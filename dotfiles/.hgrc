@@ -1,0 +1,21 @@
+[extensions]
+color =
+mq =
+pager =
+rebase =
+record =
+shelve =
+purge =
+graphlog =
+hgext.convert =
+hgext.fetch =
+
+[defaults]
+revert = --no-backup
+
+[pager]
+pager = LESS='FRX' less
+ignore = version, help, update, serve, record
+
+[ui]
+username = Anssi Syrjäsalo <anssi.syrjasalo@gmail.com>

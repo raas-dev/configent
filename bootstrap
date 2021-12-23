@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091   # disable not finding scripts as input
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+"$this_path/symlink_dotfiles" -f
+"$this_path/install_apps"
+"$this_path/setup_vscode" -f
+
+echo -e "\n✅ bootstrap done."

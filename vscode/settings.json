@@ -1,0 +1,138 @@
+{
+    "editor.fontFamily": "TerminessTTF Nerd Font",
+    "editor.fontSize": 18,
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "terminal.integrated.fontSize": 17,
+    "terminal.integrated.scrollback": 99999,
+    "markdown.preview.fontSize": 17,
+    "workbench.iconTheme": "ayu",
+    "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
+    "terminal.integrated.cursorBlinking": true,
+    "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
+    "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
+    "terminal.integrated.shell.osx": "zsh",
+    "terminal.external.linuxExec": "xterm-256color",
+    "terminal.external.osxExec": "Terminal.app",
+    "terminal.integrated.copyOnSelection": true,
+    "debug.console.fontSize": 13,
+    "editor.mouseWheelScrollSensitivity": 0.75,
+    "editor.renderControlCharacters": true,
+    "editor.renderLineHighlight": "all",
+    "editor.rulers": [
+    80, 100
+    ],
+    "editor.smoothScrolling": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorWidth": 2,
+    "files.hotExit": "onExitAndWindowClose",
+    "workbench.list.smoothScrolling": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.tabSizing": "shrink",
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false,
+    "zenMode.hideStatusBar": false,
+    "explorer.confirmDelete": false,
+    "markdown.preview.lineHeight": 1.25,
+    "workbench.colorCustomizations": {
+        "terminal.background":"#090A14",
+        "terminal.foreground":"#D8D8D8",
+        "terminalCursor.background":"#D8D8D8",
+        "terminalCursor.foreground":"#D8D8D8",
+        "terminal.ansiBlack":"#303030",
+        "terminal.ansiBlue":"#7CAFC2",
+        "terminal.ansiBrightBlack":"#585858",
+        "terminal.ansiBrightBlue":"#7CAFC2",
+        "terminal.ansiBrightCyan":"#86C1B9",
+        "terminal.ansiBrightGreen":"#A1B56C",
+        "terminal.ansiBrightMagenta":"#BA8BAF",
+        "terminal.ansiBrightRed":"#AB4642",
+        "terminal.ansiBrightWhite":"#F8F8F8",
+        "terminal.ansiBrightYellow":"#F7CA88",
+        "terminal.ansiCyan":"#86C1B9",
+        "terminal.ansiGreen":"#A1B56C",
+        "terminal.ansiMagenta":"#BA8BAF",
+        "terminal.ansiRed":"#AB4642",
+        "terminal.ansiWhite":"#D8D8D8",
+        "terminal.ansiYellow":"#F7CA88"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "python.showStartPage": false,
+    "editor.lineHeight": 16.25,
+    "workbench.activityBar.visible": false,
+    "editor.minimap.showSlider": "always",
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.minimap.enabled": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.languageServer": "Pylance",
+    "window.openFoldersInNewWindow": "off",
+    "window.restoreFullscreen": true,
+    "window.closeWhenEmpty": true,
+    "window.newWindowDimensions": "inherit",
+    "go.useLanguageServer": true,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.letterSpacing": -0.5,
+    "rest-client.fontSize": 18,
+    "terminal.integrated.letterSpacing": -1,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "rest-client.fontFamily": "TerminessTTF Nerd Font",
+    "rest-client.enableTelemetry": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        ".aliases": "shellscript",
+        "*.ejs": "json",
+        "*.tpl": "json",
+        "*.sh": "shellscript"
+    },
+    "powershell.integratedConsole.showOnStartup": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "rest-client.defaultHeaders": {
+        "User-Agent": "debug",
+        "Content-Type": "application/json"
+    },
+    "editor.semanticHighlighting.enabled": true,
+    "docker.showStartPage": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "terminal.integrated.tabs.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": false
+    },
+    "[shellscript]": {
+        "editor.detectIndentation": false,
+        "editor.tabSize": 2
+    },
+    "breadcrumbs.enabled": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "git.confirmSync": false,
+    "window.zoomLevel": 1,
+    "bracketPairColorizer.depreciation-notice": false,
+    "security.workspace.trust.enabled": false
+}

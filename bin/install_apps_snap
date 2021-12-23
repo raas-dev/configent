@@ -1,0 +1,43 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+if [ "$EUID" = "0" ]; then
+    SUDO=''
+elif which sudo &>/dev/null; then
+    SUDO='sudo'
+
+    # Ask sudo password upfront
+    sudo -v
+
+    # Keep sudo alive until the script has finished
+    while true; do
+      sudo -n true
+      sleep 60
+      kill -0 "$$" || exit
+    done 2>/dev/null &
+else
+    echo "ERROR: User is non-root and sudo is not available, cannot proceed."
+    exit 1
+fi
+
+# Core
+$SUDO snap install core
+
+# VSCode
+$SUDO snap install code --classic
+
+# Brave
+$SUDO snap install brave
+
+# Google Cloud SDK
+# $SUDO snap install google-cloud-sdk --classic
+
+# LibreOffice
+# $SUDO snap install libreoffice
+
+# OpenDrive (Google Drive)
+$SUDO snap install odrive-unofficial
+
+# powershell
+$SUDO snap install powershell --classic

@@ -1,0 +1,430 @@
+### .aliases
+
+### OS specific ################################################################
+
+# Upgrade brew formulas, and zplugins if on zsh
+if which zplug &>/dev/null; then
+  alias br='brew update && brew upgrade ; zplug update'
+else
+  alias br='brew update && brew upgrade'
+fi
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  # Brew cask upgrade
+  alias brc='brew cu --all --yes --cleanup'
+
+  # Install macOS application updates
+  alias up='br ; brc'
+
+  # Install macOS application and system updates
+  alias dup='up ; softwareupdate --install --all --force'
+
+  # Recursively delete .DS_Store files in the current path
+  alias cleanupds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
+
+  # Clean up LaunchServices to remove duplicates in "Open With" menues
+  alias cleanupls='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
+    -kill -r -domain local -domain system -domain user && \
+    killall Finder'
+
+  # Mute or unmute sounds
+  alias mute='osascript -e "set volume output muted true"'
+  alias blast='osascript -e "set volume output muted false"'
+
+  # Fix broken icons in Dock
+  alias reseticons="sudo /usr/bin/find /private/var/folders/ -name com.apple.dock.iconcache -exec rm {} \;; sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \;; sudo rm -rf /Library/Caches/com.apple.iconservices.store; sleep 3; killall Dock; killall Finder"
+
+  # Fix macOS keyboard input sources
+  alias resetkeyboard="rm -f ~/Library/Preferences/com.apple.HIToolbox.plist ; \
+  sudo rm -f /Library/Preferences/com.apple.HIToolbox.plist"
+
+  # Disable or enable Spotlight (indexing)
+  alias spotoff='sudo mdutil -a -i off'
+  alias spoton='sudo mdutil -a -i on'
+
+  # Canonical hex dump; some systems have this symlinked
+  command -v hd > /dev/null || alias hd='hexdump -C'
+
+  # macOS has no `md5sum`, use `md5` as a fallback
+  command -v md5sum > /dev/null || alias md5sum='md5'
+
+  # macOS has no `sha1sum`, use `shasum` as a fallback
+  command -v sha1sum > /dev/null || alias sha1sum='shasum'
+else
+  if which apt &>/dev/null ; then
+    alias up='sudo snap refresh ; \
+      sudo apt update && \
+      sudo apt upgrade -y && sudo apt autoremove -y && \
+      sudo apt clean ; br'
+    alias dup='sudo snap refresh ; \
+      sudo apt update && \
+      sudo apt dist-upgrade -y && sudo apt autoremove -y && \
+      sudo apt clean ; br'
+  elif which yum &>/dev/null ; then
+    alias up='sudo snap refresh ; \
+      sudo yum update -y --exclude=kernel* && \
+      sudo yum autoremove -y && \
+      br'
+    alias dup='sudo snap refresh ; \
+      sudo yum update -y && \
+      sudo yum autoremove -y && \
+      br'
+  fi
+
+  # Similar to macOS `pbcopy` and `pbpaste`
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+
+  # Similar to macOS `open`
+  alias open='xdg-open'
+fi
+
+### More sensible defaults #####################################################
+
+alias code='code --reuse-window --add'
+
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias fgrep='fgrep --color'
+
+alias ping='ping -c 999'
+
+### Safer defaults #############################################################
+
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+### Enhanced ls ################################################################
+
+if which lsd &>/dev/null ; then
+  alias ls='lsd --group-dirs first --date="+%a %d-%b-%y %H:%M:%S" --icon never'
+  alias la='ls -Al'
+  alias le='ls -Al --extensionsort && echo Ordered by extension, alphabetically'
+  alias lu='ls -Al --sizesort && echo Ordered by size, biggest first'
+  alias lt='ls -Al --timesort && echo Ordered by change time, most recent first'
+  alias lut='ls -Al --sizesort --total-size --tree --depth 2'
+else
+  alias ls='ls --color -h'
+  alias la='ls -Al'
+  alias le='ls -Al -XB && echo Ordered by extension, alphabetically'
+  alias lu='ls -Al -S && echo Ordered by size, biggest first'
+  alias lt='ls -Al -tc && echo Ordered by change time, most recent first'
+fi
+
+### Shortcuts ##################################################################
+
+alias _='bat --show-all'
+alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
+alias b='bat --theme=base16'
+alias c='kalker'
+alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ; docker build --tag ${PWD##*/} . && docker run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} && docker port ${PWD##*/}'
+alias e='ext'
+alias f='fd --ignore-case --no-ignore --hidden'
+alias g='gitui'
+alias h='xh'
+alias i='btop'
+# j is for zoxide
+alias k='kubectl'
+alias l='la'
+# m is for m-cli
+alias n='nerdctl stop ${PWD##*/} ; nerdctl kill ${PWD##*/} ; nerdctl build --tag ${PWD##*/} . && nerdctl run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} && nerdctl port ${PWD##*/}'
+alias o='open'
+alias p='procs --tree --watch-interval 1'
+alias q='clear'
+# r is for reloading shell's configuration (alias is in shell specific rc files)
+alias s='source'
+alias t='tail --follow --verbose --lines=20'
+alias u='usage'
+alias v='limactl'
+alias w='which -a'
+alias x='pkill -i -f'
+alias y='cht.sh'
+alias z='whatlistens'
+
+### Vim ########################################################################
+
+which nvim &>/dev/null && alias vim='nvim'
+
+### Lima VMs ###################################################################
+
+  alias vm4rancher="limactl start \$HOME/local/etc/lima/rancher.yaml --tty=false ; \
+  export KUBECONFIG=\$HOME/.lima/rancher/kubeconfig.yaml ; \
+  limactl shell rancher sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ; \
+  kubectl get nodes"
+
+alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
+alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false"
+
+alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
+alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"
+
+### Docker #####################################################################
+
+alias drmc='docker rm --force $(docker ps --all --quiet)'
+alias drmv='docker volume rm --force $(docker volume ls --quiet)'
+alias drmi='docker rmi --force $(docker images --all --quiet)'
+alias dpr='drmc; drmv; drmi; docker system prune --force --volumes'
+
+# e.g.
+alias netdata='docker run -d --name=netdata \
+  -p 19999:19999 \
+  -v netdataconfig:/etc/netdata \
+  -v netdatalib:/var/lib/netdata \
+  -v netdatacache:/var/cache/netdata \
+  -v /etc/passwd:/host/etc/passwd:ro \
+  -v /etc/group:/host/etc/group:ro \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /etc/os-release:/host/etc/os-release:ro \
+  --cap-add SYS_PTRACE \
+  --security-opt apparmor=unconfined \
+  netdata/netdata'
+
+### nerdctl ####################################################################
+
+alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
+alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
+alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
+alias npr='nrmc; nrmv; nrmi'
+
+# e.g.
+alias rustscan='nerdctl run -it --rm --name rustscan \
+  --cap-drop ALL \
+  rustscan/rustscan:alpine --accessible --batch-size 512 --timeout 5000'
+
+### Misc #######################################################################
+
+# Copy the current path to clipboard
+alias cwd='pwd | tr -d "\n" | pbcopy'
+
+# Public IP
+alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
+alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
+
+# Python 3 HTTP server
+alias serv='python3 -m http.server 8000 --bind 127.0.0.1'
+
+# Display PATH content
+alias path='echo -e "${PATH//:/\\n}"'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Get the week number
+alias week='date +%V'
+
+### Utilities ##################################################################
+
+# Quick extract
+ext() {
+ if [[ -f $1 ]]; then
+   case $1 in
+     *.tar.bz2)   tar xvjf $1    ;;
+     *.tar.gz)    tar xvzf $1    ;;
+     *.bz2)       bunzip2 $1     ;;
+     *.rar)       unrar x $1     ;;
+     *.gz)        gunzip $1      ;;
+     *.tar)       tar xvf $1     ;;
+     *.tbz2)      tar xvjf $1    ;;
+     *.tgz)       tar xvzf $1    ;;
+     *.zip)       unzip $1       ;;
+     *.Z)         uncompress $1  ;;
+     *.7z)        7z x $1        ;;
+     *)           echo "don't know how to extract '$1'..." ;;
+   esac
+ else
+   echo "'$1' is not a valid file!"
+ fi
+}
+
+# Quick password generator
+genpass() {
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | \
+    fold -w $1 | head -n1 | pbcopy
+}
+
+# https://github.com/kdabir/has
+has() {
+  curl -sL https://raw.githubusercontent.com/kdabir/has/master/has | \
+    bash -s "$@"
+}
+
+# Show process listening on given port
+whatlistens() {
+  lsof -P -i :"$1" | column -t
+}
+
+# List 20 biggest directories
+usage() {
+  du | sort -r -n | \
+  awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
+}
+
+# Remove all non-cask brew
+brewclear() {
+  brew list --formula | xargs brew uninstall --ignore-dependencies --force
+}
+
+# Npm remove all global packages (except npm installed npm)
+npmclear() {
+  npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | \
+  xargs npm -g rm
+}
+
+# Pip remove all
+pipclear() {
+  pip freeze | grep -v "^-e" | xargs pip uninstall -y
+}
+
+# Gem remove all
+gemclear() {
+  gem uninstall -aIx
+}
+
+# Recursively remove __pycache__ direcotries
+pyclean() {
+  find . -type d -name  "__pycache__" -exec rm -r {} +
+}
+
+### Latest version of global nodejs devtools ###################################
+
+# Find unused and missing package.json (dev)Dependencies
+alias depcheck='npx depcheck'
+
+# Command-line JSON processing tool
+alias fx='npx fx'
+
+# Simple, zero-configuration command-line http server
+alias http-server='npx http-server'
+
+# Automatically generate CHANGELOG.md
+alias auto-changelog='npx auto-changelog'
+
+# Codemods for project config files
+alias mrm='npx mrm'
+
+# Upgrades your package.json dependencies to the latest version
+alias ncu='npx npm-check-updates'
+
+### decode #####################################################################
+
+decode_base64_url() {
+  local len=$((${#1} % 4))
+  local result="$1"
+  if [ $len -eq 2 ]; then result="$1"'=='
+  elif [ $len -eq 3 ]; then result="$1"'='
+  fi
+  echo "$result" | tr '_-' '/+' | base64 -d
+}
+
+decode_jwt_partial(){
+   decode_base64_url "$(echo -n $2 | cut -d "." -f $1)" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
+}
+
+decode_jwt_header_payload(){
+   decode_jwt_partial 1 $1
+   decode_jwt_partial 2 $1
+}
+
+# decode jwt header + payload
+alias jwthp="decode_jwt_header_payload"
+
+# decode jwt header
+alias jwth="decode_jwt_partial 1"
+
+# decode jwt payload
+alias jwtp="decode_jwt_partial"
+
+### Git helpers ################################################################
+
+# https://dev.to/erykpiast/two-bash-scripts-i-cannot-live-without-when-working-with-git-44a1
+
+git_clean_untracked_safely() {
+  TO_REMOVE_LINES=$(git clean -f -d -n | wc -l);
+  if [ "$TO_REMOVE_LINES" -ne "0" ]; then
+    TO_REMOVE=$(git clean -f -d -n);
+
+    echo "Cleaning...";
+    printf "\n$TO_REMOVE\n\n";
+    echo "Proceed?";
+
+    select result in Yes No; do
+      if [[ "$result" == "Yes" ]]; then
+        echo "Cleaning in progress...";
+        echo "";
+        git clean -f -d;
+        echo "";
+        echo "All files and directories removed!";
+      fi
+      break;
+    done;
+  else
+    echo "Everything is clean";
+  fi;
+}
+
+git_clean_local_branches() {
+  OPTION="-d";
+  if [[ "$1" == "-f" ]]; then
+    echo "WARNING! Removing with force";
+    OPTION="-D";
+  fi;
+
+  TO_REMOVE_LINES=$(git branch -r | \
+    awk "{print \\$1}" | \
+    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
+    awk "{print \\$1}" | wc -l);
+
+  if [ "$TO_REMOVE_LINES" -ne "0" ]; then
+    TO_REMOVE=$(git branch -r | awk "{print \\$1}" | \
+    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
+    awk "{print \\$1}");
+
+    echo "Removing branches...";
+    echo "";
+    printf "\n$TO_REMOVE\n\n";
+    echo "Proceed?";
+
+    select result in Yes No; do
+      if [[ "$result" == "Yes" ]]; then
+        echo "Removing in progress...";
+        echo "$TO_REMOVE" | xargs git branch "$OPTION";
+        if [ $? -ne 0 ]; then
+          echo ""
+          echo "Some branches were not removed, you have to do it manually!";
+        else
+          echo "All branches removed!";
+        fi
+      fi
+
+      break;
+    done;
+  else
+    echo "You have nothing to clean";
+  fi
+}
+
+### macOS keychain #############################################################
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  get_keychain_variable() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: get_keychain_variable <varname>" && return 1
+
+    security find-generic-password -w \
+      -a "$USER" -D "environment variable" -s "$name"
+  }
+
+  set_keychain_variable() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: set_keychain_variable <varname>" && return 1
+
+    echo -n "Enter secret for $name: "
+    read secret
+    [ -z "$secret" ] && echo "Error: Empty secret" && return 1
+
+    security add-generic-password -U \
+      -a "$USER" -D "environment variable" -s "$name" -w "$secret"
+  }
+fi

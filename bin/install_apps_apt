@@ -1,0 +1,70 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+if [ "$EUID" = "0" ]; then
+    SUDO=''
+    SUDOEULA=''
+    export DEBIAN_FRONTEND=noninteractive
+elif which sudo &>/dev/null; then
+    SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+    SUDOEULA='sudo ACCEPT_EULA=Y'
+
+    # Ask sudo password upfront
+    sudo -v
+
+    # Keep sudo alive until the script has finished
+    while true; do
+      sudo -n true
+      sleep 60
+      kill -0 "$$" || exit
+    done 2>/dev/null &
+else
+    echo "ERROR: User is non-root and sudo is not available, cannot proceed."
+    exit 1
+fi
+
+# Update package lists
+$SUDOEULA apt-get update
+
+# Ensure apt-get sources.list works with https
+$SUDO apt-get install -y apt-transport-https
+
+# Certificates
+$SUDO apt-get install -y ca-certificates 
+
+# Cryptography
+$SUDO apt-get install -y gnupg
+
+# Common build requirements
+$SUDO apt-get install -y libssl-dev libreadline-dev libsqlite3-dev libbz2-dev \
+  zlib1g-dev
+
+# Utils
+$SUDO apt-get install -y build-essential coreutils dnsutils file \
+  findutils git htop lsb-release procps traceroute unzip wget whois
+
+# Locales (required on Debian)
+$SUDO apt-get install -y locales
+echo "en_US.UTF-8 UTF-8" | $SUDO tee /etc/locale.gen
+echo "LANG=en_US.UTF-8" | $SUDO tee /etc/locale.conf
+$SUDO locale-gen en_US.UTF-8
+
+# macOS pbcopy/pbpaste like experience
+$SUDO apt-get install -y xsel
+
+# Microsoft TrueType fonts (accepts EULA)
+$SUDO apt-get install -y ttf-mscorefonts-installer
+
+# Xfce
+#$SUDO apt-get install -y xfce4-pulseaudio-plugin
+
+# Docker (rootless)
+$SUDO apt-get install -y uidmap iptables dbus-user-session
+curl -fsSL https://get.docker.com/rootless | sh
+systemctl --user start dbus
+systemctl --user start docker
+$SUDO loginctl enable-linger "$USER"
+
+# Snap
+$SUDO apt-get install -y snapd

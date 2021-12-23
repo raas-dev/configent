@@ -1,0 +1,30 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+### Install fonts ##############################################################
+
+fonts_dir="$this_path/../ui/fonts"
+find_command="find \"$fonts_dir\" \( -name '*.[o,t]tf' -or -name '*.pcf.gz' \) \
+  -type f -print0"
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  font_dir="$HOME/Library/Fonts"
+else
+  font_dir="$HOME/.local/share/fonts"
+  mkdir -p "$font_dir"
+fi
+
+# Copy all fonts to user fonts directory
+echo "Copying fonts..."
+eval "$find_command" | xargs -0 -I % cp "%" "$font_dir/"
+
+# Reset font cache on Linux
+if command -v fc-cache @>/dev/null; then
+  echo "Resetting font cache, this may take a moment..."
+  fc-cache -f "$font_dir"
+fi
+
+echo "All fonts installed to $font_dir"

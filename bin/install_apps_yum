@@ -1,0 +1,58 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+if [ "$EUID" = "0" ]; then
+    SUDO=''
+elif which sudo &>/dev/null; then
+    SUDO='sudo'
+
+    # Ask sudo password upfront
+    sudo -v
+
+    # Keep sudo alive until the script has finished
+    while true; do
+      sudo -n true
+      sleep 60
+      kill -0 "$$" || exit
+    done 2>/dev/null &
+else
+    echo "ERROR: User is non-root and sudo is not available, cannot proceed."
+    exit 1
+fi
+
+# Update package lists
+$SUDO yum check-update -y
+
+# Add Epel repostitory
+$SUDO yum install -y epel-release
+
+# Certificates
+$SUDO yum install -y ca-certificates 
+
+# Cryptography
+$SUDO yum install -y gnupg
+
+# Common build requirements
+$SUDO yum install -y openssl-devel readline-devel sqlite-devel bzip2-devel \
+  zlib-devel
+
+# Utils
+$SUDO yum install -y gcc gcc-c++ make coreutils bind-utils file \
+  findutils git htop redhat-lsb-core procps traceroute unzip wget whois
+
+# pbcopy/pbpaste like experience
+$SUDO yum install -y xsel
+
+# Docker (rootless)
+$SUDO yum install -y fuse-overlayfs iptables dbus-daemon
+curl -fsSL https://get.docker.com/rootless | sh
+systemctl --user start dbus
+systemctl --user start docker
+$SUDO loginctl enable-linger "$USER"
+
+# Snap
+$SUDO yum install -y fuse squashfuse # docker requirement for snap
+$SUDO yum install -y kernel-modules # VM requirement for snap
+$SUDO yum install -y snapd
+$SUDO ln -s /var/lib/snapd/snap /snap

@@ -1,0 +1,103 @@
+add_newline = true
+command_timeout = 1000 # milliseconds
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$cobol\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$status\
+$jobs\
+$fill\
+$shell\
+$line_break\
+$character"""
+
+right_format = """
+$battery\
+$memory_usage\
+$time"""
+
+[gcloud]
+disabled = true
+
+[fill]
+symbol = "."
+style = "bold dimmed black"
+
+[shell]
+disabled = false
+style = "bold black"
+zsh_indicator = "zsh"
+bash_indicator = "bash"
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
+
+[status]
+disabled = false
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = "[${ram}]($style)" # "[${ram}( | ${swap})]($style)"
+style = "black"
+
+[battery]
+disabled = false
+
+[[battery.display]]
+threshold = 10

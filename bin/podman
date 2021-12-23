@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+## shim for running `podman` in lima VM
+
+# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
+
+: "${VM:="podman-testing"}"
+
+if [[ "$OSTYPE" = darwin* ]]; then
+# forward to the same script on the guest VM
+  if ! limactl shell "$VM" true &>/dev/null ; then
+    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false || \
+      limactl start "$VM"
+  fi
+  limactl shell "$VM" "$HOME/local/bin/podman" $@
+else
+  if [[ -x "/usr/bin/podman" ]] ; then
+    "/usr/bin/podman" $@
+  else
+    echo "${BASH_SOURCE:-$0}: podman not found in this Linux system."
+    exit 127
+  fi
+fi

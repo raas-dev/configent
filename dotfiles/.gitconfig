@@ -1,0 +1,154 @@
+### User info ##################################################################
+
+[user]
+  name = Anssi Syrjäsalo
+  email = anssi.syrjasalo@gmail.com
+
+### Aliases ####################################################################
+
+[alias]
+  # Shortcuts
+  a = add -p
+  b = branch -av
+  bd = branch -d
+  bda = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+  bm = branch -M
+  c = !"git add -A && git commit -v"
+  ca = !"git add -A && git commit --amend --reuse-message=HEAD"
+  cb = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  co = checkout
+  in = pull --rebase
+  out = push -u
+  r = diff --name-only --diff-filter=U
+  rab = !"git add -A && git rebase --abort"
+  rac = !"git add -A && git rebase --continue"
+  res = reset HEAD
+  s = !"git submodule update --init --recursive"
+  st = status -sb
+  t = tag -l
+
+  # Short and self-explanatory helpers
+  cloner = clone --recursive
+  contributors = shortlog --summary --numbered
+  daily = log --since '1 day ago' --oneline
+  discard = reset --hard HEAD
+  incoming = !"git remote update -p; git log ..@{u}"
+  outgoing = log @{u}..
+  pullr = !"git pull; git submodule foreach git pull origin main"
+  purge = clean -dfx
+  ready = rebase -i @{u}
+
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # `git di $number` shows the diff between the state `$number` revisions ago
+  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+  # Find branches containing commit
+  fb = "!f() { git branch -a --contains $1; }; f"
+
+  # Find commits by source code
+  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+  # Find commits by commit message
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+  # Find tags containing commit
+  ft = "!f() { git describe --always --contains $1; }; f"
+
+  # Show git log as graph
+  lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
+
+  # Remove the old tag with this name and tag the latest commit with it
+  retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+### Colors #####################################################################
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = green reverse
+  local = green
+  remote = magenta
+
+[color "diff"]
+  frag = yellow
+  meta = yellow bold
+  new = green bold
+  old = red bold
+
+[color "diff-highlight"]
+  newNormal = green bold
+  newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+
+[color "status"]
+  added = green
+  changed = red bold
+  untracked = magenta bold
+
+### General settings ###########################################################
+
+[code]
+  ignorecase = false
+
+[core]
+  autocrlf = input
+  precomposeunicode = false
+  quotepath = off
+  trustctime = false
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  excludesfile = ~/.gitignore
+
+### Command specific settings ##################################################
+
+[apply]
+  whitespace = warn
+
+#[commit]
+#  gpgSign = true
+
+[diff]
+  renames = copies
+
+[diff "bin"]
+  textconv = hexdump -v -C
+
+[fetch]
+  prune = true
+
+[help]
+  autocorrect = 1
+
+[init]
+  defaultBranch = main
+
+[merge]
+  ff = false
+  log = true
+
+[pull]
+  rebase = true
+
+[push]
+  default = current
+
+### URL shorthands #############################################################
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+  insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"

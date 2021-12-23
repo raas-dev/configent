@@ -1,0 +1,350 @@
+COLOR tty
+
+TERM ansi
+TERM color_xterm
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM dvtm
+TERM dvtm-256color
+TERM Eterm
+TERM eterm-color
+TERM fbterm
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM konsole-256color
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM nxterm
+TERM putty
+TERM putty-256color
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode256
+TERM rxvt-unicode-256color
+TERM screen
+TERM screen-16color
+TERM screen-16color-bce
+TERM screen-16color-s
+TERM screen-16color-bce-s
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-256color-s
+TERM screen-256color-bce-s
+TERM screen-bce
+TERM screen-w
+TERM screen.linux
+TERM screen.xterm-new
+TERM st
+TERM st-meta
+TERM st-256color
+TERM st-meta-256color
+TERM vt100
+TERM xterm
+TERM xterm-new
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+TERM xterm-termite
+
+EIGHTBIT 1
+
+
+################################################################################
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+#
+# Attribute codes:
+#   00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+#   30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+#   40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+#
+################################################################################
+
+# Global default
+NORMAL 00
+
+# Regular file
+FILE 00
+
+# File with setid or setgid
+SETUID 30;43
+SETGID 30;43
+
+# Directory
+DIR 01;36
+
+# Directories with unusual permissions
+STICKY_OTHER_WRITABLE 01;30;43    # sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 01;30;43           # other-writable (o+w) and not sticky
+STICKY 01;30;43                   # sticky bit set (+t) and not other-writable
+
+# Symbolic link
+LINK 30;42
+
+# Broken symbolic link
+ORPHAN  05;30;41
+
+# Missing file
+MISSING 05;30;41
+
+# Pipe
+FIFO 30;46
+
+# Socket
+SOCK 30;45
+DOOR 30;45      # Solaris 2.5 and later
+
+# Block and character devices
+BLK 30;44
+CHR 30;44
+
+# File with execute permission
+EXEC 33
+
+# Other OS's executable
+.cmd 33
+.exe 33
+.com 33
+.bat 33
+.reg 33
+.app 33     # macOS
+
+# Plain text files
+.txt 32
+.org 32
+.md 32
+.mkd 32
+.nfo 32
+
+# GNU Autotools readme files
+*README 32
+*AUTHORS 32
+*THANKS 32
+*NEWS 32
+*INSTALL 32
+*COPYING 32
+*LICENSE 32
+*BUGS 32
+*ChangeLog 32
+
+# Binary document
+.doc 31
+.docx 31
+.rtf 31
+.dot 31
+.dotx 31
+.xls 31
+.xlsx 31
+.ppt 31
+.pptx 31
+.fla 31
+.psd 31
+
+# Source code
+.h 37
+.c 37
+.C 37
+.cc 37
+.cpp 37
+.cxx 37
+.objc 37
+.sh 37
+.csh 37
+.zsh 37
+.el 37
+.vim 37
+.java 37
+.pl 37
+.pm 37
+.py 37
+.rb 37
+.hs 37
+.php 37
+.htm 37
+.html 37
+.shtml 37
+.erb 37
+.haml 37
+.xml 37
+.rdf 37
+.css 37
+.sass 37
+.scss 37
+.less 37
+.js 37
+.coffee 37
+.man 37
+.0 37
+.1 37
+.2 37
+.3 37
+.4 37
+.5 37
+.6 37
+.7 37
+.8 37
+.9 37
+.l 37
+.n 37
+.p 37
+.pod 37
+.tex 37
+.go 37
+
+# Configuration files
+.yml 37
+.json 37
+
+# Image
+.bmp 35
+.cgm 35
+.dl 35
+.dvi 35
+.emf 35
+.eps 35
+.gif 35
+.jpeg 35
+.jpg 35
+.JPG 35
+.mng 35
+.pbm 35
+.pcx 35
+.pdf 35
+.pgm 35
+.png 35
+.PNG 35
+.ppm 35
+.pps 35
+.ppsx 35
+.ps 35
+.svg 35
+.svgz 35
+.tga 35
+.tif 35
+.tiff 35
+.xbm 35
+.xcf 35
+.xpm 35
+.xwd 35
+.xwd 35
+.yuv 35
+
+# Audio
+.aac 35
+.au  35
+.flac 35
+.m4a 35
+.mid 35
+.midi 35
+.mka 35
+.mp3 35
+.mpa 35
+.mpeg 35
+.mpg 35
+.ogg  35
+.ra 35
+.wav 35
+
+# Video
+.anx 35
+.asf 35
+.avi 35
+.axv 35
+.flc 35
+.fli 35
+.flv 35
+.gl 35
+.m2v 35
+.m4v 35
+.mkv 35
+.mov 35
+.MOV 35
+.mp4 35
+.mp4v 35
+.mpeg 35
+.mpg 35
+.nuv 35
+.ogm 35
+.ogv 35
+.ogx 35
+.qt 35
+.rm 35
+.rmvb 35
+.swf 35
+.vob 35
+.webm 35
+.wmv 35
+
+# Archive
+.7z   1;34
+.apk  1;34
+.arj  1;34
+.bin  1;34
+.bz   1;34
+.bz2  1;34
+.cab  1;34      # Windows
+.deb  1;34
+.dmg  1;34      # macOS
+.gem  1;34
+.gz   1;34
+.iso  1;34
+.jar  1;34
+.msi  1;34      # Windows
+.rar  1;34
+.rpm  1;34
+.tar  1;34
+.tbz  1;34
+.tbz2 1;34
+.tgz  1;34
+.tx   1;34
+.war  1;34
+.xpi  1;34
+.xz   1;34
+.z    1;34
+.Z    1;34
+.zip  1;34
+
+# Unimportant files
+.log 30
+*~ 30
+*# 30
+.bak 30
+.BAK 30
+.old 30
+.OLD 30
+.org_archive 30
+.off 30
+.OFF 30
+.dist 30
+.DIST 30
+.orig 30
+.ORIG 30
+.swp 30
+.swo 30
+*,v 30
+.DS_Store 30       # macOS

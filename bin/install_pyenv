@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### pyenv ######################################################################
+
+pyenv_dir="$HOME/.pyenv"
+git clone https://github.com/pyenv/pyenv.git "$pyenv_dir" || \
+  git -C "$pyenv_dir" pull --rebase
+
+git clone https://github.com/pyenv/pyenv-virtualenv.git \
+  "$pyenv_dir/plugins/pyenv-virtualenv" || \
+  git -C "$pyenv_dir/plugins/pyenv-virtualenv" pull --rebase
+
+eval "$($HOME/.pyenv/bin/pyenv init -)"
+
+### pythons ####################################################################
+
+#python3_version="3.7.12"
+#python3_version="3.8.12"
+#python3_version="3.9.9"
+python3_version="3.10.1"
+"$HOME/.pyenv/bin/pyenv" install --skip-existing "$python3_version"
+"$HOME/.pyenv/bin/pyenv" rehash
+"$HOME/.pyenv/bin/pyenv" shell "$python3_version"
+"$HOME/.pyenv/bin/pyenv" global "$python3_version"
+
+### Python packages ############################################################
+
+eval "$($HOME/.pyenv/bin/pyenv init --path)"
+
+pip install --upgrade pip setuptools wheel
+pip install --upgrade ptpython
+pip install --upgrade better_exceptions tbvaccine
+pip install --upgrade you-get
+
+### Jupyter ####################################################################
+
+# pip install --upgrade jupyter
+# pip install --upgrade jupytext
+# pip install --upgrade jupyterlab

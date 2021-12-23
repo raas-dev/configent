@@ -1,0 +1,52 @@
+images:
+  - location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img"
+    arch: "x86_64"
+  - location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"
+    arch: "aarch64"
+
+mounts:
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      command -v podman >/dev/null 2>&1 && exit 0
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update
+      apt-get install -y podman crun
+  - mode: user
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      systemctl --user enable --now podman.socket
+  - mode: system
+    script: |
+      #!/bin/bash
+      echo "unqualified-search-registries = ['docker.io']" | tee -a /etc/containers/registries.conf
+  - mode: system
+    script: |
+      #!/bin/bash
+      apt-get install -y pip
+  - mode: user
+    script: |
+      #!/bin/bash
+      pip3 install podman-compose
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until command -v podman >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "podman is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log". in the guest

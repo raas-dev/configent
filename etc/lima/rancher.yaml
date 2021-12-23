@@ -1,0 +1,54 @@
+# Deploy kubernetes via k3s (which includes a containerd shim).
+#
+# It can be accessed from the host by exporting the kubeconfig file;
+# the ports are already forwarded automatically by lima:
+#
+# $ export KUBECONFIG="$HOME/.lima/rancher/kubeconfig.yaml"
+# $ limactl shell rancher sudo cat /etc/rancher/k3s/k3s.yaml > $KUBECONFIG
+# $ kubectl get nodes
+#
+# NAME          STATUS   ROLES                  AGE   VERSION
+# lima-rancher  Ready    control-plane,master   69s   v1.21.1+k3s1
+
+images:
+- location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img"
+  arch: "x86_64"
+- location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"
+  arch: "aarch64"
+
+cpus: 4
+memory: "4GiB"
+disk: "100GiB"
+
+mounts:
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: true  # this is different from k3s's containerd
+
+provision:
+- mode: system
+  script: |
+    #!/bin/sh
+    curl -sfL https://get.k3s.io | sh -
+#- mode: user
+#  script: |
+#    #!/bin/bash
+#    NO_FORMULAE=true bash -c "$(curl -sS https://raw.githubusercontent.com/raas-dev/configent/main/install.sh)"
+
+probes:
+- script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+            echo >&2 "k3s is not running yet"
+            exit 1
+    fi
+  hint: |
+    The k3s kubeconfig file has not yet been created.
+    Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
+    If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+## shim for running `docker` in lima VM
+
+# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
+# shellcheck disable=SC2155  # will not declare separately, value compactness
+
+: "${VM:="ubuntu"}"
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  if ! which limactl &> /dev/null ; then
+    echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
+    exit 127
+  fi
+  if [[ $(uname -m) == 'arm64' ]]; then
+    local_docker_path="/opt/homebrew/bin/docker"
+  else
+    local_docker_path="/usr/local/bin/docker"
+  fi
+  if [[ -x "$local_docker_path" ]]; then
+    if [[ -z "$DOCKER_HOST" ]] ; then
+      # requires forwarding the socket in the lima vm config file
+      export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
+    fi
+    "$local_docker_path" $@
+  else
+    # no docker cli on HOST -> recall this script on the guest VM
+    if ! limactl shell "$VM" true &>/dev/null ; then
+      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false || \
+        limactl start "$VM"
+    fi
+    limactl shell "$VM" "$HOME/local/bin/docker" $@
+  fi
+else
+  # prefer rootless docker
+  if [[ -x "$HOME/bin/docker" ]] ; then
+    if [[ -z "$DOCKER_HOST" ]] ; then
+      export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+    fi
+    "$HOME/bin/docker" $@
+  elif [[ -x "/usr/bin/docker" ]] ; then
+    # try distro's package manager installed as the last resort
+    "/usr/bin/docker" $@
+  else
+    echo "Error: Docker CLI not found or executable in this Linux system."
+    exit 127
+  fi
+fi

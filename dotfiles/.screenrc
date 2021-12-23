@@ -1,0 +1,27 @@
+# Bypass the GPL notice - yes, I am aware
+startup_message off
+
+# Sensible defaults
+altscreen on
+autodetach on
+nonblock on
+defnonblock on
+
+# Allow multiple users to access the session
+multiuser on
+
+# Always start the screen with UTF-8 enabled (the same as running screen -U)
+defutf8 on
+
+# Bigger scrollback (100 lines by default)
+defscrollback 8192
+
+# Enable 256 color term
+term xterm-256color
+
+# Enable bold colors as well
+attrcolor b ".I"
+
+# Statusbar
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d.%m.%Y %{W}%c %{g}]'

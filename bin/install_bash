@@ -1,0 +1,77 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+eval_brew() {
+  if [[ -x "/opt/homebrew/bin/brew" ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x "/usr/local/bin/brew" ]]; then
+      eval "$(/usr/local/bin/brew shellenv)"
+  elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+      eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+  fi
+}
+eval_brew
+
+if ! which brew &>/dev/null ; then
+  NONINTERACTIVE=true bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  eval_brew
+fi
+
+brew install bash
+brew install bash-completion || (brew unlink util-linux && brew install bash-completion)
+
+### Set bash as the default shell ##############################################
+
+if [[ "$OSTYPE" = darwin* ]] ; then
+  if [[ $(uname -m) == 'arm64' ]]; then
+    brew_bash_path="/opt/homebrew/bin/bash"
+  else
+    brew_bash_path="/usr/local/bin/bash"
+  fi
+  default_shell=$(dscl . -read "$HOME" UserShell | cut -d' ' -f2)
+else
+  if [[ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]]; then
+      brew_bash_path="/home/linuxbrew/.linuxbrew/bin/bash"
+  elif [[ -x "$HOME/.linuxbrew/bin/bash" ]]; then
+      brew_bash_path="$HOME/.linuxbrew/bin/bash"
+  fi
+  default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
+fi
+
+if [[ -e "$brew_bash_path" ]] ; then
+  if [[ "$default_shell" = "$brew_bash_path" ]] ; then
+    echo "Brewed Bash is already set as the user's default shell."
+  else
+    if [ -z "$NO_PROMPT_DEFAULT_SHELL" ] ; then
+      echo ""
+      read -p "Set brewed Bash as the user's default shell [y\N] > " -r set_bash
+      case "$set_bash" in
+        [yY][eE][sS]|[yY])
+          if ! grep -q "$brew_bash_path" /etc/shells &>/dev/null ; then
+            echo "Sudo password may be asked next to write to /etc/shells"
+            echo "$brew_bash_path" | sudo tee -a /etc/shells
+          fi
+          if [[ "$OSTYPE" = darwin* ]] ; then
+            echo "On macOS, sudo is used to set the user's default shell."
+            sudo dscl . -create "$HOME" UserShell "$brew_bash_path"
+          else
+            case $(passwd --status "$USER" | awk '{print $2}') in
+              NP) echo "User's password will be asked next to set the shell."
+                  chsh -s "$brew_bash_path"
+                  ;;
+              L)  echo "User is locked, sudo is used to set the shell."
+                  sudo chsh -s "$brew_bash_path" "$USER"
+                  ;;
+              P)  echo "User has no password, sudo is used to set the shell."
+                  sudo chsh -s "$brew_bash_path" "$USER"
+                  ;;
+            esac
+          fi
+          ;;
+      esac
+    fi
+  fi
+fi

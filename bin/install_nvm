@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### nvm ########################################################################
+
+nvm_dir="$HOME/.nvm"
+git clone https://github.com/creationix/nvm.git "$nvm_dir"
+git -C "$nvm_dir" fetch --tags origin
+git -C "$nvm_dir" -c advice.detachedHead=false checkout \
+  "$(git -C "$nvm_dir" describe --abbrev=0 --tags --match "v[0-9]*" origin)"
+
+### Node #######################################################################
+
+. "$nvm_dir/nvm.sh" && \
+  nvm install --lts && \
+  nvm alias default 'lts/*' && \
+  nvm use default
+
+### Node packages ##############################################################
+
+npm install -g yarn
+
+### Jupyter ####################################################################
+
+# jupyter labextension install @jupyter-widgets/jupyterlab-manager
+# npm install -g configurable-http-proxy

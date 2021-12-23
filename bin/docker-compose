@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+## shim for running `docker-compose` in lima VM
+
+# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
+
+: "${VM:="ubuntu"}"
+
+install_docker_compose_plugin() {
+  if [[ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]] ; then
+    os="$(uname)"
+    arch="$(uname -m)"
+    echo "Downloading docker-compose as Docker CLI plugin on $os ($arch)"
+    rm -f "$HOME/.docker/cli-plugins/docker-compose"
+    mkdir -p "$HOME/.docker/cli-plugins/"
+    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+      -o "$HOME/.docker/cli-plugins/docker-compose"
+    chmod +x "$HOME/.docker/cli-plugins/docker-compose"
+  fi
+}
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  if ! which limactl &> /dev/null ; then
+    echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
+    exit 127
+  fi
+  if [[ $(uname -m) == 'arm64' ]]; then
+    local_docker_path="/opt/homebrew/bin/docker"
+  else
+    local_docker_path="/usr/local/bin/docker"
+  fi
+  if [[ -x "$local_docker_path" ]] ; then
+    install_docker_compose_plugin
+    if [[ -z "$DOCKER_HOST" ]] ; then
+      # requires forwarding the socket in the lima vm config file
+      export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
+    fi
+    "$local_docker_path" compose $@
+  else
+    if ! limactl shell "$VM" true &>/dev/null ; then
+      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false || \
+        limactl start "$VM"
+    fi
+    # forward to the same script on the guest VM
+    limactl shell "$VM" "$HOME/local/bin/docker-compose" $@
+  fi
+else
+  install_docker_compose_plugin
+  "$HOME/local/bin/docker" compose $@
+fi
