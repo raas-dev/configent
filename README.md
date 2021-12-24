@@ -22,7 +22,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## 💣
 
-This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
+This repo is cloned to `$HOME/configent` or pulled if already exists there:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
