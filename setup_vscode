@@ -13,7 +13,8 @@ else
 fi
 
 rm -rfv "${user_path}-old"
-mv -v "$user_path" "${user_path}-old"
+[ -d "$user_path" ] && mv -v "$user_path" "${user_path}-old"
+mkdir -p "$user_path"
 ln -snvi "$this_path/vscode" "$user_path"
 
 ### Install VSCode extensions ##################################################

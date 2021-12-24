@@ -24,14 +24,16 @@ done
 
 local_bin_path="$HOME/local/bin"
 rm -rfv "${local_bin_path}-old"
-mv -v "$local_bin_path" "${local_bin_path}-old"
+[ -d "$local_bin_path" ] && mv -v "$local_bin_path" "${local_bin_path}-old"
+mkdir -p "$HOME/local"
 ln -snvi "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
 local_etc_path="$HOME/local/etc"
 rm -rfv "${local_etc_path}-old"
-mv -v "$local_etc_path" "${local_etc_path}-old"
+[ -d "$local_etc_path" ] && mv -v "$local_etc_path" "${local_etc_path}-old"
+mkdir -p "$HOME/local"
 ln -snvi "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################

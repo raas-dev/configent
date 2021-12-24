@@ -79,12 +79,13 @@ if [ -t 0 ]; then
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
-  if [ ! -d "$TARGET_PATH" ]; then
+  if [ ! -d "$TARGET_PATH/.git" ]; then
     printf "\nGit working copy does not exist, cloning to %s" "$TARGET_PATH"
     git clone --quiet "$GIT_REPO_URL" "$TARGET_PATH"
   else
     printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
-  cd "$TARGET_PATH" && . "bootstrap" # 2> >(tee install_error.log >&2)
+  cd "$TARGET_PATH" && \
+   . "bootstrap" # 2> >(tee install_error.log >&2)
 fi
