@@ -330,69 +330,6 @@ alias jwth="decode_jwt_partial 1"
 # decode jwt payload
 alias jwtp="decode_jwt_partial"
 
-### Git helpers ################################################################
-
-# https://dev.to/erykpiast/two-bash-scripts-i-cannot-live-without-when-working-with-git-44a1
-
-git_clean_untracked_safely() {
-  TO_REMOVE_LINES=$(git clean -f -d -n | wc -l)
-  if [ "$TO_REMOVE_LINES" -ne "0" ]; then
-    TO_REMOVE=$(git clean -f -d -n)
-
-    echo "Cleaning..."
-    echo -e "\n$TO_REMOVE\n\n"
-    echo "Proceed?"
-
-    select result in Yes No; do
-      if [[ "$result" == "Yes" ]]; then
-        echo -e "Cleaning in progress...\n"
-        git clean -f -d
-        echo -e "\nAll files and directories removed!"
-      fi
-      break
-    done
-  else
-    echo "Everything is clean"
-  fi
-}
-
-git_clean_local_branches() {
-  option="-d"
-  if [[ "$1" == "-f" ]]; then
-    echo "Warning: Removing with force"
-    option="-D"
-  fi
-
-  to_remove_lines=$(git branch -r | \
-    awk "{print \\$1}" | \
-    grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
-    awk "{print \\$1}" | wc -l)
-
-  if [ "$to_remove_lines" -ne "0" ]; then
-    to_remove=$(git branch -r | awk "{print \\$1}" | \
-    grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
-    awk "{print \\$1}")
-
-    echo "Removing branches..."
-    echo -e "\n\n$to_remove\n\n"
-    echo "Proceed?"
-
-    select result in Yes No; do
-      if [[ "$result" == "Yes" ]]; then
-        echo "Removing in progress..."
-        if ! echo "$to_remove" | xargs git branch "$option"; then
-          echo -e "\nSome branches were not removed, do it manually."
-        else
-          echo "All branches removed."
-        fi
-      fi
-      break
-    done
-  else
-    echo "You have nothing to clean."
-  fi
-}
-
 ### macOS keychain #############################################################
 
 if [[ "$OSTYPE" = darwin* ]]; then
