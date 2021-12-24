@@ -21,7 +21,8 @@ if ! which brew &>/dev/null ; then
 fi
 
 brew install bash
-brew install bash-completion || (brew unlink util-linux && brew install bash-completion)
+brew install bash-completion || \
+  (brew unlink util-linux && brew install bash-completion)
 
 ### Set bash as the default shell ##############################################
 

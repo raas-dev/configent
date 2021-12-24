@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-if [ "$EUID" = "0" ]; then
+if [ "$(id -u)" = 0 ]; then
     SUDO=''
-elif which sudo &>/dev/null; then
+elif which sudo >/dev/null 2>&1 ; then
     SUDO='sudo'
 
     # Ask sudo password upfront
@@ -34,12 +34,12 @@ $SUDO yum install -y ca-certificates
 $SUDO yum install -y gnupg
 
 # Common build requirements
-$SUDO yum install -y openssl-devel readline-devel sqlite-devel bzip2-devel \
-  zlib-devel
+$SUDO yum install -y gcc gcc-c++ make \
+  openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel
 
 # Utils
-$SUDO yum install -y gcc gcc-c++ make coreutils bind-utils file \
-  findutils git htop redhat-lsb-core procps traceroute unzip wget whois
+$SUDO yum install -y bash coreutils bind-utils file findutils \
+  git htop redhat-lsb-core procps traceroute unzip wget whois
 
 # pbcopy/pbpaste like experience
 $SUDO yum install -y xsel

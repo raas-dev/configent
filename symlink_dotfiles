@@ -1,18 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 set -u
 
-this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
-### Configuration ##############################################################
-
+this_path=$(cd "$(dirname "$0")" && pwd)
 dotfiles_path="$this_path/dotfiles"
-
-# Do not symlink these paths. Paths are relative to $dotfiles_path.
-do_not_symlink=(
-  "xfce4"
-)
 
 ### Parse arguments ############################################################
 
@@ -44,20 +36,13 @@ ln -snvi "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
 
-in_array() {
-  local e
-  for e in "${@:2}" ; do
-    [[ "$e" == "$1" ]] && return 0
-  done
-  return 1
-}
+files="$(find "$dotfiles_path" -type f -exec basename {} \;)"
 
-for source_file_name in $(ls -A $dotfiles_path) ; do
-  if (in_array "$source_file_name" "${do_not_symlink[@]}") ; then
-    echo "Ignoring: $source_file_name"
+for source_file_name in $files ; do
+  if [ "$source_file_name" = "xfce4" ]; then
+    printf "Ignoring %s\n" "$source_file_name"
   else
-    ln -snvi"$args" "$dotfiles_path/$source_file_name" \
-      "$HOME/$source_file_name"
+    ln -snvi"$args" "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
   fi
 done
 
@@ -69,14 +54,14 @@ ln -snvi"$args" "$HOME/local/etc/starship/config.toml" \
 
 ### Symlink htoprc for Linux distributions #####################################
 
-if [[ "$OSTYPE" = linux-gnu* ]] ; then
+if [ "$(uname -s)" = 'Linux' ] ; then
   mkdir -p "$HOME/.config/htop"
   ln -snvi"$args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
 
 ### Symlink XFCE for Linux distributions #######################################
 
-#if [[ "$OSTYPE" = linux-gnu* ]] ; then
+#if [ "$(uname -s)" = 'Linux' ]; then
 #  xfce_configs_path="$HOME/.config/xfce4"
 #  if [ -d "$xfce_configs_path" ] ; then
 #     rm -rfv "${xfce_configs_path}-old"

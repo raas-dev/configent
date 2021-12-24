@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-if [ "$EUID" = "0" ]; then
+if [ "$(id -u)" = 0 ]; then
     SUDO=''
     SUDOEULA=''
     export DEBIAN_FRONTEND=noninteractive
-elif which sudo &>/dev/null; then
+elif which sudo >/dev/null 2>&1 ; then
     SUDO='sudo DEBIAN_FRONTEND=noninteractive'
     SUDOEULA='sudo ACCEPT_EULA=Y'
 
@@ -37,12 +37,12 @@ $SUDO apt-get install -y ca-certificates
 $SUDO apt-get install -y gnupg
 
 # Common build requirements
-$SUDO apt-get install -y libssl-dev libreadline-dev libsqlite3-dev libbz2-dev \
-  zlib1g-dev
+$SUDO apt-get install -y build-essential \
+  libssl-dev libreadline-dev libsqlite3-dev libbz2-dev zlib1g-dev
 
 # Utils
-$SUDO apt-get install -y build-essential coreutils dnsutils file \
-  findutils git htop lsb-release procps traceroute unzip wget whois
+$SUDO apt-get install -y bash coreutils dnsutils file findutils \
+  git htop lsb-release procps traceroute unzip wget whois
 
 # Locales (required on Debian)
 $SUDO apt-get install -y locales

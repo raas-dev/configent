@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Usage: https://github.com/raas-dev/configent/blob/main/README.md
 #
@@ -21,19 +21,19 @@ export NO_CASKS="true"
 
 ###############################################################################
 
-if [[ "$OSTYPE" = linux-gnu* ]]; then
-  if [[ $(uname -m) == 'aarch64' ]]; then
+if [ "$(uname -s)" = 'Linux' ]; then
+  if [ "$(uname -m)" = 'aarch64' ]; then
     export NO_FORMULAE="true"
-    echo "Homebrew Linux does not support AArch64, NO_FORMULAE=true is forced."
+    printf "Homebrew Linux does not run on AArch64, NO_FORMULAE=true is forced."
   fi
-  if [ "$EUID" = "0" ]; then
+  if [ "$(id -u)" = 0 ]; then
     CANELEVATE='true'
     SUDO=''
-  elif which sudo &>/dev/null ; then
+  elif which sudo >/dev/null 2>&1 ; then
     CANELEVATE='true'
     SUDO='sudo'
 
-    echo -e "\nSudo might be prompted to install git from distro's packages."
+    printf "\nSudo might be prompted to install git from distro's packages."
 
     # Ask sudo password upfront
     sudo -v
@@ -48,49 +48,45 @@ if [[ "$OSTYPE" = linux-gnu* ]]; then
     CANELEVATE='false'
   fi
 
-  if [ "$CANELEVATE" = "true" ]; then
-    if ! which git &>/dev/null ; then
-      if which apt-get &>/dev/null ; then
+  if [ "$CANELEVATE" = 'true' ]; then
+    if ! which git >/dev/null 2>&1 ; then
+      if which apt-get >/dev/null 2>&1 ; then
         $SUDO apt-get install -y git
-      elif which yum &>/dev/null ; then
+      elif which yum >/dev/null 2>&1 ; then
         $SUDO yum install -y git
       else
-        echo -e "\nError: Could not install git, please install git manually."
+        printf "\nError: Could not install git, please install git manually."
         exit 1
       fi
     fi
   fi
-elif [[ "$OSTYPE" = darwin* ]]; then
+elif [ "$(uname -s)" = 'Darwin' ]; then
   if [ ! -d "$(xcode-select -p)" ]; then
     xcode-select --install
   fi
 else
-  echo -e "\nError: Installer is only supported on macOS and Linux distros."
+  printf "\nError: Installer is only supported on macOS and Linux distros."
   exit 1
 fi
 
 if [ -t 0 ]; then
   # if in terminal/stdin present (script run by ./install.sh)
-  echo -e "\nChecking if inside the git working copy and ought to pull."
+  printf "\nChecking if inside the git working copy and ought to pull."
   if [ -d "$SCRIPT_PATH/.git" ]; then
-    echo -e "\nInside git working copy $(cd "$SCRIPT_PATH" && pwd), pulling."
+    full_path=$(cd "$(dirname "$0")" && pwd)
+    printf "\nInside git working copy %s, pulling.\n" "$full_path"
     git -C "$SCRIPT_PATH" pull --rebase
-
-    pushd "$SCRIPT_PATH" >/dev/null || exit
-      . "$SCRIPT_PATH/bootstrap" "$@" # 2> >(tee install_error.log >&2)
-    popd >/dev/null || exit
+    . "$SCRIPT_PATH/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH" ]; then
-    echo -e "\nGit working copy does not exist, cloning to $TARGET_PATH"
+    printf "\nGit working copy does not exist, cloning to %s" "$TARGET_PATH"
     git clone --quiet "$GIT_REPO_URL" "$TARGET_PATH"
   else
-    echo -e "\nGit working copy found at $TARGET_PATH, pulling."
+    printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
 
-  pushd "$TARGET_PATH" >/dev/null || exit
-    . "$TARGET_PATH/bootstrap" "$@" # 2> >(tee install_error.log >&2)
-  popd >/dev/null || exit
+  . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
 fi

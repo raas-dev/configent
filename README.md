@@ -12,7 +12,7 @@ Principles:
 
 Features:
 
-- Bootstrap macOS/APT/YUM Linux distros one command only with `curl` and `bash`
+- Bootstrap macOS/APT/YUM Linux distros one command only, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
 - In terminal, Rust and Go written utilities are always preferred due to speed
 - Best practices language multiple versioning with `pyenv`, `rbenv` and `nvm`
@@ -22,7 +22,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## TL;DR
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
 If git is not present, it is installed by APT or YUM (or by Xcode command line
 tools on macOS) and the repo is cloned to `$HOME/configent`.

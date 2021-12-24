@@ -1,35 +1,35 @@
-#!/bin/bash
+#!/bin/sh
 
-this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-if [[ "$OSTYPE" = darwin* ]]; then
-  if [[ -z "$NO_CASKS" ]] ; then
+if [ "$(uname -s)" = 'Darwin' ]; then
+  if [ -z "$NO_CASKS" ] ; then
     "$bin_path/install_apps_cask"
   else
     echo "NO_CASKS was specified and on macOS, won't install casks."
   fi
-elif [[ "$OSTYPE" = linux-gnu* ]] ; then
-  if which apt-get &>/dev/null ; then
+elif [ "$(uname -s)" = 'Linux' ] ; then
+  if which apt-get >/dev/null 2>&1  ; then
     "$bin_path/install_apps_apt"
-  elif which yum &>/dev/null ; then
+  elif which yum >/dev/null 2>&1  ; then
     "$bin_path/install_apps_yum"
   fi
-  if [[ -z "$NO_SNAPS" ]] ; then
+  if [ -z "$NO_SNAPS" ] ; then
     "$bin_path/install_apps_snap"
   else
     echo "NO_SNAPS was specified and on Linux, won't install snaps."
   fi
 else
-  echo -e "\nError: Only macOS and APT and YUM Linux distros are supported."
+  printf "\nError: Only macOS and APT and YUM Linux distros are supported."
   exit 1
 fi
 
 "$bin_path/install_fonts"
 
-if [[ -z "$NO_FORMULAE" ]] ; then
+if [ -z "$NO_FORMULAE" ] ; then
   NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_bash"
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
