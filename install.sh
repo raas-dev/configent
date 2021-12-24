@@ -76,7 +76,8 @@ if [ -t 0 ]; then
     full_path=$(cd "$(dirname "$0")" && pwd)
     printf "\nInside git working copy %s, pulling.\n" "$full_path"
     git -C "$SCRIPT_PATH" pull --rebase
-    . "$SCRIPT_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+    cd "$SCRIPT_PATH" && \
+      . "$SCRIPT_PATH/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
@@ -87,6 +88,6 @@ else
     printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
-
-  . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+  cd "$TARGET_PATH" && \
+    . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
 fi
