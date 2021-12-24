@@ -20,7 +20,7 @@ Features:
 
 Things are happening per user, but `sudo` may be required for some OS features.
 
-## TL;DR
+## Usage
 
 This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 
@@ -39,7 +39,7 @@ Prerequisites:
 - Create an SSH key pair (`ssh-keygen -t rsa`)
 - Add SSH key `.pub` part in GitHub
 
-One command install:
+The same one command install:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
