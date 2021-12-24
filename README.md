@@ -20,7 +20,7 @@ Features:
 
 Things are happening per user, but `sudo` may be required for some OS features.
 
-## Usage
+## 💣
 
 This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 
@@ -39,11 +39,11 @@ Prerequisites:
 - Create an SSH key pair (`ssh-keygen -t rsa`)
 - Add SSH key `.pub` part in GitHub
 
-The same one command install:
+Run the same one command install:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
-## Scripts included
+## ❔
 
 Script `bootstrap` runs all the scripts documented below.
 
@@ -101,7 +101,7 @@ If prefer `bash` instead, install the latest from brew and set it as default:
 
     install_bash
 
-## Docker and containerd
+## 🏗️ Docker and containerd
 
 On macOS, these shims wrap the respective commands to run inside Lima VMs:
 
@@ -115,7 +115,7 @@ is sourced only in terminals where STDIN (effectively keyboard) is present.
 See aliases to create Lima VMs named 'ubuntu' (for Docker) and 'rancher'
 (for containerd and k3s) and `d` and `n` for container build and run shortcuts.
 
-## Development
+## 🔨 Development
 
 Tested on:
 - macOS Catalina (10.15), Big Sur (11) and Monterey (12)
