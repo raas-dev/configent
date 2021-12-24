@@ -37,8 +37,8 @@ provision:
     curl -fsSL https://get.k3s.io | sh
 - mode: user
   script: |
-    #!/bin/bash
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh
+    #!/bin/sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/v110/install.sh | NO_FORMULAE=true sh
 
 probes:
 - script: |
