@@ -57,7 +57,7 @@ Script `bootstrap` passes `-f` to this script to skip override prompts per file.
 
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 
-If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
+If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
 Restart the shell or run `source ~/.zshrc`. Then you may simply reload with `r`.
 
@@ -72,21 +72,21 @@ MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
 [Homebrew](https://brew.sh/) is installed first if it is not already in `PATH`.
 
 Secondly, [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
-[snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
+[Snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
 
-Thirdly, [Terminess](https://www.programmingfonts.org/#terminus) monospace
-font is installed.
+Thirdly, [Terminess](https://www.programmingfonts.org/#terminus) monospace font
+is installed.
 
-Fourthly, latest `zsh`, `tmux`, command-line utilities, cloud development tools
-and [Neovim](https://neovim.io/) is installed.
+Fourthly, `zsh`, `tmux`, command-line utilities, cloud development tools and
+[Neovim](https://neovim.io/) is installed.
 
-Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
+Finally `pyenv`, `rbenv` and `nvm` and given language versions are installed.
 
 ### 🖊️ setup_vscode
 
-Symlinks `vscode/` to `<os_vscode_path>/Code`.
+The script symlinks `vscode/` to `<os_vscode_path>/Code`.
 
-The symlink is created even if `code` is not (yet) installed.
+This is done even if `code` is not (yet) installed.
 
 The old `Code/` is first backed up as `Code-old`.
 
@@ -110,11 +110,16 @@ On macOS, these shims wrap the respective commands to run inside Lima VMs:
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
 - `nerdctl`: Runs nerdctl (incl. nerdctl compose) in containerd user context
 
-The shims are also available in non-interactive sessions, while `~/.aliases`
-is sourced only in terminals where STDIN (effectively keyboard) is present.
+The shims are available in non-interactive sessions, while `~/.aliases` is
+sourced only in terminals where STDIN (effectively keyboard) is present.
 
-See aliases to create Lima VMs named 'ubuntu' (for Docker) and 'rancher'
-(for containerd and k3s) and `d` and `n` for container build and run shortcuts.
+The scripts create or start the necessary virtual machines, lima VM 'ubuntu'
+for running rootless Docker and lima VM 'rancher' for containerd.
+
+In addition, 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes development.
+
+See aliases to create additional VMs and named aliases `d` and `n` for
+container build and run shortcuts.
 
 ## 🔨 Development
 
