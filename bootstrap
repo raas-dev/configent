@@ -4,7 +4,7 @@
 
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-this_path=$(cd "$(dirname "$0")" && pwd)
+this_path="$(cd "$(dirname "$0")" && pwd)"
 
 "$this_path/symlink_dotfiles" -f
 "$this_path/install_apps"
