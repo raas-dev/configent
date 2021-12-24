@@ -76,8 +76,7 @@ if [ -t 0 ]; then
   if [ -d "$full_path/.git" ]; then
     printf "\nInside git working copy %s, pulling %s\n" \
       "$full_path" "$GIT_BRANCH"
-    git -C "$full_path" checkout --track "origin/$GIT_BRANCH" || \
-      git -C "$full_path" "$GIT_BRANCH"
+    git -C "$full_path" checkout -b "$GIT_BRANCH"
     git -C "$full_path" pull --rebase
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
@@ -90,8 +89,7 @@ else
   else
     printf "\nGit working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
-    git -C "$TARGET_PATH" checkout --track "origin/$GIT_BRANCH" || \
-      git -C "$full_path" "$GIT_BRANCH"
+    git -C "$TARGET_PATH" checkout --track "origin/$GIT_BRANCH"
     git -C "$TARGET_PATH" pull --rebase
   fi
   cd "$TARGET_PATH" && \
