@@ -9,7 +9,6 @@
 
 ### constants  #################################################################
 
-SCRIPT_PATH=$(dirname "$0")
 GIT_REPO_URL="https://github.com/raas-dev/configent"
 TARGET_PATH="$HOME/configent"
 
@@ -71,13 +70,12 @@ fi
 
 if [ -t 0 ]; then
   # if in terminal/stdin present (script run by ./install.sh)
+  full_path=$(cd "$(dirname "$0")" && pwd)
   printf "\nChecking if inside the git working copy and ought to pull."
-  if [ -d "$SCRIPT_PATH/.git" ]; then
-    full_path=$(cd "$(dirname "$0")" && pwd)
+  if [ -d "$full_path/.git" ]; then
     printf "\nInside git working copy %s, pulling.\n" "$full_path"
-    git -C "$SCRIPT_PATH" pull --rebase
-    cd "$SCRIPT_PATH" && \
-      . "$SCRIPT_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+    git -C "$full_path" pull --rebase
+    . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
@@ -88,6 +86,5 @@ else
     printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
-  cd "$TARGET_PATH" && \
-    . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+  . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
 fi
