@@ -22,7 +22,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## TL;DR
 
-    curl -sS https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | bash
 
 If git is not present, it is installed by APT or YUM (or by Xcode command line
 tools on macOS) and the repo is cloned to `$HOME/configent`.
