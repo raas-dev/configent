@@ -29,7 +29,8 @@ This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 If git is not present, it is installed first by APT, YUM or Xcode cmdline tools.
 
 GUI apps (macOS: Homebrew Cask, others: Snap) are not installed by `install.sh`.
-Run `./bootstrap` in the cloned repo to install them.
+
+If machine is not server, run `./bootstrap` in the cloned repo to install them.
 
 ### From a private git repo
 
