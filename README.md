@@ -71,12 +71,11 @@ MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
 Secondly, [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
 
-Thirdly, latest `zsh` and `bash`, `tmux` and other command-line utilities, 
-cloud development tools and [Neovim](https://neovim.io/) are installed,
-if `brew` is present
-
-Fourthly, [Terminess](https://www.programmingfonts.org/#terminus) monospace
+Thirdly, [Terminess](https://www.programmingfonts.org/#terminus) monospace
 font is installed.
+
+Fourthly, latest `zsh`, `tmux`, command-line utilities, cloud development tools
+and [Neovim](https://neovim.io/) with plugins are installed.
 
 Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
