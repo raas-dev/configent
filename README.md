@@ -65,8 +65,9 @@ All the binaries in `bin/` are available by name from now on.
 
 MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
 
-[Homebrew](https://brew.sh/) is installed first if `brew` is not already in
-`PATH`. **On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
+[Homebrew](https://brew.sh/) is installed if `brew` is not already in `PATH`.
+
+**On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
 
 Secondly, [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
@@ -75,7 +76,7 @@ Thirdly, [Terminess](https://www.programmingfonts.org/#terminus) monospace
 font is installed.
 
 Fourthly, latest `zsh`, `tmux`, command-line utilities, cloud development tools
-and [Neovim](https://neovim.io/) with plugins are installed.
+and [Neovim](https://neovim.io/) is installed.
 
 Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
