@@ -43,7 +43,7 @@ Run the same one command install:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
-## ❔
+## What's included❔
 
 Script `bootstrap` runs all the scripts documented below.
 
