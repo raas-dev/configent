@@ -80,10 +80,10 @@ if [ -t 0 ]; then
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
-    printf "\nGit working copy does not exist, cloning to %s" "$TARGET_PATH"
+    printf "\nGit working copy does not exist, cloning to %s\n" "$TARGET_PATH"
     git clone --quiet "$GIT_REPO_URL" "$TARGET_PATH"
   else
-    printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
+    printf "\nGit working copy found at %s, pulling.\n" "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
   cd "$TARGET_PATH" && \
