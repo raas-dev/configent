@@ -32,7 +32,7 @@ If git is not present, it is installed first by APT, YUM or Xcode cmdline tools.
 
 Homebrew Cask or Snaps are not installed by default, as server/VM is assumed.
 
-Run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
+Re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
 
 ### Private installation
 
