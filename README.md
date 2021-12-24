@@ -113,10 +113,10 @@ On macOS, these shims wrap the respective commands to run inside Lima VMs:
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
-The scripts create or start the necessary virtual machines, lima VM 'ubuntu'
-for running rootless Docker and lima VM 'rancher' for containerd.
+The shims create or start the necessary virtual machines, a lima VM named
+'ubuntu' for running rootless Docker and a lima VM 'rancher' for containerd.
 
-In addition, 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes development.
+In addition, the 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes development.
 
 See aliases to create additional VMs and named aliases `d` and `n` for
 container build and run shortcuts.
