@@ -132,7 +132,7 @@
     },
     "workbench.editor.untitled.hint": "hidden",
     "git.confirmSync": false,
-    "window.zoomLevel": 1,
     "bracketPairColorizer.depreciation-notice": false,
-    "security.workspace.trust.enabled": false
+    "security.workspace.trust.enabled": false,
+    "window.zoomLevel": 1
 }
