@@ -32,14 +32,14 @@ GUI apps (macOS: Homebrew Cask, others: Snap) are not installed by `install.sh`.
 
 If machine is not server, run `./bootstrap` in the cloned repo to install them.
 
-### From a private git repo
+### Private installation
 
-Prerequisites:
+Fork this repository. Installing from a private git repo has some prerequisites:
 - Install git to clone the repo (on macOS: `xcode-select --install`)
 - Create an SSH key pair (`ssh-keygen -t rsa`)
 - Add SSH key `.pub` part in GitHub
 
-Run the same one command install:
+Then run the one command install/update:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
