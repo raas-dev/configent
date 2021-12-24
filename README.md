@@ -65,9 +65,9 @@ All the binaries in `bin/` are available by name from now on.
 
 MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
 
-[Homebrew](https://brew.sh/) is installed if `brew` is not already in `PATH`.
-
 **On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
+
+[Homebrew](https://brew.sh/) is installed first if it is not already in `PATH`.
 
 Secondly, [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
