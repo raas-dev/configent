@@ -1,44 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
-### Configuration ##############################################################
-
-vscode_settings_path="$this_path/vscode"
-
-### Parse arguments ############################################################
-
-ln_args=''
-while getopts 'f' arg ; do
-  case "$arg" in
-    f)
-      ln_args='f'
-      ;;
-    *)
-      exit 1
-      ;;
-  esac
-done
+this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Symlink Visual Studio Code configuration ###################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [ "$(name -s)" = "Darwin" ]]; then
   user_path="$HOME/Library/Application Support/Code/User"
 else
   user_path="$HOME/.config/Code/User"
 fi
 
-mkdir -p "$user_path"
-if [[ ! -L "$user_path" ]] ; then
-  mv -i "$user_path" "${user_path}-old"
-  ln -snvi"$ln_args" "$vscode_settings_path" "$user_path"
-fi
+rm -rfv "${user_path}-old"
+mv -v "$user_path" "${user_path}-old"
+ln -snvi "$this_path/vscode" "$user_path"
 
 ### Install VSCode extensions ##################################################
 
-if which code &>/dev/null ; then
+if which code >/dev/null 2>&1 ; then
   # code --list-extensions | xargs -L 1 echo "code --force --install-extension"
   code --force --install-extension Arjun.swagger-viewer
   code --force --install-extension bencoleman.armview

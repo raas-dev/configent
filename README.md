@@ -12,7 +12,7 @@ Principles:
 
 Features:
 
-- Bootstrap macOS/APT/YUM Linux distros one command only with `curl` and `bash`
+- Bootstrap macOS/APT/YUM Linux distros one command only, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
 - In terminal, Rust and Go written utilities are always preferred due to speed
 - Best practices language multiple versioning with `pyenv`, `rbenv` and `nvm`
@@ -22,7 +22,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## TL;DR
 
-    curl -sS https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
 If git is not present, it is installed by APT or YUM (or by Xcode command line
 tools on macOS) and the repo is cloned to `$HOME/configent`.
@@ -45,19 +45,18 @@ Clone the repo and run one command install:
 
 Script `bootstrap` runs all the scripts documented below.
 
-It passes `-f` to the scripts to not prompt anything.
-
 ### ⚙️ Dotfiles
 
-Symlinks all the `dotfiles` to user's home directory (`-f` to skip prompts):
+Symlinks all files in `dotfiles/` to home directory (pass `-f` to skip prompts):
 
     ./symlink_dotfiles
 
-Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`,
-thus binaries in it are available by name.
+Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`.
 
-Restart the shell to load the shell configs (and `.profile` setting the `PATH`),
-or run `source ~/.zshrc` (or `source ~/.bashrc`).
+If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
+
+Restart the shell, or run `source ~/.zshrc` (or `source ~/.bashrc`) and
+binaries in `bin/` are available by name.
 
 ### 🖥️ Apps
 
@@ -82,7 +81,7 @@ Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
 ### 🖊️ Visual Studio Code
 
-Symlink the `vscode/` directory (`-f` to replace `code/User` without prompting):
+Symlink `vscode/` to `<vscode_config_path>/Code` (back ups old as `Code-old`):
 
     ./setup_vscode
 

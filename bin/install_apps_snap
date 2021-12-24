@@ -2,7 +2,7 @@
 
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
-if [ "$EUID" = "0" ]; then
+if [ "$(id -u)" = 0 ]; then
     SUDO=''
 elif which sudo &>/dev/null; then
     SUDO='sudo'

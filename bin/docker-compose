@@ -13,7 +13,7 @@ install_docker_compose_plugin() {
     echo "Downloading docker-compose as Docker CLI plugin on $os ($arch)"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
     mkdir -p "$HOME/.docker/cli-plugins/"
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+    curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
     chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi

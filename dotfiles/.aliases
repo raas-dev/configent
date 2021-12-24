@@ -244,12 +244,6 @@ genpass() {
     fold -w $1 | head -n1 | pbcopy
 }
 
-# https://github.com/kdabir/has
-has() {
-  curl -sL https://raw.githubusercontent.com/kdabir/has/master/has | \
-    bash -s "$@"
-}
-
 # Show process listening on given port
 whatlistens() {
   lsof -P -i :"$1" | column -t

@@ -3,10 +3,10 @@
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+fonts_dir="$this_path/../ui/fonts"
 
 ### Install fonts ##############################################################
 
-fonts_dir="$this_path/../ui/fonts"
 find_command="find \"$fonts_dir\" \( -name '*.[o,t]tf' -or -name '*.pcf.gz' \) \
   -type f -print0"
 
