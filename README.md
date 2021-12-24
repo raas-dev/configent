@@ -22,13 +22,14 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## TL;DR
 
+This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
+
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
-If git is not present, it is installed by APT, YUM or Xcode command line tools,
-and the repo is cloned to `$HOME/configent`, or pulled if it already exists.
+If git is not present, it is installed first by APT, YUM or Xcode cmdline tools.
 
-GUI apps (macOS: Homebrew Cask, Linux distros: Snap) are not installed by
-`install.sh`. Run `./bootstrap` in the cloned repo to install them.
+GUI apps (macOS: Homebrew Cask, others: Snap) are not installed by `install.sh`.
+Run `./bootstrap` in the cloned repo to install them.
 
 ### From a private git repo
 
@@ -37,7 +38,7 @@ Prerequisites:
 - Create an SSH key pair (`ssh-keygen -t rsa`)
 - Add SSH key `.pub` part in GitHub
 
-Clone the repo and run one command install:
+One command install:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
