@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC1117,SC2001
+# shellcheck disable=SC2001,SC2059,SC2268,SC2034,SC2086,SC2021,SC2012
 #
 # [X] open section
 # [X] one shot mode
