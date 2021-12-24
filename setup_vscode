@@ -6,7 +6,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Symlink Visual Studio Code configuration ###################################
 
-if [ "$(name -s)" = "Darwin" ]]; then
+if [ "$(name -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/Code/User"
 else
   user_path="$HOME/.config/Code/User"

@@ -1,11 +1,15 @@
-### .bashrc
+#!/usr/bin/env bash
+
+# shellcheck disable=SC1091  # do not expect input files
+# shellcheck disable=SC2015  # true is expected to be returned by the last line
+# shellcheck disable=SC2155  # will not declare separately, value compactness
 
 # quit if no prompt is present - shell is not interactive
 [[ -z "$PS1" ]] && return
 
 export SHELL="$(which bash)"
 
-alias r=". $HOME/.bashrc"
+alias r=". \$HOME/.bashrc"
 
 ### Bash builtins ##############################################################
 
