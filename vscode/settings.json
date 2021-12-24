@@ -1,10 +1,10 @@
 {
     "editor.fontFamily": "TerminessTTF Nerd Font",
-    "editor.fontSize": 18,
+    "editor.fontSize": 17,
     "workbench.colorTheme": "Ayu Dark Bordered",
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "terminal.integrated.fontSize": 17,
+    "terminal.integrated.fontSize": 16,
     "terminal.integrated.scrollback": 99999,
     "markdown.preview.fontSize": 17,
     "workbench.iconTheme": "ayu",

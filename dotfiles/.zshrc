@@ -2,7 +2,7 @@
 
 export SHELL="$(which zsh)"
 
-alias r=". $HOME/.zshrc"
+alias r=". \$HOME/.zshrc"
 
 ### Zplug ######################################################################
 

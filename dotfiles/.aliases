@@ -1,4 +1,4 @@
-### .aliases
+#!/usr/bin/env bash
 
 ### OS specific ################################################################
 
@@ -220,17 +220,17 @@ alias week='date +%V'
 ext() {
  if [[ -f $1 ]]; then
    case $1 in
-     *.tar.bz2)   tar xvjf $1    ;;
-     *.tar.gz)    tar xvzf $1    ;;
-     *.bz2)       bunzip2 $1     ;;
-     *.rar)       unrar x $1     ;;
-     *.gz)        gunzip $1      ;;
-     *.tar)       tar xvf $1     ;;
-     *.tbz2)      tar xvjf $1    ;;
-     *.tgz)       tar xvzf $1    ;;
-     *.zip)       unzip $1       ;;
-     *.Z)         uncompress $1  ;;
-     *.7z)        7z x $1        ;;
+     *.tar.bz2)   tar xvjf "$1"   ;;
+     *.tar.gz)    tar xvzf "$1"   ;;
+     *.bz2)       bunzip2 "$1"    ;;
+     *.rar)       unrar x "$1"    ;;
+     *.gz)        gunzip "$1"     ;;
+     *.tar)       tar xvf "$1"    ;;
+     *.tbz2)      tar xvjf "$1"   ;;
+     *.tgz)       tar xvzf "$1"   ;;
+     *.zip)       unzip "$1"      ;;
+     *.Z)         uncompress "$1" ;;
+     *.7z)        7z x "$1"       ;;
      *)           echo "don't know how to extract '$1'..." ;;
    esac
  else
@@ -240,8 +240,8 @@ ext() {
 
 # Quick password generator
 genpass() {
-  cat /dev/urandom | tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | \
-    fold -w $1 | head -n1 | pbcopy
+  < /dev/urandom tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | \
+    fold -w "$1" | head -n1 | pbcopy
 }
 
 # Show process listening on given port
@@ -313,12 +313,12 @@ decode_base64_url() {
 }
 
 decode_jwt_partial(){
-   decode_base64_url "$(echo -n $2 | cut -d "." -f $1)" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
+   decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
 }
 
 decode_jwt_header_payload(){
-   decode_jwt_partial 1 $1
-   decode_jwt_partial 2 $1
+   decode_jwt_partial 1 "$1"
+   decode_jwt_partial 2 "$1"
 }
 
 # decode jwt header + payload
@@ -335,67 +335,61 @@ alias jwtp="decode_jwt_partial"
 # https://dev.to/erykpiast/two-bash-scripts-i-cannot-live-without-when-working-with-git-44a1
 
 git_clean_untracked_safely() {
-  TO_REMOVE_LINES=$(git clean -f -d -n | wc -l);
+  TO_REMOVE_LINES=$(git clean -f -d -n | wc -l)
   if [ "$TO_REMOVE_LINES" -ne "0" ]; then
-    TO_REMOVE=$(git clean -f -d -n);
+    TO_REMOVE=$(git clean -f -d -n)
 
-    echo "Cleaning...";
-    printf "\n$TO_REMOVE\n\n";
-    echo "Proceed?";
+    echo "Cleaning..."
+    echo -e "\n$TO_REMOVE\n\n"
+    echo "Proceed?"
 
     select result in Yes No; do
       if [[ "$result" == "Yes" ]]; then
-        echo "Cleaning in progress...";
-        echo "";
-        git clean -f -d;
-        echo "";
-        echo "All files and directories removed!";
+        echo -e "Cleaning in progress...\n"
+        git clean -f -d
+        echo -e "\nAll files and directories removed!"
       fi
-      break;
-    done;
+      break
+    done
   else
-    echo "Everything is clean";
-  fi;
+    echo "Everything is clean"
+  fi
 }
 
 git_clean_local_branches() {
-  OPTION="-d";
+  option="-d"
   if [[ "$1" == "-f" ]]; then
-    echo "WARNING! Removing with force";
-    OPTION="-D";
-  fi;
+    echo "Warning: Removing with force"
+    option="-D"
+  fi
 
-  TO_REMOVE_LINES=$(git branch -r | \
+  to_remove_lines=$(git branch -r | \
     awk "{print \\$1}" | \
-    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
-    awk "{print \\$1}" | wc -l);
+    grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
+    awk "{print \\$1}" | wc -l)
 
-  if [ "$TO_REMOVE_LINES" -ne "0" ]; then
-    TO_REMOVE=$(git branch -r | awk "{print \\$1}" | \
-    egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
-    awk "{print \\$1}");
+  if [ "$to_remove_lines" -ne "0" ]; then
+    to_remove=$(git branch -r | awk "{print \\$1}" | \
+    grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | \
+    awk "{print \\$1}")
 
-    echo "Removing branches...";
-    echo "";
-    printf "\n$TO_REMOVE\n\n";
-    echo "Proceed?";
+    echo "Removing branches..."
+    echo -e "\n\n$to_remove\n\n"
+    echo "Proceed?"
 
     select result in Yes No; do
       if [[ "$result" == "Yes" ]]; then
-        echo "Removing in progress...";
-        echo "$TO_REMOVE" | xargs git branch "$OPTION";
-        if [ $? -ne 0 ]; then
-          echo ""
-          echo "Some branches were not removed, you have to do it manually!";
+        echo "Removing in progress..."
+        if ! echo "$to_remove" | xargs git branch "$option"; then
+          echo -e "\nSome branches were not removed, do it manually."
         else
-          echo "All branches removed!";
+          echo "All branches removed."
         fi
       fi
-
-      break;
-    done;
+      break
+    done
   else
-    echo "You have nothing to clean";
+    echo "You have nothing to clean."
   fi
 }
 
@@ -405,7 +399,6 @@ if [[ "$OSTYPE" = darwin* ]]; then
   get_keychain_variable() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: get_keychain_variable <varname>" && return 1
-
     security find-generic-password -w \
       -a "$USER" -D "environment variable" -s "$name"
   }
@@ -413,11 +406,9 @@ if [[ "$OSTYPE" = darwin* ]]; then
   set_keychain_variable() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: set_keychain_variable <varname>" && return 1
-
     echo -n "Enter secret for $name: "
-    read secret
+    read -r secret
     [ -z "$secret" ] && echo "Error: Empty secret" && return 1
-
     security add-generic-password -U \
       -a "$USER" -D "environment variable" -s "$name" -w "$secret"
   }

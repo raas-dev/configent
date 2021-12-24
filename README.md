@@ -55,8 +55,8 @@ Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`.
 
 If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
 
-Restart the shell, or run `source ~/.zshrc` (or `source ~/.bashrc`) and
-binaries in `bin/` are available by name.
+Restart the shell, or run `source ~/.zshrc`, and all binaries in `bin/` are
+available by name from now on.
 
 ### 🖥️ Apps
 
@@ -81,19 +81,21 @@ Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
 ### 🖊️ Visual Studio Code
 
-Symlink `vscode/` to `<vscode_config_path>/Code` (back ups old as `Code-old`):
+Symlink `vscode/` to `<os_vscode_path>/Code` (even if `code` is not installed):
 
     ./setup_vscode
 
-If `code` is present, extensions are installed.
+The old `Code/` is first backed up as `Code-old`.
+
+If `code` is present, VSCode extensions are installed.
 
 ### 🐚 User's default shell
 
-Set the brew installed `zsh` as the user's default shell:
+Set the bootstrap installed `zsh` as the user's default shell:
 
     install_zsh
 
-or, if prefer (brew installed) `bash` instead:
+If prefer `bash` instead, install the latest from brew and set it as default:
 
     install_bash
 

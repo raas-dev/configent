@@ -30,7 +30,6 @@ fi
 "$bin_path/install_fonts"
 
 if [ -z "$NO_FORMULAE" ] ; then
-  NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_bash"
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
   "$bin_path/install_devenv"
