@@ -24,11 +24,11 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
-If git is not present, it is installed by APT or YUM (or by Xcode command line
-tools on macOS) and the repo is cloned to `$HOME/configent`.
+If git is not present, it is installed by APT, YUM or Xcode command line tools,
+and the repo is cloned to `$HOME/configent`, or pulled if it already exists.
 
-GUI apps (macOS: Homebrew Cask, others: Snap) are not installed by `install.sh`,
-after the installation re-run `./bootstrap` in the cloned repo to install them.
+GUI apps (macOS: Homebrew Cask, Linux distros: Snap) are not installed by
+`install.sh`. Run `./bootstrap` in the cloned repo to install them.
 
 ### From a private git repo
 
@@ -47,15 +47,15 @@ Script `bootstrap` runs all the scripts documented below.
 
 ### ⚙️ Dotfiles
 
-Symlinks all files in `dotfiles/` to home directory (pass `-f` to skip prompts):
+Symlinks all files in `dotfiles/` to home directory (use `-f` to skip prompts):
 
-    ./symlink_dotfiles
+    ./symlink_dotfiles -f
 
 Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`.
 
 If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
 
-Restart the shell, or run `source ~/.zshrc`, and all binaries in `bin/` are
+Restart the shell, or run `source ~/.zshrc` and all binaries in `bin/` are
 available by name from now on.
 
 ### 🖥️ Apps
@@ -91,7 +91,7 @@ If `code` is present, VSCode extensions are installed.
 
 ### 🐚 User's default shell
 
-Set the bootstrap installed `zsh` as the user's default shell:
+Set the brew installed `zsh` as the user's default shell:
 
     install_zsh
 
