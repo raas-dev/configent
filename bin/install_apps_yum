@@ -1,6 +1,6 @@
 #!/bin/sh
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
+trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(id -u)" = 0 ]; then
     SUDO=''
@@ -17,7 +17,7 @@ elif which sudo >/dev/null 2>&1 ; then
       kill -0 "$$" || exit
     done 2>/dev/null &
 else
-    echo "ERROR: User is non-root and sudo is not available, cannot proceed."
+    printf "ERROR: User is non-root and sudo is not available, cannot proceed."
     exit 1
 fi
 

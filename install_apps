@@ -3,13 +3,13 @@
 this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
+trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -z "$NO_CASKS" ] ; then
     "$bin_path/install_apps_cask"
   else
-    echo "NO_CASKS was specified and on macOS, won't install casks."
+    printf "NO_CASKS was specified and on macOS, won't install casks."
   fi
 elif [ "$(uname -s)" = 'Linux' ] ; then
   if which apt-get >/dev/null 2>&1  ; then
@@ -20,7 +20,7 @@ elif [ "$(uname -s)" = 'Linux' ] ; then
   if [ -z "$NO_SNAPS" ] ; then
     "$bin_path/install_apps_snap"
   else
-    echo "NO_SNAPS was specified and on Linux, won't install snaps."
+    printf "NO_SNAPS was specified and on Linux, won't install snaps."
   fi
 else
   printf "\nError: Only macOS and APT and YUM Linux distros are supported."
@@ -36,7 +36,7 @@ if [ -z "$NO_FORMULAE" ] ; then
   "$bin_path/install_neovim"
   NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_zsh"
 else
-  echo "NO_FORMULAE was specified, won't install formula."
+  printf "NO_FORMULAE was specified, won't install formula."
 fi
 
 "$bin_path/install_pyenv"

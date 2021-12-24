@@ -1,6 +1,6 @@
 #!/bin/sh
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
+trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 
