@@ -86,6 +86,6 @@ else
     printf "\nGit working copy found at %s, pulling." "$TARGET_PATH"
     git -C "$TARGET_PATH" pull --rebase
   fi
-  cd "$TARGET_PATH"
-  . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+  cd "$TARGET_PATH" && \
+   . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
 fi
