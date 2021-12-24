@@ -16,11 +16,11 @@ do_not_symlink=(
 
 ### Parse arguments ############################################################
 
-ln_args=''
+args=''
 while getopts 'f' arg ; do
   case "$arg" in
     f)
-      ln_args='f'
+      args='f'
       ;;
     *)
       exit 1
@@ -31,20 +31,16 @@ done
 ### Symlink bin ################################################################
 
 local_bin_path="$HOME/local/bin"
-mkdir -p "$local_bin_path"
-if [[ ! -L "$local_bin_path" ]] ; then
-  mv -i "$local_bin_path" "${local_bin_path}-old"
-  ln -snvi"$ln_args" "$this_path/bin" "$local_bin_path"
-fi
+rm -r"$args" "${local_bin_path}-old"
+mv "$local_bin_path" "${local_bin_path}-old"
+ln -snvi"$args" "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
 local_etc_path="$HOME/local/etc"
-mkdir -p "$local_etc_path"
-if [[ ! -L "$local_etc_path" ]] ; then
-  mv -i "$local_etc_path" "${local_etc_path}-old"
-  ln -snvi"$ln_args" "$this_path/etc" "$local_etc_path"
-fi
+rm -r"$args" "${local_etc_path}-old"
+mv "$local_etc_path" "${local_etc_path}-old"
+ln -snvi"$args" "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
 
@@ -60,7 +56,7 @@ for source_file_name in $(ls -A $dotfiles_path) ; do
   if (in_array "$source_file_name" "${do_not_symlink[@]}") ; then
     echo "Ignoring: $source_file_name"
   else
-    ln -snvi"$ln_args" "$dotfiles_path/$source_file_name" \
+    ln -snvi"$args" "$dotfiles_path/$source_file_name" \
       "$HOME/$source_file_name"
   fi
 done
@@ -68,14 +64,14 @@ done
 ### Symlink Starship config ####################################################
 
 mkdir -p "$HOME/.config"
-ln -svi"$ln_args" "$HOME/local/etc/starship/config.toml" \
+ln -snvi"$args" "$HOME/local/etc/starship/config.toml" \
   "$HOME/.config/starship.toml"
 
 ### Symlink htoprc for Linux distributions #####################################
 
 if [[ "$OSTYPE" = linux-gnu* ]] ; then
   mkdir -p "$HOME/.config/htop"
-  ln -snvi"$ln_args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
+  ln -snvi"$args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
 
 ### Symlink XFCE for Linux distributions #######################################
@@ -83,9 +79,8 @@ fi
 #if [[ "$OSTYPE" = linux-gnu* ]] ; then
 #  xfce_configs_path="$HOME/.config/xfce4"
 #  if [ -d "$xfce_configs_path" ] ; then
-#    if [[ ! -L "$xfce_configs_path" ]] ; then
-#      mv -i "$xfce_configs_path" "${xfce_configs_path}-old"
-#      ln -snvi"$ln_args" "$dotfiles_path/xfce4" "$xfce_configs_path"
-#    fi
+      #rm -r"$args" "${xfce_configs_path}-old"
+#     mv "$xfce_configs_path" "${xfce_configs_path}-old"
+#     ln -snvi"$args" "$dotfiles_path/xfce4" "$xfce_configs_path"
 #  fi
 #fi
