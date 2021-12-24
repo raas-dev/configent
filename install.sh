@@ -89,7 +89,7 @@ else
   else
     printf "\nGit working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
-    git -C "$TARGET_PATH" checkout --track "origin/$GIT_BRANCH"
+    git -C "$TARGET_PATH" checkout -b "$GIT_BRANCH"
     git -C "$TARGET_PATH" pull --rebase
   fi
   cd "$TARGET_PATH" && \
