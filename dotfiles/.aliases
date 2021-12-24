@@ -359,7 +359,7 @@ git_clean_untracked_safely() {
 git_clean_local_branches() {
   option="-d"
   if [[ "$1" == "-f" ]]; then
-    echo "WARNING! Removing with force"
+    echo "Warning: Removing with force"
     option="-D"
   fi
 
@@ -381,15 +381,15 @@ git_clean_local_branches() {
       if [[ "$result" == "Yes" ]]; then
         echo "Removing in progress..."
         if ! echo "$to_remove" | xargs git branch "$option"; then
-          echo -e "\nSome branches were not removed, you have to do it manually!"
+          echo -e "\nSome branches were not removed, do it manually."
         else
-          echo "All branches removed!"
+          echo "All branches removed."
         fi
       fi
       break
     done
   else
-    echo "You have nothing to clean"
+    echo "You have nothing to clean."
   fi
 }
 
