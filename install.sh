@@ -10,6 +10,7 @@
 ### constants  #################################################################
 
 GIT_REPO_URL="https://github.com/raas-dev/configent"
+GIT_BRANCH="v111"
 TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
@@ -74,17 +75,17 @@ if [ -t 0 ]; then
   printf "\nChecking if inside the git working copy and ought to pull."
   if [ -d "$full_path/.git" ]; then
     printf "\nInside git working copy %s, pulling.\n" "$full_path"
-    git -C "$full_path" pull --rebase
+    git -C "$full_path" pull --rebase origin "$GIT_BRANCH"
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
     printf "\nGit working copy does not exist, cloning to %s\n" "$TARGET_PATH"
-    git clone --quiet "$GIT_REPO_URL" "$TARGET_PATH"
+    git clone --quiet --branch "$GIT_BRANCH" "$GIT_REPO_URL" "$TARGET_PATH"
   else
     printf "\nGit working copy found at %s, pulling.\n" "$TARGET_PATH"
-    git -C "$TARGET_PATH" pull --rebase
+    git -C "$TARGET_PATH" pull --rebase origin "$GIT_BRANCH"
   fi
   cd "$TARGET_PATH" && \
    . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
