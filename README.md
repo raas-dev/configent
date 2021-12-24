@@ -43,28 +43,27 @@ Run the same one command install:
 
     git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
-## What's included❔
+## 🔋's included
 
-Script `bootstrap` runs all the scripts documented below.
+Script `bootstrap` runs the three scripts in the order documented below.
 
-### ⚙️ Dotfiles
+### ⚙️ symlink_dotfiles
 
-Symlinks all files in `dotfiles/` to home directory (use `-f` to skip prompts):
+Symlinks all the files in `dotfiles/` to the user's home directory.
 
-    ./symlink_dotfiles -f
+Script `bootstrap` passes `-f` to this script to skip override prompts per file.
 
-Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`.
+Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 
 If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
 
-Restart the shell, or run `source ~/.zshrc` and all binaries in `bin/` are
-available by name from now on.
+Restart the shell or run `source ~/.zshrc`. Then you may simply reload with `r`.
 
-### 🖥️ Apps
+All the binaries in `bin/` are available by name from now on.
 
-MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported:
+### 🖥️ install_apps
 
-    ./install_apps
+MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
 
 [Homebrew](https://brew.sh/) is installed first if `brew` is not already in
 `PATH`. **On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
@@ -81,17 +80,17 @@ font is installed.
 
 Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
-### 🖊️ Visual Studio Code
+### 🖊️ setup_vscode
 
-Symlink `vscode/` to `<os_vscode_path>/Code` (even if `code` is not installed):
+Symlinks `vscode/` to `<os_vscode_path>/Code`.
 
-    ./setup_vscode
+The symlink is created even if `code` is not (yet) installed.
 
 The old `Code/` is first backed up as `Code-old`.
 
 If `code` is present, VSCode extensions are installed.
 
-### 🐚 User's default shell
+## 🐚 User's default shell
 
 Set the brew installed `zsh` as the user's default shell:
 
