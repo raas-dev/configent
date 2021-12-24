@@ -34,11 +34,11 @@ provision:
 - mode: system
   script: |
     #!/bin/sh
-    curl -sfL https://get.k3s.io | sh -
-#- mode: user
-#  script: |
-#    #!/bin/bash
-#    NO_FORMULAE=true bash -c "$(curl -sS https://raw.githubusercontent.com/raas-dev/configent/main/install.sh)"
+    curl -fsSL https://get.k3s.io | sh
+- mode: user
+  script: |
+    #!/bin/bash
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh
 
 probes:
 - script: |
