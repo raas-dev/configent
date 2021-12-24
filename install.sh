@@ -76,20 +76,20 @@ if [ -t 0 ]; then
   if [ -d "$full_path/.git" ]; then
     printf "\nInside git working copy %s, pulling %s\n" \
       "$full_path" "$GIT_BRANCH"
-    git -C "$full_path" checkout -b "$GIT_BRANCH"
+    git -C "$full_path" checkout "$GIT_BRANCH"
     git -C "$full_path" pull --rebase
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
-    printf "\nGit working copy does not exist, cloning %s (%s)\n" \
+    printf "\nGit working copy does not exist, cloning %s (branch: %s)\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
     git clone --quiet --branch "$GIT_BRANCH" "$GIT_REPO_URL" "$TARGET_PATH"
   else
     printf "\nGit working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
-    git -C "$TARGET_PATH" checkout -b "$GIT_BRANCH"
+    git -C "$TARGET_PATH" checkout "$GIT_BRANCH"
     git -C "$TARGET_PATH" pull --rebase
   fi
   cd "$TARGET_PATH" && \
