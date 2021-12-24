@@ -31,16 +31,16 @@ done
 ### Symlink bin ################################################################
 
 local_bin_path="$HOME/local/bin"
-rm -r"$args" "${local_bin_path}-old"
+rm -rf "${local_bin_path}-old"
 mv "$local_bin_path" "${local_bin_path}-old"
-ln -snvi"$args" "$this_path/bin" "$local_bin_path"
+ln -snvi "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
 local_etc_path="$HOME/local/etc"
-rm -r"$args" "${local_etc_path}-old"
+rm -rf "${local_etc_path}-old"
 mv "$local_etc_path" "${local_etc_path}-old"
-ln -snvi"$args" "$this_path/etc" "$local_etc_path"
+ln -snvi "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
 
@@ -79,8 +79,8 @@ fi
 #if [[ "$OSTYPE" = linux-gnu* ]] ; then
 #  xfce_configs_path="$HOME/.config/xfce4"
 #  if [ -d "$xfce_configs_path" ] ; then
-      #rm -r"$args" "${xfce_configs_path}-old"
+#     rm -rf "${xfce_configs_path}-old"
 #     mv "$xfce_configs_path" "${xfce_configs_path}-old"
-#     ln -snvi"$args" "$dotfiles_path/xfce4" "$xfce_configs_path"
+#     ln -snvi "$dotfiles_path/xfce4" "$xfce_configs_path"
 #  fi
 #fi

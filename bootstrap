@@ -8,6 +8,6 @@ this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 "$this_path/symlink_dotfiles" -f
 "$this_path/install_apps"
-"$this_path/setup_vscode" -f
+"$this_path/setup_vscode"
 
 echo -e "\n✅ bootstrap done."

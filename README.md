@@ -45,19 +45,18 @@ Clone the repo and run one command install:
 
 Script `bootstrap` runs all the scripts documented below.
 
-It passes `-f` to the scripts to not prompt anything.
-
 ### ⚙️ Dotfiles
 
-Symlinks all the `dotfiles` to user's home directory (`-f` to skip prompts):
+Symlinks all files in `dotfiles/` to home directory (pass `-f` to skip prompts):
 
     ./symlink_dotfiles
 
-Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`,
-thus binaries in it are available by name.
+Directory `bin` is symlinked to `~/local/bin` which takes preference in `PATH`.
 
-Restart the shell to load the shell configs (and `.profile` setting the `PATH`),
-or run `source ~/.zshrc` (or `source ~/.bashrc`).
+If an existing `~/local/bin` exists, it is first backed up as `~/local/bin-old`.
+
+Restart the shell, or run `source ~/.zshrc` (or `source ~/.bashrc`) and
+binaries in `bin/` are available by name.
 
 ### 🖥️ Apps
 
@@ -82,7 +81,7 @@ Finally `pyenv`, `rbenv` and `nvm` and defined language versions are installed.
 
 ### 🖊️ Visual Studio Code
 
-Symlink the `vscode/` directory (`-f` to replace `code/User` without prompting):
+Symlink `vscode/` to `<vscode_config_path>/Code` (back ups old as `Code-old`):
 
     ./setup_vscode
 

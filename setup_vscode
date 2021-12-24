@@ -8,20 +8,6 @@ this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 vscode_settings_path="$this_path/vscode"
 
-### Parse arguments ############################################################
-
-args=''
-while getopts 'f' arg ; do
-  case "$arg" in
-    f)
-      args='f'
-      ;;
-    *)
-      exit 1
-      ;;
-  esac
-done
-
 ### Symlink Visual Studio Code configuration ###################################
 
 if [[ "$OSTYPE" = darwin* ]]; then
@@ -30,9 +16,9 @@ else
   user_path="$HOME/.config/Code/User"
 fi
 
-rm -r"$args" "${user_path}-old"
+rm -rf "${user_path}-old"
 mv "$user_path" "${user_path}-old"
-ln -snvi"$args" "$vscode_settings_path" "$user_path"
+ln -snvi "$vscode_settings_path" "$user_path"
 
 ### Install VSCode extensions ##################################################
 
