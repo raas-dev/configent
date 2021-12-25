@@ -53,16 +53,13 @@ Script `bootstrap` runs the three scripts in the order documented below.
 ### ⚙️ symlink_dotfiles
 
 Symlinks all the files in `dotfiles/` to the user's home directory.
-
-Script `bootstrap` passes `-f` to this script to skip override prompts per file.
+- Script `bootstrap` passes `-f` to this script to skip confirmation per file.
 
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
-
-If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
+- If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
 Restart the shell or run `source ~/.zshrc`. Then you may simply reload with `r`.
-
-All the binaries in `bin/` are available by name from now on.
+- All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
