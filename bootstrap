@@ -10,4 +10,4 @@ this_path="$(cd "$(dirname "$0")" && pwd)"
 "$this_path/install_apps"
 "$this_path/setup_vscode"
 
-printf "\n✅ bootstrap done."
+printf "\n✅ bootstrap done.\n"
