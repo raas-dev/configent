@@ -83,11 +83,9 @@ Order of installation:
 ### 🖊️ setup_vscode
 
 The script symlinks `vscode/` to `<os_vscode_path>/Code`.
-
-This is done even if `code` is not (yet) installed.
-
 The old `Code/` is first backed up as `Code-old`.
 
+This is done even if `code` is not (yet) installed.
 If `code` is present, VSCode extensions are installed.
 
 ## 🐚 User's default shell
