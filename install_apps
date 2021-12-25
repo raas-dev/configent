@@ -12,10 +12,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     printf "NO_CASKS was specified and on macOS, won't install casks."
   fi
 elif [ "$(uname -s)" = 'Linux' ] ; then
-  if which apt-get >/dev/null 2>&1  ; then
+  if which apt-get >/dev/null 2>&1 ; then
     "$bin_path/install_apps_apt"
-  elif which yum >/dev/null 2>&1  ; then
+  elif which yum >/dev/null 2>&1 ; then
     "$bin_path/install_apps_yum"
+  elif which apk >/dev/null 2>&1  ; then
+    "$bin_path/install_apps_apk"
+    echo "Snap is not available on Alpine Linux, NO_SNAPS=true is forced"
+    export NO_SNAPS="true"
   fi
   if [ -z "$NO_SNAPS" ] ; then
     "$bin_path/install_apps_snap"
@@ -23,7 +27,7 @@ elif [ "$(uname -s)" = 'Linux' ] ; then
     printf "NO_SNAPS was specified and on Linux, won't install snaps."
   fi
 else
-  printf "\nError: Only macOS and APT and YUM Linux distros are supported."
+  printf "\nError: Only macOS and APT/YUM/APK Linux distros are supported."
   exit 1
 fi
 

@@ -12,7 +12,7 @@ Principles:
 
 Features:
 
-- Bootstrap macOS/APT/YUM Linux distros one command only, only `curl` required
+- Bootstrap macOS/APT/YUM/Alpine Linux with one command, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
 - In terminal, Rust and Go written utilities are always preferred due to speed
 - Best practices language multiple versioning with `pyenv`, `rbenv` and `nvm`
@@ -26,7 +26,8 @@ This repo is cloned to `$HOME/configent` or pulled if already exists there:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
 
-If git is not present, it is installed first by APT, YUM or Xcode cmdline tools.
+If git is not present, it is installed first by the Linux distro's package
+manager or by Xcode cmdline tools on macOS.
 
 ### GUI apps
 
@@ -65,7 +66,8 @@ All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
-MacOS, APT-based (Ubuntu, Debian) and YUM-based (Fedora, Rocky) are supported.
+MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky) and
+Alpine Linux are supported.
 
 **On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
 
@@ -129,6 +131,7 @@ Tested on:
 - Debian Linux 11 (bullseye)
 - Fedora Linux 35
 - Rocky Linux 8.5
+- Alpine Linux 3.14.3
 
 ### Known bugs
 

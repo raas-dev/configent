@@ -42,7 +42,10 @@ $SUDO yum install -y bash coreutils bind-utils file findutils \
   git htop redhat-lsb-core procps traceroute unzip wget whois
 
 # pbcopy/pbpaste like experience
-$SUDO yum install -y xsel
+#$SUDO yum install -y xsel
+
+# Microsoft TrueType fonts (accepts EULA)
+#$SUDO yum install -y ttf-mscorefonts-installer
 
 # Docker (rootless)
 $SUDO yum install -y fuse-overlayfs iptables dbus-daemon

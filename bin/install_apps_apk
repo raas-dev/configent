@@ -1,0 +1,55 @@
+#!/bin/sh
+
+trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
+
+if [ "$(id -u)" = 0 ]; then
+    SUDO=''
+elif which sudo >/dev/null 2>&1 ; then
+    SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+
+    # Ask sudo password upfront
+    sudo -v
+
+    # Keep sudo alive until the script has finished
+    while true; do
+      sudo -n true
+      sleep 60
+      kill -0 "$$" || exit
+    done 2>/dev/null &
+else
+    printf "ERROR: User is non-root and sudo is not available, cannot proceed."
+    exit 1
+fi
+
+# Update package lists
+$SUDO apk update
+
+# Certificates
+$SUDO apk add ca-certificates 
+
+# Cryptography
+$SUDO apk add gnupg
+
+# Common build requirements
+$SUDO apk add build-base \
+  openssl-dev readline-dev sqlite-dev bzip2-dev zlib-dev
+
+# Utils
+$SUDO apk add bash coreutils curl bind-tools file findutils \
+  git htop procps unzip wget whois
+  
+# macOS pbcopy/pbpaste like experience
+#$SUDO apk add xsel
+
+# Microsoft TrueType fonts (accepts EULA)
+#$SUDO apk add msttcorefonts-installer fontconfig && \
+#    $SUDO update-ms-fonts && \
+#    $SUDO fc-cache -f
+
+# Docker (rootless Docker is not supported on Alpine Linux)
+$SUDO apk add docker
+$SUDO addgroup "$USER" docker
+$SUDO service docker start
+$SUDO rc-update add docker boot
+
+# No Snap is available for Alpine Linux
