@@ -78,7 +78,7 @@ Order of installation:
 3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 4. Vim bundles, and if `brew` is present, Neovim 
 5. Rust, Go, Node, Python and Ruby version managers and the language versions
-6. Zsh, tmux, command-line utilities and cloud development tools
+6. Zsh, tmux, command-line utilities and infrastructure-as-code tools
 
 ### 🖊️ setup_vscode
 

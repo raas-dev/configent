@@ -40,15 +40,15 @@ fi
 # install language version managers and versions
 "$bin_path/install_rust"
 "$bin_path/install_go"
-"$bin_path/install_nvm"
-"$bin_path/install_pyenv"
-"$bin_path/install_rbenv"
+"$bin_path/install_nodejs"
+"$bin_path/install_python"
+"$bin_path/install_ruby"
 
 # brew
 if [ -z "$NO_FORMULAE" ] ; then
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
-  "$bin_path/install_devenv"
+  "$bin_path/install_iac"
   NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_zsh"
 else
   printf "NO_FORMULAE was specified, won't install formula.\n"
