@@ -89,13 +89,6 @@ if [[ -d "$jars_path" ]]; then
   export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0  | xargs echo | tr ' ' ':')
 fi
 
-### Groovy #####################################################################
-
-groovy_home="/usr/local/opt/groovy/libexec"
-if [[ -d "$groovy_home" ]]; then
-  export GROOVY_HOME="$groovy_home"
-fi
-
 ### Rbenv ######################################################################
 
 path_prepend "$HOME/.rbenv/bin"
