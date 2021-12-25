@@ -15,9 +15,6 @@ mounts:
   - location: "/tmp/lima"
     writable: true
 
-firmware:
-  legacyBIOS: true
-
 containerd:
   system: false
   user: false
