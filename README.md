@@ -142,7 +142,10 @@ Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
         - Building all dependencies from source would be tedious task
 - Rocky Linux 8.5 has serious issues booting on aarch64
     - Rootless Docker installer (sh) does not work on x86_64 either
-- [On Alpine Linux, NVM](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-nvm-on-alpine-linux) can install Node.js only from source
+- [On Alpine Linux, nvm](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-nvm-on-alpine-linux) can install Node.js only from source
     - `nvm install --lts -s` does this but takes an hour
     - Alternatively, `sudo apk add nodejs npm` if Node version does not matter
+- On Alpine Linux, [gvm](https://github.com/stefanmaric/g) does not work
+    - Pre-compiled binaries do not exist, as Alpine bases on musl and not glibc
+    - Use `sudo apk add go` instead to install go
 - Podman does not seem very well with most containers (as of 2021-12)
