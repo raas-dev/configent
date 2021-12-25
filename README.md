@@ -144,5 +144,9 @@ Tested on:
     - Required ruby 2.6.8 can be installed system-wide from source
     - Most formulas do not have arm64 bottle but must be installed from source
         - Building all dependencies from source would be tedious task
-- Podman seems not to work very well with most of the containers (as of 2021-12)
 - Docker installer sh does not work on Rocky Linux 8.5
+- [On Alpine Linux, NVM](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-nvm-on-alpine-linux) can install Node.js only from source
+    - Alpine Linux is a musl, not glibc, based distro
+    - `nvm install --lts -s` works but takes a long time
+    - Alternatively, use `sudo apk add nodejs npm`
+- Podman seems not to work very well with most of the containers (as of 2021-12)
