@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091  # do not expect input files
 
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 

@@ -5,7 +5,7 @@
 # Forked from:
 # https://github.com/geekzter/bootstrap-os/blob/master/linux/bootstrap_linux.sh
 
-# shellcheck disable=SC1091   # disable not finding script bootstrap as input
+# shellcheck disable=SC1091  # do not expect input files
 
 ### constants  #################################################################
 

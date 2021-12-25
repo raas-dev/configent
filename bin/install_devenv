@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
-
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 eval_brew() {
