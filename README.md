@@ -59,6 +59,7 @@ Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
 Restart the shell or run `source ~/.zshrc`. Then you may simply reload with `r`.
+
 All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
