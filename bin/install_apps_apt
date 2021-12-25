@@ -20,7 +20,7 @@ elif which sudo >/dev/null 2>&1 ; then
       kill -0 "$$" || exit
     done 2>/dev/null &
 else
-    printf "ERROR: User is non-root and sudo is not available, cannot proceed."
+    printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
     exit 1
 fi
 

@@ -9,7 +9,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -z "$NO_CASKS" ] ; then
     "$bin_path/install_apps_cask"
   else
-    printf "NO_CASKS was specified and on macOS, won't install casks."
+    printf "NO_CASKS was specified and on macOS, won't install casks.\n"
   fi
 elif [ "$(uname -s)" = 'Linux' ] ; then
   if which apt-get >/dev/null 2>&1 ; then
@@ -18,16 +18,16 @@ elif [ "$(uname -s)" = 'Linux' ] ; then
     "$bin_path/install_apps_yum"
   elif which apk >/dev/null 2>&1  ; then
     "$bin_path/install_apps_apk"
-    echo "Snap is not available on Alpine Linux, NO_SNAPS=true is forced"
+    printf "Snap is not available on Alpine Linux, NO_SNAPS=true forced.\n"
     export NO_SNAPS="true"
   fi
   if [ -z "$NO_SNAPS" ] ; then
     "$bin_path/install_apps_snap"
   else
-    printf "NO_SNAPS was specified and on Linux, won't install snaps."
+    printf "NO_SNAPS was specified and on Linux, won't install snaps.\n"
   fi
 else
-  printf "\nError: Only macOS and APT/YUM/APK Linux distros are supported."
+  printf "\nError: Only macOS and APT/YUM/APK Linux distros are supported.\n"
   exit 1
 fi
 
@@ -40,7 +40,7 @@ if [ -z "$NO_FORMULAE" ] ; then
   "$bin_path/install_neovim"
   NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_zsh"
 else
-  printf "NO_FORMULAE was specified, won't install formula."
+  printf "NO_FORMULAE was specified, won't install formula.\n"
 fi
 
 "$bin_path/install_pyenv"

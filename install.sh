@@ -24,7 +24,7 @@ export NO_CASKS="true"
 if [ "$(uname -s)" = 'Linux' ]; then
   if [ "$(uname -m)" = 'aarch64' ]; then
     export NO_FORMULAE="true"
-    printf "Homebrew Linux does not run on AArch64, NO_FORMULAE=true is forced."
+    printf "Homebrew Linux does not run on AArch64, NO_FORMULAE=true forced.\n"
   fi
   if [ "$(id -u)" = 0 ]; then
     CANELEVATE='true'
@@ -33,7 +33,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
     CANELEVATE='true'
     SUDO='sudo'
 
-    printf "\nSudo might be prompted to install git from distro's packages."
+    printf "Sudo might be prompted to install git from distro's packages.\n"
 
     # Ask sudo password upfront
     sudo -v
@@ -57,7 +57,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
       elif which apk >/dev/null 2>&1 ; then
         $SUDO apk add git coreutils   # coreutils is required for ln -i
       else
-        printf "\nError: Could not install git, please install git manually."
+        printf "\nError: Could not install git, please install git manually.\n"
         exit 1
       fi
     fi
@@ -67,16 +67,16 @@ elif [ "$(uname -s)" = 'Darwin' ]; then
     xcode-select --install
   fi
 else
-  printf "\nError: Installer is only supported on macOS and Linux distros."
+  printf "\nError: Installer is only supported on macOS and Linux distros.\n"
   exit 1
 fi
 
 if [ -t 0 ]; then
   # if in terminal/stdin present (script run by ./install.sh)
   full_path=$(cd "$(dirname "$0")" && pwd)
-  printf "\nChecking if inside the git working copy and ought to pull."
+  printf "Checking if inside the git working copy and ought to pull.\n"
   if [ -d "$full_path/.git" ]; then
-    printf "\nInside git working copy %s, pulling %s\n" \
+    printf "Inside git working copy %s, pulling %s\n" \
       "$full_path" "$GIT_BRANCH"
     git -C "$full_path" checkout "$GIT_BRANCH"
     git -C "$full_path" pull --rebase
@@ -85,11 +85,11 @@ if [ -t 0 ]; then
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
-    printf "\nGit working copy does not exist, cloning %s (branch: %s)\n" \
+    printf "Git working copy does not exist, cloning %s (branch: %s)\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
     git clone --quiet --branch "$GIT_BRANCH" "$GIT_REPO_URL" "$TARGET_PATH"
   else
-    printf "\nGit working copy found at %s, pulling %s\n" \
+    printf "Git working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
     git -C "$TARGET_PATH" checkout "$GIT_BRANCH"
     git -C "$TARGET_PATH" pull --rebase
