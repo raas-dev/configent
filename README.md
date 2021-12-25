@@ -20,7 +20,7 @@ Features:
 
 Things are happening per user, but `sudo` may be required for some OS features.
 
-## 💣
+## 💣 Up
 
 This repo is cloned to `$HOME/configent` or pulled if already exists there:
 
