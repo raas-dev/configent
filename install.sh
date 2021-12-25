@@ -19,6 +19,8 @@ export NO_SNAPS="true"
 export NO_CASKS="true"
 [ -n "$NO_FORMULAE" ] && export NO_FORMULAE="true"
 
+export NO_PROMPT_DEFAULT_SHELL="true"
+
 ###############################################################################
 
 if [ "$(uname -s)" = 'Linux' ]; then

@@ -49,7 +49,7 @@ if [ -z "$NO_FORMULAE" ] ; then
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
   "$bin_path/install_iac"
-  NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_zsh"
+  "$bin_path/install_zsh"
 else
   printf "NO_FORMULAE was specified, won't install formula.\n"
 fi
