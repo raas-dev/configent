@@ -135,9 +135,9 @@ Tested on:
 
 ### Known bugs
 
-- Neovim plugins do not get installed unless `install_nvim` is run second time
+Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
 
-### Won't fix
+#### Won't fix
 
 - Homebrew on Linux is not officially supported on aarch64
     - Hack1: Installer can be patched to skip the aarch64 check

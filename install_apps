@@ -31,17 +31,19 @@ else
   exit 1
 fi
 
-"$bin_path/install_fonts"
-
 if [ -z "$NO_FORMULAE" ] ; then
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
   "$bin_path/install_devenv"
-  "$bin_path/install_neovim"
   NO_PROMPT_DEFAULT_SHELL=true "$bin_path/install_zsh"
 else
   printf "NO_FORMULAE was specified, won't install formula.\n"
 fi
+
+"$bin_path/install_fonts"
+
+# install vim bundles even if NO_FORMULAE to install nvim
+"$bin_path/install_neovim"
 
 "$bin_path/install_pyenv"
 "$bin_path/install_rbenv"

@@ -34,4 +34,4 @@ vundle_dir="$HOME/.vim/bundle/Vundle.vim"
 git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" || \
   git -C "$vundle_dir" pull --rebase
 
-echo -ne '\n' | nvim +PluginInstall +qall 2>/dev/null
+echo -ne '\n' | vim +PluginInstall +qall 2>/dev/null
