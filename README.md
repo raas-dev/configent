@@ -15,7 +15,7 @@ Features:
 - Bootstrap macOS/APT/YUM/Alpine Linux with one command, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
 - In terminal, Rust and Go written utilities are always preferred due to speed
-- Best practices language multiple versioning with `pyenv`, `rbenv` and `nvm`
+- Multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
 - Run `docker` and `nerdctl` from macOS, by lima VMs for dockerd and containerd
 
 Things are happening per user, but `sudo` may be required for some OS features.
