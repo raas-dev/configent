@@ -123,20 +123,29 @@ export TBVACCINE=1          # pip install --upgrade tbvaccine
 # Add `pip install --user` scope into $PATH if the dir exists
 path_prepend "$HOME/.local/bin"
 
-### Go #########################################################################
-
-go_path="$HOME/go"
-if [[ -d "$go_path" ]]; then
-  path_prepend "$go_path/bin"
-  export GOPATH="$go_path"
-fi
-
 ### Nvm ########################################################################
 
 if [[ -d "$HOME/.nvm" ]]; then
   export NVM_DIR="$HOME/.nvm"
   source "$HOME/.nvm/nvm.sh"
   [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+fi
+
+### Go #########################################################################
+
+go_path="$HOME/go"
+if [[ -d "$go_path" ]]; then
+  path_prepend "$go_path/bin"
+  export GOPATH="$go_path"
+  export GOROOT="$HOME/.go"
+fi
+
+### Rust #######################################################################
+
+cargo_path="$HOME/.cargo"
+if [[ -d "$cargo_path" ]]; then
+  path_prepend "$cargo_path/bin"
+  source "$cargo_path/env"
 fi
 
 ### Fzf ########################################################################

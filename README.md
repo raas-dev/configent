@@ -71,18 +71,14 @@ Alpine Linux are supported.
 
 **On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
 
-[Homebrew](https://brew.sh/) is installed first if it is not already in `PATH`.
-
-Secondly, [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
-[Snap](https://snapcraft.io/) (Linux distros) and snaps are installed.
-
-Thirdly, [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-is installed.
-
-Fourthly, `zsh`, `tmux`, command-line utilities, cloud development tools and
-[Neovim](https://neovim.io/) is installed.
-
-Finally `pyenv`, `rbenv` and `nvm` and given language versions are installed.
+Order of installation:
+1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
+2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
+[Snap](https://snapcraft.io/) (Linux distros) and snaps
+3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
+4. Vim bundles, and if `brew` is present, Neovim 
+5. Rust, Go, Node, Python and Ruby version managers and the language versions
+6. Zsh, tmux, command-line utilities and cloud development tools
 
 ### 🖊️ setup_vscode
 

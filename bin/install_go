@@ -1,0 +1,18 @@
+#!/bin/bash
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### gvm ########################################################################
+
+mkdir -p "$HOME/go/bin"
+
+curl -fsSL "https://raw.githubusercontent.com/stefanmaric/g/master/bin/g" \
+  -o "$HOME/go/bin/gvm"
+
+chmod +x "$HOME/go/bin/gvm"
+
+export GOPATH="$HOME/go"
+export GOROOT="$HOME/.go"
+PATH="$GOPATH/bin:$PATH"
+
+"$HOME/go/bin/gvm" install latest

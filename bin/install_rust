@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091  # do not expect input files
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### rustup #####################################################################
+
+curl "https://sh.rustup.rs" -sSf | sh -s -- -y --no-modify-path
+
+. "$HOME/.cargo/env" && \
+  rustup install stable && \
+  rustup default stable
