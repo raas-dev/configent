@@ -36,7 +36,7 @@ probes:
         echo >&2 "rootlesskit (used by rootless docker) is not running"
         exit 1
       fi
-    hint: See "/var/log/cloud-init-output.log". in the guest
+    hint: See "/var/log/cloud-init-output.log" in the guest
 
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/docker.sock"

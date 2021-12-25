@@ -25,3 +25,13 @@ provision:
     script: |
       #!/bin/sh
       wget -q -O - https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until command -v docker >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "docker is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
