@@ -139,14 +139,14 @@ Tested on:
 
 ### Won't fix
 
-- Homebrew on Linux is not officially supported on arm64
-    - Installer can be patched to skip the arm64 and
-    - Required ruby 2.6.8 can be installed system-wide from source
-    - Most formulas do not have arm64 bottle but must be installed from source
+- Homebrew on Linux is not officially supported on aarch64
+    - Hack1: Installer can be patched to skip the aarch64 check
+    - Hack2: Requirement ruby 2.6.8 can be installed system-wide from source
+    - Showstopper: Most formulas do not have aarch64 bottle
         - Building all dependencies from source would be tedious task
-- Docker installer sh does not work on Rocky Linux 8.5
-- [On Alpine Linux, NVM](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-nvm-on-alpine-linux) can install Node.js only from source
-    - Alpine Linux is a musl, not glibc, based distro
-    - `nvm install --lts -s` works but takes a long time
-    - Alternatively, use `sudo apk add nodejs npm`
-- Podman seems not to work very well with most of the containers (as of 2021-12)
+- Rocky Linux 8.5 has serious issues booting on aarch64
+    - Rootless Docker installer (sh) does not work on x86_64 either
+- [On Alpine Linux, NVM](https://github.com/nvm-sh/nvm/blob/master/README.  md#installing-nvm-on-alpine-linux) can install Node.js only from source
+    - `nvm install --lts -s` does this but takes an hour
+    - Alternatively, `sudo apk add nodejs npm` if Node version does not matter
+- Podman does not seem very well with most containers (as of 2021-12)
