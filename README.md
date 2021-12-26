@@ -142,10 +142,10 @@ Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
 
 ### Tools
 
-[Format shell scripts](https://github.com/mvdan/sh) according to `.editorconfig`:
+[Format shell](https://github.com/mvdan/sh) scripts according to `.editorconfig`:
 
     shfmt -w $(shfmt -f .)
 
-[Shellcheck](https://www.shellcheck.net/) scripts in `bin`:
+[Shellcheck](https://www.shellcheck.net/) scripts in `bin/`:
 
     find bin/ -type f -not -path '*/\.git*' -exec "shellcheck" {} \;
