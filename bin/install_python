@@ -33,6 +33,7 @@ eval "$($HOME/.pyenv/bin/pyenv init --path)"
 
 pip install --upgrade pip setuptools wheel
 pip install --upgrade ptpython
+pip install --upgrade pre-commit
 pip install --upgrade better_exceptions tbvaccine
 pip install --upgrade you-get
 
