@@ -26,4 +26,4 @@ repos:
   rev: v1.1.0
   hooks:
   - id: detect-secrets
-    exclude: package.lock.json
+    exclude: "dotfiles/.withsecrets"
