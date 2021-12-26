@@ -7,7 +7,7 @@ trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 this_path="$(cd "$(dirname "$0")" && pwd)"
 
 "$this_path/symlink_dotfiles" -f
-"$this_path/install_apps"
+NO_PROMPT_DEFAULT_SHELL="true" "$this_path/install_apps"
 "$this_path/setup_vscode"
 
 printf "\n✅ bootstrap done.\n"
