@@ -16,3 +16,8 @@ export GOROOT="$HOME/.go"
 PATH="$GOPATH/bin:$PATH"
 
 "$HOME/go/bin/gvm" install latest
+
+### packages ###################################################################
+
+# https://github.com/mvdan/sh#shfmt
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
