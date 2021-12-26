@@ -74,7 +74,7 @@ Order of installation:
 2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [Snap](https://snapcraft.io/) (Linux distros) and snaps
 3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-4. Vim bundles, and if `brew` is present, Neovim 
+4. Vim bundles, and if `brew` is present, Neovim
 5. Rust, Go, Node, Python and Ruby version managers and the language versions
 6. Zsh, tmux, command-line utilities and infrastructure-as-code tools
 
@@ -139,3 +139,13 @@ Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
 - Rocky Linux 8.5 has serious issues booting on aarch64
     - Rootless Docker installer (sh) does not work on x86_64 either
 - Podman does not seem very well with most containers (as of 2021-12)
+
+### Tools
+
+[Format shell scripts](https://github.com/mvdan/sh) according to `.editorconfig`:
+
+    shfmt -w $(shfmt -f .)
+
+[Shellcheck](https://www.shellcheck.net/) scripts in `bin`:
+
+    find bin/ -type f -not -path '*/\.git*' -exec "shellcheck" {} \;
