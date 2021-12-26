@@ -43,6 +43,7 @@ fi
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
 "$bin_path/install_ruby"
+#"$bin_path/install_java"
 
 # brew
 if [ -z "$NO_FORMULAE" ] ; then
