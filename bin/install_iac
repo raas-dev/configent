@@ -20,6 +20,10 @@ if ! which brew &>/dev/null ; then
   eval_brew
 fi
 
+### linters ####################################################################
+
+brew install shellcheck
+
 ### docker #####################################################################
 
 [[ "$OSTYPE" = darwin* ]] && brew install lima
@@ -30,12 +34,6 @@ brew install dog
 brew install k6
 brew install nmap
 brew install oha
-
-### misc #######################################################################
-
-brew install grex
-brew install shellcheck
-brew install xo/xo/usql
 
 ### azure ######################################################################
 

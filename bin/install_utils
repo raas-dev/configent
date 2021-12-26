@@ -28,6 +28,7 @@ brew install fd
 brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc
 brew install git
 brew install gitui
+brew install grex
 brew install jq
 brew install kalker
 brew install lsd
