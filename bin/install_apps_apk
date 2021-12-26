@@ -3,29 +3,29 @@
 trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(id -u)" = 0 ]; then
-    SUDO=''
-elif which sudo >/dev/null 2>&1 ; then
-    SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+  SUDO=''
+elif which sudo >/dev/null 2>&1; then
+  SUDO='sudo DEBIAN_FRONTEND=noninteractive'
 
-    # Ask sudo password upfront
-    sudo -v
+  # Ask sudo password upfront
+  sudo -v
 
-    # Keep sudo alive until the script has finished
-    while true; do
-      sudo -n true
-      sleep 60
-      kill -0 "$$" || exit
-    done 2>/dev/null &
+  # Keep sudo alive until the script has finished
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
 else
-    printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
-    exit 1
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
 fi
 
 # Update package lists
 $SUDO apk update
 
 # Certificates
-$SUDO apk add ca-certificates 
+$SUDO apk add ca-certificates
 
 # Cryptography
 $SUDO apk add gnupg
@@ -37,7 +37,7 @@ $SUDO apk add build-base gcompat ncurses \
 # Utils
 $SUDO apk add bash coreutils curl bind-tools file findutils \
   git htop procps zip unzip wget whois
-  
+
 # macOS pbcopy/pbpaste like experience
 #$SUDO apk add xsel
 

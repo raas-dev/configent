@@ -9,14 +9,14 @@ dotfiles_path="$this_path/dotfiles"
 ### Parse arguments ############################################################
 
 args=''
-while getopts 'f' arg ; do
+while getopts 'f' arg; do
   case "$arg" in
-    f)
-      args='f'
-      ;;
-    *)
-      exit 1
-      ;;
+  f)
+    args='f'
+    ;;
+  *)
+    exit 1
+    ;;
   esac
 done
 
@@ -40,7 +40,7 @@ ln -snvi "$this_path/etc" "$local_etc_path"
 
 files="$(find "$dotfiles_path" -type f -exec basename {} \;)"
 
-for source_file_name in $files ; do
+for source_file_name in $files; do
   if [ "$source_file_name" = "xfce4" ]; then
     printf "Ignoring %s\n" "$source_file_name"
   else
@@ -56,7 +56,7 @@ ln -snvi"$args" "$HOME/local/etc/starship/config.toml" \
 
 ### Symlink htoprc for Linux distributions #####################################
 
-if [ "$(uname -s)" = 'Linux' ] ; then
+if [ "$(uname -s)" = 'Linux' ]; then
   mkdir -p "$HOME/.config/htop"
   ln -snvi"$args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi

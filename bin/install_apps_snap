@@ -3,22 +3,22 @@
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 if [ "$(id -u)" = 0 ]; then
-    SUDO=''
+  SUDO=''
 elif which sudo &>/dev/null; then
-    SUDO='sudo'
+  SUDO='sudo'
 
-    # Ask sudo password upfront
-    sudo -v
+  # Ask sudo password upfront
+  sudo -v
 
-    # Keep sudo alive until the script has finished
-    while true; do
-      sudo -n true
-      sleep 60
-      kill -0 "$$" || exit
-    done 2>/dev/null &
+  # Keep sudo alive until the script has finished
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
 else
-    echo "ERROR: User is non-root and sudo is not available, cannot proceed."
-    exit 1
+  echo "ERROR: User is non-root and sudo is not available, cannot proceed."
+  exit 1
 fi
 
 # Core

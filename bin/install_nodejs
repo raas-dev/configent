@@ -14,9 +14,9 @@ git -C "$nvm_path" -c advice.detachedHead=false checkout \
 
 ### Node #######################################################################
 
-. "$nvm_path/nvm.sh" && \
-  nvm install --lts && \
-  nvm alias default 'lts/*' && \
+. "$nvm_path/nvm.sh" &&
+  nvm install --lts &&
+  nvm alias default 'lts/*' &&
   nvm use default
 
 ### Node packages ##############################################################

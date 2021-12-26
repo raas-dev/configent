@@ -40,17 +40,16 @@ CHTSH_HOME=${CHTSH:-"$HOME"/.cht.sh}
 # currently we support only two modes:
 # * lite = access the server using curl
 # * auto = try standalone usage first
-CHTSH_MODE="$(cat "$CHTSH_HOME"/mode 2> /dev/null)"
+CHTSH_MODE="$(cat "$CHTSH_HOME"/mode 2>/dev/null)"
 [ "$CHTSH_MODE" != lite ] && CHTSH_MODE=auto
-CHEATSH_INSTALLATION="$(cat "$CHTSH_HOME/standalone" 2> /dev/null)"
-
+CHEATSH_INSTALLATION="$(cat "$CHTSH_HOME/standalone" 2>/dev/null)"
 
 export LESSSECURE=1
 STEALTH_MAX_SELECTION_LENGTH=5
 
 case "$(uname -s)" in
-  Darwin) is_macos=yes ;;
-  *) is_macos=no ;;
+Darwin) is_macos=yes ;;
+*) is_macos=no ;;
 esac
 
 # for KSH93
@@ -59,25 +58,23 @@ if echo "$KSH_VERSION" | grep -q ' 93' && ! local foo 2>/dev/null; then
   alias local=typeset
 fi
 
-fatal()
-{
+fatal() {
   echo "ERROR: $*" >&2
   exit 1
 }
 
-_say_what_i_do()
-{
-  [ -n "$LOG" ] && echo "$(date '+[%Y-%m-%d %H:%M%S]') $*" >> "$LOG"
+_say_what_i_do() {
+  [ -n "$LOG" ] && echo "$(date '+[%Y-%m-%d %H:%M%S]') $*" >>"$LOG"
 
   local this_prompt="\033[0;1;4;32m>>\033[0m"
   printf "\n${this_prompt}%s\033[0m\n" " $* "
 }
 
-cheatsh_standalone_install()
-{
+cheatsh_standalone_install() {
   # the function installs cheat.sh with the upstream repositories
   # in the standalone mode
-  local installdir; installdir="$1"
+  local installdir
+  installdir="$1"
   local default_installdir="$HOME/.cheat.sh"
 
   [ -z "$installdir" ] && installdir=${default_installdir}
@@ -124,20 +121,23 @@ EOF
 
   local dependencies=(python git virtualenv)
   for dep in "${dependencies[@]}"; do
-    command -v "$dep" >/dev/null || \
-    { echo "DEPENDENCY: \"$dep\" is needed to install cheat.sh in the standalone mode" >&2; _exit_code=1; }
+    command -v "$dep" >/dev/null ||
+      {
+        echo "DEPENDENCY: \"$dep\" is needed to install cheat.sh in the standalone mode" >&2
+        _exit_code=1
+      }
   done
   [ "$_exit_code" -ne 0 ] && return "$_exit_code"
 
   while true; do
     local _installdir
-    echo -n "Where should cheat.sh be installed [$installdir]? "; read -r _installdir
+    echo -n "Where should cheat.sh be installed [$installdir]? "
+    read -r _installdir
     [ -n "$_installdir" ] && installdir=$_installdir
 
-    if [ "$installdir" = y ] \
-        || [ "$installdir" = Y ] \
-        || [ "$(echo "$installdir" | tr "[:upper:]" "[:lower:]")" = yes ]
-    then
+    if [ "$installdir" = y ] ||
+      [ "$installdir" = Y ] ||
+      [ "$(echo "$installdir" | tr "[:upper:]" "[:lower:]")" = yes ]; then
       echo Please enter the directory name
       echo If it was the directory name already, please prepend it with \"./\": "./$installdir"
     else
@@ -158,7 +158,8 @@ EOF
   fi
 
   local space_needed=700
-  local space_available; space_available=$(($(df -k "$installdir" | awk '{print $4}' | tail -1)/1024))
+  local space_available
+  space_available=$(($(df -k "$installdir" | awk '{print $4}' | tail -1) / 1024))
 
   if [ "$space_available" -lt "$space_needed" ]; then
     echo "ERROR: Installation directory has no enough space (needed: ${space_needed}M, available: ${space_available}M"
@@ -199,8 +200,8 @@ EOF
   fi
 
   _say_what_i_do Creating virtual environment
-  virtualenv "${virtualenv_python3_option[@]}" ve \
-      || fatal "Could not create virtual environment with 'virtualenv ve'"
+  virtualenv "${virtualenv_python3_option[@]}" ve ||
+    fatal "Could not create virtual environment with 'virtualenv ve'"
 
   export CHEATSH_PATH_WORKDIR=$PWD
 
@@ -208,20 +209,20 @@ EOF
   # so if we are using Python 2, install fuzzywuzzy instead
   if [[ $PYTHON2 = YES ]]; then
     sed -i s/rapidfuzz/fuzzywuzzy/ requirements.txt
-    echo "python-Levenshtein" >> requirements.txt
+    echo "python-Levenshtein" >>requirements.txt
   fi
 
   _say_what_i_do Installing python requirements into the virtual environment
-  ve/bin/"$pip" install -r requirements.txt > "$LOG" \
-      || {
+  ve/bin/"$pip" install -r requirements.txt >"$LOG" ||
+    {
 
-    echo "ERROR:"
-    echo "---"
-    tail -n 10 "$LOG"
-    echo "---"
-    echo "See $LOG for more"
-    fatal Could not install python dependencies into the virtual environment
-  }
+      echo "ERROR:"
+      echo "---"
+      tail -n 10 "$LOG"
+      echo "---"
+      echo "See $LOG for more"
+      fatal Could not install python dependencies into the virtual environment
+    }
   echo "$(ve/bin/"$pip" freeze | wc -l) dependencies were successfully installed"
 
   _say_what_i_do Fetching the upstream cheat sheets repositories
@@ -232,10 +233,9 @@ EOF
     cd tests || exit
 
     if CHEATSH_TEST_STANDALONE=YES \
-       CHEATSH_TEST_SKIP_ONLINE=NO \
-       CHEATSH_TEST_SHOW_DETAILS=NO \
-       PYTHON=../ve/bin/python bash run-tests.sh | tee -a "$LOG"
-    then
+      CHEATSH_TEST_SKIP_ONLINE=NO \
+      CHEATSH_TEST_SHOW_DETAILS=NO \
+      PYTHON=../ve/bin/python bash run-tests.sh | tee -a "$LOG"; then
       printf "\033[0;32m%s\033[0m\n" "SUCCESS"
     else
       printf "\033[0;31m%s\033[0m\n" "FAILED"
@@ -245,13 +245,15 @@ EOF
   )
 
   mkdir -p "$CHTSH_HOME"
-  echo "$installdir" > "$CHTSH_HOME/standalone"
-  echo auto > "$CHTSH_HOME/mode"
+  echo "$installdir" >"$CHTSH_HOME/standalone"
+  echo auto >"$CHTSH_HOME/mode"
 
   _say_what_i_do Done
 
-  local v1; v1=$(printf "\033[0;1;32m")
-  local v2; v2=$(printf "\033[0m")
+  local v1
+  v1=$(printf "\033[0;1;32m")
+  local v2
+  v2=$(printf "\033[0m")
 
   cat <<EOF | sed "s/{/$v1/; s/}/$v2/"
 
@@ -286,11 +288,11 @@ with the ENTRY-POINT from the URL https://ENTRY-POINT/:actualize specified
 EOF
 }
 
-chtsh_mode()
-{
+chtsh_mode() {
   local mode="$1"
 
-  local text; text=$(
+  local text
+  text=$(
     echo "  auto    use the standalone installation first"
     echo "  lite    use the cheat sheets server directly"
   )
@@ -307,7 +309,7 @@ chtsh_mode()
       echo "The configured mode was \"$CHTSH_MODE\"; nothing changed"
     else
       mkdir -p "$CHTSH_HOME"
-      echo "$mode" > "$CHTSH_HOME/mode"
+      echo "$mode" >"$CHTSH_HOME/mode"
       echo "Configured mode: $mode"
     fi
   else
@@ -318,20 +320,18 @@ chtsh_mode()
   fi
 }
 
-get_query_options()
-{
+get_query_options() {
   local query="$*"
   if [ -n "$CHTSH_QUERY_OPTIONS" ]; then
     case $query in
-      *\?*)   query="$query&${CHTSH_QUERY_OPTIONS}";;
-      *)      query="$query?${CHTSH_QUERY_OPTIONS}";;
+    *\?*) query="$query&${CHTSH_QUERY_OPTIONS}" ;;
+    *) query="$query?${CHTSH_QUERY_OPTIONS}" ;;
     esac
   fi
   printf "%s" "$query"
 }
 
-do_query()
-{
+do_query() {
   local query="$*"
   local b_opts=
   local uri="${CHTSH_URL}/\"\$(get_query_options $query)\""
@@ -340,7 +340,7 @@ do_query()
     b_opts="-b \"\$CHTSH_HOME/id\""
   fi
 
-  eval curl "$b_opts" -s "$uri" > "$TMP1"
+  eval curl "$b_opts" -s "$uri" >"$TMP1"
 
   if [ -z "$lines" ] || [ "$(wc -l "$TMP1" | awk '{print $1}')" -lt "$lines" ]; then
     cat "$TMP1"
@@ -349,10 +349,11 @@ do_query()
   fi
 }
 
-prepare_query()
-{
-  local section="$1"; shift
-  local input="$1"; shift
+prepare_query() {
+  local section="$1"
+  shift
+  local input="$1"
+  shift
   local arguments="$1"
 
   local query
@@ -366,27 +367,28 @@ prepare_query()
   printf %s "$query$arguments"
 }
 
-get_list_of_sections()
-{
+get_list_of_sections() {
   curl -s "${CHTSH_URL}"/:list | grep -v '/.*/' | grep '/$' | xargs
 }
 
-gen_random_str()
-(
+gen_random_str() (
   len=$1
   if command -v openssl >/dev/null; then
-    openssl rand -base64 $((len*3/4)) | awk -v ORS='' //
+    openssl rand -base64 $((len * 3 / 4)) | awk -v ORS='' //
   else
     rdev=/dev/urandom
     for d in /dev/{srandom,random,arandom}; do
       test -r "$d" && rdev=$d
     done
     if command -v hexdump >/dev/null; then
-      hexdump -vn $((len/2)) -e '1/1 "%02X" 1 ""' "$rdev"
+      hexdump -vn $((len / 2)) -e '1/1 "%02X" 1 ""' "$rdev"
     elif command -v xxd >/dev/null; then
-      xxd -l $((len/2)) -ps "$rdev" | awk -v ORS='' //
+      xxd -l $((len / 2)) -ps "$rdev" | awk -v ORS='' //
     else
-      cd /tmp || { echo Cannot cd into /tmp >&2; exit 1; }
+      cd /tmp || {
+        echo Cannot cd into /tmp >&2
+        exit 1
+      }
       s=
       # shellcheck disable=SC2000
       while [ "$(echo "$s" | wc -c)" -lt "$len" ]; do
@@ -407,7 +409,9 @@ if [ "$CHTSH_MODE" = auto ] && [ -d "$CHEATSH_INSTALLATION" ]; then
     done
     shift $((OPTIND - 1))
 
-    local url; url="$1"; shift
+    local url
+    url="$1"
+    shift
     PYTHONIOENCODING=UTF-8 "$CHEATSH_INSTALLATION/ve/bin/python" "$CHEATSH_INSTALLATION/lib/standalone.py" "${url#"$CHTSH_URL"}" "$@"
   }
 elif [ "$(uname -s)" = OpenBSD ] && [ -x /usr/bin/ftp ]; then
@@ -416,16 +420,22 @@ elif [ "$(uname -s)" = OpenBSD ] && [ -x /usr/bin/ftp ]; then
     local opt args="-o -"
     while getopts "b:s" opt; do
       case $opt in
-        b) args="$args -c $OPTARG";;
-        s) args="$args -M -V";;
-        *) echo "internal error: unsupported cURL option '$opt'" >&2; exit 1;;
+      b) args="$args -c $OPTARG" ;;
+      s) args="$args -M -V" ;;
+      *)
+        echo "internal error: unsupported cURL option '$opt'" >&2
+        exit 1
+        ;;
       esac
     done
     shift $((OPTIND - 1))
     /usr/bin/ftp "$args" "$@"
   }
 else
-  command -v curl   >/dev/null || { echo 'DEPENDENCY: install "curl" to use cht.sh' >&2; exit 1; }
+  command -v curl >/dev/null || {
+    echo 'DEPENDENCY: install "curl" to use cht.sh' >&2
+    exit 1
+  }
   _CURL=$(command -v curl)
   if [ x"$CHTSH_CURL_OPTIONS" != x ]; then
     curl() {
@@ -496,7 +506,11 @@ if [ "$shell_mode" != yes ]; then
 else
   new_section="$1"
   valid_sections=$(get_list_of_sections)
-  valid=no; for q in $valid_sections; do [ "$q" = "$new_section/" ] && { valid=yes; break; }; done
+  valid=no
+  for q in $valid_sections; do [ "$q" = "$new_section/" ] && {
+    valid=yes
+    break
+  }; done
 
   if [ "$valid" = yes ]; then
     section="$new_section"
@@ -517,10 +531,13 @@ if [ "$is_macos" != yes ]; then
   if [ "$XDG_SESSION_TYPE" = wayland ]; then
     command -v wl-copy >/dev/null || echo 'DEPENDENCY: please install "wl-copy" for "copy"' >&2
   else
-    command -v xsel >/dev/null ||   echo 'DEPENDENCY: please install "xsel" for "copy"' >&2
+    command -v xsel >/dev/null || echo 'DEPENDENCY: please install "xsel" for "copy"' >&2
   fi
 fi
-command -v rlwrap >/dev/null || { echo 'DEPENDENCY: install "rlwrap" to use cht.sh in the shell mode' >&2; exit 1; }
+command -v rlwrap >/dev/null || {
+  echo 'DEPENDENCY: install "rlwrap" to use cht.sh in the shell mode' >&2
+  exit 1
+}
 
 mkdir -p "$CHTSH_HOME/"
 lines=$(tput lines)
@@ -542,15 +559,19 @@ cmd_cd() {
       section=""
     else
       valid_sections=$(get_list_of_sections)
-      valid=no; for q in $valid_sections; do [ "$q" = "$new_section/" ] && { valid=yes; break; }; done
+      valid=no
+      for q in $valid_sections; do [ "$q" = "$new_section/" ] && {
+        valid=yes
+        break
+      }; done
       if [ "$valid" = no ]; then
         echo "Invalid section: $new_section"
         echo "Valid sections:"
-        echo "$valid_sections" \
-            | xargs printf "%-10s\n" \
-            | tr ' ' .  \
-            | xargs -n 10 \
-            | sed 's/\./ /g; s/^/  /'
+        echo "$valid_sections" |
+          xargs printf "%-10s\n" |
+          tr ' ' . |
+          xargs -n 10 |
+          sed 's/\./ /g; s/^/  /'
       else
         section="$new_section"
       fi
@@ -564,15 +585,15 @@ cmd_copy() {
   elif [ -z "$input" ]; then
     echo copy: Make at least one query first.
   else
-    curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?T)" > "$TMP1"
+    curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?T)" >"$TMP1"
     if [ "$is_macos" != yes ]; then
       if [ "$XDG_SESSION_TYPE" = wayland ]; then
-        wl-copy < "$TMP1"
+        wl-copy <"$TMP1"
       else
-        xsel -bi < "$TMP1"
+        xsel -bi <"$TMP1"
       fi
     else
-      pbcopy < "$TMP1"
+      pbcopy <"$TMP1"
     fi
     echo "copy: $(wc -l "$TMP1" | awk '{print $1}') lines copied to the selection"
   fi
@@ -584,15 +605,15 @@ cmd_ccopy() {
   elif [ -z "$input" ]; then
     echo copy: Make at least one query first.
   else
-    curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?TQ)" > "$TMP1"
+    curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?TQ)" >"$TMP1"
     if [ "$is_macos" != yes ]; then
       if [ "$XDG_SESSION_TYPE" = wayland ]; then
-        wl-copy < "$TMP1"
+        wl-copy <"$TMP1"
       else
-        xsel -bi < "$TMP1"
+        xsel -bi <"$TMP1"
       fi
     else
-      pbcopy < "$TMP1"
+      pbcopy <"$TMP1"
     fi
     echo "copy: $(wc -l "$TMP1" | awk '{print $1}') lines copied to the selection"
   fi
@@ -662,13 +683,13 @@ cmd_id() {
   else
     echo WARNING: if someone gueses your id, he can read your cht.sh search history
   fi
-  if [ -e "$id_file" ] && grep -q '\tid\t[^\t][^\t]*$' "$id_file" 2> /dev/null; then
+  if [ -e "$id_file" ] && grep -q '\tid\t[^\t][^\t]*$' "$id_file" 2>/dev/null; then
     sed -i 's/\tid\t[^\t][^\t]*$/ id '"$new_id"'/' "$id_file"
   else
     if ! [ -e "$id_file" ]; then
-      printf '#\n\n' > "$id_file"
+      printf '#\n\n' >"$id_file"
     fi
-    printf ".cht.sh\tTRUE\t/\tTRUE\t0\tid\t$new_id\n" >> "$id_file"
+    printf ".cht.sh\tTRUE\t/\tTRUE\t0\tid\t$new_id\n" >>"$id_file"
   fi
   echo "$new_id"
 }
@@ -720,16 +741,19 @@ cmd_stealth() {
         do_query "$query"
       fi
     fi
-    sleep 1;
+    sleep 1
   done
   trap - INT
 }
 
 cmd_update() {
-  [ -w "$0" ] || { echo "The script is readonly; please update manually: curl -s ${CHTSH_URL}/:cht.sh | sudo tee $0"; return; }
+  [ -w "$0" ] || {
+    echo "The script is readonly; please update manually: curl -s ${CHTSH_URL}/:cht.sh | sudo tee $0"
+    return
+  }
   TMP2=$(mktemp /tmp/cht.sh.XXXXXXXXXXXXX)
-  curl -s "${CHTSH_URL}"/:cht.sh > "$TMP2"
-  if ! cmp "$0" "$TMP2" > /dev/null 2>&1; then
+  curl -s "${CHTSH_URL}"/:cht.sh >"$TMP2"
+  if ! cmp "$0" "$TMP2" >/dev/null 2>&1; then
     if grep -q ^__CHTSH_VERSION= "$TMP2"; then
       # section was vaildated by us already
       args=(--shell "$section")
@@ -740,21 +764,21 @@ cmd_update() {
   else
     echo "cht.sh is up to date. No update needed"
   fi
-  rm -f "$TMP2" > /dev/null 2>&1
+  rm -f "$TMP2" >/dev/null 2>&1
 }
 
 cmd_version() {
   insttime=$(ls -l -- "$0" | sed 's/  */ /g' | cut -d ' ' -f 6-8)
   echo "cht.sh version $__CHTSH_VERSION of $__CHTSH_DATETIME; installed at: $insttime"
   TMP2=$(mktemp /tmp/cht.sh.XXXXXXXXXXXXX)
-  if curl -s "${CHTSH_URL}"/:cht.sh > "$TMP2"; then
-    if ! cmp "$0" "$TMP2" > /dev/null 2>&1; then
+  if curl -s "${CHTSH_URL}"/:cht.sh >"$TMP2"; then
+    if ! cmp "$0" "$TMP2" >/dev/null 2>&1; then
       echo "Update needed (type 'update' for that)".
     else
       echo "Up to date. No update needed"
     fi
   fi
-  rm -f "$TMP2" > /dev/null 2>&1
+  rm -f "$TMP2" >/dev/null 2>&1
 }
 
 TMP1=$(mktemp /tmp/cht.sh.XXXXXXXXXXXXX)
@@ -779,18 +803,21 @@ while true; do
   cmd_name=${input%% *}
   cmd_args=${input#* }
   case $cmd_name in
-    "")             continue;;   # skip empty input lines
-    '?'|h|help)     cmd_name=help;;
-    hush)           cmd_name=hush;;
-    cd)             cmd_name="cd";;
-    exit|quit)      cmd_name="exit";;
-    copy|yank|c|y)  cmd_name=copy;;
-    ccopy|cc|C|Y)   cmd_name=ccopy;;
-    id)             cmd_name=id;;
-    stealth)        cmd_name=stealth;;
-    update)         cmd_name=update;;
-    version)        cmd_name=version;;
-    *)              cmd_name="query"; cmd_args="$input";;
+  "") continue ;; # skip empty input lines
+  '?' | h | help) cmd_name=help ;;
+  hush) cmd_name=hush ;;
+  cd) cmd_name="cd" ;;
+  exit | quit) cmd_name="exit" ;;
+  copy | yank | c | y) cmd_name=copy ;;
+  ccopy | cc | C | Y) cmd_name=ccopy ;;
+  id) cmd_name=id ;;
+  stealth) cmd_name=stealth ;;
+  update) cmd_name=update ;;
+  version) cmd_name=version ;;
+  *)
+    cmd_name="query"
+    cmd_args="$input"
+    ;;
   esac
   "cmd_$cmd_name" $cmd_args
 done

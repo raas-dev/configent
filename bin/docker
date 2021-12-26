@@ -8,7 +8,7 @@
 : "${VM:="ubuntu"}"
 
 if [[ "$OSTYPE" = darwin* ]]; then
-  if ! which limactl &> /dev/null ; then
+  if ! which limactl &>/dev/null; then
     echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
     exit 127
   fi
@@ -18,27 +18,27 @@ if [[ "$OSTYPE" = darwin* ]]; then
     local_docker_path="/usr/local/bin/docker"
   fi
   if [[ -x "$local_docker_path" ]]; then
-    if [[ -z "$DOCKER_HOST" ]] ; then
+    if [[ -z "$DOCKER_HOST" ]]; then
       # requires forwarding the socket in the lima vm config file
       export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
     fi
     "$local_docker_path" $@
   else
     # no docker cli on HOST -> recall this script on the guest VM
-    if ! limactl shell "$VM" true &>/dev/null ; then
-      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false || \
+    if ! limactl shell "$VM" true &>/dev/null; then
+      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
         limactl start "$VM"
     fi
     limactl shell "$VM" "$HOME/local/bin/docker" $@
   fi
 else
   # prefer rootless docker
-  if [[ -x "$HOME/bin/docker" ]] ; then
-    if [[ -z "$DOCKER_HOST" ]] ; then
+  if [[ -x "$HOME/bin/docker" ]]; then
+    if [[ -z "$DOCKER_HOST" ]]; then
       export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
     fi
     "$HOME/bin/docker" $@
-  elif [[ -x "/usr/bin/docker" ]] ; then
+  elif [[ -x "/usr/bin/docker" ]]; then
     # try distro's package manager installed as the last resort
     "/usr/bin/docker" $@
   else

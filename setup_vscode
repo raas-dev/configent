@@ -19,7 +19,7 @@ ln -snvi "$this_path/vscode" "$user_path"
 
 ### Install VSCode extensions ##################################################
 
-if which code >/dev/null 2>&1 ; then
+if which code >/dev/null 2>&1; then
   # code --list-extensions | xargs -L 1 echo "code --force --install-extension"
   code --force --install-extension Arjun.swagger-viewer
   code --force --install-extension bencoleman.armview

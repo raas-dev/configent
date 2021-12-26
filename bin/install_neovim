@@ -4,18 +4,18 @@ trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 eval_brew() {
   if [[ -x "/opt/homebrew/bin/brew" ]]; then
-      eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [[ -x "/usr/local/bin/brew" ]]; then
-      eval "$(/usr/local/bin/brew shellenv)"
+    eval "$(/usr/local/bin/brew shellenv)"
   elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
-      eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+    eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
   fi
 }
 eval_brew
 
-if ! which brew &>/dev/null ; then
+if ! which brew &>/dev/null; then
   NONINTERACTIVE=true bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval_brew
 fi
@@ -31,7 +31,7 @@ ln -sf "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 ### Install Vundle #############################################################
 
 vundle_dir="$HOME/.vim/bundle/Vundle.vim"
-git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" || \
+git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
   git -C "$vundle_dir" pull --rebase
 
 echo -ne '\n' | vim +PluginInstall +qall 2>/dev/null

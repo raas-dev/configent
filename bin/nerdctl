@@ -8,14 +8,14 @@
 : "${VM:="rancher"}"
 
 if [[ "$OSTYPE" = darwin* ]]; then
-  if ! limactl shell "$VM" true &>/dev/null ; then
-    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false || \
+  if ! limactl shell "$VM" true &>/dev/null; then
+    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
   # forward to the same script on the guest VM
   limactl shell "$VM" "$HOME/local/bin/nerdctl" $@
 else
-  if [[ -x "/usr/local/bin/nerdctl" ]] ; then
+  if [[ -x "/usr/local/bin/nerdctl" ]]; then
     export XDG_RUNTIME_DIR="/run/user/$(id -u)"
     "/usr/local/bin/nerdctl" $@
   else
@@ -23,4 +23,3 @@ else
     exit 127
   fi
 fi
-

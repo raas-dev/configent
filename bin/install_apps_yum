@@ -3,22 +3,22 @@
 trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(id -u)" = 0 ]; then
-    SUDO=''
-elif which sudo >/dev/null 2>&1 ; then
-    SUDO='sudo'
+  SUDO=''
+elif which sudo >/dev/null 2>&1; then
+  SUDO='sudo'
 
-    # Ask sudo password upfront
-    sudo -v
+  # Ask sudo password upfront
+  sudo -v
 
-    # Keep sudo alive until the script has finished
-    while true; do
-      sudo -n true
-      sleep 60
-      kill -0 "$$" || exit
-    done 2>/dev/null &
+  # Keep sudo alive until the script has finished
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
 else
-    printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
-    exit 1
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
 fi
 
 # Update package lists
@@ -28,7 +28,7 @@ $SUDO yum check-update -y
 $SUDO yum install -y epel-release
 
 # Certificates
-$SUDO yum install -y ca-certificates 
+$SUDO yum install -y ca-certificates
 
 # Cryptography
 $SUDO yum install -y gnupg
@@ -57,6 +57,6 @@ $SUDO loginctl enable-linger "$USER"
 
 # Snap
 $SUDO yum install -y fuse squashfuse # docker requirement for snap
-$SUDO yum install -y kernel-modules # VM requirement for snap
+$SUDO yum install -y kernel-modules  # VM requirement for snap
 $SUDO yum install -y snapd
 $SUDO ln -s /var/lib/snapd/snap /snap

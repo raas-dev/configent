@@ -6,22 +6,22 @@ bin_path="$this_path/bin"
 trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  if [ -z "$NO_CASKS" ] ; then
+  if [ -z "$NO_CASKS" ]; then
     "$bin_path/install_apps_cask"
   else
     printf "NO_CASKS was specified and on macOS, won't install casks.\n"
   fi
-elif [ "$(uname -s)" = 'Linux' ] ; then
-  if which apt-get >/dev/null 2>&1 ; then
+elif [ "$(uname -s)" = 'Linux' ]; then
+  if which apt-get >/dev/null 2>&1; then
     "$bin_path/install_apps_apt"
-  elif which yum >/dev/null 2>&1 ; then
+  elif which yum >/dev/null 2>&1; then
     "$bin_path/install_apps_yum"
-  elif which apk >/dev/null 2>&1  ; then
+  elif which apk >/dev/null 2>&1; then
     "$bin_path/install_apps_apk"
     printf "Snap is not available on Alpine Linux, NO_SNAPS=true forced.\n"
     export NO_SNAPS="true"
   fi
-  if [ -z "$NO_SNAPS" ] ; then
+  if [ -z "$NO_SNAPS" ]; then
     "$bin_path/install_apps_snap"
   else
     printf "NO_SNAPS was specified and on Linux, won't install snaps.\n"
@@ -47,7 +47,7 @@ fi
 #"$bin_path/install_sql"
 
 # brew
-if [ -z "$NO_FORMULAE" ] ; then
+if [ -z "$NO_FORMULAE" ]; then
   "$bin_path/install_tmux"
   "$bin_path/install_utils"
   "$bin_path/install_iac"

@@ -7,12 +7,12 @@ trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 ### rbenv ######################################################################
 
 rbenv_dir="$HOME/.rbenv"
-git clone https://github.com/rbenv/rbenv.git "$rbenv_dir" || \
+git clone https://github.com/rbenv/rbenv.git "$rbenv_dir" ||
   git -C "$rbenv_dir" pull --rebase
 ruby_build_dir="$HOME/.rbenv/plugins/ruby-build"
-git clone https://github.com/rbenv/ruby-build.git "$ruby_build_dir" || \
+git clone https://github.com/rbenv/ruby-build.git "$ruby_build_dir" ||
   git -C "$ruby_build_dir" pull --rebase
-  
+
 eval "$($HOME/.rbenv/bin/rbenv init -)"
 
 ### rubies #####################################################################

@@ -8,9 +8,9 @@ trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 curl -fsSL "https://get.sdkman.io" | bash
 
-. "$HOME/.sdkman/bin/sdkman-init.sh" && \
-  sdk selfupdate force && \
-  sdk install java 17.0.1-tem && \
+. "$HOME/.sdkman/bin/sdkman-init.sh" &&
+  sdk selfupdate force &&
+  sdk install java 17.0.1-tem &&
   sdk default java 17.0.1-tem
 
 # JDKs: https://sdkman.io/jdks
