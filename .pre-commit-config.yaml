@@ -2,6 +2,12 @@
 # pre-commit install
 
 repos:
+- repo: https://github.com/Yelp/detect-secrets
+  rev: v1.1.0
+  hooks:
+  - id: detect-secrets
+    exclude: dotfiles/.examplewithsecrets
+
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v2.3.0
   hooks:
@@ -21,9 +27,3 @@ repos:
   hooks:
     - id: shellcheck
     - id: shfmt
-
-- repo: https://github.com/Yelp/detect-secrets
-  rev: v1.1.0
-  hooks:
-  - id: detect-secrets
-    exclude: dotfiles/.examplewithsecrets
