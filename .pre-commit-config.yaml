@@ -21,3 +21,9 @@ repos:
   hooks:
     - id: shellcheck
     - id: shfmt
+
+- repo: https://github.com/Yelp/detect-secrets
+  rev: v1.1.0
+  hooks:
+  - id: detect-secrets
+    exclude: package.lock.json
