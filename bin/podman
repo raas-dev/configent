@@ -6,7 +6,7 @@
 
 : "${VM:="podman-testing"}"
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # forward to the same script on the guest VM
   if ! limactl shell "$VM" true &>/dev/null; then
     limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||

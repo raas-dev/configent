@@ -26,7 +26,7 @@ brew install starship
 
 ### Set zsh as the default shell ###############################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   if [[ $(uname -m) == 'arm64' ]]; then
     brew_zsh_path="/opt/homebrew/bin/zsh"
   else
@@ -42,8 +42,8 @@ else
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [[ -e "$brew_zsh_path" ]]; then
-  if [[ "$default_shell" = "$brew_zsh_path" ]]; then
+if [[ -e $brew_zsh_path ]]; then
+  if [[ $default_shell == "$brew_zsh_path" ]]; then
     echo "Brewed Zsh is already set as the user's default shell."
   else
     if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then
@@ -55,7 +55,7 @@ if [[ -e "$brew_zsh_path" ]]; then
           echo "Sudo password may be asked next to write to /etc/shells"
           echo "$brew_zsh_path" | sudo tee -a /etc/shells
         fi
-        if [[ "$OSTYPE" = darwin* ]]; then
+        if [[ $OSTYPE == darwin* ]]; then
           echo "On macOS, sudo is used to set the user's default shell."
           sudo dscl . -create "$HOME" UserShell "$brew_zsh_path"
         else

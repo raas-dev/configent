@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2001,SC2059,SC2268,SC2034,SC2086,SC2021,SC2012
+# shellcheck disable=SC2001,SC2059,SC2268,SC2034,SC2086,SC2021,SC2012,SC2016
 #
 # [X] open section
 # [X] one shot mode
@@ -189,7 +189,7 @@ EOF
   # PYTHON2=NO
   #
   PYTHON2=NO
-  if [[ $PYTHON2 = YES ]]; then
+  if [[ $PYTHON2 == YES ]]; then
     python="python2"
     pip="pip"
     virtualenv_python3_option=()
@@ -207,7 +207,7 @@ EOF
 
   # rapidfuzz does not support Python 2,
   # so if we are using Python 2, install fuzzywuzzy instead
-  if [[ $PYTHON2 = YES ]]; then
+  if [[ $PYTHON2 == YES ]]; then
     sed -i s/rapidfuzz/fuzzywuzzy/ requirements.txt
     echo "python-Levenshtein" >>requirements.txt
   fi
@@ -337,7 +337,7 @@ do_query() {
   local uri="${CHTSH_URL}/\"\$(get_query_options $query)\""
 
   if [ -e "$CHTSH_HOME/id" ]; then
-    b_opts="-b \"\$CHTSH_HOME/id\""
+    b_opts='-b "$CHTSH_HOME/id"'
   fi
 
   eval curl "$b_opts" -s "$uri" >"$TMP1"

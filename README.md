@@ -140,12 +140,13 @@ Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
     - Rootless Docker installer (sh) does not work on x86_64 either
 - Podman does not seem very well with most containers (as of 2021-12)
 
-### Tools
+### Contributing
 
-[Format shell](https://github.com/mvdan/sh) scripts according to `.editorconfig`:
+Install [pre-commit](https://pre-commit.com/) in the repository:
 
-    shfmt -w $(shfmt -f .)
+    pip install --user pre-commit
+    pre-commit install
 
-[Shellcheck](https://www.shellcheck.net/) scripts in `bin/`:
+Run checks for all the files according to `.pre-commit-commit.yaml`:
 
-    find bin/ -type f -not -path '*/\.git*' -exec "shellcheck" {} \;
+    pre-commit run --all-files

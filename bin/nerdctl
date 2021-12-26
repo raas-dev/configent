@@ -7,7 +7,7 @@
 
 : "${VM:="rancher"}"
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   if ! limactl shell "$VM" true &>/dev/null; then
     limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"

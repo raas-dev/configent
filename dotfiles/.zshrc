@@ -1,4 +1,7 @@
-### .zshrc
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
+# shellcheck disable=SC2155  # will not declare separately, value compactness
 
 export SHELL="$(which zsh)"
 
@@ -6,11 +9,11 @@ alias r=". \$HOME/.zshrc"
 
 ### Zplug ######################################################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   if [[ $(uname -m) == 'arm64' ]]; then
-     export ZPLUG_HOME="/opt/homebrew/opt/zplug"
+    export ZPLUG_HOME="/opt/homebrew/opt/zplug"
   else
-     export ZPLUG_HOME="/usr/local/opt/zplug"
+    export ZPLUG_HOME="/usr/local/opt/zplug"
   fi
 else
   if [[ -d "/home/linuxbrew/.linuxbrew/opt/zplug" ]]; then
@@ -20,11 +23,11 @@ else
   fi
 fi
 
-[[ -d "$ZPLUG_HOME" ]] && source "$ZPLUG_HOME/init.zsh"
+[[ -d $ZPLUG_HOME ]] && source "$ZPLUG_HOME/init.zsh"
 
-if which zplug &>/dev/null ; then
+if which zplug &>/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
-  zplug "zsh-users/zsh-autosuggestions", from:github 
+  zplug "zsh-users/zsh-autosuggestions", from:github
 
   zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
 
@@ -66,7 +69,7 @@ alias history='fc -El 1'
 
 ### Prompt #####################################################################
 
-if which starship &>/dev/null ; then
+if which starship &>/dev/null; then
   eval "$(starship init zsh)"
 else
   PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
@@ -80,7 +83,7 @@ bindkey -e
 
 ### zoxide #####################################################################
 
-if which zoxide &>/dev/null ; then
+if which zoxide &>/dev/null; then
   eval "$(zoxide init zsh --cmd j --no-aliases)"
 
   function j() {
@@ -103,6 +106,6 @@ chpwd() {
 
 ### Restore tmux ###############################################################
 
-[[ -n "$TMUX" ]] || tmux attach -t "local" || tmux new -s "local"
+[[ -n $TMUX ]] || tmux attach -t "local" || tmux new -s "local"
 
 # sdkman-init.sh is mentioned here to not be appended by `install_java`

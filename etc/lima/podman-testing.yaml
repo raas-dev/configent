@@ -39,7 +39,7 @@ provision:
   - mode: user
     script: |
       #!/bin/bash
-      pip3 install podman-compose
+      pip install podman-compose
 
 probes:
   - script: |

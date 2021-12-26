@@ -41,7 +41,7 @@ brew install zoxide
 
 ### macOS only brews ###########################################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # https://github.com/Homebrew/homebrew-services
   brew tap homebrew/services
 

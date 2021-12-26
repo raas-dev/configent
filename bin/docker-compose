@@ -19,7 +19,7 @@ install_docker_compose_plugin() {
   fi
 }
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   if ! which limactl &>/dev/null; then
     echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
     exit 127
@@ -29,9 +29,9 @@ if [[ "$OSTYPE" = darwin* ]]; then
   else
     local_docker_path="/usr/local/bin/docker"
   fi
-  if [[ -x "$local_docker_path" ]]; then
+  if [[ -x $local_docker_path ]]; then
     install_docker_compose_plugin
-    if [[ -z "$DOCKER_HOST" ]]; then
+    if [[ -z $DOCKER_HOST ]]; then
       # requires forwarding the socket in the lima vm config file
       export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
     fi

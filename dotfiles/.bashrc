@@ -5,7 +5,7 @@
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
 # quit if no prompt is present - shell is not interactive
-[[ -z "$PS1" ]] && return
+[[ -z $PS1 ]] && return
 
 export SHELL="$(which bash)"
 
@@ -46,45 +46,45 @@ txtcyn='\[\e[0;36m\]'
 txtrst='\[\e[0m\]'
 
 parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"
+  git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"
 }
 
 get_branch_info() {
   local branch=$(parse_git_branch)
   local scm=''
-  if [[ -n "$branch" ]]; then
+  if [[ -n $branch ]]; then
     scm='git'
   else
     branch=$(parse_git_branch)
-    [[ -n "$branch" ]] && scm='hg'
+    [[ -n $branch ]] && scm='hg'
   fi
-  [[ -n "$scm" ]] && echo "($scm:$branch)"
+  [[ -n $scm ]] && echo "($scm:$branch)"
 }
 
-if which git &>/dev/null ; then
+if which git &>/dev/null; then
   PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtgrn\$(get_branch_info)$txtrst\$ "
 else
   PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtrst\$ "
 fi
 
-if which starship &>/dev/null ; then
+if which starship &>/dev/null; then
   eval "$(starship init bash)"
 fi
 
 ### Additional bash completions ################################################
 
-if [[ "$OSTYPE" != darwin* ]] ; then
+if [[ $OSTYPE != darwin* ]]; then
   # apt-get install bash-completion
-  if [[ -f "/usr/share/bash-completion/bash_completion" ]] ; then
+  if [[ -f "/usr/share/bash-completion/bash_completion" ]]; then
     # ubuntu
     source "/usr/share/bash-completion/bash_completion"
-  elif [[ -f "etc/bash_completion" ]] ; then
+  elif [[ -f "etc/bash_completion" ]]; then
     # debian
     source "/etc/bash_completion"
   fi
 fi
 
-if which brew &>/dev/null ; then
+if which brew &>/dev/null; then
   if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
     source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
   fi
@@ -92,12 +92,12 @@ fi
 
 # add tab completion for hostnames based on ~/.ssh/config, ignoring wildcards
 [[ -e "$HOME/.ssh/config" ]] && complete -o 'default' -o 'nospace' \
-  -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" \
-    | cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
+  -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |
+    cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
 
 ### zoxide #####################################################################
 
-if which zoxide &>/dev/null ; then
+if which zoxide &>/dev/null; then
   eval "$(zoxide init bash --cmd j --no-aliases)"
 
   function j() {
@@ -107,9 +107,9 @@ fi
 
 ### Load other configs #########################################################
 
-[[ -f "$HOME/.profile" ]]  && . "$HOME/.profile"
-[[ -f "$HOME/.aliases" ]]  && . "$HOME/.aliases"
+[[ -f "$HOME/.profile" ]] && . "$HOME/.profile"
+[[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
 [[ -f "$HOME/.fzf.bash" ]] && . "$HOME/.fzf.bash"
-[[ -f "$HOME/.rclocal" ]]  && . "$HOME/.rclocal" || true
+[[ -f "$HOME/.rclocal" ]] && . "$HOME/.rclocal" || true
 
 # sdkman-init.sh is mentioned here to not be appended by `install_java`

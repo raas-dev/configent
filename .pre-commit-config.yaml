@@ -1,0 +1,23 @@
+# pip install --user pre-commit
+# pre-commit install
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+    - id: detect-private-key
+    - id: check-merge-conflict
+    - id: check-added-large-files
+    - id: check-case-conflict
+    - id: mixed-line-ending
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-json
+    - id: check-toml
+    - id: check-yaml
+
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 2.1.5
+  hooks:
+    - id: shellcheck
+    - id: shfmt

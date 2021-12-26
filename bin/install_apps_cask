@@ -2,7 +2,7 @@
 
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
-if [[ "$OSTYPE" != darwin* ]]; then
+if [[ $OSTYPE != darwin* ]]; then
   echo "Error: This script ought to be run on macOS only."
   exit 1
 fi
