@@ -146,7 +146,3 @@ Install [pre-commit](https://pre-commit.com/) in the repository:
 
     pip install --user pre-commit
     pre-commit install
-
-Run checks for all the files according to `.pre-commit-commit.yaml`:
-
-    pre-commit run --all-files
