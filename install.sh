@@ -76,10 +76,10 @@ if [ -t 0 ]; then
   full_path=$(cd "$(dirname "$0")" && pwd)
   printf "Checking if inside the git working copy and ought to pull.\n"
   if [ -d "$full_path/.git" ]; then
+    GIT_BRANCH="$(cd "$full_path" && git rev-parse --abbrev-ref HEAD)"
     printf "Inside git working copy %s, pulling %s\n" \
       "$full_path" "$GIT_BRANCH"
-    git -C "$full_path" checkout "$GIT_BRANCH"
-    git -C "$full_path" pull --rebase
+    git -C "$full_path" pull --rebase origin "$GIT_BRANCH"
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
@@ -89,10 +89,10 @@ else
       "$TARGET_PATH" "$GIT_BRANCH"
     git clone --quiet --branch "$GIT_BRANCH" "$GIT_REPO_URL" "$TARGET_PATH"
   else
+    GIT_BRANCH="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
     printf "Git working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$GIT_BRANCH"
-    git -C "$TARGET_PATH" checkout "$GIT_BRANCH"
-    git -C "$TARGET_PATH" pull --rebase
+    git -C "$TARGET_PATH" pull --rebase origin "$GIT_BRANCH"
   fi
   cd "$TARGET_PATH" &&
     . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
