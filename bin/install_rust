@@ -6,7 +6,7 @@ trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 ### rustup #####################################################################
 
-curl "https://sh.rustup.rs" -sSf | sh -s -- -y --no-modify-path
+curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 
 . "$HOME/.cargo/env" && \
   rustup install stable && \

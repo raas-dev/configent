@@ -12,3 +12,6 @@ curl -fsSL "https://get.sdkman.io" | bash
   sdk selfupdate force && \
   sdk install java 17.0.1-oracle && \
   sdk default java 17.0.1-oracle
+
+# JDKs: https://sdkman.io/jdks
+# SDKs: https://sdkman.io/sdks

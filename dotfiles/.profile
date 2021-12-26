@@ -122,10 +122,10 @@ path_prepend "$HOME/.local/bin"
 
 ### Nvm ########################################################################
 
-if [[ -d "$HOME/.nvm" ]]; then
-  export NVM_DIR="$HOME/.nvm"
-  source "$HOME/.nvm/nvm.sh"
-  [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+nvm_path="$HOME/.nvm"
+if [[ -d "$nvm_path" ]]; then
+  source "$nvm_path/nvm.sh"
+  [[ -s "$nvm_path/bash_completion" ]] && source "$nvm_path/bash_completion"
 fi
 
 ### Go #########################################################################
