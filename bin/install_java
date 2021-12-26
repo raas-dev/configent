@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091  # do not expect input files
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### sdkman #####################################################################
+
+curl -fsSL "https://get.sdkman.io" | bash
+
+. "$HOME/.sdkman/bin/sdkman-init.sh" && \
+  sdk selfupdate force && \
+  sdk install java 17.0.1-oracle && \
+  sdk default java 17.0.1-oracle

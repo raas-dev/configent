@@ -36,7 +36,7 @@ $SUDO apk add build-base gcompat ncurses \
 
 # Utils
 $SUDO apk add bash coreutils curl bind-tools file findutils \
-  git htop procps unzip wget whois
+  git htop procps zip unzip wget whois
   
 # macOS pbcopy/pbpaste like experience
 #$SUDO apk add xsel

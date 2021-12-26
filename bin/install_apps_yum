@@ -39,7 +39,7 @@ $SUDO yum install -y gcc gcc-c++ make \
 
 # Utils
 $SUDO yum install -y bash coreutils bind-utils file findutils \
-  git htop redhat-lsb-core procps traceroute unzip wget whois
+  git htop redhat-lsb-core procps traceroute zip unzip wget whois
 
 # pbcopy/pbpaste like experience
 #$SUDO yum install -y xsel

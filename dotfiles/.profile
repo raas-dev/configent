@@ -84,6 +84,9 @@ fi
 
 ### Java #######################################################################
 
+sdkman_path="$HOME/.sdkman"
+[[ -d "$sdkman_path" ]] && . "$sdkman_path/bin/sdkman-init.sh"
+
 jars_path="$HOME/jars"
 if [[ -d "$jars_path" ]]; then
   export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0 | \
