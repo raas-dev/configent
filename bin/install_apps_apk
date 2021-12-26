@@ -31,7 +31,7 @@ $SUDO apk add ca-certificates
 $SUDO apk add gnupg
 
 # Common build requirements
-$SUDO apk add build-base \
+$SUDO apk add build-base gcompat ncurses \
   openssl-dev readline-dev sqlite-dev bzip2-dev zlib-dev libffi-dev
 
 # Utils
