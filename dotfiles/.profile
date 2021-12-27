@@ -158,6 +158,16 @@ which dircolors &>/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
+### DOCKER_HOST ################################################################
+
+if [[ $OSTYPE == darwin* ]]; then
+  # requires forwarding the socket in the lima vm config file
+  export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
+else
+  # prefer rootless docker on Linux
+  export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+fi
+
 ### Local binaries first in the PATH ###########################################
 
 path_prepend "$HOME/local/bin"
