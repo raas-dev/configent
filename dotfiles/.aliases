@@ -218,11 +218,16 @@ alias week='date +%V'
 
 # nixery.dev
 nixery() {
-  local bin="$1"
+  set -x
+  local pkg="$1"
+  shift
+  local args="${*:-$pkg}"
   if [[ $(uname -m) == 'arm64' ]]; then
-    docker run -it --rm --name "$bin" "nixery.dev/arm64/shell/$bin" "$bin"
+    docker run -it --rm --name "$pkg" --publish-all \
+      "nixery.dev/arm64/shell/$pkg" "$args"
   else
-    docker run -it --rm --name "$bin" "nixery.dev/shell/$bin" "$bin"
+    docker run -it --rm --name "$pkg" --publish-all \
+      "nixery.dev/shell/$pkg" "$args"
   fi
 }
 
