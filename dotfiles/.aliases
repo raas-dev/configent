@@ -223,19 +223,16 @@ nixery() {
   local pkg="$1"
   shift
   local args="${*:-$pkg}"
-  if [[ $(uname -m) == 'arm64' ]]; then
-    docker run -it --rm --name "$pkg" \
-      --publish-all \
-      --volume="$PWD:$PWD":ro \
-      --workdir="$PWD" \
-      "nixery.dev/arm64/shell/$pkg" $args
+  if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then
+    image="nixery.dev/arm64/shell/$pkg"
   else
-    docker run -it --rm --name "$pkg" \
-      --publish-all \
-      --volume="$PWD:$PWD":ro \
-      --workdir="$PWD" \
-      "nixery.dev/shell/$pkg" $args
+    image="nixery.dev/shell/$pkg"
   fi
+  docker run -it --rm --name "$pkg" \
+    --publish-all \
+    --volume="$PWD:$PWD":ro \
+    --workdir="$PWD" \
+    "$image" $args
 }
 
 # Quick extract
