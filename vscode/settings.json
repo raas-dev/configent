@@ -135,5 +135,6 @@
     "sonarlint.disableTelemetry": true,
     "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current",
     "telemetry.telemetryLevel": "off",
-    "terminal.integrated.defaultProfile.osx": "zsh"
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "shellformat.useEditorConfig": true
 }
