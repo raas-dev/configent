@@ -192,11 +192,6 @@ alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
 alias npr='nrmc; nrmv; nrmi'
 
-# e.g.
-alias rustscan='nerdctl run -it --rm --name rustscan \
-  --cap-drop ALL \
-  rustscan/rustscan:alpine --accessible --batch-size 512 --timeout 5000'
-
 ### Misc #######################################################################
 
 # Copy the current path to clipboard
