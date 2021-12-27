@@ -40,6 +40,7 @@ else
     "$HOME/bin/docker" $@
   elif [[ -x "/usr/bin/docker" ]]; then
     # try distro's package manager installed as the last resort
+    export DOCKER_HOST="unix:///var/run/docker.sock"
     "/usr/bin/docker" $@
   else
     echo "Error: Docker CLI not found or executable in this Linux system."
