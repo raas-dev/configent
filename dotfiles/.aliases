@@ -170,7 +170,16 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc; drmv; drmi; docker system prune --force --volumes'
 
-alias netdata='docker run -d --name=netdata \
+alias rustscan='nixery rustscan'
+
+### nerdctl ####################################################################
+
+alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
+alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
+alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
+alias npr='nrmc; nrmv; nrmi'
+
+alias netdata='nerdctl run -d --name=netdata \
   -p 19999:19999 \
   -v netdataconfig:/etc/netdata \
   -v netdatalib:/var/lib/netdata \
@@ -183,15 +192,6 @@ alias netdata='docker run -d --name=netdata \
   --cap-add SYS_PTRACE \
   --security-opt apparmor=unconfined \
   netdata/netdata'
-
-alias rustscan='nixery rustscan'
-
-### nerdctl ####################################################################
-
-alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
-alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
-alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
-alias npr='nrmc; nrmv; nrmi'
 
 ### Misc #######################################################################
 
@@ -217,7 +217,6 @@ alias week='date +%V'
 ### Utilities ##################################################################
 
 # nixery.dev
-
 nixery() {
   local bin="$1"
   if [[ $(uname -m) == 'arm64' ]]; then
