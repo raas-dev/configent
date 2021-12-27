@@ -22,6 +22,8 @@ fi
 
 ### linters ####################################################################
 
+brew install aquasecurity/trivy/trivy
+brew install goodwithtech/r/dockle
 brew install shellcheck
 
 ### docker #####################################################################
