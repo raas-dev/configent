@@ -8,7 +8,7 @@
 alias br='which brew &>/dev/null && brew update && brew upgrade ; \
   which zplug &>/dev/null && zplug update'
 
-if [[ "$OSTYPE" = darwin* ]] ; then
+if [[ "$OSTYPE" = darwin* ]]; then
   # Brew cask upgrade
   alias brc='brew cu --all --yes --cleanup'
 
@@ -42,15 +42,15 @@ if [[ "$OSTYPE" = darwin* ]] ; then
   alias spoton='sudo mdutil -a -i on'
 
   # Canonical hex dump; some systems have this symlinked
-  command -v hd > /dev/null || alias hd='hexdump -C'
+  command -v hd >/dev/null || alias hd='hexdump -C'
 
   # macOS has no `md5sum`, use `md5` as a fallback
-  command -v md5sum > /dev/null || alias md5sum='md5'
+  command -v md5sum >/dev/null || alias md5sum='md5'
 
   # macOS has no `sha1sum`, use `shasum` as a fallback
-  command -v sha1sum > /dev/null || alias sha1sum='shasum'
+  command -v sha1sum >/dev/null || alias sha1sum='shasum'
 else
-  if which apt &>/dev/null ; then
+  if which apt &>/dev/null; then
     alias up='sudo snap refresh ; \
       sudo apt update && \
       sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
@@ -59,14 +59,14 @@ else
       sudo apt update && \
       sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
-  elif which yum &>/dev/null ; then
+  elif which yum &>/dev/null; then
     alias up='sudo snap refresh ; \
       sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ; \
       br'
     alias dup='sudo snap refresh ; \
       sudo yum update -y && sudo yum autoremove -y ; \
       br'
-  elif which apk &>/dev/null ; then
+  elif which apk &>/dev/null; then
     alias up='sudo apk update && \
       sudo apk add --upgrade apk-tools && \
       sudo apk upgrade ; \
@@ -100,7 +100,7 @@ alias chgrp='chgrp --preserve-root'
 
 ### Enhanced ls ################################################################
 
-if which lsd &>/dev/null ; then
+if which lsd &>/dev/null; then
   alias ls='lsd --group-dirs first --date="+%a %d-%b-%y %H:%M:%S" --icon never'
   alias la='ls -Al'
   alias le='ls -Al --extensionsort && echo Ordered by extension, alphabetically'
@@ -235,29 +235,29 @@ nixery() {
 
 # Quick extract
 ext() {
- if [[ -f $1 ]]; then
-   case $1 in
-     *.tar.bz2)   tar xvjf "$1"   ;;
-     *.tar.gz)    tar xvzf "$1"   ;;
-     *.bz2)       bunzip2 "$1"    ;;
-     *.rar)       unrar x "$1"    ;;
-     *.gz)        gunzip "$1"     ;;
-     *.tar)       tar xvf "$1"    ;;
-     *.tbz2)      tar xvjf "$1"   ;;
-     *.tgz)       tar xvzf "$1"   ;;
-     *.zip)       unzip "$1"      ;;
-     *.Z)         uncompress "$1" ;;
-     *.7z)        7z x "$1"       ;;
-     *)           echo "don't know how to extract '$1'..." ;;
-   esac
- else
-   echo "'$1' is not a valid file!"
- fi
+  if [[ -f $1 ]]; then
+    case $1 in
+    *.tar.bz2) tar xvjf "$1" ;;
+    *.tar.gz) tar xvzf "$1" ;;
+    *.bz2) bunzip2 "$1" ;;
+    *.rar) unrar x "$1" ;;
+    *.gz) gunzip "$1" ;;
+    *.tar) tar xvf "$1" ;;
+    *.tbz2) tar xvjf "$1" ;;
+    *.tgz) tar xvzf "$1" ;;
+    *.zip) unzip "$1" ;;
+    *.Z) uncompress "$1" ;;
+    *.7z) 7z x "$1" ;;
+    *) echo "don't know how to extract '$1'..." ;;
+    esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
 }
 
 # Quick password generator
 genpass() {
-  < /dev/urandom tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | \
+  tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
     fold -w "$1" | head -n1 | pbcopy
 }
 
@@ -268,8 +268,8 @@ whatlistens() {
 
 # List 20 biggest directories
 usage() {
-  du | sort -r -n | \
-  awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
+  du | sort -r -n |
+    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
 # Remove all non-cask brew
@@ -279,8 +279,8 @@ brewclear() {
 
 # Npm remove all global packages (except npm installed npm)
 npmclear() {
-  npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | \
-  xargs npm -g rm
+  npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' |
+    xargs npm -g rm
 }
 
 # Pip remove all
@@ -295,7 +295,7 @@ gemclear() {
 
 # Recursively remove __pycache__ direcotries
 pyclean() {
-  find . -type d -name  "__pycache__" -exec rm -r {} +
+  find . -type d -name "__pycache__" -exec rm -r {} +
 }
 
 ### Latest version of global nodejs devtools ###################################
@@ -323,19 +323,21 @@ alias ncu='npx npm-check-updates'
 decode_base64_url() {
   local len=$((${#1} % 4))
   local result="$1"
-  if [ $len -eq 2 ]; then result="$1"'=='
-  elif [ $len -eq 3 ]; then result="$1"'='
+  if [ $len -eq 2 ]; then
+    result="$1"'=='
+  elif [ $len -eq 3 ]; then
+    result="$1"'='
   fi
   echo "$result" | tr '_-' '/+' | base64 -d
 }
 
-decode_jwt_partial(){
-   decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
+decode_jwt_partial() {
+  decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
 }
 
-decode_jwt_header_payload(){
-   decode_jwt_partial 1 "$1"
-   decode_jwt_partial 2 "$1"
+decode_jwt_header_payload() {
+  decode_jwt_partial 1 "$1"
+  decode_jwt_partial 2 "$1"
 }
 
 # decode jwt header + payload

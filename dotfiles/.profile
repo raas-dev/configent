@@ -14,21 +14,21 @@ path_append() {
 
 path_prepend() {
   if [ -d "$1" ]; then
-    PATH=${PATH//":$1:"/:} #delete all instances in the middle
-    PATH=${PATH/%":$1"/} #delete any instance at the end
-    PATH=${PATH/#"$1:"/} #delete any instance at the beginning
+    PATH=${PATH//":$1:"/:}     #delete all instances in the middle
+    PATH=${PATH/%":$1"/}       #delete any instance at the end
+    PATH=${PATH/#"$1:"/}       #delete any instance at the beginning
     PATH="$1${PATH:+":$PATH"}" #prepend $1 or if $PATH is empty set to $1
   fi
 }
 
-if [[ "$OSTYPE" = darwin* ]] ; then
+if [[ "$OSTYPE" = darwin* ]]; then
   PATH=''
   path_append '/usr/local/bin'
   path_append '/usr/bin'
   path_append '/bin'
   path_append '/usr/sbin'
   path_append '/sbin'
-elif [[ "$OSTYPE" = linux-gnu* ]] ; then
+elif [[ "$OSTYPE" = linux-gnu* ]]; then
   PATH=''
   path_append '/usr/local/sbin'
   path_append '/usr/local/bin'
@@ -89,7 +89,7 @@ sdkman_path="$HOME/.sdkman"
 
 jars_path="$HOME/jars"
 if [[ -d "$jars_path" ]]; then
-  export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0 | \
+  export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0 |
     xargs echo | tr ' ' ':')
 fi
 
@@ -97,7 +97,7 @@ fi
 
 path_prepend "$HOME/.rbenv/bin"
 
-if which rbenv &>/dev/null ; then
+if which rbenv &>/dev/null; then
   eval "$(rbenv init -)"
 fi
 
@@ -105,17 +105,17 @@ fi
 
 path_prepend "$HOME/.pyenv/bin"
 
-if which pyenv &>/dev/null ; then
+if which pyenv &>/dev/null; then
   eval "$(pyenv init -)"
   eval "$(pyenv init --path)"
-  if [[ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]] ; then
+  if [[ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]]; then
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     eval "$(pyenv virtualenv-init -)"
   fi
 fi
 
-export BETTER_EXCEPTIONS=1  # pip install --upgrade better_exceptions
-export TBVACCINE=1          # pip install --upgrade tbvaccine
+export BETTER_EXCEPTIONS=1 # pip install --upgrade better_exceptions
+export TBVACCINE=1         # pip install --upgrade tbvaccine
 
 # Add `pip install --user` scope into $PATH if the dir exists
 path_prepend "$HOME/.local/bin"
