@@ -134,5 +134,7 @@
     "git.confirmSync": false,
     "bracketPairColorizer.depreciation-notice": false,
     "security.workspace.trust.enabled": false,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "sonarlint.disableTelemetry": true,
+    "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current"
 }
