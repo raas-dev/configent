@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2086  # not quoting args passed to nixery() docker run
+
 ### OS specific ################################################################
 
 # Upgrade brew formulas, and zplugins if on zsh
 alias br='which brew &>/dev/null && brew update && brew upgrade ; \
   which zplug &>/dev/null && zplug update'
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ "$OSTYPE" = darwin* ]] ; then
   # Brew cask upgrade
   alias brc='brew cu --all --yes --cleanup'
 
@@ -224,10 +226,10 @@ nixery() {
   local args="${*:-$pkg}"
   if [[ $(uname -m) == 'arm64' ]]; then
     docker run -it --rm --name "$pkg" --publish-all \
-      "nixery.dev/arm64/shell/$pkg" "$args"
+      "nixery.dev/arm64/shell/$pkg" $args
   else
     docker run -it --rm --name "$pkg" --publish-all \
-      "nixery.dev/shell/$pkg" "$args"
+      "nixery.dev/shell/$pkg" $args
   fi
 }
 
