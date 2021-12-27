@@ -2,8 +2,6 @@
     "editor.fontFamily": "TerminessTTF Nerd Font",
     "editor.fontSize": 17,
     "workbench.colorTheme": "Ayu Dark Bordered",
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.scrollback": 99999,
     "markdown.preview.fontSize": 17,
@@ -12,7 +10,6 @@
     "terminal.integrated.cursorBlinking": true,
     "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
     "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
-    "terminal.integrated.shell.osx": "zsh",
     "terminal.external.linuxExec": "xterm-256color",
     "terminal.external.osxExec": "Terminal.app",
     "terminal.integrated.copyOnSelection": true,
@@ -136,5 +133,7 @@
     "security.workspace.trust.enabled": false,
     "window.zoomLevel": 1,
     "sonarlint.disableTelemetry": true,
-    "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current"
+    "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current",
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.defaultProfile.osx": "zsh"
 }
