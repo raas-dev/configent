@@ -170,7 +170,6 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc; drmv; drmi; docker system prune --force --volumes'
 
-# e.g.
 alias netdata='docker run -d --name=netdata \
   -p 19999:19999 \
   -v netdataconfig:/etc/netdata \
@@ -184,6 +183,8 @@ alias netdata='docker run -d --name=netdata \
   --cap-add SYS_PTRACE \
   --security-opt apparmor=unconfined \
   netdata/netdata'
+
+alias rustscan='nixery rustscan'
 
 ### nerdctl ####################################################################
 
@@ -214,6 +215,17 @@ alias sudo='sudo '
 alias week='date +%V'
 
 ### Utilities ##################################################################
+
+# nixery.dev
+
+nixery() {
+  local bin="$1"
+  if [[ $(uname -m) == 'arm64' ]]; then
+    docker run -it --rm --name "$bin" "nixery.dev/arm64/shell/$bin" "$bin"
+  else
+    docker run -it --rm --name "$bin" "nixery.dev/shell/$bin" "$bin"
+  fi
+}
 
 # Quick extract
 ext() {
