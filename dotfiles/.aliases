@@ -136,7 +136,7 @@ alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
 # r is for reloading shell's configuration (alias is in shell specific rc files)
-alias s='source'
+alias s='sncli'
 alias t='tail --follow --verbose --lines=20'
 alias u='usage'
 alias v='limactl'
