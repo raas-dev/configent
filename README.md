@@ -125,6 +125,15 @@ Tested on:
 - Rocky Linux 8.5
 - Alpine Linux 3.14.3
 
+See `CHANGELOG.md` for released fixes and upcoming features.
+
+### Contributing
+
+Install [pre-commit](https://pre-commit.com/) in the repository:
+
+    pip install --user pre-commit
+    pre-commit install
+
 ### Known bugs
 
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
@@ -140,10 +149,3 @@ a pull request.
 - Rocky Linux 8.5 has serious issues booting on aarch64
     - Rootless Docker installer (sh) does not work on x86_64 either
 - Podman does not seem very well with most containers (as of 2021-12)
-
-### Contributing
-
-Install [pre-commit](https://pre-commit.com/) in the repository:
-
-    pip install --user pre-commit
-    pre-commit install
