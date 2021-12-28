@@ -110,10 +110,10 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless Docker and a lima VM 'rancher' for containerd.
 
-In addition, the 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes development.
+In addition, 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes.
 
-See aliases to create additional VMs and named aliases `d` and `n` for
-container build and run shortcuts.
+See aliases for creating additional VMs and aliases `d` and `n` for running
+containers.
 
 ## 🔨 Development
 

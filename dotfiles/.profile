@@ -163,8 +163,8 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 if [[ $OSTYPE == darwin* ]] && which lima &>/dev/null; then
   # requires forwarding the socket in the lima vm config file
   export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
-else
-  # always prefer rootless docker on Linux
+elif [[ -x "$HOME/bin/docker" ]] ; then
+  # rootless docker installed
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi
 

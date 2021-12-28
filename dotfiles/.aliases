@@ -131,7 +131,7 @@ alias i='btop'
 alias k='kubectl'
 alias l='la'
 # m is for m-cli
-alias n='nerdctl stop ${PWD##*/} ; nerdctl kill ${PWD##*/} ; nerdctl build --tag ${PWD##*/} . && nerdctl run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} && nerdctl port ${PWD##*/}'
+alias n='nixery'
 alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
@@ -220,6 +220,7 @@ alias week='date +%V'
 
 # nixery.dev
 nixery() {
+  [[ -z "$1" ]] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
   local pkg="$1"
   shift
   local args="${*:-$pkg}"
