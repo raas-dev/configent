@@ -127,7 +127,8 @@ Tested on:
 
 ### Known bugs
 
-Tracked in [GitHub issue tracker](https://github.com/raas-dev/configent/issues).
+Please create an [issue](https://github.com/raas-dev/configent/issues) and
+a pull request.
 
 #### Won't fix
 
@@ -146,3 +147,14 @@ Install [pre-commit](https://pre-commit.com/) in the repository:
 
     pip install --user pre-commit
     pre-commit install
+
+### Changelog
+
+To update `CHANGELOG.md`:
+
+    npx -y auto-changelog --template keepachangelog \
+      --unreleased \
+      --hide-empty-releases \
+      --breaking-pattern BWIC \
+      --issue-pattern "^[Ff]ix" \
+      --ignore-commit-pattern "^(?:[Rr]e(?:forma|inden)t|(?:[Ff]orma|[Ii]nden)t)"
