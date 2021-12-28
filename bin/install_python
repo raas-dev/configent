@@ -35,6 +35,7 @@ pip install --upgrade pip setuptools wheel
 pip install --upgrade pre-commit
 pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
+pip install --upgrade sncli
 pip install --upgrade you-get
 
 ### Jupyter ####################################################################

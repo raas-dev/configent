@@ -1,0 +1,17 @@
+[sncli]
+cfg_sn_username = anssi.syrjasalo@gmail.com
+cfg_sn_password_eval = cat "$HOME/.snclirc_pw"
+
+cfg_format_strftime = %Y-%m-%d
+cfg_tabstop = 2
+
+clr_note_focus_bg = light blue
+
+kb_up = up
+kb_down = down
+kb_page_up = left
+kb_page_down = right
+
+kb_create_note = n
+kb_edit_note = e
+kb_view_note_ext = space
