@@ -41,3 +41,10 @@ repos:
   hooks:
     - id: semgrep
       args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
+
+- repo: local
+  hooks:
+    - id: auto-changelog
+      name: Update CHANGELOG.md
+      language: script
+      entry: update_changelog.sh
