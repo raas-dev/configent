@@ -5,7 +5,16 @@ cfg_sn_password_eval = cat "$HOME/.snclirc_pw"
 cfg_format_strftime = %Y-%m-%d
 cfg_tabstop = 2
 
+clr_help_focus_bg = light blue
+clr_help_focus_fg = black
+clr_note_content_focus_bg = light blue
+clr_note_content_focus_fg = black
+clr_note_content_old_focus_bg = light blue
+clr_note_content_old_focus_fg = black
 clr_note_focus_bg = light blue
+clr_note_focus_fg = black
+clr_status_bar_bg = light green
+clr_status_bar_fg = dark gray
 
 kb_up = up
 kb_down = down
