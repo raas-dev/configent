@@ -5,7 +5,7 @@
 #   pre-commit install
 #
 # Test all hoooks:
-# pre-commit run --all-files
+#   pre-commit run --all-files
 
 repos:
 - repo: https://github.com/Yelp/detect-secrets
@@ -41,6 +41,12 @@ repos:
   hooks:
     - id: semgrep
       args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
+
+- repo: https://github.com/commitizen-tools/commitizen
+  rev: v2.20.3
+  hooks:
+    - id: commitizen
+      stages: [commit-msg]
 
 - repo: local
   hooks:
