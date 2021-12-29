@@ -136,5 +136,6 @@
     "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current",
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.defaultProfile.osx": "zsh",
-    "shellformat.useEditorConfig": true
+    "shellformat.useEditorConfig": true,
+    "nixfmt.path": "~/.nix-profile/bin/nixfmt"
 }
