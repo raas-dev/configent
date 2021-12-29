@@ -36,11 +36,12 @@ repos:
     - id: shellcheck
     - id: shfmt
 
-- repo: https://github.com/returntocorp/semgrep
-  rev: v0.77.0
-  hooks:
-    - id: semgrep
-      args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
+# bash support is experimental
+#- repo: https://github.com/returntocorp/semgrep
+#  rev: v0.77.0
+#  hooks:
+#    - id: semgrep
+#      args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
 
 - repo: local
   hooks:

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * (sh): tidy release scripts
 * Tidy up release files
 
-Full set of changes: [`1.2.0...ce7dcb1`](https://github.com/raas-dev/configent/compare/1.2.0...ce7dcb1)
+Full set of changes: [`1.2.0...d557a1c`](https://github.com/raas-dev/configent/compare/1.2.0...d557a1c)
 
 ## 1.2.0 (2021-12-29)
 
