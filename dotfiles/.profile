@@ -145,6 +145,19 @@ if [[ -d "$cargo_path" ]]; then
   source "$cargo_path/env"
 fi
 
+### Nix ########################################################################
+
+if [[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
+  # single-user
+  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [[ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
+  # multi-user
+  source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  path_append "/nix/var/nix/profiles/default/bin"
+fi
+
+path_prepend "$HOME/.nix-profile/bin"
+
 ### Fzf ########################################################################
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
