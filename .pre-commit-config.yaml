@@ -1,11 +1,9 @@
-# Install $HOME/.local/bin/pre-commit:
-#   pip install --user pre-commit
+# Install pre-commit user-wide:
+#   pip3 install --user --upgrade pre-commit
 #
-# Set up in the repository:
-#   pre-commit install
-#
-# Test all hoooks:
-#   pre-commit run --all-files
+# Install the hooks in this file:
+#   "$HOME/.local/bin/pre-commit" install --hook-type pre-commit
+#   "$HOME/.local/bin/pre-commit" install --hook-type commit-msg
 
 repos:
 - repo: https://github.com/Yelp/detect-secrets

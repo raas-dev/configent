@@ -129,10 +129,11 @@ See `CHANGELOG.md` for released fixes and upcoming features.
 
 ### Contributing
 
-Install [pre-commit](https://pre-commit.com/) in the repository:
+Install or upgrade [pre-commit](https://pre-commit.com/) and the hooks:
 
-    pip install --user pre-commit
-    pre-commit install
+    pip3 install --user --upgrade pre-commit
+    "$HOME/.local/bin/pre-commit" install --hook-type pre-commit
+    "$HOME/.local/bin/pre-commit" install --hook-type commit-msg
 
 ### Known bugs
 
