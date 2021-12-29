@@ -304,25 +304,25 @@ pyclean() {
 ### Latest version of global nodejs devtools ###################################
 
 # Find unused and missing package.json (dev)Dependencies
-alias depcheck='npx -y depcheck'
+alias npx-depcheck='npx -y depcheck'
 
 # Command-line JSON processing tool
-alias fx='npx -y fx'
+alias npx-fx='npx -y fx'
 
 # Simple, zero-configuration command-line http server
-alias http-server='npx -y http-server'
+alias npx-http-server='npx -y http-server'
 
-# Automatically generate CHANGELOG.md
-alias auto-changelog='npx -y auto-changelog'
+# Generate CHANGELOG.md
+alias npx-auto-changelog='npx -y auto-changelog'
 
 # https://github.com/kefranabg/readme-md-generator
-alias readme-md-generator='npx -y readme-md-generator'
+alias npx-readme-md-generator='npx -y readme-md-generator'
 
 # Codemods for project config files
-alias mrm='npx -y mrm'
+alias npx-mrm='npx -y mrm'
 
 # Upgrades your package.json dependencies to the latest version
-alias ncu='npx -y npm-check-updates'
+alias npx-ncu='npx -y npm-check-updates'
 
 ### decode #####################################################################
 
