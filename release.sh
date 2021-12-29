@@ -4,12 +4,12 @@ conventional_commits_starting_tag="1.2.0"
 prerelease_type="$1"
 
 # https://github.com/commitizen-tools/commitizen
-pip install --quiet --user --upgrade commitizen
+pip3 install --quiet --user --upgrade commitizen
 
 ! "$HOME/.local/bin/cz" bump --dry-run && exit 0
 
 # prefer https://github.com/KeNaCo/auto-changelog over `cz changelog`
-pip install --quiet --user --upgrade auto-changelog
+pip3 install --quiet --user --upgrade auto-changelog
 
 "$HOME/.local/bin/auto-changelog" --description \
   "All notable changes to this project will be documented in this file.
