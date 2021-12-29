@@ -36,20 +36,6 @@ repos:
     - id: shellcheck
     - id: shfmt
 
-# bash support is experimental
-#- repo: https://github.com/returntocorp/semgrep
-#  rev: v0.77.0
-#  hooks:
-#    - id: semgrep
-#      args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
-
-#- repo: local
-#  hooks:
-#    - id: release
-#      name: Bump version and update CHANGELOG.md
-#      language: script
-#      entry: release.sh
-
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v2.20.3
   hooks:
