@@ -125,7 +125,8 @@ Tested on:
 - Rocky Linux 8.5
 - Alpine Linux 3.14.3
 
-See `CHANGELOG.md` for released fixes and upcoming features.
+For the history of fixes, added and removed features, see
+[CHANGELOG.md](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 
 ### Contributing
 
