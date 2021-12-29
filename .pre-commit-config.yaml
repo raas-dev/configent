@@ -43,12 +43,12 @@ repos:
 #    - id: semgrep
 #      args: ['--config', 'auto', '--skip-unknown-extensions', '--error']
 
-- repo: local
-  hooks:
-    - id: release
-      name: Bump version and update CHANGELOG.md
-      language: script
-      entry: release.sh
+#- repo: local
+#  hooks:
+#    - id: release
+#      name: Bump version and update CHANGELOG.md
+#      language: script
+#      entry: release.sh
 
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v2.20.3
