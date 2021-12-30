@@ -3,6 +3,17 @@
 conventional_commits_starting_tag="1.2.0"
 prerelease_type="$1"
 
+branch="$(git branch --show-current)"
+if [[ "$branch" != "main" ]] && [[ "$branch" != "master" ]]; then
+  echo "Error: Releases must be created from trunk, run $0 in main/master."
+  exit 1
+fi
+
+if [[ ! $(git diff-index --quiet HEAD --) ]]; then
+  echo "Error: Working tree has changes, add and commit or reset them first."
+  exit 1
+fi
+
 # https://github.com/commitizen-tools/commitizen
 pip3 install --quiet --user --upgrade commitizen
 
