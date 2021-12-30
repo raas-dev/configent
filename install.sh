@@ -10,7 +10,7 @@
 ### constants  #################################################################
 
 GIT_REPO_URL="https://github.com/raas-dev/configent"
-GIT_BRANCH="main"
+GIT_TAG="1.3.2"
 TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
@@ -74,25 +74,26 @@ fi
 if [ -t 0 ]; then
   # if in terminal/stdin present (script run by ./install.sh)
   full_path=$(cd "$(dirname "$0")" && pwd)
-  printf "Checking if inside the git working copy and ought to pull.\n"
+  printf "Checking if in the git working copy and ought to pull.\n"
   if [ -d "$full_path/.git" ]; then
-    GIT_BRANCH="$(cd "$full_path" && git rev-parse --abbrev-ref HEAD)"
-    printf "Inside git working copy %s, pulling %s\n" \
-      "$full_path" "$GIT_BRANCH"
-    git -C "$full_path" pull --rebase origin "$GIT_BRANCH"
+    git_branch="$(cd "$full_path" && git rev-parse --abbrev-ref HEAD)"
+    printf "In git working copy %s, pulling %s\n" \
+      "$full_path" "$git_branch"
+    git -C "$full_path" pull --rebase origin "$git_branch"
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
-    printf "Git working copy does not exist, cloning %s (branch: %s)\n" \
-      "$TARGET_PATH" "$GIT_BRANCH"
-    git clone --quiet --branch "$GIT_BRANCH" "$GIT_REPO_URL" "$TARGET_PATH"
+    printf "Git working copy not found, cloning %s (%s)\n" \
+      "$TARGET_PATH" "$GIT_TAG"
+    git clone --quiet --depth 1 --branch "$GIT_TAG" \
+      "$GIT_REPO_URL" "$TARGET_PATH"
   else
-    GIT_BRANCH="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
+    git_branch="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
     printf "Git working copy found at %s, pulling %s\n" \
-      "$TARGET_PATH" "$GIT_BRANCH"
-    git -C "$TARGET_PATH" pull --rebase origin "$GIT_BRANCH"
+      "$TARGET_PATH" "$git_branch"
+    git -C "$TARGET_PATH" pull --rebase origin "$git_branch"
   fi
   cd "$TARGET_PATH" &&
     . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
