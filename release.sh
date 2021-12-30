@@ -9,8 +9,8 @@ if [[ "$branch" != "main" ]] && [[ "$branch" != "master" ]]; then
   exit 1
 fi
 
-if [[ ! $(git diff-index --quiet HEAD --) ]]; then
-  echo "Error: Working tree has changes, add and commit or reset them first."
+if [[ -n "$(git status -s)" ]]; then
+  echo "Error: Working tree has changes, commit or reset first"
   exit 1
 fi
 
