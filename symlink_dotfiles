@@ -60,14 +60,3 @@ if [ "$(uname -s)" = 'Linux' ]; then
   mkdir -p "$HOME/.config/htop"
   ln -snvi"$args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
-
-### Symlink XFCE for Linux distributions #######################################
-
-#if [ "$(uname -s)" = 'Linux' ]; then
-#  xfce_configs_path="$HOME/.config/xfce4"
-#  if [ -d "$xfce_configs_path" ] ; then
-#     rm -rfv "${xfce_configs_path}-old"
-#     mv -v "$xfce_configs_path" "${xfce_configs_path}-old"
-#     ln -snvi "$dotfiles_path/xfce4" "$xfce_configs_path"
-#  fi
-#fi
