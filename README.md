@@ -24,7 +24,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## 💣 Up
 
-This repo is cloned to `$HOME/configent` or pulled if already exists there:
+This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.3.4/install.sh | sh
 
@@ -36,17 +36,6 @@ manager or by Xcode cmdline tools on macOS.
 Homebrew Cask or Snaps are not installed by default, as server/VM is assumed.
 
 Re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
-
-### Private installation
-
-Fork this repository. Installing from a private git repo has some prerequisites:
-- Install git to clone the repo (on macOS: `xcode-select --install`)
-- Create an SSH key pair (`ssh-keygen -t rsa`)
-- Add SSH key `.pub` part in GitHub
-
-Then run the one command install/update:
-
-    git clone git@github.com:raas-dev/configent.git && configent/install.sh
 
 ## 🔋's included
 
