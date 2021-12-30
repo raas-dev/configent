@@ -1,6 +1,6 @@
 # c🌀nfigent
 
-[![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)(https://github.com/raas-dev/configent/tags)
+[![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)](https://github.com/raas-dev/configent/tags)
 
 No startup pitches, I am an opinionated config manager and machine bootstrapper.
 
