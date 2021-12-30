@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# Usage: https://github.com/raas-dev/configent/blob/main/README.md
-#
-# Forked from:
+# Originally from:
 # https://github.com/geekzter/bootstrap-os/blob/master/linux/bootstrap_linux.sh
 
 # shellcheck disable=SC1091  # do not expect input files
