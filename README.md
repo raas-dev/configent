@@ -1,4 +1,4 @@
-# c🌀nfigent
+# c🌀nfigent (1.3.4)
 
 [![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)](https://github.com/raas-dev/configent/tags)
 
