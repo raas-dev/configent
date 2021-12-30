@@ -26,7 +26,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 This repo is cloned to `$HOME/configent` or pulled if already exists there:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.3.3/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.3.4/install.sh | sh
 
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
