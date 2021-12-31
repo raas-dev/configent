@@ -67,6 +67,7 @@ endif
 "-- Clipboard ------------------------------------------------------------------
 set clipboard^=unnamed,unnamedplus
 set pastetoggle=<F2>
+set paste
 set go+=a              " visual selection automatically copied to the clipboard
 
 
