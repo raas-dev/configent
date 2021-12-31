@@ -270,3 +270,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey  ctermbg=232
 
 "--- vim-json ------------------------------------------------------------------
 let g:vim_json_syntax_conceal = 0
+
+
+"--- sh ------------------------------------------------------------------------
+let g:is_posix = 1
