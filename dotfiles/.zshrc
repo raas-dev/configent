@@ -41,31 +41,27 @@ if which zplug &>/dev/null; then
   zplug load
 fi
 
-# Allow bash completions
-autoload bashcompinit
-bashcompinit
+# completions
+autoload -U compinit && compinit
+autoload -U bashcompinit bashcompinit
 
 ### History ####################################################################
 
-# This is unset on some environments
 HISTFILE="$HOME/.zsh_history"
-
-# Increase sizes
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 
-# Share history between shells
-setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
+setopt append_history         # append to history list rather than replace
+setopt extended_history       # special history format with timestamp
+setopt hist_expire_dups_first # expire the oldest instance of command
+setopt hist_ignore_dups       # ignore second instance of same event
+setopt hist_ignore_space      # ignore entries with leading space
+setopt hist_verify            # do not execute the line directly
+setopt inc_append_history     # write to history immediately
+setopt no_hist_beep           # no beep
+setopt share_history          # share history between session
 
-# Show timestamped history (zsh only)
-alias history='fc -El 1'
+alias history='fc -El 1' # show timestamped history (zsh fc only)
 
 ### Prompt #####################################################################
 
