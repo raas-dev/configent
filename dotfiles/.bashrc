@@ -91,16 +91,6 @@ fi
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |
     cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
 
-### zoxide #####################################################################
-
-if which zoxide &>/dev/null; then
-  eval "$(zoxide init bash --cmd j --no-aliases)"
-
-  function j() {
-    __zoxide_z "$@"
-  }
-fi
-
 ### Load other configs #########################################################
 
 [[ -f "$HOME/.profile" ]] && . "$HOME/.profile"

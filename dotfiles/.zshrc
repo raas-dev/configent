@@ -73,16 +73,6 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 # https://zsh.sourceforge.io/Guide/zshguide04.html
 bindkey -e
 
-### zoxide #####################################################################
-
-if which zoxide &>/dev/null; then
-  eval "$(zoxide init zsh --cmd j --no-aliases)"
-
-  function j() {
-    __zoxide_z "$@"
-  }
-fi
-
 ### Load other configs #########################################################
 
 [[ -f "$HOME/.profile" ]] && . "$HOME/.profile"

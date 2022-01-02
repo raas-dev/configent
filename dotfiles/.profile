@@ -85,7 +85,17 @@ fi
 ### Prompt #####################################################################
 
 if which starship &>/dev/null; then
-  eval "$(starship init "$SHELL")"
+  eval "$(starship init "${SHELL##*/}")"
+fi
+
+### zoxide #####################################################################
+
+if which zoxide &>/dev/null; then
+  eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
+
+  function j() {
+    __zoxide_z "$@"
+  }
 fi
 
 ### Java #######################################################################
