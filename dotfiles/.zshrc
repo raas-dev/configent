@@ -42,8 +42,8 @@ if which zplug &>/dev/null; then
 fi
 
 # completions
-autoload -U compinit && compinit
-autoload -U bashcompinit bashcompinit
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 ### History ####################################################################
 

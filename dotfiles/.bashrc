@@ -80,12 +80,6 @@ if [[ $OSTYPE != darwin* ]]; then
   fi
 fi
 
-if which brew &>/dev/null; then
-  if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-  fi
-fi
-
 # add tab completion for hostnames based on ~/.ssh/config, ignoring wildcards
 [[ -e "$HOME/.ssh/config" ]] && complete -o 'default' -o 'nospace' \
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |

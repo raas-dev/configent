@@ -88,6 +88,11 @@ if which starship &>/dev/null; then
   eval "$(starship init "${SHELL##*/}")"
 fi
 
+# brew install bash-completion
+if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
+  source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
+
 ### zoxide #####################################################################
 
 if which zoxide &>/dev/null; then
