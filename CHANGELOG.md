@@ -5,11 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.3.4 (2021-12-30)
+## 1.4.0 (2022-01-02)
+
+### Feat
+
+- **tmux**: Increase scroll speed
+- **lima**: forward SSH agent to Ubuntu VM
+- **zsh**: Improve zsh options for handling history
+- **zsh**: Add plugin for colored man pages
+- **tmux**: Double scroll speed
+- **vim**: Set paste mode by default
+- **vim**: Remove neocomplete to not override indent settings
+- **IAC**: Add semgrep to brew installed linters
 
 ### Fix
 
-- **versioning**: Update version in README.md
+- **shells**: Load bash-completion in profile
+- **profile**: move zoxide from shell rcs to profile
+- **profile**: move starship from shell rcs to profile
+- **vim**: Do not error hilight POSIX subshells
+
+### Refactor
+
+- **desktop**: Remove long unused xfce4 configs
+
+## 1.3.4 (2021-12-30)
+
+#### Fixes
+
+* (versioning): Update version in README.md
+
+Full set of changes: [`1.3.3...1.3.4`](https://github.com/raas-dev/configent/compare/1.3.3...1.3.4)
 
 ## 1.3.3 (2021-12-30)
 
