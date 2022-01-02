@@ -82,6 +82,12 @@ else
   fi
 fi
 
+### Prompt #####################################################################
+
+if which starship &>/dev/null; then
+  eval "$(starship init "$SHELL")"
+fi
+
 ### Java #######################################################################
 
 sdkman_path="$HOME/.sdkman"

@@ -65,12 +65,8 @@ alias history='fc -El 1' # show timestamped history (zsh fc only)
 
 ### Prompt #####################################################################
 
-if which starship &>/dev/null; then
-  eval "$(starship init zsh)"
-else
-  PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
-  RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
-fi
+PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
+RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 ### Use emacs keymap ###########################################################
 

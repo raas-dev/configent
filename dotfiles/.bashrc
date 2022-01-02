@@ -67,10 +67,6 @@ else
   PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtrst\$ "
 fi
 
-if which starship &>/dev/null; then
-  eval "$(starship init bash)"
-fi
-
 ### Additional bash completions ################################################
 
 if [[ $OSTYPE != darwin* ]]; then
