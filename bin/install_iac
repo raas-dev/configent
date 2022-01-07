@@ -41,6 +41,10 @@ brew install k6
 brew install nmap
 brew install oha
 
+### aws ########################################################################
+
+brew install awscli
+
 ### azure ######################################################################
 
 brew install azure-cli

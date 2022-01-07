@@ -185,6 +185,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 which dircolors &>/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
+### awscli #####################################################################
+
+which aws_completer &>/dev/null && complete -C "$(which aws_completer)" aws
+
 ### Azure Functions Core Tools #################################################
 
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
