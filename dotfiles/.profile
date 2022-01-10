@@ -89,8 +89,10 @@ if which starship &>/dev/null; then
 fi
 
 # brew install bash-completion
-if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
-  source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if which brew &>/dev/null ; then
+  if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  fi
 fi
 
 ### zoxide #####################################################################
