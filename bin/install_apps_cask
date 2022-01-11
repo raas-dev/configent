@@ -40,7 +40,10 @@ brew install --cask powershell
 #brew install --cask tunnelblick
 brew install --cask visual-studio-code
 #brew install --cask the-unarchiver
-brew install --cask ukelele
+
+# Peripheral drivers
+#brew install --cask homebrew/cask-drivers/corsair-icue
+#brew install --cask ukelele
 
 # Finder quick look plugins
 # https://github.com/sindresorhus/quick-look-plugins
