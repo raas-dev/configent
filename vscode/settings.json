@@ -136,6 +136,5 @@
     "shellformat.useEditorConfig": true,
     "nixfmt.path": "~/.nix-profile/bin/nixfmt",
     "editor.lineHeight": 15.5,
-    "workbench.fontAliasing": "auto",
     "window.zoomLevel": 1
 }
