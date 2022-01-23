@@ -1,8 +1,8 @@
 {
     "editor.fontFamily": "TerminessTTF Nerd Font",
-    "editor.fontSize": 18,
+    "editor.fontSize": 17,
     "workbench.colorTheme": "Ayu Dark Bordered",
-    "terminal.integrated.fontSize": 17,
+    "terminal.integrated.fontSize": 16,
     "terminal.integrated.scrollback": 99999,
     "markdown.preview.fontSize": 17,
     "workbench.iconTheme": "ayu",
@@ -57,7 +57,6 @@
     },
     "explorer.confirmDragAndDrop": false,
     "python.showStartPage": false,
-    "editor.lineHeight": 16.25,
     "workbench.activityBar.visible": false,
     "editor.minimap.showSlider": "always",
     "editor.hideCursorInOverviewRuler": true,
@@ -73,9 +72,8 @@
     "window.newWindowDimensions": "inherit",
     "go.useLanguageServer": true,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.letterSpacing": -0.5,
-    "rest-client.fontSize": 18,
-    "terminal.integrated.letterSpacing": -1,
+    "editor.letterSpacing": -0.25,
+    "rest-client.fontSize": 17,
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -131,11 +129,13 @@
     "git.confirmSync": false,
     "bracketPairColorizer.depreciation-notice": false,
     "security.workspace.trust.enabled": false,
-    "window.zoomLevel": 1,
     "sonarlint.disableTelemetry": true,
     "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current",
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "shellformat.useEditorConfig": true,
-    "nixfmt.path": "~/.nix-profile/bin/nixfmt"
+    "nixfmt.path": "~/.nix-profile/bin/nixfmt",
+    "editor.lineHeight": 15.5,
+    "workbench.fontAliasing": "auto",
+    "window.zoomLevel": 1
 }
