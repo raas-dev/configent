@@ -136,5 +136,7 @@
     "shellformat.useEditorConfig": true,
     "nixfmt.path": "~/.nix-profile/bin/nixfmt",
     "editor.lineHeight": 15.5,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "gitlens.showWelcomeOnInstall": false,
+    "devskim.enableBestPracticeRules": true
 }
