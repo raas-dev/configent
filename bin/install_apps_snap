@@ -37,7 +37,7 @@ $SUDO snap install brave
 # $SUDO snap install libreoffice
 
 # OpenDrive (Google Drive)
-$SUDO snap install odrive-unofficial
+# $SUDO snap install odrive-unofficial
 
 # powershell
 $SUDO snap install powershell --classic
