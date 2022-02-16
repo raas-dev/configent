@@ -5,29 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.4.0 (2022-01-02)
+## 1.5.0 (2022-02-16)
 
 ### Feat
 
-- **tmux**: Increase scroll speed
-- **lima**: forward SSH agent to Ubuntu VM
-- **zsh**: Improve zsh options for handling history
-- **zsh**: Add plugin for colored man pages
-- **tmux**: Double scroll speed
-- **vim**: Set paste mode by default
-- **vim**: Remove neocomplete to not override indent settings
-- **IAC**: Add semgrep to brew installed linters
+- **iac**: Add aws-vault
+- **gdrive**: Remove installation of Google Drive
+- **vscode**: Disable GitLens welcome, Devskim enable BP
+- **vscode**: disable font aliasing
+- **vscode**: Decrease font size
+- **casks**: Optional peripheral drivers
+- **iac**: Install awscli and aws_completer
 
 ### Fix
 
-- **shells**: Load bash-completion in profile
-- **profile**: move zoxide from shell rcs to profile
-- **profile**: move starship from shell rcs to profile
-- **vim**: Do not error hilight POSIX subshells
+- **profile**: Check if brew present before bash_completion
 
-### Refactor
+## 1.4.0 (2022-01-02)
 
-- **desktop**: Remove long unused xfce4 configs
+#### New Features
+
+* (tmux): Increase scroll speed
+* (lima): forward SSH agent to Ubuntu VM
+* (zsh): Improve zsh options for handling history
+* (zsh): Add plugin for colored man pages
+* (tmux): Double scroll speed
+* (vim): Set paste mode by default
+* (vim): Remove neocomplete to not override indent settings
+* (IAC): Add semgrep to brew installed linters
+#### Fixes
+
+* (shells): Load bash-completion in profile
+* (profile): move zoxide from shell rcs to profile
+* (profile): move starship from shell rcs to profile
+* (vim): Do not error hilight POSIX subshells
+#### Refactorings
+
+* (desktop): Remove long unused xfce4 configs
+#### Docs
+
+* (README): Add current version
+* (README): Remove installing from a private git repo
+* (README): Add latest version
+
+Full set of changes: [`1.3.4...1.4.0`](https://github.com/raas-dev/configent/compare/1.3.4...1.4.0)
 
 ## 1.3.4 (2021-12-30)
 
