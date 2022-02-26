@@ -29,7 +29,7 @@ provision:
   - mode: user
     script: |
       #!/bin/bash
-      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
 probes:
   - script: |
