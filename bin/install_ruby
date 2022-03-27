@@ -18,7 +18,7 @@ eval "$($HOME/.rbenv/bin/rbenv init -)"
 ### rubies #####################################################################
 
 #ruby_version="2.7.5"
-ruby_version="3.0.3"
+ruby_version="3.1.1"
 "$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"
 "$HOME/.rbenv/bin/rbenv" rehash
 "$HOME/.rbenv/bin/rbenv" shell "$ruby_version"
