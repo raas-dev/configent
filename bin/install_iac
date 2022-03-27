@@ -22,13 +22,13 @@ fi
 
 ### linters ####################################################################
 
+brew install hadolint
 brew install semgrep
 brew install shellcheck
 
 ### scanners ###################################################################
 
-brew install aquasecurity/trivy/trivy
-brew install goodwithtech/r/dockle
+brew install trivy
 
 ### docker #####################################################################
 
