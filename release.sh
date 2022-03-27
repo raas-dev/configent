@@ -17,7 +17,12 @@ fi
 # https://github.com/commitizen-tools/commitizen
 pip3 install --quiet --user --upgrade commitizen
 
-! "$HOME/.local/bin/cz" bump --dry-run && exit 0
+if [[ -n "$prerelease_type" ]]; then
+  echo "Creating pre-release ($prerelease_type)"
+  "$HOME/.local/bin/cz" bump --prerelease "$prerelease_type"
+else
+  "$HOME/.local/bin/cz" bump
+fi
 
 # prefer https://github.com/KeNaCo/auto-changelog over `cz changelog`
 # change target after https://github.com/KeNaCo/auto-changelog/pull/114 merged
@@ -34,11 +39,4 @@ and this project adheres to \
   --unreleased
 
 git add -A CHANGELOG.md
-
-if [[ -n "$prerelease_type" ]]; then
-  echo "Creating pre-release ($prerelease_type)"
-  "$HOME/.local/bin/cz" bump --changelog-to-stdout \
-    --prerelease "$prerelease_type"
-else
-  "$HOME/.local/bin/cz" bump --changelog-to-stdout
-fi
+git commit --amend --reuse-message HEAD
