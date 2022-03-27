@@ -138,5 +138,6 @@
     "editor.lineHeight": 15.5,
     "window.zoomLevel": 1,
     "gitlens.showWelcomeOnInstall": false,
-    "devskim.enableBestPracticeRules": true
+    "devskim.enableBestPracticeRules": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false
 }
