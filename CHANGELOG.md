@@ -7,19 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.6.0 (2022-03-27)
 
-### Fix
+#### New Features
 
-- **release**: Patch auto-changelog error with jinja2
+* (python): Update and use Python 3.10
+* (ruby): Upgrade Ruby to 3.1
+* (python): Downgrade to Python 3.9 due to broken packages
+* (vscode): Disable multiline paste warning
+* (aliases): Add naabu via nixery
+* (iac): Add hadolint for Dockerfile linting, remvoe dockle
+* (lima): Bootstrap on background
+#### Fixes
 
-### Feat
+* (release): Patch auto-changelog error with jinja2
 
-- **python**: Update and use Python 3.10
-- **ruby**: Upgrade Ruby to 3.1
-- **python**: Downgrade to Python 3.9 due to broken packages
-- **vscode**: Disable multiline paste warning
-- **aliases**: Add naabu via nixery
-- **iac**: Add hadolint for Dockerfile linting, remvoe dockle
-- **lima**: Bootstrap on background
+Full set of changes: [`1.5.0...1.6.0`](https://github.com/raas-dev/configent/compare/1.5.0...1.6.0)
 
 ## 1.5.0 (2022-02-16)
 
