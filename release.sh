@@ -20,7 +20,8 @@ pip3 install --quiet --user --upgrade commitizen
 ! "$HOME/.local/bin/cz" bump --dry-run && exit 0
 
 # prefer https://github.com/KeNaCo/auto-changelog over `cz changelog`
-pip3 install --quiet --user --upgrade auto-changelog
+# change target after https://github.com/KeNaCo/auto-changelog/pull/114 merged
+pip3 install --quiet --user --upgrade git+https://github.com/kapsner/auto-changelog.git
 
 "$HOME/.local/bin/auto-changelog" --description \
   "All notable changes to this project will be documented in this file.
