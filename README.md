@@ -87,19 +87,25 @@ If prefer `bash` instead, install the latest from brew and set it as default:
 
     install_bash
 
-## 🏗️ Docker and containerd
+## 🏗️ dockerd and containerd
 
-On macOS, these shims wrap the respective commands to run inside Lima VMs:
+Couple of things to understand:
 
-- `docker`: Runs docker cli and prefers rootless docker (no sudo required)
+- the two are different runtimes - if you used Docker Desktop, it was dockerd
+- containerd is the standard runtime of production kubernetes - thus prefer it
+- regardless of runtime, `sudo` is always a bad idea in terms security
+
+On macOS, these shims wrap the respective runtime CLIs to run inside lima VMs:
+
+- `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
-- `nerdctl`: Runs nerdctl (incl. nerdctl compose) in containerd user context
+- `nerdctl`: Runs nerdctl (also `nerdctl compose`) in user context containerd
 
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
 The shims create or start the necessary virtual machines, a lima VM named
-'ubuntu' for running rootless Docker and a lima VM 'rancher' for containerd.
+'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
 In addition, 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes.
 
