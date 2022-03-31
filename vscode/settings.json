@@ -139,5 +139,6 @@
     "window.zoomLevel": 1,
     "gitlens.showWelcomeOnInstall": false,
     "devskim.enableBestPracticeRules": true,
-    "terminal.integrated.enableMultiLinePasteWarning": false
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.minimumContrastRatio": 1
 }
