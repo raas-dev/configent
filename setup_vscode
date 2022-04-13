@@ -22,6 +22,7 @@ ln -snvi "$this_path/vscode" "$user_path"
 if which code >/dev/null 2>&1; then
   # code --list-extensions | xargs -L 1 echo "code --force --install-extension"
   code --force --install-extension Arjun.swagger-viewer
+  code --force --install-extension azapi-vscode.azapi
   code --force --install-extension bencoleman.armview
   code --force --install-extension CoenraadS.bracket-pair-colorizer
   code --force --install-extension dbaeumer.vscode-eslint
@@ -30,20 +31,24 @@ if which code >/dev/null 2>&1; then
   code --force --install-extension EditorConfig.EditorConfig
   code --force --install-extension eg2.vscode-npm-script
   code --force --install-extension esbenp.prettier-vscode
+  code --force --install-extension foxundermoon.shell-format
   code --force --install-extension golang.go
   code --force --install-extension Gruntfuggly.activitusbar
   code --force --install-extension hashicorp.terraform
   code --force --install-extension humao.rest-client
   code --force --install-extension mermade.openapi-lint
   code --force --install-extension ms-azure-devops.azure-pipelines
+  code --force --install-extension ms-azuretools.vscode-azureresourcegroups
   code --force --install-extension ms-azuretools.vscode-bicep
   code --force --install-extension ms-azuretools.vscode-docker
   code --force --install-extension MS-CST-E.vscode-devskim
   code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
+  code --force --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
   code --force --install-extension ms-python.python
   code --force --install-extension ms-python.vscode-pylance
   code --force --install-extension ms-toolsai.jupyter
   code --force --install-extension ms-toolsai.jupyter-keymap
+  code --force --install-extension ms-toolsai.jupyter-renderers
   code --force --install-extension ms-vscode.azure-account
   code --force --install-extension ms-vscode.powershell
   code --force --install-extension ms-vsliveshare.vsliveshare
@@ -51,6 +56,8 @@ if which code >/dev/null 2>&1; then
   code --force --install-extension naumovs.color-highlight
   code --force --install-extension Perkovec.emoji
   code --force --install-extension redhat.vscode-yaml
+  code --force --install-extension Semgrep.semgrep
+  code --force --install-extension stevejpurves.cucumber
   code --force --install-extension stkb.rewrap
   code --force --install-extension tamasfe.even-better-toml
   code --force --install-extension teabyii.ayu
