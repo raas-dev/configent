@@ -18,7 +18,7 @@
   cb = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   co = checkout
   in = pull --rebase
-  out = !"git push --set-upstream --follow-tags"
+  out = !"git push --set-upstream && git push --tags"
   r = diff --name-only --diff-filter=U
   rab = !"git add -A && git rebase --abort"
   rac = !"git add -A && git rebase --continue"
