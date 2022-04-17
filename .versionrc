@@ -1,0 +1,7 @@
+{
+  "tagPrefix": "",
+  "skip": {
+    "commit": true,
+    "tag": true
+  }
+}
