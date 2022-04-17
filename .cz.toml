@@ -1,5 +1,5 @@
 [tool.commitizen]
-name = "cz_conventional_commits"
+bump_message = "chore: Release $new_version"
 tag_format = "$version"
 version = "1.7.0"
 version_files = [
