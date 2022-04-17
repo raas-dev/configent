@@ -33,13 +33,13 @@ manager or by Xcode cmdline tools on macOS.
 
 ### GUI apps
 
-Homebrew Cask or Snaps are not installed by default, as server/VM is assumed.
+Homebrew Cask or Snaps are not installed by default, as a server/VM is assumed.
 
 Re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
 
 ## 🔋's included
 
-Script `bootstrap` runs the three scripts in the order documented below.
+Script `bootstrap` runs the three below scripts in the order described.
 
 ### ⚙️ symlink_dotfiles
 
@@ -93,7 +93,7 @@ Couple of things to understand:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
 - containerd is the standard runtime of production kubernetes - thus prefer it
-- regardless of runtime, `sudo` is always a bad idea in terms security
+- regardless of runtime, `sudo` is always a bad idea in terms of security
 
 On macOS, these shims wrap the respective runtime CLIs to run inside lima VMs:
 
@@ -115,7 +115,7 @@ containers.
 ## 🔨 Development
 
 Tested on:
-- macOS Catalina (10.15), Big Sur (11) and Monterey (12)
+- macOS Catalina (10), Big Sur (11) and Monterey (12)
 - Ubuntu Linux 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
 - Fedora Linux 35
