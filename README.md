@@ -1,4 +1,4 @@
-# c🌀nfigent (1.6.2)
+# c🌀nfigent (1.7.0)
 
 [![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)](https://github.com/raas-dev/configent/tags)
 
@@ -26,7 +26,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.6.2/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.7.0/install.sh | sh
 
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
