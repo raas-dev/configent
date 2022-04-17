@@ -313,8 +313,8 @@ alias npx-fx='npx -y fx'
 # Simple, zero-configuration command-line http server
 alias npx-http-server='npx -y http-server'
 
-# Generate CHANGELOG.md
-alias npx-auto-changelog='npx -y auto-changelog'
+# Bump version and generate CHANGELOG.md
+alias npx-standard-version='npx -y standard-version'
 
 # https://github.com/kefranabg/readme-md-generator
 alias npx-readme-md-generator='npx -y readme-md-generator'
