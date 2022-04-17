@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# update changelog: https://github.com/conventional-changelog/standard-version
+# tag, replace version in files: https://github.com/commitizen-tools/commitizen
+
 prerelease_type="$1"
 
 branch="$(git branch --show-current)"
@@ -13,15 +16,13 @@ if [[ -n "$(git status -s)" ]]; then
   exit 1
 fi
 
-# https://github.com/conventional-changelog/standard-version
-npx -y standard-version
-
-# https://github.com/commitizen-tools/commitizen
 pip3 install --quiet --user --upgrade commitizen
 
 if [[ -n "$prerelease_type" ]]; then
   echo "Creating pre-release ($prerelease_type)"
+  npx -y standard-version --prerelease "$prerelease_type"
   "$HOME/.local/bin/cz" bump --prerelease "$prerelease_type"
 else
+  npx -y standard-version
   "$HOME/.local/bin/cz" bump
 fi
