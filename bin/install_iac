@@ -32,7 +32,11 @@ brew install trivy
 
 ### docker #####################################################################
 
-[[ $OSTYPE == darwin* ]] && brew install lima
+if [[ $OSTYPE == darwin* ]]; then
+  brew install lima
+else
+  brew install ctop
+fi
 
 ### network ####################################################################
 
