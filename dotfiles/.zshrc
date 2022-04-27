@@ -29,12 +29,12 @@ if which zplug &>/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-  zplug "zsh-users/zsh-history-substring-search", from:github, defer:3
+  zplug "zsh-users/zsh-history-substring-search", defer:3
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
 
-  zplug "zsh-users/zsh-autosuggestions", from:github
-  zplug "bobsoppe/zsh-ssh-agent", use:ssh-agent.zsh, from:github
+  zplug "zsh-users/zsh-autosuggestions"
+  zplug "bobsoppe/zsh-ssh-agent", use:ssh-agent.zsh
   zplug "plugins/colored-man-pages", from:oh-my-zsh
 
   zplug check || zplug install
