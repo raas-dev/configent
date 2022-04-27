@@ -27,7 +27,7 @@ fi
 
 if which zplug &>/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
-  zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
   zplug "zsh-users/zsh-history-substring-search", from:github, defer:3
   bindkey '^[[A' history-substring-search-up
