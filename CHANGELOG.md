@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/raas-dev/configent/compare/1.7.0...1.8.0) (2022-04-29)
+
+
+### Features
+
+* **docker:** Brew install ctop on GNU/Linux ([698daed](https://github.com/raas-dev/configent/commit/698daed3430c9d9a7a73959854d5f03a3a12cf26))
+
+
+### Refactor
+
+* **zsh:** Remove zplug plugin source as github by default ([7186403](https://github.com/raas-dev/configent/commit/718640380d894518c4f6449b6dcd869c861bdb79))
+
+
+### Fixes
+
+* **git:** Alias git out push changes and tags ([46c5716](https://github.com/raas-dev/configent/commit/46c57164b6454b58dd76065f794343c430c04981))
+* **python:** Use brew to install pre-requisites for Pythons ([1ceb0ce](https://github.com/raas-dev/configent/commit/1ceb0ce25729e5386af535e49c9cc70dc1590e98))
+* **release:** Add updating CHANGELOG for prereleases ([576c93c](https://github.com/raas-dev/configent/commit/576c93c61b509949ac3aee292fa803b94d948c2b))
+* **vscode:** Fix kubectl mac path ([9e63bbb](https://github.com/raas-dev/configent/commit/9e63bbbceb36eb5ca6312d725cae39ed6bb1f7de))
+* **zsh:** Load zsh-syntax-highlighting ([6091d66](https://github.com/raas-dev/configent/commit/6091d6620fdba4d8913293ba0c8137193cf4fab7))
+
 ## [1.7.0](https://github.com/raas-dev/configent/compare/1.6.1...1.7.0) (2022-04-17)
 
 
