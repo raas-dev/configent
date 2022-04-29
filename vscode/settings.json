@@ -142,5 +142,6 @@
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.minimumContrastRatio": 1,
     "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
-    "vscode-kubernetes.kubectl-path.mac": "/usr/local/bin/kubectl"
+    "vscode-kubernetes.kubectl-path.mac": "",
+    "vscode-kubernetes.kubectl-path.windows": ""
 }
