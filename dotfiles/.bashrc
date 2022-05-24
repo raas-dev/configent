@@ -7,7 +7,19 @@
 # quit if no prompt is present - shell is not interactive
 [[ -z $PS1 ]] && return
 
-export SHELL="$(which bash)"
+if [[ $OSTYPE == darwin* ]]; then
+  if [[ -x "/opt/homebrew/bin/bash" ]]; then
+    export SHELL="/opt/homebrew/bin/bash"
+  elif [[ -x "/usr/local/bin/bash" ]]; then
+    export SHELL="/usr/local/bin/bash"
+  fi
+else
+  if [[ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]]; then
+    export SHELL="/home/linuxbrew/.linuxbrew/bin/bash"
+  elif [[ -x "$HOME/.linuxbrew/bin/bash" ]]; then
+    export SHELL="$HOME/.linuxbrew/bin/bash"
+  fi
+fi
 
 alias r=". \$HOME/.bashrc"
 

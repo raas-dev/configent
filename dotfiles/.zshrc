@@ -3,7 +3,19 @@
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
-export SHELL="$(which zsh)"
+if [[ $OSTYPE == darwin* ]]; then
+  if [[ -x "/opt/homebrew/bin/zsh" ]]; then
+    export SHELL="/opt/homebrew/bin/zsh"
+  elif [[ -x "/usr/local/bin/zsh" ]]; then
+    export SHELL="/usr/local/bin/zsh"
+  fi
+else
+  if [[ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]]; then
+    export SHELL="/home/linuxbrew/.linuxbrew/bin/zsh"
+  elif [[ -x "$HOME/.linuxbrew/bin/zsh" ]]; then
+    export SHELL="$HOME/.linuxbrew/bin/zsh"
+  fi
+fi
 
 alias r=". \$HOME/.zshrc"
 
