@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/raas-dev/configent/compare/1.8.0...1.9.0) (2022-05-24)
+
+
+### Features
+
+* **lima:** Add hostResolver for Docker ([b37ba2c](https://github.com/raas-dev/configent/commit/b37ba2c73557203c4d1f417c4b46ac57a32436cd))
+* **lima:** Update images ([43492f7](https://github.com/raas-dev/configent/commit/43492f7c430e9c2c0d3ee5547f938b3b5bb3ff9d))
+
+
+### Fixes
+
+* **shell:** Fix export SHELL on brew installed shells ([5cafd07](https://github.com/raas-dev/configent/commit/5cafd072b887cf23207082a820f234ad8529d4b3))
+
 ## [1.8.0](https://github.com/raas-dev/configent/compare/1.7.0...1.8.0) (2022-04-29)
 
 
