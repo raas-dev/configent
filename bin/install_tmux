@@ -21,8 +21,7 @@ if ! which brew &>/dev/null; then
 fi
 
 brew tap z80oolong/tmux
-
-tmux_version=3.2
+tmux_version="3.2"
 brew install "tmux@$tmux_version"
 brew link "tmux@$tmux_version"
 
