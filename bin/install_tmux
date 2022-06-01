@@ -20,10 +20,14 @@ if ! which brew &>/dev/null; then
   eval_brew
 fi
 
-#brew tap z80oolong/tmux
-#brew install tmux@3.1c
+brew tap z80oolong/tmux
 
-brew install tmux
+tmux_version=3.2
+brew install "tmux@$tmux_version"
+brew link "tmux@$tmux_version"
+
+# broken: termcap on macOS (12.4)
+#brew install tmux
 
 ### Tpm ########################################################################
 
