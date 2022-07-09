@@ -144,6 +144,7 @@ alias w='which -a'
 alias x='pkill -i -f'
 alias y='cht.sh'
 alias z='whatlistens'
+alias §='got -o -s en -t fi'
 
 ### Vim ########################################################################
 
