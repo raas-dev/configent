@@ -47,4 +47,4 @@ brew install --cask visual-studio-code
 
 # Finder quick look plugins
 # https://github.com/sindresorhus/quick-look-plugins
-# brew install --cask qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
+#brew install --cask qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo

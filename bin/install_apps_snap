@@ -31,13 +31,13 @@ $SUDO snap install code --classic
 $SUDO snap install brave
 
 # Google Cloud SDK
-# $SUDO snap install google-cloud-sdk --classic
+#$SUDO snap install google-cloud-sdk --classic
 
 # LibreOffice
-# $SUDO snap install libreoffice
+#$SUDO snap install libreoffice
 
 # OpenDrive (Google Drive)
-# $SUDO snap install odrive-unofficial
+#$SUDO snap install odrive-unofficial
 
 # powershell
 $SUDO snap install powershell --classic

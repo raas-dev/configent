@@ -25,5 +25,5 @@ npm install -g yarn
 
 ### Jupyter ####################################################################
 
-# jupyter labextension install @jupyter-widgets/jupyterlab-manager
-# npm install -g configurable-http-proxy
+#jupyter labextension install @jupyter-widgets/jupyterlab-manager
+#npm install -g configurable-http-proxy

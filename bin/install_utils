@@ -54,10 +54,10 @@ if [[ $OSTYPE == darwin* ]]; then
   # GNU utils are g-prefixed (non-g symlinks are prepended to PATH in .profile)
   brew install coreutils
   brew install findutils
-  # brew install gnu-getopt
-  # brew install gnu-indent
-  # brew install gnu-sed
-  # brew install gnu-tar
-  # brew install gnu-time
-  # brew install gnu-which
+  #brew install gnu-getopt
+  #brew install gnu-indent
+  #brew install gnu-sed
+  #brew install gnu-tar
+  #brew install gnu-time
+  #brew install gnu-which
 fi
