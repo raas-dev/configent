@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/raas-dev/configent/compare/1.9.0...1.10.0) (2022-07-12)
+
+
+### Features
+
+* **got:** Add got (google translator) cli ([112373a](https://github.com/raas-dev/configent/commit/112373af913834b44c84127eec8163870a188957))
+
+
+### Fixes
+
+* **tmux:** Use tmux 3.2 due to broken termcap on 3.3 ([ed4c6d3](https://github.com/raas-dev/configent/commit/ed4c6d321dd2653bd098ad85afb78c6d0c6f2443))
+
 ## [1.9.0](https://github.com/raas-dev/configent/compare/1.8.0...1.9.0) (2022-05-24)
 
 
