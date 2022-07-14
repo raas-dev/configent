@@ -130,8 +130,8 @@ For the history of fixes, added and removed features, see
 Install or upgrade [pre-commit](https://pre-commit.com/) and the hooks:
 
     pip3 install --user --upgrade pre-commit
-    "$HOME/.local/bin/pre-commit" install --hook-type pre-commit
-    "$HOME/.local/bin/pre-commit" install --hook-type commit-msg
+    pre-commit install --hook-type pre-commit
+    pre-commit install --hook-type commit-msg
 
 ### Known bugs
 
