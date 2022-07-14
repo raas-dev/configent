@@ -32,7 +32,7 @@ If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
 
 Then the respective tag from this git repo is cloned as `$HOME/configent`,
-or main branch is pulled in the directory if the directory already exists.
+or main branch is pulled on top of it if the git working copy already exists.
 
 ### GUI apps
 
