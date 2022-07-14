@@ -24,14 +24,15 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 ## 💣 Up
 
-This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
+**Note: The script overrides your current dotfiles at $HOME without prompting.**
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.11.0/install.sh | sh
 
-**Note: The script overrides your current dotfiles at $HOME without prompting.**
-
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
+
+Then the respective tag from this git repo is cloned to `$HOME/configent`,
+or the current master is pulled in the directory if it already exists.
 
 ### GUI apps
 
