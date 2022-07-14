@@ -111,7 +111,7 @@ The shims create or start the necessary virtual machines, a lima VM named
 
 In addition, 'rancher' VM includes [k3s](https://k3s.io/) for local Kubernetes.
 
-See `dotfiles/.aliases` for `vm4...` for starting different distros as lima VMs.
+See `dotfiles/.aliases` for `vm4...` for starting various distros as lima VMs.
 
 See aliases `d`/`n` as generic shortcuts for `docker`/`nerdctl` containers.
 
@@ -141,7 +141,7 @@ Install or upgrade [pre-commit](https://pre-commit.com/) and the hooks:
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-#### Unscoped
+#### Out of scope
 
 - Homebrew on Linux is not officially supported on aarch64
     - Hack1: Installer can be patched to skip the aarch64 check (2021)
