@@ -118,12 +118,12 @@ See aliases `d`/`n` as generic shortcuts for `docker`/`nerdctl` containers.
 ## 🔨 Development
 
 Tested on:
-- macOS Catalina (10), Big Sur (11) and Monterey (12)
-- Ubuntu Linux 21.10 (Impish Indri) and 22.04 (Jammy Jellyfish)
+- macOS Monterey (12), Big Sur (11) and Catalina (10)
+- Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
-- Fedora Linux 35 and 36
+- Fedora Linux 36 and 35
 - Rocky Linux 8.5
-- Alpine Linux 3.14 and 3.15
+- Alpine Linux 3.15 and 3.14
 
 For the history of fixes, added and removed features, see
 [CHANGELOG.md](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
@@ -141,12 +141,12 @@ Install or upgrade [pre-commit](https://pre-commit.com/) and the hooks:
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-#### Won't fix
+#### Unscoped
 
 - Homebrew on Linux is not officially supported on aarch64
-    - Hack1: Installer can be patched to skip the aarch64 check
-    - Hack2: Requirement ruby 2.6.8 can be installed system-wide from source
-    - Showstopper: Most formulas do not have aarch64 bottle
-        - Building all dependencies from source would be tedious task
-- Rocky Linux 8.5 has serious issues booting on aarch64
-    - Rootless Docker installer (sh) does not work on x86_64 either
+    - Hack1: Installer can be patched to skip the aarch64 check (2021)
+    - Hack2: Requirement Ruby 2.6.8 can be installed system-wide from source
+    - Showstopper: Most formulaes do not have aarch64 binaries ("bottles")
+        - Building all dependencies from source would take really long time
+- Rocky Linux 8.5 in Lima VM has some issues booting on aarch64 (2022)
+- Rootless Docker installer (sh) does not work on x86_64/aarch64 Rocky Linux 8.5
