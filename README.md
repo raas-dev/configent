@@ -1,4 +1,4 @@
-# c🌀nfigent (1.10.0)
+# c🌀nfigent (1.11.0)
 
 [![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)](https://github.com/raas-dev/configent/tags)
 
@@ -26,7 +26,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 This repo is cloned to `$HOME/configent`, or pulled if it already exists there:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.10.0/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.11.0/install.sh | sh
 
 **Note: The script overrides your current dotfiles at $HOME without prompting.**
 

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/raas-dev/configent/compare/1.10.0...1.11.0) (2022-07-14)
+
+
+### Features
+
+* **aliases:** Add alias for translating to English ([e2118bb](https://github.com/raas-dev/configent/commit/e2118bb92c4d5951ed5959656285e4861f42aaeb))
+
+
+### Fixes
+
+* **pre-commit:** Fix pre-commit path in docs ([b037750](https://github.com/raas-dev/configent/commit/b0377507e48c2d9e2eb17cff7b71b0275b802288))
+
+
+### Documentation
+
+* **README:** Add note on overriding existing dotfiles ([14e51c0](https://github.com/raas-dev/configent/commit/14e51c021110ee54457e6891b61c2d7bbde641b0))
+* **README:** Fix typos ([23beaa0](https://github.com/raas-dev/configent/commit/23beaa0f04699ce9fe0fa76f6d4ab227abee3373))
+* **README:** Update distros tested on ([eed6b65](https://github.com/raas-dev/configent/commit/eed6b659cf807f63e4ecb07b5af317a3d1dbb2c1))
+
 ## [1.10.0](https://github.com/raas-dev/configent/compare/1.9.0...1.10.0) (2022-07-12)
 
 
