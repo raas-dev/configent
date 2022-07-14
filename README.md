@@ -60,7 +60,7 @@ All the binaries in `bin/` are available by name from now on.
 MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky) and
 Alpine Linux are supported.
 
-**On ARM64 Linux distros, Homebrew is skipped (see Known bugs).**
+**On ARM64 Linux distros, Homebrew is skipped (see Known bugs further below).**
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
@@ -85,7 +85,7 @@ Set the brew installed `zsh` as the user's default shell:
 
     install_zsh
 
-If prefer `bash` instead, install the latest from brew and set it as default:
+If you prefer `bash` instead, brew the latest Bash and set it as default:
 
     install_bash
 
@@ -94,8 +94,8 @@ If prefer `bash` instead, install the latest from brew and set it as default:
 Couple of things to understand:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
-- containerd is the standard runtime of production kubernetes - thus prefer it
-- regardless of runtime, `sudo` is always a bad idea in terms of security
+- containerd is the de facto runtime in production Kubernetes - thus prefer it
+- regardless of runtime, `sudo` is always a bad idea when it comes to security
 
 On macOS, these shims wrap the respective runtime CLIs to run inside lima VMs:
 
@@ -109,10 +109,11 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
-In addition, 'rancher' VM has [k3s](https://k3s.io/) for local Kubernetes.
+In addition, 'rancher' VM includes [k3s](https://k3s.io/) for local Kubernetes.
 
-See aliases for creating additional VMs and aliases `d` and `n` for running
-containers.
+See `dotfiles/.aliases` for `vm4...` for starting different distros as lima VMs.
+
+See aliases `d`/`n` as generic shortcuts for `docker`/`nerdctl` containers.
 
 ## 🔨 Development
 
@@ -149,4 +150,3 @@ a pull request.
         - Building all dependencies from source would be tedious task
 - Rocky Linux 8.5 has serious issues booting on aarch64
     - Rootless Docker installer (sh) does not work on x86_64 either
-- Podman does not seem very well with most containers (as of 2021-12)
