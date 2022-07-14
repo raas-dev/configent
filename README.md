@@ -31,8 +31,8 @@ Things are happening per user, but `sudo` may be required for some OS features.
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
 
-Then the respective tag from this git repo is cloned to `$HOME/configent`,
-or the current master is pulled in the directory if it already exists.
+Then the respective tag from this git repo is cloned as `$HOME/configent`,
+or main branch is pulled in the directory if the directory already exists.
 
 ### GUI apps
 
