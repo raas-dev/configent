@@ -116,11 +116,11 @@ containers.
 
 Tested on:
 - macOS Catalina (10), Big Sur (11) and Monterey (12)
-- Ubuntu Linux 21.10 (Impish Indri)
+- Ubuntu Linux 21.10 (Impish Indri) and 22.04 (Jammy Jellyfish)
 - Debian Linux 11 (bullseye)
-- Fedora Linux 35
+- Fedora Linux 35 and 36
 - Rocky Linux 8.5
-- Alpine Linux 3.14.3
+- Alpine Linux 3.14 and 3.15
 
 For the history of fixes, added and removed features, see
 [CHANGELOG.md](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
