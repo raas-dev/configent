@@ -117,7 +117,6 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias _='bat --show-all'
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat --theme=base16'
 alias c='kalker'
@@ -145,6 +144,8 @@ alias x='pkill -i -f'
 alias y='cht.sh'
 alias z='whatlistens'
 alias §='got -o -s en -t fi'
+alias ,='got -o -s fi -t en'
+alias _='bat --show-all'
 
 ### Vim ########################################################################
 
