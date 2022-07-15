@@ -1,6 +1,6 @@
 # c🌀nfigent (1.11.0)
 
-[![Latest version](https://img.shields.io/github/v/tag/raas-dev/configent?label=latest&sort=semver)](https://github.com/raas-dev/configent/tags)
+[![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 
 No startup pitches, I am an opinionated config manager and machine bootstrapper.
 
@@ -61,7 +61,7 @@ All the binaries in `bin/` are available by name from now on.
 MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky) and
 Alpine Linux are supported.
 
-**On ARM64 Linux distros, Homebrew is skipped (see Known bugs further below).**
+**On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
@@ -118,7 +118,7 @@ See aliases `d`/`n` as generic shortcuts for `docker`/`nerdctl` containers.
 
 ## 🔨 Development
 
-Tested on:
+As of 2022-07, tested on:
 - macOS Monterey (12), Big Sur (11) and Catalina (10)
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
@@ -126,12 +126,9 @@ Tested on:
 - Rocky Linux 8.5
 - Alpine Linux 3.15 and 3.14
 
-For the history of fixes, added and removed features, see
-[CHANGELOG.md](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
-
 ### Contributing
 
-Install or upgrade [pre-commit](https://pre-commit.com/) and the hooks:
+Install or upgrade [pre-commit](https://pre-commit.com/) and install the hooks:
 
     pip3 install --user --upgrade pre-commit
     pre-commit install --hook-type pre-commit
