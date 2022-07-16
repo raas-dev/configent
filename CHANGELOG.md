@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/raas-dev/configent/compare/1.13.0...1.14.0) (2022-07-16)
+
+
+### Features
+
+* **lima:** Add support for Arch Linux ([b31278f](https://github.com/raas-dev/configent/commit/b31278fd9b5ec9b2e59a11b7bed06edc8318f985))
+* **pacman:** Add installing MS core fonts ([d2419c2](https://github.com/raas-dev/configent/commit/d2419c24c537a66e5c6da79ce2ab917a81b0d78a))
+* **yay:** Use yay over pacman if yay is installed ([be968cb](https://github.com/raas-dev/configent/commit/be968cb6c866fba8a22cddb91189a2c4dd7146d3))
+
+
+### Documentation
+
+* **arch:** Note bug with snapd installation on Arch ([60f74a0](https://github.com/raas-dev/configent/commit/60f74a000660aaa53bab28a2b14520d9e5512087))
+
+
+### Fixes
+
+* **pacman:** Add gcc for brew ([83b15ab](https://github.com/raas-dev/configent/commit/83b15ab40e2b90c229760cd1cab8e9bbda5c97ff))
+* **pacman:** Fix installing snap on Arch Linux ([544988a](https://github.com/raas-dev/configent/commit/544988acc283347b882882779adf6a5d40e831b4))
+* **posix:** Use  over  for checking existence ([747a6f1](https://github.com/raas-dev/configent/commit/747a6f1019775b44f6a1b0facde2c491c3159f67))
+* **starship:** Double command timeout due to git ([42ebe04](https://github.com/raas-dev/configent/commit/42ebe047a03ee3d97b971a5274bbb66adef4ece6))
+
 ## [1.13.0](https://github.com/raas-dev/configent/compare/1.12.0...1.13.0) (2022-07-16)
 
 

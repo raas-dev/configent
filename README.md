@@ -1,4 +1,4 @@
-# c🌀nfigent (1.13.0)
+# c🌀nfigent (1.14.0)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md) [![License](https://img.shields.io/github/license/raas-dev/configent?label=license)](https://github.com/raas-dev/configent/blob/main/LICENSE)
 
@@ -38,7 +38,7 @@ Tested on:
 
 **Note: The script overrides your current dotfiles at $HOME without prompting.**
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.13.0/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.14.0/install.sh | sh
 
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
