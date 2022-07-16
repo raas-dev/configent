@@ -36,7 +36,7 @@ $SUDO pacman --noconfirm --needed -S bash coreutils bind file findutils \
   git htop lsb-release procps traceroute zip unzip wget which whois
 
 # pbcopy/pbpaste like experience
-#$SUDO pacman --noconfirm --needed -S -y xsel
+#$SUDO pacman --noconfirm --needed -S xsel
 
 # Docker (rootless)
 $SUDO pacman --noconfirm --needed -S fuse-overlayfs iptables
@@ -45,10 +45,13 @@ systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
-# Yay-bin
+# Yay
 git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
   git -C "/tmp/yay-bin" pull --rebase
 (cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
+
+# Microsoft TrueType fonts (accepts EULA)
+yay -S --noconfirm --needed ttf-ms-fonts
 
 # Snap
 yay -S --noconfirm --needed snapd
