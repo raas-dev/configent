@@ -33,7 +33,7 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-Things are happening per user, but `sudo` may be required for some OS features.
+Things are happening per user, but `sudo` may be used for some OS features.
 
 ## 💣 Up
 
@@ -71,7 +71,7 @@ All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
-MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, is supported.
+MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
 **On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
 
@@ -82,7 +82,7 @@ Order of installation:
 3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 4. Vim bundles, and if `brew` is present, Neovim
 5. Rust, Go, Node, Python and Ruby version managers and the language versions
-6. Zsh, tmux, command-line utilities and infrastructure-as-code tools
+6. Zsh, tmux, command-line utilities, cloud and infrastructure-as-code tools
 
 ### 🖊️ setup_vscode
 
