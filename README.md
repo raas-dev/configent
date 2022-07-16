@@ -22,6 +22,17 @@ Features:
 
 Things are happening per user, but `sudo` may be required for some OS features.
 
+Tested on:
+
+- macOS Monterey (12), Big Sur (11) and Catalina (10)
+- Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
+- Debian Linux 11 (bullseye)
+- Fedora Linux 36 and 35
+- Rocky Linux 8.6 and 8.5
+- CentOS Stream 8
+- AlmaLinux 8.6
+- Alpine Linux 3.16, 3.15 and 3.14
+
 ## 💣 Up
 
 **Note: The script overrides your current dotfiles at $HOME without prompting.**
@@ -112,21 +123,13 @@ The shims create or start the necessary virtual machines, a lima VM named
 
 In addition, 'rancher' VM includes [k3s](https://k3s.io/) for local Kubernetes.
 
-See `dotfiles/.aliases` for `vm4...` for starting various distros as lima VMs.
-
-See aliases `d`/`n` as generic shortcuts for `docker`/`nerdctl` containers.
+Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
+`docker` or `nerdctl` respectively, as long as the current working directory has
+`Dockerfile` present. The host-container mapped ports are output by the aliases.
 
 ## 🔨 Development
 
-As of 2022-07, tested on:
-- macOS Monterey (12), Big Sur (11) and Catalina (10)
-- Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
-- Debian Linux 11 (bullseye)
-- Fedora Linux 36 and 35
-- Rocky Linux 8.6 and 8.5
-- CentOS Stream 8
-- AlmaLinux 8.6
-- Alpine Linux 3.16, 3.15 and 3.14
+See `dotfiles/.aliases` for `vm4...` for starting various distros as lima VMs.
 
 ### Contributing
 
