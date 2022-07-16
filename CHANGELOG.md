@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/raas-dev/configent/compare/1.12.0...1.13.0) (2022-07-16)
+
+
+### Features
+
+* **lima:** Add Alpine Linux 3.16 support, note brew issues ([39533a7](https://github.com/raas-dev/configent/commit/39533a7f8edbe924203ddd014ddc679e6a4169e0))
+* **lima:** Add CentOS Stream 8 and AlmaLinux 8.6 ([38a26d6](https://github.com/raas-dev/configent/commit/38a26d6cf097b670bf7340b5fe80f2bc8e1bcc80))
+* **lima:** Add preliminary support for Arch Linux ([ebbc1ab](https://github.com/raas-dev/configent/commit/ebbc1abf5296d8c98136c5e636ee644bc9a547a0))
+* **lima:** Add Rocky Linux 3.6 support ([cc19db8](https://github.com/raas-dev/configent/commit/cc19db808533e8dee87ee59797c0030b8a61e223))
+
+
+### Refactor
+
+* **podman:** Rename VM podman-testing -> podman-ubuntu ([65dae26](https://github.com/raas-dev/configent/commit/65dae264e36dec1f24fa26ede141e2c021c782ee))
+
+
+### Fixes
+
+* **pyenv:** Fix liblzma yum package name as prerequisite for Pythons ([05f8d95](https://github.com/raas-dev/configent/commit/05f8d9509d976d3c01b53d11370eb7f8af3e2cca))
+* **pyenv:** Install liblzma as prerequisite for Python ([49eb3ab](https://github.com/raas-dev/configent/commit/49eb3ab6cf5281c7ef20ca8bc34511ce4533ac5c))
+
+
+### Documentation
+
+* **README:** Add license/disclaimer badge ([8dea8ed](https://github.com/raas-dev/configent/commit/8dea8ed568a9080cc2947dfd070a3f007d73fb8e))
+* **README:** Reorganize ([68be721](https://github.com/raas-dev/configent/commit/68be7211b5eebbbd5f9dcbc679211f821935ceb2))
+
 ## [1.12.0](https://github.com/raas-dev/configent/compare/1.11.0...1.12.0) (2022-07-16)
 
 
