@@ -62,4 +62,5 @@ $SUDO loginctl enable-linger "$USER"
 $SUDO yum install -y fuse squashfuse # docker requirement for snap
 $SUDO yum install -y kernel-modules  # VM requirement for snap
 $SUDO yum install -y snapd
+$SUDO systemctl enable --now snapd.socket
 $SUDO ln -s /var/lib/snapd/snap /snap
