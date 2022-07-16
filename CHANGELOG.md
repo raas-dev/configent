@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/raas-dev/configent/compare/1.14.0...1.15.0) (2022-07-16)
+
+
+### Features
+
+* **lima:** Add support for Oracle Linux ([9d42af1](https://github.com/raas-dev/configent/commit/9d42af119dc7ba70428612a78baf0b0d42899c01))
+
+
+### Documentation
+
+* **README:** Add working distros ([719007f](https://github.com/raas-dev/configent/commit/719007f3f2b51c32ef5d249adb279ddabeae7a22))
+* **README:** Elaborate distros and tools ([d7109be](https://github.com/raas-dev/configent/commit/d7109be30a23fbd9d5854fabd16d08b47eeeba0b))
+
+
+### Fixes
+
+* **yum:** Fix lzma-sdk not available on Oracle Linux ([69b39dd](https://github.com/raas-dev/configent/commit/69b39dd6a27a1e72285a0176b115e8a170c6ae83))
+* **yum:** Fix systemctl enable snapd ([934001d](https://github.com/raas-dev/configent/commit/934001d37ae3deec05b5cdf1bd8d712ceb9a5a39))
+
 ## [1.14.0](https://github.com/raas-dev/configent/compare/1.13.0...1.14.0) (2022-07-16)
 
 
