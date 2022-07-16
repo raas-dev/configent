@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/raas-dev/configent/compare/1.11.0...1.12.0) (2022-07-16)
+
+
+### Features
+
+* **python:** Update Pythons ([f5123c3](https://github.com/raas-dev/configent/commit/f5123c3af6bcaa4e9951deedbe6180373764b1c6))
+* **ruby:** Update Rubies ([5f4af3f](https://github.com/raas-dev/configent/commit/5f4af3ffb9101a2da8fcbc3b1b3dfac96446a285))
+
+
+### Documentation
+
+* **README:** Clarify install.sh if repo already exists ([641cf21](https://github.com/raas-dev/configent/commit/641cf21200cd472179e372d5c23de4c712c3607d))
+* **README:** Clarify pulling working copy on install.sh ([5e373f8](https://github.com/raas-dev/configent/commit/5e373f8179624fbd80bd13c9fe752b9c6bb2eeeb))
+* **README:** Clarify setup ([0acff3e](https://github.com/raas-dev/configent/commit/0acff3e82b18ee5ac7accf301de8a76b5ba52cfa))
+* **README:** Fix typos ([cd1661a](https://github.com/raas-dev/configent/commit/cd1661a1c0858cd51636a55a974eb21bc5a32241))
+* **README:** Move changelog to top ([df5b1da](https://github.com/raas-dev/configent/commit/df5b1da4a00ec35560b6270cc9beae27c0067207))
+* **README:** Update known issues ([c3ddc49](https://github.com/raas-dev/configent/commit/c3ddc490fff9a50f82c10e40145030afb5e4a696))
+
 ## [1.11.0](https://github.com/raas-dev/configent/compare/1.10.0...1.11.0) (2022-07-14)
 
 

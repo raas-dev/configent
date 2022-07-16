@@ -1,4 +1,4 @@
-# c🌀nfigent (1.11.0)
+# c🌀nfigent (1.12.0)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 
@@ -26,7 +26,7 @@ Things are happening per user, but `sudo` may be required for some OS features.
 
 **Note: The script overrides your current dotfiles at $HOME without prompting.**
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.11.0/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.12.0/install.sh | sh
 
 If git is not present, it is installed first by the Linux distro's package
 manager or by Xcode cmdline tools on macOS.
