@@ -154,3 +154,5 @@ a pull request.
     - Showstopper: Most formulaes do not have aarch64 binaries ("bottles")
         - Building all dependencies from source would be too long as a bootstrap
 - Homebrew on Linux does not work on Alpine Linux, as Alpine Linux has no glibc
+- On Arch Linux, `snapd` install by `yay` fails -> no `snap` present (2022-07)
+  - error: `Package libseccomp was not found in the pkg-config search path.`
