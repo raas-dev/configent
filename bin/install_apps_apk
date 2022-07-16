@@ -32,7 +32,7 @@ $SUDO apk add gnupg
 
 # Common build requirements
 $SUDO apk add build-base gcompat ncurses \
-  openssl-dev readline-dev sqlite-dev bzip2-dev zlib-dev libffi-dev
+  openssl-dev readline-dev sqlite-dev bzip2-dev zlib-dev libffi-dev xz-dev
 
 # Utils
 $SUDO apk add bash coreutils curl bind-tools file findutils \
