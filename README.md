@@ -14,7 +14,7 @@ Principles:
 
 Features:
 
-- Bootstrap macOS/APT/YUM/Alpine Linux with one command, only `curl` required
+- Bootstrap macOS or common Linux distros with one command, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
 - In terminal, Rust and Go written utilities are always preferred due to speed
 - Multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
@@ -31,6 +31,7 @@ Tested on:
 - Rocky Linux 8.6 and 8.5
 - CentOS Stream 8
 - AlmaLinux 8.6
+- Arch Linux (as of 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
 ## 💣 Up
@@ -69,8 +70,9 @@ All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
-MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky, CentOS Stream,
-AlmaLinux) and Alpine Linux are supported.
+MacOS, APT-based distros (Ubuntu, Debian), YUM-based distros (Fedora, Rocky,
+CentOS Stream, AlmaLinux), pacman-based distros (Arch Linux) and Alpine Linux
+are supported.
 
 **On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
 
