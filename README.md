@@ -142,9 +142,8 @@ a pull request.
 #### Out of scope
 
 - Homebrew on Linux is not officially supported on aarch64
-    - Hack1: Installer can be patched to skip the aarch64 check (2021)
+    - Hack1: Installer can be patched to skip the aarch64 check
     - Hack2: Requirement Ruby 2.6.8 can be installed system-wide from source
     - Showstopper: Most formulaes do not have aarch64 binaries ("bottles")
-        - Building all dependencies from source would take really long time
-- Rocky Linux 8.5 in Lima VM has some issues booting on aarch64 (2022)
-- Rootless Docker installer (sh) does not work on x86_64/aarch64 Rocky Linux 8.5
+        - Building all dependencies from source would be too long as a bootstrap
+- Homebrew on Linux does not work on Alpine Linux, as Alpine Linux has no glibc
