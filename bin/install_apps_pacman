@@ -28,7 +28,7 @@ $SUDO pacman --noconfirm --needed -S ca-certificates
 $SUDO pacman --noconfirm --needed -S gnupg
 
 # Common build requirements
-$SUDO pacman --noconfirm --needed -S base-devel \
+$SUDO pacman --noconfirm --needed -S base-devel gcc \
   openssl readline sqlite3 bzip2 zlib libffi xz
 
 # Utils
