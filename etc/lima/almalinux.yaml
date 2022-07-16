@@ -1,0 +1,45 @@
+images:
+- location: "http://repo.almalinux.org/almalinux/8.6/cloud/x86_64/images/AlmaLinux-8-GenericCloud-8.6-20220513.x86_64.qcow2"
+  arch: "x86_64"
+  digest: "sha256:1563c0b09d98e7a606e1e737f1c810830aeb0cbe37ac5585f3696be62f0a32b4"
+- location: "http://repo.almalinux.org/almalinux/8.6/cloud/aarch64/images/AlmaLinux-8-GenericCloud-8.6-20220513.aarch64.qcow2"
+  arch: "aarch64"
+  digest: "sha256:d00960b398f257d83ade160eea954caf95a060ad5d74f3af9feeb17e0aa0b6e2"
+
+cpuType:
+  # Workaround for "vmx_write_mem: mmu_gva_to_gpa XXXXXXXXXXXXXXXX failed" on Intel Mac
+  # https://bugs.launchpad.net/qemu/+bug/1838390
+  x86_64: "Haswell-v4"
+
+firmware:
+  legacyBIOS: true
+
+mounts:
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: user
+    script: |
+      #!/bin/bash
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until pgrep rootlesskit; do sleep 3; done"; then
+        echo >&2 "rootlesskit (used by rootless docker) is not running"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest

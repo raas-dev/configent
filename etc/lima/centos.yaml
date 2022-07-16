@@ -1,0 +1,45 @@
+images:
+- location: "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-GenericCloud-8-20220125.1.x86_64.qcow2"
+  arch: "x86_64"
+  digest: "sha256:a25560ab39e10594ee7a4a1dadcba7bf303b7c3c41559b4a7fc3c522540a6672"
+- location: "https://cloud.centos.org/centos/8-stream/aarch64/images/CentOS-Stream-GenericCloud-8-20220125.1.aarch64.qcow2"
+  arch: "aarch64"
+  digest: "sha256:d973991085db0ca8373e1d9948440213cdc76b6acf8f17aa2aed2163c1347cbc"
+
+cpuType:
+  # Workaround for "vmx_write_mem: mmu_gva_to_gpa XXXXXXXXXXXXXXXX failed" on Intel Mac
+  # https://bugs.launchpad.net/qemu/+bug/1838390
+  x86_64: "Haswell-v4"
+
+firmware:
+  legacyBIOS: true
+
+mounts:
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: user
+    script: |
+      #!/bin/bash
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until pgrep rootlesskit; do sleep 3; done"; then
+        echo >&2 "rootlesskit (used by rootless docker) is not running"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest

@@ -58,8 +58,8 @@ All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
-MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky) and
-Alpine Linux are supported.
+MacOS, APT-distros (Ubuntu, Debian), YUM-distros (Fedora, Rocky, CentOS Stream,
+AlmaLinux) and Alpine Linux are supported.
 
 **On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
 
@@ -124,6 +124,8 @@ As of 2022-07, tested on:
 - Debian Linux 11 (bullseye)
 - Fedora Linux 36 and 35
 - Rocky Linux 8.6 and 8.5
+- CentOS Stream 8
+- AlmaLinux 8.6
 - Alpine Linux 3.16, 3.15 and 3.14
 
 ### Contributing
