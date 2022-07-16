@@ -1,6 +1,6 @@
 # c🌀nfigent (1.12.0)
 
-[![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
+[![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md) [![License](https://img.shields.io/github/license/raas-dev/configent?label=license)](https://github.com/raas-dev/configent/blob/main/LICENSE)
 
 No startup pitches, I am an opinionated config manager and machine bootstrapper.
 
