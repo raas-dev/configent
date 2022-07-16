@@ -16,6 +16,8 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     "$bin_path/install_apps_apt"
   elif which yum >/dev/null 2>&1; then
     "$bin_path/install_apps_yum"
+  elif which pacman >/dev/null 2>&1; then
+    "$bin_path/install_apps_pacman"
   elif which apk >/dev/null 2>&1; then
     "$bin_path/install_apps_apk"
     printf "Snap is not available on Alpine Linux, NO_SNAPS=true forced.\n"

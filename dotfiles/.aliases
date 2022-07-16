@@ -66,6 +66,13 @@ else
     alias dup='sudo snap refresh ; \
       sudo yum update -y && sudo yum autoremove -y ; \
       br'
+  elif which pacman &>/dev/null; then
+    alias up='sudo snap refresh ; \
+      sudo pacman -Suy ; \
+      br'
+    alias dup='sudo snap refresh ; \
+      sudo pacman -Suy ; \
+      br'
   elif which apk &>/dev/null; then
     alias up='sudo apk update && \
       sudo apk add --upgrade apk-tools && \
@@ -167,6 +174,7 @@ alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false"
 alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
 alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"
 
+alias vm4arch="limactl start \$HOME/local/etc/lima/archlinux.yaml --tty=false"
 alias vm4alpine="limactl start \$HOME/local/etc/lima/alpine.yaml --tty=false"
 
 ### Docker #####################################################################

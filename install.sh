@@ -52,6 +52,8 @@ if [ "$(uname -s)" = 'Linux' ]; then
         $SUDO apt-get install -y git
       elif which yum >/dev/null 2>&1; then
         $SUDO yum install -y git
+      elif which pacman >/dev/null 2>&1; then
+        $SUDO pacman --noconfirm --needed -S git which
       elif which apk >/dev/null 2>&1; then
         $SUDO apk add git coreutils # coreutils is required for ln -i
       else

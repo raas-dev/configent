@@ -1,0 +1,58 @@
+#!/bin/sh
+
+trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
+
+if [ "$(id -u)" = 0 ]; then
+  SUDO=''
+elif which sudo >/dev/null 2>&1; then
+  SUDO='sudo'
+
+  # Ask sudo password upfront
+  sudo -v
+
+  # Keep sudo alive until the script has finished
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 10
+fi
+
+set -e
+
+# Certificates
+$SUDO pacman --noconfirm --needed -S ca-certificates
+
+# Cryptography
+$SUDO pacman --noconfirm --needed -S gnupg
+
+# Common build requirements
+$SUDO pacman --noconfirm --needed -S base-devel \
+  openssl readline sqlite3 bzip2 zlib libffi xz
+
+# Utils
+$SUDO pacman --noconfirm --needed -S bash coreutils bind file findutils \
+  git htop lsb-release procps traceroute zip unzip wget whois
+
+# pbcopy/pbpaste like experience
+#$SUDO pacman --noconfirm --needed -S -y xsel
+
+# Docker (rootless)
+$SUDO pacman --noconfirm --needed -S fuse-overlayfs iptables
+curl -fsSL https://get.docker.com/rootless | sh
+systemctl --user start dbus
+systemctl --user start docker
+$SUDO loginctl enable-linger "$USER"
+
+# Yay-bin
+git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
+  git -C "/tmp/yay-bin" pull --rebase
+(cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
+
+# Snap
+yay -S --noconfirm --needed install snapd
+$SUDO systemctl enable --now snapd.socket
+$SUDO ln -s /var/lib/snapd/snap /snap
