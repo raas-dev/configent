@@ -20,9 +20,7 @@ Features:
 - Multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
 - Run `docker` and `nerdctl` from macOS, by lima VMs for dockerd and containerd
 
-Things are happening per user, but `sudo` may be required for some OS features.
-
-Tested on:
+Works on:
 
 - macOS Monterey (12), Big Sur (11) and Catalina (10)
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
@@ -33,6 +31,8 @@ Tested on:
 - AlmaLinux 8.6
 - Arch Linux (as of 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
+
+Things are happening per user, but `sudo` may be required for some OS features.
 
 ## 💣 Up
 
@@ -131,7 +131,9 @@ Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
 
 ## 🔨 Development
 
-See `dotfiles/.aliases` for `vm4...` for starting various distros as lima VMs.
+See `dotfiles/.aliases` for `vm4...` for self-testing on various Linux distros.
+
+Uses [lima](https://github.com/lima-vm/lima) VMs underneath, on top of QEMU.
 
 ### Contributing
 
