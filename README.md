@@ -123,8 +123,8 @@ As of 2022-07, tested on:
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
 - Fedora Linux 36 and 35
-- Rocky Linux 8.5
-- Alpine Linux 3.15 and 3.14
+- Rocky Linux 8.6 and 8.5
+- Alpine Linux 3.16, 3.15 and 3.14
 
 ### Contributing
 
