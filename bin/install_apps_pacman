@@ -21,8 +21,6 @@ else
   exit 10
 fi
 
-set -e
-
 # Certificates
 $SUDO pacman --noconfirm --needed -S ca-certificates
 
@@ -35,7 +33,7 @@ $SUDO pacman --noconfirm --needed -S base-devel \
 
 # Utils
 $SUDO pacman --noconfirm --needed -S bash coreutils bind file findutils \
-  git htop lsb-release procps traceroute zip unzip wget whois
+  git htop lsb-release procps traceroute zip unzip wget which whois
 
 # pbcopy/pbpaste like experience
 #$SUDO pacman --noconfirm --needed -S -y xsel
@@ -53,6 +51,6 @@ git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
 (cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
 
 # Snap
-yay -S --noconfirm --needed install snapd
+yay -S --noconfirm --needed snapd
 $SUDO systemctl enable --now snapd.socket
 $SUDO ln -s /var/lib/snapd/snap /snap

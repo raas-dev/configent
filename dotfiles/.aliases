@@ -70,9 +70,7 @@ else
     alias up='sudo snap refresh ; \
       sudo pacman -Suy ; \
       br'
-    alias dup='sudo snap refresh ; \
-      sudo pacman -Suy ; \
-      br'
+    alias dup='up'
   elif command -v apk >/dev/null; then
     alias up='sudo apk update && \
       sudo apk add --upgrade apk-tools && \
