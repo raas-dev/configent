@@ -66,9 +66,14 @@ else
     alias dup='sudo snap refresh ; \
       sudo yum update -y && sudo yum autoremove -y ; \
       br'
+  elif command -v yay >/dev/null; then
+    alias up='sudo snap refresh ; \
+      yay --noconfirm -Suy ; \
+      br'
+    alias dup='up'
   elif command -v pacman >/dev/null; then
     alias up='sudo snap refresh ; \
-      sudo pacman -Suy ; \
+      sudo pacman --noconfirm -Suy ; \
       br'
     alias dup='up'
   elif command -v apk >/dev/null; then
