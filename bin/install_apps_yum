@@ -36,7 +36,7 @@ $SUDO yum install -y gnupg
 # Common build requirements
 $SUDO yum install -y gcc gcc-c++ make \
   openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel \
-  libffi-devel lzma-devel
+  libffi-devel lzma-sdk
 
 # Utils
 $SUDO yum install -y bash coreutils bind-utils file findutils \
