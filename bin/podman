@@ -4,7 +4,7 @@
 
 # shellcheck disable=SC2068  # not quoting parameters passed to the real bin
 
-: "${VM:="podman-testing"}"
+: "${VM:="podman-ubuntu"}"
 
 if [[ $OSTYPE == darwin* ]]; then
   # forward to the same script on the guest VM
