@@ -176,6 +176,7 @@ alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
 alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false"
 alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
 alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"
+alias vm4oracle="limactl start \$HOME/local/etc/lima/oraclelinux.yaml --tty=false"
 
 alias vm4arch="limactl start \$HOME/local/etc/lima/archlinux.yaml --tty=false"
 alias vm4alpine="limactl start \$HOME/local/etc/lima/alpine.yaml --tty=false"

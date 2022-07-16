@@ -29,7 +29,8 @@ Works on:
 - Rocky Linux 8.6 and 8.5
 - CentOS Stream 8
 - AlmaLinux 8.6
-- Arch Linux (as of 2022-07)
+- Oracle Linux 8.6
+- Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
 Things are happening per user, but `sudo` may be required for some OS features.
@@ -70,9 +71,7 @@ All the binaries in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
-MacOS, APT-based distros (Ubuntu, Debian), YUM-based distros (Fedora, Rocky,
-CentOS Stream, AlmaLinux), pacman-based distros (Arch Linux) and Alpine Linux
-are supported.
+MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, is supported.
 
 **On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
 

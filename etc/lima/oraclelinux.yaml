@@ -1,0 +1,49 @@
+# This example requires Lima v0.9.0 or later.
+# Oracle image licence: https://www.oracle.com/downloads/licenses/oracle-linux-license.html
+# Image source: https://yum.oracle.com/oracle-linux-templates.html
+
+images:
+- location: "https://yum.oracle.com/templates/OracleLinux/OL8/u6/x86_64/OL8U6_x86_64-kvm-b126.qcow"
+  arch: "x86_64"
+  digest: "sha256:f00bf07669b1b9b07de446140ed0ac4f3f310160104a41715cfa051d0ded3eed"
+- location: "https://yum.oracle.com/templates/OracleLinux/OL8/u6/aarch64/OL8U6_aarch64-kvm-b2.qcow"
+  arch: "aarch64"
+  digest: "sha256:7fcf1765c5aa346be85eb8df0bc03d9e71b83dba6724fa7c41421be541d2ff93"
+
+cpuType:
+  # Workaround for "vmx_write_mem: mmu_gva_to_gpa XXXXXXXXXXXXXXXX failed" on Intel Mac
+  # https://bugs.launchpad.net/qemu/+bug/1838390
+  x86_64: "Haswell-v4"
+
+firmware:
+  legacyBIOS: true
+
+mounts:
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: user
+    script: |
+      #!/bin/bash
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until pgrep rootlesskit; do sleep 3; done"; then
+        echo >&2 "rootlesskit (used by rootless docker) is not running"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
