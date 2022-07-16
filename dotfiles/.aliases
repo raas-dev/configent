@@ -5,8 +5,8 @@
 ### OS specific ################################################################
 
 # Upgrade brew formulas, and zplugins if on zsh
-alias br='which brew &>/dev/null && brew update && brew upgrade ; \
-  which zplug &>/dev/null && zplug update'
+alias br='command -v brew >/dev/null && brew update && brew upgrade ; \
+  command -v zplug >/dev/null && zplug update'
 
 if [[ "$OSTYPE" = darwin* ]]; then
   # Brew cask upgrade
@@ -50,7 +50,7 @@ if [[ "$OSTYPE" = darwin* ]]; then
   # macOS has no `sha1sum`, use `shasum` as a fallback
   command -v sha1sum >/dev/null || alias sha1sum='shasum'
 else
-  if which apt &>/dev/null; then
+  if command -v apt >/dev/null; then
     alias up='sudo snap refresh ; \
       sudo apt update && \
       sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
@@ -59,21 +59,21 @@ else
       sudo apt update && \
       sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
-  elif which yum &>/dev/null; then
+  elif command -v yum >/dev/null; then
     alias up='sudo snap refresh ; \
       sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ; \
       br'
     alias dup='sudo snap refresh ; \
       sudo yum update -y && sudo yum autoremove -y ; \
       br'
-  elif which pacman &>/dev/null; then
+  elif command -v pacman >/dev/null; then
     alias up='sudo snap refresh ; \
       sudo pacman -Suy ; \
       br'
     alias dup='sudo snap refresh ; \
       sudo pacman -Suy ; \
       br'
-  elif which apk &>/dev/null; then
+  elif command -v apk >/dev/null; then
     alias up='sudo apk update && \
       sudo apk add --upgrade apk-tools && \
       sudo apk upgrade ; \
@@ -107,7 +107,7 @@ alias chgrp='chgrp --preserve-root'
 
 ### Enhanced ls ################################################################
 
-if which lsd &>/dev/null; then
+if command -v lsd >/dev/null; then
   alias ls='lsd --group-dirs first --date="+%a %d-%b-%y %H:%M:%S" --icon never'
   alias la='ls -Al'
   alias le='ls -Al --extensionsort && echo Ordered by extension, alphabetically'
@@ -156,7 +156,7 @@ alias _='bat --show-all'
 
 ### Vim ########################################################################
 
-which nvim &>/dev/null && alias vim='nvim'
+command -v nvim >/dev/null && alias vim='nvim'
 
 ### Lima VMs ###################################################################
 

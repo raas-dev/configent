@@ -37,7 +37,7 @@ fi
 
 [[ -d $ZPLUG_HOME ]] && source "$ZPLUG_HOME/init.zsh"
 
-if which zplug &>/dev/null; then
+if command -v zplug >/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 

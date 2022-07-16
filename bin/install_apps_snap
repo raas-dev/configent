@@ -4,7 +4,7 @@ trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 if [ "$(id -u)" = 0 ]; then
   SUDO=''
-elif which sudo &>/dev/null; then
+elif command -v sudo >/dev/null; then
   SUDO='sudo'
 
   # Ask sudo password upfront

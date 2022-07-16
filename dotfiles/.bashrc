@@ -73,7 +73,7 @@ get_branch_info() {
   [[ -n $scm ]] && echo "($scm:$branch)"
 }
 
-if which git &>/dev/null; then
+if command -v git >/dev/null; then
   PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtgrn\$(get_branch_info)$txtrst\$ "
 else
   PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtrst\$ "

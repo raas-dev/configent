@@ -27,7 +27,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
   if [ "$(id -u)" = 0 ]; then
     CANELEVATE='true'
     SUDO=''
-  elif which sudo >/dev/null 2>&1; then
+  elif command -v sudo >/dev/null; then
     CANELEVATE='true'
     SUDO='sudo'
 
@@ -47,14 +47,14 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 
   if [ "$CANELEVATE" = 'true' ]; then
-    if ! which git >/dev/null 2>&1; then
-      if which apt-get >/dev/null 2>&1; then
+    if ! command -v git >/dev/null; then
+      if command -v apt-get >/dev/null; then
         $SUDO apt-get install -y git
-      elif which yum >/dev/null 2>&1; then
+      elif command -v yum >/dev/null; then
         $SUDO yum install -y git
-      elif which pacman >/dev/null 2>&1; then
-        $SUDO pacman --noconfirm --needed -S git which
-      elif which apk >/dev/null 2>&1; then
+      elif command -v pacman >/dev/null; then
+        $SUDO pacman --noconfirm --needed -S git
+      elif command -v apk >/dev/null; then
         $SUDO apk add git coreutils # coreutils is required for ln -i
       else
         printf "\nError: Could not install git, please install git manually.\n"

@@ -84,12 +84,12 @@ fi
 
 ### Prompt #####################################################################
 
-if which starship &>/dev/null; then
+if command -v starship >/dev/null; then
   eval "$(starship init "${SHELL##*/}")"
 fi
 
 # brew install bash-completion
-if which brew &>/dev/null ; then
+if command -v brew >/dev/null ; then
   if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
     source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
   fi
@@ -97,7 +97,7 @@ fi
 
 ### zoxide #####################################################################
 
-if which zoxide &>/dev/null; then
+if command -v zoxide >/dev/null; then
   eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
 
   function j() {
@@ -120,7 +120,7 @@ fi
 
 path_prepend "$HOME/.rbenv/bin"
 
-if which rbenv &>/dev/null; then
+if command -v rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
 
@@ -128,7 +128,7 @@ fi
 
 path_prepend "$HOME/.pyenv/bin"
 
-if which pyenv &>/dev/null; then
+if command -v pyenv >/dev/null; then
   eval "$(pyenv init -)"
   eval "$(pyenv init --path)"
   if [[ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]]; then
@@ -185,11 +185,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ### Dircolors ##################################################################
 
-which dircolors &>/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
+command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 ### awscli #####################################################################
 
-which aws_completer &>/dev/null && complete -C "$(which aws_completer)" aws
+command -v aws_completer >/dev/null && complete -C "$(command -v aws_completer)" aws
 
 ### Azure Functions Core Tools #################################################
 
@@ -197,7 +197,7 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
 ### DOCKER_HOST ################################################################
 
-if [[ $OSTYPE == darwin* ]] && which lima &>/dev/null; then
+if [[ $OSTYPE == darwin* ]] && command -v lima >/dev/null; then
   # requires forwarding the socket in the lima vm config file
   export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
 elif [[ -x "$HOME/bin/docker" ]] ; then

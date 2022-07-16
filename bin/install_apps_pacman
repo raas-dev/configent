@@ -4,7 +4,7 @@ trap "printf '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 if [ "$(id -u)" = 0 ]; then
   SUDO=''
-elif which sudo >/dev/null 2>&1; then
+elif command -v sudo >/dev/null; then
   SUDO='sudo'
 
   # Ask sudo password upfront
