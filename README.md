@@ -177,7 +177,7 @@ a pull request.
 #### Out of scope
 
 - Homebrew on Linux on 64-bit ARM: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm)
-    - As of 2022, most formulaes do not have AArch64 binary packages ("bottles")
+    - Most formulaes do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
     - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
 - Alpine Linux: Homebrew on Linux does not install, Alpine Linux has no glibc
