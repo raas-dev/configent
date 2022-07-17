@@ -110,11 +110,13 @@ Couple of things to understand:
 - containerd is the de facto runtime in production Kubernetes - thus prefer it
 - regardless of runtime, `sudo` is always a bad idea when it comes to security
 
-On macOS, these shims wrap the respective runtime CLIs to run inside lima VMs:
+On macOS, these shims wrap the respective runtime CLIs to run inside Linux VMs:
 
 - `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
 - `nerdctl`: Runs nerdctl (also `nerdctl compose`) in user context containerd
+
+[lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
 
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
@@ -122,7 +124,7 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
-In addition, 'rancher' VM includes [k3s](https://k3s.io/) for local Kubernetes.
+In addition, VM 'rancher' includes [k3s](https://k3s.io/) for local Kubernetes.
 
 Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
 `docker` or `nerdctl` respectively, as long as the current working directory has
@@ -130,9 +132,15 @@ Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
 
 ## 🔨 Development
 
-See `dotfiles/.aliases` for `vm4...` for self-testing on various Linux distros.
+See `dotfiles/.aliases` for `vm4...` for self-testing on various Linux distros
+on [lima](https://github.com/lima-vm/lima). See alias `v` for shelling into,
+stopping and deleting the VM.
 
-Uses [lima](https://github.com/lima-vm/lima) VMs underneath, on top of QEMU.
+VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
+on boot by fetching and running `install.sh` from the remote repo's main branch.
+
+Once booted, the host's home directory is mounted to the VM. Use it to test
+changes in scripts without first commiting and pushing them to the remote repo.
 
 ### Contributing
 
@@ -149,11 +157,13 @@ a pull request.
 
 #### Out of scope
 
-- Homebrew on Linux is not officially supported on aarch64
-    - Hack1: Installer can be patched to skip the aarch64 check
+- Homebrew on Linux is not officially supported on AArch64
+    - Hack1: Installer can be patched to skip the AArch64 check
     - Hack2: Requirement Ruby 2.6.8 can be installed system-wide from source
-    - Showstopper: Most formulaes do not have aarch64 binaries ("bottles")
+    - Showstopper: Most formulaes do not have AArch64 binaries ("bottles")
         - Building all dependencies from source would be too long as a bootstrap
 - Homebrew on Linux does not work on Alpine Linux, as Alpine Linux has no glibc
-- On Arch Linux, `snapd` install by `yay` fails -> no `snap` present (2022-07)
-  - error: `Package libseccomp was not found in the pkg-config search path.`
+- On Arch Linux, installing `snapd` fails even though deps are present (2022-07)
+    - error: `Package libseccomp was not found in the pkg-config search path.`
+- YUM-distros must be rebooted after `squashfuse`installation for `snap` to work
+    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs`
