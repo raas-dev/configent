@@ -67,10 +67,9 @@ Script `bootstrap` runs the three below scripts in the order described.
 This script essentially handles the whole automated setup (dotfiles, apps,
 VSCode, zsh) of the machine it is run in and the script is non-interactive.
 
-The [default shell](https://github.com/raas-dev/configent#-default-shell)
-is not changed to zsh (as there is a chance that zsh installation has failed),
-but you may do it (and will get prompted) by running `bin/install_zsh` after
-`bootstrap` has finished.
+The default shell is not changed to zsh (as there is a chance that zsh
+installation has failed), but you may do it (and get prompted) by running
+`bin/install_zsh` after `bootstrap` has finished.
 
 ### ⚙️ symlink_dotfiles
 
@@ -82,9 +81,10 @@ per already existing file or symlink in the user's home directory.
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
-Restart the shell or run `source ~/.zshrc`. Then you may simply reload with `r`.
+Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
+the configuration of the current shell (`.bashrc` or `.zshrc`) shell with `r`.
 
-All the binaries in `bin/` are available by name from now on.
+All the scripts in `bin/` are available by name from now on.
 
 ### 🖥️ install_apps
 
@@ -121,13 +121,13 @@ If you prefer `bash` instead, brew the latest Bash and set it as default:
 
 ## 🏗️ dockerd and containerd
 
-Couple of things to understand:
+Things to understand:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
 - containerd is the de facto runtime in production Kubernetes - thus prefer it
 - regardless of runtime, `sudo` is always a bad idea when it comes to security
 
-On macOS, these shims wrap the respective runtime CLIs to run inside Linux VMs:
+On macOS, these `bin/` shims wrap the respective CLIs to run inside Linux VMs:
 
 - `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
