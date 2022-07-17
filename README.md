@@ -51,12 +51,13 @@ or main branch is pulled on top of it if the git working copy already exists.
 ### Customization
 
 Nothing is prompted by `installer.sh`, it's non-interactive and thus suitable
-for cloud-init: Fork the repo, comment out the tech stacks in `install_apps`
-you don't need, and change the URL your public fork.
+for cloud-init: Fork this repo, comment out the tech stacks in `install_apps`
+you don't need, and change the URL to your public fork.
 
-GUI apps are not installed by `install.sh`, as a server or VM is assumed; re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
+GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
+`./bootstrap` in the repo (after `install.sh` finishes) to install GUI apps.
 
-Change GUI apps to your liking in `bin/install_apps_snap`
+Add or remove GUI apps to your liking in `bin/install_apps_snap`
 (Snap on Linux distros) and `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 ## 🔋's included
