@@ -138,14 +138,11 @@
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "shellformat.useEditorConfig": true,
-    "nixfmt.path": "~/.nix-profile/bin/nixfmt",
     "editor.lineHeight": 15.5,
     "window.zoomLevel": 1,
     "gitlens.showWelcomeOnInstall": false,
     "devskim.enableBestPracticeRules": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.minimumContrastRatio": 1,
-    "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
-    "vscode-kubernetes.kubectl-path.mac": "",
-    "vscode-kubernetes.kubectl-path.windows": ""
+    "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl"
 }
