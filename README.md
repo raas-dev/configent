@@ -180,6 +180,7 @@ a pull request.
     - Most formulaes do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
     - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
-- Alpine Linux: Homebrew on Linux does not install, Alpine Linux has no glibc
+- Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) bash to ash
+    - Thus setting the user's login shell to bash in `install_apps_apk` does not work in Lima
 - Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
     - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
