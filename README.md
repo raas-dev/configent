@@ -182,7 +182,5 @@ a pull request.
     - Showstopper: Most formulaes do not have AArch64 binaries ("bottles")
         - Building all dependencies from source would be too long as a bootstrap
 - Alpine Linux: Homebrew on Linux does not work as Alpine Linux has no glibc
-- Arch Linux: Installing `snapd` fails even though deps are present (2022-07)
-    - error: `Package libseccomp was not found in the pkg-config search path.`
 - Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
     - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
