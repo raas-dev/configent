@@ -142,8 +142,9 @@ See alias `v` for shelling into, stopping and deleting the VM.
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by fetching and running `install.sh` from the remote repo's main branch.
 
-Once booted, the host's home directory is mounted to the VM. Use it to test
-changes in scripts without first commiting and pushing them to the remote repo.
+Once VM has been started, your host's `$HOME` directory is mounted to the VM.
+
+Use it to test script changes without first commiting and pushing to the remote repo/your fork.
 
 ### Contributing
 
@@ -160,13 +161,13 @@ a pull request.
 
 #### Out of scope
 
-- Homebrew on Linux is not officially supported on AArch64
+- Homebrew on Linux: Is not officially supported ("by best effort") on AArch64
     - Hack1: Installer can be patched to skip the AArch64 check
     - Hack2: Requirement Ruby 2.6.8 can be installed system-wide from source
     - Showstopper: Most formulaes do not have AArch64 binaries ("bottles")
         - Building all dependencies from source would be too long as a bootstrap
-- Homebrew on Linux does not work on Alpine Linux, as Alpine Linux has no glibc
-- On Arch Linux, installing `snapd` fails even though deps are present (2022-07)
+- Alpine Linux: Homebrew on Linux does not work as Alpine Linux has no glibc
+- Arch Linux: Installing `snapd` fails even though deps are present (2022-07)
     - error: `Package libseccomp was not found in the pkg-config search path.`
-- YUM-distros must be rebooted after `squashfuse`installation for `snap` to work
-    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs`
+- Fedora Linux: Must reboot after `squashfuse`installation for `snap` to work
+    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
