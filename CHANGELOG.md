@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/raas-dev/configent/compare/1.15.0...1.15.1) (2022-07-17)
+
+
+### Refactor
+
+* **install.sh:** Fix comment ([f9e6a72](https://github.com/raas-dev/configent/commit/f9e6a720c200f5718ecffef208a6165df98c660c))
+* **README:** Rename screenshot ([b4df946](https://github.com/raas-dev/configent/commit/b4df94686013d6ad751e28db3bf84adffb6922f0))
+
+
+### Documentation
+
+* **README:** Add screenshot in webp format ([4bbe324](https://github.com/raas-dev/configent/commit/4bbe3246bae1c92188e96a4f810a1b1b528a4b4b))
+* **README:** Add what to customize ([5cdc8ae](https://github.com/raas-dev/configent/commit/5cdc8ae2ca02873460f2085d4565be6330ee0df4))
+* **README:** Clarify ([8f8846d](https://github.com/raas-dev/configent/commit/8f8846d598cb72c94e3b189e5f162a5f529676fb))
+* **README:** Development ([c67389d](https://github.com/raas-dev/configent/commit/c67389dcc06f9fd3c206344bb5ef614593f8e82f))
+* **README:** Document bootstrap ([d338548](https://github.com/raas-dev/configent/commit/d33854813aba14c0721948794e90700b0a69bb73))
+* **README:** Fix typos ([31612e9](https://github.com/raas-dev/configent/commit/31612e98e11a52379296b27d6838c7f5b9727feb))
+* **README:** Fix typos ([23c44d3](https://github.com/raas-dev/configent/commit/23c44d3cea652fdcefa0abb3fc6d1b89841df81e))
+* **README:** Fix typos ([a013e97](https://github.com/raas-dev/configent/commit/a013e97fd6be77cbe4f3883bd77cdc702a457c06))
+* **README:** Move screenshot ([9c60e3b](https://github.com/raas-dev/configent/commit/9c60e3bdcf19a3d58073205e5d5cd8e89559ed88))
+* **README:** Move screenshot to dir ([120d672](https://github.com/raas-dev/configent/commit/120d672a757de7c6149acc5abf79de061273aa32))
+* **README:** Resize screenshot ([d107bf9](https://github.com/raas-dev/configent/commit/d107bf9755620b64d4f11da81c148c192c3b0fc4))
+* **README:** Sort known issues per distro ([5037e80](https://github.com/raas-dev/configent/commit/5037e809686d3c4b80c0ad3940accff32345a783))
+* **README:** Tidy ([bd7e733](https://github.com/raas-dev/configent/commit/bd7e7332ba07d7c54b592852c4e665c47f26d971))
+* **README:** Tidy ([ed2baf1](https://github.com/raas-dev/configent/commit/ed2baf13ffecf0fd7149e902fcb1ce80cacd52fb))
+* **README:** Tidy ([8f024e5](https://github.com/raas-dev/configent/commit/8f024e59f871e56405c7eeeb790e492d48a5f968))
+* **README:** Update screenshot ([4c9a052](https://github.com/raas-dev/configent/commit/4c9a05266e4e33e014054ca67b19686d5ddaba66))
+* **REDME:** Add screenshot ([d002dca](https://github.com/raas-dev/configent/commit/d002dca8221c724ecffe4a5756ea3ce5b79f6b33))
+
+
+### Fixes
+
+* **README:** Fix commands for reloading the shell config ([2578daa](https://github.com/raas-dev/configent/commit/2578daae381341fad28d047edcd46824a65171a5))
+* **README:** Fix typos ([b18fc83](https://github.com/raas-dev/configent/commit/b18fc830fa9d5588c71acc856320379b7b218ae8))
+
 ## [1.15.0](https://github.com/raas-dev/configent/compare/1.14.0...1.15.0) (2022-07-16)
 
 
