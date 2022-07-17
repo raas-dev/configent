@@ -12,6 +12,8 @@ Principles:
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The fastest open source web browser, VSCode and killer terminal. That's it.
 
+![Screenshot of Brave Browser and VSCode with tmux and zsh](screenshot.png)
+
 Features:
 
 - Bootstrap macOS or common Linux distros with one command, only `curl` required
