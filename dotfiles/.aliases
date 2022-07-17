@@ -51,29 +51,23 @@ if [[ "$OSTYPE" = darwin* ]]; then
   command -v sha1sum >/dev/null || alias sha1sum='shasum'
 else
   if command -v apt >/dev/null; then
-    alias up='sudo snap refresh ; \
-      sudo apt update && \
+    alias up='sudo apt update && \
       sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
-    alias dup='sudo snap refresh ; \
-      sudo apt update && \
+    alias dup='sudo apt update && \
       sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
   elif command -v yum >/dev/null; then
-    alias up='sudo snap refresh ; \
-      sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ; \
+    alias up='sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ; \
       br'
-    alias dup='sudo snap refresh ; \
-      sudo yum update -y && sudo yum autoremove -y ; \
+    alias dup='sudo yum update -y && sudo yum autoremove -y ; \
       br'
   elif command -v yay >/dev/null; then
-    alias up='sudo snap refresh ; \
-      yay --noconfirm -Suy ; \
+    alias up='yay --noconfirm -Suy ; \
       br'
     alias dup='up'
   elif command -v pacman >/dev/null; then
-    alias up='sudo snap refresh ; \
-      sudo pacman --noconfirm -Suy ; \
+    alias up='sudo pacman --noconfirm -Suy ; \
       br'
     alias dup='up'
   elif command -v apk >/dev/null; then
