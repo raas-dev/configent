@@ -35,8 +35,15 @@ $SUDO apk add build-base gcompat ncurses \
   openssl-dev readline-dev sqlite-dev bzip2-dev zlib-dev libffi-dev xz-dev
 
 # Utils
-$SUDO apk add bash coreutils curl bind-tools file findutils \
+$SUDO apk add coreutils curl bind-tools file findutils \
   git htop procps zip unzip wget whois
+
+# Bash
+$SUDO apk add bash
+$SUDO touch /etc/login.defs
+$SUDO mkdir /etc/default
+$SUDO touch /etc/default/useradd
+echo "SHELL=/bin/bash" | $SUDO tee /etc/default/useradd
 
 # macOS pbcopy/pbpaste like experience
 #$SUDO apk add xsel

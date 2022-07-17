@@ -41,8 +41,11 @@ $SUDO yum install -y gcc gcc-c++ make \
 $SUDO yum install -y lzma-sdk
 
 # Utils
-$SUDO yum install -y bash coreutils bind-utils file findutils \
+$SUDO yum install -y coreutils bind-utils file findutils \
   git htop redhat-lsb-core procps traceroute zip unzip wget whois
+
+# Bash
+$SUDO yum install -y bash
 
 # pbcopy/pbpaste like experience
 #$SUDO yum install -y xsel

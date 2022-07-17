@@ -42,8 +42,11 @@ $SUDO apt-get install -y build-essential \
   liblzma-dev
 
 # Utils
-$SUDO apt-get install -y bash coreutils dnsutils file findutils \
+$SUDO apt-get install -y coreutils dnsutils file findutils \
   git htop lsb-release procps traceroute zip unzip wget whois
+
+# Bash
+$SUDO apt-get install -y bash
 
 # Locales (required on Debian)
 $SUDO apt-get install -y locales

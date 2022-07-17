@@ -32,8 +32,11 @@ $SUDO pacman --noconfirm --needed -S base-devel gcc \
   openssl readline sqlite3 bzip2 zlib libffi xz
 
 # Utils
-$SUDO pacman --noconfirm --needed -S bash coreutils bind file findutils \
+$SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
   git htop lsb-release procps traceroute zip unzip wget which whois
+
+# Bash
+$SUDO pacman --noconfirm --needed -S bash
 
 # pbcopy/pbpaste like experience
 #$SUDO pacman --noconfirm --needed -S xsel
