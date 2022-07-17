@@ -64,6 +64,13 @@ Add or remove GUI apps to your liking in `bin/install_apps_snap`
 
 Script `bootstrap` runs the three below scripts in the order described.
 
+This script essentially handles the whole automated setup (dotfiles, apps,
+VSCode, zsh) of the machine it is run in and is non-interactive.
+
+The [default shell](https://github.com/raas-dev/configent#-default-shell)
+is not changed to zsh (as there is chance that zsh installation has failed),
+but you may´do it by running `bin/install_zsh` after `bootstrap` finishes.
+
 ### ⚙️ symlink_dotfiles
 
 Creates symlinks in the user's home directory for all the files in  `dotfiles/`.
