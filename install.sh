@@ -17,7 +17,7 @@ export NO_SNAPS="true"
 export NO_CASKS="true"
 [ -n "$NO_FORMULAE" ] && export NO_FORMULAE="true"
 
-###############################################################################
+################################################################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
   if [ "$(uname -m)" = 'aarch64' ]; then
