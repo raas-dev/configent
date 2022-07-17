@@ -10,7 +10,7 @@ No startup pitches, I am an principled config manager and machine bootstrapper.
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The fastest open source web browser, VSCode and killer terminal. That's it.
 
-| ![Screen with Brave Browser and VSCode with tmux and zsh](ui/screenshot.png) |
+| ![Screenshot with Brave Browser and VSCode with tmux and zsh](ui/target.png) |
 | ---------------------------------------------------------------------------- |
 
 Features:
