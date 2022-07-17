@@ -176,11 +176,10 @@ a pull request.
 
 #### Out of scope
 
-- Homebrew on Linux: Is not officially supported ("by best effort") on AArch64
-    - Hack1: Installer can be patched to skip the AArch64 check
-    - Hack2: Requirement Ruby 2.6.8 can be installed system-wide from source
-    - Showstopper: Most formulaes do not have AArch64 binaries ("bottles")
-        - Building all dependencies from source would be too long as a bootstrap
-- Alpine Linux: Homebrew on Linux does not work as Alpine Linux has no glibc
+- Homebrew on Linux on 64-bit ARM: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm)
+    - As of 2022, most formulaes do not have AArch64 binary packages ("bottles")
+    - Building all dependencies from source would be too long of a bootstrap
+    - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
+- Alpine Linux: Homebrew on Linux does not install, Alpine Linux has no glibc
 - Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
     - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
