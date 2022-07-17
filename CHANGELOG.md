@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.2](https://github.com/raas-dev/configent/compare/1.15.1...1.15.2) (2022-07-17)
+
+
+### Fixes
+
+* **aliases:** Remove snap refresh for aliases up and up ([c3e153d](https://github.com/raas-dev/configent/commit/c3e153dab88c4bbd15c83a160850f47995a07025))
+* **README:** Remove fixed Arch Linux snap bug from Known Bugs ([2e3cb01](https://github.com/raas-dev/configent/commit/2e3cb01b8f38b2178a1b09ab28b20344978a2be3))
+
+
+### Documentation
+
+* **README:** Document Homebrew on Linux, on 64-bit ARMs ([9385222](https://github.com/raas-dev/configent/commit/938522253c4ec04b807994343ca054c6bfec4043))
+* **README:** Tidy ([a9bdc56](https://github.com/raas-dev/configent/commit/a9bdc5662cd74bdc1e93581ca132914a7f8fc67f))
+
 ### [1.15.1](https://github.com/raas-dev/configent/compare/1.15.0...1.15.1) (2022-07-17)
 
 
