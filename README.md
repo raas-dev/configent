@@ -116,11 +116,10 @@ On macOS, these shims wrap the respective runtime CLIs to run inside Linux VMs:
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
 - `nerdctl`: Runs nerdctl (also `nerdctl compose`) in user context containerd
 
-[lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
-
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
+[lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
@@ -133,8 +132,9 @@ Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
 ## 🔨 Development
 
 See `dotfiles/.aliases` for `vm4...` for self-testing on various Linux distros
-on [lima](https://github.com/lima-vm/lima). See alias `v` for shelling into,
-stopping and deleting the VM.
+on [lima](https://github.com/lima-vm/lima).
+
+See alias `v` for shelling into, stopping and deleting the VM.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by fetching and running `install.sh` from the remote repo's main branch.
