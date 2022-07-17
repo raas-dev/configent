@@ -62,8 +62,10 @@ Script `bootstrap` runs the three below scripts in the order described.
 
 ### ⚙️ symlink_dotfiles
 
-Symlinks all the files in `dotfiles/` to the user's home directory.
-Script `bootstrap` passes `-f` to this script to skip override prompts per file.
+Creates symlinks in the user's home directory for all the files in  `dotfiles/`.
+
+Script `bootstrap` passes `-f` to `symlink_dotfiles` to skip override prompts
+per already existing file or symlink in the user's home directory.
 
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
@@ -122,7 +124,8 @@ On macOS, these shims wrap the respective runtime CLIs to run inside Linux VMs:
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
-[lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
+[Lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
+
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
@@ -169,5 +172,5 @@ a pull request.
 - Alpine Linux: Homebrew on Linux does not work as Alpine Linux has no glibc
 - Arch Linux: Installing `snapd` fails even though deps are present (2022-07)
     - error: `Package libseccomp was not found in the pkg-config search path.`
-- Fedora Linux: Must reboot after `squashfuse`installation for `snap` to work
+- Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
     - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
