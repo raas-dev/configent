@@ -69,7 +69,8 @@ VSCode, zsh) of the machine it is run in and is non-interactive.
 
 The [default shell](https://github.com/raas-dev/configent#-default-shell)
 is not changed to zsh (as there is chance that zsh installation has failed),
-but you may´do it by running `bin/install_zsh` after `bootstrap` finishes.
+but you may do it (and get prompted) by running `bin/install_zsh` after
+`bootstrap` has finished.
 
 ### ⚙️ symlink_dotfiles
 
