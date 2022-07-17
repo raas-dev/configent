@@ -42,17 +42,22 @@ Things are happening per user, but `sudo` may be used for some OS features.
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.15.0/install.sh | sh
 
-If git is not present, it is installed first by the Linux distro's package
-manager or by Xcode cmdline tools on macOS.
+If git is not present on the machine, it is installed first by the Linux
+distro's package manager or by Xcode cmdline tools on macOS.
 
 Then the respective tag from this git repo is cloned as `$HOME/configent`,
 or main branch is pulled on top of it if the git working copy already exists.
 
-### GUI apps
+### Customization
 
-Homebrew Cask or Snaps are not installed by default, as a server/VM is assumed.
+Nothing is prompted by `installer.sh`, it's non-interactive and thus suitable
+for cloud-init: Fork the repo, comment out the tech stacks in `install_apps`
+you don't need, and change the URL your public fork.
 
-Re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
+GUI apps are not installed by `install.sh`, as a server or VM is assumed; re-run `./bootstrap` in the repo (after `install.sh` finishes) to install them.
+
+Change GUI apps to your liking in `bin/install_apps_snap`
+(Snap on Linux distros) and `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 ## 🔋's included
 
