@@ -314,6 +314,12 @@ pyclean() {
 
 ### Latest version of global nodejs devtools ###################################
 
+# Yarn
+alias yarn='npx -y yarn'
+
+# configurable-http-proxy
+alias configurable-http-proxy='npx -y configurable-http-proxy'
+
 # Find unused and missing package.json (dev)Dependencies
 alias npx-depcheck='npx -y depcheck'
 

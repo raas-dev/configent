@@ -22,8 +22,3 @@ git -C "$nvm_path" -c advice.detachedHead=false checkout \
 ### Node packages ##############################################################
 
 npm install --location=global yarn
-
-### Jupyter ####################################################################
-
-#jupyter labextension install @jupyter-widgets/jupyterlab-manager
-#npm install --location=global configurable-http-proxy
