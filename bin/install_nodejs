@@ -21,4 +21,4 @@ git -C "$nvm_path" -c advice.detachedHead=false checkout \
 
 ### Node packages ##############################################################
 
-npm install --location=global yarn
+#npm install --location=global yarn
