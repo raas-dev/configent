@@ -19,7 +19,7 @@ Features:
 - Use multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
 - macOS `docker` experience exactly as it was with Docker Desktop, but it's free
 - Multiplexing terminals where Rust and Go powered utilities are used for speed
-- One character shell aliases - the fastest are the commands one does not write
+- Single character shell aliases: The fastest are the commands one does not type
 
 Works on:
 
