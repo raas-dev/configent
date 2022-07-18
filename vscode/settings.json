@@ -146,5 +146,6 @@
     "terminal.integrated.minimumContrastRatio": 1,
     "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
     "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs":"active"
+    "editor.guides.bracketPairs": "active",
+    "gitlens.showWhatsNewAfterUpgrades": false
   }
