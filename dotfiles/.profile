@@ -21,14 +21,14 @@ path_prepend() {
   fi
 }
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   PATH=''
   path_append '/usr/local/bin'
   path_append '/usr/bin'
   path_append '/bin'
   path_append '/usr/sbin'
   path_append '/sbin'
-elif [[ "$OSTYPE" = linux-gnu* ]]; then
+elif [[ $OSTYPE == linux-gnu* ]]; then
   PATH=''
   path_append '/usr/local/sbin'
   path_append '/usr/local/bin'
@@ -66,7 +66,7 @@ stty -ixon
 
 ### Homebrew/Linuxbrew #########################################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   if [[ -x "/opt/homebrew/bin/brew" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [[ -x "/usr/local/bin/brew" ]]; then

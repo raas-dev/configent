@@ -8,7 +8,7 @@
 alias br='command -v brew >/dev/null && brew update && brew upgrade ; \
   command -v zplug >/dev/null && zplug update'
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # Brew cask upgrade
   alias brc='brew cu --all --yes --cleanup'
 
@@ -368,7 +368,7 @@ alias jwtp="decode_jwt_partial"
 
 ### macOS keychain #############################################################
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   get_keychain_variable() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: get_keychain_variable <varname>" && return 1
