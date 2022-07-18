@@ -15,7 +15,7 @@ No startup pitches, I am a principled config manager and machine bootstrapper.
 
 Features:
 
-- Get full macOS/Linux development env with one command, only `curl` required
+- Get full macOS or Linux development environment by running one `curl` command
 - Use multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
 - macOS `docker` experience exactly as it was with Docker Desktop, but it's free
 - Multiplexing terminal where Rust and Go written utils are preferred for speed
