@@ -8,7 +8,7 @@
 ### constants  #################################################################
 
 GIT_REPO_URL="https://github.com/raas-dev/configent"
-GIT_TAG="1.15.2"
+GIT_TAG="1.16.0"
 TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################

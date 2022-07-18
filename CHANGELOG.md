@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/raas-dev/configent/compare/1.15.2...1.16.0) (2022-07-18)
+
+
+### Features
+
+* **nodejs:** Remove installation of global npm packages ([c2d8bdc](https://github.com/raas-dev/configent/commit/c2d8bdc25da156e9ba5645c29badfdb9585f6043))
+* **nodejs:** Remove npx- prefix from global nodejs devtool aliases ([ab78321](https://github.com/raas-dev/configent/commit/ab78321c44c9fd8c7b3dcb9d93e2f5b5297326ec))
+* **ruby:** Remove installation of Ruby but install rbenv ([4657a28](https://github.com/raas-dev/configent/commit/4657a28ef55526b11944e53150d863b9905dace7))
+
+
+### Refactor
+
+* **dotfiles:** Same convention for OSTYPE checks ([6ebf393](https://github.com/raas-dev/configent/commit/6ebf393aef3e6cf9c11d782fc1e4a3752b2b7e3a))
+* **vscode:** Remove unused settings ([0f0b9e4](https://github.com/raas-dev/configent/commit/0f0b9e4f29612df1c6a2fa048c138cce8068e6b3))
+
+
+### Documentation
+
+* **alpine:** Homebrew issues on Alpine Linux ([b82af3d](https://github.com/raas-dev/configent/commit/b82af3da4de2d9c9ed62d2ee0b7092a7496ef621))
+
+
+### Fixes
+
+* **alpine:** Change default shell to bash ([71ecc9d](https://github.com/raas-dev/configent/commit/71ecc9d4ada2ffa2aa1deb57b1d1c902a7d57bfb))
+* **alpine:** Do not set default shell ([b5dc367](https://github.com/raas-dev/configent/commit/b5dc3671571be97a6decfa3e0c0a895401c74bf9))
+* **alpine:** Setting user's default login shell on Lima ([7030b31](https://github.com/raas-dev/configent/commit/7030b31745d387eeb1cc3183210e211b758d5140))
+* **bash:** Separate bash installation steps on distros ([2132740](https://github.com/raas-dev/configent/commit/213274071c936eaebda1e45a7e87c186e5d7db1a))
+* **nodejs:** Fix npm deprecation warning ([aee2910](https://github.com/raas-dev/configent/commit/aee2910af04ce9bb58e0dc8ae57b279bee621751))
+* **python:** Remove brew dependencies for pyenv ([626ae86](https://github.com/raas-dev/configent/commit/626ae86ff4bcfcce5f77ccfd6faab80740671c46))
+* **rancher:** Enable writable home for containerd ([dd4f7f8](https://github.com/raas-dev/configent/commit/dd4f7f82ff8df72607aaeadd2eb320ace7dcb9ef))
+* **vscode:** Remove deprecated extension, is now a native feature ([034bb57](https://github.com/raas-dev/configent/commit/034bb57504355ec46016b4dd78d949644c34a46b))
+
 ### [1.15.2](https://github.com/raas-dev/configent/compare/1.15.1...1.15.2) (2022-07-17)
 
 
