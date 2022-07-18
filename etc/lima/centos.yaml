@@ -33,13 +33,3 @@ provision:
     script: |
       #!/bin/bash
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
-
-probes:
-  - script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 30s bash -c "until pgrep rootlesskit; do sleep 3; done"; then
-        echo >&2 "rootlesskit (used by rootless docker) is not running"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
