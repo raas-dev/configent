@@ -18,7 +18,7 @@ Features:
 - Get full macOS/Linux development env with one command, only `curl` required
 - Use multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
 - macOS `docker` experience exactly as it was with Docker Desktop, but it's free
-- Multiplexing terminal with Rust and Go written utils preferred due to speed
+- Multiplexing terminal where Rust and Go written utils are preferred for speed
 - One character shell aliases - the fastest are the commands one does not write
 
 Works on:
