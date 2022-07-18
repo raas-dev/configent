@@ -15,11 +15,11 @@ No startup pitches, I am a principled config manager and machine bootstrapper.
 
 Features:
 
-- Bootstrap macOS or common Linux distros with one command, only `curl` required
+- Get full macOS/Linux development env with one command, only `curl` required
 - One character shell aliases - the fastest are the commands one does not write
-- In terminal, Rust and Go written utilities are always preferred due to speed
-- Multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
-- Run `docker` and `nerdctl` from macOS, by lima VMs for dockerd and containerd
+- Multiplexing terminal with Rust and Go written utils preferred due to speed
+- Use multiple language versions with `rustup`, `gvm`, `nvm` `pyenv` and `rbenv`
+- macOS `docker` experience exactly as it was with Docker Desktop, but it's free
 
 Works on:
 
