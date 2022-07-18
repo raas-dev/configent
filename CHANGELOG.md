@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.1](https://github.com/raas-dev/configent/compare/1.16.0...1.16.1) (2022-07-18)
+
+
+### Fixes
+
+* **lima:** Remove user probe for AlmaLinux ([9f4cfba](https://github.com/raas-dev/configent/commit/9f4cfbaaa9b47f1095fe9ff47859b7772939fbc9))
+* **lima:** Remove VM user probes except Ubuntu and Rancher ([d1fcdfd](https://github.com/raas-dev/configent/commit/d1fcdfd2153d6981841023329b312030139d9e17))
+* **node:** Disable installing global yarn ([8000461](https://github.com/raas-dev/configent/commit/800046199b3287c1b718a80f37bffa23d099ce30))
+
 ## [1.16.0](https://github.com/raas-dev/configent/compare/1.15.2...1.16.0) (2022-07-18)
 
 
