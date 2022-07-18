@@ -5,7 +5,7 @@
 No startup pitches, I am a principled config manager and machine bootstrapper.
 
 - 95% identical user experience both on macOS and the most popular Linux distros
-- 100% automated: Scripts over options or menus, comment out the unwanted parts
+- 100% automated: Scripts over options or menus, comment out unwanted parts
 - There is actually one, and only one, way to do things - the most efficient
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The fastest open source web browser, VSCode and a killer terminal. That's it.
