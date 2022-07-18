@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.3](https://github.com/raas-dev/configent/compare/1.16.2...1.16.3) (2022-07-18)
+
+
+### Documentation
+
+* **README:** Add docs on volume mounts ([d98f213](https://github.com/raas-dev/configent/commit/d98f213aac9e4636813ee5b0347ec20334256fa8))
+* **README:** Features ([a40d466](https://github.com/raas-dev/configent/commit/a40d46609fd85cdbf5cd71c37e647318a1d77555))
+* **README:** Fix typos ([128f0f0](https://github.com/raas-dev/configent/commit/128f0f094804f3ea30121c8b15dbe171a129784b))
+* **README:** Intro ([1d01bbb](https://github.com/raas-dev/configent/commit/1d01bbb8b56d54b47b03f7df566a2583239724fa))
+* **README:** Update features ([ecb8228](https://github.com/raas-dev/configent/commit/ecb822869f56589274c98b56d4a3546c8441aa4f))
+
+
+### Fixes
+
+* **gitlens:** Disable what's new after upgrades ([6ec8459](https://github.com/raas-dev/configent/commit/6ec8459ed17ef0a2c01a536b3dc43d5a6a1d3e60))
+
+
+### Refactor
+
+* **README:** Customization ([5ceff72](https://github.com/raas-dev/configent/commit/5ceff72d9f1061c8805f7d30d7b41cfea9f24d95))
+* **README:** Features ([543e5ac](https://github.com/raas-dev/configent/commit/543e5ac87c6efc445c20f246937da9c6a3672f18))
+* **README:** Features ([93123fe](https://github.com/raas-dev/configent/commit/93123fe9429c9a3f16cac1a8a80ec95146baebcf))
+* **README:** Features ([6d84eac](https://github.com/raas-dev/configent/commit/6d84eac47794f065d1a55848a89b9b16e4179f41))
+* **README:** Features ([09c0795](https://github.com/raas-dev/configent/commit/09c079576c057357919ce43ef81f94ee55521a83))
+* **README:** Features ([75a29c4](https://github.com/raas-dev/configent/commit/75a29c452e905d27c15e310028c8da4ad7d3d070))
+* **README:** Features ([b1436e6](https://github.com/raas-dev/configent/commit/b1436e61e3b69625e0acbdb70784db9b9cd6a1b9))
+* **README:** Features ([78dbba4](https://github.com/raas-dev/configent/commit/78dbba46305321127218a51a59dd9ff48129b962))
+* **README:** Features ([6d9850a](https://github.com/raas-dev/configent/commit/6d9850a9d8420d9f2b14d31961863710f8f62bf9))
+
 ### [1.16.2](https://github.com/raas-dev/configent/compare/1.16.1...1.16.2) (2022-07-18)
 
 
