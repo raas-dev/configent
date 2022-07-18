@@ -50,8 +50,8 @@ or main branch is pulled on top of it if the git working copy already exists.
 
 ### Customization
 
-Nothing is prompted by `install.sh`, it's non-interactive and thus suitable
-for cloud-init: Fork this repo, comment out the tech stacks you don't need
+Nothing is prompted by `install.sh`. It is non-interactive and thus suitable
+for cloud-init. Fork this repo, comment out the tech stacks you don't need
 in `install_apps`, and change the curl target to your public fork.
 
 GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
