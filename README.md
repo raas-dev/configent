@@ -141,6 +141,11 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 The shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
+Note: Both 'ubuntu' and 'rancher' VMs mount your host's `$HOME` directory as
+writable in the VM. This enables containers to use bind mounts (directories
+on file system). If you want to keep host's home read-only (and prefer
+Docker managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
+
 In addition, VM 'rancher' includes [k3s](https://k3s.io/) for local Kubernetes.
 
 Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
@@ -149,17 +154,17 @@ Tip: Use aliases `d` and `n` as generic shortcuts for starting containers in
 
 ## 🔨 Development
 
-See `dotfiles/.aliases` for `vm4...` for self-testing on various Linux distros
-on [lima](https://github.com/lima-vm/lima).
+See `dotfiles/.aliases` for `vm4...` creating
+[lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-See alias `v` for shelling into, stopping and deleting the VM.
+See alias `v` for starting, shelling into, stopping and deleting the VM.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
-on boot by fetching and running `install.sh` from the remote repo's main branch.
+on boot by fetching and running `install.sh` from this repo's main branch.
 
-Once VM has been started, your host's `$HOME` directory is mounted to the VM.
-
-Use it to test script changes without first commiting and pushing to the remote repo/your fork.
+Once VM has been started, your host's `$HOME` directory is mounted in the VM,
+for testing scripts changes without first commiting and pushing to the remote
+repo/your fork.
 
 ### Contributing
 
