@@ -180,6 +180,7 @@ a pull request.
     - Most formulaes do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
     - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
+- Homebrew on Alpine Linux: Issues in formulaes due to Alpine Linux not using glibc
 - Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) `/bin/bash` to `/bin/ash` on boot
     - Thus Installing bash and setting it as the user's login shell does not work expectedly
 - Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
