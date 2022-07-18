@@ -321,25 +321,25 @@ alias yarn='npx -y yarn'
 alias configurable-http-proxy='npx -y configurable-http-proxy'
 
 # Find unused and missing package.json (dev)Dependencies
-alias npx-depcheck='npx -y depcheck'
+alias depcheck='npx -y depcheck'
 
 # Command-line JSON processing tool
-alias npx-fx='npx -y fx'
+alias fx='npx -y fx'
 
 # Simple, zero-configuration command-line http server
-alias npx-http-server='npx -y http-server'
+alias http-server='npx -y http-server'
 
 # Bump version and generate CHANGELOG.md
-alias npx-standard-version='npx -y standard-version'
+alias standard-version='npx -y standard-version'
 
 # https://github.com/kefranabg/readme-md-generator
-alias npx-readme-md-generator='npx -y readme-md-generator'
+alias readme-md-generator='npx -y readme-md-generator'
 
 # Codemods for project config files
-alias npx-mrm='npx -y mrm'
+alias mrm='npx -y mrm'
 
 # Upgrades your package.json dependencies to the latest version
-alias npx-ncu='npx -y npm-check-updates'
+alias ncu='npx -y npm-check-updates'
 
 ### decode #####################################################################
 
