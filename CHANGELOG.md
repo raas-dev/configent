@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.2](https://github.com/raas-dev/configent/compare/1.16.1...1.16.2) (2022-07-18)
+
+
+### Fixes
+
+* **shells:** Fix setting the default shell ([820e4c9](https://github.com/raas-dev/configent/commit/820e4c9d1dbda499cacb24c965280fb56e6909bc))
+
 ### [1.16.1](https://github.com/raas-dev/configent/compare/1.16.0...1.16.1) (2022-07-18)
 
 
