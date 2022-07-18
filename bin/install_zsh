@@ -59,17 +59,17 @@ if [[ -e $brew_zsh_path ]]; then
           echo "On macOS, sudo is used to set the user's default shell."
           sudo dscl . -create "$HOME" UserShell "$brew_zsh_path"
         else
-          case $(passwd --status "$USER" | awk '{print $2}') in
+          case $(sudo passwd --status "$USER" | awk '{print $2}') in
           NP)
             echo "User's password will be asked next to set the shell."
             chsh -s "$brew_zsh_path"
             ;;
-          L)
-            echo "User is locked, sudo is used to set the shell."
-            sudo chsh -s "$brew_zsh_path" "$USER"
-            ;;
           P)
             echo "User has no password, sudo is used to set the shell."
+            sudo chsh -s "$brew_zsh_path" "$USER"
+            ;;
+          *)
+            echo "User is locked, sudo is used to set the shell."
             sudo chsh -s "$brew_zsh_path" "$USER"
             ;;
           esac
