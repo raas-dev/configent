@@ -40,11 +40,6 @@ $SUDO apk add coreutils curl bind-tools file findutils \
 
 # Bash
 $SUDO apk add bash
-$SUDO touch /etc/login.defs
-$SUDO mkdir /etc/default
-$SUDO touch /etc/default/useradd
-echo "SHELL=/bin/bash" | $SUDO tee /etc/default/useradd
-$SUDO chsh -s /bin/bash "$USER"
 
 # macOS pbcopy/pbpaste like experience
 #$SUDO apk add xsel
