@@ -24,7 +24,6 @@ if command -v code >/dev/null; then
   code --force --install-extension Arjun.swagger-viewer
   code --force --install-extension azapi-vscode.azapi
   code --force --install-extension bencoleman.armview
-  code --force --install-extension CoenraadS.bracket-pair-colorizer
   code --force --install-extension dbaeumer.vscode-eslint
   code --force --install-extension dnicolson.binary-plist
   code --force --install-extension eamodio.gitlens
