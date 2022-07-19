@@ -7,7 +7,7 @@
 # Upgrade brew formulas, and zplugins if on zsh
 alias br='command -v brew >/dev/null && \
   (brew update && brew upgrade ; brew autoremove) ; \
-  command -v zplug >/dev/null && (zplug update ; zplug clean --force)'
+  command -v zplug >/dev/null && (zplug update ; zplug clean)'
 
 if [[ $OSTYPE == darwin* ]]; then
   # Brew cask upgrade
