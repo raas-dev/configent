@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.5](https://github.com/raas-dev/configent/compare/1.16.4...1.16.5) (2022-07-19)
+
+
+### Refactor
+
+* **vscode:** Remove unused settings ([d664567](https://github.com/raas-dev/configent/commit/d664567e83d551a03ff9d1e2117fff77d397e191))
+
+
+### Fixes
+
+* **aliases:** Remove --force from zplug clean ([d246a09](https://github.com/raas-dev/configent/commit/d246a09cb0ede2ffa17d460ebe9b1457142b3dee))
+* **remove:** Remove duplicate path append ([a9ee771](https://github.com/raas-dev/configent/commit/a9ee771ff99943f9c9648abc83f904f02897f057))
+* **vscode:** Add kubectl and helm paths ([a3d59ac](https://github.com/raas-dev/configent/commit/a3d59ac7a698c1a0030d299dace457b882e9e1af))
+* **vscode:** Fix kubernetes paths on ARM64 macOS ([226695b](https://github.com/raas-dev/configent/commit/226695b95c6c0cd62daa57605856338f89a70a2f))
+
+
+### Documentation
+
+* **pyenv:** Add note on xz on macOS ([19bd05d](https://github.com/raas-dev/configent/commit/19bd05d7e24e71f2ef441a534df99cb8327e7250))
+
 ### [1.16.4](https://github.com/raas-dev/configent/compare/1.16.3...1.16.4) (2022-07-19)
 
 
