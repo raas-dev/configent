@@ -56,7 +56,6 @@
         "terminal.ansiYellow":"#F7CA88"
     },
     "explorer.confirmDragAndDrop": false,
-    "python.showStartPage": false,
     "workbench.activityBar.visible": false,
     "editor.minimap.showSlider": "always",
     "editor.hideCursorInOverviewRuler": true,
@@ -98,7 +97,6 @@
         "Content-Type": "application/json"
     },
     "editor.semanticHighlighting.enabled": true,
-    "docker.showStartPage": false,
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "terminal.integrated.tabs.enabled": false,
@@ -133,8 +131,6 @@
     "git.confirmSync": false,
     "bracketPairColorizer.depreciation-notice": false,
     "security.workspace.trust.enabled": false,
-    "sonarlint.disableTelemetry": true,
-    "sonarlint.ls.javaHome": "~/.sdkman/candidates/java/current",
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "shellformat.useEditorConfig": true,
