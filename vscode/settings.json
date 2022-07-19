@@ -147,5 +147,9 @@
     "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
-    "gitlens.showWhatsNewAfterUpgrades": false
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "vs-kubernetes": {
+        "vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+        "vs-kubernetes.helm-path": "/usr/local/bin/helm"
+    }
   }
