@@ -64,11 +64,13 @@ else
     alias dup='sudo yum update -y && sudo yum autoremove -y ; \
       br'
   elif command -v yay >/dev/null; then
-    alias up='yay --noconfirm -Suy ; \
+    alias up='yay --noconfirm -Suy && \
+      yay -Qdtq | yay --noconfirm -Rs - ; \
       br'
     alias dup='up'
   elif command -v pacman >/dev/null; then
-    alias up='sudo pacman --noconfirm -Suy ; \
+    alias up='sudo pacman --noconfirm -Suy && \
+      sudo pacman -Qdtq | sudo pacman --noconfirm -Rs - ; \
       br'
     alias dup='up'
   elif command -v apk >/dev/null; then
