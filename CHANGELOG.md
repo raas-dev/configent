@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.4](https://github.com/raas-dev/configent/compare/1.16.3...1.16.4) (2022-07-19)
+
+
+### Documentation
+
+* **README:** Fix typos ([be65c2a](https://github.com/raas-dev/configent/commit/be65c2a5ea1e0567ec2e9205cf4a7936ef16cadc))
+
+
+### Fixes
+
+* **aliases:** Add pacman/yay autoremove like behaviour ([7d1ab97](https://github.com/raas-dev/configent/commit/7d1ab97aebe928658afeb86ae26b0bb764bfa6af))
+* **brew:** Run brew autoremove after brew upgrade ([46835c9](https://github.com/raas-dev/configent/commit/46835c9f23c2271ac5cf120ac8c483cc0a5f720a))
+* **pacman:** Do not install msttcorefonts (accepts EULA) ([9898496](https://github.com/raas-dev/configent/commit/9898496530940c8c48773fd88b052875c1d10427))
+* **yum:** Add explicit installation of libxcrypt-compat for brew ([f534e06](https://github.com/raas-dev/configent/commit/f534e0654150772222b5833c43d7c91b17d98289))
+
 ### [1.16.3](https://github.com/raas-dev/configent/compare/1.16.2...1.16.3) (2022-07-18)
 
 
