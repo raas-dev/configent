@@ -5,8 +5,9 @@
 ### OS specific ################################################################
 
 # Upgrade brew formulas, and zplugins if on zsh
-alias br='command -v brew >/dev/null && brew update && brew upgrade ; \
-  command -v zplug >/dev/null && zplug update'
+alias br='command -v brew >/dev/null && \
+  (brew update && brew upgrade ; brew autoremove) ; \
+  command -v zplug >/dev/null && (zplug update ; zplug clean --force)'
 
 if [[ $OSTYPE == darwin* ]]; then
   # Brew cask upgrade
