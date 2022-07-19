@@ -37,7 +37,10 @@ $SUDO yum install -y gnupg
 $SUDO yum install -y gcc gcc-c++ make \
   openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel libffi-devel
 
-# Required for compiling Pythons by pyenv, if provided by distro
+# Required for brew, if provided by distro (Fedora)
+$SUDO yum install -y libxcrypt-compat
+
+# Required for compiling Pythons by pyenv, if provided by distro (Fedora)
 $SUDO yum install -y lzma-sdk
 
 # Utils
