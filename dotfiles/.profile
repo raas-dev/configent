@@ -23,7 +23,6 @@ path_prepend() {
 
 if [[ $OSTYPE == darwin* ]]; then
   PATH=''
-  path_append '/usr/local/bin'
   path_append '/usr/bin'
   path_append '/bin'
   path_append '/usr/sbin'
