@@ -54,7 +54,7 @@ git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
 (cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
 
 # Microsoft TrueType fonts (accepts EULA)
-yay -S --noconfirm --needed ttf-ms-fonts
+#yay -S --noconfirm --needed ttf-ms-fonts
 
 # Snap
 yay -S --noconfirm --needed snapd
