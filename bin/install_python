@@ -18,6 +18,8 @@ eval "$($HOME/.pyenv/bin/pyenv init -)"
 
 ### pythons ####################################################################
 
+# `brew install xz` may be pre-requisite on macOS to resolve the lzma warning
+
 #python3_version="3.7.13"
 #python3_version="3.8.13"
 #python3_version="3.9.13"
