@@ -41,6 +41,9 @@ $SUDO apk add coreutils curl bind-tools file findutils \
 # Bash
 $SUDO apk add bash
 
+# The logfile navigator
+$SUDO apk add lnav
+
 # macOS pbcopy/pbpaste like experience
 #$SUDO apk add xsel
 

@@ -272,11 +272,15 @@ nixery() {
     "$image" $args
 }
 
-# Follow given log file, or cloud-init output if not given
+# Follow the given log file, or cloud-init output if not given
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
-  tail --follow --verbose --lines=20 "$log" || \
-    sudo tail --follow --verbose --lines=20 "$log"
+  if command -v lnav >/dev/null; then
+    [[ -f "$log" ]] && lnav "$log" || sudo lnav "$log"
+  else
+    [[ -f "$log" ]] && tail --follow --verbose --lines=20 "$log" || \
+      sudo tail --follow --verbose --lines=20 "$log"
+  fi
 }
 
 # List 20 biggest directories

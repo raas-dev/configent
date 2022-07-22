@@ -42,10 +42,10 @@ brew install zoxide
 ### macOS only brews ###########################################################
 
 if [[ $OSTYPE == darwin* ]]; then
-  # https://github.com/Homebrew/homebrew-services
-  brew tap homebrew/services
+  # The logfile navigator (https://github.com/tstack/lnav)
+  brew install lnav
 
-  # https://github.com/rgcr/m-cli
+  # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
   brew install m-cli
 
   # https://github.com/lavoiesl/osx-cpu-temp

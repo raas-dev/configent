@@ -38,6 +38,9 @@ $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
 # Bash
 $SUDO pacman --noconfirm --needed -S bash
 
+# The logfile navigator
+$SUDO pacman --noconfirm --needed -S lnav
+
 # pbcopy/pbpaste like experience
 #$SUDO pacman --noconfirm --needed -S xsel
 

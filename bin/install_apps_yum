@@ -50,6 +50,9 @@ $SUDO yum install -y coreutils bind-utils file findutils \
 # Bash
 $SUDO yum install -y bash
 
+# The logfile navigator
+$SUDO yum install -y lnav
+
 # pbcopy/pbpaste like experience
 #$SUDO yum install -y xsel
 

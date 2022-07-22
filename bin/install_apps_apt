@@ -48,6 +48,9 @@ $SUDO apt-get install -y coreutils dnsutils file findutils \
 # Bash
 $SUDO apt-get install -y bash
 
+# The logfile navigator
+$SUDO apt-get install -y lnav
+
 # Locales (required on Debian)
 $SUDO apt-get install -y locales
 echo "en_US.UTF-8 UTF-8" | $SUDO tee /etc/locale.gen
