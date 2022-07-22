@@ -276,10 +276,17 @@ nixery() {
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
   if command -v lnav >/dev/null; then
-    [[ -f "$log" ]] && lnav "$log" || sudo lnav "$log"
+    if [[ -r "$log" ]]; then
+      lnav "$log"
+    else
+      sudo lnav "$log"
+    fi
   else
-    [[ -f "$log" ]] && tail --follow --verbose --lines=20 "$log" || \
+    if [[ -r "$log" ]]; then
+      tail --follow --verbose --lines=20 "$log"
+    else
       sudo tail --follow --verbose --lines=20 "$log"
+    fi
   fi
 }
 
