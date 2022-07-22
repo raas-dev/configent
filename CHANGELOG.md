@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/raas-dev/configent/compare/1.16.5...1.17.0) (2022-07-22)
+
+
+### Features
+
+* **lnav:** Add The Logfile Navigator (lnav), alias t to it ([73e2bec](https://github.com/raas-dev/configent/commit/73e2bec878dd0e56d025c04ba60d5e0e3e95e6ff))
+
+
+### Refactor
+
+* **README:** Tidy ([f09198e](https://github.com/raas-dev/configent/commit/f09198ed1657427b8beed08231a2cf3389d7cd45))
+
+
+### Fixes
+
+* **aliases:** Alias t to tail log of cloud-init if target not igven ([39b4531](https://github.com/raas-dev/configent/commit/39b4531c7ec7fd5f930a7d3cead60f68b8ecb95f))
+* **lnav:** Fix check if file is readable before trying sudo ([4ef1e27](https://github.com/raas-dev/configent/commit/4ef1e2722598c02c629dde426095ee1a67be5ece))
+
 ### [1.16.5](https://github.com/raas-dev/configent/compare/1.16.4...1.16.5) (2022-07-19)
 
 
