@@ -143,7 +143,7 @@ alias p='procs --tree --watch-interval 1'
 alias q='clear'
 # r is for reloading shell's configuration (alias is in shell specific rc files)
 alias s='sncli'
-alias t='tail --follow --verbose --lines=20'
+alias t='taillog'
 alias u='usage'
 alias v='limactl'
 alias w='which -a'
@@ -232,24 +232,6 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
-# nixery.dev
-nixery() {
-  [[ -z "$1" ]] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
-  local pkg="$1"
-  shift
-  local args="${*:-$pkg}"
-  if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then
-    image="nixery.dev/arm64/shell/$pkg"
-  else
-    image="nixery.dev/shell/$pkg"
-  fi
-  docker run -it --rm --name "$pkg" \
-    --publish-all \
-    --volume="$PWD:$PWD":ro \
-    --workdir="$PWD" \
-    "$image" $args
-}
-
 # Quick extract
 ext() {
   if [[ -f $1 ]]; then
@@ -272,10 +254,35 @@ ext() {
   fi
 }
 
-# Quick password generator
-genpass() {
-  tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
-    fold -w "$1" | head -n1 | pbcopy
+# nixery.dev
+nixery() {
+  [[ -z "$1" ]] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
+  local pkg="$1"
+  shift
+  local args="${*:-$pkg}"
+  if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then
+    image="nixery.dev/arm64/shell/$pkg"
+  else
+    image="nixery.dev/shell/$pkg"
+  fi
+  docker run -it --rm --name "$pkg" \
+    --publish-all \
+    --volume="$PWD:$PWD":ro \
+    --workdir="$PWD" \
+    "$image" $args
+}
+
+# Follow given log file, or cloud-init output if not given
+taillog() {
+  local log="${1:-"/var/log/cloud-init-output.log"}"
+  tail --follow --verbose --lines=20 "$log" || \
+    sudo tail --follow --verbose --lines=20 "$log"
+}
+
+# List 20 biggest directories
+usage() {
+  du | sort -r -n |
+    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
 # Show process listening on given port
@@ -283,10 +290,10 @@ whatlistens() {
   lsof -P -i :"$1" | column -t
 }
 
-# List 20 biggest directories
-usage() {
-  du | sort -r -n |
-    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
+# Quick password generator
+genpass() {
+  tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
+    fold -w "$1" | head -n1 | pbcopy
 }
 
 # Remove all non-cask brew
