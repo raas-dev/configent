@@ -34,13 +34,13 @@ else
 fi
 
 # install language version managers and versions
-#"$bin_path/install_rust"
 "$bin_path/install_go"
+#"$bin_path/install_java"
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
-#"$bin_path/install_java"
-#"$bin_path/install_sql"
 "$bin_path/install_ruby" # depending on distro, ruby has to available for brew
+#"$bin_path/install_rust"
+#"$bin_path/install_sql"
 
 # copy fonts to user's fonts path
 "$bin_path/install_fonts"
