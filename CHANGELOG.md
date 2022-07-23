@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.2](https://github.com/raas-dev/configent/compare/1.18.1...1.18.2) (2022-07-23)
+
+
+### Fixes
+
+* **zplug:** Pull zplug repo if install_zsh is re-run ([3edeed9](https://github.com/raas-dev/configent/commit/3edeed9878ceed3343cb249477b1d48d753c5a54))
+
 ### [1.18.1](https://github.com/raas-dev/configent/compare/1.18.0...1.18.1) (2022-07-23)
 
 
