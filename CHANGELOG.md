@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.3](https://github.com/raas-dev/configent/compare/1.18.2...1.18.3) (2022-07-23)
+
+
+### Fixes
+
+* **shells:** Use POSIX compatible conditional checks ([47f4739](https://github.com/raas-dev/configent/commit/47f4739661c346119ea97b7f543a3e3fd07efca4))
+* **shells:** Use POSIX compatible OS checks ([0885f2c](https://github.com/raas-dev/configent/commit/0885f2cec824b4da70c25a6a9655df5273b926aa))
+
 ### [1.18.2](https://github.com/raas-dev/configent/compare/1.18.1...1.18.2) (2022-07-23)
 
 
