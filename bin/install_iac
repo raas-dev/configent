@@ -22,57 +22,57 @@ fi
 
 ### linters ####################################################################
 
-brew install hadolint
-brew install semgrep
-brew install shellcheck
+brew install hadolint   # haskell
+brew install semgrep    # python
+brew install shellcheck # haskell
 
 ### scanners ###################################################################
 
-brew install trivy
+brew install trivy # go
 
 ### docker #####################################################################
 
 if [[ $OSTYPE == darwin* ]]; then
-  brew install lima
+  brew install lima # go
 else
-  brew install ctop
+  brew install ctop # go
 fi
 
 ### network ####################################################################
 
-brew install dog
-brew install k6
-brew install nmap
-brew install oha
+brew install dog  # rust
+brew install k6   # go
+brew install nmap # c
+brew install oha  # rust
 
 ### aws ########################################################################
 
-brew install awscli
-brew install aws-vault
+brew install awscli    # python
+brew install aws-vault # go
 
 ### azure ######################################################################
 
-brew install azure-cli
+brew install azure-cli # python
 az config set core.collect_telemetry=false
 az config set core.output=jsonc
 
 az extension add --name azure-devops --upgrade --yes
 az extension add --name next --upgrade --yes
 
-brew install azcopy
+brew install azcopy # go
 
 ### k8s ########################################################################
 
-brew install kubernetes-cli
-brew install kubectx
-brew install helm
-brew install k9s
+brew install kubernetes-cli # go
+brew install kubectx        # go
+brew install helm           # go
+brew install k9s            # go
 
 ### terraform ##################################################################
 
-brew install tfenv
+brew install tfenv # bash
 tfenv install latest
 tfenv use latest
 
-brew install tfsec
-brew install shihanng/tfvar/tfvar
+brew install tfsec                # go
+brew install shihanng/tfvar/tfvar # go

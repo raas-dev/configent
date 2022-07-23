@@ -22,22 +22,22 @@ fi
 
 ### Homebrew core ##############################################################
 
-brew install bat
-brew install btop
-brew install fd
-brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc
-brew install gitui
-brew install grex
-brew install jq
-brew install kalker
-brew install lsd
-brew install procs
-brew install ripgrep
-brew install sd
-brew install starship
-brew install watch
-brew install xh
-brew install zoxide
+brew install bat                                                        # rust
+brew install btop                                                       # c++
+brew install fd                                                         # rust
+brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc # go
+brew install gitui                                                      # rust
+brew install grex                                                       # rust
+brew install jq                                                         # c
+brew install kalker                                                     # rust
+brew install lsd                                                        # rust
+brew install procs                                                      # rust
+brew install ripgrep                                                    # rust
+brew install sd                                                         # rust
+brew install starship                                                   # rust
+brew install watch                                                      # c
+brew install xh                                                         # rust
+brew install zoxide                                                     # rust
 
 ### macOS only brews ###########################################################
 
