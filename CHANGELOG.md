@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/raas-dev/configent/compare/1.17.2...1.18.0) (2022-07-23)
+
+
+### Features
+
+* **aliases:** Install hwatch, alias watch to it if installed ([b31e917](https://github.com/raas-dev/configent/commit/b31e917351e6da133c529959d5d984fc8e8ab71e))
+* **haskell:** Add stack for haskell ([96c3182](https://github.com/raas-dev/configent/commit/96c3182bc85f50050a4732cc755373d6fdecd926))
+* **jq:** Install gojq over jq, alias jq to gojq ([18dcabe](https://github.com/raas-dev/configent/commit/18dcabe6a22479b50ee4c9b7f9ec72acf51c3642))
+
+
+### Performance
+
+* **brew:** Do not tap homebrew/core on initial install ([620d01d](https://github.com/raas-dev/configent/commit/620d01d63ef3ae1737fefbaa57339ada204f6f08))
+
+
+### Documentation
+
+* **install:** Add languages of IAC tools and utilities ([c43cf0f](https://github.com/raas-dev/configent/commit/c43cf0f29846051253829d8d6860a5187bfc469c))
+* **README:** Update default stacks in install_apps ([98d732c](https://github.com/raas-dev/configent/commit/98d732cee9b99ddbcd80261c3f605ad567270669))
+* **utils:** Fix gojq language ([2f0ab97](https://github.com/raas-dev/configent/commit/2f0ab973619f70e46cd40d71225577f00f84037e))
+
+
+### Fixes
+
+* **aws:** Fix aws cli version to 2 ([ea29298](https://github.com/raas-dev/configent/commit/ea29298046231e0960927b49b702a47cf9176ab7))
+* **python:** Make pip install python written IAC tools, not brew ([33205a5](https://github.com/raas-dev/configent/commit/33205a5f96d00dd4f0c47b148fc702426faa1474))
+
 ### [1.17.2](https://github.com/raas-dev/configent/compare/1.17.1...1.17.2) (2022-07-23)
 
 
