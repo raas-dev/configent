@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.2](https://github.com/raas-dev/configent/compare/1.17.1...1.17.2) (2022-07-23)
+
+
+### Fixes
+
+* **zplug:** Install zplug as git repo to ~/.zplug ([b2b53c9](https://github.com/raas-dev/configent/commit/b2b53c9ceab3724d886a45cabcbf45371d867baa))
+
 ### [1.17.1](https://github.com/raas-dev/configent/compare/1.17.0...1.17.1) (2022-07-23)
 
 
