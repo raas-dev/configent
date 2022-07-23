@@ -23,8 +23,11 @@ fi
 
 brew install zsh
 
+### zplug ######################################################################
+
 # https://github.com/zplug/zplug
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+git clone https://github.com/zplug/zplug.git "$HOME/.zplug" ||
+  git -C "$HOME/.zplug" pull --rebase
 
 ### Set zsh as the default shell ###############################################
 
