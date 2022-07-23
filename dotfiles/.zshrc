@@ -21,20 +21,7 @@ alias r=". \$HOME/.zshrc"
 
 ### Zplug ######################################################################
 
-if [[ $OSTYPE == darwin* ]]; then
-  if [[ $(uname -m) == 'arm64' ]]; then
-    export ZPLUG_HOME="/opt/homebrew/opt/zplug"
-  else
-    export ZPLUG_HOME="/usr/local/opt/zplug"
-  fi
-else
-  if [[ -d "/home/linuxbrew/.linuxbrew/opt/zplug" ]]; then
-    export ZPLUG_HOME="/home/linuxbrew/.linuxbrew/opt/zplug"
-  elif [[ -d "$HOME/.linuxbrew/opt/zplug" ]]; then
-    export ZPLUG_HOME="$HOME/.linuxbrew/opt/zplug"
-  fi
-fi
-
+export ZPLUG_HOME="$HOME/.zplug"
 [[ -d $ZPLUG_HOME ]] && source "$ZPLUG_HOME/init.zsh"
 
 if command -v zplug >/dev/null; then
