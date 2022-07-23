@@ -30,13 +30,13 @@ brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc # go
 brew install gitui                                                      # rust
 brew install gojq                                                       # go
 brew install grex                                                       # rust
+brew install hwatch                                                     # rust
 brew install kalker                                                     # rust
 brew install lsd                                                        # rust
 brew install procs                                                      # rust
 brew install ripgrep                                                    # rust
 brew install sd                                                         # rust
 brew install starship                                                   # rust
-brew install hwatch                                                     # rust
 brew install xh                                                         # rust
 brew install zoxide                                                     # rust
 
