@@ -7,16 +7,19 @@
 ### PATH #######################################################################
 
 path_append() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="${PATH:+"$PATH:"}$1"
+  if [ -d "$1" ]; then
+    PATH=${PATH//":$1:"/:}      # delete all instances in the middle
+    PATH=${PATH/%":$1"/}        # delete any instance at the end
+    PATH=${PATH/#"$1:"/}        # delete any instance at the beginning
+    PATH="${PATH:+"$PATH:"}$1"  # append $1 or if $PATH is empty set to $1
   fi
 }
 
 path_prepend() {
   if [ -d "$1" ]; then
-    PATH=${PATH//":$1:"/:}      # delete all instances in the middle
-    PATH=${PATH/%":$1"/}        # delete any instance at the end
-    PATH=${PATH/#"$1:"/}        # delete any instance at the beginning
+    PATH=${PATH//":$1:"/:}
+    PATH=${PATH/%":$1"/}
+    PATH=${PATH/#"$1:"/}
     PATH="$1${PATH:+":$PATH"}"  # prepend $1 or if $PATH is empty set to $1
   fi
 }
