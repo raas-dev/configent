@@ -21,8 +21,9 @@ if ! command -v brew >/dev/null; then
 fi
 
 brew install zsh
-brew install zplug
-brew install starship
+
+# https://github.com/zplug/zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 ### Set zsh as the default shell ###############################################
 

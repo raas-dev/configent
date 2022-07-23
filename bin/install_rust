@@ -12,8 +12,9 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
   rustup install stable &&
   rustup default stable
 
-## Rust utitilities in `install_utils`
+### packages ###################################################################
 
+## Rust utitilities in `install_utils`
 #cargo install --locked bat
 #cargo install fd-find
 #cargo install gitui
@@ -22,6 +23,7 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 #cargo install lsd
 #cargo install procs
 #cargo install sd
+#cargo install starship --locked
 #cargo install ripgrep
 #cargo install xh
 #cargo install zoxide --locked
