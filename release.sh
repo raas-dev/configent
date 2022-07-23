@@ -16,7 +16,7 @@ if [[ -n "$(git status -s)" ]]; then
   exit 1
 fi
 
-pip3 install --quiet --user --upgrade commitizen
+pip3 install --no-warn-script-location --quiet --user --upgrade commitizen
 
 if [[ -n "$prerelease_type" ]]; then
   echo "Creating pre-release ($prerelease_type)"
