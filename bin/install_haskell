@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091  # do not expect input files
+
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+
+### ghcup ######################################################################
+
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org |
+  BOOTSTRAP_HASKELL_NONINTERACTIVE=true \
+    sh
+
+[[ -d "$HOME/.gchup" ]] && . "$HOME/.ghcup/env"
+
+### cabal ######################################################################
+
+#"$HOME/.ghcup/bin/cabal" install ShellCheck
+#"$HOME/.ghcup/bin/cabal" install hadolint

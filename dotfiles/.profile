@@ -150,6 +150,12 @@ if [[ -d "$nvm_path" ]]; then
   [[ -s "$nvm_path/bash_completion" ]] && source "$nvm_path/bash_completion"
 fi
 
+### Haskell ####################################################################
+
+path_prepend "$HOME/.ghcup/bin"
+path_prepend "$HOME/.cabal/bin"
+[[ -d "$HOME/.gchup" ]] && . "$HOME/.ghcup/env"
+
 ### Go #########################################################################
 
 go_path="$HOME/go"
