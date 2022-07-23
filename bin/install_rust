@@ -11,3 +11,17 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 . "$HOME/.cargo/env" &&
   rustup install stable &&
   rustup default stable
+
+## Rust utitilities in `install_utils`
+
+#cargo install --locked bat
+#cargo install fd-find
+#cargo install gitui
+#cargo install grex
+#cargo install kalker
+#cargo install lsd
+#cargo install procs
+#cargo install sd
+#cargo install ripgrep
+#cargo install xh
+#cargo install zoxide --locked
