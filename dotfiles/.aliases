@@ -154,6 +154,10 @@ alias §='got -o -s en -t fi'
 alias ,='got -o -s fi -t en'
 alias _='bat --show-all'
 
+### hwatch #####################################################################
+
+command -v hwatch >/dev/null && alias watch='hwatch'
+
 ### Vim ########################################################################
 
 command -v nvim >/dev/null && alias vim='nvim'
