@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.1](https://github.com/raas-dev/configent/compare/1.18.0...1.18.1) (2022-07-23)
+
+
+### Fixes
+
+* **python:** Fix azcli dependencies ([5d98755](https://github.com/raas-dev/configent/commit/5d987555ab807f60d023f165a84062176b416ddf))
+
 ## [1.18.0](https://github.com/raas-dev/configent/compare/1.17.2...1.18.0) (2022-07-23)
 
 
