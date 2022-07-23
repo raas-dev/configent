@@ -26,7 +26,6 @@ brew install bat
 brew install btop
 brew install fd
 brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc
-brew install git
 brew install gitui
 brew install grex
 brew install jq
@@ -50,6 +49,9 @@ if [[ $OSTYPE == darwin* ]]; then
 
   # https://github.com/lavoiesl/osx-cpu-temp
   brew install osx-cpu-temp
+
+  # Xcode Commandline Tools provides old git
+  brew install git
 
   # GNU utils are g-prefixed (non-g symlinks are prepended to PATH in .profile)
   brew install coreutils
