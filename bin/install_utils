@@ -28,8 +28,8 @@ brew install btop                                                       # c++
 brew install fd                                                         # rust
 brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc # go
 brew install gitui                                                      # rust
+brew install gojq                                                       # rust
 brew install grex                                                       # rust
-brew install jq                                                         # c
 brew install kalker                                                     # rust
 brew install lsd                                                        # rust
 brew install procs                                                      # rust

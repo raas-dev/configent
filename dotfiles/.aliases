@@ -158,6 +158,10 @@ alias _='bat --show-all'
 
 command -v hwatch >/dev/null && alias watch='hwatch'
 
+### gojq #######################################################################
+
+command -v gojq >/dev/null && alias jq='gojq'
+
 ### Vim ########################################################################
 
 command -v nvim >/dev/null && alias vim='nvim'
