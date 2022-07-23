@@ -4,15 +4,15 @@
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
 if [[ $OSTYPE == darwin* ]]; then
-  if [[ -x "/opt/homebrew/bin/zsh" ]]; then
+  if [ -x "/opt/homebrew/bin/zsh" ]; then
     export SHELL="/opt/homebrew/bin/zsh"
-  elif [[ -x "/usr/local/bin/zsh" ]]; then
+  elif [ -x "/usr/local/bin/zsh" ]; then
     export SHELL="/usr/local/bin/zsh"
   fi
 else
-  if [[ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]]; then
+  if [ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]; then
     export SHELL="/home/linuxbrew/.linuxbrew/bin/zsh"
-  elif [[ -x "$HOME/.linuxbrew/bin/zsh" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/zsh" ]; then
     export SHELL="$HOME/.linuxbrew/bin/zsh"
   fi
 fi
@@ -22,7 +22,7 @@ alias r=". \$HOME/.zshrc"
 ### Zplug ######################################################################
 
 export ZPLUG_HOME="$HOME/.zplug"
-[[ -d $ZPLUG_HOME ]] && source "$ZPLUG_HOME/init.zsh"
+[ -d "$ZPLUG_HOME" ] && source "$ZPLUG_HOME/init.zsh"
 
 if command -v zplug >/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
@@ -74,10 +74,10 @@ bindkey -e
 
 ### Load other configs #########################################################
 
-[[ -f "$HOME/.profile" ]] && . "$HOME/.profile"
-[[ -f "$HOME/.fzf.zsh" ]] && . "$HOME/.fzf.zsh"
-[[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-[[ -f "$HOME/.rclocal" ]] && . "$HOME/.rclocal"
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+[ -f "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
+[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
 ### Automatically list contents when changing directory ########################
 
@@ -87,6 +87,6 @@ chpwd() {
 
 ### Restore tmux ###############################################################
 
-[[ -n $TMUX ]] || tmux attach -t "local" || tmux new -s "local"
+[ -n "$TMUX" ] || tmux attach -t "local" || tmux new -s "local"
 
 # sdkman-init.sh is mentioned here to not be appended by `install_java`

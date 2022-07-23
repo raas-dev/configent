@@ -7,7 +7,7 @@
 : "${VM:="ubuntu"}"
 
 install_docker_compose_plugin() {
-  if [[ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]]; then
+  if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
     os="$(uname)"
     arch="$(uname -m)"
     echo "Downloading docker-compose as Docker CLI plugin on $os ($arch)"
@@ -24,14 +24,14 @@ if [[ $OSTYPE == darwin* ]]; then
     echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
     exit 127
   fi
-  if [[ $(uname -m) == 'arm64' ]]; then
+  if [ "$(uname -m)" = 'arm64' ]; then
     local_docker_path="/opt/homebrew/bin/docker"
   else
     local_docker_path="/usr/local/bin/docker"
   fi
-  if [[ -x $local_docker_path ]]; then
+  if [ -x "$local_docker_path" ]; then
     install_docker_compose_plugin
-    if [[ -z $DOCKER_HOST ]]; then
+    if [ -z "$DOCKER_HOST" ]; then
       # requires forwarding the socket in the lima vm config file
       export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
     fi

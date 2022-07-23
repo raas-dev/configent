@@ -66,17 +66,17 @@ stty -ixon
 ### Homebrew/Linuxbrew #########################################################
 
 if [[ $OSTYPE == darwin* ]]; then
-  if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x "/usr/local/bin/brew" ]]; then
+  elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
   path_prepend "$(brew --prefix findutils)/libexec/gnubin"
   path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
 else
-  if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
     eval "$("$HOME/.linuxbrew/bin/brew shellenv")"
   fi
 fi
@@ -87,7 +87,7 @@ command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 
 # brew install bash-completion
 if command -v brew >/dev/null ; then
-  if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
+  if [ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
     source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
   fi
 fi
@@ -105,10 +105,10 @@ fi
 ### Java #######################################################################
 
 sdkman_path="$HOME/.sdkman"
-[[ -d "$sdkman_path" ]] && . "$sdkman_path/bin/sdkman-init.sh"
+[ -d "$sdkman_path" ] && . "$sdkman_path/bin/sdkman-init.sh"
 
 jars_path="$HOME/jars"
-if [[ -d "$jars_path" ]]; then
+if [ -d "$jars_path" ]; then
   export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0 |
     xargs echo | tr ' ' ':')
 fi
@@ -125,7 +125,7 @@ path_prepend "$HOME/.pyenv/bin"
 if command -v pyenv >/dev/null; then
   eval "$(pyenv init -)"
   eval "$(pyenv init --path)"
-  if [[ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]]; then
+  if [ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     eval "$(pyenv virtualenv-init -)"
   fi
@@ -140,21 +140,21 @@ path_prepend "$HOME/.local/bin"
 ### Nvm ########################################################################
 
 nvm_path="$HOME/.nvm"
-if [[ -d "$nvm_path" ]]; then
+if [ -d "$nvm_path" ]; then
   source "$nvm_path/nvm.sh"
-  [[ -s "$nvm_path/bash_completion" ]] && source "$nvm_path/bash_completion"
+  [ -s "$nvm_path/bash_completion" ] && source "$nvm_path/bash_completion"
 fi
 
 ### Haskell ####################################################################
 
 path_prepend "$HOME/.ghcup/bin"
-[[ -d "$HOME/.gchup" ]] && . "$HOME/.ghcup/env"
+[ -d "$HOME/.gchup" ] && . "$HOME/.ghcup/env"
 path_prepend "$HOME/.cabal/bin"
 
 ### Go #########################################################################
 
 go_path="$HOME/go"
-if [[ -d "$go_path" ]]; then
+if [ -d "$go_path" ]; then
   path_prepend "$go_path/bin"
   export GOPATH="$go_path"
   export GOROOT="$HOME/.go"
@@ -163,7 +163,7 @@ fi
 ### Rust #######################################################################
 
 cargo_path="$HOME/.cargo"
-if [[ -d "$cargo_path" ]]; then
+if [ -d "$cargo_path" ]; then
   path_prepend "$cargo_path/bin"
   source "$cargo_path/env"
 fi
@@ -172,7 +172,7 @@ fi
 
 # multi-user installation:
 # $ sh <(curl -L https://nixos.org/nix/install) --daemon
-if [[ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
+if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
   source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
   path_append "/nix/var/nix/profiles/default/bin"
   path_prepend "$HOME/.nix-profile/bin"
@@ -201,7 +201,7 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 if [[ $OSTYPE == darwin* ]] && command -v lima >/dev/null; then
   # requires forwarding the socket in the lima vm config file
   export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
-elif [[ -x "$HOME/bin/docker" ]] ; then
+elif [ -x "$HOME/bin/docker" ] ; then
   # rootless docker installed
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi

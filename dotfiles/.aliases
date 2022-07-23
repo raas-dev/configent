@@ -242,7 +242,7 @@ alias week='date +%V'
 
 # Quick extract
 ext() {
-  if [[ -f $1 ]]; then
+  if [ -f "$1" ]; then
     case $1 in
     *.tar.bz2) tar xvjf "$1" ;;
     *.tar.gz) tar xvzf "$1" ;;
@@ -264,11 +264,11 @@ ext() {
 
 # nixery.dev
 nixery() {
-  [[ -z "$1" ]] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
+  [ -z "$1" ] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
   local pkg="$1"
   shift
   local args="${*:-$pkg}"
-  if [[ $(uname -m) == 'arm64' ]] || [[ $(uname -m) == 'aarch64' ]]; then
+  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
     image="nixery.dev/arm64/shell/$pkg"
   else
     image="nixery.dev/shell/$pkg"
@@ -284,13 +284,13 @@ nixery() {
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
   if command -v lnav >/dev/null; then
-    if [[ -r "$log" ]]; then
+    if [ -r "$log" ]; then
       lnav "$log"
     else
       sudo lnav "$log"
     fi
   else
-    if [[ -r "$log" ]]; then
+    if [ -r "$log" ]; then
       tail --follow --verbose --lines=20 "$log"
     else
       sudo tail --follow --verbose --lines=20 "$log"

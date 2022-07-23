@@ -14,7 +14,7 @@ if [[ $OSTYPE == darwin* ]]; then
   fi
   limactl shell "$VM" "$HOME/local/bin/podman" $@
 else
-  if [[ -x "/usr/bin/podman" ]]; then
+  if [ -x "/usr/bin/podman" ]; then
     "/usr/bin/podman" $@
   else
     echo "${BASH_SOURCE:-$0}: podman not found in this Linux system."

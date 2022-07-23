@@ -3,13 +3,13 @@
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 eval_brew() {
-  if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x "/usr/local/bin/brew" ]]; then
+  elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
-  elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
     eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
   fi
 }
@@ -28,23 +28,23 @@ brew install bash-completion ||
 ### Set bash as the default shell ##############################################
 
 if [[ $OSTYPE == darwin* ]]; then
-  if [[ $(uname -m) == 'arm64' ]]; then
+  if [ "$(uname -m)" = 'arm64' ]; then
     brew_bash_path="/opt/homebrew/bin/bash"
   else
     brew_bash_path="/usr/local/bin/bash"
   fi
   default_shell=$(dscl . -read "$HOME" UserShell | cut -d' ' -f2)
 else
-  if [[ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]]; then
+  if [ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]; then
     brew_bash_path="/home/linuxbrew/.linuxbrew/bin/bash"
-  elif [[ -x "$HOME/.linuxbrew/bin/bash" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/bash" ]; then
     brew_bash_path="$HOME/.linuxbrew/bin/bash"
   fi
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [[ -e $brew_bash_path ]]; then
-  if [[ $default_shell == "$brew_bash_path" ]]; then
+if [ -e "$brew_bash_path" ]; then
+  if [ "$default_shell" = "$brew_bash_path" ]; then
     echo "Brewed Bash is already set as the user's default shell."
   else
     if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then

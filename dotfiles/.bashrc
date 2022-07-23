@@ -5,18 +5,18 @@
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
 # quit if no prompt is present - shell is not interactive
-[[ -z $PS1 ]] && return
+[ -z "$PS1" ] && return
 
 if [[ $OSTYPE == darwin* ]]; then
-  if [[ -x "/opt/homebrew/bin/bash" ]]; then
+  if [ -x "/opt/homebrew/bin/bash" ]; then
     export SHELL="/opt/homebrew/bin/bash"
-  elif [[ -x "/usr/local/bin/bash" ]]; then
+  elif [ -x "/usr/local/bin/bash" ]; then
     export SHELL="/usr/local/bin/bash"
   fi
 else
-  if [[ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]]; then
+  if [ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]; then
     export SHELL="/home/linuxbrew/.linuxbrew/bin/bash"
-  elif [[ -x "$HOME/.linuxbrew/bin/bash" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/bash" ]; then
     export SHELL="$HOME/.linuxbrew/bin/bash"
   fi
 fi
@@ -64,13 +64,13 @@ parse_git_branch() {
 get_branch_info() {
   local branch=$(parse_git_branch)
   local scm=''
-  if [[ -n $branch ]]; then
+  if [ -n "$branch" ]; then
     scm='git'
   else
     branch=$(parse_git_branch)
-    [[ -n $branch ]] && scm='hg'
+    [ -n "$branch" ] && scm='hg'
   fi
-  [[ -n $scm ]] && echo "($scm:$branch)"
+  [ -n "$scm" ] && echo "($scm:$branch)"
 }
 
 if command -v git >/dev/null; then
@@ -83,25 +83,25 @@ fi
 
 if [[ $OSTYPE != darwin* ]]; then
   # apt-get install bash-completion
-  if [[ -f "/usr/share/bash-completion/bash_completion" ]]; then
+  if [ -f "/usr/share/bash-completion/bash_completion" ]; then
     # ubuntu
     source "/usr/share/bash-completion/bash_completion"
-  elif [[ -f "etc/bash_completion" ]]; then
+  elif [ -f "etc/bash_completion" ]; then
     # debian
     source "/etc/bash_completion"
   fi
 fi
 
 # add tab completion for hostnames based on ~/.ssh/config, ignoring wildcards
-[[ -e "$HOME/.ssh/config" ]] && complete -o 'default' -o 'nospace' \
+[ -e "$HOME/.ssh/config" ] && complete -o 'default' -o 'nospace' \
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |
     cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
 
 ### Load other configs #########################################################
 
-[[ -f "$HOME/.profile" ]] && . "$HOME/.profile"
-[[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-[[ -f "$HOME/.fzf.bash" ]] && . "$HOME/.fzf.bash"
-[[ -f "$HOME/.rclocal" ]] && . "$HOME/.rclocal" || true
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+[ -f "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
+[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
 
 # sdkman-init.sh is mentioned here to not be appended by `install_java`

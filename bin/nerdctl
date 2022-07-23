@@ -15,7 +15,7 @@ if [[ $OSTYPE == darwin* ]]; then
   # forward to the same script on the guest VM
   limactl shell "$VM" "$HOME/local/bin/nerdctl" $@
 else
-  if [[ -x "/usr/local/bin/nerdctl" ]]; then
+  if [ -x "/usr/local/bin/nerdctl" ]; then
     export XDG_RUNTIME_DIR="/run/user/$(id -u)"
     "/usr/local/bin/nerdctl" $@
   else

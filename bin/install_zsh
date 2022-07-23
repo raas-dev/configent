@@ -3,13 +3,13 @@
 trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
 
 eval_brew() {
-  if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x "/usr/local/bin/brew" ]]; then
+  elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
-  elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
     eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
   fi
 }
@@ -32,23 +32,23 @@ git clone https://github.com/zplug/zplug.git "$HOME/.zplug" ||
 ### Set zsh as the default shell ###############################################
 
 if [[ $OSTYPE == darwin* ]]; then
-  if [[ $(uname -m) == 'arm64' ]]; then
+  if [ "$(uname -m)" = 'arm64' ]; then
     brew_zsh_path="/opt/homebrew/bin/zsh"
   else
     brew_zsh_path="/usr/local/bin/zsh"
   fi
   default_shell=$(dscl . -read "$HOME" UserShell | cut -d' ' -f2)
 else
-  if [[ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]]; then
+  if [ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]; then
     brew_zsh_path="/home/linuxbrew/.linuxbrew/bin/zsh"
-  elif [[ -x "$HOME/.linuxbrew/bin/zsh" ]]; then
+  elif [ -x "$HOME/.linuxbrew/bin/zsh" ]; then
     brew_zsh_path="$HOME/.linuxbrew/bin/zsh"
   fi
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [[ -e $brew_zsh_path ]]; then
-  if [[ $default_shell == "$brew_zsh_path" ]]; then
+if [ -e "$brew_zsh_path" ]; then
+  if [ "$default_shell" = "$brew_zsh_path" ]; then
     echo "Brewed Zsh is already set as the user's default shell."
   else
     if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then
