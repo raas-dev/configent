@@ -38,15 +38,6 @@ pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
 pip install --upgrade semgrep
 
-### Azure ######################################################################
-
-pip install --upgrade azure-cli
-az config set core.collect_telemetry=false
-az config set core.output=jsonc
-
-az extension add --name azure-devops --upgrade --yes
-az extension add --name next --upgrade --yes
-
 ### Simplenote CLI #############################################################
 
 pip install --upgrade sncli

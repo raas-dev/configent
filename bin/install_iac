@@ -45,17 +45,21 @@ brew install k6   # go
 brew install nmap # c
 brew install oha  # rust
 
-### aws ########################################################################
-
-brew install aws-vault # go
-
 ### azure ######################################################################
+
+brew install azure-cli # python
+az config set core.collect_telemetry=false
+az config set core.output=jsonc
+
+az extension add --name azure-devops --upgrade --yes
+az extension add --name next --upgrade --yes
 
 brew install azcopy # go
 
-### AWS ########################################################################
+### aws ########################################################################
 
-brew install awscli # python, v2 not available in PyPI
+brew install awscli    # python
+brew install aws-vault # go
 
 ### k8s ########################################################################
 
