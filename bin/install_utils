@@ -63,4 +63,5 @@ if [[ $OSTYPE == darwin* ]]; then
   #brew install gnu-tar
   #brew install gnu-time
   #brew install gnu-which
+  brew install grep
 fi
