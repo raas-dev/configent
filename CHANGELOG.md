@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.1](https://github.com/raas-dev/configent/compare/1.17.0...1.17.1) (2022-07-23)
+
+
+### Fixes
+
+* **git:** Install git from brew only on macOS ([babda30](https://github.com/raas-dev/configent/commit/babda30ccdeb3afdb0d6e204c3f813277d324806))
+* **rust:** Disable installation of Rust development tools ([624bb6c](https://github.com/raas-dev/configent/commit/624bb6c1a7cff16c0782fb8eac1af83f60ec1120))
+* **shells:** Move installation of starship prompt to utils ([b68fd96](https://github.com/raas-dev/configent/commit/b68fd964d373487698930c2998103342bc3aff25))
+* **utils:** Add installation of GNU grep on macOS ([2675334](https://github.com/raas-dev/configent/commit/267533444ceb6f6e352585f19a9897850059865f))
+* **versionrc:** Do not show refactor commits in CHANGELOG ([2b2f379](https://github.com/raas-dev/configent/commit/2b2f3799c1d7f22683f77653f568fec9387eb08f))
+
 ## [1.17.0](https://github.com/raas-dev/configent/compare/1.16.5...1.17.0) (2022-07-22)
 
 
