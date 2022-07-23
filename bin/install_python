@@ -29,15 +29,35 @@ python3_version="3.10.5"
 "$HOME/.pyenv/bin/pyenv" shell "$python3_version"
 "$HOME/.pyenv/bin/pyenv" global "$python3_version"
 
-### Python packages ############################################################
-
 eval "$($HOME/.pyenv/bin/pyenv init --path)"
-
 pip install --upgrade pip setuptools wheel
+
+### Python Development tools ###################################################
+
 pip install --upgrade pre-commit
 pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
+
+### Azure ######################################################################
+
+pip install --upgrade azure-cli
+az config set core.collect_telemetry=false
+az config set core.output=jsonc
+
+az extension add --name azure-devops --upgrade --yes
+az extension add --name next --upgrade --yes
+
+### AWS ########################################################################
+
+pip install --upgrade awscli
+pip install --upgrade semgrep
+
+### Simplenote CLI #############################################################
+
 pip install --upgrade sncli
+
+### Media downloader ###########################################################
+
 pip install --upgrade you-get
 
 ### Jupyter ####################################################################

@@ -24,7 +24,6 @@ fi
 ### linters ####################################################################
 
 brew install hadolint   # haskell
-brew install semgrep    # python
 brew install shellcheck # haskell
 
 ### scanners ###################################################################
@@ -48,17 +47,9 @@ brew install oha  # rust
 
 ### aws ########################################################################
 
-brew install awscli    # python
 brew install aws-vault # go
 
 ### azure ######################################################################
-
-brew install azure-cli # python
-az config set core.collect_telemetry=false
-az config set core.output=jsonc
-
-az extension add --name azure-devops --upgrade --yes
-az extension add --name next --upgrade --yes
 
 brew install azcopy # go
 
