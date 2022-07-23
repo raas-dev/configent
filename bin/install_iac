@@ -53,6 +53,10 @@ brew install aws-vault # go
 
 brew install azcopy # go
 
+### AWS ########################################################################
+
+brew install awscli # python, v2 not available in PyPI
+
 ### k8s ########################################################################
 
 brew install kubernetes-cli # go
