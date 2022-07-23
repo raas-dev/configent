@@ -83,9 +83,7 @@ fi
 
 ### Prompt #####################################################################
 
-if command -v starship >/dev/null; then
-  eval "$(starship init "${SHELL##*/}")"
-fi
+command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 
 # brew install bash-completion
 if command -v brew >/dev/null ; then
@@ -118,10 +116,7 @@ fi
 ### Rbenv ######################################################################
 
 path_prepend "$HOME/.rbenv/bin"
-
-if command -v rbenv >/dev/null; then
-  eval "$(rbenv init -)"
-fi
+command -v rbenv >/dev/null && eval "$(rbenv init -)"
 
 ### Pyenv ######################################################################
 
@@ -153,8 +148,8 @@ fi
 ### Haskell ####################################################################
 
 path_prepend "$HOME/.ghcup/bin"
-path_prepend "$HOME/.cabal/bin"
 [[ -d "$HOME/.gchup" ]] && . "$HOME/.ghcup/env"
+path_prepend "$HOME/.cabal/bin"
 
 ### Go #########################################################################
 
@@ -194,7 +189,8 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 ### awscli #####################################################################
 
-command -v aws_completer >/dev/null && complete -C "$(command -v aws_completer)" aws
+command -v aws_completer >/dev/null && \
+  complete -C "$(command -v aws_completer)" aws
 
 ### Azure Functions Core Tools #################################################
 
