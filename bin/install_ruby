@@ -17,7 +17,7 @@ eval "$($HOME/.rbenv/bin/rbenv init -)"
 
 ### rubies #####################################################################
 
-if [[ $OSTYPE == linux* ]] && [ -f /etc/alpine-release ]; then
+if [ "$(uname -s)" = 'Linux' ] && [ -f /etc/alpine-release ]; then
   ruby_version="2.6.10" # Required for Homebrew on Alpine Linux
 
   "$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"

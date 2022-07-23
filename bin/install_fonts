@@ -10,7 +10,7 @@ fonts_dir="$this_path/../ui/fonts"
 find_command="find \"$fonts_dir\" \( -name '*.[o,t]tf' -or -name '*.pcf.gz' \) \
   -type f -print0"
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   font_dir="$HOME/Library/Fonts"
 else
   font_dir="$HOME/.local/share/fonts"

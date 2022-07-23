@@ -21,13 +21,13 @@ path_prepend() {
   fi
 }
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   PATH=''
   path_append '/usr/bin'
   path_append '/bin'
   path_append '/usr/sbin'
   path_append '/sbin'
-elif [[ $OSTYPE == linux-gnu* ]]; then
+elif [ "$(uname -s)" = 'Linux' ]; then
   PATH=''
   path_append '/usr/local/sbin'
   path_append '/usr/local/bin'
@@ -65,7 +65,7 @@ stty -ixon
 
 ### Homebrew/Linuxbrew #########################################################
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x "/usr/local/bin/brew" ]; then
@@ -198,7 +198,7 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
 ### DOCKER_HOST ################################################################
 
-if [[ $OSTYPE == darwin* ]] && command -v lima >/dev/null; then
+if [ "$(uname -s)" = 'Darwin' ] && command -v lima >/dev/null; then
   # requires forwarding the socket in the lima vm config file
   export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
 elif [ -x "$HOME/bin/docker" ] ; then

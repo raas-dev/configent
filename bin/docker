@@ -7,7 +7,7 @@
 
 : "${VM:="ubuntu"}"
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
     echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
     exit 127

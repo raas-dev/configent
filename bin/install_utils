@@ -42,7 +42,7 @@ brew install zoxide                                                     # rust
 
 ### macOS only brews ###########################################################
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   # The logfile navigator (https://github.com/tstack/lnav)
   brew install lnav
 

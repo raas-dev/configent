@@ -3,7 +3,7 @@
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/zsh" ]; then
     export SHELL="/opt/homebrew/bin/zsh"
   elif [ -x "/usr/local/bin/zsh" ]; then

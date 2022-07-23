@@ -27,7 +27,7 @@ brew install bash-completion ||
 
 ### Set bash as the default shell ##############################################
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if [ "$(uname -m)" = 'arm64' ]; then
     brew_bash_path="/opt/homebrew/bin/bash"
   else
@@ -56,7 +56,7 @@ if [ -e "$brew_bash_path" ]; then
           echo "Sudo password may be asked next to write to /etc/shells"
           echo "$brew_bash_path" | sudo tee -a /etc/shells
         fi
-        if [[ $OSTYPE == darwin* ]]; then
+        if [ "$(uname -s)" = 'Darwin' ]; then
           echo "On macOS, sudo is used to set the user's default shell."
           sudo dscl . -create "$HOME" UserShell "$brew_bash_path"
         else

@@ -31,7 +31,7 @@ git clone https://github.com/zplug/zplug.git "$HOME/.zplug" ||
 
 ### Set zsh as the default shell ###############################################
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if [ "$(uname -m)" = 'arm64' ]; then
     brew_zsh_path="/opt/homebrew/bin/zsh"
   else
@@ -60,7 +60,7 @@ if [ -e "$brew_zsh_path" ]; then
           echo "Sudo password may be asked next to write to /etc/shells"
           echo "$brew_zsh_path" | sudo tee -a /etc/shells
         fi
-        if [[ $OSTYPE == darwin* ]]; then
+        if [ "$(uname -s)" = 'Darwin' ]; then
           echo "On macOS, sudo is used to set the user's default shell."
           sudo dscl . -create "$HOME" UserShell "$brew_zsh_path"
         else

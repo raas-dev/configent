@@ -7,7 +7,7 @@
 # quit if no prompt is present - shell is not interactive
 [ -z "$PS1" ] && return
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/bash" ]; then
     export SHELL="/opt/homebrew/bin/bash"
   elif [ -x "/usr/local/bin/bash" ]; then
@@ -81,7 +81,7 @@ fi
 
 ### Additional bash completions ################################################
 
-if [[ $OSTYPE != darwin* ]]; then
+if [ "$(uname -s)" = 'Linux' ]; then
   # apt-get install bash-completion
   if [ -f "/usr/share/bash-completion/bash_completion" ]; then
     # ubuntu

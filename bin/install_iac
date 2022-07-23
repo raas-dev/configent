@@ -32,7 +32,7 @@ brew install trivy # go
 
 ### docker #####################################################################
 
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   brew install lima # go
 else
   brew install ctop # go
