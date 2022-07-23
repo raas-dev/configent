@@ -34,7 +34,7 @@ else
 fi
 
 # install language version managers and versions
-"$bin_path/install_rust"
+#"$bin_path/install_rust"
 "$bin_path/install_go"
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
