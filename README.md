@@ -145,7 +145,7 @@ Both container runtimes in a nutshell:
 - containerd is the de facto runtime in production Kubernetes - thus prefer it
 - regardless of runtime, `sudo` is always a bad idea when it comes to security
 
-On macOS, these `bin/` shims wrap the respective CLIs to run inside Linux VMs:
+These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
 - `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
 - `docker-compose`: Installs and runs docker-compose as a docker cli plugin
@@ -154,9 +154,15 @@ On macOS, these `bin/` shims wrap the respective CLIs to run inside Linux VMs:
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
+💡: Use aliases `d` and `n` as generic shortcuts for starting containers in
+`docker` or `nerdctl` respectively, as long as the current working directory has
+`Dockerfile` present. The host-container mapped ports are output by the aliases.
+
+### macOS
+
 [Lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
 
-The shims create or start the necessary virtual machines, a lima VM named
+The above shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
 ❗: Both 'ubuntu' and 'rancher' VMs mount your host's `$HOME` directory as
@@ -165,10 +171,6 @@ on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 In addition, VM 'rancher' includes [k3s](https://k3s.io/) for local Kubernetes.
-
-💡: Use aliases `d` and `n` as generic shortcuts for starting containers in
-`docker` or `nerdctl` respectively, as long as the current working directory has
-`Dockerfile` present. The host-container mapped ports are output by the aliases.
 
 ## 🔨 Development
 
