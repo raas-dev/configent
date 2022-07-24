@@ -192,7 +192,7 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 ### awscli #####################################################################
 
-command -v aws_completer >/dev/null && \
+command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
 ### Azure Functions Core Tools #################################################

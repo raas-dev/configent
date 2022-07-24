@@ -54,8 +54,8 @@ $SUDO apk add lnav
 #$SUDO apk add xsel
 
 # Microsoft TrueType fonts (accepts EULA)
-#$SUDO apk add msttcorefonts-installer fontconfig && \
-#    $SUDO update-ms-fonts && \
+#$SUDO apk add msttcorefonts-installer fontconfig &&
+#    $SUDO update-ms-fonts &&
 #    $SUDO fc-cache -f
 
 # Docker (rootless Docker is not supported on Alpine Linux)

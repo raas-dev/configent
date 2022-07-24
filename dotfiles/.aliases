@@ -5,7 +5,7 @@
 ### OS specific ################################################################
 
 # Upgrade brew formulas, and zplugins if on zsh
-alias br='command -v brew >/dev/null && \
+alias br='command -v brew >/dev/null &&
   (brew update && brew upgrade ; brew autoremove) ; \
   command -v zplug >/dev/null && (zplug update ; zplug clean)'
 
@@ -24,7 +24,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # Clean up LaunchServices to remove duplicates in "Open With" menues
   alias cleanupls='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
-    -kill -r -domain local -domain system -domain user && \
+    -kill -r -domain local -domain system -domain user &&
     killall Finder'
 
   # Mute or unmute sounds
@@ -52,10 +52,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   command -v sha1sum >/dev/null || alias sha1sum='shasum'
 else
   if command -v apt >/dev/null; then
-    alias up='sudo apt update && \
+    alias up='sudo apt update &&
       sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
-    alias dup='sudo apt update && \
+    alias dup='sudo apt update &&
       sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
       br'
   elif command -v yum >/dev/null; then
@@ -64,18 +64,18 @@ else
     alias dup='sudo yum update -y && sudo yum autoremove -y ; \
       br'
   elif command -v yay >/dev/null; then
-    alias up='yay --noconfirm -Suy && \
+    alias up='yay --noconfirm -Suy &&
       yay -Qdtq | yay --noconfirm -Rs - ; \
       br'
     alias dup='up'
   elif command -v pacman >/dev/null; then
-    alias up='sudo pacman --noconfirm -Suy && \
+    alias up='sudo pacman --noconfirm -Suy &&
       sudo pacman -Qdtq | sudo pacman --noconfirm -Rs - ; \
       br'
     alias dup='up'
   elif command -v apk >/dev/null; then
-    alias up='sudo apk update && \
-      sudo apk add --upgrade apk-tools && \
+    alias up='sudo apk update &&
+      sudo apk add --upgrade apk-tools &&
       sudo apk upgrade ; \
       br'
     alias dup='up'
