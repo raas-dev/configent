@@ -26,35 +26,25 @@ containerd:
 provision:
   - mode: system
     script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      command -v podman >/dev/null 2>&1 && exit 0
-      export DEBIAN_FRONTEND=noninteractive
-      apt-get update
-      apt-get install -y podman crun
+      #!/bin/sh
+      DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y podman
   - mode: user
     script: |
-      #!/bin/bash
-      set -eux -o pipefail
+      #!/bin/sh
       systemctl --user enable --now podman.socket
   - mode: system
     script: |
-      #!/bin/bash
+      #!/bin/sh
       echo "unqualified-search-registries = ['docker.io']" | tee -a /etc/containers/registries.conf
-  - mode: system
-    script: |
-      #!/bin/bash
-      apt-get install -y pip
   - mode: user
     script: |
-      #!/bin/bash
-      pip install podman-compose
+      #!/bin/sh
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh &
 
 probes:
   - script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 30s bash -c "until command -v podman >/dev/null 2>&1; do sleep 3; done"; then
+      #!/bin/sh
+      if ! timeout 30s sh -c "until command -v podman >/dev/null 2>&1; do sleep 3; done"; then
         echo >&2 "podman is not installed yet"
         exit 1
       fi
