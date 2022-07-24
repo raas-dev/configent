@@ -160,7 +160,8 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 
 ### macOS
 
-[Lima](https://github.com/lima-vm/lima) is used for managing Linux VMs on QEMU.
+Both dockerd and containerd base on Linux kernel features not present on macOS,
+so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 
 The above shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
