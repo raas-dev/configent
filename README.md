@@ -51,8 +51,8 @@ or main branch is pulled on top of it if the git working copy already exists.
 
 ### Server (default)
 
-Nothing is prompted by `install.sh`. It is non-interactive and thus suitable
-for cloud-init.
+Script `install.sh` is non-interactive and suitable for cloud-init when run as
+user with passwordless sudo (recommended), or as root.
 
 Fork this repo, comment or uncomment the wanted tech stacks in `install_apps`,
 and change the curl URL to point to your public fork.
