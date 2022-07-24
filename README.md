@@ -48,11 +48,15 @@ distro's package manager or by Xcode Command Line Tools on macOS.
 Then the respective git tag from this repository is cloned as `$HOME/configent`,
 or main branch is pulled on top of it if the git working copy already exists.
 
-### Customization
+### Server (default)
 
 Nothing is prompted by `install.sh`. It is non-interactive and thus suitable
-for cloud-init. Fork this repo, comment or uncomment the wanted tech stacks
-in `install_apps`, and change the curl to point to your public fork.
+for cloud-init.
+
+Fork this repo, comment or uncomment the wanted tech stacks in `install_apps`,
+and change the curl to point to your public fork.
+
+### Desktop
 
 GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
 `./bootstrap` in the repo (after `install.sh` finishes) to install GUI apps.
