@@ -80,7 +80,7 @@ The default shell is not changed to zsh (as there is a chance that zsh
 installation has failed), but you may do it (and get prompted) by running
 `bin/install_zsh` after `bootstrap` has finished.
 
-### ⚙️ symlink_dotfiles
+### symlink_dotfiles
 
 Creates symlinks in the user's home directory for all the files in  `dotfiles/`.
 
@@ -94,7 +94,7 @@ If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 the configuration of the current shell (`.bashrc` or `.zshrc`) shell with `r`
 and all the scripts in `bin/` are available by name.
 
-### 🖥️ install_apps
+### install_apps
 
 MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
@@ -116,7 +116,7 @@ On macOS, Homebrew, formulae and casks are always installed user-wide.
 
 On Linux distros, snaps are system-wide and auto-upgraded on schedule by snapd.
 
-### 🖊️ setup_vscode
+### setup_vscode
 
 The script symlinks `vscode/` to `<user_vscode_path>/Code`.
 The old `Code/` is first backed up as `Code-old`.
