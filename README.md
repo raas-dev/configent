@@ -98,7 +98,7 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
-**On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).**
+❗: On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
