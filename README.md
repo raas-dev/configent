@@ -90,10 +90,9 @@ per already existing file or symlink in the user's home directory.
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
-Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
+💡: Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) shell with `r`.
-
-All the scripts in `bin/` are available by name from now on.
+All the scripts in `bin/` are available by name from then on.
 
 ### 🖥️ install_apps
 
