@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.4](https://github.com/raas-dev/configent/compare/1.18.3...1.18.4) (2022-07-24)
+
+
+### Fixes
+
+* **profile:** Make path_append POSIX compatible ([79c960e](https://github.com/raas-dev/configent/commit/79c960ef278d8ae5a7c7811279db9558228fe484))
+
+
+### Documentation
+
+* **copyright:** Add licensed under LGPL-3.0 ([c2611be](https://github.com/raas-dev/configent/commit/c2611be673488d5903ddfdb84a3076bc7372ba3a))
+
 ### [1.18.3](https://github.com/raas-dev/configent/compare/1.18.2...1.18.3) (2022-07-23)
 
 
