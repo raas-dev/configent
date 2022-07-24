@@ -1,5 +1,7 @@
 #!/bin/sh
+# the above shebang is purely for ShellCheck, this file is not executable
 
+# shellcheck disable=SC1091  # do not expect input files
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
