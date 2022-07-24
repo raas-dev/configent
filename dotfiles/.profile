@@ -112,8 +112,8 @@ sdkman_path="$HOME/.sdkman"
 
 jars_path="$HOME/jars"
 if [ -d "$jars_path" ]; then
-  export CLASSPATH=$(find "$jars_path" -name '*.jar' -print0 |
-    xargs echo | tr ' ' ':')
+  export CLASSPATH="$(find "$jars_path" -name '*.jar' -print0 |
+    xargs echo | tr ' ' ':')"
 fi
 
 ### Rbenv ######################################################################
