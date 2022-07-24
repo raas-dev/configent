@@ -6,7 +6,7 @@
 
 # Upgrade brew formulas, and zplugins if on zsh
 alias br='command -v brew >/dev/null &&
-  (brew update && brew upgrade ; brew autoremove) ; \
+  (brew update && brew upgrade ; brew autoremove) ;
   command -v zplug >/dev/null && (zplug update ; zplug clean)'
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -35,7 +35,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias reseticons="sudo /usr/bin/find /private/var/folders/ -name com.apple.dock.iconcache -exec rm {} \;; sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \;; sudo rm -rf /Library/Caches/com.apple.iconservices.store; sleep 3; killall Dock; killall Finder"
 
   # Fix macOS keyboard input sources
-  alias resetkeyboard="rm -f ~/Library/Preferences/com.apple.HIToolbox.plist ; \
+  alias resetkeyboard="rm -f ~/Library/Preferences/com.apple.HIToolbox.plist ;
   sudo rm -f /Library/Preferences/com.apple.HIToolbox.plist"
 
   # Disable or enable Spotlight (indexing)
@@ -53,30 +53,30 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 else
   if command -v apt >/dev/null; then
     alias up='sudo apt update &&
-      sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
+      sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ;
       br'
     alias dup='sudo apt update &&
-      sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ; \
+      sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ;
       br'
   elif command -v yum >/dev/null; then
-    alias up='sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ; \
+    alias up='sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ;
       br'
-    alias dup='sudo yum update -y && sudo yum autoremove -y ; \
+    alias dup='sudo yum update -y && sudo yum autoremove -y ;
       br'
   elif command -v yay >/dev/null; then
     alias up='yay --noconfirm -Suy &&
-      yay -Qdtq | yay --noconfirm -Rs - ; \
+      yay -Qdtq | yay --noconfirm -Rs - ;
       br'
     alias dup='up'
   elif command -v pacman >/dev/null; then
     alias up='sudo pacman --noconfirm -Suy &&
-      sudo pacman -Qdtq | sudo pacman --noconfirm -Rs - ; \
+      sudo pacman -Qdtq | sudo pacman --noconfirm -Rs - ;
       br'
     alias dup='up'
   elif command -v apk >/dev/null; then
     alias up='sudo apk update &&
       sudo apk add --upgrade apk-tools &&
-      sudo apk upgrade ; \
+      sudo apk upgrade ;
       br'
     alias dup='up'
   fi
@@ -169,9 +169,9 @@ command -v nvim >/dev/null && alias vim='nvim'
 ### Lima VMs ###################################################################
 
 alias vm4rancher="limactl start \$HOME/local/etc/lima/rancher.yaml \
-  --tty=false ; \
-  export KUBECONFIG=\$HOME/.lima/rancher/kubeconfig.yaml ; \
-  limactl shell rancher sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ; \
+  --tty=false ;
+  export KUBECONFIG=\$HOME/.lima/rancher/kubeconfig.yaml ;
+  limactl shell rancher sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ;
   kubectl get nodes"
 
 alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
