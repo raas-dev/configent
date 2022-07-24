@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### gvm ########################################################################
 

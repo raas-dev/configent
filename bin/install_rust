@@ -8,7 +8,7 @@
 
 # shellcheck disable=SC1091  # do not expect input files
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### rustup #####################################################################
 
