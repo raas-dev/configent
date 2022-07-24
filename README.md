@@ -34,11 +34,12 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-Pre-requirements are installed system-wide thus `sudo` password may be asked.
-
 ## 💣 Up
 
-**Note: The script overrides your current dotfiles at $HOME without prompting.**
+All configuration (dotfiles, VSCode settings) is installed per-user.
+**The script overrides those files at $HOME without prompting.**
+
+Some packages are installed system-wide, thus `sudo` password may be asked:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.18.6/install.sh | sh
 
