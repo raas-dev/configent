@@ -230,7 +230,7 @@ alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
 alias serv='python3 -m http.server 8000 --bind 127.0.0.1'
 
 # Display PATH content
-alias path='echo -e "${PATH//:/\\n}"'
+alias path='printf "${PATH//:/\\n}\n"'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -414,7 +414,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   set_keychain_variable() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: set_keychain_variable <varname>" && return 1
-    echo -n "Enter secret for $name: "
+    printf "Enter secret for %s: " "$name"
     read -r secret
     [ -z "$secret" ] && echo "Error: Empty secret" && return 1
     security add-generic-password -U \
