@@ -160,7 +160,7 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 
 ### macOS
 
-Both dockerd and containerd base on Linux kernel features not present on macOS,
+Both dockerd and containerd base on Linux kernel features not present on macOS
 so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 
 The above shims create or start the necessary virtual machines, a lima VM named
@@ -184,15 +184,14 @@ VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by fetching and running `install.sh` from this repo's main branch.
 
 Once VM has been started, your host's `$HOME` directory is mounted in the VM,
-for testing scripts changes without first commiting and pushing to the remote
-repo/your fork.
+for testing script changes without first committing and pushing to your fork.
 
 ### Contributing
 
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-Install [pre-commit](https://pre-commit.com/) and the hooks before pushing:
+Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
 
     pip3 install --user --upgrade pre-commit
     pre-commit install --hook-type pre-commit
