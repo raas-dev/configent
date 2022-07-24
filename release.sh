@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
 # update changelog: https://github.com/conventional-changelog/standard-version
 # tag, replace version in files: https://github.com/commitizen-tools/commitizen
 

@@ -1,6 +1,12 @@
 #!/bin/sh
 
-# Originally from:
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# install.sh is based on parts from:
 # https://github.com/geekzter/bootstrap-os/blob/master/linux/bootstrap_linux.sh
 
 # shellcheck disable=SC1091  # do not expect input files
