@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.5](https://github.com/raas-dev/configent/compare/1.18.4...1.18.5) (2022-07-24)
+
+
+### Documentation
+
+* **README:** Refresh shields.io ([1592122](https://github.com/raas-dev/configent/commit/1592122597f247539c1016ab8a8d014a52868a26))
+* **README:** Update screenshot ([a95b00b](https://github.com/raas-dev/configent/commit/a95b00b15623701f63552d2b15960baf390dcbb6))
+
+
+### Performance
+
+* **dotfiles:** Make dotfiles POSIX compatible ([66f9009](https://github.com/raas-dev/configent/commit/66f90096587e8307501a5e3b29000837d07147d9))
+* **shell:** Use /bin/sh over bash for speed whenever possible ([938f666](https://github.com/raas-dev/configent/commit/938f666832eb8db9977ace2008234c91eb71e586))
+
+
+### Fixes
+
+* **aliases:** Fix echo bashisms ([4363e1e](https://github.com/raas-dev/configent/commit/4363e1ec00865e46f0e5788f708c53548e0b27d9))
+* **aliases:** Parse with bash to allow local variables ([60cf358](https://github.com/raas-dev/configent/commit/60cf358fecdf7607801f476723b0dec20eb7c423))
+* **dotfiles:** Prefer . over source ([ca8313c](https://github.com/raas-dev/configent/commit/ca8313c2c372b20fbcecd0cec59b1fd865e78823))
+* **profile:** Parse using bash for string substitutions to work ([91920a1](https://github.com/raas-dev/configent/commit/91920a131de98bfefb7dda01b8fa0eae9e8e6c98))
+* **profile:** Quote CLASSPATH ([096dc87](https://github.com/raas-dev/configent/commit/096dc8736293a2089bc87f17f5deb0a8376d555b))
+* **profile:** Remove non-standard function keyword ([a61f736](https://github.com/raas-dev/configent/commit/a61f73603f1a3257a3890f8178d9f61f364a9b7b))
+* **shells:** Fix echo bashism in traps ([7617fd7](https://github.com/raas-dev/configent/commit/7617fd7c5bbd42e1c487e57da8b2f32f09eb7cee))
+
 ### [1.18.4](https://github.com/raas-dev/configent/compare/1.18.3...1.18.4) (2022-07-24)
 
 
