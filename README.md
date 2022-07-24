@@ -197,7 +197,7 @@ Install or upgrade [pre-commit](https://pre-commit.com/) and install the hooks:
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-#### Out of scope
+### Bugs in dependencies
 
 - Homebrew on Linux on 64-bit ARM: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm)
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
