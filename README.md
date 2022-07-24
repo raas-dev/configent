@@ -113,17 +113,20 @@ Order of installation:
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred, but if this is not possible (no `sudo`), it is installed user's home.
 
-On macOS, Homebrew and casks are always user-wide.
+On macOS, Homebrew, formulae and casks are always installed user-wide.
 
-On Linux distros, Snaps are system-wide and auto-upgraded on schedule by snapd.
+On Linux distros, snaps are system-wide and auto-upgraded on schedule by snapd.
 
 ### 🖊️ setup_vscode
 
 The script symlinks `vscode/` to `<user_vscode_path_at_home>/Code`.
 The old `Code/` is first backed up as `Code-old`.
 
-This is done even if `code` is not (yet) installed.
+Symlinking happens even if `code` has not been installed by `install_apps`.
 If `code` is present, VSCode extensions are installed.
+
+Configuring
+[VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) will not interfere with storing configs in the git repo.
 
 ## 🐚 Default shell
 
