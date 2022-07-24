@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -8,7 +8,7 @@
 
 # shellcheck disable=SC1091  # do not expect input files
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 ### nvm ########################################################################
 

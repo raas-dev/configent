@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then

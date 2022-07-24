@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.

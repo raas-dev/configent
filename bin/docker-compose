@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -43,7 +43,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
     "$local_docker_path" compose $@
   else
-    if ! limactl shell "$VM" true &>/dev/null; then
+    if ! limactl shell "$VM" true >/dev/null 2>&1; then
       limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
         limactl start "$VM"
     fi

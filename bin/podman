@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -14,7 +14,7 @@
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # forward to the same script on the guest VM
-  if ! limactl shell "$VM" true &>/dev/null; then
+  if ! limactl shell "$VM" true >/dev/null 2>&1; then
     limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
@@ -23,7 +23,7 @@ else
   if [ -x "/usr/bin/podman" ]; then
     "/usr/bin/podman" $@
   else
-    echo "${BASH_SOURCE:-$0}: podman not found in this Linux system."
+    echo "Error: podman not found in this Linux system."
     exit 127
   fi
 fi

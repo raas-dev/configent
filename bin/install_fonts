@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -6,9 +6,9 @@
 # Copyright(C) 2016- Anssi Syrjäsalo
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
-this_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+this_path=$(cd "$(dirname "$0")" && pwd)
 fonts_dir="$this_path/../ui/fonts"
 
 ### Install fonts ##############################################################

@@ -37,7 +37,7 @@ provision:
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   - mode: user
     script: |
-      #!/bin/bash
+      #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
 probes:

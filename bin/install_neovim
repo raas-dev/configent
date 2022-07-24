@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" SIGINT
+trap "echo -e '\nCaught ^C from user - exiting now' ; exit 130" INT
 
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
@@ -41,4 +41,4 @@ vundle_dir="$HOME/.vim/bundle/Vundle.vim"
 git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
   git -C "$vundle_dir" pull --rebase
 
-echo -ne '\n' | vim +PluginInstall +qall 2>/dev/null
+printf '\n' | vim +PluginInstall +qall 2>/dev/null
