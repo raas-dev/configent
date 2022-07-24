@@ -119,7 +119,7 @@ On Linux distros, snaps are system-wide and auto-upgraded on schedule by snapd.
 
 ### 🖊️ setup_vscode
 
-The script symlinks `vscode/` to `<user_vscode_path_at_home>/Code`.
+The script symlinks `vscode/` to `<user_vscode_path>/Code`.
 The old `Code/` is first backed up as `Code-old`.
 
 Symlinking happens even if `code` has not been installed by `install_apps`.
