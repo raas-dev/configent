@@ -34,7 +34,7 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-Things are happening per user, but `sudo` password may be asked on some distros.
+Installation is per user and `sudo` password may be asked for some OS features.
 
 ## 💣 Up
 
