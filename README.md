@@ -37,10 +37,9 @@ Works on:
 ## 💣 Up
 
 All configuration (dotfiles, VSCode settings) is installed per-user.
+**The script overrides existing dotfiles at `$HOME` without prompting.**
 
-**Note: The script overrides existing dotfiles at `$HOME` without prompting.**
-
-Some packages are installed system-wide, thus `sudo` password may be asked:
+Some packages are installed system-wide, thus `sudo` password may be asked.
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.18.6/install.sh | sh
 
