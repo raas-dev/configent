@@ -98,7 +98,7 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
-❗: On ARM64 Linux distros, Homebrew parts are skipped (see [Known bugs](https://github.com/raas-dev/configent#known-bugs)).
+❗: On ARM64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
@@ -200,7 +200,7 @@ Install or upgrade [pre-commit](https://pre-commit.com/) and install the hooks:
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-### Bugs in dependencies
+### Issues in dependencies
 
 - Homebrew on Linux on 64-bit ARM: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm)
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
