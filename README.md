@@ -122,8 +122,8 @@ On Linux distros, snaps are system-wide and auto-upgraded on schedule by snapd.
 The script symlinks `vscode/` to `<user_vscode_path>/Code`.
 The old `Code/` is first backed up as `Code-old`.
 
-Symlinking happens even if `code` has not been installed by `install_apps`.
-If `code` is present, VSCode extensions are installed.
+Symlinking happens even if `code` has not been installed.
+If `code` is present, also VSCode extensions are installed.
 
 Configuring
 [VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) will not interfere with storing configs in the git repo.
