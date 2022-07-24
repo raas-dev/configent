@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
@@ -22,7 +22,7 @@ alias r=". \$HOME/.zshrc"
 ### Zplug ######################################################################
 
 export ZPLUG_HOME="$HOME/.zplug"
-[ -d "$ZPLUG_HOME" ] && source "$ZPLUG_HOME/init.zsh"
+[ -d "$ZPLUG_HOME" ] && . "$ZPLUG_HOME/init.zsh"
 
 if command -v zplug >/dev/null; then
   zplug "zsh-users/zsh-completions", depth:1
