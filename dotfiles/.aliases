@@ -384,7 +384,7 @@ decode_base64_url() {
 }
 
 decode_jwt_partial() {
-  decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
+  decode_base64_url "$(printf "%s" "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
 }
 
 decode_jwt_header_payload() {
