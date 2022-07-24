@@ -51,14 +51,17 @@ or main branch is pulled on top of it if the git working copy already exists.
 ### Customization
 
 Nothing is prompted by `install.sh`. It is non-interactive and thus suitable
-for cloud-init. Fork this repo, comment out the tech stacks you don't need
-in `install_apps`, and change the curl target to your public fork.
+for cloud-init. Fork this repo, comment or uncomment the wanted tech stacks
+in `install_apps`, and change the curl to point to your public fork.
 
 GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
 `./bootstrap` in the repo (after `install.sh` finishes) to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_snap`
 (Snap on Linux distros) and `bin/install_apps_cask` (Homebrew Cask on macOS).
+
+To use GUI apps on Linux distros, you have to install Xorg, Display manager and
+window manager of your choice from the distro's package repository.
 
 ## 🔋's included
 
