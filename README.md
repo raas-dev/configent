@@ -36,10 +36,10 @@ Works on:
 
 ## 💣 Up
 
+Some packages are installed system-wide, thus `sudo` password may be asked.
+
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
-
-Some packages are installed system-wide, thus `sudo` password may be asked.
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.18.6/install.sh | sh
 
