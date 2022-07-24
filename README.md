@@ -37,7 +37,7 @@ Works on:
 ## 💣 Up
 
 All configuration (dotfiles, VSCode settings) is installed per-user.
-**The script overrides existing dotfiles at `$HOME` without prompting.**
+**Existing dotfiles at `$HOME` are overriden without prompting.**
 
 Some packages are installed system-wide, thus `sudo` password may be asked.
 
