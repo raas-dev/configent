@@ -51,11 +51,10 @@ provision:
 
 probes:
 - script: |
-    #!/bin/bash
-    set -eux -o pipefail
-    if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
-            echo >&2 "k3s is not running yet"
-            exit 1
+    #!/bin/sh
+    if ! timeout 30s sh -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+      echo >&2 "k3s is not running yet"
+      exit 1
     fi
   hint: |
     The k3s kubeconfig file has not yet been created.
