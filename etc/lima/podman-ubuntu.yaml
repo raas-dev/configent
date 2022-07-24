@@ -15,7 +15,7 @@ images:
 
 mounts:
   - location: "~"
-    writable: false
+    writable: true
   - location: "/tmp/lima"
     writable: true
 
