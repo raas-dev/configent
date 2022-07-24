@@ -57,9 +57,10 @@ user with passwordless sudo (recommended), or as root.
 Fork this repo, comment or uncomment the wanted tech stacks in `install_apps`,
 and change the curl URL to point to your public fork.
 
+GUI apps are not installed by `install.sh` as a server is assumed.
+
 ### Desktop
 
-GUI apps are not installed by `install.sh` as a server is assumed.
 Run `bootstrap` in the git working copy (`$HOME/configent`) to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_snap`
