@@ -143,7 +143,7 @@ Both container runtimes in a nutshell:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
 - containerd is the de facto runtime in production Kubernetes - thus prefer it
-- regardless of runtime, `sudo` is always a bad idea when it comes to security
+- regardless of the runtime and OS, `sudo` is a bad idea in running containers
 
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
