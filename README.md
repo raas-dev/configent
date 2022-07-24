@@ -189,16 +189,14 @@ repo/your fork.
 
 ### Contributing
 
-Install or upgrade [pre-commit](https://pre-commit.com/) and install the hooks:
+Please create an [issue](https://github.com/raas-dev/configent/issues) and
+a pull request.
+
+Install [pre-commit](https://pre-commit.com/) and the hooks before pushing:
 
     pip3 install --user --upgrade pre-commit
     pre-commit install --hook-type pre-commit
     pre-commit install --hook-type commit-msg
-
-### Known bugs
-
-Please create an [issue](https://github.com/raas-dev/configent/issues) and
-a pull request.
 
 ### Issues in dependencies
 
