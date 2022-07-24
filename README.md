@@ -54,18 +54,18 @@ Nothing is prompted by `install.sh`. It is non-interactive and thus suitable
 for cloud-init.
 
 Fork this repo, comment or uncomment the wanted tech stacks in `install_apps`,
-and change the curl to point to your public fork.
+and change the curl URL to point to your public fork.
 
 ### Desktop
 
-GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
-`./bootstrap` in the repo (after `install.sh` finishes) to install GUI apps.
+GUI apps are not installed by `install.sh` as a server is assumed.
+Run `bootstrap` in the git working copy created to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_snap`
 (Snap on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 To use GUI apps on Linux distros, you have to install Xorg, display manager and
-window manager of your choice from the distro's package repository.
+window manager of your choice. See the distro's own instructions for that.
 
 ## 🔋's included
 
