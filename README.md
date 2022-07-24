@@ -43,9 +43,9 @@ Things are happening per user, but `sudo` may be used for some OS features.
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.18.6/install.sh | sh
 
 If git is not present on the machine, it is installed first by the Linux
-distro's package manager or by Xcode cmdline tools on macOS.
+distro's package manager or by Xcode Command Line Tools on macOS.
 
-Then the respective tag from this git repo is cloned as `$HOME/configent`,
+Then the respective git tag from this repository is cloned as `$HOME/configent`,
 or main branch is pulled on top of it if the git working copy already exists.
 
 ### Customization
@@ -58,9 +58,9 @@ GUI apps are not installed by `install.sh` as a server or VM is assumed. Re-run
 `./bootstrap` in the repo (after `install.sh` finishes) to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_snap`
-(Snap on Linux distros) and `bin/install_apps_cask` (Homebrew Cask on macOS).
+(Snap on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
 
-To use GUI apps on Linux distros, you have to install Xorg, Display manager and
+To use GUI apps on Linux distros, you have to install Xorg, display manager and
 window manager of your choice from the distro's package repository.
 
 ## 🔋's included
