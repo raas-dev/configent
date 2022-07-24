@@ -91,7 +91,7 @@ command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 # brew install bash-completion
 if command -v brew >/dev/null ; then
   if [ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
   fi
 fi
 
@@ -144,8 +144,8 @@ path_prepend "$HOME/.local/bin"
 
 nvm_path="$HOME/.nvm"
 if [ -d "$nvm_path" ]; then
-  source "$nvm_path/nvm.sh"
-  [ -s "$nvm_path/bash_completion" ] && source "$nvm_path/bash_completion"
+  . "$nvm_path/nvm.sh"
+  [ -s "$nvm_path/bash_completion" ] && . "$nvm_path/bash_completion"
 fi
 
 ### Haskell ####################################################################
@@ -168,7 +168,7 @@ fi
 cargo_path="$HOME/.cargo"
 if [ -d "$cargo_path" ]; then
   path_prepend "$cargo_path/bin"
-  source "$cargo_path/env"
+  . "$cargo_path/env"
 fi
 
 ### Nix ########################################################################
@@ -176,7 +176,7 @@ fi
 # multi-user installation:
 # $ sh <(curl -L https://nixos.org/nix/install) --daemon
 if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
-  source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
   path_append "/nix/var/nix/profiles/default/bin"
   path_prepend "$HOME/.nix-profile/bin"
 fi

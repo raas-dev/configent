@@ -85,10 +85,10 @@ if [ "$(uname -s)" = 'Linux' ]; then
   # apt-get install bash-completion
   if [ -f "/usr/share/bash-completion/bash_completion" ]; then
     # ubuntu
-    source "/usr/share/bash-completion/bash_completion"
+    . "/usr/share/bash-completion/bash_completion"
   elif [ -f "etc/bash_completion" ]; then
     # debian
-    source "/etc/bash_completion"
+    . "/etc/bash_completion"
   fi
 fi
 
