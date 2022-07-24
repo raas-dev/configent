@@ -34,9 +34,9 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-## 💣 Up
-
 Some packages are installed system-wide, thus `sudo` password may be asked.
+
+## 💣 Up
 
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
