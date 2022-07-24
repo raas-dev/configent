@@ -100,7 +100,7 @@ fi
 if command -v zoxide >/dev/null; then
   eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
 
-  function j() {
+  j() {
     __zoxide_z "$@"
   }
 fi
