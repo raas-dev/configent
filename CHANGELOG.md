@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.6](https://github.com/raas-dev/configent/compare/1.18.5...1.18.6) (2022-07-24)
+
+
+### Fixes
+
+* **aliases:** Remove bashism from decode_jwt_partial() ([db00d50](https://github.com/raas-dev/configent/commit/db00d508875ec0f0c00da3448d48adcf87071460))
+* **lima:** Install configent on podman-ubuntu but no brew formulae ([7316966](https://github.com/raas-dev/configent/commit/731696604cf319959e586a5cc42f25728db47909))
+* **lima:** Use /bin/sh over bash in ubuntu and rancher VM probes ([79fbdee](https://github.com/raas-dev/configent/commit/79fbdee2b46ef8e53284d222205cbfd019826a72))
+* **podman:** Make host's home writable for containers ([039cd32](https://github.com/raas-dev/configent/commit/039cd326110e1b69dd2aef712cc4bd39954f67c0))
+
 ### [1.18.5](https://github.com/raas-dev/configent/compare/1.18.4...1.18.5) (2022-07-24)
 
 
