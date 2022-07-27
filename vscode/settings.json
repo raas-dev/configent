@@ -142,5 +142,6 @@
     "terminal.integrated.minimumContrastRatio": 1,
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
-    "gitlens.showWhatsNewAfterUpgrades": false
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "npm.keybindingsChangedWarningShown": true
   }
