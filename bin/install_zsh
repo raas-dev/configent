@@ -29,11 +29,11 @@ fi
 
 brew install zsh
 
-### zplug ######################################################################
+### antidote ###################################################################
 
-# https://github.com/zplug/zplug
-git clone https://github.com/zplug/zplug.git "$HOME/.zplug" ||
-  git -C "$HOME/.zplug" pull --rebase
+# https://github.com/mattmc3/antidote
+git git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
+  git -C "$HOME/.antidote" pull --rebase
 
 ### Set zsh as the default shell ###############################################
 

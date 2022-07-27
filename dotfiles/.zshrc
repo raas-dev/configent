@@ -21,28 +21,19 @@ fi
 
 alias r=". \$HOME/.zshrc"
 
-### Zplug ######################################################################
+### antidote ###################################################################
 
-export ZPLUG_HOME="$HOME/.zplug"
-[ -d "$ZPLUG_HOME" ] && . "$ZPLUG_HOME/init.zsh"
+[ -e "$HOME/.antidote" ] && . "$HOME/.antidote/antidote.zsh"
 
-if command -v zplug >/dev/null; then
-  zplug "zsh-users/zsh-completions", depth:1
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+if command -v antidote >/dev/null; then
+  antidote load
 
-  zplug "zsh-users/zsh-history-substring-search", defer:3
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
-
-  zplug "zsh-users/zsh-autosuggestions"
-  zplug "bobsoppe/zsh-ssh-agent", use:ssh-agent.zsh
-  zplug "plugins/colored-man-pages", from:oh-my-zsh
-
-  zplug check || zplug install
-  zplug load
 fi
 
-# completions
+### Completions ################################################################
+
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 

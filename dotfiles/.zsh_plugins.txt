@@ -1,0 +1,8 @@
+bobsoppe/zsh-ssh-agent
+
+ohmyzsh/ohmyzsh  path:plugins/colored-man-pages
+
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions

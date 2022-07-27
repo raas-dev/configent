@@ -5,10 +5,10 @@
 
 ### OS specific ################################################################
 
-# Upgrade brew formulas, and zplugins if on zsh
+# Upgrade brew formulas and antidote plugins
 alias br='command -v brew >/dev/null &&
   (brew update && brew upgrade ; brew autoremove) ;
-  command -v zplug >/dev/null && (zplug update ; zplug clean)'
+  command -v antidote >/dev/null && antidote update'
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Brew cask upgrade
