@@ -32,7 +32,7 @@ brew install zsh
 ### antidote ###################################################################
 
 # https://github.com/mattmc3/antidote
-git git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
+git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
   git -C "$HOME/.antidote" pull --rebase
 
 ### Set zsh as the default shell ###############################################
