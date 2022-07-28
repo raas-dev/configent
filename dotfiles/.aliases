@@ -5,10 +5,12 @@
 
 ### OS specific ################################################################
 
-# Upgrade brew formulas and antidote plugins
+# Upgrade brew formulas, antidote and tmux plugins
 alias br='command -v brew >/dev/null &&
   (brew update && brew upgrade ; brew autoremove) ;
-  command -v antidote >/dev/null && antidote update'
+  command -v antidote >/dev/null && antidote update ;
+  [ -x "$HOME/.tmux/plugins/tpm/bin/update_plugins" ] &&
+  $HOME/.tmux/plugins/tpm/bin/update_plugins all'
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Brew cask upgrade
