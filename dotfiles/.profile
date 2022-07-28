@@ -57,8 +57,8 @@ export MANPAGER='less -X'
 
 # wrapper to lesspipe.sh
 export LESSOPEN='|~/local/bin/lessfilter %s'
-export LESS=' -R '
-export MORE=' -R '
+export LESS='-R'
+export MORE='-R'
 
 ### Shell behaviour ############################################################
 

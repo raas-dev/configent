@@ -4,12 +4,9 @@ mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
 
 if command -v lsd >/dev/null && [ -d "$1" ]; then
-  lsd -1 --color=always "$1"
+  lsd -A --group-dirs first --oneline --color=always "$1"
 elif command -v bat >/dev/null && [ "$category" = text ]; then
-  bat --color=always --theme=base16 "$1"
-elif [ "$category" = image ]; then
-  command -v chafa >/dev/null && chafa "$1"
-  command -v exiftool >/dev/null && exiftool "$1"
+  bat --color=always --theme=base16 --style=plain "$1"
 else
-  lesspipe.sh "$1"
+  sh -t lesspipe.sh "$1"
 fi
