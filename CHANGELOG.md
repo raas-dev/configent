@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.1](https://github.com/raas-dev/configent/compare/1.20.0...1.20.1) (2022-07-28)
+
+
+### Fixes
+
+* **lessfilter:** Run lesspipe.sh in bash for stdin ([0ae39da](https://github.com/raas-dev/configent/commit/0ae39da6da31c04783532ce111b955bc8a0fa68b))
+* **lessfilter:** Use OS lesspipe if exists ([54c213d](https://github.com/raas-dev/configent/commit/54c213defb0b5f29fc4fc2f13730da5d1efa17e6))
+
 ## [1.20.0](https://github.com/raas-dev/configent/compare/1.19.0...1.20.0) (2022-07-28)
 
 
