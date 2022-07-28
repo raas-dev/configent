@@ -7,8 +7,6 @@ if command -v lsd >/dev/null && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
 elif command -v bat >/dev/null && [ "$category" = text ]; then
   bat --color=always --theme=base16 --style=plain "$1"
-elif command -v lesspipe >/dev/null; then
-  lesspipe "$1"
 else
-  sh -t lesspipe.sh "$1"
+  bash -t lesspipe.sh "$1"
 fi
