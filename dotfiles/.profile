@@ -55,8 +55,8 @@ export SVN_EDITOR="$EDITOR"
 export PAGER='less'
 export MANPAGER='less -X'
 
-# .lessfilter -> lesspipe.sh
-export LESSOPEN='|~/.lessfilter %s'
+# wrapper to lesspipe.sh
+export LESSOPEN='|~/local/bin/lessfilter %s'
 export LESS=' -R '
 export MORE=' -R '
 
