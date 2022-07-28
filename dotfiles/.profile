@@ -58,6 +58,7 @@ export MANPAGER='less -X'
 # .lessfilter -> lesspipe.sh
 export LESSOPEN='|~/.lessfilter %s'
 export LESS=' -R '
+export MORE=' -R '
 
 ### Shell behaviour ############################################################
 
