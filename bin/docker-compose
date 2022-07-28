@@ -3,7 +3,7 @@
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
 #
-# Copyright(C) 2016- Anssi Syrjäsalo
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # shim for running `docker-compose` in lima VM
