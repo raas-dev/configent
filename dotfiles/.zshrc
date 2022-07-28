@@ -2,6 +2,7 @@
 # the above shebang is purely for ShellCheck, this file is not executable
 
 # shellcheck disable=SC1091  # do not expect input files
+# shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
@@ -21,6 +22,11 @@ fi
 
 alias r=". \$HOME/.zshrc"
 
+### Completions ################################################################
+
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
 ### antidote ###################################################################
 
 [ -e "$HOME/.antidote" ] && . "$HOME/.antidote/antidote.zsh"
@@ -28,14 +34,19 @@ alias r=". \$HOME/.zshrc"
 if command -v antidote >/dev/null; then
   antidote load
 
+  # .zsh_plugins.txt: Aloxaf/fzf-tab
+  enable-fzf-tab
+  zstyle ':completion:*' list-colors "${LS_COLORS}"
+  zstyle ':completion:*:descriptions' format '[%d]'
+  zstyle ':fzf-tab:*' switch-group ',' '.'
+  zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+  zstyle ':fzf-tab:complete:*:options' fzf-preview
+  zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+
+  # .zsh_plugins.txt: zsh-users/zsh-history-substring-search
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
 fi
-
-### Completions ################################################################
-
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
 
 ### History ####################################################################
 

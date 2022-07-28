@@ -55,6 +55,10 @@ export SVN_EDITOR="$EDITOR"
 export PAGER='less'
 export MANPAGER='less -X'
 
+# .lessfilter -> lesspipe.sh
+export LESSOPEN='|~/.lessfilter %s'
+export LESS=' -R '
+
 ### Shell behaviour ############################################################
 
 # default file permissions: u=rwx,g=rx,o=

@@ -4,6 +4,7 @@
 !cht.sh
 !docker
 !docker-compose
+!lesspipe.sh
 !nerdctl
 !podman
 !install_*
