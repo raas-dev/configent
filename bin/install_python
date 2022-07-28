@@ -44,6 +44,10 @@ pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
 pip install --upgrade semgrep
 
+### tldr man pages #############################################################
+
+pip install --upgrade tldr
+
 ### Simplenote CLI #############################################################
 
 pip install --upgrade sncli

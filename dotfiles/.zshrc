@@ -42,6 +42,9 @@ if command -v antidote >/dev/null; then
   zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
   zstyle ':fzf-tab:complete:*:options' fzf-preview
   zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+  zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr $word'
+  zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+    '(out=$(tldr $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
   # .zsh_plugins.txt: zsh-users/zsh-history-substring-search
   bindkey '^[[A' history-substring-search-up
