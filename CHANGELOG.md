@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/raas-dev/configent/compare/1.19.0...1.20.0) (2022-07-28)
+
+
+### Features
+
+* **tmux:** Install and update tpm plugins ([97361ad](https://github.com/raas-dev/configent/commit/97361ad8b47cc1ebd2bc3331d68929275a250a56))
+* **xpanes:** Add xpanes ([a91c929](https://github.com/raas-dev/configent/commit/a91c9296004e38245059b5fda412a644ebba602c))
+
+
+### Fixes
+
+* **more:** Fix unknown MORE option -R on GNU/Linux ([e84678e](https://github.com/raas-dev/configent/commit/e84678ecd2fa3898bff809ae42b647a74b290969))
+
 ## [1.19.0](https://github.com/raas-dev/configent/compare/1.18.6...1.19.0) (2022-07-28)
 
 
