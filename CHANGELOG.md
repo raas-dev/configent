@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/raas-dev/configent/compare/1.18.6...1.19.0) (2022-07-28)
+
+
+### Features
+
+* **less:** Add lessfilter and lesspipe ([a33c0a6](https://github.com/raas-dev/configent/commit/a33c0a66f60498e3ffe70a82e9e21b89a74f1dda))
+* **python:** Add tldr and zsh completion for man ([67d3c44](https://github.com/raas-dev/configent/commit/67d3c44de4e8b6469ece49be13a9596666a1411a))
+* **zsh:** Add more feature-rich highlighting ([1c13b69](https://github.com/raas-dev/configent/commit/1c13b69c063ade5302b8de1ca7d06024d49d589a))
+* **zsh:** Migrate to antidote from zplug due to speed ([9c3d407](https://github.com/raas-dev/configent/commit/9c3d407bece6057d210205fb5708c3764deea945))
+
+
+### Documentation
+
+* **README:** Add note on display server, DMs and WMs on GNU/Linux ([dca9c94](https://github.com/raas-dev/configent/commit/dca9c941465ff055079b76492164092f1c13da43))
+* **README:** Clarify server vs desktop ([c9d97f6](https://github.com/raas-dev/configent/commit/c9d97f6b5d35f163ace1eb420759499f89fde66e))
+* **README:** Fix typos ([7ffed28](https://github.com/raas-dev/configent/commit/7ffed28b8959ac3904659d2c7e8cd9502eac6bd8))
+
+
+### Fixes
+
+* **less:** Add checks in lessfilter if tools exist ([c46741c](https://github.com/raas-dev/configent/commit/c46741cc280ed8c4073b3304a473f6e885047983))
+* **less:** Tidy lessfilter output ([764c0d9](https://github.com/raas-dev/configent/commit/764c0d9b0a461d878145fd69335663b962d1f0a8))
+* **profile:** Fix raw control chars for more ([aa158e9](https://github.com/raas-dev/configent/commit/aa158e997a93c0b5cb76943aca1ce5a9b2ce1447))
+* **README:** Fix typos ([1a12e6b](https://github.com/raas-dev/configent/commit/1a12e6b0d695ff8b59b0411bacdda39bfd6997e3))
+* **zsh:** Fix installing antidote ([8380e4e](https://github.com/raas-dev/configent/commit/8380e4ea1e6042e933c4150d1e0f88d09db32c85))
+
 ### [1.18.6](https://github.com/raas-dev/configent/compare/1.18.5...1.18.6) (2022-07-24)
 
 
