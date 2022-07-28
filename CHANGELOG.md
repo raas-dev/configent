@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.2](https://github.com/raas-dev/configent/compare/1.20.1...1.20.2) (2022-07-28)
+
+
+### Fixes
+
+* **aliases:** Update tmux tpm plugins ([0f23345](https://github.com/raas-dev/configent/commit/0f23345436cde6adaf77292099a1af9605d04e9b))
+
+
+### Documentation
+
+* **license:** Update web page ([64f824c](https://github.com/raas-dev/configent/commit/64f824cfed0c375520c78d23ce3d8482ba5e8f47))
+
 ### [1.20.1](https://github.com/raas-dev/configent/compare/1.20.0...1.20.1) (2022-07-28)
 
 
