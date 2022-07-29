@@ -2,6 +2,7 @@
 # the above shebang is purely for ShellCheck, this file is not executable
 
 # shellcheck disable=SC1091  # do not expect input files
+# shellcheck disable=SC2015  # true is expected if .rclocal is not found
 # shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
@@ -84,7 +85,7 @@ bindkey -e
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
 [ -f "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal"
+[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
 
 ### Automatically list contents when changing directory ########################
 
