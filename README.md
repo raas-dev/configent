@@ -155,8 +155,8 @@ The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
 💡: Use alias `d` as a generic shortcut for starting a `docker` container,
-when the current working directory has `Dockerfile` present. After started,
-the alias outputs the host-container mapped ports.
+when the current working directory has `Dockerfile` present. After container
+has been started, the host-container mapped ports are output.
 
 ### macOS
 
