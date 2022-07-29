@@ -42,7 +42,7 @@ Some dependencies are installed system-wide, thus `sudo` password may be asked.
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 
-    curl -fsL https://raw.githubusercontent.com/raas-dev/configent/1.21.2/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.21.2/install.sh | sh
 
 If git is not present on the machine, it is installed first by the Linux
 distro's package manager or by Xcode Command Line Tools on macOS.

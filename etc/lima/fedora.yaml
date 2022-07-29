@@ -24,4 +24,4 @@ provision:
   - mode: user
     script: |
       #!/bin/sh
-      curl -fsL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &

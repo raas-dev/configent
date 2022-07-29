@@ -71,7 +71,7 @@ $SUDO locale-gen en_US.UTF-8
 
 # Docker (rootless)
 $SUDO apt-get install -y uidmap iptables dbus-user-session
-curl -fsL https://get.docker.com/rootless | sh
+curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"

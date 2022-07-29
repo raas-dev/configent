@@ -12,7 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### sdkman #####################################################################
 
-curl -fsL "https://get.sdkman.io" | bash
+curl -fsSL "https://get.sdkman.io" | bash
 
 . "$HOME/.sdkman/bin/sdkman-init.sh" &&
   sdk selfupdate force &&

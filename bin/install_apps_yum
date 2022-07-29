@@ -68,7 +68,7 @@ $SUDO yum install -y lnav
 
 # Docker (rootless)
 $SUDO yum install -y fuse-overlayfs iptables dbus-daemon
-curl -fsL https://get.docker.com/rootless | sh
+curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"

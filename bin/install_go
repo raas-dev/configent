@@ -12,7 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 mkdir -p "$HOME/go/bin"
 
-curl -fsL "https://raw.githubusercontent.com/stefanmaric/g/master/bin/g" \
+curl -fsSL "https://raw.githubusercontent.com/stefanmaric/g/master/bin/g" \
   -o "$HOME/go/bin/gvm"
 
 chmod +x "$HOME/go/bin/gvm"
