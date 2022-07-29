@@ -52,7 +52,7 @@ $SUDO pacman --noconfirm --needed -S lnav
 
 # Docker (rootless)
 $SUDO pacman --noconfirm --needed -S fuse-overlayfs iptables
-curl -fsSL https://get.docker.com/rootless | sh
+curl -fsL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"

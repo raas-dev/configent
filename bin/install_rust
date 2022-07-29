@@ -12,7 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### rustup #####################################################################
 
-curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
+curl -fsL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 
 . "$HOME/.cargo/env" &&
   rustup install stable &&

@@ -43,11 +43,11 @@ provision:
 - mode: system
   script: |
     #!/bin/sh
-    curl -fsSL https://get.k3s.io | sh
+    curl -fsL https://get.k3s.io | sh
 - mode: user
   script: |
     #!/bin/sh
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh &
+    curl -fsL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh &
 
 probes:
 - script: |
