@@ -56,6 +56,10 @@ pip install --upgrade sncli
 
 pip install --upgrade you-get
 
+### visidata ###################################################################
+
+pip install --upgrade visidata
+
 ### Jupyter ####################################################################
 
 #pip install --upgrade jupyter
