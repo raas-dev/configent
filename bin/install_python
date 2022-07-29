@@ -37,27 +37,25 @@ python3_version="3.10.5"
 eval "$($HOME/.pyenv/bin/pyenv init --path)"
 pip install --upgrade pip setuptools wheel
 
-### Python Development tools ###################################################
+### Python development tools ###################################################
 
 pip install --upgrade pre-commit
 pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
 pip install --upgrade semgrep
 
-### tldr man pages #############################################################
+### Command line tools #########################################################
 
+# simplified man pages
 pip install --upgrade tldr
 
-### Simplenote CLI #############################################################
-
+# Simplenote CLI
 pip install --upgrade sncli
 
-### Media downloader ###########################################################
-
+# general media downloader
 pip install --upgrade you-get
 
-### visidata ###################################################################
-
+# multitool for tabular data
 pip install --upgrade visidata
 
 ### Jupyter ####################################################################
