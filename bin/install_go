@@ -45,3 +45,11 @@ go install github.com/sachaos/viddy@latest
 
 # https://github.com/grafana/xk6
 go install go.k6.io/xk6/cmd/xk6@latest
+
+### fzf ########################################################################
+
+# https://github.com/junegunn/fzf
+git clone https://github.com/junegunn/fzf.git "$HOME/.fzf" ||
+  git -C "$HOME/.fzf" pull --rebase
+
+"$HOME/.fzf/install" --key-bindings --completion --no-update-rc

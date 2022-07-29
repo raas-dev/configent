@@ -29,21 +29,20 @@ fi
 
 ### Homebrew core ##############################################################
 
-brew install bat                                                        # rust
-brew install btop                                                       # c++
-brew install diskonaut                                                  # rust
-brew install fd                                                         # rust
-brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc # go
-brew install gitui                                                      # rust
-brew install grex                                                       # rust
-brew install kalker                                                     # rust
-brew install lsd                                                        # rust
-brew install procs                                                      # rust
-brew install ripgrep                                                    # rust
-brew install sd                                                         # rust
-brew install starship                                                   # rust
-brew install xh                                                         # rust
-brew install zoxide                                                     # rust
+brew install bat       # rust
+brew install btop      # c++
+brew install diskonaut # rust
+brew install fd        # rust
+brew install gitui     # rust
+brew install grex      # rust
+brew install kalker    # rust
+brew install lsd       # rust
+brew install procs     # rust
+brew install ripgrep   # rust
+brew install sd        # rust
+brew install starship  # rust
+brew install xh        # rust
+brew install zoxide    # rust
 
 ### macOS only brews ###########################################################
 
