@@ -33,3 +33,6 @@ go install go.k6.io/xk6/cmd/xk6@latest
 
 # https://github.com/fedeztk/got
 go install github.com/fedeztk/got/cmd/got@latest
+
+# https://github.com/cespare/reflex
+go install github.com/cespare/reflex@latest
