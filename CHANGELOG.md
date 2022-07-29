@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/raas-dev/configent/compare/1.21.2...1.22.0) (2022-07-29)
+
+
+### Features
+
+* **go:** Add viddy and alias watch to it ([b649096](https://github.com/raas-dev/configent/commit/b649096b23a829cb7ca7e380fc4744c806bac03d))
+* **python:** Add visidata ([cb118b2](https://github.com/raas-dev/configent/commit/cb118b2f3d3dbf62dab75dfa3f8f9fed1a53152a))
+* **rust:** Add diskonaut and alias to u ([98461bc](https://github.com/raas-dev/configent/commit/98461bc12fc1ee5d9aee114d9928eda195191095))
+* **sql:** Add gobang ([e929010](https://github.com/raas-dev/configent/commit/e929010455eadd5d98aa27f43019693364e401e1))
+
+
+### Fixes
+
+* **curl:** Do not pipe curl error messages to sh ([94e2082](https://github.com/raas-dev/configent/commit/94e2082bb725dddf54b01d6fbe6d022603e62ece))
+* **curl:** Do not pipe curl error messages to sh/bash ([cfbb720](https://github.com/raas-dev/configent/commit/cfbb720f96a19ff22f689efb44fc5916f49fb2e7))
+
+
+### Documentation
+
+* **python:** Clarify headings ([d688b5c](https://github.com/raas-dev/configent/commit/d688b5c395f9a059e54e3b4745a33f29bccf1e71))
+* **python:** Note euporie ([a98a70e](https://github.com/raas-dev/configent/commit/a98a70ea7f19722f4174781b07f8943dd80f71b8))
+
 ### [1.21.2](https://github.com/raas-dev/configent/compare/1.21.1...1.21.2) (2022-07-29)
 
 
