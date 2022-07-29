@@ -102,15 +102,15 @@ if [ "$(uname -s)" = 'Linux' ]; then
 fi
 
 # add tab completion for hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o 'default' -o 'nospace' \
+[ -r "$HOME/.ssh/config" ] && complete -o 'default' -o 'nospace' \
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |
     cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
 
 ### Load other configs #########################################################
 
-[ -f "$HOME/.profile" ] && . "$HOME/.profile"
-[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-[ -f "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
-[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+[ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
+[ -r "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
+[ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
 
 # sdkman-init.sh is mentioned here to not be appended by `install_java`

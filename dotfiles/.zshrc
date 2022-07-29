@@ -30,7 +30,7 @@ autoload -U +X bashcompinit && bashcompinit
 
 ### antidote ###################################################################
 
-[ -e "$HOME/.antidote" ] && . "$HOME/.antidote/antidote.zsh"
+[ -d "$HOME/.antidote" ] && . "$HOME/.antidote/antidote.zsh"
 
 if command -v antidote >/dev/null; then
   antidote load
@@ -82,10 +82,10 @@ bindkey -e
 
 ### Load other configs #########################################################
 
-[ -f "$HOME/.profile" ] && . "$HOME/.profile"
-[ -f "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
-[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-[ -f "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+[ -r "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
+[ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
+[ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
 
 ### Automatically list contents when changing directory ########################
 

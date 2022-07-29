@@ -173,7 +173,7 @@ fi
 
 # multi-user installation:
 # $ sh <(curl -L https://nixos.org/nix/install) --daemon
-if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+if [ -r "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
   . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
   path_append "/nix/var/nix/profiles/default/bin"
   path_prepend "$HOME/.nix-profile/bin"

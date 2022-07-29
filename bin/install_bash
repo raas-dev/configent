@@ -49,7 +49,7 @@ else
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [ -e "$brew_bash_path" ]; then
+if [ -x "$brew_bash_path" ]; then
   if [ "$default_shell" = "$brew_bash_path" ]; then
     echo "Brewed Bash is already set as the user's default shell."
   else

@@ -53,7 +53,7 @@ else
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [ -e "$brew_zsh_path" ]; then
+if [ -x "$brew_zsh_path" ]; then
   if [ "$default_shell" = "$brew_zsh_path" ]; then
     echo "Brewed Zsh is already set as the user's default shell."
   else
