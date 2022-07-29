@@ -35,11 +35,17 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias blast='osascript -e "set volume output muted false"'
 
   # Fix broken icons in Dock
-  alias reseticons="sudo /usr/bin/find /private/var/folders/ -name com.apple.dock.iconcache -exec rm {} \;; sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \;; sudo rm -rf /Library/Caches/com.apple.iconservices.store; sleep 3; killall Dock; killall Finder"
+  alias reseticons="sudo /usr/bin/find /private/var/folders/ \
+    -name com.apple.dock.iconcache -exec rm {} \; ;
+    sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \; ;
+    sudo rm -rf /Library/Caches/com.apple.iconservices.store ;
+    sleep 3 ;
+    killall Dock ;
+    killall Finder"
 
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -f ~/Library/Preferences/com.apple.HIToolbox.plist ;
-  sudo rm -f /Library/Preferences/com.apple.HIToolbox.plist"
+    sudo rm -f /Library/Preferences/com.apple.HIToolbox.plist"
 
   # Disable or enable Spotlight (indexing)
   alias spotoff='sudo mdutil -a -i off'
@@ -130,7 +136,10 @@ fi
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat --theme=base16'
 alias c='kalker'
-alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ; docker build --tag ${PWD##*/} . && docker run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} && docker port ${PWD##*/}'
+alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ;
+  docker build --tag ${PWD##*/} . &&
+  docker run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} &&
+  docker port ${PWD##*/}'
 alias e='ext'
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
@@ -194,14 +203,14 @@ alias vm4alpine="limactl start \$HOME/local/etc/lima/alpine.yaml --tty=false"
 alias drmc='docker rm --force $(docker ps --all --quiet)'
 alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
-alias dpr='drmc; drmv; drmi; docker system prune --force --volumes'
+alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 ### nerdctl ####################################################################
 
 alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
 alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
-alias npr='nrmc; nrmv; nrmi'
+alias npr='nrmc ; nrmv ; nrmi'
 
 alias netdata='nerdctl run -d --name=netdata \
   -p 19999:19999 \
