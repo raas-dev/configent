@@ -196,9 +196,6 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc; drmv; drmi; docker system prune --force --volumes'
 
-alias rustscan='nixery rustscan rustscan'
-alias naabu='nixery naabu naabu'
-
 ### nerdctl ####################################################################
 
 alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
@@ -344,6 +341,12 @@ gemclear() {
 pyclean() {
   find . -type d -name "__pycache__" -exec rm -r {} +
 }
+
+### Binaries within Docker built dynamically by nixery #########################
+
+alias rustscan='nixery rustscan rustscan'
+alias naabu='nixery naabu naabu'
+alias tickrs='nixery tickrs tickrs --show-x-labels --chart-type candle -s'
 
 ### Latest version of global nodejs devtools ###################################
 
