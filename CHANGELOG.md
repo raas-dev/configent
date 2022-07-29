@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.2](https://github.com/raas-dev/configent/compare/1.21.1...1.21.2) (2022-07-29)
+
+
+### Documentation
+
+* **README:** Add tip for using nixery by alias n ([197a69d](https://github.com/raas-dev/configent/commit/197a69d6c1300e9287605c62d0d1082d33463dcf))
+* **README:** Fix behaviour for alias d ([7d6fa48](https://github.com/raas-dev/configent/commit/7d6fa483d369c6e6bd9474b67b43bd56221d0527))
+
+
+### Fixes
+
+* **nixery:** Support multiple nix-pkgs ([4fc8a98](https://github.com/raas-dev/configent/commit/4fc8a983fd7c1538c4d782082997c8043e7fe1c9))
+
 ### [1.21.1](https://github.com/raas-dev/configent/compare/1.21.0...1.21.1) (2022-07-29)
 
 
