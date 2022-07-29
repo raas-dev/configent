@@ -154,9 +154,12 @@ These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
-💡: Use alias `d` as a generic shortcut for starting a `docker` container,
+💡: Use alias `d` as a generic shortcut for starting a `docker` container
 when the current working directory has `Dockerfile` present. After container
 has been started, the host-container mapped ports are output.
+
+💡: Use alias `n` for running Docker containers for binaries not installed on
+the host system by building ad-hoc images with [Nixery](https://nixery.dev/).
 
 ### macOS
 
