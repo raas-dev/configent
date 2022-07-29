@@ -36,3 +36,6 @@ go install github.com/fedeztk/got/cmd/got@latest
 
 # https://github.com/cespare/reflex
 go install github.com/cespare/reflex@latest
+
+# https://github.com/muesli/duf
+go install github.com/muesli/duf@latest
