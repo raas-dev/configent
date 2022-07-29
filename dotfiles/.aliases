@@ -304,7 +304,8 @@ taillog() {
 # List 20 biggest directories
 usage() {
   du | sort -r -n |
-    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} print int($1)" "v[s]"\t"$2}' | head -n 20
+    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} \
+      print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
 # Show process listening on given port
