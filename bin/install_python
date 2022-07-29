@@ -65,3 +65,4 @@ pip install --upgrade visidata
 #pip install --upgrade jupyter
 #pip install --upgrade jupytext
 #pip install --upgrade jupyterlab
+#pip install --upgrade euporie
