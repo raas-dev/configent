@@ -20,16 +20,18 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 
 ### packages ###################################################################
 
-# Rust utitilities in `install_utils`
-#cargo install --locked bat
-#cargo install fd-find
-#cargo install gitui
-#cargo install grex
-#cargo install kalker
-#cargo install lsd
-#cargo install procs
-#cargo install ripgrep
-#cargo install sd
-#cargo install starship --locked
-#cargo install xh
-#cargo install zoxide --locked
+# Rust utitilities installed by `install_utils` if brew is available for OS
+if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
+  cargo install --locked bat
+  cargo install fd-find
+  cargo install gitui
+  cargo install grex
+  cargo install kalker
+  cargo install lsd
+  cargo install procs
+  cargo install ripgrep
+  cargo install sd
+  cargo install starship --locked
+  cargo install xh
+  cargo install zoxide --locked
+fi
