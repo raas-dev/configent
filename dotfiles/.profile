@@ -93,13 +93,6 @@ fi
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 
-# brew install bash-completion
-if command -v brew >/dev/null ; then
-  if [ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-  fi
-fi
-
 ### zoxide #####################################################################
 
 if command -v zoxide >/dev/null; then
