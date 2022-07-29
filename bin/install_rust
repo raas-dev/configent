@@ -29,6 +29,7 @@ cargo install pastel
 # Rust utitilities installed by `install_utils` if brew is available for OS
 if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
   cargo install --locked bat
+  cargo install diskonaut
   cargo install fd-find
   cargo install gitui
   cargo install grex

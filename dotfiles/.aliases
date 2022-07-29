@@ -156,7 +156,7 @@ alias q='clear'
 # r is for reloading shell's configuration (alias is in shell specific rc files)
 alias s='sncli'
 alias t='taillog'
-alias u='usage'
+alias u='diskonaut'
 alias v='limactl'
 alias w='which -a'
 alias x='pkill -i -f'
