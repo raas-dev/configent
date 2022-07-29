@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.1](https://github.com/raas-dev/configent/compare/1.21.0...1.21.1) (2022-07-29)
+
+
+### Fixes
+
+* **bash:** Add brew install bash-completions ([e45d5dd](https://github.com/raas-dev/configent/commit/e45d5dd89b9b310aec38acc2101fe5185345785c))
+* **tickrs:** Launch with summary view ([b8f6367](https://github.com/raas-dev/configent/commit/b8f63670cb0fdb32a8d4e3b7b0a2b0c8f64eedb8))
+
 ## [1.21.0](https://github.com/raas-dev/configent/compare/1.20.2...1.21.0) (2022-07-29)
 
 
