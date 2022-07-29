@@ -34,7 +34,6 @@ brew install btop                                                       # c++
 brew install fd                                                         # rust
 brew install fzf && yes | "$(brew --prefix fzf)/install" --no-update-rc # go
 brew install gitui                                                      # rust
-brew install gojq                                                       # go
 brew install grex                                                       # rust
 brew install hwatch                                                     # rust
 brew install kalker                                                     # rust

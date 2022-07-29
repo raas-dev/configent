@@ -157,15 +157,15 @@ alias §='got -o -s en -t fi'
 alias ,='got -o -s fi -t en'
 alias _='bat --show-all'
 
-### hwatch #####################################################################
+### watch ######################################################################
 
 command -v hwatch >/dev/null && alias watch='hwatch'
 
-### gojq #######################################################################
+### jq #########################################################################
 
 command -v gojq >/dev/null && alias jq='gojq'
 
-### Vim ########################################################################
+### vim ########################################################################
 
 command -v nvim >/dev/null && alias vim='nvim'
 
@@ -344,8 +344,8 @@ pyclean() {
 
 ### Binaries within Docker built dynamically by nixery #########################
 
-alias rustscan='nixery rustscan rustscan'
 alias naabu='nixery naabu naabu'
+alias rustscan='nixery rustscan rustscan'
 alias tickrs='nixery tickrs tickrs --show-x-labels --chart-type candle -s'
 
 ### Latest version of global nodejs devtools ###################################
