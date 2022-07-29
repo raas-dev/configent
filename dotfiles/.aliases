@@ -273,16 +273,16 @@ ext() {
 
 # nixery.dev
 nixery() {
-  [ -z "$1" ] && echo "Usage: $0 NIX-PKG [COMMAND]" && return
-  local pkg="$1"
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
+  local pkgs="$1"
   shift
-  local args="${*:-$pkg}"
+  local args="${*:-$pkgs}"
   if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
-    image="nixery.dev/arm64/shell/$pkg"
+    image="nixery.dev/arm64/shell/$pkgs"
   else
-    image="nixery.dev/shell/$pkg"
+    image="nixery.dev/shell/$pkgs"
   fi
-  docker run -it --rm --name "$pkg" \
+  docker run -it --rm --name "${pkgs//\//-}" \
     --publish-all \
     --volume="$PWD:$PWD":ro \
     --workdir="$PWD" \
