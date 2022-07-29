@@ -346,7 +346,7 @@ pyclean() {
 
 alias naabu='nixery naabu naabu'
 alias rustscan='nixery rustscan rustscan'
-alias tickrs='nixery tickrs tickrs --show-x-labels --chart-type candle -s'
+alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 
 ### Latest version of global nodejs devtools ###################################
 
