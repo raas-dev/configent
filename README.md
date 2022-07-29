@@ -1,6 +1,7 @@
 # c🌀nfigent (1.21.1)
 
-[![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md) [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
+[![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
+[![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
 
 No startup pitches, I am a principled config manager and machine bootstrapper.
 
@@ -125,7 +126,8 @@ Symlinking happens even if `code` has not been installed.
 If `code` is present, also VSCode extensions are installed.
 
 Configuring
-[VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) will not interfere with storing configs in the git repo.
+[VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync)
+will not interfere with storing configs in the git repo.
 
 ## 🐚 Default shell
 
