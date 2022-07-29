@@ -168,7 +168,7 @@ alias _='bat --show-all'
 
 ### watch ######################################################################
 
-command -v hwatch >/dev/null && alias watch='hwatch'
+command -v viddy >/dev/null && alias watch='viddy --differences'
 
 ### jq #########################################################################
 
