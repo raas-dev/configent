@@ -83,12 +83,20 @@ fi
 ### Additional bash completions ################################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
-  # apt-get install bash-completion
-  if [ -f "/usr/share/bash-completion/bash_completion" ]; then
-    # ubuntu
+  # brew on Intel Macs
+  if [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
+    . "/usr/local/etc/profile.d/bash_completion.sh"
+  # brew on ARM64 macs
+  elif [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
+    . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+  # Linuxbrew
+  elif [ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]; then
+    . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
+  # apt on Ubuntu
+  elif [ -r "/usr/share/bash-completion/bash_completion" ]; then
     . "/usr/share/bash-completion/bash_completion"
-  elif [ -f "etc/bash_completion" ]; then
-    # debian
+  # apt on Debian
+  elif [ -r "etc/bash_completion" ]; then
     . "/etc/bash_completion"
   fi
 fi
