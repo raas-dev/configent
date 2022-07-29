@@ -37,7 +37,7 @@ if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
   cargo install procs
   cargo install ripgrep
   cargo install sd
-  cargo install starship --locked
+  cargo install --locked starship
   cargo install xh
-  cargo install zoxide --locked
+  cargo install --locked zoxide
 fi
