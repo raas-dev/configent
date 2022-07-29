@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/raas-dev/configent/compare/1.20.2...1.21.0) (2022-07-29)
+
+
+### Features
+
+* **aliases:** Add alias for tickrs ([9260e41](https://github.com/raas-dev/configent/commit/9260e41100283637002ae1d3dab8895302abf02a))
+* **go:** Add duf ([1a28d14](https://github.com/raas-dev/configent/commit/1a28d14bd3e9c0ff8e56e721462acf7a17aebcba))
+* **go:** Add reflex ([2be55e1](https://github.com/raas-dev/configent/commit/2be55e17c356decf2178519cfac4fca40320fd28))
+* **rust:** Add bore-cli and pastel ([056be9f](https://github.com/raas-dev/configent/commit/056be9fee51dff573035337ff52f2cccf4f7fc6c))
+
+
+### Fixes
+
+* **go:** Install gojq using go, not brew ([7cebe86](https://github.com/raas-dev/configent/commit/7cebe860465ee8d2c60709099d9775f621c6ea59))
+* **rust:** Use Rust for install_utils if no brew ([e581152](https://github.com/raas-dev/configent/commit/e581152304bb5de2556b942ea9db8e50571ebbfe))
+* **shells:** Return true if .rclocal does not exist ([058abef](https://github.com/raas-dev/configent/commit/058abef249236b35ec56f97bba02efaf7bbfb685))
+
 ### [1.20.2](https://github.com/raas-dev/configent/compare/1.20.1...1.20.2) (2022-07-28)
 
 
