@@ -20,6 +20,12 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 
 ### packages ###################################################################
 
+# https://github.com/ekzhang/bore
+cargo install bore-cli
+
+# https://github.com/sharkdp/pastel
+cargo install pastel
+
 # Rust utitilities installed by `install_utils` if brew is available for OS
 if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
   cargo install --locked bat
