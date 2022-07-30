@@ -122,20 +122,12 @@ command -v rbenv >/dev/null && eval "$(rbenv init -)"
 ### Pyenv ######################################################################
 
 path_prepend "$HOME/.pyenv/bin"
-
-if command -v pyenv >/dev/null; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv init --path)"
-  if [ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
-    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-    eval "$(pyenv virtualenv-init -)"
-  fi
-fi
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 export BETTER_EXCEPTIONS=1 # pip install --upgrade better_exceptions
 export TBVACCINE=1         # pip install --upgrade tbvaccine
 
-# Add `pip install --user` scope into $PATH if the dir exists
+# Add `pip install --user` and `pipx` scope into $PATH if the dir exists
 path_prepend "$HOME/.local/bin"
 
 ### Nvm ########################################################################

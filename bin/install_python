@@ -16,10 +16,6 @@ pyenv_dir="$HOME/.pyenv"
 git clone https://github.com/pyenv/pyenv.git "$pyenv_dir" ||
   git -C "$pyenv_dir" pull --rebase
 
-git clone https://github.com/pyenv/pyenv-virtualenv.git \
-  "$pyenv_dir/plugins/pyenv-virtualenv" ||
-  git -C "$pyenv_dir/plugins/pyenv-virtualenv" pull --rebase
-
 eval "$($HOME/.pyenv/bin/pyenv init -)"
 
 ### pythons ####################################################################
@@ -33,8 +29,6 @@ python3_version="3.10.5"
 "$HOME/.pyenv/bin/pyenv" rehash
 "$HOME/.pyenv/bin/pyenv" shell "$python3_version"
 "$HOME/.pyenv/bin/pyenv" global "$python3_version"
-
-eval "$($HOME/.pyenv/bin/pyenv init --path)"
 
 # upgrade packages included with Python
 pip install --upgrade pip setuptools wheel
