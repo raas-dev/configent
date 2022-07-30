@@ -38,9 +38,9 @@ Works on:
 Minimum requirements are 4 VCPUs and 4GBs RAM, or a 2016 MacBook Pro,
 both on which it takes ~30 minutes.
 
-Some dependencies are installed system-wide, thus `sudo` password may be asked.
-
 ## 💣 Up
+
+Some dependencies are installed system-wide, thus `sudo` password may be asked.
 
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
