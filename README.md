@@ -35,7 +35,7 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-Minimum requirements are 4 VCPUs and 4GBs RAM, or a 2016 MacBook Pro,
+Minimum requirements are 4GBs RAM and 10GB disk, or a 2016 MacBook Pro,
 both on which it takes ~30 minutes.
 
 ## 💣 Up
