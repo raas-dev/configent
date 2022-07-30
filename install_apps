@@ -57,8 +57,8 @@ fi
 
 # brew
 if [ -z "$NO_FORMULAE" ]; then
-  "$bin_path/install_tmux"
   "$bin_path/install_utils"
+  "$bin_path/install_tmux"
   "$bin_path/install_iac"
   "$bin_path/install_zsh"
 else
