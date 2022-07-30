@@ -99,7 +99,7 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
-❗: On ARM64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
+⚠️: On ARM64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
@@ -171,7 +171,7 @@ so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 The above shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
 
-❗: Both 'ubuntu' and 'rancher' VMs mount your host's `$HOME` directory as
+⚠️: Both 'ubuntu' and 'rancher' VMs mount your host's `$HOME` directory as
 writable in the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
