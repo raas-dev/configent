@@ -144,7 +144,7 @@ alias e='ext'
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
 alias h='xh'
-alias i='btop'
+alias i='glances'
 # j is for zoxide
 alias k='kubectl'
 alias l='la'
@@ -358,6 +358,9 @@ alias rustscan='nixery rustscan rustscan'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 
 ### Latest version of Python command line tools ################################
+
+# cross-platform monitoring
+alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'
 
 # Simplenote CLI
 alias sncli='pipx run sncli'

@@ -30,7 +30,6 @@ fi
 ### Homebrew core ##############################################################
 
 brew install bat       # rust
-brew install btop      # c++
 brew install diskonaut # rust
 brew install fd        # rust
 brew install gitui     # rust
