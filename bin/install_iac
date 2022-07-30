@@ -38,11 +38,7 @@ brew install trivy # go
 
 ### docker #####################################################################
 
-if [ "$(uname -s)" = 'Darwin' ]; then
-  brew install lima # go
-else
-  brew install ctop # go
-fi
+[ "$(uname -s)" = 'Darwin' ] && brew install lima
 
 ### network ####################################################################
 
