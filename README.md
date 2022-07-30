@@ -24,7 +24,7 @@ Features:
 
 Works on:
 
-- macOS Monterey (12), Big Sur (11) and Catalina (10)
+- macOS Monterey (12) and Big Sur (11) on Intel and ARM Macs
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
 - Fedora Linux 36 and 35
@@ -34,6 +34,9 @@ Works on:
 - Oracle Linux 8.6
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
+
+Minimum requirements are 4 VCPUs and 4GBs of RAM (or a 2016 MacBook Pro)
+on which the whole setup takes about 30 minutes.
 
 Some dependencies are installed system-wide, thus `sudo` password may be asked.
 
