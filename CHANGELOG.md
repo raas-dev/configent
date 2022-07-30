@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/raas-dev/configent/compare/1.22.0...1.23.0) (2022-07-30)
+
+
+### Features
+
+* **utils:** Use glances over btop, alias i to glances ([2d7c0fc](https://github.com/raas-dev/configent/commit/2d7c0fc92a8838d2978dd99e771972af6241cb6a))
+
+
+### Fixes
+
+* **fzf:** Install fzf from git repo ([d2abbd6](https://github.com/raas-dev/configent/commit/d2abbd6e54a70ba51ac5c9c6ae8a0154a7bd1140))
+* **node:** Remove global node packages, use npx ([d2c9253](https://github.com/raas-dev/configent/commit/d2c9253081f5e8573bf8b3d9bddcaeab25794801))
+* **python:** Add openpyxl for opening xlsx with vd ([26c6850](https://github.com/raas-dev/configent/commit/26c6850c2afc556e8d2c0d5e25f2c5bf6156ab3d))
+* **python:** Install and run tools ad-hoc by pipx ([ad8adc9](https://github.com/raas-dev/configent/commit/ad8adc972fde8c1f56a9f543ad3c49a5c9f38ce0))
+* **python:** Pipx install Python-based CLI tools ([87d2dc9](https://github.com/raas-dev/configent/commit/87d2dc979f0c88ed033adc17a9e7fc60d1a8f2d9))
+* **python:** Remove support for pyenv virtualenv ([5943fdf](https://github.com/raas-dev/configent/commit/5943fdf3f80fd53259ee8e377756c2d8765cb524))
+
 ## [1.22.0](https://github.com/raas-dev/configent/compare/1.21.2...1.22.0) (2022-07-29)
 
 
