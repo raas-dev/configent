@@ -1,11 +1,15 @@
 #!/bin/sh
 
+has_cmd() {
+  command -v "$1" >/dev/null
+}
+
 mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
 
-if command -v lsd >/dev/null && [ -d "$1" ]; then
+if has_cmd lsd && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
-elif command -v bat >/dev/null && [ "$category" = text ]; then
+elif has_cmd bat && [ "$category" = text ]; then
   bat --color=always --theme=base16 --style=plain "$1"
 else
   bash -t lesspipe.sh "$1"
