@@ -163,7 +163,7 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 when the current working directory has `Dockerfile` present. After container
 has been started, the host-container mapped ports are output.
 
-💡: Use alias `n` for running containerized binaries you do not want to install
+💡: Use alias `n` for running containers for binaries you do not want to install
 on the OS by building ad-hoc images for them with [Nixery](https://nixery.dev/).
 
 ### macOS
