@@ -35,8 +35,8 @@ Works on:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.16, 3.15 and 3.14
 
-Minimum requirements are 4 VCPUs and 4GBs of RAM (or a 2016 MacBook Pro)
-on which the whole setup takes about 30 minutes.
+Minimum requirements are 4 VCPUs and 4GBs RAM, or a 2016 MacBook Pro,
+on which the whole setup takes ~30 minutes.
 
 Some dependencies are installed system-wide, thus `sudo` password may be asked.
 
