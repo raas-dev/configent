@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.1](https://github.com/raas-dev/configent/compare/1.23.0...1.23.1) (2022-07-30)
+
+
+### Fixes
+
+* **iac:** Remove ctop over glances ([0ba5c15](https://github.com/raas-dev/configent/commit/0ba5c1555d20adf026fb3c6b37e00c5e45477b3b))
+* **lima:** Let lima decide CPU and memory for VMs ([b3360fc](https://github.com/raas-dev/configent/commit/b3360fc8858cf2af0f146c6f6d98f9c70a4d90c8))
+* **utils:** Run nmap via nixery ([9e6de0c](https://github.com/raas-dev/configent/commit/9e6de0c043a336f59027a375b78572b5166c8000))
+
 ## [1.23.0](https://github.com/raas-dev/configent/compare/1.22.0...1.23.0) (2022-07-30)
 
 
