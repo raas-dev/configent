@@ -36,7 +36,7 @@ Works on:
 - Alpine Linux 3.16, 3.15 and 3.14
 
 Minimum requirements are 4 VCPUs and 4GBs RAM, or a 2016 MacBook Pro,
-on which the whole setup takes ~30 minutes.
+both on which it takes ~30 minutes.
 
 Some dependencies are installed system-wide, thus `sudo` password may be asked.
 
