@@ -357,6 +357,21 @@ alias naabu='nixery naabu naabu'
 alias rustscan='nixery rustscan rustscan'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 
+### Latest version of Python command line tools ################################
+
+# Simplenote CLI
+alias sncli='pipx run sncli'
+
+# general media downloader
+alias you-get='pipx run you-get'
+
+# multitool for tabular data
+alias vd='pipx run --pip-args openpyxl visidata'
+
+# Jupyter
+alias euporie='pipx run euporie'
+alias jupytext='pipx run jupytext'
+
 ### Latest version of global nodejs devtools ###################################
 
 # Yarn

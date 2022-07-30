@@ -35,7 +35,12 @@ python3_version="3.10.5"
 "$HOME/.pyenv/bin/pyenv" global "$python3_version"
 
 eval "$($HOME/.pyenv/bin/pyenv init --path)"
+
+# upgrade packages included with Python
 pip install --upgrade pip setuptools wheel
+
+# https://pypa.github.io/pipx
+pip install --upgrade pipx
 
 ### Python development tools ###################################################
 
@@ -43,24 +48,4 @@ pip install --upgrade pre-commit
 pip install --upgrade ptpython
 pip install --upgrade better_exceptions tbvaccine
 pip install --upgrade semgrep
-
-### Command line tools #########################################################
-
-# simplified man pages
 pip install --upgrade tldr
-
-# Simplenote CLI
-pip install --upgrade sncli
-
-# general media downloader
-pip install --upgrade you-get
-
-# multitool for tabular data
-pip install --upgrade visidata openpyxl
-
-### Jupyter ####################################################################
-
-#pip install --upgrade jupyter
-#pip install --upgrade jupytext
-#pip install --upgrade jupyterlab
-#pip install --upgrade euporie
