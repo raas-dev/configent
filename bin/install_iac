@@ -46,10 +46,9 @@ fi
 
 ### network ####################################################################
 
-brew install dog  # rust
-brew install k6   # go
-brew install nmap # c
-brew install oha  # rust
+brew install dog # rust
+brew install k6  # go
+brew install oha # rust
 
 ### azure ######################################################################
 

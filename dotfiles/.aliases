@@ -354,6 +354,7 @@ pyclean() {
 ### Binaries within Docker built dynamically by nixery #########################
 
 alias naabu='nixery naabu naabu'
+alias nmap='nixery nmap nmap'
 alias rustscan='nixery rustscan rustscan'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 
