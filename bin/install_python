@@ -36,10 +36,14 @@ pip install --upgrade pip setuptools wheel
 # https://pypa.github.io/pipx
 pip install --upgrade pipx
 
-### Python development tools ###################################################
+### Interpreter scope ##########################################################
 
+pip install --upgrade better_exceptions
 pip install --upgrade pre-commit
-pip install --upgrade ptpython
-pip install --upgrade better_exceptions tbvaccine
-pip install --upgrade semgrep
-pip install --upgrade tldr
+pip install --upgrade tbvaccine
+
+### Local and isolated scope ###################################################
+
+pipx install ptpython
+pipx install semgrep
+pipx install tldr

@@ -124,10 +124,10 @@ command -v rbenv >/dev/null && eval "$(rbenv init -)"
 path_prepend "$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
-export BETTER_EXCEPTIONS=1 # pip install --upgrade better_exceptions
-export TBVACCINE=1         # pip install --upgrade tbvaccine
+export BETTER_EXCEPTIONS=1
+export TBVACCINE=1
 
-# Add `pip install --user` and `pipx` scope into $PATH if the dir exists
+# Add `pip install --user` and `pipx` scope into $PATH
 path_prepend "$HOME/.local/bin"
 
 ### Nvm ########################################################################
