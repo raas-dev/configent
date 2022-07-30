@@ -24,7 +24,3 @@ git -C "$nvm_path" -c advice.detachedHead=false checkout \
   nvm install --lts &&
   nvm alias default 'lts/*' &&
   nvm use default
-
-### Node packages ##############################################################
-
-#npm install --location=global yarn
