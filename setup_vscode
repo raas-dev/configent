@@ -37,6 +37,7 @@ if command -v code >/dev/null; then
   code --force --install-extension EditorConfig.EditorConfig
   code --force --install-extension eg2.vscode-npm-script
   code --force --install-extension esbenp.prettier-vscode
+  code --force --install-extension exiasr.hadolint
   code --force --install-extension foxundermoon.shell-format
   code --force --install-extension golang.go
   code --force --install-extension Gruntfuggly.activitusbar
