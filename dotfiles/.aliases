@@ -205,7 +205,7 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
-alias dufs='docker run -it \
+alias dufs='docker run -it --cap-drop ALL \
   -p 80:80 \
   -v $(pwd):/data \
   sigoden/dufs \
