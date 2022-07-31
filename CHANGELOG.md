@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.6](https://github.com/raas-dev/configent/compare/1.23.5...1.23.6) (2022-07-31)
+
+
+### Documentation
+
+* **README:** Update screenshot ([b6f6e86](https://github.com/raas-dev/configent/commit/b6f6e86011abf94ee65f2f98b14f0afd3e8f178b))
+* **README:** Update screenshot ([74d64d7](https://github.com/raas-dev/configent/commit/74d64d71e423be8cd2eb87bf7948766f17fafefe))
+
+
+### Fixes
+
+* **k6:** Alias k6 to run k6 in docker by nixery ([8be4c79](https://github.com/raas-dev/configent/commit/8be4c79ea6a4b203964859a5994370b61eec832f))
+
 ### [1.23.5](https://github.com/raas-dev/configent/compare/1.23.4...1.23.5) (2022-07-31)
 
 
