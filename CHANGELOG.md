@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.4](https://github.com/raas-dev/configent/compare/1.23.3...1.23.4) (2022-07-31)
+
+
+### Fixes
+
+* **aliases:** Remove configurable-http-proxy ([5dc4725](https://github.com/raas-dev/configent/commit/5dc4725f246b8000d70ede58a7aec866585397f3))
+* **aliases:** Remove other ad-hoc web servers over dufs ([43eb93a](https://github.com/raas-dev/configent/commit/43eb93af5b20304951281fe8562afc590bc4d6cb))
+* **iac:** Add check if go exists before installing k6 ([fde1e72](https://github.com/raas-dev/configent/commit/fde1e7252046a3a1290d53372b5bdbfd2b676fb3))
+
 ### [1.23.3](https://github.com/raas-dev/configent/compare/1.23.2...1.23.3) (2022-07-31)
 
 
