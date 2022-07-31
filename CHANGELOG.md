@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.2](https://github.com/raas-dev/configent/compare/1.23.1...1.23.2) (2022-07-31)
+
+
+### Performance
+
+* **utils:** Install utils before tmux ([023e151](https://github.com/raas-dev/configent/commit/023e151af575efa4440c05ac2ae5eec7de961026))
+
+
+### Documentation
+
+* **README:** Add min disk space requirement ([3206711](https://github.com/raas-dev/configent/commit/32067118932e6c903a48d24ef6296a82dac10d18))
+* **README:** Add minimum hardware requirements ([d635ea0](https://github.com/raas-dev/configent/commit/d635ea0f2e5fddaafd2d9f27882b4b9b1de62bfa))
+* **README:** Add minimum requirements ([464e2de](https://github.com/raas-dev/configent/commit/464e2def9dd80e6d6995ebc151658c5191f72326))
+* **README:** Add more specific disk space requirement ([562b2a6](https://github.com/raas-dev/configent/commit/562b2a616d6099c104184241e3c050225464166e))
+
+
+### Fixes
+
+* **iac:** Use xk6 for k6, use nixery for dog and oha ([e4e5983](https://github.com/raas-dev/configent/commit/e4e5983d57b5a3c185b685c697763a70775dad9b))
+* **vscode:** Add extension for hadolint ([be13762](https://github.com/raas-dev/configent/commit/be1376223baa8cff1ce79165df33706655b2a617))
+* **vscode:** Add extension for trivy ([09ec596](https://github.com/raas-dev/configent/commit/09ec596d1727a2f8ca51001e6df132d00fbe8b81))
+
 ### [1.23.1](https://github.com/raas-dev/configent/compare/1.23.0...1.23.1) (2022-07-30)
 
 
