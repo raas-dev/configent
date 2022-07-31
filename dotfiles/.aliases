@@ -386,9 +386,6 @@ alias jupytext='pipx run jupytext'
 # Yarn
 alias yarn='npx -y yarn'
 
-# configurable-http-proxy
-alias configurable-http-proxy='npx -y configurable-http-proxy'
-
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
