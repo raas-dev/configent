@@ -205,6 +205,12 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
+alias dufs='docker run -it \
+  -p 80:80 \
+  -v $(pwd):/data \
+  sigoden/dufs \
+  /data -p 80'
+
 ### nerdctl ####################################################################
 
 alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
@@ -234,9 +240,6 @@ alias cwd='pwd | tr -d "\n" | pbcopy'
 # Public IP
 alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
 alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
-
-# Python 3 HTTP server
-alias serv='python3 -m http.server 8000 --bind 127.0.0.1'
 
 # Display PATH content
 alias path='printf "${PATH//:/\\n}\n"'
@@ -391,9 +394,6 @@ alias depcheck='npx -y depcheck'
 
 # Command-line JSON processing tool
 alias fx='npx -y fx'
-
-# Simple, zero-configuration command-line http server
-alias http-server='npx -y http-server'
 
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
