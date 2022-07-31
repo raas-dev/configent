@@ -27,6 +27,10 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
+### QEMU #######################################################################
+
+[ "$(uname -s)" = 'Darwin' ] && brew install lima
+
 ### linters ####################################################################
 
 brew install hadolint   # haskell
@@ -35,16 +39,6 @@ brew install shellcheck # haskell
 ### scanners ###################################################################
 
 brew install trivy # go
-
-### docker #####################################################################
-
-[ "$(uname -s)" = 'Darwin' ] && brew install lima
-
-### network ####################################################################
-
-brew install dog # rust
-brew install k6  # go
-brew install oha # rust
 
 ### azure ######################################################################
 
@@ -77,3 +71,9 @@ tfenv use latest
 
 brew install tfsec                # go
 brew install shihanng/tfvar/tfvar # go
+
+### k6 #########################################################################
+
+go install go.k6.io/xk6/cmd/xk6@latest && "$HOME/go/bin/xk6" build \
+  --with github.com/grafana/xk6-browser \
+  --output "$HOME/go/bin/k6"

@@ -43,9 +43,6 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 # https://github.com/sachaos/viddy
 go install github.com/sachaos/viddy@latest
 
-# https://github.com/grafana/xk6
-go install go.k6.io/xk6/cmd/xk6@latest
-
 ### fzf ########################################################################
 
 # https://github.com/junegunn/fzf
