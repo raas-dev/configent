@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.3](https://github.com/raas-dev/configent/compare/1.23.2...1.23.3) (2022-07-31)
+
+
+### Fixes
+
+* **k6:** Fix go path ([00dfd01](https://github.com/raas-dev/configent/commit/00dfd01e138cc983e2ae6bc41354c05551c987a2))
+* **vscode:** Add extension for tfsec ([885f26c](https://github.com/raas-dev/configent/commit/885f26cf93dd04b0cca92732d7ea71a099b5357e))
+
 ### [1.23.2](https://github.com/raas-dev/configent/compare/1.23.1...1.23.2) (2022-07-31)
 
 
