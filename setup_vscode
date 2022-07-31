@@ -68,6 +68,7 @@ if command -v code >/dev/null; then
   code --force --install-extension stkb.rewrap
   code --force --install-extension tamasfe.even-better-toml
   code --force --install-extension teabyii.ayu
+  code --force --install-extension tfsec.tfsec
   code --force --install-extension timonwong.shellcheck
   code --force --install-extension tokoph.ghosttext
   code --force --install-extension VisualStudioExptTeam.vscodeintellicode
