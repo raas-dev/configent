@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.5](https://github.com/raas-dev/configent/compare/1.23.4...1.23.5) (2022-07-31)
+
+
+### Fixes
+
+* **aliases:** Add --cap-drop ALL ([494d3fc](https://github.com/raas-dev/configent/commit/494d3fcfdf383ccb9b02dcc89ac96105d42898ca))
+
 ### [1.23.4](https://github.com/raas-dev/configent/compare/1.23.3...1.23.4) (2022-07-31)
 
 
