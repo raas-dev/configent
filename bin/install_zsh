@@ -35,6 +35,9 @@ brew install zsh
 git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
   git -C "$HOME/.antidote" pull --rebase
 
+# for bobsoppe/zsh-ssh-agent, create .ssh directory if it does not already exist
+mkdir "$HOME/.ssh" 2>/dev/null && chmod 700 "$HOME/.ssh"
+
 ### Set zsh as the default shell ###############################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
