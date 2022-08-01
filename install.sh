@@ -55,12 +55,16 @@ if [ "$(uname -s)" = 'Linux' ]; then
   if [ "$CANELEVATE" = 'true' ]; then
     if ! command -v git >/dev/null; then
       if command -v apt-get >/dev/null; then
+        $SUDO apt-get update
         $SUDO apt-get install -y git
       elif command -v yum >/dev/null; then
+        $SUDO yum check-update
         $SUDO yum install -y git
       elif command -v pacman >/dev/null; then
+        $SUDO pacman -Syy
         $SUDO pacman --noconfirm --needed -S git
       elif command -v apk >/dev/null; then
+        $SUDO apk update
         $SUDO apk add git coreutils # coreutils is required for ln -i
       else
         printf "\nError: Could not install git, please install git manually.\n"
