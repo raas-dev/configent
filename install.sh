@@ -61,11 +61,9 @@ if [ "$(uname -s)" = 'Linux' ]; then
         $SUDO yum check-update
         $SUDO yum install -y git
       elif command -v pacman >/dev/null; then
-        $SUDO pacman -Syy
-        $SUDO pacman --noconfirm --needed -S git
+        $SUDO pacman --noconfirm --needed -Sy git
       elif command -v apk >/dev/null; then
-        $SUDO apk update
-        $SUDO apk add git coreutils # coreutils is required for ln -i
+        $SUDO apk -U add git coreutils # coreutils is required for ln -i
       else
         printf "\nError: Could not install git, please install git manually.\n"
         exit 1
