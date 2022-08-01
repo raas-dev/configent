@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.7](https://github.com/raas-dev/configent/compare/1.23.6...1.23.7) (2022-08-01)
+
+
+### Fixes
+
+* **install:** Refresh package database first ([418edd8](https://github.com/raas-dev/configent/commit/418edd8d2afc45ed8471ef258908e81c9d758bd7))
+* **install:** Refresh package database first ([dc70610](https://github.com/raas-dev/configent/commit/dc706102b3e556897645c34777f973b60c7276be))
+* **sudo:** Check if user has passwordless sudo ([ca07d7c](https://github.com/raas-dev/configent/commit/ca07d7cfe42ba08f0fac851b1a0d55ea43f62f8c))
+* **zsh:** Create .ssh if not already exists ([7ccd7ae](https://github.com/raas-dev/configent/commit/7ccd7aedcd2041d299945cff89bfbbf06ee82b88))
+* **zsh:** Do not restore tmux ([edd0f26](https://github.com/raas-dev/configent/commit/edd0f261017eeb739bebeae8203fa26986d31dcd))
+
 ### [1.23.6](https://github.com/raas-dev/configent/compare/1.23.5...1.23.6) (2022-07-31)
 
 
