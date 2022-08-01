@@ -17,7 +17,7 @@ elif command -v sudo >/dev/null; then
   SUDOEULA='sudo ACCEPT_EULA=Y'
 
   # Ask sudo password upfront
-  sudo -v
+  sudo -n true || sudo -v
 
   # Keep sudo alive until the script has finished
   while true; do

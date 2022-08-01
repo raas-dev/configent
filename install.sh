@@ -40,7 +40,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
     printf "Sudo might be prompted to install git from distro's packages.\n"
 
     # Ask sudo password upfront
-    sudo -v
+    sudo -n true || sudo -v
 
     # Keep sudo alive until the script has finished
     while true; do
