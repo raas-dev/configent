@@ -89,20 +89,6 @@ else
   fi
 fi
 
-### Prompt #####################################################################
-
-command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
-
-### zoxide #####################################################################
-
-if command -v zoxide >/dev/null; then
-  eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
-
-  j() {
-    __zoxide_z "$@"
-  }
-fi
-
 ### Java #######################################################################
 
 sdkman_path="$HOME/.sdkman"
@@ -169,6 +155,20 @@ if [ -r "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
   . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
   path_append "/nix/var/nix/profiles/default/bin"
   path_prepend "$HOME/.nix-profile/bin"
+fi
+
+### Prompt #####################################################################
+
+command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
+
+### zoxide #####################################################################
+
+if command -v zoxide >/dev/null; then
+  eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
+
+  j() {
+    __zoxide_z "$@"
+  }
 fi
 
 ### Fzf ########################################################################
