@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.8](https://github.com/raas-dev/configent/compare/1.23.7...1.23.8) (2022-08-02)
+
+
+### Fixes
+
+* **profile:** Load Rust utils after cargo is present ([1041fce](https://github.com/raas-dev/configent/commit/1041fce3c460c612123a1cf0c928ca72235d66a2))
+
 ### [1.23.7](https://github.com/raas-dev/configent/compare/1.23.6...1.23.7) (2022-08-01)
 
 
