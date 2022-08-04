@@ -138,7 +138,7 @@ alias b='bat --theme=base16'
 alias c='kalker'
 alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ;
   docker build --tag ${PWD##*/} . &&
-  docker run -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} &&
+  docker run --init -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} &&
   docker port ${PWD##*/}'
 alias e='ext'
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -205,7 +205,7 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
-alias dufs='docker run -it --cap-drop ALL \
+alias dufs='docker run --init -it --cap-drop ALL \
   -p 80:80 \
   -v $(pwd):/data \
   sigoden/dufs \
@@ -285,7 +285,7 @@ nixery() {
   else
     image="nixery.dev/shell/$pkgs"
   fi
-  docker run -it --rm --name "${pkgs//\//-}" \
+  docker run --init -it --rm --name "${pkgs//\//-}" \
     --publish-all \
     --volume="$PWD:$PWD":ro \
     --workdir="$PWD" \
