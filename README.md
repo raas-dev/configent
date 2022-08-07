@@ -1,4 +1,4 @@
-# c🌀nfigent (1.23.8)
+# c🌀nfigent (1.23.9)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
@@ -45,7 +45,7 @@ Some dependencies are installed system-wide, thus `sudo` password may be asked.
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.23.8/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.23.9/install.sh | sh
 
 If git is not present on the machine, it is installed first by the Linux
 distro's package manager or by Xcode Command Line Tools on macOS.

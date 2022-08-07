@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.9](https://github.com/raas-dev/configent/compare/1.23.8...1.23.9) (2022-08-07)
+
+
+### Fixes
+
+* **docker:** Add --init to reap processes properly ([f11e753](https://github.com/raas-dev/configent/commit/f11e753405268563c7adacccbb1189d131170828))
+
 ### [1.23.8](https://github.com/raas-dev/configent/compare/1.23.7...1.23.8) (2022-08-02)
 
 
