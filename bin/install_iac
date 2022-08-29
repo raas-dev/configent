@@ -69,5 +69,4 @@ brew install tfenv # bash
 tfenv install latest
 tfenv use latest
 
-brew install tfsec                # go
-brew install shihanng/tfvar/tfvar # go
+brew install tfsec # go

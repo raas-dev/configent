@@ -48,6 +48,9 @@ go install github.com/sachaos/viddy@latest
 #  --with github.com/grafana/xk6-browser \
 #  --output "$GOPATH/bin/xk6-browser"
 
+# https://github.com/shihanng/tfvar
+go install github.com/shihanng/tfvar@latest
+
 ### fzf ########################################################################
 
 # https://github.com/junegunn/fzf
