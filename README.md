@@ -40,15 +40,15 @@ both on which it takes ~30 minutes.
 
 ## 💣 Up
 
-Some dependencies are installed system-wide, thus `sudo` password may be asked.
-
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.23.9/install.sh | sh
 
-If git is not present on the machine, it is installed first by the Linux
-distro's package manager or by Xcode Command Line Tools on macOS.
+To install system-wide packages, `sudo` password may be asked in the beginning.
+
+If git is not present, it is installed by the Linux distro's package manager
+or by Xcode Command Line Tools on macOS.
 
 Then the respective git tag from this repository is cloned as `$HOME/configent`,
 or main branch is pulled on top of it if the git working copy already exists.
