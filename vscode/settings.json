@@ -143,5 +143,6 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "gitlens.showWhatsNewAfterUpgrades": false,
-    "npm.keybindingsChangedWarningShown": true
+    "npm.keybindingsChangedWarningShown": true,
+    "git.enableSmartCommit": true
   }
