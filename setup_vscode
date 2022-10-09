@@ -56,6 +56,8 @@ if command -v code >/dev/null; then
   code --force --install-extension ms-toolsai.jupyter
   code --force --install-extension ms-toolsai.jupyter-keymap
   code --force --install-extension ms-toolsai.jupyter-renderers
+  code --force --install-extension ms-toolsai.vscode-jupyter-cell-tags
+  code --force --install-extension ms-toolsai.vscode-jupyter-slideshow
   code --force --install-extension ms-vscode.azure-account
   code --force --install-extension ms-vscode.powershell
   code --force --install-extension ms-vsliveshare.vsliveshare
@@ -71,5 +73,6 @@ if command -v code >/dev/null; then
   code --force --install-extension tfsec.tfsec
   code --force --install-extension timonwong.shellcheck
   code --force --install-extension tokoph.ghosttext
+  code --force --install-extension VisualStudioExptTeam.intellicode-api-usage-examples
   code --force --install-extension VisualStudioExptTeam.vscodeintellicode
 fi
