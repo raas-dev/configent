@@ -38,7 +38,8 @@ brew install shellcheck # haskell
 
 ### scanners ###################################################################
 
-brew install trivy # go
+brew install trivy                 # go
+brew install goodwithtech/r/dockle # go
 
 ### azure ######################################################################
 
