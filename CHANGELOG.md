@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/raas-dev/configent/compare/1.23.9...1.24.0) (2022-10-30)
+
+
+### Features
+
+* **iac:** Add dockle for Docker image scanning ([75a89bd](https://github.com/raas-dev/configent/commit/75a89bd9f7a4e27bbdf757d00280218271b34953))
+* **vscode:** Add spectral OpenAPI linter extension ([935b25a](https://github.com/raas-dev/configent/commit/935b25a37053fa9d412425c4fadb57d5fa372893))
+* **vscode:** Add vscode cfn lint ([5a6bdac](https://github.com/raas-dev/configent/commit/5a6bdac78022014ddd6df64e079657d577fbc82b))
+
+
+### Documentation
+
+* **README:** Installation -> system-wide packages ([e110e8a](https://github.com/raas-dev/configent/commit/e110e8aa5d0ec8bc3d178cd4361be73a6208737f))
+
+
+### Fixes
+
+* **iac:** Install tfvar by go to support arm64 ([220caa6](https://github.com/raas-dev/configent/commit/220caa6ef90d62deb7195cd0811075ad5625d86b))
+* **profile:** Add /usr/local/bin to PATH on macOS for pwsh ([22ac950](https://github.com/raas-dev/configent/commit/22ac950fa0d2721bc0654bbbbe4dd8e45e561c32))
+* **vscode:** Enable fast commit in Source Control ([2205428](https://github.com/raas-dev/configent/commit/220542846a0a7e2b257323e910d3bfcf848f431f))
+* **vscode:** Update extensions list in vscode setup ([0f56d4f](https://github.com/raas-dev/configent/commit/0f56d4ffb3107baad001ec5d0a42fb2284460274))
+
 ### [1.23.9](https://github.com/raas-dev/configent/compare/1.23.8...1.23.9) (2022-08-07)
 
 
