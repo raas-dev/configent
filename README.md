@@ -24,7 +24,7 @@ Features:
 
 Works on:
 
-- macOS Monterey (12) and Big Sur (11) on Intel and ARM Macs
+- macOS Ventura (13), Monterey (12) and Big Sur (11) on Intel and ARM Macs
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish) and 21.10 (Impish Indri)
 - Debian Linux 11 (bullseye)
 - Fedora Linux 36 and 35
