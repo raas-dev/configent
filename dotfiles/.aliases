@@ -364,6 +364,7 @@ alias nuclei='nixery nuclei nuclei'
 alias oha='nixery oha oha'
 alias rustscan='nixery rustscan rustscan'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
+alias wapiti='nixery wapiti wapiti'
 
 ### Latest version of Python command line tools ################################
 
