@@ -42,7 +42,6 @@ brew install --cask brave-browser
 #brew install --cask libreoffice
 #brew install --cask postman
 brew install --cask powershell
-#brew install --cask rancher
 #brew install --cask tunnelblick
 brew install --cask visual-studio-code
 #brew install --cask the-unarchiver
