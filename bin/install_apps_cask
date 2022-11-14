@@ -36,7 +36,6 @@ brew tap buo/cask-upgrade
 # Homebrew Cask apps
 brew install --cask brave-browser
 #brew install --cask google-cloud-sdk
-#brew install --cask google-drive
 #brew install --cask gpg-suite
 #brew install --cask iina
 #brew install --cask lens
