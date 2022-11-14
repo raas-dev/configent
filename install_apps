@@ -46,7 +46,7 @@ fi
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
 "$bin_path/install_ruby" # depending on distro, ruby has to available for brew
-#"$bin_path/install_rust"
+"$bin_path/install_rust"
 #"$bin_path/install_sql"
 
 # copy fonts to user's fonts path

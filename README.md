@@ -110,7 +110,7 @@ Order of installation:
 [Snap](https://snapcraft.io/) (Linux distros) and snaps
 3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 4. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
-5. Go, Node.js and Python version managers and the specified language versions
+5. Go, Node.js, Python and Rust version managers and the language versions
 6. Zsh, tmux, command-line utilities, cloud and infrastructure-as-code tools
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
