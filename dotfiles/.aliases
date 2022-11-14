@@ -356,6 +356,7 @@ pyclean() {
 
 ### Binaries within Docker built dynamically by nixery #########################
 
+alias amass='nixery amass amass'
 alias dog='nixery dogdns dog'
 alias hydra='nixery thc-hydra hydra'
 alias k6='nixery k6 k6'
