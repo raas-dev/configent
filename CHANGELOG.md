@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.1](https://github.com/raas-dev/configent/compare/1.25.0...1.25.1) (2022-11-14)
+
+
+### Fixes
+
+* **gnulinux:** Install cmake ([feec869](https://github.com/raas-dev/configent/commit/feec8695f807617a410a1f6d9440c21926312bd4))
+* **gnulinux:** Install m4 as build dep ([5feb0a9](https://github.com/raas-dev/configent/commit/5feb0a9610a36b42e1f3bba39283fc3f058a4bcb))
+
 ## [1.25.0](https://github.com/raas-dev/configent/compare/1.24.0...1.25.0) (2022-11-14)
 
 
