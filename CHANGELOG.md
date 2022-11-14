@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/raas-dev/configent/compare/1.24.0...1.25.0) (2022-11-14)
+
+
+### Features
+
+* **aliases:** Add amass via nixery ([da5774a](https://github.com/raas-dev/configent/commit/da5774a31c5d7b3bb005e1526bd3d053d924e55a))
+* **aliases:** Add hydra via nixery ([c45fa2d](https://github.com/raas-dev/configent/commit/c45fa2d3a111c4e18b776c6fcff2cbaaf908f510))
+* **aliases:** Add nuclei via nixery ([d7815b6](https://github.com/raas-dev/configent/commit/d7815b64f47ce6e3ec0cc944037c26729896af0c))
+* **aliases:** Add wapiti via nixery ([6f6ddf4](https://github.com/raas-dev/configent/commit/6f6ddf405eb7d505f7513b3e0ed6a01c0295e986))
+* **macos:** Add UTM ([36ad0d4](https://github.com/raas-dev/configent/commit/36ad0d4701ee5f4a64c0fe6c62b101f0a1c80996))
+* **rust:** Install Rust and on aarch64, the utils ([c8855fc](https://github.com/raas-dev/configent/commit/c8855fc4ba67fbb66f174bb48d68ada49ac3661b))
+
+
+### Documentation
+
+* **macos:** Add Ventura ([8420817](https://github.com/raas-dev/configent/commit/8420817686e337f3c4d87f31530ace30c98d2ddf))
+
+
+### Fixes
+
+* **google:** Remove unused Google Drive ([91555ab](https://github.com/raas-dev/configent/commit/91555abae7e4cbc4ae6fce4f139569d63c01a0f5))
+* **macos:** Purge defaults removed by Ventura ([80286e3](https://github.com/raas-dev/configent/commit/80286e3f2fe20a946549cc63deda376ff99fdbde))
+* **macos:** Remove unused Rancher Desktop ([5cf2304](https://github.com/raas-dev/configent/commit/5cf23046b40096ccd7c8ab0c143eed2ea25d38e4))
+
 ## [1.24.0](https://github.com/raas-dev/configent/compare/1.23.9...1.24.0) (2022-10-30)
 
 
