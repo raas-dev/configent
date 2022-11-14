@@ -40,7 +40,7 @@ $SUDO yum install -y ca-certificates
 $SUDO yum install -y gnupg
 
 # Common build requirements
-$SUDO yum install -y gcc gcc-c++ make \
+$SUDO yum install -y cmake gcc gcc-c++ make \
   openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel libffi-devel
 
 # Required for brew, if provided by distro (Fedora)
