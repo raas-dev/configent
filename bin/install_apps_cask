@@ -43,6 +43,7 @@ brew install --cask brave-browser
 #brew install --cask postman
 brew install --cask powershell
 #brew install --cask tunnelblick
+#brew install --cask utm
 brew install --cask visual-studio-code
 #brew install --cask the-unarchiver
 
