@@ -357,7 +357,11 @@ pyclean() {
 ### Binaries within Docker built dynamically by nixery #########################
 
 alias amass='nixery amass amass'
+alias dalfox='nixery dalfox dalfox'
 alias dog='nixery dogdns dog'
+alias dnstwist='nixery dnstwist dnstwist'
+alias ffuf='nixery ffuf ffuf'
+alias gobuster'nixery gobuster gobuster'
 alias hydra='nixery thc-hydra hydra'
 alias k6='nixery k6 k6'
 alias naabu='nixery naabu naabu'
@@ -365,6 +369,7 @@ alias nmap='nixery nmap nmap'
 alias nuclei='nixery nuclei nuclei'
 alias oha='nixery oha oha'
 alias rustscan='nixery rustscan rustscan'
+alias sqlmap='nixery sqlmap sqlmap'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 alias wapiti='nixery wapiti wapiti'
 
