@@ -357,6 +357,7 @@ pyclean() {
 ### Binaries within Docker built dynamically by nixery #########################
 
 alias amass='nixery amass amass'
+alias chain-bench='nixery chain-bench chain-bench'
 alias dalfox='nixery dalfox dalfox'
 alias dog='nixery dogdns dog'
 alias dnstwist='nixery dnstwist dnstwist'
