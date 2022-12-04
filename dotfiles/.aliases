@@ -65,7 +65,7 @@ else
       sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ;
       br'
     alias dup='sudo apt update &&
-      sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt clean ;
+      sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean ;
       br'
   elif command -v yum >/dev/null; then
     alias up='sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ;
