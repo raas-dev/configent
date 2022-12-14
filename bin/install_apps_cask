@@ -45,7 +45,6 @@ brew install --cask powershell
 #brew install --cask tunnelblick
 #brew install --cask utm
 brew install --cask visual-studio-code
-#brew install --cask the-unarchiver
 
 # Peripheral drivers
 #brew install --cask homebrew/cask-drivers/corsair-icue

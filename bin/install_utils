@@ -42,6 +42,7 @@ brew install sd        # rust
 brew install starship  # rust
 brew install xh        # rust
 brew install zoxide    # rust
+brew install unar      # c
 
 ### macOS only brews ###########################################################
 
