@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/raas-dev/configent/compare/1.25.1...1.26.0) (2022-12-14)
+
+
+### Features
+
+* **aliases:** Add chain-bench via nixery ([54f2881](https://github.com/raas-dev/configent/commit/54f28814378d3af0f92fe15f578b3bd100d2ecbe))
+* **aliases:** Add metasploit via nixery ([794303e](https://github.com/raas-dev/configent/commit/794303eef8352e167c47ff9dd3569c946cd5b0b2))
+* **aliases:** Add msfconsole via nixery ([e1b4ef7](https://github.com/raas-dev/configent/commit/e1b4ef77fb69c528284ef9ee299b3469f8b605f8))
+* **aliases:** Add nikto via nixery ([3acb358](https://github.com/raas-dev/configent/commit/3acb3584df9030e4b438f578df81ec3f5153a541))
+* **aliases:** Add security tools via nixery ([c557713](https://github.com/raas-dev/configent/commit/c557713e1a867a3d3877396c7fe57ec9e50c9ca2))
+* **aliases:** Add unar ([0fd7409](https://github.com/raas-dev/configent/commit/0fd7409e4a0791cc16e6d7b470985cbc793ceac6))
+
+
+### Fixes
+
+* **aliases:** Use apt full-upgrade ([c07698f](https://github.com/raas-dev/configent/commit/c07698fefc7f0efddbf339f77276fe46c67fd8b9))
+
 ### [1.25.1](https://github.com/raas-dev/configent/compare/1.25.0...1.25.1) (2022-11-14)
 
 
