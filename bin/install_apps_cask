@@ -38,7 +38,6 @@ brew install --cask brave-browser
 #brew install --cask google-cloud-sdk
 #brew install --cask gpg-suite
 #brew install --cask iina
-#brew install --cask lens
 #brew install --cask libreoffice
 #brew install --cask postman
 brew install --cask powershell
