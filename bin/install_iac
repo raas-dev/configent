@@ -48,6 +48,7 @@ az config set core.collect_telemetry=false
 az config set core.output=jsonc
 
 az extension add --name azure-devops --upgrade --yes
+az extension add --name containerapp --upgrade --yes
 az extension add --name next --upgrade --yes
 
 brew install azcopy # go
