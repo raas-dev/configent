@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/raas-dev/configent/compare/1.26.0...1.27.0) (2023-01-08)
+
+
+### Features
+
+* **iac:** Add azure-cli extension for containers ([1e7e215](https://github.com/raas-dev/configent/commit/1e7e2155ab7ad1dd184e536611e4a766fac14ba2))
+
 ## [1.26.0](https://github.com/raas-dev/configent/compare/1.25.1...1.26.0) (2022-12-14)
 
 
