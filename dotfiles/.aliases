@@ -253,10 +253,9 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
-# https://github.com/abhagsain/ai-cli
 ask() {
-  # setup: npx -y @abhagsain/ai-cli auth
-  npx -y @abhagsain/ai-cli ask "$*"
+  # setup: ai auth
+  ai ask "$*"
 }
 
 # Quick extract
@@ -427,6 +426,9 @@ alias mrm='npx -y mrm'
 
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
+
+# https://github.com/abhagsain/ai-cli
+alias ai='npx -y @abhagsain/ai-cli'
 
 ### decode #####################################################################
 
