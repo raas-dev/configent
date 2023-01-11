@@ -165,6 +165,7 @@ alias z='whatlistens'
 alias §='got -o -s en -t fi'
 alias ,='got -o -s fi -t en'
 alias _='bat --show-all'
+alias @='ask'
 
 ### watch ######################################################################
 
@@ -251,6 +252,12 @@ alias sudo='sudo '
 alias week='date +%V'
 
 ### Utilities ##################################################################
+
+# https://github.com/abhagsain/ai-cli
+ask() {
+  # setup: npx -y @abhagsain/ai-cli auth
+  npx -y @abhagsain/ai-cli ask "$*"
+}
 
 # Quick extract
 ext() {
