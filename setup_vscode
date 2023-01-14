@@ -39,10 +39,10 @@ if command -v code >/dev/null; then
   code --force --install-extension esbenp.prettier-vscode
   code --force --install-extension exiasr.hadolint
   code --force --install-extension foxundermoon.shell-format
+  code --force --install-extension gencay.vscode-chatgpt
   code --force --install-extension golang.go
   code --force --install-extension Gruntfuggly.activitusbar
   code --force --install-extension hashicorp.terraform
-  code --force --install-extension humao.rest-client
   code --force --install-extension kddejong.vscode-cfn-lint
   code --force --install-extension mermade.openapi-lint
   code --force --install-extension ms-azure-devops.azure-pipelines
@@ -52,6 +52,7 @@ if command -v code >/dev/null; then
   code --force --install-extension MS-CST-E.vscode-devskim
   code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
   code --force --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+  code --force --install-extension ms-python.isort
   code --force --install-extension ms-python.python
   code --force --install-extension ms-python.vscode-pylance
   code --force --install-extension ms-toolsai.jupyter
@@ -65,6 +66,7 @@ if command -v code >/dev/null; then
   code --force --install-extension msazurermtools.azurerm-vscode-tools
   code --force --install-extension naumovs.color-highlight
   code --force --install-extension Perkovec.emoji
+  code --force --install-extension RapidAPI.vscode-rapidapi-client
   code --force --install-extension redhat.vscode-yaml
   code --force --install-extension Semgrep.semgrep
   code --force --install-extension stevejpurves.cucumber
