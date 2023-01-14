@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/raas-dev/configent/compare/1.27.0...1.28.0) (2023-01-14)
+
+
+### Features
+
+* **aliases:** Add alias for asking chatgpt ([d55f1df](https://github.com/raas-dev/configent/commit/d55f1df933c28d17b22552256eceb3027da5c0f7))
+
+
+### Fixes
+
+* **aliases:** Fix alias for openai ([afa534d](https://github.com/raas-dev/configent/commit/afa534d89153d69200ebb9eb531973720af798d0))
+* **aliases:** Fix pipclear to remove also local packages ([16e8078](https://github.com/raas-dev/configent/commit/16e8078acffd24248e1ae692cc25d78ce6c558e6))
+
 ## [1.27.0](https://github.com/raas-dev/configent/compare/1.26.0...1.27.0) (2023-01-08)
 
 
