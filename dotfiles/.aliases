@@ -351,7 +351,7 @@ npmclear() {
 
 # Pip remove all
 pipclear() {
-  pip freeze | grep -v "^-e" | xargs pip uninstall -y
+  pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
 # Gem remove all
