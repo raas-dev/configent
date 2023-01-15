@@ -165,7 +165,7 @@ alias z='whatlistens'
 alias §='got -o -s en -t fi'
 alias ,='got -o -s fi -t en'
 alias _='bat --show-all'
-alias @='ai'
+alias @='copilot'
 
 ### watch ######################################################################
 
@@ -253,10 +253,15 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
+# https://github.com/maxvfischer/askai
 ai() {
-  # https://github.com/maxvfischer/askai
   # setup: pipx run askai init
   pipx run askai "$*"
+}
+
+# https://github.com/Methexis-Inc/terminal-copilot
+copilot() {
+  pipx run --pip-args=terminal-copilot copilot "$*"
 }
 
 # Quick extract
