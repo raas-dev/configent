@@ -410,6 +410,9 @@ alias vd='pipx run --pip-args openpyxl visidata'
 alias euporie='pipx run euporie'
 alias jupytext='pipx run jupytext'
 
+# openai
+alias openai='pipx run openai'
+
 ### Latest version of global nodejs devtools ###################################
 
 # Yarn
