@@ -32,6 +32,7 @@ fi
 brew install bat       # rust
 brew install diskonaut # rust
 brew install fd        # rust
+brew install git-lsf   # go
 brew install gitui     # rust
 brew install grex      # rust
 brew install kalker    # rust
