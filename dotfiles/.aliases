@@ -261,7 +261,7 @@ ai() {
 
 # https://github.com/Methexis-Inc/terminal-copilot
 copilot() {
-  pipx run --pip-args=terminal-copilot copilot "$*"
+  pipx run --spec=terminal-copilot copilot "$*"
 }
 
 # Quick extract
