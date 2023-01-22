@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.29.0](https://github.com/raas-dev/configent/compare/1.28.0...1.29.0) (2023-01-22)
+
+
+### Features
+
+* **aliases:** Add alias for run openai Python package ([6d5dc05](https://github.com/raas-dev/configent/commit/6d5dc05d0e6f9f7ef3db39d16302b2c0a780d10a))
+* **aliases:** Add huggingface-cli ([60e3569](https://github.com/raas-dev/configent/commit/60e356933df16e73d421c8c80712172ab77a4472))
+* **aliases:** Add pipx run lama-cleaner ([13f906e](https://github.com/raas-dev/configent/commit/13f906e46aa8f598fa7041abce264853a3b180b8))
+* **aliases:** Add terminal-copilot, alias to @ ([1929921](https://github.com/raas-dev/configent/commit/1929921c76a4783bbc954d2be1b2059ec5e545d4))
+* **git:** Add git-lfs ([d894cbb](https://github.com/raas-dev/configent/commit/d894cbbbb74a6ab310b182320edaa6fb35b2477f))
+* **macos:** Make alias dup update appstore apps ([ce2c03f](https://github.com/raas-dev/configent/commit/ce2c03fc5b872acf5c0a5eead676ae493e06b575))
+* **osx:** Add mas-cli ([eb66283](https://github.com/raas-dev/configent/commit/eb662839a6d67ccfd26074c9c33ad8a8654869bb))
+* **utils:** Add brew install git-lfs ([fd05c7a](https://github.com/raas-dev/configent/commit/fd05c7a5762199611805f1a2329da2334715cfeb))
+
+
+### Fixes
+
+* **aliases:** Fix copilot pipx args ([37ddea1](https://github.com/raas-dev/configent/commit/37ddea1d11f5c3117d8569dcb037cb848c409b69))
+* **osx:** Do not quarantine brew casks after install ([37b8112](https://github.com/raas-dev/configent/commit/37b8112ce7ce7bcd2f12b0a9b0379180bd2253d2))
+
 ## [1.28.0](https://github.com/raas-dev/configent/compare/1.27.0...1.28.0) (2023-01-14)
 
 
