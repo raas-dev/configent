@@ -14,7 +14,7 @@ alias br='command -v brew >/dev/null &&
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Brew cask upgrade
-  alias brc='brew cu --all --yes --cleanup'
+  alias brc='brew cu --all --yes --no-quarantine --cleanup'
 
   # Install macOS application updates
   alias up='br ; brc'
