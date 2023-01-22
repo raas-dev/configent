@@ -416,6 +416,9 @@ alias lama-cleaner='pipx run lama-cleaner --model=lama --device=cpu --port=8080'
 # openai
 alias openai='pipx run openai'
 
+# huggingface-cli
+alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
+
 ### Latest version of global nodejs devtools ###################################
 
 # Yarn
