@@ -268,7 +268,7 @@ codex() {
   args="$*"
   args_len=${#args}
   pipx run askai "generate $args" \
-    --model 'code-davinci-002' \
+    --model 'text-davinci-003' \
     --temperature 0 \
     --max-tokens $((4096-args_len))
 }
