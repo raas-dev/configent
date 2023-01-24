@@ -8,11 +8,22 @@
 
 # pure shell wrapper for the OpenAI completion API, requires jq/gojq and curl
 
+# shellcheck disable=SC2034  # ignore unused color codes
 # shellcheck disable=SC2086  # not quoting numbers in json payload
 
 ### constants ##################################################################
 
 hist_file="$HOME/.ai_history"
+
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+normal=$(tput sgr0)
 
 ### variables ##################################################################
 
@@ -23,7 +34,7 @@ hist_file="$HOME/.ai_history"
 ################################################################################
 
 if ! command -v curl >/dev/null; then
-  printf "Error: curl not found in this system.\n"
+  printf "%sError: curl not found in this system.\n" "$red"
   exit 127
 fi
 
@@ -32,12 +43,12 @@ if command -v gojq >/dev/null; then
 elif command -v jq >/dev/null; then
   json_parser="jq"
 else
-  printf "Error: gojq/jq not found in this system.\n"
+  printf "%sError: gojq/jq not found in this system.\n" "$red"
   exit 127
 fi
 
 if [ -z "$OPENAI_API_KEY" ]; then
-  printf "Error: export OPENAI_API_KEY=your-openaikey\n"
+  printf "%sError: export OPENAI_API_KEY=your-openaikey\n" "$red"
   exit 1
 fi
 
@@ -47,14 +58,14 @@ while true; do
   if [ $# -gt 1 ]; then
     prompt="$*"
   else
-    printf "\n?: "
+    printf "\n%s?: " "$green"
     read -r prompt
   fi
 
   if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ]; then
     exit 0
   elif [ "$prompt" = "history" ]; then
-    printf '%s\n' "$(cat "$hist_file")"
+    printf '%s%s\n' "$normal" "$(cat "$hist_file")"
   else
     escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
     response=$(curl https://api.openai.com/v1/completions \
@@ -67,7 +78,7 @@ while true; do
   			"max_tokens": '$AI_MAX_TOKENS',
   			"temperature": '$AI_TEMPERATURE'
 	    }' | "$json_parser" -r '.choices[].text' | sed '1,2d')
-    printf '%s\n' "$response"
+    printf '%s%s\n' "$white" "$response"
     timestamp=$(date +"%d.%m.%Y %H:%M:%S")
     printf '\n%s\n?: %s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
   fi
