@@ -59,7 +59,7 @@ while true; do
   elif [ "$prompt" = "history" ]; then
     printf '%s\n' "$(cat "$hist_file")"
   else
-    escaped_prompt=$(printf '%s' "$prompt" | sed 's/"/\\"/g')
+    escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
     # shellcheck disable=SC2086  # not quoting AI_MAX_TOKENS and AI_TEMPERATURE
     response=$(curl -X POST https://api.openai.com/v1/completions -sS \
       -H 'Content-Type: application/json' \
