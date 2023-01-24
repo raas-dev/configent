@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!ai
 !cht.sh
 !docker
 !docker-compose

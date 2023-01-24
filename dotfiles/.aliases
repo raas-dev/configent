@@ -253,24 +253,11 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
-# https://github.com/maxvfischer/askai
-# setup: pipx run askai init
-ai() {
-  # e.g. what is openai temperature
-  pipx run askai "$*" \
-    --model 'text-davinci-003' \
-    --temperature 0.4 \
-    --max-tokens 512
-}
-
 codex() {
-  # e.g. codex terraform for a highly available eks
   args="$*"
   args_len=${#args}
-  pipx run askai "generate $args" \
-    --model 'text-davinci-003' \
-    --temperature 0 \
-    --max-tokens $((4096-args_len))
+  AI_MAX_TOKENS=$((4096-args_len)) AI_TEMPERATURE=0 \
+    ai generate $args
 }
 
 # https://github.com/Methexis-Inc/terminal-copilot

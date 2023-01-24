@@ -1,0 +1,76 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# pure shell wrapper for the OpenAI completion API, requires jq/gojq and curl
+
+# shellcheck disable=SC2086  # not quoting numbers in json payload
+
+### constants  #################################################################
+
+hist_file="$HOME/.ai_history"
+
+### variables ##################################################################
+
+[ -z "$AI_MODEL" ] && AI_MODEL="text-davinci-003"
+[ -z "$AI_MAX_TOKENS" ] && AI_MAX_TOKENS=512
+[ -z "$AI_TEMPERATURE" ] && AI_TEMPERATURE=0.4
+
+################################################################################
+
+if ! command -v curl >/dev/null; then
+  printf "Error: curl not found in this system.\n"
+  exit 127
+fi
+
+if command -v gojq >/dev/null; then
+  json_parser="gojq"
+elif command -v jq >/dev/null; then
+  json_parser="jq"
+else
+  printf "Error: gojq/jq not found in this system.\n"
+  exit 127
+fi
+
+if [ -z "$OPENAI_API_KEY" ] ; then
+  printf "Error: export OPENAI_API_KEY=your-openaikey\n"
+  exit 1
+fi
+
+[ ! -f "$hist_file" ] && touch "$hist_file"
+
+while true; do
+  if [ $# -gt 1 ] ; then
+     prompt="$*"
+  else
+  	printf "\nPrompt: "
+    read -r prompt
+  fi
+
+	if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ] ; then
+		exit 0
+	elif [ "$prompt" = "history" ]; then
+		printf '%s\n' "$(cat "$hist_file")"
+	else
+		escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
+		response=$(curl https://api.openai.com/v1/completions \
+			-sS \
+			-H 'Content-Type: application/json' \
+			-H "Authorization: Bearer $OPENAI_API_KEY" \
+			-d '{
+  			"model": "'"$AI_MODEL"'",
+  			"prompt": "'"$escaped_prompt"'",
+  			"max_tokens": '$AI_MAX_TOKENS',
+  			"temperature": '$AI_TEMPERATURE'
+	    }' | "$json_parser" -r '.choices[].text' | sed '1,2d')
+		printf '%s\n' "$response"
+		timestamp=$(date +"%d.%m.%Y %H:%M:%S")
+		printf '\n%s\n%s\n%s\n' "$timestamp" "$prompt" "$response" >> "$hist_file"
+	fi
+
+  [ $# -gt 1 ] && exit 0
+done
