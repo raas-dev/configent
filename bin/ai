@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# OpenAI completions API shell client in <80 lines, requires jq/gojq and curl
+# OpenAI completions API client in <80 lines, requires curl and gojq/jq
 
 ### constants ##################################################################
 
@@ -34,7 +34,7 @@ if command -v gojq >/dev/null; then
 elif command -v jq >/dev/null; then
   json_parser="jq"
 else
-  printf '%sError: gojq/jq not found in this system.\n' "$red"
+  printf '%sError: gojq or jq not found in this system.\n' "$red"
   exit 127
 fi
 
@@ -61,7 +61,7 @@ while true; do
   else
     escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
     # shellcheck disable=SC2086  # not quoting AI_MAX_TOKENS and AI_TEMPERATURE
-    response=$(curl https://api.openai.com/v1/completions -sS \
+    response=$(curl -X POST https://api.openai.com/v1/completions -sS \
       -H 'Content-Type: application/json' \
       -H "Authorization: Bearer $OPENAI_API_KEY" \
       -d '{
@@ -71,8 +71,8 @@ while true; do
   			"temperature": '$AI_TEMPERATURE'
 	    }' | "$json_parser" --raw-output '.choices[].text' | sed '1,2d')
     printf '%s\n' "$response"
-    timestamp=$(date +"%d.%m.%Y %H:%M:%S")
-    printf '\n%s\n?: %s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
+    timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+    printf '\n%s - %s\n\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
   fi
 
   [ $# -gt 1 ] && exit 0
