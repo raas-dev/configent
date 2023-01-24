@@ -47,7 +47,7 @@ while true; do
   if [ $# -gt 1 ]; then
     prompt="$*"
   else
-    printf "\nPrompt: "
+    printf "\n?: "
     read -r prompt
   fi
 
@@ -69,7 +69,7 @@ while true; do
 	    }' | "$json_parser" -r '.choices[].text' | sed '1,2d')
     printf '%s\n' "$response"
     timestamp=$(date +"%d.%m.%Y %H:%M:%S")
-    printf '\n%s\n%s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
+    printf '\n%s\n?: %s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
   fi
 
   [ $# -gt 1 ] && exit 0
