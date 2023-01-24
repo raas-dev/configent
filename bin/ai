@@ -8,21 +8,14 @@
 
 # pure shell wrapper for the OpenAI completion API, requires jq/gojq and curl
 
-# shellcheck disable=SC2034  # ignore unused color codes
 # shellcheck disable=SC2086  # not quoting numbers in json payload
 
 ### constants ##################################################################
 
 hist_file="$HOME/.ai_history"
 
-black=$(tput setaf 0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
-cyan=$(tput setaf 6)
-white=$(tput setaf 7)
 normal=$(tput sgr0)
 
 ### variables ##################################################################
@@ -60,12 +53,13 @@ while true; do
   else
     printf "\n%s?: " "$green"
     read -r prompt
+    printf "%s" "$normal"
   fi
 
   if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ]; then
     exit 0
   elif [ "$prompt" = "history" ]; then
-    printf '%s%s\n' "$normal" "$(cat "$hist_file")"
+    printf '%s\n' "$(cat "$hist_file")"
   else
     escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
     response=$(curl https://api.openai.com/v1/completions \
@@ -78,7 +72,7 @@ while true; do
   			"max_tokens": '$AI_MAX_TOKENS',
   			"temperature": '$AI_TEMPERATURE'
 	    }' | "$json_parser" -r '.choices[].text' | sed '1,2d')
-    printf '%s%s\n' "$white" "$response"
+    printf '%s\n' "$response"
     timestamp=$(date +"%d.%m.%Y %H:%M:%S")
     printf '\n%s\n?: %s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
   fi
