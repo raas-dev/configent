@@ -10,7 +10,7 @@
 
 # shellcheck disable=SC2086  # not quoting numbers in json payload
 
-### constants  #################################################################
+### constants ##################################################################
 
 hist_file="$HOME/.ai_history"
 
@@ -36,7 +36,7 @@ else
   exit 127
 fi
 
-if [ -z "$OPENAI_API_KEY" ] ; then
+if [ -z "$OPENAI_API_KEY" ]; then
   printf "Error: export OPENAI_API_KEY=your-openaikey\n"
   exit 1
 fi
@@ -44,33 +44,33 @@ fi
 [ ! -f "$hist_file" ] && touch "$hist_file"
 
 while true; do
-  if [ $# -gt 1 ] ; then
-     prompt="$*"
+  if [ $# -gt 1 ]; then
+    prompt="$*"
   else
-  	printf "\nPrompt: "
+    printf "\nPrompt: "
     read -r prompt
   fi
 
-	if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ] ; then
-		exit 0
-	elif [ "$prompt" = "history" ]; then
-		printf '%s\n' "$(cat "$hist_file")"
-	else
-		escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
-		response=$(curl https://api.openai.com/v1/completions \
-			-sS \
-			-H 'Content-Type: application/json' \
-			-H "Authorization: Bearer $OPENAI_API_KEY" \
-			-d '{
+  if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ]; then
+    exit 0
+  elif [ "$prompt" = "history" ]; then
+    printf '%s\n' "$(cat "$hist_file")"
+  else
+    escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
+    response=$(curl https://api.openai.com/v1/completions \
+      -sS \
+      -H 'Content-Type: application/json' \
+      -H "Authorization: Bearer $OPENAI_API_KEY" \
+      -d '{
   			"model": "'"$AI_MODEL"'",
   			"prompt": "'"$escaped_prompt"'",
   			"max_tokens": '$AI_MAX_TOKENS',
   			"temperature": '$AI_TEMPERATURE'
 	    }' | "$json_parser" -r '.choices[].text' | sed '1,2d')
-		printf '%s\n' "$response"
-		timestamp=$(date +"%d.%m.%Y %H:%M:%S")
-		printf '\n%s\n%s\n%s\n' "$timestamp" "$prompt" "$response" >> "$hist_file"
-	fi
+    printf '%s\n' "$response"
+    timestamp=$(date +"%d.%m.%Y %H:%M:%S")
+    printf '\n%s\n%s\n%s\n' "$timestamp" "$prompt" "$response" >>"$hist_file"
+  fi
 
   [ $# -gt 1 ] && exit 0
 done
