@@ -6,9 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# OpenAI completions API shell client in <100 lines, requires jq/gojq and curl
-
-# shellcheck disable=SC2086  # not quoting numbers in json payload
+# OpenAI completions API shell client in <80 lines, requires jq/gojq and curl
 
 ### constants ##################################################################
 
@@ -27,7 +25,7 @@ normal=$(tput sgr0)
 ################################################################################
 
 if ! command -v curl >/dev/null; then
-  printf "%sError: curl not found in this system.\n" "$red"
+  printf '%sError: curl not found in this system.\n' "$red"
   exit 127
 fi
 
@@ -36,12 +34,12 @@ if command -v gojq >/dev/null; then
 elif command -v jq >/dev/null; then
   json_parser="jq"
 else
-  printf "%sError: gojq/jq not found in this system.\n" "$red"
+  printf '%sError: gojq/jq not found in this system.\n' "$red"
   exit 127
 fi
 
 if [ -z "$OPENAI_API_KEY" ]; then
-  printf "%sError: export OPENAI_API_KEY=your-openaikey\n" "$red"
+  printf '%sError: export OPENAI_API_KEY=your-openaikey\n' "$red"
   exit 1
 fi
 
@@ -51,9 +49,9 @@ while true; do
   if [ $# -gt 1 ]; then
     prompt="$*"
   else
-    printf "\n%s?: " "$green"
+    printf '\n%s?: ' "$green"
     read -r prompt
-    printf "%s" "$normal"
+    printf '%s' "$normal"
   fi
 
   if [ "$prompt" = "exit" ] || [ "$prompt" = "quit" ]; then
@@ -62,6 +60,7 @@ while true; do
     printf '%s\n' "$(cat "$hist_file")"
   else
     escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
+    # shellcheck disable=SC2086  # not quoting AI_MAX_TOKENS and AI_TEMPERATURE
     response=$(curl https://api.openai.com/v1/completions -sS \
       -H 'Content-Type: application/json' \
       -H "Authorization: Bearer $OPENAI_API_KEY" \
