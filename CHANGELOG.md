@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.30.0](https://github.com/raas-dev/configent/compare/1.29.0...1.30.0) (2023-01-24)
+
+
+### Features
+
+* **aliases:** Add alias for codex ([5831f04](https://github.com/raas-dev/configent/commit/5831f046846cc48cf9b08a1c37e3555bf4383443))
+* **bin:** Add `ai` ([c0016bf](https://github.com/raas-dev/configent/commit/c0016bfe629495a721f7b2baac0e227694ef87d3))
+* **bin:** Add ai ([2b0125a](https://github.com/raas-dev/configent/commit/2b0125ad8ba8494e153c100baf7508043b6646a9))
+
+
+### Fixes
+
+* **ai:** Fix preserving newlines in question ([e2d4227](https://github.com/raas-dev/configent/commit/e2d4227e63741f4451084dcefc4a7e21c2bd49bc))
+* **ai:** Fix preserving newlines in question ([8b426a1](https://github.com/raas-dev/configent/commit/8b426a1b9d7b96cc5ce4503d91b56efb0e65fa7f))
+* **ai:** Fix prompt styling when generating code ([4e73ff0](https://github.com/raas-dev/configent/commit/4e73ff093642c50ed283a520b98c190d0b3d7c91))
+* **codex:** Fix openai model ([18cd60e](https://github.com/raas-dev/configent/commit/18cd60eda898cb9dad23a1440dedd739c0d348a8))
+
 ## [1.29.0](https://github.com/raas-dev/configent/compare/1.28.0...1.29.0) (2023-01-22)
 
 
