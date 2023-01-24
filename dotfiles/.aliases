@@ -260,7 +260,7 @@ ai() {
   pipx run askai "$*" \
     --model 'text-davinci-003' \
     --temperature 0.4 \
-    --max-tokens 300
+    --max-tokens 512
 }
 
 codex() {
