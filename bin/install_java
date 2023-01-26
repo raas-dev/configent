@@ -12,6 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### sdkman #####################################################################
 
+# nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
 curl -fsSL "https://get.sdkman.io" | bash
 
 . "$HOME/.sdkman/bin/sdkman-init.sh" &&
