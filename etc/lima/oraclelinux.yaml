@@ -1,19 +1,13 @@
-# This example requires Lima v0.9.0 or later.
 # Oracle image licence: https://www.oracle.com/downloads/licenses/oracle-linux-license.html
 # Image source: https://yum.oracle.com/oracle-linux-templates.html
 
 images:
-- location: "https://yum.oracle.com/templates/OracleLinux/OL8/u6/x86_64/OL8U6_x86_64-kvm-b126.qcow"
+- location: "https://yum.oracle.com/templates/OracleLinux/OL9/u1/x86_64/OL9U1_x86_64-kvm-b158.qcow"
   arch: "x86_64"
-  digest: "sha256:f00bf07669b1b9b07de446140ed0ac4f3f310160104a41715cfa051d0ded3eed"
-- location: "https://yum.oracle.com/templates/OracleLinux/OL8/u6/aarch64/OL8U6_aarch64-kvm-b2.qcow"
+  digest: "sha256:ca655beba34038349827c5ab365df4f7936a7f6226a04d0452bbe4430f4d6658"
+- location: "https://yum.oracle.com/templates/OracleLinux/OL9/u1/aarch64/OL9U1_aarch64-kvm-b13.qcow"
   arch: "aarch64"
-  digest: "sha256:7fcf1765c5aa346be85eb8df0bc03d9e71b83dba6724fa7c41421be541d2ff93"
-
-cpuType:
-  # Workaround for "vmx_write_mem: mmu_gva_to_gpa XXXXXXXXXXXXXXXX failed" on Intel Mac
-  # https://bugs.launchpad.net/qemu/+bug/1838390
-  x86_64: "Haswell-v4"
+  digest: "sha256:a71abfd60713cd5c37443287dd267efd30f1715f8db075e0377b43e2d6ec44cf"
 
 firmware:
   legacyBIOS: true

@@ -1,15 +1,10 @@
 images:
-- location: "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-GenericCloud-8-20220125.1.x86_64.qcow2"
+- location: "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20221206.0.x86_64.qcow2"
   arch: "x86_64"
-  digest: "sha256:a25560ab39e10594ee7a4a1dadcba7bf303b7c3c41559b4a7fc3c522540a6672"
-- location: "https://cloud.centos.org/centos/8-stream/aarch64/images/CentOS-Stream-GenericCloud-8-20220125.1.aarch64.qcow2"
+  digest: "sha256:16881d90b322c7ebe1f105a24c3abbc36c35b724366f38aa4022dfed08b93406"
+- location: "https://cloud.centos.org/centos/9-stream/aarch64/images/CentOS-Stream-GenericCloud-9-20221206.0.aarch64.qcow2"
   arch: "aarch64"
-  digest: "sha256:d973991085db0ca8373e1d9948440213cdc76b6acf8f17aa2aed2163c1347cbc"
-
-cpuType:
-  # Workaround for "vmx_write_mem: mmu_gva_to_gpa XXXXXXXXXXXXXXXX failed" on Intel Mac
-  # https://bugs.launchpad.net/qemu/+bug/1838390
-  x86_64: "Haswell-v4"
+  digest: "sha256:2f5d67e99153112eff92925aae89767b8d59d1ff4a9ce0c1055ceb92dcedc75e"
 
 firmware:
   legacyBIOS: true

@@ -1,10 +1,10 @@
 images:
-- location: "https://cloud.debian.org/images/cloud/bullseye/20220328-962/debian-11-generic-amd64-20220328-962.qcow2"
+- location: "https://cloud.debian.org/images/cloud/bullseye/20221205-1220/debian-11-generic-amd64-20221205-1220.qcow2"
   arch: "x86_64"
-  digest: "sha512:5444ecaedcadc20e032e622a8a95f40d157c6abc68aeba1c97ef568e1a704c936848b6b05d1ed574f7e7ee53d219a6a3e7d764a5851dd6f353899a36479fa4f4"
-- location: "https://cloud.debian.org/images/cloud/bullseye/20220328-962/debian-11-generic-arm64-20220328-962.qcow2"
+  digest: "sha512:25c6f2b5d61b0897077533023cccb05badb2d3fd5adc9ca9071fb8f1fe5ffe682a09f12279ef8013dc5641d20ff16eedc09e3b4657d81bcf455bdb9b4cd8ba54"
+- location: "https://cloud.debian.org/images/cloud/bullseye/20221205-1220/debian-11-generic-arm64-20221205-1220.qcow2"
   arch: "aarch64"
-  digest: "sha512:8fb285fa0faf1a18f40ee426ff5bb2c8f7dd3ad01c38dbd6cc54102aedb4bb58fd88bf7b28f4b53b1a0ab0ea4fde31055d140170b83c8ed7b1077d84ec02442b"
+  digest: "sha512:9d09c70030bbbc4680f4ada358a2fc3e57f73d37789384a4230d4f374629a3edc04982ac67423e8dc4531cba9abf5f89891a974d51ebc8f48bfc626d4171f09b"
 
 mounts:
   - location: "~"
