@@ -17,8 +17,8 @@ curl -fsSL "https://get.sdkman.io" | bash
 
 . "$HOME/.sdkman/bin/sdkman-init.sh" &&
   sdk selfupdate force &&
-  sdk install java 17.0.1-tem &&
-  sdk default java 17.0.1-tem
+  sdk install java 17.0.6-tem &&
+  sdk default java 17.0.6-tem
 
 # JDKs: https://sdkman.io/jdks
 # SDKs: https://sdkman.io/sdks
