@@ -211,6 +211,8 @@ Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
     - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
+- Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
+    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
 - Arch Linux on AArch64
   - If `pacman` fails, backup and replace `/etc/pacman.d/mirrorlist` e.g. with:
     - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
@@ -218,6 +220,4 @@ Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
   - `sudo ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2`
 - Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) `/bin/bash` to `/bin/ash` on boot
     - Thus Installing bash and setting it as the user's login shell does not work expectedly
-- Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
-    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
 - Homebrew on Alpine Linux: Issues in formulae due to Alpine Linux not using glibc
