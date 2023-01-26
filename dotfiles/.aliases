@@ -253,16 +253,12 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
+# Generate code with bin/ai
 codex() {
-  args="$*"
-  args_len=${#args}
+  local args="$*"
+  local args_len=${#args}
   AI_MAX_TOKENS=$((4096-args_len)) AI_TEMPERATURE=0 \
     ai generate $args
-}
-
-# https://github.com/Methexis-Inc/terminal-copilot
-copilot() {
-  pipx run --spec=terminal-copilot copilot "$*"
 }
 
 # Quick extract
@@ -416,6 +412,9 @@ alias lama-cleaner='pipx run lama-cleaner --model=lama --device=cpu --port=8080'
 
 # openai
 alias openai='pipx run openai'
+
+# https://github.com/Methexis-Inc/terminal-copilot
+alias copilot='pipx run --spec=terminal-copilot copilot'
 
 # huggingface-cli
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
