@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.2](https://github.com/raas-dev/configent/compare/1.31.1...1.31.2) (2023-01-26)
+
+
+### Fixes
+
+* **arch:** Libunistring fixes ([13cecf9](https://github.com/raas-dev/configent/commit/13cecf97101958f66c500b8435417dd2ae70bb56))
+
 ### [1.31.1](https://github.com/raas-dev/configent/compare/1.31.0...1.31.1) (2023-01-26)
 
 
