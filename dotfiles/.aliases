@@ -427,8 +427,6 @@ nixd() {
 alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
-alias cachix='nixd cachix'
-alias devenv='nixd devenv'
 
 ### Binaries within Docker built dynamically by nixery #########################
 
