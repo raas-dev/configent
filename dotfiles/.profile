@@ -148,16 +148,6 @@ if [ -d "$cargo_path" ]; then
   . "$cargo_path/env"
 fi
 
-### Nix ########################################################################
-
-# multi-user installation:
-# $ sh <(curl -L https://nixos.org/nix/install) --daemon
-if [ -r "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
-  . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-  path_append "/nix/var/nix/profiles/default/bin"
-  path_prepend "$HOME/.nix-profile/bin"
-fi
-
 ### Prompt #####################################################################
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"

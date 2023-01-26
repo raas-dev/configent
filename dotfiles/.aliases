@@ -287,24 +287,6 @@ ext() {
   fi
 }
 
-# nixery.dev
-nixery() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
-  local pkgs="$1"
-  shift
-  local args="${*:-$pkgs}"
-  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
-    image="nixery.dev/arm64/shell/$pkgs"
-  else
-    image="nixery.dev/shell/$pkgs"
-  fi
-  docker run --init -it --rm --name "${pkgs//\//-}" \
-    --publish-all \
-    --volume="$PWD:$PWD":ro \
-    --workdir="$PWD" \
-    "$image" $args
-}
-
 # Follow the given log file, or cloud-init output if not given
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
@@ -367,28 +349,6 @@ pyclean() {
   find . -type d -name "__pycache__" -exec rm -r {} +
 }
 
-### Binaries within Docker built dynamically by nixery #########################
-
-alias amass='nixery amass amass'
-alias chain-bench='nixery chain-bench chain-bench'
-alias dalfox='nixery dalfox dalfox'
-alias dnstwist='nixery dnstwist dnstwist'
-alias dog='nixery dogdns dog'
-alias ffuf='nixery ffuf ffuf'
-alias gobuster='nixery gobuster gobuster'
-alias hydra='nixery thc-hydra hydra'
-alias k6='nixery k6 k6'
-alias msfconsole='nixery metasploit msfconsole'
-alias naabu='nixery naabu naabu'
-alias nikto='nixery nikto nikto'
-alias nmap='nixery nmap nmap'
-alias nuclei='nixery nuclei nuclei'
-alias oha='nixery oha oha'
-alias rustscan='nixery rustscan rustscan'
-alias sqlmap='nixery sqlmap sqlmap'
-alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
-alias wapiti='nixery wapiti wapiti'
-
 ### Latest version of Python command line tools ################################
 
 # cross-platform monitoring
@@ -444,6 +404,69 @@ alias mrm='npx -y mrm'
 
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
+
+### Run nix in Docker ##########################################################
+
+# nix.dev
+nixd() {
+  if [ -z "$1" ] ; then
+    local args="bash"
+  else
+    local args="$*"
+  fi
+  docker start nix &>/dev/null || docker run --init -it --detach --name nix \
+    --publish-all \
+    --volume="$PWD:$PWD" \
+    --workdir="$PWD" \
+    nixos/nix
+  docker exec -it --workdir="$PWD" nix "$args"
+}
+
+alias nix='nixd nix'
+alias nix-env='nixd nix-env'
+alias nix-shell='nixd nix-shell'
+alias cachix='nixd cachix'
+alias devenv='nixd devenv'
+
+### Binaries within Docker built dynamically by nixery #########################
+
+# nixery.dev
+nixery() {
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
+  local pkgs="$1"
+  shift
+  local args="${*:-$pkgs}"
+  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
+    image="nixery.dev/arm64/shell/$pkgs"
+  else
+    image="nixery.dev/shell/$pkgs"
+  fi
+  docker run --init -it --rm --name "${pkgs//\//-}" \
+    --publish-all \
+    --volume="$PWD:$PWD":ro \
+    --workdir="$PWD" \
+    "$image" $args
+}
+
+alias amass='nixery amass amass'
+alias chain-bench='nixery chain-bench chain-bench'
+alias dalfox='nixery dalfox dalfox'
+alias dnstwist='nixery dnstwist dnstwist'
+alias dog='nixery dogdns dog'
+alias ffuf='nixery ffuf ffuf'
+alias gobuster='nixery gobuster gobuster'
+alias hydra='nixery thc-hydra hydra'
+alias k6='nixery k6 k6'
+alias msfconsole='nixery metasploit msfconsole'
+alias naabu='nixery naabu naabu'
+alias nikto='nixery nikto nikto'
+alias nmap='nixery nmap nmap'
+alias nuclei='nixery nuclei nuclei'
+alias oha='nixery oha oha'
+alias rustscan='nixery rustscan rustscan'
+alias sqlmap='nixery sqlmap sqlmap'
+alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
+alias wapiti='nixery wapiti wapiti'
 
 ### decode #####################################################################
 
