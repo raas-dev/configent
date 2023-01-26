@@ -34,12 +34,12 @@ $SUDO pacman --noconfirm --needed -S ca-certificates
 $SUDO pacman --noconfirm --needed -S gnupg
 
 # Common build requirements
-$SUDO pacman --noconfirm --needed -S base-devel cmake gcc m4 \
-  openssl readline sqlite3 bzip2 zlib libffi xz
+$SUDO pacman --noconfirm --needed -S base-devel cmake m4 \
+  openssl openssl-1.1 readline sqlite3 bzip2 zlib libffi xz
 
 # Utils
 $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
-  git htop lsb-release procps traceroute zip unzip wget which whois
+  git htop lsb-release procps traceroute zip unzip vim wget which whois
 
 # Bash
 $SUDO pacman --noconfirm --needed -S bash

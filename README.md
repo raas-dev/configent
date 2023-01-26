@@ -102,7 +102,7 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
 
-⚠️: On ARM64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
+⚠️: On AArch64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
@@ -207,7 +207,12 @@ Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
 
 ### Issues in dependencies
 
-- Homebrew on Linux on 64-bit ARM: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm)
+- Arch Linux on AArch64
+  - If `pacman` fails, backup and replace its `/etc/pacman.d/mirrorlist` with:
+    `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
+- Arch Linux `libunistring.so.2` issues (2023-01):
+  - `sudo ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2`
+- Homebrew on Linux on AArch64: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
     - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
