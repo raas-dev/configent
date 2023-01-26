@@ -428,6 +428,14 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
+# setup:
+# nixd ln -s /root/.nix-profile/bin/bash /bin/bash
+# nixd curl -fsSL https://get.jetpack.io/devbox -o devbox_install
+# nixd chmod +x devbox_install
+# nixd ./devbox_install --force
+# nixd ln -s /usr/local/bin/devbox /root/.nix-profile/bin/devbox
+alias devbox='nixd devbox'
+
 ### Binaries within Docker built dynamically by nixery #########################
 
 # nixery.dev
