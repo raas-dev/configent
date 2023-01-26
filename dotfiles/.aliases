@@ -421,7 +421,7 @@ nixd() {
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     nixos/nix
-  docker exec -it --workdir="$PWD" "$name" "$args"
+  docker exec -it --workdir="$PWD" "$name" $args
 }
 
 alias nix='nixd nix'
