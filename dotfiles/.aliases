@@ -409,17 +409,19 @@ alias ncu='npx -y npm-check-updates'
 
 # nix.dev
 nixd() {
+  local name="${PWD##*/}"
   if [ -z "$1" ] ; then
     local args="bash"
   else
     local args="$*"
   fi
-  docker start nix &>/dev/null || docker run --init -it --detach --name nix \
+  docker start "$name" &>/dev/null || docker run --init -it --detach \
+    --name "$name" \
     --publish-all \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     nixos/nix
-  docker exec -it --workdir="$PWD" nix "$args"
+  docker exec -it --workdir="$PWD" "$name" "$args"
 }
 
 alias nix='nixd nix'
