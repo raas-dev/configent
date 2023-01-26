@@ -420,6 +420,9 @@ alias openai='pipx run openai'
 # huggingface-cli
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 
+# playwright
+alias playwright='pipx run playwright'
+
 ### Latest version of global nodejs devtools ###################################
 
 # Yarn
