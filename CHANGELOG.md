@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://github.com/raas-dev/configent/compare/1.30.0...1.31.0) (2023-01-26)
+
+
+### Features
+
+* **aliases:** Add alias for playwright ([ed8ac5d](https://github.com/raas-dev/configent/commit/ed8ac5db6bc69035f031172a0db95ff7ccf6febc))
+* **java:** Update java to 17.0.6 ([992ca2f](https://github.com/raas-dev/configent/commit/992ca2fd48ffcc80526f0d561aca4b3e3b6ce317))
+* **lima:** Update lima VMs ([11d1449](https://github.com/raas-dev/configent/commit/11d14491a943d47d1b9ce444cc88e576277892c9))
+* **python:** Upgrade Python to 3.11 series ([a0242e8](https://github.com/raas-dev/configent/commit/a0242e885926fb88d8154a15be950d620fcbb841))
+* **ruby:** Update Ruby from 3.1 to 3.2 ([2368ac0](https://github.com/raas-dev/configent/commit/2368ac057de5509584e80e386c9a306094634b91))
+
+
+### Fixes
+
+* **aliases:** Fix typo in gobuster alias ([82661b0](https://github.com/raas-dev/configent/commit/82661b01e4395567f4b4078aabeb8a664a6f5dd3))
+* **gitlens:** Disable telemetry ([1f50598](https://github.com/raas-dev/configent/commit/1f50598d75196118ed42e0f9d58dbe704bcf1903))
+* **vscode:** Chatgpt settings ([340faac](https://github.com/raas-dev/configent/commit/340faac478ba54fdf8ef8ad683552a1c44a1f95b))
+
 ## [1.30.0](https://github.com/raas-dev/configent/compare/1.29.0...1.30.0) (2023-01-24)
 
 
