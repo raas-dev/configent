@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.1](https://github.com/raas-dev/configent/compare/1.31.0...1.31.1) (2023-01-26)
+
+
+### Fixes
+
+* **arch:** Arch Linux pacman fixes ([b2dfe32](https://github.com/raas-dev/configent/commit/b2dfe322bbbceca53c51e6d4e8513312d4278263))
+
+
+### Documentation
+
+* **README:** Tidy ([a6b7596](https://github.com/raas-dev/configent/commit/a6b759662500d8a6e1a3c384ceea903d1e2acfca))
+* **README:** Update known issues in deps ([19bb981](https://github.com/raas-dev/configent/commit/19bb981c5d4fea676d0b46d057ab8b25cd88ea0f))
+
 ## [1.31.0](https://github.com/raas-dev/configent/compare/1.30.0...1.31.0) (2023-01-26)
 
 
