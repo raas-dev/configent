@@ -144,5 +144,8 @@
     "editor.guides.bracketPairs": "active",
     "gitlens.showWhatsNewAfterUpgrades": false,
     "npm.keybindingsChangedWarningShown": true,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "chatgpt.gpt3.temperature": 0,
+    "chatgpt.telemetry.disable": true,
+    "chatgpt.gpt3.maxTokens": 2048
   }
