@@ -147,5 +147,6 @@
     "git.enableSmartCommit": true,
     "chatgpt.gpt3.temperature": 0,
     "chatgpt.telemetry.disable": true,
-    "chatgpt.gpt3.maxTokens": 2048
+    "chatgpt.gpt3.maxTokens": 2048,
+    "gitlens.telemetry.enabled": false
   }
