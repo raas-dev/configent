@@ -35,7 +35,10 @@ $SUDO pacman --noconfirm --needed -S gnupg
 
 # Common build requirements
 $SUDO pacman --noconfirm --needed -S base-devel cmake m4 \
-  openssl openssl-1.1 readline sqlite3 bzip2 zlib libffi xz
+  libunistring openssl openssl-1.1 readline sqlite3 bzip2 zlib libffi xz
+
+# Hack for 2023-01 libunistring.so.2 issues
+$SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
 
 # Utils
 $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \

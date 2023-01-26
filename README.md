@@ -216,8 +216,6 @@ Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
 - Arch Linux on AArch64
   - If `pacman` fails, backup and replace `/etc/pacman.d/mirrorlist` e.g. with:
     - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
-- Arch Linux packages with `libunistring.so.2` not found issues (2023-01):
-  - `sudo ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2`
 - Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) `/bin/bash` to `/bin/ash` on boot
     - Thus Installing bash and setting it as the user's login shell does not work expectedly
 - Homebrew on Alpine Linux: Issues in formulae due to Alpine Linux not using glibc
