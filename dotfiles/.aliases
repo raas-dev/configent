@@ -396,8 +396,8 @@ alias standard-version='npx -y standard-version'
 # https://github.com/kefranabg/readme-md-generator
 alias readme-md-generator='npx -y readme-md-generator'
 
-# Codemods for project config files
-alias mrm='npx -y mrm'
+# project generator (uses bin/yarn)
+alias projen='npx -y projen'
 
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
