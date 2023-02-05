@@ -384,9 +384,6 @@ alias playwright='pipx run playwright'
 
 ### Latest version of global nodejs devtools ###################################
 
-# Yarn
-alias yarn='npx -y yarn'
-
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
