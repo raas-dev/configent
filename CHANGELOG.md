@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://github.com/raas-dev/configent/compare/1.31.2...1.32.0) (2023-03-04)
+
+
+### Features
+
+* **aliases:** Add oryx ([bf474b3](https://github.com/raas-dev/configent/commit/bf474b34ec3ab44fbcebd27e3d9cfbf3c0b2f7e9))
+* **aliases:** Remove mrm, add projen ([4789836](https://github.com/raas-dev/configent/commit/478983621fddbdd8ed1bfec656c66f956cab3819))
+* **nix:** Run nix/nix-env in docker ([a30bd00](https://github.com/raas-dev/configent/commit/a30bd00f03a3f9482df6325fa4f791085c67cd07))
+
+
+### Documentation
+
+* **README:** Fix minimum memory requirements ([2b15f0d](https://github.com/raas-dev/configent/commit/2b15f0d618cda253b149d6545693ff5004be53dd))
+
+
+### Fixes
+
+* **aliases:** Add nixd devbox ([932317a](https://github.com/raas-dev/configent/commit/932317ad5700b14012ed3ffb7de9fb3c4304bc8f))
+* **aliases:** Remove aliases for cachix and devenv ([65e1771](https://github.com/raas-dev/configent/commit/65e17716b59848d40b0fdd849f00c7fe228c0ad2))
+* **aliases:** Remove broken --include-mas from update ([4dec5e1](https://github.com/raas-dev/configent/commit/4dec5e17875f6745fa0726ad1065d2b59a96713e))
+* **aliases:** Use function for devbox over alias ([870d8c1](https://github.com/raas-dev/configent/commit/870d8c1241b588ed619c8284a5d7912b173586c1))
+* **devbox:** Change install path ([89f43d1](https://github.com/raas-dev/configent/commit/89f43d178ee0af423539e2ecee2ff14194f99d4f))
+* **nixd:** Create nix environment per dir ([1942831](https://github.com/raas-dev/configent/commit/194283190fa3ca71a4bde9fc35f10b7647d66b3b))
+* **nixd:** Don't quote args for docker exec ([0ff1816](https://github.com/raas-dev/configent/commit/0ff1816cc53b52ca7d00df6b8639c12d538f4da9))
+* **utils:** Fix typo in git-lfs ([fea1fc1](https://github.com/raas-dev/configent/commit/fea1fc1972f37acc50bb6e1258d861d0950497f9))
+* **vscode:** Don't show release notes after update ([425c3e4](https://github.com/raas-dev/configent/commit/425c3e4b2f4364347884d407b5dbab518e1205d7))
+* **yarn:** Shim npx -y yarn, over using the alias ([99ed686](https://github.com/raas-dev/configent/commit/99ed686a5833b13698d375300b5fbdb9038469ee))
+
 ### [1.31.2](https://github.com/raas-dev/configent/compare/1.31.1...1.31.2) (2023-01-26)
 
 
