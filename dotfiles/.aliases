@@ -409,6 +409,9 @@ alias projen='npx -y projen'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
+# Identify technology on websites
+alias wappalyzer='npx -y wappalyzer'
+
 ### Run nix in Docker ##########################################################
 
 # nix.dev
