@@ -140,7 +140,7 @@ alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ;
   docker build --tag ${PWD##*/} . &&
   docker run --init -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} &&
   docker port ${PWD##*/}'
-alias e='ext'
+alias e='sgpt_execute'
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
 alias h='xh'
@@ -260,12 +260,17 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
-# Generate code with bin/ai
-codex() {
-  local args="$*"
-  local args_len=${#args}
-  AI_MAX_TOKENS=$((4096-args_len)) AI_TEMPERATURE=0 \
-    ai generate $args
+# command-line ChatGPT
+sgpt() {
+  pipx run --spec=shell-gpt sgpt --no-spinner "$@"
+}
+
+sgpt_execute() {
+  sgpt --temperature 0 --shell --execute "$*"
+}
+
+sgpt_code() {
+  sgpt --temperature 0 --code "$*"
 }
 
 # Quick extract
