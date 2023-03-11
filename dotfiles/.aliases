@@ -363,7 +363,7 @@ gemclear() {
   gem uninstall -aIx
 }
 
-# Recursively remove __pycache__ direcotries
+# Recursively remove __pycache__ directories
 pyclean() {
   find . -type d -name "__pycache__" -exec rm -r {} +
 }
@@ -497,37 +497,6 @@ alias rustscan='nixery rustscan rustscan'
 alias sqlmap='nixery sqlmap sqlmap'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 alias wapiti='nixery wapiti wapiti'
-
-### decode #####################################################################
-
-decode_base64_url() {
-  local len=$((${#1} % 4))
-  local result="$1"
-  if [ $len -eq 2 ]; then
-    result="$1"'=='
-  elif [ $len -eq 3 ]; then
-    result="$1"'='
-  fi
-  echo "$result" | tr '_-' '/+' | base64 -d
-}
-
-decode_jwt_partial() {
-  decode_base64_url "$(printf "%s" "$2" | cut -d "." -f "$1")" | jq 'if .iat then (.iatstr = (.iat|todate)) else . end | if .exp then (.expstr = (.exp|todate)) else . end | if .nbf then (.nbfstr = (.nbf|todate)) else . end'
-}
-
-decode_jwt_header_payload() {
-  decode_jwt_partial 1 "$1"
-  decode_jwt_partial 2 "$1"
-}
-
-# decode jwt header + payload
-alias jwthp="decode_jwt_header_payload"
-
-# decode jwt header
-alias jwth="decode_jwt_partial 1"
-
-# decode jwt payload
-alias jwtp="decode_jwt_partial"
 
 ### macOS keychain #############################################################
 
