@@ -164,8 +164,9 @@ alias y='cht.sh'
 alias z='whatlistens'
 alias §='got -o -s en -t fi'
 alias ≤='got -o -s fi -t en'
-alias _='bat --show-all'
-alias ,='sgpt_code'
+alias ¨='bat --show-all'
+alias ,='sgpt_chat'
+alias _='sgpt_code'
 
 ### watch ######################################################################
 
@@ -265,12 +266,16 @@ sgpt() {
   pipx run --spec=shell-gpt sgpt --no-spinner --no-cache "$@"
 }
 
-sgpt_execute() {
-  sgpt --temperature 0 --shell --execute "$*"
+sgpt_chat() {
+  sgpt --chat "$(date +"%Y-%m-%d")$TMUX_PANE" "$*"
 }
 
 sgpt_code() {
   sgpt --temperature 0 --code "$*"
+}
+
+sgpt_execute() {
+  sgpt --temperature 0 --shell --execute "$*"
 }
 
 # Quick extract
