@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.33.0](https://github.com/raas-dev/configent/compare/1.32.0...1.33.0) (2023-03-11)
+
+
+### Features
+
+* **aliases:** Add wappalyzer via npx ([0aacce2](https://github.com/raas-dev/configent/commit/0aacce2544ce505a4cc8bbc8266f7cfe58d20623))
+
+
+### Documentation
+
+* **bin:** Add copyright and summary ([35c111c](https://github.com/raas-dev/configent/commit/35c111cab8e7416ea79def4f88d14801dc866d96))
+
+
+### Fixes
+
+* **aliases:** Add context-aware chatgpt aliases ([bc45fb0](https://github.com/raas-dev/configent/commit/bc45fb0ca35266c47e379ba0a3e982ff9d35b380))
+* **aliases:** Add context-aware code completion ([f0f19d7](https://github.com/raas-dev/configent/commit/f0f19d7921038e8753d0de9a847c63213d0cf33c))
+* **aliases:** Change alias for translating text ([194e6a3](https://github.com/raas-dev/configent/commit/194e6a342cccf1b2515c5ffb26e340d20aa48cd0))
+* **aliases:** Fix typo ([7676a21](https://github.com/raas-dev/configent/commit/7676a21e95ee9966d813e47463dcff9c76b598c3))
+* **aliases:** Make 'e' to find and execute with sgpt ([5cdc460](https://github.com/raas-dev/configent/commit/5cdc460907dd26f33383d530724a94e0a737d297))
+* **aliases:** Remove terminal-copilot ([28bcb05](https://github.com/raas-dev/configent/commit/28bcb055924111d4703afe64d4ed4455a5a94078))
+* **sgpt:** Use no cache for completions/chats ([592c422](https://github.com/raas-dev/configent/commit/592c4225e991ab8473b4154b7ad2bcf80651fcfd))
+
 ## [1.32.0](https://github.com/raas-dev/configent/compare/1.31.2...1.32.0) (2023-03-04)
 
 
