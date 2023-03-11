@@ -331,13 +331,15 @@ usage() {
 
 # Show process listening on given port
 whatlistens() {
-  lsof -P -i :"$1" | column -t
+  local port="${1:-8080}"
+  lsof -P -i :"$port" | column -t
 }
 
 # Quick password generator
 genpass() {
+  local length="${1:-16}"
   tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
-    fold -w "$1" | head -n1 | pbcopy
+    fold -w "$length" | head -n1 | pbcopy
 }
 
 # Remove all non-cask brew
