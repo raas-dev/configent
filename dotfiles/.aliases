@@ -165,7 +165,7 @@ alias z='whatlistens'
 alias §='got -o -s en -t fi'
 alias ≤='got -o -s fi -t en'
 alias _='bat --show-all'
-alias ,='sgpt_code';
+alias ,='sgpt_code'
 
 ### watch ######################################################################
 
