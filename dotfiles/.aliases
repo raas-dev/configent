@@ -165,7 +165,7 @@ alias z='whatlistens'
 alias §='got -o -s en -t fi'
 alias ≤='got -o -s fi -t en'
 alias _='bat --show-all'
-alias @='copilot'
+alias ,='sgpt_code';
 
 ### watch ######################################################################
 
@@ -379,9 +379,6 @@ alias lama-cleaner='pipx run lama-cleaner --model=lama --device=cpu --port=8080'
 
 # openai
 alias openai='pipx run openai'
-
-# https://github.com/Methexis-Inc/terminal-copilot
-alias copilot='pipx run --spec=terminal-copilot copilot'
 
 # huggingface-cli
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
