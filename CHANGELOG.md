@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.33.1](https://github.com/raas-dev/configent/compare/1.33.0...1.33.1) (2023-03-11)
+
+
+### Fixes
+
+* **aliases:** Add default args to genpass and whatlistens ([3a92d1e](https://github.com/raas-dev/configent/commit/3a92d1ed659bf31dba847c79b54f634702b4bf39))
+* **aliases:** Remove JWT decode shortcuts ([d6dcddc](https://github.com/raas-dev/configent/commit/d6dcddc5fa1d0da21d9d4cafb6c4f587fcb136fc))
+
 ## [1.33.0](https://github.com/raas-dev/configent/compare/1.32.0...1.33.0) (2023-03-11)
 
 
