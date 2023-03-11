@@ -356,7 +356,7 @@ pyclean() {
   find . -type d -name "__pycache__" -exec rm -r {} +
 }
 
-### Latest version of Python command line tools ################################
+### Latest version of Python command-line tools ################################
 
 # cross-platform monitoring
 alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'

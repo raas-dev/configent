@@ -54,13 +54,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
   brew install m-cli
 
-  # Mac App Store command line interface (https://github.com/mas-cli/mas)
+  # Mac App Store command-line interface (https://github.com/mas-cli/mas)
   brew install mas
 
   # https://github.com/lavoiesl/osx-cpu-temp
   brew install osx-cpu-temp
 
-  # Xcode Commandline Tools provides old git
+  # Xcode Command Line Tools includes an outdated git
   brew install git
 
   # GNU utils are g-prefixed (non-g symlinks are prepended to PATH in .profile)
