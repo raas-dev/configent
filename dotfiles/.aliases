@@ -349,7 +349,8 @@ brewclear() {
 
 # Npm remove all global packages (except npm installed npm)
 npmclear() {
-  npm ls --location=global -p --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' |
+  npm ls --location=global -p --depth=0 |
+    awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' |
     xargs npm --location=global rm
 }
 
@@ -398,7 +399,7 @@ alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 # playwright
 alias playwright='pipx run playwright'
 
-### Latest version of global nodejs devtools ###################################
+### Latest versions of global Node.js command-line tools #######################
 
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
@@ -408,9 +409,6 @@ alias fx='npx -y fx'
 
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
-
-# https://github.com/kefranabg/readme-md-generator
-alias readme-md-generator='npx -y readme-md-generator'
 
 # project generator (uses bin/yarn)
 alias projen='npx -y projen'
