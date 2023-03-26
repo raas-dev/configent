@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.33.2](https://github.com/raas-dev/configent/compare/1.33.1...1.33.2) (2023-03-26)
+
+
+### Documentation
+
+* **lima:** Add lima-vm defaults as reference ([28f34e0](https://github.com/raas-dev/configent/commit/28f34e042e6cb54e3cf99d82333523e224875bd1))
+
+
+### Fixes
+
+* **ai:** Remove bin/ai wrapper over shell-gpt ([cad6425](https://github.com/raas-dev/configent/commit/cad64255c4ff58a33adbe607cd29ecb6d82354d8))
+* **vscode:** Remove unused extensions ([f2ac4c5](https://github.com/raas-dev/configent/commit/f2ac4c5fd69ccf655d48b1ce1605bb81e378188d))
+
 ### [1.33.1](https://github.com/raas-dev/configent/compare/1.33.0...1.33.1) (2023-03-11)
 
 
