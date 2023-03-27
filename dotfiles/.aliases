@@ -304,7 +304,7 @@ ext() {
   fi
 }
 
-# Follow the given log file, or cloud-init output if not given
+# Follow the given log file, or cloud-init output if log file not given
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
   if command -v lnav >/dev/null; then
@@ -329,39 +329,40 @@ usage() {
       print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
-# Show process listening on given port
+# Show process listening the given port
 whatlistens() {
   local port="${1:-8080}"
   lsof -P -i :"$port" | column -t
 }
 
-# Quick password generator
+# Generate password and copy it to clipboard
 genpass() {
   local length="${1:-16}"
   tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
     fold -w "$length" | head -n1 | pbcopy
 }
 
-# Remove all non-cask brew
+# Remove all non-cask formulae
 brewclear() {
   brew list --formula | xargs brew uninstall --ignore-dependencies --force
 }
 
-# Npm remove all global packages (except npm installed npm)
+# Npm remove all global packages (except later npm installed via npm)
 npmclear() {
   npm ls --location=global -p --depth=0 |
     awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' |
     xargs npm --location=global rm
 }
 
-# Pip remove all
-pipclear() {
-  pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
-}
-
 # Gem remove all
 gemclear() {
   gem uninstall -aIx
+}
+
+# Pip(x) remove all
+pipclear() {
+  command -v pipx >/dev/null && pipx uninstall-all
+  pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
 # Recursively remove __pycache__ directories
