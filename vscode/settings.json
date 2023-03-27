@@ -149,5 +149,6 @@
     "chatgpt.telemetry.disable": true,
     "chatgpt.gpt3.maxTokens": 2048,
     "gitlens.telemetry.enabled": false,
-    "update.showReleaseNotes": false
+    "update.showReleaseNotes": false,
+    "chatgpt.throttling": 0
   }
