@@ -9,13 +9,13 @@ default_stages: [commit]
 
 repos:
 - repo: https://github.com/Yelp/detect-secrets
-  rev: v1.2.0
+  rev: v1.4.0
   hooks:
   - id: detect-secrets
     exclude: dotfiles/.examplewithsecrets
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.3.0
+  rev: v4.4.0
   hooks:
     - id: check-merge-conflict
     - id: check-added-large-files
@@ -31,13 +31,13 @@ repos:
     - id: check-executables-have-shebangs
 
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 2.1.6
+  rev: 3.0.0
   hooks:
     - id: shellcheck
     - id: shfmt
 
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.28.0
+  rev: v2.42.1
   hooks:
     - id: commitizen
       stages: [commit-msg]
