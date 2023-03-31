@@ -39,6 +39,7 @@ if command -v code >/dev/null; then
   code --force --install-extension esbenp.prettier-vscode
   code --force --install-extension exiasr.hadolint
   code --force --install-extension foxundermoon.shell-format
+  code --force --install-extension fregante.ghost-text
   code --force --install-extension golang.go
   code --force --install-extension Gruntfuggly.activitusbar
   code --force --install-extension hashicorp.terraform
@@ -60,6 +61,7 @@ if command -v code >/dev/null; then
   code --force --install-extension naumovs.color-highlight
   code --force --install-extension Perkovec.emoji
   code --force --install-extension RapidAPI.vscode-rapidapi-client
+  code --force --install-extension rapidapi.vscode-services
   code --force --install-extension redhat.vscode-yaml
   code --force --install-extension Semgrep.semgrep
   code --force --install-extension stevejpurves.cucumber
@@ -69,7 +71,5 @@ if command -v code >/dev/null; then
   code --force --install-extension teabyii.ayu
   code --force --install-extension tfsec.tfsec
   code --force --install-extension timonwong.shellcheck
-  code --force --install-extension tokoph.ghosttext
-  code --force --install-extension VisualStudioExptTeam.intellicode-api-usage-examples
   code --force --install-extension VisualStudioExptTeam.vscodeintellicode
 fi
