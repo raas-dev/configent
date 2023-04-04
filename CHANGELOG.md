@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.34.0](https://github.com/raas-dev/configent/compare/1.33.2...1.34.0) (2023-04-04)
+
+
+### Features
+
+* **aliases:** Add alias oc ([96e0d89](https://github.com/raas-dev/configent/commit/96e0d890e6543a0563c9759ce18fa0b9343920a3))
+* **osx:** Add cmake ([67f9a9d](https://github.com/raas-dev/configent/commit/67f9a9d87b13acc6977f80ee663a44e542b0c179))
+* **python:** Upgrade installed Python version ([da1395e](https://github.com/raas-dev/configent/commit/da1395e2094887e22439ff34d476601a1d21f345))
+* **ruby:** Update optional Ruby version ([24aab25](https://github.com/raas-dev/configent/commit/24aab2598c4b6595a1949c3cc3e83ea01f22280e))
+
+
+### Fixes
+
+* **aliases:** Clean up pipx packages on pipclear ([25ed92c](https://github.com/raas-dev/configent/commit/25ed92cc592da8710e95759b2c53b686bf592988))
+* **aliases:** Fix pipclear to not try remove -e ([72d6619](https://github.com/raas-dev/configent/commit/72d66199af3ec9caf38cc72ca63897208271c41f))
+* **lima:** Double VM ram to 8GiB to speed up LLMS ([b2c788f](https://github.com/raas-dev/configent/commit/b2c788f3ab7d32dce14a61a08facbfc31c05b6ba))
+* **vscode:** Disable throttling ([1e92061](https://github.com/raas-dev/configent/commit/1e9206154bbb55712b6161a1d2870347c67182fa))
+* **vscode:** Migrate deprecated VSCode extensions ([ad9fdd0](https://github.com/raas-dev/configent/commit/ad9fdd08ca6875b06fab827b1602f8bdc7485add))
+
 ### [1.33.2](https://github.com/raas-dev/configent/compare/1.33.1...1.33.2) (2023-03-26)
 
 
