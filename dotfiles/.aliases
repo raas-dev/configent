@@ -362,7 +362,7 @@ gemclear() {
 # Pip(x) remove all
 pipclear() {
   command -v pipx >/dev/null && pipx uninstall-all
-  pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
+  pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
 # Recursively remove __pycache__ directories
