@@ -408,14 +408,17 @@ alias depcheck='npx -y depcheck'
 # Command-line JSON processing tool
 alias fx='npx -y fx'
 
-# Bump version and generate CHANGELOG.md
-alias standard-version='npx -y standard-version'
+# Upgrades your package.json dependencies to the latest version
+alias ncu='npx -y npm-check-updates'
+
+# GPT CLI to generate commit messages
+alias oc='npx -y opencommit'
 
 # project generator (uses bin/yarn)
 alias projen='npx -y projen'
 
-# Upgrades your package.json dependencies to the latest version
-alias ncu='npx -y npm-check-updates'
+# Bump version and generate CHANGELOG.md
+alias standard-version='npx -y standard-version'
 
 # Identify technology on websites
 alias wappalyzer='npx -y wappalyzer'
