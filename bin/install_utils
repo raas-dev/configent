@@ -63,6 +63,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Xcode Command Line Tools includes an outdated git
   brew install git
 
+  # Cross-platform make is often required by packages with non-native deps
+  brew install cmake
+
   # GNU utils are g-prefixed (non-g symlinks are prepended to PATH in .profile)
   brew install coreutils
   brew install findutils
