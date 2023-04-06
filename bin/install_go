@@ -28,6 +28,9 @@ PATH="$GOPATH/bin:$PATH"
 # https://github.com/muesli/duf
 go install github.com/muesli/duf@latest
 
+# https://github.com/appleboy/CodeGPT
+go install github.com/appleboy/CodeGPT@latest
+
 # https://github.com/itchyny/gojq
 go install github.com/itchyny/gojq/cmd/gojq@latest
 
