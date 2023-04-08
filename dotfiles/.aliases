@@ -136,10 +136,7 @@ fi
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat --theme=base16'
 alias c='kalker'
-alias d='docker stop ${PWD##*/} ; docker kill ${PWD##*/} ;
-  docker build --tag ${PWD##*/} . &&
-  docker run --init -d --name ${PWD##*/} --rm --cap-drop ALL --publish-all -it ${PWD##*/} &&
-  docker port ${PWD##*/}'
+alias d='dr'
 alias e='sgpt_execute'
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
@@ -208,14 +205,16 @@ alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 # https://github.com/sigoden/dufs
-alias dufs='docker run --init -it --cap-drop ALL \
+alias dufs='docker run --init -it \
+  --cap-drop ALL \
   -p 80:80 \
   -v $(pwd):/data \
   sigoden/dufs \
   /data -p 80'
 
 # https://github.com/microsoft/Oryx
-alias oryx='docker run --init -it --cap-drop ALL \
+alias oryx='docker run --init -it \
+    --cap-drop ALL \
     -v $(pwd):/repo \
     mcr.microsoft.com/oryx/build \
     oryx build /repo --output /repo'
@@ -276,6 +275,20 @@ sgpt_code() {
 
 sgpt_execute() {
   sgpt --temperature 0 --shell --execute "$*"
+}
+
+# Generic docker build and run
+dr() {
+  # shellcheck disable=SC2155  # will not declare separately, value compactness
+  local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
+  docker stop "$name"
+  docker kill "$name"
+  docker build --tag "$name:latest" . &&
+  docker run --init -it -d --name "$name" --rm \
+    --cap-drop ALL \
+    --publish-all \
+    "$name:latest" &&
+  docker port "$name"
 }
 
 # Quick extract
