@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.1](https://github.com/raas-dev/configent/compare/1.34.0...1.34.1) (2023-04-08)
+
+
+### Fixes
+
+* **aliases:** Build d lower case image names ([5704f32](https://github.com/raas-dev/configent/commit/5704f321ffcf718fa6b84df19e1c17edf8a1852a))
+* **docker:** Install Buildx and Compose as plugins ([41a67a4](https://github.com/raas-dev/configent/commit/41a67a4577c53070f0142c120379e700f707c2b2))
+
 ## [1.34.0](https://github.com/raas-dev/configent/compare/1.33.2...1.34.0) (2023-04-04)
 
 
