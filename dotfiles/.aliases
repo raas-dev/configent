@@ -281,8 +281,9 @@ sgpt_execute() {
 dr() {
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
-  docker stop "$name"
-  docker kill "$name"
+  if docker top "$name" &>/dev/null ; then
+    docker stop "$name" || docker kill "$name"
+  fi
   docker build --tag "$name:latest" . &&
   docker run --init -it -d --name "$name" --rm \
     --cap-drop ALL \
