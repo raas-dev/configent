@@ -285,8 +285,8 @@ d() {
     docker stop "$name" || docker kill "$name"
   fi
   [ -n "$1" ] && local envfile="--env-file $1"
-  docker build --tag "$name" . &&
-  docker run --init -it -d --name "$name" --rm \
+  docker build --pull --tag "$name" . &&
+  docker run --init -it --detach --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
     $envfile \
