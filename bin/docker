@@ -9,9 +9,40 @@
 # shim for running `docker` in lima VM
 
 # shellcheck disable=SC2068  # not quoting parameters passed to the real bin
-# shellcheck disable=SC2155  # will not declare separately, value compactness
 
 : "${VM:="ubuntu"}"
+DOCKER_CONFIG=${DOCKER_CONFIG:-"$HOME/.docker"}
+
+install_docker_buildx_plugin() {
+  if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-buildx" ]; then
+    buildx_version="v0.10.4"
+    os="$(uname | tr '[:upper:]' '[:lower:]')"
+    arch="$(uname -m)"
+    if [ "$arch" = "aarch64" ]; then
+      arch="arm64"
+    fi
+    echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
+    rm -f "$DOCKER_CONFIG/cli-plugins/docker-buildx"
+    mkdir -p "$DOCKER_CONFIG/cli-plugins"
+    curl -fsSL "https://github.com/docker/buildx/releases/latest/download/buildx-$buildx_version.$os-$arch" \
+      -o "$DOCKER_CONFIG/cli-plugins/docker-buildx"
+    chmod +x "$DOCKER_CONFIG/cli-plugins/docker-buildx"
+  fi
+}
+
+install_docker_compose_plugin() {
+  if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-compose" ]; then
+    os="$(uname)"
+    arch="$(uname -m)"
+    echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
+    rm -f "$DOCKER_CONFIG/cli-plugins/docker-compose"
+    DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+    mkdir -p "$DOCKER_CONFIG/cli-plugins"
+    curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+      -o "$DOCKER_CONFIG/cli-plugins/docker-compose"
+    chmod +x "$DOCKER_CONFIG/cli-plugins/docker-compose"
+  fi
+}
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
@@ -28,6 +59,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       # requires forwarding the socket in the lima vm config file
       export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
     fi
+    if [ "$1" = "build" ]; then
+      install_docker_buildx_plugin
+    elif [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+    fi
+    # homebrew installed docker
     "$local_docker_path" $@
   else
     # no docker cli on HOST -> recall this script on the guest VM
@@ -41,11 +78,17 @@ else
   # prefer rootless docker
   if [ -x "$HOME/bin/docker" ]; then
     if [ -z "$DOCKER_HOST" ]; then
+      # shellcheck disable=SC2155  # will not declare separately, compactness
       export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+    fi
+    if [ "$1" = "build" ]; then
+      install_docker_buildx_plugin
+    elif [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
     fi
     "$HOME/bin/docker" $@
   elif [ -x "/usr/bin/docker" ]; then
-    # try distro's package manager installed as the last resort
+    # try distro's package manager installed docker as the last resort
     export DOCKER_HOST="unix:///var/run/docker.sock"
     "/usr/bin/docker" $@
   else
