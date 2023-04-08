@@ -136,7 +136,7 @@ fi
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat --theme=base16'
 alias c='kalker'
-alias d='dr'
+# d is for generic docker build and run, see d()
 alias e='sgpt_execute'
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
@@ -277,18 +277,24 @@ sgpt_execute() {
   sgpt --temperature 0 --shell --execute "$*"
 }
 
-# Generic docker build and run
-dr() {
+# Usage: d dev.env
+d() {
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
   if docker top "$name" &>/dev/null ; then
     docker stop "$name" || docker kill "$name"
   fi
-  docker build --tag "$name:latest" . &&
+  local envvars=""
+  for var in "$@"; do
+    envvars="--env $var $envvars"
+  done
+  # shellcheck disable=SC2046,SC2116  # echo envvars separated
+  docker build --tag "$name" . &&
   docker run --init -it -d --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
-    "$name:latest" &&
+    $(echo "$envvars") \
+    "$name" &&
   docker port "$name"
 }
 
