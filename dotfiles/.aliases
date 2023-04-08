@@ -284,9 +284,7 @@ d() {
   if docker top "$name" &>/dev/null ; then
     docker stop "$name" || docker kill "$name"
   fi
-  if [ -n "$1" ]; then
-    envfile="--env-file $1"
-  fi
+  [ -n "$1" ] && local envfile="--env-file $1"
   docker build --tag "$name" . &&
   docker run --init -it -d --name "$name" --rm \
     --cap-drop ALL \
