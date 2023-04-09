@@ -290,10 +290,14 @@ d() {
   docker run --init -it --detach --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
+    --publish 127.0.0.1:8080:8080 \
     $env_file \
     $run_args \
     "$name" &&
+  echo "[d] Published ports: container -> host"
   docker port "$name"
+  echo "[d] Following logs, ^C does not halt the container"
+  docker logs --follow "$name"
 }
 
 # Quick extract
