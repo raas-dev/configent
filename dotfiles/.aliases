@@ -207,7 +207,7 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 # https://github.com/sigoden/dufs
 alias dufs='docker run --init -it \
   --cap-drop ALL \
-  -p 80:80 \
+  -p 127.0.0.1:80:80 \
   -v $(pwd):/data \
   sigoden/dufs \
   /data -p 80'
@@ -227,7 +227,7 @@ alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
 alias npr='nrmc ; nrmv ; nrmi'
 
 alias netdata='nerdctl run -d --name=netdata \
-  -p 19999:19999 \
+  -p 127.0.0.1:19999:19999 \
   -v netdataconfig:/etc/netdata \
   -v netdatalib:/var/lib/netdata \
   -v netdatacache:/var/cache/netdata \
