@@ -284,12 +284,14 @@ d() {
   if docker top "$name" &>/dev/null ; then
     docker stop "$name" || docker kill "$name"
   fi
-  [ -n "$1" ] && local envfile="--env-file $1"
+  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
+  local run_args="$*"
   docker build --pull --tag "$name" . &&
   docker run --init -it --detach --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
-    $envfile \
+    $env_file \
+    $run_args \
     "$name" &&
   docker port "$name"
 }
