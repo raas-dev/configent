@@ -207,15 +207,15 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 # https://github.com/sigoden/dufs
 alias dufs='docker run --init -it \
   --cap-drop ALL \
-  -p 127.0.0.1:80:80 \
-  -v $(pwd):/data \
+  --publish 127.0.0.1:80:80 \
+  --volume $(pwd):/data \
   sigoden/dufs \
   /data -p 80'
 
 # https://github.com/microsoft/Oryx
 alias oryx='docker run --init -it \
     --cap-drop ALL \
-    -v $(pwd):/repo \
+    --volume $(pwd):/repo \
     mcr.microsoft.com/oryx/build \
     oryx build /repo --output /repo'
 
@@ -227,15 +227,15 @@ alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
 alias npr='nrmc ; nrmv ; nrmi'
 
 alias netdata='nerdctl run -d --name=netdata \
-  -p 127.0.0.1:19999:19999 \
-  -v netdataconfig:/etc/netdata \
-  -v netdatalib:/var/lib/netdata \
-  -v netdatacache:/var/cache/netdata \
-  -v /etc/passwd:/host/etc/passwd:ro \
-  -v /etc/group:/host/etc/group:ro \
-  -v /proc:/host/proc:ro \
-  -v /sys:/host/sys:ro \
-  -v /etc/os-release:/host/etc/os-release:ro \
+  --publish 127.0.0.1:19999:19999 \
+  --volume netdataconfig:/etc/netdata \
+  --volume netdatalib:/var/lib/netdata \
+  --volume netdatacache:/var/cache/netdata \
+  --volume /etc/passwd:/host/etc/passwd:ro \
+  --volume /etc/group:/host/etc/group:ro \
+  --volume /proc:/host/proc:ro \
+  --volume /sys:/host/sys:ro \
+  --volume /etc/os-release:/host/etc/os-release:ro \
   --cap-add SYS_PTRACE \
   --security-opt apparmor=unconfined \
   netdata/netdata'
