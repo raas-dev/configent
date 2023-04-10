@@ -262,7 +262,7 @@ alias week='date +%V'
 
 # ChatGPT helpers
 sgpt() {
-  pipx run --spec=shell-gpt sgpt --no-spinner --no-cache "$@"
+  pipx run --spec=shell-gpt sgpt --no-cache "$@"
 }
 
 sgpt_chat() {
