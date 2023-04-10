@@ -1,4 +1,4 @@
-# c🌀nfigent (1.34.1)
+# c🌀nfigent (1.34.2)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
@@ -43,7 +43,7 @@ both on which it takes ~30 minutes.
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.34.1/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.34.2/install.sh | sh
 
 To install system-wide packages, `sudo` password may be asked in the beginning.
 

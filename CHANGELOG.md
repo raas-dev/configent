@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.2](https://github.com/raas-dev/configent/compare/1.34.1...1.34.2) (2023-04-10)
+
+
+### Fixes
+
+* **aliases:** Add check to stop and kill container ([83bdbfa](https://github.com/raas-dev/configent/commit/83bdbfa5a9522385b03ba50fd78fa783015ac1b2))
+* **aliases:** Add d() support for envvars ([f40cd6b](https://github.com/raas-dev/configent/commit/f40cd6be6aa4ccc8ca113fa9536e036cc9441855))
+* **aliases:** Make d() attempt to pull newer image ([1d46375](https://github.com/raas-dev/configent/commit/1d46375b09118cda0fdf640806aa8a8e0d083e51))
+* **aliases:** Make d() follow docker logs ([7ebba0f](https://github.com/raas-dev/configent/commit/7ebba0f7cfdfcf4007a0bfeadf41c676ce6485ff))
+* **aliases:** Make d() read envvars for env-file ([a65ec1e](https://github.com/raas-dev/configent/commit/a65ec1e0d8b0224040284d6a0f4c865a70a47a85))
+* **aliases:** Passing custom args to d() ([35031a7](https://github.com/raas-dev/configent/commit/35031a7563ca0ac6ba7970ea590527165af2a5cf))
+* **aliases:** Publish docker ports to localhost ([d6c1b41](https://github.com/raas-dev/configent/commit/d6c1b41e46976963eef397bf0389fb97144e9add))
+* **aliases:** Remove obsolete option for sgpt ([2b369a1](https://github.com/raas-dev/configent/commit/2b369a16a74227d2ef09b970091edc0884ff72a3))
+* **aliases:** Remove obsolete option for sgpt_execute ([0a3c501](https://github.com/raas-dev/configent/commit/0a3c501566d12f4fb70bd46ed2c1649a91790896))
+* **limavm:** Use Quad9 DNS servers for Ubuntu VM ([faeaa7f](https://github.com/raas-dev/configent/commit/faeaa7f8c823808ccc02fa3483a99b3fc8193f7c))
+
 ### [1.34.1](https://github.com/raas-dev/configent/compare/1.34.0...1.34.1) (2023-04-08)
 
 
