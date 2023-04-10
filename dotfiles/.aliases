@@ -274,7 +274,7 @@ sgpt_code() {
 }
 
 sgpt_execute() {
-  sgpt --temperature 0 --shell --execute "$*"
+  sgpt --temperature 0 --shell "$*"
 }
 
 # Generic docker build and run
