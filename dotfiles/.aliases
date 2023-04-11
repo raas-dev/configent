@@ -20,7 +20,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias up='br ; brc'
 
   # Install macOS application and system updates
-  alias dup='br ; brc ; softwareupdate --install --all'
+  alias dup='br ; brc ; softwareupdate --install --all --agree-to-license'
 
   # Recursively delete .DS_Store files in the current path
   alias cleanupds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
