@@ -433,9 +433,6 @@ alias fx='npx -y fx'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
-# GPT CLI to generate commit messages
-alias oc='npx -y opencommit'
-
 # project generator (uses bin/yarn)
 alias projen='npx -y projen'
 
