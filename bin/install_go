@@ -34,9 +34,6 @@ go install github.com/appleboy/CodeGPT@latest
 # https://github.com/itchyny/gojq
 go install github.com/itchyny/gojq/cmd/gojq@latest
 
-# https://github.com/fedeztk/got
-go install github.com/fedeztk/got/cmd/got@latest
-
 # https://github.com/cespare/reflex
 go install github.com/cespare/reflex@latest
 
