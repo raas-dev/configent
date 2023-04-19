@@ -150,5 +150,7 @@
     "chatgpt.gpt3.maxTokens": 2048,
     "gitlens.telemetry.enabled": false,
     "update.showReleaseNotes": false,
-    "chatgpt.throttling": 0
+    "chatgpt.throttling": 0,
+    "aws.telemetry": false,
+    "aws.codeWhisperer.shareCodeWhispererContentWithAWS": false
   }
