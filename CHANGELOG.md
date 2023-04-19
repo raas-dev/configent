@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.35.0](https://github.com/raas-dev/configent/compare/1.34.2...1.35.0) (2023-04-19)
+
+
+### Features
+
+* add turbocommit to Rust installation script ([7d43d31](https://github.com/raas-dev/configent/commit/7d43d31feb7b5b22793b1ac7e640a62a37006611))
+* **aliases:** Add alias for autoheal ([774a125](https://github.com/raas-dev/configent/commit/774a1250d72b06778be122133c20e295b0c6ca22))
+* **vscode:** Add vscode extensions ([7a1cc07](https://github.com/raas-dev/configent/commit/7a1cc07879e6e2925ac5597ac25e50391a8353e8))
+
+
+### Fixes
+
+* **aliases:** Remove broken got ([f6f9ceb](https://github.com/raas-dev/configent/commit/f6f9ceb2f5b4b44a612b60d0983ed8fe37c50b54))
+* **macos:** Agree to licenses when running dup ([4a40be1](https://github.com/raas-dev/configent/commit/4a40be1303d80b861a4bed6e3b898ecb3ac12977))
+
 ### [1.34.2](https://github.com/raas-dev/configent/compare/1.34.1...1.34.2) (2023-04-10)
 
 
