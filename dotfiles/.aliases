@@ -135,7 +135,7 @@ fi
 
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat --theme=base16'
-alias c='kalker'
+alias c='code'
 # d is for generic docker build and run, see d()
 alias e='sgpt_execute'
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -143,7 +143,7 @@ alias g='gitui'
 alias h='xh'
 alias i='glances'
 # j is for zoxide
-alias k='kubectl'
+alias k='kalker'
 alias l='la'
 # m is for m-cli
 alias n='nixery'
