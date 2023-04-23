@@ -181,5 +181,7 @@
         "!Select sequence",
         "!Split",
         "!Split sequence"
-    ]
+    ],
+    "hediet.vscode-drawio.resizeImages": null,
+    "codeium.enableCodeLens": false
   }
