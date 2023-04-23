@@ -71,6 +71,7 @@ if command -v code >/dev/null; then
   code --force --install-extension msazurermtools.azurerm-vscode-tools
   code --force --install-extension naumovs.color-highlight
   code --force --install-extension Perkovec.emoji
+  code --force --install-extension rambit.highlight-counter
   code --force --install-extension RapidAPI.vscode-rapidapi-client
   code --force --install-extension rapidapi.vscode-services
   code --force --install-extension redhat.vscode-yaml
