@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.36.0](https://github.com/raas-dev/configent/compare/1.35.0...1.36.0) (2023-04-24)
+
+
+### Features
+
+* **vscode:** Add highlight-counter extension ([9695d25](https://github.com/raas-dev/configent/commit/9695d2580edbd66f546e2e5ab0317ac8971e2667))
+* **vscode:** Add markdown extensions ([6ad0cff](https://github.com/raas-dev/configent/commit/6ad0cff54b25fc9b4a3448b4885843272311a98b))
+* **vscode:** Add vscode extensions ([54c98a4](https://github.com/raas-dev/configent/commit/54c98a4a26d05d1e7affec0be84a50a510d5030f))
+
+
+### Fixes
+
+* **aliases:** Change c to code and k to kalker ([e9a25fb](https://github.com/raas-dev/configent/commit/e9a25fb619fc4dc31658f24ddc4e1f69a0f50803))
+
 ## [1.35.0](https://github.com/raas-dev/configent/compare/1.34.2...1.35.0) (2023-04-19)
 
 
