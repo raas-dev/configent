@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.37.0](https://github.com/raas-dev/configent/compare/1.36.0...1.37.0) (2023-04-25)
+
+
+### Features
+
+* **vscode:** Add cursor to extensions ([4e58701](https://github.com/raas-dev/configent/commit/4e5870154a4bd0fb53d66c5860ccfc411bc801ca))
+* **vscode:** Remove RapidAPI, replace with REST client ([024381a](https://github.com/raas-dev/configent/commit/024381a809785fc41c5924b83b592a1b8680c24b))
+
+
+### Fixes
+
+* **aliases:** Alias , to  ext ([ac5412c](https://github.com/raas-dev/configent/commit/ac5412c673e78bc8c627f4fe8f8f6e2b0f88e43d))
+* **aliases:** Alias s to sgpt chat ([906a67e](https://github.com/raas-dev/configent/commit/906a67ee632c3b4d63323f9b2ce6d7e32a856c09))
+
 ## [1.36.0](https://github.com/raas-dev/configent/compare/1.35.0...1.36.0) (2023-04-24)
 
 
