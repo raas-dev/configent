@@ -183,5 +183,6 @@
         "!Split sequence"
     ],
     "hediet.vscode-drawio.resizeImages": null,
-    "codeium.enableCodeLens": false
+    "codeium.enableCodeLens": false,
+    "semgrep.metrics": "off"
   }
