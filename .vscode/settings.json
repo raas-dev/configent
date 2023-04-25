@@ -1,11 +1,19 @@
 {
     "cSpell.words": [
         "bootstrapper",
+        "chatgpt",
+        "codeium",
         "configent",
         "containerd",
+        "devskim",
         "distro's",
         "distros",
         "dotfiles",
+        "drawio",
+        "esbenp",
+        "Fullscreen",
+        "hediet",
+        "ipynb",
         "linuxbrew",
         "mirrorlist",
         "Neovim",
@@ -15,12 +23,17 @@
         "pacman",
         "passwordless",
         "pyenv",
+        "Pylance",
         "runtimes",
         "rustup",
+        "scrollback",
+        "semgrep",
+        "shellformat",
         "squashfs",
         "squashfuse",
         "Terminess",
         "vmname",
+        "vsintellicode",
         "Xorg"
     ]
 }
