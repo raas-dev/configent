@@ -502,7 +502,6 @@ nixery() {
 }
 
 alias amass='nixery amass amass'
-alias chain-bench='nixery chain-bench chain-bench'
 alias dalfox='nixery dalfox dalfox'
 alias dnstwist='nixery dnstwist dnstwist'
 alias dog='nixery dogdns dog'
