@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.38.0](https://github.com/raas-dev/configent/compare/1.37.0...1.38.0) (2023-04-26)
+
+
+### Features
+
+* **aliases:** Add katana via nixery ([c4a3273](https://github.com/raas-dev/configent/commit/c4a3273987fe23870cf7b7bb40fe47e6615dc7bb))
+* **iac:** Replace dockle with grype ([c2de700](https://github.com/raas-dev/configent/commit/c2de700c1ad8a7b6d0dcc36a0fc7e142f8a2ebd9))
+
+
+### Documentation
+
+* **aliases:** Add devbox link ([4e3f9a7](https://github.com/raas-dev/configent/commit/4e3f9a763a494f31a8ce2222b484908e344eaa0b))
+* **python:** Add hint to resolve lzma on macOS" ([94d00f2](https://github.com/raas-dev/configent/commit/94d00f216ea2caed88948bf2c326492b5afff8e7))
+
+
+### Fixes
+
+* **aliases:** Remove chain-bench ([76c786c](https://github.com/raas-dev/configent/commit/76c786c92c8eef0a3834e7a4ac71e552bace06ce))
+* **vscode:** Remove trivy from extensions ([c2a2a0b](https://github.com/raas-dev/configent/commit/c2a2a0bf5ce5ffce7f1088981a8b6496f3b26a73))
+
 ## [1.37.0](https://github.com/raas-dev/configent/compare/1.36.0...1.37.0) (2023-04-25)
 
 
