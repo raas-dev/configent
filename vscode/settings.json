@@ -184,5 +184,7 @@
     ],
     "hediet.vscode-drawio.resizeImages": null,
     "codeium.enableCodeLens": false,
-    "semgrep.metrics": "off"
+    "semgrep.metrics": "off",
+    "trivy.fixedOnly": true,
+    "trivy.secretScanning": true
   }
