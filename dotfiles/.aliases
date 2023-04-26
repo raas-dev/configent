@@ -466,6 +466,7 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
+# https://www.jetpack.io/devbox/
 devbox() {
   local args="$*"
   if nixd [ ! -x /bin/bash ] ; then
