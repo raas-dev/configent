@@ -495,11 +495,11 @@ nixery() {
     image="nixery.dev/shell/$pkgs"
   fi
   name="${pkgs//\//-}"
-  mkdir -p "/tmp/$name"
+  mkdir -p "/tmp/lima/$name"
   docker run --init -it --rm --name "$name" \
     --publish-all \
-    --volume="/tmp/$name:/tmp/$name" \
-    --workdir="/tmp/$name" \
+    --volume="/tmp/lima/$name:/tmp/lima/$name" \
+    --workdir="/tmp/lima/$name" \
     "$image" $args
 }
 
