@@ -497,7 +497,6 @@ nixery() {
   name="${pkgs//\//-}"
   mkdir -p "/tmp/lima/$name"
   docker run --init -it --rm --name "$name" \
-    --publish-all \
     --volume="/tmp/lima/$name:/tmp/lima/$name" \
     --workdir="/tmp/lima/$name" \
     "$image" $args
