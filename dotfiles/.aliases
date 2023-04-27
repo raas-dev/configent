@@ -494,10 +494,12 @@ nixery() {
   else
     image="nixery.dev/shell/$pkgs"
   fi
-  docker run --init -it --rm --name "${pkgs//\//-}" \
+  name="${pkgs//\//-}"
+  mkdir -p "/tmp/$name"
+  docker run --init -it --rm --name "$name" \
     --publish-all \
-    --volume="$PWD:$PWD":ro \
-    --workdir="$PWD" \
+    --volume="/tmp/$name:/tmp/$name" \
+    --workdir="/tmp/$name" \
     "$image" $args
 }
 
