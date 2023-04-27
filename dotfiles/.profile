@@ -176,9 +176,13 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
-### Azure Functions Core Tools #################################################
+### Disable telemetry ##########################################################
 
+# Azure Functions Core Tools
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
+# kics
+export DISABLE_CRASH_REPORT=0
 
 ### DOCKER_HOST ################################################################
 
