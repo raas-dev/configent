@@ -522,6 +522,7 @@ alias rustscan='nixery rustscan rustscan'
 alias sqlmap='nixery sqlmap sqlmap'
 alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
 alias wapiti='nixery wapiti wapiti'
+alias webanalyze='nixery webanalyze webanalyze'
 
 ### macOS keychain #############################################################
 
