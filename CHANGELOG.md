@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.39.0](https://github.com/raas-dev/configent/compare/1.38.0...1.39.0) (2023-04-27)
+
+
+### Features
+
+* **aliases:** Add maigret via nixery ([2f58515](https://github.com/raas-dev/configent/commit/2f58515a8785827fbe338574648dba4f4e59cf09))
+* **aliases:** Add webanalyze via nixery ([743c9a2](https://github.com/raas-dev/configent/commit/743c9a27ecb2c6ceba79948ca95ee9ad1ab3222d))
+
+
+### Fixes
+
+* **nixery:** Fix volume mount via lima ([a4d1f4d](https://github.com/raas-dev/configent/commit/a4d1f4d33f63318dc83d1d9beeedb968bde74d9c))
+* **nixery:** Remove publishing ports ([1c265da](https://github.com/raas-dev/configent/commit/1c265daada5ee4540386261881a2a16476d78abb))
+* **nixery:** Use temporary writable volume mount ([b13627c](https://github.com/raas-dev/configent/commit/b13627c83d247e4fec28772b0d21d980c9a0ae6c))
+
 ## [1.38.0](https://github.com/raas-dev/configent/compare/1.37.0...1.38.0) (2023-04-26)
 
 
