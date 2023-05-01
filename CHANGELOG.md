@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.40.0](https://github.com/raas-dev/configent/compare/1.39.0...1.40.0) (2023-05-01)
+
+
+### Features
+
+* **aliases:** Add translate-shell ([5e1d9f3](https://github.com/raas-dev/configent/commit/5e1d9f38e2392759e6eca1b14c87359b66a3fd97))
+
+
+### Fixes
+
+* **profile:** Disable KICS crash reports ([0f71c05](https://github.com/raas-dev/configent/commit/0f71c0584b709bd6f7e953121f099206ddd6d232))
+
 ## [1.39.0](https://github.com/raas-dev/configent/compare/1.38.0...1.39.0) (2023-04-27)
 
 
