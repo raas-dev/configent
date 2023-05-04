@@ -29,7 +29,6 @@ if ! command -v brew >/dev/null; then
 fi
 
 # Homebrew Cask taps
-brew tap homebrew/cask
 #brew tap homebrew/cask-versions
 brew tap buo/cask-upgrade
 
