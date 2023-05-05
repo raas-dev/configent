@@ -186,5 +186,8 @@
     "codeium.enableCodeLens": false,
     "semgrep.metrics": "off",
     "trivy.fixedOnly": true,
-    "trivy.secretScanning": true
+    "trivy.secretScanning": true,
+    "genieai.personalizedName": "GPT",
+    "genieai.openai.temperature": 0,
+    "genieai.enableConversationHistory": true
   }
