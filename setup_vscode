@@ -81,7 +81,6 @@ if command -v code >/dev/null; then
   code --force --install-extension Perkovec.emoji
   code --force --install-extension rambit.highlight-counter
   code --force --install-extension redhat.vscode-yaml
-  code --force --install-extension Semgrep.semgrep
   code --force --install-extension stevejpurves.cucumber
   code --force --install-extension stkb.rewrap
   code --force --install-extension stoplight.spectral
