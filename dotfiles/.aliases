@@ -160,6 +160,7 @@ alias x='pkill -i -f'
 alias y='cht.sh'
 alias z='whatlistens'
 alias ¨='bat --show-all'
+alias §='trans :fi'
 alias ,='trans'
 alias _='sgpt_code'
 
