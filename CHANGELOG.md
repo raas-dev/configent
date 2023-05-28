@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.41.0](https://github.com/raas-dev/configent/compare/1.40.0...1.41.0) (2023-05-28)
+
+
+### Features
+
+* **aliases:** Add § to translate to Finnish ([44e47ef](https://github.com/raas-dev/configent/commit/44e47efb25312487a021817559ee9bb296ac66a3))
+
+
+### Fixes
+
+* **aliases:** Update tech list for webanalyze ([72831d4](https://github.com/raas-dev/configent/commit/72831d4e18b7ff9799f6af661edb082fae8616c3))
+* **osx:** Remove unneeded cask tap ([05719f3](https://github.com/raas-dev/configent/commit/05719f325cc3a68d01e36c9ed99d9a3d9e07ba20))
+* **vscode:** Remove broken semgrep extension ([c85e5ce](https://github.com/raas-dev/configent/commit/c85e5cead8fe0de1837c1ee053e2c614336c8646))
+
 ## [1.40.0](https://github.com/raas-dev/configent/compare/1.39.0...1.40.0) (2023-05-01)
 
 
