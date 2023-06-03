@@ -193,5 +193,6 @@
     "todohighlight.keywords": [
         "AP:",
         "TBD:"
-    ]
+    ],
+    "git.openRepositoryInParentFolders": "always"
   }
