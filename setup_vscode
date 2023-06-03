@@ -29,6 +29,7 @@ if command -v code >/dev/null; then
   # code --list-extensions | xargs -L 1 echo "code --force --install-extension"
   code --force --install-extension aaron-bond.better-comments
   code --force --install-extension adpyke.codesnap
+  code --force --install-extension AquaSecurityOfficial.trivy-vulnerability-scanner
   code --force --install-extension AykutSarac.jsoncrack-vscode
   code --force --install-extension bbenoist.Nix
   code --force --install-extension bencoleman.armview
@@ -60,14 +61,12 @@ if command -v code >/dev/null; then
   code --force --install-extension humao.rest-client
   code --force --install-extension IBM.output-colorizer
   code --force --install-extension kddejong.vscode-cfn-lint
-  code --force --install-extension ktiays.aicursor
   code --force --install-extension mikestead.dotenv
   code --force --install-extension ms-azure-devops.azure-pipelines
   code --force --install-extension ms-azuretools.vscode-bicep
   code --force --install-extension ms-azuretools.vscode-docker
   code --force --install-extension MS-CST-E.vscode-devskim
   code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
-  code --force --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
   code --force --install-extension ms-python.isort
   code --force --install-extension ms-python.python
   code --force --install-extension ms-python.vscode-pylance
