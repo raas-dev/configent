@@ -101,6 +101,21 @@
   trustctime = false
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
   excludesfile = ~/.gitignore
+  pager = delta
+
+### git-delta ##################################################################
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    navigate = true   # use n and N to move between diff sections
+    side-by-side = true
+    line-numbers = true
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
 
 ### Command specific settings ##################################################
 
