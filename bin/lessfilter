@@ -8,13 +8,8 @@
 
 # Extends lesspipe.sh by user defined filters
 
-has_cmd() {
-  command -v "$1" >/dev/null
-}
-
-if has_cmd lsd && [ -d "$1" ]; then
+if command -v lsd >/dev/null && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
 else
-  # any non-zero exit code leaves the filtering to lesspipe.sh
-  exit 1
+  exit 1 # jump back to lesspipe.sh
 fi
