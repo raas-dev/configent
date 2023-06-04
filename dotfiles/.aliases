@@ -134,8 +134,8 @@ fi
 ### Shortcuts ##################################################################
 
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
-alias b='bat --theme=base16'
-alias c='code'
+alias b='bat'
+alias c='sgpt_code'
 # d is for generic docker build and run, see d()
 alias e='sgpt_execute'
 alias f='fd --ignore-case --no-ignore --hidden'
