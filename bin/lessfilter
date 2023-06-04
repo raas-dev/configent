@@ -18,7 +18,7 @@ category=${mime%%/*}
 if has_cmd lsd && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
 elif has_cmd bat && [ "$category" = text ]; then
-  bat --color=always --theme=base16 --style=plain "$1"
+  bat --color=always --style=plain "$1"
 else
   bash -t lesspipe.sh "$1"
 fi

@@ -167,6 +167,10 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+### bat ########################################################################
+
+export BAT_THEME="base16"
+
 ### Dircolors ##################################################################
 
 command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
