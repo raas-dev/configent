@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.42.0](https://github.com/raas-dev/configent/compare/1.41.0...1.42.0) (2023-06-04)
+
+
+### Features
+
+* **aliases:** Change alias _ to describe command ([18f8e74](https://github.com/raas-dev/configent/commit/18f8e74dfd27ce34bd4ef45c3e5cb9c60d86956b))
+* **aliases:** Change alias c to sgpt_code ([1981eb1](https://github.com/raas-dev/configent/commit/1981eb1ad96a029db0ca0d4cbe59dba86f4f2072))
+* **git:** Add colorMoved to git diff ([2f92340](https://github.com/raas-dev/configent/commit/2f9234084680370ce0f3dbf121b66b77094cf9ee))
+* **git:** Add diff3 merge conflict resolution ([71f66a7](https://github.com/raas-dev/configent/commit/71f66a77424a057f3b82cc1b6737dd1ed478341d))
+* **git:** Add git-delta ([d5b3a5d](https://github.com/raas-dev/configent/commit/d5b3a5db6730272c0291c0dbfd5c411139884845))
+* **macos:** Add sniffnet ([401c734](https://github.com/raas-dev/configent/commit/401c73479f01b6cae86ed0163d79a8da941211db))
+* **utils:** Add bat-extras ([a8569a6](https://github.com/raas-dev/configent/commit/a8569a628b874279f10845dce7871118c74712fc))
+
+
+### Fixes
+
+* **aliases:** Remove autoheal ([632b08a](https://github.com/raas-dev/configent/commit/632b08afa3f99dde05a6bc2b613e12fc8d704035))
+* **aliases:** Use shim for jq over alias ([292685e](https://github.com/raas-dev/configent/commit/292685e92a788208778170c043ecc6591d347d89))
+* **bat:** Move setting default theme to profile ([a4f2772](https://github.com/raas-dev/configent/commit/a4f27725d668d867d655413c79fa79ea5f5ccd8b))
+* **bat:** Output plain if bat is piped ([6e16b4d](https://github.com/raas-dev/configent/commit/6e16b4d65e3c9aa215895e7fb79ee30de3a16ad9))
+* **git:** Add git-delta side-by-side settings ([7c2e4a8](https://github.com/raas-dev/configent/commit/7c2e4a85ecd1b4a99ec4774d634722ed571f5e08))
+* **git:** Add vscode hyperlinks to delta ([755a2d2](https://github.com/raas-dev/configent/commit/755a2d2a9f503bf78edef7aceb5c14ccfb62c42c))
+* **lessfilter:** Fix exit code to pass to lesspipe ([da70a12](https://github.com/raas-dev/configent/commit/da70a124e49ff8a681dcf563028089975e9a1af3))
+* **less:** Fix extending lesspipe with lessfilter ([33015e7](https://github.com/raas-dev/configent/commit/33015e702f96d31219dbed30ddb5e25da4eb4048))
+* **tmux:** Enable 24-bit/true color ([4b1bfb7](https://github.com/raas-dev/configent/commit/4b1bfb7355c0085fd3f65d3ff501e4f4a0bd9318))
+
 ## [1.41.0](https://github.com/raas-dev/configent/compare/1.40.0...1.41.0) (2023-05-28)
 
 
