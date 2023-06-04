@@ -162,7 +162,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all'
 alias §='trans :fi'
 alias ,='trans'
-alias _='sgpt_code'
+alias _='sgpt_describe'
 
 ### watch ######################################################################
 
@@ -270,6 +270,10 @@ sgpt_chat() {
 
 sgpt_code() {
   sgpt --temperature 0 --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" --code "$*"
+}
+
+sgpt_describe() {
+    sgpt --temperature 0 --describe-shell "$*"
 }
 
 sgpt_execute() {
