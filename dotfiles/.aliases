@@ -423,9 +423,6 @@ alias playwright='pipx run playwright'
 
 ### Latest versions of global Node.js command-line tools #######################
 
-# AutoGPT agent which automatically fixes your tests
-alias autoheal='npx -y autoheal'
-
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
