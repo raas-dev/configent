@@ -127,6 +127,7 @@
 
 [diff]
   renames = copies
+  colorMoved = default
 
 [diff "bin"]
   textconv = hexdump -v -C
