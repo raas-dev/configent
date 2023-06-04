@@ -113,6 +113,8 @@
   line-numbers = true
   side-by-side = true
   features = decorations
+  hyperlinks = true
+  hyperlinks-file-link-format = "vscode://file/{path}:{line}"
 
 [delta "decorations"]
   commit-decoration-style = blue ol
