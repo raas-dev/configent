@@ -103,19 +103,28 @@
   excludesfile = ~/.gitignore
   pager = delta
 
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
 ### git-delta ##################################################################
 
-[interactive]
-    diffFilter = delta --color-only --features=interactive
-
 [delta]
-    navigate = true   # use n and N to move between diff sections
-    side-by-side = true
-    line-numbers = true
-    features = decorations
+  navigate = true   # use n and N to move between diff sections
+  line-numbers = true
+  side-by-side = true
+  features = decorations
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
 
 [delta "interactive"]
-    keep-plus-minus-markers = false
+  keep-plus-minus-markers = false
 
 ### Command specific settings ##################################################
 
