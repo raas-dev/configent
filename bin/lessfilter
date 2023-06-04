@@ -18,6 +18,6 @@ category=${mime%%/*}
 if has_cmd lsd && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
 elif has_cmd bat && [ "$category" = text ]; then
-  # make bat colorize text always, something which lesspipe.sh does not do
+  # colorize any text file always, something which lesspipe.sh does not do
   bat --color=always --style=plain --paging=never "$1"
 fi

@@ -58,7 +58,7 @@ export MANPAGER='less -X'
 
 # https://github.com/wofr06/lesspipe
 export LESSOPEN='|~/local/bin/lesspipe.sh %s'
-export LESS='-R'  # make less output raw control characters to have colors
+export LESS='-R'  # output raw control characters to have colors
 
 ### Shell behaviour ############################################################
 
