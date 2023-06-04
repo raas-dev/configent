@@ -4,10 +4,11 @@
 !cht.sh
 !docker
 !docker-compose
+!install_*
+!jq
 !lessfilter
 !lesspipe.sh
 !nerdctl
 !podman
-!install_*
 !xpanes
 !yarn

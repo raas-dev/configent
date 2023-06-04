@@ -168,10 +168,6 @@ alias _='sgpt_describe'
 
 command -v viddy >/dev/null && alias watch='viddy --differences'
 
-### jq #########################################################################
-
-command -v gojq >/dev/null && alias jq='gojq'
-
 ### vim ########################################################################
 
 command -v nvim >/dev/null && alias vim='nvim'
