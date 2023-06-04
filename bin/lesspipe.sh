@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# lesspipe.sh, a preprocessor for less (version 2.05)
+# lesspipe.sh, a preprocessor for less
+lesspipe_version=2.07
 # Author: Wolfgang Friebel (wp.friebel AT gmail.com)
 #( [[ -n 1 && -n 2 ]] ) > /dev/null 2>&1 || exec zsh -y --ksh-arrays -- "$0" ${1+"$@"}
 
@@ -22,7 +23,7 @@ filetype() {
   if [[ "$1" == - || -z $1 ]]; then
     declare t
     t=$(nexttmp)
-    head -c 40000 >"$t" 2>/dev/null
+    head -c 1000000 >"$t" 2>/dev/null
     set "$t" "$2"
     fname="$fileext"
   fi
@@ -34,6 +35,7 @@ filetype() {
   fcat="${ft%/*}"
   ft="${ft#*/}"
   ft="${ft%;*}"
+  ft="${ft#x-script.}"
   ft="${ft#x-}"
   ftype="${ft#vnd\.}"
   # chose better name
@@ -93,6 +95,13 @@ filetype() {
     ;;
   esac
   ### get file type from 'file' command for an unspecific result
+  if [[ "$fcat" == message && $ftype == plain ]]; then
+    ftype=msg
+  fi
+  if [[ "$fcat" == message && $ftype == rfc822 ]]; then
+    fcat=text
+    ftype=email
+  fi
   if [[ "$fcat" == application && "$ftype" == octet-stream || "$fcat" == text && $ftype == plain ]]; then
     ft=$(file -L -s -b "$1" 2>/dev/null)
     # first check if the file command yields something
@@ -121,8 +130,14 @@ filetype() {
     Audio\ file\ with\ ID3\ *)
       ftype=mp3
       ;;
-    'OpenOffice.org 1.x Writer document')
+    OpenOffice.org\ 1.x\ Writer\ document)
       ftype=ooffice1
+      ;;
+    *osascript*)
+      ftype=applescript
+      ;;
+    *Device\ Tree\ Blob*)
+      ftype=dtb
       ;;
     # if still unspecific, determine file type by extension
     data)
@@ -183,17 +198,24 @@ filetype() {
       esac
     fi
   fi
+
   echo "$ftype:$fchar:$fcat"
 }
 
 msg() {
   [[ -n "$LESSQUIET" ]] && return
-  echo "==> $*"
+  if [[ -n "$lesspipe_version" ]]; then
+    echo "==> (lesspipe $lesspipe_version) $*"
+  else
+    echo "==> $*"
+  fi
+  lesspipe_version=
 }
 
-contentline() {
+separatorline() {
   declare a="==================================="
-  echo "$a Contents $a"
+  word=$1 || "Contents"
+  echo "$a $word $a"
 }
 
 nexttmp() {
@@ -261,18 +283,17 @@ show() {
   if [[ "${cmd[*]}" == "" ]]; then
     ft=$(filetype "$file1")
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       show "-$rest1"
     else
       # if nothing to convert, exit without a command
-      [[ ${colorizer[*]} == cat ]] && colorizer=()
       isfinal "$file1" "$rest11"
     fi
   elif [[ "$c1" == "" ]]; then
     c1=("${cmd[@]}")
     ft=$("${c1[@]}" | filetype -) || exit 1
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       show "-$rest1"
     else
       "${c1[@]}" | isfinal - "$rest11"
@@ -281,7 +302,7 @@ show() {
     c2=("${cmd[@]}")
     ft=$("${c1[@]}" | "${c2[@]}" | filetype -) || exit 1
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       show "-$rest1"
     else
       "${c1[@]}" | "${c2[@]}" | isfinal - "$rest11"
@@ -290,7 +311,7 @@ show() {
     c3=("${cmd[@]}")
     ft=$("${c1[@]}" | "${c2[@]}" | "${c3[@]}" | filetype -) || exit 1
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       show "-$rest1"
     else
       "${c1[@]}" | "${c2[@]}" | "${c3[@]}" | isfinal - "$rest11"
@@ -299,7 +320,7 @@ show() {
     c4=("${cmd[@]}")
     ft=$("${c1[@]}" | "${c2[@]}" | "${c3[@]}" | "${c4[@]}" | filetype -) || exit 1
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       show "-$rest1"
     else
       "${c1[@]}" | "${c2[@]}" | "${c3[@]}" | "${c4[@]}" | isfinal - "$rest11"
@@ -308,7 +329,7 @@ show() {
     c5=("${cmd[@]}")
     ft=$("${c1[@]}" | "${c2[@]}" | "${c3[@]}" | "${c4[@]}" | "${c5[@]}" | filetype -) || exit 1
     get_unpack_cmd "$ft" "$file1" "$rest1"
-    if [[ "${cmd[*]}" != "" && -z ${colorizer[*]} ]]; then
+    if [[ "${cmd[*]}" != "" ]]; then
       echo "$0: Too many levels of encapsulation"
     else
       "${c1[@]}" | "${c2[@]}" | "${c3[@]}" | "${c4[@]}" | "${c5[@]}" | isfinal - "$rest11"
@@ -359,7 +380,7 @@ get_unpack_cmd() {
     trans=()
     echo "" | iconv --byte-subst - 2>/dev/null && rep=(--unicode-subst="$qm" --byte-subst="$qm" --widechar-subst="$qm") # MacOS
     echo "" | iconv -f "$fchar" -t "$locale//TRANSLIT" - 2>/dev/null && trans=(-t "$locale//TRANSLIT")
-    msg "append $sep$sep to filename to view the $fchar encoded file"
+    msg "append $sep$sep to filename to view the original $fchar encoded file"
     cmd=(iconv "${rep[@]}" -f "$fchar" "${trans[@]}" "$2")
     # loop protection, just in case
     lclocale=
@@ -417,13 +438,13 @@ get_unpack_cmd() {
   if [[ -n ${cmd[*]} ]]; then
     [[ -n "$file2" ]] && file2= && return
     msg "use ${x}_file${sep}contained_file to view a file in the archive"
-    has_cmd archive_color && colorizer=(archive_color) || colorizer=(cat)
+    has_cmd archive_color && colorizer=(archive_color)
   fi
 }
 
 analyze_args() {
   # determine how we are called
-  cmdtree=$(ps -T -oargs=)
+  cmdtree=$(ps -T -oargs= 2>/dev/null)
   while read -r line; do
     arg1=${line%% *}
     arg1=${arg1##*/}
@@ -440,11 +461,13 @@ analyze_args() {
   # return if we want to watch growing files
   [[ $lessarg == *less\ *\ +F\ * || $lessarg == *less\ *\ : ]] && exit 0
   # color is set when calling less with -r or -R or LESS contains that option
-  lessarg="l $LESS $lessarg"
-  # shellcheck disable=SC2001
-  lessarg=$(echo "$lessarg" | sed 's/ -[a-zA-Z]*[rR]/ -r/')
+  has_r=$(echo "l $LESS $lessarg" | tr '[:upper:]' '[:lower:]')
+  has_r=${has_r/[a-z]-/}
+  has_r=${has_r/--raw-control-chars/ -r}
+
+  has_r=${has_r//[a-qs-z]/}
   has_cmd tput && colors=$(tput colors) || colors=0
-  if [[ $colors -ge 8 && $lessarg == *\ -[rR]* ]]; then
+  if [[ $colors -ge 8 && $has_r == *\ -r* ]]; then
     COLOR="--color=always"
   else
     COLOR="--color=auto"
@@ -454,8 +477,6 @@ analyze_args() {
 }
 
 has_colorizer() {
-  arg="$1"
-  [[ "$arg" = - ]] && arg=
   [[ $COLOR == *always ]] || return
   [[ $2 == plain || -z $2 ]] && return
   prog=${LESSCOLORIZER%% *}
@@ -463,28 +484,41 @@ has_colorizer() {
   for i in bat batcat pygmentize source-highlight code2color vimcolor; do
     [[ -z $prog || $prog == "$i" ]] && has_cmd "$i" && prog=$i
   done
-  [[ "$2" =~ ^[0-9]*$ ]] && opt=() || opt=(-l "$2")
-  ext=${fileext##*.}
+  [[ "$2" =~ ^[0-9]*$ || -z "$2" ]] || lang=$2
+  # prefer an explicitly requested language
+  [[ -n $3 ]] && lang=$3 || lang=$2
   case $prog in
   bat | batcat)
-    # only allow an explicitly requested language
-    opt=(-l "$ext")
-    { [[ -n $ext ]] && "$prog" "${opt[@]}" /dev/null; } || opt=()
-    opt+=("$COLOR" --style=plain --paging=never)
+    [[ -n $lang ]] && $prog --list-languages | grep -i "$lang" >/dev/null && opt=(-l "$lang")
+    [[ -n $LESSCOLORIZER && $LESSCOLORIZER = *\ *--style=* ]] && style="${LESSCOLORIZER/* --style=/}"
+    [[ -z $style ]] && style=$BAT_STYLE
+    [[ -z $style ]] && style=plain
+    [[ -n $LESSCOLORIZER && $LESSCOLORIZER = *\ *--theme=* ]] && theme="${LESSCOLORIZER/* --theme=/}"
+    [[ -z $theme ]] && theme=$BAT_THEME
+    [[ -z $theme ]] && theme=ansi
+    if [[ -r "$HOME/.config/bat/config" ]]; then
+      grep -q -e '^--style' "$HOME/.config/bat/config" || opt+=(--style="${style%% *}")
+      grep -q -e '^--theme' "$HOME/.config/bat/config" || opt+=(--theme="${theme%% *}")
+    fi
+    opt+=("$COLOR" --paging=never "$1")
     ;;
   pygmentize)
-    pygmentize -l "$2" /dev/null &>/dev/null && opt=(-l "$2") || opt=(-g)
-    [[ -n $LESSCOLORIZER && $LESSCOLORIZER =~ pygmentize\ \ *-O\ *style=[a-z]* ]] && opt+=(-O "${LESSCOLORIZER##* }")
+    pygmentize -l "$lang" /dev/null &>/dev/null && opt=(-l "$lang") || opt=(-g)
+    [[ -n $LESSCOLORIZER && $LESSCOLORIZER = *-O\ *style=* ]] && style="${LESSCOLORIZER/*style=/}"
+    [[ -n $style ]] && opt+=(-O style="${style%% *}")
     [[ $colors -ge 256 ]] && opt+=(-f terminal256)
+    [[ "$1" == - ]] || opt+=("$1")
     ;;
   source-highlight)
-    [[ -z $arg ]] && arg=/dev/stdin
-    [[ -n "${opt[*]}" && -n "$2" ]] && opt=(-s "$2") || opt=()
-    opt+=(--failsafe -f esc -i)
+    [[ -n $1 && "$1" != - ]] && opt=(-i "$1") || opt=()
+    [[ -n $lang ]] && opt+=(-s "$lang")
+    style=esc
+    [[ $colors -ge 256 ]] && style=esc256
+    opt+=(--failsafe -f "$style")
     ;;
   code2color | vimcolor)
-    opt=()
-    [[ -n "$fileext" ]] && opt=(-l "$fileext")
+    opt=("$1")
+    [[ -n "$3" ]] && opt=(-l "$3" "$1")
     ;;
   *)
     return
@@ -514,6 +548,9 @@ isfinal() {
       ;;
     html | xml)
       [[ -z $file2 ]] && has_htmlprog && cmd=(ishtml "$1")
+      ;;
+    dtb | dts)
+      has_cmd dtc && cmd=(isdtb "$1")
       ;;
     pdf)
       { has_cmd pdftotext && cmd=(istemp pdftotext -layout -nopgbrk -q -- "$1" -); } ||
@@ -590,6 +627,8 @@ isfinal() {
         [[ "$fext" == me ]] && macro=e
         [[ "$fext" == ms ]] && macro=s
         cmd=(groff -s -p -t -e -Tutf8 -m "$macro" "$1")
+      elif has_cmd mandoc; then
+        cmd=(mandoc "$1")
       fi
       ;;
     rtf)
@@ -603,7 +642,7 @@ isfinal() {
       cmd=(istemp nm "$1")
       ;;
     pod)
-      [[ -z $file2 ]] && LESSQUIET=1 &&
+      [[ -z $file2 ]] &&
         { { has_cmd pod2text && cmd=(pod2text "$1"); } ||
           { has_cmd perldoc && cmd=(istemp perldoc "$1"); }; }
       ;;
@@ -627,7 +666,8 @@ isfinal() {
       has_cmd gpg && cmd=(gpg -d "$1")
       ;;
     plist)
-      has_cmd plistutil && cmd=(istemp "plistutil -i" "$1")
+      { has_cmd plistutil && cmd=(istemp "plistutil -i" "$1"); } ||
+        { has_cmd plutil && cmd=(istemp "plutil -p" "$1"); }
       ;;
     mp3)
       has_cmd id3v2 && cmd=(istemp "id3v2 --list" "$1")
@@ -640,13 +680,17 @@ isfinal() {
       { has_cmd csvlook && cmd=(csvlook "$1"); } ||
         { has_cmd pandoc && cmd=(pandoc -f csv -t plain "$1"); }
       ;;
+    json)
+      [[ $COLOR = *always ]] && opt=(-C .) || opt=(.)
+      has_cmd jq && cmd=(jq "${opt[@]}" "$1")
+      ;;
     esac
   fi
   # not a specific file format
   if [[ -z ${cmd[*]} ]]; then
     fext=$(fileext "$1")
     if [[ $fcat == audio || $fcat == video || $fcat == image ]]; then
-      { has_cmd mediainfo && cmd=(mediainfo --Full "$1"); } ||
+      { [[ "$1" != '-' ]] && has_cmd mediainfo && cmd=(mediainfo --Full "$1"); } ||
         { has_cmd exiftool && cmd=(exiftool "$1"); } ||
         { has_cmd identify && [[ $fcat == image ]] && cmd=(identify -verbose "$1"); }
     elif [[ "$fchar" == binary ]]; then
@@ -654,22 +698,24 @@ isfinal() {
     fi
   fi
   if [[ -n ${cmd[*]} && "${cmd[*]}" != "cat" ]]; then
-    [[ -z $msg ]] && msg="append $sep to filename to view the $x file"
+    [[ -z $msg ]] && msg="append $sep to filename to view the original $x file"
     msg "$msg"
   fi
+  [[ -n "$file2" ]] && fext="$file2"
+  [[ $fcat == text && $x != plain ]] && fext=$x
+  [[ -z "$fext" ]] && fext=$(fileext "$fileext")
+  fext=${fext##*/}
+  [[ -z ${colorizer[*]} ]] && has_colorizer "$1" "$fext" "$fileext"
   if [[ -n ${cmd[*]} ]]; then
-    if [[ ${colorizer[*]} == archive_color && $COLOR == *always ]]; then
-      "${cmd[@]}" | archive_color
-    else
-      "${cmd[@]}"
+    # TAU: When cmd starts with environment variable settings, bash will refuse to execute it via : "${cmd[@]}"
+    # The remedy is simple : Just run it through the "env" command in that case.
+    if [[ "$cmd" =~ '=' ]]; then
+      cmd=(env "${cmd[@]}")
     fi
+    #[[ -n ${colorizer[*]} ]] && "${cmd[@]}" | "${colorizer[@]}" && return
+    "${cmd[@]}"
   else
-    [[ -n "$file2" ]] && fext="$file2"
-    [[ -z "$fext" && $fcat == text && $x != plain ]] && fext=$x
-    [[ -z "$fext" ]] && fext=$(fileext "$fileext")
-    fext=${fext##*/}
-    [[ -z ${colorizer[*]} ]] && has_colorizer "$1" "$fext"
-    [[ -n ${colorizer[*]} && $fcat != binary ]] && "${colorizer[@]}" "$1" && return
+    [[ -n ${colorizer[*]} && $fcat != binary ]] && "${colorizer[@]}" && return
     # if fileext set, we need to filter to get rid of .fileext
     [[ -n $fileext || "$1" == - || "$1" == "$t" ]] && cat "$1"
   fi
@@ -725,15 +771,15 @@ isarchive() {
       t="$2"
       istemp "isoinfo -d -i" "$2"
       isoinfo -d -i "$t" | grep -E '^Joliet' && joliet=J
-      contentline
-      isoinfo -fR$joliet -i "$t"
+      separatorline
+      isoinfo -fR"$joliet" -i "$t"
       ;;
     7za | 7zr)
       istemp "$prog l" "$2"
       ;;
     esac
   fi
-  [[ $? && $3 ]] && msg "could not retrieve $3 from $2"
+  [[ $? != 0 && -n $3 ]] && msg ":$!: could not retrieve $3 from $2"
 }
 
 cabextract2() {
@@ -748,7 +794,7 @@ isrpm() {
   if [[ -z "$2" ]]; then
     if has_cmd rpm; then
       istemp "rpm -qivp" "$1"
-      contentline
+      separatorline
       [[ $1 == - ]] && set "$t" "$1"
     fi
     if has_cmd bsdtar; then
@@ -774,7 +820,7 @@ isdeb() {
     if [[ -z "$2" ]]; then
       control=$(bsdtar tf "$1" "control*")
       bsdtar xOf "$1" "$control" | bsdtar xOf - ./control
-      contentline
+      separatorline
       bsdtar xOf "$1" "$data" | bsdtar tvf -
     else
       bsdtar xOf "$1" "$data" | bsdtar xOf - "$2"
@@ -786,7 +832,7 @@ isdeb() {
     if [[ -z "$2" ]]; then
       control=$(ar t "$1" | grep control)
       ar p "$1" "$control" | "${cmd[@]}" | tar xOf - ./control
-      contentline
+      separatorline
       ar p "$1" "$data" | "${cmd[@]}" | tar tvf -
     else
       ar p "$1" "$data" | "${cmd[@]}" | tar xOf - "$2"
@@ -804,6 +850,17 @@ isoffice() {
 
 isoffice2() {
   istemp "libreoffice --headless --cat" "$1" 2>/dev/null
+}
+
+isdtb() {
+  errors=$(nexttmp)
+  has_colorizer "-" "dts" "dts"
+  [[ -z "${colorizer[*]}" ]] && colorizer=(cat)
+  dtc -I dtb -O dts -o - -- "$1" 2>"$errors" | "${colorizer[@]}"
+  if [[ -s "$errors" ]]; then
+    separatorline "Warnings"
+    cat "$errors"
+  fi
 }
 
 has_htmlprog() {
@@ -840,7 +897,7 @@ setopt sh_word_split 2>/dev/null
 PATH=$PATH:${0%%/lesspipe.sh}
 # the current locale in lowercase (or generic utf-8)
 locale=$(locale | grep LC_CTYPE | sed 's/.*"\(.*\)"/\1/') || locale=en_US.UTF-8
-lclocale=$(echo ${locale##*.} | tr '[:upper:]' '[:lower:]')
+lclocale=$(echo "${locale##*.}" | tr '[:upper:]' '[:lower:]')
 
 sep=:      # file name separator
 altsep='=' # alternate separator character

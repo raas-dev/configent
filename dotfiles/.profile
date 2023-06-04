@@ -56,9 +56,9 @@ export SVN_EDITOR="$EDITOR"
 export PAGER='less'
 export MANPAGER='less -X'
 
-# wrapper to lesspipe.sh
-export LESSOPEN='|~/local/bin/lessfilter %s'
-export LESS='-R'
+# https://github.com/wofr06/lesspipe
+export LESSOPEN='|~/local/bin/lesspipe.sh %s'
+export LESS='-R'  # make less output raw control characters to have colors
 
 ### Shell behaviour ############################################################
 

@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# Previews files best effort based on the mime type
+# Extends lesspipe.sh by user defined filters
 
 has_cmd() {
   command -v "$1" >/dev/null
@@ -18,7 +18,6 @@ category=${mime%%/*}
 if has_cmd lsd && [ -d "$1" ]; then
   lsd -A --group-dirs first --oneline --color=always "$1"
 elif has_cmd bat && [ "$category" = text ]; then
-  bat --color=always --style=plain "$1"
-else
-  bash -t lesspipe.sh "$1"
+  # make bat colorize text always, something which lesspipe.sh does not do
+  bat --color=always --style=plain --paging=never "$1"
 fi
