@@ -30,7 +30,6 @@ fi
 ### Homebrew core ##############################################################
 
 brew install bat             # rust
-brew install bat-extras      # bash
 brew install diskonaut       # rust
 brew install fd              # rust
 brew install git-delta       # rust
