@@ -8,8 +8,20 @@
 
 # Extends lesspipe.sh by user defined filters
 
-if command -v lsd >/dev/null && [ -d "$1" ]; then
+has_cmd() {
+  command -v "$1" >/dev/null
+}
+
+mime=$(file -bL --mime-type "$1")
+category=${mime%%/*}
+
+if has_cmd lsd && [ -d "$1" ]; then
+  # output compact listing for fzf-preview
   lsd -A --group-dirs first --oneline --color=always "$1"
+elif has_cmd bat && [ "$category" = text ]; then
+  # colorize all text files (like Dockerfile), which lesspipe.sh does not match
+  bat --color=always --paging=never "$1"
 else
-  exit 1 # jump back to lesspipe.sh
+  # no user rules matched, pass control back to lesspipe.sh
+  exit 1
 fi

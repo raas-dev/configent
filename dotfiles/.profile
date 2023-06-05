@@ -57,8 +57,9 @@ export MANPAGER='sh -c "col -bx | bat -l man -p"'
 export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
-export LESSOPEN='|~/local/bin/lesspipe.sh %s'
 export LESS='-R'  # output raw control characters to have colors
+export LESSOPEN='|~/local/bin/lesspipe.sh %s' # use lesspipe.sh in this repo
+export LESSQUIET=1  # suppress additional output not belonging to the file
 
 ### Shell behaviour ############################################################
 
