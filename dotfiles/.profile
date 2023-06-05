@@ -186,6 +186,9 @@ command -v aws_completer >/dev/null &&
 # Azure Functions Core Tools
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
+# Azure Developer CLI
+export AZURE_DEV_COLLECT_TELEMETRY=no
+
 # kics
 export DISABLE_CRASH_REPORT=0
 
