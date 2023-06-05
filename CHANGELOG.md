@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.42.1](https://github.com/raas-dev/configent/compare/1.42.0...1.42.1) (2023-06-05)
+
+
+### Fixes
+
+* **git:** Add git-delta settings ([73aa23d](https://github.com/raas-dev/configent/commit/73aa23d98ee5688a7bd42761e29bc95f747a1c82))
+* **go:** Install gopls for VSCode Go extension ([386f609](https://github.com/raas-dev/configent/commit/386f6098f07b51cc5710a8f58d324702a2f2fa58))
+* **iac:** Add azd ([7ac7da1](https://github.com/raas-dev/configent/commit/7ac7da169225fbb32d3080f1ef10faa947c86924))
+* **macos:** Include later less ([444ae48](https://github.com/raas-dev/configent/commit/444ae48d0f1c114f217462959331c35c4602f752))
+* **macos:** Remove broken less ([c49eba6](https://github.com/raas-dev/configent/commit/c49eba6761c79421e165b2a1537dc48e8aa4d09f))
+* **macos:** Remove broken osx-cpu-temp ([da1256f](https://github.com/raas-dev/configent/commit/da1256f1b2cc6b165d327dbb6d83f274d8741c29))
+* **pager:** Use bat for colored manpages ([9f6bb2c](https://github.com/raas-dev/configent/commit/9f6bb2c6a17b8f09c8d8b64e9210e55721d0f076))
+* **profile:** Disable azd telemetry ([c231479](https://github.com/raas-dev/configent/commit/c23147954e472e01e8126d7415164316dd9193be))
+* **terminal:** Set theme for bat and git-delta ([510b423](https://github.com/raas-dev/configent/commit/510b423de37c84b3d595ca88b77990d66f100384))
+* **utils:** Remove bat-extras ([744dff7](https://github.com/raas-dev/configent/commit/744dff71397a28f6fd6b022af2513ad652b8f79c))
+* **utils:** Remove grex as obsolete ([6576b3d](https://github.com/raas-dev/configent/commit/6576b3d4c17f6a30e772a092e45f02af2fed19fe))
+* **utils:** Remove turbocommit over codegpt ([fd9fb23](https://github.com/raas-dev/configent/commit/fd9fb23204efdcfa91a193035bc1470e8b2cbb95))
+
 ## [1.42.0](https://github.com/raas-dev/configent/compare/1.41.0...1.42.0) (2023-06-04)
 
 
