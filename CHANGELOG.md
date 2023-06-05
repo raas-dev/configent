@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.42.2](https://github.com/raas-dev/configent/compare/1.42.1...1.42.2) (2023-06-05)
+
+
+### Fixes
+
+* **iac:** Add bicep CLI via az ([ec97af7](https://github.com/raas-dev/configent/commit/ec97af7453aff6f6515b83beae56132c4eb93d38))
+* **less:** Colorize all plain text files ([26a71f9](https://github.com/raas-dev/configent/commit/26a71f9ae622c833d5bfcdf2c2b592ccdec5ffe0))
+
 ### [1.42.1](https://github.com/raas-dev/configent/compare/1.42.0...1.42.1) (2023-06-05)
 
 
