@@ -36,7 +36,6 @@ brew install fd              # rust
 brew install git-delta       # rust
 brew install git-lfs         # go
 brew install gitui           # rust
-brew install grex            # rust
 brew install kalker          # rust
 brew install lsd             # rust
 brew install procs           # rust
