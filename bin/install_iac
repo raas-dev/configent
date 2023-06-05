@@ -51,7 +51,8 @@ az extension add --name azure-devops --upgrade --yes
 az extension add --name containerapp --upgrade --yes
 az extension add --name next --upgrade --yes
 
-brew install azcopy # go
+brew install azcopy        # go
+brew install azure/azd/azd # go
 
 ### aws ########################################################################
 
