@@ -170,7 +170,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ### bat ########################################################################
 
 export BAT_STYLE="auto" # same as default, unless output is piped (lesspipe.sh)
-export BAT_THEME="base16"
+export BAT_THEME="DarkNeon"
 
 ### Dircolors ##################################################################
 

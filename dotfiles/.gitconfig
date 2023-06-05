@@ -119,7 +119,7 @@
   line-numbers = true
   side-by-side = true
   keep-plus-minus-markers = false
-  syntax-theme = base16
+  syntax-theme = DarkNeon
   file-style = "#434C5E" bold
   file-decoration-style = "#434C5E" ul
   file-added-label = [+]
