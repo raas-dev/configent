@@ -52,9 +52,9 @@ export EDITOR='vim'
 export VISUAL="$EDITOR"
 export SVN_EDITOR="$EDITOR"
 
-# no clearing of the screen after quitting man
-export PAGER='less'
-export MANPAGER='less -X'
+# color manpages
+export MANPAGER='sh -c "col -bx | bat -l man -p"'
+export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
 export LESSOPEN='|~/local/bin/lesspipe.sh %s'
