@@ -53,11 +53,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Cross-platform make is often required by packages with non-native deps
   brew install cmake
 
-  # Use later than included in Xcode Command Line Tools
+  # Newer git than by Xcode Command Line Tools
   brew install git
-
-  # Use later than included in macOS
-  brew install less
 
   # The logfile navigator (https://github.com/tstack/lnav)
   brew install lnav
