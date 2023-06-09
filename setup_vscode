@@ -65,7 +65,6 @@ if command -v code >/dev/null; then
   code --force --install-extension ms-azure-devops.azure-pipelines
   code --force --install-extension ms-azuretools.vscode-bicep
   code --force --install-extension ms-azuretools.vscode-docker
-  code --force --install-extension MS-CST-E.vscode-devskim
   code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
   code --force --install-extension ms-python.isort
   code --force --install-extension ms-python.python
