@@ -194,5 +194,6 @@
         "AP:",
         "TBD:"
     ],
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "genieai.openai.maxTokens": 4096
   }
