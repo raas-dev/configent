@@ -71,6 +71,7 @@ if command -v code >/dev/null; then
   code --force --install-extension ms-python.python
   code --force --install-extension ms-python.vscode-pylance
   code --force --install-extension ms-toolsai.jupyter
+  code --force --install-extension ms-toolsai.jupyter-renderers
   code --force --install-extension ms-vscode.azure-account
   code --force --install-extension ms-vscode.makefile-tools
   code --force --install-extension ms-vscode.powershell
