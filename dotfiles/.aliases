@@ -405,9 +405,8 @@ alias you-get='pipx run you-get'
 # multitool for tabular data
 alias vd='pipx run --pip-args openpyxl visidata'
 
-# Jupyter
+# Jupyter notebooks in the terminal
 alias euporie='pipx run euporie'
-alias jupytext='pipx run jupytext'
 
 # image inpainting tool
 alias lama-cleaner='pipx run lama-cleaner --model=lama --device=cpu --port=8080'
