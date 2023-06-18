@@ -191,8 +191,7 @@
     "genieai.openai.temperature": 0,
     "genieai.enableConversationHistory": true,
     "todohighlight.keywords": [
-        "AP:",
-        "TBD:"
+        "AP:"
     ],
     "git.openRepositoryInParentFolders": "always",
     "genieai.openai.maxTokens": 4096
