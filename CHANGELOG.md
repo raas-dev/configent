@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.42.3](https://github.com/raas-dev/configent/compare/1.42.2...1.42.3) (2023-06-18)
+
+
+### Fixes
+
+* **aliases:** Remove unused jupytext ([716cc7d](https://github.com/raas-dev/configent/commit/716cc7d7fbaf088676517a39af65bd022c6069f6))
+* **vscode:** Fix context lenght ([c21504c](https://github.com/raas-dev/configent/commit/c21504cb3ed51203ea339410f734283db6f74129))
+* **vscode:** Increase token count for Genie ([d3c984b](https://github.com/raas-dev/configent/commit/d3c984b33e4d106c7734b1c7104b9bbc7aababc3))
+* **vscode:** Remove broken extensions ([5b3dda7](https://github.com/raas-dev/configent/commit/5b3dda764e302b39de5b33cfed1625d06390e50e))
+* **vscode:** Remove unused todohighlight keywords ([fa9f1c8](https://github.com/raas-dev/configent/commit/fa9f1c8996c2eb3794f728eef48aeb45fcdde421))
+
 ### [1.42.2](https://github.com/raas-dev/configent/compare/1.42.1...1.42.2) (2023-06-05)
 
 
