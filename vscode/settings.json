@@ -193,6 +193,5 @@
     "todohighlight.keywords": [
         "AP:"
     ],
-    "git.openRepositoryInParentFolders": "always",
-    "genieai.openai.maxTokens": 4096
+    "git.openRepositoryInParentFolders": "always"
   }
