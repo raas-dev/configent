@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.43.0](https://github.com/raas-dev/configent/compare/1.42.3...1.43.0) (2023-07-02)
+
+
+### Features
+
+* **aliases:** Add aider via pipx ([d6293aa](https://github.com/raas-dev/configent/commit/d6293aa602df3fec916c231984a36115ae6a6e01))
+* **python:** Update pythons ([3a48751](https://github.com/raas-dev/configent/commit/3a487514e023a06596f225a9df2ec775f2049dcc))
+* **utils:** Add universal-ctags ([ec4f7d4](https://github.com/raas-dev/configent/commit/ec4f7d434b81e573e0a893a3e936934ef0f5d3e5))
+
+
+### Fixes
+
+* **aliases:** Remove lama-cleaner ([76db5e7](https://github.com/raas-dev/configent/commit/76db5e7f30be4d271b9df77595f610036bfa1be8))
+
+
+### Documentation
+
+* **aliases:** Fix comment ([e7030ef](https://github.com/raas-dev/configent/commit/e7030efc9889c0799b0525a5294f513a98c713e5))
+
 ### [1.42.3](https://github.com/raas-dev/configent/compare/1.42.2...1.42.3) (2023-06-18)
 
 
