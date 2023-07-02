@@ -420,6 +420,9 @@ alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 # playwright
 alias playwright='pipx run playwright'
 
+# aider
+alias aider='pipx run aider-chat'
+
 ### Latest versions of global Node.js command-line tools #######################
 
 # Find unused and missing package.json (dev)Dependencies
