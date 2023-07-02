@@ -255,7 +255,7 @@ alias week='date +%V'
 
 ### Utilities ##################################################################
 
-# ChatGPT helpers
+# OpenAI helpers
 sgpt() {
   pipx run --spec=shell-gpt sgpt --no-cache "$@"
 }
