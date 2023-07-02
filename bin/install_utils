@@ -43,6 +43,7 @@ brew install sd              # rust
 brew install starship        # rust
 brew install translate-shell # awk
 brew install unar            # c
+brew install universal-ctags # c
 brew install xh              # rust
 brew install zoxide          # rust
 
