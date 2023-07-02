@@ -408,9 +408,6 @@ alias vd='pipx run --pip-args openpyxl visidata'
 # Jupyter notebooks in the terminal
 alias euporie='pipx run euporie'
 
-# image inpainting tool
-alias lama-cleaner='pipx run lama-cleaner --model=lama --device=cpu --port=8080'
-
 # openai
 alias openai='pipx run openai'
 
