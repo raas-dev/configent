@@ -269,7 +269,7 @@ sgpt_code() {
 }
 
 sgpt_describe() {
-    sgpt --temperature 0 --describe-shell "$*"
+  sgpt --temperature 0 --describe-shell "$*"
 }
 
 sgpt_execute() {
