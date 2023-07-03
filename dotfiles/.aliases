@@ -420,6 +420,9 @@ alias playwright='pipx run playwright'
 # aider
 alias aider='pipx run aider-chat'
 
+# gpt-engineer
+alias gpt-engineer='pipx run gpt-engineer'
+
 ### Latest versions of global Node.js command-line tools #######################
 
 # Find unused and missing package.json (dev)Dependencies
