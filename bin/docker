@@ -15,7 +15,7 @@ DOCKER_CONFIG=${DOCKER_CONFIG:-"$HOME/.docker"}
 
 install_docker_buildx_plugin() {
   if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-buildx" ]; then
-    buildx_version="v0.10.4"
+    buildx_version="v0.11.0"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$arch" = "aarch64" ]; then
