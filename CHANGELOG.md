@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.44.0](https://github.com/raas-dev/configent/compare/1.43.0...1.44.0) (2023-07-03)
+
+
+### Features
+
+* **aliases:** Add gpt-engineer ([4888807](https://github.com/raas-dev/configent/commit/4888807dc97ccf699010924e8c29e56165c7a7b2))
+
+
+### Fixes
+
+* **docker:** Update buildx ([d21beab](https://github.com/raas-dev/configent/commit/d21beabec400131845fc81fa1f11c44f4579abbb))
+
 ## [1.43.0](https://github.com/raas-dev/configent/compare/1.42.3...1.43.0) (2023-07-02)
 
 
