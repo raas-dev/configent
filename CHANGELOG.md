@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.45.0](https://github.com/raas-dev/configent/compare/1.44.0...1.45.0) (2023-07-04)
+
+
+### Features
+
+* **go:** Add glow for preview markdown in term ([ba851b5](https://github.com/raas-dev/configent/commit/ba851b578e47873bcb23d371c67d6f0bff09dfcd))
+
+
+### Fixes
+
+* **aliases:** Alias _ to shell gpt ([cd324a0](https://github.com/raas-dev/configent/commit/cd324a01c9c09bc859e7714b14427fc05b276fb8))
+* **aliases:** Alias e to generic package extract ([3363edb](https://github.com/raas-dev/configent/commit/3363edbabe0aa3ac77708d4d9cd59afb2666f159))
+* **aliases:** Clarify e() error messages ([95f1362](https://github.com/raas-dev/configent/commit/95f136212d64cf71db71bdea1fc09aba286bb215))
+* **vscode:** Replace genie by chatgpt-reborn ([a87d346](https://github.com/raas-dev/configent/commit/a87d346f92c68865f0a5a86f77606efc4ea182c2))
+
 ## [1.44.0](https://github.com/raas-dev/configent/compare/1.43.0...1.44.0) (2023-07-03)
 
 
