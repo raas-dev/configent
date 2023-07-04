@@ -137,7 +137,7 @@ alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat'
 alias c='sgpt_code'
 # d is for generic docker build and run, see d()
-alias e='sgpt_execute'
+# e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
 alias h='xh'
@@ -299,8 +299,8 @@ d() {
   docker logs --follow "$name"
 }
 
-# Quick extract
-ext() {
+# Generic extract package
+e() {
   if [ -r "$1" ]; then
     if command -v unar >/dev/null; then
       unar "$1"
