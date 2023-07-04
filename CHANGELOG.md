@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.45.1](https://github.com/raas-dev/configent/compare/1.45.0...1.45.1) (2023-07-04)
+
+
+### Fixes
+
+* **vscode:** Remove unused extension ([b543f21](https://github.com/raas-dev/configent/commit/b543f213361b7d9b47647817c2b96d483d4ef91c))
+
 ## [1.45.0](https://github.com/raas-dev/configent/compare/1.44.0...1.45.0) (2023-07-04)
 
 
