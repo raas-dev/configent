@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.45.2](https://github.com/raas-dev/configent/compare/1.45.1...1.45.2) (2023-07-04)
+
+
+### Fixes
+
+* **lessfilter:** Fix more suitable dark theme ([a7c2e49](https://github.com/raas-dev/configent/commit/a7c2e492bd29c0a87ad96c04065e63453bea9937))
+
 ### [1.45.1](https://github.com/raas-dev/configent/compare/1.45.0...1.45.1) (2023-07-04)
 
 
