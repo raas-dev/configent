@@ -14,10 +14,13 @@ has_cmd() {
 
 mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
+extension=${1##*.}
 
 if has_cmd lsd && [ -d "$1" ]; then
   # output compact listing for fzf-preview
   lsd -A --group-dirs first --oneline --color=always "$1"
+elif has_cmd glow && [ "$extension" = md ]; then
+  glow --width 100 --style dark "$1"
 elif has_cmd bat && [ "$category" = text ]; then
   # colorize all text files (like Dockerfile), which lesspipe.sh does not match
   bat --color=always --paging=never "$1"
