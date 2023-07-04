@@ -147,8 +147,8 @@ If you prefer `bash` instead, brew the latest Bash and set it as default:
 Both container runtimes in a nutshell:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
-- containerd is the de facto runtime in production Kubernetes - thus prefer it
-- regardless of the runtime, running containers with `sudo` is a bad idea
+- containerd is the industry-standard runtime in Kubernetes deployments
+- regardless of the runtime, containers must not be run with `sudo`
 
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
