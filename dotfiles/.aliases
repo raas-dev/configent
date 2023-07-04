@@ -162,7 +162,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='sgpt_describe'
+alias _='sgpt_shell'
 
 ### watch ######################################################################
 
@@ -268,12 +268,8 @@ sgpt_code() {
   sgpt --temperature 0 --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" --code "$*"
 }
 
-sgpt_describe() {
-  sgpt --temperature 0 --describe-shell "$*"
-}
-
-sgpt_execute() {
-  sgpt --temperature 0 --shell "$*"
+sgpt_shell() {
+  sgpt --temperature 0 --chat "$(date +"%Y-%m-%d"):shell$TMUX_PANE" --shell "$*"
 }
 
 # Generic docker build and run
