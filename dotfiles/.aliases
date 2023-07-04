@@ -313,11 +313,11 @@ e() {
         *.zip) unzip "$1" ;;
         *.Z) uncompress "$1" ;;
         *.7z) 7z x "$1" ;;
-        *) echo "don't know how to extract '$1'..." ;;
+        *) echo "[e] Couldn't open archive '$1'" ;;
       esac
     fi
   else
-    echo "'$1' is not a valid file!"
+    echo "[e] Couldn't read file '$1'"
   fi
 }
 
