@@ -190,5 +190,6 @@
     "todohighlight.keywords": [
         "AP:"
     ],
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "gitlens.graph.minimap.enabled": false
   }
