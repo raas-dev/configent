@@ -240,7 +240,7 @@ alias netdata='nerdctl run -d --name=netdata \
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
 
-# Public IP
+# Display public IP
 alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
 alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
 
@@ -250,7 +250,7 @@ alias path='printf "${PATH//:/\\n}\n"'
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Get the week number
+# Display week number
 alias week='date +%V'
 
 ### Utilities ##################################################################
@@ -389,29 +389,29 @@ pyclean() {
 
 ### Latest version of Python command-line tools ################################
 
-# cross-platform monitoring
+# cross-platform real-time monitoring
 alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'
-
-# Simplenote CLI
-alias sncli='pipx run sncli'
 
 # general media downloader
 alias you-get='pipx run you-get'
 
-# multitool for tabular data
-alias vd='pipx run --pip-args openpyxl visidata'
+# simplenote in terminal
+alias sncli='pipx run sncli'
 
-# Jupyter notebooks in the terminal
+# jupyter notebooks in terminal
 alias euporie='pipx run euporie'
 
-# openai
-alias openai='pipx run openai'
+# multitool for tabular data in terminal
+alias vd='pipx run --pip-args openpyxl visidata'
+
+# playwright
+alias playwright='pipx run playwright'
 
 # huggingface-cli
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 
-# playwright
-alias playwright='pipx run playwright'
+# openai
+alias openai='pipx run openai'
 
 # aider
 alias aider='pipx run aider-chat'
