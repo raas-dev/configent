@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # lesspipe.sh, a preprocessor for less
-lesspipe_version=2.07
+lesspipe_version=2.08
 # Author: Wolfgang Friebel (wp.friebel AT gmail.com)
 #( [[ -n 1 && -n 2 ]] ) > /dev/null 2>&1 || exec zsh -y --ksh-arrays -- "$0" ${1+"$@"}
 
@@ -214,7 +214,8 @@ msg() {
 
 separatorline() {
   declare a="==================================="
-  word=$1 || "Contents"
+  word="Contents"
+  [[ -n $1 ]] && word=$1
   echo "$a $word $a"
 }
 
@@ -461,16 +462,15 @@ analyze_args() {
   # return if we want to watch growing files
   [[ $lessarg == *less\ *\ +F\ * || $lessarg == *less\ *\ : ]] && exit 0
   # color is set when calling less with -r or -R or LESS contains that option
-  has_r=$(echo "l $LESS $lessarg" | tr '[:upper:]' '[:lower:]')
-  has_r=${has_r/[a-z]-/}
-  has_r=${has_r/--raw-control-chars/ -r}
-
-  has_r=${has_r//[a-qs-z]/}
+  COLOR="--color=auto"
   has_cmd tput && colors=$(tput colors) || colors=0
-  if [[ $colors -ge 8 && $has_r == *\ -r* ]]; then
-    COLOR="--color=always"
-  else
-    COLOR="--color=auto"
+  if [[ $colors -ge 8 ]]; then
+    # shellcheck disable=SC2206
+    r_string=($LESS $lessarg)
+    for i in "${r_string[@]}"; do
+      [[ $i = -*[rR] ]] && COLOR="--color=always"
+      [[ $i = --raw-control-chars ]] && COLOR="--color=always"
+    done
   fi
   # last argument starting with colon or equal sign is used for piping into less
   [[ $lessarg == *\ [:=]* ]] && fext=${lessarg#*[:=]}
@@ -728,7 +728,11 @@ isarchive() {
     case $prog in
     tar | bsdtar)
       [[ "$2" =~ ^[a-z_-]*:.* ]] && echo "$2: remote operation tar host:file not allowed" && return
-      $prog Oxf "$2" "$3" 2>/dev/null
+      if [[ "$3" =~ --* ]]; then
+        $prog Oxf "$2" "--" "$3" 2>/dev/null
+      else
+        $prog Oxf "$2" "$3" 2>/dev/null
+      fi
       ;;
     rar | unrar)
       istemp "$prog p -inul" "$2" "$3"
