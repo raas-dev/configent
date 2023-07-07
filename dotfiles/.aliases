@@ -427,9 +427,6 @@ alias gpt-engineer='pipx run gpt-engineer'
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
-# Command-line JSON processing tool
-alias fx='npx -y fx'
-
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
