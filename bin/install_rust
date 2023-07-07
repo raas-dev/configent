@@ -23,6 +23,9 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
 # https://github.com/ekzhang/bore
 cargo install bore-cli
 
+# https://github.com/tbillington/kondo
+cargo install kondo
+
 # https://github.com/sharkdp/pastel
 cargo install pastel
 
