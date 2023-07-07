@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.46.0](https://github.com/raas-dev/configent/compare/1.45.2...1.46.0) (2023-07-07)
+
+
+### Features
+
+* **rust:** Add kondo for delete temp build dirs ([7e23b77](https://github.com/raas-dev/configent/commit/7e23b77892f04167309c4144be1d2ec6a5255a8a))
+
+
+### Documentation
+
+* **README:** Container runtimes ([fca05d5](https://github.com/raas-dev/configent/commit/fca05d53c7a3fa44797afb99bab6ac62de11efa0))
+
+
+### Fixes
+
+* **aliases:** Add wttr ([4f5df04](https://github.com/raas-dev/configent/commit/4f5df0412363ff8854e5378f3f95ef7ba69f1604))
+* **aliases:** Remove pyclean() over kondo ([6e11921](https://github.com/raas-dev/configent/commit/6e119218d8a8898487c6914d09f4adf4ef37fe57))
+* **aliases:** Remove unused fx ([4f7113b](https://github.com/raas-dev/configent/commit/4f7113b28f5aba80f56c27e11758cf450e2fdeed))
+* **aliases:** Use gpt4 in sgpt ([aead31b](https://github.com/raas-dev/configent/commit/aead31b978f7e7fd44aba18eb446b3e5644160b2))
+* **git:** Enable git rerere globally ([acf117f](https://github.com/raas-dev/configent/commit/acf117fa4865f67a2297b023c3a2cf3747d8d941))
+* **git:** Rebase defaults ([e1bef4d](https://github.com/raas-dev/configent/commit/e1bef4d02ebf04b78edf1486e5558011694f9c66))
+* **go:** Remove reflex ([47a9c83](https://github.com/raas-dev/configent/commit/47a9c8321b240df41467744c62cae70adad3fee2))
+* **lesspipe:** Update lesspipe to 2.08 ([c9ebf5c](https://github.com/raas-dev/configent/commit/c9ebf5c5e70ecacfb3bb84b5ca9a32a579323bf3))
+* **rust:** Add watchexec ([ae43e70](https://github.com/raas-dev/configent/commit/ae43e70c46e160bfd1c61ef0d3339a38deb84133))
+* **vscode:** Use gpt4 in chatgpt extension ([a842545](https://github.com/raas-dev/configent/commit/a8425453a98301fc6fb71446bb9b302956536a90))
+
 ### [1.45.2](https://github.com/raas-dev/configent/compare/1.45.1...1.45.2) (2023-07-04)
 
 
