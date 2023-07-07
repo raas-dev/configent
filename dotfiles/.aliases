@@ -385,11 +385,6 @@ pipclear() {
   pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
-# Recursively remove __pycache__ directories
-pyclean() {
-  find . -type d -name "__pycache__" -exec rm -r {} +
-}
-
 ### Latest version of Python command-line tools ################################
 
 # cross-platform real-time monitoring
