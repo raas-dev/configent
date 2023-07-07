@@ -26,6 +26,9 @@ cargo install bore-cli
 # https://github.com/sharkdp/pastel
 cargo install pastel
 
+# https://github.com/watchexec/watchexec
+cargo install --locked watchexec-cli
+
 # Rust utitilities installed by `install_utils` if brew is available for OS
 if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
   cargo install --locked bat
