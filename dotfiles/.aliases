@@ -253,6 +253,9 @@ alias sudo='sudo '
 # Display week number
 alias week='date +%V'
 
+# Weather (https://wttr.in/:help)
+alias wttr='curl "wttr.in?format=v2&MF"'
+
 ### Utilities ##################################################################
 
 # OpenAI helpers
