@@ -107,7 +107,7 @@
   diffFilter = delta --color-only --features=configent
 
 [rerere]
-	enabled = true
+  enabled = true
 
 ### git-delta ##################################################################
 
@@ -160,9 +160,6 @@
 [apply]
   whitespace = warn
 
-#[commit]
-#  gpgSign = true
-
 [diff]
   renames = copies
   colorMoved = default
@@ -190,6 +187,11 @@
 [push]
   default = current
 
+[rebase]
+  autoStash = true
+  autosquash = true
+  updateRefs = true
+
 ### URL shortcuts ##############################################################
 
 [url "git@github.com:"]
@@ -211,7 +213,7 @@
 ### git-lfs ####################################################################
 
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
