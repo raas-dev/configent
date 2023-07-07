@@ -106,6 +106,9 @@
 [interactive]
   diffFilter = delta --color-only --features=configent
 
+[rerere]
+	enabled = true
+
 ### git-delta ##################################################################
 
 [delta]
