@@ -40,9 +40,6 @@ go install golang.org/x/tools/gopls@latest
 # https://github.com/itchyny/gojq
 go install github.com/itchyny/gojq/cmd/gojq@latest
 
-# https://github.com/cespare/reflex
-go install github.com/cespare/reflex@latest
-
 # https://github.com/mvdan/sh#shfmt
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
