@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.47.1](https://github.com/raas-dev/configent/compare/1.47.0...1.47.1) (2023-07-08)
+
+
+### Fixes
+
+* **rust:** Prefer cargo install binaries ([ed0cfec](https://github.com/raas-dev/configent/commit/ed0cfec11951606a32f9de60736ddbe4b9b99cb8))
+
 ## [1.47.0](https://github.com/raas-dev/configent/compare/1.46.0...1.47.0) (2023-07-08)
 
 
