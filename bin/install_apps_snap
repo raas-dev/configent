@@ -44,3 +44,6 @@ $SUDO snap install brave
 
 # powershell
 $SUDO snap install powershell --classic
+
+# Spotify
+#$SUDO snap install spotify
