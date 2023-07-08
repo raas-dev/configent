@@ -5,8 +5,8 @@
 
 No startup pitches, I am a DevOps principled development machine bootstrapper.
 
-- 95% consistent user experience both on macOS and the most used Linux distros
 - 100% automated: Scripts over options or menus, comment out unwanted parts
+- 95% consistent user experience both on macOS and the most used Linux distros
 - There is actually one, and only one, way to do it right - the most efficient
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The secure open source web browser, VSCode and a killer terminal. That's it.
