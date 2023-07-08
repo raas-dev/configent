@@ -3,7 +3,7 @@
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
 
-No startup pitches, I am a principled config manager and machine bootstrapper.
+No startup pitches, I am a DevOps principled development machine bootstrapper.
 
 - 95% consistent user experience both on macOS and the most used Linux distros
 - 100% automated: Scripts over options or menus, comment out unwanted parts
