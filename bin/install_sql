@@ -30,4 +30,3 @@ fi
 ### sql ########################################################################
 
 brew install xo/xo/usql
-brew install tako8ki/tap/gobang
