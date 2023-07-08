@@ -30,10 +30,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     -kill -r -domain local -domain system -domain user &&
     killall Finder'
 
-  # Mute or unmute sounds
-  alias mute='osascript -e "set volume output muted true"'
-  alias blast='osascript -e "set volume output muted false"'
-
   # Fix broken icons in Dock
   alias reseticons="sudo /usr/bin/find /private/var/folders/ \
     -name com.apple.dock.iconcache -exec rm {} \; ;
