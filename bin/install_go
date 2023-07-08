@@ -31,9 +31,6 @@ go install github.com/muesli/duf@latest
 # https://github.com/charmbracelet/glow
 go install github.com/charmbracelet/glow@latest
 
-# https://github.com/appleboy/CodeGPT
-go install github.com/appleboy/CodeGPT@latest
-
 # https://pkg.go.dev/golang.org/x/tools/gopls
 go install golang.org/x/tools/gopls@latest
 
