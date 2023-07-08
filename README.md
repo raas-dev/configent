@@ -20,7 +20,7 @@ Features:
 - macOS `docker` experience exactly as it was with Docker Desktop, but it's free
 - Multiplexed terminals with helpers/utilities written in Rust and Go for speed
 - One character shell aliases - the fastest are the commands one does not type
-- Use GPT in shell and in IDE to describe commands, generate and complete code
+- Use GPT in terminal and in IDE to create commands, apps and complete code
 
 Works on:
 
