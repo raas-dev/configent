@@ -108,10 +108,10 @@ Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
 2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [Snap](https://snapcraft.io/) (Linux distros) and snaps
-3. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-4. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
-5. Go, Node.js, Python and Rust version managers and the language versions
-6. Zsh, tmux, command-line utilities, cloud and infrastructure-as-code tools
+3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
+4. Rust, Go, Node.js and Python version managers, language runtimes and packages
+5. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
+6. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred, but if this is not possible (no `sudo`), it is installed user's home.

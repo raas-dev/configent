@@ -18,10 +18,28 @@ curl -fsSL "https://sh.rustup.rs" | sh -s -- -y --no-modify-path
   rustup install stable &&
   rustup default stable
 
-### packages ###################################################################
+### cargo binstall #############################################################
 
-# cargo binstall (https://github.com/cargo-bins/cargo-binstall)
+# https://github.com/cargo-bins/cargo-binstall
 cargo install cargo-binstall
+
+### dotfiles requirements ######################################################
+
+cargo binstall -y --locked bat
+cargo binstall -y diskonaut
+cargo binstall -y fd-find
+cargo binstall -y git-delta
+cargo binstall -y gitui
+cargo binstall -y kalker
+cargo binstall -y lsd
+cargo binstall -y procs
+cargo binstall -y ripgrep
+cargo binstall -y sd
+cargo binstall -y --locked starship
+cargo binstall -y xh
+cargo binstall -y --locked zoxide
+
+### extras #####################################################################
 
 # https://github.com/ekzhang/bore
 cargo binstall -y bore-cli
@@ -34,20 +52,3 @@ cargo binstall -y pastel
 
 # https://github.com/watchexec/watchexec
 cargo binstall -y --locked watchexec-cli
-
-# Rust utitilities installed by `install_utils` if brew is available for OS
-if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = 'aarch64' ]; then
-  cargo binstall -y --locked bat
-  cargo binstall -y diskonaut
-  cargo binstall -y fd-find
-  cargo binstall -y git-delta
-  cargo binstall -y gitui
-  cargo binstall -y kalker
-  cargo binstall -y lsd
-  cargo binstall -y procs
-  cargo binstall -y ripgrep
-  cargo binstall -y sd
-  cargo binstall -y --locked starship
-  cargo binstall -y xh
-  cargo binstall -y --locked zoxide
-fi

@@ -39,28 +39,28 @@ else
   exit 1
 fi
 
+# brew
+if [ -z "$NO_FORMULAE" ]; then
+  "$bin_path/install_zsh"
+  "$bin_path/install_tmux"
+  "$bin_path/install_utils"
+  "$bin_path/install_iac"
+else
+  printf "NO_FORMULAE was specified, won't install formula.\n"
+fi
+
 # install language version managers and versions
-#"$bin_path/install_haskell"
+"$bin_path/install_rust"
 "$bin_path/install_go"
-#"$bin_path/install_java"
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
 "$bin_path/install_ruby" # depending on distro, ruby has to available for brew
-"$bin_path/install_rust"
 #"$bin_path/install_sql"
+#"$bin_path/install_java"
+#"$bin_path/install_haskell"
 
 # copy fonts to user's fonts path
 "$bin_path/install_fonts"
 
 # install vim bundles even if NO_FORMULAE to install nvim
 "$bin_path/install_neovim"
-
-# brew
-if [ -z "$NO_FORMULAE" ]; then
-  "$bin_path/install_utils"
-  "$bin_path/install_tmux"
-  "$bin_path/install_iac"
-  "$bin_path/install_zsh"
-else
-  printf "NO_FORMULAE was specified, won't install formula.\n"
-fi

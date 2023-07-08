@@ -29,31 +29,21 @@ fi
 
 ### Homebrew core ##############################################################
 
-brew install bat             # rust
-brew install diskonaut       # rust
-brew install fd              # rust
-brew install git-delta       # rust
 brew install git-lfs         # go
-brew install gitui           # rust
-brew install kalker          # rust
-brew install lsd             # rust
-brew install procs           # rust
-brew install ripgrep         # rust
-brew install sd              # rust
-brew install starship        # rust
 brew install translate-shell # awk
 brew install unar            # c
 brew install universal-ctags # c
-brew install xh              # rust
-brew install zoxide          # rust
 
 ### macOS only brews ###########################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  # Required by pyenv on macOS (install_python)
+  brew install xz
+
   # Cross-platform make is often required by packages with non-native deps
   brew install cmake
 
-  # Newer git than by Xcode Command Line Tools
+  # More recent git than in Xcode Command Line Tools
   brew install git
 
   # The logfile navigator (https://github.com/tstack/lnav)
