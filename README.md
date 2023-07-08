@@ -153,7 +153,7 @@ Both container runtimes in a nutshell:
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
 - `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
-- `docker-compose`: Installs and runs docker-compose as a docker cli plugin
+- `docker-compose`: Runs classic docker-compose as a docker cli plugin
 - `nerdctl`: Runs nerdctl (also `nerdctl compose`) in user context containerd
 
 The shims are available in non-interactive sessions, while `~/.aliases` is
@@ -196,14 +196,14 @@ for testing script changes without first committing and pushing to your fork.
 
 ### Contributing
 
-Please create an [issue](https://github.com/raas-dev/configent/issues) and
-a pull request.
-
 Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
 
     pip3 install --user --upgrade pre-commit
     pre-commit install --hook-type pre-commit
     pre-commit install --hook-type commit-msg
+
+Please create an [issue](https://github.com/raas-dev/configent/issues) and
+a pull request.
 
 ### Issues in dependencies
 
