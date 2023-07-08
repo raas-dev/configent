@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.48.0](https://github.com/raas-dev/configent/compare/1.47.1...1.48.0) (2023-07-08)
+
+
+### Features
+
+* **apps:** Install cask spotify on macOS ([6cd2455](https://github.com/raas-dev/configent/commit/6cd24558bce474b362e604ed3d5e69fd4798dd90))
+* **macos:** Install casks nordvpn and ukelele ([adfee54](https://github.com/raas-dev/configent/commit/adfee5414ea15ed18faf3b2bf53c169c867759da))
+* **rust:** Move terminal utils from brew to rust ([3be55a1](https://github.com/raas-dev/configent/commit/3be55a11c42730b6d753ebb22e7751f9a99934d9))
+
+
+### Documentation
+
+* **README:** Fix install order ([07f96a4](https://github.com/raas-dev/configent/commit/07f96a4112e23e77c0b97264c5b0739fe1dcecf1))
+* **README:** Fix language versions ([5e66744](https://github.com/raas-dev/configent/commit/5e66744ebb79c28d4928a5b48a4f36b2daaf62ea))
+
+
+### Fixes
+
+* **snap:** Add optional Spotify ([882c08e](https://github.com/raas-dev/configent/commit/882c08e64a8372459681d82a0eb906318d854905))
+
 ### [1.47.1](https://github.com/raas-dev/configent/compare/1.47.0...1.47.1) (2023-07-08)
 
 
