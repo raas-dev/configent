@@ -109,7 +109,7 @@ Order of installation:
 2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
 [Snap](https://snapcraft.io/) (Linux distros) and snaps
 3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
-4. Rust, Go, Node.js and Python version managers, language runtimes and packages
+4. Rust, Go, Node.js and Python version managers, language versions and packages
 5. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
 6. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
