@@ -37,7 +37,9 @@ brew install --cask --no-quarantine brave-browser
 #brew install --cask --no-quarantine google-cloud-sdk
 #brew install --cask --no-quarantine iina
 #brew install --cask --no-quarantine libreoffice
+brew install --cask --no-quarantine nordvpn
 brew install --cask --no-quarantine powershell
+#brew install --cask --no-quarantine spotify
 #brew install --cask --no-quarantine tunnelblick
 #brew install --cask --no-quarantine utm
 brew install --cask --no-quarantine visual-studio-code
@@ -46,7 +48,7 @@ brew install --cask --no-quarantine visual-studio-code
 #brew install --cask --no-quarantine homebrew/cask-drivers/corsair-icue
 
 # Keyboard remapper (see ui/os_x/ukelele for layouts)
-#brew install --cask --no-quarantine ukelele
+brew install --cask --no-quarantine ukelele
 
 # Finder quick look plugins (https://github.com/sindresorhus/quick-look-plugins)
 #brew install --cask --no-quarantine qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
