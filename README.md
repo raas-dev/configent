@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled development machine bootstrapper.
 - 100% automated: Scripts over options or menus, comment out unwanted parts
 - There is actually one, and only one, way to do things - the most efficient
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
-- The fastest open source web browser, VSCode and a killer terminal. That's it.
+- The secure open source web browser, VSCode and a killer terminal. That's it.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
