@@ -244,7 +244,7 @@ alias sudo='sudo '
 alias week='date +%V'
 
 # Weather (https://wttr.in/:help)
-alias wttr='curl "wttr.in?format=v2&MF"'
+alias wttr='curl "https://wttr.in?format=v2&MF"'
 
 ### Utilities ##################################################################
 
