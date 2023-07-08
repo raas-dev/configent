@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.47.0](https://github.com/raas-dev/configent/compare/1.46.0...1.47.0) (2023-07-08)
+
+
+### Features
+
+* **go:** Add sttr ([2e32912](https://github.com/raas-dev/configent/commit/2e32912ff8f5985eb64e5e42e04ede08910c3a4a))
+
+
+### Fixes
+
+* **aliases:** Remove md5sum and sha1sum over coreutils ([bd6124c](https://github.com/raas-dev/configent/commit/bd6124c34c6c3f43762b33aa246b235e71a31d12))
+* **aliases:** Remove mute and unmute on macOS ([ce6de6f](https://github.com/raas-dev/configent/commit/ce6de6fc14eced577f6c6f83989844b06fb8c112))
+* **aliases:** Remove oryx, does not have aarch64 ([b4607cc](https://github.com/raas-dev/configent/commit/b4607cc56ff88d3ed39a1380c42d736ac3586b02))
+* **aliases:** Use https for wttr ([497e9d8](https://github.com/raas-dev/configent/commit/497e9d8044d036e6fa94060fff59604e1ec81b98))
+* **db:** Remove unused gobang ([aadae3d](https://github.com/raas-dev/configent/commit/aadae3d756ad15e438435c0277070447d5b22aa7))
+* **go:** Remove unused CodeGPT ([620968c](https://github.com/raas-dev/configent/commit/620968c78d456ef6116babf25e200a7ba2170fc2))
+
 ## [1.46.0](https://github.com/raas-dev/configent/compare/1.45.2...1.46.0) (2023-07-07)
 
 
