@@ -27,7 +27,8 @@
     },
     {
       "type": "docs",
-      "section": "Documentation"
+      "section": "Documentation",
+      "hidden": true
     },
     {
       "type": "perf",
