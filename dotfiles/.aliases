@@ -197,13 +197,6 @@ alias dufs='docker run --init -it \
   sigoden/dufs \
   /data -p 80'
 
-# https://github.com/microsoft/Oryx
-alias oryx='docker run --init -it \
-    --cap-drop ALL \
-    --volume $(pwd):/repo \
-    mcr.microsoft.com/oryx/build \
-    oryx build /repo --output /repo'
-
 ### nerdctl ####################################################################
 
 alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
