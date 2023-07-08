@@ -40,6 +40,9 @@ go install github.com/itchyny/gojq/cmd/gojq@latest
 # https://github.com/mvdan/sh#shfmt
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
+# https://github.com/abhimanyu003/sttr
+go install github.com/abhimanyu003/sttr@latest
+
 # https://github.com/sachaos/viddy
 go install github.com/sachaos/viddy@latest
 
