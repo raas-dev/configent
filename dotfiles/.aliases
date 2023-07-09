@@ -106,6 +106,9 @@ else
   alias open='xdg-open'
 fi
 
+# Experimental "upgrade all the things" regardless of OS
+alias tup='topgrade --yes --no-retry --cleanup --disable containers'
+
 ### More sensible defaults #####################################################
 
 alias code='code --reuse-window --add'
