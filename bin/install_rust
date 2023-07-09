@@ -52,3 +52,8 @@ cargo binstall -y pastel
 
 # https://github.com/watchexec/watchexec
 cargo binstall -y --locked watchexec-cli
+
+### cargo install-update #######################################################
+
+# https://github.com/nabijaczleweli/cargo-update
+cargo binstall -y cargo-update
