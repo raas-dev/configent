@@ -25,6 +25,9 @@ PATH="$GOPATH/bin:$PATH"
 
 ### packages ###################################################################
 
+# https://github.com/mholt/archiver/tree/v3.5.1
+go install github.com/mholt/archiver/v3/cmd/arc@latest
+
 # https://github.com/muesli/duf
 go install github.com/muesli/duf@latest
 
