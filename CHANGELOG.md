@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.49.0](https://github.com/raas-dev/configent/compare/1.48.0...1.49.0) (2023-07-09)
+
+
+### Features
+
+* **aliases:** Add fq via nixery ([827b7d2](https://github.com/raas-dev/configent/commit/827b7d2d481dc3534dbaf6d026639116513bdaaf))
+* **aliases:** Add grex via nixery ([4d10428](https://github.com/raas-dev/configent/commit/4d10428097796234227700adf051445bc18f449d))
+* **aliases:** Add hexyl via nixery ([2cf3fbc](https://github.com/raas-dev/configent/commit/2cf3fbc91deea215718043430d344eb18cf7c8aa))
+* **aliases:** Add tokei via nixery ([0dda418](https://github.com/raas-dev/configent/commit/0dda418992b27ce017fccd997d0bd19ae0871e7f))
+* **aliases:** Improve e() and remove using unar ([8e53b0c](https://github.com/raas-dev/configent/commit/8e53b0ced578760608a68f6c5ae57fa8580bc047))
+* **aliases:** Use pwd as volume for nixery ([280f4cf](https://github.com/raas-dev/configent/commit/280f4cfc805c275bcb0ff676bb4642b8e5d9508a))
+* **go:** Add arc v3 ([fe03054](https://github.com/raas-dev/configent/commit/fe0305498b11a26a9f7d2497e4c68515d6f5d8a5))
+* **rust:** Add cargo install-update ([45b9d3c](https://github.com/raas-dev/configent/commit/45b9d3c495b30678e83257cc94350fd3ec31ea45))
+
+
+### Fixes
+
+* **utils:** Remove unar ([93962ae](https://github.com/raas-dev/configent/commit/93962aed65deac47ac16ad9997e8b5b0e8761af7))
+
 ## [1.48.0](https://github.com/raas-dev/configent/compare/1.47.1...1.48.0) (2023-07-08)
 
 
