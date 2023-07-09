@@ -50,13 +50,16 @@ cargo binstall -y kondo
 # https://github.com/sharkdp/pastel
 cargo binstall -y pastel
 
-# https://github.com/topgrade-rs/topgrade
-cargo binstall -y topgrade
-
 # https://github.com/watchexec/watchexec
 cargo binstall -y --locked watchexec-cli
 
-### cargo install-update #######################################################
+### topgrade ###################################################################
+
+# https://github.com/topgrade-rs/topgrade
+cargo binstall -y topgrade
 
 # https://github.com/nabijaczleweli/cargo-update
 cargo binstall -y cargo-update
+
+# https://github.com/matthiaskrgr/cargo-cache
+cargo binstall -y cargo-cache
