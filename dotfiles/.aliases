@@ -487,10 +487,9 @@ nixery() {
     image="nixery.dev/shell/$pkgs"
   fi
   name="${pkgs//\//-}"
-  mkdir -p "/tmp/lima/$name"
   docker run --init -it --rm --name "$name" \
-    --volume="/tmp/lima/$name:/tmp/lima/$name" \
-    --workdir="/tmp/lima/$name" \
+    --volume="$PWD:$PWD" \
+    --workdir="$PWD" \
     "$image" $args
 }
 
