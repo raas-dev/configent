@@ -43,6 +43,9 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 # https://github.com/abhimanyu003/sttr
 go install github.com/abhimanyu003/sttr@latest
 
+# https://github.com/shihanng/tfvar
+go install github.com/shihanng/tfvar@latest
+
 # https://github.com/sachaos/viddy
 go install github.com/sachaos/viddy@latest
 
@@ -50,9 +53,6 @@ go install github.com/sachaos/viddy@latest
 #go install go.k6.io/xk6/cmd/xk6@latest && xk6 build \
 #  --with github.com/grafana/xk6-browser \
 #  --output "$GOPATH/bin/xk6-browser"
-
-# https://github.com/shihanng/tfvar
-go install github.com/shihanng/tfvar@latest
 
 ### fzf ########################################################################
 
