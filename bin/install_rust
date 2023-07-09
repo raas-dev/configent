@@ -50,6 +50,9 @@ cargo binstall -y kondo
 # https://github.com/sharkdp/pastel
 cargo binstall -y pastel
 
+# https://github.com/topgrade-rs/topgrade
+cargo binstall -y topgrade
+
 # https://github.com/watchexec/watchexec
 cargo binstall -y --locked watchexec-cli
 
