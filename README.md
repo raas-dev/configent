@@ -210,7 +210,7 @@ a pull request.
 - Homebrew on Linux on AArch64: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
-    - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros (2022-07)
+    - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros
 - Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
     - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
 - Arch Linux on AArch64
@@ -218,4 +218,5 @@ a pull request.
     - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
 - Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) `/bin/bash` to `/bin/ash` on boot
     - Thus Installing bash and setting it as the user's login shell does not work expectedly
+    - Use `bash` manually to enter bash after login and have dotfiles effective
 - Homebrew on Alpine Linux: Issues in formulae due to Alpine Linux not using glibc
