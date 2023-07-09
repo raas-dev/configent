@@ -1,10 +1,10 @@
 images:
-- location: "https://dl.rockylinux.org/pub/rocky/9.1/images/x86_64/Rocky-9-GenericCloud-Base-9.1-20221130.0.x86_64.qcow2"
+- location: "https://dl.rockylinux.org/pub/rocky/9.2/images/x86_64/Rocky-9-GenericCloud-Base-9.2-20230513.0.x86_64.qcow2"
   arch: "x86_64"
-  digest: "sha256:4405926b4c84edf4a25a51d5ed36bffada04e5e143045c41c974a9a9d35937f1"
-- location: "https://dl.rockylinux.org/pub/rocky/9.1/images/aarch64/Rocky-9-GenericCloud-Base-9.1-20221130.0.aarch64.qcow2"
+  digest: "sha256:50510f98abe1b20a548102a05a9be83153b0bf634fc502d5c8d1f508f6de1430"
+- location: "http://dl.rockylinux.org/pub/rocky/9.2/images/aarch64/Rocky-9-GenericCloud-Base-9.2-20230513.0.aarch64.qcow2"
   arch: "aarch64"
-  digest: "sha256:8e680f226adeaf9f09cfc7fc9b7839db3ca0f40c4a2e7838de605571d1b33fbb"
+  digest: "sha256:eb7752c0be359007ad470e43b0d8c921e31d3ad7d4bcec9b6a2b18a8d17c05d8"
 
 mounts:
   - location: "~"

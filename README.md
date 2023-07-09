@@ -26,14 +26,14 @@ Works on:
 
 - macOS Ventura (13), Monterey (12) and Big Sur (11) on Intel and ARM Macs
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish)
-- Debian Linux 11 (bullseye)
-- Fedora Linux 37 and 36
-- Rocky Linux 9.1 and 8.7
+- Debian Linux 12 (bookworm) and 11 (bullseye)
+- Fedora Linux 38, 37 and 36
+- Rocky Linux 9 and 8
 - CentOS Stream 9 and 8
-- AlmaLinux 9.1 and 8.7
-- Oracle Linux 9.1 and 8.7
+- AlmaLinux 9 and 8
+- Oracle Linux 9 and 8
 - Arch Linux (rolling; since 2022-07)
-- Alpine Linux 3.17, 3.16 and 3.15
+- Alpine Linux 3.18, 3.17 and 3.16
 
 Minimum requirements are 4GB RAM and 10GB disk, or a 2016 MacBook Pro,
 both on which it is <30 minutes.
