@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.50.0](https://github.com/raas-dev/configent/compare/1.49.0...1.50.0) (2023-07-09)
+
+
+### Features
+
+* **lima:** Update Linux distros images ([9eba701](https://github.com/raas-dev/configent/commit/9eba701ef4b9885ece92d6450b5fb93644a6d295))
+* **rust:** Add topgrade ([a0f6ed3](https://github.com/raas-dev/configent/commit/a0f6ed3a67fc897b0ae2290d47034c66535f888f))
+
+
+### Fixes
+
+* **aliases:** Add 'tup' for experimental upgrade all ([03f581c](https://github.com/raas-dev/configent/commit/03f581c2ff4e439f939ffd6479b874c63cc136ae))
+* **rust:** Add cargo-cache for cleanup ([f977da5](https://github.com/raas-dev/configent/commit/f977da5b01406464fc3e18a3e5d269bbda31b91e))
+* **yum:** Install locales for en_US.UTF-8 ([d4a55fe](https://github.com/raas-dev/configent/commit/d4a55febe83e17a91af592ca3b3f12e2c7cff607))
+
 ## [1.49.0](https://github.com/raas-dev/configent/compare/1.48.0...1.49.0) (2023-07-09)
 
 
