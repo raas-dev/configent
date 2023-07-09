@@ -59,6 +59,9 @@ $SUDO yum install -y bash
 # The logfile navigator
 $SUDO yum install -y lnav
 
+# Locales
+$SUDO yum install -y langpacks-en
+
 # pbcopy/pbpaste like experience
 #$SUDO yum install -y xsel
 
