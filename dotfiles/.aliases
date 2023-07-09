@@ -3,25 +3,14 @@
 
 # shellcheck disable=SC2086  # not quoting args passed to docker run
 
+### Upgrade for all package managers ###########################################
+
+alias up='topgrade --yes --no-retry --cleanup --disable system containers'
+alias dup='topgrade --yes --no-retry --cleanup --disable containers'
+
 ### OS specific ################################################################
 
-# Upgrade brew formulas, antidote and tmux plugins
-alias br='command -v brew >/dev/null &&
-  (brew update && brew upgrade ; brew autoremove) ;
-  command -v antidote >/dev/null && antidote update ;
-  [ -x "$HOME/.tmux/plugins/tpm/bin/update_plugins" ] &&
-  $HOME/.tmux/plugins/tpm/bin/update_plugins all'
-
 if [ "$(uname -s)" = 'Darwin' ]; then
-  # Brew cask upgrade
-  alias brc='brew cu --all --yes --no-quarantine --cleanup'
-
-  # Install macOS application updates
-  alias up='br ; brc'
-
-  # Install macOS application and system updates
-  alias dup='br ; brc ; softwareupdate --install --all --agree-to-license'
-
   # Recursively delete .DS_Store files in the current path
   alias cleanupds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
 
@@ -68,36 +57,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       -a "$USER" -D "environment variable" -s "$name" -w "$secret"
   }
 else
-  if command -v apt >/dev/null; then
-    alias up='sudo apt update &&
-      sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean ;
-      br'
-    alias dup='sudo apt update &&
-      sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean ;
-      br'
-  elif command -v yum >/dev/null; then
-    alias up='sudo yum update -y --exclude=kernel* && sudo yum autoremove -y ;
-      br'
-    alias dup='sudo yum update -y && sudo yum autoremove -y ;
-      br'
-  elif command -v yay >/dev/null; then
-    alias up='yay --noconfirm -Suy &&
-      yay -Qdtq | yay --noconfirm -Rs - ;
-      br'
-    alias dup='up'
-  elif command -v pacman >/dev/null; then
-    alias up='sudo pacman --noconfirm -Suy &&
-      sudo pacman -Qdtq | sudo pacman --noconfirm -Rs - ;
-      br'
-    alias dup='up'
-  elif command -v apk >/dev/null; then
-    alias up='sudo apk update &&
-      sudo apk add --upgrade apk-tools &&
-      sudo apk upgrade ;
-      br'
-    alias dup='up'
-  fi
-
   # Similar to macOS `pbcopy` and `pbpaste`
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
@@ -105,9 +64,6 @@ else
   # Similar to macOS `open`
   alias open='xdg-open'
 fi
-
-# Experimental "upgrade all the things" regardless of OS
-alias tup='topgrade --yes --no-retry --cleanup --disable containers'
 
 ### More sensible defaults #####################################################
 
