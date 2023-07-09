@@ -33,7 +33,7 @@ Works on:
 - AlmaLinux 9 and 8
 - Oracle Linux 9 and 8
 - Arch Linux (rolling; since 2022-07)
-- Alpine Linux 3.18, 3.17 and 3.16
+- Alpine Linux 3.18, 3.17, 3.16 and 3.15
 
 Minimum requirements are 4GB RAM and 10GB disk, or a 2016 MacBook Pro,
 both on which it is <30 minutes.
