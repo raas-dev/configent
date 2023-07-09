@@ -31,7 +31,6 @@ fi
 
 brew install git-lfs         # go
 brew install translate-shell # awk
-brew install unar            # c
 brew install universal-ctags # c
 
 ### macOS only brews ###########################################################
