@@ -42,6 +42,7 @@ if command -v code >/dev/null; then
   code --force --install-extension bierner.markdown-yaml-preamble
   code --force --install-extension bradlc.vscode-tailwindcss
   code --force --install-extension CaptainJiNX.kickass-c64
+  code --force --install-extension charliermarsh.ruff
   code --force --install-extension chris-hayes.chatgpt-reborn
   code --force --install-extension Codeium.codeium
   code --force --install-extension dbaeumer.vscode-eslint
@@ -67,7 +68,6 @@ if command -v code >/dev/null; then
   code --force --install-extension ms-azuretools.vscode-bicep
   code --force --install-extension ms-azuretools.vscode-docker
   code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
-  code --force --install-extension ms-python.isort
   code --force --install-extension ms-python.python
   code --force --install-extension ms-python.vscode-pylance
   code --force --install-extension ms-toolsai.jupyter
