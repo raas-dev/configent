@@ -1,12 +1,16 @@
 #!/bin/bash
 # the above shebang is purely for ShellCheck, this file is not executable
 
-# shellcheck disable=SC2086  # not quoting args passed to docker run
+# shellcheck disable=SC2086  # not quoting args passed to docker and nixery
 
 ### Upgrade for all package managers ###########################################
 
-alias up='topgrade --yes --no-retry --cleanup --disable system containers'
-alias dup='topgrade --yes --no-retry --cleanup --disable containers'
+# shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
+skipped_managers="containers helm"
+alias up="topgrade --yes --no-retry --cleanup --skip-notify \
+ --disable system restarts $skipped_managers"
+alias dup="topgrade --yes --no-retry --cleanup --skip-notify \
+--disable $skipped_managers"
 
 ### OS specific ################################################################
 
