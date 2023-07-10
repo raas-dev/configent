@@ -34,15 +34,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Language support
 Plugin 'chrisbra/csv.vim'
 Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'elixir-lang/vim-elixir'
 Plugin 'elzr/vim-json'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'moll/vim-node'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
 
 " UI
 Plugin 'bling/vim-airline'
@@ -234,6 +227,7 @@ autocmd BufEnter * call SyncTree()
 " vim-nerdtree-tabs
 let g:nerdtree_tabs_autofind=1
 
+
 "--- Syntastic -----------------------------------------------------------------
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -244,15 +238,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-
-"--- vim-node ------------------------------------------------------------------
-" open new file in a vertical split instead of horizontal
-autocmd User Node
-  \ if &filetype == "javascript" |
-  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
-  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
-  \ endif
 
 
 "--- tagbar --------------------------------------------------------------------
