@@ -235,13 +235,13 @@ sgpt_chat() {
     "variables": null,
     "role": "You are a helpful assistant."
   }' > "$HOME/.config/shell_gpt/roles/assistant.json"
-  sgpt --no-cache --model gpt-4 --role assistant \
-    --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
+  sgpt --no-cache --role assistant \
+    --model gpt-4 --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
 }
 
 sgpt_code() {
   sgpt --no-cache --temperature 0 --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" \
-    --code "$*"
+    --model gpt-4 --code "$*"
 }
 
 sgpt_shell() {
