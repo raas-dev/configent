@@ -23,23 +23,14 @@ eval "$($HOME/.rbenv/bin/rbenv init -)"
 
 ### rubies #####################################################################
 
-if [ "$(uname -s)" = 'Linux' ] && [ -r /etc/alpine-release ]; then
-  ruby_version="2.6.10" # Required for Homebrew on Alpine Linux
+ruby_version="3.2.2"
+#ruby_version="3.1.4"
 
-  "$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"
-  "$HOME/.rbenv/bin/rbenv" rehash
-  "$HOME/.rbenv/bin/rbenv" shell "$ruby_version"
-  "$HOME/.rbenv/bin/rbenv" global "$ruby_version"
-else
-  ruby_version="3.2.2"
-  #ruby_version="3.1.4"
-
-  #"$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"
-  #"$HOME/.rbenv/bin/rbenv" rehash
-  #"$HOME/.rbenv/bin/rbenv" shell "$ruby_version"
-  #"$HOME/.rbenv/bin/rbenv" global "$ruby_version"
-fi
+"$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"
+"$HOME/.rbenv/bin/rbenv" rehash
+"$HOME/.rbenv/bin/rbenv" shell "$ruby_version"
+"$HOME/.rbenv/bin/rbenv" global "$ruby_version"
 
 ### gems #######################################################################
 
-#gem install bundler
+gem install bundler
