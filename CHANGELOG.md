@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.51.2](https://github.com/raas-dev/configent/compare/1.51.1...1.51.2) (2023-07-10)
+
+
+### Fixes
+
+* **vim:** Remove deprecated language plugins ([e202122](https://github.com/raas-dev/configent/commit/e20212291ef9dacc0ba808a2bc258b8de0213a99))
+* **vscode:** Export currently installed extensions ([76af97d](https://github.com/raas-dev/configent/commit/76af97d2eee82bdc0e2677d52c725d6f6991056a))
+* **vscode:** Remove extension for isort, add ruff ([798a546](https://github.com/raas-dev/configent/commit/798a546a6c6f6e1638b25dd60ec6aa43eac5e0ad))
+
 ### [1.51.1](https://github.com/raas-dev/configent/compare/1.51.0...1.51.1) (2023-07-10)
 
 
