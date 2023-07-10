@@ -15,7 +15,6 @@ repos:
   rev: v1.4.0
   hooks:
   - id: detect-secrets
-    exclude: dotfiles/.examplewithsecrets
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
