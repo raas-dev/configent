@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.51.0](https://github.com/raas-dev/configent/compare/1.50.0...1.51.0) (2023-07-10)
+
+
+### Features
+
+* **aliases:** Make up and dup use topgrade ([8a39a35](https://github.com/raas-dev/configent/commit/8a39a35cefce50ca37624cdc8e4aa5aee7175170))
+
+
+### Fixes
+
+* **aliases:** Topgrade disabled package managers ([79c9ecc](https://github.com/raas-dev/configent/commit/79c9ecc4146595da8081d667d84e85cd19974652))
+
 ## [1.50.0](https://github.com/raas-dev/configent/compare/1.49.0...1.50.0) (2023-07-09)
 
 
