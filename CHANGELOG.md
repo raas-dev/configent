@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.51.1](https://github.com/raas-dev/configent/compare/1.51.0...1.51.1) (2023-07-10)
+
+
+### Fixes
+
+* **aliases:** Add sgpt system role ([27fa203](https://github.com/raas-dev/configent/commit/27fa203946b1a9e89f6171e4c2e128a8d74e56ed))
+* **aliases:** Remove jetpack devbox ([80be8b9](https://github.com/raas-dev/configent/commit/80be8b963b12f0d7dfa5d2c34906b2aa8b9fd062))
+* **aliases:** Use gpt-4 for sgpt chat and code ([16be4d9](https://github.com/raas-dev/configent/commit/16be4d9eaadd43a0d6136e2af3e052a5ba20de4f))
+
 ## [1.51.0](https://github.com/raas-dev/configent/compare/1.50.0...1.51.0) (2023-07-10)
 
 
