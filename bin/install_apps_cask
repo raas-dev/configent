@@ -39,7 +39,7 @@ brew install --cask --no-quarantine brave-browser
 #brew install --cask --no-quarantine libreoffice
 brew install --cask --no-quarantine nordvpn
 brew install --cask --no-quarantine powershell
-brew install --cask --no-quarantine spotify
+#brew install --cask --no-quarantine spotify
 #brew install --cask --no-quarantine tunnelblick
 #brew install --cask --no-quarantine utm
 brew install --cask --no-quarantine visual-studio-code
