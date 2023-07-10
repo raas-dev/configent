@@ -202,7 +202,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Fixes
 
 * **aliases:** Remove unused jupytext ([716cc7d](https://github.com/raas-dev/configent/commit/716cc7d7fbaf088676517a39af65bd022c6069f6))
-* **vscode:** Fix context lenght ([c21504c](https://github.com/raas-dev/configent/commit/c21504cb3ed51203ea339410f734283db6f74129))
+* **vscode:** Fix context length ([c21504c](https://github.com/raas-dev/configent/commit/c21504cb3ed51203ea339410f734283db6f74129))
 * **vscode:** Increase token count for Genie ([d3c984b](https://github.com/raas-dev/configent/commit/d3c984b33e4d106c7734b1c7104b9bbc7aababc3))
 * **vscode:** Remove broken extensions ([5b3dda7](https://github.com/raas-dev/configent/commit/5b3dda764e302b39de5b33cfed1625d06390e50e))
 * **vscode:** Remove unused todohighlight keywords ([fa9f1c8](https://github.com/raas-dev/configent/commit/fa9f1c8996c2eb3794f728eef48aeb45fcdde421))
@@ -1358,7 +1358,7 @@ Full set of changes: [`1.6.0...1.6.1`](https://github.com/raas-dev/configent/com
 * (python): Downgrade to Python 3.9 due to broken packages
 * (vscode): Disable multiline paste warning
 * (aliases): Add naabu via nixery
-* (iac): Add hadolint for Dockerfile linting, remvoe dockle
+* (iac): Add hadolint for Dockerfile linting, remove dockle
 * (lima): Bootstrap on background
 #### Fixes
 
@@ -1400,7 +1400,7 @@ Full set of changes: [`1.4.0...1.5.0`](https://github.com/raas-dev/configent/com
 * (shells): Load bash-completion in profile
 * (profile): move zoxide from shell rcs to profile
 * (profile): move starship from shell rcs to profile
-* (vim): Do not error hilight POSIX subshells
+* (vim): Do not error highlight POSIX subshells
 #### Refactorings
 
 * (desktop): Remove long unused xfce4 configs
