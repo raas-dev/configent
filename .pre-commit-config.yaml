@@ -4,6 +4,9 @@
 # Install the hooks in this file:
 #   pre-commit install --hook-type pre-commit
 #   pre-commit install --hook-type commit-msg
+#
+# (optional) test all hooks:
+#   pre-commit run --all-files --verbose
 
 default_stages: [commit]
 
@@ -35,6 +38,11 @@ repos:
   hooks:
     - id: shellcheck
     - id: shfmt
+
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.2.5
+  hooks:
+  - id: codespell
 
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v3.5.2

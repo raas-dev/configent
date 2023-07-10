@@ -1,0 +1,2 @@
+[codespell]
+skip = CHANGELOG.md,bin/cht.sh,bin/xpanes
