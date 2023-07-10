@@ -26,71 +26,7 @@ ln -snvi "$this_path/vscode" "$user_path"
 ### Install VSCode extensions ##################################################
 
 if command -v code >/dev/null; then
-  # code --list-extensions | xargs -L 1 echo "code --force --install-extension"
-  code --force --install-extension aaron-bond.better-comments
-  code --force --install-extension adpyke.codesnap
-  code --force --install-extension AquaSecurityOfficial.trivy-vulnerability-scanner
-  code --force --install-extension AykutSarac.jsoncrack-vscode
-  code --force --install-extension bbenoist.Nix
-  code --force --install-extension bencoleman.armview
-  code --force --install-extension bierner.github-markdown-preview
-  code --force --install-extension bierner.markdown-checkbox
-  code --force --install-extension bierner.markdown-emoji
-  code --force --install-extension bierner.markdown-footnotes
-  code --force --install-extension bierner.markdown-mermaid
-  code --force --install-extension bierner.markdown-preview-github-styles
-  code --force --install-extension bierner.markdown-yaml-preamble
-  code --force --install-extension bradlc.vscode-tailwindcss
-  code --force --install-extension CaptainJiNX.kickass-c64
-  code --force --install-extension charliermarsh.ruff
-  code --force --install-extension chris-hayes.chatgpt-reborn
-  code --force --install-extension Codeium.codeium
-  code --force --install-extension dbaeumer.vscode-eslint
-  code --force --install-extension dnicolson.binary-plist
-  code --force --install-extension eamodio.gitlens
-  code --force --install-extension EditorConfig.EditorConfig
-  code --force --install-extension esbenp.prettier-vscode
-  code --force --install-extension exiasr.hadolint
-  code --force --install-extension formulahendry.auto-close-tag
-  code --force --install-extension formulahendry.auto-rename-tag
-  code --force --install-extension foxundermoon.shell-format
-  code --force --install-extension fregante.ghost-text
-  code --force --install-extension golang.go
-  code --force --install-extension Gruntfuggly.activitusbar
-  code --force --install-extension hashicorp.terraform
-  code --force --install-extension hediet.vscode-drawio
-  code --force --install-extension humao.rest-client
-  code --force --install-extension IBM.output-colorizer
-  code --force --install-extension kddejong.vscode-cfn-lint
-  code --force --install-extension kubescape.kubescape
-  code --force --install-extension mikestead.dotenv
-  code --force --install-extension ms-azure-devops.azure-pipelines
-  code --force --install-extension ms-azuretools.vscode-bicep
-  code --force --install-extension ms-azuretools.vscode-docker
-  code --force --install-extension ms-dotnettools.vscode-dotnet-runtime
-  code --force --install-extension ms-python.python
-  code --force --install-extension ms-python.vscode-pylance
-  code --force --install-extension ms-toolsai.jupyter
-  code --force --install-extension ms-toolsai.jupyter-renderers
-  code --force --install-extension ms-vscode.azure-account
-  code --force --install-extension ms-vscode.makefile-tools
-  code --force --install-extension ms-vscode.powershell
-  code --force --install-extension ms-vsliveshare.vsliveshare
-  code --force --install-extension msazurermtools.azurerm-vscode-tools
-  code --force --install-extension naumovs.color-highlight
-  code --force --install-extension Perkovec.emoji
-  code --force --install-extension rambit.highlight-counter
-  code --force --install-extension redhat.vscode-yaml
-  code --force --install-extension stevejpurves.cucumber
-  code --force --install-extension stkb.rewrap
-  code --force --install-extension stoplight.spectral
-  code --force --install-extension streetsidesoftware.code-spell-checker
-  code --force --install-extension tamasfe.even-better-toml
-  code --force --install-extension teabyii.ayu
-  code --force --install-extension tfsec.tfsec
-  code --force --install-extension timonwong.shellcheck
-  code --force --install-extension tomoki1207.pdf
-  code --force --install-extension VisualStudioExptTeam.vscodeintellicode
-  code --force --install-extension wayou.vscode-todo-highlight
-  code --force --install-extension wix.vscode-import-cost
+  while read -r extension; do
+    code --force --install-extension "$extension"
+  done <"$this_path/vscode/extensions.list"
 fi

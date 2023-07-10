@@ -126,7 +126,11 @@ The script symlinks `vscode/` to `<user_vscode_path>/Code`.
 The old `Code/` is first backed up as `Code-old`.
 
 Symlinking happens even if `code` has not been installed.
-If `code` is present, also VSCode extensions are installed.
+If `code` is present, also VSCode extensions (`vscode/extensions.list`)
+are installed.
+
+To update the list after adding or removing extensions in VSCode, run
+`vscode/create_extensions_list`.
 
 Configuring
 [VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync)
