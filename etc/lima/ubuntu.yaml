@@ -52,6 +52,7 @@ probes:
 hostResolver:
   enabled: false
 
+# https://www.quad9.net/service/service-addresses-and-features/
 dns:
   - 9.9.9.9
   - 149.112.112.112

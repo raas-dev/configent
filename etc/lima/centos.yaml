@@ -31,7 +31,7 @@ ssh:
 
 containerd:
   system: false
-  user: true # this is different from k3s's containerd
+  user: true
 
 provision:
   - mode: system
