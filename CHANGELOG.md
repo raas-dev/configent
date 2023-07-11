@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.1](https://github.com/raas-dev/configent/compare/1.53.0...1.53.1) (2023-07-11)
+
+
+### Fixes
+
+* **alpine:** Remove unnecessary var from sudo ([a4d6474](https://github.com/raas-dev/configent/commit/a4d6474b636ddac420b9be2c74d370291504577d))
+* **containerd:** Run nerdctl on Debian over CentOS ([314a0af](https://github.com/raas-dev/configent/commit/314a0af7915252172f31fa89fd80866c228cf8a7))
+
 ## [1.53.0](https://github.com/raas-dev/configent/compare/1.52.1...1.53.0) (2023-07-11)
 
 
