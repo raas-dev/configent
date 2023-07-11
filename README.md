@@ -26,10 +26,10 @@ Works on:
 
 - macOS Ventura (13), Monterey (12) and Big Sur (11) on Intel and ARM Macs
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish)
-- Debian Linux 12 (bookworm) and 11 (bullseye)
+- Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 38, 37 and 36
-- Rocky Linux 9 and 8
 - CentOS Stream 9 and 8
+- Rocky Linux 9 and 8
 - AlmaLinux 9 and 8
 - Oracle Linux 9 and 8
 - Arch Linux (rolling; since 2022-07)
