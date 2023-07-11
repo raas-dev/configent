@@ -149,10 +149,8 @@ alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
 alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false"
 
 alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
-alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml \
-  --tty=false ;
+alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false ;
   export KUBECONFIG=\$HOME/.lima/centos/kubeconfig.yaml ;
-  limactl shell centos sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ;
   kubectl get nodes"
 
 alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
@@ -233,7 +231,7 @@ sgpt_chat() {
     "expecting": "Answer",
     "variables": null,
     "role": "You are a helpful assistant."
-  }' > "$HOME/.config/shell_gpt/roles/assistant.json"
+  }' >"$HOME/.config/shell_gpt/roles/assistant.json"
   sgpt --no-cache --role assistant \
     --model gpt-4 --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
 }
@@ -245,7 +243,7 @@ sgpt_code() {
 
 sgpt_shell() {
   sgpt --no-cache --temperature 0 --chat "$(date +"%Y-%m-%d"):shell$TMUX_PANE" \
-     --shell "$*"
+    --shell "$*"
 }
 
 # Generic docker build and run
