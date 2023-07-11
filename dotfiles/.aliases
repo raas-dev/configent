@@ -450,7 +450,7 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
-### Binaries within Docker built dynamically by nixery #########################
+### Binaries within containerd built dynamically by nixery #####################
 
 # nixery.dev
 nixery() {
@@ -464,7 +464,7 @@ nixery() {
     image="nixery.dev/shell/$pkgs"
   fi
   name="${pkgs//\//-}"
-  docker run --init -it --rm --name "$name" \
+  nerdctl run --init -it --rm --name "$name" \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     "$image" $args
