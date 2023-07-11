@@ -168,8 +168,8 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 when the current working directory has `Dockerfile` present. After container
 has been started, the host-container mapped ports are output.
 
-💡: Use alias `n` for running containers for binaries you do not want to install
-permanently by building ad-hoc images with [Nixery](https://nixery.dev/).
+💡: Use alias `n` for running a `nerdctl` container for binary you do not
+want to install, by creating an ad-hoc image with [Nixery](https://nixery.dev/).
 
 ### macOS
 
@@ -177,9 +177,13 @@ Both dockerd and containerd base on Linux kernel features not present on macOS
 so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 
 The above shims create or start the necessary virtual machines, a lima VM named
-'ubuntu' for running rootless dockerd and a lima VM 'debian' for containerd.
+'ubuntu' for running rootless dockerd and a lima VM 'debian' for running
+rootless containerd.
 
-In addition, VM 'debian' includes [k3s](https://k3s.io/) for local Kubernetes.
+VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes, see Lima VM's
+startup message for exporting `KUBECONFIG` to access it with `kubectl`.
+
+VM 'fedora' has rootless [podman](https://podman.io/), run `podman` to use it.
 
 ⚠️: VMs 'ubuntu', 'debian' and 'fedora' mount your host's `$HOME` directory as
 writable in the VM. This enables containers to use bind mounts (directories
