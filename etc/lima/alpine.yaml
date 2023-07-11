@@ -1,16 +1,16 @@
 images:
-- location: "https://github.com/lima-vm/alpine-lima/releases/download/v0.2.30/alpine-lima-std-3.18.0-x86_64.iso"
-  arch: "x86_64"
-  digest: "sha512:c5f00210ecc355c57dd2f44b23c3976d3af20f831a618d920e64fc0a5b1f99fa41640c06efe50bbc33228bc2d39e9ba435a6f2c76c5c06315cb8f5ada9584c91"
-- location: "https://github.com/lima-vm/alpine-lima/releases/download/v0.2.30/alpine-lima-std-3.18.0-aarch64.iso"
-  arch: "aarch64"
-  digest: "sha512:48ca7c15ae66fc68d86b5e25a769c273e253aaba4fd9a70a4e7f21fdc420b53829ba9fe17b730922938941639c3ed93bf5a560b6ce4252f9df3200d9f8f73280"
+  - location: "https://github.com/lima-vm/alpine-lima/releases/download/v0.2.30/alpine-lima-std-3.18.0-x86_64.iso"
+    arch: "x86_64"
+    digest: "sha512:c5f00210ecc355c57dd2f44b23c3976d3af20f831a618d920e64fc0a5b1f99fa41640c06efe50bbc33228bc2d39e9ba435a6f2c76c5c06315cb8f5ada9584c91"
+  - location: "https://github.com/lima-vm/alpine-lima/releases/download/v0.2.30/alpine-lima-std-3.18.0-aarch64.iso"
+    arch: "aarch64"
+    digest: "sha512:48ca7c15ae66fc68d86b5e25a769c273e253aaba4fd9a70a4e7f21fdc420b53829ba9fe17b730922938941639c3ed93bf5a560b6ce4252f9df3200d9f8f73280"
 
 mounts:
-- location: "~"
-  writable: false
-- location: "/tmp/lima"
-  writable: true
+  - location: "~"
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
 
 containerd:
   system: false

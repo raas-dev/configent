@@ -6,10 +6,6 @@ images:
     arch: "aarch64"
     digest: "sha256:ad71d22104a16e4f9efa93e61e8c7bce28de693f59c802586abbe85e9db55a65"
 
-#cpus: 4          # default: 4
-memory: "8GiB" # default: "4GiB"
-#disk: "100GiB"   # default: "100GiB"
-
 mounts:
   - location: "~"
     writable: true
@@ -24,10 +20,6 @@ containerd:
   user: false
 
 provision:
-  - mode: system
-    script: |
-      #!/bin/sh
-      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   - mode: system
     script: |
       #!/bin/sh
@@ -57,10 +49,3 @@ probes:
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"
-
-hostResolver:
-  enabled: false
-
-dns:
-- 9.9.9.9
-- 149.112.112.112

@@ -1,37 +1,67 @@
 images:
-# Try to use release-yyyyMMdd image if available. Note that release-yyyyMMdd will be removed after several months.
-- location: "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20230523.0.x86_64.qcow2"
-  arch: "x86_64"
-  digest: "sha256:47dca0f014aff27bad5a4156f7ce3168fc339546d6e66bfaf52617a773f05bf0"
-- location: "https://cloud.centos.org/centos/9-stream/aarch64/images/CentOS-Stream-GenericCloud-9-20230523.0.aarch64.qcow2"
-  arch: "aarch64"
-  digest: "sha256:6c8566fe05b3541956e2ff0f72b41158b92751be9a4d68ac977e9d7fe22a6db6"
-# Fallback to the latest release image.
-# Hint: run `limactl prune` to invalidate the cache
-- location: "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
-  arch: "x86_64"
-- location: "https://cloud.centos.org/centos/9-stream/aarch64/images/CentOS-Stream-GenericCloud-9-latest.aarch64.qcow2"
-  arch: "aarch64"
+  # Try to use release-yyyyMMdd image if available. Note that release-yyyyMMdd will be removed after several months.
+  - location: "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20230523.0.x86_64.qcow2"
+    arch: "x86_64"
+    digest: "sha256:47dca0f014aff27bad5a4156f7ce3168fc339546d6e66bfaf52617a773f05bf0"
+  - location: "https://cloud.centos.org/centos/9-stream/aarch64/images/CentOS-Stream-GenericCloud-9-20230523.0.aarch64.qcow2"
+    arch: "aarch64"
+    digest: "sha256:6c8566fe05b3541956e2ff0f72b41158b92751be9a4d68ac977e9d7fe22a6db6"
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
+  - location: "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
+    arch: "x86_64"
+  - location: "https://cloud.centos.org/centos/9-stream/aarch64/images/CentOS-Stream-GenericCloud-9-latest.aarch64.qcow2"
+    arch: "aarch64"
+
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
 
 firmware:
   legacyBIOS: true
 
 mounts:
   - location: "~"
-    writable: false
+    writable: true
   - location: "/tmp/lima"
     writable: true
+
+ssh:
+  forwardAgent: true
 
 containerd:
   system: false
   user: false
 
 provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      curl -fsSL https://get.k3s.io | sh
   - mode: user
     script: |
       #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
-hostResolver:
-  hosts:
-    host.docker.internal: host.lima.internal
+probes:
+  - script: |
+      #!/bin/sh
+      if ! timeout 30s sh -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+        echo >&2 "k3s is not running yet"
+        exit 1
+      fi
+    hint: |
+      The k3s kubeconfig file has not yet been created.
+      Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
+      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
+
+copyToHost:
+  - guest: "/etc/rancher/k3s/k3s.yaml"
+    host: "{{.Dir}}/copied-from-guest/kubeconfig.yaml"
+
+message: |
+  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
+  ------
+  export KUBECONFIG="{{.Dir}}/copied-from-guest/kubeconfig.yaml"
+  kubectl ...
+  ------
