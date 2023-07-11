@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.52.0](https://github.com/raas-dev/configent/compare/1.51.2...1.52.0) (2023-07-11)
+
+
+### Features
+
+* **aliases:** Add psql and mysql cli via nixery ([85ccb7e](https://github.com/raas-dev/configent/commit/85ccb7e867297321795a5116ed645b43d1dd0f8d))
+* **lima:** Combine VMs centos and rancher ([9cbe8c4](https://github.com/raas-dev/configent/commit/9cbe8c4fc7a2efab0fe765687fa23c9425f60d8f))
+* **lima:** Combine VMs fedora and podman ([df469f3](https://github.com/raas-dev/configent/commit/df469f3fead3f7b463c9183b3a807b4cf29cd87e))
+* **lima:** Move podman to use Fedora over Ubuntu ([f8b6903](https://github.com/raas-dev/configent/commit/f8b6903191dc497c16813ab3c33fa9cb51f8012e))
+* **podman:** Allow connecting to remote podman ([da02d13](https://github.com/raas-dev/configent/commit/da02d13940e39dcde6258727d2a36fad8be29714))
+
+
+### Fixes
+
+* **aliases:** Make nixery use nerdctl on centos ([56c74d6](https://github.com/raas-dev/configent/commit/56c74d6e0c37fe10f5862f9a4ebfdc3eb68b987c))
+* **alpine:** Remove support for brew ([734c147](https://github.com/raas-dev/configent/commit/734c147e9483fabd2cdfa267e6aea2049bfc1575))
+* **centos:** Get kubecoonfig ([654fa8b](https://github.com/raas-dev/configent/commit/654fa8b8669192b0f3e0e645afa0cd5d5f88bcc8))
+* **lima:** Fix fedora host.docker.internal ([a1822dd](https://github.com/raas-dev/configent/commit/a1822ddd35b8249050c942a3d8260ce15903260e))
+* **lima:** Use hostResolver hosts over /etc/hosts ([529908f](https://github.com/raas-dev/configent/commit/529908f16110a20b2605b34eb2cc7de725e82251))
+* **macos:** Remove cask install spotify ([eb5e86a](https://github.com/raas-dev/configent/commit/eb5e86a9262e6bedaa93455d07bf1295590789f4))
+* **ruby:** Remove installing rbenv by default ([6d64557](https://github.com/raas-dev/configent/commit/6d645572b94a9323c3bd5b74e8018b002763efbd))
+* **yum:** Add lsof ([1215a2e](https://github.com/raas-dev/configent/commit/1215a2e725589e0373e7225daac66cfb9e9088c8))
+
 ### [1.51.2](https://github.com/raas-dev/configent/compare/1.51.1...1.51.2) (2023-07-10)
 
 
