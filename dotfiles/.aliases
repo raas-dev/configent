@@ -470,30 +470,47 @@ nixery() {
     "$image" $args
 }
 
+# database
+alias mysql='nixery mariadb mysql'
+alias psql='nixery postgresql psql'
+alias sqlmap='nixery sqlmap sqlmap'
+
+# decoders
+alias fq='nixery fq fq'
+alias hexyl='nixery hexyl hexyl'
+
+# development
+alias grex='nixery grex grex'
+alias tokei='nixery tokei tokei'
+alias webanalyze='nixery webanalyze webanalyze -update'
+
+# load testing
+alias k6='nixery k6 k6'
+alias oha='nixery oha oha'
+
+# network
+alias dog='nixery dogdns dog'
+alias naabu='nixery naabu naabu'
+alias nmap='nixery nmap nmap'
+alias rustscan='nixery rustscan rustscan'
+
+# osint
 alias amass='nixery amass amass'
+alias maigret='nixery maigret maigret'
+
+# pentesting
+alias hydra='nixery thc-hydra hydra'
+alias gobuster='nixery gobuster gobuster'
+alias msfconsole='nixery metasploit msfconsole'
+
+# scanners
 alias dalfox='nixery dalfox dalfox'
 alias dnstwist='nixery dnstwist dnstwist'
-alias dog='nixery dogdns dog'
 alias ffuf='nixery ffuf ffuf'
-alias fq='nixery fq fq'
-alias gobuster='nixery gobuster gobuster'
-alias grex='nixery grex grex'
-alias hexyl='nixery hexyl hexyl'
-alias hydra='nixery thc-hydra hydra'
 alias katana='nixery katana katana'
-alias k6='nixery k6 k6'
-alias maigret='nixery maigret maigret'
-alias msfconsole='nixery metasploit msfconsole'
-alias mysql='nixery mariadb mysql'
-alias naabu='nixery naabu naabu'
 alias nikto='nixery nikto nikto'
-alias nmap='nixery nmap nmap'
 alias nuclei='nixery nuclei nuclei'
-alias oha='nixery oha oha'
-alias psql='nixery postgresql psql'
-alias rustscan='nixery rustscan rustscan'
-alias sqlmap='nixery sqlmap sqlmap'
-alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
-alias tokei='nixery tokei tokei'
 alias wapiti='nixery wapiti wapiti'
-alias webanalyze='nixery webanalyze webanalyze -update'
+
+# miscellaneous
+alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
