@@ -10,7 +10,7 @@
 
 # shellcheck disable=SC2068  # not quoting parameters passed to the real bin
 
-: "${VM:="podman"}"
+: "${VM:="fedora"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # forward to the same script on the guest VM
