@@ -176,14 +176,14 @@ Both dockerd and containerd base on Linux kernel features not present on macOS
 so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 
 The above shims create or start the necessary virtual machines, a lima VM named
-'ubuntu' for running rootless dockerd and a lima VM 'rancher' for containerd.
+'ubuntu' for running rootless dockerd and a lima VM 'centos' for containerd.
 
-⚠️: Both 'ubuntu' and 'rancher' VMs mount your host's `$HOME` directory as
+In addition, VM 'centos' includes [k3s](https://k3s.io/) for local Kubernetes.
+
+⚠️: VMs 'ubuntu', 'fedora' and 'centos' mount your host's `$HOME` directory as
 writable in the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
-
-In addition, VM 'rancher' includes [k3s](https://k3s.io/) for local Kubernetes.
 
 ## 🔨 Development
 

@@ -145,18 +145,17 @@ command -v nvim >/dev/null && alias vim='nvim'
 
 ### Lima VMs ###################################################################
 
-alias vm4rancher="limactl start \$HOME/local/etc/lima/rancher.yaml \
-  --tty=false ;
-  export KUBECONFIG=\$HOME/.lima/rancher/kubeconfig.yaml ;
-  limactl shell rancher sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ;
-  kubectl get nodes"
-
 alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
 alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false"
 
-alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
-alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false"
 alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
+alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml \
+  --tty=false ;
+  export KUBECONFIG=\$HOME/.lima/centos/kubeconfig.yaml ;
+  limactl shell centos sudo cat /etc/rancher/k3s/k3s.yaml > \$KUBECONFIG ;
+  kubectl get nodes"
+
+alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
 alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"
 alias vm4oracle="limactl start \$HOME/local/etc/lima/oraclelinux.yaml --tty=false"
 

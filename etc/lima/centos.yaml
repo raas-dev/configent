@@ -31,7 +31,7 @@ ssh:
 
 containerd:
   system: false
-  user: false
+  user: true # this is different from k3s's containerd
 
 provision:
   - mode: system
@@ -54,14 +54,3 @@ probes:
       The k3s kubeconfig file has not yet been created.
       Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
       If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
-
-copyToHost:
-  - guest: "/etc/rancher/k3s/k3s.yaml"
-    host: "{{.Dir}}/copied-from-guest/kubeconfig.yaml"
-
-message: |
-  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
-  ------
-  export KUBECONFIG="{{.Dir}}/copied-from-guest/kubeconfig.yaml"
-  kubectl ...
-  ------
