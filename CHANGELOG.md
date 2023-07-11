@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.53.0](https://github.com/raas-dev/configent/compare/1.52.1...1.53.0) (2023-07-11)
+
+
+### Features
+
+* **lima:** Add openSUSE Leap ([80126d2](https://github.com/raas-dev/configent/commit/80126d2d5eb4d3aefbd33d5e676759ec7311ba69))
+
 ### [1.52.1](https://github.com/raas-dev/configent/compare/1.52.0...1.52.1) (2023-07-11)
 
 
