@@ -55,6 +55,10 @@ probes:
       Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
       If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
 
+hostResolver:
+  hosts:
+    host.docker.internal: host.lima.internal
+
 copyToHost:
   - guest: "/etc/rancher/k3s/k3s.yaml"
     host: "{{.Dir}}/kubeconfig.yaml"

@@ -46,6 +46,10 @@ probes:
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
 
+hostResolver:
+  hosts:
+    host.docker.internal: host.lima.internal
+
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"
