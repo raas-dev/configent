@@ -1,0 +1,45 @@
+images:
+  - location: "https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/x86_64/images/Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
+    arch: "x86_64"
+    digest: "sha256:d334670401ff3d5b4129fcc662cf64f5a6e568228af59076cc449a4945318482"
+  - location: "https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/aarch64/images/Fedora-Cloud-Base-38-1.6.aarch64.qcow2"
+    arch: "aarch64"
+    digest: "sha256:ad71d22104a16e4f9efa93e61e8c7bce28de693f59c802586abbe85e9db55a65"
+
+mounts:
+  - location: "~"
+    writable: true
+  - location: "/tmp/lima"
+    writable: true
+
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      yum install -y podman
+  - mode: user
+    script: |
+      #!/bin/sh
+      systemctl --user enable --now podman.socket
+  - mode: system
+    script: |
+      #!/bin/sh
+      echo "unqualified-search-registries = ['docker.io']" | tee -a /etc/containers/registries.conf
+  - mode: user
+    script: |
+      #!/bin/sh
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | NO_FORMULAE=true sh &
+
+probes:
+  - script: |
+      #!/bin/sh
+      if ! timeout 30s sh -c "until command -v podman >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "podman is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
