@@ -9,10 +9,10 @@
 
 path_append() {
   if [ -d "$1" ]; then
-    PATH=${PATH//":$1:"/:}      # delete all instances in the middle
-    PATH=${PATH/%":$1"/}        # delete any instance at the end
-    PATH=${PATH/#"$1:"/}        # delete any instance at the beginning
-    PATH="${PATH:+"$PATH:"}$1"  # append $1 or if $PATH is empty set to $1
+    PATH=${PATH//":$1:"/:}     # delete all instances in the middle
+    PATH=${PATH/%":$1"/}       # delete any instance at the end
+    PATH=${PATH/#"$1:"/}       # delete any instance at the beginning
+    PATH="${PATH:+"$PATH:"}$1" # append $1 or if $PATH is empty set to $1
   fi
 }
 
@@ -21,7 +21,7 @@ path_prepend() {
     PATH=${PATH//":$1:"/:}
     PATH=${PATH/%":$1"/}
     PATH=${PATH/#"$1:"/}
-    PATH="$1${PATH:+":$PATH"}"  # prepend $1 or if $PATH is empty set to $1
+    PATH="$1${PATH:+":$PATH"}" # prepend $1 or if $PATH is empty set to $1
   fi
 }
 
@@ -57,9 +57,9 @@ export MANPAGER='sh -c "col -bx | bat -l man -p"'
 export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
-export LESS='-R'  # output raw control characters to have colors
+export LESS='-R'                              # output raw control characters to have colors
 export LESSOPEN='|~/local/bin/lesspipe.sh %s' # use lesspipe.sh in this repo
-export LESSQUIET=1  # suppress additional output not belonging to the file
+export LESSQUIET=1                            # suppress additional output not belonging to the file
 
 ### Shell behaviour ############################################################
 
@@ -198,7 +198,7 @@ export DISABLE_CRASH_REPORT=0
 if [ "$(uname -s)" = 'Darwin' ] && command -v lima >/dev/null; then
   # requires forwarding the socket in the lima vm config file
   export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
-elif [ -x "$HOME/bin/docker" ] ; then
+elif [ -x "$HOME/bin/docker" ]; then
   # rootless docker installed
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi
