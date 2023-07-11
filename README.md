@@ -29,8 +29,8 @@ Works on:
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 38, 37 and 36
 - CentOS Stream 9 and 8
-- Rocky Linux 9 and 8
 - AlmaLinux 9 and 8
+- Rocky Linux 9 and 8
 - Oracle Linux 9 and 8
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.18, 3.17, 3.16 and 3.15
