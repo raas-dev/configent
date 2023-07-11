@@ -50,8 +50,8 @@ $SUDO yum install -y libxcrypt-compat
 $SUDO yum install -y lzma-sdk
 
 # Utils
-$SUDO yum install -y coreutils bind-utils file findutils \
-  git htop redhat-lsb-core procps traceroute zip unzip wget whois
+$SUDO yum install -y bind-utils coreutils file findutils \
+  git htop lsof procps redhat-lsb-core traceroute unzip wget whois zip
 
 # Bash
 $SUDO yum install -y bash
