@@ -22,9 +22,9 @@ Features:
 - One character shell aliases - the fastest are the commands one does not type
 - Use GPT in terminal and in IDE to create rest of the commands, code and apps
 
-Works on:
+Works on x86_64 and AArch64/ARM64:
 
-- macOS Ventura (13), Monterey (12) and Big Sur (11) on Intel and ARM Macs
+- macOS Ventura (13), Monterey (12) and Big Sur (11)
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 38, 37 and 36
