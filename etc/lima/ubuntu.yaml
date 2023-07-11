@@ -51,8 +51,6 @@ probes:
 
 hostResolver:
   enabled: false
-  hosts:
-    host.docker.internal: host.lima.internal
 
 dns:
 - 9.9.9.9
