@@ -11,7 +11,7 @@
 # shellcheck disable=SC2068  # not quoting parameters passed to the real bin
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 
-: "${VM:="centos"}"
+: "${VM:="debian"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! limactl shell "$VM" true >/dev/null 2>&1; then

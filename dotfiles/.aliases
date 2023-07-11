@@ -146,12 +146,12 @@ command -v nvim >/dev/null && alias vim='nvim'
 ### Lima VMs ###################################################################
 
 alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
-alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false"
+alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false ;
+  export KUBECONFIG=\$HOME/.lima/debian/kubeconfig.yaml ;
+  kubectl get nodes"
 
 alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
-alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false ;
-  export KUBECONFIG=\$HOME/.lima/centos/kubeconfig.yaml ;
-  kubectl get nodes"
+alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false"
 
 alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
 alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"

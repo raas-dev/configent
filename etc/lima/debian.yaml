@@ -13,22 +13,63 @@ images:
   - location: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-arm64.qcow2"
     arch: "aarch64"
 
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
+
 mounts:
   - location: "~"
-    writable: false
+    writable: true
   - location: "/tmp/lima"
     writable: true
 
+ssh:
+  forwardAgent: true
+
 containerd:
   system: false
-  user: false
+  user: true
 
 provision:
+  # Add iptables to $PATH for nerdctl
+  # See: https://github.com/containerd/nerdctl/discussions/1536
+  - mode: system
+    script: |
+      #!/bin/sh
+      ln -s /usr/sbin/iptables /usr/local/bin/iptables
+      ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
+  - mode: system
+    script: |
+      #!/bin/sh
+      curl -fsSL https://get.k3s.io | sh
   - mode: user
     script: |
       #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
+probes:
+  - script: |
+      #!/bin/sh
+      if ! timeout 30s sh -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+        echo >&2 "k3s is not running yet"
+        exit 1
+      fi
+    hint: |
+      The k3s kubeconfig file has not yet been created.
+      Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
+      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
+
 hostResolver:
   hosts:
     host.docker.internal: host.lima.internal
+
+copyToHost:
+  - guest: "/etc/rancher/k3s/k3s.yaml"
+    host: "{{.Dir}}/kubeconfig.yaml"
+
+message: |
+  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
+  ------
+  export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
+  kubectl get nodes
+  ------
