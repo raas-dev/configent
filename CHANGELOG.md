@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.1](https://github.com/raas-dev/configent/compare/1.52.0...1.52.1) (2023-07-11)
+
+
+### Fixes
+
+* **lima:** Resolve host.docker.internal ([5daa6fd](https://github.com/raas-dev/configent/commit/5daa6fd62a2781ef68061ea4275affb899f37174))
+
 ## [1.52.0](https://github.com/raas-dev/configent/compare/1.51.2...1.52.0) (2023-07-11)
 
 
