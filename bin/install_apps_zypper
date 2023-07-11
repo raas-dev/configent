@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+if [ "$(id -u)" = 0 ]; then
+  SUDO=''
+elif command -v sudo >/dev/null; then
+  SUDO='sudo'
+
+  # Ask sudo password upfront
+  sudo -n true || sudo -v
+
+  # Keep sudo alive until the script has finished
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
+fi
+
+# Update package lists
+$SUDO zypper refresh
+
+# Certificates
+$SUDO zypper install -y ca-certificates
+
+# Cryptography
+$SUDO zypper install -y gpg2
+
+# Common build requirements
+$SUDO zypper install -y cmake gcc gcc-c++ make m4 readline-devel sqlite3-devel \
+  libbz2-devel libffi-devel liblzma5 libopenssl-devel xz-devel zlib-devel
+
+# Utils
+$SUDO zypper install -y bind-utils coreutils file findutils \
+  git htop lsb-release lsof man procps traceroute unzip wget whois zip
+
+# Bash
+$SUDO zypper install -y bash
+
+# The logfile navigator
+$SUDO zypper install -y lnav
+
+# pbcopy/pbpaste like experience
+#$SUDO zypper install -y xsel
+
+# Microsoft TrueType fonts (accepts EULA)
+# $SUDO zypper install -y fetchmsttfonts
+
+# Docker (rootless)
+$SUDO zypper install -y fuse-overlayfs
+$SUDO modprobe ip_tables iptable_mangle iptable_nat iptable_filter
+curl -fsSL https://get.docker.com/rootless | sh
+systemctl --user start dbus
+systemctl --user start docker
+$SUDO loginctl enable-linger "$USER"
+
+# Snap
+$SUDO zypper addrepo --refresh \
+  https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_15.4 \
+  snappy || true
+$SUDO zypper --gpg-auto-import-keys refresh
+$SUDO zypper dup --from snappy
+$SUDO zypper install -y snapd
+$SUDO systemctl enable --now snapd.socket
+$SUDO systemctl enable --now snapd.apparmor

@@ -18,7 +18,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     printf "NO_CASKS was specified and on macOS, won't install casks.\n"
   fi
 elif [ "$(uname -s)" = 'Linux' ]; then
-  if command -v apt-get >/dev/null; then
+  # zypper is aliased as apt-get, thus it has to come before real apt-get!
+  if command -v zypper >/dev/null; then
+    "$bin_path/install_apps_zypper"
+  elif command -v apt-get >/dev/null; then
     "$bin_path/install_apps_apt"
   elif command -v yum >/dev/null; then
     "$bin_path/install_apps_yum"

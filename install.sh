@@ -54,7 +54,11 @@ if [ "$(uname -s)" = 'Linux' ]; then
 
   if [ "$CANELEVATE" = 'true' ]; then
     if ! command -v git >/dev/null; then
-      if command -v apt-get >/dev/null; then
+      # zypper is aliased as apt-get, thus it has to come before real apt-get!
+      if command -v zypper >/dev/null; then
+        $SUDO zypper refresh
+        $SUDO zypper install -y git
+      elif command -v apt-get >/dev/null; then
         $SUDO apt-get update
         $SUDO apt-get install -y git
       elif command -v yum >/dev/null; then
