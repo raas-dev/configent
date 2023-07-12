@@ -471,7 +471,7 @@ nixery() {
     "$image" $args
 }
 
-# database
+# databases
 alias mysql='nixery mariadb mysql'
 alias psql='nixery postgresql psql'
 alias sqlmap='nixery sqlmap sqlmap'

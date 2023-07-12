@@ -61,9 +61,9 @@ if [ "$(uname -s)" = 'Linux' ]; then
       elif command -v apt-get >/dev/null; then
         $SUDO apt-get update
         $SUDO apt-get install -y git
-      elif command -v yum >/dev/null; then
-        $SUDO yum check-update
-        $SUDO yum install -y git
+      elif command -v dnf >/dev/null; then
+        $SUDO dnf check-update
+        $SUDO dnf install -y git
       elif command -v pacman >/dev/null; then
         $SUDO pacman --noconfirm --needed -Sy git
       elif command -v apk >/dev/null; then

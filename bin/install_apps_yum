@@ -28,57 +28,57 @@ else
 fi
 
 # Update package lists
-$SUDO yum check-update -y
+$SUDO dnf check-update -y
 
 # Add Epel repostitory
-$SUDO yum install -y epel-release
+$SUDO dnf install -y epel-release
 
 # Certificates
-$SUDO yum install -y ca-certificates
+$SUDO dnf install -y ca-certificates
 
 # Cryptography
-$SUDO yum install -y gnupg
+$SUDO dnf install -y gnupg
 
 # Common build requirements
-$SUDO yum install -y cmake gcc gcc-c++ make m4 \
+$SUDO dnf install -y cmake gcc gcc-c++ make m4 \
   openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel libffi-devel
 
 # Required for brew, if provided by distro (Fedora)
-$SUDO yum install -y libxcrypt-compat
+$SUDO dnf install -y libxcrypt-compat
 
 # Required for compiling Pythons by pyenv, if provided by distro (Fedora)
-$SUDO yum install -y lzma-sdk
+$SUDO dnf install -y lzma-sdk
 
 # Utils
-$SUDO yum install -y bind-utils coreutils file findutils \
+$SUDO dnf install -y bind-utils coreutils file findutils \
   git htop lsof procps redhat-lsb-core traceroute unzip wget whois zip
 
 # Bash
-$SUDO yum install -y bash
+$SUDO dnf install -y bash
 
 # The logfile navigator
-$SUDO yum install -y lnav
+$SUDO dnf install -y lnav
 
 # Locales
-$SUDO yum install -y langpacks-en
+$SUDO dnf install -y langpacks-en
 
 # pbcopy/pbpaste like experience
-#$SUDO yum install -y xsel
+#$SUDO dnf install -y xsel
 
 # Microsoft TrueType fonts (accepts EULA)
-#$SUDO yum install -y cabextract fontconfig xorg-x11-font-utils
+#$SUDO dnf install -y cabextract fontconfig xorg-x11-font-utils
 #$SUDO rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 # Docker (rootless)
-$SUDO yum install -y fuse-overlayfs iptables dbus-daemon
+$SUDO dnf install -y fuse-overlayfs iptables dbus-daemon
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Snap
-$SUDO yum install -y fuse squashfuse # docker requirement for snap
-$SUDO yum install -y kernel-modules  # VM requirement for snap
-$SUDO yum install -y snapd
+$SUDO dnf install -y fuse squashfuse # docker requirement for snap
+$SUDO dnf install -y kernel-modules  # VM requirement for snap
+$SUDO dnf install -y snapd
 $SUDO systemctl enable --now snapd.socket
 $SUDO ln -s /var/lib/snapd/snap /snap
