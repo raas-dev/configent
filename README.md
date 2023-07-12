@@ -101,7 +101,7 @@ and all the scripts in `bin/` are available by name.
 
 ### install_apps
 
-MacOS, APT, YUM and pacman based distros, as well as Alpine Linux, are known.
+MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
 ⚠️: On AArch64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
@@ -115,11 +115,11 @@ Order of installation:
 6. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
-preferred, but if this is not possible (no `sudo`), it is installed user's home.
+preferred but if this is not possible (no `sudo`), it is installed user's home.
 
 On macOS, Homebrew, formulae and casks are always installed user-wide.
 
-On Linux distros, snaps are system-wide and auto-upgraded on schedule by snapd.
+On Linux distros, snaps are always installed system-wide.
 
 ### setup_vscode
 
