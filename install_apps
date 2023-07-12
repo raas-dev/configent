@@ -38,7 +38,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     printf "NO_SNAPS was specified and on Linux, won't install snaps.\n"
   fi
 else
-  printf "\nError: Only macOS and APT/YUM/APK Linux distros are supported.\n"
+  printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"
   exit 1
 fi
 
