@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.2](https://github.com/raas-dev/configent/compare/1.53.1...1.53.2) (2023-07-12)
+
+
+### Fixes
+
+* **debian:** Install locales asap ([b20da04](https://github.com/raas-dev/configent/commit/b20da04945af1b3b7e306cfc0faeeded066d692c))
+* **yum:** Use dnf over yum ([068521f](https://github.com/raas-dev/configent/commit/068521f4f8a3b52832816ea5ec59d5561d17a45d))
+
 ### [1.53.1](https://github.com/raas-dev/configent/compare/1.53.0...1.53.1) (2023-07-11)
 
 
