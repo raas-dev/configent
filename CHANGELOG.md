@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.3](https://github.com/raas-dev/configent/compare/1.53.2...1.53.3) (2023-07-13)
+
+
+### Fixes
+
+* **install:** Fix package manager error message ([8cb2340](https://github.com/raas-dev/configent/commit/8cb234091031fb34b0c94875e22df15dae5eb4cf))
+* **python:** Install xz-devel for pyenv ([5248b5f](https://github.com/raas-dev/configent/commit/5248b5f42a716f72d3c5ea5018cd404faf76e332))
+
 ### [1.53.2](https://github.com/raas-dev/configent/compare/1.53.1...1.53.2) (2023-07-12)
 
 
