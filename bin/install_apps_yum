@@ -43,11 +43,11 @@ $SUDO dnf install -y gnupg
 $SUDO dnf install -y cmake gcc gcc-c++ make m4 \
   openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel libffi-devel
 
-# Required for brew, if provided by distro (Fedora)
+# Required for brew, if provided by distro
 $SUDO dnf install -y libxcrypt-compat
 
-# Required for compiling Pythons by pyenv, if provided by distro (Fedora)
-$SUDO dnf install -y lzma-sdk
+# Required for compiling Pythons by pyenv (lzma)
+$SUDO dnf install -y xz-devel
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils file findutils \
