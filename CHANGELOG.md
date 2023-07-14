@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.54.3](https://github.com/raas-dev/configent/compare/1.54.2...1.54.3) (2023-07-14)
+
+
+### Fixes
+
+* **lima:** Remove forwarding docker socket to host ([5f64877](https://github.com/raas-dev/configent/commit/5f648778c34d0ac571617067b7ffb9b641a3bf93))
+* **podman:** Simplify podman shim ([9732bda](https://github.com/raas-dev/configent/commit/9732bda797ebe8adbe87ec3842a0c2e038c3b93c))
+
 ### [1.54.2](https://github.com/raas-dev/configent/compare/1.54.1...1.54.2) (2023-07-14)
 
 
