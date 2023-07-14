@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.54.1](https://github.com/raas-dev/configent/compare/1.54.0...1.54.1) (2023-07-14)
+
+
+### Fixes
+
+* **zsh:** Install antidote plugins always ([2ea3fa0](https://github.com/raas-dev/configent/commit/2ea3fa071d92526d2352d96969aed82b7e699793))
+
 ## [1.54.0](https://github.com/raas-dev/configent/compare/1.53.3...1.54.0) (2023-07-14)
 
 
