@@ -56,6 +56,9 @@ $SUDO dnf install -y bind-utils coreutils file findutils \
 # Bash
 $SUDO dnf install -y bash
 
+# Zsh
+$SUDO dnf install -y zsh
+
 # The logfile navigator
 $SUDO dnf install -y lnav
 

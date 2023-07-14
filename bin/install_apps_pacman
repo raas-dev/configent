@@ -47,6 +47,9 @@ $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
 # Bash
 $SUDO pacman --noconfirm --needed -S bash
 
+# Zsh
+$SUDO pacman --noconfirm --needed -S zsh
+
 # The logfile navigator
 $SUDO pacman --noconfirm --needed -S lnav
 

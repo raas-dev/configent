@@ -47,6 +47,9 @@ $SUDO zypper install -y bind-utils coreutils file findutils \
 # Bash
 $SUDO zypper install -y bash
 
+# Zsh
+$SUDO zypper install -y zsh
+
 # The logfile navigator
 $SUDO zypper install -y lnav
 

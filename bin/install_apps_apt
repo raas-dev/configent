@@ -60,6 +60,9 @@ $SUDO apt-get install -y coreutils dnsutils file findutils \
 # Bash
 $SUDO apt-get install -y bash
 
+# Zsh
+$SUDO apt-get install -y zsh
+
 # The logfile navigator
 $SUDO apt-get install -y lnav
 
