@@ -17,11 +17,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for podman."
     exit 127
   fi
-  # pass arguments to this exact same script on the guest VM
   if ! limactl shell "$VM" true >/dev/null 2>&1; then
     limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
+  # pass arguments to this exact same script on the guest VM
   limactl shell "$VM" "$HOME/local/bin/podman" $@
 else
   # shellcheck disable=SC2155  # will not declare separately
