@@ -1,8 +1,12 @@
+# Carries over system-wide readline configuration to the user configuration
+$include /etc/inputrc
+
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
 # List all matches in case multiple possible completions are possible
 set show-all-if-ambiguous on
+set show-all-if-unmodified on
 
 # Immediately add a trailing slash when autocompleting symlinks to directories
 set mark-symlinked-directories on
@@ -20,6 +24,9 @@ set page-completions off
 
 # If there are more than 200 possible completions for a word, ask to show them all
 set completion-query-items 200
+
+# Set readline to display possible completions using different colors
+set colored-stats on
 
 # Show extra file information when completing, like `ls -F` does
 set visible-stats on
