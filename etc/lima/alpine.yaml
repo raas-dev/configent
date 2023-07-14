@@ -17,6 +17,14 @@ containerd:
   user: false
 
 provision:
+  # Reverse lima's ash-as-bash hack
+  # https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh
+  - mode: system
+    script: |
+      #!/bin/sh
+      rm -f /bin/bash
+      sudo apk add bash
+      ln -sf /bin/bash /bin/ash
   - mode: user
     script: |
       #!/bin/sh

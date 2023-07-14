@@ -225,6 +225,3 @@ a pull request.
 - Arch Linux on AArch64
   - If `pacman` fails, backup and replace `/etc/pacman.d/mirrorlist` e.g. with:
     - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
-- Alpine Linux on Lima: Lima [shims](https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh) `/bin/bash` to `/bin/ash` on boot
-    - Thus Installing bash and setting it as the user's login shell does not work expectedly
-    - Use `bash` manually to enter bash after login and have dotfiles effective
