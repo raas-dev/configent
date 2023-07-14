@@ -81,7 +81,7 @@ Script `bootstrap` runs the three below scripts in the order described.
 This script essentially handles the whole automated setup (dotfiles, apps,
 VSCode, zsh) of the machine it is run in and the script is non-interactive.
 
-The default shell is not changed to zsh , but you may do it (and get prompted)
+The default shell is not changed to `zsh`, but you may do it (and get prompted)
 by running `bin/install_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
