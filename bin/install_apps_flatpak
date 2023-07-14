@@ -8,34 +8,15 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-if [ "$(id -u)" = 0 ]; then
-  SUDO=''
-elif command -v sudo >/dev/null; then
-  SUDO='sudo'
-
-  # Ask sudo password upfront
-  sudo -n true || sudo -v
-
-  # Keep sudo alive until the script has finished
-  while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-  done 2>/dev/null &
-else
-  echo "ERROR: User is non-root and sudo is not available, cannot proceed."
-  exit 1
-fi
-
 # https://flathub.org/
-$SUDO flatpak remote-add --if-not-exists \
+flatpak remote-add --user --if-not-exists \
   flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # VSCode
-$SUDO flatpak install -y flathub com.visualstudio.code
+flatpak install --user -y flathub com.visualstudio.code
 
 # Brave
-$SUDO flatpak install -y flathub com.brave.Browser
+flatpak install --user -y flathub com.brave.Browser
 
 # LibreOffice
-#$SUDO flatpak install -y flathub org.libreoffice.LibreOffice
+#flatpak install --user -y flathub org.libreoffice.LibreOffice

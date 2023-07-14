@@ -68,8 +68,8 @@ GUI apps are not installed by `install.sh` as a server is assumed.
 
 Run `bootstrap` in the git working copy (`$HOME/configent`) to install GUI apps.
 
-Add or remove GUI apps to your liking in `bin/install_apps_snap`
-(Snap on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
+Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
+(Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 To use GUI apps on Linux distros, you have to install Xorg, display manager and
 window manager of your choice. See the distro's own instructions for that.
@@ -107,7 +107,7 @@ MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
 2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
-[Snap](https://snapcraft.io/) (Linux distros) and snaps
+[Flatpak](https://flatpak.org/) (Linux distros) and flatpaks
 3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
 4. Rust, Go, Node.js and Python version managers, language versions and packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
@@ -118,7 +118,7 @@ preferred but if this is not possible (no `sudo`), it is installed user's home.
 
 On macOS, Homebrew, formulae and casks are always installed user-wide.
 
-On Linux distros, snaps are always installed system-wide.
+On Linux distros, flatpaks are always installed user-wide.
 
 ### setup_vscode
 
@@ -215,13 +215,11 @@ a pull request.
 
 ### Issues in dependencies
 
-- Homebrew on Linux on AArch64: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
+- Homebrew on AArch64 Linux distros: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Most formulae do not have AArch64 binary packages ("bottles") for Linux
     - Building all dependencies from source would be too long of a bootstrap
-    - Thus `install.sh` skips Homebrew parts on AArch64 Linux distros
-- Homebrew on Alpine Linux (does not have glibc)
-- Fedora Linux: Must reboot after `squashfuse` installation for `snap` to work
-    - error: `system does not fully support snapd: cannot mount squashfs image using "squashfs"`
+    - Thus `install.sh` skips the Homebrew parts on AArch64 Linux distros
+- Homebrew does not work on Alpine Linux, as it does not base on glibc
 - Arch Linux on AArch64
   - If `pacman` fails, backup and replace `/etc/pacman.d/mirrorlist` e.g. with:
     - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`

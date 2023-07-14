@@ -80,7 +80,7 @@ systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Snap
-$SUDO apt-get install -y snapd
+#$SUDO apt-get install -y snapd
 
 # Flatpak
 $SUDO apt-get install -y flatpak

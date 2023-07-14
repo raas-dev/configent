@@ -72,9 +72,9 @@ git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
 #yay --noconfirm --needed -S ttf-ms-fonts
 
 # Snap
-yay --noconfirm --needed -S snapd
-$SUDO systemctl enable --now snapd.socket
-$SUDO ln -s /var/lib/snapd/snap /snap
+#yay --noconfirm --needed -S snapd
+#$SUDO systemctl enable --now snapd.socket
+#$SUDO ln -s /var/lib/snapd/snap /snap
 
 # Flatpak
 $SUDO pacman --noconfirm --needed -S flatpak

@@ -19,8 +19,9 @@ TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
 
-export NO_SNAPS="true"
 export NO_CASKS="true"
+export NO_FLATPAKS="true"
+export NO_SNAPS="true"
 [ -n "$NO_FORMULAE" ] && export NO_FORMULAE="true"
 
 ################################################################################
