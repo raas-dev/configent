@@ -56,7 +56,3 @@ hostResolver:
 dns:
   - 9.9.9.9
   - 149.112.112.112
-
-portForwards:
-  - guestSocket: "/run/user/{{.UID}}/docker.sock"
-    hostSocket: "{{.Dir}}/sock/docker.sock"
