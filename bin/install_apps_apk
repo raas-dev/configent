@@ -47,6 +47,9 @@ $SUDO apk add coreutils curl bind-tools file findutils \
 # Bash
 $SUDO apk add bash
 
+# Bash
+$SUDO apk add vim
+
 # The logfile navigator
 $SUDO apk add lnav
 
