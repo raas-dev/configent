@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.57.0](https://github.com/raas-dev/configent/compare/1.56.0...1.57.0) (2023-07-14)
+
+
+### Features
+
+* **linux:** Move from snaps to user-wide flatpaks ([ed13bf8](https://github.com/raas-dev/configent/commit/ed13bf8c713aa7d83cfde5c094204251cfa9ebcd))
+
+
+### Fixes
+
+* **inputrc:** Improve completion for bash ([edf38ec](https://github.com/raas-dev/configent/commit/edf38ec84593d7ef6eb85e87f8a514e8a7cacfb8))
+
 ## [1.56.0](https://github.com/raas-dev/configent/compare/1.55.0...1.56.0) (2023-07-14)
 
 
