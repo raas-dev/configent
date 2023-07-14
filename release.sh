@@ -18,7 +18,7 @@ if [ "$branch" != "main" ] && [ "$branch" != "master" ]; then
 fi
 
 if [ -n "$(git status -s)" ]; then
-  echo "Error: Working tree has changes, commit or reset first"
+  echo "Error: Working tree has changes: Stash, commit or reset first"
   exit 1
 fi
 
