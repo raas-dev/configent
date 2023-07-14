@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.54.2](https://github.com/raas-dev/configent/compare/1.54.1...1.54.2) (2023-07-14)
+
+
+### Fixes
+
+* **docker:** Remove support for macOS docker cli ([b72ae52](https://github.com/raas-dev/configent/commit/b72ae5205c7649885b698a3606f82b18b262df78))
+* **docker:** Set XDG_RUNTIME_DIR before DOCKER_HOST ([6f1e2bc](https://github.com/raas-dev/configent/commit/6f1e2bcb901435101bae905da19680eac9da9c74))
+* **nerdctl:** Only set XDG_RUNTIME_DIR if empty ([c804c95](https://github.com/raas-dev/configent/commit/c804c95b0141673e1fc2e9a1cfb2d16324f5ecf2))
+* **nerdctl:** Set XDG_RUNTIME_DIR earlier ([510111c](https://github.com/raas-dev/configent/commit/510111c97673faf5862de08f731130fcbf8821f1))
+* **shells:** Echo after default shell is set ([8938df6](https://github.com/raas-dev/configent/commit/8938df6261be2dd000e16602309dc3a70935b6de))
+
 ### [1.54.1](https://github.com/raas-dev/configent/compare/1.54.0...1.54.1) (2023-07-14)
 
 
