@@ -41,6 +41,3 @@ $SUDO snap install brave
 
 # LibreOffice
 #$SUDO snap install libreoffice
-
-# Spotify
-#$SUDO snap install spotify
