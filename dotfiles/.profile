@@ -193,6 +193,12 @@ export AZURE_DEV_COLLECT_TELEMETRY=no
 # kics
 export DISABLE_CRASH_REPORT=0
 
+### Flatpak ####################################################################
+
+if command -v flatpak >/dev/null ; then
+  export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
+fi
+
 ### Local binaries first in the PATH ###########################################
 
 path_prepend "$HOME/local/bin"

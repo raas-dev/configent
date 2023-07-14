@@ -76,3 +76,6 @@ $SUDO zypper dup --from snappy
 $SUDO zypper install -y snapd
 $SUDO systemctl enable --now snapd.socket
 $SUDO systemctl enable --now snapd.apparmor
+
+# Flatpak
+$SUDO zypper install -y flatpak

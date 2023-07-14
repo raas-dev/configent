@@ -77,3 +77,6 @@ $SUDO service docker start
 $SUDO rc-update add docker default
 
 # No Snap is available for Alpine Linux
+
+# Flatpak
+$SUDO apk add flatpak

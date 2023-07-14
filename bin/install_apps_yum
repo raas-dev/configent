@@ -85,3 +85,6 @@ $SUDO dnf install -y kernel-modules  # VM requirement for snap
 $SUDO dnf install -y snapd
 $SUDO systemctl enable --now snapd.socket
 $SUDO ln -s /var/lib/snapd/snap /snap
+
+# Flatpak
+$SUDO dnf install -y flatpak
