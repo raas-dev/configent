@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.54.0](https://github.com/raas-dev/configent/compare/1.53.3...1.54.0) (2023-07-14)
+
+
+### Features
+
+* **zsh:** Install system-wide zsh on all distros ([434ac13](https://github.com/raas-dev/configent/commit/434ac13c12626ea0f98c01497d01bed339b5c83e))
+
+
+### Fixes
+
+* **alpine:** Add vim ([2073c1c](https://github.com/raas-dev/configent/commit/2073c1c050f822a636e6f73ab13a01ac2f64a5e8))
+* **alpine:** Fix docker runlevel on boot ([2d87fd9](https://github.com/raas-dev/configent/commit/2d87fd9788d57035e4dc77c81143f2b861c182ba))
+* **bash:** Fix detection of system-wide bash ([748c32d](https://github.com/raas-dev/configent/commit/748c32de5a44922927436a5e17e702faba7a0e1b))
+* **installer:** Install coreutils on Alpine Linux ([86984d1](https://github.com/raas-dev/configent/commit/86984d186ed24bf9ca8e5ec193025fbe17d49b1a))
+* **nvm:** export NVM_DIR for .cache ([87c318c](https://github.com/raas-dev/configent/commit/87c318c29d4fcdb1da5a9d32f6f55117434dbc0a))
+* **shells:** Add setting system-wide as default ([1d7e1a5](https://github.com/raas-dev/configent/commit/1d7e1a5af098ccd40271063b16e56310a2a6e064))
+* **zsh:** Fix detection of system-wide zsh ([bb656b8](https://github.com/raas-dev/configent/commit/bb656b8d94a70fcfca8df682393f9b6657302d6d))
+
 ### [1.53.3](https://github.com/raas-dev/configent/compare/1.53.2...1.53.3) (2023-07-13)
 
 
