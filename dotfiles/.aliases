@@ -197,6 +197,12 @@ alias netdata='nerdctl run -d --name=netdata \
   --security-opt apparmor=unconfined \
   netdata/netdata'
 
+alias pwsh='nerdctl run --init -it --rm --name pwsh \
+  --volume="$PWD:$PWD" \
+  --workdir="$PWD" \
+  --cap-drop ALL \
+  clowa/powershell-core'
+
 ### Misc #######################################################################
 
 # Copy the current path to clipboard
