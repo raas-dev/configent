@@ -81,9 +81,8 @@ Script `bootstrap` runs the three below scripts in the order described.
 This script essentially handles the whole automated setup (dotfiles, apps,
 VSCode, zsh) of the machine it is run in and the script is non-interactive.
 
-The default shell is not changed to zsh (as there is a chance that zsh
-installation has failed), but you may do it (and get prompted) by running
-`bin/install_zsh` after `bootstrap` has finished.
+The default shell is not changed to zsh , but you may do it (and get prompted)
+by running `bin/install_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
 
@@ -139,11 +138,11 @@ will not interfere with storing configs in the git repo.
 
 ## 🐚 Default shell
 
-Set the brew installed `zsh` as the user's default shell:
+Set `zsh` as the user's default shell:
 
     install_zsh
 
-If you prefer `bash` instead, brew the latest Bash and set it as default:
+If you prefer `bash` instead:
 
     install_bash
 

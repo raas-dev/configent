@@ -27,6 +27,7 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
+# If brew is available, it likely has more recent zsh
 brew install zsh
 
 ### antidote ###################################################################
@@ -42,50 +43,60 @@ mkdir "$HOME/.ssh" 2>/dev/null && chmod 700 "$HOME/.ssh"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ "$(uname -m)" = 'arm64' ]; then
-    brew_zsh_path="/opt/homebrew/bin/zsh"
+    if [ -x "/opt/homebrew/bin/zsh" ]; then
+      zsh_path="/opt/homebrew/bin/zsh"
+    elif [ -x "/bin/zsh" ]; then
+      zsh_path="/bin/zsh"
+    fi
   else
-    brew_zsh_path="/usr/local/bin/zsh"
+    if [ -x "/usr/local/bin/zsh" ]; then
+      zsh_path="/usr/local/bin/zsh"
+    elif [ -x "/bin/zsh" ]; then
+      zsh_path="/bin/zsh"
+    fi
   fi
   default_shell=$(dscl . -read "$HOME" UserShell | cut -d' ' -f2)
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]; then
-    brew_zsh_path="/home/linuxbrew/.linuxbrew/bin/zsh"
+    zsh_path="/home/linuxbrew/.linuxbrew/bin/zsh"
   elif [ -x "$HOME/.linuxbrew/bin/zsh" ]; then
-    brew_zsh_path="$HOME/.linuxbrew/bin/zsh"
+    zsh_path="$HOME/.linuxbrew/bin/zsh"
+  elif [ -x "/bin/zsh" ]; then
+    zsh_path="/bin/zsh"
   fi
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [ -x "$brew_zsh_path" ]; then
-  if [ "$default_shell" = "$brew_zsh_path" ]; then
-    echo "Brewed Zsh is already set as the user's default shell."
+if [ -x "$zsh_path" ]; then
+  if [ "$default_shell" = "$zsh_path" ]; then
+    echo "$zsh_path is already set as the user's default shell."
   else
     if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then
       echo ""
-      printf "Set brewed Zsh as the user's default shell [y\N] > "
+      printf "Set %s as the user's default shell [y\N] > " "$zsh_path"
       read -r set_zsh
       case "$set_zsh" in
       [yY][eE][sS] | [yY])
-        if ! grep -q "$brew_zsh_path" /etc/shells >/dev/null 2>&1; then
+        if ! grep -q "$zsh_path" /etc/shells >/dev/null 2>&1; then
           echo "Sudo password may be asked next to write to /etc/shells"
-          echo "$brew_zsh_path" | sudo tee -a /etc/shells
+          echo "$zsh_path" | sudo tee -a /etc/shells
         fi
         if [ "$(uname -s)" = 'Darwin' ]; then
           echo "On macOS, sudo is used to set the user's default shell."
-          sudo dscl . -create "$HOME" UserShell "$brew_zsh_path"
+          sudo dscl . -create "$HOME" UserShell "$zsh_path"
         else
           case $(sudo passwd --status "$USER" | awk '{print $2}') in
           NP)
             echo "User's password will be asked next to set the shell."
-            chsh -s "$brew_zsh_path"
+            chsh -s "$zsh_path"
             ;;
           P)
             echo "User has no password, sudo is used to set the shell."
-            sudo chsh -s "$brew_zsh_path" "$USER"
+            sudo chsh -s "$zsh_path" "$USER"
             ;;
           *)
             echo "User is locked, sudo is used to set the shell."
-            sudo chsh -s "$brew_zsh_path" "$USER"
+            sudo chsh -s "$zsh_path" "$USER"
             ;;
           esac
         fi

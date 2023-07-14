@@ -27,6 +27,7 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
+# If brew is available, it likely has more recent bash
 brew install bash
 brew install bash-completion ||
   (brew unlink util-linux && brew install bash-completion)
@@ -35,50 +36,60 @@ brew install bash-completion ||
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ "$(uname -m)" = 'arm64' ]; then
-    brew_bash_path="/opt/homebrew/bin/bash"
+    if [ -x "/opt/homebrew/bin/bash" ]; then
+      bash_path="/opt/homebrew/bin/bash"
+    elif [ -x "/bin/bash" ]; then
+      bash_path="/bin/bash"
+    fi
   else
-    brew_bash_path="/usr/local/bin/bash"
+    if [ -x "/usr/local/bin/bash" ]; then
+      bash_path="/usr/local/bin/bash"
+    elif [ -x "/bin/bash" ]; then
+      bash_path="/bin/bash"
+    fi
   fi
   default_shell=$(dscl . -read "$HOME" UserShell | cut -d' ' -f2)
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/bash" ]; then
-    brew_bash_path="/home/linuxbrew/.linuxbrew/bin/bash"
+    bash_path="/home/linuxbrew/.linuxbrew/bin/bash"
   elif [ -x "$HOME/.linuxbrew/bin/bash" ]; then
-    brew_bash_path="$HOME/.linuxbrew/bin/bash"
+    bash_path="$HOME/.linuxbrew/bin/bash"
+  elif [ -x "/bin/bash" ]; then
+    bash_path="/bin/bash"
   fi
   default_shell=$(getent passwd "$LOGNAME" | cut -d: -f7)
 fi
 
-if [ -x "$brew_bash_path" ]; then
-  if [ "$default_shell" = "$brew_bash_path" ]; then
-    echo "Brewed Bash is already set as the user's default shell."
+if [ -x "$bash_path" ]; then
+  if [ "$default_shell" = "$bash_path" ]; then
+    echo "$bash_path is already set as the user's default shell."
   else
     if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then
       echo ""
-      printf "Set brewed Bash as the user's default shell [y\N] > "
+      printf "Set %s as the user's default shell [y\N] > " "$bash_path"
       read -r set_bash
       case "$set_bash" in
       [yY][eE][sS] | [yY])
-        if ! grep -q "$brew_bash_path" /etc/shells >/dev/null 2>&1; then
+        if ! grep -q "$bash_path" /etc/shells >/dev/null 2>&1; then
           echo "Sudo password may be asked next to write to /etc/shells"
-          echo "$brew_bash_path" | sudo tee -a /etc/shells
+          echo "$bash_path" | sudo tee -a /etc/shells
         fi
         if [ "$(uname -s)" = 'Darwin' ]; then
           echo "On macOS, sudo is used to set the user's default shell."
-          sudo dscl . -create "$HOME" UserShell "$brew_bash_path"
+          sudo dscl . -create "$HOME" UserShell "$bash_path"
         else
           case $(sudo passwd --status "$USER" | awk '{print $2}') in
           NP)
             echo "User's password will be asked next to set the shell."
-            chsh -s "$brew_bash_path"
+            chsh -s "$bash_path"
             ;;
           P)
             echo "User has no password, sudo is used to set the shell."
-            sudo chsh -s "$brew_bash_path" "$USER"
+            sudo chsh -s "$bash_path" "$USER"
             ;;
           *)
             echo "User is locked, sudo is used to set the shell."
-            sudo chsh -s "$brew_bash_path" "$USER"
+            sudo chsh -s "$bash_path" "$USER"
             ;;
           esac
         fi
