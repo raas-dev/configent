@@ -12,12 +12,16 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     export SHELL="/opt/homebrew/bin/zsh"
   elif [ -x "/usr/local/bin/zsh" ]; then
     export SHELL="/usr/local/bin/zsh"
+  else
+    export SHELL="/bin/zsh"
   fi
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/zsh" ]; then
     export SHELL="/home/linuxbrew/.linuxbrew/bin/zsh"
   elif [ -x "$HOME/.linuxbrew/bin/zsh" ]; then
     export SHELL="$HOME/.linuxbrew/bin/zsh"
+  else
+    export SHELL="/bin/zsh"
   fi
 fi
 
