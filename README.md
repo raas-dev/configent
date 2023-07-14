@@ -152,14 +152,14 @@ If you prefer `bash` instead, brew the latest Bash and set it as default:
 Both container runtimes in a nutshell:
 
 - the two are different runtimes - if you used Docker Desktop, it was dockerd
-- containerd is the industry-standard runtime in Kubernetes deployments
+- containerd is the industry-standard (CNCF) runtime in Kubernetes deployments
 - regardless of the runtime, containers must not be run with `sudo`
 
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
-- `docker`: Runs docker cli and prefers rootless dockerd (no sudo is required)
-- `docker-compose`: Runs classic docker-compose as a docker cli plugin
-- `nerdctl`: Runs nerdctl (also `nerdctl compose`) in user context containerd
+- `docker`: Runs docker cli preferring rootless dockerd when available (no sudo)
+- `nerdctl`: Runs nerdctl (containerd cli) on the rootless containerd (no sudo)
+- `podman`: The 3rd option, near-Docker compatible daemonless runtime (no sudo)
 
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
@@ -168,8 +168,8 @@ sourced only in terminals where STDIN (effectively keyboard) is present.
 when the current working directory has `Dockerfile` present. After container
 has been started, the host-container mapped ports are output.
 
-💡: Use alias `n` for running a `nerdctl` container for binary you do not
-want to install, by creating an ad-hoc image with [Nixery](https://nixery.dev/).
+💡: Use alias `n` to run (with `nerdctl`) a container for a binary you do not
+want to install, the image built ad-hoc by [Nixery](https://nixery.dev/).
 
 ### macOS
 
