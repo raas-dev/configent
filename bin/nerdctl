@@ -22,7 +22,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   limactl shell "$VM" "$HOME/local/bin/nerdctl" $@
 else
   if [ -x "/usr/local/bin/nerdctl" ]; then
-    export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+    [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
     "/usr/local/bin/nerdctl" $@
   else
     echo "Error: nerdctl not found in this Linux system."
