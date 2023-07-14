@@ -193,10 +193,14 @@ export AZURE_DEV_COLLECT_TELEMETRY=no
 # kics
 export DISABLE_CRASH_REPORT=0
 
-### Flatpak ####################################################################
+### Linux distros only #########################################################
 
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share"
+if [ "$(uname -s)" = 'Linux' ]; then
+  export XDG_DATA_HOME="$HOME/.local/share"
+  if command -v flatpak >/dev/null; then
+    export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share"
+  fi
+fi
 
 ### Local binaries first in the PATH ###########################################
 
