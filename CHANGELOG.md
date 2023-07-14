@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.55.0](https://github.com/raas-dev/configent/compare/1.54.4...1.55.0) (2023-07-14)
+
+
+### Features
+
+* **linux:** Install flatpak ([70498b5](https://github.com/raas-dev/configent/commit/70498b5f5a5e3879ab04582bf266beb74f4f9286))
+* **powershell:** Move pwsh to a container only ([4dab4d0](https://github.com/raas-dev/configent/commit/4dab4d0a9fb085c9e75497f0cf836082004edc92))
+
+
+### Fixes
+
+* **alpine:** Add musl-locales ([6262479](https://github.com/raas-dev/configent/commit/62624796458402d16b07c673d3d2275fdecbafea))
+* **alpine:** Add perl for fzf ([fd3b4c8](https://github.com/raas-dev/configent/commit/fd3b4c8921e0106d9d81427ae96f63f14109a10c))
+* **alpine:** Install less ([3cde727](https://github.com/raas-dev/configent/commit/3cde727bce11783e3f43a6f5f094eda2bc9f057e))
+* **alpine:** Install util-linux ([5ce0a51](https://github.com/raas-dev/configent/commit/5ce0a51d3436cdc78aaf3eda60b3e521831d4249))
+* **alpine:** Reverse lima's ash-as-bash hack ([6861a75](https://github.com/raas-dev/configent/commit/6861a75798175ea38a0dde0482ca07d698f69787))
+
 ### [1.54.4](https://github.com/raas-dev/configent/compare/1.54.3...1.54.4) (2023-07-14)
 
 
