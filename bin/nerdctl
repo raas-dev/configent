@@ -22,7 +22,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-  if [ -x "/usr/local/bin/nerdctl" ]; then
+  if [ -x "$HOME/bin/nerdctl" ]; then
+    "$HOME/bin/nerdctl" $@
+  elif [ -x "/usr/local/bin/nerdctl" ]; then
     "/usr/local/bin/nerdctl" $@
   else
     echo "Error: nerdctl not found in this Linux system."
