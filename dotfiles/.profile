@@ -198,7 +198,7 @@ export DISABLE_CRASH_REPORT=0
 if [ "$(uname -s)" = 'Linux' ]; then
   export XDG_DATA_HOME="$HOME/.local/share"
   if command -v flatpak >/dev/null; then
-    export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share"
+    export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
   fi
 fi
 
