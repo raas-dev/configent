@@ -49,7 +49,3 @@ probes:
 hostResolver:
   hosts:
     host.docker.internal: host.lima.internal
-
-portForwards:
-  - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
-    hostSocket: "{{.Dir}}/sock/podman.sock"

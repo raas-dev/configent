@@ -14,30 +14,18 @@
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot run VM for Podman daemon."
+    echo "Error: limactl not found on macOS, cannot start Linux VM for podman."
     exit 127
   fi
-  if [ "$(uname -m)" = 'arm64' ]; then
-    local_podman_path="/opt/homebrew/bin/podman"
-  else
-    local_podman_path="/usr/local/bin/podman"
+  # pass arguments to this exact same script on the guest VM
+  if ! limactl shell "$VM" true >/dev/null 2>&1; then
+    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
+      limactl start "$VM"
   fi
-  if [ -x "$local_podman_path" ]; then
-    if [ -z "$CONTAINER_HOST" ]; then
-      # requires forwarding the socket in the lima vm config file
-      export CONTAINER_HOST="unix://$HOME/.lima/$VM/sock/podman.sock"
-    fi
-    # homebrew installed podman
-    "$local_podman_path" $@
-  else
-    # no podman cli on HOST -> recall this script on the guest VM
-    if ! limactl shell "$VM" true >/dev/null 2>&1; then
-      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
-        limactl start "$VM"
-    fi
-    limactl shell "$VM" "$HOME/local/bin/podman" $@
-  fi
+  limactl shell "$VM" "$HOME/local/bin/podman" $@
 else
+  # shellcheck disable=SC2155  # will not declare separately
+  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "/usr/bin/podman" ]; then
     "/usr/bin/podman" $@
   else
