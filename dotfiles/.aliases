@@ -172,7 +172,7 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 alias dufs='docker run --init -it \
   --cap-drop ALL \
   --publish 127.0.0.1:80:80 \
-  --volume $(pwd):/data \
+  --volume $PWD:/data \
   sigoden/dufs \
   /data -p 80'
 
@@ -183,6 +183,7 @@ alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nrmi='nerdctl rmi $(nerdctl images --all --quiet)'
 alias npr='nrmc ; nrmv ; nrmi'
 
+# https://github.com/netdata/netdata
 alias netdata='nerdctl run -d --name=netdata \
   --publish 127.0.0.1:19999:19999 \
   --volume netdataconfig:/etc/netdata \
@@ -197,6 +198,7 @@ alias netdata='nerdctl run -d --name=netdata \
   --security-opt apparmor=unconfined \
   netdata/netdata'
 
+# https://github.com/clowa/docker-powershell-core
 alias pwsh='nerdctl run --init -it --rm --name pwsh \
   --volume="$PWD:$PWD" \
   --workdir="$PWD" \
