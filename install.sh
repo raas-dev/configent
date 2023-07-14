@@ -67,11 +67,15 @@ if [ "$(uname -s)" = 'Linux' ]; then
       elif command -v pacman >/dev/null; then
         $SUDO pacman --noconfirm --needed -Sy git
       elif command -v apk >/dev/null; then
-        $SUDO apk -U add git coreutils # coreutils is required for ln -i
+        $SUDO apk -U add git
       else
         printf "\nError: Could not install git, please install git manually.\n"
         exit 1
       fi
+    fi
+    if command -v apk >/dev/null; then
+      printf "On Alpine Linux: Installing coreutils required by installer.\n"
+      $SUDO apk -U add coreutils
     fi
   fi
 elif [ "$(uname -s)" = 'Darwin' ]; then
