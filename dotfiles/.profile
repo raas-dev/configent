@@ -122,8 +122,9 @@ path_prepend "$HOME/.local/bin"
 
 nvm_path="$HOME/.nvm"
 if [ -d "$nvm_path" ]; then
-  . "$nvm_path/nvm.sh"
-  [ -s "$nvm_path/bash_completion" ] && . "$nvm_path/bash_completion"
+  export NVM_DIR="$nvm_path"
+  . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 fi
 
 ### Haskell ####################################################################

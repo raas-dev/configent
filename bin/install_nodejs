@@ -12,15 +12,15 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### nvm ########################################################################
 
-nvm_path="$HOME/.nvm"
-git clone https://github.com/creationix/nvm.git "$nvm_path"
-git -C "$nvm_path" fetch --tags origin
-git -C "$nvm_path" -c advice.detachedHead=false checkout \
-  "$(git -C "$nvm_path" describe --abbrev=0 --tags --match "v[0-9]*" origin)"
+export NVM_DIR="$HOME/.nvm"
+git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+git -C "$NVM_DIR" fetch --tags origin
+git -C "$NVM_DIR" -c advice.detachedHead=false checkout \
+  "$(git -C "$NVM_DIR" describe --abbrev=0 --tags --match "v[0-9]*" origin)"
 
 ### Node #######################################################################
 
-. "$nvm_path/nvm.sh" &&
+. "$NVM_DIR/nvm.sh" &&
   nvm install --lts &&
   nvm alias default 'lts/*' &&
   nvm use default
