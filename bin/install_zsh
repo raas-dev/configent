@@ -100,6 +100,7 @@ if [ -x "$zsh_path" ]; then
             ;;
           esac
         fi
+        echo "$zsh_path is the user's default shell on next login or reboot."
         ;;
       esac
     fi

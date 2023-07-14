@@ -93,6 +93,7 @@ if [ -x "$bash_path" ]; then
             ;;
           esac
         fi
+        echo "$bash_path is the user's default shell on next login or reboot."
         ;;
       esac
     fi
