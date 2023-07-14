@@ -65,6 +65,6 @@ $SUDO apk add lnav
 $SUDO apk add docker
 $SUDO addgroup "$USER" docker
 $SUDO service docker start
-$SUDO rc-update add docker boot
+$SUDO rc-update add docker default
 
 # No Snap is available for Alpine Linux
