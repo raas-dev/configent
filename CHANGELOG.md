@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.56.0](https://github.com/raas-dev/configent/compare/1.55.0...1.56.0) (2023-07-14)
+
+
+### Features
+
+* **flatpak:** Add initial support ([db4a957](https://github.com/raas-dev/configent/commit/db4a957f5552ae4d5359c088d27b65b8f33dcf0b))
+
+
+### Fixes
+
+* **apps:** Remove spotify ([b3b5aa3](https://github.com/raas-dev/configent/commit/b3b5aa3ea5c0e9a17985eb8a539039200da8b8a2))
+* **profile:** Add conditional XDG_DATA_DIRS ([5a1d702](https://github.com/raas-dev/configent/commit/5a1d70284256002ebe31fc8c4d9d51f0905d6316))
+* **profile:** Add XDG_DATA_DIRS ([31ff1fa](https://github.com/raas-dev/configent/commit/31ff1faaba143d7322335f7abb68e721fa650cc9))
+* **profile:** export XDG_ vars on Linux distros only ([d6810ce](https://github.com/raas-dev/configent/commit/d6810ceaa2ab5418fa4de3e3ef27e8fd9b639602))
+* **profile:** export XDG_DATA_HOME ([0c3f4fe](https://github.com/raas-dev/configent/commit/0c3f4fe5bf1a88f23d159ab6859ceb5bc9849b8f))
+* **profile:** Fix colon in XDG_DATA_DIRS ([f4614f4](https://github.com/raas-dev/configent/commit/f4614f428dd6e76003e8be3ec50416dcc5dbd4f1))
+
 ## [1.55.0](https://github.com/raas-dev/configent/compare/1.54.4...1.55.0) (2023-07-14)
 
 
