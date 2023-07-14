@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.54.4](https://github.com/raas-dev/configent/compare/1.54.3...1.54.4) (2023-07-14)
+
+
+### Fixes
+
+* **nerdctl:** Add check for lima installed ([48d1f2f](https://github.com/raas-dev/configent/commit/48d1f2fe49cc9f3aa7e7c634c1e62150ec16cc60))
+* **nerdctl:** Add support for user installed nerdctl ([cdffedb](https://github.com/raas-dev/configent/commit/cdffedb9123e2e06f0802dfd340ed48c36b5d301))
+
 ### [1.54.3](https://github.com/raas-dev/configent/compare/1.54.2...1.54.3) (2023-07-14)
 
 
