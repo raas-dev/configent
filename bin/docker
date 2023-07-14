@@ -56,15 +56,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # pass arguments to this exact same script on the guest VM
   limactl shell "$VM" "$HOME/local/bin/docker" $@
 else
+  # shellcheck disable=SC2155  # will not declare separately
+  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -z "$DOCKER_HOST" ]; then
     if [ -S "/run/user/$(id -u)/docker.sock" ]; then
-      # rootless
-      # shellcheck disable=SC2155  # will not declare separately
-      [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
     elif [ -S "/var/run/docker.sock" ]; then
-      # rootful
-      export DOCKER_HOST="unix:///var/run/docker.sock"
+      export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
     fi
   fi
   if [ -x "$HOME/bin/docker" ]; then
