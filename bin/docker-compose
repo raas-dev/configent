@@ -14,30 +14,16 @@
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
+    echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
     exit 127
   fi
-  if [ "$(uname -m)" = 'arm64' ]; then
-    local_docker_path="/opt/homebrew/bin/docker"
-  else
-    local_docker_path="/usr/local/bin/docker"
+  if ! limactl shell "$VM" true >/dev/null 2>&1; then
+    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
+      limactl start "$VM"
   fi
-  if [ -x "$local_docker_path" ]; then
-    if [ -z "$DOCKER_HOST" ]; then
-      # requires forwarding the socket in the lima vm config file
-      export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
-    fi
-    # homebrew installed docker
-    "$local_docker_path" compose $@
-  else
-    if ! limactl shell "$VM" true >/dev/null 2>&1; then
-      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
-        limactl start "$VM"
-    fi
-    # forward to the same script on the guest VM
-    limactl shell "$VM" "$HOME/local/bin/docker-compose" $@
-  fi
+  # pass arguments to this exact same script on the guest VM
+  limactl shell "$VM" "$HOME/local/bin/docker-compose" $@
 else
-  # docker shim
+  # pass arguments to docker shim, which installs the compose plugin
   "$HOME/local/bin/docker" compose $@
 fi

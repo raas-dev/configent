@@ -15,7 +15,7 @@ DOCKER_CONFIG=${DOCKER_CONFIG:-"$HOME/.docker"}
 
 install_docker_buildx_plugin() {
   if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-buildx" ]; then
-    buildx_version="v0.11.0"
+    buildx_version="v0.11.1"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$arch" = "aarch64" ]; then
@@ -24,7 +24,7 @@ install_docker_buildx_plugin() {
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CONFIG/cli-plugins/docker-buildx"
     mkdir -p "$DOCKER_CONFIG/cli-plugins"
-    curl -fsSL "https://github.com/docker/buildx/releases/latest/download/buildx-$buildx_version.$os-$arch" \
+    curl -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
       -o "$DOCKER_CONFIG/cli-plugins/docker-buildx"
     chmod +x "$DOCKER_CONFIG/cli-plugins/docker-buildx"
   fi
@@ -46,41 +46,29 @@ install_docker_compose_plugin() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot run VM for Docker daemon."
+    echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
     exit 127
   fi
-  if [ "$(uname -m)" = 'arm64' ]; then
-    local_docker_path="/opt/homebrew/bin/docker"
-  else
-    local_docker_path="/usr/local/bin/docker"
+  if ! limactl shell "$VM" true >/dev/null 2>&1; then
+    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
+      limactl start "$VM"
   fi
-  if [ -x "$local_docker_path" ]; then
-    if [ -z "$DOCKER_HOST" ]; then
-      # requires forwarding the socket in the lima vm config file
-      export DOCKER_HOST="unix://$HOME/.lima/$VM/sock/docker.sock"
-    fi
-    if [ "$1" = "build" ]; then
-      install_docker_buildx_plugin
-    elif [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
-    fi
-    # homebrew installed docker
-    "$local_docker_path" $@
-  else
-    # no docker cli on HOST -> recall this script on the guest VM
-    if ! limactl shell "$VM" true >/dev/null 2>&1; then
-      limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
-        limactl start "$VM"
-    fi
-    limactl shell "$VM" "$HOME/local/bin/docker" $@
-  fi
+  # pass arguments to this exact same script on the guest VM
+  limactl shell "$VM" "$HOME/local/bin/docker" $@
 else
-  # prefer rootless docker
-  if [ -x "$HOME/bin/docker" ]; then
-    if [ -z "$DOCKER_HOST" ]; then
-      # shellcheck disable=SC2155  # will not declare separately, compactness
-      export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+  if [ -z "$DOCKER_HOST" ]; then
+    if [ -S "/run/user/$(id -u)/docker.sock" ]; then
+      # rootless
+      # shellcheck disable=SC2155  # will not declare separately
+      [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+    elif [ -S "/var/run/docker.sock" ]; then
+      # rootful
+      export DOCKER_HOST="unix:///var/run/docker.sock"
     fi
+  fi
+  if [ -x "$HOME/bin/docker" ]; then
+    # user scope
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
@@ -88,8 +76,7 @@ else
     fi
     "$HOME/bin/docker" $@
   elif [ -x "/usr/bin/docker" ]; then
-    # try distro's package manager installed docker as the last resort
-    export DOCKER_HOST="unix:///var/run/docker.sock"
+    # system scope
     "/usr/bin/docker" $@
   else
     echo "Error: Docker CLI not found or executable in this Linux system."

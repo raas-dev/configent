@@ -156,7 +156,7 @@ Both container runtimes in a nutshell:
 
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
-- `docker`: Runs docker cli preferring rootless dockerd when available (no sudo)
+- `docker`: Runs docker cli preferring rootless docker when available (no sudo)
 - `nerdctl`: Runs nerdctl (containerd cli) on the rootless containerd (no sudo)
 - `podman`: The 3rd option, near-Docker compatible daemonless runtime (no sudo)
 

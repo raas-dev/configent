@@ -194,16 +194,6 @@ export AZURE_DEV_COLLECT_TELEMETRY=no
 # kics
 export DISABLE_CRASH_REPORT=0
 
-### DOCKER_HOST ################################################################
-
-if [ "$(uname -s)" = 'Darwin' ] && command -v lima >/dev/null; then
-  # requires forwarding the socket in the lima vm config file
-  export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
-elif [ -x "$HOME/bin/docker" ]; then
-  # rootless docker installed
-  export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
-fi
-
 ### Local binaries first in the PATH ###########################################
 
 path_prepend "$HOME/local/bin"
