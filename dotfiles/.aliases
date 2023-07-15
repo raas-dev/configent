@@ -169,12 +169,20 @@ alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 # https://github.com/sigoden/dufs
-alias dufs='docker run --init -it \
+alias dufs='docker run --init -it --rm \
   --cap-drop ALL \
   --publish 127.0.0.1:80:80 \
   --volume $PWD:/data \
   sigoden/dufs \
   /data -p 80'
+
+# https://github.com/svenstaro/miniserve
+alias miniserve='docker run --init -it --rm \
+  --cap-drop ALL \
+  --publish 127.0.0.1:80:80 \
+  --volume $PWD:/data \
+  docker.io/svenstaro/miniserve \
+  --hide-version-footer -p 80 /data'
 
 ### nerdctl ####################################################################
 
