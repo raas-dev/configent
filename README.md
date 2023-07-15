@@ -72,7 +72,7 @@ Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
 (Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 To use GUI apps on Linux distros, you have to install Xorg, display manager and
-window manager of your choice. See the distro's own instructions for that.
+window manager of your choice. See your distro's own instructions for that.
 
 ## 🔋's included
 
@@ -106,8 +106,8 @@ MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
 Order of installation:
 1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
-2. [Homebrew Cask](https://formulae.brew.sh/cask/) and casks (macOS) or
-[Flatpak](https://flatpak.org/) (Linux distros) and flatpaks
+2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
+[Flatpak](https://flatpak.org/) (Linux distros)
 3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
 4. Rust, Go, Node.js and Python version managers, language versions and packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
@@ -116,7 +116,7 @@ Order of installation:
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred but if this is not possible (no `sudo`), it is installed user's home.
 
-On macOS, Homebrew, formulae and casks are always installed user-wide.
+On macOS, Homebrew formulae and casks are always installed user-wide.
 
 On Linux distros, flatpaks are always installed user-wide.
 
