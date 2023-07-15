@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.57.1](https://github.com/raas-dev/configent/compare/1.57.0...1.57.1) (2023-07-15)
+
+
+### Fixes
+
+* **aliases:** Add miniserve ([1dd8fae](https://github.com/raas-dev/configent/commit/1dd8faef332210e423a242ade9f4cb3f5c088b44))
+* **aliases:** Add nerdctl args for prune ([b863007](https://github.com/raas-dev/configent/commit/b863007eb506ff8c2beee4394e12539a14366c41))
+* **aliases:** Remove netdata ([fbb1ba8](https://github.com/raas-dev/configent/commit/fbb1ba8e70705276998475ea91aa1ef435f75e21))
+
 ## [1.57.0](https://github.com/raas-dev/configent/compare/1.56.0...1.57.0) (2023-07-14)
 
 
