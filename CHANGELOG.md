@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.57.3](https://github.com/raas-dev/configent/compare/1.57.2...1.57.3) (2023-07-17)
+
+
+### Fixes
+
+* **aliases:** Swap powershell and miniserve runtime ([2889ce5](https://github.com/raas-dev/configent/commit/2889ce5bba373c2f0b4ac5686cd8bbddee9abb9c))
+* **iac:** Add krew and kubectx via krew ([aa47359](https://github.com/raas-dev/configent/commit/aa47359b6b85e85f7a5a2a13b286b720aa796d84))
+
 ### [1.57.2](https://github.com/raas-dev/configent/compare/1.57.1...1.57.2) (2023-07-17)
 
 
