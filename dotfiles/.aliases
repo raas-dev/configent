@@ -168,13 +168,12 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
-# https://github.com/svenstaro/miniserve
-alias miniserve='docker run --init -it --rm \
+# https://github.com/clowa/docker-powershell-core
+alias pwsh='docker run --init -it --rm --name pwsh \
+  --volume="$PWD:$PWD" \
+  --workdir="$PWD" \
   --cap-drop ALL \
-  --publish 127.0.0.1:8080:8080 \
-  --volume $PWD:/data \
-  docker.io/svenstaro/miniserve \
-  --hide-version-footer -p 8080 /data'
+  clowa/powershell-core'
 
 ### nerdctl ####################################################################
 
@@ -183,12 +182,13 @@ alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nrmi='nerdctl rmi --force $(nerdctl images --all --quiet)'
 alias npr='nrmc ; nrmv ; nrmi ; nerdctl system prune --force --volumes'
 
-# https://github.com/clowa/docker-powershell-core
-alias pwsh='nerdctl run --init -it --rm --name pwsh \
-  --volume="$PWD:$PWD" \
-  --workdir="$PWD" \
+# https://github.com/svenstaro/miniserve
+alias miniserve='nerdctl run --init -it --rm \
   --cap-drop ALL \
-  clowa/powershell-core'
+  --publish 127.0.0.1:8080:8080 \
+  --volume $PWD:/data \
+  docker.io/svenstaro/miniserve \
+  --hide-version-footer -p 8080 /data'
 
 ### Misc #######################################################################
 
