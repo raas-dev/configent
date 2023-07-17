@@ -57,7 +57,7 @@ $SUDO pacman --noconfirm --needed -S lnav
 #$SUDO pacman --noconfirm --needed -S xsel
 
 # Docker (rootless)
-$SUDO pacman --noconfirm --needed -S fuse-overlayfs iptables
+$SUDO pacman --noconfirm --needed -S fuse3 fuse-overlayfs iptables
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker

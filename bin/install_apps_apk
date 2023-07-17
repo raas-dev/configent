@@ -71,6 +71,7 @@ $SUDO apk add perl
 #    $SUDO fc-cache -f
 
 # Docker (rootless Docker is not supported on Alpine Linux)
+$SUDO apk add iptables
 $SUDO apk add docker
 $SUDO addgroup "$USER" docker
 $SUDO service docker start

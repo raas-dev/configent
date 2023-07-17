@@ -73,7 +73,7 @@ $SUDO apt-get install -y lnav
 #$SUDO apt-get install -y ttf-mscorefonts-installer
 
 # Docker (rootless)
-$SUDO apt-get install -y uidmap iptables dbus-user-session
+$SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker

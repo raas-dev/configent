@@ -51,7 +51,7 @@ $SUDO dnf install -y xz-devel
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils file findutils \
-  git htop lsof procps redhat-lsb-core traceroute unzip wget whois zip
+  git htop lsof procps redhat-lsb-core tar traceroute unzip wget whois zip
 
 # Bash
 $SUDO dnf install -y bash
@@ -73,7 +73,7 @@ $SUDO dnf install -y langpacks-en
 #$SUDO rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 # Docker (rootless)
-$SUDO dnf install -y fuse-overlayfs iptables dbus-daemon
+$SUDO dnf install -y fuse3 fuse-overlayfs dbus-daemon iptables shadow-utils
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
 systemctl --user start docker
