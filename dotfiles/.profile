@@ -182,6 +182,13 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
+### kubectl krew ###############################################################
+
+krew_path="${KREW_ROOT:-$HOME/.krew}"
+if [ -d "$krew_path" ]; then
+  path_append "$krew_path/bin"
+fi
+
 ### Disable telemetry ##########################################################
 
 # Azure Functions Core Tools

@@ -63,9 +63,12 @@ brew install aws-vault # go
 ### k8s ########################################################################
 
 brew install kubernetes-cli # go
-brew install kubectx        # go
-brew install helm           # go
-brew install k9s            # go
+brew install krew           # go
+kubectl krew install ctx
+kubectl krew install ns
+
+brew install helm # go
+brew install k9s  # go
 
 ### terraform ##################################################################
 
