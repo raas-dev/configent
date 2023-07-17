@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.57.2](https://github.com/raas-dev/configent/compare/1.57.1...1.57.2) (2023-07-17)
+
+
+### Fixes
+
+* **aliases:** Add google-cloud-sdk via nixery ([4f05677](https://github.com/raas-dev/configent/commit/4f05677f58eccee4fbbabdff57910e4628738c48))
+* **aliases:** Change miniserve port ([cef86d0](https://github.com/raas-dev/configent/commit/cef86d0b358c8ef2e7c6ead757bff25d864d4a40))
+* **aliases:** Remove dufs over miniserve ([b923268](https://github.com/raas-dev/configent/commit/b9232687db8d3b970bfac4418bdf34808fe51753))
+
 ### [1.57.1](https://github.com/raas-dev/configent/compare/1.57.0...1.57.1) (2023-07-15)
 
 
