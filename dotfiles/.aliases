@@ -167,13 +167,14 @@ alias drmc='docker rm --force $(docker ps --all --quiet)'
 alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
+
 # https://github.com/svenstaro/miniserve
 alias miniserve='docker run --init -it --rm \
   --cap-drop ALL \
-  --publish 127.0.0.1:80:80 \
+  --publish 127.0.0.1:8080:8080 \
   --volume $PWD:/data \
   docker.io/svenstaro/miniserve \
-  --hide-version-footer -p 80 /data'
+  --hide-version-footer -p 8080 /data'
 
 ### nerdctl ####################################################################
 
