@@ -36,8 +36,5 @@ $SUDO snap install code --classic
 # Brave
 $SUDO snap install brave
 
-# Google Cloud SDK
-#$SUDO snap install google-cloud-sdk --classic
-
 # LibreOffice
 #$SUDO snap install libreoffice

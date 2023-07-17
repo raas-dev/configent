@@ -472,6 +472,9 @@ nixery() {
     "$image" $args
 }
 
+# cloud
+alias gcloud='nixery google-cloud-sdk gcloud'
+
 # databases
 alias mysql='nixery mariadb mysql'
 alias psql='nixery postgresql psql'
