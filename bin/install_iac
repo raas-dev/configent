@@ -80,4 +80,4 @@ brew install k9s  # go
 
 ### cloudflare #################################################################
 
-brew install cloudflare/cloudflare/cloudflared # go
+brew install cloudflared # go
