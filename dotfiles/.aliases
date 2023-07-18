@@ -247,17 +247,25 @@ d() {
   if docker top "$name" &>/dev/null; then
     docker stop "$name" || docker kill "$name"
   fi
+
+  if [ -r "$PWD/Dockerfile" ]; then
+    echo "[d] Building image from Dockerfile"
+    docker build --pull --tag "$name" . || return
+  else
+    echo "[d] Building image with nixpacks"
+    TMPDIR="/tmp/lima" nixpacks build . --name "$name" || return
+  fi
+
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
   local run_args="$*"
-  docker build --pull --tag "$name" . &&
-    docker run --init -it --detach --name "$name" --rm \
-      --cap-drop ALL \
-      --publish-all \
-      --publish 127.0.0.1:8080:8080 \
-      $env_file \
-      $run_args \
-      "$name" &&
-    echo "[d] Published ports: container -> host"
+  docker run --init -it --detach --name "$name" --rm \
+    --cap-drop ALL \
+    --publish-all \
+    --publish 127.0.0.1:8080:8080 \
+    $env_file \
+    $run_args \
+    "$name"
+  echo "[d] Published ports: container -> host"
   docker port "$name"
   echo "[d] Following logs, ^C does not halt the container"
   docker logs --follow "$name"
@@ -443,9 +451,6 @@ nixd() {
 alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
-
-# https://nixpacks.com/docs/getting-started
-alias nixpacks='TMPDIR=/tmp/lima nixpacks'
 
 ### Binaries within containerd built dynamically by nixery #####################
 
