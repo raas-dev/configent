@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.57.4](https://github.com/raas-dev/configent/compare/1.57.3...1.57.4) (2023-07-18)
+
+
+### Fixes
+
+* **iac:** Add cloudflared ([10d5640](https://github.com/raas-dev/configent/commit/10d56404086816f88b6ed13b8d3b747914bbf94c))
+* **iac:** Fix cloudflared formula name ([d61551d](https://github.com/raas-dev/configent/commit/d61551dcf879915b9903a1044d9f56c318c6a4d2))
+* **linux:** Add package deps ([7a0c32d](https://github.com/raas-dev/configent/commit/7a0c32dbff89bf0cdce36089473a2052afc39600))
+* **rust:** Remove bore-cli ([d514457](https://github.com/raas-dev/configent/commit/d51445723a3f2a8f2e644c08e855a9ad49cb77d1))
+
 ### [1.57.3](https://github.com/raas-dev/configent/compare/1.57.2...1.57.3) (2023-07-17)
 
 
