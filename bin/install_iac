@@ -60,6 +60,14 @@ brew install azure/azd/azd # go
 brew install awscli    # python
 brew install aws-vault # go
 
+### terraform ##################################################################
+
+brew install tfenv # bash
+tfenv install latest
+tfenv use latest
+
+brew install tfsec # go
+
 ### k8s ########################################################################
 
 brew install kubernetes-cli # go
@@ -70,10 +78,6 @@ kubectl krew install ns
 brew install helm # go
 brew install k9s  # go
 
-### terraform ##################################################################
+### cloudflare #################################################################
 
-brew install tfenv # bash
-tfenv install latest
-tfenv use latest
-
-brew install tfsec # go
+brew install cloudflare/cloudflare/cloudflared # go
