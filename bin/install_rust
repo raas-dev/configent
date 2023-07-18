@@ -41,9 +41,6 @@ cargo binstall -y --locked zoxide
 
 ### extras #####################################################################
 
-# https://github.com/ekzhang/bore
-cargo binstall -y bore-cli
-
 # https://github.com/tbillington/kondo
 cargo binstall -y kondo
 
