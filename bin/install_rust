@@ -44,6 +44,9 @@ cargo binstall -y --locked zoxide
 # https://github.com/tbillington/kondo
 cargo binstall -y kondo
 
+# https://github.com/railwayapp/nixpacks
+cargo binstall -y nixpacks
+
 # https://github.com/sharkdp/pastel
 cargo binstall -y pastel
 
