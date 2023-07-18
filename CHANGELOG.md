@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.58.0](https://github.com/raas-dev/configent/compare/1.57.4...1.58.0) (2023-07-18)
+
+
+### Features
+
+* **aliases:** Make d() build images with nixpacks ([05fa5f4](https://github.com/raas-dev/configent/commit/05fa5f40865263018def0a84dd03979c5c9ddce8))
+
+
+### Fixes
+
+* **aliases:** Add nixpacks ([ba45acd](https://github.com/raas-dev/configent/commit/ba45acdd206166e8f5c0e981999bc7383a564a43))
+
 ### [1.57.4](https://github.com/raas-dev/configent/compare/1.57.3...1.57.4) (2023-07-18)
 
 
