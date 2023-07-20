@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.58.1](https://github.com/raas-dev/configent/compare/1.58.0...1.58.1) (2023-07-20)
+
+
+### Fixes
+
+* **aliases:** Add d() support for entrypoint ([3bd6bb0](https://github.com/raas-dev/configent/commit/3bd6bb02c51ee7523b1468bd339ddc4c1851fd72))
+
 ## [1.58.0](https://github.com/raas-dev/configent/compare/1.57.4...1.58.0) (2023-07-18)
 
 
