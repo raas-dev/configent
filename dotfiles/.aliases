@@ -257,18 +257,27 @@ d() {
   fi
 
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
-  local run_args="$*"
-  docker run --init -it --detach --name "$name" --rm \
+  if [ -n "$1" ] && [ "$1" != "-d" ] && [ "$1" != "--detach" ]; then
+    local run_args="--log-driver none --entrypoint /bin/sh"
+    local cmd="-c $*"
+  else
+    local run_args="$*"
+  fi
+
+  docker run --init -it --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
     --publish 127.0.0.1:8080:8080 \
     $env_file \
     $run_args \
-    "$name"
-  echo "[d] Published ports: container -> host"
-  docker port "$name"
-  echo "[d] Following logs, ^C does not halt the container"
-  docker logs --follow "$name"
+    "$name" $cmd
+
+  if [ "$run_args" = "-d" ] || [ "$run_args" = "--detach" ]; then
+    echo "[d] Published ports: container -> host"
+    docker port "$name"
+    echo "[d] Following logs, ^C does not halt the container"
+    docker logs --follow "$name"
+  fi
 }
 
 # Generic extract package
