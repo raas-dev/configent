@@ -170,9 +170,9 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 # https://github.com/clowa/docker-powershell-core
 alias pwsh='docker run --init -it --rm --name pwsh \
+  --cap-drop ALL \
   --volume="$PWD:$PWD" \
   --workdir="$PWD" \
-  --cap-drop ALL \
   clowa/powershell-core'
 
 ### nerdctl ####################################################################
@@ -450,6 +450,7 @@ nixd() {
   fi
   docker start "$name" &>/dev/null || docker run --init -it --detach \
     --name "$name" \
+    --cap-drop ALL \
     --publish-all \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
