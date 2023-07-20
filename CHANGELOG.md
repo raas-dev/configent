@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.58.3](https://github.com/raas-dev/configent/compare/1.58.2...1.58.3) (2023-07-20)
+
+
+### Fixes
+
+* **docker:** Add support for system-wide plugins ([4c88008](https://github.com/raas-dev/configent/commit/4c88008d3c3227d3713a22f98be46aaa10797678))
+
 ### [1.58.2](https://github.com/raas-dev/configent/compare/1.58.1...1.58.2) (2023-07-20)
 
 
