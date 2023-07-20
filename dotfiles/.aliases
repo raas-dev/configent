@@ -448,9 +448,9 @@ nixd() {
   else
     local args="$*"
   fi
+  # do not docker run --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null || docker run --init -it --detach \
     --name "$name" \
-    --cap-drop ALL \
     --publish-all \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
