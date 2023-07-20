@@ -11,10 +11,9 @@
 # shellcheck disable=SC2068  # not quoting parameters passed to the real bin
 
 : "${VM:="ubuntu"}"
-DOCKER_CONFIG=${DOCKER_CONFIG:-"$HOME/.docker"}
 
 install_docker_buildx_plugin() {
-  if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-buildx" ]; then
+  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx" ]; then
     buildx_version="v0.11.1"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
@@ -22,25 +21,32 @@ install_docker_buildx_plugin() {
       arch="arm64"
     fi
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
-    rm -f "$DOCKER_CONFIG/cli-plugins/docker-buildx"
-    mkdir -p "$DOCKER_CONFIG/cli-plugins"
+    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
+    mkdir -p "$DOCKER_CLI_PLUGINS_DIR"
     curl -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
-      -o "$DOCKER_CONFIG/cli-plugins/docker-buildx"
-    chmod +x "$DOCKER_CONFIG/cli-plugins/docker-buildx"
+      -o "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
+    if [ "$(id -u)" = 0 ]; then
+      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
+    else
+      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
+    fi
   fi
 }
 
 install_docker_compose_plugin() {
-  if [ ! -x "$DOCKER_CONFIG/cli-plugins/docker-compose" ]; then
+  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
     os="$(uname)"
     arch="$(uname -m)"
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
-    rm -f "$DOCKER_CONFIG/cli-plugins/docker-compose"
-    DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
-    mkdir -p "$DOCKER_CONFIG/cli-plugins"
+    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    mkdir -p "$DOCKER_CLI_PLUGINS_DIR"
     curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
-      -o "$DOCKER_CONFIG/cli-plugins/docker-compose"
-    chmod +x "$DOCKER_CONFIG/cli-plugins/docker-compose"
+      -o "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    if [ "$(id -u)" = 0 ]; then
+      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    else
+      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    fi
   fi
 }
 
@@ -67,6 +73,7 @@ else
   fi
   if [ -x "$HOME/bin/docker" ]; then
     # user scope
+    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
@@ -75,6 +82,12 @@ else
     "$HOME/bin/docker" $@
   elif [ -x "/usr/bin/docker" ]; then
     # system scope
+    DOCKER_CLI_PLUGINS_DIR="/usr/libexec/docker/cli-plugins"
+    if [ "$1" = "build" ]; then
+      install_docker_buildx_plugin
+    elif [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+    fi
     "/usr/bin/docker" $@
   else
     echo "Error: Docker CLI not found or executable in this Linux system."
