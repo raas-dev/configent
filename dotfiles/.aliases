@@ -169,7 +169,7 @@ alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 # https://github.com/clowa/docker-powershell-core
-alias pwsh='docker run --init -it --rm --name pwsh \
+alias pwsh='docker run --init -it --rm \
   --cap-drop ALL \
   --volume="$PWD:$PWD" \
   --workdir="$PWD" \
