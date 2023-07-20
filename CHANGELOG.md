@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.58.2](https://github.com/raas-dev/configent/compare/1.58.1...1.58.2) (2023-07-20)
+
+
+### Fixes
+
+* **aliases:** Add cap-drop ALL to nix ([fb43a53](https://github.com/raas-dev/configent/commit/fb43a534bd466358e3aa0bcf8907a7617c5770ff))
+* **aliases:** Add default docker cap to nix ([08d0150](https://github.com/raas-dev/configent/commit/08d0150685133e585a96008d13700925d7b71611))
+* **aliases:** Remove pwsh container name ([8f07749](https://github.com/raas-dev/configent/commit/8f07749e11bb3db637b130f6b8024b92144180d6))
+
 ### [1.58.1](https://github.com/raas-dev/configent/compare/1.58.0...1.58.1) (2023-07-20)
 
 
