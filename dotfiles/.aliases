@@ -461,6 +461,23 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
+ns() {
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
+  # shellcheck disable=SC1001   # escape forward slash on purpose
+  case "$1"
+    in *\/*)
+      local packages="${1//\// }"
+      shift
+      local command="${packages%% *} $*"
+      ;;
+    *)
+      local packages="$1"
+      local command="$*"
+      ;;
+  esac
+  eval nix-shell --packages "$packages" --command \""$command"\"
+}
+
 ### Binaries within containerd built dynamically by nixery #####################
 
 # nixery.dev
