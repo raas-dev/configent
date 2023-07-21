@@ -1,8 +1,6 @@
 #!/bin/bash
 # the above shebang is purely for ShellCheck, this file is not executable
 
-# shellcheck disable=SC2086  # not quoting args passed to docker and nixery
-
 ### Upgrade for all package managers ###########################################
 
 # shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
@@ -259,18 +257,18 @@ d() {
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
   if [ -n "$1" ] && [ "$1" != "-d" ] && [ "$1" != "--detach" ]; then
     local run_args="--log-driver none --entrypoint /bin/sh"
-    local cmd="-c $*"
+    local cmd="-c '$*'"
   else
     local run_args="$*"
   fi
 
-  docker run --init -it --name "$name" --rm \
+  eval docker run --init -it --name "$name" --rm \
     --cap-drop ALL \
     --publish-all \
     --publish 127.0.0.1:8080:8080 \
-    $env_file \
-    $run_args \
-    "$name" $cmd
+    "$env_file" \
+    "$run_args" \
+    "$name" "$cmd"
 
   if [ "$run_args" = "-d" ] || [ "$run_args" = "--detach" ]; then
     echo "[d] Published ports: container -> host"
@@ -446,7 +444,7 @@ nixd() {
   if [ -z "$1" ]; then
     local args="bash"
   else
-    local args="$*"
+    local args="/bin/sh -c '$*'"
   fi
   # do not docker run --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null || docker run --init -it --detach \
@@ -455,7 +453,7 @@ nixd() {
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     nixos/nix
-  docker exec -it --workdir="$PWD" "$name" $args
+  eval docker exec -it --workdir="$PWD" "$name" "$args"
 }
 
 alias nix='nixd nix'
@@ -476,10 +474,10 @@ nixery() {
     image="nixery.dev/shell/$pkgs"
   fi
   name="${pkgs//\//-}"
-  nerdctl run --init -it --rm --name "$name" \
+  eval nerdctl run --init -it --rm --name "$name" \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
-    "$image" $args
+    "$image" "$args"
 }
 
 # cloud

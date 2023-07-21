@@ -8,8 +8,6 @@
 
 # shim for running `podman` in lima VM
 
-# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
-
 : "${VM:="fedora"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -22,12 +20,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/local/bin/podman" $@
+  limactl shell "$VM" "$HOME/local/bin/podman" "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "/usr/bin/podman" ]; then
-    "/usr/bin/podman" $@
+    "/usr/bin/podman" "$@"
   else
     echo "Error: podman not found in this Linux system."
     exit 127

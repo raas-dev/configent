@@ -8,8 +8,6 @@
 
 # shim for running `nerdctl` in lima VM
 
-# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
-
 : "${VM:="debian"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -22,14 +20,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/local/bin/nerdctl" $@
+  limactl shell "$VM" "$HOME/local/bin/nerdctl" "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "$HOME/bin/nerdctl" ]; then
-    "$HOME/bin/nerdctl" $@
+    "$HOME/bin/nerdctl" "$@"
   elif [ -x "/usr/local/bin/nerdctl" ]; then
-    "/usr/local/bin/nerdctl" $@
+    "/usr/local/bin/nerdctl" "$@"
   else
     echo "Error: nerdctl not found in this Linux system."
     exit 127

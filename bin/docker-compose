@@ -8,8 +8,6 @@
 
 # shim for running `docker-compose` in lima VM
 
-# shellcheck disable=SC2068  # not quoting parameters passed to the real bin
-
 : "${VM:="ubuntu"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -22,8 +20,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/local/bin/docker-compose" $@
+  limactl shell "$VM" "$HOME/local/bin/docker-compose" "$@"
 else
   # pass arguments to docker shim, which installs the compose plugin
-  "$HOME/local/bin/docker" compose $@
+  "$HOME/local/bin/docker" compose "$@"
 fi
