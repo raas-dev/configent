@@ -442,9 +442,10 @@ alias wappalyzer='npx -y wappalyzer'
 nixd() {
   local name="${PWD##*/}"
   if [ -z "$1" ]; then
-    local args="bash"
+    local bin="bash"
   else
-    local args="/bin/sh -c '$*'"
+    local bin="$1"
+    shift
   fi
   # do not docker run --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null || docker run --init -it --detach \
@@ -453,7 +454,7 @@ nixd() {
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     nixos/nix
-  eval docker exec -it --workdir="$PWD" "$name" "$args"
+  docker exec -it --workdir="$PWD" "$name" "$bin" "$@"
 }
 
 alias nix='nixd nix'
