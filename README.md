@@ -163,12 +163,12 @@ These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
-💡: Use alias `d` as a generic shortcut for starting a `docker` container
-when the current working directory has `Dockerfile` present. After container
-has been started, the host-container mapped ports are output.
-
-💡: Use alias `n` to run (with `nerdctl`) a container for a binary you do not
-want to install, the image built ad-hoc by [Nixery](https://nixery.dev/).
+💡: Use alias `d` as a shortcut for building a docker image of the current
+working directory. `Dockerfile` is used for building if present; otherwise
+`nixpacks` is used to detect the tech stack and build the image best effort.
+After the image is built, a new container is launched from it. If alias `d` was
+used with `--detached`/`-d`, host-container mapped ports are output and
+docker logs are followed.
 
 ### macOS
 
@@ -188,6 +188,23 @@ VM 'fedora' has rootless [podman](https://podman.io/), run `podman` to use it.
 writable in the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
+
+## ❄️ Nix support
+
+[Nix](https://nix.dev/) is not present on the hosts, but run in OCI containers.
+
+Aliases `nix`, `nix-env`, `nix-shell` and create a container (if not running)
+from [NixOS image](https://hub.docker.com/r/nixos/nix) and then attach in it.
+
+The following aliases are available for creating ad-hoc (shell) environments:
+- `n`: Shortcut for creating ad-hoc shell environments by `nix-shell` above
+- `nixery`: Runs container(d) from an image dynamically created by [Nixery](https://nixery.dev/)
+
+Where `nixery` is preferred for various binaries not wanted installed on
+the host, such as various command-line security tools.
+
+Both `n` and `nixery` take in the package name(s) and the command as argument;
+run aliases without arguments for more help.
 
 ## 🔨 Development
 

@@ -115,7 +115,7 @@ alias i='glances'
 alias k='kalker'
 alias l='la'
 # m is for m-cli
-alias n='nixery'
+# n is for ad-hoc nix-shell in docker, see n()
 alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
@@ -461,7 +461,7 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
-ns() {
+n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
   # shellcheck disable=SC1001   # escape forward slash on purpose
   case "$1"
@@ -483,19 +483,29 @@ ns() {
 # nixery.dev
 nixery() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
-  local pkgs="$1"
-  shift
-  local args="${*:-${pkgs%%/*}}"
+  # shellcheck disable=SC1001   # escape forward slash on purpose
+  case "$1"
+    in *\/*)
+      local packages="$1"
+      shift
+      local command="${packages%%/*} $*"
+      ;;
+    *)
+      local packages="$1"
+      shift
+      local command="$*"
+      ;;
+  esac
+  local name="${packages//\//-}"
   if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
-    local image="nixery.dev/arm64/shell/$pkgs"
+    local image="nixery.dev/arm64/shell/$packages"
   else
-    local image="nixery.dev/shell/$pkgs"
+    local image="nixery.dev/shell/$packages"
   fi
-  local name="${pkgs//\//-}"
   eval nerdctl run --init -it --rm --name "$name" \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
-    "$image" "$args"
+    "$image" "$command"
 }
 
 # cloud
