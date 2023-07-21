@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.58.4](https://github.com/raas-dev/configent/compare/1.58.3...1.58.4) (2023-07-21)
+
+
+### Fixes
+
+* **aliases:** Fix quotes in nix-shell ([0acd1dd](https://github.com/raas-dev/configent/commit/0acd1dd7737a2be3abd7673d4dad12e6370a2de0))
+* **aliases:** Quote docker and nerdctl args ([26136a8](https://github.com/raas-dev/configent/commit/26136a84bc113f7e0bc1f68aa266ba0d3ade0a11))
+
 ### [1.58.3](https://github.com/raas-dev/configent/compare/1.58.2...1.58.3) (2023-07-20)
 
 
