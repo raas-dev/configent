@@ -191,20 +191,20 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 ## ❄️ Nix
 
-[Nix](https://nix.dev/) is not installed in host but is run in OCI containers.
+[Nix](https://nix.dev/) is not available on the host, but run in OCI containers.
 
-Aliases `nix`, `nix-env` and `nix-shell` start and attach a Nix environment
-in a docker container from an image built by `etc/nix/Dockerfile`.
+Aliases `nix`, `nix-env` and `nix-shell` create a Nix environment in docker
+for the current working directory. The image is defined in `etc/nix/Dockerfile`,
 
-The following aliases are available for creating ad-hoc (shell) environments:
-- `n`: Starts an interactive `nix-shell` in the current directory (dockerd)
-- `nixery`: Starts a container by [Nixery](https://nixery.dev/) (containerd)
+The following aliases are available for creating isolated ad-hoc environments:
+- `n`: Creates a `nix-shell` with requested packages for running the command(s)
+- `nixery`: Runs a command in a container based on [Nixery](https://nixery.dev/)
 
 Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
 to install as the first argument. Packages are from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
-The rest of the arguments are as following (run without arguments for usage):
+The rest of the arguments are as following (run without arguments for help):
 - `n` assumes the binary being the same as the name of the first package,
 thus the rest of the arguments (if any) are passed to this binary
 (e.g. `n vim README.md`).

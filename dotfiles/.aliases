@@ -238,6 +238,7 @@ sgpt_shell() {
 
 # Generic docker build and run
 d() {
+  # lowercase the image name to allow pushing it to container registries
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
   if docker top "$name" &>/dev/null; then
@@ -438,8 +439,8 @@ alias wappalyzer='npx -y wappalyzer'
 
 # nix.dev
 nixd() {
-  local name="nixd"
-  # do not docker run --cap-drop ALL, or creating /nix/store fails
+  local name="${PWD##*/}"
+  # do not docker run with --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null ||
     (docker build --pull --tag "$name" "$HOME/local/etc/nix" &&
     docker run --init -it --detach \
