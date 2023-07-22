@@ -461,6 +461,7 @@ alias nix='nixd nix'
 alias nix-env='nixd nix-env'
 alias nix-shell='nixd nix-shell'
 
+# Generic nix-shell run
 n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
   # shellcheck disable=SC1001   # escape forward slash on purpose
@@ -477,8 +478,6 @@ n() {
   esac
   eval nix-shell --packages "$packages" --command \""$command"\"
 }
-
-### Binaries within containerd built dynamically by nixery #####################
 
 # nixery.dev
 nixery() {
@@ -503,10 +502,12 @@ nixery() {
     local image="nixery.dev/shell/$packages"
   fi
   eval nerdctl run --init -it --rm --name "$name" \
-    --volume="$PWD:$PWD" \
+    --volume="$PWD:$PWD":rro,rprivate \
     --workdir="$PWD" \
     "$image" "$command"
 }
+
+### Run binaries in ad-hoc environments ########################################
 
 # cloud
 alias gcloud='nixery google-cloud-sdk gcloud'
@@ -523,7 +524,7 @@ alias hexyl='nixery hexyl hexyl'
 # development
 alias grex='nixery grex grex'
 alias tokei='nixery tokei tokei'
-alias webanalyze='nixery webanalyze webanalyze -update'
+alias webanalyze='n webanalyze -update' # requires read-write file system
 
 # load testing
 alias k6='nixery k6 k6'

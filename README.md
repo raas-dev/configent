@@ -200,11 +200,14 @@ The following aliases are available for creating ad-hoc (shell) environments:
 - `n`: Creates an ad-hoc shell environment in the current dir using `nix-shell`
 - `nixery`: Runs container(d) from an image dynamically created by [Nixery](https://nixery.dev/)
 
+Both `n` and `nixery` take in the package name(s, separated by forward slashes)
+to install and the command as argument; run aliases without arguments for help.
+
 💡: Use alias `nixery` for binaries not wanted installed on the host, such as
 various command-line security tools, or for binaries not available on AArch64.
 
-Both `n` and `nixery` take in the package name(s, separated by forward slashes)
-to install and the command as argument; run aliases without arguments for help.
+⚠️: Alias `n` mounts the current directory as writable inside the container,
+where `nixery` mounts the current directory as read-only.
 
 ## 🔨 Development
 
