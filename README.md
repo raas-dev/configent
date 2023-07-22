@@ -197,7 +197,7 @@ Aliases `nix`, `nix-env` and `nix-shell` start and attach a Nix environment
 in a docker container from an image built by `etc/nix/Dockerfile`.
 
 The following aliases are available for creating ad-hoc (shell) environments:
-- `n`: Starts a new interactive `nix-shell` in the current directory (dockerd)
+- `n`: Starts an interactive `nix-shell` in the current directory (dockerd)
 - `nixery`: Starts a container by [Nixery](https://nixery.dev/) (containerd)
 
 Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
