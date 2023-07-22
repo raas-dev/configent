@@ -3,11 +3,11 @@
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
 
-No startup pitches, I am a DevOps principled development machine bootstrapper.
+No startup pitches, I am a DevOps principled environment bootstrapper.
 
-- 100% automated installation of curated, only stable and battle-tested tools
-- 95% consistent user experience both on macOS and the most used Linux distros
-- There is actually one, and only one, way to do it right - the most efficient
+- 100% automated installation of only curated, stable and battle-tested tools
+- 95% consistent user experience both on macOS and the most loved Linux distros
+- There is one, and only one, way to do tasks in terminal - the most efficient
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The secure open source web browser, VSCode and a killer terminal. That's it.
 
