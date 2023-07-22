@@ -200,10 +200,13 @@ The following aliases are available for creating ad-hoc (shell) environments:
 - `n`: Creates an ad-hoc shell environment in the current dir using `nix-shell`
 - `nixery`: Runs container(d) from an image dynamically created by [Nixery](https://nixery.dev/)
 
-Both `n` and `nixery` take in Nix package name(s, separated by forward slashes)
-to install as the first argument, and rest of the arguments as following:
+Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
+to install as the first argument. Packages are from channel
+[unstable](https://search.nixos.org/packages?channel=unstable).
+
+The rest of the arguments are as following (run without arguments for help):
 - `n` assumes the binary being the same as the name of the first package,
-thus rest of the arguments (if any) are passed to this binary.
+thus the rest of the arguments (if any) are passed to this binary.
 - `nixery` does not assume the binary from the package name, thus binary name
 is required before its arguments - if none is passed, `bash` is assumed.
 
