@@ -156,9 +156,9 @@ Both container runtimes in a nutshell:
 
 These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 
-- `docker`: Runs docker cli preferring rootless docker when available (no sudo)
-- `nerdctl`: Runs nerdctl (containerd cli) on the rootless containerd (no sudo)
-- `podman`: The 3rd option, near-Docker compatible daemonless runtime (no sudo)
+- `docker`: Runs docker cli and its plugins preferring rootless docker
+- `nerdctl`: Runs nerdctl (containerd cli) preferring rootless containerd
+- `podman`: The 3rd option, runs on near-Docker compatible daemonless runtime
 
 The shims are available in non-interactive sessions, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
@@ -197,8 +197,8 @@ Aliases `nix`, `nix-env` and `nix-shell` start and attach a Nix environment
 in a docker container from an image built by `etc/nix/Dockerfile`.
 
 The following aliases are available for creating ad-hoc (shell) environments:
-- `n`: Creates an ad-hoc shell environment in the current dir using `nix-shell`
-- `nixery`: Runs container(d) from an image dynamically created by [Nixery](https://nixery.dev/)
+- `n`: Starts a new interactive `nix-shell` in the current directory (docker)
+- `nixery`: Starts a container by [Nixery](https://nixery.dev/) (containerd)
 
 Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
 to install as the first argument. Packages are from channel
