@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.59.0](https://github.com/raas-dev/configent/compare/1.58.4...1.59.0) (2023-07-22)
+
+
+### Features
+
+* **aliases:** Make n() run nix-shell in docker ([11487f5](https://github.com/raas-dev/configent/commit/11487f52293a97cda25a4f03bfc1e33d3ba43fe7))
+
+
+### Fixes
+
+* **aliases:** Add ns() for nix-shell ([78eef30](https://github.com/raas-dev/configent/commit/78eef30497598c507aa63745b73ec8ac4461f1a1))
+* **aliases:** Build image on create only ([9e1da78](https://github.com/raas-dev/configent/commit/9e1da7821f498d518387e43cd5e2753dc0ee5dd0))
+* **aliases:** Infer nixery default command name ([00602f1](https://github.com/raas-dev/configent/commit/00602f1098b1b723d51e6f85caf348305b1e034b))
+* **aliases:** Name nixd container by command ([caba14a](https://github.com/raas-dev/configent/commit/caba14a3c30423a4381b648526c8db714d468b1b))
+* **nix:** Add nix Dockerfile ([b3a5675](https://github.com/raas-dev/configent/commit/b3a5675d91e9afc0e6730d4f95b4c1a0f538dc8b))
+* **nix:** Use locally built image for nixd ([ed110ff](https://github.com/raas-dev/configent/commit/ed110ffafb774a9781ccf5233be98b1ebfb888d9))
+* **topgrade:** Args ([d2ec25c](https://github.com/raas-dev/configent/commit/d2ec25c8181d5e55d0714a1adef9962d33ceffda))
+* **topgrade:** Update casks ([f5fd210](https://github.com/raas-dev/configent/commit/f5fd21046c6be99cf96ab87b6e04e9718b05f432))
+
 ### [1.58.4](https://github.com/raas-dev/configent/compare/1.58.3...1.58.4) (2023-07-21)
 
 
