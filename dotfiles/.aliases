@@ -463,16 +463,15 @@ alias nix-shell='nixd nix-shell'
 
 # Generic nix-shell run
 n() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
   # shellcheck disable=SC1001   # escape forward slash on purpose
+  local packages="${1//\// }"
   case "$1"
     in *\/*)
-      local packages="${1//\// }"
       shift
       local command="${packages%% *} $*"
       ;;
     *)
-      local packages="$1"
       local command="$*"
       ;;
   esac
