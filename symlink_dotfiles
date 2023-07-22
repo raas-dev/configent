@@ -60,6 +60,12 @@ mkdir -p "$HOME/.config"
 ln -snvi"$args" "$HOME/local/etc/starship/config.toml" \
   "$HOME/.config/starship.toml"
 
+### Symlink Topgrade config ####################################################
+
+mkdir -p "$HOME/.config"
+ln -snvi"$args" "$HOME/local/etc/topgrade/topgrade.toml" \
+  "$HOME/.config/topgrade.toml"
+
 ### Symlink htoprc for Linux distributions #####################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
