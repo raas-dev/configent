@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.59.2](https://github.com/raas-dev/configent/compare/1.59.1...1.59.2) (2023-07-22)
+
+
+### Fixes
+
+* **nixd:** Container naming per bin and per dir ([0c37d65](https://github.com/raas-dev/configent/commit/0c37d65b8c351a8177ed0f30209554a9d1adaad9))
+* **nixd:** Name container per dir ([0cf2bc6](https://github.com/raas-dev/configent/commit/0cf2bc64bc8178246fa18214a90beb1fa47f11c3))
+
 ### [1.59.1](https://github.com/raas-dev/configent/compare/1.59.0...1.59.1) (2023-07-22)
 
 
