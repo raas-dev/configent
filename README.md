@@ -215,8 +215,8 @@ if none is passed, `bash` is assumed.
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 where as `nixery` mounts the current directory as read-only.
 
-💡: Use alias `nixery` for binaries not wanted installed on the host, such as
-various command-line security tools, or for binaries not available on AArch64.
+💡: Use aliases for binaries not wanted installed on the host, such as various
+command-line security tools, and for binaries that are not available on AArch64.
 
 ## 🔨 Development
 
