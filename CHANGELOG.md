@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.59.1](https://github.com/raas-dev/configent/compare/1.59.0...1.59.1) (2023-07-22)
+
+
+### Fixes
+
+* **aliases:** Make nixery environments read-only ([6f7f355](https://github.com/raas-dev/configent/commit/6f7f355966350be46821459ef5e0526933403510))
+* **aliases:** Require nixery command always ([7cd97b6](https://github.com/raas-dev/configent/commit/7cd97b6c3c02276bc3ccbfaef45616685d9f0d62))
+
 ## [1.59.0](https://github.com/raas-dev/configent/compare/1.58.4...1.59.0) (2023-07-22)
 
 
