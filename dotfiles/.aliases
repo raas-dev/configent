@@ -183,7 +183,7 @@ alias miniserve='nerdctl run --init -it --rm \
   --cap-drop ALL \
   --publish 127.0.0.1:8080:8080 \
   --volume $PWD:/data \
-  docker.io/svenstaro/miniserve \
+  svenstaro/miniserve \
   --hide-version-footer -p 8080 /data'
 
 ### Misc #######################################################################
