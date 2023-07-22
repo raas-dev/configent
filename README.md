@@ -204,11 +204,13 @@ Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
 to install as the first argument. Packages are from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
-The rest of the arguments are as following (run without arguments for help):
+The rest of the arguments are as following (run without arguments for usage):
 - `n` assumes the binary being the same as the name of the first package,
-thus the rest of the arguments (if any) are passed to this binary.
+thus the rest of the arguments (if any) are passed to this binary
+(e.g. `n vim README.md`).
 - `nixery` does not assume the binary from the package name, thus binary name
-is required before its arguments - if none is passed, `bash` is assumed.
+is required before its arguments (e.g. `nixery vim vim README.md`) -
+if none is passed, `bash` is assumed.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 where as `nixery` mounts the current directory as read-only.
