@@ -5,10 +5,8 @@
 
 # shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
 skipped_managers="containers helm"
-alias up="topgrade --yes --no-retry --cleanup --skip-notify \
- --disable system restarts $skipped_managers"
-alias dup="topgrade --yes --no-retry --cleanup --skip-notify \
---disable $skipped_managers"
+alias up="topgrade --yes --no-retry --disable system restarts $skipped_managers"
+alias dup="topgrade --yes --no-retry --disable $skipped_managers"
 
 ### OS specific ################################################################
 
@@ -440,13 +438,13 @@ alias wappalyzer='npx -y wappalyzer'
 
 # nix.dev
 nixd() {
+  local name="nixd"
   if [ -z "$1" ]; then
     local bin="bash"
   else
     local bin="$1"
     shift
   fi
-  local name="$bin"
   # do not docker run --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null || docker run --init -it --detach \
     --name "$name" \
