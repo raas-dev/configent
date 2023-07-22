@@ -480,20 +480,10 @@ n() {
 
 # nixery.dev
 nixery() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND]" && return
-  # shellcheck disable=SC1001   # escape forward slash on purpose
-  case "$1"
-    in *\/*)
-      local packages="$1"
-      shift
-      local command="${packages%%/*} $*"
-      ;;
-    *)
-      local packages="$1"
-      shift
-      local command="$*"
-      ;;
-  esac
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND=bash]" && return
+  local packages="$1"
+  shift
+  local command="$*"
   local name="${packages//\//-}"
   if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
     local image="nixery.dev/arm64/shell/$packages"
