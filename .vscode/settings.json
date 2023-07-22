@@ -1,9 +1,12 @@
 {
   "cSpell.words": [
+    "autofix",
     "bootstrapper",
     "chatgpt",
     "CNCF",
     "codeium",
+    "codespell",
+    "commitizen",
     "configent",
     "containerd",
     "daemonless",
@@ -34,7 +37,9 @@
     "rustup",
     "scrollback",
     "semgrep",
+    "shellcheck",
     "shellformat",
+    "shfmt",
     "squashfs",
     "squashfuse",
     "Terminess",
