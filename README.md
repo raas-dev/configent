@@ -193,8 +193,8 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 [Nix](https://nix.dev/) is not installed in host but is run in OCI containers.
 
-Aliases `nix`, `nix-env` and `nix-shell` create and attach a Nix environment
-in a container created from [NixOS image](https://hub.docker.com/r/nixos/nix).
+Aliases `nix`, `nix-env` and `nix-shell` start and attach a Nix environment
+in a docker container from an image built by `etc/nix/Dockerfile`.
 
 The following aliases are available for creating ad-hoc (shell) environments:
 - `n`: Creates an ad-hoc shell environment in the current dir using `nix-shell`
