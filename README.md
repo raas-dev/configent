@@ -6,7 +6,7 @@
 No startup pitches, I am a DevOps principled environment bootstrapper.
 
 - 100% automated installation of only curated, stable and battle-tested tools
-- 95% consistent user experience both on macOS and the most loved Linux distros
+- 95% consistent user experience both on macOS and the beloved Linux distros
 - There is one, and only one, way to do tasks in terminal - the most efficient
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The secure open source web browser, VSCode and a killer terminal. That's it.
