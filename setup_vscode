@@ -23,6 +23,14 @@ rm -rfv "${user_path}-old"
 mv -v "$user_path" "${user_path}-old"
 ln -snvi "$this_path/vscode" "$user_path"
 
+### Remove VSCode extensions ###################################################
+
+#if command -v code >/dev/null; then
+#  code --list-extensions | while read -r extension; do
+#    code --force --uninstall-extension "$extension"
+#  done
+#fi
+
 ### Install VSCode extensions ##################################################
 
 if command -v code >/dev/null; then
