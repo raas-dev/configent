@@ -439,14 +439,15 @@ alias wappalyzer='npx -y wappalyzer'
 # nix.dev
 nixd() {
   local name="nixd"
-  docker build --pull --tag "$name" "$HOME/local/etc/nix"
   # do not docker run --cap-drop ALL, or creating /nix/store fails
-  docker start "$name" &>/dev/null || docker run --init -it --detach \
+  docker start "$name" &>/dev/null ||
+    (docker build --pull --tag "$name" "$HOME/local/etc/nix" &&
+    docker run --init -it --detach \
     --name "$name" \
     --publish-all \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
-    "$name"
+    "$name")
   if [ -z "$1" ]; then
     local bin="bash"
   else
