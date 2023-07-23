@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.60.0](https://github.com/raas-dev/configent/compare/1.59.2...1.60.0) (2023-07-23)
+
+
+### Features
+
+* **aliases:** Add devenv via Nix ([284a93b](https://github.com/raas-dev/configent/commit/284a93bc8f531c6d44d563101ca3e4a8f15337b0))
+
+
+### Fixes
+
+* **aliases:** Add shell meta-package option for n ([1c4a8da](https://github.com/raas-dev/configent/commit/1c4a8da3185dddb123088a2ed89fbf3303f662fe))
+* **aliases:** Fix nixd image name ([cf34f5b](https://github.com/raas-dev/configent/commit/cf34f5bb98a8cf47358d11bd5f0eb39a87d1cbec))
+* **aliases:** Remove nix- aliases over nixd and n ([ec239d9](https://github.com/raas-dev/configent/commit/ec239d9533a54cc7bc2508c4389e5294f789d74b))
+* **aliases:** Simplify nixery arguments ([7dda829](https://github.com/raas-dev/configent/commit/7dda829bbb55da1b81774287a100d63961c1c321))
+
 ### [1.59.2](https://github.com/raas-dev/configent/compare/1.59.1...1.59.2) (2023-07-22)
 
 
