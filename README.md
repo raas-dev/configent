@@ -18,9 +18,9 @@ Features:
 
 - Get full macOS or Linux development environment by running one `curl` command
 - macOS `docker` experience exactly as it was with Docker Desktop, but it's free
-- Multiplexed terminals with helpers/utilities written in Rust and Go for speed
-- One character shell aliases - the fastest are the commands one does not type
-- Use GPT in terminal and in IDE to create rest of the commands, code and apps
+- Command-line is Rust, Go and C for speed and `nix-shell`s for ad-hoc binaries
+- One character shell aliases as the fastest are the commands one does not type
+- Ask GPT in terminal (`s`), create shell commands (`_`) and write code (`c`)
 
 Works on x86_64 and AArch64/ARM64 operating systems:
 
