@@ -445,16 +445,17 @@ nixd() {
     local bin="$1"
     shift
   fi
-  local name="n-${PWD##*/}"
+  local image="nix"
+  local name="$image-${PWD##*/}"
   # do not docker run with --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null ||
-    (docker build --pull --tag "$name" "$HOME/local/etc/nix" &&
+    (docker build --pull --tag "$image" "$HOME/local/etc/nix" &&
     docker run --init -it --detach \
     --name "$name" \
     --publish-all \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
-    "$name")
+    "$image")
   docker exec -it --workdir="$PWD" "$name" "$bin" "$@"
 }
 
@@ -470,13 +471,15 @@ n() {
   case "$1"
     in *\/*)
       shift
-      local command="${packages%% *} $*"
+      local bin="${packages%% *}"
+      local command="$bin $*"
       ;;
     *)
       local command="$*"
       ;;
   esac
-  eval nix-shell --packages "$packages" --command \""$command"\"
+  set -x
+  eval nix-shell --packages "$packages" --command \"$command\"
 }
 
 # nixery.dev
