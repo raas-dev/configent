@@ -18,7 +18,7 @@ Features:
 
 - Setup is one `curl` command, run `up` to upgrade every package manager on OS
 - macOS `docker` experience as it was with Docker Desktop, but it runs rootless
-- Command-line is Rust, Go and C for speed and `nix-shell`s for ad-hoc binaries
+- Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character shell aliases as the fastest are the commands one does not type
 - Ask GPT in terminal (`s`), create shell commands (`_`) and write code (`c`)
 
