@@ -445,7 +445,7 @@ nixd() {
     local bin="$1"
     shift
   fi
-  local name="$bin-${PWD##*/}"
+  local name="n-${PWD##*/}"
   # do not docker run with --cap-drop ALL, or creating /nix/store fails
   docker start "$name" &>/dev/null ||
     (docker build --pull --tag "$name" "$HOME/local/etc/nix" &&
@@ -465,8 +465,8 @@ alias nix-shell='nixd nix-shell'
 # Generic nix-shell run
 n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
-  # shellcheck disable=SC1001   # escape forward slash on purpose
   local packages="${1//\// }"
+  # shellcheck disable=SC1001   # escape forward slash on purpose
   case "$1"
     in *\/*)
       shift
@@ -481,17 +481,21 @@ n() {
 
 # nixery.dev
 nixery() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [COMMAND=bash]" && return
+  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
   local packages="$1"
   shift
-  local command="$*"
-  local name="${packages//\//-}"
-  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
-    local image="nixery.dev/arm64/shell/$packages"
+  local bin="${packages%%/*}"
+  if [ "$bin" = "shell" ]; then
+    local command="bash -c \"$*\""
   else
-    local image="nixery.dev/shell/$packages"
+    local command="$bin $*"
   fi
-  eval nerdctl run --init -it --rm --name "$name" \
+  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
+    local image="nixery.dev/arm64/$packages"
+  else
+    local image="nixery.dev/$packages"
+  fi
+  eval nerdctl run --init -it --rm \
     --volume="$PWD:$PWD":rro,rprivate \
     --workdir="$PWD" \
     "$image" "$command"
@@ -500,49 +504,49 @@ nixery() {
 ### Run binaries in ad-hoc environments ########################################
 
 # cloud
-alias gcloud='nixery google-cloud-sdk gcloud'
+alias gcloud='nixery shell/google-cloud-sdk gcloud'
 
 # databases
-alias mysql='nixery mariadb mysql'
-alias psql='nixery postgresql psql'
-alias sqlmap='nixery sqlmap sqlmap'
+alias mysql='nixery shell/mariadb mysql'
+alias psql='nixery shell/postgresql psql'
+alias sqlmap='nixery sqlmap'
 
 # decoders
-alias fq='nixery fq fq'
-alias hexyl='nixery hexyl hexyl'
+alias fq='nixery fq'
+alias hexyl='nixery hexyl'
 
 # development
-alias grex='nixery grex grex'
-alias tokei='nixery tokei tokei'
+alias grex='nixery grex'
+alias tokei='nixery tokei'
 alias webanalyze='n webanalyze -update' # requires read-write file system
 
 # load testing
-alias k6='nixery k6 k6'
-alias oha='nixery oha oha'
+alias k6='nixery k6'
+alias oha='nixery oha'
 
 # network
-alias dog='nixery dogdns dog'
-alias naabu='nixery naabu naabu'
-alias nmap='nixery nmap nmap'
-alias rustscan='nixery rustscan rustscan'
+alias dog='nixery shell/dogdns dog'
+alias naabu='nixery naabu'
+alias nmap='nixery nmap'
+alias rustscan='nixery rustscan'
 
 # osint
-alias amass='nixery amass amass'
-alias maigret='nixery maigret maigret'
+alias amass='nixery amass'
+alias maigret='nixery maigret'
 
 # pentesting
-alias hydra='nixery thc-hydra hydra'
-alias gobuster='nixery gobuster gobuster'
-alias msfconsole='nixery metasploit msfconsole'
+alias hydra='nixery shell/thc-hydra hydra'
+alias gobuster='nixery gobuster'
+alias msfconsole='nixery shell/metasploit msfconsole'
 
 # scanners
-alias dalfox='nixery dalfox dalfox'
-alias dnstwist='nixery dnstwist dnstwist'
-alias ffuf='nixery ffuf ffuf'
-alias katana='nixery katana katana'
-alias nikto='nixery nikto nikto'
-alias nuclei='nixery nuclei nuclei'
-alias wapiti='nixery wapiti wapiti'
+alias dalfox='nixery dalfox'
+alias dnstwist='nixery dnstwist'
+alias ffuf='nixery ffuf'
+alias katana='nixery katana'
+alias nikto='nixery nikto'
+alias nuclei='nixery nuclei'
+alias wapiti='nixery wapiti'
 
 # miscellaneous
-alias tickrs='nixery tickrs tickrs --show-x-labels --summary -c candle -s'
+alias tickrs='nixery tickrs --show-x-labels --summary -c candle -s'
