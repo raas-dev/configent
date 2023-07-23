@@ -535,6 +535,7 @@ alias oha='nixery oha'
 
 # network
 alias dog='nixery shell/dogdns dog'
+alias gping='nixery gping/iputils'
 alias naabu='nixery naabu'
 alias nmap='nixery nmap'
 alias rustscan='nixery rustscan'
