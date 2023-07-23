@@ -423,6 +423,9 @@ alias gpt-engineer='pipx run gpt-engineer'
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
+# Zero config GUI for Jest
+alias majestic='npx -y majestic'
+
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
