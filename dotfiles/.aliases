@@ -435,9 +435,9 @@ alias standard-version='npx -y standard-version'
 # Identify technology on websites
 alias wappalyzer='npx -y wappalyzer'
 
-### Run nix in Docker ##########################################################
+### Nix ########################################################################
 
-# nix.dev
+# Start Nix in docker
 nixd() {
   if [ -z "$1" ]; then
     local bin="bash"
@@ -459,11 +459,7 @@ nixd() {
   docker exec -it --workdir="$PWD" "$name" "$bin" "$@"
 }
 
-alias nix='nixd nix'
-alias nix-env='nixd nix-env'
-alias nix-shell='nixd nix-shell'
-
-# Generic nix-shell run
+# Generic nix-shell builder and runner
 n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
   local packages="${1//\// }"
@@ -478,8 +474,7 @@ n() {
       local command="$*"
       ;;
   esac
-  set -x
-  eval nix-shell --packages "$packages" --command \"$command\"
+  eval nixd nix-shell --packages "$packages" --command \"$command\"
 }
 
 # nixery.dev

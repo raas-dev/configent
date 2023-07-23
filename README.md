@@ -191,21 +191,22 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 ## ❄️ Nix
 
-[Nix](https://nix.dev/) is not available on the host, but run in OCI containers.
+[Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
+a docker container where `nix`, `nix-env`, `nix-shell`, etc. are available.
+The docker image is built according to `etc/nix/Dockerfile`.
 
-Aliases `nix`, `nix-env` and `nix-shell` create a Nix environment in docker
-for the current working directory. The image is defined in `etc/nix/Dockerfile`,
+The environment is created in the current directory and alias `n` can be used
+to start a new `nix-shell` with selected packages only, e.g. `n vim README.md`.
 
-The following aliases are available for creating isolated ad-hoc environments:
-- `n`: Creates a `nix-shell` with requested packages for running the command(s)
-- `nixery`: Runs a command in a container based on [Nixery](https://nixery.dev/)
+Similar ad-hoc environments can be created in containerd with alias `nixery`,
+which dynamically builds and pulls the image from [Nixery](https://nixery.dev/).
 
-Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
+Both `n` and `nixery` parse Nix package name(s, separated by forward slashes)
 as the first argument. The packages are installed from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
-The binary is assumed to be the name of the first package and the rest of the
-arguments are passed to it. If binary is different from the package name,
+The binary is assumed named according to the first package and the rest of the
+arguments are passed to the binary. If name is different from the package name,
 install and use meta-package shell e.g. `nixery shell/google-cloud-sdk gcloud`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
