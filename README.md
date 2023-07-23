@@ -207,7 +207,7 @@ as the first argument. The packages are installed from channel
 
 The binary is assumed named according to the first package and the rest of the
 arguments are passed to the binary. If name is different from the package name,
-install and use meta-package shell e.g. `nixery shell/google-cloud-sdk gcloud`.
+put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 where as `nixery` mounts the current directory as read-only.

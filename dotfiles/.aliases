@@ -465,7 +465,12 @@ n() {
   local packages="${1//\// }"
   # shellcheck disable=SC1001   # escape forward slash on purpose
   case "$1"
-    in *\/*)
+    in shell*)
+      shift
+      local packages="${packages#* }"
+      local command="bash -c '$*'"
+      ;;
+    *\/*)
       shift
       local bin="${packages%% *}"
       local command="$bin $*"
@@ -484,7 +489,7 @@ nixery() {
   shift
   local bin="${packages%%/*}"
   if [ "$bin" = "shell" ]; then
-    local command="bash -c \"$*\""
+    local command="bash -c '$*'"
   else
     local command="$bin $*"
   fi
