@@ -1,5 +1,5 @@
 #!/bin/bash
-# the above shebang is purely for ShellCheck, this file is not executable
+# the above shebang is only for ShellCheck, this file is not executable
 
 ### Upgrade for all package managers ###########################################
 
@@ -157,7 +157,7 @@ alias vm4suse="limactl start \$HOME/local/etc/lima/opensuse.yaml --tty=false"
 alias vm4arch="limactl start \$HOME/local/etc/lima/archlinux.yaml --tty=false"
 alias vm4alpine="limactl start \$HOME/local/etc/lima/alpine.yaml --tty=false"
 
-### Docker #####################################################################
+### docker #####################################################################
 
 alias drmc='docker rm --force $(docker ps --all --quiet)'
 alias drmv='docker volume rm --force $(docker volume ls --quiet)'
@@ -209,7 +209,7 @@ alias wttr='curl "https://wttr.in?format=v2&MF"'
 
 ### Utilities ##################################################################
 
-# OpenAI helpers
+# Generic AI helpers
 sgpt() {
   pipx run --spec=shell-gpt sgpt "$@"
 }
@@ -325,7 +325,7 @@ e() {
   done
 }
 
-# Follow the given log file, or cloud-init output if log file not given
+# Follow the given log file, or cloud-init output if log file is not given
 taillog() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
   if command -v lnav >/dev/null; then
@@ -343,7 +343,7 @@ taillog() {
   fi
 }
 
-# List 20 biggest directories
+# List 20 biggest subdirectories
 usage() {
   du | sort -r -n |
     awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} \
@@ -386,36 +386,36 @@ pipclear() {
   pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
-### Latest version of Python command-line tools ################################
+### Latest versions of Python command-line tools ###############################
 
-# cross-platform real-time monitoring
+# Cross-platform real-time monitoring
 alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'
 
-# general media downloader
+# General media downloader
 alias you-get='pipx run you-get'
 
-# simplenote in terminal
+# Simplenote in terminal
 alias sncli='pipx run sncli'
 
-# jupyter notebooks in terminal
+# Jupyter notebooks in terminal
 alias euporie='pipx run euporie'
 
-# multitool for tabular data in terminal
+# Multitool for tabular data in terminal
 alias vd='pipx run --pip-args openpyxl visidata'
 
-# playwright
+# Playwright
 alias playwright='pipx run playwright'
 
-# huggingface-cli
+# Huggingface CLI
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 
-# openai
+# OpenAI CLI
 alias openai='pipx run openai'
 
-# aider
+# GPT powered coding in terminal
 alias aider='pipx run aider-chat'
 
-# gpt-engineer
+# AI codebase generator
 alias gpt-engineer='pipx run gpt-engineer'
 
 ### Latest versions of global Node.js command-line tools #######################
@@ -426,7 +426,7 @@ alias depcheck='npx -y depcheck'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
-# project generator (uses bin/yarn)
+# Project generator (requires bin/yarn shim)
 alias projen='npx -y projen'
 
 # Bump version and generate CHANGELOG.md

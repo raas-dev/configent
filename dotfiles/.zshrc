@@ -1,5 +1,5 @@
 #!/bin/sh
-# the above shebang is purely for ShellCheck, this file is not executable
+# the above shebang is only for ShellCheck, this file is not executable
 
 # shellcheck disable=SC1091  # do not expect input files
 # shellcheck disable=SC2015  # true is expected if .rclocal is not found
