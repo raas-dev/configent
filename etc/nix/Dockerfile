@@ -9,3 +9,8 @@ EOF
 RUN nix-channel --update
 RUN nix-env -u '*'
 RUN nix-collect-garbage --delete-old
+
+# https://devenv.sh/
+RUN nix-env -iA cachix -f https://cachix.org/api/v1/install
+RUN cachix use devenv
+RUN nix-env -if https://install.devenv.sh/latest

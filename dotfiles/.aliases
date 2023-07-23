@@ -437,7 +437,7 @@ alias wappalyzer='npx -y wappalyzer'
 
 ### Nix ########################################################################
 
-# Start Nix in docker
+# Nix in docker
 nixd() {
   if [ -z "$1" ]; then
     local bin="bash"
@@ -458,6 +458,9 @@ nixd() {
     "$image")
   docker exec -it --workdir="$PWD" "$name" "$bin" "$@"
 }
+
+# https://devenv.sh/
+alias devenv="nixd devenv"
 
 # Generic nix-shell builder and runner
 n() {
@@ -482,7 +485,7 @@ n() {
   eval nixd nix-shell --packages "$packages" --command \"$command\"
 }
 
-# nixery.dev
+# https://nixery.dev/
 nixery() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
   local packages="$1"
@@ -504,7 +507,7 @@ nixery() {
     "$image" "$command"
 }
 
-### Run binaries in ad-hoc environments ########################################
+### Ad-hoc binaries via Nix ####################################################
 
 # cloud
 alias gcloud='nixery shell/google-cloud-sdk gcloud'
