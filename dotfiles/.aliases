@@ -447,11 +447,11 @@ nixd() {
     (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
         nerdctl run --init -t --detach \
         --name "$name" \
-        --publish 127.0.0.1:8000:8000 \
+        --publish "127.0.0.1:${PORT:-8000}:${PORT:-8000}" \
         --volume="$PWD:$PWD" \
         --workdir="$PWD" \
         "$image")
-  nerdctl exec -it --workdir="$PWD" "$name" "$bin" "$@"
+  nerdctl exec -it --env PORT --workdir="$PWD" "$name" "$bin" "$@"
 }
 
 # https://devenv.sh/
