@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.61.0](https://github.com/raas-dev/configent/compare/1.60.0...1.61.0) (2023-07-24)
+
+
+### Features
+
+* **aliases:** Add difftastic via nix-shell ([bea7042](https://github.com/raas-dev/configent/commit/bea70423a2e5972e92a77cab3a745502fce6b033))
+* **aliases:** Add gping via nixery ([46d14c2](https://github.com/raas-dev/configent/commit/46d14c2e3c82ff5aeffcb1e8db08fe8b560cfaab))
+* **aliases:** Add majestic via npx ([398d73c](https://github.com/raas-dev/configent/commit/398d73c22376f2e53cf3c8f993e76e292f9fbadb))
+
+
+### Fixes
+
+* **aliases:** Add miniserve via nix-shell ([7c1b3f6](https://github.com/raas-dev/configent/commit/7c1b3f637c16e5c7f9f453107feee239c6b58a88))
+* **aliases:** Fix pwsh entrypoint ([4fb1ee6](https://github.com/raas-dev/configent/commit/4fb1ee6121bc25bdc0ab5e8e7efcf6325d6a0f55))
+* **bin:** Remove cht.sh over tldr ([d9558f6](https://github.com/raas-dev/configent/commit/d9558f6fb01c8d269b71419dc7885567dc806d8b))
+* **git:** Remove side-by-side diff ([c51ad83](https://github.com/raas-dev/configent/commit/c51ad83f951e42817528abf6dfae2a4f5bb8f392))
+* **nixd:** Fix check if container is running ([242a8e6](https://github.com/raas-dev/configent/commit/242a8e6aad5dde631112e6993ebcac3bf0f3a435))
+* **nixd:** Fix check if container is running ([55f38bf](https://github.com/raas-dev/configent/commit/55f38bf1c2db99939bbbeb13647825c57153567b))
+* **nixd:** Fix container capabilities ([34654bf](https://github.com/raas-dev/configent/commit/34654bffc334d64368b2281dc7b753702959c027))
+* **nix:** Do not upgrade on image build ([fdb27da](https://github.com/raas-dev/configent/commit/fdb27da570b7bca3d0a1a3c5c7dab4238a09bf78))
+* **nixd:** Run in containerd ([5f0fe10](https://github.com/raas-dev/configent/commit/5f0fe103b95ce53415dedbd71e37a7abf3d2a1b7))
+* **sql:** Remove install_sql, move usql to nix ([283b69b](https://github.com/raas-dev/configent/commit/283b69bca7be5693a0159a277accdeb9e19ed97f))
+
 ## [1.60.0](https://github.com/raas-dev/configent/compare/1.59.2...1.60.0) (2023-07-23)
 
 
