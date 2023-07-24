@@ -168,6 +168,7 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 alias pwsh='docker run --init -it --rm \
   --cap-drop ALL \
   --volume="$PWD:$PWD" \
+  --entrypoint="/opt/microsoft/powershell/pwsh" \
   --workdir="$PWD" \
   clowa/powershell-core'
 
