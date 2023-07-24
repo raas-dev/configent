@@ -1,7 +1,6 @@
 *
 
 !.gitignore
-!cht.sh
 !docker
 !docker-compose
 !install_*

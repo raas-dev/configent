@@ -1,2 +1,2 @@
 [codespell]
-skip = bin/cht.sh,bin/xpanes
+skip = bin/xpanes

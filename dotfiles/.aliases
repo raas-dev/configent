@@ -124,7 +124,7 @@ alias u='diskonaut'
 alias v='limactl'
 alias w='which -a'
 alias x='pkill -i -f'
-alias y='cht.sh'
+alias y='tldr'
 alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
@@ -525,6 +525,7 @@ alias fq='nixery fq'
 alias hexyl='nixery hexyl'
 
 # development
+alias cht.sh='n shell/cht-sh cht.sh'
 alias grex='nixery grex'
 alias tokei='nixery tokei'
 alias webanalyze='n webanalyze -update' # requires read-write file system
