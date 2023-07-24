@@ -256,8 +256,8 @@ d() {
 
   eval docker run --init -it --name "$name" --rm \
     --cap-drop=ALL \
-    --publish-all \
-    --publish 127.0.0.1:8080:8080 \
+    --publish "127.0.0.1:${PORT:-8080}:${PORT:-8080}" \
+    --env PORT \
     "$env_file" \
     "$run_args" \
     "$name" "$cmd"
