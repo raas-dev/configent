@@ -13,10 +13,10 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"
-git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR" ||
-  git -C "$ASDF_DIR" pull --rebase
+git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 
-. "$ASDF_DIR/asdf.sh"
+. "$ASDF_DIR/asdf.sh" && asdf update
+
 #asdf plugin add rust
 #asdf plugin add golang
 #asdf plugin add nodejs
