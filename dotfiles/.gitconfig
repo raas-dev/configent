@@ -120,7 +120,7 @@
 [delta "configent"]
   dark = true
   line-numbers = true
-  side-by-side = true
+  side-by-side = false
   keep-plus-minus-markers = false
   syntax-theme = DarkNeon
   file-style = "#434C5E" bold
