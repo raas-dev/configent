@@ -451,7 +451,10 @@ nixd() {
         --volume="$PWD:$PWD" \
         --workdir="$PWD" \
         "$image")
-  nerdctl exec -it --env PORT --workdir="$PWD" "$name" "$bin" "$@"
+  nerdctl exec -it \
+    --env "PORT=${PORT:-8000}" \
+    --workdir="$PWD" \
+    "$name" "$bin" "$@"
 }
 
 # https://devenv.sh/
