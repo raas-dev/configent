@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.61.1](https://github.com/raas-dev/configent/compare/1.61.0...1.61.1) (2023-07-24)
+
+
+### Fixes
+
+* **d:** Add support for passing PORT ([387bf9c](https://github.com/raas-dev/configent/commit/387bf9c30837aecc210d0dbfba540fdf2a596cc8))
+* **nixd:** Add support for passing PORT ([204abdd](https://github.com/raas-dev/configent/commit/204abddb3641795263711502c6554a343758a6c5))
+* **nixd:** Fix passing PORT if not set ([0ff833e](https://github.com/raas-dev/configent/commit/0ff833eaa2ed23517579b737b8e97ef4fde63528))
+
 ## [1.61.0](https://github.com/raas-dev/configent/compare/1.60.0...1.61.0) (2023-07-24)
 
 
