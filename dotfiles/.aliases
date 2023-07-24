@@ -485,6 +485,7 @@ n() {
       local command="$*"
       ;;
   esac
+  # shellcheck disable=SC2086   # command has to be in quotes
   eval nixd nix-shell --packages "$packages" --command \"$command\"
 }
 

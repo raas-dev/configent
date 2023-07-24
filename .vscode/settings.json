@@ -1,6 +1,8 @@
 {
   "cSpell.words": [
+    "Aloxaf",
     "autofix",
+    "bobsoppe",
     "bootstrapper",
     "chatgpt",
     "CNCF",
@@ -43,11 +45,15 @@
     "shellcheck",
     "shellformat",
     "shfmt",
+    "sncli",
+    "snclirc",
     "squashfs",
     "squashfuse",
+    "strftime",
     "Terminess",
     "vmname",
     "vsintellicode",
-    "Xorg"
+    "Xorg",
+    "zdharma"
   ]
 }
