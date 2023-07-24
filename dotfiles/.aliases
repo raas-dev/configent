@@ -451,16 +451,17 @@ nixd() {
   fi
   local image="nix"
   local name="$image-${PWD##*/}"
-  # do not docker run with --cap-drop ALL, or creating /nix/store fails
-  docker start "$name" &>/dev/null ||
-    (docker build --pull --tag "$image" "$HOME/local/etc/nix" &&
-    docker run --init -it --detach \
+  # remove --cap-drop ALL if updating /nix/store fails
+  nerdctl start "$name" &>/dev/null ||
+    (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
+    nerdctl run --init -t --detach \
     --name "$name" \
-    --publish-all \
+    --cap-drop ALL \
+    --publish 127.0.0.1:8000:8000 \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
     "$image")
-  docker exec -it --workdir="$PWD" "$name" "$bin" "$@"
+  nerdctl exec -it --workdir="$PWD" "$name" "$bin" "$@"
 }
 
 # https://devenv.sh/

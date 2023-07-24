@@ -193,13 +193,13 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 [Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
 a container where `nix`, `nix-env`, `nix-shell`, `devenv`, etc. are available.
-The container image is built by `etc/nix/Dockerfile` and run on rootless docker.
+The container image is built by `etc/nix/Dockerfile` and run on containerd.
 
 The environment is created in the current directory and alias `n` is used e.g.
 `n vim README.md` to start an isolated `nix-shell` with selected packages only.
 
-Alternatively, use alias `nixery` to create ad-hoc environments on containerd
-by building and pulling the container image from [Nixery](https://nixery.dev/).
+Alternatively, use alias `nixery` to create ad-hoc environments by building
+and pulling the container image from [Nixery](https://nixery.dev/).
 
 Both `n` and `nixery` parse Nix package name(s, separated by forward slashes)
 as the first argument. The packages are installed from channel
