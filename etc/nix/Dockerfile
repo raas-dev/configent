@@ -6,8 +6,7 @@ experimental-features = nix-command flakes
 EOF
 
 RUN nix-channel --update
-RUN nix-env -u '*'
-RUN nix-collect-garbage --delete-old
+#RUN nix-env -u '*'
 
 # https://www.cachix.org/
 RUN nix-env -iA cachix -f https://cachix.org/api/v1/install
@@ -15,3 +14,5 @@ RUN cachix use devenv
 
 # https://devenv.sh/
 RUN nix-env -if https://install.devenv.sh/latest
+
+RUN nix-collect-garbage --delete-old
