@@ -29,8 +29,8 @@ alias r=". \$HOME/.zshrc"
 
 ### Completions ################################################################
 
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 
 ### antidote ###################################################################
 
