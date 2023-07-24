@@ -443,12 +443,10 @@ nixd() {
   fi
   local image="nix"
   local name="$image-${PWD##*/}"
-  # remove --cap-drop ALL if updating /nix/store fails
   nerdctl start "$name" &>/dev/null ||
     (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
     nerdctl run --init -t --detach \
     --name "$name" \
-    --cap-drop ALL \
     --publish 127.0.0.1:8000:8000 \
     --volume="$PWD:$PWD" \
     --workdir="$PWD" \
