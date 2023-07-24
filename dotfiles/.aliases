@@ -519,11 +519,11 @@ alias hexyl='nixery hexyl'
 
 # development
 alias cht.sh='n shell/cht-sh cht.sh'
+alias difft='n shell/difftastic difft'
 alias grex='nixery grex'
 alias tokei='nixery tokei'
 alias usql='n usql'
 alias webanalyze='n webanalyze -update' # requires read-write file system
-alias miniserve='n miniserve --hide-version-footer --port 8000 $PWD'
 
 # load testing
 alias k6='nixery k6'
@@ -555,4 +555,5 @@ alias nuclei='nixery nuclei'
 alias wapiti='nixery wapiti'
 
 # miscellaneous
+alias miniserve='n miniserve --hide-version-footer --port 8000 $PWD'
 alias tickrs='nixery tickrs --show-x-labels --summary -c candle -s'
