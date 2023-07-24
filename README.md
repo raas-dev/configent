@@ -19,7 +19,7 @@ Features:
 - Setup is one `curl` command, run `up` to upgrade every package manager on OS
 - macOS `docker` experience as it was with Docker Desktop, but it runs rootless
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
-- One character shell aliases as the fastest are the commands one does not type
+- One character shell aliases - the fastest are the commands one does not type
 - Ask GPT in terminal (`s`), create shell commands (`_`) and write code (`c`)
 
 Works on x86_64 and AArch64/ARM64 operating systems:
@@ -192,8 +192,8 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 ## ❄️ Nix
 
 [Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
-a container where `nix`, `nix-env`, `nix-shell`, `devenv`, etc. are available.
-The container image is built by `etc/nix/Dockerfile` and run on containerd.
+a container on containerd where `nix`, `nix-env`, `nix-shell`, `devenv`, etc.
+are available. The container image is built by `etc/nix/Dockerfile`.
 
 The environment is created in the current directory and alias `n` is used e.g.
 `n vim README.md` to start an isolated `nix-shell` with selected packages only.
@@ -201,7 +201,7 @@ The environment is created in the current directory and alias `n` is used e.g.
 Alternatively, use alias `nixery` to create ad-hoc environments by building
 and pulling the container image from [Nixery](https://nixery.dev/).
 
-Both `n` and `nixery` parse Nix package name(s, separated by forward slashes)
+Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
 as the first argument. The packages are installed from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 

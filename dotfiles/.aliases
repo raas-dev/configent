@@ -166,7 +166,7 @@ alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
 # https://github.com/clowa/docker-powershell-core
 alias pwsh='docker run --init -it --rm \
-  --cap-drop ALL \
+  --cap-drop=ALL \
   --volume="$PWD:$PWD" \
   --entrypoint="/opt/microsoft/powershell/pwsh" \
   --workdir="$PWD" \
@@ -255,7 +255,7 @@ d() {
   fi
 
   eval docker run --init -it --name "$name" --rm \
-    --cap-drop ALL \
+    --cap-drop=ALL \
     --publish-all \
     --publish 127.0.0.1:8080:8080 \
     "$env_file" \
