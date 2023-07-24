@@ -24,6 +24,8 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 #asdf plugin add ruby
 #asdf plugin add java
 #asdf plugin add stack
+#asdf plugin add dotnet
+asdf plugin update --all
 
 #asdf install rust
 #asdf install golang
@@ -32,3 +34,4 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 #asdf install ruby
 #asdf install java
 #BOOTSTRAP_HASKELL_NONINTERACTIVE=true asdf install stack
+#asdf install dotnet
