@@ -105,6 +105,10 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
+# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+[ -r "$HOME/.asdf/completions/asdf.bash" ] &&
+  . "$HOME/.asdf/completions/asdf.bash"
+
 # add tab completion for hostnames based on ~/.ssh/config, ignoring wildcards
 [ -r "$HOME/.ssh/config" ] && complete -o 'default' -o 'nospace' \
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |

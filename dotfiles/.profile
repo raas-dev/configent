@@ -149,6 +149,14 @@ if [ -d "$cargo_path" ]; then
   . "$cargo_path/env"
 fi
 
+### asdf #######################################################################
+
+path_prepend "$HOME/.asdf/bin"
+if command -v asdf >/dev/null; then
+  . "$HOME/.asdf/asdf.sh"
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+fi
+
 ### Prompt #####################################################################
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
