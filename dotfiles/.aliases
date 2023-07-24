@@ -179,14 +179,6 @@ alias nrmv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nrmi='nerdctl rmi --force $(nerdctl images --all --quiet)'
 alias npr='nrmc ; nrmv ; nrmi ; nerdctl system prune --force --volumes'
 
-# https://github.com/svenstaro/miniserve
-alias miniserve='nerdctl run --init -it --rm \
-  --cap-drop ALL \
-  --publish 127.0.0.1:8080:8080 \
-  --volume $PWD:/data \
-  svenstaro/miniserve \
-  --hide-version-footer -p 8080 /data'
-
 ### Misc #######################################################################
 
 # Copy the current path to clipboard
@@ -533,6 +525,7 @@ alias grex='nixery grex'
 alias tokei='nixery tokei'
 alias usql='n usql'
 alias webanalyze='n webanalyze -update' # requires read-write file system
+alias miniserve='n miniserve --hide-version-footer --port 8000 $PWD'
 
 # load testing
 alias k6='nixery k6'
