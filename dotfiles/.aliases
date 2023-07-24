@@ -529,6 +529,7 @@ alias hexyl='nixery hexyl'
 alias cht.sh='n shell/cht-sh cht.sh'
 alias grex='nixery grex'
 alias tokei='nixery tokei'
+alias usql='n usql'
 alias webanalyze='n webanalyze -update' # requires read-write file system
 
 # load testing
