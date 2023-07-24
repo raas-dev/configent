@@ -15,10 +15,11 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
 curl -fsSL "https://get.sdkman.io" | bash
 
-. "$HOME/.sdkman/bin/sdkman-init.sh" &&
+# sdkman-init.sh does not work on /bin/sh
+bash -c ". \$HOME/.sdkman/bin/sdkman-init.sh &&
   sdk selfupdate force &&
-  sdk install java 17.0.6-tem &&
-  sdk default java 17.0.6-tem
+  sdk install java 17.0.8-tem &&
+  sdk default java 17.0.8-tem"
 
 # JDKs: https://sdkman.io/jdks
 # SDKs: https://sdkman.io/sdks
