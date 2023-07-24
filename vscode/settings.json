@@ -64,7 +64,6 @@
   "editor.scrollbar.horizontal": "hidden",
   "editor.minimap.enabled": true,
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.languageServer": "Pylance",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
