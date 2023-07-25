@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.63.0](https://github.com/raas-dev/configent/compare/1.62.0...1.63.0) (2023-07-25)
+
+
+### Features
+
+* **asdf:** Move language version managers to asdf ([70a2de9](https://github.com/raas-dev/configent/commit/70a2de9bdc1d8133c8dc0d0f2c53480315bfd973))
+
+
+### Fixes
+
+* **asdf:** Remove extraneous update ([550ae66](https://github.com/raas-dev/configent/commit/550ae667761186eb578dad0c5d56b2d3e9645c18))
+* **dircolors:** Add .jsx and .tsx ([f87cb99](https://github.com/raas-dev/configent/commit/f87cb9989aae9a4d60b47d1c736c516c08d8f991))
+* **dircolors:** Add .ts ([8aa9991](https://github.com/raas-dev/configent/commit/8aa9991b94382aa3028dd460f3ad3c74884ffd20))
+* **haskell:** Fix loading ghcup env ([dc9dc27](https://github.com/raas-dev/configent/commit/dc9dc275cffb641cb0f52ee83863167fc75cb487))
+* **haskell:** Install cabal packages ([4088ab5](https://github.com/raas-dev/configent/commit/4088ab522d9399142a26202d54c85bb69590cd6e))
+* **profile:** Add CARGO_HOME for Rust ([a46b41c](https://github.com/raas-dev/configent/commit/a46b41cba944face0caeec892a62462b2d3781e5))
+* **rust:** Remove unused CARGO_HOME ([e8d28a6](https://github.com/raas-dev/configent/commit/e8d28a6fb648af5ee0c7311ee17d178b8641a350))
+
 ## [1.62.0](https://github.com/raas-dev/configent/compare/1.61.1...1.62.0) (2023-07-25)
 
 
