@@ -171,6 +171,14 @@ if command -v zoxide >/dev/null; then
   }
 fi
 
+### Dotnet #####################################################################
+
+dotnet_shell_env="$HOME/.asdf/plugins/dotnet/set-dotnet-env.${SHELL##*/}"
+# shellcheck disable=SC1090  # do not follow non-constant source
+[ -r "$dotnet_shell_env" ] && . "$dotnet_shell_env"
+
+path_append "$HOME/.dotnet/tools"
+
 ### Fzf ########################################################################
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'

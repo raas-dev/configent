@@ -13,24 +13,11 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"
-git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-
 . "$ASDF_DIR/asdf.sh" && asdf update
 
-#asdf plugin add rust
-#asdf plugin add golang
-#asdf plugin add nodejs
-#asdf plugin add python
-#asdf plugin add ruby
-#asdf plugin add java
-#asdf plugin add stack
-#asdf plugin add dotnet
+asdf plugin add dotnet || asdf plugin update dotnet
+asdf install dotnet
 
-#asdf install rust
-#asdf install golang
-#asdf install nodejs
-#asdf install python
-#asdf install ruby
-#asdf install java
-#BOOTSTRAP_HASKELL_NONINTERACTIVE=true asdf install stack
-#asdf install dotnet
+### dotnet tools ###############################################################
+
+"$ASDF_DIR/shims/dotnet" tool install --global PowerShell

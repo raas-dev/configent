@@ -164,14 +164,6 @@ alias drmv='docker volume rm --force $(docker volume ls --quiet)'
 alias drmi='docker rmi --force $(docker images --all --quiet)'
 alias dpr='drmc ; drmv ; drmi ; docker system prune --force --volumes'
 
-# https://github.com/clowa/docker-powershell-core
-alias pwsh='docker run --init -it --rm \
-  --cap-drop=ALL \
-  --volume="$PWD:$PWD" \
-  --entrypoint="/opt/microsoft/powershell/pwsh" \
-  --workdir="$PWD" \
-  clowa/powershell-core'
-
 ### nerdctl ####################################################################
 
 alias nrmc='nerdctl rm --force $(nerdctl ps --all --quiet)'
