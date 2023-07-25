@@ -2,8 +2,7 @@
 # the above shebang is only for ShellCheck, this file is not executable
 
 # shellcheck disable=SC1091  # do not expect input files
-# shellcheck disable=SC2123  # set PATH
-# shellcheck disable=SC2155  # will not declare separately, value compactness
+# shellcheck disable=SC2123  # reset PATH
 
 ### PATH #######################################################################
 
@@ -56,9 +55,9 @@ export MANPAGER='sh -c "col -bx | bat -l man -p"'
 export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
-export LESS='-R'                              # output raw control characters to have colors
+export LESS='-R'                              # output control chars for colors
 export LESSOPEN='|~/local/bin/lesspipe.sh %s' # use lesspipe.sh in this repo
-export LESSQUIET=1                            # suppress additional output not belonging to the file
+export LESSQUIET=1                            # suppress additional output
 
 ### Shell behaviour ############################################################
 
@@ -72,7 +71,7 @@ unset ignoreeof
 
 stty -ixon
 
-### Homebrew/Linuxbrew #########################################################
+### Brew #######################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/brew" ]; then
@@ -95,7 +94,7 @@ fi
 if [ -r "$HOME/.asdf/asdf.sh" ]; then
   . "$HOME/.asdf/asdf.sh"
 
-  # go
+  # Go
   export ASDF_GOLANG_MOD_VERSION_ENABLED=true
   go_path="$(asdf where golang)"
   if [ -d "$go_path" ]; then
@@ -104,7 +103,7 @@ if [ -r "$HOME/.asdf/asdf.sh" ]; then
     path_prepend "$GOPATH/bin"
   fi
 
-  # rust
+  # Rust
   rust_path="$(asdf where rust)"
   if [ -d "$rust_path" ]; then
     export CARGO_HOME="$rust_path"
@@ -121,10 +120,10 @@ fi
 export BETTER_EXCEPTIONS=1
 export TBVACCINE=1
 
-# Add `pip install --user` and `pipx` scope into $PATH
+# Add `pip install --user` and `pipx` scopes to $PATH
 path_prepend "$HOME/.local/bin"
 
-### Prompt #####################################################################
+### Starship cross-shell prompt ################################################
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 
@@ -132,18 +131,9 @@ command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 
 if command -v zoxide >/dev/null; then
   eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
-
   j() {
     __zoxide_z "$@"
   }
-fi
-
-### Java #######################################################################
-
-jars_path="$HOME/jars"
-if [ -d "$jars_path" ]; then
-  export CLASSPATH="$(find "$jars_path" -name '*.jar' -print0 |
-    xargs echo | tr ' ' ':')"
 fi
 
 ### Dotnet #####################################################################
@@ -151,20 +141,19 @@ fi
 dotnet_shell_env="$HOME/.asdf/plugins/dotnet/set-dotnet-env.${SHELL##*/}"
 # shellcheck disable=SC1090  # do not follow non-constant source
 [ -r "$dotnet_shell_env" ] && . "$dotnet_shell_env"
-
 path_append "$HOME/.dotnet/tools"
 
-### Fzf ########################################################################
+### fzf ########################################################################
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ### bat ########################################################################
 
-export BAT_STYLE="auto" # same as default, unless output is piped (lesspipe.sh)
+export BAT_STYLE="auto" # auto == default, unless output is piped (lesspipe.sh)
 export BAT_THEME="DarkNeon"
 
-### Dircolors ##################################################################
+### dircolors ##################################################################
 
 command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
@@ -175,22 +164,22 @@ command -v aws_completer >/dev/null &&
 
 ### kubectl krew ###############################################################
 
-krew_path="${KREW_ROOT:-$HOME/.krew}"
-path_append "$krew_path/bin"
+path_append "$HOME/.krew/bin"
 
-### Disable telemetry ##########################################################
-
-# Azure Functions Core Tools
-export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+### Disable telemetries ########################################################
 
 # Azure Developer CLI
 export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# kics
+# Azure Functions Core Tools
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
+# KICS
 export DISABLE_CRASH_REPORT=0
 
-### Linux distros only #########################################################
+### XDG base directory specification ###########################################
 
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 if [ "$(uname -s)" = 'Linux' ]; then
   export XDG_DATA_HOME="$HOME/.local/share"
   if command -v flatpak >/dev/null; then
@@ -202,6 +191,6 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
-### Local binaries first in the PATH ###########################################
+### configent/bin ##############################################################
 
 path_prepend "$HOME/local/bin"
