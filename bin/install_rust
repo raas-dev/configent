@@ -18,8 +18,6 @@ export ASDF_DIR="$HOME/.asdf"
 asdf plugin add rust || asdf plugin update rust
 asdf install rust
 
-export CARGO_HOME="$HOME/.cargo"
-
 ### cargo binstall #############################################################
 
 # https://github.com/cargo-bins/cargo-binstall
