@@ -14,7 +14,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"
-. "$ASDF_DIR/asdf.sh" && asdf update
+. "$ASDF_DIR/asdf.sh"
 
 asdf plugin add golang || asdf plugin update golang
 asdf install golang
