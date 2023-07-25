@@ -14,13 +14,13 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
 
-Features:
+A few features:
 
 - Setup is one `curl` command, run `up` to upgrade every package manager on OS
 - macOS `docker` experience as it was with Docker Desktop, but it runs rootless
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
-- One character shell aliases - the fastest are the commands one does not type
-- Ask GPT in terminal (`s`), create shell commands (`_`) and write code (`c`)
+- One character `.aliases` - the fastest are the commands one does not type
+- Ask GPT in terminal (`s`), create shell commands (`_`) and code (`c`)
 
 Works on x86_64 and AArch64/ARM64 operating systems:
 
