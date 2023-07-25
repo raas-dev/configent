@@ -105,7 +105,11 @@ if [ -r "$HOME/.asdf/asdf.sh" ]; then
   fi
 
   # rust
-  asdf where rust &>/dev/null && path_prepend "$(asdf where rust)/bin"
+  rust_path="$(asdf where rust)"
+  if [ -d "$rust_path" ]; then
+    export CARGO_HOME="$rust_path"
+    path_prepend "$CARGO_HOME/bin"
+  fi
 fi
 
 ### Haskell ####################################################################
