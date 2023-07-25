@@ -7,7 +7,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 - 100% automated installation of only curated, stable and battle-tested tools
 - 95% consistent user experience both on macOS and the beloved Linux distros
-- There is only one way to install, update and change language runtime versions
+- There is only one way to install, update and change language and tool versions
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The secure open source web browser, VSCode and a killer terminal. That's it.
 
