@@ -7,7 +7,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 - 100% automated installation of only curated, stable and battle-tested tools
 - 95% consistent user experience both on macOS and the beloved Linux distros
-- There is one, and only one, way to do tasks in terminal - the most efficient
+- There is only one way to install, update and change language runtime versions
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
 - The secure open source web browser, VSCode and a killer terminal. That's it.
 
@@ -109,7 +109,7 @@ Order of installation:
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
 3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
-4. Rust, Go, Node.js and Python version managers, language versions and packages
+4. Rust, Go, Node.js, Python and .NET (`~/.tool-versions`) and default packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 6. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
 
