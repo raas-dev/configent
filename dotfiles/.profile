@@ -90,72 +90,35 @@ else
   fi
 fi
 
-### Java #######################################################################
+### asdf #######################################################################
 
-sdkman_path="$HOME/.sdkman"
-[ -d "$sdkman_path" ] && . "$sdkman_path/bin/sdkman-init.sh"
+if [ -r "$HOME/.asdf/asdf.sh" ]; then
+  . "$HOME/.asdf/asdf.sh"
 
-jars_path="$HOME/jars"
-if [ -d "$jars_path" ]; then
-  export CLASSPATH="$(find "$jars_path" -name '*.jar' -print0 |
-    xargs echo | tr ' ' ':')"
+  # go
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+  go_path="$(asdf where golang)"
+  if [ -d "$go_path" ]; then
+    export GOPATH="$go_path"
+    export GOROOT="$GOPATH/go"
+    path_prepend "$GOPATH/bin"
+  fi
+
+  # rust
+  asdf where rust &>/dev/null && path_prepend "$(asdf where rust)/bin"
 fi
 
-### Rbenv ######################################################################
+### Haskell ####################################################################
 
-path_prepend "$HOME/.rbenv/bin"
-command -v rbenv >/dev/null && eval "$(rbenv init -)"
+[ -r "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
 
-### Pyenv ######################################################################
-
-path_prepend "$HOME/.pyenv/bin"
-command -v pyenv >/dev/null && eval "$(pyenv init -)"
+### Python #####################################################################
 
 export BETTER_EXCEPTIONS=1
 export TBVACCINE=1
 
 # Add `pip install --user` and `pipx` scope into $PATH
 path_prepend "$HOME/.local/bin"
-
-### Nvm ########################################################################
-
-nvm_path="$HOME/.nvm"
-if [ -d "$nvm_path" ]; then
-  export NVM_DIR="$nvm_path"
-  . "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-fi
-
-### Haskell ####################################################################
-
-path_prepend "$HOME/.ghcup/bin"
-[ -d "$HOME/.gchup" ] && . "$HOME/.ghcup/env"
-path_prepend "$HOME/.cabal/bin"
-
-### Go #########################################################################
-
-go_path="$HOME/go"
-if [ -d "$go_path" ]; then
-  path_prepend "$go_path/bin"
-  export GOPATH="$go_path"
-  export GOROOT="$HOME/.go"
-fi
-
-### Rust #######################################################################
-
-cargo_path="$HOME/.cargo"
-if [ -d "$cargo_path" ]; then
-  path_prepend "$cargo_path/bin"
-  . "$cargo_path/env"
-fi
-
-### asdf #######################################################################
-
-path_prepend "$HOME/.asdf/bin"
-if command -v asdf >/dev/null; then
-  . "$HOME/.asdf/asdf.sh"
-  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-fi
 
 ### Prompt #####################################################################
 
@@ -169,6 +132,14 @@ if command -v zoxide >/dev/null; then
   j() {
     __zoxide_z "$@"
   }
+fi
+
+### Java #######################################################################
+
+jars_path="$HOME/jars"
+if [ -d "$jars_path" ]; then
+  export CLASSPATH="$(find "$jars_path" -name '*.jar' -print0 |
+    xargs echo | tr ' ' ':')"
 fi
 
 ### Dotnet #####################################################################
@@ -201,9 +172,7 @@ command -v aws_completer >/dev/null &&
 ### kubectl krew ###############################################################
 
 krew_path="${KREW_ROOT:-$HOME/.krew}"
-if [ -d "$krew_path" ]; then
-  path_append "$krew_path/bin"
-fi
+path_append "$krew_path/bin"
 
 ### Disable telemetry ##########################################################
 

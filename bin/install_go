@@ -6,22 +6,21 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
+# shellcheck disable=SC1091  # do not expect input files
+# shellcheck disable=SC2155  # will not declare separately, value compactness
+
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### gvm ########################################################################
+### asdf #######################################################################
 
-mkdir -p "$HOME/go/bin"
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh" && asdf update
 
-curl -fsSL "https://raw.githubusercontent.com/stefanmaric/g/master/bin/g" \
-  -o "$HOME/go/bin/gvm"
+asdf plugin add golang || asdf plugin update golang
+asdf install golang
 
-chmod +x "$HOME/go/bin/gvm"
-
-export GOPATH="$HOME/go"
-export GOROOT="$HOME/.go"
-PATH="$GOPATH/bin:$PATH"
-
-"$HOME/go/bin/gvm" install latest
+export GOPATH="$(asdf where golang)"
+export GOROOT="$GOPATH/go"
 
 ### packages ###################################################################
 

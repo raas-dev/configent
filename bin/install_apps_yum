@@ -46,7 +46,7 @@ $SUDO dnf install -y cmake gcc gcc-c++ make m4 \
 # Required for brew, if provided by distro
 $SUDO dnf install -y libxcrypt-compat
 
-# Required for compiling Pythons by pyenv (lzma)
+# Required for compiling Pythons
 $SUDO dnf install -y xz-devel
 
 # Utils

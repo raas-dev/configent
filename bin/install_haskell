@@ -10,15 +10,17 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### ghcup ######################################################################
+### asdf #######################################################################
 
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org |
-  BOOTSTRAP_HASKELL_NONINTERACTIVE=true \
-    sh
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh" && asdf update
 
-[ -d "$HOME/.gchup" ] && . "$HOME/.ghcup/env"
+asdf plugin add stack || asdf plugin update stack
+BOOTSTRAP_HASKELL_NONINTERACTIVE=true asdf install stack
 
 ### cabal ######################################################################
+
+[ -d "$HOME/.gchup" ] && . "$HOME/.ghcup/env"
 
 #"$HOME/.ghcup/bin/cabal" install ShellCheck
 #"$HOME/.ghcup/bin/cabal" install hadolint

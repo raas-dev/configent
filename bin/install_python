@@ -6,27 +6,19 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# shellcheck disable=SC2086  # not escaping $HOME
+# shellcheck disable=SC1091  # do not expect input files
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### pyenv ######################################################################
+### asdf #######################################################################
 
-pyenv_dir="$HOME/.pyenv"
-git clone https://github.com/pyenv/pyenv.git "$pyenv_dir" ||
-  git -C "$pyenv_dir" pull --rebase
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh" && asdf update
 
-eval "$($HOME/.pyenv/bin/pyenv init -)"
+asdf plugin add python || asdf plugin update python
+asdf install python
 
-### pythons ####################################################################
-
-#python3_version="3.9.17"
-#python3_version="3.10.12"
-python3_version="3.11.4"
-"$HOME/.pyenv/bin/pyenv" install --skip-existing "$python3_version"
-"$HOME/.pyenv/bin/pyenv" rehash
-"$HOME/.pyenv/bin/pyenv" shell "$python3_version"
-"$HOME/.pyenv/bin/pyenv" global "$python3_version"
+### interpreter scope ##########################################################
 
 # upgrade packages included with Python
 pip install --upgrade pip setuptools wheel
@@ -34,13 +26,11 @@ pip install --upgrade pip setuptools wheel
 # https://pypa.github.io/pipx
 pip install --upgrade pipx
 
-### Interpreter scope ##########################################################
-
 pip install --upgrade better_exceptions
 pip install --upgrade pre-commit
 pip install --upgrade tbvaccine
 
-### Local and isolated scope ###################################################
+### local and isolated scope ###################################################
 
 pipx install ptpython
 pipx install semgrep

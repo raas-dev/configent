@@ -36,7 +36,7 @@ brew install universal-ctags # c
 ### macOS only brews ###########################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  # Required by pyenv on macOS (install_python)
+  # Required for compiling Pythons
   brew install xz
 
   # Cross-platform make is often required by packages with non-native deps

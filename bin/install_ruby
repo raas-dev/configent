@@ -6,31 +6,16 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# shellcheck disable=SC2086  # not escaping $HOME
+# shellcheck disable=SC1091  # do not expect input files
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### rbenv ######################################################################
+### asdf #######################################################################
 
-rbenv_dir="$HOME/.rbenv"
-git clone https://github.com/rbenv/rbenv.git "$rbenv_dir" ||
-  git -C "$rbenv_dir" pull --rebase
-ruby_build_dir="$HOME/.rbenv/plugins/ruby-build"
-git clone https://github.com/rbenv/ruby-build.git "$ruby_build_dir" ||
-  git -C "$ruby_build_dir" pull --rebase
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh" && asdf update
 
-eval "$($HOME/.rbenv/bin/rbenv init -)"
+asdf plugin add ruby || asdf plugin update ruby
+asdf install ruby
 
-### rubies #####################################################################
-
-ruby_version="3.2.2"
-#ruby_version="3.1.4"
-
-"$HOME/.rbenv/bin/rbenv" install --skip-existing "$ruby_version"
-"$HOME/.rbenv/bin/rbenv" rehash
-"$HOME/.rbenv/bin/rbenv" shell "$ruby_version"
-"$HOME/.rbenv/bin/rbenv" global "$ruby_version"
-
-### gems #######################################################################
-
-gem install bundler
+gem update --system

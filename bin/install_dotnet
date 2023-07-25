@@ -20,4 +20,5 @@ asdf install dotnet
 
 ### dotnet tools ###############################################################
 
-"$ASDF_DIR/shims/dotnet" tool install --global PowerShell
+"$ASDF_DIR/shims/dotnet" tool install --global powershell
+#"$ASDF_DIR/shims/dotnet" tool update --global powershell
