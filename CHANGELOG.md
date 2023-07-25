@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.62.0](https://github.com/raas-dev/configent/compare/1.61.1...1.62.0) (2023-07-25)
+
+
+### Features
+
+* **asdf:** Add dotnet ([c978909](https://github.com/raas-dev/configent/commit/c9789098e943baca2347a7311c77061008ebd487))
+* **asdf:** Add support for asdf ([8d04c9c](https://github.com/raas-dev/configent/commit/8d04c9cc13f4c050d6247d18e33c9343e37bccb0))
+* **dotnet:** Install dotnet via asdf ([fd5f554](https://github.com/raas-dev/configent/commit/fd5f554f47db09f1fb8f6912daae63b3715dc47a))
+
+
+### Fixes
+
+* **asdf:** Update asdf to latest stable ([d673585](https://github.com/raas-dev/configent/commit/d6735856b6952fe5c26d0bf720962d554a659bbb))
+* **java:** Fix sdkman-init.sh shell to bash ([64e2f76](https://github.com/raas-dev/configent/commit/64e2f76de9cd3068f7deaccd50151d3f1fb32567))
+* **vscode:** Disable IntelliCode override ([61070aa](https://github.com/raas-dev/configent/commit/61070aa7bb3ddc4e101e17ef5db3a61d31a66f49))
+* **zsh:** Add -z to autoload compinit ([69a068b](https://github.com/raas-dev/configent/commit/69a068b7394110f9be4bae8ca9619a2efc7e2e46))
+
 ### [1.61.1](https://github.com/raas-dev/configent/compare/1.61.0...1.61.1) (2023-07-24)
 
 
