@@ -197,7 +197,9 @@ EXEC 33
 .scss 37
 .less 37
 .js 37
+.jsx 37
 .ts 37
+.tsx 37
 .coffee 37
 .man 37
 .0 37
