@@ -22,5 +22,5 @@ BOOTSTRAP_HASKELL_NONINTERACTIVE=true asdf install stack
 
 [ -r "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
 
-#"$HOME/.ghcup/bin/cabal" install ShellCheck
-#"$HOME/.ghcup/bin/cabal" install hadolint
+cabal install ShellCheck
+cabal install hadolint
