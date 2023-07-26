@@ -40,8 +40,9 @@ $SUDO dnf install -y ca-certificates
 $SUDO dnf install -y gnupg
 
 # Common build requirements
-$SUDO dnf install -y cmake gcc gcc-c++ make m4 \
-  openssl-devel readline-devel sqlite-devel bzip2-devel zlib-devel libffi-devel
+$SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 \
+  bzip2-devel libffi-devel libyaml-devel openssl-devel readline-devel \
+  sqlite-devel zlib-devel
 
 # Required for brew, if provided by distro
 $SUDO dnf install -y libxcrypt-compat
