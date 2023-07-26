@@ -31,7 +31,6 @@ fi
 
 if command -v brew >/dev/null; then
   brew install git-lfs
-  brew install translate-shell
   brew install universal-ctags
 fi
 

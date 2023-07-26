@@ -255,7 +255,6 @@ a pull request.
 - Linux Homebrew on AArch64 is [not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
   - If used, install these from the distro's repository (`bin/where_skipped`):
     - git-lfs (`install_utils`)
-    - translate-shell (`install_utils`)
     - universal-ctags (`install_utils`)
     - azcopy (`install_iac`)
     - azd (`install_iac`)
