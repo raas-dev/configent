@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.66.0](https://github.com/raas-dev/configent/compare/1.65.0...1.66.0) (2023-07-26)
+
+
+### Features
+
+* **linux:** Add ctags ([2272c77](https://github.com/raas-dev/configent/commit/2272c7733afa047ce5fabed694f4a680361722d2))
+
+
+### Fixes
+
+* **fonts:** Install fonts last ([e4ba9df](https://github.com/raas-dev/configent/commit/e4ba9df3db1e04654b5fdff4110974ca3a5a8201))
+* **linux:** Add build deps for Ruby ([e3a998f](https://github.com/raas-dev/configent/commit/e3a998fee6a93ef30bb57936cd095326c947d4a5))
+* **linux:** Compile-time deps ([3214f2b](https://github.com/raas-dev/configent/commit/3214f2b04a576ecfd74c56452055c12313b2a4ed))
+* **nvim:** Fix symlinking neovim configs ([13e0277](https://github.com/raas-dev/configent/commit/13e027746a400ffb09dfbcb75456765635975f7f))
+
 ## [1.65.0](https://github.com/raas-dev/configent/compare/1.64.0...1.65.0) (2023-07-26)
 
 
