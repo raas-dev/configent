@@ -15,7 +15,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 export ASDF_DIR="$HOME/.asdf"
 . "$ASDF_DIR/asdf.sh"
 
-asdf plugin add dotnet || asdf plugin update dotnet
+asdf plugin add dotnet
 DOTNET_CLI_TELEMETRY_OPTOUT=1 asdf install dotnet
 
 ### dotnet tools ###############################################################
