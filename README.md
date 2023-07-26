@@ -196,13 +196,13 @@ The above shims create or start the necessary virtual machines, a lima VM named
 'ubuntu' for running rootless dockerd and a lima VM 'debian' for running
 rootless containerd.
 
-VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes, see Lima VM's
-startup message for exporting `KUBECONFIG` to access it with `kubectl`.
+In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes,
+see VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 VM 'fedora' has rootless [podman](https://podman.io/), run `podman` to use it.
 
 ⚠️: VMs 'ubuntu', 'debian' and 'fedora' mount your host's `$HOME` directory as
-writable in the VM. This enables containers to use bind mounts (directories
+writable inside the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
@@ -227,7 +227,7 @@ arguments are passed to the binary. If name is different from the package name,
 put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
-where as `nixery` mounts the current directory as read-only.
+whereas `nixery` mounts the current directory as read-only.
 
 💡: Use aliases for binaries not wanted installed on the host, such as various
 command-line security tools, and for binaries that are not available on AArch64.
@@ -237,7 +237,7 @@ command-line security tools, and for binaries that are not available on AArch64.
 See `dotfiles/.aliases` for `vm4...` creating
 [lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-💡: See alias `v` for starting, shelling into, stopping and deleting the VM.
+💡: See alias `v` for starting, shelling into, stopping and deleting a VM.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by fetching and running `install.sh` from this repo's main branch.
