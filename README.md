@@ -107,7 +107,7 @@ What's installed:
 3. Zsh plugin manager and plugins (Zsh from `brew` if Homebrew is available)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. Appsec, cloud development and infrastructure-as-code command-line tools
-6. Vim/Neovim bundles and config (Neovim from `brew` if Homebrew is available)
+6. (Neo)vim bundles and config (Neovim from `brew` if Homebrew is available)
 7. Tmux plugins and config (tmux from `brew` if Homebrew is available)
 8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
