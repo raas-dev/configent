@@ -6,7 +6,16 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
+# shellcheck disable=SC1091  # do not expect input files
+
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+### asdf #######################################################################
+
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh"
+
+### brew #######################################################################
 
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
@@ -27,57 +36,55 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-### QEMU #######################################################################
+### aws ########################################################################
 
-[ "$(uname -s)" = 'Darwin' ] && brew install lima
+asdf plugin add awscli
+asdf install awscli
 
-### linters ####################################################################
-
-brew install hadolint   # haskell
-brew install shellcheck # haskell
-
-### scanners ###################################################################
-
-brew install trivy               # go
-brew install anchore/grype/grype # go
+asdf plugin add aws-vault
+asdf install aws-vault
 
 ### azure ######################################################################
 
-brew install azure-cli # python
+asdf plugin add azure-cli
+asdf install azure-cli
+
 az config set core.collect_telemetry=false
 az config set core.output=jsonc
 
-az bicep upgrade
+az bicep install
 az extension add --name azure-devops --upgrade --yes
 az extension add --name containerapp --upgrade --yes
 az extension add --name next --upgrade --yes
 
-brew install azcopy        # go
-brew install azure/azd/azd # go
-
-### aws ########################################################################
-
-brew install awscli    # python
-brew install aws-vault # go
+if command -v brew >/dev/null; then
+  brew install azcopy
+  brew install azure/azd/azd
+fi
 
 ### terraform ##################################################################
 
-brew install tfenv # bash
-tfenv install latest
-tfenv use latest
-
-brew install tfsec # go
+asdf plugin add terraform
+asdf install terraform
 
 ### k8s ########################################################################
 
-brew install kubernetes-cli # go
-brew install krew           # go
+asdf plugin add kubectl
+asdf install kubectl
+
+asdf plugin add krew
+asdf install krew
+
 kubectl krew install ctx
 kubectl krew install ns
 
-brew install helm # go
-brew install k9s  # go
+asdf plugin add helm
+asdf install helm
+
+asdf plugin add k9s
+asdf install k9s
 
 ### cloudflare #################################################################
 
-brew install cloudflared # go
+asdf plugin add cloudflared
+asdf install cloudflared

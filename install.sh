@@ -22,15 +22,10 @@ TARGET_PATH="$HOME/configent"
 export NO_CASKS="true"
 export NO_FLATPAKS="true"
 export NO_SNAPS="true"
-[ -n "$NO_FORMULAE" ] && export NO_FORMULAE="true"
 
 ################################################################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
-  if [ "$(uname -m)" = 'aarch64' ]; then
-    export NO_FORMULAE="true"
-    printf "Homebrew Linux does not run on AArch64, NO_FORMULAE=true forced.\n"
-  fi
   if [ "$(id -u)" = 0 ]; then
     CANELEVATE='true'
     SUDO=''

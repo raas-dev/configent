@@ -102,16 +102,21 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
-⚠️: On AArch64 Linux distros, Homebrew parts are skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
+Language runtimes and most command-line tools are installed by
+[asdf](https://asdf-vm.com/). Versions are defined in `~/.tool-versions`.
+
+⚠️: On AArch64 Linux distros, Homebrew formulae is skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
 Order of installation:
-1. [Homebrew](https://brew.sh/) if it is not already in `PATH`
+1. [Homebrew](https://brew.sh/) if it's not found in `PATH`
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh, tmux, tmux plugins, cloud development and infrastructure-as-code tools
-4. Rust, Go, Node.js, Python and .NET (`~/.tool-versions`) and default packages
+3. Zsh plugins and Zsh on macOS (on Linux distros Zsh is installed from repo)
+4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-6. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
+6. Appsec, cloud development and infrastructure-as-code command-line tools
+7. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
+8. Tmux plugins, and if `brew` is present, [tmux](https://github.com/tmux/tmux)
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred but if this is not possible (no `sudo`), it is installed user's home.
@@ -241,11 +246,14 @@ a pull request.
 
 ### Issues in dependencies
 
-- Homebrew on AArch64 Linux distros: [Not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-    - Most formulae do not have AArch64 binary packages ("bottles") for Linux
-    - Building all dependencies from source would be too long of a bootstrap
-    - Thus `install.sh` skips the Homebrew parts on AArch64 Linux distros
-- Homebrew does not work on Alpine Linux, as it does not base on glibc
-- Arch Linux on AArch64
-  - If `pacman` fails, backup and replace `/etc/pacman.d/mirrorlist` e.g. with:
-    - `Server = http://eu.mirror.archlinuxarm.org/$arch/$repo`
+- Linux Homebrew on AArch64 is [not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
+    - If used, install these from the distro's repository (`bin/where_skipped`):
+      - git-lfs (`install_utils`)
+      - translate-shell (`install_utils`)
+      - universal-ctags (`install_utils`)
+      - azcopy (`install_iac`)
+      - azd (`install_iac`)
+      - neovim (`install_neovim`)
+      - tmux (`install_tmux`)
+- Cloudflared (`install_iac`) does not work on Linux on AArch64
+- Homebrew does not work on Alpine Linux as it bases on musl, not glibc

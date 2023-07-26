@@ -28,7 +28,9 @@ if ! command -v brew >/dev/null; then
 fi
 
 # If brew is available, it likely has more recent zsh
-brew install zsh
+if command -v brew >/dev/null; then
+  brew install zsh
+fi
 
 ### antidote ###################################################################
 

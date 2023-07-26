@@ -28,9 +28,11 @@ if ! command -v brew >/dev/null; then
 fi
 
 # If brew is available, it likely has more recent bash
-brew install bash
-brew install bash-completion ||
-  (brew unlink util-linux && brew install bash-completion)
+if command -v brew >/dev/null; then
+  brew install bash
+  brew install bash-completion ||
+    (brew unlink util-linux && brew install bash-completion)
+fi
 
 ### Set bash as the default shell ##############################################
 

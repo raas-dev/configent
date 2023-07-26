@@ -27,13 +27,14 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-brew tap z80oolong/tmux
-tmux_version="3.2"
-brew install "tmux@$tmux_version"
-brew link "tmux@$tmux_version"
-
-# broken: termcap on macOS (12.4)
-#brew install tmux
+if command -v brew >/dev/null; then
+  brew tap z80oolong/tmux # brew install tmux is broken on termcap
+  tmux_version="3.2"
+  brew install "tmux@$tmux_version"
+  brew link "tmux@$tmux_version"
+else
+  printf "Homebrew is not available, please install tmux manually.\n"
+fi
 
 ### Tpm ########################################################################
 

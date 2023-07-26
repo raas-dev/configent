@@ -47,17 +47,11 @@ else
   exit 1
 fi
 
-# strict brew requirement (skip on AArch64 Linux distros)
-if [ -z "$NO_FORMULAE" ]; then
-  "$bin_path/install_tmux"
-  "$bin_path/install_utils"
-  "$bin_path/install_iac"
-else
-  printf "NO_FORMULAE was specified, won't install formula.\n"
-fi
-
-# install zsh plugins even if brew is not available
+# install zsh plugins
 "$bin_path/install_zsh"
+
+# install command-line utils
+"$bin_path/install_utils"
 
 # install language version managers and versions
 "$bin_path/install_asdf"
@@ -73,5 +67,14 @@ fi
 # copy fonts to user's fonts path
 "$bin_path/install_fonts"
 
-# install vim bundles even if brew is not available
+# install appsec tools and linters
+"$bin_path/install_appsec"
+
+# install cloud development and infrastructure-as-code tools
+"$bin_path/install_iac"
+
+# install neovim and vim bundles
 "$bin_path/install_neovim"
+
+# install tmux and plugins
+"$bin_path/install_tmux"

@@ -27,15 +27,20 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-### Homebrew core ##############################################################
+### Utils ######################################################################
 
-brew install git-lfs         # go
-brew install translate-shell # awk
-brew install universal-ctags # c
+if command -v brew >/dev/null; then
+  brew install git-lfs
+  brew install translate-shell
+  brew install universal-ctags
+fi
 
-### macOS only brews ###########################################################
+### macOS only #################################################################
 
-if [ "$(uname -s)" = 'Darwin' ]; then
+if [ "$(uname -s)" = 'Darwin' ] && command -v brew >/dev/null; then
+  # Linux virtual machines on QEMU
+  brew install lima
+
   # Required for compiling Pythons
   brew install xz
 

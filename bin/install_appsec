@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# shellcheck disable=SC1091  # do not expect input files
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+### asdf #######################################################################
+
+export ASDF_DIR="$HOME/.asdf"
+. "$ASDF_DIR/asdf.sh"
+
+asdf plugin add tfsec
+asdf install tfsec
+
+asdf plugin add hadolint
+asdf install hadolint
+
+asdf plugin add shellcheck
+asdf install shellcheck
+
+asdf plugin add trivy
+asdf install trivy
+
+asdf plugin add grype
+asdf install grype
