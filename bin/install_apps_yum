@@ -41,14 +41,8 @@ $SUDO dnf install -y gnupg
 
 # Common build requirements
 $SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 \
-  bzip2-devel libffi-devel libyaml-devel openssl-devel readline-devel \
-  sqlite-devel zlib-devel
-
-# Required for brew, if provided by distro
-$SUDO dnf install -y libxcrypt-compat
-
-# Required for compiling Pythons
-$SUDO dnf install -y xz-devel
+  bzip2-devel libffi-devel libyaml-devel libxcrypt-compat openssl-devel \
+  readline-devel sqlite-devel zlib-devel xz-devel
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils file findutils \

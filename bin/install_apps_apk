@@ -40,8 +40,9 @@ $SUDO apk add gnupg
 $SUDO apk add musl-locales
 
 # Common build requirements
-$SUDO apk add build-base cmake gcompat m4 ncurses openssl-dev \
-  readline-dev sqlite-dev bzip2-dev zlib-dev libffi-dev xz-dev
+$SUDO apk add build-base cmake gcompat icu-libs m4 ncurses openssl-dev \
+  bzip2-dev libffi-dev libpsl-native readline-dev sqlite-dev xz-dev \
+  yaml-dev zlib-dev
 
 # Utils
 $SUDO apk add coreutils curl bind-tools file findutils \

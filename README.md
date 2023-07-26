@@ -257,6 +257,4 @@ a pull request.
   - If you miss these tools, install them manually (`bin/where_skipped`):
     - azcopy (`install_iac`)
     - azd (`install_iac`)
-- Cloudflared (`install_iac`) does not work on Linux on AArch64 (as of 2023-07)
-  - `cannot execute binary file: Exec format error`
 - Homebrew does not work on Alpine Linux (both x86_64 and AArch64, due to musl)
