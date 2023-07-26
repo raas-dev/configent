@@ -12,6 +12,7 @@ bin_path="$this_path/bin"
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  "$bin_path/install_apps_macos"
   if [ -z "$NO_CASKS" ]; then
     "$bin_path/install_apps_cask"
   else
@@ -47,11 +48,8 @@ else
   exit 1
 fi
 
-# install zsh plugins
+# install Zsh plugins
 "$bin_path/install_zsh"
-
-# install command-line utils
-"$bin_path/install_utils"
 
 # install language version managers and versions
 "$bin_path/install_asdf"
@@ -73,7 +71,7 @@ fi
 # install cloud development and infrastructure-as-code tools
 "$bin_path/install_iac"
 
-# install neovim and vim bundles
+# install Neovim and vim bundles
 "$bin_path/install_neovim"
 
 # install tmux and plugins

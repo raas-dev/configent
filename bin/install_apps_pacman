@@ -42,7 +42,8 @@ $SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
 
 # Utils
 $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
-  git htop lsb-release procps traceroute zip unzip vim wget which whois
+  git git-lfs htop lsb-release procps traceroute unzip vim wget which \
+  whois zip
 
 # Bash
 $SUDO pacman --noconfirm --needed -S bash

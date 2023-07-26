@@ -42,7 +42,8 @@ $SUDO zypper install -y cmake gcc gcc-c++ make m4 readline-devel sqlite3-devel \
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils file findutils \
-  git htop lsb-release lsof man procps traceroute unzip wget whois zip
+  git git-lfs htop lsb-release lsof man procps traceroute unzip wget \
+  whois zip
 
 # Bash
 $SUDO zypper install -y bash

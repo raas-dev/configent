@@ -55,7 +55,8 @@ $SUDO apt-get install -y build-essential cmake \
 
 # Utils
 $SUDO apt-get install -y coreutils dnsutils file findutils \
-  git htop lsb-release procps traceroute zip unzip wget whois
+  git git-lfs htop lsb-release procps traceroute unzip wget \
+  whois zip
 
 # Bash
 $SUDO apt-get install -y bash

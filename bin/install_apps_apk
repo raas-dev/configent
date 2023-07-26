@@ -45,7 +45,8 @@ $SUDO apk add build-base cmake gcompat m4 ncurses openssl-dev \
 
 # Utils
 $SUDO apk add coreutils curl bind-tools file findutils \
-  git htop less procps zip unzip util-linux wget whois
+  git git-lfs htop less procps zip unzip util-linux wget \
+  whois
 
 # Bash
 $SUDO apk add bash

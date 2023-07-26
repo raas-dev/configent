@@ -51,7 +51,8 @@ $SUDO dnf install -y xz-devel
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils file findutils \
-  git htop lsof procps redhat-lsb-core tar traceroute unzip wget whois zip
+  git git-lfs htop lsof procps redhat-lsb-core tar traceroute unzip wget \
+  whois zip
 
 # Bash
 $SUDO dnf install -y bash
