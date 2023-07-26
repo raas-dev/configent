@@ -79,10 +79,11 @@ window manager of your choice. See your distro's own instructions for that.
 Script `bootstrap` runs the three below scripts in the order described.
 
 This script essentially handles the whole automated setup (dotfiles, apps,
-VSCode, zsh) of the machine it is run in and the script is non-interactive.
+VSCode) of the machine it is run in and is non-interactive.
 
-The default shell is not changed to `zsh`, but you may do it (and get prompted)
-by running `bin/install_zsh` after `bootstrap` has finished.
+Even though Zsh is preferred, the user's default shell is not automatically set
+to Zsh. You may do it (and get prompted, possibly requiring `sudo`) by running
+`bin/install_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
 
@@ -96,7 +97,7 @@ If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
 💡: Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) shell with `r`
-and all the scripts in `bin/` are available by name.
+and all the scripts in `bin/` are available by name from now on.
 
 ### install_apps
 
@@ -138,9 +139,8 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 The script symlinks `vscode/` to `<user_vscode_path>/Code`.
 The old `Code/` is first backed up as `Code-old`.
 
-Symlinking happens even if `code` has not been installed.
-If `code` is present, also VSCode extensions (`vscode/extensions.list`)
-are installed.
+Symlinking happens even if `code` has not been installed. If `code` is present,
+also VSCode extensions (`vscode/extensions.list`) are installed.
 
 To update the list after adding or removing extensions in VSCode, run
 `vscode/create_extensions_list`.
