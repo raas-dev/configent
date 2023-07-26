@@ -33,7 +33,7 @@ fi
 
 ### Symlink Neovim configs #####################################################
 
-mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.config/nvim"
 ln -sf "$HOME/.vim" "$HOME/.config/nvim"
 ln -sf "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 
