@@ -100,20 +100,22 @@ and all the scripts in `bin/` are available by name.
 
 ### install_apps
 
-Apt, yum (dnf), zypper, pacman and apk based Linux distros are recognized.
+Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
+to install requirements from Linux distro's repository (requires `sudo` rights).
+On Linux distros, flatpaks (GUI apps) are always installed user-wide.
 
-Language runtimes and most command-line tools are installed by
-[asdf](https://asdf-vm.com/).
+On macOS, [Homebrew](https://brew.sh) is used to install requirements and
+casks (GUI apps) user-wide.
 
-Global versions are locked in `~/.tool-versions`. See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for other scopes.
+Language runtimes and development tools are always installed user-wide by
+[asdf](https://asdf-vm.com/) and
+[asdf plugins](https://github.com/asdf-vm/asdf-plugins)
+are preferred over Homebrew whenever possible.
 
-Command-line tools not available as
-[asdf plugins](https://github.com/asdf-vm/asdf-plugins), and not in
-the Linux distro's repo, are installed by [Homebrew](https://brew.sh/).
+Global versions are defined in `~/.tool-versions`, see
+[asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 
-⚠️: Homebrew Linux [does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
-
-What's installed, unless you modify the script:
+What's installed:
 1. Command-line necessities and compile-time requirements
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
@@ -124,12 +126,11 @@ What's installed, unless you modify the script:
 7. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
 8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
-With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
-preferred but if this is not possible (no `sudo`), it is installed user's home.
+⚠️: Homebrew may or may not be present after installation as Homebrew Linux
+[does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
-On macOS, Homebrew formulae and casks are always installed user-wide.
-
-On Linux distros, flatpaks are always installed user-wide.
+With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`)
+is preferred but if it is not possible (no `sudo`), it is installed user's home.
 
 ### setup_vscode
 
