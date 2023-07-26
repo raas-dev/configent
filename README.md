@@ -108,12 +108,9 @@ On macOS, [Homebrew](https://brew.sh) is used to install requirements and
 casks (GUI apps) user-wide.
 
 Language runtimes and development tools are always installed user-wide by
-[asdf](https://asdf-vm.com/) and
-[asdf plugins](https://github.com/asdf-vm/asdf-plugins)
-are preferred over Homebrew whenever possible.
-
-Global versions are defined in `~/.tool-versions`, see
-[asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
+[asdf](https://asdf-vm.com/). Global versions are defined in `~/.tool-versions`.
+Whenever possible, [asdf plugins](https://github.com/asdf-vm/asdf-plugins)
+are preferred over Homebrew.
 
 What's installed:
 1. Command-line necessities and compile-time requirements
@@ -131,6 +128,8 @@ What's installed:
 
 With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`)
 is preferred but if it is not possible (no `sudo`), it is installed user's home.
+
+💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 
 ### setup_vscode
 
