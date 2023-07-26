@@ -102,16 +102,20 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
-Language runtimes and most command-line tools are installed by
+Language runtimes and most command-line tools are installed OS independent by
 [asdf](https://asdf-vm.com/). Versions are defined in `~/.tool-versions`.
 
-⚠️: On AArch64 Linux distros, Homebrew formulae is skipped (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
+For a few other command-line tools which are not available as
+[asdf plugins](https://github.com/asdf-vm/asdf-plugins),
+[Homebrew](https://brew.sh/) is preferred.
+
+⚠️: Homebrew Linux on AArch64 is poorly supported (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
 Order of installation:
-1. [Homebrew](https://brew.sh/) if it's not found in `PATH`
+1. Command-line necessities and compile-time requirements (Linux distro's repo)
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugins and Zsh on macOS (on Linux distros Zsh is installed from repo)
+3. Zsh plugins and Zsh on macOS (on Linux distros, Zsh is installed from repo)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 6. Appsec, cloud development and infrastructure-as-code command-line tools
@@ -247,13 +251,14 @@ a pull request.
 ### Issues in dependencies
 
 - Linux Homebrew on AArch64 is [not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-    - If used, install these from the distro's repository (`bin/where_skipped`):
-      - git-lfs (`install_utils`)
-      - translate-shell (`install_utils`)
-      - universal-ctags (`install_utils`)
-      - azcopy (`install_iac`)
-      - azd (`install_iac`)
-      - neovim (`install_neovim`)
-      - tmux (`install_tmux`)
+  - If used, install these from the distro's repository (`bin/where_skipped`):
+    - git-lfs (`install_utils`)
+    - translate-shell (`install_utils`)
+    - universal-ctags (`install_utils`)
+    - azcopy (`install_iac`)
+    - azd (`install_iac`)
+    - neovim (`install_neovim`)
+    - tmux (`install_tmux`)
 - Cloudflared (`install_iac`) does not work on Linux on AArch64
+  - `cannot execute binary file: Exec format error`
 - Homebrew does not work on Alpine Linux as it bases on musl, not glibc
