@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.64.0](https://github.com/raas-dev/configent/compare/1.63.0...1.64.0) (2023-07-26)
+
+
+### Features
+
+* **asdf:** Prefer asdf over brew for most tools ([3f1beb1](https://github.com/raas-dev/configent/commit/3f1beb1af84bd7931af5b0e7a000b8615355de52))
+
+
+### Fixes
+
+* **asdf:** Remove plugin update on language install ([6f6defb](https://github.com/raas-dev/configent/commit/6f6defbd34bbc3eb5cf078bb34fe9812972124d1))
+* **dotnet:** Opt out telemetry ([c67cc83](https://github.com/raas-dev/configent/commit/c67cc8332b0805c2a1fff8a29aad652f818a3496))
+* **go:** Export asdf go mod support before install ([a27f743](https://github.com/raas-dev/configent/commit/a27f743be046a0545e042d70e2ad19a7488d37ab))
+* **haskell:** Remove cabal packages over asdf ([1139cf7](https://github.com/raas-dev/configent/commit/1139cf72bc7834285dfc1e5f855c2b64e7f90827))
+
 ## [1.63.0](https://github.com/raas-dev/configent/compare/1.62.0...1.63.0) (2023-07-25)
 
 
