@@ -67,6 +67,9 @@ fi
 asdf plugin add terraform
 asdf install terraform
 
+asdf plugin add tfsec
+asdf install tfsec
+
 ### k8s ########################################################################
 
 asdf plugin add kubectl

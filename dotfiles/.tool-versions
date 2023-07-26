@@ -8,20 +8,20 @@ ruby 3.2.2
 java temurin-17.0.8+7
 stack 2.11.1  # haskell
 
-# install_iac
-awscli 2.13.3
-aws-vault 7.2.0
-azure-cli 2.50.0
-terraform 1.5.3
-kubectl 1.27.4
-krew 0.4.4
-helm 3.12.2
-k9s 0.27.4
-cloudflared 2023.7.2
-
 # install_appsec
 shellcheck 0.9.0
 hadolint 2.12.0
 trivy 0.43.1
 grype 0.64.2
+
+# install_iac
+awscli 2.13.3
+aws-vault 7.2.0
+azure-cli 2.50.0
+terraform 1.5.3
 tfsec 1.28.1
+kubectl 1.27.4
+krew 0.4.4
+helm 3.12.2
+k9s 0.27.4
+cloudflared 2023.7.2
