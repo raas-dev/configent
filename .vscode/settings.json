@@ -45,6 +45,7 @@
     "ohmyzsh",
     "pacman",
     "passwordless",
+    "pipx",
     "Pylance",
     "runtimes",
     "scrollback",

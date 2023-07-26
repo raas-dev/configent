@@ -249,7 +249,7 @@ for testing script changes without first committing and pushing to your fork.
 
 Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
 
-    pip3 install --user --upgrade pre-commit
+    pipx install pre-commit
     pre-commit install --hook-type pre-commit
     pre-commit install --hook-type commit-msg
 

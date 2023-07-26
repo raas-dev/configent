@@ -1,5 +1,5 @@
 # Install pre-commit user-wide:
-#   pip3 install --user --upgrade pre-commit
+#   pipx install pre-commit
 #
 # Install the hooks in this file:
 #   pre-commit install --hook-type pre-commit
