@@ -108,8 +108,8 @@ Language runtimes and most command-line tools are installed by
 Global versions are locked in `~/.tool-versions`. See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for other scopes.
 
 Command-line tools which are not available as
-[asdf plugins](https://github.com/asdf-vm/asdf-plugins),
-and are not in the Linux distro's repo, [Homebrew](https://brew.sh/) is used.
+[asdf plugins](https://github.com/asdf-vm/asdf-plugins), and are not in
+the Linux distro's repo, [Homebrew](https://brew.sh/) is used for installation.
 
 ⚠️: Homebrew Linux does not work on AArch64, so a few (non-critical) tools will
 [be missed](https://github.com/raas-dev/configent#issues-in-dependencies).
