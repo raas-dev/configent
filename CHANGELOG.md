@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.66.1](https://github.com/raas-dev/configent/compare/1.66.0...1.66.1) (2023-07-26)
+
+
+### Fixes
+
+* **brew:** Install azcopy and azd without brew ([311c017](https://github.com/raas-dev/configent/commit/311c01772bbd30ae875e8657b8cd151a3fb5a079))
+* **rust:** Default stable ([08de6e0](https://github.com/raas-dev/configent/commit/08de6e0ac95f6c05b6dfa1a0feb02d8af42d2adf))
+
 ## [1.66.0](https://github.com/raas-dev/configent/compare/1.65.0...1.66.0) (2023-07-26)
 
 
