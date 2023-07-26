@@ -117,11 +117,11 @@ What's installed, unless you modify the script:
 1. Command-line necessities and compile-time requirements (Linux distro's repo)
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugins and Zsh on macOS (on Linux distros Zsh is installed from repo)
+3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 6. Appsec, cloud development and infrastructure-as-code command-line tools
-7. Vim bundles, and if `brew` is present, [Neovim](https://neovim.io/)
+7. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
 8. Tmux plugins, and if `brew` is present, [tmux](https://github.com/tmux/tmux)
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
@@ -256,7 +256,6 @@ a pull request.
   - If used, install these from the distro's repository (`bin/where_skipped`):
     - azcopy (`install_iac`)
     - azd (`install_iac`)
-    - neovim (`install_neovim`)
     - tmux (`install_tmux`)
 - Cloudflared (`install_iac`) does not work on Linux on AArch64
   - `cannot execute binary file: Exec format error`

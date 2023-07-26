@@ -29,8 +29,6 @@ fi
 
 if command -v brew >/dev/null; then
   brew install neovim
-else
-  printf "Homebrew is not available, please install neovim manually.\n"
 fi
 
 ### Symlink Neovim configs #####################################################

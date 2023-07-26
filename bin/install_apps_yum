@@ -60,6 +60,9 @@ $SUDO dnf install -y bash
 # Zsh
 $SUDO dnf install -y zsh
 
+# Neovim
+$SUDO dnf install -y neovim
+
 # The logfile navigator
 $SUDO dnf install -y lnav
 

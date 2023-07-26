@@ -57,6 +57,9 @@ $SUDO apk add zsh
 # Vim
 $SUDO apk add vim
 
+# Neovim
+$SUDO apk add neovim
+
 # The logfile navigator
 $SUDO apk add lnav
 
