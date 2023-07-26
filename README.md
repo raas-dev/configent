@@ -100,6 +100,17 @@ and all the scripts in `bin/` are available by name.
 
 ### install_apps
 
+What's installed:
+1. Command-line necessities and compile-time requirements
+2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
+[Flatpak](https://flatpak.org/) (Linux distros)
+3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
+4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
+5. Appsec, cloud development and infrastructure-as-code command-line tools
+6. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
+7. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
+8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
+
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
 to install requirements from Linux distro's repository (requires `sudo` rights).
 On Linux distros, flatpaks (GUI apps) are always installed user-wide.
@@ -112,18 +123,7 @@ Language runtimes and development tools are always installed user-wide by
 Whenever possible, [asdf plugins](https://github.com/asdf-vm/asdf-plugins)
 are preferred over Homebrew.
 
-What's installed:
-1. Command-line necessities and compile-time requirements
-2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
-[Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
-4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
-5. Appsec, cloud development and infrastructure-as-code command-line tools
-6. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
-7. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
-8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-
-⚠️: Homebrew may or may not be present after installation as Homebrew Linux
+⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
 With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`)
