@@ -60,6 +60,9 @@ $SUDO zypper install -y lnav
 # tmux
 $SUDO zypper install -y tmux
 
+# ctags
+$SUDO zypper install -y ctags
+
 # pbcopy/pbpaste like experience
 #$SUDO zypper install -y xsel
 

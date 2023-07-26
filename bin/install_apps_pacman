@@ -60,6 +60,9 @@ $SUDO pacman --noconfirm --needed -S lnav
 # tmux
 $SUDO pacman --noconfirm --needed -S tmux
 
+# ctags
+$SUDO pacman --noconfirm --needed -S universal-ctags
+
 # pbcopy/pbpaste like experience
 #$SUDO pacman --noconfirm --needed -S xsel
 

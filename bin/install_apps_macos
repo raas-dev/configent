@@ -62,7 +62,7 @@ brew install mas
 # Internet traffic monitor (https://github.com/GyulyVGC/sniffnet)
 brew install sniffnet
 
-# Maintained ctags implementation (used by git-delta)
+# Maintained ctags implementation
 brew install universal-ctags
 
 # Often required for compiling Pythons

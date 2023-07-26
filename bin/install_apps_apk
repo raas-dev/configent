@@ -66,6 +66,9 @@ $SUDO apk add lnav
 # Tmux
 $SUDO apk add tmux
 
+# ctags
+$SUDO apk add ctags
+
 # Perl
 $SUDO apk add perl
 
