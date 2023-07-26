@@ -102,20 +102,20 @@ and all the scripts in `bin/` are available by name.
 
 MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
-Language runtimes and most command-line tools are installed OS independent by
-[asdf](https://asdf-vm.com/). Versions are defined in `~/.tool-versions`.
+Language runtimes and most command-line tools are installed by
+[asdf](https://asdf-vm.com/). Global versions are locked in `~/.tool-versions`.
 
-For a few other command-line tools which are not available as
+For a few other command-line tools, which are not available as
 [asdf plugins](https://github.com/asdf-vm/asdf-plugins),
 [Homebrew](https://brew.sh/) is preferred.
 
 ⚠️: Homebrew Linux on AArch64 is poorly supported (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
 
-Order of installation:
+What's installed, unless you modify the script:
 1. Command-line necessities and compile-time requirements (Linux distro's repo)
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugins and Zsh on macOS (on Linux distros, Zsh is installed from repo)
+3. Zsh plugins and Zsh on macOS (on Linux distros Zsh is installed from repo)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 6. Appsec, cloud development and infrastructure-as-code command-line tools
