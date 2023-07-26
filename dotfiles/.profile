@@ -162,6 +162,10 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
+### Azure developer CLI ########################################################
+
+path_append "$HOME/.azd/bin"
+
 ### kubectl krew ###############################################################
 
 path_append "$HOME/.krew/bin"

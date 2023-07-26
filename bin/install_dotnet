@@ -16,7 +16,8 @@ export ASDF_DIR="$HOME/.asdf"
 . "$ASDF_DIR/asdf.sh"
 
 asdf plugin add dotnet
-DOTNET_CLI_TELEMETRY_OPTOUT=1 asdf install dotnet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+asdf install dotnet
 
 ### dotnet tools ###############################################################
 

@@ -107,12 +107,11 @@ Language runtimes and most command-line tools are installed by
 
 Global versions are locked in `~/.tool-versions`. See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for other scopes.
 
-Command-line tools which are not available as
-[asdf plugins](https://github.com/asdf-vm/asdf-plugins), and are not in
-the Linux distro's repo, [Homebrew](https://brew.sh/) is used for installation.
+Command-line tools not available as
+[asdf plugins](https://github.com/asdf-vm/asdf-plugins), and not in
+the Linux distro's repo, are installed by [Homebrew](https://brew.sh/).
 
-⚠️: Homebrew Linux does not work on AArch64, so a few (non-critical) tools will
-[be missed](https://github.com/raas-dev/configent#issues-in-dependencies).
+⚠️: Homebrew Linux [does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
 What's installed, unless you modify the script:
 1. Command-line necessities and compile-time requirements
@@ -253,8 +252,4 @@ a pull request.
 
 ### Issues in dependencies
 
-- Linux Homebrew on AArch64 is [not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-  - If you miss these tools, install them manually (`bin/where_skipped`):
-    - azcopy (`install_iac`)
-    - azd (`install_iac`)
 - Homebrew does not work on Alpine Linux (both x86_64 and AArch64, due to musl)

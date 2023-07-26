@@ -30,7 +30,7 @@ fi
 # Cross-platform make is often required by packages with non-native deps
 brew install cmake
 
-# GNU utils are g-prefixed (non-g symlinks are prepended to PATH in .profile)
+# GNU bins are prepended to PATH in .profile
 brew install coreutils
 brew install findutils
 #brew install gnu-getopt
@@ -65,5 +65,5 @@ brew install sniffnet
 # Maintained ctags implementation
 brew install universal-ctags
 
-# Often required for compiling Pythons
+# For compiling language versions (asdf)
 brew install xz

@@ -57,10 +57,11 @@ az extension add --name azure-devops --upgrade --yes
 az extension add --name containerapp --upgrade --yes
 az extension add --name next --upgrade --yes
 
-if command -v brew >/dev/null; then
-  brew install azcopy
-  brew install azure/azd/azd
-fi
+### azure developer cli ########################################################
+
+mkdir -p "$HOME/.azd/bin"
+curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
+  bash -s -- --install-folder "$HOME/.azd" --symlink-folder "$HOME/.azd/bin"
 
 ### terraform ##################################################################
 

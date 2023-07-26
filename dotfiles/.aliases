@@ -501,6 +501,7 @@ nixery() {
 ### Ad-hoc binaries via Nix ####################################################
 
 # cloud
+alias azcopy='n shell/azure-storage-azcopy azcopy'
 alias gcloud='nixery shell/google-cloud-sdk gcloud'
 
 # databases
@@ -518,7 +519,7 @@ alias difft='n shell/difftastic difft'
 alias grex='nixery grex'
 alias tokei='nixery tokei'
 alias usql='n usql'
-alias webanalyze='n webanalyze -update' # requires read-write file system
+alias webanalyze='n webanalyze -update' # writes technologies.json to $PWD
 
 # load testing
 alias k6='nixery k6'
