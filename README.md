@@ -159,6 +159,10 @@ If you prefer `bash` instead:
 
     install_bash
 
+If Homebrew is available (Linux distros on x86_64, macOS on x86_64 or ARM64),
+Zsh and Bash are installed from Homebrew and preferred over system-wide shells
+(respectively), as Homebrew likely has newer versions available.
+
 ## 🏗️ dockerd and containerd
 
 Both container runtimes in a nutshell:
