@@ -120,10 +120,10 @@ What's installed, unless you modify the script:
 [Flatpak](https://flatpak.org/) (Linux distros)
 3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
-5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
-6. Appsec, cloud development and infrastructure-as-code command-line tools
-7. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
-8. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
+5. Appsec, cloud development and infrastructure-as-code command-line tools
+6. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
+7. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
+8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred but if this is not possible (no `sudo`), it is installed user's home.

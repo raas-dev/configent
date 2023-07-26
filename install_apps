@@ -62,9 +62,6 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
-# copy fonts to user's fonts path
-"$bin_path/install_fonts"
-
 # install appsec tools and linters
 "$bin_path/install_appsec"
 
@@ -76,3 +73,6 @@ fi
 
 # install tmux and plugins
 "$bin_path/install_tmux"
+
+# copy fonts to user's fonts path
+"$bin_path/install_fonts"
