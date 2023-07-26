@@ -104,11 +104,11 @@ What's installed:
 1. Command-line necessities and compile-time requirements
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
+3. Zsh plugin manager and plugins (Zsh from `brew` if Homebrew is available)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. Appsec, cloud development and infrastructure-as-code command-line tools
-6. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
-7. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
+6. Vim/Neovim bundles and configs (Neovim from `brew` if Homebrew is available)
+7. Tmux plugin manager and plugins (tmux from `brew` if Homebrew is available)
 8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
@@ -126,8 +126,10 @@ are preferred over Homebrew.
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
-With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`)
-is preferred but if it is not possible (no `sudo`), it is installed user's home.
+With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`) is
+preferred, but if it this not possible (no `sudo`), it is installed user's home.
+In both cases, Zsh, Neovim and tmux are installed using Homebrew on Linux,
+as it likely has newer versions than the ones gotten from the distro's repo.
 
 💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 

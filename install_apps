@@ -62,16 +62,16 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
-# install appsec tools and linters
+# install appsec tools such as linters
 "$bin_path/install_appsec"
 
-# install cloud development and infrastructure-as-code tools
+# install cloud development such as infrastructure-as-code tools
 "$bin_path/install_iac"
 
-# install Neovim and vim bundles
+# install vim bundles
 "$bin_path/install_neovim"
 
-# install tmux and plugins
+# install tmux plugins
 "$bin_path/install_tmux"
 
 # copy fonts to user's fonts path
