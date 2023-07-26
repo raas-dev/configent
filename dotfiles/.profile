@@ -150,7 +150,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ### bat ########################################################################
 
-export BAT_STYLE="auto" # auto == default, unless output is piped (lesspipe.sh)
+export BAT_STYLE="auto"
 export BAT_THEME="DarkNeon"
 
 ### dircolors ##################################################################
@@ -173,6 +173,9 @@ export AZURE_DEV_COLLECT_TELEMETRY=no
 
 # Azure Functions Core Tools
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
+# dotnet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # KICS
 export DISABLE_CRASH_REPORT=0
