@@ -66,6 +66,9 @@ $SUDO dnf install -y neovim
 # The logfile navigator
 $SUDO dnf install -y lnav
 
+# tmux
+$SUDO dnf install -y tmux
+
 # Locales
 $SUDO dnf install -y langpacks-en
 

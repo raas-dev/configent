@@ -70,6 +70,9 @@ $SUDO apt-get install -y neovim
 # The logfile navigator
 $SUDO apt-get install -y lnav
 
+# tmux
+$SUDO apt-get install -y tmux
+
 # macOS pbcopy/pbpaste like experience
 #$SUDO apt-get install -y xsel
 

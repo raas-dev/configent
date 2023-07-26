@@ -57,6 +57,9 @@ $SUDO zypper install -y neovim
 # The logfile navigator
 $SUDO zypper install -y lnav
 
+# tmux
+$SUDO zypper install -y tmux
+
 # pbcopy/pbpaste like experience
 #$SUDO zypper install -y xsel
 

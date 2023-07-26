@@ -57,6 +57,9 @@ $SUDO pacman --noconfirm --needed -S neovim
 # The logfile navigator
 $SUDO pacman --noconfirm --needed -S lnav
 
+# tmux
+$SUDO pacman --noconfirm --needed -S tmux
+
 # pbcopy/pbpaste like experience
 #$SUDO pacman --noconfirm --needed -S xsel
 

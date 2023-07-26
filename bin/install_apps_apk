@@ -63,6 +63,9 @@ $SUDO apk add neovim
 # The logfile navigator
 $SUDO apk add lnav
 
+# Tmux
+$SUDO apk add tmux
+
 # Perl
 $SUDO apk add perl
 

@@ -100,21 +100,22 @@ and all the scripts in `bin/` are available by name.
 
 ### install_apps
 
-MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
+Apt, yum (dnf), zypper, pacman and apk based Linux distros are recognized.
 
 Language runtimes and most command-line tools are installed by
 [asdf](https://asdf-vm.com/).
 
 Global versions are locked in `~/.tool-versions`. See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for other scopes.
 
-For a few other command-line tools, which are not available as
-[asdf plugins](https://github.com/asdf-vm/asdf-plugins),
-[Homebrew](https://brew.sh/) is preferred.
+For command-line tools which are not available as
+[asdf plugins](https://github.com/asdf-vm/asdf-plugins), or are not available
+in the Linux distro's repo, [Homebrew](https://brew.sh/) is used.
 
-⚠️: Homebrew Linux on AArch64 is poorly supported (see [Issues in dependencies](https://github.com/raas-dev/configent#issues-in-dependencies)).
+⚠️: Homebrew Linux does not work on AArch64, so a few (non-critical) tools will
+[be missed](https://github.com/raas-dev/configent#issues-in-dependencies).
 
 What's installed, unless you modify the script:
-1. Command-line necessities and compile-time requirements (Linux distro's repo)
+1. Command-line necessities and compile-time requirements
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
 3. Zsh plugins and Zsh on macOS (on Linux distros is installed from repo)
@@ -122,7 +123,7 @@ What's installed, unless you modify the script:
 5. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 6. Appsec, cloud development and infrastructure-as-code command-line tools
 7. Vim bundles and Neovim on macOS (on Linux distros is installed from repo)
-8. Tmux plugins, and if `brew` is present, [tmux](https://github.com/tmux/tmux)
+8. Tmux plugins and tmux on macOS (on Linux distros is installed from repo)
 
 With Homebrew on Linux, system-wide installation (i.e. `/home/linuxbrew`) is
 preferred but if this is not possible (no `sudo`), it is installed user's home.
@@ -253,10 +254,9 @@ a pull request.
 ### Issues in dependencies
 
 - Linux Homebrew on AArch64 is [not officially supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-  - If used, install these from the distro's repository (`bin/where_skipped`):
+  - If you miss these tools, install them manually (`bin/where_skipped`):
     - azcopy (`install_iac`)
     - azd (`install_iac`)
-    - tmux (`install_tmux`)
-- Cloudflared (`install_iac`) does not work on Linux on AArch64
+- Cloudflared (`install_iac`) does not work on Linux on AArch64 (as of 2023-07)
   - `cannot execute binary file: Exec format error`
-- Homebrew does not work on Alpine Linux as it bases on musl, not glibc
+- Homebrew does not work on Alpine Linux (both x86_64 and AArch64, due to musl)
