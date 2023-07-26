@@ -103,7 +103,9 @@ and all the scripts in `bin/` are available by name.
 MacOS, apt, yum, zypper, pacman and apk based Linux distros are recognized.
 
 Language runtimes and most command-line tools are installed by
-[asdf](https://asdf-vm.com/). Global versions are locked in `~/.tool-versions`.
+[asdf](https://asdf-vm.com/).
+
+Global versions are locked in `~/.tool-versions`. See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for other scopes.
 
 For a few other command-line tools, which are not available as
 [asdf plugins](https://github.com/asdf-vm/asdf-plugins),
