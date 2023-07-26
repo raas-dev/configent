@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.65.0](https://github.com/raas-dev/configent/compare/1.64.0...1.65.0) (2023-07-26)
+
+
+### Features
+
+* **linux:** Add git-lfs ([0038a6b](https://github.com/raas-dev/configent/commit/0038a6bd10fd921ff29a4f2a4ee4e5937a78662d))
+* **linux:** Add neovim ([7a1c9e6](https://github.com/raas-dev/configent/commit/7a1c9e6e3798967b9683bf59ccaaeb1ed4a53724))
+* **linux:** Add tmux ([f5cd2e3](https://github.com/raas-dev/configent/commit/f5cd2e332af70d12a6d576fc53b496a884f288a5))
+
+
+### Fixes
+
+* **iac:** Move tfsec from appsec to iac ([0b0942b](https://github.com/raas-dev/configent/commit/0b0942beddd22110a98c7e1632583cb4d733b0c3))
+* **trans:** Add trans as script, remove brew ([69b11b4](https://github.com/raas-dev/configent/commit/69b11b4ac40e9d759d71ac53a2f06aefd8122a5b))
+
 ## [1.64.0](https://github.com/raas-dev/configent/compare/1.63.0...1.64.0) (2023-07-26)
 
 
