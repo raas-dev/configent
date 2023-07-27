@@ -30,7 +30,7 @@ fi
 # Cross-platform make is often required by packages with non-native deps
 brew install cmake
 
-# GNU bins are prepended to PATH in .profile
+# GNU bins prepended to PATH in .profile
 brew install coreutils
 brew install findutils
 #brew install gnu-getopt
@@ -39,8 +39,10 @@ brew install findutils
 #brew install gnu-tar
 #brew install gnu-time
 #brew install gnu-which
-brew install grep
+
+# GNU bins not prepended to PATH .profile
 brew install gawk
+brew install grep
 
 # More recent git than in Xcode Command Line Tools
 brew install git
