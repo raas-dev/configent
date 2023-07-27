@@ -39,7 +39,7 @@ Works on x86-64 and ARM:
 Minimum requirements are 4GB RAM and 10GB disk, or a 2016 MacBook Pro,
 both on which it is <30 minutes.
 
-## 💣 Up
+## 🥾 Up
 
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
