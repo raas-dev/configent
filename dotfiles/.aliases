@@ -348,11 +348,6 @@ genpass() {
     fold -w "$length" | head -n1 | pbcopy
 }
 
-# Remove all non-cask formulae
-brewclear() {
-  brew list --formula | xargs brew uninstall --ignore-dependencies --force
-}
-
 # Npm remove all global packages (except later npm installed via npm)
 npmclear() {
   npm ls --location=global -p --depth=0 |
@@ -369,6 +364,36 @@ gemclear() {
 pipclear() {
   command -v pipx >/dev/null && pipx uninstall-all
   pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
+}
+
+# Remove all non-cask formulae
+brewclear() {
+  printf "Are you sure to remove all Homebrew formulae [y\N] > "
+  read -r choice
+  case "$choice" in
+    [yY])
+      brew list --formula | xargs brew uninstall --ignore-dependencies --force
+    ;;
+    *)
+      printf "Aborted.\n"
+    ;;
+  esac
+}
+
+# Remove all VSCode extensions
+codeclear() {
+  printf "Are you sure to remove all VSCode extensions [y\N] > "
+  read -r choice
+  case "$choice" in
+    [yY])
+      code --list-extensions | while read -r extension; do
+        code --force --uninstall-extension "$extension"
+      done
+    ;;
+    *)
+      printf "Aborted.\n"
+    ;;
+  esac
 }
 
 ### Latest versions of Python command-line tools ###############################
