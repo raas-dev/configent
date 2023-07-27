@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.66.2](https://github.com/raas-dev/configent/compare/1.66.1...1.66.2) (2023-07-27)
+
+
+### Fixes
+
+* **aliases:** Confirm brewclear and codeclear ([f0d8e5e](https://github.com/raas-dev/configent/commit/f0d8e5e7f9898513bd95cec39c5aceb3b59e3dfa))
+* **aliases:** Use nixery for read-only bins ([4226c29](https://github.com/raas-dev/configent/commit/4226c2917f62d17cc39fdb9b99b2435663421b3c))
+* **packages:** Add gawk ([90b3b1d](https://github.com/raas-dev/configent/commit/90b3b1db6c41a67baec15b9a75bb2874c6cf85b4))
+* **python:** Move pre-commit to venv scope ([977a964](https://github.com/raas-dev/configent/commit/977a964a599832c462a7a4c1f2c0b14797c314f9))
+* **python:** Move ptpython to aliases ([ad40bc4](https://github.com/raas-dev/configent/commit/ad40bc4845309fee4d1cd14df9afb8283c70bfe4))
+* **vscode:** Add Semgrep vscode extension ([c6f23d2](https://github.com/raas-dev/configent/commit/c6f23d2e7eec78ff175c6ae777edb47a0bba9245))
+
 ### [1.66.1](https://github.com/raas-dev/configent/compare/1.66.0...1.66.1) (2023-07-26)
 
 
