@@ -247,9 +247,8 @@ for testing script changes without first committing and pushing to your fork.
 
 ### Contributing
 
-Install [pre-commit](https://pre-commit.com/) and the hooks before committing:
+Install [pre-commit](https://pre-commit.com/) hooks before committing:
 
-    pipx install pre-commit
     pre-commit install --hook-type pre-commit
     pre-commit install --hook-type commit-msg
 

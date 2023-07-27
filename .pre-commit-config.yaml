@@ -1,6 +1,3 @@
-# Install pre-commit user-wide:
-#   pipx install pre-commit
-#
 # Install the hooks in this file:
 #   pre-commit install --hook-type pre-commit
 #   pre-commit install --hook-type commit-msg
