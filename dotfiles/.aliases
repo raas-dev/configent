@@ -371,11 +371,11 @@ brewclear() {
   printf "Are you sure to remove all Homebrew formulae [y\N] > "
   read -r choice
   case "$choice" in
-    [yY])
-      brew list --formula | xargs brew uninstall --ignore-dependencies --force
+  [yY])
+    brew list --formula | xargs brew uninstall --ignore-dependencies --force
     ;;
-    *)
-      printf "Aborted.\n"
+  *)
+    printf "Aborted.\n"
     ;;
   esac
 }
@@ -385,13 +385,13 @@ codeclear() {
   printf "Are you sure to remove all VSCode extensions [y\N] > "
   read -r choice
   case "$choice" in
-    [yY])
-      code --list-extensions | while read -r extension; do
-        code --force --uninstall-extension "$extension"
-      done
+  [yY])
+    code --list-extensions | while read -r extension; do
+      code --force --uninstall-extension "$extension"
+    done
     ;;
-    *)
-      printf "Aborted.\n"
+  *)
+    printf "Aborted.\n"
     ;;
   esac
 }
@@ -465,7 +465,7 @@ nixd() {
   local name="$image-${PWD##*/}"
   nerdctl start "$name" &>/dev/null ||
     (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
-        nerdctl run --init -t --detach \
+      nerdctl run --init -t --detach \
         --name "$name" \
         --publish "127.0.0.1:${PORT:-8000}:${PORT:-8000}" \
         --volume="$PWD:$PWD" \
@@ -485,20 +485,19 @@ n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
   local packages="${1//\// }"
   # shellcheck disable=SC1001   # escape forward slash on purpose
-  case "$1"
-    in shell*)
-      shift
-      local packages="${packages#* }"
-      local command="bash -c '$*'"
-      ;;
-    *\/*)
-      shift
-      local bin="${packages%% *}"
-      local command="$bin $*"
-      ;;
-    *)
-      local command="$*"
-      ;;
+  case "$1" in shell*)
+    shift
+    local packages="${packages#* }"
+    local command="bash -c '$*'"
+    ;;
+  *\/*)
+    shift
+    local bin="${packages%% *}"
+    local command="$bin $*"
+    ;;
+  *)
+    local command="$*"
+    ;;
   esac
   # shellcheck disable=SC2086   # command has to be in quotes
   eval nixd nix-shell --packages "$packages" --command \"$command\"
