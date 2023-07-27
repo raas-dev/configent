@@ -22,7 +22,7 @@ A few features:
 - One character `.aliases` - the fastest are the commands one does not type
 - Ask GPT in terminal (`s`), create shell commands (`_`) and code (`c`)
 
-Works on x86_64 and AArch64/ARM64 operating systems:
+Works on x86-64 and ARM:
 
 - macOS Ventura (13), Monterey (12) and Big Sur (11)
 - Ubuntu Linux 22.04 LTS (Jammy Jellyfish)
@@ -125,9 +125,9 @@ Whenever possible, [asdf plugins](https://github.com/asdf-vm/asdf-plugins)
 are preferred over Homebrew.
 
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
-[does not work on AArch64](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
+[does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
-With Homebrew on Linux (x86_64), system-wide installation (`/home/linuxbrew`) is
+With Homebrew on Linux (x86-64), system-wide installation (`/home/linuxbrew`) is
 preferred, but if it this not possible (no `sudo`), it is installed user's home.
 In both cases, Zsh, Neovim and tmux are installed using Homebrew on Linux,
 as it likely has newer versions than the ones gotten from the distro's repo.
@@ -159,7 +159,7 @@ If you prefer `bash` instead:
 
     install_bash
 
-If Homebrew is available (Linux distros on x86_64, macOS on x86_64 or ARM64),
+If Homebrew is available (Linux distros on x86-64, macOS on x86-64 or ARM),
 Zsh and Bash are installed from Homebrew and preferred over system-wide shells
 (respectively), as Homebrew likely has newer versions available.
 
@@ -230,7 +230,7 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 whereas `nixery` mounts the current directory as read-only.
 
 💡: Use aliases for binaries not wanted installed on the host, such as various
-command-line security tools, and for binaries that are not available on AArch64.
+command-line security tools, and for binaries that are not available on ARM.
 
 ## 🔨 Development
 
@@ -257,4 +257,4 @@ a pull request.
 
 ### Issues in dependencies
 
-- Homebrew does not work on Alpine Linux (both x86_64 and AArch64, due to musl)
+- Homebrew does not work on Alpine Linux (both x86-64 and ARM, due to musl)

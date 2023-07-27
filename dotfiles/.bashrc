@@ -90,7 +90,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
   # brew on Intel Macs
   if [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
     . "/usr/local/etc/profile.d/bash_completion.sh"
-  # brew on ARM64 macs
+  # brew on ARM macs
   elif [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
     . "/opt/homebrew/etc/profile.d/bash_completion.sh"
   # Linuxbrew
