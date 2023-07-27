@@ -382,6 +382,9 @@ alias you-get='pipx run you-get'
 # Simplenote in terminal
 alias sncli='pipx run sncli'
 
+# Advanced Python REPL
+alias ptpython='pipx run ptpython'
+
 # Jupyter notebooks in terminal
 alias euporie='pipx run euporie'
 

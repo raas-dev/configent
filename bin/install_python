@@ -21,20 +21,19 @@ asdf install python
 ### interpreter scope ##########################################################
 
 # Upgrade packages included with Python
-pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade pip setuptools wheel
 
 # Pretty and useful exceptions (https://github.com/Qix-/better-exceptions)
-pip install --upgrade better_exceptions
+python -m pip install --upgrade better_exceptions
 
 # Pretty-print Python tracebacks (https://github.com/skorokithakis/tbvaccine)
-pip install --upgrade tbvaccine
+python -m pip install --upgrade tbvaccine
 
 # Python applications in isolated environments (https://pypa.github.io/pipx)
-pip install --upgrade pipx
+python -m pip install --upgrade pipx
 
 ### dedicated virtualenvs ######################################################
 
 pipx install pre-commit
-pipx install ptpython
 pipx install semgrep
 pipx install tldr
