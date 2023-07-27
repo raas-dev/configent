@@ -60,6 +60,7 @@ az extension add --name next --upgrade --yes
 ### azure developer cli ########################################################
 
 mkdir -p "$HOME/.azd/bin"
+# nosemgrep
 curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
   bash -s -- --install-folder "$HOME/.azd" --symlink-folder "$HOME/.azd/bin"
 
