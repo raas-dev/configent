@@ -22,13 +22,11 @@ if [ -n "$(git status -s)" ]; then
   exit 1
 fi
 
-pip3 install --no-warn-script-location --quiet --user --upgrade commitizen
-
 if [ -n "$prerelease_type" ]; then
   echo "Creating pre-release ($prerelease_type)"
   npx -y standard-version --prerelease "$prerelease_type"
-  "$HOME/.local/bin/cz" bump --prerelease "$prerelease_type"
+  pipx run --spec commitizen cz bump --prerelease "$prerelease_type"
 else
   npx -y standard-version
-  "$HOME/.local/bin/cz" bump
+  pipx run --spec commitizen cz bump
 fi
