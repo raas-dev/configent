@@ -61,6 +61,9 @@ $SUDO zypper install -y lnav
 # tmux
 $SUDO zypper install -y tmux
 
+# GNU awk
+$SUDO zypper install -y gawk
+
 # ctags
 $SUDO zypper install -y ctags
 

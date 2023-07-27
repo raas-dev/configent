@@ -40,6 +40,7 @@ brew install findutils
 #brew install gnu-time
 #brew install gnu-which
 brew install grep
+brew install gawk
 
 # More recent git than in Xcode Command Line Tools
 brew install git

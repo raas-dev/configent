@@ -60,6 +60,9 @@ $SUDO pacman --noconfirm --needed -S lnav
 # tmux
 $SUDO pacman --noconfirm --needed -S tmux
 
+# GNU awk
+$SUDO pacman --noconfirm --needed -S gawk
+
 # ctags
 $SUDO pacman --noconfirm --needed -S universal-ctags
 

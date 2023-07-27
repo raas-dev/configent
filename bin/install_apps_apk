@@ -67,6 +67,9 @@ $SUDO apk add lnav
 # Tmux
 $SUDO apk add tmux
 
+# GNU awk
+$SUDO apk add gawk
+
 # ctags
 $SUDO apk add ctags
 
