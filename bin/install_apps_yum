@@ -34,6 +34,9 @@ $SUDO dnf check-update -y
 $SUDO dnf config-manager --set-enabled crb
 $SUDO dnf install -y epel-release epel-next-release
 
+# The logfile navigator, not available in CentOS Stream (as of 2023-07)
+$SUDO dnf install -y lnav
+
 # Certificates
 $SUDO dnf install -y ca-certificates
 
@@ -61,9 +64,6 @@ $SUDO dnf install -y neovim
 
 # git-extras, not available in CentOS Stream (as of 2023-07)
 $SUDO dnf install -y git-extras
-
-# The logfile navigator, not available in CentOS Stream (as of 2023-07)
-$SUDO dnf install -y lnav
 
 # tmux
 $SUDO dnf install -y tmux

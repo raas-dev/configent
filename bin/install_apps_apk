@@ -35,6 +35,9 @@ fi
 # Update package lists
 $SUDO apk update
 
+# The logfile navigator
+$SUDO apk add lnav
+
 # Certificates
 $SUDO apk add ca-certificates
 
@@ -68,9 +71,6 @@ $SUDO apk add neovim
 
 # Git-extras
 $SUDO apk add git-extras@testing
-
-# The logfile navigator
-$SUDO apk add lnav
 
 # Tmux
 $SUDO apk add tmux

@@ -27,6 +27,9 @@ else
   exit 10
 fi
 
+# The logfile navigator
+$SUDO pacman --noconfirm --needed -S lnav
+
 # Certificates
 $SUDO pacman --noconfirm --needed -S ca-certificates
 
@@ -56,9 +59,6 @@ $SUDO pacman --noconfirm --needed -S neovim
 
 # git-extras
 $SUDO pacman --noconfirm --needed -S git-extras
-
-# The logfile navigator
-$SUDO pacman --noconfirm --needed -S lnav
 
 # tmux
 $SUDO pacman --noconfirm --needed -S tmux

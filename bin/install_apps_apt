@@ -42,6 +42,9 @@ echo "en_US.UTF-8 UTF-8" | $SUDO tee /etc/locale.gen
 echo "LANG=en_US.UTF-8" | $SUDO tee /etc/locale.conf
 $SUDO locale-gen en_US.UTF-8
 
+# The logfile navigator
+$SUDO apt-get install -y lnav
+
 # Certificates
 $SUDO apt-get install -y ca-certificates
 
@@ -69,9 +72,6 @@ $SUDO apt-get install -y neovim
 
 # git-extras
 $SUDO apt-get install -y git-extras
-
-# The logfile navigator
-$SUDO apt-get install -y lnav
 
 # tmux
 $SUDO apt-get install -y tmux

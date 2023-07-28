@@ -30,6 +30,9 @@ fi
 # Update package lists
 $SUDO zypper refresh
 
+# The logfile navigator
+$SUDO zypper install -y lnav
+
 # Certificates
 $SUDO zypper install -y ca-certificates
 
@@ -57,9 +60,6 @@ $SUDO zypper install -y neovim
 
 # git-extras, not available in OpenSUSE (as of 2023-07)
 #$SUDO zypper install -y git-extras
-
-# The logfile navigator
-$SUDO zypper install -y lnav
 
 # tmux
 $SUDO zypper install -y tmux
