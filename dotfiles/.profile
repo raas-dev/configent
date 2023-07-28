@@ -96,7 +96,7 @@ if [ -r "$HOME/.asdf/asdf.sh" ]; then
 
   # Go
   export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-  go_path="$(asdf where golang)"
+  go_path="$(asdf where golang 2>/dev/null)"
   if [ -d "$go_path" ]; then
     export GOPATH="$go_path"
     export GOROOT="$GOPATH/go"
@@ -104,7 +104,7 @@ if [ -r "$HOME/.asdf/asdf.sh" ]; then
   fi
 
   # Rust
-  rust_path="$(asdf where rust)"
+  rust_path="$(asdf where rust 2>/dev/null)"
   if [ -d "$rust_path" ]; then
     export CARGO_HOME="$rust_path"
     path_prepend "$CARGO_HOME/bin"
