@@ -29,8 +29,6 @@
 
   # Short and self-explanatory helpers
   cloner = clone --recursive
-  contributors = shortlog --summary --numbered
-  daily = log --since '1 day ago' --oneline
   discard = reset --hard HEAD
   incoming = !"git remote update -p; git log ..@{u}"
   outgoing = log @{u}..
