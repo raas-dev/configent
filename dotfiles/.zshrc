@@ -35,6 +35,7 @@ autoload -Uz bashcompinit && bashcompinit
 ### antidote ###################################################################
 
 if [ -r "$HOME/.antidote/antidote.zsh" ]; then
+  export ANTIDOTE_HOME="$HOME/.cache/antidote"
   . "$HOME/.antidote/antidote.zsh"
   antidote load
 
