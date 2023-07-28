@@ -34,6 +34,7 @@ humao.rest-client
 IBM.output-colorizer
 kddejong.vscode-cfn-lint
 kubescape.kubescape
+mads-hartmann.bash-ide-vscode
 mikestead.dotenv
 ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-bicep
@@ -60,7 +61,6 @@ streetsidesoftware.code-spell-checker
 tamasfe.even-better-toml
 teabyii.ayu
 tfsec.tfsec
-timonwong.shellcheck
 tomoki1207.pdf
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
