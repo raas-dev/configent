@@ -34,9 +34,8 @@ autoload -Uz bashcompinit && bashcompinit
 
 ### antidote ###################################################################
 
-[ -d "$HOME/.antidote" ] && . "$HOME/.antidote/antidote.zsh"
-
-if command -v antidote >/dev/null; then
+if [ -r "$HOME/.antidote/antidote.zsh" ]; then
+  . "$HOME/.antidote/antidote.zsh"
   antidote load
 
   # .zsh_plugins.txt: Aloxaf/fzf-tab
