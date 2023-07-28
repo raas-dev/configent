@@ -547,6 +547,7 @@ alias hexyl='nixery hexyl'
 alias cht.sh='n shell/cht-sh cht.sh'
 alias difft='nixery shell/difftastic difft'
 alias grex='nixery grex'
+alias pcalc='nixery pcalc'
 alias tokei='nixery tokei'
 alias usql='n usql' # rw
 alias webanalyze='n webanalyze -update' # rw, writes technologies.json
