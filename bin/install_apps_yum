@@ -30,8 +30,9 @@ fi
 # Update package lists
 $SUDO dnf check-update -y
 
-# Add Epel repostitory
-$SUDO dnf install -y epel-release
+# Add Epel repostitory (https://docs.fedoraproject.org/en-US/epel/)
+$SUDO dnf config-manager --set-enabled crb
+$SUDO dnf install -y epel-release epel-next-release
 
 # Certificates
 $SUDO dnf install -y ca-certificates
