@@ -27,9 +27,6 @@ else
   exit 10
 fi
 
-# The logfile navigator
-$SUDO pacman --noconfirm --needed -S lnav
-
 # Certificates
 $SUDO pacman --noconfirm --needed -S ca-certificates
 
@@ -47,6 +44,9 @@ $SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
 $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
   git git-lfs htop lsb-release procps traceroute unzip vim wget which \
   whois zip
+
+# The logfile navigator
+$SUDO pacman --noconfirm --needed -S lnav
 
 # Bash
 $SUDO pacman --noconfirm --needed -S bash

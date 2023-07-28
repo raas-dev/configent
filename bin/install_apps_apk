@@ -35,9 +35,6 @@ fi
 # Update package lists
 $SUDO apk update
 
-# The logfile navigator
-$SUDO apk add lnav
-
 # Certificates
 $SUDO apk add ca-certificates
 
@@ -56,6 +53,9 @@ $SUDO apk add build-base cmake gcompat icu-libs m4 ncurses openssl-dev \
 $SUDO apk add coreutils curl bind-tools file findutils \
   git git-lfs htop less procps zip unzip util-linux wget \
   whois
+
+# The logfile navigator
+$SUDO apk add lnav
 
 # Bash
 $SUDO apk add bash

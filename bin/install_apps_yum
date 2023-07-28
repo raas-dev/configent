@@ -34,9 +34,6 @@ $SUDO dnf check-update -y
 $SUDO dnf config-manager --set-enabled crb
 $SUDO dnf install -y epel-release epel-next-release
 
-# The logfile navigator, not available in CentOS Stream (as of 2023-07)
-$SUDO dnf install -y lnav
-
 # Certificates
 $SUDO dnf install -y ca-certificates
 
@@ -52,6 +49,9 @@ $SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 \
 $SUDO dnf install -y bind-utils coreutils file findutils \
   git git-lfs htop lsof procps redhat-lsb-core tar traceroute unzip wget \
   whois zip
+
+# The logfile navigator, not available in CentOS Stream (as of 2023-07)
+$SUDO dnf install -y lnav
 
 # Bash
 $SUDO dnf install -y bash

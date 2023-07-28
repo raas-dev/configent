@@ -42,9 +42,6 @@ echo "en_US.UTF-8 UTF-8" | $SUDO tee /etc/locale.gen
 echo "LANG=en_US.UTF-8" | $SUDO tee /etc/locale.conf
 $SUDO locale-gen en_US.UTF-8
 
-# The logfile navigator
-$SUDO apt-get install -y lnav
-
 # Certificates
 $SUDO apt-get install -y ca-certificates
 
@@ -60,6 +57,9 @@ $SUDO apt-get install -y build-essential cmake \
 $SUDO apt-get install -y coreutils dnsutils file findutils \
   git git-lfs htop lsb-release procps traceroute unzip wget \
   whois zip
+
+# The logfile navigator
+$SUDO apt-get install -y lnav
 
 # Bash
 $SUDO apt-get install -y bash

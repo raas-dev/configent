@@ -30,9 +30,6 @@ fi
 # Update package lists
 $SUDO zypper refresh
 
-# The logfile navigator
-$SUDO zypper install -y lnav
-
 # Certificates
 $SUDO zypper install -y ca-certificates
 
@@ -48,6 +45,9 @@ $SUDO zypper install -y cmake gcc gcc-c++ make m4 \
 $SUDO zypper install -y bind-utils coreutils file findutils \
   git git-lfs htop lsb-release lsof man procps traceroute unzip wget \
   whois zip
+
+# The logfile navigator
+$SUDO zypper install -y lnav
 
 # Bash
 $SUDO zypper install -y bash
