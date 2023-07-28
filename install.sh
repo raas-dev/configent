@@ -18,7 +18,7 @@ TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
 
-GIT_REF="${GIT_REF:-1.67.1}"
+GIT_REF="${GIT_REF:-1.67.2}"
 
 export NO_CASKS="${NO_CASKS:-true}"
 export NO_FLATPAKS="${NO_FLATPAKS:-true}"

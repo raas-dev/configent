@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.2](https://github.com/raas-dev/configent/compare/1.67.1...1.67.2) (2023-07-28)
+
+
+### Fixes
+
+* **distros:** NO_FLATPAKS skips install flatpak ([dfa9531](https://github.com/raas-dev/configent/commit/dfa9531a6584759a48ff4cc10ea1512d8708f0bb))
+* **install:** Allow passing variables to install.sh ([f5a3452](https://github.com/raas-dev/configent/commit/f5a34526bf883dd112fd8be0a372d1a96afce435))
+
 ### [1.67.1](https://github.com/raas-dev/configent/compare/1.67.0...1.67.1) (2023-07-28)
 
 
