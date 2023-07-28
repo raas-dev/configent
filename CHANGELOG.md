@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.3](https://github.com/raas-dev/configent/compare/1.67.2...1.67.3) (2023-07-28)
+
+
+### Fixes
+
+* **asdf:** Remove error message plugin not installed ([07a62cf](https://github.com/raas-dev/configent/commit/07a62cf76589431cd96311f96b05152a117eedb7))
+* **distros:** Postpone lnav installation after utils ([e433d84](https://github.com/raas-dev/configent/commit/e433d84800a9073fe5c7efe9fbe8eac53d4290d5))
+* **install:** CASKS, FLATPAKS, SNAPS is false by default ([a02aad1](https://github.com/raas-dev/configent/commit/a02aad1fb1c8d8bb68a6feda5643669a9b4e5b46))
+* **shells:** Change skip prompt to NONINTERACTIVE ([0ed1c41](https://github.com/raas-dev/configent/commit/0ed1c415e127f0bef0a9b55d9413a8c2221c4380))
+
 ### [1.67.2](https://github.com/raas-dev/configent/compare/1.67.1...1.67.2) (2023-07-28)
 
 
