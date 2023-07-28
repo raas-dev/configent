@@ -96,7 +96,11 @@ systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Snap
+#if [ -z "$NO_SNAPS" ]; then
 #$SUDO apt-get install -y snapd
+#fi
 
 # Flatpak
-$SUDO apt-get install -y flatpak
+if [ -z "$NO_FLATPAKS" ]; then
+  $SUDO apt-get install -y flatpak
+fi

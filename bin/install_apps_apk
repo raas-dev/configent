@@ -102,4 +102,6 @@ $SUDO rc-update add docker default
 # No Snap is available for Alpine Linux
 
 # Flatpak
-$SUDO apk add flatpak
+if [ -z "$NO_FLATPAKS" ]; then
+  $SUDO apk add flatpak
+fi

@@ -88,9 +88,13 @@ yay --noconfirm --needed -S git-extras
 #yay --noconfirm --needed -S ttf-ms-fonts
 
 # Snap
+#if [ -z "$NO_SNAPS" ]; then
 #yay --noconfirm --needed -S snapd
 #$SUDO systemctl enable --now snapd.socket
 #$SUDO ln -s /var/lib/snapd/snap /snap
+#fi
 
 # Flatpak
-$SUDO pacman --noconfirm --needed -S flatpak
+if [ -z "$NO_FLATPAKS" ]; then
+  $SUDO pacman --noconfirm --needed -S flatpak
+fi
