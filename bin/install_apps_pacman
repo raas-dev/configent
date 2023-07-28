@@ -57,9 +57,6 @@ $SUDO pacman --noconfirm --needed -S zsh
 # Neovim
 $SUDO pacman --noconfirm --needed -S neovim
 
-# git-extras
-$SUDO pacman --noconfirm --needed -S git-extras
-
 # tmux
 $SUDO pacman --noconfirm --needed -S tmux
 
@@ -83,6 +80,9 @@ $SUDO loginctl enable-linger "$USER"
 git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
   git -C "/tmp/yay-bin" pull --rebase
 (cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
+
+# git-extras
+yay --noconfirm --needed -S git-extras
 
 # Microsoft TrueType fonts (accepts EULA)
 #yay --noconfirm --needed -S ttf-ms-fonts
