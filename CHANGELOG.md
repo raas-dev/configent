@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.4](https://github.com/raas-dev/configent/compare/1.67.3...1.67.4) (2023-07-28)
+
+
+### Fixes
+
+* **python:** Fix pip install for asdf ([7d67b55](https://github.com/raas-dev/configent/commit/7d67b55c79815e154930d4999953173d6f280a23))
+
 ### [1.67.3](https://github.com/raas-dev/configent/compare/1.67.2...1.67.3) (2023-07-28)
 
 
