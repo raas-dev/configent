@@ -40,7 +40,7 @@ brew install findutils
 #brew install gnu-time
 #brew install gnu-which
 
-# GNU bins not prepended to PATH .profile
+# GNU bins NOT prepended to PATH in .profile
 brew install gawk
 brew install grep
 
