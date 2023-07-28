@@ -67,6 +67,9 @@ $SUDO apt-get install -y zsh
 # Neovim
 $SUDO apt-get install -y neovim
 
+# git-extras
+$SUDO apt-get install -y git-extras
+
 # The logfile navigator
 $SUDO apt-get install -y lnav
 

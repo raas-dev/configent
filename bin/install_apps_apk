@@ -66,6 +66,9 @@ $SUDO apk add vim
 # Neovim
 $SUDO apk add neovim
 
+# Git-extras
+$SUDO apk add git-extras@testing
+
 # The logfile navigator
 $SUDO apk add lnav
 

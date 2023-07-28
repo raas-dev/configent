@@ -54,6 +54,9 @@ $SUDO pacman --noconfirm --needed -S zsh
 # Neovim
 $SUDO pacman --noconfirm --needed -S neovim
 
+# git-extras
+$SUDO pacman --noconfirm --needed -S git-extras
+
 # The logfile navigator
 $SUDO pacman --noconfirm --needed -S lnav
 
