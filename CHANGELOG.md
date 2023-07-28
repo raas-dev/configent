@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.1](https://github.com/raas-dev/configent/compare/1.67.0...1.67.1) (2023-07-28)
+
+
+### Fixes
+
+* **archlinux:** Fix git-extras installation ([21ec73b](https://github.com/raas-dev/configent/commit/21ec73b9cafb95361f5c6c62be1e15b8981eba5e))
+
 ## [1.67.0](https://github.com/raas-dev/configent/compare/1.66.2...1.67.0) (2023-07-28)
 
 
