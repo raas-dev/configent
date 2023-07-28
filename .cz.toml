@@ -4,5 +4,5 @@ tag_format = "$version"
 version = "1.67.1"
 version_files = [
     "README.md",
-    "install.sh:GIT_TAG"
+    "install.sh:GIT_REF"
 ]

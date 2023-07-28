@@ -14,7 +14,7 @@
 ### constants  #################################################################
 
 GIT_REPO_URL="https://github.com/raas-dev/configent"
-GIT_TAG="1.67.1"
+GIT_REF="${GIT_REF:-1.67.1}"
 TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
@@ -98,8 +98,8 @@ else
   # if not in terminal (script run by curl/wget/cat)
   if [ ! -d "$TARGET_PATH/.git" ]; then
     printf "Git working copy not found, cloning %s (%s)\n" \
-      "$TARGET_PATH" "$GIT_TAG"
-    git clone --quiet --depth 1 --branch "$GIT_TAG" \
+      "$TARGET_PATH" "$GIT_REF"
+    git clone --quiet --depth 1 --branch "$GIT_REF" \
       "$GIT_REPO_URL" "$TARGET_PATH"
   else
     git_branch="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
