@@ -66,7 +66,7 @@ if [ -x "$bash_path" ]; then
   if [ "$default_shell" = "$bash_path" ]; then
     echo "$bash_path is already set as the user's default shell."
   else
-    if [ -z "$NO_PROMPT_DEFAULT_SHELL" ]; then
+    if [ -z "$NONINTERACTIVE" ]; then
       echo ""
       printf "Set %s as the user's default shell [y\N] > " "$bash_path"
       read -r set_bash
