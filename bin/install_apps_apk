@@ -27,6 +27,11 @@ else
   exit 1
 fi
 
+if ! $SUDO grep -Fq "@testing" /etc/apk/repositories; then
+  echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" |
+    $SUDO tee -a /etc/apk/repositories
+fi
+
 # Update package lists
 $SUDO apk update
 
