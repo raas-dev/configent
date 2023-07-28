@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.67.0](https://github.com/raas-dev/configent/compare/1.66.2...1.67.0) (2023-07-28)
+
+
+### Features
+
+* **aliases:** Add pcalc via nixery ([5ae06f9](https://github.com/raas-dev/configent/commit/5ae06f9884bbe6b4000d069378a211095cafe29b))
+* **aliases:** Add xplr via nix-shell ([4fe29aa](https://github.com/raas-dev/configent/commit/4fe29aabac22b1bea2f6174e0f960198ab36bf2e))
+* **git:** Add git-extras ([087afe6](https://github.com/raas-dev/configent/commit/087afe6d4a44fdd96a88bae9dcbe342bc8f60f24))
+
+
+### Performance
+
+* **zsh:** Remove extra check for antidote ([7111cd7](https://github.com/raas-dev/configent/commit/7111cd7ba36b9fb3407df148a57437f9e3ea9b7a))
+
+
+### Fixes
+
+* **alpine:** Add testing apk repo as a tag ([0915e3d](https://github.com/raas-dev/configent/commit/0915e3daccdd198b97da5cb80146ca7ce853af41))
+* **centos:** Add Epel in repositories ([2a3e650](https://github.com/raas-dev/configent/commit/2a3e650079563f02cacd4f62e1539e00a3e86e22))
+* **docker:** Use curl --create-dirs over mkdir -p ([7db3140](https://github.com/raas-dev/configent/commit/7db3140ccfb5f1e00cbd958ebe36f82e8959288f))
+* **git:** Remove aliases provided by git-extras ([112af41](https://github.com/raas-dev/configent/commit/112af41a565f3e0030a59d76b8657d8cab8cd220))
+* **install:** Move lnav earlier to read cloud-init ([62250b3](https://github.com/raas-dev/configent/commit/62250b3452b5fdf92513db456e17201d6c6e77a1))
+* **vscode:** Use Bash IDE over shellcheck extension ([23b408c](https://github.com/raas-dev/configent/commit/23b408cae4f34a6f34f4b5a7c6bb77265e63bb7c))
+* **zsh:** Set ANTIDOTE_HOME to prevent cleanup ([3c26ac8](https://github.com/raas-dev/configent/commit/3c26ac854e2be2c5137efa1edfbe7b8b86bc71cb))
+
 ### [1.66.2](https://github.com/raas-dev/configent/compare/1.66.1...1.66.2) (2023-07-27)
 
 
