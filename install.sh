@@ -14,14 +14,15 @@
 ### constants  #################################################################
 
 GIT_REPO_URL="https://github.com/raas-dev/configent"
-GIT_REF="${GIT_REF:-1.67.1}"
 TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
 
-export NO_CASKS="true"
-export NO_FLATPAKS="true"
-export NO_SNAPS="true"
+GIT_REF="${GIT_REF:-1.67.1}"
+
+export NO_CASKS="${NO_CASKS:-true}"
+export NO_FLATPAKS="${NO_FLATPAKS:-true}"
+export NO_SNAPS="${NO_SNAPS:-true}"
 
 ################################################################################
 
