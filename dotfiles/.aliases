@@ -583,3 +583,4 @@ alias wapiti='nixery wapiti'
 # miscellaneous
 alias miniserve='n miniserve --hide-version-footer --port 8000 $PWD' # portmap
 alias tickrs='nixery tickrs --show-x-labels --summary -c candle -s'
+alias xplr='n xplr'
