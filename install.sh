@@ -20,9 +20,9 @@ TARGET_PATH="$HOME/configent"
 
 GIT_REF="${GIT_REF:-1.67.2}"
 
-export NO_CASKS="${NO_CASKS:-true}"
-export NO_FLATPAKS="${NO_FLATPAKS:-true}"
-export NO_SNAPS="${NO_SNAPS:-true}"
+export CASKS="${CASKS:-false}"
+export FLATPAKS="${FLATPAKS:-false}"
+export SNAPS="${SNAPS:-false}"
 
 ################################################################################
 

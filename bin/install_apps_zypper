@@ -85,7 +85,7 @@ systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Snap
-#if [ -z "$NO_SNAPS" ]; then
+#if [ "$SNAPS" != 'false' ]; then
 #$SUDO zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_15.4 snappy || true
 #$SUDO zypper --gpg-auto-import-keys refresh
 #$SUDO zypper dup --from snappy
@@ -95,6 +95,6 @@ $SUDO loginctl enable-linger "$USER"
 #fi
 
 # Flatpak
-if [ -z "$NO_FLATPAKS" ]; then
+if [ "$FLATPAKS" != 'false' ]; then
   $SUDO zypper install -y flatpak
 fi

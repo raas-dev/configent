@@ -13,10 +13,10 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   "$bin_path/install_apps_macos"
-  if [ -z "$NO_CASKS" ]; then
+  if [ "$CASKS" != 'false' ]; then
     "$bin_path/install_apps_cask"
   else
-    printf "NO_CASKS was specified and on macOS, won't install casks.\n"
+    printf "CASKS=false and on macOS, won't install casks.\n"
   fi
 elif [ "$(uname -s)" = 'Linux' ]; then
   # zypper is aliased as apt-get, thus it has to come before real apt-get!
@@ -30,18 +30,18 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     "$bin_path/install_apps_pacman"
   elif command -v apk >/dev/null; then
     "$bin_path/install_apps_apk"
-    #printf "Snap is not available on Alpine Linux, NO_SNAPS=true forced.\n"
-    #export NO_SNAPS="true"
+    #printf "Snap is not available on Alpine Linux, SNAPS=false forced.\n"
+    #export SNAPS="false"
   fi
-  #if [ -z "$NO_SNAPS" ]; then
+  #if [ "$SNAPS" != 'false' ]; then
   #  "$bin_path/install_apps_snap"
   #else
-  #  printf "NO_SNAPS was specified and on Linux, won't install snaps.\n"
+  #  printf "SNAPS=false and on Linux, won't install snaps.\n"
   #fi
-  if [ -z "$NO_FLATPAKS" ]; then
+  if [ "$FLATPAKS" != 'false' ]; then
     "$bin_path/install_apps_flatpak"
   else
-    printf "NO_FLATPAKS was specified and on Linux, won't install flatpaks.\n"
+    printf "FLATPAKS=false and on Linux, won't install flatpaks.\n"
   fi
 else
   printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"
