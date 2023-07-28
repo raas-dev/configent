@@ -20,8 +20,7 @@ install_docker_buildx_plugin() {
     fi
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
-    mkdir -p "$DOCKER_CLI_PLUGINS_DIR"
-    curl -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
+    curl --create-dirs -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
       -o "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
     if [ "$(id -u)" = 0 ]; then
       chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
@@ -37,8 +36,7 @@ install_docker_compose_plugin() {
     arch="$(uname -m)"
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    mkdir -p "$DOCKER_CLI_PLUGINS_DIR"
-    curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+    curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
       -o "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
     if [ "$(id -u)" = 0 ]; then
       chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
