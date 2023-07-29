@@ -63,8 +63,8 @@ GUI apps are not installed by `install.sh` as a server is assumed, unless you
 explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the script.
 
 **The defaults are what is most often used in software development in cloud.**
-If you want to deviate from it, fork this repo, comment or uncomment tech stacks
-in `install_apps`, and change the cURL above to your public fork.
+If you want to deviate from it, the fastest is to fork this repo, make changes
+and cURL your public fork in cloud-init.
 
 ### Desktop
 
