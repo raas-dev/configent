@@ -271,7 +271,7 @@ Install [pre-commit](https://pre-commit.com/) hooks before committing:
 Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
-PR guidelines:
+Development guidelines:
 1. We do not use anything which is not POSIX compatible in installation scripts
 2. Linux on Aarch64 is a first class citizen as all Macs base on ARM since 2023
 3. The software to be installed must work on 95% of the supported Linux distros
@@ -281,6 +281,7 @@ PR guidelines:
 7. Otherwise we use the distros' official repositories (may have old versions)
 8. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
 9. Dotfiles are mostly based on personal preference but improvements are welcome
+10. We do not use Rust or Python just for the lulz, as `sh` has worked since 70s
 
 ### Issues in dependencies
 
