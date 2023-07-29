@@ -192,5 +192,6 @@
   ],
   "git.openRepositoryInParentFolders": "always",
   "gitlens.graph.minimap.enabled": false,
-  "chatgpt.gpt3.model": "gpt-4"
+  "chatgpt.gpt3.model": "gpt-4",
+  "cSpell.spellCheckOnlyWorkspaceFiles": true
 }
