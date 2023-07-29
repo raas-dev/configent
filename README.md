@@ -102,8 +102,8 @@ Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
 💡: Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
-the configuration of the current shell (`.bashrc` or `.zshrc`) shell with `r`
-and all the scripts in `bin/` are available by name from now on.
+the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
+the scripts in `bin/` are available by name from now on.
 
 ### install_apps
 
