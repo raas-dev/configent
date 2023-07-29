@@ -92,7 +92,7 @@ if [ -t 0 ]; then
     git_branch="$(cd "$full_path" && git rev-parse --abbrev-ref HEAD)"
     printf "In git working copy %s, pulling %s\n" \
       "$full_path" "$git_branch"
-    git -C "$full_path" pull --rebase origin "$git_branch"
+    git -C "$full_path" pull --no-autostash --rebase origin "$git_branch"
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
@@ -106,7 +106,7 @@ else
     git_branch="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
     printf "Git working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$git_branch"
-    git -C "$TARGET_PATH" pull --rebase origin "$git_branch"
+    git -C "$TARGET_PATH" pull --no-autostash --rebase origin "$git_branch"
   fi
   cd "$TARGET_PATH" &&
     . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)

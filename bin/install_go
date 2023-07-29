@@ -62,6 +62,6 @@ go install github.com/sachaos/viddy@latest
 
 # https://github.com/junegunn/fzf
 git clone https://github.com/junegunn/fzf.git "$HOME/.fzf" ||
-  git -C "$HOME/.fzf" pull --rebase
+  git -C "$HOME/.fzf" pull --no-autostash --rebase
 
 "$HOME/.fzf/install" --key-bindings --completion --no-update-rc

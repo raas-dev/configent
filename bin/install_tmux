@@ -38,6 +38,6 @@ fi
 
 tpm_dir="$HOME/.tmux/plugins/tpm"
 git clone https://github.com/tmux-plugins/tpm "$tpm_dir" ||
-  git -C "$tpm_dir" pull --rebase
+  git -C "$tpm_dir" pull --no-autostash --rebase
 "$tpm_dir/bin/install_plugins"
 #"$tpm_dir/bin/clean_plugins"

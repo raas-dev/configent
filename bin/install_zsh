@@ -36,7 +36,7 @@ fi
 
 # https://github.com/mattmc3/antidote
 git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
-  git -C "$HOME/.antidote" pull --rebase
+  git -C "$HOME/.antidote" pull --no-autostash --rebase
 
 # for bobsoppe/zsh-ssh-agent, create .ssh directory if it does not already exist
 mkdir "$HOME/.ssh" 2>/dev/null && chmod 700 "$HOME/.ssh"
