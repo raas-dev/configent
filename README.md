@@ -253,7 +253,7 @@ on boot by pulling and running `install.sh` from this repo's main branch.
 ⚠️: Regardless of pulling main, the version to install is defined in
 `install.sh` and is only updated by `release.sh`.
 
-You may willingly live on the edge by explicitly passing `GIT_REF`, e.g:
+You may willingly live on the edge by explicitly passing `GIT_REF`:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.7/install.sh | GIT_REF=main sh
 
