@@ -123,7 +123,7 @@ What's installed by default:
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
 to install requirements from Linux distro's repository (requires `sudo` rights).
-On Linux distros, flatpaks (GUI apps) are always installed user-wide.
+Flatpaks (GUI apps) are always installed user-wide.
 
 On macOS, [Homebrew](https://brew.sh) is used to install requirements and
 casks (GUI apps) user-wide.
@@ -198,17 +198,15 @@ docker logs are followed.
 
 ### macOS
 
-Both dockerd and containerd base on Linux kernel features not present on macOS
-so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
+Container runtimes base on Linux kernel features not present on macOS. Thus
+[Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs on QEMU.
 
-The aforementioned shims create or start the necessary virtual machines,
-a Lima VM named 'ubuntu' for running rootless dockerd and a Lima VM 'debian'
-for running rootless containerd.
+The aforementioned shims create and start the necessary virtual machines:
+VM 'ubuntu' for rootless dockerd, VM 'debian' for rootless containerd
+and VM 'fedora' for rootless podman.
 
-In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes,
-see VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
-
-VM 'fedora' has rootless [podman](https://podman.io/), run `podman` to use it.
+In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
+See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 ⚠️: VMs 'ubuntu', 'debian' and 'fedora' mount your host's `$HOME` directory as
 writable inside the VM. This enables containers to use bind mounts (directories
