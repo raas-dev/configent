@@ -250,8 +250,16 @@ See `dotfiles/.aliases` for `vm4...` creating
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by fetching and running `install.sh` from this repo's main branch.
 
-Once VM has been started, your host's `$HOME` directory is mounted in the VM,
-for testing script changes without first committing and pushing to your fork.
+⚠️: Regardless of pulling main, the version to install is defined in
+`install.sh` and is only updated by `release.sh`.
+
+You may willingly live on the edge by explicitly passing `GIT_REF` e.g:
+
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.6/install.sh | GIT_REF=main sh
+
+For development purposes, once the VM has been started, your host's `$HOME`
+directory is mounted in the VM. This enables testing most changes without first
+committing and pushing to your fork.
 
 ### Contributing
 
