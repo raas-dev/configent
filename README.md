@@ -237,8 +237,8 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 whereas `nixery` mounts the current directory as read-only.
 
-💡: Use aliases for binaries not wanted permanently installed on the host,
-such as various command-line security tools.
+💡: Use the aliases for binaries not wanted permanently installed on the host,
+such as command-line security tools.
 
 ## 🔨 Development
 
