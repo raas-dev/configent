@@ -58,7 +58,7 @@ development purposes, you want to set your name and email in `~/.gitconfig`.
 ### Server (default)
 
 Script `install.sh` is non-interactive and suitable for cloud-init when run as
-user with passwordless sudo (recommended), or as root
+user with passwordless sudo.
 
 **The defaults are what is most often used in software development in cloud.**
 If you want to deviate from it, the fastest is to fork this repo, make changes
