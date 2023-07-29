@@ -41,20 +41,18 @@ both on which it is <30 minutes.
 
 ## 🥾 Up
 
-VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
+After backing them up, run:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.7/install.sh | sh
 
-To install system-wide packages, `sudo` password may be asked in the beginning.
+Things are installed primarily per-user, but to install system-wide
+requirements (such as `git`), `sudo` password may be asked in the beginning.
 
-If git is not present, it is installed by the Linux distro's package manager
-or by Xcode Command Line Tools on macOS.
-
-Then the respective git tag from this repository is cloned as `$HOME/configent`,
+The respective git tag from this repository is cloned as `$HOME/configent`,
 or main branch is pulled on top of it if the git working copy already exists.
 
-After the installation, if you want to use `git` on the machine for any
+⚠️: After the installation, if you want to use `git` on the machine for any
 development purposes, you want to set your name and email in `~/.gitconfig`.
 
 ### Server (default)
