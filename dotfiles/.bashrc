@@ -47,7 +47,7 @@ HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=10000
 HISTSIZE=10000
 HISTCONTROL=ignoreboth
-HISTIGNORE='ls:cd:bg:fg:history:pwd:exit:date:s'
+HISTIGNORE='ls:cd:bg:fg:history:pwd:exit:r'
 HISTTIMEFORMAT='%d.%m.%Y %H:%M  '
 
 # save and reload the history after each command finishes
