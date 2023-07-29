@@ -167,7 +167,7 @@ If you prefer `bash` instead:
 
 If Homebrew is available (Linux distros on x86-64, macOS on x86-64 or ARM),
 Zsh and Bash are installed from Homebrew and preferred over system-wide shells
-(respectively), as Homebrew likely has newer versions of shells available.
+(respectively), as Homebrew likely has newer versions available.
 
 ## 🏗️ dockerd and containerd
 
