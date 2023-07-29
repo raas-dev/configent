@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.6](https://github.com/raas-dev/configent/compare/1.67.5...1.67.6) (2023-07-29)
+
+
+### Fixes
+
+* **aliases:** Alias r to common shell reloader ([77f64d7](https://github.com/raas-dev/configent/commit/77f64d752837f13c8f442cea8f33cdb9b9229ce4))
+* **asdf:** Remove separate asdf install ([3769392](https://github.com/raas-dev/configent/commit/376939207d4cb3c8847cfc87a8cddfedea166174))
+* **bash:** Fix HISTIGNORE to ignore r ([55b729a](https://github.com/raas-dev/configent/commit/55b729a0672a127f5f932933c409134a34b4178c))
+* **install:** Do not rebase git repos with autostash ([ed8c29a](https://github.com/raas-dev/configent/commit/ed8c29a2693e2fa56aa6001e0d19b036b40ee881))
+* **lima:** Do not mess with PATH on VM boot ([b3139c8](https://github.com/raas-dev/configent/commit/b3139c8d809b551d88ecb183c24dae1f60f226de))
+* **shells:** Increase history size ([4e0cefc](https://github.com/raas-dev/configent/commit/4e0cefc009d8c736fdc056690c8cd8f6421f7677))
+* **vim:** Put swap, backups and undo under ~/.vim ([b629319](https://github.com/raas-dev/configent/commit/b6293199ea8b8f99878ca6881ee80d6c4d0245a2))
+
 ### [1.67.5](https://github.com/raas-dev/configent/compare/1.67.4...1.67.5) (2023-07-29)
 
 
