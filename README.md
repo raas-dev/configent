@@ -272,7 +272,7 @@ Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
 PR guidelines:
-1. ARM on Linux is a first class citizen as most Macs base on that since 2023
+1. ARM on Linux is a first class citizen as most Macs base on ARM since 2023
 2. The software to be installed must work on 95% of the supported Linux distros
 3. There is most often **no need to install** and `n` and `nixery` will do fine
 4. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
