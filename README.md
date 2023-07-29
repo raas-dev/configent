@@ -64,7 +64,7 @@ explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the s
 
 **The defaults are what is most often used in software development in cloud.**
 If you want to deviate from it, the fastest is to fork this repo, make changes
-and cURL your public fork in cloud-init.
+and cURL your public fork.
 
 ### Desktop
 
