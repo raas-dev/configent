@@ -272,7 +272,7 @@ Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
 PR guidelines:
-- Dotfiles base on decade long personal preferences but additions are welcome
+- Dotfiles base on decades long personal preference but improvements are welcome
 - ARM on Linux is a first class citizen as most of Macs base on that since 2023
 - We do not prefer Homebrew over asdf, unless brew works on Linux distros on ARM
 - The software to be installed must work on 95% on the supported Linux distros
