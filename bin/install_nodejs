@@ -12,8 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### asdf #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-. "$ASDF_DIR/asdf.sh"
+. "$HOME/.asdf/asdf.sh"
 
 asdf plugin add nodejs
 asdf install nodejs

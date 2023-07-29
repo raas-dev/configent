@@ -12,8 +12,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### asdf #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-. "$ASDF_DIR/asdf.sh"
+. "$HOME/.asdf/asdf.sh"
 
 asdf plugin add dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -21,5 +20,5 @@ asdf install dotnet
 
 ### dotnet tools ###############################################################
 
-"$ASDF_DIR/shims/dotnet" tool install --global powershell
-#"$ASDF_DIR/shims/dotnet" tool update --global powershell
+dotnet tool install --global powershell
+#dotnet tool update --global powershell
