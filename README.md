@@ -59,16 +59,18 @@ or main branch is pulled on top of it if the git working copy already exists.
 Script `install.sh` is non-interactive and suitable for cloud-init when run as
 user with passwordless sudo (recommended), or as root
 
-GUI apps are not installed by `install.sh` as a server is assumed, unless you
-explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the script.
-
 **The defaults are what is most often used in software development in cloud.**
 If you want to deviate from it, the fastest is to fork this repo, make changes
 and cURL your public fork.
 
+GUI apps are not installed by `install.sh` as a server is assumed, unless you
+explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the
+script.
+
 ### Desktop
 
-Run `bootstrap` in the git working copy (`$HOME/configent`) to install GUI apps.
+Alternatively, you can run `bootstrap` in the git working copy
+(`$HOME/configent`) to install GUI apps after `install.sh` has finished.
 
 Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
 (Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
