@@ -57,7 +57,7 @@ fi
 ### History ####################################################################
 
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
+HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
 setopt append_history         # append to history list rather than replace

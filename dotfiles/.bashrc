@@ -44,8 +44,7 @@ shopt -s cmdhist
 
 # configure history
 HISTFILE="$HOME/.bash_history"
-HISTFILESIZE=10000
-HISTSIZE=10000
+HISTSIZE=100000
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:cd:bg:fg:history:pwd:exit:r'
 HISTTIMEFORMAT='%d.%m.%Y %H:%M  '
