@@ -118,5 +118,3 @@ fi
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
-
-# sdkman-init.sh is mentioned here to not be appended by `install_java`

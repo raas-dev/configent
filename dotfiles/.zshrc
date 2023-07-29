@@ -98,5 +98,3 @@ chpwd() {
 ### Restore tmux ###############################################################
 
 # [ -n "$TMUX" ] || tmux attach -t "local" || tmux new -s "local"
-
-# sdkman-init.sh is mentioned here to not be appended by `install_java`
