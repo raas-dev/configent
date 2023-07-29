@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.8](https://github.com/raas-dev/configent/compare/1.67.7...1.67.8) (2023-07-29)
+
+
+### Fixes
+
+* **hg:** Remove .hgrc ([c5d99da](https://github.com/raas-dev/configent/commit/c5d99da3ae13eeff50bae721920e5e71748df8ff))
+
 ### [1.67.7](https://github.com/raas-dev/configent/compare/1.67.6...1.67.7) (2023-07-29)
 
 
