@@ -117,7 +117,7 @@ alias l='la'
 alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
-# r is for reloading shell's configuration (alias is in shell specific rc files)
+alias r='exec $SHELL'
 alias s='sgpt_chat'
 alias t='taillog'
 alias u='diskonaut'

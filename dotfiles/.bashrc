@@ -26,8 +26,6 @@ else
   fi
 fi
 
-alias r=". \$HOME/.bashrc"
-
 ### Bash builtins ##############################################################
 
 # have Bash to check if the window size has changed

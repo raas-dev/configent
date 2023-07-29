@@ -25,8 +25,6 @@ else
   fi
 fi
 
-alias r=". \$HOME/.zshrc"
-
 ### Completions ################################################################
 
 autoload -Uz compinit && compinit
