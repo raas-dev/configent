@@ -51,8 +51,7 @@ fi
 # install Zsh plugins
 "$bin_path/install_zsh"
 
-# install language version managers and versions
-"$bin_path/install_asdf"
+# install asdf, asdf language plugin and language version in .tool-versions
 "$bin_path/install_rust"
 "$bin_path/install_go"
 "$bin_path/install_nodejs"
