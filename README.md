@@ -248,12 +248,12 @@ See `dotfiles/.aliases` for `vm4...` creating
 💡: See alias `v` for starting, shelling into, stopping and deleting a VM.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
-on boot by fetching and running `install.sh` from this repo's main branch.
+on boot by pulling and running `install.sh` from this repo's main branch.
 
 ⚠️: Regardless of pulling main, the version to install is defined in
 `install.sh` and is only updated by `release.sh`.
 
-You may willingly live on the edge by explicitly passing `GIT_REF` e.g:
+You may willingly live on the edge by explicitly passing `GIT_REF`, e.g:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.7/install.sh | GIT_REF=main sh
 
@@ -268,19 +268,19 @@ Install [pre-commit](https://pre-commit.com/) hooks before committing:
     pre-commit install --hook-type pre-commit
     pre-commit install --hook-type commit-msg
 
-Please create an [issue](https://github.com/raas-dev/configent/issues) and
+Kindly create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
 Development guidelines:
 1. We do not use anything in installation scripts that is not POSIX compatible
 2. Linux on AArch64 is a first class citizen as Macs run on ARM since 2023
 3. The software **installed** must work on 95% of the supported Linux distros
-4. There is most often **no need to install** as `n` and `nixery` will do fine
+4. There is most often **no need to install** as `n` and `nixery` can run it
 5. We do not rely on Homebrew outside macOS, before Homebrew Linux works on ARM
-6. We prefer `asdf plugin`s when they install binaries both on x86-64 and ARM
+6. We prefer `asdf plugin`s when they provide binaries both for x86-64 and ARM
 7. Otherwise we use the distros' official repositories (may have older versions)
 8. Thus we will not add LunarVim, NVChad, etc. if the latest Neovim is required
-9. Dotfiles are mostly based on personal preference and improvements are welcome
+9. Dotfiles are often based on personal preference and improvements are welcome
 10. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
 
 ### Issues in dependencies
