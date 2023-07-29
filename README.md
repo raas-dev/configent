@@ -272,13 +272,14 @@ Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
 PR guidelines:
-- Dotfiles base on decades long personal preference but improvements are welcome
-- ARM on Linux is a first class citizen as most of Macs base on that since 2023
-- We do not prefer Homebrew over asdf, unless brew works on Linux distros on ARM
-- The software to be installed must work on 95% on the supported Linux distros
-- There is most often **no need to install** and `n` and `nixery` will do fine
-- Otherwise we prefer distro's official repository unless absolutely not doable
-- We will not add LunarVim, LazyVim, NVChad, etc. if latest Neovim is required
+1. ARM on Linux is a first class citizen as most Macs base on that since 2023
+2. The software to be installed must work on 95% of the supported Linux distros
+3. There is most often **no need to install** and `n` and `nixery` will do fine
+4. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
+5. We prefer `asdf` plugins always as long as they work both on x86-64 and ARM
+6. Otherwise we use the distros' official repositories (may have old versions)
+7. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
+8. Dotfiles are mostly based on personal preference but improvements are welcome
 
 ### Issues in dependencies
 
