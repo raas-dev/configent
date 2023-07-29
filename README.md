@@ -272,14 +272,15 @@ Please create an [issue](https://github.com/raas-dev/configent/issues) and
 a pull request.
 
 PR guidelines:
-1. Linux on Aarch64 is a first class citizen as all Macs base on ARM since 2023
-2. The software to be installed must work on 95% of the supported Linux distros
-3. There is most often **no need to install** and `n` and `nixery` will do fine
-4. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
-5. We prefer `asdf` plugins whenever they install binaries on x86-64 and ARM
-6. Otherwise we use the distros' official repositories (may have old versions)
-7. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
-8. Dotfiles are mostly based on personal preference but improvements are welcome
+1. We do not use anything which is not POSIX compatible in installation scripts
+2. Linux on Aarch64 is a first class citizen as all Macs base on ARM since 2023
+3. The software to be installed must work on 95% of the supported Linux distros
+4. There is most often **no need to install** and `n` and `nixery` will do fine
+5. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
+6. We prefer `asdf` plugins whenever they install binaries on x86-64 and ARM
+7. Otherwise we use the distros' official repositories (may have old versions)
+8. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
+9. Dotfiles are mostly based on personal preference but improvements are welcome
 
 ### Issues in dependencies
 
