@@ -237,7 +237,7 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 whereas `nixery` mounts the current directory as read-only.
 
 💡: Use `n` and `nixery` for binaries not wanted permanently installed, such as
-command-line security tools. See `.aliases` for already existing ad-hoc tools.
+command-line security tools. See `.aliases` for already defined ad-hoc tools.
 
 ## 🔨 Development
 
