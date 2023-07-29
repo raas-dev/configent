@@ -200,9 +200,9 @@ docker logs are followed.
 Both dockerd and containerd base on Linux kernel features not present on macOS
 so [Lima](https://github.com/lima-vm/lima) is used creating Linux VMs on QEMU.
 
-The above shims create or start the necessary virtual machines, a lima VM named
-'ubuntu' for running rootless dockerd and a lima VM 'debian' for running
-rootless containerd.
+The aforementioned shims create or start the necessary virtual machines,
+a Lima VM named 'ubuntu' for running rootless dockerd and a Lima VM 'debian'
+for running rootless containerd.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes,
 see VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
@@ -243,7 +243,7 @@ command-line security tools. See `.aliases` for the existing ad-hoc tools.
 ## 🔨 Development
 
 See `dotfiles/.aliases` for `vm4...` creating
-[lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
+[Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
 💡: See alias `v` for starting, shelling into, stopping and deleting a VM.
 
