@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.5](https://github.com/raas-dev/configent/compare/1.67.4...1.67.5) (2023-07-29)
+
+
+### Fixes
+
+* **dotnet:** Fix path ([94c8020](https://github.com/raas-dev/configent/commit/94c8020e1eaf912a02a7bbee05d5a7b6ba24cd48))
+* **iac:** Remove brew requirement ([906607e](https://github.com/raas-dev/configent/commit/906607eb13728b0a6a1dcd2de70f15911828be8c))
+
 ### [1.67.4](https://github.com/raas-dev/configent/compare/1.67.3...1.67.4) (2023-07-28)
 
 
