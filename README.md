@@ -71,7 +71,7 @@ script.
 ### Desktop
 
 Alternatively, you can run `bootstrap` in the git working copy
-(`$HOME/configent`) to install GUI apps after `install.sh` has finished.
+(`$HOME/configent`) to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
 (Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
