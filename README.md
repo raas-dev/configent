@@ -50,7 +50,7 @@ Things are installed primarily per-user, but to install system-wide
 requirements (such as `git`), `sudo` password may be asked in the beginning.
 
 The respective git tag from this repository is cloned as `$HOME/configent`,
-or main branch is pulled on top of it if the git working copy already exists.
+or main branch is pulled on top of the git working copy if it already exists.
 
 ⚠️: After the installation, if you want to use `git` on the machine for any
 development purposes, you want to set your name and email in `~/.gitconfig`.
