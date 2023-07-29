@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.7](https://github.com/raas-dev/configent/compare/1.67.6...1.67.7) (2023-07-29)
+
+
+### Fixes
+
+* **vscode:** Only spell check workspace files ([fbfd6db](https://github.com/raas-dev/configent/commit/fbfd6db29553cddd28356a71b5310465b5f0113e))
+
 ### [1.67.6](https://github.com/raas-dev/configent/compare/1.67.5...1.67.6) (2023-07-29)
 
 

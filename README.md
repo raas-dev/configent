@@ -1,4 +1,4 @@
-# c🌀nfigent (1.67.6)
+# c🌀nfigent (1.67.7)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
@@ -44,7 +44,7 @@ both on which it is <30 minutes.
 VSCode configs and dotfiles are installed per-user.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.6/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.7/install.sh | sh
 
 To install system-wide packages, `sudo` password may be asked in the beginning.
 
@@ -255,7 +255,7 @@ on boot by fetching and running `install.sh` from this repo's main branch.
 
 You may willingly live on the edge by explicitly passing `GIT_REF` e.g:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.6/install.sh | GIT_REF=main sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.67.7/install.sh | GIT_REF=main sh
 
 For development purposes, once the VM has been started, your host's `$HOME`
 directory is mounted in the VM. This enables testing most changes without first
