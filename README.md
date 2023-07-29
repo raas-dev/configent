@@ -105,7 +105,7 @@ and all the scripts in `bin/` are available by name from now on.
 
 ### install_apps
 
-If you need to adjust wanted tech stacks on the high-level, modify this file.
+If you want to adjust high level tech stacks, modify this script.
 
 What's installed by default:
 1. Command-line necessities and compile-time requirements
