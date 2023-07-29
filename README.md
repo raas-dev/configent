@@ -57,12 +57,14 @@ or main branch is pulled on top of it if the git working copy already exists.
 ### Server (default)
 
 Script `install.sh` is non-interactive and suitable for cloud-init when run as
-user with passwordless sudo (recommended), or as root.
+user with passwordless sudo (recommended), or as root
 
-Fork this repo, comment or uncomment the wanted tech stacks in `install_apps`,
-and change the curl URL to point to your public fork.
+GUI apps are not installed by `install.sh` as a server is assumed, unless you
+explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the script.
 
-GUI apps are not installed by `install.sh` as a server is assumed.
+**The defaults are what is most often used in software development in cloud.**
+If you want to deviate from it, fork this repo, comment or uncomment tech stacks
+in `install_apps`, and change the cURL above to your public fork.
 
 ### Desktop
 
@@ -76,14 +78,16 @@ window manager of your choice. See your distro's own instructions for that.
 
 ## 🔋's included
 
-Script `bootstrap` runs the three below scripts in the order described.
+Script `bootstrap` essentially handles the whole automated setup (dotfiles,
+apps, VSCode) of the machine it is run in. These three respective scripts are
+described further below.
 
-This script essentially handles the whole automated setup (dotfiles, apps,
-VSCode) of the machine it is run in and is non-interactive.
+Necessities (such as Zsh) are installed best effort from the Linux distro's
+repo, or from Homebrew if it is runnable on the OS and the CPU architecture.
 
-Even though Zsh is preferred, the user's default shell is not automatically set
-to Zsh. You may do it (and get prompted, possibly requiring `sudo`) by running
-`bin/install_zsh` after `bootstrap` has finished.
+The script is non-interactive: Due to this, and though Zsh is preferred, it is
+not set as the user's default shell. You may do it and get prompted, possibly
+asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
 
@@ -101,7 +105,9 @@ and all the scripts in `bin/` are available by name from now on.
 
 ### install_apps
 
-What's installed:
+If you need to adjust wanted tech stacks on the high-level, modify this file.
+
+What's installed by default:
 1. Command-line necessities and compile-time requirements
 2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
@@ -161,7 +167,7 @@ If you prefer `bash` instead:
 
 If Homebrew is available (Linux distros on x86-64, macOS on x86-64 or ARM),
 Zsh and Bash are installed from Homebrew and preferred over system-wide shells
-(respectively), as Homebrew likely has newer versions available.
+(respectively), as Homebrew likely has newer versions of shells available.
 
 ## 🏗️ dockerd and containerd
 
@@ -177,7 +183,7 @@ These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 - `nerdctl`: Runs nerdctl (containerd cli) preferring rootless containerd
 - `podman`: The 3rd option, runs on near-Docker compatible daemonless runtime
 
-The shims are available in non-interactive sessions, while `~/.aliases` is
+The shims are available in non-interactive shells, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
 💡: Use alias `d` as a shortcut for building a docker image in the current
@@ -229,8 +235,8 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 whereas `nixery` mounts the current directory as read-only.
 
-💡: Use aliases for binaries not wanted installed on the host, such as various
-command-line security tools, and for binaries that are not available on ARM.
+💡: Use aliases for binaries not wanted permanently installed on the host,
+such as various command-line security tools.
 
 ## 🔨 Development
 
