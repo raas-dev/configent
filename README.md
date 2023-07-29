@@ -273,7 +273,7 @@ a pull request.
 
 Development guidelines:
 1. We do not use anything which is not POSIX compatible in installation scripts
-2. Linux on Aarch64 is a first class citizen as all Macs base on ARM since 2023
+2. Linux on AArch64 is a first class citizen as all Macs base on ARM since 2023
 3. The software to be installed must work on 95% of the supported Linux distros
 4. There is most often **no need to install** and `n` and `nixery` will do fine
 5. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
