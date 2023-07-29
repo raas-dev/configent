@@ -281,7 +281,7 @@ Development guidelines:
 7. Otherwise we use the distros' official repositories (may have old versions)
 8. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
 9. Dotfiles are mostly based on personal preference but improvements are welcome
-10. We do not use Rust or Python for the tasks where `sh` has worked since 70s
+10. We do not use Rust, Go or Python for tasks where `sh` has worked since 70s
 
 ### Issues in dependencies
 
