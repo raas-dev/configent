@@ -274,3 +274,5 @@ a pull request.
 ### Issues in dependencies
 
 - Homebrew does not work on Alpine Linux (both x86-64 and ARM, due to musl)
+- Node.js may not work on Alpine Linux, install it by `apk` if wanted (2023-07)
+- Cloudflare does not work on ARM on Ubuntu, Debian, Arch or OpenSUSE (2023-07)
