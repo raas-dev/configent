@@ -220,16 +220,16 @@ a container where `nix`, `nix-env`, `nix-shell`, `devenv`, etc. are available.
 The container image is built by `etc/nix/Dockerfile`.
 
 The environment is created in the current directory and alias `n` is used e.g.
-`n vim README.md` to run an isolated `nix-shell` on containerd.
+`n vim README.md` to run Vim in an isolated `nix-shell` on containerd.
 
-Alternatively, use alias `nixery` to create ad-hoc environments with selected
-packages only by building the container image in [Nixery](https://nixery.dev/).
+Alternatively, use alias `nixery` to create ad-hoc environments by building
+the container image in [Nixery](https://nixery.dev/).
 
 Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
 as the first argument. The packages are installed from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
-The binary is assumed named according to the first package and the rest of the
+The binary is assumed named according to the first package. The rest of the
 arguments are passed to the binary. If name is different from the package name,
 put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 
@@ -237,7 +237,7 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 whereas `nixery` mounts the current directory as read-only.
 
 💡: Use `n` and `nixery` for binaries not wanted permanently installed, such as
-command-line security tools. See `.aliases` for the existing ad-hoc tools.
+command-line security tools. See `.aliases` for already existing ad-hoc tools.
 
 ## 🔨 Development
 
