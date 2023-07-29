@@ -124,13 +124,13 @@ set nocindent
 set nobackup                    " don't keep backup after close
 set writebackup                 " do keep a backup while working
 
-set backupdir=~/.vim/swap//
-set directory=~/.vim/swap//
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
 
 set tags=./tags
 
 set undofile
-set undodir=~/.vim-tmp/undo//
+set undodir=~/.vim/undo
 
 
 " --- Autoreload vim configs after changes -------------------------------------
