@@ -64,7 +64,7 @@ If you want to deviate from it, the fastest is to fork this repo, make changes
 and cURL your public fork.
 
 After the installation, if you want to use `git` on the machine for
-development purposes, you want to set your email in `~/.gitconfig`.
+development purposes, you want to set your name and email in `~/.gitconfig`.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
 explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the
