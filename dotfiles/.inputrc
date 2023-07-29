@@ -1,4 +1,5 @@
 # Carries over system-wide readline configuration to the user configuration
+# shellcheck disable=SC2154
 $include /etc/inputrc
 
 # Make Tab autocomplete regardless of filename case
