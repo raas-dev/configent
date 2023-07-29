@@ -276,7 +276,7 @@ PR guidelines:
 2. The software to be installed must work on 95% of the supported Linux distros
 3. There is most often **no need to install** and `n` and `nixery` will do fine
 4. We do not prefer Homebrew over `asdf`, unless Homebrew works on Linux on ARM
-5. We prefer `asdf` plugins always as long as they work both on x86-64 and ARM
+5. We prefer `asdf` plugins whenever they install binaries on x86-64 and ARM
 6. Otherwise we use the distros' official repositories (may have old versions)
 7. Thus we do not add LunarVim, NVChad, etc. if the latest Neovim is required
 8. Dotfiles are mostly based on personal preference but improvements are welcome
