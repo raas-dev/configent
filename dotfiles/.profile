@@ -190,7 +190,12 @@ export DISABLE_CRASH_REPORT=0
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 if [ "$(uname -s)" = 'Linux' ]; then
+  export XDG_CACHE_HOME="$HOME/.cache"
+  export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
+  export XDG_STATE_HOME="$HOME/.local/state"
+
+  # Ordered base directories relative to which data files should be searched
   if command -v flatpak >/dev/null; then
     export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share"
   fi
