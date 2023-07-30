@@ -238,6 +238,11 @@ d() {
     TMPDIR="/tmp/lima" nixpacks build . --name "$name" || return
   fi
 
+  if [ -n "$PORT" ]; then
+    port_args="--publish 127.0.0.1:$PORT:$PORT"
+    env_args="--env PORT=$PORT"
+  fi
+
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
   if [ -n "$1" ] && [ "$1" != "-d" ] && [ "$1" != "--detach" ]; then
     local run_args="--log-driver none --entrypoint /bin/sh"
@@ -247,10 +252,10 @@ d() {
   fi
 
   eval docker run --init -it --name "$name" --rm \
-    --cap-drop=ALL \
-    --publish "127.0.0.1:${PORT:-8080}:${PORT:-8080}" \
-    --env PORT \
+    --cap-drop ALL \
+    "$port_args" \
     "$env_file" \
+    "$env_args" \
     "$run_args" \
     "$name" "$cmd"
 
@@ -463,18 +468,22 @@ nixd() {
   fi
   local image="nix"
   local name="$image-${PWD##*/}"
+  if [ -n "$PORT" ]; then
+    port_args="--publish 127.0.0.1:$PORT:$PORT"
+    env_args="--env PORT=$PORT"
+  fi
   nerdctl start "$name" &>/dev/null ||
     (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
-      nerdctl run --init -t --detach \
+      eval nerdctl run --init -t --detach \
         --name "$name" \
-        --publish "127.0.0.1:${PORT:-8000}:${PORT:-8000}" \
-        --volume="$PWD:$PWD" \
-        --workdir="$PWD" \
+        "$port_args" \
+        --volume "$PWD:$PWD" \
+        --workdir "$PWD" \
         "$image")
-  nerdctl exec -it \
-    --env "PORT=${PORT:-8000}" \
-    --workdir="$PWD" \
-    "$name" "$bin" "$@"
+  eval nerdctl exec -it \
+    "$env_args" \
+    --workdir "$PWD" \
+    "$name" "$bin" "$*"
 }
 
 # https://devenv.sh/
@@ -500,7 +509,7 @@ n() {
     ;;
   esac
   # shellcheck disable=SC2086   # command has to be in quotes
-  eval nixd nix-shell --packages "$packages" --command \"$command\"
+  nixd nix-shell --packages "$packages" --command \"$command\"
 }
 
 # https://nixery.dev/
@@ -520,8 +529,8 @@ nixery() {
     local image="nixery.dev/$packages"
   fi
   eval nerdctl run --init -it --rm \
-    --volume="$PWD:$PWD":rro,rprivate \
-    --workdir="$PWD" \
+    --volume "$PWD:$PWD":rro,rprivate \
+    --workdir "$PWD" \
     "$image" "$command"
 }
 
@@ -583,6 +592,6 @@ alias trufflehog='nixery trufflehog/git'
 alias wapiti='nixery wapiti'
 
 # miscellaneous
-alias miniserve='n miniserve --hide-version-footer --port 8000 $PWD' # portmap
+alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 alias tickrs='nixery tickrs --show-x-labels --summary -c candle -s'
 alias xplr='n xplr'

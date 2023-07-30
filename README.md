@@ -234,10 +234,11 @@ arguments are passed to the binary. If name is different from the package name,
 put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
-whereas `nixery` mounts the current directory as read-only.
+whereas `nixery` mounts the current directory as read-only. Alias `n` can map
+a port to the host (e.g. `PORT=8000 n python3 -m http.server`) unlike `nixery`.
 
-💡: Use `n` and `nixery` for binaries not wanted permanently installed, such as
-command-line security tools. See `.aliases` for already defined ad-hoc tools.
+💡: Use `nixery` for command-line tools not wanted permanently installed on the
+host. See `.aliases` for example ad-hoc tools such as vulnerability scanners.
 
 ## 🔨 Development
 
