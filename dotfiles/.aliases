@@ -579,6 +579,7 @@ alias ffuf='nixery ffuf'
 alias katana='nixery katana'
 alias nikto='nixery nikto'
 alias nuclei='nixery nuclei'
+alias trufflehog='nixery trufflehog/git'
 alias wapiti='nixery wapiti'
 
 # miscellaneous
