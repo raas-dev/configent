@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.68.0](https://github.com/raas-dev/configent/compare/1.67.8...1.68.0) (2023-07-30)
+
+
+### Features
+
+* **aliases:** Add trufflehog via nixery ([f228269](https://github.com/raas-dev/configent/commit/f228269cfd0dfa6c13ff7b39513174b1834e1072))
+
+
+### Fixes
+
+* **linux:** Set XDG environment variables ([d3bcd63](https://github.com/raas-dev/configent/commit/d3bcd637f06560d41d5eba07cfe9dda9119c8b41))
+
 ### [1.67.8](https://github.com/raas-dev/configent/compare/1.67.7...1.67.8) (2023-07-29)
 
 
