@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.68.1](https://github.com/raas-dev/configent/compare/1.68.0...1.68.1) (2023-07-31)
+
+
+### Fixes
+
+* **aliases:** Add support for PORT for d and n ([06e99ac](https://github.com/raas-dev/configent/commit/06e99ac8215057fc74467df43ed703944a16041a))
+* **aliases:** Improve d and n args ([8f41164](https://github.com/raas-dev/configent/commit/8f411641e3ec9ed90e39dfe12dcb5b12d106ee9e))
+* **aliases:** Shorten docker/nerdctl cleanup aliases ([6220c7a](https://github.com/raas-dev/configent/commit/6220c7a2def755b713cfd3a69b9d49010eda5050))
+
 ## [1.68.0](https://github.com/raas-dev/configent/compare/1.67.8...1.68.0) (2023-07-30)
 
 
