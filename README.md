@@ -42,7 +42,9 @@ both on which it is <30 minutes.
 ## 🥾 Up
 
 **User's dotfiles are overridden without prompting** and reversing some changes
-requires reading. If in doubt, do a test drive in a virtual machine.
+requires reading further.
+
+If in doubt, do a test drive in a virtual machine.
 
 You can install with nothing else than `curl` as a prerequisite:
 
@@ -54,7 +56,7 @@ Things are installed primarily per-user, but to install system-wide requirements
 The respective git tag from this repository is cloned in `~/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
 
-Dotfiles are backed up by the installer best-effort:
+Installer backups previous dotfiles best-effort:
 - Dotfiles which were replaced at `$HOME` are backed up in `~/.dotfiles-old`
 - Starship, Topgrade, htop and Neovim configs are backed up in `~/.config-old`
 - Vim directory (`~/.vim`) is backed up `~/.vim-old`
