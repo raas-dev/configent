@@ -30,7 +30,7 @@ fi
 
 ### files in the repo ##########################################################
 
-"$this_path/symlink_dotfiles" -f
+"$this_path/symlink_dotfiles"
 NONINTERACTIVE=true "$this_path/install_apps"
 "$this_path/setup_vscode"
 

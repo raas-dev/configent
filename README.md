@@ -41,16 +41,25 @@ both on which it is <30 minutes.
 
 ## 🥾 Up
 
-**Existing dotfiles at `$HOME` are overridden without prompting.**
-After backing them up, run:
+**User's dotfiles are overridden without prompting** and reversing some changes
+requires reading further. If in doubt, do a test drive in a virtual machine.
+
+After backing up your configs, run:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.69.0/install.sh | sh
 
-Things are installed primarily per-user, but to install system-wide
-requirements (such as `git`), `sudo` password may be asked in the beginning.
+Things are installed primarily per-user, but to install system-wide requirements
+(such as `git`), `sudo` password may be asked in the beginning.
 
 The respective git tag from this repository is cloned in `~/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
+
+For your safety, pre-install dotfiles were backed up by the installer:
+- Dotfiles which were replaced at `$HOME` are backed up in `~/.dotfiles-old`
+- Starship, Topgrade, htop and Neovim configs are backed up in `~/.config-old`
+- Vim directory (`~/.vim`) is backed up `~/.vim-old`
+- VSCode `User` directory is backed up `User-old` in the OS specific location
+- Directories `~/local/bin` and `~/local/etc` are backed up `~/local/X-old`
 
 ### Server (default)
 
@@ -93,8 +102,8 @@ asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
 
 Creates symlinks in the user's home directory for all the files in  `dotfiles/`.
 
-Script `bootstrap` passes `-f` to `symlink_dotfiles` to skip override prompts
-per already existing file or symlink in the user's home directory.
+Script `symlink_dotfiles` overrides already existing files or symlinks in the
+user's home directory.
 
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.

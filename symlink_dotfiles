@@ -6,69 +6,72 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-set -e
-set -u
-
 this_path=$(cd "$(dirname "$0")" && pwd)
 dotfiles_path="$this_path/dotfiles"
-
-### Parse arguments ############################################################
-
-args=''
-while getopts 'f' arg; do
-  case "$arg" in
-  f)
-    args='f'
-    ;;
-  *)
-    exit 1
-    ;;
-  esac
-done
 
 ### Symlink bin ################################################################
 
 local_bin_path="$HOME/local/bin"
-rm -rfv "${local_bin_path}-old"
-[ -d "$local_bin_path" ] && mv -v "$local_bin_path" "${local_bin_path}-old"
-mkdir -p "$HOME/local"
-ln -snvi "$this_path/bin" "$local_bin_path"
+if [ -d "$local_bin_path" ] && [ ! -L "$local_bin_path" ]; then
+  rm -rf "$HOME/local/bin-old"
+  mkdir -pv "$HOME/local" # required for mv target
+  mv -v "$local_bin_path" "$HOME/local/bin-old"
+fi
+mkdir -pv "$HOME/local"
+ln -snvf "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
 local_etc_path="$HOME/local/etc"
-rm -rfv "${local_etc_path}-old"
-[ -d "$local_etc_path" ] && mv -v "$local_etc_path" "${local_etc_path}-old"
-mkdir -p "$HOME/local"
-ln -snvi "$this_path/etc" "$local_etc_path"
+if [ -d "$local_etc_path" ] && [ ! -L "$local_etc_path" ]; then
+  rm -rf "$HOME/local/etc-old"
+  mkdir -pv "$HOME/local" # required for mv target
+  mv -v "$local_etc_path" "$HOME/local/etc-old"
+fi
+mkdir -pv "$HOME/local"
+ln -snvf "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
 
 files="$(find "$dotfiles_path" -type f -exec basename {} \;)"
 
 for source_file_name in $files; do
-  if [ "$source_file_name" = "xfce4" ]; then
-    printf "Ignoring %s\n" "$source_file_name"
-  else
-    ln -snvi"$args" "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
+  # backup non-symlink dotfiles
+  if [ ! -L "$HOME/$source_file_name" ]; then
+    mkdir -pv "$HOME/.dotfiles-old"
+    cp -v "$HOME/$source_file_name" "$HOME/.dotfiles-old/$source_file_name"
   fi
+  ln -snvf "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
 done
 
 ### Symlink Starship config ####################################################
 
-mkdir -p "$HOME/.config"
-ln -snvi"$args" "$HOME/local/etc/starship/config.toml" \
-  "$HOME/.config/starship.toml"
+mkdir -pv "$HOME/.config"
+# backup non-symlink starship.toml
+if [ ! -L "$HOME/.config/starship.toml" ]; then
+  mkdir -pv "$HOME/.config-old"
+  cp -v "$HOME/.config/starship.toml" "$HOME/.config-old/starship.toml"
+fi
+ln -snvf "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
 
 ### Symlink Topgrade config ####################################################
 
-mkdir -p "$HOME/.config"
-ln -snvi"$args" "$HOME/local/etc/topgrade/topgrade.toml" \
-  "$HOME/.config/topgrade.toml"
+mkdir -pv "$HOME/.config"
+# backup non-symlink topgrade.toml
+if [ ! -L "$HOME/.config/topgrade.toml" ]; then
+  mkdir -pv "$HOME/.config-old"
+  cp -v "$HOME/.config/topgrade.toml" "$HOME/.config-old/topgrade.toml"
+fi
+ln -snvf "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
 
 ### Symlink htoprc for Linux distributions #####################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
-  mkdir -p "$HOME/.config/htop"
-  ln -snvi"$args" "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
+  mkdir -pv "$HOME/.config/htop"
+  # backup non-symlink htoprc
+  if [ ! -L "$HOME/.config/htop/htoprc" ]; then
+    mkdir -pv "$HOME/.config-old/htop"
+    cp -v "$HOME/.config/htop/htoprc" "$HOME/.config-old/htop/htoprc"
+  fi
+  ln -snvf "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
