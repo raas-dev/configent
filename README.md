@@ -172,22 +172,19 @@ If Homebrew is available (Linux distros on x86-64, macOS on x86-64 or ARM),
 Zsh and Bash are installed from Homebrew and preferred over system-wide shells
 (respectively), as Homebrew likely has newer versions available.
 
-## 🏗️ dockerd and containerd
+## 🏗️ Containers
 
-Both container runtimes in a nutshell:
+[Rootless containers](https://rootlesscontaine.rs/) in a nutshell:
 
-- the two are different runtimes - if you used Docker Desktop, it was dockerd
+- there are various OCI compatible runtimes, such as Docker (in Docker Desktop)
 - containerd is the industry-standard (CNCF) runtime in Kubernetes deployments
-- regardless of the runtime, containers must not be run with `sudo`
+- third option is Podman, which is near-Docker compatible daemonless runtime
 
-These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
+These `bin/` shims wrap the container CLIs to prefer rootless runtimes:
 
-- `docker`: Runs docker cli and its plugins preferring rootless docker
-- `nerdctl`: Runs nerdctl (containerd cli) preferring rootless containerd
-- `podman`: The 3rd option, runs on near-Docker compatible daemonless runtime
-
-The shims are available in non-interactive shells, while `~/.aliases` is
-sourced only in terminals where STDIN (effectively keyboard) is present.
+- `docker`: Runs docker CLI, installing build and compose CLI plugins when used
+- `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
+- `podman`: Runs podman CLI (on daemonless podman), but lacks proper compose
 
 ### macOS
 
@@ -195,7 +192,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs on QEMU.
 
 The aforementioned shims create and start the necessary virtual machines:
-VM 'ubuntu' for rootless dockerd, VM 'debian' for rootless containerd
+VM 'ubuntu' for rootless docker, VM 'debian' for rootless containerd
 and VM 'fedora' for rootless podman.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
@@ -206,7 +203,7 @@ writable inside the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
-### `d`
+### docker
 
 Alias `d` is a shortcut for building docker image in the current directory.
 `Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
