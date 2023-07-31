@@ -1,4 +1,4 @@
-# c🌀nfigent (1.68.1)
+# c🌀nfigent (1.69.0)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
@@ -44,7 +44,7 @@ both on which it is <30 minutes.
 **Existing dotfiles at `$HOME` are overridden without prompting.**
 After backing them up, run:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.68.1/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.69.0/install.sh | sh
 
 Things are installed primarily per-user, but to install system-wide
 requirements (such as `git`), `sudo` password may be asked in the beginning.

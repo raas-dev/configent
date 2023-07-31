@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.69.0](https://github.com/raas-dev/configent/compare/1.68.1...1.69.0) (2023-07-31)
+
+
+### Features
+
+* **bootstrap:** Populate .rclocal with git user info ([4beb84d](https://github.com/raas-dev/configent/commit/4beb84dcf68488e7e16ac546d62f46bb18e12545))
+
+
+### Fixes
+
+* **git:** Set name and email in envvars ([c29f5f3](https://github.com/raas-dev/configent/commit/c29f5f3fdcea6243360282fcb482ab1c6aff38c5))
+* **sncli:** Remove user login settings ([bbc95c3](https://github.com/raas-dev/configent/commit/bbc95c39746ce2559ff969cb1e30c1ff8fe80971))
+
 ### [1.68.1](https://github.com/raas-dev/configent/compare/1.68.0...1.68.1) (2023-07-31)
 
 
