@@ -1,7 +1,4 @@
 [sncli]
-cfg_sn_username = anssi.syrjasalo@gmail.com
-cfg_sn_password_eval = cat "$HOME/.snclirc_pw"
-
 cfg_format_strftime = %Y-%m-%d
 cfg_tabstop = 2
 
