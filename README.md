@@ -17,7 +17,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 A few features:
 
 - Setup is one `curl` command, run `up` to upgrade every package manager on OS
-- macOS `docker` experience as it was with Docker Desktop, but its free
+- macOS `docker` experience as it was with Docker Desktop, but it does not cost
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character `.aliases` - the fastest are the commands one does not type
 - Ask GPT in terminal (`s`), create shell commands (`_`) and code (`c`)
@@ -182,7 +182,7 @@ Zsh and Bash are installed from Homebrew and preferred over system-wide shells
 
 These `bin/` shims wrap the container CLIs to prefer rootless runtimes:
 
-- `docker`: Runs Docker CLI, installing build and compose CLI plugins on-demand
+- `docker`: Runs Docker CLI, installing build and compose CLI plugins when used
 - `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
 - `podman`: Runs podman CLI (on daemonless podman), but lacks proper compose
 
