@@ -189,13 +189,6 @@ These `bin/` shims wrap the container runtime CLIs to run best-effort on the OS:
 The shims are available in non-interactive shells, while `~/.aliases` is
 sourced only in terminals where STDIN (effectively keyboard) is present.
 
-💡: Use alias `d` as a shortcut for building a docker image in the current
-directory. `Dockerfile` is used for building if present, otherwise `nixpacks`
-is used to detect the tech stack and build the image best effort.
-After the image is built, a new container is launched from it. If alias `d` was
-used with `--detached`/`-d`, host-container mapped ports are output and
-docker logs are followed.
-
 ### macOS
 
 Container runtimes base on Linux kernel features not present on macOS. Thus
@@ -212,6 +205,30 @@ See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 writable inside the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
+
+### `d`
+
+Alias `d` is a shortcut for building docker image in the current directory.
+`Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
+is used to detect the tech stack and build the image best effort.
+
+After the image is built, a new container is launched from it. If `.env` file
+is present in the current directory, its environment variables are set in the
+container.
+
+If you use `PORT=8000 d`, the port given is mapped to the host and environment
+variable `PORT` is set inside the container. Note that this takes precedence
+if `PORT` is also defined in `.env` file.
+
+If `d -d` or `d --detached` is used, all arguments are passed to `docker run`.
+CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in `Dockerfile`
+(or by `nixpacks`) is effective, unless you override it in arguments.
+
+If container was started as detached and successfully started up, docker logs
+are followed. Sending `^C` exits the log view and does not stop the container.
+
+If `-d` or `--detached` is not used, an interactive session is assumed and all arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
+`d bash` starts Bash in the container. Exiting the shell stops the container.
 
 ## ❄️ Nix
 
@@ -235,7 +252,8 @@ put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 whereas `nixery` mounts the current directory as read-only. Alias `n` can map
-a port to the host (e.g. `PORT=8000 n python3 -m http.server`) unlike `nixery`.
+a port to the host (e.g. `PORT=8000 n python3 -m http.server`) and reads `.env`
+ file in the current directory, unlike `nixery`.
 
 💡: Use `nixery` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as vulnerability scanners.

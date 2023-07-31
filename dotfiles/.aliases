@@ -239,11 +239,12 @@ d() {
   fi
 
   if [ -n "$PORT" ]; then
-    port_args="--publish 127.0.0.1:$PORT:$PORT"
-    env_args="--env PORT=$PORT"
+    local port_args="--publish 127.0.0.1:$PORT:$PORT"
+    local env_args="--env PORT=$PORT"
   fi
 
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
+
   if [ -n "$1" ] && [ "$1" != "-d" ] && [ "$1" != "--detach" ]; then
     local run_args="--log-driver none --entrypoint /bin/sh"
     local cmd="-c '$*'"
@@ -468,10 +469,14 @@ nixd() {
   fi
   local image="nix"
   local name="$image-${PWD##*/}"
+
   if [ -n "$PORT" ]; then
-    port_args="--publish 127.0.0.1:$PORT:$PORT"
-    env_args="--env PORT=$PORT"
+    local port_args="--publish 127.0.0.1:$PORT:$PORT"
+    local env_args="--env PORT=$PORT"
   fi
+
+  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
+
   nerdctl start "$name" &>/dev/null ||
     (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
       eval nerdctl run --init -t --detach \
@@ -481,6 +486,7 @@ nixd() {
         --workdir "$PWD" \
         "$image")
   eval nerdctl exec -it \
+    "$env_file" \
     "$env_args" \
     --workdir "$PWD" \
     "$name" "$bin" "$*"
