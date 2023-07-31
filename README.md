@@ -17,7 +17,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 A few features:
 
 - Setup is one `curl` command, run `up` to upgrade every package manager on OS
-- macOS `docker` experience as it was with Docker Desktop, but it runs rootless
+- macOS `docker` experience as it was with Docker Desktop, but its free
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character `.aliases` - the fastest are the commands one does not type
 - Ask GPT in terminal (`s`), create shell commands (`_`) and code (`c`)
@@ -182,7 +182,7 @@ Zsh and Bash are installed from Homebrew and preferred over system-wide shells
 
 These `bin/` shims wrap the container CLIs to prefer rootless runtimes:
 
-- `docker`: Runs docker CLI, installing build and compose CLI plugins when used
+- `docker`: Runs Docker CLI, installing build and compose CLI plugins on-demand
 - `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
 - `podman`: Runs podman CLI (on daemonless podman), but lacks proper compose
 
@@ -192,7 +192,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs on QEMU.
 
 The aforementioned shims create and start the necessary virtual machines:
-VM 'ubuntu' for rootless docker, VM 'debian' for rootless containerd
+VM 'ubuntu' for rootless Docker, VM 'debian' for rootless containerd
 and VM 'fedora' for rootless podman.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
@@ -203,9 +203,9 @@ writable inside the VM. This enables containers to use bind mounts (directories
 on file system). If you want to keep host's home read-only (and prefer container
 managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
-### docker
+### docker shortcut
 
-Alias `d` is a shortcut for building docker image in the current directory.
+Alias `d` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
 is used to detect the tech stack and build the image best effort.
 
