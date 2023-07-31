@@ -4,7 +4,6 @@
 # Lima BEGIN is mentioned here for Lima to not mess with PATH on VM boot
 
 # shellcheck disable=SC1091  # do not expect input files
-# shellcheck disable=SC2015  # true is expected if .rclocal is not found
 # shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 # shellcheck disable=SC2155  # will not declare separately, value compactness
@@ -89,7 +88,7 @@ bindkey -e
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 [ -r "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
-[ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal" || true
+[ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
 ### Automatically list contents when changing directory ########################
 

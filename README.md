@@ -49,7 +49,7 @@ After backing them up, run:
 Things are installed primarily per-user, but to install system-wide
 requirements (such as `git`), `sudo` password may be asked in the beginning.
 
-The respective git tag from this repository is cloned as `$HOME/configent`,
+The respective git tag from this repository is cloned in `~/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
 
 ### Server (default)
@@ -67,8 +67,8 @@ script.
 
 ### Desktop
 
-Alternatively, you can run `bootstrap` in the git working copy
-(`$HOME/configent`) to install GUI apps.
+Alternatively, you can run `bootstrap` in the git working copy (`~/configent`)
+to install GUI apps.
 
 Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
 (Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
@@ -103,7 +103,8 @@ Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
 the scripts in `bin/` are available by name from now on.
 
-💡: Export your own environment variables in `~/.rclocal` (such as `git` user).
+💡: Export your own environment variables in `~/.rclocal`. Git name and email
+are automatically exported here if they were set in your previous `.gitconfig`.
 
 ### install_apps
 

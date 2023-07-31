@@ -410,7 +410,7 @@ alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,fold
 # General media downloader
 alias you-get='pipx run you-get'
 
-# Simplenote in terminal (set SN_USERNAME and SN_PASSWORD in $HOME/.rclocal)
+# Simplenote in terminal (set SN_USERNAME and SN_PASSWORD in ~/.rclocal)
 alias sncli='pipx run sncli'
 
 # Advanced Python REPL
