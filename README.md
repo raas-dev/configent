@@ -42,9 +42,9 @@ both on which it is <30 minutes.
 ## 🥾 Up
 
 **User's dotfiles are overridden without prompting** and reversing some changes
-requires reading further. If in doubt, do a test drive in a virtual machine.
+requires reading. If in doubt, do a test drive in a virtual machine.
 
-After backing up your configs, run:
+You can install with nothing else than `curl` as a prerequisite:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.69.0/install.sh | sh
 
@@ -54,7 +54,7 @@ Things are installed primarily per-user, but to install system-wide requirements
 The respective git tag from this repository is cloned in `~/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
 
-For your safety, pre-install dotfiles were backed up by the installer:
+Dotfiles are backed up by the installer best-effort:
 - Dotfiles which were replaced at `$HOME` are backed up in `~/.dotfiles-old`
 - Starship, Topgrade, htop and Neovim configs are backed up in `~/.config-old`
 - Vim directory (`~/.vim`) is backed up `~/.vim-old`
@@ -91,8 +91,8 @@ Script `bootstrap` essentially handles the whole automated setup (dotfiles,
 apps, VSCode) of the machine it is run in. These three respective scripts are
 described further below.
 
-Necessities (such as Zsh) are installed best effort from the Linux distro's
-repo, or from Homebrew if it is runnable on the OS and the CPU architecture.
+Necessities (such as Zsh) are installed from the Linux distro's repo,
+or from Homebrew if it is runnable on the OS and the CPU architecture.
 
 The script is non-interactive: Due to this, and though Zsh is preferred, it is
 not set as the user's default shell. You may do it and get prompted, possibly
@@ -216,7 +216,7 @@ managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 Alias `d` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
-is used to detect the tech stack and build the image best effort.
+is used to detect the tech stack and build the image best-effort.
 
 After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
