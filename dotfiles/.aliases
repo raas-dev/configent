@@ -542,8 +542,8 @@ nixery() {
 
 ### Ad-hoc binaries via Nix ####################################################
 
-# n: read-write fs and port mapping
-# nixery: read-only fs
+# n: read-write filesystem, .env file is read, PORT= is published if given
+# nixery: read-only filesystem
 
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy' # rw

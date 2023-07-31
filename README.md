@@ -184,7 +184,7 @@ These `bin/` shims wrap the container CLIs to prefer rootless runtimes:
 
 - `docker`: Runs Docker CLI, installing build and compose CLI plugins when used
 - `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
-- `podman`: Runs podman CLI (on daemonless podman), but lacks proper compose
+- `podman`: Runs Podman CLI (on daemonless Podman), but lacks proper compose
 
 ### macOS
 
@@ -193,7 +193,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 
 The aforementioned shims create and start the necessary virtual machines:
 VM 'ubuntu' for rootless Docker, VM 'debian' for rootless containerd
-and VM 'fedora' for rootless podman.
+and VM 'fedora' for rootless Podman.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
