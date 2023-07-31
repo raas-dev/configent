@@ -52,9 +52,6 @@ requirements (such as `git`), `sudo` password may be asked in the beginning.
 The respective git tag from this repository is cloned as `$HOME/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
 
-⚠️: After the installation, if you want to use `git` on the machine for any
-development purposes, you want to set your name and email in `~/.gitconfig`.
-
 ### Server (default)
 
 Script `install.sh` is non-interactive and suitable for cloud-init when run as
@@ -102,9 +99,11 @@ per already existing file or symlink in the user's home directory.
 Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
 If `~/local/bin` already exists, it is backed up as `~/local/bin-old`.
 
-💡: Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
+Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
 the scripts in `bin/` are available by name from now on.
+
+💡: Export your own environment variables in `~/.rclocal` (such as `git` user).
 
 ### install_apps
 

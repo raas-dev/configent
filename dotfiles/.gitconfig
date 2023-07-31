@@ -1,8 +1,10 @@
 ### User info ##################################################################
 
-[user]
-  name = Anssi Syrjäsalo
-  email = anssi.syrjasalo@gmail.com
+# Set the following in $HOME/.rclocal:
+# export NAME=''
+# export EMAIL=''
+# export GIT_AUTHOR_NAME="$NAME"
+# export GIT_COMMITTER_NAME="$NAME"
 
 ### Aliases ####################################################################
 

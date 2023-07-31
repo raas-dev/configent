@@ -51,6 +51,7 @@
     "pipx",
     "POSIX",
     "Pylance",
+    "rclocal",
     "runtimes",
     "scrollback",
     "semgrep",
