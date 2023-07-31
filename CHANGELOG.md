@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.70.0](https://github.com/raas-dev/configent/compare/1.69.0...1.70.0) (2023-07-31)
+
+
+### Features
+
+* **install:** Backup dotfiles and configs ([1071031](https://github.com/raas-dev/configent/commit/1071031547145c271d12a30988cd05ddd9f205e5))
+
 ## [1.69.0](https://github.com/raas-dev/configent/compare/1.68.1...1.69.0) (2023-07-31)
 
 
