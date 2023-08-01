@@ -58,7 +58,7 @@ ln -sfv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
 ### Symlink Topgrade config ####################################################
 
 if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
-  if [ -r "$$HOME/.config/topgrade.toml" ]; then
+  if [ -r "$HOME/.config/topgrade.toml" ]; then
     mkdir -p "$backup_path/.config"
     cp -P "$HOME/.config/topgrade.toml" "$backup_path/.config/topgrade.toml"
   fi
