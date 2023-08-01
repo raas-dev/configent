@@ -16,7 +16,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 A few features:
 
-- Setup is one command, run `up` to upgrade every package manager on the system
+- Setup is one command, run `up` to upgrade every package manager in the system
 - macOS `docker` experience as it was with Docker Desktop, but it does not cost
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character `.aliases` - the fastest are the commands one does not type
@@ -41,9 +41,10 @@ both on which it is <30 minutes.
 
 ## 🥾 Up
 
-**Already existing dotfiles are overridden without prompting.**
+Already existing **dotfiles are overridden without prompting**. There is no
+uninstaller currently.
 
-There is no uninstaller currently. If in doubt, test drive in a virtual machine.
+If in doubt, test drive in a virtual machine.
 
 Installer requires only `curl` available:
 
