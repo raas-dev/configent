@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.7](https://github.com/raas-dev/configent/compare/1.70.6...1.70.7) (2023-08-01)
+
+
+### Fixes
+
+* **install:** Do not backup vscode if source is symlink ([645f4a2](https://github.com/raas-dev/configent/commit/645f4a2f3bd693a92fc89de52242fb632b47e9cd))
+* **install:** No de-reference symlink target dirs ([4943977](https://github.com/raas-dev/configent/commit/494397728cdece7a9be030879398b6630d0e5ea9))
+* **install:** Split ~/local to standard subdirs ([c356431](https://github.com/raas-dev/configent/commit/c356431e6339bb6a2cc35d8a0bfa7621092c55d2))
+
 ### [1.70.6](https://github.com/raas-dev/configent/compare/1.70.5...1.70.6) (2023-08-01)
 
 
