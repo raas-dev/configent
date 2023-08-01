@@ -41,7 +41,7 @@ for source_file_name in $files; do
     mkdir -p "$backup_path"
     cp -P "$HOME/$source_file_name" "$backup_path/$source_file_name"
   fi
-  ln -sfv "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
+  ln -sfnv "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
 done
 
 ### Symlink Starship config ####################################################
@@ -53,7 +53,7 @@ if [ ! -r "$backup_path/.config/starship.toml" ]; then
   fi
 fi
 mkdir -p "$HOME/.config"
-ln -sfv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
+ln -sfnv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
 
 ### Symlink Topgrade config ####################################################
 
@@ -64,7 +64,7 @@ if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
   fi
 fi
 mkdir -p "$HOME/.config"
-ln -sfv "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
+ln -sfnv "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
 
 ### Symlink htoprc for Linux distributions #####################################
 
@@ -76,5 +76,5 @@ if [ "$(uname -s)" = 'Linux' ]; then
     fi
   fi
   mkdir -p "$HOME/.config/htop"
-  ln -sfv "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
+  ln -sfnv "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi

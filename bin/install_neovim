@@ -52,7 +52,7 @@ fi
 
 mkdir -p "$HOME/.config/nvim"
 ln -sfnv "$HOME/.vim" "$HOME/.config/nvim"
-ln -sfv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+ln -sfnv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 
 ### Install Vundle #############################################################
 
