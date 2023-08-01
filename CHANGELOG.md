@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.3](https://github.com/raas-dev/configent/compare/1.70.2...1.70.3) (2023-08-01)
+
+
+### Fixes
+
+* **install:** Do not create empty backup dirs ([451ceb4](https://github.com/raas-dev/configent/commit/451ceb4e497b5c7dc7ced49df2c99ed688387ae4))
+* **install:** Do not dereference symlinks in backups ([c27810a](https://github.com/raas-dev/configent/commit/c27810a6aca377dc457e8a1f429dafde37883f6b))
+
 ### [1.70.2](https://github.com/raas-dev/configent/compare/1.70.1...1.70.2) (2023-08-01)
 
 
