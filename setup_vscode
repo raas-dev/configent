@@ -22,7 +22,7 @@ fi
 
 if [ ! -d "$backup_path/User" ] && [ -d "$user_path" ]; then
   mkdir -p "$backup_path"
-  cp -R "$user_path" "$backup_path/User"
+  cp -RP "$user_path" "$backup_path/User"
 fi
 mkdir -p "$user_path"
 ln -sfnv "$this_path/vscode" "$user_path"

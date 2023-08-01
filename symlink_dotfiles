@@ -15,7 +15,7 @@ backup_path="$this_path/.backup"
 local_bin_path="$HOME/local/bin"
 if [ ! -d "$backup_path/local/bin" ] && [ -d "$local_bin_path" ]; then
   mkdir -p "$backup_path/local"
-  cp -R "$local_bin_path" "$backup_path/local/bin"
+  cp -RP "$local_bin_path" "$backup_path/local/bin"
 fi
 mkdir -p "$HOME/local"
 ln -sfnv "$this_path/bin" "$local_bin_path"
@@ -25,7 +25,7 @@ ln -sfnv "$this_path/bin" "$local_bin_path"
 local_etc_path="$HOME/local/etc"
 if [ ! -d "$backup_path/local/etc" ] && [ -d "$local_etc_path" ]; then
   mkdir -p "$backup_path/local"
-  cp -R "$local_etc_path" "$backup_path/local/etc"
+  cp -RP "$local_etc_path" "$backup_path/local/etc"
 fi
 mkdir -p "$HOME/local"
 ln -sfnv "$this_path/etc" "$local_etc_path"
@@ -37,7 +37,7 @@ files="$(find "$dotfiles_path" -type f -exec basename {} \;)"
 for source_file_name in $files; do
   if [ ! -r "$backup_path/$source_file_name" ]; then
     mkdir -p "$backup_path"
-    cp "$HOME/$source_file_name" "$backup_path/$source_file_name"
+    cp -P "$HOME/$source_file_name" "$backup_path/$source_file_name"
   fi
   ln -sfv "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
 done
@@ -47,7 +47,7 @@ done
 if [ ! -r "$backup_path/.config/starship.toml" ]; then
   if [ -r "$HOME/.config/starship.toml" ]; then
     mkdir -p "$backup_path/.config"
-    cp "$HOME/.config/starship.toml" "$backup_path/.config/starship.toml"
+    cp -P "$HOME/.config/starship.toml" "$backup_path/.config/starship.toml"
   fi
 fi
 mkdir -p "$HOME/.config"
@@ -58,7 +58,7 @@ ln -sfv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
 if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
   if [ -r "$$HOME/.config/topgrade.toml" ]; then
     mkdir -p "$backup_path/.config"
-    cp "$HOME/.config/topgrade.toml" "$backup_path/.config/topgrade.toml"
+    cp -P "$HOME/.config/topgrade.toml" "$backup_path/.config/topgrade.toml"
   fi
 fi
 mkdir -p "$HOME/.config"
@@ -70,7 +70,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
   if [ ! -r "$backup_path/.config/htop/htoprc" ]; then
     if [ -r "$HOME/.config/htop/htoprc" ]; then
       mkdir -p "$backup_path/.config/htop"
-      cp "$HOME/.config/htop/htoprc" "$backup_path/.config/htop/htoprc"
+      cp -P "$HOME/.config/htop/htoprc" "$backup_path/.config/htop/htoprc"
     fi
   fi
   mkdir -p "$HOME/.config/htop"
