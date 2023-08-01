@@ -25,6 +25,7 @@ if [ ! -d "$backup_path/User" ] && [ -d "$user_path" ]; then
   cp -RP "$user_path" "$backup_path/User"
 fi
 mkdir -p "$user_path"
+rm -rf "$user_path"
 ln -sfnv "$this_path/vscode" "$user_path"
 
 ### Install VSCode extensions ##################################################
