@@ -16,11 +16,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
+    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/local/bin/podman" "$@"
+  limactl shell "$VM" "$HOME/.local/configent/bin/podman" "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"

@@ -50,7 +50,7 @@ if [ ! -d "$backup_path/.config/nvim" ] && [ -d "$HOME/.config/nvim" ]; then
   cp -RP "$HOME/.config/nvim" "$backup_path/.config/nvim"
 fi
 
-mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config"
 ln -sfnv "$HOME/.vim" "$HOME/.config/nvim"
 ln -sfnv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 

@@ -65,8 +65,8 @@ Script `install.sh` is non-interactive and suitable for cloud-init when run as
 user with passwordless sudo.
 
 **The defaults are what is most often used in software development in cloud.**
-If you want to deviate from it, the fastest is to fork this repo, make changes
-and cURL your public fork.
+If you want to deviate from it, the fastest is to fork this repository,
+make changes and cURL your public fork.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
 explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the
@@ -101,9 +101,12 @@ asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
 Symlinks are created in in the user's home directory for all the files in
 `dotfiles/`. Files or symlinks of the same name at `$HOME` are overridden.
 
-Directory `bin` in the repo is symlinked to `~/local/bin`, taking preference
-in `PATH`.  Directory `etc` in the repo is symlinked to `~/local/etc`
-Starship, Topgrade, Neovim and htop configs are symlinked in `~/.config`.
+Starship, Topgrade, Neovim and htop configs are symlinked in `~/.config`,
+which is a standard config search path on many operating systems.
+
+Directory `bin` in this repository is symlinked to `~/.local/configent/bin`,
+taking 1st preference in `PATH`. Directory `etc` in this repository is
+symlinked to `~/.config/configent`
 
 Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
@@ -269,7 +272,7 @@ See `dotfiles/.aliases` for `vm4...` creating
 💡: See alias `v` for starting, shelling into, stopping and deleting a VM.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
-on boot by pulling and running `install.sh` from this repo's main branch.
+on boot by pulling and running `install.sh` from this repository's main branch.
 
 ⚠️: Regardless of pulling main, the version to install is defined in
 `install.sh` and is only updated by `release.sh`.

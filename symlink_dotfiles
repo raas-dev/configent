@@ -12,25 +12,17 @@ backup_path="$this_path/.backup"
 
 ### Symlink bin ################################################################
 
-local_bin_path="$HOME/local/bin"
-if [ ! -d "$backup_path/local/bin" ] && [ -d "$local_bin_path" ]; then
-  mkdir -p "$backup_path/local"
-  cp -RP "$local_bin_path" "$backup_path/local/bin"
-fi
+local_bin_path="$HOME/.local/configent/bin"
 mkdir -p "$local_bin_path"
 rm -rf "$local_bin_path"
 ln -sfnv "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
-local_etc_path="$HOME/local/etc"
-if [ ! -d "$backup_path/local/etc" ] && [ -d "$local_etc_path" ]; then
-  mkdir -p "$backup_path/local"
-  cp -RP "$local_etc_path" "$backup_path/local/etc"
-fi
-mkdir -p "$local_etc_path"
-rm -rf "$local_etc_path"
-ln -sfnv "$this_path/etc" "$local_etc_path"
+config_path="$HOME/.config/configent"
+mkdir -p "$config_path"
+rm -rf "$config_path"
+ln -sfnv "$this_path/etc" "$config_path"
 
 ### Symlink dotfiles ###########################################################
 
@@ -53,7 +45,7 @@ if [ ! -r "$backup_path/.config/starship.toml" ]; then
   fi
 fi
 mkdir -p "$HOME/.config"
-ln -sfnv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
+ln -sfnv "$config_path/starship/config.toml" "$HOME/.config/starship.toml"
 
 ### Symlink Topgrade config ####################################################
 
@@ -64,7 +56,7 @@ if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
   fi
 fi
 mkdir -p "$HOME/.config"
-ln -sfnv "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
+ln -sfnv "$config_path/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
 
 ### Symlink htoprc for Linux distributions #####################################
 

@@ -141,21 +141,21 @@ command -v nvim >/dev/null && alias vim='nvim'
 
 ### Lima VMs ###################################################################
 
-alias vm4ubuntu="limactl start \$HOME/local/etc/lima/ubuntu.yaml --tty=false"
-alias vm4debian="limactl start \$HOME/local/etc/lima/debian.yaml --tty=false ;
-  export KUBECONFIG=\$HOME/.lima/debian/kubeconfig.yaml ;
+alias vm4ubuntu="limactl start ~/.config/configent/lima/ubuntu.yaml --tty=false"
+alias vm4debian="limactl start ~/.config/configent/lima/debian.yaml --tty=false ;
+  export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
   kubectl get nodes"
 
-alias vm4fedora="limactl start \$HOME/local/etc/lima/fedora.yaml --tty=false"
-alias vm4centos="limactl start \$HOME/local/etc/lima/centos.yaml --tty=false"
+alias vm4fedora="limactl start ~/.config/configent/lima/fedora.yaml --tty=false"
+alias vm4centos="limactl start ~/.config/configent/lima/centos.yaml --tty=false"
 
-alias vm4alma="limactl start \$HOME/local/etc/lima/almalinux.yaml --tty=false"
-alias vm4rocky="limactl start \$HOME/local/etc/lima/rocky.yaml --tty=false"
-alias vm4oracle="limactl start \$HOME/local/etc/lima/oraclelinux.yaml --tty=false"
+alias vm4alma="limactl start ~/.config/configent/lima/almalinux.yaml --tty=false"
+alias vm4rocky="limactl start ~/.config/configent/lima/rocky.yaml --tty=false"
+alias vm4oracle="limactl start ~/.config/configent/lima/oraclelinux.yaml --tty=false"
 
-alias vm4suse="limactl start \$HOME/local/etc/lima/opensuse.yaml --tty=false"
-alias vm4arch="limactl start \$HOME/local/etc/lima/archlinux.yaml --tty=false"
-alias vm4alpine="limactl start \$HOME/local/etc/lima/alpine.yaml --tty=false"
+alias vm4suse="limactl start ~/.config/configent/lima/opensuse.yaml --tty=false"
+alias vm4arch="limactl start ~/.config/configent/lima/archlinux.yaml --tty=false"
+alias vm4alpine="limactl start ~/.config/configent/lima/alpine.yaml --tty=false"
 
 ### docker #####################################################################
 
@@ -200,13 +200,13 @@ sgpt() {
 }
 
 sgpt_chat() {
-  mkdir -p "$HOME/.config/shell_gpt/roles"
+  mkdir -p ~/.config/shell_gpt/roles
   echo '{
     "name": "assistant",
     "expecting": "Answer",
     "variables": null,
     "role": "You are a helpful assistant."
-  }' >"$HOME/.config/shell_gpt/roles/assistant.json"
+  }' >~/.config/shell_gpt/roles/assistant.json
   sgpt --no-cache --role assistant \
     --model gpt-4 --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
 }
@@ -478,7 +478,7 @@ nixd() {
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
 
   nerdctl start "$name" &>/dev/null ||
-    (nerdctl build --tag "$image" "$HOME/local/etc/nix" &&
+    (nerdctl build --tag "$image" ~/.config/configent/nix &&
       eval nerdctl run --init -t --detach \
         --name "$name" \
         "$port_args" \
@@ -564,7 +564,7 @@ alias difft='nixery shell/difftastic difft'
 alias grex='nixery grex'
 alias pcalc='nixery pcalc'
 alias tokei='nixery tokei'
-alias usql='n usql' # rw
+alias usql='n usql'                     # rw
 alias webanalyze='n webanalyze -update' # rw, writes technologies.json
 
 # load testing

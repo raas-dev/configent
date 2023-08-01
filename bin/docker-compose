@@ -16,12 +16,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/local/etc/lima/$VM.yaml" --tty=false ||
+    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/local/bin/docker-compose" "$@"
+  limactl shell "$VM" "$HOME/.local/configent/bin/docker-compose" "$@"
 else
   # pass arguments to docker shim, which installs the compose plugin
-  "$HOME/local/bin/docker" compose "$@"
+  "$HOME/.local/configent/bin/docker" compose "$@"
 fi
