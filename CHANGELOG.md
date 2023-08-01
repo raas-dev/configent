@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.5](https://github.com/raas-dev/configent/compare/1.70.4...1.70.5) (2023-08-01)
+
+
+### Fixes
+
+* **install:** Fix symlinking local if exists ([d4289db](https://github.com/raas-dev/configent/commit/d4289db71f91af3345bf3ce4f3aa49242a381303))
+
 ### [1.70.4](https://github.com/raas-dev/configent/compare/1.70.3...1.70.4) (2023-08-01)
 
 
