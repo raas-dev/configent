@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.6](https://github.com/raas-dev/configent/compare/1.70.5...1.70.6) (2023-08-01)
+
+
+### Fixes
+
+* **install:** Fix typo in config path ([8e1ae93](https://github.com/raas-dev/configent/commit/8e1ae93e4f3c8ecd9ca0c6147e905db0750839c9))
+
 ### [1.70.5](https://github.com/raas-dev/configent/compare/1.70.4...1.70.5) (2023-08-01)
 
 
