@@ -8,6 +8,11 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+
+### Neovim from Homebrew #######################################################
+
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -33,19 +38,21 @@ fi
 
 ### Symlink Neovim configs #####################################################
 
-if [ ! -d "$HOME/.vim-old" ]; then
-  cp -R "$HOME/.vim" "$HOME/.vim-old"
+# Vim  (.vimrc is backed up by symlink_dotfiles)
+if [ ! -d "$backup_path/.vim" ]; then
+  mkdir -p "$backup_path"
+  cp -R "$HOME/.vim" "$backup_path/.vim"
 fi
 
-if [ ! -d "$HOME/.config-old/nvim" ]; then
-  mkdir -p "$HOME/.config-old"
-  cp -R "$HOME/.config/nvim" "$HOME/.config-old/nvim"
+# Neovim
+if [ ! -d "$backup_path/.config/nvim" ]; then
+  mkdir -p "$backup_path/.config"
+  cp -R "$HOME/.config/nvim" "$backup_path/.config/nvim"
 fi
 
 mkdir -p "$HOME/.config/nvim"
-ln -snfv "$HOME/.vim" "$HOME/.config/nvim"
-# .vimrc is backup'd by symlink_dotfiles
-ln -snfv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+ln -sfnv "$HOME/.vim" "$HOME/.config/nvim"
+ln -sfv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 
 ### Install Vundle #############################################################
 

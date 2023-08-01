@@ -14,15 +14,18 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 if [ "$(uname -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/Code/User"
+  backup_path="$this_path/.backup/Library/Application Support/Code"
 else
   user_path="$HOME/.config/Code/User"
+  backup_path="$this_path/.backup/.config/Code"
 fi
 
-if [ ! -d "${user_path}-old" ]; then
-  cp -R "$user_path" "${user_path}-old"
+if [ ! -d "$backup_path/User" ]; then
+  mkdir -p "$backup_path"
+  cp -R "$user_path" "$backup_path/User"
 fi
 mkdir -p "$user_path"
-ln -snvf "$this_path/vscode" "$user_path"
+ln -sfnv "$this_path/vscode" "$user_path"
 
 ### Install VSCode extensions ##################################################
 

@@ -16,7 +16,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 A few features:
 
-- Setup is one `curl` command, run `up` to upgrade every package manager on OS
+- Setup is one command, run `up` to upgrade every package manager on the system
 - macOS `docker` experience as it was with Docker Desktop, but it does not cost
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character `.aliases` - the fastest are the commands one does not type
@@ -41,11 +41,11 @@ both on which it is <30 minutes.
 
 ## 🥾 Up
 
-**User's dotfiles are overridden without prompting**.
+**Already existing dotfiles are overridden without prompting.**
 
-Backup your configs and when in doubt, test drive in a virtual machine.
+There is no uninstaller currently. If in doubt, test drive in a virtual machine.
 
-You can install with nothing else than `curl` as a prerequisite:
+Installer requires only `curl` available:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.70.1/install.sh | sh
 
@@ -54,6 +54,9 @@ Things are installed primarily per-user, but to install system-wide requirements
 
 The respective git tag from this repository is cloned in `~/configent`,
 or main branch is pulled on top of the git working copy if it already exists.
+
+User's configs (dotfiles, symlinks and directories) overridden are backed up in
+`~/configent/.backup` with same directory hierarchy as they located in `$HOME`.
 
 ### Server (default)
 
@@ -94,18 +97,12 @@ asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
 
-Creates symlinks in the user's home directory for all the files in  `dotfiles/`.
-Directory `bin` is symlinked to `~/local/bin`, taking 1st preference in `PATH`.
+Symlinks are created in in the user's home directory for all the files in
+`dotfiles/`. Files or symlinks of the same name at `$HOME` are overridden.
 
-Script `symlink_dotfiles` overrides the already existing files or symlinks
-in the  user's home directory.
-
-Backups are done best-effort:
-- Dotfiles replaced at `$HOME` are backed up in `~/.dotfiles-old`
-- Starship, Topgrade, htop and Neovim configs are backed up in `~/.config-old`
-- Vim directory (`~/.vim`) is backed up `~/.vim-old`
-- VSCode `User` directory is backed up `User-old` in the OS specific location
-- Directories `~/local/bin` and `~/local/etc` are backed up `~/local/X-old`
+Directory `bin` in the repo is symlinked to `~/local/bin`, taking preference
+in `PATH`.  Directory `etc` in the repo is symlinked to `~/local/etc`
+Starship, Topgrade, Neovim and htop configs are symlinked in `~/.config`.
 
 Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
@@ -153,8 +150,8 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 
 ### setup_vscode
 
-The script symlinks `vscode/` to `<user_vscode_path>/Code`.
-The old `Code/` is first backed up as `Code-old`.
+The script symlinks `vscode/` to `<os_vscode_path>/User`. Existing `User`
+directory is first backed up to `~/configent/.backup/<os_vscode_path>/User`.
 
 Symlinking happens even if `code` has not been installed. If `code` is present,
 also VSCode extensions (`vscode/extensions.list`) are installed.

@@ -8,64 +8,65 @@
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 dotfiles_path="$this_path/dotfiles"
+backup_path="$this_path/.backup"
 
 ### Symlink bin ################################################################
 
 local_bin_path="$HOME/local/bin"
-if [ ! -d "$HOME/local/bin-old" ]; then
-  mkdir -p "$HOME/local"
-  cp -R "$local_bin_path" "$HOME/local/bin-old"
+if [ ! -d "$backup_path/local/bin" ]; then
+  mkdir -p "$backup_path/local"
+  cp -R "$local_bin_path" "$backup_path/local/bin"
 fi
 mkdir -p "$HOME/local"
-ln -snvf "$this_path/bin" "$local_bin_path"
+ln -sfnv "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
 
 local_etc_path="$HOME/local/etc"
-if [ ! -d "$HOME/local/etc-old" ]; then
-  mkdir -p "$HOME/local"
-  cp -R "$local_etc_path" "$HOME/local/etc-old"
+if [ ! -d "$backup_path/local/etc" ]; then
+  mkdir -p "$backup_path/local"
+  cp -R "$local_etc_path" "$backup_path/local/etc"
 fi
 mkdir -p "$HOME/local"
-ln -snvf "$this_path/etc" "$local_etc_path"
+ln -sfnv "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
 
 files="$(find "$dotfiles_path" -type f -exec basename {} \;)"
 
 for source_file_name in $files; do
-  if [ ! -r "$HOME/.dotfiles-old/$source_file_name" ]; then
-    mkdir -p "$HOME/.dotfiles-old"
-    cp "$HOME/$source_file_name" "$HOME/.dotfiles-old/$source_file_name"
+  if [ ! -r "$backup_path/$source_file_name" ]; then
+    mkdir -p "$backup_path"
+    cp "$HOME/$source_file_name" "$backup_path/$source_file_name"
   fi
-  ln -snvf "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
+  ln -sfv "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
 done
 
 ### Symlink Starship config ####################################################
 
-mkdir -p "$HOME/.config"
-if [ ! -r "$HOME/.config-old/starship.toml" ]; then
-  mkdir -p "$HOME/.config-old"
-  cp "$HOME/.config/starship.toml" "$HOME/.config-old/starship.toml"
+if [ ! -r "$backup_path/.config/starship.toml" ]; then
+  mkdir -p "$backup_path/.config"
+  cp "$HOME/.config/starship.toml" "$backup_path/.config/starship.toml"
 fi
-ln -snvf "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
+mkdir -p "$HOME/.config"
+ln -sfv "$HOME/local/etc/starship/config.toml" "$HOME/.config/starship.toml"
 
 ### Symlink Topgrade config ####################################################
 
-mkdir -p "$HOME/.config"
-if [ ! -r "$HOME/.config-old/topgrade.toml" ]; then
-  mkdir -p "$HOME/.config-old"
-  cp "$HOME/.config/topgrade.toml" "$HOME/.config-old/topgrade.toml"
+if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
+  mkdir -p "$backup_path/.config"
+  cp "$HOME/.config/topgrade.toml" "$backup_path/.config/topgrade.toml"
 fi
-ln -snvf "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
+mkdir -p "$HOME/.config"
+ln -sfv "$HOME/local/etc/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
 
 ### Symlink htoprc for Linux distributions #####################################
 
 if [ "$(uname -s)" = 'Linux' ]; then
-  mkdir -p "$HOME/.config/htop"
-  if [ ! -r "$HOME/.config-old/htop/htoprc" ]; then
-    mkdir -p "$HOME/.config-old/htop"
-    cp "$HOME/.config/htop/htoprc" "$HOME/.config-old/htop/htoprc"
+  if [ ! -r "$backup_path/.config/htop/htoprc" ]; then
+    mkdir -p "$backup_path/.config/htop"
+    cp "$HOME/.config/htop/htoprc" "$backup_path/.config/htop/htoprc"
   fi
-  ln -snvf "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
+  mkdir -p "$HOME/.config/htop"
+  ln -sfv "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
