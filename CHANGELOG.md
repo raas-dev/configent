@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.4](https://github.com/raas-dev/configent/compare/1.70.3...1.70.4) (2023-08-01)
+
+
+### Fixes
+
+* **vscode:** Fix symlinking user path ([69f7eca](https://github.com/raas-dev/configent/commit/69f7ecabb1d9450e245cf8c243f74aab227e0d23))
+
 ### [1.70.3](https://github.com/raas-dev/configent/compare/1.70.2...1.70.3) (2023-08-01)
 
 
