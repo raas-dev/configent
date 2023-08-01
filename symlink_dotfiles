@@ -17,7 +17,8 @@ if [ ! -d "$backup_path/local/bin" ] && [ -d "$local_bin_path" ]; then
   mkdir -p "$backup_path/local"
   cp -RP "$local_bin_path" "$backup_path/local/bin"
 fi
-mkdir -p "$HOME/local"
+mkdir -p "$local_bin_path"
+rm -rf "$local_bin_path"
 ln -sfnv "$this_path/bin" "$local_bin_path"
 
 ### Symlink etc ################################################################
@@ -27,7 +28,8 @@ if [ ! -d "$backup_path/local/etc" ] && [ -d "$local_etc_path" ]; then
   mkdir -p "$backup_path/local"
   cp -RP "$local_etc_path" "$backup_path/local/etc"
 fi
-mkdir -p "$HOME/local"
+mkdir -p "$local_etc_path"
+rm -rf "$local_etc_path"
 ln -sfnv "$this_path/etc" "$local_etc_path"
 
 ### Symlink dotfiles ###########################################################
