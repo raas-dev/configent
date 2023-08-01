@@ -14,15 +14,16 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 if [ "$(uname -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/Code/User"
-  backup_path="$this_path/.backup/Library/Application Support/Code"
+  backup_path="$this_path/.backup/Library/Application Support/Code/User"
 else
   user_path="$HOME/.config/Code/User"
-  backup_path="$this_path/.backup/.config/Code"
+  backup_path="$this_path/.backup/.config/Code/User"
 fi
 
-if [ ! -d "$backup_path/User" ] && [ -d "$user_path" ]; then
+if [ ! -d "$backup_path" ] && [ -d "$user_path" ] && [ ! -L "$user_path" ]; then
   mkdir -p "$backup_path"
-  cp -RP "$user_path" "$backup_path/User"
+  rm -rf "$backup_path"
+  cp -RP "$user_path" "$backup_path"
 fi
 mkdir -p "$user_path"
 rm -rf "$user_path"
