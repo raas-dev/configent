@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.8](https://github.com/raas-dev/configent/compare/1.70.7...1.70.8) (2023-08-01)
+
+
+### Fixes
+
+* **neovim:** Fix create nvim dir ([19e1db8](https://github.com/raas-dev/configent/commit/19e1db8e3acd142bbec04bc84a3c586e21532af2))
+
 ### [1.70.7](https://github.com/raas-dev/configent/compare/1.70.6...1.70.7) (2023-08-01)
 
 
