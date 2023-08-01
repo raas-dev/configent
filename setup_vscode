@@ -20,7 +20,7 @@ else
   backup_path="$this_path/.backup/.config/Code"
 fi
 
-if [ ! -d "$backup_path/User" ]; then
+if [ ! -d "$backup_path/User" ] && [ -d "$user_path" ]; then
   mkdir -p "$backup_path"
   cp -R "$user_path" "$backup_path/User"
 fi

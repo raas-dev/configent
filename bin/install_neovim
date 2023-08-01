@@ -39,13 +39,13 @@ fi
 ### Symlink Neovim configs #####################################################
 
 # Vim  (.vimrc is backed up by symlink_dotfiles)
-if [ ! -d "$backup_path/.vim" ]; then
+if [ ! -d "$backup_path/.vim" ] && [ -d "$HOME/.vim" ]; then
   mkdir -p "$backup_path"
   cp -R "$HOME/.vim" "$backup_path/.vim"
 fi
 
 # Neovim
-if [ ! -d "$backup_path/.config/nvim" ]; then
+if [ ! -d "$backup_path/.config/nvim" ] && [ -d "$HOME/.config/nvim" ]; then
   mkdir -p "$backup_path/.config"
   cp -R "$HOME/.config/nvim" "$backup_path/.config/nvim"
 fi
