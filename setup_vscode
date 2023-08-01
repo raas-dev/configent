@@ -18,9 +18,8 @@ else
   user_path="$HOME/.config/Code/User"
 fi
 
-if [ -d "$user_path" ] && [ ! -L "$user_path" ]; then
-  rm -rf "${user_path}-old"
-  mv -v "$user_path" "${user_path}-old"
+if [ ! -d "${user_path}-old" ]; then
+  cp -R "$user_path" "${user_path}-old"
 fi
 mkdir -p "$user_path"
 ln -snvf "$this_path/vscode" "$user_path"

@@ -33,22 +33,18 @@ fi
 
 ### Symlink Neovim configs #####################################################
 
-# backup non-symlink .vim directory
-if [ -d "$HOME/.vim" ] && [ ! -L "$HOME/.vim" ]; then
-  rm -rf "$HOME/.vim-old"
+if [ ! -d "$HOME/.vim-old" ]; then
   cp -R "$HOME/.vim" "$HOME/.vim-old"
 fi
 
-# backup non-symlink nvim direcrory
-if [ -d "$HOME/.config/nvim" ] && [ ! -L "$HOME/.config/nvim" ]; then
-  rm -rf "$HOME/.config-old/nvim"
-  mkdir -pv "$HOME/.config-old" # required for cp target
+if [ ! -d "$HOME/.config-old/nvim" ]; then
+  mkdir -p "$HOME/.config-old"
   cp -R "$HOME/.config/nvim" "$HOME/.config-old/nvim"
 fi
 
-mkdir -pv "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/nvim"
 ln -snfv "$HOME/.vim" "$HOME/.config/nvim"
-# .vimrc is backed up in symlink_dotfiles
+# .vimrc is backup'd by symlink_dotfiles
 ln -snfv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 
 ### Install Vundle #############################################################
