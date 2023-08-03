@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.10](https://github.com/raas-dev/configent/compare/1.70.9...1.70.10) (2023-08-03)
+
+
+### Fixes
+
+* **apps:** Split cloud dev and IAC tools to files ([18b4fd7](https://github.com/raas-dev/configent/commit/18b4fd7117adfd8b37320948e6e88bbede00ace0))
+
 ### [1.70.9](https://github.com/raas-dev/configent/compare/1.70.8...1.70.9) (2023-08-03)
 
 
