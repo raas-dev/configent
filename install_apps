@@ -61,11 +61,16 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
-# install appsec tools such as vulnerability scanners
+# install appsec tools such as container vulnerability scanners
 "$bin_path/install_appsec"
 
-# install cloud development tools such as infrastructure-as-code frameworks
-"$bin_path/install_iac"
+# install cloud development tools
+"$bin_path/install_aws"
+"$bin_path/install_azure"
+#"$bin_path/install_gcloud"
+#"$bin_path/install_terraform"
+#"$bin_path/install_k8sdev"
+#"$bin_path/install_cloudflare"
 
 # install Neovim if brew is available, always install Vim bundles
 "$bin_path/install_neovim"

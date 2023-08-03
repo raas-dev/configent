@@ -547,7 +547,6 @@ nixery() {
 
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy' # rw
-alias gcloud='nixery shell/google-cloud-sdk gcloud'
 
 # databases
 alias mysql='nixery shell/mariadb mysql'

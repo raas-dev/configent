@@ -50,6 +50,7 @@
     "passwordless",
     "pipx",
     "POSIX",
+    "psql",
     "Pylance",
     "rclocal",
     "runtimes",

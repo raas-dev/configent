@@ -18,6 +18,7 @@ grype 0.64.2
 awscli 2.13.3
 aws-vault 7.2.0
 azure-cli 2.50.0
+gcloud 441.0.0
 terraform 1.5.3
 tfsec 1.28.1
 kubectl 1.27.4

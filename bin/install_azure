@@ -16,15 +16,7 @@ export ASDF_DIR="$HOME/.asdf"
 git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 . "$ASDF_DIR/asdf.sh"
 
-### aws ########################################################################
-
-asdf plugin add awscli
-asdf install awscli
-
-asdf plugin add aws-vault
-asdf install aws-vault
-
-### azure ######################################################################
+### azure cli ##################################################################
 
 asdf plugin add azure-cli
 asdf install azure-cli
@@ -32,7 +24,12 @@ asdf install azure-cli
 az config set core.collect_telemetry=false
 az config set core.output=jsonc
 
+### bicep ######################################################################
+
 az bicep install
+
+### azure-cli extensions #######################################################
+
 az extension add --name azure-devops --upgrade --yes
 az extension add --name containerapp --upgrade --yes
 az extension add --name next --upgrade --yes
@@ -43,33 +40,3 @@ mkdir -p "$HOME/.azd/bin"
 # nosemgrep
 curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
   bash -s -- --install-folder "$HOME/.azd" --symlink-folder "$HOME/.azd/bin"
-
-### terraform ##################################################################
-
-asdf plugin add terraform
-asdf install terraform
-
-asdf plugin add tfsec
-asdf install tfsec
-
-### k8s ########################################################################
-
-asdf plugin add kubectl
-asdf install kubectl
-
-asdf plugin add krew
-asdf install krew
-
-kubectl krew install ctx
-kubectl krew install ns
-
-asdf plugin add helm
-asdf install helm
-
-asdf plugin add k9s
-asdf install k9s
-
-### cloudflare #################################################################
-
-asdf plugin add cloudflared
-asdf install cloudflared

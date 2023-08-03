@@ -125,7 +125,7 @@ What's installed by default:
 [Flatpak](https://flatpak.org/) (Linux distros)
 3. Zsh plugin manager and plugins (Zsh from `brew` if Homebrew is available)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
-5. Appsec, cloud development and infrastructure-as-code command-line tools
+5. AWS and Azure development tools, AppSec and container vulnerability scanners
 6. (Neo)vim bundles and config (Neovim from `brew` if Homebrew is available)
 7. Tmux plugins and config (tmux from `brew` if Homebrew is available)
 8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
@@ -254,7 +254,7 @@ as the first argument. The packages are installed from channel
 
 The binary is assumed named according to the first package. The rest of the
 arguments are passed to the binary. If name is different from the package name,
-put meta-package "shell" first e.g. `nixery shell/google-cloud-sdk gcloud`.
+put meta-package "shell" first e.g. `nixery shell/postgresql psql`.
 
 ⚠️: Alias `n` mounts the current directory as writable inside the container,
 whereas `nixery` mounts the current directory as read-only. Alias `n` can map
@@ -310,5 +310,8 @@ Development guidelines:
 ### Issues in dependencies
 
 - Homebrew does not work on Alpine Linux (both x86-64 and ARM, due to musl)
-- Node.js may not work on Alpine Linux, install it by `apk` if wanted (2023-07)
+  - Use `asdf` if possible, if not use `apk`
+- Node.js may not work on Alpine Linux (2023-07)
+  - Install it by `apk add nodejs` if required
 - Cloudflared does not work on ARM Ubuntu, Debian, Arch or OpenSUSE (2023-07)
+  - Is not installed by default
