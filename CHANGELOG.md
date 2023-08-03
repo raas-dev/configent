@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.9](https://github.com/raas-dev/configent/compare/1.70.8...1.70.9) (2023-08-03)
+
+
+### Fixes
+
+* **vscode:** Fix backup check ([09cf571](https://github.com/raas-dev/configent/commit/09cf5712709ee65a19163a11c51840cddd6cb9f3))
+
 ### [1.70.8](https://github.com/raas-dev/configent/compare/1.70.7...1.70.8) (2023-08-01)
 
 
