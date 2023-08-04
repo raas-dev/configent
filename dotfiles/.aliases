@@ -437,6 +437,9 @@ alias aider='pipx run aider-chat'
 # AI codebase generator
 alias gpt-engineer='pipx run gpt-engineer'
 
+# AI personal assistant for digital brain
+alias khoj='pipx run --spec khoj-assistant khoj'
+
 ### Latest versions of global Node.js command-line tools #######################
 
 # Find unused and missing package.json (dev)Dependencies
