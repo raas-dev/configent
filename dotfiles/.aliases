@@ -550,6 +550,7 @@ nixery() {
 
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy' # rw
+alias terrascan='nixery terrascan'
 
 # databases
 alias mysql='nixery shell/mariadb mysql'
