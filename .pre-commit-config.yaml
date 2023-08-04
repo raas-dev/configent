@@ -13,6 +13,12 @@ repos:
   hooks:
   - id: detect-secrets
 
+- repo: https://github.com/returntocorp/semgrep
+  rev: v1.34.1
+  hooks:
+  - id: semgrep
+    args: ['--config', 'auto', '--error', '--skip-unknown-extensions']
+
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
   hooks:
