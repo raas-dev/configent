@@ -183,9 +183,6 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 # dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-# KICS
-export DISABLE_CRASH_REPORT=0
-
 ### XDG base directory specification ###########################################
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
