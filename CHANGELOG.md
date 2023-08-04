@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.11](https://github.com/raas-dev/configent/compare/1.70.10...1.70.11) (2023-08-04)
+
+
+### Fixes
+
+* **aliases:** Add checkov via nixery ([3e936a9](https://github.com/raas-dev/configent/commit/3e936a97a1be8ea1c8866db240610e6a4ab3d2b2))
+* **aliases:** Add khoj via pipx ([3f34587](https://github.com/raas-dev/configent/commit/3f345870571d567b1c93a2ee745e1c5d12f0e22b))
+* **aliases:** Add terrascan via nixery ([41de07c](https://github.com/raas-dev/configent/commit/41de07c6995643e58c49ccee6ec5cbf2fe20618d))
+
 ### [1.70.10](https://github.com/raas-dev/configent/compare/1.70.9...1.70.10) (2023-08-03)
 
 
