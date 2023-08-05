@@ -40,7 +40,7 @@ repos:
     - id: shellcheck
     - id: shfmt
 
-- repo: https://github.com/bridgecrewio/checkov.git
+- repo: https://github.com/bridgecrewio/checkov
   rev: 2.3.356
   hooks:
     - id: checkov
