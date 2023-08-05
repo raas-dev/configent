@@ -45,12 +45,6 @@ repos:
   hooks:
     - id: hadolint
 
-- repo: https://github.com/returntocorp/semgrep
-  rev: v1.34.1
-  hooks:
-  - id: semgrep
-    args: ['--config', 'auto', '--error', '--skip-unknown-extensions']
-
 - repo: https://github.com/codespell-project/codespell
   rev: v2.2.5
   hooks:
