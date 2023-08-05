@@ -425,6 +425,9 @@ alias vd='pipx run --pip-args openpyxl visidata'
 # Playwright
 alias playwright='pipx run playwright'
 
+# Checkov
+alias checkov='pipx run checkov'
+
 # Huggingface CLI
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 
@@ -548,10 +551,13 @@ nixery() {
 # n: read-write filesystem, .env file is read, PORT= is published if given
 # nixery: read-only filesystem
 
+# appsec
+alias grype='nixery grype'
+alias terrascan='nixery terrascan'
+alias trufflehog='nixery trufflehog/git'
+
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy' # rw
-alias checkov='nixery checkov'
-alias terrascan='nixery terrascan'
 
 # databases
 alias mysql='nixery shell/mariadb mysql'
@@ -598,7 +604,6 @@ alias ffuf='nixery ffuf'
 alias katana='nixery katana'
 alias nikto='nixery nikto'
 alias nuclei='nixery nuclei'
-alias trufflehog='nixery trufflehog/git'
 alias wapiti='nixery wapiti'
 
 # miscellaneous
