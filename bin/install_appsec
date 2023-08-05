@@ -24,6 +24,3 @@ asdf install hadolint
 
 asdf plugin add trivy
 asdf install trivy
-
-asdf plugin add grype
-asdf install grype
