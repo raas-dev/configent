@@ -45,6 +45,14 @@ repos:
   hooks:
     - id: hadolint
 
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 2.3.356
+  hooks:
+    #- id: checkov_secrets
+    - id: checkov
+      files: .*
+      args: [--skip-path, 'vscode', --quiet]
+
 - repo: https://github.com/codespell-project/codespell
   rev: v2.2.5
   hooks:
