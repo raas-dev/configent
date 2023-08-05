@@ -1,7 +1,7 @@
 # hadolint global ignore=DL3007,DL3059
-# checkov:skip=CKV_DOCKER_7: skip pinning image
+# checkov:skip=CKV_DOCKER_7: skip image tag
 # checkov:skip=CKV_DOCKER_2: skip healthcheck
-# checkov:skip=CKV_DOCKER_3: skip creating use
+# checkov:skip=CKV_DOCKER_3: skip creating user
 FROM nixos/nix:latest
 
 RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
