@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.12](https://github.com/raas-dev/configent/compare/1.70.11...1.70.12) (2023-08-05)
+
+
+### Fixes
+
+* **appsec:** Add checkov via pipx ([fca2a7f](https://github.com/raas-dev/configent/commit/fca2a7f3bec2c1ae070aaf13cdebd7a0b7a19f4c))
+* **appsec:** Add grype via nixery, not asdf ([6fc845c](https://github.com/raas-dev/configent/commit/6fc845c158baa8068f2ae86210f8e8cc4b8bc21d))
+* **nixd:** Fix dockerfile to pass checkov ([a3ece1c](https://github.com/raas-dev/configent/commit/a3ece1c462f36a2fa378152cb98b14f9bc544bd3))
+
 ### [1.70.11](https://github.com/raas-dev/configent/compare/1.70.10...1.70.11) (2023-08-04)
 
 
