@@ -14,7 +14,6 @@ bierner.markdown-yaml-preamble
 bradlc.vscode-tailwindcss
 CaptainJiNX.kickass-c64
 charliermarsh.ruff
-chris-hayes.chatgpt-reborn
 Codeium.codeium
 dbaeumer.vscode-eslint
 dnicolson.binary-plist
@@ -56,6 +55,7 @@ naumovs.color-highlight
 Perkovec.emoji
 rambit.highlight-counter
 redhat.vscode-yaml
+rubberduck.rubberduck-vscode
 Semgrep.semgrep
 stevejpurves.cucumber
 stkb.rewrap
