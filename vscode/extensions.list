@@ -1,5 +1,6 @@
 aaron-bond.better-comments
 adpyke.codesnap
+AndrewButson.vscode-openai
 AquaSecurityOfficial.trivy-vulnerability-scanner
 AykutSarac.jsoncrack-vscode
 bbenoist.Nix
@@ -55,7 +56,6 @@ naumovs.color-highlight
 Perkovec.emoji
 rambit.highlight-counter
 redhat.vscode-yaml
-rubberduck.rubberduck-vscode
 Semgrep.semgrep
 stevejpurves.cucumber
 stkb.rewrap
