@@ -445,6 +445,9 @@ alias khoj='pipx run --spec khoj-assistant khoj'
 
 ### Latest versions of global Node.js command-line tools #######################
 
+# Azure Functions CLI
+alias func='npx -y azure-functions-core-tools'
+
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
