@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.70.13](https://github.com/raas-dev/configent/compare/1.70.12...1.70.13) (2023-08-22)
+
+
+### Fixes
+
+* **aliases:** Add Azure Functions CLI via npx ([a0b8902](https://github.com/raas-dev/configent/commit/a0b89024454cc370164edded93218f204ecd32de))
+
 ### [1.70.12](https://github.com/raas-dev/configent/compare/1.70.11...1.70.12) (2023-08-05)
 
 
