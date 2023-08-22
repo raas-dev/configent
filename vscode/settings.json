@@ -204,5 +204,8 @@
   "vscode-openai.conversation-configuration.temperature": 0,
   "vscode-openai.conversation-configuration.summary-threshold": 6,
   "vscode-openai.conversation-configuration.number-of-attempts": 30,
-  "vscode-openai.conversation-configuration.api-headers": []
+  "vscode-openai.conversation-configuration.api-headers": [],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
