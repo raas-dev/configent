@@ -145,12 +145,8 @@
   "gitlens.showWhatsNewAfterUpgrades": false,
   "npm.keybindingsChangedWarningShown": true,
   "git.enableSmartCommit": true,
-  "chatgpt.gpt3.temperature": 0,
-  "chatgpt.telemetry.disable": true,
-  "chatgpt.gpt3.maxTokens": 2048,
   "gitlens.telemetry.enabled": false,
   "update.showReleaseNotes": false,
-  "chatgpt.throttling": 0,
   "aws.telemetry": false,
   "aws.codeWhisperer.shareCodeWhispererContentWithAWS": false,
   "yaml.customTags": [
@@ -192,20 +188,9 @@
   ],
   "git.openRepositoryInParentFolders": "always",
   "gitlens.graph.minimap.enabled": false,
-  "chatgpt.gpt3.model": "gpt-4",
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
-  "vscode-openai.serviceProvider": "OpenAI",
-  "vscode-openai.baseUrl": "https://api.openai.com/v1",
-  "vscode-openai.defaultModel": "gpt-4",
-  "vscode-openai.embeddingModel": "text-embedding-ada-002",
-  "vscode-openai.azureDeployment": "setup-required",
-  "vscode-openai.embeddingsDeployment": "setup-required",
-  "vscode-openai.azureApiVersion": "2023-05-15",
-  "vscode-openai.conversation-configuration.temperature": 0,
-  "vscode-openai.conversation-configuration.summary-threshold": 6,
-  "vscode-openai.conversation-configuration.number-of-attempts": 30,
-  "vscode-openai.conversation-configuration.api-headers": [],
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "diffEditor.codeLens": true
 }

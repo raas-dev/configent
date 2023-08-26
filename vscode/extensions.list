@@ -1,6 +1,5 @@
 aaron-bond.better-comments
 adpyke.codesnap
-AndrewButson.vscode-openai
 AquaSecurityOfficial.trivy-vulnerability-scanner
 AykutSarac.jsoncrack-vscode
 bbenoist.Nix
@@ -16,6 +15,7 @@ bradlc.vscode-tailwindcss
 CaptainJiNX.kickass-c64
 charliermarsh.ruff
 Codeium.codeium
+Continue.continue
 dbaeumer.vscode-eslint
 dnicolson.binary-plist
 eamodio.gitlens

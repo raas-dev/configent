@@ -70,3 +70,14 @@ if [ "$(uname -s)" = 'Linux' ]; then
   mkdir -p "$HOME/.config/htop"
   ln -sfnv "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
+
+### Symlink continue config ####################################################
+
+if [ ! -r "$backup_path/.continue/config.py" ]; then
+  if [ -r "$HOME/.continue/config.py" ]; then
+    mkdir -p "$backup_path/.continue"
+    cp -P "$HOME/.continue/config.py" "$backup_path/.continue/config.py"
+  fi
+fi
+mkdir -p "$HOME/.continue"
+ln -sfnv "$config_path/continue/config.py" "$HOME/.continue/config.py"
