@@ -71,6 +71,7 @@ fi
 #"$bin_path/install_terraform"
 #"$bin_path/install_k8sdev"
 #"$bin_path/install_cloudflare"
+#"$bin_path/install_flyctl"
 
 # install Neovim if brew is available, always install Vim bundles
 "$bin_path/install_neovim"
