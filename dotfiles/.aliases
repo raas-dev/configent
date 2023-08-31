@@ -466,6 +466,9 @@ alias standard-version='npx -y standard-version'
 # Identify technology on websites
 alias wappalyzer='npx -y wappalyzer'
 
+# CLI for railway.app
+alias railway='npx -y @railway/cli'
+
 ### Nix ########################################################################
 
 # Nix in docker
