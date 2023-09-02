@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.71.0](https://github.com/raas-dev/configent/compare/1.70.13...1.71.0) (2023-09-02)
+
+
+### Features
+
+* **aliases:** Add railway cli ([57c039f](https://github.com/raas-dev/configent/commit/57c039f45b00110183ab0ac073df70f233842763))
+* **apps:** Install flyctl by asdf ([6143f8a](https://github.com/raas-dev/configent/commit/6143f8af15798d7ba8e2ac8bcbe402cd880beeb9))
+* **install:** Add bun ([879d6c1](https://github.com/raas-dev/configent/commit/879d6c11918e8dbafe45cfca4528c44d9d196822))
+* **vscode:** Add continue extension ([52c6b8a](https://github.com/raas-dev/configent/commit/52c6b8a54217b7057c5d655951656ab5095db704))
+
+
+### Fixes
+
+* **aliases:** Add alias fly for flyctl ([5de0ddb](https://github.com/raas-dev/configent/commit/5de0ddbf719d740214ff17dcdb4b91c9bf1a0a1e))
+* **nodejs:** Update nodejs version ([26ab85c](https://github.com/raas-dev/configent/commit/26ab85c986b2a846ad83694368fc3821e67de06b))
+
 ### [1.70.13](https://github.com/raas-dev/configent/compare/1.70.12...1.70.13) (2023-08-22)
 
 
