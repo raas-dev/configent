@@ -31,6 +31,9 @@ fi
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
+# bun completions
+[ -s "/$HOME/.bun/_bun" ] && . "$HOME/.bun/_bun"
+
 ### antidote ###################################################################
 
 if [ -r "$HOME/.antidote/antidote.zsh" ]; then
