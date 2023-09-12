@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.72.0](https://github.com/raas-dev/configent/compare/1.71.0...1.72.0) (2023-09-12)
+
+
+### Features
+
+* **aliases:** Add open-interpreter ([c5aa554](https://github.com/raas-dev/configent/commit/c5aa55416158b7f8692c29da6ac309bc404df236))
+
 ## [1.71.0](https://github.com/raas-dev/configent/compare/1.70.13...1.71.0) (2023-09-02)
 
 
