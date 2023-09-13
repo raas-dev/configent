@@ -20,7 +20,7 @@ A few features:
 - macOS `docker` experience as it was with Docker Desktop, but it does not cost
 - Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
 - One character `.aliases` - the fastest are the commands one does not type
-- Ask GPT in terminal (`s`), create shell commands (`_`) and code (`c`)
+- Ask GPT in terminal (`c`) or open-interpreter (`_`) for commands and code
 
 Works on x86-64 and ARM:
 
