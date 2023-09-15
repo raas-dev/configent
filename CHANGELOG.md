@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.73.0](https://github.com/raas-dev/configent/compare/1.72.0...1.73.0) (2023-09-15)
+
+
+### Features
+
+* **aliases:** Rotate one character GPT aliases ([d4f2b2d](https://github.com/raas-dev/configent/commit/d4f2b2d18decba9905a1f88052695899794536c8))
+
+
+### Fixes
+
+* **bun:** Remove bun due to polluting zshrc ([29cf2c0](https://github.com/raas-dev/configent/commit/29cf2c0774745173f008052494b12131ec26a4f3))
+
 ## [1.72.0](https://github.com/raas-dev/configent/compare/1.71.0...1.72.0) (2023-09-12)
 
 
