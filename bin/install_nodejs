@@ -19,5 +19,5 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 asdf plugin add nodejs
 asdf install nodejs
 
-asdf plugin add bun
-asdf install bun
+#asdf plugin add bun
+#asdf install bun
