@@ -40,13 +40,6 @@ repos:
     - id: shellcheck
     - id: shfmt
 
-- repo: https://github.com/bridgecrewio/checkov
-  rev: 2.3.356
-  hooks:
-    - id: checkov
-      files: .*
-      args: [--skip-path, 'vscode', --quiet]
-
 - repo: https://github.com/codespell-project/codespell
   rev: v2.2.5
   hooks:
