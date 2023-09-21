@@ -440,9 +440,6 @@ alias openai='pipx run openai'
 # AI codebase generator
 alias gpt-engineer='pipx run gpt-engineer'
 
-# AI personal assistant for digital brain
-alias khoj='pipx run --spec khoj-assistant khoj'
-
 # open-interpreter
 alias interpreter='pipx run --spec open-interpreter interpreter'
 
