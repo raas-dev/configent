@@ -16,7 +16,7 @@ from continuedev.src.continuedev.core.config import (
 from continuedev.src.continuedev.core.main import Step
 from continuedev.src.continuedev.core.models import Models
 from continuedev.src.continuedev.core.sdk import ContinueSDK
-from continuedev.src.continuedev.libs.llm.maybe_proxy_openai import OpenAI
+from continuedev.src.continuedev.libs.llm.openai_free_trial import OpenAI
 from continuedev.src.continuedev.plugins.context_providers.diff import (
     DiffContextProvider,
 )
@@ -67,7 +67,7 @@ config = ContinueConfig(
         # You can try Continue with limited free usage. Please eventually replace with your own API key.
         # Learn how to customize models here: https://continue.dev/docs/customization#change-the-default-llm
         default=OpenAI(api_key=API_KEY, model="gpt-4"),
-        medium=OpenAI(api_key=API_KEY, model="gpt-3.5-turbo-16k"),
+        summarize=OpenAI(api_key=API_KEY, model="gpt-3.5-turbo-16k"),
     ),
     # Set a system message with information that the LLM should always keep in mind
     # E.g. "Please give concise answers. Always respond in Spanish."
