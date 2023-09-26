@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.1](https://github.com/raas-dev/configent/compare/1.73.0...1.73.1) (2023-09-26)
+
+
+### Fixes
+
+* **aliases:** Remove aider ([b277bce](https://github.com/raas-dev/configent/commit/b277bcea75284c25575d7869f9ec0efe071eb1bc))
+* **aliases:** Remove gpt-engineer over IDE plugins ([cbb0d38](https://github.com/raas-dev/configent/commit/cbb0d38565f690863861f83f15169c5bcb694bde))
+* **aliases:** Remove khoj ([6e369ed](https://github.com/raas-dev/configent/commit/6e369ed737a18d1ec342fc1237ca03283c46a6e2))
+* **bun:** Uppgrade bun ([c10138a](https://github.com/raas-dev/configent/commit/c10138aee51e29ade5d6aa9b2742abfc99065cfc))
+
 ## [1.73.0](https://github.com/raas-dev/configent/compare/1.72.0...1.73.0) (2023-09-15)
 
 
