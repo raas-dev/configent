@@ -437,9 +437,6 @@ alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 # OpenAI CLI
 alias openai='pipx run openai'
 
-# AI codebase generator
-alias gpt-engineer='pipx run gpt-engineer'
-
 # open-interpreter
 alias interpreter='pipx run --spec open-interpreter interpreter'
 
