@@ -81,3 +81,15 @@ if [ ! -r "$backup_path/.continue/config.py" ]; then
 fi
 mkdir -p "$HOME/.continue"
 ln -sfnv "$config_path/continue/config.py" "$HOME/.continue/config.py"
+
+### Symlink ptpython config ####################################################
+
+if [ ! -r "$backup_path/.config/ptpython/config.py" ]; then
+  if [ -r "$HOME/.config/ptpython/config.py" ]; then
+    mkdir -p "$backup_path/.config/ptpython"
+    cp -P "$HOME/.config/ptpython/config.py" \
+      "$backup_path/.config/ptpython/config.py"
+  fi
+fi
+mkdir -p "$HOME/.config/ptpython"
+ln -sfnv "$config_path/ptpython/config.py" "$HOME/.config/ptpython/config.py"
