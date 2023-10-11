@@ -194,5 +194,6 @@
   },
   "diffEditor.codeLens": true,
   "python.analysis.typeCheckingMode": "basic",
-  "window.commandCenter": false
+  "window.commandCenter": false,
+  "workbench.editor.empty.hint": "hidden"
 }

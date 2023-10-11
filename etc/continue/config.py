@@ -8,31 +8,31 @@ import os
 import subprocess
 from textwrap import dedent
 
-from continuedev.src.continuedev.core.config import (
+from continuedev.core.config import (
     ContinueConfig,
     CustomCommand,
     SlashCommand,
 )
-from continuedev.src.continuedev.core.main import Step
-from continuedev.src.continuedev.core.models import Models
-from continuedev.src.continuedev.core.sdk import ContinueSDK
-from continuedev.src.continuedev.libs.llm.openai_free_trial import OpenAI
-from continuedev.src.continuedev.plugins.context_providers.diff import (
+from continuedev.core.main import Step
+from continuedev.core.models import Models
+from continuedev.core.sdk import ContinueSDK
+from continuedev.libs.llm.openai_free_trial import OpenAI
+from continuedev.plugins.context_providers.diff import (
     DiffContextProvider,
 )
-from continuedev.src.continuedev.plugins.context_providers.google import (
+from continuedev.plugins.context_providers.google import (
     GoogleContextProvider,
 )
-from continuedev.src.continuedev.plugins.context_providers.search import (
+from continuedev.plugins.context_providers.search import (
     SearchContextProvider,
 )
-from continuedev.src.continuedev.plugins.context_providers.url import URLContextProvider
-from continuedev.src.continuedev.plugins.policies.default import DefaultPolicy
-from continuedev.src.continuedev.plugins.steps.clear_history import ClearHistoryStep
-from continuedev.src.continuedev.plugins.steps.comment_code import CommentCodeStep
-from continuedev.src.continuedev.plugins.steps.main import EditHighlightedCodeStep
-from continuedev.src.continuedev.plugins.steps.open_config import OpenConfigStep
-from continuedev.src.continuedev.plugins.steps.share_session import ShareSessionStep
+from continuedev.plugins.context_providers.url import URLContextProvider
+from continuedev.plugins.policies.default import DefaultPolicy
+from continuedev.plugins.steps.clear_history import ClearHistoryStep
+from continuedev.plugins.steps.comment_code import CommentCodeStep
+from continuedev.plugins.steps.main import EditHighlightedCodeStep
+from continuedev.plugins.steps.open_config import OpenConfigStep
+from continuedev.plugins.steps.share_session import ShareSessionStep
 
 
 class CommitMessageStep(Step):
