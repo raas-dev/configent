@@ -42,9 +42,6 @@ brew install --cask --no-quarantine nordvpn
 #brew install --cask --no-quarantine utm
 brew install --cask --no-quarantine visual-studio-code
 
-# Peripheral drivers
-#brew install --cask --no-quarantine homebrew/cask-drivers/corsair-icue
-
 # Keyboard remapper (see ui/os_x/ukelele for layouts)
 brew install --cask --no-quarantine ukelele
 
