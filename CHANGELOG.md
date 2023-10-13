@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.2](https://github.com/raas-dev/configent/compare/1.73.1...1.73.2) (2023-10-13)
+
+
+### Fixes
+
+* **macos:** Remove cask drivers ([ac0592b](https://github.com/raas-dev/configent/commit/ac0592b0fe1421fd4a246802b61a14219a10a0c9))
+* **ptpython:** Add config ([e13c990](https://github.com/raas-dev/configent/commit/e13c9901d303b4e1b61d7c8478ce2296246fa288))
+* **vscode:** Add rift extension ([7ffd65c](https://github.com/raas-dev/configent/commit/7ffd65c8e938f7ab5e1bde09c8f4bd5145c80491))
+
 ### [1.73.1](https://github.com/raas-dev/configent/compare/1.73.0...1.73.1) (2023-09-26)
 
 
