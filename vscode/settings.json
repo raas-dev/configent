@@ -30,7 +30,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.tabSizing": "shrink",
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false,
   "zenMode.hideStatusBar": false,
   "explorer.confirmDelete": false,
   "markdown.preview.lineHeight": 1.25,
@@ -57,7 +56,6 @@
     "terminal.ansiYellow": "#F7CA88"
   },
   "explorer.confirmDragAndDrop": false,
-  "workbench.activityBar.visible": false,
   "editor.minimap.showSlider": "always",
   "editor.hideCursorInOverviewRuler": true,
   "editor.scrollbar.vertical": "hidden",
@@ -127,7 +125,6 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "workbench.editor.untitled.hint": "hidden",
   "git.confirmSync": false,
   "bracketPairColorizer.depreciation-notice": false,
   "security.workspace.trust.enabled": false,
@@ -195,5 +192,6 @@
   "diffEditor.codeLens": true,
   "python.analysis.typeCheckingMode": "basic",
   "window.commandCenter": false,
-  "workbench.editor.empty.hint": "hidden"
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.activityBar.location": "hidden"
 }
