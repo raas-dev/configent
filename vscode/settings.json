@@ -193,5 +193,7 @@
   "python.analysis.typeCheckingMode": "basic",
   "window.commandCenter": false,
   "workbench.editor.empty.hint": "hidden",
-  "workbench.activityBar.location": "hidden"
+  "workbench.activityBar.location": "hidden",
+  "gitlens.ai.experimental.openai.model": "gpt-4",
+  "rift.chatModel": "openai:gpt-4"
 }
