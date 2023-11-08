@@ -194,6 +194,5 @@
   "window.commandCenter": false,
   "workbench.editor.empty.hint": "hidden",
   "workbench.activityBar.location": "hidden",
-  "gitlens.ai.experimental.openai.model": "gpt-4",
-  "rift.chatModel": "openai:gpt-4"
+  "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k"
 }
