@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.3](https://github.com/raas-dev/configent/compare/1.73.2...1.73.3) (2023-11-08)
+
+
+### Fixes
+
+* **aliases:** Update gpt aliases to gpt-4-turbo ([2a050b2](https://github.com/raas-dev/configent/commit/2a050b2acf3d0232758957352f6d534090dfea5f))
+* **tmux:** Change tmux-power plugin origin ([d2db5ba](https://github.com/raas-dev/configent/commit/d2db5ba892a77d6890843f7fdc8a0f761aeeb718))
+* **vscode:** Remove continue ([a25a70c](https://github.com/raas-dev/configent/commit/a25a70c5faca9187fec9b0973ea94507699b5885))
+* **vscode:** Update extensions to use gpt-4 over 3 ([d62dac0](https://github.com/raas-dev/configent/commit/d62dac0a72dbddd3927d5d10beceb3d6bf17ee7b))
+
 ### [1.73.2](https://github.com/raas-dev/configent/compare/1.73.1...1.73.2) (2023-10-13)
 
 
