@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.4](https://github.com/raas-dev/configent/compare/1.73.3...1.73.4) (2023-11-08)
+
+
+### Fixes
+
+* **aliases:** Colorize gpt responses ([09548b5](https://github.com/raas-dev/configent/commit/09548b5b796f00b6e06252d65d41aee050f3ec90))
+* **vscode:** Disable telemetry ([0a65030](https://github.com/raas-dev/configent/commit/0a65030228a37fed82d1e994b1126c52e6f37ffb))
+* **vscode:** Remove rift ([44c6cec](https://github.com/raas-dev/configent/commit/44c6cec95d4015413df3ccb12a7ba0e0fed69ae3))
+* **vscode:** Update continue gpt models ([8ebde8c](https://github.com/raas-dev/configent/commit/8ebde8ce57259ba6c3c9a3743ace9d986cd07b56))
+* **vscode:** Use faster gpt model for gitlens ([a683a64](https://github.com/raas-dev/configent/commit/a683a64b7c9d07e4c4cf498f959adbeb6e311d4d))
+
 ### [1.73.3](https://github.com/raas-dev/configent/compare/1.73.2...1.73.3) (2023-11-08)
 
 
