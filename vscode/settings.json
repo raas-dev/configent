@@ -194,5 +194,6 @@
   "window.commandCenter": false,
   "workbench.editor.empty.hint": "hidden",
   "workbench.activityBar.location": "hidden",
-  "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k"
+  "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k",
+  "continue.telemetryEnabled": false
 }
