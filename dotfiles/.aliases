@@ -210,13 +210,13 @@ sgpt_chat() {
     "variables": null,
     "role": "You are a helpful assistant."
   }' >~/.config/shell_gpt/roles/assistant.json
-  DEFAULT_COLOR=white sgpt --no-cache --role assistant \
+  DEFAULT_COLOR=bright_magenta sgpt --no-cache --role assistant \
     --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" \
     --model gpt-4-1106-preview "$*"
 }
 
 sgpt_code() {
-  DEFAULT_COLOR=magenta sgpt --no-cache --temperature 0 \
+  DEFAULT_COLOR=white sgpt --no-cache --temperature 0 \
     --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" \
     --model gpt-4-1106-preview --code "$*"
 }
