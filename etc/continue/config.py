@@ -66,8 +66,8 @@ config = ContinueConfig(
     models=Models(
         # You can try Continue with limited free usage. Please eventually replace with your own API key.
         # Learn how to customize models here: https://continue.dev/docs/customization#change-the-default-llm
-        default=OpenAI(api_key=API_KEY, model="gpt-4"),
-        summarize=OpenAI(api_key=API_KEY, model="gpt-3.5-turbo-16k"),
+        default=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"),
+        summarize=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"),
     ),
     # Set a system message with information that the LLM should always keep in mind
     # E.g. "Please give concise answers. Always respond in Spanish."
