@@ -211,12 +211,12 @@ sgpt_chat() {
     "role": "You are a helpful assistant."
   }' >~/.config/shell_gpt/roles/assistant.json
   sgpt --no-cache --role assistant \
-    --model gpt-4 --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
+    --model gpt-4-1106-preview --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" "$*"
 }
 
 sgpt_code() {
   sgpt --no-cache --temperature 0 --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" \
-    --model gpt-4 --code "$*"
+    --model gpt-4-1106-preview --code "$*"
 }
 
 sgpt_shell() {
