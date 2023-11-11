@@ -16,22 +16,25 @@ from continuedev.core.config import (
 from continuedev.core.main import Step
 from continuedev.core.models import Models
 from continuedev.core.sdk import ContinueSDK
-from continuedev.libs.llm.openai_free_trial import OpenAI
-from continuedev.plugins.context_providers.diff import (
+from continuedev.libs.llm.openai import OpenAI
+from continuedev.plugins.context_providers import (
     DiffContextProvider,
-)
-from continuedev.plugins.context_providers.google import (
+    FileTreeContextProvider,
+    GitHubIssuesContextProvider,  # noqa: F401
     GoogleContextProvider,
-)
-from continuedev.plugins.context_providers.search import (
     SearchContextProvider,
+    TerminalContextProvider,
+    URLContextProvider,
 )
-from continuedev.plugins.context_providers.url import URLContextProvider
+from continuedev.plugins.context_providers.file import FileContextProvider
 from continuedev.plugins.policies.default import DefaultPolicy
-from continuedev.plugins.steps.clear_history import ClearHistoryStep
-from continuedev.plugins.steps.comment_code import CommentCodeStep
-from continuedev.plugins.steps.main import EditHighlightedCodeStep
-from continuedev.plugins.steps.open_config import OpenConfigStep
+from continuedev.plugins.steps import (
+    ClearHistoryStep,
+    CommentCodeStep,
+    EditHighlightedCodeStep,
+    GenerateShellCommandStep,
+    OpenConfigStep,
+)
 from continuedev.plugins.steps.share_session import ShareSessionStep
 
 
@@ -60,24 +63,15 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 SERPER_API_KEY = os.getenv("SERPER_API_KEY") or ""
 
 config = ContinueConfig(
-    # If set to False, we will not collect any usage data
-    # See here to learn what anonymous data we collect: https://continue.dev/docs/telemetry
     allow_anonymous_telemetry=False,
     models=Models(
-        # You can try Continue with limited free usage. Please eventually replace with your own API key.
-        # Learn how to customize models here: https://continue.dev/docs/customization#change-the-default-llm
-        default=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"),
-        summarize=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"),
+        default=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"), # type: ignore
+        summarize=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"), # type: ignore
     ),
-    # Set a system message with information that the LLM should always keep in mind
-    # E.g. "Please give concise answers. Always respond in Spanish."
+
     system_message="You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained.",
-    # Set temperature to any value between 0 and 1. Higher values will make the LLM
-    # more creative, while lower values will make it more predictable.
+
     temperature=0.0,
-    # Custom commands let you map a prompt to a shortened slash command
-    # They are like slash commands, but more easily defined - write just a prompt instead of a Step class
-    # Their output will always be in chat form
     custom_commands=[
         CustomCommand(
             name="test",
@@ -132,24 +126,29 @@ config = ContinueConfig(
             description="Download and share the session transcript",
             step=ShareSessionStep,
         ),
+        SlashCommand(
+            name="cmd",
+            description="Generate a shell command",
+            step=GenerateShellCommandStep,
+        )
     ],
     # Context providers let you quickly select context by typing '@'
-    # Uncomment the following to
-    # - quickly reference GitHub issues
-    # - show Google search results to the LLM
     context_providers=[
-        # GitHubIssuesContextProvider(
+        DiffContextProvider(), # type: ignore
+        FileContextProvider(), # type: ignore
+        FileTreeContextProvider(), # type: ignore
+        #GitHubIssuesContextProvider(
         #     repo_name="<your github username or organization>/<your repo name>",
         #     auth_token="<your github auth token>"
-        # ),
-        GoogleContextProvider(serper_api_key=SERPER_API_KEY),
-        SearchContextProvider(),
-        DiffContextProvider(),
+        #),
+        GoogleContextProvider(serper_api_key=SERPER_API_KEY), # type: ignore
+        SearchContextProvider(), # type: ignore
+        TerminalContextProvider(), # type: ignore
         URLContextProvider(
             preset_urls=[
                 # Add any common urls you reference here so they appear in autocomplete
             ]
-        ),
+        ), # type: ignore
     ],
     # Policies hold the main logic that decides which Step to take next
     # You can use them to design agents, or deeply customize Continue
