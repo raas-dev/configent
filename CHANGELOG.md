@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.5](https://github.com/raas-dev/configent/compare/1.73.4...1.73.5) (2023-11-12)
+
+
+### Fixes
+
+* **continue:** Add terminal context provider ([e5481b7](https://github.com/raas-dev/configent/commit/e5481b7849d515b1467577610c7e82c68240a0af))
+* **profile:** Add PATH for bicep ([cf42eee](https://github.com/raas-dev/configent/commit/cf42eeed128e52294eec6b878ffa8f0eb24af4e5))
+
 ### [1.73.4](https://github.com/raas-dev/configent/compare/1.73.3...1.73.4) (2023-11-08)
 
 
