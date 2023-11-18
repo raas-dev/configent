@@ -4,7 +4,7 @@ golang 1.20.6
 nodejs 18.17.1
 bun 1.0.13
 python 3.11.4
-dotnet 7.0.306
+dotnet 8.0.100
 ruby 3.2.2
 java temurin-17.0.8+7
 stack 2.11.1  # haskell
