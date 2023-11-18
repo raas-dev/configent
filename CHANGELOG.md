@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.73.6](https://github.com/raas-dev/configent/compare/1.73.5...1.73.6) (2023-11-18)
+
+
+### Fixes
+
+* **asdf:** Update bun ([79c0049](https://github.com/raas-dev/configent/commit/79c004957f7997642bc9463120b5599dfd04e893))
+* **asdf:** Update dotnet to 8 ([b4916c1](https://github.com/raas-dev/configent/commit/b4916c11c057dd4d505c29c01bca8552bf487a9c))
+
 ### [1.73.5](https://github.com/raas-dev/configent/compare/1.73.4...1.73.5) (2023-11-12)
 
 
