@@ -448,6 +448,12 @@ alias interpreter='pipx run --spec open-interpreter interpreter'
 # Azure Functions CLI
 alias func='npx -y azure-functions-core-tools'
 
+# Firebase CLI
+alias firebase='npx -y firebase-tools'
+
+# Railway.app CLI
+alias railway='npx -y @railway/cli'
+
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
@@ -463,11 +469,8 @@ alias projen='npx -y projen'
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
 
-# Identify technology on websites
+# Identify technology of websites
 alias wappalyzer='npx -y wappalyzer'
-
-# CLI for railway.app
-alias railway='npx -y @railway/cli'
 
 ### Nix ########################################################################
 
