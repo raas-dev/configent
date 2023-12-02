@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.74.0](https://github.com/raas-dev/configent/compare/1.73.6...1.74.0) (2023-12-02)
+
+
+### Features
+
+* **aliases:** Add firebase-tools via npx ([6df587a](https://github.com/raas-dev/configent/commit/6df587af121b0d7705618009dae81758492ee01f))
+* **azure:** Add azure-cli ssh extension ([6aacdca](https://github.com/raas-dev/configent/commit/6aacdcab34909694aa9ff60bc6112e5c45cca031))
+
 ### [1.73.6](https://github.com/raas-dev/configent/compare/1.73.5...1.73.6) (2023-11-18)
 
 
