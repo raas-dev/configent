@@ -69,7 +69,7 @@ config = ContinueConfig(
         summarize=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"), # type: ignore
     ),
 
-    system_message="You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained.",
+    system_message="You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained. Take a deep breath and work on the problem step-by-step.",
 
     temperature=0.0,
     custom_commands=[
