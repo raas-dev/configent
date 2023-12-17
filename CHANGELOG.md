@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.1](https://github.com/raas-dev/configent/compare/1.74.0...1.74.1) (2023-12-17)
+
+
+### Fixes
+
+* **continue:** Prompt ([312b8be](https://github.com/raas-dev/configent/commit/312b8bed911c8123ad3a6403637d2ce5014b0c17))
+* **spgt:** Adjust prompt to produce shorter answers ([194374b](https://github.com/raas-dev/configent/commit/194374b75e1c24db1f32fc8665ffc117b69fb5e4))
+
 ## [1.74.0](https://github.com/raas-dev/configent/compare/1.73.6...1.74.0) (2023-12-02)
 
 
