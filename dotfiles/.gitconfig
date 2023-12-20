@@ -20,7 +20,7 @@
   r = diff --name-only --diff-filter=U
   rab = !"git add -A && git rebase --abort"
   rac = !"git add -A && git rebase --continue"
-  res = reset HEAD
+  rem = reset HEAD
   s = !"git submodule update --init --recursive"
   st = status -sb
   t = tag -l
