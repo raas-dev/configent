@@ -206,8 +206,6 @@ sgpt_chat() {
   mkdir -p ~/.config/shell_gpt/roles
   echo '{
     "name": "assistant",
-    "expecting": "Answer",
-    "variables": null,
     "role": "You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained. Take a deep breath and work on the problem step-by-step."
   }' >~/.config/shell_gpt/roles/assistant.json
   DEFAULT_COLOR=bright_magenta sgpt --no-cache --role assistant \
