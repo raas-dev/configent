@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.3](https://github.com/raas-dev/configent/compare/1.74.2...1.74.3) (2023-12-23)
+
+
+### Fixes
+
+* **sgpt:** Revert shell-gpt to last working version ([6b0861c](https://github.com/raas-dev/configent/commit/6b0861c19b721c7912d6d1ffa1794a9f98b49b1a))
+
 ### [1.74.2](https://github.com/raas-dev/configent/compare/1.74.1...1.74.2) (2023-12-23)
 
 
