@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.2](https://github.com/raas-dev/configent/compare/1.74.1...1.74.2) (2023-12-23)
+
+
+### Fixes
+
+* **git:** Git alias res -> rem ([1ae983d](https://github.com/raas-dev/configent/commit/1ae983dedaa5fa421062ac565523fe588a925f6b))
+* **sgpt:** Fix assistant role json format ([a015e7b](https://github.com/raas-dev/configent/commit/a015e7baa766c05acf470574fe28e358ece964cf))
+
 ### [1.74.1](https://github.com/raas-dev/configent/compare/1.74.0...1.74.1) (2023-12-17)
 
 
