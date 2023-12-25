@@ -188,6 +188,10 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 # dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+### aichat #####################################################################
+
+export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
+
 ### XDG base directory specification ###########################################
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html

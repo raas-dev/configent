@@ -30,6 +30,7 @@ cargo install cargo-binstall
 
 ### dotfiles requirements ######################################################
 
+cargo binstall -y aichat
 cargo binstall -y --locked bat
 cargo binstall -y diskonaut
 cargo binstall -y fd-find

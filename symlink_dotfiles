@@ -93,3 +93,27 @@ if [ ! -r "$backup_path/.config/ptpython/config.py" ]; then
 fi
 mkdir -p "$HOME/.config/ptpython"
 ln -sfnv "$config_path/ptpython/config.py" "$HOME/.config/ptpython/config.py"
+
+### Symlink aichat configs #####################################################
+
+# config.yaml
+if [ ! -r "$backup_path/.config/aichat/config.yaml" ]; then
+  if [ -r "$HOME/.config/aichat/config.yaml" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/config.yaml" \
+      "$backup_path/.config/aichat/config.yaml"
+  fi
+fi
+mkdir -p "$HOME/.config/aichat"
+ln -sfnv "$config_path/aichat/config.yaml" "$HOME/.config/aichat/config.yaml"
+
+# roles.yaml
+if [ ! -r "$backup_path/.config/aichat/roles.yaml" ]; then
+  if [ -r "$HOME/.config/aichat/roles.yaml" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/roles.yaml" \
+      "$backup_path/.config/aichat/roles.yaml"
+  fi
+fi
+mkdir -p "$HOME/.config/aichat"
+ln -sfnv "$config_path/aichat/roles.yaml" "$HOME/.config/aichat/roles.yaml"

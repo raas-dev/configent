@@ -102,7 +102,7 @@ fi
 
 alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias b='bat'
-alias c='sgpt_chat'
+alias c='aichat'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -197,34 +197,20 @@ alias wttr='curl "https://wttr.in?format=v2&MF"'
 
 ### Utilities ##################################################################
 
-# Generic AI helpers
+# LLM: aichat
+ai() {
+  local role="${1:-"chat"}"
+  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
+}
+
+# LLM: shell-gpt
 sgpt() {
-  pipx run --spec shell-gpt==0.9.4 sgpt "$@"
-}
-
-sgpt_chat() {
-  mkdir -p ~/.config/shell_gpt/roles
-  echo '{
-    "name": "assistant",
-    "expecting": "Answer",
-    "variables": null,
-    "role": "You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained. Take a deep breath and work on the problem step-by-step."
-  }' >~/.config/shell_gpt/roles/assistant.json
-  DEFAULT_COLOR=bright_magenta sgpt --no-cache --role assistant \
-    --chat "$(date +"%Y-%m-%d"):chat$TMUX_PANE" \
-    --model gpt-4-1106-preview "$*"
-}
-
-sgpt_code() {
-  DEFAULT_COLOR=white sgpt --no-cache --temperature 0 \
-    --chat "$(date +"%Y-%m-%d"):code$TMUX_PANE" \
-    --model gpt-4-1106-preview --code "$*"
+  pipx run --spec shell-gpt sgpt --model gpt-4-1106-preview --no-cache "$@"
 }
 
 sgpt_shell() {
-  DEFAULT_COLOR=green sgpt --no-cache --temperature 0 \
-    --chat "$(date +"%Y-%m-%d"):shell$TMUX_PANE" \
-    --shell "$*"
+  DEFAULT_COLOR=green sgpt --temperature 0 --shell \
+    --chat "$(date +"%Y-%m-%d"):term$TMUX_PANE" "$*"
 }
 
 # Generic docker build and run
