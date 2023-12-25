@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.75.0](https://github.com/raas-dev/configent/compare/1.74.3...1.75.0) (2023-12-25)
+
+
+### Features
+
+* **aliases:** Move from shell-gpt to aichat ([5abdbe0](https://github.com/raas-dev/configent/commit/5abdbe08f6860198caa57c55a69de429eac0cac2))
+
 ### [1.74.3](https://github.com/raas-dev/configent/compare/1.74.2...1.74.3) (2023-12-23)
 
 
