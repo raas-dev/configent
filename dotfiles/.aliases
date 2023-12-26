@@ -209,8 +209,7 @@ sgpt() {
 }
 
 sgpt_shell() {
-  DEFAULT_COLOR=green sgpt --temperature 0 --shell \
-    --chat "$(date +"%Y-%m-%d"):term$TMUX_PANE" "$*"
+  sgpt --temperature 0 --shell --chat "$(date +"%Y-%m-%d"):term$TMUX_PANE" "$*"
 }
 
 # Generic docker build and run
