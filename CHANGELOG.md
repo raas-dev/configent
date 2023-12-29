@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.75.1](https://github.com/raas-dev/configent/compare/1.75.0...1.75.1) (2023-12-29)
+
+
+### Fixes
+
+* **azure:** Upgrade bicep cli ([9091274](https://github.com/raas-dev/configent/commit/909127427d8b3c1ae86b5ef1be3b70783a729dde))
+
 ## [1.75.0](https://github.com/raas-dev/configent/compare/1.74.3...1.75.0) (2023-12-25)
 
 
