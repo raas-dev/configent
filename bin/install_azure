@@ -27,6 +27,7 @@ az config set core.output=jsonc
 ### bicep ######################################################################
 
 az bicep install
+az bicep upgrade
 
 ### azure-cli extensions #######################################################
 
