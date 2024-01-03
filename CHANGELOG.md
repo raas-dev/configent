@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.75.2](https://github.com/raas-dev/configent/compare/1.75.1...1.75.2) (2024-01-03)
+
+
+### Fixes
+
+* **aichat:** Improve prompts ([755aecb](https://github.com/raas-dev/configent/commit/755aecb636b085c65b663cdf3296c8dd74d979b2))
+* **aichat:** Improve subject-matter expert prompt ([0345544](https://github.com/raas-dev/configent/commit/0345544b05671c9072db1225e0b6f2da4eb0962e))
+* **aliases:** Add ai() option for code ([b5e2740](https://github.com/raas-dev/configent/commit/b5e27401964e0c117047a5d1dde1cbf5ba95c590))
+
 ### [1.75.1](https://github.com/raas-dev/configent/compare/1.75.0...1.75.1) (2023-12-29)
 
 
