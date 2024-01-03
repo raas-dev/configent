@@ -200,7 +200,7 @@ alias wttr='curl "https://wttr.in?format=v2&MF"'
 # LLM: aichat
 ai() {
   local role="chat"
-  [ -n "$1" ] && role="chat:$1"
+  [ -n "$1" ] && role="$role:$1"
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
