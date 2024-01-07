@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.75.3](https://github.com/raas-dev/configent/compare/1.75.2...1.75.3) (2024-01-07)
+
+
+### Fixes
+
+* **aichat:** Improve prompts ([8a0bc3a](https://github.com/raas-dev/configent/commit/8a0bc3a3c9bdbc121c00349c33a5dd511f32b720))
+
 ### [1.75.2](https://github.com/raas-dev/configent/compare/1.75.1...1.75.2) (2024-01-03)
 
 
