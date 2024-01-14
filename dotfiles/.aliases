@@ -81,6 +81,11 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
+### cd #########################################################################
+
+alias dc='cd' # typo
+alias cdtemp="cd $(mktemp -d)"
+
 ### Enhanced ls ################################################################
 
 if command -v lsd >/dev/null; then
