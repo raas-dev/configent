@@ -198,7 +198,7 @@ alias sudo='sudo '
 alias week='date +%V'
 
 # Weather (https://wttr.in/:help)
-alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2FMnq"'
+alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 
 ### Utilities ##################################################################
 
