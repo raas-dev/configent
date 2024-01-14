@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.76.0](https://github.com/raas-dev/configent/compare/1.75.3...1.76.0) (2024-01-14)
+
+
+### Features
+
+* **aliases:** Add cd shortcuts ([f164218](https://github.com/raas-dev/configent/commit/f164218f6e45711321968d661127cd8f6fed12ac))
+
+
+### Fixes
+
+* **aliases:** Get wttr for current time zone ([10ecaf5](https://github.com/raas-dev/configent/commit/10ecaf585f976d144cd5582fc1fa92ffea3a3dbb))
+* **aliases:** Response ANSI wttr ([323f2af](https://github.com/raas-dev/configent/commit/323f2afce70316f1cd2f9528a366a2b5295f69b5))
+* **aliases:** Simplify wttr format ([fe06415](https://github.com/raas-dev/configent/commit/fe06415f9a10eda2087ca7e8a70d965b50e04231))
+
 ### [1.75.3](https://github.com/raas-dev/configent/compare/1.75.2...1.75.3) (2024-01-07)
 
 
