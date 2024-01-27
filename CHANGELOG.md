@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.77.0](https://github.com/raas-dev/configent/compare/1.76.1...1.77.0) (2024-01-27)
+
+
+### Features
+
+* **ai:** Upgrade to latest gpt-4-turbo model ([8eac5e0](https://github.com/raas-dev/configent/commit/8eac5e0d1538dc5121a0dbde1b8c449ad0ca83cc))
+
+
+### Fixes
+
+* **tmux:** Upgrade tmux 3.2 -> 3.3a ([08fa18a](https://github.com/raas-dev/configent/commit/08fa18a20c14273f53bfa931838b3ffeb09c5981))
+
 ### [1.76.1](https://github.com/raas-dev/configent/compare/1.76.0...1.76.1) (2024-01-23)
 
 
