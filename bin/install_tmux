@@ -29,10 +29,7 @@ if ! command -v brew >/dev/null; then
 fi
 
 if command -v brew >/dev/null; then
-  brew tap z80oolong/tmux # brew install tmux has a history of being broken
-  tmux_version="3.2"
-  brew install "tmux@$tmux_version"
-  brew link "tmux@$tmux_version"
+  brew install tmux
 fi
 
 ### Tpm ########################################################################
