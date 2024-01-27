@@ -217,7 +217,7 @@ ai() {
 
 # LLM: shell-gpt
 sgpt() {
-  pipx run --spec shell-gpt sgpt --model gpt-4-1106-preview --no-cache "$@"
+  pipx run --spec shell-gpt sgpt --model gpt-4-turbo-preview --no-cache "$@"
 }
 
 sgpt_shell() {

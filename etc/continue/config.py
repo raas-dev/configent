@@ -65,8 +65,8 @@ SERPER_API_KEY = os.getenv("SERPER_API_KEY") or ""
 config = ContinueConfig(
     allow_anonymous_telemetry=False,
     models=Models(
-        default=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"), # type: ignore
-        summarize=OpenAI(api_key=API_KEY, model="gpt-4-1106-preview"), # type: ignore
+        default=OpenAI(api_key=API_KEY, model="gpt-4-turbo-preview"), # type: ignore
+        summarize=OpenAI(api_key=API_KEY, model="gpt-4-turbo-preview"), # type: ignore
     ),
 
     system_message="You are a helpful assistant. Please make all responses as concise as possible and never repeat something you have already explained. Take a deep breath and work on the problem step-by-step.",
