@@ -112,7 +112,7 @@ alias c='aichat'
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='gitui'
-alias h='xh'
+alias h='xh --verify=no'
 alias i='glances'
 # j is for zoxide
 alias k='kalker'
