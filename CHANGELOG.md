@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.77.1](https://github.com/raas-dev/configent/compare/1.77.0...1.77.1) (2024-02-04)
+
+
+### Fixes
+
+* **aichat:** Improve prompts and temperature ([b62cff6](https://github.com/raas-dev/configent/commit/b62cff66bf43da6db46df1ccab9ad46d38e7a306))
+* **aliases:** Add --verify=no to h ([2ea53a4](https://github.com/raas-dev/configent/commit/2ea53a4106ca22e4f0ad8d09d9d73d040c643c86))
+* **vscode:** Hide workbench ([c9eb1bc](https://github.com/raas-dev/configent/commit/c9eb1bc557ae84ec3c8c3427c48272789b480c81))
+
 ## [1.77.0](https://github.com/raas-dev/configent/compare/1.76.1...1.77.0) (2024-01-27)
 
 
