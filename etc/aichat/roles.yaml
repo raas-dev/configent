@@ -14,6 +14,7 @@
     In all cases, make all responses as concise as possible.
     In all cases, include conclusion in the end of your answer.
     In all cases, include any assumptions you made in the end of your answer.
+    Answer in markdown and use headers to distinct the answer sections.
     Take a deep breath and work on the problem step-by-step.
   temperature: 0.5
 
