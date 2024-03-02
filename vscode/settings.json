@@ -202,5 +202,7 @@
   "workbench.activityBar.location": "hidden",
   "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k",
   "continue.telemetryEnabled": false,
-  "workbench.layoutControl.enabled": false
+  "workbench.layoutControl.enabled": false,
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.enableImages": true
 }
