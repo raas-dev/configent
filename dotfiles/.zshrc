@@ -95,7 +95,3 @@ bindkey -e
 chpwd() {
   ls
 }
-
-### Restore tmux ###############################################################
-
-# [ -n "$TMUX" ] || tmux attach -t "local" || tmux new -s "local"

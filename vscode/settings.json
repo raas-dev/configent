@@ -128,7 +128,18 @@
   "git.confirmSync": false,
   "security.workspace.trust.enabled": false,
   "telemetry.telemetryLevel": "off",
-  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.osx": "tmux-local",
+  "terminal.integrated.profiles.osx": {
+    "tmux-local": {
+      "path": "tmux",
+      "args": [
+        "new-session",
+        "-A",
+        "-s",
+        "local"
+      ]
+    }
+  },
   "shellformat.useEditorConfig": true,
   "editor.lineHeight": 15.5,
   "window.zoomLevel": 1,
