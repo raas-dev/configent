@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.78.0](https://github.com/raas-dev/configent/compare/1.77.2...1.78.0) (2024-03-02)
+
+
+### Features
+
+* **vscode:** Set tmux as default vscode terminal ([738bbcc](https://github.com/raas-dev/configent/commit/738bbccda28942be919c81462cb03c7b75228cd0))
+
+
+### Fixes
+
+* **aliases:** Remove majestic - unmaintained ([056771e](https://github.com/raas-dev/configent/commit/056771eaa1ec9ab75bb62109f9bceea97eda1d2f))
+* **colors:** Add support for tmux-256color ([2d0f41a](https://github.com/raas-dev/configent/commit/2d0f41ac6d60c44ee439d17e8158cd0372faf364))
+* **tmux:** Update 24-bit color settings ([42826c0](https://github.com/raas-dev/configent/commit/42826c0e7db1541e6bcd9c298f217f2120f97174))
+* **tmux:** Use tmux 3.3a - 3.4 prints garbage ([cd60749](https://github.com/raas-dev/configent/commit/cd607492f22dab1f694ca4847320c1bd19db602e))
+* **vscode:** Disable shell integration ([75a1a7e](https://github.com/raas-dev/configent/commit/75a1a7e87f02f20f391b7ae2a9a13d0d773b9c6d))
+* **vscode:** Integrated terminal settings ([939572f](https://github.com/raas-dev/configent/commit/939572f52d1b21505306ad74b31575bece7f726f))
+
 ### [1.77.2](https://github.com/raas-dev/configent/compare/1.77.1...1.77.2) (2024-02-10)
 
 
