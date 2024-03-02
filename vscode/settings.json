@@ -1,19 +1,52 @@
 {
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "other": "off",
+      "strings": "off"
+    },
+    "editor.wordWrap": "on"
+  },
+  "[shellscript]": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "breadcrumbs.enabled": false,
+  "codeium.enableCodeLens": false,
+  "continue.telemetryEnabled": false,
+  "cSpell.spellCheckOnlyWorkspaceFiles": true,
+  "debug.console.fontSize": 13,
+  "diffEditor.codeLens": true,
+  "dotnetAcquisitionExtension.enableTelemetry": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorWidth": 2,
   "editor.fontFamily": "TerminessTTF Nerd Font",
   "editor.fontSize": 17,
-  "workbench.colorTheme": "Ayu Dark Bordered",
-  "terminal.integrated.fontSize": 16,
-  "terminal.integrated.scrollback": 99999,
-  "markdown.preview.fontSize": 17,
-  "workbench.iconTheme": "ayu",
-  "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
-  "terminal.integrated.cursorBlinking": true,
-  "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
-  "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
-  "terminal.external.linuxExec": "xterm-256color",
-  "terminal.external.osxExec": "Terminal.app",
-  "terminal.integrated.copyOnSelection": true,
-  "debug.console.fontSize": 13,
+  "editor.guides.bracketPairs": "active",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.letterSpacing": -0.25,
+  "editor.lineHeight": 15.5,
+  "editor.minimap.enabled": true,
+  "editor.minimap.showSlider": "always",
   "editor.mouseWheelScrollSensitivity": 0.75,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
@@ -21,23 +54,91 @@
     80,
     100
   ],
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.semanticHighlighting.enabled": true,
   "editor.smoothScrolling": true,
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorWidth": 2,
-  "files.hotExit": "onExitAndWindowClose",
-  "workbench.list.smoothScrolling": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.tabSizing": "shrink",
-  "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "wordWrapColumn",
   "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.ejs": "json",
+    "*.sh": "shellscript",
+    "*.tpl": "json",
+    ".aliases": "shellscript"
+  },
+  "files.hotExit": "onExitAndWindowClose",
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k",
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.graph.minimap.enabled": false,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.telemetry.enabled": false,
+  "go.useLanguageServer": true,
+  "hediet.vscode-drawio.resizeImages": null,
+  "markdown.preview.fontSize": 17,
   "markdown.preview.lineHeight": 1.25,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "powershell.integratedConsole.showOnStartup": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "redhat.telemetry.enabled": false,
+  "rest-client.defaultHeaders": {
+    "Content-Type": "application/json",
+    "User-Agent": "debug"
+  },
+  "rest-client.enableTelemetry": false,
+  "rest-client.fontFamily": "TerminessTTF Nerd Font",
+  "rest-client.fontSize": 17,
+  "security.workspace.trust.enabled": false,
+  "semgrep.metrics": "off",
+  "shellformat.useEditorConfig": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.external.linuxExec": "xterm-256color",
+  "terminal.external.osxExec": "Terminal.app",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.defaultProfile.osx": "tmux-local",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.enableImages": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.minimumContrastRatio": 1,
+  "terminal.integrated.profiles.osx": {
+    "tmux-local": {
+      "args": [
+        "new-session",
+        "-A",
+        "-s",
+        "local"
+      ],
+      "path": "tmux"
+    }
+  },
+  "terminal.integrated.scrollback": 99999,
+  "terminal.integrated.tabs.enabled": false,
+  "todohighlight.keywords": [
+    "AP:"
+  ],
+  "trivy.fixedOnly": true,
+  "trivy.secretScanning": true,
+  "update.showReleaseNotes": false,
+  "window.closeWhenEmpty": true,
+  "window.commandCenter": false,
+  "window.newWindowDimensions": "inherit",
+  "window.openFoldersInNewWindow": "off",
+  "window.restoreFullscreen": true,
+  "window.zoomLevel": 1,
+  "workbench.activityBar.location": "hidden",
   "workbench.colorCustomizations": {
-    "terminal.background": "#090A14",
-    "terminal.foreground": "#D8D8D8",
-    "terminalCursor.background": "#D8D8D8",
-    "terminalCursor.foreground": "#D8D8D8",
     "terminal.ansiBlack": "#303030",
     "terminal.ansiBlue": "#7CAFC2",
     "terminal.ansiBrightBlack": "#585858",
@@ -53,105 +154,26 @@
     "terminal.ansiMagenta": "#BA8BAF",
     "terminal.ansiRed": "#AB4642",
     "terminal.ansiWhite": "#D8D8D8",
-    "terminal.ansiYellow": "#F7CA88"
+    "terminal.ansiYellow": "#F7CA88",
+    "terminal.background": "#090A14",
+    "terminal.foreground": "#D8D8D8",
+    "terminalCursor.background": "#D8D8D8",
+    "terminalCursor.foreground": "#D8D8D8"
   },
-  "explorer.confirmDragAndDrop": false,
-  "editor.minimap.showSlider": "always",
-  "editor.hideCursorInOverviewRuler": true,
-  "editor.scrollbar.vertical": "hidden",
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.minimap.enabled": true,
-  "editor.suggestSelection": "first",
-  "python.languageServer": "Pylance",
-  "window.openFoldersInNewWindow": "off",
-  "window.restoreFullscreen": true,
-  "window.closeWhenEmpty": true,
-  "window.newWindowDimensions": "inherit",
-  "go.useLanguageServer": true,
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.letterSpacing": -0.25,
-  "rest-client.fontSize": 17,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "rest-client.fontFamily": "TerminessTTF Nerd Font",
-  "rest-client.enableTelemetry": false,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "files.associations": {
-    ".aliases": "shellscript",
-    "*.ejs": "json",
-    "*.tpl": "json",
-    "*.sh": "shellscript"
-  },
-  "powershell.integratedConsole.showOnStartup": false,
+  "workbench.colorTheme": "Ayu Dark Bordered",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
-  "dotnetAcquisitionExtension.enableTelemetry": false,
-  "rest-client.defaultHeaders": {
-    "User-Agent": "debug",
-    "Content-Type": "application/json"
-  },
-  "editor.semanticHighlighting.enabled": true,
-  "gitlens.codeLens.recentChange.enabled": false,
-  "gitlens.codeLens.authors.enabled": false,
-  "terminal.integrated.tabs.enabled": false,
-  "redhat.telemetry.enabled": false,
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.wordWrap": "on",
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    }
-  },
-  "[shellscript]": {
-    "editor.detectIndentation": false,
-    "editor.tabSize": 2
-  },
-  "breadcrumbs.enabled": false,
-  "notebook.cellToolbarLocation": {
-    "default": "right",
-    "jupyter-notebook": "left"
-  },
-  "git.confirmSync": false,
-  "security.workspace.trust.enabled": false,
-  "telemetry.telemetryLevel": "off",
-  "terminal.integrated.defaultProfile.osx": "tmux-local",
-  "terminal.integrated.profiles.osx": {
-    "tmux-local": {
-      "path": "tmux",
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "local"
-      ]
-    }
-  },
-  "shellformat.useEditorConfig": true,
-  "editor.lineHeight": 15.5,
-  "window.zoomLevel": 1,
-  "gitlens.showWelcomeOnInstall": false,
-  "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.minimumContrastRatio": 1,
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "gitlens.showWhatsNewAfterUpgrades": false,
-  "git.enableSmartCommit": true,
-  "gitlens.telemetry.enabled": false,
-  "update.showReleaseNotes": false,
+  "workbench.iconTheme": "ayu",
+  "workbench.layoutControl.enabled": false,
+  "workbench.list.smoothScrolling": true,
+  "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
+  "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
+  "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
+  "workbench.startupEditor": "newUntitledFile",
   "yaml.customTags": [
     "!And",
     "!And sequence",
@@ -181,28 +203,6 @@
     "!Split",
     "!Split sequence"
   ],
-  "hediet.vscode-drawio.resizeImages": null,
-  "codeium.enableCodeLens": false,
-  "semgrep.metrics": "off",
-  "trivy.fixedOnly": true,
-  "trivy.secretScanning": true,
-  "todohighlight.keywords": [
-    "AP:"
-  ],
-  "git.openRepositoryInParentFolders": "always",
-  "gitlens.graph.minimap.enabled": false,
-  "cSpell.spellCheckOnlyWorkspaceFiles": true,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "diffEditor.codeLens": true,
-  "python.analysis.typeCheckingMode": "basic",
-  "window.commandCenter": false,
-  "workbench.editor.empty.hint": "hidden",
-  "workbench.activityBar.location": "hidden",
-  "gitlens.ai.experimental.openai.model": "gpt-3.5-turbo-16k",
-  "continue.telemetryEnabled": false,
-  "workbench.layoutControl.enabled": false,
-  "terminal.integrated.drawBoldTextInBrightColors": false,
-  "terminal.integrated.enableImages": true
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideStatusBar": false
 }
