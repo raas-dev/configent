@@ -1,6 +1,7 @@
 COLOR tty
 
 TERM ansi
+TERM alacritty
 TERM color_xterm
 TERM color-xterm
 TERM con132x25
@@ -59,14 +60,18 @@ TERM st
 TERM st-meta
 TERM st-256color
 TERM st-meta-256color
+TERM tmux
+TERM tmux-256color
 TERM vt100
 TERM xterm
 TERM xterm-new
 TERM xterm-16color
 TERM xterm-256color
+TERM xterm-256color-italic
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM xterm-kitty
 TERM xterm-termite
 
 EIGHTBIT 1
