@@ -5,34 +5,30 @@
 ### Aliases ####################################################################
 
 [alias]
-  # Shortcuts
   a = add -p
   b = branch -av
   bd = branch -d
   bda = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   bm = branch -M
-  c = !"git add -A && git commit -v"
+  c = !"git add -A && git commit"
   ca = !"git add -A && git commit --amend --reuse-message=HEAD"
-  cb = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-  co = checkout
-  in = pull --rebase
-  out = !"git push --set-upstream && git push --tags"
-  r = diff --name-only --diff-filter=U
-  rab = !"git add -A && git rebase --abort"
-  rac = !"git add -A && git rebase --continue"
-  rem = reset HEAD
-  s = !"git submodule update --init --recursive"
-  st = status -sb
-  t = tag -l
-
-  # Short and self-explanatory helpers
-  cloner = clone --recursive
+  co = checkout -p
   discard = reset --hard HEAD
-  incoming = !"git remote update -p; git log ..@{u}"
-  outgoing = log @{u}..
-  pullr = !"git pull; git submodule foreach git pull origin main"
+  f = fetch --all
+  i = pull --rebase --recurse-submodules
+  ig = !"git remote update -p; git log ..@{u}"
+  o = !"git push --set-upstream && git push --tags"
+  og = log @{u}..
   purge = clean -dfx
-  ready = rebase -i @{u}
+  r = remote -v
+  re = diff --name-only --diff-filter=U
+  rea = git rebase --abort
+  rec = !"git add -A && git rebase --continue"
+  rem = reset --mixed HEAD
+  rip = rebase -i @{upstream}
+  st = status -sb
+  sup = !"git submodule update --init --recursive"
+  t = tag -l
 
   # Show the diff between the latest commit and the current state
   d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -53,10 +49,13 @@
   ft = "!f() { git describe --always --contains $1; }; f"
 
   # Show git log as graph
-  lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
+  l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 
   # Remove the old tag with this name and tag the latest commit with it
   retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+  # Create a new tracking branch from origin and switch to it
+  s = "!s() { git fetch origin && git switch -c $1 --track origin/$1; }; s"
 
 ### Colors #####################################################################
 
