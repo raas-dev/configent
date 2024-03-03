@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.79.0](https://github.com/raas-dev/configent/compare/1.78.1...1.79.0) (2024-03-03)
+
+
+### Features
+
+* **git:** Alias s to status and j to switch branch ([06cc78e](https://github.com/raas-dev/configent/commit/06cc78e6750dba304aa89a5c3d19c70fb6de9228))
+* **git:** Renew git aliases ([ecd0f1e](https://github.com/raas-dev/configent/commit/ecd0f1e7f7a1ca670f226748d12a0bcf88e23a9d))
+
 ### [1.78.1](https://github.com/raas-dev/configent/compare/1.78.0...1.78.1) (2024-03-03)
 
 
