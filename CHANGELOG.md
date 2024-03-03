@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.78.1](https://github.com/raas-dev/configent/compare/1.78.0...1.78.1) (2024-03-03)
+
+
+### Fixes
+
+* **aliases:** Remove flyctl ([4af2593](https://github.com/raas-dev/configent/commit/4af259369a2ce21e47ec9b1912276d10fca1e2eb))
+* **vscode:** Fix Linux external terminal ([5f97714](https://github.com/raas-dev/configent/commit/5f97714b1896d96b0b0942f06cb7b811bad57e94))
+
 ## [1.78.0](https://github.com/raas-dev/configent/compare/1.77.2...1.78.0) (2024-03-02)
 
 
