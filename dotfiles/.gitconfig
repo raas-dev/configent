@@ -14,7 +14,7 @@
   ca = !"git add -A && git commit --amend --reuse-message=HEAD"
   co = checkout -p
   discard = reset --hard HEAD
-  f = fetch --all
+  f = fetch --all --tags
   i = pull --rebase --recurse-submodules
   ig = !"git remote update -p; git log ..@{u}"
   o = !"git push --set-upstream && git push --tags"
@@ -34,7 +34,7 @@
   d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
   # `git di $number` shows the diff between the state `$number` revisions ago
-  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+  di = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
 
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
@@ -49,13 +49,13 @@
   ft = "!f() { git describe --always --contains $1; }; f"
 
   # Create a new tracking branch from origin and switch to it
-  j = "!j() { git fetch origin && git switch -c $1 --track origin/$1; }; j"
+  j = "!f() { git fetch origin && git switch -c $1 --track origin/$1; }; f"
 
   # Show git log as graph
   l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 
-  # Remove the old tag with this name and tag the latest commit with it
-  retag = "!retag() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; retag"
+  # Remove existing tag (local and remote) and recreate it for HEAD
+  retag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
 
 ### Colors #####################################################################
 
