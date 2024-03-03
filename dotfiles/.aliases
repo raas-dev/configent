@@ -181,9 +181,6 @@ alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes'
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
 
-# CLI for fly.io
-alias fly='flyctl'
-
 # Display public IP
 alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
 alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
