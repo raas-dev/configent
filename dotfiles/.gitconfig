@@ -49,7 +49,7 @@
   ft = "!f() { git describe --always --contains $1; }; f"
 
   # Create a new tracking branch from origin and switch to it
-  j = "!g() { git fetch origin && git switch -c $1 --track origin/$1; }; g"
+  j = "!j() { git fetch origin && git switch -c $1 --track origin/$1; }; j"
 
   # Show git log as graph
   l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
