@@ -102,7 +102,7 @@
   "semgrep.metrics": "off",
   "shellformat.useEditorConfig": true,
   "telemetry.telemetryLevel": "off",
-  "terminal.external.linuxExec": "xterm-256color",
+  "terminal.external.linuxExec": "xterm",
   "terminal.external.osxExec": "Terminal.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
