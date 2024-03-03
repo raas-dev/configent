@@ -55,7 +55,7 @@
   l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 
   # Remove the old tag with this name and tag the latest commit with it
-  retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+  retag = "!retag() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; retag"
 
 ### Colors #####################################################################
 
