@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.79.1](https://github.com/raas-dev/configent/compare/1.79.0...1.79.1) (2024-03-04)
+
+
+### Fixes
+
+* **git:** Fix aliases st and s ([23b8d98](https://github.com/raas-dev/configent/commit/23b8d983494085b5c754038da178746e09a40348))
+* **git:** Make f fetch also tags ([5376ff3](https://github.com/raas-dev/configent/commit/5376ff3b62f53964938adad7c7b12c4c3eace224))
+
 ## [1.79.0](https://github.com/raas-dev/configent/compare/1.78.1...1.79.0) (2024-03-03)
 
 
