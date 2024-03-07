@@ -81,6 +81,8 @@
   "gitlens.telemetry.enabled": false,
   "go.useLanguageServer": true,
   "hediet.vscode-drawio.resizeImages": null,
+  "javascript.suggest.paths": false,
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "markdown.preview.fontSize": 17,
   "markdown.preview.lineHeight": 1.25,
   "notebook.cellToolbarLocation": {
@@ -124,12 +126,15 @@
     }
   },
   "terminal.integrated.scrollback": 99999,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.tabs.enabled": false,
   "todohighlight.keywords": [
     "AP:"
   ],
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
+  "typescript.suggest.paths": false,
   "update.showReleaseNotes": false,
   "window.closeWhenEmpty": true,
   "window.commandCenter": false,
@@ -204,7 +209,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "terminal.integrated.shellIntegration.enabled": false,
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never"
+  "zenMode.hideStatusBar": false
 }
