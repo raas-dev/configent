@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.80.0](https://github.com/raas-dev/configent/compare/1.79.1...1.80.0) (2024-03-10)
+
+
+### Features
+
+* **git:** Revisit and improve git aliases ([f7e3be9](https://github.com/raas-dev/configent/commit/f7e3be9dba95df1e94582dbf46ffe040bcd51963))
+* **vscode:** Update extensions ([d406e15](https://github.com/raas-dev/configent/commit/d406e150567e90577d5deee2c963f5b32593b6cc))
+
 ### [1.79.1](https://github.com/raas-dev/configent/compare/1.79.0...1.79.1) (2024-03-04)
 
 
