@@ -66,7 +66,8 @@
     "*.ejs": "json",
     "*.sh": "shellscript",
     "*.tpl": "json",
-    ".aliases": "shellscript"
+    ".aliases": "shellscript",
+    "*.plist": "plist"
   },
   "files.hotExit": "onExitAndWindowClose",
   "git.confirmSync": false,
