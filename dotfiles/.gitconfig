@@ -5,57 +5,59 @@
 ### Aliases ####################################################################
 
 [alias]
-  a = add -p
-  b = branch -av
-  bd = branch -d
-  bda = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-  bm = branch -M
-  c = !"git add -A && git commit"
-  ca = !"git add -A && git commit --amend --reuse-message=HEAD"
-  co = checkout -p
+  a = add --patch
+  b = branch --list --all --verbose
+  bd = branch --delete --force
+  bda = !"git branch --merged | grep -v '\\*' | xargs -n 1 git branch --delete"
+  bm = branch --move --force
+  c = commit
+  ca = !"git add --all && git commit"
+  cam = !"git add --all && git commit --amend --reuse-message=HEAD"
+  co = checkout --patch
   discard = reset --hard HEAD
   f = fetch --all --tags
   i = pull --rebase --recurse-submodules
-  ig = !"git remote update -p; git log ..@{u}"
+  ig = !"git remote update --prune; git log ..@{u}"
   o = !"git push --set-upstream && git push --tags"
   og = log @{u}..
-  purge = clean -dfx
-  r = remote -v
+  purge = clean -d -x --force
+  r = remote --verbose
   re = diff --name-only --diff-filter=U
-  rea = git rebase --abort
-  rec = !"git add -A && git rebase --continue"
+  rea = rebase --abort
+  rec = !"git add --all && git rebase --continue"
   rem = reset --mixed HEAD
-  rip = rebase -i @{upstream}
-  st = status -sb
+  rip = rebase --interactive @{upstream}
+  s = status --short
+  st = status --branch --show-stash
   sup = !"git submodule update --init --recursive"
-  t = tag -l
+  t = tag --list --sort=-version:refname
 
-  # Show the diff between the latest commit and the current state
-  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  # Show the diff between the latest commit and current
+  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
-  # `git di $number` shows the diff between the state `$number` revisions ago
+  # Show the diff between the $number revisions ago and current
   di = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
 
   # Find branches containing commit
-  fb = "!f() { git branch -a --contains $1; }; f"
+  fb = !"f() { git branch --all --contains $1; }; f"
 
   # Find commits by source code
-  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+  fc = !"f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
   # Find commits by commit message
-  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  fm = !"f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
   # Find tags containing commit
-  ft = "!f() { git describe --always --contains $1; }; f"
+  ft = !"f() { git tag --contains $1; }; f"
 
-  # Create a new tracking branch from origin and switch to it
-  s = "!f() { git fetch origin && git switch -c $1 --track origin/$1; }; f"
-
-  # Show git log as graph
+  # Show git log as a graph
   l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 
-  # Remove existing tag (local and remote) and recreate it for HEAD
-  retag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
+  # Remove a tag (local and remote) and recreate it for HEAD
+  retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
+
+  # Create or get a new tracking branch and switch to it
+  sw = !"f() { git fetch origin && git switch --create $1 --track origin/$1; }; f"
 
 ### Colors #####################################################################
 
@@ -85,6 +87,9 @@
   untracked = magenta bold
 
 ### General ####################################################################
+
+[advice]
+	statusHints = false
 
 [code]
   ignorecase = false
