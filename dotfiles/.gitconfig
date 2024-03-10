@@ -13,7 +13,7 @@
   c = commit
   ca = !"git add --all && git commit"
   cam = !"git add --all && git commit --amend --no-edit"
-  co = checkout --patch
+  co = checkout
   discard = reset --hard HEAD
   f = fetch --all --tags --prune
   i = pull --rebase --recurse-submodules
