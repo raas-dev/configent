@@ -41,17 +41,17 @@
   # Find branches containing commit
   fb = !"f() { git branch --all --contains $1; }; f"
 
-  # Find commits by source code
-  fc = !"f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
-
   # Find commits by commit message
-  fm = !"f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  fc = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad  %C(green)%d%C(reset) %s %C(cyan)<%an>' --decorate --date=short --grep=$1; }; f"
+
+  # Find commits by source code
+  fs = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad  %C(green)%d%C(reset) %s %C(cyan)<%an>' --decorate --date=short -S$1; }; f"
 
   # Find tags containing commit
   ft = !"f() { git tag --contains $1; }; f"
 
   # Show git log as a graph
-  l = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(green)%d%Creset %s %C(blue)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
+  l = log --graph --pretty=format:'%C(yellow)%h  %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
 
   # Remove a tag (local and remote) and recreate it for HEAD
   retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
