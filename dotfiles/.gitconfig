@@ -56,8 +56,8 @@
   # Remove a tag (local and remote) and recreate it for HEAD
   retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
 
-  # Create or get a new tracking branch and switch to it
-  sw = !"f() { git fetch origin && git switch --create $1 --track origin/$1; }; f"
+  # Switch to a remote tracking branch, create branch if it does not exist
+  sw = !"f() { git fetch origin && git switch --create $1 --track origin/$1 || git switch $1 || git switch --create $1; }; f"
 
 ### Colors #####################################################################
 
