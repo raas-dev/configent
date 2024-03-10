@@ -12,7 +12,7 @@
   bm = branch --move --force
   c = commit
   ca = !"git add --all && git commit"
-  cam = !"git add --all && git commit --amend --reuse-message=HEAD"
+  cam = !"git add --all && git commit --amend --no-edit"
   co = checkout --patch
   discard = reset --hard HEAD
   f = fetch --all --tags --prune
