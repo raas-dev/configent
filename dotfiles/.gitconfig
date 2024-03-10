@@ -15,7 +15,7 @@
   cam = !"git add --all && git commit --amend --reuse-message=HEAD"
   co = checkout --patch
   discard = reset --hard HEAD
-  f = fetch --all --tags
+  f = fetch --all --tags --prune
   i = pull --rebase --recurse-submodules
   ig = !"git remote update --prune; git log ..@{u}"
   o = !"git push --set-upstream && git push --tags"
