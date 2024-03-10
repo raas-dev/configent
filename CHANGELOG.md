@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.80.2](https://github.com/raas-dev/configent/compare/1.80.1...1.80.2) (2024-03-10)
+
+
+### Fixes
+
+* **git:** Alias co without patch ([c4c1c33](https://github.com/raas-dev/configent/commit/c4c1c3327ad9b556051b27120ebf3bf52820d90d))
+* **git:** Fix git sw ([779c570](https://github.com/raas-dev/configent/commit/779c5708d6e96e4a711fbbcbb4f81d15fa1a858f))
+* **git:** Remove fetch extra prune ([a309de7](https://github.com/raas-dev/configent/commit/a309de7f2a4379c7f849aac71cafa200c95039e2))
+* **macos:** Add check for script run on macOS only ([628996c](https://github.com/raas-dev/configent/commit/628996c8441c56181531d9724cf2487ce85b8763))
+* **macos:** Add script to setup ukelele layouts ([231438c](https://github.com/raas-dev/configent/commit/231438ca1f28fd403d6441e764af1f7d1e6343e3))
+* **macos:** Rename write defaults script ([4d48ac9](https://github.com/raas-dev/configent/commit/4d48ac9ac38f3d2bbaf88ad35cb51deaffa889c5))
+
 ### [1.80.1](https://github.com/raas-dev/configent/compare/1.80.0...1.80.1) (2024-03-10)
 
 
