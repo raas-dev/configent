@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# Warning! Run with caution, as it is very hard to reset settings to originals.
+
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Error: Not on macOS."
+  exit 1
+fi
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../../.backup/Library/Preferences"
+user_plist_path="$HOME/Library/Preferences/com.apple.HIToolbox.plist"
+
+### Backup user's keyboard configuration #######################################
+
+if [ ! -r "$backup_path/com.apple.HIToolbox.plist" ]; then
+  if [ -r "$user_plist_path" ]; then
+    mkdir -p "$backup_path"
+    cp -P "$user_plist_path" "$backup_path/com.apple.HIToolbox.plist"
+  fi
+fi
+
+### Set user keyboard configuration ############################################
+
+cp -P "$this_path/Library/Preferences/com.apple.HIToolbox.plist" \
+  "$user_plist_path"
