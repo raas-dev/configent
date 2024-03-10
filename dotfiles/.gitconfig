@@ -51,7 +51,7 @@
   ft = !"f() { git tag --contains $1; }; f"
 
   # Show git log as a graph
-  l = log --graph --pretty=format:'%C(yellow)%h  %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
+  l = log --graph --pretty=format:'%C(yellow)%h %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
 
   # Remove a tag (local and remote) and recreate it for HEAD
   retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
