@@ -8,7 +8,12 @@
 
 # Warning! Run with caution, as it is very hard to reset settings to originals.
 
-# Originally forked from https://mths.be/osx by Mathias Bynens
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Error: Not on macOS."
+  exit 1
+fi
+
+# Here below originally forked from https://mths.be/osx by Mathias Bynens
 # (https://github.com/mathiasbynens/dotfiles)
 
 # Close any open System Preferences panes, to prevent them from overriding
