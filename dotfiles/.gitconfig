@@ -42,10 +42,10 @@
   fb = !"f() { git branch --all --contains $1; }; f"
 
   # Find commits by commit message
-  fc = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad  %C(green)%d%C(reset) %s %C(cyan)<%an>' --decorate --date=short --grep=$1; }; f"
+  fc = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad %C(green)%d%C(reset) %s %C(cyan)<%an>' --date=short --grep=$1 --regexp-ignore-case; }; f"
 
   # Find commits by source code
-  fs = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad  %C(green)%d%C(reset) %s %C(cyan)<%an>' --decorate --date=short -S$1; }; f"
+  fs = !"f() { git log --pretty=format:'%C(yellow)%h  %C(blue)%ad %C(green)%d%C(reset) %s %C(cyan)<%an>' --date=short -S$1 --regexp-ignore-case; }; f"
 
   # Find tags containing commit
   ft = !"f() { git tag --contains $1; }; f"
