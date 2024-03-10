@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.80.1](https://github.com/raas-dev/configent/compare/1.80.0...1.80.1) (2024-03-10)
+
+
+### Fixes
+
+* **git:** Find aliases to ignore case ([65e3a00](https://github.com/raas-dev/configent/commit/65e3a00df2ef550f20d7dfbca7e36799f53af855))
+* **git:** git b list remote references ([ded87c3](https://github.com/raas-dev/configent/commit/ded87c3efe695f4783701c8868f3d9966c91e6c8))
+* **git:** git cam to no-edit ([1afd92a](https://github.com/raas-dev/configent/commit/1afd92a878743a3ce872a30ba218a33df81367f4))
+* **git:** git f to prune ([9435d77](https://github.com/raas-dev/configent/commit/9435d77dcc2012edc11a21daae9a0ecf9549abc3))
+* **git:** Similarize find aliases log format ([18e5ed2](https://github.com/raas-dev/configent/commit/18e5ed24a82f141470e194b5e34c39ed5453f49f))
+
 ## [1.80.0](https://github.com/raas-dev/configent/compare/1.79.1...1.80.0) (2024-03-10)
 
 
