@@ -15,7 +15,7 @@
   cam = !"git add --all && git commit --amend --no-edit"
   co = checkout
   discard = reset --hard HEAD
-  f = fetch --all --tags --prune
+  f = fetch --all --tags
   i = pull --rebase --recurse-submodules
   ig = !"git remote update --prune; git log ..@{u}"
   o = !"git push --set-upstream && git push --tags"
