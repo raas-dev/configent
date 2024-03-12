@@ -9,6 +9,7 @@
 !lesspipe.sh
 !nerdctl
 !podman
+!poetry
 !trans
 !xpanes
 !yarn
