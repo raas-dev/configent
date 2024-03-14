@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.81.0](https://github.com/raas-dev/configent/compare/1.80.2...1.81.0) (2024-03-14)
+
+
+### Features
+
+* **python:** Add poetry ([a70a5ae](https://github.com/raas-dev/configent/commit/a70a5ae417d92c55833c5b78024cc11c2d0b77f7))
+
+
+### Fixes
+
+* **git:** Tidy git l format ([9e2d0ce](https://github.com/raas-dev/configent/commit/9e2d0ce44b573eb7db2a3d147818da4d6b4d07ad))
+
 ### [1.80.2](https://github.com/raas-dev/configent/compare/1.80.1...1.80.2) (2024-03-10)
 
 
