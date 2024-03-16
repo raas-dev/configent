@@ -201,15 +201,16 @@ alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 
 # LLM: aichat
 ai() {
-  local role="chat"
   if [ -n "$1" ]; then
     if [ "$1" = "code" ]; then
-      role="code:$2"
+      aichat --model "claude:claude-3-sonnet-20240229" --role "$1:$2" \
+        --session "$(date +"%Y-%m-%d"):$1:$2"
     else
-      role="chat:$1"
+      aichat --role "chat:$1" --session "$(date +"%Y-%m-%d"):chat:$1"
     fi
+  else
+    aichat --role "chat" --session "$(date +"%Y-%m-%d"):chat"
   fi
-  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
 # LLM: shell-gpt
