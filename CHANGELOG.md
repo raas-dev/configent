@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.81.1](https://github.com/raas-dev/configent/compare/1.81.0...1.81.1) (2024-03-16)
+
+
+### Fixes
+
+* **aichat:** Use claude 3 for codegen ([4863682](https://github.com/raas-dev/configent/commit/48636826c03275aa9c031be9bbeb70081fa0a377))
+* **aliases:** Improve code prompt ([bdfea74](https://github.com/raas-dev/configent/commit/bdfea7408a885041820a816a686d53b5dcc4fa7b))
+* **aliases:** Remove shell-gpt over aichat ([202a14f](https://github.com/raas-dev/configent/commit/202a14f541b5d00052d52847810abe94a9343064))
+* **continue:** Move from py config to ts config ([d46f6e9](https://github.com/raas-dev/configent/commit/d46f6e91bb889bc9750b573611a56442cc149443))
+
 ## [1.81.0](https://github.com/raas-dev/configent/compare/1.80.2...1.81.0) (2024-03-14)
 
 
