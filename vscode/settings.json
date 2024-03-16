@@ -31,6 +31,7 @@
   },
   "breadcrumbs.enabled": false,
   "codeium.enableCodeLens": false,
+  "continue.enableTabAutocomplete": false,
   "continue.telemetryEnabled": false,
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
   "debug.console.fontSize": 13,
@@ -64,10 +65,10 @@
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
     "*.ejs": "json",
+    "*.plist": "plist",
     "*.sh": "shellscript",
     "*.tpl": "json",
-    ".aliases": "shellscript",
-    "*.plist": "plist"
+    ".aliases": "shellscript"
   },
   "files.hotExit": "onExitAndWindowClose",
   "git.confirmSync": false,
@@ -167,6 +168,7 @@
     "terminalCursor.foreground": "#D8D8D8"
   },
   "workbench.colorTheme": "Ayu Dark Bordered",
+  "workbench.editor.defaultBinaryEditor": "default",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.tabSizing": "shrink",
@@ -210,7 +212,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "workbench.editor.defaultBinaryEditor": "default",
-  "continue.enableTabAutocomplete": false
+  "zenMode.hideStatusBar": false
 }
