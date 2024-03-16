@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.82.0](https://github.com/raas-dev/configent/compare/1.81.1...1.82.0) (2024-03-16)
+
+
+### Features
+
+* **aliases:** Add guarddog via pipx ([7ca5962](https://github.com/raas-dev/configent/commit/7ca5962cf2d2c69e368bbb9520ed2c07c3d99bdf))
+* **aliases:** Alias s to open GPT coding session ([786f764](https://github.com/raas-dev/configent/commit/786f764f59221e3f4f2a35a21e65c589c61fb296))
+* **zsh:** Add CTRL+e for aichat shell integration ([011edba](https://github.com/raas-dev/configent/commit/011edbae7616f1cb115f53e3f1dfcfb96e26096b))
+
+
+### Fixes
+
+* **aliases:** Add open-interpreter defaults ([da210ed](https://github.com/raas-dev/configent/commit/da210edd16c3fe24327bf36403aef4dd42a5d157))
+* **aliases:** Fix open-interpreter args ([6741519](https://github.com/raas-dev/configent/commit/674151956ef4fd25a923839962668392558f596c))
+* **aliases:** Fix open-interpreter context length ([9c4537b](https://github.com/raas-dev/configent/commit/9c4537b136233883f7f4e5db756066823af29992))
+* **aliases:** Remove unused glances modules ([e034834](https://github.com/raas-dev/configent/commit/e034834c7160bda44d0dab95cfbbe574b9c354d2))
+
 ### [1.81.1](https://github.com/raas-dev/configent/compare/1.81.0...1.81.1) (2024-03-16)
 
 
