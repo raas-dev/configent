@@ -123,7 +123,7 @@ alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
 alias r='exec $SHELL'
-alias s='sgpt_shell'
+alias s='aichat --execute'
 alias t='taillog'
 alias u='diskonaut'
 alias v='limactl'
@@ -211,15 +211,6 @@ ai() {
   else
     aichat --role "chat" --session "$(date +"%Y-%m-%d"):chat"
   fi
-}
-
-# LLM: shell-gpt
-sgpt() {
-  pipx run --spec shell-gpt sgpt --model gpt-4-turbo-preview --no-cache "$@"
-}
-
-sgpt_shell() {
-  sgpt --temperature 0 --shell --chat "$(date +"%Y-%m-%d"):term$TMUX_PANE" "$*"
 }
 
 # Generic docker build and run
