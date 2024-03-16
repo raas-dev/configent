@@ -83,6 +83,20 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 # https://zsh.sourceforge.io/Guide/zshguide04.html
 bindkey -e
 
+### aichat shell integration ###################################################
+
+_aichat_zsh() {
+  if [ -n "$BUFFER" ]; then
+    _input="$BUFFER"
+    BUFFER="$_input⌛"
+    zle -I && zle redisplay
+    BUFFER=$(aichat --execute "$_input")
+    zle end-of-line
+  fi
+}
+zle -N _aichat_zsh
+bindkey '^E' _aichat_zsh # CTRL + e
+
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
