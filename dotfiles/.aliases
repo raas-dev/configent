@@ -433,6 +433,9 @@ alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 # OpenAI CLI
 alias openai='pipx run openai'
 
+# GuardDog
+alias guarddog='pipx run guarddog'
+
 ### Latest versions of global Node.js command-line tools #######################
 
 # Azure Functions CLI
