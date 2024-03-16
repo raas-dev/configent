@@ -123,7 +123,7 @@ alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
 alias r='exec $SHELL'
-alias s='aichat --execute'
+alias s='ai_code'
 alias t='taillog'
 alias u='diskonaut'
 alias v='limactl'
@@ -201,16 +201,16 @@ alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 
 # aichat
 ai() {
-  if [ -n "$1" ]; then
-    if [ "$1" = "code" ]; then
-      # TODO: --model "claude:claude-3-sonnet-20240229"
-      aichat --role "$1:$2" --session "$(date +"%Y-%m-%d"):$1:$2"
-    else
-      aichat --role "chat:$1" --session "$(date +"%Y-%m-%d"):chat:$1"
-    fi
-  else
-    aichat --role "chat" --session "$(date +"%Y-%m-%d"):chat"
-  fi
+  role="chat"
+  [ -n "$1" ] && role="$role:$1"
+  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
+}
+
+ai_code() {
+  lang="sh"
+  [ -n "$1" ] && lang="$1"
+  aichat --role "code:$lang" --session "$(date +"%Y-%m-%d"):code:$lang"
+  # TODO: --model "claude:claude-3-sonnet-20240229"
 }
 
 # open-interpreter (https://docs.openinterpreter.com)
