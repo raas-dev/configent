@@ -406,12 +406,6 @@ codeclear() {
 # Cross-platform real-time monitoring
 alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'
 
-# General media downloader
-alias you-get='pipx run you-get'
-
-# Simplenote in terminal (set SN_USERNAME and SN_PASSWORD in ~/.rclocal)
-alias sncli='pipx run sncli'
-
 # Advanced Python REPL
 alias ptpython='pipx run ptpython'
 
@@ -421,20 +415,26 @@ alias euporie='pipx run euporie'
 # Multitool for tabular data in terminal
 alias vd='pipx run --pip-args openpyxl visidata'
 
+# Simplenote in terminal (set SN_USERNAME and SN_PASSWORD in ~/.rclocal)
+alias sncli='pipx run sncli'
+
 # Playwright
 alias playwright='pipx run playwright'
 
+# General media downloader
+alias you-get='pipx run you-get'
+
 # Checkov
 alias checkov='pipx run checkov'
+
+# GuardDog
+alias guarddog='pipx run guarddog'
 
 # Huggingface CLI
 alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 
 # OpenAI CLI
 alias openai='pipx run openai'
-
-# GuardDog
-alias guarddog='pipx run guarddog'
 
 ### Latest versions of global Node.js command-line tools #######################
 
