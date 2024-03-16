@@ -203,8 +203,8 @@ alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 ai() {
   if [ -n "$1" ]; then
     if [ "$1" = "code" ]; then
-      aichat --model "claude:claude-3-sonnet-20240229" --role "$1:$2" \
-        --session "$(date +"%Y-%m-%d"):$1:$2"
+      # TODO: --model "claude:claude-3-sonnet-20240229"
+      aichat --role "$1:$2" --session "$(date +"%Y-%m-%d"):$1:$2"
     else
       aichat --role "chat:$1" --session "$(date +"%Y-%m-%d"):chat:$1"
     fi
