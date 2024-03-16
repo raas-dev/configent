@@ -404,7 +404,7 @@ codeclear() {
 ### Latest versions of Python command-line tools ###############################
 
 # Cross-platform real-time monitoring
-alias glances='pipx run "glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]"'
+alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 
 # Advanced Python REPL
 alias ptpython='pipx run ptpython'
