@@ -213,13 +213,19 @@ ai_code() {
   # TODO: --model "claude:claude-3-sonnet-20240229"
 }
 
-# TODO: Experimental: Using fabric's patterns as a system role
+# create aliases for the prompt library
 ai_task() {
-  pattern="$1"
+  task="$1"
   shift
-  aichat --role "task" --file "$PROMPTS_PATH/$pattern/system.md" -- "INPUT: $*"
+  aichat --role "task" --file "$PROMPTS_PATH/$task/system.md" -- "INPUT: $*"
 }
-alias improve_prompt="ai_task improve_prompt"
+for dir in "$PROMPTS_PATH"/*; do
+  if [ -d "$dir" ]; then
+    task="$(basename "$dir")"
+    [ "$task" = "ai" ] && continue  # skip overriding 'ai()'
+    alias "$task"="ai_task $task"
+  fi
+done
 
 # open-interpreter (https://docs.openinterpreter.com)
 interpreter() {
