@@ -1,0 +1,13 @@
+### OPEN INTERPRETER PROFILE
+
+disable_telemetry: true
+
+local: false
+
+llm:
+  model: gpt-4-turbo-preview
+  llm_supports_functions: true
+  context_window: 16000
+  temperature: 0
+
+version: 0.2.1  # Profile version (do not modify)

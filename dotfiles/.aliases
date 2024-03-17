@@ -134,7 +134,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='interpreter'
+alias _="interpreter --profile openai.yaml --api_key=$OPENAI_API_KEY"
 
 ### watch ######################################################################
 
@@ -245,13 +245,10 @@ interpreter() {
     "$port_args" \
     "$env_file" \
     "$env_args" \
-    --env "OPENAI_API_KEY=$OPENAI_API_KEY" \
     --volume "$PWD:$PWD" \
     --workdir "$PWD" \
     "$image" \
-      --disable_telemetry \
-      --model gpt-4-turbo-preview --context_window 16000 \
-      --llm_supports_functions "$*"
+      --disable_telemetry "$*"
 }
 
 # Generic docker build and run

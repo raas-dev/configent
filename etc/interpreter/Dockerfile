@@ -1,7 +1,7 @@
 
 FROM python:3.11-slim-bookworm
 
-ARG ADD_DEB_PACKAGES="bash gcc python3-dev"
+ARG ADD_DEB_PACKAGES="gcc python3-dev"
 
 # hadolint ignore=DL3008
 RUN apt-get update && \
@@ -14,6 +14,8 @@ RUN (cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
 
 # hadolint ignore=DL3013
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel open-interpreter
+
+COPY profiles /root/.config/open-interpreter/profiles
 
 ENTRYPOINT ["interpreter"]
 CMD ["--disable_telemetry"]
