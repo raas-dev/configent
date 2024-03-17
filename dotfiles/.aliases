@@ -213,6 +213,16 @@ ai_code() {
   # TODO: --model "claude:claude-3-sonnet-20240229"
 }
 
+# TODO: Experimental: Using fabric's patterns as a system role
+ai_task() {
+  pattern="$1"
+  shift
+  aichat --role "task" \
+    --file "$HOME/.config/configent/fabric/patterns/$pattern/system.md" \
+    -- "INPUT: $*"
+}
+alias improve_prompt="ai_task improve_prompt"
+
 # open-interpreter (https://docs.openinterpreter.com)
 interpreter() {
   pipx run --spec open-interpreter interpreter --disable_telemetry \
