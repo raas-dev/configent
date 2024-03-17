@@ -238,12 +238,9 @@ interpreter() {
     local env_args="--env PORT=$PORT"
   fi
 
-  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
-
   eval docker run --init -it --name "$name" --rm \
     --cap-drop ALL \
     "$port_args" \
-    "$env_file" \
     "$env_args" \
     --volume "$PWD:$PWD" \
     --workdir "$PWD" \
