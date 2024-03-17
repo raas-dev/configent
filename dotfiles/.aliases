@@ -227,11 +227,31 @@ for dir in "$PROMPTS_PATH"/*; do
   fi
 done
 
-# open-interpreter (https://docs.openinterpreter.com)
+# open-interpreter (https://docs.openinterpreter.com/integrations/docker)
 interpreter() {
-  pipx run --spec open-interpreter interpreter --disable_telemetry \
-    --model gpt-4-turbo-preview --context_window 16000 --temperature 0 \
-    --llm_supports_functions "$@"
+  local image="interpreter"
+  local name="$image-${PWD##*/}"
+  docker build --pull --tag "$image" ~/.config/configent/interpreter || return
+
+  if [ -n "$PORT" ]; then
+    local port_args="--publish 127.0.0.1:$PORT:$PORT"
+    local env_args="--env PORT=$PORT"
+  fi
+
+  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
+
+  eval docker run --init -it --name "$name" --rm \
+    --cap-drop ALL \
+    "$port_args" \
+    "$env_file" \
+    "$env_args" \
+    --env "OPENAI_API_KEY=$OPENAI_API_KEY" \
+    --volume "$PWD:$PWD" \
+    --workdir "$PWD" \
+    "$image" \
+      --disable_telemetry \
+      --model gpt-4-turbo-preview --context_window 16000 \
+      --llm_supports_functions "$*"
 }
 
 # Generic docker build and run
