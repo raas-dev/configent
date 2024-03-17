@@ -217,9 +217,7 @@ ai_code() {
 ai_task() {
   pattern="$1"
   shift
-  aichat --role "task" \
-    --file "$HOME/.config/configent/fabric/patterns/$pattern/system.md" \
-    -- "INPUT: $*"
+  aichat --role "task" --file "$PROMPTS_PATH/$pattern/system.md" -- "INPUT: $*"
 }
 alias improve_prompt="ai_task improve_prompt"
 
