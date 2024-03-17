@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.83.0](https://github.com/raas-dev/configent/compare/1.82.0...1.83.0) (2024-03-17)
+
+
+### Features
+
+* **aliases:** Create aliases for the prompt library ([a8dba8c](https://github.com/raas-dev/configent/commit/a8dba8c132421d38426a4df4862533d04cfdf078))
+* **interpreter:** Run open-interpreter in docker ([2145ced](https://github.com/raas-dev/configent/commit/2145ced67b20514acfc9d05bbafb2194e98b5b10))
+
+
+### Fixes
+
+* **interpreter:** Add open-interpreter profile ([0f4f1b6](https://github.com/raas-dev/configent/commit/0f4f1b6e35761855b330d5cfb9a575225fcc3c7c))
+
 ## [1.82.0](https://github.com/raas-dev/configent/compare/1.81.1...1.82.0) (2024-03-16)
 
 
