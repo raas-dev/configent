@@ -213,5 +213,7 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "gitlens.plusFeatures.enabled": false
+  "gitlens.plusFeatures.enabled": false,
+  "activitusbar.toggleSidebar": false,
+  "activitusbar.activeColour": "#7B9050"
 }
