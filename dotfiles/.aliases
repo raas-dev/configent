@@ -583,6 +583,7 @@ nixery() {
 
 # appsec
 alias grype='n grype' # rw, write report
+alias syft='n syft' # rw, write sbom
 
 # sast
 alias terrascan='nixery terrascan'
