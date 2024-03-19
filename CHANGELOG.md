@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.84.0](https://github.com/raas-dev/configent/compare/1.83.0...1.84.0) (2024-03-19)
+
+
+### Features
+
+* **aliases:** Add syft via n ([06d2f4a](https://github.com/raas-dev/configent/commit/06d2f4a1ffc42a41a18c3822dc34c58a05def729))
+
+
+### Fixes
+
+* **aliases:** Remove interpreter env file ([1ef4abd](https://github.com/raas-dev/configent/commit/1ef4abd90e806c31592b44b57348169c404e4d54))
+* **aliases:** Run grype via n as rw to write report ([a60b322](https://github.com/raas-dev/configent/commit/a60b3224a31d05a8826145f36d51cfe13744ffeb))
+* **git:** Add alias ig to list git ignores ([b9e453b](https://github.com/raas-dev/configent/commit/b9e453b46bc4c7518050ea2bfe9f81acdeb4e058))
+* **vscode:** Keep sidebar open ([3cfb4f1](https://github.com/raas-dev/configent/commit/3cfb4f16606399c7f594c8919e0ef4eef158516e))
+* **vscode:** Remove unused kubescape ext ([538a0f4](https://github.com/raas-dev/configent/commit/538a0f43e7e1d14aeb30e251baf96e8eda66a2ff))
+
 ## [1.83.0](https://github.com/raas-dev/configent/compare/1.82.0...1.83.0) (2024-03-17)
 
 
