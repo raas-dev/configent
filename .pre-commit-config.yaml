@@ -2,7 +2,10 @@
 #   pre-commit install --hook-type pre-commit
 #   pre-commit install --hook-type commit-msg
 #
-# (optional) test all hooks:
+# (optional) test hooks for staged files:
+#   pre-commit run --verbose
+#
+# (optional) test hooks for all files:
 #   pre-commit run --all-files --verbose
 
 default_stages: [commit]
