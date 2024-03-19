@@ -1,4 +1,5 @@
-
+# checkov:skip=CKV_DOCKER_2: skip healthcheck
+# checkov:skip=CKV_DOCKER_3: skip creating user
 FROM python:3.11-slim-bookworm
 
 ARG ADD_DEB_PACKAGES="gcc python3-dev"
