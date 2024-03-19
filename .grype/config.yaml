@@ -1,0 +1,16 @@
+# Usage:
+#   grype dir:.
+
+name: configent
+
+check-for-app-update: false
+
+exclude:
+  - ./.git
+  - ./.backup
+  - ./vscode/globalStorage
+  - ./vscode/History
+  - ./vscode/sync
+  - ./vscode/workspaceStorage
+
+fail-on-severity: high
