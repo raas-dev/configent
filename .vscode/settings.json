@@ -32,6 +32,7 @@
     "gcloud",
     "grype",
     "hadolint",
+    "HEALTHCHECK",
     "hediet",
     "ipynb",
     "krew",
@@ -73,8 +74,10 @@
     "tfsec",
     "Topgrade",
     "trivy",
+    "trivyignore",
     "vmname",
     "vsintellicode",
+    "vuln",
     "Xorg",
     "zdharma"
   ]
