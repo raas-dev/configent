@@ -582,7 +582,7 @@ nixery() {
 # nixery: read-only filesystem
 
 # appsec
-alias grype='nixery grype'
+alias grype='n grype' # rw, write report
 
 # sast
 alias terrascan='nixery terrascan'
