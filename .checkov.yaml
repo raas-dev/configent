@@ -5,6 +5,7 @@ enable-secret-scan-all-files: true
 framework:
   - all
 skip-path:
+  - .git
   - .backup
   - vscode/globalStorage
   - vscode/History
