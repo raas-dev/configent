@@ -1,5 +1,5 @@
-# usage:
-# checkov -d .
+# Usage:
+#   checkov -d .
 
 block-list-secret-scan: []
 branch: master
