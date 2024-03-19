@@ -17,9 +17,10 @@
   discard = reset --hard HEAD
   f = fetch --all --tags
   i = pull --rebase --recurse-submodules
-  ig = !"git remote update --prune; git log ..@{u}"
+  ig = ls-files --others --ignored --exclude-standard --directory
+  in = !"git remote update --prune; git log ..@{u}"
   o = !"git push --set-upstream && git push --tags"
-  og = log @{u}..
+  out = log @{u}..
   purge = clean -d -x --force
   r = remote --verbose
   re = diff --name-only --diff-filter=U
