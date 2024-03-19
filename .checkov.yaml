@@ -1,7 +1,6 @@
 # Usage:
 #   checkov -d .
 
-block-list-secret-scan: []
 branch: master
 download-external-modules: false
 evaluate-variables: true
@@ -9,9 +8,6 @@ enable-secret-scan-all-files: true
 external-modules-download-path: .external_modules
 framework:
   - all
-mask: []
-secrets-history-timeout: 12h
-secrets-scan-file-type: []
 skip-path:
 - .backup
 - vscode/globalStorage
