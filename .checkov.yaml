@@ -5,8 +5,9 @@ directory:
 download-external-modules: false
 evaluate-variables: true
 external-modules-download-path: .external_modules
+framework:
+  - all
 mask: []
-quiet: true
 secrets-history-timeout: 12h
 secrets-scan-file-type: []
 skip-path:
@@ -16,3 +17,4 @@ skip-path:
 - vscode/sync
 - vscode/workspaceStorage
 summary-position: top
+quiet: true
