@@ -5,6 +5,7 @@ exit-code: 1
 
 scan:
   skip-dirs:
+    - .git
     - .backup
     - vscode/globalStorage
     - vscode/History
