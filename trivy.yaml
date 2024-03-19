@@ -1,0 +1,23 @@
+# Usage:
+#   trivy fs .
+
+exit-code: 1
+
+scan:
+  skip-dirs:
+    - vscode/History
+    - vscode/globalStorage
+  skip-files:
+    # inline trivyignore does not work
+    # see: https://github.com/aquasecurity/trivy/issues/2961
+    - etc/interpreter/Dockerfile
+    - etc/nix/Dockerfile
+    # AVD-DS-0001 - ‘:latest’ tag used
+    # AVD-DS-0002 - Image user should not be ‘root’
+    # AVD-DS-0017 - ‘RUN update’ instruction alone
+    # AVD-DS-0026 - No HEALTHCHECK defined
+  scanners:
+    - vuln
+    - config
+    - secret
+    - license
