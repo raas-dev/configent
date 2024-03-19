@@ -1,18 +1,13 @@
 # Usage:
 #   checkov -d .
 
-branch: master
-download-external-modules: false
-evaluate-variables: true
 enable-secret-scan-all-files: true
-external-modules-download-path: .external_modules
 framework:
   - all
 skip-path:
-- .backup
-- vscode/globalStorage
-- vscode/History
-- vscode/sync
-- vscode/workspaceStorage
-summary-position: top
+  - .backup
+  - vscode/globalStorage
+  - vscode/History
+  - vscode/sync
+  - vscode/workspaceStorage
 quiet: true
