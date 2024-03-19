@@ -1,7 +1,8 @@
+# usage:
+# checkov -d . --enable-secret-scan-all-files
+
 block-list-secret-scan: []
 branch: master
-directory:
-- .
 download-external-modules: false
 evaluate-variables: true
 external-modules-download-path: .external_modules
