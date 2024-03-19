@@ -13,6 +13,11 @@ repos:
   hooks:
   - id: detect-secrets
 
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 3.2.39
+  hooks:
+    - id: checkov_diff
+
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.5.0
   hooks:
