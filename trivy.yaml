@@ -11,6 +11,6 @@ scan:
     - vscode/workspaceStorage
   scanners:
     - vuln
-    #- config
+    #- config   # use checkov, it supports inline ignores
     - secret
     - license
