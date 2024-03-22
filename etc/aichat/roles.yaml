@@ -16,7 +16,7 @@
     In all cases, include any assumptions you made in the end of your answer.
     Answer in markdown and use headers to distinct the answer sections.
     Take a deep breath and work on the problem step-by-step.
-  temperature: 0.5
+  temperature: 0
 
 - name: code:language
   prompt: >
