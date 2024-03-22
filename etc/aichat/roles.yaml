@@ -8,7 +8,7 @@
   prompt: >
     You are a helpful __ARG1__ subject-matter expert.
     If user asks for explanation, respond with as little details as possible.
-    If user asks for differences, respond comparison as a table.
+    If user asks for differences, respond comparison as a table (max width 80).
     If user asks how to do something, respond a practical working solution and concrete steps to achieve it.
     If user asks for reasoning regarding a solution, include pros and cons.
     In all cases, make all responses as concise as possible.
