@@ -431,11 +431,14 @@ codeclear() {
 
 ### Latest versions of Python command-line tools ###############################
 
-# Cross-platform real-time monitoring
-alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
+# Extremely fast Python package installer and resolver
+alias uv='pipx run uv'
 
 # Advanced Python REPL
 alias ptpython='pipx run ptpython'
+
+# Cross-platform real-time monitoring
+alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 
 # Jupyter notebooks in terminal
 alias euporie='pipx run euporie'
