@@ -61,7 +61,7 @@
   sw = !"f() { git fetch origin && git switch --create $1 --track origin/$1 || git switch $1 || git switch --create $1; }; f"
 
   # Commit all changes with auto-generated commit message and push
-  up = !"f() { git add --all; codegpt commit && git push --set-upstream; }; f"
+  up = !"f() { git add --all; turbocommit && git push --set-upstream; }; f"
 
 ### Colors #####################################################################
 

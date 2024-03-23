@@ -130,3 +130,13 @@ fi
 mkdir -p "$HOME/.config/codegpt"
 ln -sfnv "$config_path/codegpt/.codegpt.yaml" \
   "$HOME/.config/codegpt/.codegpt.yaml"
+
+### Symlink turbocommit config #################################################
+
+if [ ! -r "$backup_path/.turbocommit.yaml" ]; then
+  if [ -r "$HOME/.turbocommit.yaml" ]; then
+    mkdir -p "$backup_path"
+    cp -P "$HOME/.turbocommit.yaml" "$backup_path/.turbocommit.yaml"
+  fi
+fi
+ln -sfnv "$config_path/turbocommit/.turbocommit.yaml" "$HOME/.turbocommit.yaml"
