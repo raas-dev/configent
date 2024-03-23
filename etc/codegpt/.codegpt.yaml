@@ -1,0 +1,23 @@
+git:
+    diff_unified: 3
+    exclude_list: ""
+    template_file: ""
+    template_string: ""
+openai:
+    api_key: ""
+    api_version: ""
+    base_url: ""
+    headers: ""
+    max_tokens: 300
+    model: gpt-3.5-turbo
+    model_name: ""
+    org_id: ""
+    provider: openai
+    proxy: ""
+    skip_verify: false
+    socks: ""
+    temperature: 0
+    timeout: 10s
+output:
+    file: ""
+    lang: en
