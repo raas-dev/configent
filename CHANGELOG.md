@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.84.1](https://github.com/raas-dev/configent/compare/1.84.0...1.84.1) (2024-03-23)
+
+
+### Fixes
+
+* **aichat:** Lower temperature ([d902684](https://github.com/raas-dev/configent/commit/d902684c272c4f2ead176b7481fec3084e37edb2))
+* **aichat:** Prompt attemp to limit markdown width ([ca638e3](https://github.com/raas-dev/configent/commit/ca638e39074d6964f30d03270fcd3c713683a0c2))
+* **rust:** Lock kalker dependencies ([5a96db8](https://github.com/raas-dev/configent/commit/5a96db8a89c88a06754ffcac86aafcfb42a07948))
+
 ## [1.84.0](https://github.com/raas-dev/configent/compare/1.83.0...1.84.0) (2024-03-19)
 
 
