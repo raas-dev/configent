@@ -19,6 +19,7 @@
   i = pull --rebase --recurse-submodules
   ig = ls-files --others --ignored --exclude-standard --directory
   in = !"git remote update --prune; git log ..@{u}"
+  l = log --graph --pretty=format:'%C(yellow)%h %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
   o = !"git push --set-upstream && git push --tags"
   out = log @{u}..
   purge = clean -d -x --force
@@ -50,9 +51,6 @@
 
   # Find tags containing commit
   ft = !"f() { git tag --contains $1; }; f"
-
-  # Show git log as a graph
-  l = log --graph --pretty=format:'%C(yellow)%h %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
 
   # Remove a tag (local and remote) and recreate it for HEAD
   retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
