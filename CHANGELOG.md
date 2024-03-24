@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.85.0](https://github.com/raas-dev/configent/compare/1.84.1...1.85.0) (2024-03-24)
+
+
+### Features
+
+* **gpt:** Add codegpt for creating commit msgs ([83ef374](https://github.com/raas-dev/configent/commit/83ef3746995225696baff22d9328b58cba5242bf))
+* **gpt:** Add turbocommit ([0ae24fc](https://github.com/raas-dev/configent/commit/0ae24fc92ef6926f012de2e813468dc2e09d6ce7))
+
+
+### Fixes
+
+* **aliases:** Add uv via pipx ([9414d71](https://github.com/raas-dev/configent/commit/9414d71a196cc81729027f0acdc79b3f2ec76530))
+* **turbocommit:** Improve prompt ([6232a6f](https://github.com/raas-dev/configent/commit/6232a6fd60eb22dc9a9e347428a1bf24a6f90a78))
+
 ### [1.84.1](https://github.com/raas-dev/configent/compare/1.84.0...1.84.1) (2024-03-23)
 
 
