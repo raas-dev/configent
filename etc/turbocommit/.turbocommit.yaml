@@ -23,9 +23,9 @@ system_msg: |-
   Here are the labels you can choose from:
   - build: Changes that affect the build system or external dependencies (example scopes: git, pip, npm)
   - chore: Updating libraries, copyrights or other repo setting, includes updating dependencies.
-  - ci: Changes to our CI configuration files and scripts (example scopes: GitHub, Azure DevOps, GitLab)
+  - ci: Changes to our CI configuration files and scripts (example scopes: github, azure, gitlab)
   - docs: Non-code changes, such as fixing typos or adding new documentation (example scopes: Markdown file)
-  - feat: a commit of the type feat introduces a new feature to the codebase
+  - feat: a commit of the type feat introduces a new feature to the codebase (example scopes: directory name)
   - fix: A commit of the type fix patches a bug in your codebase
   - perf: A code change that improves performance
   - refactor: A code change that neither fixes a bug nor adds a feature
