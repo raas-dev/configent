@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.85.1](https://github.com/raas-dev/configent/compare/1.85.0...1.85.1) (2024-03-30)
+
+
+### Fixes
+
+* **aichat:** Add specialized roles ([4984ff0](https://github.com/raas-dev/configent/commit/4984ff04a5a15cdb7da5c7ae7ebb4a92b7086989))
+* **turbocommit:** Improve prompt ([96d16fe](https://github.com/raas-dev/configent/commit/96d16fe51de2218540785ff0b4b37f76e42002be))
+* **turbocommit:** Improve prompt ([c22d7fe](https://github.com/raas-dev/configent/commit/c22d7febf30c748a26571c6bfb0474d9ea2032b0))
+* **turbocommit:** Improve prompt ([d64790f](https://github.com/raas-dev/configent/commit/d64790f8ed87d08a93a0e786c2d89b8759ac8e30))
+
 ## [1.85.0](https://github.com/raas-dev/configent/compare/1.84.1...1.85.0) (2024-03-24)
 
 
