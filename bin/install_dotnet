@@ -9,6 +9,9 @@
 # shellcheck disable=SC1091  # do not expect input files
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
 
 ### asdf #######################################################################
 
@@ -16,11 +19,24 @@ export ASDF_DIR="$HOME/.asdf"
 git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 . "$ASDF_DIR/asdf.sh"
 
+### dotnet tools ###############################################################
+
 asdf plugin add dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 asdf install dotnet
 
-### dotnet tools ###############################################################
+### Powershell #################################################################
 
 dotnet tool install --global powershell
 #dotnet tool update --global powershell
+
+# backup and symlink powershell config dir
+if [ ! -d "$backup_path/.config/powershell" ] &&
+  [ -d "$HOME/.config/powershell" ]; then
+  mkdir -p "$backup_path/.config"
+  cp -RP "$HOME/.config/powershell" "$backup_path/.config/powershell"
+fi
+
+mkdir -p "$HOME/.config"
+rm -rf "$HOME/.config/powershell"
+ln -sfnv "$config_path/powershell" "$HOME/.config/powershell"
