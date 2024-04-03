@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.86.0](https://github.com/raas-dev/configent/compare/1.85.1...1.86.0) (2024-04-03)
+
+
+### Features
+
+* **gpt:** Remove codegpt due to lack of models ([37f589f](https://github.com/raas-dev/configent/commit/37f589f30a1640d9d5790e788f08a3892587628a))
+* **pwsh:** Add starship to powershell ([b1a5c60](https://github.com/raas-dev/configent/commit/b1a5c601b0c13677aacac96933d8db26ecfdb7af))
+* **python:** Update python ([51579e8](https://github.com/raas-dev/configent/commit/51579e803a12d0429db3b29bdbebbc65a066a8a2))
+* **vscode:** Add pyright extension ([68253c0](https://github.com/raas-dev/configent/commit/68253c07daed7e9bfdc94de3df944202c6d66524))
+
 ### [1.85.1](https://github.com/raas-dev/configent/compare/1.85.0...1.85.1) (2024-03-30)
 
 
