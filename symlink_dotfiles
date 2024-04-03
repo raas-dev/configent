@@ -118,19 +118,6 @@ fi
 mkdir -p "$HOME/.config/aichat"
 ln -sfnv "$config_path/aichat/roles.yaml" "$HOME/.config/aichat/roles.yaml"
 
-### Symlink codegpt config #####################################################
-
-if [ ! -r "$backup_path/.config/codegpt/.codegpt.yaml" ]; then
-  if [ -r "$HOME/.config/codegpt/.codegpt.yaml" ]; then
-    mkdir -p "$backup_path/.config/codegpt"
-    cp -P "$HOME/.config/codegpt/.codegpt.yaml" \
-      "$backup_path/.config/codegpt/.codegpt.yaml"
-  fi
-fi
-mkdir -p "$HOME/.config/codegpt"
-ln -sfnv "$config_path/codegpt/.codegpt.yaml" \
-  "$HOME/.config/codegpt/.codegpt.yaml"
-
 ### Symlink turbocommit config #################################################
 
 if [ ! -r "$backup_path/.turbocommit.yaml" ]; then

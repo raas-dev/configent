@@ -53,9 +53,6 @@ go install github.com/shihanng/tfvar@latest
 # https://github.com/sachaos/viddy
 go install github.com/sachaos/viddy@latest
 
-# https://github.com/appleboy/CodeGPT
-go install github.com/appleboy/CodeGPT/cmd/codegpt@latest
-
 # https://github.com/grafana/xk6-browser
 #go install go.k6.io/xk6/cmd/xk6@latest && xk6 build \
 #  --with github.com/grafana/xk6-browser \
