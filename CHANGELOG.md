@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.86.1](https://github.com/raas-dev/configent/compare/1.86.0...1.86.1) (2024-04-05)
+
+
+### Fixes
+
+* **aichat:** Improve system prompts ([392b58d](https://github.com/raas-dev/configent/commit/392b58d1700aefe846ec92af6279054165e53bf5))
+* **tmux:** Use terminal present by default ([842c333](https://github.com/raas-dev/configent/commit/842c333881e275551e5c3dca75a315aed9023805))
+
 ## [1.86.0](https://github.com/raas-dev/configent/compare/1.85.1...1.86.0) (2024-04-03)
 
 
