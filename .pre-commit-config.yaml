@@ -11,11 +11,6 @@
 default_stages: [commit]
 
 repos:
-- repo: https://github.com/Yelp/detect-secrets
-  rev: v1.4.0
-  hooks:
-  - id: detect-secrets
-
 - repo: https://github.com/bridgecrewio/checkov.git
   rev: 3.2.39
   hooks:
