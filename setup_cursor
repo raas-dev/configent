@@ -19,7 +19,6 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 user_path="$HOME/Library/Application Support/Cursor/User"
 backup_path="$this_path/.backup/Library/Application Support/Cursor/User"
-cursor_bin="/Applications/Cursor.app/Contents/Resources/app/bin/code"
 
 if [ ! -d "$backup_path" ] && [ -d "$user_path" ]; then
   mkdir -p "$backup_path"
@@ -34,6 +33,6 @@ ln -sfnv "$this_path/vscode" "$user_path"
 
 if command -v code >/dev/null; then
   while read -r extension; do
-    "$cursor_bin" --force --install-extension "$extension"
+    code --force --install-extension "$extension"
   done <"$this_path/vscode/extensions.list"
 fi

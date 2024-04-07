@@ -39,9 +39,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Canonical hex dump; some systems have this symlinked
   command -v hd >/dev/null || alias hd='hexdump -C'
 
-  # https://cursor.sh
-  alias cursor='/Applications/Cursor.app/Contents/Resources/app/bin/code --reuse-window --add'
-
   # macOS keychain
   get_keychain_variable() {
     local name="$1"
@@ -422,8 +419,8 @@ codeclear() {
   read -r choice
   case "$choice" in
   [yY])
-    code --list-extensions | while read -r extension; do
-      code --force --uninstall-extension "$extension"
+    "$code_bin" --list-extensions | while read -r extension; do
+      "$code_bin" --force --uninstall-extension "$extension"
     done
     ;;
   *)
