@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 export function modifyConfig(config: Config): Config {
   config.allowAnonymousTelemetry = false;
 
