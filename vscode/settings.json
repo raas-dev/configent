@@ -216,6 +216,8 @@
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.suggestionMenuType": "quickFix",
   "editor.acceptSuggestionOnEnter": "off",
-  "cursor.cpp.disabledLanguages": [],
+  "cursor.cpp.disabledLanguages": [
+    "markdown"
+  ],
   "window.customTitleBarVisibility": "windowed"
 }
