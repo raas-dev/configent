@@ -215,5 +215,8 @@
   "zenMode.hideStatusBar": false,
   "gitlens.plusFeatures.enabled": false,
   "activitusbar.toggleSidebar": false,
-  "activitusbar.activeColour": "#7B9050"
+  "activitusbar.activeColour": "#7B9050",
+  "cSpell.showAutocompleteSuggestions": true,
+  "cSpell.suggestionMenuType": "quickFix",
+  "editor.acceptSuggestionOnEnter": "off"
 }
