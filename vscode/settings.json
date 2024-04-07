@@ -139,12 +139,11 @@
   "typescript.suggest.paths": false,
   "update.showReleaseNotes": false,
   "window.closeWhenEmpty": true,
-  "window.commandCenter": false,
   "window.newWindowDimensions": "inherit",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
   "window.zoomLevel": 1,
-  "workbench.activityBar.location": "hidden",
+  "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "terminal.ansiBlack": "#303030",
     "terminal.ansiBlue": "#7CAFC2",
@@ -176,7 +175,6 @@
     "*.ipynb": "jupyter-notebook"
   },
   "workbench.iconTheme": "ayu",
-  "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
   "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
   "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
@@ -217,5 +215,7 @@
   "activitusbar.activeColour": "#7B9050",
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.suggestionMenuType": "quickFix",
-  "editor.acceptSuggestionOnEnter": "off"
+  "editor.acceptSuggestionOnEnter": "off",
+  "cursor.cpp.disabledLanguages": [],
+  "window.customTitleBarVisibility": "windowed"
 }
