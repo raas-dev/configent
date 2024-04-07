@@ -10,4 +10,11 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Write installed extensions to a file #######################################
 
-code --list-extensions >"$this_path/extensions.list"
+cursor_bin="/Applications/Cursor.app/Contents/Resources/app/bin/code"
+if [ "$(uname -s)" = 'Darwin' ] && [ -e "$cursor_bin" ]; then
+  code_bin="$cursor_bin"
+else
+  code_bin="code"
+fi
+
+"$code_bin" --list-extensions >"$this_path/extensions.list"
