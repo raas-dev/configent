@@ -15,6 +15,6 @@ if command -v cursor >/dev/null; then
 elif command -v code >/dev/null; then
   code --list-extensions >"$this_path/extensions.list"
 else
-  echo "Error: VSCode or Cursor not found in PATH."
+  echo "Error: Cursor or VSCode not found in PATH."
   exit 127
 fi
