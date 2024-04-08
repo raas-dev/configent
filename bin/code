@@ -10,9 +10,12 @@
 
 # shellcheck disable=SC2068  # not quoting args
 
+# TODO: prepend to PATH on MacOS, remove this
 cursor_bin="/Applications/Cursor.app/Contents/Resources/app/bin/code"
+vscode_bin="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+
 if [ "$(uname -s)" = 'Darwin' ] && [ -e "$cursor_bin" ]; then
   "$cursor_bin" $@
 else
-  code $@
+  "$vscode_bin" $@
 fi
