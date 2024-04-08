@@ -10,4 +10,11 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Write installed extensions to a file #######################################
 
-code --list-extensions >"$this_path/extensions.list"
+if command -v cursor >/dev/null; then
+  cursor --list-extensions >"$this_path/extensions.list"
+elif command -v code >/dev/null; then
+  code --list-extensions >"$this_path/extensions.list"
+else
+  echo "Error: VSCode or Cursor not found in PATH."
+  exit 127
+fi

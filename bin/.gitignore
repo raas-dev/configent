@@ -1,7 +1,6 @@
 *
 
 !.gitignore
-!code
 !docker
 !docker-compose
 !install_*

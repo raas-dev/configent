@@ -28,6 +28,7 @@ path_prepend() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   PATH=''
+  path_append '/usr/local/bin'
   path_append '/usr/bin'
   path_append '/bin'
   path_append '/usr/sbin'
