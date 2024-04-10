@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.88.0](https://github.com/raas-dev/configent/compare/1.87.3...1.88.0) (2024-04-10)
+
+
+### Features
+
+* **terminal:** Add SynthWave84 theme ([b3764ec](https://github.com/raas-dev/configent/commit/b3764ec2329665b480d92b8282a685e216242ac2))
+
+
+### Fixes
+
+* **aichat:** Improve code prompt ([c7ac60b](https://github.com/raas-dev/configent/commit/c7ac60b17930d3c099b3ed956ca7433f922f81ab))
+
 ### [1.87.3](https://github.com/raas-dev/configent/compare/1.87.2...1.87.3) (2024-04-10)
 
 
