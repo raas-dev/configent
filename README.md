@@ -86,8 +86,8 @@ window manager of your choice. See your distro's own instructions for that.
 ## 🔋's included
 
 Script `bootstrap` essentially handles the whole automated setup (dotfiles,
-apps, Cursor/VSCodium) of the machine it is run in. These three respective
-scripts are described further below.
+apps, editor) of the machine it is run in. These three respective scripts are
+described further below.
 
 Necessities (such as Zsh) are installed from the Linux distro's repo,
 or from Homebrew if it is runnable on the OS and the CPU architecture.
@@ -152,17 +152,25 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 
 💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 
-### setup_vscodium
+### setup_cursor / setup_vscodium
 
-The script symlinks `vscode/` to `<os_vscode_path>/User`. Existing `User`
-directory is first backed up to `~/configent/.backup/<os_vscode_path>/User`.
+[VSCodium](https://vscodium.com/) and its forks are preferred over VSCode.
+Regardless, editor specific configuration is the same across the forks.
+
+The specific `setup_` script is run so that VSCodium is the default editor on
+Linux distros and [Cursor](https://cursor.sh/) is the default on macOS.
+
+💡: Preferring Cursor might expand to Linux distros later.
+
+The script symlinks `vscode/` to `<os_specific_path>/User`. Existing `User`
+directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
 
 Symlinking happens even if `codium` has not been installed.
 If `codium` is present, also VSCode extensions (`vscode/extensions.list`)
 are installed.
 
-To update the list after adding or removing extensions in VSCodium, run
-`vscode/create_extensions_list`.
+To update the list after adding or removing extensions in Cursor/VSCodium,
+run `vscode/create_extensions_list`.
 
 ## 🐚 Default shell
 
