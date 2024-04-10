@@ -13,3 +13,7 @@ prelude: 'role:chat'                # Set a default role or session (role:<name>
 
 left_prompt: '{color.green}{?session {session}{?role /}}{role}{color.cyan}{?session )}{!session >}{color.reset} '
 right_prompt: '{color.purple}{?session {?consume_tokens {consume_tokens}({consume_percent}%)}{!consume_tokens {consume_tokens}}}{color.reset}'
+
+clients:
+  - type: openai
+  - type: claude
