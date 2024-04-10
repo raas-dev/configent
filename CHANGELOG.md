@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.87.0](https://github.com/raas-dev/configent/compare/1.86.1...1.87.0) (2024-04-10)
+
+
+### Features
+
+* **linux:** Use VSCodium over VSCode ([5b49472](https://github.com/raas-dev/configent/commit/5b4947257cc9ae1fcd7822a432225cc97317dfc7))
+* **macos:** Add experimental Cursor support ([0136df9](https://github.com/raas-dev/configent/commit/0136df9a3fa8a63e3a943d4819efc3495dcd4f36))
+* **macos:** Prefer Cursor over VSCodium ([e7179ac](https://github.com/raas-dev/configent/commit/e7179acfa0a38e1eb3dbc51c734c7822de5f6dde))
+* **macos:** Use Cursor over VSCode ([9fd46f7](https://github.com/raas-dev/configent/commit/9fd46f74f6a117a50136c5b6e512718640f258f4))
+* **vscode:** Add pyright extension ([33c5ff5](https://github.com/raas-dev/configent/commit/33c5ff5869f911819350bf1949222483086bfbb2))
+* **vscode:** Use VSCodium over VSCode ([f458699](https://github.com/raas-dev/configent/commit/f4586995dffdec988da65c9e533f4381ea7fb578))
+
+
+### Fixes
+
+* **aliases:** Fix codeclear ([c75cc2d](https://github.com/raas-dev/configent/commit/c75cc2dcd5c1e694b1c2a25bfccc7dae20d4012b))
+* **code:** Prefer cursor as vscode if present ([7a75d22](https://github.com/raas-dev/configent/commit/7a75d22dd7bf83234db5fe239ba0f81ed89a8c57))
+* **continue:** Add dotenv ([e446b30](https://github.com/raas-dev/configent/commit/e446b303ad06907a191a793e354fbfe73fc03fbc))
+* **continue:** Move config.ts to setup_vscode ([c505759](https://github.com/raas-dev/configent/commit/c505759ee5cb905c058f1e7b88385deeeb617322))
+* **cursor:** Add cursor specific extensions ([836ea3b](https://github.com/raas-dev/configent/commit/836ea3bd51ce7ff2769423e79dc97759575d594a))
+* **cursor:** Fix aliasing code to cursor ([16200f1](https://github.com/raas-dev/configent/commit/16200f1880dd4600302ddbc36d9fc135f1ed691f))
+* **vscode:** Add support for cursor extensions ([8fc5145](https://github.com/raas-dev/configent/commit/8fc5145ad2699a7cc3a562b11b4fd2bdf935e82a))
+* **vscode:** Allow toggling sidebar ([b7a0e48](https://github.com/raas-dev/configent/commit/b7a0e482a4134baefaa76ec85ac3e31222cea0c1))
+* **vscode:** Fix finding VSCode bin ([17e3027](https://github.com/raas-dev/configent/commit/17e302759202bfd6d34c192269b97e07715ce5be))
+* **vscode:** Remove extensions requiring login ([c2a5478](https://github.com/raas-dev/configent/commit/c2a54784afe5809991a41a17dd35cc9b6d33f8ca))
+
 ### [1.86.1](https://github.com/raas-dev/configent/compare/1.86.0...1.86.1) (2024-04-05)
 
 
