@@ -207,9 +207,8 @@ alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 
 # aichat
 # add to ~/.rclocal:
-# export OPENAI_API_KEY='sk-xxx'
-# export CLAUDE_API_KEY='sk-ant-xxx'
-
+# export OPENAI_API_KEY='sk-xxxxxx'
+# export CLAUDE_API_KEY='sk-ant-xxxxxx'
 ai() {
   role="chat"
   [ -n "$1" ] && role="$role:$1"
