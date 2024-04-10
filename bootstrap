@@ -32,6 +32,6 @@ fi
 
 "$this_path/symlink_dotfiles"
 NONINTERACTIVE=true "$this_path/install_apps"
-"$this_path/setup_vscode"
+"$this_path/setup_vscodium"
 
 printf "\n✅ bootstrap done.\n"

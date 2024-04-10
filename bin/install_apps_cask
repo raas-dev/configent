@@ -41,7 +41,8 @@ brew install --cask --no-quarantine brave-browser
 brew install --cask --no-quarantine nordvpn
 #brew install --cask --no-quarantine tunnelblick
 #brew install --cask --no-quarantine utm
-brew install --cask --no-quarantine visual-studio-code
+#brew install --cask --no-quarantine visual-studio-code
+#brew install --cask --no-quarantine vscodium
 
 # Keyboard remapper (see ui/os_x/ukelele for layouts)
 brew install --cask --no-quarantine ukelele

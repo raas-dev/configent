@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - 95% consistent user experience both on macOS and the beloved Linux distros
 - There is only one way to install, update and change language and tool versions
 - If something switches context faster than `tmux` and `zsh`, we'll switch to it
-- The secure open source web browser, VSCode and a killer terminal. That's it.
+- Secure open web browser, AI-first editor and a killer terminal. That's it.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
@@ -86,8 +86,8 @@ window manager of your choice. See your distro's own instructions for that.
 ## 🔋's included
 
 Script `bootstrap` essentially handles the whole automated setup (dotfiles,
-apps, VSCode) of the machine it is run in. These three respective scripts are
-described further below.
+apps, Cursor/VSCodium) of the machine it is run in. These three respective
+scripts are described further below.
 
 Necessities (such as Zsh) are installed from the Linux distro's repo,
 or from Homebrew if it is runnable on the OS and the CPU architecture.
@@ -152,20 +152,17 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 
 💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 
-### setup_vscode
+### setup_vscodium
 
 The script symlinks `vscode/` to `<os_vscode_path>/User`. Existing `User`
 directory is first backed up to `~/configent/.backup/<os_vscode_path>/User`.
 
-Symlinking happens even if `code` has not been installed. If `code` is present,
-also VSCode extensions (`vscode/extensions.list`) are installed.
+Symlinking happens even if `codium` has not been installed.
+If `codium` is present, also VSCode extensions (`vscode/extensions.list`)
+are installed.
 
-To update the list after adding or removing extensions in VSCode, run
+To update the list after adding or removing extensions in VSCodium, run
 `vscode/create_extensions_list`.
-
-Configuring
-[VSCode Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync)
-will not interfere with storing configs in the git repo.
 
 ## 🐚 Default shell
 
