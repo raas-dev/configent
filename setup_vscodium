@@ -10,7 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 
-### Symlink VSCodium configuration #############################################
+### Symlink configuration ######################################################
 
 if [ "$(uname -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/VSCodium/User"

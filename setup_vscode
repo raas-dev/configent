@@ -10,7 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 
-### Symlink Visual Studio Code configuration ###################################
+### Symlink configuration ######################################################
 
 if [ "$(uname -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/Code/User"
@@ -29,7 +29,7 @@ mkdir -p "$user_path" # ensure intermediate directories exist
 rm -rf "$user_path"
 ln -sfnv "$this_path/vscode" "$user_path"
 
-### Install VSCode extensions ##################################################
+### Install extensions #########################################################
 
 if command -v code >/dev/null; then
   while read -r extension; do
