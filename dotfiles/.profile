@@ -148,7 +148,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ### bat ########################################################################
 
 export BAT_STYLE="auto"
-export BAT_THEME="DarkNeon"
+export BAT_THEME="SynthWave84"
 
 ### dircolors ##################################################################
 

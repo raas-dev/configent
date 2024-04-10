@@ -104,8 +104,33 @@ if [ ! -r "$backup_path/.config/aichat/roles.yaml" ]; then
       "$backup_path/.config/aichat/roles.yaml"
   fi
 fi
-mkdir -p "$HOME/.config/aichat"
 ln -sfnv "$config_path/aichat/roles.yaml" "$HOME/.config/aichat/roles.yaml"
+
+# SynthWave84.tmTheme
+if [ ! -r "$backup_path/.config/aichat/dark.tmTheme" ]; then
+  if [ -r "$HOME/.config/aichat/dark.tmTheme" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/dark.tmTheme" \
+      "$backup_path/.config/aichat/dark.tmTheme"
+  fi
+fi
+ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
+  "$HOME/.config/aichat/dark.tmTheme"
+
+### Symlink bat theme ##########################################################
+
+if [ ! -r "$backup_path/.config/bat/themes/SynthWave84.tmTheme" ]; then
+  if [ -r "$HOME/.config/bat/themes/SynthWave84.tmTheme" ]; then
+    mkdir -p "$backup_path/.config/bat/themes"
+    cp -P "$HOME/.config/bat/themes/SynthWave84.tmTheme" \
+      "$backup_path/.config/bat/themes/SynthWave84.tmTheme"
+  fi
+fi
+mkdir -p "$HOME/.config/bat/themes"
+ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
+  "$HOME/.config/bat/themes/SynthWave84.tmTheme"
+
+bat cache --build
 
 ### Symlink turbocommit config #################################################
 
