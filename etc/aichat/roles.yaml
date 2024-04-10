@@ -21,7 +21,6 @@
     Make all responses as concise as possible.
     Answer in markdown and use headers to distinct the answer sections.
     Take a deep breath and work on the problem step-by-step.
-  temperature: 0
 
 - name: expert:solution
   prompt: >

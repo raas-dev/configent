@@ -1,7 +1,7 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 model: openai:gpt-4-turbo-preview   # Default LLM
-temperature: 0.5                    # GPT temperature, between 0 and 2
+temperature: 0                      # GPT temperature, between 0 and 2
 save: true                          # Whether to save the message
 highlight: true                     # Set false to turn highlight
 light_theme: false                  # Whether to use a light theme
