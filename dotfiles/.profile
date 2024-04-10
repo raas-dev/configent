@@ -192,7 +192,6 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 ### aichat #####################################################################
 
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
-export PROMPTS_PATH="$HOME/.config/configent/fabric/patterns"
 
 ### XDG base directory specification ###########################################
 

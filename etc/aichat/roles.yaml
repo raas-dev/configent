@@ -44,8 +44,3 @@
     Do not be lazy, always provide the complete code.
     Eliminate all potential errors and ambiguities in the code.
   temperature: 0
-
-- name: task
-  prompt: >
-    Follow instructions in file `system.md`.
-  temperature: 0.5

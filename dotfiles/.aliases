@@ -219,20 +219,6 @@ ai_code() {
   # TODO: --model "claude:claude-3-sonnet-20240229"
 }
 
-# create aliases for the prompt library
-ai_task() {
-  task="$1"
-  shift
-  aichat --role "task" --file "$PROMPTS_PATH/$task/system.md" -- "INPUT: $*"
-}
-for dir in "$PROMPTS_PATH"/*; do
-  if [ -d "$dir" ]; then
-    task="$(basename "$dir")"
-    [ "$task" = "ai" ] && continue  # skip overriding 'ai()'
-    alias "$task"="ai_task $task"
-  fi
-done
-
 # open-interpreter (https://docs.openinterpreter.com/integrations/docker)
 interpreter() {
   local image="interpreter"
