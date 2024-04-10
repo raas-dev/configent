@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.87.3](https://github.com/raas-dev/configent/compare/1.87.2...1.87.3) (2024-04-10)
+
+
+### Fixes
+
+* **aichat:** Do not ask to save session ([ca8e0c7](https://github.com/raas-dev/configent/commit/ca8e0c7188f3cc0aa05b9292b33fe9c3ffbddad5))
+* **aichat:** Make default temperature 0 ([4001f65](https://github.com/raas-dev/configent/commit/4001f656aca7d3b950989b1f89ecd6a2a460a088))
+* **aichat:** Shorten fast chat responses ([5e5691f](https://github.com/raas-dev/configent/commit/5e5691f507b4b176858d085922c5d3bd21de3824))
+* **aliases:** Use Claude3 Haiku for coding ([3a2b30b](https://github.com/raas-dev/configent/commit/3a2b30bc99a9fef9dfacadafa4c41ba3e8c44350))
+* **codium:** Use Claude 3 haiku for Continue ([bec9ec2](https://github.com/raas-dev/configent/commit/bec9ec233944f2285678dcab2226a18084bced3b))
+
 ### [1.87.2](https://github.com/raas-dev/configent/compare/1.87.1...1.87.2) (2024-04-10)
 
 
