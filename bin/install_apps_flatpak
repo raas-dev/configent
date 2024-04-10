@@ -12,11 +12,11 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 flatpak remote-add --user --if-not-exists \
   flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# VSCode
-flatpak install --user -y flathub com.visualstudio.code
-
 # Brave
 flatpak install --user -y flathub com.brave.Browser
+
+# VSCodium
+flatpak install --user -y flathub com.vscodium.codium
 
 # LibreOffice
 #flatpak install --user -y flathub org.libreoffice.LibreOffice

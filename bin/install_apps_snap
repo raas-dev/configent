@@ -30,11 +30,11 @@ fi
 # Core
 $SUDO snap install core
 
-# VSCode
-$SUDO snap install code --classic
-
 # Brave
 $SUDO snap install brave
+
+# VSCodium
+$SUDO snap install codium --classic
 
 # LibreOffice
 #$SUDO snap install libreoffice
