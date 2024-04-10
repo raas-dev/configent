@@ -1,7 +1,6 @@
 FaroSystemAppender constructor
 aaron-bond.better-comments
 adpyke.codesnap
-anysphere.pyright
 aquasecurityofficial.trivy-vulnerability-scanner
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
@@ -40,7 +39,6 @@ ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-bicep
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
-ms-pyright.pyright
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
