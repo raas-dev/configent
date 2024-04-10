@@ -155,7 +155,7 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 ### setup_cursor / setup_vscodium
 
 [VSCodium](https://vscodium.com/) and its forks are preferred over VSCode.
-Regardless, editor specific configuration is the same across the forks.
+The extensions and editor configuration are the same across the forks.
 
 The specific `setup_` script is run so that VSCodium is the default editor on
 Linux distros and [Cursor](https://cursor.sh/) is the default on macOS.
@@ -165,9 +165,8 @@ Linux distros and [Cursor](https://cursor.sh/) is the default on macOS.
 The script symlinks `vscode/` to `<os_specific_path>/User`. Existing `User`
 directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
 
-Symlinking happens even if `codium` has not been installed.
-If `codium` is present, also VSCode extensions (`vscode/extensions.list`)
-are installed.
+If editor is present, its extensions (`vscode/extensions.list`) are installed
+using the command-line tool of the editor.
 
 To update the list after adding or removing extensions in Cursor/VSCodium,
 run `vscode/create_extensions_list`.
