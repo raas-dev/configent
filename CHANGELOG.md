@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.87.2](https://github.com/raas-dev/configent/compare/1.87.1...1.87.2) (2024-04-10)
+
+
+### Fixes
+
+* **aliases:** Remove fabric ([ff02f25](https://github.com/raas-dev/configent/commit/ff02f257560de2dc06dcecbeef76f0046a0f374e))
+
 ### [1.87.1](https://github.com/raas-dev/configent/compare/1.87.0...1.87.1) (2024-04-10)
 
 
