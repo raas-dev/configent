@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.87.1](https://github.com/raas-dev/configent/compare/1.87.0...1.87.1) (2024-04-10)
+
+
+### Fixes
+
+* **codium:** Remove cursor ([947de76](https://github.com/raas-dev/configent/commit/947de76d4b67efc8ec0c3295b602e81c2c4e961d))
+* **cursor:** Add pyright ([b990b2e](https://github.com/raas-dev/configent/commit/b990b2e903502b36b7fe65ba0e658391850096d5))
+
 ## [1.87.0](https://github.com/raas-dev/configent/compare/1.86.1...1.87.0) (2024-04-10)
 
 
