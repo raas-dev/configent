@@ -35,7 +35,7 @@ brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --no-quarantine brave-browser
-#brew install --cask --no-quarantine cursor
+brew install --cask --no-quarantine cursor
 #brew install --cask --no-quarantine iina
 #brew install --cask --no-quarantine libreoffice
 brew install --cask --no-quarantine nordvpn
