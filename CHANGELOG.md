@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.88.2](https://github.com/raas-dev/configent/compare/1.88.1...1.88.2) (2024-04-11)
+
+
+### Fixes
+
+* **dircolors:** Preload before fzf-tab ([76241e9](https://github.com/raas-dev/configent/commit/76241e9a0948f6c3cd88573b0132a5e04861972b))
+* **lessfilter:** Never show icons in dir listing ([c735482](https://github.com/raas-dev/configent/commit/c7354824ed8849cb312ca89b1995a0dc06b90092))
+* **less:** Update lesspipe ([5351400](https://github.com/raas-dev/configent/commit/53514002fb6d930d8ba4a7c87badc112fad31a94))
+* **vim:** Do not change cursor in vim ([3b9dcbf](https://github.com/raas-dev/configent/commit/3b9dcbf7ad4848c97aa4b19b67d03fe064ff7710))
+* **vscode:** Improve terminal colors ([6b8c3bb](https://github.com/raas-dev/configent/commit/6b8c3bbaeb1e5dac1d25f5c01e2eb1d2c9deb061))
+* **zsh:** Add fzf-tab menu defaults ([27ef7a5](https://github.com/raas-dev/configent/commit/27ef7a577000487dafd46635ffe1d6bb7f680e4d))
+
 ### [1.88.1](https://github.com/raas-dev/configent/compare/1.88.0...1.88.1) (2024-04-11)
 
 
