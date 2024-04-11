@@ -171,9 +171,9 @@
     "terminal.ansiWhite": "#F2F2F2",
     "terminal.ansiYellow": "#FBB829",
     "terminal.background": "#090A14",
-    "terminal.foreground": "#C9C9C9",
-    "terminalCursor.background": "#353535",
-    "terminalCursor.foreground": "#A3A3A3"
+    "terminal.foreground": "#D0D0D0",
+    "terminalCursor.background": "#F2F2E3",
+    "terminalCursor.foreground": "#B300AD"
   },
   "workbench.colorTheme": "Ayu Dark Bordered",
   "workbench.editor.defaultBinaryEditor": "default",
