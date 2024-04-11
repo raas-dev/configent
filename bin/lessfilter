@@ -18,7 +18,7 @@ extension=${1##*.}
 
 if has_cmd lsd && [ -d "$1" ]; then
   # output compact listing for fzf-preview
-  lsd -A --group-dirs first --oneline --color=always "$1"
+  lsd -A --oneline --group-dirs first --icon never --color always "$1"
 elif has_cmd glow && [ "$extension" = md ]; then
   glow --width 100 --style dracula "$1"
 elif has_cmd bat && [ "$category" = text ]; then
