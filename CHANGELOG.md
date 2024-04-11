@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.88.1](https://github.com/raas-dev/configent/compare/1.88.0...1.88.1) (2024-04-11)
+
+
+### Fixes
+
+* **gpt:** Update turbo-preview to turbo ([7c1875e](https://github.com/raas-dev/configent/commit/7c1875eb94472dafb69fc6be6249718e0de2b1d2))
+* **turbocommit:** Fix LLM for turbocommit ([89d162f](https://github.com/raas-dev/configent/commit/89d162f43f848e53eed7e974ba9486f8e5345df7))
+* **vscode:** Improve terminal color scheme ([26f384a](https://github.com/raas-dev/configent/commit/26f384a77e6d8b4bcc9df24db26326d35d32789a))
+* **vscode:** Improve terminal colors ([629b01f](https://github.com/raas-dev/configent/commit/629b01f435502b4a956d95bfba27a1d3300b7d6f))
+* **vscode:** Improve terminal colors ([c4488aa](https://github.com/raas-dev/configent/commit/c4488aae903902fb78203a0c31102097c05cd2ae))
+
 ## [1.88.0](https://github.com/raas-dev/configent/compare/1.87.3...1.88.0) (2024-04-10)
 
 
