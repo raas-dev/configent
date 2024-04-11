@@ -44,7 +44,7 @@ brew install --cask --no-quarantine nordvpn
 #brew install --cask --no-quarantine visual-studio-code
 #brew install --cask --no-quarantine vscodium
 
-# Keyboard remapper (see ui/os_x/ukelele for layouts)
+# Keyboard remapper (see ui/macos/ukelele for layouts)
 brew install --cask --no-quarantine ukelele
 
 # Finder quick look plugins (https://github.com/sindresorhus/quick-look-plugins)
