@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # lesspipe.sh, a preprocessor for less
-lesspipe_version=2.08
+lesspipe_version=2.12
 # Author: Wolfgang Friebel (wp.friebel AT gmail.com)
 #( [[ -n 1 && -n 2 ]] ) > /dev/null 2>&1 || exec zsh -y --ksh-arrays -- "$0" ${1+"$@"}
 
@@ -9,10 +9,11 @@ has_cmd() {
 }
 
 fileext() {
-  case "$1" in
-  .*.*) extension=${1##*.} ;;
+  fn=${1##*/}
+  case "$fn" in
+  .*.*) extension=${fn##*.} ;;
   .*) extension= ;;
-  *.*) extension=${1##*.} ;;
+  *.*) extension=${fn##*.} ;;
   esac
   echo "$extension"
 }
@@ -24,8 +25,8 @@ filetype() {
     declare t
     t=$(nexttmp)
     head -c 1000000 >"$t" 2>/dev/null
+    [[ -z $fileext ]] && fname="$t" || fname="$fileext"
     set "$t" "$2"
-    fname="$fileext"
   fi
   fext=$(fileext "$fname")
   ### get file type from mime type
@@ -92,6 +93,15 @@ filetype() {
     ;;
   mp3)
     [[ $ftype == mpeg ]] && ftype=mp3
+    ;;
+  jsx)
+    [[ $fcat == text ]] && ftype=jsx
+    ;;
+  tsx)
+    [[ $fcat == text ]] && ftype=typescript-jsx
+    ;;
+  csv)
+    [[ $fcat == text ]] && ftype=csv
     ;;
   esac
   ### get file type from 'file' command for an unspecific result
@@ -220,7 +230,7 @@ separatorline() {
 }
 
 nexttmp() {
-  declare new="$tmpdir/lesspipe.$RANDOM"
+  declare new="$tmpdir/lesspipe.$RANDOM.${ft%%:*}"
   echo "$new"
 }
 
@@ -422,7 +432,8 @@ get_unpack_cmd() {
       { has_cmd cabextract && prog=cabextract; }
     ;;
   7z-compressed)
-    { has_cmd 7zr && prog=7zr; } ||
+    { has_cmd 7zz && prog=7zz; } ||
+      { has_cmd 7zr && prog=7zr; } ||
       { has_cmd 7z && prog=7z; } ||
       { has_cmd 7za && prog=7za; }
     ;;
@@ -439,7 +450,9 @@ get_unpack_cmd() {
   if [[ -n ${cmd[*]} ]]; then
     [[ -n "$file2" ]] && file2= && return
     msg "use ${x}_file${sep}contained_file to view a file in the archive"
-    has_cmd archive_color && colorizer=(archive_color)
+    if [[ $COLOR = --color=always ]]; then
+      has_cmd archive_color && colorizer=(archive_color)
+    fi
   fi
 }
 
@@ -465,11 +478,11 @@ analyze_args() {
   COLOR="--color=auto"
   has_cmd tput && colors=$(tput colors) || colors=0
   if [[ $colors -ge 8 ]]; then
+    [[ $LESS =~ -[A-Za-z~]*[rR] || $i = --raw-control-chars || $i = --RAW-CONTROL-CHARS ]] && COLOR="--color=always"
     # shellcheck disable=SC2206
-    r_string=($LESS $lessarg)
+    r_string=($lessarg)
     for i in "${r_string[@]}"; do
-      [[ $i = -*[rR] ]] && COLOR="--color=always"
-      [[ $i = --raw-control-chars ]] && COLOR="--color=always"
+      [[ $i =~ [\s]-[A-Za-z~]*[rR] || $i = --raw-control-chars || $i = --RAW-CONTROL-CHARS ]] && COLOR="--color=always"
     done
   fi
   # last argument starting with colon or equal sign is used for piping into less
@@ -481,7 +494,7 @@ has_colorizer() {
   [[ $2 == plain || -z $2 ]] && return
   prog=${LESSCOLORIZER%% *}
 
-  for i in bat batcat pygmentize source-highlight code2color vimcolor; do
+  for i in bat batcat pygmentize source-highlight vimcolor code2color; do
     [[ -z $prog || $prog == "$i" ]] && has_cmd "$i" && prog=$i
   done
   [[ "$2" =~ ^[0-9]*$ || -z "$2" ]] || lang=$2
@@ -489,7 +502,7 @@ has_colorizer() {
   [[ -n $3 ]] && lang=$3 || lang=$2
   case $prog in
   bat | batcat)
-    [[ -n $lang ]] && $prog --list-languages | grep -i "$lang" >/dev/null && opt=(-l "$lang")
+    [[ -n $lang ]] && $prog --list-languages | sed 's/.*:/,/;s/$/,/' | grep -i ",$lang," >/dev/null && opt=(-l "$lang")
     [[ -n $LESSCOLORIZER && $LESSCOLORIZER = *\ *--style=* ]] && style="${LESSCOLORIZER/* --style=/}"
     [[ -z $style ]] && style=$BAT_STYLE
     [[ -z $style ]] && style=plain
@@ -499,6 +512,8 @@ has_colorizer() {
     if [[ -r "$HOME/.config/bat/config" ]]; then
       grep -q -e '^--style' "$HOME/.config/bat/config" || opt+=(--style="${style%% *}")
       grep -q -e '^--theme' "$HOME/.config/bat/config" || opt+=(--theme="${theme%% *}")
+    else
+      opt+=(--style="${style%% *}" --theme="${theme%% *}")
     fi
     opt+=("$COLOR" --paging=never "$1")
     ;;
@@ -582,9 +597,9 @@ isfinal() {
 					-o $t2" "$1" && cmd=(pandoc -f markdown -t plain "$t2"); }; } ||
         { has_cmd libreoffice && has_htmlprog && cmd=(isoffice "$1" ppt); }
       ;;
-    xlsx)
-      { has_cmd xlscat && cmd=(istemp xlscat "$1"); } ||
-        { has_cmd libreoffice && has_htmlprog && cmd=(isoffice "$1" xlsx); }
+    xlsx | ods)
+      { has_cmd xlscat && cmd=(istemp "xlscat -L -R all" "$1"); } ||
+        { has_cmd libreoffice && has_htmlprog && cmd=(isoffice "$1" "$x"); }
       ;;
     odt)
       { has_cmd odt2txt && cmd=(istemp odt2txt "$1"); } ||
@@ -594,15 +609,10 @@ isfinal() {
     odp)
       { has_cmd libreoffice && has_htmlprog && cmd=(isoffice "$1" odp); }
       ;;
-    ods)
-      { has_cmd xlscat && t=$t.ods && cat "$1" >"$t" && cmd=(xlscat "$t"); } ||
-        { has_cmd libreoffice && has_htmlprog && cmd=(isoffice "$1" ods); }
-      ;;
     msword)
       t="$1"
       [[ "$t" == - ]] && t=/dev/stdin
       { has_cmd wvText && cmd=(istemp wvText "$t" /dev/stdout); } ||
-        { has_cmd antiword && cmd=(antiword "$1"); } ||
         { has_cmd catdoc && cmd=(catdoc "$1"); } ||
         { has_cmd libreoffice && cmd=(isoffice2 "$1"); }
       ;;
@@ -628,7 +638,9 @@ isfinal() {
         [[ "$fext" == ms ]] && macro=s
         cmd=(groff -s -p -t -e -Tutf8 -m "$macro" "$1")
       elif has_cmd mandoc; then
-        cmd=(mandoc "$1")
+        cmd=(mandoc -l "$1")
+      elif has_cmd man; then
+        cmd=(man -l "$1")
       fi
       ;;
     rtf)
@@ -663,7 +675,7 @@ isfinal() {
       has_cmd openssl && cmd=(istemp "openssl req -text -noout -in" "$1")
       ;;
     pgp)
-      has_cmd gpg && cmd=(gpg -d "$1")
+      has_cmd gpg && cmd=(gpg --decrypt --quiet --no-tty --batch --yes "$1")
       ;;
     plist)
       { has_cmd plistutil && cmd=(istemp "plistutil -i" "$1"); } ||
@@ -677,12 +689,18 @@ isfinal() {
       return
       ;;
     csv)
-      { has_cmd csvlook && cmd=(csvlook "$1"); } ||
+      msg "type -S<ENTER> for better display of very wide tables"
+      { has_cmd csvtable && csvtable -h >/dev/null 2>&1 && cmd=(csvtable "$1"); } ||
+        { has_cmd csvlook && cmd=(csvlook -S "$1"); } ||
+        { has_cmd column && cmd=(istemp "column -s	,; -t" "$1"); } ||
         { has_cmd pandoc && cmd=(pandoc -f csv -t plain "$1"); }
       ;;
     json)
       [[ $COLOR = *always ]] && opt=(-C .) || opt=(.)
       has_cmd jq && cmd=(jq "${opt[@]}" "$1")
+      ;;
+    zlib)
+      has_cmd zlib-flate && zlib-flate -uncompress <"$1" && return
       ;;
     esac
   fi
@@ -749,7 +767,7 @@ isarchive() {
     isoinfo)
       istemp "isoinfo -i" "$2" "-x$3"
       ;;
-    7za | 7zr)
+    7zz | 7za | 7zr)
       istemp "$prog e -so" "$2" "$3"
       ;;
     esac
@@ -778,7 +796,7 @@ isarchive() {
       separatorline
       isoinfo -fR"$joliet" -i "$t"
       ;;
-    7za | 7zr)
+    7zz | 7za | 7zr)
       istemp "$prog l" "$2"
       ;;
     esac
@@ -797,7 +815,7 @@ ispdf() {
 isrpm() {
   if [[ -z "$2" ]]; then
     if has_cmd rpm; then
-      istemp "rpm -qivp" "$1"
+      istemp "rpm -qivp --changelog --nomanifest --" "$1"
       separatorline
       [[ $1 == - ]] && set "$t" "$1"
     fi
@@ -889,10 +907,9 @@ ishtml() {
   has_cmd elinks && nodash "elinks -dump -force-html" "$1" && return ||
     has_cmd w3m && handle_w3m "$1" && return ||
     has_cmd lynx && lynx -force_html -dump "$arg1" && return ||
-    # different incompatible versions with the name html2text may let this fail
-    [[ "$1" == https://* ]] && return
-  html2text -utf8 || html2text -from_encoding utf-8
-  has_cmd html2text && nodash html2text "$1"
+    # different versions of html2text existing, therefore no encoding handling
+    [[ "$1" == https://* ]] && return ||
+    has_cmd html2text && nodash html2text "$1"
 }
 
 # the main program
@@ -900,7 +917,7 @@ set +o noclobber
 setopt sh_word_split 2>/dev/null
 PATH=$PATH:${0%%/lesspipe.sh}
 # the current locale in lowercase (or generic utf-8)
-locale=$(locale | grep LC_CTYPE | sed 's/.*"\(.*\)"/\1/') || locale=en_US.UTF-8
+locale=$(locale | grep LC_CTYPE | tr -d '"') || locale=utf-8
 lclocale=$(echo "${locale##*.}" | tr '[:upper:]' '[:lower:]')
 
 sep=:      # file name separator
@@ -928,7 +945,7 @@ if [[ $LESSOPEN == *\|-* && $1 == - ]]; then
   nexttmp >/dev/null
 fi
 
-if [[ -z "$1" ]]; then
+if [[ -z "$1" && "$0" == */lesspipe.sh ]]; then
   [[ "$0" == /* ]] || pat=$(pwd)/
   if [[ "$SHELL" == *csh ]]; then
     echo "setenv LESSOPEN \"|$pat$0 %s\""
@@ -942,5 +959,10 @@ else
   elif has_cmd lessfilter; then
     lessfilter "$1" && exit 0
   fi
-  show "$@"
+  if [[ -z "$1" ]]; then
+    LESSQUIET=1
+    show -
+  else
+    show "$@"
+  fi
 fi
