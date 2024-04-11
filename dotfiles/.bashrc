@@ -27,6 +27,10 @@ else
   fi
 fi
 
+### dircolors ##################################################################
+
+command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
+
 ### Bash builtins ##############################################################
 
 # have Bash to check if the window size has changed

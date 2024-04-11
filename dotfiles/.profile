@@ -150,10 +150,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_STYLE="auto"
 export BAT_THEME="SynthWave84"
 
-### dircolors ##################################################################
-
-command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
-
 ### awscli #####################################################################
 
 command -v aws_completer >/dev/null &&

@@ -26,6 +26,11 @@ else
   fi
 fi
 
+### dircolors ##################################################################
+
+# load before Aloxaf/fzf-tab
+command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
+
 ### Completions ################################################################
 
 autoload -Uz compinit && compinit
