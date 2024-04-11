@@ -111,9 +111,9 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='rg --smart-case --no-ignore --hidden --glob "!.git/"'
+alias a='aichat'
 alias b='bat'
-alias c='aichat'
+alias c='ai_code'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -129,7 +129,7 @@ alias o='open'
 alias p='procs --tree --watch-interval 1'
 alias q='clear'
 alias r='exec $SHELL'
-alias s='ai_code'
+alias s='rg --smart-case --no-ignore --hidden --glob "!.git/"'
 alias t='taillog'
 alias u='diskonaut'
 alias v='limactl'
