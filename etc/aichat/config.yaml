@@ -1,6 +1,6 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
-model: openai:gpt-4-turbo-preview   # Default LLM
+model: openai:gpt-4-turbo           # Default LLM
 temperature: 0                      # GPT temperature, between 0 and 2
 save: true                          # Whether to save the message
 save_session: false                 # Whether to save the session, if null, asking

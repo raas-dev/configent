@@ -5,7 +5,7 @@ disable_telemetry: true
 local: false
 
 llm:
-  model: gpt-4-turbo-preview
+  model: gpt-4-turbo
   llm_supports_functions: true
   context_window: 16000
   temperature: 0
