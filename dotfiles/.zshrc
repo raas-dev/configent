@@ -46,7 +46,9 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   # .zsh_plugins.txt: Aloxaf/fzf-tab
   enable-fzf-tab
   zstyle ':completion:*' list-colors "${LS_COLORS}"
+  zstyle ':completion:*' menu no
   zstyle ':completion:*:descriptions' format '[%d]'
+  zstyle ':completion:*:git-checkout:*' sort false
   zstyle ':fzf-tab:*' switch-group ',' '.'
   zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
   zstyle ':fzf-tab:complete:*:options' fzf-preview
