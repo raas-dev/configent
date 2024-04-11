@@ -155,7 +155,7 @@ EXEC 33
 *COPYING 32
 *LICENSE 32
 *BUGS 32
-*ChangeLog 32
+*CHANGELOG 32
 
 # Binary document
 .doc 31
@@ -224,9 +224,13 @@ EXEC 33
 .tex 37
 .go 37
 
-# Configuration files
-.yml 37
-.json 37
+# Configuration
+.cfg 34
+.conf 34
+.json 34
+.toml 34
+.yml 34
+.yaml 34
 
 # Image
 .bmp 35
