@@ -143,11 +143,6 @@ set autoread
 
 
 "--- UI ------------------------------------------------------------------------
-set guicursor=i:ver25-iCursor
-
-" https://github.com/neovim/neovim/wiki/FAQ#cursor-style-isnt-restored-after-exiting-nvim
-au VimLeave * set guicursor=a:ver25-iCursor
-
 set background=dark
 colorscheme hemisu
 
