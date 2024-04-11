@@ -195,7 +195,6 @@ EXEC 33
 .shtml 37
 .erb 37
 .haml 37
-.xml 37
 .rdf 37
 .css 37
 .sass 37
@@ -227,8 +226,10 @@ EXEC 33
 # Configuration
 .cfg 35
 .conf 35
+.ini 35
 .json 35
 .toml 35
+.xml 35
 .yml 35
 .yaml 35
 
