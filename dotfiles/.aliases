@@ -216,7 +216,7 @@ ai() {
 }
 
 ai_code() {
-  lang="sh"
+  lang="polyglot"
   [ -n "$1" ] && lang="$1"
   aichat --role "code:$lang" --session "$(date +"%Y-%m-%d"):code:$lang" \
     --model claude:claude-3-haiku-20240307
