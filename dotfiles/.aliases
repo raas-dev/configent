@@ -632,7 +632,6 @@ alias fq='nixery fq'
 alias hexyl='nixery hexyl'
 
 # development
-alias cht.sh='n shell/cht-sh cht.sh'
 alias difft='nixery shell/difftastic difft'
 alias grex='nixery grex'
 alias pcalc='nixery pcalc'
@@ -669,7 +668,6 @@ alias nikto='nixery nikto'
 alias nuclei='nixery nuclei'
 alias wapiti='nixery wapiti'
 
-# miscellaneous
+# miscellaneous (rw)
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
-alias tickrs='nixery tickrs --show-x-labels --summary -c candle -s'
 alias xplr='n xplr'
