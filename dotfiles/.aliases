@@ -608,65 +608,62 @@ nixery() {
 
 ### Ad-hoc binaries via Nix ####################################################
 
-# n: read-write filesystem, .env file is read, PORT= is published if given
-# nixery: read-only filesystem
-
 # appsec
-alias grype='n grype' # rw, write report
-alias syft='n syft' # rw, write sbom
+alias grype='n grype' # rw, writes report
+alias syft='n syft' # rw, writes sbom
 
 # sast
-alias terrascan='nixery terrascan'
-alias trufflehog='nixery trufflehog/git'
+alias terrascan='n terrascan'
+alias trufflehog='n trufflehog/git'
 
 # cloud
-alias azcopy='n shell/azure-storage-azcopy azcopy' # rw
+alias azcopy='n shell/azure-storage-azcopy azcopy'
 
 # databases
-alias mysql='nixery shell/mariadb mysql'
-alias psql='nixery shell/postgresql psql'
-alias sqlmap='nixery sqlmap'
+alias mysql='n shell/mariadb mysql'
+alias psql='n shell/postgresql psql'
+alias sqlmap='n sqlmap'
 
 # decoders
-alias fq='nixery fq'
-alias hexyl='nixery hexyl'
+alias fq='n fq'
+alias hexyl='n hexyl'
 
 # development
-alias difft='nixery shell/difftastic difft'
-alias grex='nixery grex'
-alias pcalc='nixery pcalc'
-alias tokei='nixery tokei'
-alias usql='n usql'                     # rw
+alias difft='n shell/difftastic difft'
+alias grex='n grex'
+alias pcalc='n pcalc'
+alias tokei='n tokei'
+alias usql='n usql'
 alias webanalyze='n webanalyze -update' # rw, writes technologies.json
 
 # load testing
-alias k6='nixery k6'
-alias oha='nixery oha'
+alias k6='n k6'
+alias oha='n oha'
 
 # network
-alias dog='nixery shell/dogdns dog'
-alias gping='nixery gping/iputils'
-alias naabu='nixery naabu'
-alias nmap='nixery nmap'
-alias rustscan='nixery rustscan'
+alias dog='n shell/dogdns dog'
+alias gping='n gping/iputils'
+alias naabu='n naabu'
+alias nmap='n nmap'
+alias rustscan='n rustscan'
 
 # osint
-alias amass='nixery amass'
-alias maigret='nixery maigret'
+alias amass='n amass'
+alias maigret='n maigret'
 
 # pentesting
-alias hydra='nixery shell/thc-hydra hydra'
-alias gobuster='nixery gobuster'
-alias msfconsole='nixery shell/metasploit msfconsole'
+alias hydra='n shell/thc-hydra hydra'
+alias gobuster='n gobuster'
+alias msfconsole='n shell/metasploit msfconsole'
 
 # scanners
-alias dalfox='nixery dalfox'
-alias dnstwist='nixery dnstwist'
-alias ffuf='nixery ffuf'
-alias katana='nixery katana'
-alias nikto='nixery nikto'
-alias nuclei='nixery nuclei'
-alias wapiti='nixery wapiti'
+alias dalfox='n dalfox'
+alias dnstwist='n dnstwist'
+alias ffuf='n ffuf'
+alias katana='n katana'
+alias nikto='n nikto'
+alias nuclei='n nuclei'
+alias wapiti='n wapiti'
 
 # miscellaneous (rw)
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'

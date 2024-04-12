@@ -249,23 +249,19 @@ The container image is built by `etc/nix/Dockerfile`.
 The environment is created in the current directory and alias `n` is used e.g.
 `n vim README.md` to run Vim in an isolated `nix-shell` on containerd.
 
-Alternatively, use alias `nixery` to create ad-hoc environments by building
-the container image in [Nixery](https://nixery.dev/).
-
-Both `n` and `nixery` take Nix package name(s, separated by forward slashes)
-as the first argument. The packages are installed from channel
+Package name(s, separated by forward slashes) are taken as the first argument.
+The packages are installed from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
 The binary is assumed named according to the first package. The rest of the
-arguments are passed to the binary. If name is different from the package name,
-put meta-package "shell" first e.g. `nixery shell/postgresql psql`.
+arguments are passed to the binary. If binary name is different from the
+package name, put meta-package "shell" first, e.g. `n shell/postgresql psql`.
 
-⚠️: Alias `n` mounts the current directory as writable inside the container,
-whereas `nixery` mounts the current directory as read-only. Alias `n` can map
-a port to the host (e.g. `PORT=8000 n python3 -m http.server`) and reads `.env`
- file in the current directory, unlike `nixery`.
+You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 
-💡: Use `nixery` for command-line tools not wanted permanently installed on the
+⚠️: Alias `n` automatically reads `.env` file in the current working directory.
+
+💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as vulnerability scanners.
 
 ## 🔨 Development
@@ -303,7 +299,7 @@ Development guidelines:
 1. We do not use anything in installation scripts that is not POSIX compatible
 2. Linux on AArch64 is a first class citizen as Macs run on ARM since 2023
 3. The software **installed** must work on 95% of the supported Linux distros
-4. There is most often **no need to install** as `n` and `nixery` can run it
+4. There is most often **no need to install** on the host as `n` can run it
 5. We do not rely on Homebrew outside macOS, before Homebrew Linux works on ARM
 6. We prefer `asdf plugin`s when they provide binaries both for x86-64 and ARM
 7. Otherwise we use the distros' official repositories (may have older versions)
