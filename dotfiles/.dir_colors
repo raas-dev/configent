@@ -200,6 +200,8 @@ EXEC 33
 .sass 37
 .scss 37
 .less 37
+.cjs 37
+.mjs 37
 .js 37
 .jsx 37
 .ts 37
@@ -226,6 +228,7 @@ EXEC 33
 # Configuration
 .cfg 35
 .conf 35
+.env 35
 .ini 35
 .json 35
 .toml 35
