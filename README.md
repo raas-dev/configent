@@ -243,7 +243,7 @@ If `-d` or `--detached` is not used, an interactive session is assumed and all a
 ## ❄️ Nix
 
 [Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
-a container where `nix`, `nix-env`, `nix-shell`, `devenv`, etc. are available.
+a container where `nix`, `nix-env`, `nix-shell`, etc. are available.
 The container image is built by `etc/nix/Dockerfile`.
 
 The environment is created in the current directory and alias `n` is used e.g.

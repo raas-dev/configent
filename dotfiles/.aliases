@@ -558,9 +558,6 @@ nixd() {
     "$name" "$bin" "$*"
 }
 
-# https://devenv.sh/
-alias devenv="nixd devenv"
-
 # Generic nix-shell builder and runner
 n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
@@ -629,6 +626,7 @@ alias fq='n fq'
 alias hexyl='n hexyl'
 
 # development
+alias devenv="n devenv" # https://devenv.sh/
 alias difft='n shell/difftastic difft'
 alias grex='n grex'
 alias pcalc='n pcalc'
