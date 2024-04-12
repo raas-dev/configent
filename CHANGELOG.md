@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.89.0](https://github.com/raas-dev/configent/compare/1.88.2...1.89.0) (2024-04-12)
+
+
+### Features
+
+* **aliases:** Change a, c to aichat and s to rg ([d493d02](https://github.com/raas-dev/configent/commit/d493d02a4c548071a65b1ab49fbe6adc8a82794f))
+
+
+### Fixes
+
+* **aichat:** Improve code prompt ([755c9ff](https://github.com/raas-dev/configent/commit/755c9ffcafd35042a6252b550cf50909a4247c55))
+* **aichat:** Improve prompts ([63fc95c](https://github.com/raas-dev/configent/commit/63fc95cd6cc8bbd6aa39cde9e67ca085300f613e))
+* **aichat:** Use gpt-4-turbo for coding ([547dfad](https://github.com/raas-dev/configent/commit/547dfad2e6607cbdbc4e1b0b8723558b8370015f))
+* **dircolors:** Add colors to config files ([ed11b8d](https://github.com/raas-dev/configent/commit/ed11b8dc0afb7e122b5001c4d97ea9f6a59f1092))
+* **dircolors:** Add ini and xml to config ([429f15f](https://github.com/raas-dev/configent/commit/429f15f9fb2560497e2ba768fdee78654a031c58))
+* **dircolors:** Add webp ([e5683a3](https://github.com/raas-dev/configent/commit/e5683a395d821b813b9263a2ec26b1cdb3b8ebac))
+* **dircolors:** Change colors for config and media ([286fdb9](https://github.com/raas-dev/configent/commit/286fdb9d0f5673f241c2c733ac4380c428f2b956))
+* **macos:** Disable .DS_Store on removable drives ([5f2c6d6](https://github.com/raas-dev/configent/commit/5f2c6d6b5652f53bc1379e202e010f00c5278da5))
+* **macos:** Rename os_x to macos ([14dc32a](https://github.com/raas-dev/configent/commit/14dc32a1a6d49d25f202397274406fb2b6f288a6))
+* **vscode:** Keep sidebar open ([875a3e7](https://github.com/raas-dev/configent/commit/875a3e7d93901a72d5d149550739bfd0e59062ad))
+
 ### [1.88.2](https://github.com/raas-dev/configent/compare/1.88.1...1.88.2) (2024-04-11)
 
 
