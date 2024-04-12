@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.89.1](https://github.com/raas-dev/configent/compare/1.89.0...1.89.1) (2024-04-12)
+
+
+### Fixes
+
+* **aichat:** Shorten fast chat responses ([69bcf85](https://github.com/raas-dev/configent/commit/69bcf85942f7bde2dc43a88ee67535188d4fe183))
+* **aichat:** Shorten fast chat responses ([53aecf8](https://github.com/raas-dev/configent/commit/53aecf87d07a225c1b5a1252be357012fc0ba5fc))
+* **aliases:** Remove unused nixery apps ([64a0061](https://github.com/raas-dev/configent/commit/64a00619e47a0c14db3f381d911f6318e8742c2f))
+* **dircolors:** Add formats ([9d0bb6b](https://github.com/raas-dev/configent/commit/9d0bb6b86f7fc360a1ed346951c8f3b5a815f417))
+* **nix:** Do not build with cachix and devenv ([88007f6](https://github.com/raas-dev/configent/commit/88007f6920bfe94bb1f514fb7d6582f3b1b40dc0))
+* **nixery:** Remove nixery ([c8cbc98](https://github.com/raas-dev/configent/commit/c8cbc98b1ab7051331c9410da04b3a3f8062ef95))
+
 ## [1.89.0](https://github.com/raas-dev/configent/compare/1.88.2...1.89.0) (2024-04-12)
 
 
