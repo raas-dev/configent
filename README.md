@@ -211,10 +211,9 @@ and VM 'fedora' for rootless Podman.
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
-⚠️: VMs 'ubuntu', 'debian' and 'fedora' mount your host's `$HOME` directory as
-writable inside the VM. This enables containers to use bind mounts (directories
-on file system). If you want to keep host's home read-only (and prefer container
-managed volumes instead), adjust `writable` in `etc/lima/<vmname>.yaml`.
+⚠️: VMs 'ubuntu' and 'fedora' mounts your host's `$HOME` directory as writable inside the VM. This enables containers to use bind mounts (directories on file
+system). If you want read-only (and prefer container managed volumes instead),
+adjust `writable` in `etc/lima/<vmname>.yaml`.
 
 ### docker shortcut
 

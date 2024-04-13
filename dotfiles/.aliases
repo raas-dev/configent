@@ -226,7 +226,7 @@ ai_code() {
 interpreter() {
   local image="interpreter"
   local name="$image-${PWD##*/}"
-  docker build --pull --tag "$image" ~/.config/configent/interpreter || return
+  docker build --pull --tag "$image" ~/configent/interpreter || return
 
   if [ -n "$PORT" ]; then
     local port_args="--publish 127.0.0.1:$PORT:$PORT"
@@ -544,7 +544,7 @@ nixd() {
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
 
   nerdctl start "$name" &>/dev/null ||
-    (nerdctl build --tag "$image" ~/.config/configent/nix &&
+    (nerdctl build --tag "$image" ~/configent/etc/nix &&
       eval nerdctl run --init -t --detach \
         --name "$name" \
         "$port_args" \

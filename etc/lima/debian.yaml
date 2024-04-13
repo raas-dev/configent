@@ -18,10 +18,12 @@ memory: "8GiB" # default: "4GiB"
 #disk: "100GiB"   # default: "100GiB"
 
 mounts:
-  - location: "~"
+  - location: "~/dev"
     writable: true
-  - location: "/tmp/lima"
+  - location: "~/Downloads"
     writable: true
+  - location: "~/configent"
+    writable: false
 
 ssh:
   forwardAgent: true
