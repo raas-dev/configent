@@ -5,8 +5,8 @@
 
 No startup pitches, I am a DevOps principled environment bootstrapper.
 
-- It must happen by running one command. Moving mouse is not productivity.
-- Does not install 100s of tools most of which run well ad-hoc in container.
+- It must finish by running one command. Mouse and ClickOps is not speed.
+- Does not install 100s of tools most of which can run ad-hoc in container.
 - 95% consistent user experience both on macOS and the beloved Linux distros.
 - There is only one way to manage programming languages and tool versions.
 - AI-first in terminal and in editor. Open source everywhere doable.
