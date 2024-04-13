@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.90.0](https://github.com/raas-dev/configent/compare/1.89.3...1.90.0) (2024-04-13)
+
+
+### Features
+
+* **lima:** Make most volume mounts read only ([99fa848](https://github.com/raas-dev/configent/commit/99fa8482f625395bfd5c33d467d538e4dc62229d))
+
+
+### Fixes
+
+* **docker:** Fix handling of guest paths ([01660b6](https://github.com/raas-dev/configent/commit/01660b6e2f8819102d40432bc8594bc973eae935))
+
 ### [1.89.3](https://github.com/raas-dev/configent/compare/1.89.2...1.89.3) (2024-04-13)
 
 
