@@ -1,8 +1,9 @@
-### OPEN INTERPRETER PROFILE
+# https://docs.openinterpreter.com/settings/all-settings
 
 disable_telemetry: true
 
 local: false
+offline: false # uses https://api.openinterpreter.com/
 
 llm:
   model: gpt-3.5-turbo
