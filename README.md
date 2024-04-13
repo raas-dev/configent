@@ -243,6 +243,8 @@ are followed. Sending `^C` exits the log view and does not stop the container.
 If `-d` or `--detached` is not used, an interactive session is assumed and all arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
 `d bash` starts Bash in the container. Exiting the shell stops the container.
 
+⚠️: If container writes to filesystem, you must be in a VM writable directory.
+
 ## ❄️ Nix
 
 [Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
@@ -265,7 +267,7 @@ You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 ⚠️: If binary writes to filesystem, you must be in a VM writable directory.
 
 💡: Use `n` for command-line tools not wanted permanently installed on the
-host. See `.aliases` for example ad-hoc tools such as vulnerability scanners.
+host. See `.aliases` for example ad-hoc tools such as container image scanners.
 
 ## 🔨 Development
 
