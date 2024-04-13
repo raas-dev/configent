@@ -19,8 +19,8 @@ A few features:
 - One character `.aliases`: The fastest are the commands one does not type.
 - Apps are Rust, Go and C for speed, and `n`ix-shells are for ad-hoc binaries.
 - macOS `docker` experience as it was with Docker Desktop but it does not cost.
-- Run `up` to upgrade every package manager but respect the locked versions.
-- Quick ask GPT in terminal (`a`), code (`c`) or open chat session (`ai`).
+- Run `up` to upgrade every package manager but respect locked tool versions.
+- Quick ask GPT in terminal (`a`), code (`c`), or open chat session (`ai`).
 
 Works on x86-64 and ARM:
 
