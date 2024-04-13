@@ -210,8 +210,8 @@ alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 # export OPENAI_API_KEY='sk-xxxxxx'
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
-  role="chat"
-  [ -n "$1" ] && role="$role:$1"
+  role="chat:"
+  [ -n "$1" ] && role="chat:$1"
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
