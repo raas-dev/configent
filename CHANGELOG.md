@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.90.1](https://github.com/raas-dev/configent/compare/1.90.0...1.90.1) (2024-04-13)
+
+
+### Fixes
+
+* **aliases:** Add auto-run to interpreter ([01be4ab](https://github.com/raas-dev/configent/commit/01be4ab246a1eafbdd4b42685aadba3a50d8cc67))
+* **interpreter:** Fix open interpreter model ([991f223](https://github.com/raas-dev/configent/commit/991f223c280292975494f1f344da4f49a6f72f90))
+* **interpreter:** Pin Open Interpreter version ([79b9aac](https://github.com/raas-dev/configent/commit/79b9aac339ff07872230334e59f48af583fc1164))
+* **n:** Do not read .env file ([07b0ffc](https://github.com/raas-dev/configent/commit/07b0ffce1af299c9bebc962c80fe83070f421672))
+
 ## [1.90.0](https://github.com/raas-dev/configent/compare/1.89.3...1.90.0) (2024-04-13)
 
 
