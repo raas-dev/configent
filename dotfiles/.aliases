@@ -140,7 +140,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _="interpreter --profile openai.yaml --api_key $OPENAI_API_KEY --auto_run"
+alias _="interpreter --profile openai.yaml --api_key $OPENAI_API_KEY"
 
 ### watch ######################################################################
 

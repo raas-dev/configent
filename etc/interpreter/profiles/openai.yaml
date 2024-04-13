@@ -3,6 +3,7 @@
 disable_telemetry: true
 
 verbose: false
+auto_run: true
 
 offline: true # do not use https://api.openinterpreter.com/
 
