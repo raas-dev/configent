@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.89.3](https://github.com/raas-dev/configent/compare/1.89.2...1.89.3) (2024-04-13)
+
+
+### Fixes
+
+* **docker:** Fix paths ([d29117f](https://github.com/raas-dev/configent/commit/d29117f563c46fcc72d1fa8d90e3e52e90f57660))
+* **interpreter:** Fix dockerfile path ([c686e26](https://github.com/raas-dev/configent/commit/c686e26bcec05f3f182b031b41abb144eaa59475))
+
 ### [1.89.2](https://github.com/raas-dev/configent/compare/1.89.1...1.89.2) (2024-04-13)
 
 
