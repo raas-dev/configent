@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.89.2](https://github.com/raas-dev/configent/compare/1.89.1...1.89.2) (2024-04-13)
+
+
+### Performance
+
+* **nix:** Speed up image build ([d6fca62](https://github.com/raas-dev/configent/commit/d6fca62c9ed59da1197ef2f65ea2877758f95042))
+
+
+### Fixes
+
+* **aliases:** Improve ai role ([4699058](https://github.com/raas-dev/configent/commit/46990580f72e612ea46a2f3752b29990774f644c))
+* **docker:** Use relative paths in shims ([5e949d2](https://github.com/raas-dev/configent/commit/5e949d20e8b4603afe09a5c98ef2f3f6d749aedb))
+* **lima:** Limit Debian VM volume mounts ([341765d](https://github.com/raas-dev/configent/commit/341765d57cb542010e6abb0fcaa7871bfae43ca5))
+* **lima:** Update debian image ([8b1d333](https://github.com/raas-dev/configent/commit/8b1d33362f5707a722bbcdd1068b2dcabd11738f))
+
 ### [1.89.1](https://github.com/raas-dev/configent/compare/1.89.0...1.89.1) (2024-04-12)
 
 
