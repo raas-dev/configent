@@ -541,7 +541,7 @@ nixd() {
     local env_args="--env PORT=$PORT"
   fi
 
-  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
+  #[ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
 
   nerdctl start "$name" &>/dev/null ||
     (nerdctl build --tag "$image" ~/configent/etc/nix &&

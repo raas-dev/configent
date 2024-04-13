@@ -223,6 +223,8 @@ Alias `d` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
 is used to detect the tech stack and build the image best-effort.
 
+⚠️: Ensure the Docker image you are building `FROM` is safe before proceeding.
+
 After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
 container.
@@ -260,7 +262,7 @@ package name, put meta-package "shell" first, e.g. `n shell/postgresql psql`.
 
 You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 
-⚠️: Alias `n` automatically reads `.env` file in the current working directory.
+⚠️: If binary writes to filesystem, you must be in a VM writable directory.
 
 💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as vulnerability scanners.
