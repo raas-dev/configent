@@ -7,8 +7,12 @@ images:
     digest: "sha512:48ca7c15ae66fc68d86b5e25a769c273e253aaba4fd9a70a4e7f21fdc420b53829ba9fe17b730922938941639c3ed93bf5a560b6ce4252f9df3200d9f8f73280"
 
 mounts:
-  - location: "~"
+  - location: "~/configent"
     writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
+    writable: true
   - location: "/tmp/lima"
     writable: true
 

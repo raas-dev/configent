@@ -13,8 +13,12 @@ images:
   arch: "aarch64"
 
 mounts:
-  - location: "~"
+  - location: "~/configent"
     writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
+    writable: true
   - location: "/tmp/lima"
     writable: true
 
