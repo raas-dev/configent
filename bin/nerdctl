@@ -19,8 +19,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
       limactl start "$VM"
   fi
-  # pass arguments to nerdctl on the guest VM
-  limactl shell "$VM" nerdctl "$@"
+  # pass arguments to this exact same script on the guest VM
+  limactl shell "$VM" ~/configent/bin/nerdctl "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"

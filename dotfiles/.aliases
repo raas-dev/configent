@@ -226,7 +226,7 @@ ai_code() {
 interpreter() {
   local image="interpreter"
   local name="$image-${PWD##*/}"
-  docker build --pull --tag "$image" ~/.config/configent/interpreter || return
+  docker build --pull --tag "$image" ~/configent/etc/interpreter || return
 
   if [ -n "$PORT" ]; then
     local port_args="--publish 127.0.0.1:$PORT:$PORT"

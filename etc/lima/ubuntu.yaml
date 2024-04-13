@@ -18,7 +18,11 @@ memory: "8GiB" # default: "4GiB"
 #disk: "100GiB"   # default: "100GiB"
 
 mounts:
-  - location: "~"
+  - location: "~/configent"
+    writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
     writable: true
   - location: "/tmp/lima"
     writable: true

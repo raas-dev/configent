@@ -211,9 +211,11 @@ and VM 'fedora' for rootless Podman.
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
-⚠️: VMs 'ubuntu' and 'fedora' mounts your host's `$HOME` directory as writable inside the VM. This enables containers to use bind mounts (directories on file
-system). If you want read-only (and prefer container managed volumes instead),
-adjust `writable` in `etc/lima/<vmname>.yaml`.
+The following host directories are mounted read-write for VMs:
+
+- `$HOME/dev`
+- `$HOME/Downloads`
+- `/tmp/lima`
 
 ### docker shortcut
 
@@ -280,8 +282,8 @@ You may willingly live on the edge by explicitly passing `GIT_REF`:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
-For development purposes, once the VM has been started, your host's `$HOME`
-directory is mounted in the VM. This enables testing most changes without first
+For development purposes, once the VM has been started, host's `$HOME/configent`
+is mounted read-only in the VM. This enables testing most changes without first
 committing and pushing to your fork.
 
 ### Contributing
