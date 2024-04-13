@@ -5,22 +5,22 @@
 
 No startup pitches, I am a DevOps principled environment bootstrapper.
 
-- 100% automated installation of only curated, stable and battle-tested tools
-- 95% consistent user experience both on macOS and the beloved Linux distros
-- There is only one way to install, update and change language and tool versions
-- If something switches context faster than `tmux` and `zsh`, we'll switch to it
-- Secure open web browser, AI-first editor and a killer terminal. That's it.
+- It must happen by running one command. Moving mouse is not productivity.
+- Does not install 100s of tools most of which run well ad-hoc in container.
+- 95% consistent user experience both on macOS and the beloved Linux distros.
+- There is only one way to manage programming languages and tool versions.
+- AI-first in terminal and in editor. Open source everywhere doable.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
 
 A few features:
 
-- Setup is one command, run `up` to upgrade every package manager in the system
-- macOS `docker` experience as it was with Docker Desktop, but it does not cost
-- Command-line is Rust, Go and C for speed and `n`ix-shells for ad-hoc binaries
-- One character `.aliases` - the fastest are the commands one does not type
-- Ask GPT in terminal (`a`), code (`c`) or open a chat session (`ai`)
+- One character `.aliases`: The fastest are the commands one does not type.
+- Apps are Rust, Go and C for speed, and `n`ix-shells are for ad-hoc binaries.
+- macOS `docker` experience as it was with Docker Desktop but it does not cost.
+- Run `up` to upgrade every package manager but respect the locked versions.
+- Quick ask GPT in terminal (`a`), code (`c`) or open chat session (`ai`).
 
 Works on x86-64 and ARM:
 
