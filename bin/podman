@@ -20,7 +20,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl start "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" "$HOME/.local/configent/bin/podman" "$@"
+  limactl shell "$VM" podman "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
