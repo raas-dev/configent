@@ -5,9 +5,9 @@ disable_telemetry: true
 local: false
 
 llm:
-  model: gpt-4-turbo
+  model: gpt-3.5-turbo
   llm_supports_functions: true
-  context_window: 16000
+  context_window: 16385
   temperature: 0
 
 version: 0.2.1  # Profile version (do not modify)
