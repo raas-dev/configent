@@ -143,7 +143,7 @@ EXEC 33
 .txt 32
 .org 32
 .md 32
-.mkd 32
+.mdx 32
 .nfo 32
 
 # GNU Autotools readme files
@@ -241,8 +241,10 @@ EXEC 33
 .cgm 34
 .dl 34
 .dvi 34
+.drawio 34
 .emf 34
 .eps 34
+.excalidraw 34
 .gif 34
 .jpeg 34
 .jpg 34
