@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.90.2](https://github.com/raas-dev/configent/compare/1.90.1...1.90.2) (2024-04-14)
+
+
+### Fixes
+
+* **aliases:** Move interpreter flags to config ([203b80e](https://github.com/raas-dev/configent/commit/203b80e3b97ee43c63bed1ab5080856a4269fa32))
+* **aliases:** Remove euporie ([bc38950](https://github.com/raas-dev/configent/commit/bc38950474dfc3dbc013096d4f6c2a9469a0fc30))
+* **appsec:** Upgrade tools ([4c99a3c](https://github.com/raas-dev/configent/commit/4c99a3c3cbfdcd5841b7531f91823491f86af78a))
+* **cspell:** Ignore py files ([507ff59](https://github.com/raas-dev/configent/commit/507ff599fc57f851019f81648617e50e58307945))
+* **dircolors:** Add file extensions ([a732ebf](https://github.com/raas-dev/configent/commit/a732ebf8fa1bb7e0972ece7ea6bdcc0dcd2e7ff2))
+* **interpreter:** Assume offline ([69099e7](https://github.com/raas-dev/configent/commit/69099e71e69e99fd2d647ac0513302e8b6c0b8a7))
+* **python:** Install poetry ([1a267a4](https://github.com/raas-dev/configent/commit/1a267a4f463bc24ad9ba78b93ea2458f32a99192))
+
 ### [1.90.1](https://github.com/raas-dev/configent/compare/1.90.0...1.90.1) (2024-04-13)
 
 
