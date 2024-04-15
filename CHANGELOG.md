@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.91.0](https://github.com/raas-dev/configent/compare/1.90.2...1.91.0) (2024-04-15)
+
+
+### Features
+
+* **aliases:** Add venv() for toggling Python venv ([c3e9406](https://github.com/raas-dev/configent/commit/c3e94067c36d19dd7c9aa56557f33bca26b1612e))
+* **python:** Add uv ([18c8c21](https://github.com/raas-dev/configent/commit/18c8c21f1a7e4600e77981686afc8a12c4bc5dae))
+
+
+### Fixes
+
+* **node:** Upgrade Node.js LTS ([337c371](https://github.com/raas-dev/configent/commit/337c371c7d6ccb52c98d74747da549d96e6e4032))
+* **ruby:** Upgrade ruby ([058511c](https://github.com/raas-dev/configent/commit/058511c0ee210955c25c5d370781f193a43379d7))
+
 ### [1.90.2](https://github.com/raas-dev/configent/compare/1.90.1...1.90.2) (2024-04-14)
 
 
