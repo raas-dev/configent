@@ -39,3 +39,4 @@ pipx install poetry
 pipx install pre-commit
 pipx install semgrep
 pipx install tldr
+pipx install uv
