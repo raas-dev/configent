@@ -456,6 +456,20 @@ cursorclear() {
   esac
 }
 
+# Toggle a Python virtual environment for development
+venv() {
+  # shellcheck disable=SC1091  # activate does not exist unless venv is created
+  if [ -z "$VIRTUAL_ENV" ]; then
+    python -m venv .venv
+    source ".venv/bin/activate"
+    python -m pip install --editable .
+  else
+    # restore deactivate if shell has been reloaded after activate
+    ! command -v deactivate >/dev/null && source ".venv/bin/activate"
+    deactivate
+  fi
+}
+
 ### Latest versions of Python command-line tools ###############################
 
 # Fast Python package installer and resolver
