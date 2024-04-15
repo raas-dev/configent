@@ -123,6 +123,7 @@ fi
 export BETTER_EXCEPTIONS=1
 export TBVACCINE=1
 export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
+unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
 # Add `pip install --user` and `pipx` scopes to $PATH
 path_prepend "$HOME/.local/bin"
