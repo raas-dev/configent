@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.91.1](https://github.com/raas-dev/configent/compare/1.91.0...1.91.1) (2024-04-15)
+
+
+### Fixes
+
+* **aliases:** Recreate Python virtual env by venv ([5c5a806](https://github.com/raas-dev/configent/commit/5c5a806bebbc197138a786b5e330c9e11e62c656))
+* **python:** Unset virtualenv on shell load ([73b01c7](https://github.com/raas-dev/configent/commit/73b01c7d7b50a550f2ca6081118fa73c06363479))
+
 ## [1.91.0](https://github.com/raas-dev/configent/compare/1.90.2...1.91.0) (2024-04-15)
 
 
