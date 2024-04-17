@@ -261,5 +261,6 @@
     "vue",
     "yaml",
     "yml"
-  ]
+  ],
+  "excalidraw.theme": "dark"
 }
