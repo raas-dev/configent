@@ -481,6 +481,9 @@ alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 # View, tail, merge, and search log files (plus JSONL)
 alias tl='pipx run toolong'
 
+# SQL IDE for terminal
+alias harlequin='pipx run "harlequin[mysql,postgres]" --theme lightbulb'
+
 # Multitool for tabular data in terminal
 alias vd='pipx run --pip-args openpyxl visidata'
 
