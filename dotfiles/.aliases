@@ -685,4 +685,4 @@ alias wapiti='n wapiti'
 
 # miscellaneous (rw)
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
-alias xplr='n xplr'
+alias yazi='n yazi/vim'
