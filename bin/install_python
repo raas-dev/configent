@@ -31,12 +31,12 @@ sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["p
 cat <<EOF >"$sitepackages_path/sitecustomize.py"
 # This file was created by configent/bin/install_python
 
-import os
-
 try:
     from rich.traceback import install
-    if os.environ.get("RICH_TRACEBACKS"):
-        install(show_locals=os.environ.get("RICH_SHOW_LOCALS"))
+    import os
+    if os.environ.get("RICH_TRACEBACKS") == "1":
+        show_locals_bool = os.environ.get("RICH_SHOW_LOCALS") == "1"
+        install(show_locals=show_locals_bool)
 except ModuleNotFoundError:
     pass
 EOF
