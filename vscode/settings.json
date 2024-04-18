@@ -262,5 +262,6 @@
     "yaml",
     "yml"
   ],
-  "excalidraw.theme": "dark"
+  "excalidraw.theme": "dark",
+  "codeium.enableInComments": false
 }
