@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.92.0](https://github.com/raas-dev/configent/compare/1.91.2...1.92.0) (2024-04-18)
+
+
+### Features
+
+* **python:** Use Rich tracebacks over tbvaccine ([4547aeb](https://github.com/raas-dev/configent/commit/4547aebd25a95cb1e64a57c44a43a10ae43570e5))
+
+
+### Fixes
+
+* **aliases:** Add harlequin via pipx ([6e4f2c0](https://github.com/raas-dev/configent/commit/6e4f2c08afce0584c5b2813174c30b72ce4c3d10))
+* **aliases:** Add tl (toolong) via pipx ([3b496bc](https://github.com/raas-dev/configent/commit/3b496bc2a7122a6aaa2dc61d25bea303cdc03635))
+* **python:** Fix RICH_TRACEBACKS logic ([ddf1630](https://github.com/raas-dev/configent/commit/ddf1630df1d531b3d9353ce1e1d06c823dd4ea25))
+* **vscode:** Send most keybindings to shell ([5587f80](https://github.com/raas-dev/configent/commit/5587f8052d6a31118d22350ad3644efd1c0c5695))
+
 ### [1.91.2](https://github.com/raas-dev/configent/compare/1.91.1...1.91.2) (2024-04-18)
 
 
