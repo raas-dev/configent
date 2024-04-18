@@ -644,6 +644,7 @@ alias sqlmap='n sqlmap'
 # decoders
 alias fq='n fq'
 alias hexyl='n hexyl'
+alias lemmeknow='n lemmeknow'
 
 # development
 alias devenv="n devenv" # https://devenv.sh/
