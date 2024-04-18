@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.93.0](https://github.com/raas-dev/configent/compare/1.92.0...1.93.0) (2024-04-18)
+
+
+### Features
+
+* **go:** Remove arc ([2ccb751](https://github.com/raas-dev/configent/commit/2ccb751f6f86055b7355c59e265b9bead6aec6cc))
+* **rust:** Add ouch, deprecates go arc ([f5c74e9](https://github.com/raas-dev/configent/commit/f5c74e912d133ccef4980d8fe5bf2ae50bc62150))
+
+
+### Fixes
+
+* **aliases:** Add lemmeknow via nix ([67179c4](https://github.com/raas-dev/configent/commit/67179c4dc4eebfe18a28b9855389197e7b895a44))
+* **aliases:** Add onefetch via nix ([0722547](https://github.com/raas-dev/configent/commit/072254746ea8b270b6043e1e2e6dcab788869440))
+* **aliases:** Use yazi over xplr, via nix ([9eaf61e](https://github.com/raas-dev/configent/commit/9eaf61e322f8d5fc9e002f1eefdf9bc3fa11f37b))
+* **tmux:** Enable passthrough ([5848592](https://github.com/raas-dev/configent/commit/5848592ac74708d15763ff15cdd3942b2188e332))
+
 ## [1.92.0](https://github.com/raas-dev/configent/compare/1.91.2...1.92.0) (2024-04-18)
 
 
