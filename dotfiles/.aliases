@@ -647,12 +647,11 @@ alias hexyl='n hexyl'
 alias lemmeknow='n lemmeknow'
 
 # development
-alias devenv="n devenv" # https://devenv.sh/
+alias devenv='n devenv' # https://devenv.sh/
 alias difft='n shell/difftastic difft'
 alias grex='n grex'
 alias pcalc='n pcalc'
 alias tokei='n tokei'
-alias webanalyze='n webanalyze -update' # rw, writes technologies.json
 
 # load testing
 alias k6='n k6'
