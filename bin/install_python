@@ -24,8 +24,22 @@ asdf install python
 # Upgrade packages included with Python
 pip install --upgrade pip
 
-# Pretty-print Python tracebacks (https://github.com/skorokithakis/tbvaccine)
-pip install --upgrade tbvaccine
+# Create interpreter wide hook for printing Rich tracebacks
+pip install --upgrade rich
+
+sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
+cat <<EOF >"$sitepackages_path/sitecustomize.py"
+# This file was created by configent/bin/install_python
+
+import os
+
+try:
+    from rich.traceback import install
+    if os.environ.get("RICH_TRACEBACKS"):
+        install(show_locals=os.environ.get("RICH_SHOW_LOCALS"))
+except ModuleNotFoundError:
+    pass
+EOF
 
 # Python applications in isolated environments (https://pypa.github.io/pipx)
 pip install --upgrade pipx
