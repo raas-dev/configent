@@ -24,9 +24,6 @@ asdf install python
 # Upgrade packages included with Python
 pip install --upgrade pip setuptools wheel
 
-# Pretty and useful exceptions (https://github.com/Qix-/better-exceptions)
-pip install --upgrade better_exceptions
-
 # Pretty-print Python tracebacks (https://github.com/skorokithakis/tbvaccine)
 pip install --upgrade tbvaccine
 
