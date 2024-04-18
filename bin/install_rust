@@ -38,6 +38,7 @@ cargo binstall -y git-delta
 cargo binstall -y gitui
 cargo binstall -y --locked kalker
 cargo binstall -y lsd
+cargo binstall -y ouch
 cargo binstall -y procs
 cargo binstall -y ripgrep
 cargo binstall -y sd
