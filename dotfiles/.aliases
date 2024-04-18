@@ -696,10 +696,10 @@ alias wapiti='n wapiti'
 # xss scanners
 alias dalfox='n dalfox'
 
-# penetration testing
+# pentesting
 alias msfconsole='n shell/metasploit msfconsole'
 alias sqlmap='n sqlmap'
 
-# password cracking
+# password recovery
 alias hashcat='n hashcat'
 alias hydra='n shell/thc-hydra hydra'
