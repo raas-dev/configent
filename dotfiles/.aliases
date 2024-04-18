@@ -478,6 +478,9 @@ alias ptpython='pipx run ptpython'
 # Cross-platform real-time monitoring
 alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 
+# View, tail, merge, and search log files (plus JSONL)
+alias tl='pipx run toolong'
+
 # Multitool for tabular data in terminal
 alias vd='pipx run --pip-args openpyxl visidata'
 
