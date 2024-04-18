@@ -175,14 +175,14 @@ alias drv='docker volume rm --force $(docker volume ls --quiet)'
 alias dri='docker rmi --force $(docker images --all --quiet)'
 alias dpr='dr ; drv ; dri ; docker system prune --force --volumes'
 
-### nerdctl ####################################################################
+### containerd #################################################################
 
 alias nr='nerdctl rm --force $(nerdctl ps --all --quiet)'
 alias nrv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nri='nerdctl rmi --force $(nerdctl images --all --quiet)'
 alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes'
 
-### Misc #######################################################################
+### Utilities ##################################################################
 
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
@@ -203,7 +203,88 @@ alias week='date +%V'
 # Weather (https://wttr.in/:help)
 alias wttr='curl "https://wttr.in/${$(ip | jq -r .time_zone)##*/}?&2AFMnq"'
 
-### Utilities ##################################################################
+### Python #####################################################################
+
+# Advanced Python REPL
+alias ptpython='pipx run ptpython'
+
+# Cross-platform real-time monitoring
+alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
+
+# View, tail, merge, and search log files (plus JSONL)
+alias tl='pipx run toolong'
+
+# SQL IDE for terminal
+alias harlequin='pipx run "harlequin[mysql,postgres]" --theme lightbulb'
+
+# Multitool for tabular data in terminal
+alias vd='pipx run --pip-args openpyxl visidata'
+
+# Simplenote in terminal (export SN_USERNAME and SN_PASSWORD in ~/.rclocal)
+alias sncli='pipx run sncli'
+
+# Playwright
+alias playwright='pipx run playwright'
+
+# General media downloader
+alias you-get='pipx run you-get'
+
+# Checkov
+alias checkov='pipx run checkov'
+
+# GuardDog
+alias guarddog='pipx run guarddog'
+
+# Huggingface CLI
+alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
+
+# OpenAI CLI
+alias openai='pipx run openai'
+
+# Toggle a Python virtual environment for development
+venv() {
+  # shellcheck disable=SC1091  # activate does not exist unless venv is created
+  if [ -z "$VIRTUAL_ENV" ]; then
+    [ ! -d ".venv" ] && uv venv  # python -m venv .venv
+    source ".venv/bin/activate"
+    uv pip install --editable . # python -m pip install --editable .
+  else
+    # restore deactivate if shell has been reloaded after activate
+    ! command -v deactivate >/dev/null && source ".venv/bin/activate"
+    deactivate && [ -d ".venv" ] && rm -r ".venv"
+  fi
+}
+
+### Node.js ####################################################################
+
+# Azure Functions CLI
+alias func='npx -y azure-functions-core-tools'
+
+# Firebase CLI
+alias firebase='npx -y firebase-tools'
+
+# Railway.app CLI
+alias railway='npx -y @railway/cli'
+
+# Find unused and missing package.json (dev)Dependencies
+alias depcheck='npx -y depcheck'
+
+# Upgrades your package.json dependencies to the latest version
+alias ncu='npx -y npm-check-updates'
+
+# Yet another package manager
+alias pnpm='npx -y pnpm'
+
+# Project generator (requires bin/yarn shim)
+alias projen='npx -y projen'
+
+# Bump version and generate CHANGELOG.md
+alias standard-version='npx -y standard-version'
+
+# Identify technology of websites
+alias wappalyzer='npx -y wappalyzer'
+
+### Functions: AI ##############################################################
 
 # aichat
 # add to ~/.rclocal:
@@ -242,6 +323,8 @@ interpreter() {
     "$image" \
       --disable_telemetry "$*"
 }
+
+### Functions: Docker ##########################################################
 
 # Generic docker build and run
 d() {
@@ -289,6 +372,8 @@ d() {
     docker logs --follow "$name"
   fi
 }
+
+### Functions: Utilities #######################################################
 
 # Generic extract package
 e() {
@@ -376,6 +461,8 @@ genpass() {
     fold -w "$length" | head -n1 | pbcopy
 }
 
+### Functions: Cleaners ########################################################
+
 # Npm remove all global packages (except later npm installed via npm)
 npmclear() {
   npm ls --location=global -p --depth=0 |
@@ -456,90 +543,9 @@ cursorclear() {
   esac
 }
 
-# Toggle a Python virtual environment for development
-venv() {
-  # shellcheck disable=SC1091  # activate does not exist unless venv is created
-  if [ -z "$VIRTUAL_ENV" ]; then
-    [ ! -d ".venv" ] && uv venv  # python -m venv .venv
-    source ".venv/bin/activate"
-    uv pip install --editable . # python -m pip install --editable .
-  else
-    # restore deactivate if shell has been reloaded after activate
-    ! command -v deactivate >/dev/null && source ".venv/bin/activate"
-    deactivate && [ -d ".venv" ] && rm -r ".venv"
-  fi
-}
-
-### Latest versions of Python command-line tools ###############################
-
-# Advanced Python REPL
-alias ptpython='pipx run ptpython'
-
-# Cross-platform real-time monitoring
-alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
-
-# View, tail, merge, and search log files (plus JSONL)
-alias tl='pipx run toolong'
-
-# SQL IDE for terminal
-alias harlequin='pipx run "harlequin[mysql,postgres]" --theme lightbulb'
-
-# Multitool for tabular data in terminal
-alias vd='pipx run --pip-args openpyxl visidata'
-
-# Simplenote in terminal (export SN_USERNAME and SN_PASSWORD in ~/.rclocal)
-alias sncli='pipx run sncli'
-
-# Playwright
-alias playwright='pipx run playwright'
-
-# General media downloader
-alias you-get='pipx run you-get'
-
-# Checkov
-alias checkov='pipx run checkov'
-
-# GuardDog
-alias guarddog='pipx run guarddog'
-
-# Huggingface CLI
-alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
-
-# OpenAI CLI
-alias openai='pipx run openai'
-
-### Latest versions of global Node.js command-line tools #######################
-
-# Azure Functions CLI
-alias func='npx -y azure-functions-core-tools'
-
-# Firebase CLI
-alias firebase='npx -y firebase-tools'
-
-# Railway.app CLI
-alias railway='npx -y @railway/cli'
-
-# Find unused and missing package.json (dev)Dependencies
-alias depcheck='npx -y depcheck'
-
-# Upgrades your package.json dependencies to the latest version
-alias ncu='npx -y npm-check-updates'
-
-# Yet another package manager
-alias pnpm='npx -y pnpm'
-
-# Project generator (requires bin/yarn shim)
-alias projen='npx -y projen'
-
-# Bump version and generate CHANGELOG.md
-alias standard-version='npx -y standard-version'
-
-# Identify technology of websites
-alias wappalyzer='npx -y wappalyzer'
-
 ### Nix ########################################################################
 
-# Nix in docker
+# Nix in containerd
 nixd() {
   if [ -z "$1" ]; then
     local bin="bash"
