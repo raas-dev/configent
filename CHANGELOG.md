@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.91.2](https://github.com/raas-dev/configent/compare/1.91.1...1.91.2) (2024-04-18)
+
+
+### Fixes
+
+* **aichat:** Improve prompts ([bd2f62f](https://github.com/raas-dev/configent/commit/bd2f62f75f4730447f08f468935658634324632d))
+* **python:** Remove better-exceptions ([3dcbef9](https://github.com/raas-dev/configent/commit/3dcbef95514ddbea52efb339c8c9a2f60106017e))
+* **python:** Remove setuptools and wheel ([4608280](https://github.com/raas-dev/configent/commit/4608280f8d3a53113d7b329b0ceb3877c99f6839))
+
 ### [1.91.1](https://github.com/raas-dev/configent/compare/1.91.0...1.91.1) (2024-04-15)
 
 
