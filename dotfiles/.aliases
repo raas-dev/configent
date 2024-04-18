@@ -625,21 +625,29 @@ nixery() {
 
 ### Ad-hoc binaries via Nix ####################################################
 
-# appsec
-alias grype='n grype' # rw, writes report
-alias syft='n syft' # rw, writes sbom
+# file explorers
+alias yazi='n yazi/vim'
 
-# sast
-alias terrascan='n terrascan'
-alias trufflehog='n trufflehog/git'
+# servers
+alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy'
 
-# databases
+# appsec
+alias grype='n grype'
+alias syft='n syft'
+
+# secrets
+alias trufflehog='n trufflehog/git'
+
+# sast
+alias kubescape='n kubescape'
+alias terrascan='n terrascan'
+
+# database clients
 alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
-alias sqlmap='n sqlmap'
 
 # decoders
 alias fq='n fq'
@@ -660,28 +668,38 @@ alias oha='n oha'
 # network
 alias dog='n shell/dogdns dog'
 alias gping='n gping/iputils'
+
+# port scanners
 alias naabu='n naabu'
 alias nmap='n nmap'
 alias rustscan='n rustscan'
 
 # osint
-alias amass='n amass'
 alias maigret='n maigret'
 
-# pentesting
-alias hydra='n shell/thc-hydra hydra'
+# enumeration
+alias amass='n amass'
+alias feroxbuster='n feroxbuster'
 alias gobuster='n gobuster'
-alias msfconsole='n shell/metasploit msfconsole'
-
-# scanners
-alias dalfox='n dalfox'
-alias dnstwist='n dnstwist'
-alias ffuf='n ffuf'
 alias katana='n katana'
+
+# dns scanners
+alias dnstwist='n dnstwist'
+alias subfinder='n subfinder'
+
+# web scanners
+alias ffuf='n ffuf'
 alias nikto='n nikto'
 alias nuclei='n nuclei'
 alias wapiti='n wapiti'
 
-# miscellaneous (rw)
-alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
-alias yazi='n yazi/vim'
+# xss scanners
+alias dalfox='n dalfox'
+
+# penetration testing
+alias msfconsole='n shell/metasploit msfconsole'
+alias sqlmap='n sqlmap'
+
+# password cracking
+alias hashcat='n hashcat'
+alias hydra='n shell/thc-hydra hydra'
