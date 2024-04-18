@@ -652,7 +652,6 @@ alias difft='n shell/difftastic difft'
 alias grex='n grex'
 alias pcalc='n pcalc'
 alias tokei='n tokei'
-alias usql='n usql'
 alias webanalyze='n webanalyze -update' # rw, writes technologies.json
 
 # load testing
