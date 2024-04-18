@@ -22,7 +22,7 @@ asdf install python
 ### interpreter scope ##########################################################
 
 # Upgrade packages included with Python
-pip install --upgrade pip setuptools wheel
+pip install --upgrade pip
 
 # Pretty-print Python tracebacks (https://github.com/skorokithakis/tbvaccine)
 pip install --upgrade tbvaccine
