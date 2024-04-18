@@ -263,5 +263,6 @@
     "yml"
   ],
   "excalidraw.theme": "dark",
-  "codeium.enableInComments": false
+  "codeium.enableInComments": false,
+  "terminal.integrated.sendKeybindingsToShell": true
 }
