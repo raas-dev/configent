@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.1](https://github.com/raas-dev/configent/compare/1.93.0...1.93.1) (2024-04-18)
+
+
+### Fixes
+
+* **aliases:** Remove onefetch ([5336817](https://github.com/raas-dev/configent/commit/53368177c4db0a486bbac29811650761f66db4a1))
+* **aliases:** Remove usql ([c5e99fa](https://github.com/raas-dev/configent/commit/c5e99fa9145b513f390846ac9a65c06b60111b88))
+* **aliases:** Remove webanalyze ([38cfa3a](https://github.com/raas-dev/configent/commit/38cfa3ae26fc3106ed8a1f1a9c141fc727ce50e4))
+* **azure:** Upgrade azure cli ([f02560f](https://github.com/raas-dev/configent/commit/f02560fcd20d6e4f286f5e38b0777c700403ee70))
+
 ## [1.93.0](https://github.com/raas-dev/configent/compare/1.92.0...1.93.0) (2024-04-18)
 
 
