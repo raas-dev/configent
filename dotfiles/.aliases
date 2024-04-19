@@ -67,10 +67,10 @@ fi
 
 ### More sensible defaults #####################################################
 
-if command -v cursor >/dev/null; then
-  alias code='cursor --reuse-window --add'
-elif command -v codium >/dev/null; then
+if command -v codium >/dev/null; then
   alias code='codium --reuse-window --add'
+elif command -v cursor >/dev/null; then
+  alias code='cursor --reuse-window --add'
 elif command -v code >/dev/null; then
   alias code='code --reuse-window --add'
 fi
@@ -492,22 +492,6 @@ brewclear() {
   esac
 }
 
-# Remove all VSCode extensions
-codeclear() {
-  printf "Are you sure to remove all VSCode extensions [y\N] > "
-  read -r choice
-  case "$choice" in
-  [yY])
-    code --list-extensions | while read -r extension; do
-      code --force --uninstall-extension "$extension"
-    done
-    ;;
-  *)
-    printf "Aborted.\n"
-    ;;
-  esac
-}
-
 # Remove all VSCodium extensions
 codiumclear() {
   printf "Are you sure to remove all VSCodium extensions [y\N] > "
@@ -532,6 +516,22 @@ cursorclear() {
   [yY])
     cursor --list-extensions | while read -r extension; do
       cursor --force --uninstall-extension "$extension"
+    done
+    ;;
+  *)
+    printf "Aborted.\n"
+    ;;
+  esac
+}
+
+# Remove all VSCode extensions
+codeclear() {
+  printf "Are you sure to remove all VSCode extensions [y\N] > "
+  read -r choice
+  case "$choice" in
+  [yY])
+    code --list-extensions | while read -r extension; do
+      code --force --uninstall-extension "$extension"
     done
     ;;
   *)
