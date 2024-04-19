@@ -37,7 +37,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias spoton='sudo mdutil -a -i on'
 
   # Canonical hex dump; some systems have this symlinked
-  command -v hd >/dev/null || alias hd='hexdump -C'
+  ! command -v hd >/dev/null && alias hd='hexdump -C'
 
   # macOS keychain
   get_keychain_variable() {
