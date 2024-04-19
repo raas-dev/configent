@@ -120,8 +120,9 @@ fi
 
 ### Python #####################################################################
 
-export RICH_TRACEBACKS=True
-export RICH_SHOW_LOCALS=True
+export RICH_TRACEBACKS=true
+export RICH_SHOW_LOCALS=true
+export POETRY_VIRTUALENVS_IN_PROJECT=true
 export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
