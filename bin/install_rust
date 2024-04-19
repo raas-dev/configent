@@ -19,6 +19,12 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 asdf plugin add rust
 asdf install rust
 
+rust_path="$(asdf where rust 2>/dev/null)"
+if [ -d "$rust_path" ]; then
+  export CARGO_HOME="$rust_path"
+  export PATH="$CARGO_HOME/bin:$PATH"
+fi
+
 ### rustup #####################################################################
 
 rustup default stable
