@@ -6,10 +6,11 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# Generate git commit message using LLM
+# Proposes git commit message generated with LLM and asks to commit
 
 # shellcheck disable=SC2034  # some colors are unused
 normal=$(tput sgr0)
+bold=$(tput bold)
 black=$(tput setaf 0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
@@ -20,23 +21,30 @@ cyan=$(tput setaf 6)
 white=$(tput setaf 7)
 
 if ! command -v aichat >/dev/null; then
-  printf "%sError: aichat not found.\n" "$red"
+  printf "%sError: aichat not found in the system.\n" "$red"
   exit 127
 fi
 
-git_diff="$(git diff --staged)"
+git_diff="$(git diff --staged --no-color)"
 if [ -z "$git_diff" ]; then
-  printf "%sNothing to commit.\n" "$red"
+  printf "%sNothing staged to commit.\n" "$red"
   exit 1
 fi
 
-commit_message="$(aichat --role commit --no-highlight --no-stream "$git_diff" | fmt --width 80)"
+commit_message="$(aichat --role commit --no-highlight --no-stream \
+  "$git_diff" | fmt --width 100)"
 
 printf "%s$commit_message" "$white"
-printf "\n\n"
-printf "%sCommit with this (y), edit message first (e) or quit (q) [y\\\e\\\q] %s > " "$cyan" "$normal"
+printf "\n"
 
-read -r choice
+if [ -z "$NONINTERACTIVE" ]; then
+  printf "\n%sCommit with this (y), edit message first (e), or quit (q)\
+  [y\\\e\\\q] %s> " "${bold}${cyan}" "$normal"
+  read -r choice
+else
+  choice="y"
+fi
+
 case "$choice" in
 [yY])
   git commit --message "$commit_message"
