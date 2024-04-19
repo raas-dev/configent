@@ -34,9 +34,9 @@ from https://github.com/robb0wen/synthwave-vscode
           <key>foreground</key>
           <string>#ffffff</string>
           <key>lineHighlight</key>
-          <string>#49549539</string>
+          <string>#495495</string>
           <key>selection</key>
-          <string>#ffffff20</string>
+          <string>#ffff00</string>
         </dict>
       </dict>
       <dict>
@@ -58,7 +58,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#72f1b8cc</string>
+          <string>#72f1b8</string>
         </dict>
       </dict>
       <dict>
@@ -69,7 +69,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#b893ceee</string>
+          <string>#b893ce</string>
         </dict>
       </dict>
       <dict>
@@ -91,7 +91,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#ffffff59</string>
+          <string>#ffffff</string>
         </dict>
       </dict>
       <dict>
@@ -306,7 +306,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#D50</string>
+          <string>#dd5500</string>
         </dict>
       </dict>
       <dict>
@@ -339,7 +339,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
         </dict>
       </dict>
       <dict>
@@ -548,7 +548,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#D50</string>
+          <string>#dd5500</string>
         </dict>
       </dict>
       <dict>
@@ -581,7 +581,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#ffffffee</string>
+          <string>#ffffff</string>
         </dict>
       </dict>
       <dict>
@@ -592,7 +592,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#b6b1b1cc</string>
+          <string>#b6b1b1</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -616,7 +616,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#D50</string>
+          <string>#dd5500</string>
         </dict>
       </dict>
       <dict>
@@ -892,7 +892,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#ff7edbff</string>
+          <string>#ff7edb</string>
         </dict>
       </dict>
       <dict>
@@ -903,7 +903,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#ff7edbff</string>
+          <string>#ff7edb</string>
         </dict>
       </dict>
       <dict>
@@ -947,7 +947,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
         </dict>
       </dict>
       <dict>
@@ -995,7 +995,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -1008,7 +1008,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -1032,7 +1032,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#ff7edbff</string>
+          <string>#ff7edb</string>
         </dict>
       </dict>
       <dict>
@@ -1065,7 +1065,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
         </dict>
       </dict>
       <dict>
@@ -1076,7 +1076,7 @@ from https://github.com/robb0wen/synthwave-vscode
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#2EE2FA</string>
+          <string>#2ee2fa</string>
         </dict>
       </dict>
       <dict>
