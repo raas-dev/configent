@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.5](https://github.com/raas-dev/configent/compare/1.93.4...1.93.5) (2024-04-19)
+
+
+### Fixes
+
+* **rust:** Set CARGO_HOME on install ([f4fd57d](https://github.com/raas-dev/configent/commit/f4fd57df59b9f81827224ce4a7d34be4dc3d2318))
+
 ### [1.93.4](https://github.com/raas-dev/configent/compare/1.93.3...1.93.4) (2024-04-19)
 
 
