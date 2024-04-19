@@ -27,19 +27,10 @@ pip install --upgrade pip
 # Create interpreter wide hook for printing Rich tracebacks
 pip install --upgrade rich
 
+# Symlink sitecustomize.py to Python site-packages
 sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
-cat <<EOF >"$sitepackages_path/sitecustomize.py"
-# This file was created by configent/bin/install_python
-
-try:
-    from rich.traceback import install
-    import os
-    if os.environ.get("RICH_TRACEBACKS") == "1":
-        show_locals_bool = os.environ.get("RICH_SHOW_LOCALS") == "1"
-        install(show_locals=show_locals_bool)
-except ModuleNotFoundError:
-    pass
-EOF
+ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
+  "$sitepackages_path/sitecustomize.py"
 
 # Python applications in isolated environments (https://pypa.github.io/pipx)
 pip install --upgrade pipx

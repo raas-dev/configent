@@ -71,6 +71,19 @@ if [ "$(uname -s)" = 'Linux' ]; then
   ln -sfnv "$dotfiles_path/.htoprc" "$HOME/.config/htop/htoprc"
 fi
 
+### Symlink sitecustomize.py ###################################################
+
+if [ ! -r "$backup_path/.config/python/sitecustomize.py" ]; then
+  if [ -r "$HOME/.config/python/sitecustomize.py" ]; then
+    mkdir -p "$backup_path/.config/python"
+    cp -P "$HOME/.config/python/sitecustomize.py" \
+      "$backup_path/.config/python/sitecustomize.py"
+  fi
+fi
+mkdir -p "$HOME/.config/python"
+ln -sfnv "$config_path/python/sitecustomize.py" \
+  "$HOME/.config/python/sitecustomize.py"
+
 ### Symlink ptpython config ####################################################
 
 if [ ! -r "$backup_path/.config/ptpython/config.py" ]; then
