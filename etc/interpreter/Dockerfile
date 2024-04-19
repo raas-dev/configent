@@ -12,6 +12,7 @@ RUN (cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
     echo ${TZ} > /etc/timezone) || true
 
 ARG OI_VERSION="0.2.4"
+# hadolint ignore=DL3013
 RUN pip install --no-cache-dir --upgrade pip open-interpreter=="$OI_VERSION"
 
 COPY profiles /root/.config/open-interpreter/profiles
