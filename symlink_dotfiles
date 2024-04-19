@@ -142,13 +142,3 @@ fi
 mkdir -p "$HOME/.config/bat/themes"
 ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/bat/themes/SynthWave84.tmTheme"
-
-### Symlink turbocommit config #################################################
-
-if [ ! -r "$backup_path/.turbocommit.yaml" ]; then
-  if [ -r "$HOME/.turbocommit.yaml" ]; then
-    mkdir -p "$backup_path"
-    cp -P "$HOME/.turbocommit.yaml" "$backup_path/.turbocommit.yaml"
-  fi
-fi
-ln -sfnv "$config_path/turbocommit/.turbocommit.yaml" "$HOME/.turbocommit.yaml"
