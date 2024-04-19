@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.4](https://github.com/raas-dev/configent/compare/1.93.3...1.93.4) (2024-04-19)
+
+
+### Fixes
+
+* **bat:** Fix bat cache build order ([e8f852a](https://github.com/raas-dev/configent/commit/e8f852a19c3b18942a313fd6198b36d1f8b8ccd9))
+* **poetry:** Do not install pip in venv ([a2685f8](https://github.com/raas-dev/configent/commit/a2685f82e6e45ebd3bcc97348bf771ee02410794))
+* **poetry:** Prefer active python ([1af3360](https://github.com/raas-dev/configent/commit/1af33603ca8e7046ef4795ba01b0cf2d409bf33c))
+* **python:** Add poetry export plugin ([d6cce8d](https://github.com/raas-dev/configent/commit/d6cce8dc07ae31c2277b4465c127c0af2ae53d67))
+* **python:** Create poetry venvs in project dir ([b844b3e](https://github.com/raas-dev/configent/commit/b844b3e5f124457262f593984d5888a72430c025))
+* **python:** Export requirements.txt if not exist ([2811575](https://github.com/raas-dev/configent/commit/2811575db91bd43a6531cc1a249f2c85a7eda709))
+* **python:** Interpret truth values ([46f510c](https://github.com/raas-dev/configent/commit/46f510c71438a35b5a757365cd00141d073c41a4))
+
 ### [1.93.3](https://github.com/raas-dev/configent/compare/1.93.2...1.93.3) (2024-04-19)
 
 
