@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.2](https://github.com/raas-dev/configent/compare/1.93.1...1.93.2) (2024-04-19)
+
+
+### Fixes
+
+* **aliases:** Add rich tracebacks to venv ([bc9822c](https://github.com/raas-dev/configent/commit/bc9822c27a2c4c8a46cb60fdf6036b8ab1363d1c))
+* **aliases:** Add security tools via nix ([0f28ebb](https://github.com/raas-dev/configent/commit/0f28ebb13f7181148aaaeed80ea39fccb53b2192))
+* **aliases:** Remove wttr ([ca2ed7d](https://github.com/raas-dev/configent/commit/ca2ed7dcf3dd59ff05cd8b93e32532f28390a005))
+* **codium:** Change Codium priority above Cursor ([47c981e](https://github.com/raas-dev/configent/commit/47c981e8f1b88b0422d7824dc3d2001bf3ff4c16))
+* **python:** Symlink sitecustomize.py ([9fbc2fe](https://github.com/raas-dev/configent/commit/9fbc2feffe2adc69a2d1d951cd4290eef1e671e3))
+
 ### [1.93.1](https://github.com/raas-dev/configent/compare/1.93.0...1.93.1) (2024-04-18)
 
 
