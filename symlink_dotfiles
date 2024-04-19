@@ -143,8 +143,6 @@ mkdir -p "$HOME/.config/bat/themes"
 ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/bat/themes/SynthWave84.tmTheme"
 
-bat cache --build
-
 ### Symlink turbocommit config #################################################
 
 if [ ! -r "$backup_path/.turbocommit.yaml" ]; then
