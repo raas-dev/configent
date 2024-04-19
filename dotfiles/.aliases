@@ -248,8 +248,8 @@ venv() {
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
     uv pip install rich # python -m pip install rich
-    if command -v poetry >/dev/null && [ -r "pyproject.toml" ]; then
-      [ ! -r "requirements.txt" ] && poetry export -o requirements.txt
+    if [ ! -r "requirements.txt" ] && [ -r "pyproject.toml" ]; then
+       command -v poetry >/dev/null && poetry export -o requirements.txt
     fi
     [ -r "requirements.txt" ] && uv pip install -r requirements.txt
     uv pip install --editable . # python -m pip install --editable .
