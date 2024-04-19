@@ -120,10 +120,18 @@ fi
 
 ### Python #####################################################################
 
+# sitecustomize.py
 export RICH_TRACEBACKS=true
 export RICH_SHOW_LOCALS=true
+
+# poetry
 export POETRY_VIRTUALENVS_IN_PROJECT=true
+export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
+
+# ptpython
 export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
+
+# PATH is rewritten on (re)loading shell, thus we are not in virtualenv
 unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
 # Add `pip install --user` and `pipx` scopes to $PATH
