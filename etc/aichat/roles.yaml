@@ -39,9 +39,9 @@
 
     The expected output is formatted as following:
 
-      label(scope): headline
+      label(scope): Headline
 
-      body
+      Body
 
     Important: The commit message must only have 1 headline and at most 1 body.
 
