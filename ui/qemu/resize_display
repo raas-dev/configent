@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 xrandr --output Virtual-1 --auto
