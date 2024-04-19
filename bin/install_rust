@@ -47,7 +47,6 @@ cargo binstall -y procs
 cargo binstall -y ripgrep
 cargo binstall -y sd
 cargo binstall -y --locked starship
-cargo binstall -y turbocommit
 cargo binstall -y xh
 cargo binstall -y --locked zoxide
 
