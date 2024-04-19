@@ -247,7 +247,6 @@ venv() {
     sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
-    # python -m ensurepip --default-pip
     uv pip install rich # python -m pip install rich
     uv pip install --editable . # python -m pip install --editable .
   else
