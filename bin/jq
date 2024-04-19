@@ -12,5 +12,8 @@
 if command -v gojq >/dev/null; then
   gojq $@
 else
+  # avoid infinite loop
+  this_path="$(cd "$(dirname "$0")" && pwd)"
+  PATH=${PATH#"$this_path"}
   jq $@
 fi
