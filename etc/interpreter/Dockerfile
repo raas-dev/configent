@@ -1,5 +1,3 @@
-# checkov:skip=CKV_DOCKER_2: skip healthcheck
-# checkov:skip=CKV_DOCKER_3: skip creating user
 FROM python:3.11-slim-bookworm
 
 ARG ADD_DEB_PACKAGES="gcc python3-dev"
@@ -14,11 +12,12 @@ RUN (cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
     echo ${TZ} > /etc/timezone) || true
 
 ARG OI_VERSION="0.2.4"
-# hadolint ignore=DL3013
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
-      open-interpreter=="$OI_VERSION"
+RUN pip install --no-cache-dir --upgrade pip open-interpreter=="$OI_VERSION"
 
 COPY profiles /root/.config/open-interpreter/profiles
 
 ENTRYPOINT ["interpreter"]
 CMD ["--disable_telemetry"]
+
+# checkov:skip=CKV_DOCKER_2: skip healthcheck
+# checkov:skip=CKV_DOCKER_3: skip creating user
