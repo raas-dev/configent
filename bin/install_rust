@@ -7,6 +7,7 @@
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # shellcheck disable=SC1091  # do not expect input files
+# shellcheck disable=SC2155  # will not declare separately, value compactness
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
@@ -19,11 +20,8 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 asdf plugin add rust
 asdf install rust
 
-rust_path="$(asdf where rust 2>/dev/null)"
-if [ -d "$rust_path" ]; then
-  export CARGO_HOME="$rust_path"
-  export PATH="$CARGO_HOME/bin:$PATH"
-fi
+export CARGO_HOME="$(asdf where rust 2>/dev/null)"
+export PATH="$CARGO_HOME/bin:$PATH"
 
 ### rustup #####################################################################
 
