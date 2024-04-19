@@ -248,6 +248,9 @@ venv() {
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
     uv pip install rich # python -m pip install rich
+    if command -v poetry >/dev/null && [ -r "pyproject.toml" ]; then
+      poetry export -o requirements.txt && uv pip install -r requirements.txt
+    fi
     uv pip install --editable . # python -m pip install --editable .
   else
     # restore deactivate if shell has been reloaded after activate
