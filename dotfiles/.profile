@@ -120,8 +120,8 @@ fi
 
 ### Python #####################################################################
 
-export RICH_TRACEBACKS=1
-export RICH_SHOW_LOCALS=1
+export RICH_TRACEBACKS=True
+export RICH_SHOW_LOCALS=True
 export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
