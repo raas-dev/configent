@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.3](https://github.com/raas-dev/configent/compare/1.93.2...1.93.3) (2024-04-19)
+
+
+### Fixes
+
+* **interpreter:** Remove unused packages ([028d5c3](https://github.com/raas-dev/configent/commit/028d5c3d4299f6ad0c0d45000cee315b5688af16))
+* **themes:** Fix hex codes ([8820b70](https://github.com/raas-dev/configent/commit/8820b7092d9ba788a51dde84b8d83e2706f02a9c))
+
 ### [1.93.2](https://github.com/raas-dev/configent/compare/1.93.1...1.93.2) (2024-04-19)
 
 
