@@ -242,8 +242,13 @@ alias openai='pipx run openai'
 venv() {
   # shellcheck disable=SC1091  # activate does not exist unless venv is created
   if [ -z "$VIRTUAL_ENV" ]; then
-    [ ! -d ".venv" ] && uv venv  # python -m venv .venv
+    [ ! -d ".venv" ] && uv venv # python -m venv .venv
     source ".venv/bin/activate"
+    sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
+    ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
+      "$sitepackages_path/sitecustomize.py"
+    # python -m ensurepip --default-pip
+    uv pip install rich # python -m pip install rich
     uv pip install --editable . # python -m pip install --editable .
   else
     # restore deactivate if shell has been reloaded after activate
