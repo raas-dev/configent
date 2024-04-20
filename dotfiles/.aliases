@@ -266,8 +266,6 @@ venv() {
       uv pip install --editable ".[dev,test]"
     fi
   else
-    # restore deactivate() if shell has been reloaded after activate
-    ! command -v deactivate >/dev/null && source ".venv/bin/activate"
     deactivate # && [ -d ".venv" ] && rm -r ".venv"
   fi
 }
