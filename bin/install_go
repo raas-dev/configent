@@ -29,6 +29,9 @@ export GOROOT="$GOPATH/go"
 # https://github.com/muesli/duf
 go install github.com/muesli/duf@latest
 
+# https://github.com/go-enry/enry
+go install github.com/go-enry/enry@latest
+
 # https://github.com/charmbracelet/glow
 go install github.com/charmbracelet/glow@latest
 

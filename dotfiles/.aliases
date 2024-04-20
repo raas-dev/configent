@@ -302,10 +302,16 @@ ai() {
 }
 
 ai_code() {
-  local lang="polyglot"
-  [ -n "$1" ] && lang="$1"
-  aichat --role "code:$lang" --session "$(date +"%Y-%m-%d"):code:$lang"
-    # --model claude:claude-3-haiku-20240307
+  # shellcheck disable=SC2155  # will not declare separately, value compactness
+  if [ -n "$1" ]; then
+    local lang="$1"
+  elif command -v enry >/dev/null; then
+    local lang="$(enry -prog | head -n1 | cut -f2)"
+  else
+    local lang="polyglot"
+  fi
+  local project="${PWD##*/}"
+  aichat --role "code:$lang" --session "$project" --save-session
 }
 
 # open-interpreter (https://docs.openinterpreter.com/integrations/docker)
