@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.94.0](https://github.com/raas-dev/configent/compare/1.93.5...1.94.0) (2024-04-20)
+
+
+### Features
+
+* **bin:** introduce ai_commit script and update configs ([aa7cfeb](https://github.com/raas-dev/configent/commit/aa7cfeba3436d1bb5474858a0f8ac83fee594dae))
+
+
+### Fixes
+
+* **ai_code:** Detect repo language if not given ([dd1085d](https://github.com/raas-dev/configent/commit/dd1085d14471f4527d8b95c0f82efcc673c5ac78))
+* **ai_commit:** Capitalize headline and body ([28123a8](https://github.com/raas-dev/configent/commit/28123a8ea349bdde495c78633e007c1e4951852d))
+* **ai_commit:** Improve formatting ([1dfcd9d](https://github.com/raas-dev/configent/commit/1dfcd9d0ab2b5d636737c23471922f8f5ef655dd))
+* **aliases:** Do not purge venv after deactivate ([262d33c](https://github.com/raas-dev/configent/commit/262d33c7c46d6c2266736575cd6b9ab020b731ff))
+* **aliases:** Make venv install dev and test deps ([096b6f6](https://github.com/raas-dev/configent/commit/096b6f6b672c2a72ae2c34797827630012e45152))
+* **aliases:** Validate pyproject.toml before exporting ([be1d568](https://github.com/raas-dev/configent/commit/be1d568cc352c830fc2f89bcda2b000e9f62fe3b))
+* **jq:** Avoid infinite loop ([4a68826](https://github.com/raas-dev/configent/commit/4a688262e0a3283d89d9c9bba565adb35108698b))
+* **python:** Add hatch ([f5ed188](https://github.com/raas-dev/configent/commit/f5ed18835437b05708e51138d90b73f9e203abae))
+* **python:** Add pdm and hatch via pipx run ([6f23bb0](https://github.com/raas-dev/configent/commit/6f23bb0913813e88b19313aeaffa8b14548f2cc3))
+* **qemu:** Fix shebang ([21bd0cd](https://github.com/raas-dev/configent/commit/21bd0cd6fabf5e4b94fa0b10eda7277c65fb98fa))
+* **xpanes:** Update xpanes ([9d60928](https://github.com/raas-dev/configent/commit/9d609282204d90c4a7ed80eaa80c7ac554406dc0))
+
 ### [1.93.5](https://github.com/raas-dev/configent/compare/1.93.4...1.93.5) (2024-04-19)
 
 
