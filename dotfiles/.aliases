@@ -238,6 +238,12 @@ alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
 # OpenAI CLI
 alias openai='pipx run openai'
 
+# https://hatch.pypa.io/latest
+alias hatch='pipx run hatch'
+
+# https://pdm-project.org/en/stable
+alias pdm='pipx run pdm'
+
 # Toggle a Python virtual environment for development
 venv() {
   # shellcheck disable=SC1091  # activate does not exist unless venv is created
@@ -248,7 +254,9 @@ venv() {
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
     uv pip install rich # python -m pip install rich
-    if [ -r "poetry.lock" ] && command -v poetry >/dev/null; then
+    if [ -r "pdm.lock" ] && command -v pdm >/dev/null; then
+      pdm install
+    elif [ -r "poetry.lock" ] && command -v poetry >/dev/null; then
       ! poetry check &>/dev/null && poetry lock
       poetry install
     elif [ -r "requirements.txt" ]; then
