@@ -249,7 +249,9 @@ venv() {
       "$sitepackages_path/sitecustomize.py"
     uv pip install rich # python -m pip install rich
     if [ ! -r "requirements.txt" ] && [ -r "pyproject.toml" ]; then
-      command -v poetry >/dev/null && poetry export -o requirements.txt
+      if command -v poetry >/dev/null ; then
+        poetry check &>/dev/null && poetry export -o requirements.txt
+      fi
     fi
     [ -r "requirements.txt" ] && uv pip install -r requirements.txt
     uv pip install --editable . # python -m pip install --editable .
