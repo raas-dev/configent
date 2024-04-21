@@ -14,16 +14,28 @@ shellcheck 0.10.0
 hadolint 2.12.0
 trivy 0.50.1
 
-# install_iac
-awscli 2.13.3
+# install_aws
+awscli 2.15.40
 aws-vault 7.2.0
+
+# install_azure
 azure-cli 2.59.0
-gcloud 441.0.0
-terraform 1.5.3
-tfsec 1.28.1
-kubectl 1.27.4
+
+# install_gcloud
+gcloud 472.0.0
+
+# install_terraform
+terraform 1.8.1
+tfsec 1.28.5
+
+# install_k8sdev
+kubectl 1.30.0
 krew 0.4.4
-helm 3.12.2
-k9s 0.27.4
-cloudflared 2023.7.2
-flyctl 0.1.85
+helm 3.14.4
+k9s 0.32.4
+
+# install_cloudflare
+cloudflared 2024.4.0
+
+# install_flyctl
+flyctl 0.2.40
