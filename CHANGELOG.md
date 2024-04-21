@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.94.1](https://github.com/raas-dev/configent/compare/1.94.0...1.94.1) (2024-04-21)
+
+
+### Fixes
+
+* **python:** Fix azure-cli python version requirement ([adacd2b](https://github.com/raas-dev/configent/commit/adacd2b58ab24434d7827d46e50d552bc48c7ed3))
+* **python:** Install pdm ([1d7e96f](https://github.com/raas-dev/configent/commit/1d7e96fa2f0acea8665e20c57e1e2beb42f1391d))
+
 ## [1.94.0](https://github.com/raas-dev/configent/compare/1.93.5...1.94.0) (2024-04-20)
 
 
