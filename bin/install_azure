@@ -18,7 +18,7 @@ git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 
 ### azure cli ##################################################################
 
-asdf plugin add azure-cli
+asdf plugin add azure-cli https://github.com/asyrjasalo/asdf-azure-cli
 asdf install azure-cli
 
 az config set core.collect_telemetry=false
