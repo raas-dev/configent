@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.1](https://github.com/raas-dev/configent/compare/1.95.0...1.95.1) (2024-04-21)
+
+
+### Fixes
+
+* **asdf:** Consistent prepending to PATH on all OS ([773a8f3](https://github.com/raas-dev/configent/commit/773a8f3776374269840b6df19b246ed29bda5739))
+* **rust:** Removing rustup over asdf installed cargo ([0a49b83](https://github.com/raas-dev/configent/commit/0a49b83d509e3f144f4ef7a964f2daef1115cd2c))
+
 ## [1.95.0](https://github.com/raas-dev/configent/compare/1.94.1...1.95.0) (2024-04-21)
 
 
