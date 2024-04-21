@@ -20,12 +20,9 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 asdf plugin add rust
 asdf install rust
 
+### cargo ######################################################################
+
 export CARGO_HOME="$(asdf where rust 2>/dev/null)"
-export PATH="$CARGO_HOME/bin:$PATH"
-
-### rustup #####################################################################
-
-rustup default stable
 
 ### cargo binstall #############################################################
 
@@ -35,7 +32,7 @@ cargo install cargo-binstall
 ### dotfiles requirements ######################################################
 
 cargo binstall -y aichat
-cargo binstall -y --locked bat && bat cache --build
+cargo binstall -y --locked bat && "$CARGO_HOME/bin/bat" cache --build
 cargo binstall -y diskonaut
 cargo binstall -y fd-find
 cargo binstall -y git-delta
