@@ -95,7 +95,7 @@ fi
 ### asdf #######################################################################
 
 if [ -r "$HOME/.asdf/asdf.sh" ]; then
-  . "$HOME/.asdf/asdf.sh"
+  ASDF_FORCE_PREPEND=yes . "$HOME/.asdf/asdf.sh"
 
   # Go
   export ASDF_GOLANG_MOD_VERSION_ENABLED=true

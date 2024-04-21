@@ -17,7 +17,7 @@ config_path="$HOME/.config/configent"
 
 export ASDF_DIR="$HOME/.asdf"
 git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-. "$ASDF_DIR/asdf.sh"
+ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
 ### dotnet tools ###############################################################
 
