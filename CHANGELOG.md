@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.95.0](https://github.com/raas-dev/configent/compare/1.94.1...1.95.0) (2024-04-21)
+
+
+### Features
+
+* **asdf:** Upgrade all languages ([adfaea9](https://github.com/raas-dev/configent/commit/adfaea9919bcfa0d88b6c013777405397107c231))
+* **asdf:** Upgrade all non-language tools ([0db624c](https://github.com/raas-dev/configent/commit/0db624c7345d0e289f71d98d0aa85f1acf3188b7))
+
+
+### Fixes
+
+* **bash:** Fix PROMPT_COMMAND ([5c92c1d](https://github.com/raas-dev/configent/commit/5c92c1d91f23de7cb19afe18ebed3fe2efdf4cae))
+
 ### [1.94.1](https://github.com/raas-dev/configent/compare/1.94.0...1.94.1) (2024-04-21)
 
 
