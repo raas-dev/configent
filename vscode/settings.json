@@ -54,7 +54,7 @@
   "editor.lineHeight": 15.5,
   "editor.minimap.enabled": true,
   "editor.minimap.showSlider": "always",
-  "editor.mouseWheelScrollSensitivity": 0.75,
+  "editor.mouseWheelScrollSensitivity": 0.25,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.rulers": [
@@ -264,5 +264,7 @@
   ],
   "excalidraw.theme": "dark",
   "codeium.enableInComments": false,
-  "terminal.integrated.sendKeybindingsToShell": true
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "editor.find.addExtraSpaceOnTop": false,
+  "workbench.list.mouseWheelScrollSensitivity": 0.25
 }
