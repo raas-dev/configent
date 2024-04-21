@@ -36,7 +36,7 @@ Works on x86-64 and ARM:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.18, 3.17, 3.16 and 3.15
 
-Minimum requirements are 4GB RAM and 10GB disk, or a 2016 MacBook Pro,
+Minimum requirements are 4GB RAM and 12GB disk, or a 2016 MacBook Pro,
 both on which it is <30 minutes.
 
 ## 🥾 Up
