@@ -37,6 +37,7 @@ pip install --upgrade pipx
 
 ### dedicated virtualenvs ######################################################
 
+pipx install pdm
 pipx install poetry
 pipx install pre-commit
 pipx install semgrep
