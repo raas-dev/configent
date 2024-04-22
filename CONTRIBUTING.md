@@ -27,5 +27,3 @@ a pull request.
   - Use `asdf` if possible, if not use `apk`
 - Node.js may not work on Alpine Linux (2023-07)
   - Install it by `apk add nodejs` if required
-- Cloudflared does not work on ARM Ubuntu, Debian, Arch or OpenSUSE (2024-04)
-  - Is not installed by default
