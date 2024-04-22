@@ -23,7 +23,10 @@ a pull request.
 
 ## Issues in dependencies
 
-- Homebrew does not work on Alpine Linux (both x86-64 and ARM, due to musl)
-  - Use `asdf` if possible, if not use `apk`
-- Node.js may not work on Alpine Linux (2023-07)
-  - Install it by `apk add nodejs` if required
+- Alpine Linux:
+  - Homebrew does not work due to musl (all architectures)
+    - Use `asdf` wherever possible, otherwise use `apk`
+  - asdf installed Node.js crashes, use `apk add nodejs` (2024-04)
+    - `.asdf/installs/nodejs/20.12.2/bin/node: fcntl64: symbol not found`
+  - Rootless docker is not supported
+    - Re-login is required after the initial install to be in `docker` group
