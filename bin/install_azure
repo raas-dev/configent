@@ -26,8 +26,16 @@ az config set core.output=jsonc
 
 ### bicep ######################################################################
 
-az bicep install
-az bicep upgrade
+# bicep CLI is required for VSCode/Cursor extension
+if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = "aarch64" ]; then
+  # target is not correctly detected on aarch64 Lima VMs (2024-04)
+  # linux-musl-arm64 is not supported (2024-04)
+  az bicep install --target "linux-arm64"
+  az bicep upgrade --target "linux-arm64"
+else
+  az bicep install
+  az bicep upgrade
+fi
 
 ### azure-cli extensions #######################################################
 
