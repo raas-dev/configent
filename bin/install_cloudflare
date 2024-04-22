@@ -18,5 +18,5 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
 ### cloudflared ################################################################
 
-asdf plugin add cloudflared
+asdf plugin add cloudflared https://github.com/asyrjasalo/asdf-cloudflared
 asdf install cloudflared
