@@ -264,5 +264,8 @@
   "excalidraw.theme": "dark",
   "codeium.enableInComments": false,
   "terminal.integrated.sendKeybindingsToShell": true,
-  "editor.find.addExtraSpaceOnTop": false
+  "editor.find.addExtraSpaceOnTop": false,
+  "bicep.enableSurveys": false,
+  "typescript.surveys.enabled": false,
+  "go.survey.prompt": false
 }
