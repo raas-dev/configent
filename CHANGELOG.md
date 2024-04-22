@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.2](https://github.com/raas-dev/configent/compare/1.95.1...1.95.2) (2024-04-22)
+
+
+### Fixes
+
+* **azure:** Fix bicep target arch on Linux aarch64 ([5a5a82d](https://github.com/raas-dev/configent/commit/5a5a82d6a287cf06b8b01d91fa05b5eb658a4b0b))
+* **cloudflared:** Change to support aarch64 linux ([9ea4982](https://github.com/raas-dev/configent/commit/9ea4982f134ca63557d3e21573da332632d73f22))
+
 ### [1.95.1](https://github.com/raas-dev/configent/compare/1.95.0...1.95.1) (2024-04-21)
 
 
