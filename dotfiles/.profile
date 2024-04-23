@@ -223,6 +223,18 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
+### docker #####################################################################
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
+elif [ "$(uname -s)" = 'Linux' ]; then
+  if [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
+    export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
+  elif [ -S "/var/run/docker.sock" ]; then
+    export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
+  fi
+fi
+
 ### configent/bin ##############################################################
 
 path_prepend "$HOME/.local/configent/bin"

@@ -56,6 +56,10 @@ probes:
 hostResolver:
   enabled: false
 
+portForwards:
+- guestSocket: "/run/user/{{.UID}}/docker.sock"
+  hostSocket: "{{.Dir}}/sock/docker.sock"
+
 # https://www.quad9.net/service/service-addresses-and-features/
 dns:
   - 9.9.9.9
