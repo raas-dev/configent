@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.3](https://github.com/raas-dev/configent/compare/1.95.2...1.95.3) (2024-04-23)
+
+
+### Fixes
+
+* **aliases:** Make z list all open ports by default ([bafabe7](https://github.com/raas-dev/configent/commit/bafabe7633b1085470ac01e27ba4e2654877a919))
+* **lima:** Update alpine linux ([b013882](https://github.com/raas-dev/configent/commit/b013882f414091b26a9b64954e742de14365af7f))
+* **profile:** Export DOCKER_HOST ([c228718](https://github.com/raas-dev/configent/commit/c228718b54e4f8a0c971b38ac3d5c45cdb3aa805))
+* **venv:** Include pip in uv venv for legacy compat ([6c59024](https://github.com/raas-dev/configent/commit/6c5902407690906174ac012943d429dca818e8a0))
+
 ### [1.95.2](https://github.com/raas-dev/configent/compare/1.95.1...1.95.2) (2024-04-22)
 
 
