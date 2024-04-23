@@ -99,7 +99,6 @@
   },
   "powershell.integratedConsole.showOnStartup": false,
   "python.analysis.typeCheckingMode": "basic",
-  "python.languageServer": "Pylance",
   "redhat.telemetry.enabled": false,
   "rest-client.defaultHeaders": {
     "Content-Type": "application/json",
