@@ -10,6 +10,8 @@ def strtobool(val):
     are 'n', 'no', 'f', 'false', 'off', and '0'.  Raises ValueError if
     'val' is anything else.
     """
+    if not val:
+        return 0
     val = val.lower()
     if val in ('y', 'yes', 't', 'true', 'on', '1'):
         return 1
