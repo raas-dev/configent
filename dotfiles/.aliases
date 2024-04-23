@@ -466,10 +466,11 @@ usage() {
       print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
-# Show process listening the given port
+# Show what listens on port(s)
 whatlistens() {
-  local port="${1:-8080}"
-  lsof -P -i :"$port" | column -t
+  local filter=
+  [ -n "$1" ] && filter=":$1"
+  lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
 }
 
 # Generate password and copy it to clipboard
