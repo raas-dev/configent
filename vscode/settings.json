@@ -169,7 +169,7 @@
     "terminal.ansiYellow": "#FBB829",
     "terminal.background": "#090A14",
     "terminal.foreground": "#D0D0D0",
-    "terminalCursor.background": "#F2F2E3",
+    "terminalCursor.background": "#353535",
     "terminalCursor.foreground": "#B300AD"
   },
   "workbench.colorTheme": "Ayu Dark Bordered",
