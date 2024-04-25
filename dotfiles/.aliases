@@ -258,9 +258,13 @@ venv() {
       poetry install
     elif [ -r "requirements.txt" ]; then
       uv pip install -r requirements.txt
-      uv pip install --editable .
+      if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
+        uv pip install --editable .
+      fi
     else
-      uv pip install --editable ".[dev,test]"
+      if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
+        uv pip install --editable ".[dev,test]"
+      fi
     fi
   else
     deactivate # && [ -d ".venv" ] && rm -r ".venv"
