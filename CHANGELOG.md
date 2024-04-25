@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.4](https://github.com/raas-dev/configent/compare/1.95.3...1.95.4) (2024-04-25)
+
+
+### Fixes
+
+* **aliases:** Not install editable in venv if not lib ([fa1acf2](https://github.com/raas-dev/configent/commit/fa1acf2e670aa508e4cd44486dbbfbaae139fe57))
+* **python:** Fix sitecustomize val not defined ([7f44b06](https://github.com/raas-dev/configent/commit/7f44b062a1562b76c18f82bb34d848db976afe6d))
+
 ### [1.95.3](https://github.com/raas-dev/configent/compare/1.95.2...1.95.3) (2024-04-23)
 
 
