@@ -87,11 +87,6 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-### cd #########################################################################
-
-alias dc='cd' # typo
-alias cdtemp="cd $(mktemp -d)"
-
 ### Enhanced ls ################################################################
 
 if command -v lsd >/dev/null; then
@@ -183,6 +178,13 @@ alias nri='nerdctl rmi --force $(nerdctl images --all --quiet)'
 alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes'
 
 ### Utilities ##################################################################
+
+# cd
+alias cdtemp="cd $(mktemp -d)"
+
+# Typos
+alias dc='cd'
+alias gti='git'
 
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
