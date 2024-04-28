@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.5](https://github.com/raas-dev/configent/compare/1.95.4...1.95.5) (2024-04-28)
+
+
+### Fixes
+
+* **aliases:** Add aliases for common typos ([46522f6](https://github.com/raas-dev/configent/commit/46522f643d59bafcda84cd77187d77d9454cdde2))
+* **docker:** Upgrade docker buildx version ([b4e1b6b](https://github.com/raas-dev/configent/commit/b4e1b6b19936f020f2b4817911d674a4fd368ff6))
+
 ### [1.95.4](https://github.com/raas-dev/configent/compare/1.95.3...1.95.4) (2024-04-25)
 
 
