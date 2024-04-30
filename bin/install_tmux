@@ -29,10 +29,8 @@ if ! command -v brew >/dev/null; then
 fi
 
 if command -v brew >/dev/null; then
-  # brew install tmux   # tmux 3.4 outputs garbage in VSCode terminal
-  # see: https://bbs.archlinux.org/viewtopic.php?id=292977
-  # fix: use homebrew tap with tmux 3.3a as the latest
-  brew install asyrjasalo/tmux/tmux
+  # brew install asyrjasalo/tmux/tmux
+  brew install tmux
 fi
 
 ### Tpm ########################################################################
