@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.96.0](https://github.com/raas-dev/configent/compare/1.95.5...1.96.0) (2024-04-30)
+
+
+### Features
+
+* **tmux:** Update tmux to 3.4 ([e853e7b](https://github.com/raas-dev/configent/commit/e853e7b8f6a3f099d286402ecac3a03ddaad0f80))
+
+
+### Fixes
+
+* **tmux:** Increase escape-time to avoid rgb garbage ([ddd4e46](https://github.com/raas-dev/configent/commit/ddd4e46e515f2f22676dffdd6c797bb4574398b4))
+
 ### [1.95.5](https://github.com/raas-dev/configent/compare/1.95.4...1.95.5) (2024-04-28)
 
 
