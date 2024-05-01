@@ -389,12 +389,16 @@ d() {
     "$run_args" \
     "$name" "$cmd"
 
+  local run_exit_code=$?
+
   if [ "$run_args" = "-d" ] || [ "$run_args" = "--detach" ]; then
     echo "[d] Published ports: container -> host"
     docker port "$name"
     echo "[d] Following logs, ^C does not halt the container"
     docker logs --follow "$name"
   fi
+
+  return $run_exit_code
 }
 
 ### Functions: Utilities #######################################################
