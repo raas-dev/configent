@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.96.1](https://github.com/raas-dev/configent/compare/1.96.0...1.96.1) (2024-05-03)
+
+
+### Fixes
+
+* **aliases:** Return docker run exit code ([75426c0](https://github.com/raas-dev/configent/commit/75426c03c49b637d2769a93ef7d43426e343064d))
+
 ## [1.96.0](https://github.com/raas-dev/configent/compare/1.95.5...1.96.0) (2024-04-30)
 
 
