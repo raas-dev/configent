@@ -284,6 +284,9 @@ alias firebase='npx -y firebase-tools'
 # Railway.app CLI
 alias railway='npx -y @railway/cli'
 
+# Cloudflare Workers CLI
+alias wrangler='npx -y wrangler'
+
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
