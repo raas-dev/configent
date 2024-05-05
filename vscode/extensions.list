@@ -28,6 +28,7 @@ formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
 foxundermoon.shell-format
 fregante.ghost-text
+github.vscode-github-actions
 golang.go
 gruntfuggly.activitusbar
 hashicorp.terraform
