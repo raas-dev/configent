@@ -32,8 +32,8 @@ github.vscode-github-actions
 golang.go
 hashicorp.terraform
 hediet.vscode-drawio
-humao.rest-client
 ibm.output-colorizer
+jacobpfeifer.pfeifer-hurl
 kddejong.vscode-cfn-lint
 mads-hartmann.bash-ide-vscode
 mikestead.dotenv

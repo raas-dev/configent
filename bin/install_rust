@@ -37,6 +37,7 @@ cargo binstall -y diskonaut
 cargo binstall -y fd-find
 cargo binstall -y git-delta
 cargo binstall -y gitui
+cargo binstall -y hurl
 cargo binstall -y --locked kalker
 cargo binstall -y lsd
 cargo binstall -y ouch
