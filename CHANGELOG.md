@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.97.0](https://github.com/raas-dev/configent/compare/1.96.1...1.97.0) (2024-05-05)
+
+
+### Features
+
+* **rust:** Add hurl, remove restclient ([35029b8](https://github.com/raas-dev/configent/commit/35029b8d3e1e26c399ed34d8d7137ea33304beb9))
+
+
+### Fixes
+
+* **aichat:** Improve prompts ([cdd0912](https://github.com/raas-dev/configent/commit/cdd09129e754615dd26be4089b904be2c6383870))
+* **aliases:** Add wrangler ([d85723d](https://github.com/raas-dev/configent/commit/d85723d937e64739994e444bca9cbd22f811dc23))
+* **n:** Fix nix docker image source ([1265096](https://github.com/raas-dev/configent/commit/126509626e4ebc4c8be89aa5bf42022184dd77c9))
+* **vscode:** Add gh actions extension ([afb7ef6](https://github.com/raas-dev/configent/commit/afb7ef63dd96b5ff3664c33df884239722fd4064))
+
 ### [1.96.1](https://github.com/raas-dev/configent/compare/1.96.0...1.96.1) (2024-05-03)
 
 
