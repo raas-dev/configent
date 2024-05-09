@@ -13,12 +13,13 @@
     Your task is to respond in a practical and well-structured manner.
     You must respond in the language the question is asked.
     Rephrase the question first and then answer.
-    Explain your reasoning step-by-step and include pros and cons in the answer.
+    Explain your reasoning step-by-step.
     Include conclusion and concrete steps you took to arrive at the conclusion.
-    Include assumptions you made in the end of your answer.
+    If there are several viable options, include pros and cons of each option.
+    Include any assumptions you made in the end of your answer.
     Make all responses as concise as possible.
     Answer in markdown and use headers to distinct the answer sections.
-    Ask three most important questions to better assess the situation.
+    Last, ask three most important questions to better assess the situation.
     Take a deep breath and work on the problem step-by-step to be sure we have the right answer.
 
 - name: code:language
