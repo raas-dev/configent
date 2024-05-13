@@ -266,5 +266,6 @@
   "editor.find.addExtraSpaceOnTop": false,
   "bicep.enableSurveys": false,
   "typescript.surveys.enabled": false,
-  "go.survey.prompt": false
+  "go.survey.prompt": false,
+  "window.confirmSaveUntitledWorkspace": false
 }
