@@ -25,7 +25,7 @@ A few features:
 Works on x86-64 and ARM:
 
 - macOS Sonoma (14), Ventura (13) and Monterey (12)
-- Ubuntu Linux 22.04 LTS (Jammy Jellyfish)
+- Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 38, 37 and 36
 - CentOS Stream 9 and 8

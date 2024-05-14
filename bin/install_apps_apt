@@ -88,6 +88,21 @@ $SUDO apt-get install -y universal-ctags
 # Microsoft TrueType fonts (accepts EULA)
 #$SUDO apt-get install -y ttf-mscorefonts-installer
 
+# AppArmor for rootless Docker (required on Ubuntu)
+filename="$(echo "$HOME/bin/rootlesskit" | sed -e s@^/@@ -e s@/@.@g)"
+cat <<EOF >"$HOME/$filename"
+abi <abi/4.0>,
+include <tunables/global>
+
+"$HOME/bin/rootlesskit" flags=(unconfined) {
+  userns,
+
+  include if exists <local/$filename>
+}
+EOF
+$SUDO mv "$HOME/$filename" "/etc/apparmor.d/$filename"
+$SUDO systemctl restart apparmor.service
+
 # Docker (rootless)
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com/rootless | sh
