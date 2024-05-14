@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.98.1](https://github.com/raas-dev/configent/compare/1.98.0...1.98.1) (2024-05-14)
+
+
+### Fixes
+
+* **aichat:** Fix language for prompt ([6ca22e7](https://github.com/raas-dev/configent/commit/6ca22e76c02447c0956ffa2af4de2693e179d75a))
+
 ## [1.98.0](https://github.com/raas-dev/configent/compare/1.97.0...1.98.0) (2024-05-14)
 
 
