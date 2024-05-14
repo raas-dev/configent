@@ -18,9 +18,9 @@ export function modifyConfig(config: Config): Config {
       "apiKey": process.env.CLAUDE_API_KEY
     },
     {
-      "title": "gpt-4-turbo",
+      "title": "gpt-4o",
       "provider": "openai",
-      "model": "gpt-4-turbo",
+      "model": "gpt-4o",
       "apiKey": process.env.OPENAI_API_KEY
     }
   ];

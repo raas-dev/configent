@@ -79,7 +79,7 @@
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.openRepositoryInParentFolders": "always",
-  "gitlens.ai.experimental.openai.model": "gpt-4-turbo",
+  "gitlens.ai.experimental.openai.model": "gpt-4o",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.graph.minimap.enabled": false,
