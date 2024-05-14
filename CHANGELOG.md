@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.99.0](https://github.com/raas-dev/configent/compare/1.98.1...1.99.0) (2024-05-14)
+
+
+### Features
+
+* **lima:** Update Ubuntu LTS and Debian image ([234b067](https://github.com/raas-dev/configent/commit/234b0678b8181ef55803876e504a0efd67bb65e2))
+
 ### [1.98.1](https://github.com/raas-dev/configent/compare/1.98.0...1.98.1) (2024-05-14)
 
 
