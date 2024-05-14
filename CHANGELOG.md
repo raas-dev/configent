@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.98.0](https://github.com/raas-dev/configent/compare/1.97.0...1.98.0) (2024-05-14)
+
+
+### Features
+
+* **ai:** Upgrade LLMs to GPT-4o ([e29e47e](https://github.com/raas-dev/configent/commit/e29e47e468f81508402d8172e9f0779be8113f59))
+
+
+### Fixes
+
+* **aichat:** Improve expert prompt ([2d81020](https://github.com/raas-dev/configent/commit/2d810205d4a16638da62a6be4898940e3d0627f0))
+* **aichat:** Improve prompts ([1893156](https://github.com/raas-dev/configent/commit/1893156dfbd5eaf1f72bfec5745ecc83f9728b90))
+* **aichat:** Structure prompts ([b19aed9](https://github.com/raas-dev/configent/commit/b19aed96ff6abbf5e456606667780ce747bb2a57))
+* **vscode:** No confirm save untitled workspaces ([b240a77](https://github.com/raas-dev/configent/commit/b240a77af4ab62dca2fea94dc8896dce85901447))
+
 ## [1.97.0](https://github.com/raas-dev/configent/compare/1.96.1...1.97.0) (2024-05-05)
 
 
