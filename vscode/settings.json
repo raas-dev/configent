@@ -267,5 +267,6 @@
   "bicep.enableSurveys": false,
   "typescript.surveys.enabled": false,
   "go.survey.prompt": false,
-  "window.confirmSaveUntitledWorkspace": false
+  "window.confirmSaveUntitledWorkspace": false,
+  "simple-lines-count.format": "Lns: {t} ({e} empty)"
 }
