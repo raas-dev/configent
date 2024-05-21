@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.99.1](https://github.com/raas-dev/configent/compare/1.99.0...1.99.1) (2024-05-21)
+
+
+### Fixes
+
+* **vim:** Remove set paste ([06688d0](https://github.com/raas-dev/configent/commit/06688d0d1bb74b0372edfa1c5375d8dceb38549f))
+* **vscode:** Add lines count extension ([1288495](https://github.com/raas-dev/configent/commit/128849520913b97a8d88a7d441c906babf2610cb))
+* **vscode:** Line count format ([44b6d35](https://github.com/raas-dev/configent/commit/44b6d358cfbed0ba9356cff54705ef210fd13db8))
+
 ## [1.99.0](https://github.com/raas-dev/configent/compare/1.98.1...1.99.0) (2024-05-14)
 
 
