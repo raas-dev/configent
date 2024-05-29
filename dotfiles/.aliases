@@ -275,6 +275,9 @@ venv() {
 
 ### Node.js ####################################################################
 
+# Flowise
+alias flowise='npx -y flowise'
+
 # Azure Functions CLI
 alias func='npx -y azure-functions-core-tools'
 
