@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.99.2](https://github.com/raas-dev/configent/compare/1.99.1...1.99.2) (2024-05-29)
+
+
+### Fixes
+
+* **aichat:** Fix language ([61f363c](https://github.com/raas-dev/configent/commit/61f363cb4c1787194bcc9f83f7dc6bfaaef1aa31))
+* **aliases:** Add flowise via npx ([4a77752](https://github.com/raas-dev/configent/commit/4a7775248db2cb76ce36b5f88840475575f91d98))
+
 ### [1.99.1](https://github.com/raas-dev/configent/compare/1.99.0...1.99.1) (2024-05-21)
 
 
