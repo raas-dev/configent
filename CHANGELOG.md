@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.100.0](https://github.com/raas-dev/configent/compare/1.99.2...1.100.0) (2024-06-11)
+
+
+### Features
+
+* **jq:** Use jaq, remove gojq ([14adab4](https://github.com/raas-dev/configent/commit/14adab4a8d993e2f1628a7a1f85c1c2c1f7a617a))
+* **watch:** Use hwatch, remove viddy ([01dcd9a](https://github.com/raas-dev/configent/commit/01dcd9a6000da15ab756249457d8701bdb6a0bb3))
+
+
+### Fixes
+
+* **yazi:** Add additional nixpkgs for previews ([cadcdf6](https://github.com/raas-dev/configent/commit/cadcdf60c85fae2826a3eef7fd759370c41294da))
+
 ### [1.99.2](https://github.com/raas-dev/configent/compare/1.99.1...1.99.2) (2024-05-29)
 
 
