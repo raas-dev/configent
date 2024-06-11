@@ -661,7 +661,7 @@ nixery() {
 ### Ad-hoc binaries via Nix ####################################################
 
 # file explorers
-alias yazi='n yazi/vim'
+alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 
 # servers
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
