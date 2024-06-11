@@ -139,7 +139,7 @@ alias _="interpreter --profile openai.yaml --api_key $OPENAI_API_KEY"
 
 ### watch ######################################################################
 
-command -v viddy >/dev/null && alias watch='viddy --differences'
+command -v hwatch >/dev/null && alias watch='hwatch --differences watch'
 
 ### vim ########################################################################
 
