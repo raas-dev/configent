@@ -12,9 +12,9 @@ export function modifyConfig(config: Config): Config {
   config.models = [
     ...config.models,
     {
-      "title": "claude-3-haiku",
+      "title": "claude-3.5-sonnet",
       "provider": "anthropic",
-      "model": "claude-3-haiku-20240307",
+      "model": "claude-3-5-sonnet-20240620",
       "apiKey": process.env.CLAUDE_API_KEY
     },
     {
