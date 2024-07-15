@@ -31,7 +31,6 @@
   },
   "activitusbar.activeColour": "#7B9050",
   "breadcrumbs.enabled": false,
-  "continue.enableTabAutocomplete": false,
   "continue.telemetryEnabled": false,
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
@@ -268,5 +267,7 @@
   "typescript.surveys.enabled": false,
   "go.survey.prompt": false,
   "window.confirmSaveUntitledWorkspace": false,
-  "simple-lines-count.format": "Lns: {t} ({e} empty)"
+  "simple-lines-count.format": "Lns: {t} ({e} empty)",
+  "continue.enableQuickActions": true,
+  "continue.enableTabAutocomplete": true
 }
