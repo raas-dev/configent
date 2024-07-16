@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.1](https://github.com/raas-dev/configent/compare/1.100.0...1.100.1) (2024-07-16)
+
+
+### Fixes
+
+* **cursor:** Remove conflicting continue keybindings ([c43816f](https://github.com/raas-dev/configent/commit/c43816f85d3c40818f09a4fabeb948b3d7570fa6))
+* **macos:** Add cask libreoffice-language-pack ([95d99a5](https://github.com/raas-dev/configent/commit/95d99a526daeab76008c208f7a187ff4e8f4b027))
+* **vscode:** Add continue, remove codeium ([275641c](https://github.com/raas-dev/configent/commit/275641cdab7c3b06525581410629095c33a699ac))
+* **vscode:** Add indent extensions ([8f2051a](https://github.com/raas-dev/configent/commit/8f2051a3f5706d5fe53c968b5dc290d48439fc76))
+* **vscode:** Fix continue config ([cc3d453](https://github.com/raas-dev/configent/commit/cc3d45397b9d6a06d14126f4c3d27f378d54ef26))
+* **vscode:** Update Claude version in Continue ([6065298](https://github.com/raas-dev/configent/commit/606529833781f2215b550e01b4c6bacd5a330d2c))
+
 ## [1.100.0](https://github.com/raas-dev/configent/compare/1.99.2...1.100.0) (2024-06-11)
 
 
