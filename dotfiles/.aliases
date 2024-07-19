@@ -135,7 +135,6 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _="interpreter --profile openai.yaml --api_key $OPENAI_API_KEY"
 
 ### watch ######################################################################
 
@@ -331,27 +330,6 @@ ai_code() {
   fi
   local project="${PWD##*/}"
   aichat --role "code:$lang" --session "$project" --save-session
-}
-
-# open-interpreter (https://docs.openinterpreter.com/integrations/docker)
-interpreter() {
-  local image="interpreter"
-  local name="$image-${PWD##*/}"
-  docker build --pull --tag "$image" ~/configent/etc/interpreter || return
-
-  if [ -n "$PORT" ]; then
-    local port_args="--publish 127.0.0.1:$PORT:$PORT"
-    local env_args="--env PORT=$PORT"
-  fi
-
-  eval docker run --init -it --name "$name" --rm \
-    --cap-drop ALL \
-    "$port_args" \
-    "$env_args" \
-    --volume "$PWD:$PWD" \
-    --workdir "$PWD" \
-    "$image" \
-      --disable_telemetry "$*"
 }
 
 ### Functions: Docker ##########################################################
