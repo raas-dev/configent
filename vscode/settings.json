@@ -37,6 +37,7 @@
   "codeium.enableCodeLens": false,
   "codeium.enableInComments": false,
   "continue.enableTabAutocomplete": true,
+  "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
   "cSpell.enabledLanguageIds": [
     "asciidoc",
@@ -99,7 +100,9 @@
   "editor.letterSpacing": -0.25,
   "editor.lineHeight": 15.5,
   "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 100,
   "editor.minimap.showSlider": "always",
+  "editor.minimap.size": "fit",
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.rulers": [
@@ -147,7 +150,9 @@
   },
   "powershell.integratedConsole.showOnStartup": false,
   "problems.visibility": false,
+  "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
+  "python.testing.pytestEnabled": true,
   "redhat.telemetry.enabled": false,
   "rest-client.defaultHeaders": {
     "Content-Type": "application/json",
@@ -156,6 +161,7 @@
   "rest-client.enableTelemetry": false,
   "rest-client.fontFamily": "TerminessTTF Nerd Font",
   "rest-client.fontSize": 17,
+  "scm.countBadge": "focused",
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
   "shellformat.useEditorConfig": true,
@@ -187,6 +193,7 @@
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.showExitAlert": false,
   "terminal.integrated.tabs.enabled": false,
   "todohighlight.keywords": [
     "AP:"
@@ -271,10 +278,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "editor.minimap.maxColumn": 100,
-  "continue.showInlineTip": false,
-  "editor.minimap.size": "fit",
-  "terminal.integrated.showExitAlert": false,
-  "scm.countBadge": "focused"
+  "zenMode.hideStatusBar": false
 }
