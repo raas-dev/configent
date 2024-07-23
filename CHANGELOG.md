@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.2](https://github.com/raas-dev/configent/compare/1.100.1...1.100.2) (2024-07-23)
+
+
+### Fixes
+
+* **aliases:** Remove open-interpreter ([e7c1942](https://github.com/raas-dev/configent/commit/e7c1942263c3dee2374b262dbf7614fe1f0a0731))
+* **vscode:** Do not show problems for all files ([4fd8a0e](https://github.com/raas-dev/configent/commit/4fd8a0e157c6f359342ff21149af938d77be99ba))
+* **vscode:** Fit minimap ([0b7a7e7](https://github.com/raas-dev/configent/commit/0b7a7e75ed0b0453e6a76ecdb42576431cc03433))
+* **vscode:** Move sidebar to right ([ddbeb49](https://github.com/raas-dev/configent/commit/ddbeb49d6747acec1ddbc071fda4e7689802d1dc))
+
 ### [1.100.1](https://github.com/raas-dev/configent/compare/1.100.0...1.100.1) (2024-07-16)
 
 
