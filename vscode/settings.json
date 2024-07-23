@@ -275,5 +275,6 @@
   "editor.minimap.maxColumn": 100,
   "continue.showInlineTip": false,
   "editor.minimap.size": "fit",
-  "terminal.integrated.showExitAlert": false
+  "terminal.integrated.showExitAlert": false,
+  "scm.countBadge": "focused"
 }
