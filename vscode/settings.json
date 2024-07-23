@@ -278,5 +278,7 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "debug.toolBarLocation": "docked"
+  "debug.toolBarLocation": "docked",
+  "powershell.promptToUpdatePowerShell": false,
+  "powershell.startAsLoginShell.osx": false
 }
