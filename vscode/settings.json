@@ -271,5 +271,8 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "editor.minimap.maxColumn": 100,
+  "continue.showInlineTip": false,
+  "editor.minimap.size": "fit"
 }
