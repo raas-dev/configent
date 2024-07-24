@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.3](https://github.com/raas-dev/configent/compare/1.100.2...1.100.3) (2024-07-24)
+
+
+### Fixes
+
+* **vscode:** Add support for pytest ([74a035d](https://github.com/raas-dev/configent/commit/74a035dee98f9f85b4746c6682f1958e17833b80))
+* **vscode:** Enable shell integrations ([0bf21f1](https://github.com/raas-dev/configent/commit/0bf21f1d65aa751a67844fa3d7bffffcd4d9af9f))
+* **vscode:** Fix powershell startup ([0ef5866](https://github.com/raas-dev/configent/commit/0ef5866e908eb6ed6cc195c170ae50c6edfa5ab5))
+* **vscode:** Only check updates at start ([d522241](https://github.com/raas-dev/configent/commit/d522241390ceff11ae0764bf340d4f569534a215))
+* **vscode:** Set debug toolbar location to docked ([2629350](https://github.com/raas-dev/configent/commit/262935001374227fefe74f0c54413b76500103a6))
+* **vscode:** Show focused SCM badge over total count ([65cb609](https://github.com/raas-dev/configent/commit/65cb609d78877e95203c143447d79ad4e2ed068a))
+* **vscode:** Silence non-zero exit notifications ([dc01c19](https://github.com/raas-dev/configent/commit/dc01c19b40993e3e851516a857393441909d64de))
+
 ### [1.100.2](https://github.com/raas-dev/configent/compare/1.100.1...1.100.2) (2024-07-23)
 
 
