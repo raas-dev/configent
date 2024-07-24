@@ -149,7 +149,6 @@
     "jupyter-notebook": "left"
   },
   "powershell.integratedConsole.showOnStartup": false,
-  "problems.visibility": false,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.testing.pytestEnabled": true,
@@ -281,5 +280,7 @@
   "debug.toolBarLocation": "docked",
   "powershell.promptToUpdatePowerShell": false,
   "powershell.startAsLoginShell.osx": false,
-  "update.mode": "start"
+  "update.mode": "start",
+  "problems.visibility": false,
+  "problems.decorations.enabled": false
 }
