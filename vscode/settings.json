@@ -281,5 +281,8 @@
   "powershell.startAsLoginShell.osx": false,
   "update.mode": "start",
   "problems.visibility": false,
-  "problems.decorations.enabled": false
+  "problems.decorations.enabled": false,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.middleClickBehavior": "paste",
+  "terminal.integrated.rightClickBehavior": "nothing"
 }
