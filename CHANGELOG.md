@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.5](https://github.com/raas-dev/configent/compare/1.100.4...1.100.5) (2024-07-25)
+
+
+### Fixes
+
+* **tmux:** Improve tmux-open keybindings ([7e60640](https://github.com/raas-dev/configent/commit/7e60640917c94651275374746c5ed3667daaa64b))
+* **tmux:** Remove tmux-yank ([4f90a49](https://github.com/raas-dev/configent/commit/4f90a495efb4ef047afca4e47e2cb0ebf9bf6cf2))
+* **vscode:** Fix mouse terminal annoyances ([cd76a46](https://github.com/raas-dev/configent/commit/cd76a4624df6879b7a50f8c4400dd2ba6b1224a2))
+
 ### [1.100.4](https://github.com/raas-dev/configent/compare/1.100.3...1.100.4) (2024-07-25)
 
 
