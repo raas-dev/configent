@@ -1,6 +1,5 @@
 FaroSystemAppender constructor
 aaron-bond.better-comments
-adpyke.codesnap
 anysphere.pyright
 aquasecurityofficial.trivy-vulnerability-scanner
 aykutsarac.jsoncrack-vscode
@@ -40,7 +39,6 @@ kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
 mads-hartmann.bash-ide-vscode
 mikestead.dotenv
-million.million-lint
 ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-azureresourcegroups
 ms-azuretools.vscode-bicep
