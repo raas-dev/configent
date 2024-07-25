@@ -168,7 +168,6 @@
   "telemetry.telemetryLevel": "off",
   "terminal.external.linuxExec": "xterm",
   "terminal.external.osxExec": "Terminal.app",
-  "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.osx": "tmux-local",
   "terminal.integrated.drawBoldTextInBrightColors": false,
