@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.6](https://github.com/raas-dev/configent/compare/1.100.5...1.100.6) (2024-07-25)
+
+
+### Fixes
+
+* **tmux:** Plugin order ([0e9da5b](https://github.com/raas-dev/configent/commit/0e9da5b3d1706768af9ae0d23ccccd1fe0f98d73))
+
 ### [1.100.5](https://github.com/raas-dev/configent/compare/1.100.4...1.100.5) (2024-07-25)
 
 
