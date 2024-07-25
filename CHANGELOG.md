@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.4](https://github.com/raas-dev/configent/compare/1.100.3...1.100.4) (2024-07-25)
+
+
+### Fixes
+
+* **vscode:** Do not copy terminal on selection ([b35d30b](https://github.com/raas-dev/configent/commit/b35d30b83990edfc3f6e2701f3a1ed3b7cb3b87b))
+* **vscode:** Hide problem annoyances ([31eb7a2](https://github.com/raas-dev/configent/commit/31eb7a2f250bdb6442ec35bd5bbcac45d9238d43))
+* **vscode:** Remove extensions: codesnap, million ([ca0e0f0](https://github.com/raas-dev/configent/commit/ca0e0f0bac875034b5c4ad17079247e1b59bc5ce))
+
 ### [1.100.3](https://github.com/raas-dev/configent/compare/1.100.2...1.100.3) (2024-07-24)
 
 
