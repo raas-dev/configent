@@ -86,6 +86,7 @@
     "markdown"
   ],
   "debug.console.fontSize": 13,
+  "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
   "dotnetAcquisitionExtension.enableTelemetry": false,
   "editor.acceptSuggestionOnEnter": "off",
@@ -149,6 +150,10 @@
     "jupyter-notebook": "left"
   },
   "powershell.integratedConsole.showOnStartup": false,
+  "powershell.promptToUpdatePowerShell": false,
+  "powershell.startAsLoginShell.osx": false,
+  "problems.decorations.enabled": false,
+  "problems.visibility": false,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.testing.pytestEnabled": true,
@@ -168,12 +173,14 @@
   "telemetry.telemetryLevel": "off",
   "terminal.external.linuxExec": "xterm",
   "terminal.external.osxExec": "Terminal.app",
+  "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.osx": "tmux-local",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontSize": 16,
+  "terminal.integrated.middleClickBehavior": "paste",
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
   "terminal.integrated.profiles.osx": {
@@ -187,6 +194,7 @@
       "path": "tmux"
     }
   },
+  "terminal.integrated.rightClickBehavior": "nothing",
   "terminal.integrated.scrollback": 99999,
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
@@ -199,6 +207,7 @@
   "trivy.secretScanning": true,
   "typescript.suggest.paths": false,
   "typescript.surveys.enabled": false,
+  "update.mode": "start",
   "update.showReleaseNotes": false,
   "window.closeWhenEmpty": true,
   "window.confirmSaveUntitledWorkspace": false,
@@ -275,14 +284,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "debug.toolBarLocation": "docked",
-  "powershell.promptToUpdatePowerShell": false,
-  "powershell.startAsLoginShell.osx": false,
-  "update.mode": "start",
-  "problems.visibility": false,
-  "problems.decorations.enabled": false,
-  "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.middleClickBehavior": "paste",
-  "terminal.integrated.rightClickBehavior": "nothing"
+  "zenMode.hideStatusBar": false
 }
