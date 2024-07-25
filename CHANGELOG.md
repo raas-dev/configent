@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.101.0](https://github.com/raas-dev/configent/compare/1.100.6...1.101.0) (2024-07-25)
+
+
+### Features
+
+* **tmux:** Add prefix-Space menu via tmux-which-key ([a3b4755](https://github.com/raas-dev/configent/commit/a3b475584daf477a3fdc6957cbd7b9645c444649))
+* **tmux:** Make tmux great again ([cd89d14](https://github.com/raas-dev/configent/commit/cd89d14a0cad89d9a5821ec312d12e0b987dbcc0))
+
+
+### Fixes
+
+* **tmux:** Remove tmux-pane-focus ([33a3049](https://github.com/raas-dev/configent/commit/33a3049e28a338ae5a8386a63596182dcf264432))
+* **tmux:** Reset tmux keybindings on start ([c6a0e75](https://github.com/raas-dev/configent/commit/c6a0e75e7be81cb9e0db4ea8b9837c0d6f3b6476))
+
 ### [1.100.6](https://github.com/raas-dev/configent/compare/1.100.5...1.100.6) (2024-07-25)
 
 
