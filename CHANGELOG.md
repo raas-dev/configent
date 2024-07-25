@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.101.1](https://github.com/raas-dev/configent/compare/1.101.0...1.101.1) (2024-07-25)
+
+
+### Fixes
+
+* **tmux:** Configure vim-tmux-navigator via tpm plugin ([a15dc5d](https://github.com/raas-dev/configent/commit/a15dc5df566c9284272ba87c63446ccb018432e9))
+* **tmux:** Fix resizing panes using mouse ([6f70868](https://github.com/raas-dev/configent/commit/6f708680335503dc7ecc3abfec40547e3361046c))
+* **tmux:** Improve mouse behavior in copy-mode-vi ([5e3ca19](https://github.com/raas-dev/configent/commit/5e3ca192544d69dcaa6b930cd1b596c55d68f248))
+* **tmux:** Remove what is already set by tmux-sensible ([5cd85df](https://github.com/raas-dev/configent/commit/5cd85dfd7011a6f52f273c9c04503ff6b850b4fe))
+* **vscode:** Ignore extension recommendations ([2c53b72](https://github.com/raas-dev/configent/commit/2c53b72d18b14ff259ea5889e7d158680974a256))
+
 ## [1.101.0](https://github.com/raas-dev/configent/compare/1.100.6...1.101.0) (2024-07-25)
 
 
