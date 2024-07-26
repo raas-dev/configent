@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.101.2](https://github.com/raas-dev/configent/compare/1.101.1...1.101.2) (2024-07-26)
+
+
+### Fixes
+
+* **vscode:** Minimap width ([47437e3](https://github.com/raas-dev/configent/commit/47437e3e843b4459b7d0d7907a5dc401fe0b0315))
+* **vscode:** Select with Alt in terminal on macOS ([c553e82](https://github.com/raas-dev/configent/commit/c553e8266678c16d87a88faad44afde25c1edc1f))
+
 ### [1.101.1](https://github.com/raas-dev/configent/compare/1.101.0...1.101.1) (2024-07-25)
 
 
