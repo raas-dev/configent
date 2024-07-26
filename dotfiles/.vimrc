@@ -1,11 +1,10 @@
-"--- Vundle --------------------------------------------------------------------
+"-- Vundle --------------------------------------------------------------------
 
 " Required for Vundle
 set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-
 call vundle#begin()
 
 " Plugin manager
@@ -28,6 +27,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
@@ -44,11 +44,10 @@ Plugin 'noahfrederick/vim-hemisu'
 Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
-
 filetype plugin indent on
 
+"-- Mouse ----------------------------------------------------------------------
 
-"--- Mouse ---------------------------------------------------------------------
 set mouse=a                     " enable mouse in all modes
 
 " terminal that supports mouse codes
@@ -56,14 +55,14 @@ if !has('nvim')
   set ttymouse=xterm2
 endif
 
-
 "-- Clipboard ------------------------------------------------------------------
+
 set clipboard^=unnamed,unnamedplus
 set pastetoggle=<F2>
 set go+=a              " visual selection automatically copied to the clipboard
 
+"-- General --------------------------------------------------------------------
 
-"--- General -------------------------------------------------------------------
 set hidden                      " hide buffers instead of closing them
 set ttyfast                     " smoother changes
 set lazyredraw                  " don't draw unless necessary
@@ -82,7 +81,7 @@ set showcmd                     " display possible commands when tab is pressed
 set history=50                  " make command history longer
 set wildmenu
 set wildmode=longest:full,full
-set wildignore+=*.log,*.obj,*.o,*.jpg,*.png,*.gif,*.swp,vendor/rails/**
+set wildignore+=*.log,*.obj,*.o,*.jpg,*.png,*.gif,*.swp
 
 set nostartofline               " don't jump to the first column when scrolling
 set scrolloff=20                " keep n lines around cursor when scrolling vertically
@@ -131,8 +130,8 @@ set tags=./tags
 set undofile
 set undodir=~/.vim/undo
 
+"-- Autoreload vim configs after changes ---------------------------------------
 
-" --- Autoreload vim configs after changes -------------------------------------
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
@@ -140,8 +139,8 @@ augroup END
 
 set autoread
 
+"-- UI -------------------------------------------------------------------------
 
-"--- UI ------------------------------------------------------------------------
 set background=dark
 colorscheme hemisu
 
@@ -153,8 +152,8 @@ endif
 
 highlight ColorColumn ctermbg=234
 
+"-- Custom mappings ------------------------------------------------------------
 
-"--- Custom mappings -----------------------------------------------------------
 " tab to indent and shift+tab to unindent also when in visual mode
 vnoremap <silent> <Tab> >gv
 vnoremap <silent> <S-Tab> <gv
@@ -167,27 +166,26 @@ nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <silent> <esc>^[ <esc>^[
 
+"-- vim-airline ----------------------------------------------------------------
 
-" --- vim-airline --------------------------------------------------------------
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'hybridline'
 let g:airline#extensions#tabline#enabled = 1
 
+"-- vim-gitgutter --------------------------------------------------------------
 
-"--- vim-gitgutter -------------------------------------------------------------
 let g:gitgutter_avoid_cmd_prompt_on_windows = 0
 
+"-- ctrlp.vim ------------------------------------------------------------------
 
-"--- ctrlp.vim -----------------------------------------------------------------
 let g:ctrlp_match_window = 'top,order:btt,min:10,max:10,results:10'
-
 let g:ctrlp_show_hidden = 1
 
 " search in MRU, files and buffers at the same time
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+"-- NERDTree -------------------------------------------------------------------
 
-"--- NERDTree ------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=3
 let g:NERDTreeShowHidden=1
@@ -221,8 +219,8 @@ autocmd BufEnter * call SyncTree()
 " vim-nerdtree-tabs
 let g:nerdtree_tabs_autofind=1
 
+"-- Syntastic ------------------------------------------------------------------
 
-"--- Syntastic -----------------------------------------------------------------
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -233,23 +231,24 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
+"-- tagbar ---------------------------------------------------------------------
 
-"--- tagbar --------------------------------------------------------------------
 nmap <silent> <C-t> :TagbarToggle<CR>
 
+"-- vim-indent-guides ----------------------------------------------------------
 
-"--- vim-indent-guides ---------------------------------------------------------
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=232
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey  ctermbg=232
 
+"-- vim-json -------------------------------------------------------------------
 
-"--- vim-json ------------------------------------------------------------------
 let g:vim_json_syntax_conceal = 0
 
+"-- sh -------------------------------------------------------------------------
 
-"--- sh ------------------------------------------------------------------------
 let g:is_posix = 1
