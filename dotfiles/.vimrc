@@ -10,38 +10,45 @@ call vundle#begin()
 " Plugin manager
 Plugin 'VundleVim/Vundle.vim'
 
-" Add-ons
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ap/vim-css-color'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'easymotion/vim-easymotion'
+" Settings
+Plugin 'tpope/vim-sensible'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/emmet-vim'
+
+" Editor
+Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
+
+" Navigation
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'majutsushi/tagbar'
+Plugin 'christoomey/vim-tmux-navigator'
+
+" Theme
+Plugin 'noahfrederick/vim-hemisu'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" git
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+" HTML
+Plugin 'ap/vim-css-color'
+Plugin 'mattn/emmet-vim'
+Plugin 'tpope/vim-surround'
 
 " Language support
 Plugin 'chrisbra/csv.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-markdown'
-
-" UI
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'noahfrederick/vim-hemisu'
-Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 filetype plugin indent on
