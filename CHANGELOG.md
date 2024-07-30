@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.102.0](https://github.com/raas-dev/configent/compare/1.101.2...1.102.0) (2024-07-30)
+
+
+### Features
+
+* **vscode:** Add transparent minimap ([5be14bc](https://github.com/raas-dev/configent/commit/5be14bccecd6fc1202326c1724cded781f60c480))
+
+
+### Fixes
+
+* **vim:** Add vim-sensible ([9e597f6](https://github.com/raas-dev/configent/commit/9e597f66a71d4843f3a0026958616a42e18becb4))
+* **vscode:** Wrap markdown at wordwrap column ([c47b5a8](https://github.com/raas-dev/configent/commit/c47b5a8899564ec85ac558ca5877ef4e3e11eb1b))
+
 ### [1.101.2](https://github.com/raas-dev/configent/compare/1.101.1...1.101.2) (2024-07-26)
 
 
