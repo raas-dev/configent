@@ -17,7 +17,7 @@
       "other": "off",
       "strings": "off"
     },
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "wordWrapColumn"
   },
   "[shellscript]": {
     "editor.detectIndentation": false,
