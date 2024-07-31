@@ -623,7 +623,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Fixes
 
 * **aichat:** Lower temperature ([d902684](https://github.com/raas-dev/configent/commit/d902684c272c4f2ead176b7481fec3084e37edb2))
-* **aichat:** Prompt attemp to limit markdown width ([ca638e3](https://github.com/raas-dev/configent/commit/ca638e39074d6964f30d03270fcd3c713683a0c2))
+* **aichat:** Prompt attempt to limit markdown width ([ca638e3](https://github.com/raas-dev/configent/commit/ca638e39074d6964f30d03270fcd3c713683a0c2))
 * **rust:** Lock kalker dependencies ([5a96db8](https://github.com/raas-dev/configent/commit/5a96db8a89c88a06754ffcac86aafcfb42a07948))
 
 ## [1.84.0](https://github.com/raas-dev/configent/compare/1.83.0...1.84.0) (2024-03-19)
@@ -2775,7 +2775,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **README:** Tidy ([ed2baf1](https://github.com/raas-dev/configent/commit/ed2baf13ffecf0fd7149e902fcb1ce80cacd52fb))
 * **README:** Tidy ([8f024e5](https://github.com/raas-dev/configent/commit/8f024e59f871e56405c7eeeb790e492d48a5f968))
 * **README:** Update screenshot ([4c9a052](https://github.com/raas-dev/configent/commit/4c9a05266e4e33e014054ca67b19686d5ddaba66))
-* **REDME:** Add screenshot ([d002dca](https://github.com/raas-dev/configent/commit/d002dca8221c724ecffe4a5756ea3ce5b79f6b33))
+* **README:** Add screenshot ([d002dca](https://github.com/raas-dev/configent/commit/d002dca8221c724ecffe4a5756ea3ce5b79f6b33))
 
 
 ### Fixes
