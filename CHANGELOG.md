@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.1](https://github.com/raas-dev/configent/compare/1.102.0...1.102.1) (2024-07-31)
+
+
+### Fixes
+
+* **vscode:** Tighten line height by 0.1 ([c8fcba8](https://github.com/raas-dev/configent/commit/c8fcba8267322c6bd070f97f997bc27c23d102c5))
+
 ## [1.102.0](https://github.com/raas-dev/configent/compare/1.101.2...1.102.0) (2024-07-30)
 
 
