@@ -31,7 +31,7 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-commit_message="$(aichat --role commit --no-highlight --no-stream \
+commit_message="$(aichat --role commit --no-stream \
   "$git_diff" | fmt --width 100)"
 
 printf "%s$commit_message" "$white"
