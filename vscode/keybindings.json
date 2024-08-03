@@ -15,5 +15,15 @@
   {
     "key": "shift+cmd+l",
     "command": "-aichat.insertselectionintochat"
+  },
+  {
+    "key": "cmd+up",
+    "command": "-cursorTop",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+down",
+    "command": "-cursorDownSelect",
+    "when": "textInputFocus"
   }
 ]
