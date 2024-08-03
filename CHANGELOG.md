@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.2](https://github.com/raas-dev/configent/compare/1.102.1...1.102.2) (2024-08-03)
+
+
+### Fixes
+
+* **ai_commit:** Remove deprecated argument for aichat ([72c3e55](https://github.com/raas-dev/configent/commit/72c3e55492a9d7dbf658564164427d8d3dfb0df9))
+* **azure:** Update azure cli ([e627929](https://github.com/raas-dev/configent/commit/e627929afe3d5991637d69a8de699631ca9d38ff))
+* **vscode:** Add python formatter settings ([a549f14](https://github.com/raas-dev/configent/commit/a549f1479ca0c2e0fb0929e4c2d2543b3a3400cf))
+* **vscode:** Add python-envy ([315330f](https://github.com/raas-dev/configent/commit/315330fc829914edc22b8905a895ffac5dfcfe02))
+* **vscode:** Ignore pylance import errors ([564dd6f](https://github.com/raas-dev/configent/commit/564dd6f404e7de6de57c91242483e3b20f96d133))
+* **vscode:** Show problems ([cacd5fc](https://github.com/raas-dev/configent/commit/cacd5fcadc8d202bad02525413673d1cd01801c0))
+* **vscode:** Unbind command+up/down in editor ([13061c4](https://github.com/raas-dev/configent/commit/13061c40e3019ef24f0547784afda36ebe9936cc))
+
 ### [1.102.1](https://github.com/raas-dev/configent/compare/1.102.0...1.102.1) (2024-07-31)
 
 
