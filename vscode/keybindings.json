@@ -22,8 +22,8 @@
     "when": "textInputFocus"
   },
   {
-    "key": "shift+down",
-    "command": "-cursorDownSelect",
+    "key": "cmd+down",
+    "command": "-cursorBottom",
     "when": "textInputFocus"
   }
 ]
