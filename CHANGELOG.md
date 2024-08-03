@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.3](https://github.com/raas-dev/configent/compare/1.102.2...1.102.3) (2024-08-03)
+
+
+### Fixes
+
+* **vscode:** Fix keybinding ([61ca4a4](https://github.com/raas-dev/configent/commit/61ca4a4b5ad90eee8ce91b80a2e56430a6ac1d80))
+
 ### [1.102.2](https://github.com/raas-dev/configent/compare/1.102.1...1.102.2) (2024-08-03)
 
 
