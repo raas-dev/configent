@@ -148,11 +148,6 @@
   "powershell.promptToUpdatePowerShell": false,
   "powershell.startAsLoginShell.osx": false,
   "problems.decorations.enabled": false,
-  "problems.visibility": false,
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportMissingImports": "none",
-    "reportOptionalMemberAccess": "none"
-  },
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.testing.pytestEnabled": true,
