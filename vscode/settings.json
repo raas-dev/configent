@@ -287,5 +287,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "evenBetterToml.formatter.columnWidth": 80
+  "evenBetterToml.formatter.columnWidth": 80,
+  "ruff.lineLength": 80
 }
