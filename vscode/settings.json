@@ -82,9 +82,7 @@
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
   "cSpell.suggestionMenuType": "quickFix",
-  "cursor.cpp.disabledLanguages": [
-    "markdown"
-  ],
+  "cursor.cpp.disabledLanguages": ["markdown"],
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
@@ -106,10 +104,7 @@
   "editor.minimap.size": "fit",
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [
-    80,
-    100
-  ],
+  "editor.rulers": [80, 100],
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.semanticHighlighting.enabled": true,
@@ -187,12 +182,7 @@
   "terminal.integrated.mouseWheelZoom": true,
   "terminal.integrated.profiles.osx": {
     "tmux-local": {
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "local"
-      ],
+      "args": ["new-session", "-A", "-s", "local"],
       "path": "tmux"
     }
   },
@@ -202,9 +192,7 @@
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.tabs.enabled": false,
-  "todohighlight.keywords": [
-    "AP:"
-  ],
+  "todohighlight.keywords": ["AP:"],
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
   "typescript.suggest.paths": false,
