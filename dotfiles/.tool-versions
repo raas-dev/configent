@@ -19,7 +19,7 @@ awscli 2.15.40
 aws-vault 7.2.0
 
 # install_azure
-azure-cli 2.59.0
+azure-cli 2.62.0
 
 # install_gcloud
 gcloud 472.0.0
