@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.4](https://github.com/raas-dev/configent/compare/1.102.3...1.102.4) (2024-08-04)
+
+
+### Fixes
+
+* **aichat:** Shorten expert answers ([d99e95c](https://github.com/raas-dev/configent/commit/d99e95c51bcad43f2e787025fe2898dc84196bcf))
+* **vscode:** Remove python-envy ([8cac042](https://github.com/raas-dev/configent/commit/8cac04277cca1da66540e295df61684db5b0c193))
+* **vscode:** Update cursor.ai settings ([275203e](https://github.com/raas-dev/configent/commit/275203ef570379a1593c22b8380405ca738c3a97))
+
 ### [1.102.3](https://github.com/raas-dev/configent/compare/1.102.2...1.102.3) (2024-08-03)
 
 
