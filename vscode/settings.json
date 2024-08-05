@@ -267,9 +267,7 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "cursor.chat.alwaysSearchWeb": true,
   "cursor.aipreview.enabled": true,
-  "cursor.chat.smoothStreaming": true,
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.chat.terminalShowHoverHint": false
 }
