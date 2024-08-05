@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.5](https://github.com/raas-dev/configent/compare/1.102.4...1.102.5) (2024-08-05)
+
+
+### Fixes
+
+* **cursor:** Do not search web in chat by default ([0333de1](https://github.com/raas-dev/configent/commit/0333de1238ee4b23119706eee2c1efedbe315b8c))
+* **vscode:** Decrease line height 15.4 -> 15.25 ([f418469](https://github.com/raas-dev/configent/commit/f418469146c7d2278fdc0a82deebf7bd4b97fbcd))
+* **vscode:** Increase editor font size: 17 -> 17.5 ([47f6354](https://github.com/raas-dev/configent/commit/47f635450211695f0521c6cc3fed68393fe04eab))
+
 ### [1.102.4](https://github.com/raas-dev/configent/compare/1.102.3...1.102.4) (2024-08-04)
 
 
