@@ -91,7 +91,7 @@
   "editor.cursorWidth": 2,
   "editor.find.addExtraSpaceOnTop": false,
   "editor.fontFamily": "TerminessTTF Nerd Font",
-  "editor.fontSize": 17,
+  "editor.fontSize": 17.5,
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
   "editor.letterSpacing": -0.25,
