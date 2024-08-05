@@ -95,7 +95,7 @@
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
   "editor.letterSpacing": -0.25,
-  "editor.lineHeight": 15.4,
+  "editor.lineHeight": 15.25,
   "editor.minimap.enabled": true,
   "editor.minimap.maxColumn": 80,
   "editor.minimap.showSlider": "always",
