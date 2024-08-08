@@ -47,6 +47,9 @@ go install github.com/abhimanyu003/sttr@latest
 # https://github.com/shihanng/tfvar
 go install github.com/shihanng/tfvar@latest
 
+# https://github.com/rverton/webanalyze
+go install -v github.com/rverton/webanalyze/cmd/webanalyze@latest
+
 # https://github.com/grafana/xk6-browser
 #go install go.k6.io/xk6/cmd/xk6@latest && xk6 build \
 #  --with github.com/grafana/xk6-browser \
