@@ -304,9 +304,6 @@ alias projen='npx -y projen'
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
 
-# Identify technology of websites
-alias wappalyzer='npx -y wappalyzer'
-
 ### Functions: AI ##############################################################
 
 # aichat
