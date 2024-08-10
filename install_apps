@@ -61,6 +61,9 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
+# install GitHub CLI
+#"$bin_path/install_github"
+
 # install appsec tools such as container vulnerability scanners
 "$bin_path/install_appsec"
 
