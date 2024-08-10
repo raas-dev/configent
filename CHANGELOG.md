@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.103.0](https://github.com/raas-dev/configent/compare/1.102.5...1.103.0) (2024-08-10)
+
+
+### Features
+
+* **go:** Add webanalyze ([fb5baca](https://github.com/raas-dev/configent/commit/fb5bacad9e361002dc02cac14ad71f25efb46a51))
+
+
+### Fixes
+
+* **aliases:** Remove deprecated wappalyzer ([6e59b05](https://github.com/raas-dev/configent/commit/6e59b056888c06bf251373e2464ce46f9c164df7))
+* **zsh:** Change aichat shell integration to ^X ([f8c373a](https://github.com/raas-dev/configent/commit/f8c373a1b029f2fe30e885b2024de6f6284517a7))
+
 ### [1.102.5](https://github.com/raas-dev/configent/compare/1.102.4...1.102.5) (2024-08-05)
 
 
