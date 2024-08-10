@@ -102,7 +102,7 @@ _aichat_zsh() {
   fi
 }
 zle -N _aichat_zsh
-bindkey '^E' _aichat_zsh # CTRL + e
+bindkey '^X' _aichat_zsh # CTRL + x
 
 ### Load other configs #########################################################
 
