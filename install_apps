@@ -57,6 +57,7 @@ fi
 "$bin_path/install_nodejs"
 "$bin_path/install_python"
 "$bin_path/install_dotnet"
+#"$bin_path/install_bun"
 #"$bin_path/install_ruby"
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
