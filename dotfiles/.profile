@@ -204,6 +204,12 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
 
+### aider ######################################################################
+
+export AIDER_DARK_MODE=true
+export AIDER_ATTRIBUTE_AUTHOR=false
+export AIDER_ATTRIBUTE_COMMITTER=false
+
 ### XDG base directory specification ###########################################
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
