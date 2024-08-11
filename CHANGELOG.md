@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.104.0](https://github.com/raas-dev/configent/compare/1.103.0...1.104.0) (2024-08-11)
+
+
+### Features
+
+* **ai:** Add aider ([2453330](https://github.com/raas-dev/configent/commit/2453330633d2b76b84edf4187dff9967e1bee965))
+* **bin:** Add optional bun installation ([32d87b6](https://github.com/raas-dev/configent/commit/32d87b6cb519add2c0323ebf1e8bb6501d8909ae))
+* **gh:** Add optional installation of GitHub CLI ([19aa514](https://github.com/raas-dev/configent/commit/19aa51404d84a44a36f6e618b380d14aa090cbbe))
+
+
+### Fixes
+
+* **tmux:** Add select text to right mouse button ([0eb6afc](https://github.com/raas-dev/configent/commit/0eb6afc840eacdd690921c5a82181444ec629c32))
+
 ## [1.103.0](https://github.com/raas-dev/configent/compare/1.102.5...1.103.0) (2024-08-10)
 
 
