@@ -3,6 +3,7 @@ aaron-bond.better-comments
 anysphere.pyright
 apertia.vscode-aider
 aquasecurityofficial.trivy-vulnerability-scanner
+astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
 bencoleman.armview
@@ -73,6 +74,7 @@ tamasfe.even-better-toml
 teabyii.ayu
 tfsec.tfsec
 tomoki1207.pdf
+unifiedjs.vscode-mdx
 visualstudioexptteam.intellicode-api-usage-examples
 visualstudioexptteam.vscodeintellicode
 wayou.vscode-todo-highlight
