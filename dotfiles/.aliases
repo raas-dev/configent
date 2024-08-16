@@ -138,7 +138,7 @@ alias ,='trans'
 
 ### watch ######################################################################
 
-command -v hwatch >/dev/null && alias watch='hwatch --differences watch'
+command -v hwatch >/dev/null && alias watch='hwatch --differences word'
 
 ### vim ########################################################################
 
