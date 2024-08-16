@@ -242,6 +242,9 @@ alias openai='pipx run openai'
 # https://hatch.pypa.io/latest
 alias hatch='pipx run hatch'
 
+# Langflow
+alias langflow='pipx run langflow'
+
 # Toggle a Python virtual environment for development
 venv() {
   # shellcheck disable=SC1091  # activate does not exist unless venv is created
