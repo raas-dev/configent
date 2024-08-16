@@ -20,6 +20,8 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 asdf plugin add rust
 asdf install rust
 
+rustup default stable
+
 ### cargo ######################################################################
 
 export CARGO_HOME="$(asdf where rust 2>/dev/null)"
