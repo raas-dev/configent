@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.104.2](https://github.com/raas-dev/configent/compare/1.104.1...1.104.2) (2024-08-16)
+
+
+### Fixes
+
+* **aliases:** Add langflow via pipx ([bdb6f23](https://github.com/raas-dev/configent/commit/bdb6f23b9336d597f3d91006f2e8fc22fc5b4c4e))
+* **cli:** Opt-out of most telemetries ([90a7125](https://github.com/raas-dev/configent/commit/90a712551a108db214798e164bcddf8d6e3cc296))
+* **rust:** Add rustup default stable ([df4563c](https://github.com/raas-dev/configent/commit/df4563cb29432a5eeab902461741e94eeafc371a))
+* **watch:** Change hwatch diff mode to word level ([c1debad](https://github.com/raas-dev/configent/commit/c1debadfd43242b67e60e6497ddefa14588bccbf))
+
 ### [1.104.1](https://github.com/raas-dev/configent/compare/1.104.0...1.104.1) (2024-08-16)
 
 
