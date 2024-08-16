@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.104.1](https://github.com/raas-dev/configent/compare/1.104.0...1.104.1) (2024-08-16)
+
+
+### Fixes
+
+* **aichat:** Split assistant and expert prompts ([7ec3042](https://github.com/raas-dev/configent/commit/7ec3042dce32c093a1babc28c0465cde85cb2e0b))
+* **aider:** Use config file over envvars ([81abaeb](https://github.com/raas-dev/configent/commit/81abaeb7969c217529cc6a081b7bd585ff28ce0d))
+* **bun:** Do not add shell completions on upgrade ([0b43487](https://github.com/raas-dev/configent/commit/0b43487d6993afa39fccd6ca434027eb8d6dd7a9))
+* **vscode:** Add extensions for Astro ([094131f](https://github.com/raas-dev/configent/commit/094131f315ab955306df94259bee2888e7bcb621))
+
 ## [1.104.0](https://github.com/raas-dev/configent/compare/1.103.0...1.104.0) (2024-08-11)
 
 
