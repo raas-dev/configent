@@ -36,6 +36,9 @@ command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
+# workaround https://github.com/oven-sh/bun/issues/11179
+# bun completions
+
 ### antidote ###################################################################
 
 if [ -r "$HOME/.antidote/antidote.zsh" ]; then

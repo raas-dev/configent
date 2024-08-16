@@ -116,6 +116,9 @@ fi
   -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" |
     cut -d ' ' -f2 | tr ' ' '\n')" scp sftp ssh
 
+# workaround https://github.com/oven-sh/bun/issues/11179
+# bun completions
+
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
