@@ -21,7 +21,7 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 asdf plugin add azure-cli https://github.com/asyrjasalo/asdf-azure-cli
 asdf install azure-cli
 
-az config set core.collect_telemetry=false
+az config set core.collect_telemetry=no
 az config set core.output=jsonc
 
 ### bicep ######################################################################

@@ -189,16 +189,33 @@ path_append "$HOME/.azd/bin"
 
 path_append "$HOME/.krew/bin"
 
-### Disable telemetries ########################################################
+### Disable telemetry ##########################################################
 
-# Azure Developer CLI
+# https://consoledonottrack.com
+export DO_NOT_TRACK=1
+
+# homebrew
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ANALYTICS_THIS_RUN=1
+
+# google
+export CLOUDSDK_CORE_DISABLE_USAGE_REPORTING=true
+
+# ms
+export AZURE_CORE_COLLECT_TELEMETRY=0
 export AZURE_DEV_COLLECT_TELEMETRY=no
-
-# Azure Functions Core Tools
-export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
-
-# dotnet
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export POWERSHELL_TELEMETRY_OPTOUT=1
+
+# js
+export GATSBY_TELEMETRY_DISABLED=1
+export NEXT_TELEMETRY_DISABLED=1
+export NUXT_TELEMETRY_DISABLED1
+export YARN_ENABLE_TELEMETRY=0
+
+# go
+export GOTELEMETRY=off
 
 ### aichat #####################################################################
 

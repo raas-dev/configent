@@ -20,3 +20,5 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
 asdf plugin add gcloud
 asdf install gcloud
+
+gcloud config set disable_usage_reporting true
