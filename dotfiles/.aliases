@@ -107,7 +107,7 @@ fi
 ### Shortcuts ##################################################################
 
 alias a='aichat'
-alias b='bat'
+alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='ai_code'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
