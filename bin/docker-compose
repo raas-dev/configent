@@ -11,16 +11,22 @@
 : "${VM:="ubuntu"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
-    exit 127
+  if [ -x "/opt/homebrew/bin/docker" ]; then
+    "$HOME/.local/configent/bin/docker" compose "$@"
+  elif [ -x "/usr/local/bin/docker" ]; then
+    "$HOME/.local/configent/bin/docker" compose "$@"
+  else
+    if ! command -v limactl >/dev/null; then
+      echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
+      exit 127
+    fi
+    if ! limactl shell "$VM" true >/dev/null 2>&1; then
+      limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
+        limactl start "$VM"
+    fi
+    # pass arguments to this exact same script on the guest VM
+    limactl shell "$VM" ~/configent/bin/docker-compose "$@"
   fi
-  if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
-      limactl start "$VM"
-  fi
-  # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" ~/configent/bin/docker-compose "$@"
 else
   # pass arguments to docker shim, which installs the compose plugin
   "$HOME/.local/configent/bin/docker" compose "$@"

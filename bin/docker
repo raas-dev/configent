@@ -34,6 +34,10 @@ install_docker_compose_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
     os="$(uname)"
     arch="$(uname -m)"
+    if [ "$os" = "Darwin" ]; then
+      os='darwin'
+      [ "$arch" = "arm64" ] && arch="aarch64"
+    fi
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
     curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
@@ -47,16 +51,32 @@ install_docker_compose_plugin() {
 }
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
-    exit 127
+  # prefer homebrew installed docker CLI
+  if [ -x "/opt/homebrew/bin/docker" ]; then
+    docker_bin_path="/opt/homebrew/bin/docker"
+  elif [ -x "/usr/local/bin/docker" ]; then
+    docker_bin_path="/opt/homebrew/bin/docker"
   fi
-  if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
-      limactl start "$VM"
+  if [ -n "$docker_bin_path" ]; then
+    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
+    if [ "$1" = "build" ]; then
+      install_docker_buildx_plugin
+    elif [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+    fi
+    "$docker_bin_path" "$@"
+  else
+    if ! command -v limactl >/dev/null; then
+      echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
+      exit 127
+    fi
+    if ! limactl shell "$VM" true >/dev/null 2>&1; then
+      limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
+        limactl start "$VM"
+    fi
+    # pass arguments to this exact same script on the guest VM
+    limactl shell "$VM" ~/configent/bin/docker "$@"
   fi
-  # pass arguments to this exact same script on the guest VM
-  limactl shell "$VM" ~/configent/bin/docker "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
