@@ -21,7 +21,8 @@
   },
   "[shellscript]": {
     "editor.detectIndentation": false,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
