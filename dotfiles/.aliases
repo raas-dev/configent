@@ -86,6 +86,7 @@ alias ping='ping -c 999'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
+# rm: --preserve-root is default
 
 ### Enhanced ls ################################################################
 
