@@ -72,10 +72,7 @@ if command -v codium >/dev/null; then
 elif command -v code >/dev/null; then
   alias code='code --reuse-window --add'
 fi
-
-if command -v cursor >/dev/null; then
-  alias cursor='cursor --reuse-window --add'
-fi
+alias cursor='cursor --reuse-window --add'
 
 alias grep='grep --color'
 alias egrep='egrep --color'
