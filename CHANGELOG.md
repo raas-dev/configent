@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.105.0](https://github.com/raas-dev/configent/compare/1.104.2...1.105.0) (2024-08-24)
+
+
+### Features
+
+* **macos:** Install Docker CLI locally ([1722132](https://github.com/raas-dev/configent/commit/17221328d408fd3a2688971e17abd6ad2c2f3d80))
+* **macos:** Use VSCode by default, Cursor is buggy ([9727744](https://github.com/raas-dev/configent/commit/972774457be64abc0245d367ba9e8c13452fff63))
+
+
+### Fixes
+
+* **aliases:** Hide git changes in b ([0f68435](https://github.com/raas-dev/configent/commit/0f68435f5767bc2252b436c162799b1d688ef0d9))
+* **docker:** Detect local macOS docker CLI ([c85e956](https://github.com/raas-dev/configent/commit/c85e956255c4082acdc31d5273be77b337b159cb))
+* **docker:** Start docker VM first and always on macOS ([2c8f69e](https://github.com/raas-dev/configent/commit/2c8f69e4e61229c0f4f1915a03b291d2254b5a4c))
+* **docker:** Update buildx version ([03820e5](https://github.com/raas-dev/configent/commit/03820e57fd8890edab60358d79eb18923bf96f03))
+* **vscode:** Disable automatic updates ([5fa79f4](https://github.com/raas-dev/configent/commit/5fa79f4b08d99c5e70feeae41b124e26da63ddc1))
+* **vscode:** Set default bash formatter to shfmt ([1f9e397](https://github.com/raas-dev/configent/commit/1f9e39708b0c25d9af82bb3cf9c4320ea041cdd8))
+* **vscode:** Use VSCode compatible extensions ([9a588f7](https://github.com/raas-dev/configent/commit/9a588f7d1ba818a39de506898bd389a48f697455))
+
 ### [1.104.2](https://github.com/raas-dev/configent/compare/1.104.1...1.104.2) (2024-08-16)
 
 
