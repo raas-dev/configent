@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.105.2](https://github.com/raas-dev/configent/compare/1.105.1...1.105.2) (2024-08-24)
+
+
+### Fixes
+
+* **macos:** Add shim to fix Cursor path on ARM ([3cd58f1](https://github.com/raas-dev/configent/commit/3cd58f1dfe422f05021b40390ef79f713f05444f))
+
 ### [1.105.1](https://github.com/raas-dev/configent/compare/1.105.0...1.105.1) (2024-08-24)
 
 
