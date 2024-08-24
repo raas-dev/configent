@@ -242,5 +242,29 @@
     "zdharma",
     "zoxide",
     "zplug"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "terminal.ansiBlack": "#353535",
+    "terminal.ansiBlue": "#1398B9",
+    "terminal.ansiBrightBlack": "#535353",
+    "terminal.ansiBrightBlue": "#5FDAFF",
+    "terminal.ansiBrightCyan": "#0AAEB3",
+    "terminal.ansiBrightGreen": "#B9CA49",
+    "terminal.ansiBrightMagenta": "#FF00F6",
+    "terminal.ansiBrightRed": "#EF2F27",
+    "terminal.ansiBrightWhite": "#FFFFFF",
+    "terminal.ansiBrightYellow": "#FED06E",
+    "terminal.ansiCyan": "#2BE4D0",
+    "terminal.ansiGreen": "#AFD700",
+    "terminal.ansiMagenta": "#AA54F9",
+    "terminal.ansiRed": "#F75341",
+    "terminal.ansiWhite": "#F2F2F2",
+    "terminal.ansiYellow": "#FBB829",
+    "terminal.background": "#090A14",
+    "terminal.foreground": "#D0D0D0",
+    "terminalCursor.background": "#353535",
+    "terminalCursor.foreground": "#B300AD",
+    "minimap.background": "#00000000",
+    "scrollbar.shadow": "#00000000"
+  }
 }
