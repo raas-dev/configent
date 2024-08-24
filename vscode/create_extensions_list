@@ -12,11 +12,11 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 if command -v codium >/dev/null; then
   codium --list-extensions >"$this_path/extensions.list"
-elif command -v cursor >/dev/null; then
-  cursor --list-extensions >"$this_path/extensions.list"
 elif command -v code >/dev/null; then
   code --list-extensions >"$this_path/extensions.list"
+elif command -v cursor >/dev/null; then
+  cursor --list-extensions >"$this_path/extensions.list"
 else
-  echo "Error: VSCodium, Cursor or VSCode not found in PATH."
+  echo "Error: VSCodium, VSCode or Cursor not found in PATH."
   exit 127
 fi
