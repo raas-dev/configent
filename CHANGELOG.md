@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.105.1](https://github.com/raas-dev/configent/compare/1.105.0...1.105.1) (2024-08-24)
+
+
+### Fixes
+
+* **vscode:** Fix preference of Code over Cursor ([b470882](https://github.com/raas-dev/configent/commit/b4708823fd89ebbc60ed75dedabdb55b551734eb))
+
 ## [1.105.0](https://github.com/raas-dev/configent/compare/1.104.2...1.105.0) (2024-08-24)
 
 
