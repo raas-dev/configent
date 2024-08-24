@@ -34,7 +34,7 @@ fi
 NONINTERACTIVE=true "$this_path/install_apps"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  "$this_path/setup_cursor"
+  "$this_path/setup_vscode"
 else
   "$this_path/setup_vscodium"
 fi

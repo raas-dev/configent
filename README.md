@@ -152,15 +152,10 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 
 💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
 
-### setup_cursor / setup_vscodium
+### setup_vscode / setup_vscodium
 
-[VSCodium](https://vscodium.com/) and its forks are preferred over VSCode.
-The extensions and editor configuration are the same across the forks.
-
-The specific `setup_` script is run so that VSCodium is the default editor on
-Linux distros and [Cursor](https://cursor.sh/) is the default on macOS.
-
-💡: Preferring Cursor might expand to Linux distros later.
+[VSCodium](https://vscodium.com/) is the default editor on Linux distros and
+[VSCode](https://code.visualstudio.com/) is the default on macOS.
 
 The script symlinks `vscode/` to `<os_specific_path>/User`. Existing `User`
 directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
@@ -168,7 +163,7 @@ directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
 If editor is present, its extensions (`vscode/extensions.list`) are installed
 using the command-line tool of the editor.
 
-To update the list after adding or removing extensions in Cursor/VSCodium,
+To update the list after adding or removing extensions in VSCode/VSCodium,
 run `vscode/create_extensions_list`.
 
 ## 🐚 Default shell
