@@ -1,6 +1,4 @@
-FaroSystemAppender constructor
 aaron-bond.better-comments
-anysphere.pyright
 apertia.vscode-aider
 aquasecurityofficial.trivy-vulnerability-scanner
 astro-build.astro-vscode
@@ -47,6 +45,7 @@ ms-azuretools.vscode-azureresourcegroups
 ms-azuretools.vscode-bicep
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
+ms-pyright.pyright
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
