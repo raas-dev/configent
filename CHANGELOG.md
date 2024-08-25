@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.106.0](https://github.com/raas-dev/configent/compare/1.105.2...1.106.0) (2024-08-25)
+
+
+### Features
+
+* **macos:** Install brew casks in user's HOME dir ([e98a8bd](https://github.com/raas-dev/configent/commit/e98a8bd2024c9e1ddd662900fb2f50635eb0fcb3))
+
+
+### Fixes
+
+* **cursor:** Tidy error handling in cursor shim ([f68ab6c](https://github.com/raas-dev/configent/commit/f68ab6c99c22940e38f526b535130a1ded7f6226))
+* **macos:** Export Homebrew Cask appdir ([d65033f](https://github.com/raas-dev/configent/commit/d65033f6f5f987e4f5f2872f90e544bdffaa140a))
+* **macos:** Prefer VSCode by default over Cursor ([ab07973](https://github.com/raas-dev/configent/commit/ab0797357bb6b238b357b1765ad3598edda3808e))
+
 ### [1.105.2](https://github.com/raas-dev/configent/compare/1.105.1...1.105.2) (2024-08-24)
 
 
