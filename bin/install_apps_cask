@@ -35,13 +35,13 @@ brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --no-quarantine brave-browser
-brew install --cask --no-quarantine cursor
+#brew install --cask --no-binaries --no-quarantine cursor
 #brew install --cask --no-quarantine iina
 #brew install --cask --no-quarantine libreoffice libreoffice-language-pack
 brew install --cask --no-quarantine nordvpn
 #brew install --cask --no-quarantine tunnelblick
 #brew install --cask --no-quarantine utm
-#brew install --cask --no-quarantine visual-studio-code
+brew install --cask --no-quarantine visual-studio-code
 #brew install --cask --no-quarantine vscodium
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
