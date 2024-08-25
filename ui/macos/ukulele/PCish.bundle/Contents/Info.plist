@@ -12,6 +12,8 @@
 	<dict>
 		<key>TICapsLockLanguageSwitchCapable</key>
 		<false/>
+		<key>TISIconIsTemplate</key>
+		<false/>
 		<key>TISInputSourceID</key>
 		<string>org.sil.ukelele.keyboardlayout.pcish.english(pcish)</string>
 		<key>TISIntendedLanguage</key>
@@ -20,6 +22,8 @@
 	<key>KLInfo_Finnish (PCish)</key>
 	<dict>
 		<key>TICapsLockLanguageSwitchCapable</key>
+		<false/>
+		<key>TISIconIsTemplate</key>
 		<false/>
 		<key>TISInputSourceID</key>
 		<string>org.sil.ukelele.keyboardlayout.pcish.finnish(pcish)</string>
