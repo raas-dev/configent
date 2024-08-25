@@ -20,9 +20,9 @@
     "editor.wordWrap": "wordWrapColumn"
   },
   "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
     "editor.detectIndentation": false,
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.tabSize": 2
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -30,6 +30,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "basedpyright.analysis.typeCheckingMode": "basic",
   "bicep.enableSurveys": false,
   "breadcrumbs.enabled": false,
   "codeium.aggressiveShutdown": true,
@@ -286,5 +287,6 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "vsintellicode.python.completionsEnabled": false
 }
