@@ -29,13 +29,15 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+
 # Homebrew Cask taps
 #brew tap homebrew/cask-versions
 brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --no-quarantine brave-browser
-#brew install --cask --no-binaries --no-quarantine cursor
+#brew install --cask --no-quarantine cursor
 #brew install --cask --no-quarantine iina
 #brew install --cask --no-quarantine libreoffice libreoffice-language-pack
 brew install --cask --no-quarantine nordvpn

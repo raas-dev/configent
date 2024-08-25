@@ -7,13 +7,13 @@
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # Workaround to skip the broken cursor binary symlink created by Homebrew cask
-
 # Fixes Cursor startup on macOS ARM (2024-08)
-brew_cursor_bin_path="/Applications/Cursor.app/Contents/Resources/app/bin/code"
 
 # shellcheck disable=SC2068  # not quoting args
-if [ -x "$brew_cursor_bin_path" ]; then
-  "$brew_cursor_bin_path" $@
+if [ -x "$HOME/Applications/Cursor.app/Contents/Resources/app/bin/code" ]; then
+  "$HOME/Applications/Cursor.app/Contents/Resources/app/bin/code" $@
+elif [ -x "/Applications/Cursor.app/Contents/Resources/app/bin/code" ]; then
+  /Applications/Cursor.app/Contents/Resources/app/bin/code $@
 else
   # avoid infinite loop
   this_path="$(cd "$(dirname "$0")" && pwd)"
