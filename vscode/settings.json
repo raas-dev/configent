@@ -288,5 +288,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "vsintellicode.python.completionsEnabled": false
+  "vsintellicode.python.completionsEnabled": false,
+  "docker.images.checkForOutdatedImages": false
 }
