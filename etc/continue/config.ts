@@ -12,7 +12,7 @@ export function modifyConfig(config: Config): Config {
 
   config.contextProviders.find(
     (provider) => provider.name === "google"
-  ).params.serper_api_key = process.env.SERPER_API_KEY;
+  ).params.serperApiKey = process.env.SERPER_API_KEY;
 
   return config;
 }
