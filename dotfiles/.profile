@@ -93,6 +93,8 @@ else
   fi
 fi
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 ### asdf #######################################################################
 
 if [ -r "$HOME/.asdf/asdf.sh" ]; then
