@@ -1,18 +1,19 @@
 {
+  "allowAnonymousTelemetry": false,
   "models": [
     {
       "model": "claude-3-5-sonnet-20240620",
       "contextLength": 200000,
       "title": "Claude 3.5 Sonnet",
       "provider": "anthropic",
-      "apiKey": "<ANTHROPIC_API_KEY>"
+      "apiKey": "[ANTHROPIC_API_KEY]"
     }
   ],
   "tabAutocompleteModel": {
     "title": "Codestral",
     "provider": "mistral",
     "model": "codestral-latest",
-    "apiKey": "<CODESTRAL_API_KEY>"
+    "apiKey": "[CODESTRAL_API_KEY]"
   },
   "tabAutocompleteOptions": {
     "disableInFiles": ["*.md", "*.txt"],
@@ -22,9 +23,14 @@
     "provider": "openai",
     "model": "voyage-code-2",
     "apiBase": "https://api.voyageai.com/v1/",
-    "apiKey": "<VOYAGE_API_KEY>"
+    "apiKey": "[VOYAGE_API_KEY]"
   },
-  "allowAnonymousTelemetry": false,
+  "reranker": {
+    "name": "voyage",
+    "params": {
+      "apiKey": "[VOYAGE_API_KEY]"
+    }
+  },
   "slashCommands": [
     {
       "name": "edit",
@@ -105,12 +111,9 @@
     {
       "name": "google",
       "params": {
-        "serperApiKey": "<SERPER_API_KEY>"
+        "serperApiKey": "[SERPER_API_KEY]"
       }
     }
   ],
-  "docs": [],
-  "reranker": {
-    "name": "free-trial"
-  }
+  "docs": []
 }
