@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.106.1](https://github.com/raas-dev/configent/compare/1.106.0...1.106.1) (2024-08-26)
+
+
+### Fixes
+
+* **macos:** Remove casks installed system-wide ([a1a9431](https://github.com/raas-dev/configent/commit/a1a9431581da380fe3c638924ae20b66cc3bf17b))
+* **nodejs:** Update Node.js LTS version ([c405e4e](https://github.com/raas-dev/configent/commit/c405e4e4cec0e03769664dfe7c8b06a8005597e4))
+* **tmux:** Slower mouse wheel scroll speed ([5f8db40](https://github.com/raas-dev/configent/commit/5f8db4037fdf3359b9d40cc5895adc16bf34d780))
+* **vscode:** Use based pyright over MS pyright ([de5aace](https://github.com/raas-dev/configent/commit/de5aace3b07d79b05f3c396a69fcff92db8d9398))
+
 ## [1.106.0](https://github.com/raas-dev/configent/compare/1.105.2...1.106.0) (2024-08-25)
 
 
