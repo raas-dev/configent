@@ -166,6 +166,14 @@ using the command-line tool of the editor.
 To update the list after adding or removing extensions in VSCode/VSCodium,
 run `vscode/create_extensions_list`.
 
+### setup_continue
+
+The script copies the
+[VSCode/VSCodium Continue extension](https://docs.continue.dev)
+configuration files and installs Node.js packages used by the configuration.
+
+You must export the API keys loaded by `~/.continue/config.ts` in `~/.rclocal`.
+
 ## 🐚 Default shell
 
 Set `zsh` as the user's default shell:

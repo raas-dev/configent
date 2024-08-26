@@ -35,8 +35,10 @@ NONINTERACTIVE=true "$this_path/install_apps"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   "$this_path/setup_vscode"
+  "$this_path/setup_continue"
 else
   "$this_path/setup_vscodium"
+  "$this_path/setup_continue"
 fi
 
 printf "\n✅ bootstrap done.\n"
