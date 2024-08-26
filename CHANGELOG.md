@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.1](https://github.com/raas-dev/configent/compare/1.107.0...1.107.1) (2024-08-26)
+
+
+### Fixes
+
+* **continue:** Add config.ts for reranker ([8f453e5](https://github.com/raas-dev/configent/commit/8f453e5fc001040d00c98ab548528cb4b933f5a9))
+* **continue:** Add quick actions ([0a8b2bd](https://github.com/raas-dev/configent/commit/0a8b2bd4a6141d20093eb40d1609cc44df00f730))
+* **continue:** Add reranker ([ae01914](https://github.com/raas-dev/configent/commit/ae019143aa6a6f8ae123bc0b34d6c03c10d0bd9b))
+* **continue:** Fix serper api key param name ([f7ddbf0](https://github.com/raas-dev/configent/commit/f7ddbf0a71ea65be4491045819dfa766af9fa543))
+
 ## [1.107.0](https://github.com/raas-dev/configent/compare/1.106.1...1.107.0) (2024-08-26)
 
 
