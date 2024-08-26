@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.107.0](https://github.com/raas-dev/configent/compare/1.106.1...1.107.0) (2024-08-26)
+
+
+### Features
+
+* **continue:** Add continue configs ([6bcc20b](https://github.com/raas-dev/configent/commit/6bcc20b949751091bf56bd88086f32933e5e5d72))
+
 ### [1.106.1](https://github.com/raas-dev/configent/compare/1.106.0...1.106.1) (2024-08-26)
 
 
