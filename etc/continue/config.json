@@ -109,11 +109,30 @@
       "name": "tree"
     },
     {
+      "name": "locals",
+      "params": {
+        "stackDepth": 3
+      }
+    },
+    { "name": "os" },
+    {
       "name": "google",
       "params": {
         "serperApiKey": "[SERPER_API_KEY]"
       }
     }
   ],
-  "docs": []
+  "experimental": {
+    "quickActions": [
+      {
+        "title": "Unit test",
+        "prompt": "Write a unit test for this code. Do not change anything about the code itself."
+      },
+      {
+        "title": "Detailed explanation",
+        "prompt": "Explain the following code in detail, including all methods and properties.",
+        "sendToChat": true
+      }
+    ]
+  }
 }
