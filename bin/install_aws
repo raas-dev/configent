@@ -20,8 +20,3 @@ ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
 asdf plugin add awscli
 asdf install awscli
-
-### aws-vault ##################################################################
-
-asdf plugin add aws-vault
-asdf install aws-vault
