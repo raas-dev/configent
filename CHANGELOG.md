@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.2](https://github.com/raas-dev/configent/compare/1.107.1...1.107.2) (2024-08-27)
+
+
+### Fixes
+
+* **aws:** Remove legacy aws-vault, use aws sso ([8732c1c](https://github.com/raas-dev/configent/commit/8732c1c6d6a1d43712fb860543b9b75d3bf7c4b2))
+* **continue:** Add self-hosted claude and gpt-4o ([6c9b19a](https://github.com/raas-dev/configent/commit/6c9b19ac3552ca4051283076a834e46b41cd9b17))
+* **continue:** Configure many models of one provider ([d4e7428](https://github.com/raas-dev/configent/commit/d4e7428c8a07097590e3d2a3454e734de8476ac3))
+* **docker:** Add NVIDIA Container Toolkit ([1c117d9](https://github.com/raas-dev/configent/commit/1c117d9a367cd9c9deb3a60e6ed8d335713af6d0))
+
 ### [1.107.1](https://github.com/raas-dev/configent/compare/1.107.0...1.107.1) (2024-08-26)
 
 
