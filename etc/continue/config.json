@@ -9,13 +9,13 @@
       "apiKey": "[ANTHROPIC_API_KEY]"
     },
     {
-      "title": "AWS Bedrock",
+      "title": "AWS: claude-3.5-sonnet",
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
       "region": "eu-central-1"
     },
     {
-      "title": "Azure OpenAI: gpt-4o",
+      "title": "Azure: gpt-4o",
       "provider": "openai",
       "apiType": "azure",
       "engine": "gpt-4o",
@@ -25,7 +25,7 @@
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     },
     {
-      "title": "Azure OpenAI: gpt-4o-mini",
+      "title": "Azure: gpt-4o-mini",
       "provider": "openai",
       "apiType": "azure",
       "engine": "gpt-4o-mini",

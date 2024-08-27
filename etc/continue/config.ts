@@ -12,6 +12,9 @@ export function modifyConfig(config: Config): Config {
       anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY;
     });
 
+  // AWS Bedrock
+  // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
+
   // Azure OpenAI
   config.models
     .filter((model) => model.apiType === "azure" && model.provider === "openai")
