@@ -39,6 +39,7 @@
   "continue.enableTabAutocomplete": true,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
+  "cSpell.diagnosticLevel": "Hint",
   "cSpell.enabledLanguageIds": [
     "asciidoc",
     "c",
