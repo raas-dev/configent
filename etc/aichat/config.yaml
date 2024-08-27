@@ -1,28 +1,37 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
-model: openai:gpt-4o                # Default LLM
-temperature: 0                      # GPT temperature, between 0 and 2
-save: true                          # Whether to save the message
-save_session: false                 # Whether to save the session, if null, asking
-highlight: true                     # Set false to turn off highlight
-light_theme: false                  # Whether to use a light theme
-wrap: auto                          # Specify the text-wrapping mode (no, auto, <max-width>)
-wrap_code: false                    # Whether wrap code block
-ctrlc_exit: true                    # Whether to exit REPL by pressing ^C twice
-auto_copy: true                     # Automatically copy the last output to the clipboard
-keybindings: vi                     # REPL keybindings. (emacs, vi)
-prelude: 'role:chat'                # Set a default role or session (role:<name>, session:<name>)
+# ---- llm ----
+model: openai:gpt-4o # Specify the LLM to use
+temperature: 0 # Set default temperature parameter
 
-# Compress session if tokens exceed this value (valid when >=1000)
-#compress_threshold: 1000
-# The prompt for summarizing session messages
-#summarize_prompt: 'Summarize the discussion briefly in 200 words or less to use as a prompt for future context.'
-# The prompt for the summary of the session
-#summary_prompt: 'This is a summary of the chat history as a recap: '
+# ---- behavior ----
+save: true # Indicates whether to persist the message
+keybindings: vi # Choose keybinding style (emacs, vi)
+editor: vim # Specifies the command used to edit input buffer or session. (e.g. vim, emacs, nano).
+wrap: auto # Controls text wrapping (no, auto, <max-width>)
+wrap_code: false # Enables or disables wrapping of code blocks
 
-left_prompt: '{color.green}{?session {session}{?role /}}{role}{color.cyan}{?session )}{!session >}{color.reset} '
-right_prompt: '{color.purple}{?session {?consume_tokens {consume_tokens}({consume_percent}%)}{!consume_tokens {consume_tokens}}}{color.reset}'
+# ---- prelude ----
+prelude: "role:chat" # Set a default role or session (role:<name>, session:<name>)
 
+# ---- session ----
+# Controls the persistence of the session. if true, auto save; if false, not save; if null, asking the user
+save_session: false
+# Compress session when token count reaches or exceeds this threshold
+compress_threshold: 4000
+# Text prompt used for creating a concise summary of session message
+summarize_prompt: "Summarize the discussion briefly in 200 words or less to use as a prompt for future context."
+# Text prompt used for including the summary of the entire session
+summary_prompt: "This is a summary of the chat history as a recap: "
+
+# ---- appearance ----
+highlight: true # Controls syntax highlighting
+light_theme: false # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
+# Custom REPL left/right prompts, see https://github.com/sigoden/aichat/wiki/Custom-REPL-Prompt for more details
+left_prompt: "{color.green}{?session {?agent {agent}>}{session}{?role /}}{!session {?agent {agent}>}}{role}{?rag @{rag}}{color.cyan}{?session )}{!session >}{color.reset} "
+right_prompt: "{color.purple}{?session {?consume_tokens {consume_tokens}({consume_percent}%)}{!consume_tokens {consume_tokens}}}{color.reset}"
+
+# ---- clients ----
 clients:
   - type: openai
   - type: claude
