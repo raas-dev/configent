@@ -2,7 +2,7 @@
   "allowAnonymousTelemetry": false,
   "models": [
     {
-      "title": "Claude 3.5 Sonnet",
+      "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-20240620",
       "contextLength": 200000,
@@ -15,11 +15,23 @@
       "region": "eu-central-1"
     },
     {
+      "title": "gpt-4o",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "apiKey": "[OPENAI_API_KEY]"
+    },
+    {
+      "title": "gpt-4o-mini",
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "apiKey": "[OPENAI_API_KEY]"
+    },
+    {
       "title": "Azure: gpt-4o",
       "provider": "openai",
-      "apiType": "azure",
-      "engine": "gpt-4o",
       "model": "gpt-4o",
+      "engine": "gpt-4o",
+      "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
@@ -27,9 +39,9 @@
     {
       "title": "Azure: gpt-4o-mini",
       "provider": "openai",
-      "apiType": "azure",
-      "engine": "gpt-4o-mini",
       "model": "gpt-4o-mini",
+      "engine": "gpt-4o-mini",
+      "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
@@ -47,15 +59,13 @@
   },
   "embeddingsProvider": {
     "provider": "openai",
-    "model": "voyage-code-2",
-    "apiBase": "https://api.voyageai.com/v1/",
-    "apiKey": "[VOYAGE_API_KEY]"
+    "model": "text-embedding-3-small",
+    "apiKey": "[OPENAI_API_KEY]"
   },
   "reranker": {
-    "name": "voyage",
+    "name": "llm",
     "params": {
-      "model": "rerank-lite-1",
-      "apiKey": "[VOYAGE_API_KEY]"
+      "modelTitle": "gpt-4o-mini"
     }
   },
   "slashCommands": [

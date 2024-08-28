@@ -15,6 +15,13 @@ export function modifyConfig(config: Config): Config {
   // AWS Bedrock
   // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
 
+  // OpenAI
+  config.models
+    .filter((model) => model.apiType !== "azure" && model.provider === "openai")
+    .forEach((openaiModel) => {
+      openaiModel.apiKey = process.env.OPENAI_API_KEY;
+    });
+
   // Azure OpenAI
   config.models
     .filter((model) => model.apiType === "azure" && model.provider === "openai")
@@ -24,15 +31,20 @@ export function modifyConfig(config: Config): Config {
       openaiModel.apiVersion = process.env.AZURE_OPENAI_API_VERSION;
     });
 
-  // Mistral AI
+  // Tab autocomplete
   if (config.tabAutocompleteModel.model === "codestral-latest") {
     config.tabAutocompleteModel.apiKey = process.env.CODESTRAL_API_KEY;
   }
 
-  // Voyage AI
-  if (config.embeddingsProvider.model === "voyage-code-2") {
+  // Embeddings provider
+  if (config.embeddingsProvider.provider === "openai") {
+    config.embeddingsProvider.apiKey = process.env.OPENAI_API_KEY;
+  }
+  else if (config.embeddingsProvider.model === "voyage-code-2") {
     config.embeddingsProvider.apiKey = process.env.VOYAGE_API_KEY;
   }
+
+  // Reranker
   if (config.reranker.name === "voyage") {
     config.reranker.params.apiKey = process.env.VOYAGE_API_KEY;
   }
