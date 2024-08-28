@@ -54,6 +54,7 @@
   "reranker": {
     "name": "voyage",
     "params": {
+      "model": "rerank-lite-1",
       "apiKey": "[VOYAGE_API_KEY]"
     }
   },
