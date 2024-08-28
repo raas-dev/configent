@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.3](https://github.com/raas-dev/configent/compare/1.107.2...1.107.3) (2024-08-28)
+
+
+### Fixes
+
+* **aichat:** Remove unused options ([9e0dfdf](https://github.com/raas-dev/configent/commit/9e0dfdf75c543bb42647369699957cd475b54ee3))
+* **continue:** Make embeddings and reranker use OpenAI ([a570e74](https://github.com/raas-dev/configent/commit/a570e74df2eaae6471e4e2fc98621ddebe1cdc86))
+* **cspell:** Show mistakes as hints not problems ([aed0524](https://github.com/raas-dev/configent/commit/aed05247cb395a0d3bccd35f3f8de4672865317c))
+* **vscode:** Spellcheck all files ([702bf52](https://github.com/raas-dev/configent/commit/702bf5203c3501665f86c6f26ea7d7dd4257fcf8))
+
 ### [1.107.2](https://github.com/raas-dev/configent/compare/1.107.1...1.107.2) (2024-08-27)
 
 
