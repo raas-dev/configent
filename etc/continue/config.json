@@ -9,12 +9,6 @@
       "apiKey": "[ANTHROPIC_API_KEY]"
     },
     {
-      "title": "AWS: claude-3.5-sonnet",
-      "provider": "bedrock",
-      "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
-      "region": "eu-central-1"
-    },
-    {
       "title": "gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
@@ -25,6 +19,12 @@
       "provider": "openai",
       "model": "gpt-4o-mini",
       "apiKey": "[OPENAI_API_KEY]"
+    },
+    {
+      "title": "AWS: claude-3.5-sonnet",
+      "provider": "bedrock",
+      "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+      "region": "eu-central-1"
     },
     {
       "title": "Azure: gpt-4o",
