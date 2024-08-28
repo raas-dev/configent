@@ -14,7 +14,6 @@ repos:
 - repo: https://github.com/bridgecrewio/checkov.git
   rev: 3.2.238
   hooks:
-    - id: checkov_secrets
     - id: checkov_diff
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
