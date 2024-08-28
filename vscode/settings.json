@@ -81,7 +81,6 @@
     "yml"
   ],
   "cSpell.showAutocompleteSuggestions": true,
-  "cSpell.spellCheckOnlyWorkspaceFiles": true,
   "cSpell.suggestionMenuType": "quickFix",
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
