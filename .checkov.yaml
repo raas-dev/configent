@@ -11,4 +11,3 @@ skip-path:
   - vscode/History
   - vscode/sync
   - vscode/workspaceStorage
-quiet: true
