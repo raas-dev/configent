@@ -62,12 +62,6 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
-# install GitHub CLI
-#"$bin_path/install_github"
-
-# install appsec tools such as container vulnerability scanners
-"$bin_path/install_appsec"
-
 # install cloud development tools
 "$bin_path/install_aws"
 "$bin_path/install_azure"
@@ -77,11 +71,23 @@ fi
 #"$bin_path/install_cloudflare"
 #"$bin_path/install_flyctl"
 
+# install static analysis tools
+"$bin_path/install_linters"
+
 # install Neovim if brew is available, always install Vim bundles
 "$bin_path/install_neovim"
 
 # install tmux if brew is available, always install tmux plugins
 "$bin_path/install_tmux"
+
+# install Ollama if brew is available
+"$bin_path/install_ollama"
+
+# install appsec tools such as vulnerability scanners
+#"$bin_path/install_appsec"
+
+# install GitHub CLI
+#"$bin_path/install_github"
 
 # copy ui/fonts/** to user's fonts path
 "$bin_path/install_fonts"
