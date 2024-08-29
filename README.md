@@ -106,7 +106,7 @@ which is a standard config search path on many operating systems.
 
 Directory `bin` in this repository is symlinked to `~/.local/configent/bin`,
 taking 1st preference in `PATH`. Directory `etc` in this repository is
-symlinked to `~/.config/configent`
+symlinked to `~/.config/configent`.
 
 Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
 the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
