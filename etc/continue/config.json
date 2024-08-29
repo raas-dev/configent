@@ -45,22 +45,28 @@
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
+    },
+    {
+      "title": "Ollama",
+      "provider": "ollama",
+      "model": "deepseek-coder-v2",
+      "apiBase": "http://127.0.0.1:11434"
     }
   ],
   "tabAutocompleteModel": {
-    "title": "Codestral",
-    "provider": "mistral",
-    "model": "codestral-latest",
-    "apiKey": "[CODESTRAL_API_KEY]"
+    "title": "Ollama",
+    "provider": "ollama",
+    "model": "deepseek-coder-v2",
+    "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
     "disableInFiles": ["*.md", "*.txt"],
     "multilineCompletions": "always"
   },
   "embeddingsProvider": {
-    "provider": "openai",
-    "model": "text-embedding-3-small",
-    "apiKey": "[OPENAI_API_KEY]"
+    "provider": "ollama",
+    "model": "nomic-embed-text",
+    "apiBase": "http://127.0.0.1:11434"
   },
   "reranker": {
     "name": "llm",
