@@ -128,7 +128,8 @@ What's installed by default:
 5. AWS and Azure development tools, static analysis tools for infra-as-code
 6. (Neo)vim bundles and config (Neovim from `brew` if Homebrew is available)
 7. Tmux plugins and config (tmux from `brew` if Homebrew is available)
-8. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
+8. [Ollama](https://ollama.com/) is installed and started as a `brew service` if Homebrew is available
+9. [Terminess](https://www.programmingfonts.org/#terminus) monospace font
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
 to install requirements from Linux distro's repository (requires `sudo` rights).
