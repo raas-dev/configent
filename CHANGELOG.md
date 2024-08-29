@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.108.0](https://github.com/raas-dev/configent/compare/1.107.3...1.108.0) (2024-08-29)
+
+
+### Features
+
+* **continue:** Use local models ([c83e4c6](https://github.com/raas-dev/configent/commit/c83e4c6173ec82ed82ceaf63afa025a1db1dc87c))
+* **ollama:** Install Ollama using Homebrew ([08f65d6](https://github.com/raas-dev/configent/commit/08f65d6a24e063e4ea1f7dd4a18e91fad7ae57fc))
+
+
+### Fixes
+
+* **apps:** Split linters and appsec apps ([e9b5c05](https://github.com/raas-dev/configent/commit/e9b5c05ac9c79e405176896e5e31531ff4ae3fe1))
+
 ### [1.107.3](https://github.com/raas-dev/configent/compare/1.107.2...1.107.3) (2024-08-28)
 
 
