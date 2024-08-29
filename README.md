@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc in container.
 - 95% consistent user experience both on macOS and the beloved Linux distros.
 - There is only one way to manage programming languages and tool versions.
-- AI-first in terminal and in editor. Open Source used whenever doable.
+- Runs local open source LLMs for Copilot-like code completion in editor.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
