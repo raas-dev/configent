@@ -54,9 +54,9 @@
     }
   ],
   "tabAutocompleteModel": {
-    "title": "Ollama",
+    "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "deepseek-coder-v2",
+    "model": "starcoder2:3b",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
