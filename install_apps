@@ -80,7 +80,7 @@ fi
 # install tmux if brew is available, always install tmux plugins
 "$bin_path/install_tmux"
 
-# install Ollama if brew is available
+# install Ollama
 "$bin_path/install_ollama"
 
 # install appsec tools such as vulnerability scanners
