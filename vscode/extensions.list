@@ -37,6 +37,7 @@ hediet.vscode-drawio
 ibm.output-colorizer
 iliaskhairullin.simple-lines-count
 jacobpfeifer.pfeifer-hurl
+johnnymorganz.stylua
 kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
 mads-hartmann.bash-ide-vscode
@@ -63,11 +64,13 @@ perkovec.emoji
 pomdtr.excalidraw-editor
 rambit.highlight-counter
 redhat.vscode-yaml
+saoudrizwan.claude-dev
 semgrep.semgrep
 stevejpurves.cucumber
 stkb.rewrap
 stoplight.spectral
 streetsidesoftware.code-spell-checker
+sumneko.lua
 tamasfe.even-better-toml
 teabyii.ayu
 tfsec.tfsec
