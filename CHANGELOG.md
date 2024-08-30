@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.1](https://github.com/raas-dev/configent/compare/1.110.0...1.110.1) (2024-08-30)
+
+
+### Fixes
+
+* **lazyvim:** Add language plugins ([1861e29](https://github.com/raas-dev/configent/commit/1861e29a841546279843437ebaedae07b52c92b2))
+* **lazyvim:** Remove ruby and nix language plugins ([17d47d0](https://github.com/raas-dev/configent/commit/17d47d017fc2194c392a246390ef121cba6bddde))
+* **lazyvim:** Replace statusline clock with file info ([11cdfeb](https://github.com/raas-dev/configent/commit/11cdfeb9afeea79b717fbd2017c1c205fd4b0e13))
+
 ## [1.110.0](https://github.com/raas-dev/configent/compare/1.109.1...1.110.0) (2024-08-30)
 
 
