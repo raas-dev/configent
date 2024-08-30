@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.2](https://github.com/raas-dev/configent/compare/1.110.1...1.110.2) (2024-08-30)
+
+
+### Fixes
+
+* **install:** Postpone installation of cloud tools ([f8c5998](https://github.com/raas-dev/configent/commit/f8c5998b6157b80d6eea08b6dbf61d7ae5112799))
+* **install:** Separate vim and neovim installers ([81200bb](https://github.com/raas-dev/configent/commit/81200bbc0ca7c9034999392c87f9f154b90acc9a))
+
 ### [1.110.1](https://github.com/raas-dev/configent/compare/1.110.0...1.110.1) (2024-08-30)
 
 
