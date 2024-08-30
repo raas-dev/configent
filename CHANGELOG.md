@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.110.0](https://github.com/raas-dev/configent/compare/1.109.1...1.110.0) (2024-08-30)
+
+
+### Features
+
+* **fonts:** Update Terminess font ([4cd3d04](https://github.com/raas-dev/configent/commit/4cd3d04ab50abef1b712acd88c042eb476fd4880))
+
+
+### Fixes
+
+* **lazyvim:** Show hidden files in tree ([b064670](https://github.com/raas-dev/configent/commit/b0646705a956be94d9dc19270498eea8501df5c3))
+
 ### [1.109.1](https://github.com/raas-dev/configent/compare/1.109.0...1.109.1) (2024-08-30)
 
 
