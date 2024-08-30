@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.109.1](https://github.com/raas-dev/configent/compare/1.109.0...1.109.1) (2024-08-30)
+
+
+### Fixes
+
+* **continue:** Use better local autocomplete LLM ([85b7a53](https://github.com/raas-dev/configent/commit/85b7a53b2e2c1a4f4320ec947530184402341d46))
+* **ollama:** Install ollama on Linux distros ([c482620](https://github.com/raas-dev/configent/commit/c4826203136695d47b49405ddf84adc033fa31c5))
+
 ## [1.109.0](https://github.com/raas-dev/configent/compare/1.108.0...1.109.0) (2024-08-30)
 
 
