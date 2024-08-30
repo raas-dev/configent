@@ -12,8 +12,6 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### Neovim from Homebrew #######################################################
-
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -37,24 +35,6 @@ fi
 if command -v brew >/dev/null; then
   brew install neovim
 fi
-
-### Vim ########################################################################
-
-# backup .vim  (.vimrc is backed up by symlink_dotfiles)
-if [ ! -d "$backup_path/.vim" ] && [ -d "$HOME/.vim" ]; then
-  mkdir -p "$backup_path"
-  cp -RP "$HOME/.vim" "$backup_path/.vim"
-fi
-
-# install Vundle
-vundle_dir="$HOME/.vim/bundle/Vundle.vim"
-git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
-  git -C "$vundle_dir" pull --no-autostash --rebase
-
-# install Vim plugins using Vundle
-printf '\n' | vim +PluginInstall +qall 2>/dev/null
-
-### Neovim #####################################################################
 
 # backup .config/nvim
 if [ ! -d "$backup_path/.config/nvim" ] && [ -d "$HOME/.config/nvim" ]; then
