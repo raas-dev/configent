@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.109.0](https://github.com/raas-dev/configent/compare/1.108.0...1.109.0) (2024-08-30)
+
+
+### Features
+
+* **neovim:** Add LazyVim for NeoVim ([40eb33b](https://github.com/raas-dev/configent/commit/40eb33b4f84b39d607c4ad60567a9874b077e454))
+
+
+### Fixes
+
+* **continue:** Use leaner tab autocomplete LLM ([9e7d03e](https://github.com/raas-dev/configent/commit/9e7d03ef1e52c34d62956e53ecb210ea94885b25))
+* **vscode:** Add Lua extensions ([9f049bd](https://github.com/raas-dev/configent/commit/9f049bd5ad63a6162e7a3017c23a9c04516800c7))
+* **vscode:** Remove noisy lua extension ([b7e582e](https://github.com/raas-dev/configent/commit/b7e582eb4c34d50aa3d7bc984ea78e033e9c4a0b))
+
 ## [1.108.0](https://github.com/raas-dev/configent/compare/1.107.3...1.108.0) (2024-08-29)
 
 
