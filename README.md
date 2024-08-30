@@ -129,7 +129,7 @@ What's installed by default:
 6. Neovim with [LazyVim](https://www.lazyvim.org/) (Neovim from `brew` if Homebrew is available)
 7. Tmux plugins and config (tmux from `brew` if Homebrew is available)
 9. [Ollama](https://ollama.com/) is installed, started and configured to start on boot
-9. AWS and Azure development tools, static analysis tools for infra-as-code
+9. AWS and Azure development tools and infra-as-code linters
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
