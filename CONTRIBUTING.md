@@ -17,9 +17,7 @@ a pull request.
 5. We do not rely on Homebrew outside macOS, before Homebrew Linux works on ARM
 6. We prefer `asdf plugin`s when they provide binaries both for x86-64 and ARM
 7. Otherwise we use the distros' official repositories (may have older versions)
-8. Thus we will not add LunarVim, NVChad, etc. if the latest Neovim is required
-9. Dotfiles are often based on personal preference and improvements are welcome
-10. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
+8. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
 
 ## Issues in dependencies
 

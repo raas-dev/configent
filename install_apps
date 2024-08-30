@@ -74,7 +74,7 @@ fi
 # install static analysis tools
 "$bin_path/install_linters"
 
-# install Neovim if brew is available, always install Vim bundles
+# install Vim plugins, and Neovim if brew is available
 "$bin_path/install_neovim"
 
 # install tmux if brew is available, always install tmux plugins

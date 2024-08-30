@@ -10,6 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
 
 ### Neovim from Homebrew #######################################################
 
@@ -37,28 +38,30 @@ if command -v brew >/dev/null; then
   brew install neovim
 fi
 
-### Symlink Neovim configs #####################################################
+### Vim ########################################################################
 
-# Vim  (.vimrc is backed up by symlink_dotfiles)
+# backup .vim  (.vimrc is backed up by symlink_dotfiles)
 if [ ! -d "$backup_path/.vim" ] && [ -d "$HOME/.vim" ]; then
   mkdir -p "$backup_path"
   cp -RP "$HOME/.vim" "$backup_path/.vim"
 fi
 
-# Neovim
+# install Vundle
+vundle_dir="$HOME/.vim/bundle/Vundle.vim"
+git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
+  git -C "$vundle_dir" pull --no-autostash --rebase
+
+# install Vim plugins using Vundle
+printf '\n' | vim +PluginInstall +qall 2>/dev/null
+
+### Neovim #####################################################################
+
+# backup .config/nvim
 if [ ! -d "$backup_path/.config/nvim" ] && [ -d "$HOME/.config/nvim" ]; then
   mkdir -p "$backup_path/.config"
   cp -RP "$HOME/.config/nvim" "$backup_path/.config/nvim"
 fi
 
-mkdir -p "$HOME/.config/nvim"
-ln -sfnv "$HOME/.vim" "$HOME/.config/nvim"
-ln -sfnv "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
-
-### Install Vundle #############################################################
-
-vundle_dir="$HOME/.vim/bundle/Vundle.vim"
-git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
-  git -C "$vundle_dir" pull --no-autostash --rebase
-
-printf '\n' | vim +PluginInstall +qall 2>/dev/null
+# symlink Neovim config files
+rm -rf "$HOME/.config/nvim"
+ln -sfnv "$config_path/nvim" "$HOME/.config/nvim"

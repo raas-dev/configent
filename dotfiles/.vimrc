@@ -56,11 +56,7 @@ filetype plugin indent on
 "-- Mouse ----------------------------------------------------------------------
 
 set mouse=a                     " enable mouse in all modes
-
-" terminal that supports mouse codes
-if !has('nvim')
-  set ttymouse=xterm2
-endif
+set ttymouse=xterm2             " allow resizing panels using mouse
 
 "-- Clipboard ------------------------------------------------------------------
 

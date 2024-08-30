@@ -140,10 +140,6 @@ alias ,='trans'
 
 command -v hwatch >/dev/null && alias watch='hwatch --differences word'
 
-### vim ########################################################################
-
-command -v nvim >/dev/null && alias vim='nvim'
-
 ### Lima VMs ###################################################################
 
 alias vm4ubuntu="limactl start ~/.config/configent/lima/ubuntu.yaml --tty=false"
