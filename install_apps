@@ -62,18 +62,6 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
-# install cloud development tools
-"$bin_path/install_aws"
-"$bin_path/install_azure"
-#"$bin_path/install_gcloud"
-#"$bin_path/install_terraform"
-#"$bin_path/install_k8sdev"
-#"$bin_path/install_cloudflare"
-#"$bin_path/install_flyctl"
-
-# install static analysis tools
-"$bin_path/install_linters"
-
 # install Vim plugins
 "$bin_path/install_vim"
 
@@ -85,6 +73,18 @@ fi
 
 # install Ollama
 "$bin_path/install_ollama"
+
+# install cloud development tools
+"$bin_path/install_aws"
+"$bin_path/install_azure"
+#"$bin_path/install_gcloud"
+#"$bin_path/install_terraform"
+#"$bin_path/install_k8sdev"
+#"$bin_path/install_cloudflare"
+#"$bin_path/install_flyctl"
+
+# install static analysis tools
+"$bin_path/install_linters"
 
 # install appsec tools such as vulnerability scanners
 #"$bin_path/install_appsec"
