@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.3](https://github.com/raas-dev/configent/compare/1.110.2...1.110.3) (2024-08-31)
+
+
+### Fixes
+
+* **install:** Add libxml2 to development dependencies ([2d6b479](https://github.com/raas-dev/configent/commit/2d6b4798776666c521f5402525166911a5fb37d1))
+* **vscode:** Use pylance ([6e7206b](https://github.com/raas-dev/configent/commit/6e7206bd2b09f3bfdd24333ea40eb44eb40d5b0c))
+
 ### [1.110.2](https://github.com/raas-dev/configent/compare/1.110.1...1.110.2) (2024-08-30)
 
 
