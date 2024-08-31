@@ -19,7 +19,6 @@ charliermarsh.ruff
 christian-kohler.path-intellisense
 continue.continue
 dbaeumer.vscode-eslint
-detachhead.basedpyright
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
 eamodio.gitlens
@@ -49,6 +48,7 @@ ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
 ms-python.debugpy
 ms-python.python
+ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
