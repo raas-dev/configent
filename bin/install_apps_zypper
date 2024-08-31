@@ -36,10 +36,12 @@ $SUDO zypper install -y ca-certificates
 # Cryptography
 $SUDO zypper install -y gpg2
 
-# Common build requirements
-$SUDO zypper install -y cmake gcc gcc-c++ make m4 \
-  readline-devel sqlite3-devel libbz2-devel libffi-devel libyaml-devel \
-  liblzma5 libopenssl-devel xz-devel zlib-devel
+# Common build tools
+$SUDO zypper install -y cmake gcc gcc-c++ make m4
+
+# Common development dependencies
+$SUDO zypper install -y readline-devel sqlite3-devel libbz2-devel \
+  libffi-devel libyaml-devel liblzma5 libopenssl-devel xz-devel zlib-devel
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils file findutils \

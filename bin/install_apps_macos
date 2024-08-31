@@ -77,3 +77,6 @@ brew install universal-ctags
 
 # For compiling language versions (asdf)
 brew install xz
+
+# For hurl
+brew install pkg-config

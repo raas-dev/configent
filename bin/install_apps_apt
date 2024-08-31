@@ -48,10 +48,13 @@ $SUDO apt-get install -y ca-certificates
 # Cryptography
 $SUDO apt-get install -y gnupg
 
-# Common build requirements
-$SUDO apt-get install -y build-essential cmake \
-  libssl-dev libreadline-dev libsqlite3-dev libbz2-dev zlib1g-dev libffi-dev \
-  libgmp-dev liblzma-dev libyaml-dev m4
+# Common build tools
+$SUDO apt-get install -y build-essential cmake m4 pkg-config
+
+# Common development dependencies
+$SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
+  libgmp-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev \
+  libxml2-dev libyaml-dev zlib1g-dev
 
 # Utils
 $SUDO apt-get install -y coreutils dnsutils file findutils \

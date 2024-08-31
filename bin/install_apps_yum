@@ -40,15 +40,16 @@ $SUDO dnf install -y ca-certificates
 # Cryptography
 $SUDO dnf install -y gnupg
 
-# Common build requirements
-$SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 \
-  bzip2-devel libffi-devel libyaml-devel libxcrypt-compat openssl-devel \
-  readline-devel sqlite-devel zlib-devel xz-devel
+# Common build tools
+$SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 pkgconf-pkg-config
+
+# Common development dependencies
+$SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
+  openssl-devel readline-devel sqlite-devel zlib-devel xz-devel libxml2-devel
 
 # Utils
-$SUDO dnf install -y bind-utils coreutils file findutils \
-  git git-lfs htop lsof procps redhat-lsb-core tar traceroute unzip wget \
-  whois zip
+$SUDO dnf install -y bind-utils coreutils file findutils git git-lfs htop \
+  lsof procps redhat-lsb-core tar traceroute unzip wget whois zip
 
 # The logfile navigator, not available in CentOS Stream (as of 2023-07)
 $SUDO dnf install -y lnav
