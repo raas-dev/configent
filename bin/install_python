@@ -41,6 +41,7 @@ pipx install 'aider-chat[browser]'
 pipx install pdm
 pipx install poetry
 pipx install pre-commit
+pipx install ptpython
 pipx install semgrep
 pipx install tldr
 pipx install uv

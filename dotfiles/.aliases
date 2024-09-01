@@ -199,9 +199,6 @@ alias week='date +%V'
 
 ### Python #####################################################################
 
-# Advanced Python REPL
-alias ptpython='pipx run ptpython'
-
 # Cross-platform real-time monitoring
 alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 
