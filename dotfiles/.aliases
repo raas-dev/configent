@@ -257,14 +257,15 @@ venv() {
       uv sync
     else
       # no lockfile, do not create one either
-      if [ -r "pyproject.toml" ]; then
-        uv pip sync pyproject.toml
-      elif [ -r "requirements.txt" ]; then
+      if [ -r "requirements.txt" ]; then
+        # may contain frozen version numbers
         uv pip sync requirements.txt
-      elif [ -r "setup.py" ]; then
-        uv pip sync setup.py
+      elif [ -r "pyproject.toml" ]; then
+        uv pip sync pyproject.toml
       elif [ -r "setup.cfg" ]; then
         uv pip sync setup.cfg
+      elif [ -r "setup.py" ]; then
+        uv pip sync setup.py
       fi
       # develop this package in the environment synced
       uv pip install --editable .
