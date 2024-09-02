@@ -257,18 +257,19 @@ venv() {
       uv sync
     else
       # no lockfile, do not create one either
+      # prioritize requirements.txt as it most likely has frozen dependencies
       if [ -r "requirements.txt" ]; then
-        # may contain frozen version numbers
-        uv pip sync requirements.txt
+        uv pip install -r requirements.txt
       elif [ -r "pyproject.toml" ]; then
-        uv pip sync pyproject.toml
-      elif [ -r "setup.cfg" ]; then
-        uv pip sync setup.cfg
+        uv pip install --all-extras -r pyproject.toml
       elif [ -r "setup.py" ]; then
-        uv pip sync setup.py
+        uv pip install --all-extras -r setup.py
+      elif [ -r "setup.cfg" ]; then
+        uv pip install --all-extras -r setup.cfg
       fi
-      # develop this package in the environment synced
-      uv pip install --editable .
+      if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
+        uv pip install --editable .
+      fi
     fi
   else
     deactivate # && [ -d ".venv" ] && rm -r ".venv"
