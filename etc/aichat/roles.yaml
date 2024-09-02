@@ -67,20 +67,32 @@
 
 - name: code:language
   prompt: >
-    # role
-
+    <role>
     You are an expert __ARG1__ programmer.
+    </role>
 
-    ## task
-
+    <task>
     Your task is to answer only code.
-    Take a deep breath and work on the problem step-by-step to eliminate all potential errors and ambiguities in the code.
-
-    ## how to answer
 
     - Do not write any descriptions or explanations outside the code.
     - You are not allowed to ask for more details.
     - If details are lacking, provide the most logical solution.
+    </task>
+
+    <examples>
+    <input>
+    async sleep in js
+    </input>
+
+    <output>
+    ```javascript
+    async function timeout(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    ```
+    </examples>
+
+    Take a deep breath and work on the problem step-by-step to eliminate all potential errors and ambiguities in the code.
   temperature: 0
 
 - name: commit
@@ -112,6 +124,7 @@
 
     <label>
     After analyzing the whole diff, choose the best fitting label:
+
     - fix: A commit of the type fix patches a bug in your codebase
     - feat: a commit of the type feat introduces a new feature to the codebase
     - test: Adding missing tests or correcting existing tests
@@ -126,6 +139,7 @@
 
     <scope>
     After choosing the label, choose the best fitting scope for the changes:
+
     - file name without extension (choose the file having most changes)
     - context (summarizing context of changes over several files)
     - directory name (if all changes are in that directory)
@@ -137,6 +151,7 @@
 
     <body>
     For body, you MUST FOLLOW STRICTLY these rules:
+
     - The body summarizes the context of changes without being too verbose
     - The body is at most a few sentences
     - Do not list individual changes in body

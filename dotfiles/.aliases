@@ -322,7 +322,7 @@ ai_code() {
     local lang="polyglot"
   fi
   local project="${PWD##*/}"
-  aichat --role "code:$lang" --session "$project" --save-session
+  aichat --role "code:$lang" --session "$project:$lang" --save-session
 }
 
 ### Functions: Docker ##########################################################
