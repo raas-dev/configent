@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.7](https://github.com/raas-dev/configent/compare/1.110.6...1.110.7) (2024-09-02)
+
+
+### Fixes
+
+* **aliases:** Fix glances package names ([a073fbb](https://github.com/raas-dev/configent/commit/a073fbb22ae55e8f6a64e6fc43ff0524ad1c98de))
+* **aliases:** Use uvx over pipx run ([13897fd](https://github.com/raas-dev/configent/commit/13897fdfc1902eed60a0151e0ae46f82faba099a))
+
 ### [1.110.6](https://github.com/raas-dev/configent/compare/1.110.5...1.110.6) (2024-09-02)
 
 
