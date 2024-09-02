@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.6](https://github.com/raas-dev/configent/compare/1.110.5...1.110.6) (2024-09-02)
+
+
+### Fixes
+
+* **aliases:** Fix venv() handling extras ([e5f68ab](https://github.com/raas-dev/configent/commit/e5f68ab48149e564985e6c5accd32e4d587dc809))
+* **aliases:** Fix venv() no lockfile order logic ([f99cb3c](https://github.com/raas-dev/configent/commit/f99cb3c5040628e5327ec646b24037354984bccd))
+
 ### [1.110.5](https://github.com/raas-dev/configent/compare/1.110.4...1.110.5) (2024-09-02)
 
 
