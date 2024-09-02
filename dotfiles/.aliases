@@ -200,43 +200,43 @@ alias week='date +%V'
 ### Python #####################################################################
 
 # Cross-platform real-time monitoring
-alias glances='pipx run "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
+alias glances='uvx "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
 
 # View, tail, merge, and search log files (plus JSONL)
-alias tl='pipx run toolong'
+alias tl='uvx toolong'
 
 # SQL IDE for terminal
-alias harlequin='pipx run "harlequin[mysql,postgres]" --theme lightbulb'
+alias harlequin='uvx "harlequin[mysql,postgres]" --theme lightbulb'
 
 # Multitool for tabular data in terminal
-alias vd='pipx run --pip-args openpyxl visidata'
+alias vd='uvx --with openpyxl visidata'
 
 # Simplenote in terminal (export SN_USERNAME and SN_PASSWORD in ~/.rclocal)
-alias sncli='pipx run sncli'
+alias sncli='uvx sncli'
 
 # Playwright
-alias playwright='pipx run playwright'
+alias playwright='uvx playwright'
 
 # General media downloader
-alias you-get='pipx run you-get'
+alias you-get='uvx you-get'
 
 # Checkov
-alias checkov='pipx run checkov'
+alias checkov='uvx checkov'
 
 # GuardDog
-alias guarddog='pipx run guarddog'
+alias guarddog='uvx guarddog'
 
 # Huggingface CLI
-alias huggingface-cli='pipx run --spec huggingface-hub huggingface-cli'
+alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
 # OpenAI CLI
-alias openai='pipx run openai'
+alias openai='uvx openai'
 
 # https://hatch.pypa.io/latest
-alias hatch='pipx run hatch'
+alias hatch='uvx hatch'
 
 # Langflow
-alias langflow='pipx run langflow'
+alias langflow='uvx langflow'
 
 # Toggle a Python virtual environment for development
 venv() {
@@ -492,6 +492,7 @@ gemclear() {
 # Pip(x) remove all
 pipclear() {
   command -v pipx >/dev/null && pipx uninstall-all
+  command -v uv >/dev/null && uv tool uninstall --all
   pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
