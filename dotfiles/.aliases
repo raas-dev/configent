@@ -200,13 +200,13 @@ alias week='date +%V'
 ### Python #####################################################################
 
 # Cross-platform real-time monitoring
-alias glances='uvx "glances[cpuinfo,docker,folders,gpu,ip,web,wifi]"'
+alias glances='uvx --from "glances[containers,gpu,ip,web,wifi]" glances'
 
 # View, tail, merge, and search log files (plus JSONL)
 alias tl='uvx toolong'
 
 # SQL IDE for terminal
-alias harlequin='uvx "harlequin[mysql,postgres]" --theme lightbulb'
+alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
 
 # Multitool for tabular data in terminal
 alias vd='uvx --with openpyxl visidata'
