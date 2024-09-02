@@ -255,15 +255,19 @@ venv() {
       poetry install
     elif [ -r "uv.lock" ]; then
       uv sync
-    elif [ -r "requirements.txt" ]; then
-      uv pip sync requirements.txt
-      if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
-        uv pip install --editable .
-      fi
     else
-      if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
-        uv pip install --editable ".[dev,test]"
+      # no lockfile, do not create one either
+      if [ -r "pyproject.toml" ]; then
+        uv pip sync pyproject.toml
+      elif [ -r "requirements.txt" ]; then
+        uv pip sync requirements.txt
+      elif [ -r "setup.py" ]; then
+        uv pip sync setup.py
+      elif [ -r "setup.cfg" ]; then
+        uv pip sync setup.cfg
       fi
+      # develop this package in the environment synced
+      uv pip install --editable .
     fi
   else
     deactivate # && [ -d ".venv" ] && rm -r ".venv"
