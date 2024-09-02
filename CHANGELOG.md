@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.4](https://github.com/raas-dev/configent/compare/1.110.3...1.110.4) (2024-09-02)
+
+
+### Fixes
+
+* **aichat:** Improve coding prompt ([0bcff47](https://github.com/raas-dev/configent/commit/0bcff4716ea30314a7d5f6c0bc696c28e61a20b0))
+* **aichat:** Improve commit message prompt ([cb78b30](https://github.com/raas-dev/configent/commit/cb78b304dc3faf843db9bf408d912fc4a855892d))
+* **python:** Install ptpython via pipx ([3486406](https://github.com/raas-dev/configent/commit/3486406d43e5186d5c5d92ae99ee0693fa4422c1))
+* **vscode:** Remove claude-dev ([76a1280](https://github.com/raas-dev/configent/commit/76a1280818ea2890d3e8c5cdb22fe7d56edfc578))
+
 ### [1.110.3](https://github.com/raas-dev/configent/compare/1.110.2...1.110.3) (2024-08-31)
 
 
