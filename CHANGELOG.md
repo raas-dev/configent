@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.5](https://github.com/raas-dev/configent/compare/1.110.4...1.110.5) (2024-09-02)
+
+
+### Fixes
+
+* **aichat:** Improve generating commit message ([4f9eb40](https://github.com/raas-dev/configent/commit/4f9eb405816f3f2dbafc0e136e5072bac8ea00e8))
+* **aliases:** Add support for uv.lock in venv() ([637fd46](https://github.com/raas-dev/configent/commit/637fd460a3b915d7a1e5b132a3454550ae2e4011))
+* **aliases:** Improve venv() lockfile logic ([43b968d](https://github.com/raas-dev/configent/commit/43b968deeb7414b350690185177cdb87db039112))
+* **aliases:** Use uv pip sync over install in venv() ([cbffa6d](https://github.com/raas-dev/configent/commit/cbffa6d659f188c249f54c4e4e8f50a3b571b9e8))
+
 ### [1.110.4](https://github.com/raas-dev/configent/compare/1.110.3...1.110.4) (2024-09-02)
 
 
