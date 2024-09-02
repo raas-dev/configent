@@ -491,8 +491,8 @@ gemclear() {
 
 # Pip(x) remove all
 pipclear() {
-  command -v pipx >/dev/null && pipx uninstall-all
   command -v uv >/dev/null && uv tool uninstall --all
+  command -v pipx >/dev/null && pipx uninstall-all
   pip freeze | grep -v "^-e" | cut -d "@" -f1 | xargs pip uninstall -y
 }
 
