@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.9](https://github.com/raas-dev/configent/compare/1.110.8...1.110.9) (2024-09-03)
+
+
+### Fixes
+
+* **aider:** Disable auto commit ([62aa1a4](https://github.com/raas-dev/configent/commit/62aa1a484480b6fa1f9ca29cf8ac14101fa0200b))
+* **dotfiles:** Update venv function to check for pyproject.toml ([bdb105d](https://github.com/raas-dev/configent/commit/bdb105dab87736771659a5f6ebbdd956f8eb3404))
+
 ### [1.110.8](https://github.com/raas-dev/configent/compare/1.110.7...1.110.8) (2024-09-03)
 
 
