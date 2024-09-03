@@ -1,6 +1,5 @@
 # Install the hooks in this file:
-#   pre-commit install --hook-type pre-commit
-#   pre-commit install --hook-type commit-msg
+#   pre-commit install --hook-type pre-commit --hook-type commit-msg
 #
 # (optional) test hooks for staged files:
 #   pre-commit run --verbose
@@ -12,12 +11,12 @@ default_stages: [commit]
 
 repos:
 - repo: https://github.com/bridgecrewio/checkov.git
-  rev: 3.2.238
+  rev: 3.2.242
   hooks:
     - id: checkov_diff
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v4.6.0
   hooks:
     - id: check-merge-conflict
     - id: check-added-large-files
@@ -39,12 +38,12 @@ repos:
     - id: shfmt
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.6
+  rev: v2.3.0
   hooks:
   - id: codespell
 
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.20.0
+  rev: v3.29.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
