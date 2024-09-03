@@ -254,7 +254,9 @@ venv() {
       ! poetry check &>/dev/null && poetry lock
       poetry install
     elif [ -r "uv.lock" ]; then
-      uv sync
+      # inexact: do not remove extraneous packages unless they conflict
+      uv sync --inexact --all-extras
+      uv pip install --editable .
     else
       # no lockfile, do not create one either
       # prioritize requirements.txt as it most likely has frozen dependencies
