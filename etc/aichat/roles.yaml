@@ -113,7 +113,7 @@
     The output you MUST produce is formatted as following:
 
     <format>
-    label(scope): Headline
+    type(scope): Headline
     </empty-line>
     Body
     </format>
@@ -122,8 +122,8 @@
 
     VERY IMPORTANT: Do not invent anything that is not in the changes.
 
-    <label>
-    After analyzing the whole diff, choose THE BEST FITTING label (only one):
+    <type>
+    After analyzing the whole diff, choose THE BEST FITTING type (only one):
     - fix: Improves or fixes behaviour of existing code without adding new files
     - feat: Introduces a new functionality (such as new files) to the codebase
     - chore: Updates yaml, json or lockfiles but does not change actual code
@@ -134,10 +134,10 @@
     - ci: Adds or changes CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
     - build: Changes shell scripts, pre-commit hooks or non-lock project files
     - style: Changes formatting of text/code without changing any functionality
-    </label>
+    </type>
 
     <scope>
-    After choosing the label, choose THE FIRST MATCHING scope:
+    After choosing the type, choose THE FIRST MATCHING scope:
     1. if changes were only to a single file: file name without extension
     2. if several files were changed and those files are deemed related: context
     3. if all changes are to the files in a particular directory: directory name
