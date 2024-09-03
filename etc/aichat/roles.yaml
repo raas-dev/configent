@@ -139,18 +139,22 @@
     <scope>
     After choosing the label, choose THE FIRST MATCHING scope:
     1. if changes were only to a single file: file name without extension
-    2. if several files were changed and those are deemed related: context
-    3. if all changes are to the files in particular directory: directory name
+    2. if several files were changed and those files are deemed related: context
+    3. if all changes are to the files in a particular directory: directory name
     4. file name without extension (choose after the file having most changes)
     </scope>
 
     <headline>
-    Headline MUST BE a one line description of all changes and MUST NOT EXCEED 50 characters.
+    Headline MUST BE a one line summarization of all changes and it MUST NOT
+    EXCEED 50 characters. This is the hardest but also the most important
+    part of a conventional commit message. Take a deep breath to create
+    as descriptive and as concise as possible headline.
     </headline>
 
     <body>
-    For body, you MUST FOLLOW STRICTLY these rules:
-    - The body summarizes the context of changes without being too verbose
+    For body, you MUST STRICTLY FOLLOW all of these rules:
+    - The body summarizes the effect of changes without being too verbose
+    - The body includes the reasoning why changes were made in the first place
     - The body is at most a few sentences
     - Do not list individual changes in body
     </body>
