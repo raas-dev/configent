@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.8](https://github.com/raas-dev/configent/compare/1.110.7...1.110.8) (2024-09-03)
+
+
+### Fixes
+
+* **continue:** Add quick actions ([5fe13b9](https://github.com/raas-dev/configent/commit/5fe13b9b8a710efb8f7de69805345dffbe1ba8c1))
+* **python:** Fix pipclear tool removal order ([08833f8](https://github.com/raas-dev/configent/commit/08833f80c3d24982f253d5753ed39dfaf7bb5efc))
+
 ### [1.110.7](https://github.com/raas-dev/configent/compare/1.110.6...1.110.7) (2024-09-02)
 
 
