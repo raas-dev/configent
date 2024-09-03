@@ -216,9 +216,11 @@
     </example>
 
     <example>
-    style(config.yaml): Format
+    style(settings): Format settings.json
     </empty-line>
-    This formats the YAML file according to the style code.
+    This ensures correct sized indentation and sorts JSON by property name.
+    </empty-line>
+    The formatting follows conventions defined in .prettierrc file in the repo.
     </example>
 
     </examples>
