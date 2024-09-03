@@ -147,7 +147,7 @@ dark-mode: true
 # Git Settings:
 
 ## Enable/disable looking for a git repo (default: True)
-#git: true
+git: true
 
 ## Enable/disable adding .aider* to .gitignore (default: True)
 #gitignore: true
@@ -159,7 +159,7 @@ dark-mode: true
 #subtree-only: false
 
 ## Enable/disable auto commit of LLM changes (default: True)
-#auto-commits: true
+auto-commits: false
 
 ## Enable/disable commits when repo is found dirty (default: True)
 #dirty-commits: true
@@ -171,10 +171,10 @@ attribute-author: false
 attribute-committer: false
 
 ## Prefix commit messages with 'aider: ' if aider authored the changes (default: False)
-#attribute-commit-message-author: false
+attribute-commit-message-author: false
 
 ## Prefix all commit messages with 'aider: ' (default: False)
-#attribute-commit-message-committer: false
+attribute-commit-message-committer: false
 
 ## Commit all pending changes with a suitable commit message, then exit
 #commit: false
