@@ -178,15 +178,15 @@
     </example>
 
     <example>
-    refactor(main.py): Simplify CLI argument handling
-    </empty-line>
-    Simplify commandline-argument handling in the helper function. This removes extra lines of code which improves readability.
-    </example>
-
-    <example>
     chore(lazyvim): Update package lock file
     </empty-line>
     This updates Neovim packages to latest versions. The lock file ensures that the exact same revisions are installed on another system.
+    </example>
+
+    <example>
+    refactor(main.py): Simplify CLI argument handling
+    </empty-line>
+    Simplify commandline-argument handling in the helper function. This removes extra lines of code which improves readability.
     </example>
 
     <example>
