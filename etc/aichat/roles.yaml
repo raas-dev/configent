@@ -123,21 +123,21 @@
     VERY IMPORTANT: Do not invent anything that is not in the changes.
 
     <label>
-    After analyzing the whole diff, choose the best fitting label:
-    - fix: A commit of the type fix patches a bug in your codebase
-    - feat: a commit of the type feat introduces a new feature to the codebase
-    - test: Adding missing tests or correcting existing tests
-    - refactor: A code change that neither fixes a bug nor adds a feature
-    - chore: Updating libraries, dependencies or configuration files
-    - docs: Adding or changing documentation or comments in code files
-    - ci: Changes to our CI configuration files and scripts
-    - build: Changes that affect the build system or external dependencies
-    - perf: A code change that improves performance
-    - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+    After analyzing the whole diff, choose the best fitting label (only one):
+    - fix: Improves or fixes behaviour of existing code without adding new files
+    - feat: Introduces a new functionality (such as new files) to the codebase
+    - chore: Updates yaml, json or lockfiles but does not change actual code
+    - test: Adds tests or changes tests without changing the system-under-test
+    - perf: A code change that is commented to improve performance or speed
+    - refactor: A code change that neither fixes nor changes any functionality
+    - docs: Changes Markdown docs or code comments but not configuration files
+    - ci: Adds or changes CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
+    - build: Changes shell scripts, pre-commit hooks or non-lock project files
+    - style: Changes formatting of text/code without changing any functionality
     </label>
 
     <scope>
-    After choosing the label, choose the best fitting scope for the changes:
+    After choosing the label, choose the best fitting scope:
     - file name without extension (choose the file having most changes)
     - context (summarizing context of changes over several files)
     - directory name (if all changes are in that directory)
