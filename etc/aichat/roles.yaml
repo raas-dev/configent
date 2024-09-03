@@ -123,7 +123,7 @@
     VERY IMPORTANT: Do not invent anything that is not in the changes.
 
     <label>
-    After analyzing the whole diff, choose the best fitting label (only one):
+    After analyzing the whole diff, choose THE BEST FITTING label (only one):
     - fix: Improves or fixes behaviour of existing code without adding new files
     - feat: Introduces a new functionality (such as new files) to the codebase
     - chore: Updates yaml, json or lockfiles but does not change actual code
@@ -137,7 +137,7 @@
     </label>
 
     <scope>
-    After choosing the label, choose the first matching scope:0
+    After choosing the label, choose THE FIRST MATCHING scope:
     - file name without extension (if changes were only to a single file)
     - context (if several files were changed and those files are deemed related)
     - directory name (if all changes are to the files in a particular directory)
