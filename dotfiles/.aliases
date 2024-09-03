@@ -259,15 +259,13 @@ venv() {
       uv pip install --editable .
     else
       # no lockfile, do not create one either
-      # prioritize requirements.txt as it most likely has frozen dependencies
+      # prioritize requirements.txt as it most likely has pinned dependencies
       if [ -r "requirements.txt" ]; then
         uv pip install -r requirements.txt
       elif [ -r "pyproject.toml" ]; then
         uv pip install --all-extras -r pyproject.toml
       elif [ -r "setup.py" ]; then
         uv pip install --all-extras -r setup.py
-      elif [ -r "setup.cfg" ]; then
-        uv pip install --all-extras -r setup.cfg
       fi
       if [ -r "pyproject.toml" ] || [ -r "setup.py" ]; then
         uv pip install --editable .
