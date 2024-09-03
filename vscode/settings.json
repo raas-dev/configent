@@ -211,6 +211,7 @@
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.tabs.enabled": false,
+  "terraform.codelens.referenceCount": true,
   "todohighlight.keywords": [
     "AP:"
   ],
