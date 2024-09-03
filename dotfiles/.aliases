@@ -253,7 +253,7 @@ venv() {
     elif [ -r "poetry.lock" ] && command -v poetry >/dev/null; then
       ! poetry check &>/dev/null && poetry lock
       poetry install
-    elif [ -r "uv.lock" ]; then
+    elif [ -r "uv.lock" ] && [ -r "pyproject.toml" ]; then
       # inexact: do not remove extraneous packages unless they conflict
       uv sync --inexact --all-extras
       uv pip install --editable .
