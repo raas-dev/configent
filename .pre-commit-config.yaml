@@ -30,6 +30,10 @@ repos:
     - id: check-symlinks
     - id: destroyed-symlinks
     - id: check-executables-have-shebangs
+    - id: pretty-format-json
+      files: ^vscode/.*\.json$
+      args:
+        - --autofix
 
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
   rev: 3.0.0
