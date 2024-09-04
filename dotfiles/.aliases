@@ -320,6 +320,15 @@ ai() {
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
+ai_expert() {
+  if [ -z "$1" ]; then
+    echo "Usage: ai_expert <subject>"
+    return
+  fi
+  local role="expert#$1"
+  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
+}
+
 ai_code() {
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   if [ -n "$1" ]; then
