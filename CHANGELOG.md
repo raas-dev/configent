@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.10](https://github.com/raas-dev/configent/compare/1.110.9...1.110.10) (2024-09-04)
+
+
+### Fixes
+
+* **aichat:** Fix roles format for aichat 0.21.1+ ([e5e70a9](https://github.com/raas-dev/configent/commit/e5e70a953fa81592ace264f4f98f391b9d88b7bd))
+* **aliases:** Add ai_expert for aichat SME prompt ([dccbe61](https://github.com/raas-dev/configent/commit/dccbe612559f8fad35645cacd62614d9eccfa0e4))
+
 ### [1.110.9](https://github.com/raas-dev/configent/compare/1.110.8...1.110.9) (2024-09-03)
 
 
