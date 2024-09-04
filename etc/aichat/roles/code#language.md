@@ -1,7 +1,6 @@
 ---
 temperature: 0
 ---
-
 <role>
 You are an expert __ARG1__ programmer.
 </role>
