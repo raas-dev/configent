@@ -315,8 +315,8 @@ alias standard-version='npx -y standard-version'
 # export OPENAI_API_KEY='sk-xxxxxx'
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
-  local role="chat:"
-  [ -n "$1" ] && role="chat:$1"
+  local role="chat"
+  [ -n "$1" ] && role="chat#$1"
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
@@ -330,7 +330,7 @@ ai_code() {
     local lang="polyglot"
   fi
   local project="${PWD##*/}"
-  aichat --role "code:$lang" --session "$project:$lang" --save-session
+  aichat --role "code#$lang" --session "$project:$lang" --save-session
 }
 
 ### Functions: Docker ##########################################################

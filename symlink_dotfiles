@@ -109,15 +109,14 @@ fi
 mkdir -p "$HOME/.config/aichat"
 ln -sfnv "$config_path/aichat/config.yaml" "$HOME/.config/aichat/config.yaml"
 
-# roles.yaml
-if [ ! -r "$backup_path/.config/aichat/roles.yaml" ]; then
-  if [ -r "$HOME/.config/aichat/roles.yaml" ]; then
+# roles directory
+if [ ! -r "$backup_path/.config/aichat/roles" ]; then
+  if [ -r "$HOME/.config/aichat/roles" ]; then
     mkdir -p "$backup_path/.config/aichat"
-    cp -P "$HOME/.config/aichat/roles.yaml" \
-      "$backup_path/.config/aichat/roles.yaml"
+    cp -P "$HOME/.config/aichat/roles" "$backup_path/.config/aichat/roles"
   fi
 fi
-ln -sfnv "$config_path/aichat/roles.yaml" "$HOME/.config/aichat/roles.yaml"
+ln -sfnv "$config_path/aichat/roles" "$HOME/.config/aichat/roles"
 
 # SynthWave84.tmTheme
 if [ ! -r "$backup_path/.config/aichat/dark.tmTheme" ]; then
