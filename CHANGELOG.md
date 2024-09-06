@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.11](https://github.com/raas-dev/configent/compare/1.110.10...1.110.11) (2024-09-06)
+
+
+### Fixes
+
+* **aichat:** Add jina-embeddings model via ollama ([03b9046](https://github.com/raas-dev/configent/commit/03b90468973e9a1e4fa20eef688be2515002688c))
+* **aichat:** Add ollama nomic-embed-text support ([4174b12](https://github.com/raas-dev/configent/commit/4174b12039127d4cf6652e568faca56ecbea02df))
+* **aichat:** Add support for ollama ([e082614](https://github.com/raas-dev/configent/commit/e082614884240be3d0605c94efe1e14f15c0ad8d))
+* **continue:** Upgrade local ollama model ([a10d9c5](https://github.com/raas-dev/configent/commit/a10d9c532d38b1065122c1b0f1def315059c2fb9))
+
 ### [1.110.10](https://github.com/raas-dev/configent/compare/1.110.9...1.110.10) (2024-09-04)
 
 
