@@ -49,14 +49,14 @@
     {
       "title": "Ollama",
       "provider": "ollama",
-      "model": "deepseek-coder-v2",
+      "model": "yi-coder:9b",
       "apiBase": "http://127.0.0.1:11434"
     }
   ],
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "starcoder2:7b",
+    "model": "yi-coder:9b",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
