@@ -47,3 +47,7 @@ clients:
         type: embedding
         default_chunk_size: 1500
         max_batch_size: 100
+      - name: nomic-embed-text
+        type: embedding
+        default_chunk_size: 1500
+        max_batch_size: 100
