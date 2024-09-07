@@ -198,28 +198,6 @@
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
-  "terminal.integrated.profiles.linux": {
-    "tmux": {
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "local"
-      ],
-      "path": "tmux"
-    }
-  },
-  "terminal.integrated.profiles.osx": {
-    "tmux": {
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "local"
-      ],
-      "path": "tmux"
-    }
-  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 99999,
   "terminal.integrated.sendKeybindingsToShell": true,
