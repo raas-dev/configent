@@ -159,7 +159,7 @@ git: true
 #subtree-only: false
 
 ## Enable/disable auto commit of LLM changes (default: True)
-auto-commits: false
+#auto-commits: true
 
 ## Enable/disable commits when repo is found dirty (default: True)
 #dirty-commits: true
