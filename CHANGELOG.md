@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.111.0](https://github.com/raas-dev/configent/compare/1.110.12...1.111.0) (2024-09-07)
+
+
+### Features
+
+* **tmux:** Use C-Space as tmux prefix ([e10e515](https://github.com/raas-dev/configent/commit/e10e5154c710da008791605e864761fd2759797e))
+
+
+### Fixes
+
+* **install:** Cleanup tmux plugins ([f412552](https://github.com/raas-dev/configent/commit/f412552360343e7b76712f671d6ee355706cd50b))
+* **tmux:** Change copy from right to middle button ([c5481c1](https://github.com/raas-dev/configent/commit/c5481c12e30b91cc3ad42a878cdc8680d3a1a185))
+* **tmux:** Remove statusline defaults ([d57ba1c](https://github.com/raas-dev/configent/commit/d57ba1c64be50f41109c8658e79b26edccc0bde6))
+* **tmux:** Remove unused find-session keybinding ([7940831](https://github.com/raas-dev/configent/commit/7940831a20820a3d4383345cc64e11c508ba5825))
+* **vscode:** Add date to statusbar ([5217d25](https://github.com/raas-dev/configent/commit/5217d254c733c24fc67a89ea54d01aab36c16147))
+* **vscode:** Add tmux-like terminal key bindings ([5467a18](https://github.com/raas-dev/configent/commit/5467a18854a2371e87855d4a5be1d587650bc589))
+* **vscode:** Change default terminal ([b1bbf0d](https://github.com/raas-dev/configent/commit/b1bbf0da0a8e51b459836b911256e67f76ff8560))
+* **vscode:** Change terminal mouse button behavior ([786c6ad](https://github.com/raas-dev/configent/commit/786c6ad99fd6268a47c10c1b44bea945fb174dd7))
+* **vscode:** Enable terminal suggestions ([f6edea9](https://github.com/raas-dev/configent/commit/f6edea94d5ad122764ab00133b0a982e6c4716c4))
+* **vscode:** Improve tmux-like keybindings ([8b14feb](https://github.com/raas-dev/configent/commit/8b14febf08b75c88d7f3af2d61112c9c7bd14e6f))
+
 ### [1.110.12](https://github.com/raas-dev/configent/compare/1.110.11...1.110.12) (2024-09-07)
 
 
