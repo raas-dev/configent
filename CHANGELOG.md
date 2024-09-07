@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.112.0](https://github.com/raas-dev/configent/compare/1.111.3...1.112.0) (2024-09-07)
+
+
+### Features
+
+* **tmux:** Add tmux battery ([785400d](https://github.com/raas-dev/configent/commit/785400d7860d4cda00377a575c18038ad2c3bda5))
+
+
+### Fixes
+
+* **vscode:** Hide date in statusbar ([8ccc3e9](https://github.com/raas-dev/configent/commit/8ccc3e9107a8c92bc29b0027a27ec6f3fef9ebb6))
+* **vscode:** Remove tmux session defaults ([983f33f](https://github.com/raas-dev/configent/commit/983f33f1a272a3d077600ce241e69a8d7273b842))
+
 ### [1.111.3](https://github.com/raas-dev/configent/compare/1.111.2...1.111.3) (2024-09-07)
 
 
