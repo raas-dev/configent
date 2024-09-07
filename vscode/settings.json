@@ -92,6 +92,10 @@
   "cursor.cpp.disabledLanguages": [
     "markdown"
   ],
+  "dateTime.showDayOfMonth": true,
+  "dateTime.showDayOfWeek": true,
+  "dateTime.showMonth": true,
+  "dateTime.showSeconds": true,
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
