@@ -5,6 +5,7 @@
 !cursor
 !docker
 !docker-compose
+!get_ip
 !install_*
 !jq
 !lessfilter
