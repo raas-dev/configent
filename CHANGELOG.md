@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.2](https://github.com/raas-dev/configent/compare/1.111.1...1.111.2) (2024-09-07)
+
+
+### Fixes
+
+* **tmux:** Add tmux-public-ip updating on interval ([39097a9](https://github.com/raas-dev/configent/commit/39097a9fbe599a07d8427f6d3ac494356a039c7d))
+
 ### [1.111.1](https://github.com/raas-dev/configent/compare/1.111.0...1.111.1) (2024-09-07)
 
 
