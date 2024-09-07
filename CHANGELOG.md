@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.1](https://github.com/raas-dev/configent/compare/1.112.0...1.112.1) (2024-09-07)
+
+
+### Fixes
+
+* **vscode:** Reuse tmux session ([a801bf1](https://github.com/raas-dev/configent/commit/a801bf1eecc42657d6720ce06fe5fa4ecd8ee140))
+
 ## [1.112.0](https://github.com/raas-dev/configent/compare/1.111.3...1.112.0) (2024-09-07)
 
 
