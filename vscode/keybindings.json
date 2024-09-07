@@ -1,29 +1,153 @@
 [
   {
-    "key": "shift+cmd+c",
-    "command": "-workbench.action.terminal.openNativeConsole",
-    "when": "!terminalFocus"
+    "command": "-aichat.newchataction",
+    "key": "cmd+l"
   },
   {
-    "key": "cmd+l",
-    "command": "-aichat.newchataction"
+    "command": "-aichat.showchatdropdown",
+    "key": "alt+cmd+l"
   },
   {
-    "key": "alt+cmd+l",
-    "command": "-aichat.showchatdropdown"
+    "command": "-aichat.insertselectionintochat",
+    "key": "shift+cmd+l"
   },
   {
-    "key": "shift+cmd+l",
-    "command": "-aichat.insertselectionintochat"
-  },
-  {
-    "key": "cmd+up",
     "command": "-cursorTop",
+    "key": "cmd+up",
     "when": "textInputFocus"
   },
   {
-    "key": "cmd+down",
     "command": "-cursorBottom",
+    "key": "cmd+down",
     "when": "textInputFocus"
+  },
+  {
+    "command": "workbench.action.terminal.newInActiveWorkspace",
+    "key": "ctrl+a c",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.kill",
+    "key": "ctrl+a x",
+    "when": "terminalFocus "
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneUp",
+    "key": "ctrl+a alt+up",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneDown",
+    "key": "ctrl+a alt+down",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneLeft",
+    "key": "ctrl+a alt+left",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneRight",
+    "key": "ctrl+a alt+right",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.quickOpenTerm",
+    "key": "ctrl+a w"
+  },
+  {
+    "command": "workbench.action.toggleMaximizedPanel",
+    "key": "ctrl+a z",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex1",
+    "key": "ctrl+a 1",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex2",
+    "key": "ctrl+a 2",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex3",
+    "key": "ctrl+a 3",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex4",
+    "key": "ctrl+a 4",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex5",
+    "key": "ctrl+a 5",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex6",
+    "key": "ctrl+a 6",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex7",
+    "key": "ctrl+a 7",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex8",
+    "key": "ctrl+a 8",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusAtIndex9",
+    "key": "ctrl+a 9",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+a right",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+a up",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+a left",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+a down",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPrevious",
+    "key": "ctrl+a p",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNext",
+    "key": "ctrl+a n",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.split",
+    "key": "ctrl+a shift+-",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.split",
+    "key": "ctrl+a shift+5",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+a d",
+    "when": "terminalFocus"
   }
 ]
