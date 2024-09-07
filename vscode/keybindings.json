@@ -23,13 +23,12 @@
   },
   {
     "command": "workbench.action.terminal.newInActiveWorkspace",
-    "key": "ctrl+a c",
-    "when": "terminalFocus"
+    "key": "ctrl+a c"
   },
   {
     "command": "workbench.action.terminal.kill",
     "key": "ctrl+a x",
-    "when": "terminalFocus "
+    "when": "terminalFocus"
   },
   {
     "command": "workbench.action.terminal.resizePaneUp",
@@ -149,5 +148,9 @@
     "command": "workbench.action.terminal.toggleTerminal",
     "key": "ctrl+a d",
     "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+a t"
   }
 ]
