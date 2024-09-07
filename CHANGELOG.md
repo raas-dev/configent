@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.12](https://github.com/raas-dev/configent/compare/1.110.11...1.110.12) (2024-09-07)
+
+
+### Fixes
+
+* **aider:** Add autocommits ([9b9c6ab](https://github.com/raas-dev/configent/commit/9b9c6ab7c9dbe1ef1da5b9dc7aceb52a50c1e997))
+* **tmux:** Faster mouse scroll ([5b83457](https://github.com/raas-dev/configent/commit/5b834573db122be5b88c76548543b87fc9e779fc))
+* **vscode:** Smooth mouse scrolling in terminal ([4c43001](https://github.com/raas-dev/configent/commit/4c43001b9049ea2463fd4659d66b3a2a24a7d9b1))
+
 ### [1.110.11](https://github.com/raas-dev/configent/compare/1.110.10...1.110.11) (2024-09-06)
 
 
