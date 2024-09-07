@@ -200,8 +200,19 @@
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
+  "terminal.integrated.profiles.linux": {
+    "tmux": {
+      "args": [
+        "new-session",
+        "-A",
+        "-s",
+        "local"
+      ],
+      "path": "tmux"
+    }
+  },
   "terminal.integrated.profiles.osx": {
-    "tmux-local": {
+    "tmux": {
       "args": [
         "new-session",
         "-A",
