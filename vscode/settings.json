@@ -192,7 +192,6 @@
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.macOptionClickForcesSelection": true,
-  "terminal.integrated.middleClickBehavior": "paste",
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
   "terminal.integrated.profiles.osx": {
@@ -206,7 +205,7 @@
       "path": "tmux"
     }
   },
-  "terminal.integrated.rightClickBehavior": "nothing",
+  "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 99999,
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
