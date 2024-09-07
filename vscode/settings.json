@@ -125,6 +125,7 @@
   ],
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.verticalScrollbarSize": 0,
   "editor.semanticHighlighting.enabled": true,
   "editor.smoothScrolling": true,
   "editor.suggestSelection": "first",
