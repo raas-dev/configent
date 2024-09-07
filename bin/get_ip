@@ -1,3 +1,0 @@
-#!/bin/sh
-
-curl --silent --ipv4 https://ifconfig.co/json | jq -r .ip
