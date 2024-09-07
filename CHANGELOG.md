@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.3](https://github.com/raas-dev/configent/compare/1.111.2...1.111.3) (2024-09-07)
+
+
+### Fixes
+
+* **tmux:** Remove extra statusline icons ([8624f1f](https://github.com/raas-dev/configent/commit/8624f1f2767cecf0e98209e57dd226afc5088e03))
+* **vscode:** Hide vertical scroll bar ([344086f](https://github.com/raas-dev/configent/commit/344086f67498d7498c70468fb02a5469bc0e09a3))
+* **vscode:** Override tmux defaults ([508be30](https://github.com/raas-dev/configent/commit/508be30d56a9c196eb3e012ef959e173b579863a))
+
 ### [1.111.2](https://github.com/raas-dev/configent/compare/1.111.1...1.111.2) (2024-09-07)
 
 
