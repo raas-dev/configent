@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.1](https://github.com/raas-dev/configent/compare/1.111.0...1.111.1) (2024-09-07)
+
+
+### Fixes
+
+* **tmux:** Remove extra statusline settings ([6e76afd](https://github.com/raas-dev/configent/commit/6e76afd52d977f577353652f62e633918b6a3220))
+* **tmux:** Use script for getting public IP ([1b9cf88](https://github.com/raas-dev/configent/commit/1b9cf8834921c118da009ce5e65303666e017d8b))
+
 ## [1.111.0](https://github.com/raas-dev/configent/compare/1.110.12...1.111.0) (2024-09-07)
 
 
