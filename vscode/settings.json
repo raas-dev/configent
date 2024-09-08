@@ -219,7 +219,7 @@
         "new-session",
         "-A",
         "-s",
-        "ide"
+        "code"
       ],
       "path": "tmux"
     }
@@ -230,7 +230,7 @@
         "new-session",
         "-A",
         "-s",
-        "ide"
+        "code"
       ],
       "path": "tmux"
     }
