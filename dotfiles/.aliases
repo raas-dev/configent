@@ -29,8 +29,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     killall Finder"
 
   # Fix macOS keyboard input sources
-  alias resetkeyboard="rm -f ~/Library/Preferences/com.apple.HIToolbox.plist ;
-    sudo rm -f /Library/Preferences/com.apple.HIToolbox.plist"
+  alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist ;
+    sudo rm -fv /Library/Preferences/com.apple.HIToolbox.plist"
+
+  # Get macOS keyboard layout name
+  alias kb="defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name' | cut -f 2 -d '=' | tr -d ' ;.\"'"
 
   # Disable or enable Spotlight (indexing)
   alias spotoff='sudo mdutil -a -i off'
