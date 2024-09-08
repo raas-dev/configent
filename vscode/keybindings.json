@@ -203,5 +203,9 @@
   {
     "command": "workbench.action.terminal.goToRecentDirectory",
     "key": "ctrl+s j"
+  },
+  {
+    "command": "code-runner.run",
+    "key": "ctrl+r"
   }
 ]

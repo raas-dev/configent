@@ -27,6 +27,7 @@ eamodio.gitlens
 editorconfig.editorconfig
 esbenp.prettier-vscode
 exiasr.hadolint
+formulahendry.code-runner
 foxundermoon.shell-format
 fregante.ghost-text
 github.vscode-github-actions
