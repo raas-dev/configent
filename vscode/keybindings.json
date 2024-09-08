@@ -200,5 +200,9 @@
   {
     "command": "workbench.action.terminal.runRecentCommand",
     "key": "ctrl+s r"
+  },
+  {
+    "command": "continue.debugTerminal",
+    "key": "ctrl+s l"
   }
 ]
