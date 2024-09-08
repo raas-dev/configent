@@ -247,9 +247,6 @@
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.tabs.enabled": false,
   "terraform.codelens.referenceCount": true,
-  "todohighlight.keywords": [
-    "AP:"
-  ],
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
   "typescript.suggest.paths": false,
