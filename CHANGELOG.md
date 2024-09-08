@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.3](https://github.com/raas-dev/configent/compare/1.112.2...1.112.3) (2024-09-08)
+
+
+### Fixes
+
+* **aliases:** Be verbose on removals ([100a1a4](https://github.com/raas-dev/configent/commit/100a1a4a236df6f9e58c70e762f4e18ef5573250))
+* **macos:** Add alias for getting kb layout ([5cd0491](https://github.com/raas-dev/configent/commit/5cd0491f7114970e138acec9bbef7f23008eaaef))
+* **tmux:** Show session icon ([2b69327](https://github.com/raas-dev/configent/commit/2b69327f1393c71b5712e35012e172d4d9754b25))
+* **vscode:** Disable integrated GIT_ASKPASS ([2488fe6](https://github.com/raas-dev/configent/commit/2488fe667e27912c2c9825f1740aac04a01f5796))
+* **vscode:** Improve integrated terminal ([9cee7f8](https://github.com/raas-dev/configent/commit/9cee7f81db826a49fbc80ca7d0559ae217738c9b))
+* **vscode:** Improve terminal history ([e641177](https://github.com/raas-dev/configent/commit/e6411777182128b1a91055c607ad1963e885fa71))
+* **vscode:** Improve terminal keybindings ([14cc4a6](https://github.com/raas-dev/configent/commit/14cc4a65726d90c31c8797173fa977e1f2e47054))
+
 ### [1.112.2](https://github.com/raas-dev/configent/compare/1.112.1...1.112.2) (2024-09-08)
 
 
