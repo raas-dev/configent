@@ -64,48 +64,39 @@
   },
   {
     "command": "workbench.action.terminal.focusAtIndex1",
-    "key": "ctrl+s 1",
-    "when": "terminalFocus"
+    "key": "ctrl+s 1"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex2",
-    "key": "ctrl+s 2",
-    "when": "terminalFocus"
+    "key": "ctrl+s 2"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex3",
-    "key": "ctrl+s 3",
-    "when": "terminalFocus"
+    "key": "ctrl+s 3"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex4",
-    "key": "ctrl+s 4",
-    "when": "terminalFocus"
+    "key": "ctrl+s 4"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex5",
-    "key": "ctrl+s 5",
-    "when": "terminalFocus"
+    "key": "ctrl+s 5"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex6",
-    "key": "ctrl+s 6",
-    "when": "terminalFocus"
+    "key": "ctrl+s 6"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex7",
-    "key": "ctrl+s 7",
-    "when": "terminalFocus"
+    "key": "ctrl+s 7"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex8",
-    "key": "ctrl+s 8",
-    "when": "terminalFocus"
+    "key": "ctrl+s 8"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex9",
-    "key": "ctrl+s 9",
-    "when": "terminalFocus"
+    "key": "ctrl+s 9"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
