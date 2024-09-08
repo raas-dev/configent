@@ -160,6 +160,7 @@
   "go.toolsManagement.checkForUpdates": "off",
   "go.useLanguageServer": true,
   "hediet.vscode-drawio.resizeImages": null,
+  "highlight-counter.priority": 1000,
   "javascript.suggest.paths": false,
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "markdown.preview.fontSize": 17,
