@@ -224,9 +224,9 @@
   "terminal.integrated.scrollback": 99999,
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.history": 10000,
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.smoothScrolling": true,
-  "terminal.integrated.suggest.enabled": true,
   "terminal.integrated.tabs.enabled": false,
   "terraform.codelens.referenceCount": true,
   "todohighlight.keywords": [
