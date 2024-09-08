@@ -204,5 +204,13 @@
   {
     "command": "continue.debugTerminal",
     "key": "ctrl+s l"
+  },
+  {
+    "command": "-workbench.action.openRecent",
+    "key": "ctrl+r"
+  },
+  {
+    "command": "workbench.action.terminal.goToRecentDirectory",
+    "key": "ctrl+s j"
   }
 ]
