@@ -135,6 +135,7 @@
   "editor.wordWrap": "wordWrapColumn",
   "evenBetterToml.formatter.columnWidth": 80,
   "excalidraw.theme": "dark",
+  "excel-viewer.showInfo": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "extendedTerminalIntegration.statusBar.maxTerminalIcons": 3,
