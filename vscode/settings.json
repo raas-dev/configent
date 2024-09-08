@@ -264,7 +264,7 @@
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#aaff00",
-    "extendedTerminalIntegration.statusBar.foreground": "#55aa00",
+    "extendedTerminalIntegration.statusBar.foreground": "#808080",
     "terminal.ansiBlack": "#353535",
     "terminal.ansiBlue": "#1398B9",
     "terminal.ansiBrightBlack": "#535353",
