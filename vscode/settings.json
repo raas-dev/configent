@@ -224,7 +224,7 @@
   "terminal.integrated.scrollback": 99999,
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.shellIntegration.history": 10000,
+  "terminal.integrated.shellIntegration.history": 1000,
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.tabs.enabled": false,
