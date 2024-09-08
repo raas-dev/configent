@@ -27,8 +27,6 @@ eamodio.gitlens
 editorconfig.editorconfig
 esbenp.prettier-vscode
 exiasr.hadolint
-formulahendry.auto-close-tag
-formulahendry.auto-rename-tag
 foxundermoon.shell-format
 fregante.ghost-text
 github.vscode-github-actions

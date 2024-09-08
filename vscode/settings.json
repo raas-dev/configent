@@ -110,6 +110,7 @@
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.letterSpacing": -0.25,
   "editor.lineHeight": 15.25,
+  "editor.linkedEditing": true,
   "editor.minimap.enabled": true,
   "editor.minimap.maxColumn": 80,
   "editor.minimap.showSlider": "always",
