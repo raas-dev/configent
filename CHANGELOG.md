@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.2](https://github.com/raas-dev/configent/compare/1.112.1...1.112.2) (2024-09-08)
+
+
+### Fixes
+
+* **tmux:** Clear plugin settings ([fe537bb](https://github.com/raas-dev/configent/commit/fe537bb80ab615262b81ad9a165ae390cab9fd96))
+* **vscode:** Set default tmux session name ([4673163](https://github.com/raas-dev/configent/commit/467316324db80870d8cccc4eac8063781f000608))
+
 ### [1.112.1](https://github.com/raas-dev/configent/compare/1.112.0...1.112.1) (2024-09-07)
 
 
