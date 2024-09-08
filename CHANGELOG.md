@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.5](https://github.com/raas-dev/configent/compare/1.112.4...1.112.5) (2024-09-08)
+
+
+### Fixes
+
+* **vscode:** Add debug terminal key binding ([83ed033](https://github.com/raas-dev/configent/commit/83ed0338ca0fc9f32cc86ef1d6f3d54d874cf1a2))
+* **vscode:** Add keybinding to go to recent dir ([634a756](https://github.com/raas-dev/configent/commit/634a756ecdb5006ed35551189528b2e6c5a3d1a8))
+* **vscode:** Add multi cursor case preserve ([8676017](https://github.com/raas-dev/configent/commit/8676017a1518e5b083cdf2715b79850f50f929cb))
+* **vscode:** Hide cursor in overview ruler ([33ae49c](https://github.com/raas-dev/configent/commit/33ae49cc4a43a3d3ecdc8facca320e8db40243fa))
+* **vscode:** Improve statusbar colors ([9d411f0](https://github.com/raas-dev/configent/commit/9d411f04f25980e119fbdc06c890ba9435fb4938))
+* **vscode:** Improve terminal switching ([31933f2](https://github.com/raas-dev/configent/commit/31933f251d6d04b6291e5b3b1ddcc0b72a582f40))
+
 ### [1.112.4](https://github.com/raas-dev/configent/compare/1.112.3...1.112.4) (2024-09-08)
 
 
