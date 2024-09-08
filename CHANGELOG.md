@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.6](https://github.com/raas-dev/configent/compare/1.112.5...1.112.6) (2024-09-08)
+
+
+### Fixes
+
+* **vscode:** Add code-runner ([236b90d](https://github.com/raas-dev/configent/commit/236b90d87c1ba0cf93a828171e85d85a7ae9ffa2))
+* **vscode:** Add excel viewer ([9cd4023](https://github.com/raas-dev/configent/commit/9cd4023fdfb03f78bc338240af6a95783dc94142))
+* **vscode:** Remove highlight APs ([e87fda9](https://github.com/raas-dev/configent/commit/e87fda94d45474ba647eb7d3d3f9c54ebaf41e47))
+* **vscode:** Use VSCode buildins over extensions ([43558da](https://github.com/raas-dev/configent/commit/43558dacef134769520e6298099f46e311de4755))
+
 ### [1.112.5](https://github.com/raas-dev/configent/compare/1.112.4...1.112.5) (2024-09-08)
 
 
