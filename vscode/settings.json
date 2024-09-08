@@ -223,24 +223,12 @@
   "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.profiles.linux": {
     "tmux": {
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "code"
-      ],
-      "path": "tmux"
+      "path": "tm"
     }
   },
   "terminal.integrated.profiles.osx": {
     "tmux": {
-      "args": [
-        "new-session",
-        "-A",
-        "-s",
-        "code"
-      ],
-      "path": "tmux"
+      "path": "tm"
     }
   },
   "terminal.integrated.rightClickBehavior": "default",

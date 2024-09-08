@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec tmux new-session -A -s "$(hostname -s)"
