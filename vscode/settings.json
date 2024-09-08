@@ -131,6 +131,10 @@
   "excalidraw.theme": "dark",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "extendedTerminalIntegration.statusBar.maxTerminalIcons": 3,
+  "extendedTerminalIntegration.statusBar.preferLatestTerminals": true,
+  "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
+  "extendedTerminalIntegration.statusBar.showTerminalName": true,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.ejs": "json",
@@ -259,6 +263,8 @@
   "window.zoomLevel": 1,
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
+    "extendedTerminalIntegration.statusBar.activeForeground": "#aaff00",
+    "extendedTerminalIntegration.statusBar.foreground": "#55aa00",
     "terminal.ansiBlack": "#353535",
     "terminal.ansiBlue": "#1398B9",
     "terminal.ansiBrightBlack": "#535353",
