@@ -21,9 +21,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # Fix broken icons in Dock
   alias reseticons="sudo /usr/bin/find /private/var/folders/ \
-    -name com.apple.dock.iconcache -exec rm {} \; ;
-    sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \; ;
-    sudo rm -rf /Library/Caches/com.apple.iconservices.store ;
+    -name com.apple.dock.iconcache -exec rmv {} \; ;
+    sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rfv {} \; ;
+    sudo rm -rfv /Library/Caches/com.apple.iconservices.store ;
     sleep 3 ;
     killall Dock ;
     killall Finder"
@@ -272,7 +272,7 @@ venv() {
       fi
     fi
   else
-    deactivate # && [ -d ".venv" ] && rm -r ".venv"
+    deactivate # && [ -d ".venv" ] && rm -rv ".venv"
   fi
 }
 
