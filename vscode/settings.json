@@ -195,9 +195,19 @@
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontSize": 16,
+  "terminal.integrated.ignoreBracketedPasteMode": true,
+  "terminal.integrated.ignoreProcessNames": [
+    "starship",
+    "oh-my-posh",
+    "bash",
+    "zsh",
+    "pwsh"
+  ],
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
+  "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.profiles.linux": {
     "tmux": {
       "args": [
@@ -221,9 +231,9 @@
     }
   },
   "terminal.integrated.rightClickBehavior": "default",
-  "terminal.integrated.scrollback": 99999,
+  "terminal.integrated.scrollback": 10000,
   "terminal.integrated.sendKeybindingsToShell": true,
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.decorationsEnabled": "gutter",
   "terminal.integrated.shellIntegration.history": 1000,
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.smoothScrolling": true,
