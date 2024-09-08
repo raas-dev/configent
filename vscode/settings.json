@@ -114,6 +114,7 @@
   "editor.minimap.maxColumn": 80,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fit",
+  "editor.overviewRulerBorder": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.rulers": [
