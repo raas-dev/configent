@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.4](https://github.com/raas-dev/configent/compare/1.112.3...1.112.4) (2024-09-08)
+
+
+### Fixes
+
+* **vscode:** Add terminals to statusbar ([a2b1179](https://github.com/raas-dev/configent/commit/a2b1179822d959a872b6020f5e84b796c250a4d1))
+* **vscode:** Adjust highlight counter position ([849c256](https://github.com/raas-dev/configent/commit/849c256b3f2f174f46c2d4c0632dca8a8da47c0d))
+* **vscode:** Change default session name ([d17967a](https://github.com/raas-dev/configent/commit/d17967a2fa71461077ebea1d725306d46c8e268e))
+* **vscode:** Improve statusbar terminal colors ([01d3b5c](https://github.com/raas-dev/configent/commit/01d3b5c38518ca15817d37751c9b7c1044eed9bf))
+
 ### [1.112.3](https://github.com/raas-dev/configent/compare/1.112.2...1.112.3) (2024-09-08)
 
 
