@@ -204,7 +204,7 @@
         "new-session",
         "-A",
         "-s",
-        "local"
+        "ide"
       ],
       "path": "tmux"
     }
@@ -215,7 +215,7 @@
         "new-session",
         "-A",
         "-s",
-        "local"
+        "ide"
       ],
       "path": "tmux"
     }
