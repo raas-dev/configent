@@ -56,7 +56,7 @@
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "yi-coder:9b",
+    "model": "deepseek-coder-v2:16b",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
