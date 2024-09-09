@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.7](https://github.com/raas-dev/configent/compare/1.112.6...1.112.7) (2024-09-09)
+
+
+### Fixes
+
+* **bin:** Add tm for reusing tmux session ([4cda2d5](https://github.com/raas-dev/configent/commit/4cda2d5cb6e7be7bbab740c2a3f5d51976666d29))
+* **continue:** Update auto-complete model ([530db55](https://github.com/raas-dev/configent/commit/530db55f3f38c748fa48c3c4fb13f2e6c6bab6db))
+* **vscode:** Do not require terminal focus ([080fa4a](https://github.com/raas-dev/configent/commit/080fa4a880f90b76e9f965e529d90672fddfdd7b))
+* **vscode:** Remove default debug terminal key ([8270c94](https://github.com/raas-dev/configent/commit/8270c94370d311d397957dfac1bc48afe68aa1a2))
+
 ### [1.112.6](https://github.com/raas-dev/configent/compare/1.112.5...1.112.6) (2024-09-08)
 
 
