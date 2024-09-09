@@ -138,7 +138,7 @@
   "excel-viewer.showInfo": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  "extendedTerminalIntegration.statusBar.maxTerminalIcons": 3,
+  "extendedTerminalIntegration.statusBar.maxTerminalIcons": 4,
   "extendedTerminalIntegration.statusBar.preferLatestTerminals": true,
   "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
   "extendedTerminalIntegration.statusBar.showTerminalName": true,
