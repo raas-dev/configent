@@ -199,5 +199,9 @@
   {
     "command": "code-runner.run",
     "key": "ctrl+r"
+  },
+  {
+    "command": "-continue.debugTerminal",
+    "key": "shift+cmd+r"
   }
 ]
