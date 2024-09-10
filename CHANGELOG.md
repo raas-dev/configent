@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.8](https://github.com/raas-dev/configent/compare/1.112.7...1.112.8) (2024-09-10)
+
+
+### Fixes
+
+* **aider:** Disable auto-commit. enable caching ([84cdc77](https://github.com/raas-dev/configent/commit/84cdc77198ea02d29af02429139e71c9ec4cd676))
+* **vscode:** Disable terminal copy on selection ([639bd2a](https://github.com/raas-dev/configent/commit/639bd2a90f7f2d8a7dfff6399c5e73d628724764))
+
 ### [1.112.7](https://github.com/raas-dev/configent/compare/1.112.6...1.112.7) (2024-09-09)
 
 
