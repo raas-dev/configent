@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.9](https://github.com/raas-dev/configent/compare/1.112.8...1.112.9) (2024-09-11)
+
+
+### Fixes
+
+* **vscode:** Remove python-envy ([52c36d0](https://github.com/raas-dev/configent/commit/52c36d02bf64742c6ddb447a52edca05e67c355f))
+
 ### [1.112.8](https://github.com/raas-dev/configent/compare/1.112.7...1.112.8) (2024-09-10)
 
 
