@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.10](https://github.com/raas-dev/configent/compare/1.112.9...1.112.10) (2024-09-11)
+
+
+### Fixes
+
+* **vscode:** Remove auto-switching venv in terminal ([502532b](https://github.com/raas-dev/configent/commit/502532b7d26a2e9dab1228121e5dd0e18e0489e5))
+
 ### [1.112.9](https://github.com/raas-dev/configent/compare/1.112.8...1.112.9) (2024-09-11)
 
 
