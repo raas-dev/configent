@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.112.11](https://github.com/raas-dev/configent/compare/1.112.10...1.112.11) (2024-09-12)
+
+
+### Fixes
+
+* **aliases:** Add copier ([5adc807](https://github.com/raas-dev/configent/commit/5adc80761b00e1c706e08f3dd4ecc18df3a853ff))
+* **vscode:** Use 2002ish green for statusbar fg ([bc2cc67](https://github.com/raas-dev/configent/commit/bc2cc67da07a543d7cc0a8141ae81d5c6346b10e))
+
 ### [1.112.10](https://github.com/raas-dev/configent/compare/1.112.9...1.112.10) (2024-09-11)
 
 
