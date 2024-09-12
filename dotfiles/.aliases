@@ -235,6 +235,9 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 # OpenAI CLI
 alias openai='uvx openai'
 
+# Command-line utility for rendering projects templates
+alias copier='uvx --with copier-templates-extensions copier'
+
 # https://hatch.pypa.io/latest
 alias hatch='uvx hatch'
 
