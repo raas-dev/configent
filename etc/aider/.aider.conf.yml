@@ -261,7 +261,7 @@ attribute-commit-message-committer: false
 #apply:
 
 ## Always say yes to every confirmation
-#yes: false
+yes: true
 
 ## Enable verbose output
 #verbose: false
