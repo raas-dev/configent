@@ -206,7 +206,7 @@ alias week='date +%V'
 alias glances='uvx --from "glances[containers,gpu,ip,web,wifi]" glances'
 
 # View, tail, merge, and search log files (plus JSONL)
-alias tl='uvx toolong'
+alias tl='uvx --from toolong tl'
 
 # SQL IDE for terminal
 alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
