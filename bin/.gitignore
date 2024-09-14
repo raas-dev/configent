@@ -11,6 +11,7 @@
 !lesspipe.sh
 !nerdctl
 !podman
+!rsync_tmbackup.sh
 !tm
 !trans
 !xpanes
