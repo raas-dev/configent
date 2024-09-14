@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.113.0](https://github.com/raas-dev/configent/compare/1.112.11...1.113.0) (2024-09-14)
+
+
+### Features
+
+* **bin:** Add rsync_tmbackup.sh script ([2e9f5c6](https://github.com/raas-dev/configent/commit/2e9f5c66533c6df990002a2f93e4d89b65f89569))
+
+
+### Fixes
+
+* **aider:** Accept suggestions without confirmation ([c854fde](https://github.com/raas-dev/configent/commit/c854fde6de621754125e8257a497555cbedd4fe6))
+
 ### [1.112.11](https://github.com/raas-dev/configent/compare/1.112.10...1.112.11) (2024-09-12)
 
 
