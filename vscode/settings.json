@@ -214,7 +214,8 @@
     "oh-my-posh",
     "bash",
     "zsh",
-    "pwsh"
+    "pwsh",
+    "tmux"
   ],
   "terminal.integrated.initialHint": false,
   "terminal.integrated.macOptionClickForcesSelection": true,
