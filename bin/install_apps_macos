@@ -80,3 +80,6 @@ brew install xz
 
 # For hurl
 brew install pkg-config
+
+# For speech-to-text
+brew install portaudio
