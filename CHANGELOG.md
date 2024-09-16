@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.1](https://github.com/raas-dev/configent/compare/1.113.0...1.113.1) (2024-09-16)
+
+
+### Fixes
+
+* **aliases:** Fix toolong binary name ([5eb2fda](https://github.com/raas-dev/configent/commit/5eb2fda51e6c9a22c7862171af97938d2e66c044))
+* **macos:** Add portaudio for speech-to-text ([390eaa5](https://github.com/raas-dev/configent/commit/390eaa5e97d2365d2d2c4b44ec9ca869b96d0d37))
+
 ## [1.113.0](https://github.com/raas-dev/configent/compare/1.112.11...1.113.0) (2024-09-14)
 
 
