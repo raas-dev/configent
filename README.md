@@ -24,7 +24,7 @@ A few features:
 
 Works on x86-64 and ARM:
 
-- macOS Sonoma (14), Ventura (13) and Monterey (12)
+- macOS Sequoia (15), Sonoma (14) and Ventura (13)
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 38, 37 and 36
@@ -36,8 +36,7 @@ Works on x86-64 and ARM:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.19, 3.18 and 3.17
 
-Minimum requirements are 4GB RAM and 12GB disk, or a 2016 MacBook Pro,
-both on which it is <30 minutes.
+Minimum requirements are 4GB RAM and 12GB disk, on which it takes <30 minutes.
 
 ## 🥾 Up
 
