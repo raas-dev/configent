@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.2](https://github.com/raas-dev/configent/compare/1.113.1...1.113.2) (2024-09-18)
+
+
+### Fixes
+
+* **lazyvim:** Remove avante, too new nvim required ([cb0fa1f](https://github.com/raas-dev/configent/commit/cb0fa1f58f0b5591a5d2bb8ac85ad190184d626d))
+
 ### [1.113.1](https://github.com/raas-dev/configent/compare/1.113.0...1.113.1) (2024-09-16)
 
 
