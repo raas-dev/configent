@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.3](https://github.com/raas-dev/configent/compare/1.113.2...1.113.3) (2024-09-19)
+
+
+### Fixes
+
+* **docker:** Fix nvidia-ctk to use sudo ([0a0dff1](https://github.com/raas-dev/configent/commit/0a0dff1d6703e84ce9c41937ec04e39cce8acec3))
+* **docker:** Use Cloudflare DNS servers ([d53404b](https://github.com/raas-dev/configent/commit/d53404be7f01175d8a6a4568539595f982fa04bf))
+* **lazyvim:** Remove dangling config ([28b9ec2](https://github.com/raas-dev/configent/commit/28b9ec20676308e2d71e3c0e88ac5b511abbd1e0))
+
 ### [1.113.2](https://github.com/raas-dev/configent/compare/1.113.1...1.113.2) (2024-09-18)
 
 
