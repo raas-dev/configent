@@ -60,7 +60,7 @@ portForwards:
   - guestSocket: "/run/user/{{.UID}}/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
 
-# https://www.quad9.net/service/service-addresses-and-features/
+# https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-tls/
 dns:
-  - 9.9.9.9
-  - 149.112.112.112
+  - 1.1.1.1
+  - 1.0.0.1
