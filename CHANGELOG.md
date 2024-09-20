@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.4](https://github.com/raas-dev/configent/compare/1.113.3...1.113.4) (2024-09-20)
+
+
+### Fixes
+
+* **apt:** Fix NVIDIA Container Toolkit install ([fcde482](https://github.com/raas-dev/configent/commit/fcde4826f02cc37f25fb3141fbb61d0e804b7323))
+* **vscode:** Remove semgrep ([e0339e3](https://github.com/raas-dev/configent/commit/e0339e3d0196f56fa6fdfca31b59a9746c2e0317))
+
 ### [1.113.3](https://github.com/raas-dev/configent/compare/1.113.2...1.113.3) (2024-09-19)
 
 
