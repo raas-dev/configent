@@ -3,7 +3,6 @@
     "editorconfig.editorconfig",
     "foxundermoon.shell-format",
     "mads-hartmann.bash-ide-vscode",
-    "exiasr.hadolint",
-    "semgrep.semgrep"
+    "exiasr.hadolint"
   ]
 }
