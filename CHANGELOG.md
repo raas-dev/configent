@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.5](https://github.com/raas-dev/configent/compare/1.113.4...1.113.5) (2024-09-21)
+
+
+### Fixes
+
+* **jq:** Use gojq for better jq compatibility ([58f8bea](https://github.com/raas-dev/configent/commit/58f8beab653c09567ca8db467d6d4a33de9cb7e9))
+
 ### [1.113.4](https://github.com/raas-dev/configent/compare/1.113.3...1.113.4) (2024-09-20)
 
 
