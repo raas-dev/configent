@@ -215,7 +215,8 @@ alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightb
 alias vd='uvx --with openpyxl visidata'
 
 # Simplenote in terminal (export SN_USERNAME and SN_PASSWORD in ~/.rclocal)
-alias sncli='uvx sncli'
+# workaround: use Python 3.11.x because sncli requires distutils (2024-09)
+alias sncli='uvx --python 3.11 sncli'
 
 # Playwright
 alias playwright='uvx playwright'
