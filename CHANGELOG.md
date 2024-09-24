@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.6](https://github.com/raas-dev/configent/compare/1.113.5...1.113.6) (2024-09-24)
+
+
+### Fixes
+
+* **macos:** Remove install docker CLI ([fab424a](https://github.com/raas-dev/configent/commit/fab424aac2caf98124ac57302adc80d1f8d8748e))
+* **sncli:** Use python 3.11 ([12a6094](https://github.com/raas-dev/configent/commit/12a6094ca65a075f24aa7398a841c2515a79b09d))
+
 ### [1.113.5](https://github.com/raas-dev/configent/compare/1.113.4...1.113.5) (2024-09-21)
 
 
