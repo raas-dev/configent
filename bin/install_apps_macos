@@ -54,9 +54,6 @@ brew install git-lfs
 # Git extra commands (https://asdf-vm.com/manage/commands.html)
 brew install git-extras
 
-# Docker CLI
-brew install docker
-
 # Linux virtual machines on QEMU
 brew install lima
 
