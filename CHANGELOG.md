@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.7](https://github.com/raas-dev/configent/compare/1.113.6...1.113.7) (2024-09-26)
+
+
+### Fixes
+
+* **topgrade:** Disable vim/nvim plugin updates ([6342fff](https://github.com/raas-dev/configent/commit/6342ffff01b6320da647d303642a87828b3e90b0))
+
 ### [1.113.6](https://github.com/raas-dev/configent/compare/1.113.5...1.113.6) (2024-09-24)
 
 
