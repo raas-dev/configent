@@ -86,7 +86,6 @@
   "codeium.aggressiveShutdown": true,
   "codeium.enableCodeLens": false,
   "codeium.enableInComments": false,
-  "continue.enableQuickActions": true,
   "continue.enableTabAutocomplete": true,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
