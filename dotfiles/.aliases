@@ -208,6 +208,9 @@ alias glances='uvx --from "glances[containers,gpu,ip,web,wifi]" glances'
 # View, tail, merge, and search log files (plus JSONL)
 alias tl='uvx --from toolong tl'
 
+# Reactive notebook
+alias marimo='uvx marimo'
+
 # SQL IDE for terminal
 alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
 
