@@ -47,16 +47,16 @@
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     },
     {
-      "title": "Ollama",
+      "title": "Ollama: deepseek-coder-v2",
       "provider": "ollama",
-      "model": "deepseek-coder-v2:16b",
+      "model": "deepseek-coder-v2",
       "apiBase": "http://127.0.0.1:11434"
     }
   ],
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "deepseek-coder-v2:16b",
+    "model": "llama3.2",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
