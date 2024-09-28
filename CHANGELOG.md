@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.8](https://github.com/raas-dev/configent/compare/1.113.7...1.113.8) (2024-09-28)
+
+
+### Fixes
+
+* **aliases:** Add marimo via uvx ([abb0c3a](https://github.com/raas-dev/configent/commit/abb0c3a87bd353895245b3769135f465e770ca1b))
+* **continue:** Hide quick actions ([e30d15c](https://github.com/raas-dev/configent/commit/e30d15cbcc76d657f83287cf7150f61ff6e3b9bd))
+* **continue:** Update models ([a67efa6](https://github.com/raas-dev/configent/commit/a67efa61aad347136e7f74909111e59125f4ebde))
+* **continue:** Use llama 3.2 as autocomplete model ([cc5a837](https://github.com/raas-dev/configent/commit/cc5a8371b41af7cbf63c78d5986c372688864965))
+
 ### [1.113.7](https://github.com/raas-dev/configent/compare/1.113.6...1.113.7) (2024-09-26)
 
 
