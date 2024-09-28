@@ -49,14 +49,14 @@
     {
       "title": "Ollama: deepseek-coder-v2",
       "provider": "ollama",
-      "model": "deepseek-coder-v2",
+      "model": "deepseek-coder-v2:16b",
       "apiBase": "http://127.0.0.1:11434"
     }
   ],
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "llama3.2",
+    "model": "starcoder2:3b",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
