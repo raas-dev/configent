@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.9](https://github.com/raas-dev/configent/compare/1.113.8...1.113.9) (2024-10-07)
+
+
+### Fixes
+
+* **docker:** Add gVisor runtime support ([bb0e3fb](https://github.com/raas-dev/configent/commit/bb0e3fb3c40bc76260fc6a8c9c16579e1ca43294))
+
 ### [1.113.8](https://github.com/raas-dev/configent/compare/1.113.7...1.113.8) (2024-09-28)
 
 
