@@ -191,17 +191,19 @@ Zsh and Bash are installed from Homebrew and preferred over system-wide shells
 
 ## 🏗️ Containers
 
-[Rootless containers](https://rootlesscontaine.rs/) in a nutshell:
+Supported container runtimes:
 
-- there are various OCI compatible runtimes, such as Docker (in Docker Desktop)
+- the original OCI compatible runtime was Docker (used by Docker Desktop)
 - containerd is the industry-standard (CNCF) runtime in Kubernetes deployments
-- third option is Podman, which is near-Docker compatible daemonless runtime
+- third option is Podman, which is nearly Docker compatible daemonless runtime
 
-These `bin/` shims wrap the container CLIs to prefer rootless runtimes:
+These `bin/` shims wrap the container CLIs to use those runtimes:
 
 - `docker`: Runs Docker CLI, installing build and compose CLI plugins when used
 - `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
 - `podman`: Runs Podman CLI (on daemonless Podman), but lacks proper compose
+
+See [rootless containers](https://rootlesscontaine.rs/) as those are preferred.
 
 ### macOS
 
