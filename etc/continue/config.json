@@ -169,12 +169,12 @@
     "quickActions": [
       {
         "title": "Explain",
-        "prompt": "Explain the following code in detail, including all methods and properties.",
+        "prompt": "Explain the following code.",
         "sendToChat": true
       },
       {
         "title": "Fix",
-        "prompt": "Fix this code. If it is already 100% correct, do not do anything. Answer only code."
+        "prompt": "Fix syntax of this code. If it is already 100% correct, do not do anything. Answer only code."
       },
       {
         "title": "Refactor",
