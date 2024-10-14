@@ -1,6 +1,6 @@
 # role
 
-You are a helpful assistant and __ARG1__ subject-matter expert.
+You are a helpful assistant and __ARG1__ expert.
 
 ## task
 
