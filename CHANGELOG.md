@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.10](https://github.com/raas-dev/configent/compare/1.113.9...1.113.10) (2024-10-16)
+
+
+### Fixes
+
+* **aichat:** Improve subject-matter expert prompt ([2e5429d](https://github.com/raas-dev/configent/commit/2e5429d4ca3188399601ffe61c8c852862dba029))
+* **aliases:** Add gptme ([9e01403](https://github.com/raas-dev/configent/commit/9e01403a27a81e78075ae18f3dadaf24edaf62e0))
+* **docker:** Add support for rootful docker ([f00dc36](https://github.com/raas-dev/configent/commit/f00dc36ef16a6b5bd46853378acccace1c52abda))
+* **docker:** Remove AppArmor for rootful Docker ([2c11f49](https://github.com/raas-dev/configent/commit/2c11f492d71ce8ee031b84c2012001b7403a9010))
+* **ubuntu:** Use rootful Docker for compatibility ([bf58aa2](https://github.com/raas-dev/configent/commit/bf58aa26fa610729fe693c82f4699b973df37a39))
+* **ubuntu:** Use rootless docker ([9ff556c](https://github.com/raas-dev/configent/commit/9ff556cbc89a5d26c3b58a0d294a2403677a7128))
+
 ### [1.113.9](https://github.com/raas-dev/configent/compare/1.113.8...1.113.9) (2024-10-07)
 
 
