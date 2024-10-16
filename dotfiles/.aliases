@@ -234,7 +234,7 @@ alias checkov='uvx checkov'
 alias guarddog='uvx guarddog'
 
 # gptme
-alias gptme='uvx gptme'
+alias gptme='uvx --from "gptme[browser]" gptme'
 
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
