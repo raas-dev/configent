@@ -59,8 +59,3 @@ hostResolver:
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
-
-# https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-tls/
-dns:
-  - 1.1.1.1
-  - 1.0.0.1
