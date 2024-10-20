@@ -235,6 +235,7 @@ alias guarddog='uvx guarddog'
 
 # gptme
 alias gptme='uvx --from "gptme[browser]" gptme'
+alias gptme-server='uvx --with flask --from "gptme[browser]" gptme-server'
 
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
