@@ -56,7 +56,7 @@
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "starcoder2:3b",
+    "model": "qwen2.5-coder:latest",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
