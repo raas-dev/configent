@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.11](https://github.com/raas-dev/configent/compare/1.113.10...1.113.11) (2024-10-22)
+
+
+### Fixes
+
+* **aichat:** Improve prompts, delete unused ([87bef92](https://github.com/raas-dev/configent/commit/87bef9244ce9044dcd811053ef57d444f54164b4))
+* **aliases:** Add gptme-server ([3209d8a](https://github.com/raas-dev/configent/commit/3209d8a6f888ccee6a2e23b83c1aee980c5f58e4))
+* **azure:** Update azure cli ([8f85ec3](https://github.com/raas-dev/configent/commit/8f85ec374572014ccd6841d87263fbfcd73b8a7c))
+* **continue:** Use better local autocomplete model ([14ae7b2](https://github.com/raas-dev/configent/commit/14ae7b2d13b773c28870c74c0248c36e3357faba))
+* **gptme:** Add support for reading web pages ([1a19cd6](https://github.com/raas-dev/configent/commit/1a19cd684acf75d804d85f670527c7f12ef098ea))
+* **lima:** Remove explicit DNS servers ([b0cf62f](https://github.com/raas-dev/configent/commit/b0cf62f5597d017736eb9a58cfa4bb67f79b2020))
+* **terraform:** Update terraform and tfsec ([7e9f7e8](https://github.com/raas-dev/configent/commit/7e9f7e8443ab3374edd69ffc6cfdf8406ef0edc0))
+* **vscode:** Add extension: cline ([dd67be3](https://github.com/raas-dev/configent/commit/dd67be358fa9ba2a2f31f648f2871364926c122a))
+
 ### [1.113.10](https://github.com/raas-dev/configent/compare/1.113.9...1.113.10) (2024-10-16)
 
 
