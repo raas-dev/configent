@@ -111,7 +111,7 @@ fi
 
 alias a='aichat'
 alias b='bat --style=grid,header-filename,numbers,snip'
-alias c='ai_code'
+alias c='ai'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -138,6 +138,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
+alias _='ai_agent'
 
 ### watch ######################################################################
 
@@ -324,7 +325,6 @@ alias standard-version='npx -y standard-version'
 
 ### Functions: AI ##############################################################
 
-# aichat
 # add to ~/.rclocal:
 # export OPENAI_API_KEY='sk-xxxxxx'
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
@@ -334,26 +334,9 @@ ai() {
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
-ai_expert() {
-  if [ -z "$1" ]; then
-    echo "Usage: ai_expert <subject>"
-    return
-  fi
-  local role="expert#$1"
-  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
-}
-
-ai_code() {
-  # shellcheck disable=SC2155  # will not declare separately, value compactness
-  if [ -n "$1" ]; then
-    local lang="$1"
-  elif command -v enry >/dev/null; then
-    local lang="$(enry -prog | head -n1 | cut -f2)"
-  else
-    local lang="polyglot"
-  fi
+ai_agent() {
   local project="${PWD##*/}"
-  aichat --role "code#$lang" --session "$project:$lang" --save-session
+  gptme --system short --name "$(date +"%Y-%m-%d"):$project" "$@"
 }
 
 ### Functions: Docker ##########################################################
