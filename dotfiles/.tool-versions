@@ -27,8 +27,8 @@ azure-cli 2.65.0
 gcloud 472.0.0
 
 # install_terraform
-terraform 1.8.1
-tfsec 1.28.5
+terraform 1.9.8
+tfsec 1.28.11
 
 # install_k8sdev
 kubectl 1.30.0
