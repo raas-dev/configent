@@ -21,7 +21,7 @@ trivy 0.50.1
 awscli 2.15.40
 
 # install_azure
-azure-cli 2.62.0
+azure-cli 2.65.0
 
 # install_gcloud
 gcloud 472.0.0
