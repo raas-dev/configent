@@ -26,10 +26,10 @@
 ## Specify the model to use for the main chat
 #model:
 
-## Use claude-3-opus-20240229 model for the main chat
+## Use claude-3-opus model for the main chat
 #opus: false
 
-## Use claude-3-5-sonnet-20240620 model for the main chat
+## Use claude-3-5-sonnet model for the main chat
 #sonnet: false
 
 ## Use gpt-4-0613 model for the main chat
