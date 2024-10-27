@@ -201,6 +201,9 @@ alias sudo='sudo '
 # Display week number
 alias week='date +%V'
 
+# Weather (https://github.com/chubin/wttr.in)
+alias wttr='curl "v2.wttr.in/$(ip | jq -r .city)?MF&lang=en"'
+
 ### Python #####################################################################
 
 # Cross-platform real-time monitoring
