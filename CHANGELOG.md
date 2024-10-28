@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.12](https://github.com/raas-dev/configent/compare/1.113.11...1.113.12) (2024-10-28)
+
+
+### Fixes
+
+* **aider:** Update config ([376780f](https://github.com/raas-dev/configent/commit/376780fe0143c51a72c34ec7e8faf179a034ba81))
+* **aliases:** Add wttr ([aebde58](https://github.com/raas-dev/configent/commit/aebde58cb9c922e74cac36a5db4a44a40ecfdc5e))
+* **continue:** Update Claude Sonnet version ([6a3525a](https://github.com/raas-dev/configent/commit/6a3525ac05bbf5af91ad60326bb3ccff2016ebd4))
+* **js:** Update nodejs and bun ([a082a62](https://github.com/raas-dev/configent/commit/a082a6216487576e13a6f0cbc1e5af0df7e52f11))
+* **python:** Update Python 3.11 -> 3.12 ([7c2ae7e](https://github.com/raas-dev/configent/commit/7c2ae7ec4f0e8fd48918dcf939cf5a0ddda6f1c3))
+
 ### [1.113.11](https://github.com/raas-dev/configent/compare/1.113.10...1.113.11) (2024-10-22)
 
 
