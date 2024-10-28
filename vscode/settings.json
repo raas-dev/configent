@@ -145,6 +145,7 @@
   "files.associations": {
     "*.ejs": "json",
     "*.plist": "plist",
+    "*.prompt": "markdown",
     "*.sh": "shellscript",
     "*.tpl": "json",
     ".aliases": "shellscript"
