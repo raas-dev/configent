@@ -33,6 +33,9 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "basedpyright.analysis.diagnosticSeverityOverrides": {
+    "reportPrivateImportUsage": "none"
+  },
   "basedpyright.analysis.typeCheckingMode": "standard",
   "bicep.enableSurveys": false,
   "breadcrumbs.enabled": false,
