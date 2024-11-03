@@ -188,6 +188,7 @@
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.terminal.activateEnvironment": false,
+  "python.terminal.shellIntegration.enabled": true,
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
