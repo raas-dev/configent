@@ -9,6 +9,13 @@
       "apiKey": "[ANTHROPIC_API_KEY]"
     },
     {
+      "title": "claude-3.5-haiku",
+      "provider": "anthropic",
+      "model": "claude-3-5-haiku-latest",
+      "contextLength": 200000,
+      "apiKey": "[ANTHROPIC_API_KEY]"
+    },
+    {
       "title": "gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
