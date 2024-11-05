@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.13](https://github.com/raas-dev/configent/compare/1.113.12...1.113.13) (2024-11-05)
+
+
+### Fixes
+
+* **continue:** Add Claude 3.5 Haiku to LLMs ([7f2dfcd](https://github.com/raas-dev/configent/commit/7f2dfcd1a7c45f3b1e044dfebe1e7d8b59e65f8a))
+
 ### [1.113.12](https://github.com/raas-dev/configent/compare/1.113.11...1.113.12) (2024-10-28)
 
 
