@@ -2,6 +2,18 @@
   "allowAnonymousTelemetry": false,
   "models": [
     {
+      "title": "Ollama: deepseek-coder-v2",
+      "provider": "ollama",
+      "model": "deepseek-coder-v2:16b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
+      "title": "Ollama: codestral",
+      "provider": "ollama",
+      "model": "codestral:22b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
@@ -34,6 +46,12 @@
       "region": "eu-central-1"
     },
     {
+      "title": "AWS: claude-3.5-haiku",
+      "provider": "bedrock",
+      "model": "anthropic.claude-3-5-haiku-20241022-v1:0",
+      "region": "eu-central-1"
+    },
+    {
       "title": "Azure: gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
@@ -52,19 +70,20 @@
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
-    },
-    {
-      "title": "Ollama: deepseek-coder-v2",
-      "provider": "ollama",
-      "model": "deepseek-coder-v2:16b",
-      "apiBase": "http://127.0.0.1:11434"
     }
   ],
+  /*
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
     "model": "qwen2.5-coder:7b",
     "apiBase": "http://127.0.0.1:11434"
+  },
+  */
+  "tabAutocompleteModel": {
+    "title": "Codestral",
+    "provider": "mistral",
+    "model": "codestral-latest"
   },
   "tabAutocompleteOptions": {
     "disableInFiles": ["*.md", "*.txt"],
