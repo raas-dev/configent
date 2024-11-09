@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.15](https://github.com/raas-dev/configent/compare/1.113.14...1.113.15) (2024-11-09)
+
+
+### Fixes
+
+* **docker:** Add support for rootful docker ([f1078b3](https://github.com/raas-dev/configent/commit/f1078b3329533c3e16d2cad25efee3759b461251))
+
 ### [1.113.14](https://github.com/raas-dev/configent/compare/1.113.13...1.113.14) (2024-11-09)
 
 
