@@ -8,7 +8,7 @@
 
 # shim for running `nerdctl` in lima VM
 
-: "${NAME:="containerd"}"
+: "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
