@@ -39,18 +39,6 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-  - mode: system
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      command -v docker >/dev/null 2>&1 && exit 0
-      if [ ! -e /etc/systemd/system/docker.socket.d/override.conf ]; then
-        mkdir -p /etc/systemd/system/docker.socket.d
-        # Alternatively we could just add the user to the "docker" group, but that requires restarting the user session
-        cat <<-EOF >/etc/systemd/system/docker.socket.d/override.conf
-        [Socket]
-        SocketUser={{.User}}
-      EOF
   - mode: user
     script: |
       #!/bin/sh
