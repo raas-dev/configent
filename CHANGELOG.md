@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.114.0](https://github.com/raas-dev/configent/compare/1.113.17...1.114.0) (2024-11-09)
+
+
+### Features
+
+* **lima:** Fix docker, nerdctl and podman VM names ([4d2506b](https://github.com/raas-dev/configent/commit/4d2506b833e942962b80143ba5bb4bf912eac64f))
+* **lima:** Use rootful docker in Ubuntu ([e60ef75](https://github.com/raas-dev/configent/commit/e60ef75ad6e8758a031b79c6bbfe2b02cab73894))
+
 ### [1.113.17](https://github.com/raas-dev/configent/compare/1.113.16...1.113.17) (2024-11-09)
 
 
