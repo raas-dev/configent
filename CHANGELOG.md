@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.17](https://github.com/raas-dev/configent/compare/1.113.16...1.113.17) (2024-11-09)
+
+
+### Fixes
+
+* **docker:** Remove using docker group ([6ef99ac](https://github.com/raas-dev/configent/commit/6ef99acd6d542904a18a337851c6339e484f6c74))
+
 ### [1.113.16](https://github.com/raas-dev/configent/compare/1.113.15...1.113.16) (2024-11-09)
 
 
