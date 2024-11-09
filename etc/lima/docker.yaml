@@ -73,6 +73,10 @@ probes:
 hostResolver:
   enabled: false
 
+dns:
+- 1.1.1.1
+- 1.0.0.1
+
 portForwards:
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
