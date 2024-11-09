@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.1](https://github.com/raas-dev/configent/compare/1.114.0...1.114.1) (2024-11-09)
+
+
+### Fixes
+
+* **lima:** Update debian image ([9ce05fe](https://github.com/raas-dev/configent/commit/9ce05fe525fb29a55849225945605320566a20b6))
+* **lima:** Use Ubuntu LTS ([0aea74d](https://github.com/raas-dev/configent/commit/0aea74d2c3a6bd3418b68d7e4ccfd3d05bc17445))
+
 ## [1.114.0](https://github.com/raas-dev/configent/compare/1.113.17...1.114.0) (2024-11-09)
 
 
