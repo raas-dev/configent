@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.2](https://github.com/raas-dev/configent/compare/1.114.1...1.114.2) (2024-11-09)
+
+
+### Fixes
+
+* **lima:** Rename Debian containerd VM to default ([3331e7f](https://github.com/raas-dev/configent/commit/3331e7ff71f392d6fc8983469a294d435c850987))
+
 ### [1.114.1](https://github.com/raas-dev/configent/compare/1.114.0...1.114.1) (2024-11-09)
 
 
