@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.14](https://github.com/raas-dev/configent/compare/1.113.13...1.113.14) (2024-11-09)
+
+
+### Fixes
+
+* **continue:** Add codestral as autocomplete LLM ([e9044bd](https://github.com/raas-dev/configent/commit/e9044bd4cad304e5bdd5ba53c7dde85f51b7bac6))
+* **docker:** Fix DNS servers for docker ([9268337](https://github.com/raas-dev/configent/commit/9268337bff2125c9ac773579e92662265a2b61c9))
+* **lima:** Fix limactl start arguments ([ba89c62](https://github.com/raas-dev/configent/commit/ba89c626f0ddc200251b5699788e91c3848edd07))
+* **lima:** Update ubuntu images ([b9d9350](https://github.com/raas-dev/configent/commit/b9d935051789e27d7b5c2afdc3f79250fc06cfe6))
+
 ### [1.113.13](https://github.com/raas-dev/configent/compare/1.113.12...1.113.13) (2024-11-05)
 
 
