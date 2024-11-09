@@ -54,7 +54,7 @@ provision:
   - mode: user
     script: |
       #!/bin/sh
-      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | ROOTFUL_DOCKER=true sh &
 
 probes:
   - script: |

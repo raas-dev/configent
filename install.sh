@@ -23,6 +23,7 @@ GIT_REF="${GIT_REF:-1.113.14}"
 export CASKS="${CASKS:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
 export SNAPS="${SNAPS:-false}"
+export ROOTFUL_DOCKER="${ROOTFUL_DOCKER:-false}"
 
 ################################################################################
 
