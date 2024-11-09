@@ -16,8 +16,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
-      limactl start "$VM"
+    limactl start --name "$VM" "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
+      limactl start --name "$VM"
   fi
   # pass arguments to this exact same script on the guest VM
   limactl shell "$VM" ~/configent/bin/nerdctl "$@"

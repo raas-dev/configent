@@ -57,8 +57,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   if ! limactl shell "$VM" true >/dev/null 2>&1; then
-    limactl start "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
-      limactl start "$VM"
+    limactl start --name "$VM" "$HOME/.config/configent/lima/$VM.yaml" --tty=false ||
+      limactl start --name "$VM"
   fi
   # try homebrew installed docker CLI first on macOS
   if [ -x "/opt/homebrew/bin/docker" ]; then
