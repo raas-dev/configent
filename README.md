@@ -211,7 +211,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs on QEMU.
 
 The aforementioned shims create and start the necessary virtual machines:
-VM 'ubuntu' for Docker, VM 'debian' for ontainerd and VM 'fedora for Podman.
+Ubuntu for Docker, Debian for containerd and Fedora for Podman.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
