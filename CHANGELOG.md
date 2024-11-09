@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.113.16](https://github.com/raas-dev/configent/compare/1.113.15...1.113.16) (2024-11-09)
+
+
+### Fixes
+
+* **docker:** Add no-restart solution for sudo docker ([d78b7c4](https://github.com/raas-dev/configent/commit/d78b7c471ad03a03d3d855bbd0f50f91af5a60ce))
+
 ### [1.113.15](https://github.com/raas-dev/configent/compare/1.113.14...1.113.15) (2024-11-09)
 
 
