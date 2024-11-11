@@ -148,7 +148,7 @@ command -v hwatch >/dev/null && alias watch='hwatch --differences word'
 
 alias vm4ubuntu="limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false"
 alias vm4debian="limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false ;
-  export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
+  export KUBECONFIG=~/.lima/default/kubeconfig.yaml ;
   kubectl get nodes"
 
 alias vm4fedora="limactl start --name fedora ~/.config/configent/lima/fedora.yaml --tty=false"
