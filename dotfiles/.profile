@@ -247,7 +247,7 @@ fi
 ### docker #####################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  export DOCKER_HOST="unix://$HOME/.lima/ubuntu/sock/docker.sock"
+  export DOCKER_HOST="unix://$HOME/.lima/docker/sock/docker.sock"
 elif [ "$(uname -s)" = 'Linux' ]; then
   if [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
     export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
