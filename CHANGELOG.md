@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.3](https://github.com/raas-dev/configent/compare/1.114.2...1.114.3) (2024-11-11)
+
+
+### Fixes
+
+* **macos:** Fix Lima VM name in DOCKER_HOST ([09451f4](https://github.com/raas-dev/configent/commit/09451f421a6ec17d316fd87715eef2edf2acf273))
+* **macos:** Fix Lima VM name in KUBECONFIG ([651bcec](https://github.com/raas-dev/configent/commit/651bcecd033a521f96f6368909258d2b3b9d5266))
+* **macos:** Install clang via brew and add to PATH ([c795b16](https://github.com/raas-dev/configent/commit/c795b16904820dc7b91680c581fcab4b8900378e))
+
 ### [1.114.2](https://github.com/raas-dev/configent/compare/1.114.1...1.114.2) (2024-11-09)
 
 
