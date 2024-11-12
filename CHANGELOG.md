@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.4](https://github.com/raas-dev/configent/compare/1.114.3...1.114.4) (2024-11-12)
+
+
+### Fixes
+
+* **aichat:** Update llama3.1 to llama3.2-vision ([652a256](https://github.com/raas-dev/configent/commit/652a2561e2de213b5e8091da62bca988e158c71b))
+* **aliases:** Add repomix via npx ([54ab1ae](https://github.com/raas-dev/configent/commit/54ab1ae3d69cc9c05ccd7268902f6cb87cb01e54))
+* **continue:** Add more context providers ([0734901](https://github.com/raas-dev/configent/commit/0734901f13d9693c52ae218a9c025b1a326ebcb3))
+* **continue:** Use qwen2.5-coder:14b via ollama ([ac2e295](https://github.com/raas-dev/configent/commit/ac2e2952a541579027179e152311ae26c2151e0e))
+
 ### [1.114.3](https://github.com/raas-dev/configent/compare/1.114.2...1.114.3) (2024-11-11)
 
 
