@@ -8,9 +8,9 @@
       "apiBase": "http://127.0.0.1:11434"
     },
     {
-      "title": "Ollama: codestral",
+      "title": "Ollama: qwen2.5-coder",
       "provider": "ollama",
-      "model": "codestral:22b",
+      "model": "qwen2.5-coder:14b",
       "apiBase": "http://127.0.0.1:11434"
     },
     {
@@ -76,7 +76,7 @@
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "qwen2.5-coder:7b",
+    "model": "qwen2.5-coder:14b",
     "apiBase": "http://127.0.0.1:11434"
   },
   */
