@@ -40,13 +40,9 @@ clients:
     name: ollama
     api_base: http://127.0.0.1:11434/v1
     models:
-      - name: llama3.1:8b
+      - name: llama3.2-vision:11b
         max_input_tokens: 128000
         supports_function_calling: true
-      - name: jina/jina-embeddings-v2-base-en
-        type: embedding
-        default_chunk_size: 1500
-        max_batch_size: 100
       - name: nomic-embed-text
         type: embedding
         default_chunk_size: 1500
