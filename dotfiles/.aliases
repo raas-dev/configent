@@ -326,6 +326,9 @@ alias projen='npx -y projen'
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
 
+# Packs entire repository into a single, AI-friendly file
+alias repomix='npx -y repomix'
+
 ### Functions: AI ##############################################################
 
 # add to ~/.rclocal:
