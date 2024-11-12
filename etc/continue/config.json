@@ -163,6 +163,9 @@
       "name": "open"
     },
     {
+      "name": "web"
+    },
+    {
       "name": "codebase"
     },
     {
@@ -178,18 +181,21 @@
       "name": "tree"
     },
     {
-      "name": "locals",
-      "params": {
-        "stackDepth": 3
-      }
-    },
-    { "name": "os" },
-    {
       "name": "google",
       "params": {
         "serperApiKey": "[SERPER_API_KEY]"
       }
-    }
+    },
+    {
+      "name": "debugger",
+      "params": {
+        "stackDepth": 3
+      }
+    },
+    {
+      "name": "repo-map"
+    },
+    { "name": "os" }
   ],
   "experimental": {
     "quickActions": [
