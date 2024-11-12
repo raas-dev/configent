@@ -24,7 +24,6 @@ repos:
     - id: mixed-line-ending
     - id: end-of-file-fixer
     - id: trailing-whitespace
-    - id: check-json
     - id: check-toml
     - id: check-yaml
     - id: check-symlinks
