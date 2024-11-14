@@ -1,7 +1,7 @@
 # languages
 rust 1.77.2
 golang 1.22.2
-nodejs 20.18.0
+nodejs 22.11.0
 python 3.12.7
 dotnet 8.0.204
 bun 1.1.32 # zig
