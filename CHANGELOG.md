@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.5](https://github.com/raas-dev/configent/compare/1.114.4...1.114.5) (2024-11-14)
+
+
+### Fixes
+
+* **aider:** Update config ([a4c6836](https://github.com/raas-dev/configent/commit/a4c68363f84c5e912f333dce43dc761a7ab40f5d))
+* **nodejs:** Update Node.js LTS version ([39b5727](https://github.com/raas-dev/configent/commit/39b57277aae4f1d25c7de823c0223ee50b590012))
+* **vscode:** Add esbuild-problem-matchers extension ([f8814d1](https://github.com/raas-dev/configent/commit/f8814d18acbaafabe1fd8f9fd850bc4d738cd797))
+
 ### [1.114.4](https://github.com/raas-dev/configent/compare/1.114.3...1.114.4) (2024-11-12)
 
 
