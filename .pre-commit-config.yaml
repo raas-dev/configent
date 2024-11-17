@@ -24,6 +24,8 @@ repos:
     - id: mixed-line-ending
     - id: end-of-file-fixer
     - id: trailing-whitespace
+    - id: check-json
+      files: ^(?!etc\/continue\/config\.json$).*
     - id: check-toml
     - id: check-yaml
     - id: check-symlinks
