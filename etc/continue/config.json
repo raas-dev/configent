@@ -78,19 +78,18 @@
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     }
   ],
-  /*
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "qwen2.5-coder:14b",
+    "model": "qwen2.5-coder:7b-base",
     "apiBase": "http://127.0.0.1:11434"
   },
-  */
+  /*
   "tabAutocompleteModel": {
     "title": "Codestral",
     "provider": "mistral",
     "model": "codestral-latest"
-  },
+  },*/
   "tabAutocompleteOptions": {
     "disableInFiles": ["*.md", "*.txt"],
     "multilineCompletions": "always"
