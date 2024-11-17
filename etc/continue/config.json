@@ -61,20 +61,20 @@
       "title": "Azure: gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
-      "engine": "gpt-4o",
       "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
+      "deployment": "gpt-4o",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     },
     {
       "title": "Azure: gpt-4o-mini",
       "provider": "openai",
       "model": "gpt-4o-mini",
-      "engine": "gpt-4o-mini",
       "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
+      "deployment": "gpt-4o-mini",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     }
   ],
@@ -84,12 +84,6 @@
     "model": "qwen2.5-coder:7b-base",
     "apiBase": "http://127.0.0.1:11434"
   },
-  /*
-  "tabAutocompleteModel": {
-    "title": "Codestral",
-    "provider": "mistral",
-    "model": "codestral-latest"
-  },*/
   "tabAutocompleteOptions": {
     "disableInFiles": ["*.md", "*.txt"],
     "multilineCompletions": "always"
