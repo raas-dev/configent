@@ -12,3 +12,4 @@ Take a deep breath and work on the problem step-by-step to be sure we have the r
 
 - Respond in no more than a few paragraphs starting from the most important
 - Answer in markdown
+- No yapping
