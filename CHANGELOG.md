@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.6](https://github.com/raas-dev/configent/compare/1.114.5...1.114.6) (2024-11-21)
+
+
+### Fixes
+
+* **continue:** Add lama3.2-vision ([c322de3](https://github.com/raas-dev/configent/commit/c322de3785a54cb4dd098482d2b5c7d275877577))
+* **continue:** Fix Azure OpenAI deployment name ([4116f89](https://github.com/raas-dev/configent/commit/4116f89b9d07fe9cff8dfee65c0f4017ab6b8bf3))
+* **continue:** Use qwen2.5 base model in autocomplete ([6f787b0](https://github.com/raas-dev/configent/commit/6f787b09fa2a5ba7cd7dc9810afe642120289de1))
+* **vscode:** Remove cspell, too much noise ([ffe3491](https://github.com/raas-dev/configent/commit/ffe34911e5756f353fc89b10827a8fdae674808a))
+
 ### [1.114.5](https://github.com/raas-dev/configent/compare/1.114.4...1.114.5) (2024-11-14)
 
 
