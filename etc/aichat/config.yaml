@@ -35,7 +35,7 @@ right_prompt: "{color.purple}{?session {?consume_tokens {consume_tokens}({consum
 clients:
   - type: openai
   - type: claude
-  - type: cohere
+  - type: gemini
   - type: openai-compatible
     name: ollama
     api_base: http://127.0.0.1:11434/v1
