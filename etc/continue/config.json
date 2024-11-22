@@ -87,9 +87,7 @@
     "multilineCompletions": "always"
   },
   "embeddingsProvider": {
-    "provider": "ollama",
-    "model": "nomic-embed-text:latest",
-    "apiBase": "http://127.0.0.1:11434"
+    "provider": "transformers.js"
   },
   "reranker": {
     "name": "llm",
