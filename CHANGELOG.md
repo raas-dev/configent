@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.115.0](https://github.com/raas-dev/configent/compare/1.114.6...1.115.0) (2024-11-24)
+
+
+### Features
+
+* **continue:** Add support for Gemini ([78322f9](https://github.com/raas-dev/configent/commit/78322f92051cb3fbe2e8fea75861515d9b7c944c))
+
+
+### Fixes
+
+* **aichat:** Add gemini, remove cohere ([d545264](https://github.com/raas-dev/configent/commit/d545264b5a6e60a66fe324f0af07f9a45b3db0ba))
+* **aider:** Add autotest ([d8d78ea](https://github.com/raas-dev/configent/commit/d8d78ea5b2db81eb36310101c3d192128df139a3))
+* **continue:** Remove Haiku 3.5 from model options ([55fb886](https://github.com/raas-dev/configent/commit/55fb886a6174243d1197ccdb8b461641781b3413))
+* **continue:** Use built-in embedding model ([aaa516f](https://github.com/raas-dev/configent/commit/aaa516f62e0abc52b117cb2d3ac17e269217224f))
+
 ### [1.114.6](https://github.com/raas-dev/configent/compare/1.114.5...1.114.6) (2024-11-21)
 
 
