@@ -26,12 +26,6 @@
       "apiKey": "[ANTHROPIC_API_KEY]"
     },
     {
-      "title": "claude-3.5-haiku",
-      "provider": "anthropic",
-      "model": "claude-3-5-haiku-latest",
-      "apiKey": "[ANTHROPIC_API_KEY]"
-    },
-    {
       "title": "gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
@@ -47,12 +41,6 @@
       "title": "AWS: claude-3.5-sonnet",
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
-      "region": "eu-central-1"
-    },
-    {
-      "title": "AWS: claude-3.5-haiku",
-      "provider": "bedrock",
-      "model": "anthropic.claude-3-5-haiku-20241022-v1:0",
       "region": "eu-central-1"
     },
     {
