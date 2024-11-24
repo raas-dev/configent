@@ -263,7 +263,7 @@ attribute-committer: false
 #test-cmd: xxx
 
 ## Enable/disable automatic testing after changes (default: False)
-#auto-test: false
+auto-test: true
 
 ## Run tests and fix problems found
 #test: false
