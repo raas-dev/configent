@@ -12,8 +12,12 @@ export function modifyConfig(config: Config): Config {
       anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY;
     });
 
-  // AWS Bedrock
-  // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
+  // Google
+  config.models
+  .filter((model) => model.provider === "gemini")
+  .forEach((googleModel) => {
+    googleModel.apiKey = process.env.GEMINI_API_KEY;
+  });
 
   // OpenAI
   config.models
@@ -21,6 +25,9 @@ export function modifyConfig(config: Config): Config {
     .forEach((openaiModel) => {
       openaiModel.apiKey = process.env.OPENAI_API_KEY;
     });
+
+  // AWS Bedrock
+  // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
 
   // Azure OpenAI
   config.models
