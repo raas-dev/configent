@@ -327,7 +327,7 @@ analytics-disable: true
 #apply-clipboard-edits: false
 
 ## Always say yes to every confirmation
-yes-always: true
+#yes-always: true
 
 ## Enable verbose output
 #verbose: false
