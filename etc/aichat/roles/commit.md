@@ -58,7 +58,7 @@ as descriptive and as concise as possible headline.
 <body>
 For body, you MUST STRICTLY FOLLOW all of these rules:
 - First paragraph summarizes the effect of changes
-- Second paragraph includes the reasoning why changes were made
+- Second paragraph is the reason why the changes were made
 - The first and the second paragraphs are at most a few sentences
 - Never list individual changes in body
 </body>
