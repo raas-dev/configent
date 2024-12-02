@@ -94,9 +94,6 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.chat.terminalShowHoverHint": false,
-  "cursor.cpp.disabledLanguages": [
-    "markdown"
-  ],
   "dateTime.showSeconds": true,
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
