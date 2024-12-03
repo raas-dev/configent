@@ -115,7 +115,7 @@ alias c='ai'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
-alias g='gitui'
+alias g='git'
 alias h='xh --verify=no'
 alias i='glances'
 # j is for zoxide
