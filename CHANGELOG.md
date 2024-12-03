@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.115.1](https://github.com/raas-dev/configent/compare/1.115.0...1.115.1) (2024-12-03)
+
+
+### Fixes
+
+* **aliases:** Alias g to git, not gitui ([eb98c95](https://github.com/raas-dev/configent/commit/eb98c95626430e81401968b28a5b9a05c65792b5))
+
 ## [1.115.0](https://github.com/raas-dev/configent/compare/1.114.6...1.115.0) (2024-11-24)
 
 
