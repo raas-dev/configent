@@ -10,6 +10,7 @@
 !lessfilter
 !lesspipe.sh
 !nerdctl
+!pnpm
 !podman
 !rsync_tmbackup.sh
 !tm

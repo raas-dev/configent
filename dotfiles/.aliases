@@ -317,9 +317,6 @@ alias depcheck='npx -y depcheck'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
-# Yet another package manager
-alias pnpm='npx -y pnpm'
-
 # Project generator (requires bin/yarn shim)
 alias projen='npx -y projen'
 
