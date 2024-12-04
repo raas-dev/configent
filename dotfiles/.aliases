@@ -338,8 +338,7 @@ ai() {
 }
 
 ai_agent() {
-  local project="${PWD##*/}"
-  gptme --system short --name "$(date +"%Y-%m-%d"):$project" "$@"
+  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/fabric-agent.gpt"
 }
 
 ### Functions: Docker ##########################################################
