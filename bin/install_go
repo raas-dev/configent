@@ -41,6 +41,9 @@ go install github.com/itchyny/gojq/cmd/gojq@latest
 # https://pkg.go.dev/golang.org/x/tools/gopls
 go install golang.org/x/tools/gopls@latest
 
+# https://github.com/gptscript-ai/gptscript
+go install github.com/gptscript-ai/gptscript@latest
+
 # https://github.com/mvdan/sh#shfmt
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
