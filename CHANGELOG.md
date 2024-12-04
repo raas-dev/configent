@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.116.0](https://github.com/raas-dev/configent/compare/1.115.1...1.116.0) (2024-12-04)
+
+
+### Features
+
+* **ai:** Add fabric-agent, use via alias _ ([8f79c6f](https://github.com/raas-dev/configent/commit/8f79c6f90fb363f237131015c742a2378e093b94))
+
+
+### Fixes
+
+* **aliases:** Skip pnpm for up and dup ([72ed113](https://github.com/raas-dev/configent/commit/72ed1136f0bf055f20d2d808be796415d8357ac7))
+* **go:** Add gptscript ([c710578](https://github.com/raas-dev/configent/commit/c710578380370a2db159b710a4e66caa8ae7f09e))
+* **go:** Update go to 1.23 from 1.22 ([572ffd0](https://github.com/raas-dev/configent/commit/572ffd0392d232654b7c40befec3d423a1a28c82))
+* **pnpm:** Add shim for non-interactive shells ([8ce98a3](https://github.com/raas-dev/configent/commit/8ce98a391db6700cc0b73919535d43f0355a0015))
+
 ### [1.115.1](https://github.com/raas-dev/configent/compare/1.115.0...1.115.1) (2024-12-03)
 
 
