@@ -338,7 +338,7 @@ ai() {
 }
 
 ai_agent() {
-  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/fabric-agent.gpt"
+  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/agent.gpt"
 }
 
 ### Functions: Docker ##########################################################

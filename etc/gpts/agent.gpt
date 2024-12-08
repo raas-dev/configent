@@ -1,4 +1,4 @@
-Name: Fabric CLI Assistant
+Name: Agent
 Description: Help uset choose correct fabric prompts, execute them and provide output
 Type: Tool
 Context: github.com/gptscript-ai/context/cli, fabric
