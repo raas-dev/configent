@@ -76,6 +76,7 @@ elif command -v code >/dev/null; then
   alias code='code --reuse-window --add'
 fi
 alias cursor='cursor --reuse-window --add'
+alias windsurf='windsurf --reuse-window --add'
 
 alias grep='grep --color'
 alias egrep='egrep --color'
@@ -518,6 +519,22 @@ brewclear() {
   esac
 }
 
+# Remove all VS Code extensions
+codeclear() {
+  printf "Are you sure to remove all VS Code extensions [y\N] > "
+  read -r choice
+  case "$choice" in
+  [yY])
+    code --list-extensions | while read -r extension; do
+      code --force --uninstall-extension "$extension"
+    done
+    ;;
+  *)
+    printf "Aborted.\n"
+    ;;
+  esac
+}
+
 # Remove all VSCodium extensions
 codiumclear() {
   printf "Are you sure to remove all VSCodium extensions [y\N] > "
@@ -550,14 +567,14 @@ cursorclear() {
   esac
 }
 
-# Remove all VSCode extensions
-codeclear() {
-  printf "Are you sure to remove all VSCode extensions [y\N] > "
+# Remove all Windsurf extensions
+windsurfclear() {
+  printf "Are you sure to remove all Windsurf extensions [y\N] > "
   read -r choice
   case "$choice" in
   [yY])
-    code --list-extensions | while read -r extension; do
-      code --force --uninstall-extension "$extension"
+    windsurf --list-extensions | while read -r extension; do
+      windsurf --force --uninstall-extension "$extension"
     done
     ;;
   *)

@@ -156,7 +156,7 @@ as it likely has newer versions than the ones gotten from the distro's repo.
 ### setup_vscode / setup_vscodium
 
 [VSCodium](https://vscodium.com/) is the default editor on Linux distros and
-[VSCode](https://code.visualstudio.com/) is the default on macOS.
+[VS Code](https://code.visualstudio.com/) is the default on macOS.
 
 The script symlinks `vscode/` to `<os_specific_path>/User`. Existing `User`
 directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
@@ -164,13 +164,13 @@ directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
 If editor is present, its extensions (`vscode/extensions.list`) are installed
 using the command-line tool of the editor.
 
-To update the list after adding or removing extensions in VSCode/VSCodium,
+To update the list after adding or removing extensions in VS Code-like editor,
 run `vscode/create_extensions_list`.
 
 ### setup_continue
 
 The script copies the
-[VSCode/VSCodium Continue extension](https://docs.continue.dev)
+[VS Code/Open VSX Continue extension](https://docs.continue.dev)
 configuration files and installs Node.js packages used by the configuration.
 
 You must export the API keys loaded by `~/.continue/config.ts` in `~/.rclocal`.

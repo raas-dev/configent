@@ -17,8 +17,8 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Symlink configuration ######################################################
 
-user_path="$HOME/Library/Application Support/Cursor/User"
-backup_path="$this_path/.backup/Library/Application Support/Cursor/User"
+user_path="$HOME/Library/Application Support/Windsurf/User"
+backup_path="$this_path/.backup/Library/Application Support/Windsurf/User"
 
 if [ ! -d "$backup_path" ] && [ -d "$user_path" ]; then
   mkdir -p "$backup_path"
@@ -31,8 +31,8 @@ ln -sfnv "$this_path/vscode" "$user_path"
 
 ### Install extensions #########################################################
 
-if command -v cursor >/dev/null; then
+if command -v windsurf >/dev/null; then
   while read -r extension; do
-    cursor --force --install-extension "$extension"
+    windsurf --force --install-extension "$extension"
   done <"$this_path/vscode/extensions.list"
 fi

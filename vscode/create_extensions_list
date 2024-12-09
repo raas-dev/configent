@@ -16,7 +16,9 @@ elif command -v code >/dev/null; then
   code --list-extensions >"$this_path/extensions.list"
 elif command -v cursor >/dev/null; then
   cursor --list-extensions >"$this_path/extensions.list"
+elif command -v windsurf >/dev/null; then
+  windsurf --list-extensions >"$this_path/extensions.list"
 else
-  echo "Error: VSCodium, VSCode or Cursor not found in PATH."
+  echo "Error: VS Code-like editor not found in PATH."
   exit 127
 fi
