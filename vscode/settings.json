@@ -256,6 +256,7 @@
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
   "window.zoomLevel": 1,
+  "windsurf.autocompleteSpeed": "fast",
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
