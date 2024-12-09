@@ -38,6 +38,12 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
+      "title": "gemini-exp-1206",
+      "provider": "gemini",
+      "model": "gemini-exp-1121",
+      "apiKey": "[GEMINI_API_KEY]"
+    },
+    {
       "title": "Gemini-1.5-Flash",
       "provider": "gemini",
       "model": "gemini-1.5-flash-latest",
