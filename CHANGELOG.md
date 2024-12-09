@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.117.0](https://github.com/raas-dev/configent/compare/1.116.0...1.117.0) (2024-12-09)
+
+
+### Features
+
+* **windsurf:** Add support for Windsurf editor ([e2793b4](https://github.com/raas-dev/configent/commit/e2793b4aa9955222d51b32ef0547f90b35cafdbb))
+
+
+### Fixes
+
+* **continue:** Add gemini-exp-1206 model ([bf56db9](https://github.com/raas-dev/configent/commit/bf56db9af18e9dfe97de9cc4d36e68ca0d8ac956))
+* **gptscript:** Rename agent ([7853fb4](https://github.com/raas-dev/configent/commit/7853fb4c0a6ad1b3b62377afb16711eb6c033069))
+
 ## [1.116.0](https://github.com/raas-dev/configent/compare/1.115.1...1.116.0) (2024-12-04)
 
 
