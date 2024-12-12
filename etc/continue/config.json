@@ -38,9 +38,9 @@
       "apiKey": "[GEMINI_API_KEY]"
     },
     {
-      "title": "Gemini-1.5-Flash",
+      "title": "gemini-2.0-flash-exp",
       "provider": "gemini",
-      "model": "gemini-1.5-flash-latest",
+      "model": "gemini-2.0-flash-exp",
       "apiKey": "[GEMINI_API_KEY]"
     },
     {
