@@ -30,14 +30,14 @@ VERY IMPORTANT: Do not invent anything that is not in the changes.
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - fix: Improves or fixes behaviour of existing code without adding new files
 - feat: Introduces a new functionality (such as new files) to the codebase
-- chore: Changes yaml, toml, json or any other input files or lock files
+- chore: Only changing yaml, toml or json configuration or project lock files
 - test: Adds tests or changes tests without changing the system-under-test
 - perf: A code change that is commented to improve performance or speed
 - refactor: A code change that neither fixes nor changes any functionality
-- docs: Changes to well known documentation files or changes in code comments
-- ci: Adds or changes CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
-- build: Changes shell scripts, pre-commit hooks or non-lock project files
-- style: Changes formatting of text/code without changing any functionality
+- docs: Only changing plain text project documentation files or code comments
+- ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
+- build: Only changing project metadata files or pre-commit hooks
+- style: Only formatting of text/code like reindenting, converting tabs
 </type>
 
 <scope>
