@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.117.1](https://github.com/raas-dev/configent/compare/1.117.0...1.117.1) (2024-12-13)
+
+
+### Fixes
+
+* **continue:** Add Gemini 2.0 Flash (exp) ([fda6b96](https://github.com/raas-dev/configent/commit/fda6b965a253b739bbf9d4292365ae87ae039a6e))
+* **continue:** Double maxPromptTokens ([3666657](https://github.com/raas-dev/configent/commit/366665769c3c723773c60679acc578c94d2f0086))
+* **continue:** Remove deepseek LLM support ([0d662c8](https://github.com/raas-dev/configent/commit/0d662c8b94fab187afea2bd97763ce274289498c))
+* **profile:** Export XDG_BIN_HOME on Linux ([8d2346a](https://github.com/raas-dev/configent/commit/8d2346ac9a297e0283f2d00abb285d510098faa3))
+
 ## [1.117.0](https://github.com/raas-dev/configent/compare/1.116.0...1.117.0) (2024-12-09)
 
 
