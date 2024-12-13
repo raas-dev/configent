@@ -231,6 +231,7 @@ export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
 if [ "$(uname -s)" = 'Linux' ]; then
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
+  export XDG_BIN_HOME="$HOME/.local/bin"
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_STATE_HOME="$HOME/.local/state"
 
