@@ -27,7 +27,7 @@
   re = diff --name-only --diff-filter=U
   rea = rebase --abort
   rec = !"git add --all && git rebase --continue"
-  rem = reset --mixed HEAD
+  rem = reset --mixed
   rip = rebase --interactive @{upstream}
   s = status --short
   st = status --branch --show-stash
