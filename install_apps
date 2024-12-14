@@ -95,7 +95,7 @@ fi
 #"$bin_path/install_appsec"
 
 # install GitHub CLI
-#"$bin_path/install_github"
+"$bin_path/install_github"
 
 # copy ui/fonts/** to user's fonts path
 "$bin_path/install_fonts"
