@@ -14,7 +14,7 @@
   ca = !"git add --all && git commit"
   cam = !"git add --all && git commit --amend --no-edit"
   co = checkout
-  discard = reset --hard HEAD
+  discard = reset --hard
   f = fetch --all --tags
   i = pull --rebase --recurse-submodules
   ig = ls-files --others --ignored --exclude-standard --directory
