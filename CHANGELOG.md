@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.117.2](https://github.com/raas-dev/configent/compare/1.117.1...1.117.2) (2024-12-15)
+
+
+### Fixes
+
+* **git:** Remove unncessary HEAD from git discard ([456fd86](https://github.com/raas-dev/configent/commit/456fd8652bb84f69b4f86a24550850896ee2484a))
+* **git:** Remove unnecessary HEAD from git rem ([f1eec0f](https://github.com/raas-dev/configent/commit/f1eec0fb9cd81b9f91b2b78ca0f7f02d2f964477))
+* **install_apps:** Enable GitHub CLI installation ([1640c3b](https://github.com/raas-dev/configent/commit/1640c3b7e7c67e6c4a86f729ea77f7de9abaf00b))
+
 ### [1.117.1](https://github.com/raas-dev/configent/compare/1.117.0...1.117.1) (2024-12-13)
 
 
