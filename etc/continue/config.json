@@ -86,7 +86,7 @@
   "reranker": {
     "name": "llm",
     "params": {
-      "modelTitle": "gpt-4o-mini"
+      "modelTitle": "gemini-2.0-flash-exp"
     }
   },
   "slashCommands": [
