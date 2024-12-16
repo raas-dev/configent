@@ -143,7 +143,7 @@ export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 export RICH_TRACEBACKS=true
 export RICH_SHOW_LOCALS=true
 
-# Add pipx installed binaries to PATH
+# Add uv/pipx installed binaries to PATH
 path_prepend "$HOME/.local/bin"
 
 ### Starship cross-shell prompt ################################################

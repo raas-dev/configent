@@ -32,16 +32,15 @@ sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["p
 ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
   "$sitepackages_path/sitecustomize.py"
 
-# Python applications in isolated environments (https://pipx.pypa.io/stable/)
-pip install --upgrade pipx
+# Python applications in isolated environments (https://github.com/astral-sh/uv)
+pip install --upgrade uv
 
 ### dedicated virtualenvs ######################################################
 
-pipx install 'aider-chat[browser]'
-pipx install pdm
-pipx install poetry
-pipx install pre-commit
-pipx install ptpython
-pipx install semgrep
-pipx install tldr
-pipx install uv
+uv tool install 'aider-chat[browser]'
+uv tool install pdm
+uv tool install poetry
+uv tool install pre-commit
+uv tool install ptpython
+uv tool install semgrep
+uv tool install tldr
