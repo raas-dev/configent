@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.118.0](https://github.com/raas-dev/configent/compare/1.117.2...1.118.0) (2024-12-16)
+
+
+### Features
+
+* **python:** Use uv over pipx ([9fc71c0](https://github.com/raas-dev/configent/commit/9fc71c015b73e86c3907714e4a8418d32cc91366))
+
+
+### Fixes
+
+* **continue:** Change reranker model to gemini ([34948c7](https://github.com/raas-dev/configent/commit/34948c7655f2d5c1e05699e3b473888f7cf6ca63))
+
 ### [1.117.2](https://github.com/raas-dev/configent/compare/1.117.1...1.117.2) (2024-12-15)
 
 
