@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.119.0](https://github.com/raas-dev/configent/compare/1.118.0...1.119.0) (2024-12-18)
+
+
+### Features
+
+* **gpt:** Add assistant and developer agent ([cf193b6](https://github.com/raas-dev/configent/commit/cf193b69eca7a4e8eabe37d41ac772d774960392))
+* **jq:** Add vanilla jq for maximum compatibility ([0ed975b](https://github.com/raas-dev/configent/commit/0ed975b123edd1fa7045aa25d2fb62485e9885b9))
+
+
+### Fixes
+
+* **continue:** Use qwen2.5-coder 3b autocomplete ([42f8b05](https://github.com/raas-dev/configent/commit/42f8b0533d8257838f493c49fff1745028a66bae))
+
 ## [1.118.0](https://github.com/raas-dev/configent/compare/1.117.2...1.118.0) (2024-12-16)
 
 
