@@ -1,0 +1,28 @@
+Name: Developer
+Description: Help user to choose correct prompt for software development task, execute it and provide its output
+Type: Tool
+Context: github.com/gptscript-ai/context/cli, aichat
+Tools: sys.prompt, sys.read, sys.stat, sys.find
+Chat: true
+
+Ask clarifying questions about the user' task if required, provide the best possible role for the user to choose from, execute the selected role, and provide the output to the user.
+
+Always use aichat roles for the user to choose from.
+
+IMPORTANT: Please provide the correct aichat roles for the user to choose from.
+
+---
+Name: aichat
+
+#!/usr/bin/env bash
+
+echo "This is help text for the aichat CLI:"
+aichat --help
+
+echo "This is the list of all the roles that are available for aichat:"
+AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles
+
+echo "This document helps you to choose the correct role for user's task:"
+cat "$HOME/.config/configent/prompts/developer.md"
+
+echo "IMPORTANT: Remember that you need to pipe user's request to the aichat role to make it work. Example: echo 'user input' | AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role quality_risk_assessment or if reading from a file: cat /path/to/file | AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role quality_risk_assessment"

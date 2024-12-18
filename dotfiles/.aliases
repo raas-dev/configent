@@ -139,7 +139,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='ai_agent'
+alias _='ai_assistant'
 
 ### watch ######################################################################
 
@@ -338,8 +338,12 @@ ai() {
   aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
 }
 
-ai_agent() {
-  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/agent.gpt"
+ai_assistant() {
+  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/assistant.gpt"
+}
+
+ai_developer() {
+  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/developer.gpt"
 }
 
 ### Functions: Docker ##########################################################
