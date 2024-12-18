@@ -6,7 +6,6 @@
 !docker
 !docker-compose
 !install_*
-!jq
 !lessfilter
 !lesspipe.sh
 !nerdctl

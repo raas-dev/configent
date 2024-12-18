@@ -67,6 +67,9 @@ fi
 #"$bin_path/install_java"
 #"$bin_path/install_haskell"
 
+# install jq
+"$bin_path/install_jq"
+
 # install Vim plugins
 "$bin_path/install_vim"
 

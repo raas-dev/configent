@@ -35,9 +35,6 @@ go install github.com/go-enry/enry@latest
 # https://github.com/charmbracelet/glow
 go install github.com/charmbracelet/glow@latest
 
-# https://github.com/itchyny/gojq
-go install github.com/itchyny/gojq/cmd/gojq@latest
-
 # https://pkg.go.dev/golang.org/x/tools/gopls
 go install golang.org/x/tools/gopls@latest
 
