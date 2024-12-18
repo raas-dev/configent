@@ -9,17 +9,16 @@ List available `aichat` roles:
     AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" \
       aichat --list-roles
 
-Passing user input to role (`ROLE_NAME`):
+Passing user input to role:
 
     echo 'user input' | \
       AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" \
-        aichat --role=<ROLE_NAME>
+        aichat --role=role_name
 
-Or passing file to role (`ROLE_NAME`):
+Or passing input file to role:
 
-    cat '/path/to/file' | \
-      AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" \
-        aichat --role=<ROLE_NAME>
+    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" \
+      aichat --role=role_name < /path/to/file
 
 ## Available roles
 

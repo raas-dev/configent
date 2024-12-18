@@ -25,4 +25,4 @@ AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles
 echo "This document helps you to choose the correct role for user's task:"
 cat "$HOME/.config/configent/prompts/developer.md"
 
-echo "IMPORTANT: Remember that you need to pipe user's request to the aichat role to make it work. Example: echo 'user input' | AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role quality_risk_assessment or if reading from a file: cat /path/to/file | AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role quality_risk_assessment"
+echo "IMPORTANT: Remember that you need to pipe user's request to the aichat role to make it work. Example: echo 'user input' | AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role=quality_risk_assessment or if reading from a file: AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --role=quality_risk_assessment < /path/to/file "

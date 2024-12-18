@@ -9,19 +9,15 @@ List available `aichat` roles:
     AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
       aichat --list-roles
 
-Passing source file to analyze (`SOURCE_FILE_PATH`) to role (`ROLE_NAME`):
+Passing source file to analyze to role:
 
-    cat <SOURCE_FILE_PATH> | \
-      AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
-        aichat --role=<ROLE_NAME>
+    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
+      aichat --role=role_name < /path/to/file
 
-### Examples
+For example, to identify and analyze errors in snake game's main module:
 
-To identify and analyze errors and inconsistencies in snake game's main module:
-
-    cat "$HOME/Downloads/snake/main.py" | \
-      AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
-        aichat --role=quality_error_analysis
+    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
+      aichat --role=quality_error_analysis < "$HOME/Downloads/snake/main.py"
 
 ## Available roles
 
