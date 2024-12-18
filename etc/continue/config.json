@@ -73,7 +73,7 @@
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "ollama",
-    "model": "qwen2.5-coder:7b-base",
+    "model": "qwen2.5-coder:3b",
     "apiBase": "http://127.0.0.1:11434"
   },
   "tabAutocompleteOptions": {
