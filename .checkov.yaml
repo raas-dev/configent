@@ -7,6 +7,7 @@ framework:
 skip-path:
   - .git
   - .backup
+  - etc/prompts/assistant/write_nuclei_template_rule.md
   - vscode/globalStorage
   - vscode/History
   - vscode/sync
