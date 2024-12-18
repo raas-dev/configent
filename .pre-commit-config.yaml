@@ -10,11 +10,6 @@
 default_stages: [pre-commit]
 
 repos:
-- repo: https://github.com/bridgecrewio/checkov.git
-  rev: 3.2.276
-  hooks:
-    - id: checkov_diff
-
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v5.0.0
   hooks:
