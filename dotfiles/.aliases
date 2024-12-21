@@ -266,7 +266,7 @@ venv() {
     sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
-    uv pip install rich # python -m pip install rich
+    uv pip install ptpython rich
     if [ -r "pdm.lock" ] && command -v pdm >/dev/null; then
       pdm install
     elif [ -r "poetry.lock" ] && command -v poetry >/dev/null; then
