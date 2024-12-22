@@ -30,6 +30,8 @@ exiasr.hadolint
 formulahendry.code-runner
 foxundermoon.shell-format
 fregante.ghost-text
+github.copilot
+github.copilot-chat
 github.vscode-github-actions
 golang.go
 grapecity.gc-excelviewer
