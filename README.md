@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc in a container.
 - 95% consistent user experience both on macOS and the beloved Linux distros.
 - There is only one way to manage programming languages and tool versions.
-- Creates workflows for AI Native Development by LLM prompt chaining.
+- Uses LLM tools that support prompt chaining for AI Native Development.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
