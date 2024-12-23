@@ -34,6 +34,7 @@ cargo install cargo-binstall
 ### dotfiles requirements ######################################################
 
 cargo binstall -y aichat
+cargo binstall -y argc
 cargo binstall -y --locked bat && "$CARGO_HOME/bin/bat" cache --build
 cargo binstall -y diskonaut
 cargo binstall -y fd-find
