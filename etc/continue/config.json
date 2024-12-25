@@ -2,16 +2,16 @@
   "allowAnonymousTelemetry": false,
   "models": [
     {
-      "title": "Ollama: llama3.2-vision",
-      "provider": "ollama",
-      "model": "llama3.2-vision:11b",
-      "apiBase": "http://127.0.0.1:11434"
+      "title": "gemini-exp-1206",
+      "provider": "gemini",
+      "model": "gemini-exp-1121",
+      "apiKey": "[GEMINI_API_KEY]"
     },
     {
-      "title": "Ollama: qwen2.5-coder",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:14b",
-      "apiBase": "http://127.0.0.1:11434"
+      "title": "gemini-2.0-flash-exp",
+      "provider": "gemini",
+      "model": "gemini-2.0-flash-exp",
+      "apiKey": "[GEMINI_API_KEY]"
     },
     {
       "title": "claude-3.5-sonnet",
@@ -32,32 +32,22 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
-      "title": "gemini-exp-1206",
-      "provider": "gemini",
-      "model": "gemini-exp-1121",
-      "apiKey": "[GEMINI_API_KEY]"
+      "title": "Ollama: llama3.2-vision",
+      "provider": "ollama",
+      "model": "llama3.2-vision:11b",
+      "apiBase": "http://127.0.0.1:11434"
     },
     {
-      "title": "gemini-2.0-flash-exp",
-      "provider": "gemini",
-      "model": "gemini-2.0-flash-exp",
-      "apiKey": "[GEMINI_API_KEY]"
+      "title": "Ollama: qwen2.5-coder",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:14b",
+      "apiBase": "http://127.0.0.1:11434"
     },
     {
       "title": "AWS: claude-3.5-sonnet",
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
       "region": "eu-central-1"
-    },
-    {
-      "title": "Azure: gpt-4o",
-      "provider": "openai",
-      "model": "gpt-4o",
-      "apiType": "azure",
-      "apiBase": "[AZURE_OPENAI_API_BASE]",
-      "apiVersion": "[AZURE_OPENAI_API_VERSION]",
-      "deployment": "gpt-4o",
-      "apiKey": "[AZURE_OPENAI_API_KEY]"
     },
     {
       "title": "Azure: gpt-4o-mini",
