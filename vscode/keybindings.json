@@ -203,5 +203,27 @@
   {
     "command": "-continue.debugTerminal",
     "key": "shift+cmd+r"
+  },
+  {
+    "command": "workbench.action.toggleAuxiliaryBar",
+    "key": "shift+cmd+b"
+  },
+  {
+    "command": "-workbench.action.toggleAuxiliaryBar",
+    "key": "alt+cmd+b"
+  },
+  {
+    "command": "-kickass-c64.build",
+    "key": "shift+cmd+b",
+    "when": "editorLangId == 'kickassembler'"
+  },
+  {
+    "command": "-workbench.action.tasks.build",
+    "key": "shift+cmd+b",
+    "when": "taskCommandsRegistered"
+  },
+  {
+    "command": "workbench.action.focusAuxiliaryBar",
+    "key": "cmd+[IntlBackslash]"
   }
 ]
