@@ -4,7 +4,7 @@
     {
       "title": "gemini-exp-1206",
       "provider": "gemini",
-      "model": "gemini-exp-1121",
+      "model": "gemini-exp-1206",
       "apiKey": "[GEMINI_API_KEY]"
     },
     {
