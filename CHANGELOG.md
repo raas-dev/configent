@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.120.0](https://github.com/raas-dev/configent/compare/1.119.0...1.120.0) (2024-12-25)
+
+
+### Features
+
+* **ai:** Add GitHub Copilot for autocomplete ([e1bd45b](https://github.com/raas-dev/configent/commit/e1bd45bc49283ff2a0ec5bc7e8976bab36aa4c7e))
+
+
+### Fixes
+
+* **aichat:** Update config for function calling ([5daa3be](https://github.com/raas-dev/configent/commit/5daa3be69b231f8e8b7244c8f889489d5ef39cef))
+* **aichat:** Use gemini-2.0-flash-exp by default ([6d801a1](https://github.com/raas-dev/configent/commit/6d801a1b8acc11dd5b747f50b43a7c52c3155da7))
+* **continue:** Cleanup models ([c39e2cc](https://github.com/raas-dev/configent/commit/c39e2cc5e5c680ed234c8c11178a8ea3e2442d32))
+* **continue:** Fix gemini-exp model name ([52d5605](https://github.com/raas-dev/configent/commit/52d56059c284528b8407bef038044a1bd89dc218))
+* **continue:** Improve quick actions ([92dc793](https://github.com/raas-dev/configent/commit/92dc793f9539ab8ca41c6a9ffb0fdc85f8b9a1cc))
+* **gptscript:** Fix cat abuse ([9a71c58](https://github.com/raas-dev/configent/commit/9a71c5873c0720fa656d1ba97b8cde43ee232a64))
+* **python:** Install ptpython in environments ([167cdce](https://github.com/raas-dev/configent/commit/167cdcee1d6dadf5be08385e8170469781b4a125))
+* **rust:** Install argc ([4e51def](https://github.com/raas-dev/configent/commit/4e51def0deb4e3289d01af3e21e38425231a3706))
+* **vscode:** Add keybindings for secondary sidebar ([449797a](https://github.com/raas-dev/configent/commit/449797a089701e250f381cbfd1b062d7e2540bbb))
+* **vscode:** Adjust window zoom and font sizes ([daebe8a](https://github.com/raas-dev/configent/commit/daebe8ae8ed4bea032076758a90cccfade3dbb5b))
+
 ## [1.119.0](https://github.com/raas-dev/configent/compare/1.118.0...1.119.0) (2024-12-18)
 
 
