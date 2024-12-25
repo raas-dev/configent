@@ -180,16 +180,16 @@
     "quickActions": [
       {
         "title": "Explain",
-        "prompt": "Explain the following code.",
+        "prompt": "Explain what this code does. Answer briefly and concisely.",
         "sendToChat": true
       },
       {
         "title": "Fix",
-        "prompt": "Fix syntax of this code. If it is already 100% correct, do not do anything. Answer only code."
+        "prompt": "Fix syntax of this code. If it is already 100% correct, do NOT do anything. Answer only code."
       },
       {
         "title": "Refactor",
-        "prompt": "Refactor this code for readability. Do not change the functionality of the code itself.",
+        "prompt": "Refactor this code for human readability. Do NOT change the functionality of the code itself.",
          "sendToChat": true
       },
       {
@@ -197,16 +197,16 @@
         "prompt": "Optimize this code for performance. Answer only code."
       },
       {
-        "title": "Add comments",
-        "prompt": "Write comments for this code. Do not change anything about the code itself. Answer only code."
+        "title": "Add comment",
+        "prompt": "Add comment summarizing what the code does. Do NOT comment every single line. Do NOT change anything about the code itself."
       },
       {
         "title": "Add docstring",
-        "prompt": "Write a docstring for this code. Do not change anything about the code itself. Answer only code."
+        "prompt": "Write a docstring for this code. Do NOT change anything about the code itself. Answer only code."
       },
       {
         "title": "Add tests",
-        "prompt": "Write tests for this code. Do not change anything about the code itself. Answer only code."
+        "prompt": "Write tests for this code. Do NOT change anything about the code itself. Answer only code."
       }
     ]
   }
