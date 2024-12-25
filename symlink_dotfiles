@@ -138,6 +138,18 @@ if [ ! -r "$backup_path/.aider.conf.yml" ]; then
 fi
 ln -sfnv "$config_path/aider/.aider.conf.yml" "$HOME/.aider.conf.yml"
 
+### Symlink gptme config #######################################################
+
+if [ ! -r "$backup_path/.config/gptme/config.toml" ]; then
+  if [ -r "$HOME/.config/gptme/config.toml" ]; then
+    mkdir -p "$backup_path/.config/gptme"
+    cp -P "$HOME/.config/gptme/config.toml" \
+      "$backup_path/.config/gptme/config.toml"
+  fi
+fi
+mkdir -p "$HOME/.config/gptme"
+ln -sfnv "$config_path/gptme/config.toml" "$HOME/.config/gptme/config.toml"
+
 ### Symlink bat theme ##########################################################
 
 if [ ! -r "$backup_path/.config/bat/themes/SynthWave84.tmTheme" ]; then

@@ -1,0 +1,6 @@
+[prompt]
+about_user = "I am a curious human programmer."
+response_preference = "Basic concepts don't need to be explained."
+
+[env]
+MODEL = "gemini/gemini-2.0-flash-exp"
