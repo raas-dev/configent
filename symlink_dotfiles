@@ -109,6 +109,15 @@ fi
 mkdir -p "$HOME/.config/aichat"
 ln -sfnv "$config_path/aichat/config.yaml" "$HOME/.config/aichat/config.yaml"
 
+# .env
+if [ ! -r "$backup_path/.config/aichat/.env" ]; then
+  if [ -r "$HOME/.config/aichat/.env" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/.env" "$backup_path/.config/aichat/.env"
+  fi
+fi
+ln -sfnv "$config_path/aichat/env" "$HOME/.config/aichat/.env"
+
 # roles directory
 if [ ! -r "$backup_path/.config/aichat/roles" ]; then
   if [ -r "$HOME/.config/aichat/roles" ]; then
