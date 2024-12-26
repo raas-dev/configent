@@ -33,6 +33,13 @@ summarize_prompt: 'Summarize the discussion briefly in 200 words or less to use 
 # Text prompt used for including the summary of the entire session
 summary_prompt: 'This is a summary of the chat history as a recap: '
 
+# ---- RAG ----
+# See [RAG-Guide](https://github.com/sigoden/aichat/wiki/RAG-Guide) for more details.
+rag_embedding_model: gemini:text-embedding-004
+rag_reranker_model: null                    # Specifies the rerank model to use
+rag_chunk_size: 1500
+rag_chunk_overlap: 75
+
 # ---- appearance ----
 highlight: true # Controls syntax highlighting
 light_theme: false # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
