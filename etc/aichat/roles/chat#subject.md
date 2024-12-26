@@ -1,3 +1,7 @@
+---
+use_tools: all
+---
+
 # role
 
 You are a helpful __ARG1__ expert.
