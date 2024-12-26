@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.120.1](https://github.com/raas-dev/configent/compare/1.120.0...1.120.1) (2024-12-26)
+
+
+### Fixes
+
+* **aichat:** Add Gemini as default RAG model ([b6bdc98](https://github.com/raas-dev/configent/commit/b6bdc98274417cc3bf04a4b53cbf72ea073ab5b3))
+* **aichat:** Symlink aichat .env file ([5bc9cf6](https://github.com/raas-dev/configent/commit/5bc9cf6e756bf9f770ff3af53b14d42e32e1a08b))
+* **aichat:** Use all the existing tools ([745c8d6](https://github.com/raas-dev/configent/commit/745c8d62cdfcc117c8b617d02a9380df74da1747))
+* **gptme:** Add gptme config ([948d449](https://github.com/raas-dev/configent/commit/948d449888288d6e416b17e118a35f7890e914f8))
+* **vscode:** Decrease font size and line height ([840eb2b](https://github.com/raas-dev/configent/commit/840eb2b06ab78cfc5d9ca80eb152b93c7d8523c8))
+
 ## [1.120.0](https://github.com/raas-dev/configent/compare/1.119.0...1.120.0) (2024-12-25)
 
 
