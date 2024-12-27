@@ -20,7 +20,7 @@ A few features:
 - Apps are Rust, Go and C for speed, and `n`ix-shells are for ad-hoc binaries.
 - macOS `docker` experience like it was with Docker Desktop but without cost.
 - Run `up` to upgrade every package manager but respect locked tool versions.
-- Quickly ask GPT in terminal (`a <question>`) or open a chat session (`ai`).
+- Quickly ask AI in terminal (`a <question>`) or open a chat session (`ai`).
 
 Works on x86-64 and ARM:
 

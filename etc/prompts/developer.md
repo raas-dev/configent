@@ -1,26 +1,5 @@
 # Developer Prompt Library
 
-Provides prompts as roles for analyzing codebases.
-
-## Usage
-
-List available `aichat` roles:
-
-    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
-      aichat --list-roles
-
-Passing source file to analyze to role:
-
-    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
-      aichat --role=role_name < /path/to/file
-
-For example, to identify and analyze errors in snake game's main module:
-
-    AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" \
-      aichat --role=quality_error_analysis < "$HOME/Downloads/snake/main.py"
-
-## Available roles
-
 Originally forked from [codebase-digest's prompt library](https://github.com/kamilstanuch/codebase-digest/tree/77efab5/prompt_library) assembled by [Kamil Stanuch](https://github.com/kamilstanuch).
 
 ### I. Code Quality & Understanding:

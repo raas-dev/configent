@@ -110,9 +110,9 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='aichat'
+alias a='ai_assistant'
 alias b='bat --style=grid,header-filename,numbers,snip'
-alias c='ai_assistant'
+alias c='ai_developer'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -139,7 +139,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='ai_developer'
+alias _='gptme'
 
 ### watch ######################################################################
 
@@ -338,11 +338,11 @@ ai() {
 }
 
 ai_assistant() {
-  aichat --agent "assistant" "$*"
+  aichat --agent "assistant" "$*" || aichat "$*"
 }
 
 ai_developer() {
-  aichat --agent "developer" "$*"
+  aichat --agent "developer" "$*" || aichat "$*"
 }
 
 ### Functions: Docker ##########################################################
