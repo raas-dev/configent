@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc in a container.
 - 95% consistent user experience both on macOS and the beloved Linux distros.
 - There is only one way to manage programming languages and tool versions.
-- Uses LLM tools that support prompt chaining for AI Native Development.
+- Uses LLM prompt chaining and function calling for AI Native Development.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
@@ -20,7 +20,7 @@ A few features:
 - Apps are Rust, Go and C for speed, and `n`ix-shells are for ad-hoc binaries.
 - macOS `docker` experience like it was with Docker Desktop but without cost.
 - Run `up` to upgrade every package manager but respect locked tool versions.
-- Quickly ask AI in terminal (`a <question>`) or open a chat session (`ai`).
+- Ask generative AI in terminal (`a <question>`) or open a chat session (`ai`).
 
 Works on x86-64 and ARM:
 
