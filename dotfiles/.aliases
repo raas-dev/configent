@@ -112,7 +112,7 @@ fi
 
 alias a='aichat'
 alias b='bat --style=grid,header-filename,numbers,snip'
-alias c='ai'
+alias c='ai_assistant'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -139,7 +139,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='ai_assistant'
+alias _='ai_developer'
 
 ### watch ######################################################################
 
@@ -330,20 +330,19 @@ alias repomix='npx -y repomix'
 ### Functions: AI ##############################################################
 
 # add to ~/.rclocal:
-# export OPENAI_API_KEY='sk-xxxxxx'
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local role="chat"
   [ -n "$1" ] && role="chat#$1"
-  aichat --role "$role" --session "$(date +"%Y-%m-%d"):$role"
+  aichat --role "$role"
 }
 
 ai_assistant() {
-  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/assistant.gpt"
+  aichat --agent "assistant" "$*"
 }
 
 ai_developer() {
-  gptscript --workspace "$PWD" "$HOME/.config/configent/gpts/developer.gpt"
+  aichat --agent "developer" "$*"
 }
 
 ### Functions: Docker ##########################################################
