@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.121.0](https://github.com/raas-dev/configent/compare/1.120.1...1.121.0) (2024-12-27)
+
+
+### Features
+
+* **ai:** Remove gptscript over aichat agents ([5c285c4](https://github.com/raas-dev/configent/commit/5c285c4279aed9fdd919bcf4b0777ddf268f68b2))
+* **continue:** Enable vscode autocomplete using ollama ([9cf0e86](https://github.com/raas-dev/configent/commit/9cf0e869257abf1e4d96405cd6556a4af9e7742a))
+
+
+### Fixes
+
+* **ai:** Improve use of AI agents from terminal ([c4bbfe0](https://github.com/raas-dev/configent/commit/c4bbfe0147cb0e24f1db01a74da77e816fc57fe4))
+
 ### [1.120.1](https://github.com/raas-dev/configent/compare/1.120.0...1.120.1) (2024-12-26)
 
 
