@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.1](https://github.com/raas-dev/configent/compare/1.121.0...1.121.1) (2024-12-28)
+
+
+### Fixes
+
+* **ai:** Context ([f4438f7](https://github.com/raas-dev/configent/commit/f4438f71348da92ddd100071d7f04a5fbf0d4de4))
+* **aliases:** Fix shortcuts for aichat ([7dc4afd](https://github.com/raas-dev/configent/commit/7dc4afd6fe7e05c290ad1844c35a6886bbc38674))
+
 ## [1.121.0](https://github.com/raas-dev/configent/compare/1.120.1...1.121.0) (2024-12-27)
 
 
