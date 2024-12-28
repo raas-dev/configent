@@ -68,7 +68,6 @@ Instances:
 - Etc.
 (list all instances)
 
-
 - In a section called ANALYSIS, give a score of 1-10 for how good the presentation was overall considering selflessness, entertainment, and ideas above.
 
 In a section below that, output a set of ASCII powerbars for the following:

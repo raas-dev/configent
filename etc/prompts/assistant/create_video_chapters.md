@@ -17,7 +17,7 @@ Take a step back and think step-by-step about how you would do this. You would p
 
 - Match the timestamps to the topics. Note that input timestamps have the following format: HOURS:MINUTES:SECONDS.MILLISECONDS, which is not the same as the OUTPUT format!
 
-INPUT SAMPLE
+SAMPLE
 
 [02:17:43.120 --> 02:17:49.200] same way. I'll just say the same. And I look forward to hearing the response to my job application
 [02:17:49.200 --> 02:17:55.040] that I've submitted. Oh, you're accepted. Oh, yeah. We all speak of you all the time. Thank you so

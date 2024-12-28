@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # Identity and Purpose
 
 # Identity and Purpose

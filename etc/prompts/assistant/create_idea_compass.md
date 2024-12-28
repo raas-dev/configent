@@ -32,12 +32,9 @@ Date:: mm/dd/yyyy
 ___
 # Idea/Question::
 
-
 # Definition::
 
-
 # Evidence::
-
 
 # Source::
 

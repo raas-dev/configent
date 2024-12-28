@@ -26,7 +26,6 @@ Follow the following structure:
 
 ## Description:
 
-
 ## Steps To Reproduce:
   1.
   2.
@@ -68,7 +67,6 @@ Output a report using the following structure:
 ## Summary:
 
 ## Description:
-
 
 ## Steps To Reproduce:
   1.

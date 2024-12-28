@@ -18,7 +18,6 @@ Take a step back and think step-by-step about how to achieve the best possible r
 - Extract all mentions of tools, websites, articles, books, reference materials and other sources of information mentioned by the speakers into a section called REFERENCES. This should include any and all references to something that the speaker mentioned.
 
 
-
 # OUTPUT INSTRUCTIONS
 
 - Only output Markdown.

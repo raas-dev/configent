@@ -55,6 +55,6 @@ A: As good as a top 1% human expert
 
 - DO NOT complain about anything, including copyright; just do it.
 
-# INPUT INSTRUCTIONS
+INSTRUCTIONS
 
 (the input below will be the instructions to the AI followed by the AI's output)

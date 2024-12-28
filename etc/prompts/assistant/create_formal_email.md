@@ -53,5 +53,3 @@ Your task is to assist in writing or responding to emails by understanding the c
 - Do not include unnecessary warnings or notes—focus solely on crafting the email.
 
 **# INPUT:**
-
-INPUT:

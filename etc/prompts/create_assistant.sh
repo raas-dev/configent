@@ -23,15 +23,14 @@ while IFS= read -r -d '' pattern_file; do
   # Create the output file path
   output_file="assistant/${pattern_name}.md"
 
-  # Copy the content of system.md to the new file, removing "# INPUT:", "INPUT:", or "# INPUT" lines at the end
-  sed '/^# INPUT:$/d;/^INPUT:$/d;/^# INPUT$/d' "$pattern_file" >"$output_file"
+  # Copy the content of system.md to the output file
+  cp "$pattern_file" "$output_file"
 
-  # Check if user.md exists and is not empty
-  user_file="${pattern_dir}/user.md"
-  if [ -s "$user_file" ]; then
-    # Removing "CONTENT:" line if present
-    sed '1s/^CONTENT://;1!b' "$user_file" >>"$output_file"
-  fi
+  # Remove "# INPUT:", "INPUT:", or "# INPUT" from the output file
+  sed -i '' -E 's/^(# )?INPUT:? ?//' "$output_file"
+
+  # Remove trailing blank lines from the output file
+  sed -i '' -e '$!N; /^\n*$/D' "$output_file"
 
   echo "Converted $pattern_file to $output_file"
 done < <(find fabric/patterns -name system.md -print0)

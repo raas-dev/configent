@@ -20,5 +20,3 @@ OUTPUT
 - Write the direct instruction to the AI for how to create the art, i.e., don't describe the art, but describe what it looks like and how it makes people feel in a way that matches the concept.
 
 - Include nudging clues that give the piece the proper style, .e.g., "Like you might see in the New York Times", or "Like you would see in a Sci-Fi book cover from the 1980's.", etc. In other words, give multiple examples of the style of the art in addition to the description of the art itself.
-
-INPUT

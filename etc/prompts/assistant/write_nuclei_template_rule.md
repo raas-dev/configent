@@ -38,7 +38,6 @@ When using dsl you dont need to re-use {{}} if you are already inside a {{
 ### What are Nuclei Templates?
 Nuclei templates are the cornerstone of the Nuclei scanning engine. Nuclei templates enable precise and rapid scanning across various protocols like TCP, DNS, HTTP, and more. They are designed to send targeted requests based on specific vulnerability checks, ensuring low-to-zero false positives and efficient scanning over large networks.
 
-
 # Matchers
 Review details on matchers for Nuclei
 Matchers allow different type of flexible comparisons on protocol responses. They are what makes nuclei so powerful, checks are very simple to write and multiple checks can be added as per need for very effective scanning.
@@ -625,7 +624,6 @@ caa
 ​```
 
 
-
 # Preprocessors
 Review details on pre-processors for Nuclei
 Certain pre-processors can be specified globally anywhere in the template that run as soon as the template is loaded to achieve things like random ids generated for each template run.
@@ -716,11 +714,7 @@ matchers:
         - \"root:[x*]:0:0:\"
 ```
 
-
-
 ---------------------
-
-
 
 ## Protocols :
 
@@ -762,7 +756,6 @@ http:
 ```
 
 
-
 ### Path
 The next part of the requests is the path of the request path. Dynamic variables can be placed in the path to modify its behavior on runtime.
 
@@ -798,8 +791,6 @@ Variable	Value
 ```
 
 Some sample dynamic variable replacement examples:
-
-
 
 ```
 path: \"{{BaseURL}}/.git/config\"
@@ -879,7 +870,6 @@ http:
           - \"[core]\"
 ```
 
-
 ### Raw HTTP
 Another way to create request is using raw requests which comes with more flexibility and support of DSL helper functions, like the following ones (as of now it’s suggested to leave the Host header as in the example with the variable {{Hostname}}), All the Matcher, Extractor capabilities can be used with RAW requests in same the way described above.
 
@@ -924,7 +914,6 @@ Payloads are defined using variable name and can be referenced in the request in
 Examples
 An example of the using payloads with local wordlist:
 
-
 # HTTP Intruder fuzzing using local wordlist.
 ```
 payloads:
@@ -932,7 +921,6 @@ payloads:
   header: local.txt
 ```
 An example of the using payloads with in template wordlist support:
-
 
 # HTTP Intruder fuzzing using in template wordlist.
 ```
@@ -969,7 +957,6 @@ The cluster bomb attack tries all different combinations of payloads. It still p
 It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.
 
 This attack type is useful for a brute-force attack. Load a list of commonly used usernames in the first payload set, and a list of commonly used passwords in the second payload set. The cluster bomb attack will then try all combinations.
-
 
 ​
 Attack Mode Example
@@ -1421,7 +1408,6 @@ First thing in the request is inputs. Inputs are the data that will be sent to t
 
 At its most simple, just specify a string, and it will be sent across the network socket.
 
-
 # inputs is the list of inputs to send to the server
 ```
 inputs:
@@ -1475,7 +1461,6 @@ An example name value:
 host:
   - \"{{Hostname}}\"
 Nuclei can also do TLS connection to the target server. Just add tls:// as prefix before the Hostname and you’re good to go.
-
 
 host:
   - \"tls://{{Hostname}}\"
@@ -1687,7 +1672,6 @@ template[\"ssl_domains\"] // returns value of ssl_domains from template context 
 template[\"ptrValue\"]  // returns value of ptrValue which was extracted using regex with internal: true
 ```
 
-
 Lot of times we don’t known what all data is available in template context and this can be easily found by printing it to stdout using log() function
 
 ```
@@ -1727,8 +1711,6 @@ Similar to DSL helper functions . we can either use built in functions available
 ```
 
 The example above demonstrates that there is no need for new logic or syntax. Simply write the logic for each protocol and then use the protocol-prefixed variable or the dynamic extractor to export that variable. This variable is then shared across all protocols. We refer to this as the Template Context, which contains all variables that are scoped at the template level.
-
-
 
 Important Matcher Rules:
 - Try adding at least 2 matchers in a template it can be a response header or status code for the web templates.
