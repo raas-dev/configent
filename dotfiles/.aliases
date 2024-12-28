@@ -333,16 +333,21 @@ alias repomix='npx -y repomix'
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local role="chat"
+  local context="${PWD##*/}"
   [ -n "$1" ] && role="chat#$1"
-  aichat --role "$role"
+  aichat --role "$role" --session "$context"
 }
 
 ai_assistant() {
-  aichat --agent "assistant" "$*" || aichat "$*"
+  local agent="assistant"
+  local context="${PWD##*/}"
+  aichat --agent "$agent" --session "$context" || aichat "$*"
 }
 
 ai_developer() {
-  aichat --agent "developer" "$*" || aichat "$*"
+  local agent="developer"
+  local context="${PWD##*/}"
+  aichat --agent "$agent" --session "$context" "$*" || aichat "$*"
 }
 
 ### Functions: Docker ##########################################################
