@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.2](https://github.com/raas-dev/configent/compare/1.121.1...1.121.2) (2024-12-28)
+
+
+### Fixes
+
+* **ai:** Add tool use to prompts ([ab96ec3](https://github.com/raas-dev/configent/commit/ab96ec353b3d947a4004cecad9b5f5fd32c96ddf))
+* **prompts:** Add script for create assistant ([c5f20df](https://github.com/raas-dev/configent/commit/c5f20df1ab400d36006215d7de9753cc40ceb3b6))
+* **prompts:** Fix line endings ([e6d965c](https://github.com/raas-dev/configent/commit/e6d965c850010563d71e97a20b7bf47ea898ae3e))
+* **prompts:** Improve add metadata script ([d998989](https://github.com/raas-dev/configent/commit/d99898903b301090507a1232c4387a98aa773e7e))
+* **prompts:** Reduce noise in add_metadata ([86546b9](https://github.com/raas-dev/configent/commit/86546b9169b22234d33d7507716266a431ec5b5c))
+* **prompts:** Update prompts ([e35cf17](https://github.com/raas-dev/configent/commit/e35cf175e173c6dd3edb1853d5265efef93f211f))
+* **vscode:** Remove overlapping copy/paste keys ([25be096](https://github.com/raas-dev/configent/commit/25be0965da8c3a120405044b7a7f94179ee7f3d9))
+
 ### [1.121.1](https://github.com/raas-dev/configent/compare/1.121.0...1.121.1) (2024-12-28)
 
 
