@@ -32,6 +32,9 @@ while IFS= read -r -d '' pattern_file; do
   # Remove trailing blank lines from the output file
   sed -i '' -e '$!N; /^\n*$/D' "$output_file"
 
+  # Convert CRLF to LF
+  sed -i '' 's/\r//g' "$output_file"
+
   echo "Converted $pattern_file to $output_file"
 done < <(find fabric/patterns -name system.md -print0)
 
