@@ -135,5 +135,6 @@ OUTPUT INSTRUCTIONS:
 
 - Create the summary.
 
+# INPUT
 
 RPG SESSION TRANSCRIPT:

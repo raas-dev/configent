@@ -26,3 +26,7 @@ You are an expert in extracting skill terms from the job description provided. Y
 - Do not give warnings or notes.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

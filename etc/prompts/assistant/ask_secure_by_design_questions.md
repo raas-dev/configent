@@ -51,3 +51,7 @@ END EXAMPLES
 # OUTPUT INSTRUCTIONS
 
 - Ensure the list of questions covers the most important secure by design questions that need to be asked for the project.
+
+# INPUT
+
+INPUT:

@@ -43,3 +43,7 @@ Take a deep breath and think step-by-step about how best to achieve this using t
 - Output a section called PRESENTATION that's a Markdown formatted list of slides and the content on the slide, plus the image description.
 
 - Ensure the speaker notes are in the voice of the speaker, i.e. they're what they're actually going to say.
+
+# INPUT:
+
+INPUT:

@@ -405,5 +405,6 @@ END EXAMPLE OFFERS
 
 - Output in Markdown, but don't use bolt or italics because the asterisks are difficult to read in plaintext.
 
+# INPUT
 
 …

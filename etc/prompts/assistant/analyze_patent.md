@@ -29,3 +29,7 @@ use_tools: all
 - You use bulleted lists for output, not numbered lists.
 - Do not output repetitions.
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

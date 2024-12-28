@@ -33,16 +33,19 @@ while IFS= read -r -d '' pattern_file; do
   # Copy the content of system.md to the output file
   cp "$pattern_file" "$output_file"
 
-  # Remove "# INPUT:", "INPUT:", or "# INPUT" from the output file
-  sed -i '' -E 's/^(# )?INPUT:? ?//' "$output_file"
-
-  # Remove trailing blank lines from the output file
+  # Remove trailing blank lines
   sed -i '' -e '$!N; /^\n*$/D' "$output_file"
 
   # Convert CRLF to LF
   sed -i '' 's/\r//g' "$output_file"
 
-  echo "Used $pattern_file to create $output_file"
+  # Trim trailing spaces
+  while IFS= read -r line; do
+    #shellcheck disable=SC2001
+    echo "$line" | sed 's/[[:space:]]*$//'
+  done <"$output_file" >"$output_file.tmp" && mv "$output_file.tmp" "$output_file"
+
+  echo "Creating $output_file"
 done < <(find fabric/patterns -name system.md -print0)
 
 echo "Finished processing files."

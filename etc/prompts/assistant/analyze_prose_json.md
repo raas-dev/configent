@@ -113,3 +113,7 @@ OUTPUT EXAMPLE
 - The overall-rating cannot be higher than the lowest rating given.
 - You ONLY output this JSON object.
 - You do not output the ``` code indicators, only the JSON object itself.
+
+# INPUT:
+
+INPUT:

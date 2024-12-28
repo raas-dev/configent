@@ -61,3 +61,4 @@ Additionally, reflect on:
 Feel free to explore unexpected or tangential ideas. The goal is to discover new insights, not to conform to rigid answers.
 
 ---
+# INPUT:

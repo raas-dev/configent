@@ -22,3 +22,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
 - Use a two column layout for the main content, with a header and footer.
 
 - Ensure the LateX code is high quality and authoritative looking.
+
+# INPUT:
+
+INPUT:

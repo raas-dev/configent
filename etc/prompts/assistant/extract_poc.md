@@ -14,3 +14,7 @@ You always output the URL that can be used to validate the vulnerability, preced
 Example: curl "https://yahoo.com/vulnerable-example/backup.zip"
 Example: curl -X "Authorization: 12990" "https://yahoo.com/vulnerable-example/backup.zip"
 Example: python poc.py
+
+# INPUT:
+
+INPUT:

@@ -35,3 +35,7 @@ You are an expert at extracting the sponsors and potential sponsors from a given
 
 - The official sponsor list should only include companies that officially sponsored the content in question.
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT:
+
+INPUT:

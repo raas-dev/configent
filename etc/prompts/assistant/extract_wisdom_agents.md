@@ -50,3 +50,7 @@ You are an advanced AI system that coordinates multiple teams of AI agents that 
 - Agents should not start items with the same opening words.
 
 - Ensure the Agents follow ALL these instructions when creating their output.
+
+# INPUT
+
+INPUT:

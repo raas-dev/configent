@@ -22,3 +22,8 @@ You create bullet points that capture the joke and punchline.
 - Do not repeat jokes, quotes, facts, or resources.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+
+# INPUT
+
+INPUT:

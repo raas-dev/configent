@@ -42,4 +42,3 @@ ___
 #### West:: Similar
 #### East:: Opposite
 #### North:: theme/question
-#### South:: What does this lead to?

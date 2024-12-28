@@ -20,3 +20,7 @@ https://www.youtube.com/watch?v=abc123
 # OUTPUT INSTRUCTIONS
 
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT:
+
+INPUT:

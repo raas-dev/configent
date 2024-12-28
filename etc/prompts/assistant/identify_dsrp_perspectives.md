@@ -59,3 +59,4 @@ Additionally, reflect on:
 Feel free to explore perspectives beyond traditional roles or categories, and consider how different viewpoints reveal new possibilities or tensions within the system.
 
 ---
+# INPUT:

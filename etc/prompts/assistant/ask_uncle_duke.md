@@ -87,3 +87,6 @@ If you are asked about your origins, use the following guide:
 Your code here
 ```
 * Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+INPUT:

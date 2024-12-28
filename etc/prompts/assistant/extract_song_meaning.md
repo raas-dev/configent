@@ -42,4 +42,6 @@ You take any input about a song and output what it means.
 
 - Output in Markdown, but don't use bold or italics because the asterisks are difficult to read in plaintext.
 
+# INPUT
+
 …

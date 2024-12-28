@@ -31,3 +31,7 @@ Their appearance:
 
 - Output in clear, human-readable Markdown.
 - DO NOT COMPLAIN about the task for any reason.
+
+# INPUT
+
+INPUT:

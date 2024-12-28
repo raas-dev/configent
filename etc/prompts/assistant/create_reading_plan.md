@@ -74,3 +74,7 @@ This reading plan will give you a solid foundation in ___________ (taken from th
 - You use bulleted lists for output, not numbered lists.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

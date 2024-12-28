@@ -20,3 +20,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
 # OUTPUT
 
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT:
+
+INPUT:

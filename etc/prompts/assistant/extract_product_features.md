@@ -28,3 +28,7 @@ Take a step back and think step-by-step about how to achieve the best possible r
 - Do not start items with the same opening words.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

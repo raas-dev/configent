@@ -39,3 +39,7 @@ Take a step back and think step-by-step about how to achieve the best possible r
 - You use bulleted lists for output, not numbered lists.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

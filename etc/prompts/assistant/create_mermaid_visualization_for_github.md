@@ -44,3 +44,7 @@ graph TD;
 - Ensure the visualization can stand alone as a diagram that fully conveys the concept(s), and that it perfectly matches a written explanation of the concepts themselves. Start over if it can't.
 
 - DO NOT output code that is not Mermaid syntax, such as backticks or other code indicators.
+
+# INPUT:
+
+INPUT:

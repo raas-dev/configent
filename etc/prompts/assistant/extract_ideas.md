@@ -37,3 +37,7 @@ END EXAMPLE OUTPUT
 - Do not repeat ideas
 - Do not start items with the same opening words.
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

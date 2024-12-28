@@ -120,3 +120,7 @@ Theoretical   [--3-------]     Empirical
 - In the markdown, don't use formatting like bold or italics. Make the output maximially readable in plain text.
 
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT:
+
+INPUT:

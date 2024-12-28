@@ -95,5 +95,7 @@ END EXAMPLES
 
 Remember, the output should be in markdown format, clear, concise, and understandable even for someone who is not familiar with the project.
 
+# INPUT
+
 
 $> git --no-pager diff main

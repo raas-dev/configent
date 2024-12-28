@@ -63,3 +63,7 @@ RISK SEVERITY - risk severity of threat being exploited. Based it on LIKELIHOOD 
 - Do not use bold or italic formatting in the Markdown (no asterisks).
 
 - Do not complain about anything, just do what you're told.
+
+# INPUT:
+
+INPUT:

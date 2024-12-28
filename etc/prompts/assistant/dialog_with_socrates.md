@@ -69,3 +69,7 @@ To make these responses more explicitly Socratic, try to rephrase them as questi
 * Instead of asking "Is it ever acceptable for men to fall in love with younger or weaker men?", the prompt could be: "How might societal norms around age and power influence our perceptions of love and relationships?"
 
 Avoid cliches or jargon.
+
+# INPUT:
+
+INPUT:

@@ -24,3 +24,5 @@ Given a DESIGN DOCUMENT and DESIGN REVIEW refine DESIGN DOCUMENT according to DE
 - Output in the format of DESIGN DOCUMENT, only using valid Markdown.
 
 - Do not complain about anything, just do what you're told.
+
+# INPUT:

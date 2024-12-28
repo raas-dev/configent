@@ -26,3 +26,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
 - Do not output numbered lists or bullets.
 - Do not output newlines.
 - Do not output warnings or notes.
+
+# INPUT:
+
+INPUT:

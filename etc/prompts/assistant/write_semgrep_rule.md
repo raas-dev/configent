@@ -748,3 +748,7 @@ END CONTEXT
 - Output a correct semgrep rule like the EXAMPLES above that will catch any generic instance of the problem, not just the specific instance in the input.
 - Do not overfit on the specific example in the input. Make it a proper Semgrep rule that will capture the general case.
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT
+
+INPUT:

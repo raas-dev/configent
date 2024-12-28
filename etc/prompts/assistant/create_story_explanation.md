@@ -82,3 +82,7 @@ END EXAMPLE BULLETS
 - Only output Markdown.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

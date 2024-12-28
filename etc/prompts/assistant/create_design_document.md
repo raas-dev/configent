@@ -50,3 +50,7 @@ Given a description of idea or system, provide a well written, detailed design d
 - Do not use bold or italic formatting in the Markdown (no asterisks).
 
 - Do not complain about anything, just do what you're told.
+
+# INPUT:
+
+INPUT:

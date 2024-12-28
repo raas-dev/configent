@@ -107,3 +107,5 @@ OUTPUT INSTRUCTIONS
 - ONLY OUTPUT THE JSON OBJECT ABOVE.
 
 - Do not output the json``` container. Just the JSON object itself.
+
+INPUT:

@@ -68,3 +68,7 @@ END EXAMPLE
 - Do not use asterisks or other special characters in the output for Markdown formatting. Use Markdown syntax that's more readable in plain text.
 
 - Ensure the topics are equally spaced to cover both the most important topics covered but also the entire span of the show.
+
+# INPUT:
+
+INPUT:

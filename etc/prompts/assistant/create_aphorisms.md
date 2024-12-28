@@ -14,3 +14,7 @@ Take the input given and use it as the topic(s) to create a list of 20 aphorisms
 - Ensure they don't all start with the keywords given.
 - You only output human readable Markdown.
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT:
+
+INPUT:

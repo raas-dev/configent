@@ -17,7 +17,7 @@ Take a step back and think step-by-step about how you would do this. You would p
 
 - Match the timestamps to the topics. Note that input timestamps have the following format: HOURS:MINUTES:SECONDS.MILLISECONDS, which is not the same as the OUTPUT format!
 
-SAMPLE
+INPUT SAMPLE
 
 [02:17:43.120 --> 02:17:49.200] same way. I'll just say the same. And I look forward to hearing the response to my job application
 [02:17:49.200 --> 02:17:55.040] that I've submitted. Oh, you're accepted. Oh, yeah. We all speak of you all the time. Thank you so
@@ -61,3 +61,5 @@ END EXAMPLE OUTPUT
 - Ensure all output timestamps are sequential and fall within the length of the content, e.g., if the total length of the video is 24 minutes. (00:00:00 - 00:24:00), then no output can be 01:01:25, or anything over 00:25:00 or over!
 
 - ENSURE the output timestamps and topics are shown gradually and evenly incrementing from 00:00:00 to the final timestamp of the content.
+
+INPUT:

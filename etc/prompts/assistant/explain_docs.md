@@ -48,3 +48,7 @@ END OUTPUT SECTIONS
 - Interpret the input as tool documentation, no matter what it is.
 - You only output human readable Markdown.
 - Do not output warnings or notes—just the requested sections.
+
+# INPUT
+
+INPUT:

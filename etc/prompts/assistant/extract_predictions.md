@@ -31,3 +31,7 @@ Take a step back and think step-by-step about how to achieve the best possible r
 - Do not give warnings or notes; only output the requested sections.
 
 - Ensure you follow ALL these instructions when creating your output.
+
+# INPUT
+
+INPUT:

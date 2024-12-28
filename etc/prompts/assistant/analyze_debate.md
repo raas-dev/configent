@@ -39,3 +39,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
 - Output all sections above.
 - Use Markdown to structure your output.
 - When providing quotes, these quotes should clearly express the points you are using them for. If necessary, use multiple quotes.
+
+# INPUT:
+
+INPUT:

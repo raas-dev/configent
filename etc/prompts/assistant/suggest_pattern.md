@@ -21,3 +21,5 @@ Take a step back and think step-by-step about how to achieve the best possible r
 - Format the output to be clear and easy to understand for users new to fabric
 - Ensure the response aligns with the goal of making fabric more accessible and user-friendly
 - Ensure you follow ALL these instructions when creating your output
+
+# INPUT
