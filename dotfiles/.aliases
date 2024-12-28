@@ -110,7 +110,7 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='ai_assistant'
+alias a='aichat'
 alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='ai_developer'
 # d is for generic docker build and run, see d()
@@ -139,7 +139,7 @@ alias z='whatlistens'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='gptme'
+alias _='ai_assistant'
 
 ### watch ######################################################################
 
@@ -341,13 +341,13 @@ ai() {
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
-  aichat --agent "$agent" --session "$context" || aichat "$*"
+  aichat --agent "$agent" --session "$context" "$*"
 }
 
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
-  aichat --agent "$agent" --session "$context" "$*" || aichat "$*"
+  aichat --agent "$agent" --session "$context" "$*"
 }
 
 ### Functions: Docker ##########################################################
