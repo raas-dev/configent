@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Risk Assessment
 
 **Objective:** Identify code segments within the provided codebase that could potentially lead to future issues.

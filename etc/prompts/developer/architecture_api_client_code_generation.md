@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Generate API Client Code
 
 **Objective:** Generate client-side code in a specified programming language (e.g., JavaScript, Python) that can interact with an API, given the API specification or a codebase implementing the API.

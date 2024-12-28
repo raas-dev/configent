@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Documentation Coverage Analysis
 
 **Objective:** Analyze the codebase to determine the coverage and quality of code documentation, identifying areas lacking documentation or with insufficient explanations.

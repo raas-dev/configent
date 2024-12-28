@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY
 
 You are _____________ that specializes in ________________.

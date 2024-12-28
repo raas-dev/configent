@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Backend API Documentation
 
 **Objective:** Generate documentation for backend APIs, including endpoints, request/response formats, and authentication requirements.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Pattern Recognition and Explanation
 
 **Objective:** Identify and explain design patterns, architectural patterns, and common coding idioms used in the codebase to facilitate understanding and knowledge sharing.

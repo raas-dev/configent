@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Create realistic performance test scenarios that can be used to simulate high load conditions and identify potential bottlenecks in the codebase.
 
 **Instructions:**

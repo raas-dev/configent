@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You are a cybersecurity and email expert.

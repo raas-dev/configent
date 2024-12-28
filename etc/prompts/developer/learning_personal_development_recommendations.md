@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Personal Development Recommendations
 
 **Objective:** Analyze the codebase and provide personalized recommendations for areas where the engineer can improve their skills.

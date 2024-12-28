@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Analyze the potential ripple effects of specific code changes (e.g., bug fixes, feature additions, refactoring) to identify areas of the codebase that might be affected and predict potential conflicts or regressions.
 
 **Instructions:**

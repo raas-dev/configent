@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Porter's Five Forces Analysis for Codebase
 
 **Objective:** Analyze the codebase and its market environment using Porter's Five Forces framework to understand the competitive forces shaping the industry.

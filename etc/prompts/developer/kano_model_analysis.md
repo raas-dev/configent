@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Kano Model Analysis for Codebase
 
 **Objective:** Analyze the codebase and its associated product features using the Kano Model to prioritize development efforts based on their impact on customer satisfaction.

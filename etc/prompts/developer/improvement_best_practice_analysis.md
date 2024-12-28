@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Best Practice Analysis
 
 **Objective:** Analyze the provided codebase and identify examples of both good and bad programming practices.

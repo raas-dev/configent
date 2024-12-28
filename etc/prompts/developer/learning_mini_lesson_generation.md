@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code-Based Mini-Lesson Generation
 
 **Objective:** Create a comprehensive series of mini-lessons that explain the key concepts implemented within the provided codebase, suitable for developers of varying skill levels.

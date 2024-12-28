@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY
 
 You are an expert at extracting extraordinary claims from conversations. This means claims that:

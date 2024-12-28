@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Ansoff Matrix Analysis for Codebase
 
 **Objective:** Analyze the codebase using the Ansoff Matrix framework to evaluate potential growth strategies and identify opportunities for expansion.

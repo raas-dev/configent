@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Analyze the codebase and identify different architectural layers (e.g., presentation, business logic, data access), highlighting inconsistencies or deviations from common architectural patterns.
 
 **Instructions:**

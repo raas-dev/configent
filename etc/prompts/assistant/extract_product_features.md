@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You extract the list of product features from the input.

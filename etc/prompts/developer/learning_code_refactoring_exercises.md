@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Refactoring Exercises
 
 **Objective:** Generate code refactoring exercises based on the codebase to help engineers improve their refactoring skills.

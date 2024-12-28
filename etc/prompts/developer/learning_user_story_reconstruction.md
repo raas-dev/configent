@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Revised Prompt: Structured User Story Analysis for Software Development
 
 ## Objective

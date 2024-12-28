@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Lean Canvas Analysis for Codebase
 
 **Objective:** Analyze the codebase using the Lean Canvas framework to evaluate its business potential and identify areas for improvement or pivot.

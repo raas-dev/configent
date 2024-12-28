@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Stakeholder Persona Generation
 
 **Objective:** Infer potential stakeholder personas based on the functionalities present in the codebase.

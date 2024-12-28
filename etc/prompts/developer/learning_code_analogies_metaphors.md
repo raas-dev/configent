@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code-Inspired Analogies and Metaphors
 
 **Objective:** Generate analogies and metaphors inspired by the codebase to help explain complex technical concepts to non-technical stakeholders.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Suggest Code Optimization Techniques
 
 **Objective:** Provide specific and actionable code optimization suggestions to address identified performance bottlenecks.

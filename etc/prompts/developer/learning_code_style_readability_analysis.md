@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Style and Readability Analysis
 
 **Objective:** Evaluate the codebase's overall style and readability, providing suggestions for improvement.

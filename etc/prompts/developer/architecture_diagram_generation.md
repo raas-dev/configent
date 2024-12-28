@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Generate Architectural Diagram
 
 **Objective:** Generate a clear and informative architectural diagram that visually represents the structure and components of the codebase, based on its actual structure and dependencies.

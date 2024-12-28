@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # PESTEL Analysis for Codebase
 
 **Objective:** Analyze the macro-environmental factors that may impact the codebase and its associated product using the PESTEL framework.

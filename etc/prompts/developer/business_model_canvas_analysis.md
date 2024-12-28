@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Business Model Canvas Analysis for Codebase
 
 **Objective:** Analyze the codebase using the Business Model Canvas framework to understand its business implications and potential.

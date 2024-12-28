@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Evolution Visualization
 
 **Objective:** Create visualizations that illustrate how the codebase has evolved over time, highlighting key milestones, refactorings, and architectural changes.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Competitive Positioning Map for Codebase
 
 **Objective:** Create a visual map of the codebase's associated product and its competitors, positioning each based on key dimensions that are important to the target market.

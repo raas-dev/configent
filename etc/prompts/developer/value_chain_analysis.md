@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Value Chain Analysis for Codebase
 
 **Objective:** Analyze the codebase to understand how it fits into and supports the larger value creation process of the business.

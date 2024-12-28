@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Generate visualizations that effectively represent the evolution of a codebase over time, using data from version control and other relevant sources.
 
 **Instructions:**

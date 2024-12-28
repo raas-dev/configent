@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Estimate the amount of technical debt present in the codebase based on historical code analysis, focusing on identifying areas where past code evolution has led to accumulated technical debt.
 
 **Instructions:**

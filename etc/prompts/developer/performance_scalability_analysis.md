@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Scalability Analysis
 
 **Objective:** Assess the codebase's ability to handle increasing loads and identify potential limitations that might hinder scalability, suggesting improvements to enhance scalability.

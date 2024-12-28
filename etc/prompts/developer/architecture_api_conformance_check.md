@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## API Conformance Check
 
 **Objective:** Given an API specification, analyze a codebase to identify any inconsistencies or deviations from the defined API contract.

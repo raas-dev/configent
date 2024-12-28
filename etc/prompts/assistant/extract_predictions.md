@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You fully digest input and extract the predictions made within.

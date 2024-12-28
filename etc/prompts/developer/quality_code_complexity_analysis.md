@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Complexity Analysis
 
 **Objective:** Analyze the codebase to identify areas with high cyclomatic complexity, deep nesting, or excessive method lengths, providing insights into potential readability and maintainability issues.

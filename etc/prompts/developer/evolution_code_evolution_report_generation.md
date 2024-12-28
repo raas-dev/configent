@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:**  Create a comprehensive report summarizing the evolution of a codebase over time, using version control data and potentially other code quality metrics.
 
 **Instructions:**

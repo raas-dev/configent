@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # OKR (Objectives and Key Results) Analysis for Codebase
 
 **Objective:** Analyze the codebase to align its features and capabilities with potential business Objectives and Key Results (OKRs).

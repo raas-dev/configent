@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # McKinsey 7S Framework Analysis for Codebase
 
 **Objective:** Analyze the codebase and its associated product using the McKinsey 7S Framework to evaluate the internal factors that contribute to organizational effectiveness and identify areas for improvement.

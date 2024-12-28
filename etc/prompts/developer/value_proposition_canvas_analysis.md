@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Value Proposition Canvas Analysis for Codebase
 
 **Objective:** Analyze the codebase using the Value Proposition Canvas to align technical features with user needs and benefits.

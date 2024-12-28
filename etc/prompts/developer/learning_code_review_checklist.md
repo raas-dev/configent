@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Review Checklist Generation
 
 **Objective:** Generate a checklist of important points to consider during code reviews, based on the codebase's specific requirements and best practices.

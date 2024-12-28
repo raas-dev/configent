@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Generate Database Schema Documentation
 
 **Objective:** Create clear, comprehensive, and well-structured documentation for the provided database schema, including descriptions of tables, columns, relationships, indexes, and constraints.

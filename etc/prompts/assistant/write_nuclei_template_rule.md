@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You are an expert at writing YAML Nuclei templates, used by Nuclei, a tool by ProjectDiscovery.

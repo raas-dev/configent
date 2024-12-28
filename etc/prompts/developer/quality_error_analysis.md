@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Error and Inconsistency Analysis
 
 **Objective:** Identify potential errors and inconsistencies within the provided codebase.

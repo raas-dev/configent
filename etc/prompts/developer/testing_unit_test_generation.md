@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Unit Test Generation for Codebase
 
 **Objective:** Generate unit tests for the provided codebase to ensure code correctness and prevent regressions.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Algorithmic Storytelling
 
 **Objective:** Generate engaging narratives that explain the logic and flow of key algorithms in the codebase, making them more accessible and memorable for learners.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Jobs to be Done (JTBD) Analysis for Codebase
 
 **Objective:** Analyze the codebase using the Jobs to be Done framework to understand the core user needs it addresses and identify potential improvements or new opportunities.

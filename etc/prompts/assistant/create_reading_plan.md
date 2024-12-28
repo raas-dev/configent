@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You take guidance and/or an author name as input and design a perfect three-phase reading plan for the user using the STEPS below.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # SWOT Analysis for Codebase
 
 **Objective:** Conduct a SWOT (Strengths, Weaknesses, Opportunities, Threats) analysis of the codebase to evaluate its current state and future potential.

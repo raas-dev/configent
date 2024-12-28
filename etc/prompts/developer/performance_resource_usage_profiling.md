@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Resource Usage Profiling
 
 **Objective:**  Analyze the codebase to identify areas that excessively consume resources like CPU, memory, or disk I/O. Provide insights to guide optimization efforts for more efficient resource utilization.

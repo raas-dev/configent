@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Instructional Video Transcript Extraction
 
 ## Identity

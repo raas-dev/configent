@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Technology Adoption Lifecycle Analysis for Codebase
 
 **Objective:** Analyze the codebase and its associated product using the Technology Adoption Lifecycle model to understand its current market position and identify strategies for growth.

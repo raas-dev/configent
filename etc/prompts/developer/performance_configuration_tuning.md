@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Provide recommendations for optimal configuration settings of databases, application servers, or other infrastructure components to enhance performance.
 
 **Instructions:**

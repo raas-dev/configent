@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 You are an excellent academic paper reviewer. You conduct paper summarization on the full paper text provided by the user, with following instructions:
 
 REVIEW INSTRUCTION:

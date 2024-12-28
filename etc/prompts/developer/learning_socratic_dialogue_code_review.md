@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Socratic Dialogue Generation for Code Review
 
 **Objective:** Generate Socratic-style dialogues that explore the reasoning behind code design decisions and encourage critical thinking during code reviews.

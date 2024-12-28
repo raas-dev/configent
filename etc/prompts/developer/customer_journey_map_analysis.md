@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Customer Journey Map Analysis for Codebase
 
 **Objective:** Analyze the codebase to map out how different parts support various stages of the user's journey or experience.

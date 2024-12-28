@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Product/Market Fit Analysis for Codebase
 
 **Objective:** Analyze the codebase and its associated product to evaluate how well it meets the needs of its target market and identify opportunities for improving product/market fit.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Database Schema Review
 
 **Objective:** Review the database schema for normalization, indexing, and potential performance bottlenecks, providing recommendations for improvement based on best practices.

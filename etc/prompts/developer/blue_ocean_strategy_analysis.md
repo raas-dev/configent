@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Blue Ocean Strategy Analysis for Codebase
 
 **Objective:** Analyze the codebase to identify opportunities for creating uncontested market space and generating new demand, based on the principles of Blue Ocean Strategy.

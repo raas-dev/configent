@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Analyze Coupling and Cohesion
 
 **Objective:** Evaluate the coupling and cohesion of modules or components within the codebase, identifying areas of high coupling or low cohesion that might indicate design flaws.

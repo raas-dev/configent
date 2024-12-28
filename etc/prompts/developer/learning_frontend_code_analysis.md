@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Frontend Code Analysis
 
 **Objective:** Analyze the frontend codebase to identify best practices, potential improvements, and common pitfalls.

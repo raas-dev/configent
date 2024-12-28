@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Concurrency and Synchronization Analysis
 
 **Objective:**  Analyze the codebase to identify potential issues related to concurrency, such as race conditions or deadlocks, and suggest solutions to improve thread safety and synchronization mechanisms.

@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Identify Performance Bottlenecks
 
 **Objective:** Analyze the codebase to pinpoint specific areas that negatively impact performance, such as inefficient algorithms, excessive database queries, or slow network requests.

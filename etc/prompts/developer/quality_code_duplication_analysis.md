@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Duplication Analysis
 
 **Objective:** Analyze the codebase to identify duplicated code fragments, providing insights into potential maintainability issues and suggesting refactoring opportunities.

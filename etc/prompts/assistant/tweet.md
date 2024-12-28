@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 Title: A Comprehensive Guide to Crafting Engaging Tweets with Emojis
 
 Introduction

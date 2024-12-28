@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Documentation Generation
 
 **Objective:** Generate comprehensive and user-friendly documentation for the provided codebase.

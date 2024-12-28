@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Identify Design Patterns
 
 **Objective:** Analyze the codebase to identify and understand the implementation and purpose of common design patterns.

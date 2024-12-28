@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Business Impact Analysis
 
 **Objective:** Analyze the codebase to identify key features and their potential business impact.

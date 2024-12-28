@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Trivia Game Generation
 
 **Objective:** Generate trivia questions and answers based on the codebase to gamify learning and encourage team engagement.

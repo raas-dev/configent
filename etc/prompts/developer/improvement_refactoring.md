@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Refactoring for Improved Readability and Performance
 
 **Objective:** Refactor the provided codebase to enhance its readability, maintainability, and performance.

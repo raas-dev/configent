@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 ## Suggest Refactoring for Design Patterns
 
 **Objective:** Analyze the codebase and identify opportunities to refactor code by implementing suitable design patterns to improve code maintainability, extensibility, or reusability.

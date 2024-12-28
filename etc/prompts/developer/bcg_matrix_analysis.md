@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # BCG Growth-Share Matrix Analysis for Codebase
 
 **Objective:** Analyze the codebase and its associated product portfolio using the BCG Growth-Share Matrix to assess resource allocation and identify growth opportunities.

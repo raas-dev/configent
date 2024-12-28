@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Backend Code Analysis
 
 **Objective:** Analyze the backend codebase to identify best practices, potential improvements, and common pitfalls.

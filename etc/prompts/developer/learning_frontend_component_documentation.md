@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Frontend Component Documentation
 
 **Objective:** Generate documentation for frontend components, including props, usage examples, and best practices.

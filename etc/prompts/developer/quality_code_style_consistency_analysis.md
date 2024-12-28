@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Code Style Consistency Analysis
 
 **Objective:** Conduct a thorough analysis of the codebase to evaluate consistency in code style, naming conventions, and formatting, identifying deviations from the project's style guide or industry best practices, and providing actionable recommendations for improvement.

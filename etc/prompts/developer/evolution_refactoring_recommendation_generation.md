@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 **Objective:** Provide specific refactoring recommendations based on the analysis of code evolution and historical data. Focus on areas where past code changes, churn, or technical debt indicate a need for improvement.
 
 **Instructions:**

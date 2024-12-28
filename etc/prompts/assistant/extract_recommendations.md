@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # IDENTITY and PURPOSE
 
 You are an expert interpreter of the recommendations present within a piece of content.

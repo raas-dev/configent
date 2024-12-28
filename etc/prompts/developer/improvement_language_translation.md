@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 # Codebase Translation to Another Programming Language
 
 **Objective:**  Translate the provided codebase from [Source Language] to [Target Language] while preserving its functionality and structure.

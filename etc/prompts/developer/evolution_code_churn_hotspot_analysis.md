@@ -1,3 +1,6 @@
+---
+use_tools: all
+---
 #### Code Churn Hotspot Analysis
 
 **Objective:** Analyze the codebase's commit history to identify areas with high churn rates (frequent changes), which often indicate areas that are complex, error-prone, or in need of refactoring.
