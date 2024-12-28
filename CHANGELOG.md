@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.3](https://github.com/raas-dev/configent/compare/1.121.2...1.121.3) (2024-12-28)
+
+
+### Fixes
+
+* **prompts:** Fix a bug in adding metadata ([6813f04](https://github.com/raas-dev/configent/commit/6813f0414f0c6a047b21f9d7791f757bbed8a1ce))
+* **prompts:** Improve prompt file creation scripts ([7740a03](https://github.com/raas-dev/configent/commit/7740a0355feb97fc2cd22e165d57a9edfa55896b))
+* **prompts:** Recreate prompts ([1a20c0b](https://github.com/raas-dev/configent/commit/1a20c0bfacc01aad298484ecd21ac9c4deaf85e8))
+
 ### [1.121.2](https://github.com/raas-dev/configent/compare/1.121.1...1.121.2) (2024-12-28)
 
 
