@@ -1,6 +1,10 @@
 # Developer Prompt Library
 
-Originally forked from [codebase-digest's prompt library](https://github.com/kamilstanuch/codebase-digest/tree/77efab5/prompt_library) assembled by [Kamil Stanuch](https://github.com/kamilstanuch).
+Prompt files in `developer/` are originally forked from [codebase-digest's prompt library](https://github.com/kamilstanuch/codebase-digest/tree/77efab5/prompt_library).
+
+The codebase-digest and its prompts are created by [Kamil Stanuch](https://github.com/kamilstanuch).
+
+## Sorted by use case
 
 ### I. Code Quality & Understanding:
 - **Analysis:**

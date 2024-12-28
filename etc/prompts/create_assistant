@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
 
+if [ -z "$1" ]; then
+  echo "Usage: $0 <target_dir>"
+  exit 1
+fi
+
+target_path="$1"
+
 # Check if the fabric directory exists
 if [ -d "fabric" ]; then
-  echo "Fabric repository already exists. Pulling latest changes with rebase..."
+  echo "Fabric repository already exists, pulling latest changes with rebase."
   pushd fabric >/dev/null || exit
   git pull --rebase origin main
   popd >/dev/null || exit
 else
-  echo "Cloning the latest commit of the fabric repository..."
+  echo "Cloning the latest commit of the fabric repository."
   git clone --depth 1 https://github.com/danielmiessler/fabric.git
 fi
 
-# Create assistant directory if it doesn't exist
-mkdir -p assistant
+# Create target directory if it doesn't exist
+mkdir -p "$target_path"
 
 # Loop through all patterns and convert them
 while IFS= read -r -d '' pattern_file; do
@@ -21,7 +28,7 @@ while IFS= read -r -d '' pattern_file; do
   pattern_name=$(basename "$pattern_dir")
 
   # Create the output file path
-  output_file="assistant/${pattern_name}.md"
+  output_file="$target_path/${pattern_name}.md"
 
   # Copy the content of system.md to the output file
   cp "$pattern_file" "$output_file"
@@ -35,7 +42,7 @@ while IFS= read -r -d '' pattern_file; do
   # Convert CRLF to LF
   sed -i '' 's/\r//g' "$output_file"
 
-  echo "Converted $pattern_file to $output_file"
+  echo "Used $pattern_file to create $output_file"
 done < <(find fabric/patterns -name system.md -print0)
 
-echo "Conversion complete. See assistant/ for the prompt files."
+echo "Finished processing files."
