@@ -44,7 +44,10 @@ export function modifyConfig(config: Config): Config {
   }
 
   // Embeddings provider
-  if (config.embeddingsProvider.provider === "openai") {
+  if (config.embeddingsProvider.provider === "gemini") {
+    config.embeddingsProvider.apiKey = process.env.GEMINI_API_KEY;
+  }
+  else if (config.embeddingsProvider.provider === "openai") {
     config.embeddingsProvider.apiKey = process.env.OPENAI_API_KEY;
   }
   else if (config.embeddingsProvider.model === "voyage-code-2") {

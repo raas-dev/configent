@@ -69,7 +69,9 @@
     "maxPromptTokens": 2048
   },
   "embeddingsProvider": {
-    "provider": "transformers.js"
+    "provider": "gemini",
+    "model": "models/text-embedding-004",
+    "apiKey": "[GEMINI_API_KEY]"
   },
   "reranker": {
     "name": "llm",
