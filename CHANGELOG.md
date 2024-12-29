@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.5](https://github.com/raas-dev/configent/compare/1.121.4...1.121.5) (2024-12-29)
+
+
+### Fixes
+
+* **continue:** Add caching to Anthropic ([ef53faf](https://github.com/raas-dev/configent/commit/ef53fafdfc917824077c07b9c70a8d56c19dfe65))
+* **continue:** Adjust completion options ([ab3dcab](https://github.com/raas-dev/configent/commit/ab3dcab2a0864ddf33e8ccb6d2c0f940704c9b99))
+* **continue:** Use text-embedding-004 as embeddings ([ae41410](https://github.com/raas-dev/configent/commit/ae41410e1b26093e40c4c282f5f0f04a7db77534))
+
 ### [1.121.4](https://github.com/raas-dev/configent/compare/1.121.3...1.121.4) (2024-12-29)
 
 
