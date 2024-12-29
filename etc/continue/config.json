@@ -17,7 +17,11 @@
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
-      "apiKey": "[ANTHROPIC_API_KEY]"
+      "apiKey": "[ANTHROPIC_API_KEY]",
+      "cacheBehavior": {
+        "cacheSystemMessage": true,
+        "cacheConversation": true
+      }
     },
     {
       "title": "gpt-4o",
