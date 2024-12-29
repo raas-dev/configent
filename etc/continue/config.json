@@ -50,13 +50,13 @@
       "region": "eu-central-1"
     },
     {
-      "title": "Azure: gpt-4o-mini",
+      "title": "Azure: gpt-4o",
       "provider": "openai",
-      "model": "gpt-4o-mini",
+      "model": "gpt-4o",
       "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
       "apiVersion": "[AZURE_OPENAI_API_VERSION]",
-      "deployment": "gpt-4o-mini",
+      "deployment": "gpt-4o",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     }
   ],
