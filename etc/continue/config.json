@@ -64,9 +64,14 @@
     "model": "qwen2.5-coder:3b",
     "apiBase": "http://127.0.0.1:11434"
   },
+  "completionOptions": {
+    "stream": true,
+    "temperature": 0
+  },
   "tabAutocompleteOptions": {
     "multilineCompletions": "always",
-    "maxPromptTokens": 2048
+    "maxPromptTokens": 2048,
+    "onlyMyCode": false
   },
   "embeddingsProvider": {
     "provider": "gemini",
