@@ -256,7 +256,7 @@
   "window.newWindowDimensions": "inherit",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
-  "window.zoomLevel": 0.5,
+  "window.zoomLevel": 0.6,
   "windsurf.autocompleteSpeed": "fast",
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
