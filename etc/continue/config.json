@@ -38,12 +38,6 @@
       "apiBase": "http://127.0.0.1:11434"
     },
     {
-      "title": "Ollama: qwen2.5-coder",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:14b",
-      "apiBase": "http://127.0.0.1:11434"
-    },
-    {
       "title": "AWS: claude-3.5-sonnet",
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
