@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.4](https://github.com/raas-dev/configent/compare/1.121.3...1.121.4) (2024-12-29)
+
+
+### Fixes
+
+* **continue:** Remove qwen2.5-coder from chat ([c2c46cb](https://github.com/raas-dev/configent/commit/c2c46cb50d93fa8036a5b54ff5aaa9ef616c2daf))
+* **continue:** Use gpt-4o in Azure ([dbe48af](https://github.com/raas-dev/configent/commit/dbe48affe44eabdddfe7e5eb50aeeabaa10ae838))
+* **vscode:** Adjust font size and spacing ([b906118](https://github.com/raas-dev/configent/commit/b906118e8fc9ccb7f0dc8eebd8cc3d5e66e98321))
+* **vscode:** Increase window zoom level to 2/3 ([ec2752a](https://github.com/raas-dev/configent/commit/ec2752ae1692041502a84b7cfaf2927794081a35))
+
 ### [1.121.3](https://github.com/raas-dev/configent/compare/1.121.2...1.121.3) (2024-12-28)
 
 
