@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.122.0](https://github.com/raas-dev/configent/compare/1.121.5...1.122.0) (2024-12-30)
+
+
+### Features
+
+* **ai:** Add optional installation of agents ([775f9b8](https://github.com/raas-dev/configent/commit/775f9b8f53145f429df121b6f4c5d007731db7f3))
+
 ### [1.121.5](https://github.com/raas-dev/configent/compare/1.121.4...1.121.5) (2024-12-29)
 
 
