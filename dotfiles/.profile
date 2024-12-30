@@ -98,8 +98,9 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 ### asdf #######################################################################
 
-if [ -r "$HOME/.asdf/asdf.sh" ]; then
-  ASDF_FORCE_PREPEND=yes . "$HOME/.asdf/asdf.sh"
+export ASDF_DIR="$HOME/.asdf"
+if [ -r "$ASDF_DIR/asdf.sh" ]; then
+  ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
   # Go
   export ASDF_GOLANG_MOD_VERSION_ENABLED=true
@@ -176,7 +177,7 @@ command -v aws_completer >/dev/null &&
 
 ### Dotnet #####################################################################
 
-dotnet_shell_env="$HOME/.asdf/plugins/dotnet/set-dotnet-env.${SHELL##*/}"
+dotnet_shell_env="$ASDF_DIR/plugins/dotnet/set-dotnet-env.${SHELL##*/}"
 # shellcheck disable=SC1090  # do not follow non-constant source
 [ -r "$dotnet_shell_env" ] && . "$dotnet_shell_env"
 path_append "$HOME/.dotnet/tools"
