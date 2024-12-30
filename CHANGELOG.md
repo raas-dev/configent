@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.123.0](https://github.com/raas-dev/configent/compare/1.122.0...1.123.0) (2024-12-30)
+
+
+### Features
+
+* **aliases:** Use numbat-cli over kalker ([0a149ec](https://github.com/raas-dev/configent/commit/0a149ec66043f23923424dbcd67f852ca9980c07))
+
+
+### Fixes
+
+* **ai:** Fix stashing in create_assistant ([034e1b5](https://github.com/raas-dev/configent/commit/034e1b57d0a6187b13fe0ea0bb21d7a6ebe86264))
+* **asdf:** Export ASDF_DIR ([b9e7b32](https://github.com/raas-dev/configent/commit/b9e7b32f9174303220f4eaeedbd1d2ebc53adbdc))
+* **topgrade:** Disable asdf updates ([00b2265](https://github.com/raas-dev/configent/commit/00b226542f20a34984bf202ccd143f3fd59f8fc9))
+
 ## [1.122.0](https://github.com/raas-dev/configent/compare/1.121.5...1.122.0) (2024-12-30)
 
 
