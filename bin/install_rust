@@ -42,8 +42,8 @@ cargo binstall -y git-delta
 cargo binstall -y gitui
 cargo binstall -y hurl
 cargo binstall -y hwatch
-cargo binstall -y --locked kalker
 cargo binstall -y lsd
+cargo binstall -y numbat-cli
 cargo binstall -y ouch
 cargo binstall -y procs
 cargo binstall -y ripgrep
