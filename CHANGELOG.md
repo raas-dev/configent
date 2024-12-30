@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.123.1](https://github.com/raas-dev/configent/compare/1.123.0...1.123.1) (2024-12-30)
+
+
+### Fixes
+
+* **asdf:** Clone asdf 0.14.1 by default ([e7f42a3](https://github.com/raas-dev/configent/commit/e7f42a370fda3b2e190a5af6607daae70738e414))
+
 ## [1.123.0](https://github.com/raas-dev/configent/compare/1.122.0...1.123.0) (2024-12-30)
 
 
