@@ -4,19 +4,13 @@ if [ -z "$1" ]; then
   echo "Usage: $0 <target_dir>"
   exit 1
 fi
-
 target_path="$1"
 
-# Check if the fabric directory exists
-if [ -d "fabric" ]; then
-  echo "Fabric repository already exists, pulling latest changes with rebase."
-  pushd fabric >/dev/null || exit
-  git pull --no-autostash --rebase origin main
-  popd >/dev/null || exit
-else
-  echo "Cloning the latest commit of the fabric repository."
-  git clone --depth 1 https://github.com/danielmiessler/fabric.git
-fi
+this_path="$(cd "$(dirname "$0")" && pwd)"
+fabric_path="$this_path/fabric"
+
+git clone --depth 1 https://github.com/danielmiessler/fabric.git "$fabric_path" ||
+  git -C "$fabric_path" pull --no-autostash --rebase origin main
 
 # Create target directory if it doesn't exist
 mkdir -p "$target_path"
