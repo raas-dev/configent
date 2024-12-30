@@ -13,7 +13,8 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"
-git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
+git clone --depth 1 --branch v0.14.1 \
+  https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
 ### gcloud cli #################################################################
