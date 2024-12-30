@@ -18,7 +18,7 @@
 # Main model:
 
 ## Specify the model to use for the main chat
-#model: xxx
+model: gemini/gemini-2.0-flash-exp
 
 ## Use claude-3-opus-20240229 model for the main chat
 #opus: false
