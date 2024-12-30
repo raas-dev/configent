@@ -11,7 +11,7 @@ target_path="$1"
 if [ -d "fabric" ]; then
   echo "Fabric repository already exists, pulling latest changes with rebase."
   pushd fabric >/dev/null || exit
-  git pull --rebase origin main
+  git pull --no-autostash --rebase origin main
   popd >/dev/null || exit
 else
   echo "Cloning the latest commit of the fabric repository."
