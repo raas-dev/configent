@@ -329,25 +329,44 @@ alias repomix='npx -y repomix'
 
 ### Functions: AI ##############################################################
 
-# add to ~/.rclocal:
+_aichat_build() {
+  if [ -d "$AICHAT_FUNCTIONS_DIR" ]; then
+    (
+      cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 && \
+      if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        if [ -n "$(git status --porcelain)" ]; then
+          argc build
+        fi
+      fi
+    )
+  else
+    git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" || return
+    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 && argc build)
+  fi
+}
+
+# in ~/.rclocal:
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local role="chat"
   local context="${PWD##*/}"
   [ -n "$1" ] && role="chat#$1"
+  _aichat_build
   aichat --role "$role" --session "$context"
 }
 
+# requires AICHAT_FUNCTIONS_DIR
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
-  aichat --agent "$agent" --session "$context" "$*"
+  _aichat_build && aichat --agent "$agent" --session "$context" "$*"
 }
 
+# requires AICHAT_FUNCTIONS_DIR
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
-  aichat --agent "$agent" --session "$context" "$*"
+  _aichat_build && aichat --agent "$agent" --session "$context" "$*"
 }
 
 ### Functions: Docker ##########################################################
