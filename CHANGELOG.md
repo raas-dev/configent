@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.123.2](https://github.com/raas-dev/configent/compare/1.123.1...1.123.2) (2024-12-31)
+
+
+### Fixes
+
+* **aider:** Default model to gemini-2.0-flash-exp ([01c6fff](https://github.com/raas-dev/configent/commit/01c6fffa3da7a4a82bacfb8eaaf87f4bc2cb2394))
+* **aider:** Use architect mode and /load script ([cc8395c](https://github.com/raas-dev/configent/commit/cc8395c123b8e9d70ba588873038a6f49131bbe9))
+* **continue:** Add Phi-4 via ollama ([9076da8](https://github.com/raas-dev/configent/commit/9076da83e227f7b05cd3ed96af474aca97a5eb8b))
+* **continue:** Remove gpt-4o over faster gpt-4o-mini ([f913728](https://github.com/raas-dev/configent/commit/f9137286b3c170b584d13079956d707fc8d74931))
+* **vscode:** Disable GitHub copilot ([db977e2](https://github.com/raas-dev/configent/commit/db977e28701dc01b0c31096a6d2a5880a9b4e24f))
+* **vscode:** Use Roo-Cline over Cline ([1b5d32b](https://github.com/raas-dev/configent/commit/1b5d32b57711bdf8469111b587d17dc735cdd0c6))
+
 ### [1.123.1](https://github.com/raas-dev/configent/compare/1.123.0...1.123.1) (2024-12-30)
 
 
