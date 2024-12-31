@@ -36,9 +36,9 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
-      "title": "Ollama: llama3.2-vision",
+      "title": "Ollama: vanilj/Phi-4",
       "provider": "ollama",
-      "model": "llama3.2-vision:11b",
+      "model": "vanilj/Phi-4:latest",
       "apiBase": "http://127.0.0.1:11434"
     },
     {
