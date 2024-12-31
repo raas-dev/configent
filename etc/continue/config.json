@@ -2,15 +2,15 @@
   "allowAnonymousTelemetry": false,
   "models": [
     {
-      "title": "gemini-exp-1206",
-      "provider": "gemini",
-      "model": "gemini-exp-1206",
-      "apiKey": "[GEMINI_API_KEY]"
-    },
-    {
       "title": "gemini-2.0-flash-exp",
       "provider": "gemini",
       "model": "gemini-2.0-flash-exp",
+      "apiKey": "[GEMINI_API_KEY]"
+    },
+    {
+      "title": "gemini-exp-1206",
+      "provider": "gemini",
+      "model": "gemini-exp-1206",
       "apiKey": "[GEMINI_API_KEY]"
     },
     {
@@ -22,12 +22,6 @@
         "cacheSystemMessage": true,
         "cacheConversation": true
       }
-    },
-    {
-      "title": "gpt-4o",
-      "provider": "openai",
-      "model": "gpt-4o",
-      "apiKey": "[OPENAI_API_KEY]"
     },
     {
       "title": "gpt-4o-mini",
