@@ -61,7 +61,6 @@ clients:
       - name: llama3.2-vision:11b
         max_input_tokens: 128000
         supports_vision: true
-        supports_function_calling: true
       - name: jina-embeddings-v2-base-en
         type: embedding
         default_chunk_size: 1500
