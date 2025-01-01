@@ -427,6 +427,13 @@ d() {
 
 ### Functions: Utilities #######################################################
 
+# List 20 biggest subdirectories
+big() {
+  du | sort -r -n |
+    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} \
+      print int($1)" "v[s]"\t"$2}' | head -n 20
+}
+
 # Generic extract package
 e() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
@@ -508,13 +515,6 @@ taillog() {
       sudo tail --follow --verbose --lines=20 "$log"
     fi
   fi
-}
-
-# List 20 biggest subdirectories
-usage() {
-  du | sort -r -n |
-    awk '{split("K M G",v); s=1; while($1>1024){$1/=1024; s++} \
-      print int($1)" "v[s]"\t"$2}' | head -n 20
 }
 
 # Show what listens on port(s)
