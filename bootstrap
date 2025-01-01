@@ -15,12 +15,9 @@ this_path="$(cd "$(dirname "$0")" && pwd)"
 
 touch "$rclocal_path"
 
-# set empty github tokens (https://github.com/jdx/mise/issues/2910)
+# set empty MISE_GITHUB_TOKEN token (https://github.com/jdx/mise/issues/2910)
 if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
   printf "\nexport MISE_GITHUB_TOKEN="
-fi
-if ! grep -q "export GITHUB_TOKEN=" "$rclocal_path"; then
-  printf "\nexport GITHUB_TOKEN="
 fi
 
 # take existing git user name and email from .gitconfig, or leave them blank
