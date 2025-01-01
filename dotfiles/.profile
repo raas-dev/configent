@@ -101,6 +101,10 @@ export HOMEBREW_NO_ENV_HINTS=1
 path_prepend "$HOME/.local/bin"
 command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
+### go #########################################################################
+
+export GOPATH="$HOME/.go"
+
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"

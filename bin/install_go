@@ -19,6 +19,7 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### go #########################################################################
 
+export GOPATH="$HOME/.go"
 mise install go
 
 ### packages ###################################################################
@@ -50,7 +51,7 @@ go install -v github.com/rverton/webanalyze/cmd/webanalyze@latest
 # https://github.com/grafana/xk6-browser
 #go install go.k6.io/xk6/cmd/xk6@latest && xk6 build \
 #  --with github.com/grafana/xk6-browser \
-#  --output "$GOPATH/bin/xk6-browser"
+#  --output "$(mise where go)/bin/xk6-browser"
 
 ### fzf ########################################################################
 
