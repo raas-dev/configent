@@ -34,5 +34,7 @@ if command -v brew >/dev/null; then
   brew install ollama
   brew services start ollama
 elif [ "$(uname -s)" = 'Linux' ]; then
-  curl -fsSL https://ollama.com/install.sh | sh
+  if ! command -v ollama >/dev/null; then
+    curl -fsSL https://ollama.com/install.sh | sh
+  fi
 fi
