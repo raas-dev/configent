@@ -433,6 +433,7 @@ EPOCH=$(date "+%s")
 KEEP_ALL_DATE=$((EPOCH - 86400))       # 1 day ago
 KEEP_DAILIES_DATE=$((EPOCH - 2678400)) # 31 days ago
 
+# nosemgrep: bash.lang.security.ifs-tampering.ifs-tampering
 export IFS=$'\n' # Better for handling spaces in filenames.
 DEST="$DEST_FOLDER/$NOW"
 PREVIOUS_DEST="$(fn_find_backups | head -n 1)"
