@@ -99,7 +99,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 ### mise #######################################################################
 
 path_prepend "$HOME/.local/bin"
-command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
+command -v mise >/dev/null && eval "$(mise activate --quiet "${SHELL##*/}")"
 
 ### go #########################################################################
 
@@ -165,7 +165,7 @@ command -v aws_completer >/dev/null &&
 
 # shellcheck disable=SC2155  # will not declare separately, value compactness
 if command -v mise >/dev/null; then
-  export DOTNET_ROOT="$(mise where dotnet)"
+  export DOTNET_ROOT="$(mise where --quiet dotnet)"
 fi
 
 path_append "$HOME/.dotnet/tools"
