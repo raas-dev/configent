@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.5](https://github.com/raas-dev/configent/compare/1.125.4...1.125.5) (2025-01-01)
+
+
+### Fixes
+
+* **profile:** Fix Haskell ghcup order in PATH ([5d99ff0](https://github.com/raas-dev/configent/commit/5d99ff043c74b39f7a8d983e35bae75ad0e3966a))
+
 ### [1.125.4](https://github.com/raas-dev/configent/compare/1.125.3...1.125.4) (2025-01-01)
 
 
