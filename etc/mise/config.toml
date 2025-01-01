@@ -1,7 +1,4 @@
 [tools]
-# https://github.com/jdx/mise-usage
-usage = '1.7.4'
-
 # languages
 rust = '1.83.0'
 go = '1.23.4'
@@ -49,3 +46,9 @@ cloudflared = '2024.12.2'
 
 # install_flyctl
 flyctl = '0.3.56'
+
+# https://github.com/jdx/mise-usage
+usage = '1.7.4'
+
+[settings]
+activate_aggressive = true
