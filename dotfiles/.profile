@@ -105,6 +105,10 @@ command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
 export GOPATH="$HOME/.go"
 
+### Haskell ####################################################################
+
+path_prepend "$HOME/.ghcup/bin"
+
 ### Python #####################################################################
 
 # PATH is rewritten on (re)loading shell, thus we are not in virtualenv
@@ -156,10 +160,6 @@ export BAT_THEME="SynthWave84"
 
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
-
-### Haskell ####################################################################
-
-path_append "$HOME/.ghcup/bin"
 
 ### Dotnet #####################################################################
 
