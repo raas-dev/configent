@@ -122,7 +122,7 @@ ln -sfnv "$config_path/aichat/env" "$HOME/.config/aichat/.env"
 if [ ! -r "$backup_path/.config/aichat/roles" ]; then
   if [ -r "$HOME/.config/aichat/roles" ]; then
     mkdir -p "$backup_path/.config/aichat"
-    cp -P "$HOME/.config/aichat/roles" "$backup_path/.config/aichat/roles"
+    cp -RP "$HOME/.config/aichat/roles" "$backup_path/.config/aichat/roles"
   fi
 fi
 ln -sfnv "$config_path/aichat/roles" "$HOME/.config/aichat/roles"
