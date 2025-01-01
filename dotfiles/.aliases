@@ -722,6 +722,7 @@ alias syft='n syft'
 alias trufflehog='n trufflehog/git'
 
 # sast
+alias hadolint='n hadolint'
 alias kubescape='n kubescape'
 alias terrascan='n terrascan'
 
