@@ -41,6 +41,9 @@ pip install --upgrade uv
 
 ### dedicated virtualenvs ######################################################
 
+mkdir -p "$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
+
 uv tool install 'aider-chat[browser]'
 uv tool install pdm
 uv tool install poetry
