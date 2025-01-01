@@ -58,8 +58,11 @@ fi
 
 # install mise
 export PATH="$HOME/.local/bin:$PATH"
-! command -v mise >/dev/null && curl https://mise.run | sh
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+if command -v mise >/dev/null; then
+  mise self-update --yes
+else
+  curl https://mise.run | sh
+fi
 mise install usage
 
 # install language SDKs
