@@ -105,29 +105,6 @@ command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
 export GOPATH="$HOME/.go"
 
-### asdf #######################################################################
-
-export ASDF_DIR="$HOME/.asdf"
-if [ -r "$ASDF_DIR/asdf.sh" ]; then
-  ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
-
-  # Go
-  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-  go_path="$(asdf where golang 2>/dev/null)"
-  if [ -d "$go_path" ]; then
-    export GOPATH="$go_path"
-    export GOROOT="$GOPATH/go"
-    path_prepend "$GOPATH/bin"
-  fi
-
-  # Rust
-  rust_path="$(asdf where rust 2>/dev/null)"
-  if [ -d "$rust_path" ]; then
-    export CARGO_HOME="$rust_path"
-    path_prepend "$CARGO_HOME/bin"
-  fi
-fi
-
 ### Python #####################################################################
 
 # PATH is rewritten on (re)loading shell, thus we are not in virtualenv
