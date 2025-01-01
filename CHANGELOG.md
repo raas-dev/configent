@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.124.0](https://github.com/raas-dev/configent/compare/1.123.2...1.124.0) (2025-01-01)
+
+
+### Features
+
+* **rust:** Update rust 1.77.2 -> 1.83.0 ([5a94416](https://github.com/raas-dev/configent/commit/5a944161ccf9fcb986236ac538113bdd89f844fa))
+
+
+### Fixes
+
+* **aliases:** Make f use glob search by default ([14b9635](https://github.com/raas-dev/configent/commit/14b963551abbcd2435e5639c68379d1d81b893bf))
+* **python:** Add create ~/.local/bin to install ([878c228](https://github.com/raas-dev/configent/commit/878c2280ec6c2f21365a5287dd0f36ecd79e0d68))
+
 ### [1.123.2](https://github.com/raas-dev/configent/compare/1.123.1...1.123.2) (2024-12-31)
 
 
