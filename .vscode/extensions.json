@@ -2,7 +2,6 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "foxundermoon.shell-format",
-    "mads-hartmann.bash-ide-vscode",
-    "exiasr.hadolint"
+    "mads-hartmann.bash-ide-vscode"
   ]
 }

@@ -19,7 +19,3 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 ### shellcheck #################################################################
 
 mise install shellcheck
-
-### hadolint ###################################################################
-
-mise install hadolint

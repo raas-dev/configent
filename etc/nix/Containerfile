@@ -1,4 +1,3 @@
-# hadolint global ignore=DL3007,DL3059
 # checkov:skip=CKV_DOCKER_7: skip image tag
 FROM nixos/nix:2.22.0
 
