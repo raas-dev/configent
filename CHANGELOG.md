@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.2](https://github.com/raas-dev/configent/compare/1.125.1...1.125.2) (2025-01-01)
+
+
+### Fixes
+
+* **aliases:** Add hadolint via n ([13db792](https://github.com/raas-dev/configent/commit/13db7928c79536b904c399fcf1314605485f637e))
+* **bootstrap:** Add empty GITHUB_TOKEN ([92bfa7c](https://github.com/raas-dev/configent/commit/92bfa7c50739e0c83c534e929b2b6863d6b61910))
+
 ### [1.125.1](https://github.com/raas-dev/configent/compare/1.125.0...1.125.1) (2025-01-01)
 
 
