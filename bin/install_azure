@@ -18,7 +18,7 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### az #########################################################################
 
-mise plugin install --yes azure-cli https://github.com/asyrjasalo/asdf-azure-cli
+mise plugin install --yes https://github.com/asyrjasalo/asdf-azure-cli
 mise install azure-cli
 
 az config set core.collect_telemetry=no
