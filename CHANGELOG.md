@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.7](https://github.com/raas-dev/configent/compare/1.125.6...1.125.7) (2025-01-01)
+
+
+### Fixes
+
+* **docker:** Add sudo to runsc install ([8ae9c0e](https://github.com/raas-dev/configent/commit/8ae9c0e5c7a0b29733e60eacddd84cf492a0f198))
+* **install:** Check if rootful docker installed ([a06b048](https://github.com/raas-dev/configent/commit/a06b0483257552599b1ec72bb4ae2300f8c5b09d))
+* **ollama:** Skip reinstall on Linux ([2ae43d5](https://github.com/raas-dev/configent/commit/2ae43d5c341b69151ca733f7656cef9828e049f4))
+
 ### [1.125.6](https://github.com/raas-dev/configent/compare/1.125.5...1.125.6) (2025-01-01)
 
 
