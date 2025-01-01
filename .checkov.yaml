@@ -8,6 +8,7 @@ skip-path:
   - .git
   - .backup
   - etc/prompts/assistant/write_nuclei_template_rule.md
+  - etc/prompts/fabric
   - vscode/globalStorage
   - vscode/History
   - vscode/sync
