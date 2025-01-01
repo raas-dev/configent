@@ -69,5 +69,5 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gviso
 $SUDO apt-get update
 $SUDO apt-get install -y runsc
 # rootful install:
-runsc install
+$SUDO runsc install
 $SUDO systemctl reload docker
