@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.6](https://github.com/raas-dev/configent/compare/1.125.5...1.125.6) (2025-01-01)
+
+
+### Fixes
+
+* **install:** Self-update mise ([ce8129b](https://github.com/raas-dev/configent/commit/ce8129b985fbac6ec1258bfd130a5a40f4ced5d6))
+* **profile:** Make mise quiet ([98236ea](https://github.com/raas-dev/configent/commit/98236eacbabedb484fbdfbe6179b5fa6b0a6ba35))
+
 ### [1.125.5](https://github.com/raas-dev/configent/compare/1.125.4...1.125.5) (2025-01-01)
 
 
