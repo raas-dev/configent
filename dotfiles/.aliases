@@ -120,7 +120,7 @@ alias g='git'
 alias h='xh --verify=no'
 alias i='glances'
 # j is for zoxide
-# k is for scientific "kalkulator", see k()
+alias k='kalk'
 alias l='la'
 # m is for m-cli
 # n is for ad-hoc nix-shell in docker, see n()
@@ -129,13 +129,13 @@ alias p='procs --tree --watch-interval 1'
 alias q='clear'
 alias r='exec $SHELL'
 alias s='rg --smart-case --no-ignore --hidden --glob "!.git/"'
-alias t='taillog'
+alias t='logs'
 alias u='diskonaut'
 alias v='limactl'
 alias w='which -a'
 alias x='pkill -i -f'
 alias y='tldr'
-alias z='whatlistens'
+alias z='port'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
@@ -438,8 +438,8 @@ big() {
 e() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
   if [ $# -eq 0 ]; then
-    echo "Usage: e <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
-    echo "       e <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
+    echo "       $0 <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
   fi
 
   for n in "$@"; do
@@ -490,7 +490,7 @@ genpass() {
 }
 
 # Scientific calculator with support for physical units
-k() {
+kalk() {
   # https://numbat.dev/
   if [ $# -eq 0 ]; then
     numbat
@@ -500,7 +500,7 @@ k() {
 }
 
 # Follow the given log file, or cloud-init output if log file is not given
-taillog() {
+logs() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
   if command -v lnav >/dev/null; then
     if [ -r "$log" ]; then
@@ -517,8 +517,8 @@ taillog() {
   fi
 }
 
-# Show what listens on port(s)
-whatlistens() {
+# List what listens on port(s, separated by comma)
+port() {
   local filter=
   [ -n "$1" ] && filter=":$1"
   lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
