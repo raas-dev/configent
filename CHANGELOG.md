@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.8](https://github.com/raas-dev/configent/compare/1.125.7...1.125.8) (2025-01-01)
+
+
+### Fixes
+
+* **aliases:** Skip mise in up/dup ([1385b1c](https://github.com/raas-dev/configent/commit/1385b1c6fa7aa821f51cb2a19abfafb892f142ed))
+
 ### [1.125.7](https://github.com/raas-dev/configent/compare/1.125.6...1.125.7) (2025-01-01)
 
 
