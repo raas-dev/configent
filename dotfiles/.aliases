@@ -521,7 +521,6 @@ whatlistens() {
   lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
 }
 
-
 ### Functions: Cleaners ########################################################
 
 # Npm remove all global packages (except later npm installed via npm)
