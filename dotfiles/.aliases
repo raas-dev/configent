@@ -115,7 +115,7 @@ alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='ai_developer'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
-alias f='fd --ignore-case --no-ignore --hidden'
+alias f='fd --ignore-case --no-ignore --hidden --glob'
 alias g='git'
 alias h='xh --verify=no'
 alias i='glances'
