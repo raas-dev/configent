@@ -163,8 +163,8 @@ command -v aws_completer >/dev/null &&
 
 ### Dotnet #####################################################################
 
-# shellcheck disable=SC2155  # will not declare separately, value compactness
 if command -v mise >/dev/null; then
+  # shellcheck disable=SC2155  # will not declare separately, value compactness
   export DOTNET_ROOT="$(mise where --quiet dotnet)"
 fi
 
