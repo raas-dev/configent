@@ -45,5 +45,4 @@ python -m uv tool install 'aider-chat[browser]'
 python -m uv tool install pdm
 python -m uv tool install poetry
 python -m uv tool install pre-commit
-python -m uv tool install semgrep
 python -m uv tool install tldr

@@ -235,6 +235,9 @@ alias you-get='uvx you-get'
 # Checkov
 alias checkov='uvx checkov'
 
+# Semgrep
+alias semgrep='uvx semgrep'
+
 # GuardDog
 alias guarddog='uvx guarddog'
 
