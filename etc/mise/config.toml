@@ -1,50 +1,52 @@
 [tools]
-# mise
+# https://github.com/jdx/mise-usage
 usage = '1.7.4'
 
 # languages
 rust = '1.83.0'
-go = '1.23.3'
-nodejs = '22.11.0'
-python = '3.12.7'
-dotnet = '8.0.204'
-bun = '1.1.32' # zig
-ruby = '3.3.0'
-java = 'temurin-17.0.11+9'
+go = '1.23.4'
+nodejs = '22.12.0'
+python = '3.12.8'
+dotnet = '8.0.404'
+bun = '1.1.42'
+ruby = '3.4.1'
+java = 'temurin-17.0.13+11'
 ghcup = '0.1.30.0' # haskell
 
 # install_jq
 jq = '1.7.1'
 
 # install_github
-github-cli = '2.54.0'
+github-cli = '2.64.0'
 
-# install_appsec'
+# install_linters
 shellcheck = '0.10.0'
 hadolint = '2.12.0'
-trivy = '0.50.1'
+
+# install_appsec
+trivy = '0.58.1'
 
 # install_aws
-awscli = '2.15.40'
+awscli = '2.22.26'
 
 # install_azure
-azure-cli = '2.65.0'
+azure-cli = '2.67.0'
 
 # install_gcloud
-gcloud = '472.0.0'
+gcloud = '504.0.1'
 
 # install_terraform
-terraform = '1.9.8'
+terraform = '1.10.3'
 tfsec = '1.28.11'
 
 # install_k8sdev
-kubectl = '1.30.0'
+kubectl = '1.32.0'
 krew = '0.4.4'
-helm = '3.14.4'
-k9s = '0.32.4'
+helm = '3.16.4'
+k9s = '0.32.7'
 
 # install_cloudflare
-cloudflared = '2024.4.0'
+cloudflared = '2024.12.2'
 
 # install_flyctl
-flyctl = '0.2.40'
+flyctl = '0.3.56'
