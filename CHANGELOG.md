@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.125.0](https://github.com/raas-dev/configent/compare/1.124.0...1.125.0) (2025-01-01)
+
+
+### Features
+
+* **install:** Remove legacy asdf files ([2bf618f](https://github.com/raas-dev/configent/commit/2bf618fb0a5b7f9838acd0129a3c52dcaea17c28))
+* **install:** Update all languages and tools ([d6ff241](https://github.com/raas-dev/configent/commit/d6ff2414187de6d3e73033e86dc3267c220f27d1))
+* **install:** Use mise over asdf ([cfebbf1](https://github.com/raas-dev/configent/commit/cfebbf1b2deec4859d6b6f1818eb20ba75a76f14))
+
+
+### Fixes
+
+* **aliases:** Remove default --glob for f ([0b2da09](https://github.com/raas-dev/configent/commit/0b2da09ab89a60e2015a6debad60b7347f1af43a))
+* **azure:** Fix azure cli ([500604a](https://github.com/raas-dev/configent/commit/500604a1229c3ac0f85154560ecd5483e2f595f5))
+* **bash:** Remove asdf completions ([e5ffc9a](https://github.com/raas-dev/configent/commit/e5ffc9aea671a86de98e7212cb16fb589d356ca8))
+* **go:** Make GOPATH ~/.go regardless of go version ([bb1f6f2](https://github.com/raas-dev/configent/commit/bb1f6f27d4e309323216de189e364a6c0c27f7b9))
+* **install:** Fix azure-cli plugin source ([3e873fe](https://github.com/raas-dev/configent/commit/3e873fe6488b4aa39da7e401102773f236cb0351))
+* **install:** Fix backup achat roles dir ([ff0810d](https://github.com/raas-dev/configent/commit/ff0810de08ed0e8b9ce17af49433722a635bab9e))
+* **install:** Order install apps per priority ([2eda02a](https://github.com/raas-dev/configent/commit/2eda02a708b6fe55719f05eb2191996e9068d58e))
+* **profile:** Remove loading asdf ([ceb5ad0](https://github.com/raas-dev/configent/commit/ceb5ad0d314368aa016e8f91b81c020ce54dd4a6))
+
 ## [1.124.0](https://github.com/raas-dev/configent/compare/1.123.2...1.124.0) (2025-01-01)
 
 
