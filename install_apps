@@ -76,6 +76,9 @@ mise install usage
 # install jq
 "$bin_path/install_jq"
 
+# install GitHub CLI
+"$bin_path/install_github"
+
 # install Vim plugins
 "$bin_path/install_vim"
 
@@ -88,6 +91,12 @@ mise install usage
 # install Ollama
 "$bin_path/install_ollama"
 
+# install static analysis tools
+"$bin_path/install_linters"
+
+# install appsec tools such as vulnerability scanners
+#"$bin_path/install_appsec"
+
 # install cloud development tools
 "$bin_path/install_aws"
 "$bin_path/install_azure"
@@ -96,15 +105,6 @@ mise install usage
 #"$bin_path/install_k8sdev"
 #"$bin_path/install_cloudflare"
 #"$bin_path/install_flyctl"
-
-# install static analysis tools
-"$bin_path/install_linters"
-
-# install appsec tools such as vulnerability scanners
-#"$bin_path/install_appsec"
-
-# install GitHub CLI
-"$bin_path/install_github"
 
 # copy ui/fonts/** to user's fonts path
 "$bin_path/install_fonts"
