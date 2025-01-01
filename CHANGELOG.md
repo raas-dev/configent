@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.1](https://github.com/raas-dev/configent/compare/1.125.0...1.125.1) (2025-01-01)
+
+
+### Fixes
+
+* **hadolint:** Remove hadolint due to ARM64 issues ([a308de3](https://github.com/raas-dev/configent/commit/a308de35c7d6d773e3af98dcb1e311a07f6dc693))
+* **python:** Move semgrep to be used via uvx ([b5a1977](https://github.com/raas-dev/configent/commit/b5a19777a7a5aea44e7411f81e9f6f8a4cc44f30))
+* **python:** Remove unnecessary uninstall ([f3270af](https://github.com/raas-dev/configent/commit/f3270af05e5dd84f00529646d28f6c48d90bc091))
+
 ## [1.125.0](https://github.com/raas-dev/configent/compare/1.124.0...1.125.0) (2025-01-01)
 
 
