@@ -7,27 +7,18 @@
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # shellcheck disable=SC1091  # do not expect input files
-# shellcheck disable=SC2155  # will not declare separately, value compactness
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### asdf #######################################################################
+### mise #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-git clone --depth 1 --branch v0.14.1 \
-  https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
-
-### rustup #####################################################################
-
-asdf plugin add rust
-asdf install rust
-
-rustup default stable
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### cargo ######################################################################
 
-export CARGO_HOME="$(asdf where rust 2>/dev/null)"
+mise install rust
 
 ### cargo binstall #############################################################
 

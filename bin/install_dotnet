@@ -13,18 +13,16 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### asdf #######################################################################
+### mise #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-git clone --depth 1 --branch v0.14.1 \
-  https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### dotnet #####################################################################
 
-asdf plugin add dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-asdf install dotnet
+mise install --yes dotnet
 
 ### Powershell #################################################################
 

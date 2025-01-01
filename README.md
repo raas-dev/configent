@@ -139,9 +139,9 @@ On macOS, [Homebrew](https://brew.sh) is used to install requirements and
 casks (GUI apps) user-wide.
 
 Language runtimes and development tools are always installed user-wide by
-[asdf](https://asdf-vm.com/). Global versions are defined in `~/.tool-versions`.
-Whenever possible, [asdf plugins](https://github.com/asdf-vm/asdf-plugins)
-are preferred over Homebrew.
+[mise](https://mise.jdx.dev/). Global versions are defined in
+`~/.config/mise/config.toml`. Whenever possible,
+[mise plugins](https://mise.jdx.dev/registry.html) are preferred over Homebrew.
 
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
@@ -151,7 +151,8 @@ preferred, but if it this not possible (no `sudo`), it is installed user's home.
 In both cases, Zsh, Neovim and tmux are installed using Homebrew on Linux,
 as it likely has newer versions than the ones gotten from the distro's repo.
 
-💡: See [asdf documentation](https://asdf-vm.com/manage/versions.html#set-current-version) for locking project specific versions.
+💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
+configuring project specific versions.
 
 ### setup_vscode / setup_vscodium
 

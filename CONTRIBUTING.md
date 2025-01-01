@@ -15,7 +15,7 @@ a pull request.
 3. The software **installed** must work on 95% of the supported Linux distros
 4. There is most often **no need to install** on the host as `n` can run it
 5. We do not rely on Homebrew outside macOS, before Homebrew Linux works on ARM
-6. We prefer `asdf plugin`s when they provide binaries both for x86-64 and ARM
+6. We prefer `mise` plugins when they provide binaries both for x86-64 and ARM
 7. Otherwise we use the distros' official repositories (may have older versions)
 8. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
 
@@ -23,8 +23,6 @@ a pull request.
 
 - Alpine Linux:
   - Homebrew does not work due to musl (all architectures)
-    - Use `asdf` wherever possible, otherwise use `apk`
-  - asdf installed Node.js crashes, use `apk add nodejs` (2024-04)
-    - `.asdf/installs/nodejs/20.12.2/bin/node: fcntl64: symbol not found`
+    - Use `mise` wherever possible, otherwise use `apk`
   - Rootless docker is not supported
     - Re-login is required after the initial install to be in `docker` group

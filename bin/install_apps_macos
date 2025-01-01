@@ -51,7 +51,7 @@ brew install git
 # Git extension for versioning large files
 brew install git-lfs
 
-# Git extra commands (https://asdf-vm.com/manage/commands.html)
+# Git extra commands (https://github.com/tj/git-extras)
 brew install git-extras
 
 # Linux virtual machines on QEMU

@@ -6,4 +6,4 @@ zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
 
-ohmyzsh/ohmyzsh path:plugins/asdf
+wintermi/zsh-mise

@@ -10,14 +10,12 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### asdf #######################################################################
+### mise #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-git clone --depth 1 --branch v0.14.1 \
-  https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### gh #########################################################################
 
-asdf plugin add github-cli
-asdf install github-cli
+mise install github-cli

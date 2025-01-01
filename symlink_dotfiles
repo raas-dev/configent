@@ -36,6 +36,16 @@ for source_file_name in $files; do
   ln -sfnv "$dotfiles_path/$source_file_name" "$HOME/$source_file_name"
 done
 
+### Symlink mise config directory  #############################################
+
+if [ ! -r "$backup_path/.config/mise" ]; then
+  if [ -r "$HOME/.config/mise" ]; then
+    mkdir -p "$backup_path/.config"
+    cp -RP "$HOME/.config/mise" "$backup_path/.config/mise"
+  fi
+fi
+ln -sfnv "$config_path/mise" "$HOME/.config/mise"
+
 ### Symlink Starship config ####################################################
 
 if [ ! -r "$backup_path/.config/starship.toml" ]; then

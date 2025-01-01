@@ -56,7 +56,13 @@ fi
 # install Zsh if brew is available, always install Zsh plugins
 "$bin_path/install_zsh"
 
-# install asdf, asdf language plugin and language version in .tool-versions
+# install mise
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+mise install usage
+
+# install language SDKs
 "$bin_path/install_rust"
 "$bin_path/install_go"
 "$bin_path/install_nodejs"

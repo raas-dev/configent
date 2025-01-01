@@ -10,17 +10,16 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### asdf #######################################################################
+### mise #######################################################################
 
-export ASDF_DIR="$HOME/.asdf"
-git clone --depth 1 --branch v0.14.1 \
-  https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
-ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### python #####################################################################
 
-asdf plugin add python
-asdf install python
+mise uninstall python
+mise install python
 
 ### interpreter scope ##########################################################
 
@@ -43,12 +42,9 @@ pip install --upgrade uv
 
 ### dedicated virtualenvs ######################################################
 
-mkdir -p "$HOME/.local/bin"
-export PATH="$HOME/.local/bin:$PATH"
-
-uv tool install 'aider-chat[browser]'
-uv tool install pdm
-uv tool install poetry
-uv tool install pre-commit
-uv tool install semgrep
-uv tool install tldr
+python -m uv tool install 'aider-chat[browser]'
+python -m uv tool install pdm
+python -m uv tool install poetry
+python -m uv tool install pre-commit
+python -m uv tool install semgrep
+python -m uv tool install tldr

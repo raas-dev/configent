@@ -96,6 +96,11 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
+### mise #######################################################################
+
+path_prepend "$HOME/.local/bin"
+command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
+
 ### asdf #######################################################################
 
 export ASDF_DIR="$HOME/.asdf"
@@ -119,10 +124,6 @@ if [ -r "$ASDF_DIR/asdf.sh" ]; then
   fi
 fi
 
-### Haskell ####################################################################
-
-[ -r "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
-
 ### Python #####################################################################
 
 # PATH is rewritten on (re)loading shell, thus we are not in virtualenv
@@ -144,7 +145,7 @@ export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 export RICH_TRACEBACKS=true
 export RICH_SHOW_LOCALS=true
 
-# Add uv/pipx installed binaries to PATH
+# Put uv/pipx installed binaries first in PATH
 path_prepend "$HOME/.local/bin"
 
 ### Starship cross-shell prompt ################################################
@@ -175,11 +176,17 @@ export BAT_THEME="SynthWave84"
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
+### Haskell ####################################################################
+
+path_append "$HOME/.ghcup/bin"
+
 ### Dotnet #####################################################################
 
-dotnet_shell_env="$ASDF_DIR/plugins/dotnet/set-dotnet-env.${SHELL##*/}"
-# shellcheck disable=SC1090  # do not follow non-constant source
-[ -r "$dotnet_shell_env" ] && . "$dotnet_shell_env"
+# shellcheck disable=SC2155  # will not declare separately, value compactness
+if command -v mise >/dev/null; then
+  export DOTNET_ROOT="$(mise where dotnet)"
+fi
+
 path_append "$HOME/.dotnet/tools"
 
 ### Azure bicep ################################################################
