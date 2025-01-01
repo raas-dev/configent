@@ -17,7 +17,7 @@ git clone --depth 1 --branch v0.14.1 \
   https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
-### azure cli ##################################################################
+### az #########################################################################
 
 asdf plugin add azure-cli https://github.com/asyrjasalo/asdf-azure-cli
 asdf install azure-cli

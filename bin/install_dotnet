@@ -20,7 +20,7 @@ git clone --depth 1 --branch v0.14.1 \
   https://github.com/asdf-vm/asdf.git "$ASDF_DIR"
 ASDF_FORCE_PREPEND=yes . "$ASDF_DIR/asdf.sh"
 
-### dotnet tools ###############################################################
+### dotnet #####################################################################
 
 asdf plugin add dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
