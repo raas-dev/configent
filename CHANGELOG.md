@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.3](https://github.com/raas-dev/configent/compare/1.125.2...1.125.3) (2025-01-01)
+
+
+### Fixes
+
+* **bootstrap:** Set empty MISE_GITHUB_TOKEN ([39bcfba](https://github.com/raas-dev/configent/commit/39bcfba6b4af09ef74c2b4e4ad94dd9a54e8e6ef))
+
 ### [1.125.2](https://github.com/raas-dev/configent/compare/1.125.1...1.125.2) (2025-01-01)
 
 
