@@ -72,7 +72,7 @@ brew install sniffnet
 # Maintained ctags implementation
 brew install universal-ctags
 
-# For compiling language versions (asdf)
+# For compiling language versions (mise)
 brew install xz
 
 # For hurl
