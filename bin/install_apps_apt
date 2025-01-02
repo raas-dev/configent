@@ -73,9 +73,6 @@ $SUDO apt-get install -y zsh
 # git-extras
 $SUDO apt-get install -y git-extras
 
-# tmux
-$SUDO apt-get install -y tmux
-
 # GNU awk
 $SUDO apt-get install -y gawk
 

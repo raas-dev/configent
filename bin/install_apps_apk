@@ -71,9 +71,6 @@ $SUDO apk add vim
 # Git-extras
 $SUDO apk add git-extras@testing
 
-# Tmux
-$SUDO apk add tmux
-
 # GNU awk
 $SUDO apk add gawk
 

@@ -88,7 +88,7 @@ mise install usage
 # install Neovim
 "$bin_path/install_neovim"
 
-# install tmux if brew is available, always install tmux plugins
+# install tmux and tmux plugins
 "$bin_path/install_tmux"
 
 # install Ollama

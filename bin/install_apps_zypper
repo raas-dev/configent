@@ -60,9 +60,6 @@ $SUDO zypper install -y zsh
 # git-extras, not available in OpenSUSE (as of 2023-07)
 #$SUDO zypper install -y git-extras
 
-# tmux
-$SUDO zypper install -y tmux
-
 # GNU awk
 $SUDO zypper install -y gawk
 

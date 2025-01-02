@@ -63,9 +63,6 @@ $SUDO dnf install -y zsh
 # git-extras, not available in CentOS Stream (as of 2023-07)
 $SUDO dnf install -y git-extras
 
-# tmux
-$SUDO dnf install -y tmux
-
 # GNU awk
 $SUDO dnf install -y gawk
 

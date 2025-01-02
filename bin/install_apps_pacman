@@ -57,9 +57,6 @@ $SUDO pacman --noconfirm --needed -S bash
 # Zsh
 $SUDO pacman --noconfirm --needed -S zsh
 
-# tmux
-$SUDO pacman --noconfirm --needed -S tmux
-
 # GNU awk
 $SUDO pacman --noconfirm --needed -S gawk
 

@@ -50,6 +50,9 @@ flyctl = '0.3.56'
 # install_neovim
 neovim = '0.10.3'
 
+# install_tmux
+tmux = '3.5a'
+
 # mise completion
 usage = '1.7.4'
 
