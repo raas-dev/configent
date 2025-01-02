@@ -199,16 +199,34 @@ export AZURE_CORE_COLLECT_TELEMETRY=0
 export AZURE_DEV_COLLECT_TELEMETRY=no
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export ORYX_DISABLE_TELEMETRY=true
 export POWERSHELL_TELEMETRY_OPTOUT=1
+export RESTLER_TELEMETRY_OPTOUT=1
+
+# aws
+export SLS_TELEMETRY_DISABLED=1
+export SLS_TRACKING_DISABLED=1
 
 # js
 export GATSBY_TELEMETRY_DISABLED=1
 export NEXT_TELEMETRY_DISABLED=1
 export NUXT_TELEMETRY_DISABLED=1
+export NG_CLI_ANALYTICS=false
+export NG_CLI_ANALYTICS_SHARE=false
 export YARN_ENABLE_TELEMETRY=0
+
+# rust
+export BINSTALL_DISABLE_TELEMETRY=true
 
 # go
 export GOTELEMETRY=off
+
+# hashicorp (terraform, consul, ...)
+export CHECKPOINT_DISABLE=1
+
+# infracost
+export INFRACOST_SELF_HOSTED_TELEMETRY=false
+export INFRACOST_SKIP_UPDATE_CHECK=true
 
 ### aichat #####################################################################
 
