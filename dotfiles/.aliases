@@ -352,14 +352,13 @@ _aichat_build() {
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local context="${PWD##*/}"
-  local role=""
-  [ -n "$1" ] && role="$1"
+  local role="$1"
   _aichat_build
 
   # search most specific roles first
-  if AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles | grep -Fx -q "$1"; then
+  if AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles | grep -Fx -q "$role"; then
     local category="developer"
-  elif AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" aichat --list-roles | grep -Fx -q "$1"; then
+  elif AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" aichat --list-roles | grep -Fx -q "$role"; then
     local category="assistant"
   else
     local category="general"
