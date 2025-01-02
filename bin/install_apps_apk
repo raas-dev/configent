@@ -45,7 +45,7 @@ $SUDO apk add gnupg
 $SUDO apk add musl-locales
 
 # Common build tools
-$SUDO apk add build-base cmake gcc gcompat icu-libs m4 ncurses
+$SUDO apk add bison build-base cmake gcc gcompat icu-libs m4 ncurses
 
 # Common development dependencies
 $SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev musl-dev \

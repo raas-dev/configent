@@ -34,7 +34,7 @@ $SUDO pacman --noconfirm --needed -S ca-certificates
 $SUDO pacman --noconfirm --needed -S gnupg
 
 # Common build tools
-$SUDO pacman --noconfirm --needed -S base-devel bzip2 cmake gcc glibc
+$SUDO pacman --noconfirm --needed -S base-devel bison bzip2 cmake gcc glibc
 
 # Common development dependencies
 $SUDO pacman --noconfirm --needed -S libffi libunistring libxml2 m4 ncurses \

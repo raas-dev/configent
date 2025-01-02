@@ -41,7 +41,7 @@ $SUDO dnf install -y ca-certificates
 $SUDO dnf install -y gnupg
 
 # Common build tools
-$SUDO dnf install -y cmake gcc gcc-c++ libicu make m4 pkgconf-pkg-config
+$SUDO dnf install -y bison cmake gcc gcc-c++ libicu make m4 pkgconf-pkg-config
 
 # Common development dependencies
 $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
