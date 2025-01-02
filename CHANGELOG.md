@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.7](https://github.com/raas-dev/configent/compare/1.128.6...1.128.7) (2025-01-02)
+
+
+### Fixes
+
+* **pacman:** Remove legacy openssl-1.1 ([593c64f](https://github.com/raas-dev/configent/commit/593c64f4b493fe2d709c426cf012db6dbea15344))
+
 ### [1.128.6](https://github.com/raas-dev/configent/compare/1.128.5...1.128.6) (2025-01-02)
 
 
