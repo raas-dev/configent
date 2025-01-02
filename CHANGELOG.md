@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.126.0](https://github.com/raas-dev/configent/compare/1.125.9...1.126.0) (2025-01-02)
+
+
+### Features
+
+* **mise:** Add neovim ([4db216b](https://github.com/raas-dev/configent/commit/4db216bbba5495c738eb5dbcf3ca69cfe74fb5c0))
+* **mise:** Add ollama ([2f50888](https://github.com/raas-dev/configent/commit/2f5088809c1edede934a04e4dc7d59e9503cfea7))
+* **mise:** Add tmux ([52deec3](https://github.com/raas-dev/configent/commit/52deec30f8bd07c7a8f56e4da70648bb8884c4be))
+
+
+### Fixes
+
+* **install:** Add bison for install tmux via mise ([f41ff1b](https://github.com/raas-dev/configent/commit/f41ff1bba466a0c13f2ae7f9ccd4ba341ba9bace))
+* **neovim:** Remove installing neovim from distro ([c0a8ed1](https://github.com/raas-dev/configent/commit/c0a8ed11e9f93272604742776aa24e8dd368376c))
+
 ### [1.125.9](https://github.com/raas-dev/configent/compare/1.125.8...1.125.9) (2025-01-02)
 
 
