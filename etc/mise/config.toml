@@ -27,9 +27,9 @@ uv = 'latest'
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "postinstall_pwsh" }
 #bun = '1.1.42'
-#ruby = { version = '3.4.1', postinstall = "postinstall_ruby" }
+#ruby = '3.4.1'
 #java = 'temurin-17.0.13+11'
-#ghcup = { version = '0.1.30.0', postinstall = "postinstall_ghcup" }
+#ghcup = { version = '0.1.30.0', postinstall = "ghcup install stack" }
 jq = '1.7.1'
 github-cli = '2.64.0'
 shellcheck = '0.10.0'
@@ -40,7 +40,7 @@ azure-cli = { version = '2.67.0', postinstall = "postinstall_azure" }
 #terraform = '1.10.3'
 #tfsec = '1.28.11'
 #kubectl = '1.32.0'
-#krew = { version = '0.4.4', postinstall = "postinstall_krew" }
+#krew = { version = '0.4.4', postinstall = "krew install ctx ns" }
 #helm = '3.16.4'
 #k9s = '0.32.7'
 #cloudflared = '2024.12.2'
