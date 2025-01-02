@@ -85,6 +85,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   path_prepend "$(brew --prefix llvm)/bin"
   path_prepend "$(brew --prefix findutils)/libexec/gnubin"
   path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
+  export CFLAGS="-I$(brew --prefix openssl)/include"
+  export LDFLAGS="-L$(brew --prefix openssl)/lib"
   export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then

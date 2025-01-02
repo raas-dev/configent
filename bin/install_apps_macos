@@ -34,6 +34,9 @@ brew install zsh
 # Cross-platform make is often required by packages with non-native deps
 brew install cmake
 
+# Install newer OpenSSL, 1.1 has reached EOL 2023 (brew disabled it 2024-10-24)
+brew install openssl
+
 # GNU bins prepended to PATH in .profile
 brew install coreutils
 brew install findutils
