@@ -61,9 +61,6 @@ $SUDO apt-get install -y coreutils dnsutils file findutils \
   git git-lfs htop lsb-release procps traceroute unzip wget \
   whois zip
 
-# The logfile navigator
-$SUDO apt-get install -y lnav
-
 # Bash
 $SUDO apt-get install -y bash
 

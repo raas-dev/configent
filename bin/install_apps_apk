@@ -56,9 +56,6 @@ $SUDO apk add coreutils curl bind-tools file findutils \
   git git-lfs htop less procps zip unzip util-linux wget \
   whois
 
-# The logfile navigator
-$SUDO apk add lnav
-
 # Bash
 $SUDO apk add bash
 

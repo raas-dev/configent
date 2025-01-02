@@ -48,9 +48,6 @@ $SUDO pacman --noconfirm --needed -S coreutils bind file findutils \
   git git-lfs htop lsb-release procps traceroute unzip vim wget which \
   whois zip
 
-# The logfile navigator
-$SUDO pacman --noconfirm --needed -S lnav
-
 # Bash
 $SUDO pacman --noconfirm --needed -S bash
 

@@ -60,9 +60,6 @@ brew install git-lfs
 # Git extra commands (https://github.com/tj/git-extras)
 brew install git-extras
 
-# The logfile navigator (https://github.com/tstack/lnav)
-brew install lnav
-
 # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
 brew install m-cli
 

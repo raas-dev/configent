@@ -48,9 +48,6 @@ $SUDO zypper install -y bind-utils coreutils file findutils \
   git git-lfs htop lsb-release lsof man procps traceroute unzip wget \
   whois zip
 
-# The logfile navigator
-$SUDO zypper install -y lnav
-
 # Bash
 $SUDO zypper install -y bash
 
