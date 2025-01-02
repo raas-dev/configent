@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.13](https://github.com/raas-dev/configent/compare/1.128.12...1.128.13) (2025-01-02)
+
+
+### Fixes
+
+* **logs:** Use lnav ([251d93f](https://github.com/raas-dev/configent/commit/251d93f57d57bf44f2734cc354cab22cd05f19e3))
+
 ### [1.128.12](https://github.com/raas-dev/configent/compare/1.128.11...1.128.12) (2025-01-02)
 
 
