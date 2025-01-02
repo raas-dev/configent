@@ -53,7 +53,6 @@ uv = 'latest'
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
-'pipx:toolong' = 'latest'
 'pipx:tldr' = 'latest'
 
 dotnet = { version = '8.0.404' }
