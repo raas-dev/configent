@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.12](https://github.com/raas-dev/configent/compare/1.128.11...1.128.12) (2025-01-02)
+
+
+### Fixes
+
+* **aliases:** Use toolong over lnav for tailing logs ([f036d9b](https://github.com/raas-dev/configent/commit/f036d9b02cf852ba398fda9525d9f1f3fafd1793))
+* **azure:** Remove messing with PATH ([f19c20b](https://github.com/raas-dev/configent/commit/f19c20b19fe968bf7328e099ca0279fc39a9f822))
+* **profile:** Set DOTNET_ROOT ([37c6a26](https://github.com/raas-dev/configent/commit/37c6a26421112bfd3b4287888cda7c0f00511f99))
+
 ### [1.128.11](https://github.com/raas-dev/configent/compare/1.128.10...1.128.11) (2025-01-02)
 
 
