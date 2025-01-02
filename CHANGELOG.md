@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.10](https://github.com/raas-dev/configent/compare/1.128.9...1.128.10) (2025-01-02)
+
+
+### Fixes
+
+* **fzf:** Fix loading order ([ca5afd6](https://github.com/raas-dev/configent/commit/ca5afd69694126d2a470227055f0b3ddb318e967))
+* **lima:** Remove custom dns settings from ubuntu ([d36f643](https://github.com/raas-dev/configent/commit/d36f6431a7ab43678f016c6777378615b5691777))
+
 ### [1.128.9](https://github.com/raas-dev/configent/compare/1.128.8...1.128.9) (2025-01-02)
 
 
