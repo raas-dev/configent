@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.125.9](https://github.com/raas-dev/configent/compare/1.125.8...1.125.9) (2025-01-02)
+
+
+### Fixes
+
+* **aliases:** Rename usage to big ([db29eb8](https://github.com/raas-dev/configent/commit/db29eb809b5089f7ce7198b1981a5f662242c448))
+* **aliases:** Rename utilities functions better ([283c1cc](https://github.com/raas-dev/configent/commit/283c1ccc16e12254088366fb16cf91ef1cb120af))
+* **mise:** Activate aggressive ([a557c12](https://github.com/raas-dev/configent/commit/a557c122b1067d554388eecfc53dee4214d862b6))
+* **mise:** Do not warn on missing tools ([95c7491](https://github.com/raas-dev/configent/commit/95c74913082b944ed2b5700fc1d6c29406bcd2b1))
+
 ### [1.125.8](https://github.com/raas-dev/configent/compare/1.125.7...1.125.8) (2025-01-01)
 
 
