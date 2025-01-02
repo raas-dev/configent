@@ -8,17 +8,6 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### mise #######################################################################
-
-# shellcheck disable=SC2155  # will not declare separately, value compactness
-export PATH="$(mise where dotnet):$PATH"
-
-### Powershell #################################################################
-
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-dotnet tool install --global powershell
-#dotnet tool update --global powershell
-
 ### configs ####################################################################
 
 this_path=$(cd "$(dirname "$0")" && pwd)

@@ -161,15 +161,6 @@ export BAT_THEME="SynthWave84"
 command -v aws_completer >/dev/null &&
   complete -C "$(command -v aws_completer)" aws
 
-### Dotnet #####################################################################
-
-if command -v mise >/dev/null; then
-  # shellcheck disable=SC2155  # will not declare separately, value compactness
-  export DOTNET_ROOT="$(mise where dotnet 2>/dev/null)"
-fi
-
-path_append "$HOME/.dotnet/tools"
-
 ### Azure bicep ################################################################
 
 path_append "$HOME/.azure/bin"

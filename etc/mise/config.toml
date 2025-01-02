@@ -7,7 +7,8 @@ rust = { version = '1.83.0', postinstall = "postinstall_rust" }
 go = { version = '1.23.4', postinstall = "postinstall_go" }
 node = '22.12.0'
 python = { version = '3.12.8', postinstall = "postinstall_python" }
-dotnet = { version = '8.0.404', postinstall = "postinstall_dotnet" }
+dotnet = { version = '8.0.404' }
+'dotnet:powershell' = { version = '7.4.6', postinstall = "postinstall_pwsh" }
 #bun = '1.1.42'
 #ruby = { version = '3.4.1', postinstall = "postinstall_ruby" }
 #java = 'temurin-17.0.13+11'
@@ -33,3 +34,6 @@ tmux = { version = '3.5a', postinstall = "postinstall_tmux" }
 lima = '1.0.3'
 usage = '1.7.4'
 'vfox:jdx/vfox-clang' = '18.1.8'
+
+[settings]
+experimental = true
