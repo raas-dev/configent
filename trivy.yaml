@@ -4,14 +4,20 @@
 exit-code: 1
 
 scan:
+  skip-files:
+    - etc/prompts/fabric/go.mod
+    - etc/prompts/fabric/web/package-lock.json
+    - etc/prompts/fabric/web/pnpm-lock.yaml
+    - etc/prompts/fabric/Dockerfile
+    - etc/nix/Containerfile # inline ignores supported only for Terraform and CF
   skip-dirs:
-    - etc/prompts/fabric
+    - .backup
     - vscode/globalStorage
     - vscode/History
     - vscode/sync
     - vscode/workspaceStorage
   scanners:
     - vuln
-    #- config   # use checkov, it supports inline ignores
+    - config
     - secret
     - license
