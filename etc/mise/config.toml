@@ -62,6 +62,11 @@ lima = '1.0.3'
 # mise completion
 usage = '1.7.4'
 
+# clang
+'vfox:jdx/vfox-clang' = '18.1.8'
+
 [settings]
-activate_aggressive = true
 status.missing_tools = 'never'
+disable_tools = [
+  'ollama' # works on both macOS/Linux but autostarts on neither
+]
