@@ -517,11 +517,11 @@ kalk() {
 # Follow the given log file, or cloud-init output if log file is not given
 logs() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
-  if command -v tl >/dev/null; then
+  if command -v lnav >/dev/null; then
     if [ -r "$log" ]; then
-      tl "$log"
+      lnav "$log"
     else
-      sudo "$(which tl)" "$log"
+      sudo lnav "$log"
     fi
   else
     if [ -r "$log" ]; then
