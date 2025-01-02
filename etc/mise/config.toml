@@ -22,6 +22,8 @@ rust = '1.83.0'
 'cargo:ripgrep' = 'latest'
 'cargo:sd' = 'latest'
 'cargo:starship' = 'latest'
+'cargo:xh' = 'latest'
+'cargo:zoxide' = 'latest'
 # topgrade
 'cargo:cargo-cache' = 'latest' # https://github.com/matthiaskrgr/cargo-cache
 'cargo:cargo-update' = 'latest' # https://github.com/nabijaczleweli/cargo-update
