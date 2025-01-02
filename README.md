@@ -127,7 +127,7 @@ What's installed by default:
 5. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
 6. Neovim with [LazyVim](https://www.lazyvim.org/)
 7. Tmux, tpm (Tmux Plugin Manager) and tmux plugins
-9. [Ollama](https://ollama.com/)
+9. [Ollama](https://ollama.com/) is installed and (auto-)started
 9. AWS and Azure development tools, script linters
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
