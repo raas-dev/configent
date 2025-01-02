@@ -4,7 +4,7 @@ azure-cli = 'asdf:https://github.com/asyrjasalo/asdf-azure-cli'
 
 [tools]
 rust = '1.83.0'
-'cargo:cargo-binstall' = 'latest' # use this, not cargo-binstall (macOS OpenSSL)
+cargo-binstall = 'latest'
 # dotfiles requirements
 'cargo:aichat' = 'latest'
 'cargo:argc' = 'latest'
