@@ -351,11 +351,28 @@ _aichat_build() {
 # in ~/.rclocal:
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
-  local role="chat"
   local context="${PWD##*/}"
-  [ -n "$1" ] && role="chat#$1"
+  local role=""
+  [ -n "$1" ] && role="$1"
   _aichat_build
-  aichat --role "$role" --session "$context"
+
+  # search most specific roles first
+  if AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles | grep -Fx -q "$1"; then
+    local category="developer"
+  elif AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" aichat --list-roles | grep -Fx -q "$1"; then
+    local category="assistant"
+  else
+    local category="general"
+    if [ -z "$role" ]; then
+      role="chat"
+    else
+      role="chat#$role"
+    fi
+  fi
+
+  echo "[ai] using $category prompts"
+  AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/$category" \
+    aichat --role "$role" --session "$context"
 }
 
 # requires AICHAT_FUNCTIONS_DIR
