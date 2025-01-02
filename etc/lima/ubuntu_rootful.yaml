@@ -59,11 +59,8 @@ probes:
     hint: See "/var/log/cloud-init-output.log" in the guest
 
 hostResolver:
-  enabled: false
-
-dns:
-- 1.1.1.1
-- 1.0.0.1
+  hosts:
+    host.docker.internal: host.lima.internal
 
 portForwards:
   - guestSocket: "/var/run/docker.sock"

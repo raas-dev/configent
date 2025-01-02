@@ -43,6 +43,7 @@ go = '1.23.4'
 'go:github.com/abhimanyu003/sttr' = 'latest'
 'go:github.com/shihanng/tfvar' = 'latest'
 'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
+
 node = '22.12.0'
 
 python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
@@ -55,6 +56,7 @@ uv = 'latest'
 
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
+
 #bun = '1.1.42'
 #ruby = '3.4.1'
 #java = 'temurin-17.0.13+11'
