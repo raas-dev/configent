@@ -24,5 +24,7 @@ a pull request.
 - Alpine Linux:
   - Homebrew does not work due to musl (all architectures)
     - Use `mise` wherever possible, otherwise use `apk`
+  - See `mise` option `node.flavor = musl` for installing Node.js
+    - https://mise.jdx.dev/lang/node.html#unofficial-builds
   - Rootless docker is not supported
     - Re-login is required after the initial install to be in `docker` group
