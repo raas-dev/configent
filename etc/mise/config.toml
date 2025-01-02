@@ -50,6 +50,7 @@ node = '22.12.0'
 python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:aider-chat[browser]' = 'latest'
+"pipx:glances" = { version = "latest", extras = "containers,gpu,web,wifi" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'

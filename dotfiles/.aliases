@@ -207,8 +207,11 @@ alias wttr='curl "v2.wttr.in/$(ip | jq -r .city)?MF&lang=en"'
 
 ### Python #####################################################################
 
-# Cross-platform real-time monitoring
-alias glances='uvx --from "glances[containers,gpu,ip,web,wifi]" glances'
+# https://hatch.pypa.io/latest
+alias hatch='uvx hatch'
+
+# Command-line utility for rendering projects templates
+alias copier='uvx --with copier-templates-extensions copier'
 
 # Reactive notebook
 alias marimo='uvx marimo'
@@ -216,12 +219,21 @@ alias marimo='uvx marimo'
 # SQL IDE for terminal
 alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
 
-# Multitool for tabular data in terminal
-alias vd='uvx --with openpyxl visidata'
+# Semgrep (SAST: code vulnerability scanner)
+alias semgrep='uvx semgrep'
+
+# GuardDog (SAST: malicious package identifier - uses semgrep underneath)
+alias guarddog='uvx guarddog'
+
+# Checkov (SAST: cloud misconfiguration scanner)
+alias checkov='uvx checkov'
 
 # Simplenote in terminal (export SN_USERNAME and SN_PASSWORD in ~/.rclocal)
 # workaround: use Python 3.11.x because sncli requires distutils (2024-09)
 alias sncli='uvx --python 3.11 sncli'
+
+# Multitool for tabular data in terminal
+alias vd='uvx --with openpyxl visidata'
 
 # Playwright
 alias playwright='uvx playwright'
@@ -229,33 +241,18 @@ alias playwright='uvx playwright'
 # General media downloader
 alias you-get='uvx you-get'
 
-# Checkov
-alias checkov='uvx checkov'
-
-# Semgrep
-alias semgrep='uvx semgrep'
-
-# GuardDog
-alias guarddog='uvx guarddog'
-
-# gptme
-alias gptme='uvx --from "gptme[browser]" gptme'
-alias gptme-server='uvx --with flask --from "gptme[browser]" gptme-server'
-
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
 # OpenAI CLI
 alias openai='uvx openai'
 
-# Command-line utility for rendering projects templates
-alias copier='uvx --with copier-templates-extensions copier'
-
-# https://hatch.pypa.io/latest
-alias hatch='uvx hatch'
-
 # Langflow
 alias langflow='uvx langflow'
+
+# gptme
+alias gptme='uvx --from "gptme[browser]" gptme'
+alias gptme-server='uvx --with flask --from "gptme[browser]" gptme-server'
 
 # Toggle a Python virtual environment for development
 venv() {
@@ -297,21 +294,6 @@ venv() {
 
 ### Node.js ####################################################################
 
-# Flowise
-alias flowise='npx -y flowise'
-
-# Azure Functions CLI
-alias func='npx -y azure-functions-core-tools'
-
-# Firebase CLI
-alias firebase='npx -y firebase-tools'
-
-# Railway.app CLI
-alias railway='npx -y @railway/cli'
-
-# Cloudflare Workers CLI
-alias wrangler='npx -y wrangler'
-
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='npx -y depcheck'
 
@@ -324,8 +306,23 @@ alias projen='npx -y projen'
 # Bump version and generate CHANGELOG.md
 alias standard-version='npx -y standard-version'
 
+# Azure Functions CLI
+alias func='npx -y azure-functions-core-tools'
+
+# Firebase CLI
+alias firebase='npx -y firebase-tools'
+
+# Cloudflare Workers CLI
+alias wrangler='npx -y wrangler'
+
+# Railway.app CLI
+alias railway='npx -y @railway/cli'
+
 # Packs entire repository into a single, AI-friendly file
 alias repomix='npx -y repomix'
+
+# Flowise
+alias flowise='npx -y flowise'
 
 ### Functions: AI ##############################################################
 
