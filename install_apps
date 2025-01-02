@@ -58,6 +58,9 @@ fi
 # pass NONINTERACTIVE=true to skip (set by bootstrap)
 "$bin_path/install_zsh"
 
+# install fzf
+"$bin_path/install_fzf"
+
 # install Vim plugins
 "$bin_path/install_vim"
 
