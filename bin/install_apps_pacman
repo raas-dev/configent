@@ -38,7 +38,7 @@ $SUDO pacman --noconfirm --needed -S base-devel bison bzip2 cmake gcc glibc
 
 # Common development dependencies
 $SUDO pacman --noconfirm --needed -S libffi libunistring libxml2 m4 ncurses \
-  openssl openssl-1.1 pkgconf readline sqlite3 xz zlib
+  openssl pkgconf readline sqlite3 xz zlib
 
 # Hack for 2023-01 libunistring.so.2 issues
 $SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
