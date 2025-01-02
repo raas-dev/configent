@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.127.1](https://github.com/raas-dev/configent/compare/1.127.0...1.127.1) (2025-01-02)
+
+
+### Fixes
+
+* **ollama:** Start ollama on boot ([a957e88](https://github.com/raas-dev/configent/commit/a957e8844c92f11eeaab963cbac92640883a2691))
+
 ## [1.127.0](https://github.com/raas-dev/configent/compare/1.126.0...1.127.0) (2025-01-02)
 
 
