@@ -45,7 +45,7 @@ go = '1.23.4'
 'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
 node = '22.12.0'
 
-python = { version = '3.12.8', postinstall = "postinstall_python" }
+python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:aider-chat[browser]' = 'latest'
 'pipx:pdm' = 'latest'
@@ -54,7 +54,7 @@ uv = 'latest'
 'pipx:tldr' = 'latest'
 
 dotnet = { version = '8.0.404' }
-'dotnet:powershell' = { version = '7.4.6', postinstall = "postinstall_pwsh" }
+'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 #bun = '1.1.42'
 #ruby = '3.4.1'
 #java = 'temurin-17.0.13+11'
@@ -64,7 +64,7 @@ github-cli = '2.64.0'
 shellcheck = '0.10.0'
 trivy = '0.58.1'
 awscli = '2.22.26'
-azure-cli = { version = '2.67.0', postinstall = "postinstall_azure" }
+azure-cli = { version = '2.67.0', postinstall = "~/.local/configent/bin/postinstall_azure" }
 #gcloud = '504.0.1'
 #terraform = '1.10.3'
 #tfsec = '1.28.11'
@@ -74,8 +74,8 @@ azure-cli = { version = '2.67.0', postinstall = "postinstall_azure" }
 #k9s = '0.32.7'
 #cloudflared = '2024.12.2'
 #flyctl = '0.3.56'
-neovim = { version = '0.10.3', postinstall = "postinstall_neovim" }
-tmux = { version = '3.5a', postinstall = "postinstall_tmux" }
+neovim = { version = '0.10.3', postinstall = "~/.local/configent/bin/postinstall_neovim" }
+tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 #ollama = '0.5.4' # works on both macOS/Linux but autostarts on neither
 lima = '1.0.3'
 usage = '1.7.4'
