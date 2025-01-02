@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.128.0](https://github.com/raas-dev/configent/compare/1.127.2...1.128.0) (2025-01-02)
+
+
+### Features
+
+* **install:** Use mise over install_ scripts ([33b80be](https://github.com/raas-dev/configent/commit/33b80be05dd8afa2de99f5257b1385a52a681191))
+
+
+### Fixes
+
+* **ai:** Make agents to save and load their sessions ([e72a97d](https://github.com/raas-dev/configent/commit/e72a97d72d9f44f7c898803923b0b04ae3dac95d))
+
 ### [1.127.2](https://github.com/raas-dev/configent/compare/1.127.1...1.127.2) (2025-01-02)
 
 
