@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.4](https://github.com/raas-dev/configent/compare/1.128.3...1.128.4) (2025-01-02)
+
+
+### Fixes
+
+* **aliases:** Include mise in up and dup ([0fc1704](https://github.com/raas-dev/configent/commit/0fc17047fd6073b36ee095ab9493667e07d255ba))
+* **vscode:** Remove conflicting extension ([8a4741d](https://github.com/raas-dev/configent/commit/8a4741d6a7731905f260d6e3ad26f90b5efa5fe4))
+
 ### [1.128.3](https://github.com/raas-dev/configent/compare/1.128.2...1.128.3) (2025-01-02)
 
 
