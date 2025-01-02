@@ -8,15 +8,9 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-this_path=$(cd "$(dirname "$0")" && pwd)
-backup_path="$this_path/../.backup"
-config_path="$HOME/.config/configent"
-
 ### mise #######################################################################
 
-export PATH="$HOME/.local/bin:$PATH"
-! command -v mise >/dev/null && curl https://mise.run | sh
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
 ### dotnet #####################################################################
 
@@ -27,6 +21,12 @@ mise install --yes dotnet
 
 dotnet tool install --global powershell
 #dotnet tool update --global powershell
+
+### configs ####################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
 
 # backup and symlink powershell config dir
 if [ ! -d "$backup_path/.config/powershell" ] &&

@@ -10,9 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### mise #######################################################################
 
-export PATH="$HOME/.local/bin:$PATH"
-! command -v mise >/dev/null && curl https://mise.run | sh
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
 ### cloudflared ################################################################
 

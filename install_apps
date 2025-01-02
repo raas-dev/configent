@@ -57,7 +57,7 @@ fi
 "$bin_path/install_zsh"
 #"$bin_path/install_bash"
 
-# install mise
+# install or update mise, it is used by most of the succeeding install scripts
 export PATH="$HOME/.local/bin:$PATH"
 if command -v mise >/dev/null; then
   mise self-update --yes
