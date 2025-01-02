@@ -10,7 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### mise #######################################################################
 
-export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 if command -v mise >/dev/null; then
   mise self-update --yes
@@ -20,4 +20,4 @@ else
 fi
 
 # install all enabled tools
-mise install
+mise install --yes

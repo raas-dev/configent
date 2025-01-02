@@ -10,7 +10,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### mise #######################################################################
 
-export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 ### interpreter scope ##########################################################
 
@@ -32,6 +32,8 @@ ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
 pip install --upgrade uv
 
 ### dedicated virtualenvs ######################################################
+
+export PATH="$HOME/.local/bin:$PATH"
 
 python -m uv tool install 'aider-chat[browser]'
 python -m uv tool install pdm
