@@ -57,9 +57,6 @@ $SUDO zypper install -y bash
 # Zsh
 $SUDO zypper install -y zsh
 
-# Neovim
-$SUDO zypper install -y neovim
-
 # git-extras, not available in OpenSUSE (as of 2023-07)
 #$SUDO zypper install -y git-extras
 

@@ -70,9 +70,6 @@ $SUDO apt-get install -y bash
 # Zsh
 $SUDO apt-get install -y zsh
 
-# Neovim
-$SUDO apt-get install -y neovim
-
 # git-extras
 $SUDO apt-get install -y git-extras
 

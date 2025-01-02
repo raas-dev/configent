@@ -68,9 +68,6 @@ $SUDO apk add zsh
 # Vim
 $SUDO apk add vim
 
-# Neovim
-$SUDO apk add neovim
-
 # Git-extras
 $SUDO apk add git-extras@testing
 
