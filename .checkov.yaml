@@ -5,10 +5,13 @@ enable-secret-scan-all-files: true
 framework:
   - all
 skip-path:
-  - .git
   - .backup
   - etc/prompts/assistant/write_nuclei_template_rule.md
-  - etc/prompts/fabric
+  - etc/prompts/fabric/patterns/write_nuclei_template_rule/system.md
+  - etc/prompts/fabric/.github
+  - etc/prompts/fabric/Dockerfile
+  - etc/prompts/fabric/web/jsconfig.json
+  - etc/prompts/fabric/web/tsconfig.json
   - vscode/globalStorage
   - vscode/History
   - vscode/sync
