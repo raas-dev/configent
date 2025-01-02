@@ -8,14 +8,12 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### mise #######################################################################
-
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-
 ### Tpm ########################################################################
 
 tpm_dir="$HOME/.tmux/plugins/tpm"
+
 git clone https://github.com/tmux-plugins/tpm "$tpm_dir" ||
   git -C "$tpm_dir" pull --no-autostash --rebase
+
 "$tpm_dir/bin/install_plugins"
 "$tpm_dir/bin/clean_plugins"
