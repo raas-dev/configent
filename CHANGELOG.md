@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.1](https://github.com/raas-dev/configent/compare/1.128.0...1.128.1) (2025-01-02)
+
+
+### Fixes
+
+* **mise:** Fix setting PATHs ([b822930](https://github.com/raas-dev/configent/commit/b82293032834c2e9a2aa01b3f6c9d8d768051051))
+* **mise:** Remove unused option ([daf57a9](https://github.com/raas-dev/configent/commit/daf57a9842109ed1cd21098b4ce7ee6bf70e6e33))
+
 ## [1.128.0](https://github.com/raas-dev/configent/compare/1.127.2...1.128.0) (2025-01-02)
 
 
