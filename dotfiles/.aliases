@@ -210,9 +210,6 @@ alias wttr='curl "v2.wttr.in/$(ip | jq -r .city)?MF&lang=en"'
 # Cross-platform real-time monitoring
 alias glances='uvx --from "glances[containers,gpu,ip,web,wifi]" glances'
 
-# View, tail, merge, and search log files (plus JSONL)
-alias tl='uvx --from toolong tl'
-
 # Reactive notebook
 alias marimo='uvx marimo'
 
@@ -520,11 +517,11 @@ kalk() {
 # Follow the given log file, or cloud-init output if log file is not given
 logs() {
   local log="${1:-"/var/log/cloud-init-output.log"}"
-  if command -v lnav >/dev/null; then
+  if command -v tl >/dev/null; then
     if [ -r "$log" ]; then
-      lnav "$log"
+      tl "$log"
     else
-      sudo lnav "$log"
+      sudo "$(which tl)" "$log"
     fi
   else
     if [ -r "$log" ]; then
