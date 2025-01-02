@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.11](https://github.com/raas-dev/configent/compare/1.128.10...1.128.11) (2025-01-02)
+
+
+### Fixes
+
+* **cargo:** Binstall ([3138ca3](https://github.com/raas-dev/configent/commit/3138ca3c57216ec72cb008f31f04dd9688cfbf95))
+* **shell:** Check presence of fzf ([34ab163](https://github.com/raas-dev/configent/commit/34ab1633d1c2a1d8805b197e6969a9a33b669ad9))
+
 ### [1.128.10](https://github.com/raas-dev/configent/compare/1.128.9...1.128.10) (2025-01-02)
 
 
