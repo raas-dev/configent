@@ -100,8 +100,8 @@ asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
 Symlinks are created in in the user's home directory for all the files in
 `dotfiles/`. Files or symlinks of the same name at `$HOME` are overridden.
 
-Starship, Topgrade, Neovim and htop configs are symlinked in `~/.config`,
-which is a standard config search path on many operating systems.
+In addition the tool specific configurations in `etc/` are symlinked in
+`~/.config` either as config files or directories depending on the tool.
 
 Directory `bin` in this repository is symlinked to `~/.local/configent/bin`,
 taking 1st preference in `PATH`. Directory `etc` in this repository is
