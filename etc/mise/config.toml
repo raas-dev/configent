@@ -47,7 +47,10 @@ cloudflared = '2024.12.2'
 # install_flyctl
 flyctl = '0.3.56'
 
-# https://github.com/jdx/mise-usage
+# install_neovim
+neovim = '0.10.3'
+
+# mise completion
 usage = '1.7.4'
 
 [settings]

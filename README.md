@@ -125,7 +125,7 @@ What's installed by default:
 3. Zsh plugin manager and plugins (Zsh from `brew` if Homebrew is available)
 4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
 5. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
-6. Neovim with [LazyVim](https://www.lazyvim.org/) (Neovim from `brew` if Homebrew is available)
+6. Neovim with [LazyVim](https://www.lazyvim.org/)
 7. Tmux plugins and config (tmux from `brew` if Homebrew is available)
 9. [Ollama](https://ollama.com/) is installed, started and configured to start on boot
 9. AWS and Azure development tools, script linters
@@ -148,7 +148,7 @@ Language runtimes and development tools are always installed user-wide by
 
 With Homebrew on Linux (x86-64), system-wide installation (`/home/linuxbrew`) is
 preferred, but if it this not possible (no `sudo`), it is installed user's home.
-In both cases, Zsh, Neovim and tmux are installed using Homebrew on Linux,
+In both cases, Zsh and tmux are installed using Homebrew on Linux,
 as it likely has newer versions than the ones gotten from the distro's repo.
 
 💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for

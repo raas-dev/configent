@@ -85,7 +85,7 @@ mise install usage
 # install Vim plugins
 "$bin_path/install_vim"
 
-# install Neovim if brew is available
+# install Neovim
 "$bin_path/install_neovim"
 
 # install tmux if brew is available, always install tmux plugins
