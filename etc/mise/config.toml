@@ -1,5 +1,4 @@
 [settings]
-status.missing_tools = 'never'
 disable_tools = [
   'bun',
   'ruby',
