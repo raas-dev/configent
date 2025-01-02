@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 # the above shebang is only for ShellCheck, this file is not executable
 
 # Lima BEGIN is mentioned here for Lima to not mess with PATH on VM boot
 
+# shellcheck disable=SC1090  # do not follow non-constant source
 # shellcheck disable=SC1091  # do not expect input files
 # shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
@@ -107,10 +108,13 @@ _aichat_zsh() {
 zle -N _aichat_zsh
 bindkey '^X' _aichat_zsh # CTRL + x
 
+### fzf ########################################################################
+
+. <(fzf --zsh)
+
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
-[ -r "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
