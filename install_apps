@@ -53,9 +53,11 @@ else
   exit 1
 fi
 
-# installs Zsh plugins, also installs newer Zsh if brew is available for the OS
+# installs Zsh plugins
+# prompts to set Zsh as the default shell
+# pass NONINTERACTIVE=true to skip (set by bootstrap)
+
 "$bin_path/install_zsh"
-#"$bin_path/install_bash"
 
 # install or update mise, it is used by most of the succeeding install scripts
 export PATH="$HOME/.local/bin:$PATH"

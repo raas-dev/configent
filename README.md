@@ -187,9 +187,11 @@ If you prefer `bash` instead:
 
     install_bash
 
-If Homebrew is available (Linux distros on x86-64, macOS on x86-64 or ARM),
-Zsh and Bash are installed from Homebrew and preferred over system-wide shells
-(respectively), as Homebrew likely has newer versions available.
+These scripts are interactive as they prompt to change the default shell,
+(unless that is default already). Such change may also require `sudo`
+password to be entered, so if `NONINTERACTIVE=true` is passed (such as
+`bootstrap` does), the default shell won't be changed. The shell plugins,
+if any, are installed even in that case.
 
 ## 🏗️ Containers
 
