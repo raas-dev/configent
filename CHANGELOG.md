@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.9](https://github.com/raas-dev/configent/compare/1.128.8...1.128.9) (2025-01-02)
+
+
+### Fixes
+
+* **fzf:** Add via mise ([0cd3e2b](https://github.com/raas-dev/configent/commit/0cd3e2b2f7ab9729a937ac50f6765464714c0f0c))
+* **mise:** Fix path to postinstall scripts ([0c2fa29](https://github.com/raas-dev/configent/commit/0c2fa29e14066f17533db19ced351820c9deb6a0))
+
 ### [1.128.8](https://github.com/raas-dev/configent/compare/1.128.7...1.128.8) (2025-01-02)
 
 
