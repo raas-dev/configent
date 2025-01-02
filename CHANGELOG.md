@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.8](https://github.com/raas-dev/configent/compare/1.128.7...1.128.8) (2025-01-02)
+
+
+### Fixes
+
+* **rust:** Add missing packages ([deae380](https://github.com/raas-dev/configent/commit/deae380ff66eea1be08d5d47327a7789ab0280b8))
+
 ### [1.128.7](https://github.com/raas-dev/configent/compare/1.128.6...1.128.7) (2025-01-02)
 
 
