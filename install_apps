@@ -85,10 +85,10 @@ mise install usage
 # install Vim plugins
 "$bin_path/install_vim"
 
-# install Neovim
+# install Neovim and Lazyvim
 "$bin_path/install_neovim"
 
-# install tmux and tmux plugins
+# install tmux, tpm and tmux plugins
 "$bin_path/install_tmux"
 
 # install Ollama

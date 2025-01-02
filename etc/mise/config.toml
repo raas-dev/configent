@@ -53,6 +53,9 @@ neovim = '0.10.3'
 # install_tmux
 tmux = '3.5a'
 
+# install_ollama
+ollama = '0.5.4'
+
 # mise completion
 usage = '1.7.4'
 
