@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.127.2](https://github.com/raas-dev/configent/compare/1.127.1...1.127.2) (2025-01-02)
+
+
+### Fixes
+
+* **aichat:** Default roles dir ([75cef3b](https://github.com/raas-dev/configent/commit/75cef3b0403a511ba863f4089c3266ea19d833dd))
+* **ai:** Try most specific roles first ([df11d30](https://github.com/raas-dev/configent/commit/df11d307e65edb536df5fde36735a9174e64d511))
+* **clang:** Install via mise and vfox plugin ([4dc6921](https://github.com/raas-dev/configent/commit/4dc69211c1ac6fbaa10449b5ba218e06f34f726b))
+* **mise:** Install or update once in install_apps ([49d107e](https://github.com/raas-dev/configent/commit/49d107ee82e3396b767a5b8ed0924f4d59692cca))
+* **zsh:** Do not install zsh on Linux Homebrew ([249c6ba](https://github.com/raas-dev/configent/commit/249c6ba9687aeb906f98308a761cd325141ff22e))
+
 ### [1.127.1](https://github.com/raas-dev/configent/compare/1.127.0...1.127.1) (2025-01-02)
 
 
