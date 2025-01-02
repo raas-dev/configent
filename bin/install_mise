@@ -12,11 +12,12 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
-### stack ######################################################################
+if command -v mise >/dev/null; then
+  mise self-update --yes
+else
+  # install mise first
+  curl https://mise.run | sh
+fi
 
-mise install --yes ghcup
-
-ghcup install stack
-# stack install ShellCheck
-
-#ghcup install cabal
+# install all enabled tools
+mise install

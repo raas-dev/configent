@@ -1,72 +1,55 @@
-[tools]
-# languages
-rust = '1.83.0'
-go = '1.23.4'
-nodejs = '22.12.0'
-python = '3.12.8'
-dotnet = '8.0.404'
-bun = '1.1.42'
-ruby = '3.4.1'
-java = 'temurin-17.0.13+11'
-ghcup = '0.1.30.0' # haskell
-
-# install_jq
-jq = '1.7.1'
-
-# install_github
-github-cli = '2.64.0'
-
-# install_linters
-shellcheck = '0.10.0'
-
-# install_appsec
-trivy = '0.58.1'
-
-# install_aws
-awscli = '2.22.26'
-
-# install_azure
-azure-cli = '2.67.0'
-
-# install_gcloud
-gcloud = '504.0.1'
-
-# install_terraform
-terraform = '1.10.3'
-tfsec = '1.28.11'
-
-# install_k8sdev
-kubectl = '1.32.0'
-krew = '0.4.4'
-helm = '3.16.4'
-k9s = '0.32.7'
-
-# install_cloudflare
-cloudflared = '2024.12.2'
-
-# install_flyctl
-flyctl = '0.3.56'
-
-# install_neovim
-neovim = '0.10.3'
-
-# install_tmux
-tmux = '3.5a'
-
-# install_ollama
-ollama = '0.5.4'
-
-# install_lima
-lima = '1.0.3'
-
-# mise completion
-usage = '1.7.4'
-
-# clang
-'vfox:jdx/vfox-clang' = '18.1.8'
-
 [settings]
 status.missing_tools = 'never'
 disable_tools = [
+  'bun',
+  'ruby',
+  'java',
+  'ghcup',
+  'trivy',
+  'gcloud',
+  'terraform',
+  'tfsec',
+  'kubectl',
+  'krew',
+  'helm',
+  'k9s',
+  'cloudflared',
+  'flyctl',
   'ollama' # works on both macOS/Linux but autostarts on neither
 ]
+
+[alias]
+# the original asdf-azure-cli plugin messes up python version
+azure-cli = 'asdf:https://github.com/asyrjasalo/asdf-azure-cli'
+
+[tools]
+rust = { version = '1.83.0', postinstall = "postinstall_rust" }
+go = { version = '1.23.4', postinstall = "postinstall_go" }
+nodejs = '22.12.0'
+python = { version = '3.12.8', postinstall = "postinstall_python" }
+dotnet = { version = '8.0.404', postinstall = "postinstall_dotnet" }
+bun = '1.1.42'
+ruby = { version = '3.4.1', postinstall = "postinstall_ruby" }
+java = 'temurin-17.0.13+11'
+ghcup = { version = '0.1.30.0', postinstall = "postinstall_haskell" }
+jq = '1.7.1'
+github-cli = '2.64.0'
+shellcheck = '0.10.0'
+trivy = '0.58.1'
+awscli = '2.22.26'
+azure-cli = { version = '2.67.0', postinstall = "postinstall_azure" }
+gcloud = '504.0.1'
+terraform = '1.10.3'
+tfsec = '1.28.11'
+kubectl = '1.32.0'
+krew = { version = '0.4.4', postinstall = "postinstall_krew" }
+helm = '3.16.4'
+k9s = '0.32.7'
+cloudflared = '2024.12.2'
+flyctl = '0.3.56'
+neovim = { version = '0.10.3', postinstall = "postinstall_neovim" }
+tmux = { version = '3.5a', postinstall = "postinstall_tmux" }
+ollama = '0.5.4'
+lima = '1.0.3'
+usage = '1.7.4'
+'vfox:jdx/vfox-clang' = '18.1.8'

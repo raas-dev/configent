@@ -116,19 +116,19 @@ are automatically exported here if they were set in your previous `.gitconfig`.
 
 ### install_apps
 
-If you want to adjust high level tech stacks, modify this script.
+Sensible defaults are used. Enable or disable tools in `etc/mise/config.toml`.
 
 What's installed by default:
-1. Command-line necessities and compile-time requirements
-2. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
+1. Zsh, antidote (plugin manager for Zsh) and Zsh plugins
+2. Other command-line essentials and a few build time requirements
+3. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
+4. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
 [Flatpak](https://flatpak.org/) (Linux distros)
-3. Zsh plugin manager and plugins (Zsh from `brew` if Homebrew is available)
-4. Rust, Go, Node.js, Python and .NET language runtimes and default packages
-5. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
-6. Neovim with [LazyVim](https://www.lazyvim.org/)
-7. Tmux, tpm (Tmux Plugin Manager) and tmux plugins
-9. [Ollama](https://ollama.com/) is installed and (auto-)started
-9. AWS and Azure development tools, script linters
+5. Rust, Go, Node.js, Python and .NET language runtimes and a few packages
+6. Linters (static analysis tools) and AWS and Azure development tools
+7. Neovim with [LazyVim](https://www.lazyvim.org/)
+8. Tmux, tpm (Tmux Plugin Manager) and tmux plugins
+9. [Ollama](https://ollama.com/) and it is (auto-)started on background
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used

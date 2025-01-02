@@ -12,6 +12,6 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
-### fly ########################################################################
+### interpreter scope ##########################################################
 
-mise install flyctl
+gem update --system

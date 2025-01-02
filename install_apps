@@ -56,64 +56,16 @@ fi
 # installs Zsh plugins
 # prompts to set Zsh as the default shell
 # pass NONINTERACTIVE=true to skip (set by bootstrap)
-
 "$bin_path/install_zsh"
-
-# install or update mise, it is used by most of the succeeding install scripts
-export PATH="$HOME/.local/bin:$PATH"
-if command -v mise >/dev/null; then
-  mise self-update --yes
-else
-  curl https://mise.run | sh
-fi
-mise install usage
-
-# install language SDKs
-"$bin_path/install_rust"
-"$bin_path/install_go"
-"$bin_path/install_nodejs"
-"$bin_path/install_python"
-"$bin_path/install_dotnet"
-#"$bin_path/install_bun"
-#"$bin_path/install_ruby"
-#"$bin_path/install_java"
-#"$bin_path/install_haskell"
-
-# install jq
-"$bin_path/install_jq"
-
-# install GitHub CLI
-"$bin_path/install_github"
 
 # install Vim plugins
 "$bin_path/install_vim"
 
-# install Neovim and Lazyvim
-"$bin_path/install_neovim"
-
-# install tmux, tpm and tmux plugins
-"$bin_path/install_tmux"
+# install mise, and all tools which are not disabled in etc/mise/config.yml
+"$bin_path/install_mise"
 
 # install Ollama
 "$bin_path/install_ollama"
-
-# install static analysis tools
-"$bin_path/install_linters"
-
-# install application security tools such as vulnerability scanners
-#"$bin_path/install_appsec"
-
-# install cloud development tools
-"$bin_path/install_aws"
-"$bin_path/install_azure"
-#"$bin_path/install_gcloud"
-#"$bin_path/install_terraform"
-#"$bin_path/install_k8sdev"
-#"$bin_path/install_cloudflare"
-#"$bin_path/install_flyctl"
-
-# install Lima
-"$bin_path/install_lima"
 
 # copy ui/fonts/** to user's fonts path
 "$bin_path/install_fonts"
