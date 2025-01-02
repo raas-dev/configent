@@ -10,7 +10,8 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### mise #######################################################################
 
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+# shellcheck disable=SC2155  # will not declare separately, value compactness
+export PATH="$(mise where dotnet):$PATH"
 
 ### Powershell #################################################################
 
