@@ -516,18 +516,18 @@ kalk() {
 
 # Follow the given log file, or cloud-init output if log file is not given
 logs() {
-  local log="${1:-"/var/log/cloud-init-output.log"}"
-  if command -v lnav >/dev/null; then
-    if [ -r "$log" ]; then
-      lnav "$log"
+  local log_file="${1:-"/var/log/cloud-init-output.log"}"
+  if command -v tspin >/dev/null; then
+    if [ -r "$log_file" ]; then
+      tspin --follow "$log_file"
     else
-      sudo lnav "$log"
+      sudo "$(which tspin)" --follow "$log_file"
     fi
   else
-    if [ -r "$log" ]; then
-      tail --follow --verbose --lines=20 "$log"
+    if [ -r "$log_file" ]; then
+      tail --follow --verbose --lines=20 "$log_file"
     else
-      sudo tail --follow --verbose --lines=20 "$log"
+      sudo tail --follow --verbose --lines=20 "$log_file"
     fi
   fi
 }
