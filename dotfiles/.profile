@@ -132,6 +132,10 @@ export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 export RICH_TRACEBACKS=true
 export RICH_SHOW_LOCALS=true
 
+### dotnet #####################################################################
+
+command -v dotnet >/dev/null && export DOTNET_ROOT="$(dirname $(which dotnet))"
+
 ### Starship cross-shell prompt ################################################
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
