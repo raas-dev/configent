@@ -14,7 +14,16 @@ go = '1.23.4'
 'go:github.com/shihanng/tfvar' = 'latest'
 'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
 node = '22.12.0'
+
 python = { version = '3.12.8', postinstall = "postinstall_python" }
+uv = 'latest'
+'pipx:aider-chat[browser]' = 'latest'
+'pipx:pdm' = 'latest'
+'pipx:poetry' = 'latest'
+'pipx:pre-commit' = 'latest'
+'pipx:tldr' = 'latest'
+
+
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "postinstall_pwsh" }
 #bun = '1.1.42'
@@ -45,3 +54,4 @@ usage = '1.7.4'
 
 [settings]
 experimental = true
+pipx.uvx = true

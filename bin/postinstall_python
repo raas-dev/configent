@@ -8,36 +8,9 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### mise #######################################################################
-
-# shellcheck disable=SC2155  # will not declare separately, value compactness
-export PATH="$(mise where python)/bin:$PATH"
-
 ### interpreter scope ##########################################################
-
-# Upgrade packages included with Python
-pip install --upgrade pip
-
-# Create interpreter wide hook for printing Rich tracebacks
-pip install --upgrade rich
-
-# Install a better Python REPL
-pip install --upgrade ptpython
 
 # Symlink sitecustomize.py to Python site-packages
 sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
 ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
   "$sitepackages_path/sitecustomize.py"
-
-# Python applications in isolated environments (https://github.com/astral-sh/uv)
-pip install --upgrade uv
-
-### dedicated virtualenvs ######################################################
-
-export PATH="$HOME/.local/bin:$PATH"
-
-python -m uv tool install 'aider-chat[browser]'
-python -m uv tool install pdm
-python -m uv tool install poetry
-python -m uv tool install pre-commit
-python -m uv tool install tldr

@@ -130,9 +130,6 @@ export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
 export RICH_TRACEBACKS=true
 export RICH_SHOW_LOCALS=true
 
-# Put uv/pipx installed binaries first in PATH
-path_prepend "$HOME/.local/bin"
-
 ### Starship cross-shell prompt ################################################
 
 command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
