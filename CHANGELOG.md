@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.127.0](https://github.com/raas-dev/configent/compare/1.126.0...1.127.0) (2025-01-02)
+
+
+### Features
+
+* **mise:** Add lima ([f014de1](https://github.com/raas-dev/configent/commit/f014de18be7c9ee8573f3cafa63aed7f55fc7bea))
+
 ## [1.126.0](https://github.com/raas-dev/configent/compare/1.125.9...1.126.0) (2025-01-02)
 
 
