@@ -9,11 +9,9 @@
 !lessfilter
 !lesspipe.sh
 !nerdctl
-!pnpm
 !podman
 !postinstall_*
 !rsync_tmbackup.sh
 !tm
 !trans
 !xpanes
-!yarn

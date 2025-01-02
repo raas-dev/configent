@@ -45,7 +45,10 @@ go = '1.23.4'
 'go:github.com/shihanng/tfvar' = 'latest'
 'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
 
+#bun = '1.1.42'
 node = '22.12.0'
+'npm:pnpm' = { version = 'latest', postinstall =  "corepack enable pnpm" }
+'npm:yarn' = 'latest'
 
 python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
@@ -59,7 +62,6 @@ uv = 'latest'
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
-#bun = '1.1.42'
 #ruby = '3.4.1'
 #java = 'temurin-17.0.13+11'
 #ghcup = { version = '0.1.30.0', postinstall = "ghcup install stack" }
@@ -89,4 +91,5 @@ usage = '1.7.4'
 [settings]
 experimental = true
 cargo.binstall = true
+npm.bun = false
 pipx.uvx = true
