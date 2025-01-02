@@ -3,7 +3,35 @@
 azure-cli = 'asdf:https://github.com/asyrjasalo/asdf-azure-cli'
 
 [tools]
-rust = { version = '1.83.0', postinstall = "postinstall_rust" }
+rust = '1.83.0'
+'cargo:cargo-binstall' = 'latest' # use this, not cargo-binstall (macOS OpenSSL)
+# dotfiles requirements
+'cargo:aichat' = 'latest'
+'cargo:argc' = 'latest'
+'cargo:bat' = { version = 'latest', postinstall = "bat cache --build" }
+'cargo:diskonaut' = 'latest'
+'cargo:fd-find' = 'latest'
+'cargo:git-delta' = 'latest'
+'cargo:gitui' = 'latest'
+'cargo:hurl' = 'latest'
+'cargo:hwatch' = 'latest'
+'cargo:lsd' = 'latest'
+'cargo:numbat-cli' = 'latest'
+'cargo:ouch' = 'latest'
+'cargo:procs' = 'latest'
+'cargo:ripgrep' = 'latest'
+'cargo:sd' = 'latest'
+'cargo:starship' = 'latest'
+# topgrade
+'cargo:cargo-cache' = 'latest' # https://github.com/matthiaskrgr/cargo-cache
+'cargo:cargo-update' = 'latest' # https://github.com/nabijaczleweli/cargo-update
+'cargo:topgrade' = 'latest' #  https://github.com/topgrade-rs/topgrade
+# extras
+'cargo:kondo' = 'latest' # https://github.com/tbillington/kondo
+'cargo:nixpacks' = 'latest' # https://github.com/railwayapp/nixpacks
+'cargo:pastel' = 'latest' # https://github.com/sharkdp/pastel
+'cargo:watchexec-cli' = 'latest' # https://github.com/watchexec/watchexec
+
 go = '1.23.4'
 'go:github.com/muesli/duf' = 'latest'
 'go:github.com/go-enry/enry' = 'latest'
@@ -22,7 +50,6 @@ uv = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
 'pipx:tldr' = 'latest'
-
 
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "postinstall_pwsh" }
@@ -54,4 +81,5 @@ usage = '1.7.4'
 
 [settings]
 experimental = true
+cargo.binstall = true
 pipx.uvx = true
