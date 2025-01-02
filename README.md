@@ -210,7 +210,7 @@ See [rootless containers](https://rootlesscontaine.rs/) as those are preferred.
 ### macOS
 
 Container runtimes base on Linux kernel features not present on macOS. Thus
-[Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs on QEMU.
+[Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs.
 
 The aforementioned shims create and start the necessary virtual machines:
 Ubuntu for Docker, Debian for containerd and Fedora for Podman.
@@ -276,7 +276,7 @@ You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as container image scanners.
 
-## 🔨 QEMU
+## 🔨 VMs
 
 See `dotfiles/.aliases` for `vm4...` creating
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.

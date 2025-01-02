@@ -54,9 +54,6 @@ brew install git-lfs
 # Git extra commands (https://github.com/tj/git-extras)
 brew install git-extras
 
-# Linux virtual machines on QEMU
-brew install lima
-
 # The logfile navigator (https://github.com/tstack/lnav)
 brew install lnav
 
