@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.2](https://github.com/raas-dev/configent/compare/1.128.1...1.128.2) (2025-01-02)
+
+
+### Fixes
+
+* **mise:** Do not use shims ([04553d2](https://github.com/raas-dev/configent/commit/04553d2958cc7010dc09364f248fd04096b10578))
+* **mise:** Remove noise ([8519e2e](https://github.com/raas-dev/configent/commit/8519e2e7865e660172d3e67e3fc644a6f019d461))
+* **mise:** Remove unused export PATHs ([b3d4df5](https://github.com/raas-dev/configent/commit/b3d4df59178e08400b101cbe9ed24795a1a5c619))
+
 ### [1.128.1](https://github.com/raas-dev/configent/compare/1.128.0...1.128.1) (2025-01-02)
 
 
