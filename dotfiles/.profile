@@ -161,8 +161,7 @@ export BAT_THEME="SynthWave84"
 
 ### awscli #####################################################################
 
-command -v aws_completer >/dev/null &&
-  complete -C "$(command -v aws_completer)" aws
+command -v aws_completer >/dev/null && complete -C "$(which aws_completer)" aws
 
 ### Azure bicep ################################################################
 
