@@ -53,8 +53,9 @@ else
   exit 1
 fi
 
-# install Zsh if brew is available, always install Zsh plugins
+# installs Zsh plugins, also installs newer Zsh if brew is available for the OS
 "$bin_path/install_zsh"
+#"$bin_path/install_bash"
 
 # install mise
 export PATH="$HOME/.local/bin:$PATH"
