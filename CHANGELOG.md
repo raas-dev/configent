@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.5](https://github.com/raas-dev/configent/compare/1.128.4...1.128.5) (2025-01-02)
+
+
+### Fixes
+
+* **mise:** Improve disabling and enabling tools ([5d6344b](https://github.com/raas-dev/configent/commit/5d6344bb52db159974430ed18eafa864c2150730))
+
 ### [1.128.4](https://github.com/raas-dev/configent/compare/1.128.3...1.128.4) (2025-01-02)
 
 
