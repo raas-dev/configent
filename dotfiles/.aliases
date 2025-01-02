@@ -378,14 +378,16 @@ ai() {
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
-  _aichat_build && aichat --agent "$agent" --session "$context" "$*"
+  _aichat_build &&
+    aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
 # requires AICHAT_FUNCTIONS_DIR
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
-  _aichat_build && aichat --agent "$agent" --session "$context" "$*"
+  _aichat_build &&
+    aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
 ### Functions: Docker ##########################################################
