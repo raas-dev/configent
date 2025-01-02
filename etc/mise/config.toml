@@ -45,9 +45,9 @@ go = '1.23.4'
 'go:github.com/shihanng/tfvar' = 'latest'
 'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
 
-#bun = '1.1.42'
 node = '22.12.0'
-'npm:pnpm' = { version = 'latest', postinstall =  "corepack enable pnpm" }
+bun = '1.1.42'
+'npm:pnpm' = 'latest'
 'npm:yarn' = 'latest'
 
 python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
@@ -91,5 +91,5 @@ usage = '1.7.4'
 [settings]
 experimental = true
 cargo.binstall = true
-npm.bun = false
+npm.bun = true
 pipx.uvx = true
