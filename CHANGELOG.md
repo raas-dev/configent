@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.6](https://github.com/raas-dev/configent/compare/1.128.5...1.128.6) (2025-01-02)
+
+
+### Fixes
+
+* **fzf:** Add separate install script ([3f256e2](https://github.com/raas-dev/configent/commit/3f256e240694480862bac50e1d4c72f8e76fe6b5))
+* **macos:** Add newer OpenSSL ([a8e7d3e](https://github.com/raas-dev/configent/commit/a8e7d3e9e6887238e413600452b7bd92965e3bda))
+* **mise:** Add go backend ([7954d30](https://github.com/raas-dev/configent/commit/7954d30f8ed02ff0243feb7819de73604eb3e100))
+* **mise:** Add python backend ([9a6959b](https://github.com/raas-dev/configent/commit/9a6959b2d0b48aa6c801029690c3a47f0ea5575d))
+* **mise:** Tidy postinstall ([b03b15a](https://github.com/raas-dev/configent/commit/b03b15a1f512661a9ce21ceff42f7dcb5389ae0c))
+* **mise:** Use cargo backend over rust postinstall ([c63c46e](https://github.com/raas-dev/configent/commit/c63c46eb8289d700d4a8b956c8070e60617de47a))
+* **mise:** Use dotnet backend to install pwsh ([7562ed2](https://github.com/raas-dev/configent/commit/7562ed26374c6a2b51cd6d305f045c59f4f1041c))
+
 ### [1.128.5](https://github.com/raas-dev/configent/compare/1.128.4...1.128.5) (2025-01-02)
 
 
