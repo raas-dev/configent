@@ -111,7 +111,7 @@ bindkey '^X' _aichat_zsh # CTRL + x
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
-. <(fzf --zsh) # fzf is added to PATH in profile
+command -v fzf >/dev/null && . <(fzf --zsh)
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 

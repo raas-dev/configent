@@ -118,6 +118,6 @@ fi
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
-eval "$(fzf --bash)" # fzf is added to PATH in profile
+command -v fzf >/dev/null && eval "$(fzf --bash)"
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
