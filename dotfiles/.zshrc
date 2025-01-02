@@ -108,13 +108,10 @@ _aichat_zsh() {
 zle -N _aichat_zsh
 bindkey '^X' _aichat_zsh # CTRL + x
 
-### fzf ########################################################################
-
-. <(fzf --zsh)
-
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
+. <(fzf --zsh) # fzf is added to PATH in profile
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 

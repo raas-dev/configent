@@ -115,12 +115,9 @@ fi
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
 
-### fzf ########################################################################
-
-eval "$(fzf --bash)"
-
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
+eval "$(fzf --bash)" # fzf is added to PATH in profile
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
