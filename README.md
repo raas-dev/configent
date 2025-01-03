@@ -186,23 +186,21 @@ outside what is in `vscode/*.json`. Exceptions are documented below.
 
 ### bin/setup_continue
 
-[Continue](https://docs.continue.dev) is installed for chat and code
-completion by Large Language Models in VS Code like editors.
-Note that (commercial) VS Code forks may prefer their own closed source
-solutions and disable the extension automatically.
+[Continue](https://docs.continue.dev) is installed as open-source AI code
+assistant in VS Code like editors. Note that (commercial) VS Code forks may
+prefer their own (closed) solutions and disable Continue automatically.
 
-The `bin/setup_continue` copies the Continue configuration files and
-installs Node.js packages (like dotenv) used by the configuration.
-The script is in `PATH` and **is already run in bootstrap** after it has
-installed editor extensions.
+The script `setup_continue` is in `PATH` and **is run as part of bootstrap**.
+The script symlinks (`config.json`) or copies (`config.ts`) to `~/.continue/`
+and installs Node.js packages imported by `.ts` config.
 
-Some manual configuration is required:
+To start using Continue, do these manually after bootstrap:
 
-1. You must export LLM Providers' API key environment variables used by
-`~/.continue/config.ts` in e.g. `~/.rclocal` (outside the git repo).
+1. Export your LLM Provider API keys as environment variables in e.g.
+`~/.rclocal` (outside the git repo), as they are read by `config.ts`.
 
-2. If you are using local LLMs via Ollama (for code autocompletion), you must
-`ollama pull` those models before they are automatically started by Continue.
+2. If you use local LLMs via Ollama (e.g. for code autocomplete), you must
+`ollama pull` the model before it is automatically started by Continue.
 
 3. ⚠️: File `config.ts` (unlike `.json`) is copied in place, not symlinked -
 you must manually run `setup_continue` if/after editing the `.ts` file.
