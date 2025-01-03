@@ -181,9 +181,9 @@
   "docs": [
       {
       "title": "Continue",
-      "startUrl": "https://docs.continue.dev/intro",
+      "startUrl": "https://docs.continue.dev",
       "rootUrl": "https://docs.continue.dev",
-      "faviconUrl": "https://docs.continue.dev/favicon.ico",
+      "maxDepth": 1
     }
   ],
   "experimental": {
