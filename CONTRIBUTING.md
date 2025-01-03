@@ -5,14 +5,11 @@ a pull request.
 
 ## Guidelines
 
-1. We do not use anything in installation scripts that is not POSIX compatible
-2. Linux on AArch64 is a first class citizen as Macs run on ARM since 2023
+1. Do not use anything in installation scripts that is not POSIX compatible
+2. Supporting Linux on AArch64 is mandatory as all Macs use ARM64 since 2023
 3. The software **installed** must work on 95% of the supported Linux distros
 4. There is most often **no need to install** on the host as `n` can run it
-5. We do not rely on Homebrew outside macOS, before Homebrew Linux works on ARM
-6. We prefer `mise` plugins when they provide binaries both for x86-64 and ARM
-7. Otherwise we use the distros' official repositories (may have older versions)
-8. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
+5. Do not rely on Homebrew, use `mise` plugins, or distros' repo as last resort
 
 ## Testing
 
