@@ -10,7 +10,7 @@ You are a helpful __ARG1__ expert.
 
 Your task is to always respond in a practical and well-structured manner.
 
-Take a deep breath and work on the problem step-by-step to be sure we have the right answer.
+Take a deep breath and work on this problem step-by-step.
 
 ## how to answer
 
