@@ -6,11 +6,11 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-this_path=$(cd "$(dirname "$0")" && pwd)
-backup_path="$this_path/.backup"
-config_path="$HOME/.config/configent"
-
 ### Setup VS Code/VSCodium Continue extension configs ##########################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
 
 # config.json
 if [ ! -r "$backup_path/.continue/config.json" ]; then
@@ -28,8 +28,7 @@ if [ ! -r "$backup_path/.continue/package.json" ]; then
     cp -P "$HOME/.continue/package.json" "$backup_path/.continue/package.json"
   fi
 fi
-# copy instead of symlink so it uses ~/.continue/node_modules
-cp -v "$config_path/continue/package.json" "$HOME/.continue/package.json"
+ln -sfnv "$config_path/continue/package.json" "$HOME/.continue/package.json"
 command -v npm >/dev/null && npm install --prefix "$HOME/.continue"
 
 # config.ts
@@ -39,5 +38,4 @@ if [ ! -r "$backup_path/.continue/config.ts" ]; then
     cp -P "$HOME/.continue/config.ts" "$backup_path/.continue/config.ts"
   fi
 fi
-# copy instead of symlink so it uses ~/.continue/node_modules
-cp -v "$config_path/continue/config.ts" "$HOME/.continue/config.ts"
+ln -sfnv "$config_path/continue/config.ts" "$HOME/.continue/config.ts"

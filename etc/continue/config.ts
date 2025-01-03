@@ -1,5 +1,3 @@
-// NOTE: this file is copied, not symlinked - run setup_continue after editing
-
 import * as dotenv from "dotenv";
 
 dotenv.config();
