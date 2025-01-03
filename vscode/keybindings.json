@@ -186,7 +186,7 @@
   },
   {
     "command": "continue.debugTerminal",
-    "key": "cmd+a t"
+    "key": "ctrl+s a"
   },
   {
     "command": "-workbench.action.openRecent",
@@ -317,10 +317,6 @@
     "key": "alt+a"
   },
   {
-    "command": "continue.newSession",
-    "key": "cmd+a c"
-  },
-  {
     "command": "-continue.toggleTabAutocompleteEnabled",
     "key": "cmd+k cmd+a",
     "when": "!terminalFocus"
@@ -329,9 +325,5 @@
     "command": "-continue.toggleFullScreen",
     "key": "cmd+k cmd+m",
     "when": "!terminalFocus"
-  },
-  {
-    "command": "continue.codebaseForceReIndex",
-    "key": "cmd+a r"
   }
 ]
