@@ -187,13 +187,12 @@ outside what is in `vscode/*.json`. Exceptions are documented below.
 ### bin/setup_continue
 
 [Continue](https://docs.continue.dev) is installed for chat and code
-completion in VS Code like editor using Large Language Models.
+completion by Large Language Models in VS Code like editors.
 Note that (commercial) VS Code forks may prefer their own closed source
-solutions and disable Continue extension automatically.
+solutions and disable the extension automatically.
 
 The `bin/setup_continue` copies the Continue configuration files and
 installs Node.js packages (like dotenv) used by the configuration.
-
 The script is in `PATH` and is also run as part of the bootstrap,
 after it has installed VS Code like editor extensions like Continue.
 
