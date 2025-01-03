@@ -169,15 +169,23 @@ Existing `User` directory is first backed up to
 If editor command-line binary is present, the extensions
 (`vscode/extensions.list`) are installed.
 
-To update the file after adding or removing extensions in VS Code like editor,
-run `vscode/create_extensions_list`.
+## 🧬 IDE extensions
+
+To update `vscode/extensions.list` after adding or removing extensions
+in VS Code like editor, run `vscode/create_extensions_list`.
 
 💡: You can reuse both `setup_code` and `vscode/create_extensions_list` scripts
 for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
-## 🧬 Extensions
+Some extensions may be unavailable for VSCodium and VS Code forks.
+Extensions in [Open VSX Registry](https://open-vsx.org/) are available
+for all VS Code like editors and are thus preferred.
 
-### VS Code / OpenVSX
+By default, the editor extensions do not need any additional configuration
+outside what is already in `vscode/*.json` but if this is not the case,
+setting up these extensions is documented below.
+
+### bin/setup_continue
 
 [Continue](https://docs.continue.dev) is installed for chat with
 Large Language Models and for code completion in VS Code like editor.
@@ -192,6 +200,9 @@ used by `~/.continue/config.ts` in `~/.rclocal`.
 
 ⚠️: File `config.ts` (unlike `config.json`) is copied, not symlinked -
 you must manually run `setup_continue` after editing the `.ts` file.
+
+Note that (commercial) VS Code forks may implement their own
+closed source solutions and disable Continue extension automatically.
 
 ## 🐚 Default shell
 
