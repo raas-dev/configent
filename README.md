@@ -119,7 +119,7 @@ are automatically exported here if they were set in your previous `.gitconfig`.
 Sensible defaults are used. Enable or disable tools in `etc/mise/config.toml`.
 
 What's installed by default:
-1. Zsh, antidote (plugin manager for Zsh) and Zsh plugins
+1. Zsh and antidote (Zsh plugin manager)
 2. Other command-line essentials and a few build time requirements
 3. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
 4. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
@@ -139,9 +139,9 @@ On macOS, [Homebrew](https://brew.sh) is used to install requirements and
 casks (GUI apps) user-wide.
 
 Language runtimes and development tools are always installed user-wide by
-[mise](https://mise.jdx.dev/). Global versions are defined in
-`~/.config/mise/config.toml`. Whenever possible,
-[mise plugins](https://mise.jdx.dev/registry.html) are preferred over Homebrew.
+[mise](https://mise.jdx.dev/). Mise is always preferred over Homebrew.
+Tools are enabled and disabled in `~/.config/mise/config.toml`,
+use [mise plugins](https://mise.jdx.dev/registry.html) to add more.
 
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
@@ -150,12 +150,16 @@ With Homebrew on Linux (x86-64), system-wide installation (`/home/linuxbrew`) is
 preferred, but if it this not possible (no `sudo`), it is installed user's home.
 
 💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
-configuring project specific versions.
+configuring (and locking) project specific versions.
 
 ## 🔨 IDE
 
 [VSCodium](https://vscodium.com/) is the default IDE on Linux distros and
 [VS Code](https://code.visualstudio.com/) is the default IDE on macOS.
+
+Some extensions may be unavailable for VSCodium and VS Code forks.
+Extensions in [Open VSX Registry](https://open-vsx.org/) are available
+for all VS Code like editors and are thus preferred.
 
 ### bin/setup_code
 
@@ -173,13 +177,6 @@ in VS Code like editor, run `vscode/create_extensions_list`.
 
 💡: You can reuse both `setup_code` and `vscode/create_extensions_list` scripts
 for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
-
-Some extensions may be unavailable for VSCodium and VS Code forks.
-Extensions in [Open VSX Registry](https://open-vsx.org/) are available
-for all VS Code like editors and are thus preferred.
-
-By default, the editor extensions do not use any additional configuration
-outside what is in `vscode/*.json`. Exceptions are documented below.
 
 ### bin/setup_continue
 
@@ -200,7 +197,10 @@ To start using Continue, do these manually after bootstrap:
 you must `ollama pull` the model defined in `config.json` before it is
 automatically started by Continue (e.g. for code autocomplete).
 
-## 🐚 Default shell
+## 🐚 Shell
+
+Zsh loads [antidote](https://antidote.sh/) and uses it to install Zsh
+plugins on first start.
 
 Set `zsh` as the user's default shell:
 
