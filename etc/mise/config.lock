@@ -1,0 +1,293 @@
+[tools.awscli]
+version = "2.22.26"
+backend = "aqua:aws/aws-cli"
+
+[tools.awscli.checksums]
+"AWSCLIV2-2.22.26.pkg" = "sha256:ea8e5eebff9fd88e50b0976dc5fb9fb4620659c39aa696728f3e8ca27d233758"
+
+[tools.azure-cli]
+version = "2.67.0"
+backend = "asdf:azure-cli"
+
+[tools.bun]
+version = "1.1.42"
+backend = "core:bun"
+
+[tools.bun.checksums]
+"bun-darwin-aarch64.zip" = "sha256:64a70fe290bd6391a09d555d4e4e1a8df56543e526bb1381ab344a385348572c"
+
+[tools.cargo-binstall]
+version = "1.10.18"
+backend = "aqua:cargo-bins/cargo-binstall"
+
+[tools.cargo-binstall.checksums]
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:cdd82130ba1c98ca4db63c44087881d6ae92ba642ba6361654987a707040aabd"
+
+[tools."cargo:aichat"]
+version = "0.26.0"
+backend = "cargo:aichat"
+
+[tools."cargo:argc"]
+version = "1.22.0"
+backend = "cargo:argc"
+
+[tools."cargo:bat"]
+version = "0.24.0"
+backend = "cargo:bat"
+
+[tools."cargo:cargo-cache"]
+version = "0.8.3"
+backend = "cargo:cargo-cache"
+
+[tools."cargo:cargo-update"]
+version = "16.0.0"
+backend = "cargo:cargo-update"
+
+[tools."cargo:diskonaut"]
+version = "0.11.0"
+backend = "cargo:diskonaut"
+
+[tools."cargo:fd-find"]
+version = "10.2.0"
+backend = "cargo:fd-find"
+
+[tools."cargo:git-delta"]
+version = "0.18.2"
+backend = "cargo:git-delta"
+
+[tools."cargo:gitui"]
+version = "0.26.3"
+backend = "cargo:gitui"
+
+[tools."cargo:hurl"]
+version = "6.0.0"
+backend = "cargo:hurl"
+
+[tools."cargo:hwatch"]
+version = "0.3.18"
+backend = "cargo:hwatch"
+
+[tools."cargo:kondo"]
+version = "0.8.0"
+backend = "cargo:kondo"
+
+[tools."cargo:lsd"]
+version = "1.1.5"
+backend = "cargo:lsd"
+
+[tools."cargo:nixpacks"]
+version = "1.30.0"
+backend = "cargo:nixpacks"
+
+[tools."cargo:numbat-cli"]
+version = "1.15.0"
+backend = "cargo:numbat-cli"
+
+[tools."cargo:ouch"]
+version = "0.5.1"
+backend = "cargo:ouch"
+
+[tools."cargo:pastel"]
+version = "0.10.0"
+backend = "cargo:pastel"
+
+[tools."cargo:procs"]
+version = "0.14.8"
+backend = "cargo:procs"
+
+[tools."cargo:ripgrep"]
+version = "14.1.1"
+backend = "cargo:ripgrep"
+
+[tools."cargo:sd"]
+version = "1.0.0"
+backend = "cargo:sd"
+
+[tools."cargo:starship"]
+version = "1.21.1"
+backend = "cargo:starship"
+
+[tools."cargo:tailspin"]
+version = "4.0.0"
+backend = "cargo:tailspin"
+
+[tools."cargo:topgrade"]
+version = "16.0.2"
+backend = "cargo:topgrade"
+
+[tools."cargo:watchexec-cli"]
+version = "2.2.1"
+backend = "cargo:watchexec-cli"
+
+[tools."cargo:xh"]
+version = "0.23.0"
+backend = "cargo:xh"
+
+[tools."cargo:zoxide"]
+version = "0.9.6"
+backend = "cargo:zoxide"
+
+[tools.dotnet]
+version = "8.0.404"
+backend = "asdf:dotnet"
+
+[tools."dotnet:powershell"]
+version = "7.4.6"
+backend = "dotnet:powershell"
+
+[tools.fzf]
+version = "0.57.0"
+backend = "aqua:junegunn/fzf"
+
+[tools.fzf.checksums]
+"fzf-0.57.0-darwin_arm64.tar.gz" = "sha256:b4e1c5322652bc2672c32dc37993f8d501df7aecb3fa9e545a3d80eca8ae9a2f"
+
+[tools.github-cli]
+version = "2.64.0"
+backend = "aqua:cli/cli"
+
+[tools.github-cli.checksums]
+"gh_2.64.0_macOS_arm64.zip" = "sha256:4f26239fc923120c26325b5c54759275e5a68892a26e52351b74ab7e7ac22ba1"
+
+[tools.go]
+version = "1.23.4"
+backend = "core:go"
+
+[tools.go.checksums]
+"go1.23.4.darwin-arm64.tar.gz" = "sha256:87d2bb0ad4fe24d2a0685a55df321e0efe4296419a9b3de03369dbe60b8acd3a"
+
+[tools."go:github.com/abhimanyu003/sttr"]
+version = "0.2.24"
+backend = "go:github.com/abhimanyu003/sttr"
+
+[tools."go:github.com/charmbracelet/glow"]
+version = "1.5.1"
+backend = "go:github.com/charmbracelet/glow"
+
+[tools."go:github.com/go-enry/enry"]
+version = "1.3.0"
+backend = "go:github.com/go-enry/enry"
+
+[tools."go:github.com/muesli/duf"]
+version = "0.8.1"
+backend = "go:github.com/muesli/duf"
+
+[tools."go:github.com/rverton/webanalyze/cmd/webanalyze"]
+version = "0.4.1"
+backend = "go:github.com/rverton/webanalyze/cmd/webanalyze"
+
+[tools."go:github.com/shihanng/tfvar"]
+version = "0.10.0"
+backend = "go:github.com/shihanng/tfvar"
+
+[tools."go:golang.org/x/tools/gopls"]
+version = "0.17.1"
+backend = "go:golang.org/x/tools/gopls"
+
+[tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
+version = "3.10.0"
+backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
+
+[tools.jq]
+version = "1.7.1"
+backend = "aqua:jqlang/jq"
+
+[tools.jq.checksums]
+jq-macos-arm64 = "sha256:0bbe619e663e0de2c550be2fe0d240d076799d6f8a652b70fa04aea8a8362e8a"
+
+[tools.lima]
+version = "1.0.3"
+backend = "aqua:lima-vm/lima"
+
+[tools.lima.checksums]
+"lima-1.0.3-Darwin-arm64.tar.gz" = "sha256:5033cadcf49b0297bac897c5b81ee5f9f83858327e6e08609f06f46e8c56dd2f"
+
+[tools.neovim]
+version = "0.10.3"
+backend = "aqua:neovim/neovim"
+
+[tools.neovim.checksums]
+"nvim-macos-arm64.tar.gz" = "sha256:351819f8353c4f34f4928bddd2ab92c33f2a8976e9310a87a8fb794e2ae69104"
+
+[tools.node]
+version = "22.12.0"
+backend = "core:node"
+
+[tools.node.checksums]
+"node-v22.12.0-darwin-arm64.tar.gz" = "sha256:293dcc6c2408da21562d135b0412525e381bb6fe150d688edb58fe850d0f3e13"
+
+[tools."npm:pnpm"]
+version = "9.15.2"
+backend = "npm:pnpm"
+
+[tools."npm:yarn"]
+version = "1.22.22"
+backend = "npm:yarn"
+
+[tools."pipx:aider-chat"]
+version = "0.70.0"
+backend = "pipx:aider-chat"
+
+[tools."pipx:glances"]
+version = "4.3.0.7"
+backend = "pipx:glances"
+
+[tools."pipx:pdm"]
+version = "2.22.1"
+backend = "pipx:pdm"
+
+[tools."pipx:poetry"]
+version = "1.8.5"
+backend = "pipx:poetry"
+
+[tools."pipx:pre-commit"]
+version = "4.0.1"
+backend = "pipx:pre-commit"
+
+[tools."pipx:tldr"]
+version = "3.3.0"
+backend = "pipx:tldr"
+
+[tools.python]
+version = "3.12.8"
+backend = "core:python"
+
+[tools.rust]
+version = "1.83.0"
+backend = "core:rust"
+
+[tools.shellcheck]
+version = "0.10.0"
+backend = "aqua:koalaman/shellcheck"
+
+[tools.shellcheck.checksums]
+"shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
+
+[tools.tmux]
+version = "3.5a"
+backend = "asdf:tmux"
+
+[tools.trivy]
+version = "0.58.1"
+backend = "aqua:aquasecurity/trivy"
+
+[tools.trivy.checksums]
+"trivy_0.58.1_macOS-ARM64.tar.gz" = "sha256:499a64a911a1ac80fcc26d619cdc1bdb05528d8b1bd0490f01a8324aa6ec6e13"
+
+[tools.usage]
+version = "1.7.4"
+backend = "ubi:jdx/usage"
+
+[tools.usage.checksums]
+usage-macos-aarch64 = "sha256:c20888772f759eb418de24544f2eaabe3fbd3696ed1710bba25de233a79ffa2b"
+
+[tools.uv]
+version = "0.5.14"
+backend = "aqua:astral-sh/uv"
+
+[tools.uv.checksums]
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:d548dffc256014c4c8c693e148140a3a21bcc2bf066a35e1d5f0d24c91d32112"
+
+[tools."vfox:jdx/vfox-clang"]
+version = "18.1.8"
+backend = "vfox:jdx/vfox-clang"
