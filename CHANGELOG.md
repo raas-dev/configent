@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.16](https://github.com/raas-dev/configent/compare/1.128.15...1.128.16) (2025-01-03)
+
+
+### Fixes
+
+* **azure:** Remove changing az output format ([791bc51](https://github.com/raas-dev/configent/commit/791bc51f1133da7231cae01f9021dfc79240b9a3))
+* **cmake:** Move cmake to mise ([bdebd9c](https://github.com/raas-dev/configent/commit/bdebd9c62b288439e247afaae3fbbee6d70c633c))
+* **macos:** Remove explicit openssl ([98cd495](https://github.com/raas-dev/configent/commit/98cd495f4a9af7371c9aff90bee86733b64f3781))
+* **macos:** Remove unused llvm from path ([7e4a5f9](https://github.com/raas-dev/configent/commit/7e4a5f925e61b17c1a8c9db1fc9a56df2a0d857d))
+* **mise:** Comment out cmake ([510790f](https://github.com/raas-dev/configent/commit/510790f89b63d54f86fc87e27ef79392c21b955a))
+* **mise:** Fix lockfile azure-cli backend ([4754c87](https://github.com/raas-dev/configent/commit/4754c87f86e8d6819b277a5af5f642e7b2240da4))
+* **mise:** Fix lockfile azure-cli backend ([ca618f2](https://github.com/raas-dev/configent/commit/ca618f23778d2578143fba90a658dc9a7d65c176))
+
 ### [1.128.15](https://github.com/raas-dev/configent/compare/1.128.14...1.128.15) (2025-01-03)
 
 
