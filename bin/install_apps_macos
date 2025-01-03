@@ -72,12 +72,6 @@ brew install sniffnet
 # Maintained ctags implementation
 brew install universal-ctags
 
-# For compiling language versions (mise)
-brew install xz
-
-# For hurl
-brew install pkg-config
-
 # For speech-to-text
 brew install portaudio
 # brew install ffmpeg
