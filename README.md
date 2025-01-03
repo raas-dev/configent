@@ -197,8 +197,13 @@ installs Node.js packages (like dotenv) used by the configuration.
 The script is in `PATH` and is also run as part of the bootstrap,
 after it has installed VS Code like editor extensions like Continue.
 
-You must export the LLM Providers' API key environment variables
-used by `~/.continue/config.ts` in `~/.rclocal` (outside git repo).
+Some manual configuration is required:
+
+1. You must export LLM Providers' API key environment variables used by
+`~/.continue/config.ts` in e.g. `~/.rclocal` (outside the git repo).
+
+2. If you are using local LLMs via Ollama (for code autocompletion), you must
+`ollama pull` those models before they are automatically started by Continue.
 
 ⚠️: File `config.ts` (unlike `.json`) is copied in place, not symlinked -
 you must manually run `setup_continue` after editing the `.ts` file.
