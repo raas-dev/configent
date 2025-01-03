@@ -32,7 +32,6 @@ fi
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 
 # Homebrew Cask taps
-#brew tap homebrew/cask-versions
 brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
