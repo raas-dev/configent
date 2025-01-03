@@ -1,5 +1,6 @@
 {
   "allowAnonymousTelemetry": false,
+  "systemMessage": "Please provide concise answers.",
   "models": [
     {
       "title": "gemini-2.0-flash-exp",
@@ -179,7 +180,7 @@
     "quickActions": [
       {
         "title": "Explain",
-        "prompt": "Explain what this code does. Answer briefly and concisely.",
+        "prompt": "Explain what this code does.",
         "sendToChat": true
       },
       {
@@ -188,8 +189,7 @@
       },
       {
         "title": "Refactor",
-        "prompt": "Refactor this code for human readability. Do NOT change the functionality of the code itself.",
-         "sendToChat": true
+        "prompt": "Refactor this code for human readability. Do NOT change the functionality of the code itself."
       },
       {
         "title": "Optimize",
