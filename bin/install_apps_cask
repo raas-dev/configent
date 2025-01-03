@@ -50,6 +50,3 @@ brew install --cask --no-quarantine visual-studio-code
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
 brew install --cask --no-quarantine ukelele
-
-# Finder quick look plugins (https://github.com/sindresorhus/quick-look-plugins)
-#brew install --cask --no-quarantine qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
