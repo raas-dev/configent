@@ -14,6 +14,15 @@ a pull request.
 7. Otherwise we use the distros' official repositories (may have older versions)
 8. We do not use Rust, Go or Python for tasks where `sh` has worked since 1970s
 
+## Testing
+
+See `dotfiles/.aliases` for `vm4...` creating
+[Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
+
+For development purposes, once the VM has been started, host's `$HOME/configent`
+is mounted read-only in the VM. This enables testing most changes without first
+committing and pushing to your fork.
+
 ## Pre-commit
 
 Install [pre-commit](https://pre-commit.com/) hooks before committing:
@@ -42,15 +51,6 @@ See respective ignore files in the repository root.
 In addition, Semgrep and Checkov support inline ignores (as comments in files).
 
 SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
-
-## Testing
-
-See `dotfiles/.aliases` for `vm4...` creating
-[Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
-
-For development purposes, once the VM has been started, host's `$HOME/configent`
-is mounted read-only in the VM. This enables testing most changes without first
-committing and pushing to your fork.
 
 ## Issues in dependencies
 
