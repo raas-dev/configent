@@ -6,13 +6,15 @@
       "title": "gemini-2.0-flash-exp",
       "provider": "gemini",
       "model": "gemini-2.0-flash-exp",
-      "apiKey": "[GEMINI_API_KEY]"
+      "apiKey": "[GEMINI_API_KEY]",
+      "contextLength": 2097152
     },
     {
       "title": "gemini-exp-1206",
       "provider": "gemini",
       "model": "gemini-exp-1206",
-      "apiKey": "[GEMINI_API_KEY]"
+      "apiKey": "[GEMINI_API_KEY]",
+      "contextLength": 2097152
     },
     {
       "title": "claude-3.5-sonnet",
@@ -176,6 +178,14 @@
     },
     { "name": "os" }
   ],
+  "docs": [
+      {
+      "title": "Continue",
+      "startUrl": "https://docs.continue.dev/intro",
+      "rootUrl": "https://docs.continue.dev",
+      "faviconUrl": "https://docs.continue.dev/favicon.ico",
+    }
+  ],
   "experimental": {
     "quickActions": [
       {
@@ -208,5 +218,8 @@
         "prompt": "Write tests for this code. Do NOT change anything about the code itself. Answer only code."
       }
     ]
+  },
+  "ui": {
+    "fontSize": 14
   }
 }
