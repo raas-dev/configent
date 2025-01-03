@@ -175,19 +175,21 @@ run `vscode/create_extensions_list`.
 💡: You can reuse both `setup_code` and `vscode/create_extensions_list` scripts
 for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
-### bin/setup_continue
+## 🧬 Extensions
 
-VS Code (Open VSX) extension [Continue](https://docs.continue.dev) is used
-for chat with Large Language Models and for Copilot-like code completion.
+### Code Continue
 
-This script copies the Continue's configuration files and installs
-Node.js packages (like dotenv) used by the configuration.
+[Continue](https://docs.continue.dev) is installed for chat with Large Language Models and for code completion in VS Code like editor.
+
+The `bin/setup_continue` copies the Continue's configuration files
+and installs Node.js packages (like dotenv) used by the configuration.
+
+The script is run as part of `bootstrap` (after installing editor extensions)
+and is also is in `PATH`.
 
 You must export the API keys loaded by `~/.continue/config.ts` in `~/.rclocal`.
 
 ⚠️: File `~/.continue/config.ts` is copied, not symlinked - you must run `setup_continue` after editing that particular file.
-
-The script is in bin which is in `PATH`.
 
 ## 🐚 Default shell
 
