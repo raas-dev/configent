@@ -82,10 +82,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
+  # install_apps_macos
   path_prepend "$(brew --prefix findutils)/libexec/gnubin"
   path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
-  export CFLAGS="-I$(brew --prefix openssl)/include"
-  export LDFLAGS="-L$(brew --prefix openssl)/lib"
+  # install_apps_cask
   export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
