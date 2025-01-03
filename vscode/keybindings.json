@@ -186,7 +186,7 @@
   },
   {
     "command": "continue.debugTerminal",
-    "key": "ctrl+s l"
+    "key": "cmd+a t"
   },
   {
     "command": "-workbench.action.openRecent",
@@ -264,5 +264,74 @@
     "command": "-workbench.action.terminal.openNativeConsole",
     "key": "shift+cmd+c",
     "when": "!terminalFocus"
+  },
+  {
+    "command": "continue.acceptDiff",
+    "key": "ctrl+up",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "-continue.acceptDiff",
+    "key": "shift+cmd+enter",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "continue.rejectDiff",
+    "key": "ctrl+down",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "-continue.rejectDiff",
+    "key": "shift+cmd+backspace",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "-continue.rejectDiff",
+    "key": "cmd+z",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "continue.acceptVerticalDiffBlock",
+    "key": "ctrl+right",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "-continue.acceptVerticalDiffBlock",
+    "key": "alt+cmd+y"
+  },
+  {
+    "command": "continue.rejectVerticalDiffBlock",
+    "key": "ctrl+left",
+    "when": "continue.diffVisible"
+  },
+  {
+    "command": "-continue.rejectVerticalDiffBlock",
+    "key": "alt+cmd+n"
+  },
+  {
+    "command": "continue.applyCodeFromChat",
+    "key": "ctrl+enter"
+  },
+  {
+    "command": "-continue.applyCodeFromChat",
+    "key": "alt+a"
+  },
+  {
+    "command": "continue.newSession",
+    "key": "cmd+a c"
+  },
+  {
+    "command": "-continue.toggleTabAutocompleteEnabled",
+    "key": "cmd+k cmd+a",
+    "when": "!terminalFocus"
+  },
+  {
+    "command": "-continue.toggleFullScreen",
+    "key": "cmd+k cmd+m",
+    "when": "!terminalFocus"
+  },
+  {
+    "command": "continue.codebaseForceReIndex",
+    "key": "cmd+a r"
   }
 ]
