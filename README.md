@@ -7,8 +7,8 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 - Work must finish by running one command. Mouse is not productivity.
 - Does not install 10s of tools most of which can be run ad-hoc in a container.
-- 95% consistent user experience both on macOS and most common Linux distros.
-- There is only one way to manage programming languages and tool versions.
+- 95% consistent user experience both on macOS and common Linux distros.
+- Has an obvious (one) way to manage programming languages and tool versions.
 - AI agents are built on prompt chaining and function calling to self-direct.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
@@ -18,7 +18,7 @@ A few features:
 
 - One character `.aliases`: The fastest are the commands one does not type.
 - Terminal is mostly Rust and Go for speed, use `n`ix-shells for ad-hoc CLIs.
-- macOS `docker` experience like it was with Docker Desktop but no payments.
+- Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Ask AI (`a <question>`), open chat on (`ai <topic>`) or ask assistant (`_`).
 
