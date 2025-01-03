@@ -181,9 +181,8 @@ Some extensions may be unavailable for VSCodium and VS Code forks.
 Extensions in [Open VSX Registry](https://open-vsx.org/) are available
 for all VS Code like editors and are thus preferred.
 
-By default, the editor extensions do not need any additional configuration
-outside what is already in `vscode/*.json` but if this is not the case,
-setting up these extensions is documented below.
+By default, the editor extensions do not use any additional configuration
+outside what is in `vscode/*.json`. Exceptions are documented below.
 
 ### bin/setup_continue
 
