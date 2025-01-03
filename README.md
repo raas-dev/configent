@@ -193,8 +193,8 @@ solutions and disable the extension automatically.
 
 The `bin/setup_continue` copies the Continue configuration files and
 installs Node.js packages (like dotenv) used by the configuration.
-The script is in `PATH` and is also run as part of the bootstrap,
-after it has installed VS Code like editor extensions like Continue.
+The script is in `PATH` and *is already run as part of the bootstrap*
+after it has installed VS Code like editor extensions.
 
 Some manual configuration is required:
 
