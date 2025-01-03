@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.1](https://github.com/raas-dev/configent/compare/1.129.0...1.129.1) (2025-01-03)
+
+
+### Fixes
+
+* **ai:** Improve prompts ([c98504c](https://github.com/raas-dev/configent/commit/c98504c37839f9ee6e309467c77b60c6ca315437))
+* **continue:** Add gemini context length ([059d61f](https://github.com/raas-dev/configent/commit/059d61fc6f0bf47dcee74ef4a20b6a60f2ad58b9))
+* **continue:** Improve keys ([6ecf334](https://github.com/raas-dev/configent/commit/6ecf334824603416b4d2415541cbeb9eeda1da69))
+* **continue:** Improve keys ([25b9fd7](https://github.com/raas-dev/configent/commit/25b9fd777b9e207bfe8aa0c261c13cd5b481de11))
+* **continue:** Improve prompts ([f669106](https://github.com/raas-dev/configent/commit/f669106ea74dcd4f12e548bdf4887913988d50fc))
+* **continue:** Move setup script to PATH ([a562fa4](https://github.com/raas-dev/configent/commit/a562fa470275684e69c38b0b3b1faf4ed2aca58b))
+
 ## [1.129.0](https://github.com/raas-dev/configent/compare/1.128.16...1.129.0) (2025-01-03)
 
 
