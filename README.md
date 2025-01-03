@@ -157,9 +157,13 @@ configuring (and locking) project specific versions.
 [VSCodium](https://vscodium.com/) is the default IDE on Linux distros and
 [VS Code](https://code.visualstudio.com/) is the default IDE on macOS.
 
-Some extensions may be unavailable for VSCodium and VS Code forks.
-Extensions in [Open VSX Registry](https://open-vsx.org/) are available
-for all VS Code like editors and are thus preferred.
+Some extensions may be unavailable for VSCodium and its forks
+("later VS Code likes"). Extensions in
+[Open VSX Registry](https://open-vsx.org/) are available for all VS Code
+likes and thus are preferred when in doubt what extension to use.
+
+To update `vscode/extensions.list` after adding or removing extensions via GUI
+in VS Code like editor, run `vscode/create_extensions_list`.
 
 ### bin/setup_code
 
@@ -167,15 +171,13 @@ The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
 `~/configent/.backup/<editor_specific_path>/User`.
 
-⚠️: This does not install any editor, see OS specific install scripts for that.
+⚠️: This script not install any VS Code like editor, see Cask and Flatpak
+related `bin/install_apps_` for that.
 
-If editor command-line binary is present, the extensions
-(`vscode/extensions.list`) are installed.
+If editor command-line binary is present when running this script,
+the extensions (`vscode/extensions.list`) are installed.
 
-To update `vscode/extensions.list` after adding or removing extensions
-in VS Code like editor, run `vscode/create_extensions_list`.
-
-💡: You can reuse both `setup_code` and `vscode/create_extensions_list` scripts
+💡: You can reuse both `vscode/create_extensions_list` and `setup_code` scripts
 for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
 ### bin/setup_continue
@@ -200,7 +202,7 @@ automatically started by Continue (e.g. for code autocomplete).
 ## 🐚 Shell
 
 Zsh loads [antidote](https://antidote.sh/) and uses it to install Zsh
-plugins on first start.
+plugins (`~/.zsh_plugins.txt`) on the first start.
 
 Set `zsh` as the user's default shell:
 
