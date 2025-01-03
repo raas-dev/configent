@@ -320,6 +320,4 @@ You may willingly live on the edge by explicitly passing `GIT_REF`:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
-For development purposes, once the VM has been started, host's `$HOME/configent`
-is mounted read-only in the VM. This enables testing most changes without first
-committing and pushing to your fork.
+See `CONTRIBUTING.md` for more info on that.
