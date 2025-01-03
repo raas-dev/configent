@@ -178,6 +178,7 @@
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
+  "mise.binPath": "/Users/asyrjasalo/.local/bin/mise",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
