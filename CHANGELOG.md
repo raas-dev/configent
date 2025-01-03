@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.14](https://github.com/raas-dev/configent/compare/1.128.13...1.128.14) (2025-01-03)
+
+
+### Fixes
+
+* **aliases:** Add ods support for vd ([6e0ac5b](https://github.com/raas-dev/configent/commit/6e0ac5b196bdc18a21a228c260c4db41fbbf7694))
+* **bun:** Add bun ([c6f8115](https://github.com/raas-dev/configent/commit/c6f8115cd79142ac558df22c4b0a0bb295a21a84))
+* **install:** Remove lnav, broken on most distros ([5bf89d0](https://github.com/raas-dev/configent/commit/5bf89d00e18c1a3074cbbf2ee16f316c90f277ab))
+* **logs:** Add tailspin for tailing logs ([c895996](https://github.com/raas-dev/configent/commit/c895996c2544d64ffb1d143cf1176742cd89dd06))
+* **node:** Add yarn and pnpm via mise ([0ad9135](https://github.com/raas-dev/configent/commit/0ad91352094470fc913a39a39fb75532bf53fd64))
+* **python:** Install glances ([27405ab](https://github.com/raas-dev/configent/commit/27405abe3655c10d5989fe1ec92ccfbb736d836b))
+* **python:** Remove toolong ([cd2acbb](https://github.com/raas-dev/configent/commit/cd2acbbfc25ace5612e9db10b4a5d4151e747bd2))
+
 ### [1.128.13](https://github.com/raas-dev/configent/compare/1.128.12...1.128.13) (2025-01-02)
 
 
