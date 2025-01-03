@@ -38,8 +38,7 @@ fi
 
 "$this_path/symlink_dotfiles"
 NONINTERACTIVE=true "$this_path/install_apps"
-
-"$this_path/setup_continue"
 "$this_path/setup_code"
+"$this_path/bin/setup_continue"
 
 printf "\n✅ bootstrap done.\n"
