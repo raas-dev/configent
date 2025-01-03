@@ -205,8 +205,8 @@ Some manual configuration is required:
 2. If you are using local LLMs via Ollama (for code autocompletion), you must
 `ollama pull` those models before they are automatically started by Continue.
 
-⚠️: File `config.ts` (unlike `.json`) is copied in place, not symlinked -
-you must manually run `setup_continue` after editing the `.ts` file.
+3. ⚠️: File `config.ts` (unlike `.json`) is copied in place, not symlinked -
+you must manually run `setup_continue` if/after editing the `.ts` file.
 
 ## 🐚 Default shell
 
