@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc in a container.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
-- AI agents are built on prompt chaining and function calling to self-direct.
+- Provides AI assistants and agentic development tools that can self-direct.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
@@ -20,7 +20,7 @@ A few features:
 - Terminal is mostly Rust and Go for speed, use `n`ix-shells for ad-hoc CLIs.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
-- Ask AI (`a <question>`), open chat on (`ai <topic>`) or ask assistant (`_`).
+- Ask AI (`a <question>`), ask assistant (`_`) or open a chat on (`ai <topic>`).
 
 Works on x86-64 and ARM:
 
