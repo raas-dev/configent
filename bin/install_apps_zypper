@@ -37,7 +37,7 @@ $SUDO zypper install -y ca-certificates
 $SUDO zypper install -y gpg2
 
 # Common build tools
-$SUDO zypper install -y bison cmake gcc gcc-c++ make m4
+$SUDO zypper install -y bison cmake gcc gcc-c++ make m4 pkg-config
 
 # Common development dependencies
 $SUDO zypper install -y readline-devel sqlite3-devel libbz2-devel \
