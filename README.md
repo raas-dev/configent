@@ -177,19 +177,21 @@ for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
 ## 🧬 Extensions
 
-### Code Continue
+### VS Code / OpenVSX
 
-[Continue](https://docs.continue.dev) is installed for chat with Large Language Models and for code completion in VS Code like editor.
+[Continue](https://docs.continue.dev) is installed for chat with
+Large Language Models and for code completion in VS Code like editor.
 
-The `bin/setup_continue` copies the Continue's configuration files
-and installs Node.js packages (like dotenv) used by the configuration.
+The `bin/setup_continue` copies the Continue configuration files and
+installs Node.js packages (like dotenv) used by the configuration.
 
-The script is run as part of `bootstrap` (after installing editor extensions)
-and is also is in `PATH`.
+The script is in `PATH` and is also run as part of bootstrap after it has installed VS Code like editor extensions like Continue.
 
-You must export the API keys loaded by `~/.continue/config.ts` in `~/.rclocal`.
+You must export the LLM Provider API key environment variables
+used by `~/.continue/config.ts` in `~/.rclocal`.
 
-⚠️: File `~/.continue/config.ts` is copied, not symlinked - you must run `setup_continue` after editing that particular file.
+⚠️: File `config.ts` (unlike `config.json`) is copied, not symlinked -
+you must manually run `setup_continue` after editing the `.ts` file.
 
 ## 🐚 Default shell
 
