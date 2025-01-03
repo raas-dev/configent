@@ -82,7 +82,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
-  path_prepend "$(brew --prefix llvm)/bin"
   path_prepend "$(brew --prefix findutils)/libexec/gnubin"
   path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
   export CFLAGS="-I$(brew --prefix openssl)/include"
