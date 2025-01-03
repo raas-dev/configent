@@ -6,8 +6,6 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
-
 ### interpreter scope ##########################################################
 
 # Symlink sitecustomize.py to Python site-packages

@@ -6,8 +6,6 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# shellcheck disable=SC2155  # will not declare separately, value compactness
-
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 ### mise #######################################################################
