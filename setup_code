@@ -8,16 +8,36 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+# you can use this script to symlink configuration for VSCode forks, e.g.:
+#
+# APP_NAME="Cursor" BIN_NAME="cursor" ./setup_code
+# APP_NAME="Windsurf" BIN_NAME="windsurf" ./setup_code
+
+### constants ##################################################################
+
 this_path=$(cd "$(dirname "$0")" && pwd)
+
+if [ "$(uname -s)" = 'Linux' ]; then
+  default_app_name="VSCodium"
+  default_bin_name="codium"
+else
+  default_app_name="Code"
+  default_bin_name="code"
+fi
+
+### variables ##################################################################
+
+: "${APP_NAME:="$default_app_name"}"
+: "${BIN_NAME:="$default_bin_name"}"
 
 ### Symlink configuration ######################################################
 
 if [ "$(uname -s)" = "Darwin" ]; then
-  user_path="$HOME/Library/Application Support/Code/User"
-  backup_path="$this_path/.backup/Library/Application Support/Code/User"
+  user_path="$HOME/Library/Application Support/$APP_NAME/User"
+  backup_path="$this_path/.backup/Library/Application Support/$APP_NAME/User"
 else
-  user_path="$HOME/.config/Code/User"
-  backup_path="$this_path/.backup/.config/Code/User"
+  user_path="$HOME/.config/$APP_NAME/User"
+  backup_path="$this_path/.backup/.config/$APP_NAME/User"
 fi
 
 if [ ! -d "$backup_path" ] && [ -d "$user_path" ]; then
@@ -31,8 +51,8 @@ ln -sfnv "$this_path/vscode" "$user_path"
 
 ### Install extensions #########################################################
 
-if command -v code >/dev/null; then
+if command -v "$BIN_NAME" >/dev/null; then
   while read -r extension; do
-    code --force --install-extension "$extension"
+    "$BIN_NAME" --force --install-extension "$extension"
   done <"$this_path/vscode/extensions.list"
 fi

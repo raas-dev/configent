@@ -155,19 +155,25 @@ similarly, on you choose to install newer Bash manually.
 💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
 configuring project specific versions.
 
-### setup_vscode / setup_vscodium
+### setup_code
 
 [VSCodium](https://vscodium.com/) is the default editor on Linux distros and
 [VS Code](https://code.visualstudio.com/) is the default on macOS.
 
-The script symlinks `vscode/` to `<os_specific_path>/User`. Existing `User`
-directory is first backed up to `~/configent/.backup/<os_specific_path>/User`.
+The script symlinks `vscode/` to `<editor_specific_path>/User`.
+Existing `User` directory is first backed up to
+`~/configent/.backup/<editor_specific_path>/User`.
 
-If editor is present, its extensions (`vscode/extensions.list`) are installed
-using the command-line tool of the editor.
+⚠️: This does not install any editor, see OS specific install scripts for that.
 
-To update the list after adding or removing extensions in VS Code-like editor,
+If editor command-line binary is present, the extensions
+(`vscode/extensions.list`) are installed.
+
+To update the file after adding or removing extensions in VS Code like editor,
 run `vscode/create_extensions_list`.
+
+💡: You can reuse both `setup_code` and `vscode/create_extensions_list` scripts
+for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
 ### setup_continue
 

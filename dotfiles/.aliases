@@ -70,11 +70,11 @@ fi
 
 ### More sensible defaults #####################################################
 
-if command -v codium >/dev/null; then
-  alias code='codium --reuse-window --add'
-elif command -v code >/dev/null; then
-  alias code='code --reuse-window --add'
-fi
+alias code='code --reuse-window --add'
+# If present, VSCodium takes presendence over VSCode
+command -v codium >/dev/null && alias code='codium --reuse-window --add'
+
+# (Commercial) VSCode forks
 alias cursor='cursor --reuse-window --add'
 alias ws='windsurf --reuse-window --add'
 

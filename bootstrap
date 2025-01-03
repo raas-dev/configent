@@ -39,12 +39,7 @@ fi
 "$this_path/symlink_dotfiles"
 NONINTERACTIVE=true "$this_path/install_apps"
 
-if [ "$(uname -s)" = 'Darwin' ]; then
-  "$this_path/setup_vscode"
-  "$this_path/setup_continue"
-else
-  "$this_path/setup_vscodium"
-  "$this_path/setup_continue"
-fi
+"$this_path/setup_continue"
+"$this_path/setup_code"
 
 printf "\n✅ bootstrap done.\n"
