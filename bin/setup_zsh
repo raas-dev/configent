@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-### antidote ###################################################################
+### Install antidote ###########################################################
 
 # https://github.com/mattmc3/antidote
 git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||

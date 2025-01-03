@@ -93,7 +93,7 @@ or from Homebrew if it is runnable on the OS and the CPU architecture.
 
 The script is non-interactive: Due to this, and though Zsh is preferred, it is
 not set as the user's default shell. You may do it and get prompted, possibly
-asked `sudo`, by running `bin/install_zsh` after `bootstrap` has finished.
+asked `sudo`, by running `bin/setup_zsh` after `bootstrap` has finished.
 
 ### symlink_dotfiles
 
@@ -148,17 +148,16 @@ Language runtimes and development tools are always installed user-wide by
 
 With Homebrew on Linux (x86-64), system-wide installation (`/home/linuxbrew`) is
 preferred, but if it this not possible (no `sudo`), it is installed user's home.
-Zsh is installed using Homebrew, even on Linux, as it likely has newer version
-than the one installed from the distro's repo. Script `install_bash` works
-similarly, on you choose to install newer Bash manually.
 
 💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
 configuring project specific versions.
 
-### setup_code
+## 🔨 IDE
 
-[VSCodium](https://vscodium.com/) is the default editor on Linux distros and
-[VS Code](https://code.visualstudio.com/) is the default on macOS.
+[VSCodium](https://vscodium.com/) is the default IDE on Linux distros and
+[VS Code](https://code.visualstudio.com/) is the default IDE on macOS.
+
+### bin/setup_code
 
 The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
@@ -168,8 +167,6 @@ Existing `User` directory is first backed up to
 
 If editor command-line binary is present, the extensions
 (`vscode/extensions.list`) are installed.
-
-## 🧬 IDE extensions
 
 To update `vscode/extensions.list` after adding or removing extensions
 in VS Code like editor, run `vscode/create_extensions_list`.
@@ -207,11 +204,11 @@ automatically started by Continue (e.g. for code autocomplete).
 
 Set `zsh` as the user's default shell:
 
-    install_zsh
+    setup_zsh
 
 If you prefer `bash` instead:
 
-    install_bash
+    setup_bash
 
 These scripts are interactive as they prompt to change the default shell,
 (unless that is default already). Such change may also require `sudo`
@@ -304,7 +301,7 @@ You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as container image scanners.
 
-## 🔨 VMs
+## ⚙️ VMs
 
 See `dotfiles/.aliases` for `vm4...` creating
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.

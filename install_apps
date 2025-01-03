@@ -53,19 +53,16 @@ else
   exit 1
 fi
 
-# installs Zsh plugins
+# assumes `zsh` is present at this point, installs Zsh plugins
 # prompts to set Zsh as the default shell
 # pass NONINTERACTIVE=true to skip (set by bootstrap)
-"$bin_path/install_zsh"
+"$bin_path/setup_zsh"
 
-# install Vim plugins
-"$bin_path/install_vim"
+# assumes `vim` is present at this point, install Vundle and vim plugins
+"$bin_path/setup_vundle"
 
 # install mise, and all tools which are not disabled in etc/mise/config.yml
 "$bin_path/install_mise"
 
 # install Ollama
 "$bin_path/install_ollama"
-
-# copy ui/fonts/** to user's fonts path
-"$bin_path/install_fonts"

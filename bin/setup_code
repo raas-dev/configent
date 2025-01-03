@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+### usage ######################################################################
 
 # you can use this script to symlink configuration for VSCode forks, e.g.:
 #
@@ -34,10 +34,10 @@ fi
 
 if [ "$(uname -s)" = "Darwin" ]; then
   user_path="$HOME/Library/Application Support/$APP_NAME/User"
-  backup_path="$this_path/.backup/Library/Application Support/$APP_NAME/User"
+  backup_path="$this_path/../.backup/Library/Application Support/$APP_NAME/User"
 else
   user_path="$HOME/.config/$APP_NAME/User"
-  backup_path="$this_path/.backup/.config/$APP_NAME/User"
+  backup_path="$this_path/../.backup/.config/$APP_NAME/User"
 fi
 
 if [ ! -d "$backup_path" ] && [ -d "$user_path" ]; then
@@ -47,12 +47,12 @@ if [ ! -d "$backup_path" ] && [ -d "$user_path" ]; then
 fi
 mkdir -p "$user_path" # ensure intermediate directories exist
 rm -rf "$user_path"
-ln -sfnv "$this_path/vscode" "$user_path"
+ln -sfnv "$this_path/../vscode" "$user_path"
 
 ### Install extensions #########################################################
 
 if command -v "$BIN_NAME" >/dev/null; then
   while read -r extension; do
     "$BIN_NAME" --force --install-extension "$extension"
-  done <"$this_path/vscode/extensions.list"
+  done <"$this_path/../vscode/extensions.list"
 fi

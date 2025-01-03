@@ -6,12 +6,14 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+### constants ##################################################################
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 
-# backup .vim  (.vimrc is backed up by symlink_dotfiles)
+### Install Vim plugins ########################################################
+
+# backup .vim  (.vimrc is already symlinked and backed up by symlink_dotfiles)
 if [ ! -d "$backup_path/.vim" ] && [ -d "$HOME/.vim" ]; then
   mkdir -p "$backup_path"
   cp -RP "$HOME/.vim" "$backup_path/.vim"
@@ -22,5 +24,5 @@ vundle_dir="$HOME/.vim/bundle/Vundle.vim"
 git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
   git -C "$vundle_dir" pull --no-autostash --rebase
 
-# install Vim plugins using Vundle
+# use Vundle to install Vim plugins
 printf '\n' | vim +PluginInstall +qall 2>/dev/null
