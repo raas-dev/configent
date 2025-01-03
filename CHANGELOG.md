@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.15](https://github.com/raas-dev/configent/compare/1.128.14...1.128.15) (2025-01-03)
+
+
+### Fixes
+
+* **install:** Remove unused deps ([1729ed1](https://github.com/raas-dev/configent/commit/1729ed1d9ec3da986a172ab9757e446b7e14e5d6))
+* **macos:** Remove unused finder quicklook plugins ([0f0fc8e](https://github.com/raas-dev/configent/commit/0f0fc8e1e3ea20ec8ce0304e7cc278dd0952e088))
+* **mise:** Add lockfile ([e6703b8](https://github.com/raas-dev/configent/commit/e6703b8c37c1746326c1e20488f4aa4f5c53e7f6))
+* **mise:** Usage version ([f743aaa](https://github.com/raas-dev/configent/commit/f743aaa3677271bd8c989a549450db91c442b07c))
+
 ### [1.128.14](https://github.com/raas-dev/configent/compare/1.128.13...1.128.14) (2025-01-03)
 
 
