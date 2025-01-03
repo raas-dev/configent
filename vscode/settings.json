@@ -185,8 +185,12 @@
     "jupyter-notebook": "left"
   },
   "powershell.integratedConsole.showOnStartup": false,
+  "powershell.powerShellAdditionalExePaths": {
+    "mise": "~/.local/share/mise/shims"
+  },
   "powershell.promptToUpdatePowerShell": false,
   "powershell.startAsLoginShell.osx": false,
+  "powershell.suppressAdditionalExeNotFoundWarning": true,
   "problems.decorations.enabled": false,
   "python.analysis.autoFormatStrings": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
