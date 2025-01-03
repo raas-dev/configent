@@ -186,22 +186,22 @@ outside what is in `vscode/*.json`. Exceptions are documented below.
 
 ### bin/setup_continue
 
-[Continue](https://docs.continue.dev) is installed for chat with
-Large Language Models and for code completion in VS Code like editor.
+[Continue](https://docs.continue.dev) is installed for chat and code
+completion in VS Code like editor using Large Language Models.
+Note that (commercial) VS Code forks may prefer their own closed source
+solutions and disable Continue extension automatically.
 
 The `bin/setup_continue` copies the Continue configuration files and
 installs Node.js packages (like dotenv) used by the configuration.
 
-The script is in `PATH` and is also run as part of bootstrap after it has installed VS Code like editor extensions like Continue.
+The script is in `PATH` and is also run as part of the bootstrap,
+after it has installed VS Code like editor extensions like Continue.
 
-You must export the LLM Provider API key environment variables
-used by `~/.continue/config.ts` in `~/.rclocal`.
+You must export the LLM Providers' API key environment variables
+used by `~/.continue/config.ts` in `~/.rclocal` (outside git repo).
 
-⚠️: File `config.ts` (unlike `config.json`) is copied, not symlinked -
+⚠️: File `config.ts` (unlike `.json`) is copied in place, not symlinked -
 you must manually run `setup_continue` after editing the `.ts` file.
-
-Note that (commercial) VS Code forks may implement their own
-closed source solutions and disable Continue extension automatically.
 
 ## 🐚 Default shell
 
