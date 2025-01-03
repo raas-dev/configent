@@ -87,7 +87,7 @@ tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmu
 lima = '1.0.3'
 usage = 'latest'
 'vfox:jdx/vfox-clang' = '18.1.8'
-'vfox:version-fox/vfox-cmake' = '3.31.3'
+#'vfox:version-fox/vfox-cmake' = '3.31.3'
 
 [settings]
 experimental = true
