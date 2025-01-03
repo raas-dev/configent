@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.129.0](https://github.com/raas-dev/configent/compare/1.128.16...1.129.0) (2025-01-03)
+
+
+### Features
+
+* **code:** Tidy setup for VS Code like forks ([021bdcb](https://github.com/raas-dev/configent/commit/021bdcbb07f156e4782e945d17361222b79187ad))
+
+
+### Fixes
+
+* **linux:** Install pkg-config for hurl ([e5b1b07](https://github.com/raas-dev/configent/commit/e5b1b0794c55e9644ecbfcf501535cbbecff020e))
+
 ### [1.128.16](https://github.com/raas-dev/configent/compare/1.128.15...1.128.16) (2025-01-03)
 
 
