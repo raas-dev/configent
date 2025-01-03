@@ -11,6 +11,7 @@
 !podman
 !postinstall_*
 !rsync_tmbackup.sh
+!setup_continue
 !tm
 !trans
 !xpanes
