@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.4](https://github.com/raas-dev/configent/compare/1.129.3...1.129.4) (2025-01-03)
+
+
+### Fixes
+
+* **continue:** Symlink continue configs ([52937e6](https://github.com/raas-dev/configent/commit/52937e6f54a3e387b1f14d9b909f5ec056187ce6))
+* **install:** Reorganize parts ([de9744e](https://github.com/raas-dev/configent/commit/de9744e1657f26dc8ef4a3f3421e7751c4b31a03))
+* **vscode:** Add mise extension to get PATHs right ([0a9d56e](https://github.com/raas-dev/configent/commit/0a9d56ed2e1afc544c099838e647c973e4d52f1f))
+* **vscode:** Fix pwsh PATH ([139a393](https://github.com/raas-dev/configent/commit/139a3931712d8021785f5f1cfe5ed2fc6af7dec9))
+
 ### [1.129.3](https://github.com/raas-dev/configent/compare/1.129.2...1.129.3) (2025-01-03)
 
 
