@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.2](https://github.com/raas-dev/configent/compare/1.130.1...1.130.2) (2025-01-04)
+
+
+### Fixes
+
+* **aider:** Python version ([3ff1a99](https://github.com/raas-dev/configent/commit/3ff1a9945d7dcbf2a74d81547d467b41a09f32f9))
+* **python:** Install sncli on Python 3.11 ([06975f9](https://github.com/raas-dev/configent/commit/06975f9e9af3d86ce3c4bbf270c2ba48f6d1d9fd))
+
 ### [1.130.1](https://github.com/raas-dev/configent/compare/1.130.0...1.130.1) (2025-01-04)
 
 
