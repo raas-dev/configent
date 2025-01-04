@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.5](https://github.com/raas-dev/configent/compare/1.129.4...1.129.5) (2025-01-04)
+
+
+### Fixes
+
+* **vscode:** Add default interpreter path for python ([2a9d721](https://github.com/raas-dev/configent/commit/2a9d72197c9ae1207b76109b1c7c8aa88d74d7e4))
+
 ### [1.129.4](https://github.com/raas-dev/configent/compare/1.129.3...1.129.4) (2025-01-03)
 
 
