@@ -289,8 +289,9 @@ a container where `nix`, `nix-env`, `nix-shell`, etc. are available.
 The image is built by `etc/nix/Containerfile` and is run on containerd.
 This enables NixOS like experience without going all-in NixOS (even on a VM).
 
-The environment is created in the current directory and alias `n` is used e.g.
-`n vim README.md` to run Vim in an isolated `nix-shell`.
+Use alias `n` e.g. `n vim README.md` to open `README.md`, where Vim is running
+in an isolated `nix-shell` in the container. The volume mount is created based
+on the current working directory.
 
 Package name(s, separated by forward slashes) are taken as the first argument.
 The packages are installed from channel
