@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.6](https://github.com/raas-dev/configent/compare/1.129.5...1.129.6) (2025-01-04)
+
+
+### Fixes
+
+* **bin:** Postinstall ([e79b358](https://github.com/raas-dev/configent/commit/e79b3584d0e169b0ddbf4d83979d293d78b24092))
+* **symlink:** Move app specific config to postinstalls ([d07af10](https://github.com/raas-dev/configent/commit/d07af10858daf0bce9fb97e836b1cbbb6f6079bc))
+
 ### [1.129.5](https://github.com/raas-dev/configent/compare/1.129.4...1.129.5) (2025-01-04)
 
 
