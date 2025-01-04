@@ -7,7 +7,7 @@ backend = "aqua:aws/aws-cli"
 
 [tools.azure-cli]
 version = "2.67.0"
-backend = "asdf:azure-cli"
+backend = "asdf:https://github.com/asyrjasalo/asdf-azure-cli"
 
 [tools.bun]
 version = "1.1.42"
@@ -17,11 +17,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:64a70fe290bd6391a09d555d4e4e1a8df56543e526bb1381ab344a385348572c"
 
 [tools.cargo-binstall]
-version = "1.10.18"
+version = "1.10.19"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:cdd82130ba1c98ca4db63c44087881d6ae92ba642ba6361654987a707040aabd"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:e6abcd57e2918f50f85117e80799ef525876b4e109a5126561ed69f89bb79ee5"
 
 [tools."cargo:aichat"]
 version = "0.26.0"
@@ -229,7 +229,7 @@ version = "0.70.0"
 backend = "pipx:aider-chat"
 
 [tools."pipx:glances"]
-version = "4.3.0.7"
+version = "4.3.0.8"
 backend = "pipx:glances"
 
 [tools."pipx:gptme"]
