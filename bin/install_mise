@@ -16,13 +16,17 @@ config_path="$HOME/.config/configent"
 
 ### mise #######################################################################
 
-# symlink mise config directory
+# backup dir
 if [ ! -r "$backup_path/.config/mise" ]; then
   if [ -r "$HOME/.config/mise" ]; then
     mkdir -p "$backup_path/.config"
     cp -RP "$HOME/.config/mise" "$backup_path/.config/mise"
   fi
 fi
+
+# symlink dir
+mkdir -p "$HOME/.config"
+rm -rf "$HOME/.config/nvim"
 ln -sfnv "$config_path/mise" "$HOME/.config/mise"
 
 # install mise
