@@ -14,11 +14,14 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
+# backup
 if [ ! -r "$backup_path/.config/starship.toml" ]; then
   if [ -r "$HOME/.config/starship.toml" ]; then
     mkdir -p "$backup_path/.config"
     cp -P "$HOME/.config/starship.toml" "$backup_path/.config/starship.toml"
   fi
 fi
+
+# symlink
 mkdir -p "$HOME/.config"
 ln -sfnv "$config_path/starship/config.toml" "$HOME/.config/starship.toml"

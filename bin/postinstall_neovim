@@ -14,12 +14,13 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# backup .config/nvim directory
+# backup dir
 if [ ! -d "$backup_path/.config/nvim" ] && [ -d "$HOME/.config/nvim" ]; then
   mkdir -p "$backup_path/.config"
   cp -RP "$HOME/.config/nvim" "$backup_path/.config/nvim"
 fi
 
-# symlink Neovim config files
+# symlink dir
+mkdir -p "$HOME/.config"
 rm -rf "$HOME/.config/nvim"
 ln -sfnv "$config_path/nvim" "$HOME/.config/nvim"

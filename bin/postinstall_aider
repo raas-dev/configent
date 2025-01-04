@@ -14,9 +14,12 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
+# backup
 if [ ! -r "$backup_path/.aider.conf.yml" ]; then
   if [ -r "$HOME/.aider.conf.yml" ]; then
     cp -P "$HOME/.aider.conf.yml" "$backup_path/.aider.conf.yml"
   fi
 fi
+
+# symlink
 ln -sfnv "$config_path/aider/.aider.conf.yml" "$HOME/.aider.conf.yml"

@@ -12,11 +12,14 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
+# backup
 if [ ! -r "$backup_path/.config/topgrade.toml" ]; then
   if [ -r "$HOME/.config/topgrade.toml" ]; then
     mkdir -p "$backup_path/.config"
     cp -P "$HOME/.config/topgrade.toml" "$backup_path/.config/topgrade.toml"
   fi
 fi
+
+# symlink
 mkdir -p "$HOME/.config"
 ln -sfnv "$config_path/topgrade/topgrade.toml" "$HOME/.config/topgrade.toml"
