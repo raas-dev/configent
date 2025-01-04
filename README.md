@@ -149,10 +149,10 @@ Mise is always preferred over Homebrew. Use
 On macOS, [Homebrew](https://brew.sh) is used to install **absolutely minimum**
 build-time requirements and apps.
 
-⚠️: Homebrew may or may not be available at all on Linux as it
+⚠️: Homebrew may not be available on Linux at all as it
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
-If Homebrew is available on Linux (x86-64), it is installed `/home/linuxbrew`.
-If `sudo` is not possible, then it is installed user's home.
+On Linux distros (x86-64) it is installed `/home/linuxbrew`. If `sudo` is not
+possible, then it is installed user's home.
 
 ## 🔨 IDE
 
