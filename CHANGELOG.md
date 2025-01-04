@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.3](https://github.com/raas-dev/configent/compare/1.130.2...1.130.3) (2025-01-04)
+
+
+### Fixes
+
+* **aliases:** Use bun over npx ([702908f](https://github.com/raas-dev/configent/commit/702908fc15aa23cdfd9fc1a5ae51d9adc35933ef))
+* **continue:** Remove phi-4 rc, add qwen2.5-coder:14b ([62d21de](https://github.com/raas-dev/configent/commit/62d21de5a2616900364a9e1cd4a9277ae720ffcf))
+* **vscode:** Remove overlapping format extension ([37dba86](https://github.com/raas-dev/configent/commit/37dba86241c2a17b3c648523b0523064b505b456))
+
 ### [1.130.2](https://github.com/raas-dev/configent/compare/1.130.1...1.130.2) (2025-01-04)
 
 
