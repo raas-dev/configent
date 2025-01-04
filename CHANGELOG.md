@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.1](https://github.com/raas-dev/configent/compare/1.130.0...1.130.1) (2025-01-04)
+
+
+### Fixes
+
+* **macos:** Rename script ([9134461](https://github.com/raas-dev/configent/commit/913446137ee9c36e61ad7732411b391b1cb385bf))
+* **setup:** Script name ([1ad00bf](https://github.com/raas-dev/configent/commit/1ad00bf2416360863af7857d1c5ad500ff7026c8))
+
 ## [1.130.0](https://github.com/raas-dev/configent/compare/1.129.8...1.130.0) (2025-01-04)
 
 
