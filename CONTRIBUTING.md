@@ -9,7 +9,7 @@ a pull request.
 2. Supporting Linux on AArch64 is mandatory as all Macs since 2023 are ARM64
 3. The software **installed** must work on 95% of the Linux distros in README
 4. In 90% cases there is **no use to install CLIs** as they can be run via `n`
-5. Do not rely on Homebrew, use `mise` plugins, or distros' repo as last resort
+5. Do not build on Homebrew, use `mise` plugins, or distros' repo (last resort)
 
 ## Testing
 
