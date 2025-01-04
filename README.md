@@ -85,11 +85,7 @@ window manager of your choice. See your distro's own instructions for that.
 ## 🔋's included
 
 Script `bootstrap` essentially handles the whole automated setup (dotfiles,
-apps, editor) of the machine it is run in. These three respective scripts are
-described further below.
-
-Necessities (such as Zsh) are installed from the Linux distro's repo,
-or from Homebrew if it is runnable on the OS and the CPU architecture.
+apps) of the machine it is run in.
 
 The script is non-interactive: Due to this, and though Zsh is preferred, it is
 not set as the user's default shell. You may do it and get prompted, possibly
@@ -98,21 +94,22 @@ asked `sudo`, by running `bin/setup_zsh` after `bootstrap` has finished.
 ### symlink_dotfiles
 
 Symlinks are created in in the user's home directory for all the files in
-`dotfiles/`. Files or symlinks of the same name at `$HOME` are overridden.
+`dotfiles/`.
 
-In addition the tool specific configurations in `etc/` are symlinked in
-`~/.config` either as config files or directories depending on the tool.
+Files or symlinks of the same name at `$HOME` are overridden without asking,
+but they are backed up first in `.backup/`.
 
-Directory `bin` in this repository is symlinked to `~/.local/configent/bin`,
-taking 1st preference in `PATH`. Directory `etc` in this repository is
-symlinked to `~/.config/configent`.
+The tool specific configurations in `etc/` are symlinked in `~/.config` either
+as files or directories depending on which is more suitable for the tool.
 
-Restart the shell or run `source ~/.bashrc`. Then on, you may simply reload
-the configuration of the current shell (`.bashrc` or `.zshrc`) with `r` and all
-the scripts in `bin/` are available by name from now on.
+Directory `bin` in this repository is symlinked to `~/.local/configent/bin`
+and is first in `PATH` after you  restart the shell or run `source ~/.bashrc`.
 
-💡: Export your own environment variables in `~/.rclocal`. Git name and email
-are automatically exported here if they were set in your previous `.gitconfig`.
+All the scripts in `bin/` are available by name from then on. Also now you
+can simply reload the configuration of the current shell with `r`.
+
+💡: Export your environment variables (such as `GITHUB_TOKEN`) in `~/.rclocal`.
+Git name and email were automatically added if they were in your `.gitconfig`.
 
 ### install_apps
 
