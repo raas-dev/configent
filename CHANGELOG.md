@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.130.0](https://github.com/raas-dev/configent/compare/1.129.8...1.130.0) (2025-01-04)
+
+
+### Features
+
+* **python:** Update python 3.12 -> 3.13 ([676c3ff](https://github.com/raas-dev/configent/commit/676c3ffe2306f2b6e4a48e8e898375e3466d8052))
+
+
+### Fixes
+
+* **python:** Add playwright via mise ([e2e6ad3](https://github.com/raas-dev/configent/commit/e2e6ad327f0f75e459967f8d2d0745f5ed300359))
+
 ### [1.129.8](https://github.com/raas-dev/configent/compare/1.129.7...1.129.8) (2025-01-04)
 
 
