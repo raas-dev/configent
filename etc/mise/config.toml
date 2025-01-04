@@ -56,6 +56,7 @@ uv = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
 'pipx:gptme' = { version = 'latest', extras = 'browser', pipx_args = ' --with flask', uvx_args = ' --with flask', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
+'pipx:playwright' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
 'pipx:tldr' = 'latest'

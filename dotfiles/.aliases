@@ -235,9 +235,6 @@ alias sncli='uvx --python 3.11 sncli'
 # Multitool for tabular data in terminal
 alias vd='uvx --with odfpy,openpyxl visidata'
 
-# Playwright
-alias playwright='uvx playwright'
-
 # General media downloader
 alias you-get='uvx you-get'
 
