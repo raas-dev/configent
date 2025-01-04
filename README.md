@@ -139,15 +139,15 @@ Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
 
 💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
-Also see [mise documentation](https://mise.jdx.dev/configuration.html) for
-configuring (and locking) project (directory) specific versions.
+Also see [mise for using and locking](https://mise.jdx.dev/configuration.html)
+project specific versions.
 
 Mise is always preferred over Homebrew. Use
 [mise backends](https://mise.jdx.dev/dev-tools/backends/) and
 [mise plugins](https://mise.jdx.dev/registry.html) to add more tools.
 
 On macOS, [Homebrew](https://brew.sh) is used to install **absolutely minimum**
-build-time requirements, command-line tools and casks (GUI apps) user-wide.
+build-time requirements and apps.
 
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
