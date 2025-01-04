@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.8](https://github.com/raas-dev/configent/compare/1.129.7...1.129.8) (2025-01-04)
+
+
+### Fixes
+
+* **install:** Add setup_ide ([65d3e15](https://github.com/raas-dev/configent/commit/65d3e15a9cc2668e331b2f9e3fe45993930ec56a))
+
 ### [1.129.7](https://github.com/raas-dev/configent/compare/1.129.6...1.129.7) (2025-01-04)
 
 
