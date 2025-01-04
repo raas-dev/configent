@@ -300,7 +300,7 @@ package name, put meta-package "shell" first, e.g. `n shell/postgresql psql`.
 
 You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 
-⚠️: If binary writes to filesystem, you must be in a VM writable directory.
+⚠️: If that binary writes to filesystem, you must be in a VM writable directory.
 
 💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as container image scanners.
