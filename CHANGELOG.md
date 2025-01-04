@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.129.7](https://github.com/raas-dev/configent/compare/1.129.6...1.129.7) (2025-01-04)
+
+
+### Fixes
+
+* **installl:** Remove support for SNAPS ([4fcc52e](https://github.com/raas-dev/configent/commit/4fcc52edbba00d72ba1d6da904edcad5a9d6f711))
+
 ### [1.129.6](https://github.com/raas-dev/configent/compare/1.129.5...1.129.6) (2025-01-04)
 
 
