@@ -51,10 +51,14 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Issues in dependencies
 
-- Alpine Linux:
-  - Homebrew does not work due to musl (all architectures)
-    - Use `mise` wherever possible, otherwise use `apk`
+- Neovim on Aarch64 Linux
+  - Does not install by any available `mise` plugin as of 2025-01
+    -> Use repo
+
+- Alpine Linux (musl based Linux-distro):
   - See `mise` option `node.flavor = musl` for installing Node.js
-    - https://mise.jdx.dev/lang/node.html#unofficial-builds
+    -> https://mise.jdx.dev/lang/node.html#unofficial-builds
   - Rootless docker is not supported
-    - Re-login is required after the initial install to be in `docker` group
+    -> Re-login is required after the initial install to be in `docker` group
+  - Homebrew does not work due to musl (all architectures)
+    -> Use repo
