@@ -82,7 +82,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
-  # install_apps_macos
+  # install_apps_brew
   path_prepend "$(brew --prefix findutils)/libexec/gnubin"
   path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
   # install_apps_cask

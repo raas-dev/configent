@@ -28,10 +28,7 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-# Zsh
-brew install zsh
-
-# GNU bins prepended to PATH in .profile
+# GNU bins prepended to PATH on macOS in .profile
 brew install coreutils
 brew install findutils
 #brew install gnu-getopt
@@ -41,18 +38,18 @@ brew install findutils
 #brew install gnu-time
 #brew install gnu-which
 
-# GNU bins NOT prepended to PATH in .profile
+# GNU bins NOT prepended to PATH on macOS in .profile
 brew install gawk
 brew install grep
 
 # More recent git than in Xcode Command Line Tools
 brew install git
 
-# Git extension for versioning large files
-brew install git-lfs
-
 # Git extra commands (https://github.com/tj/git-extras)
 brew install git-extras
+
+# Git extension for versioning large files
+brew install git-lfs
 
 # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
 brew install m-cli
@@ -60,12 +57,14 @@ brew install m-cli
 # Mac App Store command-line interface (https://github.com/mas-cli/mas)
 brew install mas
 
+# For speech-to-text
+brew install portaudio
+
 # Internet traffic monitor (https://github.com/GyulyVGC/sniffnet)
 brew install sniffnet
 
 # Maintained ctags implementation
 brew install universal-ctags
 
-# For speech-to-text
-brew install portaudio
-# brew install ffmpeg
+# Zsh
+brew install zsh

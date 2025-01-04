@@ -12,7 +12,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  "$bin_path/install_apps_macos"
+  "$bin_path/install_apps_brew"
   if [ "$CASKS" != 'false' ]; then
     "$bin_path/install_apps_cask"
   else
