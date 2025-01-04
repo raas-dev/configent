@@ -127,7 +127,6 @@ Sensible defaults are used, what's installed by default:
 7. Neovim with [LazyVim](https://www.lazyvim.org/)
 8. Tmux, tpm (Tmux Plugin Manager) and tmux plugins
 9. [Ollama](https://ollama.com/) and it is (auto-)started on background
-10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
 Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
@@ -150,6 +149,13 @@ build-time requirements and apps.
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 On Linux distros (x86-64) it is installed `/home/linuxbrew`. If `sudo` is not
 possible, then it is installed user's home.
+
+### setup_ide
+
+[Terminess](https://www.nerdfonts.com/font-downloads) monospace font is
+installed. The font is used by IDE.
+
+IDE configuration is then backed up, symlinked and IDE extensions are installed.
 
 ## 🔨 IDE
 
