@@ -155,7 +155,9 @@ possible, then it is installed user's home.
 [Terminess](https://www.nerdfonts.com/font-downloads) monospace font is
 installed. The font is used by IDE.
 
-IDE configuration is then backed up, symlinked and IDE extensions are installed.
+IDE configuration is then symlinked and IDE extensions are installed.
+
+The configuration is backed up first if the IDE is already in use.
 
 ## 🔨 IDE
 
