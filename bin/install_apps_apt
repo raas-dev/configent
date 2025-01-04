@@ -82,11 +82,6 @@ $SUDO apt-get install -y universal-ctags
 # Microsoft TrueType fonts (accepts EULA)
 #$SUDO apt-get install -y ttf-mscorefonts-installer
 
-# Snap
-#if [ "$SNAPS" != 'false' ]; then
-#$SUDO apt-get install -y snapd
-#fi
-
 # Flatpak
 if [ "$FLATPAKS" != 'false' ]; then
   $SUDO apt-get install -y flatpak

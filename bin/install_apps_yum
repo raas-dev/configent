@@ -83,15 +83,6 @@ systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
-# Snap
-#if [ "$SNAPS" != 'false' ]; then
-#$SUDO dnf install -y fuse squashfuse # docker requirement for snap
-#$SUDO dnf install -y kernel-modules  # VM requirement for snap
-#$SUDO dnf install -y snapd
-#$SUDO systemctl enable --now snapd.socket
-#$SUDO ln -s /var/lib/snapd/snap /snap
-#fi
-
 # Flatpak
 if [ "$FLATPAKS" != 'false' ]; then
   $SUDO dnf install -y flatpak

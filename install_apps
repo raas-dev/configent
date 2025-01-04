@@ -35,14 +35,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     "$bin_path/install_apps_pacman"
   elif command -v apk >/dev/null; then
     "$bin_path/install_apps_apk"
-    #printf "Snap is not available on Alpine Linux, SNAPS=false forced.\n"
-    #export SNAPS="false"
   fi
-  #if [ "$SNAPS" != 'false' ]; then
-  #  "$bin_path/install_apps_snap"
-  #else
-  #  printf "SNAPS=false and on Linux, won't install snaps.\n"
-  #fi
   if [ "$FLATPAKS" != 'false' ]; then
     "$bin_path/install_apps_flatpak"
   else

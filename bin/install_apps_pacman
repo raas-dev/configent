@@ -81,13 +81,6 @@ yay --noconfirm --needed -S git-extras
 # Microsoft TrueType fonts (accepts EULA)
 #yay --noconfirm --needed -S ttf-ms-fonts
 
-# Snap
-#if [ "$SNAPS" != 'false' ]; then
-#yay --noconfirm --needed -S snapd
-#$SUDO systemctl enable --now snapd.socket
-#$SUDO ln -s /var/lib/snapd/snap /snap
-#fi
-
 # Flatpak
 if [ "$FLATPAKS" != 'false' ]; then
   $SUDO pacman --noconfirm --needed -S flatpak
