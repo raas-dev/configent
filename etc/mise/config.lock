@@ -240,6 +240,10 @@ backend = "pipx:gptme"
 version = "2.22.1"
 backend = "pipx:pdm"
 
+[tools."pipx:playwright"]
+version = "1.49.1"
+backend = "pipx:playwright"
+
 [tools."pipx:poetry"]
 version = "1.8.5"
 backend = "pipx:poetry"
@@ -248,12 +252,16 @@ backend = "pipx:poetry"
 version = "4.0.1"
 backend = "pipx:pre-commit"
 
+[tools."pipx:sncli"]
+version = "0.4.3"
+backend = "pipx:sncli"
+
 [tools."pipx:tldr"]
 version = "3.3.0"
 backend = "pipx:tldr"
 
 [tools.python]
-version = "3.12.8"
+version = "3.13.1"
 backend = "core:python"
 
 [tools.rust]
