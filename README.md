@@ -301,9 +301,9 @@ package name, put meta-package "shell" first, e.g. `n shell/postgresql psql`.
 The packages are installed from channel
 [unstable](https://search.nixos.org/packages?channel=unstable).
 
-You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
-
 ⚠️: If that binary writes to filesystem, you must be in a VM writable directory.
+
+You can expose `PORT` for servers, e.g. `PORT=8000 n python3 -m http.server`.
 
 💡: Use `n` for command-line tools not wanted permanently installed on the
 host. See `.aliases` for example ad-hoc tools such as container image scanners.
