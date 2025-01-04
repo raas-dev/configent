@@ -315,8 +315,8 @@ See `dotfiles/.aliases` for `vm4...` creating
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by pulling and running `install.sh` from this repository's main branch.
 
-⚠️: Regardless of pulling main, the version to install is defined in
-`install.sh` and is only updated by `release.sh`.
+⚠️: Regardless of pulling main, the version is hardcoded in `install.sh`
+and is only updated by `release.sh`.
 
 You may willingly live on the edge by explicitly passing `GIT_REF`:
 
