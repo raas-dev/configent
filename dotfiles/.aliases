@@ -284,34 +284,34 @@ venv() {
 ### Node.js ####################################################################
 
 # Find unused and missing package.json (dev)Dependencies
-alias depcheck='npx -y depcheck'
+alias depcheck='bunx depcheck'
 
 # Upgrades your package.json dependencies to the latest version
-alias ncu='npx -y npm-check-updates'
+alias ncu='bunx npm-check-updates'
 
 # Project generator (requires bin/yarn shim)
-alias projen='npx -y projen'
+alias projen='bunx projen'
 
 # Bump version and generate CHANGELOG.md
-alias standard-version='npx -y standard-version'
+alias standard-version='bunx standard-version'
 
 # Azure Functions CLI
-alias func='npx -y azure-functions-core-tools'
+alias func='bunx azure-functions-core-tools'
 
 # Firebase CLI
-alias firebase='npx -y firebase-tools'
+alias firebase='bunx firebase-tools'
 
 # Cloudflare Workers CLI
-alias wrangler='npx -y wrangler'
+alias wrangler='bunx wrangler'
 
 # Railway.app CLI
-alias railway='npx -y @railway/cli'
+alias railway='bunx @railway/cli'
 
 # Packs entire repository into a single, AI-friendly file
-alias repomix='npx -y repomix'
+alias repomix='bunx repomix'
 
 # Flowise
-alias flowise='npx -y flowise'
+alias flowise='bunx flowise'
 
 ### Functions: AI ##############################################################
 
