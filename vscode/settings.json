@@ -215,7 +215,6 @@
   "scm.countBadge": "focused",
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
-  "shellformat.useEditorConfig": true,
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
