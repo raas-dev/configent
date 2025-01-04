@@ -6,9 +6,11 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-### plugins ####################################################################
+### constants ##################################################################
 
 tpm_dir="$HOME/.tmux/plugins/tpm"
+
+### plugins ####################################################################
 
 git clone https://github.com/tmux-plugins/tpm "$tpm_dir" ||
   git -C "$tpm_dir" pull --no-autostash --rebase

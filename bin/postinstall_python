@@ -6,9 +6,48 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-### interpreter scope ##########################################################
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### sitecustomize ##############################################################
+
+# rich (imported by sitecustomize) is installed by ~/.default-python-packages
+
+# Backup sitecustomize.py in $HOME/.config/python
+if [ ! -r "$backup_path/.config/python/sitecustomize.py" ]; then
+  if [ -r "$HOME/.config/python/sitecustomize.py" ]; then
+    mkdir -p "$backup_path/.config/python"
+    cp -P "$HOME/.config/python/sitecustomize.py" \
+      "$backup_path/.config/python/sitecustomize.py"
+  fi
+fi
+
+# Symlink sitecustomize.py to $HOME/.config/python
+mkdir -p "$HOME/.config/python"
+ln -sfnv "$config_path/python/sitecustomize.py" \
+  "$HOME/.config/python/sitecustomize.py"
 
 # Symlink sitecustomize.py to Python site-packages
 sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
 ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
   "$sitepackages_path/sitecustomize.py"
+
+### ptpython ###################################################################
+
+# ptpython is installed by ~/.default-python-packages
+
+# backup
+if [ ! -r "$backup_path/.config/ptpython/config.py" ]; then
+  if [ -r "$HOME/.config/ptpython/config.py" ]; then
+    mkdir -p "$backup_path/.config/ptpython"
+    cp -P "$HOME/.config/ptpython/config.py" \
+      "$backup_path/.config/ptpython/config.py"
+  fi
+fi
+
+# symlink
+mkdir -p "$HOME/.config/ptpython"
+ln -sfnv "$config_path/ptpython/config.py" "$HOME/.config/ptpython/config.py"

@@ -14,12 +14,12 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# backup and symlink powershell config dir
-if [ ! -d "$backup_path/.config/powershell" ] &&
-  [ -d "$HOME/.config/powershell" ]; then
-  mkdir -p "$backup_path/.config"
-  cp -RP "$HOME/.config/powershell" "$backup_path/.config/powershell"
+if [ ! -r "$backup_path/.config/gptme/config.toml" ]; then
+  if [ -r "$HOME/.config/gptme/config.toml" ]; then
+    mkdir -p "$backup_path/.config/gptme"
+    cp -P "$HOME/.config/gptme/config.toml" \
+      "$backup_path/.config/gptme/config.toml"
+  fi
 fi
-
-mkdir -p "$HOME/.config"
-ln -sfnv "$config_path/powershell" "$HOME/.config/powershell"
+mkdir -p "$HOME/.config/gptme"
+ln -sfnv "$config_path/gptme/config.toml" "$HOME/.config/gptme/config.toml"

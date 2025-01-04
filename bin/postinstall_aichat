@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# config.yaml
+if [ ! -r "$backup_path/.config/aichat/config.yaml" ]; then
+  if [ -r "$HOME/.config/aichat/config.yaml" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/config.yaml" \
+      "$backup_path/.config/aichat/config.yaml"
+  fi
+fi
+mkdir -p "$HOME/.config/aichat"
+ln -sfnv "$config_path/aichat/config.yaml" "$HOME/.config/aichat/config.yaml"
+
+# .env
+if [ ! -r "$backup_path/.config/aichat/.env" ]; then
+  if [ -r "$HOME/.config/aichat/.env" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/.env" "$backup_path/.config/aichat/.env"
+  fi
+fi
+ln -sfnv "$config_path/aichat/env" "$HOME/.config/aichat/.env"
+
+# SynthWave84.tmTheme
+if [ ! -r "$backup_path/.config/aichat/dark.tmTheme" ]; then
+  if [ -r "$HOME/.config/aichat/dark.tmTheme" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/dark.tmTheme" \
+      "$backup_path/.config/aichat/dark.tmTheme"
+  fi
+fi
+ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
+  "$HOME/.config/aichat/dark.tmTheme"

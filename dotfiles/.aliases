@@ -250,10 +250,6 @@ alias openai='uvx openai'
 # Langflow
 alias langflow='uvx langflow'
 
-# gptme
-alias gptme='uvx --from "gptme[browser]" gptme'
-alias gptme-server='uvx --with flask --from "gptme[browser]" gptme-server'
-
 # Toggle a Python virtual environment for development
 venv() {
   # shellcheck disable=SC1091  # activate does not exist unless venv is created

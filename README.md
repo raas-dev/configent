@@ -99,9 +99,6 @@ Symlinks are created in in the user's home directory for all the files in
 Files or symlinks of the same name at `$HOME` are overridden without asking,
 but they are backed up first in `.backup/`.
 
-The tool specific configurations in `etc/` are symlinked in `~/.config` either
-as files or directories depending on which is more suitable for the tool.
-
 Directory `bin` in this repository is symlinked to `~/.local/configent/bin`
 and is first in `PATH` after you  restart the shell or run `source ~/.bashrc`.
 

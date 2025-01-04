@@ -8,16 +8,26 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
 ### mise #######################################################################
 
-export PATH="$HOME/.local/bin:$PATH"
-
-if command -v mise >/dev/null; then
-  mise self-update --yes
-else
-  # install mise first
-  curl https://mise.run | sh
+# symlink mise config directory
+if [ ! -r "$backup_path/.config/mise" ]; then
+  if [ -r "$HOME/.config/mise" ]; then
+    mkdir -p "$backup_path/.config"
+    cp -RP "$HOME/.config/mise" "$backup_path/.config/mise"
+  fi
 fi
+ln -sfnv "$config_path/mise" "$HOME/.config/mise"
+
+# install mise
+export PATH="$HOME/.local/bin:$PATH"
+! command -v mise >/dev/null && curl https://mise.run | sh
 
 # install all enabled tools
 mise install --yes

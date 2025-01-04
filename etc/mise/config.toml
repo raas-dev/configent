@@ -6,9 +6,9 @@ azure-cli = 'asdf:https://github.com/asyrjasalo/asdf-azure-cli'
 rust = '1.83.0'
 cargo-binstall = 'latest'
 # dotfiles requirements
-'cargo:aichat' = 'latest'
+'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 'cargo:argc' = 'latest'
-'cargo:bat' = { version = 'latest', postinstall = "bat cache --build" }
+'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'cargo:diskonaut' = 'latest'
 'cargo:fd-find' = 'latest'
 'cargo:git-delta' = 'latest'
@@ -21,13 +21,13 @@ cargo-binstall = 'latest'
 'cargo:procs' = 'latest'
 'cargo:ripgrep' = 'latest'
 'cargo:sd' = 'latest'
-'cargo:starship' = 'latest'
+'cargo:starship' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_starship" }
 'cargo:tailspin' = 'latest'
 'cargo:xh' = 'latest'
 'cargo:zoxide' = 'latest'
 # topgrade
 'cargo:cargo-cache' = 'latest' # https://github.com/matthiaskrgr/cargo-cache
-'cargo:cargo-update' = 'latest' # https://github.com/nabijaczleweli/cargo-update
+'cargo:cargo-update' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" } # https://github.com/nabijaczleweli/cargo-update
 'cargo:topgrade' = 'latest' #  https://github.com/topgrade-rs/topgrade
 # extras
 'cargo:kondo' = 'latest' # https://github.com/tbillington/kondo
@@ -52,8 +52,9 @@ bun = '1.1.42'
 
 python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
-'pipx:aider-chat[browser]' = 'latest'
-"pipx:glances" = { version = "latest", extras = "containers,gpu,web,wifi" }
+'pipx:aider-chat' = { version = 'latest', extras = 'browser', postinstall = "~/.local/configent/bin/postinstall_aider" }
+'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
+'pipx:gptme' = { version = 'latest', extras = 'browser', pipx_args = ' --with flask', uvx_args = ' --with flask', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
