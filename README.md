@@ -36,7 +36,7 @@ Works on x86-64 and ARM:
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.19, 3.18 and 3.17
 
-Minimum requirements are 4GB RAM and 12GB disk, on which it takes <15 minutes.
+Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
 
 ## 🥾 Up
 
