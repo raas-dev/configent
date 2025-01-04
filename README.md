@@ -136,7 +136,6 @@ Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
 
 **It is strongly recommended to `export GITHUB_TOKEN=` in your `~/.rclocal`.**
-
 This avoids getting rate limited by GitHub on parallel installation.
 
 💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
