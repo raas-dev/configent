@@ -135,13 +135,17 @@ Sensible defaults are used, what's installed by default:
 Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
 
+**It is strongly recommended to `export GITHUB_TOKEN=` in your `~/.rclocal`.**
+
+This avoids getting rate limited by GitHub on parallel installation.
+
 💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
 Also see [mise for using and locking](https://mise.jdx.dev/configuration.html)
 project specific versions.
 
-Mise is always preferred over Homebrew. Use
-[mise backends](https://mise.jdx.dev/dev-tools/backends/) and
-[mise plugins](https://mise.jdx.dev/registry.html) to add more tools.
+Mise is always preferred over Homebrew. Use mise
+[backends](https://mise.jdx.dev/dev-tools/backends/) and
+[plugins](https://mise.jdx.dev/registry.html) to add more tools.
 
 On macOS, [Homebrew](https://brew.sh) is used to install **absolutely minimum**
 build-time requirements and apps.
