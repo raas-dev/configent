@@ -24,9 +24,9 @@ fi
 
 if [ -n "$prerelease_type" ]; then
   echo "Creating pre-release ($prerelease_type)"
-  npx -y standard-version --prerelease "$prerelease_type"
+  bunx standard-version --prerelease "$prerelease_type"
   uvx --from commitizen cz bump --prerelease "$prerelease_type"
 else
-  npx -y standard-version
+  bunx standard-version
   uvx --from commitizen cz bump
 fi
