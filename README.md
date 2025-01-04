@@ -116,9 +116,13 @@ are automatically exported here if they were set in your previous `.gitconfig`.
 
 ### install_apps
 
-Sensible defaults are used. Enable or disable tools in `etc/mise/config.toml`.
+Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
+to install mostly build-time requirements. and other absolute necessities,
+from Linux distro's repository, which requires `sudo` rights.
 
-What's installed by default:
+Everything (else) that can be installed only user-wide is done so, as following.
+
+Sensible defaults are used, what's installed by default:
 1. Zsh and antidote (Zsh plugin manager)
 2. Other command-line essentials and a few build time requirements
 3. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
@@ -131,26 +135,26 @@ What's installed by default:
 9. [Ollama](https://ollama.com/) and it is (auto-)started on background
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
-Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
-to install requirements from Linux distro's repository (requires `sudo` rights).
-Flatpaks (GUI apps) are always installed user-wide.
+On both macOS and Linux distros, with a few exceptions (such as GUI apps)
+these are installed by using [mise](https://mise.jdx.dev/).
 
-On macOS, [Homebrew](https://brew.sh) is used to install requirements and
-casks (GUI apps) user-wide.
+**Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.**
 
-Language runtimes and development tools are always installed user-wide by
-[mise](https://mise.jdx.dev/). Mise is always preferred over Homebrew.
-Tools are enabled and disabled in `~/.config/mise/config.toml`,
-use [mise plugins](https://mise.jdx.dev/registry.html) to add more.
+💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
+configuring (and locking) project specific versions.
+
+Mise is always preferred over Homebrew. Use
+[mise backends](https://mise.jdx.dev/dev-tools/backends/) and
+[mise plugins](https://mise.jdx.dev/registry.html) to add more tools.
+
+On macOS, [Homebrew](https://brew.sh) is used to install **absolutely minimum**
+build-time requirements, command-line tools and casks (GUI apps) user-wide.
 
 ⚠️: Homebrew may or may not be present after installation, as Homebrew Linux
 [does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
 
 With Homebrew on Linux (x86-64), system-wide installation (`/home/linuxbrew`) is
 preferred, but if it this not possible (no `sudo`), it is installed user's home.
-
-💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
-configuring (and locking) project specific versions.
 
 ## 🔨 IDE
 
