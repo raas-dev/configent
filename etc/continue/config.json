@@ -33,9 +33,9 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
-      "title": "Ollama: vanilj/Phi-4",
+      "title": "Ollama: qwen2.5-coder:14b",
       "provider": "ollama",
-      "model": "vanilj/Phi-4:latest",
+      "model": "qwen2.5-coder:14b",
       "apiBase": "http://127.0.0.1:11434"
     },
     {
