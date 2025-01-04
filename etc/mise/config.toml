@@ -59,6 +59,7 @@ uv = 'latest'
 'pipx:playwright' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
+'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 'pipx:tldr' = 'latest'
 
 dotnet = { version = '8.0.404' }
