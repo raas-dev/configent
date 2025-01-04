@@ -135,12 +135,11 @@ Sensible defaults are used, what's installed by default:
 9. [Ollama](https://ollama.com/) and it is (auto-)started on background
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
-Also, on both macOS and Linux distros, with a few exceptions (such as GUI apps)
-everything is installed by using [mise](https://mise.jdx.dev/).
+Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
+everything is installed by [mise](https://mise.jdx.dev/).
 
-**Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.**
-
-💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
+💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
+Also see [mise documentation](https://mise.jdx.dev/configuration.html) for
 configuring (and locking) project (directory) specific versions.
 
 Mise is always preferred over Homebrew. Use
