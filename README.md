@@ -117,7 +117,7 @@ are automatically exported here if they were set in your previous `.gitconfig`.
 ### install_apps
 
 Apt, yum (dnf), zypper, pacman and apk package managers are recognized and used
-to install mostly build-time requirements. and other absolute necessities,
+to install mostly build-time requirements and other absolute necessities
 from Linux distro's repository, which requires `sudo` rights.
 
 Everything (else) that can be installed only user-wide is done so, as following.
@@ -135,13 +135,13 @@ Sensible defaults are used, what's installed by default:
 9. [Ollama](https://ollama.com/) and it is (auto-)started on background
 10. [Terminess](https://www.nerdfonts.com/font-downloads) monospace font
 
-On both macOS and Linux distros, with a few exceptions (such as GUI apps)
-these are installed by using [mise](https://mise.jdx.dev/).
+Also, on both macOS and Linux distros, with a few exceptions (such as GUI apps)
+everything is installed by using [mise](https://mise.jdx.dev/).
 
 **Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.**
 
 💡: See [mise documentation](https://mise.jdx.dev/configuration.html) for
-configuring (and locking) project specific versions.
+configuring (and locking) project (directory) specific versions.
 
 Mise is always preferred over Homebrew. Use
 [mise backends](https://mise.jdx.dev/dev-tools/backends/) and
