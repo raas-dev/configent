@@ -294,12 +294,12 @@ in an isolated `nix-shell` in the container. The volume mount is created based
 on the current working directory.
 
 Package name(s, separated by forward slashes) are taken as the first argument.
-The packages are installed from channel
-[unstable](https://search.nixos.org/packages?channel=unstable).
-
 The binary is assumed named according to the first package. The rest of the
 arguments are passed to the binary. If binary name is different from the
 package name, put meta-package "shell" first, e.g. `n shell/postgresql psql`.
+
+The packages are installed from channel
+[unstable](https://search.nixos.org/packages?channel=unstable).
 
 You can expose `PORT` on the host, e.g. `PORT=8000 n python3 -m http.server`.
 
