@@ -5,11 +5,11 @@ a pull request.
 
 ## Guidelines
 
-1. Do not use anything in installation scripts that is not POSIX compatible
-2. Supporting Linux on AArch64 is mandatory as all Macs since 2023 are ARM64
-3. The software **installed** must work on 95% of the Linux distros in README
-4. In 90% cases there is **no use to install CLIs** as they can be run via `n`
-5. Do not build on Homebrew, use `mise` plugins, or distros' repo (last resort)
+1. Do not use anything in installation scripts that is not POSIX compatible.
+3. The software **installed** must work on 95% of the README's Linux distros.
+3. Base on Homebrew only on macOS (see 4.), use `mise` plugins or distros' repo.
+4. Supporting Linux on AArch64 is mandatory as all Macs since 2023 are ARM64.
+5. In 90% cases there is **no use to install CLIs** as they can be run via `n`.
 
 ## Testing
 
