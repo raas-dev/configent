@@ -50,7 +50,7 @@ bun = '1.1.42'
 'npm:pnpm' = 'latest'
 'npm:yarn' = 'latest'
 
-python = { version = '3.12.8', postinstall = "~/.local/configent/bin/postinstall_python" }
+python = { version = '3.13.1', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:aider-chat' = { version = 'latest', extras = 'browser', postinstall = "~/.local/configent/bin/postinstall_aider" }
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
