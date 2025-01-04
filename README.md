@@ -306,7 +306,7 @@ The packages are installed from channel
 You can expose `PORT` for servers, e.g. `PORT=8000 n python3 -m http.server`.
 
 💡: Use `n` for command-line tools not wanted permanently installed on the
-host. See `.aliases` for example ad-hoc tools such as container image scanners.
+host. See `.aliases` for example ad-hoc tools such as security scanners.
 
 ## ⚙️ VMs
 
