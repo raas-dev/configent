@@ -315,30 +315,42 @@ alias flowise='bunx flowise'
 
 ### Functions: AI ##############################################################
 
-_aichat_build() {
+_aichat_setup_functions() {
+  git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
+    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build)
+}
+
+_aichat_build_agents() {
   local agent="$1"
   local context="$2"
-
-  if [ -d "$AICHAT_FUNCTIONS_DIR" ]; then
-    (
-      cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 && \
-      if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        if [ -n "$(git status --porcelain)" ]; then
-          if [ -n "$agent" ]; then
-            argc build@agent "$agent"
-            if [ -n "$context" ]; then
-              rm -fv "$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
-            fi
-          else
-            argc build@agent
+  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
+  (
+    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      if [ -n "$(git status --porcelain)" ]; then
+        if [ -n "$agent" ]; then
+          argc build@agent "$agent"
+          if [ -n "$context" ]; then
+            rm -fv "$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
           fi
+        else
+          argc build@agent
         fi
       fi
-    )
-  else
-    git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" || return
-    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 && argc build)
-  fi
+    fi
+  )
+}
+
+_aichat_build_tools() {
+  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
+  (
+    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      if [ -n "$(git status --porcelain)" ]; then
+        argc build@tool
+      fi
+    fi
+  )
 }
 
 # in ~/.rclocal:
@@ -347,7 +359,7 @@ ai() {
   local role="$1"
   local category="general"
   local context="${PWD##*/}"
-  _aichat_build
+  _aichat_build_tools
 
   if [ -z "$role" ]; then
     role="chat"
@@ -370,14 +382,14 @@ ai() {
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
-  _aichat_build "$agent" "$context"
+  _aichat_build_agents "$agent" "$context"
   aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
-  _aichat_build "$agent" "$context"
+  _aichat_build_agents "$agent" "$context"
   aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
