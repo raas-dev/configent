@@ -323,7 +323,6 @@ _aichat_setup_functions() {
 _aichat_build_agents() {
   local agent="$1"
   local context="$2"
-  local context_path="$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
   [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
   (
     cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
@@ -332,7 +331,8 @@ _aichat_build_agents() {
         if [ -n "$agent" ]; then
           argc build@agent "$agent"
           if [ -n "$context" ]; then
-            [ -e "$context_path" ] && mv -fv "$context_path" "$context_path.old"
+            ctx_path="$AICHAT_CONFIG_DIR/agents/$agent/sessions/$context.yaml"
+            [ -e "$ctx_path" ] && mv -fv "$ctx_path" "$ctx_path.old"
           fi
         else
           argc build@agent
