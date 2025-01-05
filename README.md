@@ -1,4 +1,4 @@
-# c🌀nfigent (1.130.4)
+# c🌀nfigent (1.130.5)
 
 [![Changelog](https://img.shields.io/github/v/tag/raas-dev/configent?label=changelog&sort=semver)](https://github.com/raas-dev/configent/blob/main/CHANGELOG.md)
 [![LGPL-3.0](https://img.shields.io/github/license/raas-dev/configent)](https://github.com/raas-dev/configent/blob/main/LICENSE)
@@ -47,7 +47,7 @@ If in doubt, test drive in a virtual machine.
 
 Installer requires only `curl` available:
 
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.130.4/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/1.130.5/install.sh | sh
 
 Things are installed primarily per-user, but to install system-wide requirements
 (such as `git`), `sudo` password may be asked in the beginning.

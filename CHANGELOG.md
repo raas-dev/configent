@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.5](https://github.com/raas-dev/configent/compare/1.130.4...1.130.5) (2025-01-05)
+
+
+### Fixes
+
+* **aichat:** Pass all arguments to aichat ([f508e3a](https://github.com/raas-dev/configent/commit/f508e3a3bd44fc5562a17595b7e6049df7d1fffa))
+* **aliases:** Fix agent context removal ([e9a1f17](https://github.com/raas-dev/configent/commit/e9a1f17424a68a1dd2ec5dbf4a983f0e32e559a5))
+* **aliases:** Fix ai function to work without role ([9e89825](https://github.com/raas-dev/configent/commit/9e89825d75cf455c8918b2d2f086055fbd72232f))
+* **aliases:** Fix context path in aichat function ([34650f9](https://github.com/raas-dev/configent/commit/34650f90661752933f384863796d121b8342d87a))
+
 ### [1.130.4](https://github.com/raas-dev/configent/compare/1.130.3...1.130.4) (2025-01-05)
 
 
