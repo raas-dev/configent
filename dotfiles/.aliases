@@ -376,7 +376,7 @@ ai() {
 
   echo "[ai] using $category prompts"
   AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/$category" \
-    aichat --role "$role" --session "$context"
+    aichat --role "$role" --session "$context" --save-session "$*"
 }
 
 ai_assistant() {
