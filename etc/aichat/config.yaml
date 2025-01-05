@@ -44,8 +44,8 @@ document_loaders:
   # You can add custom loaders using the following syntax:
   #   <file-extension>: <command-to-load-the-file>
   # Note: Use `$1` for input file and `$2` for output file. If `$2` is omitted, use stdout as output.
-  pdf: 'pdftotext $1 -'                         # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
-  docx: 'pandoc --to plain $1'                  # Load .docx file, see https://pandoc.org to set up pandoc
+  #pdf: 'pdftotext $1 -'                         # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
+  docx: 'uvx pandoc --to plain $1'                  # Load .docx file, see https://pandoc.org to set up pandoc
 
 # ---- appearance ----
 highlight: true # Controls syntax highlighting
