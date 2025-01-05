@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.4](https://github.com/raas-dev/configent/compare/1.130.3...1.130.4) (2025-01-05)
+
+
+### Fixes
+
+* **aichat:** Add --save-session and increase threshold ([9e836c3](https://github.com/raas-dev/configent/commit/9e836c328089f2ac45785af8b6349b4090471d82))
+* **aichat:** Fix session name and prompt ([a153e0b](https://github.com/raas-dev/configent/commit/a153e0bd3526ffe74b2e9f1a1b844d645276ea6c))
+* **ai:** Improve general prompts ([b7675b5](https://github.com/raas-dev/configent/commit/b7675b5e9353681c8125fe41633fab57ec722c58))
+* **aliases:** Fix ai session naming ([0935da2](https://github.com/raas-dev/configent/commit/0935da2e6a56a90ddc87995fbcc2256e8c27d4de))
+* **aliases:** Fix aichat build command ([22ccd47](https://github.com/raas-dev/configent/commit/22ccd47278fbbefb69b23c85dc34c2b8505a5fc3))
+* **aliases:** Remove session file verbosely ([945b2de](https://github.com/raas-dev/configent/commit/945b2def45e9c2ade04a2bea05c5a010a52ba752))
+
 ### [1.130.3](https://github.com/raas-dev/configent/compare/1.130.2...1.130.3) (2025-01-04)
 
 
