@@ -373,6 +373,7 @@ ai() {
     else
       role="chat#$role"
     fi
+    shift
   fi
 
   echo "[ai] using $category prompts"
