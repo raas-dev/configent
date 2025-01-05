@@ -316,12 +316,22 @@ alias flowise='bunx flowise'
 ### Functions: AI ##############################################################
 
 _aichat_build() {
+  local agent="$1"
+  local context="$2"
+
   if [ -d "$AICHAT_FUNCTIONS_DIR" ]; then
     (
       cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 && \
       if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         if [ -n "$(git status --porcelain)" ]; then
-          argc build
+          if [ -n "$agent" ]; then
+            argc build@agent "$agent"
+            if [ -n "$context" ]; then
+              rm -f "$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
+            fi
+          else
+            argc build@agent
+          fi
         fi
       fi
     )
@@ -357,20 +367,18 @@ ai() {
     aichat --role "$role" --session "$context"
 }
 
-# requires AICHAT_FUNCTIONS_DIR
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
-  _aichat_build &&
-    aichat --agent "$agent" --session "$context" --save-session "$*"
+  _aichat_build "$agent" "$context"
+  aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
-# requires AICHAT_FUNCTIONS_DIR
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
-  _aichat_build &&
-    aichat --agent "$agent" --session "$context" --save-session "$*"
+  _aichat_build "$agent" "$context"
+  aichat --agent "$agent" --session "$context" --save-session "$*"
 }
 
 ### Functions: Docker ##########################################################
