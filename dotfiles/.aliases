@@ -327,7 +327,7 @@ _aichat_build() {
           if [ -n "$agent" ]; then
             argc build@agent "$agent"
             if [ -n "$context" ]; then
-              rm -f "$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
+              rm -fv "$HOME/.config/aichat/agents/$agent/sessions/$context.yaml"
             fi
           else
             argc build@agent
