@@ -358,6 +358,7 @@ _aichat_build_tools() {
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local role="$1"
+  shift
   local category="general"
   local context="${PWD##*/}"
   _aichat_build_tools
@@ -377,21 +378,21 @@ ai() {
 
   echo "[ai] using $category prompts"
   AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/$category" \
-    aichat --role "$role" --session "$context:$role" --save-session
+    aichat --role "$role" --session "$context:$role" --save-session "$@"
 }
 
 ai_assistant() {
   local agent="assistant"
   local context="${PWD##*/}"
   _aichat_build_agents "$agent" "$context"
-  aichat --agent "$agent" --session "$context" --save-session "$*"
+  aichat --agent "$agent" --session "$context" --save-session "$@"
 }
 
 ai_developer() {
   local agent="developer"
   local context="${PWD##*/}"
   _aichat_build_agents "$agent" "$context"
-  aichat --agent "$agent" --session "$context" --save-session "$*"
+  aichat --agent "$agent" --session "$context" --save-session "$@"
 }
 
 ### Functions: Docker ##########################################################
