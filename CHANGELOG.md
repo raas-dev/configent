@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.6](https://github.com/raas-dev/configent/compare/1.130.5...1.130.6) (2025-01-05)
+
+
+### Fixes
+
+* **aliases:** Fix ai session naming ([efeedaa](https://github.com/raas-dev/configent/commit/efeedaa9b3cfcd46799609f04574efb683328657))
+* **aliases:** Fix shift ([5233866](https://github.com/raas-dev/configent/commit/5233866e0456d29d8baa13e77bbb5dc7d04c2d89))
+
 ### [1.130.5](https://github.com/raas-dev/configent/compare/1.130.4...1.130.5) (2025-01-05)
 
 
