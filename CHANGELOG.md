@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.7](https://github.com/raas-dev/configent/compare/1.130.6...1.130.7) (2025-01-05)
+
+
+### Fixes
+
+* **aliases:** Add pdftotext via nix ([9cf22c2](https://github.com/raas-dev/configent/commit/9cf22c2b38a8eccdccd1fa0008f4d7e1b66dc303))
+
 ### [1.130.6](https://github.com/raas-dev/configent/compare/1.130.5...1.130.6) (2025-01-05)
 
 
