@@ -358,7 +358,6 @@ _aichat_build_tools() {
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
   local role="$1"
-  shift
   local category="general"
   local context="${PWD##*/}"
   _aichat_build_tools
