@@ -224,6 +224,10 @@ backend = "npm:pnpm"
 version = "1.22.22"
 backend = "npm:yarn"
 
+[tools.pandoc]
+version = "3.6.1"
+backend = "asdf:pandoc"
+
 [tools."pipx:aider-chat"]
 version = "0.70.0"
 backend = "pipx:aider-chat"
