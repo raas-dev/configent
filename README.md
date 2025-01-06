@@ -105,8 +105,7 @@ and is first in `PATH` after you  restart the shell or run `source ~/.bashrc`.
 All the scripts in `bin/` are available by name from then on. Also now you
 can simply reload the configuration of the current shell with `r`.
 
-💡: Export your environment variables (such as `GITHUB_TOKEN`) in `~/.rclocal`.
-Git name and email were automatically added if they were in your `.gitconfig`.
+💡: Export your own environment variables outside the git repo in `~/.rclocal`.
 
 ### install_apps
 
@@ -131,7 +130,7 @@ Sensible defaults are used, what's installed by default:
 Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
 
-**It is strongly recommended to `export GITHUB_TOKEN=` in your `~/.rclocal`.**
+**It is strongly recommended to `export GITHUB_TOKEN=`.**
 This avoids getting rate limited by GitHub on parallel installation.
 
 💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
@@ -200,7 +199,7 @@ The script **is run as part of bootstrap**.
 
 To start using Continue, do these manually after bootstrap:
 
-1. Export your LLM provider API keys in `~/.rclocal` (outside the git repo).
+1. Export your LLM provider's required environment variables (API key, etc.).
 
 2. If you use local LLMs via Ollama (which is installed in apps),
 you must `ollama pull` the model defined in `config.json` before it is
