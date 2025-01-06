@@ -43,21 +43,40 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   ! command -v hd >/dev/null && alias hd='hexdump -C'
 
   # macOS keychain
-  get_keychain_variable() {
+  # get environment variable
+  gx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: get_keychain_variable <varname>" && return 1
-    security find-generic-password -w \
-      -a "$USER" -D "environment variable" -s "$name"
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    security find-generic-password -a "$USER" -D "environment variable" \
+      -s "$name" -w
   }
 
-  set_keychain_variable() {
+  # set environment variable
+  sx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: set_keychain_variable <varname>" && return 1
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
     printf "Enter secret for %s: " "$name"
     read -r secret
     [ -z "$secret" ] && echo "Error: Empty secret" && return 1
-    security add-generic-password -U \
-      -a "$USER" -D "environment variable" -s "$name" -w "$secret"
+    security add-generic-password -a "$USER" -D "environment variable" \
+      -s "$name" -w "$secret" -U
+  }
+
+  # delete environment variable
+  dx() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    printf "Are you sure to remove all secret %s [y\N] > " "$1"
+    read -r choice
+    case "$choice" in
+    [yY])
+      security delete-generic-password -a "$USER" -D "environment variable" \
+        -s "$name"
+      ;;
+    *)
+      printf "Aborted.\n"
+      ;;
+    esac
   }
 else
   # Similar to macOS `pbcopy` and `pbpaste`
