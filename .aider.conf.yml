@@ -6,3 +6,4 @@ git: false
 yes-always: true
 
 load: .aider.script.md
+editor: code -w
