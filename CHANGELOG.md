@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.8](https://github.com/raas-dev/configent/compare/1.130.7...1.130.8) (2025-01-06)
+
+
+### Fixes
+
+* **macos:** Keychain ([4923833](https://github.com/raas-dev/configent/commit/4923833e17fd9f75b6bab4aad5f225e3c004bccc))
+* **pandoc:** Add pandoc via official repo ([b288fe2](https://github.com/raas-dev/configent/commit/b288fe244e631bd224c7c3f78ba24b5491c0c00e))
+
 ### [1.130.7](https://github.com/raas-dev/configent/compare/1.130.6...1.130.7) (2025-01-05)
 
 
