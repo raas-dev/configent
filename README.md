@@ -193,13 +193,13 @@ assistant in VS Code like editors. Note that (commercial) VS Code forks may
 prefer their own (closed) solutions and disable the extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
-Dynamic configuration (`config.ts`) is used to read all LLM provider keys
-from environment variables to avoid having them in `config.json`.
+Dynamic configuration (`config.ts`) is used to read all LLM provider
+environment variables to avoid having them in `config.json`.
 The script **is run as part of bootstrap**.
 
 To start using Continue, do these manually after bootstrap:
 
-1. Export your LLM provider's required environment variables (API key, etc.).
+1. Export your LLM provider's environment variables (API key, etc.).
 
 2. If you use local LLMs via Ollama (which is installed in apps),
 you must `ollama pull` the model defined in `config.json` before it is
