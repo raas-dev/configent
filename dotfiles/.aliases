@@ -255,6 +255,9 @@ alias vd='uvx --with odfpy,openpyxl visidata'
 # General media downloader
 alias you-get='uvx you-get'
 
+# Concatenate files for use with LLMs (see repomix for Node.js version)
+alias files-to-prompt='uvx files-to-prompt'
+
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
