@@ -217,16 +217,12 @@ backend = "core:node"
 "node-v22.12.0-darwin-arm64.tar.gz" = "sha256:293dcc6c2408da21562d135b0412525e381bb6fe150d688edb58fe850d0f3e13"
 
 [tools."npm:pnpm"]
-version = "9.15.2"
+version = "9.15.3"
 backend = "npm:pnpm"
 
 [tools."npm:yarn"]
 version = "1.22.22"
 backend = "npm:yarn"
-
-[tools.pandoc]
-version = "3.6.1"
-backend = "asdf:pandoc"
 
 [tools."pipx:aider-chat"]
 version = "0.70.0"

@@ -45,7 +45,7 @@ $SUDO zypper install -y readline-devel sqlite3-devel libbz2-devel \
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils file findutils \
-  git git-lfs htop lsb-release lsof man procps traceroute unzip wget \
+  git git-lfs htop lsb-release lsof man pandoc procps traceroute unzip wget \
   whois zip
 
 # Bash
