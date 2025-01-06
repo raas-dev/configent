@@ -23,7 +23,7 @@
     "editor.wordWrap": "wordWrapColumn"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
     "editor.detectIndentation": false,
     "editor.tabSize": 2
   },
