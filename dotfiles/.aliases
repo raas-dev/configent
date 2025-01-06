@@ -55,8 +55,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   sx() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
-    printf "Enter secret for %s: " "$name"
-    read -r secret
+    local secret="$2"
+    if [ -z "$secret" ]; then
+      printf "Enter secret for %s: " "$name"
+      read -r secret
+    fi
     [ -z "$secret" ] && echo "Error: Empty secret" && return 1
     security add-generic-password -a "$USER" -D "environment variable" \
       -s "$name" -w "$secret" -U
