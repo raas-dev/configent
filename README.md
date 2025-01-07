@@ -155,8 +155,9 @@ possible, then it is installed user's home.
 installed. The font is used by IDE.
 
 IDE configuration is then symlinked and IDE extensions are installed.
-
 The configuration is backed up first if the IDE is already in use.
+
+These steps are detailed further below.
 
 ## 🔨 IDE
 
@@ -193,13 +194,12 @@ assistant in VS Code like editors. Note that (commercial) VS Code forks may
 prefer their own (closed) solutions and disable the extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
-Dynamic configuration (`config.ts`) is used to read all LLM provider
-environment variables to avoid having them in `config.json`.
-The script **is run as part of bootstrap**.
+Dynamic configuration (`config.ts`) is used for reading all LLM provider
+environment variables to avoid having API keys hardcoded in `config.json`.
 
 To start using Continue, do these manually after bootstrap:
 
-1. Export your LLM provider's environment variables (API key, etc.).
+1. Export your LLM provider's environment variables in e.g. `~/.rclocal`.
 
 2. If you use local LLMs via Ollama (which is installed in apps),
 you must `ollama pull` the model defined in `config.json` before it is

@@ -1,7 +1,3 @@
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
 export function modifyConfig(config: Config): Config {
   // Anthropic
   config.models
