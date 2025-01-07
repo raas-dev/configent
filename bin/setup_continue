@@ -31,7 +31,7 @@ if [ ! -r "$backup_path/.continue/package.json" ]; then
   fi
 fi
 ln -sfnv "$config_path/continue/package.json" "$HOME/.continue/package.json"
-command -v npm >/dev/null && npm install --prefix "$HOME/.continue"
+#command -v npm >/dev/null && npm install --prefix "$HOME/.continue"
 
 # config.ts
 if [ ! -r "$backup_path/.continue/config.ts" ]; then
