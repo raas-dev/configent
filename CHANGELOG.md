@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.9](https://github.com/raas-dev/configent/compare/1.130.8...1.130.9) (2025-01-07)
+
+
+### Fixes
+
+* **aliases:** Add files-to-prompt ([b19c71a](https://github.com/raas-dev/configent/commit/b19c71a971ecbaed07d1181315a4ede4245a9b87))
+* **aliases:** Allow passing secret as argument to sx ([d1f053d](https://github.com/raas-dev/configent/commit/d1f053d15705043a6469fd44947825c2ff8e163d))
+* **continue:** Fix dependencies by config.ts ([540d43b](https://github.com/raas-dev/configent/commit/540d43b1f831b50b3d16e711917ec47d5b31d478))
+* **vscode:** Set default formatter for shell ([81d2da5](https://github.com/raas-dev/configent/commit/81d2da51f0c5bbe48b0b65567c787cdef78ea4ae))
+
 ### [1.130.8](https://github.com/raas-dev/configent/compare/1.130.7...1.130.8) (2025-01-06)
 
 
