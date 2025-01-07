@@ -8,10 +8,10 @@ export function modifyConfig(config: Config): Config {
 
   // Google
   config.models
-  .filter((model) => model.provider === "gemini")
-  .forEach((googleModel) => {
-    googleModel.apiKey = process.env.GEMINI_API_KEY;
-  });
+    .filter((model) => model.provider === "gemini")
+    .forEach((googleModel) => {
+      googleModel.apiKey = process.env.GEMINI_API_KEY;
+    });
 
   // OpenAI
   config.models
@@ -40,11 +40,9 @@ export function modifyConfig(config: Config): Config {
   // Embeddings provider
   if (config.embeddingsProvider.provider === "gemini") {
     config.embeddingsProvider.apiKey = process.env.GEMINI_API_KEY;
-  }
-  else if (config.embeddingsProvider.provider === "openai") {
+  } else if (config.embeddingsProvider.provider === "openai") {
     config.embeddingsProvider.apiKey = process.env.OPENAI_API_KEY;
-  }
-  else if (config.embeddingsProvider.model === "voyage-code-2") {
+  } else if (config.embeddingsProvider.model === "voyage-code-2") {
     config.embeddingsProvider.apiKey = process.env.VOYAGE_API_KEY;
   }
 
