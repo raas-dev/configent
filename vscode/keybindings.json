@@ -338,10 +338,38 @@
   },
   {
     "command": "continue.focusEditWithoutClear",
-    "key": "cmd+k"
+    "key": "cmd+k",
+    "when": "editorFocus"
   },
   {
     "command": "-continue.focusEditWithoutClear",
     "key": "shift+cmd+i"
+  },
+  {
+    "command": "continue.focusContinueInputWithoutClear",
+    "key": "shift+cmd+l",
+    "when": "editorFocus"
+  },
+  {
+    "command": "-continue.focusContinueInputWithoutClear",
+    "key": "shift+cmd+l"
+  },
+  {
+    "command": "continue.focusContinueInput",
+    "key": "cmd+l",
+    "when": "editorFocus"
+  },
+  {
+    "command": "-continue.focusContinueInput",
+    "key": "cmd+l"
+  },
+  {
+    "command": "continue.focusEdit",
+    "key": "cmd+i",
+    "when": "editorFocus"
+  },
+  {
+    "command": "-continue.focusEdit",
+    "key": "cmd+i"
   }
 ]
