@@ -294,11 +294,11 @@ backend = "ubi:jdx/usage"
 usage-macos-aarch64 = "sha256:c20888772f759eb418de24544f2eaabe3fbd3696ed1710bba25de233a79ffa2b"
 
 [tools.uv]
-version = "0.5.15"
+version = "0.5.16"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:bb7409c4d7d503e929bcd31bf179ae6f555f5092d0d5dc38df37be9f29832859"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:0b16039f469df078c1445f5b7f84d3c0342580c4592b5a4b604db2c86dc37c3e"
 
 [tools."vfox:jdx/vfox-clang"]
 version = "18.1.8"
