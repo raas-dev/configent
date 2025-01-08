@@ -32,7 +32,7 @@ version = "1.22.0"
 backend = "cargo:argc"
 
 [tools."cargo:bat"]
-version = "0.24.0"
+version = "0.25.0"
 backend = "cargo:bat"
 
 [tools."cargo:cargo-cache"]
