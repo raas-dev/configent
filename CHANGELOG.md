@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.10](https://github.com/raas-dev/configent/compare/1.130.9...1.130.10) (2025-01-08)
+
+
+### Fixes
+
+* **continue:** Load system message from file ([2f59c41](https://github.com/raas-dev/configent/commit/2f59c41657f0ea1f644d7a2fccdce1ec293d170e))
+* **continue:** Remove extraneuous npm install ([3a4ce64](https://github.com/raas-dev/configent/commit/3a4ce642d10ee25c16fea65fdfa4d7923bc0b535))
+* **gitconfig:** Make git c create commit message with AI ([2962196](https://github.com/raas-dev/configent/commit/2962196359ee78a4d272df14ea51fa230cffb289))
+
 ### [1.130.9](https://github.com/raas-dev/configent/compare/1.130.8...1.130.9) (2025-01-07)
 
 
