@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.11](https://github.com/raas-dev/configent/compare/1.130.10...1.130.11) (2025-01-08)
+
+
+### Fixes
+
+* **keybindings:** Add missing when clauses ([eb500b1](https://github.com/raas-dev/configent/commit/eb500b1af332eb3126b5ce924b14db8b1fb61f1a))
+* **vscode:** Add cline to extensions ([7b03c6a](https://github.com/raas-dev/configent/commit/7b03c6ac7e6704c087e696b758ddd1c139a015c2))
+
 ### [1.130.10](https://github.com/raas-dev/configent/compare/1.130.9...1.130.10) (2025-01-08)
 
 
