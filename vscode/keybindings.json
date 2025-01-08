@@ -347,17 +347,12 @@
   },
   {
     "command": "continue.focusContinueInputWithoutClear",
-    "key": "shift+cmd+l",
+    "key": "cmd+l",
     "when": "editorFocus"
   },
   {
     "command": "-continue.focusContinueInputWithoutClear",
     "key": "shift+cmd+l"
-  },
-  {
-    "command": "continue.focusContinueInput",
-    "key": "cmd+l",
-    "when": "editorFocus"
   },
   {
     "command": "-continue.focusContinueInput",
@@ -371,5 +366,15 @@
   {
     "command": "-continue.focusEdit",
     "key": "cmd+i"
+  },
+  {
+    "command": "-workbench.action.chat.openEditSession",
+    "key": "shift+cmd+i",
+    "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"
+  },
+  {
+    "command": "-workbench.panel.chatEditing",
+    "key": "shift+cmd+i",
+    "when": "workbench.panel.chat.view.edits.active"
   }
 ]
