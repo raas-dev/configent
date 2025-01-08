@@ -325,5 +325,23 @@
     "command": "-continue.toggleFullScreen",
     "key": "cmd+k cmd+m",
     "when": "!terminalFocus"
+  },
+  {
+    "command": "-editor.debug.action.showDebugHover",
+    "key": "cmd+k cmd+i",
+    "when": "editorTextFocus && inDebugMode"
+  },
+  {
+    "command": "-workbench.debug.panel.action.clearReplAction",
+    "key": "cmd+k",
+    "when": "focusedView == 'workbench.panel.repl.view'"
+  },
+  {
+    "command": "continue.focusEditWithoutClear",
+    "key": "cmd+k"
+  },
+  {
+    "command": "-continue.focusEditWithoutClear",
+    "key": "shift+cmd+i"
   }
 ]
