@@ -1,6 +1,5 @@
 {
   "allowAnonymousTelemetry": false,
-  "systemMessage": "Please provide concise answers. Take a deep breath and work on this problem step-by-step.",
   "models": [
     {
       "title": "gemini-2.0-flash-exp",

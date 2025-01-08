@@ -1,4 +1,27 @@
+import * as fs from "fs";
+import * as os from "os";
+import * as path from "path";
+
 export function modifyConfig(config: Config): Config {
+  // Load system message from file
+  const systemMessagePath = path.join(
+    os.homedir(),
+    ".config",
+    "configent",
+    "prompts",
+    "general",
+    "chat.md"
+  );
+  try {
+    if (fs.existsSync(systemMessagePath)) {
+      config.systemMessage = fs.readFileSync(systemMessagePath, "utf-8");
+    }
+  } catch (e) {
+    console.error(
+      `Failed to load system message from ${systemMessagePath}: ${e}`
+    );
+  }
+
   // Anthropic
   config.models
     .filter((model) => model.provider === "anthropic")
