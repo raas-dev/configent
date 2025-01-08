@@ -28,8 +28,6 @@ editorconfig.editorconfig
 esbenp.prettier-vscode
 formulahendry.code-runner
 fregante.ghost-text
-github.copilot
-github.copilot-chat
 github.vscode-github-actions
 golang.go
 grapecity.gc-excelviewer
