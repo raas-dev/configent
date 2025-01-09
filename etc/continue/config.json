@@ -185,6 +185,15 @@
     }
   ],
   "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": ["mcp-server-sqlite", "--db-path", "/Users/NAME/test.db"]
+        }
+      }
+    ],
     "quickActions": [
       {
         "title": "Explain",
