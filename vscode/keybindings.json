@@ -267,7 +267,7 @@
   },
   {
     "command": "continue.acceptDiff",
-    "key": "ctrl+up",
+    "key": "cmd+up",
     "when": "continue.diffVisible"
   },
   {
@@ -277,7 +277,7 @@
   },
   {
     "command": "continue.rejectDiff",
-    "key": "ctrl+down",
+    "key": "cmd+down",
     "when": "continue.diffVisible"
   },
   {
@@ -292,7 +292,7 @@
   },
   {
     "command": "continue.acceptVerticalDiffBlock",
-    "key": "ctrl+right",
+    "key": "cmd+right",
     "when": "continue.diffVisible"
   },
   {
@@ -301,7 +301,7 @@
   },
   {
     "command": "continue.rejectVerticalDiffBlock",
-    "key": "ctrl+left",
+    "key": "cmd+left",
     "when": "continue.diffVisible"
   },
   {
@@ -310,7 +310,7 @@
   },
   {
     "command": "continue.applyCodeFromChat",
-    "key": "ctrl+enter"
+    "key": "cmd+enter"
   },
   {
     "command": "-continue.applyCodeFromChat",
