@@ -193,6 +193,7 @@
     }
   ],
   "experimental": {
+    "useTools": true,
     "modelContextProtocolServers": [
       {
         "transport": {
