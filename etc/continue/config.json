@@ -133,6 +133,9 @@
       "name": "diff"
     },
     {
+      "name": "currentFile"
+    },
+    {
       "name": "terminal"
     },
     {
@@ -174,10 +177,15 @@
     {
       "name": "repo-map"
     },
-    { "name": "os" }
+    {
+      "name": "os"
+    },
+    {
+      "name": "clipboard"
+    }
   ],
   "docs": [
-      {
+    {
       "title": "Continue",
       "startUrl": "https://docs.continue.dev",
       "rootUrl": "https://docs.continue.dev",

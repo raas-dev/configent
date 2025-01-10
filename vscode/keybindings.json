@@ -376,5 +376,10 @@
     "command": "-workbench.panel.chatEditing",
     "key": "shift+cmd+i",
     "when": "workbench.panel.chat.view.edits.active"
+  },
+  {
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "key": "ctrl+c",
+    "when": "filesExplorerFocus"
   }
 ]
