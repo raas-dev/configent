@@ -227,18 +227,6 @@
     "key": "cmd+[IntlBackslash]"
   },
   {
-    "command": "-editor.action.clipboardPasteAction",
-    "key": "cmd+v"
-  },
-  {
-    "command": "-editor.action.clipboardCopyAction",
-    "key": "cmd+c"
-  },
-  {
-    "command": "-editor.action.clipboardCutAction",
-    "key": "cmd+x"
-  },
-  {
     "command": "-execCopy",
     "key": "cmd+c"
   },
