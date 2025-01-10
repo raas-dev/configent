@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.12](https://github.com/raas-dev/configent/compare/1.130.11...1.130.12) (2025-01-10)
+
+
+### Fixes
+
+* **continue:** Add phi4 as chat model ([f63acde](https://github.com/raas-dev/configent/commit/f63acde64f19603f4b20c1485aec02f261aa21cd))
+* **keybindings:** Change keybindings to use cmd key ([b770fe3](https://github.com/raas-dev/configent/commit/b770fe332d65a4a2634ec25efb6a829f4368fb6d))
+* **vscode:** Adjust window and font size ([ec4e5f0](https://github.com/raas-dev/configent/commit/ec4e5f0d174b1845f0acd6b445d305e27b5fba11))
+* **vscode:** Confirm drag and drop ([1ded406](https://github.com/raas-dev/configent/commit/1ded40611db4a3e1b993b5a4432f220847bb48e2))
+* **vscode:** Fix copy/paste/cut in input boxes ([45ef0bc](https://github.com/raas-dev/configent/commit/45ef0bc592b3da8b9a0f5fb8f70fcb4748b8f56e))
+
 ### [1.130.11](https://github.com/raas-dev/configent/compare/1.130.10...1.130.11) (2025-01-08)
 
 
