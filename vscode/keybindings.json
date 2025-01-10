@@ -369,5 +369,21 @@
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+c",
     "when": "filesExplorerFocus"
+  },
+  {
+    "command": "workbench.action.zoomReset",
+    "key": "cmd+0"
+  },
+  {
+    "command": "-workbench.action.zoomReset",
+    "key": "cmd+numpad0"
+  },
+  {
+    "command": "-workbench.action.zoomIn",
+    "key": "shift+cmd+0"
+  },
+  {
+    "command": "-workbench.action.zoomOut",
+    "key": "shift+cmd+-"
   }
 ]
