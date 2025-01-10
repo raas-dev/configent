@@ -136,7 +136,6 @@
   "excalidraw.theme": "dark",
   "excel-viewer.showInfo": false,
   "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
   "extendedTerminalIntegration.statusBar.maxTerminalIcons": 4,
   "extendedTerminalIntegration.statusBar.preferLatestTerminals": true,
   "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
