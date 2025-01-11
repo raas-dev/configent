@@ -21,7 +21,7 @@ cargo-binstall = 'latest'
 'cargo:procs' = 'latest'
 'cargo:ripgrep' = 'latest'
 'cargo:sd' = 'latest'
-'cargo:starship' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_starship" }
+'cargo:starship' = { version = '1.22.1', postinstall = "~/.local/configent/bin/postinstall_starship" }
 'cargo:tailspin' = 'latest'
 'cargo:xh' = 'latest'
 'cargo:zoxide' = 'latest'
