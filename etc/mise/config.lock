@@ -228,17 +228,9 @@ backend = "npm:yarn"
 version = "0.71.0"
 backend = "pipx:aider-chat"
 
-[tools."pipx:cfn-lint"]
-version = "1.22.4"
-backend = "pipx:cfn-lint"
-
 [tools."pipx:glances"]
 version = "4.3.0.8"
 backend = "pipx:glances"
-
-[tools."pipx:gptme"]
-version = "0.25.0"
-backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
 version = "2.22.2"
@@ -278,6 +270,13 @@ backend = "aqua:koalaman/shellcheck"
 
 [tools.shellcheck.checksums]
 "shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
+
+[tools.tflint]
+version = "0.54.0"
+backend = "aqua:terraform-linters/tflint"
+
+[tools.tflint.checksums]
+"tflint_darwin_arm64.zip" = "sha256:d96ad0781423dbf74bcc2d24b4026aff03d914b22f73aa488d3dc3436fa9ebe7"
 
 [tools.tmux]
 version = "3.5a"
