@@ -17,11 +17,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:64a70fe290bd6391a09d555d4e4e1a8df56543e526bb1381ab344a385348572c"
 
 [tools.cargo-binstall]
-version = "1.10.19"
+version = "1.10.20"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:e6abcd57e2918f50f85117e80799ef525876b4e109a5126561ed69f89bb79ee5"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:48a790152a0a022b9aad4448b2d29f2057c217049f388c84cdd6566d5c4b5c13"
 
 [tools."cargo:aichat"]
 version = "0.26.0"
@@ -225,7 +225,7 @@ version = "1.22.22"
 backend = "npm:yarn"
 
 [tools."pipx:aider-chat"]
-version = "0.70.0"
+version = "0.71.0"
 backend = "pipx:aider-chat"
 
 [tools."pipx:glances"]
@@ -237,7 +237,7 @@ version = "0.25.0"
 backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
-version = "2.22.1"
+version = "2.22.2"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
@@ -287,19 +287,15 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.58.1_macOS-ARM64.tar.gz" = "sha256:499a64a911a1ac80fcc26d619cdc1bdb05528d8b1bd0490f01a8324aa6ec6e13"
 
 [tools.usage]
-version = "1.7.4"
+version = "2.0.3"
 backend = "ubi:jdx/usage"
 
 [tools.usage.checksums]
-usage-macos-aarch64 = "sha256:c20888772f759eb418de24544f2eaabe3fbd3696ed1710bba25de233a79ffa2b"
+usage-macos-aarch64 = "sha256:9810318df49c9b1d807d63d0cebdda99e54595b456f851417f0dfd9890ce1102"
 
 [tools.uv]
-version = "0.5.16"
+version = "0.5.17"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:0b16039f469df078c1445f5b7f84d3c0342580c4592b5a4b604db2c86dc37c3e"
-
-[tools."vfox:jdx/vfox-clang"]
-version = "18.1.8"
-backend = "vfox:jdx/vfox-clang"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:9e041a7c0bbd8a653b2272e03ba5de5b726dcbbccc3ffcc526dc7de9f14ad334"
