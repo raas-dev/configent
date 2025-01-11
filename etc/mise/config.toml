@@ -77,7 +77,6 @@ awscli = '2.22.26'
 azure-cli = { version = '2.67.0', postinstall = "~/.local/configent/bin/postinstall_azure" }
 #gcloud = '504.0.1'
 #terraform = '1.10.3'
-#tfsec = '1.28.11'
 #kubectl = '1.32.0'
 #krew = { version = '0.4.4', postinstall = "krew install ctx ns" }
 #helm = '3.16.4'
