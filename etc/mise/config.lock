@@ -228,6 +228,10 @@ backend = "npm:yarn"
 version = "0.71.0"
 backend = "pipx:aider-chat"
 
+[tools."pipx:cfn-lint"]
+version = "1.22.4"
+backend = "pipx:cfn-lint"
+
 [tools."pipx:glances"]
 version = "4.3.0.8"
 backend = "pipx:glances"
