@@ -222,7 +222,9 @@
   "terminal.external.osxExec": "Terminal.app",
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.terminal.focusNext",
-    "workbench.action.terminal.focusPrevious"
+    "workbench.action.terminal.focusNextPane",
+    "workbench.action.terminal.focusPrevious",
+    "workbench.action.terminal.focusPreviousPane"
   ],
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "zsh",
