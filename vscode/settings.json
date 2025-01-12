@@ -96,6 +96,8 @@
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.chat.terminalShowHoverHint": false,
   "dateTime.showSeconds": true,
+  "dateTime.statusBarAlignment": "left",
+  "dateTime.statusBarPriority": 10000,
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
