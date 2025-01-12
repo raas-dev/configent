@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.13](https://github.com/raas-dev/configent/compare/1.130.12...1.130.13) (2025-01-12)
+
+
+### Fixes
+
+* **aichat:** Give shorter responses ([39ad584](https://github.com/raas-dev/configent/commit/39ad5841a80950c0e086ade0ac0d0804e93b2f04))
+* **settings:** Skip more terminal commands ([846a0d2](https://github.com/raas-dev/configent/commit/846a0d287f5275f08322b4bf3aa5c0b15e241597))
+* **terraform:** Remove tfsec, move to Trivy ([19bb02c](https://github.com/raas-dev/configent/commit/19bb02cfeb3d8d5bd92ce23e0898bf3286465178))
+* **vscode:** Add commands to skip in shell ([251ac10](https://github.com/raas-dev/configent/commit/251ac1069219d67a4d8b3e700d50738a9c240f96))
+* **vscode:** NOT prefer latest terminals on switch ([c2f72e0](https://github.com/raas-dev/configent/commit/c2f72e0a6230e9701e1c218506fa2b270480dc04))
+* **vscode:** Remove mise extension ([2f8629c](https://github.com/raas-dev/configent/commit/2f8629c06d10300e4588c5af74891205c0d6395e))
+
 ### [1.130.12](https://github.com/raas-dev/configent/compare/1.130.11...1.130.12) (2025-01-10)
 
 
