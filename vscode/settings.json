@@ -111,6 +111,7 @@
   "editor.fontSize": 17,
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
+  "editor.indentSize": "tabSize",
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.letterSpacing": -0.5,
   "editor.lineHeight": 14,
@@ -242,6 +243,7 @@
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.environmentChangesRelaunch": false,
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
