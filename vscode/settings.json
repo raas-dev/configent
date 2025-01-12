@@ -181,6 +181,7 @@
     "worktrees": true
   },
   "go.survey.prompt": false,
+  "go.terminal.activateEnvironment": false,
   "go.toolsManagement.checkForUpdates": "off",
   "go.useLanguageServer": true,
   "hediet.vscode-drawio.resizeImages": null,
