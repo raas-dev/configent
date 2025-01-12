@@ -25,6 +25,7 @@ dnicolson.binary-plist
 eamodio.gitlens
 editorconfig.editorconfig
 esbenp.prettier-vscode
+fabiospampinato.vscode-statusbar-debugger
 formulahendry.code-runner
 fregante.ghost-text
 github.vscode-github-actions
@@ -74,6 +75,7 @@ teabyii.ayu
 teticio.python-envy
 tomoki1207.pdf
 unifiedjs.vscode-mdx
+usernamehw.errorlens
 visualstudioexptteam.intellicode-api-usage-examples
 visualstudioexptteam.vscodeintellicode
 wayou.vscode-todo-highlight
