@@ -99,6 +99,7 @@
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
+  "docker.dockerPath": "docker",
   "docker.images.checkForOutdatedImages": false,
   "dotnetAcquisitionExtension.enableTelemetry": false,
   "editor.acceptSuggestionOnEnter": "off",
