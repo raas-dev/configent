@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.14](https://github.com/raas-dev/configent/compare/1.130.13...1.130.14) (2025-01-12)
+
+
+### Fixes
+
+* **settings:** Remove unused Python settings ([c1d1e91](https://github.com/raas-dev/configent/commit/c1d1e917c0fda886be231809b9313532891e3764))
+* **vscode:** Add extensions for debugging ([fcbd4bf](https://github.com/raas-dev/configent/commit/fcbd4bf392b03eae5d5c7df38eade1a19aef4d43))
+* **vscode:** Move statusbar clock left ([517e774](https://github.com/raas-dev/configent/commit/517e774d3fd097991310a0ce7e4a6d56bb8ab077))
+* **vscode:** Remove trivy, lack of config support ([e08ca4d](https://github.com/raas-dev/configent/commit/e08ca4dddf24180dbfe5aeb9d475206b7e4a1b68))
+
 ### [1.130.13](https://github.com/raas-dev/configent/compare/1.130.12...1.130.13) (2025-01-12)
 
 
