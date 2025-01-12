@@ -225,7 +225,7 @@ version = "1.22.22"
 backend = "npm:yarn"
 
 [tools."pipx:aider-chat"]
-version = "0.71.0"
+version = "0.71.1"
 backend = "pipx:aider-chat"
 
 [tools."pipx:glances"]
@@ -241,7 +241,7 @@ version = "1.49.1"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
-version = "2.0.0"
+version = "2.0.1"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
