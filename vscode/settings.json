@@ -91,6 +91,7 @@
   "codeium.enableCodeLens": false,
   "codeium.enableInComments": false,
   "continue.enableTabAutocomplete": true,
+  "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
