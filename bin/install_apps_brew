@@ -38,7 +38,7 @@ brew install findutils
 #brew install gnu-time
 #brew install gnu-which
 
-# Common build-tiime requirement
+# Common build-time requirement
 brew install cmake
 
 # GNU bins NOT prepended to PATH on macOS in .profile
