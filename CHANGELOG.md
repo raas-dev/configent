@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.15](https://github.com/raas-dev/configent/compare/1.130.14...1.130.15) (2025-01-14)
+
+
+### Fixes
+
+* **cargo:** Lock gitui ([43c632d](https://github.com/raas-dev/configent/commit/43c632ddd262dc956f826652923d07d2d611c9c5))
+* **macos:** Cmake ([9e00128](https://github.com/raas-dev/configent/commit/9e00128fb297b6e8106458d723431db18ceaa0d9))
+* **vscode:** Remove extended terminal extension ([01225dc](https://github.com/raas-dev/configent/commit/01225dca94da73c03c52590d84a1e2f901bf2d91))
+
 ### [1.130.14](https://github.com/raas-dev/configent/compare/1.130.13...1.130.14) (2025-01-12)
 
 
