@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.131.0](https://github.com/raas-dev/configent/compare/1.130.15...1.131.0) (2025-01-15)
+
+
+### Features
+
+* **vscode:** Add more terminal keybindings ([ae0d26b](https://github.com/raas-dev/configent/commit/ae0d26bbe7e9ef99c666dbcc0d20bc70223b5505))
+
+
+### Fixes
+
+* **lima:** Set explicit DNS servers ([66d6f03](https://github.com/raas-dev/configent/commit/66d6f03c3f9128ab767352ae4f04a1cdb7b287e8))
+
 ### [1.130.15](https://github.com/raas-dev/configent/compare/1.130.14...1.130.15) (2025-01-14)
 
 
