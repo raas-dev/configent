@@ -35,21 +35,6 @@
     "when": "terminalFocus"
   },
   {
-    "command": "workbench.action.terminal.resizePaneUp",
-    "key": "ctrl+s ctrl+up",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "workbench.action.terminal.resizePaneLeft",
-    "key": "ctrl+s ctrl+left",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "workbench.action.terminal.resizePaneRight",
-    "key": "ctrl+s ctrl+right",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
     "command": "workbench.action.quickOpenTerm",
     "key": "ctrl+s w"
   },
@@ -100,7 +85,17 @@
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+s ctrl+right",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
     "key": "ctrl+s l",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+s ctrl+l",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
@@ -110,7 +105,17 @@
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+s ctrl+up",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
     "key": "ctrl+s j",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+s ctrl+j",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
@@ -120,7 +125,17 @@
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+s ctrl+left",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
     "key": "ctrl+s h",
+    "when": "terminalFocus && panelPosition == 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+s ctrl+h",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
@@ -130,7 +145,17 @@
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+s ctrl+down",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
     "key": "ctrl+s k",
+    "when": "terminalFocus && panelPosition != 'bottom'"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+s ctrl+k",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
@@ -386,21 +411,6 @@
     "key": "shift+cmd+-"
   },
   {
-    "command": "-workbench.action.terminal.resizePaneLeft",
-    "key": "ctrl+cmd+left",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "-workbench.action.terminal.resizePaneDown",
-    "key": "ctrl+cmd+down",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "-workbench.action.terminal.resizePaneRight",
-    "key": "ctrl+cmd+right",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
     "command": "-workbench.action.terminal.focusNextPane",
     "key": "alt+cmd+right",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
@@ -408,16 +418,6 @@
   {
     "command": "-workbench.action.terminal.focusNextPane",
     "key": "alt+cmd+down",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "-workbench.action.terminal.resizePaneUp",
-    "key": "ctrl+cmd+up",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "workbench.action.terminal.resizePaneDown",
-    "key": "ctrl+s ctrl+down",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
