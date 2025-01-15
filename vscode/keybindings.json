@@ -36,19 +36,18 @@
   },
   {
     "command": "workbench.action.terminal.resizePaneUp",
-    "key": "ctrl+s ctrl+up"
-  },
-  {
-    "command": "workbench.action.terminal.resizePaneDown",
-    "key": "ctrl+s ctrl+down"
+    "key": "ctrl+s ctrl+up",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
     "command": "workbench.action.terminal.resizePaneLeft",
-    "key": "ctrl+s ctrl+left"
+    "key": "ctrl+s ctrl+left",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
     "command": "workbench.action.terminal.resizePaneRight",
-    "key": "ctrl+s ctrl+right"
+    "key": "ctrl+s ctrl+right",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
     "command": "workbench.action.quickOpenTerm",
@@ -101,7 +100,7 @@
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+s ctrl+right",
+    "key": "ctrl+s l",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
@@ -111,7 +110,7 @@
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+s ctrl+up",
+    "key": "ctrl+s j",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
@@ -121,7 +120,7 @@
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+s ctrl+left",
+    "key": "ctrl+s h",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
@@ -131,7 +130,7 @@
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+s ctrl+down",
+    "key": "ctrl+s k",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
@@ -194,7 +193,7 @@
   },
   {
     "command": "workbench.action.terminal.goToRecentDirectory",
-    "key": "ctrl+s j"
+    "key": "ctrl+s g"
   },
   {
     "command": "code-runner.run",
@@ -385,5 +384,179 @@
   {
     "command": "-workbench.action.zoomOut",
     "key": "shift+cmd+-"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneLeft",
+    "key": "ctrl+cmd+left",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneDown",
+    "key": "ctrl+cmd+down",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneRight",
+    "key": "ctrl+cmd+right",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNextPane",
+    "key": "alt+cmd+right",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNextPane",
+    "key": "alt+cmd+down",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneUp",
+    "key": "ctrl+cmd+up",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneDown",
+    "key": "ctrl+s ctrl+down",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "key": "alt+cmd+up",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "key": "alt+cmd+left",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.chat.attachContext",
+    "key": "shift+cmd+7",
+    "when": "inChatInput && chatLocation == 'editing-session' || inChatInput && chatLocation == 'editor' || inChatInput && chatLocation == 'notebook' || inChatInput && chatLocation == 'panel' || inChatInput && chatLocation == 'terminal'"
+  },
+  {
+    "command": "-workbench.action.terminal.split",
+    "key": "ctrl+shift+5",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "command": "-workbench.action.terminal.splitActiveTab",
+    "key": "ctrl+alt+cmd+[Minus]",
+    "when": "terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.splitActiveTab",
+    "key": "ctrl+shift+alt+cmd+7",
+    "when": "terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.splitActiveTab",
+    "key": "ctrl+shift+5",
+    "when": "terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.split",
+    "key": "ctrl+alt+cmd+[Minus]",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "command": "-workbench.action.terminal.split",
+    "key": "ctrl+shift+alt+cmd+7",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNext",
+    "key": "ctrl+shift+alt+cmd+9",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNext",
+    "key": "ctrl+alt+cmd+0",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.focusPrevious",
+    "key": "ctrl+shift+alt+cmd+8",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.focusPrevious",
+    "key": "ctrl+alt+cmd+7",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.focusTabs",
+    "key": "ctrl+alt+cmd+[Backquote]",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+shift+[Equal]",
+    "when": "terminal.active"
+  },
+  {
+    "command": "-workbench.action.terminal.goToRecentDirectory",
+    "key": "cmd+g",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.killEditor",
+    "key": "cmd+w",
+    "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated || terminalEditorFocus && terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "workbench.action.terminal.openDetectedLink",
+    "key": "ctrl+s o"
+  },
+  {
+    "command": "-workbench.action.terminal.openDetectedLink",
+    "key": "shift+cmd+o",
+    "when": "terminalFocus && terminalHasBeenCreated"
+  },
+  {
+    "command": "-workbench.action.terminal.runRecentCommand",
+    "key": "ctrl+alt+r",
+    "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled"
+  },
+  {
+    "command": "workbench.action.terminal.focusTabs",
+    "key": "ctrl+s f"
+  },
+  {
+    "command": "workbench.action.terminal.openUrlLink",
+    "key": "ctrl+s u"
+  },
+  {
+    "command": "workbench.action.terminal.openFileLink",
+    "key": "ctrl+s i"
+  },
+  {
+    "command": "workbench.action.terminal.detachSession",
+    "key": "ctrl+s q"
+  },
+  {
+    "command": "workbench.action.terminal.paste",
+    "key": "ctrl+s v"
+  },
+  {
+    "command": "workbench.action.terminal.unsplit",
+    "key": "ctrl+s [Period]"
+  },
+  {
+    "command": "workbench.action.terminal.moveToEditor",
+    "key": "ctrl+s m"
+  },
+  {
+    "command": "workbench.action.terminal.copyLastCommandOutput",
+    "key": "ctrl+s y"
+  },
+  {
+    "command": "workbench.action.terminal.attachToSession",
+    "key": "ctrl+s space"
+  },
+  {
+    "command": "workbench.action.terminal.newWithProfile",
+    "key": "ctrl+s b"
   }
 ]
