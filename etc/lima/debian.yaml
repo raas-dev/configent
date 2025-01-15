@@ -35,6 +35,10 @@ containerd:
   user: true
 
 provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   # Add iptables to $PATH for nerdctl
   # See: https://github.com/containerd/nerdctl/discussions/1536
   - mode: system
@@ -64,8 +68,11 @@ probes:
       If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
 
 hostResolver:
-  hosts:
-    host.docker.internal: host.lima.internal
+  enabled: false
+
+dns:
+  - 1.1.1.1
+  - 1.0.0.1
 
 copyToHost:
   - guest: "/etc/rancher/k3s/k3s.yaml"
