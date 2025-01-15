@@ -212,6 +212,7 @@
     "jupyter-notebook": "left"
   },
   "powershell.integratedConsole.showOnStartup": false,
+  "powershell.integratedConsole.suppressStartupBanner": true,
   "powershell.powerShellAdditionalExePaths": {
     "mise": "~/.local/share/mise/shims"
   },
@@ -292,7 +293,8 @@
   "terminal.integrated.tabStopWidth": 4,
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.hideCondition": "never",
-  "terminal.integrated.tabs.showActions": "always",
+  "terminal.integrated.tabs.showActions": "never",
+  "terminal.integrated.tabs.showActiveTerminal": "never",
   "terraform.codelens.referenceCount": true,
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
