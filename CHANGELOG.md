@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.131.1](https://github.com/raas-dev/configent/compare/1.131.0...1.131.1) (2025-01-16)
+
+
+### Fixes
+
+* **vscode:** Add terminal panel focus keybindings ([83b8cb6](https://github.com/raas-dev/configent/commit/83b8cb6374c999793fc16f1060028a1e284e25e3))
+* **vscode:** Open panel maximized always ([afe47a8](https://github.com/raas-dev/configent/commit/afe47a8b339ea7807ad9a7065546bd43cc3a0f61))
+* **vscode:** Tidy terminal view ([da5bb16](https://github.com/raas-dev/configent/commit/da5bb16647c6fadcf01ac88f36ded35161da6fb9))
+
 ## [1.131.0](https://github.com/raas-dev/configent/compare/1.130.15...1.131.0) (2025-01-15)
 
 
