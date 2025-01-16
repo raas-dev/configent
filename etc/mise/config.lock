@@ -290,8 +290,8 @@ backend = "ubi:jdx/usage"
 usage-macos-aarch64 = "sha256:9810318df49c9b1d807d63d0cebdda99e54595b456f851417f0dfd9890ce1102"
 
 [tools.uv]
-version = "0.5.18"
+version = "0.5.20"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:13bcde0a15c50af976980b484f140e10969df67488542856a2152534f255c675"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:d7f0c219808073f8ae8c6a991e85e5c7539b4e539b014a4ca5b3286911f06fd5"
