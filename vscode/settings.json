@@ -346,6 +346,7 @@
   },
   "workbench.iconTheme": "ayu",
   "workbench.list.smoothScrolling": true,
+  "workbench.panel.opensMaximized": "always",
   "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
   "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
   "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
