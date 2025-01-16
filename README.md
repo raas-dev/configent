@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc in a container.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
-- Uses AI assistant to analyse the task and execute the best AI agent for it.
+- Provides AI assistant to select and execute the best AI agent for your task.
 
 | ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
 | --------------------------------------------------------------------------- |
