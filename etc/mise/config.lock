@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.0.0"
+version = "16.1.0"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
@@ -92,7 +92,7 @@ version = "0.10.0"
 backend = "cargo:pastel"
 
 [tools."cargo:procs"]
-version = "0.14.8"
+version = "0.14.9"
 backend = "cargo:procs"
 
 [tools."cargo:ripgrep"]
