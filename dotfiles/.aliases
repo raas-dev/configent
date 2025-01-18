@@ -210,6 +210,9 @@ alias gti='git'
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
 
+# Display public DNS server
+alias dns='dig +short whoami.akamai.net'
+
 # Display public IP
 alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
 alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
