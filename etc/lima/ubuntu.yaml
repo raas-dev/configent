@@ -61,9 +61,10 @@ probes:
 hostResolver:
   enabled: false
 
-dns:
-  - 1.1.1.1
-  - 1.0.0.1
+# https://lima-vm.io/docs/config/network/#dns-19216853
+#dns:
+#  - 1.1.1.1
+#  - 1.0.0.1
 
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/docker.sock"
