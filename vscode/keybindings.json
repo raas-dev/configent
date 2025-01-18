@@ -344,11 +344,6 @@
     "when": "editorTextFocus && inDebugMode"
   },
   {
-    "command": "-workbench.debug.panel.action.clearReplAction",
-    "key": "cmd+k",
-    "when": "focusedView == 'workbench.panel.repl.view'"
-  },
-  {
     "command": "-continue.focusEditWithoutClear",
     "key": "shift+cmd+i"
   },
@@ -556,8 +551,8 @@
   },
   {
     "command": "workbench.action.pinEditor",
-    "key": "cmd+enter",
-    "when": "editorFocus && !activeEditorIsPinned"
+    "key": "cmd+k p",
+    "when": "!activeEditorIsPinned"
   },
   {
     "command": "-workbench.action.pinEditor",
@@ -566,8 +561,8 @@
   },
   {
     "command": "workbench.action.unpinEditor",
-    "key": "cmd+enter",
-    "when": "editorFocus && activeEditorIsPinned"
+    "key": "cmd+k p",
+    "when": "activeEditorIsPinned"
   },
   {
     "command": "-workbench.action.unpinEditor",
