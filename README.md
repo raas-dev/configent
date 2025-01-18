@@ -27,7 +27,7 @@ Works on x86-64 and ARM:
 - macOS Sequoia (15), Sonoma (14) and Ventura (13)
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
-- Fedora Linux 38, 37 and 36
+- Fedora Linux 41, 40 and 39
 - CentOS Stream 9 and 8
 - AlmaLinux 9 and 8
 - Rocky Linux 9 and 8
