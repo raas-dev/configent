@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.131.4](https://github.com/raas-dev/configent/compare/1.131.3...1.131.4) (2025-01-18)
+
+
+### Fixes
+
+* **lima:** Use user-v2 network by default ([7793b3a](https://github.com/raas-dev/configent/commit/7793b3aebb87c934e8af9b97c1860806d786c711))
+* **vscode:** Change keybinding for pin/unpin tab ([650b9df](https://github.com/raas-dev/configent/commit/650b9df9d80fba93ee8fb57fbf46aecce2b7871a))
+
 ### [1.131.3](https://github.com/raas-dev/configent/compare/1.131.2...1.131.3) (2025-01-18)
 
 
