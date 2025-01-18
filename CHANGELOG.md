@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.132.1](https://github.com/raas-dev/configent/compare/1.132.0...1.132.1) (2025-01-18)
+
+
+### Fixes
+
+* **centos:** Remove legacyBIOS to enable macOS vz support ([09eea98](https://github.com/raas-dev/configent/commit/09eea98a2aac4e31163ed4cb2a7fec2e0fa33c16))
+* **yum:** Install which ([cdd9809](https://github.com/raas-dev/configent/commit/cdd9809e6c3323bb6a1ebf35ef4bb7f01ec387b2))
+
 ## [1.132.0](https://github.com/raas-dev/configent/compare/1.131.5...1.132.0) (2025-01-18)
 
 
