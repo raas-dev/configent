@@ -58,13 +58,9 @@ probes:
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
 
+# https://lima-vm.io/docs/config/network
 hostResolver:
-  enabled: false
-
-# https://lima-vm.io/docs/config/network/#dns-19216853
-#dns:
-#  - 1.1.1.1
-#  - 1.0.0.1
+  enabled: true
 
 portForwards:
   - guestSocket: "/run/user/{{.UID}}/docker.sock"
