@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.131.3](https://github.com/raas-dev/configent/compare/1.131.2...1.131.3) (2025-01-18)
+
+
+### Fixes
+
+* **aliases:** Rename alias ip to ipv4 ([5377c0c](https://github.com/raas-dev/configent/commit/5377c0c59e3763e9602752e1dde798c35decdb47))
+* **keybindings:** Fix keybinding conflicts ([5a21eed](https://github.com/raas-dev/configent/commit/5a21eedd02aa4d52af390aaed96fd18fcda25956))
+* **lima:** Use macOS vzNAT for Ubuntu and Debian VMs ([2914735](https://github.com/raas-dev/configent/commit/2914735d9a019df5a5d289c537af2259802e78ca))
+
 ### [1.131.2](https://github.com/raas-dev/configent/compare/1.131.1...1.131.2) (2025-01-18)
 
 
