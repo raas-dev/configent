@@ -6,6 +6,7 @@ images:
     arch: "aarch64"
     digest: "sha256:a4cbd35010ae0ce7437b2855e5f6f6f03124784ca2aaa5c111563f64e03301e4"
 
+mountTypesUnsupported: ["9p"]
 mounts:
   - location: "~/configent"
     writable: false

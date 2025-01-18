@@ -12,6 +12,7 @@ images:
 firmware:
   legacyBIOS: true
 
+mountTypesUnsupported: ["9p"]
 mounts:
   - location: "~/configent"
     writable: false
