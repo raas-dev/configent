@@ -10,11 +10,11 @@ version = "2.67.0"
 backend = "asdf:https://github.com/asyrjasalo/asdf-azure-cli"
 
 [tools.bun]
-version = "1.1.42"
+version = "1.1.45"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:64a70fe290bd6391a09d555d4e4e1a8df56543e526bb1381ab344a385348572c"
+"bun-darwin-aarch64.zip" = "sha256:2cc497daee4817aa6ce3e258ebf17262bc4202e5276871f18748aa928254bd66"
 
 [tools.cargo-binstall]
 version = "1.10.21"
