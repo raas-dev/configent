@@ -349,11 +349,6 @@
     "when": "focusedView == 'workbench.panel.repl.view'"
   },
   {
-    "command": "continue.focusEditWithoutClear",
-    "key": "cmd+k",
-    "when": "editorFocus"
-  },
-  {
     "command": "-continue.focusEditWithoutClear",
     "key": "shift+cmd+i"
   },
@@ -558,5 +553,29 @@
   {
     "command": "workbench.action.terminal.newWithProfile",
     "key": "ctrl+s b"
+  },
+  {
+    "command": "workbench.action.pinEditor",
+    "key": "cmd+enter",
+    "when": "editorFocus && !activeEditorIsPinned"
+  },
+  {
+    "command": "-workbench.action.pinEditor",
+    "key": "cmd+k shift+enter",
+    "when": "!activeEditorIsPinned"
+  },
+  {
+    "command": "workbench.action.unpinEditor",
+    "key": "cmd+enter",
+    "when": "editorFocus && activeEditorIsPinned"
+  },
+  {
+    "command": "-workbench.action.unpinEditor",
+    "key": "cmd+k shift+enter",
+    "when": "activeEditorIsPinned"
+  },
+  {
+    "command": "continue.focusEditWithoutClear",
+    "key": "shift+cmd+i"
   }
 ]
