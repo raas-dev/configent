@@ -1,17 +1,13 @@
 images:
-# Hint: run `limactl prune` to invalidate the "Current" cache
-- location: "https://download.opensuse.org/distribution/leap/15.4/appliances/openSUSE-Leap-15.4-JeOS.x86_64-15.4-OpenStack-Cloud-Current.qcow2"
-  arch: "x86_64"
-- location: "https://download.opensuse.org/distribution/leap/15.4/appliances/openSUSE-Leap-15.4-ARM-JeOS-efi.aarch64.qcow2"
-  arch: "aarch64"
-# download.opensuse.org is inaccessible from Japan (500 Internal Server Error)
-# https://bugzilla.opensuse.org/show_bug.cgi?id=1210240
-# NOTE: the file name on provo-mirror.opensuse.org lacks the "-Current" suffix.
-- location: "https://provo-mirror.opensuse.org/distribution/leap/15.4/appliances/openSUSE-Leap-15.4-JeOS.x86_64-OpenStack-Cloud.qcow2"
-  arch: "x86_64"
-- location: "https://provo-mirror.opensuse.org/distribution/leap/15.4/appliances/openSUSE-Leap-15.4-ARM-JeOS-efi.aarch64.qcow2"
-  arch: "aarch64"
+  - location: "https://download.opensuse.org/distribution/leap/15.6/appliances/openSUSE-Leap-15.6-Minimal-VM.x86_64-Cloud.qcow2"
+    arch: "x86_64"
+  - location: "https://download.opensuse.org/distribution/leap/15.6/appliances/openSUSE-Leap-15.6-Minimal-VM.aarch64-Cloud.qcow2"
+    arch: "aarch64"
 
+# Hint: to allow 9p and virtiofs, replace the `kernel-default-base` package with `kernel-default` and reboot the VM.
+# https://github.com/lima-vm/lima/issues/3055
+mountType: "reverse-sshfs"
+mountTypesUnsupported: ["9p", "virtiofs"]
 mounts:
   - location: "~/configent"
     writable: false

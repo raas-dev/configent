@@ -54,7 +54,7 @@ $SUDO zypper install -y bash
 # Zsh
 $SUDO zypper install -y zsh
 
-# git-extras, not available in OpenSUSE (as of 2023-07)
+# git-extras, not available in OpenSUSE (as of 2025-01)
 #$SUDO zypper install -y git-extras
 
 # GNU awk
@@ -70,7 +70,7 @@ $SUDO zypper install -y ctags
 # $SUDO zypper install -y fetchmsttfonts
 
 # Docker (rootless)
-$SUDO zypper install -y fuse-overlayfs
+$SUDO zypper install -y fuse-overlayfs iptables
 $SUDO modprobe ip_tables iptable_mangle iptable_nat iptable_filter
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus

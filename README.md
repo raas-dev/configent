@@ -32,7 +32,7 @@ Works on x86-64 and ARM:
 - AlmaLinux 9 and 8
 - Rocky Linux 9 and 8
 - Oracle Linux 9 and 8
-- openSUSE Leap 15.4
+- openSUSE Leap 15
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.19, 3.18 and 3.17
 
