@@ -74,6 +74,9 @@ hostResolver:
 #  - 1.1.1.1
 #  - 1.0.0.1
 
+networks:
+- vzNAT: true
+
 copyToHost:
   - guest: "/etc/rancher/k3s/k3s.yaml"
     host: "{{.Dir}}/kubeconfig.yaml"
