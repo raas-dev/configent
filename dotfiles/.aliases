@@ -214,7 +214,7 @@ alias cwd='pwd | tr -d "\n" | pbcopy'
 alias dns='dig +short whoami.akamai.net'
 
 # Display public IP
-alias ip='curl --silent --ipv4 https://ifconfig.co/json | jq .'
+alias ipv4='curl --silent --ipv4 https://ifconfig.co/json | jq .'
 alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
 
 # Display PATH content
