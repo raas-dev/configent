@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.132.0](https://github.com/raas-dev/configent/compare/1.131.5...1.132.0) (2025-01-18)
+
+
+### Features
+
+* **lima:** Update Fedora to 41 ([6bf9adf](https://github.com/raas-dev/configent/commit/6bf9adff58caf66fa1ab86ed94711f1f0e3991c8))
+* **lima:** Update to CentOS Stream 10 ([2fc5a94](https://github.com/raas-dev/configent/commit/2fc5a94f2085cdf57e689680132ebcf47ad2a3d5))
+
+
+### Fixes
+
+* **lima:** Add forward podman.sock for Fedora ([4057aa2](https://github.com/raas-dev/configent/commit/4057aa22a4292cd66b69a9d4cabb885a3aa58b91))
+* **lima:** Exclude 9p mount type for CentOS-likes ([e9992cc](https://github.com/raas-dev/configent/commit/e9992cca15a52e69b7ab03aef6f5170571cc1739))
+* **mise:** Use latest bun ([31d8eaa](https://github.com/raas-dev/configent/commit/31d8eaa826d1d3879aad99feba084fa711a0c1b2))
+
 ### [1.131.5](https://github.com/raas-dev/configent/compare/1.131.4...1.131.5) (2025-01-18)
 
 
