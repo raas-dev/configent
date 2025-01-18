@@ -56,3 +56,7 @@ probes:
 
 hostResolver:
   enabled: false
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - lima: user-v2

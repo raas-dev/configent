@@ -74,8 +74,9 @@ hostResolver:
 #  - 1.1.1.1
 #  - 1.0.0.1
 
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:
-- vzNAT: true
+  - lima: user-v2
 
 copyToHost:
   - guest: "/etc/rancher/k3s/k3s.yaml"
