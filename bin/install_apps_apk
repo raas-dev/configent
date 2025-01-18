@@ -92,8 +92,6 @@ $SUDO addgroup "$USER" docker
 $SUDO service docker start
 $SUDO rc-update add docker default
 
-# No Snap is available for Alpine Linux
-
 # Flatpak
 if [ "$FLATPAKS" != 'false' ]; then
   $SUDO apk add flatpak
