@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.133.0](https://github.com/raas-dev/configent/compare/1.132.1...1.133.0) (2025-01-18)
+
+
+### Features
+
+* **lima:** Update Alpine Linux to 3.20 ([8ce8872](https://github.com/raas-dev/configent/commit/8ce8872cd02ab3534ce0170427828b79da726e9a))
+* **opensuse:** Update openSUSE to 15.6 ([9fa0a8d](https://github.com/raas-dev/configent/commit/9fa0a8db1be6451ed7785190d1c13d6157ad0fd0))
+
 ### [1.132.1](https://github.com/raas-dev/configent/compare/1.132.0...1.132.1) (2025-01-18)
 
 
