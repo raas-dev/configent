@@ -51,9 +51,12 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Issues in dependencies
 
-- Neovim on Aarch64 Linux
+- Neovim on Aarch64 Linux:
   - Does not install by any available `mise` plugin as of 2025-01
     - Fix: Use repo
+
+- CentOS Stream 10:
+  - Reboot VM is required after installing `iptables` for Docker to work.
 
 - Alpine Linux (musl based Linux-distro):
   - See `mise` option `node.flavor = musl` for installing Node.js
