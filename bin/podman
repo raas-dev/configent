@@ -17,8 +17,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   if ! limactl shell "$NAME" true >/dev/null 2>&1; then
-    limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT ||
-      limactl start --name "$NAME" --vm-type=vz --network=vzNAT
+    limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+      limactl start --name "$NAME" --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
   fi
   # pass arguments to this exact same script on the guest VM
   limactl shell "$NAME" ~/configent/bin/podman "$@"
