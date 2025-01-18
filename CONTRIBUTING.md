@@ -58,10 +58,10 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 - CentOS Stream 10:
   - Reboot VM is required after installing `iptables` for Docker to work.
 
-- Alpine Linux (musl based Linux-distro):
-  - See `mise` option `node.flavor = musl` for installing Node.js
-    - Fix: https://mise.jdx.dev/lang/node.html#unofficial-builds
+- Alpine Linux (musl based distro):
+  - Mise starts compiling Node.js from source, which takes a long time
+    - Fix: See [node.flavor=musl](https://mise.jdx.dev/lang/node.html#unofficial-builds)
   - Rootless docker is not supported
-    - Fix: Re-login is after the initial install to be in `docker` group
+    - Fix: Reboot VM is required after install to be in `docker` group
   - Homebrew does not work due to musl (all architectures)
     - Fix: Use repo

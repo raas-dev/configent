@@ -27,14 +27,14 @@ Works on x86-64 and ARM:
 - macOS Sequoia (15), Sonoma (14) and Ventura (13)
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
-- Fedora Linux 41, 40 and 39
+- Fedora Linux 41 and 40
 - CentOS Stream 10 and 9
 - AlmaLinux 9 and 8
 - Rocky Linux 9 and 8
 - Oracle Linux 9 and 8
 - openSUSE Leap 15
 - Arch Linux (rolling; since 2022-07)
-- Alpine Linux 3.19, 3.18 and 3.17
+- Alpine Linux 3.20 and 3.19
 
 Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
 
