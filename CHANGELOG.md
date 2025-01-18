@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.131.2](https://github.com/raas-dev/configent/compare/1.131.1...1.131.2) (2025-01-18)
+
+
+### Fixes
+
+* **aliases:** Add alias to display dns server ([6a4da8d](https://github.com/raas-dev/configent/commit/6a4da8d09d3f04798c7e167da3ca66aff647a2b9))
+* **lima:** Use hostresolver for docker ([76971eb](https://github.com/raas-dev/configent/commit/76971eb32cd739fa24fb78ceb838625768401c10))
+* **lima:** Use hosts dns servers ([5646b67](https://github.com/raas-dev/configent/commit/5646b67c62629551a043bab74bd3116282e1d13c))
+
 ### [1.131.1](https://github.com/raas-dev/configent/compare/1.131.0...1.131.1) (2025-01-16)
 
 
