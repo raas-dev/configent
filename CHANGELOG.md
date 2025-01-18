@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.131.5](https://github.com/raas-dev/configent/compare/1.131.4...1.131.5) (2025-01-18)
+
+
+### Fixes
+
+* **lima:** Add GITHUB_TOKEN to guest /etc/environment ([6242220](https://github.com/raas-dev/configent/commit/62422206fda0a458ce84028aad4033788e962fba))
+* **lima:** Add support for vzNAT on macOS ([6ebd78a](https://github.com/raas-dev/configent/commit/6ebd78a80bf9006a679fddff59c90c053a24728f))
+
 ### [1.131.4](https://github.com/raas-dev/configent/compare/1.131.3...1.131.4) (2025-01-18)
 
 
