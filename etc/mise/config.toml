@@ -23,8 +23,8 @@ cargo-binstall = 'latest'
 'cargo:zoxide' = 'latest'
 # topgrade
 'cargo:cargo-cache' = 'latest' # https://github.com/matthiaskrgr/cargo-cache
-'cargo:cargo-update' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" } # https://github.com/nabijaczleweli/cargo-update
-'cargo:topgrade' = 'latest' #  https://github.com/topgrade-rs/topgrade
+'cargo:cargo-update' = 'latest' # https://github.com/nabijaczleweli/cargo-update
+'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" } #  https://github.com/topgrade-rs/topgrade
 # extras
 'cargo:kondo' = 'latest' # https://github.com/tbillington/kondo
 'cargo:nixpacks' = 'latest' # https://github.com/railwayapp/nixpacks
