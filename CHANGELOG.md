@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.133.3](https://github.com/raas-dev/configent/compare/1.133.2...1.133.3) (2025-01-19)
+
+
+### Fixes
+
+* **azure:** Fix installing az extensions ([2d1070b](https://github.com/raas-dev/configent/commit/2d1070b88097ed5dd12543136f463d8a3766442f))
+* **lima:** Update Ubuntu and Debian images ([de90e4d](https://github.com/raas-dev/configent/commit/de90e4df61c3549694c866de4ae75fb45de0e9a5))
+
 ### [1.133.2](https://github.com/raas-dev/configent/compare/1.133.1...1.133.2) (2025-01-19)
 
 
