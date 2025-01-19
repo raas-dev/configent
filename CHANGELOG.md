@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.133.4](https://github.com/raas-dev/configent/compare/1.133.3...1.133.4) (2025-01-19)
+
+
+### Fixes
+
+* **mise:** Fix topgrade postinstall ([946b043](https://github.com/raas-dev/configent/commit/946b04396198a0a40ca224918e41ca01d5d948b0))
+* **mise:** Remove broken autocmpletion ([e4a06c6](https://github.com/raas-dev/configent/commit/e4a06c623c1f2e3dc701cbc0200219ca29281278))
+* **profile:** Use command directly instead of which ([57fd9ad](https://github.com/raas-dev/configent/commit/57fd9adfec20141fc23d567471fa2fb727611863))
+
 ### [1.133.3](https://github.com/raas-dev/configent/compare/1.133.2...1.133.3) (2025-01-19)
 
 
