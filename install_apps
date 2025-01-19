@@ -54,6 +54,9 @@ fi
 # assumes `vim` is present at this point, install Vundle and vim plugins
 "$bin_path/setup_vundle"
 
+# Neovim setup is not a Mise postinstall script as `nvim` may already be present
+"$bin_path/setup_neovim"
+
 # install mise, and all tools which are not disabled in etc/mise/config.yml
 "$bin_path/install_mise"
 

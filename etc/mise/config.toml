@@ -88,7 +88,7 @@ azure-cli = { version = '2.67.0', postinstall = "~/.local/configent/bin/postinst
 #k9s = '0.32.7'
 #cloudflared = '2024.12.2'
 #flyctl = '0.3.56'
-neovim = { version = '0.10.3', postinstall = "~/.local/configent/bin/postinstall_neovim" }
+neovim = '0.10.3'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 #ollama = '0.5.4' # works on both macOS/Linux but autostarts on neither
 lima = '1.0.3'
