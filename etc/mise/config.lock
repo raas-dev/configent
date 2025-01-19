@@ -123,6 +123,13 @@ backend = "cargo:xh"
 version = "0.9.6"
 backend = "cargo:zoxide"
 
+[tools.cosign]
+version = "2.4.1"
+backend = "aqua:sigstore/cosign"
+
+[tools.cosign.checksums]
+cosign-darwin-arm64 = "sha256:13343856b69f70388c4fe0b986a31dde5958e444b41be22d785d3dc5e1a9cc62"
+
 [tools.dotnet]
 version = "8.0.404"
 backend = "asdf:dotnet"
@@ -270,6 +277,13 @@ backend = "aqua:koalaman/shellcheck"
 
 [tools.shellcheck.checksums]
 "shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
+
+[tools.slsa-verifier]
+version = "2.6.0"
+backend = "ubi:slsa-framework/slsa-verifier"
+
+[tools.slsa-verifier.checksums]
+slsa-verifier-macos-aarch64 = "sha256:8740e66832fd48bbaa479acd5310986b876ff545460add0cb4a087aec056189c"
 
 [tools.tmux]
 version = "3.5a"
