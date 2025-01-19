@@ -282,13 +282,6 @@ backend = "aqua:aquasecurity/trivy"
 [tools.trivy.checksums]
 "trivy_0.58.1_macOS-ARM64.tar.gz" = "sha256:499a64a911a1ac80fcc26d619cdc1bdb05528d8b1bd0490f01a8324aa6ec6e13"
 
-[tools.usage]
-version = "2.0.3"
-backend = "ubi:jdx/usage"
-
-[tools.usage.checksums]
-usage-macos-aarch64 = "sha256:9810318df49c9b1d807d63d0cebdda99e54595b456f851417f0dfd9890ce1102"
-
 [tools.uv]
 version = "0.5.21"
 backend = "aqua:astral-sh/uv"
