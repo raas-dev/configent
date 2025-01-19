@@ -51,32 +51,32 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
 
+- Neovim: Linux / Aarch64 (as of 2025-01)
+  - Any existing `mise` plugin does not install Aarch64 binary
+    - Fix: Install neovim from distro's repo
+
+- Docker: CentOS Stream 10 / all archs (as of 2025-01)
+  - After installing iptables from repo, `modproble iptables` fails until reboot
+    - Fix: Reboot is required after (first) bootstrap for Docker to run
+
+- Docker: Alpine Linux / all archs (as of 2025-01)
+  - Rootless docker is not supported
+    - Fix: Relogin is required after (first) bootstrap to be in `docker` group
+
+- Node.js: Alpine Linux / all archs (as of 2025-01)
+  - Mise starts compiling Node.js from source, which takes a long time
+    - Fix: See [node.flavor=musl](https://mise.jdx.dev/lang/node.html#unofficial-builds)
+
+- Homebrew: Alpine Linux / x86-64 (as of 2025)
+  - Homebrew on Linux does not work on musl based distros
+    - Workaround: Use `mise install` when possible, otherwise use `apk install`
+
+- Homebrew: Linux / Aarch64  (as of 2025)
+  - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
+    - Workaround: Use `mise install`
+
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
   - [ISSUE]
     - [FIX|WORKAROUND]
 ```
-
-- Neovim: Linux / Aarch64 (as of 2025-01):
-  - Any existing `mise` plugin does not install Aarch64 binary
-    - Fix: Install neovim from distro's repo
-
-- Docker: CentOS Stream 10 / all archs (as of 2025-01):
-  - After installing iptables from repo, `modproble iptables` fails until reboot
-    - Fix: Reboot is required after (first) bootstrap for Docker to run
-
-- Docker: Alpine Linux / all archs (as of 2025-01):
-  - Rootless docker is not supported
-    - Fix: Relogin is required after (first) bootstrap to be in `docker` group
-
-- Node.js: Alpine Linux / all archs (as of 2025-01):
-  - Mise starts compiling Node.js from source, which takes a long time
-    - Fix: See [node.flavor=musl](https://mise.jdx.dev/lang/node.html#unofficial-builds)
-
-- Homebrew: Alpine Linux / x86-64 (as of 2025):
-  - Homebrew on Linux does not work on musl based distros
-    - Workaround: Use `mise install` when possible, otherwise use `apk install`
-
-- Homebrew: Linux / Aarch64  (as of 2025):
-  - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-    - Workaround: Use `mise install`
