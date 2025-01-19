@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.133.1](https://github.com/raas-dev/configent/compare/1.133.0...1.133.1) (2025-01-19)
+
+
+### Fixes
+
+* **lima:** Update Arch Linux, remove LegacyBIOS ([42feed0](https://github.com/raas-dev/configent/commit/42feed076e8e3f57bc5c05365a511c255d80b412))
+* **linux:** Install neovim from repo ([45e4a34](https://github.com/raas-dev/configent/commit/45e4a34a3c37490e03b74528d53478a12fbdae74))
+* **neovim:** Run neovim setup always, no by mise ([18645a7](https://github.com/raas-dev/configent/commit/18645a7ce368040423291e91b2abd5e89faa9c12))
+
 ## [1.133.0](https://github.com/raas-dev/configent/compare/1.132.1...1.133.0) (2025-01-18)
 
 
