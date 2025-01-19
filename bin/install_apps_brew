@@ -54,6 +54,9 @@ brew install git-extras
 # Git extension for versioning large files
 brew install git-lfs
 
+# For cosign and slsa-verifier, used by mise for verifying checksums
+brew install gnupg
+
 # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
 brew install m-cli
 
