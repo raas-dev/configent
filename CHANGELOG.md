@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.133.2](https://github.com/raas-dev/configent/compare/1.133.1...1.133.2) (2025-01-19)
+
+
+### Fixes
+
+* **azure:** Fix install azure-cli ([3ce410d](https://github.com/raas-dev/configent/commit/3ce410d63c888c200211ee7206fb1a21aadce57a))
+
 ### [1.133.1](https://github.com/raas-dev/configent/compare/1.133.0...1.133.1) (2025-01-19)
 
 
