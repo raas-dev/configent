@@ -54,6 +54,12 @@ $SUDO pacman --noconfirm --needed -S bash
 # Zsh
 $SUDO pacman --noconfirm --needed -S zsh
 
+# Neovim
+$SUDO pacman --noconfirm --needed -S neovim
+
+# Use AUR for git-extras
+# See: https://pkgs.org/download/git-extras
+
 # GNU awk
 $SUDO pacman --noconfirm --needed -S gawk
 

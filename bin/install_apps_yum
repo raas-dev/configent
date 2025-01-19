@@ -58,6 +58,9 @@ $SUDO dnf install -y bash
 # Zsh
 $SUDO dnf install -y zsh
 
+# Neovim
+$SUDO dnf install -y neovim
+
 # git-extras, not available in CentOS Stream 9 (as of 2023-07)
 $SUDO dnf install -y git-extras
 
