@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.134.0](https://github.com/raas-dev/configent/compare/1.133.4...1.134.0) (2025-01-19)
+
+
+### Features
+
+* **macos:** Install gnupg ([1501d0a](https://github.com/raas-dev/configent/commit/1501d0a3fab3ea8a35b00c56c2f903c2896978bd))
+
+
+### Fixes
+
+* **mise:** Add support for cosign and slsa-verifier ([3dcc2e3](https://github.com/raas-dev/configent/commit/3dcc2e3b3b0c4d6b5a5096ef5c68dbaf14947603))
+* **mise:** Use .default-npm-packages over npm backend ([07929bc](https://github.com/raas-dev/configent/commit/07929bc86cfad556ae6a3fd75d89ae91d54e7456))
+* **node:** Update npm after install node ([c701a58](https://github.com/raas-dev/configent/commit/c701a5816e3a4308fe24f28d8df5d767161db43c))
+
 ### [1.133.4](https://github.com/raas-dev/configent/compare/1.133.3...1.133.4) (2025-01-19)
 
 
