@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.134.1](https://github.com/raas-dev/configent/compare/1.134.0...1.134.1) (2025-01-20)
+
+
+### Fixes
+
+* **lima:** Add support for openSUSE tumbleweed ([9e231ac](https://github.com/raas-dev/configent/commit/9e231ac1a3be9f1b9c901d38437ad3e019a9879e))
+* **opensuse:** Add missing development dependencies ([30552fc](https://github.com/raas-dev/configent/commit/30552fce040670064105df2e87a0d93a6a9e5289))
+
 ## [1.134.0](https://github.com/raas-dev/configent/compare/1.133.4...1.134.0) (2025-01-19)
 
 
