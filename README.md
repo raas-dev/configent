@@ -22,7 +22,9 @@ A few features:
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Ask AI (`a <question>`), ask assistant (`_`) or open a chat on (`ai <topic>`).
 
-Works on x86-64 and ARM:
+Works both on AArch64 (including Apple Silicon) and on x86-64.
+
+Supported operating systems:
 
 - macOS Sequoia (15), Sonoma (14) and Ventura (13)
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
@@ -32,7 +34,7 @@ Works on x86-64 and ARM:
 - AlmaLinux 9 and 8
 - Rocky Linux 9 and 8
 - Oracle Linux 9 and 8
-- openSUSE Leap 15
+- openSUSE Tumbleweed and Leap (15.6)
 - Arch Linux (rolling; since 2022-07)
 - Alpine Linux 3.20 and 3.19
 

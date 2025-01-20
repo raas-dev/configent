@@ -181,6 +181,7 @@ alias vm4rocky="limactl start --name rocky ~/.config/configent/lima/rocky.yaml -
 alias vm4oracle="limactl start --name oraclelinux ~/.config/configent/lima/oraclelinux.yaml --tty=false"
 
 alias vm4suse="limactl start --name opensuse ~/.config/configent/lima/opensuse.yaml --tty=false"
+alias vm4tumbleweed="limactl start --name tumbleweed ~/.config/configent/lima/opensuse-tumbleweed.yaml --tty=false"
 alias vm4arch="limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false"
 alias vm4alpine="limactl start --name alpine ~/.config/configent/lima/alpine.yaml --tty=false"
 
