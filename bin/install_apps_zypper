@@ -40,8 +40,9 @@ $SUDO zypper install -y gpg2
 $SUDO zypper install -y bison cmake gcc gcc-c++ make m4 pkg-config
 
 # Common development dependencies
-$SUDO zypper install -y readline-devel sqlite3-devel libbz2-devel \
-  libffi-devel libyaml-devel liblzma5 libopenssl-devel xz-devel zlib-devel
+$SUDO zypper install -y readline-devel libbz2-devel libffi-devel \
+  libicu-devel liblzma5 libopenssl-devel libxml2-devel libyaml-devel \
+  sqlite3-devel xz-devel zlib-devel
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils file findutils \
