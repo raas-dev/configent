@@ -68,9 +68,7 @@ clients:
       - name: llama3.2-vision:11b
         max_input_tokens: 128000
         supports_vision: true
-      - name: jina-embeddings-v2-base-en
+      - name: nomic-embed-text
         type: embedding
-        default_chunk_size: 1500
-        max_batch_size: 100
       - name: jina-reranker-v2-base-multilingual
         type: reranker
