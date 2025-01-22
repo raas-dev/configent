@@ -6,11 +6,11 @@ backend = "aqua:aws/aws-cli"
 "AWSCLIV2-2.22.26.pkg" = "sha256:ea8e5eebff9fd88e50b0976dc5fb9fb4620659c39aa696728f3e8ca27d233758"
 
 [tools.bun]
-version = "1.1.45"
+version = "1.2.0"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:2cc497daee4817aa6ce3e258ebf17262bc4202e5276871f18748aa928254bd66"
+"bun-darwin-aarch64.zip" = "sha256:fa72173cb2220d00e2d2650fefdc0b5b37bfd8bb33d8d671b50efb409c2f5745"
 
 [tools.cargo-binstall]
 version = "1.10.22"
@@ -220,7 +220,7 @@ backend = "core:node"
 "node-v22.12.0-darwin-arm64.tar.gz" = "sha256:293dcc6c2408da21562d135b0412525e381bb6fe150d688edb58fe850d0f3e13"
 
 [tools."pipx:aider-chat"]
-version = "0.72.1"
+version = "0.72.2"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
