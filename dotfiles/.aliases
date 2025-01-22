@@ -302,7 +302,11 @@ venv() {
       fi
     fi
   else
-    deactivate # && [ -d ".venv" ] && rm -rv ".venv"
+    deactivate
+    if [ "$1" = "-f" ] || [ "$1" = "--force" ]; then
+      [ -d ".venv" ] && rm -rv ".venv"
+      shift
+    fi
   fi
 }
 
