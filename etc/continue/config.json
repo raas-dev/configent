@@ -67,7 +67,9 @@
   },
   "tabAutocompleteOptions": {
     "multilineCompletions": "always",
-    "onlyMyCode": false
+    "onlyMyCode": false,
+    "debounceDelay": 500,
+    "disableInFiles": ["*.txt"]
   },
   "embeddingsProvider": {
     "provider": "gemini",
