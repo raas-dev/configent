@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.134.2](https://github.com/raas-dev/configent/compare/1.134.1...1.134.2) (2025-01-22)
+
+
+### Fixes
+
+* **aichat:** Change embedding to nomic-embed-text ([214419e](https://github.com/raas-dev/configent/commit/214419e5b7ea08217ca1242b1e1a0a34073e9c2f))
+* **aliases:** Add option to remove venv forcefully ([4fc72b1](https://github.com/raas-dev/configent/commit/4fc72b1aab186b1f05f2c6efcc77dc2b1b2e98fc))
+* **continue:** Increase autocomplete delay and ignore txt ([7c26a47](https://github.com/raas-dev/configent/commit/7c26a475f26347869892c8c1281e29c1b0057696))
+* **continue:** Use MistralAI codestral 22 for tab complete ([2e0923d](https://github.com/raas-dev/configent/commit/2e0923d175a2a3d1bd77c8cc83df500bc956d4ea))
+
 ### [1.134.1](https://github.com/raas-dev/configent/compare/1.134.0...1.134.1) (2025-01-20)
 
 
