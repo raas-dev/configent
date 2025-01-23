@@ -182,6 +182,7 @@ alias vm4oracle='limactl start --name oraclelinux ~/.config/configent/lima/oracl
 
 alias vm4suse='limactl start --name opensuse ~/.config/configent/lima/opensuse.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 alias vm4tumbleweed='limactl start --name tumbleweed ~/.config/configent/lima/opensuse-tumbleweed.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+
 alias vm4arch='limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 alias vm4alpine='limactl start --name alpine ~/.config/configent/lima/alpine.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 
