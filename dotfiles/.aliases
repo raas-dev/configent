@@ -171,7 +171,7 @@ command -v hwatch >/dev/null && alias watch='hwatch --differences word'
 alias vm4ubuntu='limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 alias vm4debian='limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"";
   export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
-  kubectl get nodes'
+  command -v kubectl >/dev/null && kubectl get nodes'
 
 alias vm4fedora='limactl start --name fedora ~/.config/configent/lima/fedora.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 alias vm4centos='limactl start --name centos ~/.config/configent/lima/centos.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
