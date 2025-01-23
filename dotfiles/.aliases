@@ -168,22 +168,22 @@ command -v hwatch >/dev/null && alias watch='hwatch --differences word'
 
 ### Lima VMs ###################################################################
 
-alias vm4ubuntu="limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false"
-alias vm4debian="limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false ;
-  export KUBECONFIG=~/.lima/default/kubeconfig.yaml ;
-  kubectl get nodes"
+alias vm4ubuntu='limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4debian='limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"";
+  export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
+  kubectl get nodes'
 
-alias vm4fedora="limactl start --name fedora ~/.config/configent/lima/fedora.yaml --tty=false"
-alias vm4centos="limactl start --name centos ~/.config/configent/lima/centos.yaml --tty=false"
+alias vm4fedora='limactl start --name fedora ~/.config/configent/lima/fedora.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4centos='limactl start --name centos ~/.config/configent/lima/centos.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 
-alias vm4alma="limactl start --name almalinux ~/.config/configent/lima/almalinux.yaml --tty=false"
-alias vm4rocky="limactl start --name rocky ~/.config/configent/lima/rocky.yaml --tty=false"
-alias vm4oracle="limactl start --name oraclelinux ~/.config/configent/lima/oraclelinux.yaml --tty=false"
+alias vm4alma='limactl start --name almalinux ~/.config/configent/lima/almalinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4rocky='limactl start --name rocky ~/.config/configent/lima/rocky.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4oracle='limactl start --name oraclelinux ~/.config/configent/lima/oraclelinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 
-alias vm4suse="limactl start --name opensuse ~/.config/configent/lima/opensuse.yaml --tty=false"
-alias vm4tumbleweed="limactl start --name tumbleweed ~/.config/configent/lima/opensuse-tumbleweed.yaml --tty=false"
-alias vm4arch="limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false"
-alias vm4alpine="limactl start --name alpine ~/.config/configent/lima/alpine.yaml --tty=false"
+alias vm4suse='limactl start --name opensuse ~/.config/configent/lima/opensuse.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4tumbleweed='limactl start --name tumbleweed ~/.config/configent/lima/opensuse-tumbleweed.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4arch='limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias vm4alpine='limactl start --name alpine ~/.config/configent/lima/alpine.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 
 ### docker #####################################################################
 
