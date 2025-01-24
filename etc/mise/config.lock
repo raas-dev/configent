@@ -72,7 +72,7 @@ version = "1.1.5"
 backend = "cargo:lsd"
 
 [tools."cargo:nixpacks"]
-version = "1.32.0"
+version = "1.33.0"
 backend = "cargo:nixpacks"
 
 [tools."cargo:numbat-cli"]
@@ -289,8 +289,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.58.1_macOS-ARM64.tar.gz" = "sha256:499a64a911a1ac80fcc26d619cdc1bdb05528d8b1bd0490f01a8324aa6ec6e13"
 
 [tools.uv]
-version = "0.5.23"
+version = "0.5.24"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:bedfc709b281ab4c6ff1c84c0ad7e4525bf2669f56f009f6fb308657bebe165b"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:8016d47f4cce265b3d122ad8cbbf701713caf803fa7d3ef69d8a1fd6793d939a"
