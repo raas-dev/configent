@@ -32,6 +32,12 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
+      "title": "Ollama: deepseek-r1:14b",
+      "provider": "ollama",
+      "model": "deepseek-r1:14b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
       "title": "Ollama: phi4:14b",
       "provider": "ollama",
       "model": "phi4:14b",
