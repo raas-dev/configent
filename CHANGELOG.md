@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.134.3](https://github.com/raas-dev/configent/compare/1.134.2...1.134.3) (2025-01-24)
+
+
+### Fixes
+
+* **aliases:** Check if kubectl is present for Lima ([5553455](https://github.com/raas-dev/configent/commit/5553455c00c75db54bf3216bcce3767ab2377fd7))
+* **aliases:** Export GITHUB_TOKEN in Lima VMs ([ee27a2b](https://github.com/raas-dev/configent/commit/ee27a2b18883b95675c4b570029ed5daa53da364))
+* **continue:** Add local deepseek-r1:14b as chat model ([8fda089](https://github.com/raas-dev/configent/commit/8fda0890daff9d819ec4e03252fbbff4f0950756))
+
 ### [1.134.2](https://github.com/raas-dev/configent/compare/1.134.1...1.134.2) (2025-01-22)
 
 
