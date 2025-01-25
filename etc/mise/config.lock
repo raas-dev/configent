@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.22.26"
+version = "2.23.6"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.22.26.pkg" = "sha256:ea8e5eebff9fd88e50b0976dc5fb9fb4620659c39aa696728f3e8ca27d233758"
+"AWSCLIV2-2.23.6.pkg" = "sha256:b18bc60f63c59b8c69699d57398aa5bb394ad4cb6e6bd6f1da9d7501ee434c09"
 
 [tools.bun]
 version = "1.2.0"
@@ -139,18 +139,18 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.57.0"
+version = "0.58.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.57.0-darwin_arm64.tar.gz" = "sha256:b4e1c5322652bc2672c32dc37993f8d501df7aecb3fa9e545a3d80eca8ae9a2f"
+"fzf-0.58.0-darwin_arm64.tar.gz" = "sha256:73338f93ec79cc221028e9dc5c14ea5d3d63941fadcf27587573c13ae9eb651b"
 
 [tools.github-cli]
-version = "2.64.0"
+version = "2.65.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.64.0_macOS_arm64.zip" = "sha256:4f26239fc923120c26325b5c54759275e5a68892a26e52351b74ab7e7ac22ba1"
+"gh_2.65.0_macOS_arm64.zip" = "sha256:5acb7110fa6f18d2e1a7bea41526bb8532584f4a10067b40217488bf9f3ad9ab"
 
 [tools.go]
 version = "1.23.4"
@@ -199,11 +199,11 @@ backend = "aqua:jqlang/jq"
 jq-macos-arm64 = "sha256:0bbe619e663e0de2c550be2fe0d240d076799d6f8a652b70fa04aea8a8362e8a"
 
 [tools.lima]
-version = "1.0.3"
+version = "1.0.4"
 backend = "aqua:lima-vm/lima"
 
 [tools.lima.checksums]
-"lima-1.0.3-Darwin-arm64.tar.gz" = "sha256:5033cadcf49b0297bac897c5b81ee5f9f83858327e6e08609f06f46e8c56dd2f"
+"lima-1.0.4-Darwin-arm64.tar.gz" = "sha256:9ae5eb12a8fbe008085fa1795e631c66d878f70b4613d4744e207828e50a5f7b"
 
 [tools.neovim]
 version = "0.10.3"
@@ -282,11 +282,11 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.58.1"
+version = "0.58.2"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.checksums]
-"trivy_0.58.1_macOS-ARM64.tar.gz" = "sha256:499a64a911a1ac80fcc26d619cdc1bdb05528d8b1bd0490f01a8324aa6ec6e13"
+"trivy_0.58.2_macOS-ARM64.tar.gz" = "sha256:8dccfb898a6f10b3cbe3f49a97cde6ab9ebf160d16055ce0375899f4040bdc5b"
 
 [tools.uv]
 version = "0.5.24"
