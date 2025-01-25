@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.135.0](https://github.com/raas-dev/configent/compare/1.134.3...1.135.0) (2025-01-25)
+
+
+### Features
+
+* **mise:** Update most non-SDK tools to latest ([e7f5a63](https://github.com/raas-dev/configent/commit/e7f5a63dc9ced98351b4f7a976a68f0f80e00d90))
+
 ### [1.134.3](https://github.com/raas-dev/configent/compare/1.134.2...1.134.3) (2025-01-24)
 
 
