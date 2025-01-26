@@ -220,7 +220,7 @@ backend = "core:node"
 "node-v22.12.0-darwin-arm64.tar.gz" = "sha256:293dcc6c2408da21562d135b0412525e381bb6fe150d688edb58fe850d0f3e13"
 
 [tools."pipx:aider-chat"]
-version = "0.72.2"
+version = "0.72.3"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
