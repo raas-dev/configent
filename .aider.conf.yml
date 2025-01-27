@@ -5,5 +5,7 @@ editor-model: gemini/gemini-2.0-flash-exp
 git: false
 yes-always: true
 
-load: .aider.script.md
+multiline: true
+
+#load: .aider.script.md
 editor: code -w
