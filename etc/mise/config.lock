@@ -206,11 +206,11 @@ backend = "aqua:lima-vm/lima"
 "lima-1.0.4-Darwin-arm64.tar.gz" = "sha256:9ae5eb12a8fbe008085fa1795e631c66d878f70b4613d4744e207828e50a5f7b"
 
 [tools.neovim]
-version = "0.10.3"
+version = "0.10.4"
 backend = "aqua:neovim/neovim"
 
 [tools.neovim.checksums]
-"nvim-macos-arm64.tar.gz" = "sha256:351819f8353c4f34f4928bddd2ab92c33f2a8976e9310a87a8fb794e2ae69104"
+"nvim-macos-arm64.tar.gz" = "sha256:3d7b07ec9b491d2a3d55167bc1db1cfa96773a1a37e74ea384cb15ab0189223b"
 
 [tools.node]
 version = "22.12.0"
