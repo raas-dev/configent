@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.23.7"
+version = "2.23.8"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.23.7.pkg" = "sha256:48568310529ad12226744b21cad755c6dda42ffeca77b01bd6ef9d1f4dc9c473"
+"AWSCLIV2-2.23.8.pkg" = "sha256:51e96f44248726fe9d6e989cf4229a18a91df72a4cb750792f69f2e977d5503e"
 
 [tools.bun]
 version = "1.2.1"
@@ -289,8 +289,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.58.2_macOS-ARM64.tar.gz" = "sha256:8dccfb898a6f10b3cbe3f49a97cde6ab9ebf160d16055ce0375899f4040bdc5b"
 
 [tools.uv]
-version = "0.5.24"
+version = "0.5.25"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:8016d47f4cce265b3d122ad8cbbf701713caf803fa7d3ef69d8a1fd6793d939a"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:3c29e941d691614bc4eba95629c8f8dee106e5d44d70a03efed66a544588caa1"
