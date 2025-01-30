@@ -282,11 +282,11 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.58.2"
+version = "0.59.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.checksums]
-"trivy_0.58.2_macOS-ARM64.tar.gz" = "sha256:8dccfb898a6f10b3cbe3f49a97cde6ab9ebf160d16055ce0375899f4040bdc5b"
+"trivy_0.59.0_macOS-ARM64.tar.gz" = "sha256:e6d0a5d5c2b8da041514af886f620d65bcd1acc987ccc118cf9b9c27cbed5d08"
 
 [tools.uv]
 version = "0.5.25"
