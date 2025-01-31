@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.2](https://github.com/raas-dev/configent/compare/1.135.1...1.135.2) (2025-01-31)
+
+
+### Fixes
+
+* **vscode:** Make minimap fit ([e2c03b7](https://github.com/raas-dev/configent/commit/e2c03b78e642e840de2531722b3fb95d4a92d2db))
+* **vscode:** Move statusbar debugger left ([848d8c3](https://github.com/raas-dev/configent/commit/848d8c3622d9ee3eff7b95268744c6e25128e38b))
+
 ### [1.135.1](https://github.com/raas-dev/configent/compare/1.135.0...1.135.1) (2025-01-31)
 
 
