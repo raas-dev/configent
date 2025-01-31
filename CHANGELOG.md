@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.1](https://github.com/raas-dev/configent/compare/1.135.0...1.135.1) (2025-01-31)
+
+
+### Fixes
+
+* **aichat:** Add kluster.ai ([0afba25](https://github.com/raas-dev/configent/commit/0afba25552da8cd9e6f7a31b3f7fa9e52398622a))
+* **vscode:** Decrease terminal font size ([c97b8de](https://github.com/raas-dev/configent/commit/c97b8deacc35ebf44be72f41a33e1e3e1c64f913))
+* **vscode:** Disable editor code folding ([87372df](https://github.com/raas-dev/configent/commit/87372dfc7f79951bfc1864fb7b0562142a2d1ad3))
+* **vscode:** Fill minimap ([ea33aee](https://github.com/raas-dev/configent/commit/ea33aeebad8daa9b9cf30a2e60846dc858a6aab0))
+* **vscode:** Make minimap less width ([2cf5cc9](https://github.com/raas-dev/configent/commit/2cf5cc9219ae4e88a6d110945b4ed30ef69e41e6))
+
 ## [1.135.0](https://github.com/raas-dev/configent/compare/1.134.3...1.135.0) (2025-01-25)
 
 
