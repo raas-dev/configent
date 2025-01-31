@@ -108,6 +108,7 @@
   "editor.cursorBlinking": "smooth",
   "editor.cursorWidth": 2,
   "editor.find.addExtraSpaceOnTop": false,
+  "editor.folding": false,
   "editor.fontFamily": "Terminess Nerd Font",
   "editor.fontSize": 17,
   "editor.guides.bracketPairs": "active",
