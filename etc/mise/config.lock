@@ -146,11 +146,11 @@ backend = "aqua:junegunn/fzf"
 "fzf-0.58.0-darwin_arm64.tar.gz" = "sha256:73338f93ec79cc221028e9dc5c14ea5d3d63941fadcf27587573c13ae9eb651b"
 
 [tools.github-cli]
-version = "2.65.0"
+version = "2.66.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.65.0_macOS_arm64.zip" = "sha256:5acb7110fa6f18d2e1a7bea41526bb8532584f4a10067b40217488bf9f3ad9ab"
+"gh_2.66.0_macOS_arm64.zip" = "sha256:6ff91f7555f78ae46fdce3bc07a987047b85fbdb0f6c9a9a298892c805c751b6"
 
 [tools.go]
 version = "1.23.4"
@@ -289,8 +289,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.59.0_macOS-ARM64.tar.gz" = "sha256:e6d0a5d5c2b8da041514af886f620d65bcd1acc987ccc118cf9b9c27cbed5d08"
 
 [tools.uv]
-version = "0.5.25"
+version = "0.5.26"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:3c29e941d691614bc4eba95629c8f8dee106e5d44d70a03efed66a544588caa1"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:3b503c630dc65b991502e1d9fe0ffc410ae50c503e8df6d4900f23b9ad436366"
