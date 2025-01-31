@@ -119,7 +119,7 @@
   "editor.lineHeight": 14,
   "editor.linkedEditing": true,
   "editor.minimap.enabled": true,
-  "editor.minimap.maxColumn": 80,
+  "editor.minimap.maxColumn": 70,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fit",
   "editor.overviewRulerBorder": false,
