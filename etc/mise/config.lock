@@ -6,11 +6,11 @@ backend = "aqua:aws/aws-cli"
 "AWSCLIV2-2.23.10.pkg" = "sha256:770ea2b638a865105617d47cec349ed17a9e71bdc5337160f86ae3d8ffdf334d"
 
 [tools.bun]
-version = "1.2.1"
+version = "1.2.2"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:f903ca0206e8855f869be2f79908b8873c424e5b82ac86cc16d8cfc7dd39420b"
+"bun-darwin-aarch64.zip" = "sha256:c4d58e06c5c33885b526f4d91a38ca9ebdb9fc3fb4cd547f7d3302055c98e41c"
 
 [tools.cargo-binstall]
 version = "1.10.22"
@@ -146,11 +146,11 @@ backend = "aqua:junegunn/fzf"
 "fzf-0.58.0-darwin_arm64.tar.gz" = "sha256:73338f93ec79cc221028e9dc5c14ea5d3d63941fadcf27587573c13ae9eb651b"
 
 [tools.github-cli]
-version = "2.66.0"
+version = "2.66.1"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.66.0_macOS_arm64.zip" = "sha256:6ff91f7555f78ae46fdce3bc07a987047b85fbdb0f6c9a9a298892c805c751b6"
+"gh_2.66.1_macOS_arm64.zip" = "sha256:80bf6b20a56411ae56ffebdfef81217cb2b739674a625a85f8668153604cc4f6"
 
 [tools.go]
 version = "1.23.4"
