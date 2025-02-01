@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.5](https://github.com/raas-dev/configent/compare/1.135.4...1.135.5) (2025-02-01)
+
+
+### Fixes
+
+* **aichat:** Use gemini-exp-1206 by default ([0a18345](https://github.com/raas-dev/configent/commit/0a18345eb26fef69ac14aac5d5a01eb778370d32))
+* **vscode:** Decrease editor font size by 0.25 ([369398d](https://github.com/raas-dev/configent/commit/369398d209ba28281040bde7d4f92765317b234d))
+
 ### [1.135.4](https://github.com/raas-dev/configent/compare/1.135.3...1.135.4) (2025-02-01)
 
 
