@@ -2,7 +2,6 @@ aaron-bond.better-comments
 astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
-bencoleman.armview
 benrogerswpg.transparent-minimap
 bierner.github-markdown-preview
 bierner.markdown-checkbox
@@ -42,7 +41,6 @@ kevinrose.vsc-python-indent
 mads-hartmann.bash-ide-vscode
 mikestead.dotenv
 ms-azure-devops.azure-pipelines
-ms-azuretools.vscode-azureresourcegroups
 ms-azuretools.vscode-bicep
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
@@ -56,7 +54,6 @@ ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.makefile-tools
 ms-vscode.powershell
 ms-vsliveshare.vsliveshare
-msazurermtools.azurerm-vscode-tools
 naumovs.color-highlight
 perkovec.emoji
 pomdtr.excalidraw-editor
