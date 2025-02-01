@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.3](https://github.com/raas-dev/configent/compare/1.135.2...1.135.3) (2025-02-01)
+
+
+### Fixes
+
+* **tmux:** Fix statusbar icons ([fb56d24](https://github.com/raas-dev/configent/commit/fb56d249b7a9fe7cae24fa53580c9fcf31b954ba))
+* **vscode:** Decrease editor font size by 0.25 ([9781fab](https://github.com/raas-dev/configent/commit/9781fab7ec516cd15fb4ffc83835f26b5aa4a4e8))
+
 ### [1.135.2](https://github.com/raas-dev/configent/compare/1.135.1...1.135.2) (2025-01-31)
 
 
