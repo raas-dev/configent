@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.4](https://github.com/raas-dev/configent/compare/1.135.3...1.135.4) (2025-02-01)
+
+
+### Fixes
+
+* **vscode:** Hide glyph margin ([27d8fb0](https://github.com/raas-dev/configent/commit/27d8fb06b3955753d6cecc11b7b99d6b84a6cb93))
+* **vscode:** Remove deprecated Azure Account extension ([a563994](https://github.com/raas-dev/configent/commit/a56399463ec5a802203815d8a8179d48f1dfe138))
+* **vscode:** Remove unused Microsoft extensions ([4b984f6](https://github.com/raas-dev/configent/commit/4b984f699968f999d7cca29e59d4b70889df003f))
+
 ### [1.135.3](https://github.com/raas-dev/configent/compare/1.135.2...1.135.3) (2025-02-01)
 
 
