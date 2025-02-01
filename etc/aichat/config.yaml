@@ -1,7 +1,7 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 # ---- llm ----
-model: gemini:gemini-2.0-flash-exp # Specify the LLM to use
+model: gemini:gemini-exp-1206 # Specify the LLM to use
 temperature: 0 # Set default temperature parameter
 
 # ---- behavior ----
@@ -66,8 +66,7 @@ clients:
     api_base: https://api.kluster.ai/v1
     models:
       - name: deepseek-ai/DeepSeek-R1
-        max_input_tokens: 64000
-        max_output_tokens: 8192
+        max_output_tokens: 8000
         supports_function_calling: true
   - type: openai-compatible
     name: ollama
