@@ -31,33 +31,11 @@ export function modifyConfig(config: Config): Config {
       anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY;
     });
 
-  // AWS Bedrock
-  // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
-
-  // Azure AI Foundry
-  config.models
-    .filter((model) => model.apiBase === "[AZURE_AI_API_BASE]")
-    .forEach((azureModel) => {
-      azureModel.apiBase = process.env.AZURE_AI_API_BASE;
-    });
-  config.models
-    .filter((model) => model.apiKey === "[AZURE_AI_API_KEY]")
-    .forEach((azureModel) => {
-      azureModel.apiKey = process.env.AZURE_AI_API_KEY;
-    });
-
   // Google AI Studio
   config.models
     .filter((model) => model.apiKey === "[GEMINI_API_KEY]")
     .forEach((geminiModel) => {
       geminiModel.apiKey = process.env.GEMINI_API_KEY;
-    });
-
-  // kluster.ai
-  config.models
-    .filter((model) => model.apiKey === "[KLUSTER_API_KEY]")
-    .forEach((klusteraiModel) => {
-      klusteraiModel.apiKey = process.env.KLUSTER_API_KEY;
     });
 
   // OpenAI
@@ -72,6 +50,28 @@ export function modifyConfig(config: Config): Config {
     .filter((model) => model.apiKey === "[OPENROUTER_API_KEY]")
     .forEach((openrouterModel) => {
       openrouterModel.apiKey = process.env.OPENROUTER_API_KEY;
+    });
+
+  // together.ai
+  config.models
+    .filter((model) => model.apiKey === "[TOGETHER_API_KEY]")
+    .forEach((togetheraiModel) => {
+      togetheraiModel.apiKey = process.env.TOGETHER_API_KEY;
+    });
+
+  // AWS Bedrock
+  // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
+
+  // Azure AI Foundry
+  config.models
+    .filter((model) => model.apiBase === "[AZURE_AI_API_BASE]")
+    .forEach((azureModel) => {
+      azureModel.apiBase = process.env.AZURE_AI_API_BASE;
+    });
+  config.models
+    .filter((model) => model.apiKey === "[AZURE_AI_API_KEY]")
+    .forEach((azureModel) => {
+      azureModel.apiKey = process.env.AZURE_AI_API_KEY;
     });
 
   // Tab autocomplete ----------------------------------------------------------
