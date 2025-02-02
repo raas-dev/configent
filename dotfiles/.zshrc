@@ -78,7 +78,6 @@ setopt hist_expire_dups_first # expire the oldest instance of command
 setopt hist_ignore_dups       # ignore second instance of same event
 setopt hist_ignore_space      # ignore entries with leading space
 setopt hist_verify            # do not execute the line directly
-setopt inc_append_history     # write to history immediately
 setopt no_hist_beep           # no beep
 setopt share_history          # share history between session
 
