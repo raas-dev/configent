@@ -5,23 +5,19 @@
       "provider": "gemini",
       "model": "gemini-2.0-flash-exp",
       "apiKey": "[GEMINI_API_KEY]",
-      "contextLength": 2097152
+      "contextLength": 2097152,
+      "completionOptions": {
+        "temperature": 0
+      }
     },
     {
       "title": "gemini-exp-1206",
       "provider": "gemini",
       "model": "gemini-exp-1206",
       "apiKey": "[GEMINI_API_KEY]",
-      "contextLength": 2097152
-    },
-    {
-      "title": "claude-3.5-sonnet",
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-latest",
-      "apiKey": "[ANTHROPIC_API_KEY]",
-      "cacheBehavior": {
-        "cacheSystemMessage": true,
-        "cacheConversation": true
+      "contextLength": 2097152,
+      "completionOptions": {
+        "temperature": 0
       }
     },
     {
@@ -31,29 +27,59 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
+      "title": "claude-3.5-sonnet",
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-latest",
+      "apiKey": "[ANTHROPIC_API_KEY]",
+      "cacheBehavior": {
+        "cacheSystemMessage": true,
+        "cacheConversation": true
+      },
+      "completionOptions": {
+        "stream": true,
+        "temperature": 0
+      }
+    },
+    {
       "title": "Ollama: deepseek-r1:14b",
       "provider": "ollama",
       "model": "deepseek-r1:14b",
-      "apiBase": "http://127.0.0.1:11434"
+      "apiBase": "http://127.0.0.1:11434",
+      "completionOptions": {
+        "stream": true,
+        "temperature": 0,
+        "keepAlive": 1800
+      }
     },
     {
       "title": "Ollama: phi4:14b",
       "provider": "ollama",
       "model": "phi4:14b",
-      "apiBase": "http://127.0.0.1:11434"
+      "apiBase": "http://127.0.0.1:11434",
+      "completionOptions": {
+        "stream": true,
+        "temperature": 0,
+        "keepAlive": 1800
+      }
     },
     {
       "title": "OpenRouter: R1",
       "provider": "openrouter",
       "model": "deepseek/deepseek-r1",
       "apiBase": "https://openrouter.ai/api/v1",
-      "apiKey": "[OPENROUTER_API_KEY]"
+      "apiKey": "[OPENROUTER_API_KEY]",
+      "completionOptions": {
+        "temperature": 0
+      }
     },
     {
       "title": "AWS: claude-3.5-sonnet",
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
-      "region": "eu-central-1"
+      "region": "eu-central-1",
+      "completionOptions": {
+        "temperature": 0
+      }
     },
     {
       "title": "Azure: gpt-4o-mini",
@@ -61,13 +87,12 @@
       "model": "gpt-4o-mini",
       "deployment": "gpt-4o-mini",
       "apiBase": "[AZURE_AI_API_BASE]",
-      "apiKey": "[AZURE_AI_API_KEY]"
+      "apiKey": "[AZURE_AI_API_KEY]",
+      "completionOptions": {
+        "temperature": 0
+      }
     }
   ],
-  "completionOptions": {
-    "stream": true,
-    "temperature": 0
-  },
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "mistral",
