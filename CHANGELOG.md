@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.7](https://github.com/raas-dev/configent/compare/1.135.6...1.135.7) (2025-02-02)
+
+
+### Fixes
+
+* **continue:** Update config ([ff5b0f0](https://github.com/raas-dev/configent/commit/ff5b0f0b606941382c62c2da803189130ecc1771))
+* **continue:** Update config ([255c738](https://github.com/raas-dev/configent/commit/255c738f042d9f73a9486dcb48b66fffafec5975))
+* **vscode:** Adjust gutter error icon size ([de0572a](https://github.com/raas-dev/configent/commit/de0572acd7a5b123e8ed4396a29deef434f4f657))
+* **vscode:** Adjust window and font size ([4d0c6cb](https://github.com/raas-dev/configent/commit/4d0c6cbb77e4e49ae5bd291676bf57e1da2ab6b7))
+* **vscode:** Decrease font size by 0.50 ([9d802c4](https://github.com/raas-dev/configent/commit/9d802c4a252ba72770d896d19ed496e8c4bd12bc))
+* **zsh:** Remove inc_append_history over share_history ([89f5453](https://github.com/raas-dev/configent/commit/89f54530fceb0b42ace20174469b61a567e0ca2d))
+
 ### [1.135.6](https://github.com/raas-dev/configent/compare/1.135.5...1.135.6) (2025-02-02)
 
 
