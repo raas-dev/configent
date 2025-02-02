@@ -110,7 +110,7 @@
   "editor.find.addExtraSpaceOnTop": false,
   "editor.folding": false,
   "editor.fontFamily": "Terminess Nerd Font",
-  "editor.fontSize": 16.5,
+  "editor.fontSize": 16,
   "editor.glyphMargin": false,
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
