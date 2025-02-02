@@ -69,10 +69,10 @@ export function modifyConfig(config: Config): Config {
 
   // OpenRouter
   config.models
-  .filter((model) => model.apiKey === "[OPENROUTER_API_KEY]")
-  .forEach((openrouterModel) => {
-    openrouterModel.apiKey = process.env.OPENROUTER_API_KEY;
-  });
+    .filter((model) => model.apiKey === "[OPENROUTER_API_KEY]")
+    .forEach((openrouterModel) => {
+      openrouterModel.apiKey = process.env.OPENROUTER_API_KEY;
+    });
 
   // Tab autocomplete ----------------------------------------------------------
 

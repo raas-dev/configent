@@ -16,13 +16,6 @@
       "contextLength": 2097152
     },
     {
-      "title": "OpenRouter: R1",
-      "provider": "openrouter",
-      "model": "deepseek/deepseek-r1:free",
-      "apiBase": "https://openrouter.ai/api/v1",
-      "apiKey": "[OPENROUTER_API_KEY]"
-    },
-    {
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
@@ -33,9 +26,9 @@
       }
     },
     {
-      "title": "gpt-4o-mini",
+      "title": "o3-mini",
       "provider": "openai",
-      "model": "gpt-4o-mini",
+      "model": "o3-mini",
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
@@ -49,6 +42,13 @@
       "provider": "ollama",
       "model": "phi4:14b",
       "apiBase": "http://127.0.0.1:11434"
+    },
+    {
+      "title": "OpenRouter: R1",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-r1",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "[OPENROUTER_API_KEY]"
     },
     {
       "title": "AWS: claude-3.5-sonnet",
@@ -208,15 +208,7 @@
   ],
   "experimental": {
     "useTools": true,
-    "modelContextProtocolServers": [
-      {
-        "transport": {
-          "type": "stdio",
-          "command": "uvx",
-          "args": ["mcp-server-sqlite", "--db-path", "/Users/NAME/test.db"]
-        }
-      }
-    ],
+    "modelContextProtocolServers": [],
     "quickActions": [
       {
         "title": "Explain",
