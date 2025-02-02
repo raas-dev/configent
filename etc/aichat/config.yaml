@@ -65,17 +65,10 @@ clients:
   # OpenRouter
   - type: openai-compatible
     name: openrouter
-    api_base: https://openrouter.ai/api/v1
 
-  # Azure AI Foundry
-  - type: azure-openai
-    name: azure_ai # set AZURE_AI_API_BASE and _API_KEY in .rclocal
-    models:
-      - name: gpt-4o-mini
-        max_input_tokens: 128000
-        max_output_tokens: 16384
-        supports_vision: true
-        supports_function_calling: true
+  # together.ai
+  - type: openai-compatible
+    name: together
 
   # kluster.ai
   - type: openai-compatible
@@ -87,6 +80,16 @@ clients:
         max_output_tokens: 16384
         input_price: 7
         output_price: 7
+
+  # Azure AI Foundry
+  - type: azure-openai
+    name: azure_ai # set AZURE_AI_API_BASE and _API_KEY in .rclocal
+    models:
+      - name: gpt-4o-mini
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        supports_vision: true
+        supports_function_calling: true
 
   # local
   - type: openai-compatible
