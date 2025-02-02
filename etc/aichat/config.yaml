@@ -62,18 +62,18 @@ clients:
   - type: gemini
   - type: openai
 
-  # openrouter
+  # OpenRouter
   - type: openai-compatible
     name: openrouter
     api_base: https://openrouter.ai/api/v1
 
-  # azure
+  # Azure AI Foundry
   - type: azure-openai
-    name: azure_openai
-    api_base: https://alkue-ai.openai.azure.com
+    name: azure_openai # set AZURE_OPENAI_API_BASE and _API_KEY in .rclocal
     models:
       - name: gpt-4o-mini
         max_input_tokens: 128000
+        max_output_tokens: 16384
         supports_vision: true
         supports_function_calling: true
 
