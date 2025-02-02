@@ -131,7 +131,7 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='aichat'
+alias a='aichat --role chat'
 alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='ai_developer'
 # d is for generic docker build and run, see d()
