@@ -1,5 +1,4 @@
 {
-  "allowAnonymousTelemetry": false,
   "models": [
     {
       "title": "gemini-2.0-flash-exp",
@@ -76,12 +75,6 @@
     "apiKey": "[CODESTRAL_API_KEY]",
     "apiBase": "https://codestral.mistral.ai/v1"
   },
-  "tabAutocompleteOptions": {
-    "multilineCompletions": "always",
-    "onlyMyCode": false,
-    "debounceDelay": 500,
-    "disableInFiles": ["*.txt"]
-  },
   "embeddingsProvider": {
     "provider": "gemini",
     "model": "models/text-embedding-004",
@@ -105,7 +98,9 @@
     {
       "name": "share",
       "description": "Export the current chat session to markdown",
-      "params": { "outputDir": "~/.continue/session-transcripts" }
+      "params": {
+        "outputDir": "~/.continue/session-transcripts"
+      }
     },
     {
       "name": "cmd",
@@ -206,6 +201,10 @@
       "maxDepth": 1
     }
   ],
+  "tabAutocompleteOptions": {
+    "onlyMyCode": false,
+    "debounceDelay": 500
+  },
   "experimental": {
     "useTools": true,
     "modelContextProtocolServers": [],
@@ -240,8 +239,5 @@
         "prompt": "Write tests for this code. Do NOT change anything about the code itself. Answer only code."
       }
     ]
-  },
-  "ui": {
-    "fontSize": 14
   }
 }
