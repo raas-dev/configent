@@ -110,7 +110,7 @@
   "editor.find.addExtraSpaceOnTop": false,
   "editor.folding": false,
   "editor.fontFamily": "Terminess Nerd Font",
-  "editor.fontSize": 16,
+  "editor.fontSize": 17.5,
   "editor.glyphMargin": false,
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
@@ -260,7 +260,7 @@
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.environmentChangesRelaunch": false,
-  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontSize": 15,
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
     "starship",
@@ -311,7 +311,7 @@
   "window.newWindowDimensions": "inherit",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
-  "window.zoomLevel": 0.5,
+  "window.zoomLevel": 0.25,
   "windsurf.autocompleteSpeed": "fast",
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
