@@ -77,6 +77,17 @@ clients:
         supports_vision: true
         supports_function_calling: true
 
+  # kluster.ai
+  - type: openai-compatible
+    name: kluster
+    api_base: https://api.kluster.ai/v1
+    models:
+      - name: deepseek-ai/DeepSeek-R1
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 7
+        output_price: 7
+
   # local
   - type: openai-compatible
     name: ollama
