@@ -74,6 +74,7 @@
       "provider": "bedrock",
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
       "region": "eu-central-1",
+      "profile": "bedrock",
       "completionOptions": {
         "temperature": 0
       }
