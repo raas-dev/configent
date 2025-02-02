@@ -36,14 +36,14 @@ export function modifyConfig(config: Config): Config {
 
   // Azure AI Foundry
   config.models
-    .filter((model) => model.apiKey === "[AZURE_OPENAI_API_BASE]")
-    .forEach((azureaifoundryModel) => {
-      azureaifoundryModel.apiBase = process.env.AZURE_OPENAI_API_BASE;
+    .filter((model) => model.apiKey === "[AZURE_AI_API_BASE]")
+    .forEach((azureModel) => {
+      azureModel.apiBase = process.env.AZURE_AI_API_BASE;
     });
   config.models
-    .filter((model) => model.apiKey === "[AZURE_OPENAI_API_KEY]")
-    .forEach((azureaifoundryModel) => {
-      azureaifoundryModel.apiKey = process.env.AZURE_OPENAI_API_KEY;
+    .filter((model) => model.apiKey === "[AZURE_AI_API_KEY]")
+    .forEach((azureModel) => {
+      azureModel.apiKey = process.env.AZURE_AI_API_KEY;
     });
 
   // Google AI Studio
