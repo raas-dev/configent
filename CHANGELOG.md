@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.6](https://github.com/raas-dev/configent/compare/1.135.5...1.135.6) (2025-02-02)
+
+
+### Fixes
+
+* **aichat:** Allow use of models via OpenRouter ([9217c67](https://github.com/raas-dev/configent/commit/9217c679c7951c96267f4c9f900dcbc6ba5ce1be))
+* **aichat:** Use explicit default role ([927bcab](https://github.com/raas-dev/configent/commit/927bcabdf6f545d7944d1abfb513c941c0bd0d96))
+* **ai:** Rename envvars AZURE_OPENAI_ -> AZURE_AI_ ([ae42e7b](https://github.com/raas-dev/configent/commit/ae42e7b86259d7899f20467f20e2047d179e5ce8))
+* **continue:** Add o3-mini as option ([06bcf01](https://github.com/raas-dev/configent/commit/06bcf01eca77dd7a23fead5efaf1109e6c7f69ab))
+* **continue:** Fix loading AZURE_AI_API_BASE ([dd6a7ba](https://github.com/raas-dev/configent/commit/dd6a7ba0e91a4910418cffc57dc74c4c7a130e09))
+* **continue:** Improve loading API keys ([dbfd361](https://github.com/raas-dev/configent/commit/dbfd361a06d9248c4bb4b538cfbb50cd29edff67))
+
 ### [1.135.5](https://github.com/raas-dev/configent/compare/1.135.4...1.135.5) (2025-02-01)
 
 
