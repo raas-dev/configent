@@ -16,8 +16,6 @@ Take a deep breath and work on this problem step-by-step.
 
 ## output
 
-Answer in markdown.
-
 Answer in practical and well-structured manner.
 
 Please answer in no more than a few sentences.
