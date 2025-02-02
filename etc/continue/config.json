@@ -16,6 +16,13 @@
       "contextLength": 2097152
     },
     {
+      "title": "OpenRouter: R1",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-r1:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "[OPENROUTER_API_KEY]"
+    },
+    {
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
@@ -53,9 +60,8 @@
       "title": "Azure: gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
-      "apiType": "azure",
       "apiBase": "[AZURE_OPENAI_API_BASE]",
-      "apiVersion": "[AZURE_OPENAI_API_VERSION]",
+      "apiVersion": "2023-03-15-preview",
       "deployment": "gpt-4o",
       "apiKey": "[AZURE_OPENAI_API_KEY]"
     }

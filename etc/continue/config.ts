@@ -22,57 +22,81 @@ export function modifyConfig(config: Config): Config {
     );
   }
 
+  // Chat models------- --------------------------------------------------------
+
   // Anthropic
   config.models
-    .filter((model) => model.provider === "anthropic")
+    .filter((model) => model.apiKey === "[ANTHROPIC_API_KEY]")
     .forEach((anthropicModel) => {
       anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY;
-    });
-
-  // Google
-  config.models
-    .filter((model) => model.provider === "gemini")
-    .forEach((googleModel) => {
-      googleModel.apiKey = process.env.GEMINI_API_KEY;
-    });
-
-  // OpenAI
-  config.models
-    .filter((model) => model.apiType !== "azure" && model.provider === "openai")
-    .forEach((openaiModel) => {
-      openaiModel.apiKey = process.env.OPENAI_API_KEY;
     });
 
   // AWS Bedrock
   // See: https://docs.continue.dev/reference/Model%20Providers/bedrock
 
-  // Azure OpenAI
+  // Azure AI Foundry
   config.models
-    .filter((model) => model.apiType === "azure" && model.provider === "openai")
-    .forEach((openaiModel) => {
-      openaiModel.apiBase = process.env.AZURE_OPENAI_API_BASE;
-      openaiModel.apiKey = process.env.AZURE_OPENAI_API_KEY;
-      openaiModel.apiVersion = process.env.AZURE_OPENAI_API_VERSION;
+    .filter((model) => model.apiKey === "[AZURE_OPENAI_API_BASE]")
+    .forEach((azureaifoundryModel) => {
+      azureaifoundryModel.apiBase = process.env.AZURE_OPENAI_API_BASE;
+    });
+  config.models
+    .filter((model) => model.apiKey === "[AZURE_OPENAI_API_KEY]")
+    .forEach((azureaifoundryModel) => {
+      azureaifoundryModel.apiKey = process.env.AZURE_OPENAI_API_KEY;
     });
 
-  // Tab autocomplete
-  if (config.tabAutocompleteModel.model === "codestral-latest") {
+  // Google AI Studio
+  config.models
+    .filter((model) => model.apiKey === "[GEMINI_API_KEY]")
+    .forEach((geminiModel) => {
+      geminiModel.apiKey = process.env.GEMINI_API_KEY;
+    });
+
+  // kluster.ai
+  config.models
+    .filter((model) => model.apiKey === "[KLUSTER_API_KEY]")
+    .forEach((klusteraiModel) => {
+      klusteraiModel.apiKey = process.env.KLUSTER_API_KEY;
+    });
+
+  // OpenAI
+  config.models
+    .filter((model) => model.apiKey === "[OPENAI_API_KEY]")
+    .forEach((openaiModel) => {
+      openaiModel.apiKey = process.env.OPENAI_API_KEY;
+    });
+
+  // OpenRouter
+  config.models
+  .filter((model) => model.apiKey === "[OPENROUTER_API_KEY]")
+  .forEach((openrouterModel) => {
+    openrouterModel.apiKey = process.env.OPENROUTER_API_KEY;
+  });
+
+  // Tab autocomplete ----------------------------------------------------------
+
+  if (config.tabAutocompleteModel.apiKey === "[CODESTRAL_API_KEY]") {
     config.tabAutocompleteModel.apiKey = process.env.CODESTRAL_API_KEY;
   }
 
-  // Embeddings provider
-  if (config.embeddingsProvider.provider === "gemini") {
+  // Embeddings provider -------------------------------------------------------
+
+  if (config.embeddingsProvider.apiKey === "[GEMINI_API_KEY]") {
     config.embeddingsProvider.apiKey = process.env.GEMINI_API_KEY;
-  } else if (config.embeddingsProvider.provider === "openai") {
+  } else if (config.embeddingsProvider.apiKey === "[OPENAI_API_KEY]") {
     config.embeddingsProvider.apiKey = process.env.OPENAI_API_KEY;
-  } else if (config.embeddingsProvider.model === "voyage-code-2") {
+  } else if (config.embeddingsProvider.apiKey === "[VOYAGE_API_KEY]") {
     config.embeddingsProvider.apiKey = process.env.VOYAGE_API_KEY;
   }
 
-  // Reranker
+  // Reranking model -----------------------------------------------------------
+
   if (config.reranker.name === "voyage") {
     config.reranker.params.apiKey = process.env.VOYAGE_API_KEY;
   }
+
+  // Context providers ---------------------------------------------------------
 
   // Google search
   config.contextProviders.find(
