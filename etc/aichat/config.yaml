@@ -61,13 +61,23 @@ clients:
   - type: claude
   - type: gemini
   - type: openai
+
+  # openrouter
   - type: openai-compatible
-    name: kluster
-    api_base: https://api.kluster.ai/v1
+    name: openrouter
+    api_base: https://openrouter.ai/api/v1
+
+  # azure
+  - type: azure-openai
+    name: azure_openai
+    api_base: https://alkue-ai.openai.azure.com
     models:
-      - name: deepseek-ai/DeepSeek-R1
-        max_output_tokens: 8000
+      - name: gpt-4o-mini
+        max_input_tokens: 128000
+        supports_vision: true
         supports_function_calling: true
+
+  # local
   - type: openai-compatible
     name: ollama
     api_base: http://127.0.0.1:11434/v1
