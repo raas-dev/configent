@@ -139,11 +139,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.58.0"
+version = "0.59.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.58.0-darwin_arm64.tar.gz" = "sha256:73338f93ec79cc221028e9dc5c14ea5d3d63941fadcf27587573c13ae9eb651b"
+"fzf-0.59.0-darwin_arm64.tar.gz" = "sha256:4451947ebaf54616f2dd4c6db7d681ffeffc7b96b1a61d4b9b9aa22c5b9c6880"
 
 [tools.github-cli]
 version = "2.66.1"
