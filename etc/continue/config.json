@@ -36,7 +36,6 @@
         "cacheConversation": true
       },
       "completionOptions": {
-        "stream": true,
         "temperature": 0
       }
     },
@@ -46,7 +45,6 @@
       "model": "deepseek-r1:14b",
       "apiBase": "http://127.0.0.1:11434",
       "completionOptions": {
-        "stream": true,
         "temperature": 0,
         "keepAlive": 1800
       }
@@ -57,7 +55,6 @@
       "model": "phi4:14b",
       "apiBase": "http://127.0.0.1:11434",
       "completionOptions": {
-        "stream": true,
         "temperature": 0,
         "keepAlive": 1800
       }
@@ -93,6 +90,9 @@
       }
     }
   ],
+  "completionOptions": {
+    "stream": true
+  },
   "tabAutocompleteModel": {
     "title": "Tab Autocomplete Model",
     "provider": "mistral",
