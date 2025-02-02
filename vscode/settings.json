@@ -139,6 +139,7 @@
   "editor.wordWrap": "wordWrapColumn",
   "errorLens.followCursor": "activeLine",
   "errorLens.followCursorMore": 3,
+  "errorLens.gutterIconSize": "150%",
   "errorLens.gutterIconsEnabled": true,
   "errorLens.margin": "2ch",
   "errorLens.messageBackgroundMode": "message",
