@@ -40,23 +40,13 @@
       }
     },
     {
-      "title": "Ollama: deepseek-r1:14b",
+      "title": "Ollama: mistral-small:24b",
       "provider": "ollama",
-      "model": "deepseek-r1:14b",
+      "model": "mistral-small:latest",
       "apiBase": "http://127.0.0.1:11434",
       "completionOptions": {
         "temperature": 0,
-        "keepAlive": 1800
-      }
-    },
-    {
-      "title": "Ollama: phi4:14b",
-      "provider": "ollama",
-      "model": "phi4:14b",
-      "apiBase": "http://127.0.0.1:11434",
-      "completionOptions": {
-        "temperature": 0,
-        "keepAlive": 1800
+        "keepAlive": 900
       }
     },
     {
