@@ -229,7 +229,7 @@ alias sudo='sudo '
 alias week='date +%V'
 
 # Weather (https://github.com/chubin/wttr.in)
-alias wttr='curl "v2.wttr.in/$(ip | jq -r .city)?MF&lang=en"'
+alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
 
 ### Python #####################################################################
 
