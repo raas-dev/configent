@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.8](https://github.com/raas-dev/configent/compare/1.135.7...1.135.8) (2025-02-03)
+
+
+### Fixes
+
+* **aichat:** Add kluster.ai ([91a3eef](https://github.com/raas-dev/configent/commit/91a3eefc9e2886bb2844dc3d5e39ea153cef36f3))
+* **aichat:** Add together.ai ([fa552d2](https://github.com/raas-dev/configent/commit/fa552d2766f3fc8f7c03d472cba4bb1a3a7e2a71))
+* **aichat:** Do not force markdown in default chat ([e39b92d](https://github.com/raas-dev/configent/commit/e39b92dfac81c5e10a208847de77d9631e2c214f))
+* **continue:** Add streaming in global completionOptions ([788950c](https://github.com/raas-dev/configent/commit/788950ce93d3a0cc391ef342b11c5f91dfb4d12e))
+* **continue:** Add support for together.ai ([55d5fdc](https://github.com/raas-dev/configent/commit/55d5fdc75c37025b6e45a2896619b5643304b2e7))
+
 ### [1.135.7](https://github.com/raas-dev/configent/compare/1.135.6...1.135.7) (2025-02-02)
 
 
