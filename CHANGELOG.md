@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.135.9](https://github.com/raas-dev/configent/compare/1.135.8...1.135.9) (2025-02-04)
+
+
+### Fixes
+
+* **.aliases:** Use ipv4 alias to get city for wttr ([48b8aec](https://github.com/raas-dev/configent/commit/48b8aec4abbd748212cc34f1dc145da0c93c529f))
+* **aichat:** Add mistral small 3 via ollama ([12faca7](https://github.com/raas-dev/configent/commit/12faca7868a74fdddacf3cfcbe7c2fe222bed614))
+* **continue:** Add mistral-small 3 via ollama ([0cc6c3a](https://github.com/raas-dev/configent/commit/0cc6c3acc7d325b9b55aa07b1f19cb4267f07853))
+* **vscode:** Remove python envy extension ([9fa040b](https://github.com/raas-dev/configent/commit/9fa040bd8936246f39a4bb155555d6bd73ba1e29))
+
 ### [1.135.8](https://github.com/raas-dev/configent/compare/1.135.7...1.135.8) (2025-02-03)
 
 
