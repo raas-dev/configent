@@ -118,6 +118,7 @@
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.letterSpacing": -0.5,
   "editor.lineHeight": 14,
+  "editor.lineNumbers": "off",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": true,
   "editor.minimap.maxColumn": 70,
