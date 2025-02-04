@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.136.0](https://github.com/raas-dev/configent/compare/1.135.9...1.136.0) (2025-02-04)
+
+
+### Features
+
+* **vscode:** Add extension to toggle line numbers ([1c95405](https://github.com/raas-dev/configent/commit/1c9540541f409fc4c08e13173dc406b2de14d0bd))
+
+
+### Fixes
+
+* **vscode:** Add commit message to GitLens statusbar ([708a00c](https://github.com/raas-dev/configent/commit/708a00c885568b4bb1e0dd19482bb1567e7edfcf))
+* **vscode:** Add GitLens shortcut to statusbar ([127c4a2](https://github.com/raas-dev/configent/commit/127c4a217e9c803d62ba2e9b8e4f4aaa775822f7))
+* **vscode:** Disable line numbers, use statusbar toggle ([1314d9f](https://github.com/raas-dev/configent/commit/1314d9f46453d5acf90c3f11d1a9859148487581))
+
 ### [1.135.9](https://github.com/raas-dev/configent/compare/1.135.8...1.135.9) (2025-02-04)
 
 
