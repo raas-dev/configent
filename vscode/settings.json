@@ -183,7 +183,6 @@
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
   "gitlens.graph.minimap.enabled": false,
-  "gitlens.graph.statusBar.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
   "gitlens.mode.statusBar.alignment": "left",
   "gitlens.plusFeatures.enabled": false,
