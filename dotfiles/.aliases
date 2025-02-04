@@ -212,6 +212,10 @@ alias gti='git'
 # Copy the current path to clipboard
 alias cwd='pwd | tr -d "\n" | pbcopy'
 
+# Print columns to measure terminal width
+alias c80='printf "%.0s-" $(seq 80)'
+alias c90='printf "%.0s-" $(seq 90)'
+
 # Display public DNS server
 alias dns='dig +short whoami.akamai.net'
 
