@@ -99,6 +99,7 @@
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
+  "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
   "docker.dockerPath": "docker",
