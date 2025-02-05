@@ -9,7 +9,7 @@ a pull request.
 3. The software **installed** must work on 95% of the Linux distros in README.
 3. Do `mise` plugins or distros' repos. Do minimum Homebrew and only on macOS.
 4. It must work on Linux distros on AArch64, as all Macs are AArch64 since 2023.
-5. 9/10 cases there is no use to install a CLI, use it via `uvx`, `bunx` or `n`.
+5. No benefit to install a tool if can use it via alias to `uvx`, `bunx` or `n`.
 
 ## Testing
 
