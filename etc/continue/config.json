@@ -112,14 +112,6 @@
   },
   "slashCommands": [
     {
-      "name": "edit",
-      "description": "Edit highlighted code"
-    },
-    {
-      "name": "comment",
-      "description": "Write comments for the highlighted code"
-    },
-    {
       "name": "share",
       "description": "Export the current chat session to markdown",
       "params": {
@@ -133,10 +125,6 @@
     {
       "name": "commit",
       "description": "Generate a commit message for the current changes"
-    },
-    {
-      "name": "so",
-      "description": "Reference StackOverflow to answer the question"
     },
     {
       "name": "onboard",
