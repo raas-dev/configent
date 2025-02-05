@@ -243,7 +243,19 @@
   },
   "experimental": {
     "useTools": true,
-    "modelContextProtocolServers": [],
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "--from",
+            "git+https://github.com/txbm/mcp-local-dev@main",
+            "mcp-local-dev"
+          ]
+        }
+      }
+    ],
     "quickActions": [
       {
         "title": "Explain",
