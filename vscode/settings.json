@@ -227,6 +227,7 @@
   },
   "powershell.promptToUpdatePowerShell": false,
   "powershell.startAsLoginShell.osx": false,
+  "powershell.startAutomatically": false,
   "powershell.suppressAdditionalExeNotFoundWarning": true,
   "problems.decorations.enabled": false,
   "python.analysis.autoFormatStrings": true,
