@@ -249,9 +249,7 @@
           "type": "stdio",
           "command": "uvx",
           "args": [
-            "--from",
-            "git+https://github.com/txbm/mcp-local-dev@main",
-            "mcp-local-dev"
+            "mcp-server-aidd"
           ]
         }
       }
