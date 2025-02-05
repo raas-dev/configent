@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.136.2](https://github.com/raas-dev/configent/compare/1.136.1...1.136.2) (2025-02-05)
+
+
+### Fixes
+
+* **vscode:** Add mise extension to put shims in env ([3da3e66](https://github.com/raas-dev/configent/commit/3da3e66c535b131a6973a146b0c1f651b5dd3cf6))
+* **vscode:** Disable powershell auto start ([0697bb5](https://github.com/raas-dev/configent/commit/0697bb50af414c2314f5a8ecc5e19848268d96a0))
+
 ### [1.136.1](https://github.com/raas-dev/configent/compare/1.136.0...1.136.1) (2025-02-05)
 
 
