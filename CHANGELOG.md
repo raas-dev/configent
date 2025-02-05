@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.136.3](https://github.com/raas-dev/configent/compare/1.136.2...1.136.3) (2025-02-05)
+
+
+### Fixes
+
+* **mise:** Use postinstall over .default-x-packages ([3e38235](https://github.com/raas-dev/configent/commit/3e382350edcb93b955fd2f75435bea434f82fd71))
+* **vscode:** Close debug console on session end ([ac420c2](https://github.com/raas-dev/configent/commit/ac420c23473433bbfbbe14ab12f4a275f2d69b13))
+* **vscode:** Move linenum toggle statusbar button right ([b7a1348](https://github.com/raas-dev/configent/commit/b7a1348faf1623a6c7fe0263260a1b7f0e6da37e))
+* **vscode:** Open debug console on session start ([ef565bd](https://github.com/raas-dev/configent/commit/ef565bd143ef361948fe4d2c9a75c2f91dc11841))
+* **vscode:** Remove buggy Makefile Tools extension ([f4bea00](https://github.com/raas-dev/configent/commit/f4bea009188a3a404f7264a33d0eb78311df3258))
+
 ### [1.136.2](https://github.com/raas-dev/configent/compare/1.136.1...1.136.2) (2025-02-05)
 
 
