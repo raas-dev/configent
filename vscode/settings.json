@@ -216,6 +216,7 @@
   "markdown.preview.lineHeight": 1,
   "mise.binPath": "mise",
   "mise.checkForNewMiseVersion": false,
+  "mise.configureExtensionsAutomatically": false,
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
