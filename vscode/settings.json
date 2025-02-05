@@ -97,6 +97,7 @@
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.chat.terminalShowHoverHint": false,
   "dateTime.showSeconds": true,
+  "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
