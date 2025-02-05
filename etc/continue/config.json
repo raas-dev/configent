@@ -175,10 +175,16 @@
       "name": "docs"
     },
     {
-      "name": "open"
+      "name": "open",
+      "params": {
+        "onlyPinned": false
+      }
     },
     {
-      "name": "web"
+      "name": "web",
+      "params": {
+        "n": 6
+      }
     },
     {
       "name": "codebase"
@@ -193,13 +199,13 @@
       "name": "url"
     },
     {
+      "name": "clipboard"
+    },
+    {
       "name": "tree"
     },
     {
-      "name": "google",
-      "params": {
-        "serperApiKey": "[SERPER_API_KEY]"
-      }
+      "name": "problems"
     },
     {
       "name": "debugger",
@@ -208,13 +214,26 @@
       }
     },
     {
-      "name": "repo-map"
+      "name": "repo-map",
+      "params": {
+        "includeSignatures": true
+      }
     },
     {
       "name": "os"
     },
     {
-      "name": "clipboard"
+      "name": "google",
+      "params": {
+        "serperApiKey": "[SERPER_API_KEY]"
+      }
+    },
+    {
+      "name": "commit",
+      "params": {
+        "Depth": 50,
+        "LastXCommitsDepth": 10
+      }
     }
   ],
   "docs": [
