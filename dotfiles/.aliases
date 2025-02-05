@@ -237,41 +237,47 @@ alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
 
 ### Python #####################################################################
 
-# https://hatch.pypa.io/latest
-alias hatch='uvx hatch'
-
-# Command-line utility for rendering projects templates
-alias copier='uvx --with copier-templates-extensions copier'
-
-# Reactive notebook
-alias marimo='uvx marimo'
-
-# SQL IDE for terminal
-alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
-
-# Semgrep (SAST: code vulnerability scanner)
-alias semgrep='uvx semgrep'
-
-# GuardDog (SAST: malicious package identifier - uses semgrep underneath)
-alias guarddog='uvx guarddog'
-
-# Checkov (SAST: cloud misconfiguration scanner)
-alias checkov='uvx checkov'
-
 # Multitool for tabular data in terminal
 alias vd='uvx --with odfpy,openpyxl visidata'
 
 # General media downloader
 alias you-get='uvx you-get'
 
+### sast
+
+# Checkov (cloud misconfiguration scanner)
+alias checkov='uvx checkov'
+
+# GuardDog (malicious package identifier - uses semgrep underneath)
+alias guarddog='uvx guarddog'
+
+# Semgrep (code vulnerability scanner)
+alias semgrep='uvx semgrep'
+
+### ai
+
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
+
+# Langflow
+alias langflow='uvx langflow'
+
+# Reactive notebook
+alias marimo='uvx marimo'
 
 # OpenAI CLI
 alias openai='uvx openai'
 
-# Langflow
-alias langflow='uvx langflow'
+### dev
+
+# Command-line utility for rendering projects templates
+alias copier='uvx --with copier-templates-extensions copier'
+
+# SQL IDE for terminal
+alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
+
+# https://hatch.pypa.io/latest
+alias hatch='uvx hatch'
 
 # Toggle a Python virtual environment for development
 venv() {
@@ -317,6 +323,36 @@ venv() {
 
 ### Node.js ####################################################################
 
+### cloud
+
+# Firebase CLI
+alias firebase='bunx firebase-tools'
+
+# Azure Functions CLI
+alias func='bunx azure-functions-core-tools'
+
+# Railway.app CLI
+alias railway='bunx @railway/cli'
+
+# Cloudflare Workers CLI
+alias wrangler='bunx wrangler'
+
+### ai
+
+# Flowise
+alias flowise='bunx flowise'
+
+# Microsoft GenAIScript CLI
+alias genaiscript='bunx genaiscript'
+
+# LLM evaluation framework
+alias promptfoo='bunx promptfoo'
+
+# Packs entire repository into a single, AI-friendly file
+alias repomix='bunx repomix'
+
+### dev
+
 # Find unused and missing package.json (dev)Dependencies
 alias depcheck='bunx depcheck'
 
@@ -328,24 +364,6 @@ alias projen='bunx projen'
 
 # Bump version and generate CHANGELOG.md
 alias standard-version='bunx standard-version'
-
-# Azure Functions CLI
-alias func='bunx azure-functions-core-tools'
-
-# Firebase CLI
-alias firebase='bunx firebase-tools'
-
-# Cloudflare Workers CLI
-alias wrangler='bunx wrangler'
-
-# Railway.app CLI
-alias railway='bunx @railway/cli'
-
-# Packs entire repository into a single, AI-friendly file
-alias repomix='bunx repomix'
-
-# Flowise
-alias flowise='bunx flowise'
 
 ### Functions: AI ##############################################################
 
