@@ -213,7 +213,7 @@
   "highlight-counter.priority": 1000,
   "javascript.suggest.paths": false,
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
-  "lntoggle.priority": 500,
+  "lntoggle.priority": 110,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
   "mise.binPath": "mise",
