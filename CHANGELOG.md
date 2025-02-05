@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.136.1](https://github.com/raas-dev/configent/compare/1.136.0...1.136.1) (2025-02-05)
+
+
+### Fixes
+
+* **aliases:** Add aliases for printing terminal widths ([fcf5c9f](https://github.com/raas-dev/configent/commit/fcf5c9f2892a7f52b7f8fc130a24fddb31205048))
+* **continue:** Add more [@context](https://github.com/context) providers ([ce5a5b6](https://github.com/raas-dev/configent/commit/ce5a5b616cf874a9db270d0a3df5e7940163814d))
+* **continue:** Remove unused slash commands ([fe333fd](https://github.com/raas-dev/configent/commit/fe333fdbc91d8db0c95990feb1e3ec49279c0be8))
+* **vscode:** Add /review ([4d5a535](https://github.com/raas-dev/configent/commit/4d5a535c981a9978982f477bf4cd234fb385829d))
+* **vscode:** Add keybinding for clearing terminal ([c058a34](https://github.com/raas-dev/configent/commit/c058a34f6459fa4134d5fff830c7894bfda2f416))
+* **vscode:** Decrease letter spacing by 0.1 ([fc8191e](https://github.com/raas-dev/configent/commit/fc8191e902a6ce1c52f5af2358a84b925e7efda0))
+* **vscode:** Disable terminal GPU rendering ([c8d48da](https://github.com/raas-dev/configent/commit/c8d48daf658c73fbf79d672b3ee1ad505701b20f))
+* **vscode:** Use .venv/bin/python as default interpreter ([770c8bc](https://github.com/raas-dev/configent/commit/770c8bc4cf6cce7b35823e7e018dda39df639860))
+
 ## [1.136.0](https://github.com/raas-dev/configent/compare/1.135.9...1.136.0) (2025-02-04)
 
 
