@@ -12,9 +12,12 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### sitecustomize ##############################################################
+### default packages ###########################################################
 
-# rich (imported by sitecustomize) is installed by ~/.default-python-packages
+pip install ptpython
+pip install rich
+
+### sitecustomize ##############################################################
 
 # Backup sitecustomize.py in $HOME/.config/python
 if [ ! -r "$backup_path/.config/python/sitecustomize.py" ]; then
@@ -36,8 +39,6 @@ ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
   "$sitepackages_path/sitecustomize.py"
 
 ### ptpython ###################################################################
-
-# ptpython is installed by ~/.default-python-packages
 
 # backup
 if [ ! -r "$backup_path/.config/ptpython/config.py" ]; then
