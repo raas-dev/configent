@@ -7,7 +7,7 @@ a pull request.
 
 1. Do not use anything in installation scripts that is not POSIX compatible.
 3. The software **installed** must work on 95% of the Linux distros in README.
-3. Do `mise` plugins or distros' repos. Do minimum Homebrew do it only on macOS.
+3. Do `mise` plugins or distros' repos. Do minimum Homebrew and only on macOS.
 4. It must work on Linux distros on AArch64, as all Macs are AArch64 since 2023.
 5. There is **no benefit to install CLI** in 9/10 cases, as it can run via `n`.
 
