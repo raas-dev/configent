@@ -129,7 +129,12 @@
     {
       "name": "onboard",
       "description": "Familiarize yourself with the codebase"
+    },
+    {
+      "name": "review",
+      "description": "Review code and give feedback"
     }
+
   ],
   "customCommands": [
     {
