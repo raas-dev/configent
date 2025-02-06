@@ -15,7 +15,7 @@
       "provider": "gemini",
       "model": "gemini-2.0-flash-exp",
       "apiKey": "[GEMINI_API_KEY]",
-      "contextLength": 2097152,
+      "contextLength": 1048576,
       "completionOptions": {
         "temperature": 0
       }
