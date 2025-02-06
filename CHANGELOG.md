@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.136.4](https://github.com/raas-dev/configent/compare/1.136.3...1.136.4) (2025-02-06)
+
+
+### Fixes
+
+* **aichat:** Add reasoning support ([683cf1e](https://github.com/raas-dev/configent/commit/683cf1ee69c8f321e86741669e73309725294b99))
+* **aichat:** Use gemini 2.0 pro exp by default ([dc62af1](https://github.com/raas-dev/configent/commit/dc62af1fdcf1340a54e4ea048d2ef2d504bde4dd))
+* **aliases:** Add genaiscript and promptfoo ([a3f14ac](https://github.com/raas-dev/configent/commit/a3f14acd665a4aa69c67528a46e8fed99e5bf6ba))
+* **config:** Reduce Gemini model context length ([0c8db0d](https://github.com/raas-dev/configent/commit/0c8db0d2f12c764eb6d489e0ed147e4ea86ad644))
+* **continue:** Add gemini 2.0 pro exp ([b46b8f9](https://github.com/raas-dev/configent/commit/b46b8f9cbe11d2c4f3a2c202ee67886acc310423))
+
 ### [1.136.3](https://github.com/raas-dev/configent/compare/1.136.2...1.136.3) (2025-02-05)
 
 
