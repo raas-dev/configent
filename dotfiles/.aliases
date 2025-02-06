@@ -447,6 +447,10 @@ ai_developer() {
   aichat --agent "$agent" --session "$context" --save-session "$@"
 }
 
+ai_up() {
+  aichat --sync-models
+}
+
 ### Functions: Docker ##########################################################
 
 # Generic docker build and run

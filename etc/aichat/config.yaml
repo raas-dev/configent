@@ -1,7 +1,7 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 # ---- llm ----
-model: gemini:gemini-2.0-pro-exp-02-05  # Specify the LLM to use
+model: gemini:gemini-2.0-pro-exp  # Specify the LLM to use
 temperature: 0 # Set default temperature parameter
 
 # ---- behavior ----
