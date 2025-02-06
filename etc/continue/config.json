@@ -1,9 +1,9 @@
 {
   "models": [
     {
-      "title": "gemini-2.0-flash-exp",
+      "title": "gemini-2.0-pro-exp-02-05",
       "provider": "gemini",
-      "model": "gemini-2.0-flash-exp",
+      "model": "gemini-2.0-pro-exp-02-05",
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 2097152,
       "completionOptions": {
@@ -11,9 +11,9 @@
       }
     },
     {
-      "title": "gemini-exp-1206",
+      "title": "gemini-2.0-flash-exp",
       "provider": "gemini",
-      "model": "gemini-exp-1206",
+      "model": "gemini-2.0-flash-exp",
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 2097152,
       "completionOptions": {
