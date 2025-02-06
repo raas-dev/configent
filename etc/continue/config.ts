@@ -22,7 +22,7 @@ export function modifyConfig(config: Config): Config {
     );
   }
 
-  // Chat models------- --------------------------------------------------------
+  // Chat models ---------------------------------------------------------------
 
   // Anthropic
   config.models

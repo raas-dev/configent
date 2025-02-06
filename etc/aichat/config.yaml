@@ -70,18 +70,6 @@ clients:
   - type: openai-compatible
     name: together
 
-  # kluster.ai
-  - type: openai-compatible
-    name: kluster
-    api_base: https://api.kluster.ai/v1
-    models:
-      - name: deepseek-ai/DeepSeek-R1
-        max_input_tokens: 128000
-        max_output_tokens: 16384
-        input_price: 7
-        output_price: 7
-        supports_reasoning: true
-
   # Azure AI Foundry
   - type: azure-openai
     name: azure_ai # set AZURE_AI_API_BASE and _API_KEY in .rclocal
