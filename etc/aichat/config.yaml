@@ -80,6 +80,7 @@ clients:
         max_output_tokens: 16384
         input_price: 7
         output_price: 7
+        supports_reasoning: true
 
   # Azure AI Foundry
   - type: azure-openai
