@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.2](https://github.com/raas-dev/configent/compare/1.137.1...1.137.2) (2025-02-08)
+
+
+### Fixes
+
+* **bash:** Fix bash completion logic ([d46b469](https://github.com/raas-dev/configent/commit/d46b46942fc48a2b5504b4025292c74622c0ca5c))
+* **bash:** Remove completion coloring ([aab7b8b](https://github.com/raas-dev/configent/commit/aab7b8b7f35d5ec1998ac30b511aea99ebe31f77))
+* **bash:** Remove unused keybindings ([2a27d74](https://github.com/raas-dev/configent/commit/2a27d741cd5079cd2da3e1316cedb267eae3b844))
+* **macos:** Install bash-completion from brew ([a74a7fb](https://github.com/raas-dev/configent/commit/a74a7fb0408016d0126b54a524f54c5e2ae6d842))
+
 ### [1.137.1](https://github.com/raas-dev/configent/compare/1.137.0...1.137.1) (2025-02-08)
 
 
