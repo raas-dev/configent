@@ -219,6 +219,7 @@
   "mise.binPath": "mise",
   "mise.checkForNewMiseVersion": false,
   "mise.configureExtensionsAutomatically": false,
+  "mise.showToolVersionsDecorations": false,
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
