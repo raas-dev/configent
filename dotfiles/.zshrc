@@ -27,10 +27,10 @@ else
   fi
 fi
 
-### dircolors ##################################################################
+### Use emacs keymap ###########################################################
 
-# load before Aloxaf/fzf-tab
-command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
+# https://zsh.sourceforge.io/Guide/zshguide04.html
+bindkey -e
 
 ### Completions ################################################################
 
@@ -39,6 +39,11 @@ autoload -Uz bashcompinit && bashcompinit
 
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
+
+### dircolors ##################################################################
+
+# load before Aloxaf/fzf-tab
+command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 ### antidote ###################################################################
 
@@ -60,10 +65,6 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr $word'
   zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
     '(out=$(tldr $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
-
-  # .zsh_plugins.txt: zsh-users/zsh-history-substring-search
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
 fi
 
 ### History ####################################################################
@@ -88,11 +89,6 @@ alias history='fc -El 1' # show timestamped history (zsh fc only)
 PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
 RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
-### Use emacs keymap ###########################################################
-
-# https://zsh.sourceforge.io/Guide/zshguide04.html
-bindkey -e
-
 ### aichat shell integration ###################################################
 
 _aichat_zsh() {
@@ -110,7 +106,6 @@ bindkey '^X' _aichat_zsh # CTRL + x
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
-command -v fzf >/dev/null && . <(fzf --zsh)
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 

@@ -102,6 +102,10 @@ export HOMEBREW_NO_ENV_HINTS=1
 path_prepend "$HOME/.local/bin"
 command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
+### atuin ######################################################################
+
+command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
+
 ### go #########################################################################
 
 export GOPATH="$HOME/.go"
@@ -151,7 +155,6 @@ fi
 ### fzf ########################################################################
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ### bat ########################################################################
 

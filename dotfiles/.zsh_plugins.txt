@@ -1,7 +1,6 @@
 bobsoppe/zsh-ssh-agent
-zdharma-continuum/fast-syntax-highlighting kind:defer
 Aloxaf/fzf-tab
+zdharma-continuum/fast-syntax-highlighting kind:defer
 
 zsh-users/zsh-completions
-zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions

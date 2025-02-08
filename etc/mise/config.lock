@@ -27,6 +27,10 @@ backend = "cargo:aichat"
 version = "1.22.0"
 backend = "cargo:argc"
 
+[tools."cargo:atuin"]
+version = "18.4.0"
+backend = "cargo:atuin"
+
 [tools."cargo:bat"]
 version = "0.25.0"
 backend = "cargo:bat"

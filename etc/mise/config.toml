@@ -4,6 +4,7 @@ cargo-binstall = 'latest'
 # dotfiles requirements
 'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 'cargo:argc' = 'latest'
+'cargo:atuin' = 'latest'
 'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'cargo:diskonaut' = 'latest'
 'cargo:fd-find' = 'latest'
