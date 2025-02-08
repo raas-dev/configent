@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.5](https://github.com/raas-dev/configent/compare/1.137.4...1.137.5) (2025-02-08)
+
+
+### Fixes
+
+* **config:** Default to bottom search bar in TUI ([61691ce](https://github.com/raas-dev/configent/commit/61691cef12cdd61c4813f5583e5ccdc502a0a2e3))
+
 ### [1.137.4](https://github.com/raas-dev/configent/compare/1.137.3...1.137.4) (2025-02-08)
 
 
