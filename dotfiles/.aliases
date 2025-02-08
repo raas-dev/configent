@@ -828,8 +828,9 @@ alias tokei='n tokei'
 alias k6='n k6'
 alias oha='n oha'
 
-# dns
+# network
 alias dog='n shell/dogdns dog'
+alias trip='n shell/trippy trip'
 
 # port scanners
 alias naabu='n naabu'
