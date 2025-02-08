@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.6](https://github.com/raas-dev/configent/compare/1.137.5...1.137.6) (2025-02-08)
+
+
+### Fixes
+
+* **rust:** Add gping ([082462c](https://github.com/raas-dev/configent/commit/082462cf0decbf9cda0997c447be82b92d96ce71))
+* **rust:** Add jnv ([9beac46](https://github.com/raas-dev/configent/commit/9beac4679c37c834c5ad5630c0a3eaf4d9440fea))
+
 ### [1.137.5](https://github.com/raas-dev/configent/compare/1.137.4...1.137.5) (2025-02-08)
 
 
