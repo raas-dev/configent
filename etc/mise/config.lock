@@ -95,6 +95,10 @@ backend = "cargo:numbat-cli"
 version = "0.5.1"
 backend = "cargo:ouch"
 
+[tools."cargo:oxker"]
+version = "0.9.0"
+backend = "cargo:oxker"
+
 [tools."cargo:pastel"]
 version = "0.10.0"
 backend = "cargo:pastel"
