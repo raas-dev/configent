@@ -3,8 +3,7 @@
 
 # Lima BEGIN is mentioned here for Lima to not mess with PATH on VM boot
 
-# shellcheck disable=SC1091  # do not expect input files
-# shellcheck disable=SC2155  # will not declare separately, value compactness
+# shellcheck disable=SC1091   # do not expect input files
 
 # quit if no prompt is present - shell is not interactive
 [ -z "$PS1" ] && return
@@ -69,6 +68,7 @@ parse_git_branch() {
 }
 
 get_branch_info() {
+  # shellcheck disable=SC2155   # will not declare separately, value compactness
   local branch=$(parse_git_branch)
   local scm=''
   if [ -n "$branch" ]; then
@@ -116,6 +116,13 @@ fi
 
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
+
+### carapace ###################################################################
+
+if command -v carapace >/dev/null; then
+  # shellcheck disable=SC1090   # do not follow non-constant source
+  . <(carapace _carapace)
+fi
 
 ### Load other configs #########################################################
 
