@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.137.0](https://github.com/raas-dev/configent/compare/1.136.4...1.137.0) (2025-02-08)
+
+
+### Features
+
+* **shell:** Add atuin, remove fzf shell keybundings ([7d6092e](https://github.com/raas-dev/configent/commit/7d6092e5defec0dae7f84bfce6df9f0498bc7e36))
+
+
+### Fixes
+
+* **ai:** Remove kluster.ai support, is slow ([fa1536f](https://github.com/raas-dev/configent/commit/fa1536faa81f3422afebc3944ee8dd05fca87d4e))
+
 ### [1.136.4](https://github.com/raas-dev/configent/compare/1.136.3...1.136.4) (2025-02-06)
 
 
