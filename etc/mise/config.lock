@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.23.15"
+version = "2.24.0"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.23.15.pkg" = "sha256:03ba83f68734a0f82aa83c86873bc0d7ddc00832bb549114e7ba09a6a5b61027"
+"AWSCLIV2-2.24.0.pkg" = "sha256:5d99cc24075e62c0a72c66d882216f9c418dd29eb9d9250890c985a76516bda5"
 
 [tools.bun]
 version = "1.2.2"
@@ -271,11 +271,11 @@ backend = "aqua:koalaman/shellcheck"
 "shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
 
 [tools.slsa-verifier]
-version = "2.6.0"
+version = "2.7.0"
 backend = "ubi:slsa-framework/slsa-verifier"
 
 [tools.slsa-verifier.checksums]
-slsa-verifier-macos-aarch64 = "sha256:8740e66832fd48bbaa479acd5310986b876ff545460add0cb4a087aec056189c"
+slsa-verifier-macos-aarch64 = "sha256:84d9122ce12e0c79080844285fd5c4976407ed3463e434a1b21b0979c46b1e55"
 
 [tools.tmux]
 version = "3.5a"
