@@ -77,3 +77,6 @@ brew install universal-ctags
 
 # Zsh
 brew install zsh
+
+# bash-completion (see .bashrc for setup)
+brew install bash-completion
