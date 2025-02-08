@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.138.2](https://github.com/raas-dev/configent/compare/1.138.1...1.138.2) (2025-02-08)
+
+
+### Fixes
+
+* **rust:** Add opscan ([37b69cb](https://github.com/raas-dev/configent/commit/37b69cb08d46287be56a34ddf8ef5f4548df8547))
+
 ### [1.138.1](https://github.com/raas-dev/configent/compare/1.138.0...1.138.1) (2025-02-08)
 
 
