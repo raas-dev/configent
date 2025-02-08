@@ -139,6 +139,7 @@ export RICH_SHOW_LOCALS=true
 if command -v dotnet >/dev/null; then
   #shellcheck disable=SC2155  # will not declare separately, value compactness
   export DOTNET_ROOT="$(dirname "$(which dotnet)")"
+  export POWERSHELL_UPDATECHECK="Off"
 fi
 
 ### Starship cross-shell prompt ################################################
