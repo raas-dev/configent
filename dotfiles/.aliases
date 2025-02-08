@@ -133,7 +133,7 @@ fi
 
 alias a='aichat --role chat'
 alias b='bat --style=grid,header-filename,numbers,snip'
-alias c='ai_developer'
+alias c='oxker'
 # d is for generic docker build and run, see d()
 # e is for generic extract package, see e()
 alias f='fd --ignore-case --no-ignore --hidden'
@@ -435,13 +435,6 @@ ai() {
 
 ai_assistant() {
   local agent="assistant"
-  local context="${PWD##*/}"
-  _aichat_build_agents "$agent" "$context"
-  aichat --agent "$agent" --session "$context" --save-session "$@"
-}
-
-ai_developer() {
-  local agent="developer"
   local context="${PWD##*/}"
   _aichat_build_agents "$agent" "$context"
   aichat --agent "$agent" --session "$context" --save-session "$@"
