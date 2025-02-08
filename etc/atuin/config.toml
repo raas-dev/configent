@@ -26,7 +26,7 @@
 # auto_sync = true
 
 ## enable or disable automatic update checks
-# update_check = true
+update_check = false
 
 ## address of the sync server
 # sync_address = "https://api.atuin.sh"
@@ -93,7 +93,7 @@ inline_height = 12
 
 ## use ctrl instead of alt as the shortcut modifier key for numerical UI shortcuts
 ## alt-0 .. alt-9
-# ctrl_n_shortcuts = false
+ctrl_n_shortcuts = true
 
 ## default history list format - can also be specified with the --format arg
 # history_format = "{time}\t{command}\t{duration}"
