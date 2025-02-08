@@ -64,6 +64,7 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr $word'
   zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
     '(out=$(tldr $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+  # disable-fzf-tab
 fi
 
 ### History ####################################################################
