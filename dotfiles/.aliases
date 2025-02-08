@@ -795,6 +795,7 @@ alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 
 # cloud
 alias azcopy='n shell/azure-storage-azcopy azcopy'
+alias termscp='n termscp/vim'
 
 # appsec
 alias grype='n grype'
