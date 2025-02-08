@@ -69,7 +69,7 @@ style = "compact"
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
-inline_height = 12
+inline_height = 10
 
 ## Invert the UI - put the search bar at the top , Default to `false`
 #invert = true
