@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.1](https://github.com/raas-dev/configent/compare/1.137.0...1.137.1) (2025-02-08)
+
+
+### Performance
+
+* **bootstrap:** Git clone repos using --depth 1 ([acb1680](https://github.com/raas-dev/configent/commit/acb1680cf9f42cefd4e39a607f1bd6eb5f35f29f))
+
 ## [1.137.0](https://github.com/raas-dev/configent/compare/1.136.4...1.137.0) (2025-02-08)
 
 
