@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.138.1](https://github.com/raas-dev/configent/compare/1.138.0...1.138.1) (2025-02-08)
+
+
+### Fixes
+
+* **ai:** Do not save session by default ([c84bb52](https://github.com/raas-dev/configent/commit/c84bb5292cfccddd09bbbe683882f8d8ec9782ee))
+* **ai:** Remove ai_developer agent ([8331b95](https://github.com/raas-dev/configent/commit/8331b95ac01278636482a606c413544d0931d331))
+
 ## [1.138.0](https://github.com/raas-dev/configent/compare/1.137.6...1.138.0) (2025-02-08)
 
 
