@@ -21,9 +21,6 @@ set page-completions off
 # If there are more than 200 possible completions for a word, ask to show them all
 set completion-query-items 200
 
-# Set readline to display possible completions using different colors
-set colored-stats on
-
 # Show extra file information when completing, like `ls -F` does
 set visible-stats on
 
