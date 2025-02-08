@@ -88,21 +88,23 @@ fi
 
 ### Additional bash completions ################################################
 
-if [ "$(uname -s)" = 'Linux' ]; then
-  # brew on Intel Macs
-  if [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
-    . "/usr/local/etc/profile.d/bash_completion.sh"
-  # brew on ARM macs
-  elif [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
+  if [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
+    # brew on ARM macs
     . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-  # Linuxbrew
-  elif [ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]; then
+  elif [ -r "/usr/local/etc/profile.d/bash_completion.sh" ]; then
+    # brew on Intel Macs
+    . "/usr/local/etc/profile.d/bash_completion.sh"
+  fi
+else
+  if [ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]; then
+    # Linuxbrew
     . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
-  # apt on Ubuntu
   elif [ -r "/usr/share/bash-completion/bash_completion" ]; then
+    # apt on Ubuntu
     . "/usr/share/bash-completion/bash_completion"
-  # apt on Debian
-  elif [ -r "etc/bash_completion" ]; then
+  elif [ -r "/etc/bash_completion" ]; then
+    # apt on Debian
     . "/etc/bash_completion"
   fi
 fi
