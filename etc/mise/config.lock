@@ -67,6 +67,10 @@ backend = "cargo:hurl"
 version = "0.3.18"
 backend = "cargo:hwatch"
 
+[tools."cargo:jnv"]
+version = "0.4.2"
+backend = "cargo:jnv"
+
 [tools."cargo:kondo"]
 version = "0.8.0"
 backend = "cargo:kondo"
