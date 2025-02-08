@@ -3,9 +3,6 @@
 
 # Lima BEGIN is mentioned here for Lima to not mess with PATH on VM boot
 
-# shellcheck disable=SC1091  # do not expect input files
-# shellcheck disable=SC2123  # reset PATH
-
 ### PATH #######################################################################
 
 path_append() {
@@ -27,6 +24,7 @@ path_prepend() {
 }
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  # shellcheck disable=SC2123  # reset PATH
   PATH=''
   path_append '/usr/local/bin'
   path_append '/usr/bin'
@@ -34,6 +32,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   path_append '/usr/sbin'
   path_append '/sbin'
 elif [ "$(uname -s)" = 'Linux' ]; then
+  # shellcheck disable=SC2123  # reset PATH
   PATH=''
   path_append '/usr/local/sbin'
   path_append '/usr/local/bin'
@@ -137,7 +136,10 @@ export RICH_SHOW_LOCALS=true
 
 ### dotnet #####################################################################
 
-command -v dotnet >/dev/null && export DOTNET_ROOT="$(dirname $(which dotnet))"
+if command -v dotnet >/dev/null; then
+  #shellcheck disable=SC2155  # will not declare separately, value compactness
+  export DOTNET_ROOT="$(dirname "$(which dotnet)")"
+fi
 
 ### Starship cross-shell prompt ################################################
 
