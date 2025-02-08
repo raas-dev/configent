@@ -813,6 +813,7 @@ alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 
 # decoders
+alias binsider='n binsider'
 alias fq='n fq'
 alias hexyl='n hexyl'
 alias lemmeknow='n lemmeknow'
