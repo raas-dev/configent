@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.138.0](https://github.com/raas-dev/configent/compare/1.137.6...1.138.0) (2025-02-08)
+
+
+### Features
+
+* **docker:** Add oxker ([573ce75](https://github.com/raas-dev/configent/commit/573ce75b1c96f812984b6fd8dd7f056a0dd40f47))
+
+
+### Fixes
+
+* **aliases:** Add binsider via n ([709e2c9](https://github.com/raas-dev/configent/commit/709e2c975b9713d5b1bac1ba21571a6c5844acab))
+* **aliases:** Add openapi-tui via n ([f124706](https://github.com/raas-dev/configent/commit/f1247065c8396a1acb0a40e9e9941e2551fc1db6))
+* **aliases:** Add termscp via n ([fa6fb42](https://github.com/raas-dev/configent/commit/fa6fb42ed53fa8bac0289ffcc252ce9f397b02a6))
+* **aliases:** Add trippy via n ([afe72d3](https://github.com/raas-dev/configent/commit/afe72d34969de86daa075d99c46298959e0d6a13))
+
 ### [1.137.6](https://github.com/raas-dev/configent/compare/1.137.5...1.137.6) (2025-02-08)
 
 
