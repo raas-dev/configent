@@ -823,6 +823,7 @@ alias lemmeknow='n lemmeknow'
 alias devenv='n devenv' # https://devenv.sh/
 alias difft='n shell/difftastic difft'
 alias grex='n grex'
+alias openapi-tui='n openapi-tui'
 alias pcalc='n pcalc'
 alias tokei='n tokei'
 
