@@ -91,6 +91,10 @@ backend = "cargo:nixpacks"
 version = "1.16.0"
 backend = "cargo:numbat-cli"
 
+[tools."cargo:opscan"]
+version = "0.4.0"
+backend = "cargo:opscan"
+
 [tools."cargo:ouch"]
 version = "0.5.1"
 backend = "cargo:ouch"
