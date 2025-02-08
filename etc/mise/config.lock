@@ -59,6 +59,10 @@ backend = "cargo:git-delta"
 version = "0.27.0"
 backend = "cargo:gitui"
 
+[tools."cargo:gping"]
+version = "1.19.0"
+backend = "cargo:gping"
+
 [tools."cargo:hurl"]
 version = "6.0.0"
 backend = "cargo:hurl"
