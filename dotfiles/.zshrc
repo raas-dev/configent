@@ -42,7 +42,7 @@ autoload -Uz bashcompinit && bashcompinit
 
 ### dircolors ##################################################################
 
-# load before Aloxaf/fzf-tab
+# load before LS_COLORS for Aloxaf/fzf-tab
 command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
 ### antidote ###################################################################
@@ -53,7 +53,6 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   antidote load
 
   # .zsh_plugins.txt: Aloxaf/fzf-tab
-  enable-fzf-tab
   zstyle ':completion:*' list-colors "${LS_COLORS}"
   zstyle ':completion:*' menu no
   zstyle ':completion:*:descriptions' format '[%d]'
