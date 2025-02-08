@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.3](https://github.com/raas-dev/configent/compare/1.137.2...1.137.3) (2025-02-08)
+
+
+### Fixes
+
+* **atuin:** Add config ([4ff4142](https://github.com/raas-dev/configent/commit/4ff4142e248a7c282293a6b68c3d8605f5c142b3))
+* **atuin:** Change style ([faf1aac](https://github.com/raas-dev/configent/commit/faf1aac24e0d5f493cbc0078d0d05dca815b2237))
+* **settings:** Hide mise tool version decorations ([cebd717](https://github.com/raas-dev/configent/commit/cebd7179888c7d2e1101238ecf23723959c83afe))
+
 ### [1.137.2](https://github.com/raas-dev/configent/compare/1.137.1...1.137.2) (2025-02-08)
 
 
