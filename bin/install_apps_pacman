@@ -77,7 +77,7 @@ systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Yay
-git clone https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
+git clone --depth 1 https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
   git -C "/tmp/yay-bin" pull --no-autostash --rebase
 (cd "/tmp/yay-bin" && makepkg --noconfirm --needed -si)
 

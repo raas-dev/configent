@@ -21,7 +21,7 @@ fi
 
 # install Vundle
 vundle_dir="$HOME/.vim/bundle/Vundle.vim"
-git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
+git clone --depth 1 https://github.com/VundleVim/Vundle.vim.git "$vundle_dir" ||
   git -C "$vundle_dir" pull --no-autostash --rebase
 
 # use Vundle to install Vim plugins

@@ -9,7 +9,8 @@
 ### Install antidote ###########################################################
 
 # https://github.com/mattmc3/antidote
-git clone https://github.com/mattmc3/antidote.git "$HOME/.antidote" ||
+git clone --depth 1 https://github.com/mattmc3/antidote.git \
+  "$HOME/.antidote" ||
   git -C "$HOME/.antidote" pull --no-autostash --rebase
 
 # for bobsoppe/zsh-ssh-agent, create .ssh directory if it does not already exist

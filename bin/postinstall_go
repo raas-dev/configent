@@ -8,12 +8,12 @@
 
 ### constants ##################################################################
 
-tpm_dir="$HOME/.tmux/plugins/tpm"
+carapace_dir="$HOME/.local/share/carapace"
 
-### plugins ####################################################################
+### carapace ###################################################################
 
-git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir" ||
-  git -C "$tpm_dir" pull --no-autostash --rebase
+git clone --depth 1 https://github.com/carapace-sh/carapace-bin \
+  "$carapace_dir" ||
+  git -C "$carapace_dir" pull --no-autostash
 
-"$tpm_dir/bin/install_plugins"
-"$tpm_dir/bin/clean_plugins"
+(cd "$carapace_dir/cmd/carapace" && go generate ./... && go install)

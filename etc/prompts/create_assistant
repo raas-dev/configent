@@ -10,7 +10,7 @@ this_path="$(cd "$(dirname "$0")" && pwd)"
 fabric_path="$this_path/fabric"
 
 git clone --depth 1 https://github.com/danielmiessler/fabric.git "$fabric_path" ||
-  git -C "$fabric_path" pull --no-autostash --rebase origin main
+  git -C "$fabric_path" pull --no-autostash --rebase
 
 # Create target directory if it doesn't exist
 mkdir -p "$target_path"
