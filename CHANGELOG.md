@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.137.4](https://github.com/raas-dev/configent/compare/1.137.3...1.137.4) (2025-02-08)
+
+
+### Fixes
+
+* **.profile:** Disable PowerShell update check ([b8f9eab](https://github.com/raas-dev/configent/commit/b8f9eab09851c74cdc3928ddbb23da1f8a89bf08))
+* **bash:** Add carapace ([dd57301](https://github.com/raas-dev/configent/commit/dd57301e06f3aa4a173ce5485877e5e7062925c6))
+* **pwsh:** Add carapace ([0b7eff3](https://github.com/raas-dev/configent/commit/0b7eff3861b206ddc8bdf9c1698ba43340dd4e9f))
+
 ### [1.137.3](https://github.com/raas-dev/configent/compare/1.137.2...1.137.3) (2025-02-08)
 
 
