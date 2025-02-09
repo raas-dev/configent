@@ -132,7 +132,7 @@ version = "1.3.0"
 backend = "cargo:viddy"
 
 [tools."cargo:watchexec-cli"]
-version = "2.2.1"
+version = "2.3.0"
 backend = "cargo:watchexec-cli"
 
 [tools."cargo:xh"]
