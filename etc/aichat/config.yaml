@@ -86,7 +86,7 @@ clients:
     api_base: http://127.0.0.1:11434/v1
     models:
       - name: mistral-small
-        max_input_tokens: 32000
+        max_input_tokens: 32768
         supports_function_calling: true
       - name: nomic-embed-text
         type: embedding
