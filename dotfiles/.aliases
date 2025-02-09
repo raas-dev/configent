@@ -164,7 +164,7 @@ alias _='ai_assistant'
 
 ### watch ######################################################################
 
-command -v hwatch >/dev/null && alias watch='hwatch --differences word'
+command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 

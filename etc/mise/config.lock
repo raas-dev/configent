@@ -67,10 +67,6 @@ backend = "cargo:gping"
 version = "6.0.0"
 backend = "cargo:hurl"
 
-[tools."cargo:hwatch"]
-version = "0.3.18"
-backend = "cargo:hwatch"
-
 [tools."cargo:jnv"]
 version = "0.4.2"
 backend = "cargo:jnv"
@@ -130,6 +126,10 @@ backend = "cargo:tailspin"
 [tools."cargo:topgrade"]
 version = "16.0.2"
 backend = "cargo:topgrade"
+
+[tools."cargo:viddy"]
+version = "1.3.0"
+backend = "cargo:viddy"
 
 [tools."cargo:watchexec-cli"]
 version = "2.2.1"
