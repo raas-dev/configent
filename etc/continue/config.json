@@ -44,6 +44,18 @@
       "provider": "ollama",
       "model": "mistral-small:latest",
       "apiBase": "http://127.0.0.1:11434",
+      "contextLength": 32768,
+      "completionOptions": {
+        "temperature": 0,
+        "keepAlive": 900
+      }
+    },
+    {
+      "title": "Ollama: deepseek-r1:14b",
+      "provider": "ollama",
+      "model": "deepseek-r1:14b",
+      "apiBase": "http://127.0.0.1:11434",
+      "contextLength": 32768,
       "completionOptions": {
         "temperature": 0,
         "keepAlive": 900
