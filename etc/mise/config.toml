@@ -1,7 +1,7 @@
 [tools]
 rust = '1.83.0'
 cargo-binstall = 'latest'
-# dotfiles requirements
+# cli tools
 'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 'cargo:argc' = 'latest'
 'cargo:atuin' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
@@ -12,29 +12,28 @@ cargo-binstall = 'latest'
 'cargo:gitui' = 'latest'
 'cargo:gping' = 'latest'
 'cargo:hurl' = 'latest'
-'cargo:viddy' = 'latest'
 'cargo:jnv'= 'latest'
+'cargo:kondo' = 'latest'
 'cargo:lsd' = 'latest'
+'cargo:nixpacks' = 'latest'
 'cargo:numbat-cli' = 'latest'
 'cargo:opscan' = 'latest'
 'cargo:ouch' = 'latest'
 'cargo:oxker' = 'latest'
+'cargo:pastel' = 'latest'
 'cargo:procs' = 'latest'
 'cargo:ripgrep' = 'latest'
 'cargo:sd' = 'latest'
 'cargo:starship' = { version = '1.22.1', postinstall = "~/.local/configent/bin/postinstall_starship" }
 'cargo:tailspin' = 'latest'
+'cargo:viddy' = 'latest'
+'cargo:watchexec-cli' = 'latest'
 'cargo:xh' = 'latest'
 'cargo:zoxide' = 'latest'
 # topgrade
-'cargo:cargo-cache' = 'latest' # https://github.com/matthiaskrgr/cargo-cache
-'cargo:cargo-update' = 'latest' # https://github.com/nabijaczleweli/cargo-update
-'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" } #  https://github.com/topgrade-rs/topgrade
-# extras
-'cargo:kondo' = 'latest' # https://github.com/tbillington/kondo
-'cargo:nixpacks' = 'latest' # https://github.com/railwayapp/nixpacks
-'cargo:pastel' = 'latest' # https://github.com/sharkdp/pastel
-'cargo:watchexec-cli' = 'latest' # https://github.com/watchexec/watchexec
+'cargo:cargo-cache' = 'latest'
+'cargo:cargo-update' = 'latest'
+'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 
 go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go" }
 'go:github.com/muesli/duf' = 'latest'
