@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.138.3](https://github.com/raas-dev/configent/compare/1.138.2...1.138.3) (2025-02-09)
+
+
+### Fixes
+
+* **continue:** Add deepseek-r1:14b via ollama ([ac5e78a](https://github.com/raas-dev/configent/commit/ac5e78abf2b38c6661705c7913f2ff4c359b76b5))
+* **watch:** Use viddy, remove hwatch ([54ee837](https://github.com/raas-dev/configent/commit/54ee8377621d97f663953876ef2ba5430decc3a3))
+
 ### [1.138.2](https://github.com/raas-dev/configent/compare/1.138.1...1.138.2) (2025-02-08)
 
 
