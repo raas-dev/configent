@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.138.5](https://github.com/raas-dev/configent/compare/1.138.4...1.138.5) (2025-02-13)
+
+
+### Fixes
+
+* **vscode:** Update mise env automatically in terminal ([9f26bb3](https://github.com/raas-dev/configent/commit/9f26bb363444ee25b770583c29cb307d616cd639))
+
 ### [1.138.4](https://github.com/raas-dev/configent/compare/1.138.3...1.138.4) (2025-02-11)
 
 
