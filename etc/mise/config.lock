@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.24.1"
+version = "2.24.3"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.24.1.pkg" = "sha256:0a6cf5bdfc45a2e38f90467c50fde22830bfcee5a3635ecd5a4f05bc99ec47b7"
+"AWSCLIV2-2.24.3.pkg" = "sha256:8e43a2342f18dce367c293115fdaf59d7243317122599cf0e636d19572d780c9"
 
 [tools.bun]
 version = "1.2.2"
@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:c4d58e06c5c33885b526f4d91a38ca9ebdb9fc3fb4cd547f7d3302055c98e41c"
 
 [tools.cargo-binstall]
-version = "1.10.22"
+version = "1.10.23"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:97ce4a2f18181f052dda266b042d8bb220e48ffe40ca75e796ae4c5e418b9e01"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:73abce9648edad70f4c5d22c30a2f5bb8ebedd012b6ac874608003153fd815c2"
 
 [tools."cargo:aichat"]
 version = "0.27.0"
@@ -140,7 +140,7 @@ version = "0.23.1"
 backend = "cargo:xh"
 
 [tools."cargo:zoxide"]
-version = "0.9.6"
+version = "0.9.7"
 backend = "cargo:zoxide"
 
 [tools.cosign]
@@ -159,18 +159,18 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.59.0"
+version = "0.60.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.59.0-darwin_arm64.tar.gz" = "sha256:4451947ebaf54616f2dd4c6db7d681ffeffc7b96b1a61d4b9b9aa22c5b9c6880"
+"fzf-0.60.0-darwin_arm64.tar.gz" = "sha256:96f6829af0889b3ae2304a1fd736d2aa138d26a014d2523cbe667bcf888d7c2a"
 
 [tools.github-cli]
-version = "2.66.1"
+version = "2.67.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.66.1_macOS_arm64.zip" = "sha256:80bf6b20a56411ae56ffebdfef81217cb2b739674a625a85f8668153604cc4f6"
+"gh_2.67.0_macOS_arm64.zip" = "sha256:0c2524c2b002fda89f8b766c7d3dd8e6ac1de183556728a83182c6137f19643d"
 
 [tools.go]
 version = "1.23.4"
@@ -219,11 +219,11 @@ backend = "aqua:jqlang/jq"
 jq-macos-arm64 = "sha256:0bbe619e663e0de2c550be2fe0d240d076799d6f8a652b70fa04aea8a8362e8a"
 
 [tools.lima]
-version = "1.0.5"
+version = "1.0.6"
 backend = "aqua:lima-vm/lima"
 
 [tools.lima.checksums]
-"lima-1.0.5-Darwin-arm64.tar.gz" = "sha256:ddf70859d8c505887609e08474b12fe6c7407c1686efe4169d3118e00acb457f"
+"lima-1.0.6-Darwin-arm64.tar.gz" = "sha256:4c65d63eb5f3a97a781ccea4944aa936def4d68e34e95c3f1e010791f318236c"
 
 [tools.neovim]
 version = "0.10.4"
@@ -309,8 +309,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.59.1_macOS-ARM64.tar.gz" = "sha256:abe9cd4e8cc86304d18956151aff95d9086a234be89610159feab6365a10d995"
 
 [tools.uv]
-version = "0.5.30"
+version = "0.5.31"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:654c3e010c9c53b024fa752d08b949e0f80f10ec4e3a1acea9437a1d127a1053"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:396c9bd6acd98466fdb585da2ed040eecea15228e580d4bd649c09215b490bf9"
