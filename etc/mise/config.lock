@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.24.3"
+version = "2.24.4"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.24.3.pkg" = "sha256:8e43a2342f18dce367c293115fdaf59d7243317122599cf0e636d19572d780c9"
+"AWSCLIV2-2.24.4.pkg" = "sha256:21fd2a1a5811b90875e236c7d9e9280736c935db8bab6a1526719f06ecc4646c"
 
 [tools.bun]
 version = "1.2.2"
