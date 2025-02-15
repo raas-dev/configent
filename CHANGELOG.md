@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.138.6](https://github.com/raas-dev/configent/compare/1.138.5...1.138.6) (2025-02-15)
+
+
+### Fixes
+
+* **continue:** Remove AiDD MCP Server ([4dc5975](https://github.com/raas-dev/configent/commit/4dc59755b56986c99e8aee5d3a8012bc069bfbb8))
+
 ### [1.138.5](https://github.com/raas-dev/configent/compare/1.138.4...1.138.5) (2025-02-13)
 
 
