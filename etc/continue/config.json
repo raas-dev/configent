@@ -255,17 +255,7 @@
   },
   "experimental": {
     "useTools": true,
-    "modelContextProtocolServers": [
-      {
-        "transport": {
-          "type": "stdio",
-          "command": "uvx",
-          "args": [
-            "mcp-server-aidd"
-          ]
-        }
-      }
-    ],
+    "modelContextProtocolServers": [],
     "quickActions": [
       {
         "title": "Explain",
