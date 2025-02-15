@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:c4d58e06c5c33885b526f4d91a38ca9ebdb9fc3fb4cd547f7d3302055c98e41c"
 
 [tools.cargo-binstall]
-version = "1.10.23"
+version = "1.11.0"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:73abce9648edad70f4c5d22c30a2f5bb8ebedd012b6ac874608003153fd815c2"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:bd746c656e5cc9820fb277b442f438127bc461c52f20500452b845a767d15322"
 
 [tools."cargo:aichat"]
 version = "0.27.0"
@@ -260,7 +260,7 @@ version = "1.50.0"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
-version = "2.0.1"
+version = "2.1.0"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
