@@ -165,6 +165,10 @@ backend = "aqua:junegunn/fzf"
 [tools.fzf.checksums]
 "fzf-0.60.0-darwin_arm64.tar.gz" = "sha256:96f6829af0889b3ae2304a1fd736d2aa138d26a014d2523cbe667bcf888d7c2a"
 
+[tools.gcloud]
+version = "510.0.0"
+backend = "asdf:jthegedus/asdf-gcloud"
+
 [tools.github-cli]
 version = "2.67.0"
 backend = "aqua:cli/cli"
