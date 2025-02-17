@@ -260,7 +260,7 @@ version = "1.50.0"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
-version = "2.1.0"
+version = "2.1.1"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
