@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.139.0](https://github.com/raas-dev/configent/compare/1.138.6...1.139.0) (2025-02-17)
+
+
+### Features
+
+* **mise:** Add gcloud sdk ([b113e71](https://github.com/raas-dev/configent/commit/b113e7136289d2d12ca56f216448dc88fc1a6f31))
+
 ### [1.138.6](https://github.com/raas-dev/configent/compare/1.138.5...1.138.6) (2025-02-15)
 
 
