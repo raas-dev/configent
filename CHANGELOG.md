@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.139.1](https://github.com/raas-dev/configent/compare/1.139.0...1.139.1) (2025-02-19)
+
+
+### Fixes
+
+* **aliases:** Remove extra file from resetkeyboard ([6e56a0f](https://github.com/raas-dev/configent/commit/6e56a0f9430266e3248dee577f345b2621e68cce))
+* **macos:** Remove obsolete reset dock ([72c30c0](https://github.com/raas-dev/configent/commit/72c30c042a5a39f6aece6f55888472c55c70771a))
+* **vscode:** Decrease minimap width ([67575ba](https://github.com/raas-dev/configent/commit/67575baf713a508aad6ba5909f542a4d4f20ad2c))
+* **vscode:** Disable git terminal authentication ([e908979](https://github.com/raas-dev/configent/commit/e90897946372056aba6aa856f15939931aac6d2d))
+
 ## [1.139.0](https://github.com/raas-dev/configent/compare/1.138.6...1.139.0) (2025-02-17)
 
 
