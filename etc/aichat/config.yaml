@@ -98,6 +98,7 @@ clients:
         supports_vision: true
         supports_function_calling: true
         system_prompt_prefix: Formatting re-enabled
+        #api_version: "2025-01-01-preview"
         patch:
           body:
             reasoning_effort: high
