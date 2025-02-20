@@ -79,6 +79,18 @@ clients:
         max_output_tokens: 16384
         supports_vision: true
         supports_function_calling: true
+      - name: o3-mini
+        max_input_tokens: 200000
+        max_output_tokens: 100000
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            reasoning_effort: high
+            max_tokens: null
+            temperature: null
+            top_p: null
 
   # local
   - type: openai-compatible
