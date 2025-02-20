@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.139.5](https://github.com/raas-dev/configent/compare/1.139.4...1.139.5) (2025-02-20)
+
+
+### Fixes
+
+* **macos:** Do not enable auto-update for apps ([824220e](https://github.com/raas-dev/configent/commit/824220ef521ef3c3b7a80bd4fbe96977ff2f494c))
+* **vscode:** Use bold font in editor and terminal ([5e8ec8b](https://github.com/raas-dev/configent/commit/5e8ec8b1812560fb5f957548a714fd7e42ee558c))
+
 ### [1.139.4](https://github.com/raas-dev/configent/compare/1.139.3...1.139.4) (2025-02-20)
 
 
