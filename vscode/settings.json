@@ -113,12 +113,13 @@
   "editor.folding": false,
   "editor.fontFamily": "Terminess Nerd Font",
   "editor.fontSize": 17.5,
+  "editor.fontWeight": "bold",
   "editor.glyphMargin": false,
   "editor.guides.bracketPairs": "active",
   "editor.hideCursorInOverviewRuler": true,
   "editor.indentSize": "tabSize",
   "editor.inlayHints.enabled": "offUnlessPressed",
-  "editor.letterSpacing": -0.75,
+  "editor.letterSpacing": -0.6,
   "editor.lineHeight": 14,
   "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
@@ -275,6 +276,7 @@
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.environmentChangesRelaunch": false,
   "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.gpuAcceleration": "off",
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
@@ -400,7 +402,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "editor.fontWeight": "bold",
-  "terminal.integrated.fontWeight": "bold"
+  "zenMode.hideStatusBar": false
 }
