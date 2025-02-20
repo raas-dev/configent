@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.139.3](https://github.com/raas-dev/configent/compare/1.139.2...1.139.3) (2025-02-20)
+
+
+### Fixes
+
+* **vscode:** Decrease editor font size ([ee3db7b](https://github.com/raas-dev/configent/commit/ee3db7b393be7c7f117dee1c9d2e8372b596ef23))
+* **vscode:** Decrease font size by 0.50 ([47daff5](https://github.com/raas-dev/configent/commit/47daff53652e078c4025a766e2c4f8eb0a23f298))
+* **vscode:** Decrease terminal font size ([47b3750](https://github.com/raas-dev/configent/commit/47b3750ee384b5d1ea8115e806783d1f63d8b543))
+* **vscode:** Make minimap proportional size ([0a197c8](https://github.com/raas-dev/configent/commit/0a197c814a9ee7d4739de845699f62482c943116))
+* **vscode:** Revert decrease font size by 0.50 ([c91ef47](https://github.com/raas-dev/configent/commit/c91ef47bc29a48aca7171e22011f9de1a91c56ee))
+
 ### [1.139.2](https://github.com/raas-dev/configent/compare/1.139.1...1.139.2) (2025-02-20)
 
 
