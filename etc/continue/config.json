@@ -27,6 +27,12 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
+      "title": "gpt-4o-mini",
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "apiKey": "[OPENAI_API_KEY]"
+    },
+    {
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
@@ -43,17 +49,6 @@
       "title": "Ollama: mistral-small:24b",
       "provider": "ollama",
       "model": "mistral-small:latest",
-      "apiBase": "http://127.0.0.1:11434",
-      "contextLength": 32768,
-      "completionOptions": {
-        "temperature": 0,
-        "keepAlive": 900
-      }
-    },
-    {
-      "title": "Ollama: deepseek-r1:14b",
-      "provider": "ollama",
-      "model": "deepseek-r1:14b",
       "apiBase": "http://127.0.0.1:11434",
       "contextLength": 32768,
       "completionOptions": {
@@ -85,6 +80,18 @@
       "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
       "region": "eu-central-1",
       "profile": "bedrock",
+      "completionOptions": {
+        "temperature": 0
+      }
+    },
+    {
+      "title": "Azure: o3-mini",
+      "provider": "azure",
+      "model": "o3-mini",
+      "deployment": "gpt-4o-mini",
+      "apiBase": "[AZURE_AI_API_BASE]",
+      "apiKey": "[AZURE_AI_API_KEY]",
+      "reasoning_effort": "medium",
       "completionOptions": {
         "temperature": 0
       }
