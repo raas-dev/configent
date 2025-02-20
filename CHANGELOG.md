@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.139.2](https://github.com/raas-dev/configent/compare/1.139.1...1.139.2) (2025-02-20)
+
+
+### Fixes
+
+* **aichat:** Add azure-openai o3-mini ([80565de](https://github.com/raas-dev/configent/commit/80565de55cc41fe029f948725f412d0119b83fd4))
+* **aichat:** Add bedrock ([ba32334](https://github.com/raas-dev/configent/commit/ba3233400a9cf132caacb6002f24a9bef029b67b))
+* **continue:** Add missing options to Azure AI models ([8a5b68d](https://github.com/raas-dev/configent/commit/8a5b68d8b6acce0715fe75147a48d8446b5cec2a))
+* **macos:** Do not show hidden files by default ([ee08dec](https://github.com/raas-dev/configent/commit/ee08decba1184564342f8ba21ee0fc4d0245a6c2))
+* **vscode:** Update models ([737f5a2](https://github.com/raas-dev/configent/commit/737f5a2380e3e62899975777375cbe8b2f88dcc2))
+
 ### [1.139.1](https://github.com/raas-dev/configent/compare/1.139.0...1.139.1) (2025-02-19)
 
 
