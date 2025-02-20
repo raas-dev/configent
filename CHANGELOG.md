@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.139.4](https://github.com/raas-dev/configent/compare/1.139.3...1.139.4) (2025-02-20)
+
+
+### Fixes
+
+* **vscode:** Decrease letter spacing ([0a33a5a](https://github.com/raas-dev/configent/commit/0a33a5a2e3a99ba42b9f82bde9a05b52ea3651cd))
+* **vscode:** Increase font size ([15c154b](https://github.com/raas-dev/configent/commit/15c154b9ccd2d93f359b770ca07df4d9470d96b0))
+
 ### [1.139.3](https://github.com/raas-dev/configent/compare/1.139.2...1.139.3) (2025-02-20)
 
 
