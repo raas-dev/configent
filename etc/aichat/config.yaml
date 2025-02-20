@@ -70,34 +70,6 @@ clients:
   - type: openai-compatible
     name: together
 
-  # Azure AI Foundry
-  - type: azure-openai
-    name: azure_ai # set AZURE_AI_API_BASE and _API_KEY in .rclocal
-    models:
-      - name: gpt-4o-mini
-        max_input_tokens: 128000
-        max_output_tokens: 16384
-        supports_vision: true
-        supports_function_calling: true
-      - name: o3-mini
-        max_input_tokens: 200000
-        max_output_tokens: 100000
-        supports_vision: true
-        supports_function_calling: true
-        system_prompt_prefix: Formatting re-enabled
-        patch:
-          body:
-            reasoning_effort: high
-            max_tokens: null
-            temperature: null
-            top_p: null
-
-
-  # AWS Bedrock
-  - type: bedrock
-    name: aws
-    region: eu-central-1
-
   # local
   - type: openai-compatible
     name: ollama
@@ -110,3 +82,30 @@ clients:
         type: embedding
       - name: jina-reranker-v2-base-multilingual
         type: reranker
+
+  # AWS Bedrock
+  - type: bedrock
+    name: aws   # export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    region: eu-central-1
+
+  # Azure AI Foundry
+  - type: azure-openai
+    name: azure_ai    # export AZURE_AI_API_BASE and AZURE_API_KEY
+    models:
+      - name: o3-mini
+        max_input_tokens: 200000
+        max_output_tokens: 100000
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            reasoning_effort: high
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: gpt-4o-mini
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        supports_vision: true
+        supports_function_calling: true
