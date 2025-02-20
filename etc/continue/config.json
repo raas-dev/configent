@@ -88,21 +88,24 @@
       "title": "Azure: o3-mini",
       "provider": "azure",
       "model": "o3-mini",
-      "deployment": "gpt-4o-mini",
+      "deployment": "o3-mini",
+      "contextLength": 200000,
+      "maxCompletionTokens": 65536,
+      "apiType": "azure-openai",
       "apiBase": "[AZURE_AI_API_BASE]",
       "apiKey": "[AZURE_AI_API_KEY]",
-      "reasoning_effort": "medium",
-      "completionOptions": {
-        "temperature": 0
-      }
+      "apiVersion": "2025-01-01-preview"
     },
     {
       "title": "Azure: gpt-4o-mini",
       "provider": "azure",
       "model": "gpt-4o-mini",
       "deployment": "gpt-4o-mini",
+      "contextLength": 128000,
+      "apiType": "azure-openai",
       "apiBase": "[AZURE_AI_API_BASE]",
       "apiKey": "[AZURE_AI_API_KEY]",
+      "apiVersion": "2025-01-01-preview",
       "completionOptions": {
         "temperature": 0
       }
