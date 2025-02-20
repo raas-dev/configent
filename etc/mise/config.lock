@@ -159,11 +159,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.60.0"
+version = "0.60.1"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.60.0-darwin_arm64.tar.gz" = "sha256:96f6829af0889b3ae2304a1fd736d2aa138d26a014d2523cbe667bcf888d7c2a"
+"fzf-0.60.1-darwin_arm64.tar.gz" = "sha256:1a6f97d8b7669a88211c0ff8be599b68047dbd87d801658844b82d5440656e8e"
 
 [tools.gcloud]
 version = "510.0.0"
@@ -208,7 +208,7 @@ version = "0.10.0"
 backend = "go:github.com/shihanng/tfvar"
 
 [tools."go:golang.org/x/tools/gopls"]
-version = "0.17.1"
+version = "0.18.0"
 backend = "go:golang.org/x/tools/gopls"
 
 [tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
