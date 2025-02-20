@@ -92,6 +92,12 @@ clients:
             temperature: null
             top_p: null
 
+
+  # AWS Bedrock
+  - type: bedrock
+    name: aws
+    region: eu-central-1
+
   # local
   - type: openai-compatible
     name: ollama
