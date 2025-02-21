@@ -404,6 +404,6 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "csv-preview.resizeColumns": "all",
-  "csv-preview.separator": ";",
+  "csv-preview.separator": "[,;]",
   "csv-preview.lineNumbers": "ordinal"
 }
