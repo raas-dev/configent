@@ -187,7 +187,7 @@
     "plaintext": false,
     "scminput": false
   },
-  "gitlens.ai.experimental.model": "openai:gpt-4o",
+  "gitlens.ai.experimental.model": "openai:gpt-4o-mini",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
@@ -200,7 +200,7 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.statusBar.alignment": "left",
-  "gitlens.statusBar.format": "${author, }${agoOrDate}${' via  'pullRequest}${ \u2022 message|80?}",
+  "gitlens.statusBar.format": "${author, }${agoOrDate}${' via  'pullRequest}${ \u2022 message|100}",
   "gitlens.telemetry.enabled": false,
   "gitlens.views.scm.grouped.views": {
     "branches": true,
