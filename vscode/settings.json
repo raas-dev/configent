@@ -200,7 +200,7 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.statusBar.alignment": "left",
-  "gitlens.statusBar.format": "${author, }${agoOrDate}${' via  'pullRequest}${ \u2022 message|100}",
+  "gitlens.statusBar.format": "${author, }${agoOrDate}${' via  'pullRequest}${ \u2022 message|100?}",
   "gitlens.telemetry.enabled": false,
   "gitlens.views.scm.grouped.views": {
     "branches": true,
