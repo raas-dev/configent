@@ -93,6 +93,9 @@
   "continue.enableTabAutocomplete": true,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
+  "csv-preview.lineNumbers": "ordinal",
+  "csv-preview.resizeColumns": "all",
+  "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.chat.terminalShowHoverHint": false,
@@ -170,8 +173,11 @@
     ".aliases": "shellscript"
   },
   "files.hotExit": "onExitAndWindowClose",
+  "genaiscript.cache": false,
+  "git.blame.statusBarItem.enabled": false,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
+  "git.enableStatusBarSync": false,
   "git.openRepositoryInParentFolders": "always",
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
@@ -186,8 +192,10 @@
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
   "gitlens.graph.minimap.enabled": false,
+  "gitlens.graph.statusBar.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
   "gitlens.mode.statusBar.alignment": "left",
+  "gitlens.mode.statusBar.enabled": false,
   "gitlens.plusFeatures.enabled": false,
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
@@ -402,8 +410,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "csv-preview.resizeColumns": "all",
-  "csv-preview.separator": "[,;]",
-  "csv-preview.lineNumbers": "ordinal"
+  "zenMode.hideStatusBar": false
 }
