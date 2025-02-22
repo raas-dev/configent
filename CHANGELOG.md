@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.140.0](https://github.com/raas-dev/configent/compare/1.139.6...1.140.0) (2025-02-22)
+
+
+### Features
+
+* **vscode:** Add GenAiScript extension to list ([e15659d](https://github.com/raas-dev/configent/commit/e15659d5a5bda85cd561c1232bb211877db3ea77))
+
+
+### Fixes
+
+* **settings:** Improve GitLens status bar readability ([0b3897d](https://github.com/raas-dev/configent/commit/0b3897dc0cfe7dba27eb87d89405a9b54017d714))
+* **vscode:** Use ; in CSV preview ([b2592e5](https://github.com/raas-dev/configent/commit/b2592e5d4eaf88a686335677cb6cf1e6307a720c))
+
 ### [1.139.6](https://github.com/raas-dev/configent/compare/1.139.5...1.139.6) (2025-02-20)
 
 
