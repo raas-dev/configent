@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.1](https://github.com/raas-dev/configent/compare/1.140.0...1.140.1) (2025-02-22)
+
+
+### Fixes
+
+* **settings:** Truncate GitLens status bar message ([6c9e145](https://github.com/raas-dev/configent/commit/6c9e14514b8129c7339005e75c3c68f2e0816495))
+* **vscode:** Decrease minimap width ([a8da68b](https://github.com/raas-dev/configent/commit/a8da68b119d1d12a6b85aa7a0d26830842219cb7))
+
 ## [1.140.0](https://github.com/raas-dev/configent/compare/1.139.6...1.140.0) (2025-02-22)
 
 
