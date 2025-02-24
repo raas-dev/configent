@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.2](https://github.com/raas-dev/configent/compare/1.140.1...1.140.2) (2025-02-24)
+
+
+### Fixes
+
+* **vscode:** Increase minimap width slightly ([285f9e7](https://github.com/raas-dev/configent/commit/285f9e72e73fb64f2ad81e0d0cc47b65d88a71b6))
+
 ### [1.140.1](https://github.com/raas-dev/configent/compare/1.140.0...1.140.1) (2025-02-22)
 
 
