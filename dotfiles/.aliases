@@ -14,20 +14,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Recursively delete .DS_Store files in the current path
   alias cleanupds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
 
-  # Clean up LaunchServices to remove duplicates in "Open With" menues
-  alias cleanupls='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
-    -kill -r -domain local -domain system -domain user &&
-    killall Finder'
-
-  # Fix broken icons in Dock
-  alias reseticons="sudo /usr/bin/find /private/var/folders/ \
-    -name com.apple.dock.iconcache -exec rmv {} \; ;
-    sudo /usr/bin/find /private/var/folders/ -name com.apple.iconservices -exec rm -rfv {} \; ;
-    sudo rm -rfv /Library/Caches/com.apple.iconservices.store ;
-    sleep 3 ;
-    killall Dock ;
-    killall Finder"
-
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist"
 
