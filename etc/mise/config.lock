@@ -208,7 +208,7 @@ version = "0.10.0"
 backend = "go:github.com/shihanng/tfvar"
 
 [tools."go:golang.org/x/tools/gopls"]
-version = "0.18.0"
+version = "0.18.1"
 backend = "go:golang.org/x/tools/gopls"
 
 [tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.74.3"
+version = "0.75.1"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
@@ -313,8 +313,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.59.1_macOS-ARM64.tar.gz" = "sha256:abe9cd4e8cc86304d18956151aff95d9086a234be89610159feab6365a10d995"
 
 [tools.uv]
-version = "0.6.2"
+version = "0.6.3"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:4af802a1216053650dd82eee85ea4241994f432937d41c8b0bc90f2639e6ae14"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:51b84818bbfe08358a298ba3389c6d448d3ddc0f2601a2d63c5a62cb7b704062"
