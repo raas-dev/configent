@@ -33,6 +33,19 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
+      "title": "claude-3.7-sonnet",
+      "provider": "anthropic",
+      "model": "claude-3-7-sonnet-20250219",
+      "apiKey": "[ANTHROPIC_API_KEY]",
+      "cacheBehavior": {
+        "cacheSystemMessage": true,
+        "cacheConversation": true
+      },
+      "completionOptions": {
+        "temperature": 0
+      }
+    },
+    {
       "title": "claude-3.5-sonnet",
       "provider": "anthropic",
       "model": "claude-3-5-sonnet-latest",
