@@ -43,19 +43,10 @@
       },
       "completionOptions": {
         "temperature": 0
-      }
-    },
-    {
-      "title": "claude-3.5-sonnet",
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-latest",
-      "apiKey": "[ANTHROPIC_API_KEY]",
-      "cacheBehavior": {
-        "cacheSystemMessage": true,
-        "cacheConversation": true
       },
-      "completionOptions": {
-        "temperature": 0
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
     {
@@ -95,6 +86,10 @@
       "profile": "bedrock",
       "completionOptions": {
         "temperature": 0
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
     {
@@ -103,11 +98,13 @@
       "model": "o3-mini",
       "deployment": "o3-mini",
       "contextLength": 200000,
-      "maxCompletionTokens": 100000,
       "apiType": "azure-openai",
       "apiBase": "[AZURE_AI_API_BASE]",
       "apiKey": "[AZURE_AI_API_KEY]",
-      "apiVersion": "2025-01-01-preview"
+      "apiVersion": "2025-01-01-preview",
+      "capabilities": {
+        "tools": true
+      }
     },
     {
       "title": "Azure: gpt-4o-mini",
@@ -121,6 +118,10 @@
       "apiVersion": "2025-01-01-preview",
       "completionOptions": {
         "temperature": 0
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     }
   ],
