@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.3](https://github.com/raas-dev/configent/compare/1.140.2...1.140.3) (2025-02-25)
+
+
+### Fixes
+
+* **aliases:** Remove unused macos aliases ([f23b673](https://github.com/raas-dev/configent/commit/f23b6730e436cb2bd26708e14537e0f95e865176))
+* **aliases:** Rename alias cleanupds to cds ([0487a93](https://github.com/raas-dev/configent/commit/0487a932e00f7fbb3bd5879ce8e11e003bdf2cb9))
+* **nodejs:** Update Node.js minor version ([c014f5c](https://github.com/raas-dev/configent/commit/c014f5c02ba71794edc7e8d6f75faf8069a8da40))
+
 ### [1.140.2](https://github.com/raas-dev/configent/compare/1.140.1...1.140.2) (2025-02-24)
 
 
