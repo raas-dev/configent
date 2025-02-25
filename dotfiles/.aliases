@@ -12,7 +12,7 @@ alias dup="topgrade --yes --no-retry --disable $skipped_managers"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Recursively delete .DS_Store files in the current path
-  alias cleanupds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
+  alias cds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
 
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist"
