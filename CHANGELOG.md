@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.4](https://github.com/raas-dev/configent/compare/1.140.3...1.140.4) (2025-02-26)
+
+
+### Fixes
+
+* **config:** Switch to mistral-small:24b ([3b8201e](https://github.com/raas-dev/configent/commit/3b8201e01fd6afb6fb553bcb8e901a195a15d8d0))
+* **continue:** Add claude-3-7-sonnet-20250219 ([2e92c47](https://github.com/raas-dev/configent/commit/2e92c47103b4d4e8c9afd4c1e39af1fe7bc40e8a))
+* **continue:** Remove claude 3.5 sonnet ([c3fdc3e](https://github.com/raas-dev/configent/commit/c3fdc3e8ee19077c6908ba7d23fd942a9d526f7a))
+* **continue:** Remove unused defaultContext option ([3a0ac5e](https://github.com/raas-dev/configent/commit/3a0ac5e136e0127283be70a432af61c9c44efc7d))
+* **continue:** Use currentFile as default context ([6b51edb](https://github.com/raas-dev/configent/commit/6b51edb6b42dbbdb9b7dbd38e05d7a8ee5cf9e74))
+
 ### [1.140.3](https://github.com/raas-dev/configent/compare/1.140.2...1.140.3) (2025-02-25)
 
 
