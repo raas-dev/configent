@@ -265,14 +265,6 @@
       }
     }
   ],
-  "docs": [
-    {
-      "title": "Continue",
-      "startUrl": "https://docs.continue.dev",
-      "rootUrl": "https://docs.continue.dev",
-      "maxDepth": 1
-    }
-  ],
   "tabAutocompleteOptions": {
     "onlyMyCode": false,
     "debounceDelay": 500
