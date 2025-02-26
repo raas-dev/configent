@@ -271,11 +271,6 @@
   },
   "experimental": {
     "useTools": true,
-    "defaultContext": [
-      {
-        "name": "currentFile"
-      }
-    ],
     "modelContextProtocolServers": [],
     "quickActions": [
       {
