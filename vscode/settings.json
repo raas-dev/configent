@@ -181,8 +181,8 @@
   "git.openRepositoryInParentFolders": "always",
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
+  "github.copilot.chat.copilotDebugCommand.enabled": false,
   "github.copilot.enable": {
-    "*": false,
     "markdown": false,
     "plaintext": false,
     "scminput": false
