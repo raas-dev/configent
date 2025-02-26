@@ -52,7 +52,7 @@
     {
       "title": "Ollama: mistral-small:24b",
       "provider": "ollama",
-      "model": "mistral-small:latest",
+      "model": "mistral-small:24b",
       "apiBase": "http://127.0.0.1:11434",
       "contextLength": 32768,
       "completionOptions": {
