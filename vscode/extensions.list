@@ -46,7 +46,6 @@ ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-bicep
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
-ms-python.debugpy
 ms-python.python
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
