@@ -136,9 +136,7 @@
     "apiKey": "[CODESTRAL_API_KEY]"
   },
   "embeddingsProvider": {
-    "provider": "gemini",
-    "model": "models/text-embedding-004",
-    "apiKey": "[GEMINI_API_KEY]"
+    "provider": "transformers.js"
   },
   "reranker": {
     "name": "llm",
