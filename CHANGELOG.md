@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.5](https://github.com/raas-dev/configent/compare/1.140.4...1.140.5) (2025-02-26)
+
+
+### Fixes
+
+* **extensions:** Remove debugpy from extensions list ([ab09d9e](https://github.com/raas-dev/configent/commit/ab09d9ef1f7f09bb6f06a4386e99ac7494dc3d8a))
+
 ### [1.140.4](https://github.com/raas-dev/configent/compare/1.140.3...1.140.4) (2025-02-26)
 
 
