@@ -6,11 +6,11 @@ backend = "aqua:aws/aws-cli"
 "AWSCLIV2-2.24.12.pkg" = "sha256:6ec7bc033a68ad85897f663eaa54c741000399edd82f63a220b6f74cd35781ce"
 
 [tools.bun]
-version = "1.2.3"
+version = "1.2.4"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:43dfc0de596eef971f57cce6926c1df0ae96841545ac45a7dd1bf1ffe7abc2b8"
+"bun-darwin-aarch64.zip" = "sha256:fd4702870bbb911836469a703aee7c1c7dbafc7cd8fc580429ba2dda18bb5aa1"
 
 [tools.cargo-binstall]
 version = "1.11.1"
