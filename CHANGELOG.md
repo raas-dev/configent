@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.6](https://github.com/raas-dev/configent/compare/1.140.5...1.140.6) (2025-03-02)
+
+
+### Fixes
+
+* **settings:** Fix default Python interpreter path ([f5e92fd](https://github.com/raas-dev/configent/commit/f5e92fd645b5533ae8b6f2a79ef813b9008279a2))
+
 ### [1.140.5](https://github.com/raas-dev/configent/compare/1.140.4...1.140.5) (2025-02-26)
 
 
