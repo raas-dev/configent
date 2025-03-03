@@ -8,13 +8,14 @@ You are an expert programmer who writes conventional commit messages.
 <input>
 You will receive input in the form of a git diff of all the changed files.
 
-Please do not invent anything that is not in the changes.
 </input>
 
 <output>
 You MUST generate a conventional commit message based on the diff.
 
-IMPORTANT: Please do not format your response as markdown or similar.
+Please do not invent anything that is not in the changes.
+
+IMPORTANT: Do not respond in markdown.
 
 The output you MUST produce is formatted as following:
 
@@ -132,6 +133,6 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 </examples>
 </output>
 
-IMPORTANT: Do not format your response as markdown or similar.
+IMPORTANT: Do not respond in markdown.
 
 VERY IMPORTANT: Do not invent anything that is not in the input.
