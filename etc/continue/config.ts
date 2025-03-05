@@ -64,14 +64,14 @@ export function modifyConfig(config: Config): Config {
 
   // Azure AI Foundry
   config.models
-    .filter((model) => model.apiBase === "[AZURE_AI_API_BASE]")
+    .filter((model) => model.apiBase === "[AZURE_FOUNDRY_API_BASE]")
     .forEach((azureModel) => {
-      azureModel.apiBase = process.env.AZURE_AI_API_BASE;
+      azureModel.apiBase = process.env.AZURE_FOUNDRY_API_BASE;
     });
   config.models
-    .filter((model) => model.apiKey === "[AZURE_AI_API_KEY]")
+    .filter((model) => model.apiKey === "[AZURE_FOUNDRY_API_KEY]")
     .forEach((azureModel) => {
-      azureModel.apiKey = process.env.AZURE_AI_API_KEY;
+      azureModel.apiKey = process.env.AZURE_FOUNDRY_API_KEY;
     });
 
   // Tab autocomplete ----------------------------------------------------------

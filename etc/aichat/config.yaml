@@ -90,7 +90,7 @@ clients:
 
   # Azure AI Foundry
   - type: azure-openai
-    name: azure_ai    # export AZURE_AI_API_BASE and AZURE_AI_API_KEY
+    name: azure_foundry   # export AZURE_FOUNDRY_API_BASE and _API_KEY
     models:
       - name: o3-mini
         max_input_tokens: 200000

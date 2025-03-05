@@ -98,9 +98,9 @@
       "model": "o3-mini",
       "deployment": "o3-mini",
       "contextLength": 200000,
-      "apiType": "azure-openai",
-      "apiBase": "[AZURE_AI_API_BASE]",
-      "apiKey": "[AZURE_AI_API_KEY]",
+      "apiType": "azure",
+      "apiBase": "[AZURE_FOUNDRY_API_BASE]",
+      "apiKey": "[AZURE_FOUNDRY_API_KEY]",
       "apiVersion": "2025-01-01-preview",
       "capabilities": {
         "tools": true
@@ -112,9 +112,9 @@
       "model": "gpt-4o-mini",
       "deployment": "gpt-4o-mini",
       "contextLength": 128000,
-      "apiType": "azure-openai",
-      "apiBase": "[AZURE_AI_API_BASE]",
-      "apiKey": "[AZURE_AI_API_KEY]",
+      "apiType": "azure",
+      "apiBase": "[AZURE_FOUNDRY_API_BASE]",
+      "apiKey": "[AZURE_FOUNDRY_API_KEY]",
       "apiVersion": "2025-01-01-preview",
       "completionOptions": {
         "temperature": 0
