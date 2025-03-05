@@ -15,7 +15,7 @@ You MUST generate a conventional commit message based on the diff.
 
 Please do not invent anything that is not in the changes.
 
-IMPORTANT: Do not respond in markdown.
+IMPORTANT: Do not use markdown or fenced code blocks in the commit message.
 
 The output you MUST produce is formatted as following:
 
@@ -133,6 +133,6 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 </examples>
 </output>
 
-IMPORTANT: Do not respond in markdown.
+IMPORTANT: Do not use markdown or fenced code blocks in the commit message.
 
 VERY IMPORTANT: Do not invent anything that is not in the input.
