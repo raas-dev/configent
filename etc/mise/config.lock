@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.24.17"
+version = "2.24.18"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.24.17.pkg" = "sha256:d7b4c89c229a098fcb6c44664ccb02f3504112b3598c19eebafea709c0ee9311"
+"AWSCLIV2-2.24.18.pkg" = "sha256:6407e09c4320d3189ef152a572cecea76360b79b555b561771c7fc4ae5dd89e0"
 
 [tools.bun]
 version = "1.2.4"
@@ -170,11 +170,11 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.67.0"
+version = "2.68.1"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.67.0_macOS_arm64.zip" = "sha256:0c2524c2b002fda89f8b766c7d3dd8e6ac1de183556728a83182c6137f19643d"
+"gh_2.68.1_macOS_arm64.zip" = "sha256:801797ffc65072fb872865922f9b532795cd95872b1db161e987f25ce89baafe"
 
 [tools.go]
 version = "1.23.4"
@@ -212,7 +212,7 @@ version = "0.18.1"
 backend = "go:golang.org/x/tools/gopls"
 
 [tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
-version = "3.10.0"
+version = "3.11.0"
 backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 
 [tools.jq]
@@ -306,11 +306,11 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.59.1"
+version = "0.60.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.checksums]
-"trivy_0.59.1_macOS-ARM64.tar.gz" = "sha256:abe9cd4e8cc86304d18956151aff95d9086a234be89610159feab6365a10d995"
+"trivy_0.60.0_macOS-ARM64.tar.gz" = "sha256:b017cfdd640dcf4f7ed6c87e0e7337155f32c07530a086cb08dc8dc270ae2382"
 
 [tools.uv]
 version = "0.6.4"
