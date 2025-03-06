@@ -68,67 +68,67 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 
 <examples>
 
-  <example>
-  fix(install.sh): Fix installation crashing on Ubuntu LTS
+<example>
+fix(install.sh): Fix installation crashing on Ubuntu LTS
 
-  This fixes a bug with a missing dependency on Ubuntu LTS 22.04.01. The fix is to include the package in the installation of prerequisites. The fix does not break installation on older Ubuntu versions.
-  </example>
+This fixes a bug with a missing dependency on Ubuntu LTS 22.04.01. The fix is to include the package in the installation of prerequisites. The fix does not break installation on older Ubuntu versions.
+</example>
 
-  <example>
-  feat(payments): Add Payments API v1 for handling payments
+<example>
+feat(payments): Add Payments API v1 for handling payments
 
-  This commit adds HTTP API endpoints for creating and reading payments. The documentation and emphasises that payments must never be DELETED.
+This commit adds HTTP API endpoints for creating and reading payments. The documentation and emphasises that payments must never be DELETED.
 
-  It includes controllers, models and views for the feature.
+It includes controllers, models and views for the feature.
 
-  It does not include deployment infrastructure for the functionality.
-  </example>
+It does not include deployment infrastructure for the functionality.
+</example>
 
-  <example>
-  chore(lazyvim): Update package lock file
+<example>
+chore(lazyvim): Update package lock file
 
-  This updates Neovim packages to latest versions. The lock file ensures that the exact same revisions are installed on another system.
-  </example>
+This updates Neovim packages to latest versions. The lock file ensures that the exact same revisions are installed on another system.
+</example>
 
-  <example>
-  refactor(main.py): Simplify CLI argument handling
+<example>
+refactor(main.py): Simplify CLI argument handling
 
-  Simplify commandline-argument handling in the helper function. This removes extra lines of code which improves readability.
-  </example>
+Simplify commandline-argument handling in the helper function. This removes extra lines of code which improves readability.
+</example>
 
-  <example>
-  docs(README): Add installation instructions for macOS version
+<example>
+docs(README): Add installation instructions for macOS version
 
-  The instructions communicate the prerequisites that must be present in the system before proceeding with installation steps.
+The instructions communicate the prerequisites that must be present in the system before proceeding with installation steps.
 
-  In addition it details what set of packages are installed user-wide and what packages are required to be installed system-wide.
-  </example>
+In addition it details what set of packages are installed user-wide and what packages are required to be installed system-wide.
+</example>
 
-  <example>
-  ci(github): Remove duplicate step in CI/CD pipeline
+<example>
+ci(github): Remove duplicate step in CI/CD pipeline
 
-  This removes an extraneous step in GitHub Actions build-pipeline which
-  caused unit tests to be ran twice.
+This removes an extraneous step in GitHub Actions build-pipeline which
+caused unit tests to be ran twice.
 
-  The problem was that tests were run once independently and then again as part of the whole test set.
-  </example>
+The problem was that tests were run once independently and then again as part of the whole test set.
+</example>
 
-  <example>
-  build(pyproject): Add script to run lint all Python files
+<example>
+build(pyproject): Add script to run lint all Python files
 
-  Run `pdm lint` to check all Python files for programming errors.
-  You can use `pdm lint --fix` to fix all auto-fixable problems.
+Run `pdm lint` to check all Python files for programming errors.
+You can use `pdm lint --fix` to fix all auto-fixable problems.
 
-  It uses `ruff` underneath which was added in the development dependencies.
-  </example>
+It uses `ruff` underneath which was added in the development dependencies.
+</example>
 
-  <example>
-  style(settings): Format settings.json
+<example>
+style(settings): Format settings.json
 
-  This ensures correct sized indentation and sorts JSON by property name.
+This ensures correct sized indentation and sorts JSON by property name.
 
-  The formatting follows conventions defined in .prettierrc file in the repo.
-  </example>
+The formatting follows conventions defined in .prettierrc file in the repo.
+</example>
 
 </examples>
 </output>
