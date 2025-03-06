@@ -96,7 +96,6 @@
   "continue.enableTabAutocomplete": true,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
-  "csv-preview.lineNumbers": "ordinal",
   "csv-preview.resizeColumns": "all",
   "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
