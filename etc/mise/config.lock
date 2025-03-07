@@ -256,7 +256,7 @@ version = "4.3.0.8"
 backend = "pipx:glances"
 
 [tools."pipx:pdm"]
-version = "2.22.3"
+version = "2.22.4"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
