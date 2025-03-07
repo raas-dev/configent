@@ -280,7 +280,7 @@ version = "3.3.0"
 backend = "pipx:tldr"
 
 [tools.python]
-version = "3.13.1"
+version = "3.13.2"
 backend = "core:python"
 
 [tools.rust]
