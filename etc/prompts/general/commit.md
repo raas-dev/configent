@@ -14,7 +14,9 @@ You MUST generate a conventional commit message based on the diff.
 
 IMPORTANT: Do not invent anything that is not in the changes.
 
-The commit message you MUST produce is formatted as following:
+VERY IMPORTANT: Do not use markdown or fenced code blocks.
+
+The format is plain text as following:
 
 <commit_message>
 type(scope): Headline
@@ -22,9 +24,7 @@ type(scope): Headline
 Body
 </commit_message>
 
-IMPORTANT: The commit message MUST only have 1 headline. Do not use fenced code blocks in the commit message.
-
-VERY IMPORTANT: The message MUST be plain text. Do not use markdown in the commit message.
+IMPORTANT: The commit message MUST only have 1 headline.
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
