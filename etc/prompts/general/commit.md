@@ -12,7 +12,7 @@ You will receive input in the form of a git diff of all the changed files.
 <output>
 You MUST generate a conventional commit message based on the diff.
 
-IMPORTANT: Do not invent anything that is not in the changes.
+IMPORTANT: Do not invent anything that is not in the input.
 
 VERY IMPORTANT: Do not use markdown or fenced code blocks.
 
@@ -129,5 +129,7 @@ The formatting follows conventions defined in .prettierrc file in the repo.
 
 </examples>
 </output>
+
+IMPORTANT: Do not use markdown or fenced code blocks.
 
 VERY IMPORTANT: Do not invent anything that is not in the input.
