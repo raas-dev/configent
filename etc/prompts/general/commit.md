@@ -16,13 +16,13 @@ IMPORTANT: Do not invent anything that is not in the input.
 
 VERY IMPORTANT: Do not use markdown or fenced code blocks.
 
-The format is plain text as following:
+The commit message is formatted as following:
 
-<commit_message>
+<plain_text>
 type(scope): Headline
 
 Body
-</commit_message>
+</plain_text>
 
 IMPORTANT: The commit message MUST only have 1 headline.
 
