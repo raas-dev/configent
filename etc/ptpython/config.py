@@ -5,6 +5,7 @@ Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
 On Linux, this is: ~/.config/ptpython/config.py
 On macOS, this is: ~/Library/Application Support/ptpython/config.py
 """
+
 from prompt_toolkit.filters import ViInsertMode
 from prompt_toolkit.key_binding.key_processor import KeyPress
 from prompt_toolkit.keys import Keys
@@ -119,7 +120,7 @@ def configure(repl):
 
     # repl.color_depth = "DEPTH_1_BIT"  # Monochrome.
     # repl.color_depth = "DEPTH_4_BIT"  # ANSI colors only.
-    #repl.color_depth = "DEPTH_8_BIT"  # The default, 256 colors.
+    # repl.color_depth = "DEPTH_8_BIT"  # The default, 256 colors.
     repl.color_depth = "DEPTH_24_BIT"  # True color.
 
     # Min/max brightness
