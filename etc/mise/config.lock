@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.1.0"
+version = "16.2.0"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
