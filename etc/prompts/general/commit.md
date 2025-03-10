@@ -18,13 +18,11 @@ VERY IMPORTANT: Do not use markdown or fenced code blocks.
 
 The commit message is formatted as following:
 
-<plain_text>
+<message>
 type(scope): Headline
 
 Body
-</plain_text>
-
-IMPORTANT: The commit message MUST only have 1 headline.
+</message>
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
