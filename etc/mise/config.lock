@@ -1,16 +1,16 @@
 [tools.awscli]
-version = "2.24.20"
+version = "2.24.21"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.24.20.pkg" = "sha256:d4badd582a46c077b7a0646c0ea9122046e6f4de424e6de8413ec7c460fb43ff"
+"AWSCLIV2-2.24.21.pkg" = "sha256:fb7e1acbf02637ab698b3b113aaaafef84ef19565c341b3f42eef4ba386bc19a"
 
 [tools.bun]
-version = "1.2.4"
+version = "1.2.5"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:fd4702870bbb911836469a703aee7c1c7dbafc7cd8fc580429ba2dda18bb5aa1"
+"bun-darwin-aarch64.zip" = "sha256:55e6520a172e22a37d4822f23afde90b26f36880ce3eaad348699418dbf788bb"
 
 [tools.cargo-binstall]
 version = "1.12.0"
@@ -80,7 +80,7 @@ version = "1.1.5"
 backend = "cargo:lsd"
 
 [tools."cargo:nixpacks"]
-version = "1.34.0"
+version = "1.34.1"
 backend = "cargo:nixpacks"
 
 [tools."cargo:numbat-cli"]
@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.76.0"
+version = "0.76.1"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
