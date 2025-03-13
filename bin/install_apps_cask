@@ -35,7 +35,7 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
-brew install --cask --no-quarantine brave-browser
+brew install --cask --force --no-quarantine brave-browser
 #brew install --cask --no-quarantine cursor
 #brew install --cask --no-quarantine iina
 #brew install --cask --no-quarantine libreoffice libreoffice-language-pack
@@ -43,9 +43,9 @@ brew install --cask --no-quarantine brave-browser
 #brew install --cask --no-quarantine slack
 #brew install --cask --no-quarantine tunnelblick
 #brew install --cask --no-quarantine utm
-brew install --cask --no-quarantine visual-studio-code
+brew install --cask --force --no-quarantine visual-studio-code
 #brew install --cask --no-quarantine windsurf
 #brew install --cask --no-quarantine zed
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
-brew install --cask --no-quarantine ukelele
+brew install --cask --force --no-quarantine ukelele
