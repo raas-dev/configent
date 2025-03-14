@@ -18,11 +18,9 @@ VERY IMPORTANT: Do not use markdown or fenced code blocks.
 
 The commit message is formatted as following:
 
-<message>
 type(scope): Headline
 
 Body
-</message>
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
