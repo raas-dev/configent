@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.7](https://github.com/raas-dev/configent/compare/1.140.6...1.140.7) (2025-03-14)
+
+
+### Fixes
+
+* **ai:** Rename envvars AZURE_AI_ to AZURE_FOUNDRY_ ([dc0f208](https://github.com/raas-dev/configent/commit/dc0f208295a5be02d1b6bcc778cd1e181d0535fd))
+* **install_apps_cask:** Force install packages with brew ([53080d9](https://github.com/raas-dev/configent/commit/53080d9d84c4a41f92f96fd1601bf89d98dadaec))
+
 ### [1.140.6](https://github.com/raas-dev/configent/compare/1.140.5...1.140.6) (2025-03-02)
 
 
