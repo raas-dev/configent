@@ -344,6 +344,10 @@
     "when": "editorTextFocus && inDebugMode"
   },
   {
+    "command": "continue.focusEditWithoutClear",
+    "key": "shift+cmd+i"
+  },
+  {
     "command": "-continue.focusEditWithoutClear",
     "key": "shift+cmd+i"
   },
@@ -359,15 +363,6 @@
   {
     "command": "-continue.focusContinueInput",
     "key": "cmd+l"
-  },
-  {
-    "command": "continue.focusEdit",
-    "key": "cmd+i",
-    "when": "editorFocus"
-  },
-  {
-    "command": "-continue.focusEdit",
-    "key": "cmd+i"
   },
   {
     "command": "-workbench.action.chat.openEditSession",
@@ -548,10 +543,6 @@
   {
     "command": "workbench.action.terminal.newWithProfile",
     "key": "ctrl+s b"
-  },
-  {
-    "command": "continue.focusEditWithoutClear",
-    "key": "shift+cmd+i"
   },
   {
     "command": "workbench.action.terminal.clear",
