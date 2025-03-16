@@ -1,13 +1,14 @@
 {
   "models": [
     {
-      "title": "gemini-2.0-pro-exp-02-05",
+      "title": "gemini-2.0-pro-exp",
       "provider": "gemini",
-      "model": "gemini-2.0-pro-exp-02-05",
+      "model": "gemini-2.0-pro-exp",
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 2097152,
       "completionOptions": {
-        "temperature": 0
+        "temperature": 0,
+        "maxTokens": 8192
       }
     },
     {
@@ -17,7 +18,8 @@
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 1048576,
       "completionOptions": {
-        "temperature": 0
+        "temperature": 0,
+        "maxTokens": 8192
       }
     },
     {
