@@ -550,26 +550,6 @@
     "key": "ctrl+s b"
   },
   {
-    "command": "workbench.action.pinEditor",
-    "key": "cmd+k p",
-    "when": "!activeEditorIsPinned"
-  },
-  {
-    "command": "-workbench.action.pinEditor",
-    "key": "cmd+k shift+enter",
-    "when": "!activeEditorIsPinned"
-  },
-  {
-    "command": "workbench.action.unpinEditor",
-    "key": "cmd+k p",
-    "when": "activeEditorIsPinned"
-  },
-  {
-    "command": "-workbench.action.unpinEditor",
-    "key": "cmd+k shift+enter",
-    "when": "activeEditorIsPinned"
-  },
-  {
     "command": "continue.focusEditWithoutClear",
     "key": "shift+cmd+i"
   },
