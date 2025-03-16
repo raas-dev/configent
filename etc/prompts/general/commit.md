@@ -14,13 +14,17 @@ You MUST generate a conventional commit message based on the diff.
 
 IMPORTANT: Do not invent anything that is not in the input.
 
-VERY IMPORTANT: Do not use markdown or fenced code blocks.
-
 The commit message is formatted as following:
 
+<format>
 type(scope): Headline
 
 Body
+</format>
+
+IMPORTANT: Do not use markdown or code formatting.
+
+VERY IMPORTANT: Do not use fenced code blocks. Do not surround answer in ```.
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
