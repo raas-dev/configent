@@ -345,6 +345,7 @@
   "windsurf.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "workbench.activityBar.location": "top",
+  "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
     "extendedTerminalIntegration.statusBar.foreground": "#808080",
