@@ -342,6 +342,8 @@
   "window.restoreFullscreen": true,
   "window.zoomLevel": 0.25,
   "windsurf.autocompleteSpeed": "fast",
+  "windsurf.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
+  "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
