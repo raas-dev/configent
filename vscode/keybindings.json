@@ -1,17 +1,5 @@
 [
   {
-    "command": "-aichat.newchataction",
-    "key": "cmd+l"
-  },
-  {
-    "command": "-aichat.showchatdropdown",
-    "key": "alt+cmd+l"
-  },
-  {
-    "command": "-aichat.insertselectionintochat",
-    "key": "shift+cmd+l"
-  },
-  {
     "command": "-cursorTop",
     "key": "cmd+up",
     "when": "textInputFocus"
