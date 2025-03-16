@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.9](https://github.com/raas-dev/configent/compare/1.140.8...1.140.9) (2025-03-16)
+
+
+### Fixes
+
+* **install_apps_cask:** Force install with no-quarantine flag ([7fea86b](https://github.com/raas-dev/configent/commit/7fea86bc9f73df0938bb2ea850a2da6c8b05c66e))
+* **keybindings:** Remove conflicting Continue keybindings ([e919f49](https://github.com/raas-dev/configent/commit/e919f49c3ee8ed032d5898e28b99e2202a03635f))
+* **keybindings:** Remove duplicate Continue shortcut ([ff4a2dc](https://github.com/raas-dev/configent/commit/ff4a2dc97cd5f5e3ce444c3c95bc9d99bb637fa7))
+* **keybindings:** Remove duplicate pin editor commands ([85655f6](https://github.com/raas-dev/configent/commit/85655f65e43c6f1b5ce450938edafb343a61ca37))
+* **settings:** Disable VS Code chat command center ([e855ff6](https://github.com/raas-dev/configent/commit/e855ff64b00c4ecf1b08e9659d35907ce8c86c0b))
+* **settings:** Move auxiliary activity bar to top ([26f7cd0](https://github.com/raas-dev/configent/commit/26f7cd0f6a6bd92f90bc43922ed68361398192e3))
+
 ### [1.140.8](https://github.com/raas-dev/configent/compare/1.140.7...1.140.8) (2025-03-16)
 
 
