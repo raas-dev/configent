@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.8](https://github.com/raas-dev/configent/compare/1.140.7...1.140.8) (2025-03-16)
+
+
+### Fixes
+
+* **ai:** Update assistant prompts created by fabric ([62650b7](https://github.com/raas-dev/configent/commit/62650b77240b7fb275278c07bead56b533e08775))
+
 ### [1.140.7](https://github.com/raas-dev/configent/compare/1.140.6...1.140.7) (2025-03-14)
 
 
