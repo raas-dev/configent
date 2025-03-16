@@ -52,7 +52,7 @@ highlight: true # Controls syntax highlighting
 light_theme: false # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
 # Custom REPL left/right prompts, see https://github.com/sigoden/aichat/wiki/Custom-REPL-Prompt for more details
 left_prompt:
-  '{?agent {color.purple}{agent}}{!agent {color.green}{role}}{?rag {color.yellow}@{rag}}{color.reset}) '
+  '{?agent {color.purple}{agent}}{!agent {color.green}{role}}{?rag {color.yellow}@{rag}}{color.reset}> '
 right_prompt:
   '{?consume_tokens {color.blue}{consume_tokens}({consume_percent}%)}{!consume_tokens {color.blue}{consume_tokens}} {?session {color.cyan}({session})}{color.reset}'
 
