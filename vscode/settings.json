@@ -91,7 +91,7 @@
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
-  "continue.enableTabAutocomplete": true,
+  "continue.enableTabAutocomplete": false,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
   "csv-preview.resizeColumns": "all",
