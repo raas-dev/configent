@@ -44,7 +44,7 @@ brew install --cask --force --no-quarantine brave-browser
 #brew install --cask --force --no-quarantine tunnelblick
 #brew install --cask --force --no-quarantine utm
 brew install --cask --force --no-quarantine visual-studio-code
-#brew install --cask --force --no-quarantine windsurf
+brew install --cask --force --no-quarantine windsurf
 #brew install --cask --force --no-quarantine zed
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
