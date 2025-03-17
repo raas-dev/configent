@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.10](https://github.com/raas-dev/configent/compare/1.140.9...1.140.10) (2025-03-17)
+
+
+### Fixes
+
+* **code:** Remove support for VSCodium ([8864f04](https://github.com/raas-dev/configent/commit/8864f04b6d4d297b4f47e93f44cc90065237c007))
+* **install_apps_cask:** Add windsurf to cask install script ([1459f28](https://github.com/raas-dev/configent/commit/1459f2827312f4138c9fb61f242f0679bf4cc43b))
+
 ### [1.140.9](https://github.com/raas-dev/configent/compare/1.140.8...1.140.9) (2025-03-16)
 
 
