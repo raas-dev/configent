@@ -163,12 +163,13 @@ These steps are detailed further below.
 
 ## 🔨 IDE
 
-[VS Code](https://code.visualstudio.com/) is the default IDE. You may take
-into use other VS Code like editors by adjusting parameters the scripts below.
+[VS Code](https://code.visualstudio.com/) is the default IDE, but you can use
+the scripts below with the other VS Code like editors by passing in their
+names as parameters to the script.
 
 Extensions in
 [Open VSX Registry](https://open-vsx.org/) are available for all VS Code
-likes and thus are preferred when in doubt which extensions to use.
+likes and are preferred when choosing extensions.
 
 To update `vscode/extensions.list` after adding or removing extensions via GUI
 in VS Code like editor, run `vscode/create_extensions_list`.
