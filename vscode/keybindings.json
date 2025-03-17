@@ -327,21 +327,6 @@
     "when": "!terminalFocus"
   },
   {
-    "command": "-editor.debug.action.showDebugHover",
-    "key": "cmd+k cmd+i",
-    "when": "editorTextFocus && inDebugMode"
-  },
-  {
-    "command": "-workbench.action.chat.openEditSession",
-    "key": "shift+cmd+i",
-    "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"
-  },
-  {
-    "command": "-workbench.panel.chatEditing",
-    "key": "shift+cmd+i",
-    "when": "workbench.panel.chat.view.edits.active"
-  },
-  {
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+c",
     "when": "filesExplorerFocus"
