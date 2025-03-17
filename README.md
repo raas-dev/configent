@@ -163,13 +163,11 @@ These steps are detailed further below.
 
 ## 🔨 IDE
 
-[VSCodium](https://vscodium.com/) is the default IDE on Linux distros and
-[VS Code](https://code.visualstudio.com/) is the default IDE on macOS.
+[VS Code](https://code.visualstudio.com/) is the default IDE.
 
-Some extensions may be unavailable for VSCodium and its forks
-("later VS Code likes"). Extensions in
+Extensions in
 [Open VSX Registry](https://open-vsx.org/) are available for all VS Code
-likes and thus are preferred when in doubt what extension to use.
+likes and thus are preferred when in doubt which extensions to use.
 
 To update `vscode/extensions.list` after adding or removing extensions via GUI
 in VS Code like editor, run `vscode/create_extensions_list`.

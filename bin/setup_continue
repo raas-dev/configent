@@ -12,7 +12,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### Setup VS Code/VSCodium Continue extension configs ##########################
+### Setup VS Code Continue extension configs ###################################
 
 # config.json
 if [ ! -r "$backup_path/.continue/config.json" ]; then

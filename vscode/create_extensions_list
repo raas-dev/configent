@@ -15,15 +15,9 @@
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 
-if [ "$(uname -s)" = 'Linux' ]; then
-  default_bin_name="codium"
-else
-  default_bin_name="code"
-fi
-
 ### variables ##################################################################
 
-: "${BIN_NAME:="$default_bin_name"}"
+: "${BIN_NAME:="$code"}"
 
 ###  Write list of installed extensions to a file ##############################
 

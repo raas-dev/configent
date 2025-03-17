@@ -33,8 +33,8 @@ $SUDO snap install core
 # Brave
 $SUDO snap install brave
 
-# VSCodium
-$SUDO snap install codium --classic
+# VSCode
+$SUDO snap install code --classic
 
 # LibreOffice
 #$SUDO snap install libreoffice

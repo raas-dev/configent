@@ -17,18 +17,10 @@
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 
-if [ "$(uname -s)" = 'Linux' ]; then
-  default_app_name="VSCodium"
-  default_bin_name="codium"
-else
-  default_app_name="Code"
-  default_bin_name="code"
-fi
-
 ### variables ##################################################################
 
-: "${APP_NAME:="$default_app_name"}"
-: "${BIN_NAME:="$default_bin_name"}"
+: "${APP_NAME:="$Code"}"
+: "${BIN_NAME:="$code"}"
 
 ### Symlink configuration ######################################################
 
