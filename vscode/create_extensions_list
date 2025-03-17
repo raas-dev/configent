@@ -17,7 +17,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### variables ##################################################################
 
-: "${BIN_NAME:="$code"}"
+: "${BIN_NAME:="code"}"
 
 ###  Write list of installed extensions to a file ##############################
 
