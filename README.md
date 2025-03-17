@@ -11,8 +11,8 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Has an obvious (one) way to manage programming languages and tool versions.
 - Provides AI assistant to choose and execute the best AI agent for your task.
 
-| ![Screenshot of Brave Browser and VSCode with tmux and zsh](ui/target.webp) |
-| --------------------------------------------------------------------------- |
+| ![Screenshot of Brave Browser and IDE with tmux and zsh](ui/target.webp) |
+| ------------------------------------------------------------------------ |
 
 A few features:
 
@@ -191,8 +191,8 @@ for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 ### bin/setup_continue
 
 [Continue](https://docs.continue.dev) is installed as open-source AI code
-assistant in VS Code like editors. Note that (commercial) VS Code forks may
-prefer their own copilots and disable the extension automatically.
+assistant in VS Code like editors. Note that (commercial) VS Code likes may
+prefer their own copilots and disable this extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
 Dynamic configuration (`config.ts`) is used for reading all LLM provider

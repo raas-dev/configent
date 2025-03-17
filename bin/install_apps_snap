@@ -33,7 +33,7 @@ $SUDO snap install core
 # Brave
 $SUDO snap install brave
 
-# VSCode
+# VS Code
 $SUDO snap install code --classic
 
 # LibreOffice

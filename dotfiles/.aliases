@@ -77,8 +77,7 @@ fi
 ### More sensible defaults #####################################################
 
 alias code='code --reuse-window --add'
-
-# (Commercial) VSCode forks
+# (Commercial) VS Code likes
 alias cursor='cursor --reuse-window --add'
 alias ws='windsurf --reuse-window --add'
 

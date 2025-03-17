@@ -8,7 +8,7 @@
 
 ### usage ######################################################################
 
-# you can use this script to symlink configuration for VSCode forks, e.g.:
+# you can use this script to symlink configuration for VS Code likes, e.g.:
 #
 # APP_NAME="Cursor" BIN_NAME="cursor" ./setup_code
 # APP_NAME="Windsurf" BIN_NAME="windsurf" ./setup_code
