@@ -323,6 +323,10 @@
     "when": "!terminalFocus"
   },
   {
+    "command": "cursor.generateGitCommitMessage",
+    "key": "cmd+m"
+  },
+  {
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+c",
     "when": "filesExplorerFocus"
