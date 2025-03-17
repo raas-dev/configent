@@ -324,9 +324,6 @@ alias wrangler='bunx wrangler'
 # Flowise
 alias flowise='bunx flowise'
 
-# Microsoft GenAIScript CLI
-alias genaiscript='bunx genaiscript'
-
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
