@@ -197,10 +197,6 @@
     "key": "ctrl+s r"
   },
   {
-    "command": "continue.debugTerminal",
-    "key": "ctrl+s a"
-  },
-  {
     "command": "-workbench.action.openRecent",
     "key": "ctrl+r"
   },
