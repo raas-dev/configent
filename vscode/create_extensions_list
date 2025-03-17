@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# you can use this script to symlink configuration for VS Code forks, e.g.:
+# you can use this script to symlink configuration for VS Code likes, e.g.:
 #
 # BIN_NAME="cursor" ./create_extensions_list
 # BIN_NAME="windsurf" ./create_extensions_list
