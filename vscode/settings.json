@@ -91,9 +91,6 @@
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
-  "codeium.aggressiveShutdown": true,
-  "codeium.enableCodeLens": false,
-  "codeium.enableInComments": false,
   "continue.enableTabAutocomplete": true,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
@@ -345,6 +342,8 @@
   "windsurf.autocompleteSpeed": "fast",
   "windsurf.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
+  "windsurf.showInlayHintShortcuts": false,
+  "windsurf.showSelectionActions": false,
   "workbench.activityBar.location": "top",
   "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
