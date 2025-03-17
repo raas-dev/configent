@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.11](https://github.com/raas-dev/configent/compare/1.140.10...1.140.11) (2025-03-17)
+
+
+### Fixes
+
+* **ai:** Remove GenAIScript ([59c8e71](https://github.com/raas-dev/configent/commit/59c8e71945b29dd7092fef496a9e6080c360c873))
+* **create_extensions_list:** Correct variable assignment ([cd33ec1](https://github.com/raas-dev/configent/commit/cd33ec1c848480b3dd35684374f0703adbc09eb5))
+* **install_apps_cask:** Unconditionally install Cursor and VS Code ([3ab5a62](https://github.com/raas-dev/configent/commit/3ab5a6213940caa7641c042568d428e87958b521))
+* **keybindings:** Remove continue.debugTerminal command ([7291148](https://github.com/raas-dev/configent/commit/7291148998499c9b5daf920379af30ca92bafe63))
+* **settings:** Disable tab autocomplete in VS Code ([6b6ba75](https://github.com/raas-dev/configent/commit/6b6ba750f61408f79964c0a8ef76b3182ec1a197))
+
 ### [1.140.10](https://github.com/raas-dev/configent/compare/1.140.9...1.140.10) (2025-03-17)
 
 
