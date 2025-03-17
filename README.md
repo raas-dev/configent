@@ -163,7 +163,8 @@ These steps are detailed further below.
 
 ## 🔨 IDE
 
-[VS Code](https://code.visualstudio.com/) is the default IDE.
+[VS Code](https://code.visualstudio.com/) is the default IDE. You may take
+into use other VS Code like editors by adjusting parameters the scripts below.
 
 Extensions in
 [Open VSX Registry](https://open-vsx.org/) are available for all VS Code
@@ -178,8 +179,8 @@ The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
 `~/configent/.backup/<editor_specific_path>/User`.
 
-⚠️: This script not install any VS Code like editor, see Cask and Flatpak
-related `bin/install_apps_` for that.
+⚠️: This script does not install VS Code, see Cask and Flatpak related
+`bin/install_apps_` for that.
 
 If editor command-line binary is present when running this script,
 the extensions (`vscode/extensions.list`) are installed.
@@ -191,7 +192,7 @@ for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
 
 [Continue](https://docs.continue.dev) is installed as open-source AI code
 assistant in VS Code like editors. Note that (commercial) VS Code forks may
-prefer their own (closed) solutions and disable the extension automatically.
+prefer their own copilots and disable the extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
 Dynamic configuration (`config.ts`) is used for reading all LLM provider
