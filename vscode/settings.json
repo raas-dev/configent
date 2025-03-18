@@ -99,7 +99,8 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.cpp.disabledLanguages": [
-    "plaintext"
+    "plaintext",
+    "markdown"
   ],
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
