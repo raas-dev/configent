@@ -98,6 +98,9 @@
   "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
+  "cursor.cpp.disabledLanguages": [
+    "plaintext"
+  ],
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
