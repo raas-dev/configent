@@ -58,8 +58,8 @@ right_prompt:
 
 # ---- clients ----
 clients:
-  - type: claude
   - type: gemini
+  - type: claude
   - type: openai
 
   # OpenRouter

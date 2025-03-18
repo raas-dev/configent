@@ -23,18 +23,6 @@
       }
     },
     {
-      "title": "o3-mini",
-      "provider": "openai",
-      "model": "o3-mini",
-      "apiKey": "[OPENAI_API_KEY]"
-    },
-    {
-      "title": "gpt-4o-mini",
-      "provider": "openai",
-      "model": "gpt-4o-mini",
-      "apiKey": "[OPENAI_API_KEY]"
-    },
-    {
       "title": "claude-3.7-sonnet",
       "provider": "anthropic",
       "model": "claude-3-7-sonnet-20250219",
@@ -52,20 +40,21 @@
       }
     },
     {
-      "title": "Ollama: mistral-small:24b",
-      "provider": "ollama",
-      "model": "mistral-small:24b",
-      "apiBase": "http://127.0.0.1:11434",
-      "contextLength": 32768,
-      "completionOptions": {
-        "temperature": 0,
-        "keepAlive": 900
-      }
+      "title": "o3-mini",
+      "provider": "openai",
+      "model": "o3-mini",
+      "apiKey": "[OPENAI_API_KEY]"
     },
     {
-      "title": "OpenRouter: R1",
+      "title": "gpt-4o-mini",
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "apiKey": "[OPENAI_API_KEY]"
+    },
+    {
+      "title": "OpenRouter",
       "provider": "openrouter",
-      "model": "deepseek/deepseek-r1",
+      "model": "google/gemini-2.0-flash-001",
       "apiKey": "[OPENROUTER_API_KEY]",
       "completionOptions": {
         "temperature": 0
@@ -78,6 +67,17 @@
       "apiKey": "[TOGETHER_API_KEY]",
       "completionOptions": {
         "temperature": 0
+      }
+    },
+    {
+      "title": "Ollama: mistral-small:24b",
+      "provider": "ollama",
+      "model": "mistral-small:24b",
+      "apiBase": "http://127.0.0.1:11434",
+      "contextLength": 32768,
+      "completionOptions": {
+        "temperature": 0,
+        "keepAlive": 900
       }
     },
     {
