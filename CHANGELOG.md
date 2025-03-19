@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.12](https://github.com/raas-dev/configent/compare/1.140.11...1.140.12) (2025-03-19)
+
+
+### Fixes
+
+* **settings:** Enable VS Code prereleases ([562ac84](https://github.com/raas-dev/configent/commit/562ac840520fb36d6efeac906e33638ac54eed10))
+* **settings:** Ignore markdown files in cursor.cpp ([3c41542](https://github.com/raas-dev/configent/commit/3c415424fd6c3882714fc151f4fb8a16a3bd19ae))
+* **vscode:** Add keybinding for generating git commit message ([c8717e3](https://github.com/raas-dev/configent/commit/c8717e384719621f874cad4d89c291d5fb3b0429))
+
 ### [1.140.11](https://github.com/raas-dev/configent/compare/1.140.10...1.140.11) (2025-03-17)
 
 
