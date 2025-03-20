@@ -67,6 +67,7 @@ dotnet = { version = '8.0.404' }
 
 #ruby = '3.4.2'
 #java = 'temurin-21'
+#'vfox:maven' = 'latest'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 fzf = 'latest'
 jq = 'latest'
