@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:55e6520a172e22a37d4822f23afde90b26f36880ce3eaad348699418dbf788bb"
 
 [tools.cargo-binstall]
-version = "1.12.1"
+version = "1.12.2"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:baac0e3379b53924a7c6eb69641ea0f67d9a7ec7bcc70b4ce544218b7d482d44"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:f3c90a36a6d934a3f73ba57e3620f9a5ec5b5da4da976094e2c69f83fe061ece"
 
 [tools."cargo:aichat"]
 version = "0.28.0"
@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.2.1"
+version = "16.3.0"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
