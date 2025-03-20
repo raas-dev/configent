@@ -66,7 +66,7 @@ dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 #ruby = '3.4.1'
-#java = 'temurin-17.0.13+11'
+#java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 fzf = 'latest'
 jq = 'latest'
