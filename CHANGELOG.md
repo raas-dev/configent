@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.13](https://github.com/raas-dev/configent/compare/1.140.12...1.140.13) (2025-03-22)
+
+
+### Fixes
+
+* **install_apps_cask:** Add no-quarantine to Cask install opts ([f55c914](https://github.com/raas-dev/configent/commit/f55c914c3d757339000ac1f369a3989fdd1828e9))
+* **mise:** Update java 17 -> 21 ([8dcdea7](https://github.com/raas-dev/configent/commit/8dcdea776daee651c1705d642b73dae8a3839e0f))
+* **mise:** Update ruby ([298e571](https://github.com/raas-dev/configent/commit/298e5718d7a5513b6b9d352b0e2cdb2ea3b3649b))
+
 ### [1.140.12](https://github.com/raas-dev/configent/compare/1.140.11...1.140.12) (2025-03-19)
 
 
