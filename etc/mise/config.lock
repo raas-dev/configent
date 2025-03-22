@@ -223,11 +223,11 @@ backend = "aqua:jqlang/jq"
 jq-macos-arm64 = "sha256:0bbe619e663e0de2c550be2fe0d240d076799d6f8a652b70fa04aea8a8362e8a"
 
 [tools.lima]
-version = "1.0.6"
+version = "1.0.7"
 backend = "aqua:lima-vm/lima"
 
 [tools.lima.checksums]
-"lima-1.0.6-Darwin-arm64.tar.gz" = "sha256:4c65d63eb5f3a97a781ccea4944aa936def4d68e34e95c3f1e010791f318236c"
+"lima-1.0.7-Darwin-arm64.tar.gz" = "sha256:fa3836128e19920ca7113bbcc9908399c56f0665b4b04f294dd76aa02ef38905"
 
 [tools.neovim]
 version = "0.10.4"
@@ -252,7 +252,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:glances"]
-version = "4.3.0.8"
+version = "4.3.1"
 backend = "pipx:glances"
 
 [tools."pipx:pdm"]
