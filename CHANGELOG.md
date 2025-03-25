@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.14](https://github.com/raas-dev/configent/compare/1.140.13...1.140.14) (2025-03-25)
+
+
+### Fixes
+
+* **keybindings:** Add keybinding for composerMode.agent ([39fd653](https://github.com/raas-dev/configent/commit/39fd6533cf282e161ef20a9b80eb19daac6a944e))
+
 ### [1.140.13](https://github.com/raas-dev/configent/compare/1.140.12...1.140.13) (2025-03-22)
 
 
