@@ -1,0 +1,12 @@
+{
+    "folders": [
+        {
+            "name": "configent",
+            "path": "."
+        },
+        {
+            "name": "Documents",
+            "path": "../Documents"
+        }
+    ]
+}
