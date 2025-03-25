@@ -64,7 +64,7 @@ version = "1.19.0"
 backend = "cargo:gping"
 
 [tools."cargo:hurl"]
-version = "6.1.0"
+version = "6.1.1"
 backend = "cargo:hurl"
 
 [tools."cargo:jnv"]
