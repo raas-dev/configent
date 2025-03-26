@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.17](https://github.com/raas-dev/configent/compare/1.140.16...1.140.17) (2025-03-26)
+
+
+### Fixes
+
+* **.aliases:** Add --fixed-strings to rg alias s ([27ba8eb](https://github.com/raas-dev/configent/commit/27ba8ebe17fe60b157285bc74d9fcda228419368))
+* **continue:** Fix Gemini 2.5 Pro context length ([1f2a713](https://github.com/raas-dev/configent/commit/1f2a71334cde77d2f53a9385aca5d7cf9fdcd82b))
+* **continue:** Remove legacy LLMs ([08d2154](https://github.com/raas-dev/configent/commit/08d21542cb9f88a12c231703ee5d04af851a3df7))
+
 ### [1.140.16](https://github.com/raas-dev/configent/compare/1.140.15...1.140.16) (2025-03-26)
 
 
