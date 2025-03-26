@@ -250,9 +250,6 @@ alias langflow='uvx langflow'
 # Reactive notebook
 alias marimo='uvx marimo'
 
-# OpenAI CLI
-alias openai='uvx openai'
-
 ### dev
 
 # Command-line utility for rendering projects templates
