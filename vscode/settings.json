@@ -190,7 +190,6 @@
     "plaintext": false,
     "scminput": false
   },
-  "gitlens.ai.experimental.model": "openai:gpt-4o-mini",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
