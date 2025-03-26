@@ -1,5 +1,5 @@
 architect: true
-model: gemini/gemini-2.0-flash-thinking-exp-01-21
+model: gemini/gemini-2.5-pro-exp-03-25
 editor-model: gemini/gemini-2.0-flash-exp
 
 git: false
