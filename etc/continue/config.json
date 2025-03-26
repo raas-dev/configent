@@ -5,7 +5,7 @@
       "provider": "gemini",
       "model": "gemini-2.5-pro-exp-03-25",
       "apiKey": "[GEMINI_API_KEY]",
-      "contextLength": 2097152,
+      "contextLength": 1048576,
       "completionOptions": {
         "temperature": 0,
         "maxTokens": 8192
