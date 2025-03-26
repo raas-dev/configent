@@ -219,6 +219,9 @@ alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
 
 ### Python #####################################################################
 
+# Prevent system sleep
+alias awake='uvx --from caffeinate awake'
+
 # Multitool for tabular data in terminal
 alias vd='uvx --with odfpy,openpyxl visidata'
 
