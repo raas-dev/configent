@@ -768,6 +768,7 @@ alias terrascan='n terrascan'
 # database clients
 alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
+alias sqlcmd='n sqlcmd'
 
 # decoders
 alias binsider='n binsider'
