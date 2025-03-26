@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.16](https://github.com/raas-dev/configent/compare/1.140.15...1.140.16) (2025-03-26)
+
+
+### Fixes
+
+* **aichat:** Use Gemini 2.5 Pro as the default LLM ([69380e2](https://github.com/raas-dev/configent/commit/69380e233c56db40dcfed12d9f906cd0721772b4))
+
 ### [1.140.15](https://github.com/raas-dev/configent/compare/1.140.14...1.140.15) (2025-03-26)
 
 
