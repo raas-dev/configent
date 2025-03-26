@@ -12,17 +12,6 @@
       }
     },
     {
-      "title": "gemini-2.0-flash-exp",
-      "provider": "gemini",
-      "model": "gemini-2.0-flash-exp",
-      "apiKey": "[GEMINI_API_KEY]",
-      "contextLength": 1048576,
-      "completionOptions": {
-        "temperature": 0,
-        "maxTokens": 8192
-      }
-    },
-    {
       "title": "claude-3.7-sonnet",
       "provider": "anthropic",
       "model": "claude-3-7-sonnet-20250219",
@@ -46,13 +35,7 @@
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
-      "title": "gpt-4o-mini",
-      "provider": "openai",
-      "model": "gpt-4o-mini",
-      "apiKey": "[OPENAI_API_KEY]"
-    },
-    {
-      "title": "OpenRouter",
+      "title": "OpenRouter: Gemini 2.0 Flash",
       "provider": "openrouter",
       "model": "google/gemini-2.0-flash-001",
       "apiKey": "[OPENROUTER_API_KEY]",
@@ -61,7 +44,7 @@
       }
     },
     {
-      "title": "Together: R1",
+      "title": "Together: Deepseek R1",
       "provider": "together",
       "model": "deepseek-ai/DeepSeek-R1",
       "apiKey": "[TOGETHER_API_KEY]",
