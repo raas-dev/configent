@@ -1,5 +1,5 @@
 # checkov:skip=CKV_DOCKER_7: skip image tag
-FROM nixos/nix:2.22.0
+FROM nixos/nix:latest
 
 RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 
