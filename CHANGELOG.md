@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.15](https://github.com/raas-dev/configent/compare/1.140.14...1.140.15) (2025-03-26)
+
+
+### Fixes
+
+* **ai:** Prefer Gemini 2.5 Pro as the default LLM ([7fd273c](https://github.com/raas-dev/configent/commit/7fd273cb561a217f11ca98b21d09fd91c48fdcac))
+
 ### [1.140.14](https://github.com/raas-dev/configent/compare/1.140.13...1.140.14) (2025-03-25)
 
 
