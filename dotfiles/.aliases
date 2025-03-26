@@ -256,7 +256,7 @@ alias openai='uvx openai'
 alias copier='uvx --with copier-templates-extensions copier'
 
 # SQL IDE for terminal
-alias harlequin='uvx --from "harlequin[mysql,postgres]" harlequin --theme lightbulb'
+alias harlequin='uvx --from "harlequin[mysql,postgres,odbc]" harlequin --theme dracula'
 
 # https://hatch.pypa.io/latest
 alias hatch='uvx hatch'
