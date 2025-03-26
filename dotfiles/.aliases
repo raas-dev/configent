@@ -219,7 +219,7 @@ alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
 
 ### Python #####################################################################
 
-# Prevent system sleep
+# https://github.com/subash774/Caffeinate
 alias awake='uvx --from caffeinate awake'
 
 # Multitool for tabular data in terminal
