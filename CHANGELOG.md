@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.19](https://github.com/raas-dev/configent/compare/1.140.18...1.140.19) (2025-03-27)
+
+
+### Fixes
+
+* **code:** Fix typo in app name ([a533168](https://github.com/raas-dev/configent/commit/a5331684e92517619cdced5c2b779ed8ed3d9e61))
+* **macos:** Add duti ([0901e16](https://github.com/raas-dev/configent/commit/0901e16ba63df138e001c5449fbbe81e65c8fec7))
+* **macos:** Register URL handler for vscode:// ([cb54643](https://github.com/raas-dev/configent/commit/cb54643e4f11764581dcdd5b5191c91f4fa03a83))
+
 ### [1.140.18](https://github.com/raas-dev/configent/compare/1.140.17...1.140.18) (2025-03-27)
 
 
