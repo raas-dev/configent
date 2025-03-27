@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.18](https://github.com/raas-dev/configent/compare/1.140.17...1.140.18) (2025-03-27)
+
+
+### Fixes
+
+* **aliases:** Add sqlcmd via n ([8148b14](https://github.com/raas-dev/configent/commit/8148b14e9ef20e0a71217d86fd9ce41de50b5eb7))
+* **n:** Use latest NixOS Docker image ([df8fb72](https://github.com/raas-dev/configent/commit/df8fb72517e08f1005cfa2b71697790dbd426f8a))
+
 ### [1.140.17](https://github.com/raas-dev/configent/compare/1.140.16...1.140.17) (2025-03-26)
 
 
