@@ -19,8 +19,8 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### variables ##################################################################
 
-: "${APP_NAME:="$Code"}"
-: "${BIN_NAME:="$code"}"
+: "${APP_NAME:="Code"}"
+: "${BIN_NAME:="code"}"
 
 ### Symlink configuration ######################################################
 
