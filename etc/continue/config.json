@@ -9,6 +9,10 @@
       "completionOptions": {
         "temperature": 0,
         "maxTokens": 8192
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
     {
