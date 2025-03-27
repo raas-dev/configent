@@ -266,6 +266,7 @@
   ],
   "ruff.lineLength": 80,
   "scm.countBadge": "focused",
+  "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
