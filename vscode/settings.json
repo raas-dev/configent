@@ -86,7 +86,7 @@
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.suggestionMenuType": "quickFix",
   "chat.commandCenter.enabled": false,
-  "chat.editor.fontSize": 13,
+  "chat.editor.fontSize": 14,
   "chat.experimental.offerSetup": false,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
