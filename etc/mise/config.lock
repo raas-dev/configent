@@ -1,16 +1,16 @@
 [tools.awscli]
-version = "2.25.3"
+version = "2.25.5"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.25.3.pkg" = "sha256:2fdfd954651db367d2f478d249a988e8b0d43f9baed7adae05dc8eb2448fee8f"
+"AWSCLIV2-2.25.5.pkg" = "sha256:2669dfc773ed2d6c74bf6b1fc7b6b4a51cf2d3dfd930811ae2610d123b258f6e"
 
 [tools.bun]
-version = "1.2.6"
+version = "1.2.7"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:231f819d531e8a39a44b9541a82009a68189c5a42ecf9b2e755030bc8631f02b"
+"bun-darwin-aarch64.zip" = "sha256:571076d2d644a0a4967211e9851f584c44a645c0a0b7bb5199aff12172fd5ae4"
 
 [tools.cargo-binstall]
 version = "1.12.2"
@@ -20,7 +20,7 @@ backend = "aqua:cargo-bins/cargo-binstall"
 "cargo-binstall-aarch64-apple-darwin.zip" = "sha256:f3c90a36a6d934a3f73ba57e3620f9a5ec5b5da4da976094e2c69f83fe061ece"
 
 [tools."cargo:aichat"]
-version = "0.28.0"
+version = "0.29.0"
 backend = "cargo:aichat"
 
 [tools."cargo:argc"]
@@ -104,7 +104,7 @@ version = "0.10.0"
 backend = "cargo:pastel"
 
 [tools."cargo:procs"]
-version = "0.14.9"
+version = "0.14.10"
 backend = "cargo:procs"
 
 [tools."cargo:ripgrep"]
@@ -120,7 +120,7 @@ version = "1.22.1"
 backend = "cargo:starship"
 
 [tools."cargo:tailspin"]
-version = "4.0.0"
+version = "5.0.0"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
@@ -184,7 +184,7 @@ backend = "core:go"
 "go1.23.4.darwin-arm64.tar.gz" = "sha256:87d2bb0ad4fe24d2a0685a55df321e0efe4296419a9b3de03369dbe60b8acd3a"
 
 [tools."go:github.com/abhimanyu003/sttr"]
-version = "0.2.24"
+version = "0.2.25"
 backend = "go:github.com/abhimanyu003/sttr"
 
 [tools."go:github.com/charmbracelet/glow"]
@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.79.1"
+version = "0.79.2"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
