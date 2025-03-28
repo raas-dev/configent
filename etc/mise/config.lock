@@ -276,7 +276,7 @@ version = "0.4.3"
 backend = "pipx:sncli"
 
 [tools."pipx:tldr"]
-version = "3.3.0"
+version = "3.4.0"
 backend = "pipx:tldr"
 
 [tools.python]
@@ -306,11 +306,11 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.60.0"
+version = "0.61.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.checksums]
-"trivy_0.60.0_macOS-ARM64.tar.gz" = "sha256:b017cfdd640dcf4f7ed6c87e0e7337155f32c07530a086cb08dc8dc270ae2382"
+"trivy_0.61.0_macOS-ARM64.tar.gz" = "sha256:9ad04f68b7823109b93d3c6b4e069d932348bf2847e4ccd197787f87f346138e"
 
 [tools.uv]
 version = "0.6.10"
