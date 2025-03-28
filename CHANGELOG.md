@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.20](https://github.com/raas-dev/configent/compare/1.140.19...1.140.20) (2025-03-28)
+
+
+### Fixes
+
+* **mise:** Fix remove existing symlink ([2e56c74](https://github.com/raas-dev/configent/commit/2e56c74e6ddf350cccb54997ddde0dbe58e2c124))
+
 ### [1.140.19](https://github.com/raas-dev/configent/compare/1.140.18...1.140.19) (2025-03-27)
 
 
