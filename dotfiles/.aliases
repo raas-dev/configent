@@ -208,7 +208,7 @@ alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
 # Display PATH content
 alias path='printf "${PATH//:/\\n}\n"'
 
-# Enable aliases to be sudo’ed
+# Enable aliases to be sudo'ed
 alias sudo='sudo '
 
 # Display week number
@@ -489,7 +489,7 @@ big() {
 e() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
   if [ $# -eq 0 ]; then
-    echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
+    echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso|.whl>"
     echo "       $0 <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
   fi
 
@@ -507,7 +507,7 @@ e() {
     *.bz2) bunzip2 ./"$n" ;;
     *.cbr | *.rar) unrar x -ad ./"$n" ;;
     *.gz) gunzip ./"$n" ;;
-    *.cbz | *.epub | *.zip) unzip ./"$n" ;;
+    *.cbz | *.epub | *.zip | *.whl) unzip ./"$n" ;;
     *.z) uncompress ./"$n" ;;
     *.7z | *.apk | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar | *.vhd)
       7z x ./"$n"
