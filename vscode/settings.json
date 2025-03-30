@@ -111,7 +111,12 @@
   "diffEditor.codeLens": true,
   "docker.dockerPath": "docker",
   "docker.images.checkForOutdatedImages": false,
+  "dotnetAcquisitionExtension.allowInvalidPaths": true,
   "dotnetAcquisitionExtension.enableTelemetry": false,
+  "dotnetAcquisitionExtension.existingDotnetPath": [
+    "~/.local/share/mise/shims/dotnet"
+  ],
+  "dotnetAcquisitionExtension.sharedExistingDotnetPath": "~/.local/share/mise/shims/dotnet",
   "editor.acceptSuggestionOnEnter": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorBlinking": "smooth",
