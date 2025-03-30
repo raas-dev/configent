@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.21](https://github.com/raas-dev/configent/compare/1.140.20...1.140.21) (2025-03-30)
+
+
+### Fixes
+
+* **aliases:** Add whl extract support for e() ([0def2d3](https://github.com/raas-dev/configent/commit/0def2d30e8128b22fee69c55e5e9a3309b7a4bc7))
+
 ### [1.140.20](https://github.com/raas-dev/configent/compare/1.140.19...1.140.20) (2025-03-28)
 
 
