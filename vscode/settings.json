@@ -95,6 +95,7 @@
   "continue.enableTabAutocomplete": false,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
+  "crashReporting.enabled": "off",
   "csv-preview.resizeColumns": "all",
   "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
