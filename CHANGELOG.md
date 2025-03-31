@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.22](https://github.com/raas-dev/configent/compare/1.140.21...1.140.22) (2025-03-31)
+
+
+### Fixes
+
+* **aliases:** fix `c` passing DOCKER_HOST to oxker ([943bd67](https://github.com/raas-dev/configent/commit/943bd67f235ca5c2255d33414b92a0756cc1f6a5))
+* **bash:** Add bash-preexec to fix atuin history ([b0623bb](https://github.com/raas-dev/configent/commit/b0623bb4ebaedb7e548553c8d15df8f0e20fc04f))
+* **vscode:** Disable Code Lens ([f86cda2](https://github.com/raas-dev/configent/commit/f86cda22dcdd0cc70f8f821ea6f8396b38491e43))
+
 ### [1.140.21](https://github.com/raas-dev/configent/compare/1.140.20...1.140.21) (2025-03-30)
 
 
