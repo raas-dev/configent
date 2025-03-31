@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.23](https://github.com/raas-dev/configent/compare/1.140.22...1.140.23) (2025-03-31)
+
+
+### Fixes
+
+* **settings:** Enable CodeLens due to git merge editor ([f68ac29](https://github.com/raas-dev/configent/commit/f68ac29b55d188006e474b1ba78b5818171122f3))
+
 ### [1.140.22](https://github.com/raas-dev/configent/compare/1.140.21...1.140.22) (2025-03-31)
 
 
