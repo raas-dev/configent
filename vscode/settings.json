@@ -120,7 +120,6 @@
   "dotnetAcquisitionExtension.sharedExistingDotnetPath": "~/.local/share/mise/shims/dotnet",
   "editor.acceptSuggestionOnEnter": "off",
   "editor.bracketPairColorization.enabled": true,
-  "editor.codeLens": false,
   "editor.cursorBlinking": "smooth",
   "editor.cursorWidth": 2,
   "editor.find.addExtraSpaceOnTop": false,
