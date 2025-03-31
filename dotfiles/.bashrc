@@ -126,6 +126,7 @@ fi
 
 ### Load other configs #########################################################
 
+[ -r "$HOME/.bash-preexec.sh" ] && . "$HOME/.bash-preexec.sh"
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
