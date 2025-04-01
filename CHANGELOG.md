@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.140.24](https://github.com/raas-dev/configent/compare/1.140.23...1.140.24) (2025-04-01)
+
+
+### Fixes
+
+* **aichat:** Add gemma3 ([8d8741e](https://github.com/raas-dev/configent/commit/8d8741e7762a9c6f2bf5db7db32d90ff352552ef))
+* **aichat:** Remove explicit tool use from prompts ([708bbb2](https://github.com/raas-dev/configent/commit/708bbb2317f007d743182e7b51867f7b2a6cbef2))
+* **fabric:** Update assistant prompts ([96df8b4](https://github.com/raas-dev/configent/commit/96df8b48eb71a9d48b2b9fc596e7d03c3a2c2aea))
+
 ### [1.140.23](https://github.com/raas-dev/configent/compare/1.140.22...1.140.23) (2025-03-31)
 
 
