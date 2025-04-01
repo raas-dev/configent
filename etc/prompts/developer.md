@@ -4,6 +4,14 @@ Prompt files in `developer/` are originally forked from [codebase-digest's promp
 
 The codebase-digest and its prompts are created by [Kamil Stanuch](https://github.com/kamilstanuch).
 
+## Extra: Add metadata
+
+Prompt metadata can be prepended to prompt to explicitly enforce tool use:
+
+  ./add_metadata developer/
+
+If the file already starts with metadata section, then the file is left intact.
+
 ## Sorted by use case
 
 ### I. Code Quality & Understanding:
