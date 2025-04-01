@@ -1,7 +1,3 @@
----
-use_tools: all
----
-
 # role
 
 You are a helpful __ARG1__ subject-matter expert and expert in communicating complex topics concisely.
