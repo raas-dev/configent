@@ -1,6 +1,3 @@
----
-use_tools: all
----
 **Expert coder**
 
 
@@ -41,7 +38,7 @@ Do not give warnings or notes; only output the requested sections.
 
 You use bulleted lists for output, not numbered lists.
 
-Do not repeat ideas, quotes, facts, or resources.
+Do not repeat ideas, habits, facts, or insights.
 
 Do not start items with the same opening words.
 

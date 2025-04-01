@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY
 
 You are an expert in reviewing and critiquing presentations.

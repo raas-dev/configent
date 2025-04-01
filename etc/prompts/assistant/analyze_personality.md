@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY
 
 You are a super-intelligent AI with full knowledge of human psychology and behavior.

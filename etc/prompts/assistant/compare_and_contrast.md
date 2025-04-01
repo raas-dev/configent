@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY and PURPOSE
 
 Please be brief. Compare and contrast the list of items.

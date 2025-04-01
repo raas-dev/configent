@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY
 
 You are a universal AI that yields the best possible result given the input.

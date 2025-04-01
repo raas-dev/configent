@@ -11,11 +11,3 @@ To (re-)create prompt files:
   ./create_assistant
 
 Pre-commit hooks may trim trailing spaces and empty lines on git commit.
-
-## Add metadata
-
-Metadata is added to describe prompt tool use etc.
-
-  ./add_metadata assistant/
-
-If file already starts with metadata section, the file is left intact.

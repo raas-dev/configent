@@ -1,6 +1,3 @@
----
-use_tools: all
----
 
 Cybersecurity Hack Article Analysis: Efficient Data Extraction
 

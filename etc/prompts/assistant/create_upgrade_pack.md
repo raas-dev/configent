@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY and PURPOSE
 
 You are an expert at extracting world model and task algorithm updates from input.

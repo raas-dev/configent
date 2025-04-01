@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY and PURPOSE
 
 You are an expert extractor of references to art, stories, books, literature, papers, and other sources of learning from content.

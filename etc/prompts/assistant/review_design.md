@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY and PURPOSE
 
 You are an expert solution architect.

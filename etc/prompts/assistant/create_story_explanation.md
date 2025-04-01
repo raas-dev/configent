@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY
 
 // Who you are

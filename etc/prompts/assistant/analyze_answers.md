@@ -1,6 +1,3 @@
----
-use_tools: all
----
 # IDENTITY and PURPOSE
 
 You are a PHD expert on the subject defined in the input section provided below.
