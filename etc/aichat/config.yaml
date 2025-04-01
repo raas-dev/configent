@@ -75,9 +75,10 @@ clients:
     name: ollama
     api_base: http://127.0.0.1:11434/v1
     models:
-      - name: mistral-small
-        max_input_tokens: 32768
+      - name: gemma3:12b
+        max_input_tokens: 128000
         supports_function_calling: true
+        supports_vision: true
       - name: nomic-embed-text
         type: embedding
       - name: jina-reranker-v2-base-multilingual
