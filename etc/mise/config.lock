@@ -1,16 +1,16 @@
 [tools.awscli]
-version = "2.25.6"
+version = "2.25.7"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.25.6.pkg" = "sha256:8abbf9ef03902d6f322524c89010de8823f64599dbaefe49f8789e14ba7a7cf2"
+"AWSCLIV2-2.25.7.pkg" = "sha256:0236ef3249b5f28382eedb44d8dcad826d50ca49cba2bd6f38ca1cabe83489e1"
 
 [tools.bun]
-version = "1.2.7"
+version = "1.2.8"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:571076d2d644a0a4967211e9851f584c44a645c0a0b7bb5199aff12172fd5ae4"
+"bun-darwin-aarch64.zip" = "sha256:8a806a40a037329e4fb559457267f6c4ebe8204cbbacdb03f39b349bed5aa355"
 
 [tools.cargo-binstall]
 version = "1.12.2"
@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.80.0"
+version = "0.80.1"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
@@ -256,7 +256,7 @@ version = "4.3.1"
 backend = "pipx:glances"
 
 [tools."pipx:pdm"]
-version = "2.22.4"
+version = "2.23.0"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
