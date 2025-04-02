@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.1](https://github.com/raas-dev/configent/compare/1.141.0...1.141.1) (2025-04-02)
+
+
+### Fixes
+
+* **.aliases:** Add aliases for latest gptme ([89e4237](https://github.com/raas-dev/configent/commit/89e42378015139b6640d1eb9932639064e6642fc))
+* **.aliases:** Add claude alias for Claude Code ([db7b630](https://github.com/raas-dev/configent/commit/db7b6306e8c1d53ec85590587fa9871e18c8de7d))
+* **.aliases:** Remove default gptme session name ([fcd7573](https://github.com/raas-dev/configent/commit/fcd757344506f289361b5fad1696a76b1d87b15c))
+* **.aliases:** Remove default name argument from gptme alias ([174988f](https://github.com/raas-dev/configent/commit/174988f77ce811d52c782e08608ded465c4da234))
+* **ai:** Add gptme ([3eb3092](https://github.com/raas-dev/configent/commit/3eb30928bae3293126e8ce5779870b94153a66da))
+* **gptme:** Add support for gptme-rag ([f9d4880](https://github.com/raas-dev/configent/commit/f9d4880b33a2c336b5c6cd58c95caa8d1faafc9f))
+* **gptme:** Add upcoming mcp configuration ([0ea4801](https://github.com/raas-dev/configent/commit/0ea48013e47ed7256d2c9e9579dcfb32bdc719b7))
+* **gptme:** Resume session ([f9de5db](https://github.com/raas-dev/configent/commit/f9de5db4f1ba885e38e32f066ce5a75fe5112c34))
+
 ## [1.141.0](https://github.com/raas-dev/configent/compare/1.140.24...1.141.0) (2025-04-02)
 
 
