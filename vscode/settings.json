@@ -123,6 +123,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorBlinking": "smooth",
   "editor.cursorWidth": 2,
+  "editor.emptySelectionClipboard": false,
   "editor.find.addExtraSpaceOnTop": false,
   "editor.folding": false,
   "editor.fontFamily": "Terminess Nerd Font",
