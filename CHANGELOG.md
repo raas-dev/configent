@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.2](https://github.com/raas-dev/configent/compare/1.141.1...1.141.2) (2025-04-02)
+
+
+### Fixes
+
+* **gptme:** Remove explicit gptme-rag install ([c2db113](https://github.com/raas-dev/configent/commit/c2db113ccdebc51db930def4949d536ac79ea0e1))
+
 ### [1.141.1](https://github.com/raas-dev/configent/compare/1.141.0...1.141.1) (2025-04-02)
 
 
