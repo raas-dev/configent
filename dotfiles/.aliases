@@ -242,7 +242,7 @@ alias semgrep='uvx semgrep'
 ### ai
 
 # gptme (mise'd version lags behind due to slow PyPI release cycle)
-alias gptme='uvx --with "gptme[all]" --with gptme-rag --from git+https://github.com/gptme/gptme gptme'
+alias gptme='uvx --with "gptme[all]" --with gptme-rag --from git+https://github.com/gptme/gptme gptme --name ${PWD##*/}'
 alias gptme-server='uvx --with "gptme[all]" --with gptme-rag --from git+https://github.com/gptme/gptme gptme-server'
 
 # Huggingface CLI
