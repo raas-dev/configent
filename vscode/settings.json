@@ -100,6 +100,7 @@
   "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
+  "cursor.composer.shouldAllowCustomModes": true,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
     "markdown"
