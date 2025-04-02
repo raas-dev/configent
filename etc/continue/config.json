@@ -8,6 +8,21 @@
       "contextLength": 1048576,
       "completionOptions": {
         "temperature": 0,
+        "maxTokens": 65536
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
+      }
+    },
+    {
+      "title": "gemini-2.0-flash-exp",
+      "provider": "gemini",
+      "model": "gemini-2.0-flash-exp",
+      "apiKey": "[GEMINI_API_KEY]",
+      "contextLength": 1048576,
+      "completionOptions": {
+        "temperature": 0,
         "maxTokens": 8192
       },
       "capabilities": {
@@ -130,7 +145,7 @@
   "reranker": {
     "name": "llm",
     "params": {
-      "modelTitle": "gemini-2.5-pro-exp-03-25"
+      "modelTitle": "gemini-2.0-flash-exp"
     }
   },
   "slashCommands": [
