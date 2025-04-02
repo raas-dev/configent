@@ -8,6 +8,20 @@ MODEL = "gemini/gemini-2.5-pro-exp-03-25"
 GPTME_CHECK = "false"
 GPTME_COSTS = "true"
 
+[mcp]
+enabled = true
+auto_start = true
+
+[[mcp.servers]]
+name = "memory"
+enabled = true
+command = "npx"
+args = [
+    "-y",
+    "@modelcontextprotocol/server-memory"
+]
+env = { MEMORY_FILE_PATH = "/tmp/memory.json" }
+
 # One of these need to be set
 # If none of them are, they will be prompted for on first start
 #OPENAI_API_KEY = ""
