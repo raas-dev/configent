@@ -325,6 +325,9 @@ alias wrangler='bunx wrangler'
 
 ### ai
 
+# Claude Code
+alias claude="bunx @anthropic-ai/claude-code"
+
 # Flowise
 alias flowise='bunx flowise'
 
