@@ -242,8 +242,8 @@ alias semgrep='uvx semgrep'
 ### ai
 
 # gptme (mise'd version lags behind due to slow PyPI release cycle)
-alias gptme='uvx --with "gptme[all]" --from git+https://github.com/gptme/gptme gptme'
-alias gptme-server='uvx --with "gptme[all]" --from git+https://github.com/gptme/gptme gptme-server'
+alias gptme='uvx --python 3.11 --with "gptme[all]" --with gptme-rag --from git+https://github.com/gptme/gptme gptme'
+alias gptme-server='uvx --python 3.11 --with "gptme[all]" --with gptme-rag --from git+https://github.com/gptme/gptme gptme-server'
 
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
