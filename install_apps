@@ -62,3 +62,6 @@ fi
 
 # install Ollama
 "$bin_path/install_ollama"
+
+# install Goose (https://block.github.io/goose/)
+"$bin_path/install_goose"

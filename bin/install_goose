@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### install ####################################################################
+
+curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash
+
+### configs ####################################################################
+
+# config.yaml
+if [ ! -r "$backup_path/.config/goose/config.yaml" ]; then
+  if [ -r "$HOME/.config/goose/config.yaml" ]; then
+    mkdir -p "$backup_path/.config/goose"
+    cp -P "$HOME/.config/goose/config.yaml" \
+      "$backup_path/.config/goose/config.yaml"
+  fi
+fi
+mkdir -p "$HOME/.config/goose"
+ln -sfnv "$config_path/goose/config.yaml" "$HOME/.config/goose/config.yaml"
