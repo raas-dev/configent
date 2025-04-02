@@ -240,7 +240,6 @@
   "mise.checkForNewMiseVersion": false,
   "mise.configureExtensionsAutomatically": false,
   "mise.showToolVersionsDecorations": false,
-  "mise.updateOpenTerminalsEnvAutomatically": true,
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
