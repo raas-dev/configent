@@ -7,6 +7,7 @@ response_preference = "Don't explain basic concepts"
 MODEL = "gemini/gemini-2.5-pro-exp-03-25"
 GPTME_CHECK = "false"
 GPTME_COSTS = "true"
+#GPTME_SUGGEST_LLM = "true"
 
 [mcp]
 enabled = true
