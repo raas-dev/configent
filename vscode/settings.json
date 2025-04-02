@@ -306,7 +306,6 @@
     "pwsh",
     "tmux"
   ],
-  "terminal.integrated.inheritEnv": false,
   "terminal.integrated.initialHint": false,
   "terminal.integrated.letterSpacing": -1,
   "terminal.integrated.macOptionClickForcesSelection": true,
