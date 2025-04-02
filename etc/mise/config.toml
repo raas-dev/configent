@@ -54,7 +54,7 @@ uv = 'latest'
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
-#'pipx:gptme' = { version = 'latest', extras = 'browser', uvx_args = '--with flask', postinstall = "~/.local/configent/bin/postinstall_gptme" }
+'pipx:gptme' = { version = 'latest', extras = 'browser', uvx_args = '--with flask', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:playwright' = 'latest'
 'pipx:poetry' = 'latest'

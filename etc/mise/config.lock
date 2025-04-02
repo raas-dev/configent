@@ -255,6 +255,10 @@ backend = "pipx:azure-cli"
 version = "4.3.1"
 backend = "pipx:glances"
 
+[tools."pipx:gptme"]
+version = "0.27.0"
+backend = "pipx:gptme"
+
 [tools."pipx:pdm"]
 version = "2.23.0"
 backend = "pipx:pdm"
