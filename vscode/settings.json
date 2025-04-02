@@ -240,6 +240,7 @@
   "mise.checkForNewMiseVersion": false,
   "mise.configureExtensionsAutomatically": false,
   "mise.showToolVersionsDecorations": false,
+  "mise.updateEnvAutomatically": false,
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
@@ -306,6 +307,7 @@
     "pwsh",
     "tmux"
   ],
+  "terminal.integrated.inheritEnv": false,
   "terminal.integrated.initialHint": false,
   "terminal.integrated.letterSpacing": -1,
   "terminal.integrated.macOptionClickForcesSelection": true,
