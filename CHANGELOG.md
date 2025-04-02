@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.141.0](https://github.com/raas-dev/configent/compare/1.140.24...1.141.0) (2025-04-02)
+
+
+### Features
+
+* **ai:** Add Goose ([9edb56f](https://github.com/raas-dev/configent/commit/9edb56f9ac311a7122d17210d56a89854dd18e73))
+
+
+### Fixes
+
+* **aichat:** Migrate config to aichat 0.29.0 ([eb9e2c5](https://github.com/raas-dev/configent/commit/eb9e2c55e52bf8c778bdbfa30d80a45371acefd2))
+
 ### [1.140.24](https://github.com/raas-dev/configent/compare/1.140.23...1.140.24) (2025-04-01)
 
 
