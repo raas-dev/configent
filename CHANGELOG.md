@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.3](https://github.com/raas-dev/configent/compare/1.141.2...1.141.3) (2025-04-02)
+
+
+### Fixes
+
+* **gptme:** Update config for Python 3.11 and RAG ([a5fd591](https://github.com/raas-dev/configent/commit/a5fd591ae99274b9ff2f23d415f1fd677e8e45cb))
+
 ### [1.141.2](https://github.com/raas-dev/configent/compare/1.141.1...1.141.2) (2025-04-02)
 
 
