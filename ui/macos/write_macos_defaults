@@ -6,7 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# Warning! Run with caution, as it is very hard to reset settings to originals.
+# Warning! Run with caution as it is very hard to reset settings to originals.
 
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "Error: Not on macOS."
