@@ -30,7 +30,7 @@ fi
 
 ### Set system-wide keyboard type ##############################################
 
-echo "Sudo password may be to remove $system_plist_path"
+echo "Sudo password may be asked to remove $system_plist_path"
 sudo rm -f "$system_plist_path"
 
 echo "Sudo password may be asked to copy repo's plist file to the target"
