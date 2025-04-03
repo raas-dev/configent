@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# Warning! Run with caution as this makes system-wide changes.
+
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Error: Not on macOS."
+  exit 1
+fi
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../../.backup/system/Library/Preferences"
+system_plist_path="/Library/Preferences/com.apple.keyboardtype.plist"
+
+### Backup system-wide keyboard type ###########################################
+
+if [ ! -r "$backup_path/com.apple.keyboardtype.plist" ]; then
+  if [ -r "$system_plist_path" ]; then
+    mkdir -p "$backup_path"
+    cp -P "$system_plist_path" "$backup_path/com.apple.keyboardtype.plist"
+  fi
+fi
+
+### Set system-wide keyboard type ##############################################
+
+echo "Sudo password may be to remove $system_plist_path"
+sudo rm -f "$system_plist_path"
+
+echo "Sudo password may be asked to copy repo's plist file to the target"
+sudo cp -P \
+  "$this_path/system/Library/Preferences/com.apple.keyboardtype.plist" \
+  "$system_plist_path"
+echo "Sudo password may be asked to chown $system_plist_path"
+sudo chown root:wheel "$system_plist_path"
+
+# or alternatively:
+#echo "File $system_plist_path was removed. Reboot macOS to re-run Keyboard Setup Assistant"
