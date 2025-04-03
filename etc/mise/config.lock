@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.80.1"
+version = "0.80.2"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
@@ -317,8 +317,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.61.0_macOS-ARM64.tar.gz" = "sha256:9ad04f68b7823109b93d3c6b4e069d932348bf2847e4ccd197787f87f346138e"
 
 [tools.uv]
-version = "0.6.11"
+version = "0.6.12"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:a5b14a92448b908d1a5415f2a49522010fef8972695e2f7bbb4e5c5f88024573"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:fab8db5b62da1e945524b8d1a9d4946fcc6d9b77ec0cab423d953e82159967ac"
