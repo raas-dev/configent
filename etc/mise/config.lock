@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.25.9"
+version = "2.25.10"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.25.9.pkg" = "sha256:66eb7417f440dff08fda750f0f6ec7d3e41aa7ea49d46aa9807cc7a4ff03587c"
+"AWSCLIV2-2.25.10.pkg" = "sha256:1254b332021b8a85f7ce08fd930546d995873f2eaeba970bfee370c05057fe20"
 
 [tools.bun]
 version = "1.2.8"
@@ -244,7 +244,7 @@ backend = "core:node"
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:aider-chat"]
-version = "0.80.4"
+version = "0.81.0"
 backend = "pipx:aider-chat"
 
 [tools."pipx:azure-cli"]
