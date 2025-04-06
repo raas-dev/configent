@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:8a806a40a037329e4fb559457267f6c4ebe8204cbbacdb03f39b349bed5aa355"
 
 [tools.cargo-binstall]
-version = "1.12.2"
+version = "1.12.3"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:f3c90a36a6d934a3f73ba57e3620f9a5ec5b5da4da976094e2c69f83fe061ece"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:88467030db096ceddf97405750fe9e67cf25106da241db7a60900c58f192206f"
 
 [tools."cargo:aichat"]
 version = "0.29.0"
@@ -159,11 +159,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.61.0"
+version = "0.61.1"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.61.0-darwin_arm64.tar.gz" = "sha256:d8230bb1a38817b7b7dc13100f9ef951fdc216e60df04e6c4015ee6acea54aeb"
+"fzf-0.61.1-darwin_arm64.tar.gz" = "sha256:addc2d9af3281b09661223ea87887c69599d4cf7b7bc9219d7320daadc8639a1"
 
 [tools.gcloud]
 version = "510.0.0"
