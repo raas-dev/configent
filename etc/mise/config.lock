@@ -144,11 +144,11 @@ version = "0.9.7"
 backend = "cargo:zoxide"
 
 [tools.cosign]
-version = "2.4.3"
+version = "2.5.0"
 backend = "aqua:sigstore/cosign"
 
 [tools.cosign.checksums]
-cosign-darwin-arm64 = "sha256:edfc761b27ced77f0f9ca288ff4fac7caa898e1e9db38f4dfdf72160cdf8e638"
+cosign-darwin-arm64 = "sha256:780da3654d9601367b0d54686ac65cb9716578610cabe292d725c7008de4db85"
 
 [tools.dotnet]
 version = "8.0.404"
@@ -317,8 +317,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.61.0_macOS-ARM64.tar.gz" = "sha256:9ad04f68b7823109b93d3c6b4e069d932348bf2847e4ccd197787f87f346138e"
 
 [tools.uv]
-version = "0.6.12"
+version = "0.6.13"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:fab8db5b62da1e945524b8d1a9d4946fcc6d9b77ec0cab423d953e82159967ac"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:0ddb8458634cc3a02799b6da839cb546dff9dabc6f3394912c48dd479016683b"
