@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.4](https://github.com/raas-dev/configent/compare/1.141.3...1.141.4) (2025-04-08)
+
+
+### Fixes
+
+* **continue:** Add gemini-2.0-flash as reranker ([b18c486](https://github.com/raas-dev/configent/commit/b18c486c9bcba37044446f06f67d2df1502ede19))
+* **macos:** Add script to reset external keyboard type ([1d79785](https://github.com/raas-dev/configent/commit/1d797853b31a74516c8b90765299d2a31c1fd7ee))
+* **reset_keyboard_type:** Correct typo in sudo prompt message ([4fd065d](https://github.com/raas-dev/configent/commit/4fd065d29f15b9d99a36c11065137be10545af65))
+
 ### [1.141.3](https://github.com/raas-dev/configent/compare/1.141.2...1.141.3) (2025-04-02)
 
 
