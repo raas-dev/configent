@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.25.12"
+version = "2.25.13"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.25.12.pkg" = "sha256:13840745cad818860698dcae6dc3332c918a8480c896a926ea99afd540cdae4d"
+"AWSCLIV2-2.25.13.pkg" = "sha256:697db28045da95974c6e7829f64daa36b5b88b005a3d4b240742ec37a34e191d"
 
 [tools.bun]
 version = "1.2.8"
@@ -260,7 +260,7 @@ version = "0.27.0"
 backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
-version = "2.23.0"
+version = "2.23.1"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
