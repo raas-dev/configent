@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.5](https://github.com/raas-dev/configent/compare/1.141.4...1.141.5) (2025-04-09)
+
+
+### Fixes
+
+* **azure:** Add az extension for bastion ([9267a06](https://github.com/raas-dev/configent/commit/9267a0601fd8dc300c4e470f54cc047e8758c1b2))
+* **azure:** Remove obsolete `az next` CLI extension ([723aa5b](https://github.com/raas-dev/configent/commit/723aa5bbd5d5a4c0e04f613732eb8bd93be6753d))
+
 ### [1.141.4](https://github.com/raas-dev/configent/compare/1.141.3...1.141.4) (2025-04-08)
 
 
