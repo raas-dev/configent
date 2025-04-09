@@ -28,7 +28,6 @@ fi
 az extension add --name azure-devops --upgrade --yes
 az extension add --name bastion --upgrade --yes
 az extension add --name containerapp --upgrade --yes
-az extension add --name next --upgrade --yes
 az extension add --name ssh --upgrade --yes
 
 ### azure developer cli ########################################################
