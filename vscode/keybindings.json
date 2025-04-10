@@ -509,5 +509,10 @@
   {
     "command": "composerMode.agent",
     "key": "cmd+i"
+  },
+  {
+    "command": "-breadcrumbs.toggleToOn",
+    "key": "shift+cmd+[Backquote]",
+    "when": "!config.breadcrumbs.enabled"
   }
 ]
