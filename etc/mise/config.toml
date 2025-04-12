@@ -50,7 +50,7 @@ bun = 'latest'
 
 python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
-'pipx:aider-chat' = { version = 'latest', extras = 'browser', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_aider" }
+#'pipx:aider-chat' = { version = 'latest', extras = 'browser', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_aider" }
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }

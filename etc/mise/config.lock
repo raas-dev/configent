@@ -243,10 +243,6 @@ backend = "core:node"
 [tools.node.checksums]
 "node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
-[tools."pipx:aider-chat"]
-version = "0.81.1"
-backend = "pipx:aider-chat"
-
 [tools."pipx:azure-cli"]
 version = "2.68.0"
 backend = "pipx:azure-cli"
