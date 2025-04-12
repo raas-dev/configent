@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.25.14"
+version = "2.26.1"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.25.14.pkg" = "sha256:5e866dbb8bb1f6aa9107b49f0b165d7eef86fa78b160125591d63c5b74b1a2da"
+"AWSCLIV2-2.26.1.pkg" = "sha256:6bb6b438d35a8156c5199aef8cf3a2176eceb725e4206ae5bb82edf806c5ee2c"
 
 [tools.bun]
 version = "1.2.9"
@@ -120,7 +120,7 @@ version = "1.22.1"
 backend = "cargo:starship"
 
 [tools."cargo:tailspin"]
-version = "5.1.0"
+version = "5.2.0"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
