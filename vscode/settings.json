@@ -44,6 +44,7 @@
   "breadcrumbs.enabled": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.diagnosticLevel": "Hint",
+  "cSpell.enabled": true,
   "cSpell.enabledFileTypes": {
     "*": false,
     "markdown": true,
