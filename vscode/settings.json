@@ -108,7 +108,7 @@
   "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": true,
-  "editor.minimap.maxColumn": 55,
+  "editor.minimap.maxColumn": 60,
   "editor.minimap.showSlider": "always",
   "editor.overviewRulerBorder": false,
   "editor.renderControlCharacters": true,
