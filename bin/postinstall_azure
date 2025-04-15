@@ -34,3 +34,10 @@ mkdir -p "$HOME/.azd/bin"
 # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
 curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
   bash -s -- --install-folder "$HOME/.azd" --symlink-folder "$HOME/.azd/bin"
+
+### PowerShell Azure module ####################################################
+
+if command -v pwsh >/dev/null; then
+  pwsh -c "Install-Module -Name Az -Repository PSGallery"
+  pwsh -c "Update-Module -Name Az"
+fi
