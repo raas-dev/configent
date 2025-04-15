@@ -48,9 +48,16 @@
       }
     },
     {
-      "title": "o3-mini",
+      "title": "gpt-4.1",
       "provider": "openai",
-      "model": "o3-mini",
+      "model": "gpt-4.1",
+      "apiKey": "[OPENAI_API_KEY]"
+    },
+
+    {
+      "title": "gpt-4.1-mini",
+      "provider": "openai",
+      "model": "gpt-4.1-mini",
       "apiKey": "[OPENAI_API_KEY]"
     },
     {
