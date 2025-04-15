@@ -40,5 +40,5 @@ curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
 if command -v pwsh >/dev/null; then
   pwsh -c "Set-PSRepository PSGallery -InstallationPolicy Trusted"
   pwsh -c "Install-Module -Name Az -Repository PSGallery"
-  pwsh -c "Update-Module -Name Az"
+  pwsh -c "Install-Module -Name Microsoft.Graph -Repository PSGallery"
 fi
