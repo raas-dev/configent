@@ -16,10 +16,8 @@ az config set core.collect_telemetry=no
 if [ "$(uname -s)" = 'Linux' ] && [ "$(uname -m)" = "aarch64" ]; then
   # target is not correctly detected on aarch64 Lima VMs (2025-01)
   # linux-musl-arm64 is not supported (2024-04)
-  az bicep install --target "linux-arm64"
   az bicep upgrade --target "linux-arm64"
 else
-  az bicep install
   az bicep upgrade
 fi
 
