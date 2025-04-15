@@ -56,9 +56,12 @@
       "completionOptions": {
         "temperature": 0,
         "maxTokens": 32768
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
-
     {
       "title": "gpt-4.1-mini",
       "provider": "openai",
@@ -68,6 +71,10 @@
       "completionOptions": {
         "temperature": 0,
         "maxTokens": 32768
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
     {
