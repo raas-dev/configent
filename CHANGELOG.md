@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.141.6](https://github.com/raas-dev/configent/compare/1.141.5...1.141.6) (2025-04-15)
+
+
+### Fixes
+
+* **aider:** Disable aider due to yanked dependency ([bccd5d6](https://github.com/raas-dev/configent/commit/bccd5d636f82a55665303bd471822086a71f126c))
+* **continue:** Add OpenAI gpt-4.1 settings ([715368d](https://github.com/raas-dev/configent/commit/715368da3d0dfb0469f23eec4c6452b028d70373))
+* **continue:** OpenAI to use gpt-4.1 and gpt-4.1-mini ([c46a14a](https://github.com/raas-dev/configent/commit/c46a14a607efd3c999b6b6a96daae2fb125be4ed))
+* **keybindings:** Remove breadcrumbs toggle keybinding ([5ee74d8](https://github.com/raas-dev/configent/commit/5ee74d895a629340492fcfc3b3e85490b1cee841))
+* **vscode:** Add cSpell and enable it for plain text ([25eb122](https://github.com/raas-dev/configent/commit/25eb122b341fe6c1caf2703237503839414d5fd2))
+
 ### [1.141.5](https://github.com/raas-dev/configent/compare/1.141.4...1.141.5) (2025-04-09)
 
 
