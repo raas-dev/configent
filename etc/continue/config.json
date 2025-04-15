@@ -51,14 +51,24 @@
       "title": "gpt-4.1",
       "provider": "openai",
       "model": "gpt-4.1",
-      "apiKey": "[OPENAI_API_KEY]"
+      "apiKey": "[OPENAI_API_KEY]",
+      "contextLength": 1048576,
+      "completionOptions": {
+        "temperature": 0,
+        "maxTokens": 32768
+      }
     },
 
     {
       "title": "gpt-4.1-mini",
       "provider": "openai",
       "model": "gpt-4.1-mini",
-      "apiKey": "[OPENAI_API_KEY]"
+      "apiKey": "[OPENAI_API_KEY]",
+      "contextLength": 1048576,
+      "completionOptions": {
+        "temperature": 0,
+        "maxTokens": 32768
+      }
     },
     {
       "title": "OpenRouter: Gemini 2.0 Flash",
