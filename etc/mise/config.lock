@@ -79,6 +79,10 @@ backend = "cargo:kondo"
 version = "1.1.5"
 backend = "cargo:lsd"
 
+[tools."cargo:lumen"]
+version = "1.9.0"
+backend = "cargo:lumen"
+
 [tools."cargo:nixpacks"]
 version = "1.35.0"
 backend = "cargo:nixpacks"

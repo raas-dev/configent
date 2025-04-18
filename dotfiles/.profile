@@ -164,6 +164,12 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export BAT_STYLE="auto"
 export BAT_THEME="SynthWave84"
 
+### lumen ######################################################################
+
+export LUMEN_AI_PROVIDER="openai"
+export LUMEN_AI_MODEL="gpt-4.1-mini"
+export LUMEN_API_KEY="$OPENAI_API_KEY"
+
 ### awscli #####################################################################
 
 command -v aws_completer >/dev/null && complete -C aws_completer aws
