@@ -83,6 +83,10 @@ backend = "cargo:lsd"
 version = "1.9.0"
 backend = "cargo:lumen"
 
+[tools."cargo:mdcat"]
+version = "2.7.1"
+backend = "cargo:mdcat"
+
 [tools."cargo:nixpacks"]
 version = "1.35.0"
 backend = "cargo:nixpacks"
