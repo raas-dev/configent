@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.142.0](https://github.com/raas-dev/configent/compare/1.141.6...1.142.0) (2025-04-19)
+
+
+### Features
+
+* **ai:** Use goose over aichat in terminal ([942ec22](https://github.com/raas-dev/configent/commit/942ec22a9756f588f3c01b93a72f571b4b08e13c))
+* **git:** add lumen for creating commit messages ([12e0273](https://github.com/raas-dev/configent/commit/12e02739d1d677a8a72468aca7b80a878b576a63))
+
+
+### Fixes
+
+* **aichat:** Remove broken zsh integration ([3c299c5](https://github.com/raas-dev/configent/commit/3c299c5860b31a4608cae20af37a528d1a41e414))
+* **aider:** Install aider ([3df4aed](https://github.com/raas-dev/configent/commit/3df4aede1e144c0dacadca47106268da1ceaaea4))
+* **azure:** Install PowerShell Azure module if pwsh ([da40691](https://github.com/raas-dev/configent/commit/da40691d1027382a276f49a3157e532c962abd11))
+* **continue:** Change OpenRouter model to Claude 3.7 Sonnet ([670c71d](https://github.com/raas-dev/configent/commit/670c71d6c41f259299def762014861932dbd3603))
+* **continue:** Enable tools and images for gpt-4.1 ([e975363](https://github.com/raas-dev/configent/commit/e9753637b4909ff2ee2b39dc86a376fcfac39cfc))
+* **continue:** Use Gemini 2.5 flash as fast model ([3ebc74f](https://github.com/raas-dev/configent/commit/3ebc74fc3842cddea26f89f013f348c1df3dd919))
+* **gemini:** Use 2.5 preview (paid), not 2.5 exp ([c1a3952](https://github.com/raas-dev/configent/commit/c1a3952748df059f7ed8858bc8bd49450b9c6608))
+* **postinstall_azure:** Install Microsoft.Graph PS module ([3d29a2a](https://github.com/raas-dev/configent/commit/3d29a2a03983a75bfff06be6f544c72ea92af7ff))
+* **postinstall_azure:** Trust PSGallery for Az module install ([445b615](https://github.com/raas-dev/configent/commit/445b61501dd230d01757d482e8cc2fefdb00265a))
+* **rust:** Add mdcat ([7faf783](https://github.com/raas-dev/configent/commit/7faf7837f07bb85d463cb5ec6f952f102bad2b8d))
+* **topgrade:** Do not upgrade powershell modules ([776f9ea](https://github.com/raas-dev/configent/commit/776f9eabf5c62dd8bdcd7d5bca8fd9282907ba51))
+
 ### [1.141.6](https://github.com/raas-dev/configent/compare/1.141.5...1.141.6) (2025-04-15)
 
 
