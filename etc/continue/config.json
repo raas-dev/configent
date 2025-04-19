@@ -78,9 +78,9 @@
       }
     },
     {
-      "title": "OpenRouter: Gemini 2.0 Flash",
+      "title": "OpenRouter: Claude 3.7 Sonnet",
       "provider": "openrouter",
-      "model": "google/gemini-2.0-flash-001",
+      "model": "anthropic/claude-3.7-sonnet",
       "apiKey": "[OPENROUTER_API_KEY]",
       "completionOptions": {
         "temperature": 0
