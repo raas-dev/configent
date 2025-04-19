@@ -353,6 +353,15 @@ alias standard-version='bunx standard-version'
 
 ### Functions: AI ##############################################################
 
+ai() {
+  local prompt="$*"
+  if [ -n "$prompt" ]; then
+    goose run --text "$prompt"
+  else
+    goose
+  fi
+}
+
 _aichat_setup_functions() {
   git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
     (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build)
@@ -378,15 +387,6 @@ _aichat_build_agents() {
       fi
     fi
   )
-}
-
-ai() {
-  local prompt="$*"
-  if [ -n "$prompt" ]; then
-    goose run --text "$prompt"
-  else
-    goose
-  fi
 }
 
 ai_assistant() {
