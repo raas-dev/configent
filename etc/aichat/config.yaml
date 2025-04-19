@@ -93,7 +93,7 @@ clients:
   - type: azure-openai
     name: azure_foundry   # export AZURE_FOUNDRY_API_BASE and _API_KEY
     models:
-      - name: o3-mini
+      - name: o4-mini
         max_input_tokens: 200000
         max_output_tokens: 100000
         supports_vision: true
@@ -105,8 +105,8 @@ clients:
             max_tokens: null
             temperature: null
             top_p: null
-      - name: gpt-4o-mini
-        max_input_tokens: 128000
-        max_output_tokens: 16384
+      - name: gpt-4.1-nano
+        max_input_tokens: 1047576
+        max_output_tokens: 32768
         supports_vision: true
         supports_function_calling: true

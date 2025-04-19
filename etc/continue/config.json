@@ -121,25 +121,11 @@
       }
     },
     {
-      "title": "Azure: o3-mini",
+      "title": "Azure: gpt-4.1-nano",
       "provider": "azure",
-      "model": "o3-mini",
-      "deployment": "o3-mini",
-      "contextLength": 200000,
-      "apiType": "azure",
-      "apiBase": "[AZURE_FOUNDRY_API_BASE]",
-      "apiKey": "[AZURE_FOUNDRY_API_KEY]",
-      "apiVersion": "2025-01-01-preview",
-      "capabilities": {
-        "tools": true
-      }
-    },
-    {
-      "title": "Azure: gpt-4o-mini",
-      "provider": "azure",
-      "model": "gpt-4o-mini",
-      "deployment": "gpt-4o-mini",
-      "contextLength": 128000,
+      "model": "gpt-4.1-nano",
+      "deployment": "gpt-4.1-nano",
+      "contextLength": 1048576,
       "apiType": "azure",
       "apiBase": "[AZURE_FOUNDRY_API_BASE]",
       "apiKey": "[AZURE_FOUNDRY_API_KEY]",
