@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.1](https://github.com/raas-dev/configent/compare/1.142.0...1.142.1) (2025-04-19)
+
+
+### Fixes
+
+* **aichat:** Remove unused prompts ([ce1727f](https://github.com/raas-dev/configent/commit/ce1727f4141a5eac1113d995b1e7514287e30493))
+* **aichat:** Set default role for REPL ([b25387d](https://github.com/raas-dev/configent/commit/b25387df396d4aa7115593685dbdd5ef95552e83))
+
 ## [1.142.0](https://github.com/raas-dev/configent/compare/1.141.6...1.142.0) (2025-04-19)
 
 
