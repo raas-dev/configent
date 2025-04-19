@@ -87,20 +87,6 @@ alias history='fc -El 1' # show timestamped history (zsh fc only)
 PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
 RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
-### aichat shell integration ###################################################
-
-_aichat_zsh() {
-  if [ -n "$BUFFER" ]; then
-    _input="$BUFFER"
-    BUFFER="$_input⌛"
-    zle -I && zle redisplay
-    BUFFER=$(aichat --execute "$_input")
-    zle end-of-line
-  fi
-}
-zle -N _aichat_zsh
-bindkey '^X' _aichat_zsh # CTRL + x
-
 ### Load other configs #########################################################
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
