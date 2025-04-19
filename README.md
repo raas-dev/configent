@@ -20,7 +20,7 @@ A few features:
 - Terminal is mostly Rust and Go for speed, use `n`ix-shells for ad-hoc CLIs.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
-- Ask AI (`a <question>`), ask assistant (`_`) or open a chat on (`ai <topic>`).
+- Ask AI (`a <question>`) or assistant (`_`) to run the best prompt for a task.
 
 Works both on AArch64 (including Apple Silicon) and on x86-64.
 
