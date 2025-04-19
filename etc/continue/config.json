@@ -96,14 +96,18 @@
       }
     },
     {
-      "title": "Ollama: mistral-small:24b",
+      "title": "Ollama: mistral-small3.1:24b",
       "provider": "ollama",
-      "model": "mistral-small:24b",
+      "model": "mistral-small3.1:24b",
       "apiBase": "http://127.0.0.1:11434",
-      "contextLength": 32768,
+      "contextLength": 131072,
       "completionOptions": {
         "temperature": 0,
         "keepAlive": 900
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
       }
     },
     {
