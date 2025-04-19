@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.2](https://github.com/raas-dev/configent/compare/1.142.1...1.142.2) (2025-04-19)
+
+
+### Fixes
+
+* **ai:** Update Azure AI Foundry models ([6f05ab1](https://github.com/raas-dev/configent/commit/6f05ab188aa77019d1c224135d07d6f3691f1b44))
+* **config:** update mistral-small model to version 3.1 and extend context length ([d256c38](https://github.com/raas-dev/configent/commit/d256c389429bc985cac774e6a995ce7429871850))
+* **config:** update Ollama mistral-small3.1 model to latest version ([fd969d1](https://github.com/raas-dev/configent/commit/fd969d108c57894f33725496f7bc494aa48ac5ac))
+
 ### [1.142.1](https://github.com/raas-dev/configent/compare/1.142.0...1.142.1) (2025-04-19)
 
 
