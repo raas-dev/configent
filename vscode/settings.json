@@ -205,6 +205,7 @@
   "lntoggle.priority": 110,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
+  "mise.autoDetectMiseBinPath": false,
   "mise.binPath": "mise",
   "mise.checkForNewMiseVersion": false,
   "mise.configureExtensionsAutomatically": false,
