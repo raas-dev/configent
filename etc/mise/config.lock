@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.26.4"
+version = "2.26.5"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.26.4.pkg" = "sha256:097ac6825a6c7d1858dbb1d3c5f0a4bad689eb204c863f5e5c824c467187a75a"
+"AWSCLIV2-2.26.5.pkg" = "sha256:33f617a370e55ff6aaf9a70e781247bd183dbdeb269a06648190bd234e384a3a"
 
 [tools.bun]
 version = "1.2.9"
@@ -128,7 +128,7 @@ version = "1.22.1"
 backend = "cargo:starship"
 
 [tools."cargo:tailspin"]
-version = "5.3.0"
+version = "5.4.1"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
@@ -167,11 +167,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.61.1"
+version = "0.61.2"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.61.1-darwin_arm64.tar.gz" = "sha256:addc2d9af3281b09661223ea87887c69599d4cf7b7bc9219d7320daadc8639a1"
+"fzf-0.61.2-darwin_arm64.tar.gz" = "sha256:fa56ba0af787ccc97d69f5406a2ddf31c134824275f01c2acf3a3812a061a74f"
 
 [tools.gcloud]
 version = "510.0.0"
