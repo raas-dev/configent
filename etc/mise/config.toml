@@ -58,7 +58,7 @@ uv = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
 'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
-'pipx:playwright' = 'latest'
+'pipx:playwright' = { version = 'latest', postinstall = "playwright install" }
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
 'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
