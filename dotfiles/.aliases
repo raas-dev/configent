@@ -4,7 +4,7 @@
 ### Upgrade for all package managers ###########################################
 
 # shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
-skipped_managers="containers helm powershell vim"
+skipped_managers="containers helm powershell uv vim"
 alias up="topgrade --yes --no-retry --disable system restarts $skipped_managers"
 alias dup="topgrade --yes --no-retry --disable $skipped_managers"
 
