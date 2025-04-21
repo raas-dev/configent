@@ -310,7 +310,6 @@
   "typescript.suggest.paths": false,
   "typescript.surveys.enabled": false,
   "update.mode": "none",
-  "update.releaseTrack": "prerelease",
   "update.showReleaseNotes": false,
   "vsintellicode.python.completionsEnabled": false,
   "window.closeWhenEmpty": true,
