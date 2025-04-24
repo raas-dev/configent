@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.26.7"
+version = "2.27.0"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.26.7.pkg" = "sha256:292c60340726adb561dabf7474c84ba8945f41aaa0b66a1e8db8bf22b84b13c6"
+"AWSCLIV2-2.27.0.pkg" = "sha256:d47f73d5efb2775394e02e7e59fafd6374200aed09a482af7a2bdc456b719acf"
 
 [tools.bun]
 version = "1.2.10"
@@ -167,11 +167,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.61.2"
+version = "0.61.3"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.61.2-darwin_arm64.tar.gz" = "sha256:fa56ba0af787ccc97d69f5406a2ddf31c134824275f01c2acf3a3812a061a74f"
+"fzf-0.61.3-darwin_arm64.tar.gz" = "sha256:41a16be1d20a941df345ad3e6350967c28b7dff2a7c3605a3190127299989f4e"
 
 [tools.gcloud]
 version = "510.0.0"
