@@ -63,14 +63,13 @@
       }
     },
     {
-      "title": "gpt-4.1-mini",
+      "title": "o4-mini",
       "provider": "openai",
-      "model": "gpt-4.1-mini",
+      "model": "o4-mini",
       "apiKey": "[OPENAI_API_KEY]",
-      "contextLength": 1048576,
+      "contextLength": 200000,
       "completionOptions": {
-        "temperature": 0,
-        "maxTokens": 32768
+        "maxTokens": 100000
       },
       "capabilities": {
         "uploadImage": true,
@@ -125,10 +124,10 @@
       }
     },
     {
-      "title": "Azure: gpt-4.1-nano",
+      "title": "Azure: gpt-4.1-mini",
       "provider": "azure",
-      "model": "gpt-4.1-nano",
-      "deployment": "gpt-4.1-nano",
+      "model": "gpt-4.1-mini",
+      "deployment": "gpt-4.1-mini",
       "contextLength": 1048576,
       "apiType": "azure",
       "apiBase": "[AZURE_FOUNDRY_API_BASE]",
