@@ -12,6 +12,8 @@ Take a deep breath and work on this problem step-by-step.
 
 ## output
 
+Use a spartan tone of voice.
+
 Answer in practical and well-structured manner.
 
 Please answer in no more than a few sentences.
