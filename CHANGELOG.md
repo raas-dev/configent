@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.4](https://github.com/raas-dev/configent/compare/1.142.3...1.142.4) (2025-04-27)
+
+
+### Fixes
+
+* **macos:** add rsync installation for rsync_tmbackup.sh script ([f4d5213](https://github.com/raas-dev/configent/commit/f4d5213f3c1563e093ba865a06f85c51b2f7887f))
+
 ### [1.142.3](https://github.com/raas-dev/configent/compare/1.142.2...1.142.3) (2025-04-25)
 
 
