@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.5](https://github.com/raas-dev/configent/compare/1.142.4...1.142.5) (2025-05-02)
+
+
+### Fixes
+
+* **config:** update neovim version to 0.11.1 and xh to 0.24.1 ([fdf8941](https://github.com/raas-dev/configent/commit/fdf89413d544d6b9462df4b17bbc0832e7af68f5))
+
 ### [1.142.4](https://github.com/raas-dev/configent/compare/1.142.3...1.142.4) (2025-04-27)
 
 
