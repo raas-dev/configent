@@ -144,7 +144,7 @@ version = "2.3.0"
 backend = "cargo:watchexec-cli"
 
 [tools."cargo:xh"]
-version = "0.24.0"
+version = "0.24.1"
 backend = "cargo:xh"
 
 [tools."cargo:zoxide"]
@@ -238,11 +238,11 @@ backend = "aqua:lima-vm/lima"
 "lima-1.0.7-Darwin-arm64.tar.gz" = "sha256:fa3836128e19920ca7113bbcc9908399c56f0665b4b04f294dd76aa02ef38905"
 
 [tools.neovim]
-version = "0.10.4"
+version = "0.11.1"
 backend = "aqua:neovim/neovim"
 
 [tools.neovim.checksums]
-"nvim-macos-arm64.tar.gz" = "sha256:3d7b07ec9b491d2a3d55167bc1db1cfa96773a1a37e74ea384cb15ab0189223b"
+"nvim-macos-arm64.tar.gz" = "sha256:89a766fb41303dc101766898ad3c4eb6db556e19965582cc164419605a1d1f61"
 
 [tools.node]
 version = "22.14.0"
