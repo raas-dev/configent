@@ -272,7 +272,7 @@ version = "1.52.0"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
-version = "2.1.2"
+version = "2.1.3"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
@@ -314,11 +314,11 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.61.1"
+version = "0.62.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.checksums]
-"trivy_0.61.1_macOS-ARM64.tar.gz" = "sha256:58eb2024c0683f1042e162c6f258ad3f39efecea7dd7a863370c09d11f03eff7"
+"trivy_0.62.0_macOS-ARM64.tar.gz" = "sha256:727a8865c2caf6841a1f4668fd7702f442ae088fd08e3c3719e4f731c1f11333"
 
 [tools.uv]
 version = "0.7.2"
