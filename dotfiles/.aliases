@@ -327,6 +327,9 @@ alias claude="bunx @anthropic-ai/claude-code"
 # Flowise
 alias flowise='bunx flowise'
 
+# Visual testing tool for MCP servers
+alias inspector='bunx @modelcontextprotocol/inspector'
+
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
