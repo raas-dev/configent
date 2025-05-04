@@ -207,10 +207,6 @@ backend = "go:github.com/go-enry/enry"
 version = "0.8.1"
 backend = "go:github.com/muesli/duf"
 
-[tools."go:github.com/rverton/webanalyze/cmd/webanalyze"]
-version = "0.4.1"
-backend = "go:github.com/rverton/webanalyze/cmd/webanalyze"
-
 [tools."go:github.com/shihanng/tfvar"]
 version = "0.10.0"
 backend = "go:github.com/shihanng/tfvar"

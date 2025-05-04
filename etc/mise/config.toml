@@ -45,7 +45,6 @@ go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go"
 'go:mvdan.cc/sh/v3/cmd/shfmt' = 'latest'
 'go:github.com/abhimanyu003/sttr' = 'latest'
 'go:github.com/shihanng/tfvar' = 'latest'
-'go:github.com/rverton/webanalyze/cmd/webanalyze' = 'latest'
 
 node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
