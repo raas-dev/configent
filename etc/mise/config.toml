@@ -87,7 +87,6 @@ gcloud = '510.0.0'
 #helm = 'latest'
 #k9s = 'latest'
 #cloudflared = 'latest'
-#flyctl = 'latest'
 neovim = '0.11.1'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 #ollama = 'latest' # works on both macOS/Linux but autostarts on neither
