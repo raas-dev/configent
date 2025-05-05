@@ -178,11 +178,11 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.71.2"
+version = "2.72.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.71.2_macOS_arm64.zip" = "sha256:95e4d3bf841ef8448f6ac828d89de3d49bd994f063f0d1566becbe1aa8c98a81"
+"gh_2.72.0_macOS_arm64.zip" = "sha256:adf08dc15504ef74fbd37bc1a9abf2ef2b19d5e0db332a39877532b350b1f1d7"
 
 [tools.go]
 version = "1.23.4"
