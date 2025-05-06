@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.7"
+version = "2.27.8"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.7.pkg" = "sha256:ed44d3562cc2e514f1e7a0f949436405584fedc7ca5fbdc7a6b97714d0745e50"
+"AWSCLIV2-2.27.8.pkg" = "sha256:2c3ccb4d502fad632d3a02ae2a717c2cfc96c0f3ef2fdae04ddedec4ea2ba4d5"
 
 [tools.bun]
 version = "1.2.11"
@@ -88,7 +88,7 @@ version = "2.7.1"
 backend = "cargo:mdcat"
 
 [tools."cargo:nixpacks"]
-version = "1.37.0"
+version = "1.38.0"
 backend = "cargo:nixpacks"
 
 [tools."cargo:numbat-cli"]
