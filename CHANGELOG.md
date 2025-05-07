@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.6](https://github.com/raas-dev/configent/compare/1.142.5...1.142.6) (2025-05-07)
+
+
+### Fixes
+
+* **aliases:** Add mcpm via uvx ([b7bdc44](https://github.com/raas-dev/configent/commit/b7bdc4422b521308f5d39281a7afb20eff1e1ff7))
+* **cloud:** remove flyctl ([f2f8a6c](https://github.com/raas-dev/configent/commit/f2f8a6c35108fc6ef71a8be050d7470043cb8479))
+* **dotfiles:** add alias for MCP inspector visual testing tool ([fd362ae](https://github.com/raas-dev/configent/commit/fd362ae6da14e190dce9217744d48a476b849b3f))
+* **go:** Remove outdated webanalyze ([b33f322](https://github.com/raas-dev/configent/commit/b33f322958e6a648a52b4a558831cae519711e61))
+* **rust:** update tool versions including rust to 1.86.0 and atuin to 18.6.0 ([624b9e2](https://github.com/raas-dev/configent/commit/624b9e2223cee6f5f46da15a67cf1ba601ee58a8))
+
 ### [1.142.5](https://github.com/raas-dev/configent/compare/1.142.4...1.142.5) (2025-05-02)
 
 
