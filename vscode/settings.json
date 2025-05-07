@@ -216,6 +216,7 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
+  "powershell.analyzeOpenDocumentsOnly": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.integratedConsole.suppressStartupBanner": true,
   "powershell.powerShellAdditionalExePaths": {
