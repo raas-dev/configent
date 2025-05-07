@@ -1,5 +1,5 @@
 [tools]
-rust = '1.83.0'
+rust = '1.86.0'
 cargo-binstall = 'latest'
 # cli tools
 'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }

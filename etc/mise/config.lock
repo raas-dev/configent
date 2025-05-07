@@ -28,7 +28,7 @@ version = "1.22.0"
 backend = "cargo:argc"
 
 [tools."cargo:atuin"]
-version = "18.5.0"
+version = "18.6.0"
 backend = "cargo:atuin"
 
 [tools."cargo:bat"]
@@ -292,7 +292,7 @@ version = "3.13.2"
 backend = "core:python"
 
 [tools.rust]
-version = "1.83.0"
+version = "1.86.0"
 backend = "core:rust"
 
 [tools.shellcheck]
