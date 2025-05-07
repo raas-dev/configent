@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.7](https://github.com/raas-dev/configent/compare/1.142.6...1.142.7) (2025-05-07)
+
+
+### Fixes
+
+* **install:** Add mise self-update ([0080109](https://github.com/raas-dev/configent/commit/0080109efeacd5389ecf6975d06ba88e412daba1))
+* **shell:** Lock atuin version ([7a878c9](https://github.com/raas-dev/configent/commit/7a878c9cd6c435ad653a83ec17a01e3a60df1e49))
+* **shell:** Upgrade starship prompt ([305d499](https://github.com/raas-dev/configent/commit/305d4991773339f702dc72ab04610d053931a053))
+
 ### [1.142.6](https://github.com/raas-dev/configent/compare/1.142.5...1.142.6) (2025-05-07)
 
 
