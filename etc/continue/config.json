@@ -1,9 +1,9 @@
 {
   "models": [
     {
-      "title": "gemini-2.5-pro-preview-03-25",
+      "title": "gemini-2.5-pro-preview-05-06",
       "provider": "gemini",
-      "model": "gemini-2.5-pro-preview-03-25",
+      "model": "gemini-2.5-pro-preview-05-06",
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 1048576,
       "completionOptions": {
