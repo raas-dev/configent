@@ -4,7 +4,7 @@ cargo-binstall = 'latest'
 # cli tools
 'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 'cargo:argc' = 'latest'
-'cargo:atuin' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
+'cargo:atuin' = { version = '18.6.0', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'cargo:diskonaut' = 'latest'
 'cargo:fd-find' = 'latest'
