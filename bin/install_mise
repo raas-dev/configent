@@ -33,5 +33,8 @@ ln -sfnv "$config_path/mise" "$HOME/.config/mise"
 export PATH="$HOME/.local/bin:$PATH"
 ! command -v mise >/dev/null && curl https://mise.run | sh
 
+# self-update mise
+mise self-update --yes
+
 # install all enabled tools
 mise install --yes
