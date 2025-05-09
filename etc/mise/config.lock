@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.10"
+version = "2.27.11"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.10.pkg" = "sha256:16dcedee89ec5bcb0d87570fe2b5445636b7565c3337563d58ed48d5b27e7b33"
+"AWSCLIV2-2.27.11.pkg" = "sha256:3cbcfc431e901838b314faf47c2b205738efd65e7e9d9fccab04b06538eda15d"
 
 [tools.bun]
 version = "1.2.11"
@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:7d54c55c59274f2f2706481b38e6f7d90999c979f2ea522e7611bf051c5b19f4"
 
 [tools.cargo-binstall]
-version = "1.12.3"
+version = "1.12.4"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:88467030db096ceddf97405750fe9e67cf25106da241db7a60900c58f192206f"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:4b46c06e075a02f6f6eca678a910e97ea743ad52310db3a9dc496796dccdeba5"
 
 [tools."cargo:aichat"]
 version = "0.29.0"
