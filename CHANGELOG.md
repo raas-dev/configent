@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.8](https://github.com/raas-dev/configent/compare/1.142.7...1.142.8) (2025-05-09)
+
+
+### Fixes
+
+* **ai:** Update Google Gemini 2.5 pro model version ([43935c2](https://github.com/raas-dev/configent/commit/43935c29dc97f98e0519a48fa91dbc9f0ef935fd))
+
 ### [1.142.7](https://github.com/raas-dev/configent/compare/1.142.6...1.142.7) (2025-05-07)
 
 
