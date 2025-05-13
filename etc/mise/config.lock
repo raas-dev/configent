@@ -88,7 +88,7 @@ version = "2.7.1"
 backend = "cargo:mdcat"
 
 [tools."cargo:nixpacks"]
-version = "1.38.0"
+version = "1.39.0"
 backend = "cargo:nixpacks"
 
 [tools."cargo:numbat-cli"]
