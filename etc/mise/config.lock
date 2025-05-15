@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.12"
+version = "2.27.15"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.12.pkg" = "sha256:7be03f2158f81fa747033ade24c509bee9e52ef12837dee9028bc8837f2c5660"
+"AWSCLIV2-2.27.15.pkg" = "sha256:e7e681fc1928840b2784f3b50db1e77ca05d1ee759079e603c811e14c18e745e"
 
 [tools.bun]
 version = "1.2.13"
@@ -140,7 +140,7 @@ version = "1.3.0"
 backend = "cargo:viddy"
 
 [tools."cargo:watchexec-cli"]
-version = "2.3.0"
+version = "2.3.1"
 backend = "cargo:watchexec-cli"
 
 [tools."cargo:xh"]
