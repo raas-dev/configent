@@ -16,9 +16,9 @@
       }
     },
     {
-      "title": "gemini-2.5-flash-preview-04-17",
+      "title": "gemini-2.5-flash-preview-05-20",
       "provider": "gemini",
-      "model": "gemini-2.5-flash-preview-04-17",
+      "model": "gemini-2.5-flash-preview-05-20",
       "apiKey": "[GEMINI_API_KEY]",
       "contextLength": 1048576,
       "completionOptions": {
@@ -158,7 +158,7 @@
   "reranker": {
     "name": "llm",
     "params": {
-      "modelTitle": "gemini-2.5-flash-preview-04-17"
+      "modelTitle": "gemini-2.5-flash-preview-05-20"
     }
   },
   "slashCommands": [
