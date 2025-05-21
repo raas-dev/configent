@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.9](https://github.com/raas-dev/configent/compare/1.142.8...1.142.9) (2025-05-21)
+
+
+### Fixes
+
+* **ai:** Update Google Gemini 2.5 Flash version ([49d2ddd](https://github.com/raas-dev/configent/commit/49d2ddd049c9b7802aac3aa066705fca8a86b6a2))
+
 ### [1.142.8](https://github.com/raas-dev/configent/compare/1.142.7...1.142.8) (2025-05-09)
 
 
