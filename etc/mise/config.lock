@@ -227,11 +227,11 @@ backend = "aqua:jqlang/jq"
 jq-macos-arm64 = "sha256:0bbe619e663e0de2c550be2fe0d240d076799d6f8a652b70fa04aea8a8362e8a"
 
 [tools.lima]
-version = "1.0.7"
+version = "1.1.0"
 backend = "aqua:lima-vm/lima"
 
 [tools.lima.checksums]
-"lima-1.0.7-Darwin-arm64.tar.gz" = "sha256:fa3836128e19920ca7113bbcc9908399c56f0665b4b04f294dd76aa02ef38905"
+"lima-1.1.0-Darwin-arm64.tar.gz" = "sha256:03725a99e7baae12ecfe57e7cd857744604beb4f8b4ceb7e7b23e2fbd6263874"
 
 [tools.neovim]
 version = "0.11.1"
