@@ -185,7 +185,6 @@
       "name": "review",
       "description": "Review code and give feedback"
     }
-
   ],
   "customCommands": [
     {
