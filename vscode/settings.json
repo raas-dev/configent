@@ -203,6 +203,14 @@
   "highlight-counter.priority": 1000,
   "javascript.suggest.paths": false,
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
+  "kilo-code.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
   "lntoggle.priority": 110,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
