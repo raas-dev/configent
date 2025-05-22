@@ -236,14 +236,6 @@
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
-  "roo-cline.allowedCommands": [
-    "npm test",
-    "npm install",
-    "tsc",
-    "git log",
-    "git diff",
-    "git show"
-  ],
   "ruff.lineLength": 80,
   "scm.countBadge": "focused",
   "security.promptForLocalFileProtocolHandling": false,
