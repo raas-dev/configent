@@ -1,16 +1,16 @@
 [tools.awscli]
-version = "2.27.19"
+version = "2.27.21"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.19.pkg" = "sha256:f57b6323474f2bb86f64eba5190fc14dcbe3c5937b20cfe152bb145a86c0556c"
+"AWSCLIV2-2.27.21.pkg" = "sha256:4a84eb0646af04c850ac6cb4f6927a7888fde08d3bfab1e4ae6305ed2b59c33b"
 
 [tools.bun]
-version = "1.2.13"
+version = "1.2.14"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:8154367524d8c298edb269b8d0df61d469ec4194d361c07e4b8d2c65fbbc2efb"
+"bun-darwin-aarch64.zip" = "sha256:274c37bad6dd5041f74f65330b0c3980317b1142a1bdece7bebeb3aab44b88da"
 
 [tools.cargo-binstall]
 version = "1.12.5"
@@ -264,7 +264,7 @@ version = "0.27.0"
 backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
-version = "2.24.1"
+version = "2.24.2"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
