@@ -45,7 +45,6 @@ brew install --cask --force cursor
 #brew install --cask --force utm
 brew install --cask --force visual-studio-code
 #brew install --cask --force windsurf
-#brew install --cask --force zed
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
 brew install --cask --force ukelele
