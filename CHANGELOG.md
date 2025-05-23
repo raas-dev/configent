@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.11](https://github.com/raas-dev/configent/compare/1.142.10...1.142.11) (2025-05-23)
+
+
+### Fixes
+
+* **lima:** Fix bug in checking if VM is running ([f2357dc](https://github.com/raas-dev/configent/commit/f2357dca199c32cc008ae5465f4a771d3f7905d9))
+* **vscode:** Decrease letter spacing 0.1 ([2817e0f](https://github.com/raas-dev/configent/commit/2817e0feea021e1c9842a92316d6fd8f45a2d8f7))
+
 ### [1.142.10](https://github.com/raas-dev/configent/compare/1.142.9...1.142.10) (2025-05-23)
 
 
