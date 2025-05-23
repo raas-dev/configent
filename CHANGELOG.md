@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.12](https://github.com/raas-dev/configent/compare/1.142.11...1.142.12) (2025-05-23)
+
+
+### Fixes
+
+* **macos:** Remove cask for Zed ([cce5e3b](https://github.com/raas-dev/configent/commit/cce5e3b260beda7d26d353b5c605140d1675b390))
+* **macos:** Remove install Cursor by default ([2ecea66](https://github.com/raas-dev/configent/commit/2ecea6695bd47cf7fba91864955ef3c56955c483))
+
 ### [1.142.11](https://github.com/raas-dev/configent/compare/1.142.10...1.142.11) (2025-05-23)
 
 
