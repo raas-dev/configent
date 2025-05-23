@@ -104,7 +104,7 @@
   "editor.indentSize": "tabSize",
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.largeFileOptimizations": false,
-  "editor.letterSpacing": -0.5,
+  "editor.letterSpacing": -0.6,
   "editor.lineHeight": 14,
   "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
