@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.10](https://github.com/raas-dev/configent/compare/1.142.9...1.142.10) (2025-05-23)
+
+
+### Fixes
+
+* **vscode:** Add Kilo Code, remove Cline and Roo Code ([3004326](https://github.com/raas-dev/configent/commit/3004326f93b4484d6d405548a989dc425f9f33ab))
+
 ### [1.142.9](https://github.com/raas-dev/configent/compare/1.142.8...1.142.9) (2025-05-21)
 
 
