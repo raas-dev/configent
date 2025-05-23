@@ -57,7 +57,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
     exit 127
   fi
-  if ! limactl shell "$NAME" true >/dev/null 2>&1; then
+  # start VM if not running
+  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
     limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
       limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
   fi
