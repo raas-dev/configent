@@ -36,7 +36,7 @@ brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --force brave-browser
-brew install --cask --force cursor
+#brew install --cask --force cursor
 #brew install --cask --force iina
 #brew install --cask --force libreoffice libreoffice-language-pack
 #brew install --cask --force nordvpn
