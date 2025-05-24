@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.13](https://github.com/raas-dev/configent/compare/1.142.12...1.142.13) (2025-05-24)
+
+
+### Fixes
+
+* **vscode:** Add stagewise extension ([90a0310](https://github.com/raas-dev/configent/commit/90a03101e37da645d9c997c654e16d3d4eb4a340))
+* **vscode:** Decrease window zoom ([2808940](https://github.com/raas-dev/configent/commit/28089404c66aaf67068df2541e20b474d9cf799d))
+* **vscode:** Disable line numbers by default ([dbb6285](https://github.com/raas-dev/configent/commit/dbb6285e4ea4aa16d6b471abfa3ab0536ced0e6a))
+* **vscode:** Fix letter spacing ([d66441e](https://github.com/raas-dev/configent/commit/d66441e79b77ea5909bad4be38144b649f351d9d))
+* **vscode:** Increase font size ([7b0065e](https://github.com/raas-dev/configent/commit/7b0065e91f21ef94f3868a016d0e3bac244c8ceb))
+
 ### [1.142.12](https://github.com/raas-dev/configent/compare/1.142.11...1.142.12) (2025-05-23)
 
 
