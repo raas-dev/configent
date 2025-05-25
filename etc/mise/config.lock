@@ -128,7 +128,7 @@ version = "1.23.0"
 backend = "cargo:starship"
 
 [tools."cargo:tailspin"]
-version = "5.4.2"
+version = "5.4.3"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
