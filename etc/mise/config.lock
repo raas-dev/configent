@@ -148,7 +148,7 @@ version = "0.24.1"
 backend = "cargo:xh"
 
 [tools."cargo:zoxide"]
-version = "0.9.7"
+version = "0.9.8"
 backend = "cargo:zoxide"
 
 [tools.cosign]
