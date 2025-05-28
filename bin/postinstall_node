@@ -9,5 +9,6 @@
 ### default packages ###########################################################
 
 npm install -g npm
+npm install -g npx
 npm install -g pnpm
 npm install -g yarn
