@@ -14,6 +14,7 @@ config_path="$HOME/.config/configent"
 
 ### default packages ###########################################################
 
+pip install pipx
 pip install ptpython
 pip install rich
 
