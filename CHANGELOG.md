@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.142.14](https://github.com/raas-dev/configent/compare/1.142.13...1.142.14) (2025-05-28)
+
+
+### Fixes
+
+* **node:** Install npx even though bunx is preferred ([ae26645](https://github.com/raas-dev/configent/commit/ae2664553634f30b5169a521536f0c021da812f1))
+* **python:** Install pipx even though uvx is preferred ([11f6d43](https://github.com/raas-dev/configent/commit/11f6d434b2d9f292a9a512102b6007f16306d085))
+* **vscode:** Add Claude Code extension ([2cc7c27](https://github.com/raas-dev/configent/commit/2cc7c273b77f6033ec0de8f8e3c666c729417b1f))
+
 ### [1.142.13](https://github.com/raas-dev/configent/compare/1.142.12...1.142.13) (2025-05-24)
 
 
