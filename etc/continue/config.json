@@ -308,7 +308,15 @@
   },
   "experimental": {
     "useTools": true,
-    "modelContextProtocolServers": [],
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@upstash/context7-mcp@latest"]
+        }
+      }
+    ],
     "quickActions": [
       {
         "title": "Explain",
