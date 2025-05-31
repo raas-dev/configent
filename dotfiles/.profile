@@ -273,6 +273,10 @@ elif [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
+### ollama #####################################################################
+
+export OLLAMA_HOST="127.0.0.1:11434"
+
 ### configent/bin ##############################################################
 
 path_prepend "$HOME/.local/configent/bin"
