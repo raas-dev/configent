@@ -110,6 +110,21 @@
       }
     },
     {
+      "title": "Ollama: devstral",
+      "provider": "ollama",
+      "model": "devstral:24b",
+      "apiBase": "http://127.0.0.1:11434",
+      "contextLength": 131072,
+      "completionOptions": {
+        "temperature": 0,
+        "keepAlive": 900
+      },
+      "capabilities": {
+        "uploadImage": false,
+        "tools": true
+      }
+    },
+    {
       "title": "AWS: claude-sonnet-4",
       "provider": "bedrock",
       "model": "anthropic.claude-sonnet-4-20250514-v1:0",
