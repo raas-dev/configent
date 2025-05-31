@@ -31,9 +31,9 @@
       }
     },
     {
-      "title": "claude-3.7-sonnet",
+      "title": "Claude Sonnet 4",
       "provider": "anthropic",
-      "model": "claude-3-7-sonnet-20250219",
+      "model": "claude-sonnet-4-20250514",
       "apiKey": "[ANTHROPIC_API_KEY]",
       "cacheBehavior": {
         "cacheSystemMessage": true,
@@ -77,9 +77,9 @@
       }
     },
     {
-      "title": "OpenRouter: Claude 3.7 Sonnet",
+      "title": "OpenRouter: Claude Sonnet 4",
       "provider": "openrouter",
-      "model": "anthropic/claude-3.7-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "apiKey": "[OPENROUTER_API_KEY]",
       "completionOptions": {
         "temperature": 0
@@ -110,9 +110,9 @@
       }
     },
     {
-      "title": "AWS: claude-3.7-sonnet",
+      "title": "AWS: claude-sonnet-4",
       "provider": "bedrock",
-      "model": "anthropic.claude-3-7-sonnet-20250219-v1:0",
+      "model": "anthropic.claude-sonnet-4-20250514-v1:0",
       "region": "eu-central-1",
       "profile": "bedrock",
       "completionOptions": {
