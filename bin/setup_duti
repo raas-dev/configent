@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+if [ "$(uname -s)" != 'Darwin' ]; then
+  echo "Error: This script ought to be run on macOS only."
+  exit 1
+fi
+
+eval_brew() {
+  if [ -x "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x "/usr/local/bin/brew" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+    eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+  fi
+}
+eval_brew
+
+if ! command -v brew >/dev/null; then
+  # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
+  NONINTERACTIVE=true HOMEBREW_INSTALL_FROM_API=true \
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  eval_brew
+fi
+
+# Select default applications for document types and URL schemes on macOS
+brew install duti
+
+if ! command -v duti >/dev/null; then
+  echo "Error: duti not installed on macOS."
+  exit 127
+fi
+
+if command -v cursor >/dev/null; then
+  app_bundle_id="com.todesktop.230313mzl4w4u92"
+elif command -v windsurf >/dev/null; then
+  app_bundle_id="com.exafunction.windsurf"
+elif command -v code >/dev/null; then
+  app_bundle_id="com.microsoft.VSCode"
+else
+  echo "Error: No VS Code like editor installed on macOS."
+  exit 1
+fi
+
+duti -s "$app_bundle_id" public.plain-text all
+duti -s "$app_bundle_id" public.source-code all
+duti -s "$app_bundle_id" public.data all
+duti -s "$app_bundle_id" json all
+duti -s "$app_bundle_id" md all
+duti -s "$app_bundle_id" toml all
+duti -s "$app_bundle_id" txt all
+duti -s "$app_bundle_id" xml all
+duti -s "$app_bundle_id" yaml all

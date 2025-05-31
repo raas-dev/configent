@@ -41,9 +41,6 @@ brew install findutils
 # Common build-time requirement
 brew install cmake
 
-# Select default applications for document types and URL schemes on macOS
-brew install duti
-
 # GNU bins NOT prepended to PATH on macOS in .profile
 brew install gawk
 brew install grep
