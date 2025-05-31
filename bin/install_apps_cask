@@ -36,14 +36,14 @@ brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --force brave-browser
-#brew install --cask --force cursor
+brew install --cask --force cursor
 #brew install --cask --force iina
 #brew install --cask --force libreoffice libreoffice-language-pack
 #brew install --cask --force nordvpn
 #brew install --cask --force slack
 #brew install --cask --force tunnelblick
 #brew install --cask --force utm
-brew install --cask --force visual-studio-code
+#brew install --cask --force visual-studio-code
 #brew install --cask --force windsurf
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)

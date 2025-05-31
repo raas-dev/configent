@@ -8,6 +8,7 @@
 
 # you can use this script to symlink configuration for VS Code likes, e.g.:
 #
+# BIN_NAME="code" ./create_extensions_list
 # BIN_NAME="cursor" ./create_extensions_list
 # BIN_NAME="windsurf" ./create_extensions_list
 

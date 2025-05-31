@@ -12,5 +12,17 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
 "$bin_path/setup_fonts"
-"$bin_path/setup_code"
+
+if command -v cursor >/dev/null; then
+  APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+fi
+
+if command -v windsurf >/dev/null; then
+  APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_code"
+fi
+
+if command -v code >/dev/null; then
+  APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+fi
+
 "$bin_path/setup_continue"
