@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.144.0](https://github.com/raas-dev/configent/compare/1.143.1...1.144.0) (2025-05-31)
+
+
+### Features
+
+* **macos:** Use Cursor as default IDE ([456832f](https://github.com/raas-dev/configent/commit/456832f699335c140120fd46470394b714ad27b0))
+
+
+### Fixes
+
+* **bin:** associate shell scripts with app bundle ID using duti ([575fe27](https://github.com/raas-dev/configent/commit/575fe2790764048ba3d22b067f12adde7af3b59c))
+* **bin:** correct script error messages and reorder duti commands ([9401f0a](https://github.com/raas-dev/configent/commit/9401f0a44062dd672022a2ced43089297fe55585))
+* **continue:** add Claude Sonnet 4 thinking mode ([7bca55f](https://github.com/raas-dev/configent/commit/7bca55f5da08e33e391b1e8f3c12128fff7fc27a))
+* **macos:** By default `open` files to VS Code likes ([c386ec7](https://github.com/raas-dev/configent/commit/c386ec79fe19b5735f1505e1b68c220635c5f953))
+
 ### [1.143.1](https://github.com/raas-dev/configent/compare/1.143.0...1.143.1) (2025-05-31)
 
 
