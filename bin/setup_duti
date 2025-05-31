@@ -51,6 +51,7 @@ fi
 duti -s "$app_bundle_id" public.data all # for files with no extension
 duti -s "$app_bundle_id" public.json all
 duti -s "$app_bundle_id" public.plain-text all
+duti -s "$app_bundle_id" public.shell-script all
 duti -s "$app_bundle_id" public.source-code all
 duti -s "$app_bundle_id" public.unix-executable all
 
