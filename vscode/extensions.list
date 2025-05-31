@@ -45,6 +45,7 @@ mads-hartmann.bash-ide-vscode
 mikestead.dotenv
 ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-bicep
+ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
 ms-python.debugpy
