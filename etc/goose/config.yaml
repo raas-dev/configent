@@ -10,9 +10,6 @@ GOOSE_MODE: smart_approve
 GOOSE_TOOLSHIM: true
 GOOSE_TOOLSHIM_OLLAMA_MODEL: gemma3:12b
 
-# Provider API keys are already loaded as envvars from keyring
-GOOSE_DISABLE_KEYRING: true
-
 # Extensions Configuration
 extensions:
   computercontroller:
