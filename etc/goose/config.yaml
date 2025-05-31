@@ -1,6 +1,6 @@
 # Model Configuration
-GOOSE_PROVIDER: ollama
-GOOSE_MODEL: devstral:24b
+GOOSE_PROVIDER: google
+GOOSE_MODEL: gemini-2.5-pro-preview-05-06
 GOOSE_TEMPERATURE: 0
 
 # Ollama
