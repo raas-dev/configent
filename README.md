@@ -163,16 +163,15 @@ These steps are detailed further below.
 
 ## 🔨 IDE
 
-[VS Code](https://code.visualstudio.com/) is the default IDE, but you can use
-the scripts below with the other VS Code like editors by passing in their
-names as parameters to the script.
+[Cursor](https://www.cursor.com/) is the default IDE on macOS and
+[VS Code](https://code.visualstudio.com/) is the default IDE on Linux distros.
 
 Extensions in
 [Open VSX Registry](https://open-vsx.org/) are available for all VS Code
-likes and are preferred when choosing extensions.
+likes and thus are preferred when choosing extensions.
 
-To update `vscode/extensions.list` after adding or removing extensions via GUI
-in VS Code like editor, run `vscode/create_extensions_list`.
+To update `vscode/extensions.list` in repo after adding or removing extensions
+via IDE, run `vscode/create_extensions_list`.
 
 ### bin/setup_code
 
@@ -180,20 +179,20 @@ The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
 `~/configent/.backup/<editor_specific_path>/User`.
 
-⚠️: This script does not install VS Code, see Cask and Flatpak related
+⚠️: This script does not install any VS Code like, see Cask and Flatpak related
 `bin/install_apps_` for that.
 
 If editor command-line binary is present when running this script,
 the extensions (`vscode/extensions.list`) are installed.
 
-💡: You can reuse both `vscode/create_extensions_list` and `setup_code` scripts
-for VS Code like editor such as Cursor or Windsurf. See the scripts' arguments.
+💡: You can reuse `vscode/create_extensions_list` and `setup_code` for any
+VS Code like editor already installed. See the scripts' arguments for that.
 
 ### bin/setup_continue
 
 [Continue](https://docs.continue.dev) is installed as open-source AI code
-assistant in VS Code like editors. Note that (commercial) VS Code likes may
-prefer their own copilots and disable this extension automatically.
+assistant in VS Code likes. Note that (commercial) VS Code likes may
+prefer their bundled AI solution and disable this extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
 Dynamic configuration (`config.ts`) is used for reading all LLM provider
