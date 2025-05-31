@@ -1,19 +1,33 @@
-GOOSE_PROVIDER: google
+# Model Configuration
+GOOSE_PROVIDER: ollama
+GOOSE_MODEL: devstral:24b
+GOOSE_TEMPERATURE: 0
+
+# Tool Configuration
+GOOSE_MODE: smart_approve
+GOOSE_TOOLSHIM: true
+GOOSE_CLI_MIN_PRIORITY: 0.0
+
+# Extensions Configuration
 extensions:
   computercontroller:
-    bundled: null
-    display_name: null
+    bundled: true
+    display_name: Computer Controller
     enabled: true
     name: computercontroller
-    timeout: null
+    timeout: 300
     type: builtin
   developer:
-    bundled: null
-    display_name: null
+    bundled: true
+    display_name: Developer Tools
     enabled: true
     name: developer
     timeout: 300
     type: builtin
-GOOSE_CLI_MIN_PRIORITY: 0.0
-GOOSE_MODEL: gemini-2.5-pro-preview-05-06
-GOOSE_MODE: auto
+  memory:
+    bundled: true
+    display_name: Memory
+    enabled: true
+    name: memory
+    timeout: 300
+    type: builtin
