@@ -3,6 +3,10 @@ GOOSE_PROVIDER: ollama
 GOOSE_MODEL: devstral:24b
 GOOSE_TEMPERATURE: 0
 
+# Ollama
+OLLAMA_HOST: 127.0.0.1:11434
+GOOSE_TOOLSHIM_OLLAMA_MODEL: devstral:24b
+
 # Tool Configuration
 GOOSE_MODE: smart_approve
 GOOSE_TOOLSHIM: true
