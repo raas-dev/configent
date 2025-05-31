@@ -9,7 +9,7 @@
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 if [ "$(uname -s)" != 'Darwin' ]; then
-  echo "Error: This script ought to be run on macOS only."
+  echo "Error: This script is ought to be run on macOS only."
   exit 1
 fi
 
@@ -18,10 +18,6 @@ eval_brew() {
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x "/usr/local/bin/brew" ]; then
     eval "$(/usr/local/bin/brew shellenv)"
-  elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-    eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
   fi
 }
 eval_brew
@@ -37,7 +33,7 @@ fi
 brew install duti
 
 if ! command -v duti >/dev/null; then
-  echo "Error: duti not installed on macOS."
+  echo "Error: duti is not installed."
   exit 127
 fi
 
@@ -48,13 +44,16 @@ elif command -v windsurf >/dev/null; then
 elif command -v code >/dev/null; then
   app_bundle_id="com.microsoft.VSCode"
 else
-  echo "Error: No VS Code like editor installed on macOS."
+  echo "Error: No VS Code like editor present."
   exit 1
 fi
 
+duti -s "$app_bundle_id" public.data all # for files with no extension
+duti -s "$app_bundle_id" public.json all
 duti -s "$app_bundle_id" public.plain-text all
 duti -s "$app_bundle_id" public.source-code all
-duti -s "$app_bundle_id" public.data all
+duti -s "$app_bundle_id" public.unix-executable all
+
 duti -s "$app_bundle_id" json all
 duti -s "$app_bundle_id" md all
 duti -s "$app_bundle_id" toml all

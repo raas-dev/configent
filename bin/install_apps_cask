@@ -9,7 +9,7 @@
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 if [ "$(uname -s)" != 'Darwin' ]; then
-  echo "Error: This script ought to be run on macOS only."
+  echo "Error: This script is ought to be run on macOS only."
   exit 1
 fi
 
