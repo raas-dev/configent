@@ -48,6 +48,24 @@
       }
     },
     {
+      "title": "Claude Sonnet 4 (thinking)",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "apiKey": "[ANTHROPIC_API_KEY]",
+      "cacheBehavior": {
+        "cacheSystemMessage": true,
+        "cacheConversation": true
+      },
+      "completionOptions": {
+        "reasoning": true,
+        "reasoningBudgetTokens": 2048
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
+      }
+    },
+    {
       "title": "gpt-4.1",
       "provider": "openai",
       "model": "gpt-4.1",
