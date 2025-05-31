@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.143.1](https://github.com/raas-dev/configent/compare/1.143.0...1.143.1) (2025-05-31)
+
+
+### Fixes
+
+* **config:** add capabilities for uploadImage and tools in APIs config ([99ff9c4](https://github.com/raas-dev/configent/commit/99ff9c49aa914c3eb7f0d0051c76067f64fca846))
+
 ## [1.143.0](https://github.com/raas-dev/configent/compare/1.142.14...1.143.0) (2025-05-31)
 
 
