@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.143.0](https://github.com/raas-dev/configent/compare/1.142.14...1.143.0) (2025-05-31)
+
+
+### Features
+
+* **continue:** add Ollama devstral ([d212fef](https://github.com/raas-dev/configent/commit/d212fef512b86732f0a9f2c34161ad8a90407196))
+
+
+### Fixes
+
+* **ai:** add deepseek-r1 model and increase max input tokens ([8ab530c](https://github.com/raas-dev/configent/commit/8ab530c5eb1f1731c587620518603a42b41e3e6f))
+* **ai:** Update Claude 3.7 Sonnet to Claude Sonnet 4 ([6353af8](https://github.com/raas-dev/configent/commit/6353af881ff7a449864697e7e7a5523bbc1fb7df))
+* **config:** update Ollama model version to mistral-small3.1:24b ([cefea65](https://github.com/raas-dev/configent/commit/cefea65e316ca78f0c44326372e40349f72fbdf9))
+
 ### [1.142.14](https://github.com/raas-dev/configent/compare/1.142.13...1.142.14) (2025-05-28)
 
 
