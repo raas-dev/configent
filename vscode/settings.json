@@ -61,6 +61,8 @@
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
+  "containers.containerCommand": "docker",
+  "containers.images.checkForOutdatedImages": false,
   "continue.enableTabAutocomplete": false,
   "continue.showInlineTip": false,
   "continue.telemetryEnabled": false,
