@@ -61,6 +61,7 @@
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
   "containers.containerCommand": "docker",
   "containers.images.checkForOutdatedImages": false,
   "continue.enableTabAutocomplete": false,
