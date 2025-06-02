@@ -128,7 +128,7 @@ version = "1.23.0"
 backend = "cargo:starship"
 
 [tools."cargo:tailspin"]
-version = "5.4.3"
+version = "5.4.4"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
@@ -280,7 +280,7 @@ version = "4.2.0"
 backend = "pipx:pre-commit"
 
 [tools."pipx:sncli"]
-version = "0.4.3"
+version = "0.4.4"
 backend = "pipx:sncli"
 
 [tools."pipx:tldr"]
