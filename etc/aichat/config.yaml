@@ -79,6 +79,9 @@ clients:
         max_input_tokens: 131072
         supports_function_calling: true
         supports_vision: true
+      - name: qwen3:8b
+        max_input_tokens: 40960
+        supports_function_calling: true
       - name: deepseek-r1:8b
         max_input_tokens: 131072
       - name: nomic-embed-text
