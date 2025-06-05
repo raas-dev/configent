@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.145.0](https://github.com/raas-dev/configent/compare/1.144.0...1.145.0) (2025-06-05)
+
+
+### Features
+
+* **macos:** add script to disable disk eject warning notification ([3b8c36a](https://github.com/raas-dev/configent/commit/3b8c36af170250f152e6b690ea01d3d52472857a))
+
+
+### Fixes
+
+* **config:** add qwen3:8b client with function calling support ([2d282c2](https://github.com/raas-dev/configent/commit/2d282c22fb91dd2e46f0a6e5bbcd1a80dc35ad90))
+
 ## [1.144.0](https://github.com/raas-dev/configent/compare/1.143.1...1.144.0) (2025-05-31)
 
 
