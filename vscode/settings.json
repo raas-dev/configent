@@ -73,6 +73,7 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
   "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.composer.textSizeScale": 1.15,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
     "markdown"
