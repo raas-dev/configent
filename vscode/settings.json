@@ -72,6 +72,7 @@
   "csv-preview.separator": "[,;]",
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": true,
+  "cursor.composer.cmdPFilePicker2": true,
   "cursor.composer.shouldAllowCustomModes": true,
   "cursor.composer.textSizeScale": 1.15,
   "cursor.cpp.disabledLanguages": [
