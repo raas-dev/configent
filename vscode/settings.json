@@ -292,6 +292,7 @@
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.mouseWheelZoom": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.profiles.linux": {
     "tmux": {
