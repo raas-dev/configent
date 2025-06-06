@@ -271,10 +271,20 @@
       }
     },
     {
-      "name": "codebase"
+      "name": "codebase",
+      "params": {
+          "nRetrieve": 25,
+          "nFinal": 5,
+          "useReranking": true
+        }
     },
     {
-      "name": "folder"
+      "name": "folder",
+      "params": {
+        "nRetrieve": 25,
+        "nFinal": 5,
+        "useReranking": true
+      }
     },
     {
       "name": "search"
