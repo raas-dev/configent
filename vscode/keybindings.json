@@ -514,5 +514,13 @@
     "command": "-breadcrumbs.toggleToOn",
     "key": "shift+cmd+[Backquote]",
     "when": "!config.breadcrumbs.enabled"
+  },
+  {
+    "args": {
+      "text": "\\\r\n"
+    },
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "shift+enter",
+    "when": "terminalFocus"
   }
 ]
