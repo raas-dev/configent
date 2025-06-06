@@ -18,6 +18,6 @@ scan:
     - vscode/workspaceStorage
   scanners:
     - vuln
-    - config
+    - misconfig
     - secret
     - license
