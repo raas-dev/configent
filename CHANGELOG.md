@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.146.0](https://github.com/raas-dev/configent/compare/1.145.0...1.146.0) (2025-06-06)
+
+
+### Features
+
+* **terminal:** add keybinding for shift+enter to send newline sequence ([63fe98b](https://github.com/raas-dev/configent/commit/63fe98b6bfc912b5d53ec0e08824c1274018a9c2))
+
+
+### Performance
+
+* **config:** add retrieval and reranking params for codebase and folder ([cee61db](https://github.com/raas-dev/configent/commit/cee61db2f6cd6d18c622db558733839288f0ebcd))
+
+
+### Fixes
+
+* **ai:** Update Google Gemini 2.5 Pro preview version ([68e25f2](https://github.com/raas-dev/configent/commit/68e25f25bf84d3f143c72a8c4b9497f394c33e6c))
+* **scan:** correct scanner type from config to misconfig ([ee29034](https://github.com/raas-dev/configent/commit/ee29034e30be59d6033357111d342795c9b46701))
+
 ## [1.145.0](https://github.com/raas-dev/configent/compare/1.144.0...1.145.0) (2025-06-05)
 
 
