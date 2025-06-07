@@ -192,7 +192,7 @@ VS Code like editor already installed. See the scripts' arguments for that.
 
 [Continue](https://docs.continue.dev) is installed as open-source AI code
 assistant in VS Code likes. Note that (commercial) VS Code likes may
-prefer their bundled AI solution and disable this extension automatically.
+force their bundled AI solution and disable this extension automatically.
 
 The script symlinks Continue config files to `~/.continue/`.
 Dynamic configuration (`config.ts`) is used for reading all LLM provider
