@@ -79,6 +79,7 @@
     "plaintext",
     "markdown"
   ],
+  "cursor.diffs.useCharacterLevelDiffs": true,
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
