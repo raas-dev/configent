@@ -36,6 +36,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "application.shellEnvironmentResolutionTimeout": 15,
   "basedpyright.analysis.diagnosticSeverityOverrides": {
     "reportPrivateImportUsage": "none"
   },
