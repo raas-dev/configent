@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.146.2](https://github.com/raas-dev/configent/compare/1.146.1...1.146.2) (2025-06-08)
+
+
+### Fixes
+
+* **docker:** set DOCKER_DEFAULT_PLATFORM for arm64 if unset ([36fe9ab](https://github.com/raas-dev/configent/commit/36fe9ab48a2524f0cf6ae87ebc6f4fdde746206b))
+* **dotfiles:** optimize uname calls and set platform for ARM Docker host ([d77c0c3](https://github.com/raas-dev/configent/commit/d77c0c3592d2cb1cdc5bf7ec3f30bc271dbe6684))
+
 ### [1.146.1](https://github.com/raas-dev/configent/compare/1.146.0...1.146.1) (2025-06-08)
 
 ## [1.146.0](https://github.com/raas-dev/configent/compare/1.145.0...1.146.0) (2025-06-06)
