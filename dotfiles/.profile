@@ -264,14 +264,20 @@ fi
 
 ### docker #####################################################################
 
-if [ "$(uname -s)" = 'Darwin' ]; then
+os="$(uname -s)"
+if [ "$os" = 'Darwin' ]; then
   export DOCKER_HOST="unix://$HOME/.lima/docker/sock/docker.sock"
-elif [ "$(uname -s)" = 'Linux' ]; then
+elif [ "$os" = 'Linux' ]; then
   if [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
     export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
   elif [ -S "/var/run/docker.sock" ]; then
     export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
   fi
+fi
+
+arch="$(uname -m)"
+if [ "$arch" = 'aarch64' ] || [ "$arch" = 'arm64' ]; then
+  export DOCKER_DEFAULT_PLATFORM="linux/amd64"
 fi
 
 ### ollama #####################################################################
