@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.146.4](https://github.com/raas-dev/configent/compare/1.146.3...1.146.4) (2025-06-09)
+
+
+### Fixes
+
+* **lima:** Downgrade and lock Lima to 1.0.7 ([85b6b51](https://github.com/raas-dev/configent/commit/85b6b51b6d4cc6fff6355a390502d5e2974b0c42))
+
 ### [1.146.3](https://github.com/raas-dev/configent/compare/1.146.2...1.146.3) (2025-06-09)
 
 
