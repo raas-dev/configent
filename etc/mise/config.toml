@@ -90,7 +90,7 @@ gcloud = '510.0.0'
 neovim = '0.11.1'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 #ollama = 'latest' # works on both macOS/Linux but autostarts on neither
-lima = 'latest'
+lima = '1.0.7'
 slsa-verifier = "latest"
 cosign = "latest"
 #'vfox:jdx/vfox-clang' = '18.1.8'
