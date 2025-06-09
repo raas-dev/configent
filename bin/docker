@@ -13,7 +13,7 @@
 
 install_docker_buildx_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx" ]; then
-    buildx_version="v0.17.1"
+    buildx_version="v0.24.0"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$arch" = "aarch64" ]; then
