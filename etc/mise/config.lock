@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:ab0cd6fc7fc8d1ee4f8166d99b71086d4793c5aee0d0b5c73fdf9b70fa47ded4"
 
 [tools.cargo-binstall]
-version = "1.12.6"
+version = "1.12.7"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:078b27416b2235c4915a8a41b36a298c275237cd8d4d4fd99380fb5800929272"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:7c134843f4cf8625981a2e93f3b591687c405161cc0d4e0d8b9b96a277272209"
 
 [tools."cargo:aichat"]
 version = "0.29.0"
@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.3.0"
+version = "16.3.1"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
@@ -321,8 +321,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.63.0_macOS-ARM64.tar.gz" = "sha256:784f687759c647ffad54e4d7f55ed953647e4fff5ea1e38dbaf877a135254972"
 
 [tools.uv]
-version = "0.7.9"
+version = "0.7.12"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:7a8b716a2b5905fb89512371ce6c6dbc0dd0344185bd1cd93a3fe27516eef7ec"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:189108cd026c25d40fb086eaaf320aac52c3f7aab63e185bac51305a1576fc7e"
