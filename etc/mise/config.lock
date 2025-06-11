@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.32"
+version = "2.27.33"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.32.pkg" = "sha256:43e3a49ed9f8c8abae52cdbf8d6133ddb265de1f22b5f35f2b58781d058a209b"
+"AWSCLIV2-2.27.33.pkg" = "sha256:bc02975df0a739f9485ed7e97ce0442d07973386a04acfe49ad75b6c5f8fab1b"
 
 [tools.bun]
 version = "1.2.15"
@@ -178,11 +178,11 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.74.0"
+version = "2.74.1"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.checksums]
-"gh_2.74.0_macOS_arm64.zip" = "sha256:4fd32fe65b46966882d7d94466d0b971f10ac69eb8bd7b58242ef489eda119e4"
+"gh_2.74.1_macOS_arm64.zip" = "sha256:4649ade28dfdd397f8aa77fa794241058e569ba38f2f622c8ab75581c9c82060"
 
 [tools.go]
 version = "1.23.4"
