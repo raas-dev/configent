@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.146.5](https://github.com/raas-dev/configent/compare/1.146.4...1.146.5) (2025-06-13)
+
+
+### Fixes
+
+* **macos:** Add script to disable font smoothing ([356d449](https://github.com/raas-dev/configent/commit/356d4490bf72f58dd81fa301b0cb3b928202807a))
+
 ### [1.146.4](https://github.com/raas-dev/configent/compare/1.146.3...1.146.4) (2025-06-09)
 
 
