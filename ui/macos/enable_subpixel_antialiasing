@@ -14,6 +14,7 @@ fi
 # Re-enable subpixel antialiasing, effective on next login (revert: set to true)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
 
+# AppleFontSmoothing is treated as a boolean since Monterey
 # 0: disable font smoothing, 1: enable font smoothing, delete: reset default
 #defaults -currentHost write -g AppleFontSmoothing -int 0
 #defaults -currentHost write -g AppleFontSmoothing -int 1
