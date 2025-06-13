@@ -261,6 +261,7 @@
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
+  "stagewise.telemetry.enabled": false,
   "statusbarDebugger.priority": 20000,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
