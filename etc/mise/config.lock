@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.34"
+version = "2.27.35"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.34.pkg" = "sha256:b19baac79663cd9be88314321338f1f5556dbb40163e2fa5f1f3017c14af291d"
+"AWSCLIV2-2.27.35.pkg" = "sha256:6ebf5eb6843ae71408677e09cd19fe3c5ea7e657f3088d2c6721001da87aa993"
 
 [tools.bun]
 version = "1.2.16"
@@ -13,11 +13,11 @@ backend = "core:bun"
 "bun-darwin-aarch64.zip" = "sha256:20168217330b0ebb8e914836e63aaf57140aff0cf957162276587cab0412f17f"
 
 [tools.cargo-binstall]
-version = "1.12.7"
+version = "1.13.0"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:7c134843f4cf8625981a2e93f3b591687c405161cc0d4e0d8b9b96a277272209"
+"cargo-binstall-aarch64-apple-darwin.zip" = "sha256:02d6ca67746aecb27fd4bb063b9be3e6f6bc67dcd6c3105941bff64e064f991a"
 
 [tools."cargo:aichat"]
 version = "0.29.0"
@@ -264,7 +264,7 @@ version = "0.27.0"
 backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
-version = "2.24.2"
+version = "2.25.0"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
