@@ -14,10 +14,7 @@ fi
 # Re-enable subpixel antialiasing, effective on next login (revert: set to true)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
 
-# https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/
-# 0: disabled, 1: light, 2: medium, 3: strong smoothing, delete: reset default
+# 0: disable font smoothing, 1: enable font smoothing, delete: reset default
 #defaults -currentHost write -g AppleFontSmoothing -int 0
 #defaults -currentHost write -g AppleFontSmoothing -int 1
-#defaults -currentHost write -g AppleFontSmoothing -int 2
-#defaults -currentHost write -g AppleFontSmoothing -int 3
 #defaults -currentHost delete -g AppleFontSmoothing
