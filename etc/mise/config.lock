@@ -132,7 +132,7 @@ version = "5.4.5"
 backend = "cargo:tailspin"
 
 [tools."cargo:topgrade"]
-version = "16.0.3"
+version = "16.0.4"
 backend = "cargo:topgrade"
 
 [tools."cargo:viddy"]
