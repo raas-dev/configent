@@ -11,5 +11,5 @@ if [ "$(uname -s)" != "Darwin" ]; then
   exit 1
 fi
 
-# Fix blurry fonts on non-Retina displays (to revert: set to true)
+# Re-enable subpixel antialiasing, effective on next login (revert: set to true)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
