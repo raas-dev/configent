@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.3.1"
+version = "16.3.2"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
@@ -321,8 +321,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.63.0_macOS-ARM64.tar.gz" = "sha256:784f687759c647ffad54e4d7f55ed953647e4fff5ea1e38dbaf877a135254972"
 
 [tools.uv]
-version = "0.7.12"
+version = "0.7.13"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:189108cd026c25d40fb086eaaf320aac52c3f7aab63e185bac51305a1576fc7e"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:721f532b73171586574298d4311a91d5ea2c802ef4db3ebafc434239330090c6"
