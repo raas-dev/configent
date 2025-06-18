@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.146.6](https://github.com/raas-dev/configent/compare/1.146.5...1.146.6) (2025-06-18)
+
+
+### Fixes
+
+* **ai:** Update Gemini 2.5 pro and flash to non-preview ([6f51c9b](https://github.com/raas-dev/configent/commit/6f51c9b123b27ce191cb3db045e7417e03708c68))
+
 ### [1.146.5](https://github.com/raas-dev/configent/compare/1.146.4...1.146.5) (2025-06-13)
 
 
