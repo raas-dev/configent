@@ -4,7 +4,7 @@ about_user = "I am a curious human programmer."
 response_preference = "Don't explain basic concepts"
 
 [env]
-MODEL = "gemini/gemini-2.5-pro-preview-06-05"
+MODEL = "gemini/gemini-2.5-pro"
 GPTME_CHECK = "false"
 GPTME_COSTS = "true"
 #GPTME_SUGGEST_LLM = "true"
