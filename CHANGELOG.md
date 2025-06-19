@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.146.7](https://github.com/raas-dev/configent/compare/1.146.6...1.146.7) (2025-06-19)
+
+
+### Fixes
+
+* **ai:** Remove slow goose, use aichat ([cdc0cc3](https://github.com/raas-dev/configent/commit/cdc0cc309e75695739b2b01c9db22c2e3c68a9d8))
+
 ### [1.146.6](https://github.com/raas-dev/configent/compare/1.146.5...1.146.6) (2025-06-18)
 
 
