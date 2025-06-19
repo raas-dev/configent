@@ -355,6 +355,23 @@ alias standard-version='bunx standard-version'
 
 ### Functions: AI ##############################################################
 
+_aichat_setup_functions() {
+  git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
+    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build)
+}
+
+_aichat_build_tools() {
+  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
+  (
+    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      if [ -n "$(git status --porcelain)" ]; then
+        argc build@tool
+      fi
+    fi
+  )
+}
+
 # in ~/.rclocal:
 # export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
@@ -383,11 +400,6 @@ ai() {
     aichat --role "$role" --session "$role@$context" "$@"
 }
 
-_aichat_setup_functions() {
-  git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
-    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build)
-}
-
 _aichat_build_agents() {
   local agent="$1"
   local context="$2"
@@ -405,18 +417,6 @@ _aichat_build_agents() {
         else
           argc build@agent
         fi
-      fi
-    fi
-  )
-}
-
-_aichat_build_tools() {
-  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
-  (
-    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-      if [ -n "$(git status --porcelain)" ]; then
-        argc build@tool
       fi
     fi
   )
