@@ -366,18 +366,19 @@ ai() {
   if [ -z "$role" ]; then
     role="chat"
   else
-    # search most specific roles first
     if AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles | grep -Fx -q "$role"; then
       category="developer"
+      shift
+      echo "[ai] Using developer system messages"
     elif AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" aichat --list-roles | grep -Fx -q "$role"; then
       category="assistant"
+      shift
+      echo "[ai] Using assistant system messages"
     else
-      role="chat#$role"
+      role="chat"
     fi
-    shift
   fi
 
-  echo "[ai] using $category prompts"
   AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/$category" \
     aichat --role "$role" --session "$role@$context" "$@"
 }
