@@ -44,3 +44,6 @@ if [ ! -r "$backup_path/.config/aichat/dark.tmTheme" ]; then
 fi
 ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/aichat/dark.tmTheme"
+
+# https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/models.yaml
+aichat --sync-models
