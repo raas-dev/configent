@@ -355,13 +355,31 @@ alias standard-version='bunx standard-version'
 
 ### Functions: AI ##############################################################
 
+# in ~/.rclocal:
+# export <PROVIDER>_API_KEY='sk-xxxxxx'
 ai() {
-  local prompt="$*"
-  if [ -n "$prompt" ]; then
-    goose run --text "$prompt"
+  local role="$1"
+  local category="general"
+  local context="${PWD##*/}"
+  _aichat_build_tools
+
+  if [ -z "$role" ]; then
+    role="chat"
   else
-    goose
+    # search most specific roles first
+    if AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/developer" aichat --list-roles | grep -Fx -q "$role"; then
+      category="developer"
+    elif AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/assistant" aichat --list-roles | grep -Fx -q "$role"; then
+      category="assistant"
+    else
+      role="chat#$role"
+    fi
+    shift
   fi
+
+  echo "[ai] using $category prompts"
+  AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/$category" \
+    aichat --role "$role" --session "$role@$context" "$@"
 }
 
 _aichat_setup_functions() {
@@ -386,6 +404,18 @@ _aichat_build_agents() {
         else
           argc build@agent
         fi
+      fi
+    fi
+  )
+}
+
+_aichat_build_tools() {
+  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
+  (
+    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      if [ -n "$(git status --porcelain)" ]; then
+        argc build@tool
       fi
     fi
   )
