@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.147.0](https://github.com/raas-dev/configent/compare/1.146.7...1.147.0) (2025-06-19)
+
+
+### Features
+
+* **ai:** Use aichat over goose as CLI LLM client ([f917fda](https://github.com/raas-dev/configent/commit/f917fda88f0b4730d71a5d89fc1efd473e095000))
+
 ### [1.146.7](https://github.com/raas-dev/configent/compare/1.146.6...1.146.7) (2025-06-19)
 
 
