@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.148.0](https://github.com/raas-dev/configent/compare/1.147.0...1.148.0) (2025-06-22)
+
+
+### Features
+
+* **ai:** Install fast-agent ([f6158bf](https://github.com/raas-dev/configent/commit/f6158bfcf7a25c1825b0f4b57af79787e5d8acd1))
+
+
+### Fixes
+
+* **aichat:** Fetch newer models after install ([89f11c6](https://github.com/raas-dev/configent/commit/89f11c6a48d621e186cd7925ffefd3c86f34d3c1))
+* **ai:** Disable gptme - not updated ([be36b4e](https://github.com/raas-dev/configent/commit/be36b4e39b16a1d80fc754d4b7d9ce8ebe4530da))
+
 ## [1.147.0](https://github.com/raas-dev/configent/compare/1.146.7...1.147.0) (2025-06-19)
 
 
