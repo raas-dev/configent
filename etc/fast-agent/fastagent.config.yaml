@@ -1,0 +1,20 @@
+default_model: gpt-4.1
+
+logger:
+  type: "console" # "none", "console", "file", or "http"
+  level: "error" # "debug", "info", "warning", or "error"
+  progress_display: false # Enable/disable progress display
+  show_chat: false # Show chat messages on console
+  show_tools: true # Show MCP Server tool calls on console
+  truncate_tools: true # Truncate long tool calls in display
+  enable_markup: true # Disable if outputs conflict with rich library markup
+
+mcp:
+  servers:
+    filesystem:
+      command: "npx"
+      args: ["mcp-server-filesystem", "."]
+
+    prompts:
+      command: "prompt-server"
+      args: ["."]

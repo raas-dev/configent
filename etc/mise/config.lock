@@ -255,6 +255,10 @@ backend = "pipx:aider-chat"
 version = "2.68.0"
 backend = "pipx:azure-cli"
 
+[tools."pipx:fast-agent-mcp"]
+version = "0.2.34"
+backend = "pipx:fast-agent-mcp"
+
 [tools."pipx:glances"]
 version = "4.3.1"
 backend = "pipx:glances"
