@@ -167,9 +167,9 @@ export BAT_THEME="SynthWave84"
 
 ### lumen ######################################################################
 
-export LUMEN_AI_PROVIDER="openai"
-export LUMEN_AI_MODEL="gpt-4.1-mini"
-export LUMEN_API_KEY="$OPENAI_API_KEY"
+export LUMEN_AI_PROVIDER="openrouter"
+export LUMEN_AI_MODEL="openai/gpt-4.1-mini"
+export LUMEN_API_KEY="$OPENROUTER_API_KEY"
 
 ### awscli #####################################################################
 
