@@ -95,12 +95,14 @@
       }
     },
     {
-      "title": "OpenRouter: Claude Sonnet 4",
+      "title": "OpenRouter: gpt-4.1",
       "provider": "openrouter",
-      "model": "anthropic/claude-sonnet-4",
+      "model": "openai/gpt-4.1",
       "apiKey": "[OPENROUTER_API_KEY]",
+      "contextLength": 1048576,
       "completionOptions": {
-        "temperature": 0
+        "temperature": 0,
+        "maxTokens": 32768
       },
       "capabilities": {
         "uploadImage": true,
