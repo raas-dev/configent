@@ -264,7 +264,7 @@ version = "0.27.0"
 backend = "pipx:gptme"
 
 [tools."pipx:pdm"]
-version = "2.25.2"
+version = "2.25.3"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
