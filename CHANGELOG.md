@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.148.1](https://github.com/raas-dev/configent/compare/1.148.0...1.148.1) (2025-06-22)
+
+
+### Fixes
+
+* **continue:** use gpt-4.1 via OpenRouter ([9fbfa26](https://github.com/raas-dev/configent/commit/9fbfa26d2f43f0777369b6b00477e562d66bad52))
+* **dotfiles:** update lumen AI provider and API key environment variables ([690bc3b](https://github.com/raas-dev/configent/commit/690bc3b037c810c56b0810567c6728e38efcfe6f))
+* **fast-agent:** update default_model to openrouter.openai/gpt-4.1 ([4a9bb72](https://github.com/raas-dev/configent/commit/4a9bb72d07c281d1c96024561a85bf96cce315de))
+
 ## [1.148.0](https://github.com/raas-dev/configent/compare/1.147.0...1.148.0) (2025-06-22)
 
 
