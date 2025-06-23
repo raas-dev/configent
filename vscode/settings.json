@@ -249,9 +249,7 @@
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.createEnvironment.trigger": "off",
-  "python.experiments.optOutFrom": [
-    "pythonTerminalEnvVarActivation"
-  ],
+  "python.experiments.enabled": false,
   "python.terminal.activateEnvironment": false,
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
