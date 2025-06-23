@@ -1,7 +1,7 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 # ---- llm ----
-model: gemini:gemini-2.5-pro  # Specify the LLM to use
+model: openrouter:google/gemini-2.5-pro  # Specify the LLM to use
 temperature: 0 # Set default temperature parameter
 
 # ---- behavior ----
