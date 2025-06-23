@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.148.2](https://github.com/raas-dev/configent/compare/1.148.1...1.148.2) (2025-06-23)
+
+
+### Fixes
+
+* **ai:** Remove gptme - not maintained ([5fb7cd8](https://github.com/raas-dev/configent/commit/5fb7cd8862adc3f87a9739cbf2bc5dc237a718bf))
+* **config:** default API keys to empty string if env variable missing ([edca2f2](https://github.com/raas-dev/configent/commit/edca2f2ab839325b0ca59404fb16705b287cca4c))
+* **config:** default API keys to empty string if env vars are missing ([9dbf788](https://github.com/raas-dev/configent/commit/9dbf788995a271c17702183ded7f57c6362c480a))
+* **config:** remove fallback empty string for API keys in models config ([73e0b17](https://github.com/raas-dev/configent/commit/73e0b175da6a53c57c16b1334d1b2b0e97efffb0))
+* **config:** update goose provider and model settings ([beabb13](https://github.com/raas-dev/configent/commit/beabb1338086696d6b118fec961125c0573b7191))
+* **config:** update LLM model references to correct provider format ([e97a9d8](https://github.com/raas-dev/configent/commit/e97a9d83d400d907808460606ca0ade12f673f9a))
+* **powershell:** install PSScriptAnalyzer module for IDEs ([3dd4435](https://github.com/raas-dev/configent/commit/3dd4435220e5b1be51c1145b30ce3523a9bd23b4))
+
 ### [1.148.1](https://github.com/raas-dev/configent/compare/1.148.0...1.148.1) (2025-06-22)
 
 
