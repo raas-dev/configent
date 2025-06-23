@@ -210,6 +210,7 @@
   "hediet.vscode-drawio.resizeImages": null,
   "highlight-counter.priority": 1000,
   "javascript.suggest.paths": false,
+  "jupyter.experiments.enabled": false,
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "kilo-code.allowedCommands": [
     "npm test",
@@ -373,6 +374,7 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
+  "workbench.enableExperiments": false,
   "workbench.iconTheme": "ayu",
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
