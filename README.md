@@ -200,7 +200,7 @@ environment variables to avoid having API keys hardcoded in `config.json`.
 
 To start using Continue, do these manually after bootstrap:
 
-1. Export your LLM provider's environment variables in e.g. `~/.rclocal`.
+1. Export `OPENROUTER_API_KEY` and/or `ANTHROPIC_API_KEY` in `~/.rclocal`.
 
 2. If you use local LLMs via Ollama (which is installed in apps),
 you must `ollama pull` the model defined in `config.json` before it is
