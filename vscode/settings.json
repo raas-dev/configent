@@ -234,6 +234,7 @@
   },
   "powershell.analyzeOpenDocumentsOnly": true,
   "powershell.integratedConsole.showOnStartup": false,
+  "powershell.integratedConsole.startInBackground": true,
   "powershell.integratedConsole.suppressStartupBanner": true,
   "powershell.powerShellAdditionalExePaths": {
     "mise": "~/.local/share/mise/shims"
