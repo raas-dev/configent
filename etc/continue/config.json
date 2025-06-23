@@ -10,6 +10,7 @@
         "cacheConversation": true
       },
       "completionOptions": {
+        "promptCaching": true,
         "temperature": 0
       },
       "capabilities": {
@@ -27,6 +28,7 @@
         "cacheConversation": true
       },
       "completionOptions": {
+        "promptCaching": true,
         "reasoning": true,
         "reasoningBudgetTokens": 2048
       },
@@ -161,6 +163,7 @@
       "region": "eu-central-1",
       "profile": "bedrock",
       "completionOptions": {
+        "promptCaching": true,
         "temperature": 0
       },
       "capabilities": {
