@@ -25,3 +25,10 @@ fi
 mkdir -p "$HOME/.config"
 rm -rf "$HOME/.config/powershell"
 ln -sfnv "$config_path/powershell" "$HOME/.config/powershell"
+
+### PowerShell modules #########################################################
+
+# Install PSScriptAnalyzer for IDEs
+if command -v pwsh >/dev/null; then
+  pwsh -c "Install-Module -Name PSScriptAnalyzer -Force"
+fi
