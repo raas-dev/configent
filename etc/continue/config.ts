@@ -28,7 +28,7 @@ export function modifyConfig(config: Config): Config {
   config.models
     .filter((model) => model.apiKey === "[ANTHROPIC_API_KEY]")
     .forEach((anthropicModel) => {
-      anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY;
+      anthropicModel.apiKey = process.env.ANTHROPIC_API_KEY || "";
     });
 
   // Google AI Studio
@@ -49,7 +49,7 @@ export function modifyConfig(config: Config): Config {
   config.models
     .filter((model) => model.apiKey === "[OPENROUTER_API_KEY]")
     .forEach((openrouterModel) => {
-      openrouterModel.apiKey = process.env.OPENROUTER_API_KEY;
+      openrouterModel.apiKey = process.env.OPENROUTER_API_KEY || "";
     });
 
   // together.ai
