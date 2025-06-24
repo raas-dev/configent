@@ -51,10 +51,6 @@ provision:
       #!/bin/bash
       set -eux -o pipefail
       systemctl --system enable --now podman.socket
-  - mode: system
-    script: |
-      #!/bin/sh
-      echo "unqualified-search-registries = ['docker.io']" | tee -a /etc/containers/registries.conf
   - mode: user
     script: |
       #!/bin/sh
