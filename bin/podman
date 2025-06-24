@@ -9,7 +9,27 @@
 # shim for running `podman` in lima VM
 
 : "${NAME:="podman"}"
-: "${TEMPLATE:="fedora_rootful"}"
+: "${TEMPLATE:="fedora"}"
+
+install_docker_compose_plugin() {
+  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
+    os="$(uname)"
+    arch="$(uname -m)"
+    if [ "$os" = "Darwin" ]; then
+      os='darwin'
+      [ "$arch" = "arm64" ] && arch="aarch64"
+    fi
+    echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
+    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+      -o "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    if [ "$(id -u)" = 0 ]; then
+      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    else
+      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    fi
+  fi
+}
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
@@ -27,6 +47,10 @@ else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "/usr/bin/podman" ]; then
+    if [ "$1" = "compose" ]; then
+      DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
+      install_docker_compose_plugin
+    fi
     "/usr/bin/podman" "$@"
   else
     echo "Error: podman not found in this Linux system."
