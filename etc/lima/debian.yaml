@@ -5,6 +5,8 @@ images:
   - location: "https://cloud.debian.org/images/cloud/bookworm/20250519-2117/debian-12-genericcloud-arm64-20250519-2117.qcow2"
     arch: "aarch64"
     digest: "sha512:9282da6c8509e16191a3950c63174a4c94f8921ff2062ed54912f86aa8c986edf443d7f77f0e9d0937c2576f09fbacb2fd53459875ec2c7afb015c70d54c7e19"
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
   - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
     arch: x86_64
   - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-arm64.qcow2

@@ -5,6 +5,8 @@ images:
   - location: "https://cloud-images.ubuntu.com/releases/noble/release-20250516/ubuntu-24.04-server-cloudimg-arm64.img"
     arch: "aarch64"
     digest: "sha256:c933c6932615d26c15f6e408e4b4f8c43cb3e1f73b0a98c2efa916cc9ab9549c"
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
   - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
     arch: x86_64
   - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-arm64.img
