@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.149.0](https://github.com/raas-dev/configent/compare/1.148.3...1.149.0) (2025-06-24)
+
+
+### Features
+
+* **podman:** install Docker compose plugin for podman compose commands ([2dc0061](https://github.com/raas-dev/configent/commit/2dc00612e17ee68ee381802f5a578957ab085389))
+
+
+### Fixes
+
+* **bin:** update TEMPLATE default to "fedora_rootful" in podman shim ([2aafe90](https://github.com/raas-dev/configent/commit/2aafe904f36ac0a7f815e27f92b1603e9e09c0f2))
+* **docker:** update buildx plugin version to v0.25.0 ([31fe45e](https://github.com/raas-dev/configent/commit/31fe45eeef5312417ac1663d045ed4307b333e01))
+* **lima:** remove redundant mountPoint and improve k3s provisioning checks ([aae012e](https://github.com/raas-dev/configent/commit/aae012e0a93c5531a04b567d7ad7c335d1acb15b))
+
 ### [1.148.3](https://github.com/raas-dev/configent/compare/1.148.2...1.148.3) (2025-06-24)
 
 
