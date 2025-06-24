@@ -72,6 +72,13 @@ probes:
 hostResolver:
   enabled: true
 
+#hostResolver:
+#  enabled: false
+#
+#dns:
+#  - 1.1.1.1
+#  - 1.0.0.1
+
 # https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:
   - lima: user-v2
