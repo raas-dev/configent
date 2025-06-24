@@ -39,6 +39,13 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  # https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md
+  - mode: system
+    script: |
+      #!/bin/sh
+      systemctl start containerd
+      nerdctl run --privileged --rm tonistiigi/binfmt:master --install all
+      ls -1 /proc/sys/fs/binfmt_misc/qemu*
   # Add iptables to $PATH for nerdctl
   # See: https://github.com/containerd/nerdctl/discussions/1536
   - mode: system
