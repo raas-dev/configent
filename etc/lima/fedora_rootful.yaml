@@ -34,12 +34,23 @@ provision:
       #!/bin/bash
       set -eux -o pipefail
       command -v podman >/dev/null 2>&1 && test -e /etc/lima-podman && exit 0
+      if [ ! -e /etc/systemd/system/podman.socket.d/override.conf ]; then
+        mkdir -p /etc/systemd/system/podman.socket.d
+        cat <<-EOF >/etc/systemd/system/podman.socket.d/override.conf
+        [Socket]
+        SocketUser={{.User}}
+      EOF
+      fi
+      if [ ! -e /etc/tmpfiles.d/podman.conf ]; then
+        mkdir -p /etc/tmpfiles.d
+        echo "d /run/podman 0700 {{.User}} -" > /etc/tmpfiles.d/podman.conf
+      fi
       dnf -y install --best podman && touch /etc/lima-podman
-  - mode: user
+  - mode: system
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      systemctl --user enable --now podman.socket
+      systemctl --system enable --now podman.socket
   - mode: user
     script: |
       #!/bin/sh
@@ -71,5 +82,5 @@ networks:
   - lima: user-v2
 
 portForwards:
-  - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
+  - guestSocket: "/run/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"

@@ -9,7 +9,7 @@
 # shim for running `podman` in lima VM
 
 : "${NAME:="podman"}"
-: "${TEMPLATE:="fedora"}"
+: "${TEMPLATE:="fedora_rootful"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
