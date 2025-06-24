@@ -237,7 +237,7 @@ These `bin/` shims wrap the container CLIs to use those runtimes:
 
 - `docker`: Runs Docker CLI, installing build and compose CLI plugins when used
 - `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
-- `podman`: Runs Podman CLI, installing CLI compose plugin (same as for docker)
+- `podman`: Runs Podman CLI, installing compose CLI plugin (same as for docker)
 
 See [rootless containers](https://rootlesscontaine.rs/) as those are preferred.
 

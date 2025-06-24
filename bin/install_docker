@@ -51,7 +51,8 @@ $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
 $SUDO systemctl enable docker.service
 
-# https://lima-vm.io/docs/config/multi-arch/#fast-mode
+# Intel-on-ARM and ARM-on-Intel
+# https://github.com/tonistiigi/binfmt
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
 # NVIDIA Container Toolkit
