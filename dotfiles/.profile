@@ -54,7 +54,7 @@ export VISUAL="$EDITOR"
 export SVN_EDITOR="$EDITOR"
 
 # color manpages
-export MANPAGER='sh -c "col -bx | bat -l man -p"'
+command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
 export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
