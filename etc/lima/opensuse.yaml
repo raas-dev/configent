@@ -15,7 +15,7 @@ mounts:
     writable: true
   - location: "~/Downloads"
     writable: true
-  - location: "{{.GlobalTempDir}}/lima"
+  - location: "/tmp/lima"
     mountPoint: /tmp/lima
     writable: true
 
