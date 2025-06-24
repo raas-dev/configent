@@ -51,6 +51,9 @@ $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
 $SUDO systemctl enable docker.service
 
+# https://lima-vm.io/docs/config/multi-arch/#fast-mode
+$SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
+
 # NVIDIA Container Toolkit
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | $SUDO gpg --dearmor --yes -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg &&
