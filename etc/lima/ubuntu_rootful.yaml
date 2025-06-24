@@ -34,7 +34,8 @@ mounts:
     writable: true
   - location: "~/Downloads"
     writable: true
-  - location: "/tmp/lima"
+  - location: "{{.GlobalTempDir}}/lima"
+    mountPoint: /tmp/lima
     writable: true
 
 ssh:
