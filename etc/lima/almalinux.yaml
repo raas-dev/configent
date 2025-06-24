@@ -18,7 +18,6 @@ mounts:
     mountPoint: /tmp/lima
     writable: true
 
-
 containerd:
   system: false
   user: false

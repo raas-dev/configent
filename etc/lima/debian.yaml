@@ -28,7 +28,6 @@ mounts:
     mountPoint: /tmp/lima
     writable: true
 
-
 ssh:
   forwardAgent: true
 
