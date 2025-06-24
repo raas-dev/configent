@@ -346,10 +346,19 @@
     "useTools": true,
     "modelContextProtocolServers": [
       {
+        "name": "duckduckgo",
         "transport": {
           "type": "stdio",
           "command": "uvx",
           "args": ["duckduckgo-mcp-server"]
+        }
+      },
+      {
+        "name": "context7",
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@upstash/context7-mcp@latest"]
         }
       }
     ],
