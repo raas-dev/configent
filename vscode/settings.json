@@ -412,6 +412,7 @@
     "!Split",
     "!Split sequence"
   ],
+  "yaml.schemaStore.enable": false,
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false
 }
