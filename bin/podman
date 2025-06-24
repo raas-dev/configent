@@ -50,6 +50,7 @@ else
     if [ "$1" = "compose" ]; then
       DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
       install_docker_compose_plugin
+      export PODMAN_COMPOSE_WARNING_LOGS=false
     fi
     "/usr/bin/podman" "$@"
   else
