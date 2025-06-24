@@ -1,10 +1,19 @@
 images:
-  - location: "https://download.fedoraproject.org/pub/fedora/linux/releases/41/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2"
-    arch: "x86_64"
-    digest: "sha256:6205ae0c524b4d1816dbd3573ce29b5c44ed26c9fbc874fbe48c41c89dd0bac2"
-  - location: "https://download.fedoraproject.org/pub/fedora/linux/releases/41/Cloud/aarch64/images/Fedora-Cloud-Base-Generic-41-1.4.aarch64.qcow2"
-    arch: "aarch64"
-    digest: "sha256:085883b42c7e3b980e366a1fe006cd0ff15877f7e6e984426f3c6c67c7cc2faa"
+- location: https://download.fedoraproject.org/pub/fedora/linux/releases/42/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-42-1.1.x86_64.qcow2
+  arch: x86_64
+  digest: sha256:e401a4db2e5e04d1967b6729774faa96da629bcf3ba90b67d8d9cce9906bec0f
+
+- location: https://download.fedoraproject.org/pub/fedora/linux/releases/42/Cloud/aarch64/images/Fedora-Cloud-Base-Generic-42-1.1.aarch64.qcow2
+  arch: aarch64
+  digest: sha256:e10658419a8d50231037dc781c3155aa94180a8c7a74e5cac2a6b09eaa9342b7
+
+- location: https://dl.fedoraproject.org/pub/alt/risc-v/release/42/Cloud/riscv64/images/Fedora-Cloud-Base-Generic-42.20250414-8635a3a5bfcd.riscv64.qcow2
+  arch: riscv64
+  digest: sha256:537c67710f4f1c9112fecaafafc293b649acd1d35b46619b97b5a5a0132241b0
+
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
 
 mounts:
   - location: "~/configent"
@@ -13,7 +22,8 @@ mounts:
     writable: true
   - location: "~/Downloads"
     writable: true
-  - location: "/tmp/lima"
+  - location: "{{.GlobalTempDir}}/lima"
+    mountPoint: /tmp/lima
     writable: true
 
 ssh:
@@ -26,16 +36,26 @@ containerd:
 provision:
   - mode: system
     script: |
-      #!/bin/sh
-      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+      #!/bin/bash
+      set -eux -o pipefail
+      command -v podman >/dev/null 2>&1 && test -e /etc/lima-podman && exit 0
+      if [ ! -e /etc/systemd/system/podman.socket.d/override.conf ]; then
+        mkdir -p /etc/systemd/system/podman.socket.d
+        cat <<-EOF >/etc/systemd/system/podman.socket.d/override.conf
+        [Socket]
+        SocketUser={{.User}}
+      EOF
+      fi
+      if [ ! -e /etc/tmpfiles.d/podman.conf ]; then
+        mkdir -p /etc/tmpfiles.d
+        echo "d /run/podman 0700 {{.User}} -" > /etc/tmpfiles.d/podman.conf
+      fi
+      dnf -y install --best podman && touch /etc/lima-podman
   - mode: system
     script: |
-      #!/bin/sh
-      dnf -y install podman
-  - mode: user
-    script: |
-      #!/bin/sh
-      systemctl --user enable --now podman.socket
+      #!/bin/bash
+      set -eux -o pipefail
+      systemctl --system enable --now podman.socket
   - mode: system
     script: |
       #!/bin/sh
@@ -55,13 +75,21 @@ probes:
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
 
+# https://lima-vm.io/docs/config/network
 hostResolver:
-  enabled: false
+  enabled: true
+
+#hostResolver:
+#  enabled: false
+#
+#dns:
+#  - 1.1.1.1
+#  - 1.0.0.1
 
 # https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:
   - lima: user-v2
 
 portForwards:
-  - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
+  - guestSocket: "/run/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"

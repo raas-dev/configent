@@ -29,7 +29,7 @@ Supported operating systems:
 - macOS Sequoia (15), Sonoma (14) and Ventura (13)
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
-- Fedora Linux 41 and 40
+- Fedora Linux 42 and 41
 - CentOS Stream 10 and 9
 - AlmaLinux 9 and 8
 - Rocky Linux 9 and 8
