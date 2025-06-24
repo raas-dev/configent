@@ -25,7 +25,6 @@ mounts:
   - location: "~/Downloads"
     writable: true
   - location: "/tmp/lima"
-    mountPoint: /tmp/lima
     writable: true
 
 ssh:
@@ -50,7 +49,9 @@ provision:
   - mode: system
     script: |
       #!/bin/sh
-      curl -fsSL https://get.k3s.io | sh
+      if [ ! -d /var/lib/rancher/k3s ]; then
+        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644" sh -
+      fi
   - mode: user
     script: |
       #!/bin/sh
@@ -58,8 +59,9 @@ provision:
 
 probes:
   - script: |
-      #!/bin/sh
-      if ! timeout 30s sh -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
         echo >&2 "k3s is not running yet"
         exit 1
       fi

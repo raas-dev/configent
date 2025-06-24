@@ -16,7 +16,6 @@ mounts:
   - location: "~/Downloads"
     writable: true
   - location: "/tmp/lima"
-    mountPoint: /tmp/lima
     writable: true
 
 containerd:
