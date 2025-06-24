@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.148.3](https://github.com/raas-dev/configent/compare/1.148.2...1.148.3) (2025-06-24)
+
+
+### Fixes
+
+* **config:** replace '{{.GlobalTempDir}}/lima' with '/tmp/lima' in mounts ([f00a49f](https://github.com/raas-dev/configent/commit/f00a49f494f585c7a87bd4ef36104d540d17f918))
+* **config:** update LLM model to google/gemini-2.5-flash ([19ed54c](https://github.com/raas-dev/configent/commit/19ed54c0d525cbe8c87b53f465f4259355730847))
+* **config:** use global temp dir for /tmp/lima mounts in YAML files ([ae7880e](https://github.com/raas-dev/configent/commit/ae7880e72ef4a17645a85e8fccfd56a8803fe575))
+* **continue:** add mcp servers duckduckgo and context7 ([b18954d](https://github.com/raas-dev/configent/commit/b18954d40c686b89ed67909bad3fe6567081abd2))
+* **lima:** Add support for Fedora Linux 42 ([9a2db9a](https://github.com/raas-dev/configent/commit/9a2db9afb284e713cff39a65377b0e8546b5fdda))
+* **lima:** Update ubuntu and debian images ([1ff31e6](https://github.com/raas-dev/configent/commit/1ff31e624ab887fca398e867c140a5b1ecf6664a))
+* **podman:** Use rootful podman ([2b3beaa](https://github.com/raas-dev/configent/commit/2b3beaa46ed8676c0e984a00ffe2ecff4cb555a0))
+
 ### [1.148.2](https://github.com/raas-dev/configent/compare/1.148.1...1.148.2) (2025-06-23)
 
 
