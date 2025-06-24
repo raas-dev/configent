@@ -348,8 +348,8 @@
       {
         "transport": {
           "type": "stdio",
-          "command": "npx",
-          "args": ["-y", "@upstash/context7-mcp@latest"]
+          "command": "uvx",
+          "args": ["duckduckgo-mcp-server"]
         }
       }
     ],
