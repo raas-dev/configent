@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.149.1](https://github.com/raas-dev/configent/compare/1.149.0...1.149.1) (2025-06-24)
+
+
+### Fixes
+
+* **bin:** disable podman compose warning logs by default ([f5d0f67](https://github.com/raas-dev/configent/commit/f5d0f6758848a622d5d497f512fc26b2847df82f))
+* **docker:** enable multi-arch support using tonistiigi/binfmt ([fa39e44](https://github.com/raas-dev/configent/commit/fa39e44d334af8dfbe0912398e99eba89b398246))
+* **dotfiles:** conditionally set MANPAGER only if bat is available ([4e2c6cd](https://github.com/raas-dev/configent/commit/4e2c6cd15febd3a85c5f9f7a379f867697833b43))
+* **nerdctl:** enable multi-platform support with binfmt setup ([539dfe0](https://github.com/raas-dev/configent/commit/539dfe0be91c365c65cf0d7b497d331d3e8a4250))
+
 ## [1.149.0](https://github.com/raas-dev/configent/compare/1.148.3...1.149.0) (2025-06-24)
 
 
