@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.6](https://github.com/raas-dev/configent/compare/1.152.5...1.152.6) (2025-06-25)
+
+
+### Fixes
+
+* **installer:** run Docker install script with sudo for rootless install ([116c85f](https://github.com/raas-dev/configent/commit/116c85f1f6de32a3d80fb3cc9b55acafe273c4ec))
+
 ### [1.152.5](https://github.com/raas-dev/configent/compare/1.152.4...1.152.5) (2025-06-25)
 
 
