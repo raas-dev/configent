@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.10](https://github.com/raas-dev/configent/compare/1.152.9...1.152.10) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** update default TEMPLATE to ubuntu_rootful in docker shim ([0bb1ea2](https://github.com/raas-dev/configent/commit/0bb1ea2ccab4418a3f294d474f547362ba7000b6))
+
 ### [1.152.9](https://github.com/raas-dev/configent/compare/1.152.8...1.152.9) (2025-06-25)
 
 
