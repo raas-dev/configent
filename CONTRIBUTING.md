@@ -55,18 +55,6 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
   - Any existing `mise` plugin does not install Aarch64 binary
     - Fix: Install neovim from distro's repo
 
-- Docker: Alpine Linux / all archs (as of 2025-01)
-  - Rootless docker is not supported
-    - Fix: Relogin is required after (first) bootstrap to be in `docker` group
-
-- Node.js: Alpine Linux / all archs (as of 2025-01)
-  - Mise starts compiling Node.js from source, which takes a long time
-    - Fix: See [node.flavor=musl](https://mise.jdx.dev/lang/node.html#unofficial-builds)
-
-- Homebrew: Alpine Linux / x86-64 (as of 2025)
-  - Homebrew on Linux does not work on musl based distros
-    - Workaround: Use `mise install` when possible, otherwise use `apk install`
-
 - Homebrew: Linux / Aarch64  (as of 2025)
   - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Workaround: Use `mise install`

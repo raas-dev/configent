@@ -166,12 +166,6 @@ alias vm4tumbleweed='limactl start --name tumbleweed ~/.config/configent/lima/op
 
 alias vm4arch='limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 
-if command -v qemu-system-aarch64 >/dev/null; then
-  alias vm4oracle='limactl start --vm-type=qemu --name oraclelinux ~/.config/configent/lima/oraclelinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-
-  alias vm4alpine='limactl start --vm-type=qemu --name alpine ~/.config/configent/lima/alpine.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-fi
-
 ### docker #####################################################################
 
 alias dr='docker rm --force $(docker ps --all --quiet)'
