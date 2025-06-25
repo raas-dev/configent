@@ -54,7 +54,7 @@ curl -fsSL https://get.docker.com | $SUDO sh
 # https://github.com/tonistiigi/binfmt
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
-# Start dockerd
+# Start dockerd on boot
 $SUDO systemctl enable docker.service
 
 # NVIDIA Container Toolkit
