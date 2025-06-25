@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.2](https://github.com/raas-dev/configent/compare/1.150.1...1.150.2) (2025-06-25)
+
+
+### Fixes
+
+* **powershell:** set DOTNET_ROOT for pwsh ([e56a36e](https://github.com/raas-dev/configent/commit/e56a36ef999947e6e59c5f3d44cd65872bdc355d))
+
 ### [1.150.1](https://github.com/raas-dev/configent/compare/1.150.0...1.150.1) (2025-06-25)
 
 
