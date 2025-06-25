@@ -59,7 +59,6 @@ $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 if ! command -v docker >/dev/null; then
   curl -fsSL https://get.docker.com/rootless | sh
 fi
-
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
