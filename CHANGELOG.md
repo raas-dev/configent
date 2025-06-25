@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.8](https://github.com/raas-dev/configent/compare/1.150.7...1.150.8) (2025-06-25)
+
+
+### Fixes
+
+* **docker:** export DOCKER_DEFAULT_PLATFORM for Apple Silicon Macs only ([0b639cd](https://github.com/raas-dev/configent/commit/0b639cd400416652926ac8218c9e9aa5aaa0442b))
+* **docker:** set DOCKER_DEFAULT_PLATFORM for arm64 architecture ([2deed16](https://github.com/raas-dev/configent/commit/2deed1610fe824ad56000ccc7eda391f080cd101))
+* **podman:** fix podman platform handling logic ([ca80aaa](https://github.com/raas-dev/configent/commit/ca80aaae9354b537d0869ce161830bad7ca14533))
+
 ### [1.150.7](https://github.com/raas-dev/configent/compare/1.150.6...1.150.7) (2025-06-25)
 
 
