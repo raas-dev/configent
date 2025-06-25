@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.4](https://github.com/raas-dev/configent/compare/1.152.3...1.152.4) (2025-06-25)
+
+
+### Fixes
+
+* **install:** update Docker rootless install script and setup tool usage ([038883a](https://github.com/raas-dev/configent/commit/038883a54a56e209eb2acceb8bb30c4efb334107))
+* **lima:** disable user containerd and remove redundant provision scripts ([ec12098](https://github.com/raas-dev/configent/commit/ec12098cd2a6e6d914f1c3e6eb90a6e7ec0cc435))
+
 ### [1.152.3](https://github.com/raas-dev/configent/compare/1.152.2...1.152.3) (2025-06-25)
 
 
