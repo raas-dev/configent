@@ -268,7 +268,7 @@ version = "2.25.3"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
-version = "1.52.0"
+version = "1.53.0"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
