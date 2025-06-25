@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.1](https://github.com/raas-dev/configent/compare/1.152.0...1.152.1) (2025-06-25)
+
+
+### Fixes
+
+* **lima:** Fix Arch Linux on aarch64 ([b510930](https://github.com/raas-dev/configent/commit/b51093080a94cab8f2b76abca04db2158f47b272))
+
 ## [1.152.0](https://github.com/raas-dev/configent/compare/1.151.3...1.152.0) (2025-06-25)
 
 
