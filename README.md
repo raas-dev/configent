@@ -235,11 +235,9 @@ Supported container runtimes:
 
 These `bin/` shims wrap the container CLIs to use those runtimes:
 
-- `docker`: Runs Docker CLI, installing build and compose CLI plugins when used
-- `nerdctl`: Runs nerdctl (on containerd), which has build and compose built-in
-- `podman`: Runs Podman CLI, installing compose CLI plugin (same as for docker)
-
-See [rootless containers](https://rootlesscontaine.rs/) as those are preferred.
+- `docker`: Runs Docker CLI, installs build and compose CLI plugins on first use
+- `nerdctl`: Runs nerdctl CLI for the rootless containerd installed on the VM
+- `podman`: Runs Podman CLI, installs compose CLI plugin on first use
 
 ### macOS
 
@@ -247,7 +245,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs.
 
 The aforementioned shims create and start the necessary virtual machines:
-Ubuntu for Docker, Debian for containerd and Fedora for Podman.
+Ubuntu for Docker and containerd and Fedora for Podman.
 
 In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
