@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.6](https://github.com/raas-dev/configent/compare/1.150.5...1.150.6) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** remove extra newline in install_docker_rootless script ([1d3bdcc](https://github.com/raas-dev/configent/commit/1d3bdccf244ad547e46f0926c45e214d5a099ef9))
+* **bin:** update default TEMPLATE to "fedora" in podman shim ([0c27887](https://github.com/raas-dev/configent/commit/0c27887bbead452520650c755ef2278e27798102))
+
 ### [1.150.5](https://github.com/raas-dev/configent/compare/1.150.4...1.150.5) (2025-06-25)
 
 
