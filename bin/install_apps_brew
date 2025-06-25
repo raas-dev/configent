@@ -69,6 +69,9 @@ brew install pandoc
 # For speech-to-text
 brew install portaudio
 
+# For running Lima VMs that require QEMU (see .aliases)
+#brew install qemu
+
 # For rsync_tmbackup.sh
 brew install rsync
 
