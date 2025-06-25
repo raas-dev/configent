@@ -50,12 +50,12 @@ fi
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
 
+# Start dockerd now and on boo
+$SUDO systemctl enable --now docker.service docker.socket
+
 # Intel-on-ARM and ARM-on-Intel
 # https://github.com/tonistiigi/binfmt
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
-
-# Start dockerd on boot
-$SUDO systemctl enable docker.service
 
 # NVIDIA Container Toolkit
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html

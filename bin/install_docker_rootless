@@ -58,13 +58,12 @@ $SUDO systemctl restart apparmor.service
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
 
+# Start dockerd now and on boot
+$SUDO systemctl enable --now docker.service docker.socket
+
 # Intel-on-ARM and ARM-on-Intel
 # https://github.com/tonistiigi/binfmt
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
-
-# Disable system-wide Docker
-#$SUDO systemctl disable --now docker.service docker.socket
-#$SUDO rm /var/run/docker.sock
 
 # Setup Docker rootless mode
 systemctl --user start dbus
