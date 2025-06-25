@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.7](https://github.com/raas-dev/configent/compare/1.152.6...1.152.7) (2025-06-25)
+
+
+### Fixes
+
+* **script:** comment out disabling system-wide Docker to prevent disruption ([16d4cb9](https://github.com/raas-dev/configent/commit/16d4cb99b42760892d4e681d8aa49eec22b242a2))
+
 ### [1.152.6](https://github.com/raas-dev/configent/compare/1.152.5...1.152.6) (2025-06-25)
 
 
