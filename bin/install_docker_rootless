@@ -56,10 +56,9 @@ $SUDO systemctl restart apparmor.service
 
 # Install Docker (rootless)
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
-curl -fsSL https://get.docker.com/rootless | sh
+curl -fsSL https://get.docker.com | sh
 systemctl --user start dbus
-systemctl --user start docker
-$SUDO loginctl enable-linger "$USER"
+dockerd-rootless-setuptool.sh install
 
 # NVIDIA Container Toolkit
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
