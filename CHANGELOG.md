@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.151.0](https://github.com/raas-dev/configent/compare/1.150.8...1.151.0) (2025-06-25)
+
+
+### Features
+
+* **lima:** Add Alma Linux 10 and Rocky Linux 10 ([c832d91](https://github.com/raas-dev/configent/commit/c832d9181ec545266258ad0aceed9cb2e17739a0))
+
+
+### Fixes
+
+* **docker:** always run rootless docker install script without check ([ce9c534](https://github.com/raas-dev/configent/commit/ce9c5349819d49261cc1a5c5f60792ac74d08e1f))
+* **etc:** update CentOS-Stream-10 image URLs and digests ([88ed567](https://github.com/raas-dev/configent/commit/88ed567510b7e15750527063c89ed7adc871fad0))
+
 ### [1.150.8](https://github.com/raas-dev/configent/compare/1.150.7...1.150.8) (2025-06-25)
 
 
