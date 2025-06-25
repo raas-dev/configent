@@ -37,10 +37,9 @@ curl -fsSL https://aka.ms/install-azd.sh | AZURE_DEV_COLLECT_TELEMETRY=no \
 
 ### PowerShell Azure module ####################################################
 
-#shellcheck disable=SC2155  # will not declare separately, value compactness
-export DOTNET_ROOT="$(dirname "$(which dotnet)")"
-
-if command -v pwsh >/dev/null; then
+if command -v dotnet >/dev/null && command -v pwsh >/dev/nul; then
+  #shellcheck disable=SC2155  # will not declare separately, value compactness
+  export DOTNET_ROOT="$(dirname "$(which dotnet)")"
   pwsh -c "Set-PSRepository PSGallery -InstallationPolicy Trusted"
   pwsh -c "Install-Module -Name Az -Repository PSGallery"
   pwsh -c "Install-Module -Name Microsoft.Graph -Repository PSGallery"

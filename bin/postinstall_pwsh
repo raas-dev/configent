@@ -28,10 +28,8 @@ ln -sfnv "$config_path/powershell" "$HOME/.config/powershell"
 
 ### PowerShell modules #########################################################
 
-#shellcheck disable=SC2155  # will not declare separately, value compactness
-export DOTNET_ROOT="$(dirname "$(which dotnet)")"
-
-# Install PSScriptAnalyzer for IDEs
-if command -v pwsh >/dev/null; then
+if command -v dotnet >/dev/null && command -v pwsh >/dev/null; then
+  #shellcheck disable=SC2155  # will not declare separately, value compactness
+  export DOTNET_ROOT="$(dirname "$(which dotnet)")"
   pwsh -c "Install-Module -Name PSScriptAnalyzer -Force"
 fi
