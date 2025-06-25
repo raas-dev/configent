@@ -31,27 +31,13 @@ ssh:
 
 containerd:
   system: false
-  user: true
+  user: false
 
 provision:
   - mode: system
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-  # Add iptables to $PATH for nerdctl
-  # See: https://github.com/containerd/nerdctl/discussions/1536
-  - mode: system
-    script: |
-      #!/bin/sh
-      ln -s /usr/sbin/iptables /usr/local/bin/iptables
-      ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
-  # Intel-on-ARM and ARM-on-Intel
-  # See: https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md
-  - mode: system
-    script: |
-      #!/bin/sh
-      systemctl start containerd
-      nerdctl run --privileged --rm tonistiigi/binfmt:master --install all
   - mode: user
     script: |
       #!/bin/sh
