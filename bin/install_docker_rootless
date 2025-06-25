@@ -54,7 +54,7 @@ EOF
 $SUDO mv "$HOME/$filename" "/etc/apparmor.d/$filename"
 $SUDO systemctl restart apparmor.service
 
-# Docker (rootless)
+# Install Docker (rootless)
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
@@ -70,7 +70,7 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | $SUDO gpg --dea
 $SUDO apt-get update
 $SUDO apt-get install -y nvidia-container-toolkit
 nvidia-ctk runtime configure --runtime=docker --config="$HOME/.config/docker/daemon.json"
-systemctl --user restart docker
+systemctl --user reload docker
 $SUDO nvidia-ctk config --set nvidia-container-cli.no-cgroups --in-place
 
 # gVisor
@@ -80,4 +80,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gviso
 $SUDO apt-get update
 $SUDO apt-get install -y runsc
 runsc install -config_file "$HOME/.config/docker/daemon.json"
-systemctl --user restart docker
+systemctl --user reload docker

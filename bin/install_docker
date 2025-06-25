@@ -46,14 +46,16 @@ if ! $SUDO grep -Fq "SocketUser=$USER" /etc/systemd/system/docker.socket.d/overr
 SocketUser=$USER" | $SUDO tee -a /etc/systemd/system/docker.socket.d/override.conf
 fi
 
-# Docker (rootful)
+# Install Docker (rootful)
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
-$SUDO systemctl enable docker.service
 
 # Intel-on-ARM and ARM-on-Intel
 # https://github.com/tonistiigi/binfmt
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
+
+# Start dockerd
+$SUDO systemctl enable docker.service
 
 # NVIDIA Container Toolkit
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
@@ -64,7 +66,7 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | $SUDO gpg --dea
 $SUDO apt-get update
 $SUDO apt-get install -y nvidia-container-toolkit
 $SUDO nvidia-ctk runtime configure --runtime=docker
-$SUDO systemctl restart docker
+$SUDO systemctl reload docker
 
 # gVisor
 # https://gvisor.dev/docs/user_guide/install
