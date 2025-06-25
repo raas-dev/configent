@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.150.0](https://github.com/raas-dev/configent/compare/1.149.2...1.150.0) (2025-06-25)
+
+
+### Features
+
+* **lima:** Use same VM for docker and nerdctl ([3f7ad7a](https://github.com/raas-dev/configent/commit/3f7ad7a8ab9e84eb3b87a5bcf027f6f21db91efb))
+
 ### [1.149.2](https://github.com/raas-dev/configent/compare/1.149.1...1.149.2) (2025-06-24)
 
 ### [1.149.1](https://github.com/raas-dev/configent/compare/1.149.0...1.149.1) (2025-06-24)
