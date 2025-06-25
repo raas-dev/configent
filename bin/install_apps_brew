@@ -69,7 +69,7 @@ brew install pandoc
 # For speech-to-text
 brew install portaudio
 
-# For running Lima VMs that require QEMU (see .aliases)
+# For running QEMU VMs ("vz" is the Lima default on macOS 13.5 and later)
 #brew install qemu
 
 # For rsync_tmbackup.sh
