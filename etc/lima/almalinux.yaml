@@ -1,9 +1,9 @@
 images:
   - location: "https://repo.almalinux.org/almalinux/10.0/cloud/x86_64/images/AlmaLinux-10-GenericCloud-10.0-20250528.0.x86_64.qcow2"
-    arch: "x86_64"
+    arch: x86_64
     digest: "sha256:9c528c5895c7fb5fc906add749d48057dbba4a4258a708c224aa3ef60fda14bd"
   - location: "https://repo.almalinux.org/almalinux/10.0/cloud/aarch64/images/AlmaLinux-10-GenericCloud-10.0-20250528.0.aarch64.qcow2"
-    arch: "aarch64"
+    arch: aarch64
     digest: "sha256:34f255fab5d82f5470b173016cf7265282f09fc36a0c50fde72c9a7166c450ea"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
