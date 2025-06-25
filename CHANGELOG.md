@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.5](https://github.com/raas-dev/configent/compare/1.152.4...1.152.5) (2025-06-25)
+
+
+### Fixes
+
+* **docker:** update template and always install Docker with additional config ([337aa87](https://github.com/raas-dev/configent/commit/337aa87fa0dd45165d8acae0ed232a4792998cf1))
+
 ### [1.152.4](https://github.com/raas-dev/configent/compare/1.152.3...1.152.4) (2025-06-25)
 
 
