@@ -63,8 +63,8 @@ curl -fsSL https://get.docker.com | $SUDO sh
 $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
 # Disable system-wide Docker
-$SUDO systemctl disable --now docker.service docker.socket
-$SUDO rm /var/run/docker.sock
+#$SUDO systemctl disable --now docker.service docker.socket
+#$SUDO rm /var/run/docker.sock
 
 # Setup Docker rootless mode
 systemctl --user start dbus
