@@ -31,8 +31,8 @@ Supported operating systems:
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 42 and 41
 - CentOS Stream 10 and 9
-- AlmaLinux 9 and 8
-- Rocky Linux 9 and 8
+- AlmaLinux 10 and 9
+- Rocky Linux 10 and 9
 - Oracle Linux 9 and 8
 - openSUSE Tumbleweed and Leap (15.6)
 - Arch Linux (rolling; since 2022-07)
