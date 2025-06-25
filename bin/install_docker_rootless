@@ -56,7 +56,7 @@ $SUDO systemctl restart apparmor.service
 
 # Install Docker
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
-curl -fsSL https://get.docker.com | sh
+curl -fsSL https://get.docker.com | $SUDO sh
 
 # Intel-on-ARM and ARM-on-Intel
 # https://github.com/tonistiigi/binfmt

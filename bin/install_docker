@@ -46,7 +46,7 @@ if ! $SUDO grep -Fq "SocketUser=$USER" /etc/systemd/system/docker.socket.d/overr
 SocketUser=$USER" | $SUDO tee -a /etc/systemd/system/docker.socket.d/override.conf
 fi
 
-# Install Docker (rootful)
+# Install Docker
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | $SUDO sh
 
