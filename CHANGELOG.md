@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.2](https://github.com/raas-dev/configent/compare/1.152.1...1.152.2) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** support platform override for build and run commands on aarch64 ([2e2a684](https://github.com/raas-dev/configent/commit/2e2a6845419b5b5bbb9af2bcc97fbec255aaaace))
+
 ### [1.152.1](https://github.com/raas-dev/configent/compare/1.152.0...1.152.1) (2025-06-25)
 
 
