@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.1](https://github.com/raas-dev/configent/compare/1.150.0...1.150.1) (2025-06-25)
+
+
+### Fixes
+
+* **docker:** enable and reload services instead of restarting them ([b0ac6d7](https://github.com/raas-dev/configent/commit/b0ac6d7008fbfa23acb01cdfb9f36b8c2ab4c95e))
+
 ## [1.150.0](https://github.com/raas-dev/configent/compare/1.149.2...1.150.0) (2025-06-25)
 
 
