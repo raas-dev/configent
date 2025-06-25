@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.3](https://github.com/raas-dev/configent/compare/1.150.2...1.150.3) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** check dotnet and pwsh presence before exporting DOTNET_ROOT ([b1c9994](https://github.com/raas-dev/configent/commit/b1c9994a552ff92a31054abe89c0e83e29045786))
+* **postinstall_node:** remove global npx install from postinstall script ([edbd77e](https://github.com/raas-dev/configent/commit/edbd77eb3c606d61bdda4cb41058e3763ad143ac))
+
 ### [1.150.2](https://github.com/raas-dev/configent/compare/1.150.1...1.150.2) (2025-06-25)
 
 
