@@ -48,9 +48,7 @@ fi
 
 # Install Docker (rootful)
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
-if ! command -v docker >/dev/null; then
-  curl -fsSL https://get.docker.com | $SUDO sh
-fi
+curl -fsSL https://get.docker.com | $SUDO sh
 
 # Intel-on-ARM and ARM-on-Intel
 # https://github.com/tonistiigi/binfmt

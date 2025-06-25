@@ -54,9 +54,19 @@ EOF
 $SUDO mv "$HOME/$filename" "/etc/apparmor.d/$filename"
 $SUDO systemctl restart apparmor.service
 
-# Install Docker (rootless)
+# Install Docker
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
 curl -fsSL https://get.docker.com | sh
+
+# Intel-on-ARM and ARM-on-Intel
+# https://github.com/tonistiigi/binfmt
+$SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
+
+# Disable system-wide Docker
+$SUDO systemctl disable --now docker.service docker.socket
+$SUDO rm /var/run/docker.sock
+
+# Setup Docker rootless mode
 systemctl --user start dbus
 dockerd-rootless-setuptool.sh install
 

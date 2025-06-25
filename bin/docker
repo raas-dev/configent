@@ -9,7 +9,7 @@
 # shim for running `docker` in lima VM
 
 : "${NAME:="default"}"
-: "${TEMPLATE:="ubuntu_rootful"}"
+: "${TEMPLATE:="ubuntu"}"
 
 install_docker_buildx_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx" ]; then
