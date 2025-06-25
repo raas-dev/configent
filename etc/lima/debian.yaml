@@ -10,11 +10,7 @@ images:
   - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
     arch: x86_64
   - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-arm64.qcow2
-    arch: aarch64
-
-#cpus: 4          # default: 4
-memory: "8GiB" # default: "4GiB"
-#disk: "100GiB"   # default: "100GiB"
+    arch: aarch64"
 
 mountTypesUnsupported: [9p]
 mounts:
@@ -27,32 +23,15 @@ mounts:
   - location: "/tmp/lima"
     writable: true
 
-ssh:
-  forwardAgent: true
-
 containerd:
   system: false
-  user: true
+  user: false
 
 provision:
   - mode: system
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-  # Add iptables to $PATH for nerdctl
-  # See: https://github.com/containerd/nerdctl/discussions/1536
-  - mode: system
-    script: |
-      #!/bin/sh
-      ln -s /usr/sbin/iptables /usr/local/bin/iptables
-      ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
-  # Intel-on-ARM and ARM-on-Intel
-  # See: https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md
-  - mode: system
-    script: |
-      #!/bin/sh
-      systemctl start containerd
-      nerdctl run --privileged --rm tonistiigi/binfmt:master --install all
   - mode: system
     script: |
       #!/bin/sh
@@ -77,16 +56,8 @@ probes:
       Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
       If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
 
-# https://lima-vm.io/docs/config/network
 hostResolver:
-  enabled: true
-
-#hostResolver:
-#  enabled: false
-#
-#dns:
-#  - 1.1.1.1
-#  - 1.0.0.1
+  enabled: false
 
 # https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:

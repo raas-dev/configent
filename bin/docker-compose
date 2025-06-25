@@ -8,7 +8,7 @@
 
 # shim for running `docker-compose` in lima VM
 
-: "${NAME:="docker"}"
+: "${NAME:="default"}"
 : "${TEMPLATE:="ubuntu_rootful"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
