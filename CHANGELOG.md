@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.151.3](https://github.com/raas-dev/configent/compare/1.151.2...1.151.3) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** update comments for git-extras and ctags availability ([67a5612](https://github.com/raas-dev/configent/commit/67a5612f63eceeb2ffa1cd200c7cfdbb663412e2))
+
 ### [1.151.2](https://github.com/raas-dev/configent/compare/1.151.1...1.151.2) (2025-06-25)
 
 
