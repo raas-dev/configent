@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.5](https://github.com/raas-dev/configent/compare/1.150.4...1.150.5) (2025-06-25)
+
+
+### Fixes
+
+* **install:** skip Docker install if docker command exists ([e6c797d](https://github.com/raas-dev/configent/commit/e6c797d7b19fe788326c7fb712dd1447fb8ef7a8))
+
 ### [1.150.4](https://github.com/raas-dev/configent/compare/1.150.3...1.150.4) (2025-06-25)
 
 
