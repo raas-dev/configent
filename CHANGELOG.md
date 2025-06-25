@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.151.1](https://github.com/raas-dev/configent/compare/1.151.0...1.151.1) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** split epel-release installs to avoid issues ([3effce3](https://github.com/raas-dev/configent/commit/3effce33375be197115b61e8faa493f56266ce6c))
+
 ## [1.151.0](https://github.com/raas-dev/configent/compare/1.150.8...1.151.0) (2025-06-25)
 
 
