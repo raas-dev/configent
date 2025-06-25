@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.7](https://github.com/raas-dev/configent/compare/1.150.6...1.150.7) (2025-06-25)
+
+
+### Fixes
+
+* **podman:** add architecture flag to build and run commands ([b49f11f](https://github.com/raas-dev/configent/commit/b49f11f4c6ab26997140291976a8972830c013e0))
+
 ### [1.150.6](https://github.com/raas-dev/configent/compare/1.150.5...1.150.6) (2025-06-25)
 
 
