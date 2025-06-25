@@ -32,8 +32,12 @@ $SUDO dnf check-update -y
 
 # Add Epel repostitory (https://docs.fedoraproject.org/en-US/epel/)
 $SUDO dnf config-manager --set-enabled crb
-$SUDO dnf install -y epel-release
-$SUDO dnf install -y epel-next-release
+# centos stream 10:
+$SUDO dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+# centos stream 9:
+# $SUDO dnf -y install \
+#  https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+#  https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
 
 # Certificates
 $SUDO dnf install -y ca-certificates
@@ -50,7 +54,7 @@ $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils file findutils git git-lfs htop \
-  lsof pandoc procps redhat-lsb-core tar traceroute unzip wget which \
+  lsof pandoc procps tar traceroute unzip wget which \
   whois zip
 
 # Bash
