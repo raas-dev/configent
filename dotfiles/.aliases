@@ -175,12 +175,19 @@ alias drv='docker volume rm --force $(docker volume ls --quiet)'
 alias dri='docker rmi --force $(docker images --all --quiet)'
 alias dpr='dr ; drv ; dri ; docker system prune --force --volumes'
 
-### containerd #################################################################
+### nerdctl ####################################################################
 
 alias nr='nerdctl rm --force $(nerdctl ps --all --quiet)'
 alias nrv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
 alias nri='nerdctl rmi --force $(nerdctl images --all --quiet)'
 alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes'
+
+### podman #################################################################
+
+alias pr='podman rm --force $(podman ps --all --quiet)'
+alias prv='podman volume rm --force $(podman volume ls --quiet)'
+alias pri='podman rmi --force $(podman images --all --quiet)'
+alias ppr='pr ; prv ; pri ; podman system prune --force --volumes'
 
 ### Utilities ##################################################################
 
