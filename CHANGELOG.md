@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.151.2](https://github.com/raas-dev/configent/compare/1.151.1...1.151.2) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** update EPEL repo installation for CentOS Stream 10 ([ae75adf](https://github.com/raas-dev/configent/commit/ae75adf68639f261d171b2965ae89de7a8a21b9e))
+
 ### [1.151.1](https://github.com/raas-dev/configent/compare/1.151.0...1.151.1) (2025-06-25)
 
 
