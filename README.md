@@ -33,10 +33,10 @@ Supported operating systems:
 - CentOS Stream 10 and 9
 - AlmaLinux 10 and 9
 - Rocky Linux 10 and 9
-- Oracle Linux 9 and 8
 - openSUSE Tumbleweed (rolling) and Leap (15.6)
 - Arch Linux (rolling)
-- Alpine Linux 3.20 and 3.19
+- Oracle Linux 9 and 8 (on QEMU only)
+- Alpine Linux 3.20 and 3.19 (on QEMU only)
 
 Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
 
