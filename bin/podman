@@ -47,12 +47,21 @@ else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "/usr/bin/podman" ]; then
+    arch="$(uname -m)"
     if [ "$1" = "compose" ]; then
       DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
       install_docker_compose_plugin
       export PODMAN_COMPOSE_WARNING_LOGS=false
+      "/usr/bin/podman" "$@"
+    elif [ "$1" = "build" ]; then
+      shift
+      "/usr/bin/podman" build --arch="$arch" "$@"
+    elif [ "$1" = "run" ]; then
+      shift
+      "/usr/bin/podman" run --arch="$arch" "$@"
+    else
+      "/usr/bin/podman" "$@"
     fi
-    "/usr/bin/podman" "$@"
   else
     echo "Error: podman not found in this Linux system."
     exit 127
