@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.9](https://github.com/raas-dev/configent/compare/1.152.8...1.152.9) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** prevent reinstalling Docker if already installed in install scripts ([babc596](https://github.com/raas-dev/configent/commit/babc5967985e69ce5aa973f3006655b28d98c3d8))
+
 ### [1.152.8](https://github.com/raas-dev/configent/compare/1.152.7...1.152.8) (2025-06-25)
 
 
