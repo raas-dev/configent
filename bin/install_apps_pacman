@@ -71,7 +71,9 @@ $SUDO pacman --noconfirm --needed -S universal-ctags
 
 # Docker (rootless)
 $SUDO pacman --noconfirm --needed -S fuse3 fuse-overlayfs iptables
-curl -fsSL https://get.docker.com/rootless | sh
+if ! command -v docker >/dev/null; then
+  curl -fsSL https://get.docker.com/rootless | sh
+fi
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"

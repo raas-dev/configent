@@ -82,7 +82,9 @@ $SUDO dnf install -y langpacks-en
 
 # Docker (rootless)
 $SUDO dnf install -y fuse3 fuse-overlayfs dbus-daemon iptables shadow-utils
-curl -fsSL https://get.docker.com/rootless | sh
+if ! command -v docker >/dev/null; then
+  curl -fsSL https://get.docker.com/rootless | sh
+fi
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"

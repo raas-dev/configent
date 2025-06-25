@@ -76,7 +76,9 @@ $SUDO zypper install -y ctags
 # Docker (rootless)
 $SUDO zypper install -y fuse-overlayfs iptables
 $SUDO modprobe ip_tables iptable_mangle iptable_nat iptable_filter
-curl -fsSL https://get.docker.com/rootless | sh
+if ! command -v docker >/dev/null; then
+  curl -fsSL https://get.docker.com/rootless | sh
+fi
 systemctl --user start dbus
 systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
