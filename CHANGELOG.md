@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.8](https://github.com/raas-dev/configent/compare/1.152.7...1.152.8) (2025-06-25)
+
+
+### Fixes
+
+* **bin:** enable and start docker service immediately on install scripts ([b41f5a6](https://github.com/raas-dev/configent/commit/b41f5a604f8fe87241d3852f46a3efa57e7c2fcc))
+
 ### [1.152.7](https://github.com/raas-dev/configent/compare/1.152.6...1.152.7) (2025-06-25)
 
 
