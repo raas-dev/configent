@@ -55,10 +55,6 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
   - Any existing `mise` plugin does not install Aarch64 binary
     - Fix: Install neovim from distro's repo
 
-- Docker: CentOS Stream 10 / all archs (as of 2025-01)
-  - After installing iptables from repo, `modproble iptables` fails until reboot
-    - Fix: Reboot is required after (first) bootstrap for Docker to run
-
 - Docker: Alpine Linux / all archs (as of 2025-01)
   - Rootless docker is not supported
     - Fix: Relogin is required after (first) bootstrap to be in `docker` group
