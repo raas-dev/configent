@@ -266,7 +266,8 @@ fi
 
 os="$(uname -s)"
 if [ "$os" = 'Darwin' ]; then
-  export DOCKER_HOST="unix://$HOME/.lima/docker/sock/docker.sock"
+  export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
+  export CONTAINER_HOST="unix://$HOME/.lima/podman/sock/podman.sock"
   arch="$(uname -m)"
   [ "$arch" = 'arm64' ] && export DOCKER_DEFAULT_PLATFORM="linux/amd64"
 elif [ "$os" = 'Linux' ]; then

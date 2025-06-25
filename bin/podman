@@ -32,6 +32,7 @@ install_docker_compose_plugin() {
 }
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  # in all cases, guest VM is required to run Podman daemon
   if ! command -v limactl >/dev/null; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for podman."
     exit 127
@@ -41,8 +42,23 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
       limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
   fi
-  # pass arguments to this exact same script on the guest VM
-  limactl shell "$NAME" ~/configent/bin/podman "$@"
+  # try homebrew installed podman CLI first on macOS
+  if [ -x "/opt/homebrew/bin/podman" ]; then
+    podman_bin_path="/opt/homebrew/bin/podman"
+  elif [ -x "/usr/local/bin/podman" ]; then
+    podman_bin_path="/usr/local/bin/podman"
+  fi
+  if [ -n "$podman_bin_path" ]; then
+    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
+    if [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+      export PODMAN_COMPOSE_WARNING_LOGS=false
+    fi
+    "$podman_bin_path" "$@"
+  else
+    # no podman CLI found on macOS -> call this script on the Linux guest VM
+    limactl shell "$NAME" ~/configent/bin/podman "$@"
+  fi
 else
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
