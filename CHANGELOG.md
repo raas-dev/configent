@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.152.0](https://github.com/raas-dev/configent/compare/1.151.3...1.152.0) (2025-06-25)
+
+
+### Features
+
+* **vm:** add QEMU support for oraclelinux and alpine Lima VMs ([60c6c41](https://github.com/raas-dev/configent/commit/60c6c41ed6477e23ca84ab2b165c493018e8024b))
+
+
+### Fixes
+
+* **lima:** Remove support for Alpine and Oracle Linux ([5f89da5](https://github.com/raas-dev/configent/commit/5f89da5999ad19532fd0dbe5fd7b03a715b5c3d6))
+
 ### [1.151.3](https://github.com/raas-dev/configent/compare/1.151.2...1.151.3) (2025-06-25)
 
 
