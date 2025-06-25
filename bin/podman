@@ -9,7 +9,7 @@
 # shim for running `podman` in lima VM
 
 : "${NAME:="podman"}"
-: "${TEMPLATE:="fedora_rootful"}"
+: "${TEMPLATE:="fedora"}"
 
 install_docker_compose_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
