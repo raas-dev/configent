@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.3](https://github.com/raas-dev/configent/compare/1.152.2...1.152.3) (2025-06-25)
+
+
+### Fixes
+
+* **podman:** add support for podman CLI installation on macOS ([5adde30](https://github.com/raas-dev/configent/commit/5adde30e30dd51c6ff9c3bb5920b343f7681874c))
+
 ### [1.152.2](https://github.com/raas-dev/configent/compare/1.152.1...1.152.2) (2025-06-25)
 
 
