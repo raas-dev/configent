@@ -90,6 +90,12 @@ else
       export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
     fi
   fi
+  if [ -z "$DOCKER_DEFAULT_PLATFORM" ]; then
+    arch="$(uname -m)"
+    if [ "$arch" = 'aarch64' ] || [ "$arch" = 'arm64' ]; then
+      export DOCKER_DEFAULT_PLATFORM="linux/amd64"
+    fi
+  fi
   if [ -x "$HOME/bin/docker" ]; then
     # user scope
     DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
