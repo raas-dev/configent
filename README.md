@@ -34,8 +34,8 @@ Supported operating systems:
 - AlmaLinux 10 and 9
 - Rocky Linux 10 and 9
 - Oracle Linux 9 and 8
-- openSUSE Tumbleweed and Leap (15.6)
-- Arch Linux (rolling; since 2022-07)
+- openSUSE Tumbleweed (rolling) and Leap (15.6)
+- Arch Linux (rolling)
 - Alpine Linux 3.20 and 3.19
 
 Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
