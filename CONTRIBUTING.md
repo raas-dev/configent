@@ -51,10 +51,6 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
 
-- Neovim: Linux / Aarch64 (as of 2025-01)
-  - Any existing `mise` plugin does not install Aarch64 binary
-    - Fix: Install neovim from distro's repo
-
 - Homebrew: Linux / Aarch64  (as of 2025)
   - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Workaround: Use `mise install`
