@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.150.4](https://github.com/raas-dev/configent/compare/1.150.3...1.150.4) (2025-06-25)
+
+
+### Fixes
+
+* **postinstall:** add mise shims to PATH in Azure and Pwsh scripts ([cb89d20](https://github.com/raas-dev/configent/commit/cb89d20c0691883c263efba06652e313ae3f9140))
+
 ### [1.150.3](https://github.com/raas-dev/configent/compare/1.150.2...1.150.3) (2025-06-25)
 
 
