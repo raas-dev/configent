@@ -53,7 +53,7 @@ provision:
   - mode: system
     script: |
       #!/bin/bash
-      sed -i 's/short-name-mode = "enforcing"/short-name-mode = "permissive"/g' /etc/containers/registries.conf
+      sed -i 's/short-name-mode = "enforcing"/short-name-mode = "disabled"/g' /etc/containers/registries.conf
  # - mode: system
  #   script: |
  #     #!/bin/bash
