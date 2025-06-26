@@ -25,7 +25,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   limactl shell "$NAME" ~/configent/bin/nerdctl "$@"
 else
   # shellcheck disable=SC2155  # will not declare separately
-  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "$HOME/bin/nerdctl" ]; then
     export PATH="$HOME/bin:$PATH"
     "$HOME/bin/nerdctl" "$@"

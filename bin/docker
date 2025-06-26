@@ -82,7 +82,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
-  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -z "$DOCKER_HOST" ]; then
     if [ -S "/var/run/docker.sock" ]; then
       export DOCKER_HOST="unix:///var/run/docker.sock" # rootful

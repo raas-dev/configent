@@ -61,7 +61,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
-  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -x "/usr/bin/podman" ]; then
     arch="$(uname -m)"
     if [ "$1" = "compose" ]; then
