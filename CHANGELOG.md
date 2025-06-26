@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.14](https://github.com/raas-dev/configent/compare/1.152.13...1.152.14) (2025-06-26)
+
+
+### Fixes
+
+* **dotfiles:** configure docker/podman envvars for macOS only ([dc6d2cc](https://github.com/raas-dev/configent/commit/dc6d2cc309a7d0ad800a2665e2dc0c665312c9bc))
+
 ### [1.152.13](https://github.com/raas-dev/configent/compare/1.152.12...1.152.13) (2025-06-26)
 
 
