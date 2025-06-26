@@ -22,7 +22,6 @@ GIT_REF="${GIT_REF:-1.152.11}"
 
 export CASKS="${CASKS:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
-export ROOTFUL_DOCKER="${ROOTFUL_DOCKER:-false}"
 
 ################################################################################
 

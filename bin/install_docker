@@ -74,8 +74,14 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | $SUDO gpg --dea
     $SUDO tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 $SUDO apt-get update
 $SUDO apt-get install -y nvidia-container-toolkit
+
+# rootful:
 $SUDO nvidia-ctk runtime configure --runtime=docker
 $SUDO systemctl reload docker
+
+# rootless
+$SUDO nvidia-ctk config --set nvidia-container-cli.no-cgroups --in-place
+systemctl --user reload docker
 
 # gVisor
 # https://gvisor.dev/docs/user_guide/install
@@ -84,6 +90,9 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gviso
 $SUDO apt-get update
 $SUDO apt-get install -y runsc
 
-# rootful install:
+# rootful
 $SUDO runsc install
 $SUDO systemctl reload docker
+
+# rootless
+systemctl --user reload docker

@@ -9,7 +9,7 @@
 # shim for running `nerdctl` in lima VM
 
 : "${NAME:="default"}"
-: "${TEMPLATE:="ubuntu_rootful"}"
+: "${TEMPLATE:="ubuntu"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then

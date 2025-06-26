@@ -31,17 +31,31 @@ ssh:
 
 containerd:
   system: false
-  user: false
+  user: true
 
 provision:
   - mode: system
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  # Add iptables to $PATH for nerdctl
+  # See: https://github.com/containerd/nerdctl/discussions/1536
+  - mode: system
+    script: |
+      #!/bin/sh
+      ln -s /usr/sbin/iptables /usr/local/bin/iptables
+      ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
+  # Intel-on-ARM and ARM-on-Intel
+  # See: https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md
+  - mode: system
+    script: |
+      #!/bin/sh
+      systemctl start containerd
+      nerdctl run --privileged --rm tonistiigi/binfmt:master --install all
   - mode: user
     script: |
       #!/bin/sh
-      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh
 
 probes:
   - script: |
@@ -51,8 +65,8 @@ probes:
         echo >&2 "docker is not installed yet"
         exit 1
       fi
-      if ! timeout 30s bash -c "until pgrep rootlesskit; do sleep 3; done"; then
-        echo >&2 "rootlesskit (used by rootless docker) is not running"
+      if ! timeout 30s bash -c "until pgrep dockerd; do sleep 3; done"; then
+        echo >&2 "dockerd is not running"
         exit 1
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
@@ -61,17 +75,10 @@ probes:
 hostResolver:
   enabled: true
 
-#hostResolver:
-#  enabled: false
-#
-#dns:
-#  - 1.1.1.1
-#  - 1.0.0.1
-
 # https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:
   - lima: user-v2
 
 portForwards:
-  - guestSocket: "/run/user/{{.UID}}/docker.sock"
+  - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"

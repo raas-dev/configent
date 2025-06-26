@@ -9,7 +9,7 @@
 # shim for running `docker-compose` in lima VM
 
 : "${NAME:="default"}"
-: "${TEMPLATE:="ubuntu_rootful"}"
+: "${TEMPLATE:="ubuntu"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # in all cases, guest VM is required to run Docker daemon
