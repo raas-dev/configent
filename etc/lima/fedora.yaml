@@ -50,6 +50,10 @@ provision:
       set -eux -o pipefail
       command -v podman >/dev/null 2>&1 && test -e /etc/lima-podman && exit 0
       dnf -y install --best podman && touch /etc/lima-podman
+  - mode: system
+    script: |
+      #!/bin/bash
+      sed -i 's/short-name-mode = "enforcing"/short-name-mode = "permissive"/g' /etc/containers/registries.conf
  # - mode: system
  #   script: |
  #     #!/bin/bash
