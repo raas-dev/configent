@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.12](https://github.com/raas-dev/configent/compare/1.152.11...1.152.12) (2025-06-26)
+
+
+### Fixes
+
+* **docker:** Rootful and rootless docker on same VM ([cf1e69a](https://github.com/raas-dev/configent/commit/cf1e69a0c4626bce6e896364cd75bb763419dad1))
+
 ### [1.152.11](https://github.com/raas-dev/configent/compare/1.152.10...1.152.11) (2025-06-26)
 
 
