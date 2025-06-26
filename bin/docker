@@ -98,7 +98,7 @@ else
     fi
   fi
   if [ -x "$HOME/bin/docker" ]; then
-    # user-wide docker installation (rootless installer)
+    # user-wide docker installation (https://get.docker.com/rootless)
     DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
@@ -107,7 +107,7 @@ else
     fi
     "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
-    # system-wide docker installation (distribution's packages)
+    # system-wide docker installation (via DEB/RPM packages)
     DOCKER_CLI_PLUGINS_DIR="/usr/libexec/docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
