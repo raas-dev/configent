@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.153.0](https://github.com/raas-dev/configent/compare/1.152.14...1.153.0) (2025-06-26)
+
+
+### Features
+
+* **podman:** Use same VM for all podman setups ([a87d247](https://github.com/raas-dev/configent/commit/a87d24746457015191ab540be7793d88391284e1))
+
 ### [1.152.14](https://github.com/raas-dev/configent/compare/1.152.13...1.152.14) (2025-06-26)
 
 
