@@ -24,7 +24,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # pass arguments to this exact same script on the guest VM
   limactl shell "$NAME" ~/configent/bin/nerdctl "$@"
 else
-  # shellcheck disable=SC2155  # will not declare separately
+  if [ -z "$CONTAINERD_ADDRESS" ]; then
+    if [ -S "$XDG_RUNTIME_DIR/containerd/containerd.sock" ]; then
+      export CONTAINERD_ADDRESS="$XDG_RUNTIME_DIR/containerd/containerd.sock"
+    elif [ -S "/run/containerd/containerd.sock" ]; then
+      export CONTAINERD_ADDRESS="/run/containerd/containerd.sock"
+    fi
+  fi
   if [ -x "$HOME/bin/nerdctl" ]; then
     export PATH="$HOME/bin:$PATH"
     "$HOME/bin/nerdctl" "$@"
