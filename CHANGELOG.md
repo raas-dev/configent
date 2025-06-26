@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.153.2](https://github.com/raas-dev/configent/compare/1.153.1...1.153.2) (2025-06-26)
+
+
+### Fixes
+
+* **bin:** set CONTAINERD_ADDRESS if not already defined ([dd712d6](https://github.com/raas-dev/configent/commit/dd712d61c846a5e3ad55f4a9891e23ac47308bb4))
+
 ### [1.153.1](https://github.com/raas-dev/configent/compare/1.153.0...1.153.1) (2025-06-26)
 
 
