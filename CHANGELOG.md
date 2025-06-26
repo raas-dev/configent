@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.153.1](https://github.com/raas-dev/configent/compare/1.153.0...1.153.1) (2025-06-26)
+
+
+### Fixes
+
+* **bin:** prepend $HOME/bin to PATH for docker and nerdctl scripts ([44ac286](https://github.com/raas-dev/configent/commit/44ac2866e2d29a5ac3f267ecb8e0432e048e76ef))
+
 ## [1.153.0](https://github.com/raas-dev/configent/compare/1.152.14...1.153.0) (2025-06-26)
 
 
