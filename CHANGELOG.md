@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.13](https://github.com/raas-dev/configent/compare/1.152.12...1.152.13) (2025-06-26)
+
+
+### Fixes
+
+* **provision:** run install.sh script in the background with curl command ([1a98265](https://github.com/raas-dev/configent/commit/1a98265f4e6c27177020126fab3a0254b861f9d7))
+
 ### [1.152.12](https://github.com/raas-dev/configent/compare/1.152.11...1.152.12) (2025-06-26)
 
 
