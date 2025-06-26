@@ -81,13 +81,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl shell "$NAME" ~/configent/bin/docker "$@"
   fi
 else
+  export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
   # shellcheck disable=SC2155  # will not declare separately
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
   if [ -z "$DOCKER_HOST" ]; then
-    if [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
-      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
-    elif [ -S "/var/run/docker.sock" ]; then
+    if [ -S "/var/run/docker.sock" ]; then
       export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
+    elif [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
+      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
     fi
   fi
   if [ -z "$DOCKER_DEFAULT_PLATFORM" ]; then
@@ -97,7 +98,7 @@ else
     fi
   fi
   if [ -x "$HOME/bin/docker" ]; then
-    # user scope
+    # user-wide docker installation (rootless installer)
     DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
@@ -106,7 +107,7 @@ else
     fi
     "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
-    # system scope
+    # system-wide docker installation (distribution's packages)
     DOCKER_CLI_PLUGINS_DIR="/usr/libexec/docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin

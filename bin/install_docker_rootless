@@ -39,24 +39,9 @@ $SUDO apt-get install -y apt-transport-https ca-certificates
 # gpg
 $SUDO apt-get install -y gnupg
 
-# AppArmor for rootless Docker (required on Ubuntu)
-filename="$(echo "$HOME/bin/rootlesskit" | sed -e s@^/@@ -e s@/@.@g)"
-cat <<EOF >"$HOME/$filename"
-abi <abi/4.0>,
-include <tunables/global>
-
-"$HOME/bin/rootlesskit" flags=(unconfined) {
-  userns,
-
-  include if exists <local/$filename>
-}
-EOF
-$SUDO mv "$HOME/$filename" "/etc/apparmor.d/$filename"
-$SUDO systemctl restart apparmor.service
-
 # Install Docker
 $SUDO apt-get install -y dbus-user-session fuse3 iptables uidmap
-if ! command -v docker >/dev/null; then
+if [ ! -x "/usr/bin/docker" ]; then
   curl -fsSL https://get.docker.com | $SUDO sh
 
   # Start dockerd now and on boot
@@ -66,9 +51,12 @@ if ! command -v docker >/dev/null; then
   # https://github.com/tonistiigi/binfmt
   $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
-  # Setup Docker rootless mode
-  systemctl --user start dbus
-  dockerd-rootless-setuptool.sh install
+  # Setup rootless mode
+  $SUDO apt-get install -y docker-ce-rootless-extras
+  dockerd-rootless-setuptool.sh install --force
+  systemctl --user enable --now dbus
+  systemctl --user enable --now docker
+  $SUDO loginctl enable-linger "$USER"
 fi
 
 # NVIDIA Container Toolkit
