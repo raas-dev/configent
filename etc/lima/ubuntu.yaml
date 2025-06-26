@@ -79,6 +79,7 @@ hostResolver:
 networks:
   - lima: user-v2
 
+# rootful
 portForwards:
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
