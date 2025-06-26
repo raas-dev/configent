@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.152.11](https://github.com/raas-dev/configent/compare/1.152.10...1.152.11) (2025-06-26)
+
+
+### Fixes
+
+* **docker:** prioritize rootful docker.sock over rootless in env setup ([878650f](https://github.com/raas-dev/configent/commit/878650f15f3bd41ba46a57e80832115f0f1f654d))
+
 ### [1.152.10](https://github.com/raas-dev/configent/compare/1.152.9...1.152.10) (2025-06-25)
 
 
