@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.42"
+version = "2.27.43"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.42.pkg" = "sha256:bd25f670a3e95f5881c773d854366aa6d599d16546a973c9b9a6592667056af9"
+"AWSCLIV2-2.27.43.pkg" = "sha256:919635e04ea6b8420e5798f24d590ffd6aed30a37103b6a46115aa4aab50b25f"
 
 [tools.bun]
 version = "1.2.17"
@@ -256,7 +256,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.34"
+version = "0.2.35"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
