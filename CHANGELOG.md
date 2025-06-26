@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.153.3](https://github.com/raas-dev/configent/compare/1.153.2...1.153.3) (2025-06-26)
+
+
+### Fixes
+
+* **lima:** disable short-name-mode in fedora.yaml provisioning script ([00bd03a](https://github.com/raas-dev/configent/commit/00bd03a5f7cbed7ecc90c87c0b08b7ffa12865ff))
+* **lima:** set short-name-mode to permissive in registries.conf system script ([53f8344](https://github.com/raas-dev/configent/commit/53f834429f1d0a7f267408797533150f7f7da331))
+
 ### [1.153.2](https://github.com/raas-dev/configent/compare/1.153.1...1.153.2) (2025-06-26)
 
 
