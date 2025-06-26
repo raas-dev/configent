@@ -262,7 +262,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
-### docker #####################################################################
+### docker/podman CLIs on macOS ################################################
 
 os="$(uname -s)"
 if [ "$os" = 'Darwin' ]; then
@@ -270,12 +270,6 @@ if [ "$os" = 'Darwin' ]; then
   export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
   arch="$(uname -m)"
   [ "$arch" = 'arm64' ] && export DOCKER_DEFAULT_PLATFORM="linux/amd64"
-elif [ "$os" = 'Linux' ]; then
-  if [ -S "/var/run/docker.sock" ]; then
-    export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
-  elif [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
-    export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
-  fi
 fi
 
 ### ollama #####################################################################
