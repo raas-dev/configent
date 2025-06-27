@@ -724,7 +724,7 @@ n() {
     ;;
   esac
   # shellcheck disable=SC2086   # command has to be in quotes
-  nixd nix-shell --packages "$packages" --command \"$command\"
+  nixd nix-shell --quiet --packages "$packages" --command \"$command\"
 }
 
 # https://nixery.dev/
