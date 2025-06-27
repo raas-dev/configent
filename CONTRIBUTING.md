@@ -55,6 +55,10 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
   - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
     - Workaround: Use `mise install`
 
+- Lima: Aarch Linux / Aarch64 (as of 2025-06)
+  - [No up-to-date Aarch64 image](https://github.com/lima-vm/lima/issues/3049)
+    - Workaround: Try [this](https://github.com/mschirrmeister/archlinux-lima)
+
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
   - [ISSUE]
