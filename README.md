@@ -22,11 +22,9 @@ A few features:
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Ask AI (`a <question>`) or assistant (`_`) to run the best prompt for a task.
 
-Works both on AArch64 (including Apple Silicon) and on x86-64.
+Works on macOS Sequoia (15), Sonoma (14) and Ventura (13) on Apple Silicon.
 
-Supported operating systems:
-
-- macOS Sequoia (15), Sonoma (14) and Ventura (13)
+Supported Linux distributions (both aarch64 and x86-64):
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
 - Debian Linux 12 (Bookworm) and 11 (Bullseye)
 - Fedora Linux 42 and 41
