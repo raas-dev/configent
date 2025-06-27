@@ -31,7 +31,7 @@ Supported Linux distributions (both AArch64 and x86-64):
 - CentOS Stream 10 and 9
 - AlmaLinux 10 and 9
 - Rocky Linux 10 and 9
-- openSUSE Tumbleweed (rolling) and Leap (15.6)
+- openSUSE Tumbleweed (rolling) and 15.6 (Leap)
 - Arch Linux (rolling)
 
 Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
