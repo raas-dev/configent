@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.154.0](https://github.com/raas-dev/configent/compare/1.153.3...1.154.0) (2025-06-27)
+
+
+### Features
+
+* **ai:** add Gemini CLI ([a7ff366](https://github.com/raas-dev/configent/commit/a7ff366e6d25ef9228c316f92d398ded5c9b994a))
+
+
+### Fixes
+
+* **dotfiles:** add --quiet flag to nix-shell command in alias ([ee566f6](https://github.com/raas-dev/configent/commit/ee566f6be41eea7b14116db7a27571ee6d46c4be))
+
 ### [1.153.3](https://github.com/raas-dev/configent/compare/1.153.2...1.153.3) (2025-06-26)
 
 
