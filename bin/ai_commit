@@ -31,7 +31,11 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-commit_message="$(lumen draft)"
+if [ -n "$*" ]; then
+  commit_message="$(lumen draft --context "$*")"
+else
+  commit_message="$(lumen draft)"
+fi
 
 printf "%s$commit_message" "$white"
 printf "\n"
