@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.44"
+version = "2.27.45"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.44.pkg" = "sha256:a3442745a0849ae966cdf2d6a2433bba204d189704502a8a92b68d443ec92bfc"
+"AWSCLIV2-2.27.45.pkg" = "sha256:2ff4c858b1208a239263ad5f68442c80f3726db811156510f9f54f12906431be"
 
 [tools.bun]
 version = "1.2.17"
@@ -167,11 +167,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.62.0"
+version = "0.63.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.62.0-darwin_arm64.tar.gz" = "sha256:7ea045ffec6d5461a983e299eccfaa66324373c6e3d1894568f09e47fa7560c1"
+"fzf-0.63.0-darwin_arm64.tar.gz" = "sha256:2f3a1ac15ee28df1e23112bcc3eacf2d2488d1d2d0477159a4c3b21338b4ea91"
 
 [tools.gcloud]
 version = "510.0.0"
@@ -303,11 +303,11 @@ backend = "aqua:koalaman/shellcheck"
 "shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
 
 [tools.slsa-verifier]
-version = "2.7.0"
+version = "2.7.1"
 backend = "ubi:slsa-framework/slsa-verifier"
 
 [tools.slsa-verifier.checksums]
-slsa-verifier-macos-aarch64 = "sha256:84d9122ce12e0c79080844285fd5c4976407ed3463e434a1b21b0979c46b1e55"
+slsa-verifier-macos-aarch64 = "sha256:39abfcf5f1d690c3e889ce3d2d6a8b87711424d83368511868d414e8f8bcb05c"
 
 [tools.tmux]
 version = "3.5a"
@@ -321,8 +321,8 @@ backend = "aqua:aquasecurity/trivy"
 "trivy_0.63.0_macOS-ARM64.tar.gz" = "sha256:784f687759c647ffad54e4d7f55ed953647e4fff5ea1e38dbaf877a135254972"
 
 [tools.uv]
-version = "0.7.15"
+version = "0.7.16"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:7a20f3d33cbbc75683d66e0562d4bdbd702ca656d7dc1b7be3c592de6a6517b9"
+"uv-aarch64-apple-darwin.tar.gz" = "sha256:a157919a2a615fac5de0fcef5120a63de7e6582fb6e0ae4428238af347ed1054"
