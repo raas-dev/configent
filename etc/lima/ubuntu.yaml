@@ -79,7 +79,10 @@ hostResolver:
 networks:
   - lima: user-v2
 
-# rootful
 portForwards:
+  # rootful docker
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
+  # user containerd
+  - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
+    hostSocket: "{{.Dir}}/sock/buildkitd.sock"

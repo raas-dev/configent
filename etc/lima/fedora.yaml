@@ -94,7 +94,10 @@ hostResolver:
 networks:
   - lima: user-v2
 
-# rootless
 portForwards:
+  # user podman
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"
+  # rootful podman
+  #- guestSocket: "/run/podman/podman.sock"
+  #  hostSocket: "{{.Dir}}/sock/podman.sock"

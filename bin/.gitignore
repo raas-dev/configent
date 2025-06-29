@@ -2,6 +2,7 @@
 
 !.gitignore
 !ai_commit
+!buildctl
 !docker
 !docker-compose
 !install_*

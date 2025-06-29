@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# shim for running `buildctl` in lima VM
+
+: "${NAME:="default"}"
+: "${TEMPLATE:="ubuntu"}"
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  if ! command -v limactl >/dev/null; then
+    echo "Error: limactl not found on macOS, cannot start Linux VM for buildkit."
+    exit 127
+  fi
+  # start VM if not running
+  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
+    limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+      limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+  fi
+  # pass arguments to this exact same script on the guest VM
+  limactl shell "$NAME" ~/configent/bin/buildctl "$@"
+else
+  if [ -z "$BUILDKIT_HOST" ]; then
+    if [ -S "$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock" ]; then
+      export BUILDKIT_HOST="unix://$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock"
+    elif [ -S "/run/buildkit/buildkitd.sock" ]; then
+      export BUILDKIT_HOST="unix:///run/buildkit/buildkitd.sock"
+    fi
+  fi
+  if [ -x "$HOME/bin/buildctl" ]; then
+    export PATH="$HOME/bin:$PATH"
+    "$HOME/bin/buildctl" "$@"
+  elif [ -x "/usr/local/bin/buildctl" ]; then
+    "/usr/local/bin/buildctl" "$@"
+  else
+    echo "Error: buildctl not found in this Linux system."
+    exit 127
+  fi
+fi
