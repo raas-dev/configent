@@ -135,17 +135,17 @@ This avoids getting rate limited by GitHub on parallel installation.
 Also see [mise for using and locking](https://mise.jdx.dev/configuration.html)
 project specific versions.
 
-Mise is always preferred over Homebrew. Use mise
-[backends](https://mise.jdx.dev/dev-tools/backends/) and
-[plugins](https://mise.jdx.dev/registry.html) to add more tools.
+Mise is always preferred over Homebrew.
 
-On macOS [Homebrew](https://brew.sh) is used to install
-**absolutely minimum** build-time requirements.
+Use mise [backends](https://mise.jdx.dev/dev-tools/backends/) and
+[plugins](https://mise.jdx.dev/registry.html) to add more tools.
+Use [Homebrew](https://brew.sh) to install **absolutely minimum** apps and
+build-time requirements.
+
+On Linux distros Homebrew is installed in `/home/linuxbrew`.
+If `sudo` is not possible, then it is installed user's home.
 
 ⚠️: Homebrew on Linux [does not have tier 1](https://docs.brew.sh/Support-Tiers#linux) AArch64 support.
-
-On Linux distros Homebrew is installed `/home/linuxbrew`.
-If `sudo` is not possible, then it is installed user's home.
 
 ### setup_ide
 
