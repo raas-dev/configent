@@ -69,20 +69,6 @@ else
       export PODMAN_COMPOSE_WARNING_LOGS=false
       shift
       "/usr/bin/podman" compose "$@"
-    elif [ "$1" = "build" ]; then
-      shift
-      if [ "$arch" = "aarch64" ]; then
-        "/usr/bin/podman" build --platform linux/amd64 "$@"
-      else
-        "/usr/bin/podman" build "$@"
-      fi
-    elif [ "$1" = "run" ]; then
-      shift
-      if [ "$arch" = "aarch64" ]; then
-        "/usr/bin/podman" run --platform linux/amd64 "$@"
-      else
-        "/usr/bin/podman" run "$@"
-      fi
     else
       "/usr/bin/podman" "$@"
     fi
