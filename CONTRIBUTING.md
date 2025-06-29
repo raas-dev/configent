@@ -14,14 +14,14 @@ a pull request.
 ## Testing
 
 See `dotfiles/.aliases` for `v-*` for quickly creating and starting
-[Lima](https://github.com/lima-vm/lima) VMs for various Linux distros.
+[Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-You may willingly run the installer from the latest commit by passing `GIT_REF`:
+For development, run the installer from the latest commit by passing `GIT_REF`:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
-For development purposes, once the VM has been started, host's `$HOME/configent`
-is mounted read-only in the VM which helps in testing changes in the scripts.
+Also, once the VM has been started, host's `$HOME/configent` is mounted
+read-only in the VM. This helps in testing non-commited changes to the scripts.
 
 ## Pre-commit
 
