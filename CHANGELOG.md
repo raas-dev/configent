@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.154.1](https://github.com/raas-dev/configent/compare/1.154.0...1.154.1) (2025-06-29)
+
+
+### Fixes
+
+* **bin:** include command arguments as context for commit message drafting ([8b1a763](https://github.com/raas-dev/configent/commit/8b1a763e1f20ae2d4a54c84bef925e96eb16589f))
+* **docker:** remove default platform override for arm64 architectures ([1ebb0f0](https://github.com/raas-dev/configent/commit/1ebb0f050d6933ac931e6a72c9596e499c5c293e))
+
 ## [1.154.0](https://github.com/raas-dev/configent/compare/1.153.3...1.154.0) (2025-06-27)
 
 
