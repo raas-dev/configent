@@ -55,6 +55,9 @@ $SUDO zypper install -y bash
 # Zsh
 $SUDO zypper install -y zsh
 
+# Vim
+$SUDO zypper install -y vim
+
 # Neovim
 $SUDO zypper install -y neovim
 

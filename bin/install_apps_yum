@@ -63,6 +63,9 @@ $SUDO dnf install -y bash
 # Zsh
 $SUDO dnf install -y zsh
 
+# Vim
+$SUDO dnf install -y vim
+
 # Neovim
 $SUDO dnf install -y neovim
 
