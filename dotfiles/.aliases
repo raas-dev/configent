@@ -174,21 +174,21 @@ function v-start() {
       "${set_args[@]}"
 }
 
-alias v-dev='v-start default ubuntu --set=.env.GIT_REF=\"main\"; limactl shell default'
-alias v-ubuntu='v-start default ubuntu; limactl shell default'
+alias v-dev='v-start default ubuntu --set=.env.GIT_REF=\"main\" ; limactl shell default'
+alias v-ubuntu='v-start default ubuntu ; limactl shell default'
 
 alias v-debian='v-start debian debian ; export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ; command -v kubectl >/dev/null && kubectl get nodes'
 
-alias v-fedora='v-start podman fedora; limactl shell podman'
-alias v-centos='v-start centos centos; limactl shell centos'
+alias v-fedora='v-start podman fedora ; limactl shell podman'
+alias v-centos='v-start centos centos ; limactl shell centos'
 
-alias v-alma='v-start alma almalinux; limactl shell alma'
-alias v-rocky='v-start rocky almalinux; limactl shell rocky'
+alias v-alma='v-start alma almalinux ; limactl shell alma'
+alias v-rocky='v-start rocky almalinux ; limactl shell rocky'
 
-alias v-suse='v-start suse opensuse; limactl shell suse'
-alias v-tumbleweed='v-start tumbleweed opensuse-tumbleweed; limactl shell tumbleweed'
+alias v-suse='v-start suse opensuse ; limactl shell suse'
+alias v-tumbleweed='v-start tumbleweed opensuse-tumbleweed ; limactl shell tumbleweed'
 
-alias v-arch='v-start arch archlinux; limactl shell arch'
+alias v-arch='v-start arch archlinux ; limactl shell arch'
 
 ### docker #####################################################################
 
