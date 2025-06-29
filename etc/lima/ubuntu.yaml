@@ -86,3 +86,7 @@ portForwards:
   # user containerd
   - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
     hostSocket: "{{.Dir}}/sock/buildkitd.sock"
+
+rosetta:
+  enabled: true
+  binfmt: true

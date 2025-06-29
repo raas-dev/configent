@@ -101,3 +101,8 @@ portForwards:
   # rootful podman
   #- guestSocket: "/run/podman/podman.sock"
   #  hostSocket: "{{.Dir}}/sock/podman.sock"
+
+# disabled as of 2025-06 due to https://github.com/lima-vm/lima/issues/3592
+#rosetta:
+#  enabled: true
+#  binfmt: true
