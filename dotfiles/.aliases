@@ -150,6 +150,8 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 
+alias vm4dev='limactl start --name default ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" --set=".env.GIT_REF = \"main\""'
+
 alias vm4ubuntu='limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
 alias vm4debian='limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"";
   export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
