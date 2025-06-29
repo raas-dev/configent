@@ -152,7 +152,7 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 function v-start() {
   if [ -z "$1" ]; then
-    echo "Usage: v-open <name> <template> [--set <key>=<value> ...]"
+    echo "Usage: v-start <name> <template> [--set=.env.NAME=\\\"value\\\" ...]"
     return 1
   fi
 
