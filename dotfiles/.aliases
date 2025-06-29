@@ -150,23 +150,45 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 
-alias vm4dev='limactl start --name default ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" --set=".env.GIT_REF = \"main\""'
+function v-start() {
+  if [ -z "$1" ]; then
+    echo "Usage: v-open <name> <template> [--set <key>=<value> ...]"
+    return 1
+  fi
 
-alias vm4ubuntu='limactl start --name ubuntu ~/.config/configent/lima/ubuntu.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-alias vm4debian='limactl start --name debian ~/.config/configent/lima/debian.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"";
-  export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ;
-  command -v kubectl >/dev/null && kubectl get nodes'
+  local name="$1"
+  local template="$2"
+  local set_args=()
+  shift 2
+  while [ "$#" -gt 0 ]; do
+    set_args+=("$1")
+    shift
+  done
 
-alias vm4fedora='limactl start --name fedora ~/.config/configent/lima/fedora.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-alias vm4centos='limactl start --name centos ~/.config/configent/lima/centos.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+  limactl start --name "$name" --tty=false \
+    "$HOME/.config/configent/lima/$template.yaml" \
+    --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+    "${set_args[@]}" ||
+    limactl start --name "$name" --tty=false \
+      --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+      "${set_args[@]}"
+}
 
-alias vm4alma='limactl start --name almalinux ~/.config/configent/lima/almalinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-alias vm4rocky='limactl start --name rocky ~/.config/configent/lima/rocky.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias v-dev='v-start default ubuntu --set=.env.GIT_REF=\"main\"; limactl shell default'
+alias v-ubuntu='v-start default ubuntu; limactl shell default'
 
-alias vm4suse='limactl start --name opensuse ~/.config/configent/lima/opensuse.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
-alias vm4tumbleweed='limactl start --name tumbleweed ~/.config/configent/lima/opensuse-tumbleweed.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias v-debian='v-start debian debian ; export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ; command -v kubectl >/dev/null && kubectl get nodes'
 
-alias vm4arch='limactl start --name archlinux ~/.config/configent/lima/archlinux.yaml --tty=false --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""'
+alias v-fedora='v-start podman fedora; limactl shell podman'
+alias v-centos='v-start centos centos; limactl shell centos'
+
+alias v-alma='v-start alma almalinux; limactl shell alma'
+alias v-rocky='v-start rocky almalinux; limactl shell rocky'
+
+alias v-suse='v-start suse opensuse; limactl shell suse'
+alias v-tumbleweed='v-start tumbleweed opensuse-tumbleweed; limactl shell tumbleweed'
+
+alias v-arch='v-start arch archlinux; limactl shell arch'
 
 ### docker #####################################################################
 
