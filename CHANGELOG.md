@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.154.2](https://github.com/raas-dev/configent/compare/1.154.1...1.154.2) (2025-06-29)
+
+
+### Fixes
+
+* **gitconfig:** fix alias function syntax for ai_commit wrapper ([b15b2ea](https://github.com/raas-dev/configent/commit/b15b2ea045fcc706e3bc61f64d350ddeeb5659a6))
+* **install:** add vim installation to all package managers ([5cbc94d](https://github.com/raas-dev/configent/commit/5cbc94dd0d0b5e1f0081f553b271ff8e74c76e24))
+* **podman:** remove build and run command platform overrides for aarch64 ([14d11f6](https://github.com/raas-dev/configent/commit/14d11f60d34cc1612c35ed79fb70eb6058388674))
+
 ### [1.154.1](https://github.com/raas-dev/configent/compare/1.154.0...1.154.1) (2025-06-29)
 
 
