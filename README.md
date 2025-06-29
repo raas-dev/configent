@@ -310,9 +310,9 @@ host. See `.aliases` for such examples, like ad-hoc security scanners.
 ## ⚙️ VMs
 
 See `dotfiles/.aliases` for `v-*` for quickly creating and starting
-[Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
+[Lima](https://github.com/lima-vm/lima) VMs for various Linux distros.
 
-Use alias `v` as a shortcut for stopping and deleting Lima VMs via `limactl`.
+See alias `v` for quickly shelling into, stopping and deleting Lima VMs.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by pulling and running `install.sh` from this repository's main branch.
@@ -320,7 +320,7 @@ on boot by pulling and running `install.sh` from this repository's main branch.
 ⚠️: Regardless of pulling main, the version is hardcoded in `install.sh`
 and is only updated by `release.sh`.
 
-You may willingly live on the edge by explicitly passing `GIT_REF`:
+You may willingly run the installer from the latest commit by passing `GIT_REF`:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
