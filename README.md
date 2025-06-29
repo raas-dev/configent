@@ -139,7 +139,7 @@ Mise is always preferred over Homebrew.
 
 Use mise [backends](https://mise.jdx.dev/dev-tools/backends/) and
 [plugins](https://mise.jdx.dev/registry.html) to add more tools.
-Use [Homebrew](https://brew.sh) to install **absolutely minimum** apps and
+Use [Homebrew](https://brew.sh) to install **absolutely minimum**
 build-time requirements.
 
 On Linux distros Homebrew is installed in `/home/linuxbrew`.
