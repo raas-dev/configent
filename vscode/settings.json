@@ -113,7 +113,7 @@
   "editor.largeFileOptimizations": false,
   "editor.letterSpacing": -0.75,
   "editor.lineHeight": 14,
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": true,
   "editor.minimap.maxColumn": 60,

@@ -139,13 +139,14 @@ Mise is always preferred over Homebrew. Use mise
 [backends](https://mise.jdx.dev/dev-tools/backends/) and
 [plugins](https://mise.jdx.dev/registry.html) to add more tools.
 
-On macOS, [Homebrew](https://brew.sh) is used to install **absolutely minimum**
-build-time requirements and apps.
+On macOS [Homebrew](https://brew.sh) is used to install
+**absolutely minimum** build-time requirements.
 
-⚠️: Homebrew may not be available on Linux at all as it
-[does not work on ARM](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported).
-On Linux distros (x86-64) it is installed `/home/linuxbrew`. If `sudo` is not
-possible, then it is installed user's home.
+On Linux distros Homebrew is installed `/home/linuxbrew`.
+If `sudo` is not possible, then it is installed user's home.
+
+⚠️: Homebrew on Linux does not have [Tier 1](https://docs.brew.sh/Support-Tiers#linuxs) ARM64 support.
+
 
 ### setup_ide
 

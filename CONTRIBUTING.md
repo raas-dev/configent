@@ -7,7 +7,7 @@ a pull request.
 
 1. Do not use anything in installation scripts that is not POSIX compatible.
 3. The app **installed** must work on 95% of the Linux distros listed in README.
-3. Use `mise` plugins or distros' repos. Do minimum Homebrew and only on macOS.
+3. Use `mise` plugins or distros' repos. Install absolute minimum from Homebrew.
 4. The app must work on AArch64 Linux as all Macs default to AArch64 since 2023.
 5. No use to install the app if can use it via an alias to `uvx`, `bunx` or `n`.
 
@@ -50,10 +50,6 @@ In addition, Semgrep and Checkov support inline ignores (as comments in files).
 SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
-
-- Homebrew: Linux / AArch64  (as of 2025)
-  - [Not supported](https://docs.brew.sh/Homebrew-on-Linux#arm-unsupported)
-    - Workaround: Use `mise install`
 
 - Lima: Arch Linux / AArch64 (as of 2025-06)
   - [No up-to-date AArch64 image](https://github.com/lima-vm/lima/issues/3049)
