@@ -145,7 +145,7 @@ build-time requirements.
 On Linux distros Homebrew is installed in `/home/linuxbrew`.
 If `sudo` is not possible, then it is installed user's home.
 
-⚠️: Homebrew on Linux [is Tier 2 on AArch64](https://docs.brew.sh/Support-Tiers#linux). You are unable to install binary packages (bottles).
+⚠️: Homebrew on Linux [is Tier 2 on AArch64](https://docs.brew.sh/Support-Tiers#linux). You are unable to install binary packages ("bottles").
 
 ### setup_ide
 
