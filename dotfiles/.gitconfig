@@ -10,7 +10,7 @@
   bd = branch --delete --force
   bda = !"git branch --merged | grep -v '\\*' | xargs -n 1 git branch --delete"
   bm = branch --move --force
-  c = "!ai_commit"
+  c = !"f() { ai_commit \"$*\"; }; f"
   ca = !"git add --all && git c"
   cam = !"git add --all && git commit --amend --no-edit"
   co = checkout
