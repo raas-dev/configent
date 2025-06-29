@@ -396,11 +396,11 @@ _aichat_build_tools() {
   [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
   (
     cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-      if [ -n "$(git status --porcelain)" ]; then
-        argc build@tool
+      if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        if [ -n "$(git status --porcelain)" ]; then
+          argc build@tool
+        fi
       fi
-    fi
   )
 }
 
@@ -438,19 +438,19 @@ _aichat_build_agents() {
   [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
   (
     cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-      if [ -n "$(git status --porcelain)" ]; then
-        if [ -n "$agent" ]; then
-          argc build@agent "$agent"
-          if [ -n "$context" ]; then
-            ctx_path="$AICHAT_CONFIG_DIR/agents/$agent/sessions/$context.yaml"
-            [ -e "$ctx_path" ] && mv -fv "$ctx_path" "$ctx_path.old"
+      if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        if [ -n "$(git status --porcelain)" ]; then
+          if [ -n "$agent" ]; then
+            argc build@agent "$agent"
+            if [ -n "$context" ]; then
+              ctx_path="$AICHAT_CONFIG_DIR/agents/$agent/sessions/$context.yaml"
+              [ -e "$ctx_path" ] && mv -fv "$ctx_path" "$ctx_path.old"
+            fi
+          else
+            argc build@agent
           fi
-        else
-          argc build@agent
         fi
       fi
-    fi
   )
 }
 
