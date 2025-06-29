@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.155.0](https://github.com/raas-dev/configent/compare/1.154.2...1.155.0) (2025-06-29)
+
+
+### Features
+
+* **buildctl:** add buildctl shim and lima VM config for buildkit integration ([0817fd9](https://github.com/raas-dev/configent/commit/0817fd97976666288828eeec5ed6b186f6477eee))
+
 ### [1.154.2](https://github.com/raas-dev/configent/compare/1.154.1...1.154.2) (2025-06-29)
 
 
