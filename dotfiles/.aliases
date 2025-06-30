@@ -150,7 +150,7 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 
-function vup() {
+vup() {
   if [ -z "$1" ]; then
     echo "Usage: vup <template_name> [lima_args]"
     return 1
@@ -184,7 +184,7 @@ function vup() {
 alias v-default='vup ubuntu --name=default --set=.env.GIT_REF=\"main\"'
 alias v-podman='vup fedora --name=podman --set=.env.GIT_REF=\"main\"'
 
-function vdown() {
+vdown() {
   if [ -z "$1" ]; then
     echo "Usage: vdown <vm_name> [lima_flags]"
     return 1
