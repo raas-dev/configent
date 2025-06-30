@@ -161,11 +161,12 @@ v() {
   if [ -n "$1" ]; then
     local template="$1"
     shift
+    local vm_name="$template"
   else
     local template="ubuntu"
+    local vm_name="default"
   fi
 
-  local vm_name="$template"
   for arg in "$@"; do
     if [[ "$arg" == "--name="* ]]; then
       vm_name="${arg#--name=}"
@@ -186,7 +187,7 @@ v() {
   up | start)
     if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
-        --tty=false \
+        --name "$vm_name" --tty=false \
         "${os_args[@]}" \
         --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
         "$@" ||
