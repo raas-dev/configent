@@ -150,44 +150,49 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 
-function v-start() {
+function vup() {
   if [ -z "$1" ]; then
-    echo "Usage: v-start <name> <template> [--set=.env.NAME=\\\"value\\\" ...]"
+    echo "Usage: vup <template_name> [lima_args]"
     return 1
   fi
+  local template="$1"
+  shift
 
-  local name="$1"
-  local template="$2"
-  local set_args=()
-  shift 2
-  while [ "$#" -gt 0 ]; do
-    set_args+=("$1")
-    shift
-  done
-
-  limactl start --name "$name" --tty=false \
-    "$HOME/.config/configent/lima/$template.yaml" \
+  limactl start --tty=false "$HOME/.config/configent/lima/$template.yaml" \
     --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-    "${set_args[@]}" ||
-    limactl start --name "$name" --tty=false \
+    "$@" ||
+    limactl start --tty=false \
       --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-      "${set_args[@]}"
+      "$@"
+
+  local vm_name="$template"
+  for arg in "$@"; do
+    if [[ "$arg" == "--name="* ]]; then
+      vm_name="${arg#--name=}"
+      break
+    elif [[ "$arg" == "--name" ]]; then
+      shift
+      vm_name="$1"
+      break
+    fi
+  done
+  limactl shell "$vm_name"
 }
 
-alias v-ubuntu='v-start default ubuntu --set=.env.GIT_REF=\"main\" ; limactl shell default'
+alias v-default='vup ubuntu --name=default --set=.env.GIT_REF=\"main\"'
+alias v-podman='vup fedora --name podman --set=.env.GIT_REF=\"main\"'
 
-alias v-fedora='v-start podman fedora --set=.env.GIT_REF=\"main\" ; limactl shell podman'
+function vdown() {
+  if [ -z "$1" ]; then
+    echo "Usage: vdown <vm_name> [lima_flags]"
+    return 1
+  fi
+  local name="$1"
+  shift
 
-alias v-debian='v-start debian debian ; export KUBECONFIG=~/.lima/debian/kubeconfig.yaml ; command -v kubectl >/dev/null && kubectl get nodes'
-
-alias v-centos='v-start centos centos ; limactl shell centos'
-alias v-alma='v-start alma almalinux ; limactl shell alma'
-alias v-rocky='v-start rocky almalinux ; limactl shell rocky'
-
-alias v-suse='v-start suse opensuse ; limactl shell suse'
-alias v-tumbleweed='v-start tumbleweed opensuse-tumbleweed ; limactl shell tumbleweed'
-
-alias v-arch='v-start arch archlinux ; limactl shell arch'
+  limactl stop "$name" "$@"
+  limactl delete "$name" "$@"
+}
 
 ### docker #####################################################################
 
