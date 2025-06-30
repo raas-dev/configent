@@ -25,7 +25,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 
 ### Symlink configuration ######################################################
 
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   user_path="$HOME/Library/Application Support/$APP_NAME/User"
   backup_path="$this_path/../.backup/Library/Application Support/$APP_NAME/User"
 else
@@ -52,7 +52,7 @@ fi
 
 ### Register vscode:// URL scheme on macOS #####################################
 
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if command -v duti >/dev/null; then
     app_bundle_id="$(osascript -e "id of application \"$APP_NAME\"")"
     duti -s "$app_bundle_id" vscode
