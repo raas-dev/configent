@@ -158,7 +158,8 @@ function vup() {
   local template="$1"
   shift
 
-  limactl start --tty=false "$HOME/.config/configent/lima/$template.yaml" \
+  LIMA_TEMPLATES_PATH="$HOME/.config/configent/lima" \
+  limactl start --tty=false "template://$template" \
     --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
     "$@" ||
     limactl start --tty=false \
