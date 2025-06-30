@@ -134,7 +134,7 @@ alias r='exec $SHELL'
 alias s='rg --smart-case --no-ignore --hidden --glob "!.git/" --fixed-strings'
 alias t='logs'
 alias u='diskonaut'
-alias v='limactl'
+# v is for limactl wrapper, see v()
 alias w='which -a'
 alias x='pkill -i -f'
 alias y='tldr'
@@ -150,13 +150,21 @@ command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
 ### Lima VMs ###################################################################
 
-vup() {
-  if [ -z "$1" ]; then
-    echo "Usage: vup <template_name> [lima_args]"
-    return 1
+v() {
+  if [ -n "$1" ]; then
+    local command="$1"
+    shift
+  else
+    local command="help"
   fi
-  local template="$1"
-  shift
+
+  if [ -n "$1" ]; then
+    local template="$1"
+    shift
+  else
+    local template="ubuntu"
+  fi
+
   local vm_name="$template"
   for arg in "$@"; do
     if [[ "$arg" == "--name="* ]]; then
@@ -169,32 +177,38 @@ vup() {
     fi
   done
 
-  limactl start "$HOME/.config/configent/lima/$template.yaml" \
-    --tty=false \
-    --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-    "$@" ||
-    limactl start "$vm_name" \
+  case "$command" in
+  up | start)
+    limactl start "$HOME/.config/configent/lima/$template.yaml" \
       --tty=false \
       --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-      "$@"
-
-  limactl shell "$vm_name"
+      "$@" ||
+      limactl start "$vm_name" \
+        --tty=false \
+        --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+        "$@"
+    limactl shell "$vm_name"
+    ;;
+  shell | sh | s)
+    limactl shell "$vm_name" "$@"
+    ;;
+  down | stop)
+    limactl stop "$vm_name" "$@"
+    ;;
+  delete | rm)
+    limactl stop "$vm_name" "$@"
+    limactl delete "$vm_name" "$@"
+    ;;
+  *)
+    echo "Usage: v <up|shell|down|delete> <vm_name> [lima_args]"
+    echo ""
+    limactl list 2>/dev/null
+    ;;
+  esac
 }
 
-alias v-default='vup ubuntu --name=default --set=.env.GIT_REF=\"main\"'
-alias v-podman='vup fedora --name=podman --set=.env.GIT_REF=\"main\"'
-
-vdown() {
-  if [ -z "$1" ]; then
-    echo "Usage: vdown <vm_name> [lima_flags]"
-    return 1
-  fi
-  local name="$1"
-  shift
-
-  limactl stop "$name" "$@"
-  limactl delete "$name" "$@"
-}
+alias v-default='v up ubuntu --name=default --set=.env.GIT_REF=\"main\"'
+alias v-podman='v up fedora --name=podman --set=.env.GIT_REF=\"main\"'
 
 ### docker #####################################################################
 

@@ -309,10 +309,8 @@ host. See `.aliases` for such examples, like ad-hoc security scanners.
 
 ## ⚙️ VMs
 
-See `dotfiles/.aliases` for `v-*` for quickly creating and starting
+Use alias `v` for managing
 [Lima](https://github.com/lima-vm/lima) VMs for various Linux distros.
-
-See alias `v` for quickly shelling into, stopping and deleting Lima VMs.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by pulling and running `install.sh` from this repository's main branch.

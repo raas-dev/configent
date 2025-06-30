@@ -13,7 +13,7 @@ a pull request.
 
 ## Testing
 
-See `dotfiles/.aliases` for `v-*` for quickly creating and starting
+Use alias `v` for managing
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
 For development, run the installer from the latest commit by passing `GIT_REF`:
