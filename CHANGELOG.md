@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.157.2](https://github.com/raas-dev/configent/compare/1.157.1...1.157.2) (2025-06-30)
+
+
+### Fixes
+
+* **dotfiles:** avoid restarting running Lima VM before start commands ([a021723](https://github.com/raas-dev/configent/commit/a021723380bd1aa270d8da1b07bebeb8800221fb))
+* **vm:** correctly assign and use vm_name variable in v() function ([5fdf4bf](https://github.com/raas-dev/configent/commit/5fdf4bfe7ba24fd39c998bd872f39e38d4cf7e55))
+
 ### [1.157.1](https://github.com/raas-dev/configent/compare/1.157.0...1.157.1) (2025-06-30)
 
 
