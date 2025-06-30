@@ -198,13 +198,13 @@ v() {
     fi
     limactl shell "$vm_name"
     ;;
-  shell | sh | s)
+  shell | run | exec)
     limactl shell "$vm_name" "$@"
     ;;
   down | stop)
     limactl stop "$vm_name" "$@"
     ;;
-  delete | rm)
+  delete | del | rm)
     limactl stop "$vm_name" "$@"
     limactl delete "$vm_name" "$@"
     ;;
