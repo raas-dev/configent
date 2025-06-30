@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.157.0](https://github.com/raas-dev/configent/compare/1.156.0...1.157.0) (2025-06-30)
+
+
+### Features
+
+* **dotfiles:** add Darwin-specific args to limactl start command ([b15eebf](https://github.com/raas-dev/configent/commit/b15eebf321a68163e3940a6381eb545f1c89dea4))
+
+
+### Fixes
+
+* **git:** remove pager from gitconfig and set GIT_PAGER instead ([3aafdaf](https://github.com/raas-dev/configent/commit/3aafdaf3e7763182176ebccaaa9c072114565069))
+* **lima:** add --rosetta on macOS to limactl start ([04fb868](https://github.com/raas-dev/configent/commit/04fb868b8b9d6d5fa8a67cd4b128a5082815fb44))
+* **lima:** remove unused GIT_REF environment variable in install script curl command ([52a53b0](https://github.com/raas-dev/configent/commit/52a53b031bd7e68656605aa203ac66355bf6f110))
+
 ## [1.156.0](https://github.com/raas-dev/configent/compare/1.155.0...1.156.0) (2025-06-30)
 
 
