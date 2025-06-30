@@ -191,7 +191,6 @@ v() {
       "$@" ||
       limactl start "$vm_name" \
         --tty=false \
-        "${os_args[@]}" \
         --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
         "$@"
     limactl shell "$vm_name"
