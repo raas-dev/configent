@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.156.0](https://github.com/raas-dev/configent/compare/1.155.0...1.156.0) (2025-06-30)
+
+
+### Features
+
+* **aliases:** Improve v() for managing VMs ([6292805](https://github.com/raas-dev/configent/commit/62928050324e1d853938ce620b983b53bba25ef6))
+
+
+### Fixes
+
+* **aliases:** Add create/start and stop/delete lima VMs ([ea76f3d](https://github.com/raas-dev/configent/commit/ea76f3d022730a2941a562bf5add882b8453a335))
+* **aliases:** rename vm4 aliases to v-, and shell into ([c7aca92](https://github.com/raas-dev/configent/commit/c7aca92f981eb19eaff0597726cb908f00df1114))
+* **dotfiles:** correct usage message in v-start function ([aa961e4](https://github.com/raas-dev/configent/commit/aa961e4a85870970bca267f6dca946db48ae61c0))
+* **dotfiles:** update vup function to use LIMA_TEMPLATES_PATH ([4333e81](https://github.com/raas-dev/configent/commit/4333e8148f798ef82a32b4c02a1026383776f041))
+* **install_apps:** correct install order for apt and docker commands ([14cc5f2](https://github.com/raas-dev/configent/commit/14cc5f21224310143255aea9a2d202797420408f))
+* **macos:** Enable Rosetta for Ubuntu Lima VM ([28f8f13](https://github.com/raas-dev/configent/commit/28f8f1332f83528b29ed2578c4d55b680991b443))
+
 ## [1.155.0](https://github.com/raas-dev/configent/compare/1.154.2...1.155.0) (2025-06-29)
 
 
