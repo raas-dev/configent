@@ -184,16 +184,18 @@ v() {
 
   case "$command" in
   up | start)
-    limactl start "$HOME/.config/configent/lima/$template.yaml" \
-      --tty=false \
-      "${os_args[@]}" \
-      --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-      "$@" ||
-      limactl start "$vm_name" \
+    if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
+      limactl start "$HOME/.config/configent/lima/$template.yaml" \
         --tty=false \
         "${os_args[@]}" \
         --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-        "$@"
+        "$@" ||
+        limactl start "$vm_name" \
+          --tty=false \
+          "${os_args[@]}" \
+          --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+          "$@"
+    fi
     limactl shell "$vm_name"
     ;;
   shell | sh | s)
