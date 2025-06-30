@@ -24,8 +24,8 @@ elif [ "$(uname -s)" = 'Linux' ]; then
   if command -v zypper >/dev/null; then
     "$bin_path/install_apps_zypper"
   elif command -v apt-get >/dev/null; then
-    "$bin_path/install_apps_apt"
     "$bin_path/install_docker"
+    "$bin_path/install_apps_apt"
   elif command -v dnf >/dev/null; then
     "$bin_path/install_apps_yum"
   elif command -v pacman >/dev/null; then
