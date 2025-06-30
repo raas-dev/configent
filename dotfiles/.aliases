@@ -169,10 +169,12 @@ function vup() {
     fi
   done
 
-  limactl start --tty=false "$HOME/.config/configent/lima/$template.yaml" \
+  limactl start "$HOME/.config/configent/lima/$template.yaml" \
+    --tty=false \
     --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
     "$@" ||
-    limactl start --tty=false "$vm_name"\
+    limactl start "$vm_name" \
+      --tty=false \
       --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
       "$@"
 
