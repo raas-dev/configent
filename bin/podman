@@ -8,6 +8,9 @@
 
 # shim for running `podman` in lima VM
 
+# on macOS, --rosetta is not passed to limactl start as of 2025-06 due to bug
+# see: https://github.com/lima-vm/lima/issues/3592
+
 : "${NAME:="podman"}"
 : "${TEMPLATE:="fedora"}"
 
