@@ -179,7 +179,7 @@ v() {
 
   local os_args=()
   if [ "$(uname -s)" = 'Darwin' ]; then
-    os_args=(--vm-type=vz --network=vzNAT --rosetta)
+    os_args=(--network=vzNAT --rosetta)
   fi
 
   case "$command" in
@@ -191,6 +191,7 @@ v() {
       "$@" ||
       limactl start "$vm_name" \
         --tty=false \
+        "${os_args[@]}" \
         --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
         "$@"
     limactl shell "$vm_name"
