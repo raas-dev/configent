@@ -165,6 +165,10 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export BAT_STYLE="auto"
 export BAT_THEME="SynthWave84"
 
+### git ########################################################################
+
+command -v delta >/dev/null && export GIT_PAGER="delta"
+
 ### lumen ######################################################################
 
 export LUMEN_AI_PROVIDER="openrouter"

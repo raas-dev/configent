@@ -106,7 +106,6 @@
   trustctime = false
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
   excludesfile = ~/.gitignore
-  pager = delta
 
 [interactive]
   diffFilter = delta --color-only --features=configent
