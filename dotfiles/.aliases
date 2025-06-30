@@ -157,14 +157,6 @@ function vup() {
   fi
   local template="$1"
   shift
-
-  limactl start --tty=false "$HOME/.config/configent/lima/$template.yaml" \
-    --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-    "$@" ||
-    limactl start --tty=false "$template" \
-      --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
-      "$@"
-
   local vm_name="$template"
   for arg in "$@"; do
     if [[ "$arg" == "--name="* ]]; then
@@ -176,6 +168,14 @@ function vup() {
       break
     fi
   done
+
+  limactl start --tty=false "$HOME/.config/configent/lima/$template.yaml" \
+    --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+    "$@" ||
+    limactl start --tty=false "$vm_name"\
+      --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+      "$@"
+
   limactl shell "$vm_name"
 }
 
