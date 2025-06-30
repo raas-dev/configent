@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.157.1](https://github.com/raas-dev/configent/compare/1.157.0...1.157.1) (2025-06-30)
+
+
+### Fixes
+
+* **dotfiles:** pass os_args to limactl start command on Darwin ([bbc65d9](https://github.com/raas-dev/configent/commit/bbc65d9aaa578969c64048d0d1fcc2b3679c8804))
+* **dotfiles:** remove unused os_args in limactl start command ([6cf18cf](https://github.com/raas-dev/configent/commit/6cf18cf3e51046439b110133656241f1b00951fb))
+* **lima:** remove --vm-type=vz, redunant on macOS 13.5+ ([cbe25a4](https://github.com/raas-dev/configent/commit/cbe25a47776125cdbe9c0bf2aec607edd9822dab))
+
 ## [1.157.0](https://github.com/raas-dev/configent/compare/1.156.0...1.157.0) (2025-06-30)
 
 
