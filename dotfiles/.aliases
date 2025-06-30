@@ -178,14 +178,13 @@ v() {
     fi
   done
 
-  local os_args=()
-  if [ "$(uname -s)" = 'Darwin' ]; then
-    os_args=(--network=vzNAT --rosetta)
-  fi
-
   case "$command" in
   up | start)
     if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
+      local os_args=()
+      if [ "$(uname -s)" = 'Darwin' ]; then
+        os_args=(--network=vzNAT --rosetta)
+      fi
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
         --name "$vm_name" --tty=false \
         "${os_args[@]}" \
