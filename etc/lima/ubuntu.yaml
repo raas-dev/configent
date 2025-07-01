@@ -46,13 +46,6 @@ provision:
       #!/bin/sh
       ln -s /usr/sbin/iptables /usr/local/bin/iptables
       ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
-  # Intel-on-ARM and ARM-on-Intel
-  # See: https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md
-  - mode: system
-    script: |
-      #!/bin/sh
-      systemctl start containerd
-      nerdctl run --privileged --rm tonistiigi/binfmt:master --install all
   - mode: user
     script: |
       #!/bin/sh
