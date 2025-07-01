@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.157.3](https://github.com/raas-dev/configent/compare/1.157.2...1.157.3) (2025-07-01)
+
+
+### Fixes
+
+* **install:** comment out binfmt install for macOS Rosetta preference ([7fa5412](https://github.com/raas-dev/configent/commit/7fa5412fc8262064ff4e05ed772484e18c2747f4))
+* **provision:** remove deprecated Intel-on-ARM containerd setup script ([ff7ddf4](https://github.com/raas-dev/configent/commit/ff7ddf47e8e319a61101b8e7794a926558207582))
+
 ### [1.157.2](https://github.com/raas-dev/configent/compare/1.157.1...1.157.2) (2025-06-30)
 
 
