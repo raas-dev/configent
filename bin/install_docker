@@ -55,8 +55,9 @@ if [ ! -x "/usr/bin/docker" ]; then
   $SUDO systemctl enable --now docker.service docker.socket
 
   # Intel-on-ARM and ARM-on-Intel
-  # https://github.com/tonistiigi/binfmt
-  $SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
+  # See: https://github.com/tonistiigi/binfmt
+  # 2025-06: Commented out due to rosetta being preferred on macOS
+  #$SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
   # Setup rootless mode
   $SUDO apt-get install -y docker-ce-rootless-extras
