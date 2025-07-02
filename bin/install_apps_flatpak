@@ -16,7 +16,7 @@ flatpak remote-add --user --if-not-exists \
 flatpak install --user -y flathub com.brave.Browser
 
 # VS Code
-flatpak install --user -y com.visualstudio.code
+flatpak install --user -y flathub com.visualstudio.code
 
 # LibreOffice
 #flatpak install --user -y flathub org.libreoffice.LibreOffice
