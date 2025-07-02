@@ -340,7 +340,6 @@
   "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "windsurf.showInlayHintShortcuts": false,
   "windsurf.showSelectionActions": false,
-  "workbench.activityBar.location": "top",
   "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
