@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.157.4](https://github.com/raas-dev/configent/compare/1.157.3...1.157.4) (2025-07-02)
+
+
+### Fixes
+
+* **bin:** add --vm-type=vz when starting VM on macOS with lima ([93ee403](https://github.com/raas-dev/configent/commit/93ee4030f754af98c847a7d214baa293d2b94589))
+* **vscode:** remove redundant activity bar location setting ([7f8f7fc](https://github.com/raas-dev/configent/commit/7f8f7fce6e44632ca043dcf9301fc1f72c046ec1))
+
 ### [1.157.3](https://github.com/raas-dev/configent/compare/1.157.2...1.157.3) (2025-07-01)
 
 
