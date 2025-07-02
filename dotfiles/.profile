@@ -191,6 +191,12 @@ path_append "$HOME/.azd/bin"
 
 path_append "$HOME/.krew/bin"
 
+### UTM ########################################################################
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  path_append "$HOME/Applications/UTM.app/Contents/MacOS"
+fi
+
 ### Disable telemetry ##########################################################
 
 # https://consoledonottrack.com
