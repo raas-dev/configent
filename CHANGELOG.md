@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.157.5](https://github.com/raas-dev/configent/compare/1.157.4...1.157.5) (2025-07-02)
+
+
+### Fixes
+
+* **flatpak:** add flathub remote for VS Code install command ([f138486](https://github.com/raas-dev/configent/commit/f138486713b9a15c59816086a2560f52edc226f0))
+* **macos:** Fix adding utmctl to PATH ([9001da2](https://github.com/raas-dev/configent/commit/9001da2547086e74dd39a48fa3c233242f9739c2))
+* **vscode:** adjust activity bar and editor tab settings ([162d270](https://github.com/raas-dev/configent/commit/162d27023dae22872e82c07233a358d44c43c6d3))
+
 ### [1.157.4](https://github.com/raas-dev/configent/compare/1.157.3...1.157.4) (2025-07-02)
 
 
