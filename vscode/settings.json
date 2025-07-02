@@ -340,6 +340,7 @@
   "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "windsurf.showInlayHintShortcuts": false,
   "windsurf.showSelectionActions": false,
+  "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
@@ -369,6 +370,7 @@
   "workbench.editor.defaultBinaryEditor": "default",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
