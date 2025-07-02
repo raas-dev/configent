@@ -43,7 +43,6 @@ brew install --cask --force cursor
 #brew install --cask --force slack
 #brew install --cask --force tunnelblick
 #brew install --cask --force utm
-#brew install --cask --force virtualbuddy
 #brew install --cask --force visual-studio-code
 #brew install --cask --force windsurf
 
