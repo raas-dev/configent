@@ -181,18 +181,20 @@ v() {
   case "$command" in
   up | start)
     if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
-      local os_args=()
+      local os_create_args=()
+      local os_start_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        os_args=(--network=vzNAT --rosetta)
+        os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
+        os_start_args=(--network=vzNAT --rosetta)
       fi
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
         --name "$vm_name" --tty=false \
-        "${os_args[@]}" \
+        "${os_create_args[@]}" \
         --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
         "$@" ||
         limactl start "$vm_name" \
           --tty=false \
-          "${os_args[@]}" \
+          "${os_start_args[@]}" \
           --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
           "$@"
     fi
