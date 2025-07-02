@@ -1,0 +1,77 @@
+images:
+  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20250516/ubuntu-24.04-server-cloudimg-amd64.img"
+    arch: x86_64
+    digest: "sha256:8d6161defd323d24d66f85dda40e64e2b9021aefa4ca879dcbc4ec775ad1bbc5"
+  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20250516/ubuntu-24.04-server-cloudimg-arm64.img"
+    arch: aarch64
+    digest: "sha256:c933c6932615d26c15f6e408e4b4f8c43cb3e1f73b0a98c2efa916cc9ab9549c"
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
+  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
+    arch: x86_64
+  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-arm64.img
+    arch: aarch64
+
+mounts:
+  - location: "~/configent"
+    writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
+    writable: true
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+video:
+  display: vz
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      command -v Xorg >/dev/null 2>&1 && exit 0
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update
+      apt-get install -y xorg xterm openbox hsetroot tint2 slim
+      printf "auto_login yes\ndefault_user {{.User}}\n" >>/etc/slim.conf
+      printf "hsetroot -solid \"#32CD32\" &\ntint2 &\n" >>/etc/xdg/openbox/autostart
+      sed -i 's/Clearlooks/Clearlooks-Olive/' /etc/xdg/openbox/rc.xml
+      apt-get install -y --no-install-recommends dillo xfe
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      systemctl set-default graphical.target
+      systemctl isolate graphical.target
+  - mode: user
+    script: |
+      #!/bin/sh
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - description: "Xorg to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "Xorg is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+
+# https://lima-vm.io/docs/config/network
+hostResolver:
+  enabled: false
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - lima: user-v2
