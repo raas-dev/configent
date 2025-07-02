@@ -56,6 +56,7 @@ probes:
       Run "limactl shell k3s sudo journalctl -u k3s" to check the log.
       If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
 
+# https://lima-vm.io/docs/config/network
 hostResolver:
   enabled: false
 
