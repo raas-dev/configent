@@ -24,6 +24,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias spotoff='sudo mdutil -a -i off'
   alias spoton='sudo mdutil -a -i on'
 
+  # Fix utmctl assuming a system-wide UTM installation
+  if [ -x "$HOME/Applications/UTM.app/Contents/MacOS/utmctl" ]; then
+    alias utmctl="$HOME/Applications/UTM.app/Contents/MacOS/utmctl"
+  fi
+
   # Canonical hex dump; some systems have this symlinked
   ! command -v hd >/dev/null && alias hd='hexdump -C'
 
