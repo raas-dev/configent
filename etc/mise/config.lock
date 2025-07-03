@@ -220,11 +220,11 @@ version = "3.11.0"
 backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 
 [tools.jq]
-version = "1.8.0"
+version = "1.8.1"
 backend = "aqua:jqlang/jq"
 
 [tools.jq.checksums]
-jq-macos-arm64 = "sha256:aaf1efbb376d6e3eaf61f63807c32c1df519f5857dfc4f581826fa2df4b715ae"
+jq-macos-arm64 = "sha256:a9fe3ea2f86dfc72f6728417521ec9067b343277152b114f4e98d8cb0e263603"
 
 [tools.lima]
 version = "1.0.7"
