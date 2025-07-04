@@ -42,3 +42,11 @@ extensions:
     name: context7
     enabled: true
     description: context7
+  duckduckgo-mcp:
+    cmd: uvx
+    args:
+    - duckduckgo-mcp-server
+    type: stdio
+    name: duckduckgo-mcp
+    enabled: true
+    description: duckduckgo-mcp
