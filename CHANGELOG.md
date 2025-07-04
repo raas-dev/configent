@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.158.0](https://github.com/raas-dev/configent/compare/1.157.5...1.158.0) (2025-07-04)
+
+
+### Features
+
+* **mcpm:** add postinstall script and config entries for mcpm tool integration ([8b1a824](https://github.com/raas-dev/configent/commit/8b1a8246fe91dc8a6a26d526326e73d7b8d6dcfb))
+
+
+### Fixes
+
+* **goose:** add context7 extension to goose configuration.yaml ([9c39823](https://github.com/raas-dev/configent/commit/9c39823dd44079241e47af72b1c18464ce454625))
+* **mcpm:** add duckduckgo-mcp server ([5b32825](https://github.com/raas-dev/configent/commit/5b3282542ded2e64a7fb5048b85b5b9fc20011ed))
+* **postinstall_mcps:** update mcpm add commands with correct target flag placement ([b976c85](https://github.com/raas-dev/configent/commit/b976c858468fe28a5a502fdacfe4f5d88824912a))
+
 ### [1.157.5](https://github.com/raas-dev/configent/compare/1.157.4...1.157.5) (2025-07-02)
 
 
