@@ -204,11 +204,11 @@ v() {
     limactl shell "$vm_name" "$@"
     ;;
   down | stop)
-    limactl stop "$vm_name" "$@"
+    limactl stop "$vm_name" --force
     ;;
   delete | del | rm)
-    limactl stop "$vm_name" "$@"
-    limactl delete "$vm_name" "$@"
+    limactl stop "$vm_name" --force
+    limactl delete "$vm_name" --force
     ;;
   *)
     echo "Usage: v <up|shell|down|delete> <vm_name> [lima_args]"
