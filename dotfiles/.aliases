@@ -310,9 +310,6 @@ alias langflow='uvx langflow'
 # Reactive notebook
 alias marimo='uvx marimo'
 
-# CLI MCP package manager
-alias mcpm='uvx mcpm'
-
 ### dev
 
 # Command-line utility for rendering projects templates

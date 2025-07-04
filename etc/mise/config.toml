@@ -56,6 +56,7 @@ uv = 'latest'
 'pipx:fast-agent-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_fast-agent" }
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
+'pipx:mcpm' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcps" }
 'pipx:pdm' = 'latest'
 'pipx:playwright' = { version = 'latest', postinstall = "playwright install" }
 'pipx:poetry' = 'latest'
