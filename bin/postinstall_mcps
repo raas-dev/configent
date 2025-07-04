@@ -15,7 +15,6 @@ if command -v cursor >/dev/null; then
 fi
 
 if command -v goose >/dev/null; then
-  mcpm target set goose-cli
-  mcpm add context7 --force
-  mcpm add duckduckgo-mcp --force
+  mcpm add context7 --force --target goose-cli
+  mcpm add duckduckgo-mcp --force --target goose-cli
 fi
