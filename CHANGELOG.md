@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.1](https://github.com/raas-dev/configent/compare/1.158.0...1.158.1) (2025-07-04)
+
+
+### Fixes
+
+* **dotfiles:** force stop and delete lima VMs in aliases ([79cfcf9](https://github.com/raas-dev/configent/commit/79cfcf99ba0b2fa4a52435974d4adb8fcc2d8775))
+* **macos:** install nmap and remove redundant alias for nmap ([c7fcf0b](https://github.com/raas-dev/configent/commit/c7fcf0b7853b8fe577e0176712e44c2d0fa35848))
+
 ## [1.158.0](https://github.com/raas-dev/configent/compare/1.157.5...1.158.0) (2025-07-04)
 
 
