@@ -1,16 +1,16 @@
 [tools.awscli]
-version = "2.27.47"
+version = "2.27.49"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.47.pkg" = "sha256:6cd090d1dac10d9cbc09fd0b31b4ee4a816ced7ae79f963e1f702fe11bb2e397"
+"AWSCLIV2-2.27.49.pkg" = "sha256:3d8508abd696b1322acfbf247975774fea520459d56f748d5b463124dcdbd85e"
 
 [tools.bun]
-version = "1.2.17"
+version = "1.2.18"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:9f55fd213f2f768d02eb5b9885aaa44b1e1307a680c18622b57095302a931af9"
+"bun-darwin-aarch64.zip" = "sha256:cca9eb52762bbd81eb894fc8275bba0a0654e81aad318d19869854a30f3769a2"
 
 [tools.cargo-binstall]
 version = "1.14.1"
