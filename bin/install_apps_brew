@@ -63,6 +63,9 @@ brew install m-cli
 # Mac App Store command-line interface (https://github.com/mas-cli/mas)
 brew install mas
 
+# nmap (https://nmap.org/)
+brew install nmap
+
 # For conversion between text file formats
 brew install pandoc
 

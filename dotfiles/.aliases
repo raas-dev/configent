@@ -860,7 +860,6 @@ alias trip='n shell/trippy trip'
 
 # port scanners
 alias naabu='n naabu'
-alias nmap='n nmap'
 alias rustscan='n rustscan'
 
 # osint
