@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.3](https://github.com/raas-dev/configent/compare/1.158.2...1.158.3) (2025-07-05)
+
+
+### Fixes
+
+* **lima:** Use minimal Ubuntu image ([9a94931](https://github.com/raas-dev/configent/commit/9a949315968f484d59b1ae3bcb1363326183cbf5))
+* **setup_continue:** create .continue directory if missing ([6f9e2de](https://github.com/raas-dev/configent/commit/6f9e2de570d59f1bc38387746643cc4a1a3af338))
+
 ### [1.158.2](https://github.com/raas-dev/configent/compare/1.158.1...1.158.2) (2025-07-05)
 
 
