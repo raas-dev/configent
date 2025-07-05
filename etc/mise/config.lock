@@ -260,7 +260,7 @@ version = "0.2.36"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
-version = "4.3.1"
+version = "4.3.2"
 backend = "pipx:glances"
 
 [tools."pipx:mcpm"]
