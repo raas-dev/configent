@@ -28,22 +28,30 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-# GNU bins prepended to PATH on macOS in .profile
-brew install coreutils
-brew install findutils
-#brew install gnu-getopt
-#brew install gnu-indent
-#brew install gnu-sed
-#brew install gnu-tar
-#brew install gnu-time
-#brew install gnu-which
+if [ "$(uname -s)" = "Darwin" ]; then
+  # GNU bins prepended to PATH on macOS in .profile
+  brew install coreutils
+  brew install findutils
+  #brew install gnu-getopt
+  #brew install gnu-indent
+  #brew install gnu-sed
+  #brew install gnu-tar
+  #brew install gnu-time
+  #brew install gnu-which
 
-# Common build-time requirement
-brew install cmake
+  # GNU bins NOT prepended to PATH on macOS in .profile
+  brew install gawk
+  brew install grep
 
-# GNU bins NOT prepended to PATH on macOS in .profile
-brew install gawk
-brew install grep
+  # Common build-time requirement
+  brew install cmake
+
+  # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
+  brew install m-cli
+
+  # Mac App Store command-line interface (https://github.com/mas-cli/mas)
+  brew install mas
+fi
 
 # More recent git than in Xcode Command Line Tools
 brew install git
@@ -56,12 +64,6 @@ brew install git-lfs
 
 # For cosign and slsa-verifier, used by mise for verifying checksums
 brew install gnupg
-
-# Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
-brew install m-cli
-
-# Mac App Store command-line interface (https://github.com/mas-cli/mas)
-brew install mas
 
 # nmap (https://nmap.org/)
 brew install nmap
@@ -88,4 +90,5 @@ brew install universal-ctags
 brew install zsh
 
 # bash-completion (see .bashrc for setup)
+[ "$(uname -s)" = "Linux" ] && brew unlink util-linux
 brew install bash-completion
