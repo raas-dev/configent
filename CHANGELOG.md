@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.2](https://github.com/raas-dev/configent/compare/1.158.1...1.158.2) (2025-07-05)
+
+
+### Fixes
+
+* **bin:** move gnupg brew install under Darwin check for macOS ([afb46fa](https://github.com/raas-dev/configent/commit/afb46fa0c91dd963a3bca58f8718d2341d7bd3fd))
+* **brew:** fix Linux compatibility in install_apps_brew script ([389654b](https://github.com/raas-dev/configent/commit/389654b03dc3fb5beb2d8ed3e9c2b4c67d895685))
+
 ### [1.158.1](https://github.com/raas-dev/configent/compare/1.158.0...1.158.1) (2025-07-04)
 
 
