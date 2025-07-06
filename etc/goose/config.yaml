@@ -1,16 +1,9 @@
-# Model Configuration
-GOOSE_PROVIDER: openrouter
-GOOSE_MODEL: google/gemini-2.5-pro
 GOOSE_TEMPERATURE: 0
+GOOSE_TOOLSHIM_OLLAMA_MODEL: gemma3:12b
 OLLAMA_HOST: 127.0.0.1:11434
-
-# Tool Configuration
+GOOSE_MODEL: google/gemini-2.5-pro
 GOOSE_CLI_MIN_PRIORITY: 0.0
 GOOSE_MODE: auto
-GOOSE_TOOLSHIM: true
-GOOSE_TOOLSHIM_OLLAMA_MODEL: gemma3:12b
-
-# Extensions Configuration
 extensions:
   computercontroller:
     bundled: true
@@ -19,6 +12,19 @@ extensions:
     name: computercontroller
     timeout: 300
     type: builtin
+  context7:
+    args:
+    - -y
+    - '@upstash/context7-mcp@latest'
+    bundled: null
+    cmd: npx
+    description: context7
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: context7
+    timeout: null
+    type: stdio
   developer:
     bundled: true
     display_name: Developer Tools
@@ -26,27 +32,24 @@ extensions:
     name: developer
     timeout: 300
     type: builtin
+  duckduckgo-mcp:
+    args:
+    - duckduckgo-mcp-server
+    bundled: null
+    cmd: uvx
+    description: duckduckgo-mcp
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: duckduckgo-mcp
+    timeout: null
+    type: stdio
   memory:
     bundled: true
     display_name: Memory
-    enabled: true
+    enabled: false
     name: memory
     timeout: 300
     type: builtin
-  context7:
-    cmd: npx
-    args:
-    - -y
-    - '@upstash/context7-mcp@latest'
-    type: stdio
-    name: context7
-    enabled: true
-    description: context7
-  duckduckgo-mcp:
-    cmd: uvx
-    args:
-    - duckduckgo-mcp-server
-    type: stdio
-    name: duckduckgo-mcp
-    enabled: true
-    description: duckduckgo-mcp
+GOOSE_PROVIDER: openrouter
+GOOSE_TOOLSHIM: true
