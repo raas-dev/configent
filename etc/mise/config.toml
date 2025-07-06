@@ -56,8 +56,8 @@ uv = 'latest'
 'pipx:fast-agent-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_fast-agent" }
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
-'pipx:mcpm' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcps" }
 #'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
+'pipx:mcpm' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcps" }
 'pipx:pdm' = 'latest'
 'pipx:playwright' = { version = 'latest', postinstall = "playwright install" }
 'pipx:poetry' = 'latest'
