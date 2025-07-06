@@ -1,3 +1,7 @@
+---
+use_tools: all
+---
+
 # role
 
 You are a helpful assistant and expert in communicating complex topics concisely.
