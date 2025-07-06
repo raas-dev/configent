@@ -34,8 +34,8 @@ extensions:
     type: builtin
   context7:
     args:
-    - -y
-    - '@upstash/context7-mcp@latest'
+      - -y
+      - "@upstash/context7-mcp@latest"
     bundled: null
     cmd: npx
     description: context7
@@ -47,7 +47,7 @@ extensions:
     type: stdio
   duckduckgo-mcp:
     args:
-    - duckduckgo-mcp-server
+      - duckduckgo-mcp-server
     bundled: null
     cmd: uvx
     description: duckduckgo-mcp
