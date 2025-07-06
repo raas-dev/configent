@@ -319,7 +319,7 @@ gptme-dev() {
     --with "gptme[all]" \
     --with "gptme-rag" \
     --from git+https://github.com/gptme/gptme \
-    "$bin_name" "$@"
+    "$bin_name" --name "" "$@"
 }
 alias gptme='gptme-dev gptme'
 alias gptme-server='gptme-dev gptme-server'
