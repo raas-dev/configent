@@ -1,5 +1,5 @@
 GOOSE_PROVIDER: openrouter
-GOOSE_MODEL: google/gemini-2.5-pro
+GOOSE_MODEL: google/gemini-2.5-flash
 GOOSE_TEMPERATURE: 0
 
 GOOSE_MODE: auto
