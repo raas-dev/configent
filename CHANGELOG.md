@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.4](https://github.com/raas-dev/configent/compare/1.158.3...1.158.4) (2025-07-06)
+
+
+### Fixes
+
+* **dotfiles:** add empty --name option to gptme-dev command call ([43547b8](https://github.com/raas-dev/configent/commit/43547b880b2b8c62a771794d3072d502194ac250))
+
 ### [1.158.3](https://github.com/raas-dev/configent/compare/1.158.2...1.158.3) (2025-07-05)
 
 
