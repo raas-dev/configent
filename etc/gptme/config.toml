@@ -14,14 +14,16 @@ enabled = true
 auto_start = true
 
 [[mcp.servers]]
-name = "memory"
+name = "duckduckgo"
+enabled = true
+command = "uvx"
+args = ["duckduckgo-mcp-server"]
+
+[[mcp.servers]]
+name = "context7"
 enabled = true
 command = "npx"
-args = [
-    "-y",
-    "@modelcontextprotocol/server-memory"
-]
-env = { EXAMPLE = "example" }
+args = ["-y", "@upstash/context7-mcp@latest"]
 
 # One of these need to be set
 # If none of them are, they will be prompted for on first start
