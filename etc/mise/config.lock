@@ -167,11 +167,11 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.63.0"
+version = "0.64.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.checksums]
-"fzf-0.63.0-darwin_arm64.tar.gz" = "sha256:2f3a1ac15ee28df1e23112bcc3eacf2d2488d1d2d0477159a4c3b21338b4ea91"
+"fzf-0.64.0-darwin_arm64.tar.gz" = "sha256:c71d2528e090de5d4765017d745f8a4fed44b43703f93247a28f6dc2aa4c7c01"
 
 [tools.gcloud]
 version = "510.0.0"
