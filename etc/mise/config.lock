@@ -20,7 +20,7 @@ backend = "aqua:cargo-bins/cargo-binstall"
 "cargo-binstall-aarch64-apple-darwin.zip" = "sha256:07d46d31fb68ac10b906c5d39d611ded7787966f4ed15c598cb6175b45a2b069"
 
 [tools."cargo:aichat"]
-version = "0.29.0"
+version = "0.30.0"
 backend = "cargo:aichat"
 
 [tools."cargo:argc"]
@@ -216,7 +216,7 @@ version = "0.19.1"
 backend = "go:golang.org/x/tools/gopls"
 
 [tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
-version = "3.11.0"
+version = "3.12.0"
 backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 
 [tools.jq]
@@ -256,7 +256,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.36"
+version = "0.2.38"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
