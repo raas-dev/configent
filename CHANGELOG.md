@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.5](https://github.com/raas-dev/configent/compare/1.158.4...1.158.5) (2025-07-07)
+
+
+### Fixes
+
+* **config:** pin mcpm version to 1.14.2 from latest ([64429c9](https://github.com/raas-dev/configent/commit/64429c92c9eeb05a3914b9371af57be84510bde0))
+
 ### [1.158.4](https://github.com/raas-dev/configent/compare/1.158.3...1.158.4) (2025-07-06)
 
 
