@@ -80,6 +80,7 @@
     "plaintext",
     "markdown"
   ],
+  "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
