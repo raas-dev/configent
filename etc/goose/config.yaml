@@ -33,27 +33,19 @@ extensions:
     timeout: 300
     type: builtin
   context7:
-    args:
-      - -y
-      - "@upstash/context7-mcp@latest"
-    bundled: null
     cmd: npx
-    description: context7
-    enabled: true
-    env_keys: []
-    envs: {}
-    name: context7
-    timeout: null
-    type: stdio
-  duckduckgo-mcp:
     args:
-      - duckduckgo-mcp-server
-    bundled: null
-    cmd: uvx
-    description: duckduckgo-mcp
-    enabled: true
-    env_keys: []
-    envs: {}
-    name: duckduckgo-mcp
-    timeout: null
+    - -y
+    - '@upstash/context7-mcp@latest'
     type: stdio
+    name: context7
+    enabled: true
+    description: context7
+  duckduckgo-mcp:
+    cmd: uvx
+    args:
+    - duckduckgo-mcp-server
+    type: stdio
+    name: duckduckgo-mcp
+    enabled: true
+    description: duckduckgo-mcp
