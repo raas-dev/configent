@@ -53,3 +53,18 @@ fi
 # symlink
 mkdir -p "$HOME/.config/ptpython"
 ln -sfnv "$config_path/ptpython/config.py" "$HOME/.config/ptpython/config.py"
+
+### uv #########################################################################
+
+# backup previous Python version preference if any
+if [ ! -r "$backup_path/.config/uv/.python-version" ]; then
+  if [ -r "$HOME/.config/uv/.python-version" ]; then
+    mkdir -p "$backup_path/.config/uv"
+    cp -P "$HOME/.config/uv/.python-version" \
+      "$backup_path/.config/uv/.python-version"
+  fi
+fi
+
+# uv python pin <python_version> --global
+mkdir -p "$HOME/.config/uv"
+ln -sfnv "$config_path/uv/.python-version" "$HOME/.config/uv/.python-version"
