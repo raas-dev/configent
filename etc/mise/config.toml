@@ -101,4 +101,4 @@ experimental = true
 cargo.binstall = true
 npm.bun = true
 pipx.uvx = true
-idiomatic_version_file_enable_tools = ["python"]
+idiomatic_version_file_enable_tools = ["python", "node"]
