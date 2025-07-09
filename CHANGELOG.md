@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.6](https://github.com/raas-dev/configent/compare/1.158.5...1.158.6) (2025-07-09)
+
+
+### Fixes
+
+* **bin:** add global Python version pinning for uv tool ([3d4172c](https://github.com/raas-dev/configent/commit/3d4172c40524bc99fd3a846eddc3276fec27e185))
+* **macos:** enable AppleFontSmoothing by default on current host ([beee5c9](https://github.com/raas-dev/configent/commit/beee5c9c71c8cfd82955c238bdb98f4772ddc9f1))
+
 ### [1.158.5](https://github.com/raas-dev/configent/compare/1.158.4...1.158.5) (2025-07-07)
 
 
