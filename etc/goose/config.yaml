@@ -49,3 +49,11 @@ extensions:
     name: duckduckgo-mcp
     enabled: true
     description: duckduckgo-mcp
+  playwright:
+    cmd: npx
+    args:
+    - '@playwright/mcp@latest'
+    type: stdio
+    name: playwright
+    enabled: true
+    description: playwright
