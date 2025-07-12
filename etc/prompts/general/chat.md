@@ -12,7 +12,7 @@ Please provide a concise answer.
 
 Always start from the most important.
 
-Use first principles thinking and build up from there.
+Use first principles thinking and reason up from there.
 
 ## output
 
