@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.7](https://github.com/raas-dev/configent/compare/1.158.6...1.158.7) (2025-07-12)
+
+
+### Fixes
+
+* **ai:** update general prompt to use first principle thinking ([999bf60](https://github.com/raas-dev/configent/commit/999bf60e9e1b75bf5b2acd627e64b61a332af6ff))
+* **postinstall:** add playwright MCP to postinstall and goose config ([4c0132b](https://github.com/raas-dev/configent/commit/4c0132bca6b4c1e9cc15dc98b316b0ae50937a21))
+
 ### [1.158.6](https://github.com/raas-dev/configent/compare/1.158.5...1.158.6) (2025-07-09)
 
 
