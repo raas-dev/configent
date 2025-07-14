@@ -416,6 +416,9 @@ alias gemini='bunx @google/gemini-cli'
 # Visual testing tool for MCP servers
 alias inspector='bunx @modelcontextprotocol/inspector'
 
+# Midscene
+alias midscene='bunx @midscene/cli'
+
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
