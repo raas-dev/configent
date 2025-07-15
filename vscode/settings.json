@@ -235,6 +235,8 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": false,
   "powershell.analyzeOpenDocumentsOnly": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.integratedConsole.startInBackground": true,
@@ -322,6 +324,7 @@
   "terminal.integrated.tabs.showActions": "never",
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terraform.codelens.referenceCount": true,
+  "testing.followRunningTest": true,
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
   "typescript.suggest.paths": false,

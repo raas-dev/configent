@@ -47,6 +47,7 @@ ms-azuretools.vscode-bicep
 ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
 ms-dotnettools.vscode-dotnet-runtime
+ms-playwright.playwright
 ms-python.debugpy
 ms-python.python
 ms-toolsai.jupyter
