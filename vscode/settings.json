@@ -418,6 +418,11 @@
     "!Split",
     "!Split sequence"
   ],
+  "yaml.schemas": {
+    "/Users/asyrjasalo/.cursor/extensions/continue.continue-1.0.18-darwin-arm64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ]
+  },
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false
 }
