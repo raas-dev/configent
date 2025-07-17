@@ -235,6 +235,7 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
+  "openInExternalApp.enableLog": false,
   "playwright.reuseBrowser": true,
   "playwright.showTrace": false,
   "powershell.analyzeOpenDocumentsOnly": true,
