@@ -256,7 +256,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.41"
+version = "0.2.43"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
