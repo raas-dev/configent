@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.158.8](https://github.com/raas-dev/configent/compare/1.158.7...1.158.8) (2025-07-18)
+
+
+### Fixes
+
+* **dotfiles:** add alias for midscene CLI tool ([aad34f4](https://github.com/raas-dev/configent/commit/aad34f40b35a8c0064151866aaf6de05f219fa70))
+* **vscode:** add Playwright extension and update related settings ([99dac7a](https://github.com/raas-dev/configent/commit/99dac7ac14a5c85569abd2b0e4176315be980ccc))
+
 ### [1.158.7](https://github.com/raas-dev/configent/compare/1.158.6...1.158.7) (2025-07-12)
 
 
