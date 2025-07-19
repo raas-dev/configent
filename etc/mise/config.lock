@@ -1,9 +1,9 @@
 [tools.awscli]
-version = "2.27.54"
+version = "2.27.55"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.checksums]
-"AWSCLIV2-2.27.54.pkg" = "sha256:fa0a42ca4fd853b3a91cfdd029d4ba17b417b791ea25d04e251041cfd8714fbd"
+"AWSCLIV2-2.27.55.pkg" = "blake3:92cdaba1a79d04d417656d97046692fc5ffc9b2d4b29fa39f49d1f41bcf7e527"
 
 [tools.bun]
 version = "1.2.18"
@@ -40,7 +40,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "16.3.2"
+version = "16.4.0"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
