@@ -68,7 +68,7 @@ version = "6.1.1"
 backend = "cargo:hurl"
 
 [tools."cargo:jnv"]
-version = "0.6.0"
+version = "0.6.1"
 backend = "cargo:jnv"
 
 [tools."cargo:kondo"]
