@@ -6,11 +6,11 @@ backend = "aqua:aws/aws-cli"
 "AWSCLIV2-2.27.55.pkg" = "blake3:92cdaba1a79d04d417656d97046692fc5ffc9b2d4b29fa39f49d1f41bcf7e527"
 
 [tools.bun]
-version = "1.2.18"
+version = "1.2.19"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:cca9eb52762bbd81eb894fc8275bba0a0654e81aad318d19869854a30f3769a2"
+"bun-darwin-aarch64.zip" = "blake3:1d033789f9a12ddcc7b1e03c675af1dfcbf770aa7fbfa2c49dc6599e591e4779"
 
 [tools.cargo-binstall]
 version = "1.14.1"
@@ -256,7 +256,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.44"
+version = "0.2.45"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
