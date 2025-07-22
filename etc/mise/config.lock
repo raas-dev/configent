@@ -152,11 +152,11 @@ version = "0.9.8"
 backend = "cargo:zoxide"
 
 [tools.cosign]
-version = "2.5.2"
+version = "2.5.3"
 backend = "aqua:sigstore/cosign"
 
 [tools.cosign.checksums]
-cosign-darwin-arm64 = "sha256:51fdc6d8da8310d72df10065a52247b6bebfe990d4c946dd9f71e17588256011"
+cosign-darwin-arm64 = "sha256:86e0cad94d0da4c0dab5e26672ede71447a08a0f0d8495b9381c117df27d7d09"
 
 [tools.dotnet]
 version = "8.0.404"
@@ -272,7 +272,7 @@ version = "2.25.4"
 backend = "pipx:pdm"
 
 [tools."pipx:playwright"]
-version = "1.53.0"
+version = "1.54.0"
 backend = "pipx:playwright"
 
 [tools."pipx:poetry"]
