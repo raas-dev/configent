@@ -538,8 +538,39 @@ d() {
   fi
 
   if [ -n "$PORT" ]; then
-    local port_args="--publish 127.0.0.1:$PORT:$PORT"
-    local env_args="--env PORT=$PORT"
+    local port_args=""
+    local first_port=""
+
+    # Split PORT by comma and create publish args for each
+    local remaining_ports="$PORT"
+    while [ -n "$remaining_ports" ]; do
+      if [ "$remaining_ports" != "${remaining_ports#*,}" ]; then
+        # Contains comma, extract first port
+        local port="${remaining_ports%%,*}"
+        remaining_ports="${remaining_ports#*,}"
+      else
+        # No more commas, this is the last port
+        local port="$remaining_ports"
+        remaining_ports=""
+      fi
+
+      # Trim whitespace and skip empty ports
+      port=$(echo "$port" | xargs)
+      if [ -n "$port" ]; then
+        port_args="$port_args --publish 127.0.0.1:$port:$port"
+        # Use first valid port as the main PORT env var for the container
+        if [ -z "$first_port" ]; then
+          first_port="$port"
+        fi
+      fi
+    done
+
+    # Pass only the first port as PORT env var to the container
+    local env_args="--env PORT=$first_port"
+
+    # Debug: show what we're setting
+    echo "[d] Port mappings: $port_args"
+    echo "[d] Container PORT env: $first_port"
   fi
 
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
@@ -767,8 +798,35 @@ nixd() {
   local name="$image-${PWD##*/}"
 
   if [ -n "$PORT" ]; then
-    local port_args="--publish 127.0.0.1:$PORT:$PORT"
-    local env_args="--env PORT=$PORT"
+    local port_args=""
+    local first_port=""
+
+    # Split PORT by comma and create publish args for each
+    local remaining_ports="$PORT"
+    while [ -n "$remaining_ports" ]; do
+      if [ "$remaining_ports" != "${remaining_ports#*,}" ]; then
+        # Contains comma, extract first port
+        local port="${remaining_ports%%,*}"
+        remaining_ports="${remaining_ports#*,}"
+      else
+        # No more commas, this is the last port
+        local port="$remaining_ports"
+        remaining_ports=""
+      fi
+
+      # Trim whitespace and skip empty ports
+      port=$(echo "$port" | xargs)
+      if [ -n "$port" ]; then
+        port_args="$port_args --publish 127.0.0.1:$port:$port"
+        # Use first valid port as the main PORT env var for the container
+        if [ -z "$first_port" ]; then
+          first_port="$port"
+        fi
+      fi
+    done
+
+    # Pass only the first port as PORT env var to the container
+    local env_args="--env PORT=$first_port"
   fi
 
   #[ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
