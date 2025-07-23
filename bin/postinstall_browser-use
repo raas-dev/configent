@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.config/browseruse/config.json" ]; then
+  if [ -r "$HOME/.config/browseruse/config.json" ]; then
+    mkdir -p "$backup_path/.config/browseruse"
+    cp -P "$HOME/.config/browseruse/config.json" \
+      "$backup_path/.config/browseruse/config.json"
+  fi
+fi
+
+# symlink
+mkdir -p "$HOME/.config/browseruse"
+ln -sfnv "$config_path/browseruse/config.json" "$HOME/.config/browseruse/config.json"

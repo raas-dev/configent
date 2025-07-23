@@ -12,7 +12,7 @@ cargo-binstall = 'latest'
 'cargo:gitui' = 'latest'
 'cargo:gping' = 'latest'
 'cargo:hurl' = 'latest'
-'cargo:jnv'= 'latest'
+'cargo:jnv' = 'latest'
 'cargo:kondo' = 'latest'
 'cargo:lsd' = 'latest'
 'cargo:lumen' = 'latest'
@@ -53,6 +53,7 @@ python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall
 uv = 'latest'
 'pipx:aider-chat' = { version = 'latest', extras = 'browser', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_aider" }
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
+'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 'pipx:fast-agent-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_fast-agent" }
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
