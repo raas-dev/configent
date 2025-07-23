@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.159.0](https://github.com/raas-dev/configent/compare/1.158.8...1.159.0) (2025-07-23)
+
+
+### Features
+
+* **browseruse:** add browser-use tool with config and postinstall script ([a944f18](https://github.com/raas-dev/configent/commit/a944f188f76ef50cb6c3ebca6ca9d14d5bc679d8))
+
+
+### Fixes
+
+* **ai:** Disable aider-chat installation by default ([8174584](https://github.com/raas-dev/configent/commit/81745844156e5ed55106825c5ac86e5fc4df05a4))
+* **dotfiles:** handle multiple ports in PORT variable for container run ([1adb14f](https://github.com/raas-dev/configent/commit/1adb14f5a24eb8889510dacbd871afcca16cd274))
+
 ### [1.158.8](https://github.com/raas-dev/configent/compare/1.158.7...1.158.8) (2025-07-18)
 
 
