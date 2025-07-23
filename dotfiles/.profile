@@ -247,6 +247,9 @@ export CHECKPOINT_DISABLE=1
 export INFRACOST_SELF_HOSTED_TELEMETRY=false
 export INFRACOST_SKIP_UPDATE_CHECK=true
 
+# browser-use
+export ANONYMIZED_TELEMETRY=false
+
 ### aichat #####################################################################
 
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
