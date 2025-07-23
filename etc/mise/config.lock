@@ -271,10 +271,6 @@ backend = "pipx:mcpm"
 version = "2.25.4"
 backend = "pipx:pdm"
 
-[tools."pipx:playwright"]
-version = "1.54.0"
-backend = "pipx:playwright"
-
 [tools."pipx:poetry"]
 version = "2.1.3"
 backend = "pipx:poetry"
