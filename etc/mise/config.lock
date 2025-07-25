@@ -264,7 +264,7 @@ version = "4.3.3"
 backend = "pipx:glances"
 
 [tools."pipx:mcpm"]
-version = "1.14.2"
+version = "2.6.0"
 backend = "pipx:mcpm"
 
 [tools."pipx:pdm"]
