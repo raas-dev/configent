@@ -27,7 +27,7 @@ repos:
     - id: destroyed-symlinks
     - id: check-executables-have-shebangs
     - id: pretty-format-json
-      files: ^vscode/.*\.json$
+      files: ^(?!etc\/cursor\/mcp\.json$).*\.json$
       args:
         - --autofix
 
