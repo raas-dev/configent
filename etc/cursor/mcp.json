@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "duckduckgo-mcp": {
+      "command": "uvx",
+      "args": [
+        "duckduckgo-mcp-server"
+      ]
+    },
+    "playwright-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ]
+    }
+  }
+}

@@ -19,6 +19,19 @@ fi
 
 if command -v cursor >/dev/null; then
   APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+
+  backup_path="$this_path/.backup"
+  config_path="$HOME/.config/configent"
+
+  # mcp.json
+  if [ ! -r "$backup_path/.config/cursor/mcp.json" ]; then
+    if [ -r "$HOME/.cursor/mcp.json" ]; then
+      mkdir -p "$backup_path/.config/cursor"
+      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.config/cursor/mcp.json"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor"
+  ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
 fi
 
 if command -v windsurf >/dev/null; then
