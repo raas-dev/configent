@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.159.1](https://github.com/raas-dev/configent/compare/1.159.0...1.159.1) (2025-07-25)
+
+
+### Fixes
+
+* **cursor:** add mcp.json config and setup symlink for MCP servers ([57a60b4](https://github.com/raas-dev/configent/commit/57a60b480b753ff77b000c06314fb3cbbf03b23c))
+* **dotfiles:** disable browser-use telemetry ([c52c011](https://github.com/raas-dev/configent/commit/c52c0110e8bd12c4253833b8a72a68c7d62560a4))
+* **mise:** remove playwright installation ([73f9b74](https://github.com/raas-dev/configent/commit/73f9b743dd4d0dd7e4836f4601237fa120f44ff4))
+
 ## [1.159.0](https://github.com/raas-dev/configent/compare/1.158.8...1.159.0) (2025-07-23)
 
 
