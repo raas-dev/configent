@@ -13,11 +13,11 @@
         "duckduckgo-mcp-server"
       ]
     },
-    "playwright-mcp": {
+    "playwright": {
       "command": "npx",
       "args": [
         "-y",
-        "@executeautomation/playwright-mcp-server"
+        "@playwright/mcp@latest"
       ]
     }
   }
