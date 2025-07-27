@@ -331,7 +331,7 @@ alias gptme-server='gptme-dev gptme-server'
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
 # Langflow
-alias langflow='uvx langflow'
+alias langflow='uvx --python 3.11 langflow'
 
 # Reactive notebook
 alias marimo='uvx marimo'
