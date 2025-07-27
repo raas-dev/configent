@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.160.0](https://github.com/raas-dev/configent/compare/1.159.1...1.160.0) (2025-07-27)
+
+
+### Features
+
+* **cursor:** add browsermcp command to mcp.json configuration ([b6846df](https://github.com/raas-dev/configent/commit/b6846df2f3d0aa397ad87c5bc16ca47772ea5150))
+
+
+### Fixes
+
+* **bin:** remove obsolete postinstall_mcps script and update config.toml ([b708d50](https://github.com/raas-dev/configent/commit/b708d50fbbf6461ec7669f7ab4cadb45df7ba39d))
+* **cursor:** update MCP command and environment variables ([3965f4d](https://github.com/raas-dev/configent/commit/3965f4decf248355984c4c7a8df6aa70590acae2))
+* **dotfiles:** specify Python 3.11 in langflow alias command ([27384be](https://github.com/raas-dev/configent/commit/27384be841cc1b80428733fe9a26d7942c65dc4f))
+
 ### [1.159.1](https://github.com/raas-dev/configent/compare/1.159.0...1.159.1) (2025-07-25)
 
 
