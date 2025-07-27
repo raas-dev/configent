@@ -12,6 +12,10 @@
       "args": [
         "duckduckgo-mcp-server"
       ]
+    },
+    "browsermcp": {
+      "command": "npx",
+      "args": ["@browsermcp/mcp@latest"]
     }
   }
 }
