@@ -13,9 +13,12 @@
         "duckduckgo-mcp-server"
       ]
     },
-    "browsermcp": {
+    "mcp-midscene": {
       "command": "npx",
-      "args": ["@browsermcp/mcp@latest"]
+      "args": ["-y", "@midscene/mcp"],
+      "env": {
+        "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
+      }
     }
   }
 }
