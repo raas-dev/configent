@@ -2,16 +2,11 @@
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ]
+      "args": ["-y", "@upstash/context7-mcp@latest"]
     },
     "duckduckgo-mcp": {
       "command": "uvx",
-      "args": [
-        "duckduckgo-mcp-server"
-      ]
+      "args": ["duckduckgo-mcp-server"]
     },
     "mcp-midscene": {
       "command": "npx",
