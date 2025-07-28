@@ -2,22 +2,13 @@
 version = "2.27.60"
 backend = "aqua:aws/aws-cli"
 
-[tools.awscli.checksums]
-"AWSCLIV2-2.27.60.pkg" = "blake3:840755a4df20c37e05bb8e83b96afdde47446a042abcce86495c6a33a29571b9"
-
 [tools.bun]
 version = "1.2.19"
 backend = "core:bun"
 
-[tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "blake3:1d033789f9a12ddcc7b1e03c675af1dfcbf770aa7fbfa2c49dc6599e591e4779"
-
 [tools.cargo-binstall]
 version = "1.14.2"
 backend = "aqua:cargo-bins/cargo-binstall"
-
-[tools.cargo-binstall.checksums]
-"cargo-binstall-aarch64-apple-darwin.zip" = "blake3:a53a2bcd8eb367076cab636cf97ffa247982d79c9d7aadb47caaf9ed2bb9f2e7"
 
 [tools."cargo:aichat"]
 version = "0.30.0"
@@ -155,9 +146,6 @@ backend = "cargo:zoxide"
 version = "2.5.3"
 backend = "aqua:sigstore/cosign"
 
-[tools.cosign.checksums]
-cosign-darwin-arm64 = "sha256:86e0cad94d0da4c0dab5e26672ede71447a08a0f0d8495b9381c117df27d7d09"
-
 [tools.dotnet]
 version = "8.0.404"
 backend = "asdf:dotnet"
@@ -170,9 +158,6 @@ backend = "dotnet:powershell"
 version = "0.65.0"
 backend = "aqua:junegunn/fzf"
 
-[tools.fzf.checksums]
-"fzf-0.65.0-darwin_arm64.tar.gz" = "sha256:9e4dfe01a67020a19861c881fd2ffbb8dd19b118b15e82e8fae83c578ca61ab7"
-
 [tools.gcloud]
 version = "510.0.0"
 backend = "asdf:gcloud"
@@ -181,15 +166,9 @@ backend = "asdf:gcloud"
 version = "2.76.1"
 backend = "aqua:cli/cli"
 
-[tools.github-cli.checksums]
-"gh_2.76.1_macOS_arm64.zip" = "sha256:896eb1be25926db57a301859f6f13d65e07c82b26d6eb11a8d7bd3b24220498c"
-
 [tools.go]
 version = "1.23.4"
 backend = "core:go"
-
-[tools.go.checksums]
-"go1.23.4.darwin-arm64.tar.gz" = "sha256:87d2bb0ad4fe24d2a0685a55df321e0efe4296419a9b3de03369dbe60b8acd3a"
 
 [tools."go:github.com/abhimanyu003/sttr"]
 version = "0.2.26"
@@ -223,29 +202,17 @@ backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 version = "1.8.1"
 backend = "aqua:jqlang/jq"
 
-[tools.jq.checksums]
-jq-macos-arm64 = "sha256:a9fe3ea2f86dfc72f6728417521ec9067b343277152b114f4e98d8cb0e263603"
-
 [tools.lima]
 version = "1.0.7"
 backend = "aqua:lima-vm/lima"
-
-[tools.lima.checksums]
-"lima-1.0.7-Darwin-arm64.tar.gz" = "sha256:fa3836128e19920ca7113bbcc9908399c56f0665b4b04f294dd76aa02ef38905"
 
 [tools.neovim]
 version = "0.11.1"
 backend = "aqua:neovim/neovim"
 
-[tools.neovim.checksums]
-"nvim-macos-arm64.tar.gz" = "sha256:89a766fb41303dc101766898ad3c4eb6db556e19965582cc164419605a1d1f61"
-
 [tools.node]
 version = "22.14.0"
 backend = "core:node"
-
-[tools.node.checksums]
-"node-v22.14.0-darwin-arm64.tar.gz" = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5e42"
 
 [tools."pipx:azure-cli"]
 version = "2.68.0"
@@ -299,15 +266,9 @@ backend = "core:rust"
 version = "0.10.0"
 backend = "aqua:koalaman/shellcheck"
 
-[tools.shellcheck.checksums]
-"shellcheck-v0.10.0.darwin.x86_64.tar.xz" = "sha256:ef27684f23279d112d8ad84e0823642e43f838993bbb8c0963db9b58a90464c2"
-
 [tools.slsa-verifier]
 version = "2.7.1"
 backend = "ubi:slsa-framework/slsa-verifier"
-
-[tools.slsa-verifier.checksums]
-slsa-verifier-macos-aarch64 = "sha256:39abfcf5f1d690c3e889ce3d2d6a8b87711424d83368511868d414e8f8bcb05c"
 
 [tools.tmux]
 version = "3.5a"
@@ -317,12 +278,6 @@ backend = "asdf:tmux"
 version = "0.64.1"
 backend = "aqua:aquasecurity/trivy"
 
-[tools.trivy.checksums]
-"trivy_0.64.1_macOS-ARM64.tar.gz" = "sha256:7489c69948cda032adc2862923222917cd025411abc4bba8517a8d581aed226c"
-
 [tools.uv]
 version = "0.8.3"
 backend = "aqua:astral-sh/uv"
-
-[tools.uv.checksums]
-"uv-aarch64-apple-darwin.tar.gz" = "sha256:9ebfe9f3b51187932ef97270b689da48261acacadd6ea7018d2cc62719c86ffe"
