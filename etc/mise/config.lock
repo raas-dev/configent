@@ -191,7 +191,7 @@ version = "0.10.0"
 backend = "go:github.com/shihanng/tfvar"
 
 [tools."go:golang.org/x/tools/gopls"]
-version = "0.19.1"
+version = "0.20.0"
 backend = "go:golang.org/x/tools/gopls"
 
 [tools."go:mvdan.cc/sh/v3/cmd/shfmt"]
