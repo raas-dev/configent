@@ -522,5 +522,9 @@
     "command": "workbench.action.terminal.sendSequence",
     "key": "shift+enter",
     "when": "terminalFocus"
+  },
+  {
+    "command": "composerMode.background",
+    "key": "cmd+e"
   }
 ]
