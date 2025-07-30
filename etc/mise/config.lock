@@ -235,7 +235,7 @@ version = "2.6.0"
 backend = "pipx:mcpm"
 
 [tools."pipx:pdm"]
-version = "2.25.4"
+version = "2.25.5"
 backend = "pipx:pdm"
 
 [tools."pipx:poetry"]
