@@ -1,6 +1,11 @@
 [tools.awscli]
-version = "2.27.62"
+version = "2.27.63"
 backend = "aqua:aws/aws-cli"
+
+[tools.awscli.platforms.macos-arm64]
+checksum = "blake3:5af3c532afafbdb5108e68017ccee5f7bc31adf12d0b4fcdd62df3ebe47b56bc"
+size = 39583545
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.27.63.pkg"
 
 [tools.bun]
 version = "1.2.19"
@@ -55,7 +60,7 @@ version = "1.19.0"
 backend = "cargo:gping"
 
 [tools."cargo:hurl"]
-version = "6.1.1"
+version = "7.0.0"
 backend = "cargo:hurl"
 
 [tools."cargo:jnv"]
@@ -163,8 +168,13 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.76.1"
+version = "2.76.2"
 backend = "aqua:cli/cli"
+
+[tools.github-cli.platforms.macos-arm64]
+checksum = "sha256:43cea90fbd5d3b607b6125082f4a5faf7d5fc2e548d3d349a3b0310706a4f878"
+size = 17359067
+url = "https://github.com/cli/cli/releases/download/v2.76.2/gh_2.76.2_macOS_arm64.zip"
 
 [tools.go]
 version = "1.23.4"
@@ -275,8 +285,13 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.64.1"
+version = "0.65.0"
 backend = "aqua:aquasecurity/trivy"
+
+[tools.trivy.platforms.macos-arm64]
+checksum = "sha256:3076e27024b92d634fe09947934d36dc8b651a8539ff1d69b4cfac008dfb59ce"
+size = 44246462
+url = "https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_macOS-ARM64.tar.gz"
 
 [tools.uv]
 version = "0.8.4"
