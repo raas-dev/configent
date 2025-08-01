@@ -281,10 +281,10 @@
     {
       "name": "codebase",
       "params": {
-          "nRetrieve": 25,
-          "nFinal": 5,
-          "useReranking": true
-        }
+        "nRetrieve": 25,
+        "nFinal": 5,
+        "useReranking": true
+      }
     },
     {
       "name": "folder",
