@@ -446,21 +446,26 @@ alias standard-version='bunx standard-version'
 
 _aichat_setup_functions() {
   git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
-    (cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build)
+    (
+      cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build@tool && argc mcp start
+    )
 }
 
 _aichat_build_tools() {
-  [ ! -d "$AICHAT_FUNCTIONS_DIR" ] && _aichat_setup_functions
-  (
-    cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
-      if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        if [ -n "$(git status --porcelain)" ]; then
-          argc build@tool
-          argc mcp start
+  if [ ! -d "$AICHAT_FUNCTIONS_DIR" ]; then
+    _aichat_setup_functions
+  else
+    (
+      cd "$AICHAT_FUNCTIONS_DIR" >/dev/null 2>&1 &&
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          if [ -n "$(git status --porcelain)" ]; then
+            argc build@tool
+            argc mcp start
+          fi
         fi
-      fi
-    argc mcp check >/dev/null 2>&1 || argc mcp start
-  )
+      argc mcp check >/dev/null 2>&1 || argc mcp start
+    )
+  fi
 }
 
 # in ~/.rclocal:
