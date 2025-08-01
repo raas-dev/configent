@@ -127,9 +127,24 @@
       }
     },
     {
-      "title": "Ollama: mistral-small3.1",
+      "title": "Ollama: qwen3:8b",
       "provider": "ollama",
-      "model": "mistral-small3.1:24b",
+      "model": "qwen3:8b",
+      "apiBase": "http://127.0.0.1:11434",
+      "contextLength": 40960,
+      "completionOptions": {
+        "temperature": 0,
+        "keepAlive": 900
+      },
+      "capabilities": {
+        "uploadImage": false,
+        "tools": true
+      }
+    },
+    {
+      "title": "Ollama: mistral-small3.2",
+      "provider": "ollama",
+      "model": "mistral-small3.2:24b",
       "apiBase": "http://127.0.0.1:11434",
       "contextLength": 131072,
       "completionOptions": {
@@ -138,21 +153,6 @@
       },
       "capabilities": {
         "uploadImage": true,
-        "tools": true
-      }
-    },
-    {
-      "title": "Ollama: devstral",
-      "provider": "ollama",
-      "model": "devstral:24b",
-      "apiBase": "http://127.0.0.1:11434",
-      "contextLength": 131072,
-      "completionOptions": {
-        "temperature": 0,
-        "keepAlive": 900
-      },
-      "capabilities": {
-        "uploadImage": false,
         "tools": true
       }
     },
