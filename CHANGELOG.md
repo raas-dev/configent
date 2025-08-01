@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.160.1](https://github.com/raas-dev/configent/compare/1.160.0...1.160.1) (2025-08-01)
+
+
+### Fixes
+
+* **config:** update Ollama models and adjust capabilities settings ([9ef5e4b](https://github.com/raas-dev/configent/commit/9ef5e4b0704d0bcddfdf92586abd7607ad697fe9))
+* **dotfiles:** ensure mcp service starts if not running during buildtools check ([562f3bc](https://github.com/raas-dev/configent/commit/562f3bc0efb39e5e398c4cf064354f963bdbf92f))
+
 ## [1.160.0](https://github.com/raas-dev/configent/compare/1.159.1...1.160.0) (2025-07-27)
 
 
