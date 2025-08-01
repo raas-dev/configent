@@ -1,19 +1,24 @@
 [tools.awscli]
-version = "2.27.63"
+version = "2.28.1"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:5af3c532afafbdb5108e68017ccee5f7bc31adf12d0b4fcdd62df3ebe47b56bc"
-size = 39583545
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.27.63.pkg"
+checksum = "blake3:8b690cfeebfd88966348817f5004b6f37a5fc91f18e368316ed43b61c5760aeb"
+size = 39637643
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.1.pkg"
 
 [tools.bun]
 version = "1.2.19"
 backend = "core:bun"
 
 [tools.cargo-binstall]
-version = "1.14.2"
+version = "1.14.3"
 backend = "aqua:cargo-bins/cargo-binstall"
+
+[tools.cargo-binstall.platforms.macos-arm64]
+checksum = "blake3:4e0e5318781fd43853337c899394843a46eb6e1cb09d947ba05da021cc617fac"
+size = 5997842
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.3/cargo-binstall-aarch64-apple-darwin.zip"
 
 [tools."cargo:aichat"]
 version = "0.30.0"
