@@ -1,33 +1,33 @@
 {
+  "agent": {
+    "e4167f8f-8aab-4739-95f4-c25616cb9b83": {
+      "created_at": "2025-07-23T20:11:41.710483",
+      "default": true,
+      "id": "e4167f8f-8aab-4739-95f4-c25616cb9b83",
+      "max_steps": null,
+      "system_prompt": null,
+      "use_vision": null
+    }
+  },
   "browser_profile": {
     "3d78fa13-538d-4e08-bce0-00262c497ccd": {
-      "id": "3d78fa13-538d-4e08-bce0-00262c497ccd",
-      "default": true,
-      "created_at": "2025-07-23T20:11:41.710466",
-      "headless": false,
-      "user_data_dir": null,
       "allowed_domains": null,
-      "downloads_path": null
+      "created_at": "2025-07-23T20:11:41.710466",
+      "default": true,
+      "downloads_path": null,
+      "headless": false,
+      "id": "3d78fa13-538d-4e08-bce0-00262c497ccd",
+      "user_data_dir": null
     }
   },
   "llm": {
     "cd02ac3a-e014-4e00-9443-b7a0ba9f735e": {
-      "id": "cd02ac3a-e014-4e00-9443-b7a0ba9f735e",
-      "default": true,
       "created_at": "2025-07-23T20:11:41.710477",
-      "model": "gpt-4.1-nano",
-      "temperature": 0,
-      "max_tokens": null
-    }
-  },
-  "agent": {
-    "e4167f8f-8aab-4739-95f4-c25616cb9b83": {
-      "id": "e4167f8f-8aab-4739-95f4-c25616cb9b83",
       "default": true,
-      "created_at": "2025-07-23T20:11:41.710483",
-      "max_steps": null,
-      "use_vision": null,
-      "system_prompt": null
+      "id": "cd02ac3a-e014-4e00-9443-b7a0ba9f735e",
+      "max_tokens": null,
+      "model": "gpt-4.1-nano",
+      "temperature": 0
     }
   }
 }

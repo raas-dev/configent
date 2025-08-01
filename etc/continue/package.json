@@ -1,4 +1,4 @@
 {
-  "name": "continue-config",
-  "main": "config.js"
+  "main": "config.js",
+  "name": "continue-config"
 }
