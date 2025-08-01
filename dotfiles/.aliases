@@ -456,8 +456,10 @@ _aichat_build_tools() {
       if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         if [ -n "$(git status --porcelain)" ]; then
           argc build@tool
+          argc mcp start
         fi
       fi
+    argc mcp check >/dev/null 2>&1 || argc mcp start
   )
 }
 
