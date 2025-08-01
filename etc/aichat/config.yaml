@@ -75,15 +75,13 @@ clients:
     name: ollama
     api_base: http://127.0.0.1:11434/v1
     models:
-      - name: gemma3:12b
-        max_input_tokens: 131072
-        supports_function_calling: true
-        supports_vision: true
       - name: qwen3:8b
         max_input_tokens: 40960
         supports_function_calling: true
-      - name: deepseek-r1:8b
+      - name: mistral-small3.2:24b
         max_input_tokens: 131072
+        supports_function_calling: true
+        supports_vision: true
       - name: nomic-embed-text
         type: embedding
       - name: jina-reranker-v2-base-multilingual
