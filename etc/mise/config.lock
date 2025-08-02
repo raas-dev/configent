@@ -301,6 +301,13 @@ backend = "ubi:sigoden/argc"
 [tools."ubi:sigoden/argc".platforms.macos-arm64-argc]
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
+[tools."ubi:sigoden/upt"]
+version = "0.9.0"
+backend = "ubi:sigoden/upt"
+
+[tools."ubi:sigoden/upt".platforms.macos-arm64-upt]
+checksum = "blake3:d30f322831790f9d7c87d3e07c97573210706e689075342ff9a4e403fb4ad0e8"
+
 [tools.uv]
 version = "0.8.4"
 backend = "aqua:astral-sh/uv"
