@@ -32,15 +32,15 @@ if [ "$(uname -s)" = "Darwin" ]; then
   # GNU bins prepended to PATH on macOS in .profile
   brew install coreutils
   brew install findutils
-  #brew install gnu-getopt
-  #brew install gnu-indent
-  #brew install gnu-sed
-  #brew install gnu-tar
-  #brew install gnu-time
-  #brew install gnu-which
 
   # GNU bins NOT prepended to PATH on macOS in .profile
   brew install gawk
+  #brew install gnu-getopt
+  #brew install gnu-indent
+  brew install gnu-sed
+  #brew install gnu-tar
+  #brew install gnu-time
+  #brew install gnu-which
   brew install grep
 
   # Common build-time requirement
