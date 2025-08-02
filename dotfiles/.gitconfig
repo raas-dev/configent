@@ -33,6 +33,7 @@
   st = status --branch --show-stash
   sup = submodule update --init --recursive
   t = tag --list --sort=-version:refname
+  undo = reset --soft HEAD~1
 
   # Show the diff between the latest commit and current
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
