@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.160.2](https://github.com/raas-dev/configent/compare/1.160.1...1.160.2) (2025-08-02)
+
+
+### Fixes
+
+* **docker:** update buildx plugin version to v0.26.1 ([f0d823a](https://github.com/raas-dev/configent/commit/f0d823a919ce9745e9c83361ed7ed5f680c2ae89))
+
 ### [1.160.1](https://github.com/raas-dev/configent/compare/1.160.0...1.160.1) (2025-08-01)
 
 
