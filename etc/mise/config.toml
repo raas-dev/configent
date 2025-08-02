@@ -93,6 +93,7 @@ lima = '1.0.7'
 slsa-verifier = "latest"
 cosign = "latest"
 'ubi:sigoden/argc' = 'latest'
+#'ubi:mikefarah/yq' = 'latest'
 #'ubi:wagoodman/dive' = "latest"
 #'vfox:jdx/vfox-clang' = '18.1.8'
 
