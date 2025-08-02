@@ -12,7 +12,7 @@
   bm = branch --move --force
   c = !"f() { ai_commit \"$*\"; }; f"
   ca = !"git add --all && git c"
-  cam = !"git add --all && git commit --amend --no-edit"
+  cam = !"git add --all && git commit --amend"
   co = checkout
   discard = reset --hard
   f = fetch --all --tags
