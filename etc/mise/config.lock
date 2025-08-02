@@ -24,10 +24,6 @@ url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.3/ca
 version = "0.30.0"
 backend = "cargo:aichat"
 
-[tools."cargo:argc"]
-version = "1.23.0"
-backend = "cargo:argc"
-
 [tools."cargo:atuin"]
 version = "18.6.0"
 backend = "cargo:atuin"
@@ -297,6 +293,13 @@ backend = "aqua:aquasecurity/trivy"
 checksum = "sha256:3076e27024b92d634fe09947934d36dc8b651a8539ff1d69b4cfac008dfb59ce"
 size = 44246462
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_macOS-ARM64.tar.gz"
+
+[tools."ubi:sigoden/argc"]
+version = "1.23.0"
+backend = "ubi:sigoden/argc"
+
+[tools."ubi:sigoden/argc".platforms.macos-arm64-argc]
+checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [tools.uv]
 version = "0.8.4"

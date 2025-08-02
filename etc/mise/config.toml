@@ -3,7 +3,6 @@ rust = '1.86.0'
 cargo-binstall = 'latest'
 # cli tools
 'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
-'cargo:argc' = 'latest'
 'cargo:atuin' = { version = '18.6.0', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'cargo:diskonaut' = 'latest'
@@ -67,10 +66,10 @@ uv = 'latest'
 
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
-
 #ruby = '3.4.2'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
+
 fzf = 'latest'
 jq = 'latest'
 github-cli = 'latest'
@@ -93,6 +92,7 @@ tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmu
 lima = '1.0.7'
 slsa-verifier = "latest"
 cosign = "latest"
+'ubi:sigoden/argc' = 'latest'
 #'ubi:wagoodman/dive' = "latest"
 #'vfox:jdx/vfox-clang' = '18.1.8'
 
