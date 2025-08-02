@@ -96,7 +96,7 @@ cosign = "latest"
 #'ubi:mikefarah/yq' = 'latest'
 #'ubi:sigoden/upt' = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 #'ubi:wagoodman/dive' = "latest"
-#'vfox:jdx/vfox-clang' = '18.1.8'
+#'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
 [settings]
 experimental = true
