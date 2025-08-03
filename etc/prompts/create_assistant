@@ -40,6 +40,6 @@ while IFS= read -r -d '' pattern_file; do
   done <"$output_file" >"$output_file.tmp" && mv "$output_file.tmp" "$output_file"
 
   echo "Creating $output_file"
-done < <(find fabric/patterns -name system.md -print0)
+done < <(find fabric/data/patterns -name system.md -print0)
 
 echo "Finished processing files."
