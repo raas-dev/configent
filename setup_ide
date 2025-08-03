@@ -15,17 +15,28 @@ bin_path="$this_path/bin"
 
 if command -v code >/dev/null; then
   APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+
+  # Create VS Code mcp.json
+  if [ ! -r "$backup_path/.vscode/mcp.json" ]; then
+    if [ -r "$HOME/.vscode/mcp.json" ]; then
+      mkdir -p "$backup_path/.vscode"
+      cp -P "$HOME/.vscode/mcp.json" "$backup_path/.vscode/mcp.json"
+    fi
+  fi
+  mkdir -p "$HOME/.vscode"
+  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.vscode/mcp.json"
+
+  # Create Kilo Code mcp_settings.json
   APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
 
 if command -v cursor >/dev/null; then
   APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
-  APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 
   backup_path="$this_path/.backup"
   config_path="$HOME/.config/configent"
 
-  # mcp.json
+  # Create Cursor mcp.json
   if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
     if [ -r "$HOME/.cursor/mcp.json" ]; then
       mkdir -p "$backup_path/.cursor"
@@ -34,6 +45,9 @@ if command -v cursor >/dev/null; then
   fi
   mkdir -p "$HOME/.cursor"
   ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
+
+  # Create Kilo Code mcp_settings.json
+  APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi
 
 if command -v windsurf >/dev/null; then
