@@ -360,6 +360,17 @@
           "command": "npx",
           "args": ["-y", "@upstash/context7-mcp@latest"]
         }
+      },
+      {
+        "name": "midscene",
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@midscene/mcp"],
+          "env": {
+            "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
+          }
+        }
       }
     ],
     "modelRoles": {
