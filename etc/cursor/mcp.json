@@ -4,16 +4,20 @@
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp@latest"]
     },
-    "duckduckgo-mcp": {
+    "duckduckgo": {
       "command": "uvx",
       "args": ["duckduckgo-mcp-server"]
     },
-    "mcp-midscene": {
+    "midscene": {
       "command": "npx",
       "args": ["-y", "@midscene/mcp"],
       "env": {
         "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
       }
+    },
+    "functions": {
+      "command": "npx",
+      "args": ["--prefix", "~/.config/aichat/functions/mcp/server", "mcp-llm-functions", "~/.config/aichat/functions"]
     }
   }
 }
