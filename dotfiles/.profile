@@ -255,9 +255,8 @@ export ANONYMIZED_TELEMETRY=false
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
 export AICHAT_FUNCTIONS_DIR="$HOME/.config/aichat/functions"
 export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/general"
-
-# https://alkue.com
 export FUNCTIONS_REPO_URL="git@github.com:alkue-com/functions.git"
+export LLM_MCP_SKIP_CONFIRM=".*"
 
 ### XDG base directory specification ###########################################
 
