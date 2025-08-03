@@ -31,7 +31,7 @@ if command -v cursor >/dev/null; then
     fi
   fi
   mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
+  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
 fi
 
 if command -v windsurf >/dev/null; then
