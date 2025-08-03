@@ -103,28 +103,55 @@ export function modifyConfig(config: Config): Config {
     (provider) => provider.name === "google"
   ).params.serperApiKey = process.env.SERPER_API_KEY || "";
 
-  // Tool use ------------------------------------------------------------------
+  // Tools ---------------------------------------------------------------------
 
-  // MCP servers
-  if (config.experimental?.modelContextProtocolServers) {
-    config.experimental.modelContextProtocolServers.forEach((server: any) => {
-      if (server.transport && server.transport.env) {
-        Object.keys(server.transport.env).forEach((key) => {
-          if (server.transport.env[key] === "[ANTHROPIC_API_KEY]") {
-            server.transport.env[key] = process.env.ANTHROPIC_API_KEY || "";
+  // MCP servers - Load dynamically from mcp.json
+  const mcpConfigPath = path.join(
+    os.homedir(),
+    ".config",
+    "configent",
+    "mcp",
+    "mcp.json"
+  );
+
+  try {
+    if (fs.existsSync(mcpConfigPath)) {
+      const mcpConfigContent = fs.readFileSync(mcpConfigPath, "utf-8");
+      const mcpConfig = JSON.parse(mcpConfigContent);
+
+      // Transform mcp.json format to Continue's expected format
+      const mcpServers = Object.keys(mcpConfig.mcpServers || {}).map(
+        (serverName) => {
+          const serverConfig = mcpConfig.mcpServers[serverName];
+
+          const server: any = {
+            name: serverName,
+            transport: {
+              type: "stdio",
+              command: serverConfig.command,
+              args: serverConfig.args || [],
+            },
+          };
+
+          // Add environment variables if they exist
+          if (serverConfig.env) {
+            server.transport.env = { ...serverConfig.env };
           }
-          if (server.transport.env[key] === "[GEMINI_API_KEY]") {
-            server.transport.env[key] = process.env.GEMINI_API_KEY || "";
-          }
-          if (server.transport.env[key] === "[OPENAI_API_KEY]") {
-            server.transport.env[key] = process.env.OPENAI_API_KEY || "";
-          }
-          if (server.transport.env[key] === "[OPENROUTER_API_KEY]") {
-            server.transport.env[key] = process.env.OPENROUTER_API_KEY || "";
-          }
-        });
+
+          return server;
+        }
+      );
+
+      // Initialize experimental section if it doesn't exist
+      if (!config.experimental) {
+        config.experimental = {};
       }
-    });
+
+      // Set the dynamically loaded MCP servers
+      config.experimental.modelContextProtocolServers = mcpServers;
+    }
+  } catch (e) {
+    console.error(`Failed to load MCP config from ${mcpConfigPath}: ${e}`);
   }
 
   return config;

@@ -344,36 +344,6 @@
   },
   "experimental": {
     "useTools": true,
-    "modelContextProtocolServers": [
-      {
-        "name": "duckduckgo",
-        "transport": {
-          "type": "stdio",
-          "command": "uvx",
-          "args": ["duckduckgo-mcp-server"]
-        }
-      },
-      {
-        "name": "context7",
-        "transport": {
-          "type": "stdio",
-          "command": "npx",
-          "args": ["-y", "@upstash/context7-mcp@latest"]
-        }
-      },
-      {
-        "name": "midscene",
-        "transport": {
-          "type": "stdio",
-          "command": "npx",
-          "args": ["-y", "@midscene/mcp"],
-          "env": {
-            "MIDSCENE_MODEL_NAME": "gpt-4.1-mini",
-            "OPENAI_API_KEY": "[OPENAI_API_KEY]"
-          }
-        }
-      }
-    ],
     "modelRoles": {
       "inlineEdit": "gemini-2.5-pro",
       "applyCodeBlock": "gemini-2.5-pro",
