@@ -446,6 +446,8 @@ alias standard-version='bunx standard-version'
 
 _aichat_setup_functions() {
   git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
+  ln -sfnv "$HOME/.config/configent/mcp/mcp.json" \
+    "$AICHAT_FUNCTIONS_DIR/mcp.json" &&
     (
       cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build@tool && argc mcp start
     )
