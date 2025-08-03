@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### usage ######################################################################
+
+# you can use this script to symlink configuration for VS Code likes, e.g.:
+#
+# APP_NAME="Code" BIN_NAME="code" ./setup_code
+# APP_NAME="Cursor" BIN_NAME="cursor" ./setup_code
+# APP_NAME="Windsurf" BIN_NAME="windsurf" ./setup_code
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+config_path="$HOME/.config/configent"
+kilocode_settings_subpath="globalStorage/kilocode.kilo-code/settings"
+
+### variables ##################################################################
+
+: "${APP_NAME:="Code"}"
+: "${BIN_NAME:="code"}"
+
+### Symlink configuration ######################################################
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  user_path="$HOME/Library/Application Support/$APP_NAME/User"
+  backup_path="$this_path/../.backup/Library/Application Support/$APP_NAME/User"
+else
+  user_path="$HOME/.config/$APP_NAME/User"
+  backup_path="$this_path/../.backup/.config/$APP_NAME/User"
+fi
+
+# symlink mcp.json to mcp_settings.json
+if [ ! -r "$backup_path/$kilocode_settings_subpath/mcp_settings.json" ]; then
+  if [ -r "$user_path/$kilocode_settings_subpath/mcp_settings.json" ]; then
+    mkdir -p "$backup_path/$kilocode_settings_subpath"
+    cp -P "$user_path/$kilocode_settings_subpath/mcp_settings.json" "$backup_path/$kilocode_settings_subpath/mcp_settings.json"
+  fi
+fi
+mkdir -p "$user_path/$kilocode_settings_subpath"
+ln -sfnv "$config_path/mcp/mcp.json" \
+  "$user_path/$kilocode_settings_subpath/mcp_settings.json"

@@ -15,10 +15,12 @@ bin_path="$this_path/bin"
 
 if command -v code >/dev/null; then
   APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+  APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
 
 if command -v cursor >/dev/null; then
   APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+  APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 
   backup_path="$this_path/.backup"
   config_path="$HOME/.config/configent"
@@ -36,6 +38,7 @@ fi
 
 if command -v windsurf >/dev/null; then
   APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_code"
+  APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_kilocode"
 fi
 
 "$bin_path/setup_continue"
