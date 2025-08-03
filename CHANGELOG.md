@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.160.3](https://github.com/raas-dev/configent/compare/1.160.2...1.160.3) (2025-08-03)
+
+
+### Fixes
+
+* **ai:** Remove outdated aichat developer prompts ([5f1601c](https://github.com/raas-dev/configent/commit/5f1601c330157cb797d55c5c341aeb979c155012))
+* **ai:** Update assistant prompts from fabric ([b2cde70](https://github.com/raas-dev/configent/commit/b2cde7019f55d0f08561c776d70b220b40dc2ed7))
+* **config:** update argc tool source and remove old cargo entry ([5cc4e73](https://github.com/raas-dev/configent/commit/5cc4e7303392d54e741ecef47a6220f35216174c))
+* **macos:** install gnu-sed ([4739806](https://github.com/raas-dev/configent/commit/4739806bd6c2ef20a8e2ca0554f7693a6450b081))
+* **prompts:** correct path to system.md in create_assistant script ([5cf28ec](https://github.com/raas-dev/configent/commit/5cf28ec7120348ffc9f8894dc0d9f7e036764158))
+
 ### [1.160.2](https://github.com/raas-dev/configent/compare/1.160.1...1.160.2) (2025-08-02)
 
 
