@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.161.0](https://github.com/raas-dev/configent/compare/1.160.4...1.161.0) (2025-08-03)
+
+
+### Features
+
+* **ai:** load MCP servers dynamically from mcp.json ([7d5306e](https://github.com/raas-dev/configent/commit/7d5306e99d4545a58351e93394d3c09d85ee3260))
+
+
+### Fixes
+
+* **setup_ide:** copy and link Windsurf mcp_config.json correctly ([a7b9c8d](https://github.com/raas-dev/configent/commit/a7b9c8deca4884c2c4ff0565b5f3c64d570a0b86))
+* **setup_ide:** correct symlink and backup handling for mcp.json files ([50e4528](https://github.com/raas-dev/configent/commit/50e4528e90a9c0931ca661d8e515b117d95ea962))
+* **setup:** add kilocode config symlink setup and integrate it ([7f95703](https://github.com/raas-dev/configent/commit/7f95703532e06e8d0daa7de65fe62e6c23e8490e))
+
 ### [1.160.4](https://github.com/raas-dev/configent/compare/1.160.3...1.160.4) (2025-08-03)
 
 
