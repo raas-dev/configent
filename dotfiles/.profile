@@ -250,11 +250,14 @@ export INFRACOST_SKIP_UPDATE_CHECK=true
 # browser-use
 export ANONYMIZED_TELEMETRY=false
 
-### aichat #####################################################################
+### ai #########################################################################
 
+# aichat
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
 export AICHAT_FUNCTIONS_DIR="$HOME/.config/aichat/functions"
 export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/general"
+
+# functions
 export FUNCTIONS_REPO_URL="git@github.com:alkue-com/functions.git"
 export LLM_MCP_SKIP_CONFIRM=".*"
 
