@@ -26,7 +26,6 @@ if command -v code >/dev/null; then
   mkdir -p "$HOME/.vscode"
   ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.vscode/mcp.json"
 
-  # Create Kilo Code mcp_settings.json
   APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
 
@@ -46,7 +45,6 @@ if command -v cursor >/dev/null; then
   mkdir -p "$HOME/.cursor"
   ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
 
-  # Create Kilo Code mcp_settings.json
   APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi
 
@@ -64,7 +62,6 @@ if command -v windsurf >/dev/null; then
   mkdir -p "$HOME/.codeium/windsurf"
   ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.codeium/windsurf/mcp_config.json"
 
-  # Create Kilo Code mcp_settings.json
   APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_kilocode"
 fi
 
