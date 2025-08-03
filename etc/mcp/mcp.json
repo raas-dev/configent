@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "command": "npx"
+    },
+    "duckduckgo": {
+      "args": [
+        "duckduckgo-mcp-server"
+      ],
+      "command": "uvx"
+    },
+    "midscene": {
+      "args": [
+        "-y",
+        "@midscene/mcp"
+      ],
+      "command": "npx",
+      "env": {
+        "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
+      }
+    }
+  }
+}
