@@ -24,10 +24,10 @@ if command -v cursor >/dev/null; then
   config_path="$HOME/.config/configent"
 
   # mcp.json
-  if [ ! -r "$backup_path/.config/cursor/mcp.json" ]; then
+  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
     if [ -r "$HOME/.cursor/mcp.json" ]; then
-      mkdir -p "$backup_path/.config/cursor"
-      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.config/cursor/mcp.json"
+      mkdir -p "$backup_path/.cursor"
+      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
     fi
   fi
   mkdir -p "$HOME/.cursor"
