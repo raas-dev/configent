@@ -368,7 +368,8 @@
           "command": "npx",
           "args": ["-y", "@midscene/mcp"],
           "env": {
-            "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
+            "MIDSCENE_MODEL_NAME": "gpt-4.1-mini",
+            "OPENAI_API_KEY": "[OPENAI_API_KEY]"
           }
         }
       }

@@ -103,5 +103,29 @@ export function modifyConfig(config: Config): Config {
     (provider) => provider.name === "google"
   ).params.serperApiKey = process.env.SERPER_API_KEY || "";
 
+  // Tool use ------------------------------------------------------------------
+
+  // MCP servers
+  if (config.experimental?.modelContextProtocolServers) {
+    config.experimental.modelContextProtocolServers.forEach((server: any) => {
+      if (server.transport && server.transport.env) {
+        Object.keys(server.transport.env).forEach((key) => {
+          if (server.transport.env[key] === "[ANTHROPIC_API_KEY]") {
+            server.transport.env[key] = process.env.ANTHROPIC_API_KEY || "";
+          }
+          if (server.transport.env[key] === "[GEMINI_API_KEY]") {
+            server.transport.env[key] = process.env.GEMINI_API_KEY || "";
+          }
+          if (server.transport.env[key] === "[OPENAI_API_KEY]") {
+            server.transport.env[key] = process.env.OPENAI_API_KEY || "";
+          }
+          if (server.transport.env[key] === "[OPENROUTER_API_KEY]") {
+            server.transport.env[key] = process.env.OPENROUTER_API_KEY || "";
+          }
+        });
+      }
+    });
+  }
+
   return config;
 }
