@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.160.4](https://github.com/raas-dev/configent/compare/1.160.3...1.160.4) (2025-08-03)
+
+
+### Fixes
+
+* **config:** load API keys from environment variables correctly ([69bd630](https://github.com/raas-dev/configent/commit/69bd63074e0127e3ac7b8eb41b2e3c50f38ec129))
+* **continue:** add midscene mcp ([74ab123](https://github.com/raas-dev/configent/commit/74ab1239465cbada721f7ea859eafdf8a92240d9))
+* **cursor:** update command names and add functions MCP config ([2c89b07](https://github.com/raas-dev/configent/commit/2c89b07326a0595d32047d5595a63f18187379fd))
+* **setup_ide:** correct backup path for .cursor/mcp.json file ([3d28427](https://github.com/raas-dev/configent/commit/3d284279914d6c50269ea84461ca2502273e7733))
+* **setup_ide:** correct symlink target for mcp.json configuration file ([18fff6e](https://github.com/raas-dev/configent/commit/18fff6e646d30df341526d90580cfbd310fa346c))
+
 ### [1.160.3](https://github.com/raas-dev/configent/compare/1.160.2...1.160.3) (2025-08-03)
 
 
