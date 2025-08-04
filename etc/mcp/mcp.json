@@ -16,6 +16,9 @@
     "midscene": {
       "args": [
         "-y",
+        "envmcp",
+        "npx",
+        "-y",
         "@midscene/mcp"
       ],
       "command": "npx",
