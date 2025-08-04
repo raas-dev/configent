@@ -279,8 +279,13 @@ version = "1.86.0"
 backend = "core:rust"
 
 [tools.shellcheck]
-version = "0.10.0"
+version = "0.11.0"
 backend = "aqua:koalaman/shellcheck"
+
+[tools.shellcheck.platforms.macos-arm64]
+checksum = "blake3:ad4957ed937da4e876d19e3500fc31d104e43b6e4e11d57a7b7c40140bc870d6"
+size = 7245972
+url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.darwin.aarch64.tar.xz"
 
 [tools.slsa-verifier]
 version = "2.7.1"
