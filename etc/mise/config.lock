@@ -246,10 +246,6 @@ backend = "pipx:fast-agent-mcp"
 version = "4.3.3"
 backend = "pipx:glances"
 
-[tools."pipx:mcpm"]
-version = "2.6.0"
-backend = "pipx:mcpm"
-
 [tools."pipx:pdm"]
 version = "2.25.5"
 backend = "pipx:pdm"

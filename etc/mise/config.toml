@@ -57,7 +57,6 @@ uv = 'latest'
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
 #'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
-'pipx:mcpm' = 'latest'
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:pre-commit' = 'latest'
