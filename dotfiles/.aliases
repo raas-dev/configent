@@ -200,7 +200,7 @@ v() {
     fi
     limactl shell "$vm_name"
     ;;
-  shell | run | exec)
+  shell | run | exec | s)
     limactl shell "$vm_name" "$@"
     ;;
   down | stop)
