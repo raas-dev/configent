@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.1"
+version = "2.28.2"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:8b690cfeebfd88966348817f5004b6f37a5fc91f18e368316ed43b61c5760aeb"
-size = 39637643
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.1.pkg"
+checksum = "blake3:363373460985b7f7a373c99413bc31df8525a1f0c43f2fdd1446981bee406b77"
+size = 39714473
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.2.pkg"
 
 [tools.bun]
 version = "1.2.19"
@@ -251,7 +251,7 @@ version = "2.25.5"
 backend = "pipx:pdm"
 
 [tools."pipx:poetry"]
-version = "2.1.3"
+version = "2.1.4"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
