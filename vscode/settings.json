@@ -76,6 +76,7 @@
   "cursor.composer.backspaceRemoveContext": false,
   "cursor.composer.cmdPFilePicker2": true,
   "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.composer.shouldAutoSaveNonAgent": false,
   "cursor.composer.textSizeScale": 1.15,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
@@ -84,6 +85,7 @@
   ],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
+  "cursor.preferNotificationsSameAsChat": true,
   "cursor.semanticSearch.includePullRequests": false,
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
