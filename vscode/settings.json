@@ -79,7 +79,8 @@
   "cursor.composer.textSizeScale": 1.15,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
-    "markdown"
+    "markdown",
+    "untitled"
   ],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
@@ -422,7 +423,7 @@
     "!Split sequence"
   ],
   "yaml.schemas": {
-    "/Users/asyrjasalo/.cursor/extensions/continue.continue-1.0.19-darwin-arm64/config-yaml-schema.json": [
+    "/Users/asyrjasalo/.cursor/extensions/continue.continue-1.0.20-darwin-arm64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ]
   },
