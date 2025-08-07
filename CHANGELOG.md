@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.1](https://github.com/raas-dev/configent/compare/1.161.0...1.161.1) (2025-08-07)
+
+
+### Fixes
+
+* **dotfiles:** add 's' shortcut to limactl shell command aliases ([3648dfd](https://github.com/raas-dev/configent/commit/3648dfd673741cf7ca6dfce764226ea2b03aa7ee))
+* **mcp:** add missing arguments to midscene config in mcp.json ([2b3b445](https://github.com/raas-dev/configent/commit/2b3b445c274e20b80e4bae489ede1645b2051062))
+
 ## [1.161.0](https://github.com/raas-dev/configent/compare/1.160.4...1.161.0) (2025-08-03)
 
 
