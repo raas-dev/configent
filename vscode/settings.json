@@ -85,6 +85,7 @@
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.preferNotificationsSameAsChat": true,
+  "cursor.semanticSearch.includePullRequests": false,
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
