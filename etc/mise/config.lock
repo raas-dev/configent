@@ -235,11 +235,11 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:browser-use"]
-version = "0.5.9"
+version = "0.5.10"
 backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.51"
+version = "0.2.54"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
@@ -308,10 +308,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [tools.uv]
-version = "0.8.5"
+version = "0.8.6"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:467e875ac84ac2155f048b56e33741d7dee6f02369048d5b6c05b74b745411e2"
-size = 16942281
-url = "https://github.com/astral-sh/uv/releases/download/0.8.5/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:15269226c753f01137b5a35c79e59ab46d8aab25a242641fdc4003a6d0a831ff"
+size = 17202255
+url = "https://github.com/astral-sh/uv/releases/download/0.8.6/uv-aarch64-apple-darwin.tar.gz"
