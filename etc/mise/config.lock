@@ -1,24 +1,24 @@
 [tools.awscli]
-version = "2.28.5"
+version = "2.28.6"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:b6ed171b15dfe413353bfea406d063ea1bae48ba7294bf7e84dfef3be5c69800"
-size = 39749139
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.5.pkg"
+checksum = "blake3:d71e87d098b09e101efa78d71756ac629c1a46c40fb3d64d145fe63f235c3cc3"
+size = 39753229
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.6.pkg"
 
 [tools.bun]
 version = "1.2.19"
 backend = "core:bun"
 
 [tools.cargo-binstall]
-version = "1.14.3"
+version = "1.14.4"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.platforms.macos-arm64]
-checksum = "blake3:4e0e5318781fd43853337c899394843a46eb6e1cb09d947ba05da021cc617fac"
-size = 5997842
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.3/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "blake3:86599ab2c99d951d1700a564616926d40efde0014a5306b68df335749135b0e6"
+size = 5938563
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.4/cargo-binstall-aarch64-apple-darwin.zip"
 
 [tools."cargo:aichat"]
 version = "0.30.0"
@@ -235,7 +235,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:browser-use"]
-version = "0.5.10"
+version = "0.5.11"
 backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:fast-agent-mcp"]
@@ -255,7 +255,7 @@ version = "2.1.4"
 backend = "pipx:poetry"
 
 [tools."pipx:pre-commit"]
-version = "4.2.0"
+version = "4.3.0"
 backend = "pipx:pre-commit"
 
 [tools."pipx:sncli"]
@@ -308,10 +308,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [tools.uv]
-version = "0.8.7"
+version = "0.8.8"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:d1f056d2d04b07a69d2be6ed7eb07ece12dda26570a9af316309787865eba374"
-size = 17236292
-url = "https://github.com/astral-sh/uv/releases/download/0.8.7/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:9de9365997d7579d27cdbc132883343b3c47add16804f11be679375037dec33a"
+size = 17225331
+url = "https://github.com/astral-sh/uv/releases/download/0.8.8/uv-aarch64-apple-darwin.tar.gz"
