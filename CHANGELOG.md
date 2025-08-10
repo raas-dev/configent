@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.3](https://github.com/raas-dev/configent/compare/1.161.2...1.161.3) (2025-08-10)
+
+
+### Fixes
+
+* **docs:** clarify gpt-5 API key requirements and update config ([e8761c4](https://github.com/raas-dev/configent/commit/e8761c48016d99be5b32fdeb523a986543276b8b))
+* **dotfiles:** update Lumen AI provider from OpenRouter to Claude ([bd6a370](https://github.com/raas-dev/configent/commit/bd6a370fc29c02459390296914a0655362823e94))
+
 ### [1.161.2](https://github.com/raas-dev/configent/compare/1.161.1...1.161.2) (2025-08-10)
 
 
