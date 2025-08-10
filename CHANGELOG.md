@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.2](https://github.com/raas-dev/configent/compare/1.161.1...1.161.2) (2025-08-10)
+
+
+### Fixes
+
+* **continue:** Add OpenAI gpt-5 and gpt-5-mini ([435a215](https://github.com/raas-dev/configent/commit/435a2159d98fc18a3b29fb0bc50ddf482a766fce))
+
 ### [1.161.1](https://github.com/raas-dev/configent/compare/1.161.0...1.161.1) (2025-08-07)
 
 
