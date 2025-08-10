@@ -68,13 +68,27 @@
       }
     },
     {
-      "title": "OpenAI: o4-mini",
+      "title": "OpenAI: gpt-5",
       "provider": "openai",
-      "model": "o4-mini",
+      "model": "gpt-5",
       "apiKey": "[OPENAI_API_KEY]",
-      "contextLength": 200000,
+      "contextLength": 400000,
       "completionOptions": {
-        "maxTokens": 100000
+        "maxTokens": 128000
+      },
+      "capabilities": {
+        "uploadImage": true,
+        "tools": true
+      }
+    },
+    {
+      "title": "OpenAI: gpt-5-mini",
+      "provider": "openai",
+      "model": "gpt-5-mini",
+      "apiKey": "[OPENAI_API_KEY]",
+      "contextLength": 400000,
+      "completionOptions": {
+        "maxTokens": 128000
       },
       "capabilities": {
         "uploadImage": true,
@@ -172,18 +186,17 @@
       }
     },
     {
-      "title": "Azure: gpt-4.1",
+      "title": "Azure: gpt-5-nano",
       "provider": "azure",
-      "model": "gpt-4.1",
-      "deployment": "gpt-4.1",
-      "contextLength": 1048576,
+      "model": "gpt-5-nano",
+      "deployment": "gpt-5-nano",
+      "contextLength": 400000,
       "apiType": "azure",
       "apiBase": "[AZURE_FOUNDRY_API_BASE]",
       "apiKey": "[AZURE_FOUNDRY_API_KEY]",
       "apiVersion": "2025-01-01-preview",
       "completionOptions": {
-        "temperature": 0,
-        "maxTokens": 32768
+        "maxTokens": 128000
       },
       "capabilities": {
         "uploadImage": true,
