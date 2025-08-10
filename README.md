@@ -202,6 +202,8 @@ To start using Continue, do these manually after bootstrap:
 you must `ollama pull` the model defined in `config.json` before it is
 automatically started by Continue (e.g. for code autocomplete).
 
+⚠️: As of 2025-08 you also have to export `OPENAI_API_KEY` to use gpt-5 models.
+
 ## 🐚 Shell
 
 Zsh loads [antidote](https://antidote.sh/) and uses it to install Zsh
