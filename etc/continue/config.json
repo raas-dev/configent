@@ -82,10 +82,10 @@
       }
     },
     {
-      "title": "OpenAI: gpt-5-mini",
-      "provider": "openai",
+      "title": "gpt-5-mini",
+      "provider": "openrouter",
       "model": "gpt-5-mini",
-      "apiKey": "[OPENAI_API_KEY]",
+      "apiKey": "[OPENROUTER_API_KEY]",
       "contextLength": 400000,
       "completionOptions": {
         "maxTokens": 128000
