@@ -61,6 +61,32 @@ clients:
   - type: gemini
   - type: claude
   - type: openai
+    models:
+      # workaround as of 2025-08-10 for removing temperature from the request
+      - name: gpt-5
+        max_input_tokens: 400000
+        max_output_tokens: 128000
+        supports_vision: true
+        supports_function_calling: true
+        patch:
+          body:
+            temperature: null
+      - name: gpt-5-mini
+        max_input_tokens: 400000
+        max_output_tokens: 128000
+        supports_vision: true
+        supports_function_calling: true
+        patch:
+          body:
+            temperature: null
+      - name: gpt-5-nano
+        max_input_tokens: 400000
+        max_output_tokens: 128000
+        supports_vision: true
+        supports_function_calling: true
+        patch:
+          body:
+            temperature: null
 
   # OpenRouter
   - type: openai-compatible
@@ -96,7 +122,7 @@ clients:
   - type: azure-openai
     name: azure_foundry   # export AZURE_FOUNDRY_API_BASE and _API_KEY
     models:
-      - name: o4-mini
+      - name: o3-high
         max_input_tokens: 200000
         max_output_tokens: 100000
         supports_vision: true
@@ -108,8 +134,11 @@ clients:
             max_tokens: null
             temperature: null
             top_p: null
-      - name: gpt-4.1-nano
-        max_input_tokens: 1047576
-        max_output_tokens: 32768
+      - name: gpt-5-nano
+        max_input_tokens: 400000
+        max_output_tokens: 128000
         supports_vision: true
         supports_function_calling: true
+        patch:
+          body:
+            temperature: null
