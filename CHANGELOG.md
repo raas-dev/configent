@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.5](https://github.com/raas-dev/configent/compare/1.161.4...1.161.5) (2025-08-11)
+
+
+### Fixes
+
+* **ai:** Go back to gpt-4.1 from gpt-5 (garbage) ([838e5a4](https://github.com/raas-dev/configent/commit/838e5a472878efdbeaac5a56c5d81467139bb567))
+
 ### [1.161.4](https://github.com/raas-dev/configent/compare/1.161.3...1.161.4) (2025-08-11)
 
 
