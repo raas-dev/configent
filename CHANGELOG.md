@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.4](https://github.com/raas-dev/configent/compare/1.161.3...1.161.4) (2025-08-11)
+
+
+### Fixes
+
+* **aichat:** add gpt-5 models and update reference azure models ([ca771a5](https://github.com/raas-dev/configent/commit/ca771a5d8978505d65696c3758eebf86b8cc676e))
+* **ai:** update OpenAI model use from gpt-4.1 to gpt-5 series ([16580d0](https://github.com/raas-dev/configent/commit/16580d01f23034cf99b770f281c3807dd8b123bb))
+
 ### [1.161.3](https://github.com/raas-dev/configent/compare/1.161.2...1.161.3) (2025-08-10)
 
 
