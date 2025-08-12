@@ -243,7 +243,7 @@ version = "0.5.11"
 backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:fast-agent-mcp"]
-version = "0.2.54"
+version = "0.2.55"
 backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
