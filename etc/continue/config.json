@@ -38,7 +38,7 @@
       }
     },
     {
-      "title": "gemini-2.5-pro",
+      "title": "OpenRouter: gemini-2.5-pro",
       "provider": "openrouter",
       "model": "google/gemini-2.5-pro",
       "apiKey": "[OPENROUTER_API_KEY]",
@@ -53,7 +53,7 @@
       }
     },
     {
-      "title": "gemini-2.5-flash",
+      "title": "OpenRouter: gemini-2.5-flash",
       "provider": "openrouter",
       "model": "google/gemini-2.5-flash",
       "apiKey": "[OPENROUTER_API_KEY]",
@@ -82,10 +82,10 @@
       }
     },
     {
-      "title": "gpt-5-mini",
-      "provider": "openrouter",
+      "title": "OpenAI: gpt-5-mini",
+      "provider": "openai",
       "model": "gpt-5-mini",
-      "apiKey": "[OPENROUTER_API_KEY]",
+      "apiKey": "[OPENAI_API_KEY]",
       "contextLength": 400000,
       "completionOptions": {
         "maxTokens": 128000
@@ -96,10 +96,10 @@
       }
     },
     {
-      "title": "gpt-4.1",
-      "provider": "openrouter",
-      "model": "openai/gpt-4.1",
-      "apiKey": "[OPENROUTER_API_KEY]",
+      "title": "OpenAI: gpt-4.1",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "apiKey": "[OPENAI_API_KEY]",
       "contextLength": 1047576,
       "completionOptions": {
         "temperature": 0,
@@ -111,10 +111,10 @@
       }
     },
     {
-      "title": "gpt-4.1-mini",
-      "provider": "openrouter",
-      "model": "openai/gpt-4.1-mini",
-      "apiKey": "[OPENROUTER_API_KEY]",
+      "title": "OpenAI: gpt-4.1-mini",
+      "provider": "openai",
+      "model": "gpt-4.1-mini",
+      "apiKey": "[OPENAI_API_KEY]",
       "contextLength": 1047576,
       "completionOptions": {
         "temperature": 0,
@@ -126,7 +126,7 @@
       }
     },
     {
-      "title": "Deepseek R1 (0528)",
+      "title": "OpenRouter: Deepseek R1 (0528)",
       "provider": "openrouter",
       "model": "deepseek/deepseek-r1-0528",
       "apiKey": "[OPENROUTER_API_KEY]",
@@ -220,7 +220,7 @@
   "reranker": {
     "name": "llm",
     "params": {
-      "modelTitle": "gemini-2.5-flash"
+      "modelTitle": "OpenRouter: gemini-2.5-flash"
     }
   },
   "slashCommands": [
