@@ -10,7 +10,7 @@ export function modifyConfig(config: Config): Config {
     "configent",
     "prompts",
     "general",
-    "web.md"
+    "chat.md"
   );
   try {
     if (fs.existsSync(systemMessagePath)) {
