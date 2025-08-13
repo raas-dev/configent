@@ -31,10 +31,12 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
+user_message="You must use conventional commits message. You must use the file name without its extension as the scope. If multiple files within the same directory were changed, use the directory name as the scope."
+
 if [ -n "$*" ]; then
-  commit_message="$(lumen draft --context "$*")"
+  commit_message="$(lumen draft --context "$user_message. Context: $*")"
 else
-  commit_message="$(lumen draft)"
+  commit_message="$(lumen draft --context "$user_message")"
 fi
 
 printf "%s$commit_message" "$white"
