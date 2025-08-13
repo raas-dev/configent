@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.7"
+version = "2.28.8"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:08e7817cf0eaa54bbb8b967f31d03976869a72262e987f653aef086d88cdea2b"
-size = 39754180
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.7.pkg"
+checksum = "blake3:7ba5369c5154672b8563dc5d8360e7d6f0bafcc0676c474023deefde370c335a"
+size = 39753984
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.8.pkg"
 
 [tools.bun]
 version = "1.2.20"
@@ -312,10 +312,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [tools.uv]
-version = "0.8.8"
+version = "0.8.9"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:9de9365997d7579d27cdbc132883343b3c47add16804f11be679375037dec33a"
-size = 17225331
-url = "https://github.com/astral-sh/uv/releases/download/0.8.8/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:c233bee389c15fdef09a6028db61cc54a12e6171f27d6d9c018eedca5bbbd011"
+size = 17202203
+url = "https://github.com/astral-sh/uv/releases/download/0.8.9/uv-aarch64-apple-darwin.tar.gz"
