@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.161.6](https://github.com/raas-dev/configent/compare/1.161.5...1.161.6) (2025-08-13)
+
+
+### Fixes
+
+* **ai_commit:** add conventional commit rules to lumen draft context ([7a166a0](https://github.com/raas-dev/configent/commit/7a166a0cdb6f0135fa22280c5915f416f513f4e9))
+* **config:** remove slash commands and update system prompts ([c76d0b4](https://github.com/raas-dev/configent/commit/c76d0b458cffaa3b5dcd6d9a1619404831f28646))
+* **config:** update API provider configurations and docs ([f0904de](https://github.com/raas-dev/configent/commit/f0904de5bf2a6ba8c8a7898cec9e5f9aca1eace3))
+* **prompts:** add web prompt and update config reference ([55e2991](https://github.com/raas-dev/configent/commit/55e2991c6f623631db3ec27e0f57f2f0633ba565))
+
 ### [1.161.5](https://github.com/raas-dev/configent/compare/1.161.4...1.161.5) (2025-08-11)
 
 
