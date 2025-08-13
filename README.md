@@ -198,7 +198,7 @@ To start using Continue, do these manually after bootstrap:
 
 1. Export `_API_KEY` in `~/.rclocal` for all providers you use in `config.json`,
 usually `ANTHROPIC_API_KEY` and/or `OPENAI_API_KEY` and/or `OPENROUTER_API_KEY`.
-Note that installed command-line AI tools default to use these same API keys.
+Note that these environment variables are then available to other tools as well.
 
 2. If you use local LLMs via Ollama (which is installed in apps),
 you must `ollama pull` the model defined in `config.json` before it is
