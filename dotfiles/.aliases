@@ -11,6 +11,9 @@ alias dup="topgrade --yes --no-retry --disable $skipped_managers"
 ### OS specific ################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  # Open Brave Browser with remote debugging enabled
+  alias brave='open -a "Brave Browser" --args --remote-debugging-port=9222'
+
   # Recursively delete .DS_Store files in the current path
   alias cds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
 
