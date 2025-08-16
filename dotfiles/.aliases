@@ -307,7 +307,7 @@ alias semgrep='uvx semgrep'
 
 ### ai
 
-# gptme (mise'd version lags behind due to slow PyPI release cycle)
+# gptme (development version)
 gptme-dev() {
   local bin_name="$1"
   shift
