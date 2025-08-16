@@ -423,7 +423,7 @@
     "!Split sequence"
   ],
   "yaml.schemas": {
-    "/Users/asyrjasalo/.cursor/extensions/continue.continue-1.0.21-darwin-arm64/config-yaml-schema.json": [
+    "file:///Users/asyrjasalo/.cursor/extensions/continue.continue-1.0.23-darwin-arm64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ]
   },
