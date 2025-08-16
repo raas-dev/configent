@@ -227,7 +227,7 @@
     {
       "name": "web",
       "description": "Search the web",
-      "prompt": "Search the web to base your answer on the latest information available."
+      "prompt": "Always search the web to ensure your answer is based on the latest information available."
     },
     {
       "name": "check",
