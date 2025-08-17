@@ -12,7 +12,15 @@ socket_vmnet_src_dir="$HOME/.local/share/socket_vmnet"
 
 ### socket_vmnet ###############################################################
 
-[ "$(uname -s)" != "Darwin" ] && exit 0
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Skipping lima post-installation: not on macOS"
+  exit 0
+fi
+
+if ! sudo -n true 2>/dev/null; then
+  echo "Skipping lima post-installation: sudo rights required"
+  exit 0
+fi
 
 git clone --depth 1 https://github.com/lima-vm/socket_vmnet \
   "$socket_vmnet_src_dir"
