@@ -19,8 +19,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
   # start VM if not running
   if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
-    limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-      limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+    else
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+    fi
   fi
   # try homebrew installed docker CLI first on macOS
   if [ -x "/opt/homebrew/bin/docker" ]; then

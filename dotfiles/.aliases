@@ -187,8 +187,13 @@ v() {
       local os_create_args=()
       local os_start_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
-        os_start_args=(--network=vzNAT --rosetta)
+        if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+          os_create_args=(--vm-type=vz --network=vzNAT --network=lima:bridged --rosetta)
+          os_start_args=(--network=vzNAT --network=lima:bridged --rosetta)
+        else
+          os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
+          os_start_args=(--network=vzNAT --rosetta)
+        fi
       fi
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
         --name "$vm_name" --tty=false \
@@ -449,8 +454,8 @@ alias standard-version='bunx standard-version'
 
 _aichat_setup_functions() {
   git clone "$FUNCTIONS_REPO_URL" "$AICHAT_FUNCTIONS_DIR" &&
-  ln -sfnv "$HOME/.config/configent/mcp/mcp.json" \
-    "$AICHAT_FUNCTIONS_DIR/mcp.json" &&
+    ln -sfnv "$HOME/.config/configent/mcp/mcp.json" \
+      "$AICHAT_FUNCTIONS_DIR/mcp.json" &&
     (
       cd "$AICHAT_FUNCTIONS_DIR" >/dev/null && argc build@tool && argc mcp start
     )
