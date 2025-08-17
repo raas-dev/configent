@@ -43,8 +43,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # start VM if not running
   if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
     if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-        limactl start --name "$NAME" --network=vzNAT --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     else
       limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
         limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
