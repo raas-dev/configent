@@ -335,6 +335,8 @@
   "typescript.surveys.enabled": false,
   "update.mode": "none",
   "update.showReleaseNotes": false,
+  "vscode-toggle-terminal.listNames": true,
+  "vscode-toggle-terminal.priority": 25000,
   "vsintellicode.python.completionsEnabled": false,
   "window.closeWhenEmpty": true,
   "window.confirmSaveUntitledWorkspace": false,
