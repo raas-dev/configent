@@ -65,7 +65,7 @@ version = "1.20.1"
 backend = "cargo:gping"
 
 [tools."cargo:hurl"]
-version = "7.0.0"
+version = "6.1.1"
 backend = "cargo:hurl"
 
 [tools."cargo:jnv"]
@@ -237,14 +237,6 @@ backend = "core:node"
 [tools."pipx:azure-cli"]
 version = "2.68.0"
 backend = "pipx:azure-cli"
-
-[tools."pipx:browser-use"]
-version = "0.5.11"
-backend = "pipx:browser-use[extras=cli]"
-
-[tools."pipx:fast-agent-mcp"]
-version = "0.2.56"
-backend = "pipx:fast-agent-mcp"
 
 [tools."pipx:glances"]
 version = "4.3.3"
