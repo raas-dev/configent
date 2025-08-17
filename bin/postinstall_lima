@@ -39,3 +39,10 @@ git clone --depth 1 https://github.com/lima-vm/socket_vmnet \
     sudo install -o root etc_sudoers.d_lima /etc/sudoers.d/lima
   rm -f etc_sudoers.d_lima
 )
+
+# The IP address is automatically assigned by macOS’s bootpd.
+# See: https://lima-vm.io/docs/config/network/vmnet/#socket_vmnet
+#
+# If the IP address is not assigned, try the following commands:
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/libexec/bootpd
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblock /usr/libexec/bootpd
