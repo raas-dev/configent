@@ -530,5 +530,9 @@
   {
     "command": "composerMode.chat",
     "key": "cmd+l"
+  },
+  {
+    "command": "-workbench.action.newWindow",
+    "key": "shift+cmd+n"
   }
 ]
