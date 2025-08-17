@@ -223,8 +223,13 @@ version = "1.8.1"
 backend = "aqua:jqlang/jq"
 
 [tools.lima]
-version = "1.0.7"
+version = "1.2.1"
 backend = "aqua:lima-vm/lima"
+
+[tools.lima.platforms.macos-arm64]
+checksum = "sha256:4c6e20510b456a4e380500096ecce72c18d0ce98548064dc8089797de2290fdc"
+size = 23204467
+url = "https://github.com/lima-vm/lima/releases/download/v1.2.1/lima-1.2.1-Darwin-arm64.tar.gz"
 
 [tools.neovim]
 version = "0.11.1"

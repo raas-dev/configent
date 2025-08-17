@@ -88,7 +88,7 @@ gcloud = '510.0.0'
 #cloudflared = 'latest'
 neovim = '0.11.1'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-lima = '1.0.7'
+lima = '1.2.1'
 slsa-verifier = "latest"
 cosign = "latest"
 'ubi:sigoden/argc' = 'latest'
