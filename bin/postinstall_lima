@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+socket_vmnet_src_dir="$HOME/.local/share/socket_vmnet"
+
+### socket_vmnet ###############################################################
+
+[ "$(uname -s)" != "Darwin" ] && exit 0
+
+git clone --depth 1 https://github.com/lima-vm/socket_vmnet \
+  "$socket_vmnet_src_dir"
+
+(cd "$socket_vmnet_src_dir" &&
+  git fetch --tags &&
+  latest_tag=$(git tag -l | sort -V | tail -1) &&
+  git checkout "$latest_tag" &&
+  make &&
+  sudo make PREFIX=/opt/socket_vmnet install.bin &&
+  sudo chmod -R a+rx /opt/socket_vmnet)
+
+(
+  cd "$socket_vmnet_src_dir" &&
+    limactl sudoers >etc_sudoers.d_lima &&
+    sudo install -o root etc_sudoers.d_lima /etc/sudoers.d/lima
+  rm -f etc_sudoers.d_lima
+)
