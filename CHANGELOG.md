@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.162.0](https://github.com/raas-dev/configent/compare/1.161.6...1.162.0) (2025-08-17)
+
+
+### Features
+
+* **vscode:** add toggle terminal extension and config ([58d4cf5](https://github.com/raas-dev/configent/commit/58d4cf5f4329c0fe059330e6e1db8ca9c9baf2e7))
+
+
+### Fixes
+
+* **aliases:** add Brave browser remote debugging alias ([bbfc4ed](https://github.com/raas-dev/configent/commit/bbfc4ed8fd9b347446e8305e09cbfa46b6c630c3))
+* **config:** update web search prompt to ensure latest information ([4998d32](https://github.com/raas-dev/configent/commit/4998d32675ed46ba427704642f57b54cb20ece75))
+
 ### [1.161.6](https://github.com/raas-dev/configent/compare/1.161.5...1.161.6) (2025-08-13)
 
 
