@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.162.1](https://github.com/raas-dev/configent/compare/1.162.0...1.162.1) (2025-08-17)
+
+
+### Fixes
+
+* **mise:** update lima from 1.0.7 to 1.2.1 ([ea1b001](https://github.com/raas-dev/configent/commit/ea1b0018b5eba73f7af5f8254814366d22e85d25))
+
 ## [1.162.0](https://github.com/raas-dev/configent/compare/1.161.6...1.162.0) (2025-08-17)
 
 
