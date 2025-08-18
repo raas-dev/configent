@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.163.0](https://github.com/raas-dev/configent/compare/1.162.1...1.163.0) (2025-08-18)
+
+
+### Features
+
+* **postinstall_lima:** add socket_vmnet setup for Lima VM networking ([ad27dcb](https://github.com/raas-dev/configent/commit/ad27dcbddaa85aa52c33e64824af2f5741c16656))
+
+
+### Fixes
+
+* **.aliases:** remove watch-interval from procs alias ([440b0b6](https://github.com/raas-dev/configent/commit/440b0b6a32b0612efb6f40328fd697beccb8bdfc))
+* **bin:** add bridged network support when socket_vmnet available ([97d3105](https://github.com/raas-dev/configent/commit/97d3105c533678bca39b4ff2df075234c5334ce9))
+* **bin:** remove vzNAT network configuration from limactl commands ([5069ded](https://github.com/raas-dev/configent/commit/5069ded738104202b6defcc0cd67479bee50ae08))
+* **install_apps_apt:** add iputils-ping to utils packages ([d4a9e19](https://github.com/raas-dev/configent/commit/d4a9e19174486bb20e473a9684dd32f0179d485d))
+* **keybindings:** disable new window shortcut for shift+cmd+n ([87afab9](https://github.com/raas-dev/configent/commit/87afab98c0c0d85bc45632cf1378445f9aabbbe4))
+* **postinstall_lima:** add sudo check and improve error messages ([a043318](https://github.com/raas-dev/configent/commit/a043318656e7a9cf15e690391fd78eba7ec9bf0d))
+* **setup_lima_macos:** improve sudo authentication handling ([5e9cca1](https://github.com/raas-dev/configent/commit/5e9cca1dded64f9d667375da75a6c6a5282fc345))
+
 ### [1.162.1](https://github.com/raas-dev/configent/compare/1.162.0...1.162.1) (2025-08-17)
 
 
