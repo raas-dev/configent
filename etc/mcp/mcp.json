@@ -1,35 +1,22 @@
 {
   "mcpServers": {
     "context7": {
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ],
+      "args": ["-y", "@upstash/context7-mcp@latest"],
       "command": "npx"
     },
     "duckduckgo": {
-      "args": [
-        "duckduckgo-mcp-server"
-      ],
+      "args": ["duckduckgo-mcp-server"],
       "command": "uvx"
     },
     "midscene": {
-      "args": [
-        "-y",
-        "envmcp",
-        "npx",
-        "-y",
-        "@midscene/mcp"
-      ],
+      "args": ["-y", "envmcp", "npx", "-y", "@midscene/mcp"],
       "command": "npx",
       "env": {
         "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
       }
     },
     "playwright": {
-      "args": [
-        "@playwright/mcp@latest"
-      ],
+      "args": ["@playwright/mcp@latest"],
       "command": "npx"
     }
   }
