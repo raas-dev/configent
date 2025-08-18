@@ -239,6 +239,10 @@ backend = "aqua:neovim/neovim"
 version = "22.14.0"
 backend = "core:node"
 
+[tools."npm:playwright"]
+version = "1.53.2"
+backend = "npm:playwright"
+
 [tools."pipx:azure-cli"]
 version = "2.68.0"
 backend = "pipx:azure-cli"

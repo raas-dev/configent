@@ -47,6 +47,7 @@ go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go"
 
 node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
+'npm:playwright' = { version = '1.53.2', postinstall = "playwright install" }
 
 python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'

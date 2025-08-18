@@ -15,6 +15,10 @@
         "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
       }
     },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@executeautomation/playwright-mcp-server"]
+    },
     "tavily": {
       "args": ["-y", "envmcp", "npx", "-y", "tavily-mcp"],
       "command": "npx"
