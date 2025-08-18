@@ -18,6 +18,10 @@
     "playwright": {
       "args": ["@playwright/mcp@latest"],
       "command": "npx"
+    },
+    "tavily": {
+      "args": ["-y", "envmcp", "npx", "-y", "tavily-mcp"],
+      "command": "npx"
     }
   }
 }
