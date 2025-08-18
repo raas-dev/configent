@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.164.1](https://github.com/raas-dev/configent/compare/1.164.0...1.164.1) (2025-08-18)
+
+
+### Fixes
+
+* **mcp:** Fix playwright ([2efe1f7](https://github.com/raas-dev/configent/commit/2efe1f73c4315a8c43d1431538ad80696daecb0a))
+
 ## [1.164.0](https://github.com/raas-dev/configent/compare/1.163.0...1.164.0) (2025-08-18)
 
 
