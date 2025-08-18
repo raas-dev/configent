@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.164.0](https://github.com/raas-dev/configent/compare/1.163.0...1.164.0) (2025-08-18)
+
+
+### Features
+
+* **mcp:** add playwright configuration ([d34d928](https://github.com/raas-dev/configent/commit/d34d928ab39191377a75137540e8f2ba19f0dfcd))
+* **mcp:** add tavily server configuration ([d925345](https://github.com/raas-dev/configent/commit/d925345798a41afd7f5b385578d4ae0c1e2d7ecc))
+
+
+### Fixes
+
+* **mcp:** remove playwright over midscene ([4f4b235](https://github.com/raas-dev/configent/commit/4f4b2351a6d7becfce34fad5f1e4cc3e00b29552))
+
 ## [1.163.0](https://github.com/raas-dev/configent/compare/1.162.1...1.163.0) (2025-08-18)
 
 
