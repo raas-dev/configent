@@ -52,6 +52,7 @@
     "text": true
   },
   "cSpell.language": "en,fi",
+  "cSpell.reportUnknownWords": false,
   "cSpell.showAutocompleteSuggestions": true,
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
   "cSpell.suggestionMenuType": "quickFix",
