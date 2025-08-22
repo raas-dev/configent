@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.14"
+version = "2.28.15"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:5277ab4189ff0514d6bfb7c18d2d7a31e51438307a261b46f376ef0b48623e12"
-size = 39808275
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.14.pkg"
+checksum = "blake3:07d6a696783eedf5bae3b8f2d8d7d0b9921125eac4b2436b7e87a3d0317507b2"
+size = 39809571
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.15.pkg"
 
 [tools.bun]
 version = "1.2.20"
@@ -178,13 +178,13 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.76.2"
+version = "2.78.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.platforms.macos-arm64]
-checksum = "sha256:43cea90fbd5d3b607b6125082f4a5faf7d5fc2e548d3d349a3b0310706a4f878"
-size = 17359067
-url = "https://github.com/cli/cli/releases/download/v2.76.2/gh_2.76.2_macOS_arm64.zip"
+checksum = "sha256:62290b0dbc9965ebbc20d2b481fe83aa167fadc28e0d81a5d93eec6efc9d3b72"
+size = 17396485
+url = "https://github.com/cli/cli/releases/download/v2.78.0/gh_2.78.0_macOS_arm64.zip"
 
 [tools.go]
 version = "1.23.4"
@@ -257,7 +257,7 @@ version = "4.3.3"
 backend = "pipx:glances"
 
 [tools."pipx:pdm"]
-version = "2.25.6"
+version = "2.25.7"
 backend = "pipx:pdm"
 
 [tools."pipx:poetry"]
@@ -318,10 +318,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [tools.uv]
-version = "0.8.12"
+version = "0.8.13"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:a3f78d20465c6d18f7072f118ce1c61b164b98698fdc37357e72958c7d1b68fd"
-size = 17355064
-url = "https://github.com/astral-sh/uv/releases/download/0.8.12/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:c3eddc0e314abb8588f1cdf312f0b060d79e1906eff8f43b64a05ff5e2727872"
+size = 17431188
+url = "https://github.com/astral-sh/uv/releases/download/0.8.13/uv-aarch64-apple-darwin.tar.gz"
