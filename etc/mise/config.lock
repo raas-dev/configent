@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.15"
+version = "2.28.16"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:07d6a696783eedf5bae3b8f2d8d7d0b9921125eac4b2436b7e87a3d0317507b2"
-size = 39809571
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.15.pkg"
+checksum = "blake3:82fafa377cb00c330ef4c09d5a427cc31968f11fc61f60542ce01525fdfa80ff"
+size = 39831753
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.16.pkg"
 
 [tools.bun]
 version = "1.2.20"
@@ -16,13 +16,13 @@ checksum = "blake3:d5f7acc00f0fefc647a50cdfce5a0a20a311ca61f82709d60ae1d627e40b2
 size = 21788202
 
 [tools.cargo-binstall]
-version = "1.14.4"
+version = "1.15.0"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.platforms.macos-arm64]
-checksum = "blake3:86599ab2c99d951d1700a564616926d40efde0014a5306b68df335749135b0e6"
-size = 5938563
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.14.4/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "blake3:31040a9f3d6acaede29b244e11a3de9e6dae5ef9596ca96f75fb441c0e1b45b4"
+size = 5981001
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.0/cargo-binstall-aarch64-apple-darwin.zip"
 
 [tools."cargo:aichat"]
 version = "0.30.0"
