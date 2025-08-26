@@ -41,7 +41,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [tools."cargo:cargo-update"]
-version = "17.0.0"
+version = "18.0.0"
 backend = "cargo:cargo-update"
 
 [tools."cargo:diskonaut"]
@@ -49,7 +49,7 @@ version = "0.11.0"
 backend = "cargo:diskonaut"
 
 [tools."cargo:fd-find"]
-version = "10.2.0"
+version = "10.3.0"
 backend = "cargo:fd-find"
 
 [tools."cargo:git-delta"]
@@ -191,7 +191,7 @@ version = "1.23.4"
 backend = "core:go"
 
 [tools."go:github.com/abhimanyu003/sttr"]
-version = "0.2.26"
+version = "0.2.27"
 backend = "go:github.com/abhimanyu003/sttr"
 
 [tools."go:github.com/charmbracelet/glow"]
