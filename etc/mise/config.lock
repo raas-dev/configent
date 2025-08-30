@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.20"
+version = "2.28.21"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:5ff91275d7aa61d8782b7f3d7965d4807501945165a227e8ce09ae3c34d9f3e4"
-size = 39725286
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.20.pkg"
+checksum = "blake3:103b33e7f6ca84261f062fbf7063b4b84902ba2c68898bf3c73a032d489d74dc"
+size = 39726023
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.21.pkg"
 
 [tools.bun]
 version = "1.2.21"
