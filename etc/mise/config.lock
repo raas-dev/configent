@@ -165,13 +165,13 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [tools.fzf]
-version = "0.65.1"
+version = "0.65.2"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.platforms.macos-arm64]
-checksum = "sha256:2fc1de9545e49efce63a7c1f8cd2616c0c112478867d5a99e5b24570038a57a1"
-size = 1657951
-url = "https://github.com/junegunn/fzf/releases/download/v0.65.1/fzf-0.65.1-darwin_arm64.tar.gz"
+checksum = "sha256:a1464f1d4b75c3a92975f67055f9e407800ed35820ea7d73f2afb90aeb0491e8"
+size = 1658005
+url = "https://github.com/junegunn/fzf/releases/download/v0.65.2/fzf-0.65.2-darwin_arm64.tar.gz"
 
 [tools.gcloud]
 version = "510.0.0"
