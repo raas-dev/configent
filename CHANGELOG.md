@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.164.2](https://github.com/raas-dev/configent/compare/1.164.1...1.164.2) (2025-09-01)
+
+
+### Fixes
+
+* **ai:** Remove support for aider ([cd4dcca](https://github.com/raas-dev/configent/commit/cd4dcca49743aad866fdd827c3e4ba9d7d1a05b5))
+
 ### [1.164.1](https://github.com/raas-dev/configent/compare/1.164.0...1.164.1) (2025-08-18)
 
 
