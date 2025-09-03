@@ -302,13 +302,13 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [tools.trivy]
-version = "0.65.0"
+version = "0.66.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.platforms.macos-arm64]
-checksum = "sha256:3076e27024b92d634fe09947934d36dc8b651a8539ff1d69b4cfac008dfb59ce"
-size = 44246462
-url = "https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_macOS-ARM64.tar.gz"
+checksum = "sha256:964bb69fc0e652891b38514fed4ee31de004a58ac22ea2a23c6891728bb6b6eb"
+size = 44311024
+url = "https://github.com/aquasecurity/trivy/releases/download/v0.66.0/trivy_0.66.0_macOS-ARM64.tar.gz"
 
 [tools."ubi:sigoden/argc"]
 version = "1.23.0"
