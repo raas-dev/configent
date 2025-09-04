@@ -22,7 +22,7 @@
   l = log --graph --pretty=format:'%C(yellow)%h %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
   o = !"git push --set-upstream && git push --tags"
   out = log @{u}..
-  purge = clean -d -x --force
+  purge = clean -d --force
   r = remote --verbose
   re = diff --name-only --diff-filter=U
   rea = rebase --abort
