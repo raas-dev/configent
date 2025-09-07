@@ -218,6 +218,9 @@ v() {
     limactl stop "$vm_name" --force
     limactl delete "$vm_name" --force
     ;;
+  prune)
+    limactl prune
+    ;;
   *)
     echo "Usage: v <up|shell|down|delete> <vm_name> [lima_args]"
     echo ""
