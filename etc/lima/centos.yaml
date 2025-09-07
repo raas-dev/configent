@@ -35,7 +35,7 @@ provision:
       #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
-# https://lima-vm.io/docs/config/network
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
   enabled: false
 
