@@ -87,6 +87,8 @@
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.preferNotificationsSameAsChat": true,
   "cursor.semanticSearch.includePullRequests": false,
+  "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
+  "cursorpyright.analysis.typeCheckingMode": "basic",
   "dateTime.showSeconds": true,
   "debug.console.closeOnEnd": true,
   "debug.console.fontSize": 13,
