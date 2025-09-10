@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.28.26"
+version = "2.29.0"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:8880df0cfb1a5a4825b2e3fcc5a6fb40fc0552a9b53e38a2c1e65e41a2941c08"
-size = 39741441
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.28.26.pkg"
+checksum = "blake3:d6d5e5aa72d12e2dd11ec0818b7da0b2da4c23fcdae004005d1aff514c45cbc5"
+size = 39750387
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.29.0.pkg"
 
 [tools.bun]
 version = "1.2.21"
@@ -178,13 +178,13 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [tools.github-cli]
-version = "2.78.0"
+version = "2.79.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.platforms.macos-arm64]
-checksum = "sha256:62290b0dbc9965ebbc20d2b481fe83aa167fadc28e0d81a5d93eec6efc9d3b72"
-size = 17396485
-url = "https://github.com/cli/cli/releases/download/v2.78.0/gh_2.78.0_macOS_arm64.zip"
+checksum = "sha256:5454f9509e3dbb8f321310e9e344877d9a01ebb8f8703886b1afb0936d60ffaa"
+size = 17418178
+url = "https://github.com/cli/cli/releases/download/v2.79.0/gh_2.79.0_macOS_arm64.zip"
 
 [tools.go]
 version = "1.23.4"
