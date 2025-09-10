@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.164.3](https://github.com/raas-dev/configent/compare/1.164.2...1.164.3) (2025-09-10)
+
+
+### Fixes
+
+* **.aliases:** add prune command to vm function ([8ec19b0](https://github.com/raas-dev/configent/commit/8ec19b04a558188ac486a909086fcc1c8490fa4f))
+* **gitconfig:** remove -x flag from purge alias ([d4137f9](https://github.com/raas-dev/configent/commit/d4137f9ac95971fc8813c9d3b500b2a317e6575a))
+* **mcp:** Use browser-use over playwright and midscene ([6dc1ec7](https://github.com/raas-dev/configent/commit/6dc1ec7bf8be1d7b99d01e09e61ff17481f51554))
+
 ### [1.164.2](https://github.com/raas-dev/configent/compare/1.164.1...1.164.2) (2025-09-01)
 
 
