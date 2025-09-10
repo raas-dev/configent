@@ -244,13 +244,13 @@ checksum = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5
 size = 47035396
 url = "https://nodejs.org/dist/v22.14.0/node-v22.14.0-darwin-arm64.tar.gz"
 
-[tools."npm:playwright"]
-version = "1.53.2"
-backend = "npm:playwright"
-
 [tools."pipx:azure-cli"]
 version = "2.68.0"
 backend = "pipx:azure-cli"
+
+[tools."pipx:browser-use"]
+version = "0.7.7"
+backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:glances"]
 version = "4.3.3"
