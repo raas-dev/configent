@@ -146,6 +146,7 @@ alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
 alias _='ai_assistant'
+alias \#='ai_agent_web'
 
 ### watch ######################################################################
 
@@ -532,6 +533,10 @@ ai_assistant() {
   local context="${PWD##*/}"
   _aichat_build_agents "$agent" "$context"
   aichat --agent "$agent" --session "$context" --save-session "$@"
+}
+
+ai_agent_web() {
+  browser-use --prompt \""$*"\"
 }
 
 ### Functions: Docker ##########################################################
