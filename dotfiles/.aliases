@@ -134,7 +134,7 @@ alias o='open'
 alias p='procs --tree'
 alias q='clear'
 alias r='exec $SHELL'
-alias s='rg --smart-case --no-ignore --hidden --glob "!.git/" --fixed-strings'
+alias s='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
 alias t='logs'
 alias u='diskonaut'
 # v is for limactl wrapper, see v()
