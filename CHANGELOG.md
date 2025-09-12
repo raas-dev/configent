@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.164.4](https://github.com/raas-dev/configent/compare/1.164.3...1.164.4) (2025-09-12)
+
+
+### Fixes
+
+* **.aliases:** add ai_agent_web function and alias ([877eb39](https://github.com/raas-dev/configent/commit/877eb3978e91832cacd9d129f69fbcae1d382e39))
+* **.aliases:** escape exclamation mark in rg alias glob pattern ([3e2d980](https://github.com/raas-dev/configent/commit/3e2d9808ca9d81bae41ee81f921e83d34c919e32))
+* **vscode:** replace basedpyright with cursorpyright ([38f0a9e](https://github.com/raas-dev/configent/commit/38f0a9ee206dcaf38dd04200d7957ad1dcdde555))
+
 ### [1.164.3](https://github.com/raas-dev/configent/compare/1.164.2...1.164.3) (2025-09-10)
 
 
