@@ -524,10 +524,6 @@
     "when": "terminalFocus"
   },
   {
-    "command": "composerMode.background",
-    "key": "cmd+e"
-  },
-  {
     "command": "composerMode.chat",
     "key": "cmd+l"
   },

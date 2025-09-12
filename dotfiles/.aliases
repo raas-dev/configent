@@ -292,7 +292,7 @@ alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
 ### Python #####################################################################
 
 # https://github.com/subash774/Caffeinate
-alias awake='uvx --from caffeinate awake'
+alias awake='uvx --from caffeinate awake --time 540'
 
 # Converting files and office documents to Markdown
 alias markitdown='uvx --from "markitdown[all]" markitdown'
