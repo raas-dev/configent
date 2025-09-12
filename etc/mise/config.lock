@@ -1,11 +1,11 @@
 [tools.awscli]
-version = "2.29.1"
+version = "2.30.1"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:86e5ee272ba841058fce033c523285c56ece1b9369d6b93cbd741dbc9b2e7a26"
-size = 39752430
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.29.1.pkg"
+checksum = "blake3:7c32b583589d1e28bc01f31474edc4166fd9fd469a0221630a535713ec37a6bd"
+size = 48083660
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.30.1.pkg"
 
 [tools.bun]
 version = "1.2.21"
@@ -273,7 +273,7 @@ version = "0.4.4"
 backend = "pipx:sncli"
 
 [tools."pipx:tldr"]
-version = "3.4.1"
+version = "3.4.2"
 backend = "pipx:tldr"
 
 [tools.python]
