@@ -37,9 +37,11 @@ additional rules.
 Scope:
 
 You must use a single word for the scope. The scope can be the file name or the
-directory name UNLESS that is too unamiguous such as 'config'. If this is the
-case go back in current working directory path until you can find a descriptive
-name to use. Do not start scope name with a dot.
+directory name (only if multiple files in that directory are changed)
+UNLESS that is too unambiguous such as 'config'. If this is the case,
+then go back in the current working directory path until you can find a descriptive enough name to use as the scope.
+
+You must not start the scope name with a dot. You must not use emojis in the scope. You must not use special characters in the scope.
 
 Type:
 
