@@ -145,7 +145,7 @@ alias z='port'
 alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
-alias _='ai_assistant'
+alias _='ai_agent'
 alias \#='ai_agent_web'
 
 ### watch ######################################################################
@@ -533,6 +533,15 @@ ai_assistant() {
   local context="${PWD##*/}"
   _aichat_build_agents "$agent" "$context"
   aichat --agent "$agent" --session "$context" --save-session "$@"
+}
+
+ai_agent() {
+  local context="${PWD##*/}"
+  if [ -z "$1" ]; then
+    goose session --resume --name "$context"
+  else
+    goose run --quiet --interactive --resume --name "$context" --text "$*"
+  fi
 }
 
 ai_agent_web() {
