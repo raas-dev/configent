@@ -20,7 +20,7 @@ A few features:
 - Terminal is mostly Rust and Go for speed, use `n`ix-shells for ad-hoc CLIs.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
-- Ask AI (`a <question>`) or use agent `_ <task>` to automate computer use.
+- Ask AI (`a <question>`) or (`_ <task>`) AI agent for automated computer use.
 
 Works on macOS Sequoia (15), Sonoma (14) and Ventura (13) on Apple Silicon.
 
