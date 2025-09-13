@@ -14,13 +14,12 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### install ####################################################################
+### goose ######################################################################
 
+# install or update
 curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash
 
-### configs ####################################################################
-
-# config.yaml
+# backup config.yaml
 if [ ! -r "$backup_path/.config/goose/config.yaml" ]; then
   if [ -r "$HOME/.config/goose/config.yaml" ]; then
     mkdir -p "$backup_path/.config/goose"
@@ -28,5 +27,9 @@ if [ ! -r "$backup_path/.config/goose/config.yaml" ]; then
       "$backup_path/.config/goose/config.yaml"
   fi
 fi
+
+# symlink config.yaml
 mkdir -p "$HOME/.config/goose"
 ln -sfnv "$config_path/goose/config.yaml" "$HOME/.config/goose/config.yaml"
+
+# note: config.yaml (symlink) may be overwritten if `goose configure` is used

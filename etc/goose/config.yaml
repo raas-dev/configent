@@ -2,7 +2,10 @@ GOOSE_PROVIDER: openai
 GOOSE_MODEL: gpt-4.1-mini
 GOOSE_TEMPERATURE: 0
 
-CONTEXT_FILE_NAMES: ["CLAUDE.md", ".goosehints"]
+CONTEXT_FILE_NAMES:
+  - AGENTS.md
+  - .goosehints
+  - CLAUDE.md
 GOOSE_CLI_THEME: dark
 GOOSE_RANDOM_THINKING_MESSAGES: false
 GOOSE_CLI_SHOW_COST: true
@@ -13,68 +16,95 @@ GOOSE_CLI_MIN_PRIORITY: 0.5 # verbosity of tool output - default: 0.0
 GOOSE_RECIPE_GITHUB_REPO: block/goose-recipes
 
 extensions:
-  computercontroller:
-    bundled: true
-    display_name: Computer Controller
-    enabled: true
-    name: computercontroller
-    timeout: 300
-    type: builtin
-  developer:
-    bundled: true
-    display_name: Developer Tools
-    enabled: true
-    name: developer
-    timeout: 300
-    type: builtin
-  memory:
-    bundled: true
-    display_name: Memory
-    enabled: false
-    name: memory
-    timeout: 300
-    type: builtin
-  context7:
-    cmd: npx
-    args:
-      - -y
-      - "@upstash/context7-mcp@latest"
-    type: stdio
-    name: context7
-    enabled: true
-  duckduckgo:
-    cmd: uvx
-    args:
-      - duckduckgo-mcp-server
-    type: stdio
-    name: duckduckgo
-    enabled: true
   browser-use:
-    cmd: npx
     args:
       - -y
       - envmcp
       - uvx
       - browser-use[cli]
       - --mcp
-    type: stdio
-    name: browser-use
+    available_tools: []
+    bundled: null
+    cmd: npx
+    description: null
     enabled: true
     env_keys:
-    - OPENAI_API_KEY
+      - OPENAI_API_KEY
     envs:
-      BROWSER_USE_HEADLESS: "false"
       BROWSER_USE_DISABLE_SECURITY: "false"
-  tavily:
+      BROWSER_USE_HEADLESS: "false"
+    name: browser-use
+    timeout: null
+    type: stdio
+  computercontroller:
+    available_tools: []
+    bundled: true
+    description: null
+    display_name: Computer Controller
+    enabled: true
+    name: computercontroller
+    timeout: 300
+    type: builtin
+  context7:
+    args:
+      - -y
+      - "@upstash/context7-mcp@latest"
+    available_tools: []
+    bundled: null
     cmd: npx
+    description: null
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: context7
+    timeout: null
+    type: stdio
+  developer:
+    available_tools: []
+    bundled: true
+    description: null
+    display_name: Developer Tools
+    enabled: true
+    name: developer
+    timeout: 300
+    type: builtin
+  duckduckgo:
+    args:
+      - duckduckgo-mcp-server
+    available_tools: []
+    bundled: null
+    cmd: uvx
+    description: null
+    enabled: false
+    env_keys: []
+    envs: {}
+    name: duckduckgo
+    timeout: null
+    type: stdio
+  memory:
+    available_tools: []
+    bundled: true
+    description: null
+    display_name: Memory
+    enabled: false
+    name: memory
+    timeout: 300
+    type: builtin
+  tavily:
     args:
       - -y
       - envmcp
       - npx
       - -y
       - tavily-mcp
-    type: stdio
-    name: tavily
+    available_tools: []
+    bundled: null
+    cmd: npx
+    description: null
     enabled: true
     env_keys:
-    - TAVILY_API_KEY
+      - TAVILY_API_KEY
+    envs: {}
+    name: tavily
+    timeout: null
+    type: stdio
