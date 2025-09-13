@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.166.0](https://github.com/raas-dev/configent/compare/1.165.1...1.166.0) (2025-09-13)
+
+
+### Features
+
+* **ai:** add alias _ to use ai agents via goose ([5fbc319](https://github.com/raas-dev/configent/commit/5fbc3191d2860c190793a7dfef97a8533ee9ca22))
+
+
+### Fixes
+
+* **aichat:** add models-override.yaml configuration management ([a097446](https://github.com/raas-dev/configent/commit/a09744669922e098d130dda9a91bd33a7daf9a4c))
+
 ### [1.165.1](https://github.com/raas-dev/configent/compare/1.165.0...1.165.1) (2025-09-13)
 
 
