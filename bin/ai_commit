@@ -34,6 +34,12 @@ fi
 additional_context="You must use conventional commits message and follow these
 additional rules.
 
+Type:
+
+- You must prefer 'fix' over 'feat' as type unless the commit adds new files.
+- You must prefer 'chore' over 'fix' if only package versions are changed.
+- You must prefer 'chore' over 'docs' if change is to yaml or json files.
+
 Scope:
 
 You must use a single word for the scope. The scope can be the file name or the
@@ -45,17 +51,12 @@ use as the scope.
 - You must NOT start the scope name with a dot.
 - You must NOT use special characters in the scope.
 - You must NOT use emojis in the scope.
-
-Type:
-
-- You must prefer 'fix' over 'feat' as type unless the commit adds new files.
-- You must prefer 'chore' over 'fix' if only package versions are changed.
-- You must prefer 'chore' over 'docs' if change is to yaml or json files."
+"
 
 if [ -n "$*" ]; then
   commit_message="$(lumen draft --context "$additional_context.
 
-    User provided hints for choosing scope and type:
+    User provided hints for naming the scope:
     $*
   ")"
 else
