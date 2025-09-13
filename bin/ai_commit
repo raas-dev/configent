@@ -56,7 +56,7 @@ use as the scope.
 if [ -n "$*" ]; then
   commit_message="$(lumen draft --context "$additional_context.
 
-    User provided hints for scope:
+    User provided hints for type and scope:
     $*
   ")"
 else
