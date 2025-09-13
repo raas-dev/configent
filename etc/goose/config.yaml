@@ -1,5 +1,5 @@
-GOOSE_PROVIDER: openrouter
-GOOSE_MODEL: google/gemini-2.5-flash
+GOOSE_PROVIDER: openai
+GOOSE_MODEL: gpt-4.1-mini
 GOOSE_TEMPERATURE: 0
 
 CONTEXT_FILE_NAMES: ["CLAUDE.md", ".goosehints"]
