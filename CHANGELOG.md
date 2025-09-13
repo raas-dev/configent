@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.165.0](https://github.com/raas-dev/configent/compare/1.164.5...1.165.0) (2025-09-13)
+
+
+### Features
+
+* **goose:** add goose installation and configuration ([f3028b5](https://github.com/raas-dev/configent/commit/f3028b5d8fc92a58006ec6627e6dd3884fea3795))
+
+
+### Fixes
+
+* **mise:** update TOML table syntax from single to double brackets ([aa19087](https://github.com/raas-dev/configent/commit/aa190870b62b4da7d1f98b4a0f4764a1c0773bda))
+* **prompts:** refine chat assistant role and task instructions ([32689a5](https://github.com/raas-dev/configent/commit/32689a586a901bae66e92f509642de6993582ec1))
+
 ### [1.164.5](https://github.com/raas-dev/configent/compare/1.164.4...1.164.5) (2025-09-13)
 
 
