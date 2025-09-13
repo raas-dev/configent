@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.165.1](https://github.com/raas-dev/configent/compare/1.165.0...1.165.1) (2025-09-13)
+
+
+### Fixes
+
+* **goose:** symlink entire config directory instead of config.yaml ([e0fea81](https://github.com/raas-dev/configent/commit/e0fea817f3e8a56cae016b16114aba296ad6493c))
+
 ## [1.165.0](https://github.com/raas-dev/configent/compare/1.164.5...1.165.0) (2025-09-13)
 
 
