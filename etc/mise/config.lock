@@ -153,8 +153,13 @@ version = "0.9.8"
 backend = "cargo:zoxide"
 
 [tools.cosign]
-version = "2.5.3"
+version = "2.6.0"
 backend = "aqua:sigstore/cosign"
+
+[tools.cosign.platforms.macos-arm64]
+checksum = "sha256:dea5b83b8b375b99ac803c7bdb1f798963dbeb47789ceb72153202e7f20e8d07"
+size = 154611890
+url = "https://github.com/sigstore/cosign/releases/download/v2.6.0/cosign-darwin-arm64"
 
 [tools.dotnet]
 version = "8.0.404"
