@@ -60,6 +60,8 @@ extensions:
     type: stdio
     name: browser-use
     enabled: true
+    env_keys:
+    - OPENAI_API_KEY
     envs:
       BROWSER_USE_HEADLESS: "false"
       BROWSER_USE_DISABLE_SECURITY: "false"
@@ -74,4 +76,5 @@ extensions:
     type: stdio
     name: tavily
     enabled: true
-    description: tavily
+    env_keys:
+    - TAVILY_API_KEY
