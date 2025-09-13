@@ -8,7 +8,7 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### Ollama from Homebrew #######################################################
+### ollama #####################################################################
 
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
@@ -30,12 +30,13 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-# both Homebrew and the Linux installer configure autostart on boot
+# try installing from Homebrew first
 if command -v brew >/dev/null; then
   brew install ollama
   brew services start ollama
 elif [ "$(uname -s)" = 'Linux' ]; then
   if ! command -v ollama >/dev/null; then
     curl -fsSL https://ollama.com/install.sh | sh
+    # also the installer configures autostart on boot
   fi
 fi
