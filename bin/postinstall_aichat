@@ -25,6 +25,16 @@ fi
 mkdir -p "$HOME/.config/aichat"
 ln -sfnv "$config_path/aichat/config.yaml" "$HOME/.config/aichat/config.yaml"
 
+# models-override.yaml (run `aichat --sync-models` to update)
+if [ ! -r "$backup_path/.config/aichat/models-override.yaml" ]; then
+  if [ -r "$HOME/.config/aichat/models-override.yaml" ]; then
+    mkdir -p "$backup_path/.config/aichat"
+    cp -P "$HOME/.config/aichat/models-override.yaml" \
+      "$backup_path/.config/aichat/models-override.yaml"
+  fi
+fi
+ln -sfnv "$config_path/aichat/models-override.yaml" "$HOME/.config/aichat/models-override.yaml"
+
 # .env
 if [ ! -r "$backup_path/.config/aichat/.env" ]; then
   if [ -r "$HOME/.config/aichat/.env" ]; then
@@ -44,6 +54,3 @@ if [ ! -r "$backup_path/.config/aichat/dark.tmTheme" ]; then
 fi
 ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/aichat/dark.tmTheme"
-
-# https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/models.yaml
-aichat --sync-models
