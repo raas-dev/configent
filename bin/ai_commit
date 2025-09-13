@@ -31,16 +31,16 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-user_message="You must use conventional commits message and follow these
+additional_context="You must use conventional commits message and follow these
 additional rules.
 
 Scope:
 
 You must use a single word for the scope. The scope can be the file name or the
 directory name (only if multiple files in that directory are changed),
-UNLESS that is too ambiguous such as 'config'. If this is the case,
-then go back in the current working directory path until you can find an
-unambiguous name to use as the scope.
+UNLESS that is too ambiguous such as 'config'. If this is the case, go back in
+the current working directory path until you can find an unambiguous name to
+use as the scope.
 
 - You must NOT start the scope name with a dot.
 - You must NOT use special characters in the scope.
@@ -53,13 +53,13 @@ Type:
 - You must prefer 'chore' over 'docs' if change is to yaml or json files."
 
 if [ -n "$*" ]; then
-  commit_message="$(lumen draft --context "$user_message.
+  commit_message="$(lumen draft --context "$additional_context.
 
-    User provided hints for scope and type:
+    User provided hints for choosing scope and type:
     $*
   ")"
 else
-  commit_message="$(lumen draft --context "$user_message")"
+  commit_message="$(lumen draft --context "$additional_context")"
 fi
 
 printf "%s$commit_message" "$white"
