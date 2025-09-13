@@ -1,10 +1,12 @@
 # See: https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 # ---- llm ----
-model: openrouter:google/gemini-2.5-flash  # Specify the LLM to use
+model: openrouter:google/gemini-2.5-flash # Specify the LLM to use
 temperature: 0 # Set default temperature parameter
+top_p: null # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
 
 # ---- behavior ----
+stream: true # Controls whether to use the stream-style API.
 save: false # Indicates whether to persist the message (messages.md)
 keybindings: vi # Choose keybinding style (emacs, vi)
 wrap: auto # Controls text wrapping (no, auto, <max-width>)
@@ -12,15 +14,15 @@ wrap_code: false # Enables or disables wrapping of code blocks
 
 # ---- function-calling ----
 # Visit https://github.com/sigoden/llm-functions for setup instructions
-function_calling: true           # Enables or disables function calling (Globally).
-mapping_tools:                   # Alias for a tool or toolset
-  fs: 'fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write'
-use_tools: null                  # Which tools to use by default. (e.g. 'fs,web_search')
+function_calling: true # Enables or disables function calling (Globally).
+mapping_tools: # Alias for a tool or toolset
+  fs: "fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write"
+use_tools: null # Which tools to use by default. (e.g. 'fs,web_search')
 
 # ---- prelude ----
-cmd_prelude: null                # Set a default role or session for CMD mode (e.g. role:<name>, session:<name>, <session>:<role>)
-repl_prelude: "role:chat"               # Set a default role or session for REPL mode (e.g. role:<name>, session:<name>, <session>:<role>)
-agent_prelude: null              # Set a session to use when starting a agent. (e.g. temp, default)
+cmd_prelude: null # Set a default role or session for CMD mode (e.g. role:<name>, session:<name>, <session>:<role>)
+repl_prelude: "role:chat" # Set a default role or session for REPL mode (e.g. role:<name>, session:<name>, <session>:<role>)
+agent_prelude: null # Set a session to use when starting a agent. (e.g. temp, default)
 
 # ---- session ----
 # Controls the persistence of the session. if true, auto save; if false, not save; if null, asking the user
@@ -28,14 +30,14 @@ save_session: false
 # Compress session when token count reaches or exceeds this threshold
 compress_threshold: 16000
 # Text prompt used for creating a concise summary of session message
-summarize_prompt: 'Summarize the discussion briefly in 200 words or less to use as a prompt for future context.'
+summarize_prompt: "Summarize the discussion briefly in 200 words or less to use as a prompt for future context."
 # Text prompt used for including the summary of the entire session
-summary_prompt: 'This is a summary of the chat history as a recap: '
+summary_prompt: "This is a summary of the chat history as a recap: "
 
 # ---- RAG ----
 # See [RAG-Guide](https://github.com/sigoden/aichat/wiki/RAG-Guide) for more details.
 rag_embedding_model: gemini:text-embedding-004
-rag_reranker_model: null                    # Specifies the rerank model to use
+rag_reranker_model: null # Specifies the rerank model to use
 rag_chunk_size: 1500
 rag_chunk_overlap: 75
 
@@ -44,17 +46,22 @@ document_loaders:
   # You can add custom loaders using the following syntax:
   #   <file-extension>: <command-to-load-the-file>
   # Note: Use `$1` for input file and `$2` for output file. If `$2` is omitted, use stdout as output.
-  #pdf: 'pdftotext $1 -'                         # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
-  docx: 'pandoc --to plain $1'                  # Load .docx file, see https://pandoc.org to set up pandoc
+  pdf: "pdftotext $1 -" # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
+  docx: "pandoc --to plain $1" # Load .docx file, see https://pandoc.org to set up pandoc
 
 # ---- appearance ----
 highlight: true # Controls syntax highlighting
 light_theme: false # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
 # Custom REPL left/right prompts, see https://github.com/sigoden/aichat/wiki/Custom-REPL-Prompt for more details
-left_prompt:
-  '{?agent {color.purple}{agent}}{!agent {color.green}{role}}{?rag {color.yellow}@{rag}}{color.reset}> '
-right_prompt:
-  '{?consume_tokens {color.blue}{consume_tokens}({consume_percent}%)}{!consume_tokens {color.blue}{consume_tokens}} {?session {color.cyan}({session})}{color.reset}'
+left_prompt: "{?agent {color.purple}{agent}}{!agent {color.green}{role}}{?rag {color.yellow}@{rag}}{color.reset}> "
+right_prompt: "{?consume_tokens {color.blue}{consume_tokens}({consume_percent}%)}{!consume_tokens {color.blue}{consume_tokens}} {?session {color.cyan}({session})}{color.reset}"
+
+# ---- misc ----
+serve_addr: 127.0.0.1:8000 # Server listening address
+user_agent: null # Set User-Agent HTTP header, use `auto` for aichat/<current-version>
+save_shell_history: true # Whether to save shell execution command to the history file
+# URL to sync model changes from, e.g., https://cdn.jsdelivr.net/gh/sigoden/aichat@main/models.yaml
+sync_models_url: https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/models.yaml
 
 # ---- clients ----
 clients:
@@ -115,12 +122,12 @@ clients:
 
   # AWS Bedrock
   - type: bedrock
-    name: aws   # export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    name: aws # export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
     region: eu-central-1
 
   # Azure AI Foundry
   - type: azure-openai
-    name: azure_foundry   # export AZURE_FOUNDRY_API_BASE and _API_KEY
+    name: azure_foundry # export AZURE_FOUNDRY_API_BASE and _API_KEY
     models:
       - name: o3-high
         max_input_tokens: 200000
