@@ -31,7 +31,8 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-user_message="You must use conventional commits message. You must use the file name without its extension as the scope. If multiple files within the same directory were changed, use the directory name as the scope. If the name starts with dot, do not include it. If the name is generic, such as 'config', use the parent directory name as the scope. You must prefer 'fix' over 'feat' as type unless the commit adds new files."
+user_message="You must use conventional commits message. You must use the file name without its extension as the scope. If multiple files within the same directory were changed, use the directory name as the scope. If the name starts with dot, do not include it. If the name is generic, such as 'config', use the parent directory name as the scope. You must prefer 'fix' over 'feat' as type unless the commit adds new files. You must prefer 'chore' over 'fix' is only
+package or dependency versions are changed."
 
 if [ -n "$*" ]; then
   commit_message="$(lumen draft --context "$user_message. Context: $*")"
