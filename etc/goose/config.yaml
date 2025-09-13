@@ -37,17 +37,41 @@ extensions:
   context7:
     cmd: npx
     args:
-    - -y
-    - '@upstash/context7-mcp@latest'
+      - -y
+      - "@upstash/context7-mcp@latest"
     type: stdio
     name: context7
     enabled: true
-    description: context7
-  duckduckgo-mcp:
+  duckduckgo:
     cmd: uvx
     args:
-    - duckduckgo-mcp-server
+      - duckduckgo-mcp-server
     type: stdio
-    name: duckduckgo-mcp
+    name: duckduckgo
     enabled: true
-    description: duckduckgo-mcp
+  browser-use:
+    cmd: npx
+    args:
+      - -y
+      - envmcp
+      - uvx
+      - browser-use[cli]
+      - --mcp
+    type: stdio
+    name: browser-use
+    enabled: true
+    envs:
+      BROWSER_USE_HEADLESS: "false"
+      BROWSER_USE_DISABLE_SECURITY: "false"
+  tavily:
+    cmd: npx
+    args:
+      - -y
+      - envmcp
+      - npx
+      - -y
+      - tavily-mcp
+    type: stdio
+    name: tavily
+    enabled: true
+    description: tavily
