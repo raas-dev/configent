@@ -37,19 +37,27 @@ additional rules.
 Scope:
 
 You must use a single word for the scope. The scope can be the file name or the
-directory name (only if multiple files in that directory are changed)
-UNLESS that is too unambiguous such as 'config'. If this is the case,
-then go back in the current working directory path until you can find a descriptive enough name to use as the scope.
+directory name (only if multiple files in that directory are changed),
+UNLESS that is too ambiguous such as 'config'. If this is the case,
+then go back in the current working directory path until you can find an
+unambiguous name to use as the scope.
 
-You must not start the scope name with a dot. You must not use emojis in the scope. You must not use special characters in the scope.
+- You must NOT start the scope name with a dot.
+- You must NOT use special characters in the scope.
+- You must NOT use emojis in the scope.
 
 Type:
 
 - You must prefer 'fix' over 'feat' as type unless the commit adds new files.
-- You must prefer 'chore' over 'fix' if only package versions are changed."
+- You must prefer 'chore' over 'fix' if only package versions are changed.
+- You must prefer 'chore' over 'docs' if change is to yaml or json files."
 
 if [ -n "$*" ]; then
-  commit_message="$(lumen draft --context "$user_message. User provided hints for scope and type: $*")"
+  commit_message="$(lumen draft --context "$user_message.
+
+    User provided hints for scope and type:
+    $*
+  ")"
 else
   commit_message="$(lumen draft --context "$user_message")"
 fi
