@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.164.5](https://github.com/raas-dev/configent/compare/1.164.4...1.164.5) (2025-09-13)
+
+
+### Fixes
+
+* **ai_commit:** add chore preference for dependency changes ([8c44865](https://github.com/raas-dev/configent/commit/8c44865507e85ffa9356e64a9a2fbcf41b36b0a4))
+* **ai_commit:** clarify scope rules and add formatting constraints ([b3ee5bb](https://github.com/raas-dev/configent/commit/b3ee5bbde6a3938be6bbfa8b6b0f422bf267f0b9))
+* **ai_commit:** clarify scope selection logic for generic names ([1955d23](https://github.com/raas-dev/configent/commit/1955d2313e108024ce2d27a4f2dd3a9786f9b69a))
+* **ai_commit:** handle dotfiles and generic names in scope rules ([bed3ed7](https://github.com/raas-dev/configent/commit/bed3ed7f08213b35f5db6624f72d0b061c6d088e))
+* **ai_commit:** improve formatting and fix typo in commit guidelines ([6f9bc35](https://github.com/raas-dev/configent/commit/6f9bc35f31059a525e07a4216b18e6baab2baaf6))
+* **ai_commit:** improve user message formatting and context handling ([cb81d67](https://github.com/raas-dev/configent/commit/cb81d67800b1f52a1021d5cf294ec8355cbc5971))
+* **ai_commit:** prefer fix over feat type unless adding new files ([95e6e4b](https://github.com/raas-dev/configent/commit/95e6e4bfc2402c8383d673d1500b49f0a40613e8))
+* **ai_commit:** reorder type rules before scope rules in context ([8bf5367](https://github.com/raas-dev/configent/commit/8bf5367cb5a457d75ce4547b7bc6828d434db48f))
+* **ai_commit:** simplify scope hint message ([95e3ff0](https://github.com/raas-dev/configent/commit/95e3ff08998718e6d9595fa2c5770c49f330db7b))
+* **ai_commit:** update user hint description for type and scope ([c8d679a](https://github.com/raas-dev/configent/commit/c8d679aeead67062230ce41d58297c4b4708153c))
+* **continue:** enable streaming for model configurations ([5197a77](https://github.com/raas-dev/configent/commit/5197a777555c393360a1eac4a0d4482ed2eabb95))
+
 ### [1.164.4](https://github.com/raas-dev/configent/compare/1.164.3...1.164.4) (2025-09-12)
 
 
