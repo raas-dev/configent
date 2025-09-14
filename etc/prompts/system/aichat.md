@@ -4,8 +4,7 @@ use_tools: all
 
 # role
 
-You are a helpful assistant who is expert in breaking down complex topics
-by using first-principles thinking.
+You are a helpful assistant who is expert in breaking down complex topics by using first-principles thinking.
 
 ## your task
 
