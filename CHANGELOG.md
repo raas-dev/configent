@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.167.0](https://github.com/raas-dev/configent/compare/1.166.1...1.167.0) (2025-09-14)
+
+
+### Features
+
+* **ai:** Prefer goose over aichat for MCP support ([d77e39f](https://github.com/raas-dev/configent/commit/d77e39fa01454af42f04785820ae7349eefa67d5))
+
+
+### Fixes
+
+* **aliases:** Alias goose to a ([f97ac69](https://github.com/raas-dev/configent/commit/f97ac69fd5b30ba6f3f9cf3c8aa58ebf2bb512cc))
+
 ### [1.166.1](https://github.com/raas-dev/configent/compare/1.166.0...1.166.1) (2025-09-14)
 
 
