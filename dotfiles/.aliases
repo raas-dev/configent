@@ -536,7 +536,7 @@ alias standard-version='bunx standard-version'
 # }
 
 ai() {
-  local system_message_path="$HOME/.config/configent/prompts/general/chat.md"
+  local system_message_path="$HOME/.config/configent/prompts/general/system.md"
   local user_prompt="$*"
 
   if [ -n "$user_prompt" ]; then
@@ -566,7 +566,7 @@ ai() {
   else
     # no prompt is provided -> open a chat
     goose run \
-      --system \""$(cat "$system_message_path")"\" \
+      --system "$(cat "$system_message_path")" \
       --no-session \
       --interactive \
       --text "how does your system message tell you to respond?"
