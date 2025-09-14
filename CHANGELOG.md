@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.8](https://github.com/raas-dev/configent/compare/1.167.7...1.167.8) (2025-09-14)
+
+
+### Fixes
+
+* **goose:** add .goosehints configuration file ([647d7d7](https://github.com/raas-dev/configent/commit/647d7d71c0e735a15326514912dc35700caf6157))
+
 ### [1.167.7](https://github.com/raas-dev/configent/compare/1.167.6...1.167.7) (2025-09-14)
 
 
