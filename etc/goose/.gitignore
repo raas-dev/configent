@@ -1,4 +1,5 @@
 *
 
 !.gitignore
+!.goosehints
 !config.yaml
