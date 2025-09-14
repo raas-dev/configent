@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.3](https://github.com/raas-dev/configent/compare/1.167.2...1.167.3) (2025-09-14)
+
+
+### Fixes
+
+* **ai:** Simplify prompts library ([bc10f13](https://github.com/raas-dev/configent/commit/bc10f132cd109553c4dc7c09d741887f586af232))
+
 ### [1.167.2](https://github.com/raas-dev/configent/compare/1.167.1...1.167.2) (2025-09-14)
 
 
