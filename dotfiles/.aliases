@@ -457,7 +457,7 @@ alias standard-version='bunx standard-version'
 ### Functions: AI ##############################################################
 
 ai() {
-  local system_message_path="$HOME/.config/configent/prompts/system/default.md"
+  local system_message_path="$HOME/.config/configent/prompts/default.md"
   local user_prompt="$*"
 
   if [ -n "$user_prompt" ]; then

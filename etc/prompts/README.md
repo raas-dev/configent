@@ -1,11 +1,11 @@
-# AI instructions library
+# AI prompts library
 
-Files in `instructions/` are created programmatically from [fabric's patterns](https://github.com/danielmiessler/Fabric/tree/main/data/patterns).
+Prompt files in this dir (except `default.md` and `aichat.md`) are created programmatically from [fabric's patterns](https://github.com/danielmiessler/Fabric/tree/main/data/patterns).
 
 Fabric is a tool created by [Daniel Miessler](https://github.com/danielmiessler) and fabric patterns are authored by [fabric contributors](https://github.com/danielmiessler/fabric/graphs/contributors).
 
-To (re-)create instruction files:
+To (re-)create prompt files in this path:
 
-  ./create_insructions
+  ./create_prompts .
 
 Pre-commit hooks may trim trailing spaces and empty lines on git commit.
