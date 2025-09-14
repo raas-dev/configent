@@ -1,5 +1,4 @@
 aaron-bond.better-comments
-anysphere.cursorpyright
 astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
@@ -18,6 +17,7 @@ charliermarsh.ruff
 christian-kohler.path-intellisense
 connor4312.esbuild-problem-matchers
 dbaeumer.vscode-eslint
+detachhead.basedpyright
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
 eamodio.gitlens
