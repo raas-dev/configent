@@ -184,26 +184,6 @@ the extensions (`vscode/extensions.list`) are installed.
 💡: You can reuse `vscode/create_extensions_list` and `setup_code` for any
 VS Code like editor already installed. See the scripts' arguments for that.
 
-### bin/setup_continue
-
-[Continue](https://docs.continue.dev) is installed as open-source AI code
-assistant in VS Code likes. Note that (commercial) VS Code likes may
-force their bundled AI solution and disable this extension automatically.
-
-The script symlinks Continue config files to `~/.continue/`.
-Dynamic configuration (`config.ts`) is used for reading all LLM provider
-environment variables to avoid having API keys hardcoded in `config.json`.
-
-To start using Continue, do these manually after bootstrap:
-
-1. Export `_API_KEY` in `~/.rclocal` for all providers you use in `config.json`,
-usually `ANTHROPIC_API_KEY` and/or `OPENAI_API_KEY` and/or `OPENROUTER_API_KEY`.
-Note that these environment variables are then available to other tools as well.
-
-2. If you use local LLMs via Ollama (which is installed in apps),
-you must `ollama pull` the model defined in `config.json` before it is
-automatically started by Continue (e.g. for code autocomplete).
-
 ## 🐚 Shell
 
 Zsh loads [antidote](https://antidote.sh/) and uses it to install Zsh

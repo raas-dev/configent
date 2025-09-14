@@ -64,5 +64,3 @@ if command -v windsurf >/dev/null; then
 
   APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_kilocode"
 fi
-
-"$bin_path/setup_continue"
