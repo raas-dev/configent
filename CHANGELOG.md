@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.1](https://github.com/raas-dev/configent/compare/1.167.0...1.167.1) (2025-09-14)
+
+
+### Fixes
+
+* **ai:** Remove legacy aichat setup ([33707a2](https://github.com/raas-dev/configent/commit/33707a20a17122a26d4622542b0940615a0f288a))
+* **ai:** Update instructions library ([346a191](https://github.com/raas-dev/configent/commit/346a191261a7d28ffd13c1c0f4da720b5f61d941))
+* **aliases:** rename system prompt file from chat.md to system.md ([8e300d9](https://github.com/raas-dev/configent/commit/8e300d957ea22dabd45ed3621eaad6122cc67c33))
+
 ## [1.167.0](https://github.com/raas-dev/configent/compare/1.166.1...1.167.0) (2025-09-14)
 
 
