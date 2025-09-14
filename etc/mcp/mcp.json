@@ -8,16 +8,13 @@
       "args": ["duckduckgo-mcp-server"],
       "command": "uvx"
     },
-    "midscene": {
-      "args": ["-y", "envmcp", "npx", "-y", "@midscene/mcp"],
+    "browser-use": {
+      "args": ["-y", "envmcp", "uvx", "browser-use[cli]", "--mcp"],
       "command": "npx",
       "env": {
-        "MIDSCENE_MODEL_NAME": "gpt-4.1-mini"
+        "BROWSER_USE_HEADLESS": "false",
+        "BROWSER_USE_DISABLE_SECURITY": "false"
       }
-    },
-    "playwright": {
-      "command": "npx",
-      "args": ["-y", "@executeautomation/playwright-mcp-server"]
     },
     "tavily": {
       "args": ["-y", "envmcp", "npx", "-y", "tavily-mcp"],
