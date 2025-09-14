@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.6](https://github.com/raas-dev/configent/compare/1.167.5...1.167.6) (2025-09-14)
+
+
+### Fixes
+
+* **goose:** add gitignore to exclude all files except config ([5d85817](https://github.com/raas-dev/configent/commit/5d8581763b95571f77f97fe3bf3268c1ae13cadb))
+
 ### [1.167.5](https://github.com/raas-dev/configent/compare/1.167.4...1.167.5) (2025-09-14)
 
 
