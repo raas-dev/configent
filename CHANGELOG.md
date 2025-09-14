@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.2](https://github.com/raas-dev/configent/compare/1.167.1...1.167.2) (2025-09-14)
+
+
+### Fixes
+
+* **ai:** Remove continue ([b87afc1](https://github.com/raas-dev/configent/commit/b87afc115592a55885dd0969c5d89293cc96288c))
+
 ### [1.167.1](https://github.com/raas-dev/configent/compare/1.167.0...1.167.1) (2025-09-14)
 
 
