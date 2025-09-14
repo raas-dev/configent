@@ -482,9 +482,7 @@ _aichat_build_tools() {
   fi
 }
 
-# in ~/.rclocal:
-# export <PROVIDER>_API_KEY='sk-xxxxxx'
-ai() {
+ai_chat() {
   local role="$1"
   local category="general"
   local context="${PWD##*/}"
@@ -535,12 +533,50 @@ ai_assistant() {
   aichat --agent "$agent" --session "$context" --save-session "$@"
 }
 
+ai() {
+  local system_message_path="$HOME/.config/configent/prompts/general/chat.md"
+  local user_prompt="$*"
+
+  if [ -n "$user_prompt" ]; then
+    if [ -r "$user_prompt" ]; then
+      # prompt is path to a file -> open a chat
+      case "$user_prompt" in
+        *.json|*.yaml|*.yml)
+          goose run \
+            --recipe "$user_prompt" \
+            --no-session \
+            --interactive
+          ;;
+        *)
+          goose run \
+            --instructions "$user_prompt" \
+            --no-session \
+            --interactive
+          ;;
+      esac
+    else
+      # prompt is a string -> non-interactive mode
+      goose run --quiet \
+        --system \""$(cat "$system_message_path")"\" \
+        --no-session \
+        --text "$user_prompt"
+    fi
+  else
+    # no prompt is provided -> open a chat
+    goose run \
+      --system \""$(cat "$system_message_path")"\" \
+      --no-session \
+      --interactive \
+      --text "how does your system message tell you to respond?"
+  fi
+}
+
 ai_agent() {
   local context="${PWD##*/}"
   if [ -z "$1" ]; then
-    goose session --resume --name "$context"
+    goose session --name "$context" --resume
   else
-    goose run --quiet --interactive --resume --name "$context" --text "$*"
+    goose run --name "$context" --resume --interactive --text "$*"
   fi
 }
 
