@@ -255,7 +255,7 @@ export ANONYMIZED_TELEMETRY=false
 # aichat
 export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
 export AICHAT_FUNCTIONS_DIR="$HOME/.config/aichat/functions"
-export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/general"
+export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts/system"
 
 # functions
 export FUNCTIONS_REPO_URL="git@github.com:alkue-com/functions.git"

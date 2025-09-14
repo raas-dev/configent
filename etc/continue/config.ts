@@ -9,8 +9,8 @@ export function modifyConfig(config: Config): Config {
     ".config",
     "configent",
     "prompts",
-    "general",
-    "system.md"
+    "system",
+    "default.md"
   );
   try {
     if (fs.existsSync(systemMessagePath)) {

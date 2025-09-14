@@ -6,7 +6,7 @@ framework:
   - all
 skip-path:
   - .backup
-  - etc/prompts/assistant/write_nuclei_template_rule.md
+  - etc/prompts/instructions/write_nuclei_template_rule.md
   - etc/prompts/fabric/patterns/write_nuclei_template_rule/system.md
   - etc/prompts/fabric/.github
   - etc/prompts/fabric/Dockerfile
