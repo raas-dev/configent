@@ -4,7 +4,7 @@ Prompt files in this dir (except `default.md` and `aichat.md`) are created progr
 
 Fabric is a tool created by [Daniel Miessler](https://github.com/danielmiessler) and fabric patterns are authored by [fabric contributors](https://github.com/danielmiessler/fabric/graphs/contributors).
 
-To (re-)create prompt files in this path:
+To (re-)create prompt files in this dir:
 
   ./create_prompts .
 
