@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.166.1](https://github.com/raas-dev/configent/compare/1.166.0...1.166.1) (2025-09-14)
+
+
+### Fixes
+
+* **goose:** Install goose via ubi ([431b084](https://github.com/raas-dev/configent/commit/431b084910385a38a2b29bb52728957516a72f3c))
+
 ## [1.166.0](https://github.com/raas-dev/configent/compare/1.165.1...1.166.0) (2025-09-13)
 
 
