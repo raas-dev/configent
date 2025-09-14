@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.7](https://github.com/raas-dev/configent/compare/1.167.6...1.167.7) (2025-09-14)
+
+
+### Fixes
+
+* **aliases:** improve ai function argument handling and formatting ([bd73ce3](https://github.com/raas-dev/configent/commit/bd73ce3b717e1af2407b954f71c4a9b21bca7194))
+
 ### [1.167.6](https://github.com/raas-dev/configent/compare/1.167.5...1.167.6) (2025-09-14)
 
 
