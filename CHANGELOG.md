@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.4](https://github.com/raas-dev/configent/compare/1.167.3...1.167.4) (2025-09-14)
+
+
+### Fixes
+
+* **vscode:** remove cursorpyright extension ([8f4f432](https://github.com/raas-dev/configent/commit/8f4f43249acf56589d858be720e999a77e196a44))
+
 ### [1.167.3](https://github.com/raas-dev/configent/compare/1.167.2...1.167.3) (2025-09-14)
 
 
