@@ -438,35 +438,38 @@ ai() {
   local user_prompt="$*"
 
   if [ -n "$user_prompt" ]; then
-    if [ -r "$user_prompt" ]; then
-      # prompt is path to a file -> open a chat
+    if [ -r "$1" ]; then
+      # first argument is path a to file
       case "$user_prompt" in
-      *.json | *.yaml | *.yml)
-        goose run \
-          --recipe "$user_prompt" \
+      *.json | *.yaml)
+        local recipe_path="$1"
+        shift
+        goose run --quiet \
           --no-session \
-          --interactive
+          --recipe "$recipe_path" \
+          "$@"
         ;;
       *)
-        goose run \
-          --instructions "$user_prompt" \
+        local instructions_path="$1"
+        shift
+        goose run --quiet \
           --no-session \
-          --interactive
+          --instructions "$instructions_path" \
+          "$@"
         ;;
       esac
     else
       # prompt is a string -> non-interactive mode
       goose run --quiet \
-        --system \""$(cat "$system_message_path")"\" \
         --no-session \
+        --system \""$(cat "$system_message_path")"\" \
         --text "$user_prompt"
     fi
   else
     # no prompt is provided -> open a chat
-    goose run \
-      --system "$(cat "$system_message_path")" \
+    goose run --interactive \
       --no-session \
-      --interactive \
+      --system "$(cat "$system_message_path")" \
       --text "how does your system message tell you to respond?"
   fi
 }
