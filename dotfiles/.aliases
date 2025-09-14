@@ -316,29 +316,6 @@ alias semgrep='uvx semgrep'
 
 ### ai
 
-# gptme (development version)
-gptme-dev() {
-  local bin_name="$1"
-  shift
-  local context="${PWD##*/}"
-
-  uvx \
-    --quiet \
-    --python 3.11 \
-    --with "gptme[browser]" \
-    --from git+https://github.com/gptme/gptme \
-    playwright install chromium-headless-shell
-
-  uvx \
-    --python 3.11 \
-    --with "gptme[all]" \
-    --with "gptme-rag" \
-    --from git+https://github.com/gptme/gptme \
-    "$bin_name" --name "" "$@"
-}
-alias gptme='gptme-dev gptme'
-alias gptme-server='gptme-dev gptme-server'
-
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 

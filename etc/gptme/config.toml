@@ -4,7 +4,7 @@ about_user = "I am a curious human programmer."
 response_preference = "Don't explain basic concepts"
 
 [env]
-MODEL = "openrouter/google/gemini-2.5-pro"
+MODEL = "openai/gpt-5-mini"
 GPTME_CHECK = "false"
 GPTME_COSTS = "true"
 #GPTME_SUGGEST_LLM = "true"
@@ -14,16 +14,29 @@ enabled = true
 auto_start = true
 
 [[mcp.servers]]
-name = "duckduckgo"
-enabled = true
-command = "uvx"
-args = ["duckduckgo-mcp-server"]
-
-[[mcp.servers]]
 name = "context7"
 enabled = true
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]
+
+[[mcp.servers]]
+name = "duckduckgo"
+enabled = false
+command = "uvx"
+args = ["duckduckgo-mcp-server"]
+
+[[mcp.servers]]
+name = "browser-use"
+enabled = true
+command = "npx"
+args = ["-y", "envmcp", "uvx", "browser-use[cli]", "--mcp"]
+env = { BROWSER_USE_HEADLESS = "false", BROWSER_USE_DISABLE_SECURITY = "false" }
+
+[[mcp.servers]]
+name = "tavily"
+enabled = true
+command = "npx"
+args = ["-y", "envmcp", "npx", "-y", "tavily-mcp"]
 
 # One of these need to be set
 # If none of them are, they will be prompted for on first start
