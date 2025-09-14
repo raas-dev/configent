@@ -8,12 +8,12 @@ size = 48083660
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.30.1.pkg"
 
 [[tools.bun]]
-version = "1.2.21"
+version = "1.2.22"
 backend = "core:bun"
 
 [tools.bun.platforms.macos-arm64]
-checksum = "blake3:b5824ab4bf0afba1d27d55d4cbec1696c3d1070f6982cbf6b4fa0489892ec931"
-size = 22056420
+checksum = "blake3:ec41528ae2badd9c5d41cefe2c463a307c46d9b5f0ccf157d6f406890340833e"
+size = 22178114
 
 [[tools.cargo-binstall]]
 version = "1.15.4"
@@ -266,7 +266,7 @@ version = "2.25.9"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
-version = "2.1.4"
+version = "2.2.0"
 backend = "pipx:poetry"
 
 [[tools."pipx:pre-commit"]]
