@@ -24,10 +24,6 @@ checksum = "blake3:6a9104a686d44217ccfdcc2b9333a708d8ebd5a4abafe4d2eda5dec77c051
 size = 5997376
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.4/cargo-binstall-aarch64-apple-darwin.zip"
 
-[[tools."cargo:aichat"]]
-version = "0.30.0"
-backend = "cargo:aichat"
-
 [[tools."cargo:atuin"]]
 version = "18.6.0"
 backend = "cargo:atuin"
