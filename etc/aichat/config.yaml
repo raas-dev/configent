@@ -111,10 +111,15 @@ clients:
       - name: qwen3:8b
         max_input_tokens: 40960
         supports_function_calling: true
+      - name: gpt-oss:20b
+        max_input_tokens: 131072
+        supports_function_calling: true
       - name: mistral-small3.2:24b
         max_input_tokens: 131072
         supports_function_calling: true
         supports_vision: true
+      - name: embeddinggemma
+        type: embedding
       - name: nomic-embed-text
         type: embedding
       - name: jina-reranker-v2-base-multilingual
