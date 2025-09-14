@@ -434,27 +434,29 @@ alias standard-version='bunx standard-version'
 ### Functions: AI ##############################################################
 
 ai() {
-  local system_message_path="$HOME/.config/configent/prompts/default.md"
-  local user_prompt="$*"
-
-  if [ -n "$user_prompt" ]; then
-    if [ -r "$1" ]; then
-      # first argument is path a to file
-      case "$user_prompt" in
+  if [ -n "$1" ]; then
+    local user_prompt="$*"
+    if [ -d "$1" ]; then
+      if [ "$1" = "." ]; then
+        local context="${PWD##*/}"
+      else
+        local context="${1##*/}"
+      fi
+      goose session --name "$context"
+    elif [ -r "$1" ]; then
+      local input_path="$1"
+      shift
+      case "$input_path" in
       *.json | *.yaml)
-        local recipe_path="$1"
-        shift
         goose run --quiet \
           --no-session \
-          --recipe "$recipe_path" \
+          --recipe "$input_path" \
           "$@"
         ;;
       *)
-        local instructions_path="$1"
-        shift
         goose run --quiet \
           --no-session \
-          --instructions "$instructions_path" \
+          --instructions "$input_path" \
           "$@"
         ;;
       esac
@@ -462,24 +464,19 @@ ai() {
       # prompt is a string -> non-interactive mode
       goose run --quiet \
         --no-session \
-        --system \""$(cat "$system_message_path")"\" \
         --text "$user_prompt"
     fi
   else
-    # no prompt is provided -> open a chat
-    goose run --interactive \
-      --no-session \
-      --system "$(cat "$system_message_path")" \
-      --text "how does your system message tell you to respond?"
+    goose session
   fi
 }
 
 ai_agent() {
   local context="${PWD##*/}"
   if [ -z "$1" ]; then
-    goose session --name "$context" --resume
+    goose session --name "$context"
   else
-    goose run --name "$context" --resume --interactive --text "$*"
+    goose run --name "$context" --interactive --text "$*"
   fi
 }
 
