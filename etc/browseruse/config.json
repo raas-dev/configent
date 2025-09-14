@@ -14,7 +14,7 @@
       "allowed_domains": null,
       "created_at": "2025-07-23T20:11:41.710466",
       "default": true,
-      "downloads_path": null,
+      "downloads_path": "~/Downloads",
       "headless": false,
       "id": "3d78fa13-538d-4e08-bce0-00262c497ccd",
       "user_data_dir": null
