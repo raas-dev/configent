@@ -465,5 +465,9 @@
   {
     "command": "-workbench.action.newWindow",
     "key": "shift+cmd+n"
+  },
+  {
+    "command": "composerMode.chat_2",
+    "key": "cmd+[IntlBackslash]"
   }
 ]
