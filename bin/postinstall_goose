@@ -6,18 +6,13 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
-
 ### constants ##################################################################
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
-### goose ######################################################################
-
-# install or update
-curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash
+### configs ####################################################################
 
 # backup dir
 if [ ! -r "$backup_path/.config/goose" ]; then

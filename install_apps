@@ -57,8 +57,5 @@ fi
 # install mise, and all tools which are not disabled in etc/mise/config.yml
 "$bin_path/install_mise"
 
-# install goose (https://block.github.io/goose/docs)
-"$bin_path/install_goose"
-
 # install Ollama
 "$bin_path/install_ollama"

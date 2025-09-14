@@ -315,6 +315,13 @@ checksum = "sha256:964bb69fc0e652891b38514fed4ee31de004a58ac22ea2a23c6891728bb6b
 size = 44311024
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.66.0/trivy_0.66.0_macOS-ARM64.tar.gz"
 
+[[tools."ubi:block/goose"]]
+version = "1.8.0"
+backend = "ubi:block/goose"
+
+[tools."ubi:block/goose".platforms.macos-arm64-goose]
+checksum = "blake3:7464bcc78aa2c1212c0c7af343192d7bc3c44316dfa2048d3856eebce76b15d9"
+
 [[tools."ubi:sigoden/argc"]]
 version = "1.23.0"
 backend = "ubi:sigoden/argc"

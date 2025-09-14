@@ -90,6 +90,7 @@ tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmu
 lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 slsa-verifier = "latest"
 cosign = "latest"
+'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 'ubi:sigoden/argc' = 'latest'
 #'ubi:mikefarah/yq' = 'latest'
 #'ubi:sigoden/upt' = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
