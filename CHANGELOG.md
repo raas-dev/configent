@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.5](https://github.com/raas-dev/configent/compare/1.167.4...1.167.5) (2025-09-14)
+
+
+### Fixes
+
+* **ai:** Remove fast-agent ([6e771fc](https://github.com/raas-dev/configent/commit/6e771fca0f88cb4fa978a01958d1a4c92a78e747))
+* **gptme:** Fix gptme config ([d604a86](https://github.com/raas-dev/configent/commit/d604a866378ec88a6eed94b65688ff352055f1b7))
+* **mise:** comment out aichat tool configuration ([1f147f3](https://github.com/raas-dev/configent/commit/1f147f3e6fbf47251a2de4b8c83c5191d752beb5))
+
 ### [1.167.4](https://github.com/raas-dev/configent/compare/1.167.3...1.167.4) (2025-09-14)
 
 
