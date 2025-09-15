@@ -449,13 +449,20 @@ ai() {
       # the argument is a file -> interactive chat
       local input_path="$1"
       shift
+      # example: ai recipe.yaml foo=bar baz=qux
+      if [ "$#" -gt 0 ]; then
+        recipe_params=""
+        for param in "$@"; do
+          recipe_params="$recipe_params --params $(printf '%q' "$param")"
+        done
+      fi
       case "$input_path" in
       *.json | *.yaml)
-        goose run --quiet \
+        eval goose run --quiet \
           --no-session \
           --interactive \
           --recipe "$input_path" \
-          "$@"
+          "$recipe_params"
         ;;
       *)
         goose run --quiet \
