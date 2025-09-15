@@ -437,31 +437,36 @@ ai() {
   if [ -n "$1" ]; then
     local user_prompt="$*"
     if [ -d "$1" ]; then
+      # the argument is a dir -> interactive session
       if [ "$1" = "." ]; then
         local context="${PWD##*/}"
       else
         local context="${1##*/}"
       fi
-      goose session --name "$context"
+      shift
+      goose session --name "$context" --resume --history "$@"
     elif [ -r "$1" ]; then
+      # the argument is a file -> interactive chat
       local input_path="$1"
       shift
       case "$input_path" in
       *.json | *.yaml)
         goose run --quiet \
           --no-session \
+          --interactive \
           --recipe "$input_path" \
           "$@"
         ;;
       *)
         goose run --quiet \
           --no-session \
+          --interactive \
           --instructions "$input_path" \
           "$@"
         ;;
       esac
     else
-      # prompt is a string -> non-interactive mode
+      # the argument is a string -> non-interactive answer
       goose run --quiet \
         --no-session \
         --text "$user_prompt"
