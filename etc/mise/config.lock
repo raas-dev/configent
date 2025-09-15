@@ -16,13 +16,13 @@ checksum = "blake3:ec41528ae2badd9c5d41cefe2c463a307c46d9b5f0ccf157d6f4068903408
 size = 22178114
 
 [[tools.cargo-binstall]]
-version = "1.15.4"
+version = "1.15.5"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.platforms.macos-arm64]
-checksum = "blake3:6a9104a686d44217ccfdcc2b9333a708d8ebd5a4abafe4d2eda5dec77c051a67"
-size = 5997376
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.4/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "blake3:4eff2c4ed16a8864b20b55fbe855821e60dfb633c04e40ab67679a0639f08b2f"
+size = 6004395
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.5/cargo-binstall-aarch64-apple-darwin.zip"
 
 [[tools."cargo:atuin"]]
 version = "18.6.0"
