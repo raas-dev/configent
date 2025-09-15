@@ -458,6 +458,9 @@ ai() {
       fi
       case "$input_path" in
       *.json | *.yaml)
+        printf '%.0s-' {1..80}; echo
+        goose run --explain --recipe "$input_path"
+        printf '%.0s-' {1..80}; echo
         eval goose run --quiet \
           --no-session \
           --interactive \
