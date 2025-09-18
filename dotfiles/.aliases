@@ -455,10 +455,10 @@ ai() {
 
 ai_agent() {
   # loaded in addition to mcp servers in goose config
-  local ADDITIONAL_EXTENSIONS=(
+  local ADD_EXTENSIONS=(
     --with-builtin computercontroller
     --with-builtin memory
-    --with-extension "uvx browser-use[cli] --mcp"
+    --with-extension "BROWSER_USE_HEADLESS=false uvx browser-use[cli] --mcp"
     --with-extension "npx -y tavily-mcp"
     --with-extension "npx -y @upstash/context7-mcp"
   )
@@ -486,13 +486,13 @@ ai_agent() {
     else
       goose run --quiet \
         --name "$context" \
-        "${ADDITIONAL_EXTENSIONS[@]}" \
+        "${ADD_EXTENSIONS[@]}" \
         --text "$*"
     fi
   else
     goose session \
       --name "$context" \
-      "${ADDITIONAL_EXTENSIONS[@]}"
+      "${ADD_EXTENSIONS[@]}"
   fi
 }
 
