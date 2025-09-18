@@ -37,19 +37,6 @@ extensions:
     name: developer
     timeout: 300
     type: builtin
-  duckduckgo:
-    args:
-      - duckduckgo-mcp-server
-    available_tools: []
-    bundled: null
-    cmd: uvx
-    description: null
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: duckduckgo
-    timeout: null
-    type: stdio
   memory:
     available_tools: []
     bundled: true
@@ -59,3 +46,16 @@ extensions:
     name: memory
     timeout: 300
     type: builtin
+  duckduckgo:
+    args:
+      - duckduckgo-mcp-server
+    available_tools: []
+    bundled: null
+    cmd: uvx
+    description: null
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: duckduckgo
+    timeout: null
+    type: stdio
