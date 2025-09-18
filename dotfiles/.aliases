@@ -454,14 +454,11 @@ ai() {
 }
 
 ai_agent() {
-  # Add these to ~/.env.mcp for envmcp to export the env vars to mcp servers:
-  # OPENAI_API_KEY="sn-proj-..."
-  # TAVILY_API_KEY="tvly-..."
   local WITH_EXTENSIONS=(
     --with-builtin computercontroller
     --with-builtin memory
-    --with-extension "npx -y envmcp uvx browser-use[cli] --mcp"
-    --with-extension "npx -y envmcp npx tavily-mcp"
+    --with-extension "uvx browser-use[cli] --mcp"
+    --with-extension "npx tavily-mcp"
     --with-extension "npx -y @upstash/context7-mcp@latest"
   )
   local context="${PWD##*/}"
