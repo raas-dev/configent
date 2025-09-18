@@ -1,13 +1,5 @@
 {
   "mcpServers": {
-    "context7": {
-      "args": ["-y", "@upstash/context7-mcp"],
-      "command": "npx"
-    },
-    "duckduckgo": {
-      "args": ["duckduckgo-mcp-server"],
-      "command": "uvx"
-    },
     "browser-use": {
       "args": ["-y", "envmcp", "uvx", "browser-use[cli]", "--mcp"],
       "command": "npx",
@@ -15,6 +7,10 @@
         "BROWSER_USE_HEADLESS": "false",
         "BROWSER_USE_DISABLE_SECURITY": "false"
       }
+    },
+    "context7": {
+      "args": ["-y", "@upstash/context7-mcp"],
+      "command": "npx"
     },
     "tavily": {
       "args": ["-y", "envmcp", "npx", "-y", "tavily-mcp"],
