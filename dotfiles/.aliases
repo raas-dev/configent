@@ -454,6 +454,16 @@ ai() {
 }
 
 ai_agent() {
+  # Add these to ~/.env.mcp for envmcp to export the env vars to mcp servers:
+  # OPENAI_API_KEY="sn-proj-..."
+  # TAVILY_API_KEY="tvly-..."
+  local WITH_EXTENSIONS=(
+    --with-builtin computercontroller
+    --with-builtin memory
+    --with-extension "npx -y envmcp uvx browser-use[cli] --mcp"
+    --with-extension "npx -y envmcp npx tavily-mcp"
+    --with-extension "npx -y @upstash/context7-mcp@latest"
+  )
   local context="${PWD##*/}"
   if [ -n "$1" ]; then
     if [ -r "$1" ]; then
@@ -469,6 +479,7 @@ ai_agent() {
       printf '%.0s-' {1..80}; echo
       goose run --explain --recipe "$recipe_path"
       printf '%.0s-' {1..80}; echo
+      # extensions are defined in recipe
       eval goose run --quiet \
         --name "$context" \
         --interactive \
@@ -477,10 +488,11 @@ ai_agent() {
     else
       goose run --quiet \
         --name "$context" \
+        "${WITH_EXTENSIONS[@]}" \
         --text "$*"
     fi
   else
-    goose session --name "$context"
+    goose session --name "$context" "${WITH_EXTENSIONS[@]}"
   fi
 }
 
