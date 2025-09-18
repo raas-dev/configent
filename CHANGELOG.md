@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.9](https://github.com/raas-dev/configent/compare/1.167.8...1.167.9) (2025-09-18)
+
+
+### Fixes
+
+* **ai:** simplify extension handling with dynamic arguments ([db0d6cd](https://github.com/raas-dev/configent/commit/db0d6cd8a0be8728f457291231fb6a4414e14c92))
+* **aliases:** add interactive and resume flags to ai function ([7016cbd](https://github.com/raas-dev/configent/commit/7016cbded0dbb07f896b49a5b00c97e6f08e1218))
+* **aliases:** add parameter handling and debug output to ai function ([d4fe7c1](https://github.com/raas-dev/configent/commit/d4fe7c1419742eb64151f0c9cdcc7f938c85382a))
+* **aliases:** add recipe explanation output to ai function ([b3a84b0](https://github.com/raas-dev/configent/commit/b3a84b0b9043556f2410bcb53824c4f35225690b))
+* **aliases:** separate aliases for ai assistants and ai agents ([424d161](https://github.com/raas-dev/configent/commit/424d161be05a5cb284437d3bcfdd6fc750bfdaa7))
+* **aliases:** simplify ai_agent extension commands ([407208f](https://github.com/raas-dev/configent/commit/407208f5514e7fa6d42a30774f8f1cc3aa7451ad))
+* **config:** update MCP extension arguments and reorder extensions ([5f4b63d](https://github.com/raas-dev/configent/commit/5f4b63db2f8857e9a89c3e562b30320d06c0fde4))
+
 ### [1.167.8](https://github.com/raas-dev/configent/compare/1.167.7...1.167.8) (2025-09-14)
 
 
