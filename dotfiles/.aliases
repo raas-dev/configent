@@ -146,7 +146,6 @@ alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
 alias _='ai_agent'
-alias \#='ai_agent_web'
 
 ### watch ######################################################################
 
@@ -435,51 +434,19 @@ alias standard-version='bunx standard-version'
 
 ai() {
   if [ -n "$1" ]; then
-    local user_prompt="$*"
-    if [ -d "$1" ]; then
-      # the argument is a dir -> interactive session
-      if [ "$1" = "." ]; then
-        local context="${PWD##*/}"
-      else
-        local context="${1##*/}"
-      fi
+    if [ -r "$1" ]; then
+      # example: ai prompt.md
+      local instructions_path="$1"
       shift
-      goose session --name "$context" --resume --history "$@"
-    elif [ -r "$1" ]; then
-      # the argument is a file -> interactive chat
-      local input_path="$1"
-      shift
-      # example: ai recipe.yaml foo=bar baz=qux
-      if [ "$#" -gt 0 ]; then
-        recipe_params=""
-        for param in "$@"; do
-          recipe_params="$recipe_params --params $(printf '%q' "$param")"
-        done
-      fi
-      case "$input_path" in
-      *.json | *.yaml)
-        printf '%.0s-' {1..80}; echo
-        goose run --explain --recipe "$input_path"
-        printf '%.0s-' {1..80}; echo
-        eval goose run --quiet \
-          --no-session \
-          --interactive \
-          --recipe "$input_path" \
-          "$recipe_params"
-        ;;
-      *)
-        goose run --quiet \
-          --no-session \
-          --interactive \
-          --instructions "$input_path" \
-          "$@"
-        ;;
-      esac
-    else
-      # the argument is a string -> non-interactive answer
       goose run --quiet \
         --no-session \
-        --text "$user_prompt"
+        --interactive \
+        --instructions "$instructions_path" \
+        "$@"
+    else
+      goose run --quiet \
+        --no-session \
+        --text "$*"
     fi
   else
     goose session
@@ -488,10 +455,32 @@ ai() {
 
 ai_agent() {
   local context="${PWD##*/}"
-  if [ -z "$1" ]; then
-    goose session --name "$context"
+  if [ -n "$1" ]; then
+    if [ -r "$1" ]; then
+      # example: ai_agent recipe.yaml foo=bar baz=qux
+      local recipe_path="$1"
+      shift
+      if [ "$#" -gt 0 ]; then
+        recipe_params=""
+        for param in "$@"; do
+          recipe_params="$recipe_params --params $(printf '%q' "$param")"
+        done
+      fi
+      printf '%.0s-' {1..80}; echo
+      goose run --explain --recipe "$recipe_path"
+      printf '%.0s-' {1..80}; echo
+      eval goose run --quiet \
+        --name "$context" \
+        --interactive \
+        --recipe "$recipe_path" \
+        "$recipe_params"
+    else
+      goose run --quiet \
+        --name "$context" \
+        --text "$*"
+    fi
   else
-    goose run --name "$context" --interactive --text "$*"
+    goose session --name "$context"
   fi
 }
 
