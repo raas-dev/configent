@@ -454,7 +454,8 @@ ai() {
 }
 
 ai_agent() {
-  local WITH_EXTENSIONS=(
+  # loaded in addition to mcp servers in goose config
+  local ADDITIONAL_EXTENSIONS=(
     --with-builtin computercontroller
     --with-builtin memory
     --with-extension "uvx browser-use[cli] --mcp"
@@ -476,7 +477,7 @@ ai_agent() {
       printf '%.0s-' {1..80}; echo
       goose run --explain --recipe "$recipe_path"
       printf '%.0s-' {1..80}; echo
-      # extensions are defined in recipe
+      # extensions are in recipe, mcp servers in goose config are not loaded
       eval goose run --quiet \
         --name "$context" \
         --interactive \
@@ -485,11 +486,13 @@ ai_agent() {
     else
       goose run --quiet \
         --name "$context" \
-        "${WITH_EXTENSIONS[@]}" \
+        "${ADDITIONAL_EXTENSIONS[@]}" \
         --text "$*"
     fi
   else
-    goose session --name "$context" "${WITH_EXTENSIONS[@]}"
+    goose session \
+      --name "$context" \
+      "${ADDITIONAL_EXTENSIONS[@]}"
   fi
 }
 
