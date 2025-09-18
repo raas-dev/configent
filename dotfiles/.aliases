@@ -459,8 +459,8 @@ ai_agent() {
     --with-builtin computercontroller
     --with-builtin memory
     --with-extension "BROWSER_USE_HEADLESS=false uvx browser-use[cli] --mcp"
-    --with-extension "npx -y tavily-mcp"
     --with-extension "npx -y @upstash/context7-mcp"
+    --with-extension "npx -y tavily-mcp"
   )
   local context="${PWD##*/}"
   if [ -n "$1" ]; then
