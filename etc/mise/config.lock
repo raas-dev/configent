@@ -1,11 +1,11 @@
 [[tools.awscli]]
-version = "2.30.4"
+version = "2.30.5"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:47b8bed9425336d577fb4ea1408004d665ff6adede33528aaa88e18adb608831"
-size = 48090496
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.30.4.pkg"
+checksum = "blake3:1e5caf5c4101f135f27cb91872fa1161b06971c9cf3d3e7375b5caf688873129"
+size = 48089690
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.30.5.pkg"
 
 [[tools.bun]]
 version = "1.2.22"
@@ -250,7 +250,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.7.8"
+version = "0.7.9"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
