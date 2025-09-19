@@ -352,7 +352,7 @@ venv() {
       poetry install
     elif [ -r "uv.lock" ] && [ -r "pyproject.toml" ]; then
       # inexact: do not remove extraneous packages unless they conflict
-      uv sync --inexact --all-extras
+      uv sync --inexact --all-extras --no-managed-python
       uv pip install --editable .
     else
       # no lockfile, do not create one either
