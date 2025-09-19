@@ -22,7 +22,7 @@ A few features:
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Quickly ask AI (`a <question>`) or start a general purpose AI agent (`_ <task>`).
 
-Works on macOS Sequoia (15), Sonoma (14) and Ventura (13) on Apple Silicon.
+Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
 
 Supported Linux distributions (both AArch64 and x86-64):
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
