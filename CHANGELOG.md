@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.11](https://github.com/raas-dev/configent/compare/1.167.10...1.167.11) (2025-09-19)
+
+
+### Fixes
+
+* **aliases:** add --no-managed-python flag to uv sync command ([5bd4f6c](https://github.com/raas-dev/configent/commit/5bd4f6cf15c69de2f7b74c35843b407eee475f0c))
+* **aliases:** add prompts-mcp extension to ai_agent function ([fd0f7d7](https://github.com/raas-dev/configent/commit/fd0f7d7392d914decba1e30582bac150bb3ec34d))
+
 ### [1.167.10](https://github.com/raas-dev/configent/compare/1.167.9...1.167.10) (2025-09-19)
 
 
