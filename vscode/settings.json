@@ -271,7 +271,6 @@
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
   "ruff.configurationPreference": "filesystemFirst",
-  "ruff.lineLength": 88,
   "scm.countBadge": "focused",
   "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.enabled": false,
