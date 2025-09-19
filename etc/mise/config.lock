@@ -250,7 +250,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.7.7"
+version = "0.7.8"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
