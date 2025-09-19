@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.10](https://github.com/raas-dev/configent/compare/1.167.9...1.167.10) (2025-09-19)
+
+
+### Fixes
+
+* **mise:** Fix postinstall script name ([33d2c48](https://github.com/raas-dev/configent/commit/33d2c48daaef4a60acece6d1a9f76442b3d40201))
+
 ### [1.167.9](https://github.com/raas-dev/configent/compare/1.167.8...1.167.9) (2025-09-18)
 
 
