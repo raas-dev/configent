@@ -261,6 +261,9 @@ export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts"
 export FUNCTIONS_REPO_URL="git@github.com:alkue-com/functions.git"
 export LLM_MCP_SKIP_CONFIRM=".*"
 
+# prompts-mcp
+export PROMPTS_DIR="$HOME/.config/configent/prompts"
+
 ### XDG base directory specification ###########################################
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
