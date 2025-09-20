@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.12](https://github.com/raas-dev/configent/compare/1.167.11...1.167.12) (2025-09-20)
+
+
+### Fixes
+
+* **aliases:** filter comments and handle empty pip freeze output ([1d64d18](https://github.com/raas-dev/configent/commit/1d64d18abd876c759512d578782d54b6bb5426f0))
+* **aliases:** split printf and echo commands in ai_agent function ([d638caf](https://github.com/raas-dev/configent/commit/d638cafa1875ae2d400492b4058fe64650be21ee))
+* **bin:** upgrade pip before installing packages and improve pipclear ([18f879b](https://github.com/raas-dev/configent/commit/18f879bf0cdb4f5b95e2fbcfeebe5b71dc5aca9e))
+
 ### [1.167.11](https://github.com/raas-dev/configent/compare/1.167.10...1.167.11) (2025-09-19)
 
 
