@@ -475,9 +475,11 @@ ai_agent() {
           recipe_params="$recipe_params --params $(printf '%q' "$param")"
         done
       fi
-      printf '%.0s-' {1..80}; echo
+      printf '%.0s-' {1..80}
+      echo
       goose run --explain --recipe "$recipe_path"
-      printf '%.0s-' {1..80}; echo
+      printf '%.0s-' {1..80}
+      echo
       # extensions are in recipe, mcp servers in goose config are not loaded
       eval goose run --quiet \
         --name "$context" \
