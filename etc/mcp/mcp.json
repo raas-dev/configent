@@ -1,9 +1,10 @@
 {
   "mcpServers": {
     "browser-use": {
-      "args": ["-y", "envmcp", "uvx", "browser-use[cli]", "--mcp"],
-      "command": "npx",
+      "args": ["browser-use[cli]", "--mcp"],
+      "command": "uvx",
       "env": {
+        "OPENAI_API_KEY": "${env:OPENAI_API_KEY}",
         "BROWSER_USE_HEADLESS": "false",
         "BROWSER_USE_DISABLE_SECURITY": "false"
       }
@@ -13,8 +14,11 @@
       "command": "npx"
     },
     "tavily": {
-      "args": ["-y", "envmcp", "npx", "-y", "tavily-mcp"],
-      "command": "npx"
+      "args": ["-y", "tavily-mcp"],
+      "command": "npx",
+      "env": {
+        "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
+      }
     }
   }
 }
