@@ -12,6 +12,10 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
+### update pip #################################################################
+
+pip install --upgrade pip
+
 ### default packages ###########################################################
 
 pip install pipx
