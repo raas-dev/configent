@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.13](https://github.com/raas-dev/configent/compare/1.167.12...1.167.13) (2025-09-20)
+
+
+### Fixes
+
+* **aliases:** remove redundant editable install in venv function ([d0ca1ec](https://github.com/raas-dev/configent/commit/d0ca1ecada700b5c46eae3a36dd49525d7c0826e))
+* **mcp:** update server configs and add API key env vars ([6befe4c](https://github.com/raas-dev/configent/commit/6befe4cb701ee3b47f32511f1c996e4e6cf7ac50))
+
 ### [1.167.12](https://github.com/raas-dev/configent/compare/1.167.11...1.167.12) (2025-09-20)
 
 
