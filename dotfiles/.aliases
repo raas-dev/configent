@@ -305,7 +305,7 @@ alias you-get='uvx you-get'
 ### sast
 
 # Bandit (Python security linter - add toml for -c pyproject.toml support)
-alias bandit='uvx bandit[toml]'
+alias bandit='uvx "bandit[toml]"'
 
 # Checkov (cloud misconfiguration scanner)
 alias checkov='uvx checkov'
