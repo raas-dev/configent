@@ -262,7 +262,7 @@ version = "2.25.9"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
-version = "2.2.0"
+version = "2.2.1"
 backend = "pipx:poetry"
 
 [[tools."pipx:pre-commit"]]
