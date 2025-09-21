@@ -1,1 +1,5 @@
-/etc/prompts/write_nuclei_template_rule.md
+# Usage:
+#   semgrep scan .
+
+dotfiles/.bash-preexec.sh
+etc/prompts/write_nuclei_template_rule.md
