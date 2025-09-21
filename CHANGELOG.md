@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.167.14](https://github.com/raas-dev/configent/compare/1.167.13...1.167.14) (2025-09-21)
+
+
+### Fixes
+
+* **aliases:** add bandit and codespell uvx aliases ([0f3ae17](https://github.com/raas-dev/configent/commit/0f3ae17d6d4c5e2f009da0de160233784e1e1e9d))
+* **aliases:** add quotes around bandit command with brackets ([684f6b7](https://github.com/raas-dev/configent/commit/684f6b74fe37fc626961ab801b60612c2da9037b))
+* **mise:** add act tool configuration ([32a42a9](https://github.com/raas-dev/configent/commit/32a42a9f43d6d5eeb9b0a1903e833f4674406872))
+
 ### [1.167.13](https://github.com/raas-dev/configent/compare/1.167.12...1.167.13) (2025-09-20)
 
 
