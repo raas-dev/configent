@@ -304,8 +304,14 @@ alias you-get='uvx you-get'
 
 ### sast
 
+# Bandit (Python security linter - add toml for -c pyproject.toml support)
+alias bandit='uvx bandit[toml]'
+
 # Checkov (cloud misconfiguration scanner)
 alias checkov='uvx checkov'
+
+# Codespell (spelling checker)
+alias codespell='uvx codespell'
 
 # GuardDog (malicious package identifier - uses semgrep underneath)
 alias guarddog='uvx guarddog'
