@@ -283,7 +283,7 @@ version = "0.4.4"
 backend = "pipx:sncli"
 
 [[tools."pipx:tldr"]]
-version = "3.4.2"
+version = "3.4.3"
 backend = "pipx:tldr"
 
 [[tools.python]]
