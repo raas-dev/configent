@@ -84,7 +84,7 @@ gcloud = '510.0.0'
 #helm = 'latest'
 #k9s = 'latest'
 #cloudflared = 'latest'
-act = 'latest'
+act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 neovim = '0.11.1'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.actrc" ]; then
+  if [ -r "$HOME/.actrc" ]; then
+    mkdir -p "$backup_path"
+    cp -P "$HOME/.actrc" "$backup_path/.actrc"
+  fi
+fi
+
+# symlink
+ln -sfnv "$config_path/act/actrc" "$HOME/.actrc"

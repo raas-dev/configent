@@ -1,0 +1,10 @@
+# for image names, see: https://nektosact.com/usage/runners.html
+# for ubuntu-latest, see: https://github.com/nektos/act/issues/2329
+
+-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:full-24.04
+-P ubuntu-24.04=ghcr.io/catthehacker/ubuntu:full-24.04
+-P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:full-22.04
+
+#-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-24.04
+#-P ubuntu-24.04=ghcr.io/catthehacker/ubuntu:act-24.04
+#-P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:act-22.04
