@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.168.0](https://github.com/raas-dev/configent/compare/1.167.14...1.168.0) (2025-09-22)
+
+
+### Features
+
+* **act:** add GitHub Actions runner configuration ([77cd599](https://github.com/raas-dev/configent/commit/77cd599ba18bbfc2e85b74d4a632654311decfcc))
+
 ### [1.167.14](https://github.com/raas-dev/configent/compare/1.167.13...1.167.14) (2025-09-21)
 
 
