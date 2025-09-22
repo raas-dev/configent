@@ -278,6 +278,7 @@
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
   "stagewise.telemetry.enabled": false,
   "statusbarDebugger.priority": 20000,
+  "stylua.disableVersionCheck": true,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "telemetry.telemetryLevel": "off",
