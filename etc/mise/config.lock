@@ -335,10 +335,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [[tools.uv]]
-version = "0.8.20"
+version = "0.8.21"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:a87008d013efd78d94102e5268a24990c409bfb39b80df4de32d1c97f093e7ef"
-size = 17935840
-url = "https://github.com/astral-sh/uv/releases/download/0.8.20/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:51a10a0ba94139911266779e61296b07fffc98eedf3d8f6e206f86375ac7fb31"
+size = 18166796
+url = "https://github.com/astral-sh/uv/releases/download/0.8.21/uv-aarch64-apple-darwin.tar.gz"
