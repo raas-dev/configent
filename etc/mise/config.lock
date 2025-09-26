@@ -8,13 +8,13 @@ size = 7699340
 url = "https://github.com/nektos/act/releases/download/v0.2.81/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.1"
+version = "2.31.2"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:fe3dfd231975745af570e156adc4c81ea29f5a3be6b5ff0680ba1ce6939df43b"
-size = 48107487
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.1.pkg"
+checksum = "blake3:65ad954a4bcab3a82ed5b6bda729770f4f77bce639aa1c85a28907f3caf95209"
+size = 48108961
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.2.pkg"
 
 [[tools.bun]]
 version = "1.2.22"
@@ -25,13 +25,13 @@ checksum = "blake3:ec41528ae2badd9c5d41cefe2c463a307c46d9b5f0ccf157d6f4068903408
 size = 22178114
 
 [[tools.cargo-binstall]]
-version = "1.15.5"
+version = "1.15.6"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.platforms.macos-arm64]
-checksum = "blake3:4eff2c4ed16a8864b20b55fbe855821e60dfb633c04e40ab67679a0639f08b2f"
-size = 6004395
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.5/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "blake3:a9ec69060311d1073e50f2028b44a36f6d7b544183648adb5854fd235875d910"
+size = 5996733
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.6/cargo-binstall-aarch64-apple-darwin.zip"
 
 [[tools."cargo:atuin"]]
 version = "18.6.0"
