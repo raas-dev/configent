@@ -8,13 +8,13 @@ size = 7699340
 url = "https://github.com/nektos/act/releases/download/v0.2.81/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.2"
+version = "2.31.3"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:65ad954a4bcab3a82ed5b6bda729770f4f77bce639aa1c85a28907f3caf95209"
-size = 48108961
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.2.pkg"
+checksum = "blake3:70452f1de1b1259bb6323b74e2b1a831a289064e1888c72d43f2358815ae4c06"
+size = 48114541
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.3.pkg"
 
 [[tools.bun]]
 version = "1.2.22"
