@@ -17,12 +17,12 @@ size = 48114541
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.3.pkg"
 
 [[tools.bun]]
-version = "1.2.22"
+version = "1.2.23"
 backend = "core:bun"
 
 [tools.bun.platforms.macos-arm64]
-checksum = "blake3:ec41528ae2badd9c5d41cefe2c463a307c46d9b5f0ccf157d6f406890340833e"
-size = 22178114
+checksum = "blake3:621c047bdd068c4972bf7b222a2e112908cd40b53256b690ec0921ea98676756"
+size = 22280328
 
 [[tools.cargo-binstall]]
 version = "1.15.6"
