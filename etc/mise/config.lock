@@ -259,7 +259,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.7.9"
+version = "0.7.10"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
@@ -312,13 +312,13 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [[tools.trivy]]
-version = "0.66.0"
+version = "0.67.0"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.platforms.macos-arm64]
-checksum = "sha256:964bb69fc0e652891b38514fed4ee31de004a58ac22ea2a23c6891728bb6b6eb"
-size = 44311024
-url = "https://github.com/aquasecurity/trivy/releases/download/v0.66.0/trivy_0.66.0_macOS-ARM64.tar.gz"
+checksum = "sha256:feea8727b501f654683774fe0f98a9c1a128c7d8bcd7c942a8e6f6d05b33bd4b"
+size = 44676220
+url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.0/trivy_0.67.0_macOS-ARM64.tar.gz"
 
 [[tools."ubi:block/goose"]]
 version = "1.9.0"
