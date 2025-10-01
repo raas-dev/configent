@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.1](https://github.com/raas-dev/configent/compare/1.168.0...1.168.1) (2025-10-01)
+
+
+### Fixes
+
+* **mcp:** add peekaboo server configuration ([8cd7d0f](https://github.com/raas-dev/configent/commit/8cd7d0feb0a6b70266d1d7fab2e233e663cebbe0))
+* **profile:** correct Lumen AI model name format ([dd2e71d](https://github.com/raas-dev/configent/commit/dd2e71d7c92947d78a9265962dcb35cc3baba09b))
+* **profile:** update lumen ai model to claude-sonnet-4.5 ([5d451a7](https://github.com/raas-dev/configent/commit/5d451a7b3b66e0c7ee39db0470c1cde48f51db9e))
+
 ## [1.168.0](https://github.com/raas-dev/configent/compare/1.167.14...1.168.0) (2025-09-22)
 
 
