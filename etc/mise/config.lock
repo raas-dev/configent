@@ -1,11 +1,11 @@
 [[tools.act]]
-version = "0.2.81"
+version = "0.2.82"
 backend = "aqua:nektos/act"
 
 [tools.act.platforms.macos-arm64]
-checksum = "sha256:779242e40cebc6e2fe21503d50bd1b4e485a7965f1e758ed36871a7986cb4041"
-size = 7699340
-url = "https://github.com/nektos/act/releases/download/v0.2.81/act_Darwin_arm64.tar.gz"
+checksum = "sha256:c4cc7d34f497eb15f51f8f6e1d25571e18b4909ceceb40933f4a26a8e7293cfb"
+size = 7523767
+url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
 version = "2.31.5"
