@@ -8,13 +8,13 @@ size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.5"
+version = "2.31.6"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:12a432c775975c2aaccbed80942cc2a9aa355108590e50bf93c30ea500ca4657"
-size = 48144883
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.5.pkg"
+checksum = "blake3:6e1dbf74c352da650b15a85145b0b70e8add0af3156fb40b72213d1431d1917c"
+size = 48147615
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.6.pkg"
 
 [[tools.bun]]
 version = "1.2.23"
@@ -188,13 +188,13 @@ version = "510.0.0"
 backend = "asdf:gcloud"
 
 [[tools.github-cli]]
-version = "2.80.0"
+version = "2.81.0"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.platforms.macos-arm64]
-checksum = "sha256:4e3567687d714272be3664244c045785573660803eabf41dff9a3a701b39f3b6"
-size = 17561757
-url = "https://github.com/cli/cli/releases/download/v2.80.0/gh_2.80.0_macOS_arm64.zip"
+checksum = "sha256:b0f5a81601291123a25792859f7ca82229c1f1ae05b4b9f1a7e9e8bb63e649d5"
+size = 17559059
+url = "https://github.com/cli/cli/releases/download/v2.81.0/gh_2.81.0_macOS_arm64.zip"
 
 [[tools.go]]
 version = "1.23.4"
