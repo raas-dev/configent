@@ -264,6 +264,11 @@ export LLM_MCP_SKIP_CONFIRM=".*"
 # prompts-mcp
 export PROMPTS_DIR="$HOME/.config/configent/prompts"
 
+### playwright #################################################################
+
+# set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
+export PLAYWRIGHT_BROWSERS_PATH="$HOME/.cache/ms-playwright"
+
 ### XDG base directory specification ###########################################
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
