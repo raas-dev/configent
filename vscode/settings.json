@@ -73,6 +73,7 @@
   "chat.commandCenter.enabled": false,
   "chat.editor.fontSize": 14,
   "chat.experimental.offerSetup": false,
+  "claude-code.environmentVariables": [],
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
