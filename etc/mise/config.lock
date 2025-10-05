@@ -201,7 +201,7 @@ version = "1.23.4"
 backend = "core:go"
 
 [[tools."go:github.com/abhimanyu003/sttr"]]
-version = "0.2.27"
+version = "0.2.28"
 backend = "go:github.com/abhimanyu003/sttr"
 
 [[tools."go:github.com/charmbracelet/glow"]]
