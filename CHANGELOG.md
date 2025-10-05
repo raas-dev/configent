@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.2](https://github.com/raas-dev/configent/compare/1.168.1...1.168.2) (2025-10-05)
+
+
+### Fixes
+
+* **profile:** add PLAYWRIGHT_BROWSERS_PATH environment variable ([76d33b7](https://github.com/raas-dev/configent/commit/76d33b789ae3485ebcb075db58019589865f20cf))
+
 ### [1.168.1](https://github.com/raas-dev/configent/compare/1.168.0...1.168.1) (2025-10-01)
 
 
