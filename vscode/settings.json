@@ -87,6 +87,7 @@
   "crashReporting.enabled": "off",
   "csv-preview.resizeColumns": "all",
   "csv-preview.separator": "[,;]",
+  "cursor.agent_layout_browser_beta_setting": true,
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.backspaceRemoveContext": false,
