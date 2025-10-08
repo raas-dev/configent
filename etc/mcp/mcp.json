@@ -19,10 +19,6 @@
       "env": {
         "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
       }
-    },
-    "peekaboo": {
-      "args": ["-y", "peekaboo-mcp"],
-      "command": "npx"
     }
   }
 }
