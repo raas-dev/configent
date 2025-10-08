@@ -23,13 +23,6 @@
     "peekaboo": {
       "args": ["-y", "peekaboo-mcp"],
       "command": "npx"
-    },
-    "browser-tools": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@agentdeskai/browser-tools-mcp@latest"
-      ]
     }
   }
 }
