@@ -483,5 +483,15 @@
     "command": "-workbench.action.chat.openagent",
     "key": "shift+cmd+i",
     "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "command": "inlineChat.start",
+    "key": "cmd+k",
+    "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "command": "-inlineChat.start",
+    "key": "cmd+i",
+    "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
   }
 ]
