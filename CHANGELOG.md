@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.5](https://github.com/raas-dev/configent/compare/1.168.4...1.168.5) (2025-10-09)
+
+
+### Fixes
+
+* **Chat:** set model to GPT-4.1 in chatmode configuration ([65e8870](https://github.com/raas-dev/configent/commit/65e8870388319a55849669bf7bf3f526840aac25))
+* **vscode:** remove GitKraken and Pylance tools, enable auto-approve ([fa84a09](https://github.com/raas-dev/configent/commit/fa84a09a2794b29d568c359ba24b7f3d9d95de00))
+
 ### [1.168.4](https://github.com/raas-dev/configent/compare/1.168.3...1.168.4) (2025-10-09)
 
 
