@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.3](https://github.com/raas-dev/configent/compare/1.168.2...1.168.3) (2025-10-09)
+
+
+### Fixes
+
+* **prompts:** add Chat chatmode with first-principles assistant ([582bbf4](https://github.com/raas-dev/configent/commit/582bbf4adf45a1431545e9f50c7abdda08b73e12))
+* **setup_ide:** move path variable declarations to top of script ([0ca757f](https://github.com/raas-dev/configent/commit/0ca757f38bb292581b1c9be612a0596fe252a7fb))
+* **vscode:** add MCP server configuration and enable gallery ([48630cb](https://github.com/raas-dev/configent/commit/48630cb79eeb4102bd9819c9a03314b86d0d7af2))
+* **vscode:** update AI assistant extensions list ([851e557](https://github.com/raas-dev/configent/commit/851e5577fc5d0de43e48a384a4b4eb14efb2a79a))
+
 ### [1.168.2](https://github.com/raas-dev/configent/compare/1.168.1...1.168.2) (2025-10-05)
 
 
