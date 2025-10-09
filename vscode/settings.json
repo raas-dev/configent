@@ -175,10 +175,6 @@
   "extendedTerminalIntegration.statusBar.maxTerminalIcons": 4,
   "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
   "extendedTerminalIntegration.statusBar.showTerminalName": true,
-  "extensions.gallery.itemUrl": "https://marketplace.visualstudio.com/items",
-  "extensions.gallery.publisherUrl": "https://marketplace.visualstudio.com/publishers",
-  "extensions.gallery.searchUrl": "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery",
-  "extensions.gallery.serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.ejs": "json",
@@ -204,6 +200,8 @@
     "plaintext": false,
     "scminput": false
   },
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
