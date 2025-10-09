@@ -469,5 +469,19 @@
   {
     "command": "composerMode.chat_2",
     "key": "cmd+[IntlBackslash]"
+  },
+  {
+    "command": "workbench.action.chat.openask",
+    "key": "cmd+l"
+  },
+  {
+    "command": "workbench.action.chat.openagent",
+    "key": "cmd+i",
+    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "command": "-workbench.action.chat.openagent",
+    "key": "shift+cmd+i",
+    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
   }
 ]
