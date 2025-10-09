@@ -73,6 +73,7 @@
   "chat.commandCenter.enabled": false,
   "chat.editor.fontSize": 14,
   "chat.experimental.offerSetup": false,
+  "chat.mcp.gallery.enabled": true,
   "claude-code.useTerminal": true,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,

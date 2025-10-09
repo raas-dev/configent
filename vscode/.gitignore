@@ -4,6 +4,7 @@
 !create_extensions_list
 !extensions.list
 !keybindings.json
+!mcp.json
 !settings.json
 
 !prompts/
