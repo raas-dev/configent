@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.4](https://github.com/raas-dev/configent/compare/1.168.3...1.168.4) (2025-10-09)
+
+
+### Fixes
+
+* **setup_ide:** change VS Code MCP config to use Cursor directory ([56fcdbe](https://github.com/raas-dev/configent/commit/56fcdbe53659d0296f63a958453bf29e8b9f159b))
+
 ### [1.168.3](https://github.com/raas-dev/configent/compare/1.168.2...1.168.3) (2025-10-09)
 
 
