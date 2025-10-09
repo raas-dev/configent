@@ -73,6 +73,12 @@
   "chat.commandCenter.enabled": false,
   "chat.editor.fontSize": 14,
   "chat.experimental.offerSetup": false,
+  "chat.fontSize": 15,
+  "chat.mcp.discovery.enabled": {
+    "cursor-global": true,
+    "cursor-workspace": true,
+    "windsurf": true
+  },
   "chat.mcp.gallery.enabled": true,
   "claude-code.useTerminal": true,
   "code-runner.enableAppInsights": false,
@@ -210,6 +216,7 @@
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.currentLine.enabled": false,
+  "gitlens.gitkraken.mcp.autoEnabled": false,
   "gitlens.graph.minimap.enabled": false,
   "gitlens.graph.statusBar.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
@@ -367,6 +374,7 @@
   "window.confirmSaveUntitledWorkspace": false,
   "window.customTitleBarVisibility": "windowed",
   "window.newWindowDimensions": "inherit",
+  "window.newWindowProfile": "Default",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
   "window.zoomLevel": 0.2,
