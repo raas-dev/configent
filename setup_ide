@@ -10,6 +10,8 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
+backup_path="$this_path/.backup"
+config_path="$HOME/.config/configent"
 
 "$bin_path/setup_fonts"
 
@@ -31,9 +33,6 @@ fi
 
 if command -v cursor >/dev/null; then
   APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
-
-  backup_path="$this_path/.backup"
-  config_path="$HOME/.config/configent"
 
   # Create Cursor mcp.json
   if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
