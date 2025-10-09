@@ -80,6 +80,7 @@
     "windsurf": true
   },
   "chat.mcp.gallery.enabled": true,
+  "chat.tools.global.autoApprove": true,
   "claude-code.useTerminal": true,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
