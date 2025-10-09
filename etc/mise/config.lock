@@ -321,11 +321,11 @@ size = 44682130
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.1/trivy_0.67.1_macOS-ARM64.tar.gz"
 
 [[tools."ubi:block/goose"]]
-version = "1.9.1"
+version = "1.9.2"
 backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:14deb8b54f5c7c62785f201dd0bfea2a1363fb41f9adcadcd5d557bab7e4a2ee"
+checksum = "blake3:ef325a295f01334d4149fa29122359df0e2de161938968542687dcdeed2ff7cc"
 
 [[tools."ubi:sigoden/argc"]]
 version = "1.23.0"
