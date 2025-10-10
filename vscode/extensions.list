@@ -1,5 +1,6 @@
 aaron-bond.better-comments
 anthropic.claude-code
+anysphere.cursorpyright
 astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
@@ -24,6 +25,7 @@ dnicolson.binary-plist
 eamodio.gitlens
 editorconfig.editorconfig
 esbenp.prettier-vscode
+ethansk.restore-terminals
 fabiospampinato.vscode-statusbar-debugger
 formulahendry.code-runner
 fregante.ghost-text
@@ -53,7 +55,6 @@ ms-dotnettools.vscode-dotnet-runtime
 ms-playwright.playwright
 ms-python.debugpy
 ms-python.python
-ms-python.vscode-python-envs
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
