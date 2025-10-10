@@ -336,16 +336,16 @@
       "splitTerminals": [
         {
           "commands": [
-            "up"
+            "dup"
           ],
-          "name": "a",
-          "shouldRunCommands": false
+          "name": "a"
         },
         {
           "commands": [
-            "clear"
+            "tm"
           ],
-          "name": "b"
+          "name": "b",
+          "shouldRunCommands": true
         }
       ]
     }
