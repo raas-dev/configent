@@ -37,9 +37,9 @@ if ! command -v duti >/dev/null; then
   exit 127
 fi
 
-if command -v cursor && [ "$DEFAULT_IDE" = "cursor" ]; then
+if command -v cursor >/dev/null && [ "$DEFAULT_IDE" = "cursor" ]; then
   app_bundle_id="com.todesktop.230313mzl4w4u92"
-elif command -v windsurf && [ "$DEFAULT_IDE" = "windsurf" ]; then
+elif command -v windsurf >/dev/null && [ "$DEFAULT_IDE" = "windsurf" ]; then
   app_bundle_id="com.exafunction.windsurf"
 elif command -v code >/dev/null; then
   app_bundle_id="com.microsoft.VSCode"
