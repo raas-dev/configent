@@ -159,8 +159,10 @@ These steps are detailed further below.
 
 ## 🔨 IDE
 
-[Cursor](https://www.cursor.com/) is the default IDE on macOS and
-[VS Code](https://code.visualstudio.com/) is the default IDE on Linux distros.
+[VS Code](https://code.visualstudio.com/) is the default IDE.
+
+You can change the default by setting environment variable
+DEFAULT_IDE="<BIN_NAME>" (e.g. `export DEFAULT_IDE="cursor"`) in `~/.rclocal`.
 
 Extensions in
 [Open VSX Registry](https://open-vsx.org/) are available for all VS Code
