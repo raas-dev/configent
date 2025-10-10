@@ -380,6 +380,7 @@
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.hideOnStartup": "whenEmpty",
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
     "starship",
