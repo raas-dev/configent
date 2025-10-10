@@ -8,13 +8,13 @@ size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.12"
+version = "2.31.13"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:717446e3537aeb5d841b686d91fdc78f071b6b6f90281c50bdc41385ff410f0b"
-size = 48184523
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.12.pkg"
+checksum = "blake3:41491553291509a575b513f44f5b4354d2b12dcc37eb62f70d09ee4f2918131c"
+size = 48185625
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.13.pkg"
 
 [[tools.bun]]
 version = "1.2.23"
@@ -312,20 +312,20 @@ version = "3.5a"
 backend = "asdf:tmux"
 
 [[tools.trivy]]
-version = "0.67.1"
+version = "0.67.2"
 backend = "aqua:aquasecurity/trivy"
 
 [tools.trivy.platforms.macos-arm64]
-checksum = "sha256:81e24fd39ddecda180cc9abefaea184e0c22c331d7b683993a9bc89e67d07bb9"
-size = 44682130
-url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.1/trivy_0.67.1_macOS-ARM64.tar.gz"
+checksum = "sha256:6b3163667f29fc608a2ed647c1bd42023af5779349286148190a168c5b3f28f1"
+size = 44682125
+url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.2/trivy_0.67.2_macOS-ARM64.tar.gz"
 
 [[tools."ubi:block/goose"]]
-version = "1.9.2"
+version = "1.9.3"
 backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:ef325a295f01334d4149fa29122359df0e2de161938968542687dcdeed2ff7cc"
+checksum = "blake3:0be09b2ea8c35265a7b53a4b9a2c7d178b985ae4660940574505c0b0a2564c24"
 
 [[tools."ubi:sigoden/argc"]]
 version = "1.23.0"
@@ -335,10 +335,10 @@ backend = "ubi:sigoden/argc"
 checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
 
 [[tools.uv]]
-version = "0.9.1"
+version = "0.9.2"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:cc84b5c86fbde176c0e1908abd65cec6e989ff755b6e68a912652beb1311de31"
-size = 18225638
-url = "https://github.com/astral-sh/uv/releases/download/0.9.1/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:90b1e69da3d04772565dd556ae8e72c86bdb7da85a8dfc2c6b50c400b0e6aa97"
+size = 18211424
+url = "https://github.com/astral-sh/uv/releases/download/0.9.2/uv-aarch64-apple-darwin.tar.gz"
