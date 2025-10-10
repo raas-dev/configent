@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.6](https://github.com/raas-dev/configent/compare/1.168.5...1.168.6) (2025-10-10)
+
+
+### Fixes
+
+* **ide:** change default IDE from Cursor to VS Code ([61c4fa8](https://github.com/raas-dev/configent/commit/61c4fa8018120ed9d9430bd64a27bbbec55b0ec4))
+* **setup_duti:** redirect command output to /dev/null for cursor and windsurf ([12193d2](https://github.com/raas-dev/configent/commit/12193d2e3fb5592c5a38d2097bcc4adcd664d170))
+* **setup_duti:** register vscode:// URL scheme handler ([c5beb6b](https://github.com/raas-dev/configent/commit/c5beb6ba4c8e2cfd46632d9946ed1f1d16090cc0))
+* **vscode:** add marketplace URL configuration for extensions ([49adc36](https://github.com/raas-dev/configent/commit/49adc3680e9fc11d8b6dcf4b851963aecfc143ff))
+* **vscode:** auto-detect IDE from environment instead of BIN_NAME ([0080d08](https://github.com/raas-dev/configent/commit/0080d08f16d6d1f02cbefce8934c432e33d6a5d0))
+* **vscode:** disable cursor-workspace MCP discovery ([8b33c9a](https://github.com/raas-dev/configent/commit/8b33c9aa1e34da08d08d86e00fc76a63a159fec0))
+* **vscode:** update extension list with cursorpyright and terminals ([37635b7](https://github.com/raas-dev/configent/commit/37635b7036ab8ae62c36107de449d6ce25ebb368))
+
 ### [1.168.5](https://github.com/raas-dev/configent/compare/1.168.4...1.168.5) (2025-10-09)
 
 
