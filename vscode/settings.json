@@ -312,6 +312,44 @@
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
+  "restoreTerminals.artificialDelayMilliseconds": 500,
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "commands": [
+            "cd $HOME",
+            "clear"
+          ],
+          "name": "1"
+        },
+        {
+          "commands": [
+            "cd $HOME",
+            "clear"
+          ],
+          "name": "2"
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "commands": [
+            "up"
+          ],
+          "name": "a",
+          "shouldRunCommands": false
+        },
+        {
+          "commands": [
+            "clear"
+          ],
+          "name": "b"
+        }
+      ]
+    }
+  ],
   "ruff.configurationPreference": "filesystemFirst",
   "scm.countBadge": "focused",
   "security.promptForLocalFileProtocolHandling": false,
