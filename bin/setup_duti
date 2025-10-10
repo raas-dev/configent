@@ -48,6 +48,9 @@ else
   exit 1
 fi
 
+# vscode:// URL scheme
+duti -s "$app_bundle_id" vscode
+
 duti -s "$app_bundle_id" public.data all # for files with no extension
 duti -s "$app_bundle_id" public.json all
 duti -s "$app_bundle_id" public.plain-text all
