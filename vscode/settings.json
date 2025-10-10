@@ -80,7 +80,7 @@
   "chat.fontSize": 14,
   "chat.mcp.discovery.enabled": {
     "cursor-global": true,
-    "cursor-workspace": true,
+    "cursor-workspace": false,
     "windsurf": true
   },
   "chat.mcp.gallery.enabled": true,
