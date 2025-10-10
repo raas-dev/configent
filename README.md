@@ -169,7 +169,7 @@ Extensions in
 likes and thus are preferred when choosing extensions.
 
 To update `vscode/extensions.list` in repo after adding or removing extensions
-via IDE, run `vscode/create_extensions_list`.
+via default IDE, run `vscode/create_extensions_list`.
 
 ### bin/setup_code
 
