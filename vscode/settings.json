@@ -318,14 +318,12 @@
       "splitTerminals": [
         {
           "commands": [
-            "cd $HOME",
             "clear"
           ],
           "name": "1"
         },
         {
           "commands": [
-            "cd $HOME",
             "clear"
           ],
           "name": "2"
@@ -336,16 +334,19 @@
       "splitTerminals": [
         {
           "commands": [
-            "dup"
+            "cd $HOME",
+            "clear"
           ],
           "name": "a"
         },
         {
           "commands": [
-            "tm"
+            "cd $HOME",
+            "tm",
+            "cd $HOME/configent",
+            "clear"
           ],
-          "name": "b",
-          "shouldRunCommands": true
+          "name": "b"
         }
       ]
     }
