@@ -53,7 +53,9 @@ ms-dotnettools.vscode-dotnet-runtime
 ms-playwright.playwright
 ms-python.debugpy
 ms-python.python
+ms-python.vscode-python-envs
 ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
