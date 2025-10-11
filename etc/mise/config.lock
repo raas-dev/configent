@@ -17,12 +17,12 @@ size = 48185625
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.13.pkg"
 
 [[tools.bun]]
-version = "1.2.23"
+version = "1.3.0"
 backend = "core:bun"
 
 [tools.bun.platforms.macos-arm64]
-checksum = "blake3:621c047bdd068c4972bf7b222a2e112908cd40b53256b690ec0921ea98676756"
-size = 22280328
+checksum = "blake3:58ff76650b967e1a14eec5e6992b41aec9e5a4a96020f81fdebbc41a713ec821"
+size = 22391665
 
 [[tools.cargo-binstall]]
 version = "1.15.6"
@@ -158,13 +158,13 @@ version = "0.9.8"
 backend = "cargo:zoxide"
 
 [[tools.cosign]]
-version = "3.0.1"
+version = "3.0.2"
 backend = "aqua:sigstore/cosign"
 
 [tools.cosign.platforms.macos-arm64]
-checksum = "sha256:dad2a161d91fba199d1ebae7e5652a4c2dd412cbb1ab6b4cc8ad6a15378319fe"
-size = 154681746
-url = "https://github.com/sigstore/cosign/releases/download/v3.0.1/cosign-darwin-arm64"
+checksum = "sha256:3823b044de184da21e300bc5e20dd29d3fa9243af3ba70c4a5da1712f3385d46"
+size = 155624370
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-darwin-arm64"
 
 [[tools.dotnet]]
 version = "8.0.404"
@@ -267,7 +267,7 @@ version = "4.3.3"
 backend = "pipx:glances"
 
 [[tools."pipx:pdm"]]
-version = "2.25.9"
+version = "2.26.0"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
