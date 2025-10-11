@@ -105,6 +105,7 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.backspaceRemoveContext": false,
+  "cursor.composer.queueMessageDefaultBehavior": "queue",
   "cursor.composer.shouldAllowCustomModes": true,
   "cursor.composer.shouldAutoSaveNonAgent": false,
   "cursor.composer.textSizeScale": 1.15,
