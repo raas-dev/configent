@@ -31,8 +31,12 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-additional_context="You must use conventional commits message and follow these
-additional rules.
+additional_context="You MUST follow these rules.
+
+IMPORTANT:
+- You must only return the commit message, no other text or code.
+- You must only return one commit message (one line).
+- The commit message MUST ALWAYS fit in 80 characters.
 
 Type:
 
@@ -51,6 +55,11 @@ use as the scope.
 - You must NOT start the scope name with a dot.
 - You must NOT use special characters in the scope.
 - You must NOT use emojis in the scope.
+
+VERY IMPORTANT:
+- You must only return the commit message, no other text or code.
+- You must only return one commit message (one line).
+- The commit message MUST ALWAYS fit in 80 characters.
 "
 
 if [ -n "$*" ]; then
