@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.7](https://github.com/raas-dev/configent/compare/1.168.6...1.168.7) (2025-10-11)
+
+
+### Fixes
+
+* **bin:** clarify commit message rules and emphasize single-line output ([c279ad4](https://github.com/raas-dev/configent/commit/c279ad492dd2bb932008161f4c6f218530b766f6))
+
 ### [1.168.6](https://github.com/raas-dev/configent/compare/1.168.5...1.168.6) (2025-10-10)
 
 
