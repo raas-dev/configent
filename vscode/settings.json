@@ -323,24 +323,6 @@
             "cd $HOME",
             "clear"
           ],
-          "name": "1"
-        },
-        {
-          "commands": [
-            "cd $HOME",
-            "clear"
-          ],
-          "name": "2"
-        }
-      ]
-    },
-    {
-      "splitTerminals": [
-        {
-          "commands": [
-            "cd $HOME",
-            "clear"
-          ],
           "name": "a"
         },
         {
