@@ -171,9 +171,9 @@ command -v delta >/dev/null && export GIT_PAGER="delta"
 
 ### lumen ######################################################################
 
-export LUMEN_AI_PROVIDER="claude"
-export LUMEN_AI_MODEL="claude-sonnet-4-5"
-export LUMEN_API_KEY="$ANTHROPIC_API_KEY"
+export LUMEN_AI_PROVIDER="openai"
+export LUMEN_AI_MODEL="gpt-4.1-mini"
+export LUMEN_API_KEY="$OPENAI_API_KEY"
 
 ### awscli #####################################################################
 
