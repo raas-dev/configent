@@ -203,6 +203,7 @@
     ".aliases": "shellscript"
   },
   "files.hotExit": "onExitAndWindowClose",
+  "files.saveConflictResolution": "overwriteFileOnDisk",
   "genaiscript.cache": false,
   "git.blame.statusBarItem.enabled": false,
   "git.confirmSync": false,
