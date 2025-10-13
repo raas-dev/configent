@@ -315,6 +315,7 @@
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
   "restoreTerminals.artificialDelayMilliseconds": 500,
+  "restoreTerminals.keepExistingTerminalsOpen": true,
   "restoreTerminals.terminals": [
     {
       "splitTerminals": [
@@ -328,8 +329,6 @@
         {
           "commands": [
             "cd $HOME",
-            "tm",
-            "cd $HOME/configent",
             "clear"
           ],
           "name": "b"
@@ -361,7 +360,6 @@
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.environmentChangesIndicator": "off",
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
