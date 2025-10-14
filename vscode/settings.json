@@ -419,7 +419,6 @@
   "window.newWindowProfile": "Default",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
-  "window.zoomLevel": 0.2,
   "windsurf.autoExecutionPolicy": "auto",
   "windsurf.autocompleteSpeed": "fast",
   "windsurf.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
