@@ -40,9 +40,11 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 <scope>
 After choosing the type, choose THE FIRST MATCHING here are the scope:
 1. if changes were only to a single file: the file name without the extension
-2. if several files changed and most of file names are related: that context
+2. if several files were changed, one-word context where most changes were to
 3. if all changes are to the files in a particular directory: directory name
 4. file name without the extension (choose after the file having most changes)
+
+IMPORTANT: you must not include path to the file in scope
 </scope>
 
 <headline>
