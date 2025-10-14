@@ -468,7 +468,7 @@
   },
   {
     "command": "composerMode.chat_2",
-    "key": "cmd+[IntlBackslash]"
+    "key": "cmd+[Semicolon]"
   },
   {
     "command": "workbench.action.chat.openask",
@@ -493,5 +493,13 @@
     "command": "-inlineChat.start",
     "key": "cmd+i",
     "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "command": "composerMode.chat",
+    "key": "cmd+l"
+  },
+  {
+    "command": "composerMode.plan",
+    "key": "cmd+[BracketLeft]"
   }
 ]
