@@ -40,13 +40,18 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
-user_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
-$recent_headlines
-
-GIT DIFF:
+user_message="GIT DIFF:
 $git_diff
 "
+
+recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
+if [ -n "$recent_headlines" ]; then
+  user_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
+$recent_headlines
+
+$user_message
+"
+fi
 
 if [ -n "$*" ]; then
   user_message="ADDITIONAL HINTS FOR CREATING COMMIT MESSAGE HEADLINE: $*
