@@ -85,10 +85,6 @@ backend = "cargo:kondo"
 version = "1.1.5"
 backend = "cargo:lsd"
 
-[[tools."cargo:lumen"]]
-version = "1.9.0"
-backend = "cargo:lumen"
-
 [[tools."cargo:mdcat"]]
 version = "2.7.1"
 backend = "cargo:mdcat"

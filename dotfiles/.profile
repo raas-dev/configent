@@ -169,12 +169,6 @@ export BAT_THEME="SynthWave84"
 
 command -v delta >/dev/null && export GIT_PAGER="delta"
 
-### lumen ######################################################################
-
-export LUMEN_AI_PROVIDER="openai"
-export LUMEN_AI_MODEL="gpt-4.1-mini"
-export LUMEN_API_KEY="$OPENAI_API_KEY"
-
 ### awscli #####################################################################
 
 command -v aws_completer >/dev/null && complete -C aws_completer aws

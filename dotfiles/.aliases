@@ -446,6 +446,10 @@ alias standard-version='bunx standard-version'
 ### Functions: AI ##############################################################
 
 ai() {
+  local ADD_EXTENSIONS=(
+    --with-builtin developer
+    --with-builtin memory
+  )
   if [ -n "$1" ]; then
     if [ -r "$1" ]; then
       # example: ai prompt.md
@@ -455,14 +459,16 @@ ai() {
         --no-session \
         --interactive \
         --instructions "$instructions_path" \
+        "${ADD_EXTENSIONS[@]}" \
         "$@"
     else
       goose run --quiet \
         --no-session \
+        "${ADD_EXTENSIONS[@]}" \
         --text "$*"
     fi
   else
-    goose session
+    goose session "${ADD_EXTENSIONS[@]}"
   fi
 }
 
@@ -470,6 +476,7 @@ ai_agent() {
   # loaded in addition to mcp servers in goose config
   local ADD_EXTENSIONS=(
     --with-builtin computercontroller
+    --with-builtin developer
     --with-builtin memory
     --with-extension "BROWSER_USE_HEADLESS=false uvx browser-use[cli] --mcp"
     --with-extension "npx -y @upstash/context7-mcp"

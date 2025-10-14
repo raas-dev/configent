@@ -20,8 +20,8 @@ magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 white=$(tput setaf 7)
 
-if ! command -v lumen >/dev/null; then
-  printf "%sError: lumen not found in the system.\n" "$red"
+if ! command -v goose >/dev/null; then
+  printf "%sError: goose not found in the system.\n" "$red"
   exit 127
 fi
 
@@ -31,46 +31,26 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-additional_context="You MUST follow these rules.
-
-IMPORTANT:
-- You must only return the commit message, no other text or code.
-- You must only return one commit message (one line).
-- The commit message MUST ALWAYS fit in 80 characters.
-
-Type:
-
-- You must prefer 'fix' over 'feat' as type unless the commit adds new files.
-- You must prefer 'chore' over 'fix' if only package versions are changed.
-- You must prefer 'chore' over 'docs' if change is to yaml or json files.
-
-Scope:
-
-You must use a single word for the scope. The scope can be the file name or the
-directory name (only if multiple files in that directory are changed),
-UNLESS that is too ambiguous such as 'config'. If this is the case, go back in
-the current working directory path until you can find an unambiguous name to
-use as the scope.
-
-- You must NOT start the scope name with a dot.
-- You must NOT use special characters in the scope.
-- You must NOT use emojis in the scope.
-
-VERY IMPORTANT:
-- You must only return the commit message, no other text or code.
-- You must only return one commit message (one line).
-- The commit message MUST ALWAYS fit in 80 characters.
-"
-
-if [ -n "$*" ]; then
-  commit_message="$(lumen draft --context "$additional_context.
-
-    User provided hints for type and scope:
-    $*
-  ")"
-else
-  commit_message="$(lumen draft --context "$additional_context")"
+system_instructions_path="$HOME/.config/configent/prompts/commit.md"
+if [ ! -f "$system_instructions_path" ]; then
+  printf "%sError: System instructions file not found: %s\n" "$red" "$system_instructions_path"
+  exit 1
 fi
+
+user_message="GIT DIFF: $git_diff"
+if [ -n "$*" ]; then
+  user_message="ADDITIONAL HINTS for type and scope: $*
+
+$user_message"
+fi
+
+commit_message="$(goose run --quiet \
+  --no-session \
+  --system "$(cat "$system_instructions_path")" \
+  --text "$user_message")" || {
+  printf "%sError: Failed to generate commit message.\n" "$red"
+  exit 1
+}
 
 printf "%s$commit_message" "$white"
 printf "\n"
