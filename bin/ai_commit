@@ -82,14 +82,12 @@ case "$choice" in
     printf "%sError: Failed to commit changes.\n" "$red"
     exit 1
   }
-  printf "%sSuccessfully committed!\n" "$green"
   ;;
 [eE])
   git commit --edit --message "$commit_message" || {
     printf "%sError: Failed to commit changes after editing.\n" "$red"
     exit 1
   }
-  printf "%sSuccessfully committed!\n" "$green"
   ;;
 *)
   printf "Aborted.\n"
