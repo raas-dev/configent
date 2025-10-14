@@ -314,8 +314,8 @@
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
-  "restoreTerminals.artificialDelayMilliseconds": 500,
-  "restoreTerminals.keepExistingTerminalsOpen": false,
+  "restoreTerminals.artificialDelayMilliseconds": 150,
+  "restoreTerminals.keepExistingTerminalsOpen": true,
   "restoreTerminals.terminals": [
     {
       "splitTerminals": [
