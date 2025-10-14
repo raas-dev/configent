@@ -46,10 +46,15 @@ After choosing the type, choose THE FIRST MATCHING scope:
 </scope>
 
 <headline>
-Headline MUST BE a one line summarization of all changes and it MUST NOT
-EXCEED 50 characters. This is the hardest but also the most important
-part of a conventional commit message. Take a deep breath to create
-as descriptive and as concise as possible headline.
+Headline MUST BE a one line summarization of all changes. It is in present
+tense. It MUST NOT be over 50 characters. The first letter of headline is in
+downcase. It cannot fit details.
+
+This is the hardest but also the most important part of a conventional commit
+message. Take a deep breath to create as descriptive as possible headline
+within these constraints.
+
+IMPORTANT: Headline cannot be more than a few words.
 </headline>
 
 <body>

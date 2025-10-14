@@ -25,7 +25,10 @@ if ! command -v goose >/dev/null; then
   exit 127
 fi
 
-git_diff="$(git diff --staged --no-color)"
+git_diff="$(git diff --staged --no-color)" || {
+  printf "%sError: Failed to get git diff.\n" "$red"
+  exit 1
+}
 if [ -z "$git_diff" ]; then
   printf "%sNothing staged to commit.\n" "$red"
   exit 1
@@ -44,13 +47,23 @@ if [ -n "$*" ]; then
 $user_message"
 fi
 
+system_prompt="$(cat "$system_instructions_path")" || {
+  printf "%sError: Failed to read system instructions file.\n" "$red"
+  exit 1
+}
+
 commit_message="$(goose run --quiet \
   --no-session \
-  --system "$(cat "$system_instructions_path")" \
+  --system "$system_prompt" \
   --text "$user_message")" || {
   printf "%sError: Failed to generate commit message.\n" "$red"
   exit 1
 }
+
+if [ -z "$commit_message" ]; then
+  printf "%sError: Generated commit message is empty.\n" "$red"
+  exit 1
+fi
 
 printf "%s$commit_message" "$white"
 printf "\n"
@@ -65,10 +78,18 @@ fi
 
 case "$choice" in
 [yY])
-  git commit --message "$commit_message"
+  git commit --message "$commit_message" || {
+    printf "%sError: Failed to commit changes.\n" "$red"
+    exit 1
+  }
+  printf "%sSuccessfully committed!\n" "$green"
   ;;
 [eE])
-  git commit --edit --message "$commit_message"
+  git commit --edit --message "$commit_message" || {
+    printf "%sError: Failed to commit changes after editing.\n" "$red"
+    exit 1
+  }
+  printf "%sSuccessfully committed!\n" "$green"
   ;;
 *)
   printf "Aborted.\n"
