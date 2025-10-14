@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.8](https://github.com/raas-dev/configent/compare/1.168.7...1.168.8) (2025-10-14)
+
+
+### Fixes
+
+* **ai_commit:** add error handling and validations for commit generation ([47c80d7](https://github.com/raas-dev/configent/commit/47c80d77e021f4c7b082ca6f13853a8fc23f1cf0))
+* **ai_commit:** remove duplicate success messages after committing ([ee5be89](https://github.com/raas-dev/configent/commit/ee5be895ecdf3fce1307e39176a44fdab011c660))
+* **dotfiles:** update VISUAL to use DEFAULT_IDE instead of EDITOR ([365046f](https://github.com/raas-dev/configent/commit/365046fc05f504a0c237f3bbd0d297951a650f0e))
+
 ### [1.168.7](https://github.com/raas-dev/configent/compare/1.168.6...1.168.7) (2025-10-11)
 
 
