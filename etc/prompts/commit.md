@@ -38,17 +38,18 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 </type>
 
 <scope>
-After choosing the type, choose THE FIRST MATCHING scope:
-1. if changes were only to a single file: file name without extension
-2. if several files were changed and those files are deemed related: context
+After choosing the type, choose THE FIRST MATCHING here are the scope:
+1. if changes were only to a single file: the file name without the extension
+2. if several files changed and most of file names are related: that context
 3. if all changes are to the files in a particular directory: directory name
-4. file name without extension (choose after the file having most changes)
+4. file name without the extension (choose after the file having most changes)
 </scope>
 
 <headline>
-Headline MUST BE a one line summarization of changes. It is in present tense.
-It MUST NOT be over 40 characters. Thus it cannot fit any of the details.
-The first letter of the headline is always in downcase.
+Headline MUST BE a one line summarization of changes:
+- It is in present tense.
+- It MUST NOT be over 40 characters. Thus it cannot fit any of the details.
+- The first letter of the headline is always in downcase.
 
 This is the hardest but also the most important part of a conventional commit
 message. Take a deep breath to create as descriptive as possible headline
@@ -59,6 +60,7 @@ within these constraints.
 For body, you MUST STRICTLY FOLLOW all of these rules:
 - First paragraph summarizes the effect of changes
 - Second paragraph is the reason why the changes were made
+- Paragraphs are separated by empty line
 - The first and the second paragraphs are at most a few sentences
 - Never list individual changes in body
 </body>
