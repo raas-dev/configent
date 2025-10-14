@@ -25,6 +25,12 @@ if ! command -v goose >/dev/null; then
   exit 127
 fi
 
+system_instructions_path="$HOME/.config/configent/prompts/commit.md"
+if [ ! -f "$system_instructions_path" ]; then
+  printf "%sError: System instructions file not found: %s\n" "$red" "$system_instructions_path"
+  exit 1
+fi
+
 git_diff="$(git diff --staged --no-color)" || {
   printf "%sError: Failed to get git diff.\n" "$red"
   exit 1
@@ -34,15 +40,16 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-system_instructions_path="$HOME/.config/configent/prompts/commit.md"
-if [ ! -f "$system_instructions_path" ]; then
-  printf "%sError: System instructions file not found: %s\n" "$red" "$system_instructions_path"
-  exit 1
-fi
+recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
+user_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
+$recent_headlines
 
-user_message="GIT DIFF: $git_diff"
+GIT DIFF:
+$git_diff
+"
+
 if [ -n "$*" ]; then
-  user_message="ADDITIONAL HINTS for type and scope: $*
+  user_message="ADDITIONAL HINTS FOR CREATING COMMIT MESSAGE HEADLINE: $*
 
 $user_message"
 fi
