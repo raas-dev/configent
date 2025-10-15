@@ -285,7 +285,6 @@
   "gitlens.views.drafts.files.layout": "tree",
   "gitlens.views.fileHistory.files.layout": "tree",
   "gitlens.views.launchpad.files.layout": "tree",
-  "gitlens.views.pageItemLimit": 20,
   "gitlens.views.patchDetails.files.layout": "tree",
   "gitlens.views.pullRequest.files.layout": "tree",
   "gitlens.views.remotes.files.layout": "tree",
