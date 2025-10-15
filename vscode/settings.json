@@ -364,7 +364,7 @@
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.gpuAcceleration": "off",
-  "terminal.integrated.hideOnStartup": "whenEmpty",
+  "terminal.integrated.hideOnStartup": "always",
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
     "starship",
@@ -399,7 +399,7 @@
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.tabStopWidth": 4,
   "terminal.integrated.tabs.focusMode": "singleClick",
-  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.tabs.hideCondition": "singleGroup",
   "terminal.integrated.tabs.showActions": "never",
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terraform.codelens.referenceCount": true,
