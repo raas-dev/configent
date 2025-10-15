@@ -261,6 +261,7 @@
   "gitlens.graph.statusBar.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.launchpad.indicator.enabled": false,
+  "gitlens.menus": false,
   "gitlens.mode.statusBar.alignment": "left",
   "gitlens.mode.statusBar.enabled": false,
   "gitlens.plusFeatures.enabled": false,
