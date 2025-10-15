@@ -29,6 +29,7 @@
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
   },
   "[markdown]": {
+    "diffEditor.ignoreTrimWhitespace": true,
     "editor.quickSuggestions": {
       "comments": "off",
       "other": "off",
@@ -125,7 +126,6 @@
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.toolBarLocation": "docked",
   "diffEditor.codeLens": true,
-  "diffEditor.ignoreTrimWhitespace": true,
   "docker.dockerPath": "docker",
   "docker.images.checkForOutdatedImages": false,
   "dotnetAcquisitionExtension.allowInvalidPaths": true,
@@ -497,11 +497,14 @@
     "terminalCursor.foreground": "#B300AD"
   },
   "workbench.colorTheme": "Ayu Dark Bordered",
+  "workbench.editor.centeredLayoutAutoResize": false,
+  "workbench.editor.centeredLayoutFixedWidth": true,
   "workbench.editor.defaultBinaryEditor": "default",
+  "workbench.editor.dragToOpenWindow": false,
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.limit.excludeDirty": true,
   "workbench.editor.tabActionCloseVisibility": false,
-  "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
