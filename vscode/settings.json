@@ -398,6 +398,7 @@
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.tabStopWidth": 4,
+  "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.hideCondition": "singleGroup",
   "terminal.integrated.tabs.showActions": "never",
