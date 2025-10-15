@@ -259,6 +259,7 @@
   "gitlens.currentLine.enabled": false,
   "gitlens.gitkraken.mcp.autoEnabled": false,
   "gitlens.graph.minimap.enabled": false,
+  "gitlens.graph.pageItemLimit": 20,
   "gitlens.graph.statusBar.enabled": false,
   "gitlens.heatmap.locations": [
     "gutter",
@@ -284,6 +285,7 @@
   "gitlens.views.drafts.files.layout": "tree",
   "gitlens.views.fileHistory.files.layout": "tree",
   "gitlens.views.launchpad.files.layout": "tree",
+  "gitlens.views.pageItemLimit": 20,
   "gitlens.views.patchDetails.files.layout": "tree",
   "gitlens.views.pullRequest.files.layout": "tree",
   "gitlens.views.remotes.files.layout": "tree",
@@ -394,6 +396,7 @@
   "scm.countBadge": "off",
   "scm.defaultViewMode": "tree",
   "scm.graph.badges": "all",
+  "scm.graph.pageSize": 20,
   "scm.providerCountBadge": "auto",
   "scm.repositories.visible": 0,
   "scm.showActionButton": false,
