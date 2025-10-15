@@ -426,6 +426,7 @@
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terraform.codelens.referenceCount": true,
   "testing.followRunningTest": true,
+  "timeline.pageSize": 20,
   "trivy.fixedOnly": true,
   "trivy.secretScanning": true,
   "typescript.suggest.paths": false,
