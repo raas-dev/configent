@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.168.9](https://github.com/raas-dev/configent/compare/1.168.8...1.168.9) (2025-10-15)
+
+
+### Fixes
+
+* **ai_commit:** correctly include git diff and recent headlines in message ([df63685](https://github.com/raas-dev/configent/commit/df6368516b658cbabaea5d6916236184fab80f6f))
+* **ai_commit:** validate system instructions file presence ([2c10842](https://github.com/raas-dev/configent/commit/2c1084271370ae66a4804220345043ba078428df))
+* **keybindings:** update and add keybindings for composerMode commands ([2b9ab83](https://github.com/raas-dev/configent/commit/2b9ab837355f90cc617d326618ea2aa13a2ec59a))
+* **setup_duti:** add associations for log and mdc file types ([dfd17b4](https://github.com/raas-dev/configent/commit/dfd17b4634bde8cf0e1176d95f76eaef7a8fa82b))
+* **vscode:** decrease terminal restore delay and keep existing terminals open ([2ca9509](https://github.com/raas-dev/configent/commit/2ca950903d052ee1fcf02b4a5266010dc7b087b0))
+* **vscode:** set restoreTerminals.keepExistingTerminalsOpen to false ([10554e2](https://github.com/raas-dev/configent/commit/10554e2cfedc5fc5fcb66488d5ad1a3b9c6e2ca9))
+
 ### [1.168.8](https://github.com/raas-dev/configent/compare/1.168.7...1.168.8) (2025-10-14)
 
 
