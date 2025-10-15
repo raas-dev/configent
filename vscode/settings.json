@@ -277,6 +277,7 @@
   "gitlens.statusBar.format": "${author, }${agoOrDate}${' via  'pullRequest}${ \u2022 message|100?}",
   "gitlens.telemetry.enabled": false,
   "gitlens.terminalLinks.enabled": false,
+  "gitlens.views.commitDetails.files.layout": "tree",
   "gitlens.views.repositories.includeWorkingTree": true,
   "gitlens.views.repositories.showStashes": true,
   "gitlens.views.scm.grouped.views": {
