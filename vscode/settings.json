@@ -249,7 +249,8 @@
   ],
   "gitlens.changes.locations": [
     "gutter",
-    "overview"
+    "overview",
+    "line"
   ],
   "gitlens.changes.toggleMode": "window",
   "gitlens.codeLens.authors.enabled": false,
@@ -259,9 +260,14 @@
   "gitlens.gitkraken.mcp.autoEnabled": false,
   "gitlens.graph.minimap.enabled": false,
   "gitlens.graph.statusBar.enabled": false,
+  "gitlens.heatmap.locations": [
+    "gutter",
+    "overview",
+    "line"
+  ],
   "gitlens.hovers.currentLine.over": "line",
+  "gitlens.hovers.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
-  "gitlens.menus": false,
   "gitlens.mode.statusBar.alignment": "left",
   "gitlens.mode.statusBar.enabled": false,
   "gitlens.plusFeatures.enabled": false,
