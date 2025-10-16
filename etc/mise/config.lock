@@ -250,6 +250,10 @@ checksum = "sha256:e9404633bc02a5162c5c573b1e2490f5fb44648345d64a958b17e325729a5
 size = 47035396
 url = "https://nodejs.org/dist/v22.14.0/node-v22.14.0-darwin-arm64.tar.gz"
 
+[[tools."npm:@anthropic-ai/claude-code"]]
+version = "2.0.19"
+backend = "npm:@anthropic-ai/claude-code"
+
 [[tools."npm:@google/gemini-cli"]]
 version = "0.9.0"
 backend = "npm:@google/gemini-cli"
