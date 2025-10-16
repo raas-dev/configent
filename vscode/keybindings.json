@@ -1,5 +1,21 @@
 [
   {
+    "args": {
+      "text": "\\\r\n"
+    },
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "ctrl+enter",
+    "when": "terminalFocus"
+  },
+  {
+    "args": {
+      "text": "\\\r\n"
+    },
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "shift+enter",
+    "when": "terminalFocus"
+  },
+  {
     "command": "-cursorTop",
     "key": "cmd+up",
     "when": "textInputFocus"
@@ -449,14 +465,6 @@
     "command": "-breadcrumbs.toggleToOn",
     "key": "shift+cmd+[Backquote]",
     "when": "!config.breadcrumbs.enabled"
-  },
-  {
-    "args": {
-      "text": "\\\r\n"
-    },
-    "command": "workbench.action.terminal.sendSequence",
-    "key": "shift+enter",
-    "when": "terminalFocus"
   },
   {
     "command": "composerMode.chat",

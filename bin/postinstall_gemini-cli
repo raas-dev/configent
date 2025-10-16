@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.gemini/settings.json" ]; then
+  if [ -r "$HOME/.gemini/settings.json" ]; then
+    mkdir -p "$backup_path/.gemini"
+    cp -P "$HOME/.gemini/settings.json" "$backup_path/.gemini/settings.json"
+  fi
+fi
+
+# symlink
+mkdir -p "$HOME/.gemini"
+ln -sfnv "$config_path/gemini-cli/settings.json" "$HOME/.gemini/settings.json"

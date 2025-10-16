@@ -414,9 +414,6 @@ alias claude="bunx @anthropic-ai/claude-code"
 # Flowise
 alias flowise='bunx flowise'
 
-# Gemini CLI
-alias gemini='bunx @google/gemini-cli'
-
 # Visual testing tool for MCP servers
 alias inspector='bunx @modelcontextprotocol/inspector'
 

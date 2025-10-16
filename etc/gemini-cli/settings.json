@@ -1,0 +1,23 @@
+{
+  "general": {
+    "disableAutoUpdate": true
+  },
+  "ide": {
+    "enabled": true,
+    "hasSeenNudge": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "tools": {
+    "autoAccept": true,
+    "shell": {
+      "showColor": true
+    }
+  },
+  "ui": {
+    "theme": "Ayu"
+  }
+}
