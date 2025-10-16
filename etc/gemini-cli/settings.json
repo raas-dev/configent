@@ -7,7 +7,8 @@
     ]
   },
   "general": {
-    "disableAutoUpdate": true
+    "disableAutoUpdate": true,
+    "disableUpdateNag": true
   },
   "ide": {
     "enabled": true,
@@ -27,6 +28,9 @@
       ],
       "command": "npx"
     }
+  },
+  "privacy": {
+    "usageStatisticsEnabled": false
   },
   "security": {
     "auth": {
