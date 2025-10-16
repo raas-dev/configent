@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.169.0](https://github.com/raas-dev/configent/compare/1.168.9...1.169.0) (2025-10-16)
+
+
+### Features
+
+* **ai:** Add gemini-cli ([c0068cb](https://github.com/raas-dev/configent/commit/c0068cbafd7481794e2adec8dcdc759afbdb2d9f))
+* **claude-code:** add postinstall script and configuration ([6fc0e82](https://github.com/raas-dev/configent/commit/6fc0e82c099f814969b9d9d9dab8dde5d98aed56))
+
+
+### Fixes
+
+* **config.lock:** update several tool versions and checksums ([e8343a8](https://github.com/raas-dev/configent/commit/e8343a833026c5298b6313b2efba127ee3019a11))
+* **dotfiles:** remove deprecated upstash context7-mcp alias usage ([918df0e](https://github.com/raas-dev/configent/commit/918df0e0783df501f0f7fd25f2299bd47398c306))
+* **pre-commit-config:** update pretty-format-json to exclude settings.json ([4457576](https://github.com/raas-dev/configent/commit/4457576b077645ed5bfec86486dbe13ccaf92285))
+* **settings:** move alwaysThinkingEnabled to end of settings.json ([d9d8c70](https://github.com/raas-dev/configent/commit/d9d8c70dbec9eb54ef6730896dfa092de2226bae))
+* **vscode:** adjust diffEditor and editor layout settings ([ba6703a](https://github.com/raas-dev/configent/commit/ba6703a1a39727b81c6b32f945bc97f6f5980745))
+* **vscode:** adjust SCM graph page size setting to 20 ([4ae44f6](https://github.com/raas-dev/configent/commit/4ae44f64d56781c4b3d1f40e9e031c3053c85ccd))
+* **vscode:** change GitLens commitDetails files layout to tree ([54adddb](https://github.com/raas-dev/configent/commit/54adddb31ac7acd9e3a70884f90eef381bee2dc2))
+* **vscode:** disable GitLens menus in settings ([cf8ec4d](https://github.com/raas-dev/configent/commit/cf8ec4d16efdcf756423b1ad957a9cca6afa365f))
+* **vscode:** disable terminal tabs in integrated terminal settings ([50332cc](https://github.com/raas-dev/configent/commit/50332cc1bb9b02ee79fe928565608360a7d3b481))
+* **vscode:** enable deferred startup finished activation setting ([9776579](https://github.com/raas-dev/configent/commit/9776579b34a59d06b94dc059ab41165dcb83d592))
+* **vscode:** increase timeline view page size to 20 ([1694e21](https://github.com/raas-dev/configent/commit/1694e210f82eb33dc2e77577a717bdb15ac8936b))
+* **vscode:** refine SCM and GitLens view settings ([348f089](https://github.com/raas-dev/configent/commit/348f089996f976aea7edaab5f98bff775bbfc4da))
+* **vscode:** remove GitLens views page item limit setting ([4eff01a](https://github.com/raas-dev/configent/commit/4eff01a64de6b2ca4cd36063b527cfcbfbe05e72))
+* **vscode:** unify GitLens view layouts to tree style ([bbf2669](https://github.com/raas-dev/configent/commit/bbf2669a2ee81e84dc6211c70c5238bbac5707bf))
+* **vscode:** update cSpell settings for spell checking and suggestions ([733b85b](https://github.com/raas-dev/configent/commit/733b85be999594da4a12893687298f856fb84e6a))
+* **vscode:** update git and scm settings for better repository handling ([c1c0340](https://github.com/raas-dev/configent/commit/c1c0340df338b69c789f1ecf7aaaf3d2d10de6e5))
+* **vscode:** update GitLens and diff editor settings ([a6bd997](https://github.com/raas-dev/configent/commit/a6bd997b5f49591f6d4d0afa2a63a79849e15464))
+* **vscode:** update GitLens settings adding heatmap and line locations ([3fb8b60](https://github.com/raas-dev/configent/commit/3fb8b603bc7bbe8e708cd51a5bcac34d0286dc50))
+* **vscode:** update terminal tab visibility and hide on startup settings ([a6e6fbd](https://github.com/raas-dev/configent/commit/a6e6fbde8622296a39f1f366fdfc3183a1fa4edd))
+
 ### [1.168.9](https://github.com/raas-dev/configent/compare/1.168.8...1.168.9) (2025-10-15)
 
 
