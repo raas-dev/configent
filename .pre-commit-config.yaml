@@ -26,7 +26,7 @@ repos:
     - id: destroyed-symlinks
     - id: check-executables-have-shebangs
     - id: pretty-format-json
-      files: ^(?!(etc\/mcp\/mcp\.json)$).*\.json$
+      files: ^(?!(.*\/)?settings\.json$).*\.json$
       args:
         - --autofix
 
