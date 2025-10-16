@@ -6,6 +6,21 @@
     "enabled": true,
     "hasSeenNudge": true
   },
+  "mcpServers": {
+    "chrome-devtools": {
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "command": "npx"
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx"
+    }
+  },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
