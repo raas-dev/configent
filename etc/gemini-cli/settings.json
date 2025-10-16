@@ -1,4 +1,11 @@
 {
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "GEMINI.md"
+    ]
+  },
   "general": {
     "disableAutoUpdate": true
   },

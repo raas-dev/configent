@@ -14,14 +14,22 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# backup
+# settings.json
 if [ ! -r "$backup_path/.gemini/settings.json" ]; then
   if [ -r "$HOME/.gemini/settings.json" ]; then
     mkdir -p "$backup_path/.gemini"
     cp -P "$HOME/.gemini/settings.json" "$backup_path/.gemini/settings.json"
   fi
 fi
-
-# symlink
 mkdir -p "$HOME/.gemini"
 ln -sfnv "$config_path/gemini-cli/settings.json" "$HOME/.gemini/settings.json"
+
+# GEMINI.md
+if [ ! -r "$backup_path/.gemini/GEMINI.md" ]; then
+  if [ -r "$HOME/.gemini/GEMINI.md" ]; then
+    mkdir -p "$backup_path/.gemini"
+    cp -P "$HOME/.gemini/GEMINI.md" "$backup_path/.gemini/GEMINI.md"
+  fi
+fi
+mkdir -p "$HOME/.gemini"
+ln -sfnv "$config_path/gemini-cli/GEMINI.md" "$HOME/.gemini/GEMINI.md"
