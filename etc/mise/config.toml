@@ -48,6 +48,7 @@ node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
 python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "ayu",
+  "model": "github-copilot/claude-sonnet-4-20250514",
+  "autoupdate": false,
+}
