@@ -88,8 +88,8 @@ if command -v cursor >/dev/null; then
 fi
 
 if command -v windsurf >/dev/null; then
-  alias ws='windsurf --reuse-window --add'
-  [ "$DEFAULT_IDE" = "windsurf" ] && alias code='ws'
+  alias windsurf='windsurf --reuse-window --add'
+  [ "$DEFAULT_IDE" = "windsurf" ] && alias code='windsurf'
 fi
 
 alias grep='grep --color'
