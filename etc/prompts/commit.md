@@ -14,12 +14,12 @@ IMPORTANT: Do not invent anything that is not in the input.
 The output you MUST produce is formatted as following:
 
 <format>
-type(scope): Headline
+type(scope): subject
 
-Body
+body
 </format>
 
-IMPORTANT: The commit message MUST only have 1 headline.
+IMPORTANT: The commit message MUST only have 1 subject.
 
 VERY IMPORTANT: Do not invent anything that is not in the changes.
 
@@ -48,16 +48,19 @@ IMPORTANT: you must not include path to the file in scope
 VERY IMPORTANT: you must NOT include the file extension in the scope
 </scope>
 
-<headline>
-Headline MUST BE a one line summarization of changes:
+<subject>
+Subject MUST BE a one line summarization of changes:
 - It is in present tense.
 - It MUST NOT be over 40 characters. Thus it cannot fit any of the details.
-- The first letter of the headline is always in downcase.
+- The first letter of the subject is always in downcase.
 
 This is the hardest but also the most important part of a conventional commit
-message. Take a deep breath to create as descriptive as possible headline
+message. Take a deep breath to create as descriptive as possible subject
 within these constraints.
-</headline>
+
+IMPORTANT: Subject annot be more than a few words.
+VERY IMPORTANT: You must write only one subject.
+</subject>
 
 <body>
 For body, you MUST STRICTLY FOLLOW all of these rules:
@@ -136,7 +139,5 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 
 Do not format your response as markdown or similar.
 </output>
-
-VERY IMPORTANT: Headline effectively cannot be more than a few words.
 
 VERY IMPORTANT: Do not invent anything that is not in the input.
