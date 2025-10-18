@@ -15,16 +15,19 @@
       "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
     },
     "context7": {
-      "type": "local",
+      "type": "remote",
       "enabled": true,
-      "command": ["npx", "-y", "@upstash/context7-mcp"]
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
     },
     "tavily": {
       "type": "local",
       "enabled": false,
       "command": ["npx", "-y", "tavily-mcp"],
       "environment": {
-        "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
+        "TAVILY_API_KEY": "{env:TAVILY_API_KEY}"
       }
     }
   }

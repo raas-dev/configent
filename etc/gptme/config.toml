@@ -14,12 +14,6 @@ enabled = true
 auto_start = true
 
 [[mcp.servers]]
-name = "context7"
-enabled = true
-command = "npx"
-args = ["-y", "@upstash/context7-mcp@latest"]
-
-[[mcp.servers]]
 name = "duckduckgo"
 enabled = false
 command = "uvx"
