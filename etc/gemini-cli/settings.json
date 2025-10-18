@@ -1,10 +1,6 @@
 {
   "context": {
-    "fileName": [
-      "AGENTS.md",
-      "CLAUDE.md",
-      "GEMINI.md"
-    ]
+    "fileName": ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]
   },
   "general": {
     "disableAutoUpdate": true,
@@ -16,16 +12,11 @@
   },
   "mcpServers": {
     "chrome-devtools": {
-      "args": [
-        "chrome-devtools-mcp@latest"
-      ],
+      "args": ["chrome-devtools-mcp@latest"],
       "command": "npx"
     },
     "context7": {
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
+      "args": ["-y", "@upstash/context7-mcp"],
       "command": "npx"
     }
   },
