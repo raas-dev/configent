@@ -47,3 +47,27 @@ fi
 mkdir -p "$HOME/.config/opencode/agent"
 rm -rf "$HOME/.config/opencode/agent"
 ln -sfnv "$config_path/opencode/agent" "$HOME/.config/opencode/agent"
+
+# command dir
+if [ ! -r "$backup_path/.config/opencode/command" ]; then
+  if [ -r "$HOME/.config/opencode/command" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -RP "$HOME/.config/opencode/command" \
+      "$backup_path/.config/opencode/command"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode/command"
+rm -rf "$HOME/.config/opencode/command"
+ln -sfnv "$config_path/opencode/command" "$HOME/.config/opencode/command"
+
+# tool dir
+if [ ! -r "$backup_path/.config/opencode/tool" ]; then
+  if [ -r "$HOME/.config/opencode/tool" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -RP "$HOME/.config/opencode/tool" \
+      "$backup_path/.config/opencode/tool"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode/tool"
+rm -rf "$HOME/.config/opencode/tool"
+ln -sfnv "$config_path/opencode/tool" "$HOME/.config/opencode/tool"
