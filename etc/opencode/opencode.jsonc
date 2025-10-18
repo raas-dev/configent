@@ -24,7 +24,7 @@
     },
     "tavily": {
       "type": "local",
-      "enabled": false,
+      "enabled": true,
       "command": ["npx", "-y", "tavily-mcp"],
       "environment": {
         "TAVILY_API_KEY": "{env:TAVILY_API_KEY}"
