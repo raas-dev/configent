@@ -48,7 +48,7 @@ fi
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-[ -z "$DEFAULT_IDE" ] && DEFAULT_IDE='code'
+[ -z "$DEFAULT_IDE" ] && export DEFAULT_IDE='code' # can override in ~/.rclocal
 export EDITOR="$DEFAULT_IDE --wait"
 export VISUAL="$EDITOR"
 
