@@ -48,10 +48,12 @@ fi
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export EDITOR='vim'
+[ -z "$DEFAULT_IDE" ] && DEFAULT_IDE='code'
+export EDITOR="$DEFAULT_IDE --wait"
+export VISUAL="$EDITOR"
+
 export GIT_EDITOR="vim -n"
-export SVN_EDITOR="$EDITOR"
-export VISUAL="$DEFAULT_IDE --wait"
+export SVN_EDITOR="vim"
 
 # color manpages
 command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'

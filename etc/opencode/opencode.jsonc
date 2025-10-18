@@ -3,6 +3,9 @@
   "autoupdate": false,
   "share": "disabled",
   "theme": "ayu",
+  "tui": {
+    "scroll_speed": 2
+  },
   "model": "github-copilot/claude-haiku-4.5",
   "instructions": ["CLAUDE.md", "GEMINI.md"],
   "mcp": {

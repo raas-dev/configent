@@ -1,5 +1,4 @@
 aaron-bond.better-comments
-anthropic.claude-code
 astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
@@ -69,6 +68,7 @@ rambit.highlight-counter
 redhat.vscode-yaml
 rid9.datetime
 shahilkumar.docxreader
+sst-dev.opencode
 stagewise.stagewise-vscode-extension
 stevejpurves.cucumber
 stkb.rewrap
