@@ -19,7 +19,7 @@ type(scope): subject
 body
 </format>
 
-VERY IMPORTANT: You MUST only generate once what is inside format
+VERY IMPORTANT: You MUST only generate once what is inside format.
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
@@ -138,4 +138,5 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 Do not format your response as markdown or similar.
 </output>
 
-VERY IMPORTANT: Do not invent anything that is not in the input.
+MPORTANT: Do not invent anything that is not in the input.
+VERY IMPORTANT: You MUST only generate once what is inside format.
