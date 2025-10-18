@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.170.1](https://github.com/raas-dev/configent/compare/1.170.0...1.170.1) (2025-10-18)
+
+
+### Fixes
+
+* **project:** remove obsolete project tool file ([230cfac](https://github.com/raas-dev/configent/commit/230cfac3430bd84c15ffb14e1ca6ae98c6618e3f))
+
 ## [1.170.0](https://github.com/raas-dev/configent/compare/1.169.0...1.170.0) (2025-10-18)
 
 
