@@ -23,3 +23,13 @@ if [ ! -r "$backup_path/.claude/settings.json" ]; then
 fi
 mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/settings.json" "$HOME/.claude/settings.json"
+
+# CLAUDE.md
+if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
+  if [ -r "$HOME/.claude/CLAUDE.md" ]; then
+    mkdir -p "$backup_path/.claude"
+    cp -P "$HOME/.claude/CLAUDE.md" "$backup_path/.claude/CLAUDE.md"
+  fi
+fi
+mkdir -p "$HOME/.claude"
+ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"

@@ -25,6 +25,17 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
+# AGENTS.md
+if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
+  if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -P "$HOME/.config/opencode/AGENTS.md" \
+      "$backup_path/.config/opencode/AGENTS.md"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode"
+ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+
 # agent dir
 if [ ! -r "$backup_path/.config/opencode/agent" ]; then
   if [ -r "$HOME/.config/opencode/agent" ]; then
