@@ -19,9 +19,7 @@ type(scope): subject
 body
 </format>
 
-IMPORTANT: The commit message MUST only have 1 subject.
-
-VERY IMPORTANT: Do not invent anything that is not in the changes.
+VERY IMPORTANT: You MUST only generate once what is inside format
 
 <type>
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
