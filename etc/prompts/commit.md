@@ -138,5 +138,5 @@ For body, you MUST STRICTLY FOLLOW all of these rules:
 Do not format your response as markdown or similar.
 </output>
 
-MPORTANT: Do not invent anything that is not in the input.
+IMPORTANT: Do not invent anything that is not in the input.
 VERY IMPORTANT: You MUST only generate once what is inside format.
