@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.170.0](https://github.com/raas-dev/configent/compare/1.169.0...1.170.0) (2025-10-18)
+
+
+### Features
+
+* **opencode:** add opencode-ai tool support and configuration ([ddc2a7a](https://github.com/raas-dev/configent/commit/ddc2a7a3af0bba28d8e27858e24bf360ad8dd88c))
+
+
+### Fixes
+
+* **dotfiles:** add --wait flag to VISUAL editor setting ([9609000](https://github.com/raas-dev/configent/commit/96090007e91bfebea328adf18117924f0a58a4f8))
+* **dotfiles:** correct windsurf alias and code alias assignment ([3029e40](https://github.com/raas-dev/configent/commit/3029e40c85b96ef3fa116f6cde0efa1c80298852))
+* **dotfiles:** export DEFAULT_IDE for profile environment ([20d4551](https://github.com/raas-dev/configent/commit/20d455192081b169a161dbe6300a2ec65bafb020))
+* **dotfiles:** make editor configurable with DEFAULT_IDE fallback ([daaa764](https://github.com/raas-dev/configent/commit/daaa76425af0c7a80a136a7353ea47c235a6dc86))
+* **pre-commit-config:** exclude mcp.json from pretty-format-json hook ([fe64720](https://github.com/raas-dev/configent/commit/fe647206d34affb8429e1575bfe3eba5c2a062bc))
+* **prompts:** correct typo in commit message instruction template ([ac08ab9](https://github.com/raas-dev/configent/commit/ac08ab90bce8318f227b77f9a008fe83673cc48d))
+
 ## [1.169.0](https://github.com/raas-dev/configent/compare/1.168.9...1.169.0) (2025-10-16)
 
 
