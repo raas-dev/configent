@@ -71,3 +71,15 @@ fi
 mkdir -p "$HOME/.config/opencode/tool"
 rm -rf "$HOME/.config/opencode/tool"
 ln -sfnv "$config_path/opencode/tool" "$HOME/.config/opencode/tool"
+
+# plugin dir
+if [ ! -r "$backup_path/.config/opencode/plugin" ]; then
+  if [ -r "$HOME/.config/opencode/plugin" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -RP "$HOME/.config/opencode/plugin" \
+      "$backup_path/.config/opencode/plugin"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode/plugin"
+rm -rf "$HOME/.config/opencode/plugin"
+ln -sfnv "$config_path/opencode/plugin" "$HOME/.config/opencode/plugin"
