@@ -1,6 +1,26 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "ayu",
-  "model": "github-copilot/claude-sonnet-4.5",
+  "model": "github-copilot/claude-haiku-4.5",
   "autoupdate": false,
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+    },
+    "context7": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@upstash/context7-mcp"]
+    },
+    "tavily": {
+      "type": "local",
+      "enabled": false,
+      "command": ["npx", "-y", "tavily-mcp"],
+      "environment": {
+        "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
+      }
+    }
+  }
 }
