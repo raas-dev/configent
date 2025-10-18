@@ -8,7 +8,10 @@
   },
   "general": {
     "disableAutoUpdate": true,
-    "disableUpdateNag": true
+    "disableUpdateNag": true,
+    "checkpointing": {
+      "enabled": true
+    }
   },
   "ide": {
     "enabled": true,
