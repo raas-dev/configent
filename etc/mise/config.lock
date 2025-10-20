@@ -38,7 +38,7 @@ version = "18.6.0"
 backend = "cargo:atuin"
 
 [[tools."cargo:bat"]]
-version = "0.25.0"
+version = "0.26.0"
 backend = "cargo:bat"
 
 [[tools."cargo:cargo-cache"]]
@@ -110,7 +110,7 @@ version = "0.10.1"
 backend = "cargo:oxker"
 
 [[tools."cargo:pastel"]]
-version = "0.10.0"
+version = "0.11.0"
 backend = "cargo:pastel"
 
 [[tools."cargo:procs"]]
