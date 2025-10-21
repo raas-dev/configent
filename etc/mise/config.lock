@@ -251,7 +251,7 @@ size = 47035396
 url = "https://nodejs.org/dist/v22.14.0/node-v22.14.0-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.23"
+version = "2.0.24"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
@@ -259,7 +259,7 @@ version = "0.9.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.8"
+version = "0.15.10"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
@@ -329,11 +329,11 @@ size = 44682125
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.2/trivy_0.67.2_macOS-ARM64.tar.gz"
 
 [[tools."ubi:block/goose"]]
-version = "1.11.1"
+version = "1.11.0"
 backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:30ec5bfb1b27e42970332a1c564a9f7bb192f689a8b6eb8a4a967e856bf6cf04"
+checksum = "blake3:b159460db20887a945318476910269b36db1ef0433ba9d318b301299206281aa"
 
 [[tools."ubi:sigoden/argc"]]
 version = "1.23.0"
