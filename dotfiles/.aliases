@@ -392,20 +392,6 @@ venv() {
 
 ### Node.js ####################################################################
 
-### cloud
-
-# Firebase CLI
-alias firebase='bunx firebase-tools'
-
-# Azure Functions CLI
-alias func='bunx azure-functions-core-tools'
-
-# Railway.app CLI
-alias railway='bunx @railway/cli'
-
-# Cloudflare Workers CLI
-alias wrangler='bunx wrangler'
-
 ### ai
 
 # Flowise
