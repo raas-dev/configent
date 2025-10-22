@@ -105,7 +105,6 @@
   "cursor.agent_layout_browser_beta_setting": true,
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
-  "cursor.composer.backspaceRemoveContext": false,
   "cursor.composer.queueMessageDefaultBehavior": "queue",
   "cursor.composer.shouldAllowCustomModes": true,
   "cursor.composer.shouldAutoSaveNonAgent": false,
