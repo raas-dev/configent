@@ -118,7 +118,7 @@ version = "0.14.10"
 backend = "cargo:procs"
 
 [[tools."cargo:ripgrep"]]
-version = "15.0.0"
+version = "15.1.0"
 backend = "cargo:ripgrep"
 
 [[tools."cargo:sd"]]
@@ -255,7 +255,7 @@ version = "2.0.25"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.9.0"
+version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
