@@ -8,13 +8,13 @@ size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.19"
+version = "2.31.20"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:699c8646442f30f77866ce3448cfe537d4295826c48053a289700e33cbe9b9ae"
-size = 48222758
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.19.pkg"
+checksum = "blake3:be621cc5571b8ea90d6f41079d47df718356a2208b35fc782a54f21ba0d5763a"
+size = 48243964
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.20.pkg"
 
 [[tools.bun]]
 version = "1.3.1"
@@ -259,7 +259,7 @@ version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.13"
+version = "0.15.14"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
@@ -267,7 +267,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.8.1"
+version = "0.9.0"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
