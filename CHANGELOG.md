@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.170.2](https://github.com/raas-dev/configent/compare/1.170.1...1.170.2) (2025-10-24)
+
+
+### Fixes
+
+* **mcp:** add claude-skills MCP config and integration ([ef6cd6f](https://github.com/raas-dev/configent/commit/ef6cd6f0d5c80e298f0510cb9538946d7ad29760))
+* **opencode:** add support for skills via plugins ([8c76b58](https://github.com/raas-dev/configent/commit/8c76b587c8c96262cc37acd42d74251abd7da9f4))
+* **postinstall_opencode:** correct skills symlink path in postinstall script ([026aa27](https://github.com/raas-dev/configent/commit/026aa27b7d239bb144d92ac6a3beacd63849dd2a))
+
 ### [1.170.1](https://github.com/raas-dev/configent/compare/1.170.0...1.170.1) (2025-10-18)
 
 
