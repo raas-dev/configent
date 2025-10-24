@@ -23,6 +23,7 @@ type(scope): subject
 body
 </format>
 
+IMPORTANT: You MUST only choose one type(scope): subject
 VERY IMPORTANT: You will generate one conventional commit message.
 
 <type>
