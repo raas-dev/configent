@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.171.0](https://github.com/raas-dev/configent/compare/1.170.2...1.171.0) (2025-10-24)
+
+
+### Features
+
+* **claude-code:** Add skills library ([5256140](https://github.com/raas-dev/configent/commit/5256140d5b85baaa023065f9a95785374a6830ca))
+
 ### [1.170.2](https://github.com/raas-dev/configent/compare/1.170.1...1.170.2) (2025-10-24)
 
 
