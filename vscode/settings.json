@@ -88,7 +88,6 @@
   "chat.notifyWindowOnConfirmation": false,
   "chat.notifyWindowOnResponseReceived": false,
   "chat.tools.global.autoApprove": true,
-  "claude-code.useTerminal": true,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
@@ -440,7 +439,6 @@
   "terminal.integrated.letterSpacing": -1,
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
-  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.profiles.linux": {
     "tmux": {
@@ -567,5 +565,7 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "terminal.integrated.enablePersistentSessions": false,
+  "claudeCode.useTerminal": true
 }
