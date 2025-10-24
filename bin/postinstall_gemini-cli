@@ -32,4 +32,4 @@ if [ ! -r "$backup_path/.gemini/GEMINI.md" ]; then
   fi
 fi
 mkdir -p "$HOME/.gemini"
-ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.gemini/GEMINI.md"
+ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.gemini/GEMINI.md"

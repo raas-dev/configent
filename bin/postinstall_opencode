@@ -25,7 +25,7 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
-# AGENTS.md
+# AGENTS.md (from claude-code)
 if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
   if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -34,9 +34,9 @@ if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
   fi
 fi
 mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
-# agent dir
+# agent dir (from claude-code, note singular in the target dir name)
 if [ ! -r "$backup_path/.config/opencode/agent" ]; then
   if [ -r "$HOME/.config/opencode/agent" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -46,9 +46,9 @@ if [ ! -r "$backup_path/.config/opencode/agent" ]; then
 fi
 mkdir -p "$HOME/.config/opencode/agent"
 rm -rf "$HOME/.config/opencode/agent"
-ln -sfnv "$config_path/opencode/agent" "$HOME/.config/opencode/agent"
+ln -sfnv "$config_path/claude-code/agents" "$HOME/.config/opencode/agent"
 
-# command dir
+# command dir (from claude-code, note singular in the target dir name)
 if [ ! -r "$backup_path/.config/opencode/command" ]; then
   if [ -r "$HOME/.config/opencode/command" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -58,33 +58,9 @@ if [ ! -r "$backup_path/.config/opencode/command" ]; then
 fi
 mkdir -p "$HOME/.config/opencode/command"
 rm -rf "$HOME/.config/opencode/command"
-ln -sfnv "$config_path/opencode/command" "$HOME/.config/opencode/command"
+ln -sfnv "$config_path/claude-code/commands" "$HOME/.config/opencode/command"
 
-# tool dir
-if [ ! -r "$backup_path/.config/opencode/tool" ]; then
-  if [ -r "$HOME/.config/opencode/tool" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/tool" \
-      "$backup_path/.config/opencode/tool"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/tool"
-rm -rf "$HOME/.config/opencode/tool"
-ln -sfnv "$config_path/opencode/tool" "$HOME/.config/opencode/tool"
-
-# plugin dir
-if [ ! -r "$backup_path/.config/opencode/plugin" ]; then
-  if [ -r "$HOME/.config/opencode/plugin" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/plugin" \
-      "$backup_path/.config/opencode/plugin"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/plugin"
-rm -rf "$HOME/.config/opencode/plugin"
-ln -sfnv "$config_path/opencode/plugin" "$HOME/.config/opencode/plugin"
-
-# skills dir (symlink tool independent skills library)
+# skills dir (from claude-code)
 if [ ! -r "$backup_path/.config/opencode/skills" ]; then
   if [ -r "$HOME/.config/opencode/skills" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -94,4 +70,4 @@ if [ ! -r "$backup_path/.config/opencode/skills" ]; then
 fi
 mkdir -p "$HOME/.config/opencode/skills"
 rm -rf "$HOME/.config/opencode/skills"
-ln -sfnv "$config_path/skills" "$HOME/.config/opencode/skills"
+ln -sfnv "$config_path/claude-code/skills" "$HOME/.config/opencode/skills"

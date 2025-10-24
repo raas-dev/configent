@@ -32,4 +32,4 @@ if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
   fi
 fi
 mkdir -p "$HOME/.claude"
-ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"

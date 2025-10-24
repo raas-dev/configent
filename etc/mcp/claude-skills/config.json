@@ -31,8 +31,8 @@
       "url": "https://github.com/lackeyjb/playwright-skill"
     },
     {
-      "comment": "Local skills library (directory doesn't need to exist)",
-      "path": "~/.config/configent/skills",
+      "comment": "Local Claude Code Skills library.",
+      "path": "~/.config/configent/claude-code/skills",
       "type": "local"
     }
   ],
