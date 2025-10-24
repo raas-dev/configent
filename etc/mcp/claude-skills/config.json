@@ -26,13 +26,13 @@
       "url": "https://github.com/anthropics/skills"
     },
     {
-      "comment": "70+ scientific skills for bioinformatics, cheminformatics, and analysis",
+      "comment": "Claude Code Skill for browser automation with Playwright.",
       "type": "github",
-      "url": "https://github.com/K-Dense-AI/claude-scientific-skills"
+      "url": "https://github.com/lackeyjb/playwright-skill"
     },
     {
       "comment": "Your custom local skills (optional - directory doesn't need to exist)",
-      "path": "~/.claude/skills",
+      "path": "~/.config/configent/skills",
       "type": "local"
     }
   ],

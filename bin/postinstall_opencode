@@ -84,7 +84,7 @@ mkdir -p "$HOME/.config/opencode/plugin"
 rm -rf "$HOME/.config/opencode/plugin"
 ln -sfnv "$config_path/opencode/plugin" "$HOME/.config/opencode/plugin"
 
-# skills dir
+# skills dir (symlink tool independent skills library)
 if [ ! -r "$backup_path/.config/opencode/skills" ]; then
   if [ -r "$HOME/.config/opencode/skills" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -94,4 +94,4 @@ if [ ! -r "$backup_path/.config/opencode/skills" ]; then
 fi
 mkdir -p "$HOME/.config/opencode/skills"
 rm -rf "$HOME/.config/opencode/skills"
-ln -sfnv "$config_path/opencode/skills" "$HOME/.config/opencode/skills"
+ln -sfnv "$config_path/skills" "$HOME/.config/opencode/skills"
