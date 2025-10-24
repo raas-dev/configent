@@ -16,6 +16,14 @@
     "chrome-devtools": {
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
+    },
+    "claude-skills": {
+      "command": "uvx",
+      "args": [
+        "claude-skills-mcp",
+        "--config",
+        "~/.config/configent/mcp/claude-skills/config.json"
+      ]
     }
   }
 }
