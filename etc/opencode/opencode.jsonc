@@ -30,5 +30,6 @@
         "TAVILY_API_KEY": "{env:TAVILY_API_KEY}"
       }
     }
-  }
+  },
+  "plugin": ["opencode-skills"]
 }
