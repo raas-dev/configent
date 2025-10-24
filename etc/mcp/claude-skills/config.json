@@ -21,7 +21,7 @@
   "max_skill_content_chars": null,
   "skill_sources": [
     {
-      "comment": "Official Anthropic skills - diverse examples with Python scripts, images, documents",
+      "comment": "Official Anthropic skills.",
       "type": "github",
       "url": "https://github.com/anthropics/skills"
     },
@@ -31,7 +31,7 @@
       "url": "https://github.com/lackeyjb/playwright-skill"
     },
     {
-      "comment": "Your custom local skills (optional - directory doesn't need to exist)",
+      "comment": "Local skills library (directory doesn't need to exist)",
       "path": "~/.config/configent/skills",
       "type": "local"
     }
