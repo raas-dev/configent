@@ -90,7 +90,7 @@ version = "2.7.1"
 backend = "cargo:mdcat"
 
 [[tools."cargo:nixpacks"]]
-version = "1.40.0"
+version = "1.41.0"
 backend = "cargo:nixpacks"
 
 [[tools."cargo:numbat-cli"]]
@@ -259,7 +259,7 @@ version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.16"
+version = "0.15.17"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
