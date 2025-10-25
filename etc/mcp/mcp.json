@@ -15,7 +15,7 @@
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": ["chrome-devtools-mcp@latest", "--headless=true"]
     },
     "claude-skills": {
       "command": "uvx",
