@@ -458,7 +458,7 @@ ai_agent() {
     --with-builtin computercontroller
     --with-builtin developer
     --with-builtin memory
-    --with-extension "BROWSER_USE_HEADLESS=false uvx browser-use[cli] --mcp"
+    --with-extension "npx -y opendia"
     --with-extension "npx -y tavily-mcp"
     --with-extension "uvx prompts-mcp"
   )
