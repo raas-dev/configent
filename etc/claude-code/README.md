@@ -7,8 +7,12 @@ Original sources listed below.
 - https://github.com/davepoon/claude-code-subagents-collection/tree/main/subagents
 
 ```
-git clone https://github.com/davepoon/claude-code-subagents-collection.git ./tmp/claude-code-subagents-collection
-find tmp/claude-code-subagents-collection/subagents -name "*.md" -exec cp {} agents \;
+git clone --depth 1 \
+  https://github.com/davepoon/claude-code-subagents-collection.git \
+  ./tmp/claude-code-subagents-collection ||
+  git -C ./tmp/claude-code-subagents-collection pull --no-autostash --rebase
+find tmp/claude-code-subagents-collection/subagents \
+  -name "*.md" -exec cp {} agents \;
 ```
 
 ## commands
@@ -16,8 +20,12 @@ find tmp/claude-code-subagents-collection/subagents -name "*.md" -exec cp {} age
 - https://github.com/davepoon/claude-code-subagents-collection/tree/main/commands
 
 ```
-git clone https://github.com/davepoon/claude-code-subagents-collection.git  ./tmp/claude-code-subagents-collection
-find tmp/claude-code-subagents-collection/commands -name "*.md" -exec cp {} commands \;
+git clone --depth 1 \
+  https://github.com/davepoon/claude-code-subagents-collection.git \
+  ./tmp/claude-code-subagents-collection ||
+  git -C ./tmp/claude-code-subagents-collection pull --no-autostash --rebase
+find tmp/claude-code-subagents-collection/commands \
+  -name "*.md" -exec cp {} commands \;
 ```
 
 ## skills
@@ -25,6 +33,8 @@ find tmp/claude-code-subagents-collection/commands -name "*.md" -exec cp {} comm
 - https://github.com/obra/superpowers/tree/main/skills
 
 ```
-git clone https://github.com/obra/superpowers.git ./tmp/superpowers
+git clone --depth 1 https://github.com/danielmiessler/fabric.git \
+  ./tmp/superpowers ||
+  git -C ./tmp/superpowers pull --no-autostash --rebase
 cp -R tmp/superpowers/skills/* skills
 ```
