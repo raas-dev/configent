@@ -54,7 +54,7 @@ $user_message
 fi
 
 if [ -n "$*" ]; then
-  user_message="ADDITIONAL HINTS FOR CREATING COMMIT MESSAGE HEADLINE: $*
+  user_message="ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*
 
 $user_message"
 fi
