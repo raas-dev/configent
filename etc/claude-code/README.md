@@ -9,8 +9,8 @@ Original sources listed below.
 ```
 git clone --depth 1 \
   https://github.com/davepoon/claude-code-subagents-collection.git \
-  ./tmp/claude-code-subagents-collection ||
-  git -C ./tmp/claude-code-subagents-collection pull --no-autostash --rebase
+  tmp/claude-code-subagents-collection ||
+  git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/subagents \
   -name "*.md" -exec cp {} agents \;
 ```
@@ -22,8 +22,8 @@ find tmp/claude-code-subagents-collection/subagents \
 ```
 git clone --depth 1 \
   https://github.com/davepoon/claude-code-subagents-collection.git \
-  ./tmp/claude-code-subagents-collection ||
-  git -C ./tmp/claude-code-subagents-collection pull --no-autostash --rebase
+  tmp/claude-code-subagents-collection ||
+  git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/commands \
   -name "*.md" -exec cp {} commands \;
 ```
@@ -33,8 +33,8 @@ find tmp/claude-code-subagents-collection/commands \
 - https://github.com/obra/superpowers/tree/main/skills
 
 ```
-git clone --depth 1 https://github.com/danielmiessler/fabric.git \
-  ./tmp/superpowers ||
-  git -C ./tmp/superpowers pull --no-autostash --rebase
+git clone --depth 1 https://github.com/danielmiessler/fabric.git
+  tmp/superpowers ||
+  git -C tmp/superpowers pull --no-autostash --rebase
 cp -R tmp/superpowers/skills/* skills
 ```
