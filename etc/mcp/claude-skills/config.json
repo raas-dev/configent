@@ -21,17 +21,17 @@
   "max_skill_content_chars": null,
   "skill_sources": [
     {
-      "comment": "Official Anthropic skills.",
+      "comment": "Anthropic skills fork by ComposioHQ",
       "type": "github",
-      "url": "https://github.com/anthropics/skills"
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills"
     },
     {
-      "comment": "Claude Code Skill for browser automation with Playwright.",
+      "comment": "Claude Code skill for browser automation with Playwright",
       "type": "github",
       "url": "https://github.com/lackeyjb/playwright-skill"
     },
     {
-      "comment": "Local Claude Code Skills library.",
+      "comment": "Local skills library",
       "path": "~/.config/configent/claude-code/skills",
       "type": "local"
     }
