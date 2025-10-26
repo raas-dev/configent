@@ -26,5 +26,5 @@ find tmp/claude-code-subagents-collection/commands -name "*.md" -exec cp {} comm
 
 ```
 git clone https://github.com/obra/superpowers.git ./tmp/superpowers
-cp -R tmp/superpowers/skills/* skills \;
+cp -R tmp/superpowers/skills/* skills
 ```
