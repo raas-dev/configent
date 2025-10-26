@@ -38,3 +38,5 @@ git clone --depth 1 https://github.com/danielmiessler/fabric.git
   git -C tmp/superpowers pull --no-autostash --rebase
 cp -R tmp/superpowers/skills/* skills
 ```
+- https://github.com/lackeyjb/playwright-skill
+- https://github.com/ComposioHQ/awesome-claude-skills
