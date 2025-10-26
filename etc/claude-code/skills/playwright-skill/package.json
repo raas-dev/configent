@@ -1,0 +1,26 @@
+{
+  "author": "lackeyjb",
+  "dependencies": {
+    "playwright": "^1.48.0"
+  },
+  "description": "General-purpose browser automation with Playwright for Claude Code with auto-detection and smart test management",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "browser-testing",
+    "web-automation",
+    "claude-skill",
+    "general-purpose"
+  ],
+  "license": "MIT",
+  "main": "run.js",
+  "name": "playwright-skill",
+  "scripts": {
+    "install-all-browsers": "npx playwright install chromium firefox webkit",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "version": "4.0.2"
+}
