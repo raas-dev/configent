@@ -171,13 +171,13 @@ version = "7.4.6"
 backend = "dotnet:powershell"
 
 [[tools.fzf]]
-version = "0.66.0"
+version = "0.66.1"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.platforms.macos-arm64]
-checksum = "sha256:b64a9862f30f3d4568c0433dd5a23bc626fa1ede2c6e1a5e8e680bbf96725ea6"
-size = 1747376
-url = "https://github.com/junegunn/fzf/releases/download/v0.66.0/fzf-0.66.0-darwin_arm64.tar.gz"
+checksum = "sha256:0f44db428cb65a0b646e99a506422a59f4b2fc3d3973b35387f78bba48c79c16"
+size = 1747511
+url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-darwin_arm64.tar.gz"
 
 [[tools.gcloud]]
 version = "510.0.0"
@@ -259,7 +259,7 @@ version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.17"
+version = "0.15.18"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
