@@ -17,20 +17,16 @@
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest", "--headless=true"]
     },
-    "claude-skills": {
-      "command": "uvx",
-      "args": [
-        "claude-skills-mcp",
-        "--config",
-        "~/.config/configent/mcp/claude-skills/config.json"
-      ]
-    },
     "desktop-commander": {
       "command": "npx",
       "args": [
         "-y",
         "@wonderwhy-er/desktop-commander@latest"
       ]
+    },
+    "skillz": {
+      "command": "uvx",
+      "args": ["skillz@latest", "~/.claude/skills"]
     }
   }
 }
