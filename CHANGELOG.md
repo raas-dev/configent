@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.172.0](https://github.com/raas-dev/configent/compare/1.171.0...1.172.0) (2025-10-26)
+
+
+### Features
+
+* **claude-code:** Add agents and commands ([0f771bc](https://github.com/raas-dev/configent/commit/0f771bc7b86f8733bfd883c7cd3029c4c8c05f8b))
+
+
+### Fixes
+
+* **ai_commit:** correct variable name for additional constraints in commit message logic ([403d2a4](https://github.com/raas-dev/configent/commit/403d2a4a476300891f444cbdceca321b9ebc904a))
+* **claude-code:** Add ComposioHQ awesome-claude-skills ([cb68447](https://github.com/raas-dev/configent/commit/cb6844734fece862bff427b49c4e7efa443ae69b))
+* **claude-code:** correct README copy command formatting ([87bebcd](https://github.com/raas-dev/configent/commit/87bebcdfae82869f4d7d28388520d1be790e25c4))
+* **claude-code:** update README clone commands to use shallow clone with pull fallback ([523cc2b](https://github.com/raas-dev/configent/commit/523cc2b528f018f197aa0cb8e5a5eb800915b94a))
+* **claude:** add playwright-skill for browser automation with dev server detection ([9ec3b64](https://github.com/raas-dev/configent/commit/9ec3b640b984f96c3dbcc62dfc451ec051eedb3a))
+* **codespellrc:** update skip patterns in codespell configuration ([972510a](https://github.com/raas-dev/configent/commit/972510ae45a80726b7245758832e0460c3c84ce1))
+* **config:** update claude-skills config skill source references ([9f5e715](https://github.com/raas-dev/configent/commit/9f5e7155337852d65432c72f6674e5997ee02ed4))
+* **cursor:** add desktop-commander MCP ([027eef6](https://github.com/raas-dev/configent/commit/027eef6ec977565ea68926ce032c5a24d3478357))
+* **dotfiles:** update ai_agent aliases to use npx opendia and tavily-mcp ([92cb069](https://github.com/raas-dev/configent/commit/92cb069cd8392fbcc7e75ab12263870bf876b7f7))
+* **mcp:** enable headless mode for chrome-devtools MCP command ([0a60c99](https://github.com/raas-dev/configent/commit/0a60c99332bae554a133725c92fd49f444d3195c))
+* **mcp:** update claude-skills path and replace command with skillz ([66031ad](https://github.com/raas-dev/configent/commit/66031ad6d70885f41aff3bec33fb4a8f9d49a346))
+* **postinstall_claude-code:** backup and symlink agents, commands, and skills directories ([dff8988](https://github.com/raas-dev/configent/commit/dff8988911eeb5ff7350c611d82bfd4fa72deb5b))
+* **pre-commit-config:** restrict shebang check to non-skill files ([ed0164a](https://github.com/raas-dev/configent/commit/ed0164a5099dcf2713d5bfb60e40e1166ad7eb4a))
+* **README:** correct clone command paths in claude-code instructions ([3a38caf](https://github.com/raas-dev/configent/commit/3a38caf850137f86eba294064a09ba045e3f92a3))
+* **vscode:** Remove Kilo Code extension ([473e30f](https://github.com/raas-dev/configent/commit/473e30f3ebe961b8da6d2914a38ed4866a389bb4))
+
 ## [1.171.0](https://github.com/raas-dev/configent/compare/1.170.2...1.171.0) (2025-10-24)
 
 
