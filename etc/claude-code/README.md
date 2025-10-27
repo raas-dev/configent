@@ -39,6 +39,4 @@ git clone --depth 1 https://github.com/danielmiessler/fabric.git
 cp -R tmp/superpowers/skills/* skills
 ```
 
-- https://github.com/obra/superpowers-chrome
 - https://github.com/lackeyjb/playwright-skill
-- https://github.com/ComposioHQ/awesome-claude-skills
