@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.172.1](https://github.com/raas-dev/configent/compare/1.172.0...1.172.1) (2025-10-27)
+
+
+### Fixes
+
+* **browsing:** remove entire browsing skill and related files ([3a1dcdc](https://github.com/raas-dev/configent/commit/3a1dcdcb0abaa932a011847788b7fcbe08b05661))
+* **claude-code:** Add browsing skill ([91f4248](https://github.com/raas-dev/configent/commit/91f4248cf4d7640b06626432ac2c16a40ef72bca))
+* **claude-code:** Cleanup skills ([1bc12a3](https://github.com/raas-dev/configent/commit/1bc12a3b8fce817206245a0e2adf32d051e57d61))
+* **claude-code:** update .gitignore for nested node_modules and lock files ([343e2ef](https://github.com/raas-dev/configent/commit/343e2ef0f150f0c0a0783bf4efff5018b0dd2d56))
+* **claude-code:** update .gitignore to exclude node_modules directory ([c7b67de](https://github.com/raas-dev/configent/commit/c7b67deefedb12f7dd210b31594fc9be32abccf0))
+* **dotfiles:** fix unzip alias to use 7zz instead of 7z ([7eef751](https://github.com/raas-dev/configent/commit/7eef751490a343e120fb7f86d4ef3cb4f73af984))
+* **mcp:** reorder and clean duplicates in mcp.json configuration ([6305404](https://github.com/raas-dev/configent/commit/63054041d798a6ec3cd8d2270c92b74d6dd04e5d))
+* **opencode:** fix config for skillz local command and args formatting in mcp.json ([c6e9139](https://github.com/raas-dev/configent/commit/c6e91396e0abec302274d00190f9e9ac90a7a127))
+* **opencode:** Remove opencode-skills ([3f0b2f9](https://github.com/raas-dev/configent/commit/3f0b2f981994d2fa1f9a9a9e4afa0dac589d6bf0))
+* **settings:** add missing '-y' flag to chrome-devtools MCP args ([06cc072](https://github.com/raas-dev/configent/commit/06cc07240bfbee4291542a895eb3d0ff461e382c))
+
 ## [1.172.0](https://github.com/raas-dev/configent/compare/1.171.0...1.172.0) (2025-10-26)
 
 
