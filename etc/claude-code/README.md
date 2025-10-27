@@ -33,10 +33,15 @@ find tmp/claude-code-subagents-collection/commands \
 - https://github.com/obra/superpowers
 
 ```
-git clone --depth 1 https://github.com/danielmiessler/fabric.git
-  tmp/superpowers ||
+git clone --depth 1 https://github.com/obra/superpowers.git tmp/superpowers ||
   git -C tmp/superpowers pull --no-autostash --rebase
 cp -R tmp/superpowers/skills/* skills
 ```
 
 - https://github.com/lackeyjb/playwright-skill
+
+```
+git clone --depth 1 https://github.com/lackeyjb/playwright-skill.git tmp/playwright-skill ||
+  git -C tmp/playwright-skill pull --no-autostash --rebase
+cp -R tmp/playwright-skill/skills/* skills
+```
