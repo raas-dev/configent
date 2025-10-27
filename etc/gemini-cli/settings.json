@@ -20,7 +20,7 @@
   "mcpServers": {
     "chrome-devtools": {
       "args": [
-        "chrome-devtools-mcp@latest"
+        "-y", "chrome-devtools-mcp@latest"
       ],
       "command": "npx"
     },
