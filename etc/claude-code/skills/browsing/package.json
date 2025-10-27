@@ -1,0 +1,11 @@
+{
+  "bin": {
+    "chrome-ws": "./chrome-ws"
+  },
+  "description": "Lightweight Chrome DevTools Protocol client for direct browser control - zero dependencies",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "name": "chrome-ws",
+  "version": "1.0.0"
+}

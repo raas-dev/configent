@@ -4,7 +4,7 @@ Original sources listed below.
 
 ## agents
 
-- https://github.com/davepoon/claude-code-subagents-collection/tree/main/subagents
+- https://github.com/davepoon/claude-code-subagents-collection
 
 ```
 git clone --depth 1 \
@@ -17,7 +17,7 @@ find tmp/claude-code-subagents-collection/subagents \
 
 ## commands
 
-- https://github.com/davepoon/claude-code-subagents-collection/tree/main/commands
+- https://github.com/davepoon/claude-code-subagents-collection
 
 ```
 git clone --depth 1 \
@@ -30,7 +30,7 @@ find tmp/claude-code-subagents-collection/commands \
 
 ## skills
 
-- https://github.com/obra/superpowers/tree/main/skills
+- https://github.com/obra/superpowers
 
 ```
 git clone --depth 1 https://github.com/danielmiessler/fabric.git
@@ -38,5 +38,7 @@ git clone --depth 1 https://github.com/danielmiessler/fabric.git
   git -C tmp/superpowers pull --no-autostash --rebase
 cp -R tmp/superpowers/skills/* skills
 ```
+
+- https://github.com/obra/superpowers-chrome
 - https://github.com/lackeyjb/playwright-skill
 - https://github.com/ComposioHQ/awesome-claude-skills
