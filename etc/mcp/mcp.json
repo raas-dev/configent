@@ -12,10 +12,7 @@
     },
     "desktop-commander": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@wonderwhy-er/desktop-commander@latest"
-      ]
+      "args": ["-y", "@wonderwhy-er/desktop-commander@latest"]
     },
     "tavily": {
       "args": ["-y", "tavily-mcp"],

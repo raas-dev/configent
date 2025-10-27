@@ -29,6 +29,11 @@
       "environment": {
         "TAVILY_API_KEY": "{env:TAVILY_API_KEY}"
       }
+    },
+    "skillz": {
+      "type": "local",
+      "enabled": true,
+      "command": ["uvx", "skillz@latest", "~/.claude/skills"]
     }
   }
 }
