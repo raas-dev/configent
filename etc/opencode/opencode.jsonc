@@ -20,7 +20,7 @@
       "command": [
         "npx",
         "-y",
-        "@upstash/context7-mcp",
+        "@upstash/context7-mcp@latest",
         "--api-key",
         "{env:CONTEXT7_API_KEY}"
       ]
