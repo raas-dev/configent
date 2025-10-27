@@ -154,6 +154,7 @@ alias ¨='bat --show-all --theme=default'
 alias §='trans :fi'
 alias ,='trans'
 alias _='ai_agent'
+alias \#='echo'
 
 ### watch ######################################################################
 
