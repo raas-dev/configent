@@ -15,12 +15,15 @@
       "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
     },
     "context7": {
-      "type": "remote",
+      "type": "local",
       "enabled": true,
-      "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-      }
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "{env:CONTEXT7_API_KEY}"
+      ]
     },
     "tavily": {
       "type": "local",
