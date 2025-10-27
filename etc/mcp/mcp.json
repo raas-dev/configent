@@ -2,7 +2,7 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest", "--headless=true"]
+      "args": ["-y", "chrome-devtools-mcp@latest", "--headless=true"]
     },
     "context7": {
       "url": "https://mcp.context7.com/mcp",
@@ -15,7 +15,7 @@
       "args": ["-y", "@wonderwhy-er/desktop-commander@latest"]
     },
     "tavily": {
-      "args": ["-y", "tavily-mcp"],
+      "args": ["-y", "tavily-mcp@latest"],
       "command": "npx",
       "env": {
         "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
