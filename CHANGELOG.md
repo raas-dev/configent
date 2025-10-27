@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.172.2](https://github.com/raas-dev/configent/compare/1.172.1...1.172.2) (2025-10-27)
+
+
+### Fixes
+
+* **dotfiles:** add alias for echo command ([ac156b4](https://github.com/raas-dev/configent/commit/ac156b413bf6b2d886e8d384777dbed653c1d7a2))
+* **mcp:** add missing -y flag and specify latest versions in args ([cccb494](https://github.com/raas-dev/configent/commit/cccb4942076823ea6376b4a5693b25d4d342953a))
+* **mcp:** unify and simplify context7 mcp configuration ([1fc753b](https://github.com/raas-dev/configent/commit/1fc753bf7291c69d0627b9128c750960363eb48e))
+
 ### [1.172.1](https://github.com/raas-dev/configent/compare/1.172.0...1.172.1) (2025-10-27)
 
 
