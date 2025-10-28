@@ -259,7 +259,7 @@ version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.18"
+version = "0.15.19"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
