@@ -8,13 +8,13 @@ size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.23"
+version = "2.31.24"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:b2561d89a341584d125392c6885e89a61407534104c7716d646f0c09cc899474"
-size = 48249172
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.23.pkg"
+checksum = "blake3:052b164e98cbcbd180f5927496264c2c7d49034ae4608872efe930b7b000a4d9"
+size = 48134745
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.24.pkg"
 
 [[tools.bun]]
 version = "1.3.1"
@@ -259,7 +259,7 @@ version = "0.10.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.19"
+version = "0.15.20"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
@@ -329,11 +329,11 @@ size = 44682125
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.2/trivy_0.67.2_macOS-ARM64.tar.gz"
 
 [[tools."ubi:block/goose"]]
-version = "1.12.0"
+version = "1.12.1"
 backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:0ee76f8663440181535904eb377e5351a09336902fe336658360422beb85de07"
+checksum = "blake3:cd0b6546d63c8d9766cc01ddab5513de6ebcaced8d9e8e1f101a0e5f61d52f00"
 
 [[tools."ubi:sigoden/argc"]]
 version = "1.23.0"
