@@ -53,7 +53,7 @@ trivy = 'latest'
 awscli = 'latest'
 #aws-copilot = 'latest'
 #cloudflared = 'latest'
-#gcloud = '510.0.0'
+#gcloud = 'latest'
 
 # terraform
 #terraform = '1.10.3'
