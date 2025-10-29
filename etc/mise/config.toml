@@ -21,8 +21,8 @@ ripgrep = 'latest'
 sd = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-#upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
+#upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 viddy = 'latest'
 watchexec = 'latest'
