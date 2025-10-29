@@ -123,15 +123,6 @@ backend = "cargo:tailspin"
 version = "16.0.4"
 backend = "cargo:topgrade"
 
-[[tools.cosign]]
-version = "3.0.2"
-backend = "aqua:sigstore/cosign"
-
-[tools.cosign.platforms.macos-arm64]
-checksum = "sha256:3823b044de184da21e300bc5e20dd29d3fa9243af3ba70c4a5da1712f3385d46"
-size = 155624370
-url = "https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-darwin-arm64"
-
 [[tools.delta]]
 version = "0.18.2"
 backend = "aqua:dandavison/delta"
@@ -341,10 +332,6 @@ backend = "aqua:mvdan/sh"
 checksum = "sha256:d903802e0ce3ecbc82b98512f55ba370b0d37a93f3f78de394f5b657052b33dd"
 size = 2891858
 url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_darwin_arm64"
-
-[[tools.slsa-verifier]]
-version = "2.7.1"
-backend = "ubi:slsa-framework/slsa-verifier"
 
 [[tools.starship]]
 version = "1.24.0"

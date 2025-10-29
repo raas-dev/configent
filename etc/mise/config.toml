@@ -40,8 +40,6 @@ act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_ac
 github-cli = 'latest'
 
 # docker
-cosign = 'latest'
-slsa-verifier = 'latest'
 #dive = 'latest'
 lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 trivy = 'latest'
