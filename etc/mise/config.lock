@@ -255,11 +255,11 @@ version = "2.0.28"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.10.0"
+version = "0.11.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "0.15.20"
+version = "0.15.23"
 backend = "npm:opencode-ai"
 
 [[tools."pipx:azure-cli"]]
@@ -267,7 +267,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.9.2"
+version = "0.9.4"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
@@ -275,7 +275,7 @@ version = "4.3.3"
 backend = "pipx:glances"
 
 [[tools."pipx:pdm"]]
-version = "2.26.0"
+version = "2.26.1"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
