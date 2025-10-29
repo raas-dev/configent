@@ -48,6 +48,7 @@ After choosing the type, choose THE FIRST MATCHING here are the scope:
 4. file name without the extension (choose after the file having most changes)
 
 IMPORTANT: you must not include path to the file or file extension in scope
+VERY IMPORTANT: you must never include path to the file in scope
 </scope>
 
 <subject>
