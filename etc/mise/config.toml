@@ -33,8 +33,8 @@ tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmu
 # cloud development
 act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
-slsa-verifier = "latest"
-cosign = "latest"
+slsa-verifier = 'latest'
+cosign = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
 trivy = 'latest'
@@ -50,7 +50,7 @@ awscli = 'latest'
 #helm = 'latest'
 #k9s = 'latest'
 #cloudflared = 'latest'
-#'ubi:wagoodman/dive' = "latest"
+#'ubi:wagoodman/dive' = 'latest'
 
 # rust
 rust = '1.86.0'
@@ -91,7 +91,7 @@ uv = 'latest'
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 #'pipx:cfn-lint' = 'latest'
-'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
+'pipx:glances' = { version = 'latest', extras = "containers,gpu,web,wifi" }
 #'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
