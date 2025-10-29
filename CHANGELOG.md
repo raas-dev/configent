@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.6](https://github.com/raas-dev/configent/compare/1.173.5...1.173.6) (2025-10-29)
+
+
+### Fixes
+
+* **postinstall_bat:** conditionally build bat cache with PATH updated ([e2efd41](https://github.com/raas-dev/configent/commit/e2efd411266f9be31226168dbe535d77a3b685f1))
+
 ### [1.173.5](https://github.com/raas-dev/configent/compare/1.173.4...1.173.5) (2025-10-29)
 
 
