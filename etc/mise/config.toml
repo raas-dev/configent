@@ -18,7 +18,7 @@ numbat = 'latest'
 oxker = 'latest'
 ripgrep = 'latest'
 sd = 'latest'
-starship = { version = '1.23.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
+starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 viddy = 'latest'
 watchexec = 'latest'
 zoxide = 'latest'

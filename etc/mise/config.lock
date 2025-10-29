@@ -317,8 +317,13 @@ version = "2.7.1"
 backend = "ubi:slsa-framework/slsa-verifier"
 
 [[tools.starship]]
-version = "1.23.0"
+version = "1.24.0"
 backend = "aqua:starship/starship"
+
+[tools.starship.platforms.macos-arm64]
+checksum = "sha256:236baba98a5f56787dee29c9472865a9ccef83fe2b6bfdce588249d427c72945"
+size = 3911401
+url = "https://github.com/starship/starship/releases/download/v1.24.0/starship-aarch64-apple-darwin.tar.gz"
 
 [[tools.tmux]]
 version = "3.5a"
