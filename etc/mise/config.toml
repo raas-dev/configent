@@ -2,6 +2,8 @@
 # cli tools
 #aichat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
+bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
+carapace = 'latest'
 delta = 'latest'
 duf = 'latest'
 fd = 'latest'
@@ -25,7 +27,7 @@ xh = 'latest'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 yq = 'latest'
 #upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
-'ubi:sharkdp/bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
+
 'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
@@ -82,7 +84,7 @@ cargo-binstall = 'latest'
 'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 
 # go
-go = { version = '1.25.3', postinstall = "~/.local/configent/bin/postinstall_go" }
+go = '1.25.3'
 'go:github.com/go-enry/enry' = 'latest'
 'go:golang.org/x/tools/gopls' = 'latest'
 'go:github.com/abhimanyu003/sttr' = 'latest'

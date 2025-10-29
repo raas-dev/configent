@@ -25,6 +25,15 @@ checksum = "blake3:052b164e98cbcbd180f5927496264c2c7d49034ae4608872efe930b7b000a
 size = 48134745
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.24.pkg"
 
+[[tools.bat]]
+version = "0.26.0"
+backend = "aqua:sharkdp/bat"
+
+[tools.bat.platforms.macos-arm64]
+checksum = "blake3:df2e08fcd19177c1cde620b36caf9f1562a2c48b8dd4b0373475e168108d8048"
+size = 3219053
+url = "https://github.com/sharkdp/bat/releases/download/v0.26.0/bat-v0.26.0-aarch64-apple-darwin.tar.gz"
+
 [[tools.bun]]
 version = "1.3.1"
 backend = "core:bun"
@@ -32,6 +41,15 @@ backend = "core:bun"
 [tools.bun.platforms.macos-arm64]
 checksum = "blake3:1643fe56ae2f8adc8229a82672484113c01c82b5fe15b3e498610fc050831ffd"
 size = 22437956
+
+[[tools.carapace]]
+version = "1.5.3"
+backend = "aqua:carapace-sh/carapace-bin"
+
+[tools.carapace.platforms.macos-arm64]
+checksum = "sha256:df29c65ba25bfee848af767fae993d61585a2e832dbfd3485242405fab53966a"
+size = 13391266
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.3/carapace-bin_1.5.3_darwin_arm64.tar.gz"
 
 [[tools.cargo-binstall]]
 version = "1.15.9"
@@ -340,13 +358,6 @@ backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
 checksum = "blake3:cd0b6546d63c8d9766cc01ddab5513de6ebcaced8d9e8e1f101a0e5f61d52f00"
-
-[[tools."ubi:sharkdp/bat"]]
-version = "0.26.0"
-backend = "ubi:sharkdp/bat"
-
-[tools."ubi:sharkdp/bat".platforms.macos-arm64-bat]
-checksum = "blake3:801d41e726a41a95e59a2f2c35930f9bbe4a4a3c1b05717cfea0d105a3e5671e"
 
 [[tools.uv]]
 version = "0.9.5"
