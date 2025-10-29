@@ -35,6 +35,7 @@ zoxide = 'latest'
 
 # scripting
 argc = 'latest'
+pre-commit = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
 
@@ -107,7 +108,6 @@ uv = 'latest'
 #'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
-'pipx:pre-commit' = 'latest'
 'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 'pipx:tldr' = 'latest'
 

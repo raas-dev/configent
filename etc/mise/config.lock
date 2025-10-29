@@ -283,10 +283,6 @@ backend = "pipx:pdm"
 version = "2.2.1"
 backend = "pipx:poetry"
 
-[[tools."pipx:pre-commit"]]
-version = "4.3.0"
-backend = "pipx:pre-commit"
-
 [[tools."pipx:sncli"]]
 version = "0.4.4"
 backend = "pipx:sncli"
@@ -294,6 +290,15 @@ backend = "pipx:sncli"
 [[tools."pipx:tldr"]]
 version = "3.4.3"
 backend = "pipx:tldr"
+
+[[tools.pre-commit]]
+version = "4.3.0"
+backend = "aqua:pre-commit/pre-commit"
+
+[tools.pre-commit.platforms.macos-arm64]
+checksum = "sha256:f1d50b97e9ca9167aceb76c14e90b07cde8b6789bc199d5005cfd817a718878c"
+size = 8268268
+url = "https://github.com/pre-commit/pre-commit/releases/download/v4.3.0/pre-commit-4.3.0.pyz"
 
 [[tools.python]]
 version = "3.13.9"
