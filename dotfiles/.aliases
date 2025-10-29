@@ -114,6 +114,7 @@ if command -v lsd >/dev/null; then
   alias lu='ls -Al --sizesort && echo Ordered by size, biggest first'
   alias lt='ls -Al --timesort && echo Ordered by change time, most recent first'
   alias lut='ls -Al --sizesort --total-size --tree --depth 2'
+  alias tree='ls --tree'
 else
   alias ls='ls --color -h'
   alias la='ls -Al'
