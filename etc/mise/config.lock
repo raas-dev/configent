@@ -255,10 +255,6 @@ backend = "npm:@anthropic-ai/claude-code"
 version = "0.11.0"
 backend = "npm:@google/gemini-cli"
 
-[[tools."npm:opencode-ai"]]
-version = "0.15.26"
-backend = "npm:opencode-ai"
-
 [[tools.numbat]]
 version = "1.16.0"
 backend = "aqua:sharkdp/numbat"
@@ -361,6 +357,13 @@ backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
 checksum = "blake3:cd0b6546d63c8d9766cc01ddab5513de6ebcaced8d9e8e1f101a0e5f61d52f00"
+
+[[tools."ubi:sst/opencode"]]
+version = "0.15.28"
+backend = "ubi:sst/opencode"
+
+[tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
+checksum = "blake3:4e5ec071465e421cf34c1f4bb6372394e00dcc308b72269d8c44210d23c01d97"
 
 [[tools.uv]]
 version = "0.9.5"

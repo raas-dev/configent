@@ -1,6 +1,5 @@
 [tools]
-# cli tools
-#aichat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
+# terminal
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 carapace = 'latest'
@@ -21,7 +20,6 @@ ripgrep = 'latest'
 sd = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 #upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 viddy = 'latest'
@@ -30,7 +28,12 @@ xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
 
-# shell development
+# ai
+#aichat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
+'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
+'ubi:sst/opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+
+# scripting
 argc = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
@@ -93,7 +96,6 @@ node = { version = '22.21.1', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
-'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
 # python
 python = { version = '3.13.9', postinstall = "~/.local/configent/bin/postinstall_python" }
