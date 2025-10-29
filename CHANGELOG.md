@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.4](https://github.com/raas-dev/configent/compare/1.173.3...1.173.4) (2025-10-29)
+
+
+### Fixes
+
+* **config:** add bat tool entry with updated macOS arm64 checksum ([5f9270c](https://github.com/raas-dev/configent/commit/5f9270c60686a2bcdaba811ba66812857ce7d139))
+
 ### [1.173.3](https://github.com/raas-dev/configent/compare/1.173.2...1.173.3) (2025-10-29)
 
 
