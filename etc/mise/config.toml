@@ -53,6 +53,7 @@ awscli = 'latest'
 # terraform
 #terraform = '1.10.3'
 #terraform-docs = 'latest'
+#terrascan = 'latest
 #tflint = 'latest'
 #tf-summarize = 'latest'
 
