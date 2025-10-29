@@ -471,7 +471,6 @@
   "typescript.preferGoToSourceDefinition": true,
   "typescript.suggest.paths": false,
   "typescript.surveys.enabled": false,
-  "update.mode": "none",
   "update.showReleaseNotes": false,
   "vscode-toggle-terminal.priority": 25000,
   "vsintellicode.python.completionsEnabled": false,
