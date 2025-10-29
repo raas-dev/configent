@@ -7,6 +7,15 @@ checksum = "sha256:c4cc7d34f497eb15f51f8f6e1d25571e18b4909ceceb40933f4a26a8e7293
 size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
+[[tools.argc]]
+version = "1.23.0"
+backend = "github:sigoden/argc"
+
+[tools.argc.platforms.macos-arm64]
+checksum = "blake3:afb3c4663a3be3be7806b9c8f7b60b2946329f6e55305d82e5142ba015041834"
+size = 485437
+url = "https://github.com/sigoden/argc/releases/download/v1.23.0/argc-v1.23.0-aarch64-apple-darwin.tar.gz"
+
 [[tools.atuin]]
 version = "18.10.0"
 backend = "aqua:atuinsh/atuin"
@@ -345,13 +354,6 @@ backend = "ubi:block/goose"
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
 checksum = "blake3:cd0b6546d63c8d9766cc01ddab5513de6ebcaced8d9e8e1f101a0e5f61d52f00"
 
-[[tools."ubi:sigoden/argc"]]
-version = "1.23.0"
-backend = "ubi:sigoden/argc"
-
-[tools."ubi:sigoden/argc".platforms.macos-arm64-argc]
-checksum = "blake3:d7df98f4503e65138604061145bdcf1c2866955b0887cdad3bcf26f025a0c0de"
-
 [[tools.uv]]
 version = "0.9.5"
 backend = "aqua:astral-sh/uv"
@@ -372,6 +374,15 @@ backend = "aqua:watchexec/watchexec"
 [[tools.xh]]
 version = "0.25.0"
 backend = "aqua:ducaale/xh"
+
+[[tools.yq]]
+version = "4.48.1"
+backend = "aqua:mikefarah/yq"
+
+[tools.yq.platforms.macos-arm64]
+checksum = "blake3:6e0fcb5770ee814265c2d0be03f4328eb443e1b9f07b9ee7be273cd7e59b7fc5"
+size = 10980802
+url = "https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_darwin_arm64"
 
 [[tools.zoxide]]
 version = "0.9.8"
