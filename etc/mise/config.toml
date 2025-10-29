@@ -109,9 +109,11 @@ uv = 'latest'
 'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 'pipx:tldr' = 'latest'
 
-# other languages
+# dotnet
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
+
+# other languages
 #ruby = '3.4.7'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
