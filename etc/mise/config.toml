@@ -64,7 +64,7 @@ awscli = 'latest'
 #k9s = 'latest'
 
 # rust
-rust = '1.86.0'
+rust = '1.90.0'
 cargo-binstall = 'latest'
 'cargo:diskonaut' = 'latest'
 'cargo:gping' = 'latest'
@@ -82,21 +82,21 @@ cargo-binstall = 'latest'
 'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 
 # go
-go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go" }
+go = { version = '1.25.3', postinstall = "~/.local/configent/bin/postinstall_go" }
 'go:github.com/go-enry/enry' = 'latest'
 'go:golang.org/x/tools/gopls' = 'latest'
 'go:github.com/abhimanyu003/sttr' = 'latest'
 'go:github.com/shihanng/tfvar' = 'latest'
 
 # node.js
-node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
+node = { version = '22.21.1', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
 # python
-python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
+python = { version = '3.13.9', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
