@@ -38,6 +38,7 @@ argc = 'latest'
 pre-commit = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
+tlrc = 'latest'
 
 # github
 act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
@@ -109,7 +110,6 @@ uv = 'latest'
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
-'pipx:tldr' = 'latest'
 
 # dotnet
 dotnet = { version = '8.0.404' }
