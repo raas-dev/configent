@@ -114,7 +114,7 @@ uv = 'latest'
 # other languages
 dotnet = { version = '8.0.404' }
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
-#ruby = '3.4.2'
+#ruby = '3.4.7'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
