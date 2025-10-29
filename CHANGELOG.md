@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.8](https://github.com/raas-dev/configent/compare/1.173.7...1.173.8) (2025-10-29)
+
+
+### Fixes
+
+* **config:** remove postinstall_go script and update config ([aad6477](https://github.com/raas-dev/configent/commit/aad647704ed46a5970335bcd835aea8e6f8312ad))
+
 ### [1.173.7](https://github.com/raas-dev/configent/compare/1.173.6...1.173.7) (2025-10-29)
 
 
