@@ -7,6 +7,17 @@ checksum = "sha256:c4cc7d34f497eb15f51f8f6e1d25571e18b4909ceceb40933f4a26a8e7293
 size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
+[[tools.argc]]
+version = "1.23.0"
+backend = "github:sigoden/argc"
+
+[tools.argc.platforms.macos-arm64]
+checksum = "blake3:afb3c4663a3be3be7806b9c8f7b60b2946329f6e55305d82e5142ba015041834"
+name = "argc-v1.23.0-aarch64-apple-darwin.tar.gz"
+size = 485437
+url = "https://github.com/sigoden/argc/releases/download/v1.23.0/argc-v1.23.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/sigoden/argc/releases/assets/271169075"
+
 [[tools.atuin]]
 version = "18.10.0"
 backend = "aqua:atuinsh/atuin"

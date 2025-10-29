@@ -20,19 +20,18 @@ oxker = 'latest'
 ripgrep = 'latest'
 sd = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
-viddy = 'latest'
-watchexec = 'latest'
-zoxide = 'latest'
-xh = 'latest'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-yq = 'latest'
 #upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
-
 'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
+viddy = 'latest'
+watchexec = 'latest'
+xh = 'latest'
+yq = 'latest'
+zoxide = 'latest'
 
 # shell development
-# argc = 'latest'
+argc = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
 
@@ -41,10 +40,10 @@ act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_ac
 github-cli = 'latest'
 
 # docker
-lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 cosign = 'latest'
 slsa-verifier = 'latest'
 #dive = 'latest'
+lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 trivy = 'latest'
 
 # cloud
@@ -62,8 +61,8 @@ awscli = 'latest'
 # kubernetes
 #kubectl = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
-#helm = 'latest'
 #k9s = 'latest'
+#helm = 'latest'
 
 # rust
 rust = '1.90.0'
