@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.173.0](https://github.com/raas-dev/configent/compare/1.172.3...1.173.0) (2025-10-29)
+
+
+### Features
+
+* **mise:** Migrate most of CLI tools out from cargo ([fdb8d08](https://github.com/raas-dev/configent/commit/fdb8d08530876d42eb8e8167eb55dfdbf47c9823))
+* **mise:** Migrate most of CLI tools out from go ([61421a6](https://github.com/raas-dev/configent/commit/61421a667cb3d96d5cb22b2089e67f07645f3512))
+
+
+### Fixes
+
+* **mise:** remove installation of gcloud by default ([c26fcd8](https://github.com/raas-dev/configent/commit/c26fcd89bf36ab286462f0233f0e35b32d36d578))
+
 ### [1.172.3](https://github.com/raas-dev/configent/compare/1.172.2...1.172.3) (2025-10-29)
 
 
