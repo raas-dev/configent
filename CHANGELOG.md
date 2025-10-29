@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.2](https://github.com/raas-dev/configent/compare/1.173.1...1.173.2) (2025-10-29)
+
+
+### Fixes
+
+* **mise:** Upgrade language versions ([c771e69](https://github.com/raas-dev/configent/commit/c771e69f89fccbd7c79b88cc0c2d582470e291ce))
+
 ### [1.173.1](https://github.com/raas-dev/configent/compare/1.173.0...1.173.1) (2025-10-29)
 
 
