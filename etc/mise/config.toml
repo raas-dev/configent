@@ -3,7 +3,6 @@ rust = '1.86.0'
 cargo-binstall = 'latest'
 # cli tools
 #'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
-'cargo:atuin' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'cargo:diskonaut' = 'latest'
 'cargo:fd-find' = 'latest'
@@ -69,6 +68,7 @@ dotnet = { version = '8.0.404' }
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
+atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 fzf = 'latest'
 jq = 'latest'
 github-cli = 'latest'

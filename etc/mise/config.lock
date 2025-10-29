@@ -7,6 +7,15 @@ checksum = "sha256:c4cc7d34f497eb15f51f8f6e1d25571e18b4909ceceb40933f4a26a8e7293
 size = 7523767
 url = "https://github.com/nektos/act/releases/download/v0.2.82/act_Darwin_arm64.tar.gz"
 
+[[tools.atuin]]
+version = "18.10.0"
+backend = "aqua:atuinsh/atuin"
+
+[tools.atuin.platforms.macos-arm64]
+checksum = "sha256:9ac9618cf57bcfe561d53d0539ffee9b8185286b11f3b330df26fe35d06411f1"
+size = 12523696
+url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
+
 [[tools.awscli]]
 version = "2.31.24"
 backend = "aqua:aws/aws-cli"
@@ -32,10 +41,6 @@ backend = "aqua:cargo-bins/cargo-binstall"
 checksum = "blake3:f60b674981c8dbff6ca36ed3c0f38e9ffb89ade048dc4249226c916f886db810"
 size = 6016612
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.9/cargo-binstall-aarch64-apple-darwin.zip"
-
-[[tools."cargo:atuin"]]
-version = "18.6.0"
-backend = "cargo:atuin"
 
 [[tools."cargo:bat"]]
 version = "0.26.0"
