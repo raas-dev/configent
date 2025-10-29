@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.10](https://github.com/raas-dev/configent/compare/1.173.9...1.173.10) (2025-10-29)
+
+
+### Fixes
+
+* **config:** add dotnet entries and reorganize language sections in config.toml ([967555d](https://github.com/raas-dev/configent/commit/967555d4ec15be91cf841443fcf1f10cc3a5d2f9))
+* **config:** comment out incomplete terrascan entry in config.toml ([e8f7704](https://github.com/raas-dev/configent/commit/e8f77042bba7679038c0d5a6352d6bce1f1f079f))
+* **config:** migrate opencode-ai to ubi sst namespace with updated version ([b28be5f](https://github.com/raas-dev/configent/commit/b28be5f6b22207410efb919bd07a8f2e5c74db4e))
+* **config:** remove cosign and slsa-verifier tools from mise configuration ([460a680](https://github.com/raas-dev/configent/commit/460a6805d9ad63cc9d6513dc4a256ea45e54575e))
+* **config:** uncomment goose entry and reorder adjacent lines in config.toml ([3800ce4](https://github.com/raas-dev/configent/commit/3800ce428e2a1991bebbbbabc26d2872403a7656))
+* **mise:** migrate pre-commit tool configuration to native aqua backend ([898aafc](https://github.com/raas-dev/configent/commit/898aafc747e3342751ad80115a4d0190ce32121f))
+* **mise:** replace pipx:tldr with aqua tlrc tool configuration ([83c3585](https://github.com/raas-dev/configent/commit/83c3585a89498a375f82934c9ff6e8a92a2c2061))
+
 ### [1.173.9](https://github.com/raas-dev/configent/compare/1.173.8...1.173.9) (2025-10-29)
 
 
