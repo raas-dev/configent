@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.9](https://github.com/raas-dev/configent/compare/1.173.8...1.173.9) (2025-10-29)
+
+
+### Fixes
+
+* **aliases:** add tree alias to use ls tree display ([2ba517d](https://github.com/raas-dev/configent/commit/2ba517dc43fbd168d0c14c17f5f04924eda0924a))
+* **config:** add argc macos-arm64 platform and reorder tools in config files ([b5b598b](https://github.com/raas-dev/configent/commit/b5b598bcaa64fd4f04f7699ee6671bcf793a113c))
+* **config:** update neovim version and add macos-arm64 platform entry ([322bd19](https://github.com/raas-dev/configent/commit/322bd19c75a179c03959e02e019a290ddbbc370c))
+* **vscode/settings:** remove deprecated update mode setting ([4ee6ac8](https://github.com/raas-dev/configent/commit/4ee6ac85de3ba770aca692499c99431fd9605b7d))
+
 ### [1.173.8](https://github.com/raas-dev/configent/compare/1.173.7...1.173.8) (2025-10-29)
 
 
