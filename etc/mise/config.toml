@@ -112,7 +112,7 @@ uv = 'latest'
 'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 
 # dotnet
-dotnet = { version = '8.0.404' }
+dotnet = '8.0.404'
 'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 # other languages
