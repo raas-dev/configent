@@ -1,5 +1,9 @@
 # claude-code plugins
 
+Library of commands, subagents and Claude skills.
+
+Commands and agents were sorted into subdirectories using Claude Haiku 4.5.
+
 Original sources listed below.
 
 ## agents
