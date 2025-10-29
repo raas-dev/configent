@@ -124,6 +124,15 @@ backend = "asdf:dotnet"
 version = "7.4.6"
 backend = "dotnet:powershell"
 
+[[tools.duf]]
+version = "0.9.1"
+backend = "aqua:muesli/duf"
+
+[tools.duf.platforms.macos-arm64]
+checksum = "sha256:512ba0ff3585bb8c65841de557a4c4b8712332db005dc952fa98d373a05d01df"
+size = 1212705
+url = "https://github.com/muesli/duf/releases/download/v0.9.1/duf_0.9.1_darwin_arm64.tar.gz"
+
 [[tools.fd]]
 version = "10.3.0"
 backend = "aqua:sharkdp/fd"
@@ -136,10 +145,6 @@ backend = "aqua:junegunn/fzf"
 checksum = "sha256:0f44db428cb65a0b646e99a506422a59f4b2fc3d3973b35387f78bba48c79c16"
 size = 1747511
 url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-darwin_arm64.tar.gz"
-
-[[tools.gcloud]]
-version = "510.0.0"
-backend = "asdf:gcloud"
 
 [[tools.github-cli]]
 version = "2.82.1"
@@ -154,6 +159,15 @@ url = "https://github.com/cli/cli/releases/download/v2.82.1/gh_2.82.1_macOS_arm6
 version = "0.27.0"
 backend = "aqua:extrawurst/gitui"
 
+[[tools.glow]]
+version = "2.1.1"
+backend = "aqua:charmbracelet/glow"
+
+[tools.glow.platforms.macos-arm64]
+checksum = "sha256:234a20a7d0cebc775cdc77ecd62d28da9479364a122b52d8bac9adf1312b860d"
+size = 6029837
+url = "https://github.com/charmbracelet/glow/releases/download/v2.1.1/glow_2.1.1_Darwin_arm64.tar.gz"
+
 [[tools.go]]
 version = "1.23.4"
 backend = "core:go"
@@ -162,17 +176,9 @@ backend = "core:go"
 version = "0.2.28"
 backend = "go:github.com/abhimanyu003/sttr"
 
-[[tools."go:github.com/charmbracelet/glow"]]
-version = "1.5.1"
-backend = "go:github.com/charmbracelet/glow"
-
 [[tools."go:github.com/go-enry/enry"]]
 version = "1.3.0"
 backend = "go:github.com/go-enry/enry"
-
-[[tools."go:github.com/muesli/duf"]]
-version = "0.9.1"
-backend = "go:github.com/muesli/duf"
 
 [[tools."go:github.com/shihanng/tfvar"]]
 version = "0.10.0"
@@ -181,10 +187,6 @@ backend = "go:github.com/shihanng/tfvar"
 [[tools."go:golang.org/x/tools/gopls"]]
 version = "0.20.0"
 backend = "go:golang.org/x/tools/gopls"
-
-[[tools."go:mvdan.cc/sh/v3/cmd/shfmt"]]
-version = "3.12.0"
-backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 
 [[tools.hurl]]
 version = "7.0.0"
@@ -300,6 +302,15 @@ backend = "aqua:koalaman/shellcheck"
 checksum = "blake3:ad4957ed937da4e876d19e3500fc31d104e43b6e4e11d57a7b7c40140bc870d6"
 size = 7245972
 url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.darwin.aarch64.tar.xz"
+
+[[tools.shfmt]]
+version = "3.12.0"
+backend = "aqua:mvdan/sh"
+
+[tools.shfmt.platforms.macos-arm64]
+checksum = "sha256:d903802e0ce3ecbc82b98512f55ba370b0d37a93f3f78de394f5b657052b33dd"
+size = 2891858
+url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_darwin_arm64"
 
 [[tools.slsa-verifier]]
 version = "2.7.1"

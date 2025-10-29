@@ -3,10 +3,12 @@
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 delta = 'latest'
+duf = 'latest'
 fd = 'latest'
 fzf = 'latest'
 github-cli = 'latest'
 gitui = 'latest'
+glow = 'latest'
 hurl = 'latest'
 jnv = 'latest'
 jq = 'latest'
@@ -34,6 +36,7 @@ lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup
 slsa-verifier = "latest"
 cosign = "latest"
 shellcheck = 'latest'
+shfmt = 'latest'
 trivy = 'latest'
 awscli = 'latest'
 #aws-copilot = 'latest'
@@ -70,11 +73,8 @@ cargo-binstall = 'latest'
 
 # go
 go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go" }
-'go:github.com/muesli/duf' = 'latest'
 'go:github.com/go-enry/enry' = 'latest'
-'go:github.com/charmbracelet/glow' = 'latest'
 'go:golang.org/x/tools/gopls' = 'latest'
-'go:mvdan.cc/sh/v3/cmd/shfmt' = 'latest'
 'go:github.com/abhimanyu003/sttr' = 'latest'
 'go:github.com/shihanng/tfvar' = 'latest'
 
