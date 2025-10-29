@@ -7,7 +7,6 @@ delta = 'latest'
 duf = 'latest'
 fd = 'latest'
 fzf = 'latest'
-github-cli = 'latest'
 gitui = 'latest'
 glow = 'latest'
 hurl = 'latest'
@@ -25,29 +24,40 @@ watchexec = 'latest'
 zoxide = 'latest'
 xh = 'latest'
 tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 yq = 'latest'
 #upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
+'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
-# cloud development
-act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
-lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
-argc = 'latest'
-slsa-verifier = 'latest'
-cosign = 'latest'
+# shell development
+# argc = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
-trivy = 'latest'
-awscli = 'latest'
+
+# github
+act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
+github-cli = 'latest'
+
+# docker
+lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+cosign = 'latest'
+slsa-verifier = 'latest'
 #dive = 'latest'
+trivy = 'latest'
+
+# cloud
+awscli = 'latest'
 #aws-copilot = 'latest'
 #cloudflared = 'latest'
 #gcloud = '510.0.0'
+
+# terraform
 #terraform = '1.10.3'
 #terraform-docs = 'latest'
 #tflint = 'latest'
 #tf-summarize = 'latest'
+
+# kubernetes
 #kubectl = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
 #helm = 'latest'
