@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.1](https://github.com/raas-dev/configent/compare/1.173.0...1.173.1) (2025-10-29)
+
+
+### Fixes
+
+* **config:** update argc and yq tool entries and cleanup config ([305ae6d](https://github.com/raas-dev/configent/commit/305ae6dd951ddffcf3d75470dec93c7d4fa25bae))
+* **mise:** remove argc from config lock and reorder config entries ([c670d23](https://github.com/raas-dev/configent/commit/c670d23c43146cf9071c656816c9d6d083594d26))
+
 ## [1.173.0](https://github.com/raas-dev/configent/compare/1.172.3...1.173.0) (2025-10-29)
 
 
