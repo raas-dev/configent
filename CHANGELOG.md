@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.3](https://github.com/raas-dev/configent/compare/1.173.2...1.173.3) (2025-10-29)
+
+
+### Fixes
+
+* **config:** update bat tool entry and path export in postinstall script ([70bb459](https://github.com/raas-dev/configent/commit/70bb459c7d22f1906bf45ed2a072abb80754dd6a))
+
 ### [1.173.2](https://github.com/raas-dev/configent/compare/1.173.1...1.173.2) (2025-10-29)
 
 
