@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.7](https://github.com/raas-dev/configent/compare/1.173.6...1.173.7) (2025-10-29)
+
+
+### Fixes
+
+* **config:** update bat tool entry and remove old macOS arm64 entry ([aba3cd7](https://github.com/raas-dev/configent/commit/aba3cd727d5dac500dd39ed980f33b24c1097a5b))
+* **postinstall:** remove unnecessary PATH export in multiple scripts ([f31ed8b](https://github.com/raas-dev/configent/commit/f31ed8b42b5f93c184b2e78cbe518f3ef192db18))
+
 ### [1.173.6](https://github.com/raas-dev/configent/compare/1.173.5...1.173.6) (2025-10-29)
 
 
