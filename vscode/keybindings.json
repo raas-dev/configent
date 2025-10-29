@@ -509,5 +509,10 @@
   {
     "command": "composerMode.plan",
     "key": "cmd+[BracketLeft]"
+  },
+  {
+    "command": "-cursor.composer.openAgentWindow",
+    "key": "cmd+e",
+    "when": "cursor.appLayoutEnabled && cursor.appLayout != 'agent'"
   }
 ]
