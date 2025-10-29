@@ -239,8 +239,13 @@ version = "1.2.0"
 backend = "aqua:lsd-rs/lsd"
 
 [[tools.neovim]]
-version = "0.11.1"
+version = "0.11.4"
 backend = "aqua:neovim/neovim"
+
+[tools.neovim.platforms.macos-arm64]
+checksum = "blake3:31e761b1a1aa3642dec4b09b2f080f99fe550ecfb82e77f7bf11382d5f0630de"
+size = 9194532
+url = "https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-macos-arm64.tar.gz"
 
 [[tools.node]]
 version = "22.21.1"
