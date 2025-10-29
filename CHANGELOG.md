@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.172.3](https://github.com/raas-dev/configent/compare/1.172.2...1.172.3) (2025-10-29)
+
+
+### Fixes
+
+* **claude-code:** Sort commands and agents into subdirectories ([776a518](https://github.com/raas-dev/configent/commit/776a5187e9f045f6d9ac72257846839a8099593b))
+* **keybindings:** remove cmd+e binding for openAgentWindow ([d0c34f0](https://github.com/raas-dev/configent/commit/d0c34f087d5fef3e5009082bcc70b7e1e1fc26d2))
+* **mcp:** specify latest version for context7-mcp dependency ([7aff65e](https://github.com/raas-dev/configent/commit/7aff65edf26cbb4f9eaaedb0aa6252753cb14575))
+
 ### [1.172.2](https://github.com/raas-dev/configent/compare/1.172.1...1.172.2) (2025-10-27)
 
 
