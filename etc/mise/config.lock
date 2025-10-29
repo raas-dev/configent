@@ -25,6 +25,15 @@ checksum = "blake3:052b164e98cbcbd180f5927496264c2c7d49034ae4608872efe930b7b000a
 size = 48134745
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.24.pkg"
 
+[[tools.bat]]
+version = "0.26.0"
+backend = "aqua:sharkdp/bat"
+
+[tools.bat.platforms.macos-arm64]
+checksum = "blake3:df2e08fcd19177c1cde620b36caf9f1562a2c48b8dd4b0373475e168108d8048"
+size = 3219053
+url = "https://github.com/sharkdp/bat/releases/download/v0.26.0/bat-v0.26.0-aarch64-apple-darwin.tar.gz"
+
 [[tools.bun]]
 version = "1.3.1"
 backend = "core:bun"
@@ -42,10 +51,6 @@ checksum = "blake3:f60b674981c8dbff6ca36ed3c0f38e9ffb89ade048dc4249226c916f886db
 size = 6016612
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.9/cargo-binstall-aarch64-apple-darwin.zip"
 
-[[tools."cargo:bat"]]
-version = "0.26.0"
-backend = "cargo:bat"
-
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
 backend = "cargo:cargo-cache"
@@ -58,37 +63,13 @@ backend = "cargo:cargo-update"
 version = "0.11.0"
 backend = "cargo:diskonaut"
 
-[[tools."cargo:fd-find"]]
-version = "10.3.0"
-backend = "cargo:fd-find"
-
-[[tools."cargo:git-delta"]]
-version = "0.18.2"
-backend = "cargo:git-delta"
-
-[[tools."cargo:gitui"]]
-version = "0.27.0"
-backend = "cargo:gitui"
-
 [[tools."cargo:gping"]]
 version = "1.20.1"
 backend = "cargo:gping"
 
-[[tools."cargo:hurl"]]
-version = "6.1.1"
-backend = "cargo:hurl"
-
-[[tools."cargo:jnv"]]
-version = "0.6.1"
-backend = "cargo:jnv"
-
 [[tools."cargo:kondo"]]
 version = "0.8.0"
 backend = "cargo:kondo"
-
-[[tools."cargo:lsd"]]
-version = "1.1.5"
-backend = "cargo:lsd"
 
 [[tools."cargo:mdcat"]]
 version = "2.7.1"
@@ -98,10 +79,6 @@ backend = "cargo:mdcat"
 version = "1.41.0"
 backend = "cargo:nixpacks"
 
-[[tools."cargo:numbat-cli"]]
-version = "1.16.0"
-backend = "cargo:numbat-cli"
-
 [[tools."cargo:opscan"]]
 version = "0.4.0"
 backend = "cargo:opscan"
@@ -109,10 +86,6 @@ backend = "cargo:opscan"
 [[tools."cargo:ouch"]]
 version = "0.6.1"
 backend = "cargo:ouch"
-
-[[tools."cargo:oxker"]]
-version = "0.10.1"
-backend = "cargo:oxker"
 
 [[tools."cargo:pastel"]]
 version = "0.11.0"
@@ -122,18 +95,6 @@ backend = "cargo:pastel"
 version = "0.14.10"
 backend = "cargo:procs"
 
-[[tools."cargo:ripgrep"]]
-version = "15.1.0"
-backend = "cargo:ripgrep"
-
-[[tools."cargo:sd"]]
-version = "1.0.0"
-backend = "cargo:sd"
-
-[[tools."cargo:starship"]]
-version = "1.23.0"
-backend = "cargo:starship"
-
 [[tools."cargo:tailspin"]]
 version = "5.5.0"
 backend = "cargo:tailspin"
@@ -141,22 +102,6 @@ backend = "cargo:tailspin"
 [[tools."cargo:topgrade"]]
 version = "16.0.4"
 backend = "cargo:topgrade"
-
-[[tools."cargo:viddy"]]
-version = "1.3.0"
-backend = "cargo:viddy"
-
-[[tools."cargo:watchexec-cli"]]
-version = "2.3.2"
-backend = "cargo:watchexec-cli"
-
-[[tools."cargo:xh"]]
-version = "0.25.0"
-backend = "cargo:xh"
-
-[[tools."cargo:zoxide"]]
-version = "0.9.8"
-backend = "cargo:zoxide"
 
 [[tools.cosign]]
 version = "3.0.2"
@@ -167,6 +112,10 @@ checksum = "sha256:3823b044de184da21e300bc5e20dd29d3fa9243af3ba70c4a5da1712f3385
 size = 155624370
 url = "https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-darwin-arm64"
 
+[[tools.delta]]
+version = "0.18.2"
+backend = "aqua:dandavison/delta"
+
 [[tools.dotnet]]
 version = "8.0.404"
 backend = "asdf:dotnet"
@@ -174,6 +123,10 @@ backend = "asdf:dotnet"
 [[tools."dotnet:powershell"]]
 version = "7.4.6"
 backend = "dotnet:powershell"
+
+[[tools.fd]]
+version = "10.3.0"
+backend = "aqua:sharkdp/fd"
 
 [[tools.fzf]]
 version = "0.66.1"
@@ -196,6 +149,10 @@ backend = "aqua:cli/cli"
 checksum = "sha256:8cf015d101a5a43bbf662155d47ba6242bd1a1630c814e764254efa86e448ba7"
 size = 17577889
 url = "https://github.com/cli/cli/releases/download/v2.82.1/gh_2.82.1_macOS_arm64.zip"
+
+[[tools.gitui]]
+version = "0.27.0"
+backend = "aqua:extrawurst/gitui"
 
 [[tools.go]]
 version = "1.23.4"
@@ -229,6 +186,14 @@ backend = "go:golang.org/x/tools/gopls"
 version = "3.12.0"
 backend = "go:mvdan.cc/sh/v3/cmd/shfmt"
 
+[[tools.hurl]]
+version = "7.0.0"
+backend = "aqua:Orange-OpenSource/hurl"
+
+[[tools.jnv]]
+version = "0.6.1"
+backend = "aqua:ynqa/jnv"
+
 [[tools.jq]]
 version = "1.8.1"
 backend = "aqua:jqlang/jq"
@@ -241,6 +206,10 @@ backend = "aqua:lima-vm/lima"
 checksum = "sha256:4c6e20510b456a4e380500096ecce72c18d0ce98548064dc8089797de2290fdc"
 size = 23204467
 url = "https://github.com/lima-vm/lima/releases/download/v1.2.1/lima-1.2.1-Darwin-arm64.tar.gz"
+
+[[tools.lsd]]
+version = "1.2.0"
+backend = "aqua:lsd-rs/lsd"
 
 [[tools.neovim]]
 version = "0.11.1"
@@ -266,6 +235,14 @@ backend = "npm:@google/gemini-cli"
 [[tools."npm:opencode-ai"]]
 version = "0.15.23"
 backend = "npm:opencode-ai"
+
+[[tools.numbat]]
+version = "1.16.0"
+backend = "aqua:sharkdp/numbat"
+
+[[tools.oxker]]
+version = "0.12.0"
+backend = "aqua:mrjackwills/oxker"
 
 [[tools."pipx:azure-cli"]]
 version = "2.68.0"
@@ -303,9 +280,17 @@ backend = "pipx:tldr"
 version = "3.13.2"
 backend = "core:python"
 
+[[tools.ripgrep]]
+version = "15.1.0"
+backend = "aqua:BurntSushi/ripgrep"
+
 [[tools.rust]]
 version = "1.86.0"
 backend = "core:rust"
+
+[[tools.sd]]
+version = "1.0.0"
+backend = "aqua:chmln/sd"
 
 [[tools.shellcheck]]
 version = "0.11.0"
@@ -319,6 +304,10 @@ url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellche
 [[tools.slsa-verifier]]
 version = "2.7.1"
 backend = "ubi:slsa-framework/slsa-verifier"
+
+[[tools.starship]]
+version = "1.23.0"
+backend = "aqua:starship/starship"
 
 [[tools.tmux]]
 version = "3.5a"
@@ -355,3 +344,19 @@ backend = "aqua:astral-sh/uv"
 checksum = "sha256:dc098ff224d78ed418e121fd374f655949d2c7031a70f6f6604eaf016a130433"
 size = 18341942
 url = "https://github.com/astral-sh/uv/releases/download/0.9.5/uv-aarch64-apple-darwin.tar.gz"
+
+[[tools.viddy]]
+version = "1.3.0"
+backend = "aqua:sachaos/viddy"
+
+[[tools.watchexec]]
+version = "2.3.2"
+backend = "aqua:watchexec/watchexec"
+
+[[tools.xh]]
+version = "0.25.0"
+backend = "aqua:ducaale/xh"
+
+[[tools.zoxide]]
+version = "0.9.8"
+backend = "aqua:ajeetdsouza/zoxide"

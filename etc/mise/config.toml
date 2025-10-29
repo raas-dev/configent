@@ -1,77 +1,38 @@
 [tools]
-rust = '1.86.0'
-cargo-binstall = 'latest'
 # cli tools
-#'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
-'cargo:bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
-'cargo:diskonaut' = 'latest'
-'cargo:fd-find' = 'latest'
-'cargo:git-delta' = 'latest'
-'cargo:gitui' = 'latest'
-'cargo:gping' = 'latest'
-'cargo:hurl' = '6.1.1'
-'cargo:jnv' = 'latest'
-'cargo:kondo' = 'latest'
-'cargo:lsd' = 'latest'
-'cargo:mdcat' = 'latest'
-'cargo:nixpacks' = 'latest'
-'cargo:numbat-cli' = 'latest'
-'cargo:opscan' = 'latest'
-'cargo:ouch' = 'latest'
-'cargo:oxker' = '0.10.1'
-'cargo:pastel' = 'latest'
-'cargo:procs' = 'latest'
-'cargo:ripgrep' = 'latest'
-'cargo:sd' = 'latest'
-'cargo:starship' = { version = '1.23.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
-'cargo:tailspin' = 'latest'
-'cargo:viddy' = 'latest'
-'cargo:watchexec-cli' = 'latest'
-'cargo:xh' = 'latest'
-'cargo:zoxide' = 'latest'
-# topgrade
-'cargo:cargo-cache' = 'latest'
-'cargo:cargo-update' = 'latest'
-'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
-
-go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go" }
-'go:github.com/muesli/duf' = 'latest'
-'go:github.com/go-enry/enry' = 'latest'
-'go:github.com/charmbracelet/glow' = 'latest'
-'go:golang.org/x/tools/gopls' = 'latest'
-'go:mvdan.cc/sh/v3/cmd/shfmt' = 'latest'
-'go:github.com/abhimanyu003/sttr' = 'latest'
-'go:github.com/shihanng/tfvar' = 'latest'
-
-node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
-bun = 'latest'
-'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
-'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
-'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-
-python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
-uv = 'latest'
-'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
-'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
-#'pipx:cfn-lint' = 'latest'
-'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
-#'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
-'pipx:pdm' = 'latest'
-'pipx:poetry' = 'latest'
-'pipx:pre-commit' = 'latest'
-'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
-'pipx:tldr' = 'latest'
-
-dotnet = { version = '8.0.404' }
-'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
-#ruby = '3.4.2'
-#java = 'temurin-21'
-#ghcup = { version = 'latest', postinstall = "ghcup install stack" }
-
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
+bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
+delta = 'latest'
+fd = 'latest'
 fzf = 'latest'
-jq = 'latest'
 github-cli = 'latest'
+gitui = 'latest'
+hurl = 'latest'
+jnv = 'latest'
+jq = 'latest'
+lsd = 'latest'
+neovim = '0.11.1'
+numbat = 'latest'
+oxker = 'latest'
+ripgrep = 'latest'
+sd = 'latest'
+starship = { version = '1.23.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
+viddy = 'latest'
+watchexec = 'latest'
+zoxide = 'latest'
+xh = 'latest'
+tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
+'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
+'ubi:sigoden/argc' = 'latest'
+#'ubi:mikefarah/yq' = 'latest'
+#'ubi:sigoden/upt' = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
+#'vfox:mise-plugins/vfox-clang' = '18.1.8'
+
+# cloud development
+act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
+lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+slsa-verifier = "latest"
+cosign = "latest"
 shellcheck = 'latest'
 trivy = 'latest'
 awscli = 'latest'
@@ -86,18 +47,64 @@ gcloud = '510.0.0'
 #helm = 'latest'
 #k9s = 'latest'
 #cloudflared = 'latest'
-act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
-neovim = '0.11.1'
-tmux = { version = '3.5a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
-slsa-verifier = "latest"
-cosign = "latest"
-'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
-'ubi:sigoden/argc' = 'latest'
-#'ubi:mikefarah/yq' = 'latest'
-#'ubi:sigoden/upt' = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 #'ubi:wagoodman/dive' = "latest"
-#'vfox:mise-plugins/vfox-clang' = '18.1.8'
+
+# rust
+rust = '1.86.0'
+cargo-binstall = 'latest'
+#'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
+'cargo:diskonaut' = 'latest'
+'cargo:gping' = 'latest'
+'cargo:kondo' = 'latest'
+'cargo:mdcat' = 'latest'
+'cargo:nixpacks' = 'latest'
+'cargo:opscan' = 'latest'
+'cargo:ouch' = 'latest'
+'cargo:pastel' = 'latest'
+'cargo:procs' = 'latest'
+'cargo:tailspin' = 'latest'
+# topgrade
+'cargo:cargo-cache' = 'latest'
+'cargo:cargo-update' = 'latest'
+'cargo:topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
+
+# go
+go = { version = '1.23.4', postinstall = "~/.local/configent/bin/postinstall_go" }
+'go:github.com/muesli/duf' = 'latest'
+'go:github.com/go-enry/enry' = 'latest'
+'go:github.com/charmbracelet/glow' = 'latest'
+'go:golang.org/x/tools/gopls' = 'latest'
+'go:mvdan.cc/sh/v3/cmd/shfmt' = 'latest'
+'go:github.com/abhimanyu003/sttr' = 'latest'
+'go:github.com/shihanng/tfvar' = 'latest'
+
+# node.js
+node = { version = '22.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
+bun = 'latest'
+'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
+'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+
+# python
+python = { version = '3.13.2', postinstall = "~/.local/configent/bin/postinstall_python" }
+uv = 'latest'
+'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
+'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
+#'pipx:cfn-lint' = 'latest'
+'pipx:glances' = { version = "latest", extras = "containers,gpu,web,wifi" }
+#'pipx:gptme' = { version = 'latest', uvx_args = '--python 3.11 --with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
+'pipx:pdm' = 'latest'
+'pipx:poetry' = 'latest'
+'pipx:pre-commit' = 'latest'
+'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
+'pipx:tldr' = 'latest'
+
+# other languages
+dotnet = { version = '8.0.404' }
+'dotnet:powershell' = { version = '7.4.6', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
+#ruby = '3.4.2'
+#java = 'temurin-21'
+#ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
 [settings]
 experimental = true
