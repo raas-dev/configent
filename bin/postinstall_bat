@@ -29,5 +29,4 @@ ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/bat/themes/SynthWave84.tmTheme"
 
 # install theme
-export PATH="$PATH:$HOME/.local/share/mise/shims"
 bat cache --build
