@@ -25,15 +25,6 @@ checksum = "blake3:052b164e98cbcbd180f5927496264c2c7d49034ae4608872efe930b7b000a
 size = 48134745
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.24.pkg"
 
-[[tools.bat]]
-version = "0.26.0"
-backend = "aqua:sharkdp/bat"
-
-[tools.bat.platforms.macos-arm64]
-checksum = "blake3:df2e08fcd19177c1cde620b36caf9f1562a2c48b8dd4b0373475e168108d8048"
-size = 3219053
-url = "https://github.com/sharkdp/bat/releases/download/v0.26.0/bat-v0.26.0-aarch64-apple-darwin.tar.gz"
-
 [[tools.bun]]
 version = "1.3.1"
 backend = "core:bun"
@@ -50,6 +41,10 @@ backend = "aqua:cargo-bins/cargo-binstall"
 checksum = "blake3:f60b674981c8dbff6ca36ed3c0f38e9ffb89ade048dc4249226c916f886db810"
 size = 6016612
 url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.15.9/cargo-binstall-aarch64-apple-darwin.zip"
+
+[[tools."cargo:bat"]]
+version = "0.26.0"
+backend = "cargo:bat"
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
