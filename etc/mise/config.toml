@@ -1,5 +1,6 @@
 [tools]
 # cli tools
+#aichat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 delta = 'latest'
@@ -55,7 +56,6 @@ awscli = 'latest'
 # rust
 rust = '1.86.0'
 cargo-binstall = 'latest'
-#'cargo:aichat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
 'cargo:diskonaut' = 'latest'
 'cargo:gping' = 'latest'
 'cargo:kondo' = 'latest'
