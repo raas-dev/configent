@@ -79,49 +79,13 @@ backend = "cargo:cargo-cache"
 version = "18.0.0"
 backend = "cargo:cargo-update"
 
-[[tools."cargo:diskonaut"]]
-version = "0.11.0"
-backend = "cargo:diskonaut"
-
-[[tools."cargo:gping"]]
-version = "1.20.1"
-backend = "cargo:gping"
-
-[[tools."cargo:kondo"]]
-version = "0.8.0"
-backend = "cargo:kondo"
-
 [[tools."cargo:mdcat"]]
 version = "2.7.1"
 backend = "cargo:mdcat"
 
-[[tools."cargo:nixpacks"]]
-version = "1.41.0"
-backend = "cargo:nixpacks"
-
-[[tools."cargo:opscan"]]
-version = "0.4.0"
-backend = "cargo:opscan"
-
-[[tools."cargo:ouch"]]
-version = "0.6.1"
-backend = "cargo:ouch"
-
-[[tools."cargo:pastel"]]
-version = "0.11.0"
-backend = "cargo:pastel"
-
-[[tools."cargo:procs"]]
-version = "0.14.10"
-backend = "cargo:procs"
-
 [[tools."cargo:tailspin"]]
 version = "5.5.0"
 backend = "cargo:tailspin"
-
-[[tools."cargo:topgrade"]]
-version = "16.0.4"
-backend = "cargo:topgrade"
 
 [[tools.delta]]
 version = "0.18.2"
@@ -187,10 +151,6 @@ backend = "core:go"
 checksum = "sha256:7c083e3d2c00debfeb2f77d9a4c00a1aac97113b89b9ccc42a90487af3437382"
 size = 58028114
 url = "https://dl.google.com/go/go1.25.3.darwin-arm64.tar.gz"
-
-[[tools."go:github.com/abhimanyu003/sttr"]]
-version = "0.2.28"
-backend = "go:github.com/abhimanyu003/sttr"
 
 [[tools."go:github.com/go-enry/enry"]]
 version = "1.3.0"
@@ -287,6 +247,10 @@ backend = "pipx:poetry"
 version = "0.4.4"
 backend = "pipx:sncli"
 
+[[tools."pipx:tldr"]]
+version = "3.4.3"
+backend = "pipx:tldr"
+
 [[tools.pre-commit]]
 version = "4.3.0"
 backend = "aqua:pre-commit/pre-commit"
@@ -339,15 +303,6 @@ checksum = "sha256:236baba98a5f56787dee29c9472865a9ccef83fe2b6bfdce588249d427c72
 size = 3911401
 url = "https://github.com/starship/starship/releases/download/v1.24.0/starship-aarch64-apple-darwin.tar.gz"
 
-[[tools.tlrc]]
-version = "1.12.0"
-backend = "aqua:tldr-pages/tlrc"
-
-[tools.tlrc.platforms.macos-arm64]
-checksum = "blake3:200069666dca3f9e2ee39af5181f626d8e6ed470a883a2ed4d970cc7ceb29d6f"
-size = 1446809
-url = "https://github.com/tldr-pages/tlrc/releases/download/v1.12.0/tlrc-v1.12.0-x86_64-apple-darwin.tar.gz"
-
 [[tools.tmux]]
 version = "3.5a"
 backend = "asdf:tmux"
@@ -361,6 +316,10 @@ checksum = "sha256:6b3163667f29fc608a2ed647c1bd42023af5779349286148190a168c5b3f2
 size = 44682125
 url = "https://github.com/aquasecurity/trivy/releases/download/v0.67.2/trivy_0.67.2_macOS-ARM64.tar.gz"
 
+[[tools."ubi:abhimanyu003/sttr"]]
+version = "0.2.28"
+backend = "ubi:abhimanyu003/sttr"
+
 [[tools."ubi:block/goose"]]
 version = "1.12.1"
 backend = "ubi:block/goose"
@@ -368,12 +327,48 @@ backend = "ubi:block/goose"
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
 checksum = "blake3:cd0b6546d63c8d9766cc01ddab5513de6ebcaced8d9e8e1f101a0e5f61d52f00"
 
+[[tools."ubi:dalance/procs"]]
+version = "0.14.10"
+backend = "ubi:dalance/procs"
+
+[[tools."ubi:imsnif/diskonaut"]]
+version = "0.11.0"
+backend = "ubi:imsnif/diskonaut"
+
+[[tools."ubi:orf/gping"]]
+version = "gping-v1.20.1"
+backend = "ubi:orf/gping"
+
+[[tools."ubi:ouch-org/ouch"]]
+version = "0.6.1"
+backend = "ubi:ouch-org/ouch"
+
+[[tools."ubi:railwayapp/nixpacks"]]
+version = "1.41.0"
+backend = "ubi:railwayapp/nixpacks"
+
+[[tools."ubi:sharkdp/pastel"]]
+version = "0.11.0"
+backend = "ubi:sharkdp/pastel"
+
+[[tools."ubi:sigoden/opscan"]]
+version = "0.4.0"
+backend = "ubi:sigoden/opscan"
+
 [[tools."ubi:sst/opencode"]]
 version = "0.15.28"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
 checksum = "blake3:4e5ec071465e421cf34c1f4bb6372394e00dcc308b72269d8c44210d23c01d97"
+
+[[tools."ubi:tbillington/kondo"]]
+version = "0.8"
+backend = "ubi:tbillington/kondo"
+
+[[tools."ubi:topgrade-rs/topgrade"]]
+version = "16.0.4"
+backend = "ubi:topgrade-rs/topgrade"
 
 [[tools.uv]]
 version = "0.9.6"
