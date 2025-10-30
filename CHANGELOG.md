@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.13](https://github.com/raas-dev/configent/compare/1.173.12...1.173.13) (2025-10-30)
+
+
+### Fixes
+
+* **mise:** migrate kondo tool from ubi to cargo backend ([7137e52](https://github.com/raas-dev/configent/commit/7137e521d92c399cab3dbe64e847a2f1ad32ff8c))
+
 ### [1.173.12](https://github.com/raas-dev/configent/compare/1.173.11...1.173.12) (2025-10-30)
 
 
