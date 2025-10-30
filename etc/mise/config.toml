@@ -1,7 +1,6 @@
 [tools]
 # terminal
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
-bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 carapace = 'latest'
 delta = 'latest'
 duf = 'latest'
@@ -26,6 +25,7 @@ watchexec = 'latest'
 xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
+'ubi:sharkdp/bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'ubi:imsnif/diskonaut' = 'latest'
 'ubi:orf/gping' = 'latest'
 'ubi:railwayapp/nixpacks' = 'latest'
