@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.11](https://github.com/raas-dev/configent/compare/1.173.10...1.173.11) (2025-10-30)
+
+
+### Fixes
+
+* **config:** correct dotnet version format in mise configuration ([344558c](https://github.com/raas-dev/configent/commit/344558ccd43d6586af3c7ee4fd2c995a293741be))
+* **mise:** migrate several cargo tools to ubi backend and update tool config ([a69d964](https://github.com/raas-dev/configent/commit/a69d964936f901fccf6ae3adbb969930793e9a54))
+* **mise:** update versions for claude-code and uv tools ([4e29277](https://github.com/raas-dev/configent/commit/4e29277afcdb80260badb320037c2b98d1cc1eb7))
+* **vscode/keybindings:** remove unused keybindings for new agent chat and composer prompt ([843b9fb](https://github.com/raas-dev/configent/commit/843b9fbc65b115bf9c7ab8ad4a07e841704d4c55))
+
 ### [1.173.10](https://github.com/raas-dev/configent/compare/1.173.9...1.173.10) (2025-10-29)
 
 
