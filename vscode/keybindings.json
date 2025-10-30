@@ -522,5 +522,15 @@
   {
     "command": "-composer.startComposerPrompt",
     "key": "cmd+i"
+  },
+  {
+    "command": "composer.createNewWithPrevContext",
+    "key": "cmd+l",
+    "when": "agentsPaneFocused && !editorTextFocus || composerFocused && !editorTextFocus || cursor.agentIdeUnification.enabled && !editorTextFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/"
+  },
+  {
+    "command": "-composer.createNewWithPrevContext",
+    "key": "cmd+n",
+    "when": "agentsPaneFocused && !editorTextFocus || composerFocused && !editorTextFocus || cursor.agentIdeUnification.enabled && !editorTextFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/"
   }
 ]
