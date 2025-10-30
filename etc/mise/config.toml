@@ -34,6 +34,7 @@ zoxide = 'latest'
 'ubi:sharkdp/pastel' = 'latest'
 'ubi:dalance/procs' = 'latest'
 'ubi:abhimanyu003/sttr' = 'latest'
+'ubi:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
 # ai
@@ -78,13 +79,11 @@ awscli = 'latest'
 # rust
 rust = '1.90.0'
 cargo-binstall = 'latest'
-'cargo:kondo' = 'latest'
-'cargo:mdcat' = 'latest'
-'cargo:tailspin' = 'latest'
-# topgrade
-'cargo:cargo-cache' = 'latest'
-'cargo:cargo-update' = 'latest'
-'ubi:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
+'cargo:cargo-cache' = 'latest' # for topgrade
+'cargo:cargo-update' = 'latest' # for topgrade
+'cargo:kondo' = 'latest' # no linux-aarch64 release
+'cargo:mdcat' = 'latest' # no linux-aarch64 release
+'cargo:tailspin' = 'latest' # no linux-aarch64 release
 
 # go
 go = '1.25.3'

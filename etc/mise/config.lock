@@ -79,6 +79,10 @@ backend = "cargo:cargo-cache"
 version = "18.0.0"
 backend = "cargo:cargo-update"
 
+[[tools."cargo:kondo"]]
+version = "0.8.0"
+backend = "cargo:kondo"
+
 [[tools."cargo:mdcat"]]
 version = "2.7.1"
 backend = "cargo:mdcat"
@@ -361,10 +365,6 @@ backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
 checksum = "blake3:4e5ec071465e421cf34c1f4bb6372394e00dcc308b72269d8c44210d23c01d97"
-
-[[tools."ubi:tbillington/kondo"]]
-version = "0.8"
-backend = "ubi:tbillington/kondo"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.0.4"
