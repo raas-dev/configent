@@ -248,7 +248,7 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.28"
+version = "2.0.29"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
@@ -376,13 +376,13 @@ backend = "ubi:sst/opencode"
 checksum = "blake3:4e5ec071465e421cf34c1f4bb6372394e00dcc308b72269d8c44210d23c01d97"
 
 [[tools.uv]]
-version = "0.9.5"
+version = "0.9.6"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:dc098ff224d78ed418e121fd374f655949d2c7031a70f6f6604eaf016a130433"
-size = 18341942
-url = "https://github.com/astral-sh/uv/releases/download/0.9.5/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:892e8ac6d5240a4dec21fac5bedef52c1b6d40f0dfe52f9e3203038e7e16aed2"
+size = 18362320
+url = "https://github.com/astral-sh/uv/releases/download/0.9.6/uv-aarch64-apple-darwin.tar.gz"
 
 [[tools.viddy]]
 version = "1.3.0"
