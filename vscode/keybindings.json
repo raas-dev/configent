@@ -514,5 +514,13 @@
     "command": "-cursor.composer.openAgentWindow",
     "key": "cmd+e",
     "when": "cursor.appLayoutEnabled && cursor.appLayout != 'agent'"
+  },
+  {
+    "command": "-composer.newAgentChat",
+    "key": "shift+cmd+l"
+  },
+  {
+    "command": "-composer.startComposerPrompt",
+    "key": "cmd+i"
   }
 ]
