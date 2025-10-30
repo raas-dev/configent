@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.14](https://github.com/raas-dev/configent/compare/1.173.13...1.173.14) (2025-10-30)
+
+
+### Fixes
+
+* **mise:** migrate bat tool to ubi backend and update config ([5adc95b](https://github.com/raas-dev/configent/commit/5adc95bec5b80a4a4a88777f8339a8610431996b))
+* **mise:** update awscli to 2.31.25 and opencode to 0.15.29 ([fa16ead](https://github.com/raas-dev/configent/commit/fa16ead3c7943caf120abac179512176f9bb7ba8))
+
 ### [1.173.13](https://github.com/raas-dev/configent/compare/1.173.12...1.173.13) (2025-10-30)
 
 
