@@ -86,6 +86,15 @@ backend = "cargo:tailspin"
 version = "0.18.2"
 backend = "aqua:dandavison/delta"
 
+[[tools.docker-cli]]
+version = "28.5.1"
+backend = "aqua:docker/cli"
+
+[tools.docker-cli.platforms.macos-arm64]
+checksum = "blake3:64c1042d130bffba07e5cd29990a642e8614d53f061a7b863e03dbbc9d7aca15"
+size = 18920970
+url = "https://download.docker.com/mac/static/stable/aarch64/docker-28.5.1.tgz"
+
 [[tools.dotnet]]
 version = "8.0.415"
 backend = "asdf:dotnet"
