@@ -208,11 +208,11 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.30"
+version = "2.0.31"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.11.2"
+version = "0.11.3"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
