@@ -52,10 +52,11 @@ shfmt = 'latest'
 act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 github-cli = 'latest'
 
-# docker
+# containers
 docker-cli = 'latest'
 #dive = 'latest'
 lima = '1.2.1' #{ version = '1.2.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+#podman = 'latest'
 trivy = 'latest'
 
 # cloud

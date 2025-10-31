@@ -15,22 +15,18 @@
 : "${TEMPLATE:="fedora"}"
 
 install_docker_compose_plugin() {
-  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
-    os="$(uname)"
+  if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
+    os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
-    if [ "$os" = "Darwin" ]; then
-      os='darwin'
-      [ "$arch" = "arm64" ] && arch="aarch64"
+    if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
+      arch="aarch64"
     fi
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
-    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    mkdir -p "$HOME/.docker/cli-plugins"
+    rm -f "$HOME/.docker/cli-plugins/docker-compose"
     curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
-      -o "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    if [ "$(id -u)" = 0 ]; then
-      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    else
-      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    fi
+      -o "$HOME/.docker/cli-plugins/docker-compose"
+    chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
 }
 
@@ -50,14 +46,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     fi
   fi
-  # try homebrew installed podman CLI first on macOS
-  if [ -x "/opt/homebrew/bin/podman" ]; then
+  # macOS priority: mise, homebrew
+  if [ -x "$HOME/.local/share/mise/shims/podman" ]; then
+    podman_bin_path="$HOME/.local/share/mise/shims/podman"
+  elif [ -x "/opt/homebrew/bin/podman" ]; then
     podman_bin_path="/opt/homebrew/bin/podman"
   elif [ -x "/usr/local/bin/podman" ]; then
     podman_bin_path="/usr/local/bin/podman"
   fi
   if [ -n "$podman_bin_path" ]; then
-    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "compose" ]; then
       install_docker_compose_plugin
       export PODMAN_COMPOSE_WARNING_LOGS=false
@@ -69,17 +66,20 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
-  if [ -x "/usr/bin/podman" ]; then
-    arch="$(uname -m)"
+  if [ -x "$HOME/.local/share/mise/shims/podman" ]; then
+    # user-wide podman installation (mise registry)
     if [ "$1" = "compose" ]; then
-      DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
       install_docker_compose_plugin
       export PODMAN_COMPOSE_WARNING_LOGS=false
-      shift
-      "/usr/bin/podman" compose "$@"
-    else
-      "/usr/bin/podman" "$@"
     fi
+    "$HOME/.local/share/mise/shims/podman" "$@"
+  elif [ -x "/usr/bin/podman" ]; then
+    # system-wide podman installation (via DEB/RPM packages)
+    if [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+      export PODMAN_COMPOSE_WARNING_LOGS=false
+    fi
+    "/usr/bin/podman" "$@"
   else
     echo "Error: podman not found in this Linux system."
     exit 127
