@@ -58,6 +58,19 @@ install_docker_mcp_plugin() {
   fi
 }
 
+run_docker_with_plugins() {
+  docker_path="$1"
+  shift
+  if [ "$1" = "build" ]; then
+    install_docker_buildx_plugin
+  elif [ "$1" = "compose" ]; then
+    install_docker_compose_plugin
+  elif [ "$1" = "mcp" ]; then
+    install_docker_mcp_plugin
+  fi
+  "$docker_path" "$@"
+}
+
 if [ "$(uname -s)" = 'Darwin' ]; then
   # in all cases, guest VM is required to run Docker daemon
   if ! command -v limactl >/dev/null; then
@@ -83,14 +96,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     docker_bin_path="/usr/local/bin/docker"
   fi
   if [ -n "$docker_bin_path" ]; then
-    if [ "$1" = "build" ]; then
-      install_docker_buildx_plugin
-    elif [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
-    elif [ "$1" = "mcp" ]; then
-      install_docker_mcp_plugin
-    fi
-    "$docker_bin_path" "$@"
+    run_docker_with_plugins "$docker_bin_path" "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
     limactl shell "$NAME" ~/configent/bin/docker "$@"
@@ -105,26 +111,12 @@ else
     fi
   fi
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
-    # user-wide docker CLI installation (mise)
-    if [ "$1" = "build" ]; then
-      install_docker_buildx_plugin
-    elif [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
-    elif [ "$1" = "mcp" ]; then
-      install_docker_mcp_plugin
-    fi
-    "$HOME/.local/share/mise/shims/docker" "$@"
+    # user-wide docker-cli installation (mise registry)
+    run_docker_with_plugins "$HOME/.local/share/mise/shims/docker" "$@"
   elif [ -x "$HOME/bin/docker" ]; then
     # user-wide docker installation (https://get.docker.com/rootless)
     export PATH="$HOME/bin:$PATH"
-    if [ "$1" = "build" ]; then
-      install_docker_buildx_plugin
-    elif [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
-    elif [ "$1" = "mcp" ]; then
-      install_docker_mcp_plugin
-    fi
-    "$HOME/bin/docker" "$@"
+    run_docker_with_plugins "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
     # system-wide docker installation (via DEB/RPM packages) as the last resort
     # note: you cannot install docker CLI plugins here without sudo

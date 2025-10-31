@@ -28,11 +28,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   fi
   # macOS: pass arguments to docker shim, which installs the compose plugin
-  if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
-    "$HOME/.local/configent/bin/docker" compose "$@"
-  elif [ -x "/opt/homebrew/bin/docker" ]; then
-    "$HOME/.local/configent/bin/docker" compose "$@"
-  elif [ -x "/usr/local/bin/docker" ]; then
+  if [ -x "$HOME/.local/share/mise/shims/docker" ] ||
+    [ -x "/opt/homebrew/bin/docker" ] ||
+    [ -x "/usr/local/bin/docker" ]; then
     "$HOME/.local/configent/bin/docker" compose "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
