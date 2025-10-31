@@ -31,5 +31,6 @@ ln -sfnv "$config_path/powershell" "$HOME/.config/powershell"
 if command -v dotnet >/dev/null && command -v pwsh >/dev/null; then
   #shellcheck disable=SC2155  # will not declare separately, value compactness
   export DOTNET_ROOT="$(dirname "$(which dotnet)")"
-  pwsh -c "Install-Module -Name PSScriptAnalyzer -Force"
+  pwsh -c "Register-PSRepository -Default -ErrorAction SilentlyContinue; Set-PSRepository PSGallery -InstallationPolicy Trusted"
+  pwsh -c "Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force"
 fi
