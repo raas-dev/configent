@@ -16,9 +16,7 @@ install_docker_buildx_plugin() {
     buildx_version="v0.29.1"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
-    if [ "$arch" = "aarch64" ]; then
-      arch="arm64"
-    fi
+    [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
     curl --create-dirs -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
@@ -47,6 +45,27 @@ install_docker_compose_plugin() {
       chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
     else
       chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    fi
+  fi
+}
+
+install_docker_mcp_plugin() {
+  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-mcp" ]; then
+    mcp_gateway_version="v0.25.0"
+    os="$(uname | tr '[:upper:]' '[:lower:]')"
+    arch="$(uname -m)"
+    [ "$arch" = "aarch64" ] && arch="arm64"
+    echo "Downloading Docker MCP plugin on $os ($arch)"
+    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
+    tmp_tar="$(mktemp)"
+    curl --create-dirs -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
+      -o "$tmp_tar"
+    tar -xzf "$tmp_tar" -C "$DOCKER_CLI_PLUGINS_DIR" docker-mcp
+    rm -f "$tmp_tar"
+    if [ "$(id -u)" = 0 ]; then
+      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
+    else
+      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
     fi
   fi
 }
@@ -81,6 +100,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
       install_docker_compose_plugin
+    elif [ "$1" = "mcp" ]; then
+      install_docker_mcp_plugin
     fi
     "$docker_bin_path" "$@"
   else
@@ -104,6 +125,8 @@ else
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
       install_docker_compose_plugin
+    elif [ "$1" = "mcp" ]; then
+      install_docker_mcp_plugin
     fi
     "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
@@ -113,6 +136,8 @@ else
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
       install_docker_compose_plugin
+    elif [ "$1" = "mcp" ]; then
+      install_docker_mcp_plugin
     fi
     "/usr/bin/docker" "$@"
   else
