@@ -11,9 +11,12 @@
 : "${NAME:="default"}"
 : "${TEMPLATE:="ubuntu"}"
 
+# docker CLI plugin versions (compose is always latest)
+buildx_version="v0.29.1"
+mcp_gateway_version="v0.25.0"
+
 install_docker_buildx_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx" ]; then
-    buildx_version="v0.29.1"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
@@ -31,11 +34,10 @@ install_docker_buildx_plugin() {
 
 install_docker_compose_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
-    os="$(uname)"
+    os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
-    if [ "$os" = "Darwin" ]; then
-      os='darwin'
-      [ "$arch" = "arm64" ] && arch="aarch64"
+    if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
+      arch="aarch64"
     fi
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
     rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
@@ -51,7 +53,6 @@ install_docker_compose_plugin() {
 
 install_docker_mcp_plugin() {
   if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-mcp" ]; then
-    mcp_gateway_version="v0.25.0"
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
