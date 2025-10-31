@@ -251,6 +251,17 @@ backend = "pipx:sncli"
 version = "3.4.3"
 backend = "pipx:tldr"
 
+[[tools.podman]]
+version = "5.6.2"
+backend = "github:containers/podman[matching=podman-remote]"
+
+[tools.podman.platforms.macos-arm64]
+checksum = "blake3:aaf65efe5d0ba1cccbc84497868b8c9fac4a6ef689578f447c28232db0db86de"
+name = "podman-remote-release-darwin_arm64.zip"
+size = 24028754
+url = "https://github.com/containers/podman/releases/download/v5.6.2/podman-remote-release-darwin_arm64.zip"
+url_api = "https://api.github.com/repos/containers/podman/releases/assets/299019472"
+
 [[tools.pre-commit]]
 version = "4.3.0"
 backend = "aqua:pre-commit/pre-commit"
