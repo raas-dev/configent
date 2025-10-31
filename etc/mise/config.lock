@@ -28,13 +28,13 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.26"
+version = "2.31.27"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:7ce08d3704a059216c988d125a837d7eeb30a154cb8d1bd660441cb480925223"
-size = 48208633
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.26.pkg"
+checksum = "blake3:b94a980397e8c9445dbf3520d39890f373c53273804ae1432fee97ba66e0c3ec"
+size = 48224239
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.27.pkg"
 
 [[tools.bun]]
 version = "1.3.1"
@@ -395,11 +395,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "0.15.29"
+version = "1.0.2"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:68a66a9b4f199c10656d2c77d5a6e38fe4b52195f958eb7d8c2a25b16c602fa8"
+checksum = "blake3:40ecc9dbd5886d3ea9712ad6997b5b713ba5949aebe62b0c8d5daf1aac81bbee"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.0.4"
