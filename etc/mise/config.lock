@@ -87,11 +87,11 @@ version = "0.18.2"
 backend = "aqua:dandavison/delta"
 
 [[tools.dotnet]]
-version = "8.0.404"
+version = "8.0.415"
 backend = "asdf:dotnet"
 
 [[tools."dotnet:powershell"]]
-version = "7.4.6"
+version = "7.4.13"
 backend = "dotnet:powershell"
 
 [[tools.duf]]
