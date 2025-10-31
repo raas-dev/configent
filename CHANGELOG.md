@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.15](https://github.com/raas-dev/configent/compare/1.173.14...1.173.15) (2025-10-31)
+
+
+### Fixes
+
+* **claude-code:** Sort commands and agents per category ([cb85456](https://github.com/raas-dev/configent/commit/cb85456b4a7e32d4708c2964fc7810ebc990daf5))
+* **keybindings:** correct conflicting commands for cmd+l and cmd+n keys ([2e21a36](https://github.com/raas-dev/configent/commit/2e21a36a7718d53a62b485a2c8a47dbc8116023b))
+* **keybindings:** remove conflicting commands for cmd+l and cmd+n keys ([4abab87](https://github.com/raas-dev/configent/commit/4abab87d98c21755ac4d07b78d3be2ebb168af90))
+* **mise:** add macOS ARM64 platform checksums for several tools ([1785810](https://github.com/raas-dev/configent/commit/178581037ca775807b647f91ad769ae5b8793a7b))
+* **postinstall:** correct PowerShell command checks and module installs ([f26e32f](https://github.com/raas-dev/configent/commit/f26e32fc56334ee64afebaf77e19c5cf5a8858ef))
+
 ### [1.173.14](https://github.com/raas-dev/configent/compare/1.173.13...1.173.14) (2025-10-30)
 
 
