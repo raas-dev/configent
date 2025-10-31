@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.174.3](https://github.com/raas-dev/configent/compare/1.174.2...1.174.3) (2025-10-31)
+
+
+### Fixes
+
+* **config:** add podman v5.6.2 with macos-arm64 checksum and url ([87f2eee](https://github.com/raas-dev/configent/commit/87f2eee506f5c750e9a03544394c09f589f22106))
+* **docker:** improve docker CLI plugin installation with error handling ([8c34be3](https://github.com/raas-dev/configent/commit/8c34be3f1ed2228a94dd722ba43b18e3a8170392))
+* **docker:** run plugins with system-wide docker binary ([56b3518](https://github.com/raas-dev/configent/commit/56b351883e65a30f3c8441cd1a052d45b6469811))
+* **podman:** fetch latest docker-compose release and handle install errors ([e1a90c9](https://github.com/raas-dev/configent/commit/e1a90c9c6de907d53ba859ab9465885ac8d3ac73))
+* **podman:** improve podman CLI plugin install and binary selection ([c5c22ad](https://github.com/raas-dev/configent/commit/c5c22ad3eaf97acbeb08007ebba7f365229845e1))
+
 ### [1.174.2](https://github.com/raas-dev/configent/compare/1.174.1...1.174.2) (2025-10-31)
 
 
