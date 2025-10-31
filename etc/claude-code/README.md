@@ -17,7 +17,7 @@ git clone --depth 1 \
   tmp/claude-code-subagents-collection ||
   git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/subagents \
-  -name "*.md" -exec cp {} ./agents/ \;
+  -name "*.md" -exec cp {} agents/ \;
 ```
 
 ## commands
@@ -31,7 +31,7 @@ git clone --depth 1 \
   tmp/claude-code-subagents-collection ||
   git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/commands \
-  -name "*.md" -exec cp {} ./commands/ \;
+  -name "*.md" -exec cp {} commands/ \;
 ```
 
 ## skills
@@ -39,15 +39,17 @@ find tmp/claude-code-subagents-collection/commands \
 - https://github.com/obra/superpowers
 
 ```
+mkdir -p skills
 git clone --depth 1 https://github.com/obra/superpowers.git tmp/superpowers ||
   git -C tmp/superpowers pull --no-autostash --rebase
-cp -R tmp/superpowers/skills/* skills
+cp -R tmp/superpowers/skills/* skills/
 ```
 
 - https://github.com/lackeyjb/playwright-skill
 
 ```
+mkdir -p skills
 git clone --depth 1 https://github.com/lackeyjb/playwright-skill.git tmp/playwright-skill ||
   git -C tmp/playwright-skill pull --no-autostash --rebase
-cp -R tmp/playwright-skill/skills/* skills
+cp -R tmp/playwright-skill/skills/* skills/
 ```
