@@ -203,7 +203,6 @@
     ".aliases": "shellscript"
   },
   "files.hotExit": "onExitAndWindowClose",
-  "files.saveConflictResolution": "overwriteFileOnDisk",
   "genaiscript.cache": false,
   "git.blame.statusBarItem.enabled": false,
   "git.confirmSync": false,
@@ -566,5 +565,8 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "terminal.integrated.enablePersistentSessions": false,
-  "claudeCode.useTerminal": true
+  "claudeCode.useTerminal": true,
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "files.enableTrash": false,
+  "files.trimTrailingWhitespaceInRegexAndStrings": false
 }
