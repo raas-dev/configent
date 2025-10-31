@@ -58,8 +58,8 @@ $SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
 
 # Utils
 $SUDO apt-get install -y coreutils dnsutils file findutils \
-  git git-lfs htop iputils-ping lsb-release pandoc procps traceroute unzip \
-  wget whois zip
+  git git-lfs htop iputils-ping lsb-release lsof pandoc procps traceroute \
+  unzip wget whois zip
 
 # Bash
 $SUDO apt-get install -y bash
