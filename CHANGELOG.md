@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.174.0](https://github.com/raas-dev/configent/compare/1.173.16...1.174.0) (2025-10-31)
+
+
+### Features
+
+* **config:** add and enable latest docker-cli in mise configuration ([91df3f7](https://github.com/raas-dev/configent/commit/91df3f7dadc51864b48ad053b59fcd5c7ce6f3ca))
+* **docker:** add installation support for docker-mcp plugin ([01cc0d2](https://github.com/raas-dev/configent/commit/01cc0d21a7678afaa483e58a1dfd82f82a3046a1))
+
+
+### Fixes
+
+* **aliases:** add alias for Build with Claude cli ([ecb8613](https://github.com/raas-dev/configent/commit/ecb86136dfeb847d011f251c02802a1ccdc83888))
+* **docker:** refine architecture handling and version variable placement ([398f76d](https://github.com/raas-dev/configent/commit/398f76dd9f86a9b3eafcf25571d4f5389981667e))
+
 ### [1.173.16](https://github.com/raas-dev/configent/compare/1.173.15...1.173.16) (2025-10-31)
 
 
