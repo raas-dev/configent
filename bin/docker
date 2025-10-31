@@ -20,6 +20,7 @@ install_docker_buildx_plugin() {
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
+    mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-buildx"
     curl --create-dirs -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-buildx"
@@ -35,6 +36,7 @@ install_docker_compose_plugin() {
       arch="aarch64"
     fi
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
+    mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
     curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
@@ -48,6 +50,7 @@ install_docker_mcp_plugin() {
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker MCP plugin on $os ($arch)"
+    mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-mcp"
     tmp_tar="$(mktemp)"
     curl --create-dirs -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
