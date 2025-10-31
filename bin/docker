@@ -7,67 +7,54 @@
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # shim for running `docker` in lima VM
-
 : "${NAME:="default"}"
 : "${TEMPLATE:="ubuntu"}"
 
-# docker CLI plugin versions (compose is always latest)
+# docker CLI plugin GitHub release tags (compose is always the latest)
 buildx_version="v0.29.1"
 mcp_gateway_version="v0.25.0"
 
 install_docker_buildx_plugin() {
-  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx" ]; then
+  if [ ! -x "$HOME/.docker/cli-plugins/docker-buildx" ]; then
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
-    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
+    rm -f "$HOME/.docker/cli-plugins/docker-buildx"
     curl --create-dirs -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
-      -o "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
-    if [ "$(id -u)" = 0 ]; then
-      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
-    else
-      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-buildx"
-    fi
+      -o "$HOME/.docker/cli-plugins/docker-buildx"
+    chmod +x "$HOME/.docker/cli-plugins/docker-buildx"
   fi
 }
 
 install_docker_compose_plugin() {
-  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-compose" ]; then
+  if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
     echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
-    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
+    rm -f "$HOME/.docker/cli-plugins/docker-compose"
     curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
-      -o "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    if [ "$(id -u)" = 0 ]; then
-      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    else
-      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-compose"
-    fi
+      -o "$HOME/.docker/cli-plugins/docker-compose"
+    chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
 }
 
 install_docker_mcp_plugin() {
-  if [ ! -x "$DOCKER_CLI_PLUGINS_DIR/docker-mcp" ]; then
+  if [ ! -x "$HOME/.docker/cli-plugins/docker-mcp" ]; then
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker MCP plugin on $os ($arch)"
-    rm -f "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
+    rm -f "$HOME/.docker/cli-plugins/docker-mcp"
     tmp_tar="$(mktemp)"
     curl --create-dirs -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
       -o "$tmp_tar"
-    tar -xzf "$tmp_tar" -C "$DOCKER_CLI_PLUGINS_DIR" docker-mcp
+    tar -xzf "$tmp_tar" -C "$HOME/.docker/cli-plugins" docker-mcp
     rm -f "$tmp_tar"
-    if [ "$(id -u)" = 0 ]; then
-      chmod a+rx "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
-    else
-      chmod +x "$DOCKER_CLI_PLUGINS_DIR/docker-mcp"
-    fi
+    chmod +x "$HOME/.docker/cli-plugins/docker-mcp"
   fi
 }
 
@@ -96,7 +83,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     docker_bin_path="/usr/local/bin/docker"
   fi
   if [ -n "$docker_bin_path" ]; then
-    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
@@ -118,10 +104,19 @@ else
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
     fi
   fi
-  if [ -x "$HOME/bin/docker" ]; then
+  if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
+    # user-wide docker CLI installation (mise)
+    if [ "$1" = "build" ]; then
+      install_docker_buildx_plugin
+    elif [ "$1" = "compose" ]; then
+      install_docker_compose_plugin
+    elif [ "$1" = "mcp" ]; then
+      install_docker_mcp_plugin
+    fi
+    "$HOME/.local/share/mise/shims/docker" "$@"
+  elif [ -x "$HOME/bin/docker" ]; then
     # user-wide docker installation (https://get.docker.com/rootless)
     export PATH="$HOME/bin:$PATH"
-    DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
     if [ "$1" = "build" ]; then
       install_docker_buildx_plugin
     elif [ "$1" = "compose" ]; then
@@ -131,15 +126,8 @@ else
     fi
     "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
-    # system-wide docker installation (via DEB/RPM packages)
-    DOCKER_CLI_PLUGINS_DIR="/usr/libexec/docker/cli-plugins"
-    if [ "$1" = "build" ]; then
-      install_docker_buildx_plugin
-    elif [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
-    elif [ "$1" = "mcp" ]; then
-      install_docker_mcp_plugin
-    fi
+    # system-wide docker installation (via DEB/RPM packages) as the last resort
+    # note: you cannot install docker CLI plugins here without sudo
     "/usr/bin/docker" "$@"
   else
     echo "Error: Docker CLI not found or executable in this Linux system."
