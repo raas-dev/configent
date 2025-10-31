@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.174.2](https://github.com/raas-dev/configent/compare/1.174.1...1.174.2) (2025-10-31)
+
+
+### Fixes
+
+* **docker:** ensure cli-plugins directory exists before plugin installation ([d2cc7e6](https://github.com/raas-dev/configent/commit/d2cc7e6697d9b100eecf7696c11a27399911dd34))
+
 ### [1.174.1](https://github.com/raas-dev/configent/compare/1.174.0...1.174.1) (2025-10-31)
 
 
