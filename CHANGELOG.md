@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.174.1](https://github.com/raas-dev/configent/compare/1.174.0...1.174.1) (2025-10-31)
+
+
+### Fixes
+
+* **docker:** update plugin installation paths and docker binary detection ([5bdf4df](https://github.com/raas-dev/configent/commit/5bdf4df4d529d40861bdc527b9eee7e105db3057))
+
 ## [1.174.0](https://github.com/raas-dev/configent/compare/1.173.16...1.174.0) (2025-10-31)
 
 
