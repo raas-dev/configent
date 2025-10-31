@@ -26,7 +26,6 @@ xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
 'ubi:sharkdp/bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
-'ubi:imsnif/diskonaut' = 'latest'
 'ubi:orf/gping' = 'latest'
 'ubi:railwayapp/nixpacks' = 'latest'
 'ubi:sigoden/opscan' = 'latest'
@@ -83,6 +82,7 @@ rust = '1.90.0'
 cargo-binstall = 'latest'
 'cargo:cargo-cache' = 'latest' # for topgrade
 'cargo:cargo-update' = 'latest' # for topgrade
+'cargo:diskonaut' = 'latest' # no macos-arm64 release
 'cargo:kondo' = 'latest' # no linux-aarch64 release
 'cargo:mdcat' = 'latest' # no linux-aarch64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release

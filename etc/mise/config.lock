@@ -70,6 +70,10 @@ backend = "cargo:cargo-cache"
 version = "18.0.0"
 backend = "cargo:cargo-update"
 
+[[tools."cargo:diskonaut"]]
+version = "0.11.0"
+backend = "cargo:diskonaut"
+
 [[tools."cargo:kondo"]]
 version = "0.8.0"
 backend = "cargo:kondo"
@@ -347,13 +351,6 @@ backend = "ubi:dalance/procs"
 
 [tools."ubi:dalance/procs".platforms.macos-arm64-procs]
 checksum = "blake3:f51dc854b201ed55dc1e997ca22152e8f68ed8bdfc6a8e1614262e5126f023ee"
-
-[[tools."ubi:imsnif/diskonaut"]]
-version = "0.11.0"
-backend = "ubi:imsnif/diskonaut"
-
-[tools."ubi:imsnif/diskonaut".platforms.macos-arm64-diskonaut]
-checksum = "blake3:7e802f7278f14d75698d6d011e33352ba3624a9b6ac73be4f351a42357d6e93f"
 
 [[tools."ubi:orf/gping"]]
 version = "gping-v1.20.1"
