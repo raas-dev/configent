@@ -396,6 +396,9 @@ venv() {
 
 ### ai
 
+# Built with Claude
+alias bwc='bunx bwc-cli'
+
 # Flowise
 alias flowise='bunx flowise'
 
