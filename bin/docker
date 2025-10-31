@@ -10,19 +10,55 @@
 : "${NAME:="default"}"
 : "${TEMPLATE:="ubuntu"}"
 
-# docker CLI plugin GitHub release tags (compose is always the latest)
-buildx_version="v0.29.1"
-mcp_gateway_version="v0.25.0"
+# Query GitHub API for latest release tag
+get_latest_github_release() {
+  repo="$1"
+  include_prerelease="${2:-false}"
+  if [ "$include_prerelease" = "true" ]; then
+    # Get first release from releases list (includes prereleases)
+    api_url="https://api.github.com/repos/$repo/releases"
+    if [ -n "$GITHUB_TOKEN" ]; then
+      curl -fsSL -H "Authorization: token $GITHUB_TOKEN" "$api_url" 2>/dev/null |
+        grep -o '"tag_name": "[^"]*"' |
+        head -1 |
+        cut -d '"' -f 4
+    else
+      curl -fsSL "$api_url" 2>/dev/null |
+        grep -o '"tag_name": "[^"]*"' |
+        head -1 |
+        cut -d '"' -f 4
+    fi
+  else
+    # Get latest stable release only
+    api_url="https://api.github.com/repos/$repo/releases/latest"
+    if [ -n "$GITHUB_TOKEN" ]; then
+      curl -fsSL -H "Authorization: token $GITHUB_TOKEN" "$api_url" 2>/dev/null |
+        grep -o '"tag_name": "[^"]*"' |
+        head -1 |
+        cut -d '"' -f 4
+    else
+      curl -fsSL "$api_url" 2>/dev/null |
+        grep -o '"tag_name": "[^"]*"' |
+        head -1 |
+        cut -d '"' -f 4
+    fi
+  fi
+}
 
 install_docker_buildx_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-buildx" ]; then
+    buildx_version="$(get_latest_github_release docker/buildx)"
+    if [ -z "$buildx_version" ]; then
+      echo "Warning: Failed to query latest buildx version, skipping installation"
+      return 1
+    fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
-    echo "Downloading Docker Buildx as Docker CLI plugin on $os ($arch)"
+    echo "Downloading Docker Buildx $buildx_version as Docker CLI plugin on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-buildx"
-    curl --create-dirs -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
+    curl -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-buildx"
     chmod +x "$HOME/.docker/cli-plugins/docker-buildx"
   fi
@@ -30,15 +66,20 @@ install_docker_buildx_plugin() {
 
 install_docker_compose_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
+    compose_version="$(get_latest_github_release docker/compose)"
+    if [ -z "$compose_version" ]; then
+      echo "Warning: Failed to query latest compose version, skipping installation"
+      return 1
+    fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
-    echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
+    echo "Downloading Docker Compose $compose_version as Docker CLI plugin on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
-    curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+    curl -fsSL "https://github.com/docker/compose/releases/download/$compose_version/docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
     chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
@@ -46,18 +87,38 @@ install_docker_compose_plugin() {
 
 install_docker_mcp_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-mcp" ]; then
+    # mcp-gateway releases are currently prereleases, so include them
+    mcp_gateway_version="$(get_latest_github_release docker/mcp-gateway true)"
+    if [ -z "$mcp_gateway_version" ]; then
+      echo "Warning: Failed to query latest mcp-gateway version, skipping installation"
+      return 1
+    fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
-    echo "Downloading Docker MCP plugin on $os ($arch)"
+    echo "Downloading Docker MCP plugin $mcp_gateway_version on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-mcp"
     tmp_tar="$(mktemp)"
-    curl --create-dirs -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
-      -o "$tmp_tar"
-    tar -xzf "$tmp_tar" -C "$HOME/.docker/cli-plugins" docker-mcp
+    if ! curl -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
+      -o "$tmp_tar"; then
+      echo "Error: Failed to download docker-mcp plugin"
+      rm -f "$tmp_tar"
+      return 1
+    fi
+    if ! tar -xzf "$tmp_tar" -C "$HOME/.docker/cli-plugins" docker-mcp; then
+      echo "Error: Failed to extract docker-mcp plugin"
+      rm -f "$tmp_tar"
+      return 1
+    fi
     rm -f "$tmp_tar"
-    chmod +x "$HOME/.docker/cli-plugins/docker-mcp"
+    if [ ! -x "$HOME/.docker/cli-plugins/docker-mcp" ]; then
+      chmod +x "$HOME/.docker/cli-plugins/docker-mcp"
+    fi
+    if [ ! -x "$HOME/.docker/cli-plugins/docker-mcp" ]; then
+      echo "Error: docker-mcp plugin is not executable after installation"
+      return 1
+    fi
   fi
 }
 
@@ -65,11 +126,14 @@ run_docker_with_plugins() {
   docker_path="$1"
   shift
   if [ "$1" = "build" ]; then
-    install_docker_buildx_plugin
+    install_docker_buildx_plugin || return 1
   elif [ "$1" = "compose" ]; then
-    install_docker_compose_plugin
+    install_docker_compose_plugin || return 1
   elif [ "$1" = "mcp" ]; then
-    install_docker_mcp_plugin
+    install_docker_mcp_plugin || {
+      echo "Error: docker-mcp plugin is not available. Please check your network connection or install manually."
+      return 1
+    }
   fi
   "$docker_path" "$@"
 }
