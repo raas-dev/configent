@@ -121,9 +121,8 @@ else
     export PATH="$HOME/bin:$PATH"
     run_docker_with_plugins "$HOME/bin/docker" "$@"
   elif [ -x "/usr/bin/docker" ]; then
-    # system-wide docker installation (via DEB/RPM packages) as the last resort
-    # note: you cannot install docker CLI plugins here without sudo
-    "/usr/bin/docker" "$@"
+    # system-wide docker installation (via DEB/RPM packages)
+    run_docker_with_plugins "/usr/bin/docker" "$@"
   else
     echo "Error: Docker CLI not found or executable in this Linux system."
     exit 127
