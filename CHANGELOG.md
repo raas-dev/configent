@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.173.16](https://github.com/raas-dev/configent/compare/1.173.15...1.173.16) (2025-10-31)
+
+
+### Fixes
+
+* **docker:** prioritize mise docker shim on macOS ([e217421](https://github.com/raas-dev/configent/commit/e217421f7e38d97f9fec65d501bcd5c42c3df6f2))
+* **docker:** update buildx plugin version to v0.29.1 ([3eba694](https://github.com/raas-dev/configent/commit/3eba694018bcc77e20219847bf4cb5d66abccd54))
+
 ### [1.173.15](https://github.com/raas-dev/configent/compare/1.173.14...1.173.15) (2025-10-31)
 
 
