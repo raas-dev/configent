@@ -11,12 +11,13 @@ Original sources listed below.
 - https://github.com/davepoon/claude-code-subagents-collection
 
 ```
+mkdir -p agents
 git clone --depth 1 \
   https://github.com/davepoon/claude-code-subagents-collection.git \
   tmp/claude-code-subagents-collection ||
   git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/subagents \
-  -name "*.md" -exec cp {} agents \;
+  -name "*.md" -exec cp {} ./agents/ \;
 ```
 
 ## commands
@@ -24,12 +25,13 @@ find tmp/claude-code-subagents-collection/subagents \
 - https://github.com/davepoon/claude-code-subagents-collection
 
 ```
+mkdir -p commands
 git clone --depth 1 \
   https://github.com/davepoon/claude-code-subagents-collection.git \
   tmp/claude-code-subagents-collection ||
   git -C tmp/claude-code-subagents-collection pull --no-autostash --rebase
 find tmp/claude-code-subagents-collection/commands \
-  -name "*.md" -exec cp {} commands \;
+  -name "*.md" -exec cp {} ./commands/ \;
 ```
 
 ## skills
