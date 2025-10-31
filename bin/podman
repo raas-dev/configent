@@ -14,17 +14,39 @@
 : "${NAME:="podman"}"
 : "${TEMPLATE:="fedora"}"
 
+# Query GitHub API for latest release tag
+get_latest_github_release() {
+  repo="$1"
+  api_url="https://api.github.com/repos/$repo/releases/latest"
+  if [ -n "$GITHUB_TOKEN" ]; then
+    curl -fsSL -H "Authorization: token $GITHUB_TOKEN" "$api_url" 2>/dev/null |
+      grep -o '"tag_name": "[^"]*"' |
+      head -1 |
+      cut -d '"' -f 4
+  else
+    curl -fsSL "$api_url" 2>/dev/null |
+      grep -o '"tag_name": "[^"]*"' |
+      head -1 |
+      cut -d '"' -f 4
+  fi
+}
+
 install_docker_compose_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
+    compose_version="$(get_latest_github_release docker/compose)"
+    if [ -z "$compose_version" ]; then
+      echo "Warning: Failed to query latest compose version, skipping installation"
+      return 1
+    fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
-    echo "Downloading Docker Compose as Docker CLI plugin on $os ($arch)"
+    echo "Downloading Docker Compose $compose_version as Docker CLI plugin on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
-    curl --create-dirs -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$os-$arch" \
+    curl -fsSL "https://github.com/docker/compose/releases/download/$compose_version/docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
     chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
@@ -56,7 +78,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
   if [ -n "$podman_bin_path" ]; then
     if [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
+      install_docker_compose_plugin || return 1
       export PODMAN_COMPOSE_WARNING_LOGS=false
     fi
     "$podman_bin_path" "$@"
@@ -69,14 +91,14 @@ else
   if [ -x "$HOME/.local/share/mise/shims/podman" ]; then
     # user-wide podman installation (mise registry)
     if [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
+      install_docker_compose_plugin || return 1
       export PODMAN_COMPOSE_WARNING_LOGS=false
     fi
     "$HOME/.local/share/mise/shims/podman" "$@"
   elif [ -x "/usr/bin/podman" ]; then
     # system-wide podman installation (via DEB/RPM packages)
     if [ "$1" = "compose" ]; then
-      install_docker_compose_plugin
+      install_docker_compose_plugin || return 1
       export PODMAN_COMPOSE_WARNING_LOGS=false
     fi
     "/usr/bin/podman" "$@"
