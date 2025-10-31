@@ -27,8 +27,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     fi
   fi
-  # try homebrew installed docker CLI first on macOS
-  if [ -x "/opt/homebrew/bin/docker" ]; then
+  # macOS: pass arguments to docker shim, which installs the compose plugin
+  if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
+    "$HOME/.local/configent/bin/docker" compose "$@"
+  elif [ -x "/opt/homebrew/bin/docker" ]; then
     "$HOME/.local/configent/bin/docker" compose "$@"
   elif [ -x "/usr/local/bin/docker" ]; then
     "$HOME/.local/configent/bin/docker" compose "$@"
@@ -37,6 +39,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl shell "$NAME" ~/configent/bin/docker-compose "$@"
   fi
 else
-  # pass arguments to docker shim, which installs the compose plugin
+  # Linux: pass arguments to docker shim, which installs the compose plugin
   "$HOME/.local/configent/bin/docker" compose "$@"
 fi

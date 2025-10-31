@@ -67,11 +67,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     fi
   fi
-  # try homebrew installed docker CLI first on macOS
-  if [ -x "/opt/homebrew/bin/docker" ]; then
+  # macOS priority: mise, homebrew
+  if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
+    docker_bin_path="$HOME/.local/share/mise/shims/docker"
+  elif [ -x "/opt/homebrew/bin/docker" ]; then
     docker_bin_path="/opt/homebrew/bin/docker"
   elif [ -x "/usr/local/bin/docker" ]; then
-    docker_bin_path="/opt/homebrew/bin/docker"
+    docker_bin_path="/usr/local/bin/docker"
   fi
   if [ -n "$docker_bin_path" ]; then
     DOCKER_CLI_PLUGINS_DIR="$HOME/.docker/cli-plugins"
