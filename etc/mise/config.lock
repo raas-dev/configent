@@ -90,15 +90,6 @@ backend = "cargo:tailspin"
 version = "0.18.2"
 backend = "aqua:dandavison/delta"
 
-[[tools.docker-cli]]
-version = "28.5.1"
-backend = "aqua:docker/cli"
-
-[tools.docker-cli.platforms.macos-arm64]
-checksum = "blake3:64c1042d130bffba07e5cd29990a642e8614d53f061a7b863e03dbbc9d7aca15"
-size = 18920970
-url = "https://download.docker.com/mac/static/stable/aarch64/docker-28.5.1.tgz"
-
 [[tools.dotnet]]
 version = "8.0.415"
 backend = "asdf:dotnet"
@@ -254,17 +245,6 @@ backend = "pipx:sncli"
 [[tools."pipx:tldr"]]
 version = "3.4.3"
 backend = "pipx:tldr"
-
-[[tools.podman]]
-version = "5.6.2"
-backend = "github:containers/podman[matching=podman-remote]"
-
-[tools.podman.platforms.macos-arm64]
-checksum = "blake3:aaf65efe5d0ba1cccbc84497868b8c9fac4a6ef689578f447c28232db0db86de"
-name = "podman-remote-release-darwin_arm64.zip"
-size = 24028754
-url = "https://github.com/containers/podman/releases/download/v5.6.2/podman-remote-release-darwin_arm64.zip"
-url_api = "https://api.github.com/repos/containers/podman/releases/assets/299019472"
 
 [[tools.pre-commit]]
 version = "4.3.0"

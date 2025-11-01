@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.174.4](https://github.com/raas-dev/configent/compare/1.174.3...1.174.4) (2025-11-01)
+
+
+### Fixes
+
+* **config:** comment out docker and podman versions ([7ea124f](https://github.com/raas-dev/configent/commit/7ea124fc7a508e9626069870ab2f39edeb3231dd))
+* **dotfiles:** remove unused alias for bwc-cli with Claude integration ([cfdb26b](https://github.com/raas-dev/configent/commit/cfdb26b5afaf7630b280d12401b64c73b124503f))
+* **dotfiles:** require sudo for lsof in port alias ([542e820](https://github.com/raas-dev/configent/commit/542e820da4e476bbe1441f508c4e0a8f3149f335))
+* **install_apps_apt:** add lsof to installed utilities list ([8b40602](https://github.com/raas-dev/configent/commit/8b40602b521cd1d26eb7348709e32b34296d3c80))
+* **install_apps:** reorder utilities list in apt and yum installs ([d5dfc22](https://github.com/raas-dev/configent/commit/d5dfc22e7e89ab6b8b1786830fce5f02309a1464))
+* **mise:** transition diskonaut tool from ubi to cargo source ([6317a4e](https://github.com/raas-dev/configent/commit/6317a4e9da3cd7c7e874033be48dbe08364199f2))
+* **vscode:** remove obsolete update.mode setting from settings.json ([1f39cd0](https://github.com/raas-dev/configent/commit/1f39cd09f2265ffaa527dd40b664ea8f22eade81))
+
 ### [1.174.3](https://github.com/raas-dev/configent/compare/1.174.2...1.174.3) (2025-10-31)
 
 
