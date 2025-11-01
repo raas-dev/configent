@@ -567,6 +567,5 @@
   "terminal.integrated.enablePersistentSessions": false,
   "claudeCode.useTerminal": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
-  "files.trimTrailingWhitespaceInRegexAndStrings": false,
-  "update.mode": "none"
+  "files.trimTrailingWhitespaceInRegexAndStrings": false
 }
