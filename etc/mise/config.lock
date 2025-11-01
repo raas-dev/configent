@@ -375,18 +375,18 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.2"
+version = "1.0.10"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:40ecc9dbd5886d3ea9712ad6997b5b713ba5949aebe62b0c8d5daf1aac81bbee"
+checksum = "blake3:0e969f5beec90eaa31ff066b7dc4b918b3c754394be6c87f5318c91c6d0112d0"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
-version = "16.0.4"
+version = "16.1.2"
 backend = "ubi:topgrade-rs/topgrade"
 
 [tools."ubi:topgrade-rs/topgrade".platforms.macos-arm64-topgrade]
-checksum = "blake3:598c19b2c37a5e0eedf62d1847c45c6f1147e00f657957e7541878d9463fab19"
+checksum = "blake3:d8a5257b81a54cceedf3c07bdeee4bc7b3c78baff194b93950a34ce413b8ca67"
 
 [[tools.uv]]
 version = "0.9.7"
