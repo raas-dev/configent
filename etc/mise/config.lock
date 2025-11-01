@@ -232,7 +232,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.9.4"
+version = "0.9.5"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
