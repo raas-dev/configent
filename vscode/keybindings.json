@@ -508,7 +508,7 @@
   },
   {
     "command": "composerMode.plan",
-    "key": "cmd+[BracketLeft]"
+    "key": "cmd+[Quote]"
   },
   {
     "command": "-cursor.composer.openAgentWindow",
