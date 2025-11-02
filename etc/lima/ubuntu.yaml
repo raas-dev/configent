@@ -1,18 +1,18 @@
 images:
-  - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release-20250619/ubuntu-24.04-minimal-cloudimg-amd64.img"
+  - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release-20251001/ubuntu-24.04-minimal-cloudimg-amd64.img"
     arch: x86_64
-    digest: "sha256:c37d5ee2015a1039d58520b11e6fc012e695d6a224d0250c7a2eff8e91447adc"
-  - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release-20250619/ubuntu-24.04-minimal-cloudimg-arm64.img"
+    digest: "sha256:c9d17b2554832605cdb377ace2117822fb02694e8fb56d82f900ce045c7aae57"
+  - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release-20251001/ubuntu-24.04-minimal-cloudimg-arm64.img"
     arch: aarch64
-    digest: "sha256:4f0f4f51c9719d8d068332a417fc1c1960fcc21f58fdae3479f6f9a83bf992e8"
+    digest: "sha256:3586ec513ecdb47f0d27406f7e36f5300f5bd5d69a4dc7a4732f341435f6504f"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
   - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img"
     arch: x86_64
-    digest: "sha256:c37d5ee2015a1039d58520b11e6fc012e695d6a224d0250c7a2eff8e91447adc"
+    digest: "sha256:c9d17b2554832605cdb377ace2117822fb02694e8fb56d82f900ce045c7aae57"
   - location: "https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-arm64.img"
     arch: aarch64
-    digest: "sha256:4f0f4f51c9719d8d068332a417fc1c1960fcc21f58fdae3479f6f9a83bf992e8"
+    digest: "sha256:3586ec513ecdb47f0d27406f7e36f5300f5bd5d69a4dc7a4732f341435f6504f"
 
 #cpus: 4          # default: 4
 memory: "8GiB" # default: "4GiB"
