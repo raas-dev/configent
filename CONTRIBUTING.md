@@ -54,9 +54,9 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
 
-- Lima: Arch Linux / AArch64 (as of 2025-06)
+- Lima: Arch Linux / AArch64 (as of 2025-11)
   - [No up-to-date AArch64 image](https://github.com/lima-vm/lima/issues/3049)
-    - Workaround: Use [own](https://github.com/mschirrmeister/archlinux-lima)
+    - Workaround: Build [own](https://github.com/mschirrmeister/archlinux-lima)
 
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
