@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.2](https://github.com/raas-dev/configent/compare/1.176.1...1.176.2) (2025-11-02)
+
+
+### Fixes
+
+* **archlinux:** enable hostResolver in configuration ([1160eff](https://github.com/raas-dev/configent/commit/1160eff5e50ef09fb635f6c07583295d0350a066))
+* **archlinux:** update aarch64 cloud image location and digests ([acff8b3](https://github.com/raas-dev/configent/commit/acff8b3d24d3b643e738a02126910d65c23e776b))
+* **install_apps_pacman:** add lsof to the installed utilities list ([296668d](https://github.com/raas-dev/configent/commit/296668d9f83267c6a725035d0f138c7d136b42d1))
+* **lima:** rename opensuse-tumbleweed.yaml to tumbleweed.yaml ([54361da](https://github.com/raas-dev/configent/commit/54361da4a83a1ac7077863d3fe0d9115f5b816fa))
+
 ### [1.176.1](https://github.com/raas-dev/configent/compare/1.176.0...1.176.1) (2025-11-02)
 
 
