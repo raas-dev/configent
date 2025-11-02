@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.4](https://github.com/raas-dev/configent/compare/1.176.3...1.176.4) (2025-11-02)
+
+
+### Fixes
+
+* **archlinux:** remove static DNS entry from configuration ([e102f52](https://github.com/raas-dev/configent/commit/e102f521f6335c977e5e7e6ce81d1703088a8b66))
+* **install_apps_pacman:** replace lsof with less in utilities list ([eed91cf](https://github.com/raas-dev/configent/commit/eed91cfb984924945bd37305494de48c92cdd513))
+
 ### [1.176.3](https://github.com/raas-dev/configent/compare/1.176.2...1.176.3) (2025-11-02)
 
 
