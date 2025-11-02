@@ -394,30 +394,11 @@ venv() {
 
 ### Node.js ####################################################################
 
-### ai
-
-# Claude Code templates
-alias claude-code-templates='bunx claude-code-templates'
-
 # Flowise
 alias flowise='bunx flowise'
 
-# Visual testing tool for MCP servers
+# MCP server developer tool
 alias inspector='bunx @modelcontextprotocol/inspector'
-
-# Midscene
-alias midscene='bunx @midscene/cli'
-
-# LLM evaluation framework
-alias promptfoo='bunx promptfoo'
-
-# Packs entire repository into a single, AI-friendly file
-alias repomix='bunx repomix'
-
-### dev
-
-# Find unused and missing package.json (dev)Dependencies
-alias depcheck='bunx depcheck'
 
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
@@ -425,8 +406,11 @@ alias ncu='bunx npm-check-updates'
 # Project generator (requires bin/yarn shim)
 alias projen='bunx projen'
 
-# Bump version and generate CHANGELOG.md
-alias standard-version='bunx standard-version'
+# LLM evaluation framework
+alias promptfoo='bunx promptfoo'
+
+# Packs entire repository into a single, AI-friendly file
+alias repomix='bunx repomix'
 
 ### Functions: AI ##############################################################
 
