@@ -53,7 +53,7 @@ $SUDO apt-get install -y bison build-essential cmake m4 pkg-config
 
 # Common development dependencies
 $SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
-  libgmp-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev \
+  libgmp-dev libicu-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev \
   libxml2-dev libyaml-dev zlib1g-dev
 
 # Utils

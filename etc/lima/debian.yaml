@@ -1,15 +1,15 @@
 images:
-  - location: "https://cloud.debian.org/images/cloud/bookworm/20250519-2117/debian-12-genericcloud-amd64-20250519-2117.qcow2"
-    arch: x86_64
-    digest: "sha512:ee35c87b8a0c67eb67a169beec3bef5d6868957c1d31374797ef37072650c5067094c50ca293d7b926a967d07515abf1845f515084e3a192c7c69df75e84c95a"
-  - location: "https://cloud.debian.org/images/cloud/bookworm/20250519-2117/debian-12-genericcloud-arm64-20250519-2117.qcow2"
-    arch: aarch64
-    digest: "sha512:9282da6c8509e16191a3950c63174a4c94f8921ff2062ed54912f86aa8c986edf443d7f77f0e9d0937c2576f09fbacb2fd53459875ec2c7afb015c70d54c7e19"
+  - location: "https://cloud.debian.org/images/cloud/trixie/20250911-2232/debian-13-genericcloud-amd64-20250911-2232.qcow2"
+    arch: "x86_64"
+    digest: "sha512:82ca129c665d6d1d9a919aa64a1c275646755de078a4e07de83d741e28f38f506b907f46432c0368d4ab3c740cfacf9894238be7052aeb46b1933259cabecc62"
+  - location: "https://cloud.debian.org/images/cloud/trixie/20250911-2232/debian-13-genericcloud-arm64-20250911-2232.qcow2"
+    arch: "aarch64"
+    digest: "sha512:4c9cf2f8733670ff8d56a88b6e0f04900c55f68c1a4757a257605b314062fdd6dbe37b61b8b9ecda376a16770e9f12aeddc23bd5c5f499f91443d99308790a32"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
-  - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
+  - location: https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-amd64-daily.qcow2
     arch: x86_64
-  - location: https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-arm64.qcow2
+  - location: https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-arm64-daily.qcow2
     arch: aarch64
 
 mountTypesUnsupported: ["9p"]
