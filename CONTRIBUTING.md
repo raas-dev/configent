@@ -54,9 +54,11 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
 
-- Lima: Arch Linux / AArch64 (as of 2025-11)
-  - [No up-to-date AArch64 image](https://github.com/lima-vm/lima/issues/3049)
-    - Workaround: Build [own](https://github.com/mschirrmeister/archlinux-lima)
+- Lima: Alpine Linux (as of 2025-11)
+  - Sometimes the VM does not start, gets stuck in waiting ssh as requirement
+    - No known workaround
+  - Bases on Musl: Binaries may not be available, or may not build from source
+    - Install via `apk`
 
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
