@@ -37,25 +37,25 @@ mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
 # agent dir (from claude-code, note singular in the target dir name)
-if [ ! -r "$backup_path/.config/opencode/agent" ]; then
-  if [ -r "$HOME/.config/opencode/agent" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/agent" \
-      "$backup_path/.config/opencode/agent"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/agent"
-rm -rf "$HOME/.config/opencode/agent"
-ln -sfnv "$config_path/claude-code/agents" "$HOME/.config/opencode/agent"
+# if [ ! -r "$backup_path/.config/opencode/agent" ]; then
+#   if [ -r "$HOME/.config/opencode/agent" ]; then
+#     mkdir -p "$backup_path/.config/opencode"
+#     cp -RP "$HOME/.config/opencode/agent" \
+#       "$backup_path/.config/opencode/agent"
+#   fi
+# fi
+# mkdir -p "$HOME/.config/opencode/agent"
+# rm -rf "$HOME/.config/opencode/agent"
+# ln -sfnv "$config_path/claude-code/agents" "$HOME/.config/opencode/agent"
 
 # command dir (from claude-code, note singular in the target dir name)
-if [ ! -r "$backup_path/.config/opencode/command" ]; then
-  if [ -r "$HOME/.config/opencode/command" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/command" \
-      "$backup_path/.config/opencode/command"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/command"
-rm -rf "$HOME/.config/opencode/command"
-ln -sfnv "$config_path/claude-code/commands" "$HOME/.config/opencode/command"
+# if [ ! -r "$backup_path/.config/opencode/command" ]; then
+#   if [ -r "$HOME/.config/opencode/command" ]; then
+#     mkdir -p "$backup_path/.config/opencode"
+#     cp -RP "$HOME/.config/opencode/command" \
+#       "$backup_path/.config/opencode/command"
+#   fi
+# fi
+# mkdir -p "$HOME/.config/opencode/command"
+# rm -rf "$HOME/.config/opencode/command"
+# ln -sfnv "$config_path/claude-code/commands" "$HOME/.config/opencode/command"

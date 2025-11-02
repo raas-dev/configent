@@ -35,34 +35,34 @@ mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
 # agents dir
-if [ ! -r "$backup_path/.claude/agents" ]; then
-  if [ -r "$HOME/.claude/agents" ]; then
-    mkdir -p "$backup_path/.claude"
-    cp -RP "$HOME/.claude/agents" "$backup_path/.claude/agents"
-  fi
-fi
-mkdir -p "$HOME/.claude/agents"
-rm -rf "$HOME/.claude/agents"
-ln -sfnv "$config_path/claude-code/agents" "$HOME/.claude/agents"
+# if [ ! -r "$backup_path/.claude/agents" ]; then
+#   if [ -r "$HOME/.claude/agents" ]; then
+#     mkdir -p "$backup_path/.claude"
+#     cp -RP "$HOME/.claude/agents" "$backup_path/.claude/agents"
+#   fi
+# fi
+# mkdir -p "$HOME/.claude/agents"
+# rm -rf "$HOME/.claude/agents"
+# ln -sfnv "$config_path/claude-code/agents" "$HOME/.claude/agents"
 
 # commands dir
-if [ ! -r "$backup_path/.claude/commands" ]; then
-  if [ -r "$HOME/.claude/commands" ]; then
-    mkdir -p "$backup_path/.claude"
-    cp -RP "$HOME/.claude/commands" "$backup_path/.claude/commands"
-  fi
-fi
-mkdir -p "$HOME/.claude/commands"
-rm -rf "$HOME/.claude/commands"
-ln -sfnv "$config_path/claude-code/commands" "$HOME/.claude/commands"
+# if [ ! -r "$backup_path/.claude/commands" ]; then
+#   if [ -r "$HOME/.claude/commands" ]; then
+#     mkdir -p "$backup_path/.claude"
+#     cp -RP "$HOME/.claude/commands" "$backup_path/.claude/commands"
+#   fi
+# fi
+# mkdir -p "$HOME/.claude/commands"
+# rm -rf "$HOME/.claude/commands"
+# ln -sfnv "$config_path/claude-code/commands" "$HOME/.claude/commands"
 
 # skills dir
-if [ ! -r "$backup_path/.claude/skills" ]; then
-  if [ -r "$HOME/.claude/skills" ]; then
-    mkdir -p "$backup_path/.claude"
-    cp -RP "$HOME/.claude/skills" "$backup_path/.claude/skills"
-  fi
-fi
-mkdir -p "$HOME/.claude/skills"
-rm -rf "$HOME/.claude/skills"
-ln -sfnv "$config_path/claude-code/skills" "$HOME/.claude/skills"
+# if [ ! -r "$backup_path/.claude/skills" ]; then
+#   if [ -r "$HOME/.claude/skills" ]; then
+#     mkdir -p "$backup_path/.claude"
+#     cp -RP "$HOME/.claude/skills" "$backup_path/.claude/skills"
+#   fi
+# fi
+# mkdir -p "$HOME/.claude/skills"
+# rm -rf "$HOME/.claude/skills"
+# ln -sfnv "$config_path/claude-code/skills" "$HOME/.claude/skills"
