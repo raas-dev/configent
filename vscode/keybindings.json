@@ -522,5 +522,25 @@
   {
     "command": "-composer.startComposerPrompt",
     "key": "cmd+i"
+  },
+  {
+    "command": "-cursor.toggleAgentWindowIDEUnification",
+    "key": "cmd+e",
+    "when": "cursor.agentIdeUnification.featureGate && workbenchState != 'empty'"
+  },
+  {
+    "command": "-cursor.cycleComposerLocation",
+    "key": "shift+cmd+[Comma]",
+    "when": "cursor.agentIdeUnification.featureGate"
+  },
+  {
+    "command": "-workbench.action.maximizeChatSize",
+    "key": "alt+cmd+e",
+    "when": "cursor.agentIdeUnification.enabled"
+  },
+  {
+    "command": "-workbench.action.toggleUnifiedSidebar",
+    "key": "shift+cmd+s",
+    "when": "cursor.agentIdeUnification.enabled"
   }
 ]
