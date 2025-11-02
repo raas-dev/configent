@@ -1,9 +1,9 @@
 images:
   - location: "https://cloud-images.ubuntu.com/releases/questing/release-20251007/ubuntu-25.10-server-cloudimg-amd64.img"
-    arch: "x86_64"
+    arch: x86_64
     digest: "sha256:67825fe057c20aede30d86be90f876b4b687a3c7f7a7a409c68c0c1352760a55"
   - location: "https://cloud-images.ubuntu.com/releases/questing/release-20251007/ubuntu-25.10-server-cloudimg-arm64.img"
-    arch: "aarch64"
+    arch: aarch64
     digest: "sha256:a7b84e640e4dd1f1de036653fbdc18dc0600b5293e89c0958fc7de507c550cca"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
