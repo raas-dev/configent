@@ -1,15 +1,15 @@
 images:
-  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20250516/ubuntu-24.04-server-cloudimg-amd64.img"
-    arch: x86_64
-    digest: "sha256:8d6161defd323d24d66f85dda40e64e2b9021aefa4ca879dcbc4ec775ad1bbc5"
-  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20250516/ubuntu-24.04-server-cloudimg-arm64.img"
-    arch: aarch64
-    digest: "sha256:c933c6932615d26c15f6e408e4b4f8c43cb3e1f73b0a98c2efa916cc9ab9549c"
+  - location: "https://cloud-images.ubuntu.com/releases/questing/release-20251007/ubuntu-25.10-server-cloudimg-amd64.img"
+    arch: "x86_64"
+    digest: "sha256:67825fe057c20aede30d86be90f876b4b687a3c7f7a7a409c68c0c1352760a55"
+  - location: "https://cloud-images.ubuntu.com/releases/questing/release-20251007/ubuntu-25.10-server-cloudimg-arm64.img"
+    arch: "aarch64"
+    digest: "sha256:a7b84e640e4dd1f1de036653fbdc18dc0600b5293e89c0958fc7de507c550cca"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
-  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
+  - location: https://cloud-images.ubuntu.com/releases/questing/release/ubuntu-25.10-server-cloudimg-amd64.img
     arch: x86_64
-  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-arm64.img
+  - location: https://cloud-images.ubuntu.com/releases/questing/release/ubuntu-25.10-server-cloudimg-arm64.img
     arch: aarch64
 
 mounts:
