@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.175.1](https://github.com/raas-dev/configent/compare/1.175.0...1.175.1) (2025-11-02)
+
+
+### Fixes
+
+* **config:** fix paths for claude skills directory ([1ccf0f4](https://github.com/raas-dev/configent/commit/1ccf0f4f3fdad4880156e3298bf17123d8541fce))
+
 ## [1.175.0](https://github.com/raas-dev/configent/compare/1.174.4...1.175.0) (2025-11-02)
 
 
