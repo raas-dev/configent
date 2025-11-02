@@ -26,8 +26,8 @@ Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
 
 Supported Linux distributions (both AArch64 and x86-64):
 - Ubuntu Linux 24.04 LTS (Noble Numbat) and 22.04 LTS (Jammy Jellyfish)
-- Debian Linux 12 (Bookworm) and 11 (Bullseye)
-- Fedora Linux 42 and 41
+- Debian Linux 13 (Trixie) and 12 (Bookworm)
+- Fedora Linux 43 and 42
 - CentOS Stream 10 and 9
 - AlmaLinux 10 and 9
 - Rocky Linux 10 and 9
