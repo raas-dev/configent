@@ -1,0 +1,47 @@
+images:
+  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.46/alpine-lima-std-3.22.2-x86_64.iso
+    arch: x86_64
+    digest: sha512:759d8e1efa5f74e9c9357b359711c58b2dbf26232ac7bb80ddd10ba328eb7bd528eb1a0e72aff0334951c9f28a8403b76dcaa8eacb8ae378fe48dd365630fd49
+  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.46/alpine-lima-std-3.22.2-aarch64.iso
+    arch: aarch64
+    digest: sha512:53ef755c6b8fa7d6bf3c55ad96341f145c3500b685774c9e303e25651a273273d730c79603e87935d652d64f6db87b0f13abc9e44a4f4750d76ee856cd18ed43
+
+mounts:
+  - location: "~/configent"
+    writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
+    writable: true
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  # Reverse lima's ash-as-bash hack
+  # https://github.com/lima-vm/lima/blob/master/pkg/cidata/cidata.TEMPLATE.d/boot/01-alpine-ash-as-bash.sh
+  - mode: system
+    script: |
+      #!/bin/sh
+      rm -f /bin/bash
+      sudo apk add bash
+      ln -sf /bin/bash /bin/ash
+  - mode: user
+    script: |
+      #!/bin/sh
+      wget -q -O - https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
+hostResolver:
+  enabled: false
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - lima: user-v2
