@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.176.0](https://github.com/raas-dev/configent/compare/1.175.1...1.176.0) (2025-11-02)
+
+
+### Features
+
+* **lima:** Update distros ([29c7d70](https://github.com/raas-dev/configent/commit/29c7d704b9b5609788c3379652d8ad6b04bf3398))
+
+
+### Fixes
+
+* **archlinux:** update cloud image URLs and digests for lima config ([c36edad](https://github.com/raas-dev/configent/commit/c36edade273e8352250d70bc47cae4278d1b83dd))
+* **dotfiles:** add port function to list listening TCP ports ([88cd132](https://github.com/raas-dev/configent/commit/88cd13238307733b6696fd8b10114db60683b91f))
+* **dotfiles:** correct alias for pdftotext command ([6b2a7a3](https://github.com/raas-dev/configent/commit/6b2a7a31f4800896ac44ff195db0371176baa8f6))
+* **dotfiles:** enable loading of .env file in nixd alias ([56e6702](https://github.com/raas-dev/configent/commit/56e6702b2b460a84b7a1d4891b69f9538e6e1afc))
+* **etc:** remove obsolete comments and unsupported mount configs in opensuse lima yamls ([aff904f](https://github.com/raas-dev/configent/commit/aff904f041481dc9a07881d7d3a2698260d644de))
+* **etc:** update cloud image URLs and digests for lima config files ([b444451](https://github.com/raas-dev/configent/commit/b444451ece61d1a5cfafb5296708132de0572358))
+* **etc:** update Debian cloud image to version 13 and add libicu-dev to apt install ([f72c1d5](https://github.com/raas-dev/configent/commit/f72c1d5ee2f61fad2836469ba64df19c9a3dc2ed))
+* **fedora:** update Fedora cloud image to version 43 and refresh digests ([aa66c6a](https://github.com/raas-dev/configent/commit/aa66c6ac4e299f38fe7872448ebc36094ec65f11))
+* **README:** update supported Debian and Fedora Linux versions ([c33317c](https://github.com/raas-dev/configent/commit/c33317c8eddc0dc33b7bb9a6785cd964e7115dc1))
+* **ubuntu:** update 24.04 minimal cloud image URLs and digests ([8de2696](https://github.com/raas-dev/configent/commit/8de2696ffe4660f0a04a3ee61052601018487de9))
+* **vscode:** remove extra keybindings for agentIdeUnification commands ([d951561](https://github.com/raas-dev/configent/commit/d951561e52521cd936d433d846034aeaef159bb7))
+* **vscode:** suppress GitLens line uncommitted warning message ([103b716](https://github.com/raas-dev/configent/commit/103b716dfcf79f1caac6d2ec7dc19c226bf8b907))
+* **xorg:** update Ubuntu cloud image URLs to 25.10 release ([2d389d5](https://github.com/raas-dev/configent/commit/2d389d5a077e63063bcbb4a69a714ce4898fb0f9))
+
 ### [1.175.1](https://github.com/raas-dev/configent/compare/1.175.0...1.175.1) (2025-11-02)
 
 
