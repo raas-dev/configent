@@ -396,6 +396,9 @@ venv() {
 
 ### ai
 
+# Claude Code templates
+alias claude-code-templates='bunx claude-code-templates'
+
 # Flowise
 alias flowise='bunx flowise'
 
