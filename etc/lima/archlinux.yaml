@@ -36,9 +36,9 @@ provision:
       #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
-# https://lima-vm.io/docs/config/network/user/#dns-19216853
+# note: this is enabled for Arch Linux
 hostResolver:
-  enabled: false
+  enabled: true
 
 # https://lima-vm.io/docs/config/network/#lima-user-v2-network
 networks:
