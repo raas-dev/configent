@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.175.0](https://github.com/raas-dev/configent/compare/1.174.4...1.175.0) (2025-11-02)
+
+
+### Features
+
+* **dotfiles:** add alias for Claude code templates command ([6be14bc](https://github.com/raas-dev/configent/commit/6be14bc52ad612d29f38c8cb688bc4659c8d30fe))
+
+
+### Fixes
+
+* **postinstall:** comment out backup and symlink operations ([aaca3e4](https://github.com/raas-dev/configent/commit/aaca3e4889a619061edcd69b3363577fcd1d1afc))
+* **vscode:** update keybinding for composerMode.plan command ([d0d160f](https://github.com/raas-dev/configent/commit/d0d160fcff7887a54cc81e496c9ac1dedd9dbdbc))
+
 ### [1.174.4](https://github.com/raas-dev/configent/compare/1.174.3...1.174.4) (2025-11-01)
 
 
