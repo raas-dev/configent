@@ -36,7 +36,11 @@
     "skillz": {
       "type": "local",
       "enabled": true,
-      "command": ["uvx", "skillz@latest", "~/.claude/skills"]
+      "command": [
+        "uvx",
+        "skillz@latest",
+        "~/.config/configent/claude-code/skills"
+      ]
     }
   }
 }

@@ -26,7 +26,7 @@
     },
     "skillz": {
       "command": "uvx",
-      "args": ["skillz@latest", "~/.claude/skills"]
+      "args": ["skillz@latest", "~/.config/configent/claude-code/skills"]
     }
   }
 }
