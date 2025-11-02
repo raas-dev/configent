@@ -246,6 +246,9 @@ export INFRACOST_SKIP_UPDATE_CHECK=true
 # browser-use
 export ANONYMIZED_TELEMETRY=false
 
+# vercel
+export VERCEL_TELEMETRY_DISABLED=1
+
 ### ai #########################################################################
 
 # aichat
