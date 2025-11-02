@@ -56,9 +56,9 @@ SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 - Lima: Alpine Linux (as of 2025-11)
   - After restarting VM, lima gets stuck in boot waiting ssh to be available
-    - No known workaround
+    - On macOS, try [qemu instead of vz](https://github.com/lima-vm/lima/issues/3052)
   - Musl binaries for apps may not be available, or may not build from source
-    - Most notably, install `node` using `apk`
+    - Install `node` using `apk`
 
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
