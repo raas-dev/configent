@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.1](https://github.com/raas-dev/configent/compare/1.176.0...1.176.1) (2025-11-02)
+
+
+### Fixes
+
+* **dotfiles:** clean up and reorder alias definitions ([87a6c7f](https://github.com/raas-dev/configent/commit/87a6c7fcd00625194c6fe57b177c81baf5edae50))
+* **profile:** add command existence checks for starship and carapace initialization ([4b886bc](https://github.com/raas-dev/configent/commit/4b886bcdfc2a6b05cae31d6830e6ea5b112473f5))
+
 ## [1.176.0](https://github.com/raas-dev/configent/compare/1.175.1...1.176.0) (2025-11-02)
 
 
