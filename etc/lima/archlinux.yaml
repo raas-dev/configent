@@ -1,7 +1,7 @@
 images:
-  - location: "https://geo.mirror.pkgbuild.com/images/v20250415.336224/Arch-Linux-x86_64-cloudimg-20250415.336224.qcow2"
+  - location: "https://geo.mirror.pkgbuild.com/images/v20250701.374901/Arch-Linux-x86_64-cloudimg-20250701.374901.qcow2"
     arch: x86_64
-    digest: "sha256:f9086324b53fb4c50ead595e92c5addf2bb28940506be8b861d400760565c344"
+    digest: "sha256:f9a1968e2d3c4808dc52737c9ef04d666c8cf9f66d438e47162d8dac5bcfadb3"
   - location: "https://github.com/mschirrmeister/archlinux-lima/releases/download/20250513-0/Arch-Linux-aarch64-cloudimg-20250513.0.qcow2.xz"
     arch: aarch64
   # Fallback to the latest release image.
