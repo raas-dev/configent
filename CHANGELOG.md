@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.3](https://github.com/raas-dev/configent/compare/1.176.2...1.176.3) (2025-11-02)
+
+
+### Fixes
+
+* **archlinux:** update DNS configuration and disable hostResolver ([e43b582](https://github.com/raas-dev/configent/commit/e43b582585d2f040ce3f4ce9908eb3389dad2c66))
+
 ### [1.176.2](https://github.com/raas-dev/configent/compare/1.176.1...1.176.2) (2025-11-02)
 
 
