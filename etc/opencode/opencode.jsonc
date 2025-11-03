@@ -9,38 +9,13 @@
   "model": "github-copilot/claude-haiku-4.5",
   "instructions": ["CLAUDE.md", "GEMINI.md"],
   "mcp": {
-    "chrome-devtools": {
-      "type": "local",
-      "enabled": true,
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
-    },
     "context7": {
-      "type": "local",
-      "enabled": true,
-      "command": [
-        "npx",
-        "-y",
-        "@upstash/context7-mcp@latest",
-        "--api-key",
-        "{env:CONTEXT7_API_KEY}"
-      ]
-    },
-    "tavily": {
-      "type": "local",
-      "enabled": true,
-      "command": ["npx", "-y", "tavily-mcp@latest"],
-      "environment": {
-        "TAVILY_API_KEY": "{env:TAVILY_API_KEY}"
-      }
-    },
-    "skillz": {
-      "type": "local",
-      "enabled": true,
-      "command": [
-        "uvx",
-        "skillz@latest",
-        "~/.config/configent/claude-code/skills"
-      ]
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      },
+      "enabled": true
     }
   }
 }
