@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.5](https://github.com/raas-dev/configent/compare/1.176.4...1.176.5) (2025-11-03)
+
+
+### Fixes
+
+* **archlinux:** link systemd stub-resolv.conf to resolv.conf ([8b35904](https://github.com/raas-dev/configent/commit/8b3590433c8017cebacaa87e7c032712419bb667))
+
 ### [1.176.4](https://github.com/raas-dev/configent/compare/1.176.3...1.176.4) (2025-11-02)
 
 
