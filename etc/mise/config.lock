@@ -45,13 +45,13 @@ checksum = "blake3:1643fe56ae2f8adc8229a82672484113c01c82b5fe15b3e498610fc050831
 size = 22437956
 
 [[tools.carapace]]
-version = "1.5.3"
+version = "1.5.4"
 backend = "aqua:carapace-sh/carapace-bin"
 
 [tools.carapace.platforms.macos-arm64]
-checksum = "sha256:df29c65ba25bfee848af767fae993d61585a2e832dbfd3485242405fab53966a"
-size = 13391266
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.3/carapace-bin_1.5.3_darwin_arm64.tar.gz"
+checksum = "sha256:31f66b158c7b9943c0f198bad5c76e40928dee765630a1da2fe73d0bdd2697a2"
+size = 13605798
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.4/carapace-bin_1.5.4_darwin_arm64.tar.gz"
 
 [[tools.cargo-binstall]]
 version = "1.15.10"
@@ -185,13 +185,13 @@ version = "1.2.0"
 backend = "aqua:lsd-rs/lsd"
 
 [[tools.neovim]]
-version = "0.11.4"
+version = "0.11.5"
 backend = "aqua:neovim/neovim"
 
 [tools.neovim.platforms.macos-arm64]
-checksum = "blake3:31e761b1a1aa3642dec4b09b2f080f99fe550ecfb82e77f7bf11382d5f0630de"
-size = 9194532
-url = "https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-macos-arm64.tar.gz"
+checksum = "sha256:79143d3b408f7034f90b7cf59af2276de09ef8a4c2f1a28e4c99581b249d3107"
+size = 9204217
+url = "https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-macos-arm64.tar.gz"
 
 [[tools.node]]
 version = "22.21.1"
@@ -375,11 +375,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.10"
+version = "1.0.15"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:0e969f5beec90eaa31ff066b7dc4b918b3c754394be6c87f5318c91c6d0112d0"
+checksum = "blake3:1a4b35904ad37b1a97491cd05a89f322881dc3088209464cff80e4c2ca9811f1"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.1.2"
