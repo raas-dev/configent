@@ -31,6 +31,10 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: system
+    script: |
+      #!/bin/sh
+      ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
   - mode: user
     script: |
       #!/bin/sh
