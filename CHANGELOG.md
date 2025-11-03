@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.6](https://github.com/raas-dev/configent/compare/1.176.5...1.176.6) (2025-11-03)
+
+
+### Fixes
+
+* **install_apps_pacman:** remove pandoc-cli from utilities list ([e10171f](https://github.com/raas-dev/configent/commit/e10171fbe4f0063fbc85f3a18b38d3fc0d6435eb))
+
 ### [1.176.5](https://github.com/raas-dev/configent/compare/1.176.4...1.176.5) (2025-11-03)
 
 
