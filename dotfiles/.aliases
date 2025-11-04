@@ -129,7 +129,7 @@ alias a='ai'
 alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='oxker --host $DOCKER_HOST'
 # d is for generic docker build and run, see d()
-# e is for generic extract package, see e()
+alias e="$DEFAULT_IDE --reuse-window --add"
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='git'
 alias h='xh --verify=no'
@@ -585,7 +585,7 @@ big() {
 }
 
 # Generic extract package
-e() {
+ext() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
   if [ $# -eq 0 ]; then
     echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso|.whl>"
