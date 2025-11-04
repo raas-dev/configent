@@ -1,6 +1,11 @@
 #!/bin/bash
 # the above shebang is only for ShellCheck, this file is not executable
 
+### IDE ########################################################################
+
+# export DEFALT_IDE="<BIN_NAME>" in ~/.rclocal to override what's in .profile
+alias code="\$DEFAULT_IDE"
+
 ### Upgrade for all package managers ###########################################
 
 # shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
@@ -79,19 +84,6 @@ fi
 
 ### More sensible defaults #####################################################
 
-command -v code >/dev/null && alias code='code --reuse-window --add'
-
-# (Commercial) VS Code likes
-if command -v cursor >/dev/null; then
-  alias cursor='cursor --reuse-window --add'
-  [ "$DEFAULT_IDE" = "cursor" ] && alias code='cursor'
-fi
-
-if command -v windsurf >/dev/null; then
-  alias windsurf='windsurf --reuse-window --add'
-  [ "$DEFAULT_IDE" = "windsurf" ] && alias code='windsurf'
-fi
-
 alias grep='grep --color'
 alias egrep='egrep --color'
 alias fgrep='fgrep --color'
@@ -129,7 +121,7 @@ alias a='ai'
 alias b='bat --style=grid,header-filename,numbers,snip'
 alias c='oxker --host $DOCKER_HOST'
 # d is for generic docker build and run, see d()
-alias e="$DEFAULT_IDE --reuse-window --add"
+alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden'
 alias g='git'
 alias h='xh --verify=no'
