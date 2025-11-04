@@ -366,23 +366,15 @@
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
-  "restoreTerminals.artificialDelayMilliseconds": 100,
+  "restoreTerminals.artificialDelayMilliseconds": 0,
   "restoreTerminals.keepExistingTerminalsOpen": false,
   "restoreTerminals.terminals": [
     {
       "splitTerminals": [
         {
-          "commands": [
-            "cd $HOME",
-            "clear"
-          ],
           "name": "a"
         },
         {
-          "commands": [
-            "cd $HOME",
-            "clear"
-          ],
           "name": "b"
         }
       ]
