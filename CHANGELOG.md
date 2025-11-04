@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.7](https://github.com/raas-dev/configent/compare/1.176.6...1.176.7) (2025-11-04)
+
+
+### Fixes
+
+* **aliases:** rename extract function from e to ext ([429b3c3](https://github.com/raas-dev/configent/commit/429b3c3205fbdf8b0c46bbba2682ad68da76b45c))
+* **aliases:** update and simplify IDE-related aliases ([486ad96](https://github.com/raas-dev/configent/commit/486ad96c6b134a86b1344afe76b9b8aa3f6515b0))
+* **opencode:** update MCP context7 to use remote URL and headers ([6b12d1f](https://github.com/raas-dev/configent/commit/6b12d1ff0322bec73f99a5cc4c30633d86138cb0))
+* **vscode:** remove artificial delay and startup commands in terminal settings ([6a1c418](https://github.com/raas-dev/configent/commit/6a1c41842161af6486bc3e3abb821f2023f6722e))
+* **vscode:** update terminal session and hideOnStartup settings ([1aea573](https://github.com/raas-dev/configent/commit/1aea57309e06925b925296f483482634cf44ac9d))
+
 ### [1.176.6](https://github.com/raas-dev/configent/compare/1.176.5...1.176.6) (2025-11-03)
 
 
