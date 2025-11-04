@@ -424,7 +424,6 @@
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.gpuAcceleration": "off",
-  "terminal.integrated.hideOnStartup": "always",
   "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
     "starship",
@@ -564,11 +563,11 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "terminal.integrated.enablePersistentSessions": false,
   "claudeCode.useTerminal": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "files.trimTrailingWhitespaceInRegexAndStrings": false,
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
-  }
+  },
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose"
 }
