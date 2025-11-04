@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.8](https://github.com/raas-dev/configent/compare/1.176.7...1.176.8) (2025-11-04)
+
+
+### Fixes
+
+* **vscode:** add default restore terminals config file ([e1404a4](https://github.com/raas-dev/configent/commit/e1404a46c2184621db32625a25259eb00084509e))
+* **vscode:** update terminal restoreTerminals settings ([c987787](https://github.com/raas-dev/configent/commit/c98778758419a7a2920e05375bab147b8f598e5a))
+
 ### [1.176.7](https://github.com/raas-dev/configent/compare/1.176.6...1.176.7) (2025-11-04)
 
 
