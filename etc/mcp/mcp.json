@@ -23,10 +23,6 @@
       "env": {
         "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
       }
-    },
-    "skillz": {
-      "command": "uvx",
-      "args": ["skillz@latest", "~/.config/configent/claude-code/skills"]
     }
   }
 }
