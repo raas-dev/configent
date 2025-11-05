@@ -29,6 +29,8 @@ fi
 
 # https://zsh.sourceforge.io/Guide/zshguide04.html
 bindkey -e
+bindkey -r '^S' # unbind terminal chord
+bindkey -r '^@' # unbind tmux prefix
 
 ### Completions ################################################################
 
