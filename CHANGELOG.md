@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.9](https://github.com/raas-dev/configent/compare/1.176.8...1.176.9) (2025-11-05)
+
+
+### Fixes
+
+* **claude-skills:** remove deprecated config.json file ([e685b13](https://github.com/raas-dev/configent/commit/e685b13234d17592fbcb6b7381a9933d3b8933fd))
+* **dotfiles:** unbind ^S and ^@ keys in zshrc ([e40b1a4](https://github.com/raas-dev/configent/commit/e40b1a43b613ffe9f5fe11543e0dd749dc1b7595))
+* **mcp:** remove deprecated skillz configuration from mcp.json ([03a3487](https://github.com/raas-dev/configent/commit/03a3487c884562e6828f8109e65cb06517f81889))
+
 ### [1.176.8](https://github.com/raas-dev/configent/compare/1.176.7...1.176.8) (2025-11-04)
 
 
