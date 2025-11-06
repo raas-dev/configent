@@ -541,7 +541,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "claudeCode.useTerminal": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "files.trimTrailingWhitespaceInRegexAndStrings": false,
   "gitlens.advanced.messages": {
