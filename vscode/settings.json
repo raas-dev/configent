@@ -549,5 +549,6 @@
   },
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "restoreTerminals.keepExistingTerminalsOpen": true,
-  "restoreTerminals.runOnStartup": false
+  "restoreTerminals.runOnStartup": false,
+  "update.mode": "none"
 }
