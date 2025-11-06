@@ -550,5 +550,6 @@
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "restoreTerminals.keepExistingTerminalsOpen": true,
   "restoreTerminals.runOnStartup": false,
-  "update.mode": "none"
+  "update.mode": "none",
+  "claudeCode.initialPermissionMode": "acceptEdits"
 }
