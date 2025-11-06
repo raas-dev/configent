@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.10](https://github.com/raas-dev/configent/compare/1.176.9...1.176.10) (2025-11-06)
+
+
+### Fixes
+
+* **vscode:** keep existing terminals open on startup ([861684b](https://github.com/raas-dev/configent/commit/861684bfe1668877efc8196308eb80b134b92622))
+* **vscode:** remove deprecated claudeCode.useTerminal setting ([2444f6f](https://github.com/raas-dev/configent/commit/2444f6f40366abcc366b82f668923dfc047b3b08))
+
 ### [1.176.9](https://github.com/raas-dev/configent/compare/1.176.8...1.176.9) (2025-11-05)
 
 
