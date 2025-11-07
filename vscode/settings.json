@@ -110,7 +110,6 @@
   "cursor.composer.textSizeScale": 1.2,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
-    "markdown",
     "untitled"
   ],
   "cursor.cpp.enablePartialAccepts": true,
