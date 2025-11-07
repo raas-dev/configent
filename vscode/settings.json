@@ -104,9 +104,6 @@
   "cursor.agent_layout_browser_beta_setting": true,
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
-  "cursor.composer.queueMessageDefaultBehavior": "queue",
-  "cursor.composer.shouldAllowCustomModes": true,
-  "cursor.composer.shouldAutoSaveNonAgent": false,
   "cursor.composer.textSizeScale": 1.2,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
@@ -114,7 +111,6 @@
   ],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
-  "cursor.preferNotificationsSameAsChat": true,
   "cursor.semanticSearch.includePullRequests": false,
   "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
   "dateTime.showSeconds": true,
@@ -549,5 +545,7 @@
   "restoreTerminals.keepExistingTerminalsOpen": true,
   "restoreTerminals.runOnStartup": false,
   "update.mode": "none",
-  "claudeCode.initialPermissionMode": "acceptEdits"
+  "claudeCode.initialPermissionMode": "acceptEdits",
+  "cursor.preferNotificationsSameAsChat": true,
+  "cursor.composer.shouldAllowCustomModes": true
 }
