@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.176.11](https://github.com/raas-dev/configent/compare/1.176.10...1.176.11) (2025-11-08)
+
+
+### Fixes
+
+* **settings:** remove markdown from disabledLanguages list in vscode settings ([6deb304](https://github.com/raas-dev/configent/commit/6deb30451a8fce126e917d752aa942eab2054ea9))
+* **settings:** restore removed cursor composer and notification settings ([f2bb4f2](https://github.com/raas-dev/configent/commit/f2bb4f2008be42e6ce59e2853d95d93f6637f40a))
+* **vscode:** disable keeping existing terminals open on startup ([e1ce3bb](https://github.com/raas-dev/configent/commit/e1ce3bbc2f4c4b8ae2a977bf795910f08ab028d8))
+* **vscode:** fix terminal cursor and UI transparency settings ([d7febc3](https://github.com/raas-dev/configent/commit/d7febc3ff4dd888cf585245c057807c6120a0228))
+
 ### [1.176.10](https://github.com/raas-dev/configent/compare/1.176.9...1.176.10) (2025-11-06)
 
 
