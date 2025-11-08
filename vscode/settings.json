@@ -482,7 +482,9 @@
     "terminal.background": "#090A14",
     "terminal.foreground": "#D0D0D0",
     "terminalCursor.background": "#353535",
-    "terminalCursor.foreground": "#B300AD"
+    "terminalCursor.foreground": "#B300AD",
+    "minimap.background": "#00000000",
+    "scrollbar.shadow": "#00000000"
   },
   "workbench.colorTheme": "Ayu Dark Bordered",
   "workbench.editor.centeredLayoutAutoResize": false,
