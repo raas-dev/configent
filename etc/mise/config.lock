@@ -247,13 +247,13 @@ version = "3.4.3"
 backend = "pipx:tldr"
 
 [[tools.pre-commit]]
-version = "4.3.0"
+version = "4.4.0"
 backend = "aqua:pre-commit/pre-commit"
 
 [tools.pre-commit.platforms.macos-arm64]
-checksum = "sha256:f1d50b97e9ca9167aceb76c14e90b07cde8b6789bc199d5005cfd817a718878c"
-size = 8268268
-url = "https://github.com/pre-commit/pre-commit/releases/download/v4.3.0/pre-commit-4.3.0.pyz"
+checksum = "sha256:9a7e1ff43020518d26698c3d1fe1dadddd161178880293333124348276ab98db"
+size = 8262847
+url = "https://github.com/pre-commit/pre-commit/releases/download/v4.4.0/pre-commit-4.4.0.pyz"
 
 [[tools.python]]
 version = "3.13.9"
