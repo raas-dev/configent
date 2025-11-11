@@ -132,7 +132,7 @@ alias l='la'
 # m is for m-cli
 # n is for ad-hoc nix-shell in docker, see n()
 alias o='open'
-alias p='procs --tree'
+alias p='procs --pager always --tree'
 alias q='clear'
 alias r='exec $SHELL'
 alias s='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
