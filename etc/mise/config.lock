@@ -28,13 +28,13 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.33"
+version = "2.31.34"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:470a92385673791f846781688a7c0198ecd5999a431fb04ae31f521720b2acab"
-size = 48347036
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.33.pkg"
+checksum = "blake3:8370ebab046bd943e1b125498f52381fbc2392c71466a9c63d3ebdf96d9f1dd2"
+size = 48347753
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.34.pkg"
 
 [[tools.bun]]
 version = "1.3.2"
@@ -319,11 +319,11 @@ backend = "ubi:abhimanyu003/sttr"
 checksum = "blake3:f75a3a00e896c73a88a11b37e6100ec38f7caff1f0aa2d8405036c7869829883"
 
 [[tools."ubi:block/goose"]]
-version = "1.13.2"
+version = "1.14.0"
 backend = "ubi:block/goose"
 
 [tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:39da9ebfd88a48473880840de91aebc1f8d220f29552b07b0350d6ad1a17833e"
+checksum = "blake3:f8d952ae49dc878b4d284fec4d4f40c931909044076d60b2ad3a8368b34f8e4d"
 
 [[tools."ubi:dalance/procs"]]
 version = "0.14.10"
@@ -375,11 +375,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.55"
+version = "1.0.61"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:67f271f57efb21fa41be9af4e3f871884256bdbc9e652474c3e6435e7e39cf93"
+checksum = "blake3:b35f866091d4b5f6a55b196c0fe44a12e0e4f610fd9b278b621ea53814254825"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.2.1"
