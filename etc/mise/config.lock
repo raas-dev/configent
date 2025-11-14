@@ -121,13 +121,13 @@ size = 1747511
 url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-darwin_arm64.tar.gz"
 
 [[tools.github-cli]]
-version = "2.83.0"
+version = "2.83.1"
 backend = "aqua:cli/cli"
 
 [tools.github-cli.platforms.macos-arm64]
-checksum = "sha256:fecba907bc361d5e33620dbf1145f11432c39fb2b388a839463cfbb89a84820b"
-size = 17385865
-url = "https://github.com/cli/cli/releases/download/v2.83.0/gh_2.83.0_macOS_arm64.zip"
+checksum = "sha256:4461a4f07cfdbeb83f96dce8d3789d5115b22185fb1a6fd3ec7f7befb755db0c"
+size = 17386980
+url = "https://github.com/cli/cli/releases/download/v2.83.1/gh_2.83.1_macOS_arm64.zip"
 
 [[tools.gitui]]
 version = "0.27.0"
@@ -207,7 +207,7 @@ version = "2.0.37"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.14.0"
+version = "0.15.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
