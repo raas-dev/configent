@@ -28,13 +28,13 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.36"
+version = "2.31.37"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:143c523d5c7117298dba76fd4ff1ba8664112c29913c80f96371e6fb63339650"
-size = 48364312
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.36.pkg"
+checksum = "blake3:2f8a6db60c55b6302110df31ec7a1a1fe99ff309b1fa7eb45386993e1dc1a9e2"
+size = 48365981
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.37.pkg"
 
 [[tools.bun]]
 version = "1.3.2"
@@ -203,11 +203,11 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.41"
+version = "2.0.42"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.15.0"
+version = "0.15.1"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
@@ -410,13 +410,13 @@ version = "0.25.0"
 backend = "aqua:ducaale/xh"
 
 [[tools.yq]]
-version = "4.48.1"
+version = "4.48.2"
 backend = "aqua:mikefarah/yq"
 
 [tools.yq.platforms.macos-arm64]
-checksum = "blake3:6e0fcb5770ee814265c2d0be03f4328eb443e1b9f07b9ee7be273cd7e59b7fc5"
-size = 10980802
-url = "https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_darwin_arm64"
+checksum = "sha256:b3a77a428fda2daced121c937be7f5dfb8107fc62ec506064f1d23bc09415dcb"
+size = 10997522
+url = "https://github.com/mikefarah/yq/releases/download/v4.48.2/yq_darwin_arm64"
 
 [[tools.zoxide]]
 version = "0.9.8"
