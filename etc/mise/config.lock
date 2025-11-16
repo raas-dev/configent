@@ -112,13 +112,13 @@ version = "10.3.0"
 backend = "aqua:sharkdp/fd"
 
 [[tools.fzf]]
-version = "0.66.1"
+version = "0.67.0"
 backend = "aqua:junegunn/fzf"
 
 [tools.fzf.platforms.macos-arm64]
-checksum = "sha256:0f44db428cb65a0b646e99a506422a59f4b2fc3d3973b35387f78bba48c79c16"
-size = 1747511
-url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-darwin_arm64.tar.gz"
+checksum = "sha256:b7f34c964d8e52c471c933cef8ec43dc71997c266cafafd1b013bed10fc229a1"
+size = 1750013
+url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-darwin_arm64.tar.gz"
 
 [[tools.github-cli]]
 version = "2.83.1"
@@ -207,7 +207,7 @@ version = "2.0.42"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.15.1"
+version = "0.15.3"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
@@ -223,7 +223,7 @@ version = "2.68.0"
 backend = "pipx:azure-cli"
 
 [[tools."pipx:browser-use"]]
-version = "0.9.5"
+version = "0.9.6"
 backend = "pipx:browser-use[extras=cli]"
 
 [[tools."pipx:glances"]]
@@ -375,11 +375,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.65"
+version = "1.0.67"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:6540804d761f1a3b1f6bc0bd3c41ed57fb08b36118ce4f38d18a8bb4b920673f"
+checksum = "blake3:21c2edadeb7e92e6263ad275b804c3761db7135234bfb718b8e64af59355d0fa"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.2.1"
