@@ -22,7 +22,7 @@
     },
     "utcp": {
       "command": "npx",
-      "args": ["@utcp/mcp-bridge"],
+      "args": ["@utcp/code-mode-mcp"],
       "env": {
         "UTCP_CONFIG_FILE": "~/.config/configent/utcp/.utcp_config.json"
       }
