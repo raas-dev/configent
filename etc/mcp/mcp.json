@@ -13,15 +13,18 @@
         "${env:CONTEXT7_API_KEY}"
       ]
     },
-    "desktop-commander": {
-      "command": "npx",
-      "args": ["-y", "@wonderwhy-er/desktop-commander@latest"]
-    },
     "tavily": {
       "args": ["-y", "tavily-mcp@latest"],
       "command": "npx",
       "env": {
         "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
+      }
+    },
+    "utcp": {
+      "command": "npx",
+      "args": ["@utcp/mcp-bridge"],
+      "env": {
+        "UTCP_CONFIG_FILE": "~/.config/configent/utcp/.utcp_config.json"
       }
     }
   }

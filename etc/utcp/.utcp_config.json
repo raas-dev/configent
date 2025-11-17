@@ -1,1 +1,35 @@
-{}
+{
+  "load_variables_from": [
+    {
+      "env_file_path": ".env",
+      "variable_loader_type": "dotenv"
+    }
+  ],
+  "manual_call_templates": [
+    {
+      "call_template_type": "http",
+      "content_type": "application/json",
+      "http_method": "GET",
+      "name": "openlibrary",
+      "url": "https://openlibrary.org/static/openapi.json"
+    }
+  ],
+  "post_processing": [
+    {
+      "only_include_keys": [
+        "name",
+        "key"
+      ],
+      "only_include_tools": [
+        "openlibrary.read_search_authors_json_search_authors_json_get"
+      ],
+      "tool_post_processor_type": "filter_dict"
+    }
+  ],
+  "tool_repository": {
+    "tool_repository_type": "in_memory"
+  },
+  "tool_search_strategy": {
+    "tool_search_strategy_type": "tag_and_description_word_match"
+  }
+}
