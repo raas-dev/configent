@@ -266,6 +266,9 @@ export GOOSE_DISABLE_KEYRING=1
 # prompts-mcp
 export PROMPTS_DIR="$HOME/.config/configent/prompts"
 
+# utcp-mcp
+export UTCP_CONFIG_FILE="$HOME/.config/configent/utcp/.utcp_config.json"
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
