@@ -444,7 +444,6 @@ ai_agent() {
     --with-builtin memory
     --with-extension "npx -y opendia"
     --with-extension "npx -y tavily-mcp"
-    --with-extension "npx -y @utcp/mcp-bridge"
     --with-extension "uvx prompts-mcp"
   )
   local context="${PWD##*/}"
