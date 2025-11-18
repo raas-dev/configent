@@ -46,5 +46,8 @@
     "accessibility": {
       "disableLoadingPhrases": true
     }
+  },
+  "experimental": {
+    "useModelRouter": false
   }
 }
