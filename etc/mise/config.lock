@@ -382,11 +382,11 @@ backend = "ubi:sst/opencode"
 checksum = "blake3:50c16b0813506d5da5e324f4a34b57ea109fd2a6933497bf1f6c85e59d21aef2"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
-version = "16.2.1"
+version = "16.3.0"
 backend = "ubi:topgrade-rs/topgrade"
 
 [tools."ubi:topgrade-rs/topgrade".platforms.macos-arm64-topgrade]
-checksum = "blake3:20d5438fe52d920f69ddeeb7718254482427be4175a7b23f958a0745dbc145cf"
+checksum = "blake3:f5dacabb1e9caebb51ce660d60d7a51915d9b2f651706690185994022a282786"
 
 [[tools.uv]]
 version = "0.9.10"
