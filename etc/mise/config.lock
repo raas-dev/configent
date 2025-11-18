@@ -28,13 +28,13 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.31.37"
+version = "2.31.38"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:2f8a6db60c55b6302110df31ec7a1a1fe99ff309b1fa7eb45386993e1dc1a9e2"
-size = 48365981
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.37.pkg"
+checksum = "blake3:d0a2093f0485a9df34f021b3f0e6bea4490bfbd1d6223447feaf876e20b8eb3a"
+size = 48393538
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.31.38.pkg"
 
 [[tools.bun]]
 version = "1.3.2"
@@ -207,7 +207,7 @@ version = "2.0.44"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.15.4"
+version = "0.16.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
@@ -375,11 +375,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.68"
+version = "1.0.72"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:50c16b0813506d5da5e324f4a34b57ea109fd2a6933497bf1f6c85e59d21aef2"
+checksum = "blake3:1efc5b665fcea367e58cd0fec5cf86468a950011867b2c1993a99a0b5f0e047a"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.3.0"
