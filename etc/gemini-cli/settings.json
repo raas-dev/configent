@@ -1,13 +1,18 @@
 {
   "context": {
-    "fileName": ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]
+    "fileName": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "GEMINI.md"
+    ]
   },
   "general": {
     "disableAutoUpdate": true,
     "disableUpdateNag": true,
     "checkpointing": {
       "enabled": true
-    }
+    },
+    "previewFeatures": true
   },
   "ide": {
     "enabled": true,
