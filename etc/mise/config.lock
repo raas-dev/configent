@@ -45,13 +45,13 @@ checksum = "blake3:973aa23e358881b982235a05e659ca4ba81dc734ce1cd2cd06dbe9122ea7a
 size = 22511628
 
 [[tools.carapace]]
-version = "1.5.4"
+version = "1.5.5"
 backend = "aqua:carapace-sh/carapace-bin"
 
 [tools.carapace.platforms.macos-arm64]
-checksum = "sha256:31f66b158c7b9943c0f198bad5c76e40928dee765630a1da2fe73d0bdd2697a2"
-size = 13605798
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.4/carapace-bin_1.5.4_darwin_arm64.tar.gz"
+checksum = "sha256:a33f3131bca488fc1934107f7f789309baa24c39081fade19e77274fd3bfbe77"
+size = 13627163
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.5/carapace-bin_1.5.5_darwin_arm64.tar.gz"
 
 [[tools.cargo-binstall]]
 version = "1.16.0"
@@ -203,11 +203,11 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.42"
+version = "2.0.44"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.15.3"
+version = "0.15.4"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
@@ -389,13 +389,13 @@ backend = "ubi:topgrade-rs/topgrade"
 checksum = "blake3:20d5438fe52d920f69ddeeb7718254482427be4175a7b23f958a0745dbc145cf"
 
 [[tools.uv]]
-version = "0.9.9"
+version = "0.9.10"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:737e1c2c4f97577aa7764141846e27de915eebb3b2a0f467451089a64824d2f7"
-size = 18176790
-url = "https://github.com/astral-sh/uv/releases/download/0.9.9/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:af171d5a4eb1c502819de32740aa811ff71851b1f5ec2d8bd0dda302ed9554c2"
+size = 18205991
+url = "https://github.com/astral-sh/uv/releases/download/0.9.10/uv-aarch64-apple-darwin.tar.gz"
 
 [[tools.viddy]]
 version = "1.3.0"
