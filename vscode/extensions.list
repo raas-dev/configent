@@ -1,4 +1,6 @@
 aaron-bond.better-comments
+anthropic.claude-code
+anysphere.cursorpyright
 astro-build.astro-vscode
 aykutsarac.jsoncrack-vscode
 bbenoist.nix
@@ -27,8 +29,6 @@ ethansk.restore-terminals
 fabiospampinato.vscode-statusbar-debugger
 formulahendry.code-runner
 fregante.ghost-text
-github.copilot
-github.copilot-chat
 github.vscode-github-actions
 golang.go
 google.gemini-cli-vscode-ide-companion
@@ -68,7 +68,6 @@ redhat.vscode-yaml
 rid9.datetime
 shahilkumar.docxreader
 sst-dev.opencode
-stagewise.stagewise-vscode-extension
 stevejpurves.cucumber
 stkb.rewrap
 stoplight.spectral
