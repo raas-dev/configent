@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.177.0](https://github.com/raas-dev/configent/compare/1.176.11...1.177.0) (2025-11-19)
+
+
+### Features
+
+* **ide:** Add support for Antigravity IDE ([8d7c137](https://github.com/raas-dev/configent/commit/8d7c1374281ac4fccc6934eb9faa78fa256a3198))
+
+
+### Fixes
+
+* **ide:** Remove support for Windsurf ([4f2c1f2](https://github.com/raas-dev/configent/commit/4f2c1f2a03d05cfb7e02f0ffc488fc4add6b634a))
+
 ### [1.176.11](https://github.com/raas-dev/configent/compare/1.176.10...1.176.11) (2025-11-08)
 
 
