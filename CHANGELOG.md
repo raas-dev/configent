@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.1](https://github.com/raas-dev/configent/compare/1.177.0...1.177.1) (2025-11-19)
+
+
+### Fixes
+
+* **mcp:** add -y flag to utcp command args ([0413a0c](https://github.com/raas-dev/configent/commit/0413a0c601c1c97bc9e5c351812d868dd16112db))
+* **settings:** remove deprecated dotnetAcquisitionExtension.allowInvalidPaths setting ([3fe200f](https://github.com/raas-dev/configent/commit/3fe200fc00b98bb3333b5caf28ee95a78a967846))
+* **setup_ide:** update Antigravity config file path and naming ([fba5d00](https://github.com/raas-dev/configent/commit/fba5d006298dfd5d2eb750d0e5b84b09ff1fb5df))
+
 ## [1.177.0](https://github.com/raas-dev/configent/compare/1.176.11...1.177.0) (2025-11-19)
 
 
