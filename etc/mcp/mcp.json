@@ -14,11 +14,7 @@
       ]
     },
     "tavily": {
-      "command": "npx",
-      "args": ["-y", "tavily-mcp@latest"],
-      "env": {
-        "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
-      }
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
     },
     "utcp": {
       "command": "npx",

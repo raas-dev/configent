@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--headless=true"
+      ],
+      "command": "npx"
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest",
+        "--api-key",
+        "${env:CONTEXT7_API_KEY}"
+      ],
+      "command": "npx"
+    },
+    "tavily": {
+      "serverUrl": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
+    }
+  }
+}

@@ -59,7 +59,7 @@ if command -v agy >/dev/null; then
     fi
   fi
   mkdir -p "$HOME/.gemini/antigravity"
-  ln -sfnv "$config_path/mcp/mcp.json" \
+  ln -sfnv "$config_path/mcp/mcp_config.json" \
     "$HOME/.gemini/antigravity/mcp_config.json"
 
   #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"
