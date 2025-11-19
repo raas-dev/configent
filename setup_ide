@@ -50,15 +50,17 @@ fi
 if command -v agy >/dev/null; then
   APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
 
-  # Create Antigravity mcp.json
-  if [ ! -r "$backup_path/.antigravity/mcp.json" ]; then
-    if [ -r "$HOME/.antigravity/mcp.json" ]; then
-      mkdir -p "$backup_path/.antigravity"
-      cp -P "$HOME/.antigravity/mcp.json" "$backup_path/.antigravity/mcp.json"
+  # Create Antigravity mcp_config.json
+  if [ ! -r "$backup_path/.gemini/antigravity/mcp_config.json" ]; then
+    if [ -r "$HOME/.gemini/antigravity/mcp_config.json" ]; then
+      mkdir -p "$backup_path/.gemini/antigravity"
+      cp -P "$HOME/.gemini/antigravity/mcp_config.json" \
+        "$backup_path/.gemini/antigravity/mcp_config.json"
     fi
   fi
-  mkdir -p "$HOME/.antigravity"
-  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.antigravity/mcp.json"
+  mkdir -p "$HOME/.gemini/antigravity"
+  ln -sfnv "$config_path/mcp/mcp.json" \
+    "$HOME/.gemini/antigravity/mcp_config.json"
 
   #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"
 fi
