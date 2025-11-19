@@ -177,8 +177,6 @@
   "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
   "extendedTerminalIntegration.statusBar.showTerminalName": true,
   "extensions.experimental.deferredStartupFinishedActivation": true,
-  "extensions.gallery.itemUrl": "https://marketplace.visualstudio.com/items",
-  "extensions.gallery.serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.ejs": "json",
