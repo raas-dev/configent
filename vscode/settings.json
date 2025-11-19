@@ -421,13 +421,11 @@
   "vsintellicode.python.completionsEnabled": false,
   "window.closeWhenEmpty": true,
   "window.confirmSaveUntitledWorkspace": false,
-  "window.customTitleBarVisibility": "windowed",
   "window.newWindowDimensions": "inherit",
   "window.newWindowProfile": "Default",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
     "extendedTerminalIntegration.statusBar.activeForeground": "#A5FF14",
     "extendedTerminalIntegration.statusBar.foreground": "#808080",
@@ -518,7 +516,14 @@
   "claudeCode.initialPermissionMode": "acceptEdits",
   "cursor.preferNotificationsSameAsChat": true,
   "cursor.composer.shouldAllowCustomModes": true,
-  "workbench.activityBar.location": "top",
   "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery"
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
+  "window.menuStyle": "inherit",
+  "workbench.secondarySideBar.defaultVisibility": "visible",
+  "workbench.activityBar.location": "top",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": true,
+  "window.customTitleBarVisibility": "windowed"
 }
