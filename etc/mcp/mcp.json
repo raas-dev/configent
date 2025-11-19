@@ -14,15 +14,15 @@
       ]
     },
     "tavily": {
-      "args": ["-y", "tavily-mcp@latest"],
       "command": "npx",
+      "args": ["-y", "tavily-mcp@latest"],
       "env": {
         "TAVILY_API_KEY": "${env:TAVILY_API_KEY}"
       }
     },
     "utcp": {
       "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp"],
+      "args": ["-y", "@utcp/code-mode-mcp@latest"],
       "env": {
         "UTCP_CONFIG_FILE": "~/.config/configent/utcp/.utcp_config.json"
       }
