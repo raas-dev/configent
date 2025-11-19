@@ -5,13 +5,10 @@
       "args": ["-y", "chrome-devtools-mcp@latest", "--headless=true"]
     },
     "context7": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest",
-        "--api-key",
-        "${env:CONTEXT7_API_KEY}"
-      ]
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
+      }
     },
     "tavily": {
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
