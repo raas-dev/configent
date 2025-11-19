@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.3](https://github.com/raas-dev/configent/compare/1.177.2...1.177.3) (2025-11-19)
+
+
+### Fixes
+
+* **mcp:** add [@latest](https://github.com/latest) tag to tavily and utcp MCP command args ([107c545](https://github.com/raas-dev/configent/commit/107c545631785bda12f3f9f9291ee66f45860b2f))
+* **settings:** remove unused marketplace URLs from vscode config ([1dd3944](https://github.com/raas-dev/configent/commit/1dd3944a169e50b2ff4f5af2e4b094ba53b60b1f))
+* **settings:** remove workbench.view.alwaysShowHeaderActions setting ([d3072bd](https://github.com/raas-dev/configent/commit/d3072bd9403e58c489a76b646f6b4c977ac783fb))
+* **settings:** reorder and clean up window and workbench settings ([8ed6bb2](https://github.com/raas-dev/configent/commit/8ed6bb28ca69271252bf8b10b424388413919fed))
+
 ### [1.177.2](https://github.com/raas-dev/configent/compare/1.177.1...1.177.2) (2025-11-19)
 
 
