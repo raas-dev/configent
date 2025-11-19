@@ -49,12 +49,3 @@ if command -v "$BIN_NAME" >/dev/null; then
     "$BIN_NAME" --force --install-extension "$extension"
   done <"$this_path/../vscode/extensions.list"
 fi
-
-### Register vscode:// URL scheme on macOS #####################################
-
-if [ "$(uname -s)" = 'Darwin' ]; then
-  if command -v duti >/dev/null; then
-    app_bundle_id="$(osascript -e "id of application \"$APP_NAME\"")"
-    duti -s "$app_bundle_id" vscode
-  fi
-fi
