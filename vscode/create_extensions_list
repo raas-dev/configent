@@ -18,9 +18,6 @@ if command -v cursor >/dev/null && [ "$DEFAULT_IDE" = "cursor" ]; then
 elif command -v agy >/dev/null && [ "$DEFAULT_IDE" = "agy" ]; then
   echo "Exporting Antigravity extensions"
   bin_name="agy"
-elif command -v windsurf >/dev/null && [ "$DEFAULT_IDE" = "windsurf" ]; then
-  echo "Exporting Windsurf extensions"
-  bin_name="ws"
 elif command -v code >/dev/null; then
   echo "Exporting VS Code extensions"
   bin_name="code"

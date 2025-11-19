@@ -45,7 +45,6 @@ brew install --cask --force brave-browser
 #brew install --cask --force tunnelblick
 #brew install --cask --force utm
 brew install --cask --force visual-studio-code
-#brew install --cask --force windsurf
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
 brew install --cask --force ukelele

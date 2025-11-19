@@ -743,22 +743,6 @@ cursorclear() {
   esac
 }
 
-# Remove all Windsurf extensions
-wsclear() {
-  printf "Are you sure to remove all Windsurf extensions [y\N] > "
-  read -r choice
-  case "$choice" in
-  [yY])
-    windsurf --list-extensions | while read -r extension; do
-      windsurf --force --uninstall-extension "$extension"
-    done
-    ;;
-  *)
-    printf "Aborted.\n"
-    ;;
-  esac
-}
-
 # Remove all Antigravity extensions
 agyclear() {
   printf "Are you sure to remove all Antigravity extensions [y\N] > "

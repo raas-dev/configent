@@ -81,8 +81,7 @@
   "chat.fontSize": 14,
   "chat.mcp.discovery.enabled": {
     "cursor-global": true,
-    "cursor-workspace": false,
-    "windsurf": true
+    "cursor-workspace": false
   },
   "chat.mcp.gallery.enabled": true,
   "chat.notifyWindowOnConfirmation": false,
@@ -431,12 +430,6 @@
   "window.newWindowProfile": "Default",
   "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
-  "windsurf.autoExecutionPolicy": "auto",
-  "windsurf.autocompleteSpeed": "fast",
-  "windsurf.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
-  "windsurf.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
-  "windsurf.showInlayHintShortcuts": false,
-  "windsurf.showSelectionActions": false,
   "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.auxiliaryActivityBar.location": "top",
   "workbench.colorCustomizations": {
