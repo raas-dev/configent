@@ -105,10 +105,7 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.textSizeScale": 1.2,
-  "cursor.cpp.disabledLanguages": [
-    "plaintext",
-    "untitled"
-  ],
+  "cursor.cpp.disabledLanguages": ["plaintext", "untitled"],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.semanticSearch.includePullRequests": false,
@@ -153,10 +150,7 @@
   "editor.overviewRulerBorder": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [
-    80,
-    100
-  ],
+  "editor.rulers": [80, 100],
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.scrollbar.verticalScrollbarSize": 0,
@@ -212,10 +206,7 @@
   "git.openAfterClone": "whenNoFolderOpen",
   "git.openRepositoryInParentFolders": "always",
   "git.promptToSaveFilesBeforeCommit": "never",
-  "git.repositoryScanIgnoredFolders": [
-    "node_modules",
-    ".venv"
-  ],
+  "git.repositoryScanIgnoredFolders": ["node_modules", ".venv"],
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
   "github.copilot.chat.agent.thinkingTool": true,
@@ -235,16 +226,8 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "gitlens.blame.highlight.locations": [
-    "gutter",
-    "line",
-    "overview"
-  ],
-  "gitlens.changes.locations": [
-    "gutter",
-    "overview",
-    "line"
-  ],
+  "gitlens.blame.highlight.locations": ["gutter", "line", "overview"],
+  "gitlens.changes.locations": ["gutter", "overview", "line"],
   "gitlens.changes.toggleMode": "window",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.enabled": false,
@@ -254,11 +237,7 @@
   "gitlens.graph.minimap.enabled": false,
   "gitlens.graph.pageItemLimit": 20,
   "gitlens.graph.statusBar.enabled": false,
-  "gitlens.heatmap.locations": [
-    "gutter",
-    "overview",
-    "line"
-  ],
+  "gitlens.heatmap.locations": ["gutter", "overview", "line"],
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.hovers.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
@@ -549,5 +528,8 @@
   "update.mode": "none",
   "claudeCode.initialPermissionMode": "acceptEdits",
   "cursor.preferNotificationsSameAsChat": true,
-  "cursor.composer.shouldAllowCustomModes": true
+  "cursor.composer.shouldAllowCustomModes": true,
+  "workbench.activityBar.location": "top",
+  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery"
 }
