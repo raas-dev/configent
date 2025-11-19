@@ -412,7 +412,7 @@ alias repomix='bunx repomix'
 ai() {
   local ADD_EXTENSIONS=(
     --with-builtin developer
-    --with-builtin memory
+    --with-extension "npx -y tavily-mcp"
   )
   if [ -n "$1" ]; then
     if [ -r "$1" ]; then
