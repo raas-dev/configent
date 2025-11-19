@@ -521,7 +521,6 @@
   "window.menuStyle": "inherit",
   "workbench.secondarySideBar.defaultVisibility": "visible",
   "workbench.activityBar.location": "top",
-  "workbench.view.alwaysShowHeaderActions": true,
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.layoutControl.enabled": false,
   "window.commandCenter": true,
