@@ -35,6 +35,7 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications --no-quarantine"
 brew tap buo/cask-upgrade
 
 # Homebrew Cask apps
+#brew install --cask --force antigravity
 brew install --cask --force brave-browser
 #brew install --cask --force cursor
 #brew install --cask --force iina

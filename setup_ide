@@ -63,3 +63,19 @@ if command -v windsurf >/dev/null; then
 
   #APP_NAME="Windsurf" BIN_NAME="windsurf" "$bin_path/setup_kilocode"
 fi
+
+if command -v agy >/dev/null; then
+  APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
+
+  # Create Antigravity mcp.json
+  if [ ! -r "$backup_path/.antigravity/mcp.json" ]; then
+    if [ -r "$HOME/.antigravity/mcp.json" ]; then
+      mkdir -p "$backup_path/.antigravity"
+      cp -P "$HOME/.antigravity/mcp.json" "$backup_path/.antigravity/mcp.json"
+    fi
+  fi
+  mkdir -p "$HOME/.antigravity"
+  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.antigravity/mcp.json"
+
+  #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"
+fi

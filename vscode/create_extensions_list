@@ -15,6 +15,9 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 if command -v cursor >/dev/null && [ "$DEFAULT_IDE" = "cursor" ]; then
   echo "Exporting Cursor extensions"
   bin_name="cursor"
+elif command -v agy >/dev/null && [ "$DEFAULT_IDE" = "agy" ]; then
+  echo "Exporting Antigravity extensions"
+  bin_name="agy"
 elif command -v windsurf >/dev/null && [ "$DEFAULT_IDE" = "windsurf" ]; then
   echo "Exporting Windsurf extensions"
   bin_name="ws"

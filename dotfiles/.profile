@@ -193,6 +193,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   path_append "$HOME/Applications/UTM.app/Contents/MacOS"
 fi
 
+### Antigravity ################################################################
+
+path_append "$HOME/.antigravity/antigravity/bin"
+
 ### Disable telemetry ##########################################################
 
 # https://consoledonottrack.com

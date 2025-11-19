@@ -759,6 +759,22 @@ wsclear() {
   esac
 }
 
+# Remove all Antigravity extensions
+agyclear() {
+  printf "Are you sure to remove all Antigravity extensions [y\N] > "
+  read -r choice
+  case "$choice" in
+  [yY])
+    agy --list-extensions | while read -r extension; do
+      agy --force --uninstall-extension "$extension"
+    done
+    ;;
+  *)
+    printf "Aborted.\n"
+    ;;
+  esac
+}
+
 ### Nix ########################################################################
 
 # Nix in containerd
