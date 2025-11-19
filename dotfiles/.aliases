@@ -693,7 +693,7 @@ gemclear() {
 pipclear() {
   command -v uv >/dev/null && uv tool uninstall --all
   command -v pipx >/dev/null && pipx uninstall-all
-  pip list --format=freeze | grep -v "^-e" | grep -v "^pip==" | \
+  pip list --format=freeze | grep -v "^-e" | grep -v "^pip==" |
     cut -d "@" -f1 | xargs --no-run-if-empty pip uninstall -y
 }
 
