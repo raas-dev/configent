@@ -9,6 +9,9 @@
 # Proposes git commit message generated with LLM and asks to commit
 
 # shellcheck disable=SC2034  # some colors are unused
+
+### constants ##################################################################
+
 normal=$(tput sgr0)
 bold=$(tput bold)
 black=$(tput setaf 0)
@@ -19,6 +22,14 @@ blue=$(tput setaf 4)
 magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 white=$(tput setaf 7)
+
+### variables ##################################################################
+
+# set OPENROUTER_API_KEY in .rclocal
+: "${PROVIDER:="openrouter"}"
+: "${MODEL:="openai/gpt-4.1-mini"}"
+
+################################################################################
 
 if ! command -v goose >/dev/null; then
   printf "%sError: goose not found in the system.\n" "$red"
@@ -67,6 +78,7 @@ system_prompt="$(cat "$system_instructions_path")" || {
 commit_message="$(goose run --quiet \
   --no-session \
   --system "$system_prompt" \
+  --provider "$PROVIDER" --model "$MODEL" \
   --text "$user_message")" || {
   printf "%sError: Failed to generate commit message.\n" "$red"
   exit 1
