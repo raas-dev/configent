@@ -351,7 +351,6 @@
   "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
-  "serviceUrl": "https://marketplace.cursorapi.com/_apis/public/gallery",
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
   "stagewise.telemetry.enabled": false,
   "statusbarDebugger.priority": 20000,
