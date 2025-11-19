@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.2](https://github.com/raas-dev/configent/compare/1.177.1...1.177.2) (2025-11-19)
+
+
+### Fixes
+
+* **settings:** remove unused serviceUrl setting from vscode config ([dc042b8](https://github.com/raas-dev/configent/commit/dc042b89a96a011eb38462c37a28017d0a3101d5))
+* **setup_code:** remove macOS vscode:// URL scheme registration ([35e8f7f](https://github.com/raas-dev/configent/commit/35e8f7f04d9665e6f29175140e69911b2ed4d279))
+* **vscode:** remove anysphere.cursorpyright from extensions list ([ee010ed](https://github.com/raas-dev/configent/commit/ee010ed923d55533239526737bd9693634685f74))
+
 ### [1.177.1](https://github.com/raas-dev/configent/compare/1.177.0...1.177.1) (2025-11-19)
 
 
