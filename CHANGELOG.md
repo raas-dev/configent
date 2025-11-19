@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.4](https://github.com/raas-dev/configent/compare/1.177.3...1.177.4) (2025-11-19)
+
+
+### Fixes
+
+* **dotfiles:** fix line continuation in pipclear alias command ([f069aa1](https://github.com/raas-dev/configent/commit/f069aa132bf55d2c98953ccb9a93ec9e7a9906a3))
+* **dotfiles:** replace builtin memory with tavily-mcp extension in ai alias ([660e4ab](https://github.com/raas-dev/configent/commit/660e4ab02f40a9d405706add87cb49fba497e95c))
+* **dotfiles:** replace tavily-mcp extension with HTTP streamable version in ai aliases ([b5f8395](https://github.com/raas-dev/configent/commit/b5f8395149402220921f92a6a2b8751c238b8a65))
+* **mcp:** replace tavily MCP command with URL and add mcp_config.json ([b9023e8](https://github.com/raas-dev/configent/commit/b9023e8c7943c53802365d209df44fe9dda054f4))
+* **mcp:** switch from local commands to URL-based MCP server configs ([883454b](https://github.com/raas-dev/configent/commit/883454bfb8f6605f0b4e9d4be944c3a63c25528b))
+* **settings:** add gemini-3-pro-preview model to gemini-cli config ([a94c654](https://github.com/raas-dev/configent/commit/a94c654438a316a7fbe3b359bed82fbfe5e1e98d))
+* **settings:** correct order of window and terminal settings in vscode config ([20de6ed](https://github.com/raas-dev/configent/commit/20de6edcf68de047c51914fc9591be6f252c71f9))
+* **settings:** disable terminal sticky scroll by default ([d9db860](https://github.com/raas-dev/configent/commit/d9db860d8478f3c914ac6f80aa30892a477c4084))
+
 ### [1.177.3](https://github.com/raas-dev/configent/compare/1.177.2...1.177.3) (2025-11-19)
 
 
