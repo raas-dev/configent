@@ -524,5 +524,6 @@
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.layoutControl.enabled": false,
   "window.commandCenter": true,
-  "window.customTitleBarVisibility": "windowed"
+  "window.customTitleBarVisibility": "windowed",
+  "terminal.integrated.stickyScroll.enabled": false
 }
