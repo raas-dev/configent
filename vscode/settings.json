@@ -525,5 +525,6 @@
   "workbench.layoutControl.enabled": false,
   "window.commandCenter": true,
   "terminal.integrated.stickyScroll.enabled": false,
-  "window.customTitleBarVisibility": "windowed"
+  "window.customTitleBarVisibility": "windowed",
+  "workbench.editor.limit.value": 5
 }
