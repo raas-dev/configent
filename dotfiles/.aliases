@@ -413,6 +413,7 @@ ai() {
   local ADD_EXTENSIONS=(
     --with-builtin developer
     --with-streamable-http-extension "https://mcp.tavily.com/mcp/?tavilyApiKey=$TAVILY_API_KEY"
+    --with-extension "npx -y @utcp/code-mode-mcp"
   )
   if [ -n "$1" ]; then
     if [ -r "$1" ]; then
