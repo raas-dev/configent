@@ -6,14 +6,14 @@
         "mcpServers": {
           "context7": {
             "headers": {
-              "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+              "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
             },
             "transport": "http",
             "url": "https://mcp.context7.com/mcp"
           },
           "tavily": {
             "transport": "http",
-            "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
+            "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
           }
         }
       },
