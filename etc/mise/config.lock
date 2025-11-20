@@ -160,8 +160,13 @@ version = "0.20.0"
 backend = "go:golang.org/x/tools/gopls"
 
 [[tools.hurl]]
-version = "7.0.0"
+version = "7.1.0"
 backend = "aqua:Orange-OpenSource/hurl"
+
+[tools.hurl.platforms.macos-arm64]
+checksum = "sha256:bb4103efdffeed83e96e368b7deab8bfcaff5ba7c12a8e02090e968ca9800508"
+size = 2769184
+url = "https://github.com/Orange-OpenSource/hurl/releases/download/7.1.0/hurl-7.1.0-aarch64-apple-darwin.tar.gz"
 
 [[tools.jnv]]
 version = "0.6.1"
