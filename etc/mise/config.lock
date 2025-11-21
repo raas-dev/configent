@@ -54,13 +54,13 @@ size = 13627163
 url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.5/carapace-bin_1.5.5_darwin_arm64.tar.gz"
 
 [[tools.cargo-binstall]]
-version = "1.16.0"
+version = "1.16.1"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall.platforms.macos-arm64]
-checksum = "sha256:cbf46daabf9f4e222c208d169c9ff0b890360ae95b2d2553b4baee8182882e45"
-size = 5973764
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.0/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "sha256:e8af6d1464f587e084fdae2c8b9dbfe303f07c15683076ef7a553612eb7affc2"
+size = 5972492
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.1/cargo-binstall-aarch64-apple-darwin.zip"
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
