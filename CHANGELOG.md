@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.5](https://github.com/raas-dev/configent/compare/1.177.4...1.177.5) (2025-11-22)
+
+
+### Fixes
+
+* **settings:** add editor tab limit in vscode configuration ([f397ccd](https://github.com/raas-dev/configent/commit/f397ccd95718e29d9239783c286bd16bab578d2e))
+* **utcp:** correct environment variable syntax in config and remove deprecated alias extension ([3e4d710](https://github.com/raas-dev/configent/commit/3e4d7109f3b169cd525173bc012bd756672bfea8))
+* **utcp:** update API key references to use env variable syntax ([e644f48](https://github.com/raas-dev/configent/commit/e644f487d9cf8b44b2c042143b720d2d9e528d8b))
+
 ### [1.177.4](https://github.com/raas-dev/configent/compare/1.177.3...1.177.4) (2025-11-19)
 
 
