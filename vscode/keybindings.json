@@ -475,10 +475,6 @@
     "key": "shift+cmd+n"
   },
   {
-    "command": "composerMode.chat_2",
-    "key": "cmd+[Semicolon]"
-  },
-  {
     "command": "workbench.action.chat.openask",
     "key": "cmd+l"
   },
@@ -501,14 +497,6 @@
     "command": "-inlineChat.start",
     "key": "cmd+i",
     "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
-  },
-  {
-    "command": "composerMode.chat",
-    "key": "cmd+l"
-  },
-  {
-    "command": "composerMode.plan",
-    "key": "cmd+[Quote]"
   },
   {
     "command": "-cursor.composer.openAgentWindow",
@@ -542,5 +530,9 @@
     "command": "-workbench.action.toggleUnifiedSidebar",
     "key": "shift+cmd+s",
     "when": "cursor.agentIdeUnification.enabled"
+  },
+  {
+    "command": "composerMode.plan",
+    "key": "cmd+[Quote]"
   }
 ]

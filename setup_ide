@@ -13,26 +13,14 @@ bin_path="$this_path/bin"
 backup_path="$this_path/.backup"
 config_path="$HOME/.config/configent"
 
+: "${NO_SETUP:=""}"
+
 "$bin_path/setup_fonts"
 
-if command -v code >/dev/null; then
-  APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
-
-  # VS Code has settings configured to read Cursor mcp.json
-  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
-    if [ -r "$HOME/.cursor/mcp.json" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
-
-  #APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
-fi
-
 if command -v cursor >/dev/null; then
-  APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+  if [ -z "$NO_SETUP" ]; then
+    APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+  fi
 
   # Create Cursor mcp.json
   if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
@@ -44,11 +32,24 @@ if command -v cursor >/dev/null; then
   mkdir -p "$HOME/.cursor"
   ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
 
+  # commands dir
+  if [ ! -r "$backup_path/.cursor/commands" ]; then
+    if [ -r "$HOME/.cursor/commands" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -RP "$HOME/.cursor/commands" "$backup_path/.cursor/commands"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor/commands"
+  rm -rf "$HOME/.cursor/commands"
+  ln -sfnv "$config_path/claude-code/commands" "$HOME/.cursor/commands"
+
   #APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi
 
 if command -v agy >/dev/null; then
-  APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
+  if [ -z "$NO_SETUP" ]; then
+    APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
+  fi
 
   # Create Antigravity mcp_config.json
   if [ ! -r "$backup_path/.gemini/antigravity/mcp_config.json" ]; then
@@ -63,4 +64,22 @@ if command -v agy >/dev/null; then
     "$HOME/.gemini/antigravity/mcp_config.json"
 
   #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"
+fi
+
+if command -v code >/dev/null; then
+  if [ -z "$NO_SETUP" ]; then
+    APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+  fi
+
+  # VS Code has settings configured to read Cursor mcp.json
+  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
+    if [ -r "$HOME/.cursor/mcp.json" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor"
+  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
+
+  #APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
