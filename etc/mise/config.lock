@@ -28,21 +28,21 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.32.2"
+version = "2.32.3"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:c16103c0c0af77b9cf47a3c15cb32052de3c53885ddb5e5bd5a0f80844bc7054"
-size = 48671737
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.2.pkg"
+checksum = "blake3:bccdc1b6b10010b2b70f756fbf185e477242a232dbd1d03af72ec0675b81a49e"
+size = 48731096
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.3.pkg"
 
 [[tools.bun]]
-version = "1.3.2"
+version = "1.3.3"
 backend = "core:bun"
 
 [tools.bun.platforms.macos-arm64]
-checksum = "blake3:973aa23e358881b982235a05e659ca4ba81dc734ce1cd2cd06dbe9122ea7a58c"
-size = 22511628
+checksum = "blake3:2b8fa453577fa737c9eaf42730791360c8a133397db28684c93e49f9dd5d501a"
+size = 22063538
 
 [[tools.carapace]]
 version = "1.5.5"
@@ -208,11 +208,11 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.49"
+version = "2.0.50"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.17.0"
+version = "0.17.1"
 backend = "npm:@google/gemini-cli"
 
 [[tools.numbat]]
@@ -380,11 +380,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.85"
+version = "1.0.98"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:7b083fa1dd0aca176626c4544d2673a9ecdaea7f5c6b58a20b1a816d25094786"
+checksum = "blake3:e9cd61cd7b45089291c016618b6f60a64c6283588ab6543987aa48b32b7838ad"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.4.2"
@@ -415,13 +415,13 @@ version = "0.25.0"
 backend = "aqua:ducaale/xh"
 
 [[tools.yq]]
-version = "4.48.2"
+version = "4.49.1"
 backend = "aqua:mikefarah/yq"
 
 [tools.yq.platforms.macos-arm64]
-checksum = "sha256:b3a77a428fda2daced121c937be7f5dfb8107fc62ec506064f1d23bc09415dcb"
+checksum = "sha256:2798f0b76b78d8c2b6e3796d27145468c2ae094c76c9dfc0d6bb3c7031100714"
 size = 10997522
-url = "https://github.com/mikefarah/yq/releases/download/v4.48.2/yq_darwin_arm64"
+url = "https://github.com/mikefarah/yq/releases/download/v4.49.1/yq_darwin_arm64"
 
 [[tools.zoxide]]
 version = "0.9.8"
