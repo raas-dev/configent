@@ -499,6 +499,14 @@
     "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
   },
   {
+    "command": "composerMode.chat",
+    "key": "cmd+l"
+  },
+  {
+    "command": "composerMode.plan",
+    "key": "cmd+[Quote]"
+  },
+  {
     "command": "-cursor.composer.openAgentWindow",
     "key": "cmd+e",
     "when": "cursor.appLayoutEnabled && cursor.appLayout != 'agent'"
@@ -530,9 +538,5 @@
     "command": "-workbench.action.toggleUnifiedSidebar",
     "key": "shift+cmd+s",
     "when": "cursor.agentIdeUnification.enabled"
-  },
-  {
-    "command": "composerMode.plan",
-    "key": "cmd+[Quote]"
   }
 ]
