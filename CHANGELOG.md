@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.6](https://github.com/raas-dev/configent/compare/1.177.5...1.177.6) (2025-11-22)
+
+
+### Fixes
+
+* **commands:** add role and task guidelines for chat assistant ([f4179d3](https://github.com/raas-dev/configent/commit/f4179d3fea664919fce2184877ebd3eb2ed481d5))
+* **keybindings:** add new shortcuts for composer mode chat and plan commands ([7d814d7](https://github.com/raas-dev/configent/commit/7d814d70d82ad53921de82ac302d51dd251e311c))
+* **keybindings:** remove cmd+l shortcut for composerMode chat command ([aa482b3](https://github.com/raas-dev/configent/commit/aa482b3997b7d2158c9c81bb681412a011851efd))
+* **setup_ide:** improve idempotent setup and clean redundant keybindings ([8a91174](https://github.com/raas-dev/configent/commit/8a91174133c7ddd23f03adb8c6edfd9405f2c263))
+
 ### [1.177.5](https://github.com/raas-dev/configent/compare/1.177.4...1.177.5) (2025-11-22)
 
 
