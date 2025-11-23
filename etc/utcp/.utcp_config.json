@@ -14,7 +14,7 @@
             "args": [
               "-y",
               "chrome-devtools-mcp@latest",
-              "--headless=true"
+              "--headless=false"
             ],
             "command": "npx",
             "transport": "stdio"
