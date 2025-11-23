@@ -1,27 +1,27 @@
 {
+  "load_variables_from": [
+    {
+      "env_file_path": ".env",
+      "variable_loader_type": "dotenv"
+    }
+  ],
   "manual_call_templates": [
     {
       "call_template_type": "mcp",
       "config": {
         "mcpServers": {
-          "context7": {
-            "headers": {
-              "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-            },
-            "transport": "http",
-            "url": "https://mcp.context7.com/mcp"
-          },
-          "tavily": {
-            "transport": "http",
-            "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
+          "chrome-devtools": {
+            "args": [
+              "-y",
+              "chrome-devtools-mcp@latest",
+              "--headless=true"
+            ],
+            "command": "npx",
+            "transport": "stdio"
           }
         }
       },
-      "name": "mcp"
+      "name": "chrome-devtools"
     }
-  ],
-  "variables": {
-    "mcp_CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}",
-    "mcp_TAVILY_API_KEY": "${TAVILY_API_KEY}"
-  }
+  ]
 }
