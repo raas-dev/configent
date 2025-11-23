@@ -11,7 +11,7 @@
     },
     "utcp": {
       "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp@latest"]
+      "args": ["-y", "@utcp/code-mode-mcp"]
     }
   }
 }
