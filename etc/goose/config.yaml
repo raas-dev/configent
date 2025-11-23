@@ -17,7 +17,7 @@ GOOSE_MODE: auto # how to handle tool execution - default: smart_approve
 GOOSE_CLI_MIN_PRIORITY: 0.5 # verbosity of tool output - default: 0.0
 
 GOOSE_RECIPE_GITHUB_REPO: block/goose-recipes
-ALPHA_FEATURES: true # https://block.github.io/goose/docs/experimental/
+ALPHA_FEATURES: false # https://block.github.io/goose/docs/experimental/
 
 extensions:
   computercontroller:
