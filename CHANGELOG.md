@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.7](https://github.com/raas-dev/configent/compare/1.177.6...1.177.7) (2025-11-23)
+
+
+### Fixes
+
+* **config:** upgrade default model from gpt-4.1-mini to gpt-4.1 ([dc8bad2](https://github.com/raas-dev/configent/commit/dc8bad21901f9a35a76e26abe152b6d4c77698e9))
+* **dotfiles:** update comment for UTCP config to code-mode-mcp ([022c8f7](https://github.com/raas-dev/configent/commit/022c8f73503d16a3e0df83603c0e75a4d8a5c4bc))
+* **mcp:** remove chrome-devtools server configuration from MCP settings ([fa7edc0](https://github.com/raas-dev/configent/commit/fa7edc087465f28148416766ec4a36b3e60bc5f3))
+* **mcp:** remove explicit version from utcp code-mode-mcp dependency ([3ba19ab](https://github.com/raas-dev/configent/commit/3ba19ab5fb6337d1a6b89ebd94395f5461f834dc))
+* **utcp:** update MCP config by removing env variable and refactoring servers ([3ea2bf6](https://github.com/raas-dev/configent/commit/3ea2bf66f900a9ad2897113eb15d55d67a9d0a3b))
+
 ### [1.177.6](https://github.com/raas-dev/configent/compare/1.177.5...1.177.6) (2025-11-22)
 
 
