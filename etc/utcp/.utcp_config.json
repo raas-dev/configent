@@ -11,11 +11,7 @@
       "config": {
         "mcpServers": {
           "chrome-devtools": {
-            "args": [
-              "-y",
-              "chrome-devtools-mcp@latest",
-              "--headless=false"
-            ],
+            "args": ["-y", "chrome-devtools-mcp@latest", "--headless=false"],
             "command": "npx",
             "transport": "stdio"
           }
