@@ -27,7 +27,7 @@ repos:
     - id: check-executables-have-shebangs
       files: ^(?!etc/claude-code/skills/).*$
     - id: pretty-format-json
-      files: ^(?!(.*\/)?(settings|mcp)\.json$).*\.json$
+      files: ^(?!(.*\/)?(settings|mcp|mcp_config|.utcp_config)\.json$).*\.json$
       args:
         - --autofix
 
