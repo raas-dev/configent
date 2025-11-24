@@ -21,6 +21,14 @@
       "type": "remote",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey={env:TAVILY_API_KEY}",
       "enabled": true
+    },
+    "utcp": {
+      "type": "local",
+      "command": ["npx", "-y", "@utcp/code-mode-mcp"],
+      "environment": {
+        "UTCP_CONFIG_FILE": "{env:UTCP_CONFIG_FILE}"
+      },
+      "enabled": true
     }
   }
 }
