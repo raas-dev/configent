@@ -38,7 +38,7 @@ zoxide = 'latest'
 
 # ai
 #aichat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_aichat" }
-'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
+#'ubi:block/goose' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_goose" }
 'ubi:sst/opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
 # scripting

@@ -323,13 +323,6 @@ backend = "ubi:abhimanyu003/sttr"
 [tools."ubi:abhimanyu003/sttr".platforms.macos-arm64-sttr]
 checksum = "blake3:f75a3a00e896c73a88a11b37e6100ec38f7caff1f0aa2d8405036c7869829883"
 
-[[tools."ubi:block/goose"]]
-version = "1.15.0"
-backend = "ubi:block/goose"
-
-[tools."ubi:block/goose".platforms.macos-arm64-goose]
-checksum = "blake3:a7bf9454bdd43543c75ae8aa27f1b503d80d2e3f4b680497506b3b8f951e36f5"
-
 [[tools."ubi:dalance/procs"]]
 version = "0.14.10"
 backend = "ubi:dalance/procs"
