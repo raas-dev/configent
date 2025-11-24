@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.178.0](https://github.com/raas-dev/configent/compare/1.177.9...1.178.0) (2025-11-24)
+
+
+### Features
+
+* **aliases:** make ai() use opencode for chat over goose cli ([a7ec8cc](https://github.com/raas-dev/configent/commit/a7ec8cc475f2b8fdc5757accc82ff0856c079495))
+* **opencode:** enhance postinstall and update agent config ([9557dac](https://github.com/raas-dev/configent/commit/9557dac37f496f24052416594d5f8d49c916bcbc))
+
 ### [1.177.9](https://github.com/raas-dev/configent/compare/1.177.8...1.177.9) (2025-11-24)
 
 
