@@ -8,6 +8,9 @@
     },
     "tavily": {
       "serverUrl": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
+    },
+    "gh-grep": {
+      "serverUrl": "https://mcp.grep.app"
     }
   }
 }

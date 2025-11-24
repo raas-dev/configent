@@ -9,7 +9,7 @@
     "tavily": {
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
     },
-    "grep": {
+    "gh-grep": {
       "url": "https://mcp.grep.app"
     },
     "utcp": {
