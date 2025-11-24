@@ -410,17 +410,16 @@ alias repomix='bunx repomix'
 ### Functions: AI ##############################################################
 
 ai() {
-  local agent="chat"
   if [ -n "$1" ]; then
     if [ -r "$HOME/.config/opencode/command/$1.md" ]; then
       local command="$1"
       shift
-      opencode run --agent "$agent" --command "$command" "$@"
+      opencode run --agent chat --command "$command" "$@"
     else
-      opencode run --agent "$agent" "$@"
+      opencode run --agent chat "$@"
     fi
   else
-    opencode --agent "$agent"
+    opencode --agent chat
   fi
 }
 
