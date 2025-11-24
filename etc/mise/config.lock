@@ -236,7 +236,7 @@ version = "4.4.1"
 backend = "pipx:glances"
 
 [[tools."pipx:pdm"]]
-version = "2.26.1"
+version = "2.26.2"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
@@ -380,11 +380,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.98"
+version = "1.0.107"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:e9cd61cd7b45089291c016618b6f60a64c6283588ab6543987aa48b32b7838ad"
+checksum = "blake3:58dd3f4c10394eca79e587d6d7cf22e7a845b5de266f13cf879ed0297c2d8c48"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.4.2"
