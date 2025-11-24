@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.3](https://github.com/raas-dev/configent/compare/1.179.2...1.179.3) (2025-11-24)
+
+
+### Fixes
+
+* **aliases:** use OPENCODE_CONFIG env var for agent config ([044a74f](https://github.com/raas-dev/configent/commit/044a74f293b6e7af564e9383ea4658836e12f914))
+* **mcp:** add grep MCP server configuration ([8aefb57](https://github.com/raas-dev/configent/commit/8aefb57ce5afec35dfa9e610e6b12fd8a378a533))
+* **mcp:** rename grep server to gh-grep ([7615e8d](https://github.com/raas-dev/configent/commit/7615e8dd6e38b06404e356c3ba55f21b4f456e1b))
+* **opencode:** add cursor rules to instructions ([abfb38f](https://github.com/raas-dev/configent/commit/abfb38f41a8599f77c24fd8a82e352901b8a8e29))
+* **opencode:** rename grep MCP server to gh-grep ([a85ac9d](https://github.com/raas-dev/configent/commit/a85ac9d352b51bff1adabfe1ab112926a40433ac))
+* **README:** update agent invocation syntax ([3c4a9cb](https://github.com/raas-dev/configent/commit/3c4a9cb0801c5b4c099dcd9bc77dc3982427c638))
+* **README:** update agent invocation syntax ([f9f647e](https://github.com/raas-dev/configent/commit/f9f647eacb8c0bd6c44c8e3cfe20c3c487b4856b))
+* **README:** update agent invocation syntax ([187ea04](https://github.com/raas-dev/configent/commit/187ea04f449078778875afe79c23a9a3be145617))
+
 ### [1.179.2](https://github.com/raas-dev/configent/compare/1.179.1...1.179.2) (2025-11-24)
 
 
