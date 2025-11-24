@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.179.0](https://github.com/raas-dev/configent/compare/1.178.1...1.179.0) (2025-11-24)
+
+
+### Features
+
+* **aliases:** Alias _ to subagents ([49425bd](https://github.com/raas-dev/configent/commit/49425bd7dac3e49558af99076cd1c959d009ba16))
+
+
+### Fixes
+
+* **ai:** Remove goose cli as it is shit now ([0482e5c](https://github.com/raas-dev/configent/commit/0482e5ca2e96ab210010c1c506d49ddaaf52ecfb))
+* **aliases:** remove unnecessary agent variable ([65cd109](https://github.com/raas-dev/configent/commit/65cd109c1f3086d1eda062b925e4660636b38da8))
+* **opencode:** add skills directory symlink and enable skills plugin ([92e908e](https://github.com/raas-dev/configent/commit/92e908ee9c70e22ddcd944024d397e07ba2ea118))
+
 ### [1.178.1](https://github.com/raas-dev/configent/compare/1.178.0...1.178.1) (2025-11-24)
 
 
