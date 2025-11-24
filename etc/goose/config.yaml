@@ -1,5 +1,5 @@
-GOOSE_PROVIDER: openai
-GOOSE_MODEL: gpt-4.1
+GOOSE_PROVIDER: openrouter
+GOOSE_MODEL: google/gemini-3-pro-preview
 GOOSE_TEMPERATURE: 0.0
 
 GOOSE_MAX_TURNS: 10
