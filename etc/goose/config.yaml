@@ -48,23 +48,23 @@ extensions:
     timeout: 300
     type: builtin
   todo:
-    enabled: false
-    type: platform
-    name: todo
+    available_tools: []
+    bundled: true
     description: Enable a todo list for Goose so it can keep track of what it is doing
-    bundled: true
-    available_tools: []
+    enabled: false
+    name: todo
+    type: platform
   chatrecall:
-    enabled: false
-    type: platform
-    name: chatrecall
+    available_tools: []
+    bundled: true
     description: Search past conversations and load session summaries for contextual memory
-    bundled: true
-    available_tools: []
-  extensionmanager:
     enabled: false
+    name: chatrecall
     type: platform
-    name: Extension Manager
-    description: Enable extension management tools for discovering, enabling, and disabling extensions
-    bundled: true
+  extensionmanager:
     available_tools: []
+    bundled: true
+    description: Enable extension management tools for discovering, enabling, and disabling extensions
+    enabled: false
+    name: Extension Manager
+    type: platform
