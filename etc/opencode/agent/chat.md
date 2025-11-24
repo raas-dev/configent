@@ -1,3 +1,19 @@
+---
+description: General purpose chat with tools
+mode: primary
+model: github-copilot/gpt-4.1
+temperature: 0.0
+tools:
+  edit: false
+  write: false
+permissions:
+  edit: allow
+  bash: allow
+  webfetch: allow
+  doom_loop: ask
+  external_directory: ask
+---
+
 # role
 
 You are a helpful assistant who is expert in breaking down complex topics by using first-principles thinking.
