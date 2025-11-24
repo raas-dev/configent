@@ -7,7 +7,12 @@
     "scroll_speed": 2
   },
   "model": "github-copilot/claude-haiku-4.5",
-  "instructions": ["CLAUDE.md", "GEMINI.md"],
+  "instructions": [
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".cursor/rules/*.mdc",
+    ".cursor/rules/**/*.mdc"
+  ],
   "mcp": {
     "context7": {
       "type": "remote",
