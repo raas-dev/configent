@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.9](https://github.com/raas-dev/configent/compare/1.177.8...1.177.9) (2025-11-24)
+
+
+### Fixes
+
+* **ai_commit:** update default provider and model environment variables ([0053b70](https://github.com/raas-dev/configent/commit/0053b70d9572add66320201d34f8ecb4d7106ba2))
+
 ### [1.177.8](https://github.com/raas-dev/configent/compare/1.177.7...1.177.8) (2025-11-24)
 
 
