@@ -25,21 +25,13 @@ white=$(tput setaf 7)
 
 ### variables ##################################################################
 
-# set OPENROUTER_API_KEY in .rclocal
-: "${PROVIDER:="openrouter"}"
-: "${MODEL:="openai/gpt-4.1-mini"}"
+: "${MODEL:="github-copilot/gpt-4.1"}"
 
 ################################################################################
 
-if ! command -v goose >/dev/null; then
-  printf "%sError: goose not found in the system.\n" "$red"
+if ! command -v opencode >/dev/null; then
+  printf "%sError: opencode not found in the system.\n" "$red"
   exit 127
-fi
-
-system_instructions_path="$HOME/.config/configent/prompts/commit.md"
-if [ ! -f "$system_instructions_path" ]; then
-  printf "%sError: System instructions file not found: %s\n" "$red" "$system_instructions_path"
-  exit 1
 fi
 
 git_diff="$(git diff --staged --no-color)" || {
@@ -70,16 +62,11 @@ if [ -n "$*" ]; then
 $user_message"
 fi
 
-system_prompt="$(cat "$system_instructions_path")" || {
-  printf "%sError: Failed to read system instructions file.\n" "$red"
-  exit 1
-}
-
-commit_message="$(goose run --quiet \
-  --no-session \
-  --system "$system_prompt" \
-  --provider "$PROVIDER" --model "$MODEL" \
-  --text "$user_message")" || {
+commit_message="$(opencode run \
+  --agent chat \
+  --model "$MODEL" \
+  --command commit \
+  "$user_message")" || {
   printf "%sError: Failed to generate commit message.\n" "$red"
   exit 1
 }
