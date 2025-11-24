@@ -1,0 +1,15 @@
+{
+  "mcp": {
+    "desktop-commander": {
+      "type": "local",
+      "command": ["npx", "-y", "@wonderwhy-er/desktop-commander"],
+      "enabled": true
+    },
+    "browser-use": {
+      "type": "local",
+      "command": ["browser-use", "--mcp"],
+      "enabled": true
+    }
+  },
+  "$schema": "https://opencode.ai/config.json"
+}

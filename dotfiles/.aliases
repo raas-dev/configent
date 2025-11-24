@@ -430,11 +430,7 @@ ai_agent() {
   else
     local agent="build"
   fi
-  opencode --agent "$agent" --continue
-}
-
-ai_agent_web() {
-  browser-use --prompt \""$*"\"
+  opencode --agent "$agent" --continue "$HOME/.config/opencode/agent/_"
 }
 
 ### Functions: Docker ##########################################################
