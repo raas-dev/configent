@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.2](https://github.com/raas-dev/configent/compare/1.179.1...1.179.2) (2025-11-24)
+
+
+### Fixes
+
+* **aliases:** update ai_agent to use subagent config ([6723e69](https://github.com/raas-dev/configent/commit/6723e6947a22c3eac1ab6b8b29a0c5cda2d65fb9))
+
 ### [1.179.1](https://github.com/raas-dev/configent/compare/1.179.0...1.179.1) (2025-11-24)
 
 
