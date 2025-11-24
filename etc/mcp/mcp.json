@@ -9,6 +9,9 @@
     "tavily": {
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
     },
+    "grep": {
+      "url": "https://mcp.grep.app"
+    },
     "utcp": {
       "command": "npx",
       "args": ["-y", "@utcp/code-mode-mcp"]

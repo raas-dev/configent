@@ -27,6 +27,11 @@
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey={env:TAVILY_API_KEY}",
       "enabled": true
     },
+    "grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
+    },
     "utcp": {
       "type": "local",
       "command": ["npx", "-y", "@utcp/code-mode-mcp"],
