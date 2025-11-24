@@ -25,9 +25,9 @@ white=$(tput setaf 7)
 
 ### variables ##################################################################
 
-# set OPENROUTER_API_KEY in .rclocal
-: "${PROVIDER:="openrouter"}"
-: "${MODEL:="openai/gpt-4.1-mini"}"
+# set OPENAI_API_KEY in .rclocal
+: "${PROVIDER:="openai"}"
+: "${MODEL:="gpt-4.1-mini"}"
 
 ################################################################################
 
