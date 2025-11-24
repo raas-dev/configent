@@ -430,7 +430,8 @@ ai_agent() {
   else
     local agent="build"
   fi
-  opencode --agent "$agent" --continue "$HOME/.config/opencode/agent/_"
+  OPENCODE_CONFIG="$HOME/.config/configent/mcp/opencode-computer-use.jsonc" \
+    opencode --agent "$agent" --continue
 }
 
 ### Functions: Docker ##########################################################
