@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.177.8](https://github.com/raas-dev/configent/compare/1.177.7...1.177.8) (2025-11-24)
+
+
+### Fixes
+
+* **ai_commit:** update default provider and model environment variables ([76e1aa2](https://github.com/raas-dev/configent/commit/76e1aa2d2672b440cd719eb2314a38a991745bf2))
+* **Chat:** remove obsolete chatmode prompt file ([2023818](https://github.com/raas-dev/configent/commit/202381828848094d7bb876de93775a246e41b05b))
+* **utcp:** disable headless mode for chrome-devtools-mcp in config ([33cee55](https://github.com/raas-dev/configent/commit/33cee55d133b3a1ec58d3436410dd78cae2853c6))
+* **utcp:** reformat chrome-devtools args array in config file ([6d83534](https://github.com/raas-dev/configent/commit/6d835340968dff75d6f628aed35c1159632aede2))
+
 ### [1.177.7](https://github.com/raas-dev/configent/compare/1.177.6...1.177.7) (2025-11-23)
 
 
