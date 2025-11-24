@@ -71,3 +71,16 @@ fi
 mkdir -p "$HOME/.config/opencode/command"
 rm -rf "$HOME/.config/opencode/command"
 ln -sfnv "$config_path/claude-code/commands" "$HOME/.config/opencode/command"
+
+# skills dir (from claude-code, note singular in the target dir name)
+# uses opencode-skills plugin: https://github.com/malhashemi/opencode-skills
+if [ ! -r "$backup_path/.config/opencode/skills" ]; then
+  if [ -r "$HOME/.config/opencode/skills" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -RP "$HOME/.config/opencode/skills" \
+      "$backup_path/.config/opencode/skills"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode/skills"
+rm -rf "$HOME/.config/opencode/skills"
+ln -sfnv "$config_path/claude-code/skills" "$HOME/.config/opencode/skills"

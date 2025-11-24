@@ -30,5 +30,6 @@
       },
       "enabled": true
     }
-  }
+  },
+  "plugin": ["opencode-skills"]
 }
