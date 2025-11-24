@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.1](https://github.com/raas-dev/configent/compare/1.179.0...1.179.1) (2025-11-24)
+
+
+### Fixes
+
+* **opencode:** disable skills plugin setup ([3d465ef](https://github.com/raas-dev/configent/commit/3d465efe5f4546182fa681951f2b04f887e5a7e6))
+
 ## [1.179.0](https://github.com/raas-dev/configent/compare/1.178.1...1.179.0) (2025-11-24)
 
 
