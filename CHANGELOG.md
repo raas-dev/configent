@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.178.1](https://github.com/raas-dev/configent/compare/1.178.0...1.178.1) (2025-11-24)
+
+
+### Fixes
+
+* **ai_commit:** update default model to claude-haiku-4.5 ([09a99a5](https://github.com/raas-dev/configent/commit/09a99a53ad45a63ddd4a22ec5289a032e76a1eb5))
+* **ai_commit:** update provider and model handling ([408ea6c](https://github.com/raas-dev/configent/commit/408ea6ceb4042579469bcff9fdba671ec9b0fbd2))
+* **opencode:** enable utcp MCP server configuration ([31042c2](https://github.com/raas-dev/configent/commit/31042c2f5f9a06723500bbf38a1d7fc66371977e))
+
 ## [1.178.0](https://github.com/raas-dev/configent/compare/1.177.9...1.178.0) (2025-11-24)
 
 
