@@ -208,7 +208,7 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.50"
+version = "2.0.51"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
@@ -373,11 +373,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.107"
+version = "1.0.108"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:58dd3f4c10394eca79e587d6d7cf22e7a845b5de266f13cf879ed0297c2d8c48"
+checksum = "blake3:2c18d779652a5e5221c3ee4c623a9ab3b6660afd977d7e43ea642df7ce08e542"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.4.2"
