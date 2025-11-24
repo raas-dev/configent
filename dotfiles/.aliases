@@ -410,29 +410,17 @@ alias repomix='bunx repomix'
 ### Functions: AI ##############################################################
 
 ai() {
-  local ADD_EXTENSIONS=(
-    --with-builtin developer
-    --with-streamable-http-extension "https://mcp.tavily.com/mcp/?tavilyApiKey=$TAVILY_API_KEY"
-  )
+  local agent="chat"
   if [ -n "$1" ]; then
-    if [ -r "$1" ]; then
-      # example: ai prompt.md
-      local instructions_path="$1"
+    if [ -r "$HOME/.config/opencode/command/$1.md" ]; then
+      local command="$1"
       shift
-      goose run --quiet \
-        --no-session \
-        --interactive \
-        --instructions "$instructions_path" \
-        "${ADD_EXTENSIONS[@]}" \
-        "$@"
+      opencode run --agent "$agent" --command "$command" "$@"
     else
-      goose run --quiet \
-        --no-session \
-        "${ADD_EXTENSIONS[@]}" \
-        --text "$*"
+      opencode run --agent "$agent" "$@"
     fi
   else
-    goose session "${ADD_EXTENSIONS[@]}"
+    opencode --agent "$agent"
   fi
 }
 
