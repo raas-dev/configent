@@ -398,6 +398,9 @@ alias inspector='bunx @modelcontextprotocol/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
+# Web-based interface for the OpenCode Server API
+alias opencode-web='bunx opencode-web'
+
 # Project generator (requires bin/yarn shim)
 alias projen='bunx projen'
 
@@ -406,6 +409,9 @@ alias promptfoo='bunx promptfoo'
 
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
+
+# Kanban board to manage your AI coding agents
+alias vibe-kanban='bunx vibe-kanban'
 
 ### Functions: AI ##############################################################
 
@@ -430,7 +436,7 @@ ai_agent() {
   else
     local agent="build"
   fi
-  OPENCODE_CONFIG="$HOME/.config/configent/mcp/opencode-computer-use.jsonc" \
+  OPENCODE_CONFIG="$HOME/.config/configent/mcp/opencode-computer-use.json" \
     opencode --agent "$agent" --continue
 }
 

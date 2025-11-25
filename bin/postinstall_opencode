@@ -14,16 +14,16 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# opencode.jsonc
-if [ ! -r "$backup_path/.config/opencode/opencode.jsonc" ]; then
-  if [ -r "$HOME/.config/opencode/opencode.jsonc" ]; then
+# opencode.json
+if [ ! -r "$backup_path/.config/opencode/opencode.json" ]; then
+  if [ -r "$HOME/.config/opencode/opencode.json" ]; then
     mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/opencode.jsonc" \
-      "$backup_path/.config/opencode/opencode.jsonc"
+    cp -P "$HOME/.config/opencode/opencode.json" \
+      "$backup_path/.config/opencode/opencode.json"
   fi
 fi
 mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+ln -sfnv "$config_path/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 
 # AGENTS.md (from claude-code)
 if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
