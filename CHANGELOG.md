@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.5](https://github.com/raas-dev/configent/compare/1.179.4...1.179.5) (2025-11-25)
+
+
+### Fixes
+
+* **ai_commit:** handle large diffs via temp file ([dae3740](https://github.com/raas-dev/configent/commit/dae374021b7883d7d5f73e26939ee9585f9bfc72))
+* **aliases:** add openskills alias ([c9cf31b](https://github.com/raas-dev/configent/commit/c9cf31bb4c0b39a70ebb70fa6498836bfe283c37))
+* **aliases:** remove openskills alias ([5638467](https://github.com/raas-dev/configent/commit/56384670ec75c82ad0423f535976f55245d8c43a))
+* **opencode:** update model to claude-sonnet ([5893131](https://github.com/raas-dev/configent/commit/58931310070234c443c6def1b955ad36b81ab0a5))
+
 ### [1.179.4](https://github.com/raas-dev/configent/compare/1.179.3...1.179.4) (2025-11-25)
 
 
