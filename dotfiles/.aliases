@@ -401,6 +401,9 @@ alias ncu='bunx npm-check-updates'
 # Web-based interface for the OpenCode Server API
 alias opencode-web='bunx opencode-web'
 
+# Universal skills loader for AI coding agents
+alias openskills='bunx openskills'
+
 # Project generator (requires bin/yarn shim)
 alias projen='bunx projen'
 
