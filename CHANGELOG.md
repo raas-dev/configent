@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.4](https://github.com/raas-dev/configent/compare/1.179.3...1.179.4) (2025-11-25)
+
+
+### Fixes
+
+* **opencode:** migrate config from jsonc to json format ([dfa7f71](https://github.com/raas-dev/configent/commit/dfa7f71be4ec9a743e0a0964bab016afb6617e64))
+
 ### [1.179.3](https://github.com/raas-dev/configent/compare/1.179.2...1.179.3) (2025-11-24)
 
 
