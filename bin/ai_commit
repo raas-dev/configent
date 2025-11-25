@@ -43,33 +43,50 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
-user_message="GIT DIFF:
-$git_diff
-"
+# Store git diff in temporary file to avoid "Argument list too long" error
+diff_file=$(mktemp) || {
+  printf "%sError: Failed to create temporary file.\n" "$red"
+  exit 1
+}
+trap 'rm -f "$diff_file"' EXIT INT TERM
+printf '%s' "$git_diff" >"$diff_file"
 
+# Build context message (without git diff)
+context_message=""
 recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
 if [ -n "$recent_headlines" ]; then
-  user_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
-$recent_headlines
-
-$user_message
-"
+  context_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
+$recent_headlines"
 fi
 
 if [ -n "$*" ]; then
-  user_message="ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*
+  if [ -n "$context_message" ]; then
+    context_message="$context_message
 
-$user_message"
+ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
+  else
+    context_message="ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
+  fi
 fi
 
-commit_message="$(opencode run \
-  --agent chat \
-  --model "$MODEL" \
-  --command commit \
-  "$user_message")" || {
-  printf "%sError: Failed to generate commit message.\n" "$red"
-  exit 1
-}
+# The commit command reads the git diff from stdin
+if [ -n "$context_message" ]; then
+  commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
+    --agent chat \
+    --model "$MODEL" \
+    --command commit)" || {
+    printf "%sError: Failed to generate commit message.\n" "$red"
+    exit 1
+  }
+else
+  commit_message="$(cat "$diff_file" | opencode run \
+    --agent chat \
+    --model "$MODEL" \
+    --command commit)" || {
+    printf "%sError: Failed to generate commit message.\n" "$red"
+    exit 1
+  }
+fi
 
 if [ -z "$commit_message" ]; then
   printf "%sError: Generated commit message is empty.\n" "$red"
@@ -82,7 +99,13 @@ printf "\n"
 if [ -z "$NONINTERACTIVE" ]; then
   printf "\n%sCommit with this (y), edit message first (e), or quit (q)\
   [y\\\e\\\q] %s> " "${bold}${cyan}" "$normal"
-  read -r choice
+  # Allow Ctrl+C to work during read
+  trap 'printf "\n"; exit 130' INT
+  read -r choice || {
+    printf "\n"
+    exit 130
+  }
+  trap - INT
 else
   choice="y"
 fi
