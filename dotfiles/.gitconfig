@@ -20,6 +20,8 @@
   ig = ls-files --others --ignored --exclude-standard --directory
   in = !"git remote update --prune; git log ..@{u}"
   l = log --graph --pretty=format:'%C(yellow)%h %C(green)%d%C(reset) %s %C(blue)(%cr) %C(cyan)<%an>' --abbrev-commit --date=relative
+  mg = merge --no-ff
+  ms = merge --squash
   o = !"git push --set-upstream && git push --tags"
   out = log @{u}..
   purge = clean -d --force
