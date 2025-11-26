@@ -332,6 +332,9 @@ alias langflow='uvx --python 3.11 langflow'
 # Reactive notebook
 alias marimo='uvx marimo'
 
+# GitHub Spec Kit
+alias specify='uvx --from specify-cli specify'
+
 ### dev
 
 # Command-line utility for rendering projects templates
