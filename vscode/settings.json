@@ -423,7 +423,6 @@
   "window.confirmSaveUntitledWorkspace": false,
   "window.newWindowDimensions": "inherit",
   "window.newWindowProfile": "Default",
-  "window.openFoldersInNewWindow": "off",
   "window.restoreFullscreen": true,
   "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.colorCustomizations": {
