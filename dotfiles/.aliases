@@ -332,9 +332,6 @@ alias langflow='uvx --python 3.11 langflow'
 # Reactive notebook
 alias marimo='uvx marimo'
 
-# mcpm.sh (see: https://github.com/pathintegral-institute/mcpm.sh/issues/271)
-alias mcpm='uvx --with "pydantic>=2.5.1,<2.12.0" mcpm'
-
 ### dev
 
 # Command-line utility for rendering projects templates
