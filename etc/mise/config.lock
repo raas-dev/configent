@@ -28,13 +28,13 @@ size = 12523696
 url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"
 
 [[tools.awscli]]
-version = "2.32.4"
+version = "2.32.5"
 backend = "aqua:aws/aws-cli"
 
 [tools.awscli.platforms.macos-arm64]
-checksum = "blake3:93ca7de2b4e0d2cc077822364bb0e899d4bd40005cf98aa1913f953cc578637c"
-size = 48737589
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.4.pkg"
+checksum = "blake3:8e44745eb92e63f98d6024192ab8a909f108d7c9f48b36b0959c3738da97d8af"
+size = 48748910
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.5.pkg"
 
 [[tools.bun]]
 version = "1.3.3"
@@ -208,11 +208,11 @@ size = 49924179
 url = "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-arm64.tar.gz"
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.0.53"
+version = "2.0.54"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.17.1"
+version = "0.18.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:openskills"]]
@@ -377,11 +377,11 @@ backend = "ubi:sigoden/opscan"
 checksum = "blake3:6e075b033ab651731fc27fec54a96b58312a430b682a2fb72a3eed5fdc2a5a87"
 
 [[tools."ubi:sst/opencode"]]
-version = "1.0.110"
+version = "1.0.114"
 backend = "ubi:sst/opencode"
 
 [tools."ubi:sst/opencode".platforms.macos-arm64-opencode]
-checksum = "blake3:96af0e1a0504609c46a66525d7c911adb6db4df399bb08018ef257e336ed0bba"
+checksum = "blake3:6cc695d4846adfa6e9e5e043e2bdcf14531b069cc61af3961d22db1b13de3455"
 
 [[tools."ubi:topgrade-rs/topgrade"]]
 version = "16.4.2"
@@ -391,13 +391,13 @@ backend = "ubi:topgrade-rs/topgrade"
 checksum = "blake3:906e4723fadd66264b2adb1b39b4c0ab988d7e12f78cf6e7030e502c17c81d1b"
 
 [[tools.uv]]
-version = "0.9.11"
+version = "0.9.12"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:594d9f4cfbd21d5a2f34b0352bf423066a9dab1733c90b5d40e3e227506deb03"
-size = 18409829
-url = "https://github.com/astral-sh/uv/releases/download/0.9.11/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:6bf1148aa48bc42853e8216982a89f6909e1932a51f4d8dce27815e8954e4664"
+size = 18521174
+url = "https://github.com/astral-sh/uv/releases/download/0.9.12/uv-aarch64-apple-darwin.tar.gz"
 
 [[tools.viddy]]
 version = "1.3.0"
