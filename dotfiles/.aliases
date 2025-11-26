@@ -258,7 +258,7 @@ alias ppr='pr ; prv ; pri ; podman system prune --force --volumes'
 ### Utilities ##################################################################
 
 # cd
-alias cdtemp="cd $(mktemp -d)"
+alias cdtemp='cd $(mktemp -d)'
 
 # Typos
 alias dc='cd'
