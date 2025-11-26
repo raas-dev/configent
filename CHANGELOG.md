@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.179.6](https://github.com/raas-dev/configent/compare/1.179.5...1.179.6) (2025-11-26)
+
+
+### Fixes
+
+* **aliases:** add specify alias ([1680681](https://github.com/raas-dev/configent/commit/168068117b7f05cdf1409f909b508f71e16747fc))
+* **aliases:** change quotes to single quotes ([5af9be3](https://github.com/raas-dev/configent/commit/5af9be327f745975a2630465a072d5b295559533))
+* **aliases:** remove mcpm alias ([da8c908](https://github.com/raas-dev/configent/commit/da8c90806bace2ab6f0262de1f5992fe49b14638))
+* **aliases:** reuse window when opening code ([11d0317](https://github.com/raas-dev/configent/commit/11d0317395ecda8402a05add75dd813005ec0964))
+* **gitconfig:** add merge aliases ([84bc59d](https://github.com/raas-dev/configent/commit/84bc59d102543fc614fdf035325d7e6fcc98308b))
+* **gitconfig:** remove fast-forward merge default ([34a1dfd](https://github.com/raas-dev/configent/commit/34a1dfd0c5df30d14eecb46e55557f38be5aab52))
+
 ### [1.179.5](https://github.com/raas-dev/configent/compare/1.179.4...1.179.5) (2025-11-25)
 
 
