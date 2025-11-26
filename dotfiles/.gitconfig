@@ -179,7 +179,6 @@
   defaultBranch = main
 
 [merge]
-  ff = false
   log = true
   conflictstyle = diff3
 
