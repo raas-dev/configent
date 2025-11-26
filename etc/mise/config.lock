@@ -212,7 +212,7 @@ version = "2.0.54"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.18.0"
+version = "0.18.3"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:openskills"]]
@@ -391,13 +391,13 @@ backend = "ubi:topgrade-rs/topgrade"
 checksum = "blake3:906e4723fadd66264b2adb1b39b4c0ab988d7e12f78cf6e7030e502c17c81d1b"
 
 [[tools.uv]]
-version = "0.9.12"
+version = "0.9.13"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.platforms.macos-arm64]
-checksum = "sha256:6bf1148aa48bc42853e8216982a89f6909e1932a51f4d8dce27815e8954e4664"
-size = 18521174
-url = "https://github.com/astral-sh/uv/releases/download/0.9.12/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:9c594dce1c237e11680be2b6d1331448eeb6f8a1453fb851a66a40291bb624de"
+size = 18455072
+url = "https://github.com/astral-sh/uv/releases/download/0.9.13/uv-aarch64-apple-darwin.tar.gz"
 
 [[tools.viddy]]
 version = "1.3.0"
