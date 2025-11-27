@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.180.0](https://github.com/raas-dev/configent/compare/1.179.6...1.180.0) (2025-11-27)
+
+
+### Features
+
+* **ai:** Generalize commands dir and AGENTS.md ([847fe9a](https://github.com/raas-dev/configent/commit/847fe9a7c6f6f373d2d66e3f8c72197fd69c8f82))
+
+
+### Fixes
+
+* **ai:** move AGENTS.md and commands out of claude-code ([ebc6087](https://github.com/raas-dev/configent/commit/ebc60879bd654eadb47bf6ef1a32df038d30fbdb))
+* **aliases:** add bwc alias ([8c6f703](https://github.com/raas-dev/configent/commit/8c6f703bd4537cd411e30440e32e1503e5124a04))
+* **aliases:** add openspec alias ([f928d36](https://github.com/raas-dev/configent/commit/f928d363b2241f64c73868563c91a50f31c7daeb))
+* **claude-code:** Remove skills library ([8807c32](https://github.com/raas-dev/configent/commit/8807c32af43bbfd378a770bb7425cc044a458428))
+* **claude-code:** Remove subagents library ([2ec74c7](https://github.com/raas-dev/configent/commit/2ec74c71921e4be58f9404a19b4b8833a5aff019))
+* **macos:** Remove mas ([0484024](https://github.com/raas-dev/configent/commit/0484024400bb0751c3c8015e6c9691ec511ee529))
+
 ### [1.179.6](https://github.com/raas-dev/configent/compare/1.179.5...1.179.6) (2025-11-26)
 
 
