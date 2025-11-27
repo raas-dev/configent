@@ -43,7 +43,7 @@ ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 # fi
 # mkdir -p "$HOME/.claude/agents"
 # rm -rf "$HOME/.claude/agents"
-# ln -sfnv "$config_path/claude-code/agents" "$HOME/.claude/agents"
+# ln -sfnv "$config_path/claude-code/subagents" "$HOME/.claude/agents"
 
 # commands dir
 # if [ ! -r "$backup_path/.claude/commands" ]; then

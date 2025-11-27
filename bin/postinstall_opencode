@@ -46,7 +46,7 @@ ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 # fi
 # mkdir -p "$HOME/.config/opencode/agent"
 # rm -rf "$HOME/.config/opencode/agent"
-# ln -sfnv "$config_path/claude-code/agents" "$HOME/.config/opencode/agent"
+# ln -sfnv "$config_path/claude-code/subagents" "$HOME/.config/opencode/agent"
 
 # agent dir
 if [ ! -r "$backup_path/.config/opencode/agent" ]; then
