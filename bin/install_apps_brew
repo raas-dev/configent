@@ -49,9 +49,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
   # Swiss Army Knife for macOS (https://github.com/rgcr/m-cli)
   brew install m-cli
 
-  # Mac App Store command-line interface (https://github.com/mas-cli/mas)
-  brew install mas
-
   # For cosign and slsa-verifier, used by mise for verifying checksums
   brew install gnupg
 fi
