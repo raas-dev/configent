@@ -41,7 +41,7 @@ if command -v cursor >/dev/null; then
   fi
   mkdir -p "$HOME/.cursor/commands"
   rm -rf "$HOME/.cursor/commands"
-  ln -sfnv "$config_path/claude-code/commands" "$HOME/.cursor/commands"
+  ln -sfnv "$config_path/commands" "$HOME/.cursor/commands"
 
   #APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi

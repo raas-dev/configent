@@ -32,7 +32,7 @@ if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
   fi
 fi
 mkdir -p "$HOME/.claude"
-ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+ln -sfnv "$config_path/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
 # commands dir
 # if [ ! -r "$backup_path/.claude/commands" ]; then
@@ -43,4 +43,4 @@ ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 # fi
 # mkdir -p "$HOME/.claude/commands"
 # rm -rf "$HOME/.claude/commands"
-# ln -sfnv "$config_path/claude-code/commands" "$HOME/.claude/commands"
+# ln -sfnv "$config_path/commands" "$HOME/.claude/commands"
