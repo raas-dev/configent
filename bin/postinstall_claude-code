@@ -34,17 +34,6 @@ fi
 mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
-# agents dir
-# if [ ! -r "$backup_path/.claude/agents" ]; then
-#   if [ -r "$HOME/.claude/agents" ]; then
-#     mkdir -p "$backup_path/.claude"
-#     cp -RP "$HOME/.claude/agents" "$backup_path/.claude/agents"
-#   fi
-# fi
-# mkdir -p "$HOME/.claude/agents"
-# rm -rf "$HOME/.claude/agents"
-# ln -sfnv "$config_path/claude-code/subagents" "$HOME/.claude/agents"
-
 # commands dir
 # if [ ! -r "$backup_path/.claude/commands" ]; then
 #   if [ -r "$HOME/.claude/commands" ]; then
