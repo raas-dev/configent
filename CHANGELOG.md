@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.1](https://github.com/raas-dev/configent/compare/1.180.0...1.180.1) (2025-11-27)
+
+
+### Fixes
+
+* **install:** Re-add mas package manager ([60a78d6](https://github.com/raas-dev/configent/commit/60a78d619e7cbf5b57e4a19d07491bf02dc1eefe))
+
 ## [1.180.0](https://github.com/raas-dev/configent/compare/1.179.6...1.180.0) (2025-11-27)
 
 
