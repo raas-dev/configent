@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.2](https://github.com/raas-dev/configent/compare/1.180.1...1.180.2) (2025-11-29)
+
+
+### Fixes
+
+* **ai:** Add general purpose chat command ([f8dc154](https://github.com/raas-dev/configent/commit/f8dc154bb630ea41f3f372962882a4c083022d39))
+* **chat:** clarify tool usage restrictions ([abda0ab](https://github.com/raas-dev/configent/commit/abda0abe05255d49a1bf18fe42673aa741dae31d))
+* **opencode:** Reorganize agent config structure ([8539da9](https://github.com/raas-dev/configent/commit/8539da93c1daf1cf5e736477ee743f9efe1bda3a))
+* **setup_ide:** clarify MCP config location comment ([9083a42](https://github.com/raas-dev/configent/commit/9083a420f74652c5c8b138cf2a440266688c6b24))
+* **setup_ide:** Remove Cursor mcp.json symlink setup ([d1351bb](https://github.com/raas-dev/configent/commit/d1351bb3d369c7c0049976283c7ec1c310dc6aa6))
+* **vscode:** Add mcp.json ([807d89b](https://github.com/raas-dev/configent/commit/807d89bcb387e9bed741e69439852302899f2913))
+* **vscode:** Remove chat.mcp.discovery config ([b7f2cd2](https://github.com/raas-dev/configent/commit/b7f2cd222fba477a7d09e60e349f099784939116))
+* **vscode:** Remove IntelliCode extensions ([3d4483f](https://github.com/raas-dev/configent/commit/3d4483f50b817f47b6e637256277e3906451fb1c))
+
 ### [1.180.1](https://github.com/raas-dev/configent/compare/1.180.0...1.180.1) (2025-11-27)
 
 
