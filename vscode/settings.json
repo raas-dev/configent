@@ -79,10 +79,6 @@
   "chat.editor.fontSize": 13,
   "chat.experimental.offerSetup": false,
   "chat.fontSize": 14,
-  "chat.mcp.discovery.enabled": {
-    "cursor-global": true,
-    "cursor-workspace": false
-  },
   "chat.mcp.gallery.enabled": true,
   "chat.notifyWindowOnConfirmation": false,
   "chat.notifyWindowOnResponseReceived": false,
