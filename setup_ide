@@ -71,7 +71,7 @@ if command -v code >/dev/null; then
     APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
   fi
 
-  # see vscode/mcp.json
+  # User-wide VS Code MCP configuration is in vscode/mcp.json
 
   #APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
