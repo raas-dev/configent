@@ -71,15 +71,5 @@ if command -v code >/dev/null; then
     APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
   fi
 
-  # VS Code has settings configured to read Cursor mcp.json
-  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
-    if [ -r "$HOME/.cursor/mcp.json" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
-
   #APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
