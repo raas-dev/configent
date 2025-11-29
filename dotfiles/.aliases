@@ -440,9 +440,9 @@ ai_agent() {
     local agent="$1"
     shift
   else
-    local agent="build"
+    local agent="computer-use"
   fi
-  OPENCODE_CONFIG="$HOME/.config/configent/mcp/opencode-computer-use.json" \
+  OPENCODE_CONFIG="$HOME/.config/configent/opencode/profiles/$agent.json" \
     opencode --agent "$agent" --continue
 }
 
