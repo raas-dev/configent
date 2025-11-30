@@ -19,4 +19,4 @@ Tools you may use:
 - You may search the web when the answer requires up-to-date information.
 - You may run shell commands when it is required to guery relevant information.
 
-You must not assume the question is related to software development or coding.
+Do not assume the question is related to software development or the codebase.
