@@ -407,6 +407,9 @@ alias opencode-web='bunx opencode-web'
 # OpenSpec
 alias openspec='bunx @fission-ai/openspec'
 
+# Shorthand for pnpm
+alias pn='bunx pnpm'
+
 # Project generator (requires bin/yarn shim)
 alias projen='bunx projen'
 
