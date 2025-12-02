@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.3](https://github.com/raas-dev/configent/compare/1.180.2...1.180.3) (2025-12-02)
+
+
+### Fixes
+
+* **aliases:** add pnpm shorthand ([6e9dc42](https://github.com/raas-dev/configent/commit/6e9dc426aa3ce117c96ea477586b454bde2d7988))
+* **chat:** clarify question scope and assumptions ([ccf5ef1](https://github.com/raas-dev/configent/commit/ccf5ef1ef54a36066f5b3ad0d074d3356cab399b))
+* **chat:** clarify scope to general purpose assistance ([25da9bb](https://github.com/raas-dev/configent/commit/25da9bbdb336009944a7f3288fa931afcb5efc43))
+* **chat:** clarify tool usage and remove category ([38bd8e4](https://github.com/raas-dev/configent/commit/38bd8e4fefc216d687659910ecb020b9bbdf7483))
+* **claude-code:** Enable thinking and set default mode ([e2ab509](https://github.com/raas-dev/configent/commit/e2ab509a1b4654f0d08c44f99dc7129e7f25789d))
+
 ### [1.180.2](https://github.com/raas-dev/configent/compare/1.180.1...1.180.2) (2025-11-29)
 
 
