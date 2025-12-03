@@ -5,8 +5,15 @@
       "args": [
         "-y",
         "@kimuson/modular-mcp",
-        "${env:HOME}/.config/configent/mcp/modular-mcp.json"
+        "${userHome}/.config/configent/mcp/modular-mcp.json"
       ]
+    },
+    "utcp": {
+      "command": "npx",
+      "args": ["-y", "@utcp/code-mode-mcp"],
+      "env": {
+        "UTCP_CONFIG_FILE": "${env:UTCP_CONFIG_FILE}"
+      }
     }
   }
 }

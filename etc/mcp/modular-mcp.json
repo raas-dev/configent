@@ -18,12 +18,6 @@
       "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources. Provides high-quality, factual search results optimized for AI agents.",
       "type": "http",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
-    },
-    "utcp": {
-      "description": "Use when you need to execute complex logic involving multiple tool calls, filter or process data before sending to the model, or reduce token usage by batching operations. Enables code execution mode where the agent writes TypeScript scripts that call MCP tools directly, reducing context overhead by up to 98.7% and allowing more efficient tool orchestration.",
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp"]
     }
   }
 }
