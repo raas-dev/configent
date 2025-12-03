@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.4](https://github.com/raas-dev/configent/compare/1.180.3...1.180.4) (2025-12-03)
+
+
+### Fixes
+
+* **mcp:** consolidate MCP servers under modular-mcp ([a91538d](https://github.com/raas-dev/configent/commit/a91538d2a9167757004e1b92efab76c6690829bf))
+* **pre-commit:** remove json formatting hook ([00e0c44](https://github.com/raas-dev/configent/commit/00e0c44be9bfb5d04fcf3a0861efbe96a2639b4c))
+
 ### [1.180.3](https://github.com/raas-dev/configent/compare/1.180.2...1.180.3) (2025-12-02)
 
 
