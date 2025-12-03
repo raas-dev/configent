@@ -1,23 +1,16 @@
 {
-  "load_variables_from": [
-    {
-      "env_file_path": ".env",
-      "variable_loader_type": "dotenv"
-    }
-  ],
   "manual_call_templates": [
     {
       "call_template_type": "mcp",
       "config": {
         "mcpServers": {
           "chrome-devtools": {
-            "args": ["-y", "chrome-devtools-mcp@latest", "--headless=false"],
+            "transport": "stdio",
             "command": "npx",
-            "transport": "stdio"
+            "args": ["-y", "chrome-devtools-mcp@latest", "--headless=false"]
           }
         }
-      },
-      "name": "chrome-devtools"
+      }
     }
   ]
 }
