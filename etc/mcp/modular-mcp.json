@@ -2,11 +2,11 @@
   "mcpServers": {
     "context7": {
       "description": "Use when you need up-to-date, version-specific documentation and code samples for libraries, frameworks, or APIs. Ideal for getting accurate implementation details when working with packages that may have outdated training data, or when you need to understand current API usage patterns with real code examples from the source.",
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
       "headers": {
         "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-      },
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp"
+      }
     },
     "gh-grep": {
       "description": "Use when you need to find real-world code examples from GitHub repositories. Ideal for understanding how libraries are actually used in production code, finding implementation patterns, searching for specific code snippets across millions of repositories, or learning best practices from real codebases. Search for literal code patterns, not keywords.",
@@ -19,13 +19,10 @@
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
     },
     "utcp": {
-      "args": [
-        "-y",
-        "@utcp/code-mode-mcp"
-      ],
-      "command": "npx",
       "description": "Use when you need to execute complex logic involving multiple tool calls, filter or process data before sending to the model, or reduce token usage by batching operations. Enables code execution mode where the agent writes TypeScript scripts that call MCP tools directly, reducing context overhead by up to 98.7% and allowing more efficient tool orchestration.",
-      "type": "stdio"
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@utcp/code-mode-mcp"]
     }
   }
 }
