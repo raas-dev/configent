@@ -1,16 +1,12 @@
 {
   "servers": {
-    "context7": {
-      "headers": {
-        "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
-      },
-      "url": "https://mcp.context7.com/mcp"
-    },
-    "tavily": {
-      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
-    },
-    "gh-grep": {
-      "url": "https://mcp.grep.app"
+    "modular-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@kimuson/modular-mcp",
+        "${env:HOME}/.config/configent/mcp/modular-mcp.json"
+      ]
     }
   }
 }

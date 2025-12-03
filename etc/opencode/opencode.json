@@ -8,34 +8,14 @@
     ".cursor/rules/**/*.mdc"
   ],
   "mcp": {
-    "context7": {
-      "enabled": true,
-      "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-      },
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp"
-    },
-    "gh-grep": {
-      "enabled": true,
-      "type": "remote",
-      "url": "https://mcp.grep.app"
-    },
-    "tavily": {
-      "enabled": true,
-      "type": "remote",
-      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey={env:TAVILY_API_KEY}"
-    },
-    "utcp": {
+    "modular-mcp": {
       "command": [
         "npx",
         "-y",
-        "@utcp/code-mode-mcp"
+        "@kimuson/modular-mcp",
+        "{env:HOME}/.config/configent/mcp/modular-mcp.json"
       ],
       "enabled": true,
-      "environment": {
-        "UTCP_CONFIG_FILE": "{env:UTCP_CONFIG_FILE}"
-      },
       "type": "local"
     }
   },

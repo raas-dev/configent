@@ -1,10 +1,6 @@
 {
   "context": {
-    "fileName": [
-      "AGENTS.md",
-      "CLAUDE.md",
-      "GEMINI.md"
-    ]
+    "fileName": ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]
   },
   "general": {
     "disableAutoUpdate": true,
@@ -22,12 +18,13 @@
     "hasSeenNudge": true
   },
   "mcpServers": {
-    "context7": {
-      "httpUrl": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "$CONTEXT7_API_KEY",
-        "Accept": "application/json, text/event-stream"
-      }
+    "modular-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@kimuson/modular-mcp",
+        "$HOME/.config/configent/mcp/modular-mcp.json"
+      ]
     }
   },
   "privacy": {

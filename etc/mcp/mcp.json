@@ -1,20 +1,12 @@
 {
   "mcpServers": {
-    "context7": {
-      "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
-      }
-    },
-    "tavily": {
-      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
-    },
-    "gh-grep": {
-      "url": "https://mcp.grep.app"
-    },
-    "utcp": {
+    "modular-mcp": {
       "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp"]
+      "args": [
+        "-y",
+        "@kimuson/modular-mcp",
+        "${env:HOME}/.config/configent/mcp/modular-mcp.json"
+      ]
     }
   }
 }
