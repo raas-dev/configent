@@ -26,10 +26,6 @@ repos:
     - id: destroyed-symlinks
     - id: check-executables-have-shebangs
       files: ^(?!etc/claude-code/skills/).*$
-    - id: pretty-format-json
-      files: ^(?!(.*\/)?(settings|mcp|mcp_config|.utcp_config)\.json$).*\.json$
-      args:
-        - --autofix
 
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
   rev: 3.0.0
