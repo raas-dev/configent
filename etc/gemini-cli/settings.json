@@ -23,7 +23,7 @@
       "args": [
         "-y",
         "@kimuson/modular-mcp",
-        "$HOME/.config/configent/mcp/modular-mcp.json"
+        "${HOME}/.config/configent/mcp/modular-mcp.json"
       ]
     }
   },
