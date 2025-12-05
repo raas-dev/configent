@@ -522,5 +522,6 @@
   "terminal.integrated.stickyScroll.enabled": false,
   "window.customTitleBarVisibility": "windowed",
   "workbench.editor.limit.value": 5,
-  "claudeCode.preferredLocation": "panel"
+  "claudeCode.preferredLocation": "panel",
+  "biome.suggestInstallingGlobally": false
 }
