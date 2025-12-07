@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.5](https://github.com/raas-dev/configent/compare/1.180.4...1.180.5) (2025-12-07)
+
+
+### Fixes
+
+* **gemini-cli:** replace $HOME with ${HOME} variable ([0651d4a](https://github.com/raas-dev/configent/commit/0651d4a5b4aab5c44059961ea903cdb71036b5bb))
+* **mcp:** replace utcp stdio with npx command ([290a824](https://github.com/raas-dev/configent/commit/290a8242f04772cbd0626e13a4453d4701fbfd3f))
+* **utcp:** remove load_variables_from and simplify config ([c19394d](https://github.com/raas-dev/configent/commit/c19394dfadedeb9e516583a6f445c084d2546ead))
+* **vscode:** disable biome global install suggestion ([aa6c43f](https://github.com/raas-dev/configent/commit/aa6c43f2ce3b59a5d9c27e1533da4d0a1e22f392))
+
 ### [1.180.4](https://github.com/raas-dev/configent/compare/1.180.3...1.180.4) (2025-12-03)
 
 
