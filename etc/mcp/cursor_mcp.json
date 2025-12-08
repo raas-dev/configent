@@ -2,11 +2,7 @@
   "mcpServers": {
     "gateway": {
       "command": "uvx",
-      "args": ["agent-mcp-gateway"],
-      "env": {
-        "GATEWAY_MCP_CONFIG": "${env:GATEWAY_MCP_CONFIG}",
-        "GATEWAY_RULES": "${env:GATEWAY_RULES}"
-      }
+      "args": ["agent-mcp-gateway"]
     },
     "utcp": {
       "command": "npx",
