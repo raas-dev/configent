@@ -1,11 +1,9 @@
 {
   "servers": {
-    "modular-mcp": {
-      "command": "npx",
+    "gateway": {
+      "command": "uvx",
       "args": [
-        "-y",
-        "@kimuson/modular-mcp",
-        "${env:HOME}/.config/configent/mcp/modular-mcp.json"
+        "agent-mcp-gateway"
       ]
     }
   }

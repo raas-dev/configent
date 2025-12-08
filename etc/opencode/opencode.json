@@ -8,12 +8,10 @@
     ".cursor/rules/**/*.mdc"
   ],
   "mcp": {
-    "modular-mcp": {
+    "gateway": {
       "command": [
-        "npx",
-        "-y",
-        "@kimuson/modular-mcp",
-        "{env:HOME}/.config/configent/mcp/modular-mcp.json"
+        "uvx",
+        "agent-mcp-gateway"
       ],
       "enabled": true,
       "type": "local"
