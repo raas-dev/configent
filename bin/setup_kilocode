@@ -43,5 +43,5 @@ if [ ! -r "$backup_path/$kilocode_settings_subpath/mcp_settings.json" ]; then
   fi
 fi
 mkdir -p "$user_path/$kilocode_settings_subpath"
-ln -sfnv "$config_path/mcp/mcp.json" \
+ln -sfnv "$config_path/mcp/cursor_mcp.json" \
   "$user_path/$kilocode_settings_subpath/mcp_settings.json"

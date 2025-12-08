@@ -30,7 +30,7 @@ if command -v cursor >/dev/null; then
     fi
   fi
   mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/mcp/mcp.json" "$HOME/.cursor/mcp.json"
+  ln -sfnv "$config_path/mcp/cursor_mcp.json" "$HOME/.cursor/mcp.json"
 
   # commands dir
   if [ ! -r "$backup_path/.cursor/commands" ]; then
@@ -60,7 +60,7 @@ if command -v agy >/dev/null; then
     fi
   fi
   mkdir -p "$HOME/.gemini/antigravity"
-  ln -sfnv "$config_path/mcp/mcp_config.json" \
+  ln -sfnv "$config_path/mcp/antigravity_mcp.json" \
     "$HOME/.gemini/antigravity/mcp_config.json"
 
   #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"

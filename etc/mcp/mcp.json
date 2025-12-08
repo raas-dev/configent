@@ -1,19 +1,22 @@
 {
   "mcpServers": {
-    "gateway": {
-      "command": "uvx",
-      "args": ["agent-mcp-gateway"],
-      "env": {
-        "GATEWAY_MCP_CONFIG": "${env:GATEWAY_MCP_CONFIG}",
-        "GATEWAY_RULES": "${env:GATEWAY_RULES}"
+    "context7": {
+      "description": "Use when you need up-to-date, version-specific documentation and code samples for libraries, frameworks, or APIs. Ideal for getting accurate implementation details when working with packages that may have outdated training data, or when you need to understand current API usage patterns with real code examples from the source.",
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
       }
     },
-    "utcp": {
-      "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp"],
-      "env": {
-        "UTCP_CONFIG_FILE": "${env:UTCP_CONFIG_FILE}"
-      }
+    "gh-grep": {
+      "description": "Use when you need to find real-world code examples from GitHub repositories. Ideal for understanding how libraries are actually used in production code, finding implementation patterns, searching for specific code snippets across millions of repositories, or learning best practices from real codebases. Search for literal code patterns, not keywords.",
+      "type": "http",
+      "url": "https://mcp.grep.app"
+    },
+    "tavily": {
+      "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources. Provides high-quality, factual search results optimized for AI agents.",
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
     }
   }
 }
