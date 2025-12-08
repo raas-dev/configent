@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.6](https://github.com/raas-dev/configent/compare/1.180.5...1.180.6) (2025-12-08)
+
+
+### Fixes
+
+* **mcp:** reorganize configs for cursor and antigravity ([5e3a526](https://github.com/raas-dev/configent/commit/5e3a526fefaee100f44728c1ba80eee80a87a665))
+* **mcp:** replace modular-mcp with agent-mcp-gateway ([63c7c71](https://github.com/raas-dev/configent/commit/63c7c715f5a23604a0ccd829438793a09d55fb80))
+* **mcp:** replace modular-mcp with agent-mcp-gateway ([739b99c](https://github.com/raas-dev/configent/commit/739b99cbb450a614993303d3ccaa30a333b59c8c))
+
 ### [1.180.5](https://github.com/raas-dev/configent/compare/1.180.4...1.180.5) (2025-12-07)
 
 
