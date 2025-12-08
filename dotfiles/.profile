@@ -273,6 +273,10 @@ export PROMPTS_DIR="$HOME/.config/configent/prompts"
 # code-mode-mcp (https://github.com/universal-tool-calling-protocol/code-mode)
 export UTCP_CONFIG_FILE="$HOME/.config/configent/utcp/.utcp_config.json"
 
+# agent-mcp-gateway (https://github.com/roddutra/agent-mcp-gateway)
+export GATEWAY_MCP_CONFIG="$HOME/.config/configent/mcp/modular-mcp.json"
+export GATEWAY_RULES="$HOME/.config/configent/mcp/mcp-gateway-rules.json"
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default

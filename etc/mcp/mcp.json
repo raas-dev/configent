@@ -1,12 +1,12 @@
 {
   "mcpServers": {
-    "modular-mcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@kimuson/modular-mcp",
-        "${userHome}/.config/configent/mcp/modular-mcp.json"
-      ]
+    "gateway": {
+      "command": "uvx",
+      "args": ["agent-mcp-gateway"],
+      "env": {
+        "GATEWAY_MCP_CONFIG": "${env:GATEWAY_MCP_CONFIG}",
+        "GATEWAY_RULES": "${env:GATEWAY_RULES}"
+      }
     },
     "utcp": {
       "command": "npx",

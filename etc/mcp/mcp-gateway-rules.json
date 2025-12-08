@@ -1,0 +1,12 @@
+{
+  "agents": {
+    "default": {
+      "allow": {
+        "servers": ["*"]
+      }
+    }
+  },
+  "defaults": {
+    "deny_on_missing_agent": false
+  }
+}
