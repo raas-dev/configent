@@ -500,7 +500,7 @@
   },
   {
     "command": "composerMode.plan",
-    "key": "cmd+[Quote]"
+    "key": "cmd+[Semicolon]"
   },
   {
     "command": "-cursor.composer.openAgentWindow",
@@ -536,7 +536,7 @@
     "when": "cursor.agentIdeUnification.enabled"
   },
   {
-    "key": "cmd+[Semicolon]",
+    "key": "cmd+[BracketLeft]",
     "command": "composerMode.debug"
   }
 ]
