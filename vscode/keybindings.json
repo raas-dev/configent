@@ -534,5 +534,9 @@
     "command": "-workbench.action.toggleUnifiedSidebar",
     "key": "shift+cmd+s",
     "when": "cursor.agentIdeUnification.enabled"
+  },
+  {
+    "key": "cmd+[Semicolon]",
+    "command": "composerMode.debug"
   }
 ]
