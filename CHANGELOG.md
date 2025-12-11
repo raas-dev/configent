@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.7](https://github.com/raas-dev/configent/compare/1.180.6...1.180.7) (2025-12-11)
+
+
+### Fixes
+
+* **aliases:** add mcporter CLI alias ([12396ad](https://github.com/raas-dev/configent/commit/12396ad4fce453feaffa402243d7f8411aad9057))
+* **cursor_mcp:** remove redundant env vars from gateway config ([89923ee](https://github.com/raas-dev/configent/commit/89923ee8d032f5dba56c8d6bbc2e907b900c9c90))
+* **keybindings:** add composer debug mode shortcut ([a70c78a](https://github.com/raas-dev/configent/commit/a70c78ae9d2df52291c254f8a3f7ae55162c3be7))
+* **keybindings:** reassign composer mode shortcuts ([dcd03b3](https://github.com/raas-dev/configent/commit/dcd03b35b4b2f922ce8f93cf7299ba053968a8d8))
+* **opencode:** increase scroll speed ([c6410f1](https://github.com/raas-dev/configent/commit/c6410f1a2d3c316e8ee62fce2f84f1ff686f3ead))
+* **vscode:** remove gemini-cli extension ([22c192f](https://github.com/raas-dev/configent/commit/22c192fa9d9a06dbb9580160e3da1729f0ab674c))
+
 ### [1.180.6](https://github.com/raas-dev/configent/compare/1.180.5...1.180.6) (2025-12-08)
 
 
