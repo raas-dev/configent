@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.8](https://github.com/raas-dev/configent/compare/1.180.7...1.180.8) (2025-12-12)
+
+
+### Fixes
+
+* **gitconfig:** comment out interactive diff filter ([e53355b](https://github.com/raas-dev/configent/commit/e53355b913ef320330335ceb76554ef65ec7545c))
+* **mcp:** move utcp config from cursor to shared ([bf54b79](https://github.com/raas-dev/configent/commit/bf54b7941aa5a362d70d48fcfa6adde27fe178fc))
+* **restore-terminals:** disable terminal startup ([6d68bcf](https://github.com/raas-dev/configent/commit/6d68bcfd70ac852263694648d6c54805eb4e7859))
+
 ### [1.180.7](https://github.com/raas-dev/configent/compare/1.180.6...1.180.7) (2025-12-11)
 
 
