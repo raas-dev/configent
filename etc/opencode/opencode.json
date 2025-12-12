@@ -21,6 +21,6 @@
   "share": "disabled",
   "theme": "ayu",
   "tui": {
-    "scroll_speed": 3
+    "scroll_speed": 4
   }
 }
