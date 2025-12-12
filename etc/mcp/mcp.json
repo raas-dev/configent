@@ -17,6 +17,14 @@
       "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources. Provides high-quality, factual search results optimized for AI agents.",
       "type": "http",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
+    },
+    "utcp": {
+      "description": "Use when you need to execute complex workflows by writing TypeScript code that calls multiple MCP and UTCP tools in a single execution. Ideal for batching operations, orchestrating multi-step workflows, processing large datasets efficiently, or when you need to combine tools from different ecosystems (MCP, HTTP, file-based).",
+      "command": "npx",
+      "args": ["-y", "@utcp/code-mode-mcp"],
+      "env": {
+        "UTCP_CONFIG_FILE": "${UTCP_CONFIG_FILE}"
+      }
     }
   }
 }
