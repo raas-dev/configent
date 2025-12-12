@@ -107,6 +107,7 @@
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
   excludesfile = ~/.gitignore
 
+# see: https://github.com/dandavison/delta/issues/2062
 #[interactive]
 #  diffFilter = delta --color-only --features=configent
 
