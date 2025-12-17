@@ -367,7 +367,6 @@
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.gpuAcceleration": "off",
-  "terminal.integrated.ignoreBracketedPasteMode": true,
   "terminal.integrated.ignoreProcessNames": [
     "starship",
     "oh-my-posh",
