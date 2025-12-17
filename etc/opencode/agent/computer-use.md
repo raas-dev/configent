@@ -1,7 +1,7 @@
 ---
 description: Computer use agent
 mode: primary
-model: github-copilot/gpt-4.1
+model: github-copilot/gpt-5-mini
 temperature: 0.0
 permissions:
   edit: allow
