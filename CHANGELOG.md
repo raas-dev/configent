@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.180.9](https://github.com/raas-dev/configent/compare/1.180.8...1.180.9) (2025-12-17)
+
+
+### Fixes
+
+* **settings:** remove ignoreBracketedPasteMode setting ([9139b5c](https://github.com/raas-dev/configent/commit/9139b5c59c45803e32e942e15dcc7b54b0b53570))
+
 ### [1.180.8](https://github.com/raas-dev/configent/compare/1.180.7...1.180.8) (2025-12-12)
 
 
