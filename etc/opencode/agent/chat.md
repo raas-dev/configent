@@ -1,7 +1,7 @@
 ---
 description: General purpose chat with tools
 mode: primary
-model: github-copilot/gpt-4.1
+model: github-copilot/gpt-5
 temperature: 0.0
 tools:
   edit: false
