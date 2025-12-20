@@ -9,15 +9,52 @@
   ],
   "mcp": {
     "gateway": {
-      "command": [
-        "uvx",
-        "agent-mcp-gateway"
-      ],
+      "command": ["uvx", "agent-mcp-gateway"],
       "enabled": true,
       "type": "local"
     }
   },
   "model": "github-copilot/claude-sonnet-4.5",
+  "plugin": ["oh-my-opencode", "opencode-antigravity-auth"],
+  "provider": {
+    "google": {
+      "models": {
+        "gemini-3-pro-high": {
+          "name": "Gemini 3 Pro High (Antigravity)",
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "gemini-3-pro-low": {
+          "name": "Gemini 3 Pro Low (Antigravity)",
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "gemini-3-flash": {
+          "name": "Gemini 3 Flash (Antigravity)",
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        }
+      }
+    }
+  },
   "share": "disabled",
   "theme": "ayu",
   "tui": {
