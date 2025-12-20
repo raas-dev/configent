@@ -25,6 +25,18 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 
+# oh-my-opencode.json
+if [ ! -r "$backup_path/.config/opencode/oh-my-opencode.json" ]; then
+  if [ -r "$HOME/.config/opencode/oh-my-opencode.json" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -P "$HOME/.config/opencode/oh-my-opencode.json" \
+      "$backup_path/.config/opencode/oh-my-opencode.json"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode"
+ln -sfnv "$config_path/opencode/oh-my-opencode.json" \
+  "$HOME/.config/opencode/oh-my-opencode.json"
+
 # AGENTS.md
 if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
   if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
@@ -59,15 +71,3 @@ fi
 mkdir -p "$HOME/.config/opencode/command"
 rm -rf "$HOME/.config/opencode/command"
 ln -sfnv "$config_path/opencode/command" "$HOME/.config/opencode/command"
-
-# oh-my-opencode.json
-if [ ! -r "$backup_path/.config/opencode/oh-my-opencode.json" ]; then
-  if [ -r "$HOME/.config/opencode/oh-my-opencode.json" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/oh-my-opencode.json" \
-      "$backup_path/.config/opencode/oh-my-opencode.json"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/oh-my-opencode.json" \
-  "$HOME/.config/opencode/oh-my-opencode.json"
