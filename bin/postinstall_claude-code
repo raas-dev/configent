@@ -33,14 +33,3 @@ if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
 fi
 mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/AGENTS.md" "$HOME/.claude/CLAUDE.md"
-
-# commands dir
-# if [ ! -r "$backup_path/.claude/commands" ]; then
-#   if [ -r "$HOME/.claude/commands" ]; then
-#     mkdir -p "$backup_path/.claude"
-#     cp -RP "$HOME/.claude/commands" "$backup_path/.claude/commands"
-#   fi
-# fi
-# mkdir -p "$HOME/.claude/commands"
-# rm -rf "$HOME/.claude/commands"
-# ln -sfnv "$config_path/commands" "$HOME/.claude/commands"
