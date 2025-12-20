@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.181.0](https://github.com/raas-dev/configent/compare/1.180.9...1.181.0) (2025-12-20)
+
+
+### Features
+
+* **mcp:** reorganize mcp config directories per IDE ([60f076e](https://github.com/raas-dev/configent/commit/60f076e487e9047a7207dc59cd04a1117ddcd534))
+* **opencode:** add oh-my-opencode ([b78478b](https://github.com/raas-dev/configent/commit/b78478b84d43c32a1ae1d5a40c0ca4b518b2a58a))
+
+
+### Fixes
+
+* **browseruse:** update model to gpt-5-mini ([598da3f](https://github.com/raas-dev/configent/commit/598da3fd87a8623dcfa2ac818ad63c353cdec55e))
+* **chat:** update model to gpt-5 ([06b1ce6](https://github.com/raas-dev/configent/commit/06b1ce6f8e2370bb27ec013df6ff75fd81f46266))
+* **models:** update to latest gpt-5 versions ([dae17c1](https://github.com/raas-dev/configent/commit/dae17c12e8b54e6c7e02378e3a85058fc367564d))
+* **opencode:** update computer-use model to gpt-5-mini ([0021964](https://github.com/raas-dev/configent/commit/0021964bdee10196f1805517f0808fb45232c2c5))
+* **postinstall_opencode:** correct opencode command symlink path ([2c46bfc](https://github.com/raas-dev/configent/commit/2c46bfcc963874446f66ca44c88ea91e2c9e221d))
+* **postinstall_opencode:** reorder oh-my-opencode setup ([e65a4fc](https://github.com/raas-dev/configent/commit/e65a4fc30e54e6cc00830bf2a59ceeecc6afa756))
+
 ### [1.180.9](https://github.com/raas-dev/configent/compare/1.180.8...1.180.9) (2025-12-17)
 
 
