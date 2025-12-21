@@ -404,9 +404,6 @@ alias mcporter='bunx mcporter'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
-# Web-based interface for the OpenCode Server API
-alias opencode-web='bunx opencode-web'
-
 # OpenSpec
 alias openspec='bunx @fission-ai/openspec'
 
