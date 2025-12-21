@@ -389,8 +389,8 @@ venv() {
 
 ### Node.js ####################################################################
 
-# https://www.buildwithclaude.com/
-alias bwc='bunx --package bwc-cli bwc'
+# Claude Code Templates (https://github.com/davila7/claude-code-templates)
+alias claude-code-templates='bunx claude-code-templates'
 
 # Flowise
 alias flowise='bunx flowise'
