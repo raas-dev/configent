@@ -3,13 +3,13 @@
   "google_auth": true,
   "agents": {
     "Sisyphus": {
-      "model": "opencode/big-pickle"
+      "model": "google/gemini-3-pro-high"
     },
     "librarian": {
-      "model": "opencode/big-pickle"
+      "model": "google/gemini-3-pro-high"
     },
     "oracle": {
-      "model": "opencode/big-pickle"
+      "model": "google/gemini-3-pro-high"
     },
     "frontend-ui-ux-engineer": {
       "model": "google/gemini-3-pro-high"
