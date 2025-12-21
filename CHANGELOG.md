@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.181.1](https://github.com/raas-dev/configent/compare/1.181.0...1.181.1) (2025-12-21)
+
+
+### Fixes
+
+* **aliases:** remove opencode-web alias ([db14e93](https://github.com/raas-dev/configent/commit/db14e93e8768c779abeb6f8629c57ff16c71c719))
+* **aliases:** update Claude Code Templates alias ([ae13ecb](https://github.com/raas-dev/configent/commit/ae13ecb8e687c1bd34436b03f3e50419391e5ac0))
+* **mise:** replace ubi with github package source ([e4eb881](https://github.com/raas-dev/configent/commit/e4eb8819853251f717408ee52b3f9fd9cf09cd7e))
+* **oh-my-opencode:** update agent models to gemini-3-pro-high ([23d096a](https://github.com/raas-dev/configent/commit/23d096a63a889f51b29942c14d5c25a89dba2bfd))
+
 ## [1.181.0](https://github.com/raas-dev/configent/compare/1.180.9...1.181.0) (2025-12-20)
 
 
