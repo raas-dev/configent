@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.181.2](https://github.com/raas-dev/configent/compare/1.181.1...1.181.2) (2025-12-22)
+
+
+### Fixes
+
+* **oh-my-opencode:** disable google auth by default ([808a2b1](https://github.com/raas-dev/configent/commit/808a2b16578dff547dbebe15cd21fe92bce9757f))
+* **oh-my-opencode:** update agent models to gemini-3-flash ([3898007](https://github.com/raas-dev/configent/commit/38980078b593d68d249b9d2bc5fe38ebaa639d0e))
+* **opencode:** reduce scroll speed from 4 to 2 ([6b94b11](https://github.com/raas-dev/configent/commit/6b94b11fc9fb8410fe5f5353d0e8e186b8841e74))
+
 ### [1.181.1](https://github.com/raas-dev/configent/compare/1.181.0...1.181.1) (2025-12-21)
 
 
