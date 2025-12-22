@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  "google_auth": true,
+  "google_auth": false,
   "agents": {
     "Sisyphus": {
       "model": "google/gemini-3-pro-high"
