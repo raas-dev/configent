@@ -287,9 +287,6 @@ alias sudo='sudo '
 # Display week number
 alias week='date +%V'
 
-# Weather (https://github.com/chubin/wttr.in)
-alias wttr='curl "v2.wttr.in/$(ipv4 | jq -r .city)?MF&lang=en"'
-
 ### Python #####################################################################
 
 # https://github.com/subash774/Caffeinate
@@ -636,6 +633,12 @@ ports() {
   local filter=
   [ -n "$1" ] && filter=":$1"
   sudo lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
+}
+
+# Weather (https://github.com/chubin/wttr.in)
+wttr() {
+    local city="${1:-$(ipv4 | jq -r .city)}"
+    curl "v2.wttr.in/${city}?MF&lang=en"
 }
 
 ### Functions: Cleaners ########################################################
