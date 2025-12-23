@@ -4,6 +4,13 @@
 set nocompatible
 filetype off
 
+" Suppress error messages in batch/non-interactive mode (e.g., when running +PluginInstall)
+if !has('gui_running') && !has('nvim')
+  " Redirect error messages to /dev/null in batch mode
+  set verbose=0
+  set report=9999
+endif
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -210,14 +217,23 @@ function! IsNTFocused()
 endfunction
 
 function! SyncTree()
+  " Skip in non-interactive mode or when no file buffer exists
+  if expand('%') ==# '' || !buflisted(bufnr('%'))
+    return
+  endif
   if &modifiable && IsNTOpen() && !IsNTFocused() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    silent execute 'normal R'
-    wincmd p
+    try
+      NERDTreeFind
+      silent execute 'normal R'
+      wincmd p
+    catch
+      " Silently ignore errors
+    endtry
   endif
 endfunction
 
-autocmd BufEnter * call SyncTree()
+" Only run autocommands when there's a valid file buffer
+autocmd BufEnter * if expand('<afile>') !=# '' | call SyncTree() | endif
 
 " vim-nerdtree-tabs
 let g:nerdtree_tabs_autofind=1
