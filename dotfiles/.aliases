@@ -262,6 +262,7 @@ alias cdtemp='cd $(mktemp -d)'
 
 # Typos
 alias dc='cd'
+alias gt='git'
 alias gti='git'
 
 # Copy the current path to clipboard
