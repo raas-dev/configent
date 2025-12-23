@@ -18,6 +18,7 @@ repos:
     - id: check-case-conflict
     - id: mixed-line-ending
     - id: end-of-file-fixer
+      files: ^(?!etc/nvim/lazyvim\.json$).*
     - id: trailing-whitespace
     - id: check-json
     - id: check-toml
