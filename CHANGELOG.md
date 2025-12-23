@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.181.3](https://github.com/raas-dev/configent/compare/1.181.2...1.181.3) (2025-12-23)
+
+
+### Fixes
+
+* **aliases:** add uv to topgrade skip list ([db11e41](https://github.com/raas-dev/configent/commit/db11e41670bc3ffaa0367db7a9d85f1ed8567e32))
+* **aliases:** remove python version pin from langflow ([7cb9b36](https://github.com/raas-dev/configent/commit/7cb9b366b9ff29d16ac4f5f8f5856989887194d9))
+* **aliases:** remove uv from topgrade skip list ([68da180](https://github.com/raas-dev/configent/commit/68da18011ee5ea820eb720b9634f4a87a7be1f94))
+* **aliases:** remove vim from topgrade skip list ([d71d6fb](https://github.com/raas-dev/configent/commit/d71d6fb91048d1e5e2ad5f06c92cd3697d8e173c))
+* **pre-commit:** exclude lazyvim.json from end-of-file-fixer ([b0a3a81](https://github.com/raas-dev/configent/commit/b0a3a81583ac6c32d372a4b9e232b246543224ef))
+
 ### [1.181.2](https://github.com/raas-dev/configent/compare/1.181.1...1.181.2) (2025-12-22)
 
 
