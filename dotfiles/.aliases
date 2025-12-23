@@ -327,7 +327,7 @@ alias semgrep='uvx semgrep'
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
 # Langflow
-alias langflow='uvx --python 3.11 langflow'
+alias langflow='uvx langflow'
 
 # Reactive notebook
 alias marimo='uvx marimo'
