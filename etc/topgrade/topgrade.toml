@@ -142,3 +142,7 @@ autoremove = true
 [distrobox]
 #use_root = false
 #containers = ["archlinux-latest"]
+
+[uv]
+# Arguments to pass to uv commands (e.g., --force to override cache locks)
+arguments = "--force"
