@@ -91,7 +91,12 @@ if [ -t 0 ]; then
     git_branch="$(cd "$full_path" && git rev-parse --abbrev-ref HEAD)"
     printf "In git working copy %s, pulling %s\n" \
       "$full_path" "$git_branch"
-    git -C "$full_path" pull --no-autostash --rebase origin "$git_branch"
+    # Fix broken ORIG_HEAD reference if it exists
+    if [ -f "$full_path/.git/ORIG_HEAD" ] && ! git -C "$full_path" rev-parse --verify ORIG_HEAD >/dev/null 2>&1; then
+      printf "Fixing broken ORIG_HEAD reference...\n"
+      rm -f "$full_path/.git/ORIG_HEAD"
+    fi
+    git -C "$full_path" pull --no-autostash --rebase origin "$git_branch" || true
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
@@ -105,7 +110,12 @@ else
     git_branch="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
     printf "Git working copy found at %s, pulling %s\n" \
       "$TARGET_PATH" "$git_branch"
-    git -C "$TARGET_PATH" pull --no-autostash --rebase origin "$git_branch"
+    # Fix broken ORIG_HEAD reference if it exists
+    if [ -f "$TARGET_PATH/.git/ORIG_HEAD" ] && ! git -C "$TARGET_PATH" rev-parse --verify ORIG_HEAD >/dev/null 2>&1; then
+      printf "Fixing broken ORIG_HEAD reference...\n"
+      rm -f "$TARGET_PATH/.git/ORIG_HEAD"
+    fi
+    git -C "$TARGET_PATH" pull --no-autostash --rebase origin "$git_branch" || true
   fi
   cd "$TARGET_PATH" &&
     . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
