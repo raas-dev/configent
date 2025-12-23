@@ -9,7 +9,7 @@ alias code="\$DEFAULT_IDE --reuse-window"
 ### Upgrade for all package managers ###########################################
 
 # shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
-skipped_managers="containers helm mas powershell"
+skipped_managers="containers helm mas powershell uv"
 alias up="topgrade --yes --no-retry --disable system restarts $skipped_managers"
 alias dup="topgrade --yes --no-retry --disable $skipped_managers"
 
