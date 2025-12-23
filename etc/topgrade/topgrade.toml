@@ -6,7 +6,7 @@
 
 [misc]
 # Don't ask for confirmations
-#assume_yes = true
+assume_yes = true
 
 # Disable specific steps - same options as the command line flag
 #disable = ["system", "emacs"]
@@ -18,7 +18,7 @@
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-#no_retry = true
+no_retry = true
 
 # Sudo command to be used
 #sudo_command = "sudo"
@@ -66,7 +66,7 @@ skip_notify = true
 #]
 
 # Don't pull the predefined git repos
-#pull_predefined = false
+pull_predefined = false
 
 # Arguments to pass Git when pulling Repositories
 #arguments = "--rebase --autostash"
