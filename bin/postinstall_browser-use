@@ -25,4 +25,9 @@ fi
 
 # symlink
 mkdir -p "$HOME/.config/browseruse"
-ln -sfnv "$config_path/browseruse/config.json" "$HOME/.config/browseruse/config.json"
+ln -sfnv "$config_path/browseruse/config.json" \
+  "$HOME/.config/browseruse/config.json"
+
+### Chromium browser ###########################################################
+
+browser-use install
