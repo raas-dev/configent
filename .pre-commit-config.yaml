@@ -32,6 +32,7 @@ repos:
   rev: 3.0.0
   hooks:
     - id: shellcheck
+      files: ^(?!etc/claude-code/skills/).*$
     - id: shfmt
 
 - repo: https://github.com/codespell-project/codespell
