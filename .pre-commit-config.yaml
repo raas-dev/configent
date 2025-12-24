@@ -21,6 +21,7 @@ repos:
       files: ^(?!etc/nvim/lazyvim\.json$).*
     - id: trailing-whitespace
     - id: check-json
+      files: ^(?!etc/claude-code/skills/).*$
     - id: check-toml
     - id: check-yaml
     - id: check-symlinks
