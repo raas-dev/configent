@@ -26,7 +26,7 @@
       "default": true,
       "id": "cd02ac3a-e014-4e00-9443-b7a0ba9f735e",
       "max_tokens": null,
-      "model": "gpt-5.1",
+      "model": "gpt-5-mini",
       "temperature": 0
     }
   }
