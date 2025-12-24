@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.182.0](https://github.com/raas-dev/configent/compare/1.181.4...1.182.0) (2025-12-24)
+
+
+### Features
+
+* **claude-code:** Add subagents ([6d8bef3](https://github.com/raas-dev/configent/commit/6d8bef3974c3af59498e6b931c91f4a956d42e11))
+* **dev-browser:** Add browser automation skill for page state persistence ([cf16998](https://github.com/raas-dev/configent/commit/cf1699803d870ce82ec4058e08f159e705583b9a))
+
+
+### Fixes
+
+* **browseruse:** change downloads path to relative directory ([720ee57](https://github.com/raas-dev/configent/commit/720ee57172f02e0140fcbb1412d6f49b1d8c34e1))
+* **browseruse:** update model to gpt-5-mini ([07dea64](https://github.com/raas-dev/configent/commit/07dea64f4070a0cb5cf5406f311e9dd04bccf4aa))
+* **lazyvim:** update rustaceanvim package ([931a30c](https://github.com/raas-dev/configent/commit/931a30cee0fd3ff296016a2fc8b9a679379af8d5))
+* **postinstall_browser-use:** add chromium browser installation ([85950de](https://github.com/raas-dev/configent/commit/85950dee5f7e3f13f4c1425b72b813f5809680b5))
+* **postinstall_claude-code:** enable symlink setup for commands, agents, and skills ([74ca149](https://github.com/raas-dev/configent/commit/74ca149607a5827b6c5be1654c8f80876dbd98c6))
+* **pre-commit:** exclude claude-code skills from check-json ([e23dd00](https://github.com/raas-dev/configent/commit/e23dd00a41cb7e9a1cc632a1ff22010361cc0c20))
+* **pre-commit:** exclude claude-code skills from shellcheck ([9e13a7f](https://github.com/raas-dev/configent/commit/9e13a7fba376d54edd05bc9d0a26b5c336bdf774))
+
 ### [1.181.4](https://github.com/raas-dev/configent/compare/1.181.3...1.181.4) (2025-12-24)
 
 
