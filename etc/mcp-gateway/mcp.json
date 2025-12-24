@@ -14,12 +14,12 @@
       "url": "https://mcp.grep.app"
     },
     "exa": {
-      "description": "Use for web search, code search, web crawling, and research. Ideal for finding up-to-date code snippets and documentation from open source libraries and GitHub repositories, performing real-time web searches with optimized results, extracting content from specific URLs, conducting company research, searching LinkedIn, and running deep research tasks.",
+      "description": "Use for specialized domain searches with neural/semantic search capabilities. Ideal for: academic paper searches, LinkedIn professional networking searches, GitHub code repository searches, company research and business intelligence, Wikipedia lookups, and finding specific content types (code snippets, documentation, professional profiles). Choose Exa when you need to search within specialized domains or platforms rather than general web content.",
       "type": "http",
       "url": "https://mcp.exa.ai/mcp"
     },
     "tavily": {
-      "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources.",
+      "description": "Use for general web search with advanced data extraction and website mapping capabilities. Ideal for: extracting clean structured content from web pages, mapping and crawling website structures (hierarchical site exploration), competitive intelligence and website monitoring, news analysis with article extraction, automated data pipelines from multiple sources, and comprehensive content analysis. Choose Tavily when you need to extract and analyze content from websites rather than search within specialized platforms.",
       "type": "http",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
     },
