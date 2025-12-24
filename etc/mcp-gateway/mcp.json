@@ -13,8 +13,13 @@
       "type": "http",
       "url": "https://mcp.grep.app"
     },
+    "exa": {
+      "description": "Use for web search, code search, web crawling, and research. Ideal for finding up-to-date code snippets and documentation from open source libraries and GitHub repositories, performing real-time web searches with optimized results, extracting content from specific URLs, conducting company research, searching LinkedIn, and running deep research tasks.",
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp"
+    },
     "tavily": {
-      "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources. Provides high-quality, factual search results optimized for AI agents.",
+      "description": "Use for real-time web search, fact-checking, current events, research, and extracting structured data from web pages. Ideal when you need fresh information not in training data, want to crawl or map website structures, or need intelligent data extraction from multiple web sources.",
       "type": "http",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
     },
