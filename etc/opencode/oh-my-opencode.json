@@ -23,5 +23,6 @@
     "multimodal-looker": {
       "model": "google/gemini-3-flash"
     }
-  }
+  },
+  "disabled_mcps": ["context7", "websearch_exa", "grep_app"]
 }
