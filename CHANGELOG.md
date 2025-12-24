@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.181.4](https://github.com/raas-dev/configent/compare/1.181.3...1.181.4) (2025-12-24)
+
+
+### Fixes
+
+* **aliases:** add git typo alias ([4acd496](https://github.com/raas-dev/configent/commit/4acd49638db301a0347c3458c52c7e947fa939d7))
+* **aliases:** convert wttr alias to function ([b1cc017](https://github.com/raas-dev/configent/commit/b1cc0178d5027707ddb9190aedc3c6bebdf527a8))
+* **aliases:** remove redundant topgrade flags ([5eb39b8](https://github.com/raas-dev/configent/commit/5eb39b87b6f7e9f2853d362745cb0842c4ae6147))
+* **install.sh:** handle broken ORIG_HEAD on git pull ([0920f76](https://github.com/raas-dev/configent/commit/0920f764164faa0466da71f57f5a1d05fe6e022f))
+* **mcp-gateway:** clarify exa and tavily use cases ([4fb81dd](https://github.com/raas-dev/configent/commit/4fb81ddf3e2af3638e849c9dae0e17a525a5b92a))
+* **mcp-gateway:** rename server identifiers for clarity ([67add50](https://github.com/raas-dev/configent/commit/67add506fb39d87b71d11015ed86f285775a5934))
+
 ### [1.181.3](https://github.com/raas-dev/configent/compare/1.181.2...1.181.3) (2025-12-23)
 
 
