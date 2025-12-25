@@ -29,6 +29,4 @@ ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
   "$HOME/.config/bat/themes/SynthWave84.tmTheme"
 
 # install theme
-if command -v bat >/dev/null; then
-  bat cache --build
-fi
+command -v bat >/dev/null && bat cache --build
