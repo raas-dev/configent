@@ -55,14 +55,14 @@ export VISUAL="$EDITOR"
 export GIT_EDITOR="vim -n"
 export SVN_EDITOR="vim"
 
-# color manpages
-export MANROFFOPT='-c'
-
 # https://github.com/wofr06/lesspipe
 export LESS='-R' # output raw control chars for colors
 export LESSUTFBINFMT='*n%C' # display Unicode characters instead of code points
 export LESSOPEN='|~/.local/configent/bin/lesspipe.sh %s'
 export LESSQUIET=1 # suppress additional less output
+
+# get plain text from man
+export MANROFFOPT='-c'
 
 ### Shell behaviour ############################################################
 
@@ -164,7 +164,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 
 ### bat ########################################################################
 
-# color manpages (set after mise activation so bat is in PATH)
+# color manpages
 command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
 
 export BAT_STYLE="auto"
