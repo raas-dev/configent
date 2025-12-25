@@ -21,10 +21,10 @@ if has_cmd lsd && [ -d "$1" ]; then
   lsd -A --oneline --group-dirs first --icon never --color always "$1"
 elif has_cmd mcat && [ "$extension" = md ]; then
   # avoid interpreting stdin as a separate file
-  cat "$1" | mcat --color=always --paging=never
+  cat "$1" | mcat --color always --paging never --md-image none
 elif has_cmd bat && [ "$category" = text ]; then
   # colorize all text files (like Dockerfile), which lesspipe.sh does not match
-  bat --color=always --paging=never "$1"
+  bat --color always --paging never "$1"
 else
   # no user rules matched, pass control back to lesspipe.sh
   exit 1
