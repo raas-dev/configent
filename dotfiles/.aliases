@@ -339,7 +339,7 @@ alias specify='uvx --from specify-cli specify'
 alias copier='uvx --with copier-templates-extensions copier'
 
 # SQL IDE for terminal
-alias harlequin='uvx --from "harlequin[mysql,postgres,odbc]" harlequin --theme dracula'
+alias harlequin='uvx --from "harlequin[mysql,postgres,odbc]" harlequin'
 
 # https://hatch.pypa.io/latest
 alias hatch='uvx hatch'
