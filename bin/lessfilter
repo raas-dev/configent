@@ -20,6 +20,7 @@ if has_cmd lsd && [ -d "$1" ]; then
   # output compact listing for fzf-preview
   lsd -A --oneline --group-dirs first --icon never --color always "$1"
 elif has_cmd mcat && [ "$extension" = md ]; then
+  # avoid interpreting stdin as a separate file
   cat "$1" | mcat --color=always --paging=never
 elif has_cmd bat && [ "$category" = text ]; then
   # colorize all text files (like Dockerfile), which lesspipe.sh does not match
