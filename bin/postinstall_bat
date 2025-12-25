@@ -14,19 +14,17 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# backup theme
-if [ ! -r "$backup_path/.config/bat/themes/SynthWave84.tmTheme" ]; then
-  if [ -r "$HOME/.config/bat/themes/SynthWave84.tmTheme" ]; then
-    mkdir -p "$backup_path/.config/bat/themes"
-    cp -P "$HOME/.config/bat/themes/SynthWave84.tmTheme" \
-      "$backup_path/.config/bat/themes/SynthWave84.tmTheme"
+# themes dir
+if [ ! -r "$backup_path/.config/bat/themes" ]; then
+  if [ -r "$HOME/.config/bat/themes" ]; then
+    mkdir -p "$backup_path/.config/bat"
+    cp -RP "$HOME/.config/bat/themes" "$backup_path/.config/bat/themes"
   fi
 fi
-
-# symlink themes dir
 mkdir -p "$HOME/.config/bat/themes"
 rm -rf "$HOME/.config/bat/themes"
 ln -sfnv "$config_path/themes" "$HOME/.config/bat/themes"
 
-# install theme
+### binary cache ###############################################################
+
 command -v bat >/dev/null && bat cache --build
