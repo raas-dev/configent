@@ -171,7 +171,7 @@ export BAT_THEME="AyuDark"
 ### mcat #######################################################################
 
 export MCAT_ENCODER="sixel"
-export MCAT_INLINE_OPTS='center=false,scale=0.2'
+export MCAT_INLINE_OPTS='center=false'
 export MCAT_THEME="ayu"
 
 ### git ########################################################################
