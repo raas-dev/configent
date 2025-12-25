@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.1](https://github.com/raas-dev/configent/compare/1.182.0...1.182.1) (2025-12-25)
+
+
+### Fixes
+
+* **lessfilter:** add markdown rendering with mdcat ([e511fcd](https://github.com/raas-dev/configent/commit/e511fcd02a89c392b2db109d9c21ca6099ca1099))
+* **lessfilter:** change glow markdown style to tokyo-night ([e59d87b](https://github.com/raas-dev/configent/commit/e59d87b2eb56a7490747a95789070e8db81f499c))
+* **lessfilter:** remove glow markdown rendering ([fe86c7c](https://github.com/raas-dev/configent/commit/fe86c7c3fdd01e53d6245dd85556c9eb560aadb8))
+* **lesspipe.sh:** update to v2.22 with improved file handling ([1a11863](https://github.com/raas-dev/configent/commit/1a11863e60505711cbdbbd2ea25f79186cfa2e33))
+* **nvim:** Replace fluoromachine with neovim-ayu colorscheme ([712bbc8](https://github.com/raas-dev/configent/commit/712bbc876e037d0a76beb1ebb95495bca0397251))
+* **vimrc:** Replace hemisu with ayu colorscheme ([d2d1e01](https://github.com/raas-dev/configent/commit/d2d1e01f7cc5d3431fec4377a319cac522cd8c86))
+
 ## [1.182.0](https://github.com/raas-dev/configent/compare/1.181.4...1.182.0) (2025-12-24)
 
 
