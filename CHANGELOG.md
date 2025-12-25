@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.4](https://github.com/raas-dev/configent/compare/1.182.3...1.182.4) (2025-12-25)
+
+
+### Fixes
+
+* **profile:** change MCAT_INLINE_OPTS quote style ([6a7ffb3](https://github.com/raas-dev/configent/commit/6a7ffb3deb266fbbb40dbf6678e31f2ae0437ca1))
+* **profile:** move bat manpager export after mise ([a63d360](https://github.com/raas-dev/configent/commit/a63d360eec0bba2689711063b09635f33bb17645))
+* **profile:** reorder manpager exports ([54a7a35](https://github.com/raas-dev/configent/commit/54a7a35e475b1b30e51c724b216f4d8346e9a208))
+
 ### [1.182.3](https://github.com/raas-dev/configent/compare/1.182.2...1.182.3) (2025-12-25)
 
 
