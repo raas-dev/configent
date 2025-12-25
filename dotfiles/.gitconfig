@@ -108,8 +108,8 @@
   excludesfile = ~/.gitignore
 
 # see: https://github.com/dandavison/delta/issues/2062
-[interactive]
-  diffFilter = delta --color-only --features=configent
+#[interactive]
+#  diffFilter = delta --color-only --features=configent
 
 [rerere]
   enabled = true
@@ -127,7 +127,7 @@
   line-numbers = true
   side-by-side = false
   keep-plus-minus-markers = false
-  syntax-theme = base16-256
+  syntax-theme = SynthWave84
   file-style = "#434C5E" bold
   file-decoration-style = "#434C5E" ul
   file-added-label = [+]
