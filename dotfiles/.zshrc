@@ -58,6 +58,7 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':completion:*:descriptions' format '[%d]'
   zstyle ':completion:*:git-checkout:*' sort false
   zstyle ':fzf-tab:*' switch-group ',' '.'
+  zstyle ':fzf-tab:*' fzf-flags --preview-window=right:70%
   zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
   zstyle ':fzf-tab:complete:*:options' fzf-preview
   zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
