@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.2](https://github.com/raas-dev/configent/compare/1.182.1...1.182.2) (2025-12-25)
+
+
+### Fixes
+
+* **aliases:** remove harlequin theme override ([e56bc88](https://github.com/raas-dev/configent/commit/e56bc88712d570058d39a11f510a88e835c8e86b))
+* **dotfiles:** enable delta interactive mode and update themes ([a5fb075](https://github.com/raas-dev/configent/commit/a5fb07593870af8458acb1231dc5b3a798bdb9d7))
+* **dotfiles:** update delta and bat themes to SynthWave84 ([25a592e](https://github.com/raas-dev/configent/commit/25a592e0c9e2b41e1e688f4021b34d6075e6efb0))
+* **gitconfig:** enable delta interactive mode and update theme ([f352fe3](https://github.com/raas-dev/configent/commit/f352fe3867a00382c21656210246d14d5547921b))
+* **postinstall_bat:** backup themes directory instead of single file ([69c48a3](https://github.com/raas-dev/configent/commit/69c48a38338fac48ee0e91f83afb55c1f6e95e06))
+* **postinstall_bat:** simplify theme cache build command ([8c2b819](https://github.com/raas-dev/configent/commit/8c2b8192a6a359f8893a12e284cf61c3e8568c8a))
+* **postinstall_bat:** symlink themes directory instead of single file ([4371865](https://github.com/raas-dev/configent/commit/4371865f2363e2a8e121bbaaad5e68740000ed47))
+
 ### [1.182.1](https://github.com/raas-dev/configent/compare/1.182.0...1.182.1) (2025-12-25)
 
 
