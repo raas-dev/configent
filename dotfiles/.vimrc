@@ -37,7 +37,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Theme
-Plugin 'noahfrederick/vim-hemisu'
+Plugin 'ayu-theme/ayu-vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -152,15 +152,15 @@ set autoread
 "-- UI -------------------------------------------------------------------------
 
 set background=dark
-colorscheme hemisu
+set termguicolors
+let ayucolor="dark"
+colorscheme ayu
 
 " make the statusbar more informative
 if has("statusline")
   set laststatus=2
   set statusline=\ \ %F%m%r%h%w\ %=[%Y]\ (%{&ff},\ %{&enc})\ \{%v,\ %l/%L\}\ \ %p%%\
 endif
-
-highlight ColorColumn ctermbg=234
 
 "-- Custom mappings ------------------------------------------------------------
 
@@ -256,13 +256,10 @@ nmap <silent> <C-t> :TagbarToggle<CR>
 
 "-- vim-indent-guides ----------------------------------------------------------
 
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=232
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey  ctermbg=232
 
 "-- vim-json -------------------------------------------------------------------
 
