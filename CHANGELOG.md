@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.3](https://github.com/raas-dev/configent/compare/1.182.2...1.182.3) (2025-12-25)
+
+
+### Fixes
+
+* **aliases:** remove bat theme override ([073321e](https://github.com/raas-dev/configent/commit/073321e281c9c8cc9628135c1ebe7f3dd39e863f))
+* **aliases:** remove header-filename style from bat ([d04eb85](https://github.com/raas-dev/configent/commit/d04eb85f3e2947baf194e92d07b98a3bed3aa3dd))
+* **gitconfig:** update delta syntax theme to AyuDark ([87ad58f](https://github.com/raas-dev/configent/commit/87ad58f85d3aa6c3b83b70f88beb6933fa50432f))
+* **lessfilter:** add image and video preview support ([18e6921](https://github.com/raas-dev/configent/commit/18e6921bce5a2759dd9dd354b6fd8f1a8aa0bba8))
+* **lessfilter:** add pdf preview support ([95ccc71](https://github.com/raas-dev/configent/commit/95ccc71e7b7e9abcbf5a07e022a63221d3f661e2))
+* **lessfilter:** clarify stdin handling in mcat ([fb92695](https://github.com/raas-dev/configent/commit/fb926958aa236da500748adb7be0aa73a7673594))
+* **lessfilter:** replace mdcat with mcat for markdown preview ([5de6574](https://github.com/raas-dev/configent/commit/5de657417341353135ccfd282c73ac4404d6437f))
+* **lessfilter:** update mcat and bat flag syntax ([652bb9d](https://github.com/raas-dev/configent/commit/652bb9d9714c1fc01717b6156355848148836171))
+* **profile:** enable sixel image encoding in mcat ([aa8d765](https://github.com/raas-dev/configent/commit/aa8d76573a990c43200a689100ae90f9036373f6))
+* **profile:** remove scale option from mcat ([6862e50](https://github.com/raas-dev/configent/commit/6862e50a478fbc339681c20bed0e98e7b6683099))
+* **profile:** reorder and add mcat configuration options ([5829ddb](https://github.com/raas-dev/configent/commit/5829ddbd0447ee1b4dcea57a17325d77a33158cb))
+* **vimrc:** replace vim-indent-guides with indentLine ([b656ce3](https://github.com/raas-dev/configent/commit/b656ce3e0a244945fd3ace71dcfa18bf4faa6e49))
+* **zshrc:** configure fzf-tab preview window size ([a2006eb](https://github.com/raas-dev/configent/commit/a2006eb7308d54b106e28661bd2a2d29265c9f6e))
+
 ### [1.182.2](https://github.com/raas-dev/configent/compare/1.182.1...1.182.2) (2025-12-25)
 
 
