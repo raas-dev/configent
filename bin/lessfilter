@@ -25,6 +25,10 @@ elif has_cmd mcat && [ "$extension" = md ]; then
 elif has_cmd bat && [ "$category" = text ]; then
   # colorize all text files (like Dockerfile), which lesspipe.sh does not match
   bat --color always --paging never "$1"
+elif has_cmd mcat && [ "$category" = image ]; then
+  mcat --report "$1"
+elif has_cmd mcat && [ "$category" = video ]; then
+  mcat "$1"
 else
   # no user rules matched, pass control back to lesspipe.sh
   exit 1
