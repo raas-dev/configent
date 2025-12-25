@@ -56,7 +56,6 @@ export GIT_EDITOR="vim -n"
 export SVN_EDITOR="vim"
 
 # color manpages
-command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
 export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
@@ -164,6 +163,9 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 
 ### bat ########################################################################
+
+# color manpages (set after mise activation so bat is in PATH)
+command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
 
 export BAT_STYLE="auto"
 export BAT_THEME="AyuDark"
