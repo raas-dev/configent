@@ -23,10 +23,10 @@ if [ ! -r "$backup_path/.config/bat/themes/SynthWave84.tmTheme" ]; then
   fi
 fi
 
-# symlink theme
+# symlink themes dir
 mkdir -p "$HOME/.config/bat/themes"
-ln -sfnv "$config_path/themes/SynthWave84.tmTheme" \
-  "$HOME/.config/bat/themes/SynthWave84.tmTheme"
+rm -rf "$HOME/.config/bat/themes"
+ln -sfnv "$config_path/themes" "$HOME/.config/bat/themes"
 
 # install theme
 command -v bat >/dev/null && bat cache --build
