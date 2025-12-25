@@ -165,7 +165,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 ### bat ########################################################################
 
 export BAT_STYLE="auto"
-export BAT_THEME="SynthWave84"
+export BAT_THEME="base16-256"
 
 ### git ########################################################################
 
