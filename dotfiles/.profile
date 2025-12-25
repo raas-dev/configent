@@ -61,6 +61,7 @@ export MANROFFOPT='-c'
 
 # https://github.com/wofr06/lesspipe
 export LESS='-R' # output raw control chars for colors
+export LESSUTFBINFMT='*n%C' # display Unicode characters instead of code points
 export LESSOPEN='|~/.local/configent/bin/lesspipe.sh %s'
 export LESSQUIET=1 # suppress additional less output
 
@@ -166,6 +167,10 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 
 export BAT_STYLE="auto"
 export BAT_THEME="AyuDark"
+
+### mcat #######################################################################
+
+export MCAT_THEME="ayu"
 
 ### git ########################################################################
 

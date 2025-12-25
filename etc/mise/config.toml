@@ -26,6 +26,7 @@ yq = 'latest'
 zoxide = 'latest'
 'github:sharkdp/bat' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 'github:orf/gping' = 'latest'
+'github:Skardyy/mcat' = 'latest'
 'github:railwayapp/nixpacks' = 'latest'
 'github:sigoden/opscan' = 'latest'
 'github:ouch-org/ouch' = 'latest'
@@ -80,7 +81,6 @@ cargo-binstall = 'latest'
 'cargo:cargo-update' = 'latest' # for topgrade
 'cargo:diskonaut' = 'latest' # no macos-arm64 release
 'cargo:kondo' = 'latest' # no linux-aarch64 release
-'cargo:mdcat' = 'latest' # no linux-aarch64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
 
 # go
