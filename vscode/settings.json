@@ -366,7 +366,6 @@
   "terminal.integrated.environmentChangesIndicator": "off",
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
-  "terminal.integrated.gpuAcceleration": "off",
   "terminal.integrated.ignoreProcessNames": [
     "starship",
     "oh-my-posh",
