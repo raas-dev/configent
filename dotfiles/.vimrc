@@ -23,10 +23,10 @@ Plugin 'editorconfig/editorconfig-vim'
 
 " Editor
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
+Plugin 'Yggdroot/indentLine'
 
 " Navigation
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -254,12 +254,12 @@ let g:syntastic_check_on_wq = 0
 
 nmap <silent> <C-t> :TagbarToggle<CR>
 
-"-- vim-indent-guides ----------------------------------------------------------
+"-- indentLine -----------------------------------------------------------------
 
-let g:indent_guides_auto_colors = 1
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+let g:indentLine_char_list = ['┆', '┊']
+let g:indentLine_enabled = 1
+let g:indentLine_setColors = 0
+let g:indentLine_showFirstIndentLevel = 0
 
 "-- vim-json -------------------------------------------------------------------
 
