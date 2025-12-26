@@ -58,32 +58,28 @@ PROMPT_COMMAND="history -a; history -c; history -r"
 
 ### Prompt #####################################################################
 
-txtgrn='\[\e[0;32m\]'
-txtblu='\[\e[0;34m\]'
-txtcyn='\[\e[0;36m\]'
-txtrst='\[\e[0m\]'
+# Only set PS1 if starship is not available (starship will override it anyway)
+if ! command -v starship >/dev/null; then
+  txtgrn='\[\e[0;32m\]'
+  txtblu='\[\e[0;34m\]'
+  txtcyn='\[\e[0;36m\]'
+  txtrst='\[\e[0m\]'
 
-parse_git_branch() {
-  git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"
-}
+  parse_git_branch() {
+    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"
+  }
 
-get_branch_info() {
-  # shellcheck disable=SC2155   # will not declare separately, value compactness
-  local branch=$(parse_git_branch)
-  local scm=''
-  if [ -n "$branch" ]; then
-    scm='git'
+  get_branch_info() {
+    # shellcheck disable=SC2155   # will not declare separately, value compactness
+    local branch=$(parse_git_branch)
+    [ -n "$branch" ] && echo "(git:$branch)"
+  }
+
+  if command -v git >/dev/null; then
+    PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtgrn\$(get_branch_info)$txtrst\$ "
   else
-    branch=$(parse_git_branch)
-    [ -n "$branch" ] && scm='hg'
+    PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtrst\$ "
   fi
-  [ -n "$scm" ] && echo "($scm:$branch)"
-}
-
-if command -v git >/dev/null; then
-  PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtgrn\$(get_branch_info)$txtrst\$ "
-else
-  PS1="$txtblu\u@\h$txtrst:$txtcyn\w$txtrst\$ "
 fi
 
 ### Additional bash completions ################################################

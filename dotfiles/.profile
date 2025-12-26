@@ -74,7 +74,7 @@ unset ignoreeof
 
 ### Disable stop (^S) and continue (^Q) flow control signals ###################
 
-stty -ixon 2>/dev/null
+[ -t 0 ] && stty -ixon 2>/dev/null
 
 ### Brew #######################################################################
 
