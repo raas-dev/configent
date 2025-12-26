@@ -157,8 +157,7 @@ fi
 ### carapace ###################################################################
 
 if command -v carapace >/dev/null; then
-  # shellcheck disable=SC1090   # do not follow non-constant source
-  . <(carapace _carapace)
+  eval "$(carapace _carapace "${SHELL##*/}")"
 fi
 
 ### fzf ########################################################################
