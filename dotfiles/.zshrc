@@ -58,8 +58,10 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':completion:*:descriptions' format '[%d]'
   zstyle ':completion:*:git-checkout:*' sort false
   zstyle ':fzf-tab:*' switch-group ',' '.'
-  zstyle ':fzf-tab:*' fzf-flags --preview-window=right:70%
-  zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+  zstyle ':fzf-tab:*' show-group quiet
+  zstyle ':fzf-tab:*' prefix ''
+  zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ $desc == *" -- "* ]] && echo ${desc#*-- } || less ${(Q)realpath}'
+  zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:70%' '--with-nth=1' '--delimiter=\s+'
   zstyle ':fzf-tab:complete:*:options' fzf-preview
   zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
   zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr $word'
