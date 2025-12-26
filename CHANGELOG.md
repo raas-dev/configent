@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.6](https://github.com/raas-dev/configent/compare/1.182.5...1.182.6) (2025-12-26)
+
+
+### Fixes
+
+* **aliases:** correct typo in comment ([41ead7c](https://github.com/raas-dev/configent/commit/41ead7cc512b1e56e896c31b89bc8c0828f64472))
+* **bashrc:** simplify prompt by deferring to starship ([5514720](https://github.com/raas-dev/configent/commit/5514720269d1722e69f352aecd9cbd64a3a03cc9))
+* **profile:** improve shell robustness and path handling ([56e6bf2](https://github.com/raas-dev/configent/commit/56e6bf2f75078472a488e70820fded13b75c77fa))
+* **profile:** reorder shell initializations ([c4debff](https://github.com/raas-dev/configent/commit/c4debffba253feeb9bff4a6ac3b715662098cb7a))
+* **profile:** use eval for carapace initialization ([8b409dd](https://github.com/raas-dev/configent/commit/8b409dd753de4f3cb4f72304c745cae11dad2819))
+* **zshrc:** enhance fzf-tab preview options ([6a99d63](https://github.com/raas-dev/configent/commit/6a99d63e001dc7a319812a5277d900941ecef032))
+* **zshrc:** improve fzf-tab preview and formatting ([ebff906](https://github.com/raas-dev/configent/commit/ebff906a4e730749199d9909ff9756c876918646))
+* **zshrc:** reorganize completion system config ([bf7fac7](https://github.com/raas-dev/configent/commit/bf7fac7f6c6bfea7546c239d0533a99a16289643))
+* **zshrc:** simplify fzf-tab configuration ([16e2777](https://github.com/raas-dev/configent/commit/16e2777d1c7c62848fc576542f327283afe14c98))
+
 ### [1.182.5](https://github.com/raas-dev/configent/compare/1.182.4...1.182.5) (2025-12-26)
 
 
