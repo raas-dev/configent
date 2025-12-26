@@ -64,7 +64,7 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:75%' '--with-nth=1' '--delimiter=\s+' '--query='
   zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
     '(out=$(tldr -c $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
-  # disable-fzf-tab
+  #disable-fzf-tab  # to use carapace only
 fi
 
 ### History ####################################################################
