@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.5](https://github.com/raas-dev/configent/compare/1.182.4...1.182.5) (2025-12-26)
+
+
+### Fixes
+
+* **mise:** move opencode from github to npm registry ([00b5286](https://github.com/raas-dev/configent/commit/00b528655055ae07d2e664aa118176020f7015f6))
+* **mise:** switch bat from github to npm registry ([1110328](https://github.com/raas-dev/configent/commit/1110328ff5f5f031a3e5c9511458fc5ede3e8827))
+
 ### [1.182.4](https://github.com/raas-dev/configent/compare/1.182.3...1.182.4) (2025-12-25)
 
 
