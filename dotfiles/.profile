@@ -176,17 +176,20 @@ command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
 
 ### bat ########################################################################
 
-# color manpages
-command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
-
 export BAT_STYLE="auto"
 export BAT_THEME="AyuDark"
+
+# color manpages
+command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
 
 ### mcat #######################################################################
 
 export MCAT_ENCODER="sixel"
 export MCAT_INLINE_OPTS="center=false"
 export MCAT_THEME="ayu"
+
+# completions
+command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
 
 ### git ########################################################################
 
