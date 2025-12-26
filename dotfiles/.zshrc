@@ -43,28 +43,28 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   export ANTIDOTE_HOME="$HOME/.cache/antidote"
   . "$HOME/.antidote/antidote.zsh"
   antidote load
-
-  # native zsh completion system configuration
-  zstyle ':completion:*' list-colors "${LS_COLORS}"
-  zstyle ':completion:*' menu no
-  zstyle ':completion:*:descriptions' format '[%d]'
-  zstyle ':completion:*:git-checkout:*' sort false
-
-  # .zsh_plugins.txt: Aloxaf/fzf-tab
-  zstyle ':fzf-tab:*' switch-group ',' '.'
-  zstyle ':fzf-tab:*' show-group quiet
-  zstyle ':fzf-tab:*' prefix ''
-  zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ $desc == *" -- "* ]] && echo ${desc#*-- } || less ${(Q)realpath}'
-  zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:75%' '--with-nth=1' '--delimiter=\s+' '--query='
-  zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-    '(out=$(tldr -c $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
-  #disable-fzf-tab  # to use carapace only
 fi
 
 ### Completions ################################################################
 
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
+
+# native zsh completion system configuration
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:git-checkout:*' sort false
+
+# .zsh_plugins.txt: Aloxaf/fzf-tab
+zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' show-group quiet
+zstyle ':fzf-tab:*' prefix ''
+zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ $desc == *" -- "* ]] && echo ${desc#*-- } || less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:75%' '--with-nth=1' '--delimiter=\s+' '--query='
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  '(out=$(tldr -c $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+#disable-fzf-tab  # to use carapace only
 
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
