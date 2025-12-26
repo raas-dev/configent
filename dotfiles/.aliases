@@ -1,5 +1,5 @@
 #!/bin/bash
-# the abpensve shebang is only for ShellCheck, this file is not executable
+# the above shebang is only for ShellCheck, this file is not executable
 
 ### IDE ########################################################################
 
