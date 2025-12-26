@@ -25,6 +25,6 @@ mkdir -p "$HOME/.config/bat/themes"
 rm -rf "$HOME/.config/bat/themes"
 ln -sfnv "$config_path/themes" "$HOME/.config/bat/themes"
 
-### binary cache ###############################################################
+### bat binary cache for themes ################################################
 
-command -v bat >/dev/null && bat cache --build
+command -v mise >/dev/null && mise exec bat -- bat cache --build
