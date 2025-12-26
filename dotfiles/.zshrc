@@ -61,7 +61,7 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   zstyle ':fzf-tab:*' show-group quiet
   zstyle ':fzf-tab:*' prefix ''
   zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ $desc == *" -- "* ]] && echo ${desc#*-- } || less ${(Q)realpath}'
-  zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:70%'
+  zstyle ':fzf-tab:complete:*:*' fzf-flags '--preview-window=right:75%' '--with-nth=1' '--delimiter=\s+' '--query='
   zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
     '(out=$(tldr -c $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
   # disable-fzf-tab
