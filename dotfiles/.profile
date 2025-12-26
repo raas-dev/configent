@@ -74,7 +74,7 @@ unset ignoreeof
 
 ### Disable stop (^S) and continue (^Q) flow control signals ###################
 
-stty -ixon
+stty -ixon 2>/dev/null
 
 ### Brew #######################################################################
 
@@ -85,10 +85,16 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
   # install_apps_brew
-  path_prepend "$(brew --prefix findutils)/libexec/gnubin"
-  path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
+  if command -v brew >/dev/null; then
+    if brew --prefix findutils >/dev/null 2>&1; then
+      path_prepend "$(brew --prefix findutils)/libexec/gnubin"
+    fi
+    if brew --prefix coreutils >/dev/null 2>&1; then
+      path_prepend "$(brew --prefix coreutils)/libexec/gnubin"
+    fi
+  fi
   # install_apps_cask
-  export HOMEBREW_CASK_OPTS="--appdir=~/Applications --no-quarantine"
+  export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --no-quarantine"
 else
   if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -319,8 +325,7 @@ fi
 
 ### docker/podman CLIs on macOS ################################################
 
-os="$(uname -s)"
-if [ "$os" = 'Darwin' ]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
   export BUILDKIT_HOST="unix://$HOME/.lima/default/sock/buildkitd.sock"
   export CONTAINER_HOST="unix://$HOME/.lima/podman/sock/podman.sock"
