@@ -117,13 +117,6 @@ fi
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
 
-### carapace ###################################################################
-
-if command -v carapace >/dev/null; then
-  # shellcheck disable=SC1090   # do not follow non-constant source
-  . <(carapace _carapace)
-fi
-
 ### Load other configs #########################################################
 
 [ -r "$HOME/.bash-preexec.sh" ] && . "$HOME/.bash-preexec.sh"

@@ -104,10 +104,6 @@ export HOMEBREW_NO_ENV_HINTS=1
 path_prepend "$HOME/.local/bin"
 command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
-### atuin ######################################################################
-
-command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
-
 ### go #########################################################################
 
 export GOPATH="$HOME/.go"
@@ -158,9 +154,20 @@ if command -v zoxide >/dev/null; then
   }
 fi
 
+### carapace ###################################################################
+
+if command -v carapace >/dev/null; then
+  # shellcheck disable=SC1090   # do not follow non-constant source
+  . <(carapace _carapace)
+fi
+
 ### fzf ########################################################################
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+
+### atuin ######################################################################
+
+command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
 
 ### bat ########################################################################
 
