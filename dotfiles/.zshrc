@@ -52,11 +52,13 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   . "$HOME/.antidote/antidote.zsh"
   antidote load
 
-  # .zsh_plugins.txt: Aloxaf/fzf-tab
+  # native zsh completion system configuration
   zstyle ':completion:*' list-colors "${LS_COLORS}"
   zstyle ':completion:*' menu no
   zstyle ':completion:*:descriptions' format '[%d]'
   zstyle ':completion:*:git-checkout:*' sort false
+
+  # .zsh_plugins.txt: Aloxaf/fzf-tab
   zstyle ':fzf-tab:*' switch-group ',' '.'
   zstyle ':fzf-tab:*' show-group quiet
   zstyle ':fzf-tab:*' prefix ''
