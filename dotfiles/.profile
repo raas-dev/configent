@@ -162,9 +162,7 @@ fi
 
 ### carapace ###################################################################
 
-if command -v carapace >/dev/null; then
-  eval "$(carapace _carapace "${SHELL##*/}")"
-fi
+command -v carapace >/dev/null && eval "$(carapace _carapace "${SHELL##*/}")"
 
 ### fzf ########################################################################
 
