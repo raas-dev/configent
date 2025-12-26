@@ -36,8 +36,6 @@ zoxide = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
-'github:sst/opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-
 # scripting
 argc = 'latest'
 pre-commit = 'latest'
@@ -92,6 +90,7 @@ go = '1.25.3'
 # node.js
 node = { version = '22.21.1', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
+'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:openskills' = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
