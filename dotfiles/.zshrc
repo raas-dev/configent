@@ -32,14 +32,6 @@ bindkey -e
 bindkey -r '^S' # unbind terminal chord
 bindkey -r '^@' # unbind tmux prefix
 
-### Completions ################################################################
-
-autoload -Uz compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
-
-# workaround https://github.com/oven-sh/bun/issues/11179
-# bun completions
-
 ### dircolors ##################################################################
 
 # load before LS_COLORS for Aloxaf/fzf-tab
@@ -68,6 +60,14 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
     '(out=$(tldr -c $word) 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
   #disable-fzf-tab  # to use carapace only
 fi
+
+### Completions ################################################################
+
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
+# workaround https://github.com/oven-sh/bun/issues/11179
+# bun completions
 
 ### History ####################################################################
 
