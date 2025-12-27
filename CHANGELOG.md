@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.10](https://github.com/raas-dev/configent/compare/1.182.9...1.182.10) (2025-12-27)
+
+
+### Fixes
+
+* **settings:** switch to based-ayu theme and format arrays ([1abf077](https://github.com/raas-dev/configent/commit/1abf07786f9ef4df3cb7f6ca31fa444c21bcfee8))
+
 ### [1.182.9](https://github.com/raas-dev/configent/compare/1.182.8...1.182.9) (2025-12-27)
 
 
