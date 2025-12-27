@@ -445,7 +445,7 @@
     "minimap.background": "#00000000",
     "scrollbar.shadow": "#00000000"
   },
-  "workbench.colorTheme": "Ayu Dark Bordered",
+  "workbench.colorTheme": "Ayu Dark",
   "workbench.editor.centeredLayoutAutoResize": false,
   "workbench.editor.centeredLayoutFixedWidth": true,
   "workbench.editor.defaultBinaryEditor": "default",
@@ -461,9 +461,9 @@
   "workbench.iconTheme": "ayu",
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
-  "workbench.preferredDarkColorTheme": "Ayu Dark Bordered",
-  "workbench.preferredHighContrastColorTheme": "Ayu Dark Bordered",
-  "workbench.preferredLightColorTheme": "Ayu Dark Bordered",
+  "workbench.preferredDarkColorTheme": "Ayu Dark",
+  "workbench.preferredHighContrastColorTheme": "Ayu Dark",
+  "workbench.preferredLightColorTheme": "Ayu Dark",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "yaml.customTags": [
