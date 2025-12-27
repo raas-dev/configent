@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.11](https://github.com/raas-dev/configent/compare/1.182.10...1.182.11) (2025-12-27)
+
+
+### Fixes
+
+* **aliases:** add no-pager flag to bat alias ([e67da9f](https://github.com/raas-dev/configent/commit/e67da9f739d427c6dede1aed04735b1d95d3e46a))
+* **aliases:** update bat alias flags ([ae5f27a](https://github.com/raas-dev/configent/commit/ae5f27adae8fcddea86330b316c40094dfc91be2))
+* **gitconfig:** disable delta interactive filter ([327b45e](https://github.com/raas-dev/configent/commit/327b45ea0af8d318a40023cfc6bb9f6649b98a80))
+* **gitconfig:** enable delta interactive filter ([f022e73](https://github.com/raas-dev/configent/commit/f022e735b05ab27c6d4354ca31636338959706b3))
+
 ### [1.182.10](https://github.com/raas-dev/configent/compare/1.182.9...1.182.10) (2025-12-27)
 
 
