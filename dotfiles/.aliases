@@ -118,7 +118,7 @@ fi
 ### Shortcuts ##################################################################
 
 alias a='ai'
-alias b='bat --style=grid,header,snip --no-pager'
+alias b='bat --style grid,header,snip --paging never'
 alias c='oxker --host $DOCKER_HOST'
 # d is for generic docker build and run, see d()
 alias e="\$DEFAULT_IDE --add"
