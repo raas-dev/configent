@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.9](https://github.com/raas-dev/configent/compare/1.182.8...1.182.9) (2025-12-27)
+
+
+### Fixes
+
+* **settings:** format arrays and revert theme ([bb7bcfd](https://github.com/raas-dev/configent/commit/bb7bcfdce1c44a37ee3f504a996fe3fab3509f7f))
+
 ### [1.182.8](https://github.com/raas-dev/configent/compare/1.182.7...1.182.8) (2025-12-27)
 
 
