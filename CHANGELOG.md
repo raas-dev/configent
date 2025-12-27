@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.7](https://github.com/raas-dev/configent/compare/1.182.6...1.182.7) (2025-12-27)
+
+
+### Fixes
+
+* **profile:** remove aws_completer completion ([5867913](https://github.com/raas-dev/configent/commit/586791304af70d2f92847d525b3334a2ce7994e6))
+* **profile:** reorder bat config and add mcat completions ([43e5077](https://github.com/raas-dev/configent/commit/43e5077765e7f25f4cd52052d65a1de2ea837fd1))
+* **profile:** simplify carapace initialization ([44ddf53](https://github.com/raas-dev/configent/commit/44ddf53ccfdac1fa3170d3fb3162fef9c77c9006))
+* **settings:** change vscode color theme to ayu dark ([66ae8d6](https://github.com/raas-dev/configent/commit/66ae8d636e2a7bf8092b28ef80ccd9f12f0a2b34))
+* **zsh_plugins:** remove defer kind from fast-syntax-highlighting ([8a7e283](https://github.com/raas-dev/configent/commit/8a7e283ab973b75de6c0fe7dfcb09b90b9301c6a))
+* **zshrc:** move completion config after compinit ([e5b7b26](https://github.com/raas-dev/configent/commit/e5b7b2692890a1df354263bf7f96159c64f4279d))
+* **zshrc:** move completions after antidote ([0e4fe02](https://github.com/raas-dev/configent/commit/0e4fe02deffe3fbc582a8a4676e639a83aa8208e))
+
 ### [1.182.6](https://github.com/raas-dev/configent/compare/1.182.5...1.182.6) (2025-12-26)
 
 
