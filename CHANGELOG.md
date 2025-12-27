@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.8](https://github.com/raas-dev/configent/compare/1.182.7...1.182.8) (2025-12-27)
+
+
+### Fixes
+
+* **settings:** use ayu dark unbordered theme ([6e193c8](https://github.com/raas-dev/configent/commit/6e193c8a110b1fab5c7d8da5f2ffe17888a1ce0b))
+
 ### [1.182.7](https://github.com/raas-dev/configent/compare/1.182.6...1.182.7) (2025-12-27)
 
 
