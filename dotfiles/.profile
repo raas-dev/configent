@@ -61,6 +61,9 @@ export LESSUTFBINFMT='*n%C' # display Unicode characters instead of code points
 export LESSOPEN='|~/.local/configent/bin/lesspipe.sh %s'
 export LESSQUIET=1 # suppress additional less output
 
+# pager: auto-exit if output fits on one screen, don't clear screen
+export PAGER="less -F -X"
+
 # get plain text from man
 export MANROFFOPT='-c'
 
@@ -188,6 +191,10 @@ export MCAT_THEME="ayu"
 
 # completions
 command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
+
+### delta ######################################################################
+
+command -v delta >/dev/null && export GIT_PAGER="delta"
 
 ### Azure bicep ################################################################
 
