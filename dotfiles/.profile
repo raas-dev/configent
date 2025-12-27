@@ -189,10 +189,6 @@ export MCAT_THEME="ayu"
 # completions
 command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
 
-### git ########################################################################
-
-command -v delta >/dev/null && export GIT_PAGER="delta"
-
 ### Azure bicep ################################################################
 
 path_append "$HOME/.azure/bin"
