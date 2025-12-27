@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.182.12](https://github.com/raas-dev/configent/compare/1.182.11...1.182.12) (2025-12-27)
+
+
+### Fixes
+
+* **profile:** configure pager settings ([a638418](https://github.com/raas-dev/configent/commit/a638418a0822d8924d8eeaaa76ed2c77e7130aab))
+
 ### [1.182.11](https://github.com/raas-dev/configent/compare/1.182.10...1.182.11) (2025-12-27)
 
 
