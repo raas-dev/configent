@@ -445,7 +445,7 @@
     "minimap.background": "#00000000",
     "scrollbar.shadow": "#00000000"
   },
-  "workbench.colorTheme": "Ayu Dark",
+  "workbench.colorTheme": "Ayu Dark Unbordered",
   "workbench.editor.centeredLayoutAutoResize": false,
   "workbench.editor.centeredLayoutFixedWidth": true,
   "workbench.editor.defaultBinaryEditor": "default",
@@ -461,9 +461,9 @@
   "workbench.iconTheme": "ayu",
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
-  "workbench.preferredDarkColorTheme": "Ayu Dark",
-  "workbench.preferredHighContrastColorTheme": "Ayu Dark",
-  "workbench.preferredLightColorTheme": "Ayu Dark",
+  "workbench.preferredDarkColorTheme": "Ayu Dark Unbordered",
+  "workbench.preferredHighContrastColorTheme": "Ayu Dark Unbordered",
+  "workbench.preferredLightColorTheme": "Ayu Dark Unbordered",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "yaml.customTags": [
@@ -521,5 +521,7 @@
   "window.customTitleBarVisibility": "windowed",
   "workbench.editor.limit.value": 5,
   "claudeCode.preferredLocation": "panel",
-  "biome.suggestInstallingGlobally": false
+  "biome.suggestInstallingGlobally": false,
+  "workbench.preferredHighContrastLightColorTheme": "Ayu Dark Unbordered",
+  "window.systemColorTheme": "dark"
 }
