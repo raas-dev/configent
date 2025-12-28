@@ -35,6 +35,7 @@ zoxide = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
+'github:pranshuparmar/witr' = 'latest'
 
 # scripting
 argc = 'latest'
