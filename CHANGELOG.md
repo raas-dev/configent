@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.183.0](https://github.com/raas-dev/configent/compare/1.182.12...1.183.0) (2025-12-29)
+
+
+### Features
+
+* **witr:** add witr tool and update alias ([5180bd6](https://github.com/raas-dev/configent/commit/5180bd6fb7247c744cecf945cf602dab6d33f244))
+
+
+### Fixes
+
+* **ai_commit:** use claude-haiku instead of sonnet ([e1a7753](https://github.com/raas-dev/configent/commit/e1a77538910ad696d02451448846021838e72b7d))
+* **aliases:** enable mas updates in topgrade ([e74483a](https://github.com/raas-dev/configent/commit/e74483abb396bda32753170df6505261073fd798))
+* **colorscheme:** make background transparent ([2e38294](https://github.com/raas-dev/configent/commit/2e382941c5c2bc4f41c6fcdf1c3f9856f0151403))
+* **vimrc:** make background transparent ([00052b1](https://github.com/raas-dev/configent/commit/00052b18590d05e928d2adbdfeb8d3d24d4721e3))
+
 ### [1.182.12](https://github.com/raas-dev/configent/compare/1.182.11...1.182.12) (2025-12-27)
 
 
