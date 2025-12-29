@@ -153,8 +153,11 @@ set autoread
 
 set background=dark
 set termguicolors
-let ayucolor="darker"
+let ayucolor="dark"
 colorscheme ayu
+
+" transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 " make the statusbar more informative
 if has("statusline")
