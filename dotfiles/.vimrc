@@ -110,7 +110,7 @@ set number                      " display line numbers
 set relativenumber
 
 set foldlevel=100               " fold nothing by default
-set foldcolumn=1                " the width of the fold column
+set foldcolumn=0                " the width of the fold column
 
 set showmatch                   " show brace matches
 set matchpairs+=<:>             " include angle brackets into brace matches
