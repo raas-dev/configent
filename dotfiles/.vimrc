@@ -37,7 +37,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Theme
-Plugin 'ayu-theme/ayu-vim'
+Plugin 'k4yt3x/ayu-vim-darker-tree-sitter'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -153,7 +153,7 @@ set autoread
 
 set background=dark
 set termguicolors
-let ayucolor="dark"
+let ayucolor="darker"
 colorscheme ayu
 
 " make the statusbar more informative
