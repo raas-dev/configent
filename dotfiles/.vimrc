@@ -63,7 +63,12 @@ filetype plugin indent on
 "-- Mouse ----------------------------------------------------------------------
 
 set mouse=a                     " enable mouse in all modes
-set ttymouse=xterm2             " allow resizing panels using mouse
+if has("mouse_sgr")
+  set ttymouse=sgr              " mouse scrolling for modern terminals
+else
+  set ttymouse=xterm2           " fallback for older terminals
+endif
+set mousehide                   " hide mouse cursor while typing
 
 "-- Clipboard ------------------------------------------------------------------
 
