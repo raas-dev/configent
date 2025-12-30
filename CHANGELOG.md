@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [1.185.1](https://github.com/raas-dev/configent/compare/1.185.0...1.185.1) (2025-12-30)
+
+
+### Fixes
+
+* **release:** replace standard-version with commit-and-tag-version ([7e337f1](https://github.com/raas-dev/configent/commit/7e337f1fd404a02aecf28f39ec0b389fc84c8616))
 
 ## [1.185.0](https://github.com/raas-dev/configent/compare/1.184.1...1.185.0) (2025-12-30)
 
