@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.184.0](https://github.com/raas-dev/configent/compare/1.183.0...1.184.0) (2025-12-30)
+
+
+### Features
+
+* **mise:** update node to 24.12.0 ([bda191d](https://github.com/raas-dev/configent/commit/bda191dda9dc44f7709ce22e6172b5e43ae4c0c5))
+* **mise:** update python to 3.14.2 ([c56ca53](https://github.com/raas-dev/configent/commit/c56ca5394753333ea9755723412399882f8df836))
+
+
+### Fixes
+
+* **mise:** downgrade lima to 1.2.2 ([0ae3e29](https://github.com/raas-dev/configent/commit/0ae3e29efcd70f9df4e79d2ae47f9c015c57daca))
+* **mise:** update lima to 1.2.3 ([517cc34](https://github.com/raas-dev/configent/commit/517cc340dd04faad5c6e315f3b93af9dfbfd2b3b))
+* **mise:** update tmux to 3.6a ([4ce895e](https://github.com/raas-dev/configent/commit/4ce895efd42030eded73cfae886252dcd470edfa))
+* **vimrc:** disable fold column display ([6f656a7](https://github.com/raas-dev/configent/commit/6f656a73ba1a9608bcf7f488051bd164713ffbe4))
+* **vimrc:** improve mouse support for modern terminals ([23dfdaa](https://github.com/raas-dev/configent/commit/23dfdaaf412d6ef8be5a57890577ac616fb9db07))
+
 ## [1.183.0](https://github.com/raas-dev/configent/compare/1.182.12...1.183.0) (2025-12-29)
 
 
