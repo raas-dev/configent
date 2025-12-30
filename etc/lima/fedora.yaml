@@ -22,6 +22,9 @@ mounts:
 
 ssh:
   forwardAgent: true
+  # ssh.overVsock does not work with Fedora 43 due to a SELinux policy issue
+  # see: https://github.com/lima-vm/lima/issues/4334#issuecomment-3561294333
+  overVsock: false
 
 containerd:
   system: false
