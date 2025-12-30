@@ -81,7 +81,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     "$podman_bin_path" "$@"
   else
     # no podman CLI found on macOS -> call this script on the Linux guest VM
-    limactl shell "$NAME" ~/configent/bin/podman "$@"
+    limactl shell --preserve-env "$NAME" ~/configent/bin/podman "$@"
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately

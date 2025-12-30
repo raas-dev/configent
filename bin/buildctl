@@ -27,7 +27,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   fi
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$NAME" ~/configent/bin/buildctl "$@"
+  limactl shell --preserve-env "$NAME" ~/configent/bin/buildctl "$@"
 else
   if [ -z "$BUILDKIT_HOST" ]; then
     if [ -S "$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock" ]; then
