@@ -783,12 +783,20 @@ nixd() {
         --workdir "$PWD" \
         "$image")
 
-  # Run command in a new container
+  # Workaround: run command in a new container (2025-12)
   eval docker run -it --rm \
     "$env_file" \
     "$env_args" \
     --workdir "$PWD" \
     "$image" "$bin" "$@"
+
+  # Errors "path escapes from parent" with NixOS image (2025-12)
+  # see: https://github.com/containerd/containerd/issues/12683
+  #eval docker exec -it \
+  #  "$env_file" \
+  #  "$env_args" \
+  #  --workdir "$PWD" \
+  #  "$name" "$bin" "$@"
 }
 
 # Generic nix-shell builder and runner
