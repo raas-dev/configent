@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.185.0](https://github.com/raas-dev/configent/compare/1.184.1...1.185.0) (2025-12-30)
+
+
+### Features
+
+* **lima:** upgrade lima to 2.0.3 ([79f4a15](https://github.com/raas-dev/configent/commit/79f4a15fe76f5553dbc8898f33914c324dec26f8))
+
+
+### Fixes
+
+* **aliases:** add workaround comment for nixd docker execution ([a893185](https://github.com/raas-dev/configent/commit/a893185708b991d33ee74eabcc4b186e22803917))
+* **bin:** preserve environment in lima shell calls ([cf019e6](https://github.com/raas-dev/configent/commit/cf019e6b607e04b5986fbaf710419fea9f87bf3e))
+* **lima:** correct shell name in k3s probe hint ([89e91b4](https://github.com/raas-dev/configent/commit/89e91b40121cb3c6822f4d312a3a646d7d86970b))
+* **lima:** disable overVsock for Fedora 43 SELinux ([832ba16](https://github.com/raas-dev/configent/commit/832ba16a5f7b8a5574ba895b595dd0d560efbc28))
+* **lima:** preserve environment variables in shell ([62a723e](https://github.com/raas-dev/configent/commit/62a723e28e223339733aad8b1064f473e33d6102))
+* **mise:** update opencode-ai to 1.0.211 ([3b85d8a](https://github.com/raas-dev/configent/commit/3b85d8a32f6a1be467080849b5d06f172249eacd))
+* **nixd:** replace nerdctl with docker and simplify execution ([e8670b7](https://github.com/raas-dev/configent/commit/e8670b7ab4926eee4ae87735081dfa41da7734c4))
+* **podman:** enable rosetta and remove outdated comment ([9ea56e2](https://github.com/raas-dev/configent/commit/9ea56e200312891abb5a4ec5873f7295d6a86756))
+
 ### [1.184.1](https://github.com/raas-dev/configent/compare/1.184.0...1.184.1) (2025-12-30)
 
 
