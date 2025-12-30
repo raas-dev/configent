@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.2](https://github.com/raas-dev/configent/compare/1.185.1...1.185.2) (2025-12-30)
+
+
+### Fixes
+
+* **install_apps_yum:** add slirp4netns for rootless docker ([426e3d1](https://github.com/raas-dev/configent/commit/426e3d1e61ce31930f11f8a6ea4dd717baf5c3f5))
+* **nixd:** switch from docker to podman for nix container ([db489f8](https://github.com/raas-dev/configent/commit/db489f836f51645b1c55d33b008d7366e6875bdb))
+* **nixd:** use docker instead of nerdctl for nix container ([e2fd6a3](https://github.com/raas-dev/configent/commit/e2fd6a333174fa0b828e323913e0fbebca91bdb4))
+
 ## [1.185.1](https://github.com/raas-dev/configent/compare/1.185.0...1.185.1) (2025-12-30)
 
 
