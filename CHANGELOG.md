@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.184.1](https://github.com/raas-dev/configent/compare/1.184.0...1.184.1) (2025-12-30)
+
+
+### Fixes
+
+* **mise:** replace config.lock with mise.lock ([dd0ed46](https://github.com/raas-dev/configent/commit/dd0ed461b5a5b7cf148d592d7f93d1f6f78b7c62))
+
 ## [1.184.0](https://github.com/raas-dev/configent/compare/1.183.0...1.184.0) (2025-12-30)
 
 
