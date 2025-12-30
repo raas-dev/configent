@@ -90,6 +90,7 @@ $SUDO dnf install -y langpacks-en
 
 # Docker (rootless)
 $SUDO dnf install -y fuse3 fuse-overlayfs dbus-daemon iptables shadow-utils
+$SUDO dnf install -y slirp4netns
 $SUDO modprobe ip_tables
 curl -fsSL https://get.docker.com/rootless | sh
 systemctl --user start dbus
