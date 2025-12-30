@@ -89,7 +89,7 @@ go = '1.25.3'
 #'go:github.com/shihanng/tfvar' = 'latest'
 
 # node.js
-node = { version = '22.21.1', postinstall = "~/.local/configent/bin/postinstall_node" }
+node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:openskills' = 'latest'
