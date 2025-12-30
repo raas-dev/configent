@@ -50,7 +50,7 @@ github-cli = 'latest'
 # containers
 #docker-cli = 'latest'
 #dive = 'latest'
-lima = '1.2.3' #{ version = '1.2.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+lima = '1.2.2' #{ version = '1.2.2', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 #podman = 'latest'
 trivy = 'latest'
 
