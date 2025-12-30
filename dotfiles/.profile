@@ -331,6 +331,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   export CONTAINER_HOST="unix://$HOME/.lima/podman/sock/podman.sock"
 fi
 
+### lima #######################################################################
+
+# pass host environment, except these variables, by lima shell --preserve-env
+# see: https://lima-vm.io/docs/config/environment-variables/#lima_shellenv_block
+export LIMA_SHELLENV_BLOCK="+*_HOST,*_HOME,MANPATH,HOMEBREW_*,GOBIN"
+
 ### ollama #####################################################################
 
 export OLLAMA_CONTEXT_LENGTH=32768

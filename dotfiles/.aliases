@@ -208,10 +208,10 @@ v() {
           --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
           "$@"
     fi
-    limactl shell "$vm_name"
+    limactl shell --preserve-env "$vm_name"
     ;;
   shell | run | exec | s)
-    limactl shell "$vm_name" "$@"
+    limactl shell --preserve-env "$vm_name" "$@"
     ;;
   down | stop)
     limactl stop "$vm_name" --force
