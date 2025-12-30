@@ -8,9 +8,6 @@
 
 # shim for running `podman` in lima VM
 
-# on macOS, --rosetta is not passed to limactl start as of 2025-06 due to bug
-# see: https://github.com/lima-vm/lima/issues/3592
-
 : "${NAME:="podman"}"
 : "${TEMPLATE:="fedora"}"
 
@@ -61,11 +58,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # start VM if not running
   if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
     if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-        limactl start --name "$NAME" --network=lima:bridged --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     else
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-        limactl start --name "$NAME" --network=vzNAT --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     fi
   fi
   # macOS priority: mise, homebrew
