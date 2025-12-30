@@ -97,7 +97,7 @@ bun = 'latest'
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
 
 # python
-python = { version = '3.13.9', postinstall = "~/.local/configent/bin/postinstall_python" }
+python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:azure-cli' = { version = '2.68.0', uvx_args = '--python 3.11 --prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
