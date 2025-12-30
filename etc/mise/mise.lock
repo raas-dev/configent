@@ -447,17 +447,9 @@ backend = "aqua:jqlang/jq"
 "platforms.windows-x64-baseline" = { checksum = "sha256:23cb60a1354eed6bcc8d9b9735e8c7b388cd1fdcb75726b93bc299ef22dd9334", url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-windows-amd64.exe"}
 
 [[tools.lima]]
-version = "1.2.2"
+version = "2.0.3"
 backend = "aqua:lima-vm/lima"
-"platforms.linux-arm64" = { checksum = "sha256:c44b0ef51b8dbdcf8307b3b3dce5411b78e1af2a622701b655a0fcdd73904b78", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-aarch64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:c44b0ef51b8dbdcf8307b3b3dce5411b78e1af2a622701b655a0fcdd73904b78", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-aarch64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:795d30b2347dbc597dc7992e809c84417525ca775a9c0caba252bfa92aeabaf4", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-x86_64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:795d30b2347dbc597dc7992e809c84417525ca775a9c0caba252bfa92aeabaf4", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-x86_64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:795d30b2347dbc597dc7992e809c84417525ca775a9c0caba252bfa92aeabaf4", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-x86_64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:795d30b2347dbc597dc7992e809c84417525ca775a9c0caba252bfa92aeabaf4", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Linux-x86_64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:20e55afe558703e5fcf958da508da0f8d566f1748ea11e74ecd5371cfde374b0", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Darwin-arm64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:7a9c359d086d7f977adb063092c38be41f92ab63d960387e69a71c7565149778", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Darwin-x86_64.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7a9c359d086d7f977adb063092c38be41f92ab63d960387e69a71c7565149778", url = "https://github.com/lima-vm/lima/releases/download/v1.2.2/lima-1.2.2-Darwin-x86_64.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:22aee997df59e4fd448041b2d1214e48bd8eaf705d2d48a4307d65c1b179dc97", url = "https://github.com/lima-vm/lima/releases/download/v2.0.3/lima-2.0.3-Darwin-arm64.tar.gz"}
 
 [[tools.lsd]]
 version = "1.2.0"
