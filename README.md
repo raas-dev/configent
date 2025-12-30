@@ -269,7 +269,7 @@ If `-d` or `--detached` is not used, an interactive session is assumed and all a
 [Nix](https://nix.dev/) is not installed on the host, but alias `nixd` starts
 a container where `nix`, `nix-env`, `nix-shell`, etc. are available.
 
-The image is built by `etc/nix/Containerfile` and is run on containerd.
+The containers run on dockerd and the image is built using `etc/nix/Dockerfile`.
 This enables NixOS like experience without going all-in NixOS (even on a VM).
 
 Use alias `n` e.g. `n vim README.md` to open `README.md`, where Vim is running
