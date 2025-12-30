@@ -42,17 +42,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-x64-baseline" = { checksum = "sha256:03b7a428062d4d953f450e521649c06f29dd962c37fe75b608ca53c6ac8f0706", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.24"
+version = "2.32.25"
 backend = "aqua:aws/aws-cli"
-"platforms.linux-arm64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.linux-arm64-musl" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.linux-x64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.linux-x64-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.linux-x64-musl" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.linux-x64-musl-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.macos-arm64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.macos-x64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
-"platforms.macos-x64-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.24.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:d8171563d7d3d572113af86d9ee508cbc415909b3744b27b12ae74cb50afd604", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.25.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -293,17 +285,9 @@ backend = "github:ouch-org/ouch"
 "platforms.windows-x64-baseline" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-pc-windows-gnu.zip", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071208"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.1.1"
+version = "0.1.3"
 backend = "github:pranshuparmar/witr"
-"platforms.linux-arm64" = { checksum = "sha256:c2f23b0edc9cd634c5bcde7a1ab8c1737bec1a0e76871ef402810b1d9cc72e0e", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743822"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:c2f23b0edc9cd634c5bcde7a1ab8c1737bec1a0e76871ef402810b1d9cc72e0e", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743822"}
-"platforms.linux-x64" = { checksum = "sha256:082e376133030337a39dad157421593a9ddc382e9668ab4ff5278632673748d4", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743820"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:082e376133030337a39dad157421593a9ddc382e9668ab4ff5278632673748d4", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743820"}
-"platforms.linux-x64-musl" = { checksum = "sha256:082e376133030337a39dad157421593a9ddc382e9668ab4ff5278632673748d4", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743820"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:082e376133030337a39dad157421593a9ddc382e9668ab4ff5278632673748d4", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-linux-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743820"}
-"platforms.macos-arm64" = { checksum = "sha256:5f2cbdbaa30ccb18a4ecd1e89bfef53b5ac164789b7c7ebe5c0fd3812b5ccc8c", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743824"}
-"platforms.macos-x64" = { checksum = "sha256:d50125f1505ee69d92e9e26f973c9d7c8777af057512d7f121ca1a975011c13d", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-darwin-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743823"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:d50125f1505ee69d92e9e26f973c9d7c8777af057512d7f121ca1a975011c13d", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.1/witr-darwin-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/333743823"}
+"platforms.macos-arm64" = { checksum = "sha256:484131eff201e1b2faedacdef01a2f4f5207045b73636bff89e64c4f1448aaf8", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.3/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/334462743"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
@@ -505,7 +489,7 @@ version = "0.22.4"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "1.0.211"
+version = "1.0.216"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
