@@ -773,19 +773,22 @@ nixd() {
 
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
 
-  nerdctl start "$name" &>/dev/null ||
-    (nerdctl build --tag "$image" ~/configent/etc/nix &&
-      eval nerdctl run --init -t --detach \
+  # Build image if needed
+  docker start "$name" &>/dev/null ||
+    (docker build --tag "$image" "$HOME/configent/etc/nix" &&
+      eval docker run --init -t --detach \
         --name "$name" \
         "$port_args" \
         --volume "$PWD:$PWD" \
         --workdir "$PWD" \
         "$image")
-  eval nerdctl exec -it \
+
+  # Run command in a new container
+  eval docker run -it --rm \
     "$env_file" \
     "$env_args" \
     --workdir "$PWD" \
-    "$name" "$bin" "$*"
+    "$image" "$bin" "$@"
 }
 
 # Generic nix-shell builder and runner
