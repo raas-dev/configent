@@ -34,7 +34,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     "$HOME/.local/configent/bin/docker" compose "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
-    limactl shell --preserve-env "$NAME" ~/configent/bin/docker-compose "$@"
+    limactl shell "$NAME" ~/configent/bin/docker-compose "$@"
   fi
 else
   # Linux: pass arguments to docker shim, which installs the compose plugin

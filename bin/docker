@@ -166,7 +166,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     run_docker_with_plugins "$docker_bin_path" "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
-    limactl shell --preserve-env "$NAME" ~/configent/bin/docker "$@"
+    limactl shell "$NAME" ~/configent/bin/docker "$@"
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
