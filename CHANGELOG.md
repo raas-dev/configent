@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.3](https://github.com/raas-dev/configent/compare/1.185.2...1.185.3) (2025-12-31)
+
+
+### Fixes
+
+* **bin:** remove --preserve-env flag from limactl shell calls ([c539732](https://github.com/raas-dev/configent/commit/c53973272c0061ccf953c8543e0b4e538787063b))
+* **mcp-gateway:** add lima MCP server configuration ([5774fce](https://github.com/raas-dev/configent/commit/5774fceff0ef46656e95b377bd0de208d70ada54))
+* **postinstall_browser-use:** remove chromium installation step ([31dc19d](https://github.com/raas-dev/configent/commit/31dc19dba893a39a40558da19e6ed8322ce6063b))
+
 ## [1.185.2](https://github.com/raas-dev/configent/compare/1.185.1...1.185.2) (2025-12-30)
 
 
