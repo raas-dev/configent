@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.4](https://github.com/raas-dev/configent/compare/1.185.3...1.185.4) (2025-12-31)
+
+
+### Fixes
+
+* **aliases:** remove --preserve-env flag from limactl shell calls ([36074e9](https://github.com/raas-dev/configent/commit/36074e9fc3aeeaac722b492a8b8b0be84978847a))
+
 ## [1.185.3](https://github.com/raas-dev/configent/compare/1.185.2...1.185.3) (2025-12-31)
 
 
