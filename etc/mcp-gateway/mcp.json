@@ -30,6 +30,11 @@
       "env": {
         "UTCP_CONFIG_FILE": "${UTCP_CONFIG_FILE}"
       }
+    },
+    "lima": {
+      "description": "Use when you need sandboxed file operations and shell command execution within Linux virtual machines. Provides tools for: reading and writing files, listing directories, finding files by glob patterns, searching file content with regex, and executing shell commands within sandboxed Linux VMs.",
+      "command": "limactl",
+      "args": ["mcp", "serve", "default"]
     }
   }
 }
