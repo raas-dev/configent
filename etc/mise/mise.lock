@@ -485,11 +485,11 @@ version = "2.0.76"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.22.4"
+version = "0.22.5"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "1.0.218"
+version = "1.0.220"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
