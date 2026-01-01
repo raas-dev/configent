@@ -1,10 +1,10 @@
 images:
-  - location: "https://cloud.debian.org/images/cloud/trixie/20250911-2232/debian-13-genericcloud-amd64-20250911-2232.qcow2"
+  - location: "https://cloud.debian.org/images/cloud/trixie/20251117-2299/debian-13-genericcloud-amd64-20251117-2299.qcow2"
     arch: x86_64
-    digest: "sha512:82ca129c665d6d1d9a919aa64a1c275646755de078a4e07de83d741e28f38f506b907f46432c0368d4ab3c740cfacf9894238be7052aeb46b1933259cabecc62"
-  - location: "https://cloud.debian.org/images/cloud/trixie/20250911-2232/debian-13-genericcloud-arm64-20250911-2232.qcow2"
+    digest: "sha512:e5563c7bb388eebf7df385e99ee36c83cd16ba8fad4bd07f4c3fd725a6f1cf1cb9f54c6673d4274a856974327a5007a69ff24d44f9b21f7f920e1938a19edf7e"
+  - location: "https://cloud.debian.org/images/cloud/trixie/20251117-2299/debian-13-genericcloud-arm64-20251117-2299.qcow2"
     arch: aarch64
-    digest: "sha512:4c9cf2f8733670ff8d56a88b6e0f04900c55f68c1a4757a257605b314062fdd6dbe37b61b8b9ecda376a16770e9f12aeddc23bd5c5f499f91443d99308790a32"
+    digest: "sha512:5075d49a9a85f29d1ee78302785b0d5270fd22c16ca75b4b280f7f4c240fcd34fdfa22ab15a5457aa14fbdbf36d8c5562d1133709b58fc8efdec40e363eba085"
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
   - location: https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-amd64-daily.qcow2
