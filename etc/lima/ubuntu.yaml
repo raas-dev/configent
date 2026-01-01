@@ -67,6 +67,10 @@ provision:
       fi
 
       systemctl start k0scontroller
+  - mode: system
+    script: |
+      #!/bin/sh
+      chmod 644 /var/lib/k0s/pki/admin.conf
   - mode: user
     script: |
       #!/bin/sh
