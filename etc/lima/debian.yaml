@@ -12,6 +12,10 @@ images:
   - location: https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-arm64-daily.qcow2
     arch: aarch64
 
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
+
 mountTypesUnsupported: ["9p"]
 mounts:
   - location: "~/configent"
@@ -22,6 +26,9 @@ mounts:
     writable: true
   - location: "/tmp/lima"
     writable: true
+
+ssh:
+  forwardAgent: true
 
 containerd:
   system: false
@@ -47,22 +54,15 @@ probes:
   - script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
-        echo >&2 "k3s is not running yet"
+      if ! timeout 30s bash -c "until command -v docker >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "docker is not installed yet"
         exit 1
       fi
-    hint: |
-      The k3s kubeconfig file has not yet been created.
-      Run "limactl shell debian sudo journalctl -u k3s" to check the log.
-      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
-
-# https://lima-vm.io/docs/config/network/user/#dns-19216853
-hostResolver:
-  enabled: false
-
-# https://lima-vm.io/docs/config/network/#lima-user-v2-network
-networks:
-  - lima: user-v2
+      if ! timeout 30s bash -c "until pgrep dockerd; do sleep 3; done"; then
+        echo >&2 "dockerd is not running"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
 
 copyToHost:
   - guest: "/etc/rancher/k3s/k3s.yaml"
@@ -74,3 +74,25 @@ message: |
   export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
   kubectl get nodes
   ------
+
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
+hostResolver:
+  enabled: true
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - lima: user-v2
+
+portForwards:
+  # rootful docker
+  - guestSocket: "/var/run/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker.sock"
+  # user docker
+  - guestSocket: "/run/user/{{.UID}}/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
+  # user containerd
+  - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
+    hostSocket: "{{.Dir}}/sock/buildkitd.sock"
+  # user podman
+  - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
+    hostSocket: "{{.Dir}}/sock/podman.sock"
