@@ -83,7 +83,7 @@ probes:
       fi
     hint: |
       The k0s control plane is not ready yet.
-      Run "limactl shell k0s sudo journalctl -u k0scontroller" to debug.
+      Run "limactl shell ubuntu sudo journalctl -u k0scontroller" to debug.
 
 copyToHost:
   - guest: "/var/lib/k0s/pki/admin.conf"
