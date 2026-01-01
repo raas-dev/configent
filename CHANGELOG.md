@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.3](https://github.com/raas-dev/configent/compare/1.187.2...1.187.3) (2026-01-01)
+
+
+### Fixes
+
+* **lima:** disable vsock forwarding for better performance ([6a23ae1](https://github.com/raas-dev/configent/commit/6a23ae1192f77470835513dc73c96e886e00a8ce))
+
 ## [1.187.2](https://github.com/raas-dev/configent/compare/1.187.1...1.187.2) (2026-01-01)
 
 
