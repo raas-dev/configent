@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.2](https://github.com/raas-dev/configent/compare/1.187.1...1.187.2) (2026-01-01)
+
+
+### Fixes
+
+* **lima:** align VM names with default template ([486a12f](https://github.com/raas-dev/configent/commit/486a12f017624604600fbfdcf46cb1cef14e79c1))
+* **lima:** move k3s provisioning from debian to ubuntu ([0e29d8b](https://github.com/raas-dev/configent/commit/0e29d8b5656ca8492b34fcb6efb397c3eb67a33d))
+
 ## [1.187.1](https://github.com/raas-dev/configent/compare/1.187.0...1.187.1) (2026-01-01)
 
 
