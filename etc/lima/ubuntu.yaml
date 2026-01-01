@@ -79,6 +79,9 @@ portForwards:
   # rootful docker
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
+  # user docker
+  #- guestSocket: "/run/user/{{.UID}}/docker.sock"
+  #  hostSocket: "{{.Dir}}/sock/docker.sock"
   # user containerd
   - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
     hostSocket: "{{.Dir}}/sock/buildkitd.sock"
