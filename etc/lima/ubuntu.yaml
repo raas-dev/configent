@@ -66,11 +66,15 @@ provision:
         k0s install controller --single
       fi
 
+      # Fix admin.conf permissions via service override
+      mkdir -p /etc/systemd/system/k0scontroller.service.d
+      cat > /etc/systemd/system/k0scontroller.service.d/override.conf <<'EOF'
+      [Service]
+      ExecStartPost=/bin/sh -c 'until [ -f /var/lib/k0s/pki/admin.conf ]; do sleep 1; done; sleep 1; chmod 644 /var/lib/k0s/pki/admin.conf'
+      EOF
+
+      systemctl daemon-reload
       systemctl start k0scontroller
-  - mode: system
-    script: |
-      #!/bin/sh
-      chmod 644 /var/lib/k0s/pki/admin.conf
   - mode: user
     script: |
       #!/bin/sh
