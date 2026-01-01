@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.4](https://github.com/raas-dev/configent/compare/1.187.3...1.187.4) (2026-01-01)
+
+
+### Fixes
+
+* **aliases:** rename v-podman alias to v-fedora ([0c6ff03](https://github.com/raas-dev/configent/commit/0c6ff031c995cf5931ce723e7f0f585b7a3799e4))
+* **lima:** add k3s kubernetes configuration ([5425d5d](https://github.com/raas-dev/configent/commit/5425d5d4f977081c08e8e735731602ac1382110a))
+* **lima:** add rootless docker socket forwarding ([f785cd0](https://github.com/raas-dev/configent/commit/f785cd07de9082627def704de44f1854bd83802b))
+* **lima:** correct shell names in debug hints ([138a2a6](https://github.com/raas-dev/configent/commit/138a2a6930e3e18c3b47a21fb5292771c2825d2d))
+* **lima:** make k0s admin config readable ([c466e17](https://github.com/raas-dev/configent/commit/c466e174dbca7bbc3b55418788f723fac733a614))
+* **lima:** replace k3s with k0s for kubernetes testing ([552cd97](https://github.com/raas-dev/configent/commit/552cd97fbfe5c1eb82a3e5420b1652f1536e7b2b))
+* **mcp-gateway:** remove lima MCP server configuration ([8209ad5](https://github.com/raas-dev/configent/commit/8209ad5f8b47ade24190e192b7017c27f2ba9d80))
+
 ## [1.187.3](https://github.com/raas-dev/configent/compare/1.187.2...1.187.3) (2026-01-01)
 
 
