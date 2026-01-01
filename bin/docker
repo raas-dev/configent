@@ -7,8 +7,9 @@
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
 # shim for running `docker` in lima VM
-: "${NAME:="default"}"
-: "${TEMPLATE:="ubuntu"}"
+
+: "${NAME:="debian"}"
+: "${TEMPLATE:="debian"}"
 
 # Query GitHub API for latest release tag
 get_latest_github_release() {
