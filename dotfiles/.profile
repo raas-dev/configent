@@ -326,11 +326,16 @@ fi
 ### docker/podman CLIs on macOS ################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
+  # docker(d)
   export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
   #export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker_rootless.sock"
-  # CONTAINERD_ADDRESS: nerdctl does not run on macOS (2026-01)
-  export BUILDKIT_HOST="unix://$HOME/.lima/default/sock/buildkitd.sock"
+
+  # podman
   export CONTAINER_HOST="unix://$HOME/.lima/default/sock/podman.sock"
+
+  # containerd
+  # CONTAINERD_ADDRESS: nerdctl does not run on macOS (2026-01)
+  export BUILDKIT_HOST="unix://$HOME/.lima/ubuntu/sock/buildkitd.sock"
 fi
 
 ### lima #######################################################################

@@ -8,7 +8,7 @@
 
 # shim for running `docker-compose` in lima VM
 
-: "${NAME:="debian"}"
+: "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
