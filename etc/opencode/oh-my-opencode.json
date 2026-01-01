@@ -3,25 +3,25 @@
   "google_auth": false,
   "agents": {
     "Sisyphus": {
-      "model": "github-copilot/claude-sonnet-4.5"
+      "model": "google/antigravity-gemini-3-pro-high"
     },
     "librarian": {
-      "model": "github-copilot/claude-sonnet-4.5"
+      "model": "google/antigravity-gemini-3-pro-high"
     },
     "oracle": {
-      "model": "github-copilot/claude-sonnet-4.5"
+      "model": "google/antigravity-gemini-3-pro-high"
     },
     "explore": {
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "frontend-ui-ux-engineer": {
-      "model": "github-copilot/claude-sonnet-4.5"
+      "model": "google/antigravity-gemini-3-pro-high"
     },
     "document-writer": {
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "google/antigravity-gemini-3-flash"
     }
   },
   "disabled_mcps": ["context7", "websearch_exa", "grep_app"]
