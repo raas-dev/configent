@@ -104,3 +104,6 @@ portForwards:
   # rootful podman
   #- guestSocket: "/run/podman/podman.sock"
   #  hostSocket: "{{.Dir}}/sock/podman.sock"
+  # user docker
+  - guestSocket: "/run/user/{{.UID}}/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
