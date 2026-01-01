@@ -82,7 +82,7 @@ portForwards:
   # user docker
   #- guestSocket: "/run/user/{{.UID}}/docker.sock"
   #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
-  # user containerd-buildkit
+  # user buildkit
   - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
     hostSocket: "{{.Dir}}/sock/buildkitd.sock"
   # user podman
