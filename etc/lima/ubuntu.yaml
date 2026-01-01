@@ -33,7 +33,7 @@ ssh:
   forwardAgent: true
 
 containerd:
-  system: false
+  system: false # not tested
   user: true
 
 provision:
@@ -82,7 +82,7 @@ portForwards:
   # user docker
   #- guestSocket: "/run/user/{{.UID}}/docker.sock"
   #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
-  # user containerd
+  # user containerd-buildkit
   - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
     hostSocket: "{{.Dir}}/sock/buildkitd.sock"
   # user podman

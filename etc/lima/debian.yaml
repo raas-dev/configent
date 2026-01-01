@@ -90,9 +90,9 @@ portForwards:
   # user docker
   #- guestSocket: "/run/user/{{.UID}}/docker.sock"
   #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
-  # user containerd
-  #- guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
-  #  hostSocket: "{{.Dir}}/sock/buildkitd.sock"
+  # user k3s-containerd (not tested)
+  #- guestSocket: "/run/k3s/containerd/containerd.sock"
+  #  hostSocket: "{{.Dir}}/sock/containerd.sock"
   # user podman
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"

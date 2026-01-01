@@ -327,7 +327,8 @@ fi
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
-  #xport DOCKER_HOST="unix://$HOME/.lima/default/sock/docker_rootless.sock"
+  #export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker_rootless.sock"
+  # CONTAINERD_ADDRESS: nerdctl does not run on macOS (2026-01)
   export BUILDKIT_HOST="unix://$HOME/.lima/default/sock/buildkitd.sock"
   export CONTAINER_HOST="unix://$HOME/.lima/default/sock/podman.sock"
 fi
