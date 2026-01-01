@@ -233,7 +233,7 @@ v() {
 
 alias v-default='v up debian --name=default --set=.env.GIT_REF=\"main\"'
 alias v-ubuntu='v up ubuntu --name=ubuntu --set=.env.GIT_REF=\"main\"'
-alias v-podman='v up fedora --name=podman --set=.env.GIT_REF=\"main\"'
+alias v-fedora='v up fedora --name=fedora --set=.env.GIT_REF=\"main\"'
 
 ### docker #####################################################################
 
