@@ -39,12 +39,6 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-  - mode: system
-    script: |
-      #!/bin/sh
-      if [ ! -d /var/lib/rancher/k3s ]; then
-        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644" sh -
-      fi
   - mode: user
     script: |
       #!/bin/sh
@@ -64,17 +58,6 @@ probes:
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
 
-copyToHost:
-  - guest: "/etc/rancher/k3s/k3s.yaml"
-    host: "{{.Dir}}/kubeconfig.yaml"
-
-message: |
-  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
-  ------
-  export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
-  kubectl get nodes
-  ------
-
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
   enabled: true
@@ -88,8 +71,8 @@ portForwards:
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
   # user docker
-  #- guestSocket: "/run/user/{{.UID}}/docker.sock"
-  #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
+  - guestSocket: "/run/user/{{.UID}}/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
   # user podman
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"

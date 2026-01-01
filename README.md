@@ -224,9 +224,9 @@ These `bin/` shims wrap the container CLIs to use those runtimes:
 Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs.
 
-The aforementioned shims create and start the necessary virtual machine.
+The aforementioned shims create and start the VM 'debian'.
 
-In addition, VM 'debian' has [k3s](https://k3s.io/) for testing on Kubernetes.
+In addition, VM 'ubuntu' has [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 The following host directories are mounted read-write for VMs:

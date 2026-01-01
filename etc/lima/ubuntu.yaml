@@ -33,7 +33,7 @@ ssh:
   forwardAgent: true
 
 containerd:
-  system: false # not tested
+  system: false # true not tested, may interfere with rootful docker
   user: true
 
 provision:
@@ -48,6 +48,12 @@ provision:
       #!/bin/sh
       ln -s /usr/sbin/iptables /usr/local/bin/iptables
       ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
+  - mode: system
+    script: |
+      #!/bin/sh
+      if [ ! -d /var/lib/rancher/k3s ]; then
+        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644" sh -
+      fi
   - mode: user
     script: |
       #!/bin/sh
@@ -57,15 +63,25 @@ probes:
   - script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 30s bash -c "until command -v docker >/dev/null 2>&1; do sleep 3; done"; then
-        echo >&2 "docker is not installed yet"
+      if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+        echo >&2 "k3s is not running yet"
         exit 1
       fi
-      if ! timeout 30s bash -c "until pgrep dockerd; do sleep 3; done"; then
-        echo >&2 "dockerd is not running"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
+    hint: |
+      The k3s kubeconfig file has not yet been created.
+      Run "limactl shell debian sudo journalctl -u k3s" to check the log.
+      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
+
+copyToHost:
+  - guest: "/etc/rancher/k3s/k3s.yaml"
+    host: "{{.Dir}}/kubeconfig.yaml"
+
+message: |
+  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
+  ------
+  export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
+  kubectl get nodes
+  ------
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
@@ -79,7 +95,7 @@ portForwards:
   # rootful docker
   - guestSocket: "/var/run/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker.sock"
-  # user docker
+  # user docker (service is not started when containerd is already running)
   #- guestSocket: "/run/user/{{.UID}}/docker.sock"
   #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
   # user buildkit
