@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.0](https://github.com/raas-dev/configent/compare/1.186.1...1.187.0) (2026-01-01)
+
+
+### Features
+
+* **docker:** change default lima VM template from ubuntu to debian ([eb4e14f](https://github.com/raas-dev/configent/commit/eb4e14feabad02c79f8f87771ba75b18b64a4170))
+
+
+### Fixes
+
+* **lima:** add clarifying comments on container socket configs ([12c7476](https://github.com/raas-dev/configent/commit/12c7476d5ef8c5e53b0d02790ffd1b3278a907f6))
+* **lima:** comment out user docker and buildkit socket forwarding ([2603b08](https://github.com/raas-dev/configent/commit/2603b089b732ad86c3d608836127aec75eb78bae))
+* **nerdctl:** add k3s containerd socket path ([c3bc07f](https://github.com/raas-dev/configent/commit/c3bc07f26cc15a24e62dad3bb69b4ddfae96809e))
+
 ## [1.186.1](https://github.com/raas-dev/configent/compare/1.186.0...1.186.1) (2026-01-01)
 
 
