@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.5](https://github.com/raas-dev/configent/compare/1.187.4...1.187.5) (2026-01-01)
+
+
+### Fixes
+
+* **lima:** fix admin.conf permissions via systemd override ([e2d5c75](https://github.com/raas-dev/configent/commit/e2d5c75eb47e0daf55c30cedddb907721d621188))
+* **nvim:** update gitsigns.nvim to latest commit ([8722ccb](https://github.com/raas-dev/configent/commit/8722ccb46090d2705732eded4ccbebb0169fe66b))
+* **opencode:** configure antigravity authentication and models ([e7b4b65](https://github.com/raas-dev/configent/commit/e7b4b65727ee74eff34e0d64c3e84abd32560b24))
+* **opencode:** switch agent models to claude ([f059950](https://github.com/raas-dev/configent/commit/f059950b4dc23753951fde74cfa08d9ba44aa3bf))
+
 ## [1.187.4](https://github.com/raas-dev/configent/compare/1.187.3...1.187.4) (2026-01-01)
 
 
