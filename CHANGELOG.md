@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.1](https://github.com/raas-dev/configent/compare/1.187.0...1.187.1) (2026-01-01)
+
+
+### Fixes
+
+* **lima:** remove untested k3s containerd socket config ([3bfd36a](https://github.com/raas-dev/configent/commit/3bfd36a78fe2b7556ab30fd55c7cbad51ca547d4))
+* **nerdctl:** remove k3s containerd socket fallback ([ddd86f2](https://github.com/raas-dev/configent/commit/ddd86f2ac5979396ec64982cf976d294d0dd52a6))
+
 ## [1.187.0](https://github.com/raas-dev/configent/compare/1.186.1...1.187.0) (2026-01-01)
 
 
