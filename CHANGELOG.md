@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.186.1](https://github.com/raas-dev/configent/compare/1.186.0...1.186.1) (2026-01-01)
+
+
+### Fixes
+
+* **install_docker:** ensure docker service starts on installation ([69058c5](https://github.com/raas-dev/configent/commit/69058c57338c4f146da528b8d138f1041db2de45))
+* **lima:** add commented user docker socket configuration ([746798a](https://github.com/raas-dev/configent/commit/746798a242e394e1342198afdcdba9381647d093))
+* **lima:** enable docker rootless socket forwarding for ubuntu ([5d829f2](https://github.com/raas-dev/configent/commit/5d829f2a984a8d090efe8f4acadd362c9dd90809))
+* **lima:** enable docker socket forwarding for debian ([b0b5287](https://github.com/raas-dev/configent/commit/b0b5287291c6c01d5ee2539eae2b723a4e5f0eae))
+* **profile:** add commented docker rootless socket option ([eb5be39](https://github.com/raas-dev/configent/commit/eb5be3983382420265054ab95d0a1db96e05c65f))
+
 ## [1.186.0](https://github.com/raas-dev/configent/compare/1.185.4...1.186.0) (2026-01-01)
 
 
