@@ -479,7 +479,7 @@ version = "0.22.5"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:opencode-ai"]]
-version = "1.0.222"
+version = "1.0.223"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
