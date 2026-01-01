@@ -1,0 +1,78 @@
+images:
+  - location: https://cloud-images.ubuntu.com/minimal/releases/noble/release-20251001/ubuntu-24.04-minimal-cloudimg-amd64.img
+    arch: x86_64
+    digest: sha256:c9d17b2554832605cdb377ace2117822fb02694e8fb56d82f900ce045c7aae57
+  - location: https://cloud-images.ubuntu.com/minimal/releases/noble/release-20251001/ubuntu-24.04-minimal-cloudimg-arm64.img
+    arch: aarch64
+    digest: sha256:3586ec513ecdb47f0d27406f7e36f5300f5bd5d69a4dc7a4732f341435f6504f
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
+  - location: https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img
+    arch: x86_64
+    digest: sha256:c9d17b2554832605cdb377ace2117822fb02694e8fb56d82f900ce045c7aae57
+  - location: https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-arm64.img
+    arch: aarch64
+    digest: sha256:3586ec513ecdb47f0d27406f7e36f5300f5bd5d69a4dc7a4732f341435f6504f
+
+mounts:
+  - location: "~/configent"
+    writable: false
+  - location: "~/dev"
+    writable: true
+  - location: "~/Downloads"
+    writable: true
+  - location: "/tmp/lima"
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: system
+    script: |
+      #!/bin/sh
+      if [ ! -d /var/lib/rancher/k3s ]; then
+        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644" sh -
+      fi
+  - mode: user
+    script: |
+      #!/bin/sh
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
+        echo >&2 "k3s is not running yet"
+        exit 1
+      fi
+    hint: |
+      The k3s kubeconfig file has not yet been created.
+      Run "limactl shell debian sudo journalctl -u k3s" to check the log.
+      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
+
+copyToHost:
+  - guest: "/etc/rancher/k3s/k3s.yaml"
+    host: "{{.Dir}}/kubeconfig.yaml"
+    deleteOnStop: true
+
+message: |
+  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
+  ------
+  export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
+  kubectl get nodes
+  ------
+
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
+hostResolver:
+  enabled: false
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - lima: user-v2
