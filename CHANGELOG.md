@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.186.0](https://github.com/raas-dev/configent/compare/1.185.4...1.186.0) (2026-01-01)
+
+
+### Features
+
+* **podman:** add ubuntu support for podman container runtime ([eee9181](https://github.com/raas-dev/configent/commit/eee9181f232c0875b4a6463afd2882fb70a7ea3e))
+
 ## [1.185.4](https://github.com/raas-dev/configent/compare/1.185.3...1.185.4) (2025-12-31)
 
 
