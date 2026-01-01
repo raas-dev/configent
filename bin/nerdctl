@@ -32,6 +32,8 @@ else
   if [ -z "$CONTAINERD_ADDRESS" ]; then
     if [ -S "$XDG_RUNTIME_DIR/containerd/containerd.sock" ]; then
       export CONTAINERD_ADDRESS="$XDG_RUNTIME_DIR/containerd/containerd.sock"
+    elif [ -S "/run/k3s/containerd/containerd.sock" ]; then
+      export CONTAINERD_ADDRESS="/run/k3s/containerd/containerd.sock"
     elif [ -S "/run/containerd/containerd.sock" ]; then
       export CONTAINERD_ADDRESS="/run/containerd/containerd.sock"
     fi
