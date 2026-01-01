@@ -29,6 +29,7 @@ mounts:
 
 ssh:
   forwardAgent: true
+  overVsock: false # true by default - slow (2026-01)
 
 containerd:
   system: false
