@@ -226,7 +226,7 @@ Container runtimes base on Linux kernel features not present on macOS. Thus
 
 The aforementioned shims create and start the VM 'debian'.
 
-In addition, VM 'ubuntu' has [k3s](https://k3s.io/) for testing on Kubernetes.
+VM 'ubuntu' runs [k0s](https://k0sproject.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 The following host directories are mounted read-write for VMs:

@@ -33,7 +33,7 @@ ssh:
   forwardAgent: true
 
 containerd:
-  system: false # true not tested, may interfere with rootful docker
+  system: false # true may interfere with rootful docker and not work
   user: true
 
 provision:
@@ -51,30 +51,44 @@ provision:
   - mode: system
     script: |
       #!/bin/sh
-      if [ ! -d /var/lib/rancher/k3s ]; then
-        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644" sh -
+      set -eux
+      command -v k0s >/dev/null 2>&1 && exit 0
+
+      # install k0s prerequisites
+      curl -sfL https://get.k0s.sh | sh
+  - mode: system
+    script: |
+      #!/bin/sh
+      set -eux
+
+      #  start k0s as a single node cluster
+      if ! systemctl status k0scontroller >/dev/null 2>&1; then
+        k0s install controller --single
       fi
+
+      systemctl start k0scontroller
   - mode: user
     script: |
       #!/bin/sh
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
 probes:
-  - script: |
+  - description: "k0s to be running"
+    script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 30s bash -c "until test -f /etc/rancher/k3s/k3s.yaml; do sleep 3; done"; then
-        echo >&2 "k3s is not running yet"
+      if ! timeout 30s bash -c "until sudo test -f /var/lib/k0s/pki/admin.conf; do sleep 3; done"; then
+        echo >&2 "k0s kubeconfig file has not yet been created"
         exit 1
       fi
     hint: |
-      The k3s kubeconfig file has not yet been created.
-      Run "limactl shell debian sudo journalctl -u k3s" to check the log.
-      If that is still empty, check the bottom of the log at "/var/log/cloud-init-output.log".
+      The k0s control plane is not ready yet.
+      Run "limactl shell k0s sudo journalctl -u k0scontroller" to debug.
 
 copyToHost:
-  - guest: "/etc/rancher/k3s/k3s.yaml"
+  - guest: "/var/lib/k0s/pki/admin.conf"
     host: "{{.Dir}}/kubeconfig.yaml"
+    deleteOnStop: true
 
 message: |
   To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
