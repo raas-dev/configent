@@ -64,6 +64,7 @@ if [ ! -x "/usr/bin/docker" ]; then
   dockerd-rootless-setuptool.sh install --force
   systemctl --user enable --now dbus
   systemctl --user enable --now docker
+  systemctl --user start docker
   $SUDO loginctl enable-linger "$USER"
 fi
 
