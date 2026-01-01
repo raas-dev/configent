@@ -8,8 +8,8 @@
 
 # shim for running `podman` in lima VM
 
-: "${NAME:="podman"}"
-: "${TEMPLATE:="fedora"}"
+: "${NAME:="default"}"
+: "${TEMPLATE:="ubuntu"}"
 
 # Query GitHub API for latest release tag
 get_latest_github_release() {

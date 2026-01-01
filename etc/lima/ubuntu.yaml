@@ -82,3 +82,6 @@ portForwards:
   # user containerd
   - guestSocket: "/run/user/{{.UID}}/buildkit-default/buildkitd.sock"
     hostSocket: "{{.Dir}}/sock/buildkitd.sock"
+  # user podman
+  - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
+    hostSocket: "{{.Dir}}/sock/podman.sock"
