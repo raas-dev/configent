@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.7](https://github.com/raas-dev/configent/compare/1.187.6...1.187.7) (2026-01-02)
+
+
+### Fixes
+
+* **gonzo:** add postinstall script and configuration ([0e6dc5b](https://github.com/raas-dev/configent/commit/0e6dc5b12503f0cc3f999f1fb5cd22a244da0220))
+* **gonzo:** improve ayu-dark theme color accuracy ([dfd1d82](https://github.com/raas-dev/configent/commit/dfd1d822b768dd105392115d091188c2902f9262))
+* **postinstall_bat:** create bat config directory correctly ([880cc76](https://github.com/raas-dev/configent/commit/880cc761fd39420977eac18e8b38e166fca04913))
+
 ## [1.187.6](https://github.com/raas-dev/configent/compare/1.187.5...1.187.6) (2026-01-02)
 
 
