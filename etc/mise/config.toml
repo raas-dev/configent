@@ -14,7 +14,6 @@ jq = 'latest'
 lsd = 'latest'
 neovim = 'latest'
 numbat = 'latest'
-oxker = 'latest'
 ripgrep = 'latest'
 sd = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
@@ -50,9 +49,10 @@ github-cli = 'latest'
 # containers
 #docker-cli = 'latest'
 #dive = 'latest'
-lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
-#podman = 'latest'
 lazyjournal = 'latest'
+lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+oxker = 'latest'
+#podman = 'latest'
 trivy = 'latest'
 'github:owenrumney/lazytrivy' = 'latest'
 
