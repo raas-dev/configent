@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.10](https://github.com/raas-dev/configent/compare/1.187.9...1.187.10) (2026-01-02)
+
+
+### Fixes
+
+* **gonzo:** remove postinstall script ([eeba123](https://github.com/raas-dev/configent/commit/eeba123c3e2c48620afce33a554aa844fade4233))
+
 ## [1.187.9](https://github.com/raas-dev/configent/compare/1.187.8...1.187.9) (2026-01-02)
 
 
