@@ -614,37 +614,84 @@ t() {
 
   # Check if any of the arguments need sudo (not readable)
   # For globs, check if any matching files exist and are readable
+  # Portable approach that works in both bash and zsh
   if [ $# -eq 0 ]; then
     # Default case: check if any .log files are readable
-    if ! compgen -G "*.log" >/dev/null 2>&1; then
-      # No .log files exist, might need sudo
-      needs_sudo=true
-    else
-      # Check each matching file
+    local found_files=false
+    # Use a portable method to check glob expansion
+    # In zsh, use $~ to expand globs; in bash, globs expand automatically
+    if [ -n "${ZSH_VERSION:-}" ]; then
+      setopt localoptions null_glob
       for file in *.log; do
+        found_files=true
         if [ ! -r "$file" ] 2>/dev/null; then
           needs_sudo=true
           break
         fi
       done
+    else
+      # bash: save nullglob state, enable it, then restore
+      local nullglob_was_set=false
+      if shopt -q nullglob 2>/dev/null; then
+        nullglob_was_set=true
+      fi
+      shopt -s nullglob
+      for file in *.log; do
+        found_files=true
+        if [ ! -r "$file" ] 2>/dev/null; then
+          needs_sudo=true
+          break
+        fi
+      done
+      if [ "$nullglob_was_set" = false ]; then
+        shopt -u nullglob
+      fi
+    fi
+    # If no files found, might need sudo
+    if [ "$found_files" = false ]; then
+      needs_sudo=true
     fi
   else
     # Check each argument
     for arg in "$@"; do
       # Handle globs
       if [[ "$arg" == *"*"* ]] || [[ "$arg" == *"?"* ]]; then
-        if ! compgen -G "$arg" >/dev/null 2>&1; then
-          # No files match, might need sudo
-          needs_sudo=true
-          break
-        else
-          # Check each matching file
-          for file in $arg; do
+        local found_files=false
+        if [ -n "${ZSH_VERSION:-}" ]; then
+          setopt localoptions null_glob
+          # In zsh, expand glob pattern first, then iterate
+          local expanded_files
+          # shellcheck disable=SC2295  # $~ is zsh-specific glob expansion syntax
+          expanded_files=($~arg)
+          for file in "${expanded_files[@]}"; do
+            found_files=true
             if [ ! -r "$file" ] 2>/dev/null; then
               needs_sudo=true
               break 2
             fi
           done
+        else
+          # bash: save nullglob state, enable it, then restore
+          local nullglob_was_set=false
+          if shopt -q nullglob 2>/dev/null; then
+            nullglob_was_set=true
+          fi
+          shopt -s nullglob
+          for file in $arg; do
+            found_files=true
+            if [ ! -r "$file" ] 2>/dev/null; then
+              needs_sudo=true
+              break 2
+            fi
+          done
+          if [ "$nullglob_was_set" = false ]; then
+            shopt -u nullglob
+          fi
+        fi
+        # If no files found, might need sudo
+        if [ "$found_files" = false ]; then
+          needs_sudo=true
+          break
         fi
       else
         # Regular file
