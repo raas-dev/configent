@@ -27,7 +27,7 @@
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-lint": { "branch": "master", "commit": "1f19dacd945a7b1a57f29f32b2d7168384df3d36" },
   "nvim-lspconfig": { "branch": "master", "commit": "ac04ec3c2af08e9821b4eb64ede86072b9b213bf" },
-  "nvim-treesitter": { "branch": "main", "commit": "1927c76aec829d40dcad24b6469cb639f1334096" },
+  "nvim-treesitter": { "branch": "main", "commit": "737088f8571293f6a1ef8cd6c858d5daf9a38162" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "ecd03f5811eb5c66d2fa420b79121b866feecd82" },
   "nvim-ts-autotag": { "branch": "main", "commit": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc" },
   "nvim-web-devicons": { "branch": "master", "commit": "6788013bb9cb784e606ada44206b0e755e4323d7" },
