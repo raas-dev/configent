@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.8](https://github.com/raas-dev/configent/compare/1.187.7...1.187.8) (2026-01-02)
+
+
+### Fixes
+
+* **gonzo:** remove custom skin configuration ([0ebce96](https://github.com/raas-dev/configent/commit/0ebce960baff761e448f4b4733f907f0995e6396))
+
 ## [1.187.7](https://github.com/raas-dev/configent/compare/1.187.6...1.187.7) (2026-01-02)
 
 
