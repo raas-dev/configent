@@ -609,31 +609,67 @@ kalk() {
 
 # Follow logs with (multi)tail
 t() {
-  local pattern="${1:-"*.log"}"
-  local args
+  local args="${*:-*.log}"
+  local needs_sudo=false
+
+  # Check if any of the arguments need sudo (not readable)
+  # For globs, check if any matching files exist and are readable
   if [ $# -eq 0 ]; then
-    args="*.log"
+    # Default case: check if any .log files are readable
+    if ! compgen -G "*.log" >/dev/null 2>&1; then
+      # No .log files exist, might need sudo
+      needs_sudo=true
+    else
+      # Check each matching file
+      for file in *.log; do
+        if [ ! -r "$file" ] 2>/dev/null; then
+          needs_sudo=true
+          break
+        fi
+      done
+    fi
   else
-    args="$*"
+    # Check each argument
+    for arg in "$@"; do
+      # Handle globs
+      if [[ "$arg" == *"*"* ]] || [[ "$arg" == *"?"* ]]; then
+        if ! compgen -G "$arg" >/dev/null 2>&1; then
+          # No files match, might need sudo
+          needs_sudo=true
+          break
+        else
+          # Check each matching file
+          for file in $arg; do
+            if [ ! -r "$file" ] 2>/dev/null; then
+              needs_sudo=true
+              break 2
+            fi
+          done
+        fi
+      else
+        # Regular file
+        if [ ! -r "$arg" ] 2>/dev/null; then
+          needs_sudo=true
+          break
+        fi
+      fi
+    done
   fi
 
   if command -v multitail >/dev/null; then
-    if [ -r "$pattern" ] || [ "$pattern" = "*.log" ]; then
-      # shellcheck disable=SC2086  # must be without quotes to expand args
-      # Use expect to auto-dismiss "terminal too small" warning
-      expect -c "spawn sh -c \"eval multitail $args\"; expect \"Press any key\" { send \"\r\"; interact }" || eval multitail $args
-    else
-      # shellcheck disable=SC2086
+    # shellcheck disable=SC2086  # must be without quotes to expand args
+    # Use expect to auto-dismiss "terminal too small" warning
+    if [ "$needs_sudo" = true ]; then
       expect -c "spawn sh -c \"eval sudo multitail $args\"; expect \"Press any key\" { send \"\r\"; interact }" || eval sudo multitail $args
-    fi
-    return
-  else
-    if [ -r "$pattern" ] || [ "$pattern" = "*.log" ]; then
-      # shellcheck disable=SC2086
-      eval tail --follow --verbose --lines=20 $args
     else
-      # shellcheck disable=SC2086
+      expect -c "spawn sh -c \"eval multitail $args\"; expect \"Press any key\" { send \"\r\"; interact }" || eval multitail $args
+    fi
+  else
+    # shellcheck disable=SC2086
+    if [ "$needs_sudo" = true ]; then
       eval sudo tail --follow --verbose --lines=20 $args
+    else
+      eval tail --follow --verbose --lines=20 $args
     fi
   fi
 }
