@@ -274,6 +274,11 @@ backend = "github:ouch-org/ouch"
 "platforms.windows-x64" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071214"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-pc-windows-gnu.zip", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071208"}
 
+[[tools."github:owenrumney/lazytrivy"]]
+version = "1.2.9"
+backend = "github:owenrumney/lazytrivy"
+"platforms.macos-arm64" = { checksum = "sha256:9bcac2c8de72f4645df85505f38017bbee4cfaa6e27af959c18e7632b75dde27", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-darwin-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806126"}
+
 [[tools."github:pranshuparmar/witr"]]
 version = "0.1.5"
 backend = "github:pranshuparmar/witr"
