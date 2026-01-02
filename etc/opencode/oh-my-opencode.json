@@ -5,6 +5,12 @@
     "Sisyphus": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
+    "Planner-Sisyphus": {
+      "model": "google/antigravity-gemini-3-pro-high"
+    },
+    "Builder-Sisyphus": {
+      "model": "google/antigravity-gemini-3-pro-flash"
+    },
     "librarian": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
