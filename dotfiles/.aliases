@@ -619,6 +619,10 @@ t() {
 
 # Follow logs with lnav (present on most Linux distros' repositories)
 tl() {
+  if ! command -v lnav >/dev/null; then
+    echo "Error: lnav is not installed" >&2
+    return 127
+  fi
   local log_file="${1:-"/var/log/cloud-init-output.log"}"
   if [ -r "$log_file" ]; then
     lnav -c ':config /ui/theme night-owl' \
@@ -633,6 +637,10 @@ tl() {
 
 # Follow logs with tailspin (installed user-wide by mise)
 ts() {
+  if ! command -v tspin >/dev/null; then
+    echo "Error: tspin is not installed" >&2
+    return 127
+  fi
   local log_file="${1:-"/var/log/cloud-init-output.log"}"
   if [ -r "$log_file" ]; then
     tspin --follow "$log_file"
