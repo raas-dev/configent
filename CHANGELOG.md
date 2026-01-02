@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.13](https://github.com/raas-dev/configent/compare/1.187.12...1.187.13) (2026-01-02)
+
+
+### Fixes
+
+* **aliases:** generalize log following to support patterns ([59474d1](https://github.com/raas-dev/configent/commit/59474d1d2d898e0715ee8877019fab13e11f5850))
+* **aliases:** move shellcheck directive to top ([c630a23](https://github.com/raas-dev/configent/commit/c630a2384975b89c9c6b570b3fa2686218dac625))
+* **aliases:** refactor log following into separate functions ([36dbaca](https://github.com/raas-dev/configent/commit/36dbaca05edf906ced9b29340feb8c854cc5abce))
+
 ## [1.187.12](https://github.com/raas-dev/configent/compare/1.187.11...1.187.12) (2026-01-02)
 
 
