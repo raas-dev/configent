@@ -35,12 +35,8 @@ provision:
   - mode: user
     script: |
       #!/bin/sh
-      [ -f /etc/environment ] && . /etc/environment
-      if [ -n "${GIT_REF:-}" ]; then
-        curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF="$GIT_REF" sh &
-      else
-        curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
-      fi
+      [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
