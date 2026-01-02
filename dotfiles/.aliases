@@ -1,6 +1,8 @@
 #!/bin/bash
 # the above shebang is only for ShellCheck, this file is not executable
 
+# shellcheck disable=SC2139  # ok to expand skipped_managers at defined-time
+
 ### IDE ########################################################################
 
 # export DEFALT_IDE="<BIN_NAME>" in ~/.rclocal to override what's in .profile
@@ -8,7 +10,6 @@ alias code="\$DEFAULT_IDE --reuse-window"
 
 ### Upgrade for all package managers ###########################################
 
-# shellcheck disable=SC2139  # ok to expand variable read-time, not run-time
 skipped_managers="containers helm powershell uv"
 alias up="topgrade --disable system restarts $skipped_managers"
 alias dup="topgrade --disable $skipped_managers"
