@@ -36,6 +36,9 @@ $SUDO zypper install -y ca-certificates
 # Cryptography
 $SUDO zypper install -y gpg2
 
+# Log file navigator
+$SUDO zypper install -y lnav
+
 # Common build tools
 $SUDO zypper install -y bison cmake gcc gcc-c++ make m4 pkg-config
 
@@ -46,7 +49,7 @@ $SUDO zypper install -y readline-devel libbz2-devel libffi-devel \
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils file findutils git git-lfs htop \
-  lnav lsb-release lsof man pandoc procps traceroute unzip wget whois zip
+  lsb-release lsof man pandoc procps traceroute unzip wget whois zip
 
 # Bash
 $SUDO zypper install -y bash

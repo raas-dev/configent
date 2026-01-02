@@ -48,6 +48,9 @@ $SUDO apt-get install -y ca-certificates
 # Cryptography
 $SUDO apt-get install -y gnupg
 
+# Log file navigator
+$SUDO apt-get install -y lnav
+
 # Common build tools
 $SUDO apt-get install -y bison build-essential cmake m4 pkg-config
 
@@ -58,8 +61,7 @@ $SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
 
 # Utils
 $SUDO apt-get install -y coreutils dnsutils file findutils git git-lfs htop \
-  iputils-ping lnav lsb-release lsof pandoc procps traceroute unzip wget whois \
-  zip
+  iputils-ping lsb-release lsof pandoc procps traceroute unzip wget whois zip
 
 # Bash
 $SUDO apt-get install -y bash

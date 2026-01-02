@@ -45,6 +45,9 @@ $SUDO dnf install -y ca-certificates
 # Cryptography
 $SUDO dnf install -y gnupg
 
+# Log file navigator
+$SUDO dnf install -y lnav
+
 # Common build tools
 $SUDO dnf install -y bison cmake gcc gcc-c++ libicu make m4 pkgconf-pkg-config
 
@@ -53,7 +56,7 @@ $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
   openssl-devel readline-devel sqlite-devel zlib-devel xz-devel libxml2-devel
 
 # Utils
-$SUDO dnf install -y bind-utils coreutils file findutils git git-lfs htop lnav \
+$SUDO dnf install -y bind-utils coreutils file findutils git git-lfs htop \
   lsof pandoc procps tar traceroute unzip wget which whois zip
 
 # Bash

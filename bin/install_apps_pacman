@@ -33,6 +33,9 @@ $SUDO pacman --noconfirm --needed -S ca-certificates
 # Cryptography
 $SUDO pacman --noconfirm --needed -S gnupg
 
+# Log file navigator
+$SUDO pacman --noconfirm --needed -S lnav
+
 # Common build tools
 $SUDO pacman --noconfirm --needed -S base-devel bison bzip2 cmake gcc glibc
 
@@ -45,7 +48,7 @@ $SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
 
 # Utils
 $SUDO pacman --noconfirm --needed -S coreutils bind file findutils git git-lfs \
-  htop less lnav lsb-release lsof procps traceroute unzip wget which whois zip
+  htop less lsb-release lsof procps traceroute unzip wget which whois zip
 
 # Bash
 $SUDO pacman --noconfirm --needed -S bash

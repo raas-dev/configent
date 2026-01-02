@@ -41,6 +41,9 @@ $SUDO apk add ca-certificates
 # Cryptography
 $SUDO apk add gnupg
 
+# Log file navigator
+$SUDO apk add lnav
+
 # Locales
 $SUDO apk add musl-locales
 
@@ -53,7 +56,7 @@ $SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev musl-dev \
 
 # Utils
 $SUDO apk add coreutils curl bind-tools file findutils git git-lfs htop less \
-  lnav pandoc-cli procps zip unzip util-linux wget whois
+  pandoc-cli procps zip unzip util-linux wget whois
 
 # Bash
 $SUDO apk add bash
