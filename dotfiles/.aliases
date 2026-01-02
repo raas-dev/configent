@@ -136,7 +136,7 @@ alias p='procs --pager always --tree'
 alias q='clear'
 alias r='exec $SHELL'
 alias s='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
-alias t='logs'
+# t is for tail logs, see t()
 alias u='diskonaut'
 # v is for limactl wrapper, see v()
 alias w='which -a'
@@ -606,31 +606,37 @@ kalk() {
   fi
 }
 
-# Follow the given log file, or cloud-init output if log file is not given
-logs() {
+# Follow logs with tail
+t() {
   local log_file="${1:-"/var/log/cloud-init-output.log"}"
-  if command -v tspin >/dev/null; then
-    if [ -r "$log_file" ]; then
-      tspin --follow "$log_file"
-    else
-      sudo "$(which tspin)" --follow "$log_file"
-    fi
-  elif command -v lnav >/dev/null; then
-    if [ -r "$log_file" ]; then
-      lnav -c ':config /ui/theme night-owl' \
-        -c ':config /ui/mouse/mode enabled' \
-        -c ':goto -1' "$log_file"
-    else
-      sudo lnav -c ':config /ui/theme night-owl' \
-        -c ':config /ui/mouse/mode enabled' \
-        -c ':goto -1' "$log_file"
-    fi
+  if [ -r "$log_file" ]; then
+    tail --follow --verbose --lines=20 "$log_file"
   else
-    if [ -r "$log_file" ]; then
-      tail --follow --verbose --lines=20 "$log_file"
-    else
-      sudo tail --follow --verbose --lines=20 "$log_file"
-    fi
+    sudo tail --follow --verbose --lines=20 "$log_file"
+  fi
+}
+
+# Follow logs with lnav (present on most Linux distros' repositories)
+tl() {
+  local log_file="${1:-"/var/log/cloud-init-output.log"}"
+  if [ -r "$log_file" ]; then
+    lnav -c ':config /ui/theme night-owl' \
+      -c ':config /ui/mouse/mode enabled' \
+      -c ':goto -1' "$log_file"
+  else
+    sudo lnav -c ':config /ui/theme night-owl' \
+      -c ':config /ui/mouse/mode enabled' \
+      -c ':goto -1' "$log_file"
+  fi
+}
+
+# Follow logs with tailspin (installed user-wide by mise)
+ts() {
+  local log_file="${1:-"/var/log/cloud-init-output.log"}"
+  if [ -r "$log_file" ]; then
+    tspin --follow "$log_file"
+  else
+    sudo "$(which tspin)" --follow "$log_file"
   fi
 }
 
