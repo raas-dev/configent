@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.12](https://github.com/raas-dev/configent/compare/1.187.11...1.187.12) (2026-01-02)
+
+
+### Fixes
+
+* **aliases:** enable mouse mode in lnav ([87a9819](https://github.com/raas-dev/configent/commit/87a98193be86fd3b57baf2518f85a717711206c4))
+* **install:** reorganize lnav installation in package managers ([51bae38](https://github.com/raas-dev/configent/commit/51bae38b9333590650362e3d1833663414ec3655))
+
 ## [1.187.11](https://github.com/raas-dev/configent/compare/1.187.10...1.187.11) (2026-01-02)
 
 
