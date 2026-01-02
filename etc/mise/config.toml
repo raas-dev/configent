@@ -52,6 +52,7 @@ github-cli = 'latest'
 #dive = 'latest'
 lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 #podman = 'latest'
+lazyjournal = 'latest'
 trivy = 'latest'
 'github:owenrumney/lazytrivy' = 'latest'
 

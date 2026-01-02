@@ -430,6 +430,10 @@ version = "1.35.0"
 backend = "aqua:kubernetes/kubernetes/kubectl"
 "platforms.macos-arm64" = { checksum = "sha256:cf699c56340dc775230fde4ef84237d27563ea6ef52164c7d078072b586c3918", url = "https://dl.k8s.io/v1.35.0/bin/darwin/arm64/kubectl"}
 
+[[tools.lazyjournal]]
+version = "0.8.3"
+backend = "aqua:Lifailon/lazyjournal"
+
 [[tools.lima]]
 version = "2.0.3"
 backend = "aqua:lima-vm/lima"
