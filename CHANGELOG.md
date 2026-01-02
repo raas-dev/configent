@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.6](https://github.com/raas-dev/configent/compare/1.187.5...1.187.6) (2026-01-02)
+
+
+### Fixes
+
+* **mise:** add gonzo tool installation ([f09e190](https://github.com/raas-dev/configent/commit/f09e190bab166d3036d7012860950ae0fb0e45e4))
+* **mise:** add lazyjournal tool installation ([a10d32a](https://github.com/raas-dev/configent/commit/a10d32afaac1c741ad50b2a243daa62eaa458fb4))
+* **mise:** add lazytrivy tool installation ([e26a944](https://github.com/raas-dev/configent/commit/e26a9447398dc49898855b5ad7c05a9774c03914))
+* **mise:** enable kubectl installation ([59aaccf](https://github.com/raas-dev/configent/commit/59aaccf4848285cdda32474318db5f8e7689a93c))
+* **opencode:** add permissions to planner and builder agents ([4068365](https://github.com/raas-dev/configent/commit/406836533abe58ddeed950318cd37792b3d571cc))
+* **opencode:** add planner and builder agent models ([51de751](https://github.com/raas-dev/configent/commit/51de7515c25eb5bfca3f9bef2003817df05666a3))
+* **opencode:** remove builder permissions config ([1655ff4](https://github.com/raas-dev/configent/commit/1655ff4e4336ff7697725ff65b7b24470de46fc2))
+
 ## [1.187.5](https://github.com/raas-dev/configent/compare/1.187.4...1.187.5) (2026-01-01)
 
 
