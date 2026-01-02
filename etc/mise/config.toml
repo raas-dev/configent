@@ -55,7 +55,6 @@ oxker = 'latest'
 #podman = 'latest'
 trivy = 'latest'
 'github:owenrumney/lazytrivy' = 'latest'
-'github:control-theory/gonzo' = 'latest'
 
 # cloud
 awscli = 'latest'

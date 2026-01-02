@@ -196,10 +196,6 @@ command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
 
 command -v delta >/dev/null && export GIT_PAGER="delta"
 
-### gonzo #####################################################################
-
-export GONZO_AI_MODEL="gpt-5.1"
-
 ### Azure bicep ################################################################
 
 path_append "$HOME/.azure/bin"
