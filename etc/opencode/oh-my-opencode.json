@@ -6,10 +6,20 @@
       "model": "google/antigravity-gemini-3-pro-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-pro-high",
+      "permission": {
+        "bash": "allow",
+        "skill": "allow",
+        "webfetch": "allow"
+      }
     },
     "Builder-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-flash"
+      "model": "google/antigravity-gemini-3-pro-flash",
+      "permission": {
+        "bash": "allow",
+        "skill": "allow",
+        "webfetch": "allow"
+      }
     },
     "librarian": {
       "model": "google/antigravity-gemini-3-pro-high"
