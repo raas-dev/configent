@@ -36,7 +36,12 @@ provision:
   - mode: user
     script: |
       #!/bin/sh
-      wget -q -O - https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+      [ -f /etc/environment ] && . /etc/environment
+      if [ -n "${GIT_REF:-}" ]; then
+        wget -q -O - https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF="$GIT_REF" sh &
+      else
+        wget -q -O - https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+      fi
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
