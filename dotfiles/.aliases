@@ -609,11 +609,11 @@ kalk() {
 
 # Follow logs with tail
 t() {
-  local log_file="${1:-"/var/log/cloud-init-output.log"}"
-  if [ -r "$log_file" ]; then
-    tail --follow --verbose --lines=20 "$log_file"
+  local pattern="${1:-"*.log"}"
+  if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
+    eval tail --follow --verbose --lines=20 "$pattern"
   else
-    sudo tail --follow --verbose --lines=20 "$log_file"
+    eval sudo tail --follow --verbose --lines=20 "$pattern"
   fi
 }
 
