@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.11](https://github.com/raas-dev/configent/compare/1.187.10...1.187.11) (2026-01-02)
+
+
+### Fixes
+
+* **aliases:** configure lnav theme and jump to end ([278fb6c](https://github.com/raas-dev/configent/commit/278fb6c5e98589f655b36c3f3e33bcc0c2932f3a))
+* **install:** add lnav log file navigator to all package managers ([699628e](https://github.com/raas-dev/configent/commit/699628e9bc24b1f18a6fbfb597a17785ba4eca48))
+
 ## [1.187.10](https://github.com/raas-dev/configent/compare/1.187.9...1.187.10) (2026-01-02)
 
 
