@@ -21,7 +21,7 @@ if [ ! -r "$backup_path/.config/bat/themes" ]; then
     cp -RP "$HOME/.config/bat/themes" "$backup_path/.config/bat/themes"
   fi
 fi
-mkdir -p "$HOME/.config/bat/themes"
+mkdir -p "$HOME/.config/bat"
 rm -rf "$HOME/.config/bat/themes"
 ln -sfnv "$config_path/themes" "$HOME/.config/bat/themes"
 
