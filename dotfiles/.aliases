@@ -617,9 +617,9 @@ logs() {
     fi
   elif command -v lnav >/dev/null; then
     if [ -r "$log_file" ]; then
-      lnav --follow "$log_file"
+      lnav -c ':config /ui/theme night-owl' -c ':goto -1' "$log_file"
     else
-      sudo lnav --follow "$log_file"
+      sudo lnav -c ':config /ui/theme night-owl' -c ':goto -1' "$log_file"
     fi
   else
     if [ -r "$log_file" ]; then
