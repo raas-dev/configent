@@ -615,6 +615,12 @@ logs() {
     else
       sudo "$(which tspin)" --follow "$log_file"
     fi
+  elif command -v lnav >/dev/null; then
+    if [ -r "$log_file" ]; then
+      lnav --follow "$log_file"
+    else
+      sudo lnav --follow "$log_file"
+    fi
   else
     if [ -r "$log_file" ]; then
       tail --follow --verbose --lines=20 "$log_file"

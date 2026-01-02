@@ -65,6 +65,9 @@ brew install git-extras
 # Git extension for versioning large files
 brew install git-lfs
 
+# Log file navigator (https://lnav.org/)
+brew install lnav
+
 # nmap (https://nmap.org/)
 brew install nmap
 
