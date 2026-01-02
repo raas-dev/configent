@@ -63,6 +63,9 @@ $SUDO zypper install -y vim
 # Neovim
 $SUDO zypper install -y neovim
 
+# MultiTail and expect
+$SUDO zypper install -y multitail expect
+
 # git-extras, not available in OpenSUSE (as of 2025-01)
 #$SUDO zypper install -y git-extras
 

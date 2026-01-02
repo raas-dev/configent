@@ -75,6 +75,9 @@ $SUDO apt-get install -y vim
 # Neovim
 $SUDO apt-get install -y neovim
 
+# MultiTail and expect
+$SUDO apt-get install -y multitail expect
+
 # git-extras
 $SUDO apt-get install -y git-extras
 

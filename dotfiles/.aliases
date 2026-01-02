@@ -617,17 +617,18 @@ t() {
     args="$*"
   fi
 
-  if command -v multitail >/dev/null 2>&1; then
-    if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
-      # shellcheck disable=SC2086
-      eval multitail $args
+  if command -v multitail >/dev/null; then
+    if [ -r "$pattern" ] || [ "$pattern" = "*.log" ]; then
+      # shellcheck disable=SC2086  # must be without quotes to expand args
+      # Use expect to auto-dismiss "terminal too small" warning
+      expect -c "spawn sh -c \"eval multitail $args\"; expect \"Press any key\" { send \"\r\"; interact }" || eval multitail $args
     else
       # shellcheck disable=SC2086
-      eval sudo multitail $args
+      expect -c "spawn sh -c \"eval sudo multitail $args\"; expect \"Press any key\" { send \"\r\"; interact }" || eval sudo multitail $args
     fi
     return
   else
-    if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
+    if [ -r "$pattern" ] || [ "$pattern" = "*.log" ]; then
       # shellcheck disable=SC2086
       eval tail --follow --verbose --lines=20 $args
     else

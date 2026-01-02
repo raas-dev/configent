@@ -71,6 +71,9 @@ $SUDO dnf install -y vim
 # Neovim
 $SUDO dnf install -y neovim
 
+# MultiTail and expect
+$SUDO dnf install -y multitail expect
+
 # git-extras
 # not available in 2025-06: CentOS Stream 10, Alma Linux 10, Rocky Linux 10
 $SUDO dnf install -y git-extras

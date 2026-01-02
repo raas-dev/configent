@@ -62,6 +62,9 @@ $SUDO pacman --noconfirm --needed -S vim
 # Neovim
 $SUDO pacman --noconfirm --needed -S neovim
 
+# MultiTail and expect
+$SUDO pacman --noconfirm --needed -S multitail expect
+
 # Use AUR for git-extras
 # See: https://pkgs.org/download/git-extras
 

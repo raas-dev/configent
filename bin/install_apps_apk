@@ -70,6 +70,9 @@ $SUDO apk add vim
 # Neovim
 $SUDO apk add neovim
 
+# MultiTail and expect
+$SUDO apk add multitail expect
+
 # Git-extras
 $SUDO apk add git-extras@testing
 

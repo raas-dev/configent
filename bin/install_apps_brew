@@ -68,6 +68,9 @@ brew install git-lfs
 # Log file navigator (https://lnav.org/)
 brew install lnav
 
+# MultiTail and expect
+brew install multitail expect
+
 # nmap (https://nmap.org/)
 brew install nmap
 
