@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.187.9](https://github.com/raas-dev/configent/compare/1.187.8...1.187.9) (2026-01-02)
+
+
+### Fixes
+
+* **gonzo:** remove model configuration and tool installation ([8ce234a](https://github.com/raas-dev/configent/commit/8ce234a4e3b28006e36b5f144344eb9927c26109))
+
 ## [1.187.8](https://github.com/raas-dev/configent/compare/1.187.7...1.187.8) (2026-01-02)
 
 
