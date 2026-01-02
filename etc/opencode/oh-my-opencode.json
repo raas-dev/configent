@@ -14,12 +14,7 @@
       }
     },
     "Builder-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-flash",
-      "permission": {
-        "bash": "allow",
-        "skill": "allow",
-        "webfetch": "allow"
-      }
+      "model": "google/antigravity-gemini-3-pro-flash"
     },
     "librarian": {
       "model": "google/antigravity-gemini-3-pro-high"
