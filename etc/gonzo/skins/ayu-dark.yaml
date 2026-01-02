@@ -1,44 +1,46 @@
 name: ayu-dark
-description: Ayu Dark theme created by AI ayu-theme/ayu-colors
+description: Ayu Dark theme - elegant dark colors with warm accents
+# Created by AI from:
+# https://github.com/ayu-theme/ayu-colors/blob/master/src/dark.ts
 author: asyrjasalo
 colors:
   # UI Component Colors
-  primary: "#E6B450"           # common.accent.tint
-  secondary: "#59C2FF"         # syntax.entity
-  background: "#10141C"        # editor.bg
-  surface: "#161A24"           # editor.line
-  border: "#6C7380"            # editor.gutter.active (90% opacity approximation)
-  border_active: "#E6B450"     # common.accent.tint
-  text: "#BFBDB6"              # editor.fg
-  text_secondary: "#6C7380"    # editor.gutter colors (visible gray)
-  text_inverse: "#10141C"      # editor.bg
+  primary: "#E6B450"           # caret
+  secondary: "#59C2FF"         # entity
+  background: "#10141C"        # background
+  surface: "#161A24"           # lineHighlight
+  border: "#5B6875"            # comment
+  border_active: "#E6B450"     # caret
+  text: "#BFBDB6"              # foreground
+  text_secondary: "#5B6875"    # comment
+  text_inverse: "#10141C"      # background
 
   # Chart and Data Colors
-  chart_title: "#FFB454"       # syntax.func
-  chart_bar: "#AAD94C"         # syntax.string
-  chart_accent: "#FF8F40"      # syntax.keyword
+  chart_title: "#FFB454"       # function
+  chart_bar: "#AAD94C"         # string
+  chart_accent: "#FF8F40"      # keyword
 
   # Log Entry Colors
-  log_timestamp: "#6C7380"     # editor.gutter colors
-  log_message: "#BFBDB6"       # editor.fg
-  log_background: "#10141C"    # editor.bg
-  log_selected: "#3388FF40"    # editor.selection.active (25% alpha)
+  log_timestamp: "#5B6875"     # comment
+  log_message: "#BFBDB6"       # foreground
+  log_background: "#10141C"    # background
+  log_selected: "#161A24"      # lineHighlight
 
   # Severity Level Colors
-  severity_trace: "#6C7380"    # editor.gutter colors (muted)
-  severity_debug: "#73B8FF"    # vcs.modified
-  severity_info: "#39BAE6"     # syntax.tag
-  severity_warn: "#E6B450"     # common.accent.tint
-  severity_error: "#D95757"    # common.error
-  severity_fatal: "#F26D78"    # vcs.removed
+  severity_trace: "#5B6875"    # comment (muted)
+  severity_debug: "#73B8FF"    # GitGutter changed
+  severity_info: "#39BAE6"     # tag
+  severity_warn: "#E6B450"     # caret
+  severity_error: "#F26D78"    # GitGutter deleted
+  severity_fatal: "#F07178"    # markup (more intense red)
 
   # Status Colors
-  success: "#70BF56"          # vcs.added
-  warning: "#E6B450"          # common.accent.tint
-  error: "#D95757"            # common.error
-  info: "#39BAE6"             # syntax.tag
+  success: "#70BF56"          # GitGutter inserted
+  warning: "#E6B450"          # caret
+  error: "#F26D78"            # GitGutter deleted
+  info: "#39BAE6"             # tag
 
   # Special Elements
-  help: "#6C7380"             # editor.gutter colors
-  highlight: "#E6B450"        # common.accent.tint
-  disabled: "#6C7380"         # editor.gutter colors (muted)
+  help: "#5B6875"             # comment
+  highlight: "#E6B450"        # caret
+  disabled: "#5B6875"         # comment (muted)
