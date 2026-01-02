@@ -607,13 +607,33 @@ kalk() {
   fi
 }
 
-# Follow logs with tail
+# Follow logs with (multi)tail
 t() {
   local pattern="${1:-"*.log"}"
-  if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
-    eval tail --follow --verbose --lines=20 "$pattern"
+  local args
+  if [ $# -eq 0 ]; then
+    args="*.log"
   else
-    eval sudo tail --follow --verbose --lines=20 "$pattern"
+    args="$*"
+  fi
+
+  if command -v multitail >/dev/null 2>&1; then
+    if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
+      # shellcheck disable=SC2086
+      eval multitail $args
+    else
+      # shellcheck disable=SC2086
+      eval sudo multitail $args
+    fi
+    return
+  else
+    if [ -r "$pattern" ] 2>/dev/null || [ "$pattern" = "*.log" ]; then
+      # shellcheck disable=SC2086
+      eval tail --follow --verbose --lines=20 $args
+    else
+      # shellcheck disable=SC2086
+      eval sudo tail --follow --verbose --lines=20 $args
+    fi
   fi
 }
 
