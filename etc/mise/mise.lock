@@ -229,6 +229,11 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
+[[tools."github:control-theory/gonzo"]]
+version = "0.3.0"
+backend = "github:control-theory/gonzo"
+"platforms.macos-arm64" = { checksum = "sha256:6c9d25f41f8ac721c875ac0a004220c7aa1d4ae89b4ecdf388b49f0f72824d95", url = "https://github.com/control-theory/gonzo/releases/download/v0.3.0/gonzo-0.3.0-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/control-theory/gonzo/releases/assets/322980435"}
+
 [[tools."github:dalance/procs"]]
 version = "0.14.10"
 backend = "github:dalance/procs"
