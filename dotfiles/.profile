@@ -199,7 +199,6 @@ command -v delta >/dev/null && export GIT_PAGER="delta"
 ### gonzo #####################################################################
 
 export GONZO_AI_MODEL="gpt-5.1"
-export GONZO_SKIN="ayu-dark"
 
 ### Azure bicep ################################################################
 
