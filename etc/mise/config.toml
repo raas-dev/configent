@@ -68,7 +68,7 @@ awscli = 'latest'
 #tf-summarize = 'latest'
 
 # kubernetes
-#kubectl = 'latest'
+kubectl = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
 #k9s = 'latest'
 #helm = 'latest'
