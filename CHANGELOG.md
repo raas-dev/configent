@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.188.2](https://github.com/raas-dev/configent/compare/1.188.1...1.188.2) (2026-01-03)
+
+
+### Fixes
+
+* **install:** move expect to utils section and simplify multitail ([d0096bc](https://github.com/raas-dev/configent/commit/d0096bc23bf8ec8d6c9936a12d4f8e96f95cf457))
+
 ## [1.188.1](https://github.com/raas-dev/configent/compare/1.188.0...1.188.1) (2026-01-03)
 
 
