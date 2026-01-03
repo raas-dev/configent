@@ -47,8 +47,9 @@ $SUDO pacman --noconfirm --needed -S libffi libunistring libxml2 m4 ncurses \
 $SUDO ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2
 
 # Utils
-$SUDO pacman --noconfirm --needed -S coreutils bind file findutils git git-lfs \
-  htop less lsb-release lsof procps traceroute unzip wget which whois zip
+$SUDO pacman --noconfirm --needed -S coreutils bind expect file findutils git \
+  git-lfs htop less lsb-release lsof procps traceroute unzip wget which whois \
+  zip
 
 # Bash
 $SUDO pacman --noconfirm --needed -S bash
@@ -62,8 +63,8 @@ $SUDO pacman --noconfirm --needed -S vim
 # Neovim
 $SUDO pacman --noconfirm --needed -S neovim
 
-# MultiTail and expect
-$SUDO pacman --noconfirm --needed -S multitail expect
+# MultiTail
+$SUDO pacman --noconfirm --needed -S multitail
 
 # Use AUR for git-extras
 # See: https://pkgs.org/download/git-extras

@@ -60,8 +60,9 @@ $SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
   libxml2-dev libyaml-dev zlib1g-dev
 
 # Utils
-$SUDO apt-get install -y coreutils dnsutils file findutils git git-lfs htop \
-  iputils-ping lsb-release lsof pandoc procps traceroute unzip wget whois zip
+$SUDO apt-get install -y coreutils dnsutils expect file findutils git git-lfs \
+  htop iputils-ping lsb-release lsof pandoc procps traceroute unzip wget \
+  whois zip
 
 # Bash
 $SUDO apt-get install -y bash
@@ -75,8 +76,8 @@ $SUDO apt-get install -y vim
 # Neovim
 $SUDO apt-get install -y neovim
 
-# MultiTail and expect
-$SUDO apt-get install -y multitail expect
+# MultiTail
+$SUDO apt-get install -y multitail
 
 # git-extras
 $SUDO apt-get install -y git-extras

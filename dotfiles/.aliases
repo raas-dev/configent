@@ -735,11 +735,10 @@ t() {
   if command -v multitail >/dev/null; then
     local opts="-CT ansi"
     # shellcheck disable=SC2086  # must be without quotes to expand args
-    # Use expect_before to auto-dismiss warning if it appears
     if [ "$needs_sudo" = true ]; then
-      expect -c "spawn sh -c \"eval sudo multitail $opts $args\"; expect_before { \"Press any key\" { send \"\\r\" } }; interact" || eval sudo multitail $opts $args
+      eval sudo multitail $opts $args
     else
-      expect -c "spawn sh -c \"eval multitail $opts $args\"; expect_before { \"Press any key\" { send \"\\r\" } }; interact" || eval multitail $opts $args
+      eval multitail $opts $args
     fi
   else
     # shellcheck disable=SC2086

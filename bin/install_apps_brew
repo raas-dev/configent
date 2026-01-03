@@ -68,7 +68,7 @@ brew install git-lfs
 # Log file navigator (https://lnav.org/)
 brew install lnav
 
-# MultiTail (`expect` is present for t() on macOS by default)
+# MultiTail
 brew install multitail
 
 # nmap (https://nmap.org/)

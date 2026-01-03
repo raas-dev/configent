@@ -48,8 +48,9 @@ $SUDO zypper install -y readline-devel libbz2-devel libffi-devel \
   sqlite3-devel xz-devel zlib-devel
 
 # Utils
-$SUDO zypper install -y bind-utils coreutils file findutils git git-lfs htop \
-  lsb-release lsof man pandoc procps traceroute unzip wget whois zip
+$SUDO zypper install -y bind-utils coreutils expect file findutils git \
+  git-lfs htop lsb-release lsof man pandoc procps traceroute unzip wget \
+  whois zip
 
 # Bash
 $SUDO zypper install -y bash
@@ -63,8 +64,8 @@ $SUDO zypper install -y vim
 # Neovim
 $SUDO zypper install -y neovim
 
-# MultiTail and expect
-$SUDO zypper install -y multitail expect
+# MultiTail
+$SUDO zypper install -y multitail
 
 # git-extras, not available in OpenSUSE (as of 2025-01)
 #$SUDO zypper install -y git-extras

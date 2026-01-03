@@ -56,8 +56,8 @@ $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
   openssl-devel readline-devel sqlite-devel zlib-devel xz-devel libxml2-devel
 
 # Utils
-$SUDO dnf install -y bind-utils coreutils file findutils git git-lfs htop \
-  lsof pandoc procps tar traceroute unzip wget which whois zip
+$SUDO dnf install -y bind-utils coreutils expect file findutils git git-lfs \
+  htop lsof pandoc procps traceroute unzip wget whois zip
 
 # Bash
 $SUDO dnf install -y bash
@@ -71,8 +71,8 @@ $SUDO dnf install -y vim
 # Neovim
 $SUDO dnf install -y neovim
 
-# MultiTail and expect
-$SUDO dnf install -y multitail expect
+# MultiTail
+$SUDO dnf install -y multitail
 
 # git-extras
 # not available in 2025-06: CentOS Stream 10, Alma Linux 10, Rocky Linux 10
