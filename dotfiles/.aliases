@@ -607,6 +607,27 @@ kalk() {
   fi
 }
 
+# List what listens on port(s, separated by comma)
+port() {
+  local filter=
+  [ -n "$1" ] && filter=":$1"
+  lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
+}
+
+ports() {
+  local filter=
+  [ -n "$1" ] && filter=":$1"
+  sudo lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
+}
+
+# Weather (https://github.com/chubin/wttr.in)
+wttr() {
+    local city="${1:-$(ipv4 | jq -r .city)}"
+    curl "v2.wttr.in/${city}?MF&lang=en"
+}
+
+### Functions: Logs ############################################################
+
 # Follow logs with (multi)tail
 t() {
   local args="${*:-*.log}"
@@ -754,25 +775,6 @@ ts() {
   fi
 }
 
-# List what listens on port(s, separated by comma)
-port() {
-  local filter=
-  [ -n "$1" ] && filter=":$1"
-  lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
-}
-
-ports() {
-  local filter=
-  [ -n "$1" ] && filter=":$1"
-  sudo lsof -P -iTCP"$filter" -sTCP:LISTEN +c0
-}
-
-# Weather (https://github.com/chubin/wttr.in)
-wttr() {
-    local city="${1:-$(ipv4 | jq -r .city)}"
-    curl "v2.wttr.in/${city}?MF&lang=en"
-}
-
 ### Functions: Cleaners ########################################################
 
 # Npm remove all global packages (except later npm installed via npm)
@@ -857,7 +859,7 @@ agyclear() {
   esac
 }
 
-### Nix ########################################################################
+### Functions: Nix #############################################################
 
 # Nix in containerd
 nixd() {
