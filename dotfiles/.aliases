@@ -150,15 +150,15 @@ alias ,='trans'
 alias _='ai_agent'
 alias \#='echo'
 
-### journal ####################################################################
+### System logs ################################################################
 
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
 # Lazyjournal (single quotes to expand which runtime, for sudo)
-command -v lazyjournal >/dev/null && alias lj='$(which lazyjournal)'
+alias lj='$(which lazyjournal)'
 
-### watch ######################################################################
+### Watch ######################################################################
 
 command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
 
