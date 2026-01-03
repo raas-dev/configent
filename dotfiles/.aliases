@@ -757,15 +757,70 @@ tl() {
     echo "Error: lnav is not installed" >&2
     return 127
   fi
-  local log_file="${1:-"/var/log/cloud-init-output.log"}"
-  if [ -r "$log_file" ]; then
-    lnav -c ':config /ui/theme night-owl' \
-      -c ':config /ui/mouse/mode enabled' \
-      -c ':goto -1' "$log_file"
+
+  local files=()
+  local needs_sudo=false
+
+  # If no arguments, use default file
+  if [ $# -eq 0 ]; then
+    files=("/var/log/cloud-init-output.log")
   else
-    sudo lnav -c ':config /ui/theme night-owl' \
-      -c ':config /ui/mouse/mode enabled' \
-      -c ':goto -1' "$log_file"
+    # Expand all arguments (including glob patterns) and collect files
+    for arg in "$@"; do
+      # Expand glob pattern if it contains wildcards
+      if [[ "$arg" == *"*"* ]] || [[ "$arg" == *"?"* ]]; then
+        # Use nullglob to handle cases where no files match (shell-specific)
+        if [ -n "$ZSH_VERSION" ]; then
+          # zsh: use $~arg to force glob expansion
+          setopt nullglob
+          for file in ${~arg}; do
+            files+=("$file")
+          done
+          unsetopt nullglob
+        elif [ -n "$BASH_VERSION" ]; then
+          # bash
+          shopt -s nullglob
+          for file in $arg; do
+            files+=("$file")
+          done
+          shopt -u nullglob
+        else
+          # fallback: expand without nullglob (may include literal pattern if no match)
+          for file in $arg; do
+            # Only add if it's an actual file (not the literal pattern)
+            [ -e "$file" ] && files+=("$file")
+          done
+        fi
+      else
+        files+=("$arg")
+      fi
+    done
+  fi
+
+  # Check if any files need sudo access
+  for file in "${files[@]}"; do
+    if [ ! -r "$file" ]; then
+      needs_sudo=true
+      break
+    fi
+  done
+
+  # Build lnav command with all files
+  local lnav_cmd=(
+    lnav
+    -c ':config /ui/theme night-owl'
+    -c ':config /ui/mouse/mode enabled'
+    -c ':goto -1'
+  )
+
+  # Add all files to the command
+  lnav_cmd+=("${files[@]}")
+
+  # Execute with or without sudo
+  if [ "$needs_sudo" = true ]; then
+    sudo "${lnav_cmd[@]}"
+  else
+    "${lnav_cmd[@]}"
   fi
 }
 
