@@ -738,7 +738,7 @@ t() {
     # shellcheck disable=SC2086  # must be without quotes to expand args
     if [ "$(tput lines)" -lt 23 ] || [ "$(tput cols)" -lt 78 ]; then
       # Dismiss "Terminal too small" popup via expect
-      local exp='set timeout 1; spawn sh -c "multitail '"$opts"' '"$args"'"; expect "Terminal too small" { sleep 0.1; send "\r" }; interact'
+      local exp='set timeout 1; spawn -noecho sh -c "multitail '"$opts"' '"$args"'"; expect "Terminal too small" { sleep 0.1; send "\r" }; interact'
       if [ "$needs_sudo" = true ]; then
         sudo expect -c "$exp"
       else
