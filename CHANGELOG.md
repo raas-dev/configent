@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.188.0](https://github.com/raas-dev/configent/compare/1.187.13...1.188.0) (2026-01-03)
+
+
+### Features
+
+* **install:** add multitail and expect packages ([ff69365](https://github.com/raas-dev/configent/commit/ff69365daecc3091ce19e02d0dc82a4ee97a0d54))
+
+
+### Fixes
+
+* **aliases:** add ansi color support to multitail ([1b27710](https://github.com/raas-dev/configent/commit/1b27710d0fc48849e212844c39181378912f1e7f))
+* **aliases:** add color option to multitail ([c80885e](https://github.com/raas-dev/configent/commit/c80885ed052f68934499cd2f79c50c90c1042973))
+* **aliases:** add command existence checks to log followers ([3df92a2](https://github.com/raas-dev/configent/commit/3df92a23d746562f6bd8854825c8bd8ed0fef6be))
+* **aliases:** add journal section with lazyjournal alias ([a230b4d](https://github.com/raas-dev/configent/commit/a230b4defde7851a800463d4bffea40f24a1dd42))
+* **aliases:** add multitail support to log following ([7c12a01](https://github.com/raas-dev/configent/commit/7c12a014aacebb592ce690db716a54be4fb38fcf))
+* **aliases:** enhance tl function to support multiple log files ([50c8a4d](https://github.com/raas-dev/configent/commit/50c8a4d7615100543bbc3410af1bcd254b464966))
+* **aliases:** improve expect handling in multitail ([534c9a6](https://github.com/raas-dev/configent/commit/534c9a60c911dd144e60b1e7ab5bd8486abeb4c6))
+* **aliases:** improve glob handling in log following ([d8d8be3](https://github.com/raas-dev/configent/commit/d8d8be3e4482c120db28d68f7937dc4f2707dc13))
+* **aliases:** improve sudo detection for log following ([db72c46](https://github.com/raas-dev/configent/commit/db72c46c0881c8dc2355ba5ad10574bedad662b0))
+* **aliases:** improve zsh glob expansion handling ([dd858ec](https://github.com/raas-dev/configent/commit/dd858ecc93501188a4d23457ef6cb751a26fe57c))
+* **aliases:** remove extra blank line ([90918ea](https://github.com/raas-dev/configent/commit/90918ea61f4721d5195e6455582112090900e95a))
+* **aliases:** remove redundant comment in log following ([07dc85a](https://github.com/raas-dev/configent/commit/07dc85a4cbd0487535733a8f8ddd107673b7cb3a))
+* **aliases:** rename journal section to system logs ([7fc7bf5](https://github.com/raas-dev/configent/commit/7fc7bf57ba5e5f9f8b072bd2ffdfc942347c1a3b))
+* **aliases:** reorganize functions by category ([d6748a3](https://github.com/raas-dev/configent/commit/d6748a35e50f81f23af32160b318d2dc14537a0d))
+* **aliases:** simplify tailspin alias to one-liner ([a7a7798](https://github.com/raas-dev/configent/commit/a7a77980ffe5f6f1df6f18778dd1626ded388fe7))
+* **install_apps_brew:** remove expect from brew install ([65891c9](https://github.com/raas-dev/configent/commit/65891c9f23fa978d3d2db3b62c1f479f1f8ae627))
+* **lima:** simplify environment variable handling ([9b0f457](https://github.com/raas-dev/configent/commit/9b0f4572910a26dbf62382d684b682a97aadab9a))
+* **lima:** support GIT_REF environment variable in install scripts ([e6e31e6](https://github.com/raas-dev/configent/commit/e6e31e61ba73f03bba216f9c24fcb6aae5014dfc))
+
 ## [1.187.13](https://github.com/raas-dev/configent/compare/1.187.12...1.187.13) (2026-01-02)
 
 
