@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.188.3](https://github.com/raas-dev/configent/compare/1.188.2...1.188.3) (2026-01-03)
+
+
+### Fixes
+
+* **aliases:** add -noecho flag to expect spawn command ([1a8a6d7](https://github.com/raas-dev/configent/commit/1a8a6d71b8576b9782510af7bea2c4b18c705ef5))
+* **aliases:** handle terminal size check in multitail ([cf78e35](https://github.com/raas-dev/configent/commit/cf78e353da4377d4948d4d036c7d01f5b871bbb2))
+* **aliases:** reduce sleep delay in multitail expect command ([9b93a9a](https://github.com/raas-dev/configent/commit/9b93a9ab3cd18b6a5b59779b1d6187629fbb9ccc))
+* **aliases:** replace sleep with after in multitail expect ([1f4c048](https://github.com/raas-dev/configent/commit/1f4c048200e14369576bbe3bb80841a0af643079))
+* **aliases:** simplify multitail expect command ([5b4fe8b](https://github.com/raas-dev/configent/commit/5b4fe8b8e08493aea07f2808fd8658d3bee1db3b))
+
 ## [1.188.2](https://github.com/raas-dev/configent/compare/1.188.1...1.188.2) (2026-01-03)
 
 
