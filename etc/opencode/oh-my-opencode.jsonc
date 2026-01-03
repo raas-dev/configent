@@ -8,7 +8,14 @@
     },
     "Planner-Sisyphus": {
       //"model": "google/antigravity-gemini-3-pro-high"
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash",
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "git": "ask",
+          "rm": "ask"
+        }
+      }
     },
     "OpenCode-Builder": {
       "model": "google/antigravity-gemini-3-pro-flash"
