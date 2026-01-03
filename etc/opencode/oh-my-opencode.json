@@ -6,20 +6,15 @@
       "model": "google/antigravity-gemini-3-pro-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high",
-      "permission": {
-        "bash": "allow",
-        "skill": "allow",
-        "webfetch": "allow"
-      }
-    },
-    "Builder-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-flash"
-    },
-    "librarian": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
+    "OpenCode-Builder": {
+      "model": "google/antigravity-gemini-3-pro-flash"
+    },
     "oracle": {
+      "model": "google/antigravity-gemini-3-pro-high"
+    },
+    "librarian": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
     "explore": {
@@ -35,5 +30,6 @@
       "model": "google/antigravity-gemini-3-flash"
     }
   },
-  "disabled_mcps": ["context7", "websearch_exa", "grep_app"]
+  "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
+  "disabled_skills": ["playwright"]
 }
