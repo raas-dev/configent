@@ -773,7 +773,11 @@ tl() {
         if [ -n "$ZSH_VERSION" ]; then
           # zsh: use $~arg to force glob expansion
           setopt nullglob
-          for file in ${~arg}; do
+          # In zsh, expand glob pattern first, then iterate
+          local expanded_files
+          # shellcheck disable=SC2295  # $~ is zsh-specific glob expansion syntax
+          expanded_files=($~arg)
+          for file in "${expanded_files[@]}"; do
             files+=("$file")
           done
           unsetopt nullglob
