@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.188.1](https://github.com/raas-dev/configent/compare/1.188.0...1.188.1) (2026-01-03)
+
+
+### Fixes
+
+* **mise:** add @openchamber/web package ([25b495b](https://github.com/raas-dev/configent/commit/25b495be3c7e474b15870ac043a53b033e82397c))
+* **mise:** remove openskills package ([5fc6734](https://github.com/raas-dev/configent/commit/5fc6734dfa93b7c69663626052b70d177f8df5ba))
+* **opencode:** remove permissions and rename agents ([a39eac4](https://github.com/raas-dev/configent/commit/a39eac472a2c1e4ebec1c38908fe03175c1f6028))
+
 ## [1.188.0](https://github.com/raas-dev/configent/compare/1.187.13...1.188.0) (2026-01-03)
 
 
