@@ -295,7 +295,6 @@ alias path='printf "${PATH//:/\\n}\n"'
 # Display week number
 alias week='date +%V'
 
-
 ### Python #####################################################################
 
 # https://github.com/subash774/Caffeinate
