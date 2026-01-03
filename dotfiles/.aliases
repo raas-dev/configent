@@ -150,6 +150,14 @@ alias ,='trans'
 alias _='ai_agent'
 alias \#='echo'
 
+### journal ####################################################################
+
+# Enable aliases to be sudo'ed
+alias sudo='sudo '
+
+# Lazyjournal (single quotes to expand which runtime, for sudo)
+command -v lazyjournal >/dev/null && alias lj='$(which lazyjournal)'
+
 ### watch ######################################################################
 
 command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
@@ -284,11 +292,9 @@ alias ipv6='curl --silent --ipv6 https://ifconfig.co/ip'
 # Display PATH content
 alias path='printf "${PATH//:/\\n}\n"'
 
-# Enable aliases to be sudo'ed
-alias sudo='sudo '
-
 # Display week number
 alias week='date +%V'
+
 
 ### Python #####################################################################
 
