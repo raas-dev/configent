@@ -3,25 +3,30 @@
   "google_auth": false,
   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      //"model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      //"model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "OpenCode-Builder": {
       "model": "google/antigravity-gemini-3-pro-flash"
     },
     "oracle": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      //"model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "librarian": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      //"model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "explore": {
       "model": "google/antigravity-gemini-3-flash"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      //"model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "document-writer": {
       "model": "google/antigravity-gemini-3-flash"
