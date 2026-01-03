@@ -32,9 +32,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-x64-baseline" = { checksum = "sha256:03b7a428062d4d953f450e521649c06f29dd962c37fe75b608ca53c6ac8f0706", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.26"
+version = "2.32.28"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:55194a9a21352380239868df74492fc725a24b73da9ad8d4d08579cca8cfffd9", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.26.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:6838459e9af7dcf4ae612d76769e96d14d8632a8182c3fdbe35e7750cf83afb0", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -285,9 +285,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.macos-arm64" = { checksum = "sha256:9bcac2c8de72f4645df85505f38017bbee4cfaa6e27af959c18e7632b75dde27", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-darwin-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806126"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.1.5"
+version = "0.1.7"
 backend = "github:pranshuparmar/witr"
-"platforms.macos-arm64" = { checksum = "sha256:ba94635ec3a4197d482d0842177191a0d66e6dfcd88812cd90a497eb368bc23e", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.5/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/334942382"}
+"platforms.macos-arm64" = { checksum = "sha256:edecc98cabd6d421d21cff9b19634c99ea8c1adec25085c0f0291335f4d37448", url = "https://github.com/pranshuparmar/witr/releases/download/v0.1.7/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/335824413"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
