@@ -158,6 +158,9 @@ alias sudo='sudo '
 # Lazyjournal (single quotes to expand which runtime, for sudo)
 alias lj='$(which lazyjournal)'
 
+# tailspin
+alias ts='$(which tspin) --print --follow'
+
 ### Watch ######################################################################
 
 command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
@@ -763,20 +766,6 @@ tl() {
     sudo lnav -c ':config /ui/theme night-owl' \
       -c ':config /ui/mouse/mode enabled' \
       -c ':goto -1' "$log_file"
-  fi
-}
-
-# Follow logs with tailspin (installed user-wide by mise)
-ts() {
-  if ! command -v tspin >/dev/null; then
-    echo "Error: tspin is not installed" >&2
-    return 127
-  fi
-  local log_file="${1:-"/var/log/cloud-init-output.log"}"
-  if [ -r "$log_file" ]; then
-    tspin --follow "$log_file"
-  else
-    sudo "$(which tspin)" --follow "$log_file"
   fi
 }
 
