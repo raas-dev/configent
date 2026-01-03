@@ -497,6 +497,10 @@ backend = "npm:@anthropic-ai/claude-code"
 version = "0.22.5"
 backend = "npm:@google/gemini-cli"
 
+[[tools."npm:@openchamber/web"]]
+version = "1.4.2"
+backend = "npm:@openchamber/web"
+
 [[tools."npm:opencode-ai"]]
 version = "1.0.223"
 backend = "npm:opencode-ai"
