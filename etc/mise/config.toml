@@ -5,6 +5,7 @@ bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_ba
 carapace = 'latest'
 delta = 'latest'
 duf = 'latest'
+dust = 'latest'
 fd = 'latest'
 fzf = 'latest'
 gitui = 'latest'
