@@ -204,6 +204,10 @@ export TLDR_COLOR_EXAMPLE="reset"
 export TLDR_COLOR_COMMAND="cyan"
 export TLDR_COLOR_PARAMETER="green"
 
+### tlrc #######################################################################
+
+export TLRC_CONFIG="$HOME/.config/tlrc/config.toml"
+
 ### Azure bicep ################################################################
 
 path_append "$HOME/.azure/bin"
