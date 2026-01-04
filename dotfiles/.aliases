@@ -151,20 +151,24 @@ alias ¨='bat --show-all'
 alias ,='serpl'
 alias _='ai_agent'
 
-### System logs ################################################################
+### Privileged utilities #######################################################
 
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
-# Lazyjournal (single quotes to expand which runtime, for sudo)
+# lazyjournal (single quotes to expand which runtime, for sudo)
 alias lj='$(which lazyjournal)'
 
 # tailspin
 alias ts='$(which tspin) --print --follow'
 
-### Watch ######################################################################
+# netscanner
+alias ns='$(which netscanner)'
 
-command -v viddy >/dev/null && alias watch='viddy --differences --no-title'
+# viddy
+if command -v viddy >/dev/null; then
+  alias watch='$(which viddy) --differences --no-title'
+fi
 
 ### Lima VMs ###################################################################
 
