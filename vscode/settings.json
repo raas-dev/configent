@@ -547,5 +547,6 @@
   "zenMode.hideStatusBar": false,
   "terminal.integrated.confirmOnKill": "never",
   "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.perEditorGroup": true
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "maximize"
 }
