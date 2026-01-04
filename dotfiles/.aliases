@@ -1063,6 +1063,9 @@ alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 # file conversion
 alias pdftotext='n shell/poppler-utils pdftotext'
 
+# ripgrep, but also search in pdfs, zip, tar.gz, etc. (see --rga-list-adapters)
+alias rga='n shell/ffmpeg/pandoc/poppler/ripgrep/ripgrep-all rga'
+
 # servers
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 
