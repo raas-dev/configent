@@ -116,6 +116,10 @@ backend = "cargo:kondo"
 version = "5.5.0"
 backend = "cargo:tailspin"
 
+[[tools."cargo:tlrc"]]
+version = "1.12.0"
+backend = "cargo:tlrc"
+
 [[tools.delta]]
 version = "0.18.2"
 backend = "aqua:dandavison/delta"

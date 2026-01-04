@@ -30,7 +30,6 @@ zoxide = 'latest'
 'github:sharkdp/pastel' = 'latest'
 'github:dalance/procs' = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
-'github:tldr-pages/tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # # no linux-aarch64 in mise's own registry
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 'github:pranshuparmar/witr' = 'latest'
@@ -89,6 +88,7 @@ cargo-binstall = 'latest'
 'cargo:diskonaut' = 'latest' # no macos-arm64 release
 'cargo:kondo' = 'latest' # no linux-aarch64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
+'cargo:tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # no linux-aarch64 release
 
 # go
 go = '1.25.3'
