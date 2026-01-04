@@ -27,6 +27,7 @@ example = 4
 #
 # Style for the title of the page (command name).
 [style.title]
+# #AAD94C
 color = { hex = "AAD94C" }
 background = "default"
 bold = true
@@ -37,6 +38,7 @@ strikethrough = false
 
 # Style for the description of the page.
 [style.description]
+# #BFBDB6
 color = { hex = "BFBDB6" }
 background = "default"
 bold = false
@@ -47,6 +49,7 @@ strikethrough = false
 
 # Style for descriptions of examples.
 [style.bullet]
+# #BFBDB6
 color = { hex = "BFBDB6" }
 background = "default"
 bold = false
@@ -57,6 +60,7 @@ strikethrough = false
 
 # Style for command examples.
 [style.example]
+# #FFB454
 color = { hex = "FFB454" }
 background = "default"
 bold = false
@@ -67,6 +71,7 @@ strikethrough = false
 
 # Style for URLs inside the description.
 [style.url]
+# #39BAE6
 color = { hex = "39BAE6" }
 background = "default"
 bold = false
@@ -77,6 +82,7 @@ strikethrough = false
 
 # Style for text surrounded by backticks (`).
 [style.inline_code]
+# #FFB454
 color = { hex = "FFB454" }
 background = "default"
 bold = false
@@ -87,6 +93,7 @@ strikethrough = false
 
 # Style for placeholders inside command examples.
 [style.placeholder]
+# #D2A6FF
 color = { hex = "D2A6FF" }
 background = "default"
 bold = false
