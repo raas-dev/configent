@@ -675,6 +675,11 @@ backend = "aqua:starship/starship"
 "platforms.windows-x64" = { checksum = "sha256:afa6f4e7bfcfb250a642361368d72599b485cb28ca0e67dc2149264b1dec2306", url = "https://github.com/starship/starship/releases/download/v1.24.0/starship-x86_64-pc-windows-msvc.zip"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:afa6f4e7bfcfb250a642361368d72599b485cb28ca0e67dc2149264b1dec2306", url = "https://github.com/starship/starship/releases/download/v1.24.0/starship-x86_64-pc-windows-msvc.zip"}
 
+[[tools.tlrc]]
+version = "1.12.0"
+backend = "aqua:tldr-pages/tlrc"
+"platforms.macos-arm64" = { checksum = "sha256:2b53e92b7d747f2ecb4eb9633eac1c28da456fd869038a2e370dfdc1ffbc9205", url = "https://github.com/tldr-pages/tlrc/releases/download/v1.12.0/tlrc-v1.12.0-x86_64-apple-darwin.tar.gz"}
+
 [[tools.tmux]]
 version = "3.6a"
 backend = "asdf:tmux"
