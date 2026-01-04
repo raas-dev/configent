@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.190.0](https://github.com/raas-dev/configent/compare/1.189.0...1.190.0) (2026-01-04)
+
+
+### Features
+
+* **aliases:** replace diskonaut with dust for disk usage ([e61e632](https://github.com/raas-dev/configent/commit/e61e632e8cf7e1d705bcb6b1e939c08a7bf05517))
+* **mise:** add doggo DNS client tool ([76d0b2d](https://github.com/raas-dev/configent/commit/76d0b2d84c29188befbf77d57a5e131795171d83))
+
+
+### Fixes
+
+* **aliases:** comment out difft alias ([0f07211](https://github.com/raas-dev/configent/commit/0f0721133203bd35dd2a26b7155d91605946ac10))
+* **aliases:** enhance vv helper with default vm setup ([ba7242f](https://github.com/raas-dev/configent/commit/ba7242ff0d82cd750ad050dc86b572128677d7d9))
+* **aliases:** remove deprecated network aliases ([f1fed77](https://github.com/raas-dev/configent/commit/f1fed77cc1ffd903610d0f6393f197095cd5738c))
+* **aliases:** remove openapi-tui alias ([11f4f88](https://github.com/raas-dev/configent/commit/11f4f88c73a4908a22409a327bf4c97fc5958501))
+* **aliases:** replace vm aliases with vv helper function ([98a659e](https://github.com/raas-dev/configent/commit/98a659ef00319233a1d5251b5c64cf4bece2764e))
+* **aliases:** uncomment difft alias ([52bcb66](https://github.com/raas-dev/configent/commit/52bcb6632851c179641063cc6239d30ce985a2b0))
+* **mise:** move dust and tlrc to github sources ([2d6c39c](https://github.com/raas-dev/configent/commit/2d6c39c143df83d796e710e1b52a97a2133bd31a))
+* **mise:** move tlrc from github to cargo source ([74e9fab](https://github.com/raas-dev/configent/commit/74e9fabc1d3a488f0184041d49f894121aefd718))
+* **mise:** reorganize tools and remove duplicates ([4dde218](https://github.com/raas-dev/configent/commit/4dde218ae8aea7b7a0dfc536e21f4a60f2f56d2d))
+
 ## [1.189.0](https://github.com/raas-dev/configent/compare/1.188.3...1.189.0) (2026-01-04)
 
 
