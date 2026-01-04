@@ -243,9 +243,29 @@ v() {
   esac
 }
 
-# development version
+# start vm in development mode
 vv() {
-  v "$@" --set=.env.GIT_REF=\"main\"
+  if [[ "$1" == "up" || "$1" == "start" ]]; then
+    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
+      # Check if user already specified --name
+      local has_name=false
+      for arg in "${@:2}"; do
+        if [[ "$arg" == --name=* || "$arg" == --name ]]; then
+          has_name=true
+          break
+        fi
+      done
+      if [ "$has_name" = false ]; then
+        v "$1" debian --name=default "${@:2}" --set=.env.GIT_REF=\"main\"
+      else
+        v "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\"
+      fi
+    else
+      v "$@" --set=.env.GIT_REF=\"main\"
+    fi
+  else
+    v "$@"
+  fi
 }
 
 ### docker #####################################################################
