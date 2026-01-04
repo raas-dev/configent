@@ -327,6 +327,9 @@ alias awake='uvx --from caffeinate awake --time 540'
 # Converting files and office documents to Markdown
 alias markitdown='uvx --from "markitdown[all]" markitdown'
 
+# HTTP API client
+alias posting='POSTING_THEME="hypernova" uvx posting'
+
 # Multitool for tabular data in terminal
 alias vd='uvx --with odfpy,openpyxl visidata'
 
