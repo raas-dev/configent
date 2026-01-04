@@ -1088,6 +1088,7 @@ alias difft='n shell/difftastic difft'
 alias grex='n grex'
 alias pcalc='n pcalc'
 alias tokei='n tokei'
+alias wrkflw='n wrkflw'
 
 # load testing
 alias k6='n k6'
