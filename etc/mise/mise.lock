@@ -442,6 +442,21 @@ backend = "github:topgrade-rs/topgrade"
 "platforms.windows-x64" = { checksum = "sha256:af5269aa95b941837e2ae549ea5db9c9e49cbd73ffc606a8afdaa298fcfdbe7c", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.7.0/topgrade-v16.7.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/329752402"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:af5269aa95b941837e2ae549ea5db9c9e49cbd73ffc606a8afdaa298fcfdbe7c", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.7.0/topgrade-v16.7.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/329752402"}
 
+[[tools."github:yassinebridi/serpl"]]
+version = "0.3.4"
+backend = "github:yassinebridi/serpl"
+"platforms.linux-arm64" = { checksum = "sha256:954602241a4b8e6894c28f26b42723ebae04d3e8f414d56a75f376a9379ef1d4", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826762"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:954602241a4b8e6894c28f26b42723ebae04d3e8f414d56a75f376a9379ef1d4", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826762"}
+"platforms.linux-x64" = { checksum = "sha256:3d9eae74391ead2514cfa96c20037be652166a53b20e09176e16f8c26e605294", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826485"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:3d9eae74391ead2514cfa96c20037be652166a53b20e09176e16f8c26e605294", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826485"}
+"platforms.linux-x64-musl" = { checksum = "sha256:3d9eae74391ead2514cfa96c20037be652166a53b20e09176e16f8c26e605294", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826485"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3d9eae74391ead2514cfa96c20037be652166a53b20e09176e16f8c26e605294", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-linux-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826485"}
+"platforms.macos-arm64" = { checksum = "sha256:f5f75609780150146221a199fafaa445333b2bbc36f1cc750307b3620ae5453c", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-macos-arm64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826439"}
+"platforms.macos-x64" = { checksum = "sha256:c9dab08c4d64deaa5b08822cad311ac3787878e58024fd0b44328dc9814e9df9", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-macos-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826467"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:c9dab08c4d64deaa5b08822cad311ac3787878e58024fd0b44328dc9814e9df9", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-macos-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257826467"}
+"platforms.windows-x64" = { checksum = "sha256:0e64adf27ab40367f08168ec091f9a002303157d16575797e7d176b4ff60c925", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-windows-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257827031"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:0e64adf27ab40367f08168ec091f9a002303157d16575797e7d176b4ff60c925", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-windows-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257827031"}
+
 [[tools.gitui]]
 version = "0.28.0"
 backend = "aqua:extrawurst/gitui"
