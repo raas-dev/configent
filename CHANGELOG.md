@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.189.0](https://github.com/raas-dev/configent/compare/1.188.3...1.189.0) (2026-01-04)
+
+
+### Features
+
+* **tlrc:** add postinstall config and styling ([25224dc](https://github.com/raas-dev/configent/commit/25224dcb0e26c2572b25c42e433233f7457d08ae))
+
+
+### Fixes
+
+* **mise:** migrate tldr from pipx to aqua ([f5cedd5](https://github.com/raas-dev/configent/commit/f5cedd5ca2b6ec15479414199871b02719f3d9bc))
+* **oh-my-opencode:** add google auth configuration comment ([550044f](https://github.com/raas-dev/configent/commit/550044fb9d30fc597ac7dac624ee0831b3353234))
+* **oh-my-opencode:** add permission rules for planner agent ([caf5067](https://github.com/raas-dev/configent/commit/caf506789ffeab69c4d16bb76f7956653f4b2e33))
+* **oh-my-opencode:** disable all agent model configs ([a083aa1](https://github.com/raas-dev/configent/commit/a083aa14fa71b40c9bffb0ddb79ae1c0fd7b9a6b))
+* **oh-my-opencode:** switch agents to gemini-3-flash ([ad38b77](https://github.com/raas-dev/configent/commit/ad38b77a250db03f50a76c21cf87a5b046cd47fe))
+* **opencode:** switch default model to claude-haiku-4.5 ([cc90da2](https://github.com/raas-dev/configent/commit/cc90da208a6bbd2cc99fe716ed2edc5c27a4a39e))
+* **postinstall_node:** add node-gyp to default packages ([d8004bf](https://github.com/raas-dev/configent/commit/d8004bf7c6fcd6c9c958bf8383428fe9a614c63d))
+* **postinstall_opencode:** rename oh-my-opencode.json to jsonc ([d7ba8a8](https://github.com/raas-dev/configent/commit/d7ba8a80d337c817854e70bdce8e4c204c97734d))
+* **tlrc:** add color hex comments to config ([ad3451d](https://github.com/raas-dev/configent/commit/ad3451d475605888caccda389a4073682261987e))
+* **tlrc:** migrate color config to ayu dark theme ([c3a670c](https://github.com/raas-dev/configent/commit/c3a670c69c5ee9b965da5843757b943aa138b920))
+* **vscode:** add double-click tab to maximize editor ([95eee4b](https://github.com/raas-dev/configent/commit/95eee4ba30e9b299d5a7fff31efcf0f4328bc011))
+* **vscode:** disable terminal kill confirmation ([86d560a](https://github.com/raas-dev/configent/commit/86d560a739f5db2187f36fdafacfe3da8d01a7b3))
+* **vscode:** limit open editor tabs per group ([7601147](https://github.com/raas-dev/configent/commit/76011474098662a59c8b3912734d6e31bd4d94a9))
+
 ## [1.188.3](https://github.com/raas-dev/configent/compare/1.188.2...1.188.3) (2026-01-03)
 
 
