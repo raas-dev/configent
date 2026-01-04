@@ -22,8 +22,12 @@ description = 2
 bullet = 2
 example = 4
 
+# Ayu Dark theme colors
+# Based on https://github.com/ayu-theme/ayu-colors/blob/master/src/dark.ts
+#
+# Style for the title of the page (command name).
 [style.title]
-color = "magenta"
+color = { hex = "AAD94C" }
 background = "default"
 bold = true
 underline = false
@@ -31,8 +35,9 @@ italic = false
 dim = false
 strikethrough = false
 
+# Style for the description of the page.
 [style.description]
-color = "magenta"
+color = { hex = "BFBDB6" }
 background = "default"
 bold = false
 underline = false
@@ -40,8 +45,9 @@ italic = false
 dim = false
 strikethrough = false
 
+# Style for descriptions of examples.
 [style.bullet]
-color = "green"
+color = { hex = "BFBDB6" }
 background = "default"
 bold = false
 underline = false
@@ -49,8 +55,9 @@ italic = false
 dim = false
 strikethrough = false
 
+# Style for command examples.
 [style.example]
-color = "cyan"
+color = { hex = "FFB454" }
 background = "default"
 bold = false
 underline = false
@@ -58,29 +65,32 @@ italic = false
 dim = false
 strikethrough = false
 
+# Style for URLs inside the description.
 [style.url]
-color = "red"
+color = { hex = "39BAE6" }
 background = "default"
 bold = false
 underline = false
-italic = true
+italic = false
 dim = false
 strikethrough = false
 
+# Style for text surrounded by backticks (`).
 [style.inline_code]
-color = "yellow"
+color = { hex = "FFB454" }
 background = "default"
 bold = false
 underline = false
-italic = true
+italic = false
 dim = false
 strikethrough = false
 
+# Style for placeholders inside command examples.
 [style.placeholder]
-color = "red"
+color = { hex = "D2A6FF" }
 background = "default"
 bold = false
 underline = false
-italic = true
+italic = false
 dim = false
 strikethrough = false
