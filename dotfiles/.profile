@@ -196,6 +196,14 @@ command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
 
 command -v delta >/dev/null && export GIT_PAGER="delta"
 
+### tldr #######################################################################
+
+export TLDR_COLOR_NAME="yellow"
+export TLDR_COLOR_DESCRIPTION="magenta"
+export TLDR_COLOR_EXAMPLE="reset"
+export TLDR_COLOR_COMMAND="cyan"
+export TLDR_COLOR_PARAMETER="green"
+
 ### Azure bicep ################################################################
 
 path_append "$HOME/.azure/bin"
