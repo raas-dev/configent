@@ -3,12 +3,10 @@ description: General purpose chat with tools
 mode: primary
 model: github-copilot/gpt-5.2
 temperature: 0.0
-tools:
-  edit: false
-  write: false
 permissions:
-  edit: allow
-  bash: allow
+  edit: deny
+  bash: ask
+  skill: ask
   webfetch: allow
   doom_loop: ask
   external_directory: ask
