@@ -390,6 +390,11 @@ backend = "go:github.com/go-enry/enry"
 version = "0.21.0"
 backend = "go:golang.org/x/tools/gopls"
 
+[[tools.gping]]
+version = "1.20.1"
+backend = "aqua:orf/gping"
+"platforms.macos-arm64" = { checksum = "sha256:3cbfdd3653853cb4770542af7a9f259ddf93c08c507883320e4a00dfaaabca2b", url = "https://github.com/orf/gping/releases/download/gping-v1.20.1/gping-macOS-arm64.tar.gz"}
+
 [[tools.hurl]]
 version = "7.1.0"
 backend = "aqua:Orange-OpenSource/hurl"

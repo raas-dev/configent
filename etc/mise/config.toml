@@ -9,7 +9,6 @@ dust = 'latest'
 fd = 'latest'
 fzf = 'latest'
 gitui = 'latest'
-hurl = 'latest'
 jnv = 'latest'
 jq = 'latest'
 lsd = 'latest'
@@ -26,10 +25,8 @@ watchexec = 'latest'
 xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
-'github:orf/gping' = 'latest'
 'github:Skardyy/mcat' = 'latest'
 'github:railwayapp/nixpacks' = 'latest'
-'github:sigoden/opscan' = 'latest'
 'github:ouch-org/ouch' = 'latest'
 'github:sharkdp/pastel' = 'latest'
 'github:dalance/procs' = 'latest'
@@ -43,6 +40,12 @@ argc = 'latest'
 pre-commit = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
+
+# network
+gping = 'latest'
+hurl = 'latest'
+'github:sigoden/opscan' = 'latest'
+#'github:fujiapple852/trippy' = 'latest' # https://trippy.rs/guides/privileges
 
 # github
 act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
