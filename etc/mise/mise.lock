@@ -239,6 +239,11 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
+[[tools."github:bootandy/dust"]]
+version = "1.2.3"
+backend = "github:bootandy/dust"
+"platforms.macos-arm64" = { checksum = "sha256:6f49a9a56efa3c215924073a8ca7e2da3fdfb6ddb9dfb818336b2da753e95750", url = "https://github.com/bootandy/dust/releases/download/v1.2.3/dust-v1.2.3-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/278230134"}
+
 [[tools."github:control-theory/gonzo"]]
 version = "0.3.0"
 backend = "github:control-theory/gonzo"
@@ -341,6 +346,11 @@ backend = "github:sigoden/opscan"
 "platforms.macos-x64-baseline" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94913277"}
 "platforms.windows-x64" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94913244"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94913244"}
+
+[[tools."github:tldr-pages/tlrc"]]
+version = "1.12.0"
+backend = "github:tldr-pages/tlrc"
+"platforms.macos-arm64" = { checksum = "sha256:2b53e92b7d747f2ecb4eb9633eac1c28da456fd869038a2e370dfdc1ffbc9205", url = "https://github.com/tldr-pages/tlrc/releases/download/v1.12.0/tlrc-v1.12.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/tldr-pages/tlrc/releases/assets/299068996"}
 
 [[tools."github:topgrade-rs/topgrade"]]
 version = "16.7.0"
