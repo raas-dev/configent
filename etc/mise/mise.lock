@@ -130,6 +130,10 @@ backend = "cargo:diskonaut"
 version = "0.8.0"
 backend = "cargo:kondo"
 
+[[tools."cargo:netscanner"]]
+version = "0.6.3"
+backend = "cargo:netscanner"
+
 [[tools."cargo:tailspin"]]
 version = "5.5.0"
 backend = "cargo:tailspin"
