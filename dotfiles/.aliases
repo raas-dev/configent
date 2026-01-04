@@ -144,11 +144,12 @@ alias w='which -a'
 alias x='pkill -i -f'
 alias y='tldr'
 alias z='witr'
-alias ¨='bat --show-all'
 alias §='trans :fi'
-alias ,='trans'
-alias _='ai_agent'
+alias \?='trans'
 alias \#='echo'
+alias ¨='bat --show-all'
+alias ,='serpl'
+alias _='ai_agent'
 
 ### System logs ################################################################
 
