@@ -42,6 +42,7 @@ shellcheck = 'latest'
 shfmt = 'latest'
 
 # network
+doggo = 'latest'
 gping = 'latest'
 hurl = 'latest'
 'github:sigoden/opscan' = 'latest'

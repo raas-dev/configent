@@ -131,6 +131,11 @@ backend = "aqua:dandavison/delta"
 "platforms.windows-x64" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-pc-windows-msvc.zip"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-pc-windows-msvc.zip"}
 
+[[tools.doggo]]
+version = "1.1.4"
+backend = "aqua:mr-karan/doggo"
+"platforms.macos-arm64" = { checksum = "sha256:e15fd69042ec78881774e2c76f815588530b81fed8b42cd9ee396f2013225020", url = "https://github.com/mr-karan/doggo/releases/download/v1.1.4/doggo_1.1.4_Darwin_arm64.tar.gz"}
+
 [[tools.dotnet]]
 version = "8.0.415"
 backend = "asdf:dotnet"
