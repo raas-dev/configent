@@ -330,9 +330,6 @@ alias markitdown='uvx --from "markitdown[all]" markitdown'
 # HTTP API client
 alias posting='POSTING_THEME="hypernova" uvx posting'
 
-# Multitool for tabular data in terminal
-alias vd='uvx --with odfpy,openpyxl visidata'
-
 # General media downloader
 alias you-get='uvx you-get'
 
