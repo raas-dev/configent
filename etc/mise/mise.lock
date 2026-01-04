@@ -44,12 +44,12 @@ backend = "aqua:atuinsh/atuin"
 [[tools.awscli]]
 version = "2.32.28"
 backend = "aqua:aws/aws-cli"
-"platforms.linux-arm64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
-"platforms.linux-arm64-musl" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
-"platforms.linux-x64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
-"platforms.linux-x64-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
-"platforms.linux-x64-musl" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
-"platforms.linux-x64-musl-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
+"platforms.linux-arm64" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"}
+"platforms.linux-arm64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"}
+"platforms.linux-x64" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
+"platforms.linux-x64-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
+"platforms.linux-x64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
+"platforms.linux-x64-musl-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
 "platforms.macos-arm64" = { checksum = "blake3:6838459e9af7dcf4ae612d76769e96d14d8632a8182c3fdbe35e7750cf83afb0", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
 "platforms.macos-x64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
 "platforms.macos-x64-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
