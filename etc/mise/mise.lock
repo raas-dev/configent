@@ -44,12 +44,12 @@ backend = "aqua:atuinsh/atuin"
 [[tools.awscli]]
 version = "2.32.28"
 backend = "aqua:aws/aws-cli"
-"platforms.linux-arm64" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"}
-"platforms.linux-arm64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"}
-"platforms.linux-x64" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
-"platforms.linux-x64-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
-"platforms.linux-x64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
-"platforms.linux-x64-musl-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"}
+"platforms.linux-arm64" = { checksum = "blake3:a4dceae2cebc05b94ece6075491444fcae60da3c77acdaf014c31715a4f95c95", url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.32.28.zip"}
+"platforms.linux-arm64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.32.28.zip"}
+"platforms.linux-x64" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.32.28.zip"}
+"platforms.linux-x64-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.32.28.zip"}
+"platforms.linux-x64-musl" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.32.28.zip"}
+"platforms.linux-x64-musl-baseline" = { url = "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.32.28.zip"}
 "platforms.macos-arm64" = { checksum = "blake3:6838459e9af7dcf4ae612d76769e96d14d8632a8182c3fdbe35e7750cf83afb0", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
 "platforms.macos-x64" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
 "platforms.macos-x64-baseline" = { url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.28.pkg"}
@@ -141,7 +141,7 @@ backend = "cargo:tlrc"
 [[tools.delta]]
 version = "0.18.2"
 backend = "aqua:dandavison/delta"
-"platforms.linux-arm64" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-unknown-linux-gnu.tar.gz"}
+"platforms.linux-arm64" = { checksum = "blake3:1a92c45e381d4d1423f21a47277ca477676fc581f66ad85e4ec66ec77647040e", url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-unknown-linux-gnu.tar.gz"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-unknown-linux-gnu.tar.gz"}
 "platforms.linux-x64" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"}
@@ -309,7 +309,7 @@ backend = "github:control-theory/gonzo"
 [[tools."github:dalance/procs"]]
 version = "0.14.10"
 backend = "github:dalance/procs"
-"platforms.linux-arm64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511725"}
+"platforms.linux-arm64" = { checksum = "blake3:13a062387d616d390678fc7af84e4637bb5cfe4a36f4580b0a469716231dde29", url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511725"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511725"}
 "platforms.linux-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
@@ -339,7 +339,7 @@ backend = "github:orf/gping"
 [[tools."github:ouch-org/ouch"]]
 version = "0.6.1"
 backend = "github:ouch-org/ouch"
-"platforms.linux-arm64" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071216"}
+"platforms.linux-arm64" = { checksum = "blake3:2ac6917bd01eec836569f6ed5f749c9f54e26f795b8c0653ecad7100a9e42ea4", url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071216"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071215"}
 "platforms.linux-x64" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071207"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071207"}
@@ -410,7 +410,7 @@ backend = "github:sharkdp/pastel"
 [[tools."github:sigoden/opscan"]]
 version = "0.4.0"
 backend = "github:sigoden/opscan"
-"platforms.linux-arm64" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94912908"}
+"platforms.linux-arm64" = { checksum = "blake3:d07adad39868ba8af9db9f2b5ab58423a36517f0283a53ee33d18a235303bf74", url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94912908"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94912908"}
 "platforms.linux-x64" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-x86_64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94912992"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/sigoden/opscan/releases/download/v0.4.0/opscan-v0.4.0-x86_64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sigoden/opscan/releases/assets/94912992"}
@@ -755,7 +755,7 @@ backend = "core:rust"
 [[tools.sd]]
 version = "1.0.0"
 backend = "aqua:chmln/sd"
-"platforms.linux-arm64" = { url = "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64" = { checksum = "blake3:06826789980a98982b0d51097f088584f1d458f143401f90d091068bcf6139d8", url = "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-aarch64-unknown-linux-musl.tar.gz"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-aarch64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64" = { url = "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz"}
@@ -914,7 +914,7 @@ backend = "aqua:mikefarah/yq"
 [[tools.zoxide]]
 version = "0.9.8"
 backend = "aqua:ajeetdsouza/zoxide"
-"platforms.linux-arm64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64" = { checksum = "blake3:fd3861fa9b55ffa4dc7314465da13e65f02858c45887e4d471ba00adc9cabaee", url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-unknown-linux-musl.tar.gz"}
 "platforms.linux-arm64-musl" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64-baseline" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
