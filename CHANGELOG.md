@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.191.0](https://github.com/raas-dev/configent/compare/1.190.0...1.191.0) (2026-01-04)
+
+
+### Features
+
+* **mise:** add serpl tool ([2239260](https://github.com/raas-dev/configent/commit/22392608b72979984ec8f3599c7b59f118466a9c))
+* **mise:** add xleak excel viewer tool ([37a1c4d](https://github.com/raas-dev/configent/commit/37a1c4dd2e85e7f5ccf8f810a22aada04f67b876))
+
+
+### Fixes
+
+* **aliases:** add posting HTTP API client alias ([ece4c36](https://github.com/raas-dev/configent/commit/ece4c36a76120b8e40da4b6a35e7bd840184ba2b))
+* **aliases:** add serpl tool alias ([6bce94b](https://github.com/raas-dev/configent/commit/6bce94bab7939ba8f3b5950229976744008dad76))
+* **aliases:** add wrkflw workflow tool alias ([05fa45e](https://github.com/raas-dev/configent/commit/05fa45eec0060e3294c815a1a9d1b8ec882b1a54))
+* **aliases:** remove devenv alias ([cddd6cd](https://github.com/raas-dev/configent/commit/cddd6cd8d63e39c06f70fbc1546c9c784d1e1382))
+* **aliases:** remove visidata alias ([8cefa17](https://github.com/raas-dev/configent/commit/8cefa17c962478802f71c541ac71fc51567b72c3))
+* **aliases:** replace pcalc with bitwise tool ([3b8e92a](https://github.com/raas-dev/configent/commit/3b8e92ac5ef98dca031fdcfbdcf411ab848c311f))
+* **bootstrap:** add fallback for git name in stash ([51fdca5](https://github.com/raas-dev/configent/commit/51fdca5eb632e1fd46a724940e54941f8120efeb))
+* **chat:** restrict tool permissions and remove legacy config ([baed19e](https://github.com/raas-dev/configent/commit/baed19e4cdfa6d5b32c2ca2c3c143bdd48221b7c))
+* **install_apps_brew:** add macmon monitoring tool ([9dd8c63](https://github.com/raas-dev/configent/commit/9dd8c632a1e721e94e0ea9b78d8ff564e3e3d626))
+* **mise:** remove sd tool ([5bca3b7](https://github.com/raas-dev/configent/commit/5bca3b73b86dbed77566aa14a3d6ca6962098f35))
+* **mise:** update awscli linux download urls ([bc0d095](https://github.com/raas-dev/configent/commit/bc0d0953c392b46c6fb37d480028cc31f2db6f4d))
+* **mise:** update opencode-ai to 1.1.1 ([1adb71e](https://github.com/raas-dev/configent/commit/1adb71ef735e689b2a27094d5281006c34ea41dd))
+* **vscode:** replace hurl extension with runner ([4935c89](https://github.com/raas-dev/configent/commit/4935c89c6c5948841fa005c880802c17c7dd8369))
+
 ## [1.190.0](https://github.com/raas-dev/configent/compare/1.189.0...1.190.0) (2026-01-04)
 
 
