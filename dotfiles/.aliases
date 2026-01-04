@@ -124,7 +124,7 @@ alias c='oxker --host $DOCKER_HOST'
 # d is for generic docker build and run, see d()
 alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden'
-alias g='git'
+# g is for git/gitui, see g()
 alias h='xh --verify=no'
 alias i='glances'
 # j is for zoxide
@@ -615,6 +615,15 @@ ext() {
       ;;
     esac
   done
+}
+
+# Shortcut for git, opens gitui log view by default
+g() {
+  if [ $# -eq 0 ]; then
+    gitui
+  else
+    git "$@"
+  fi
 }
 
 # Generate password and copy it to clipboard
