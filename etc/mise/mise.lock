@@ -583,6 +583,21 @@ backend = "aqua:Lifailon/lazyjournal"
 "platforms.macos-x64" = { checksum = "sha256:1fb72728cf5268e45a7be9f8244408da3d439f477b57cc5e6eaf1a008339aa8d", url = "https://github.com/Lifailon/lazyjournal/releases/download/0.8.3/lazyjournal-0.8.3-darwin-amd64"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:1fb72728cf5268e45a7be9f8244408da3d439f477b57cc5e6eaf1a008339aa8d", url = "https://github.com/Lifailon/lazyjournal/releases/download/0.8.3/lazyjournal-0.8.3-darwin-amd64"}
 
+[[tools.lazyssh]]
+version = "0.3.0"
+backend = "aqua:Adembc/lazyssh"
+"platforms.linux-arm64" = { checksum = "sha256:d859663160af7d7752ec7bccfa1b6dcff5cb2d2a03cfb1d04b3a1127171f5e35", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:d859663160af7d7752ec7bccfa1b6dcff5cb2d2a03cfb1d04b3a1127171f5e35", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:3e87196faf748905f98062040d5a0e056de0e0eb0247413b70c2fc03c3928ad9", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_x86_64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:3e87196faf748905f98062040d5a0e056de0e0eb0247413b70c2fc03c3928ad9", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_x86_64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:3e87196faf748905f98062040d5a0e056de0e0eb0247413b70c2fc03c3928ad9", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_x86_64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3e87196faf748905f98062040d5a0e056de0e0eb0247413b70c2fc03c3928ad9", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_x86_64.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:43163742c109e73f2b71db682fe04fb25dac23e132edd6cf93752b26b408e8c8", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Darwin_arm64.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:8c06b27ddb51939570066682e4fcd55d2453cc6b6c6ca226cb617371f6a51279", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Darwin_x86_64.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:8c06b27ddb51939570066682e4fcd55d2453cc6b6c6ca226cb617371f6a51279", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Darwin_x86_64.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:ca4353a910e453deb5de68c95d83aa8738ff0e52c4bff919f6d74dc27560a1df", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Windows_x86_64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:ca4353a910e453deb5de68c95d83aa8738ff0e52c4bff919f6d74dc27560a1df", url = "https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Windows_x86_64.zip"}
+
 [[tools.lima]]
 version = "2.0.3"
 backend = "aqua:lima-vm/lima"

@@ -45,6 +45,7 @@ shfmt = 'latest'
 doggo = 'latest'
 gping = 'latest'
 hurl = 'latest'
+#lazyssh = 'latest'
 'github:sigoden/opscan' = 'latest'
 #'github:fujiapple852/trippy' = 'latest' # https://trippy.rs/guides/privileges
 
