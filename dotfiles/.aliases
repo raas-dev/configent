@@ -1084,6 +1084,7 @@ alias bitwise='n bitwise'
 alias devenv='n devenv' # https://devenv.sh/
 alias difft='n shell/difftastic difft'
 alias grex='n grex'
+alias serpl='n serpl'
 alias tokei='n tokei'
 alias wrkflw='n wrkflw'
 
