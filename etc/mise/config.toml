@@ -102,6 +102,9 @@ go = '1.25.3'
 # node.js
 node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
+
+## ai
+'github:memextech/ht-mcp' = { version = 'latest', bin = 'ht-mcp' }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:@openchamber/web' = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }

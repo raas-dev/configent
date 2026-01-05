@@ -325,6 +325,11 @@ backend = "github:dalance/procs"
 "platforms.windows-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
+[[tools."github:memextech/ht-mcp"]]
+version = "0.1.3"
+backend = "github:memextech/ht-mcp"
+"platforms.macos-arm64" = { checksum = "sha256:dba2d2619c01f4c8565402e64a971b1bd7acb171148e06fb6ae80bb018dc3de3", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-aarch64-apple-darwin", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265402461"}
+
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
 backend = "github:orf/gping"
