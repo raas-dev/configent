@@ -496,7 +496,7 @@
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.limit.excludeDirty": true,
-  "workbench.editor.limit.value": 6,
+  "workbench.editor.limit.value": 5,
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
