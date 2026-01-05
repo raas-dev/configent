@@ -4,12 +4,10 @@
   "google_auth": false,
   "agents": {
     "Sisyphus": {
-      //"model": "google/antigravity-gemini-3-pro-high"
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "Planner-Sisyphus": {
-      //"model": "google/antigravity-gemini-3-pro-high"
-      //"model": "google/antigravity-gemini-3-flash",
+      "model": "google/gemini-3-flash-preview",
       "permission": {
         "bash": {
           "*": "allow",
@@ -19,28 +17,25 @@
       }
     },
     "OpenCode-Builder": {
-      //"model": "google/antigravity-gemini-3-pro-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "oracle": {
-      //"model": "google/antigravity-gemini-3-pro-high"
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "librarian": {
-      //"model": "google/antigravity-gemini-3-pro-high"
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "explore": {
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "frontend-ui-ux-engineer": {
-      //"model": "google/antigravity-gemini-3-pro-high"
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "document-writer": {
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     },
     "multimodal-looker": {
-      //"model": "google/antigravity-gemini-3-flash"
+      "model": "google/gemini-3-flash-preview"
     }
   },
   "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
