@@ -32,7 +32,7 @@
       }
     },
     "commander": {
-      "description": "Use when you need to execute terminal commands or search the local file system. Provides interactive terminal access and file system navigation capabilities for running commands, browsing directories, and managing files on the local machine.",
+      "description": "Use when you need to execute terminal processes or search the local file system. Provides interactive terminal access and file system navigation capabilities for running commands, browsing directories, and managing files on the local machine.",
       "command": "npx",
       "args": ["-y", "@wonderwhy-er/desktop-commander"]
     }
