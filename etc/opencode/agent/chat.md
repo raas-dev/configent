@@ -1,7 +1,7 @@
 ---
 description: General purpose chat with tools
 mode: primary
-model: github-copilot/gpt-5.2
+model: openai/gpt-5.2
 temperature: 0.0
 permissions:
   edit: deny
