@@ -14,18 +14,18 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# opencode.json
-if [ ! -r "$backup_path/.config/opencode/opencode.json" ]; then
-  if [ -r "$HOME/.config/opencode/opencode.json" ]; then
+# opencode.jsonc
+if [ ! -r "$backup_path/.config/opencode/opencode.jsonc" ]; then
+  if [ -r "$HOME/.config/opencode/opencode.jsonc" ]; then
     mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/opencode.json" \
-      "$backup_path/.config/opencode/opencode.json"
+    cp -P "$HOME/.config/opencode/opencode.jsonc" \
+      "$backup_path/.config/opencode/opencode.jsonc"
   fi
 fi
 mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
-# oh-my-opencode.json
+# oh-my-opencode.jsonc
 if [ ! -r "$backup_path/.config/opencode/oh-my-opencode.jsonc" ]; then
   if [ -r "$HOME/.config/opencode/oh-my-opencode.jsonc" ]; then
     mkdir -p "$backup_path/.config/opencode"
