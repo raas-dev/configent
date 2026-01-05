@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.0](https://github.com/raas-dev/configent/compare/1.191.0...1.192.0) (2026-01-05)
+
+
+### Features
+
+* **mise:** add netscanner tool ([6cc9930](https://github.com/raas-dev/configent/commit/6cc9930ae074c16fd6697fc0cffd403d9b219f36))
+
+
+### Fixes
+
+* **aliases:** add rga alias for ripgrep-all ([623fd81](https://github.com/raas-dev/configent/commit/623fd814fbd55e182624c25b1fdc8216ff210829))
+* **aliases:** convert g alias to function for gitui ([5d28eb3](https://github.com/raas-dev/configent/commit/5d28eb3cc0da864648b7fceec21b8624322ba8b5))
+* **aliases:** reorder and update tool aliases ([dd7e9b5](https://github.com/raas-dev/configent/commit/dd7e9b55e85952f38af1cd8e4e5d2f1641ba3bad))
+* **aliases:** reorganize and add netscanner alias ([8b44d58](https://github.com/raas-dev/configent/commit/8b44d58d3e10399d787abf57c02debd8906477f9))
+* **mcp:** add commander server for terminal access ([0302ff5](https://github.com/raas-dev/configent/commit/0302ff5d582cada3d50e9bf610ee181ce23201e6))
+* **mcp:** update commander description wording ([51775f9](https://github.com/raas-dev/configent/commit/51775f93896c02c83e26272f66adc5aef3487dc4))
+* **nvim:** update nvim-treesitter to latest commit ([5d08413](https://github.com/raas-dev/configent/commit/5d084139e4ecd61636ebc40eadac8f7026e25b71))
+* **opencode:** comment out agent model configs ([a78c020](https://github.com/raas-dev/configent/commit/a78c020321cda1559dc975f7e14ac69d8c517619))
+* **opencode:** rename opencode.json to opencode.jsonc ([e54ab9c](https://github.com/raas-dev/configent/commit/e54ab9c0024e19a7aadae00b70cea562db728e8a))
+* **opencode:** set gemini-3-flash-preview as default model ([5fc853b](https://github.com/raas-dev/configent/commit/5fc853bba1ad6e495c76cb05323ae4c07181e7c2))
+* **opencode:** update agent models to antigravity variants ([2653fb6](https://github.com/raas-dev/configent/commit/2653fb6fc97988de0245793a36d0e2b47eb6b1d3))
+* **opencode:** update agent models to openai ([6e6e960](https://github.com/raas-dev/configent/commit/6e6e960c22a225046a1431faa70e745b7b246565))
+* **opencode:** update computer-use agent model ([a1db94f](https://github.com/raas-dev/configent/commit/a1db94fa7be173804706aa4da9d05e93e68d28a5))
+* **vscode:** decrease editor tab limit to 5 ([48d4552](https://github.com/raas-dev/configent/commit/48d4552a77f4b3747743aed58eed197e2ebba36b))
+* **vscode:** increase editor tab limit to 6 ([35adc45](https://github.com/raas-dev/configent/commit/35adc45c1dfef9031a9cf4ce8115ee1f052dcc14))
+
 ## [1.191.0](https://github.com/raas-dev/configent/compare/1.190.0...1.191.0) (2026-01-04)
 
 
