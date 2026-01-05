@@ -31,10 +31,10 @@
         "UTCP_CONFIG_FILE": "${UTCP_CONFIG_FILE}"
       }
     },
-    "commander": {
+    "headless-terminal": {
       "description": "Use when you need to execute terminal processes or search the local file system. Provides interactive terminal access and file system navigation capabilities for running commands, browsing directories, and managing files on the local machine.",
-      "command": "npx",
-      "args": ["-y", "@wonderwhy-er/desktop-commander"]
+      "command": "ht-mcp",
+      "args": []
     }
   }
 }
