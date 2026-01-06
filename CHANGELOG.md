@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.3](https://github.com/raas-dev/configent/compare/1.192.2...1.192.3) (2026-01-06)
+
+
+### Fixes
+
+* **mcp:** simplify dynamic-mcp command invocation ([191fee9](https://github.com/raas-dev/configent/commit/191fee90aba4c20395bf41e69da5b2bd263d487d))
+* **mise:** add dynamic-mcp tool to config ([a32f198](https://github.com/raas-dev/configent/commit/a32f198779c69fef7b9c491a4bb2f8cdc722dcbe))
+* **mise:** update dynamic-mcp checksum ([7a840aa](https://github.com/raas-dev/configent/commit/7a840aaa3612723ccbd123aacec8aeed1347828b))
+
 ## [1.192.2](https://github.com/raas-dev/configent/compare/1.192.1...1.192.2) (2026-01-06)
 
 
