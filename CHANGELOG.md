@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.2](https://github.com/raas-dev/configent/compare/1.192.1...1.192.2) (2026-01-06)
+
+
+### Fixes
+
+* **mcp:** rename dynamic-mcp directory to mcp ([6109ef0](https://github.com/raas-dev/configent/commit/6109ef02528dfc2f9cbf976d3c16c03138f37e64))
+
 ## [1.192.1](https://github.com/raas-dev/configent/compare/1.192.0...1.192.1) (2026-01-06)
 
 
