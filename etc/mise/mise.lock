@@ -278,7 +278,7 @@ backend = "github:abhimanyu003/sttr"
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.0.0"
 backend = "github:asyrjasalo/dynamic-mcp"
-"platforms.macos-arm64" = { checksum = "sha256:36c438d71473219ba6637c6fa67e2402f8a684b78a01fa3e60d3c55b94476c60", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.0.0/dynamic-mcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337102618"}
+"platforms.macos-arm64" = { checksum = "sha256:6b53eca241e193c0b9705b05d9ceb5bb41918dceff7550b1b0885948e1ec603f", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.0.0/dynamic-mcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337102618"}
 
 [[tools."github:bgreenwell/xleak"]]
 version = "0.2.5"
