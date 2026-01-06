@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.1](https://github.com/raas-dev/configent/compare/1.192.0...1.192.1) (2026-01-06)
+
+
+### Fixes
+
+* **extensions:** add rust-analyzer extension ([150a6a3](https://github.com/raas-dev/configent/commit/150a6a316719f5311d0dd79d1d6ef9dfa85dc908))
+* **mcp:** rename commander to headless-terminal ([76c8a2a](https://github.com/raas-dev/configent/commit/76c8a2aa5df0cf83ab80b69250d35c0dabddfb9f))
+* **mcp:** rename headless-terminal to ht ([26724cb](https://github.com/raas-dev/configent/commit/26724cbbd838c2dce1392f87ff4e75b94ff5475e))
+* **mcp:** rename mcp-gateway to dynamic-mcp ([28a0e6e](https://github.com/raas-dev/configent/commit/28a0e6e450a02fc598f1986d319954a7a077cc78))
+* **mise:** add ht-mcp tool for AI capabilities ([6efa554](https://github.com/raas-dev/configent/commit/6efa554613507a283055505861244c3407908407))
+* **mise:** update opencode-ai to 1.1.3 ([19f9b53](https://github.com/raas-dev/configent/commit/19f9b53d7e603515458a5947ecc56c14f425c173))
+
 ## [1.192.0](https://github.com/raas-dev/configent/compare/1.191.0...1.192.0) (2026-01-05)
 
 
