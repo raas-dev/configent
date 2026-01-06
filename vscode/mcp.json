@@ -1,10 +1,7 @@
 {
   "servers": {
-    "gateway": {
-      "command": "uvx",
-      "args": [
-        "agent-mcp-gateway"
-      ]
+    "dynamic-mcp": {
+      "command": "dynamic-mcp"
     }
   }
 }

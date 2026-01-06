@@ -8,8 +8,8 @@
     ".cursor/rules/**/*.mdc"
   ],
   "mcp": {
-    "gateway": {
-      "command": ["uvx", "agent-mcp-gateway"],
+    "dynamic-mcp": {
+      "command": ["dynamic-mcp"],
       "enabled": true,
       "type": "local"
     }
