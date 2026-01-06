@@ -7,8 +7,8 @@ a pull request.
 
 1. Do not write anything in installation scripts that is not POSIX compatible.
 2. Install with `mise`. For `root`, use distros' repos. Use minimum of Homebrew.
-3. If the app is **installed**, it must work on all Linux distros in README.md.
-4. The app must work on AArch64 Linux as Macs default to AArch64 since 2023.
+3. If an app is **installed**, it must work on all Linux distros in README.md.
+4. The app must work on AArch64 Linux as Apple Macs default to ARM64 since 2023.
 5. Do not install if version does not matter. Call app via `uvx`, `bunx` or `n`.
 
 ## Testing
