@@ -13,12 +13,14 @@ a pull request.
 
 ## Testing
 
-Use alias `v` for managing
+Use alias `vv` for creating
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-For development, run the installer from the latest commit by passing `GIT_REF`:
+For each VM's cloud-init, alias `vv` sets installer to use the last commit:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
+
+If `GIT_REF` is not set, the installer uses version hardcoded in `install.sh`.
 
 Also, once the VM has been started, host's `$HOME/configent` is mounted
 read-only in the VM. This helps in testing non-commited changes to the scripts.
