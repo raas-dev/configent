@@ -121,7 +121,7 @@ uv = 'latest'
 #'pipx:gptme' = { version = 'latest', uvx_args = '--with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
-'pipx:sncli' = { version = 'latest', uvx_args = '--python 3.11', postinstall = "~/.local/configent/bin/postinstall_sncli" }
+'pipx:sncli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 
 # dotnet
 dotnet = '8.0.415'

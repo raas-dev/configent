@@ -755,9 +755,6 @@ backend = "pipx:poetry"
 version = "0.4.4"
 backend = "pipx:sncli[uvx_args=--python 3.11]"
 
-[tools."pipx:sncli".options]
-uvx_args = "--python 3.11"
-
 [[tools."pipx:tldr"]]
 version = "3.4.3"
 backend = "pipx:tldr"
