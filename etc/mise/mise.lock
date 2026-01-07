@@ -723,11 +723,11 @@ backend = "aqua:mrjackwills/oxker"
 "platforms.windows-x64-baseline" = { checksum = "sha256:c5ad7e0bc642794bc95a20af9cee03c4b40f74a4c20ac5c5da969f641a890098", url = "https://github.com/mrjackwills/oxker/releases/download/v0.12.0/oxker_windows_x86_64.zip"}
 
 [[tools."pipx:azure-cli"]]
-version = "2.68.0"
+version = "2.81.0"
 backend = "pipx:azure-cli[uvx_args=--python 3.11 --prerelease=allow --with pip]"
 
 [tools."pipx:azure-cli".options]
-uvx_args = "--python 3.11 --prerelease=allow --with pip"
+uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
 version = "0.11.2"
