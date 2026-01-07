@@ -1,3 +1,7 @@
 {
-  "mcpServers": {}
+  "mcpServers": {
+    "dynamic-mcp": {
+      "command": "dmcp"
+    }
+  }
 }
