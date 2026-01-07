@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.4](https://github.com/raas-dev/configent/compare/1.192.3...1.192.4) (2026-01-07)
+
+
+### Fixes
+
+* **mcp:** add dynamic-mcp server config ([34a4650](https://github.com/raas-dev/configent/commit/34a4650e7e3c0b647802d79aa2bf7299c3172070))
+* **mcp:** update dynamic-mcp command to use uvx ([b754fa0](https://github.com/raas-dev/configent/commit/b754fa019f7259b7bc885042636b594dc818aa73))
+* **mcp:** update dynamic-mcp to 1.1.0 and rename command to dmcp ([417ef9f](https://github.com/raas-dev/configent/commit/417ef9f9fdd27b0ef7ec8b25ae1fee159737e10b))
+* **mise:** update opencode-ai to 1.1.4 ([0cc1fea](https://github.com/raas-dev/configent/commit/0cc1fea64aee5edc5700a55542a3446becb959a6))
+
 ## [1.192.3](https://github.com/raas-dev/configent/compare/1.192.2...1.192.3) (2026-01-06)
 
 
