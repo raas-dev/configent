@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.5](https://github.com/raas-dev/configent/compare/1.192.4...1.192.5) (2026-01-07)
+
+
+### Fixes
+
+* **mise:** remove python 3.11 constraint from azure-cli ([acf66cf](https://github.com/raas-dev/configent/commit/acf66cf2274233d62a33829313b537500147899c))
+* **mise:** remove python 3.11 constraint from sncli ([9676d81](https://github.com/raas-dev/configent/commit/9676d810c5c7f0f2c2b66434662135ecebc6bfe4))
+* **uv:** update python version to 3.14 ([d019923](https://github.com/raas-dev/configent/commit/d01992358a64c38b0417d20fea7c2453c13eb34f))
+
 ## [1.192.4](https://github.com/raas-dev/configent/compare/1.192.3...1.192.4) (2026-01-07)
 
 
