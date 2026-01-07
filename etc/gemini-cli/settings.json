@@ -19,7 +19,7 @@
   },
   "mcpServers": {
     "dynamic-mcp": {
-      "command": "dynamic-mcp"
+      "command": "dmcp"
     }
   },
   "privacy": {
