@@ -268,19 +268,9 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
-version = "1.1.0"
+version = "1.2.0"
 backend = "github:asyrjasalo/dynamic-mcp"
-"platforms.linux-arm64" = { checksum = "sha256:34e9a7895663437395cc5e152676e1ce2a0a534ff3206d46e9ae9c40bfe7efb7", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420689"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:34e9a7895663437395cc5e152676e1ce2a0a534ff3206d46e9ae9c40bfe7efb7", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420689"}
-"platforms.linux-x64" = { checksum = "sha256:2d221869ed17c38c63d83fa0677431367fa9da7f3b554da2927136bfb86f20f6", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420261"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:2d221869ed17c38c63d83fa0677431367fa9da7f3b554da2927136bfb86f20f6", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420261"}
-"platforms.linux-x64-musl" = { checksum = "sha256:2d221869ed17c38c63d83fa0677431367fa9da7f3b554da2927136bfb86f20f6", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420261"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:2d221869ed17c38c63d83fa0677431367fa9da7f3b554da2927136bfb86f20f6", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420261"}
-"platforms.macos-arm64" = { checksum = "sha256:6ed9cd083b19636f5d51866d33522b1c16d3597a7fa462f14281cd77897f6a93", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420637"}
-"platforms.macos-x64" = { checksum = "sha256:6ed9cd083b19636f5d51866d33522b1c16d3597a7fa462f14281cd77897f6a93", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420637"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:6ed9cd083b19636f5d51866d33522b1c16d3597a7fa462f14281cd77897f6a93", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337420637"}
-"platforms.windows-x64" = { checksum = "sha256:b1f5e4a5adf30e3b4e386c545c0c8716fabfbc1123d029eef0900e51e142f6b1", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337421419"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:b1f5e4a5adf30e3b4e386c545c0c8716fabfbc1123d029eef0900e51e142f6b1", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.1.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337421419"}
+"platforms.macos-arm64" = { checksum = "sha256:6cf60401ca0ba8cf2a2936497cf0b6a653dd0040fa540fe6c4e5ff820e950742", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.2.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337863741"}
 
 [[tools."github:bgreenwell/xleak"]]
 version = "0.2.5"

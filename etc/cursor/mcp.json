@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "dynamic-mcp": {
-      "command": "uvx",
-      "args": ["dmcp"]
+      "command": "dmcp"
     }
   }
 }
