@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.6](https://github.com/raas-dev/configent/compare/1.192.5...1.192.6) (2026-01-08)
+
+
+### Fixes
+
+* **ai_commit:** update model identifier to github-copilot ([83494a2](https://github.com/raas-dev/configent/commit/83494a2ad9ad0c4d0f881ff667ed46a7559517df))
+
 ## [1.192.5](https://github.com/raas-dev/configent/compare/1.192.4...1.192.5) (2026-01-07)
 
 
