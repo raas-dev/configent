@@ -383,9 +383,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:7ec395c4bdbf20618ca9ddb60385c043d25c84b3175d91a901ad1fefa6daf7d6", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806161"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.2.0"
+version = "0.2.1"
 backend = "github:pranshuparmar/witr"
-"platforms.macos-arm64" = { checksum = "sha256:a0b7db69fcaddd65de5002fd9b399ab6cce2506d515819d910aeea2851dd7de0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.0/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/337485060"}
+"platforms.macos-arm64" = { checksum = "sha256:8f61c2effe97c7373cb9db89696829dd688502f36d263fb82e93574e833abd6b", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.1/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/337874835"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
