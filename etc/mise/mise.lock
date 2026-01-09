@@ -268,9 +268,8 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
-version = "1.2.0"
+version = "1.3.0"
 backend = "github:asyrjasalo/dynamic-mcp"
-"platforms.macos-arm64" = { checksum = "sha256:6cf60401ca0ba8cf2a2936497cf0b6a653dd0040fa540fe6c4e5ff820e950742", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.2.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/337863741"}
 
 [[tools."github:bgreenwell/xleak"]]
 version = "0.2.5"
