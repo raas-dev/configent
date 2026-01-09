@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.7](https://github.com/raas-dev/configent/compare/1.192.6...1.192.7) (2026-01-09)
+
+
+### Fixes
+
+* **postinstall_claude-code:** disable user-wide resource symlinks ([b8f3d60](https://github.com/raas-dev/configent/commit/b8f3d60c7456b5fb7cc877452c4b8c89d5663d1c))
+* **vscode:** reorganize claudeCode permission settings ([f4f9324](https://github.com/raas-dev/configent/commit/f4f9324c9910d859d18d404a8919cf70e0c49a8e))
+
 ## [1.192.6](https://github.com/raas-dev/configent/compare/1.192.5...1.192.6) (2026-01-08)
 
 
