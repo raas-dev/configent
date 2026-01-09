@@ -103,7 +103,7 @@ go = '1.25.3'
 node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 
-## ai
+# ai
 "github:asyrjasalo/dynamic-mcp" = "1.3.0"
 'github:memextech/ht-mcp' = { version = 'latest', bin = 'ht-mcp' }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
