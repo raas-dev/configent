@@ -734,7 +734,7 @@ backend = "pipx:glances[extras=containers,gpu,web,wifi]"
 extras = "containers,gpu,web,wifi"
 
 [[tools."pipx:pdm"]]
-version = "2.26.3"
+version = "2.26.4"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
