@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.8](https://github.com/raas-dev/configent/compare/1.192.7...1.192.8) (2026-01-10)
+
+
+### Fixes
+
+* **gitconfig:** add remote verbose alias and rename diff alias ([a45f6f1](https://github.com/raas-dev/configent/commit/a45f6f1a3a62ad3b1175237fb2049cd246b9a6a9))
+* **gitconfig:** rename commit alias from up to g ([ea461fd](https://github.com/raas-dev/configent/commit/ea461fd2e1bccf62627db34bf88f24b8d7f17724))
+* **gitconfig:** rename submodule alias from sup to sub ([8021477](https://github.com/raas-dev/configent/commit/8021477d384c09c721f93d3af9bf1249a68405b6))
+* **gitconfig:** shorten merge and switch aliases ([08f7ebd](https://github.com/raas-dev/configent/commit/08f7ebd109f3d9a08b686e929bd5e8326e4e18d3))
+* **gitconfig:** simplify reset aliases ([c93d7f9](https://github.com/raas-dev/configent/commit/c93d7f983350b2d2f3f5c9838f4fbe6e0b65a1e1))
+* **mise:** pin dynamic-mcp to version 1.3.0 ([21ed0ce](https://github.com/raas-dev/configent/commit/21ed0ce1152956043a1b793586eddfe13956b9d5))
+* **oh-my-opencode:** comment out google gemini model configs ([ee8e3c5](https://github.com/raas-dev/configent/commit/ee8e3c541599cd9030185399407d0323f7c059e4))
+* **opencode:** enable google gemini models and update plugin version ([1205491](https://github.com/raas-dev/configent/commit/12054914b2a41241d1657fd3c5a6c5c95863f0b1))
+* **opencode:** reorder plugins in config ([17c08f3](https://github.com/raas-dev/configent/commit/17c08f3861eae46a3e15821fde1b6afbd74b7a70))
+
 ## [1.192.7](https://github.com/raas-dev/configent/compare/1.192.6...1.192.7) (2026-01-09)
 
 
