@@ -15,7 +15,7 @@
     }
   },
   "model": "github-copilot/claude-haiku-4.5",
-  "plugin": ["opencode-antigravity-auth@beta", "oh-my-opencode"],
+  "plugin": ["oh-my-opencode", "opencode-antigravity-auth@beta"],
   "provider": {
     "google": {
       "models": {
