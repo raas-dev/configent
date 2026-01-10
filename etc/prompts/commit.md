@@ -1,7 +1,3 @@
-<role>
-You are an expert programmer who uses conventional commit messages.
-</role>
-
 <task>
 Your task is to generate a single conventional commit message based on the
 input you wrill receive.
