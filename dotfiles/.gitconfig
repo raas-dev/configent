@@ -10,7 +10,6 @@
   bd = branch --delete --force
   bda = !"git branch --merged | grep -v '\\*' | xargs -n 1 git branch --delete"
   bm = branch --move --force
-  c = !"f() { ai_commit \"$*\"; }; f"
   ca = !"git add --all && git c"
   cam = !"git add --all && git commit --amend"
   co = checkout
@@ -37,8 +36,17 @@
   sub = submodule update --init --recursive
   t = tag --list --sort=-version:refname
 
+  # Commit all changes with auto-generated commit message
+  c = !"f() { ai_commit \"$*\"; }; f"
+
   # Show the diff between the latest commit and current
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+
+  # Enter to a remote tracking branch, create branch if it does not exist
+  e = !"f() { git fetch origin && git switch --create $1 --track origin/$1 || git switch $1 || git switch --create $1; }; f"
+
+  # Commit all changes with auto-generated commit message and push
+  g = !"f() { git add --all; ai_commit \"$*\" && git push --set-upstream; }; f"
 
   # Show the diff between the $number revisions ago and current
   h = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
@@ -57,12 +65,6 @@
 
   # Remove a tag (local and remote) and recreate it for HEAD
   retag = !"f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
-
-  # Enter to a remote tracking branch, create branch if it does not exist
-  e = !"f() { git fetch origin && git switch --create $1 --track origin/$1 || git switch $1 || git switch --create $1; }; f"
-
-  # Commit all changes with auto-generated commit message and push
-  g = !"f() { git add --all; ai_commit \"$*\" && git push --set-upstream; }; f"
 
 ### Colors #####################################################################
 
