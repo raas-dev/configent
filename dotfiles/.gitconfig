@@ -33,7 +33,7 @@
   rip = rebase --interactive @{upstream}
   s = status --short
   st = status --branch --show-stash
-  sup = submodule update --init --recursive
+  sub = submodule update --init --recursive
   t = tag --list --sort=-version:refname
 
   # Show the diff between the latest commit and current
