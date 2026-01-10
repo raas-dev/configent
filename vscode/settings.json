@@ -550,5 +550,6 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "claudeCode.allowDangerouslySkipPermissions": true,
-  "claudeCode.initialPermissionMode": "acceptEdits"
+  "claudeCode.initialPermissionMode": "bypassPermissions",
+  "claudeCode.useTerminal": true
 }
