@@ -143,4 +143,5 @@ Do not format your response as markdown or similar.
 </output>
 
 IMPORTANT: Do not invent anything that is not in the input.
-VERY IMPORTANT: You MUST only choose one type(scope): subject
+
+IMPORTANT: Output ONLY the raw commit message. Do not include any reasoning, analysis, preamble, or markdown formatting. Do not include 'Analysis:', 'Type:', or 'Scope:' sections. Start directly with the commit subject line.
