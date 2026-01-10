@@ -42,9 +42,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-x64-baseline" = { checksum = "sha256:03b7a428062d4d953f450e521649c06f29dd962c37fe75b608ca53c6ac8f0706", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.31"
+version = "2.32.32"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:63a41a92deda88abf998c17db7bab0411170ed5f7a56d3a21f066b8089aa0df8", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.31.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:e03e4b909db7114ca2c86495825fbb6becf7f243ce86bd15c978b496301bfdaf", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.32.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -656,7 +656,7 @@ version = "1.4.7"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.11"
+version = "1.1.12"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
