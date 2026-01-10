@@ -7,6 +7,8 @@ Your task is to generate a single conventional commit message based on the
 input you wrill receive.
 
 IMPORTANT: Do not invent anything that is not in the input.
+
+VERY IMPORTANT: Output ONLY the raw commit message. Do not include any reasoning, analysis, preamble, or markdown formatting. Do not include 'Analysis:', 'Type:', or 'Scope:' sections. Start directly with the commit subject line.
 </task>
 
 <input>
@@ -144,4 +146,4 @@ Do not format your response as markdown or similar.
 
 IMPORTANT: Do not invent anything that is not in the input.
 
-IMPORTANT: Output ONLY the raw commit message. Do not include any reasoning, analysis, preamble, or markdown formatting. Do not include 'Analysis:', 'Type:', or 'Scope:' sections. Start directly with the commit subject line.
+VERY IMPORTANT: Output ONLY the raw commit message. Do not include any reasoning, analysis, preamble, or markdown formatting. Do not include 'Analysis:', 'Type:', or 'Scope:' sections. Start directly with the commit subject line.

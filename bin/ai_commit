@@ -72,7 +72,7 @@ fi
 # The commit command reads the git diff from stdin
 if [ -n "$context_message" ]; then
   commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
-    --agent chat \
+    --agent coder \
     --model "$MODEL" \
     --command commit)" || {
     printf "%sError: Failed to generate commit message.\n" "$red"
@@ -80,7 +80,7 @@ if [ -n "$context_message" ]; then
   }
 else
   commit_message="$(cat "$diff_file" | opencode run \
-    --agent chat \
+    --agent coder \
     --model "$MODEL" \
     --command commit)" || {
     printf "%sError: Failed to generate commit message.\n" "$red"
