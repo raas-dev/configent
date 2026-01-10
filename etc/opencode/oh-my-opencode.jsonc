@@ -1,13 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  // google_auth: false -> uses opencode-antigravity-auth plugin
-  "google_auth": false,
-  "agents": {
+  "google_auth": false, // false: uses opencode-antigravity-auth plugin
+   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      // "model": "google/antigravity-gemini-3-pro-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high",
+      // "model": "google/antigravity-gemini-3-pro-high",
       "permission": {
         "bash": {
           "*": "allow",
@@ -20,22 +19,22 @@
       // disabled when Sisyphus is enabled (default)
     },
     "oracle": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      // "model": "google/antigravity-gemini-3-pro-high"
     },
     "librarian": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      // "model": "google/antigravity-gemini-3-pro-high"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      // "model": "google/antigravity-gemini-3-flash"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-flash"
+      // "model": "google/antigravity-gemini-3-flash"
     },
     "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      // "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      // "model": "google/antigravity-gemini-3-flash"
     }
   },
   "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
