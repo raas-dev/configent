@@ -24,6 +24,7 @@
   ms = merge --squash
   o = !"git push --set-upstream && git push --tags"
   out = log @{u}..
+  p = remote --verbose
   purge = clean -d --force
   r = reset --mixed
   res = reset --soft HEAD~1
@@ -40,7 +41,7 @@
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
   # Show the diff between the $number revisions ago and current
-  di = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
+  h = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
 
   # Find branches containing commit
   fb = !"f() { git branch --all --contains $1; }; f"
