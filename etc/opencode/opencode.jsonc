@@ -3,14 +3,12 @@
   "autoupdate": false,
   "instructions": [
     "CLAUDE.md",
-    "GEMINI.md",
     ".cursor/rules/*.mdc",
     ".cursor/rules/**/*.mdc"
   ],
   "mcp": {
     "dynamic-mcp": {
       "command": ["dmcp"],
-      "enabled": true,
       "type": "local"
     }
   },

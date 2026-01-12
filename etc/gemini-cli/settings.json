@@ -10,16 +10,14 @@
     },
     "previewFeatures": true
   },
-  "model": {
-    "name": "gemini-3-pro-preview"
-  },
   "ide": {
     "enabled": true,
     "hasSeenNudge": true
   },
   "mcpServers": {
     "dynamic-mcp": {
-      "command": "dmcp"
+      "command": "dmcp",
+      "trust": true
     }
   },
   "privacy": {
@@ -41,8 +39,5 @@
     "accessibility": {
       "disableLoadingPhrases": true
     }
-  },
-  "experimental": {
-    "useModelRouter": false
   }
 }
