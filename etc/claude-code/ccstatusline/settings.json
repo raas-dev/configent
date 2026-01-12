@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "1",
+        "type": "current-working-dir",
+        "color": "brightCyan",
+        "rawValue": true
+      },
+      {
+        "id": "3",
+        "type": "git-branch",
+        "color": "magenta",
+        "rawValue": false
+      },
+      {
+        "id": "f6bd3f0e-5f60-448a-b0d3-24f47cedca8a",
+        "type": "git-worktree",
+        "color": "brightMagenta",
+        "rawValue": true
+      },
+      {
+        "id": "871e7174-b23a-4273-8bfd-586398a37075",
+        "type": "git-changes",
+        "color": "yellow",
+        "rawValue": false
+      }
+    ],
+    [
+      {
+        "id": "aee9a2d2-6ce3-44c3-bd06-54211787f624",
+        "type": "model",
+        "color": "brightGreen",
+        "rawValue": true
+      },
+      {
+        "id": "eee0b488-f4b5-4bfb-aac9-8ac37f1a629a",
+        "type": "context-length",
+        "color": "cyan"
+      },
+      {
+        "id": "b714ccd5-8a98-4ba6-bbd3-ad07408fa573",
+        "type": "context-percentage",
+        "color": "blue",
+        "rawValue": true
+      },
+      {
+        "id": "2a96755a-1e45-4d6a-8813-2a0bbc31a8f0",
+        "type": "session-cost",
+        "color": "brightBlack",
+        "rawValue": true
+      }
+    ],
+    [
+      {
+        "id": "9d6fe083-229f-4691-9d68-3d184e871dc7",
+        "type": "block-timer",
+        "color": "green",
+        "rawValue": false,
+        "commandPath": "npx -y ccusage@latest statusline",
+        "preserveColors": false,
+        "timeout": 5000,
+        "metadata": {
+          "display": "time"
+        }
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 3,
+  "defaultPadding": " ",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "theme": "monokai",
+    "autoAlign": false
+  }
+}

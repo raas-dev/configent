@@ -34,6 +34,16 @@ fi
 mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
+# ccstatusline/settings.json
+if [ ! -r "$backup_path/.config/ccstatusline/settings.json" ]; then
+  if [ -r "$HOME/.config/ccstatusline/settings.json" ]; then
+    mkdir -p "$backup_path/.config/ccstatusline"
+    cp -P "$HOME/.config/ccstatusline/settings.json" "$backup_path/.config/ccstatusline/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.config/ccstatusline"
+ln -sfnv "$config_path/claude-code/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+
 # user-wide resources commented out, prefer project-wide resources
 
 # commands dir
