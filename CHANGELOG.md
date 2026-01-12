@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.193.0](https://github.com/raas-dev/configent/compare/1.192.10...1.193.0) (2026-01-12)
+
+
+### Features
+
+* **claude:** add ccstatusline integration ([eb39c65](https://github.com/raas-dev/configent/commit/eb39c650ee1c75d1f86ba299dc476c89b79dd52e))
+* **claude:** Add oh-my-opencode like setup ([62c5323](https://github.com/raas-dev/configent/commit/62c5323edb1d710d8f30be2801afb266342f2a69))
+
+
+### Fixes
+
+* **ccstatusline:** add session-clock status line element ([1a05a3d](https://github.com/raas-dev/configent/commit/1a05a3d54ca209e07b8deb5c8b0cc10e37cfe2f5))
+* **ccstatusline:** update status line elements and metadata ([bb8339c](https://github.com/raas-dev/configent/commit/bb8339cc6a9a2751f29deb696857fc110ced0571))
+* **oh-my-opencode:** update frontend-ui-ux-engineer model ([9edd8de](https://github.com/raas-dev/configent/commit/9edd8deed4aa5dbbef624c3e2c666d3eb6392d1e))
+* **oh-my-opencode:** update librarian model comment ([ac2f19d](https://github.com/raas-dev/configent/commit/ac2f19d0c01237b1fb88a47e789832da6b7b7a5d))
+* **vscode:** replace github markdown extensions with gfm preview ([07ec022](https://github.com/raas-dev/configent/commit/07ec02234901379682cc94a07fad05c70c9dcc7a))
+
 ## [1.192.10](https://github.com/raas-dev/configent/compare/1.192.9...1.192.10) (2026-01-12)
 
 
