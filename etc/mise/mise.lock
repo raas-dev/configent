@@ -372,9 +372,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:7ec395c4bdbf20618ca9ddb60385c043d25c84b3175d91a901ad1fefa6daf7d6", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806161"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.2.2"
+version = "0.2.3"
 backend = "github:pranshuparmar/witr"
-"platforms.macos-arm64" = { checksum = "sha256:fb7c5209b9c4b513e1a3ee4f76d1740a3e2b0a5ed9d6d98d257d40e06fd1bb5b", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.2/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/338333093"}
+"platforms.macos-arm64" = { checksum = "sha256:28ace931236e10d828f144a571e6df85c46ef0d3acb18453d4c4f006a96ed8a2", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.3/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/339080702"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
@@ -644,7 +644,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.4"
+version = "2.1.5"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
@@ -656,7 +656,7 @@ version = "1.4.7"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.13"
+version = "1.1.14"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
