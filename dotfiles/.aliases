@@ -423,7 +423,7 @@ venv() {
 
 ### Node.js ####################################################################
 
-# Claude Code Templates (https://github.com/davila7/claude-code-templates)
+# Claude Code agents/commands/skills installer (https://www.aitmpl.com)
 alias claude-code-templates='bunx claude-code-templates'
 
 # Flowise
@@ -452,6 +452,9 @@ alias promptfoo='bunx promptfoo'
 
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
+
+# Generic coding Agent Skills installer (https://claude-plugins.dev/skills)
+alias skills-installer='bunx skills-installer'
 
 # Kanban board to manage your AI coding agents
 alias vibe-kanban='bunx vibe-kanban'
