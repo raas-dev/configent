@@ -6,44 +6,48 @@
         "id": "1",
         "type": "current-working-dir",
         "color": "brightCyan",
-        "rawValue": true
+        "bold": false,
+        "rawValue": true,
+        "metadata": {
+          "fishStyle": "true"
+        }
       },
       {
         "id": "3",
-        "type": "git-branch",
-        "color": "magenta",
-        "rawValue": false
-      },
-      {
-        "id": "f6bd3f0e-5f60-448a-b0d3-24f47cedca8a",
         "type": "git-worktree",
         "color": "brightMagenta",
-        "rawValue": true
+        "bold": false,
+        "rawValue": false,
+        "metadata": {
+          "hideNoGit": "true"
+        }
       },
       {
         "id": "871e7174-b23a-4273-8bfd-586398a37075",
         "type": "git-changes",
         "color": "yellow",
-        "rawValue": false
+        "bold": false,
+        "rawValue": false,
+        "metadata": {
+          "hideNoGit": "true"
+        }
       }
     ],
     [
       {
-        "id": "aee9a2d2-6ce3-44c3-bd06-54211787f624",
-        "type": "model",
-        "color": "brightGreen",
-        "rawValue": true
-      },
-      {
         "id": "eee0b488-f4b5-4bfb-aac9-8ac37f1a629a",
         "type": "context-length",
-        "color": "cyan"
+        "color": "cyan",
+        "rawValue": false
       },
       {
         "id": "b714ccd5-8a98-4ba6-bbd3-ad07408fa573",
         "type": "context-percentage",
         "color": "blue",
-        "rawValue": true
+        "rawValue": true,
+        "metadata": {
+          "inverse": "false"
+        }
       },
       {
         "id": "2a96755a-1e45-4d6a-8813-2a0bbc31a8f0",
@@ -54,26 +58,18 @@
     ],
     [
       {
-        "id": "9d6fe083-229f-4691-9d68-3d184e871dc7",
-        "type": "block-timer",
-        "color": "green",
-        "rawValue": false,
-        "commandPath": "npx -y ccusage@latest statusline",
-        "preserveColors": false,
-        "timeout": 5000,
-        "metadata": {
-          "display": "time"
-        }
+        "id": "6666215c-63da-42e6-935b-92f3ff028235",
+        "type": "model",
+        "color": "brightGreen",
+        "rawValue": true
       },
       {
-        "id": "16de3f91-c60e-4278-92af-0f95c2d2979f",
-        "type": "session-clock",
-        "color": "brightBlack",
+        "id": "1e4b6658-74b0-47c9-b66f-e3c1d2ae6e1d",
+        "type": "block-timer",
+        "color": "green",
         "rawValue": true,
         "metadata": {
-          "display": "time",
-          "inverse": "false",
-          "hideNoGit": "false"
+          "display": "time"
         }
       }
     ]
