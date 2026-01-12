@@ -268,7 +268,7 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
-version = "1.3.0"
+version = "1.4.0"
 backend = "github:asyrjasalo/dynamic-mcp"
 
 [[tools."github:bgreenwell/xleak"]]
