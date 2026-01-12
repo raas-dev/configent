@@ -8,5 +8,31 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/keyword-detector.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/silent-auto-update.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/stop-continuation.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
