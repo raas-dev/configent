@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.9](https://github.com/raas-dev/configent/compare/1.192.8...1.192.9) (2026-01-12)
+
+
+### Fixes
+
+* **ai_commit:** switch agent from chat to coder ([8b20b80](https://github.com/raas-dev/configent/commit/8b20b80837074afbe2cad6c908d4b297d3425ee1))
+* **gitconfig:** reorganize aliases and comments ([20cf85b](https://github.com/raas-dev/configent/commit/20cf85b625bb9b489920ec1b035d9b980bd570a7))
+
 ## [1.192.8](https://github.com/raas-dev/configent/compare/1.192.7...1.192.8) (2026-01-10)
 
 
