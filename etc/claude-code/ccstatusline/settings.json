@@ -64,6 +64,17 @@
         "metadata": {
           "display": "time"
         }
+      },
+      {
+        "id": "16de3f91-c60e-4278-92af-0f95c2d2979f",
+        "type": "session-clock",
+        "color": "brightBlack",
+        "rawValue": true,
+        "metadata": {
+          "display": "time",
+          "inverse": "false",
+          "hideNoGit": "false"
+        }
       }
     ]
   ],
