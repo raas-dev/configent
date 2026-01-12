@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.192.10](https://github.com/raas-dev/configent/compare/1.192.9...1.192.10) (2026-01-12)
+
+
+### Fixes
+
+* **mise:** upgrade dynamic-mcp to 1.4.0 ([b80a186](https://github.com/raas-dev/configent/commit/b80a1860bb3d98c6d72df46ccc4e4b187d2c790f))
+
 ## [1.192.9](https://github.com/raas-dev/configent/compare/1.192.8...1.192.9) (2026-01-12)
 
 
