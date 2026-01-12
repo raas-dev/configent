@@ -22,7 +22,7 @@
       // "model": "google/antigravity-gemini-3-pro-high"
     },
     "librarian": {
-      // "model": "google/antigravity-gemini-3-pro-high"
+      // "model": "google/antigravity-gemini-3-flash"
     },
     "explore": {
       // "model": "google/antigravity-gemini-3-flash"
