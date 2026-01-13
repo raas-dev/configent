@@ -479,7 +479,7 @@ ai_agent() {
   else
     local agent="computer-use"
   fi
-  OPENCODE_CONFIG="$HOME/.config/configent/opencode/profiles/$agent.json" \
+  OPENCODE_CONFIG="$HOME/.config/configent/opencode/profiles/$agent.jsonc" \
     opencode --agent "$agent" --continue
 }
 

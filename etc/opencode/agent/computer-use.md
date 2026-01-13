@@ -7,6 +7,7 @@ permissions:
   edit: allow
   bash: allow
   webfetch: allow
+  skill: allow
   doom_loop: allow
   external_directory: allow
 ---
