@@ -432,7 +432,7 @@ alias flowise='bunx flowise'
 # MCP server developer tool
 alias inspector='bunx @modelcontextprotocol/inspector'
 
-# Call MCPs from CLI
+# Call MCP servers from CLI
 alias mcporter='bunx mcporter'
 
 # Upgrades your package.json dependencies to the latest version
@@ -455,9 +455,6 @@ alias repomix='bunx repomix'
 
 # Generic coding Agent Skills installer (https://claude-plugins.dev/skills)
 alias skills-installer='bunx skills-installer'
-
-# Kanban board to manage your AI coding agents
-alias vibe-kanban='bunx vibe-kanban'
 
 ### Functions: AI ##############################################################
 
