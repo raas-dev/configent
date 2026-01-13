@@ -34,9 +34,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-arm64" = { checksum = "sha256:b8c8f4584f801873b511ecf74dbfff1194dd9727745db9ee9ff6542eaf796aa1", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.33"
+version = "2.32.34"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:d292c0f50c4fcd02c08929e2d00e896e81cd987d9daec0f731bb4a4acbd27ec4", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.33.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:c22db67e62ab9cd26cceb4b369dfd2baf527c82cbe067c2fe282c9459afc19db", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.34.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
