@@ -16,6 +16,7 @@
   "plugin": [
     "oh-my-opencode",
     "opencode-antigravity-auth@beta",
+    "opencode-pty",
     "@franlol/opencode-md-table-formatter"
   ],
   "provider": {
