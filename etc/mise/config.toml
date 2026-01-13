@@ -107,6 +107,7 @@ bun = 'latest'
 "github:asyrjasalo/dynamic-mcp" = "1.4.0"
 'github:memextech/ht-mcp' = { version = 'latest', bin = 'ht-mcp' }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+'npm:@different-ai/opencode-browser' = 'latest'
 'npm:@openchamber/web' = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }

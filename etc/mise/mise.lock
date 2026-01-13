@@ -629,6 +629,10 @@ backend = "core:node"
 version = "2.1.6"
 backend = "npm:@anthropic-ai/claude-code"
 
+[[tools."npm:@different-ai/opencode-browser"]]
+version = "4.5.1"
+backend = "npm:@different-ai/opencode-browser"
+
 [[tools."npm:@google/gemini-cli"]]
 version = "0.23.0"
 backend = "npm:@google/gemini-cli"
