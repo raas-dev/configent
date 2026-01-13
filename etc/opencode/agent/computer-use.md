@@ -1,13 +1,12 @@
 ---
 description: Computer use agent
 mode: primary
-model: github-copilot/gpt-5-mini
 temperature: 0.0
 permissions:
   edit: allow
   bash: allow
-  webfetch: allow
   skill: allow
+  webfetch: allow
   doom_loop: allow
   external_directory: allow
 ---
