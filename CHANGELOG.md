@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.194.0](https://github.com/raas-dev/configent/compare/1.193.0...1.194.0) (2026-01-13)
+
+
+### Features
+
+* **aliases:** add skills-installer alias ([faad640](https://github.com/raas-dev/configent/commit/faad640c811629fdb0851e7cd6121cc71777aa90))
+* **opencode:** add opencode-pty plugin ([7597b7a](https://github.com/raas-dev/configent/commit/7597b7a8a35ad78e99a8db76f61a8712995d8ff1))
+* **postinstall:** add skill directory setup ([5d6ed8d](https://github.com/raas-dev/configent/commit/5d6ed8dc53353250eba7adef29deae8b7f759c7d))
+* **profiles:** Add JSONC support and browser automation plugin ([8e86953](https://github.com/raas-dev/configent/commit/8e86953790ac75ca2b85d32b0cfaefd6f32337d6))
+* **skills-discovery:** Add skills discovery documentation ([54d1e6a](https://github.com/raas-dev/configent/commit/54d1e6a3efd7b98d031af4448d903d5ed343384c))
+
+
+### Fixes
+
+* **ai_commit:** add backup and recovery for failed commits ([58c289a](https://github.com/raas-dev/configent/commit/58c289abd5e30ee4c2e8bf9ae3a265aa279ea554))
+* **aliases:** update MCP comment and remove vibe-kanban ([ff8a381](https://github.com/raas-dev/configent/commit/ff8a381e16df31e8eec1dd484e6df8dae2c84d23))
+* **opencode.jsonc:** switch to antigravity-gemini model ([a1f886c](https://github.com/raas-dev/configent/commit/a1f886cf4adfe1be233e07474ffb826efee3cb36))
+* **opencode:** remove trailing newline in config ([32eacd8](https://github.com/raas-dev/configent/commit/32eacd81cf969ddb60ab0df60f4386914001e584))
+
 ## [1.193.0](https://github.com/raas-dev/configent/compare/1.192.10...1.193.0) (2026-01-12)
 
 
