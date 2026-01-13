@@ -12,7 +12,8 @@
       "type": "local"
     }
   },
-  "model": "github-copilot/claude-haiku-4.5",
+  "model": "google/antigravity-gemini-3-pro-high",
+  // "model": "github-copilot/claude-haiku-4.5",
   "plugin": ["oh-my-opencode", "opencode-antigravity-auth@beta"],
   "provider": {
     "google": {
