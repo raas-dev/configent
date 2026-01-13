@@ -43,6 +43,40 @@ if [ -z "$git_diff" ]; then
   exit 1
 fi
 
+# Check for saved commit message from previous failed run
+git_dir="$(git rev-parse --git-dir)"
+backup_file="$git_dir/AI_COMMIT_BACKUP"
+
+if [ -f "$backup_file" ]; then
+  printf "%sFound saved commit message from failed run:%s\n" "$yellow" "$normal"
+  printf "\n"
+  cat "$backup_file"
+  printf "\n"
+
+  if [ -z "$NONINTERACTIVE" ]; then
+    printf "%sReuse this message? (y), edit (e), or generate new (n) [Y/e/n] %s> " "${bold}${cyan}" "$normal"
+    read -r reuse_choice
+    # Default to 'y'
+    if [ -z "$reuse_choice" ]; then
+      reuse_choice="y"
+    fi
+
+    case "$reuse_choice" in
+    [yY])
+      commit_message="$(cat "$backup_file")"
+      choice="y"
+      ;;
+    [eE])
+      commit_message="$(cat "$backup_file")"
+      choice="e"
+      ;;
+    *)
+      # Proceed to generate new
+      ;;
+    esac
+  fi
+fi
+
 # Store git diff in temporary file to avoid "Argument list too long" error
 diff_file=$(mktemp) || {
   printf "%sError: Failed to create temporary file.\n" "$red"
@@ -70,22 +104,24 @@ ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
 fi
 
 # The commit command reads the git diff from stdin
-if [ -n "$context_message" ]; then
-  commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
-    --agent coder \
-    --model "$MODEL" \
-    --command commit)" || {
-    printf "%sError: Failed to generate commit message.\n" "$red"
-    exit 1
-  }
-else
-  commit_message="$(cat "$diff_file" | opencode run \
-    --agent coder \
-    --model "$MODEL" \
-    --command commit)" || {
-    printf "%sError: Failed to generate commit message.\n" "$red"
-    exit 1
-  }
+if [ -z "$commit_message" ]; then
+  if [ -n "$context_message" ]; then
+    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
+      --agent coder \
+      --model "$MODEL" \
+      --command commit)" || {
+      printf "%sError: Failed to generate commit message.\n" "$red"
+      exit 1
+    }
+  else
+    commit_message="$(cat "$diff_file" | opencode run \
+      --agent coder \
+      --model "$MODEL" \
+      --command commit)" || {
+      printf "%sError: Failed to generate commit message.\n" "$red"
+      exit 1
+    }
+  fi
 fi
 
 if [ -z "$commit_message" ]; then
@@ -93,12 +129,14 @@ if [ -z "$commit_message" ]; then
   exit 1
 fi
 
-printf "%s$commit_message" "$white"
-printf "\n"
+# Only print if we didn't reuse (reuse block already printed it)
+if [ -z "$choice" ]; then
+  printf "%s$commit_message" "$white"
+  printf "\n"
+fi
 
-if [ -z "$NONINTERACTIVE" ]; then
-  printf "\n%sCommit with this (y), edit message first (e), or quit (q)\
-  [y\\\e\\\q] %s> " "${bold}${cyan}" "$normal"
+if [ -z "$NONINTERACTIVE" ] && [ -z "$choice" ]; then
+  printf "\n%sCommit with this (y), edit message first (e), or quit (q) [Y/e/q] %s> " "${bold}${cyan}" "$normal"
   # Allow Ctrl+C to work during read
   trap 'printf "\n"; exit 130' INT
   read -r choice || {
@@ -106,22 +144,41 @@ if [ -z "$NONINTERACTIVE" ]; then
     exit 130
   }
   trap - INT
-else
+  # Default to 'y' if empty
+  if [ -z "$choice" ]; then
+    choice="y"
+  fi
+elif [ -n "$NONINTERACTIVE" ]; then
   choice="y"
 fi
 
 case "$choice" in
 [yY])
-  git commit --message "$commit_message" || {
-    printf "%sError: Failed to commit changes.\n" "$red"
+  if git commit --message "$commit_message"; then
+    rm -f "$backup_file"
+  else
+    printf "%sError: Failed to commit changes (pre-commit hooks?).\n" "$red"
+    printf "%sSaving commit message to %s for reuse...\n" "$yellow" "$backup_file"
+    echo "$commit_message" >"$backup_file"
     exit 1
-  }
+  fi
   ;;
 [eE])
-  git commit --edit --message "$commit_message" || {
-    printf "%sError: Failed to commit changes after editing.\n" "$red"
+  if git commit --edit --message "$commit_message"; then
+    rm -f "$backup_file"
+  else
+    printf "%sError: Failed to commit changes (pre-commit hooks?).\n" "$red"
+
+    # Try to rescue from COMMIT_EDITMSG if it exists
+    if [ -f "$git_dir/COMMIT_EDITMSG" ]; then
+      cp "$git_dir/COMMIT_EDITMSG" "$backup_file"
+      printf "%sSaved edited message to %s for reuse.\n" "$yellow" "$backup_file"
+    else
+      echo "$commit_message" >"$backup_file"
+      printf "%sSaved original message to %s for reuse (edits might be lost).\n" "$yellow" "$backup_file"
+    fi
     exit 1
-  }
+  fi
   ;;
 *)
   printf "Aborted.\n"
