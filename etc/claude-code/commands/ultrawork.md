@@ -6,15 +6,23 @@ description: Activate maximum performance mode with parallel agent orchestration
 
 $ARGUMENTS
 
+## Smart Model Routing (SAVE TOKENS)
+
+Choose tier based on task complexity: LOW (haiku) → MEDIUM (sonnet) → HIGH (opus)
+
+| Domain | LOW (Haiku) | MEDIUM (Sonnet) | HIGH (Opus) |
+|--------|-------------|-----------------|-------------|
+| Analysis | oracle-low | oracle-medium | oracle |
+| Execution | sisyphus-junior-low | sisyphus-junior | sisyphus-junior-high |
+| Search | explore | explore-medium | - |
+| Research | librarian-low | librarian | - |
+| Frontend | frontend-engineer-low | frontend-engineer | frontend-engineer-high |
+| Docs | document-writer | - | - |
+
 ## Enhanced Execution Instructions
 - Use PARALLEL agent execution for all independent subtasks
-- Delegate aggressively to specialized subagents:
-  - 'oracle' for complex debugging and architecture decisions
-  - 'librarian' for documentation and codebase research
-  - 'explore' for quick pattern matching and file searches
-  - 'frontend-engineer' for UI/UX work
-  - 'document-writer' for documentation tasks
-  - 'multimodal-looker' for analyzing images/screenshots
+- USE TIERED ROUTING - match agent tier to task complexity to save tokens!
+- Delegate aggressively to specialized subagents
 - Maximize throughput by running multiple operations concurrently
 - Continue until ALL tasks are 100% complete - verify before stopping
 - Use background execution for long-running operations:

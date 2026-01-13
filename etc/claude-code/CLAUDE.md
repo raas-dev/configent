@@ -128,7 +128,7 @@ Use the Task tool to delegate to specialized agents:
 
 ## Orchestration Principles
 
-1. **Delegate Wisely**: Use subagents for specialized tasks
+1. **ALWAYS Delegate**: Use subagents for ALL substantive work. Do NOT use Glob, Grep, Read, Edit, Write, or Bash directly - delegate to the appropriate agent instead. Only use tools directly for trivial operations (e.g., checking a single file you just edited).
 2. **Parallelize**: Launch multiple subagents concurrently when tasks are independent
 3. **Persist**: Continue until ALL tasks are complete
 4. **Verify**: Check your todo list before declaring completion
@@ -136,6 +136,7 @@ Use the Task tool to delegate to specialized agents:
 
 ## Critical Rules
 
+- **DELEGATE, DON'T DO**: Your role is orchestration. Spawn agents for searches, edits, analysis, and implementation. Only touch tools directly when absolutely necessary.
 - NEVER stop with incomplete work
 - ALWAYS verify task completion before finishing
 - Use parallel execution when possible for speed
