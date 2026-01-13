@@ -366,7 +366,7 @@ alias langflow='uvx langflow'
 # Reactive notebook
 alias marimo='uvx marimo'
 
-# GitHub Spec Kit
+# GitHub Spec Kit (best for greenfield projects, see OpenSpec for others)
 alias specify='uvx --from specify-cli specify'
 
 ### dev
@@ -438,7 +438,7 @@ alias mcporter='bunx mcporter'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
-# OpenSpec
+# OpenSpec (best for existing codebases, see Github Spec Kit for greenfield)
 alias openspec='bunx @fission-ai/openspec'
 
 # Shorthand for pnpm
