@@ -30,11 +30,6 @@
       "env": {
         "UTCP_CONFIG_FILE": "${UTCP_CONFIG_FILE}"
       }
-    },
-    "ht": {
-      "description": "Use when you need to execute terminal processes or search the local file system. Provides interactive terminal access and file system navigation capabilities for running commands, browsing directories, and managing files on the local machine. Starts a session in a headless terminal and responds with a URL where to see that session.",
-      "command": "ht-mcp",
-      "args": []
     }
   }
 }
