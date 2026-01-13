@@ -29,22 +29,14 @@ backend = "github:sigoden/argc"
 "platforms.windows-x64-baseline" = { checksum = "sha256:55afd573dc89198a828e117125fd950c9f06124ff7c3aee2e7b30ffcc3eadecc", url = "https://github.com/sigoden/argc/releases/download/v1.23.0/argc-v1.23.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/sigoden/argc/releases/assets/271169116"}
 
 [[tools.atuin]]
-version = "18.10.0"
+version = "18.11.0"
 backend = "aqua:atuinsh/atuin"
-"platforms.linux-arm64" = { checksum = "sha256:2fe46ad53817ca052698a6879a92884071ba475a5d3d729fe9126f46950bc619", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:2fe46ad53817ca052698a6879a92884071ba475a5d3d729fe9126f46950bc619", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:3bde3af69d9fc88633c43488c6ce3c116c642733d923bbf4c4224108310bd64d", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3bde3af69d9fc88633c43488c6ce3c116c642733d923bbf4c4224108310bd64d", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3bde3af69d9fc88633c43488c6ce3c116c642733d923bbf4c4224108310bd64d", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3bde3af69d9fc88633c43488c6ce3c116c642733d923bbf4c4224108310bd64d", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:9ac9618cf57bcfe561d53d0539ffee9b8185286b11f3b330df26fe35d06411f1", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:03b7a428062d4d953f450e521649c06f29dd962c37fe75b608ca53c6ac8f0706", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:03b7a428062d4d953f450e521649c06f29dd962c37fe75b608ca53c6ac8f0706", url = "https://github.com/atuinsh/atuin/releases/download/v18.10.0/atuin-x86_64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:b8c8f4584f801873b511ecf74dbfff1194dd9727745db9ee9ff6542eaf796aa1", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.32"
+version = "2.32.33"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:e03e4b909db7114ca2c86495825fbb6becf7f243ce86bd15c978b496301bfdaf", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.32.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:d292c0f50c4fcd02c08929e2d00e896e81cd987d9daec0f731bb4a4acbd27ec4", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.33.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -62,19 +54,9 @@ backend = "aqua:sharkdp/bat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:0f729b4b6f5f28d395c641eacc2e9ff68d0096b85aa0eec344aa62425144b69b", url = "https://github.com/sharkdp/bat/releases/download/v0.26.1/bat-v0.26.1-x86_64-pc-windows-msvc.zip"}
 
 [[tools.bun]]
-version = "1.3.5"
+version = "1.3.6"
 backend = "core:bun"
-"platforms.linux-arm64" = { checksum = "sha256:ed01000f85bd97785228ad2845dc92a1860b8054856826d7317690ac8f8ee74b", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-aarch64.zip"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:980b567beeca875b79776d60a35b178309583df3f0973b3bae62f7244dc486ad", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-aarch64-musl.zip"}
-"platforms.linux-x64" = { checksum = "sha256:7051d86a924aefea3e0b96213b5fd8f79c0793f9cae6534233e627e5c3db4669", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-x64.zip"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:6bddacd6a65855698b9816f2d74871eda4dd0b7fa921140c6445248f94a742fd", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-x64-baseline.zip"}
-"platforms.linux-x64-musl" = { checksum = "sha256:720d88e0e5f40450a1da91c0226f626b156eaa224876d794fa95f6ebf74f46b6", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-x64-musl.zip"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:57997319f8b9f72ce137363c3dfcd8d401327925108bb30dc5c3257452fba524", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-x64-musl-baseline.zip"}
-"platforms.macos-arm64" = { checksum = "sha256:db17588a4aea8804856825d4bead3f05e1f37276ca606f37e369b4f72f35d3fb", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-darwin-aarch64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:f5ffc03030fe527a86295fb5852bb08c5e99b707560011d1d509ab028902bf29", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:34b9a56b851058dafa1bc9d61233f2c383aa996889bba30b3180f5ccc2cff1b2", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-darwin-x64-baseline.zip"}
-"platforms.windows-x64" = { checksum = "sha256:922cffdd5143cd118c6ccec6a61dfcf5d69e0068b048ea00f0a0615016530082", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:bf447dcc3b06aba9b9706a9db46fcd65e06a4d47d31439922313825d06eb47ca", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-windows-x64-baseline.zip"}
+"platforms.macos-arm64" = { checksum = "blake3:85526dfced776d7b3c0facf44769aaacd6ec1dabb038eb11819ddee2b8dc1173"}
 
 [[tools.carapace]]
 version = "1.5.7"
@@ -644,7 +626,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.5"
+version = "2.1.6"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@google/gemini-cli"]]
@@ -656,7 +638,7 @@ version = "1.4.7"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.15"
+version = "1.1.16"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -692,7 +674,7 @@ backend = "aqua:mrjackwills/oxker"
 "platforms.windows-x64-baseline" = { checksum = "sha256:c5ad7e0bc642794bc95a20af9cee03c4b40f74a4c20ac5c5da969f641a890098", url = "https://github.com/mrjackwills/oxker/releases/download/v0.12.0/oxker_windows_x86_64.zip"}
 
 [[tools."pipx:azure-cli"]]
-version = "2.81.0"
+version = "2.82.0"
 backend = "pipx:azure-cli[uvx_args=--python 3.11 --prerelease=allow --with pip]"
 
 [tools."pipx:azure-cli".options]
