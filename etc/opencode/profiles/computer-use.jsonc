@@ -1,11 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "headless-terminal": {
-      "type": "local",
-      "command": ["ht-mcp"]
-    }
-  },
   "plugin": [
     // see https://github.com/different-ai/opencode-browser for browser setup
     "@different-ai/opencode-browser"
