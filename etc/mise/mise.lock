@@ -638,7 +638,7 @@ version = "0.24.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.4.8"
+version = "1.4.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
