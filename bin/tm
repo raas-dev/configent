@@ -1,3 +1,17 @@
 #!/bin/sh
 
-exec tmux new-session -A -s "$(hostname -s)"
+session_name="$(hostname -s)"
+
+while getopts "s:" opt; do
+  case $opt in
+  s) session_name="$OPTARG" ;;
+  *)
+    echo "Usage: $0 [-s session_name]" >&2
+    exit 1
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+exec tmux new-session -A -s "$session_name" "$@"
