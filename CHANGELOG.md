@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.0](https://github.com/raas-dev/configent/compare/1.195.0...1.196.0) (2026-01-15)
+
+
+### Features
+
+* **tmux:** change prefix key from C-Space to C-s ([94a7e41](https://github.com/raas-dev/configent/commit/94a7e41f2a3305aaf64ce23c8c675d8109c28fb5))
+
+
+### Fixes
+
+* **ai_agent:** add config file validation ([7a4ebf6](https://github.com/raas-dev/configent/commit/7a4ebf67213a9f44b3903670623036559e43e22c))
+* **lualine:** add foreground colors to match theme ([1279894](https://github.com/raas-dev/configent/commit/1279894e52437696d16ddc0785aee2dd5b7160a4))
+* **tm:** add session name and command argument support ([31a5f31](https://github.com/raas-dev/configent/commit/31a5f3188c632d75de54e2cdca1c7b863ccdde98))
+* **tm:** attach to existing session or create new one ([ff3c9d8](https://github.com/raas-dev/configent/commit/ff3c9d8bf9450fb13e664d455e6ad8809e4d9eb3))
+* **tm:** use working directory name as default session name ([d7e7575](https://github.com/raas-dev/configent/commit/d7e75756bb9777d71333e7d5f9dd0c2ce8f1b72b))
+* **tmux:** bind middle button menu to status bar ([f7113c9](https://github.com/raas-dev/configent/commit/f7113c9fb58c4e56bd052718eb905a6bbae4f3ff))
+* **tmux:** update theme color to lighter shade ([c60178d](https://github.com/raas-dev/configent/commit/c60178d77ae159f82a10446b98e1b255c049a598)), closes [#7B9050](https://github.com/raas-dev/configent/issues/7B9050) [#AAD94](https://github.com/raas-dev/configent/issues/AAD94)
+* **ui:** update theme colors for consistency ([e8dc5ac](https://github.com/raas-dev/configent/commit/e8dc5acfbc28037d85ebe3491d577c62c99db71c)), closes [#B8CC52](https://github.com/raas-dev/configent/issues/B8CC52) [#262626](https://github.com/raas-dev/configent/issues/262626)
+* **vscode:** add agent terminal to statusbar ([716aa87](https://github.com/raas-dev/configent/commit/716aa87a3fd0b3d617c36c9add7fc83b9341ce97))
+* **vscode:** remove extra blank line in settings ([68a6edd](https://github.com/raas-dev/configent/commit/68a6eddb65726d526817d837a69858249bae4257))
+* **vscode:** use tm session commands for agent terminals ([3f839da](https://github.com/raas-dev/configent/commit/3f839daabef35f6df068a6f258601a89ec0a2dfa))
+
 ## [1.195.0](https://github.com/raas-dev/configent/compare/1.194.0...1.195.0) (2026-01-15)
 
 
