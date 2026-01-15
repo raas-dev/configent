@@ -480,7 +480,7 @@ ai_agent() {
     local agent="computer-use"
   fi
   OPENCODE_CONFIG="$HOME/.config/configent/opencode/profiles/$agent.jsonc" \
-    opencode --agent "$agent" --continue
+    opencode --agent "$agent"
 }
 
 ### Functions: Docker ##########################################################
