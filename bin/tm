@@ -1,6 +1,6 @@
 #!/bin/sh
 
-session_name="$(hostname -s)"
+session_name="$(basename "$PWD")"
 
 while getopts "s:" opt; do
   case $opt in
