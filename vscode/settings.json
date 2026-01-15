@@ -398,7 +398,6 @@
   "ShortcutMenuBar.openFilesList": false,
   "ShortcutMenuBar.openSettings": true,
   "ShortcutMenuBar.toggleRenderWhitespace": true,
-  "ShortcutMenuBar.toggleTerminal": false,
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
   "stagewise.telemetry.enabled": false,
   "statusbarDebugger.priority": 20000,
@@ -567,5 +566,34 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "statusbar_command.commands": [
+    {
+      "text": "$(terminal)",
+      "tooltip": "Toggle Panel",
+      "id": "sbc_panel",
+      "name": "Panel",
+      "alignment": "left",
+      "priority": 25000,
+      "command": "workbench.action.togglePanel"
+    },
+    {
+      "text": "$(gear)",
+      "tooltip": "Open Settings",
+      "id": "sbc_settings",
+      "name": "Settings",
+      "alignment": "left",
+      "priority": 24000,
+      "command": "workbench.action.openSettings"
+    },
+    {
+      "text": "$(run)",
+      "tooltip": "Run Code",
+      "id": "sbc_run",
+      "name": "Run",
+      "alignment": "left",
+      "priority": 23000,
+      "command": "code-runner.run"
+    }
+  ]
 }

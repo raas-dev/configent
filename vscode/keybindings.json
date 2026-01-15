@@ -216,10 +216,6 @@
     "key": "ctrl+s g"
   },
   {
-    "command": "code-runner.run",
-    "key": "ctrl+r"
-  },
-  {
     "command": "workbench.action.toggleAuxiliaryBar",
     "key": "shift+cmd+b"
   },
