@@ -412,10 +412,20 @@
     },
     {
       "alignment": "left",
+      "command": "agentterminal.run",
+      "id": "sbc_session",
+      "name": "Start Session",
+      "priority": 24000,
+      "text": "$(terminal-tmux)",
+      "tooltip": "Start Session"
+    },
+
+    {
+      "alignment": "left",
       "command": "workbench.action.openSettings",
       "id": "sbc_settings",
       "name": "Settings",
-      "priority": 24000,
+      "priority": 23000,
       "text": "$(gear)",
       "tooltip": "Open Settings"
     },
@@ -424,7 +434,7 @@
       "command": "code-runner.run",
       "id": "sbc_run",
       "name": "Run",
-      "priority": 23000,
+      "priority": 22000,
       "text": "$(run)",
       "tooltip": "Run Code"
     }
