@@ -419,7 +419,6 @@
       "text": "$(terminal-tmux)",
       "tooltip": "Start Session"
     },
-
     {
       "alignment": "left",
       "command": "workbench.action.openSettings",
