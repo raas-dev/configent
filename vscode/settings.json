@@ -69,8 +69,9 @@
       "label": "Gemini CLI"
     },
     {
-      "command": "tm zsh -i -c ai_agent",
-      "id": "agent",
+      "command": "tm zsh -i -c",
+      "args": ["ai_agent", "computer-use"],
+      "id": "computer-use",
       "label": "Computer Use"
     },
     {
