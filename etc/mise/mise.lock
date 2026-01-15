@@ -632,7 +632,7 @@ version = "1.4.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.22"
+version = "1.1.23"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -827,9 +827,9 @@ backend = "aqua:aquasecurity/trivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2aaa0ce06f9f2221a6bb21e1fc0e0ecc6aeb56362bc5c9463e9fd7b06983c3c3", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_windows-64bit.zip"}
 
 [[tools.uv]]
-version = "0.9.25"
+version = "0.9.26"
 backend = "aqua:astral-sh/uv"
-"platforms.macos-arm64" = { checksum = "sha256:606b3c6949d971709f2526fa0d9f0fd23ccf60e09f117999b406b424af18a6a6", url = "https://github.com/astral-sh/uv/releases/download/0.9.25/uv-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:fcf0a9ea6599c6ae28a4c854ac6da76f2c889354d7c36ce136ef071f7ab9721f", url = "https://github.com/astral-sh/uv/releases/download/0.9.26/uv-aarch64-apple-darwin.tar.gz"}
 
 [[tools.viddy]]
 version = "1.3.0"
