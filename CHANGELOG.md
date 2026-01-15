@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.195.0](https://github.com/raas-dev/configent/compare/1.194.0...1.195.0) (2026-01-15)
+
+
+### Features
+
+* **agents:** Add tiered agent system and enhance delegation rules ([862890f](https://github.com/raas-dev/configent/commit/862890fb9391a165585abdd88d065417adbba934))
+* **keybindings:** expand terminal command shortcuts ([1e3d92a](https://github.com/raas-dev/configent/commit/1e3d92a1f618a5087e6d75e07c5ac655554546d2))
+* **vscode:** add agent terminal and shortcut menu extensions ([46a0f84](https://github.com/raas-dev/configent/commit/46a0f841ec4a11eece2b2b2ab3aea4e109714cda))
+
+
+### Fixes
+
+* **aliases:** remove --continue flag from ai_agent ([225785f](https://github.com/raas-dev/configent/commit/225785f15e2b58bcc13b53b1eee8657b5eec2eff))
+* **computer-use:** add pty session instructions ([2c814ea](https://github.com/raas-dev/configent/commit/2c814ea4420e6dafaef846004b9b78ba8c3fe4f3))
+* **computer-use:** reorder permissions and remove model ([fef8345](https://github.com/raas-dev/configent/commit/fef83458e913a00e3fb5c75cd051209371b65950))
+* **vscode:** remove lntoggle extension ([3602861](https://github.com/raas-dev/configent/commit/3602861fc0eee65d2bba46cde0933068c64dd73f))
+* **vscode:** reorder agent terminal profiles ([76ca0ad](https://github.com/raas-dev/configent/commit/76ca0ad5cc32ed34220e383cc96c7a6f26b783a1))
+* **vscode:** replace terminal toggle with statusbar commands ([1151255](https://github.com/raas-dev/configent/commit/1151255a20e4969c037125e3cede825e14073e5a))
+* **vscode:** update terminal label in shortcut menu ([4051f75](https://github.com/raas-dev/configent/commit/4051f75058f6b24bfa24e86b9d585c1c45fb6159))
+
 ## [1.194.0](https://github.com/raas-dev/configent/compare/1.193.0...1.194.0) (2026-01-13)
 
 
