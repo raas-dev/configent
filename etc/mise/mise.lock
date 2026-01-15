@@ -34,9 +34,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-arm64" = { checksum = "sha256:b8c8f4584f801873b511ecf74dbfff1194dd9727745db9ee9ff6542eaf796aa1", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.32.34"
+version = "2.33.0"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:c22db67e62ab9cd26cceb4b369dfd2baf527c82cbe067c2fe282c9459afc19db", url = "https://awscli.amazonaws.com/AWSCLIV2-2.32.34.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:38ae6dc20ea9cd041739482f874064b6930a0edb320cdac22c52f44757e5e07e", url = "https://awscli.amazonaws.com/AWSCLIV2-2.33.0.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -344,9 +344,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:7ec395c4bdbf20618ca9ddb60385c043d25c84b3175d91a901ad1fefa6daf7d6", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806161"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.2.3"
+version = "0.2.4"
 backend = "github:pranshuparmar/witr"
-"platforms.macos-arm64" = { checksum = "sha256:28ace931236e10d828f144a571e6df85c46ef0d3acb18453d4c4f006a96ed8a2", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.3/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/339080702"}
+"platforms.macos-arm64" = { checksum = "sha256:4f4c59da3e86e6b0351aff57711fab60127a73ede777eb5f7fed2bcc700b0ba7", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.4/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/340555118"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
@@ -632,7 +632,7 @@ version = "1.4.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.20"
+version = "1.1.21"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
