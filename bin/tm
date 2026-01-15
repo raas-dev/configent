@@ -14,4 +14,12 @@ done
 
 shift $((OPTIND - 1))
 
-exec tmux new-session -A -s "$session_name" "$@"
+if tmux has-session -t "$session_name" 2>/dev/null; then
+  if [ $# -gt 0 ]; then
+    exec tmux new-window -t "$session_name" "$@" \; attach-session -t "$session_name"
+  else
+    exec tmux attach-session -t "$session_name"
+  fi
+else
+  exec tmux new-session -s "$session_name" "$@"
+fi

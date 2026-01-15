@@ -54,29 +54,29 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
-      "command": "tm -s opencode opencode",
+      "command": "tm opencode",
       "id": "opencode",
       "label": "OpenCode"
     },
     {
-      "command": "tm -s claude claude",
+      "command": "tm claude",
       "id": "claude",
       "label": "Claude Code"
     },
     {
-      "command": "tm -s gemini gemini",
+      "command": "tm gemini",
       "id": "gemini",
       "label": "Gemini CLI"
     },
     {
-      "command": "tm -s agent zsh -i -c ai_agent",
+      "command": "tm zsh -i -c ai_agent",
       "id": "agent",
       "label": "Computer Use"
     },
     {
-      "command": "tm",
+      "command": "tm zsh",
       "id": "tm",
-      "label": "Terminal"
+      "label": "Shell"
     }
   ],
   "agentterminal.rememberSelection": false,
