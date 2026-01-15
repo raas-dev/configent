@@ -54,11 +54,6 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
-      "command": "tm",
-      "id": "tm",
-      "label": "Restore tmux"
-    },
-    {
       "command": "opencode",
       "id": "opencode",
       "label": "OpenCode"
@@ -77,6 +72,11 @@
       "command": "ai_agent",
       "id": "agent",
       "label": "Computer Use"
+    },
+    {
+      "command": "tm",
+      "id": "tm",
+      "label": "Restore tmux"
     }
   ],
   "agentterminal.rememberSelection": false,
