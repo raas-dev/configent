@@ -51,6 +51,36 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "agentterminal.cwdMode": "activeWorkspace",
+  "agentterminal.profiles": [
+    {
+      "command": "tm",
+      "id": "tm",
+      "label": "Restore tmux"
+    },
+    {
+      "command": "opencode",
+      "id": "opencode",
+      "label": "OpenCode"
+    },
+    {
+      "command": "claude",
+      "id": "claude",
+      "label": "Claude Code"
+    },
+    {
+      "command": "gemini",
+      "id": "gemini",
+      "label": "Gemini CLI"
+    },
+    {
+      "command": "ai_agent",
+      "id": "agent",
+      "label": "Computer Use"
+    }
+  ],
+  "agentterminal.rememberSelection": false,
+  "agentterminal.windowsMode": "block",
   "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "application.shellEnvironmentResolutionTimeout": 15,
@@ -73,7 +103,10 @@
   "chat.notifyWindowOnConfirmation": false,
   "chat.notifyWindowOnResponseReceived": false,
   "chat.tools.global.autoApprove": true,
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions",
   "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
@@ -105,10 +138,7 @@
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.shouldAllowCustomModes": true,
   "cursor.composer.textSizeScale": 1.2,
-  "cursor.cpp.disabledLanguages": [
-    "plaintext",
-    "untitled"
-  ],
+  "cursor.cpp.disabledLanguages": ["plaintext", "untitled"],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.preferNotificationsSameAsChat": true,
@@ -153,10 +183,8 @@
   "editor.overviewRulerBorder": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [
-    80,
-    100
-  ],
+  "editor.renderWhitespace": "none",
+  "editor.rulers": [80, 100],
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.scrollbar.verticalScrollbarSize": 0,
@@ -212,10 +240,7 @@
   "git.openAfterClone": "whenNoFolderOpen",
   "git.openRepositoryInParentFolders": "always",
   "git.promptToSaveFilesBeforeCommit": "never",
-  "git.repositoryScanIgnoredFolders": [
-    "node_modules",
-    ".venv"
-  ],
+  "git.repositoryScanIgnoredFolders": ["node_modules", ".venv"],
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
   "github.copilot.chat.agent.thinkingTool": true,
@@ -238,16 +263,8 @@
   },
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "gitlens.blame.highlight.locations": [
-    "gutter",
-    "line",
-    "overview"
-  ],
-  "gitlens.changes.locations": [
-    "gutter",
-    "overview",
-    "line"
-  ],
+  "gitlens.blame.highlight.locations": ["gutter", "line", "overview"],
+  "gitlens.changes.locations": ["gutter", "overview", "line"],
   "gitlens.changes.toggleMode": "window",
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.enabled": false,
@@ -257,11 +274,7 @@
   "gitlens.graph.minimap.enabled": false,
   "gitlens.graph.pageItemLimit": 20,
   "gitlens.graph.statusBar.enabled": false,
-  "gitlens.heatmap.locations": [
-    "gutter",
-    "overview",
-    "line"
-  ],
+  "gitlens.heatmap.locations": ["gutter", "overview", "line"],
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.hovers.enabled": false,
   "gitlens.launchpad.indicator.enabled": false,
@@ -380,6 +393,12 @@
   "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.enabled": false,
   "semgrep.metrics": "off",
+  "ShortcutMenuBar.beautify": false,
+  "ShortcutMenuBar.findReplace": true,
+  "ShortcutMenuBar.openFilesList": false,
+  "ShortcutMenuBar.openSettings": true,
+  "ShortcutMenuBar.toggleRenderWhitespace": true,
+  "ShortcutMenuBar.toggleTerminal": false,
   "simple-lines-count.format": "Lns: {t} ({e} empty)",
   "stagewise.telemetry.enabled": false,
   "statusbarDebugger.priority": 20000,
@@ -548,8 +567,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "claudeCode.allowDangerouslySkipPermissions": true,
-  "claudeCode.initialPermissionMode": "bypassPermissions",
-  "claudeCode.useTerminal": true
+  "zenMode.hideStatusBar": false
 }

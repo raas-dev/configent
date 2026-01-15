@@ -61,6 +61,7 @@ rambit.highlight-counter
 redhat.vscode-yaml
 rid9.datetime
 rust-lang.rust-analyzer
+ryanreynolds.agent-terminal
 shahilkumar.docxreader
 sst-dev.opencode
 stevejpurves.cucumber
@@ -70,6 +71,7 @@ streetsidesoftware.code-spell-checker
 streetsidesoftware.code-spell-checker-finnish
 tamasfe.even-better-toml
 tomoki1207.pdf
+tomxeno.shortcut-menu-bar
 unifiedjs.vscode-mdx
 usernamehw.errorlens
 wayou.vscode-todo-highlight
