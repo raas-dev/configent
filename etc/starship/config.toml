@@ -67,7 +67,6 @@ $character"""
 
 right_format = """
 $battery\
-$memory_usage\
 $time"""
 
 [gcloud]
