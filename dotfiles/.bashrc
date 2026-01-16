@@ -30,6 +30,11 @@ fi
 
 command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
+### Key bindings ###############################################################
+
+# unbind clear-screen (ctrl+l) for terminal pane navigation
+bind -r '\C-l'
+
 ### Bash builtins ##############################################################
 
 # have Bash to check if the window size has changed
