@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.2](https://github.com/raas-dev/configent/compare/1.196.1...1.196.2) (2026-01-16)
+
+
+### Fixes
+
+* **dotfiles:** unbind clear-screen for tmux pane navigation ([fd9ba5f](https://github.com/raas-dev/configent/commit/fd9ba5fb932ef81b51a528aed12f4cdea35d08b3))
+* **tmux:** add extrakto plugin configuration ([009b118](https://github.com/raas-dev/configent/commit/009b11899e77c12ce9987d10ca1797306d86d969))
+* **tmux:** add middle button session switcher ([ff1aa4e](https://github.com/raas-dev/configent/commit/ff1aa4ecd716e05a95c72e075b7a03eff462a02c))
+* **tmux:** add tmux-session-wizard plugin ([62b6a5d](https://github.com/raas-dev/configent/commit/62b6a5df50f7ecd9f613f2afbdfa7fca14429ced))
+* **tmux:** change middle button to show windows view ([f6e47ae](https://github.com/raas-dev/configent/commit/f6e47ae48bf6657aa275ce0ca9e18890be0f3733))
+* **tmux:** prioritize app keybindings for pane navigation ([716f521](https://github.com/raas-dev/configent/commit/716f52140fc15e793a0ae5c498738ac7d1f34ed8))
+* **tmux:** reorganize keybindings section ([d17d8c5](https://github.com/raas-dev/configent/commit/d17d8c58190a5ca65689665f9bb41ba0a36179a9))
+* **tmux:** reorganize plugin configuration and settings ([77667b9](https://github.com/raas-dev/configent/commit/77667b97745016598aaa35a04aed647fc0c19905))
+* **tmux:** show zoomed pane indicator ([08cb0f2](https://github.com/raas-dev/configent/commit/08cb0f2a106188c71a7fdaf53e25c123ff218b06))
+
 ## [1.196.1](https://github.com/raas-dev/configent/compare/1.196.0...1.196.1) (2026-01-16)
 
 
