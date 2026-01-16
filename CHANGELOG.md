@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.6](https://github.com/raas-dev/configent/compare/1.196.5...1.196.6) (2026-01-16)
+
+
+### Fixes
+
+* **starship:** remove memory usage from right format ([7fa8d6d](https://github.com/raas-dev/configent/commit/7fa8d6df1a4126d3b0e5916a84c9e6f1a4ca3beb))
+* **tmux:** add battery charge tier icons ([de143e7](https://github.com/raas-dev/configent/commit/de143e7155d7c4a95533964d22c7b3e0513f86c6))
+
 ## [1.196.5](https://github.com/raas-dev/configent/compare/1.196.4...1.196.5) (2026-01-16)
 
 
