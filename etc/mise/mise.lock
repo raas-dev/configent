@@ -624,7 +624,7 @@ version = "4.5.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.24.0"
+version = "0.24.2"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
@@ -632,7 +632,7 @@ version = "1.5.1"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.24"
+version = "1.1.25"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -675,7 +675,7 @@ backend = "pipx:azure-cli[uvx_args=--python 3.11 --prerelease=allow --with pip]"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.2"
+version = "0.11.3"
 backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:browser-use".options]
