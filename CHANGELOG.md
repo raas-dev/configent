@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.5](https://github.com/raas-dev/configent/compare/1.196.4...1.196.5) (2026-01-16)
+
+
+### Fixes
+
+* **tmux:** remove battery and user icon config ([4bfd901](https://github.com/raas-dev/configent/commit/4bfd901795361a4cbf45624933cc7beedc9fb817))
+
 ## [1.196.4](https://github.com/raas-dev/configent/compare/1.196.3...1.196.4) (2026-01-16)
 
 
