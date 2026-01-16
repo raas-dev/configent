@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.1](https://github.com/raas-dev/configent/compare/1.196.0...1.196.1) (2026-01-16)
+
+
+### Fixes
+
+* **bufferline:** add theme color configuration ([ee25b34](https://github.com/raas-dev/configent/commit/ee25b3450fff6da747dc9397c27e2c990ea7e723))
+* **gitconfig:** reorganize and rename git aliases ([f081904](https://github.com/raas-dev/configent/commit/f0819049e70f210c34b0252e964d2552450ad0b7))
+* **keybindings:** rebind ctrl+s s to agentterminal and reorder shell profile ([70c4ad5](https://github.com/raas-dev/configent/commit/70c4ad50e1677157fc2b839dbd0ee57e5e143951))
+* **tmux:** add menus and which-key plugins ([d0d1535](https://github.com/raas-dev/configent/commit/d0d1535b0d5272010a423dc82a40e1ef60bf2c7c))
+* **tmux:** remove continuum and resurrect plugins ([74b94c7](https://github.com/raas-dev/configent/commit/74b94c72cb0db7a6e3c406ae620e415b789ecc4d))
+* **tmux:** use which key menu for status bar ([8674d15](https://github.com/raas-dev/configent/commit/8674d152dc15471c21565aa153eb55babf942e9b))
+
 ## [1.196.0](https://github.com/raas-dev/configent/compare/1.195.0...1.196.0) (2026-01-15)
 
 
