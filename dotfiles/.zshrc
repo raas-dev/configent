@@ -25,10 +25,10 @@ else
   fi
 fi
 
-### Use emacs keymap ###########################################################
+### Key bindings ###############################################################
 
 # https://zsh.sourceforge.io/Guide/zshguide04.html
-bindkey -e
+bindkey -e      # use emacs keymap
 bindkey -r '^S' # unbind terminal chord
 bindkey -r '^l' # unbind clear screen (ctrl+l) for terminal pane navigation
 
