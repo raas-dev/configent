@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.3](https://github.com/raas-dev/configent/compare/1.196.2...1.196.3) (2026-01-16)
+
+
+### Fixes
+
+* **tmux:** add keybinding for pane cycling ([4ae2c05](https://github.com/raas-dev/configent/commit/4ae2c0577b6521d13cfa56c31d8c7ccfb8ce622e))
+* **tmux:** add nerd font window name plugin ([95fb3e1](https://github.com/raas-dev/configent/commit/95fb3e18ee78c546644758af0f53630466d7d60c))
+* **tmux:** replace tmux-menus with tmux-fzf ([e7c13eb](https://github.com/raas-dev/configent/commit/e7c13eb6910a16c07d9ae10871a86384cf31b5f0))
+* **zshrc:** clarify key bindings comments ([5c39862](https://github.com/raas-dev/configent/commit/5c398629cd823f7e23976cd2e6b0c05a10c0e0d3))
+
 ## [1.196.2](https://github.com/raas-dev/configent/compare/1.196.1...1.196.2) (2026-01-16)
 
 
