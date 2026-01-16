@@ -54,6 +54,11 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
+      "command": "tm",
+      "id": "tm",
+      "label": "Shell"
+    },
+    {
       "command": "tm opencode",
       "id": "opencode",
       "label": "OpenCode"
@@ -73,11 +78,6 @@
       "args": ["ai_agent", "computer-use"],
       "id": "computer-use",
       "label": "Computer Use"
-    },
-    {
-      "command": "tm zsh",
-      "id": "tm",
-      "label": "Shell"
     }
   ],
   "agentterminal.rememberSelection": false,

@@ -608,10 +608,6 @@
     "command": "workbench.action.terminal.runSelectedText"
   },
   {
-    "key": "ctrl+s s",
-    "command": "workbench.action.createTerminalEditor"
-  },
-  {
     "key": "ctrl+s ctrl+space",
     "command": "workbench.action.terminal.attachToSession"
   },
@@ -662,5 +658,15 @@
   {
     "key": "ctrl+s ctrl+9",
     "command": "workbench.action.terminal.focusAtIndex9"
+  },
+  {
+    "key": "ctrl+s s",
+    "command": "agentterminal.run",
+    "when": "editorTextFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+s ctrl+s",
+    "command": "agentterminal.run",
+    "when": "editorTextFocus && !terminalFocus"
   }
 ]
