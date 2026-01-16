@@ -34,9 +34,9 @@ backend = "aqua:atuinsh/atuin"
 "platforms.macos-arm64" = { checksum = "sha256:b8c8f4584f801873b511ecf74dbfff1194dd9727745db9ee9ff6542eaf796aa1", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
-version = "2.33.0"
+version = "2.33.1"
 backend = "aqua:aws/aws-cli"
-"platforms.macos-arm64" = { checksum = "blake3:38ae6dc20ea9cd041739482f874064b6930a0edb320cdac22c52f44757e5e07e", url = "https://awscli.amazonaws.com/AWSCLIV2-2.33.0.pkg"}
+"platforms.macos-arm64" = { checksum = "blake3:4481e959255076fa36cb47c930a16588d420ad6d1f0dc1bb9830ecd92a7c5e68", url = "https://awscli.amazonaws.com/AWSCLIV2-2.33.1.pkg"}
 
 [[tools.bat]]
 version = "0.26.1"
@@ -344,9 +344,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:7ec395c4bdbf20618ca9ddb60385c043d25c84b3175d91a901ad1fefa6daf7d6", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806161"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.2.4"
+version = "0.2.5"
 backend = "github:pranshuparmar/witr"
-"platforms.macos-arm64" = { checksum = "sha256:4f4c59da3e86e6b0351aff57711fab60127a73ede777eb5f7fed2bcc700b0ba7", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.4/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/340555118"}
+"platforms.macos-arm64" = { checksum = "sha256:75fe6f2a8605ad789437588f35b1699e8deab79825e48dbc1938ee99e34d2ac0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066757"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
@@ -616,7 +616,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.7"
+version = "2.1.9"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -628,7 +628,7 @@ version = "0.24.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.4.9"
+version = "1.5.1"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
