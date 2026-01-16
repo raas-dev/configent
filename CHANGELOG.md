@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.196.4](https://github.com/raas-dev/configent/compare/1.196.3...1.196.4) (2026-01-16)
+
+
+### Fixes
+
+* **tmux:** enable multi-select in fzf options ([b095c7c](https://github.com/raas-dev/configent/commit/b095c7c3a9f3e5c6ee044509431d98ea17273324))
+
 ## [1.196.3](https://github.com/raas-dev/configent/compare/1.196.2...1.196.3) (2026-01-16)
 
 
