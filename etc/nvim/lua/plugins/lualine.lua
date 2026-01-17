@@ -24,10 +24,7 @@ return {
     return {
       options = {
         theme = ayu,
-      },
-      sections = {
-        lualine_z = { "encoding", "fileformat" },
-      },
+      }
     }
   end,
 }
