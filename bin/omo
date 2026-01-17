@@ -1,0 +1,264 @@
+#!/bin/bash
+
+# Switch oh-my-opencode configuration profiles
+
+# From:
+# https://github.com/AnPod/Switch-Omo-Config/blob/v1.09/switch-omo-config.sh
+#
+# Changes:
+# - rename from switch-omo-config.sh to omo for compactness
+# - add support for source .jsonc files
+#    - retain original file format when copying to target
+#    - ensure the target is either .json or .jsonc, but not both
+# - remove creating PROJECT_CREATE_CHOICE_FILE and PROJECT_COPY_CHOICE_FILE
+# - add prompting to create .opencode if it doesn't exist
+# - add focusing on the currently active configuration by default
+# - add quitting prompts with ^C
+
+CENTRAL_CONFIG_DIR="$HOME/.config/opencode"
+PROJECT_ROOT_DIR="$PWD"
+PROJECT_CONFIG_DIR="$PROJECT_ROOT_DIR/.opencode"
+
+CONFIG_DIR="$CENTRAL_CONFIG_DIR"
+TARGET_FILE_BASE="$CONFIG_DIR/oh-my-opencode"
+
+use_project_config_dir="false"
+just_created_project_dir="false"
+
+if [[ -d "$PROJECT_CONFIG_DIR" ]]; then
+  use_project_config_dir="true"
+else
+  # Prompt to create .opencode if it doesn't exist
+  echo "No .opencode directory detected in current directory: $PROJECT_ROOT_DIR"
+  read -r -p "Create .opencode directory here for project-local switching? [Y/n] " create_opencode
+  if [[ ! "$create_opencode" =~ ^[Nn]$ ]]; then
+    if mkdir -p "$PROJECT_CONFIG_DIR" 2>/dev/null; then
+      use_project_config_dir="true"
+      just_created_project_dir="true"
+    else
+      echo "Error: Failed to create $PROJECT_CONFIG_DIR (check permissions)"
+      exit 1
+    fi
+  else
+    exit 0
+  fi
+fi
+
+if [[ "$use_project_config_dir" == "true" ]]; then
+  CONFIG_DIR="$PROJECT_CONFIG_DIR"
+  TARGET_FILE_BASE="$CONFIG_DIR/oh-my-opencode"
+
+  if compgen -G "$CENTRAL_CONFIG_DIR/oh-my-opencode-*.json" >/dev/null || compgen -G "$CENTRAL_CONFIG_DIR/oh-my-opencode-*.jsonc" >/dev/null; then
+    copy_profiles=""
+
+    # If directory was just created, always copy; if it existed, prompt only if no profiles exist
+    if [[ "$just_created_project_dir" == "true" ]]; then
+      copy_profiles="y"
+    else
+      # Check if there are already any oh-my-opencode files in the project directory
+      if compgen -G "$PROJECT_CONFIG_DIR/oh-my-opencode-*.json" >/dev/null || compgen -G "$PROJECT_CONFIG_DIR/oh-my-opencode-*.jsonc" >/dev/null; then
+        # Files already exist, don't prompt
+        copy_profiles="n"
+      else
+        # No files exist, always prompt
+        read -r -p "Copy central oh-my-opencode-*.{json,jsonc} profiles into $PROJECT_CONFIG_DIR? [y/N] " copy_profiles
+      fi
+    fi
+
+    if [[ "$copy_profiles" =~ ^[Yy]$ ]]; then
+      for src in "$CENTRAL_CONFIG_DIR"/oh-my-opencode-*.json "$CENTRAL_CONFIG_DIR"/oh-my-opencode-*.jsonc; do
+        if [[ ! -e "$src" ]]; then
+          continue
+        fi
+        dest="$PROJECT_CONFIG_DIR/$(basename "$src")"
+        if [[ -e "$dest" ]]; then
+          continue
+        fi
+        cp "$src" "$dest"
+      done
+    fi
+  fi
+fi
+
+# Colors
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+DIM='\033[2m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Get list of config files (excluding the main one)
+get_configs() {
+  find "$CONFIG_DIR" -maxdepth 1 \( -name "oh-my-opencode-*.json" -o -name "oh-my-opencode-*.jsonc" \) -type f | sort
+}
+
+# Get current active config by comparing content
+get_current() {
+  local target_file=""
+  if [[ -f "$TARGET_FILE_BASE.json" ]]; then
+    target_file="$TARGET_FILE_BASE.json"
+  elif [[ -f "$TARGET_FILE_BASE.jsonc" ]]; then
+    target_file="$TARGET_FILE_BASE.jsonc"
+  else
+    echo ""
+    return
+  fi
+
+  local target_hash
+  target_hash=$(md5 -q "$target_file" 2>/dev/null)
+  while IFS= read -r file; do
+    local file_hash
+    file_hash=$(md5 -q "$file" 2>/dev/null)
+    if [[ "$target_hash" == "$file_hash" ]]; then
+      basename "$file"
+      return
+    fi
+  done < <(get_configs)
+  echo ""
+}
+
+# Interactive menu with arrow keys
+show_menu() {
+  local configs=()
+  local names=()
+
+  while IFS= read -r file; do
+    configs+=("$file")
+    names+=("$(basename "$file")")
+  done < <(get_configs)
+
+  if [[ ${#configs[@]} -eq 0 ]]; then
+    echo -e "${YELLOW}No oh-my-opencode-*.json or oh-my-opencode-*.jsonc config files found in $CONFIG_DIR${NC}" >&2
+    exit 1
+  fi
+
+  local current
+  current=$(get_current)
+  local selected=0
+  local total=${#configs[@]}
+
+  # Find and select the currently active configuration by default
+  if [[ -n "$current" ]]; then
+    for i in "${!names[@]}"; do
+      if [[ "${names[$i]}" == "$current" ]]; then
+        selected=$i
+        break
+      fi
+    done
+  fi
+
+  # Hide cursor
+  tput civis
+
+  # Cleanup on exit
+  trap 'tput cnorm; echo' EXIT TERM
+
+  echo -e "${BOLD}Select oh-my-opencode configuration${NC}"
+  echo -e "${DIM}Use arrow keys to navigate, Enter to select, q to quit${NC}"
+  echo ""
+
+  while true; do
+    # Move cursor up to redraw menu
+    if [[ $REPLY ]]; then
+      tput cuu "$total"
+    fi
+
+    # Draw menu
+    for i in "${!names[@]}"; do
+      local name="${names[$i]}"
+      local marker="  "
+      local color=""
+      local suffix=""
+
+      # Check if this is the currently active config
+      if [[ "$name" == "$current" ]]; then
+        suffix=" ${GREEN}(active)${NC}"
+      fi
+
+      if [[ $i -eq $selected ]]; then
+        marker="${YELLOW}>${NC} "
+        color="${CYAN}"
+        echo -e "${marker}${color}${name}${NC}${suffix}"
+      else
+        echo -e "  ${DIM}${name}${NC}${suffix}"
+      fi
+    done
+
+    # Read single keypress
+    read -rsn1 key
+
+    # Handle arrow keys (escape sequences)
+    if [[ $key == $'\x1b' ]]; then
+      read -rsn2 key
+      case $key in
+      '[A') # Up arrow
+        ((selected--))
+        [[ $selected -lt 0 ]] && selected=$((total - 1))
+        ;;
+      '[B') # Down arrow
+        ((selected++))
+        [[ $selected -ge $total ]] && selected=0
+        ;;
+      esac
+    elif [[ $key == "" ]]; then # Enter
+      break
+    elif [[ $key == $'\x03' || $key == "q" || $key == "Q" ]]; then # ^C or q
+      tput cnorm
+      echo ""
+      echo -e "${DIM}Cancelled.${NC}"
+      exit 0
+    elif [[ $key == "j" ]]; then # vim down
+      ((selected++))
+      [[ $selected -ge $total ]] && selected=0
+    elif [[ $key == "k" ]]; then # vim up
+      ((selected--))
+      [[ $selected -lt 0 ]] && selected=$((total - 1))
+    fi
+
+    REPLY=1
+  done
+
+  # Show cursor
+  tput cnorm
+
+  # Copy selected config
+  local selected_file="${configs[$selected]}"
+  local selected_name="${names[$selected]}"
+
+  echo ""
+
+  if [[ "$selected_name" == "$current" ]]; then
+    echo -e "${YELLOW}$selected_name is already active.${NC}"
+    exit 0
+  fi
+
+  # Get extension of selected file
+  local ext="${selected_file##*.}"
+  local target_file="$TARGET_FILE_BASE.$ext"
+  local other_target_file=""
+
+  # Determine the other target file to remove if it exists
+  if [[ "$ext" == "json" ]]; then
+    other_target_file="$TARGET_FILE_BASE.jsonc"
+  else
+    other_target_file="$TARGET_FILE_BASE.json"
+  fi
+
+  # Remove conflicting target file if it exists
+  if [[ -f "$other_target_file" ]]; then
+    rm -f "$other_target_file"
+  fi
+
+  # Copy selected config preserving extension
+  if cp "$selected_file" "$target_file"; then
+    echo -e "${GREEN}Switched to: ${BOLD}$selected_name${NC}"
+    echo -e "${DIM}Copied to: $target_file${NC}"
+  else
+    echo -e "${YELLOW}Error: Failed to copy config file${NC}"
+    exit 1
+  fi
+}
+
+# Run
+show_menu

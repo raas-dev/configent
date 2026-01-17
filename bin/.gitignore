@@ -13,6 +13,7 @@
 !postinstall_*
 !rsync_tmbackup.sh
 !setup_*
+!omo
 !tm
 !trans
 !xpanes

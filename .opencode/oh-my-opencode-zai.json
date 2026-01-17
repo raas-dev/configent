@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+   "agents": {
+    "Sisyphus": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "Planner-Sisyphus": {
+      "model": "zai-coding-plan/glm-4.7",
+      "permission": {
+        "edit": "ask",
+        "bash": {
+          "*": "allow",
+          "git": "ask",
+          "rm": "ask"
+        }
+      }
+    },
+    "OpenCode-Builder": {
+    },
+    "oracle": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "librarian": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "explore": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "frontend-ui-ux-engineer": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "document-writer": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "multimodal-looker": {
+      "model": "zai-coding-plan/glm-4.7"
+    }
+  },
+  "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
+  "disabled_skills": ["playwright"],
+  "experimental": {
+    "truncate_all_tool_outputs": true,
+    "aggressive_truncation": true,
+    "auto_resume": true
+  }
+}

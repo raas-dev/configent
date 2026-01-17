@@ -25,7 +25,20 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
-# oh-my-opencode.jsonc
+# oh-my-opencode-*.json and oh-my-opencode-*.jsonc
+find "$config_path/opencode" -maxdepth 1 -type f \( -name "oh-my-opencode-*.json" -o -name "oh-my-opencode-*.jsonc" \) | while read -r file; do
+  filename=$(basename "$file")
+  backup_file="$backup_path/.config/opencode/$filename"
+  if [ ! -r "$backup_file" ]; then
+    if [ -r "$HOME/.config/opencode/$filename" ]; then
+      mkdir -p "$backup_path/.config/opencode"
+      cp -P "$HOME/.config/opencode/$filename" "$backup_file"
+    fi
+  fi
+  mkdir -p "$HOME/.config/opencode"
+  ln -sfnv "$file" "$HOME/.config/opencode/$filename"
+done
+# symlink default oh-my-opencode.jsonc
 if [ ! -r "$backup_path/.config/opencode/oh-my-opencode.jsonc" ]; then
   if [ -r "$HOME/.config/opencode/oh-my-opencode.jsonc" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -34,7 +47,7 @@ if [ ! -r "$backup_path/.config/opencode/oh-my-opencode.jsonc" ]; then
   fi
 fi
 mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/oh-my-opencode.jsonc" \
+ln -sfnv "$config_path/opencode/oh-my-opencode-antigravity.jsonc" \
   "$HOME/.config/opencode/oh-my-opencode.jsonc"
 
 # AGENTS.md
