@@ -8,6 +8,7 @@
     "Planner-Sisyphus": {
       //"model": "google/antigravity-gemini-3-pro-high",
       "permission": {
+        "edit": "ask",
         "bash": {
           "*": "allow",
           "git": "ask",
@@ -38,5 +39,10 @@
     }
   },
   "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
-  "disabled_skills": ["playwright"]
+  "disabled_skills": ["playwright"],
+  "experimental": {
+    "truncate_all_tool_outputs": true,
+    "aggressive_truncation": true,
+    "auto_resume": true
+  }
 }
