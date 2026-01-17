@@ -35,6 +35,7 @@ hverlin.mise-vscode
 ibm.output-colorizer
 iliaskhairullin.simple-lines-count
 jellydn.vscode-hurl-runner
+jerrygoyal.shortcut-menu-bar
 johnnymorganz.stylua
 kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
@@ -72,7 +73,6 @@ streetsidesoftware.code-spell-checker
 streetsidesoftware.code-spell-checker-finnish
 tamasfe.even-better-toml
 tomoki1207.pdf
-tomxeno.shortcut-menu-bar
 unifiedjs.vscode-mdx
 usernamehw.errorlens
 wayou.vscode-todo-highlight
