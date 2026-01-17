@@ -24,7 +24,7 @@ return {
     return {
       options = {
         theme = ayu,
-      }
+      },
     }
   end,
 }
