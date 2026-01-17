@@ -106,7 +106,6 @@ bun = 'latest'
 # ai
 "github:asyrjasalo/dynamic-mcp" = "1.4.0"
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
-'github:memextech/ht-mcp' = { version = 'latest', bin = 'ht-mcp' }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:@openchamber/web' = 'latest'
