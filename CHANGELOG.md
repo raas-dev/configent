@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.197.0](https://github.com/raas-dev/configent/compare/1.196.6...1.197.0) (2026-01-17)
+
+
+### Features
+
+* **mise:** add agent-of-empires tool to config ([26b0caa](https://github.com/raas-dev/configent/commit/26b0caaea49d5596955146d87b6c34f529897080))
+* **mise:** add worktrunk tool to config ([5c4cf57](https://github.com/raas-dev/configent/commit/5c4cf57852613a5201b002dc20b84feb2ef34fbd))
+* **opencode:** add config profile switching tool and multiple agent configurations ([34a1c32](https://github.com/raas-dev/configent/commit/34a1c3271a9aadfd9b152e168a623065bddced24))
+* **opencode:** Add plannotator ([3036b45](https://github.com/raas-dev/configent/commit/3036b457a4d70cbc3ac2c3b4551253e10693bad0))
+* **vscode:** add mermaid markdown extensions ([3ae8bd1](https://github.com/raas-dev/configent/commit/3ae8bd16709a12f2f2403c06d10450f96499c551))
+
+
+### Fixes
+
+* **lualine:** remove encoding and fileformat display ([d6bac27](https://github.com/raas-dev/configent/commit/d6bac271790bebc25a1249b0a1758d289fe90614))
+* **mise:** comment out awscli tool ([e1a32b2](https://github.com/raas-dev/configent/commit/e1a32b2df820437f7fae2ccd77cab5c585cd7d3b))
+* **mise:** remove ht-mcp tool from config ([e23b642](https://github.com/raas-dev/configent/commit/e23b642d1a0da370e28504837a36cd29162ae1c0))
+* **profile:** remove agent-mcp-gateway exports ([5c6dc5c](https://github.com/raas-dev/configent/commit/5c6dc5cc189117eb55a17ab4d65a72cb4e2cecc0))
+* **vscode:** prefix tm commands with exec and add terminal profile ([114fc54](https://github.com/raas-dev/configent/commit/114fc54f052e0e09d5a1d7f77063ac86e1f58224))
+* **vscode:** remove drawio extension ([af52f8d](https://github.com/raas-dev/configent/commit/af52f8d43f4c320b3cd1fa8852e5bb32532c84c0))
+* **vscode:** shrink editor tabs to fit more ([229fb18](https://github.com/raas-dev/configent/commit/229fb189f339a6cea0e46df5eb2da394952abcfc))
+* **vscode:** swap keybindings and simplify when condition ([7eec205](https://github.com/raas-dev/configent/commit/7eec205c600873d7e74abef77e8a79ea306b8b05))
+* **vscode:** update shortcut menu bar extension id ([7f17a7d](https://github.com/raas-dev/configent/commit/7f17a7dcd6ab3cfd87bca62cb5d355cb7837c4cc))
+
 ## [1.196.6](https://github.com/raas-dev/configent/compare/1.196.5...1.196.6) (2026-01-16)
 
 
