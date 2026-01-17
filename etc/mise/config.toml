@@ -64,7 +64,7 @@ trivy = 'latest'
 'github:owenrumney/lazytrivy' = 'latest'
 
 # cloud
-awscli = 'latest'
+#awscli = 'latest'
 #aws-copilot = 'latest'
 #cloudflared = 'latest'
 #gcloud = 'latest'
