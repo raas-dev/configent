@@ -719,7 +719,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.11"
+version = "2.1.12"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -731,7 +731,7 @@ version = "0.24.2"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.5.1"
+version = "1.5.2"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
