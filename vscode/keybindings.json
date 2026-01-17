@@ -660,13 +660,13 @@
     "command": "workbench.action.terminal.focusAtIndex9"
   },
   {
-    "key": "ctrl+s s",
-    "command": "agentterminal.run",
-    "when": "editorTextFocus && !terminalFocus"
-  },
-  {
     "key": "ctrl+s ctrl+s",
     "command": "agentterminal.run",
-    "when": "editorTextFocus && !terminalFocus"
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+s s",
+    "command": "agentterminal.run",
+    "when": "!terminalFocus"
   }
 ]
