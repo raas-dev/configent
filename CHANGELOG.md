@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.199.1](https://github.com/raas-dev/configent/compare/1.199.0...1.199.1) (2026-01-18)
+
+
+### Fixes
+
+* **chat:** remove temperature setting from profile ([3dc9d18](https://github.com/raas-dev/configent/commit/3dc9d18af340c8452df3f32f2f501fb191ace236))
+* **config:** disable claude_code features in profiles ([7686d8b](https://github.com/raas-dev/configent/commit/7686d8b555581daca9946f3dd0121603827286a4))
+
 ## [1.199.0](https://github.com/raas-dev/configent/compare/1.198.0...1.199.0) (2026-01-18)
 
 
