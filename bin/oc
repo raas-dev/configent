@@ -58,11 +58,9 @@ if [[ "$1" == "exec" && $# -lt 3 ]]; then
 fi
 
 # Determine if we should skip the .opencode prompt
-# Skip if: in temporary environment (PROFILE_METADATA_FILE set), or using --yes flag
+# Skip if: in temporary environment (PROFILE_METADATA_FILE set), or exec command
 SKIP_OPENCODE_PROMPT=false
 if [[ -n "$PROFILE_METADATA_FILE" ]]; then
-  SKIP_OPENCODE_PROMPT=true
-elif [[ "$1" == "use" && ("$3" == "--yes" || "$3" == "-y") ]]; then
   SKIP_OPENCODE_PROMPT=true
 elif [[ "$1" == "exec" ]]; then
   SKIP_OPENCODE_PROMPT=true
@@ -264,21 +262,13 @@ switch_to_profile() {
       local current_origin_hash
       current_origin_hash=$(calculate_profile_hash "$profile_dir")
 
-      # Only ask for reset if the origin profile hash has changed
+      # Only show info if the origin profile hash has changed
       if [[ -n "$stored_hash" && "$stored_hash" != "$current_origin_hash" ]]; then
         local display_path
         display_path="${source_path/#$HOME/~}"
         echo -e "${YELLOW}$profile_name has been updated in the origin ($display_path).${NC}"
-
-        if [[ "$force_yes" != "true" ]]; then
-          echo -ne "${YELLOW}Reset it from origin (overrides project-specific changes)? [y/N]${NC} "
-          read -r reset_profile
-          if [[ ! "$reset_profile" =~ ^[Yy]$ ]]; then
-            echo -e "${GREEN}Using: ${BOLD}$profile_name${NC}"
-            echo -e "${DIM}Kept its files as is${NC}"
-            exit 0
-          fi
-        fi
+        echo -e "${DIM}Run 'oc init $profile_name --yes' to reset from origin (destructive).${NC}"
+        exit 0
       else
         local display_path
         display_path="${source_path/#$HOME/~}"
@@ -469,10 +459,10 @@ show_help() {
     "      ${DIM}Example:${NC}" \
     "      oc init" \
     "" \
-    "  ${CYAN}use${NC} ${DIM}[profile-name] [--yes | -y]${NC}" \
+    "  ${CYAN}use${NC} ${DIM}[profile-name]${NC}" \
     "      Select a new profile. Shows an interactive menu if no profile" \
-    "      name is given. ${DIM}If there are changes in origin, confirms to${NC}" \
-    "      ${DIM}update from origin unless --yes or -y is given.${NC}" \
+    "      name is given. ${DIM}If there are changes in origin, informs the${NC}" \
+    "      ${DIM}user and advises to use 'init' to reset from origin.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
     "      oc use omo-zai" \
@@ -491,7 +481,7 @@ show_help() {
     "${GREEN}EXAMPLES:${NC}" \
     "  oc                                  ${DIM}# Interactive mode${NC}" \
     "  oc init omo-zai                     ${DIM}# Initialize with a profile${NC}" \
-    "  oc use omo-antigravity --yes        ${DIM}# Switch and override changes${NC}" \
+    "  oc use omo-antigravity              ${DIM}# Switch to another profile${NC}" \
     "  oc exec computer-use -- pwd         ${DIM}# Run in a temporary profile${NC}" \
     ""
 }
@@ -606,15 +596,8 @@ EOF
       # Shift past 'use'
       shift
       profile_name="$1"
-      shift
 
-      # Check for optional --yes or -y flag
-      force_yes="false"
-      if [[ "$1" == "--yes" ]] || [[ "$1" == "-y" ]]; then
-        force_yes="true"
-      fi
-
-      switch_to_profile "$profile_name" "$force_yes"
+      switch_to_profile "$profile_name" "false"
     fi
     ;;
   *)
