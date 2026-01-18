@@ -36,50 +36,50 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
-# agent dir
-if [ ! -r "$backup_path/.config/opencode/agent" ]; then
-  if [ -r "$HOME/.config/opencode/agent" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/agent" \
-      "$backup_path/.config/opencode/agent"
+# agents dir
+if [ ! -r "$backup_path/.config/agents" ]; then
+  if [ -r "$HOME/.config/opencode/agents" ]; then
+    mkdir -p "$backup_path/.config/agents"
+    cp -RP "$HOME/.config/opencode/agents" \
+      "$backup_path/.config/agents"
   fi
 fi
-mkdir -p "$HOME/.config/opencode/agent"
-rm -rf "$HOME/.config/opencode/agent"
-ln -sfnv "$config_path/opencode/agent" "$HOME/.config/opencode/agent"
+mkdir -p "$HOME/.config/opencode/agents"
+rm -rf "$HOME/.config/opencode/agents"
+ln -sfnv "$config_path/opencode/agents" "$HOME/.config/opencode/agents"
 
-# command dir
-if [ ! -r "$backup_path/.config/opencode/command" ]; then
-  if [ -r "$HOME/.config/opencode/command" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/command" \
-      "$backup_path/.config/opencode/command"
+# commands dir
+if [ ! -r "$backup_path/.config/commands" ]; then
+  if [ -r "$HOME/.config/opencode/commands" ]; then
+    mkdir -p "$backup_path/.config/commands"
+    cp -RP "$HOME/.config/opencode/commands" \
+      "$backup_path/.config/commands"
   fi
 fi
-mkdir -p "$HOME/.config/opencode/command"
-rm -rf "$HOME/.config/opencode/command"
-ln -sfnv "$config_path/opencode/command" "$HOME/.config/opencode/command"
+mkdir -p "$HOME/.config/opencode/commands"
+rm -rf "$HOME/.config/opencode/commands"
+ln -sfnv "$config_path/opencode/commands" "$HOME/.config/opencode/commands"
 
-# skill dir
-if [ ! -r "$backup_path/.config/opencode/skill" ]; then
-  if [ -r "$HOME/.config/opencode/skill" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/skill" \
-      "$backup_path/.config/opencode/skill"
+# skills dir
+if [ ! -r "$backup_path/.config/skills" ]; then
+  if [ -r "$HOME/.config/opencode/skills" ]; then
+    mkdir -p "$backup_path/.config/skills"
+    cp -RP "$HOME/.config/opencode/skills" \
+      "$backup_path/.config/skills"
   fi
 fi
-mkdir -p "$HOME/.config/opencode/skill"
-rm -rf "$HOME/.config/opencode/skill"
-ln -sfnv "$config_path/opencode/skill" "$HOME/.config/opencode/skill"
+mkdir -p "$HOME/.config/opencode/skills"
+rm -rf "$HOME/.config/opencode/skills"
+ln -sfnv "$config_path/opencode/skills" "$HOME/.config/opencode/skills"
 
-# profile dir
-if [ ! -r "$backup_path/.config/opencode/profile" ]; then
-  if [ -r "$HOME/.config/opencode/profile" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/profile" \
-      "$backup_path/.config/opencode/profile"
+# profiles dir
+if [ ! -r "$backup_path/.config/profiles" ]; then
+  if [ -r "$HOME/.config/opencode/profiles" ]; then
+    mkdir -p "$backup_path/.config/profiles"
+    cp -RP "$HOME/.config/opencode/profiles" \
+      "$backup_path/.config/profiles"
   fi
 fi
-mkdir -p "$HOME/.config/opencode/profile"
-rm -rf "$HOME/.config/opencode/profile"
-ln -sfnv "$config_path/opencode/profile" "$HOME/.config/opencode/profile"
+mkdir -p "$HOME/.config/opencode/profiles"
+rm -rf "$HOME/.config/opencode/profiles"
+ln -sfnv "$config_path/opencode/profiles" "$HOME/.config/opencode/profiles"
