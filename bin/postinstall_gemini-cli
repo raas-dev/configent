@@ -23,13 +23,3 @@ if [ ! -r "$backup_path/.gemini/settings.json" ]; then
 fi
 mkdir -p "$HOME/.gemini"
 ln -sfnv "$config_path/gemini-cli/settings.json" "$HOME/.gemini/settings.json"
-
-# GEMINI.md
-if [ ! -r "$backup_path/.gemini/GEMINI.md" ]; then
-  if [ -r "$HOME/.gemini/GEMINI.md" ]; then
-    mkdir -p "$backup_path/.gemini"
-    cp -P "$HOME/.gemini/GEMINI.md" "$backup_path/.gemini/GEMINI.md"
-  fi
-fi
-mkdir -p "$HOME/.gemini"
-ln -sfnv "$config_path/AGENTS.md" "$HOME/.gemini/GEMINI.md"

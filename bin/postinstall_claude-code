@@ -44,8 +44,6 @@ fi
 mkdir -p "$HOME/.config/ccstatusline"
 ln -sfnv "$config_path/claude-code/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
 
-# below: https://github.com/Yeachan-Heo/oh-my-claude-sisyphus/tree/v1.10.3
-
 # commands dir
 if [ ! -r "$backup_path/.claude/commands" ]; then
   if [ -r "$HOME/.claude/commands" ]; then
