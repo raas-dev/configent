@@ -84,12 +84,6 @@ diff_file=$(mktemp) || {
 }
 cleanup() {
   rm -f "$diff_file"
-  if [ -n "$temp_dir" ] && [ -d "$temp_dir" ]; then
-    rm -rf "$temp_dir"
-  fi
-  if [ -n "$original_pwd" ] && [ "$PWD" != "$original_pwd" ]; then
-    cd "$original_pwd" || true
-  fi
 }
 trap 'cleanup' EXIT INT TERM
 printf '%s' "$git_diff" >"$diff_file"
@@ -114,19 +108,8 @@ fi
 
 # The commit command reads the git diff from stdin
 if [ -z "$commit_message" ]; then
-  # Temporarily change to temp directory to prevent opencode from loading .opencode/
-  original_pwd="$PWD"
-  temp_dir=$(mktemp -d) || {
-    printf "%sError: Failed to create temporary directory.\n" "$red"
-    exit 1
-  }
-  cd "$temp_dir" || {
-    printf "%sError: Failed to change to temporary directory.\n" "$red"
-    exit 1
-  }
-
   if [ -n "$context_message" ]; then
-    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
+    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec git-use -- opencode run \
       --agent coder \
       --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
@@ -134,7 +117,7 @@ if [ -z "$commit_message" ]; then
       exit 1
     }
   else
-    commit_message="$(cat "$diff_file" | opencode run \
+    commit_message="$(cat "$diff_file" | oc exec git-use -- opencode run \
       --agent coder \
       --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
@@ -142,12 +125,6 @@ if [ -z "$commit_message" ]; then
       exit 1
     }
   fi
-
-  # Return to original directory (handled by cleanup trap)
-  cd "$original_pwd" || {
-    printf "%sError: Failed to return to original directory.\n" "$red"
-    exit 1
-  }
 fi
 
 if [ -z "$commit_message" ]; then
