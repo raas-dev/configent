@@ -230,8 +230,8 @@ switch_to_profile() {
   if [[ -d "$PROJECT_CONFIG_DIR" && ! -f "$PROFILE_METADATA_FILE" ]]; then
     if [[ "$force_yes" != "true" ]]; then
       echo ""
-      echo -e "${YELLOW}Warning: .opencode/ exists but is not managed by oc.${NC}"
-      echo -e "${YELLOW}Commit your .opencode directory first. Proceeding will overwrite the existing files.${NC}"
+      echo -e "${YELLOW}Warning: .opencode directory exists but is not managed by oc.${NC}"
+      echo -e "${YELLOW}Commit your .opencode directory first. Proceeding will overwrite the .opencode directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_unmanaged
       if [[ ! "$confirm_unmanaged" =~ ^[Yy]$ ]]; then
@@ -239,13 +239,15 @@ switch_to_profile() {
         exit 0
       fi
     fi
+    # Clean slate for unmanaged config
+    rm -rf "$PROJECT_ROOT_DIR/.opencode"/*
   fi
 
-  # Confirm reset if init command is used on already-initialized project
-  if [[ "$is_init_cmd" == "true" && -d "$PROJECT_CONFIG_DIR" ]]; then
+  # Confirm reset if init command is used on oc-managed project (has oc.json)
+  if [[ "$is_init_cmd" == "true" && -f "$PROFILE_METADATA_FILE" ]]; then
     if [[ "$force_yes" != "true" ]]; then
       echo ""
-      echo -e "${YELLOW}Project already initialized. Re-initializing will reset all changes.${NC}"
+      echo -e "${YELLOW}Project already initialized. Re-initializing will overwrite the .opencode directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_reset
       if [[ ! "$confirm_reset" =~ ^[Yy]$ ]]; then
@@ -253,7 +255,7 @@ switch_to_profile() {
         exit 0
       fi
     fi
-    # Clean slate: remove all files in .opencode
+    # Clean slate for re-init
     rm -rf "$PROJECT_ROOT_DIR/.opencode"/*
   fi
 
