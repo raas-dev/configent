@@ -480,7 +480,7 @@ ai_agent() {
     local agent="computer-use"
   fi
 
-  local config_file="$HOME/.config/configent/opencode/profiles/$agent.jsonc"
+  local config_file="$HOME/.config/configent/opencode/profile/$agent/opencode.jsonc"
   if [ ! -r "$config_file" ]; then
     echo "Error: Config file not readable: $config_file"
     return 1
@@ -664,8 +664,8 @@ ports() {
 
 # Weather (https://github.com/chubin/wttr.in)
 wttr() {
-    local city="${1:-$(ipv4 | jq -r .city)}"
-    curl "v2.wttr.in/${city}?MF&lang=en"
+  local city="${1:-$(ipv4 | jq -r .city)}"
+  curl "v2.wttr.in/${city}?MF&lang=en"
 }
 
 ### Functions: Logs ############################################################
