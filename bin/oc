@@ -44,17 +44,17 @@ NC='\033[0m' # No Color
 
 PROFILE_METADATA_FILE="$PROJECT_CONFIG_DIR/oc.json"
 
-# Calculate hash of all files in a directory
+# Calculate hash of all files in a directory (including nested files)
 calculate_profile_hash() {
   local profile_dir="$1"
   local combined_hash=""
 
-  # Sort files and calculate combined hash
+  # Sort files recursively and calculate combined hash
   while IFS= read -r file; do
     if [[ -f "$file" ]]; then
       combined_hash+=$(hash_file "$file")
     fi
-  done < <(find "$profile_dir" -maxdepth 1 -type f | sort)
+  done < <(find "$profile_dir" -type f | sort)
 
   # Return hash of the combined hashes
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -109,16 +109,16 @@ get_configs() {
   find -L "$PROFILES_DIR" -maxdepth 1 -mindepth 1 -type d | sort
 }
 
-# Calculate hash of project config files
+# Calculate hash of project config files (including nested files)
 calculate_project_hash() {
   local combined_hash=""
 
-  # Sort files and calculate combined hash
+  # Sort files recursively and calculate combined hash
   while IFS= read -r file; do
     if [[ -f "$file" ]]; then
       combined_hash+=$(hash_file "$file")
     fi
-  done < <(find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f | sort)
+  done < <(find "$PROJECT_CONFIG_DIR" -type f | sort)
 
   # Return hash of the combined hashes
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -329,8 +329,8 @@ show_menu() {
     fi
   done
 
-  # Copy all files from the selected profile directory to the project config directory
-  if cp "$selected_profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
+  # Copy all files and directories from the selected profile directory to the project config directory
+  if cp -r "$selected_profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
     # Save profile metadata
     save_profile_metadata "$selected_name" "$selected_profile_dir"
 
