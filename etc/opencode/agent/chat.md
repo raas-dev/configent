@@ -6,10 +6,6 @@ temperature: 0.0
 permissions:
   edit: deny
   bash: ask
-  skill: ask
-  webfetch: allow
-  doom_loop: ask
-  external_directory: ask
 ---
 
 # role

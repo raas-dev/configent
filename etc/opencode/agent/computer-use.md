@@ -3,10 +3,6 @@ description: Computer use agent
 mode: primary
 temperature: 0.0
 permissions:
-  edit: allow
-  bash: allow
-  skill: allow
-  webfetch: allow
   doom_loop: allow
   external_directory: allow
 ---
