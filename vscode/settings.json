@@ -81,7 +81,7 @@
       "label": "Computer Use"
     },
     {
-      "command": "exec zsh",
+      "command": "clear",
       "id": "shell",
       "label": "Shell"
     }
