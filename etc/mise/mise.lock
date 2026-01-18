@@ -786,7 +786,7 @@ version = "2.26.4"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
-version = "2.2.1"
+version = "2.3.0"
 backend = "pipx:poetry"
 
 [[tools."pipx:sncli"]]
