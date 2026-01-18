@@ -83,15 +83,3 @@ fi
 mkdir -p "$HOME/.config/opencode/profile"
 rm -rf "$HOME/.config/opencode/profile"
 ln -sfnv "$config_path/opencode/profile" "$HOME/.config/opencode/profile"
-
-# antigravity.json
-if [ ! -r "$backup_path/.config/opencode/antigravity.json" ]; then
-  if [ -r "$HOME/.config/opencode/antigravity.json" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/antigravity.json" \
-      "$backup_path/.config/opencode/antigravity.json"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/antigravity.json" \
-  "$HOME/.config/opencode/antigravity.json"
