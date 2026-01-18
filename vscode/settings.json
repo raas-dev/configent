@@ -59,19 +59,9 @@
       "label": "Shell"
     },
     {
-      "command": "exec tm opencode",
-      "id": "opencode",
-      "label": "OpenCode"
-    },
-    {
-      "command": "exec tm claude",
-      "id": "claude",
-      "label": "Claude Code"
-    },
-    {
-      "command": "exec tm gemini",
-      "id": "gemini",
-      "label": "Gemini CLI"
+      "command": "exec aoe",
+      "id": "aoe",
+      "label": "Agent of Empires"
     },
     {
       "command": "exec tm zsh -i -c",
