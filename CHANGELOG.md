@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.200.0](https://github.com/raas-dev/configent/compare/1.199.2...1.200.0) (2026-01-18)
+
+
+### Features
+
+* **oc:** add init command for initializing project ([243666a](https://github.com/raas-dev/configent/commit/243666a67d164dd93ec30cbca3f4d17db10247b1))
+
 ## [1.199.2](https://github.com/raas-dev/configent/compare/1.199.1...1.199.2) (2026-01-18)
 
 
