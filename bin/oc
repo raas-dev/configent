@@ -361,6 +361,57 @@ show_menu() {
   switch_to_profile "$selected_name" "false"
 }
 
+# Show help message
+show_help() {
+  cat <<EOF
+${BOLD}oc${NC} - OpenCode configuration profile manager
+
+${BOLD}USAGE:${NC}
+  oc [COMMAND] [OPTIONS]
+
+${BOLD}COMMANDS:${NC}
+  ${CYAN}exec${NC} <profile-name> -- <command> [args...]
+      Execute a command in a temporary environment with the specified profile.
+      The profile's .opencode directory is copied to a temp directory.
+
+      Example:
+        oc exec git-use -- pwd
+        oc exec omo-zai -- ls -la .opencode/
+
+  ${CYAN}use${NC} <profile-name> [--yes | -y]
+      Switch to the specified profile. Shows confirmation prompts unless
+      --yes or -y flag is provided to skip prompts.
+
+      Example:
+        oc use git-use
+        oc use omo-zai -y
+
+  ${CYAN}help${NC}, ${CYAN}-h${NC}, ${CYAN}--help${NC}
+      Show this help message.
+
+  ${BOLD}(no command)${NC}
+      Show interactive profile selection menu.
+
+${BOLD}OPTIONS:${NC}
+  -h, --help        Show this help message
+  -y, --yes         Skip confirmation prompts (use command only)
+
+${BOLD}EXAMPLES:${NC}
+  # Interactive mode
+  oc
+
+  # Execute command with profile
+  oc exec git-use -- cat .opencode/oc.json
+
+  # Switch profile with confirmation
+  oc use omo-antigravity
+
+  # Switch profile without confirmation
+  oc use git-use --yes
+
+EOF
+}
+
 # Execute command in a temporary environment with a specific profile
 exec_in_profile() {
   local profile_name="$1"
@@ -433,6 +484,9 @@ EOF
 # Parse command-line arguments
 if [[ $# -gt 0 ]]; then
   case "$1" in
+  help | -h | --help)
+    show_help
+    ;;
   exec)
     if [[ $# -lt 3 ]]; then
       echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
