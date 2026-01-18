@@ -1,9 +1,19 @@
 #!/bin/bash
 
-# Switch OpenCode configuration profiles
+# oc: Switch OpenCode configuration profiles
 
 # Based on:
 # https://github.com/AnPod/Switch-Omo-Config/blob/v1.09/switch-omo-config.sh
+
+# Portable hash function
+hash_file() {
+  local file="$1"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    md5 -q "$file" 2>/dev/null
+  else
+    md5sum "$file" 2>/dev/null | awk '{print $1}'
+  fi
+}
 
 CENTRAL_CONFIG_DIR="$HOME/.config/opencode"
 PROFILES_DIR="$CENTRAL_CONFIG_DIR/profile"
@@ -42,12 +52,16 @@ calculate_profile_hash() {
   # Sort files and calculate combined hash
   while IFS= read -r file; do
     if [[ -f "$file" ]]; then
-      combined_hash+=$(md5 -q "$file" 2>/dev/null)
+      combined_hash+=$(hash_file "$file")
     fi
   done < <(find "$profile_dir" -maxdepth 1 -type f | sort)
 
   # Return hash of the combined hashes
-  echo "$combined_hash" | md5
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "$combined_hash" | md5
+  else
+    echo "$combined_hash" | md5sum | awk '{print $1}'
+  fi
 }
 
 # Save profile metadata
@@ -71,6 +85,14 @@ save_profile_metadata() {
 EOF
 }
 
+# Extract JSON value by key (portable)
+json_get_value() {
+  local file="$1"
+  local key="$2"
+
+  grep -o "\"$key\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" "$file" 2>/dev/null | cut -d'"' -f4
+}
+
 # Load profile metadata
 load_profile_metadata() {
   if [[ ! -f "$PROFILE_METADATA_FILE" ]]; then
@@ -79,7 +101,7 @@ load_profile_metadata() {
   fi
 
   # Extract profile name from JSON
-  grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "$PROFILE_METADATA_FILE" | cut -d'"' -f4
+  json_get_value "$PROFILE_METADATA_FILE" "name"
 }
 
 # Get list of profile directories
@@ -87,7 +109,26 @@ get_configs() {
   find -L "$PROFILES_DIR" -maxdepth 1 -mindepth 1 -type d | sort
 }
 
-# Get current active profile by checking metadata file first, then comparing files
+# Calculate hash of project config files
+calculate_project_hash() {
+  local combined_hash=""
+
+  # Sort files and calculate combined hash
+  while IFS= read -r file; do
+    if [[ -f "$file" ]]; then
+      combined_hash+=$(hash_file "$file")
+    fi
+  done < <(find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f | sort)
+
+  # Return hash of the combined hashes
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "$combined_hash" | md5
+  else
+    echo "$combined_hash" | md5sum | awk '{print $1}'
+  fi
+}
+
+# Get current active profile by checking metadata file first, then comparing hashes
 get_current() {
   # First, check if metadata file exists and is valid
   local metadata_profile
@@ -102,37 +143,20 @@ get_current() {
     fi
   fi
 
+  # Calculate project hash once for comparison
+  local project_hash
+  project_hash=$(calculate_project_hash)
+
   # If metadata is invalid or missing, find which profile directory matches the current project config
   while IFS= read -r profile_dir; do
     local profile_name
     profile_name=$(basename "$profile_dir")
-    local all_match=true
 
-    # Check if all files in the profile match those in the project
-    for profile_file in "$profile_dir"/*; do
-      if [[ ! -f "$profile_file" ]]; then
-        continue
-      fi
-      local filename
-      filename=$(basename "$profile_file")
-      local project_file="$PROJECT_CONFIG_DIR/$filename"
+    # Compare combined hashes instead of individual files
+    local profile_hash
+    profile_hash=$(calculate_profile_hash "$profile_dir")
 
-      if [[ ! -f "$project_file" ]]; then
-        all_match=false
-        break
-      fi
-
-      local profile_hash
-      profile_hash=$(md5 -q "$profile_file" 2>/dev/null)
-      local project_hash
-      project_hash=$(md5 -q "$project_file" 2>/dev/null)
-      if [[ "$profile_hash" != "$project_hash" ]]; then
-        all_match=false
-        break
-      fi
-    done
-
-    if [[ "$all_match" == "true" ]]; then
+    if [[ "$profile_hash" == "$project_hash" ]]; then
       echo "$profile_name"
       return
     fi
@@ -256,9 +280,9 @@ show_menu() {
     if [[ -f "$metadata_file" ]]; then
       # Extract stored hash and source path from metadata
       local stored_hash
-      stored_hash=$(grep -o '"origin_hash"[[:space:]]*:[[:space:]]*"[^"]*"' "$metadata_file" | cut -d'"' -f4)
+      stored_hash=$(json_get_value "$metadata_file" "origin_hash")
       local source_path
-      source_path=$(grep -o '"source"[[:space:]]*:[[:space:]]*"[^"]*"' "$metadata_file" | cut -d'"' -f4)
+      source_path=$(json_get_value "$metadata_file" "source")
 
       # Calculate current hash of the origin profile
       local current_origin_hash
