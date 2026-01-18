@@ -25,7 +25,7 @@ white=$(tput setaf 7)
 
 ### variables ##################################################################
 
-: "${MODEL:="github-copilot/claude-haiku-4.5"}"
+: "${AI_COMMIT_MODEL:="github-copilot/claude-haiku-4.5"}"
 
 ################################################################################
 
@@ -128,7 +128,7 @@ if [ -z "$commit_message" ]; then
   if [ -n "$context_message" ]; then
     commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
       --agent coder \
-      --model "$MODEL" \
+      --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
@@ -136,7 +136,7 @@ if [ -z "$commit_message" ]; then
   else
     commit_message="$(cat "$diff_file" | opencode run \
       --agent coder \
-      --model "$MODEL" \
+      --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
