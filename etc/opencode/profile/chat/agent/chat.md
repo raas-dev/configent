@@ -1,7 +1,6 @@
 ---
 description: General purpose chat with tools
 mode: primary
-temperature: 0.0
 permissions:
   edit: deny
   bash: ask
