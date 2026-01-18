@@ -106,7 +106,8 @@ Use the Task tool to delegate to specialized agents:
 | Command | Description |
 |---------|-------------|
 | `/sisyphus <task>` | Activate Sisyphus multi-agent orchestration |
-| `/sisyphus-default` | Set Sisyphus as your default mode |
+| `/sisyphus-default` | Configure Sisyphus for current project (./.claude/CLAUDE.md) |
+| `/sisyphus-default-global` | Configure Sisyphus globally (~/.claude/CLAUDE.md) |
 | `/ultrawork <task>` | Maximum performance mode with parallel agents |
 | `/deepsearch <query>` | Thorough codebase search |
 | `/analyze <target>` | Deep analysis and investigation |
