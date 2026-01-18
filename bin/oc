@@ -478,8 +478,8 @@ show_help() {
     "      oc use omo-zai" \
     "" \
     "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} -- ${CYAN}<command>${NC} ${DIM}[args...]${NC}" \
-    "      Execute a command in a temporary directory with the specified" \
-    "      profile. ${DIM}The profile's .opencode directory is copied to a temp${NC}" \
+    "      Execute a command in a temporary profile." \
+    "      ${DIM}The profile's .opencode directory is copied to a temporary${NC}" \
     "      ${DIM}directory which is deleted after the command is executed.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
@@ -490,9 +490,9 @@ show_help() {
     "" \
     "${GREEN}EXAMPLES:${NC}" \
     "  oc                                  ${DIM}# Interactive mode${NC}" \
-    "  oc init omo-zai                     ${DIM}# Initialize with profile${NC}" \
-    "  oc use omo-antigravity --yes        ${DIM}# Switch, skip confirm${NC}" \
-    "  oc exec computer-use -- pwd         ${DIM}# Run in temp env${NC}" \
+    "  oc init omo-zai                     ${DIM}# Initialize with a profile${NC}" \
+    "  oc use omo-antigravity --yes        ${DIM}# Switch and override changes${NC}" \
+    "  oc exec computer-use -- pwd         ${DIM}# Run in a temporary profile${NC}" \
     ""
 }
 
