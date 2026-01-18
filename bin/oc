@@ -14,9 +14,13 @@ cleanup_temp_environment() {
     cd "$ORIGINAL_DIR" 2>/dev/null || true
   fi
 
-  # Clean up any temporary directories
+  # Clean up any temporary directories (only if in a temp location)
   if [[ -n "$TEMP_DIR_TO_CLEAN" && -d "$TEMP_DIR_TO_CLEAN" ]]; then
-    rm -rf "$TEMP_DIR_TO_CLEAN"
+    case "$TEMP_DIR_TO_CLEAN" in
+    /tmp/* | /var/folders/* | "${TMPDIR}"*)
+      rm -rf "$TEMP_DIR_TO_CLEAN"
+      ;;
+    esac
   fi
 
   return "$exit_code"
@@ -26,6 +30,7 @@ cleanup_temp_environment() {
 CYAN='\033[0;36m'
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
+WHITE='\033[1;37m'
 DIM='\033[2m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
@@ -47,11 +52,7 @@ PROJECT_CONFIG_DIR="${PROJECT_CONFIG_DIR:-$PROJECT_ROOT_DIR/.opencode}"
 
 # Validate commands early to show errors before any prompts
 # This check must happen before the .opencode prompt
-if [[ "$1" == "use" && $# -lt 2 ]]; then
-  echo -e "${YELLOW}Error: use requires a profile name.${NC}" >&2
-  echo -e "${DIM}Usage: oc use <profile-name> [--yes]${NC}" >&2
-  exit 1
-elif [[ "$1" == "exec" && $# -lt 3 ]]; then
+if [[ "$1" == "exec" && $# -lt 3 ]]; then
   echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
   echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
   exit 1
@@ -75,18 +76,6 @@ if [[ "$SKIP_OPENCODE_PROMPT" == "true" || "$1" == "exec" ]]; then
   # Create .opencode directory silently if it doesn't exist
   if [[ ! -d "$PROJECT_CONFIG_DIR" ]] && [[ "$1" != "exec" ]]; then
     mkdir -p "$PROJECT_CONFIG_DIR" 2>/dev/null || true
-  fi
-elif [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
-  # Prompt to create .opencode if it doesn't exist
-  echo "No .opencode directory detected in current directory: $PROJECT_ROOT_DIR"
-  read -r -p "Create .opencode directory here for project-scope configuration? [Y/n] " create_opencode
-  if [[ ! "$create_opencode" =~ ^[Nn]$ ]]; then
-    if ! mkdir -p "$PROJECT_CONFIG_DIR" 2>/dev/null; then
-      echo "Error: Failed to create $PROJECT_CONFIG_DIR (check permissions)"
-      exit 1
-    fi
-  else
-    exit 0
   fi
 fi
 
@@ -171,12 +160,18 @@ get_configs() {
 calculate_project_hash() {
   local combined_hash=""
 
+  # Return empty hash if directory doesn't exist
+  if [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
+    echo ""
+    return
+  fi
+
   # Sort files recursively and calculate combined hash
   while IFS= read -r file; do
     if [[ -f "$file" ]]; then
       combined_hash+=$(hash_file "$file")
     fi
-  done < <(find "$PROJECT_CONFIG_DIR" -type f | sort)
+  done < <(find "$PROJECT_CONFIG_DIR" -type f 2>/dev/null | sort)
 
   # Return hash of the combined hashes
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -225,6 +220,7 @@ get_current() {
 switch_to_profile() {
   local profile_name="$1"
   local force_yes="$2"
+  local is_init_cmd="$3"
 
   # Verify profile exists
   local profile_dir="$PROFILES_DIR/$profile_name"
@@ -233,12 +229,29 @@ switch_to_profile() {
     exit 1
   fi
 
+  # Confirm reset if init command is used on already-initialized project
+  if [[ "$is_init_cmd" == "true" && -d "$PROJECT_CONFIG_DIR" ]]; then
+    if [[ "$force_yes" != "true" ]]; then
+      echo ""
+      echo -e "${YELLOW}Project already initialized. Re-initializing will reset all changes.${NC}"
+      echo -ne "${YELLOW}Continue? [y/N]${NC} "
+      read -r confirm_reset
+      if [[ ! "$confirm_reset" =~ ^[Yy]$ ]]; then
+        echo -e "${DIM}Cancelled.${NC}"
+        exit 0
+      fi
+    fi
+    # Clean slate: remove all files in .opencode
+    rm -rf "$PROJECT_ROOT_DIR/.opencode"/*
+  fi
+
   echo ""
 
   local current
   current=$(get_current)
 
-  if [[ "$profile_name" == "$current" ]]; then
+  # Skip "already active" check if this is an init command (user already confirmed reset)
+  if [[ "$is_init_cmd" != "true" && "$profile_name" == "$current" ]]; then
     # Check if the origin profile has been updated since it was last copied
     local metadata_file="$PROJECT_CONFIG_DIR/oc.json"
     if [[ -f "$metadata_file" ]]; then
@@ -259,10 +272,11 @@ switch_to_profile() {
         echo -e "${YELLOW}$profile_name has been updated in the origin ($display_path).${NC}"
 
         if [[ "$force_yes" != "true" ]]; then
-          echo -ne "${YELLOW}Reset from origin (overrides project-specific changes)? [y/N]${NC} "
+          echo -ne "${YELLOW}Reset it from origin (overrides project-specific changes)? [y/N]${NC} "
           read -r reset_profile
           if [[ ! "$reset_profile" =~ ^[Yy]$ ]]; then
-            echo -e "${DIM}Cancelled.${NC}"
+            echo -e "${GREEN}Using: ${BOLD}$profile_name${NC}"
+            echo -e "${DIM}Kept its files as is${NC}"
             exit 0
           fi
         fi
@@ -285,7 +299,7 @@ switch_to_profile() {
       local ext="${filename##*.}"
 
       # Remove any files with the same basename but different extension
-      for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
+      for existing_file in "$PROJECT_ROOT_DIR/.opencode"/"$basename_no_ext".*; do
         if [[ -f "$existing_file" ]]; then
           local existing_ext="${existing_file##*.}"
           if [[ "$existing_ext" != "$ext" ]]; then
@@ -296,12 +310,26 @@ switch_to_profile() {
     fi
   done
 
+  # Ensure project config directory exists
+  local is_init=false
+  if [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
+    is_init=true
+    if ! mkdir -p "$PROJECT_CONFIG_DIR" 2>/dev/null; then
+      echo -e "${YELLOW}Error: Failed to create $PROJECT_CONFIG_DIR (check permissions)${NC}" >&2
+      exit 1
+    fi
+  fi
+
   # Copy all files and directories from the selected profile directory to the project config directory
   if cp -r "$profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
     # Save profile metadata
     save_profile_metadata "$profile_name" "$profile_dir"
 
-    echo -e "${GREEN}Switched to: ${BOLD}$profile_name${NC}"
+    if [[ "$is_init" == "true" || "$is_init_cmd" == "true" ]]; then
+      echo -e "${GREEN}Initialized with: ${BOLD}$profile_name${NC}"
+    else
+      echo -e "${GREEN}Using: ${BOLD}$profile_name${NC}"
+    fi
     echo -e "${DIM}Copied profile files to: $PROJECT_CONFIG_DIR${NC}"
   else
     echo -e "${YELLOW}Error: Failed to copy profile files${NC}"
@@ -311,6 +339,8 @@ switch_to_profile() {
 
 # Interactive menu with arrow keys
 show_menu() {
+  local header="${1:-Select OpenCode configuration}"
+  local is_init_cmd="${2:-false}"
   local configs=()
   local names=()
 
@@ -345,7 +375,7 @@ show_menu() {
   # Cleanup on exit
   trap 'tput cnorm; echo' EXIT TERM
 
-  echo -e "${BOLD}Select OpenCode configuration${NC}"
+  echo -e "${BOLD}${header}${NC}"
   echo -e "${DIM}Use arrow keys to navigate, Enter to select, q to quit${NC}"
   echo ""
 
@@ -416,56 +446,54 @@ show_menu() {
 
   # Switch to selected profile
   local selected_name="${names[$selected]}"
-  switch_to_profile "$selected_name" "false"
+  switch_to_profile "$selected_name" "false" "$is_init_cmd"
 }
 
 # Show help message
 show_help() {
   printf "%b\n" \
-    "${BOLD}oc${NC} - OpenCode configuration manager" \
+    "${CYAN}${BOLD}oc${NC} ${DIM}-${NC} OpenCode configuration manager" \
     "" \
-    "${BOLD}USAGE:${NC}" \
-    "  oc [COMMAND] [OPTIONS]" \
+    "${WHITE}USAGE:${NC}" \
+    "  ${CYAN}oc${NC} [COMMAND] [OPTIONS]" \
     "" \
-    "${BOLD}COMMANDS:${NC}" \
-    "  ${BOLD}(no command)${NC}" \
+    "${WHITE}COMMANDS:${NC}" \
+    "  ${DIM}(no command)${NC}" \
     "      Show interactive profile selection menu." \
     "" \
-    "  ${CYAN}use${NC} <profile-name> [--yes | -y]" \
-    "      Switch to the specified profile. Shows confirmation prompts unless" \
-    "      --yes or -y flag is provided to skip prompts." \
+    "  ${CYAN}init${NC} ${DIM}[profile-name] [--yes | -y]${NC}" \
+    "      Initialize the project with a profile. Shows an interactive" \
+    "      menu if no profile name is given. ${DIM}If the project is already${NC}" \
+    "      ${DIM}initialized, confirms to discard existing changes unless${NC}" \
+    "      ${DIM}--yes or -y is given.${NC}" \
     "" \
-    "      Example:" \
-    "        oc use git-use" \
-    "        oc use omo-zai -y" \
+    "      ${DIM}Example:${NC}" \
+    "      oc init" \
     "" \
-    "  ${CYAN}exec${NC} <profile-name> -- <command> [args...]" \
-    "      Execute a command in a temporary environment with the specified profile." \
-    "      The profile's .opencode directory is copied to a temp directory." \
+    "  ${CYAN}use${NC} ${DIM}[profile-name] [--yes | -y]${NC}" \
+    "      Select a new profile. Shows an interactive menu if no profile" \
+    "      name is given. ${DIM}If there are changes in origin, confirms to${NC}" \
+    "      ${DIM}update from origin unless --yes or -y is given.${NC}" \
     "" \
-    "      Example:" \
-    "        oc exec git-use -- pwd" \
-    "        oc exec omo-zai -- ls -la .opencode/" \
+    "      ${DIM}Example:${NC}" \
+    "      oc use omo-zai" \
+    "" \
+    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} -- ${CYAN}<command>${NC} ${DIM}[args...]${NC}" \
+    "      Execute a command in a temporary directory with the specified" \
+    "      profile. ${DIM}The profile's .opencode directory is copied to a temp${NC}" \
+    "      ${DIM}directory which is deleted after the command is executed.${NC}" \
+    "" \
+    "      ${DIM}Example:${NC}" \
+    "      oc exec computer-use -- pwd" \
     "" \
     "  ${CYAN}help${NC}, ${CYAN}-h${NC}, ${CYAN}--help${NC}" \
     "      Show this help message." \
     "" \
-    "${BOLD}OPTIONS:${NC}" \
-    "  -h, --help        Show this help message" \
-    "  -y, --yes         Skip confirmation prompts (use command only)" \
-    "" \
-    "${BOLD}EXAMPLES:${NC}" \
-    "  # Interactive mode" \
-    "  oc" \
-    "" \
-    "  # Switch profile with confirmation" \
-    "  oc use omo-antigravity" \
-    "" \
-    "  # Switch profile without confirmation" \
-    "  oc use git-use --yes" \
-    "" \
-    "  # Execute command with profile" \
-    "  oc exec git-use -- cat .opencode/oc.json" \
+    "${WHITE}EXAMPLES:${NC}" \
+    "  oc                                  ${DIM}# Interactive mode${NC}" \
+    "  oc init omo-zai                     ${DIM}# Initialize with profile${NC}" \
+    "  oc use omo-antigravity --yes        ${DIM}# Switch, skip confirm${NC}" \
+    "  oc exec computer-use -- pwd         ${DIM}# Run in temp env${NC}" \
     ""
 }
 
@@ -474,6 +502,23 @@ if [[ $# -gt 0 ]]; then
   case "$1" in
   help | -h | --help)
     show_help
+    ;;
+  init)
+    if [[ $# -lt 2 ]]; then
+      show_menu "Select OpenCode configuration to initialize the project with" "true"
+    else
+      shift
+      profile_name="$1"
+      shift
+
+      # Check for optional --yes or -y flag
+      force_yes="false"
+      if [[ "$1" == "--yes" ]] || [[ "$1" == "-y" ]]; then
+        force_yes="true"
+      fi
+
+      switch_to_profile "$profile_name" "$force_yes" "true"
+    fi
     ;;
   exec)
     if [[ $# -lt 3 ]]; then
@@ -552,29 +597,41 @@ EOF
     ;;
   use)
     if [[ $# -lt 2 ]]; then
-      echo -e "${YELLOW}Error: use requires a profile name.${NC}" >&2
-      echo -e "${DIM}Usage: oc use <profile-name> [--yes]${NC}" >&2
-      exit 1
-    fi
-    # Shift past 'use'
-    shift
-    profile_name="$1"
-    shift
+      # No profile name given, show interactive menu
+      if [[ -d "$PROJECT_CONFIG_DIR" ]]; then
+        show_menu
+      else
+        show_menu "Select OpenCode configuration to initialize the project with"
+      fi
+    else
+      # Shift past 'use'
+      shift
+      profile_name="$1"
+      shift
 
-    # Check for optional --yes or -y flag
-    force_yes="false"
-    if [[ "$1" == "--yes" ]] || [[ "$1" == "-y" ]]; then
-      force_yes="true"
-    fi
+      # Check for optional --yes or -y flag
+      force_yes="false"
+      if [[ "$1" == "--yes" ]] || [[ "$1" == "-y" ]]; then
+        force_yes="true"
+      fi
 
-    switch_to_profile "$profile_name" "$force_yes"
+      switch_to_profile "$profile_name" "$force_yes"
+    fi
     ;;
   *)
     # Unknown subcommand, show interactive menu as before
-    show_menu
+    if [[ -d "$PROJECT_CONFIG_DIR" ]]; then
+      show_menu
+    else
+      show_menu "Select OpenCode configuration to initialize the project with"
+    fi
     ;;
   esac
 else
   # No arguments, show interactive menu
-  show_menu
+  if [[ -d "$PROJECT_CONFIG_DIR" ]]; then
+    show_menu
+  else
+    show_menu "Select OpenCode configuration to initialize the project with"
+  fi
 fi
