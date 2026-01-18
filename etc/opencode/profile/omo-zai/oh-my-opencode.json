@@ -36,6 +36,14 @@
       "model": "zai-coding-plan/glm-4.7"
     }
   },
+  "claude_code": {
+    "mcp": false,
+    "commands": false,
+    "skills": false,
+    "agents": false,
+    "hooks": false,
+    "plugins": false
+  },
   "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
   "disabled_skills": ["playwright"],
   "experimental": {
