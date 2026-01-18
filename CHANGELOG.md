@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.199.2](https://github.com/raas-dev/configent/compare/1.199.1...1.199.2) (2026-01-18)
+
+
+### Fixes
+
+* **oc:** rename profile and agent directories to plural ([fe1e27d](https://github.com/raas-dev/configent/commit/fe1e27d6ffcc5c3a30804c4a7a4387d882b48ca3))
+
 ## [1.199.1](https://github.com/raas-dev/configent/compare/1.199.0...1.199.1) (2026-01-18)
 
 
