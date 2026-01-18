@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.198.0](https://github.com/raas-dev/configent/compare/1.197.0...1.198.0) (2026-01-18)
+
+
+### Features
+
+* **oc:** add config profile switching tool and management ([01b8a59](https://github.com/raas-dev/configent/commit/01b8a59c746057cb50248b9b7207903b5e257c75))
+
+
+### Fixes
+
+* **ai_commit:** consolidate cleanup logic into single trap handler ([b45ad6d](https://github.com/raas-dev/configent/commit/b45ad6d78251604fba221728917ff079550e2f38))
+* **ai_commit:** prevent project config loading during commit generation ([2d59324](https://github.com/raas-dev/configent/commit/2d593244c1fbb3a6972892196ea77a0156fbd248))
+* **oc:** improve cross-platform hash handling ([410bd82](https://github.com/raas-dev/configent/commit/410bd82c14e458b22b3ad92aa7793aab1231e20c))
+* **postinstall:** remove antigravity symlink logic ([a69651a](https://github.com/raas-dev/configent/commit/a69651aeeb7c1130e9a9a0a0de66d18db6547d65))
+* **profile:** add model configuration to computer-use profile ([69a0cdf](https://github.com/raas-dev/configent/commit/69a0cdf5d6a41e73b33c1bc76d3bfa87490e51c0))
+
 ## [1.197.0](https://github.com/raas-dev/configent/compare/1.196.6...1.197.0) (2026-01-17)
 
 
