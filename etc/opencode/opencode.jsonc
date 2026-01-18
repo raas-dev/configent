@@ -1,13 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
+  "mcp": {},
   "model": "github-copilot/claude-sonnet-4.5",
-  "mcp": {
-    "dynamic-mcp": {
-      "command": ["dmcp"],
-      "type": "local"
-    }
-  },
   "plugin": [],
   "share": "disabled",
   "theme": "ayu",
