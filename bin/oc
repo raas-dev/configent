@@ -164,6 +164,94 @@ get_current() {
   echo ""
 }
 
+# Switch to a specific profile with confirmations
+switch_to_profile() {
+  local profile_name="$1"
+  local force_yes="$2"
+
+  # Verify profile exists
+  local profile_dir="$PROFILES_DIR/$profile_name"
+  if [[ ! -d "$profile_dir" ]]; then
+    echo -e "${YELLOW}Error: Profile '$profile_name' not found in $PROFILES_DIR${NC}" >&2
+    exit 1
+  fi
+
+  echo ""
+
+  local current
+  current=$(get_current)
+
+  if [[ "$profile_name" == "$current" ]]; then
+    # Check if the origin profile has been updated since it was last copied
+    local metadata_file="$PROJECT_CONFIG_DIR/oc.json"
+    if [[ -f "$metadata_file" ]]; then
+      # Extract stored hash and source path from metadata
+      local stored_hash
+      stored_hash=$(json_get_value "$metadata_file" "origin_hash")
+      local source_path
+      source_path=$(json_get_value "$metadata_file" "source")
+
+      # Calculate current hash of the origin profile
+      local current_origin_hash
+      current_origin_hash=$(calculate_profile_hash "$profile_dir")
+
+      # Only ask for reset if the origin profile hash has changed
+      if [[ -n "$stored_hash" && "$stored_hash" != "$current_origin_hash" ]]; then
+        local display_path
+        display_path="${source_path/#$HOME/~}"
+        echo -e "${YELLOW}$profile_name has been updated in the origin ($display_path).${NC}"
+
+        if [[ "$force_yes" != "true" ]]; then
+          echo -ne "${YELLOW}Reset from origin (overrides project-specific changes)? [y/N]${NC} "
+          read -r reset_profile
+          if [[ ! "$reset_profile" =~ ^[Yy]$ ]]; then
+            echo -e "${DIM}Cancelled.${NC}"
+            exit 0
+          fi
+        fi
+      else
+        local display_path
+        display_path="${source_path/#$HOME/~}"
+        echo -e "${DIM}$profile_name is already active.${NC}"
+        echo -e "${DIM}There are no updates in the origin ($display_path).${NC}"
+        exit 0
+      fi
+    fi
+  fi
+
+  # Remove conflicting files from the project config directory before copying
+  for profile_file in "$profile_dir"/*; do
+    if [[ -f "$profile_file" ]]; then
+      local filename
+      filename=$(basename "$profile_file")
+      local basename_no_ext="${filename%.*}"
+      local ext="${filename##*.}"
+
+      # Remove any files with the same basename but different extension
+      for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
+        if [[ -f "$existing_file" ]]; then
+          local existing_ext="${existing_file##*.}"
+          if [[ "$existing_ext" != "$ext" ]]; then
+            rm -f "$existing_file"
+          fi
+        fi
+      done
+    fi
+  done
+
+  # Copy all files and directories from the selected profile directory to the project config directory
+  if cp -r "$profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
+    # Save profile metadata
+    save_profile_metadata "$profile_name" "$profile_dir"
+
+    echo -e "${GREEN}Switched to: ${BOLD}$profile_name${NC}"
+    echo -e "${DIM}Copied profile files to: $PROJECT_CONFIG_DIR${NC}"
+  else
+    echo -e "${YELLOW}Error: Failed to copy profile files${NC}"
+    exit 1
+  fi
+}
+
 # Interactive menu with arrow keys
 show_menu() {
   local configs=()
@@ -268,78 +356,9 @@ show_menu() {
   # Show cursor
   tput cnorm
 
-  # Copy selected profile
-  local selected_profile_dir="${configs[$selected]}"
+  # Switch to selected profile
   local selected_name="${names[$selected]}"
-
-  echo ""
-
-  if [[ "$selected_name" == "$current" ]]; then
-    # Check if the origin profile has been updated since it was last copied
-    local metadata_file="$PROJECT_CONFIG_DIR/oc.json"
-    if [[ -f "$metadata_file" ]]; then
-      # Extract stored hash and source path from metadata
-      local stored_hash
-      stored_hash=$(json_get_value "$metadata_file" "origin_hash")
-      local source_path
-      source_path=$(json_get_value "$metadata_file" "source")
-
-      # Calculate current hash of the origin profile
-      local current_origin_hash
-      current_origin_hash=$(calculate_profile_hash "$selected_profile_dir")
-
-      # Only ask for reset if the origin profile hash has changed
-      if [[ -n "$stored_hash" && "$stored_hash" != "$current_origin_hash" ]]; then
-        local display_path
-        display_path="${source_path/#$HOME/~}"
-        echo -e "${YELLOW}$selected_name has been updated in the origin ($display_path).${NC}"
-        echo -ne "${YELLOW}Reset from origin (overrides project-specific changes)? [y/N]${NC} "
-        read -r reset_profile
-        if [[ ! "$reset_profile" =~ ^[Yy]$ ]]; then
-          echo -e "${DIM}Cancelled.${NC}"
-          exit 0
-        fi
-      else
-        local display_path
-        display_path="${source_path/#$HOME/~}"
-        echo -e "${DIM}$selected_name is already active.${NC}"
-        echo -e "${DIM}There are no updates in the origin ($display_path).${NC}"
-        exit 0
-      fi
-    fi
-  fi
-
-  # Remove conflicting files from the project config directory before copying
-  for profile_file in "$selected_profile_dir"/*; do
-    if [[ -f "$profile_file" ]]; then
-      local filename
-      filename=$(basename "$profile_file")
-      local basename_no_ext="${filename%.*}"
-      local ext="${filename##*.}"
-
-      # Remove any files with the same basename but different extension
-      for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
-        if [[ -f "$existing_file" ]]; then
-          local existing_ext="${existing_file##*.}"
-          if [[ "$existing_ext" != "$ext" ]]; then
-            rm -f "$existing_file"
-          fi
-        fi
-      done
-    fi
-  done
-
-  # Copy all files and directories from the selected profile directory to the project config directory
-  if cp -r "$selected_profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
-    # Save profile metadata
-    save_profile_metadata "$selected_name" "$selected_profile_dir"
-
-    echo -e "${GREEN}Switched to: ${BOLD}$selected_name${NC}"
-    echo -e "${DIM}Copied profile files to: $PROJECT_CONFIG_DIR${NC}"
-  else
-    echo -e "${YELLOW}Error: Failed to copy profile files${NC}"
-    exit 1
-  fi
+  switch_to_profile "$selected_name" "false"
 }
 
 # Execute command in a temporary environment with a specific profile
@@ -434,6 +453,25 @@ if [[ $# -gt 0 ]]; then
     shift # Remove '--'
 
     exec_in_profile "$profile_name" "$@"
+    ;;
+  use)
+    if [[ $# -lt 2 ]]; then
+      echo -e "${YELLOW}Error: use requires a profile name.${NC}" >&2
+      echo -e "${DIM}Usage: oc use <profile-name> [--yes]${NC}" >&2
+      exit 1
+    fi
+    # Shift past 'use'
+    shift
+    profile_name="$1"
+    shift
+
+    # Check for optional --yes flag
+    force_yes="false"
+    if [[ "$1" == "--yes" ]]; then
+      force_yes="true"
+    fi
+
+    switch_to_profile "$profile_name" "$force_yes"
     ;;
   *)
     # Unknown subcommand, show interactive menu as before
