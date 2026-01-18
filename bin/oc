@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # oc: Switch OpenCode configuration profiles
-
-# Based on:
-# https://github.com/AnPod/Switch-Omo-Config/blob/v1.09/switch-omo-config.sh
 
 # Save the original directory early
 ORIGINAL_DIR="$PWD"
@@ -25,78 +22,13 @@ cleanup_temp_environment() {
   return "$exit_code"
 }
 
-# Check if we're being called as 'oc exec' and if so, handle it specially
-# This avoids the .opencode check that happens at script load time
-if [[ "$1" == "exec" && $# -ge 3 ]]; then
-  shift # Remove 'exec'
-  profile_name="$1"
-  shift
-
-  # Check for '--' separator
-  if [[ "$1" != "--" ]]; then
-    echo "Error: Expected '--' after profile name." >&2
-    exit 1
-  fi
-  shift # Remove '--'
-
-  # Now handle exec_in_profile at the very start, before any other initialization
-  CENTRAL_CONFIG_DIR="$HOME/.config/opencode"
-  PROFILES_DIR="$CENTRAL_CONFIG_DIR/profile"
-
-  # Verify profile exists
-  profile_dir="$PROFILES_DIR/$profile_name"
-  if [[ ! -d "$profile_dir" ]]; then
-    echo "Error: Profile '$profile_name' not found in $PROFILES_DIR" >&2
-    exit 1
-  fi
-
-  # Create temporary directory
-  temp_dir=$(mktemp -d) || {
-    echo "Error: Failed to create temporary directory" >&2
-    exit 1
-  }
-
-  # Set up cleanup on exit, ensuring we return to original directory
-  TEMP_DIR_TO_CLEAN="$temp_dir"
-  trap cleanup_temp_environment EXIT TERM
-
-  # Create .opencode directory in temp environment
-  temp_opencode_dir="$temp_dir/.opencode"
-  mkdir -p "$temp_opencode_dir" || {
-    echo "Error: Failed to create .opencode directory in temp environment" >&2
-    exit 1
-  }
-
-  # Copy profile files to temporary .opencode
-  if ! cp -r "$profile_dir"/* "$temp_opencode_dir/" 2>/dev/null; then
-    echo "Error: Failed to copy profile files" >&2
-    exit 1
-  fi
-
-  # Save profile metadata in temp .opencode
-  current_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-
-  cat >"$temp_opencode_dir/oc.json" <<EOF
-{
-  "name": "$profile_name",
-  "source": "$profile_dir",
-  "updated_at": "$current_timestamp"
-}
-EOF
-
-  # Change to temp directory and execute command
-  cd "$temp_dir" || {
-    cleanup_temp_environment
-    exit 1
-  }
-  PROJECT_CONFIG_DIR="$temp_opencode_dir"
-  PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json"
-  export PROJECT_CONFIG_DIR PROFILE_METADATA_FILE
-
-  # Execute the command
-  "$@"
-  exit $?
-fi
+# Colors (defined early for use in error messages)
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+DIM='\033[2m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
 
 # Portable hash function
 hash_file() {
@@ -116,18 +48,10 @@ PROJECT_CONFIG_DIR="${PROJECT_CONFIG_DIR:-$PROJECT_ROOT_DIR/.opencode}"
 # Validate commands early to show errors before any prompts
 # This check must happen before the .opencode prompt
 if [[ "$1" == "use" && $# -lt 2 ]]; then
-  # Compute color codes early for error messages
-  YELLOW='\033[1;33m'
-  DIM='\033[2m'
-  NC='\033[0m'
   echo -e "${YELLOW}Error: use requires a profile name.${NC}" >&2
   echo -e "${DIM}Usage: oc use <profile-name> [--yes]${NC}" >&2
   exit 1
 elif [[ "$1" == "exec" && $# -lt 3 ]]; then
-  # Compute color codes early for error messages
-  YELLOW='\033[1;33m'
-  DIM='\033[2m'
-  NC='\033[0m'
   echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
   echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
   exit 1
@@ -164,14 +88,6 @@ elif [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
     exit 0
   fi
 fi
-
-# Colors
-CYAN='\033[0;36m'
-YELLOW='\033[1;33m'
-GREEN='\033[0;32m'
-DIM='\033[2m'
-BOLD='\033[1m'
-NC='\033[0m' # No Color
 
 PROFILE_METADATA_FILE="$PROJECT_CONFIG_DIR/oc.json"
 
@@ -221,18 +137,28 @@ json_get_value() {
   local file="$1"
   local key="$2"
 
+  if [[ ! -f "$file" ]]; then
+    return 1
+  fi
+
   grep -o "\"$key\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" "$file" 2>/dev/null | cut -d'"' -f4
 }
 
 # Load profile metadata
 load_profile_metadata() {
   if [[ ! -f "$PROFILE_METADATA_FILE" ]]; then
-    echo ""
-    return
+    return 1
   fi
 
   # Extract profile name from JSON
-  json_get_value "$PROFILE_METADATA_FILE" "name"
+  local profile_name
+  profile_name=$(json_get_value "$PROFILE_METADATA_FILE" "name") || return 1
+
+  if [[ -z "$profile_name" ]]; then
+    return 1
+  fi
+
+  echo "$profile_name"
 }
 
 # Get list of profile directories
@@ -262,15 +188,13 @@ calculate_project_hash() {
 # Get current active profile by checking metadata file first, then comparing hashes
 get_current() {
   # First, check if metadata file exists and is valid
-  local metadata_profile
-  metadata_profile=$(load_profile_metadata)
-
-  if [[ -n "$metadata_profile" ]]; then
+  local metadata_profile=""
+  if metadata_profile=$(load_profile_metadata); then
     # If metadata profile directory exists, return it (trust the metadata)
     local metadata_dir="$PROFILES_DIR/$metadata_profile"
     if [[ -d "$metadata_dir" ]]; then
       echo "$metadata_profile"
-      return
+      return 0
     fi
   fi
 
@@ -289,10 +213,11 @@ get_current() {
 
     if [[ "$profile_hash" == "$project_hash" ]]; then
       echo "$profile_name"
-      return
+      return 0
     fi
   done < <(get_configs)
-  echo ""
+
+  return 1
 }
 
 # Switch to a specific profile with confirmations
@@ -423,9 +348,10 @@ show_menu() {
   echo -e "${DIM}Use arrow keys to navigate, Enter to select, q to quit${NC}"
   echo ""
 
+  local should_redraw=0
   while true; do
     # Move cursor up to redraw menu
-    if [[ $REPLY ]]; then
+    if [[ $should_redraw -eq 1 ]]; then
       tput cuu "$total"
     fi
 
@@ -481,7 +407,7 @@ show_menu() {
       [[ $selected -lt 0 ]] && selected=$((total - 1))
     fi
 
-    REPLY=1
+    should_redraw=1
   done
 
   # Show cursor
@@ -542,82 +468,6 @@ show_help() {
     ""
 }
 
-# Execute command in a temporary environment with a specific profile
-exec_in_profile() {
-  local profile_name="$1"
-  shift # Remove profile name from arguments
-  local commands=("$@")
-
-  # Verify profile exists
-  local profile_dir="$PROFILES_DIR/$profile_name"
-  if [[ ! -d "$profile_dir" ]]; then
-    echo -e "${YELLOW}Error: Profile '$profile_name' not found in $PROFILES_DIR${NC}" >&2
-    exit 1
-  fi
-
-  # Verify there are commands to execute
-  if [[ ${#commands[@]} -eq 0 ]]; then
-    echo -e "${YELLOW}Error: No command provided. Usage: oc exec <profile-name> -- command and args${NC}" >&2
-    exit 1
-  fi
-
-  # Create temporary directory
-  local temp_dir
-  temp_dir=$(mktemp -d) || {
-    echo -e "${YELLOW}Error: Failed to create temporary directory${NC}" >&2
-    exit 1
-  }
-
-  # Set up cleanup on exit, ensuring we return to original directory
-  TEMP_DIR_TO_CLEAN="$temp_dir"
-  trap cleanup_temp_environment EXIT TERM
-
-  # Create .opencode directory in temp environment
-  local temp_opencode_dir="$temp_dir/.opencode"
-  mkdir -p "$temp_opencode_dir" || {
-    echo -e "${YELLOW}Error: Failed to create .opencode directory in temp environment${NC}" >&2
-    exit 1
-  }
-
-  # Copy profile files to temporary .opencode
-  if ! cp -r "$profile_dir"/* "$temp_opencode_dir/" 2>/dev/null; then
-    echo -e "${YELLOW}Error: Failed to copy profile files${NC}" >&2
-    exit 1
-  fi
-
-  # Save profile metadata in temp .opencode
-  local current_timestamp
-  current_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-  local origin_hash
-  origin_hash=$(calculate_profile_hash "$profile_dir")
-
-  cat >"$temp_opencode_dir/oc.json" <<EOF
-{
-  "name": "$profile_name",
-  "source": "$profile_dir",
-  "updated_at": "$current_timestamp",
-  "origin_hash": "$origin_hash"
-}
-EOF
-
-  # Execute command in the temporary environment
-  # Change to temp dir and export environment before executing
-  cd "$temp_dir" || {
-    cleanup_temp_environment
-    exit 1
-  }
-  PROJECT_CONFIG_DIR="$temp_opencode_dir"
-  PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json"
-  export PROJECT_CONFIG_DIR PROFILE_METADATA_FILE
-
-  # Execute the command in the temp environment
-  "${commands[@]}"
-  local exit_code=$?
-
-  # Cleanup will handle returning to original directory
-  exit "$exit_code"
-}
-
 # Parse command-line arguments
 if [[ $# -gt 0 ]]; then
   case "$1" in
@@ -632,7 +482,7 @@ if [[ $# -gt 0 ]]; then
     fi
     # Shift past 'exec'
     shift
-    profile_name="$1"
+    exec_profile_name="$1"
     shift
 
     # Check for '--' separator
@@ -643,7 +493,61 @@ if [[ $# -gt 0 ]]; then
     fi
     shift # Remove '--'
 
-    exec_in_profile "$profile_name" "$@"
+    # Verify profile exists
+    exec_profile_dir="$PROFILES_DIR/$exec_profile_name"
+    if [[ ! -d "$exec_profile_dir" ]]; then
+      echo -e "${YELLOW}Error: Profile '$exec_profile_name' not found in $PROFILES_DIR${NC}" >&2
+      exit 1
+    fi
+
+    # Create temporary directory
+    temp_dir=$(mktemp -d) || {
+      echo -e "${YELLOW}Error: Failed to create temporary directory${NC}" >&2
+      exit 1
+    }
+
+    # Set up cleanup on exit, ensuring we return to original directory
+    TEMP_DIR_TO_CLEAN="$temp_dir"
+    trap cleanup_temp_environment EXIT TERM
+
+    # Create .opencode directory in temp environment
+    temp_opencode_dir="$temp_dir/.opencode"
+    mkdir -p "$temp_opencode_dir" || {
+      echo -e "${YELLOW}Error: Failed to create .opencode directory in temp environment${NC}" >&2
+      exit 1
+    }
+
+    # Copy profile files to temporary .opencode
+    if ! cp -r "$exec_profile_dir"/* "$temp_opencode_dir/" 2>/dev/null; then
+      echo -e "${YELLOW}Error: Failed to copy profile files${NC}" >&2
+      exit 1
+    fi
+
+    # Save profile metadata in temp .opencode
+    current_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    origin_hash=$(calculate_profile_hash "$exec_profile_dir")
+
+    cat >"$temp_opencode_dir/oc.json" <<EOF
+{
+  "name": "$exec_profile_name",
+  "source": "$exec_profile_dir",
+  "updated_at": "$current_timestamp",
+  "origin_hash": "$origin_hash"
+}
+EOF
+
+    # Change to temp directory and execute command
+    cd "$temp_dir" || {
+      cleanup_temp_environment
+      exit 1
+    }
+    PROJECT_CONFIG_DIR="$temp_opencode_dir"
+    PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json"
+    export PROJECT_CONFIG_DIR PROFILE_METADATA_FILE
+
+    # Execute the command
+    "$@"
+    exit $?
     ;;
   use)
     if [[ $# -lt 2 ]]; then
