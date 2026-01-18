@@ -66,6 +66,14 @@
     {
       "command": "exec tm zsh -i -c",
       "args": [
+        "ai"
+      ],
+      "id": "chat",
+      "label": "Chat"
+    },
+    {
+      "command": "exec tm zsh -i -c",
+      "args": [
         "ai_agent",
         "computer-use"
       ],
