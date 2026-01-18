@@ -68,11 +68,12 @@ elif [[ "$1" == "exec" ]]; then
   SKIP_OPENCODE_PROMPT=true
 fi
 
-# Skip .opencode directory check if we're in a temporary environment (oc exec)
-# This is indicated by PROFILE_METADATA_FILE being set
-if [[ "$SKIP_OPENCODE_PROMPT" == "true" ]]; then
+# Skip .opencode directory check if:
+# 1. We're in a temporary environment (oc exec) - indicated by PROFILE_METADATA_FILE being set
+# 2. We're running 'oc exec' command - it will handle temp directory setup
+if [[ "$SKIP_OPENCODE_PROMPT" == "true" || "$1" == "exec" ]]; then
   # Create .opencode directory silently if it doesn't exist
-  if [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
+  if [[ ! -d "$PROJECT_CONFIG_DIR" ]] && [[ "$1" != "exec" ]]; then
     mkdir -p "$PROJECT_CONFIG_DIR" 2>/dev/null || true
   fi
 elif [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
