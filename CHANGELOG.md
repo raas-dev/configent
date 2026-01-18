@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.200.1](https://github.com/raas-dev/configent/compare/1.200.0...1.200.1) (2026-01-18)
+
+
+### Fixes
+
+* **oc:** change help text color to green ([6525dda](https://github.com/raas-dev/configent/commit/6525ddab8bfc30046aa17428125350dfcc9bbfdd))
+* **oc:** remove --yes flag from use command ([d8d05e0](https://github.com/raas-dev/configent/commit/d8d05e0989247989e8b8125c1a38795a4e144712))
+
 ## [1.200.0](https://github.com/raas-dev/configent/compare/1.199.2...1.200.0) (2026-01-18)
 
 
