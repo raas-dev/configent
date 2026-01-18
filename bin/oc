@@ -465,9 +465,9 @@ if [[ $# -gt 0 ]]; then
     profile_name="$1"
     shift
 
-    # Check for optional --yes flag
+    # Check for optional --yes or -y flag
     force_yes="false"
-    if [[ "$1" == "--yes" ]]; then
+    if [[ "$1" == "--yes" ]] || [[ "$1" == "-y" ]]; then
       force_yes="true"
     fi
 
