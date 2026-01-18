@@ -6,6 +6,7 @@
       "type": "local"
     }
   },
+  "model": "github-copilot/gpt-5-mini",
   "plugin": [
     "opencode-pty",
     // see https://github.com/different-ai/opencode-browser for browser setup
