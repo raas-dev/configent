@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.200.2](https://github.com/raas-dev/configent/compare/1.200.1...1.200.2) (2026-01-18)
+
+
+### Fixes
+
+* **claude-code:** Fix sisyphus plugin ([409e2f1](https://github.com/raas-dev/configent/commit/409e2f17a6401eb6a22aab4412b218eecf800ebc))
+* **oc:** improve warning messages for unmanaged config ([ba2c1a7](https://github.com/raas-dev/configent/commit/ba2c1a77d25f999faa0a31288db846011c65a3bf))
+* **oc:** warn when overwriting unmanaged config ([5cf7809](https://github.com/raas-dev/configent/commit/5cf7809534ed175f356561ae7d12dfc2a0b01b05))
+* **settings:** reorganize config structure ([7a9e2c7](https://github.com/raas-dev/configent/commit/7a9e2c7c0245ea93385a55dd2f606728b2a64ad0))
+* **sisyphus:** clarify default mode configuration scopes ([63a79b2](https://github.com/raas-dev/configent/commit/63a79b28540651670c562f9206ca3367608f32d7))
+
 ## [1.200.1](https://github.com/raas-dev/configent/compare/1.200.0...1.200.1) (2026-01-18)
 
 
