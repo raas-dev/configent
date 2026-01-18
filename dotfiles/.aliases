@@ -480,13 +480,7 @@ ai_agent() {
     local agent="computer-use"
   fi
 
-  local config_file="$HOME/.config/configent/opencode/profile/$agent/opencode.jsonc"
-  if [ ! -r "$config_file" ]; then
-    echo "Error: Config file not readable: $config_file"
-    return 1
-  fi
-
-  OPENCODE_CONFIG="$config_file" opencode --agent "$agent"
+  oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
 ### Functions: Docker ##########################################################
