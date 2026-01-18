@@ -364,7 +364,7 @@ show_menu() {
 # Show help message
 show_help() {
   printf "%b\n" \
-    "${BOLD}oc${NC} - OpenCode configuration profile manager" \
+    "${BOLD}oc${NC} - OpenCode configuration manager" \
     "" \
     "${BOLD}USAGE:${NC}" \
     "  oc [COMMAND] [OPTIONS]" \
