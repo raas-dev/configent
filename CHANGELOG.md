@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.199.0](https://github.com/raas-dev/configent/compare/1.198.0...1.199.0) (2026-01-18)
+
+
+### Features
+
+* **oc:** add -y shorthand for --yes flag ([e857f28](https://github.com/raas-dev/configent/commit/e857f28e1f6db05c26b6a55041d6b021201353dd))
+* **oc:** add exec subcommand for temporary profile environments ([5b91cd1](https://github.com/raas-dev/configent/commit/5b91cd138b469ddcdd1f34c69f4c03ba071bf07b))
+* **oc:** add profile isolation with exec subcommand ([a43e512](https://github.com/raas-dev/configent/commit/a43e512d727c3b4e538b069d50c2a0d59e82c207))
+* **oc:** add use subcommand for switching profiles ([7459c8a](https://github.com/raas-dev/configent/commit/7459c8af4664d0899b09e423bbcd2541bb370dbb))
+
+
+### Fixes
+
+* **agent:** remove unnecessary permissions from profiles ([1164407](https://github.com/raas-dev/configent/commit/116440716adff1913ff18a1282b17021b38fbbc8))
+* **ai_commit:** Rename model env var more descriptive ([2d50ada](https://github.com/raas-dev/configent/commit/2d50ada9bc8006acf416f95dc20e51869d75207a))
+* **oc:** handle nested files in profile hash calculation ([766f533](https://github.com/raas-dev/configent/commit/766f533c7eb92440cc5f4d32f6fd103ac7536ad6))
+* **oc:** keep current directory for exec to support stdin piping ([ee35319](https://github.com/raas-dev/configent/commit/ee35319fef553aff715627a1104ecf2a898e00b6))
+* **oc:** refactor exec implementation inline ([fa4e7dc](https://github.com/raas-dev/configent/commit/fa4e7dcbaeb7962abb5555432cd955f9cf3dc3ae))
+* **oc:** render help colors correctly using printf instead of heredoc ([7700091](https://github.com/raas-dev/configent/commit/7700091870c273c1fe61e8d632dd895bfeeeb067))
+* **oc:** restore subshell for temp directory execution with stdin support ([dfc0f33](https://github.com/raas-dev/configent/commit/dfc0f334275390e05bd85434ffbec0fd17581982))
+* **oc:** skip opencode directory check for exec command ([cb238c5](https://github.com/raas-dev/configent/commit/cb238c5c1cce21a6263ac49b902fa9277b3a0cae))
+* **opencode:** add dynamic-mcp configuration by default ([da1dc4f](https://github.com/raas-dev/configent/commit/da1dc4fb6795668e007ed9db5846b629d4c3e320))
+* **opencode:** move dynamic-mcp config to chat profile ([19c305b](https://github.com/raas-dev/configent/commit/19c305b1d3de8f8c80a852603e0e6d07ed32dcb7))
+
 ## [1.198.0](https://github.com/raas-dev/configent/compare/1.197.0...1.198.0) (2026-01-18)
 
 
