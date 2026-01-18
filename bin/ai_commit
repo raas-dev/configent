@@ -25,7 +25,7 @@ white=$(tput setaf 7)
 
 ### variables ##################################################################
 
-: "${AI_COMMIT_MODEL:="github-copilot/claude-haiku-4.5"}"
+OC_PROFILE="${OC_PROFILE:-git-use}"
 
 ################################################################################
 
@@ -109,17 +109,15 @@ fi
 # The commit command reads the git diff from stdin
 if [ -z "$commit_message" ]; then
   if [ -n "$context_message" ]; then
-    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec git-use -- opencode run \
+    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   else
-    commit_message="$(cat "$diff_file" | oc exec git-use -- opencode run \
+    commit_message="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --model "$AI_COMMIT_MODEL" \
       --command commit)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1

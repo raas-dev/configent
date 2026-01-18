@@ -460,15 +460,9 @@ alias skills-installer='bunx skills-installer'
 
 ai() {
   if [ -n "$1" ]; then
-    if [ -r "$HOME/.config/opencode/command/$1.md" ]; then
-      local command="$1"
-      shift
-      opencode run --agent chat --command "$command" "$@"
-    else
-      opencode run --agent chat "$@"
-    fi
+    oc exec chat -- opencode run --agent chat "$@"
   else
-    opencode --agent chat
+    oc exec chat -- opencode --agent chat
   fi
 }
 
