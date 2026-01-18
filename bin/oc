@@ -226,6 +226,21 @@ switch_to_profile() {
     exit 1
   fi
 
+  # Warn if .opencode exists but oc.json doesn't (unmanaged config)
+  if [[ -d "$PROJECT_CONFIG_DIR" && ! -f "$PROFILE_METADATA_FILE" ]]; then
+    if [[ "$force_yes" != "true" ]]; then
+      echo ""
+      echo -e "${YELLOW}Warning: .opencode/ exists but is not managed by oc.${NC}"
+      echo -e "${YELLOW}Commit your .opencode directory first. Proceeding will overwrite the existing files.${NC}"
+      echo -ne "${YELLOW}Continue? [y/N]${NC} "
+      read -r confirm_unmanaged
+      if [[ ! "$confirm_unmanaged" =~ ^[Yy]$ ]]; then
+        echo -e "${DIM}Cancelled.${NC}"
+        exit 0
+      fi
+    fi
+  fi
+
   # Confirm reset if init command is used on already-initialized project
   if [[ "$is_init_cmd" == "true" && -d "$PROJECT_CONFIG_DIR" ]]; then
     if [[ "$force_yes" != "true" ]]; then
