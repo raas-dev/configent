@@ -342,5 +342,105 @@ show_menu() {
   fi
 }
 
-# Run
-show_menu
+# Execute command in a temporary environment with a specific profile
+exec_in_profile() {
+  local profile_name="$1"
+  shift # Remove profile name from arguments
+  local commands=("$@")
+
+  # Verify profile exists
+  local profile_dir="$PROFILES_DIR/$profile_name"
+  if [[ ! -d "$profile_dir" ]]; then
+    echo -e "${YELLOW}Error: Profile '$profile_name' not found in $PROFILES_DIR${NC}" >&2
+    exit 1
+  fi
+
+  # Verify there are commands to execute
+  if [[ ${#commands[@]} -eq 0 ]]; then
+    echo -e "${YELLOW}Error: No command provided. Usage: oc exec <profile-name> -- command and args${NC}" >&2
+    exit 1
+  fi
+
+  # Create temporary directory
+  local temp_dir
+  temp_dir=$(mktemp -d) || {
+    echo -e "${YELLOW}Error: Failed to create temporary directory${NC}" >&2
+    exit 1
+  }
+
+  # Ensure cleanup on exit
+  trap 'rm -rf "$temp_dir"' EXIT TERM
+
+  # Create .opencode directory in temp environment
+  local temp_opencode_dir="$temp_dir/.opencode"
+  mkdir -p "$temp_opencode_dir" || {
+    echo -e "${YELLOW}Error: Failed to create .opencode directory in temp environment${NC}" >&2
+    exit 1
+  }
+
+  # Copy profile files to temporary .opencode
+  if ! cp -r "$profile_dir"/* "$temp_opencode_dir/" 2>/dev/null; then
+    echo -e "${YELLOW}Error: Failed to copy profile files${NC}" >&2
+    exit 1
+  fi
+
+  # Save profile metadata in temp .opencode
+  local current_timestamp
+  current_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+  local origin_hash
+  origin_hash=$(calculate_profile_hash "$profile_dir")
+
+  cat >"$temp_opencode_dir/oc.json" <<EOF
+{
+  "name": "$profile_name",
+  "source": "$profile_dir",
+  "updated_at": "$current_timestamp",
+  "origin_hash": "$origin_hash"
+}
+EOF
+
+  # Execute command in the temporary environment
+  (
+    cd "$temp_dir" || exit 1
+    PROJECT_CONFIG_DIR="$temp_opencode_dir"
+    PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json"
+    "${commands[@]}"
+  )
+
+  local exit_code=$?
+  exit "$exit_code"
+}
+
+# Parse command-line arguments
+if [[ $# -gt 0 ]]; then
+  case "$1" in
+  exec)
+    if [[ $# -lt 3 ]]; then
+      echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
+      echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
+      exit 1
+    fi
+    # Shift past 'exec'
+    shift
+    profile_name="$1"
+    shift
+
+    # Check for '--' separator
+    if [[ "$1" != "--" ]]; then
+      echo -e "${YELLOW}Error: Expected '--' after profile name.${NC}" >&2
+      echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
+      exit 1
+    fi
+    shift # Remove '--'
+
+    exec_in_profile "$profile_name" "$@"
+    ;;
+  *)
+    # Unknown subcommand, show interactive menu as before
+    show_menu
+    ;;
+  esac
+else
+  # No arguments, show interactive menu
+  show_menu
+fi
