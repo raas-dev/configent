@@ -56,7 +56,7 @@
     {
       "command": "exec tm",
       "id": "tm",
-      "label": "Shell"
+      "label": "Multiplexer"
     },
     {
       "command": "exec aoe",
@@ -82,8 +82,8 @@
     },
     {
       "command": "exec zsh",
-      "id": "terminal",
-      "label": "Terminal"
+      "id": "shell",
+      "label": "Shell"
     }
   ],
   "agentterminal.rememberSelection": false,
