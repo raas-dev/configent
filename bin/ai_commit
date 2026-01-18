@@ -105,11 +105,24 @@ fi
 
 # The commit command reads the git diff from stdin
 if [ -z "$commit_message" ]; then
+  # Temporarily change to temp directory to prevent opencode from loading .opencode/
+  original_pwd="$PWD"
+  temp_dir=$(mktemp -d) || {
+    printf "%sError: Failed to create temporary directory.\n" "$red"
+    exit 1
+  }
+  trap 'rm -rf "$temp_dir"' EXIT
+  cd "$temp_dir" || {
+    printf "%sError: Failed to change to temporary directory.\n" "$red"
+    exit 1
+  }
+
   if [ -n "$context_message" ]; then
     commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | opencode run \
       --agent coder \
       --model "$MODEL" \
       --command commit)" || {
+      cd "$original_pwd" || exit 1
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
@@ -118,10 +131,17 @@ if [ -z "$commit_message" ]; then
       --agent coder \
       --model "$MODEL" \
       --command commit)" || {
+      cd "$original_pwd" || exit 1
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   fi
+
+  # Return to original directory
+  cd "$original_pwd" || {
+    printf "%sError: Failed to return to original directory.\n" "$red"
+    exit 1
+  }
 fi
 
 if [ -z "$commit_message" ]; then
