@@ -468,11 +468,18 @@ exec_in_profile() {
 }
 EOF
 
-  # Execute command with profile environment variables set
-  # (don't change directory so stdin piping works correctly)
-  PROJECT_CONFIG_DIR="$temp_opencode_dir" \
-    PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json" \
+  # Execute command in the temporary environment
+  # Use a subshell to isolate the directory change while preserving stdin
+  (
+    cd "$temp_dir" || exit 1
+    PROJECT_CONFIG_DIR="$temp_opencode_dir"
+    PROFILE_METADATA_FILE="$temp_opencode_dir/oc.json"
+    export PROJECT_CONFIG_DIR PROFILE_METADATA_FILE
     "${commands[@]}"
+  )
+
+  local exit_code=$?
+  exit "$exit_code"
 }
 
 # Parse command-line arguments
