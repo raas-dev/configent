@@ -370,6 +370,9 @@ show_help() {
     "  oc [COMMAND] [OPTIONS]" \
     "" \
     "${BOLD}COMMANDS:${NC}" \
+    "  ${BOLD}(no command)${NC}" \
+    "      Show interactive profile selection menu." \
+    "" \
     "  ${CYAN}use${NC} <profile-name> [--yes | -y]" \
     "      Switch to the specified profile. Shows confirmation prompts unless" \
     "      --yes or -y flag is provided to skip prompts." \
@@ -388,9 +391,6 @@ show_help() {
     "" \
     "  ${CYAN}help${NC}, ${CYAN}-h${NC}, ${CYAN}--help${NC}" \
     "      Show this help message." \
-    "" \
-    "  ${BOLD}(no command)${NC}" \
-    "      Show interactive profile selection menu." \
     "" \
     "${BOLD}OPTIONS:${NC}" \
     "  -h, --help        Show this help message" \
