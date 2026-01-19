@@ -441,6 +441,9 @@ alias ncu='bunx npm-check-updates'
 # OpenSpec (best for existing codebases, see Github Spec Kit for greenfield)
 alias openspec='bunx @fission-ai/openspec'
 
+# OpenPackage (https://openpackage.dev/)
+alias opkg='bunx opkg'
+
 # Shorthand for pnpm
 alias pn='bunx pnpm'
 
@@ -452,9 +455,6 @@ alias promptfoo='bunx promptfoo'
 
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
-
-# Generic coding Agent Skills installer (https://claude-plugins.dev/skills)
-alias skills-installer='bunx skills-installer'
 
 ### Functions: AI ##############################################################
 
