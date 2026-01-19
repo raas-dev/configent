@@ -8,7 +8,7 @@
   "crates.nvim": { "branch": "main", "commit": "ac9fa498a9edb96dc3056724ff69d5f40b898453" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "fzf-lua": { "branch": "main", "commit": "abe5ecafebb4e24feb162384d5f492431036e791" },
+  "fzf-lua": { "branch": "main", "commit": "518ab7a64ca65899a218f364f0fb9e38ff7bdcc8" },
   "gitsigns.nvim": { "branch": "main", "commit": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e" },
   "grug-far.nvim": { "branch": "main", "commit": "794f03c97afc7f4b03fb6ec5111be507df1850cf" },
   "helm-ls.nvim": { "branch": "main", "commit": "f0b9a1723890971a6d84890b50dbf5f40974ea1b" },

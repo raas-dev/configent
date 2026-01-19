@@ -98,19 +98,9 @@ backend = "aqua:carapace-sh/carapace-bin"
 "platforms.windows-x64-baseline" = { checksum = "sha256:963f155a857c5ffa38fb0d6aafa1853e5b89c89f106a7e01ccc2cbb32ee14e2e", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_windows_amd64.zip"}
 
 [[tools.cargo-binstall]]
-version = "1.16.6"
+version = "1.16.7"
 backend = "aqua:cargo-bins/cargo-binstall"
-"platforms.linux-arm64" = { checksum = "sha256:b556421835ba67fa98ca1570c85b5511457956b7836ce938b47d3f73899517a3", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:b556421835ba67fa98ca1570c85b5511457956b7836ce938b47d3f73899517a3", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-x64" = { checksum = "sha256:3225eea8041c30d7462761a481883e3aa8fe31c58def4b6c8dd91b7c80973df0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3225eea8041c30d7462761a481883e3aa8fe31c58def4b6c8dd91b7c80973df0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3225eea8041c30d7462761a481883e3aa8fe31c58def4b6c8dd91b7c80973df0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3225eea8041c30d7462761a481883e3aa8fe31c58def4b6c8dd91b7c80973df0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.macos-arm64" = { checksum = "sha256:30543b378b96fbddabee1edfaccde7914dd2f851f02c560de859f81a21ab665b", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-aarch64-apple-darwin.zip"}
-"platforms.macos-x64" = { checksum = "sha256:633dc2f381f7000d8ba3c02eb24b2f290bf0154372bafe8d8094d777f129f21d", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:633dc2f381f7000d8ba3c02eb24b2f290bf0154372bafe8d8094d777f129f21d", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.windows-x64" = { checksum = "sha256:fca962c3d12ae6192280111074db073c15abad3ba162a1a5a2af0f6f01872114", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:fca962c3d12ae6192280111074db073c15abad3ba162a1a5a2af0f6f01872114", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.6/cargo-binstall-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:8dcaf49e099bbdd54f813838673bede9088c00111fbab0bc0cfc0e6276241c87", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.16.7/cargo-binstall-aarch64-apple-darwin.zip"}
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
@@ -342,9 +332,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.15.3"
+version = "0.15.4"
 backend = "github:max-sixty/worktrunk"
-"platforms.macos-arm64" = { checksum = "sha256:c5768670596f4424f58eb420de2325eb1c8bbc8848c5dc68a8c78f87c07e4e40", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.15.3/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/342244000"}
+"platforms.macos-arm64" = { checksum = "sha256:838cabd216f7850c0013b80feff7d88b89b4dba5a75beb1ff2168250f129bef7", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.15.4/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/342648514"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -362,17 +352,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.4.5"
+version = "0.5.2"
 backend = "github:njbrake/agent-of-empires"
-"platforms.linux-arm64" = { checksum = "sha256:defcf633328b45d02458c30ae1f62bc1372ff0e7c4c5d4d8b10fd5dda36122ab", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971408"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:defcf633328b45d02458c30ae1f62bc1372ff0e7c4c5d4d8b10fd5dda36122ab", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971408"}
-"platforms.linux-x64" = { checksum = "sha256:ff9afcc77c66c51c985350e7a3fd7ca3fd34cad203a4f4144972136840147572", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971412"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:ff9afcc77c66c51c985350e7a3fd7ca3fd34cad203a4f4144972136840147572", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971412"}
-"platforms.linux-x64-musl" = { checksum = "sha256:ff9afcc77c66c51c985350e7a3fd7ca3fd34cad203a4f4144972136840147572", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971412"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:ff9afcc77c66c51c985350e7a3fd7ca3fd34cad203a4f4144972136840147572", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971412"}
-"platforms.macos-arm64" = { checksum = "sha256:16a160e8e99b3b2ea59b596f3af7b4ddbea941364979a688805c7503bfea6470", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971409"}
-"platforms.macos-x64" = { checksum = "sha256:cb09e4086a5c10a6334b825e81bca5cff3dc5b5679fdcb503eafc1ff118f725c", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971414"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:cb09e4086a5c10a6334b825e81bca5cff3dc5b5679fdcb503eafc1ff118f725c", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.4.5/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/341971414"}
+"platforms.macos-arm64" = { checksum = "sha256:f602c808ed523718873171e54f6d6b329fb1f286eee2b4b9f020fd283efa28f0", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.5.2/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/342731550"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
