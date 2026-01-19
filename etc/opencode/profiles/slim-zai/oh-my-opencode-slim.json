@@ -1,0 +1,30 @@
+{
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  },
+  "disabled_agents": [ ],
+  "disabled_mcps": [
+    "context7",
+    "websearch_exa",
+    "grep_app"
+  ],
+  "agents": {
+    "orchestrator": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "explorer": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "oracle": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "librarian": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "designer": {
+      "model": "zai-coding-plan/glm-4.7"
+    }
+  }
+}
