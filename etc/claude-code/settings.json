@@ -4,7 +4,16 @@
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1"
   },
   "permissions": {
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "ask": [
+      "Bash(git:*)",
+      "Bash(rm:*)"
+    ],
+    "allow": [
+      "Bash",
+      "WebSearch",
+      "WebFetch"
+    ]
   },
   "statusLine": {
     "type": "command",
