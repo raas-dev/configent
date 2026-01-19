@@ -286,6 +286,11 @@ backend = "github:asyrjasalo/dynamic-mcp"
 "platforms.windows-x64" = { checksum = "sha256:b9982d89c73b545c353c580c90274dcf08d906a1817e7edaf82d25fb2fa0e709", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.4.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/339419276"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:b9982d89c73b545c353c580c90274dcf08d906a1817e7edaf82d25fb2fa0e709", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.4.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/339419276"}
 
+[[tools."github:backnotprop/plannotator"]]
+version = "0.6.6"
+backend = "github:backnotprop/plannotator"
+"platforms.macos-arm64" = { checksum = "sha256:c2306ea936e4ca76ef889f287df6e8f4f361e81e59114ee51627675994fd9956", url = "https://github.com/backnotprop/plannotator/releases/download/v0.6.6/plannotator-darwin-arm64", url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/342354792"}
+
 [[tools."github:bgreenwell/xleak"]]
 version = "0.2.5"
 backend = "github:bgreenwell/xleak"

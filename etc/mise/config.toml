@@ -104,13 +104,14 @@ node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 
 # ai
-"github:asyrjasalo/dynamic-mcp" = "1.4.0"
-'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:@openchamber/web' = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+"github:asyrjasalo/dynamic-mcp" = "1.4.0"
+'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
+'github:backnotprop/plannotator' = 'latest'
 
 # python
 python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
