@@ -35,7 +35,8 @@
       "other": "off",
       "strings": "off"
     },
-    "editor.wordWrap": "wordWrapColumn"
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.defaultFormatter": "unifiedjs.vscode-remark"
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
