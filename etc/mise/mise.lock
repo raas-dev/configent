@@ -277,9 +277,9 @@ backend = "github:asyrjasalo/dynamic-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:b9982d89c73b545c353c580c90274dcf08d906a1817e7edaf82d25fb2fa0e709", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.4.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/339419276"}
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.6.6"
+version = "0.6.7"
 backend = "github:backnotprop/plannotator"
-"platforms.macos-arm64" = { checksum = "sha256:c2306ea936e4ca76ef889f287df6e8f4f361e81e59114ee51627675994fd9956", url = "https://github.com/backnotprop/plannotator/releases/download/v0.6.6/plannotator-darwin-arm64", url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/342354792"}
+"platforms.macos-arm64" = { checksum = "sha256:9d1964de806853cfdb3c17fd429a5bc5665a7c0994211597f58c5b673d3601b6", url = "https://github.com/backnotprop/plannotator/releases/download/v0.6.7/plannotator-darwin-arm64", url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/342923439"}
 
 [[tools."github:bgreenwell/xleak"]]
 version = "0.2.5"
@@ -332,9 +332,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.15.4"
+version = "0.16.0"
 backend = "github:max-sixty/worktrunk"
-"platforms.macos-arm64" = { checksum = "sha256:838cabd216f7850c0013b80feff7d88b89b4dba5a75beb1ff2168250f129bef7", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.15.4/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/342648514"}
+"platforms.macos-arm64" = { checksum = "sha256:c57b1fb50778e4f3e9453204cef24df30843abf3cdf998454233f931bcb6ffcc", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.16.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/342915203"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -712,7 +712,7 @@ version = "1.5.2"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.25"
+version = "1.1.26"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -720,19 +720,9 @@ version = "1.3.0"
 backend = "npm:openskills"
 
 [[tools.numbat]]
-version = "1.18.0"
+version = "1.19.0"
 backend = "aqua:sharkdp/numbat"
-"platforms.linux-arm64" = { checksum = "sha256:f8fa181ee4c04f3fd9f579b5b1af019838710b58c8e6fd1f6537a3bcd9b3f278", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-arm-unknown-linux-musleabihf.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:f8fa181ee4c04f3fd9f579b5b1af019838710b58c8e6fd1f6537a3bcd9b3f278", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-arm-unknown-linux-musleabihf.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:794cb0f7669e50a061d7fbd90293b3cf45a67fafe08e249813faa324c815af40", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:794cb0f7669e50a061d7fbd90293b3cf45a67fafe08e249813faa324c815af40", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:794cb0f7669e50a061d7fbd90293b3cf45a67fafe08e249813faa324c815af40", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:794cb0f7669e50a061d7fbd90293b3cf45a67fafe08e249813faa324c815af40", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:94090eb6ccbeb20c2aa301e7ae6e346d864dbcf0c753e93fdb69909d8e50080c", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:9bc9750c315ee6a2369eaff2d22c57c5e930753a7ef353cf64dc8b3e6b163c76", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:9bc9750c315ee6a2369eaff2d22c57c5e930753a7ef353cf64dc8b3e6b163c76", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:38b32660ac07bcc97c55e1cdccf5f16f496027df879800748cc58f6c1befb825", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:38b32660ac07bcc97c55e1cdccf5f16f496027df879800748cc58f6c1befb825", url = "https://github.com/sharkdp/numbat/releases/download/v1.18.0/numbat-v1.18.0-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:506894946a35ca15526c5fa895c335eae90021f48fea262f108defc627e24a66", url = "https://github.com/sharkdp/numbat/releases/download/v1.19.0/numbat-v1.19.0-aarch64-apple-darwin.tar.gz"}
 
 [[tools.oxker]]
 version = "0.12.0"
