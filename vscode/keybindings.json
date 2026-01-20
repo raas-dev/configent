@@ -668,5 +668,9 @@
     "key": "ctrl+s s",
     "command": "agentterminal.run",
     "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.switchWindow"
   }
 ]
