@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.201.0](https://github.com/raas-dev/configent/compare/1.200.2...1.201.0) (2026-01-20)
+
+
+### Features
+
+* **plannotator:** Add plannotator plugin integration ([b83d4f1](https://github.com/raas-dev/configent/commit/b83d4f1c661f4247e648fb134f8917e3df1bb39b))
+* **profiles:** Add slim-zai configuration profile ([b2a9ac0](https://github.com/raas-dev/configent/commit/b2a9ac016a1b68f96118b10c304750fc7e2885ab))
+
+
+### Fixes
+
+* **aliases:** add opkg and remove skills-installer ([1c713a7](https://github.com/raas-dev/configent/commit/1c713a717e57e0157f1840a5cb111dfbcc95949b))
+* **aliases:** add rumdl markdown linter alias ([5612b8e](https://github.com/raas-dev/configent/commit/5612b8eeb6495fa9460c5ecf1b2678243a48b476))
+* **vscode:** add remark formatter extension ([05b253c](https://github.com/raas-dev/configent/commit/05b253c81c5c70a6f5b1c068b76067ad9dc7c2ce))
+* **vscode:** replace remark formatter with rumdl ([3f2ce25](https://github.com/raas-dev/configent/commit/3f2ce25fdf00e9d1b046af95c418809d67f50381))
+
 ## [1.200.2](https://github.com/raas-dev/configent/compare/1.200.1...1.200.2) (2026-01-18)
 
 
