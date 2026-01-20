@@ -119,7 +119,7 @@ version = "0.8.0"
 backend = "cargo:kondo"
 
 [[tools."cargo:netscanner"]]
-version = "0.6.3"
+version = "0.6.41"
 backend = "cargo:netscanner"
 
 [[tools."cargo:tailspin"]]
@@ -708,11 +708,11 @@ version = "0.24.5"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.5.2"
+version = "1.5.3"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.26"
+version = "1.1.27"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -763,7 +763,7 @@ version = "2.26.4"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
-version = "2.3.0"
+version = "2.3.1"
 backend = "pipx:poetry"
 
 [[tools."pipx:sncli"]]
@@ -927,19 +927,9 @@ backend = "aqua:sachaos/viddy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:5111869984d0cb12c2f0764bafa83159b2b011fc00efc32024e21b8ad1c0f7f0", url = "https://github.com/sachaos/viddy/releases/download/v1.3.0/viddy-v1.3.0-windows-x86_64.tar.gz"}
 
 [[tools.watchexec]]
-version = "2.3.2"
+version = "2.3.3"
 backend = "aqua:watchexec/watchexec"
-"platforms.linux-arm64" = { checksum = "sha512:ddbd811740b3ce144b5c7cef1ef817bd497631466c4df48aafd473ec24b10ff85d8f31c2d4a4825ac10165bfa529df806ee3f53519493ae9c62fcbe44a316bfc", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-arm64-musl" = { checksum = "sha512:ddbd811740b3ce144b5c7cef1ef817bd497631466c4df48aafd473ec24b10ff85d8f31c2d4a4825ac10165bfa529df806ee3f53519493ae9c62fcbe44a316bfc", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha512:ec2dadefbbfad9ba738a6f27ead78214e90db4d5bbf7eb2f4d8dac3cf18f468f900fe51d4ba107b3f2c0733c412c28e8c977f158968515c8b7f03f3c8391982a", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha512:ec2dadefbbfad9ba738a6f27ead78214e90db4d5bbf7eb2f4d8dac3cf18f468f900fe51d4ba107b3f2c0733c412c28e8c977f158968515c8b7f03f3c8391982a", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha512:ec2dadefbbfad9ba738a6f27ead78214e90db4d5bbf7eb2f4d8dac3cf18f468f900fe51d4ba107b3f2c0733c412c28e8c977f158968515c8b7f03f3c8391982a", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha512:ec2dadefbbfad9ba738a6f27ead78214e90db4d5bbf7eb2f4d8dac3cf18f468f900fe51d4ba107b3f2c0733c412c28e8c977f158968515c8b7f03f3c8391982a", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.macos-arm64" = { checksum = "sha512:88ea43af48597f7dbfceb1783e131d53aabe920c2b253a1538cc4efeee686f01c1282821ddca5dd56cb490fc7105e4e1be2d55e523f873a980b9a19ea157d523", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-aarch64-apple-darwin.tar.xz"}
-"platforms.macos-x64" = { checksum = "sha512:80899b26b9a8cf0fd751368d38ba33e79e2fddddf0208e73ddc207f5a199466667113a62d495359e366b0ae90e3e7733cb238ad0450d5ac4653f281cb377b21d", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-apple-darwin.tar.xz"}
-"platforms.macos-x64-baseline" = { checksum = "sha512:80899b26b9a8cf0fd751368d38ba33e79e2fddddf0208e73ddc207f5a199466667113a62d495359e366b0ae90e3e7733cb238ad0450d5ac4653f281cb377b21d", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-apple-darwin.tar.xz"}
-"platforms.windows-x64" = { checksum = "sha512:427b96192a49614ef4a70c298ad3f0ba601578f35352823cbeb62519823fcd40b4734d6651163c6cf9b34e481fbb53305ceb20795dc27b4062c51340a5c79351", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha512:427b96192a49614ef4a70c298ad3f0ba601578f35352823cbeb62519823fcd40b4734d6651163c6cf9b34e481fbb53305ceb20795dc27b4062c51340a5c79351", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:ab96b0ed8bd02828222f01a003c9efbd0f80facd7b884d716547083545531c90", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-apple-darwin.tar.xz"}
 
 [[tools.xh]]
 version = "0.25.3"
