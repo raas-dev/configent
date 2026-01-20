@@ -352,6 +352,9 @@ alias codespell='uvx codespell'
 # GuardDog (malicious package identifier - uses semgrep underneath)
 alias guarddog='uvx guarddog'
 
+# Markdown linter and formatter inspired by ruff
+alias rumdl='uvx rumdl'
+
 # Semgrep (code vulnerability scanner)
 alias semgrep='uvx semgrep'
 
