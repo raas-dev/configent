@@ -6,7 +6,7 @@
       "type": "local"
     }
   },
-  "model": "github-copilot/gpt-5-mini",
+  "model": "anthropic/claude-haiku-4-5",
   "plugin": [
     "opencode-pty",
     // see https://github.com/different-ai/opencode-browser for browser setup
