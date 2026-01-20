@@ -672,5 +672,10 @@
   {
     "key": "ctrl+w",
     "command": "-workbench.action.switchWindow"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "-workbench.action.toggleFullScreen",
+    "when": "!isIOS"
   }
 ]
