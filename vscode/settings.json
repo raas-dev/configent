@@ -30,13 +30,13 @@
   },
   "[markdown]": {
     "diffEditor.ignoreTrimWhitespace": true,
+    "editor.defaultFormatter": "rvben.rumdl",
     "editor.quickSuggestions": {
       "comments": "off",
       "other": "off",
       "strings": "off"
     },
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.defaultFormatter": "unifiedjs.vscode-remark"
+    "editor.wordWrap": "wordWrapColumn"
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
@@ -369,6 +369,7 @@
   ],
   "kilo-code.deniedCommands": [],
   "lntoggle.priority": 110,
+  "markdown.preview.doubleClickToSwitchToEditor": false,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
   "mise.autoDetectMiseBinPath": false,
@@ -409,6 +410,7 @@
   "restoreTerminals.keepExistingTerminalsOpen": true,
   "restoreTerminals.runOnStartup": false,
   "ruff.configurationPreference": "filesystemFirst",
+  "rumdl.enable": false,
   "rust-analyzer.check.command": "clippy",
   "scm.alwaysShowRepositories": true,
   "scm.countBadge": "off",
@@ -633,6 +635,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "markdown.preview.doubleClickToSwitchToEditor": false
+  "zenMode.hideStatusBar": false
 }
