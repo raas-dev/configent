@@ -115,6 +115,7 @@ command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
 ### bun ########################################################################
 
+# for bun link, npm link uses $(npm prefix -g)
 path_append "$HOME/.bun/bin"
 
 ### go #########################################################################
