@@ -113,13 +113,17 @@ export HOMEBREW_NO_ENV_HINTS=1
 path_prepend "$HOME/.local/bin"
 command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
 
+### bun ########################################################################
+
+path_append "$HOME/.bun/bin"
+
 ### go #########################################################################
 
 export GOPATH="$HOME/.go"
 
 ### Haskell ####################################################################
 
-path_prepend "$HOME/.ghcup/bin"
+path_append "$HOME/.ghcup/bin"
 
 ### Python #####################################################################
 
