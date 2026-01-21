@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.201.1](https://github.com/raas-dev/configent/compare/1.201.0...1.201.1) (2026-01-21)
+
+
+### Fixes
+
+* **opencode:** update model identifier format ([4c04703](https://github.com/raas-dev/configent/commit/4c0470369460ee60d1c9f92b52effc4eb05e3b5e))
+* **opencode:** update model identifier format ([b594df7](https://github.com/raas-dev/configent/commit/b594df700741f58e0a0d28798ee4e382e9edf53b))
+* **profile:** add comment for bun bin path ([5111d13](https://github.com/raas-dev/configent/commit/5111d136136ccba9938c12cdffd4856234d3930b))
+* **profile:** change ghcup bin path to append instead of prepend ([7183c05](https://github.com/raas-dev/configent/commit/7183c0523ac5e370f79a4bbf35f444466c52920d))
+
 ## [1.201.0](https://github.com/raas-dev/configent/compare/1.200.2...1.201.0) (2026-01-20)
 
 
