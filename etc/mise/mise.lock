@@ -219,19 +219,9 @@ backend = "aqua:junegunn/fzf"
 "platforms.windows-x64-baseline" = { checksum = "sha256:cad95326ed416d14226a03425513b049f5bc9a41f30a355e5fe204a29e666867", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-windows_amd64.zip"}
 
 [[tools.github-cli]]
-version = "2.85.0"
+version = "2.86.0"
 backend = "aqua:cli/cli"
-"platforms.linux-arm64" = { checksum = "sha256:c554878f62506c88464ef94474322d899dfb30468bb234f23e2355e8e1613cb2", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:c554878f62506c88464ef94474322d899dfb30468bb234f23e2355e8e1613cb2", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:5dcc4e282b9c22c0d31c217805976448c966cfc56c20157c78385a8a62c93cf0", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_amd64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:5dcc4e282b9c22c0d31c217805976448c966cfc56c20157c78385a8a62c93cf0", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:5dcc4e282b9c22c0d31c217805976448c966cfc56c20157c78385a8a62c93cf0", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:5dcc4e282b9c22c0d31c217805976448c966cfc56c20157c78385a8a62c93cf0", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_linux_amd64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:3d6999b85fa1e63aadec49b65986280578e8094c394a3776c24c789f0cc73cef", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_macOS_arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:e58bdb7da9cf4c5254f6b847198d18af7c07c486c2a3af94ad957a48c1051c1c", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_macOS_amd64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:e58bdb7da9cf4c5254f6b847198d18af7c07c486c2a3af94ad957a48c1051c1c", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_macOS_amd64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:def347c8bbb22c79109dc546d1c083753512e54fd48deca41aad73b9beef9277", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_windows_amd64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:def347c8bbb22c79109dc546d1c083753512e54fd48deca41aad73b9beef9277", url = "https://github.com/cli/cli/releases/download/v2.85.0/gh_2.85.0_windows_amd64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:bde753978a352c5ae6c4abec47334d516e82807af20c9dbbd45507a5a0aedaaa", url = "https://github.com/cli/cli/releases/download/v2.86.0/gh_2.86.0_macOS_arm64.zip"}
 
 [[tools."github:Skardyy/mcat"]]
 version = "0.4.6"
@@ -332,9 +322,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.17.0"
+version = "0.18.1"
 backend = "github:max-sixty/worktrunk"
-"platforms.macos-arm64" = { checksum = "sha256:a73df832e62bce40f6e8c9bfa8780dbfbe3f05c5ed40ea919e39b118ea1a323c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.17.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/343145113"}
+"platforms.macos-arm64" = { checksum = "sha256:f5ef7f4ea86e6c7634f6305a08b41b0698bc4b183377689f1d1b21d7bd62b428", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.18.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/343921052"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -352,9 +342,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.5.5"
+version = "0.5.7"
 backend = "github:njbrake/agent-of-empires"
-"platforms.macos-arm64" = { checksum = "sha256:b20c3381ed115fc26cfc50bd017c6e53f765b59b512d273800ecc5e6740bfae9", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.5.5/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/343373855"}
+"platforms.macos-arm64" = { checksum = "sha256:f669893a8ed6009acd5b4188d0550fba43c3a161029b7ee8db5b22d1b3e5cfcf", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.5.7/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/343879338"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -402,19 +392,9 @@ backend = "github:owenrumney/lazytrivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:7ec395c4bdbf20618ca9ddb60385c043d25c84b3175d91a901ad1fefa6daf7d6", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.2.9/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/324806161"}
 
 [[tools."github:pranshuparmar/witr"]]
-version = "0.2.5"
+version = "0.2.6"
 backend = "github:pranshuparmar/witr"
-"platforms.linux-arm64" = { checksum = "sha256:459ae7b55e43fce0f1f4c01e8a5b371878eef5a288709fed28036b0b1bf2d04d", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-arm64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066764"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:459ae7b55e43fce0f1f4c01e8a5b371878eef5a288709fed28036b0b1bf2d04d", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-arm64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066764"}
-"platforms.linux-x64" = { checksum = "sha256:650010adc150e7418b7e5df3e586fe0a2aefaf17ff9c5756032d2d3ac16642ec", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-amd64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066765"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:650010adc150e7418b7e5df3e586fe0a2aefaf17ff9c5756032d2d3ac16642ec", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-amd64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066765"}
-"platforms.linux-x64-musl" = { checksum = "sha256:650010adc150e7418b7e5df3e586fe0a2aefaf17ff9c5756032d2d3ac16642ec", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-amd64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066765"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:650010adc150e7418b7e5df3e586fe0a2aefaf17ff9c5756032d2d3ac16642ec", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-0.2.5-linux-amd64.apk", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066765"}
-"platforms.macos-arm64" = { checksum = "sha256:75fe6f2a8605ad789437588f35b1699e8deab79825e48dbc1938ee99e34d2ac0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066757"}
-"platforms.macos-x64" = { checksum = "sha256:7439d6d389b205ec92bd96a3eb56c5649e229276caa92c075bd0db8fd6b08049", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-darwin-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066744"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7439d6d389b205ec92bd96a3eb56c5649e229276caa92c075bd0db8fd6b08049", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-darwin-amd64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066744"}
-"platforms.windows-x64" = { checksum = "sha256:59de5a9e4541e6c2215d4519beed21cb26c0bc28a6e88fd86e9b7aa6ddc20083", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-windows-amd64.zip", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066760"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:59de5a9e4541e6c2215d4519beed21cb26c0bc28a6e88fd86e9b7aa6ddc20083", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.5/witr-windows-amd64.zip", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/341066760"}
+"platforms.macos-arm64" = { checksum = "sha256:6f1e8e5a67b5bfcf53b4cdf30d067583e688c5a949ae8b6034f970e7c00ae3e6", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.6/witr-darwin-arm64", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/343807215"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
@@ -696,7 +676,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.14"
+version = "2.1.15"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -712,7 +692,7 @@ version = "1.5.3"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.28"
+version = "1.1.30"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
