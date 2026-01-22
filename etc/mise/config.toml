@@ -96,7 +96,6 @@ cargo-binstall = 'latest'
 # go
 go = '1.25.3'
 'go:golang.org/x/tools/gopls' = 'latest'
-'go:github.com/go-enry/enry' = 'latest'
 #'go:github.com/shihanng/tfvar' = 'latest'
 
 # node.js
