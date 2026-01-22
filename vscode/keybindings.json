@@ -677,5 +677,23 @@
     "key": "ctrl+cmd+f",
     "command": "-workbench.action.toggleFullScreen",
     "when": "!isIOS"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.closeWindow",
+    "when": "!cursor.agentIdeUnification.enabled && !editorIsOpen && !multipleEditorGroups || currentComposerIsEmpty && cursor.agentIdeUnification.enabled && !editorIsOpen && !multipleEditorGroups"
+  },
+  {
+    "key": "cmd+q",
+    "command": "-workbench.action.quit"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
   }
 ]
