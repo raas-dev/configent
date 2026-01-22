@@ -692,7 +692,7 @@ version = "1.5.3"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.30"
+version = "1.1.31"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -725,7 +725,7 @@ backend = "pipx:azure-cli[uvx_args=--python 3.11 --prerelease=allow --with pip]"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.3"
+version = "0.11.4"
 backend = "pipx:browser-use[extras=cli]"
 
 [tools."pipx:browser-use".options]
@@ -739,7 +739,7 @@ backend = "pipx:glances[extras=containers,gpu,web,wifi]"
 extras = "containers,gpu,web,wifi"
 
 [[tools."pipx:pdm"]]
-version = "2.26.5"
+version = "2.26.6"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
