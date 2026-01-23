@@ -115,7 +115,7 @@ version = "0.11.0"
 backend = "cargo:diskonaut"
 
 [[tools."cargo:kondo"]]
-version = "0.8.0"
+version = "0.9.0"
 backend = "cargo:kondo"
 
 [[tools."cargo:netscanner"]]
@@ -692,7 +692,7 @@ version = "1.5.5"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.32"
+version = "1.1.34"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
