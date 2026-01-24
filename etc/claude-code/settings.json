@@ -4,17 +4,18 @@
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
-    "ask": [
-      "Bash(git:*)",
-      "Bash(rm:*)"
-    ],
     "allow": [
       "Bash",
       "WebSearch",
       "WebFetch"
-    ]
+    ],
+    "ask": [
+      "Bash(git:*)",
+      "Bash(rm:*)"
+    ],
+    "defaultMode": "acceptEdits"
   },
+  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline@latest",
