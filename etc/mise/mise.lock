@@ -342,9 +342,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.5.7"
+version = "0.6.2"
 backend = "github:njbrake/agent-of-empires"
-"platforms.macos-arm64" = { checksum = "sha256:f669893a8ed6009acd5b4188d0550fba43c3a161029b7ee8db5b22d1b3e5cfcf", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.5.7/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/343879338"}
+"platforms.macos-arm64" = { checksum = "sha256:3323dc091498579fef6be0e940a2a2a93cc8f09198d76c7ee981f6a802175b96", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.6.2/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/344813170"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -676,7 +676,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.17"
+version = "2.1.19"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -684,7 +684,7 @@ version = "4.5.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.25.1"
+version = "0.25.2"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
