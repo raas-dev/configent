@@ -3,6 +3,12 @@
   "autoupdate": false,
   "mcp": {},
   "model": "anthropic/claude-sonnet-4-5",
+  "permission": {
+    "bash": {
+      "git:checkout": "ask",
+      "git:reset": "ask"
+    }
+  },
   "plugin": [],
   "share": "disabled",
   "theme": "ayu",
