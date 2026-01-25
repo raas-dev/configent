@@ -5,7 +5,9 @@
   "model": "anthropic/claude-sonnet-4-5",
   "permission": {
     "bash": {
+      "git:commit": "ask",
       "git:checkout": "ask",
+      "git:push": "ask",
       "git:reset": "ask"
     }
   },
