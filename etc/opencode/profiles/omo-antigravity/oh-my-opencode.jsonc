@@ -19,6 +19,12 @@
     "OpenCode-Builder": {
       // disabled when Sisyphus is enabled (default)
     },
+    "Atlas": {
+      "model": "google/antigravity-gemini-3-pro-high"
+    },
+    "Prometheus": {
+      "model": "google/antigravity-gemini-3-pro-high"
+    },
     "oracle": {
       "model": "google/antigravity-gemini-3-pro-high"
     },

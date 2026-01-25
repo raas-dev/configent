@@ -1,21 +1,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-   "agents": {
-    "Sisyphus": {
+  "agents": {
+    "sisyphus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "Planner-Sisyphus": {
-      "model": "zai-coding-plan/glm-4.7",
-      "permission": {
-        "edit": "ask",
-        "bash": {
-          "*": "allow",
-          "git": "ask",
-          "rm": "ask"
-        }
-      }
+    "prometheus": {
+      "model": "zai-coding-plan/glm-4.7"
     },
-    "OpenCode-Builder": {
+    "atlas": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "metis": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "momus": {
+      "model": "zai-coding-plan/glm-4.7"
     },
     "oracle": {
       "model": "zai-coding-plan/glm-4.7"
@@ -44,8 +43,14 @@
     "hooks": false,
     "plugins": false
   },
-  "disabled_mcps": ["context7", "websearch_exa", "grep_app"],
-  "disabled_skills": ["playwright"],
+  "disabled_mcps": [
+    "context7",
+    "websearch_exa",
+    "grep_app"
+  ],
+  "disabled_skills": [
+    "playwright"
+  ],
   "experimental": {
     "truncate_all_tool_outputs": true,
     "aggressive_truncation": true,
