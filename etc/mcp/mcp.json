@@ -17,19 +17,6 @@
       "description": "Use for specialized domain searches with neural/semantic search capabilities. Ideal for: academic paper searches, LinkedIn professional networking searches, GitHub code repository searches, company research and business intelligence, Wikipedia lookups, and finding specific content types (code snippets, documentation, professional profiles). Choose Exa when you need to search within specialized domains or platforms rather than general web content.",
       "type": "http",
       "url": "https://mcp.exa.ai/mcp"
-    },
-    "tavily": {
-      "description": "Use for general web search with advanced data extraction and website mapping capabilities. Ideal for: extracting clean structured content from web pages, mapping and crawling website structures (hierarchical site exploration), competitive intelligence and website monitoring, news analysis with article extraction, automated data pipelines from multiple sources, and comprehensive content analysis. Choose Tavily when you need to extract and analyze content from websites rather than search within specialized platforms.",
-      "type": "http",
-      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
-    },
-    "utcp": {
-      "description": "Use when you need to execute complex workflows by writing TypeScript code that calls multiple MCP and UTCP tools in a single execution. Ideal for batching operations, orchestrating multi-step workflows, processing large datasets efficiently, or when you need to combine tools from different ecosystems (MCP, HTTP, file-based).",
-      "command": "npx",
-      "args": ["-y", "@utcp/code-mode-mcp"],
-      "env": {
-        "UTCP_CONFIG_FILE": "${UTCP_CONFIG_FILE}"
-      }
     }
   }
 }
