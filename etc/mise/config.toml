@@ -108,7 +108,8 @@ bun = 'latest'
 'npm:@openchamber/web' = 'latest'
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
-"github:asyrjasalo/dynamic-mcp" = "1.4.0"
+"github:asyrjasalo/augent" = "latest"
+"github:asyrjasalo/dynamic-mcp" = "latest"
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 'github:backnotprop/plannotator' = 'latest'
 
