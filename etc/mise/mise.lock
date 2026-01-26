@@ -322,9 +322,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.18.2"
+version = "0.19.0"
 backend = "github:max-sixty/worktrunk"
-"platforms.macos-arm64" = { checksum = "sha256:eb9c3d0bf366c35a1afe549ca3c6e3e296a1de49834d79d80a08bfa96f3a7020", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.18.2/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/344189216"}
+"platforms.macos-arm64" = { checksum = "sha256:7320bda177f0350e1fea1b38299cc875c868b07ddb0205f0a3af27ee2dfe1692", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.19.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/345793032"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -684,7 +684,7 @@ version = "1.5.7"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.35"
+version = "1.1.36"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -692,9 +692,9 @@ version = "1.3.0"
 backend = "npm:openskills"
 
 [[tools.numbat]]
-version = "1.19.0"
+version = "1.20.0"
 backend = "aqua:sharkdp/numbat"
-"platforms.macos-arm64" = { checksum = "sha256:506894946a35ca15526c5fa895c335eae90021f48fea262f108defc627e24a66", url = "https://github.com/sharkdp/numbat/releases/download/v1.19.0/numbat-v1.19.0-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:87935356260a5227e54ac16b09d29ddc7eb868813d2d46a26c55c71aacb94704", url = "https://github.com/sharkdp/numbat/releases/download/v1.20.0/numbat-v1.20.0-aarch64-apple-darwin.tar.gz"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -711,21 +711,21 @@ backend = "aqua:mrjackwills/oxker"
 
 [[tools."pipx:azure-cli"]]
 version = "2.82.0"
-backend = "pipx:azure-cli[uvx_args=--python 3.11 --prerelease=allow --with pip]"
+backend = "pipx:azure-cli"
 
 [tools."pipx:azure-cli".options]
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
 version = "0.11.4"
-backend = "pipx:browser-use[extras=cli]"
+backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
 extras = "cli"
 
 [[tools."pipx:glances"]]
 version = "4.4.1"
-backend = "pipx:glances[extras=containers,gpu,web,wifi]"
+backend = "pipx:glances"
 
 [tools."pipx:glances".options]
 extras = "containers,gpu,web,wifi"
@@ -740,7 +740,7 @@ backend = "pipx:poetry"
 
 [[tools."pipx:sncli"]]
 version = "0.4.4"
-backend = "pipx:sncli[uvx_args=--python 3.11]"
+backend = "pipx:sncli"
 
 [[tools."pipx:tldr"]]
 version = "3.4.3"
