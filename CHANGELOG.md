@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.201.2](https://github.com/raas-dev/configent/compare/1.201.1...1.201.2) (2026-01-26)
+
+
+### Fixes
+
+* **mcp:** remove tavily and utcp entries ([553658a](https://github.com/raas-dev/configent/commit/553658a9ddf4f25e0e6d0138ad210be2d523cc53))
+
 ## [1.201.1](https://github.com/raas-dev/configent/compare/1.201.0...1.201.1) (2026-01-21)
 
 
