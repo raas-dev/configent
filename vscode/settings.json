@@ -637,5 +637,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "rust-analyzer.checkOnSave": false
+  "rust-analyzer.checkOnSave": false,
+  "mise.enableCodeLens": false
 }
