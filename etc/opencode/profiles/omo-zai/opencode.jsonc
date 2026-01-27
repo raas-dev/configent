@@ -5,7 +5,9 @@
   ],
   "mcp": {
     "dynamic-mcp": {
-      "command": ["dmcp"],
+      "command": [
+        "dmcp"
+      ],
       "type": "local"
     }
   },

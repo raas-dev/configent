@@ -2,11 +2,13 @@
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
     "dynamic-mcp": {
-      "command": ["dmcp"],
+      "command": [
+        "dmcp"
+      ],
       "type": "local"
     }
   },
-  "model": "anthropic/claude-haiku-4-5",
+  "model": "github-copilot/gpt-5-mini",
   "plugin": [
     "opencode-pty",
     // see https://github.com/different-ai/opencode-browser for browser setup

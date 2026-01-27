@@ -22,7 +22,6 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "oh-my-claude-sisyphus@oh-my-claude-sisyphus": true,
-    "plannotator@plannotator": true
+    "oh-my-claude-sisyphus@oh-my-claude-sisyphus": true
   }
 }

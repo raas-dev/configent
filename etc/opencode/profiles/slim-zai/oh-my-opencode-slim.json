@@ -4,7 +4,7 @@
     "layout": "main-vertical",
     "main_pane_size": 60
   },
-  "disabled_agents": [ ],
+  "disabled_agents": [],
   "disabled_mcps": [
     "context7",
     "websearch_exa",
