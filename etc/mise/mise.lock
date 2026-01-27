@@ -746,6 +746,11 @@ backend = "aqua:pre-commit/pre-commit"
 "platforms.windows-x64" = { checksum = "sha256:19d00ba35cbf9c04dc3736cd8bb641e8633f3eddd4cedde71809574ae68a2cd1", url = "https://github.com/pre-commit/pre-commit/releases/download/v4.5.1/pre-commit-4.5.1.pyz"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:19d00ba35cbf9c04dc3736cd8bb641e8633f3eddd4cedde71809574ae68a2cd1", url = "https://github.com/pre-commit/pre-commit/releases/download/v4.5.1/pre-commit-4.5.1.pyz"}
 
+[[tools.prek]]
+version = "0.3.0"
+backend = "aqua:j178/prek"
+"platforms.macos-arm64" = { checksum = "sha256:9ab0d19a38ce659fe88a1d76ff94b9fd23c31e30be0b22ee94c24fbd92509008", url = "https://github.com/j178/prek/releases/download/v0.3.0/prek-aarch64-apple-darwin.tar.gz"}
+
 [[tools.python]]
 version = "3.14.2"
 backend = "core:python"

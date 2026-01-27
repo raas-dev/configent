@@ -27,10 +27,10 @@ read-only in the VM. This helps in testing non-commited changes to the scripts.
 
 ## Pre-commit
 
-Install [pre-commit](https://pre-commit.com/) hooks before committing:
+Install [prek](https://prek.j178.dev/) and pre-commit hooks before committing:
 
-    pre-commit install --hook-type pre-commit
-    pre-commit install --hook-type commit-msg
+    prek install --hook-type pre-commit
+    prek install --hook-type commit-msg
 
 ## Static analysis
 
@@ -51,8 +51,6 @@ Run [Checkov](https://www.checkov.io/) to scan for Docker misconfigurations:
 See respective ignore files in the repository root.
 
 In addition, Semgrep and Checkov support inline ignores (as comments in files).
-
-SAST tools are not run as `pre-commit` hooks as they are not necessarily Python.
 
 ## Known issues
 
