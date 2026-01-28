@@ -669,7 +669,7 @@ version = "1.5.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.39"
+version = "1.1.40"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
