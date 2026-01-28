@@ -88,9 +88,9 @@ backend = "aqua:carapace-sh/carapace-bin"
 "platforms.windows-x64-baseline" = { checksum = "sha256:963f155a857c5ffa38fb0d6aafa1853e5b89c89f106a7e01ccc2cbb32ee14e2e", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_windows_amd64.zip"}
 
 [[tools.cargo-binstall]]
-version = "1.17.3"
+version = "1.17.4"
 backend = "aqua:cargo-bins/cargo-binstall"
-"platforms.macos-arm64" = { checksum = "sha256:0a2700e5b52608a31a0bb354d7d4823f886b7a89ccf0b7e862ca4232ebb49a0a", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.3/cargo-binstall-aarch64-apple-darwin.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:c689061413598fa32b77b6fd2a7300c6392faf008137194ab8a4cdb93c12040a", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-aarch64-apple-darwin.zip"}
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
@@ -317,9 +317,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.20.0"
+version = "0.20.2"
 backend = "github:max-sixty/worktrunk"
-"platforms.macos-arm64" = { checksum = "sha256:5ecf65efda4c70fbfa15be36d01e6c61bd68cc75836e000beea4f759a6c905e4", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.20.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/346231612"}
+"platforms.macos-arm64" = { checksum = "sha256:8d5f18b55f76fa8e7b3988109183d6d15d1e53a5c016af753a292c0de2cac3f5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.20.2/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/346972670"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -337,9 +337,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.7.0"
+version = "0.8.2"
 backend = "github:njbrake/agent-of-empires"
-"platforms.macos-arm64" = { checksum = "sha256:f29c6d296448a6086c106ab771c31a22a4b7efdf9faa491ec8a6f9064971ce50", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.7.0/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/346230622"}
+"platforms.macos-arm64" = { checksum = "sha256:46a12b057deeaf8e7fb75995882bb775527fc31de9b36d931397e0d6dd2eea9b", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.8.2/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/346873758"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -653,7 +653,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.20"
+version = "2.1.22"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -661,15 +661,15 @@ version = "4.5.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.25.2"
+version = "0.26.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.5.8"
+version = "1.5.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.36"
+version = "1.1.39"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -702,7 +702,7 @@ backend = "pipx:azure-cli"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.4"
+version = "0.11.5"
 backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
