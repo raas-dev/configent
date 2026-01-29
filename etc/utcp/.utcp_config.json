@@ -7,7 +7,7 @@
           "chrome-devtools": {
             "transport": "stdio",
             "command": "npx",
-            "args": ["-y", "chrome-devtools-mcp@latest", "--headless=false"]
+            "args": ["-y", "chrome-devtools-mcp", "--headless=false"]
           }
         }
       }
