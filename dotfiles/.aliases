@@ -426,14 +426,14 @@ venv() {
 
 ### Node.js ####################################################################
 
-# Claude Code agents/commands/skills installer (https://www.aitmpl.com)
-alias claude-code-templates='bunx claude-code-templates'
-
 # Flowise
 alias flowise='bunx flowise'
 
-# MCP server developer tool
+# MCP server development tool
 alias inspector='bunx @modelcontextprotocol/inspector'
+
+# MCP apps development tool
+alias mcpjam='bunx @mcpjam/inspector'
 
 # Call MCP servers from CLI
 alias mcporter='bunx mcporter'
@@ -443,9 +443,6 @@ alias ncu='bunx npm-check-updates'
 
 # OpenSpec (best for existing codebases, see Github Spec Kit for greenfield)
 alias openspec='bunx @fission-ai/openspec'
-
-# OpenPackage (https://openpackage.dev/)
-alias opkg='bunx opkg'
 
 # Shorthand for pnpm
 alias pn='bunx pnpm'
