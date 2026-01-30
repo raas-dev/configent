@@ -22,6 +22,6 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "oh-my-claude-sisyphus@oh-my-claude-sisyphus": true
+    "oh-my-claudecode@omc": true
   }
 }
