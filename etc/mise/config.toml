@@ -23,10 +23,10 @@ yq = 'latest'
 zoxide = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in mise's own registry
 'github:Skardyy/mcat' = 'latest'
-'github:railwayapp/nixpacks' = 'latest'
 'github:ouch-org/ouch' = 'latest'
 'github:sharkdp/pastel' = 'latest'
 'github:dalance/procs' = 'latest'
+'github:railwayapp/railpack' = 'latest'
 'github:yassinebridi/serpl' = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }

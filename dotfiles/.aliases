@@ -492,8 +492,8 @@ d() {
     echo "[d] Building image from Dockerfile"
     docker build --pull --tag "$name" . || return
   else
-    echo "[d] Building image with nixpacks"
-    TMPDIR="/tmp/lima" nixpacks build . --name "$name" || return
+    echo "[d] Building image with railpack"
+    TMPDIR="/tmp/lima" railpack build . --name "$name" || return
   fi
 
   if [ -n "$PORT" ]; then
