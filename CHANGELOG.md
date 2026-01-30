@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.0](https://github.com/raas-dev/configent/compare/1.201.2...1.202.0) (2026-01-30)
+
+
+### Features
+
+* **mcpjam:** add mcpjam alias ([7c82dcc](https://github.com/raas-dev/configent/commit/7c82dcc8252d9882d09e7de6e26a1bcdf095df5a))
+
+
+### Fixes
+
+* **mise:** use railpack instead of nixpacks ([419a1de](https://github.com/raas-dev/configent/commit/419a1dea5ac56cc5388e9cc9055805738ed118ee))
+
 ## [1.201.2](https://github.com/raas-dev/configent/compare/1.201.1...1.201.2) (2026-01-26)
 
 
