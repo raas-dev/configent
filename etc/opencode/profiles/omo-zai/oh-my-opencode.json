@@ -25,12 +25,6 @@
     "explore": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "frontend-ui-ux-engineer": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
-    "document-writer": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
     "multimodal-looker": {
       "model": "zai-coding-plan/glm-4.7"
     }
