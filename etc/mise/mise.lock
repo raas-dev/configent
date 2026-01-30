@@ -655,11 +655,11 @@ version = "0.26.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.0"
+version = "1.6.1"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
-version = "1.1.44"
+version = "1.1.45"
 backend = "npm:opencode-ai"
 
 [[tools."npm:openskills"]]
@@ -834,19 +834,9 @@ version = "3.6a"
 backend = "asdf:tmux"
 
 [[tools.trivy]]
-version = "0.68.2"
+version = "0.69.0"
 backend = "aqua:aquasecurity/trivy"
-"platforms.linux-arm64" = { checksum = "sha256:33c87995fd0c3d1559086c3e18fd3148051296dfd0ca2a67583eb64f89998c91", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-ARM64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:33c87995fd0c3d1559086c3e18fd3148051296dfd0ca2a67583eb64f89998c91", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-ARM64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:3d933bbc3685f95ec15280f620583d05d97ee3affb66944d14481d5d6d567064", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-64bit.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3d933bbc3685f95ec15280f620583d05d97ee3affb66944d14481d5d6d567064", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-64bit.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3d933bbc3685f95ec15280f620583d05d97ee3affb66944d14481d5d6d567064", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-64bit.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3d933bbc3685f95ec15280f620583d05d97ee3affb66944d14481d5d6d567064", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_Linux-64bit.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:dfbe15ffe47426dad9fd3e0d52aeacf3dbbb25ca5dbc66049f5920834435988d", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_macOS-ARM64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:c0790530cd717b6bdd02ed437be0710f5c7043078fafaf6841be7c865bf251ce", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_macOS-64bit.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:c0790530cd717b6bdd02ed437be0710f5c7043078fafaf6841be7c865bf251ce", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_macOS-64bit.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:2aaa0ce06f9f2221a6bb21e1fc0e0ecc6aeb56362bc5c9463e9fd7b06983c3c3", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_windows-64bit.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:2aaa0ce06f9f2221a6bb21e1fc0e0ecc6aeb56362bc5c9463e9fd7b06983c3c3", url = "https://github.com/aquasecurity/trivy/releases/download/v0.68.2/trivy_0.68.2_windows-64bit.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:bd35348d963d3f661ff4d7d138e65a75fedbfade0378689f3a349c824c6e5b75", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_macOS-ARM64.tar.gz"}
 
 [[tools.uv]]
 version = "0.9.28"
