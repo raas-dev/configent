@@ -83,19 +83,9 @@ backend = "core:bun"
 "platforms.windows-x64-baseline" = { checksum = "sha256:74f4dad7b4873ee70f63add9918400334e31acab9ba3fce9ef9906d96646e231", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.8/bun-windows-x64-baseline.zip"}
 
 [[tools.carapace]]
-version = "1.5.7"
+version = "1.6.1"
 backend = "aqua:carapace-sh/carapace-bin"
-"platforms.linux-arm64" = { checksum = "sha256:591d616f57b9d96de3925514ed95fede9fd754c7731278a50d8b1933619838c5", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:591d616f57b9d96de3925514ed95fede9fd754c7731278a50d8b1933619838c5", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:5daf51d5867b0995aad94faa07c783fb083aa00723d2b9a31b177c21f197306f", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_amd64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:5daf51d5867b0995aad94faa07c783fb083aa00723d2b9a31b177c21f197306f", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:5daf51d5867b0995aad94faa07c783fb083aa00723d2b9a31b177c21f197306f", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:5daf51d5867b0995aad94faa07c783fb083aa00723d2b9a31b177c21f197306f", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_linux_amd64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:892151c15d6fcb823662ae779198af177ee4e4230028201860334a330b7973d9", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_darwin_arm64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:7dc2b39ac27a6cf3f00cee81262d56738e036497991a23dcf50d839a91b3b5a3", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_darwin_amd64.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7dc2b39ac27a6cf3f00cee81262d56738e036497991a23dcf50d839a91b3b5a3", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_darwin_amd64.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:963f155a857c5ffa38fb0d6aafa1853e5b89c89f106a7e01ccc2cbb32ee14e2e", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_windows_amd64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:963f155a857c5ffa38fb0d6aafa1853e5b89c89f106a7e01ccc2cbb32ee14e2e", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.5.7/carapace-bin_1.5.7_windows_amd64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:f990e0f8048fa1cf739da017e7b27e6331cabdd80edd038a31fac6d38b0785e9", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_darwin_arm64.tar.gz"}
 
 [[tools.cargo-binstall]]
 version = "1.17.4"
@@ -1050,31 +1040,11 @@ backend = "aqua:ducaale/xh"
 "platforms.windows-x64-baseline" = { checksum = "sha256:49f60a01324ce42726ce1f8bcdff4b376b1e8533aed33d7a107a3cd70f040236", url = "https://github.com/ducaale/xh/releases/download/v0.25.3/xh-v0.25.3-x86_64-pc-windows-msvc.zip"}
 
 [[tools.yq]]
-version = "4.50.1"
+version = "4.52.1"
 backend = "aqua:mikefarah/yq"
-"platforms.linux-arm64" = { checksum = "sha256:cf0a663d8e4e00bb61507c5237b95b45a6aaa1fbedac77f4dc8abdadd5e2b745", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_arm64"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:cf0a663d8e4e00bb61507c5237b95b45a6aaa1fbedac77f4dc8abdadd5e2b745", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_arm64"}
-"platforms.linux-x64" = { checksum = "sha256:c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_amd64"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_amd64"}
-"platforms.linux-x64-musl" = { checksum = "sha256:c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_amd64"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_linux_amd64"}
-"platforms.macos-arm64" = { checksum = "sha256:589cd3e27b2a0ae62fc4513c7d18db56203aaf88bf7c480f0cb3d4f4d0ac5514", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_darwin_arm64"}
-"platforms.macos-x64" = { checksum = "sha256:6c24724c203f8ef0afaa4584d8b7baa150fec7f6d8a493efa49b80f620174119", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_darwin_amd64"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:6c24724c203f8ef0afaa4584d8b7baa150fec7f6d8a493efa49b80f620174119", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_darwin_amd64"}
-"platforms.windows-x64" = { checksum = "sha256:85c8c1b035c3e7cd10c503f1f00334b6edae18c9fd6b64a06b98d82449e20bf8", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_windows_amd64.exe"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:85c8c1b035c3e7cd10c503f1f00334b6edae18c9fd6b64a06b98d82449e20bf8", url = "https://github.com/mikefarah/yq/releases/download/v4.50.1/yq_windows_amd64.exe"}
+"platforms.macos-arm64" = { checksum = "sha256:faf051a49a3b73b72790430206679609d86aeca89bc6ea24475b5cece4666b8e", url = "https://github.com/mikefarah/yq/releases/download/v4.52.1/yq_darwin_arm64"}
 
 [[tools.zoxide]]
-version = "0.9.8"
+version = "0.9.9"
 backend = "aqua:ajeetdsouza/zoxide"
-"platforms.linux-arm64" = { checksum = "blake3:fd3861fa9b55ffa4dc7314465da13e65f02858c45887e4d471ba00adc9cabaee", url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.8/zoxide-0.9.8-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:57e733d0436309dae2ed97e46bba43937209395298e1d88812d4e893900cb40a", url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.9/zoxide-0.9.9-aarch64-apple-darwin.tar.gz"}
