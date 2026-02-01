@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.1](https://github.com/raas-dev/configent/compare/1.202.0...1.202.1) (2026-02-01)
+
+
+### Fixes
+
+* **claudecode:** simplify claudecode docs and settings ([7f44822](https://github.com/raas-dev/configent/commit/7f4482232beb34d9e08dc9cef413e4287a780bf4))
+* **mise:** use nixpacks instead of railpack ([0410b5e](https://github.com/raas-dev/configent/commit/0410b5e1713e7ada1cec0f8752daa06a1abcee0c))
+
 ## [1.202.0](https://github.com/raas-dev/configent/compare/1.201.2...1.202.0) (2026-01-30)
 
 
