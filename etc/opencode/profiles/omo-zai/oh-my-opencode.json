@@ -4,6 +4,9 @@
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7"
     },
+    "hephaestus": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
     "prometheus": {
       "model": "zai-coding-plan/glm-4.7"
     },

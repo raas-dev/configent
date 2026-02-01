@@ -5,6 +5,9 @@
     "sisyphus": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
+    "hephaestus": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
     "prometheus": {
       "model": "google/antigravity-gemini-3-pro-high"
     },
