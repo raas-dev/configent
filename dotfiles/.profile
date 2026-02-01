@@ -299,6 +299,9 @@ export UTCP_CONFIG_FILE="$HOME/.config/configent/utcp/.utcp_config.json"
 # dynamic-mcp (https://github.com/asyrjasalo/dynamic-mcp)
 export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 
+# CodeNomad
+export CODENOMAD_SKIP_AUTH=true
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default

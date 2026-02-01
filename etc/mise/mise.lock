@@ -747,6 +747,10 @@ backend = "npm:@different-ai/opencode-browser"
 version = "0.26.0"
 backend = "npm:@google/gemini-cli"
 
+[[tools."npm:@neuralnomads/codenomad"]]
+version = "0.9.3"
+backend = "npm:@neuralnomads/codenomad"
+
 [[tools."npm:@openchamber/web"]]
 version = "1.6.1"
 backend = "npm:@openchamber/web"

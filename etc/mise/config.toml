@@ -102,16 +102,21 @@ go = '1.25.3'
 node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 
-# ai
-'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-'npm:@different-ai/opencode-browser' = 'latest'
-'npm:@openchamber/web' = 'latest'
-'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
-'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+# ai tools
 "github:asyrjasalo/augent" = "latest"
 "github:asyrjasalo/dynamic-mcp" = "latest"
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
+
+# opencode
+'npm:opencode-ai' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+'npm:@neuralnomads/codenomad' = 'latest'
+#'npm:@openchamber/web' = 'latest'
+'npm:@different-ai/opencode-browser' = 'latest'
 'github:backnotprop/plannotator' = 'latest'
+
+# other ai coding platforms
+'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
+'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
 
 # python
 python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
