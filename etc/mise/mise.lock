@@ -264,19 +264,9 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/augent"]]
-version = "0.6.1"
+version = "0.6.3"
 backend = "github:asyrjasalo/augent"
-"platforms.linux-arm64" = { checksum = "sha256:6ff3616033906fec4a80409a46c05b9d41a1afa2b0da99b8dfe55c42dba9f38e", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816517"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:6ff3616033906fec4a80409a46c05b9d41a1afa2b0da99b8dfe55c42dba9f38e", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816517"}
-"platforms.linux-x64" = { checksum = "sha256:55d6e78e435c2633e27ad89d9380737b7a7471ceb3766899cfc56175e439beec", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816518"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:55d6e78e435c2633e27ad89d9380737b7a7471ceb3766899cfc56175e439beec", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816518"}
-"platforms.linux-x64-musl" = { checksum = "sha256:55d6e78e435c2633e27ad89d9380737b7a7471ceb3766899cfc56175e439beec", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816518"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:55d6e78e435c2633e27ad89d9380737b7a7471ceb3766899cfc56175e439beec", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816518"}
-"platforms.macos-arm64" = { checksum = "sha256:f72fb322e3930991dd351a3f716b97ce8725155ed17cee83000448502953100a", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816520"}
-"platforms.macos-x64" = { checksum = "sha256:fc4d58f78ffdf6497c5f072b1a5cbf0ac257a4a2068ddb37aed9470e3cfa4957", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816519"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:fc4d58f78ffdf6497c5f072b1a5cbf0ac257a4a2068ddb37aed9470e3cfa4957", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816519"}
-"platforms.windows-x64" = { checksum = "sha256:fd71c223b2e8fccdc4881fd5816a143dc8e7b5c8de3280f19493feedc1f3c0cb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816522"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:fd71c223b2e8fccdc4881fd5816a143dc8e7b5c8de3280f19493feedc1f3c0cb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.1/augent-v0.6.1-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/347816522"}
+"platforms.macos-arm64" = { checksum = "sha256:39da1417e2159d866a17beef5b3425db0eeb186ecf7e0004812eee4a9065f64c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.3/augent-v0.6.3-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349104768"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.4.0"
@@ -387,17 +377,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.10.0"
+version = "0.10.1"
 backend = "github:njbrake/agent-of-empires"
-"platforms.linux-arm64" = { checksum = "sha256:b986ec83da0a55ad981857d60b7941ddbac7ad8c87bc5aabafe9e449dfe0290b", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802590"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:b986ec83da0a55ad981857d60b7941ddbac7ad8c87bc5aabafe9e449dfe0290b", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802590"}
-"platforms.linux-x64" = { checksum = "sha256:dfb7eb4dcd75462b365335eef040562d5fff9b3f89e2d2b815d785bf37a3a67a", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802586"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:dfb7eb4dcd75462b365335eef040562d5fff9b3f89e2d2b815d785bf37a3a67a", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802586"}
-"platforms.linux-x64-musl" = { checksum = "sha256:dfb7eb4dcd75462b365335eef040562d5fff9b3f89e2d2b815d785bf37a3a67a", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802586"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:dfb7eb4dcd75462b365335eef040562d5fff9b3f89e2d2b815d785bf37a3a67a", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802586"}
-"platforms.macos-arm64" = { checksum = "sha256:d97e1605c7adfca89587eb64b2a0919fdb0bc0865bbb81fb93c70d7905e8c642", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802587"}
-"platforms.macos-x64" = { checksum = "sha256:0ff2f00fde6333ff16df6d4e14fb35991c276c04ec09ce405876613718a4d75f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802592"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:0ff2f00fde6333ff16df6d4e14fb35991c276c04ec09ce405876613718a4d75f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.0/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/347802592"}
+"platforms.macos-arm64" = { checksum = "sha256:190b8df3e5edb33d35aa971c748e34f71975e694493d93e5ae93effc403f6588", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.1/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349054467"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -831,7 +813,7 @@ version = "2.26.6"
 backend = "pipx:pdm"
 
 [[tools."pipx:poetry"]]
-version = "2.3.1"
+version = "2.3.2"
 backend = "pipx:poetry"
 
 [[tools."pipx:sncli"]]
