@@ -4,10 +4,10 @@
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "hephaestus": {
+    "prometheus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "prometheus": {
+    "hephaestus": {
       "model": "zai-coding-plan/glm-4.7"
     },
     "atlas": {
@@ -26,6 +26,12 @@
       "model": "zai-coding-plan/glm-4.7"
     },
     "explore": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "frontend-ui-ux-engineer": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "document-writer": {
       "model": "zai-coding-plan/glm-4.7"
     },
     "multimodal-looker": {
@@ -49,8 +55,19 @@
     "playwright"
   ],
   "experimental": {
-    "truncate_all_tool_outputs": true,
-    "aggressive_truncation": true,
+    "truncate_all_tool_outputs": false,
+    "aggressive_truncation": false,
     "auto_resume": true
+  },
+  "git_master": {
+    "commit_footer": false,
+    "include_co_authored_by": false
+  },
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60,
+    "main_pane_min_width": 120,
+    "agent_pane_min_width": 40
   }
 }

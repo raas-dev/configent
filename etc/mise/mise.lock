@@ -377,9 +377,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.10.1"
+version = "0.11.0"
 backend = "github:njbrake/agent-of-empires"
-"platforms.macos-arm64" = { checksum = "sha256:190b8df3e5edb33d35aa971c748e34f71975e694493d93e5ae93effc403f6588", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.10.1/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349054467"}
+"platforms.macos-arm64" = { checksum = "sha256:aba10238f9327d6016d225d86138d68de75fa3e97a8bfdbf79cf6ba33dbc00db", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270599"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"

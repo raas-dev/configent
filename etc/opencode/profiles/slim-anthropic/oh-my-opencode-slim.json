@@ -4,7 +4,6 @@
     "layout": "main-vertical",
     "main_pane_size": 60
   },
-  "disabled_agents": [],
   "disabled_mcps": [
     "context7",
     "websearch_exa",
@@ -24,6 +23,9 @@
       "model": "anthropic/claude-haiku-4-5"
     },
     "designer": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "fixer": {
       "model": "anthropic/claude-haiku-4-5"
     }
   }
