@@ -59,7 +59,7 @@
     "include_co_authored_by": false
   },
   "tmux": {
-    "enabled": true,
+    "enabled": false,
     "layout": "main-vertical",
     "main_pane_size": 60,
     "main_pane_min_width": 120,

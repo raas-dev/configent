@@ -1,6 +1,6 @@
 {
   "tmux": {
-    "enabled": true,
+    "enabled": false,
     "layout": "main-vertical",
     "main_pane_size": 60
   },
