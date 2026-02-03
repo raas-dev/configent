@@ -778,6 +778,11 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64" = { checksum = "sha256:522fc07ea24fb57574253de276bd73baf0c141ef962713d60f532d17d0e4ea75", url = "https://github.com/sharkdp/numbat/releases/download/v1.20.0/numbat-v1.20.0-x86_64-pc-windows-msvc.zip"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:522fc07ea24fb57574253de276bd73baf0c141ef962713d60f532d17d0e4ea75", url = "https://github.com/sharkdp/numbat/releases/download/v1.20.0/numbat-v1.20.0-x86_64-pc-windows-msvc.zip"}
 
+[[tools.opencode]]
+version = "1.1.49"
+backend = "aqua:anomalyco/opencode"
+"platforms.macos-arm64" = { checksum = "sha256:da84308f57520c9f23da74f8967de1ade28b0c1ea0e03d63b7b24d0670191319", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.49/opencode-darwin-arm64.zip"}
+
 [[tools.oxker]]
 version = "0.12.0"
 backend = "aqua:mrjackwills/oxker"
