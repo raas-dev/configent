@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.2](https://github.com/raas-dev/configent/compare/1.202.1...1.202.2) (2026-02-03)
+
+
+### Fixes
+
+* **opencode:** update opencode profiles ([cb10da1](https://github.com/raas-dev/configent/commit/cb10da1947a8d821c57992268c5d515c056371f1))
+
 ## [1.202.1](https://github.com/raas-dev/configent/compare/1.202.0...1.202.1) (2026-02-01)
 
 
