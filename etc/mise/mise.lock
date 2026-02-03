@@ -264,9 +264,9 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/augent"]]
-version = "0.6.3"
+version = "0.6.4"
 backend = "github:asyrjasalo/augent"
-"platforms.macos-arm64" = { checksum = "sha256:39da1417e2159d866a17beef5b3425db0eeb186ecf7e0004812eee4a9065f64c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.3/augent-v0.6.3-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349104768"}
+"platforms.macos-arm64" = { checksum = "sha256:dba4e83552a65b45942009a01cf7810e1107d23e18c099d157b77579426b335c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839843"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.4.0"
@@ -347,19 +347,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.21.0"
+version = "0.22.0"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:1577a0ebe4f157d5f9556d26141b6931a4c4e471a17769313fd2badea2801ed5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981232"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:1577a0ebe4f157d5f9556d26141b6931a4c4e471a17769313fd2badea2801ed5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981232"}
-"platforms.linux-x64" = { checksum = "sha256:48fe7fc17ec09edc7cd41e71daa64aa015e9729ed2603b8a3cd7974c0d13a50c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981246"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:48fe7fc17ec09edc7cd41e71daa64aa015e9729ed2603b8a3cd7974c0d13a50c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981246"}
-"platforms.linux-x64-musl" = { checksum = "sha256:48fe7fc17ec09edc7cd41e71daa64aa015e9729ed2603b8a3cd7974c0d13a50c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981246"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:48fe7fc17ec09edc7cd41e71daa64aa015e9729ed2603b8a3cd7974c0d13a50c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981246"}
-"platforms.macos-arm64" = { checksum = "sha256:0c36b2b716f2fd2f86dd0bfb59acdeef3caf47bc0f03ca9e75cd74e238df56ee", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981224"}
-"platforms.macos-x64" = { checksum = "sha256:b061d818217685c939f5e9f3228620d931da21c57097b23c0b04b3f90a9ced7c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981238"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:b061d818217685c939f5e9f3228620d931da21c57097b23c0b04b3f90a9ced7c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981238"}
-"platforms.windows-x64" = { checksum = "sha256:6d2ba343879caa4d196a657c9ae53691e1d2740b5b6e62a0e08058955a50578d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981239"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:6d2ba343879caa4d196a657c9ae53691e1d2740b5b6e62a0e08058955a50578d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.21.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/347981239"}
+"platforms.macos-arm64" = { checksum = "sha256:1fd193d8ed95453dbeadd900035312a6df61ff3fad43dc85eb1a9f7b48895b3c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.22.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/349578947"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -507,19 +497,9 @@ backend = "github:tldr-pages/tlrc"
 "platforms.macos-arm64" = { checksum = "sha256:2b53e92b7d747f2ecb4eb9633eac1c28da456fd869038a2e370dfdc1ffbc9205", url = "https://github.com/tldr-pages/tlrc/releases/download/v1.12.0/tlrc-v1.12.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/tldr-pages/tlrc/releases/assets/299068996"}
 
 [[tools."github:topgrade-rs/topgrade"]]
-version = "16.8.0"
+version = "16.9.0"
 backend = "github:topgrade-rs/topgrade"
-"platforms.linux-arm64" = { checksum = "sha256:a56489320b39fd51db7864d41c80f3d41115f33843e3f099f4c2d2482f3ce73a", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338345190"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:196ed738dc6311c6ef506d7ac9ec5bf738a6262030f667b06d293ce06b64d651", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344310"}
-"platforms.linux-x64" = { checksum = "sha256:880f068d0b07421b4a3e2a285770ed65d8ae5cf02ea130aaa23b2eb703548068", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344578"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:880f068d0b07421b4a3e2a285770ed65d8ae5cf02ea130aaa23b2eb703548068", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344578"}
-"platforms.linux-x64-musl" = { checksum = "sha256:fddac41815052324113559fbfb0e7d2f1a5f4eed0cfe7116db269d2adff2661e", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344031"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:880f068d0b07421b4a3e2a285770ed65d8ae5cf02ea130aaa23b2eb703548068", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344578"}
-"platforms.macos-arm64" = { checksum = "sha256:1034ef2e1c9e312aed4853e8a8503c87ebf51d63964025ed57b0e329aedf0330", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338343215"}
-"platforms.macos-x64" = { checksum = "sha256:d85d0d2dc628959094af595d26144a0e70fd093afe782ca3fe815d8f58f60b86", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344906"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:d85d0d2dc628959094af595d26144a0e70fd093afe782ca3fe815d8f58f60b86", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338344906"}
-"platforms.windows-x64" = { checksum = "sha256:6c9f0274a864eb333e0e95400c84f8e387be77342f45a8a42084d70d1c74b6fd", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338345768"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:6c9f0274a864eb333e0e95400c84f8e387be77342f45a8a42084d70d1c74b6fd", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.8.0/topgrade-v16.8.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/338345768"}
+"platforms.macos-arm64" = { checksum = "sha256:770449308c368aa999e7eb7a34f0f9821d7f8974e46e01a755ae12c24ab4ba12", url = "https://github.com/topgrade-rs/topgrade/releases/download/v16.9.0/topgrade-v16.9.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/349985018"}
 
 [[tools."github:yassinebridi/serpl"]]
 version = "0.3.4"
@@ -736,7 +716,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.29"
+version = "2.1.30"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
