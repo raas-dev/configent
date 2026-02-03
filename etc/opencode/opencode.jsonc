@@ -4,6 +4,7 @@
   "mcp": {},
   "permission": {
     "bash": {
+      "rm *": "ask",
       "git commit *": "ask",
       "git push *": "ask",
       "git checkout *": "deny",
