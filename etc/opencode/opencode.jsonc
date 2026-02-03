@@ -7,7 +7,9 @@
       "git commit *": "ask",
       "git push *": "ask",
       "git checkout *": "deny",
-      "git reset *": "deny"
+      "git reset *": "deny",
+      "git revert *": "deny",
+      "cargo clean *": "deny"
     },
     "external_directory": {
       "/tmp/**": "allow",
