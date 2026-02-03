@@ -14,7 +14,6 @@
   "model": "zai-coding-plan/glm-4.7",
   "plugin": [
     "opencode-pty",
-    "octto",
     "@franlol/opencode-md-table-formatter"
   ]
 }
