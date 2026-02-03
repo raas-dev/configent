@@ -4,10 +4,14 @@
   "mcp": {},
   "permission": {
     "bash": {
-      "git:commit": "ask",
-      "git:checkout": "ask",
-      "git:push": "ask",
-      "git:reset": "ask"
+      "git commit *": "ask",
+      "git checkout *": "ask",
+      "git push *": "ask",
+      "git reset *": "ask"
+    },
+    "external_directory": {
+      "/tmp/**": "allow",
+      "/private/tmp/**": "allow"
     }
   },
   "plugin": [],
