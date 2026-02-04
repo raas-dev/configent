@@ -149,7 +149,7 @@ alias \?='trans'
 alias \#='echo'
 alias ¨='bat --show-all'
 alias ,='serpl'
-alias _='ai_agent'
+alias _='oc_agent'
 
 ### Privileged utilities #######################################################
 
@@ -466,7 +466,7 @@ ai() {
   fi
 }
 
-ai_agent() {
+oc_agent() {
   if [ -n "$1" ]; then
     local agent="$1"
     shift
@@ -475,6 +475,14 @@ ai_agent() {
   fi
 
   oc exec "$agent" -- opencode --agent "$agent" "$@"
+}
+
+oc_up() {
+  openchamber serve --daemon
+}
+
+oc_down() {
+  openchamber stop
 }
 
 ### Functions: Docker ##########################################################
