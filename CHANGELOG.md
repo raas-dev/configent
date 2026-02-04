@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.5](https://github.com/raas-dev/configent/compare/1.202.4...1.202.5) (2026-02-04)
+
+
+### Fixes
+
+* **aliases:** update up alias to include snap ([3c3bd9b](https://github.com/raas-dev/configent/commit/3c3bd9bba33c979acb414ef53dac102eaeda6aa4))
+* **config:** add xh to mise config ([2e2a36d](https://github.com/raas-dev/configent/commit/2e2a36d2f5af3e12f58cbdfe072b3cceb045ccfc))
+* **config:** remove cache dir setting ([0d3089e](https://github.com/raas-dev/configent/commit/0d3089e1a75eba2fba5712387cd0ab5800040bd9))
+* **install_mise:** set GOPATH to prevent creating $HOME/go ([43c1517](https://github.com/raas-dev/configent/commit/43c15177187f15d8be3481fa7bf12584f5dad572))
+
 ## [1.202.4](https://github.com/raas-dev/configent/compare/1.202.3...1.202.4) (2026-02-04)
 
 
