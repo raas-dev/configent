@@ -315,7 +315,7 @@ alias c90='printf "%.0s-" $(seq 90)'
 alias dns='dig +short whoami.akamai.net'
 
 # Display public IP
-alias ip='curl --silent --ipv4 ifconfig.me/all.json | jq .'
+alias ip='curl --silent --ipv4 https://whatismyhostname.com/json/ | jq .'
 alias ipv4='curl --silent --ipv4 ifconfig.me -w "\n"'
 alias ipv6='curl --silent --ipv6 ifconfig.me -w "\n"'
 
