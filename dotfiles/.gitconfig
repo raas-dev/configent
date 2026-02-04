@@ -6,6 +6,7 @@
 
 [alias]
   a = add --patch
+  aa = add --all
   b = branch --list --all -vv
   bd = branch --delete --force
   bda = !"git branch --merged | grep -v '\\*' | xargs -n 1 git branch --delete"
