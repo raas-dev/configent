@@ -19,6 +19,7 @@ tmux = { version = '3.6a', postinstall = "~/.local/configent/bin/postinstall_tmu
 #upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 viddy = 'latest'
 watchexec = 'latest'
+xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in mise's own registry
