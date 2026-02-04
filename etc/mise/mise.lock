@@ -140,6 +140,13 @@ backend = "cargo:tailspin"
 version = "1.12.0"
 backend = "cargo:tlrc"
 
+[[tools.cloudflared]]
+version = "2026.1.2"
+backend = "aqua:cloudflare/cloudflared"
+"platforms.macos-arm64" = { checksum = "sha256:70c30348b7e91858b60bae9a94604393dfc4b64fd552ac48be3ed4f5086525a9", url = "https://github.com/cloudflare/cloudflared/releases/download/2026.1.2/cloudflared-darwin-amd64.tgz"}
+"platforms.macos-x64" = { checksum = "sha256:70c30348b7e91858b60bae9a94604393dfc4b64fd552ac48be3ed4f5086525a9", url = "https://github.com/cloudflare/cloudflared/releases/download/2026.1.2/cloudflared-darwin-amd64.tgz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:70c30348b7e91858b60bae9a94604393dfc4b64fd552ac48be3ed4f5086525a9", url = "https://github.com/cloudflare/cloudflared/releases/download/2026.1.2/cloudflared-darwin-amd64.tgz"}
+
 [[tools.delta]]
 version = "0.18.2"
 backend = "aqua:dandavison/delta"
