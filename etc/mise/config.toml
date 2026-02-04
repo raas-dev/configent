@@ -22,6 +22,7 @@ watchexec = 'latest'
 xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
+'aqua:pranshuparmar/witr' = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in mise's own registry
 'github:Skardyy/mcat' = 'latest'
 'github:railwayapp/nixpacks' = 'latest'
@@ -32,7 +33,6 @@ zoxide = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
-'github:pranshuparmar/witr' = 'latest'
 'github:max-sixty/worktrunk' = 'latest'
 'github:bgreenwell/xleak' = 'latest'
 
