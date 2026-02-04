@@ -59,4 +59,4 @@ fi
 "$bin_path/install_mise"
 
 # install Ollama
-"$bin_path/install_ollama"
+#"$bin_path/install_ollama"

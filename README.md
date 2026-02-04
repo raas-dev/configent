@@ -123,7 +123,6 @@ Sensible defaults are used, what's installed by default:
 6. Linters (static analysis tools) and AWS and Azure development tools
 7. Neovim with [LazyVim](https://www.lazyvim.org/)
 8. Tmux, tpm (Tmux Plugin Manager) and tmux plugins
-9. [Ollama](https://ollama.com/) and it is (auto-)started on background
 
 Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
