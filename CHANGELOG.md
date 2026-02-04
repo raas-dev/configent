@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.4](https://github.com/raas-dev/configent/compare/1.202.3...1.202.4) (2026-02-04)
+
+
+### Fixes
+
+* **mise:** enable cloudflared in mise ([10d8686](https://github.com/raas-dev/configent/commit/10d868651963caaa33a50bad7c91be7c202c2261))
+
 ## [1.202.3](https://github.com/raas-dev/configent/compare/1.202.2...1.202.3) (2026-02-04)
 
 
