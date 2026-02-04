@@ -109,7 +109,6 @@ bun = 'latest'
 
 # opencode
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-'npm:@neuralnomads/codenomad' = 'latest'
 'npm:@openchamber/web' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
 'github:backnotprop/plannotator' = 'latest'
