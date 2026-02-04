@@ -281,19 +281,9 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/augent"]]
-version = "0.6.4"
+version = "0.6.5"
 backend = "github:asyrjasalo/augent"
-"platforms.linux-arm64" = { checksum = "sha256:1894dce99ef9ce5db33e3ebab2cd6f1f13b303d61249d1ef5ba2ec9fdb5eb7cb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839840"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:1894dce99ef9ce5db33e3ebab2cd6f1f13b303d61249d1ef5ba2ec9fdb5eb7cb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839840"}
-"platforms.linux-x64" = { checksum = "sha256:3191acc6bfc2fd7bf2d1b800c0d13d62ab6622b6007c5f946e3d584c0dea26cf", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839842"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3191acc6bfc2fd7bf2d1b800c0d13d62ab6622b6007c5f946e3d584c0dea26cf", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839842"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3191acc6bfc2fd7bf2d1b800c0d13d62ab6622b6007c5f946e3d584c0dea26cf", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839842"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3191acc6bfc2fd7bf2d1b800c0d13d62ab6622b6007c5f946e3d584c0dea26cf", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839842"}
-"platforms.macos-arm64" = { checksum = "sha256:dba4e83552a65b45942009a01cf7810e1107d23e18c099d157b77579426b335c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839843"}
-"platforms.macos-x64" = { checksum = "sha256:07871fe72b678661d5c15d5918297d07e98be10862498032aadef0b97c6deaeb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839839"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:07871fe72b678661d5c15d5918297d07e98be10862498032aadef0b97c6deaeb", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839839"}
-"platforms.windows-x64" = { checksum = "sha256:a2cf0e5a28b7a6c01fd466335d8c5cc1b9036770faff7278b6496907d2b91621", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839841"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:a2cf0e5a28b7a6c01fd466335d8c5cc1b9036770faff7278b6496907d2b91621", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.4/augent-v0.6.4-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/349839841"}
+"platforms.linux-x64" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.4.0"
@@ -404,17 +394,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.11.0"
+version = "0.11.1"
 backend = "github:njbrake/agent-of-empires"
-"platforms.linux-arm64" = { checksum = "sha256:087ce5480ab83beb696b1cb45fe344492b21d28b2e51220b13f9a14aef4dbc6f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270598"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:087ce5480ab83beb696b1cb45fe344492b21d28b2e51220b13f9a14aef4dbc6f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270598"}
-"platforms.linux-x64" = { checksum = "sha256:941d6d5da3fb82a04e6daee14f4f992974cbb7e025c8742799ff0507e594654d", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270595"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:941d6d5da3fb82a04e6daee14f4f992974cbb7e025c8742799ff0507e594654d", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270595"}
-"platforms.linux-x64-musl" = { checksum = "sha256:941d6d5da3fb82a04e6daee14f4f992974cbb7e025c8742799ff0507e594654d", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270595"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:941d6d5da3fb82a04e6daee14f4f992974cbb7e025c8742799ff0507e594654d", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270595"}
-"platforms.macos-arm64" = { checksum = "sha256:aba10238f9327d6016d225d86138d68de75fa3e97a8bfdbf79cf6ba33dbc00db", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270599"}
-"platforms.macos-x64" = { checksum = "sha256:13c2ffb996bc198ffcc69d0c19df0c1ad65903b77431d0ff1f34a2d346b44394", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270601"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:13c2ffb996bc198ffcc69d0c19df0c1ad65903b77431d0ff1f34a2d346b44394", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.0/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/349270601"}
+"platforms.linux-x64" = { checksum = "sha256:7f7886b0323f2cb4633a5c7480f2f9fae7894252bb0fa39b599f8631d47d5429", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.1/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/350200531"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -447,19 +429,9 @@ backend = "github:ouch-org/ouch"
 "platforms.windows-x64-baseline" = { url = "https://github.com/ouch-org/ouch/releases/download/0.6.1/ouch-x86_64-pc-windows-gnu.zip", url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/248071208"}
 
 [[tools."github:owenrumney/lazytrivy"]]
-version = "1.3.0"
+version = "1.3.1"
 backend = "github:owenrumney/lazytrivy"
-"platforms.linux-arm64" = { checksum = "sha256:b0ab41dba9f8cf1147afc26313119c45c7b592dc2c674856f830c6b90b20328f", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587366"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:b0ab41dba9f8cf1147afc26313119c45c7b592dc2c674856f830c6b90b20328f", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587366"}
-"platforms.linux-x64" = { checksum = "sha256:34637a53a7bd7b3ea12510cf5c8cc5f67bf107d107512b4e08d3aa96375a92e1", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587313"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:34637a53a7bd7b3ea12510cf5c8cc5f67bf107d107512b4e08d3aa96375a92e1", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587313"}
-"platforms.linux-x64-musl" = { checksum = "sha256:34637a53a7bd7b3ea12510cf5c8cc5f67bf107d107512b4e08d3aa96375a92e1", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587313"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:34637a53a7bd7b3ea12510cf5c8cc5f67bf107d107512b4e08d3aa96375a92e1", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587313"}
-"platforms.macos-arm64" = { checksum = "sha256:aee67cff0a9781d4c44bc3095ef8fc672798a891fc17e0f1dc0b9f2df36fee8c", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-darwin-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587312"}
-"platforms.macos-x64" = { checksum = "sha256:db6dc34d0af07c8b197aebdf434fcfcb80788894cf0285992292b60c10432469", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-darwin-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587314"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:db6dc34d0af07c8b197aebdf434fcfcb80788894cf0285992292b60c10432469", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-darwin-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587314"}
-"platforms.windows-x64" = { checksum = "sha256:93d2407078a63162acbdddb09d0e8aebaef5ab0bc5b53b5f9e926daa6f596974", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587315"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:93d2407078a63162acbdddb09d0e8aebaef5ab0bc5b53b5f9e926daa6f596974", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.0/lazytrivy-windows-amd64.exe", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/347587315"}
+"platforms.linux-x64" = { checksum = "sha256:90dde168446d7ee92ec4c993cd7ad3c4ed8fa50723699d561248bcf4ea1e68e7", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.1/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/350573068"}
 
 [[tools."github:pranshuparmar/witr"]]
 version = "0.2.6"
