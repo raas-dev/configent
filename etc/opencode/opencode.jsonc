@@ -5,9 +5,10 @@
   "permission": {
     "bash": {
       "rm *": "ask",
+      "git checkout *": "ask",
       "git commit *": "ask",
       "git push *": "ask",
-      "git checkout *": "deny",
+      "git stash *": "deny",
       "git reset *": "deny",
       "git revert *": "deny",
       "cargo clean *": "deny"

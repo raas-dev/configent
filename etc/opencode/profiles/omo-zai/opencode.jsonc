@@ -15,7 +15,7 @@
   "plugin": [
     "oh-my-opencode",
     "opencode-pty",
-    "@plannotator/opencode",
+//    "@plannotator/opencode",
     "@franlol/opencode-md-table-formatter"
   ]
 }
