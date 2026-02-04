@@ -284,6 +284,7 @@ backend = "github:abhimanyu003/sttr"
 version = "0.6.5"
 backend = "github:asyrjasalo/augent"
 "platforms.linux-x64" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
+"platforms.macos-arm64" = { checksum = "sha256:0af5840e8ee46625da240b1d8a812a24b9e1ee1239d4eb980f18e01a781b4a62", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171487"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.4.0"
@@ -397,6 +398,7 @@ backend = "github:memextech/ht-mcp"
 version = "0.11.1"
 backend = "github:njbrake/agent-of-empires"
 "platforms.linux-x64" = { checksum = "sha256:7f7886b0323f2cb4633a5c7480f2f9fae7894252bb0fa39b599f8631d47d5429", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.1/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/350200531"}
+"platforms.macos-arm64" = { checksum = "sha256:c2d3bce0ea4c1f6463e27f82c89cd2b6e63da0f6a89b2526b19fd0f23f8ee5ca", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.1/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/350200530"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -432,6 +434,7 @@ backend = "github:ouch-org/ouch"
 version = "1.3.1"
 backend = "github:owenrumney/lazytrivy"
 "platforms.linux-x64" = { checksum = "sha256:90dde168446d7ee92ec4c993cd7ad3c4ed8fa50723699d561248bcf4ea1e68e7", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.1/lazytrivy-linux-amd64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/350573068"}
+"platforms.macos-arm64" = { checksum = "sha256:983327820eb8937e09da877ed983e8977ffa23a5b7929cb144296732b28fa889", url = "https://github.com/owenrumney/lazytrivy/releases/download/v1.3.1/lazytrivy-darwin-arm64", url_api = "https://api.github.com/repos/owenrumney/lazytrivy/releases/assets/350573113"}
 
 [[tools."github:pranshuparmar/witr"]]
 version = "0.2.6"
