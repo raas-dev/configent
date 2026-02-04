@@ -36,5 +36,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # self-update mise
 mise self-update --yes
 
+# set GOPATH before installing Go tools to prevent creating $HOME/go
+export GOPATH="$HOME/.go"
+
 # install all enabled tools
 mise install --yes
