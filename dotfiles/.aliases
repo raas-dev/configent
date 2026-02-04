@@ -316,7 +316,8 @@ alias dns='dig +short whoami.akamai.net'
 
 # Display public IP
 alias ip='curl --silent --ipv4 ifconfig.me/all.json | jq .'
-alias ipv6='curl --silent --ipv6 ifconfig.me/all.json | jq .'
+alias ipv4='curl --silent --ipv4 ifconfig.me -w "\n"'
+alias ipv6='curl --silent --ipv6 ifconfig.me -w "\n"'
 
 # Display PATH content
 alias path='printf "${PATH//:/\\n}\n"'
