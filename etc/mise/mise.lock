@@ -13,6 +13,11 @@ backend = "aqua:nektos/act"
 "platforms.windows-x64" = { checksum = "sha256:3b4fcf9497d1f23afbdd40bfa8e78e154d69754da73c2d792a4152b4f8ae5c96", url = "https://github.com/nektos/act/releases/download/v0.2.84/act_Windows_x86_64.zip"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:3b4fcf9497d1f23afbdd40bfa8e78e154d69754da73c2d792a4152b4f8ae5c96", url = "https://github.com/nektos/act/releases/download/v0.2.84/act_Windows_x86_64.zip"}
 
+[[tools."aqua:neovim/neovim"]]
+version = "0.11.6"
+backend = "aqua:neovim/neovim"
+"platforms.macos-arm64" = { checksum = "sha256:d5ee93b67630d5a87f3d336d0f7e8b2fe6973aa653d3cc93b82b820e6538c1dd", url = "https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-macos-arm64.tar.gz"}
+
 [[tools."aqua:pranshuparmar/witr"]]
 version = "0.2.6"
 backend = "aqua:pranshuparmar/witr"
