@@ -363,9 +363,6 @@ alias semgrep='uvx semgrep'
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
-# Langflow
-alias langflow='uvx langflow'
-
 # Reactive notebook
 alias marimo='uvx marimo'
 
@@ -426,9 +423,6 @@ venv() {
 
 ### Node.js ####################################################################
 
-# Flowise
-alias flowise='bunx flowise'
-
 # MCP server development tool
 alias inspector='bunx @modelcontextprotocol/inspector'
 
@@ -456,6 +450,12 @@ alias promptfoo='bunx promptfoo'
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
 
+### OpenChamber ################################################################
+
+alias ocu='openchamber serve --daemon'
+alias ocs='openchamber status'
+alias ocd='openchamber stop'
+
 ### Functions: AI ##############################################################
 
 ai() {
@@ -475,14 +475,6 @@ oc_agent() {
   fi
 
   oc exec "$agent" -- opencode --agent "$agent" "$@"
-}
-
-oc_up() {
-  openchamber serve --daemon
-}
-
-oc_down() {
-  openchamber stop
 }
 
 ### Functions: Docker ##########################################################
