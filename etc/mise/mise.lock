@@ -716,7 +716,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.30"
+version = "2.1.31"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -724,7 +724,7 @@ version = "4.5.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.26.0"
+version = "0.27.0"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@neuralnomads/codenomad"]]
@@ -732,7 +732,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.1"
+version = "1.6.3"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
@@ -759,9 +759,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:522fc07ea24fb57574253de276bd73baf0c141ef962713d60f532d17d0e4ea75", url = "https://github.com/sharkdp/numbat/releases/download/v1.20.0/numbat-v1.20.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.1.49"
+version = "1.1.50"
 backend = "aqua:anomalyco/opencode"
-"platforms.macos-arm64" = { checksum = "sha256:da84308f57520c9f23da74f8967de1ade28b0c1ea0e03d63b7b24d0670191319", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.49/opencode-darwin-arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:08cfa3a1dc10b320e8cacf0efed50a2ae97d28a595e7687ba900d9329327c7da", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.50/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
