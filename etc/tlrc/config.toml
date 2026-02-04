@@ -1,5 +1,4 @@
 [cache]
-dir = "~/Library/Caches/tlrc"
 mirror = "https://github.com/tldr-pages/tldr/releases/latest/download"
 auto_update = true
 defer_auto_update = false
