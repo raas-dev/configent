@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.6](https://github.com/raas-dev/configent/compare/1.202.5...1.202.6) (2026-02-04)
+
+
+### Fixes
+
+* **aliases:** use ifconfig.me for ip aliases ([2e97481](https://github.com/raas-dev/configent/commit/2e974819cf91f6cc904061e7e7dbd95c346ca5ed))
+* **aliases:** use whatismyhostname for ip alias ([67caf8f](https://github.com/raas-dev/configent/commit/67caf8f701659b403d5e7b59de29375f5126544c))
+
 ## [1.202.5](https://github.com/raas-dev/configent/compare/1.202.4...1.202.5) (2026-02-04)
 
 
