@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.3](https://github.com/raas-dev/configent/compare/1.202.2...1.202.3) (2026-02-04)
+
+
+### Fixes
+
+* **aliases:** rename ai_agent to oc_agent ([2dc314a](https://github.com/raas-dev/configent/commit/2dc314ad06de8263ec45ebfb455982cf22d45e43))
+* **aliases:** update openchamber aliases ([250f748](https://github.com/raas-dev/configent/commit/250f7488f30741bef1e3d79c005c444488fffa73))
+
 ## [1.202.2](https://github.com/raas-dev/configent/compare/1.202.1...1.202.2) (2026-02-03)
 
 
