@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.7](https://github.com/raas-dev/configent/compare/1.202.6...1.202.7) (2026-02-05)
+
+
+### Fixes
+
+* **install:** disable ollama installation ([0ccffd9](https://github.com/raas-dev/configent/commit/0ccffd9e27c9dd03819f0860843b1fbaeda4fef5))
+* **oc:** limit .opencode cleanup to json files ([3185f64](https://github.com/raas-dev/configent/commit/3185f64a9bb715c263255f57bdeb2ebf7b1f33ea))
+* **oc:** preserve oc.json during profile switch ([45f7eda](https://github.com/raas-dev/configent/commit/45f7edab030111b98be064cf898b7f809cba7015))
+* **opencode:** disable plannotator integration ([84f8438](https://github.com/raas-dev/configent/commit/84f8438f3fa47dec0151eb3561eb53f6ef101fb4))
+
 ## [1.202.6](https://github.com/raas-dev/configent/compare/1.202.5...1.202.6) (2026-02-04)
 
 
