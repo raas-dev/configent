@@ -178,6 +178,68 @@ calculate_project_hash() {
   fi
 }
 
+# This function is no longer used, kept for reference
+calculate_project_hash_excluding_metadata() {
+  local combined_hash=""
+
+  # Return empty hash if directory doesn't exist
+  if [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
+    echo ""
+    return
+  fi
+
+  # Sort files recursively and calculate combined hash, excluding oc.json
+  while IFS= read -r file; do
+    if [[ -f "$file" ]]; then
+      # Skip oc.json
+      if [[ "$(basename "$file")" != "oc.json" ]]; then
+        combined_hash+=$(hash_file "$file")
+      fi
+    fi
+  done < <(find "$PROJECT_CONFIG_DIR" -type f 2>/dev/null | sort)
+
+  # Return hash of the combined hashes
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "$combined_hash" | md5
+  else
+    echo "$combined_hash" | md5sum | awk '{print $1}'
+  fi
+}
+
+# Calculate hash of project config files that match the profile structure
+# This only hashes files that exist in the profile directory, ignoring other files/subdirs
+calculate_project_hash_matching_profile() {
+  local profile_dir="$1"
+  local combined_hash=""
+
+  # Return empty hash if directory doesn't exist
+  if [[ ! -d "$PROJECT_CONFIG_DIR" ]]; then
+    echo ""
+    return
+  fi
+
+  # For each file in the profile, check if corresponding file exists in project
+  while IFS= read -r profile_file; do
+    if [[ -f "$profile_file" ]]; then
+      # Get relative path from profile directory
+      local rel_path="${profile_file#"$profile_dir"/}"
+      local project_file="$PROJECT_CONFIG_DIR/$rel_path"
+
+      # If corresponding file exists in project, hash it
+      if [[ -f "$project_file" ]]; then
+        combined_hash+=$(hash_file "$project_file")
+      fi
+    fi
+  done < <(find "$profile_dir" -type f | sort)
+
+  # Return hash of the combined hashes
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "$combined_hash" | md5
+  else
+    echo "$combined_hash" | md5sum | awk '{print $1}'
+  fi
+}
+
 # Get current active profile by checking metadata file first, then comparing hashes
 get_current() {
   # First, check if metadata file exists and is valid
@@ -226,6 +288,16 @@ switch_to_profile() {
     exit 1
   fi
 
+  # Calculate hash of profile directory and project directory to check if anything will change
+  # Do this BEFORE any cleanup operations
+  local profile_hash
+  profile_hash=$(calculate_profile_hash "$profile_dir")
+
+  local project_hash=""
+  if [[ -d "$PROJECT_CONFIG_DIR" ]]; then
+    project_hash=$(calculate_project_hash_matching_profile "$profile_dir")
+  fi
+
   # Warn if .opencode exists but oc.json doesn't (unmanaged config)
   if [[ -d "$PROJECT_CONFIG_DIR" && ! -f "$PROFILE_METADATA_FILE" ]]; then
     if [[ "$force_yes" != "true" ]]; then
@@ -240,7 +312,7 @@ switch_to_profile() {
       fi
     fi
     # Clean slate for unmanaged config - delete only .json and .jsonc files, preserve everything else
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f \( -name "*.json" -o -name "*.jsonc" \) -delete 2>/dev/null || true
+    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
   fi
 
   # Confirm reset if init command is used on oc-managed project (has oc.json)
@@ -256,7 +328,8 @@ switch_to_profile() {
       fi
     fi
     # Clean slate for re-init - delete only .json and .jsonc files, preserve everything else
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f \( -name "*.json" -o -name "*.jsonc" \) -delete 2>/dev/null || true
+    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
+    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
   fi
 
   echo ""
@@ -328,8 +401,13 @@ switch_to_profile() {
 
   # Copy all files and directories from the selected profile directory to the project config directory
   if cp -r "$profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
-    # Save profile metadata
-    save_profile_metadata "$profile_name" "$profile_dir"
+    # Only save metadata if profile hash differs from project hash (something changed)
+    # DEBUG: Uncomment next line to see hashes
+    # echo "DEBUG: profile_hash='$profile_hash' project_hash='$project_hash'"
+    if [[ "$profile_hash" != "$project_hash" ]]; then
+      # Save profile metadata
+      save_profile_metadata "$profile_name" "$profile_dir"
+    fi
 
     if [[ "$is_init" == "true" || "$is_init_cmd" == "true" ]]; then
       echo -e "${GREEN}Initialized with: ${BOLD}$profile_name${NC}"
