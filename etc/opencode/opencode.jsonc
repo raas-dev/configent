@@ -4,6 +4,7 @@
   "mcp": {},
   "permission": {
     "bash": {
+      "sudo *": "deny",
       "rm *": "deny",
       "cargo clean *": "deny",
       "git clean *": "deny",
