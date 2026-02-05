@@ -4,15 +4,14 @@
   "mcp": {},
   "permission": {
     "bash": {
-      "git commit *": "ask",
-      "git push *": "ask",
-      "git checkout *": "deny",
+      "rm *": "deny",
+      "cargo clean *": "deny",
       "git clean *": "deny",
-      "git stash *": "deny",
       "git reset *": "deny",
       "git revert *": "deny",
-      "cargo clean *": "deny",
-      "rm *": "deny"
+      "git stash *": "deny",
+      "git commit *": "ask",
+      "git push *": "ask"
     },
     "external_directory": {
       "/tmp/**": "allow",
