@@ -15,7 +15,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "haiku",
+  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline",
