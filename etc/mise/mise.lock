@@ -811,7 +811,7 @@ version = "4.5.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.27.1"
+version = "0.27.2"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@neuralnomads/codenomad"]]
@@ -848,6 +848,7 @@ backend = "aqua:sharkdp/numbat"
 [[tools.opencode]]
 version = "1.1.52"
 backend = "aqua:anomalyco/opencode"
+"platforms.linux-x64" = { checksum = "sha256:d2f402cf19dd6b0d3248fbc848609345075fbf4956c9b75e5957a930d20aefb8", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.52/opencode-linux-x64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:72e3cb488e617cbe5258e848c58fff447599705dabe2c18306a5fd79e614978b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.52/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
