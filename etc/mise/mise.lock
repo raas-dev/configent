@@ -324,6 +324,7 @@ backend = "github:abhimanyu003/sttr"
 [[tools."github:asyrjasalo/augent"]]
 version = "0.6.6"
 backend = "github:asyrjasalo/augent"
+"platforms.linux-x64" = { checksum = "sha256:b769fa8fb246a6a2ebddf204cc5b89db58bb4a0bad31b0476faa98aebf294e49", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.6/augent-v0.6.6-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/351148823"}
 "platforms.macos-arm64" = { checksum = "sha256:0621fc65cbed98ca106f200798b1881d86203bf399ef5dba5139f41d56e62c5c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.6/augent-v0.6.6-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/351148824"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
@@ -1034,6 +1035,7 @@ backend = "asdf:tmux"
 [[tools.trivy]]
 version = "0.69.1"
 backend = "aqua:aquasecurity/trivy"
+"platforms.linux-x64" = { checksum = "sha256:dd93975bc1e58053810a9bafea89923e5df42ddd3f99905fdf840fd797145157", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_Linux-64bit.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:ae5ce4a7b9bf2bd3794ccb3c257993526fa47470b3814d729a73788d36aff3d0", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_macOS-ARM64.tar.gz"}
 
 [[tools.uv]]
