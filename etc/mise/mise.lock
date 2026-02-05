@@ -322,19 +322,9 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
 [[tools."github:asyrjasalo/augent"]]
-version = "0.6.5"
+version = "0.6.6"
 backend = "github:asyrjasalo/augent"
-"platforms.linux-arm64" = { checksum = "sha256:02cd4f1727299a8d845bb743af50dad9932e6759f486e34b911b1400ac8bd7cc", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171485"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:02cd4f1727299a8d845bb743af50dad9932e6759f486e34b911b1400ac8bd7cc", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171485"}
-"platforms.linux-x64" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
-"platforms.linux-x64-musl" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:f430ad72d9be8ff8a0990f337c462a42e6c15e9d1a7a7f386e8335b106e5029d", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171491"}
-"platforms.macos-arm64" = { checksum = "sha256:0af5840e8ee46625da240b1d8a812a24b9e1ee1239d4eb980f18e01a781b4a62", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171487"}
-"platforms.macos-x64" = { checksum = "sha256:df0f194057b9915996d6f049d23eab4ceebfe0cf4192eb297ce89c1a71250fde", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171489"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:df0f194057b9915996d6f049d23eab4ceebfe0cf4192eb297ce89c1a71250fde", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171489"}
-"platforms.windows-x64" = { checksum = "sha256:6d92a7dc42c4ea9511449759c678deed3fc169ede3885e4935d29f8a302baadc", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171486"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:6d92a7dc42c4ea9511449759c678deed3fc169ede3885e4935d29f8a302baadc", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.5/augent-v0.6.5-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/350171486"}
+"platforms.macos-arm64" = { checksum = "sha256:0621fc65cbed98ca106f200798b1881d86203bf399ef5dba5139f41d56e62c5c", url = "https://github.com/asyrjasalo/augent/releases/download/v0.6.6/augent-v0.6.6-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/augent/releases/assets/351148824"}
 
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.4.0"
@@ -1042,19 +1032,9 @@ version = "3.6a"
 backend = "asdf:tmux"
 
 [[tools.trivy]]
-version = "0.69.0"
+version = "0.69.1"
 backend = "aqua:aquasecurity/trivy"
-"platforms.linux-arm64" = { checksum = "sha256:425e883f37cad0b512478df2803f58532e7d235267303375a3d0f97e4790a1ca", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-ARM64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:425e883f37cad0b512478df2803f58532e7d235267303375a3d0f97e4790a1ca", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-ARM64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:fff5813d6888fa6f8bd40042a08c4f072b3e65aec9f13dd9ab1d7b26146ad046", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-64bit.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:fff5813d6888fa6f8bd40042a08c4f072b3e65aec9f13dd9ab1d7b26146ad046", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-64bit.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:fff5813d6888fa6f8bd40042a08c4f072b3e65aec9f13dd9ab1d7b26146ad046", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-64bit.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:fff5813d6888fa6f8bd40042a08c4f072b3e65aec9f13dd9ab1d7b26146ad046", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_Linux-64bit.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:bd35348d963d3f661ff4d7d138e65a75fedbfade0378689f3a349c824c6e5b75", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_macOS-ARM64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:4264e4fcc73259de36a68c112a586d65bf6cd488ef2aea857f37d00d8cb5c4e6", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_macOS-64bit.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:4264e4fcc73259de36a68c112a586d65bf6cd488ef2aea857f37d00d8cb5c4e6", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_macOS-64bit.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:4b34440f0a854428e846b1d2329eede3f0663bec8eff865ae2dffca42542a076", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_windows-64bit.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:4b34440f0a854428e846b1d2329eede3f0663bec8eff865ae2dffca42542a076", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_windows-64bit.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:ae5ce4a7b9bf2bd3794ccb3c257993526fa47470b3814d729a73788d36aff3d0", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_macOS-ARM64.tar.gz"}
 
 [[tools.uv]]
 version = "0.9.30"
