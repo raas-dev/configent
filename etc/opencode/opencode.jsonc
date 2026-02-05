@@ -8,7 +8,7 @@
       "rm *": "deny",
       "cargo clean *": "deny",
       "git clean *": "deny",
-      "git reset *": "deny",
+      "git reset --hard *": "deny",
       "git revert *": "deny",
       "git stash *": "deny",
       "git commit *": "ask",
