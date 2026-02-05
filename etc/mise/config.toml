@@ -112,7 +112,6 @@ bun = 'latest'
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 'npm:@openchamber/web' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
-'github:backnotprop/plannotator' = 'latest'
 
 # other ai coding platforms
 'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
