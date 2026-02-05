@@ -807,7 +807,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.3"
+version = "1.6.4"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
@@ -1036,19 +1036,9 @@ backend = "aqua:aquasecurity/trivy"
 "platforms.windows-x64-baseline" = { checksum = "sha256:4b34440f0a854428e846b1d2329eede3f0663bec8eff865ae2dffca42542a076", url = "https://github.com/aquasecurity/trivy/releases/download/v0.69.0/trivy_0.69.0_windows-64bit.zip"}
 
 [[tools.uv]]
-version = "0.9.29"
+version = "0.9.30"
 backend = "aqua:astral-sh/uv"
-"platforms.linux-arm64" = { checksum = "sha256:b1edc94f5d6c36bb28a20f8c8afb400e55a428fcf396b03bf78cb7394f75077c", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:b1edc94f5d6c36bb28a20f8c8afb400e55a428fcf396b03bf78cb7394f75077c", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:44c93c73e8870e003bda17ab50d433e27d201d0cb28d2bb75351ef1497ffa9db", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:44c93c73e8870e003bda17ab50d433e27d201d0cb28d2bb75351ef1497ffa9db", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:44c93c73e8870e003bda17ab50d433e27d201d0cb28d2bb75351ef1497ffa9db", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:44c93c73e8870e003bda17ab50d433e27d201d0cb28d2bb75351ef1497ffa9db", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:0729ddd5c02df33669b03627aa5d9ac7cde4421657f808d54585e3cda944bb55", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:d251e48db2a962272a2efeb2771c82c02e40f473193a255e8e5c05eb61112139", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:d251e48db2a962272a2efeb2771c82c02e40f473193a255e8e5c05eb61112139", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:9825b1a5955d8a432b664e56660641aac8886ed30cd9c59a94aacc68ae9116ce", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:9825b1a5955d8a432b664e56660641aac8886ed30cd9c59a94aacc68ae9116ce", url = "https://github.com/astral-sh/uv/releases/download/0.9.29/uv-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:03a5d9ec7f7d588446b2ec226d13ff6300055e55365eca8f3fab39f342b0e805", url = "https://github.com/astral-sh/uv/releases/download/0.9.30/uv-aarch64-apple-darwin.tar.gz"}
 
 [[tools.viddy]]
 version = "1.3.0"
