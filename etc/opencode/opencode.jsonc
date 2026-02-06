@@ -9,6 +9,7 @@
       "git reset --hard *": "deny",
       "git revert *": "deny",
       "git stash *": "deny",
+      "git checkout *": "ask",
       "git commit *": "ask",
       "git push *": "ask",
       "git reset *": "ask",
