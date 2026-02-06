@@ -15,6 +15,5 @@
   "plugin": [
     "oh-my-opencode",
     "opencode-pty",
-    "@franlol/opencode-md-table-formatter"
-  ]
+    "opencode-scheduler"  ]
 }
