@@ -313,6 +313,7 @@ switch_to_profile() {
     fi
     # Clean slate for unmanaged config - delete only .json and .jsonc files, preserve everything else
     find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
+    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
   fi
 
   # Confirm reset if init command is used on oc-managed project (has oc.json)
