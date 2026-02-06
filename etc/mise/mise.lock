@@ -828,7 +828,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.4"
+version = "1.6.5"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:opencode-ai"]]
@@ -935,9 +935,9 @@ backend = "aqua:pre-commit/pre-commit"
 "platforms.windows-x64-baseline" = { checksum = "sha256:19d00ba35cbf9c04dc3736cd8bb641e8633f3eddd4cedde71809574ae68a2cd1", url = "https://github.com/pre-commit/pre-commit/releases/download/v4.5.1/pre-commit-4.5.1.pyz"}
 
 [[tools.prek]]
-version = "0.3.1"
+version = "0.3.2"
 backend = "aqua:j178/prek"
-"platforms.macos-arm64" = { checksum = "sha256:a22c879109ba89c260b16602737ffb81c35eb493e988124a4c2875c549390ede", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:9705b3e3df6db7f1128058fb4f5198736553e6c3957afe0810fa7e974679c88c", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-aarch64-apple-darwin.tar.gz"}
 
 [[tools.python]]
 version = "3.14.2"
