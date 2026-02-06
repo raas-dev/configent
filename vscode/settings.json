@@ -60,31 +60,43 @@
       "label": "Multiplexer"
     },
     {
-      "command": "exec aoe",
-      "id": "aoe",
-      "label": "Agent of Empires"
-    },
-    {
       "args": [
+        "-i",
+        "-c",
         "ai"
       ],
-      "command": "exec tm zsh -i -c",
+      "command": "exec zsh",
       "id": "chat",
       "label": "Chat"
     },
     {
       "args": [
+        "-i",
+        "-c",
         "oc_agent",
         "computer-use"
       ],
-      "command": "exec tm zsh -i -c",
+      "command": "exec zsh",
       "id": "computer-use",
       "label": "Computer Use"
     },
     {
-      "command": "clear",
-      "id": "shell",
-      "label": "Shell"
+      "command": "exec lazyssh",
+      "id": "lazyssh",
+      "label": "lazyssh"
+    },
+    {
+      "command": "exec ssh",
+      "args": [
+        "-t",
+        "dev",
+        "zsh",
+        "-i",
+        "-c",
+        "tm"
+      ],
+      "id": "ssh",
+      "label": "ssh"
     }
   ],
   "agentterminal.rememberSelection": false,
