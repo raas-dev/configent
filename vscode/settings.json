@@ -96,7 +96,7 @@
         "tm"
       ],
       "id": "ssh",
-      "label": "ssh"
+      "label": "ssh dev"
     }
   ],
   "agentterminal.rememberSelection": false,
