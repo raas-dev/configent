@@ -935,19 +935,9 @@ backend = "aqua:pre-commit/pre-commit"
 "platforms.windows-x64-baseline" = { checksum = "sha256:19d00ba35cbf9c04dc3736cd8bb641e8633f3eddd4cedde71809574ae68a2cd1", url = "https://github.com/pre-commit/pre-commit/releases/download/v4.5.1/pre-commit-4.5.1.pyz"}
 
 [[tools.prek]]
-version = "0.3.1"
+version = "0.3.2"
 backend = "aqua:j178/prek"
-"platforms.linux-arm64" = { checksum = "sha256:8c14e721fa283be03a582048255c1e6815163ad11d0b0608d03bfbdb69977dc2", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:8c14e721fa283be03a582048255c1e6815163ad11d0b0608d03bfbdb69977dc2", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:dd04fb0c261528c5b00a49c70845d5eb32b09c50fff81f53f742e6a36b5299fe", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:dd04fb0c261528c5b00a49c70845d5eb32b09c50fff81f53f742e6a36b5299fe", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:dd04fb0c261528c5b00a49c70845d5eb32b09c50fff81f53f742e6a36b5299fe", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:dd04fb0c261528c5b00a49c70845d5eb32b09c50fff81f53f742e6a36b5299fe", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:a22c879109ba89c260b16602737ffb81c35eb493e988124a4c2875c549390ede", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:cfd25f3b2ce65ad26274e3a20cc53308614d1b6f46d8c18429673aa4dcff6528", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:cfd25f3b2ce65ad26274e3a20cc53308614d1b6f46d8c18429673aa4dcff6528", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:1e7f41acb2ad26f691b2cabe2d8283539fb030d33885da537c4203099716b75f", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:1e7f41acb2ad26f691b2cabe2d8283539fb030d33885da537c4203099716b75f", url = "https://github.com/j178/prek/releases/download/v0.3.1/prek-x86_64-pc-windows-msvc.zip"}
+"platforms.linux-x64" = { checksum = "sha256:7960379beca845367258ce4080a0ce1754d88846d9cfe273106f272442729eff", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-unknown-linux-musl.tar.gz"}
 
 [[tools.python]]
 version = "3.14.2"
