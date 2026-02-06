@@ -38,6 +38,7 @@ zoxide = 'latest'
 
 # scripting
 argc = 'latest'
+ast-grep = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
