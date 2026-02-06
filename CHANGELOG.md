@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.8](https://github.com/raas-dev/configent/compare/1.202.7...1.202.8) (2026-02-06)
+
+
+### Fixes
+
+* **oc:** remove .jsonc files during reset ([27e17df](https://github.com/raas-dev/configent/commit/27e17dff69130ffa377187abfaf8eab81beb4d21))
+* **tm:** use hostname for session name ([8536779](https://github.com/raas-dev/configent/commit/8536779c308ccca9f832a1f3cbb59d77c5139ed0))
+* **tmux:** remove tmux-open plugin and shortcuts ([6241c2b](https://github.com/raas-dev/configent/commit/6241c2b60d372652dbe63bc14bdda82860e5cf50))
+
 ## [1.202.7](https://github.com/raas-dev/configent/compare/1.202.6...1.202.7) (2026-02-05)
 
 
