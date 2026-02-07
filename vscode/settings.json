@@ -57,7 +57,7 @@
     {
       "command": "exec tm",
       "id": "tm",
-      "label": "Multiplexer"
+      "label": "localhost"
     },
     {
       "args": [
