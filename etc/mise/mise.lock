@@ -430,19 +430,9 @@ backend = "github:dalance/procs"
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.23.0"
+version = "0.23.1"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:a87d9a666333103f51b69ce85c7116a29f2d0406f8f2019059ac1ddb70e3ec70", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457900"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:a87d9a666333103f51b69ce85c7116a29f2d0406f8f2019059ac1ddb70e3ec70", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457900"}
-"platforms.linux-x64" = { checksum = "sha256:26c1d121ad0c041f751d193afae0274024913f3d1d30300449f7361aad7f61cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457914"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:26c1d121ad0c041f751d193afae0274024913f3d1d30300449f7361aad7f61cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457914"}
-"platforms.linux-x64-musl" = { checksum = "sha256:26c1d121ad0c041f751d193afae0274024913f3d1d30300449f7361aad7f61cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457914"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:26c1d121ad0c041f751d193afae0274024913f3d1d30300449f7361aad7f61cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457914"}
-"platforms.macos-arm64" = { checksum = "sha256:759c10787f56bd3fbccb06809332cada0c87905410a390422ed63e6ce0e96603", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457896"}
-"platforms.macos-x64" = { checksum = "sha256:8351bdd004d484b0fc5b16d844466b8a80aed7e64ea5024f7f6724a95ff10ad6", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457906"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:8351bdd004d484b0fc5b16d844466b8a80aed7e64ea5024f7f6724a95ff10ad6", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457906"}
-"platforms.windows-x64" = { checksum = "sha256:98bfd7f9beec23c7f4d7e044a65869b65e202260402d55a3d0847eb46d920606", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457911"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:98bfd7f9beec23c7f4d7e044a65869b65e202260402d55a3d0847eb46d920606", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/351457911"}
+"platforms.macos-arm64" = { checksum = "sha256:abd07fcb117d6e9352b293cd5882cdef57048c690dc69106655a35ec8b01850d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/352093245"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
