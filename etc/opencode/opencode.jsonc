@@ -9,6 +9,10 @@
       "git reset --hard *": "deny",
       "git revert *": "deny",
       "git stash *": "deny",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "git show *": "allow",
+      "git status *": "allow",
       "git *": "ask",
       "rm *": "ask"
     },
