@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.202.9](https://github.com/raas-dev/configent/compare/1.202.8...1.202.9) (2026-02-07)
+
+
+### Fixes
+
+* **cleanup:** remove aichat and gptme configs ([c7a36bd](https://github.com/raas-dev/configent/commit/c7a36bd7ec9c570cb848ab284f2add290631a372))
+
 ## [1.202.8](https://github.com/raas-dev/configent/compare/1.202.7...1.202.8) (2026-02-06)
 
 
