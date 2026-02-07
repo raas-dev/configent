@@ -285,14 +285,6 @@ export VERCEL_TELEMETRY_DISABLED=1
 
 ### ai #########################################################################
 
-# aichat
-export AICHAT_CONFIG_DIR="$HOME/.config/aichat"
-export AICHAT_FUNCTIONS_DIR="$HOME/.config/aichat/functions"
-export AICHAT_ROLES_DIR="$HOME/.config/configent/prompts"
-
-# prompts-mcp
-export PROMPTS_DIR="$HOME/.config/configent/prompts"
-
 # code-mode-mcp (https://github.com/universal-tool-calling-protocol/code-mode)
 export UTCP_CONFIG_FILE="$HOME/.config/configent/utcp/.utcp_config.json"
 

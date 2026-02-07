@@ -125,7 +125,6 @@ uv = 'latest'
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 #'pipx:cfn-lint' = 'latest'
 'pipx:glances' = { version = 'latest', extras = "containers,gpu,web,wifi" }
-#'pipx:gptme' = { version = 'latest', uvx_args = '--with gptme-rag', extras = 'all', postinstall = "~/.local/configent/bin/postinstall_gptme" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
 'pipx:sncli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_sncli" }
