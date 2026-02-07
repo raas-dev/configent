@@ -72,6 +72,18 @@ mkdir -p "$HOME/.config/opencode/skills"
 rm -rf "$HOME/.config/opencode/skills"
 ln -sfnv "$config_path/opencode/skills" "$HOME/.config/opencode/skills"
 
+# plugins dir
+if [ ! -r "$backup_path/.config/plugins" ]; then
+  if [ -r "$HOME/.config/opencode/plugins" ]; then
+    mkdir -p "$backup_path/.config/plugins"
+    cp -RP "$HOME/.config/opencode/plugins" \
+      "$backup_path/.config/plugins"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode/plugins"
+rm -rf "$HOME/.config/opencode/plugins"
+ln -sfnv "$config_path/opencode/plugins" "$HOME/.config/opencode/plugins"
+
 # profiles dir
 if [ ! -r "$backup_path/.config/profiles" ]; then
   if [ -r "$HOME/.config/opencode/profiles" ]; then
