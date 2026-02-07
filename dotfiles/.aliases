@@ -451,12 +451,6 @@ alias promptfoo='bunx promptfoo'
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
 
-### OpenChamber ################################################################
-
-alias ocu='openchamber serve --daemon'
-alias ocs='openchamber status'
-alias ocd='openchamber stop'
-
 ### Functions: AI ##############################################################
 
 ai() {
