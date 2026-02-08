@@ -105,8 +105,9 @@ node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 
 # ai tools
-"github:asyrjasalo/augent" = "latest"
-"github:asyrjasalo/dynamic-mcp" = "latest"
+'github:asyrjasalo/augent' = 'latest'
+'github:asyrjasalo/dynamic-mcp' = 'latest'
+'github:vercel-labs/agent-browser' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 
 # opencode
