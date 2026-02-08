@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.203.0](https://github.com/raas-dev/configent/compare/1.202.9...1.203.0) (2026-02-08)
+
+
+### Features
+
+* **profile:** add worktrunk shell init ([7ce6a21](https://github.com/raas-dev/configent/commit/7ce6a21fa130734e93d79b42778e2c2a8603f0a4))
+
+
+### Fixes
+
+* **plugins:** force full file reads ([c23040c](https://github.com/raas-dev/configent/commit/c23040cb2431e3e9187a121150a5202cedcf0933))
+
 ## [1.202.9](https://github.com/raas-dev/configent/compare/1.202.8...1.202.9) (2026-02-07)
 
 
