@@ -3,6 +3,10 @@
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1"
   },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Bash",
@@ -15,15 +19,13 @@
     ],
     "defaultMode": "acceptEdits"
   },
-
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
   "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline",
     "padding": 0
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
   }
 }
