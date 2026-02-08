@@ -861,6 +861,10 @@ backend = "npm:@neuralnomads/codenomad"
 version = "1.6.5"
 backend = "npm:@openchamber/web"
 
+[[tools."npm:agent-browser"]]
+version = "0.9.1"
+backend = "npm:agent-browser"
+
 [[tools."npm:opencode-ai"]]
 version = "1.1.49"
 backend = "npm:opencode-ai"
@@ -868,6 +872,10 @@ backend = "npm:opencode-ai"
 [[tools."npm:openskills"]]
 version = "1.3.0"
 backend = "npm:openskills"
+
+[[tools."npm:vercel-labs/agent-browser"]]
+version = "0.9.1"
+backend = "npm:vercel-labs/agent-browser"
 
 [[tools.numbat]]
 version = "1.22.0"

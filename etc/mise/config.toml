@@ -107,8 +107,8 @@ bun = 'latest'
 # ai tools
 'github:asyrjasalo/augent' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
-'github:vercel-labs/agent-browser' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
+'npm:agent-browser' = 'latest'
 
 # opencode
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
