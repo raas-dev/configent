@@ -1,6 +1,6 @@
 {
   "context": {
-    "fileName": ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]
+    "fileName": ["AGENTS.md"]
   },
   "general": {
     "disableAutoUpdate": true,
