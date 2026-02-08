@@ -197,6 +197,10 @@ export MCAT_THEME="ayu"
 # completions
 command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
 
+### worktrunk ##################################################################
+
+command -v wt >/dev/null && eval "$(wt config shell init "${SHELL##*/}")"
+
 ### delta ######################################################################
 
 command -v delta >/dev/null && export GIT_PAGER="delta"
