@@ -10,10 +10,15 @@
       "WebFetch"
     ],
     "ask": [
-      "Bash(git:*)",
-      "Bash(rm:*)"
+      "Bash(git *)",
+      "Bash(rm *)"
     ],
     "defaultMode": "acceptEdits"
+  },
+
+  "attribution": {
+    "commit": "",
+    "pr": ""
   },
   "model": "sonnet",
   "statusLine": {
