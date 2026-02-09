@@ -288,12 +288,6 @@ switch_to_profile() {
     exit 1
   fi
 
-  # Safety check: ensure PROJECT_ROOT_DIR is not empty to prevent rm -rf /
-  if [[ -z "$PROJECT_ROOT_DIR" || "$PROJECT_ROOT_DIR" == "/" ]]; then
-    echo -e "${YELLOW}Error: PROJECT_ROOT_DIR is empty or root. Cannot proceed safely.${NC}" >&2
-    exit 1
-  fi
-
   # Calculate hash of profile directory and project directory to check if anything will change
   # Do this BEFORE any cleanup operations
   local profile_hash
@@ -319,8 +313,8 @@ switch_to_profile() {
       fi
     fi
     # Clean slate for unmanaged config - delete only .json and .jsonc files, preserve everything else
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
+    find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
+    find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
 
     # Remove node_modules, bun.lock, and package.json from .opencode directory
     rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
@@ -342,8 +336,8 @@ switch_to_profile() {
       fi
     fi
     # Clean slate for re-init - delete only .json and .jsonc files, preserve everything else
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
-    find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
+    find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
+    find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
 
     # Remove node_modules, bun.lock, and package.json from .opencode directory
     rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
@@ -404,8 +398,8 @@ switch_to_profile() {
       local basename_no_ext="${filename%.*}"
       local ext="${filename##*.}"
 
-      # Remove any files with the same basename but different extension
-      for existing_file in "$PROJECT_ROOT_DIR/.opencode"/"$basename_no_ext".*; do
+      # Remove any files with same basename but different extension
+      for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
         if [[ -f "$existing_file" ]]; then
           local existing_ext="${existing_file##*.}"
           if [[ "$existing_ext" != "$ext" ]]; then
