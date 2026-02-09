@@ -13,8 +13,8 @@
   bda = !"git branch --merged | grep -v '\\*' | xargs -n 1 git branch --delete"
   bm = branch --move --force
   ca = !"git add --all && git c"
-  cm = commit --amend
-  cam = !"git add --all && git commit --amend"
+  cm = commit --amend --no-edit
+  cam = !"git add --all && git commit --amend --no-edit"
   co = checkout
   f = fetch --all --tags
   i = pull --rebase --recurse-submodules
