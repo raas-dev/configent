@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.0](https://github.com/raas-dev/configent/compare/1.203.0...1.204.0) (2026-02-09)
+
+
+### Features
+
+* **skills:** add scheduled-job-best-practices skill ([c999eb5](https://github.com/raas-dev/configent/commit/c999eb50d5ad6d9f64a8cb599109f5f05950d3d1))
+
+
+### Fixes
+
+* **oc:** prevent root rm and remove node_modules ([f880ceb](https://github.com/raas-dev/configent/commit/f880ceba53ee776763123fac42030da1672fadcf))
+* **oc:** use .opencode for cleanup ([7353aaf](https://github.com/raas-dev/configent/commit/7353aaf78c0e97cb96e95bc6cc88235c0e5ff812))
+* **oc:** use PROJECT_CONFIG_DIR for cleanup ([04a63d5](https://github.com/raas-dev/configent/commit/04a63d54979588b8f243da85780723061167d1a9))
+
 ## [1.203.0](https://github.com/raas-dev/configent/compare/1.202.9...1.203.0) (2026-02-08)
 
 
