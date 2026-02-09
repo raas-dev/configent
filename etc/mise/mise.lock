@@ -863,7 +863,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.5"
+version = "1.6.6"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
@@ -883,19 +883,19 @@ version = "0.9.1"
 backend = "npm:vercel-labs/agent-browser"
 
 [[tools.numbat]]
-version = "1.22.0"
+version = "1.23.0"
 backend = "aqua:sharkdp/numbat"
-"platforms.linux-arm64" = { checksum = "sha256:570457ab79b824e7385afeca641d5f03e2c75de3886f3f6f2638748ae99bf71d", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-arm-unknown-linux-musleabihf.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:570457ab79b824e7385afeca641d5f03e2c75de3886f3f6f2638748ae99bf71d", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-arm-unknown-linux-musleabihf.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:0c0c35f6ad54f31c56c5f0d3f77e1a97f5091ff669eb1ad893ab6da24fc9d1db", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:0c0c35f6ad54f31c56c5f0d3f77e1a97f5091ff669eb1ad893ab6da24fc9d1db", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:0c0c35f6ad54f31c56c5f0d3f77e1a97f5091ff669eb1ad893ab6da24fc9d1db", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:0c0c35f6ad54f31c56c5f0d3f77e1a97f5091ff669eb1ad893ab6da24fc9d1db", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:86766a60e98918313d9f191cbba66b943bafda347689cfb6c72c4da4206fc121", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:7f8413cf586cac2345ff699e0411479a87d7e3d965603cbec5f44d3239dce76e", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7f8413cf586cac2345ff699e0411479a87d7e3d965603cbec5f44d3239dce76e", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:114de29e83b93d94a65bee01eeea84f1bd2cac418353e76081721bbd02444220", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:114de29e83b93d94a65bee01eeea84f1bd2cac418353e76081721bbd02444220", url = "https://github.com/sharkdp/numbat/releases/download/v1.22.0/numbat-v1.22.0-x86_64-pc-windows-msvc.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:693e03ed8cdc8dbd7dc1d916504ea1fb9bcf253caff85058bdc01e8b2e099eaa", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-arm-unknown-linux-musleabihf.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:693e03ed8cdc8dbd7dc1d916504ea1fb9bcf253caff85058bdc01e8b2e099eaa", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-arm-unknown-linux-musleabihf.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:09efa9dfbff4d983fb0484e2bfc126df9d0cbedede627d22ac61141457b5daa1", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:09efa9dfbff4d983fb0484e2bfc126df9d0cbedede627d22ac61141457b5daa1", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:09efa9dfbff4d983fb0484e2bfc126df9d0cbedede627d22ac61141457b5daa1", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:09efa9dfbff4d983fb0484e2bfc126df9d0cbedede627d22ac61141457b5daa1", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:58dabb8ca9476009d03f2a3d3993768fa2946657c6423eed8ed31d31cc6e35cf", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:e50d7fc908d56f97b9de1e509039cf9d9ae31a5d4280dd2b58f201c17f194de5", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-apple-darwin.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:e50d7fc908d56f97b9de1e509039cf9d9ae31a5d4280dd2b58f201c17f194de5", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-apple-darwin.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
 version = "1.1.53"
