@@ -109,6 +109,7 @@ bun = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 'npm:agent-browser' = 'latest'
+'npm:ralphy-cli' = 'latest'
 
 # opencode
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }

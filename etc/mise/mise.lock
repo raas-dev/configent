@@ -878,6 +878,10 @@ backend = "npm:opencode-ai"
 version = "1.3.0"
 backend = "npm:openskills"
 
+[[tools."npm:ralphy-cli"]]
+version = "4.7.2"
+backend = "npm:ralphy-cli"
+
 [[tools."npm:vercel-labs/agent-browser"]]
 version = "0.9.1"
 backend = "npm:vercel-labs/agent-browser"
