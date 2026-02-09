@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.1](https://github.com/raas-dev/configent/compare/1.204.0...1.204.1) (2026-02-09)
+
+
+### Fixes
+
+* **opencode:** remove smart-codebase plugin ([2619d4f](https://github.com/raas-dev/configent/commit/2619d4f3ff2e5e35bafe7482c1de55feee7edd57))
+
 ## [1.204.0](https://github.com/raas-dev/configent/compare/1.203.0...1.204.0) (2026-02-09)
 
 
