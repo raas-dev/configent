@@ -12,6 +12,7 @@
   "plugin": [
     "oh-my-opencode",
     "opencode-pty",
-    "opencode-scheduler"
+    "opencode-scheduler",
+    "smart-codebase"
   ]
 }
