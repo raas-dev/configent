@@ -310,7 +310,7 @@ switch_to_profile() {
       echo ""
       echo -e "${YELLOW}Warning: .opencode directory exists but is not managed by oc.${NC}"
       echo -e "${YELLOW}Commit your .opencode directory first. Proceeding will overwrite the .opencode directory${NC}"
-      echo -e "${YELLOW}and remove node_modules, bun.lock, and package.json from the project root.${NC}"
+      echo -e "${YELLOW}and remove node_modules, bun.lock, and package.json from the .opencode directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_unmanaged
       if [[ ! "$confirm_unmanaged" =~ ^[Yy]$ ]]; then
@@ -322,10 +322,10 @@ switch_to_profile() {
     find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
     find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
 
-    # Remove node_modules, bun.lock, and package.json from project root
-    rm -rf "$PROJECT_ROOT_DIR/node_modules" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/bun.lock" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/package.json" 2>/dev/null || true
+    # Remove node_modules, bun.lock, and package.json from .opencode directory
+    rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/bun.lock" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/package.json" 2>/dev/null || true
   fi
 
   # Confirm reset if init command is used on oc-managed project (has oc.json)
@@ -333,7 +333,7 @@ switch_to_profile() {
     if [[ "$force_yes" != "true" ]]; then
       echo ""
       echo -e "${YELLOW}Project already initialized. Re-initializing will overwrite .json and .jsonc files in the .opencode directory${NC}"
-      echo -e "${YELLOW}and remove node_modules, bun.lock, and package.json from the project root.${NC}"
+      echo -e "${YELLOW}and remove node_modules, bun.lock, and package.json from the .opencode directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_reset
       if [[ ! "$confirm_reset" =~ ^[Yy]$ ]]; then
@@ -345,10 +345,10 @@ switch_to_profile() {
     find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.json" ! -name "oc.json" -delete 2>/dev/null || true
     find "$PROJECT_ROOT_DIR/.opencode" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
 
-    # Remove node_modules, bun.lock, and package.json from project root
-    rm -rf "$PROJECT_ROOT_DIR/node_modules" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/bun.lock" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/package.json" 2>/dev/null || true
+    # Remove node_modules, bun.lock, and package.json from .opencode directory
+    rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/bun.lock" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/package.json" 2>/dev/null || true
   fi
 
   echo ""
@@ -388,12 +388,12 @@ switch_to_profile() {
     fi
   fi
 
-  # Remove node_modules, bun.lock, and package.json from project root when switching profiles
+  # Remove node_modules, bun.lock, and package.json from .opencode directory when switching profiles
   # Only do this if is_init_cmd is false (use command) and we're not already active
   if [[ "$is_init_cmd" == "false" && "$profile_name" != "$current" ]]; then
-    rm -rf "$PROJECT_ROOT_DIR/node_modules" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/bun.lock" 2>/dev/null || true
-    rm -f "$PROJECT_ROOT_DIR/package.json" 2>/dev/null || true
+    rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/bun.lock" 2>/dev/null || true
+    rm -f "$PROJECT_CONFIG_DIR/package.json" 2>/dev/null || true
   fi
 
   # Remove conflicting files from the project config directory before copying
