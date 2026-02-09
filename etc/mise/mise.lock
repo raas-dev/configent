@@ -429,6 +429,11 @@ backend = "github:dalance/procs"
 "platforms.windows-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
+[[tools."github:joshmedeski/sesh"]]
+version = "2.22.0"
+backend = "github:joshmedeski/sesh"
+"platforms.macos-arm64" = { checksum = "sha256:831a375ed140bbb79de0caf237a88300260823fbc713ca7ab4d0c7d636bfac67", url = "https://github.com/joshmedeski/sesh/releases/download/v2.22.0/sesh_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/joshmedeski/sesh/releases/assets/349615504"}
+
 [[tools."github:max-sixty/worktrunk"]]
 version = "0.23.1"
 backend = "github:max-sixty/worktrunk"

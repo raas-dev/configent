@@ -14,7 +14,9 @@
       "/private/tmp/**": "allow"
     }
   },
-  "plugin": [],
+  "plugin": [
+    "@franlol/opencode-md-table-formatter"
+  ],
   "share": "disabled",
   "theme": "ayu",
   "tui": {
