@@ -6,13 +6,8 @@
     "bash": {
       "sudo *": "deny",
       "git clean *": "deny",
-      "git checkout *": "deny",
       "git revert *": "deny",
-      "git stash *": "deny",
-      "git push *": "ask",
-      "git reset *": "ask",
-      "git tag *": "ask",
-      "rm *": "ask"
+      "git stash *": "deny"
     },
     "external_directory": {
       "/tmp/**": "allow",
