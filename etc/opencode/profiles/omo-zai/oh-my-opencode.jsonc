@@ -4,19 +4,16 @@
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "prometheus": {
+    "hephaestus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "hephaestus": {
+    "prometheus": {
       "model": "zai-coding-plan/glm-4.7"
     },
     "atlas": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "metis": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
-    "momus": {
+    "sisyphus-junior": {
       "model": "zai-coding-plan/glm-4.7"
     },
     "oracle": {
@@ -25,17 +22,23 @@
     "librarian": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "explore": {
-      "model": "zai-coding-plan/glm-4.7-flash"
-    },
-    "frontend-ui-ux-engineer": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
-    "document-writer": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
     "multimodal-looker": {
       "model": "zai-coding-plan/glm-4.7"
+    },
+    "metis": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "momus": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "plan": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "general": {
+      "model": "zai-coding-plan/glm-4.7"
+    },
+    "explore": {
+      "model": "zai-coding-plan/glm-4.7-flash"
     }
   },
   "claude_code": {
