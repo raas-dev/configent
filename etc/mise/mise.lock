@@ -74,15 +74,9 @@ backend = "aqua:ast-grep/ast-grep"
 "platforms.windows-x64-baseline" = { checksum = "sha256:50a596ef5231883ddae69f1960d27312bb2fe81254d67ef50e1794fc9820e863", url = "https://github.com/ast-grep/ast-grep/releases/download/0.40.5/app-x86_64-pc-windows-msvc.zip"}
 
 [[tools.atuin]]
-version = "18.11.0"
+version = "18.12.0"
 backend = "aqua:atuinsh/atuin"
-"platforms.linux-arm64" = { checksum = "sha256:94f224fcb65fedfc9cddcf2662b639ca53ce62e4e75634862543f4a38818aff5", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:94f224fcb65fedfc9cddcf2662b639ca53ce62e4e75634862543f4a38818aff5", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:77eac1ea8483d069265ebce6bfeead3c890e2ea52d7a86344175bfb197768d2a", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:77eac1ea8483d069265ebce6bfeead3c890e2ea52d7a86344175bfb197768d2a", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:77eac1ea8483d069265ebce6bfeead3c890e2ea52d7a86344175bfb197768d2a", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:77eac1ea8483d069265ebce6bfeead3c890e2ea52d7a86344175bfb197768d2a", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:b8c8f4584f801873b511ecf74dbfff1194dd9727745db9ee9ff6542eaf796aa1", url = "https://github.com/atuinsh/atuin/releases/download/v18.11.0/atuin-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:1a27c5c30ad43bb7132f68df49d2c93549f16727693df7d9c5aa6d830fa6894a", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
 version = "2.33.2"
@@ -128,19 +122,9 @@ backend = "core:bun"
 "platforms.windows-x64-baseline" = { checksum = "sha256:cc22962b3dcc51f279f13bf843675e052479e64a323f85eb29442066cf3942fe", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-windows-x64-baseline.zip"}
 
 [[tools.carapace]]
-version = "1.6.1"
+version = "1.6.2"
 backend = "aqua:carapace-sh/carapace-bin"
-"platforms.linux-arm64" = { checksum = "sha256:24ed2faba9152fff22757f0a826ee335aecafc44afca3eb9ee57f473011a5b34", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:24ed2faba9152fff22757f0a826ee335aecafc44afca3eb9ee57f473011a5b34", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:9a879fe75a387f8b0514d0e8591a272d08f433a69f9d04e1a0a2868d4c84b679", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_amd64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:9a879fe75a387f8b0514d0e8591a272d08f433a69f9d04e1a0a2868d4c84b679", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:9a879fe75a387f8b0514d0e8591a272d08f433a69f9d04e1a0a2868d4c84b679", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_amd64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:9a879fe75a387f8b0514d0e8591a272d08f433a69f9d04e1a0a2868d4c84b679", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_linux_amd64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:f990e0f8048fa1cf739da017e7b27e6331cabdd80edd038a31fac6d38b0785e9", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_darwin_arm64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:af83c688e8225c10869796c99d09fad81a0d2ca0ca7ffea508296bcb7ba77715", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_darwin_amd64.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:af83c688e8225c10869796c99d09fad81a0d2ca0ca7ffea508296bcb7ba77715", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_darwin_amd64.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:d976da9a0d49275467fe0980e50695e3f5f4fd2db36b9d31438700abe6083250", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_windows_amd64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:d976da9a0d49275467fe0980e50695e3f5f4fd2db36b9d31438700abe6083250", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.1/carapace-bin_1.6.1_windows_amd64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:28918fa21fab4055c270eb2035f778f83efadbde4411c36424062afe7115936d", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.2/carapace-bin_1.6.2_darwin_arm64.tar.gz"}
 
 [[tools.cargo-binstall]]
 version = "1.17.4"
@@ -465,9 +449,9 @@ backend = "github:memextech/ht-mcp"
 "platforms.windows-x64-baseline" = { checksum = "sha256:bb1ab9d18f4574dfed243d496ef107736043e2a32ba772f038bd29f68695a6ca", url = "https://github.com/memextech/ht-mcp/releases/download/v0.1.3/ht-mcp-x86_64-pc-windows-msvc.exe", url_api = "https://api.github.com/repos/memextech/ht-mcp/releases/assets/265403179"}
 
 [[tools."github:njbrake/agent-of-empires"]]
-version = "0.11.2"
+version = "0.11.1"
 backend = "github:njbrake/agent-of-empires"
-"platforms.linux-x64" = { checksum = "sha256:b279a0bc2bc34188046601303a126664fd6c38e9fafc2591f976af4afecc7770", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.2/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/353128332"}
+"platforms.macos-arm64" = { checksum = "sha256:c2d3bce0ea4c1f6463e27f82c89cd2b6e63da0f6a89b2526b19fd0f23f8ee5ca", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.1/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/350200530"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
@@ -839,7 +823,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.37"
+version = "2.1.38"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
