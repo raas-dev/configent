@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.2](https://github.com/raas-dev/configent/compare/1.204.1...1.204.2) (2026-02-10)
+
+
+### Fixes
+
+* **oc:** preserve non-conflicting files on use ([55d5103](https://github.com/raas-dev/configent/commit/55d510375a05727dde6b4585263c49c84d4e4131))
+
 ## [1.204.1](https://github.com/raas-dev/configent/compare/1.204.0...1.204.1) (2026-02-09)
 
 
