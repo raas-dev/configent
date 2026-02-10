@@ -31,12 +31,6 @@
     "momus": {
       "model": "zai-coding-plan/glm-4.7"
     },
-    "plan": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
-    "general": {
-      "model": "zai-coding-plan/glm-4.7"
-    },
     "explore": {
       "model": "zai-coding-plan/glm-4.7-flash"
     }
