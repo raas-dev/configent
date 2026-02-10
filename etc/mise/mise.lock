@@ -452,6 +452,7 @@ backend = "github:memextech/ht-mcp"
 version = "0.11.2"
 backend = "github:njbrake/agent-of-empires"
 "platforms.linux-x64" = { checksum = "sha256:b279a0bc2bc34188046601303a126664fd6c38e9fafc2591f976af4afecc7770", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.2/aoe-linux-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/353128332"}
+"platforms.macos-arm64" = { checksum = "sha256:c46d417969ae4d7e4d469e888ec924fb7ef211e6e0e2aad66e816bbd03c2b55c", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.2/aoe-darwin-arm64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/353128328"}
 
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"

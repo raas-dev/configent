@@ -5,9 +5,8 @@
   "permission": {
     "bash": {
       "sudo *": "deny",
-      "git clean *": "deny",
-      "git revert *": "deny",
-      "git stash *": "deny"
+      "git *": "ask",
+      "rm *": "ask"
     },
     "external_directory": {
       "/tmp/**": "allow",
