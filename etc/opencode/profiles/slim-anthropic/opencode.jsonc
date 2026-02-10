@@ -10,6 +10,6 @@
   },
   "model": "anthropic/claude-haiku-4-5",
   "plugin": [
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim@0.6.4"
   ]
 }

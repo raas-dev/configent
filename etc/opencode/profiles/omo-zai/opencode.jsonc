@@ -10,7 +10,7 @@
   },
   "model": "zai-coding-plan/glm-4.7",
   "plugin": [
-    "oh-my-opencode",
+    "oh-my-opencode@3.4.0",
     "opencode-pty",
     "opencode-scheduler"
   ]
