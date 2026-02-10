@@ -382,33 +382,44 @@ switch_to_profile() {
     fi
   fi
 
-  # Remove node_modules, bun.lock, and package.json from .opencode directory when switching profiles
-  # Only do this if is_init_cmd is false (use command) and we're not already active
-  if [[ "$is_init_cmd" == "false" && "$profile_name" != "$current" ]]; then
-    rm -rf "$PROJECT_CONFIG_DIR/node_modules" 2>/dev/null || true
-    rm -f "$PROJECT_CONFIG_DIR/bun.lock" 2>/dev/null || true
-    rm -f "$PROJECT_CONFIG_DIR/package.json" 2>/dev/null || true
-  fi
-
-  # Remove conflicting files from the project config directory before copying
-  for profile_file in "$profile_dir"/*; do
-    if [[ -f "$profile_file" ]]; then
-      local filename
-      filename=$(basename "$profile_file")
-      local basename_no_ext="${filename%.*}"
-      local ext="${filename##*.}"
-
-      # Remove any files with same basename but different extension
-      for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
-        if [[ -f "$existing_file" ]]; then
-          local existing_ext="${existing_file##*.}"
-          if [[ "$existing_ext" != "$ext" ]]; then
+  # Handle file cleanup based on command type
+  if [[ "$is_init_cmd" == "true" ]]; then
+    # init command: remove all files that don't exist in the new profile
+    for existing_file in "$PROJECT_CONFIG_DIR"/*; do
+      if [[ -f "$existing_file" ]]; then
+        local existing_basename
+        existing_basename=$(basename "$existing_file")
+        # Skip oc.json (metadata file)
+        if [[ "$existing_basename" != "oc.json" ]]; then
+          # Remove if exact file doesn't exist in profile
+          if [[ ! -f "$profile_dir/$existing_basename" ]]; then
             rm -f "$existing_file"
           fi
         fi
-      done
-    fi
-  done
+      fi
+    done
+  else
+    # use command: only remove conflicting files (same basename, different extension)
+    # Keep all other files from old profile
+    for profile_file in "$profile_dir"/*; do
+      if [[ -f "$profile_file" ]]; then
+        local filename
+        filename=$(basename "$profile_file")
+        local basename_no_ext="${filename%.*}"
+        local ext="${filename##*.}"
+
+        # Remove any files with same basename but different extension
+        for existing_file in "$PROJECT_CONFIG_DIR"/"$basename_no_ext".*; do
+          if [[ -f "$existing_file" ]]; then
+            local existing_ext="${existing_file##*.}"
+            if [[ "$existing_ext" != "$ext" ]]; then
+              rm -f "$existing_file"
+            fi
+          fi
+        done
+      fi
+    done
+  fi
 
   # Ensure project config directory exists
   local is_init=false
@@ -579,9 +590,9 @@ show_help() {
     "  ${CYAN}use${NC} ${DIM}[profile-name]${NC}" \
     "      Select a new profile. Shows an interactive menu if no profile" \
     "      name is given. ${DIM}If there are changes in origin, informs the${NC}" \
-    "      ${DIM}user and advises to use 'init' to reset from origin. Also${NC}" \
-    "      ${DIM}removes node_modules, bun.lock, and package.json from${NC}" \
-    "      ${DIM}the project root when switching profiles.${NC}" \
+    "      ${DIM}user and advises to use 'init' to reset from origin. Keeps${NC}" \
+    "      ${DIM}files from old profile unless they conflict with the new${NC}" \
+    "      ${DIM}profile (same basename, different extension).${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
     "      oc use omo-zai" \
