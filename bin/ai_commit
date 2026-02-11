@@ -54,7 +54,7 @@ if [ -f "$backup_file" ]; then
   printf "\n"
 
   if [ -z "$NONINTERACTIVE" ]; then
-    printf "%sReuse this message? (y), edit (e), or generate new (n) [Y/e/n] %s> " "${bold}${cyan}" "$normal"
+    printf "%sReuse this message? (y), edit (e), generate new (n), or quit (q) [Y/e/n/q] %s> " "${bold}${cyan}" "$normal"
     read -r reuse_choice
     # Default to 'y'
     if [ -z "$reuse_choice" ]; then
@@ -69,6 +69,10 @@ if [ -f "$backup_file" ]; then
     [eE])
       commit_message="$(cat "$backup_file")"
       choice="e"
+      ;;
+    [qQ])
+      printf "Aborted.\n"
+      exit 1
       ;;
     *)
       # Proceed to generate new
