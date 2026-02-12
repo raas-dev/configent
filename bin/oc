@@ -17,7 +17,7 @@ cleanup_temp_environment() {
   # Clean up any temporary directories (only if in a temp location)
   if [[ -n "$TEMP_DIR_TO_CLEAN" && -d "$TEMP_DIR_TO_CLEAN" ]]; then
     case "$TEMP_DIR_TO_CLEAN" in
-    /tmp/* | /var/folders/* | "${TMPDIR}"*)
+    /tmp/* | /var/folders/* | "$TMPDIR"*)
       rm -rf "$TEMP_DIR_TO_CLEAN"
       ;;
     esac
@@ -516,7 +516,7 @@ show_menu() {
 
       if [[ $i -eq $selected ]]; then
         marker="${YELLOW}>${NC} "
-        color="${CYAN}"
+        color="$CYAN"
         echo -e "${marker}${color}${name}${NC}${suffix}"
       else
         echo -e "  ${DIM}${name}${NC}${suffix}"
