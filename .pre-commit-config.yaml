@@ -33,7 +33,7 @@ repos:
   rev: 3.0.0
   hooks:
     - id: shellcheck
-      files: ^(?!.*skills/).*$
+      files: ^(?!.*skills/|etc/claude-code/hooks/).*$
     - id: shfmt
 
 - repo: https://github.com/crate-ci/typos
