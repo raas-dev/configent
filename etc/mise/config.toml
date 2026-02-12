@@ -110,7 +110,6 @@ bun = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 'cargo:fossil-mcp' = 'latest'
 'npm:agent-browser' = 'latest'
-'npm:ralphy-cli' = 'latest'
 
 # opencode
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
