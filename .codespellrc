@@ -1,3 +1,0 @@
-# shellcheck disable=all
-[codespell]
-skip = CHANGELOG.md,bin/rsync_tmbackup.sh,bin/trans,bin/xpanes,etc/**

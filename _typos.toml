@@ -1,0 +1,12 @@
+[files]
+extend-exclude = [
+  "CHANGELOG.md",
+  "bin/trans",
+  "bin/xpanes",
+  "dotfiles/.aliases",
+  "dotfiles/.gitconfig",
+  "etc/prompts/",
+  "etc/ptpython/config.py",
+  "etc/nvim/lazy-lock.json",
+  "ui/macos/write_macos_defaults"
+]

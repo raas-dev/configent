@@ -36,10 +36,10 @@ repos:
       files: ^(?!etc/claude-code/skills/|etc/claude-code/hooks/).*$
     - id: shfmt
 
-- repo: https://github.com/codespell-project/codespell
-  rev: v2.3.0
+- repo: https://github.com/crate-ci/typos
+  rev: v1.43.4
   hooks:
-  - id: codespell
+    - id: typos
 
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v3.30.0
