@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.3](https://github.com/raas-dev/configent/compare/1.204.2...1.204.3) (2026-02-12)
+
+
+### Fixes
+
+* **ai_commit:** add quit option to prompt ([41a10b6](https://github.com/raas-dev/configent/commit/41a10b6eae0bc00ca9b47e759da5618fe2fdccab))
+* **settings:** default to haiku model ([7279013](https://github.com/raas-dev/configent/commit/727901333dea97c56387d26ff0edddc0b2cdb3b8))
+* **tmux:** tune mouse copy behavior in tmux ([c1cf3e9](https://github.com/raas-dev/configent/commit/c1cf3e9c288fcfaba2574a826e8abe1fb19d7b51))
+
 ## [1.204.2](https://github.com/raas-dev/configent/compare/1.204.1...1.204.2) (2026-02-10)
 
 
