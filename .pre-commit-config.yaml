@@ -21,19 +21,19 @@ repos:
       files: ^(?!etc/nvim/lazyvim\.json$).*
     - id: trailing-whitespace
     - id: check-json
-      files: ^(?!etc/claude-code/skills/).*$
+      files: ^(?!.*skills/).*$
     - id: check-toml
     - id: check-yaml
     - id: check-symlinks
     - id: destroyed-symlinks
     - id: check-executables-have-shebangs
-      files: ^(?!etc/claude-code/skills/).*$
+      files: ^(?!.*skills/).*$
 
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
   rev: 3.0.0
   hooks:
     - id: shellcheck
-      files: ^(?!etc/claude-code/skills/|etc/claude-code/hooks/).*$
+      files: ^(?!.*skills/).*$
     - id: shfmt
 
 - repo: https://github.com/crate-ci/typos
