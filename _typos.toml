@@ -1,6 +1,8 @@
 [files]
 extend-exclude = [
   "CHANGELOG.md",
+  "bin/lesspipe.sh",
+  "bin/rsync_tmbackup.sh",
   "bin/trans",
   "bin/xpanes",
   "dotfiles/.aliases",
