@@ -353,6 +353,7 @@ backend = "github:abhimanyu003/sttr"
 [[tools."github:anordal/shellharden"]]
 version = "4.3.1"
 backend = "github:anordal/shellharden"
+"platforms.linux-x64" = { checksum = "sha512:db95f075fef1a2ec604d18e5c366d396cd4622b64e5a44ef1f4aa2068d6f050d7ac426a4906dc44b612072a319954e96a16dad9030055d3158dd3518e48f111c", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352441"}
 "platforms.macos-arm64" = { checksum = "sha512:ced1cfef9ec23f02ca61369fb8cdf9716104508206db43619a419b58c4ede3069953b5ffd0022316e5038fc68399d0d00396ac72db269201991ef2537bd2c364", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352438"}
 
 [[tools."github:asyrjasalo/augent"]]
@@ -701,7 +702,7 @@ version = "1.3.0"
 backend = "go:github.com/go-enry/enry"
 
 [[tools."go:golang.org/x/tools/gopls"]]
-version = "0.21.0"
+version = "0.21.1"
 backend = "go:golang.org/x/tools/gopls"
 
 [[tools.gping]]
@@ -921,19 +922,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.1.60"
+version = "1.1.63"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:0ed470eb0321c098d4c4220af113d2219858e4a314b0b922550e703fbcc83f34", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:0ed470eb0321c098d4c4220af113d2219858e4a314b0b922550e703fbcc83f34", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:dd9c487409d23302f6ec52042685a513207d8686b36e89a34388536ca6cf9409", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:68ab470ed9c59c5d80fa577c7ca13a095d99b5b424c2fe6ef8281a45c13da2c6", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:68ab470ed9c59c5d80fa577c7ca13a095d99b5b424c2fe6ef8281a45c13da2c6", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:aafa505bd31aa12afe80ca3031a323cfd9d0943f0671ab96dbe797e534a7b554", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:aafa505bd31aa12afe80ca3031a323cfd9d0943f0671ab96dbe797e534a7b554", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-windows-x64.zip"}
+"platforms.linux-x64" = { checksum = "sha256:4c64c6852f40f7324eea32d0553cd1d28c4ce997e1aa0e3807920af18bf8b83a", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.63/opencode-linux-x64.tar.gz"}
 
 [[tools.oxker]]
 version = "0.12.0"
