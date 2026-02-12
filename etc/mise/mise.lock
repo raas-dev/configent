@@ -187,6 +187,10 @@ backend = "cargo:netscanner"
 version = "2.5.0"
 backend = "cargo:ralph-cli"
 
+[[tools."cargo:shellharden"]]
+version = "4.3.1"
+backend = "cargo:shellharden"
+
 [[tools."cargo:tailspin"]]
 version = "5.5.0"
 backend = "cargo:tailspin"
@@ -345,6 +349,11 @@ backend = "github:abhimanyu003/sttr"
 "platforms.macos-x64-baseline" = { checksum = "sha256:91dd8a96e7b7a89761bbbf455d22b5ad409f8e068bfe23e3dd78be42ec671512", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Darwin_all.tar.gz", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810112"}
 "platforms.windows-x64" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
+
+[[tools."github:anordal/shellharden"]]
+version = "4.3.1"
+backend = "github:anordal/shellharden"
+"platforms.macos-arm64" = { checksum = "sha512:ced1cfef9ec23f02ca61369fb8cdf9716104508206db43619a419b58c4ede3069953b5ffd0022316e5038fc68399d0d00396ac72db269201991ef2537bd2c364", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352438"}
 
 [[tools."github:asyrjasalo/augent"]]
 version = "0.6.6"

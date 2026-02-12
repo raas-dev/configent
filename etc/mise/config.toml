@@ -42,6 +42,7 @@ ast-grep = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
+'github:anordal/shellharden' = 'latest'
 
 # network
 doggo = 'latest'
