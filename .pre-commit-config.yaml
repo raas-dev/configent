@@ -10,39 +10,39 @@
 default_stages: [pre-commit]
 
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v6.0.0
-  hooks:
-    - id: check-merge-conflict
-    - id: check-added-large-files
-    - id: check-case-conflict
-    - id: mixed-line-ending
-    - id: end-of-file-fixer
-      files: ^(?!etc/nvim/lazyvim\.json$).*
-    - id: trailing-whitespace
-    - id: check-json
-      files: ^(?!.*skills/).*$
-    - id: check-toml
-    - id: check-yaml
-    - id: check-symlinks
-    - id: destroyed-symlinks
-    - id: check-executables-have-shebangs
-      files: ^(?!.*skills/).*$
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: mixed-line-ending
+      - id: end-of-file-fixer
+        files: ^(?!etc/nvim/lazyvim\.json$).*
+      - id: trailing-whitespace
+      - id: check-json
+        files: ^(?!.*skills/).*$
+      - id: check-toml
+      - id: check-yaml
+      - id: check-symlinks
+      - id: destroyed-symlinks
+      - id: check-executables-have-shebangs
+        files: ^(?!.*skills/).*$
 
-- repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 3.0.0
-  hooks:
-    - id: shellcheck
-      files: ^(?!.*skills/|etc/claude-code/hooks/).*$
-    - id: shfmt
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: shellcheck
+        files: ^(?!.*skills/|etc/claude-code/hooks/).*$
+      - id: shfmt
 
-- repo: https://github.com/crate-ci/typos
-  rev: v1.43.4
-  hooks:
-    - id: typos
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.43.4
+    hooks:
+      - id: typos
 
-- repo: https://github.com/commitizen-tools/commitizen
-  rev: v4.13.7
-  hooks:
-    - id: commitizen
-      stages: [commit-msg]
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.13.7
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
