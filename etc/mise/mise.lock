@@ -76,7 +76,15 @@ backend = "aqua:ast-grep/ast-grep"
 [[tools.atuin]]
 version = "18.12.1"
 backend = "aqua:atuinsh/atuin"
+"platforms.linux-arm64" = { checksum = "sha256:7c03a5bf2daaea389426943213bc82dce680e0bfd54afea4cbb0686a2c9f8d13", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:7c03a5bf2daaea389426943213bc82dce680e0bfd54afea4cbb0686a2c9f8d13", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:0b25c91ff0619d2cd912f6b74abeb5f3386a28f06aee0a9d524077660ceeaee7", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:0b25c91ff0619d2cd912f6b74abeb5f3386a28f06aee0a9d524077660ceeaee7", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:0b25c91ff0619d2cd912f6b74abeb5f3386a28f06aee0a9d524077660ceeaee7", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:0b25c91ff0619d2cd912f6b74abeb5f3386a28f06aee0a9d524077660ceeaee7", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:bc4935ea9bddb1fc63d86f5859ba3c00c9d834ac8e1c689508ffb71054d63231", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-aarch64-apple-darwin.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:602c9af0a86f455153d0b4e2517740733236bd1144abcdcc8cc9485092470547", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:602c9af0a86f455153d0b4e2517740733236bd1144abcdcc8cc9485092470547", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-x86_64-pc-windows-msvc.zip"}
 
 [[tools.awscli]]
 version = "2.33.2"
@@ -174,6 +182,10 @@ backend = "cargo:kondo"
 [[tools."cargo:netscanner"]]
 version = "0.6.41"
 backend = "cargo:netscanner"
+
+[[tools."cargo:ralph-cli"]]
+version = "2.5.0"
+backend = "cargo:ralph-cli"
 
 [[tools."cargo:tailspin"]]
 version = "5.5.0"
@@ -902,7 +914,17 @@ backend = "aqua:sharkdp/numbat"
 [[tools.opencode]]
 version = "1.1.60"
 backend = "aqua:anomalyco/opencode"
+"platforms.linux-arm64" = { checksum = "sha256:0ed470eb0321c098d4c4220af113d2219858e4a314b0b922550e703fbcc83f34", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:0ed470eb0321c098d4c4220af113d2219858e4a314b0b922550e703fbcc83f34", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:138eb158e699bd3879273b2a679f98d7a5d8d3d437ba3f5ac9e2fa7ea2388604", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-linux-x64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:dd9c487409d23302f6ec52042685a513207d8686b36e89a34388536ca6cf9409", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-arm64.zip"}
+"platforms.macos-x64" = { checksum = "sha256:68ab470ed9c59c5d80fa577c7ca13a095d99b5b424c2fe6ef8281a45c13da2c6", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-x64.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:68ab470ed9c59c5d80fa577c7ca13a095d99b5b424c2fe6ef8281a45c13da2c6", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-x64.zip"}
+"platforms.windows-x64" = { checksum = "sha256:aafa505bd31aa12afe80ca3031a323cfd9d0943f0671ab96dbe797e534a7b554", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-windows-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:aafa505bd31aa12afe80ca3031a323cfd9d0943f0671ab96dbe797e534a7b554", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-windows-x64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -1126,10 +1148,10 @@ version = "2.3.3"
 backend = "aqua:watchexec/watchexec"
 "platforms.linux-arm64" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
 "platforms.linux-arm64-musl" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
 "platforms.macos-arm64" = { checksum = "sha256:ab96b0ed8bd02828222f01a003c9efbd0f80facd7b884d716547083545531c90", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-apple-darwin.tar.xz"}
 "platforms.macos-x64" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
