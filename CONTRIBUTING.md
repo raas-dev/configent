@@ -23,7 +23,7 @@ For each VM's cloud-init, alias `vv` sets installer to use the last commit:
 If `GIT_REF` is not set, the installer uses version hardcoded in `install.sh`.
 
 Also, once the VM has been started, host's `$HOME/configent` is mounted
-read-only in the VM. This helps in testing non-commited changes to the scripts.
+read-only in the VM. This helps in testing non-committed changes to the scripts.
 
 ## Pre-commit
 

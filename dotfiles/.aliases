@@ -5,7 +5,7 @@
 
 ### IDE ########################################################################
 
-# export DEFALT_IDE="<BIN_NAME>" in ~/.rclocal to override what's in .profile
+# export DEFAULT_IDE="<BIN_NAME>" in ~/.rclocal to override what's in .profile
 alias code="\$DEFAULT_IDE --reuse-window"
 
 ### Upgrade for all package managers ###########################################
