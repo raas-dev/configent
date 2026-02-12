@@ -74,15 +74,9 @@ backend = "aqua:ast-grep/ast-grep"
 "platforms.windows-x64-baseline" = { checksum = "sha256:50a596ef5231883ddae69f1960d27312bb2fe81254d67ef50e1794fc9820e863", url = "https://github.com/ast-grep/ast-grep/releases/download/0.40.5/app-x86_64-pc-windows-msvc.zip"}
 
 [[tools.atuin]]
-version = "18.12.0"
+version = "18.12.1"
 backend = "aqua:atuinsh/atuin"
-"platforms.linux-arm64" = { checksum = "sha256:5037a7b7bd49f77897a4807b42f5790ed60f208ad6471e8f1edbb93bd8eb6181", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:5037a7b7bd49f77897a4807b42f5790ed60f208ad6471e8f1edbb93bd8eb6181", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:48068d1b5f4c1cede3c4db479af604d1cf1cd1d04226d1140f96f1412317f640", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:48068d1b5f4c1cede3c4db479af604d1cf1cd1d04226d1140f96f1412317f640", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:48068d1b5f4c1cede3c4db479af604d1cf1cd1d04226d1140f96f1412317f640", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:48068d1b5f4c1cede3c4db479af604d1cf1cd1d04226d1140f96f1412317f640", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:1a27c5c30ad43bb7132f68df49d2c93549f16727693df7d9c5aa6d830fa6894a", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.0/atuin-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:bc4935ea9bddb1fc63d86f5859ba3c00c9d834ac8e1c689508ffb71054d63231", url = "https://github.com/atuinsh/atuin/releases/download/v18.12.1/atuin-aarch64-apple-darwin.tar.gz"}
 
 [[tools.awscli]]
 version = "2.33.2"
@@ -859,7 +853,7 @@ version = "4.6.0"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.28.1"
+version = "0.28.2"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@neuralnomads/codenomad"]]
@@ -867,7 +861,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.7"
+version = "1.6.8"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
@@ -906,9 +900,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.1.59"
+version = "1.1.60"
 backend = "aqua:anomalyco/opencode"
-"platforms.macos-arm64" = { checksum = "sha256:0201e7a226a32807ec36cc4683e13552b04bdbd37980b63ba298902746567215", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.59/opencode-darwin-arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:dd9c487409d23302f6ec52042685a513207d8686b36e89a34388536ca6cf9409", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.60/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
