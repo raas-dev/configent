@@ -8,7 +8,7 @@
       "type": "local"
     }
   },
-  "model": "zai-coding-plan/glm-4.7",
+  "model": "zai-coding-plan/glm-5",
   "plugin": [
     "oh-my-opencode-slim@0.7.0"
   ]
