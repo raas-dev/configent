@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.4](https://github.com/raas-dev/configent/compare/1.204.3...1.204.4) (2026-02-13)
+
+
+### Fixes
+
+* **aliases:** add glob flag to fd alias ([9968f93](https://github.com/raas-dev/configent/commit/9968f9365c6e1a7e75035264bce22d2ba0933c0f))
+* **oc:** stabilize temp cleanup and color ([2bcf777](https://github.com/raas-dev/configent/commit/2bcf777ec4b8b0c51fe59608622bbfcb06daa60b))
+
 ## [1.204.3](https://github.com/raas-dev/configent/compare/1.204.2...1.204.3) (2026-02-12)
 
 
