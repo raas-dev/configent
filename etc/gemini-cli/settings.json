@@ -9,11 +9,12 @@
       "enabled": true
     },
     "previewFeatures": true,
+    "defaultApprovalMode": "auto_edit",
     "enableAutoUpdate": false,
     "enableAutoUpdateNotification": false
   },
   "ide": {
-    "enabled": true,
+    "enabled": false,
     "hasSeenNudge": true
   },
   "mcpServers": {
@@ -31,15 +32,17 @@
     }
   },
   "tools": {
-    "autoAccept": true,
     "shell": {
       "showColor": true
     }
   },
   "ui": {
-    "theme": "Ayu",
     "accessibility": {
       "enableLoadingPhrases": false
-    }
+    },
+    "theme": "Ayu"
+  },
+  "model": {
+    "name": "auto-gemini-3"
   }
 }
