@@ -172,7 +172,7 @@ version = "0.11.0"
 backend = "cargo:diskonaut"
 
 [[tools."cargo:fossil-mcp"]]
-version = "0.1.2"
+version = "0.1.3"
 backend = "cargo:fossil-mcp"
 
 [[tools."cargo:kondo"]]
@@ -353,8 +353,17 @@ backend = "github:abhimanyu003/sttr"
 [[tools."github:anordal/shellharden"]]
 version = "4.3.1"
 backend = "github:anordal/shellharden"
+"platforms.linux-arm64" = { checksum = "sha512:5af102aa9c55de8f21d9550116617091d1fc57296fc13d0077a8193d304dda86b1ddac693d7c3d01a1c314bf3a4d9590b903862edcd2fdbbfb32eb8998486be6", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352491"}
+"platforms.linux-arm64-musl" = { checksum = "sha512:0ce6f08a001ce154c6fd2727b63b77eb920beb64873340ecdbad4d00e50432da7db6e9492ccdddb1760a2070c54861953a09f92302f2ed4043d9bacabb26b1a5", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-aarch64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352507"}
 "platforms.linux-x64" = { checksum = "sha512:db95f075fef1a2ec604d18e5c366d396cd4622b64e5a44ef1f4aa2068d6f050d7ac426a4906dc44b612072a319954e96a16dad9030055d3158dd3518e48f111c", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352441"}
+"platforms.linux-x64-baseline" = { checksum = "sha512:db95f075fef1a2ec604d18e5c366d396cd4622b64e5a44ef1f4aa2068d6f050d7ac426a4906dc44b612072a319954e96a16dad9030055d3158dd3518e48f111c", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352441"}
+"platforms.linux-x64-musl" = { checksum = "sha512:e80205ae76e134773b9bbb5db079577626089859ed5c4067e39d05c4dc93ccca73541408417d01d2ae630032f74b7387abef5b71a68a29d60927206134a83da8", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352512"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha512:db95f075fef1a2ec604d18e5c366d396cd4622b64e5a44ef1f4aa2068d6f050d7ac426a4906dc44b612072a319954e96a16dad9030055d3158dd3518e48f111c", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352441"}
 "platforms.macos-arm64" = { checksum = "sha512:ced1cfef9ec23f02ca61369fb8cdf9716104508206db43619a419b58c4ede3069953b5ffd0022316e5038fc68399d0d00396ac72db269201991ef2537bd2c364", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352438"}
+"platforms.macos-x64" = { checksum = "sha512:d29cc678adefacb55c75cab40a0cc5db28914aed52386acaf9ef387a383163e1cb937b6a8987cbbc32ccb2c5c64ff58025cceb0637853256a09f9c4c1fa6b645", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352444"}
+"platforms.macos-x64-baseline" = { checksum = "sha512:d29cc678adefacb55c75cab40a0cc5db28914aed52386acaf9ef387a383163e1cb937b6a8987cbbc32ccb2c5c64ff58025cceb0637853256a09f9c4c1fa6b645", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352444"}
+"platforms.windows-x64" = { checksum = "sha512:d788d976e232638710df20b772ba830511f10133ff112f2571e16ad9067d42773ec99daaf4f9d5ebc32ae05da008f8dd9655d5a20f1b90b286ac7686fdbfcd50", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352466"}
+"platforms.windows-x64-baseline" = { checksum = "sha512:d788d976e232638710df20b772ba830511f10133ff112f2571e16ad9067d42773ec99daaf4f9d5ebc32ae05da008f8dd9655d5a20f1b90b286ac7686fdbfcd50", url = "https://github.com/anordal/shellharden/releases/download/v4.3.1/shellharden-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/anordal/shellharden/releases/assets/158352466"}
 
 [[tools."github:asyrjasalo/augent"]]
 version = "0.6.6"
@@ -867,7 +876,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.39"
+version = "2.1.41"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -887,7 +896,7 @@ version = "1.6.8"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
-version = "0.9.2"
+version = "0.9.3"
 backend = "npm:agent-browser"
 
 [[tools."npm:opencode-ai"]]
@@ -922,10 +931,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.1.63"
+version = "1.1.64"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-x64" = { checksum = "sha256:4c64c6852f40f7324eea32d0553cd1d28c4ce997e1aa0e3807920af18bf8b83a", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.63/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:53f12fe136348716e15561b74eac84896128dc86cda41e286aba8fbc7ea54943", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.63/opencode-darwin-arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:7a007b196e69b533c3e6fe41d30cb6000b93b4cf77ca9dd6c51de6482b1c7776", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.64/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
