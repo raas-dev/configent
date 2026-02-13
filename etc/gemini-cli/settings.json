@@ -1,14 +1,16 @@
 {
   "context": {
-    "fileName": ["AGENTS.md"]
+    "fileName": [
+      "AGENTS.md"
+    ]
   },
   "general": {
-    "disableAutoUpdate": true,
-    "disableUpdateNag": true,
     "checkpointing": {
       "enabled": true
     },
-    "previewFeatures": true
+    "previewFeatures": true,
+    "enableAutoUpdate": false,
+    "enableAutoUpdateNotification": false
   },
   "ide": {
     "enabled": true,
@@ -37,7 +39,7 @@
   "ui": {
     "theme": "Ayu",
     "accessibility": {
-      "disableLoadingPhrases": true
+      "enableLoadingPhrases": false
     }
   }
 }
