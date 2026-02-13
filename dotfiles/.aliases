@@ -123,7 +123,7 @@ alias b='bat --style grid,header,snip --paging never'
 alias c='oxker --host $DOCKER_HOST'
 # d is for generic docker build and run, see d()
 alias e="\$DEFAULT_IDE --add"
-alias f='fd --ignore-case --no-ignore --hidden'
+alias f='fd --ignore-case --no-ignore --hidden --glob'
 # g is for git/gitui, see g()
 alias h='xh --verify=no'
 alias i='glances'
