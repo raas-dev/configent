@@ -17,6 +17,17 @@
       "description": "Use for specialized domain searches with neural/semantic search capabilities. Ideal for: academic paper searches, LinkedIn professional networking searches, GitHub code repository searches, company research and business intelligence, Wikipedia lookups, and finding specific content types (code snippets, documentation, professional profiles). Choose Exa when you need to search within specialized domains or platforms rather than general web content.",
       "type": "http",
       "url": "https://mcp.exa.ai/mcp"
+    },
+    "skillseeker": {
+      "description": "Convert documentation websites, GitHub repositories, and PDFs into AI skills/knowledge bases. Ideal for: scraping documentation sites, analyzing code repositories with AST parsing, extracting content from PDFs, generating .cursorrules/.windsurfrules for AI coding assistants, creating Claude Code skills, building RAG pipeline data for LangChain/LlamaIndex/Pinecone, detecting conflicts between documentation and code implementation, and packaging knowledge into uploadable formats for Claude, Gemini, or OpenAI.",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "skill-seekers[mcp]",
+        "python",
+        "-m",
+        "skill_seekers.mcp.server_fastmcp"
+      ]
     }
   }
 }
