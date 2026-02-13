@@ -27,7 +27,10 @@
         "python",
         "-m",
         "skill_seekers.mcp.server_fastmcp"
-      ]
+      ],
+      "timeout": {
+        "tools": "5min"
+      }
     }
   }
 }
