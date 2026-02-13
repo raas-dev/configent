@@ -145,19 +145,9 @@ backend = "aqua:carapace-sh/carapace-bin"
 "platforms.windows-x64-baseline" = { checksum = "sha256:c6f18ee32ae02a2a8e00838de4424ba70a64589a261ba46b27fc1a82d80bb984", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.2/carapace-bin_1.6.2_windows_amd64.zip"}
 
 [[tools.cargo-binstall]]
-version = "1.17.4"
+version = "1.17.5"
 backend = "aqua:cargo-bins/cargo-binstall"
-"platforms.linux-arm64" = { checksum = "sha256:1410ec72b4f23fa6cf8ebb4b55fe03ebca63e14adadf4501d78e91fa004e9689", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:1410ec72b4f23fa6cf8ebb4b55fe03ebca63e14adadf4501d78e91fa004e9689", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-x64" = { checksum = "sha256:8822793dd22a1fcfba6d7581ed130ec935fb26a0db58fb9b0f01f0fae17d28f8", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:8822793dd22a1fcfba6d7581ed130ec935fb26a0db58fb9b0f01f0fae17d28f8", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:8822793dd22a1fcfba6d7581ed130ec935fb26a0db58fb9b0f01f0fae17d28f8", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:8822793dd22a1fcfba6d7581ed130ec935fb26a0db58fb9b0f01f0fae17d28f8", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.macos-arm64" = { checksum = "sha256:c689061413598fa32b77b6fd2a7300c6392faf008137194ab8a4cdb93c12040a", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-aarch64-apple-darwin.zip"}
-"platforms.macos-x64" = { checksum = "sha256:278a12a049397b9f73df0c1e6c83c15fe184e3f5d824ee9a66460c41e519cfd6", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:278a12a049397b9f73df0c1e6c83c15fe184e3f5d824ee9a66460c41e519cfd6", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.windows-x64" = { checksum = "sha256:9c6df6ed7e0eef153fdd6aa0fe0c873496431ea44e2b209331b2dbd29d0d3c06", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:9c6df6ed7e0eef153fdd6aa0fe0c873496431ea44e2b209331b2dbd29d0d3c06", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.4/cargo-binstall-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:896e75a79773a11ad651649dce449a223ddd1dc718e687301988b46ee26fe58f", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.5/cargo-binstall-aarch64-apple-darwin.zip"}
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
@@ -383,7 +373,15 @@ backend = "github:asyrjasalo/augent"
 [[tools."github:asyrjasalo/dynamic-mcp"]]
 version = "1.5.0"
 backend = "github:asyrjasalo/dynamic-mcp"
+"platforms.linux-arm64" = { checksum = "sha256:a01c561e4390eef200a865428ca34d3d2b2ca062345b24338bb42328c5655584", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355617489"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:a01c561e4390eef200a865428ca34d3d2b2ca062345b24338bb42328c5655584", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355617489"}
+"platforms.linux-x64" = { checksum = "sha256:c3c44bfeb0664964a3aab64a5f8287b22c36a854bf194e3596ae5b9b3f81702b", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355616488"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:c3c44bfeb0664964a3aab64a5f8287b22c36a854bf194e3596ae5b9b3f81702b", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355616488"}
+"platforms.linux-x64-musl" = { checksum = "sha256:c3c44bfeb0664964a3aab64a5f8287b22c36a854bf194e3596ae5b9b3f81702b", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355616488"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:c3c44bfeb0664964a3aab64a5f8287b22c36a854bf194e3596ae5b9b3f81702b", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355616488"}
 "platforms.macos-arm64" = { checksum = "sha256:41ee8cc7d5819b267a8d91df30acddf23e39a89a9f9027bf2bbd0560159a201e", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355616640"}
+"platforms.windows-x64" = { checksum = "sha256:e608d0b2770698ce0e8e7b2d6378f5925dd9adb675a020a4a00a9066266986ba", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355618889"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:e608d0b2770698ce0e8e7b2d6378f5925dd9adb675a020a4a00a9066266986ba", url = "https://github.com/asyrjasalo/dynamic-mcp/releases/download/v1.5.0/dmcp-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/asyrjasalo/dynamic-mcp/releases/assets/355618889"}
 
 [[tools."github:backnotprop/plannotator"]]
 version = "0.6.8"
@@ -456,19 +454,19 @@ backend = "github:joshmedeski/sesh"
 "platforms.macos-arm64" = { checksum = "sha256:831a375ed140bbb79de0caf237a88300260823fbc713ca7ab4d0c7d636bfac67", url = "https://github.com/joshmedeski/sesh/releases/download/v2.22.0/sesh_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/joshmedeski/sesh/releases/assets/349615504"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.23.2"
+version = "0.23.3"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:05a89d970c4b0ea02e39b82adefb82b722fbfa22654c0023b9395cdf7099a9a1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077785"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:05a89d970c4b0ea02e39b82adefb82b722fbfa22654c0023b9395cdf7099a9a1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077785"}
-"platforms.linux-x64" = { checksum = "sha256:95030d092e493a2c3f4e1341536e8cf4fe1aaeff5951039b07f1b3fe35141ae2", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077794"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:95030d092e493a2c3f4e1341536e8cf4fe1aaeff5951039b07f1b3fe35141ae2", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077794"}
-"platforms.linux-x64-musl" = { checksum = "sha256:95030d092e493a2c3f4e1341536e8cf4fe1aaeff5951039b07f1b3fe35141ae2", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077794"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:95030d092e493a2c3f4e1341536e8cf4fe1aaeff5951039b07f1b3fe35141ae2", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077794"}
-"platforms.macos-arm64" = { checksum = "sha256:14c06dedf66cceebb9d95ddbb74f5e136addd52e78b7f6dcc71b393d8d051019", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077779"}
-"platforms.macos-x64" = { checksum = "sha256:7a3a13a09fbb8a5ad84ceec57e71f245b130a166c27a97c927bdb09963a346da", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077790"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7a3a13a09fbb8a5ad84ceec57e71f245b130a166c27a97c927bdb09963a346da", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077790"}
-"platforms.windows-x64" = { checksum = "sha256:db9a732337bd855bf567450cc38b312a3428e19fffb2283e7fb7e9793437e3a5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077792"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:db9a732337bd855bf567450cc38b312a3428e19fffb2283e7fb7e9793437e3a5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.2/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/354077792"}
+"platforms.linux-arm64" = { checksum = "sha256:b5925eb3b5713a718407ea5fc897e53bb1fe952d5d4a0134dffc48a398f95623", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524488"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:b5925eb3b5713a718407ea5fc897e53bb1fe952d5d4a0134dffc48a398f95623", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524488"}
+"platforms.linux-x64" = { checksum = "sha256:52b0e0ee8065c454383fd7c33cbd3d12160eadf0ef0014751279637f162fcd7e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524498"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:52b0e0ee8065c454383fd7c33cbd3d12160eadf0ef0014751279637f162fcd7e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524498"}
+"platforms.linux-x64-musl" = { checksum = "sha256:52b0e0ee8065c454383fd7c33cbd3d12160eadf0ef0014751279637f162fcd7e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524498"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:52b0e0ee8065c454383fd7c33cbd3d12160eadf0ef0014751279637f162fcd7e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524498"}
+"platforms.macos-arm64" = { checksum = "sha256:a80e0b6efa96237a1d17b462dbbd70b98f3b5aa441633abecfda2b139712843f", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524482"}
+"platforms.macos-x64" = { checksum = "sha256:c9aea0690accaf226ff54b05237d4a7c39094f9ca38d56607672e5566e6dd128", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524493"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:c9aea0690accaf226ff54b05237d4a7c39094f9ca38d56607672e5566e6dd128", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524493"}
+"platforms.windows-x64" = { checksum = "sha256:40cf9944d0a27e802fef2ad0f90bc48256ae54cfb936174109589d9838f3f3f8", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524495"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:40cf9944d0a27e802fef2ad0f90bc48256ae54cfb936174109589d9838f3f3f8", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.23.3/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/355524495"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -868,7 +866,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.41"
+version = "2.1.42"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -888,7 +886,7 @@ version = "1.6.8"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
-version = "0.9.3"
+version = "0.10.0"
 backend = "npm:agent-browser"
 
 [[tools."npm:opencode-ai"]]
@@ -925,8 +923,17 @@ backend = "aqua:sharkdp/numbat"
 [[tools.opencode]]
 version = "1.1.65"
 backend = "aqua:anomalyco/opencode"
+"platforms.linux-arm64" = { checksum = "sha256:7048deddf4caccf456d1adce8d84b23bb92ca7e53018f83a308f64bc17f41c5d", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:7048deddf4caccf456d1adce8d84b23bb92ca7e53018f83a308f64bc17f41c5d", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-arm64.tar.gz"}
 "platforms.linux-x64" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:d208b471440e1125606eafaffd5047c565f7f5aaf32b76eb33d9a0369e9ddae4", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-arm64.zip"}
+"platforms.macos-x64" = { checksum = "sha256:1f96b5b975b842353d54243b84583736839adaabfb223272720d2ff4315ff012", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-x64.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:1f96b5b975b842353d54243b84583736839adaabfb223272720d2ff4315ff012", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-x64.zip"}
+"platforms.windows-x64" = { checksum = "sha256:9420f77fe48323df1895af9399963ff5242599d4497b1052352f653e7146dfd3", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-windows-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:9420f77fe48323df1895af9399963ff5242599d4497b1052352f653e7146dfd3", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-windows-x64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -1150,10 +1157,10 @@ version = "2.3.3"
 backend = "aqua:watchexec/watchexec"
 "platforms.linux-arm64" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
 "platforms.linux-arm64-musl" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
 "platforms.macos-arm64" = { checksum = "sha256:ab96b0ed8bd02828222f01a003c9efbd0f80facd7b884d716547083545531c90", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-apple-darwin.tar.xz"}
 "platforms.macos-x64" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
