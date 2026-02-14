@@ -174,7 +174,7 @@ version = "0.6.41"
 backend = "cargo:netscanner"
 
 [[tools."cargo:ralph-cli"]]
-version = "2.5.0"
+version = "2.5.1"
 backend = "cargo:ralph-cli"
 
 [[tools."cargo:shellharden"]]
@@ -921,19 +921,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.1.65"
+version = "1.2.1"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:7048deddf4caccf456d1adce8d84b23bb92ca7e53018f83a308f64bc17f41c5d", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:7048deddf4caccf456d1adce8d84b23bb92ca7e53018f83a308f64bc17f41c5d", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:264d236b37a539bc235ab5d67b3e4fd082844775353e5153514dc105e240ef6b", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:d208b471440e1125606eafaffd5047c565f7f5aaf32b76eb33d9a0369e9ddae4", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:1f96b5b975b842353d54243b84583736839adaabfb223272720d2ff4315ff012", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:1f96b5b975b842353d54243b84583736839adaabfb223272720d2ff4315ff012", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:9420f77fe48323df1895af9399963ff5242599d4497b1052352f653e7146dfd3", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:9420f77fe48323df1895af9399963ff5242599d4497b1052352f653e7146dfd3", url = "https://github.com/anomalyco/opencode/releases/download/v1.1.65/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:f8e4f6587a66b85278233a674e29d15096d8275b44bfcbbe1ca73aaad41af44f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.1/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -1183,19 +1173,9 @@ backend = "aqua:ducaale/xh"
 "platforms.windows-x64-baseline" = { checksum = "sha256:49f60a01324ce42726ce1f8bcdff4b376b1e8533aed33d7a107a3cd70f040236", url = "https://github.com/ducaale/xh/releases/download/v0.25.3/xh-v0.25.3-x86_64-pc-windows-msvc.zip"}
 
 [[tools.yq]]
-version = "4.52.2"
+version = "4.52.4"
 backend = "aqua:mikefarah/yq"
-"platforms.linux-arm64" = { checksum = "sha256:c82856ac30da522f50dcdd4f53065487b5a2927e9b87ff637956900986f1f7c2", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_arm64"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:c82856ac30da522f50dcdd4f53065487b5a2927e9b87ff637956900986f1f7c2", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_arm64"}
-"platforms.linux-x64" = { checksum = "sha256:a74bd266990339e0c48a2103534aef692abf99f19390d12c2b0ce6830385c459", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:a74bd266990339e0c48a2103534aef692abf99f19390d12c2b0ce6830385c459", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"}
-"platforms.linux-x64-musl" = { checksum = "sha256:a74bd266990339e0c48a2103534aef692abf99f19390d12c2b0ce6830385c459", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:a74bd266990339e0c48a2103534aef692abf99f19390d12c2b0ce6830385c459", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"}
-"platforms.macos-arm64" = { checksum = "sha256:34613ea97c4c77e1894a8978dbf72588d187a69a6292c10dab396c767a1ecde7", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_darwin_arm64"}
-"platforms.macos-x64" = { checksum = "sha256:54a63555210e73abed09108097072e28bf82a6bb20439a72b55509c4dd42378d", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_darwin_amd64"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:54a63555210e73abed09108097072e28bf82a6bb20439a72b55509c4dd42378d", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_darwin_amd64"}
-"platforms.windows-x64" = { checksum = "sha256:2b6cd8974004fa0511f6b6b359d2698214fadeb4599f0b00e8d85ae62b3922d4", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_windows_amd64.exe"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:2b6cd8974004fa0511f6b6b359d2698214fadeb4599f0b00e8d85ae62b3922d4", url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_windows_amd64.exe"}
+"platforms.macos-arm64" = { checksum = "sha256:6bfa43a439936644d63c70308832390c8838290d064970eaada216219c218a13", url = "https://github.com/mikefarah/yq/releases/download/v4.52.4/yq_darwin_arm64"}
 
 [[tools.zoxide]]
 version = "0.9.9"
