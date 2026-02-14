@@ -587,19 +587,9 @@ backend = "github:railwayapp/railpack"
 "platforms.windows-x64-baseline" = { checksum = "sha256:c7bc9e1041375e657711480b12e9cc4d2fa8a893a39dcc24006008536b4b10a4", url = "https://github.com/railwayapp/railpack/releases/download/v0.17.1/railpack-v0.17.1-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/railwayapp/railpack/releases/assets/342980675"}
 
 [[tools."github:sharkdp/pastel"]]
-version = "0.11.0"
+version = "0.12.0"
 backend = "github:sharkdp/pastel"
-"platforms.linux-arm64" = { checksum = "sha256:ef8256678802f6dd94bdf7e9ce18342b7028884d2b6ffe6b2867fe3815db0555", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210222"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:ef8256678802f6dd94bdf7e9ce18342b7028884d2b6ffe6b2867fe3815db0555", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210222"}
-"platforms.linux-x64" = { checksum = "sha256:f729cef34391966ea7f84d18250b1fdadc2e6f05c0004517fd8afc53f453cb3c", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210539"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:f729cef34391966ea7f84d18250b1fdadc2e6f05c0004517fd8afc53f453cb3c", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210539"}
-"platforms.linux-x64-musl" = { checksum = "sha256:2bf6fa8d8c03b1296868cb9d82eef6c8c0969f1bf5cbc47e6976d01ef400b916", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-unknown-linux-musl.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210528"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:f729cef34391966ea7f84d18250b1fdadc2e6f05c0004517fd8afc53f453cb3c", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210539"}
-"platforms.macos-arm64" = { checksum = "sha256:181850486796383318a26279cf8cc86648498cf1123a199dc7f08178736e3d95", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306209737"}
-"platforms.macos-x64" = { checksum = "sha256:1346eb94a01358ba005270c7849115e7f3f3b385bcbeb2240c4bb775cb291015", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210262"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:1346eb94a01358ba005270c7849115e7f3f3b385bcbeb2240c4bb775cb291015", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210262"}
-"platforms.windows-x64" = { checksum = "sha256:e694fb9d32d9b6c5456268c8cce573b69f3438680204e453d5807a43274813db", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210711"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:f5f0fabc144da298d411e5d340d86a5ca073393abdef5298e1d12ef1f0464ad4", url = "https://github.com/sharkdp/pastel/releases/download/v0.11.0/pastel-v0.11.0-x86_64-pc-windows-gnu.zip", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/306210504"}
+"platforms.macos-arm64" = { checksum = "sha256:7fd81518fac1dab7bd60e4759194a942c51bb911ef5de4513f4a9e3fb4b8ac1c", url = "https://github.com/sharkdp/pastel/releases/download/v0.12.0/pastel-v0.12.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/sharkdp/pastel/releases/assets/355846363"}
 
 [[tools."github:sigoden/opscan"]]
 version = "0.4.0"
