@@ -60,6 +60,11 @@
       "label": "localhost"
     },
     {
+      "command": "clear",
+      "id": "terminal",
+      "label": "terminal"
+    },
+    {
       "args": [
         "-i",
         "-c",
