@@ -364,11 +364,11 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 # Reactive notebook
 alias marimo='uvx marimo'
 
+# Create Agent Skills from repositories, docs (https://skillseekersweb.com)
+alias skill-seekers='uvx skill-seekers'
+
 # GitHub Spec Kit (best for greenfield projects, see OpenSpec for others)
 alias specify='uvx --from specify-cli specify'
-
-# Create Agent Skills from repositories, docs (https://skillseekersweb.com/)
-alias skill-seekers='uvx skill-seekers'
 
 ### dev
 
