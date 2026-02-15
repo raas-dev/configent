@@ -62,7 +62,7 @@
     {
       "command": "clear",
       "id": "terminal",
-      "label": "terminal"
+      "label": "Terminal"
     },
     {
       "args": [
