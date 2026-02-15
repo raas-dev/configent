@@ -367,6 +367,9 @@ alias marimo='uvx marimo'
 # GitHub Spec Kit (best for greenfield projects, see OpenSpec for others)
 alias specify='uvx --from specify-cli specify'
 
+# Create Agent Skills from repositories, docs (https://skillseekersweb.com/)
+alias skill-seekers='uvx skill-seekers'
+
 ### dev
 
 # Command-line utility for rendering projects templates
