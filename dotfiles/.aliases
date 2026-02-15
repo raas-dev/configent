@@ -364,6 +364,9 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 # Reactive notebook
 alias marimo='uvx marimo'
 
+# AI agent resource security scanner (https://github.com/snyk/agent-scan)
+alias mcpscan='uvx mcp-scan'
+
 # Create Agent Skills from repositories, docs (https://skillseekersweb.com)
 alias skill-seekers='uvx skill-seekers'
 
