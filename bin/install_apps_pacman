@@ -60,9 +60,6 @@ $SUDO pacman --noconfirm --needed -S zsh
 # Vim
 $SUDO pacman --noconfirm --needed -S vim
 
-# Neovim
-$SUDO pacman --noconfirm --needed -S neovim
-
 # MultiTail
 $SUDO pacman --noconfirm --needed -S multitail
 

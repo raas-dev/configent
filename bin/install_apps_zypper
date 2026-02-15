@@ -61,9 +61,6 @@ $SUDO zypper install -y zsh
 # Vim
 $SUDO zypper install -y vim
 
-# Neovim
-$SUDO zypper install -y neovim
-
 # MultiTail
 $SUDO zypper install -y multitail
 

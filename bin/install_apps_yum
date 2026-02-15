@@ -68,9 +68,6 @@ $SUDO dnf install -y zsh
 # Vim
 $SUDO dnf install -y vim
 
-# Neovim
-$SUDO dnf install -y neovim
-
 # MultiTail
 $SUDO dnf install -y multitail
 

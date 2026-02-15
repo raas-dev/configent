@@ -73,9 +73,6 @@ $SUDO apt-get install -y zsh
 # Vim
 $SUDO apt-get install -y vim
 
-# Neovim
-$SUDO apt-get install -y neovim
-
 # MultiTail
 $SUDO apt-get install -y multitail
 

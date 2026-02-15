@@ -21,7 +21,7 @@ watchexec = 'latest'
 xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
-'aqua:neovim/neovim' = 'latest'
+'aqua:neovim/neovim' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_neovim" }
 'aqua:pranshuparmar/witr' = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in mise's own registry
 'github:Skardyy/mcat' = 'latest'
