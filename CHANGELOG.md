@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.5](https://github.com/raas-dev/configent/compare/1.204.4...1.204.5) (2026-02-15)
+
+
+### Fixes
+
+* **bin:** remove redundant neovim installs ([d21b4c1](https://github.com/raas-dev/configent/commit/d21b4c17b8574b7fc8b1fe206be31f1fec1d7230))
+* **dotfiles:** align clipboard integration ([19e7ad8](https://github.com/raas-dev/configent/commit/19e7ad8018b5e195918918290daf884d4b96662d))
+* **vimrc:** handle yanks via osc52 automatically ([e707b36](https://github.com/raas-dev/configent/commit/e707b3668066dd15426464e01120b21d2dd53f98))
+
 ## [1.204.4](https://github.com/raas-dev/configent/compare/1.204.3...1.204.4) (2026-02-13)
 
 
