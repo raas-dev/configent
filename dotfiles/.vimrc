@@ -24,6 +24,7 @@ Plugin 'editorconfig/editorconfig-vim'
 " Editor
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'godlygeek/tabular'
+Plugin 'ojroques/vim-oscyank'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'Yggdroot/indentLine'
@@ -193,6 +194,10 @@ nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <silent> <esc>^[ <esc>^[
 
+"-- sh -------------------------------------------------------------------------
+
+let g:is_posix = 1
+
 "-- vim-airline ----------------------------------------------------------------
 
 let g:airline_powerline_fonts = 1
@@ -282,6 +287,13 @@ let g:indentLine_showFirstIndentLevel = 0
 
 let g:vim_json_syntax_conceal = 0
 
-"-- sh -------------------------------------------------------------------------
+"-- vim-oscyank ----------------------------------------------------------------
 
-let g:is_posix = 1
+" Send every yank to the system clipboard via OSC 52
+function! OnYank()
+    if v:event.operator ==# 'y' && v:event.regname ==# ''
+        execute 'OSCYankRegister "'
+    endif
+endfunction
+
+autocmd TextYankPost * call OnYank()
