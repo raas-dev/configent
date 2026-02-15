@@ -72,7 +72,16 @@ set mousehide                   " hide mouse cursor while typing
 
 "-- Clipboard ------------------------------------------------------------------
 
-set clipboard^=unnamed,unnamedplus
+if has('clipboard')
+  if has('unnamedplus')
+    " Linux (X11/Wayland) uses the '+' register for the system clipboard
+    set clipboard=unnamedplus
+  else
+    " macOS uses the '*' register for the system clipboard
+    set clipboard=unnamed
+  endif
+endif
+
 set pastetoggle=<F2>
 set go+=a              " visual selection automatically copied to the clipboard
 
