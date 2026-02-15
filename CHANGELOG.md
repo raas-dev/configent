@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.6](https://github.com/raas-dev/configent/compare/1.204.5...1.204.6) (2026-02-15)
+
+
+### Fixes
+
+* **autocmds:** send osc52 yanks to clipboard ([1363b3e](https://github.com/raas-dev/configent/commit/1363b3e6c4550073d7d5d8652bfb76e3e3ef3f9b))
+
 ## [1.204.5](https://github.com/raas-dev/configent/compare/1.204.4...1.204.5) (2026-02-15)
 
 
