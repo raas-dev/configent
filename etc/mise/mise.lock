@@ -931,19 +931,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.2.4"
+version = "1.2.5"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:541e79f9ccd868767f25d9a395525e38c4b495d661af150a3a86a52360c4e0f6", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:541e79f9ccd868767f25d9a395525e38c4b495d661af150a3a86a52360c4e0f6", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:eade814552a46fc253a890eb18e789852f93832bd78e7060bb08e91c30a0d23f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:eade814552a46fc253a890eb18e789852f93832bd78e7060bb08e91c30a0d23f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:eade814552a46fc253a890eb18e789852f93832bd78e7060bb08e91c30a0d23f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:eade814552a46fc253a890eb18e789852f93832bd78e7060bb08e91c30a0d23f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:7e43d866790166b55ea4ff79b80904ab4bdf6677e75f509bf4368ef8277215ef", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:e0d806b776cda11741b68ccc853c87bb5ad9dcb974cc912fdb11a1fb41dceafa", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:e0d806b776cda11741b68ccc853c87bb5ad9dcb974cc912fdb11a1fb41dceafa", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:70cd167baa61bd435eee8baf4387873b33d7b8b26f5023177a79b27e278dd245", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:70cd167baa61bd435eee8baf4387873b33d7b8b26f5023177a79b27e278dd245", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.4/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:6e9bdb0490e58e750293fba0ce933ac62604da6f95b35adef41ea7c001c41660", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -1011,19 +1001,9 @@ backend = "aqua:pre-commit/pre-commit"
 "platforms.windows-x64-baseline" = { checksum = "sha256:19d00ba35cbf9c04dc3736cd8bb641e8633f3eddd4cedde71809574ae68a2cd1", url = "https://github.com/pre-commit/pre-commit/releases/download/v4.5.1/pre-commit-4.5.1.pyz"}
 
 [[tools.prek]]
-version = "0.3.2"
+version = "0.3.3"
 backend = "aqua:j178/prek"
-"platforms.linux-arm64" = { checksum = "sha256:fce387f0c31e87ceebb1ae84ad5fe3502931b248c89cfe5ee8208dcfa0656260", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:fce387f0c31e87ceebb1ae84ad5fe3502931b248c89cfe5ee8208dcfa0656260", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:7960379beca845367258ce4080a0ce1754d88846d9cfe273106f272442729eff", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:7960379beca845367258ce4080a0ce1754d88846d9cfe273106f272442729eff", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:7960379beca845367258ce4080a0ce1754d88846d9cfe273106f272442729eff", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:7960379beca845367258ce4080a0ce1754d88846d9cfe273106f272442729eff", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:9705b3e3df6db7f1128058fb4f5198736553e6c3957afe0810fa7e974679c88c", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:4bdf9b59530b7593a3f5d8dcce43c67e442a79af730cbd1b73c223ef30b5c1b5", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:4bdf9b59530b7593a3f5d8dcce43c67e442a79af730cbd1b73c223ef30b5c1b5", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:4aaf87523d3588090a6f547a5eca379264ddb287e3a424a1fab73aca6cd9c0c0", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:4aaf87523d3588090a6f547a5eca379264ddb287e3a424a1fab73aca6cd9c0c0", url = "https://github.com/j178/prek/releases/download/v0.3.2/prek-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:12c1e281d4d484eaa6d502804c6a8c77ab06f1fdd22c5fd46c02f87ae5f3c1af", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-aarch64-apple-darwin.tar.gz"}
 
 [[tools.python]]
 version = "3.14.2"
