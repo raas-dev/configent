@@ -931,19 +931,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.2.5"
+version = "1.2.6"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:90e4df8ebc953952e4dc4f17c2e47f4d506bc44b048aa3d027b1791bf2fcd575", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:90e4df8ebc953952e4dc4f17c2e47f4d506bc44b048aa3d027b1791bf2fcd575", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:c766b662c591a1f75aa5e50c4385fbe995f5896a8b56bcc67bef1af3f31e0740", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:c766b662c591a1f75aa5e50c4385fbe995f5896a8b56bcc67bef1af3f31e0740", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:c766b662c591a1f75aa5e50c4385fbe995f5896a8b56bcc67bef1af3f31e0740", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:c766b662c591a1f75aa5e50c4385fbe995f5896a8b56bcc67bef1af3f31e0740", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:6e9bdb0490e58e750293fba0ce933ac62604da6f95b35adef41ea7c001c41660", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:85424753718b5b4984d71360c0438854fc2bcd53fa057968ce92a4e71e992c92", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:85424753718b5b4984d71360c0438854fc2bcd53fa057968ce92a4e71e992c92", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:a566949b0af5ef884478e52b96a80d36d72542ea0a14875f7dfab920fb5d7572", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:a566949b0af5ef884478e52b96a80d36d72542ea0a14875f7dfab920fb5d7572", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.5/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:5b216ba4387bfcdf3b2cd2185e1c9bec2742f7e3d83b8731f9aa864c4517bcff", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
