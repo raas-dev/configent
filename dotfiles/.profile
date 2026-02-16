@@ -289,9 +289,6 @@ export VERCEL_TELEMETRY_DISABLED=1
 
 ### ai #########################################################################
 
-# code-mode-mcp (https://github.com/universal-tool-calling-protocol/code-mode)
-export UTCP_CONFIG_FILE="$HOME/.config/configent/utcp/.utcp_config.json"
-
 # dynamic-mcp (https://github.com/asyrjasalo/dynamic-mcp)
 export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 
