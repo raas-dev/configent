@@ -1135,6 +1135,7 @@ backend = "aqua:aquasecurity/trivy"
 [[tools.uv]]
 version = "0.10.3"
 backend = "aqua:astral-sh/uv"
+"platforms.linux-x64" = { checksum = "sha256:126496b606129eda426dac502af0d910d895f3db81da28efc49b18edf5557741", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:ed2a08079527dafae4943fee80162ed750286657901e642eba4c9de928706df8", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-aarch64-apple-darwin.tar.gz"}
 
 [[tools.viddy]]
