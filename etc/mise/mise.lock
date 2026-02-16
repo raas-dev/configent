@@ -892,7 +892,7 @@ version = "0.9.4"
 backend = "npm:@neuralnomads/codenomad"
 
 [[tools."npm:@openchamber/web"]]
-version = "1.6.8"
+version = "1.6.9"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
