@@ -457,7 +457,7 @@ alias repomix='bunx repomix'
 # skills-installer (https://claude-plugins.dev/skills)
 alias skills-installer='bunx skills-installer'
 
-### Functions: AI ##############################################################
+### AI #########################################################################
 
 ai() {
   if [ -n "$1" ]; then
@@ -478,7 +478,12 @@ oc_agent() {
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
-### Functions: Docker ##########################################################
+## openchamber
+alias occ='openchamber serve --daemon'
+alias ocs='openchamber stop'
+
+
+### Docker ####################################################################
 
 # Generic docker build and run
 d() {
@@ -562,7 +567,7 @@ d() {
   return $run_exit_code
 }
 
-### Functions: Utilities #######################################################
+### Utilities ##################################################################
 
 # Generic extract package
 ext() {
@@ -657,7 +662,7 @@ wttr() {
   curl "v2.wttr.in/${city}?MF&lang=en"
 }
 
-### Functions: Logs ############################################################
+### Logs #######################################################################
 
 # Follow logs with (multi)tail
 t() {
@@ -859,7 +864,7 @@ tl() {
   fi
 }
 
-### Functions: Cleaners ########################################################
+### Cleaners ###################################################################
 
 # Npm remove all global packages (except later npm installed via npm)
 npmclear() {
@@ -943,7 +948,7 @@ agyclear() {
   esac
 }
 
-### Functions: Nix #############################################################
+### Nix ########################################################################
 
 # Nix in containerd
 nixd() {
@@ -1050,7 +1055,7 @@ nixery() {
     "$image" "$command"
 }
 
-### Ad-hoc binaries via Nix ####################################################
+### ad-hoc binaries via Nix
 
 # file explorers
 alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
