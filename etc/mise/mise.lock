@@ -339,6 +339,17 @@ backend = "github:abhimanyu003/sttr"
 "platforms.windows-x64" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:3f15bd8c7801fd2c5b10b86129e636bf1d39a1521229c285f01492c1145c21a1", url = "https://github.com/abhimanyu003/sttr/releases/download/v0.2.30/sttr_Windows_x86_64.zip", url_api = "https://api.github.com/repos/abhimanyu003/sttr/releases/assets/332810108"}
 
+[[tools."github:always-further/nono"]]
+version = "0.5.0"
+backend = "github:always-further/nono"
+"platforms.linux-x64" = { checksum = "sha256:e14ca10f7e76f63a010fe3df7a6383515328ac165e178047c0800c0cd424712b", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334871"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:e14ca10f7e76f63a010fe3df7a6383515328ac165e178047c0800c0cd424712b", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334871"}
+"platforms.linux-x64-musl" = { checksum = "sha256:e14ca10f7e76f63a010fe3df7a6383515328ac165e178047c0800c0cd424712b", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334871"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:e14ca10f7e76f63a010fe3df7a6383515328ac165e178047c0800c0cd424712b", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334871"}
+"platforms.macos-arm64" = { checksum = "sha256:5269ab5357c21d36cee70c3c6a499cd2538d34de03229f2c9c0f4915568e9d88", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334869"}
+"platforms.macos-x64" = { checksum = "sha256:20345a92a8c6ab7c998c102f4a621a8945c27e1b91908dcc186cb7a624f8b8cd", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334868"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:20345a92a8c6ab7c998c102f4a621a8945c27e1b91908dcc186cb7a624f8b8cd", url = "https://github.com/always-further/nono/releases/download/v0.5.0/nono-v0.5.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/always-further/nono/releases/assets/356334868"}
+
 [[tools."github:anordal/shellharden"]]
 version = "4.3.1"
 backend = "github:anordal/shellharden"
@@ -455,7 +466,17 @@ backend = "github:joshmedeski/sesh"
 [[tools."github:max-sixty/worktrunk"]]
 version = "0.24.1"
 backend = "github:max-sixty/worktrunk"
+"platforms.linux-arm64" = { checksum = "sha256:5855f0a7b29aef946e157cdde169a23090b82bbe6360db38ac308c752fedb7fc", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917326"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:5855f0a7b29aef946e157cdde169a23090b82bbe6360db38ac308c752fedb7fc", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917326"}
+"platforms.linux-x64" = { checksum = "sha256:ebe45cd363ec17bb44389ff37b4abf49145c90e4e7ba6eeb8aa5a8e37ec1430c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917335"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:ebe45cd363ec17bb44389ff37b4abf49145c90e4e7ba6eeb8aa5a8e37ec1430c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917335"}
+"platforms.linux-x64-musl" = { checksum = "sha256:ebe45cd363ec17bb44389ff37b4abf49145c90e4e7ba6eeb8aa5a8e37ec1430c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917335"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:ebe45cd363ec17bb44389ff37b4abf49145c90e4e7ba6eeb8aa5a8e37ec1430c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917335"}
 "platforms.macos-arm64" = { checksum = "sha256:f08d875f051133024c73e88a5c45676cffb687af71b3f7bdc794bbbb6d59f1c5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917317"}
+"platforms.macos-x64" = { checksum = "sha256:aa1ed7e7683a306743d15378153148a8f5f16d7d2356ca577dbae179e7ce393e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917331"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:aa1ed7e7683a306743d15378153148a8f5f16d7d2356ca577dbae179e7ce393e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917331"}
+"platforms.windows-x64" = { checksum = "sha256:dbaa1435af9ccd7b3d302f534f6983dc7854af66703b3e2c7735a7b24d0b32cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917333"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:dbaa1435af9ccd7b3d302f534f6983dc7854af66703b3e2c7735a7b24d0b32cf", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917333"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -1027,6 +1048,17 @@ backend = "aqua:j178/prek"
 [[tools.python]]
 version = "3.14.2"
 backend = "core:python"
+"platforms.linux-arm64" = { checksum = "sha256:1d243bfab134c9fd3e099780a811079d8c6158283bddde65de2bc5f6eda74f7c", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:1d243bfab134c9fd3e099780a811079d8c6158283bddde65de2bc5f6eda74f7c", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:c2926d6707f4339e3bf30e90437b387712b47e60e9e55bff1dcb36bf7688b01d", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:c2926d6707f4339e3bf30e90437b387712b47e60e9e55bff1dcb36bf7688b01d", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:c2926d6707f4339e3bf30e90437b387712b47e60e9e55bff1dcb36bf7688b01d", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:c2926d6707f4339e3bf30e90437b387712b47e60e9e55bff1dcb36bf7688b01d", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:2f82ed0cf902c8a2863a3fc5864909645c761e4e0a96525850c9ef8f7e3b79e7", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-aarch64-apple-darwin-install_only_stripped.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:51e886261fb79f64079b20181a7f8adfca738f2b2882882e981b67a165e1809b", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-apple-darwin-install_only_stripped.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:51e886261fb79f64079b20181a7f8adfca738f2b2882882e981b67a165e1809b", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-apple-darwin-install_only_stripped.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:42638ce9bd8c177010c44c7a6a6fb3e1dc0b04ea372089036c689ccb57dc0d09", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:42638ce9bd8c177010c44c7a6a6fb3e1dc0b04ea372089036c689ccb57dc0d09", url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260127/cpython-3.14.2+20260127-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"}
 
 [[tools.ripgrep]]
 version = "15.1.0"
@@ -1166,10 +1198,10 @@ version = "2.3.3"
 backend = "aqua:watchexec/watchexec"
 "platforms.linux-arm64" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
 "platforms.linux-arm64-musl" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
 "platforms.macos-arm64" = { checksum = "sha256:ab96b0ed8bd02828222f01a003c9efbd0f80facd7b884d716547083545531c90", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-apple-darwin.tar.xz"}
 "platforms.macos-x64" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}

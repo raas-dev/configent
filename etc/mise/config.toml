@@ -108,6 +108,7 @@ bun = 'latest'
 'github:asyrjasalo/augent' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = '1.5.0'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
+'github:always-further/nono' = 'latest'
 'cargo:fossil-mcp' = 'latest'
 'cargo:ralph-cli' = 'latest'
 'npm:agent-browser' = 'latest'
