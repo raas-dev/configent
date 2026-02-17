@@ -763,6 +763,11 @@ backend = "aqua:jqlang/jq"
 "platforms.windows-x64" = { checksum = "sha256:23cb60a1354eed6bcc8d9b9735e8c7b388cd1fdcb75726b93bc299ef22dd9334", url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-windows-amd64.exe"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:23cb60a1354eed6bcc8d9b9735e8c7b388cd1fdcb75726b93bc299ef22dd9334", url = "https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-windows-amd64.exe"}
 
+[[tools.kind]]
+version = "0.31.0"
+backend = "aqua:kubernetes-sigs/kind"
+"platforms.macos-arm64" = { checksum = "sha256:88bf554fe9da6311c9f8c2d082613c002911a476f6b5090e9420b35d84e70c5c", url = "https://github.com/kubernetes-sigs/kind/releases/download/v0.31.0/kind-darwin-arm64"}
+
 [[tools.kubectl]]
 version = "1.35.1"
 backend = "aqua:kubernetes/kubernetes/kubectl"

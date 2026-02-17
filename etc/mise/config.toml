@@ -58,6 +58,7 @@ github-cli = 'latest'
 # containers
 #docker-cli = 'latest'
 #dive = 'latest'
+kind = 'latest'
 lazyjournal = 'latest'
 lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 oxker = 'latest'
