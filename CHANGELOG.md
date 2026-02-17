@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.7](https://github.com/raas-dev/configent/compare/1.204.6...1.204.7) (2026-02-17)
+
+
+### Fixes
+
+* **aliases:** add mcpscan alias ([a41ec8f](https://github.com/raas-dev/configent/commit/a41ec8f411815a75280d9348092a8379a1e16474))
+* **aliases:** add skills installer alias ([0a58528](https://github.com/raas-dev/configent/commit/0a5852848b02c1c6a7006e64cb0ed4458b4f2bdc))
+* **aliases:** tidy aliases and add occ shortcuts ([9c0ab34](https://github.com/raas-dev/configent/commit/9c0ab34c293f048900571bb0b7ad24d61d0b76a7))
+* **bin:** provide kind shim for lima ([0ba5df7](https://github.com/raas-dev/configent/commit/0ba5df78787603653a93a1105563fd2ff780d261))
+* **dotfiles:** add lima kube helpers ([759fbab](https://github.com/raas-dev/configent/commit/759fbabd98a82686a1699f1c46ca69b523f33b98))
+* **mise:** add kind to mise setup ([1a8302c](https://github.com/raas-dev/configent/commit/1a8302cfd1cfdd63de0a8be512713a2269ff3df6))
+* **mise:** ensure pwsh setup without dotnet ([532dc2b](https://github.com/raas-dev/configent/commit/532dc2bad22325b05b15de8e5748efe2705e995a))
+* **skillseekers:** cleanup skill seekers integration ([4f87dbc](https://github.com/raas-dev/configent/commit/4f87dbca7edb3454a07dc2a7f6653e6109e8e6af))
+* **utcp:** remove code-mode mcp config ([6eda1fd](https://github.com/raas-dev/configent/commit/6eda1fd449638b04390a9e65945fcd78a4b5acc0))
+
 ## [1.204.6](https://github.com/raas-dev/configent/compare/1.204.5...1.204.6) (2026-02-15)
 
 
