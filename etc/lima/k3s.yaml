@@ -63,13 +63,6 @@ copyToHost:
     host: "{{.Dir}}/kubeconfig.yaml"
     deleteOnStop: true
 
-message: |
-  To run `kubectl` on the host (assumes kubectl is installed), run the following commands:
-  ------
-  export KUBECONFIG="{{.Dir}}/kubeconfig.yaml"
-  kubectl get nodes
-  ------
-
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
   enabled: false

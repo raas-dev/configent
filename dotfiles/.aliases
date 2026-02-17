@@ -273,6 +273,16 @@ vv() {
   fi
 }
 
+# copy kubectl config from lima vm
+kubeconfig() {
+  if [ -n "$1" ]; then
+    local vm_name="$1"
+  else
+    local vm_name="default"
+  fi
+  limactl copy "$vm_name":~/.kube/config "$HOME/.lima/$vm_name/kubeconfig.yaml"
+}
+
 ### docker #####################################################################
 
 alias dr='docker rm --force $(docker ps --all --quiet)'

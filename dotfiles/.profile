@@ -222,6 +222,12 @@ path_append "$HOME/.azure/bin"
 
 path_append "$HOME/.azd/bin"
 
+### kubectl ####################################################################
+
+if command -v kubectl >/dev/null; then
+  export KUBECONFIG="$HOME/.kube/config:$HOME/.lima/default/kubeconfig.yaml:$HOME/.lima/ubuntu/kubeconfig.yaml:$HOME/.lima/k3s/kubeconfig.yaml"
+fi
+
 ### kubectl krew ###############################################################
 
 path_append "$HOME/.krew/bin"
