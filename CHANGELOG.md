@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.10](https://github.com/raas-dev/configent/compare/1.204.9...1.204.10) (2026-02-17)
+
+
+### Fixes
+
+* **vimrc:** disable json conceallevel ([c6907f3](https://github.com/raas-dev/configent/commit/c6907f300dafed425840f0ce76077e74c36605a4))
+* **vimrc:** keep indentline without conceal ([c2975f2](https://github.com/raas-dev/configent/commit/c2975f2a2e665f7603cc60c8ca860c1aaa77c43c))
+
 ## [1.204.9](https://github.com/raas-dev/configent/compare/1.204.8...1.204.9) (2026-02-17)
 
 
