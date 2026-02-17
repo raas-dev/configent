@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.8](https://github.com/raas-dev/configent/compare/1.204.7...1.204.8) (2026-02-17)
+
+
+### Fixes
+
+* **kind:** run limactl shell via sh ([06192c1](https://github.com/raas-dev/configent/commit/06192c18c5902428db60df22fe902df24979d08e))
+* **lima:** ensure lima kubeconfig sync ([fa03388](https://github.com/raas-dev/configent/commit/fa03388277c9b5c513807077fcf4190175ba5f02))
+
 ## [1.204.7](https://github.com/raas-dev/configent/compare/1.204.6...1.204.7) (2026-02-17)
 
 
