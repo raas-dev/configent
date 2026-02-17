@@ -237,22 +237,11 @@ backend = "aqua:mr-karan/doggo"
 "platforms.windows-x64-baseline" = { checksum = "sha256:479d3cf06b4aa131a2b48b252bc3df5c2eb1191713a2df218c88720372d8a79c", url = "https://github.com/mr-karan/doggo/releases/download/v1.1.4/doggo_1.1.4_Windows_x86_64.zip"}
 
 [[tools.dotnet]]
-version = "8.0.415"
+version = "10.0.103"
 backend = "asdf:dotnet"
-"platforms.linux-arm64" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.linux-arm64-musl" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.linux-x64" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.linux-x64-baseline" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.linux-x64-musl" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.linux-x64-musl-baseline" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.macos-arm64" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.macos-x64" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.macos-x64-baseline" = { url = "https://dot.net/v1/dotnet-install.sh"}
-"platforms.windows-x64" = { url = "https://dot.net/v1/dotnet-install.ps1"}
-"platforms.windows-x64-baseline" = { url = "https://dot.net/v1/dotnet-install.ps1"}
 
 [[tools."dotnet:powershell"]]
-version = "7.4.13"
+version = "7.5.4"
 backend = "dotnet:powershell"
 
 [[tools.duf]]
@@ -933,7 +922,17 @@ backend = "aqua:sharkdp/numbat"
 [[tools.opencode]]
 version = "1.2.6"
 backend = "aqua:anomalyco/opencode"
+"platforms.linux-arm64" = { checksum = "sha256:a02f7a8dda114f30559b73b94dca5302742731bcac6394463436ba1462733d83", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:a02f7a8dda114f30559b73b94dca5302742731bcac6394463436ba1462733d83", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:5b216ba4387bfcdf3b2cd2185e1c9bec2742f7e3d83b8731f9aa864c4517bcff", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-arm64.zip"}
+"platforms.macos-x64" = { checksum = "sha256:2f7802251f05d2ed9a128bdeca18f0ba401bba75e2301e4619b9d586536d1246", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-x64.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:2f7802251f05d2ed9a128bdeca18f0ba401bba75e2301e4619b9d586536d1246", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-x64.zip"}
+"platforms.windows-x64" = { checksum = "sha256:b6352e014308be8b4e7dbf23660de5a4540bfa5ca024d2b8c20f5a7059d1c875", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-windows-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:b6352e014308be8b4e7dbf23660de5a4540bfa5ca024d2b8c20f5a7059d1c875", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-windows-x64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -984,6 +983,21 @@ backend = "pipx:sncli"
 [[tools."pipx:tldr"]]
 version = "3.4.3"
 backend = "pipx:tldr"
+
+[[tools.powershell]]
+version = "7.5.4"
+backend = "aqua:PowerShell/PowerShell"
+"platforms.linux-arm64" = { checksum = "sha256:4b32d4cb86a43dfb83d5602d0294295bf22fafbf9e0785d1aaef81938cda92f8", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:4b32d4cb86a43dfb83d5602d0294295bf22fafbf9e0785d1aaef81938cda92f8", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:1fd7983fe56ca9e6233f126925edb24bf6b6b33e356b69996d925c4db94e2fef", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:1fd7983fe56ca9e6233f126925edb24bf6b6b33e356b69996d925c4db94e2fef", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:1fd7983fe56ca9e6233f126925edb24bf6b6b33e356b69996d925c4db94e2fef", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:1fd7983fe56ca9e6233f126925edb24bf6b6b33e356b69996d925c4db94e2fef", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:3aaadd7ca62f1e4dbe59145b6af24e926d61f8da8a4782bc535e500c184135f0", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-osx-arm64.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:cd16a04c1b99cdacbdc0337b0fd0da50dbf1a8b4e8437bcb4ca9118ef729211a", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-osx-x64.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:cd16a04c1b99cdacbdc0337b0fd0da50dbf1a8b4e8437bcb4ca9118ef729211a", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-osx-x64.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:b40d192ae95ba6ccc4cc362ff4e1b18ca6fb5055bebbcd3920684e12701fa8f6", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:b40d192ae95ba6ccc4cc362ff4e1b18ca6fb5055bebbcd3920684e12701fa8f6", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.zip"}
 
 [[tools.pre-commit]]
 version = "4.5.1"
@@ -1125,8 +1139,17 @@ backend = "aqua:aquasecurity/trivy"
 [[tools.uv]]
 version = "0.10.3"
 backend = "aqua:astral-sh/uv"
+"platforms.linux-arm64" = { checksum = "sha256:a98f8decf21204d40acb512b0e08a803ed718c640a97f3c095864967463d5b15", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:a98f8decf21204d40acb512b0e08a803ed718c640a97f3c095864967463d5b15", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-aarch64-unknown-linux-musl.tar.gz"}
 "platforms.linux-x64" = { checksum = "sha256:126496b606129eda426dac502af0d910d895f3db81da28efc49b18edf5557741", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:126496b606129eda426dac502af0d910d895f3db81da28efc49b18edf5557741", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:126496b606129eda426dac502af0d910d895f3db81da28efc49b18edf5557741", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:126496b606129eda426dac502af0d910d895f3db81da28efc49b18edf5557741", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-unknown-linux-musl.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:ed2a08079527dafae4943fee80162ed750286657901e642eba4c9de928706df8", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:e8071cedb9986724ca3d70020b4460a85a274394b378c0e8eb1e8f9e33402ff9", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-apple-darwin.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:e8071cedb9986724ca3d70020b4460a85a274394b378c0e8eb1e8f9e33402ff9", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-apple-darwin.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:d029201a3eebaa8a0001fa762ee44ca14a9cb3cae4d59fc3fd69857da03a6f8c", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:d029201a3eebaa8a0001fa762ee44ca14a9cb3cae4d59fc3fd69857da03a6f8c", url = "https://github.com/astral-sh/uv/releases/download/0.10.3/uv-x86_64-pc-windows-msvc.zip"}
 
 [[tools.viddy]]
 version = "1.3.0"
@@ -1148,10 +1171,10 @@ version = "2.3.3"
 backend = "aqua:watchexec/watchexec"
 "platforms.linux-arm64" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
 "platforms.linux-arm64-musl" = { checksum = "sha256:45347d86979de6a9766f3cac3a3c863396a7c3cfd1853a9f2a920d4c402cbe40", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:468d330b442fd766bb8e1d305b6be018a45bfbf950812d5f82430f0529416be0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-musl.tar.xz"}
+"platforms.linux-x64" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:d9ac7f301dc21885b10ca3d2e428b48b6eb7c22202e206c31111f9158d6db6f0", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-unknown-linux-gnu.tar.xz"}
 "platforms.macos-arm64" = { checksum = "sha256:ab96b0ed8bd02828222f01a003c9efbd0f80facd7b884d716547083545531c90", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-aarch64-apple-darwin.tar.xz"}
 "platforms.macos-x64" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:d3e2fae0abdccbf8e6d6d7e4c693eef45d32bd4fb2626c763dc4fc892e97d6da", url = "https://github.com/watchexec/watchexec/releases/download/v2.3.3/watchexec-2.3.3-x86_64-apple-darwin.tar.xz"}

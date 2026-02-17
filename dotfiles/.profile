@@ -152,6 +152,11 @@ export RICH_SHOW_LOCALS=true
 if command -v dotnet >/dev/null; then
   #shellcheck disable=SC2155  # will not declare separately, value compactness
   export DOTNET_ROOT="$(dirname "$(which dotnet)")"
+fi
+
+### powershell #################################################################
+
+if command -v pwsh >/dev/null; then
   export POWERSHELL_UPDATECHECK="Off"
 fi
 
