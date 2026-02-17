@@ -282,10 +282,10 @@ let g:indentLine_char_list = ['┆', '┊']
 let g:indentLine_enabled = 1
 let g:indentLine_setColors = 0
 let g:indentLine_showFirstIndentLevel = 0
+let g:indentLine_setConceal = 0
 
 "-- vim-json -------------------------------------------------------------------
 
-set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 "-- vim-oscyank ----------------------------------------------------------------
