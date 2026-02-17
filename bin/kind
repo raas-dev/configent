@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# shim for running `kind` in lima VM
+
+: "${NAME:="default"}"
+: "${TEMPLATE:="debian"}"
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  if ! command -v limactl >/dev/null; then
+    echo "Error: limactl not found on macOS, cannot start Linux VM for kind."
+    exit 127
+  fi
+  # start VM if not running
+  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
+    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+    else
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+    fi
+  fi
+  # pass arguments to this exact same script on the guest VM
+  limactl shell "$NAME" ~/configent/bin/kind "$@"
+else
+  if [ -x "$HOME/.local/bin/mise" ]; then
+    "$HOME/.local/bin/mise" exec kind -- kind "$@"
+  else
+    echo "Error: mise not found in this Linux system."
+    exit 127
+  fi
+fi
