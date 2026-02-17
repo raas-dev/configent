@@ -27,7 +27,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   fi
   # copy kubectl config from lima vm to host (if it exists)
-  if limactl shell "$NAME" test -f ~/.kube/config; then
+  if limactl shell "$NAME" sh -c 'test -f ~/.kube/config'; then
     limactl copy "$NAME":~/.kube/config "$HOME/.lima/$NAME/kubeconfig.yaml"
   fi
 
