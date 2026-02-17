@@ -172,7 +172,7 @@ version = "0.11.0"
 backend = "cargo:diskonaut"
 
 [[tools."cargo:fossil-mcp"]]
-version = "0.1.3"
+version = "0.1.5"
 backend = "cargo:fossil-mcp"
 
 [[tools."cargo:kondo"]]
@@ -453,19 +453,9 @@ backend = "github:joshmedeski/sesh"
 "platforms.macos-arm64" = { checksum = "sha256:831a375ed140bbb79de0caf237a88300260823fbc713ca7ab4d0c7d636bfac67", url = "https://github.com/joshmedeski/sesh/releases/download/v2.22.0/sesh_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/joshmedeski/sesh/releases/assets/349615504"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.24.0"
+version = "0.24.1"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:d378ad55fa76176678dacaa6e81ffa07a9db68b85e96e97978c7ea3ca72e1183", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080852"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:d378ad55fa76176678dacaa6e81ffa07a9db68b85e96e97978c7ea3ca72e1183", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080852"}
-"platforms.linux-x64" = { checksum = "sha256:504c3f556167679efa635b38da0ebdf516c8bc2cfc7b059bb5c5121ce67b970a", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080862"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:504c3f556167679efa635b38da0ebdf516c8bc2cfc7b059bb5c5121ce67b970a", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080862"}
-"platforms.linux-x64-musl" = { checksum = "sha256:504c3f556167679efa635b38da0ebdf516c8bc2cfc7b059bb5c5121ce67b970a", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080862"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:504c3f556167679efa635b38da0ebdf516c8bc2cfc7b059bb5c5121ce67b970a", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080862"}
-"platforms.macos-arm64" = { checksum = "sha256:4b54354b935f9cc976dec7385ba656c6f551bde7adef3e4431131e5814bc2488", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080847"}
-"platforms.macos-x64" = { checksum = "sha256:1450903d82b79c865fb67c6fd01a6df04734dcf05c3090282a0b7fcd3c752b21", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080857"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:1450903d82b79c865fb67c6fd01a6df04734dcf05c3090282a0b7fcd3c752b21", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080857"}
-"platforms.windows-x64" = { checksum = "sha256:460515a71ee617789fb95abb7083bda79fe8bd99cb144dcd25ced36153eba6cc", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080860"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:460515a71ee617789fb95abb7083bda79fe8bd99cb144dcd25ced36153eba6cc", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356080860"}
+"platforms.macos-arm64" = { checksum = "sha256:f08d875f051133024c73e88a5c45676cffb687af71b3f7bdc794bbbb6d59f1c5", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.24.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/356917317"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -870,7 +860,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.42"
+version = "2.1.44"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
