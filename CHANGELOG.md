@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.9](https://github.com/raas-dev/configent/compare/1.204.8...1.204.9) (2026-02-17)
+
+
+### Fixes
+
+* **kind:** preserve guest exit status ([f6be316](https://github.com/raas-dev/configent/commit/f6be316546718013e155f40234b0c478c6be3f7f))
+
 ## [1.204.8](https://github.com/raas-dev/configent/compare/1.204.7...1.204.8) (2026-02-17)
 
 
