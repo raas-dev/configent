@@ -26,6 +26,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
     fi
   fi
+  # copy kubectl config from lima vm to host (if it exists)
+  if limactl shell "$NAME" test -f ~/.kube/config; then
+    limactl copy "$NAME":~/.kube/config "$HOME/.lima/$NAME/kubeconfig.yaml"
+  fi
+
   # pass arguments to this exact same script on the guest VM
   limactl shell "$NAME" ~/configent/bin/kind "$@"
 else

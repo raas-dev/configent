@@ -222,12 +222,6 @@ path_append "$HOME/.azure/bin"
 
 path_append "$HOME/.azd/bin"
 
-### kubectl ####################################################################
-
-if command -v kubectl >/dev/null; then
-  export KUBECONFIG="$HOME/.kube/config:$HOME/.lima/default/kubeconfig.yaml:$HOME/.lima/ubuntu/kubeconfig.yaml:$HOME/.lima/k3s/kubeconfig.yaml"
-fi
-
 ### kubectl krew ###############################################################
 
 path_append "$HOME/.krew/bin"
@@ -344,6 +338,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # containerd
   # CONTAINERD_ADDRESS: nerdctl does not run on macOS (2026-01)
   export BUILDKIT_HOST="unix://$HOME/.lima/ubuntu/sock/buildkitd.sock"
+
+  # kubernetes
+  if command -v kubectl >/dev/null; then
+    export KUBECONFIG="$HOME/.lima/default/kubeconfig.yaml:$HOME/.lima/ubuntu/kubeconfig.yaml:$HOME/.lima/k3s/kubeconfig.yaml:$HOME/.kube/config"
+  fi
 fi
 
 ### lima #######################################################################
