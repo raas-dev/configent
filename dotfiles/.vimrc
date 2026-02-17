@@ -285,7 +285,7 @@ let g:indentLine_showFirstIndentLevel = 0
 
 "-- vim-json -------------------------------------------------------------------
 
-set conceallevel = 0
+set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 "-- vim-oscyank ----------------------------------------------------------------
