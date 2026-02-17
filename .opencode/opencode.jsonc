@@ -8,8 +8,10 @@
       "type": "local"
     }
   },
-  "model": "zai-coding-plan/glm-5",
+  "model": "minimax-coding-plan/MiniMax-M2.5",
   "plugin": [
-    "oh-my-opencode-slim@0.7.0"
+    "oh-my-opencode@3.5.3",
+    "opencode-pty",
+    "opencode-scheduler"
   ]
 }
