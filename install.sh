@@ -27,10 +27,10 @@ export FLATPAKS="${FLATPAKS:-false}"
 
 if [ "$(uname -s)" = 'Linux' ]; then
   if [ "$(id -u)" = 0 ]; then
-    CANELEVATE='true'
+    export CANELEVATE='true'
     SUDO=''
   elif command -v sudo >/dev/null; then
-    CANELEVATE='true'
+    export CANELEVATE='true'
     SUDO='sudo'
 
     printf "Sudo might be prompted to install git from distro's packages.\n"
@@ -45,7 +45,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
       kill -0 "$$" || exit
     done 2>/dev/null &
   else
-    CANELEVATE='false'
+    export CANELEVATE='false'
   fi
 
   if [ "$CANELEVATE" = 'true' ]; then
