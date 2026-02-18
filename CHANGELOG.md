@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.13](https://github.com/raas-dev/configent/compare/1.204.12...1.204.13) (2026-02-18)
+
+
+### Fixes
+
+* **git-credential-pass:** handle missing pass dependency ([1d9bcb2](https://github.com/raas-dev/configent/commit/1d9bcb2d344bd15be9a95a9f12257128c67eb72f))
+
 ## [1.204.12](https://github.com/raas-dev/configent/compare/1.204.11...1.204.12) (2026-02-18)
 
 
