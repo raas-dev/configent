@@ -231,4 +231,6 @@
 ### git-credentials ############################################################
 
 [credential]
-  helper = store
+  helper = pass --prefix git
+  useHttpPath = true
+
