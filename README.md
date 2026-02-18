@@ -9,15 +9,15 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
-- Provides AI agents to automate tasks requiring web browser and computer use.
+- Creates AI agents to automate tasks requiring web browser and computer use.
 
 | ![Screenshot of Brave Browser and IDE with tmux and zsh](ui/target.webp) |
 | ------------------------------------------------------------------------ |
 
 A few features:
 
-- One character `.aliases`: The fastest are the commands one does not type.
-- Prefers `mise exec` and `n`ix-shells for ad-hoc CLI usage over installations.
+- One character command `.aliases`. Less typing, the faster it happens.
+- Prefers `mise exec` and `n`ix-shells for ad-hoc CLI use over installations.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Ask AI (`a <question>`) or launch a computer-use agent to do the work (`_`).
@@ -61,9 +61,8 @@ User's configs (dotfiles, symlinks and directories) overridden are backed up in
 Script `install.sh` is non-interactive and suitable for cloud-init when run as
 user with passwordless sudo.
 
-**The defaults are what is most often used in software development in cloud.**
-If you want to deviate from it, the fastest is to fork this repository,
-make changes and cURL your public fork.
+**The defaults are opinionated.** If you want to deviate, the fastest way is to
+fork this repository, make changes and cURL your public fork.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
 explicitly pass `FLATPAKS=true` (Linux distros) or `CASKS=true` (macOS) to the
