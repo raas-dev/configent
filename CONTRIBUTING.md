@@ -1,7 +1,6 @@
 # Contributing
 
-Kindly create an [issue](https://github.com/raas-dev/configent/issues) and
-a pull request.
+Kindly create an [issue](https://github.com/raas-dev/configent/issues) first.
 
 ## Guidelines
 
@@ -9,7 +8,7 @@ a pull request.
 2. Install with `mise`. For `root`, use distros' repos. Use minimum of Homebrew.
 3. If an app is **installed**, it must work on all Linux distros in README.md.
 4. The app must work on AArch64 Linux as most Apple Macs are ARM64 since 2023.
-5. Do not install if version does not matter. Call app via `uvx`, `bunx` or `n`.
+5. Do not install if you do not have to lock, use `uvx`, `bunx` or `mise exec`.
 
 ## Testing
 

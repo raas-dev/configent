@@ -6,7 +6,7 @@
 No startup pitches, I am a DevOps principled environment bootstrapper.
 
 - Work must finish by running one command. Mouse is not productivity.
-- Does not install 10s of tools most of which can be run ad-hoc in a container.
+- Does not install 10s of tools most of which can be run ad-hoc.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
 - Provides AI agents to automate tasks requiring web browser and computer use.
@@ -17,7 +17,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 A few features:
 
 - One character `.aliases`: The fastest are the commands one does not type.
-- Terminal is mostly Rust and Go for speed, use `n`ix-shells for ad-hoc CLIs.
+- Prefers `mise exec` and `n`ix-shells for ad-hoc CLI usages over installing.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Quickly ask AI (`a <question>`) or open a specialized agent (`_ <name>`).
