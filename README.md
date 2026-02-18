@@ -16,7 +16,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 
 A few features:
 
-- One character command `.aliases`. Less typing, the faster it happens.
+- One character command `.aliases`. The less typing, the faster it happens.
 - Prefers `mise exec` and `n`ix-shells for ad-hoc CLI use over installations.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
