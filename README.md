@@ -17,7 +17,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 A few features:
 
 - One character `.aliases`: The fastest are the commands one does not type.
-- Prefers `mise exec` and `n`ix-shells for ad-hoc CLI usages over installing.
+- Prefers `mise exec` and `n`ix-shells for ad-hoc CLI usage over installations.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Quickly ask AI (`a <question>`) or open a specialized agent (`_ <name>`).
