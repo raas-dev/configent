@@ -233,4 +233,3 @@
 [credential]
   helper = pass --prefix git
   useHttpPath = true
-
