@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.11](https://github.com/raas-dev/configent/compare/1.204.10...1.204.11) (2026-02-18)
+
+
+### Fixes
+
+* **tools:** use mise exec for openchamber alias ([e2ac35b](https://github.com/raas-dev/configent/commit/e2ac35b57d2e9e4ac6078bc5e864d67c5d5dbb1b))
+
 ## [1.204.10](https://github.com/raas-dev/configent/compare/1.204.9...1.204.10) (2026-02-17)
 
 
