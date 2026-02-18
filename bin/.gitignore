@@ -1,3 +1,4 @@
+
 *
 
 !.gitignore
@@ -5,6 +6,7 @@
 !buildctl
 !docker
 !docker-compose
+!git-credential-pass
 !install_*
 !kind
 !lessfilter
