@@ -148,7 +148,7 @@ alias §='trans :fi'
 alias \?='trans'
 alias \#='echo'
 alias ¨='bat --show-all'
-alias ,='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
+alias ,='mise_exec'
 alias _='oc_agent'
 
 ### Privileged utilities #######################################################
@@ -578,6 +578,9 @@ d() {
 
 ### Utilities ##################################################################
 
+# More inclusive ripgrep, see alias `s`
+alias ss='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
+
 # Generic extract package
 ext() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
@@ -649,6 +652,14 @@ kalk() {
     numbat
   else
     numbat --expression "$*"
+  fi
+}
+
+mise_exec() {
+  if mise search --match-type equal "$1" >/dev/null 2>&1; then
+    mise exec "$1" -- "$@"
+  else
+    mise exec "$@"
   fi
 }
 
