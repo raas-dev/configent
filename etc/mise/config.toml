@@ -106,15 +106,14 @@ bun = 'latest'
 
 # ai tools
 'github:asyrjasalo/augent' = 'latest'
-'github:asyrjasalo/dynamic-mcp' = '1.5.0'
+'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
-'cargo:fossil-mcp' = 'latest'
+#'cargo:fossil-mcp' = 'latest'
 'cargo:ralph-cli' = 'latest'
 'npm:agent-browser' = 'latest'
 
 # opencode
 'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-'npm:@openchamber/web' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
 
 # other ai coding platforms
