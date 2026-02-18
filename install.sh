@@ -20,6 +20,7 @@ TARGET_PATH="$HOME/configent"
 
 GIT_REF="${GIT_REF:-1.204.11}"
 
+export CANELEVATE="${CANELEVATE:-false}"
 export CASKS="${CASKS:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
 
@@ -44,8 +45,6 @@ if [ "$(uname -s)" = 'Linux' ]; then
       sleep 60
       kill -0 "$$" || exit
     done 2>/dev/null &
-  else
-    export CANELEVATE='false'
   fi
 
   if [ "$CANELEVATE" = 'true' ]; then
