@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.12](https://github.com/raas-dev/configent/compare/1.204.11...1.204.12) (2026-02-18)
+
+
+### Fixes
+
+* **bin:** support pass credential helper lookup ([b07ff64](https://github.com/raas-dev/configent/commit/b07ff6476e47797d7c912a63d4df191aa7bdb722))
+* **install:** export canelevate before install ([2a7a725](https://github.com/raas-dev/configent/commit/2a7a725146b114d02183bd45803b24e24fb4f419))
+* **install:** export elevate flag before installs ([d80a674](https://github.com/raas-dev/configent/commit/d80a674b8fbf43b6c122ea16dc1f50d2b13ba01b))
+
 ## [1.204.11](https://github.com/raas-dev/configent/compare/1.204.10...1.204.11) (2026-02-18)
 
 
