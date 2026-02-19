@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.14](https://github.com/raas-dev/configent/compare/1.204.13...1.204.14) (2026-02-19)
+
+
+### Fixes
+
+* **aliases:** handle explicit arg separator ([cd9199f](https://github.com/raas-dev/configent/commit/cd9199f64e6067702a8ea283dce3657a44c0096b))
+* **aliases:** prioritize first matching alias ([bcebec1](https://github.com/raas-dev/configent/commit/bcebec147f03e7dfd67bd68c1e6f1e48ca69f698))
+* **aliases:** tune comma alias execution ([085ad59](https://github.com/raas-dev/configent/commit/085ad5974880279801c8f37cebc16dd972610f27))
+* **git-credential-pass:** check pass executable before use ([b43e527](https://github.com/raas-dev/configent/commit/b43e527fa1bd3f8efa52b6bfd4fbcce82f0471bb))
+
 ## [1.204.13](https://github.com/raas-dev/configent/compare/1.204.12...1.204.13) (2026-02-18)
 
 
