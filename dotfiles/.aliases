@@ -655,9 +655,13 @@ kalk() {
   fi
 }
 
+# Shortcut to execute ad-hoc commands
 mise_exec() {
-  if mise search --match-type equal "$1" >/dev/null 2>&1; then
-    mise exec "$1" -- "$@"
+  # shellcheck disable=SC2155  # will not declare separately, value compactness
+  local first_match=$(mise search --match-type contains "$1" 2>/dev/null |
+    head -1 | awk '{print $1}')
+  if [ -n "$first_match" ]; then
+    mise exec "$first_match" -- "$@"
   else
     mise exec "$@"
   fi
