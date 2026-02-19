@@ -455,19 +455,9 @@ backend = "github:joshmedeski/sesh"
 "platforms.macos-arm64" = { checksum = "sha256:831a375ed140bbb79de0caf237a88300260823fbc713ca7ab4d0c7d636bfac67", url = "https://github.com/joshmedeski/sesh/releases/download/v2.22.0/sesh_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/joshmedeski/sesh/releases/assets/349615504"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.25.0"
+version = "0.26.1"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:60e8ecc18113d5350e3ab4e4539d4229a3014ec662533969802823a7238d6710", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483931"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:60e8ecc18113d5350e3ab4e4539d4229a3014ec662533969802823a7238d6710", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483931"}
-"platforms.linux-x64" = { checksum = "sha256:1f53d85ac86c744342768c4d452f6c6cf13612130a2dfbd269fa07aedc70c855", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483945"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:1f53d85ac86c744342768c4d452f6c6cf13612130a2dfbd269fa07aedc70c855", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483945"}
-"platforms.linux-x64-musl" = { checksum = "sha256:1f53d85ac86c744342768c4d452f6c6cf13612130a2dfbd269fa07aedc70c855", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483945"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:1f53d85ac86c744342768c4d452f6c6cf13612130a2dfbd269fa07aedc70c855", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483945"}
-"platforms.macos-arm64" = { checksum = "sha256:52ab7a269901af208386b7c74f0b4106536e0a6e23b1157905260c53942be48c", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483926"}
-"platforms.macos-x64" = { checksum = "sha256:15f95ff55a3824ec6f582c18f1fdce343197330e3d0e27bcfe7d14b8b5f75be3", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483936"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:15f95ff55a3824ec6f582c18f1fdce343197330e3d0e27bcfe7d14b8b5f75be3", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483936"}
-"platforms.windows-x64" = { checksum = "sha256:038146bee263a49b3cc15be65c96fc400b8c465a85899421b5e3c0e634014bc8", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483941"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:038146bee263a49b3cc15be65c96fc400b8c465a85899421b5e3c0e634014bc8", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.25.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/357483941"}
+"platforms.macos-arm64" = { checksum = "sha256:de7aef620ab9699e4556fe28c21b324336e27943a67b0cecbf04f06a5fff5c17", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.26.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/358367068"}
 
 [[tools."github:memextech/ht-mcp"]]
 version = "0.1.3"
@@ -880,7 +870,7 @@ version = "4.6.0"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@google/gemini-cli"]]
-version = "0.29.2"
+version = "0.29.5"
 backend = "npm:@google/gemini-cli"
 
 [[tools."npm:@neuralnomads/codenomad"]]
