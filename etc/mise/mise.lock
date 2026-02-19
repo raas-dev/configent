@@ -297,6 +297,7 @@ backend = "aqua:junegunn/fzf"
 [[tools.github-cli]]
 version = "2.87.0"
 backend = "aqua:cli/cli"
+"platforms.linux-x64" = { checksum = "sha256:5f461c1dc2b80483ea5617f9253d591fb427b3ecfdd69c69089e1ee6156dc234", url = "https://github.com/cli/cli/releases/download/v2.87.0/gh_2.87.0_linux_amd64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:b1e6e3ab764892a33a1fe464c239be393e6bbd4220804692f919c4c805b1dbbf", url = "https://github.com/cli/cli/releases/download/v2.87.0/gh_2.87.0_macOS_arm64.zip"}
 
 [[tools."github:Skardyy/mcat"]]
