@@ -661,7 +661,13 @@ mise_exec() {
   local first_match=$(mise search --match-type contains "$1" 2>/dev/null |
     head -1 | awk '{print $1}')
   if [ -n "$first_match" ]; then
-    mise exec "$first_match" -- "$@"
+    local first_arg="$1"
+    shift
+    if [ "$1" = "--" ]; then
+      mise exec "$first_match" "$@"
+    else
+      mise exec "$first_match" -- "$first_arg" "$@"
+    fi
   else
     mise exec "$@"
   fi
