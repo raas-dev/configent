@@ -11,6 +11,12 @@
 this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 
+### Create vim directories #####################################################
+
+mkdir -p "$HOME/.vim/backups"
+mkdir -p "$HOME/.vim/swaps"
+mkdir -p "$HOME/.vim/undo"
+
 ### Install Vim plugins ########################################################
 
 # backup .vim  (.vimrc is already symlinked and backed up by symlink_dotfiles)
