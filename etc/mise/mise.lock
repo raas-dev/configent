@@ -282,6 +282,7 @@ backend = "aqua:sharkdp/fd"
 [[tools.fzf]]
 version = "0.68.0"
 backend = "aqua:junegunn/fzf"
+"platforms.linux-x64" = { checksum = "sha256:545004a69eb65bb9adf32000971105ac21aea54bbecb618c55414d21b823fe95", url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-linux_amd64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:1817524989b3987ebc67d16acbc5526cb51dfbc52ca62babe37c96d9d09a227b", url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-darwin_arm64.tar.gz"}
 
 [[tools.github-cli]]
@@ -447,6 +448,7 @@ backend = "github:joshmedeski/sesh"
 [[tools."github:max-sixty/worktrunk"]]
 version = "0.26.1"
 backend = "github:max-sixty/worktrunk"
+"platforms.linux-x64" = { checksum = "sha256:2831cd04f3b5011fd83dd96de5e7387b9d2794d9b8fbc1b21499333c72e0cd11", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.26.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/358367093"}
 "platforms.macos-arm64" = { checksum = "sha256:de7aef620ab9699e4556fe28c21b324336e27943a67b0cecbf04f06a5fff5c17", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.26.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/358367068"}
 
 [[tools."github:memextech/ht-mcp"]]
@@ -909,6 +911,7 @@ backend = "aqua:sharkdp/numbat"
 [[tools.opencode]]
 version = "1.2.8"
 backend = "aqua:anomalyco/opencode"
+"platforms.linux-x64" = { checksum = "sha256:99b76f6d5dc825ef65653a1ada632ee46c1f505311eb8887fea4e3a74608b6d3", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.8/opencode-linux-x64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:571c4131660c215e5a9e1a25b2ddddc6fa199ac0fd9eb3282562d3fb14832eb2", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.8/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
