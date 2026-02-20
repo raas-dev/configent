@@ -101,7 +101,7 @@
 
 [advice]
 	statusHints = false
-	setUpstreamFailure = false
+  setUpstreamFailure = false
 
 [code]
   ignorecase = false
@@ -197,6 +197,7 @@
 
 [push]
   default = current
+  autoSetupRemote = true
 
 [rebase]
   autoStash = true
