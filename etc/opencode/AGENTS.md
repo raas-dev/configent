@@ -8,7 +8,7 @@
 
 ## Processing work
 
-- Build your understanding on the first principles on what is required to do
+- Build your plan on the first principles to understand what is required to do
 - Always create a TODO list with tasks to track the work left until completion
 - Do not shortcut or postpone tasks. Do not quit until all tasks are completed
 
