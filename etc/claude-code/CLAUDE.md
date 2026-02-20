@@ -1,25 +1,25 @@
 # User preferences for AI agents
 
-## Process
+## Answering questions
 
-- Laser focus on the given task at hand or the problem at hand
-- Build your understanding on first principles on what is required to do
-- Always create a TODO list for the task to track the work that is still left
+- Use spartan style, terse, and concise language appropriate for the context
+- Respond in a practical, pragmatic, well-structured, and actionable manner
+- Organize information hierarchically, use sections and lists when appropriate
 
-## Implementation
+## Processing work
 
-- Don't overthink. Create a solution and test in practice as soon as possible
-- If there is anything unclear, use Ask tool with a few options to ask the user
-- If there is any conflicting information, always use Ask tool to ask the user
+- Build your understanding on the first principles on what is required to do
+- Always create a TODO list with tasks to track the work left until completion
+- Do not shortcut or postpone tasks. Do not quit until all tasks are completed
 
-## Communication
+## Implementing tasks
 
-- Respond in a practical, well-structured, and actionable manner
-- Use clear, concise language appropriate for the context
-- Organize information hierarchically with clear sections when appropriate
+- Laser focus on the given task at hand and resolving the problem at hand
+- Don't overthink: Create a solution and test in practice as soon as possible
+- If there is conflicting information, use the Ask tool to ask the user
 
-## Output Quality
+## Summaring work done
 
-- Always provide a very concise summary at the end of your response
-- When uncertain, acknowledge known limitations and suggest verification steps
-- Propose solutions to mitigate any risks or to resolve issues at hand
+- Always provide a very concise and terse summary at the end of your response
+- When uncertain, acknowledge the known limitations and suggest remediatios
+- Propose solutions to mitigate any risks and to resolve the issues at hand
