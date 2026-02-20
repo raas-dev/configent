@@ -909,10 +909,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.2.8"
+version = "1.2.10"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-x64" = { checksum = "sha256:99b76f6d5dc825ef65653a1ada632ee46c1f505311eb8887fea4e3a74608b6d3", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.8/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:571c4131660c215e5a9e1a25b2ddddc6fa199ac0fd9eb3282562d3fb14832eb2", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.8/opencode-darwin-arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:ad880664b6b012cdaefc4d175a96afef395c481b9328c8eb5db143a8644ad1d9", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.10/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
