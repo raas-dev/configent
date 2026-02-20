@@ -286,10 +286,9 @@ backend = "aqua:junegunn/fzf"
 "platforms.macos-arm64" = { checksum = "sha256:1817524989b3987ebc67d16acbc5526cb51dfbc52ca62babe37c96d9d09a227b", url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-darwin_arm64.tar.gz"}
 
 [[tools.github-cli]]
-version = "2.87.0"
+version = "2.87.1"
 backend = "aqua:cli/cli"
-"platforms.linux-x64" = { checksum = "sha256:5f461c1dc2b80483ea5617f9253d591fb427b3ecfdd69c69089e1ee6156dc234", url = "https://github.com/cli/cli/releases/download/v2.87.0/gh_2.87.0_linux_amd64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:b1e6e3ab764892a33a1fe464c239be393e6bbd4220804692f919c4c805b1dbbf", url = "https://github.com/cli/cli/releases/download/v2.87.0/gh_2.87.0_macOS_arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:be3725d4ce90389ba9fd1c69ea00b9498995f0058c1423ceae76ae262c175962", url = "https://github.com/cli/cli/releases/download/v2.87.1/gh_2.87.1_macOS_arm64.zip"}
 
 [[tools."github:Skardyy/mcat"]]
 version = "0.4.6"
@@ -718,19 +717,9 @@ backend = "aqua:Orange-OpenSource/hurl"
 "platforms.windows-x64-baseline" = { checksum = "sha256:ce0fcbd889513faafe2c5d52e1051abfd9c78b927089e7a59c364d70d0ae26a7", url = "https://github.com/Orange-OpenSource/hurl/releases/download/7.1.0/hurl-7.1.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.jnv]]
-version = "0.6.1"
+version = "0.6.2"
 backend = "aqua:ynqa/jnv"
-"platforms.linux-arm64" = { checksum = "sha256:fdf882848471f227f3112c85cf9c690a93cc12234ce8077bdec86d3cb8292bd5", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:fdf882848471f227f3112c85cf9c690a93cc12234ce8077bdec86d3cb8292bd5", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-aarch64-unknown-linux-gnu.tar.xz"}
-"platforms.linux-x64" = { checksum = "sha256:edac8aeef3812c021cf1ffb97ba95b1ca32c7e40a38cf2ec47d28c3c9e72e66f", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:edac8aeef3812c021cf1ffb97ba95b1ca32c7e40a38cf2ec47d28c3c9e72e66f", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:edac8aeef3812c021cf1ffb97ba95b1ca32c7e40a38cf2ec47d28c3c9e72e66f", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:edac8aeef3812c021cf1ffb97ba95b1ca32c7e40a38cf2ec47d28c3c9e72e66f", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-unknown-linux-musl.tar.xz"}
-"platforms.macos-arm64" = { checksum = "sha256:c78bca8dfd2ff2e760ce45aa97063a3a530991f9c9ed5088e7278231564f2cf6", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-aarch64-apple-darwin.tar.xz"}
-"platforms.macos-x64" = { checksum = "sha256:9c936bb2c6cca510318231cc817469b89d7e93d8a34481bfea66fa678ea19bd0", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-apple-darwin.tar.xz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:9c936bb2c6cca510318231cc817469b89d7e93d8a34481bfea66fa678ea19bd0", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-apple-darwin.tar.xz"}
-"platforms.windows-x64" = { checksum = "sha256:4db561002edffc458a1fb2bf0208f6e8800bdcf929156e01c4cce22c52ecb0fe", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:4db561002edffc458a1fb2bf0208f6e8800bdcf929156e01c4cce22c52ecb0fe", url = "https://github.com/ynqa/jnv/releases/download/v0.6.1/jnv-x86_64-pc-windows-msvc.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:17c1cea1f28d21c00f2f2362aa0eb40f783072bc62a8b88eb1e340a7098a2b7c", url = "https://github.com/ynqa/jnv/releases/download/v0.6.2/jnv-aarch64-apple-darwin.tar.xz"}
 
 [[tools.jq]]
 version = "1.8.1"
