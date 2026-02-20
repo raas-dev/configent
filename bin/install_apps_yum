@@ -101,6 +101,6 @@ systemctl --user start docker
 $SUDO loginctl enable-linger "$USER"
 
 # Flatpak
-if [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
   $SUDO dnf install -y flatpak
 fi

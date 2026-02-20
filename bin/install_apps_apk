@@ -98,6 +98,6 @@ $SUDO service docker start
 $SUDO rc-update add docker default
 
 # Flatpak
-if [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
   $SUDO apk add flatpak
 fi
