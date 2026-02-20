@@ -280,19 +280,9 @@ backend = "aqua:sharkdp/fd"
 "platforms.windows-x64-baseline" = { checksum = "sha256:318aa2a6fa664325933e81fda60d523fff29444129e91ebf0726b5b3bcd8b059", url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.fzf]]
-version = "0.67.0"
+version = "0.68.0"
 backend = "aqua:junegunn/fzf"
-"platforms.linux-arm64" = { checksum = "sha256:7071f48c2ac0f2bc992d6d33cc36fd675a579a98cc976dda699eea07dd5e9c58", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:7071f48c2ac0f2bc992d6d33cc36fd675a579a98cc976dda699eea07dd5e9c58", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:4be08018ca37b32518c608741933ea335a406de3558242b60619e98f25be2be1", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:4be08018ca37b32518c608741933ea335a406de3558242b60619e98f25be2be1", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:4be08018ca37b32518c608741933ea335a406de3558242b60619e98f25be2be1", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:4be08018ca37b32518c608741933ea335a406de3558242b60619e98f25be2be1", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:b7f34c964d8e52c471c933cef8ec43dc71997c266cafafd1b013bed10fc229a1", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-darwin_arm64.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:88dc853e0914793a2e7be0d1acfe6c922d9ccad08e3302df092399775b0279ff", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-darwin_amd64.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:88dc853e0914793a2e7be0d1acfe6c922d9ccad08e3302df092399775b0279ff", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-darwin_amd64.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:cad95326ed416d14226a03425513b049f5bc9a41f30a355e5fe204a29e666867", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-windows_amd64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:cad95326ed416d14226a03425513b049f5bc9a41f30a355e5fe204a29e666867", url = "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-windows_amd64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:1817524989b3987ebc67d16acbc5526cb51dfbc52ca62babe37c96d9d09a227b", url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-darwin_arm64.tar.gz"}
 
 [[tools.github-cli]]
 version = "2.87.0"
@@ -862,7 +852,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.47"
+version = "2.1.49"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
@@ -882,7 +872,7 @@ version = "1.7.0"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
-version = "0.12.0"
+version = "0.13.0"
 backend = "npm:agent-browser"
 
 [[tools."npm:opencode-ai"]]
@@ -917,19 +907,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.2.6"
+version = "1.2.8"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:a02f7a8dda114f30559b73b94dca5302742731bcac6394463436ba1462733d83", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:a02f7a8dda114f30559b73b94dca5302742731bcac6394463436ba1462733d83", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:1299d49d1c9e8b07217d92cea14050650c0b5a81c2ac380d6ec0d1d26abbe61a", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:5b216ba4387bfcdf3b2cd2185e1c9bec2742f7e3d83b8731f9aa864c4517bcff", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:2f7802251f05d2ed9a128bdeca18f0ba401bba75e2301e4619b9d586536d1246", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:2f7802251f05d2ed9a128bdeca18f0ba401bba75e2301e4619b9d586536d1246", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:b6352e014308be8b4e7dbf23660de5a4540bfa5ca024d2b8c20f5a7059d1c875", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:b6352e014308be8b4e7dbf23660de5a4540bfa5ca024d2b8c20f5a7059d1c875", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.6/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:571c4131660c215e5a9e1a25b2ddddc6fa199ac0fd9eb3282562d3fb14832eb2", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.8/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -952,7 +932,7 @@ backend = "pipx:azure-cli"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.9"
+version = "0.11.11"
 backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
