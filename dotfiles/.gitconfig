@@ -101,6 +101,7 @@
 
 [advice]
 	statusHints = false
+	setUpstreamFailure = false
 
 [code]
   ignorecase = false
