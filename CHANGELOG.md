@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.204.15](https://github.com/raas-dev/configent/compare/1.204.14...1.204.15) (2026-02-20)
+
+
+### Fixes
+
+* **aliases:** quote mise exec search result ([30d3c97](https://github.com/raas-dev/configent/commit/30d3c97a6fde9bbb972be6cceb516e672b00d40f))
+* **gitconfig:** enable git auto remote setup ([1aa6e00](https://github.com/raas-dev/configent/commit/1aa6e0023cfbb0960740c48c47990d2f0c70ec9d))
+* **gitconfig:** suppress upstream failure advice ([1b0c941](https://github.com/raas-dev/configent/commit/1b0c94102eadfbfe0b0aa748ec81240880181622))
+* **opencode:** restore AGENTS backup linking ([9e5f742](https://github.com/raas-dev/configent/commit/9e5f7424dc0f98212907a4de5f589929044f5c63))
+* **setup_vundle:** create vim backup dirs ([b091ba4](https://github.com/raas-dev/configent/commit/b091ba45125b1ac0adc1cd7fdb50f493a2ab1791))
+
 ## [1.204.14](https://github.com/raas-dev/configent/compare/1.204.13...1.204.14) (2026-02-19)
 
 
