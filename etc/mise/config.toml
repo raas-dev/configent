@@ -105,7 +105,6 @@ node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 
 # ai tools
-'github:asyrjasalo/augent' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 #'cargo:fossil-mcp' = 'latest'
@@ -146,4 +145,4 @@ cargo.binstall = true
 npm.bun = true
 pipx.uvx = true
 idiomatic_version_file_enable_tools = ["python", "node"]
-trusted_config_paths = ["~/dev", "~/.local/share/opencode/worktree"]
+trusted_config_paths = ["~/dev"]
