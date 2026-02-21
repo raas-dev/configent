@@ -401,7 +401,7 @@ alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
 # Tool to identify and analyze mysterious hard-coded strings
 alias lemmeknow='mise exec github:swanandx/lemmeknow -- lemmeknow'
 
-# Terminal network scanner and diagnostic tool with TUI
+# Terminal network scanner and diagnostic tool with TUI (requires sudo)
 alias netscanner='mise exec cargo:netscanner -- netscanner'
 
 # Kernel-enforced sandbox CLI for AI agents

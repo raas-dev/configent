@@ -506,6 +506,19 @@ version = "2.22.0"
 backend = "github:joshmedeski/sesh"
 "platforms.macos-arm64" = { checksum = "sha256:831a375ed140bbb79de0caf237a88300260823fbc713ca7ab4d0c7d636bfac67", url = "https://github.com/joshmedeski/sesh/releases/download/v2.22.0/sesh_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/joshmedeski/sesh/releases/assets/349615504"}
 
+[[tools."github:karol-broda/snitch"]]
+version = "0.2.2"
+backend = "github:karol-broda/snitch"
+"platforms.linux-arm64" = { checksum = "sha256:32b486ad5ade3821783d3c4fa71531902bc33c2362c0f0aaa1ddc1ef247b190f", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195344"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:32b486ad5ade3821783d3c4fa71531902bc33c2362c0f0aaa1ddc1ef247b190f", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195344"}
+"platforms.linux-x64" = { checksum = "sha256:2f96c67306bade30270fb424f462f4d00e4d33112c946fec0c4511efc6e3dce1", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195341"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:2f96c67306bade30270fb424f462f4d00e4d33112c946fec0c4511efc6e3dce1", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195341"}
+"platforms.linux-x64-musl" = { checksum = "sha256:2f96c67306bade30270fb424f462f4d00e4d33112c946fec0c4511efc6e3dce1", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195341"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:2f96c67306bade30270fb424f462f4d00e4d33112c946fec0c4511efc6e3dce1", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195341"}
+"platforms.macos-arm64" = { checksum = "sha256:04c5bb20ff705db0c325a1f2fb55f0ce8ceafc470616711eed922de906f9c1de", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195590"}
+"platforms.macos-x64" = { checksum = "sha256:8fe060109c88f55d34d493bf74c25149a07fd5bfaa48dd4499a2d85620d6f84a", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:8fe060109c88f55d34d493bf74c25149a07fd5bfaa48dd4499a2d85620d6f84a", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"}
+
 [[tools."github:max-sixty/worktrunk"]]
 version = "0.26.1"
 backend = "github:max-sixty/worktrunk"
