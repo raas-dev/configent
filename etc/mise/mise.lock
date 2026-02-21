@@ -164,7 +164,7 @@ version = "0.8.3"
 backend = "cargo:cargo-cache"
 
 [[tools."cargo:cargo-update"]]
-version = "18.0.0"
+version = "18.1.0"
 backend = "cargo:cargo-update"
 
 [[tools."cargo:diskonaut"]]
