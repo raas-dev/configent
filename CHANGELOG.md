@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.206.1](https://github.com/raas-dev/configent/compare/1.206.0...1.206.1) (2026-02-21)
+
+
+### Fixes
+
+* **aliases:** add network utility aliases ([6062314](https://github.com/raas-dev/configent/commit/60623148a5353cdf6f55d55376bcb0eb54ed4139))
+* **aliases:** fix kubectl alias config ([fcf6004](https://github.com/raas-dev/configent/commit/fcf6004822f2aa45b4c68b496a9b16105acb7124))
+* **aliases:** k alias runs fend ([42b87d7](https://github.com/raas-dev/configent/commit/42b87d7fff73899977c1c414d78c03234266a410))
+* **aliases:** update json alias to jiq ([f336955](https://github.com/raas-dev/configent/commit/f3369551735c62bfd6a3b228703638af651eec18))
+* **aliases:** update shell aliases for new tools ([21232e2](https://github.com/raas-dev/configent/commit/21232e2def912930e6b2496eb2d94fddcccb4745))
+* **mise:** ensure fend lock includes all platforms ([50c9664](https://github.com/raas-dev/configent/commit/50c9664aaf50f6f2c8218658b3b45a49d52165e4))
+
 ## [1.206.0](https://github.com/raas-dev/configent/compare/1.205.1...1.206.0) (2026-02-21)
 
 
