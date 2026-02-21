@@ -143,7 +143,7 @@ alias u='dust'
 alias w='which -a'
 alias x='pik'
 alias y='tldr'
-alias z='witr'
+alias z='snitch'
 alias §='trans :fi'
 alias \?='trans'
 alias \#='echo'
@@ -415,9 +415,6 @@ alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 
 # Interactive find-and-replace in the terminal
 alias scooter='mise exec scooter -- scooter'
-
-# TUI to inspect network connections, netstat for humans
-alias snitch='mise exec github:karol-broda/snitch -- snitch'
 
 # CLI to count programming languages
 alias tokei='mise exec tokei -- tokei'
