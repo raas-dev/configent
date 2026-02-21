@@ -373,8 +373,8 @@ alias heh='mise exec cargo:heh -- heh'
 # A terminal-based battery and energy monitor for macOS and Linux
 alias jolt='mise exec github:jordond/jolt -- jolt'
 
-#Interactive JSON filter using jq
-alias jnv='mise exec jnv -- jnv'
+# Interactive JSON query tool with real-time output
+alias jiq='mise exec github:bellicose100xp/jiq -- jiq'
 
 # Scriptable load testing tool
 alias k6='mise exec k6 -- k6'
