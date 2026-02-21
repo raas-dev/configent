@@ -141,7 +141,7 @@ alias s='rg --smart-case --hidden --glob \!.git/ --fixed-strings'
 alias u='dust'
 # v is for limactl wrapper, see v()
 alias w='which -a'
-alias x='pkill -i -f'
+alias x='pik'
 alias y='tldr'
 alias z='witr'
 alias §='trans :fi'
