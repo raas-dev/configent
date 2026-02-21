@@ -596,6 +596,11 @@ backend = "github:pranshuparmar/witr"
 "platforms.windows-x64" = { checksum = "sha256:e95c3790d8e00a586bb780aecc2a5171786c8215dbdb9e239f33f6b0df709424", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.6/witr-windows-amd64.zip", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/343807216"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:e95c3790d8e00a586bb780aecc2a5171786c8215dbdb9e239f33f6b0df709424", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.6/witr-windows-amd64.zip", url_api = "https://api.github.com/repos/pranshuparmar/witr/releases/assets/343807216"}
 
+[[tools."github:printfn/fend"]]
+version = "1.5.8"
+backend = "github:printfn/fend"
+"platforms.macos-arm64" = { checksum = "sha256:da3753313eae392a8c6dccc9d42b8736e791e6f843a74434940344483b5f0663", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-macos-aarch64.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132794"}
+
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"
 backend = "github:railwayapp/nixpacks"

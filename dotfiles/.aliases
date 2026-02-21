@@ -128,7 +128,7 @@ alias f='fd --ignore-case --no-ignore --hidden --glob'
 alias h='xh --verify=no'
 alias i='glances'
 # j is for zoxide
-alias k='kalk'
+alias k='fend'
 alias l='la'
 # m is for m-cli
 # n is for ad-hoc nix-shell in docker, see n()
@@ -730,16 +730,6 @@ genpass() {
   local length="${1:-16}"
   tr </dev/urandom -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' |
     fold -w "$length" | head -n1 | pbcopy
-}
-
-# Scientific calculator with support for physical units
-kalk() {
-  # https://numbat.dev/
-  if [ $# -eq 0 ]; then
-    numbat
-  else
-    numbat --expression "$*"
-  fi
 }
 
 # Shortcut to execute ad-hoc commands

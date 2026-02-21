@@ -9,7 +9,6 @@ fzf = 'latest'
 gitui = 'latest'
 jq = 'latest'
 lsd = 'latest'
-numbat = 'latest'
 ripgrep = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.6a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
@@ -22,6 +21,7 @@ zoxide = 'latest'
 'aqua:neovim/neovim' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_neovim" }
 'aqua:pranshuparmar/witr' = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in mise's own registry
+'github:printfn/fend' = 'latest'
 'github:Skardyy/mcat' = 'latest'
 'github:railwayapp/nixpacks' = 'latest'
 'github:ouch-org/ouch' = 'latest'
