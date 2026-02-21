@@ -329,37 +329,73 @@ alias path='printf "${PATH//:/\\n}\n"'
 # Display week number
 alias week='date +%V'
 
-### Ad-hoc TUI apps ###########################################################
+### Ad-hoc CLI apps ############################################################
+
+# Azure Storage data transfer utility - v10
+alias azcopy='mise exec github:Azure/azure-storage-azcopy -- azcopy'
+
+# Tool to analyze ELF binaries
+alias binsider='mise exec github:orhun/binsider -- binsider'
+
+# Structural diff tool that understands syntax
+alias difft='mise exec difftastic -- difft'
 
 # Terminal disk space navigator
 alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
 
-# A tool for exploring each layer in a docker image
+# Tool for exploring each layer in a docker image
 alias dive='mise exec dive -- dive'
 
-# Ping, but with a graph
+# Binary format jq equivalent
+alias fq='mise exec github:wader/fq -- fq'
+
+# Ping with a graph
 alias gping='mise exec gping -- gping'
+
+# CLI to generate regular expressions from user-provided test cases
+alias grex='mise exec grex -- grex'
+
+# Command-line hex viewer
+alias hexyl='mise exec hexyl -- hexyl'
+
+# Scriptable load testing tool
+alias k6='mise exec k6 -- k6'
 
 # Kubernetes TUI
 alias k9s='mise exec k9s -- k9s'
 
+# HTTP load generator
+alias oha='mise exec oha -- oha'
+
 # Lazyjournal is a TUI log viewer for journalctl
 alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 
-# Build complex nmap commands with an intuitive TUI
+# Build complex nmap commands with a TUI
 alias lazynmap='mise exec cargo:lazynmap -- lazynmap'
 
-# A terminal UI wrapper for Trivy
+# Terminal UI wrapper for Trivy
 alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
 
-# Terminal network scanner & diagnostic tool with modern TUI
+# Tool to identifying mysterious strings
+alias lemmeknow='mise exec github:swanandx/lemmeknow -- lemmeknow'
+
+# Terminal network scanner & diagnostic tool with TUI
 alias netscanner='mise exec cargo:netscanner -- netscanner'
 
-# A network diagnostic tool
+# CLI to count code
+alias tokei='mise exec tokei -- tokei'
+
+# Network diagnostic tool
 alias trip='mise exec github:fujiapple852/trippy -- trip'
 
-# A fast terminal Excel viewer with an interactive TUI
+# Tool to find, verify, and analyze leaked credentials
+alias trufflehog='mise exec trufflehog -- trufflehog'
+
+# Terminal Excel viewer with an interactive TUI
 alias xleak='mise exec github:bgreenwell/xleak -- xleak'
+
+# Validate and run GitHub Actions locally
+alias wrkflw='mise exec cargo:wrkflw -- wrkflw'
 
 ### Python #####################################################################
 
@@ -1111,57 +1147,33 @@ nixery() {
     "$image" "$command"
 }
 
-### ad-hoc binaries via Nix
+### Linux security tools via Nix
 
 # file explorers
 alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
-
-# file conversion
-alias pdftotext='n shell/poppler-utils pdftotext'
 
 # ripgrep, but also search in pdfs, zip, tar.gz, etc. (see --rga-list-adapters)
 alias rga='n shell/ffmpeg/pandoc/poppler/ripgrep/ripgrep-all rga'
 
 # servers
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
-
-# cloud
-alias azcopy='n shell/azure-storage-azcopy azcopy'
 alias termscp='n termscp/vim' # does not work natively on macOS
 
 # appsec
 alias grype='n grype'
 alias syft='n syft'
 
-# secrets
-alias trufflehog='n trufflehog/git'
-
 # sast
 alias hadolint='n hadolint'
 alias kubescape='n kubescape'
-alias terrascan='n terrascan'
 
 # database clients
 alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
 
-# decoders
-alias binsider='n binsider'
-alias fq='n fq'
-alias hexyl='n hexyl'
-alias lemmeknow='n lemmeknow'
-
 # development
 alias bitwise='n bitwise'
-alias difft='n shell/difftastic difft'
-alias grex='n grex'
-alias tokei='n tokei'
-alias wrkflw='n wrkflw'
-
-# load testing
-alias k6='n k6'
-alias oha='n oha'
 
 # port scanners
 alias naabu='n naabu'

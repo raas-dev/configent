@@ -285,8 +285,7 @@ You can expose `PORT` for servers, e.g. `PORT=8000 n python3 -m http.server`.
 
 ⚠️: If that binary writes to filesystem, you must be in a VM writable directory.
 
-💡: Use `n` for command-line tools not wanted permanently installed on the
-host. See `.aliases` for such examples, like ad-hoc security scanners.
+💡: Use `n` to run ad-hoc Linux command-line tools like security scanners. See `.aliases` for examples.
 
 ## ⚙️ VMs
 
