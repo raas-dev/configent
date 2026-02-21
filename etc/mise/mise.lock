@@ -599,7 +599,15 @@ backend = "github:pranshuparmar/witr"
 [[tools."github:printfn/fend"]]
 version = "1.5.8"
 backend = "github:printfn/fend"
+"platforms.linux-arm64" = { checksum = "sha256:ec745c759ab970c050e21ad08ce33b7e746256bede87f2e7f73db6ea61e74a00", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-aarch64-gnu.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132791"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:ec745c759ab970c050e21ad08ce33b7e746256bede87f2e7f73db6ea61e74a00", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-aarch64-gnu.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132791"}
+"platforms.linux-x64" = { checksum = "sha256:c23b490e503cdb94e8398c6d5275874f80b51a2090311a9694eb3a791e1706e8", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-x86_64-gnu.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132795"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:c23b490e503cdb94e8398c6d5275874f80b51a2090311a9694eb3a791e1706e8", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-x86_64-gnu.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132795"}
+"platforms.linux-x64-musl" = { checksum = "sha256:6253eb9c4ee3cf9f9ccf27dd42ee4d6565312c90afdf1459def041097bf4ee23", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-x86_64-musl.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132792"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:c23b490e503cdb94e8398c6d5275874f80b51a2090311a9694eb3a791e1706e8", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-linux-x86_64-gnu.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132795"}
 "platforms.macos-arm64" = { checksum = "sha256:da3753313eae392a8c6dccc9d42b8736e791e6f843a74434940344483b5f0663", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-macos-aarch64.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132794"}
+"platforms.windows-x64" = { checksum = "sha256:b32a4ac9d8d10e998ad934f0a0b83e4a46b45225312dcd8ae510a067fa91789c", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-windows-x64-exe.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132793"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:b32a4ac9d8d10e998ad934f0a0b83e4a46b45225312dcd8ae510a067fa91789c", url = "https://github.com/printfn/fend/releases/download/v1.5.8/fend-1.5.8-windows-x64-exe.zip", url_api = "https://api.github.com/repos/printfn/fend/releases/assets/345132793"}
 
 [[tools."github:railwayapp/nixpacks"]]
 version = "1.41.0"

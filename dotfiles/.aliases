@@ -1187,9 +1187,6 @@ alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
 
-# development
-alias bitwise='n bitwise'
-
 # port scanners
 alias naabu='n naabu'
 alias rustscan='n rustscan'
