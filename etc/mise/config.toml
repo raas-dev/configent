@@ -4,11 +4,9 @@ atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_
 bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
 carapace = 'latest'
 delta = 'latest'
-duf = 'latest'
 fd = 'latest'
 fzf = 'latest'
 gitui = 'latest'
-jnv = 'latest'
 jq = 'latest'
 lsd = 'latest'
 numbat = 'latest'
@@ -31,25 +29,27 @@ zoxide = 'latest'
 'github:dalance/procs' = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
-#'vfox:mise-plugins/vfox-clang' = '18.1.8'
 'github:max-sixty/worktrunk' = 'latest'
+'pipx:glances' = { version = 'latest', extras = "containers,gpu,web,wifi" }
+'pipx:sncli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_sncli" }
+#'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
-# scripting
-argc = 'latest'
-ast-grep = 'latest'
-prek = 'latest'
-shellcheck = 'latest'
-shfmt = 'latest'
-'github:anordal/shellharden' = 'latest'
+# ai coding platforms
+claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
+gemini-cli = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
-# network
-doggo = 'latest'
-hurl = 'latest'
-lazyssh = 'latest'
-'github:sigoden/opscan' = 'latest'
+# ai coding harnesses
+'github:asyrjasalo/dynamic-mcp' = 'latest'
+#'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
+#'cargo:fossil-mcp' = 'latest'
+'cargo:ralph-cli' = 'latest'
+'npm:agent-browser' = 'latest'
+'npm:@different-ai/opencode-browser' = 'latest'
+'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 
 # github
-act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
+#act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 github-cli = 'latest'
 
 # containers
@@ -64,18 +64,37 @@ trivy = 'latest'
 #aws-copilot = 'latest'
 #cloudflared = 'latest'
 #gcloud = 'latest'
+'pipx:azure-cli' = { version = 'latest', uvx_args = '--prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
+#'pipx:cfn-lint' = 'latest'
 
 # terraform
 #terraform = '1.10.3'
 #terraform-docs = 'latest'
-#terrascan = 'latest
 #tflint = 'latest'
 #tf-summarize = 'latest'
+#'go:github.com/shihanng/tfvar' = 'latest'
 
 # kubernetes
 kubectl = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
 #helm = 'latest'
+
+# network
+doggo = 'latest'
+hurl = 'latest'
+lazyssh = 'latest'
+'github:sigoden/opscan' = 'latest'
+
+# scripting
+argc = 'latest'
+ast-grep = 'latest'
+prek = 'latest'
+shellcheck = 'latest'
+shfmt = 'latest'
+'github:anordal/shellharden' = 'latest'
+
+# powershell
+powershell = { version = '7.5.4', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 # rust
 rust = '1.93.1'
@@ -89,43 +108,19 @@ cargo-binstall = 'latest'
 # go
 go = '1.25.3'
 'go:golang.org/x/tools/gopls' = 'latest'
-#'go:github.com/shihanng/tfvar' = 'latest'
 
 # node.js
 node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 
-# ai tools
-'github:asyrjasalo/dynamic-mcp' = 'latest'
-#'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
-#'cargo:fossil-mcp' = 'latest'
-'cargo:ralph-cli' = 'latest'
-'npm:agent-browser' = 'latest'
-
-# opencode
-'opencode' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
-'npm:@different-ai/opencode-browser' = 'latest'
-
-# other ai coding platforms
-'npm:@anthropic-ai/claude-code' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
-'npm:@google/gemini-cli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
-
 # python
 python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
-'pipx:azure-cli' = { version = 'latest', uvx_args = '--prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
-'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
-#'pipx:cfn-lint' = 'latest'
-'pipx:glances' = { version = 'latest', extras = "containers,gpu,web,wifi" }
 'pipx:pdm' = 'latest'
 'pipx:poetry' = 'latest'
-'pipx:sncli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_sncli" }
-
-# dotnet
-#dotnet = '10.0.103'
-powershell = { version = '7.5.4', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 # other languages
+#dotnet = '10.0.103'
 #ruby = '3.4.7'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }

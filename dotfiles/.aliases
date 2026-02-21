@@ -346,6 +346,9 @@ alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
 # Tool for exploring each layer in a docker image
 alias dive='mise exec dive -- dive'
 
+# Disk usage/free utility
+alias duf='mise exec duf -- duf'
+
 # Binary format jq equivalent
 alias fq='mise exec github:wader/fq -- fq'
 
@@ -357,6 +360,9 @@ alias grex='mise exec grex -- grex'
 
 # Command-line hex viewer
 alias hexyl='mise exec hexyl -- hexyl'
+
+#Interactive JSON filter using jq
+alias jnv='mise exec jnv -- jnv'
 
 # Scriptable load testing tool
 alias k6='mise exec k6 -- k6'
