@@ -364,9 +364,6 @@ alias k6='mise exec k6 -- k6'
 # Kubernetes TUI
 alias k9s='mise exec k9s -- k9s'
 
-# HTTP load generator
-alias oha='mise exec oha -- oha'
-
 # Lazyjournal is a TUI log viewer for journalctl
 alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 
@@ -381,6 +378,12 @@ alias lemmeknow='mise exec github:swanandx/lemmeknow -- lemmeknow'
 
 # Terminal network scanner & diagnostic tool with TUI
 alias netscanner='mise exec cargo:netscanner -- netscanner'
+
+# Kernel-enforced sandbox CLI for AI agents
+alias nono='mise exec github:always-further/nono -- nono'
+
+# HTTP load generator
+alias oha='mise exec oha -- oha'
 
 # CLI to count code
 alias tokei='mise exec tokei -- tokei'
