@@ -341,6 +341,9 @@ alias azcopy='mise exec github:Azure/azure-storage-azcopy -- azcopy'
 # Tool to analyze Linux ELF binaries
 alias binsider='mise exec github:orhun/binsider -- binsider'
 
+# CIDR network prefix explainer
+alias cidr='mise exec github:bschaatsbergen/cidr -- cidr'
+
 # Structural diff tool that understands syntax
 alias difft='mise exec difftastic -- difft'
 
@@ -412,6 +415,9 @@ alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 
 # Interactive find-and-replace in the terminal
 alias scooter='mise exec scooter -- scooter'
+
+# TUI to inspect network connections, netstat for humans
+alias snitch='mise exec github:karol-broda/snitch -- snitch'
 
 # CLI to count programming languages
 alias tokei='mise exec tokei -- tokei'

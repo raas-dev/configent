@@ -475,6 +475,10 @@ backend = "github:dalance/procs"
 "platforms.windows-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
+[[tools."github:dhth/act3"]]
+version = "2.0.0"
+backend = "github:dhth/act3"
+
 [[tools."github:jacek-kurlit/pik"]]
 version = "0.29.0"
 backend = "github:jacek-kurlit/pik"

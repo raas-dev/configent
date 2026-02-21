@@ -52,6 +52,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 github-cli = 'latest'
+'github:dhth/act3' = 'latest'
 
 # containers
 #docker-cli = 'latest'
