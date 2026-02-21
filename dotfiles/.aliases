@@ -156,14 +156,8 @@ alias _='oc_agent'
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
-# lazyjournal (single quotes to expand which runtime, for sudo)
-alias lj='$(which lazyjournal)'
-
 # tailspin
 alias ts='$(which tspin) --print --follow'
-
-# netscanner
-alias ns='$(which netscanner)'
 
 # viddy
 if command -v viddy >/dev/null; then
@@ -343,6 +337,12 @@ alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
 # A tool for exploring each layer in a docker image
 alias dive='mise exec dive -- dive'
 
+# Ping, but with a graph
+alias gping='mise exec gping -- gping'
+
+# Lazyjournal is a TUI log viewer for journalctl
+alias lazyjournal='mise exec lazyjournal -- lazyjournal'
+
 # Build complex nmap commands with an intuitive TUI
 alias lazynmap='mise exec cargo:lazynmap -- lazynmap'
 
@@ -353,7 +353,7 @@ alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
 alias netscanner='mise exec cargo:netscanner -- netscanner'
 
 # A network diagnostic tool
-alias trip='mise exec github:fujiapple852/trippy -- sudo trip'
+alias trip='mise exec github:fujiapple852/trippy -- trip'
 
 # A fast terminal Excel viewer with an interactive TUI
 alias xleak='mise exec github:bgreenwell/xleak -- xleak'
