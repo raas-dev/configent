@@ -72,7 +72,8 @@ trivy = 'latest'
 #terraform-docs = 'latest'
 #tflint = 'latest'
 #tf-summarize = 'latest'
-#'go:github.com/shihanng/tfvar' = 'latest'
+#'github:leg100/pug' = 'latest'
+#'github:shihanng/tfvar' = 'latest'
 
 # kubernetes
 kubectl = 'latest'
