@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.205.1](https://github.com/raas-dev/configent/compare/1.205.0...1.205.1) (2026-02-21)
+
+
+### Fixes
+
+* **aliases:** clarify n alias usage ([ba6c6aa](https://github.com/raas-dev/configent/commit/ba6c6aae10018fbeb2da0e9ed870b530a0359617))
+* **aliases:** reorder alias definitions ([3969ab3](https://github.com/raas-dev/configent/commit/3969ab32a9a2026252c519ba7dc3d4e0327723a6))
+* **config:** sync ai tool aliases ([99f6166](https://github.com/raas-dev/configent/commit/99f61660033fee3ad954069cfcf8984bccd22ecb))
+
 ## [1.205.0](https://github.com/raas-dev/configent/compare/1.204.15...1.205.0) (2026-02-21)
 
 
