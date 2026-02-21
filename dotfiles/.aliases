@@ -331,10 +331,10 @@ alias week='date +%V'
 
 ### Ad-hoc CLI apps ############################################################
 
-# Azure Storage data transfer utility - v10
+# Azure Storage data transfer utility
 alias azcopy='mise exec github:Azure/azure-storage-azcopy -- azcopy'
 
-# Tool to analyze ELF binaries
+# Tool to analyze Linux ELF binaries
 alias binsider='mise exec github:orhun/binsider -- binsider'
 
 # Structural diff tool that understands syntax
@@ -352,7 +352,7 @@ alias fq='mise exec github:wader/fq -- fq'
 # Ping with a graph
 alias gping='mise exec gping -- gping'
 
-# CLI to generate regular expressions from user-provided test cases
+# CLI to generate regular expressions from provided test cases
 alias grex='mise exec grex -- grex'
 
 # Command-line hex viewer
@@ -364,31 +364,31 @@ alias k6='mise exec k6 -- k6'
 # Kubernetes TUI
 alias k9s='mise exec k9s -- k9s'
 
-# Lazyjournal is a TUI log viewer for journalctl
+# TUI log viewer for journalctl
 alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 
-# Build complex nmap commands with a TUI
+# Tool to build complex nmap commands with TUI
 alias lazynmap='mise exec cargo:lazynmap -- lazynmap'
 
 # Terminal UI wrapper for Trivy
 alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
 
-# Tool to identifying mysterious strings
+# Tool to identify and analyze mysterious hard-coded strings
 alias lemmeknow='mise exec github:swanandx/lemmeknow -- lemmeknow'
 
-# Terminal network scanner & diagnostic tool with TUI
+# Terminal network scanner and diagnostic tool with TUI
 alias netscanner='mise exec cargo:netscanner -- netscanner'
 
 # Kernel-enforced sandbox CLI for AI agents
 alias nono='mise exec github:always-further/nono -- nono'
 
-# HTTP load generator
+# HTTP load generator with TUI
 alias oha='mise exec oha -- oha'
 
-# CLI to count code
+# CLI to count programming languages
 alias tokei='mise exec tokei -- tokei'
 
-# Network diagnostic tool
+# Network diagnostic tool with TUI
 alias trip='mise exec github:fujiapple852/trippy -- trip'
 
 # Tool to find, verify, and analyze leaked credentials
