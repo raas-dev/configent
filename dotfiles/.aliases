@@ -465,11 +465,9 @@ alias specify='uvx --from specify-cli specify'
 # Command-line utility for rendering projects templates
 alias copier='uvx --with copier-templates-extensions copier'
 
-# SQL IDE for terminal
-alias harlequin='uvx --from "harlequin[mysql,postgres,odbc]" harlequin'
-
-# https://hatch.pypa.io/latest
-alias hatch='uvx hatch'
+# TUI for SQL databases
+alias sqlit='uvx --from sqlit-tui sqlit'
+# alias harlequin='uvx --from "harlequin[mysql,postgres,odbc]" harlequin'
 
 # Toggle a Python virtual environment for development
 venv() {
