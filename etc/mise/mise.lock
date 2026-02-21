@@ -852,6 +852,11 @@ version = "0.31.0"
 backend = "aqua:kubernetes-sigs/kind"
 "platforms.macos-arm64" = { checksum = "sha256:88bf554fe9da6311c9f8c2d082613c002911a476f6b5090e9420b35d84e70c5c", url = "https://github.com/kubernetes-sigs/kind/releases/download/v0.31.0/kind-darwin-arm64"}
 
+[[tools.kubecolor]]
+version = "0.5.3"
+backend = "aqua:kubecolor/kubecolor"
+"platforms.macos-arm64" = { checksum = "sha256:7210767d09601389d9d87ae048381a4ba0b89373c55673be0008cdb0bf97fe3f", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_darwin_arm64.tar.gz"}
+
 [[tools.kubectl]]
 version = "1.35.1"
 backend = "aqua:kubernetes/kubernetes/kubectl"

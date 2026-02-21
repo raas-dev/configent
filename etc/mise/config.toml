@@ -78,6 +78,7 @@ trivy = 'latest'
 
 # kubernetes
 kubectl = 'latest'
+kubecolor = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
 #helm = 'latest'
 

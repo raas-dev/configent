@@ -267,16 +267,6 @@ vv() {
   fi
 }
 
-# copy kubectl config from lima vm
-kubeconfig() {
-  if [ -n "$1" ]; then
-    local vm_name="$1"
-  else
-    local vm_name="default"
-  fi
-  limactl copy "$vm_name":~/.kube/config "$HOME/.lima/$vm_name/kubeconfig.yaml"
-}
-
 ### docker #####################################################################
 
 alias dr='docker rm --force $(docker ps --all --quiet)'
@@ -297,6 +287,20 @@ alias pr='podman rm --force $(podman ps --all --quiet)'
 alias prv='podman volume rm --force $(podman volume ls --quiet)'
 alias pri='podman rmi --force $(podman images --all --quiet)'
 alias ppr='pr ; prv ; pri ; podman system prune --force --volumes'
+
+### kubectl ####################################################################
+
+command -v kubecolor >/dev/null && alias kubectl='kubecolor'
+
+# copy kubectl config from lima vm
+kubeconfig() {
+  if [ -n "$1" ]; then
+    local vm_name="$1"
+  else
+    local vm_name="default"
+  fi
+  limactl copy "$vm_name":~/.kube/config "$HOME/.lima/$vm_name/kubeconfig.yaml"
+}
 
 ### Utilities ##################################################################
 
