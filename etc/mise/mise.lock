@@ -475,6 +475,19 @@ backend = "github:dalance/procs"
 "platforms.windows-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 "platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
 
+[[tools."github:jacek-kurlit/pik"]]
+version = "0.29.0"
+backend = "github:jacek-kurlit/pik"
+"platforms.linux-arm64" = { checksum = "sha256:6b5e000c6d4e736f0e640b011eaf72509e1808628080c6f8c68046e57a996f1b", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519256"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:6b5e000c6d4e736f0e640b011eaf72509e1808628080c6f8c68046e57a996f1b", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519256"}
+"platforms.linux-x64" = { checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"}
+"platforms.linux-x64-musl" = { checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"}
+"platforms.macos-arm64" = { checksum = "sha256:63e5969d6ef10633ac561abbac517689a512a0ff64d389f77d7aeccadfffa384", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519106"}
+"platforms.macos-x64" = { checksum = "sha256:f04327b2988fbe6c1773f37c9f026f74339e1bb1459689085e1b7fe862fb5b18", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357518967"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:f04327b2988fbe6c1773f37c9f026f74339e1bb1459689085e1b7fe862fb5b18", url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357518967"}
+
 [[tools."github:joshmedeski/sesh"]]
 version = "2.22.0"
 backend = "github:joshmedeski/sesh"
@@ -616,6 +629,17 @@ backend = "github:railwayapp/railpack"
 [[tools."github:ramonvermeulen/whosthere"]]
 version = "0.6.1"
 backend = "github:ramonvermeulen/whosthere"
+"platforms.linux-arm64" = { checksum = "sha256:7bf10ea17230635369740effa039a91da9c7fb9d63df677cacc861af8ed84d5e", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868460"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:7bf10ea17230635369740effa039a91da9c7fb9d63df677cacc861af8ed84d5e", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868460"}
+"platforms.linux-x64" = { checksum = "sha256:73bd0e3d967287c7c1cb5a9d679d5c3820b7c168abbf67a33ce7b14ecd61761d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868450"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:73bd0e3d967287c7c1cb5a9d679d5c3820b7c168abbf67a33ce7b14ecd61761d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868450"}
+"platforms.linux-x64-musl" = { checksum = "sha256:73bd0e3d967287c7c1cb5a9d679d5c3820b7c168abbf67a33ce7b14ecd61761d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868450"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:73bd0e3d967287c7c1cb5a9d679d5c3820b7c168abbf67a33ce7b14ecd61761d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868450"}
+"platforms.macos-arm64" = { checksum = "sha256:15234095c82e62e385bed8d603f3173cb03ce554c53e22f66a0eb13fc8ee8422", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868463"}
+"platforms.macos-x64" = { checksum = "sha256:e8e965e389fbe1228b2632d0da81842d76c155568562e241e470f52c1d324ed0", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868468"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:e8e965e389fbe1228b2632d0da81842d76c155568562e241e470f52c1d324ed0", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868468"}
+"platforms.windows-x64" = { checksum = "sha256:357e5833ef85fb5045055f330f0f6d6a9969e324f08319b3da6d79480548796d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_windows_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868451"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:357e5833ef85fb5045055f330f0f6d6a9969e324f08319b3da6d79480548796d", url = "https://github.com/ramonvermeulen/whosthere/releases/download/v0.6.1/whosthere_0.6.1_windows_amd64.tar.gz", url_api = "https://api.github.com/repos/ramonvermeulen/whosthere/releases/assets/354868451"}
 
 [[tools."github:sharkdp/pastel"]]
 version = "0.12.0"
