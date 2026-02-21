@@ -286,9 +286,9 @@ backend = "aqua:junegunn/fzf"
 "platforms.macos-arm64" = { checksum = "sha256:1817524989b3987ebc67d16acbc5526cb51dfbc52ca62babe37c96d9d09a227b", url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-darwin_arm64.tar.gz"}
 
 [[tools.github-cli]]
-version = "2.87.1"
+version = "2.87.2"
 backend = "aqua:cli/cli"
-"platforms.macos-arm64" = { checksum = "sha256:be3725d4ce90389ba9fd1c69ea00b9498995f0058c1423ceae76ae262c175962", url = "https://github.com/cli/cli/releases/download/v2.87.1/gh_2.87.1_macOS_arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:18d90c7ae5b462d47cc665d4c59de61af1e208edb81a9abee1b5a82c94e91d94", url = "https://github.com/cli/cli/releases/download/v2.87.2/gh_2.87.2_macOS_arm64.zip"}
 
 [[tools."github:Skardyy/mcat"]]
 version = "0.4.6"
@@ -843,7 +843,7 @@ backend = "core:node"
 "platforms.windows-x64-baseline" = { checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812", url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"}
 
 [[tools."npm:@anthropic-ai/claude-code"]]
-version = "2.1.49"
+version = "2.1.50"
 backend = "npm:@anthropic-ai/claude-code"
 
 [[tools."npm:@different-ai/opencode-browser"]]
