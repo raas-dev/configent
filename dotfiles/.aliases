@@ -120,7 +120,7 @@ fi
 
 alias a='ai'
 alias b='bat --style grid,header,snip --paging never'
-alias c='oxker --host $DOCKER_HOST'
+alias c='dcv'
 # d is for generic docker build and run, see d()
 alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden --glob'
@@ -393,6 +393,9 @@ alias netscanner='mise exec cargo:netscanner -- netscanner'
 
 # Kernel-enforced sandbox CLI for AI agents
 alias nono='mise exec github:always-further/nono -- nono'
+
+# A simple tui to view and control docker containers
+alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 
 # HTTP load generator with TUI
 alias oha='mise exec oha -- oha'

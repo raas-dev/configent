@@ -648,6 +648,21 @@ version = "1.12.0"
 backend = "github:tldr-pages/tlrc"
 "platforms.macos-arm64" = { checksum = "sha256:2b53e92b7d747f2ecb4eb9633eac1c28da456fd869038a2e370dfdc1ffbc9205", url = "https://github.com/tldr-pages/tlrc/releases/download/v1.12.0/tlrc-v1.12.0-x86_64-apple-darwin.tar.gz", url_api = "https://api.github.com/repos/tldr-pages/tlrc/releases/assets/299068996"}
 
+[[tools."github:tokuhirom/dcv"]]
+version = "0.3.2"
+backend = "github:tokuhirom/dcv"
+"platforms.linux-arm64" = { checksum = "sha256:c4da14cb8442f23cf1feadcc65e27b31fa9199efae866882a8c228d4913519d9", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605590"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:c4da14cb8442f23cf1feadcc65e27b31fa9199efae866882a8c228d4913519d9", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605590"}
+"platforms.linux-x64" = { checksum = "sha256:e0795b6b8d11eb03e8f71b0ba23467e2418f30f5956f426bbfd8643ec80f48bb", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605596"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:e0795b6b8d11eb03e8f71b0ba23467e2418f30f5956f426bbfd8643ec80f48bb", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605596"}
+"platforms.linux-x64-musl" = { checksum = "sha256:e0795b6b8d11eb03e8f71b0ba23467e2418f30f5956f426bbfd8643ec80f48bb", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605596"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:e0795b6b8d11eb03e8f71b0ba23467e2418f30f5956f426bbfd8643ec80f48bb", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605596"}
+"platforms.macos-arm64" = { checksum = "sha256:174d708aab4ae41d520e7eb340ae18510f1ba15e4b839c7df6a6a6ed7db54652", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605592"}
+"platforms.macos-x64" = { checksum = "sha256:786aaa9738f96548ea2d0d54052965cdd91e4a5b58b3e2b07ade26264be8f4f1", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605591"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:786aaa9738f96548ea2d0d54052965cdd91e4a5b58b3e2b07ade26264be8f4f1", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605591"}
+"platforms.windows-x64" = { checksum = "sha256:50c45edfaa57071accecaa53e8decb526bcaf4b649a5d9112e87fd39966bcb5d", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_windows_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605589"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:50c45edfaa57071accecaa53e8decb526bcaf4b649a5d9112e87fd39966bcb5d", url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_windows_amd64.tar.gz", url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605589"}
+
 [[tools."github:topgrade-rs/topgrade"]]
 version = "16.9.0"
 backend = "github:topgrade-rs/topgrade"
