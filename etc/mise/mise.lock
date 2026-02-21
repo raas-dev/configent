@@ -478,6 +478,15 @@ backend = "github:dalance/procs"
 [[tools."github:dhth/act3"]]
 version = "2.0.0"
 backend = "github:dhth/act3"
+"platforms.linux-arm64" = { checksum = "sha256:c2c3bab9097a91a29daf376db0d65498db2f47cf60d270eaa06a6da495c15d52", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423980"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:c2c3bab9097a91a29daf376db0d65498db2f47cf60d270eaa06a6da495c15d52", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_arm64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423980"}
+"platforms.linux-x64" = { checksum = "sha256:d18e9590cb08390442b5e97bfeb148cee6686f829e788fc8f9395148ce192642", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423975"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:d18e9590cb08390442b5e97bfeb148cee6686f829e788fc8f9395148ce192642", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423975"}
+"platforms.linux-x64-musl" = { checksum = "sha256:d18e9590cb08390442b5e97bfeb148cee6686f829e788fc8f9395148ce192642", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423975"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:d18e9590cb08390442b5e97bfeb148cee6686f829e788fc8f9395148ce192642", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_linux_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423975"}
+"platforms.macos-arm64" = { checksum = "sha256:cbbb7bbcac3933372089b5b1c9d8547a39fb7049f31c137e7b5ff838498a6c05", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423976"}
+"platforms.macos-x64" = { checksum = "sha256:af47924c00c5f1ca8f22b8e21cd8f5b71dbdee334cc1552a498a0593f1596c43", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423977"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:af47924c00c5f1ca8f22b8e21cd8f5b71dbdee334cc1552a498a0593f1596c43", url = "https://github.com/dhth/act3/releases/download/v2.0.0/act3_2.0.0_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/dhth/act3/releases/assets/264423977"}
 
 [[tools."github:jacek-kurlit/pik"]]
 version = "0.29.0"
@@ -859,7 +868,17 @@ backend = "aqua:kubernetes-sigs/kind"
 [[tools.kubecolor]]
 version = "0.5.3"
 backend = "aqua:kubecolor/kubecolor"
+"platforms.linux-arm64" = { checksum = "sha256:cf0e35b748aa8ff5db51be1d5e0812df77b8970c810c4fd955b51a5a4ff2c86a", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:cf0e35b748aa8ff5db51be1d5e0812df77b8970c810c4fd955b51a5a4ff2c86a", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:7d19ca394cbfc3cc82f587222e10621ba527158deb6bc8b71a56f091156147de", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_amd64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:7d19ca394cbfc3cc82f587222e10621ba527158deb6bc8b71a56f091156147de", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_amd64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:7d19ca394cbfc3cc82f587222e10621ba527158deb6bc8b71a56f091156147de", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_amd64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:7d19ca394cbfc3cc82f587222e10621ba527158deb6bc8b71a56f091156147de", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_linux_amd64.tar.gz"}
 "platforms.macos-arm64" = { checksum = "sha256:7210767d09601389d9d87ae048381a4ba0b89373c55673be0008cdb0bf97fe3f", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_darwin_arm64.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:425a7475afe7c779ac234f0516d3fcdc2158a005e268bea17a0ab0cc997ad369", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_darwin_amd64.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:425a7475afe7c779ac234f0516d3fcdc2158a005e268bea17a0ab0cc997ad369", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_darwin_amd64.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:1a516692dffb81f9c6068217b82f1efe1f13202ab2b5308814f26628ca27b42b", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_windows_amd64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:1a516692dffb81f9c6068217b82f1efe1f13202ab2b5308814f26628ca27b42b", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_windows_amd64.zip"}
 
 [[tools.kubectl]]
 version = "1.35.1"
