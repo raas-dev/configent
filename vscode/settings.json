@@ -607,7 +607,8 @@
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
+    "*.ipynb": "jupyter-notebook",
+    "git-rebase-todo": "default"
   },
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "based-ayu",
