@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.205.0](https://github.com/raas-dev/configent/compare/1.204.15...1.205.0) (2026-02-21)
+
+
+### Features
+
+* **aliases:** add ad hoc mise tui aliases ([41068ce](https://github.com/raas-dev/configent/commit/41068ce3603e682fdb87d3fe197a783e3779ec77))
+* **mise:** expose k9s alias in mise ([2129fec](https://github.com/raas-dev/configent/commit/2129fec9921f3682a392bff8846306fb2988f41c))
+
+
+### Fixes
+
+* **aliases:** standardize tool aliases ([2683df0](https://github.com/raas-dev/configent/commit/2683df074b512430c96477b7443e78f235535080))
+* **install_apps:** guard app flags before installing ([1c69265](https://github.com/raas-dev/configent/commit/1c6926519b805417b1661f980626b36659500bd8))
+
 ## [1.204.15](https://github.com/raas-dev/configent/compare/1.204.14...1.204.15) (2026-02-20)
 
 
