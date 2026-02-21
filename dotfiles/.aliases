@@ -367,8 +367,11 @@ alias gping='mise exec gping -- gping'
 # CLI to generate regular expressions from provided test cases
 alias grex='mise exec grex -- grex'
 
-# Command-line hex viewer
-alias hexyl='mise exec hexyl -- hexyl'
+# Terminal hex editor
+alias heh='mise exec cargo:heh -- heh'
+
+# A terminal-based battery and energy monitor for macOS and Linux
+alias jolt='mise exec github:jordond/jolt -- jolt'
 
 #Interactive JSON filter using jq
 alias jnv='mise exec jnv -- jnv'
@@ -402,6 +405,9 @@ alias oha='mise exec oha -- oha'
 
 # A simple TUI to manage docker containers
 alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
+
+# Interactive find-and-replace in the terminal
+alias scooter='mise exec scooter -- scooter'
 
 # CLI to count programming languages
 alias tokei='mise exec tokei -- tokei'
