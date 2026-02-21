@@ -75,7 +75,6 @@ trivy = 'latest'
 # kubernetes
 kubectl = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
-#k9s = 'latest'
 #helm = 'latest'
 
 # rust

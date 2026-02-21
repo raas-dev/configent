@@ -340,6 +340,9 @@ alias dive='mise exec dive -- dive'
 # Ping, but with a graph
 alias gping='mise exec gping -- gping'
 
+# Kubernetes TUI
+alias k9s='mise exec k9s -- k9s'
+
 # Lazyjournal is a TUI log viewer for journalctl
 alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 
