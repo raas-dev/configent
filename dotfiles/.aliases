@@ -349,6 +349,9 @@ alias dive='mise exec dive -- dive'
 # Universal domain availability checker
 alias domain-check='mise exec github:saidutt46/domain-check -- domain-check'
 
+# Terminal-native document viewer for Word files
+alias doxx='mise exec github:bgreenwell/doxx -- doxx'
+
 # Disk usage/free utility
 alias duf='mise exec duf -- duf'
 
@@ -1209,6 +1212,7 @@ alias dnstwist='n dnstwist'
 alias subfinder='n subfinder'
 
 # web scanners
+alias cariddi='n cariddi'
 alias ffuf='n ffuf'
 alias nikto='n nikto'
 alias nuclei='n nuclei'

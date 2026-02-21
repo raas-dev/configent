@@ -84,6 +84,7 @@ kubectl = 'latest'
 doggo = 'latest'
 hurl = 'latest'
 lazyssh = 'latest'
+'github:ramonvermeulen/whosthere' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_whosthere" }
 'github:sigoden/opscan' = 'latest'
 
 # scripting

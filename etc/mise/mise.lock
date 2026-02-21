@@ -613,6 +613,10 @@ backend = "github:railwayapp/railpack"
 "platforms.windows-x64" = { checksum = "sha256:c7bc9e1041375e657711480b12e9cc4d2fa8a893a39dcc24006008536b4b10a4", url = "https://github.com/railwayapp/railpack/releases/download/v0.17.1/railpack-v0.17.1-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/railwayapp/railpack/releases/assets/342980675"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:c7bc9e1041375e657711480b12e9cc4d2fa8a893a39dcc24006008536b4b10a4", url = "https://github.com/railwayapp/railpack/releases/download/v0.17.1/railpack-v0.17.1-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/railwayapp/railpack/releases/assets/342980675"}
 
+[[tools."github:ramonvermeulen/whosthere"]]
+version = "0.6.1"
+backend = "github:ramonvermeulen/whosthere"
+
 [[tools."github:sharkdp/pastel"]]
 version = "0.12.0"
 backend = "github:sharkdp/pastel"
