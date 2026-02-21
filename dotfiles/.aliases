@@ -346,8 +346,14 @@ alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
 # Tool for exploring each layer in a docker image
 alias dive='mise exec dive -- dive'
 
+# Universal domain availability checker
+alias domain-check='mise exec github:saidutt46/domain-check -- domain-check'
+
 # Disk usage/free utility
 alias duf='mise exec duf -- duf'
+
+# Duplicate file fiinder
+alias fclones='mise exec cargo:fclones -- fclones'
 
 # Binary format jq equivalent
 alias fq='mise exec github:wader/fq -- fq'
