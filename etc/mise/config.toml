@@ -33,7 +33,6 @@ zoxide = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 'github:max-sixty/worktrunk' = 'latest'
-'github:bgreenwell/xleak' = 'latest'
 
 # scripting
 argc = 'latest'
@@ -49,7 +48,6 @@ gping = 'latest'
 hurl = 'latest'
 lazyssh = 'latest'
 'github:sigoden/opscan' = 'latest'
-#'github:fujiapple852/trippy' = 'latest' # https://trippy.rs/guides/privileges
 
 # github
 act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
@@ -57,13 +55,11 @@ github-cli = 'latest'
 
 # containers
 #docker-cli = 'latest'
-#dive = 'latest'
 lazyjournal = 'latest'
 lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 oxker = 'latest'
 #podman = 'latest'
 trivy = 'latest'
-'github:owenrumney/lazytrivy' = 'latest'
 
 # cloud
 #awscli = 'latest'
@@ -89,9 +85,7 @@ rust = '1.90.0'
 cargo-binstall = 'latest'
 'cargo:cargo-cache' = 'latest' # for topgrade
 'cargo:cargo-update' = 'latest' # for topgrade
-'cargo:diskonaut' = 'latest' # no macos-arm64 release
 'cargo:kondo' = 'latest' # no linux-aarch64 release
-'cargo:netscanner' = 'latest' # no releases
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
 'cargo:tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # no linux-aarch64 release
 

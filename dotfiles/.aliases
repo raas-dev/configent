@@ -335,6 +335,29 @@ alias path='printf "${PATH//:/\\n}\n"'
 # Display week number
 alias week='date +%V'
 
+### Ad-hoc TUI apps ###########################################################
+
+# Terminal disk space navigator
+alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
+
+# A tool for exploring each layer in a docker image
+alias dive='mise exec dive -- dive'
+
+# Build complex nmap commands with an intuitive TUI
+alias lazynmap='mise exec cargo:lazynmap -- lazynmap'
+
+# A terminal UI wrapper for Trivy
+alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
+
+# Terminal network scanner & diagnostic tool with modern TUI
+alias netscanner='mise exec cargo:netscanner -- netscanner'
+
+# A network diagnostic tool
+alias trip='mise exec github:fujiapple852/trippy -- sudo trip'
+
+# A fast terminal Excel viewer with an interactive TUI
+alias xleak='mise exec github:bgreenwell/xleak -- xleak'
+
 ### Python #####################################################################
 
 # https://github.com/subash774/Caffeinate
