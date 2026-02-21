@@ -394,11 +394,11 @@ alias netscanner='mise exec cargo:netscanner -- netscanner'
 # Kernel-enforced sandbox CLI for AI agents
 alias nono='mise exec github:always-further/nono -- nono'
 
-# A simple tui to view and control docker containers
-alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
-
 # HTTP load generator with TUI
 alias oha='mise exec oha -- oha'
+
+# A simple TUI to manage docker containers
+alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 
 # CLI to count programming languages
 alias tokei='mise exec tokei -- tokei'
