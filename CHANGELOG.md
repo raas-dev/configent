@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.206.2](https://github.com/raas-dev/configent/compare/1.206.1...1.206.2) (2026-02-21)
+
+
+### Fixes
+
+* **aliases:** alias z now uses snitch ([507ab92](https://github.com/raas-dev/configent/commit/507ab92d182ef0c308a75ca1c7be9a4fce0c4fdb))
+* **aliases:** rename mcpscan alias to mcp-scan ([4afffba](https://github.com/raas-dev/configent/commit/4afffba37ce9512b883294b50954b70f6eba8f59))
+
 ## [1.206.1](https://github.com/raas-dev/configent/compare/1.206.0...1.206.1) (2026-02-21)
 
 
