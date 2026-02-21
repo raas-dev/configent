@@ -29,19 +29,19 @@ backend = "aqua:neovim/neovim"
 "platforms.windows-x64-baseline" = { checksum = "sha256:90fc6d7cdf3d3388737caab1e2c554aa24b468f3a5cc38ef63857ddf1103513c", url = "https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-win64.zip"}
 
 [[tools."aqua:pranshuparmar/witr"]]
-version = "0.2.7"
+version = "0.3.0"
 backend = "aqua:pranshuparmar/witr"
-"platforms.linux-arm64" = { checksum = "sha256:7b1dd3bebdf923caffbda9e94044fc9198e571eb9171a1b5154fd3f36a74dbe0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-arm64"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:7b1dd3bebdf923caffbda9e94044fc9198e571eb9171a1b5154fd3f36a74dbe0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-arm64"}
-"platforms.linux-x64" = { checksum = "sha256:3715a6ae00dac820c76a1b6a952e0cb9e9fb111912c31c4bd283180c7c158425", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-amd64"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3715a6ae00dac820c76a1b6a952e0cb9e9fb111912c31c4bd283180c7c158425", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-amd64"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3715a6ae00dac820c76a1b6a952e0cb9e9fb111912c31c4bd283180c7c158425", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-amd64"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3715a6ae00dac820c76a1b6a952e0cb9e9fb111912c31c4bd283180c7c158425", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-linux-amd64"}
-"platforms.macos-arm64" = { checksum = "sha256:7765a85932e61b6a68ab258c7cd14a1a137364bd89ca713a6ad6e794a6eb03f0", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-darwin-arm64"}
-"platforms.macos-x64" = { checksum = "sha256:3efd846840b177459fa9e91a87ab1dee83e7853e0f210d8cb003e5f4207bcc1f", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-darwin-amd64"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:3efd846840b177459fa9e91a87ab1dee83e7853e0f210d8cb003e5f4207bcc1f", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-darwin-amd64"}
-"platforms.windows-x64" = { checksum = "sha256:eff0fcc7c774a86de034cbb19239587dc5616f4373d97610f9c2960d156e847e", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-windows-amd64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:eff0fcc7c774a86de034cbb19239587dc5616f4373d97610f9c2960d156e847e", url = "https://github.com/pranshuparmar/witr/releases/download/v0.2.7/witr-windows-amd64.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:ceaa88f5bde5ecf797eb5e38fea9487778aa3e1de47a81a50ca71e6c89334d98", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-arm64"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:ceaa88f5bde5ecf797eb5e38fea9487778aa3e1de47a81a50ca71e6c89334d98", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-arm64"}
+"platforms.linux-x64" = { checksum = "sha256:370e4a6629ca14bb40754137e2481023cf026b5344acb012d3862bb46dbb715a", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-amd64"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:370e4a6629ca14bb40754137e2481023cf026b5344acb012d3862bb46dbb715a", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-amd64"}
+"platforms.linux-x64-musl" = { checksum = "sha256:370e4a6629ca14bb40754137e2481023cf026b5344acb012d3862bb46dbb715a", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-amd64"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:370e4a6629ca14bb40754137e2481023cf026b5344acb012d3862bb46dbb715a", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-linux-amd64"}
+"platforms.macos-arm64" = { checksum = "sha256:5c1c0b0cb597256edf4d8ef068d0d71f912b4639f163fd7a4f71b5f259bc8c7a", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-darwin-arm64"}
+"platforms.macos-x64" = { checksum = "sha256:2f2ae94c14bd5141184be4416d4275e6f7251303fecd3fc17e12c05614e2d566", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-darwin-amd64"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:2f2ae94c14bd5141184be4416d4275e6f7251303fecd3fc17e12c05614e2d566", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-darwin-amd64"}
+"platforms.windows-x64" = { checksum = "sha256:50b91ce8070c7a644ba8c5e3045c25ce2a7d914a6df1d05192b831872dd88842", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-windows-amd64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:50b91ce8070c7a644ba8c5e3045c25ce2a7d914a6df1d05192b831872dd88842", url = "https://github.com/pranshuparmar/witr/releases/download/v0.3.0/witr-windows-amd64.zip"}
 
 [[tools.argc]]
 version = "1.23.0"
