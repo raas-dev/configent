@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.206.0](https://github.com/raas-dev/configent/compare/1.205.1...1.206.0) (2026-02-21)
+
+
+### Features
+
+* **whosthere:** add whosthere integration ([e4e188f](https://github.com/raas-dev/configent/commit/e4e188f389aaeac5832a67a5e5e841e2593e60ac))
+
+
+### Fixes
+
+* **aliases:** add utility aliases ([ed6eaf8](https://github.com/raas-dev/configent/commit/ed6eaf8f358adb0abe607a1618a714dc461a984a))
+* **aliases:** align x alias with pik ([d34dee1](https://github.com/raas-dev/configent/commit/d34dee1558ff77c8b20636bb4ba2d4e1fd8eddc0))
+* **aliases:** route c alias to dcv ([5ee662e](https://github.com/raas-dev/configent/commit/5ee662e31b1f194e92e45c83d02f2774977da616))
+* **aliases:** switch default sql alias to sqlit ([501a76b](https://github.com/raas-dev/configent/commit/501a76b0d1b312270be7859318889e88135a4d34))
+
 ## [1.205.1](https://github.com/raas-dev/configent/compare/1.205.0...1.205.1) (2026-02-21)
 
 
