@@ -78,7 +78,7 @@ kubectl = 'latest'
 #helm = 'latest'
 
 # rust
-rust = '1.90.0'
+rust = '1.93.1'
 cargo-binstall = 'latest'
 'cargo:cargo-cache' = 'latest' # for topgrade
 'cargo:cargo-update' = 'latest' # for topgrade
