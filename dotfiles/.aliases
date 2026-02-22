@@ -359,6 +359,9 @@ alias diskonaut='mise exec cargo:diskonaut -- diskonaut'
 # Tool for exploring each layer in a docker image
 alias dive='mise exec dive -- dive'
 
+# A diff tool and converter for YAML and JSON formats
+alias dyff='mise exec dyff -- dyff'
+
 # Universal domain availability checker
 alias domain-check='mise exec github:saidutt46/domain-check -- domain-check'
 
@@ -1071,9 +1074,9 @@ agyclear() {
   esac
 }
 
-### Nix ########################################################################
+### nix-shell ##################################################################
 
-# Nix in containerd
+# Nix in podman
 nixd() {
   if [ -z "$1" ]; then
     local bin="bash"
@@ -1156,39 +1159,21 @@ n() {
   nixd nix-shell --quiet --packages "$packages" --command \"$command\"
 }
 
-# https://nixery.dev/
-nixery() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
-  local packages="$1"
-  shift
-  local bin="${packages%%/*}"
-  if [ "$bin" = "shell" ]; then
-    local command="bash -c '$*'"
-  else
-    local command="$bin $*"
-  fi
-  if [ "$(uname -m)" = 'arm64' ] || [ "$(uname -m)" = 'aarch64' ]; then
-    local image="nixery.dev/arm64/$packages"
-  else
-    local image="nixery.dev/$packages"
-  fi
-  eval nerdctl run --init -it --rm \
-    --volume "$PWD:$PWD":rro,rprivate \
-    --workdir "$PWD" \
-    "$image" "$command"
-}
+# https://docs.asciinema.org/manual/agg/usage
+alias asciinema='n asciinema'
+alias agg='n shell/asciinema-agg/dejavu_fonts agg --font-dir /nix/store'
 
-### Linux security tools via Nix
-
-# file explorers
-alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
+# http server
+alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 
 # ripgrep, but also search in pdfs, zip, tar.gz, etc. (see --rga-list-adapters)
 alias rga='n shell/ffmpeg/pandoc/poppler/ripgrep/ripgrep-all rga'
 
-# servers
-alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
-alias termscp='n termscp/vim' # does not work natively on macOS
+# terminal file transfer and explorer (does not work natively on macOS)
+alias termscp='n termscp/vim'
+
+# terminal file explorer
+alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 
 # appsec
 alias grype='n grype'
