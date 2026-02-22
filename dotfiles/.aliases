@@ -1166,6 +1166,9 @@ alias asciinema='n asciinema'
 # http server
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
 
+# terminal based slideshow tool
+alias presenterm='n presenterm/python313Packages.weasyprint'
+
 # ripgrep, but also search in pdfs, zip, tar.gz, etc. (see --rga-list-adapters)
 alias rga='n shell/ffmpeg/pandoc/poppler/ripgrep/ripgrep-all rga'
 
