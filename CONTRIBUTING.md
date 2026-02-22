@@ -37,7 +37,7 @@ Run [semgrep](https://semgrep.dev/) for static code analysis:
 
     semgrep scan  .
 
-Run [Trivy](https://trivy.dev/latest/) to scan for vulnerabilities and secrets:
+Run [Trivy](https://trivy.dev/) to scan for vulnerabilities and secrets:
 
     trivy fs .
 
