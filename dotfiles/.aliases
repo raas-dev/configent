@@ -431,6 +431,9 @@ alias trip='mise exec github:fujiapple852/trippy -- trip'
 # Tool to find, verify, and analyze leaked credentials
 alias trufflehog='mise exec trufflehog -- trufflehog'
 
+# A time zone helper
+alias tz='TZ_LIST="UTC;US/Eastern;US/Pacific" mise exec github:oz/tz -- tz'
+
 # Terminal Excel viewer with an interactive TUI
 alias xleak='mise exec github:bgreenwell/xleak -- xleak'
 
