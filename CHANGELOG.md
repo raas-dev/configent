@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.0](https://github.com/raas-dev/configent/compare/1.206.2...1.207.0) (2026-02-22)
+
+
+### Features
+
+* **aliases:** add tz alias helper ([59bcf05](https://github.com/raas-dev/configent/commit/59bcf0512ed3adcdf91d2e43a9da74dc0686d919))
+* **mise:** add dstp alias and install ([82ea792](https://github.com/raas-dev/configent/commit/82ea79275d63a67b9aa363ea8597345c1d6ed599))
+
+
+### Fixes
+
+* **aliases:** update osint alias to sherlock ([d3837ce](https://github.com/raas-dev/configent/commit/d3837ce7ee0accb20b0d6cc2855f8cd939b99d91))
+* **mise:** register snitch tool assets ([24a5972](https://github.com/raas-dev/configent/commit/24a5972cd6b3df279c6102b0d081d45ab133d55b))
+* **mise:** switch act backend to lazyactions ([d90fc83](https://github.com/raas-dev/configent/commit/d90fc836cb8d911d2848325acf123b2d4dd0a278))
+
 ## [1.206.2](https://github.com/raas-dev/configent/compare/1.206.1...1.206.2) (2026-02-21)
 
 
