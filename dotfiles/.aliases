@@ -164,6 +164,9 @@ if command -v viddy >/dev/null; then
   alias watch='$(which viddy) --differences --no-title'
 fi
 
+# kill all processes matching the given pattern (-i is macOS only)
+alias xall='pkill -i -f'
+
 ### Lima VMs ###################################################################
 
 v() {
