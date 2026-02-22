@@ -1205,7 +1205,7 @@ alias naabu='n naabu'
 alias rustscan='n rustscan'
 
 # osint
-alias maigret='n maigret'
+alias sherlock='n sherlock'
 
 # enumeration
 alias amass='n amass'
