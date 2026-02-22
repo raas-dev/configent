@@ -1184,6 +1184,7 @@ alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 # appsec
 alias grype='n grype'
 alias syft='n syft'
+alias osv-scanner='n osv-scanner'
 
 # sast
 alias hadolint='n hadolint'
