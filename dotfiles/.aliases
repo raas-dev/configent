@@ -422,6 +422,9 @@ alias oha='mise exec oha -- oha'
 # A simple TUI to manage docker containers
 alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 
+# Code quality CLI for universal linting, auto-formatting, security scanning
+alias qlty='mise exec github:qltysh/qlty -- qlty'
+
 # Interactive find-and-replace in the terminal
 alias scooter='mise exec scooter -- scooter'
 
