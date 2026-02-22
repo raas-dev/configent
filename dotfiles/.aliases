@@ -347,6 +347,9 @@ alias binsider='mise exec github:orhun/binsider -- binsider'
 # CIDR network prefix explainer
 alias cidr='mise exec github:bschaatsbergen/cidr -- cidr'
 
+# CLI for internet speed test via cloudflare
+alias cloudflare-speed-cli='mise exec github:kavehtehrani/cloudflare-speed-cli -- cloudflare-speed-cli'
+
 # Structural diff tool that understands syntax
 alias difft='mise exec difftastic -- difft'
 
