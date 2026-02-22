@@ -657,6 +657,5 @@
   "rust-analyzer.checkOnSave": false,
   "mise.enableCodeLens": false,
   "editor.scrollbar.horizontalScrollbarSize": 10,
-  "editor.minimap.autohide": true,
-  "editor.scrollbar.vertical": "visible"
+  "editor.minimap.autohide": true
 }
