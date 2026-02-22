@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.2](https://github.com/raas-dev/configent/compare/1.207.1...1.207.2) (2026-02-22)
+
+
+### Fixes
+
+* **aliases:** add osv-scanner alias ([0c0cfc2](https://github.com/raas-dev/configent/commit/0c0cfc24d75e1aec5184109b028d6181e8678200))
+* **aliases:** add qlty alias for linting ([444990d](https://github.com/raas-dev/configent/commit/444990d2796c3697669430a8215f5a9a45292653))
+* **dockerfile:** set interactive shell env ([10fd7e6](https://github.com/raas-dev/configent/commit/10fd7e60b7c18ec224ea7efe70d22881e68c6d4f))
+
 ## [1.207.1](https://github.com/raas-dev/configent/compare/1.207.0...1.207.1) (2026-02-22)
 
 
