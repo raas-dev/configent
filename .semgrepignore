@@ -1,5 +1,6 @@
 # Usage:
 #   semgrep scan .
 
+bin/git-credential-pass
 dotfiles/.bash-preexec.sh
 etc/prompts/write_nuclei_template_rule.md
