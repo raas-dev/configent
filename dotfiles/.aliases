@@ -1159,9 +1159,9 @@ n() {
   nixd nix-shell --quiet --packages "$packages" --command \"$command\"
 }
 
-# https://docs.asciinema.org/manual/agg/usage
-alias asciinema='n asciinema'
+# https://docs.asciinema.org/manual/agg/usage/
 alias agg='n shell/asciinema-agg/dejavu_fonts agg --font-dir /nix/store'
+alias asciinema='n asciinema'
 
 # http server
 alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
