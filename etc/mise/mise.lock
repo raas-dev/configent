@@ -790,6 +790,21 @@ backend = "github:yassinebridi/serpl"
 "platforms.windows-x64" = { checksum = "sha256:0e64adf27ab40367f08168ec091f9a002303157d16575797e7d176b4ff60c925", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-windows-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257827031"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:0e64adf27ab40367f08168ec091f9a002303157d16575797e7d176b4ff60c925", url = "https://github.com/yassinebridi/serpl/releases/download/0.3.4/serpl-0.3.4-windows-x86_64.tar.gz", url_api = "https://api.github.com/repos/yassinebridi/serpl/releases/assets/257827031"}
 
+[[tools."github:ycd/dstp"]]
+version = "0.4.23"
+backend = "github:ycd/dstp"
+"platforms.linux-arm64" = { checksum = "sha256:cf379b4d0fcdf8b987be1a481d1f4b86a90cfc54232fd675d04aa35a9c2df6dc", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_arm64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541200"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:cf379b4d0fcdf8b987be1a481d1f4b86a90cfc54232fd675d04aa35a9c2df6dc", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_arm64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541200"}
+"platforms.linux-x64" = { checksum = "sha256:247e68a0fd9558d8751b155d13d1f18668ae22d549fb1e156e9cccc7325833ef", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541206"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:247e68a0fd9558d8751b155d13d1f18668ae22d549fb1e156e9cccc7325833ef", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541206"}
+"platforms.linux-x64-musl" = { checksum = "sha256:247e68a0fd9558d8751b155d13d1f18668ae22d549fb1e156e9cccc7325833ef", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541206"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:247e68a0fd9558d8751b155d13d1f18668ae22d549fb1e156e9cccc7325833ef", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Linux_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541206"}
+"platforms.macos-arm64" = { checksum = "sha256:960eed0b4c2614d6ec493cebd5cd81a3119d9c21def6c90e1cef97d9f0a89db4", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541198"}
+"platforms.macos-x64" = { checksum = "sha256:7bf240ccc7fcacc0905f231c7ee0b519d997ff0f42111610c1ff5af529d31520", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541199"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:7bf240ccc7fcacc0905f231c7ee0b519d997ff0f42111610c1ff5af529d31520", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541199"}
+"platforms.windows-x64" = { checksum = "sha256:e8597c20e924e917718e5102a3e7a0f240c099939ba89a04d07a3f3974955c8e", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Windows_amd64.zip", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541203"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:e8597c20e924e917718e5102a3e7a0f240c099939ba89a04d07a3f3974955c8e", url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Windows_amd64.zip", url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541203"}
+
 [[tools.gitui]]
 version = "0.28.0"
 backend = "aqua:extrawurst/gitui"

@@ -125,7 +125,7 @@ alias c='dcv'
 alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden --glob'
 # g is for git/gitui, see g()
-alias h='xh --verify=no'
+alias h='dstp'
 alias i='glances'
 # j is for zoxide
 alias k='fend'

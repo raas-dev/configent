@@ -90,6 +90,7 @@ kubecolor = 'latest'
 doggo = 'latest'
 hurl = 'latest'
 lazyssh = 'latest'
+'github:ycd/dstp' = 'latest'
 'github:sigoden/opscan' = 'latest'
 'github:karol-broda/snitch' = 'latest'
 'github:ramonvermeulen/whosthere' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_whosthere" }
