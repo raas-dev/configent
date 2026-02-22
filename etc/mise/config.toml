@@ -40,7 +40,7 @@ zoxide = 'latest'
 
 # ai coding platforms
 claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
-gemini-cli = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
+#gemini-cli = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
 opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 
 # ai coding harnesses
