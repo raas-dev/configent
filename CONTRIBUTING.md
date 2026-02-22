@@ -33,18 +33,15 @@ Install [prek](https://prek.j178.dev/) and pre-commit hooks before committing:
 
 ## Static analysis
 
-All of these tools are either installed or installed lazily on use by configent.
-
-Run [semgrep](https://semgrep.dev/) for code vulnerability analysis:
+Run [semgrep](https://semgrep.dev/) for static code analysis:
 
     semgrep scan  .
 
-Run [Trivy](https://trivy.dev/latest/) to scan for secrets in git repository:
+Run [Trivy](https://trivy.dev/latest/) to scan for vulnerabilities and secrets:
 
     trivy fs .
 
-See the respective ignore files in the repository root.
-Semgrep also supports inline ignores as comments in files.
+See ignore files in the repository root. Semgrep also supports inline ignores.
 
 ## Known issues
 
