@@ -386,11 +386,11 @@ alias grex='mise exec grex -- grex'
 # Terminal hex editor
 alias heh='mise exec cargo:heh -- heh'
 
-# A terminal-based battery and energy monitor for macOS and Linux
-alias jolt='mise exec github:jordond/jolt -- jolt'
-
 # Interactive JSON query tool with real-time output
 alias jiq='mise exec github:bellicose100xp/jiq -- jiq'
+
+# A terminal-based battery and energy monitor for macOS and Linux
+alias jolt='mise exec github:jordond/jolt -- jolt'
 
 # Scriptable load testing tool
 alias k6='mise exec k6 -- k6'
