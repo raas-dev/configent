@@ -365,7 +365,7 @@ alias doxx='mise exec github:bgreenwell/doxx -- doxx'
 # Disk usage/free utility
 alias duf='mise exec duf -- duf'
 
-# Duplicate file fiinder
+# Duplicate file finder
 alias fclones='mise exec cargo:fclones -- fclones'
 
 # Binary format jq equivalent
@@ -392,7 +392,7 @@ alias k6='mise exec k6 -- k6'
 # Kubernetes TUI
 alias k9s='mise exec k9s -- k9s'
 
-# TUI log viewer for journalctl
+# TUI log viewer for journalctl (may require sudo)
 alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 
 # Tool to build complex nmap commands with TUI
@@ -419,10 +419,10 @@ alias oxker='mise exec oxker -- oxker --host $DOCKER_HOST'
 # Interactive find-and-replace in the terminal
 alias scooter='mise exec scooter -- scooter'
 
-# CLI to count programming languages
+# CLI to count programming language lines
 alias tokei='mise exec tokei -- tokei'
 
-# Network diagnostic tool with TUI
+# Network diagnostic tool with TUI (may require sudo)
 alias trip='mise exec github:fujiapple852/trippy -- trip'
 
 # Tool to find, verify, and analyze leaked credentials
