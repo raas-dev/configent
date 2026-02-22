@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.1](https://github.com/raas-dev/configent/compare/1.207.0...1.207.1) (2026-02-22)
+
+
+### Fixes
+
+* **aliases:** fix asciinema alias order ([7a5b084](https://github.com/raas-dev/configent/commit/7a5b08415056b7f4e3783618097ccc9d40b9a516))
+* **aliases:** fix nix alias helpers ([87f34f3](https://github.com/raas-dev/configent/commit/87f34f3c809d9c54a7b69e635b3ce1bd07b86879))
+* **aliases:** fix presenterm alias ([2d63ab1](https://github.com/raas-dev/configent/commit/2d63ab1f527b5c39794be96f20ffaee9b47039f7))
+
 ## [1.207.0](https://github.com/raas-dev/configent/compare/1.206.2...1.207.0) (2026-02-22)
 
 
