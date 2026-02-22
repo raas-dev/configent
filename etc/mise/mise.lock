@@ -562,6 +562,21 @@ backend = "github:njbrake/agent-of-empires"
 "platforms.macos-x64" = { checksum = "sha256:55e5c229167b5144fa285fd61298d3f6db422516a3c08caeee828b7758d3e06f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.2/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/353128330"}
 "platforms.macos-x64-baseline" = { checksum = "sha256:55e5c229167b5144fa285fd61298d3f6db422516a3c08caeee828b7758d3e06f", url = "https://github.com/njbrake/agent-of-empires/releases/download/v0.11.2/aoe-darwin-amd64.tar.gz", url_api = "https://api.github.com/repos/njbrake/agent-of-empires/releases/assets/353128330"}
 
+[[tools."github:nnnkkk7/lazyactions"]]
+version = "0.0.12"
+backend = "github:nnnkkk7/lazyactions"
+"platforms.linux-arm64" = { checksum = "sha256:cb8cd36731222b14a45cd5a63451feb290ff2c73d117a414f76ef8cb362c5bb6", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_arm64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536095"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:cb8cd36731222b14a45cd5a63451feb290ff2c73d117a414f76ef8cb362c5bb6", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_arm64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536095"}
+"platforms.linux-x64" = { checksum = "sha256:b177fecfba30d6d5c4262671d8edf2a9807c9f0068318c60bfc781cc2b7f46b4", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536094"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:b177fecfba30d6d5c4262671d8edf2a9807c9f0068318c60bfc781cc2b7f46b4", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536094"}
+"platforms.linux-x64-musl" = { checksum = "sha256:b177fecfba30d6d5c4262671d8edf2a9807c9f0068318c60bfc781cc2b7f46b4", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536094"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:b177fecfba30d6d5c4262671d8edf2a9807c9f0068318c60bfc781cc2b7f46b4", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Linux_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536094"}
+"platforms.macos-arm64" = { checksum = "sha256:622cb4e0d3de14e7de64776f0ce0a7898351f2a9b7f6924e8b50c4249aa56680", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Darwin_arm64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536093"}
+"platforms.macos-x64" = { checksum = "sha256:31ef3596998552ffddbfa1a8d6f8a6dc9be3a576debea8f66ed2a47c2a479e4c", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Darwin_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536096"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:31ef3596998552ffddbfa1a8d6f8a6dc9be3a576debea8f66ed2a47c2a479e4c", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Darwin_x86_64.tar.gz", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536096"}
+"platforms.windows-x64" = { checksum = "sha256:08f663fe6a07ab5e418445e18df3196dcd3bf7988474824ee8705e97b871d247", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Windows_x86_64.zip", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536101"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:08f663fe6a07ab5e418445e18df3196dcd3bf7988474824ee8705e97b871d247", url = "https://github.com/nnnkkk7/lazyactions/releases/download/v0.0.12/lazyactions_0.0.12_Windows_x86_64.zip", url_api = "https://api.github.com/repos/nnnkkk7/lazyactions/releases/assets/344536101"}
+
 [[tools."github:orf/gping"]]
 version = "gping-v1.20.1"
 backend = "github:orf/gping"
