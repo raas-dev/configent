@@ -43,13 +43,8 @@ Run [Trivy](https://trivy.dev/latest/) to scan for secrets in git repository:
 
     trivy fs .
 
-Run [Checkov](https://www.checkov.io/) to scan for Docker misconfigurations:
-
-    checkov -d .
-
-See respective ignore files in the repository root.
-
-In addition, Semgrep and Checkov support inline ignores (as comments in files).
+See the respective ignore files in the repository root.
+Semgrep also supports inline ignores as comments in files.
 
 ## Known issues
 
