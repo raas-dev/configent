@@ -12,7 +12,6 @@ lsd = 'latest'
 ripgrep = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.6a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
-#upt = { version = 'latest', postinstall = "sudo ln -sfnv ~/.local/share/mise/shims/upt /usr/local/bin/upt" }
 viddy = 'latest'
 watchexec = 'latest'
 xh = 'latest'
@@ -101,6 +100,7 @@ ast-grep = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
+usage = 'latest'
 'github:anordal/shellharden' = 'latest'
 
 # powershell
