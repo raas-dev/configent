@@ -249,62 +249,6 @@ fi
 
 path_append "$HOME/.antigravity/antigravity/bin"
 
-### Disable telemetry ##########################################################
-
-# https://consoledonottrack.com
-export DO_NOT_TRACK=1
-
-# homebrew
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ANALYTICS_THIS_RUN=1
-
-# anthropic
-export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-
-# google
-export CLOUDSDK_CORE_DISABLE_USAGE_REPORTING=true
-export GEMINI_CLI_START_SESSION_TELEMETRY_ENABLED=false
-
-# microsoft
-export AZURE_CORE_COLLECT_TELEMETRY=0
-export AZURE_DEV_COLLECT_TELEMETRY=no
-export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export ORYX_DISABLE_TELEMETRY=true
-export POWERSHELL_TELEMETRY_OPTOUT=1
-export RESTLER_TELEMETRY_OPTOUT=1
-
-# aws
-export SLS_TELEMETRY_DISABLED=1
-export SLS_TRACKING_DISABLED=1
-
-# js
-export GATSBY_TELEMETRY_DISABLED=1
-export NEXT_TELEMETRY_DISABLED=1
-export NUXT_TELEMETRY_DISABLED=1
-export NG_CLI_ANALYTICS=false
-export NG_CLI_ANALYTICS_SHARE=false
-export YARN_ENABLE_TELEMETRY=0
-
-# rust
-export BINSTALL_DISABLE_TELEMETRY=true
-
-# go
-export GOTELEMETRY=off
-
-# hashicorp (terraform, consul, ...)
-export CHECKPOINT_DISABLE=1
-
-# infracost
-export INFRACOST_SELF_HOSTED_TELEMETRY=false
-export INFRACOST_SKIP_UPDATE_CHECK=true
-
-# browser-use
-export ANONYMIZED_TELEMETRY=false
-
-# vercel
-export VERCEL_TELEMETRY_DISABLED=1
-
 ### ai #########################################################################
 
 # dynamic-mcp (https://github.com/asyrjasalo/dynamic-mcp)
@@ -362,12 +306,72 @@ fi
 
 # pass host environment, except these variables, by lima shell --preserve-env
 # see: https://lima-vm.io/docs/config/environment-variables/#lima_shellenv_block
-export LIMA_SHELLENV_BLOCK="+*_HOST,*_HOME,MANPATH,HOMEBREW_*,GOBIN"
+if command -v limactl >/dev/null; then
+  export LIMA_SHELLENV_BLOCK="+*_HOST,*_HOME,MANPATH,HOMEBREW_*,GOBIN"
+fi
 
 ### ollama #####################################################################
 
-export OLLAMA_CONTEXT_LENGTH=32768
-export OLLAMA_HOST="127.0.0.1:11434"
+if command -v ollama >/dev/null; then
+  export OLLAMA_CONTEXT_LENGTH=32768
+  export OLLAMA_HOST="127.0.0.1:11434"
+fi
+
+### Disable telemetry ##########################################################
+
+# https://consoledonottrack.com
+export DO_NOT_TRACK=1
+
+# homebrew
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ANALYTICS_THIS_RUN=1
+
+# anthropic
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+
+# google
+export CLOUDSDK_CORE_DISABLE_USAGE_REPORTING=true
+export GEMINI_CLI_START_SESSION_TELEMETRY_ENABLED=false
+
+# microsoft
+export AZURE_CORE_COLLECT_TELEMETRY=0
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export ORYX_DISABLE_TELEMETRY=true
+export POWERSHELL_TELEMETRY_OPTOUT=1
+export RESTLER_TELEMETRY_OPTOUT=1
+
+# aws
+export SLS_TELEMETRY_DISABLED=1
+export SLS_TRACKING_DISABLED=1
+
+# js
+export GATSBY_TELEMETRY_DISABLED=1
+export NEXT_TELEMETRY_DISABLED=1
+export NUXT_TELEMETRY_DISABLED=1
+export NG_CLI_ANALYTICS=false
+export NG_CLI_ANALYTICS_SHARE=false
+export YARN_ENABLE_TELEMETRY=0
+
+# rust
+export BINSTALL_DISABLE_TELEMETRY=true
+
+# go
+export GOTELEMETRY=off
+
+# hashicorp (terraform, consul, ...)
+export CHECKPOINT_DISABLE=1
+
+# infracost
+export INFRACOST_SELF_HOSTED_TELEMETRY=false
+export INFRACOST_SKIP_UPDATE_CHECK=true
+
+# browser-use
+export ANONYMIZED_TELEMETRY=false
+
+# vercel
+export VERCEL_TELEMETRY_DISABLED=1
 
 ### configent/bin ##############################################################
 
