@@ -366,9 +366,6 @@ alias dyff='mise exec dyff -- dyff'
 # Universal domain availability checker
 alias domain-check='mise exec github:saidutt46/domain-check -- domain-check'
 
-# Terminal-native document viewer for Word files
-alias doxx='mise exec github:bgreenwell/doxx -- doxx'
-
 # Disk usage/free utility
 alias duf='mise exec duf -- duf'
 
