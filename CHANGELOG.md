@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.3](https://github.com/raas-dev/configent/compare/1.207.2...1.207.3) (2026-02-23)
+
+
+### Fixes
+
+* **mise:** refresh usage tooling ([a4565ff](https://github.com/raas-dev/configent/commit/a4565ff093d1e47f1c997ca472e2c1794d9aa5e2))
+* **zshrc:** adjust completion completers ([b2b23d9](https://github.com/raas-dev/configent/commit/b2b23d9d7cbd764a7ad435ff61504a74928fbf5b))
+
 ## [1.207.2](https://github.com/raas-dev/configent/compare/1.207.1...1.207.2) (2026-02-22)
 
 
