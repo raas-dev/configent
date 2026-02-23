@@ -6,9 +6,6 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# update changelog: https://github.com/conventional-changelog/standard-version
-# tag, replace version in files: https://github.com/commitizen-tools/commitizen
-
 prerelease_type="$1"
 
 branch="$(git branch --show-current)"
