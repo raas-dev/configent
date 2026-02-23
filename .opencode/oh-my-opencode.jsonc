@@ -2,37 +2,37 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "hephaestus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "prometheus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "atlas": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "sisyphus-junior": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "oracle": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "librarian": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "multimodal-looker": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "metis": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "momus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-5"
     },
     "explore": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "zai-coding-plan/glm-4.7-flash"
     }
   },
   "claude_code": {
