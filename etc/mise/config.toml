@@ -100,7 +100,6 @@ ast-grep = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
-usage = 'latest'
 'github:anordal/shellharden' = 'latest'
 
 # powershell
