@@ -132,16 +132,22 @@ path_append "$HOME/.ghcup/bin"
 unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
 # hatch
-unset HATCH_ENV_ACTIVE
-export HATCH_ENV_TYPE_VIRTUAL_PATH=".venv"
+if command -v hatch >/dev/null; then
+  unset HATCH_ENV_ACTIVE
+  export HATCH_ENV_TYPE_VIRTUAL_PATH=".venv"
+fi
 
 # poetry
-export POETRY_VIRTUALENVS_IN_PROJECT=true
-export POETRY_VIRTUALENVS_OPTIONS_NO_PIP=true
-export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
+if command -v poetry >/dev/null; then
+  export POETRY_VIRTUALENVS_IN_PROJECT=true
+  export POETRY_VIRTUALENVS_OPTIONS_NO_PIP=true
+  export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
+fi
 
 # ptpython
-export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
+if command -v ptpython >/dev/null; then
+  export PTPYTHON_CONFIG_HOME="$HOME/.config/ptpython"
+fi
 
 # sitecustomize.py
 export RICH_TRACEBACKS=true
@@ -156,9 +162,7 @@ fi
 
 ### powershell #################################################################
 
-if command -v pwsh >/dev/null; then
-  export POWERSHELL_UPDATECHECK="Off"
-fi
+command -v pwsh >/dev/null && export POWERSHELL_UPDATECHECK="Off"
 
 ### Starship cross-shell prompt ################################################
 
@@ -179,7 +183,9 @@ command -v carapace >/dev/null && eval "$(carapace _carapace "${SHELL##*/}")"
 
 ### fzf ########################################################################
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+if command -v rg >/dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+fi
 
 ### atuin ######################################################################
 
@@ -187,21 +193,25 @@ command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
 
 ### bat ########################################################################
 
-export BAT_PAGING="never"
-export BAT_STYLE="plain"
-export BAT_THEME="AyuDark"
+if command -v bat >/dev/null; then
+  export BAT_PAGING="never"
+  export BAT_STYLE="plain"
+  export BAT_THEME="AyuDark"
 
-# color manpages
-command -v bat >/dev/null && export MANPAGER='sh -c "col -bx | bat -l man -p"'
+  # color manpages
+  export MANPAGER='sh -c "col -bx | bat -l man -p"'
+fi
 
 ### mcat #######################################################################
 
-export MCAT_ENCODER="sixel"
-export MCAT_INLINE_OPTS="center=false"
-export MCAT_THEME="ayu"
+if command -v mcat >/dev/null; then
+  export MCAT_ENCODER="sixel"
+  export MCAT_INLINE_OPTS="center=false"
+  export MCAT_THEME="ayu"
 
-# completions
-command -v mcat >/dev/null && eval "$(mcat --generate "${SHELL##*/}")"
+  # completions
+  eval "$(mcat --generate "${SHELL##*/}")"
+fi
 
 ### worktrunk ##################################################################
 
@@ -213,7 +223,9 @@ command -v delta >/dev/null && export GIT_PAGER="delta"
 
 ### tlrc #######################################################################
 
-export TLRC_CONFIG="$HOME/.config/tlrc/config.toml"
+if command -v tlrc >/dev/null; then
+  export TLRC_CONFIG="$HOME/.config/tlrc/config.toml"
+fi
 
 ### Azure bicep ################################################################
 
