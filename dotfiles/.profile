@@ -187,7 +187,8 @@ command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
 
 ### bat ########################################################################
 
-export BAT_STYLE="auto"
+export BAT_PAGING="never"
+export BAT_STYLE="plain"
 export BAT_THEME="AyuDark"
 
 # color manpages

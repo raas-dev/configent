@@ -148,7 +148,7 @@ alias z='snitch'
 alias §='trans :fi'
 alias \?='trans'
 alias \#='echo'
-alias ¨='bat --paging never --show-all'
+alias ¨='bat --paging auto --style full --show-all'
 alias ,='mise_exec'
 alias _='oc_agent'
 
