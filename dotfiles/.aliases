@@ -119,7 +119,8 @@ fi
 ### Shortcuts ##################################################################
 
 alias a='ai'
-alias b='bat --style grid,header,snip --paging never'
+alias b='lessfilter'
+#alias b='mcat --no-linenumbers --paging never'
 alias c='dcv'
 # d is for generic docker build and run, see d()
 alias e="\$DEFAULT_IDE --add"
