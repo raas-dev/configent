@@ -83,9 +83,6 @@ brew install portaudio
 # For rsync_tmbackup.sh
 brew install rsync
 
-# Internet traffic monitor (https://github.com/GyulyVGC/sniffnet)
-brew install sniffnet
-
 # Maintained ctags implementation
 brew install universal-ctags
 
