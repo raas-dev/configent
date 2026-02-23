@@ -51,6 +51,7 @@ autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
 # native zsh completion system configuration
+zstyle ':completion:*' completer _complete _ignored _gnu_generic
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
