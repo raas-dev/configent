@@ -9,6 +9,7 @@ fzf = 'latest'
 gitui = 'latest'
 jq = 'latest'
 lsd = 'latest'
+pandoc = 'latest'
 ripgrep = 'latest'
 starship = { version = '1.24.0', postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.6a', postinstall = "~/.local/configent/bin/postinstall_tmux" }

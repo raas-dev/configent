@@ -49,7 +49,7 @@ $SUDO zypper install -y readline-devel libbz2-devel libffi-devel \
 
 # Utils
 $SUDO zypper install -y bind-utils coreutils expect file findutils git \
-  git-lfs htop lsb-release lsof man pandoc procps traceroute unzip wget \
+  git-lfs htop lsb-release lsof man procps traceroute unzip wget \
   whois zip
 
 # Bash

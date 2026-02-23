@@ -56,7 +56,7 @@ $SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev musl-dev \
 
 # Utils
 $SUDO apk add coreutils curl bind-tools expect file findutils git git-lfs \
-  htop less pandoc-cli procps zip unzip util-linux wget whois
+  htop less procps zip unzip util-linux wget whois
 
 # Bash
 $SUDO apk add bash

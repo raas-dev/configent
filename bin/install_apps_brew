@@ -77,9 +77,6 @@ brew install multitail
 # nmap (https://nmap.org/)
 brew install nmap
 
-# For conversion between text file formats
-brew install pandoc
-
 # For speech-to-text
 brew install portaudio
 

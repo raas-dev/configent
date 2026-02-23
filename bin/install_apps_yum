@@ -57,7 +57,7 @@ $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
 
 # Utils
 $SUDO dnf install -y bind-utils coreutils expect file findutils git git-lfs \
-  htop lsof pandoc procps traceroute unzip wget whois zip
+  htop lsof procps traceroute unzip wget whois zip
 
 # Bash
 $SUDO dnf install -y bash

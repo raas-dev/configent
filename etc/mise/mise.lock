@@ -1107,6 +1107,10 @@ backend = "aqua:mrjackwills/oxker"
 "platforms.windows-x64" = { checksum = "sha256:c5ad7e0bc642794bc95a20af9cee03c4b40f74a4c20ac5c5da969f641a890098", url = "https://github.com/mrjackwills/oxker/releases/download/v0.12.0/oxker_windows_x86_64.zip"}
 "platforms.windows-x64-baseline" = { checksum = "sha256:c5ad7e0bc642794bc95a20af9cee03c4b40f74a4c20ac5c5da969f641a890098", url = "https://github.com/mrjackwills/oxker/releases/download/v0.12.0/oxker_windows_x86_64.zip"}
 
+[[tools.pandoc]]
+version = "3.9"
+backend = "github:jgm/pandoc"
+
 [[tools."pipx:azure-cli"]]
 version = "2.83.0"
 backend = "pipx:azure-cli"
