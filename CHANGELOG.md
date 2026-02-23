@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.5](https://github.com/raas-dev/configent/compare/1.207.4...1.207.5) (2026-02-23)
+
+
+### Fixes
+
+* **install_apps_brew:** remove sniffnet install step ([cbee70f](https://github.com/raas-dev/configent/commit/cbee70fc446ecc3d1b67c7fdacefb7dd45eb634e))
+* **install:** centralize pandoc install ([8a0d12b](https://github.com/raas-dev/configent/commit/8a0d12b5657fe6a39d5e8c365a715f1bec3082df))
+* **lessfilter:** expand supported document formats ([601f387](https://github.com/raas-dev/configent/commit/601f387b4426e5903bc053380ab3c9050709ebda))
+* **profile:** guard env exports with command checks ([d418553](https://github.com/raas-dev/configent/commit/d418553d61808911f569db602c3215b7a89a95c0))
+* **profile:** guard lima and ollama env exports ([54d0ecf](https://github.com/raas-dev/configent/commit/54d0ecfc9c2d6ffbd27205c24599526d5eca3ac3))
+
 ## [1.207.4](https://github.com/raas-dev/configent/compare/1.207.3...1.207.4) (2026-02-23)
 
 
