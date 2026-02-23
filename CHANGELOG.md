@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.4](https://github.com/raas-dev/configent/compare/1.207.3...1.207.4) (2026-02-23)
+
+
+### Fixes
+
+* **aliases:** force bat to show all without paging ([1231ac7](https://github.com/raas-dev/configent/commit/1231ac7465a7cdfeb91c841c9a9bb20027cb170d))
+* **dotfiles:** align bat defaults ([29818b3](https://github.com/raas-dev/configent/commit/29818b34692ddef626b57bef4f3a1a9409664eeb))
+* **lessfilter:** tune output flags ([8c11a4c](https://github.com/raas-dev/configent/commit/8c11a4c9eb9dbe86133cfaafe24dff1b20f7eb27))
+
 ## [1.207.3](https://github.com/raas-dev/configent/compare/1.207.2...1.207.3) (2026-02-23)
 
 
