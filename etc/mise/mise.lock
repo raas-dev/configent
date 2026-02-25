@@ -184,7 +184,7 @@ version = "0.6.41"
 backend = "cargo:netscanner"
 
 [[tools."cargo:ralph-cli"]]
-version = "2.5.1"
+version = "2.6.0"
 backend = "cargo:ralph-cli"
 
 [[tools."cargo:shellharden"]]
@@ -1119,7 +1119,7 @@ backend = "pipx:azure-cli"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.12"
+version = "0.11.13"
 backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
