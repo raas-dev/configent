@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.6](https://github.com/raas-dev/configent/compare/1.207.5...1.207.6) (2026-02-25)
+
+
+### Fixes
+
+* **aliases:** add boxrun alias ([14e4478](https://github.com/raas-dev/configent/commit/14e4478a83fd3c321d4da5bccdd80bd8d94f4e11))
+
 ## [1.207.5](https://github.com/raas-dev/configent/compare/1.207.4...1.207.5) (2026-02-23)
 
 
