@@ -613,7 +613,7 @@ d() {
     docker build --pull --tag "$name" . || return
   else
     echo "[d] Building image with nixpacks"
-    TMPDIR="/tmp/lima" nixpacks build . --name "$name" || return
+    nixpacks build . --name "$name" || return
   fi
 
   if [ -n "$PORT" ]; then

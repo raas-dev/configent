@@ -232,7 +232,6 @@ The following host directories are mounted read-write for VMs:
 
 - `$HOME/dev`
 - `$HOME/Downloads`
-- `/tmp/lima`
 
 ### docker shortcut
 
