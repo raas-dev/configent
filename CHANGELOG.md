@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.7](https://github.com/raas-dev/configent/compare/1.207.6...1.207.7) (2026-02-26)
+
+
+### Fixes
+
+* **bin:** use mise github token env ([b3d6bb0](https://github.com/raas-dev/configent/commit/b3d6bb090134210adb30086dc56cddd3d2c260a1))
+* **lima:** drop /tmp/lima mounts ([d74b636](https://github.com/raas-dev/configent/commit/d74b636252f2e6099b6921cbc3d968ff08f89b5b))
+* **lima:** mount configent only via vv alias ([5be17f5](https://github.com/raas-dev/configent/commit/5be17f58443b414de9f781430d465670acedad18))
+
 ## [1.207.6](https://github.com/raas-dev/configent/compare/1.207.5...1.207.6) (2026-02-25)
 
 
