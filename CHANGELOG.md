@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.8](https://github.com/raas-dev/configent/compare/1.207.7...1.207.8) (2026-02-26)
+
+
+### Fixes
+
+* **bin:** pass args correctly to limactl ([4d5e19f](https://github.com/raas-dev/configent/commit/4d5e19f1567bec6f74bc9ca2e1d6ed547e82c9b9))
+
 ## [1.207.7](https://github.com/raas-dev/configent/compare/1.207.6...1.207.7) (2026-02-26)
 
 
