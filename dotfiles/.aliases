@@ -1119,24 +1119,28 @@ nixd() {
 # Generic nix-shell builder and runner
 n() {
   [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
-  local packages="${1//\// }"
-  # shellcheck disable=SC1001   # escape forward slash on purpose
-  case "$1" in shell*)
-    shift
-    local packages="${packages#* }"
-    local command="bash -c '$*'"
-    ;;
-  *\/*)
-    shift
-    local bin="${packages%% *}"
-    local command="$bin $*"
-    ;;
-  *)
-    local command="$*"
-    ;;
-  esac
-  # shellcheck disable=SC2086   # command has to be in quotes
-  nixd nix-shell --quiet --packages "$packages" --command \"$command\"
+  local arg="$1"
+  shift
+  local cmd="${arg%%/*}"
+  [ "$cmd" = "shell" ] && cmd="bash"
+  local packages shell_cmd
+  if [ "$cmd" = "bash" ]; then
+    case "$arg" in
+      */*)
+        local rest="${arg#*/}"
+        packages="${rest//\// }"
+        ;;
+      *)
+        packages="bash"
+        ;;
+    esac
+    shell_cmd="${*:-bash}"
+  else
+    packages="${arg//\// }"
+    shell_cmd="$cmd${*:+ $*}"
+  fi
+  # shellcheck disable=SC2086  # shell_cmd has to be in quotes to pass args
+  nixd nix-shell --quiet --packages "$packages" --command \"$shell_cmd\"
 }
 
 # https://docs.asciinema.org/manual/agg/usage/
