@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.9](https://github.com/raas-dev/configent/compare/1.207.8...1.207.9) (2026-02-26)
+
+
+### Fixes
+
+* **aliases:** escape nixd runner args ([6f94574](https://github.com/raas-dev/configent/commit/6f94574301d8b7a69b26a43c5a6ccfb12732aa42))
+
 ## [1.207.8](https://github.com/raas-dev/configent/compare/1.207.7...1.207.8) (2026-02-26)
 
 
