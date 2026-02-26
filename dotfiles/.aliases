@@ -259,12 +259,13 @@ vv() {
         fi
       done
       if [ "$has_name" = false ]; then
-        v "$1" debian --name=default "${@:2}" --set=.env.GIT_REF=\"main\"
+        v "$1" debian --name=default "${@:2}" \
+          --set=.env.GIT_REF=\"main\" --mount="~/configent"
       else
-        v "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\"
+        v "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" --mount="~/configent"
       fi
     else
-      v "$@" --set=.env.GIT_REF=\"main\"
+      v "$@" --set=.env.GIT_REF=\"main\" --mount="~/configent"
     fi
   else
     v "$@"

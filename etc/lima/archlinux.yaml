@@ -13,8 +13,6 @@ images:
     arch: aarch64
 
 mounts:
-  - location: "~/configent"
-    writable: false
   - location: "~/dev"
     writable: true
   - location: "~/Downloads"

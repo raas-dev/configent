@@ -7,8 +7,6 @@ images:
     digest: sha512:53ef755c6b8fa7d6bf3c55ad96341f145c3500b685774c9e303e25651a273273d730c79603e87935d652d64f6db87b0f13abc9e44a4f4750d76ee856cd18ed43
 
 mounts:
-  - location: "~/configent"
-    writable: false
   - location: "~/dev"
     writable: true
   - location: "~/Downloads"

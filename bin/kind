@@ -28,7 +28,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 
   # pass arguments to this exact same script on the guest VM
-  limactl shell "$NAME" ~/configent/bin/kind "$@"
+  limactl shell "$NAME" bash -i -c kind "$@"
   ret=$?
 
   # copy kubectl config from lima vm to host (if it exists)

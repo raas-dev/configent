@@ -14,8 +14,6 @@ images:
 
 mountTypesUnsupported: ["9p"]
 mounts:
-  - location: "~/configent"
-    writable: false
   - location: "~/dev"
     writable: true
   - location: "~/Downloads"

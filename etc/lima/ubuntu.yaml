@@ -20,8 +20,6 @@ memory: "8GiB" # default: "4GiB"
 
 #mountInotify: true  # experimental, see caveats in Lima docs (2025-06)
 mounts:
-  - location: "~/configent"
-    writable: false
   - location: "~/dev"
     writable: true
   - location: "~/Downloads"

@@ -15,8 +15,6 @@ images:
     digest: sha256:3586ec513ecdb47f0d27406f7e36f5300f5bd5d69a4dc7a4732f341435f6504f
 
 mounts:
-  - location: "~/configent"
-    writable: false
   - location: "~/dev"
     writable: true
   - location: "~/Downloads"
