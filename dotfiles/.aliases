@@ -406,7 +406,7 @@ alias lazyjournal='mise exec lazyjournal -- lazyjournal'
 # Tool to build complex nmap commands with TUI
 alias lazynmap='mise exec cargo:lazynmap -- lazynmap'
 
-# Terminal UI wrapper for Trivy
+# Terminal UI for Trivy
 alias lazytrivy='mise exec github:owenrumney/lazytrivy -- lazytrivy'
 
 # Tool to identify and analyze mysterious hard-coded strings
@@ -1180,6 +1180,7 @@ alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 # appsec
 alias grype='n grype'
 alias syft='n syft'
+alias trivy='n trivy'
 alias osv-scanner='n osv-scanner'
 
 # sast

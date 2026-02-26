@@ -61,7 +61,7 @@ github-cli = 'latest'
 #docker-cli = 'latest'
 lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 #podman = 'latest'
-trivy = 'latest'
+#trivy = 'latest'
 'github:tokuhirom/dcv' = 'latest'
 
 # cloud

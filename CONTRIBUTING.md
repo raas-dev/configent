@@ -30,17 +30,13 @@ Install [prek](https://prek.j178.dev/) and pre-commit hooks before committing:
     prek install --hook-type pre-commit
     prek install --hook-type commit-msg
 
-## Static analysis
+## Static code analysis
 
-Run [semgrep](https://semgrep.dev/) for static code analysis:
+Run [semgrep](https://semgrep.dev/):
 
     semgrep scan  .
 
-Run [Trivy](https://trivy.dev/) to scan for vulnerabilities and secrets:
-
-    trivy fs .
-
-See ignore files in the repository root. Semgrep also supports inline ignores.
+See `.semgrepignore` in repository root. Semgrep also supports inline ignores.
 
 ## Known issues
 
