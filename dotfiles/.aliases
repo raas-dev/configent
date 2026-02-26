@@ -1147,7 +1147,7 @@ alias agg='n shell/asciinema-agg/dejavu_fonts agg --font-dir /nix/store'
 alias asciinema='n asciinema'
 
 # http server
-alias miniserve='PORT=8000 n miniserve --hide-version-footer --port \$PORT $PWD'
+alias miniserve='PORT=8000 n miniserve --hide-version-footer --port 8000 $PWD'
 
 # terminal based slideshow tool
 alias presenterm='n presenterm/python313Packages.weasyprint'
