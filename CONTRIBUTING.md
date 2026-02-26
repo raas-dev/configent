@@ -34,7 +34,7 @@ Install [prek](https://prek.j178.dev/) and pre-commit hooks before committing:
 
 Run [semgrep](https://semgrep.dev/):
 
-    semgrep scan  .
+    semgrep scan .
 
 See `.semgrepignore` in repository root. Semgrep also supports inline ignores.
 
