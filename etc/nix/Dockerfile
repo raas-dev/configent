@@ -1,8 +1,8 @@
 FROM nixos/nix:latest
 
-RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+#RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 
-RUN nix-channel --update
+#RUN nix-channel --update
 
 RUN echo 'export TERM=xterm-256color' >> /etc/bashrc \
   && echo 'export COLORTERM=truecolor' >> /etc/bashrc \
