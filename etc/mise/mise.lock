@@ -115,19 +115,19 @@ backend = "aqua:sharkdp/bat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:0f729b4b6f5f28d395c641eacc2e9ff68d0096b85aa0eec344aa62425144b69b", url = "https://github.com/sharkdp/bat/releases/download/v0.26.1/bat-v0.26.1-x86_64-pc-windows-msvc.zip"}
 
 [[tools.bun]]
-version = "1.3.9"
+version = "1.3.10"
 backend = "core:bun"
-"platforms.linux-arm64" = { checksum = "sha256:a2c2862bcc1fd1c0b3a8dcdc8c7efb5e2acd871eb20ed2f17617884ede81c844", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-aarch64.zip"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:412e9b2732d148cb127a753d63899b0333c4f4f1bd8dde79316ecfb7ef170270", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-aarch64-musl.zip"}
-"platforms.linux-x64" = { checksum = "sha256:4680e80e44e32aa718560ceae85d22ecfbf2efb8f3641782e35e4b7efd65a1aa", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-x64.zip"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:104d4d037f4b35e10215c0507e1779691f39c57bd91ddeefe11cad781e3fc4b9", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-x64-baseline.zip"}
-"platforms.linux-x64-musl" = { checksum = "sha256:04b7184318937623d317de6b25e82bef7bf5cce0b241501c5d0499513201c72d", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-x64-musl.zip"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:40ea1b2b209d393a07e06299d2d19a31710f1e55d15811a193bfa7c9dd757e01", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-linux-x64-musl-baseline.zip"}
-"platforms.macos-arm64" = { checksum = "sha256:cde6a4edf19cf64909158fa5a464a12026fd7f0d79a4a950c10cf0af04266d85", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-darwin-aarch64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:588f4a48740b9a0c366a00f878810ab3ab5e6734d29b7c3cbdd9484b74a007de", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:a6e15821aa60795f541ce18fce16bca9f2a94e193068b77f6f33330f4d0a3ad5", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-darwin-x64-baseline.zip"}
-"platforms.windows-x64" = { checksum = "sha256:f4c1cf3549f6af986dc6535c40b4785ff1a7e7805e59637ec450fc11adb0c874", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:cc22962b3dcc51f279f13bf843675e052479e64a323f85eb29442066cf3942fe", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.9/bun-windows-x64-baseline.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:fa5ecb25cafa8e8f5c87a0f833719d46dd0af0a86c7837d806531212d55636d3", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-aarch64.zip"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:d2c81365a2e529b78a42330d3a0056e8dbd7896b4a6782c8e392b6532141e34d", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-aarch64-musl.zip"}
+"platforms.linux-x64" = { checksum = "sha256:f57bc0187e39623de716ba3a389fda5486b2d7be7131a980ba54dc7b733d2e08", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-x64.zip"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:41201a8c5ee74a9dcbb1ce25a1104f1f929838b57a845aa78d98379b0ce7cde2", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-x64-baseline.zip"}
+"platforms.linux-x64-musl" = { checksum = "sha256:48a6c32277d343db0148ce066336472ffd380358a4d26bb1329714742492d824", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-x64-musl.zip"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:a7bc4cdea1ef255a83adbf39c7aafcd30e09f2b8f74deec4b10ee318bc024d1f", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-linux-x64-musl-baseline.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:82034e87c9d9b4398ea619aee2eed5d2a68c8157e9a6ae2d1052d84d533ccd8d", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-darwin-aarch64.zip"}
+"platforms.macos-x64" = { checksum = "sha256:c1d90bf6140f20e572c473065dc6b37a4b036349b5e9e4133779cc642ad94323", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-darwin-x64.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:f9686c4e4e760db4cde77a0f1fad05e552648b9c9cbfa4f7fc9a7ec26b9f3267", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-darwin-x64-baseline.zip"}
+"platforms.windows-x64" = { checksum = "sha256:7a77b3e245e2e26965c93089a4a1332e8a326d3364c89fae1d1fd99cdd3cd73d", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-windows-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:715709c69b176e20994533d3292bd0b7c32de9c0c5575b916746ec6b2aa38346", url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.10/bun-windows-x64-baseline.zip"}
 
 [[tools.carapace]]
 version = "1.6.3"
@@ -200,17 +200,17 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.56"
+version = "2.1.59"
 backend = "aqua:anthropics/claude-code"
-"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-arm64/claude"}
-"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-arm64/claude"}
-"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-x64/claude"}
-"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-x64/claude"}
-"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-x64/claude"}
-"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/linux-x64/claude"}
-"platforms.macos-arm64" = { checksum = "blake3:85964ec96b7319c5ae9b67e1b40507a043bb0dbdb88b10272a6c19389d7289fa", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/darwin-arm64/claude"}
-"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/darwin-x64/claude"}
-"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.56/darwin-x64/claude"}
+"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-arm64/claude"}
+"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-arm64/claude"}
+"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-x64/claude"}
+"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-x64/claude"}
+"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-x64/claude"}
+"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/linux-x64/claude"}
+"platforms.macos-arm64" = { checksum = "blake3:eab1a3a81d628b3bbf4719db91a79ac5ad59eb4bb6155d40d6dc61fd34c97575", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/darwin-arm64/claude"}
+"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/darwin-x64/claude"}
+"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.59/darwin-x64/claude"}
 
 [[tools.cloudflared]]
 version = "2026.1.2"
@@ -1045,7 +1045,7 @@ version = "1.7.0"
 backend = "npm:@openchamber/web"
 
 [[tools."npm:agent-browser"]]
-version = "0.14.0"
+version = "0.15.0"
 backend = "npm:agent-browser"
 
 [[tools."npm:opencode-ai"]]
@@ -1080,19 +1080,9 @@ backend = "aqua:sharkdp/numbat"
 "platforms.windows-x64-baseline" = { checksum = "sha256:2945a728dd748f5bfb18685e89c94e267d96187f440d04d000e326aad88ede21", url = "https://github.com/sharkdp/numbat/releases/download/v1.23.0/numbat-v1.23.0-x86_64-pc-windows-msvc.zip"}
 
 [[tools.opencode]]
-version = "1.2.14"
+version = "1.2.15"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:aeea8d4160e2f8e9190a92ed69b81d4a70d5cc8b610570ff0d781dad88877282", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:aeea8d4160e2f8e9190a92ed69b81d4a70d5cc8b610570ff0d781dad88877282", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:3a7feacef8cdd306791ef4558d66bfe27d45b9d5c532b7dc97a71bdf22f81731", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:3a7feacef8cdd306791ef4558d66bfe27d45b9d5c532b7dc97a71bdf22f81731", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:3a7feacef8cdd306791ef4558d66bfe27d45b9d5c532b7dc97a71bdf22f81731", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:3a7feacef8cdd306791ef4558d66bfe27d45b9d5c532b7dc97a71bdf22f81731", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:6139f02aa2f96843939c60a68274b2d58530225c8a8c73420c71dd167923806f", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:d0136bf89bef1361c4c33e577a73884c4dc9d58d5ffba47cb6c24b29fb05c119", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:d0136bf89bef1361c4c33e577a73884c4dc9d58d5ffba47cb6c24b29fb05c119", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:1067fd22345923533432aa062382df44298695dde779c73dfd0de7c44892f880", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:1067fd22345923533432aa062382df44298695dde779c73dfd0de7c44892f880", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.14/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:4144cdb7ae4d183964d7b23bdd37061ed52761bbde7e55763e0ebd12998c1e5e", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.15/opencode-darwin-arm64.zip"}
 
 [[tools.oxker]]
 version = "0.12.0"
@@ -1119,7 +1109,7 @@ backend = "pipx:azure-cli"
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.11.13"
+version = "0.12.0"
 backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
