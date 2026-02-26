@@ -1132,7 +1132,7 @@ nixd() {
     "$env_file" \
     "$env_args" \
     --workdir "$PWD" \
-    "$name" "$bin" "$*"
+    "$name" "$bin" $(printf '%q ' "$@")
 }
 
 # Generic nix-shell builder and runner
