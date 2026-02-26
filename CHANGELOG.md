@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.10](https://github.com/raas-dev/configent/compare/1.207.9...1.207.10) (2026-02-26)
+
+
+### Fixes
+
+* **aliases:** miniserve uses fixed 8000 port ([d8abeaf](https://github.com/raas-dev/configent/commit/d8abeaf3836d6cd642801e8b23b53e7bde45241c))
+* **aliases:** refine nix shell handling ([bdf5c37](https://github.com/raas-dev/configent/commit/bdf5c370671b44658de93651ca7abb495b58db94))
+
 ## [1.207.9](https://github.com/raas-dev/configent/compare/1.207.8...1.207.9) (2026-02-26)
 
 
