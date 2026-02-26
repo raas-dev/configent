@@ -1162,24 +1162,19 @@ alias termscp='n termscp/vim'
 # terminal file explorer
 alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 
-# appsec
-alias grype='n grype'
-alias osv-scanner='n osv-scanner'
-alias trivy='n trivy'
-alias trufflehog='n trufflehog'
-
-# sast
-alias hadolint='n hadolint'
-alias kubescape='n kubescape'
-
 # database clients
 alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
 
-# port scanners
-alias naabu='n naabu'
-alias rustscan='n rustscan'
+# sast
+alias hadolint='n hadolint'
+alias kubescape='n kubescape'
+
+# appsec
+alias grype='n grype'
+alias osv-scanner='n osv-scanner'
+alias trivy='n trivy'
 
 # osint
 alias sherlock='n sherlock'
@@ -1189,6 +1184,10 @@ alias amass='n amass'
 alias feroxbuster='n feroxbuster'
 alias gobuster='n gobuster'
 alias katana='n katana'
+
+# port scanners
+alias naabu='n naabu'
+alias rustscan='n rustscan'
 
 # dns scanners
 alias dnstwist='n dnstwist'
@@ -1204,10 +1203,13 @@ alias wapiti='n wapiti'
 # xss scanners
 alias dalfox='n dalfox'
 
-# pentesting
-alias msfconsole='n shell/metasploit msfconsole'
-alias sqlmap='n sqlmap'
+# secrets scanners
+alias trufflehog='n trufflehog'
 
 # password recovery
 alias hashcat='n hashcat'
 alias hydra='n shell/thc-hydra hydra'
+
+# pentesting
+alias msfconsole='n shell/metasploit msfconsole'
+alias sqlmap='n sqlmap'
