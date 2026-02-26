@@ -98,6 +98,7 @@ lazyssh = 'latest'
 # scripting
 argc = 'latest'
 ast-grep = 'latest'
+gitleaks = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
