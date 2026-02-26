@@ -15,9 +15,9 @@ this_path="$(cd "$(dirname "$0")" && pwd)"
 
 touch "$rclocal_path"
 
-# GITHUB_TOKEN is passed on lima VM create/start and is in /etc/environment
+# MISE_GITHUB_TOKEN is passed on lima VM create/start and is in /etc/environment
 if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
-  printf "\nexport MISE_GITHUB_TOKEN=\"\$GITHUB_TOKEN\"" >>"$rclocal_path"
+  printf "\nexport GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"" >>"$rclocal_path"
 fi
 
 # take existing git user name and email from .gitconfig, or leave them blank

@@ -15,8 +15,8 @@
 get_latest_github_release() {
   repo="$1"
   api_url="https://api.github.com/repos/$repo/releases/latest"
-  if [ -n "$GITHUB_TOKEN" ]; then
-    curl -fsSL -H "Authorization: token $GITHUB_TOKEN" "$api_url" 2>/dev/null |
+  if [ -n "$MISE_GITHUB_TOKEN" ]; then
+    curl -fsSL -H "Authorization: token $MISE_GITHUB_TOKEN" "$api_url" 2>/dev/null |
       grep -o '"tag_name": "[^"]*"' |
       head -1 |
       cut -d '"' -f 4
@@ -58,11 +58,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # start VM if not running
   if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
     if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-        limactl start --name "$NAME" --network=lima:bridged --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\""
     else
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" ||
-        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\""
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\""
     fi
   fi
   # macOS priority: mise, homebrew

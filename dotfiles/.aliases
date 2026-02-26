@@ -215,12 +215,12 @@ v() {
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
         --name "$vm_name" --tty=false \
         "${os_create_args[@]}" \
-        --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
         "$@" ||
         limactl start "$vm_name" \
           --tty=false \
           "${os_start_args[@]}" \
-          --set=".env.GITHUB_TOKEN = \"$GITHUB_TOKEN\"" \
+          --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
           "$@"
     fi
     limactl shell "$vm_name"

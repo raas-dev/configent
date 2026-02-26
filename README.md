@@ -126,7 +126,8 @@ Sensible defaults are used, what's installed by default:
 Also on both macOS and Linux distros, with a few exceptions (GUI apps, Ollama)
 everything is installed by [mise](https://mise.jdx.dev/).
 
-**It is strongly recommended to `export GITHUB_TOKEN=`.**
+**It is strongly recommended to create read-only GitHub token for `export MISE_GITHUB_TOKEN=`.**
+
 This avoids getting rate limited when mise installs packages from GitHub.
 
 💡: Enable or disable tools in `etc/mise/config.toml`, then run `install_mise`.
