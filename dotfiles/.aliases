@@ -1077,62 +1077,46 @@ agyclear() {
 
 # Nix in podman
 nixd() {
-  if [ -z "$1" ]; then
-    local bin="bash"
-  else
-    local bin="$1"
-    shift
-  fi
+  local bin="${1:-bash}"
+  [ -n "$1" ] && shift
   local image="nix"
   local name="$image-${PWD##*/}"
 
+  local run_args=() exec_args=()
+
+  [ -r "$PWD/.env" ] && exec_args+=(--env-file "$PWD/.env")
+
   if [ -n "$PORT" ]; then
-    local port_args=""
-    local first_port=""
-
-    # Split PORT by comma and create publish args for each
-    local remaining_ports="$PORT"
-    while [ -n "$remaining_ports" ]; do
-      if [ "$remaining_ports" != "${remaining_ports#*,}" ]; then
-        # Contains comma, extract first port
-        local port="${remaining_ports%%,*}"
-        remaining_ports="${remaining_ports#*,}"
+    local first_port="" remaining="$PORT" port
+    while [ -n "$remaining" ]; do
+      if [ "$remaining" != "${remaining#*,}" ]; then
+        port="${remaining%%,*}"
+        remaining="${remaining#*,}"
       else
-        # No more commas, this is the last port
-        local port="$remaining_ports"
-        remaining_ports=""
+        port="$remaining"
+        remaining=""
       fi
-
-      # Trim whitespace and skip empty ports
       port=$(echo "$port" | xargs)
-      if [ -n "$port" ]; then
-        port_args="$port_args --publish $port:$port"
-        # Use first valid port as the main PORT env var for the container
-        if [ -z "$first_port" ]; then
-          first_port="$port"
-        fi
-      fi
+      [ -z "$port" ] && continue
+      run_args+=(--publish "$port:$port")
+      [ -z "$first_port" ] && first_port="$port"
     done
-
-    # Pass only the first port as PORT env var to the container
-    local env_args="--env PORT=$first_port"
+    exec_args+=(--env "PORT=$first_port")
   fi
-
-  [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
 
   podman start "$name" &>/dev/null ||
     (podman build --tag "$image" ~/configent/etc/nix &&
-      eval podman run --init -t --detach \
+      podman run --init -t --detach \
         --name "$name" \
-        "$port_args" \
+        "${run_args[@]}" \
         --volume "$PWD:$PWD" \
         --workdir "$PWD" \
         "$image")
-  eval podman exec -it \
-    "$env_file" \
-    "$env_args" \
+
+  podman exec -it \
+    "${exec_args[@]}" \
     --workdir "$PWD" \
-    "$name" "$bin" $(printf '%q ' "$@")
+    "$name" "$bin" "$@"
 }
 
 # Generic nix-shell builder and runner
