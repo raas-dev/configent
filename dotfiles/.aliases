@@ -436,9 +436,6 @@ alias tokei='mise exec tokei -- tokei'
 # Network diagnostic tool with TUI (may require sudo)
 alias trip='mise exec github:fujiapple852/trippy -- trip'
 
-# Tool to find, verify, and analyze leaked credentials
-alias trufflehog='mise exec trufflehog -- trufflehog'
-
 # A time zone helper
 alias tz='TZ_LIST="UTC;US/Eastern;US/Pacific" mise exec github:oz/tz -- tz'
 
