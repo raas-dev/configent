@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.11](https://github.com/raas-dev/configent/compare/1.207.10...1.207.11) (2026-02-27)
+
+
+### Fixes
+
+* **aliases:** add nix wrapper around nixd ([428ed51](https://github.com/raas-dev/configent/commit/428ed51ab938bf13f2b541bf2a90760dbd939579))
+* **aliases:** fix nix command invocation ([c05e0f9](https://github.com/raas-dev/configent/commit/c05e0f97c36ddfe37c36a6e383f2e36c7675136c))
+* **aliases:** improve nix shell alias ([beec126](https://github.com/raas-dev/configent/commit/beec126a55d8bdc208674b7e773734a316a1e1cc))
+* **aliases:** keep nix run alias compatible ([f955ab1](https://github.com/raas-dev/configent/commit/f955ab1246c33e47dce9e58fc2de4df3b95d82cc))
+
 ## [1.207.10](https://github.com/raas-dev/configent/compare/1.207.9...1.207.10) (2026-02-26)
 
 
