@@ -1116,9 +1116,9 @@ nixd() {
     "$name" "$bin" "$@"
 }
 
-# Generic nix-shell builder and runner
+# Generic nix shell (usage: n nix-pkg1[/nix-pkgN] [ARGUMENTS])
 n() {
-  [ -z "$1" ] && echo "Usage: $0 nix-pkg1[/nix-pkgN] [ARGUMENTS]" && return
+  [ -z "$1" ] && { nixd nix shell --no-warn-dirty; return; }
   local arg="$1"
   shift
   local cmd="${arg%%/*}"
@@ -1139,8 +1139,15 @@ n() {
     packages="${arg//\// }"
     shell_cmd="$cmd${*:+ $*}"
   fi
-  # shellcheck disable=SC2086  # shell_cmd has to be in quotes to pass args
-  nixd nix-shell --quiet --packages "$packages" --command \"$shell_cmd\"
+  local pkg_args=()
+  for pkg in $packages; do pkg_args+=("nixpkgs#$pkg"); done
+  # shellcheck disable=SC2086  # shell_cmd must be unquoted for --command
+  nixd nix shell --no-warn-dirty "${pkg_args[@]}" --command $shell_cmd
+}
+
+# Generic nix run
+nixr() {
+  nixd nix run --no-warn-dirty . -- "$@"
 }
 
 # https://docs.asciinema.org/manual/agg/usage/
