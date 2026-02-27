@@ -317,19 +317,19 @@ backend = "github:bootandy/dust"
 "platforms.windows-x64-baseline" = { checksum = "sha256:75d3f28cc5b051d5fcdd69848dbb3cbf0ba0659c9aa49122557933157a9da510", url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86_64-pc-windows-gnu.zip", url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338101681"}
 
 [[tools."github:dalance/procs"]]
-version = "0.14.10"
+version = "0.14.11"
 backend = "github:dalance/procs"
-"platforms.linux-arm64" = { checksum = "blake3:13a062387d616d390678fc7af84e4637bb5cfe4a36f4580b0a469716231dde29", url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511725"}
-"platforms.linux-arm64-musl" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511725"}
-"platforms.linux-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
-"platforms.linux-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
-"platforms.linux-x64-musl" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
-"platforms.linux-x64-musl-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511922"}
-"platforms.macos-arm64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-aarch64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511560"}
-"platforms.macos-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511554"}
-"platforms.macos-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511554"}
-"platforms.windows-x64" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
-"platforms.windows-x64-baseline" = { url = "https://github.com/dalance/procs/releases/download/v0.14.10/procs-v0.14.10-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/241511643"}
+"platforms.linux-arm64" = { checksum = "sha256:891855dff3143fd3620c06eb68bd63e94114dd2e369107b455d48bf60cc1464c", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235298"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:891855dff3143fd3620c06eb68bd63e94114dd2e369107b455d48bf60cc1464c", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-aarch64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235298"}
+"platforms.linux-x64" = { checksum = "sha256:9c4faecf85a3af4d3d39aae47d04fa31d0a6eb0a239039f68d3f55043f04f974", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235647"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:9c4faecf85a3af4d3d39aae47d04fa31d0a6eb0a239039f68d3f55043f04f974", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235647"}
+"platforms.linux-x64-musl" = { checksum = "sha256:9c4faecf85a3af4d3d39aae47d04fa31d0a6eb0a239039f68d3f55043f04f974", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235647"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:9c4faecf85a3af4d3d39aae47d04fa31d0a6eb0a239039f68d3f55043f04f974", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-linux.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235647"}
+"platforms.macos-arm64" = { checksum = "sha256:6650e7f354c07d0319d0f771ef8bb898ce8d0c841865a96c23281eebb033cac3", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-aarch64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235808"}
+"platforms.macos-x64" = { checksum = "sha256:72e45a61660e1c586afff64b3a8a393fed06f3a133df8e716ade68b00190ea87", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235807"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:72e45a61660e1c586afff64b3a8a393fed06f3a133df8e716ade68b00190ea87", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-mac.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235807"}
+"platforms.windows-x64" = { checksum = "sha256:1b1fef6dfc46ce2f2fe33a678cf865bea35234febe42c3921b06ab41024cda01", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235471"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:1b1fef6dfc46ce2f2fe33a678cf865bea35234febe42c3921b06ab41024cda01", url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-windows.zip", url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235471"}
 
 [[tools."github:jacek-kurlit/pik"]]
 version = "0.29.0"
@@ -358,19 +358,19 @@ backend = "github:karol-broda/snitch"
 "platforms.macos-x64-baseline" = { checksum = "sha256:8fe060109c88f55d34d493bf74c25149a07fd5bfaa48dd4499a2d85620d6f84a", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.27.0"
+version = "0.28.0"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:bdf27733df3de80ae209e3cd6c5b441c434949e2a534940c6e44b1e83c822a03", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366174"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:bdf27733df3de80ae209e3cd6c5b441c434949e2a534940c6e44b1e83c822a03", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366174"}
-"platforms.linux-x64" = { checksum = "sha256:ee81d353b5194f3de8c2feab2daa2086d882fe60d57bec3e10ffd891f737a903", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366188"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:ee81d353b5194f3de8c2feab2daa2086d882fe60d57bec3e10ffd891f737a903", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366188"}
-"platforms.linux-x64-musl" = { checksum = "sha256:ee81d353b5194f3de8c2feab2daa2086d882fe60d57bec3e10ffd891f737a903", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366188"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:ee81d353b5194f3de8c2feab2daa2086d882fe60d57bec3e10ffd891f737a903", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366188"}
-"platforms.macos-arm64" = { checksum = "sha256:3ebfbe6b034afeb686bbddd39c0bee1942ed1448a7a7d5c9cca703ae9693683f", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366170"}
-"platforms.macos-x64" = { checksum = "sha256:58a23a6fe375187b8e7250e2da193a3632df41d0f1689c8eadf8e0e17a6f8d1d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366177"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:58a23a6fe375187b8e7250e2da193a3632df41d0f1689c8eadf8e0e17a6f8d1d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366177"}
-"platforms.windows-x64" = { checksum = "sha256:fcb8345fa85c6c12b4e1bf327af832ba8460d65f177d684ff1c39a1aa95f0b81", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366180"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:fcb8345fa85c6c12b4e1bf327af832ba8460d65f177d684ff1c39a1aa95f0b81", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.27.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/360366180"}
+"platforms.linux-arm64" = { checksum = "sha256:0d4894169a2df978144298d8d26d7f430102474fce2b79e82c4818f86247166e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000460"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:0d4894169a2df978144298d8d26d7f430102474fce2b79e82c4818f86247166e", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000460"}
+"platforms.linux-x64" = { checksum = "sha256:7c6ad63fffe8328c8d96cf770a724bb778c0510461ffb4110a62ddb5306acb28", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000475"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:7c6ad63fffe8328c8d96cf770a724bb778c0510461ffb4110a62ddb5306acb28", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000475"}
+"platforms.linux-x64-musl" = { checksum = "sha256:7c6ad63fffe8328c8d96cf770a724bb778c0510461ffb4110a62ddb5306acb28", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000475"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:7c6ad63fffe8328c8d96cf770a724bb778c0510461ffb4110a62ddb5306acb28", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000475"}
+"platforms.macos-arm64" = { checksum = "sha256:5bb9b66f4ebe63f686156a2894e18fe0beedd490a651c6ce51896fa39cf14ec9", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000451"}
+"platforms.macos-x64" = { checksum = "sha256:a235c95d5128b3f50f2f829eee9f296e3383efc0c89f3ebe6977e2ce610a39a0", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000468"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:a235c95d5128b3f50f2f829eee9f296e3383efc0c89f3ebe6977e2ce610a39a0", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000468"}
+"platforms.windows-x64" = { checksum = "sha256:8cb44bcf30b7b113a12382bd3002868657e29ca9ddf5f432bb84d28a82e0fa5f", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000471"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:8cb44bcf30b7b113a12382bd3002868657e29ca9ddf5f432bb84d28a82e0fa5f", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.0/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/363000471"}
 
 [[tools."github:nnnkkk7/lazyactions"]]
 version = "0.0.12"
@@ -887,19 +887,19 @@ version = "3.6a"
 backend = "asdf:tmux"
 
 [[tools.uv]]
-version = "0.10.6"
+version = "0.10.7"
 backend = "aqua:astral-sh/uv"
-"platforms.linux-arm64" = { checksum = "sha256:7de7aa836fd54ff930fa5e63bc04da35e2fbd72889d6258e153479c44d08b863", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:7de7aa836fd54ff930fa5e63bc04da35e2fbd72889d6258e153479c44d08b863", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:01d6ce770da88ce6445acb0a8764c8b1634c9f69c728dca68b19fc7a893f72b9", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:01d6ce770da88ce6445acb0a8764c8b1634c9f69c728dca68b19fc7a893f72b9", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:01d6ce770da88ce6445acb0a8764c8b1634c9f69c728dca68b19fc7a893f72b9", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:01d6ce770da88ce6445acb0a8764c8b1634c9f69c728dca68b19fc7a893f72b9", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:3993249d8f51deaf34cfce037e57e294e82267ff1f9dc45b7983a17afaf065b4", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:d7647571fb17a5107d4d23cc190418039c157fd7361ddb59bc6f8127a49e3eac", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:d7647571fb17a5107d4d23cc190418039c157fd7361ddb59bc6f8127a49e3eac", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:b27eb789f281e398a82197477de727fc8faf08605152115686da2c3cba0d25f7", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:b27eb789f281e398a82197477de727fc8faf08605152115686da2c3cba0d25f7", url = "https://github.com/astral-sh/uv/releases/download/0.10.6/uv-x86_64-pc-windows-msvc.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:115291f9943531a3b63db3a2eabda8b74b8da4831551679382cb309c9debd9f7", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:115291f9943531a3b63db3a2eabda8b74b8da4831551679382cb309c9debd9f7", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:992529add6024e67135b1c80617abd2eca7be2cf0b99b3911f923de815bd8dc1", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:992529add6024e67135b1c80617abd2eca7be2cf0b99b3911f923de815bd8dc1", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:992529add6024e67135b1c80617abd2eca7be2cf0b99b3911f923de815bd8dc1", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:992529add6024e67135b1c80617abd2eca7be2cf0b99b3911f923de815bd8dc1", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:1eb4dcc5e0fc8669fa0b33cf1151b64ba3b8c26b60dceff4f7a686129e2af22b", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:4fed9d4f4608fb3850db714ee37244436f850a2b6e485bc510795679c2d08866", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-apple-darwin.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:4fed9d4f4608fb3850db714ee37244436f850a2b6e485bc510795679c2d08866", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-apple-darwin.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:8881afb877996a1373a12e816395122a8d39a3ac06cd066272acdb49510cf0fe", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:8881afb877996a1373a12e816395122a8d39a3ac06cd066272acdb49510cf0fe", url = "https://github.com/astral-sh/uv/releases/download/0.10.7/uv-x86_64-pc-windows-msvc.zip"}
 
 [[tools.viddy]]
 version = "1.3.0"
