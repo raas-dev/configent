@@ -1122,52 +1122,42 @@ nix() {
 
 # Generic nix shell (usage: n nix-pkg1[/nix-pkgN] [ARGUMENTS])
 n() {
-  [ -z "$1" ] && { nixd nix shell --no-warn-dirty; return; }
+  [ -z "$1" ] && { nixd nix shell --no-warn-dirty nixpkgs#bash --command bash; return; }
   local arg="$1"
   shift
-  local cmd="${arg%%/*}"
-  [ "$cmd" = "shell" ] && cmd="bash"
-  local packages shell_cmd
-  if [ "$cmd" = "bash" ]; then
-    case "$arg" in
-      */*)
-        local rest="${arg#*/}"
-        packages="${rest//\// }"
-        ;;
-      *)
-        packages="bash"
-        ;;
-    esac
+  local shell_cmd
+  local pkg_args=()
+  if [[ "$arg" == *#* ]]; then
+    # Any flakeref#attr: pass through as a single installable
+    pkg_args+=("$arg")
+    local attr="${arg##*#}"
+    shell_cmd="${*:-${attr##*.}}"
+  elif [[ "$arg" == ./* || "$arg" == ../* || "$arg" == /* || \
+          "$arg" == path:* || "$arg" == github:* || "$arg" == gitlab:* || \
+          "$arg" == sourcehut:* || "$arg" == git+* || "$arg" == tarball+* || \
+          "$arg" == https:* || "$arg" == http:* ]]; then
+    # URL/path flake without #attr: enter bash shell
+    pkg_args+=("$arg")
     shell_cmd="${*:-bash}"
   else
-    packages="${arg//\// }"
-    shell_cmd="$cmd${*:+ $*}"
+    # Plain names[/name2/...]: split by / and auto-prefix with nixpkgs#
+    local cmd="${arg%%/*}"
+    [ "$cmd" = "shell" ] && cmd="bash"
+    if [ "$cmd" = "bash" ]; then
+      if [[ "$arg" == */* ]]; then
+        local rest="${arg#*/}"
+        for pkg in ${=rest//\// }; do pkg_args+=("nixpkgs#$pkg"); done
+      else
+        pkg_args+=("nixpkgs#bash")
+      fi
+      shell_cmd="${*:-bash}"
+    else
+      for pkg in ${=arg//\// }; do pkg_args+=("nixpkgs#$pkg"); done
+      shell_cmd="$cmd${*:+ $*}"
+    fi
   fi
-  local pkg_args=()
-  for pkg in $packages; do pkg_args+=("nixpkgs#$pkg"); done
   # shellcheck disable=SC2086  # shell_cmd must be unquoted for --command
   nixd nix shell --no-warn-dirty "${pkg_args[@]}" --command $shell_cmd
-}
-
-# Generic nix run
-nn() {
-  [ -z "$1" ] && { nixd nix run --no-warn-dirty .; return; }
-  local arg="$1"
-  shift
-  local pkg
-  case "$arg" in
-    *#* | *:* | ./* | /*)
-      pkg="$arg"
-      ;;
-    .)
-      pkg="--no-warn-dirty ."
-      ;;
-    *)
-      pkg="nixpkgs#$arg"
-      ;;
-  esac
-  # shellcheck disable=SC2086  # pkg may contain --no-warn-dirty flag
-  nixd nix run $pkg -- "$@"
 }
 
 # https://docs.asciinema.org/manual/agg/usage/
