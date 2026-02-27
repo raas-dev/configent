@@ -274,23 +274,23 @@ vv() {
 
 ### docker #####################################################################
 
-alias dr='docker rm --force $(docker ps --all --quiet)'
-alias drv='docker volume rm --force $(docker volume ls --quiet)'
-alias dri='docker rmi --force $(docker images --all --quiet)'
+dr() { local ids; ids=$(docker ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rm -f 2>/dev/null; return 0; }
+drv() { local ids; ids=$(docker volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker volume rm -f 2>/dev/null; return 0; }
+dri() { local ids; ids=$(docker images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null; return 0; }
 alias dpr='dr ; drv ; dri ; docker system prune --force --volumes'
 
 ### nerdctl ####################################################################
 
-alias nr='nerdctl rm --force $(nerdctl ps --all --quiet)'
-alias nrv='nerdctl volume rm --force $(nerdctl volume ls --quiet)'
-alias nri='nerdctl rmi --force $(nerdctl images --all --quiet)'
+nr() { local ids; ids=$(nerdctl ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rm -f 2>/dev/null; return 0; }
+nrv() { local ids; ids=$(nerdctl volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl volume rm -f 2>/dev/null; return 0; }
+nri() { local ids; ids=$(nerdctl images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null; return 0; }
 alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes'
 
 ### podman #################################################################
 
-alias pr='podman rm --force $(podman ps --all --quiet)'
-alias prv='podman volume rm --force $(podman volume ls --quiet)'
-alias pri='podman rmi --force $(podman images --all --quiet)'
+pr() { local ids; ids=$(podman ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rm -f 2>/dev/null; return 0; }
+prv() { local ids; ids=$(podman volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman volume rm -f 2>/dev/null; return 0; }
+pri() { local ids; ids=$(podman images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null; return 0; }
 alias ppr='pr ; prv ; pri ; podman system prune --force --volumes'
 
 ### kubectl ####################################################################
