@@ -1116,13 +1116,14 @@ nixd() {
     "$name" "$bin" "$@"
 }
 
+# Wraps nix into container
 nix() {
   nixd nix "$@"
 }
 
 # Generic nix shell (usage: n nix-pkg1[/nix-pkgN] [ARGUMENTS])
 n() {
-  [ -z "$1" ] && { nixd nix shell --no-warn-dirty nixpkgs#bash --command bash; return; }
+  [ -z "$1" ] && { nix shell --no-warn-dirty nixpkgs#bash --command bash; return; }
   local arg="$1"
   shift
   local shell_cmd
@@ -1157,7 +1158,7 @@ n() {
     fi
   fi
   # shellcheck disable=SC2086  # shell_cmd must be unquoted for --command
-  nixd nix shell --no-warn-dirty "${pkg_args[@]}" --command $shell_cmd
+  nix shell --no-warn-dirty "${pkg_args[@]}" --command $shell_cmd
 }
 
 # https://docs.asciinema.org/manual/agg/usage/
