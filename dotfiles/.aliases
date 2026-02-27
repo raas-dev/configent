@@ -1116,6 +1116,10 @@ nixd() {
     "$name" "$bin" "$@"
 }
 
+nix() {
+  nixd nix "$@"
+}
+
 # Generic nix shell (usage: n nix-pkg1[/nix-pkgN] [ARGUMENTS])
 n() {
   [ -z "$1" ] && { nixd nix shell --no-warn-dirty; return; }
