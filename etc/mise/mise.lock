@@ -156,17 +156,17 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.62"
+version = "2.1.63"
 backend = "aqua:anthropics/claude-code"
-"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-arm64/claude"}
-"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-arm64/claude"}
-"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-x64/claude"}
-"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-x64/claude"}
-"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-x64/claude"}
-"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/linux-x64/claude"}
-"platforms.macos-arm64" = { checksum = "blake3:b36121b39d3506e299e333099e7aae9b589937b75ecd2084a30e8bf61de47f69", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/darwin-arm64/claude"}
-"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/darwin-x64/claude"}
-"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.62/darwin-x64/claude"}
+"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-arm64/claude"}
+"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-arm64/claude"}
+"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-x64/claude"}
+"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-x64/claude"}
+"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-x64/claude"}
+"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/linux-x64/claude"}
+"platforms.macos-arm64" = { checksum = "blake3:8719d16f09e5368fbbde5352fe1882fa3e70d6e984d77d513bf2230f22e2ddbe", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/darwin-arm64/claude"}
+"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/darwin-x64/claude"}
+"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.63/darwin-x64/claude"}
 
 [[tools.delta]]
 version = "0.18.2"
@@ -789,19 +789,19 @@ backend = "aqua:PowerShell/PowerShell"
 "platforms.windows-x64-baseline" = { checksum = "sha256:b40d192ae95ba6ccc4cc362ff4e1b18ca6fb5055bebbcd3920684e12701fa8f6", url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.zip"}
 
 [[tools.prek]]
-version = "0.3.3"
+version = "0.3.4"
 backend = "aqua:j178/prek"
-"platforms.linux-arm64" = { checksum = "sha256:02628a23f55a88620dcb8ba90987556c7e42ff9f9c7a4359afb1f2ac2884b620", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:02628a23f55a88620dcb8ba90987556c7e42ff9f9c7a4359afb1f2ac2884b620", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-aarch64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:4967cead51c26313c9dfdad0d2cdedf52ccbfc3d5ebd5dfd61676c45668f3791", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:4967cead51c26313c9dfdad0d2cdedf52ccbfc3d5ebd5dfd61676c45668f3791", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:4967cead51c26313c9dfdad0d2cdedf52ccbfc3d5ebd5dfd61676c45668f3791", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:4967cead51c26313c9dfdad0d2cdedf52ccbfc3d5ebd5dfd61676c45668f3791", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-unknown-linux-musl.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:12c1e281d4d484eaa6d502804c6a8c77ab06f1fdd22c5fd46c02f87ae5f3c1af", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-aarch64-apple-darwin.tar.gz"}
-"platforms.macos-x64" = { checksum = "sha256:0b65555d2bd2add6b24a1f2be51cfee6d0c837892560baf2c2163bdafafed338", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:0b65555d2bd2add6b24a1f2be51cfee6d0c837892560baf2c2163bdafafed338", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-apple-darwin.tar.gz"}
-"platforms.windows-x64" = { checksum = "sha256:c829796e1ddad21e82eef768cee01469880caff7b073a2f1c01073fe075d8ba7", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:c829796e1ddad21e82eef768cee01469880caff7b073a2f1c01073fe075d8ba7", url = "https://github.com/j178/prek/releases/download/v0.3.3/prek-x86_64-pc-windows-msvc.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:610df84f084300f084bf9ea572da9d1909607cf5f930aa78e29b68f408568d2c", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:610df84f084300f084bf9ea572da9d1909607cf5f930aa78e29b68f408568d2c", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-aarch64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:05466ec070a4f3324e800b396e049db3c6e80345c6ab0f4812cf56fc52ce066e", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:05466ec070a4f3324e800b396e049db3c6e80345c6ab0f4812cf56fc52ce066e", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:05466ec070a4f3324e800b396e049db3c6e80345c6ab0f4812cf56fc52ce066e", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:05466ec070a4f3324e800b396e049db3c6e80345c6ab0f4812cf56fc52ce066e", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:f0a416139eaf8753deb603993314077a3916099d23de67287086a21349151ef0", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-aarch64-apple-darwin.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:60a8d093012bcd40e8fec348450d75d8f5b09d85529f11fc5d606b84273b7978", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-apple-darwin.tar.gz"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:60a8d093012bcd40e8fec348450d75d8f5b09d85529f11fc5d606b84273b7978", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-apple-darwin.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:21c6e119d58443a696bd585946a6fac8fa0b918a2d975f623157c3f72994a2f3", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:21c6e119d58443a696bd585946a6fac8fa0b918a2d975f623157c3f72994a2f3", url = "https://github.com/j178/prek/releases/download/v0.3.4/prek-x86_64-pc-windows-msvc.zip"}
 
 [[tools.python]]
 version = "3.14.2"
