@@ -615,19 +615,19 @@ backend = "aqua:kubecolor/kubecolor"
 "platforms.windows-x64-baseline" = { checksum = "sha256:1a516692dffb81f9c6068217b82f1efe1f13202ab2b5308814f26628ca27b42b", url = "https://github.com/kubecolor/kubecolor/releases/download/v0.5.3/kubecolor_0.5.3_windows_amd64.zip"}
 
 [[tools.kubectl]]
-version = "1.35.2"
+version = "1.34.5"
 backend = "aqua:kubernetes/kubernetes/kubectl"
-"platforms.linux-arm64" = { url = "https://dl.k8s.io/1.35.2/bin/linux/arm64/kubectl"}
-"platforms.linux-arm64-musl" = { url = "https://dl.k8s.io/1.35.2/bin/linux/arm64/kubectl"}
-"platforms.linux-x64" = { url = "https://dl.k8s.io/1.35.2/bin/linux/amd64/kubectl"}
-"platforms.linux-x64-baseline" = { url = "https://dl.k8s.io/1.35.2/bin/linux/amd64/kubectl"}
-"platforms.linux-x64-musl" = { url = "https://dl.k8s.io/1.35.2/bin/linux/amd64/kubectl"}
-"platforms.linux-x64-musl-baseline" = { url = "https://dl.k8s.io/1.35.2/bin/linux/amd64/kubectl"}
-"platforms.macos-arm64" = { checksum = "sha256:b0b59cdd7ba20ca20b85214943100e578dd50ddd85242fcddf277a87c2249706", url = "https://dl.k8s.io/v1.35.2/bin/darwin/arm64/kubectl"}
-"platforms.macos-x64" = { url = "https://dl.k8s.io/1.35.2/bin/darwin/amd64/kubectl"}
-"platforms.macos-x64-baseline" = { url = "https://dl.k8s.io/1.35.2/bin/darwin/amd64/kubectl"}
-"platforms.windows-x64" = { url = "https://dl.k8s.io/1.35.2/bin/windows/amd64/kubectl.exe"}
-"platforms.windows-x64-baseline" = { url = "https://dl.k8s.io/1.35.2/bin/windows/amd64/kubectl.exe"}
+"platforms.linux-arm64" = { checksum = "sha256:2d433b53b99ea532f877df6fa5044286e3950d4933967ac3d99262760bc649fd", url = "https://dl.k8s.io/v1.34.5/bin/linux/arm64/kubectl"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:2d433b53b99ea532f877df6fa5044286e3950d4933967ac3d99262760bc649fd", url = "https://dl.k8s.io/v1.34.5/bin/linux/arm64/kubectl"}
+"platforms.linux-x64" = { checksum = "sha256:6a17dd8387783b3144a65535e38d02c351027e9718ea34a6c360476cb26d28bb", url = "https://dl.k8s.io/v1.34.5/bin/linux/amd64/kubectl"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:6a17dd8387783b3144a65535e38d02c351027e9718ea34a6c360476cb26d28bb", url = "https://dl.k8s.io/v1.34.5/bin/linux/amd64/kubectl"}
+"platforms.linux-x64-musl" = { checksum = "sha256:6a17dd8387783b3144a65535e38d02c351027e9718ea34a6c360476cb26d28bb", url = "https://dl.k8s.io/v1.34.5/bin/linux/amd64/kubectl"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:6a17dd8387783b3144a65535e38d02c351027e9718ea34a6c360476cb26d28bb", url = "https://dl.k8s.io/v1.34.5/bin/linux/amd64/kubectl"}
+"platforms.macos-arm64" = { checksum = "sha256:0c0b575db594e0f8842aa44e5d36b224bb9f8bf4b92cd34c0547d29b61a0277f", url = "https://dl.k8s.io/v1.34.5/bin/darwin/arm64/kubectl"}
+"platforms.macos-x64" = { checksum = "sha256:61ccfd05992fcc1135818d25691e55997155e914c98b704df7ddd542339a93cb", url = "https://dl.k8s.io/v1.34.5/bin/darwin/amd64/kubectl"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:61ccfd05992fcc1135818d25691e55997155e914c98b704df7ddd542339a93cb", url = "https://dl.k8s.io/v1.34.5/bin/darwin/amd64/kubectl"}
+"platforms.windows-x64" = { checksum = "sha256:ecaabd85663e2beece62c53bcf4ad999e1959f60abd69188837e1a22d98604eb", url = "https://dl.k8s.io/v1.34.5/bin/windows/amd64/kubectl.exe"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:ecaabd85663e2beece62c53bcf4ad999e1959f60abd69188837e1a22d98604eb", url = "https://dl.k8s.io/v1.34.5/bin/windows/amd64/kubectl.exe"}
 
 [[tools.lazyssh]]
 version = "0.3.0"
