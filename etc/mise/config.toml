@@ -81,7 +81,7 @@ lima = '2.0.3' #{ version = '2.0.3', postinstall = "~/.local/configent/bin/setup
 #'github:shihanng/tfvar' = 'latest'
 
 # kubernetes
-kubectl = 'latest'
+kubectl = '1.34.5'
 kubecolor = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns" }
 #helm = 'latest'
