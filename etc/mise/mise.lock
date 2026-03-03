@@ -358,19 +358,19 @@ backend = "github:karol-broda/snitch"
 "platforms.macos-x64-baseline" = { checksum = "sha256:8fe060109c88f55d34d493bf74c25149a07fd5bfaa48dd4499a2d85620d6f84a", url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2.2_darwin_amd64.tar.gz", url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"}
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.28.1"
+version = "0.28.2"
 backend = "github:max-sixty/worktrunk"
-"platforms.linux-arm64" = { checksum = "sha256:da78884a4403912b9abd54cbad2715efea4c3d216eb7ca3080387f99c885a0b1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023407"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:da78884a4403912b9abd54cbad2715efea4c3d216eb7ca3080387f99c885a0b1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023407"}
-"platforms.linux-x64" = { checksum = "sha256:978620acbf49409da6c4c3ee9145886e0ceb106fbd69b10ed04859e9db1a9945", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023418"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:978620acbf49409da6c4c3ee9145886e0ceb106fbd69b10ed04859e9db1a9945", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023418"}
-"platforms.linux-x64-musl" = { checksum = "sha256:978620acbf49409da6c4c3ee9145886e0ceb106fbd69b10ed04859e9db1a9945", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023418"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:978620acbf49409da6c4c3ee9145886e0ceb106fbd69b10ed04859e9db1a9945", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023418"}
-"platforms.macos-arm64" = { checksum = "sha256:10731a850214dc4114d37a788e075a9c97123dc88841537c617c7118965c5cb7", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023401"}
-"platforms.macos-x64" = { checksum = "sha256:4b515496e98467028791fc1ab672ab608a6bb638f7fb16b2c78f7e9399d638ac", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023413"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:4b515496e98467028791fc1ab672ab608a6bb638f7fb16b2c78f7e9399d638ac", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023413"}
-"platforms.windows-x64" = { checksum = "sha256:3320a7a3ff485c37541636bc4149f2c1123b7361c1320c355e6b8d2b769d3474", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023415"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:3320a7a3ff485c37541636bc4149f2c1123b7361c1320c355e6b8d2b769d3474", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.1/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/364023415"}
+"platforms.linux-arm64" = { checksum = "sha256:0054d1ab8ac2207a0a2c86ee8705c37e90a0683ca5786e6a85707acf14b199f9", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820352"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:0054d1ab8ac2207a0a2c86ee8705c37e90a0683ca5786e6a85707acf14b199f9", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-aarch64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820352"}
+"platforms.linux-x64" = { checksum = "sha256:0c22f05758d1cc1c1d24ace9374cb3e483c4d9b383083d98d71e87c6e55be44d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820364"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:0c22f05758d1cc1c1d24ace9374cb3e483c4d9b383083d98d71e87c6e55be44d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820364"}
+"platforms.linux-x64-musl" = { checksum = "sha256:0c22f05758d1cc1c1d24ace9374cb3e483c4d9b383083d98d71e87c6e55be44d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820364"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:0c22f05758d1cc1c1d24ace9374cb3e483c4d9b383083d98d71e87c6e55be44d", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-unknown-linux-musl.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820364"}
+"platforms.macos-arm64" = { checksum = "sha256:015f92ac1c3391756281508494a85addd3ff56643ececbb302da98f65d1eff48", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-aarch64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820345"}
+"platforms.macos-x64" = { checksum = "sha256:7edeae748715f9183f834864dc969eec864a398fdd390f2cdfbc08c4f8f12ca1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820357"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:7edeae748715f9183f834864dc969eec864a398fdd390f2cdfbc08c4f8f12ca1", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-apple-darwin.tar.xz", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820357"}
+"platforms.windows-x64" = { checksum = "sha256:fe68654726548ea30560518ee8168893a2d7b792cbdfbb718148ad95766883c9", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820362"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:fe68654726548ea30560518ee8168893a2d7b792cbdfbb718148ad95766883c9", url = "https://github.com/max-sixty/worktrunk/releases/download/v0.28.2/worktrunk-x86_64-pc-windows-msvc.zip", url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/365820362"}
 
 [[tools."github:nnnkkk7/lazyactions"]]
 version = "0.0.12"
@@ -707,7 +707,7 @@ version = "4.6.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:agent-browser"]]
-version = "0.15.1"
+version = "0.15.3"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
@@ -741,14 +741,14 @@ backend = "github:jgm/pandoc"
 "platforms.windows-x64-baseline" = { checksum = "sha256:edccdaa95b5a33b3320187f0e291d58a232e21318a8081750bd31f847e598d18", url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-windows-x86_64.zip", url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472785"}
 
 [[tools."pipx:azure-cli"]]
-version = "2.83.0"
+version = "2.84.0"
 backend = "pipx:azure-cli"
 
 [tools."pipx:azure-cli".options]
 uvx_args = "--prerelease=allow --with pip"
 
 [[tools."pipx:browser-use"]]
-version = "0.12.0"
+version = "0.12.1"
 backend = "pipx:browser-use"
 
 [tools."pipx:browser-use".options]
