@@ -612,7 +612,6 @@
   },
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "based-ayu",
-  "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
   "workbench.preferredDarkColorTheme": "Based Ayu Dark Bordered",
