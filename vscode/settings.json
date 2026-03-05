@@ -293,6 +293,7 @@
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "gitlens.advanced.messages": {
+    "suppressFileNotUnderSourceControlWarning": true,
     "suppressLineUncommittedWarning": true
   },
   "gitlens.ai.model": "vscode",
