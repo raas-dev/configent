@@ -711,9 +711,9 @@ version = "0.16.3"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
-version = "1.2.19"
+version = "1.2.20"
 backend = "aqua:anomalyco/opencode"
-"platforms.macos-arm64" = { checksum = "sha256:c4c0d6a27a58db18f7b20c1a20399c5efb99893468ac8e4bd8b32bb419fa6c30", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.19/opencode-darwin-arm64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:20386056bffdc4ec52155fb107fb470d47297f86dc405f993992596dc3eb4a81", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.20/opencode-darwin-arm64.zip"}
 
 [[tools.pandoc]]
 version = "3.9"
