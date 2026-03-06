@@ -144,7 +144,7 @@ version = "0.9.0"
 backend = "cargo:kondo"
 
 [[tools."cargo:ralph-cli"]]
-version = "2.6.0"
+version = "2.7.0"
 backend = "cargo:ralph-cli"
 
 [[tools."cargo:tailspin"]]
@@ -156,17 +156,17 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.69"
+version = "2.1.70"
 backend = "aqua:anthropics/claude-code"
-"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-arm64/claude"}
-"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-arm64/claude"}
-"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-x64/claude"}
-"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-x64/claude"}
-"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-x64/claude"}
-"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/linux-x64/claude"}
-"platforms.macos-arm64" = { checksum = "blake3:341ef90890f7414c7d36c97bb1a17b6ea33c8f0f882f52d7dd4248d25706b116", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/darwin-arm64/claude"}
-"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/darwin-x64/claude"}
-"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.69/darwin-x64/claude"}
+"platforms.linux-arm64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-arm64/claude"}
+"platforms.linux-arm64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-arm64/claude"}
+"platforms.linux-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-x64/claude"}
+"platforms.linux-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-x64/claude"}
+"platforms.linux-x64-musl" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-x64/claude"}
+"platforms.linux-x64-musl-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/linux-x64/claude"}
+"platforms.macos-arm64" = { checksum = "blake3:c07b56746d78813d423e366343e8c8ea0f7a60e3a25114e55f26d8013a1e2f83", url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/darwin-arm64/claude"}
+"platforms.macos-x64" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/darwin-x64/claude"}
+"platforms.macos-x64-baseline" = { url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.70/darwin-x64/claude"}
 
 [[tools.delta]]
 version = "0.18.2"
@@ -711,19 +711,9 @@ version = "0.16.3"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
-version = "1.2.18"
+version = "1.2.19"
 backend = "aqua:anomalyco/opencode"
-"platforms.linux-arm64" = { checksum = "sha256:cd8b3cd13bef12e29f32e0f32e5ca48e29159cf6cd32ddee8b3be97438a0242c", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-arm64.tar.gz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:cd8b3cd13bef12e29f32e0f32e5ca48e29159cf6cd32ddee8b3be97438a0242c", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-arm64.tar.gz"}
-"platforms.linux-x64" = { checksum = "sha256:45fac9f9a293f73ebe82e305b43c30cad98d9f3ec2e510de438358335966a9ad", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:45fac9f9a293f73ebe82e305b43c30cad98d9f3ec2e510de438358335966a9ad", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:45fac9f9a293f73ebe82e305b43c30cad98d9f3ec2e510de438358335966a9ad", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-x64.tar.gz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:45fac9f9a293f73ebe82e305b43c30cad98d9f3ec2e510de438358335966a9ad", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-linux-x64.tar.gz"}
-"platforms.macos-arm64" = { checksum = "sha256:7dc1eb25b79a85ec882df9560a2b1d84927a6f9981165a56f562ab704a312529", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-darwin-arm64.zip"}
-"platforms.macos-x64" = { checksum = "sha256:7894e4ad5c2a185b0efe76cfd1895de5d695ded2d9b1f7169fba1170d6cbfeeb", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-darwin-x64.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:7894e4ad5c2a185b0efe76cfd1895de5d695ded2d9b1f7169fba1170d6cbfeeb", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-darwin-x64.zip"}
-"platforms.windows-x64" = { checksum = "sha256:3f6becc5acc68c165c6694f6e20e26826d8de654556dc129427c82ad01ca7d1b", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-windows-x64.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:3f6becc5acc68c165c6694f6e20e26826d8de654556dc129427c82ad01ca7d1b", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.18/opencode-windows-x64.zip"}
+"platforms.macos-arm64" = { checksum = "sha256:c4c0d6a27a58db18f7b20c1a20399c5efb99893468ac8e4bd8b32bb419fa6c30", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.19/opencode-darwin-arm64.zip"}
 
 [[tools.pandoc]]
 version = "3.9"
