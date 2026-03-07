@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.207.12](https://github.com/raas-dev/configent/compare/1.207.11...1.207.12) (2026-03-07)
+
+
+### Fixes
+
+* **aliases:** handle empty docker lists safely ([05dd958](https://github.com/raas-dev/configent/commit/05dd958f837408dda36a13f07837967880c94bd3))
+* **aliases:** update openchamber aliases to latest ([6708140](https://github.com/raas-dev/configent/commit/6708140d41917370c63a27a2608769bc0c095061))
+
 ## [1.207.11](https://github.com/raas-dev/configent/compare/1.207.10...1.207.11) (2026-02-27)
 
 
