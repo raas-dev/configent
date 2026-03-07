@@ -119,19 +119,19 @@ backend = "aqua:carapace-sh/carapace-bin"
 "platforms.windows-x64-baseline" = { checksum = "sha256:74da06809744399003f6a3ad65449dcfcdce7b4c7c52967230770db93459cc7f", url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_windows_amd64.zip"}
 
 [[tools.cargo-binstall]]
-version = "1.17.6"
+version = "1.17.7"
 backend = "aqua:cargo-bins/cargo-binstall"
-"platforms.linux-arm64" = { checksum = "sha256:e5f2c4b79b10370dff707b86a14e7a0ad399c5dc5853824e933432910741992c", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-arm64-musl" = { checksum = "sha256:e5f2c4b79b10370dff707b86a14e7a0ad399c5dc5853824e933432910741992c", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
-"platforms.linux-x64" = { checksum = "sha256:f926d96e9f0822ded35c4ac2071ce190bd1311565695c49c45e295de0d685aaa", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-baseline" = { checksum = "sha256:f926d96e9f0822ded35c4ac2071ce190bd1311565695c49c45e295de0d685aaa", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl" = { checksum = "sha256:f926d96e9f0822ded35c4ac2071ce190bd1311565695c49c45e295de0d685aaa", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.linux-x64-musl-baseline" = { checksum = "sha256:f926d96e9f0822ded35c4ac2071ce190bd1311565695c49c45e295de0d685aaa", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
-"platforms.macos-arm64" = { checksum = "sha256:101447fa30a723ca8e1a13cec11bb1350b7179331b2aa7054d27bef7a3e19021", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-aarch64-apple-darwin.zip"}
-"platforms.macos-x64" = { checksum = "sha256:cd07fd79e2848b13b994e3f83fa5377b631625b847f0734219f2706feb518258", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.macos-x64-baseline" = { checksum = "sha256:cd07fd79e2848b13b994e3f83fa5377b631625b847f0734219f2706feb518258", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-apple-darwin.zip"}
-"platforms.windows-x64" = { checksum = "sha256:5fcbddde2d415704d2432bbe606a5767ddaf1ef4ee2c16b7828f8be2ed1e5a5c", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-pc-windows-msvc.zip"}
-"platforms.windows-x64-baseline" = { checksum = "sha256:5fcbddde2d415704d2432bbe606a5767ddaf1ef4ee2c16b7828f8be2ed1e5a5c", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.6/cargo-binstall-x86_64-pc-windows-msvc.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:b0658b0a7f0959bc1dbb4ab665931c31c7dd1109ff01cb8772af17dfdc52a9af", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:b0658b0a7f0959bc1dbb4ab665931c31c7dd1109ff01cb8772af17dfdc52a9af", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-unknown-linux-musl.tgz"}
+"platforms.linux-x64" = { checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"}
+"platforms.macos-arm64" = { checksum = "sha256:1ad3c0c56fa3970634cce5009ed0ce61b943515f9115f8e480fd0e41d8d89085", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-apple-darwin.zip"}
+"platforms.macos-x64" = { checksum = "sha256:aa7174fb938e668dea4b4c3d22fe6cefed97642cc3a7a419ba96d63d63fd729b", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-apple-darwin.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:aa7174fb938e668dea4b4c3d22fe6cefed97642cc3a7a419ba96d63d63fd729b", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-apple-darwin.zip"}
+"platforms.windows-x64" = { checksum = "sha256:c5cb2444ee04480502a8ac73d96abd9f97af8300ec04ea1c1f2a9e959c02e4d6", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-pc-windows-msvc.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:c5cb2444ee04480502a8ac73d96abd9f97af8300ec04ea1c1f2a9e959c02e4d6", url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-pc-windows-msvc.zip"}
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
@@ -713,9 +713,19 @@ version = "0.16.3"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
-version = "1.2.20"
+version = "1.2.21"
 backend = "aqua:anomalyco/opencode"
-"platforms.macos-arm64" = { checksum = "sha256:20386056bffdc4ec52155fb107fb470d47297f86dc405f993992596dc3eb4a81", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.20/opencode-darwin-arm64.zip"}
+"platforms.linux-arm64" = { checksum = "sha256:87a4854ac7c06f6b79d539af0f5eb24644881e9b57bc4d46c188fb915ecb68f1", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-arm64.tar.gz"}
+"platforms.linux-arm64-musl" = { checksum = "sha256:87a4854ac7c06f6b79d539af0f5eb24644881e9b57bc4d46c188fb915ecb68f1", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-arm64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:4ccd5ee8322ff97f9321349a064ddc4c2b9b59b335336d2d2aa00670af200617", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-baseline" = { checksum = "sha256:4ccd5ee8322ff97f9321349a064ddc4c2b9b59b335336d2d2aa00670af200617", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl" = { checksum = "sha256:4ccd5ee8322ff97f9321349a064ddc4c2b9b59b335336d2d2aa00670af200617", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-x64.tar.gz"}
+"platforms.linux-x64-musl-baseline" = { checksum = "sha256:4ccd5ee8322ff97f9321349a064ddc4c2b9b59b335336d2d2aa00670af200617", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-linux-x64.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:432d53995797c496b3fb34dd11426bca82dd8e5741f5ba5096d505f895c39e28", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-darwin-arm64.zip"}
+"platforms.macos-x64" = { checksum = "sha256:f78b9332e0dac7953b49fd272995d74abaad2dc9664b625fdd3db1d2ae7a26ab", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-darwin-x64.zip"}
+"platforms.macos-x64-baseline" = { checksum = "sha256:f78b9332e0dac7953b49fd272995d74abaad2dc9664b625fdd3db1d2ae7a26ab", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-darwin-x64.zip"}
+"platforms.windows-x64" = { checksum = "sha256:2562492ed26dfead1f297ec8ff3e86146c299e5d51a30f526747f89bd7aa9229", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-windows-x64.zip"}
+"platforms.windows-x64-baseline" = { checksum = "sha256:2562492ed26dfead1f297ec8ff3e86146c299e5d51a30f526747f89bd7aa9229", url = "https://github.com/anomalyco/opencode/releases/download/v1.2.21/opencode-windows-x64.zip"}
 
 [[tools.pandoc]]
 version = "3.9"
@@ -747,7 +757,7 @@ backend = "pipx:browser-use"
 extras = "cli"
 
 [[tools."pipx:glances"]]
-version = "4.5.0.5"
+version = "4.5.1"
 backend = "pipx:glances"
 
 [tools."pipx:glances".options]
