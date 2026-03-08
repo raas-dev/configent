@@ -24,6 +24,16 @@ fi
 mkdir -p "$HOME/.pi/agent"
 ln -sfnv "$config_path/pi/settings.json" "$HOME/.pi/agent/settings.json"
 
+# mcp.json
+if [ ! -r "$backup_path/.pi/agent/mcp.json" ]; then
+  if [ -r "$HOME/.pi/agent/mcp.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/mcp.json" "$backup_path/.pi/agent/mcp.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/mcp.json" "$HOME/.pi/agent/mcp.json"
+
 # extensions dir
 if [ ! -r "$backup_path/.pi/agent/extensions" ]; then
   if [ -r "$HOME/.pi/agent/extensions" ]; then

@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "context7": {
+      "headers": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      },
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "exa": {
+      "directTools": true,
+      "lifecycle": "eager",
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "gh-grep": {
+      "type": "http",
+      "url": "https://mcp.grep.app"
+    }
+  },
+  "settings": {
+    "idleTimeout": 10,
+    "toolPrefix": "none"
+  }
+}

@@ -8,7 +8,9 @@
     "npm:pi-interactive-shell",
     "npm:pi-review-loop",
     "npm:pi-skill-palette",
-    "npm:pi-rewind-hook"
+    "npm:pi-rewind-hook",
+    "npm:pi-teams",
+    "npm:pi-mcp-adapter"
   ],
   "quietStartup": true,
   "theme": "ayu-mirage",
