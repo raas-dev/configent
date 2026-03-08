@@ -6,7 +6,6 @@
   "packages": [
     "npm:pi-powerline-footer",
     "npm:pi-interactive-shell",
-    "npm:pi-review-loop",
     "npm:pi-skill-palette",
     "npm:pi-rewind-hook",
     "npm:pi-teams",
