@@ -319,8 +319,8 @@ fi
 
 ### Disable telemetry ##########################################################
 
-# https://consoledonottrack.com
 export DO_NOT_TRACK=1
+export DISABLE_TELEMETRY=1
 
 # homebrew
 export HOMEBREW_NO_ANALYTICS=1

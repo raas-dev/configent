@@ -566,8 +566,8 @@ alias promptfoo='bunx promptfoo'
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
 
-# skills-installer (https://claude-plugins.dev/skills)
-alias skills-installer='bunx skills-installer'
+# https://skills.sh
+alias skills='bunx skills'
 
 ### AI #########################################################################
 
