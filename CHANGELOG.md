@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.209.0](https://github.com/raas-dev/configent/compare/1.208.0...1.209.0) (2026-03-08)
+
+
+### Features
+
+* **extract:** add extract skill docs and script ([91b79e4](https://github.com/raas-dev/configent/commit/91b79e485b19717f969a9d6c2e0f7d28e45ccd37))
+* **pi-review-loop:** add review loop extension ([74325e9](https://github.com/raas-dev/configent/commit/74325e94734032a8ba288b3e3ce8288372f2b29f))
+
+
+### Fixes
+
+* **mcp:** remove eager lifecycle flag ([7b9bf2a](https://github.com/raas-dev/configent/commit/7b9bf2ad9ccd955373890c9529dca3c2f5c98c85))
+* **pi-review-loop:** remove review loop extension ([e468dc3](https://github.com/raas-dev/configent/commit/e468dc35b5e3b067692a83b642ca1495386b6d60))
+* **search:** sync tavily search skill ([b96645b](https://github.com/raas-dev/configent/commit/b96645b27d4f79d283fe7929f9804fd4e5dcb8f7))
+* **settings:** drop pi-review-loop package ([8fd8159](https://github.com/raas-dev/configent/commit/8fd8159ae4ff030a647b65855f4543fca3b15a3c))
+
 ## [1.208.0](https://github.com/raas-dev/configent/compare/1.207.12...1.208.0) (2026-03-08)
 
 
