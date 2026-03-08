@@ -1,0 +1,73 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# settings.json
+if [ ! -r "$backup_path/.pi/agent/settings.json" ]; then
+  if [ -r "$HOME/.pi/agent/settings.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/settings.json" "$backup_path/.pi/agent/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/settings.json" "$HOME/.pi/agent/settings.json"
+
+# extensions dir
+if [ ! -r "$backup_path/.pi/agent/extensions" ]; then
+  if [ -r "$HOME/.pi/agent/extensions" ]; then
+    mkdir -p "$backup_path/.pi/agent/extensions"
+    cp -RP "$HOME/.pi/agent/extensions" \
+      "$backup_path/.pi/agent/extensions"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/extensions"
+rm -rf "$HOME/.pi/agent/extensions"
+ln -sfnv "$config_path/pi/extensions" "$HOME/.pi/agent/extensions"
+
+# prompts dir
+if [ ! -r "$backup_path/.pi/agent/prompts" ]; then
+  if [ -r "$HOME/.pi/agent/prompts" ]; then
+    mkdir -p "$backup_path/.pi/agent/prompts"
+    cp -RP "$HOME/.pi/agent/prompts" \
+      "$backup_path/.pi/agent/prompts"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/prompts"
+rm -rf "$HOME/.pi/agent/prompts"
+ln -sfnv "$config_path/pi/prompts" "$HOME/.pi/agent/prompts"
+
+# skills dir
+if [ ! -r "$backup_path/.pi/agent/skills" ]; then
+  if [ -r "$HOME/.pi/agent/skills" ]; then
+    mkdir -p "$backup_path/.pi/agent/skills"
+    cp -RP "$HOME/.pi/agent/skills" \
+      "$backup_path/.pi/agent/skills"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/skills"
+rm -rf "$HOME/.pi/agent/skills"
+ln -sfnv "$config_path/pi/skills" "$HOME/.pi/agent/skills"
+
+# themes dir
+if [ ! -r "$backup_path/.pi/agent/themes" ]; then
+  if [ -r "$HOME/.pi/agent/themes" ]; then
+    mkdir -p "$backup_path/.pi/agent/themes"
+    cp -RP "$HOME/.pi/agent/themes" \
+      "$backup_path/.pi/agent/themes"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/themes"
+rm -rf "$HOME/.pi/agent/themes"
+ln -sfnv "$config_path/pi/themes" "$HOME/.pi/agent/themes"

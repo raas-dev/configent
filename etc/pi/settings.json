@@ -1,0 +1,16 @@
+{
+  "lastChangelogVersion": "0.57.1",
+  "defaultProvider": "minimax",
+  "defaultModel": "MiniMax-M2.5",
+  "theme": "dark",
+  "collapseChangelog": true,
+  "packages": [
+    "npm:pi-powerline-footer",
+    "npm:pi-interactive-shell",
+    "npm:pi-review-loop",
+    "npm:pi-skill-palette",
+    "npm:pi-rewind-hook"
+  ],
+  "quietStartup": true,
+  "transport": "sse"
+}
