@@ -2,7 +2,7 @@
   "lastChangelogVersion": "0.57.1",
   "defaultProvider": "minimax",
   "defaultModel": "MiniMax-M2.5",
-  "theme": "dark",
+  "theme": "ayu-mirage",
   "collapseChangelog": true,
   "packages": [
     "npm:pi-powerline-footer",
