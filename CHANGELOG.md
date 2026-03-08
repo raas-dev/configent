@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.208.0](https://github.com/raas-dev/configent/compare/1.207.12...1.208.0) (2026-03-08)
+
+
+### Features
+
+* **pi:** add ayu mirage theme ([1ec2dda](https://github.com/raas-dev/configent/commit/1ec2dda5b15439b9b6336de612931d92bc08873d))
+* **pi:** add pi coding agent ([56115cc](https://github.com/raas-dev/configent/commit/56115ccf3699a022597caaa51f7f5f7731f3ffe7))
+* **pi:** link pi configs into home agent ([48906c8](https://github.com/raas-dev/configent/commit/48906c8f0938f5b4b0900741d7205d8ccf6866b5))
+* **skills:** add mcp config and remove pi skills ([309e907](https://github.com/raas-dev/configent/commit/309e907f2ec32f2c33c1dae8970237b5fdd65c23))
+
+
+### Fixes
+
+* **dotfiles:** rename skills alias ([18e45c9](https://github.com/raas-dev/configent/commit/18e45c9bc0a4102d2927afe04a4dca7483793b9f))
+* **tmux:** enable extended key sequences ([bd45e0f](https://github.com/raas-dev/configent/commit/bd45e0ffe3ace0beb2072e08a66a9045a2621535))
+
 ## [1.207.12](https://github.com/raas-dev/configent/compare/1.207.11...1.207.12) (2026-03-07)
 
 
