@@ -9,7 +9,6 @@
     },
     "exa": {
       "directTools": true,
-      "lifecycle": "eager",
       "type": "http",
       "url": "https://mcp.exa.ai/mcp"
     },
