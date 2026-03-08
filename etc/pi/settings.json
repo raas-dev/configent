@@ -1,9 +1,8 @@
 {
-  "lastChangelogVersion": "0.57.1",
-  "defaultProvider": "minimax",
-  "defaultModel": "MiniMax-M2.5",
-  "theme": "ayu-mirage",
   "collapseChangelog": true,
+  "defaultModel": "MiniMax-M2.5",
+  "defaultProvider": "minimax",
+  "lastChangelogVersion": "0.57.1",
   "packages": [
     "npm:pi-powerline-footer",
     "npm:pi-interactive-shell",
@@ -12,5 +11,6 @@
     "npm:pi-rewind-hook"
   ],
   "quietStartup": true,
+  "theme": "ayu-mirage",
   "transport": "sse"
 }
