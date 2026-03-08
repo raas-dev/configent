@@ -2366,7 +2366,7 @@ version = "0.57.1"
 backend = "npm:@mariozechner/pi-coding-agent"
 
 [[tools."npm:agent-browser"]]
-version = "0.16.3"
+version = "0.17.0"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
