@@ -470,6 +470,7 @@ url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d
 url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.71/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-x64"]
+checksum = "blake3:6599ed189b3b5f6fea2b336871c0e0ab166332cac6b65111a42a479cb7aba155"
 url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.71/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-baseline"]
@@ -2600,7 +2601,6 @@ url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-unknown
 [tools.prek."platforms.macos-arm64"]
 checksum = "sha256:652cc3f3907f732028366c1da60babfdd9236fc7bef1a686fa561b45e6f948de"
 url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-aarch64-apple-darwin.tar.gz"
-provenance = "github-attestations"
 
 [tools.prek."platforms.macos-x64"]
 checksum = "sha256:e4fdab89c5fcca22ea99c4582eb8186e088c8d5c10b10c4fa97e1cff45050c6d"
@@ -2765,54 +2765,6 @@ url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellche
 [tools.shellcheck."platforms.windows-x64-baseline"]
 checksum = "sha256:8a4e35ab0b331c85d73567b12f2a444df187f483e5079ceffa6bda1faa2e740e"
 url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.zip"
-
-[[tools.shfmt]]
-version = "3.12.0"
-backend = "aqua:mvdan/sh"
-
-[tools.shfmt."platforms.linux-arm64"]
-checksum = "sha256:5f3fe3fa6a9f766e6a182ba79a94bef8afedafc57db0b1ad32b0f67fae971ba4"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_arm64"
-
-[tools.shfmt."platforms.linux-arm64-musl"]
-checksum = "sha256:5f3fe3fa6a9f766e6a182ba79a94bef8afedafc57db0b1ad32b0f67fae971ba4"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_arm64"
-
-[tools.shfmt."platforms.linux-x64"]
-checksum = "sha256:d9fbb2a9c33d13f47e7618cf362a914d029d02a6df124064fff04fd688a745ea"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_amd64"
-
-[tools.shfmt."platforms.linux-x64-baseline"]
-checksum = "sha256:d9fbb2a9c33d13f47e7618cf362a914d029d02a6df124064fff04fd688a745ea"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_amd64"
-
-[tools.shfmt."platforms.linux-x64-musl"]
-checksum = "sha256:d9fbb2a9c33d13f47e7618cf362a914d029d02a6df124064fff04fd688a745ea"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_amd64"
-
-[tools.shfmt."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:d9fbb2a9c33d13f47e7618cf362a914d029d02a6df124064fff04fd688a745ea"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_amd64"
-
-[tools.shfmt."platforms.macos-arm64"]
-checksum = "sha256:d903802e0ce3ecbc82b98512f55ba370b0d37a93f3f78de394f5b657052b33dd"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_darwin_arm64"
-
-[tools.shfmt."platforms.macos-x64"]
-checksum = "sha256:c31548693de6584e6164b7ed5fbb7b4a083f2d937ca94b4e0ddf59aa461a85e4"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_darwin_amd64"
-
-[tools.shfmt."platforms.macos-x64-baseline"]
-checksum = "sha256:c31548693de6584e6164b7ed5fbb7b4a083f2d937ca94b4e0ddf59aa461a85e4"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_darwin_amd64"
-
-[tools.shfmt."platforms.windows-x64"]
-checksum = "sha256:c8bda517ba1c640ce4a715c0fa665439ddbe4357ba5e9b77b0e51e70e2b9c94b"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_windows_amd64.exe"
-
-[tools.shfmt."platforms.windows-x64-baseline"]
-checksum = "sha256:c8bda517ba1c640ce4a715c0fa665439ddbe4357ba5e9b77b0e51e70e2b9c94b"
-url = "https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_windows_amd64.exe"
 
 [[tools.starship]]
 version = "1.24.0"
