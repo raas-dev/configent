@@ -11,6 +11,6 @@
     "npm:pi-mcp-adapter"
   ],
   "quietStartup": true,
-  "theme": "ayu-mirage",
+  "theme": "ayu-dark",
   "transport": "sse"
 }
