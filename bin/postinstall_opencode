@@ -95,3 +95,15 @@ fi
 mkdir -p "$HOME/.config/opencode/profiles"
 rm -rf "$HOME/.config/opencode/profiles"
 ln -sfnv "$config_path/opencode/profiles" "$HOME/.config/opencode/profiles"
+
+### universal agent skills dir #################################################
+
+if [ ! -r "$backup_path/.agents/skills" ]; then
+  if [ -r "$HOME/.agents/skills" ]; then
+    mkdir -p "$backup_path/.agents"
+    cp -RP "$HOME/.agents/skills" "$backup_path/.agents/skills"
+  fi
+fi
+mkdir -p "$HOME/.agents/skills"
+rm -rf "$HOME/.agents/skills"
+ln -sfnv "$config_path/agents/skills" "$HOME/.agents/skills"

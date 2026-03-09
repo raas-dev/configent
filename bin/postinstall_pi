@@ -81,3 +81,15 @@ fi
 mkdir -p "$HOME/.pi/agent/themes"
 rm -rf "$HOME/.pi/agent/themes"
 ln -sfnv "$config_path/pi/themes" "$HOME/.pi/agent/themes"
+
+### universal agent skills dir #################################################
+
+if [ ! -r "$backup_path/.agents/skills" ]; then
+  if [ -r "$HOME/.agents/skills" ]; then
+    mkdir -p "$backup_path/.agents"
+    cp -RP "$HOME/.agents/skills" "$backup_path/.agents/skills"
+  fi
+fi
+mkdir -p "$HOME/.agents/skills"
+rm -rf "$HOME/.agents/skills"
+ln -sfnv "$config_path/agents/skills" "$HOME/.agents/skills"
