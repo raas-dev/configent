@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "context7": {
-      "headers": {
-        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-      },
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp"
-    },
     "exa": {
       "directTools": true,
       "type": "http",
