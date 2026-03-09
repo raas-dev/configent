@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.209.1](https://github.com/raas-dev/configent/compare/1.209.0...1.209.1) (2026-03-09)
+
+
+### Fixes
+
+* **agent-browser:** document browser skill usage ([63cec70](https://github.com/raas-dev/configent/commit/63cec7092165f5bad508c1bc8fa2345f9d768785))
+* **agents:** fix agents skill paths ([3a35968](https://github.com/raas-dev/configent/commit/3a35968ec92b5da8e950b3dec42c751881b978c8))
+* **settings:** drop pi skill palette package ([f2e1101](https://github.com/raas-dev/configent/commit/f2e11012968daf5cbac929e355c304ba6532b0ae))
+* **settings:** register extra pi packages ([500fd79](https://github.com/raas-dev/configent/commit/500fd795794c38ec8fca1892e4ab6df1d66b473b))
+* **settings:** set default theme to ayu-dark ([e5ea0d3](https://github.com/raas-dev/configent/commit/e5ea0d36fbe996feee3d8745de9829624e1f18f9))
+* **skills:** fix skills search scripts ([efb3f82](https://github.com/raas-dev/configent/commit/efb3f8214bd63c8cf616356bf41b6ba5d6d1b953))
+* **skills:** link universal agent skills dir ([cd28b2c](https://github.com/raas-dev/configent/commit/cd28b2c777bba7a395cc9570bae9c940744dd54d))
+* **skills:** rework tavily search skill ([41b034c](https://github.com/raas-dev/configent/commit/41b034c9b2c937c714f806de86c0fe55fb4a15c5))
+* **tavily:** restore tavily search skill ([83bc3a1](https://github.com/raas-dev/configent/commit/83bc3a152cf1f47094aafc71da88e788f941a3ba))
+
 ## [1.209.0](https://github.com/raas-dev/configent/compare/1.208.0...1.209.0) (2026-03-08)
 
 
