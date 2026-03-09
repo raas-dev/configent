@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.210.0](https://github.com/raas-dev/configent/compare/1.209.1...1.210.0) (2026-03-09)
+
+
+### Features
+
+* **mcporter:** add mcporter bootstrap wiring ([b64accd](https://github.com/raas-dev/configent/commit/b64accd12fd14de38310a29a1f19e6fc80be6d2d))
+
+
+### Fixes
+
+* **agent-skill-creator:** add infra docs ([ed7ddb8](https://github.com/raas-dev/configent/commit/ed7ddb87b27483ec96ebcf8a735324c993b52c28))
+* **mcp:** add keep-alive to mcp endpoint ([1a994b5](https://github.com/raas-dev/configent/commit/1a994b5bf87957f6ecb1eeaf29a18b8f3e0d3f07))
+* **skill-creator:** add eval tooling ([62346f1](https://github.com/raas-dev/configent/commit/62346f12aa56b4b37f9ad4f613a9d8e87fbd0ecf))
+* **skills:** add design taste skill ([56e18c2](https://github.com/raas-dev/configent/commit/56e18c2d9167eb1f01c8d7759ae43c50c12297ab))
+
 ## [1.209.1](https://github.com/raas-dev/configent/compare/1.209.0...1.209.1) (2026-03-09)
 
 
