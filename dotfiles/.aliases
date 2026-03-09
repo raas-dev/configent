@@ -487,9 +487,6 @@ alias marimo='uvx marimo'
 # AI agent resource security scanner (https://github.com/snyk/agent-scan)
 alias mcp-scan='uvx mcp-scan'
 
-# Create Agent Skills from repositories, docs (https://skillseekersweb.com)
-alias skill-seekers='uvx skill-seekers'
-
 ### dev
 
 # Command-line utility for rendering projects templates

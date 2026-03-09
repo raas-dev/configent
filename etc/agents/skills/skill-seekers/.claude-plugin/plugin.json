@@ -1,0 +1,5 @@
+{
+  "name": "skill-seekers",
+  "description": "Convert documentation websites, GitHub repos, and PDFs into Claude skills",
+  "version": "1.0.0"
+}

@@ -2469,6 +2469,10 @@ backend = "pipx:pdm"
 version = "2.3.2"
 backend = "pipx:poetry"
 
+[[tools."pipx:skill-seekers"]]
+version = "3.2.0"
+backend = "pipx:skill-seekers"
+
 [[tools."pipx:sncli"]]
 version = "0.4.4"
 backend = "pipx:sncli"
