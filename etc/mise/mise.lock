@@ -2310,52 +2310,52 @@ checksum = "sha256:90fc6d7cdf3d3388737caab1e2c554aa24b468f3a5cc38ef63857ddf11035
 url = "https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-win64.zip"
 
 [[tools.node]]
-version = "24.12.0"
+version = "24.14.0"
 backend = "core:node"
 
 [tools.node."platforms.linux-arm64"]
-checksum = "sha256:9b2a2eeb98a8eb37361224e2a1d060300ad2dd143af58dfdb16de785df0f1228"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-arm64.tar.gz"
+checksum = "sha256:f44740cd218de8127f1c44c41510a3a740fa5c9c8d1cdce1c3bedada79f3cde7"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-arm64.tar.gz"
 
 [tools.node."platforms.linux-arm64-musl"]
-checksum = "sha256:9b2a2eeb98a8eb37361224e2a1d060300ad2dd143af58dfdb16de785df0f1228"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-arm64.tar.gz"
+checksum = "sha256:f44740cd218de8127f1c44c41510a3a740fa5c9c8d1cdce1c3bedada79f3cde7"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-arm64.tar.gz"
 
 [tools.node."platforms.linux-x64"]
-checksum = "sha256:6159227e0af7d7c3c6bb2fa900452b04a6cb8841a702a79acc613209d70b04d0"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-x64.tar.gz"
+checksum = "sha256:dbf5b8665dec15e59e6359a517fefb47b23fdb9152d8def975b9bca3dfc6d355"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-x64.tar.gz"
 
 [tools.node."platforms.linux-x64-baseline"]
-checksum = "sha256:6159227e0af7d7c3c6bb2fa900452b04a6cb8841a702a79acc613209d70b04d0"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-x64.tar.gz"
+checksum = "sha256:dbf5b8665dec15e59e6359a517fefb47b23fdb9152d8def975b9bca3dfc6d355"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-x64.tar.gz"
 
 [tools.node."platforms.linux-x64-musl"]
-checksum = "sha256:6159227e0af7d7c3c6bb2fa900452b04a6cb8841a702a79acc613209d70b04d0"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-x64.tar.gz"
+checksum = "sha256:dbf5b8665dec15e59e6359a517fefb47b23fdb9152d8def975b9bca3dfc6d355"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-x64.tar.gz"
 
 [tools.node."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:6159227e0af7d7c3c6bb2fa900452b04a6cb8841a702a79acc613209d70b04d0"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-linux-x64.tar.gz"
+checksum = "sha256:dbf5b8665dec15e59e6359a517fefb47b23fdb9152d8def975b9bca3dfc6d355"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-x64.tar.gz"
 
 [tools.node."platforms.macos-arm64"]
-checksum = "sha256:319f221adc5e44ff0ed57e8a441b2284f02b8dc6fc87b8eb92a6a93643fd8080"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-darwin-arm64.tar.gz"
+checksum = "sha256:a1a54f46a750d2523d628d924aab61758a51c9dad3e0238beb14141be9615dd3"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-darwin-arm64.tar.gz"
 
 [tools.node."platforms.macos-x64"]
-checksum = "sha256:b82ea4c62fd08e250cab59d625e75d77cc5b0a3d60c6698ebee4545c88a169c5"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-darwin-x64.tar.gz"
+checksum = "sha256:f2879eb810e25993a0578e5d878930266fd2eafcffe9f2839b3d8db354d4879e"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-darwin-x64.tar.gz"
 
 [tools.node."platforms.macos-x64-baseline"]
-checksum = "sha256:b82ea4c62fd08e250cab59d625e75d77cc5b0a3d60c6698ebee4545c88a169c5"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-darwin-x64.tar.gz"
+checksum = "sha256:f2879eb810e25993a0578e5d878930266fd2eafcffe9f2839b3d8db354d4879e"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-darwin-x64.tar.gz"
 
 [tools.node."platforms.windows-x64"]
-checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"
+checksum = "sha256:313fa40c0d7b18575821de8cb17483031fe07d95de5994f6f435f3b345f85c66"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-win-x64.zip"
 
 [tools.node."platforms.windows-x64-baseline"]
-checksum = "sha256:9c125f61ae947b52e779095830f9cac267846a043ef7192183c84016aaad2812"
-url = "https://nodejs.org/dist/v24.12.0/node-v24.12.0-win-x64.zip"
+checksum = "sha256:313fa40c0d7b18575821de8cb17483031fe07d95de5994f6f435f3b345f85c66"
+url = "https://nodejs.org/dist/v24.14.0/node-v24.14.0-win-x64.zip"
 
 [[tools."npm:@different-ai/opencode-browser"]]
 version = "4.6.1"

@@ -119,7 +119,7 @@ go = '1.25.3'
 'go:golang.org/x/tools/gopls' = 'latest'
 
 # node.js
-node = { version = '24.12.0', postinstall = "~/.local/configent/bin/postinstall_node" }
+node = { version = '24.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
 bun = 'latest'
 
 # python
