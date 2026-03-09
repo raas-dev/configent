@@ -548,9 +548,6 @@ alias inspector='bunx @modelcontextprotocol/inspector'
 # MCP apps development tool
 alias mcpjam='bunx @mcpjam/inspector'
 
-# Call MCP servers from CLI
-alias mcporter='bunx mcporter'
-
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 

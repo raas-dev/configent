@@ -2369,6 +2369,10 @@ backend = "npm:@mariozechner/pi-coding-agent"
 version = "0.17.1"
 backend = "npm:agent-browser"
 
+[[tools."npm:mcporter"]]
+version = "0.7.3"
+backend = "npm:mcporter"
+
 [[tools.opencode]]
 version = "1.2.24"
 backend = "aqua:anomalyco/opencode"

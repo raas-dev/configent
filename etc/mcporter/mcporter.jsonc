@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "exa": {
+      "type": "http",
+      "baseUrl": "https://mcp.exa.ai/mcp"
+    },
+    "gh-grep": {
+      "type": "http",
+      "baseUrl": "https://mcp.grep.app"
+    },
+    "skillseeker": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "skill-seekers[mcp]",
+        "python",
+        "-m",
+        "skill_seekers.mcp.server_fastmcp"
+      ]
+    }
+  },
+  "imports": []
+}

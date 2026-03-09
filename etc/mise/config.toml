@@ -51,6 +51,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 'cargo:ralph-cli' = 'latest'
 'npm:agent-browser' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
+'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 
 # github
