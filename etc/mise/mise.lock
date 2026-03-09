@@ -2366,56 +2366,16 @@ version = "0.57.1"
 backend = "npm:@mariozechner/pi-coding-agent"
 
 [[tools."npm:agent-browser"]]
-version = "0.17.0"
+version = "0.17.1"
 backend = "npm:agent-browser"
 
 [[tools.opencode]]
-version = "1.2.22"
+version = "1.2.24"
 backend = "aqua:anomalyco/opencode"
 
-[tools.opencode."platforms.linux-arm64"]
-checksum = "sha256:2d1a6bf4e1e3622a7ba3192c4421e1a7f01670a569a0dea02d5d74473d6d746b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-arm64.tar.gz"
-
-[tools.opencode."platforms.linux-arm64-musl"]
-checksum = "sha256:2d1a6bf4e1e3622a7ba3192c4421e1a7f01670a569a0dea02d5d74473d6d746b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-arm64.tar.gz"
-
-[tools.opencode."platforms.linux-x64"]
-checksum = "sha256:a02e59726a8496d6398c7ab6e87442530d08821f1a0c6b6f83307cf5dc00e9c4"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-x64.tar.gz"
-
-[tools.opencode."platforms.linux-x64-baseline"]
-checksum = "sha256:a02e59726a8496d6398c7ab6e87442530d08821f1a0c6b6f83307cf5dc00e9c4"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-x64.tar.gz"
-
-[tools.opencode."platforms.linux-x64-musl"]
-checksum = "sha256:a02e59726a8496d6398c7ab6e87442530d08821f1a0c6b6f83307cf5dc00e9c4"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-x64.tar.gz"
-
-[tools.opencode."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:a02e59726a8496d6398c7ab6e87442530d08821f1a0c6b6f83307cf5dc00e9c4"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-linux-x64.tar.gz"
-
 [tools.opencode."platforms.macos-arm64"]
-checksum = "sha256:fddbd38cc49666b6c331e7461ad776069eb9ff7a66ad864f7ef9d84ca0c9ac3b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-darwin-arm64.zip"
-
-[tools.opencode."platforms.macos-x64"]
-checksum = "sha256:5171547cbcbbd8801ea6ebc8a0ba040125af000022ba8f0d039372c72de22205"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-darwin-x64.zip"
-
-[tools.opencode."platforms.macos-x64-baseline"]
-checksum = "sha256:5171547cbcbbd8801ea6ebc8a0ba040125af000022ba8f0d039372c72de22205"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-darwin-x64.zip"
-
-[tools.opencode."platforms.windows-x64"]
-checksum = "sha256:44bbd5d34cd64877bc9461b16c9f3cfe63ed011c456c4c556f28ee2e33682b96"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-windows-x64.zip"
-
-[tools.opencode."platforms.windows-x64-baseline"]
-checksum = "sha256:44bbd5d34cd64877bc9461b16c9f3cfe63ed011c456c4c556f28ee2e33682b96"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.2.22/opencode-windows-x64.zip"
+checksum = "sha256:858467155943c1030815047cbda2fd5074d1ba9309a00e5dd4585a19b3c4896e"
+url = "https://github.com/anomalyco/opencode/releases/download/v1.2.24/opencode-darwin-arm64.zip"
 
 [[tools.pandoc]]
 version = "3.9"
