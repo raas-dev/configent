@@ -1,13 +1,5 @@
 {
   "mcpServers": {
-    "context7": {
-      "description": "Use when you need up-to-date, version-specific documentation and code samples for libraries, frameworks, or APIs. Ideal for getting accurate implementation details when working with packages that may have outdated training data, or when you need to understand current API usage patterns with real code examples from the source.",
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-      }
-    },
     "gh-grep": {
       "description": "Use when you need to find real-world code examples from GitHub repositories. Ideal for understanding how libraries are actually used in production code, finding implementation patterns, searching for specific code snippets across millions of repositories, or learning best practices from real codebases. Search for literal code patterns, not keywords.",
       "type": "http",
