@@ -7,8 +7,9 @@
     "npm:pi-powerline-footer",
     "npm:pi-interactive-shell",
     "npm:pi-rewind-hook",
-    "npm:pi-teams",
-    "npm:pi-mcp-adapter"
+    "npm:pi-mcp-adapter",
+    "npm:@tmustier/pi-ralph-wiggum",
+    "npm:@tmustier/pi-raw-paste"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
