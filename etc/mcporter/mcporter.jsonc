@@ -1,12 +1,11 @@
 {
+  "$schema": "https://raw.githubusercontent.com/steipete/mcporter/main/mcporter.schema.json",
   "mcpServers": {
     "exa": {
-      "type": "http",
-      "baseUrl": "https://mcp.exa.ai/mcp"
+      "url": "https://mcp.exa.ai/mcp"
     },
     "gh-grep": {
-      "type": "http",
-      "baseUrl": "https://mcp.grep.app"
+      "url": "https://mcp.grep.app"
     },
     "skillseeker": {
       "command": "uvx",
