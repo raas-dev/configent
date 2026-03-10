@@ -6,12 +6,6 @@ description: >
   sub-skill decomposition.
   <example>User says: "design the architecture for a new DevOps skill"</example>
   <example>User says: "what tier should my skill be?"</example>
-model: inherit
-color: blue
-tools:
-  - Read
-  - Grep
-  - Glob
 ---
 
 You are an architecture specialist for Claude Code skills.

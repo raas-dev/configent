@@ -8,13 +8,6 @@ description: >
   <example>User says: "can this skill work on Codex?"</example>
   <example>User says: "what would I need to change for Gemini?"</example>
   <example>User says: "convert this skill for Cursor"</example>
-model: inherit
-color: cyan
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
 ---
 
 You are a multi-platform skill conversion specialist.

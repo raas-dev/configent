@@ -6,12 +6,6 @@ description: >
   Skills standard.
   <example>User says: "write the SKILL.md for my tool"</example>
   <example>User says: "generate the skill content"</example>
-model: inherit
-color: green
-tools:
-  - Read
-  - Grep
-  - Glob
 ---
 
 You are a SKILL.md content generation specialist.

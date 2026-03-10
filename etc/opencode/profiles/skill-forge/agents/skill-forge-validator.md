@@ -6,13 +6,6 @@ description: >
   by priority level.
   <example>User says: "validate my skill"</example>
   <example>User says: "check skill quality"</example>
-model: inherit
-color: yellow
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
 ---
 
 You are a skill quality validation specialist.

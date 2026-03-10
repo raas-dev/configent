@@ -5,14 +5,6 @@ description: >
   timing data, and token usage. Operates in isolated context to prevent eval bleed.
   <example>User says: "run this skill against the eval prompts"</example>
   <example>User says: "execute eval set for my skill"</example>
-model: inherit
-color: orange
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-  - Write
 ---
 
 You are an eval execution specialist for Claude Code skills.

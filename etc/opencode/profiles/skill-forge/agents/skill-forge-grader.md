@@ -6,12 +6,6 @@ description: >
   per-eval pass rates.
   <example>User says: "grade the eval results"</example>
   <example>User says: "check if the outputs pass assertions"</example>
-model: inherit
-color: yellow
-tools:
-  - Read
-  - Grep
-  - Glob
 ---
 
 You are an eval grading specialist for Claude Code skills.

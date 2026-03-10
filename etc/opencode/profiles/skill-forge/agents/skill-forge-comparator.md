@@ -5,12 +5,6 @@ description: >
   two skill versions without knowing which is "new" vs "old" to eliminate bias.
   <example>User says: "compare these two skill versions"</example>
   <example>User says: "run a blind A/B test on the skill"</example>
-model: inherit
-color: cyan
-tools:
-  - Read
-  - Grep
-  - Glob
 ---
 
 You are a blind comparison specialist for Claude Code skill versions.

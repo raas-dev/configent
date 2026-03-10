@@ -6,12 +6,6 @@ description: >
   regression risks across iterations.
   <example>User says: "analyze the benchmark results"</example>
   <example>User says: "what patterns do you see in the eval failures?"</example>
-model: inherit
-color: purple
-tools:
-  - Read
-  - Grep
-  - Glob
 ---
 
 You are a benchmark analysis specialist for Claude Code skills.
