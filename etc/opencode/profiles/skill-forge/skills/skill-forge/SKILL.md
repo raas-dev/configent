@@ -12,14 +12,6 @@ description: >
   "convert skill", "port skill", "multi-platform", "cross-platform",
   "eval skill", "test skill", "benchmark skill", "skill evals",
   "measure skill", "skill performance", "skill A/B test".
-allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-  - Write
-  - Edit
-  - WebFetch
 ---
 
 # Skill Forge — Ultimate Claude Code Skill Creator
