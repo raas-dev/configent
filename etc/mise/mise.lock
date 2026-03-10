@@ -156,52 +156,52 @@ url = "https://github.com/sigoden/argc/releases/download/v1.23.0/argc-v1.23.0-x8
 url_api = "https://api.github.com/repos/sigoden/argc/releases/assets/271169116"
 
 [[tools.ast-grep]]
-version = "0.41.0"
+version = "0.41.1"
 backend = "aqua:ast-grep/ast-grep"
 
 [tools.ast-grep."platforms.linux-arm64"]
-checksum = "sha256:6f089d014d5fda8fed2e63e5095acf8ebec4c4cd2e721bd663f2284ace42b623"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-aarch64-unknown-linux-gnu.zip"
+checksum = "sha256:4eeb610bdf846f68e81b3c3b74c1a02d50057e95a5e890c871771046af3bcc91"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-aarch64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.linux-arm64-musl"]
-checksum = "sha256:6f089d014d5fda8fed2e63e5095acf8ebec4c4cd2e721bd663f2284ace42b623"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-aarch64-unknown-linux-gnu.zip"
+checksum = "sha256:4eeb610bdf846f68e81b3c3b74c1a02d50057e95a5e890c871771046af3bcc91"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-aarch64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.linux-x64"]
-checksum = "sha256:e71afdcbb2e79f7710a56d2f89662bdd0a6e9d639c4abecd5d5f129d80a38bac"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-unknown-linux-gnu.zip"
+checksum = "sha256:f9b56d9fc3763c11a65b50a0f4ec0343b662f6ac6264850f531f04dec93ebd6d"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.linux-x64-baseline"]
-checksum = "sha256:e71afdcbb2e79f7710a56d2f89662bdd0a6e9d639c4abecd5d5f129d80a38bac"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-unknown-linux-gnu.zip"
+checksum = "sha256:f9b56d9fc3763c11a65b50a0f4ec0343b662f6ac6264850f531f04dec93ebd6d"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.linux-x64-musl"]
-checksum = "sha256:e71afdcbb2e79f7710a56d2f89662bdd0a6e9d639c4abecd5d5f129d80a38bac"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-unknown-linux-gnu.zip"
+checksum = "sha256:f9b56d9fc3763c11a65b50a0f4ec0343b662f6ac6264850f531f04dec93ebd6d"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:e71afdcbb2e79f7710a56d2f89662bdd0a6e9d639c4abecd5d5f129d80a38bac"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-unknown-linux-gnu.zip"
+checksum = "sha256:f9b56d9fc3763c11a65b50a0f4ec0343b662f6ac6264850f531f04dec93ebd6d"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-unknown-linux-gnu.zip"
 
 [tools.ast-grep."platforms.macos-arm64"]
-checksum = "sha256:388f1f0bf8bf1d64232f6894c1f06034909ca80fa40719ecf3461c07fdd1c23c"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-aarch64-apple-darwin.zip"
+checksum = "sha256:ffd07706f1e0eb4a5844d00983bba010e8ec2d8480bf9a06db4422672d9820c5"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-aarch64-apple-darwin.zip"
 
 [tools.ast-grep."platforms.macos-x64"]
-checksum = "sha256:a22b64ac5880fa1cab57988f6d9e99c412a2024bc4e2834540d4f6499108aa73"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-apple-darwin.zip"
+checksum = "sha256:60c7f6bdaad0e542352007d0b46978bfc1de3e1c7e9fe69a54f4e4cbceb27ebe"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-apple-darwin.zip"
 
 [tools.ast-grep."platforms.macos-x64-baseline"]
-checksum = "sha256:a22b64ac5880fa1cab57988f6d9e99c412a2024bc4e2834540d4f6499108aa73"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-apple-darwin.zip"
+checksum = "sha256:60c7f6bdaad0e542352007d0b46978bfc1de3e1c7e9fe69a54f4e4cbceb27ebe"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-apple-darwin.zip"
 
 [tools.ast-grep."platforms.windows-x64"]
-checksum = "sha256:b13ba0f16f1b979cee4ec6c20984d7787749607df2c4c735802b34572efc43f2"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:f9733d7843c2472132b0c7b5629dc859129eab0097168e55057fc03723475fc1"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-pc-windows-msvc.zip"
 
 [tools.ast-grep."platforms.windows-x64-baseline"]
-checksum = "sha256:b13ba0f16f1b979cee4ec6c20984d7787749607df2c4c735802b34572efc43f2"
-url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.0/app-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:f9733d7843c2472132b0c7b5629dc859129eab0097168e55057fc03723475fc1"
+url = "https://github.com/ast-grep/ast-grep/releases/download/0.41.1/app-x86_64-pc-windows-msvc.zip"
 
 [[tools.atuin]]
 version = "18.12.1"
