@@ -1685,73 +1685,73 @@ url = "https://github.com/tokuhirom/dcv/releases/download/v0.3.2/dcv_windows_amd
 url_api = "https://api.github.com/repos/tokuhirom/dcv/releases/assets/359605589"
 
 [[tools."github:topgrade-rs/topgrade"]]
-version = "17.0.0"
+version = "17.1.0"
 backend = "github:topgrade-rs/topgrade"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-arm64"]
-checksum = "sha256:45980a8c2f875bb8d375787c2a1d4db8225c1f5d353eede0f6084b77dc146530"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368818659"
+checksum = "sha256:866919a36466b67eedc0203f56680cb86a9418ef7c65b236b54d22401e278957"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371607635"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-arm64-musl"]
-checksum = "sha256:924572881dea248b9b4306db6dea4d5b81ec831e63215c0dcbd687b8ceee0e36"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368815050"
+checksum = "sha256:f882dea86f4f90acb6307a7e4bbef50d6bc14403f54fdf0053e587db9bff0eab"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606058"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-x64"]
-checksum = "sha256:f14adfb73c45a3b40acb50bbc3e5eb125d96e7a69cad053a705f62ad95b6112d"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368816865"
+checksum = "sha256:486a181dab44644e710bbd5272e49fa8216e2bd089791b1c0296fcc931428cdf"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606923"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-x64-baseline"]
-checksum = "sha256:f14adfb73c45a3b40acb50bbc3e5eb125d96e7a69cad053a705f62ad95b6112d"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368816865"
+checksum = "sha256:486a181dab44644e710bbd5272e49fa8216e2bd089791b1c0296fcc931428cdf"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606923"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-x64-musl"]
-checksum = "sha256:ee00a53acb2867839ed7d4d949060353b8af3ccb41ce9fa3c3a8d725b7f5ed73"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368814867"
+checksum = "sha256:01f830cad3b59ee676e4d08bd01d6015ddb5fc07c547df5a452423d9fcbccdcf"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606028"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:f14adfb73c45a3b40acb50bbc3e5eb125d96e7a69cad053a705f62ad95b6112d"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368816865"
+checksum = "sha256:486a181dab44644e710bbd5272e49fa8216e2bd089791b1c0296fcc931428cdf"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606923"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.macos-arm64"]
-checksum = "sha256:5739192b7543e28c6ee80018e1feefede99f60c442181201d2cf8469359d126c"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368812085"
+checksum = "sha256:d3f6651d686226fa909edcc641fc7ba1575db22a323a1d41e62b4a5886594fc3"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371604631"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.macos-x64"]
-checksum = "sha256:ac95b00e3993ef9a21fc97d53bab304bd80578f7695223aa69bb52a1eadab3d0"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368818805"
+checksum = "sha256:b1ce3345c37f60c0ebc5a0becf2f1e0dc828900ae91d96d23cf50de54dd5db22"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606545"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.macos-x64-baseline"]
-checksum = "sha256:ac95b00e3993ef9a21fc97d53bab304bd80578f7695223aa69bb52a1eadab3d0"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368818805"
+checksum = "sha256:b1ce3345c37f60c0ebc5a0becf2f1e0dc828900ae91d96d23cf50de54dd5db22"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371606545"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.windows-x64"]
-checksum = "sha256:5ca31b7a6c5570059275c07db09083e93a6cc98a806d506a280e0e16dfa01cf6"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368819038"
+checksum = "sha256:d1dc14035225b2cd08d0052ab313bd6d564d60418cb50792ba01099716e0f229"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371607977"
 provenance = "github-attestations"
 
 [tools."github:topgrade-rs/topgrade"."platforms.windows-x64-baseline"]
-checksum = "sha256:5ca31b7a6c5570059275c07db09083e93a6cc98a806d506a280e0e16dfa01cf6"
-url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.0.0/topgrade-v17.0.0-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/368819038"
+checksum = "sha256:d1dc14035225b2cd08d0052ab313bd6d564d60418cb50792ba01099716e0f229"
+url = "https://github.com/topgrade-rs/topgrade/releases/download/v17.1.0/topgrade-v17.1.0-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/topgrade-rs/topgrade/releases/assets/371607977"
 provenance = "github-attestations"
 
 [[tools."github:ycd/dstp"]]
