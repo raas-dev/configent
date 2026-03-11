@@ -9,7 +9,8 @@
     "npm:pi-rewind-hook",
     "npm:pi-mcp-adapter",
     "npm:@tmustier/pi-ralph-wiggum",
-    "npm:@tmustier/pi-raw-paste"
+    "npm:@tmustier/pi-raw-paste",
+    "npm:pi-ask-user"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
