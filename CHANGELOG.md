@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.211.0](https://github.com/raas-dev/configent/compare/1.210.0...1.211.0) (2026-03-11)
+
+
+### Features
+
+* **mise:** add oh-my-pi integration ([86b300c](https://github.com/raas-dev/configent/commit/86b300c13f0c1fc46277072bd779fdea91adcb97))
+
+
+### Fixes
+
+* **ayu-dark:** normalize ayu-dark colors ([8639bbb](https://github.com/raas-dev/configent/commit/8639bbbcfd5926e0ce4ad29fc37d185fe4667172))
+* **mcporter:** refresh mcporter docs and config ([9c7eced](https://github.com/raas-dev/configent/commit/9c7eced917748eb79379f42c27f9930427a11544))
+* **skillseekers:** sync docs ([a0a2a83](https://github.com/raas-dev/configent/commit/a0a2a838ea1be286a1afa8df669dc78fadb05267))
+
 ## [1.210.0](https://github.com/raas-dev/configent/compare/1.209.1...1.210.0) (2026-03-09)
 
 
