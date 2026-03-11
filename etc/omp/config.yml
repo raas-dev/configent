@@ -26,3 +26,6 @@ disabledProviders:
   - claude
 theme:
   dark: ayu-dark
+task:
+  disabledAgents:
+    - designer
