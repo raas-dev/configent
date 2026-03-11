@@ -1,0 +1,35 @@
+lastChangelogVersion: 13.10.1
+modelRoles:
+  default: zai/glm-5
+renderMermaid:
+  enabled: true
+checkpoint:
+  enabled: true
+inspect_image:
+  enabled: true
+calc:
+  enabled: true
+async:
+  enabled: false
+commands:
+  enableClaudeProject: false
+  enableClaudeUser: false
+providers:
+  webSearch: auto
+defaultThinkingLevel: high
+startup:
+  quiet: true
+disabledProviders:
+  - cursor
+  - opencode
+  - claude
+theme:
+  dark: ayu-dark
+interruptMode: immediate
+compaction:
+  strategy: context-full
+  thresholdPercent: -1
+mcp:
+  notifications: false
+bashInterceptor:
+  enabled: false
