@@ -1,6 +1,11 @@
 lastChangelogVersion: 13.10.1
 modelRoles:
   default: zai/glm-5
+  smol: zai/glm-5
+  slow: zai/glm-5
+  vision: zai/glm-5
+  plan: zai/glm-5
+  commit: zai/glm-5
 renderMermaid:
   enabled: true
 checkpoint:
