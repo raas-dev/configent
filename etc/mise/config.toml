@@ -55,6 +55,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 'pipx:skill-seekers' = 'latest'
+'pipx:desloppify' = 'latest'
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
