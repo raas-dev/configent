@@ -2560,7 +2560,7 @@ backend = "pipx:browser-use"
 extras = "cli"
 
 [[tools."pipx:desloppify"]]
-version = "0.9.5"
+version = "0.9.4"
 backend = "pipx:desloppify"
 
 [[tools."pipx:glances"]]
