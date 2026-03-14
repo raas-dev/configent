@@ -25,14 +25,14 @@ mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/settings.json" "$HOME/.claude/settings.json"
 
 # CLAUDE.md
-if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
-  if [ -r "$HOME/.claude/CLAUDE.md" ]; then
-    mkdir -p "$backup_path/.claude"
-    cp -P "$HOME/.claude/CLAUDE.md" "$backup_path/.claude/CLAUDE.md"
-  fi
-fi
-mkdir -p "$HOME/.claude"
-ln -sfnv "$config_path/claude-code/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+#if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
+#  if [ -r "$HOME/.claude/CLAUDE.md" ]; then
+#    mkdir -p "$backup_path/.claude"
+#    cp -P "$HOME/.claude/CLAUDE.md" "$backup_path/.claude/CLAUDE.md"
+#  fi
+#fi
+#mkdir -p "$HOME/.claude"
+#ln -sfnv "$config_path/claude-code/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 # ccstatusline/settings.json
 if [ ! -r "$backup_path/.config/ccstatusline/settings.json" ]; then
