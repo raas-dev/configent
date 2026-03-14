@@ -2,7 +2,7 @@
   "collapseChangelog": true,
   "defaultModel": "MiniMax-M2.5",
   "defaultProvider": "minimax",
-  "lastChangelogVersion": "0.57.1",
+  "lastChangelogVersion": "0.58.0",
   "packages": [
     "npm:pi-powerline-footer",
     "npm:pi-interactive-shell",
@@ -10,7 +10,8 @@
     "npm:pi-mcp-adapter",
     "npm:@tmustier/pi-ralph-wiggum",
     "npm:@tmustier/pi-raw-paste",
-    "npm:pi-ask-user"
+    "npm:pi-ask-user",
+    "https://github.com/davebcn87/pi-autoresearch"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
