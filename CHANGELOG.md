@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.211.1](https://github.com/raas-dev/configent/compare/1.211.0...1.211.1) (2026-03-14)
+
+
+### Fixes
+
+* **aliases:** ensure fd alias uses fixed strings ([1f505c3](https://github.com/raas-dev/configent/commit/1f505c3ae260c42a92bb8f1514af367343dd5b2f))
+
 ## [1.211.0](https://github.com/raas-dev/configent/compare/1.210.0...1.211.0) (2026-03-11)
 
 
