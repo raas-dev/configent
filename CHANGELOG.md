@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.211.2](https://github.com/raas-dev/configent/compare/1.211.1...1.211.2) (2026-03-15)
+
+
+### Fixes
+
+* **postinstall_claude-code:** skip claude doc backup ([faf47fb](https://github.com/raas-dev/configent/commit/faf47fb5406d689d8f51a024c934aa6dafd3f08f))
+* **postinstall:** migrate tui config to separate file ([c970c19](https://github.com/raas-dev/configent/commit/c970c19148d91c4e5747036ce263733c786cce60))
+
 ## [1.211.1](https://github.com/raas-dev/configent/compare/1.211.0...1.211.1) (2026-03-14)
 
 
