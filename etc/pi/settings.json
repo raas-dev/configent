@@ -2,18 +2,18 @@
   "collapseChangelog": true,
   "defaultModel": "MiniMax-M2.5",
   "defaultProvider": "minimax",
-  "lastChangelogVersion": "0.58.0",
+  "lastChangelogVersion": "0.58.1",
   "packages": [
-    "npm:pi-powerline-footer",
-    "npm:pi-interactive-shell",
-    "npm:pi-rewind-hook",
-    "npm:pi-mcp-adapter",
-    "npm:@tmustier/pi-ralph-wiggum",
-    "npm:@tmustier/pi-raw-paste",
     "npm:pi-ask-user",
+    "npm:pi-interactive-shell",
+    "npm:pi-mcp-adapter",
+    "npm:pi-powerline-footer",
+    "npm:pi-rewind-hook",
+    "npm:@tmustier/pi-raw-paste",
     "https://github.com/davebcn87/pi-autoresearch"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
-  "transport": "sse"
+  "showHardwareCursor": true,
+  "transport": "auto"
 }
