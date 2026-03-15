@@ -10,6 +10,6 @@
   },
   "model": "zai-coding-plan/glm-5",
   "plugin": [
-    "oh-my-opencode-slim@0.8.1"
+    "oh-my-opencode-slim"
   ]
 }
