@@ -585,7 +585,7 @@ oc_agent() {
 }
 
 ## openchamber
-alias occ='mise exec npm:@openchamber/web@latest -- openchamber serve --daemon'
+alias occ='mise exec npm:@openchamber/web@latest -- openchamber serve'
 alias ocs='mise exec npm:@openchamber/web@latest -- openchamber stop'
 
 ### Docker ####################################################################
