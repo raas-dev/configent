@@ -218,6 +218,7 @@ url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-aarch64
 [tools.atuin."platforms.linux-x64"]
 checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
 url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-unknown-linux-musl.tar.gz"
+provenance = "github-attestations"
 
 [tools.atuin."platforms.linux-x64-baseline"]
 checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
@@ -681,6 +682,7 @@ url = "https://github.com/cli/cli/releases/download/v2.88.1/gh_2.88.1_linux_arm6
 [tools.github-cli."platforms.linux-x64"]
 checksum = "sha256:36352a993b97e9758793cdb87f9ba674bd6d88c914488e122be78a1962203803"
 url = "https://github.com/cli/cli/releases/download/v2.88.1/gh_2.88.1_linux_amd64.tar.gz"
+provenance = "github-attestations"
 
 [tools.github-cli."platforms.linux-x64-baseline"]
 checksum = "sha256:36352a993b97e9758793cdb87f9ba674bd6d88c914488e122be78a1962203803"
@@ -2885,6 +2887,7 @@ url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-aarch64-unkn
 [tools.uv."platforms.linux-x64"]
 checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
 url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-unknown-linux-musl.tar.gz"
+provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64-baseline"]
 checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
