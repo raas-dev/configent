@@ -4,7 +4,6 @@
   "mcp": {},
   "permission": {
     "bash": {
-      "git *": "ask",
       "rm *": "ask"
     },
     "external_directory": {
