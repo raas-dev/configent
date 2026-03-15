@@ -15,9 +15,5 @@
   "plugin": [
     "@franlol/opencode-md-table-formatter"
   ],
-  "share": "disabled",
-  "theme": "ayu",
-  "tui": {
-    "scroll_speed": 2
-  }
+  "share": "disabled"
 }

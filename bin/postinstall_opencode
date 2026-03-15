@@ -25,6 +25,17 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
+# tui.json
+if [ ! -r "$backup_path/.config/opencode/tui.json" ]; then
+  if [ -r "$HOME/.config/opencode/tui.json" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -P "$HOME/.config/opencode/tui.json" \
+      "$backup_path/.config/opencode/tui.json"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode"
+ln -sfnv "$config_path/opencode/tui.json" "$HOME/.config/opencode/tui.json"
+
 # AGENTS.md
 if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
   if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
