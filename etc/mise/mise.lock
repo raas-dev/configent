@@ -2421,7 +2421,7 @@ version = "0.58.1"
 backend = "npm:@mariozechner/pi-coding-agent"
 
 [[tools."npm:agent-browser"]]
-version = "0.20.7"
+version = "0.20.10"
 backend = "npm:agent-browser"
 
 [[tools."npm:mcporter"]]
