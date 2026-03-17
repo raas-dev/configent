@@ -218,6 +218,7 @@ url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-aarch64
 [tools.atuin."platforms.linux-x64"]
 checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
 url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-unknown-linux-musl.tar.gz"
+provenance = "github-attestations"
 
 [tools.atuin."platforms.linux-x64-baseline"]
 checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
