@@ -204,45 +204,45 @@ checksum = "sha256:55836fa1b2c65dc7d61615a4d9368622a0d2371a76d28b9a165e5a3ab6ae3
 url = "https://github.com/ast-grep/ast-grep/releases/download/0.42.0/app-x86_64-pc-windows-msvc.zip"
 
 [[tools.atuin]]
-version = "18.13.2"
+version = "18.13.3"
 backend = "aqua:atuinsh/atuin"
 
 [tools.atuin."platforms.linux-arm64"]
-checksum = "sha256:15622692f1da3d5e1692552b86347dcedb710b05b21d80dadb1963d242b437ac"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:069dd4ba6313c6d4ab97fe8f98f57dfb63580e6818c418482d21737d5d94bfff"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.linux-arm64-musl"]
-checksum = "sha256:15622692f1da3d5e1692552b86347dcedb710b05b21d80dadb1963d242b437ac"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:069dd4ba6313c6d4ab97fe8f98f57dfb63580e6818c418482d21737d5d94bfff"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.linux-x64"]
-checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-unknown-linux-musl.tar.gz"
-provenance = "github-attestations"
+checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.linux-x64-baseline"]
-checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.linux-x64-musl"]
-checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:2acde3dd596906e77a19b39394633a222014219d6a067d7d375329317fa626a3"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b9347f049eb75ef98bf8b21c307eb4fb04d4b917ee09b6848f159a3f6d252868"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.atuin."platforms.macos-arm64"]
-checksum = "sha256:900ef550a42345c9e3564c8485ffe43fe863deaca1948156e358aada7e794373"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:63361ed90ffba52849298997bad65ef3d95e9a605deadaae3e32d5e50fc4e588"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-aarch64-apple-darwin.tar.gz"
+provenance = "github-attestations"
 
 [tools.atuin."platforms.windows-x64"]
-checksum = "sha256:2395a9d5fde665afccd409a344eb0151fe9b0b2dc6522624e0af339052c854c6"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:28bb4dc5bfe81b1bab0fb18855573aec0c07c1b89c7a6063ac900a05892b2b95"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-pc-windows-msvc.zip"
 
 [tools.atuin."platforms.windows-x64-baseline"]
-checksum = "sha256:2395a9d5fde665afccd409a344eb0151fe9b0b2dc6522624e0af339052c854c6"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.13.2/atuin-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:28bb4dc5bfe81b1bab0fb18855573aec0c07c1b89c7a6063ac900a05892b2b95"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.13.3/atuin-x86_64-pc-windows-msvc.zip"
 
 [[tools.bat]]
 version = "0.26.1"
@@ -461,37 +461,36 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.76"
+version = "2.1.77"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.linux-arm64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-arm64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-x64"]
-checksum = "blake3:e17acc8c7a56c8503c224741eedad035074123bdcc06333ceffe2306c7c32b8e"
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/linux-x64/claude"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "blake3:6ce77b9eba69a84d760013883f324cb92e7b9ed84a58bcaa084d0d1e7820b32c"
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/darwin-arm64/claude"
+checksum = "blake3:48174edaa1f10b4cb308dc81d2e922c7d61c9a8def84c7bde8f555c40a3751fc"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/darwin-arm64/claude"
 
 [tools.claude-code."platforms.macos-x64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/darwin-x64/claude"
 
 [tools.claude-code."platforms.macos-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.76/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.77/darwin-x64/claude"
 
 [[tools.delta]]
 version = "0.18.2"
@@ -1002,63 +1001,63 @@ url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86
 url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338101681"
 
 [[tools."github:can1357/oh-my-pi"]]
-version = "13.12.6"
+version = "13.12.8"
 backend = "github:can1357/oh-my-pi"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64"]
-checksum = "sha256:1e47b471abb14254ba4972f0ecdc54d6e6e3da985d31d145fed1194ea4561e54"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561390"
+checksum = "sha256:a2d02fb3852bbc016cc8dfd205c5ccc750c2ee8cc70678acb61163260589734d"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063141"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64-musl"]
-checksum = "sha256:1e47b471abb14254ba4972f0ecdc54d6e6e3da985d31d145fed1194ea4561e54"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561390"
+checksum = "sha256:a2d02fb3852bbc016cc8dfd205c5ccc750c2ee8cc70678acb61163260589734d"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063141"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64"]
-checksum = "sha256:a734d2371d6deb6835a22cb65b5579908e9857545af2a09080501292bec0eb6a"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561388"
+checksum = "sha256:338cee2762fd453e08c8765fd5f1c289226f95d0354c3618ecbe839199d98303"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063138"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-baseline"]
-checksum = "sha256:a734d2371d6deb6835a22cb65b5579908e9857545af2a09080501292bec0eb6a"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561388"
+checksum = "sha256:338cee2762fd453e08c8765fd5f1c289226f95d0354c3618ecbe839199d98303"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063138"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl"]
-checksum = "sha256:a734d2371d6deb6835a22cb65b5579908e9857545af2a09080501292bec0eb6a"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561388"
+checksum = "sha256:338cee2762fd453e08c8765fd5f1c289226f95d0354c3618ecbe839199d98303"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063138"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:a734d2371d6deb6835a22cb65b5579908e9857545af2a09080501292bec0eb6a"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561388"
+checksum = "sha256:338cee2762fd453e08c8765fd5f1c289226f95d0354c3618ecbe839199d98303"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063138"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-arm64"]
-checksum = "sha256:cd651df5c7d28963c7cf17c7dc6f9ffb89d7538952aea4350bdb4d6d1007d9d1"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-darwin-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561389"
+checksum = "sha256:f4e8a0fbe44a601a6d0411b3183efc5be55b69d0c76f5f69ff4399625d5576fa"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-darwin-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063136"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64"]
-checksum = "sha256:a620e6b1f4557403ca1cbf3dc69bbdb2bda2095ccb6ce0e3fcbe3c3ae7e8161f"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561392"
+checksum = "sha256:ddf6d54782adf0e9409508267d645d9b466b51fc9fd4dcbe29903400702377b4"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063133"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64-baseline"]
-checksum = "sha256:a620e6b1f4557403ca1cbf3dc69bbdb2bda2095ccb6ce0e3fcbe3c3ae7e8161f"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561392"
+checksum = "sha256:ddf6d54782adf0e9409508267d645d9b466b51fc9fd4dcbe29903400702377b4"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063133"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64"]
-checksum = "sha256:f91153dc24bdeab93b3526cbff25419f6e5a41c11ece7d1efe1921117ed6c371"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561391"
+checksum = "sha256:3ea8524815e40643cdc2d164a87a40a750539ee21de83fc2efaba5c39a3d787a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063137"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64-baseline"]
-checksum = "sha256:f91153dc24bdeab93b3526cbff25419f6e5a41c11ece7d1efe1921117ed6c371"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.6/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/374561391"
+checksum = "sha256:3ea8524815e40643cdc2d164a87a40a750539ee21de83fc2efaba5c39a3d787a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.12.8/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/375063137"
 
 [[tools."github:dalance/procs"]]
 version = "0.14.11"
@@ -2417,11 +2416,11 @@ version = "4.6.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@mariozechner/pi-coding-agent"]]
-version = "0.58.3"
+version = "0.58.4"
 backend = "npm:@mariozechner/pi-coding-agent"
 
 [[tools."npm:agent-browser"]]
-version = "0.20.13"
+version = "0.20.14"
 backend = "npm:agent-browser"
 
 [[tools."npm:mcporter"]]
@@ -2625,52 +2624,53 @@ checksum = "sha256:b40d192ae95ba6ccc4cc362ff4e1b18ca6fb5055bebbcd3920684e12701fa
 url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.zip"
 
 [[tools.prek]]
-version = "0.3.5"
+version = "0.3.6"
 backend = "aqua:j178/prek"
 
 [tools.prek."platforms.linux-arm64"]
-checksum = "sha256:2534c3297c466814a0356121c9fe15934433ec3dd0343f0c8251ff348b08fa41"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:0cf6d013c981a56465757dc7ff0fd3a9ceace27d7f0a792f435d1be79b790236"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.linux-arm64-musl"]
-checksum = "sha256:2534c3297c466814a0356121c9fe15934433ec3dd0343f0c8251ff348b08fa41"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:0cf6d013c981a56465757dc7ff0fd3a9ceace27d7f0a792f435d1be79b790236"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.linux-x64"]
-checksum = "sha256:b8a18b6da657e2a85cabaa699da191f0aaa55008109cf97d23ae0580962876dc"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:942564ccc9c342d317294fec7b7a77aa24ec71136e3439b15cddb62e49f76899"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.linux-x64-baseline"]
-checksum = "sha256:b8a18b6da657e2a85cabaa699da191f0aaa55008109cf97d23ae0580962876dc"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:942564ccc9c342d317294fec7b7a77aa24ec71136e3439b15cddb62e49f76899"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.linux-x64-musl"]
-checksum = "sha256:b8a18b6da657e2a85cabaa699da191f0aaa55008109cf97d23ae0580962876dc"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:942564ccc9c342d317294fec7b7a77aa24ec71136e3439b15cddb62e49f76899"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:b8a18b6da657e2a85cabaa699da191f0aaa55008109cf97d23ae0580962876dc"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:942564ccc9c342d317294fec7b7a77aa24ec71136e3439b15cddb62e49f76899"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.prek."platforms.macos-arm64"]
-checksum = "sha256:652cc3f3907f732028366c1da60babfdd9236fc7bef1a686fa561b45e6f948de"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:50535d4fb3a0fd05f137bbdae6f8ffde17615949bd282817e3aa5755dd8d8d4c"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-aarch64-apple-darwin.tar.gz"
+provenance = "github-attestations"
 
 [tools.prek."platforms.macos-x64"]
-checksum = "sha256:e4fdab89c5fcca22ea99c4582eb8186e088c8d5c10b10c4fa97e1cff45050c6d"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:0ef3ec3dd4429a5d9e2ebe1b65b37319b5611be3d688a86813aa3004761c4db3"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-apple-darwin.tar.gz"
 
 [tools.prek."platforms.macos-x64-baseline"]
-checksum = "sha256:e4fdab89c5fcca22ea99c4582eb8186e088c8d5c10b10c4fa97e1cff45050c6d"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:0ef3ec3dd4429a5d9e2ebe1b65b37319b5611be3d688a86813aa3004761c4db3"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-apple-darwin.tar.gz"
 
 [tools.prek."platforms.windows-x64"]
-checksum = "sha256:d7f0877d54533376186b31455f3c23f226eaecaa4ff9e8169d5bd1670f594525"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:71d02992997e3fc7a3cf1877febf385bc299cdbe397d1b7b2e57f8bc3d0a14e8"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-pc-windows-msvc.zip"
 
 [tools.prek."platforms.windows-x64-baseline"]
-checksum = "sha256:d7f0877d54533376186b31455f3c23f226eaecaa4ff9e8169d5bd1670f594525"
-url = "https://github.com/j178/prek/releases/download/v0.3.5/prek-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:71d02992997e3fc7a3cf1877febf385bc299cdbe397d1b7b2e57f8bc3d0a14e8"
+url = "https://github.com/j178/prek/releases/download/v0.3.6/prek-x86_64-pc-windows-msvc.zip"
 
 [[tools.python]]
 version = "3.14.2"
@@ -2873,53 +2873,53 @@ version = "3.6a"
 backend = "asdf:tmux"
 
 [[tools.uv]]
-version = "0.10.10"
+version = "0.10.11"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:d08c08b82cdcaf2bd3d928ffe844d3558dda53f90066db6ef9174157cc763252"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:5d80a7f6343d2676dfde1e5126582070a2bbc62df6f60d5527a169be3788532a"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:d08c08b82cdcaf2bd3d928ffe844d3558dda53f90066db6ef9174157cc763252"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:5d80a7f6343d2676dfde1e5126582070a2bbc62df6f60d5527a169be3788532a"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-unknown-linux-musl.tar.gz"
-provenance = "github-attestations"
+checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-baseline"]
-checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:74544e8755fbc27559e22e29fd561bdc48f91b8bd8323e760a1130f32433bea4"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:8a09f0ef51ee7f7170731b4cb8bde5bf9ba6da5304f49a7df6cdab42a1f37b5d"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:437a7d498dd6564d5bf986074249ba1fc600e73da55ae04d7bd4c24d5f149b95"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-apple-darwin.tar.gz"
+provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:dd18420591d625f9b4ca2b57a7a6fe3cce43910f02e02d90e47a4101428de14a"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:ff90020b554cf02ef8008535c9aab6ef27bb7be6b075359300dec79c361df897"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-apple-darwin.tar.gz"
 
 [tools.uv."platforms.macos-x64-baseline"]
-checksum = "sha256:dd18420591d625f9b4ca2b57a7a6fe3cce43910f02e02d90e47a4101428de14a"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:ff90020b554cf02ef8008535c9aab6ef27bb7be6b075359300dec79c361df897"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-apple-darwin.tar.gz"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:d31a30f1dfb96e630a08d5a9b3f3f551254b7ed6e9b7e495f46a4232661c7252"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:9ee74df98582f37fdd6069e1caac80d2616f9a489f5dbb2b1c152f30be69c58e"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-pc-windows-msvc.zip"
 
 [tools.uv."platforms.windows-x64-baseline"]
-checksum = "sha256:d31a30f1dfb96e630a08d5a9b3f3f551254b7ed6e9b7e495f46a4232661c7252"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.10/uv-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:9ee74df98582f37fdd6069e1caac80d2616f9a489f5dbb2b1c152f30be69c58e"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-pc-windows-msvc.zip"
 
 [[tools.viddy]]
 version = "1.3.0"
