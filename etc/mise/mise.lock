@@ -342,52 +342,52 @@ checksum = "sha256:9d0e0f923e9626f3bc6044fc32e0d3ab29039aea753f5678ef8801cf26f75
 url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.11/bun-windows-x64-baseline.zip"
 
 [[tools.carapace]]
-version = "1.6.3"
+version = "1.6.4"
 backend = "aqua:carapace-sh/carapace-bin"
 
 [tools.carapace."platforms.linux-arm64"]
-checksum = "sha256:0e4884e0c933a3bea8771c85d5289045274aa981c131f7b1688d368753a9651a"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_arm64.tar.gz"
+checksum = "sha256:17293dcadaebb615984042019125ed2fe932af1bfb48fc2b916c1e67249e748b"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_arm64.tar.gz"
 
 [tools.carapace."platforms.linux-arm64-musl"]
-checksum = "sha256:0e4884e0c933a3bea8771c85d5289045274aa981c131f7b1688d368753a9651a"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_arm64.tar.gz"
+checksum = "sha256:17293dcadaebb615984042019125ed2fe932af1bfb48fc2b916c1e67249e748b"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_arm64.tar.gz"
 
 [tools.carapace."platforms.linux-x64"]
-checksum = "sha256:dc5b20eb980902c9bc184e90ce7dbb004edcd59437de52cf32234ee09bcb8abd"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_amd64.tar.gz"
+checksum = "sha256:885ee9f90ab759c60e50d8123966c4edabb426c5cac531253c8d75a30145eff2"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_amd64.tar.gz"
 
 [tools.carapace."platforms.linux-x64-baseline"]
-checksum = "sha256:dc5b20eb980902c9bc184e90ce7dbb004edcd59437de52cf32234ee09bcb8abd"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_amd64.tar.gz"
+checksum = "sha256:885ee9f90ab759c60e50d8123966c4edabb426c5cac531253c8d75a30145eff2"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_amd64.tar.gz"
 
 [tools.carapace."platforms.linux-x64-musl"]
-checksum = "sha256:dc5b20eb980902c9bc184e90ce7dbb004edcd59437de52cf32234ee09bcb8abd"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_amd64.tar.gz"
+checksum = "sha256:885ee9f90ab759c60e50d8123966c4edabb426c5cac531253c8d75a30145eff2"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_amd64.tar.gz"
 
 [tools.carapace."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:dc5b20eb980902c9bc184e90ce7dbb004edcd59437de52cf32234ee09bcb8abd"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_linux_amd64.tar.gz"
+checksum = "sha256:885ee9f90ab759c60e50d8123966c4edabb426c5cac531253c8d75a30145eff2"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_linux_amd64.tar.gz"
 
 [tools.carapace."platforms.macos-arm64"]
-checksum = "sha256:99ad588ae83fb976421578c35e2efd55db4c9e375f9d8a115e8c296c9e69367a"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_darwin_arm64.tar.gz"
+checksum = "sha256:67689f9f14d8d99a87ac70e680ccfb98a702c16e4b1058ef6309a05834e68f09"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_darwin_arm64.tar.gz"
 
 [tools.carapace."platforms.macos-x64"]
-checksum = "sha256:777e7dd865774850cd0d66bb5be6c33253fdb5d423f05f125c5959526caf48f6"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_darwin_amd64.tar.gz"
+checksum = "sha256:6c9b9cbe06fa58c81f888f2b2254eaac9c97ffc9ad53ed7e642695afd066d375"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_darwin_amd64.tar.gz"
 
 [tools.carapace."platforms.macos-x64-baseline"]
-checksum = "sha256:777e7dd865774850cd0d66bb5be6c33253fdb5d423f05f125c5959526caf48f6"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_darwin_amd64.tar.gz"
+checksum = "sha256:6c9b9cbe06fa58c81f888f2b2254eaac9c97ffc9ad53ed7e642695afd066d375"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_darwin_amd64.tar.gz"
 
 [tools.carapace."platforms.windows-x64"]
-checksum = "sha256:74da06809744399003f6a3ad65449dcfcdce7b4c7c52967230770db93459cc7f"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_windows_amd64.zip"
+checksum = "sha256:b16a51bf02f99a37ca738b8292292b549675175a285921606efef711854d6fca"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_windows_amd64.zip"
 
 [tools.carapace."platforms.windows-x64-baseline"]
-checksum = "sha256:74da06809744399003f6a3ad65449dcfcdce7b4c7c52967230770db93459cc7f"
-url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.3/carapace-bin_1.6.3_windows_amd64.zip"
+checksum = "sha256:b16a51bf02f99a37ca738b8292292b549675175a285921606efef711854d6fca"
+url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_windows_amd64.zip"
 
 [[tools.cargo-binstall]]
 version = "1.17.7"
@@ -1002,63 +1002,63 @@ url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86
 url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338101681"
 
 [[tools."github:can1357/oh-my-pi"]]
-version = "13.13.0"
+version = "13.13.2"
 backend = "github:can1357/oh-my-pi"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64"]
-checksum = "sha256:3f7a3120c23e19503efa266da3bc4c7f011dc1a1e0f5cb270cb5068ab9e5cc18"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352932"
+checksum = "sha256:7af1b5f1b38368e48cc64f41a94c21d612ad8f56786274d3200dbbe23627ce59"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968157"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64-musl"]
-checksum = "sha256:3f7a3120c23e19503efa266da3bc4c7f011dc1a1e0f5cb270cb5068ab9e5cc18"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352932"
+checksum = "sha256:7af1b5f1b38368e48cc64f41a94c21d612ad8f56786274d3200dbbe23627ce59"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968157"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64"]
-checksum = "sha256:0a64691f2a2a540929a0ba82b9df44576d25cc4fece80b5789c0d61e6df643c3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352935"
+checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-baseline"]
-checksum = "sha256:0a64691f2a2a540929a0ba82b9df44576d25cc4fece80b5789c0d61e6df643c3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352935"
+checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl"]
-checksum = "sha256:0a64691f2a2a540929a0ba82b9df44576d25cc4fece80b5789c0d61e6df643c3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352935"
+checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:0a64691f2a2a540929a0ba82b9df44576d25cc4fece80b5789c0d61e6df643c3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352935"
+checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-arm64"]
-checksum = "sha256:d0117d586b58902ac16bb344f326456c3802eff0f487ae01b625ae899ee28c65"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-darwin-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352936"
+checksum = "sha256:757a38581700acc341bee41306e72837520cee1377911bb940992f1fe5444f2c"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968161"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64"]
-checksum = "sha256:97febde9c680947add3861541d4250673d78cc6417913ddc0b8e623a1a39e426"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352939"
+checksum = "sha256:7563858274745c8c391b7ef462bb3e6ca552f1051a268056d5c52559654aba66"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968152"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64-baseline"]
-checksum = "sha256:97febde9c680947add3861541d4250673d78cc6417913ddc0b8e623a1a39e426"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352939"
+checksum = "sha256:7563858274745c8c391b7ef462bb3e6ca552f1051a268056d5c52559654aba66"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968152"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64"]
-checksum = "sha256:a6875d6cf3adede2a2ae44b462e4cf9d094a1263ab50d4999dfd73ccb5435ca3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352938"
+checksum = "sha256:b47366eb45d1bc569cc0985a3d4b41739c801a3410e97a64f49c79b892017880"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968159"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64-baseline"]
-checksum = "sha256:a6875d6cf3adede2a2ae44b462e4cf9d094a1263ab50d4999dfd73ccb5435ca3"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.0/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376352938"
+checksum = "sha256:b47366eb45d1bc569cc0985a3d4b41739c801a3410e97a64f49c79b892017880"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968159"
 
 [[tools."github:dalance/procs"]]
 version = "0.14.11"
@@ -1218,63 +1218,63 @@ url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2
 url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.29.4"
+version = "0.30.0"
 backend = "github:max-sixty/worktrunk"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-arm64"]
-checksum = "sha256:8d387a145f2b069ade7de6fb0cda68492bf96863dca5aa1b109f6bfce337c54f"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-aarch64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075932"
+checksum = "sha256:9191b21427d486449579ed754c612271c4da02979014c88463e6db15f74c9884"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378927"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-arm64-musl"]
-checksum = "sha256:8d387a145f2b069ade7de6fb0cda68492bf96863dca5aa1b109f6bfce337c54f"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-aarch64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075932"
+checksum = "sha256:9191b21427d486449579ed754c612271c4da02979014c88463e6db15f74c9884"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378927"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64"]
-checksum = "sha256:ffd8caab885631412510efe7d1b56dbc389bf6bdd94a266f0614d3f4a8e916b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075941"
+checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-baseline"]
-checksum = "sha256:ffd8caab885631412510efe7d1b56dbc389bf6bdd94a266f0614d3f4a8e916b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075941"
+checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-musl"]
-checksum = "sha256:ffd8caab885631412510efe7d1b56dbc389bf6bdd94a266f0614d3f4a8e916b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075941"
+checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:ffd8caab885631412510efe7d1b56dbc389bf6bdd94a266f0614d3f4a8e916b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075941"
+checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-arm64"]
-checksum = "sha256:35819a8c7cdc84d9006b52f2b68063d3762e1758e09998af230b582feca91741"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075928"
+checksum = "sha256:de8a6c4aee79a2f15c1c435dd725466d9b858a77d321fc02b04a3bea45ae2edc"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378925"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-x64"]
-checksum = "sha256:be990c5468e4697f60a992b9af90765ac983c121da32a20133bc4f7b8715c6b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075937"
+checksum = "sha256:7319a14b4102f9cd1580b0824922454f360145e7d343761d38690c4d2d1b9860"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378933"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-x64-baseline"]
-checksum = "sha256:be990c5468e4697f60a992b9af90765ac983c121da32a20133bc4f7b8715c6b6"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075937"
+checksum = "sha256:7319a14b4102f9cd1580b0824922454f360145e7d343761d38690c4d2d1b9860"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378933"
 
 [tools."github:max-sixty/worktrunk"."platforms.windows-x64"]
-checksum = "sha256:10885b58e677054e9ff867fcf9eefdd6c6decd0c7032b25ecc52dc5fa7559294"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075938"
+checksum = "sha256:58166b2b0c104ade5e026c9d447a786f125f763e8d49979eee537193f7556f04"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378936"
 
 [tools."github:max-sixty/worktrunk"."platforms.windows-x64-baseline"]
-checksum = "sha256:10885b58e677054e9ff867fcf9eefdd6c6decd0c7032b25ecc52dc5fa7559294"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.29.4/worktrunk-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/374075938"
+checksum = "sha256:58166b2b0c104ade5e026c9d447a786f125f763e8d49979eee537193f7556f04"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378936"
 
 [[tools."github:nnnkkk7/lazyactions"]]
 version = "0.0.13"
@@ -2477,63 +2477,63 @@ checksum = "sha256:9e2e43568e6f952e8c7cb77b934fbff53f454f0213688f24f3c3769b69703
 url = "https://github.com/anomalyco/opencode/releases/download/v1.2.27/opencode-windows-x64.zip"
 
 [[tools.pandoc]]
-version = "3.9"
+version = "3.9.0.2"
 backend = "github:jgm/pandoc"
 
 [tools.pandoc."platforms.linux-arm64"]
-checksum = "sha256:e09b97d7313bd417a35bde6c747c458486ec84f696e1cfd0f8c527cd69c89433"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472687"
+checksum = "sha256:b6d21e8f9c3b15744f5a7ab40248019157ed7793875dbe0383d4c82ff572b528"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165670"
 
 [tools.pandoc."platforms.linux-arm64-musl"]
-checksum = "sha256:e09b97d7313bd417a35bde6c747c458486ec84f696e1cfd0f8c527cd69c89433"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472687"
+checksum = "sha256:b6d21e8f9c3b15744f5a7ab40248019157ed7793875dbe0383d4c82ff572b528"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165670"
 
 [tools.pandoc."platforms.linux-x64"]
-checksum = "sha256:872a10c7ec29d5278831d855b11bd4ade0df4d5ec9a089a3197bc63a37eb4003"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472451"
+checksum = "sha256:a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165366"
 
 [tools.pandoc."platforms.linux-x64-baseline"]
-checksum = "sha256:872a10c7ec29d5278831d855b11bd4ade0df4d5ec9a089a3197bc63a37eb4003"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472451"
+checksum = "sha256:a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165366"
 
 [tools.pandoc."platforms.linux-x64-musl"]
-checksum = "sha256:872a10c7ec29d5278831d855b11bd4ade0df4d5ec9a089a3197bc63a37eb4003"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472451"
+checksum = "sha256:a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165366"
 
 [tools.pandoc."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:872a10c7ec29d5278831d855b11bd4ade0df4d5ec9a089a3197bc63a37eb4003"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472451"
+checksum = "sha256:a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165366"
 
 [tools.pandoc."platforms.macos-arm64"]
-checksum = "sha256:7d56ac6fe6fad0a7407bcd776aa142f61ca41838f286165f79d0584fa57b24d1"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-arm64-macOS.zip"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472393"
+checksum = "sha256:6e9eca844076bcbb599bbeebbba78a70f93b5307782b85c2c272872812c88875"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-arm64-macOS.zip"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377165034"
 
 [tools.pandoc."platforms.macos-x64"]
-checksum = "sha256:f1dfb5a433976b131818c2e69db70bb46874604367e8923412a5c2fa673f2526"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-x86_64-macOS.zip"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350473216"
+checksum = "sha256:b9fbceabccbc8f34ac021a50483fc32f8160568d0b4b2c22d81bb29e3054fd82"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-x86_64-macOS.zip"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377167038"
 
 [tools.pandoc."platforms.macos-x64-baseline"]
-checksum = "sha256:f1dfb5a433976b131818c2e69db70bb46874604367e8923412a5c2fa673f2526"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-x86_64-macOS.zip"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350473216"
+checksum = "sha256:b9fbceabccbc8f34ac021a50483fc32f8160568d0b4b2c22d81bb29e3054fd82"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-x86_64-macOS.zip"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377167038"
 
 [tools.pandoc."platforms.windows-x64"]
-checksum = "sha256:edccdaa95b5a33b3320187f0e291d58a232e21318a8081750bd31f847e598d18"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-windows-x86_64.zip"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472785"
+checksum = "sha256:c97542f2800f446e788d9f74237856d995421ad1bb3cc8324286840c5f272d3a"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-windows-x86_64.zip"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377166311"
 
 [tools.pandoc."platforms.windows-x64-baseline"]
-checksum = "sha256:edccdaa95b5a33b3320187f0e291d58a232e21318a8081750bd31f847e598d18"
-url = "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-windows-x86_64.zip"
-url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/350472785"
+checksum = "sha256:c97542f2800f446e788d9f74237856d995421ad1bb3cc8324286840c5f272d3a"
+url = "https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-windows-x86_64.zip"
+url_api = "https://api.github.com/repos/jgm/pandoc/releases/assets/377166311"
 
 [[tools."pipx:azure-cli"]]
 version = "2.84.0"
