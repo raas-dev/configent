@@ -32,7 +32,7 @@
       "model": "zai-coding-plan/glm-5"
     },
     "explore": {
-      "model": "zai-coding-plan/glm-4.7-flash"
+      "model": "zai-coding-plan/glm-5-turbo"
     }
   },
   "claude_code": {

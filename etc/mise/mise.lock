@@ -462,74 +462,68 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.79"
+version = "2.1.80"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.linux-arm64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-arm64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-x64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "blake3:6d3d82e8f0d3f41d30a7ad1982bbbe435d35d8a38e80656a4e5708127216b575"
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/darwin-arm64/claude"
+checksum = "blake3:a8b0ff61e9e255d0a5b00b8fc77b9e7b750bfe831966bf189ded2f05c90a5bcb"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-arm64/claude"
 
 [tools.claude-code."platforms.macos-x64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-x64/claude"
 
 [tools.claude-code."platforms.macos-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.79/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-x64/claude"
 
 [[tools.delta]]
-version = "0.18.2"
+version = "0.19.0"
 backend = "aqua:dandavison/delta"
 
-[tools.delta."platforms.linux-arm64"]
-checksum = "blake3:1a92c45e381d4d1423f21a47277ca477676fc581f66ad85e4ec66ec77647040e"
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-unknown-linux-gnu.tar.gz"
-
-[tools.delta."platforms.linux-arm64-musl"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-unknown-linux-gnu.tar.gz"
-
 [tools.delta."platforms.linux-x64"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b4096cf910255e64941e06f217b87bbfbdd9ab7c0a1a9e373d3220b98055170c"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.delta."platforms.linux-x64-baseline"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b4096cf910255e64941e06f217b87bbfbdd9ab7c0a1a9e373d3220b98055170c"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.delta."platforms.linux-x64-musl"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b4096cf910255e64941e06f217b87bbfbdd9ab7c0a1a9e373d3220b98055170c"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.delta."platforms.linux-x64-musl-baseline"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:b4096cf910255e64941e06f217b87bbfbdd9ab7c0a1a9e373d3220b98055170c"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.delta."platforms.macos-arm64"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-aarch64-apple-darwin.tar.gz"
-
-[tools.delta."platforms.macos-x64"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-apple-darwin.tar.gz"
-
-[tools.delta."platforms.macos-x64-baseline"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:b7c04ef8ebac03096e995b11fcdd38664ea0866bde0ff095e0f23f18d2b99ba5"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-aarch64-apple-darwin.tar.gz"
 
 [tools.delta."platforms.windows-x64"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:c704699d76def630edfd65bf356e710c28acd147ca30a4f425762c934e8e107d"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-pc-windows-msvc.zip"
 
 [tools.delta."platforms.windows-x64-baseline"]
-url = "https://github.com/dandavison/delta/releases/download/0.18.2/delta-0.18.2-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:c704699d76def630edfd65bf356e710c28acd147ca30a4f425762c934e8e107d"
+url = "https://github.com/dandavison/delta/releases/download/0.19.0/delta-0.19.0-x86_64-pc-windows-msvc.zip"
 
 [[tools.doggo]]
 version = "1.1.4"
@@ -2874,53 +2868,53 @@ version = "3.6a"
 backend = "asdf:tmux"
 
 [[tools.uv]]
-version = "0.10.11"
+version = "0.10.12"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:5d80a7f6343d2676dfde1e5126582070a2bbc62df6f60d5527a169be3788532a"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:55bd1c1c10ec8b95a8c184f5e18b566703c6ab105f0fc118aaa4d748aabf28e4"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:5d80a7f6343d2676dfde1e5126582070a2bbc62df6f60d5527a169be3788532a"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:55bd1c1c10ec8b95a8c184f5e18b566703c6ab105f0fc118aaa4d748aabf28e4"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-aarch64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:adccf40b5d1939a5e0093081ec2307ea24235adf7c2d96b122c561fa37711c46"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-baseline"]
-checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:adccf40b5d1939a5e0093081ec2307ea24235adf7c2d96b122c561fa37711c46"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:adccf40b5d1939a5e0093081ec2307ea24235adf7c2d96b122c561fa37711c46"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:d78246139dc6cf3ed6d03c84da762686bced7ad1de67977ee372a45b95a1f6d0"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:adccf40b5d1939a5e0093081ec2307ea24235adf7c2d96b122c561fa37711c46"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:437a7d498dd6564d5bf986074249ba1fc600e73da55ae04d7bd4c24d5f149b95"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:ae738b5661a900579ec621d3918c0ef17bdec0da2a8a6d8b161137cd15f25414"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-aarch64-apple-darwin.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:ff90020b554cf02ef8008535c9aab6ef27bb7be6b075359300dec79c361df897"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:17443e293f2ae407bb2d8d34b875ebfe0ae01cf1296de5647e69e7b2e2b428f0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-apple-darwin.tar.gz"
 
 [tools.uv."platforms.macos-x64-baseline"]
-checksum = "sha256:ff90020b554cf02ef8008535c9aab6ef27bb7be6b075359300dec79c361df897"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:17443e293f2ae407bb2d8d34b875ebfe0ae01cf1296de5647e69e7b2e2b428f0"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-apple-darwin.tar.gz"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:9ee74df98582f37fdd6069e1caac80d2616f9a489f5dbb2b1c152f30be69c58e"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:4c1d55501869b3330d4aabf45ad6024ce2367e0f3af83344395702d272c22e88"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-pc-windows-msvc.zip"
 
 [tools.uv."platforms.windows-x64-baseline"]
-checksum = "sha256:9ee74df98582f37fdd6069e1caac80d2616f9a489f5dbb2b1c152f30be69c58e"
-url = "https://github.com/astral-sh/uv/releases/download/0.10.11/uv-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:4c1d55501869b3330d4aabf45ad6024ce2367e0f3af83344395702d272c22e88"
+url = "https://github.com/astral-sh/uv/releases/download/0.10.12/uv-x86_64-pc-windows-msvc.zip"
 
 [[tools.viddy]]
 version = "1.3.0"
