@@ -2,37 +2,37 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "hephaestus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "prometheus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "atlas": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "sisyphus-junior": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "oracle": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "librarian": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "multimodal-looker": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "metis": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "momus": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     },
     "explore": {
-      "model": "minimax-coding-plan/MiniMax-M2.5"
+      "model": "minimax-coding-plan/MiniMax-M2.7"
     }
   },
   "claude_code": {
