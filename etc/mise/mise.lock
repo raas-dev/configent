@@ -2411,11 +2411,11 @@ version = "4.6.1"
 backend = "npm:@different-ai/opencode-browser"
 
 [[tools."npm:@mariozechner/pi-coding-agent"]]
-version = "0.61.0"
+version = "0.61.1"
 backend = "npm:@mariozechner/pi-coding-agent"
 
 [[tools."npm:agent-browser"]]
-version = "0.21.2"
+version = "0.21.4"
 backend = "npm:agent-browser"
 
 [[tools."npm:mcporter"]]
