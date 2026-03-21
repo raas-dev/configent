@@ -390,52 +390,52 @@ checksum = "sha256:b16a51bf02f99a37ca738b8292292b549675175a285921606efef711854d6
 url = "https://github.com/carapace-sh/carapace-bin/releases/download/v1.6.4/carapace-bin_1.6.4_windows_amd64.zip"
 
 [[tools.cargo-binstall]]
-version = "1.17.7"
+version = "1.17.8"
 backend = "aqua:cargo-bins/cargo-binstall"
 
 [tools.cargo-binstall."platforms.linux-arm64"]
-checksum = "sha256:b0658b0a7f0959bc1dbb4ab665931c31c7dd1109ff01cb8772af17dfdc52a9af"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-unknown-linux-musl.tgz"
+checksum = "sha256:81d6245bd1a7a89e914d29af81d82280540e94927e61492a0fc359820cd97abb"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-aarch64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.linux-arm64-musl"]
-checksum = "sha256:b0658b0a7f0959bc1dbb4ab665931c31c7dd1109ff01cb8772af17dfdc52a9af"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-unknown-linux-musl.tgz"
+checksum = "sha256:81d6245bd1a7a89e914d29af81d82280540e94927e61492a0fc359820cd97abb"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-aarch64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.linux-x64"]
-checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"
+checksum = "sha256:1da1ef72448db667cc4ae6d48e37451087602c8c07dc61782a4a5e538303e015"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.linux-x64-baseline"]
-checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"
+checksum = "sha256:1da1ef72448db667cc4ae6d48e37451087602c8c07dc61782a4a5e538303e015"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.linux-x64-musl"]
-checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"
+checksum = "sha256:1da1ef72448db667cc4ae6d48e37451087602c8c07dc61782a4a5e538303e015"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:29b5ecfb6e03c2511a617c77d312b06df0c54717644fbfda3d465ec8240532f0"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-unknown-linux-musl.tgz"
+checksum = "sha256:1da1ef72448db667cc4ae6d48e37451087602c8c07dc61782a4a5e538303e015"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-unknown-linux-musl.tgz"
 
 [tools.cargo-binstall."platforms.macos-arm64"]
-checksum = "sha256:1ad3c0c56fa3970634cce5009ed0ce61b943515f9115f8e480fd0e41d8d89085"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-aarch64-apple-darwin.zip"
+checksum = "sha256:af87346fdb186f0a2333bc0a30cfddd6faa98b31145ef1bb19c284aedea65972"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-aarch64-apple-darwin.zip"
 
 [tools.cargo-binstall."platforms.macos-x64"]
-checksum = "sha256:aa7174fb938e668dea4b4c3d22fe6cefed97642cc3a7a419ba96d63d63fd729b"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-apple-darwin.zip"
+checksum = "sha256:db353e01b582c97382178db9b4dfe22d81109782e480a38f3db953e62f569952"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-apple-darwin.zip"
 
 [tools.cargo-binstall."platforms.macos-x64-baseline"]
-checksum = "sha256:aa7174fb938e668dea4b4c3d22fe6cefed97642cc3a7a419ba96d63d63fd729b"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-apple-darwin.zip"
+checksum = "sha256:db353e01b582c97382178db9b4dfe22d81109782e480a38f3db953e62f569952"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-apple-darwin.zip"
 
 [tools.cargo-binstall."platforms.windows-x64"]
-checksum = "sha256:c5cb2444ee04480502a8ac73d96abd9f97af8300ec04ea1c1f2a9e959c02e4d6"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:fef07560d4e391812091bb30c6ed1bd5289f74403a0c947b47b8a8c7a597b51b"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-pc-windows-msvc.zip"
 
 [tools.cargo-binstall."platforms.windows-x64-baseline"]
-checksum = "sha256:c5cb2444ee04480502a8ac73d96abd9f97af8300ec04ea1c1f2a9e959c02e4d6"
-url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.7/cargo-binstall-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:fef07560d4e391812091bb30c6ed1bd5289f74403a0c947b47b8a8c7a597b51b"
+url = "https://github.com/cargo-bins/cargo-binstall/releases/download/v1.17.8/cargo-binstall-x86_64-pc-windows-msvc.zip"
 
 [[tools."cargo:cargo-cache"]]
 version = "0.8.3"
@@ -462,36 +462,36 @@ version = "1.12.0"
 backend = "cargo:tlrc"
 
 [[tools.claude-code]]
-version = "2.1.80"
+version = "2.1.81"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.linux-arm64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-arm64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-arm64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-arm64/claude"
 
 [tools.claude-code."platforms.linux-x64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-x64/claude"
 
 [tools.claude-code."platforms.linux-x64-musl-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/linux-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/linux-x64/claude"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "blake3:a8b0ff61e9e255d0a5b00b8fc77b9e7b750bfe831966bf189ded2f05c90a5bcb"
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-arm64/claude"
+checksum = "blake3:38b8dddd9c7c5d54954bbe47309a27e8b4c543b3e8918318476e4dc31f35ff39"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/darwin-arm64/claude"
 
 [tools.claude-code."platforms.macos-x64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/darwin-x64/claude"
 
 [tools.claude-code."platforms.macos-x64-baseline"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.80/darwin-x64/claude"
+url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.81/darwin-x64/claude"
 
 [[tools.delta]]
 version = "0.19.0"
@@ -996,63 +996,63 @@ url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86
 url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338101681"
 
 [[tools."github:can1357/oh-my-pi"]]
-version = "13.13.2"
+version = "13.14.0"
 backend = "github:can1357/oh-my-pi"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64"]
-checksum = "sha256:7af1b5f1b38368e48cc64f41a94c21d612ad8f56786274d3200dbbe23627ce59"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968157"
+checksum = "sha256:3084373b06490b6aa0311eef7c85ebf7e91ae63952f9170ac8a328d4b64b1f5a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242544"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-arm64-musl"]
-checksum = "sha256:7af1b5f1b38368e48cc64f41a94c21d612ad8f56786274d3200dbbe23627ce59"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968157"
+checksum = "sha256:3084373b06490b6aa0311eef7c85ebf7e91ae63952f9170ac8a328d4b64b1f5a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242544"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64"]
-checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
+checksum = "sha256:4ada1606cb58eaedeecfa45d7d695da6fde73cc96157199d17c01361d63fb37f"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242538"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-baseline"]
-checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
+checksum = "sha256:4ada1606cb58eaedeecfa45d7d695da6fde73cc96157199d17c01361d63fb37f"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242538"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl"]
-checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
+checksum = "sha256:4ada1606cb58eaedeecfa45d7d695da6fde73cc96157199d17c01361d63fb37f"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242538"
 
 [tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:50c70112643219bf39bfbe7b1b0401b6c263fee97e6bb7226578f1e333b91698"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968154"
+checksum = "sha256:4ada1606cb58eaedeecfa45d7d695da6fde73cc96157199d17c01361d63fb37f"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-linux-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242538"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-arm64"]
-checksum = "sha256:757a38581700acc341bee41306e72837520cee1377911bb940992f1fe5444f2c"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968161"
+checksum = "sha256:417c52bbe36a7d8a3ebce65a0892b47ef39f164e98b18a13222a7f8316a93e07"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-darwin-arm64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242542"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64"]
-checksum = "sha256:7563858274745c8c391b7ef462bb3e6ca552f1051a268056d5c52559654aba66"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968152"
+checksum = "sha256:9e32d7f97ff600b40e7bac31d99fd59a089a04193426bcafc0000b9a2ebd3357"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242545"
 
 [tools."github:can1357/oh-my-pi"."platforms.macos-x64-baseline"]
-checksum = "sha256:7563858274745c8c391b7ef462bb3e6ca552f1051a268056d5c52559654aba66"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968152"
+checksum = "sha256:9e32d7f97ff600b40e7bac31d99fd59a089a04193426bcafc0000b9a2ebd3357"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-darwin-x64"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242545"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64"]
-checksum = "sha256:b47366eb45d1bc569cc0985a3d4b41739c801a3410e97a64f49c79b892017880"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968159"
+checksum = "sha256:29630c79617012295f484517fefca01672a02360a862fbe07a25797a4866dd5a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242546"
 
 [tools."github:can1357/oh-my-pi"."platforms.windows-x64-baseline"]
-checksum = "sha256:b47366eb45d1bc569cc0985a3d4b41739c801a3410e97a64f49c79b892017880"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.13.2/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/376968159"
+checksum = "sha256:29630c79617012295f484517fefca01672a02360a862fbe07a25797a4866dd5a"
+url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.0/omp-windows-x64.exe"
+url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378242546"
 
 [[tools."github:dalance/procs"]]
 version = "0.14.11"
@@ -1114,53 +1114,63 @@ url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.1
 url_api = "https://api.github.com/repos/dalance/procs/releases/assets/363235471"
 
 [[tools."github:jacek-kurlit/pik"]]
-version = "0.29.0"
+version = "0.30.2"
 backend = "github:jacek-kurlit/pik"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-arm64"]
-checksum = "sha256:6b5e000c6d4e736f0e640b011eaf72509e1808628080c6f8c68046e57a996f1b"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519256"
+checksum = "sha256:8cf98bd5e8ade19bb23dcf8f8ea1c394d27b13efd1a66327be92ab7094b56b99"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378254209"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-arm64-musl"]
-checksum = "sha256:6b5e000c6d4e736f0e640b011eaf72509e1808628080c6f8c68046e57a996f1b"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519256"
+checksum = "sha256:8cf98bd5e8ade19bb23dcf8f8ea1c394d27b13efd1a66327be92ab7094b56b99"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378254209"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-x64"]
-checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"
+checksum = "sha256:c93720231d43bd146029cd3cb67ffb7f1fab6aa25085f52c0f866fbc3c64596d"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378253576"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-x64-baseline"]
-checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"
+checksum = "sha256:c93720231d43bd146029cd3cb67ffb7f1fab6aa25085f52c0f866fbc3c64596d"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378253576"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-x64-musl"]
-checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"
+checksum = "sha256:c93720231d43bd146029cd3cb67ffb7f1fab6aa25085f52c0f866fbc3c64596d"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378253576"
 
 [tools."github:jacek-kurlit/pik"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:42763b292ec9bdc5aaa7a986a1dd1771513fe792946385c149fcd040176e6f1e"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519047"
+checksum = "sha256:c93720231d43bd146029cd3cb67ffb7f1fab6aa25085f52c0f866fbc3c64596d"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378253576"
 
 [tools."github:jacek-kurlit/pik"."platforms.macos-arm64"]
-checksum = "sha256:63e5969d6ef10633ac561abbac517689a512a0ff64d389f77d7aeccadfffa384"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357519106"
+checksum = "sha256:ae089a4a6fcec2b238c0dd36b4aac147e5e4ab106f5d383a9ba8013e3af6e2fa"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378253519"
 
 [tools."github:jacek-kurlit/pik"."platforms.macos-x64"]
-checksum = "sha256:f04327b2988fbe6c1773f37c9f026f74339e1bb1459689085e1b7fe862fb5b18"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357518967"
+checksum = "sha256:046490a08f905738a57ec1a902f3e0966732d86356a9a0775de4942f26b7a47c"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378254424"
 
 [tools."github:jacek-kurlit/pik"."platforms.macos-x64-baseline"]
-checksum = "sha256:f04327b2988fbe6c1773f37c9f026f74339e1bb1459689085e1b7fe862fb5b18"
-url = "https://github.com/jacek-kurlit/pik/releases/download/0.29.0/pik-0.29.0-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/357518967"
+checksum = "sha256:046490a08f905738a57ec1a902f3e0966732d86356a9a0775de4942f26b7a47c"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378254424"
+
+[tools."github:jacek-kurlit/pik"."platforms.windows-x64"]
+checksum = "sha256:8d76156fb8951cba6cdbd9da80b371a7aab1e78b3a6520f7456dc55c7f8fe66f"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378255179"
+
+[tools."github:jacek-kurlit/pik"."platforms.windows-x64-baseline"]
+checksum = "sha256:8d76156fb8951cba6cdbd9da80b371a7aab1e78b3a6520f7456dc55c7f8fe66f"
+url = "https://github.com/jacek-kurlit/pik/releases/download/0.30.2/pik-0.30.2-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/jacek-kurlit/pik/releases/assets/378255179"
 
 [[tools."github:karol-broda/snitch"]]
 version = "0.2.2"
@@ -1212,63 +1222,63 @@ url = "https://github.com/karol-broda/snitch/releases/download/v0.2.2/snitch_0.2
 url_api = "https://api.github.com/repos/karol-broda/snitch/releases/assets/334195589"
 
 [[tools."github:max-sixty/worktrunk"]]
-version = "0.30.0"
+version = "0.30.1"
 backend = "github:max-sixty/worktrunk"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-arm64"]
-checksum = "sha256:9191b21427d486449579ed754c612271c4da02979014c88463e6db15f74c9884"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378927"
+checksum = "sha256:0020467fb9a252f49aca5b1df77221bf1e1875001578af40461bf0f699bd2d8c"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-aarch64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179252"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-arm64-musl"]
-checksum = "sha256:9191b21427d486449579ed754c612271c4da02979014c88463e6db15f74c9884"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378927"
+checksum = "sha256:0020467fb9a252f49aca5b1df77221bf1e1875001578af40461bf0f699bd2d8c"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-aarch64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179252"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64"]
-checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
+checksum = "sha256:5a5c76e642432bcc3054ed44a1bf33c8e9f255df51c299d452f023e8c61720d9"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179275"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-baseline"]
-checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
+checksum = "sha256:5a5c76e642432bcc3054ed44a1bf33c8e9f255df51c299d452f023e8c61720d9"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179275"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-musl"]
-checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
+checksum = "sha256:5a5c76e642432bcc3054ed44a1bf33c8e9f255df51c299d452f023e8c61720d9"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179275"
 
 [tools."github:max-sixty/worktrunk"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:d6c2e8ba4419bb37a55f4323eb27ab44036d15dde4ec9c3b96085cde1eb38c51"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378938"
+checksum = "sha256:5a5c76e642432bcc3054ed44a1bf33c8e9f255df51c299d452f023e8c61720d9"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-unknown-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179275"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-arm64"]
-checksum = "sha256:de8a6c4aee79a2f15c1c435dd725466d9b858a77d321fc02b04a3bea45ae2edc"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378925"
+checksum = "sha256:6b96eac8025a63198e646037772021585a64b42cf1d02157fae5f6b6de1a1b07"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179247"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-x64"]
-checksum = "sha256:7319a14b4102f9cd1580b0824922454f360145e7d343761d38690c4d2d1b9860"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378933"
+checksum = "sha256:e54dba56bb541c6097191d16621ff9796d6526690ed9d3ea7c29c06aaa106603"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179261"
 
 [tools."github:max-sixty/worktrunk"."platforms.macos-x64-baseline"]
-checksum = "sha256:7319a14b4102f9cd1580b0824922454f360145e7d343761d38690c4d2d1b9860"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378933"
+checksum = "sha256:e54dba56bb541c6097191d16621ff9796d6526690ed9d3ea7c29c06aaa106603"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179261"
 
 [tools."github:max-sixty/worktrunk"."platforms.windows-x64"]
-checksum = "sha256:58166b2b0c104ade5e026c9d447a786f125f763e8d49979eee537193f7556f04"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378936"
+checksum = "sha256:8667f2b8ccf7ba0457105c09af0acb6962b176e53f96096d88dc428db5490953"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179266"
 
 [tools."github:max-sixty/worktrunk"."platforms.windows-x64-baseline"]
-checksum = "sha256:58166b2b0c104ade5e026c9d447a786f125f763e8d49979eee537193f7556f04"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.0/worktrunk-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/377378936"
+checksum = "sha256:8667f2b8ccf7ba0457105c09af0acb6962b176e53f96096d88dc428db5490953"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.30.1/worktrunk-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/378179266"
 
 [[tools."github:nnnkkk7/lazyactions"]]
 version = "0.0.13"
@@ -1831,52 +1841,52 @@ url = "https://github.com/ycd/dstp/releases/download/v0.4.23/dstp_0.4.23_Windows
 url_api = "https://api.github.com/repos/ycd/dstp/releases/assets/219541203"
 
 [[tools.gitleaks]]
-version = "8.30.0"
+version = "8.30.1"
 backend = "aqua:gitleaks/gitleaks"
 
 [tools.gitleaks."platforms.linux-arm64"]
-checksum = "sha256:b4cbbb6ddf7d1b2a603088cd03a4e3f7ce48ee7fd449b51f7de6ee2906f5fa2f"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_arm64.tar.gz"
+checksum = "sha256:e4a487ee7ccd7d3a7f7ec08657610aa3606637dab924210b3aee62570fb4b080"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_arm64.tar.gz"
 
 [tools.gitleaks."platforms.linux-arm64-musl"]
-checksum = "sha256:b4cbbb6ddf7d1b2a603088cd03a4e3f7ce48ee7fd449b51f7de6ee2906f5fa2f"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_arm64.tar.gz"
+checksum = "sha256:e4a487ee7ccd7d3a7f7ec08657610aa3606637dab924210b3aee62570fb4b080"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_arm64.tar.gz"
 
 [tools.gitleaks."platforms.linux-x64"]
-checksum = "sha256:79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz"
+checksum = "sha256:551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz"
 
 [tools.gitleaks."platforms.linux-x64-baseline"]
-checksum = "sha256:79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz"
+checksum = "sha256:551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz"
 
 [tools.gitleaks."platforms.linux-x64-musl"]
-checksum = "sha256:79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz"
+checksum = "sha256:551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz"
 
 [tools.gitleaks."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz"
+checksum = "sha256:551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz"
 
 [tools.gitleaks."platforms.macos-arm64"]
-checksum = "sha256:b251ab2bcd4cd8ba9e56ff37698c033ebf38582b477d21ebd86586d927cf87e7"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_darwin_arm64.tar.gz"
+checksum = "sha256:b40ab0ae55c505963e365f271a8d3846efbc170aa17f2607f13df610a9aeb6a5"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_darwin_arm64.tar.gz"
 
 [tools.gitleaks."platforms.macos-x64"]
-checksum = "sha256:ca221d012d247080c2f6f61f4b7a83bffa2453806b0c195c795bbe9a8c775ed5"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_darwin_x64.tar.gz"
+checksum = "sha256:dfe101a4db2255fc85120ac7f3d25e4342c3c20cf749f2c20a18081af1952709"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_darwin_x64.tar.gz"
 
 [tools.gitleaks."platforms.macos-x64-baseline"]
-checksum = "sha256:ca221d012d247080c2f6f61f4b7a83bffa2453806b0c195c795bbe9a8c775ed5"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_darwin_x64.tar.gz"
+checksum = "sha256:dfe101a4db2255fc85120ac7f3d25e4342c3c20cf749f2c20a18081af1952709"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_darwin_x64.tar.gz"
 
 [tools.gitleaks."platforms.windows-x64"]
-checksum = "sha256:54fe94f644b832dd08e8c3a5915efb3bfa862386d59fb27ca0792cb687a83573"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_windows_x64.zip"
+checksum = "sha256:d29144deff3a68aa93ced33dddf84b7fdc26070add4aa0f4513094c8332afc4e"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_windows_x64.zip"
 
 [tools.gitleaks."platforms.windows-x64-baseline"]
-checksum = "sha256:54fe94f644b832dd08e8c3a5915efb3bfa862386d59fb27ca0792cb687a83573"
-url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_windows_x64.zip"
+checksum = "sha256:d29144deff3a68aa93ced33dddf84b7fdc26070add4aa0f4513094c8332afc4e"
+url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_windows_x64.zip"
 
 [[tools.gitui]]
 version = "0.28.0"
