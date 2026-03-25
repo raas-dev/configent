@@ -49,7 +49,6 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 # ai coding harnesses
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
-#'cargo:fossil-mcp' = 'latest'
 'cargo:ralph-cli' = 'latest'
 'npm:agent-browser' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
