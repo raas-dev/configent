@@ -42,6 +42,7 @@ zoxide = 'latest'
 claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 #gemini-cli = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_gemini-cli" }
 opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+'npm:@openchamber/web' = 'latest'
 'npm:@mariozechner/pi-coding-agent' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
 
