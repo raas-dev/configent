@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.211.3](https://github.com/raas-dev/configent/compare/1.211.2...1.211.3) (2026-03-25)
+
+
+### Fixes
+
+* **agent-skill-creator:** remove agent skill creator ([c6760b0](https://github.com/raas-dev/configent/commit/c6760b0df4bb1281f0358ce29616c8cf60cc4e7f))
+* **aliases:** include skills when upgrading ([3137001](https://github.com/raas-dev/configent/commit/31370015e51ffacd8d4bd17a2736aa37f32f49cb))
+* **aliases:** remove daemon flag from occ alias ([7fdb2d3](https://github.com/raas-dev/configent/commit/7fdb2d3f12e6071494f7783ab2b6a092ccb37ff6))
+* **aliases:** skip skills in topgrade ([2019620](https://github.com/raas-dev/configent/commit/2019620c031654bc492bd20e0fa2a0a2d8556b80))
+* **mise:** align openchamber tools ([370f519](https://github.com/raas-dev/configent/commit/370f519928f4e99d9928c85b488ea13acf6a7aa1))
+* **opencode:** allow git commands in permission config ([f69b4a8](https://github.com/raas-dev/configent/commit/f69b4a862962e82a6af68d6977560776c5728405))
+
 ## [1.211.2](https://github.com/raas-dev/configent/compare/1.211.1...1.211.2) (2026-03-15)
 
 
