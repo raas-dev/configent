@@ -131,7 +131,6 @@
   "claudeCode.allowDangerouslySkipPermissions": true,
   "claudeCode.initialPermissionMode": "bypassPermissions",
   "claudeCode.preferredLocation": "panel",
-  "claudeCode.useTerminal": true,
   "code-runner.enableAppInsights": false,
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.runInTerminal": true,
@@ -657,5 +656,6 @@
   "rust-analyzer.checkOnSave": false,
   "mise.enableCodeLens": false,
   "editor.scrollbar.horizontalScrollbarSize": 10,
-  "editor.minimap.autohide": true
+  "editor.minimap.autohide": true,
+  "claudeCode.hideOnboarding": true
 }
