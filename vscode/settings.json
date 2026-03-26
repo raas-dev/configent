@@ -161,7 +161,6 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.shouldAllowCustomModes": true,
-  "cursor.composer.textSizeScale": 1.2,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
     "untitled"
