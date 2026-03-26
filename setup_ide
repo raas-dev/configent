@@ -22,16 +22,6 @@ if command -v cursor >/dev/null; then
     APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
   fi
 
-  # Create Cursor mcp.json
-  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
-    if [ -r "$HOME/.cursor/mcp.json" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
-
   # commands dir
   if [ ! -r "$backup_path/.cursor/commands" ]; then
     if [ -r "$HOME/.cursor/commands" ]; then
@@ -53,6 +43,26 @@ if command -v cursor >/dev/null; then
   mkdir -p "$HOME/.cursor/hooks"
   rm -rf "$HOME/.cursor/hooks"
   ln -sfnv "$config_path/cursor/hooks" "$HOME/.cursor/hooks"
+
+  # hooks.json
+  if [ ! -r "$backup_path/.cursor/hooks.json" ]; then
+    if [ -r "$HOME/.cursor/hooks.json" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -P "$HOME/.cursor/hooks.json" "$backup_path/.cursor/hooks.json"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor"
+  ln -sfnv "$config_path/cursor/hooks.json" "$HOME/.cursor/hooks.json"
+
+  # mcp.json
+  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
+    if [ -r "$HOME/.cursor/mcp.json" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor"
+  ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
 
   #APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi

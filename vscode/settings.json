@@ -656,6 +656,8 @@
   "rust-analyzer.checkOnSave": false,
   "mise.enableCodeLens": false,
   "editor.scrollbar.horizontalScrollbarSize": 10,
-  "editor.minimap.autohide": true,
-  "claudeCode.hideOnboarding": true
+  "editor.minimap.autohide": "mouseover",
+  "claudeCode.hideOnboarding": true,
+  "go.showWelcome": false,
+  "gitlens.advanced.skipOnboarding": true
 }

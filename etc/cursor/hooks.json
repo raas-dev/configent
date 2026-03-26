@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": "./hooks/rtk-rewrite.sh",
+        "matcher": "Shell"
+      }
+    ]
+  }
+}
