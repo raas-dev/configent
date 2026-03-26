@@ -373,6 +373,9 @@ export ANONYMIZED_TELEMETRY=false
 # vercel
 export VERCEL_TELEMETRY_DISABLED=1
 
+# rtk
+export RTK_TELEMETRY_DISABLED=1
+
 ### configent/bin ##############################################################
 
 path_prepend "$HOME/.local/configent/bin"
