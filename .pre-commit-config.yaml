@@ -18,7 +18,7 @@ repos:
       - id: check-case-conflict
       - id: mixed-line-ending
       - id: end-of-file-fixer
-        files: ^(?!etc/nvim/lazyvim\.json$|etc/claude-code/hooks/\.rtk-hook\.sha256$).*
+        files: ^(?!etc/nvim/lazyvim\.json$|etc/claude-code/hooks/.*\.sha256$).*
       - id: trailing-whitespace
       - id: check-json
         files: ^(?!.*skills/).*$

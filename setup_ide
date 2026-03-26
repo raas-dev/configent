@@ -43,6 +43,17 @@ if command -v cursor >/dev/null; then
   rm -rf "$HOME/.cursor/commands"
   ln -sfnv "$config_path/cursor/commands" "$HOME/.cursor/commands"
 
+  # hooks dir
+  if [ ! -r "$backup_path/.cursor/hooks" ]; then
+    if [ -r "$HOME/.cursor/hooks" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -RP "$HOME/.cursor/hooks" "$backup_path/.cursor/hooks"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor/hooks"
+  rm -rf "$HOME/.cursor/hooks"
+  ln -sfnv "$config_path/cursor/hooks" "$HOME/.cursor/hooks"
+
   #APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi
 

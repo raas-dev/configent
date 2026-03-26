@@ -682,5 +682,10 @@
     "key": "shift+cmd+r",
     "command": "-workbench.action.reloadWindow",
     "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+e",
+    "command": "-cursor.toggleAgentWindowIDEUnification",
+    "when": "cursor.agentIdeUnification.featureGate && !isGlass && workbenchState != 'empty'"
   }
 ]
