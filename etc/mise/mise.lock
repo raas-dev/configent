@@ -1074,65 +1074,6 @@ checksum = "sha256:75d3f28cc5b051d5fcdd69848dbb3cbf0ba0659c9aa49122557933157a9da
 url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86_64-pc-windows-gnu.zip"
 url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338101681"
 
-[[tools."github:can1357/oh-my-pi"]]
-version = "13.14.2"
-backend = "github:can1357/oh-my-pi"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-arm64"]
-checksum = "sha256:82e7fef69afe6a67fe3cb2a862cc1a33f5d82668a47aab4c2e1a7ea78b36e9f2"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641711"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-arm64-musl"]
-checksum = "sha256:82e7fef69afe6a67fe3cb2a862cc1a33f5d82668a47aab4c2e1a7ea78b36e9f2"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641711"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-x64"]
-checksum = "sha256:90995e38d7fa6f244e6a00ca5bca6e686a8c499319ca31d9581b9de4ba697c67"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641710"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-x64-baseline"]
-checksum = "sha256:90995e38d7fa6f244e6a00ca5bca6e686a8c499319ca31d9581b9de4ba697c67"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641710"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl"]
-checksum = "sha256:90995e38d7fa6f244e6a00ca5bca6e686a8c499319ca31d9581b9de4ba697c67"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641710"
-
-[tools."github:can1357/oh-my-pi"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:90995e38d7fa6f244e6a00ca5bca6e686a8c499319ca31d9581b9de4ba697c67"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-linux-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641710"
-
-[tools."github:can1357/oh-my-pi"."platforms.macos-arm64"]
-checksum = "sha256:256ff89787a2bbdc047998c9035a1386bfd95e8817315fbf8b1c2cd28a278c39"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-darwin-arm64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641712"
-
-[tools."github:can1357/oh-my-pi"."platforms.macos-x64"]
-checksum = "sha256:7493005d77fdf14605b19b31589a307b53e68eae27409db1c22c62f538371793"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641714"
-
-[tools."github:can1357/oh-my-pi"."platforms.macos-x64-baseline"]
-checksum = "sha256:7493005d77fdf14605b19b31589a307b53e68eae27409db1c22c62f538371793"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-darwin-x64"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641714"
-
-[tools."github:can1357/oh-my-pi"."platforms.windows-x64"]
-checksum = "sha256:8da3577dee6c232fffcd436f2d7f7b9bba3bc0d3228c9bd5f4ed7a905385d5a5"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641713"
-
-[tools."github:can1357/oh-my-pi"."platforms.windows-x64-baseline"]
-checksum = "sha256:8da3577dee6c232fffcd436f2d7f7b9bba3bc0d3228c9bd5f4ed7a905385d5a5"
-url = "https://github.com/can1357/oh-my-pi/releases/download/v13.14.2/omp-windows-x64.exe"
-url_api = "https://api.github.com/repos/can1357/oh-my-pi/releases/assets/378641713"
-
 [[tools."github:dalance/procs"]]
 version = "0.14.11"
 backend = "github:dalance/procs"

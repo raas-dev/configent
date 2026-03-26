@@ -2,7 +2,7 @@
   "collapseChangelog": true,
   "defaultModel": "MiniMax-M2.7",
   "defaultProvider": "minimax",
-  "lastChangelogVersion": "0.61.0",
+  "lastChangelogVersion": "0.62.0",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-interactive-shell",
@@ -15,5 +15,6 @@
   "quietStartup": true,
   "theme": "ayu-dark",
   "showHardwareCursor": true,
-  "transport": "auto"
+  "transport": "auto",
+  "powerline": "default"
 }
