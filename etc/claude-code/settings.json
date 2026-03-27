@@ -32,8 +32,5 @@
       }
     }
   },
-  "defaultMode": "acceptEdits",
-  "enabledPlugins": {
-    "context-mode@context-mode": true
-  }
+  "defaultMode": "acceptEdits"
 }
