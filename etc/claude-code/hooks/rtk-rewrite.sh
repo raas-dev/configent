@@ -48,26 +48,26 @@ REWRITTEN=$(rtk rewrite "$CMD" 2>/dev/null)
 EXIT_CODE=$?
 
 case $EXIT_CODE in
-0)
-  # Rewrite found, no permission rules matched — safe to auto-allow.
-  # If the output is identical, the command was already using RTK.
-  [ "$CMD" = "$REWRITTEN" ] && exit 0
-  ;;
-1)
-  # No RTK equivalent — pass through unchanged.
-  exit 0
-  ;;
-2)
-  # Deny rule matched — let Claude Code's native deny rule handle it.
-  exit 0
-  ;;
-3)
-  # Ask rule matched — rewrite the command but do NOT auto-allow so that
-  # Claude Code prompts the user for confirmation.
-  ;;
-*)
-  exit 0
-  ;;
+  0)
+    # Rewrite found, no permission rules matched — safe to auto-allow.
+    # If the output is identical, the command was already using RTK.
+    [ "$CMD" = "$REWRITTEN" ] && exit 0
+    ;;
+  1)
+    # No RTK equivalent — pass through unchanged.
+    exit 0
+    ;;
+  2)
+    # Deny rule matched — let Claude Code's native deny rule handle it.
+    exit 0
+    ;;
+  3)
+    # Ask rule matched — rewrite the command but do NOT auto-allow so that
+    # Claude Code prompts the user for confirmation.
+    ;;
+  *)
+    exit 0
+    ;;
 esac
 
 ORIGINAL_INPUT=$(echo "$INPUT" | jq -c '.tool_input')
