@@ -10,7 +10,7 @@ alias code="\$DEFAULT_IDE --reuse-window"
 
 ### Upgrade for all package managers ###########################################
 
-skipped_managers="containers helm powershell uv"
+skipped_managers="containers helm mise powershell uv"
 alias up="topgrade --disable restarts snap system $skipped_managers"
 alias dup="topgrade --disable $skipped_managers"
 
