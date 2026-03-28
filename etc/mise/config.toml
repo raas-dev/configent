@@ -47,15 +47,14 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 
 # ai coding harnesses
 'github:asyrjasalo/dynamic-mcp' = 'latest'
-#'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
-'cargo:ralph-cli' = 'latest'
+'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-browser' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
+'pipx:desloppify' = '0.9.14'
 'pipx:skill-seekers' = 'latest'
-'pipx:desloppify' = '0.9.9'
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
