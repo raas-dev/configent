@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.212.1](https://github.com/raas-dev/configent/compare/1.212.0...1.212.1) (2026-03-28)
+
+
+### Fixes
+
+* **config:** use aqua rtk-ai repo ([f4caaa1](https://github.com/raas-dev/configent/commit/f4caaa1f002becad57672107be44979fdf248582))
+
 ## [1.212.0](https://github.com/raas-dev/configent/compare/1.211.3...1.212.0) (2026-03-28)
 
 
