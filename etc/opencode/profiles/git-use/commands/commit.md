@@ -36,11 +36,8 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - docs: Changing known named documentation files (NOT agent skills or prompts)
 - chore: Changing anything else than known code or documentation files
 - test: Adds tests or changes tests without changing the system-under-test
-- perf: A code change that is commented to improve performance or speed
-- refactor: A code change that neither fixes nor changes any functionality
+- build: Only changing workspace config or project task files or git hooks
 - ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
-- build: Only changing standard project metadata files or pre-commit hooks
-- style: Only formatting of text/code like reindenting, converting tabs
 </type>
 
 <scope>
