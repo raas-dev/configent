@@ -33,11 +33,11 @@ VERY IMPORTANT: You will generate one conventional commit message.
 After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - fix: Improves or fixes behaviour of existing code without adding new files
 - feat: Introduces a new functionality (such as new files) to the codebase
-- docs: Changing known named documentation files (NOT agent skills or prompts)
-- chore: Changing anything else than known named code or documentation files
 - test: Adds tests or changes tests without changing the system-under-test
-- build: Only changing workspace config or project task files or git hooks
-- ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
+- docs: Changes only known documentation files (NOT AI agent resource files)
+- build: Only changing workspace configs, build files, tasks or git hooks
+- ci: Only changing known CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
+- chore: Changes anything else than known named code or documentation files
 </type>
 
 <scope>
