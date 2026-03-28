@@ -34,7 +34,7 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - fix: Improves or fixes behaviour of existing code without adding new files
 - feat: Introduces a new functionality (such as new files) to the codebase
 - docs: Changing known named documentation files (NOT agent skills or prompts)
-- chore: Changing anything else than known code or documentation files
+- chore: Changing anything else than known named code or documentation files
 - test: Adds tests or changes tests without changing the system-under-test
 - build: Only changing workspace config or project task files or git hooks
 - ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
