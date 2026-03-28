@@ -36,17 +36,6 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/tui.json" "$HOME/.config/opencode/tui.json"
 
-# AGENTS.md
-#if [ ! -r "$backup_path/.config/agents/AGENTS.md" ]; then
-#  if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
-#    mkdir -p "$backup_path/.config/opencode"
-#    cp -P "$HOME/.config/opencode/AGENTS.md" \
-#      "$backup_path/.config/opencode/AGENTS.md"
-#  fi
-#fi
-#mkdir -p "$HOME/.config/opencode"
-#ln -sfnv "$config_path/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
-
 # agents dir
 if [ ! -r "$backup_path/.config/agents" ]; then
   if [ -r "$HOME/.config/opencode/agents" ]; then
@@ -107,14 +96,14 @@ mkdir -p "$HOME/.config/opencode/profiles"
 rm -rf "$HOME/.config/opencode/profiles"
 ln -sfnv "$config_path/opencode/profiles" "$HOME/.config/opencode/profiles"
 
-### universal agent skills dir #################################################
+### ~/.agents dir ##############################################################
 
-if [ ! -r "$backup_path/.agents/skills" ]; then
-  if [ -r "$HOME/.agents/skills" ]; then
+if [ ! -r "$backup_path/.agents" ]; then
+  if [ -r "$HOME/.agents" ]; then
     mkdir -p "$backup_path/.agents"
-    cp -RP "$HOME/.agents/skills" "$backup_path/.agents/skills"
+    cp -RP "$HOME/.agents" "$backup_path/.agents"
   fi
 fi
-mkdir -p "$HOME/.agents/skills"
-rm -rf "$HOME/.agents/skills"
-ln -sfnv "$config_path/agents/skills" "$HOME/.agents/skills"
+mkdir -p "$HOME/.agents"
+rm -rf "$HOME/.agents"
+ln -sfnv "$config_path/agents" "$HOME/.agents"

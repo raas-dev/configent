@@ -25,14 +25,24 @@ mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/settings.json" "$HOME/.claude/settings.json"
 
 # CLAUDE.md
-#if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
-#  if [ -r "$HOME/.claude/CLAUDE.md" ]; then
-#    mkdir -p "$backup_path/.claude"
-#    cp -P "$HOME/.claude/CLAUDE.md" "$backup_path/.claude/CLAUDE.md"
-#  fi
-#fi
-#mkdir -p "$HOME/.claude"
-#ln -sfnv "$config_path/claude-code/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+if [ ! -r "$backup_path/.claude/CLAUDE.md" ]; then
+  if [ -r "$HOME/.claude/CLAUDE.md" ]; then
+    mkdir -p "$backup_path/.claude"
+    cp -P "$HOME/.claude/CLAUDE.md" "$backup_path/.claude/CLAUDE.md"
+  fi
+fi
+mkdir -p "$HOME/.claude"
+ln -sfnv "$config_path/claude-code/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+# RTK.md
+if [ ! -r "$backup_path/.claude/RTK.md" ]; then
+  if [ -r "$HOME/.claude/RTK.md" ]; then
+    mkdir -p "$backup_path/.claude"
+    cp -P "$HOME/.claude/RTK.md" "$backup_path/.claude/RTK.md"
+  fi
+fi
+mkdir -p "$HOME/.claude"
+ln -sfnv "$config_path/claude-code/RTK.md" "$HOME/.claude/RTK.md"
 
 # ccstatusline/settings.json
 if [ ! -r "$backup_path/.config/ccstatusline/settings.json" ]; then
@@ -88,14 +98,14 @@ mkdir -p "$HOME/.claude/hooks"
 rm -rf "$HOME/.claude/hooks"
 ln -sfnv "$config_path/claude-code/hooks" "$HOME/.claude/hooks"
 
-### universal agent skills dir #################################################
+### ~/.agents dir ##############################################################
 
-if [ ! -r "$backup_path/.agents/skills" ]; then
-  if [ -r "$HOME/.agents/skills" ]; then
+if [ ! -r "$backup_path/.agents" ]; then
+  if [ -r "$HOME/.agents" ]; then
     mkdir -p "$backup_path/.agents"
-    cp -RP "$HOME/.agents/skills" "$backup_path/.agents/skills"
+    cp -RP "$HOME/.agents" "$backup_path/.agents"
   fi
 fi
-mkdir -p "$HOME/.agents/skills"
-rm -rf "$HOME/.agents/skills"
-ln -sfnv "$config_path/agents/skills" "$HOME/.agents/skills"
+mkdir -p "$HOME/.agents"
+rm -rf "$HOME/.agents"
+ln -sfnv "$config_path/agents" "$HOME/.agents"
