@@ -18,8 +18,6 @@ watchexec = 'latest'
 xh = 'latest'
 yq = 'latest'
 zoxide = 'latest'
-'aqua:neovim/neovim' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_neovim" }
-'aqua:pranshuparmar/witr' = 'latest'
 'github:bootandy/dust' = 'latest' # no linux-aarch64 in aqua:bootandy/dust
 'github:printfn/fend' = 'latest'
 'github:Skardyy/mcat' = 'latest'
@@ -31,6 +29,8 @@ zoxide = 'latest'
 'github:abhimanyu003/sttr' = 'latest'
 'github:topgrade-rs/topgrade' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_topgrade" }
 'github:max-sixty/worktrunk' = 'latest'
+'aqua:neovim/neovim' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_neovim" }
+'aqua:pranshuparmar/witr' = 'latest'
 'cargo:kondo' = 'latest' # no linux-aarch64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
 'cargo:tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # no linux-aarch64 release
