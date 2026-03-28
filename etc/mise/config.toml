@@ -130,7 +130,7 @@ bun = 'latest'
 python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:pdm' = 'latest'
-'pipx:poetry' = 'latest'
+#'pipx:poetry' = 'latest'
 
 # other languages
 #dotnet = '10.0.103'
