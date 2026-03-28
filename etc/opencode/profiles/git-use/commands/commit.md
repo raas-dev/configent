@@ -39,7 +39,7 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - refactor: A code change that neither fixes nor changes any functionality
 - docs: Only changing standard documentation files (NOT agent skills or prompts)
 - ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
-- build: Only changing project metadata files or pre-commit hooks
+- build: Only changing standard project metadata files or pre-commit hooks
 - style: Only formatting of text/code like reindenting, converting tabs
 </type>
 
