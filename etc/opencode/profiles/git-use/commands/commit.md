@@ -37,7 +37,7 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - docs: Changes only known documentation files (NOT AI agent resource files)
 - build: Only changing workspace configs, build files, tasks or git hooks
 - ci: Only changing known CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
-- chore: Changes anything else than known named code or documentation files
+- chore: Changes anything else than known code, build or documentation files
 </type>
 
 <scope>
