@@ -11,22 +11,22 @@
   ],
   "agents": {
     "orchestrator": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     },
     "explorer": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     },
     "oracle": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     },
     "designer": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     },
     "fixer": {
-      "model": "zai-coding-plan/glm-5"
+      "model": "zai-coding-plan/glm-5.1"
     }
   }
 }
