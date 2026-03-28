@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.212.0](https://github.com/raas-dev/configent/compare/1.211.3...1.212.0) (2026-03-28)
+
+
+### Features
+
+* **rtk:** add rtk rewrite hooks ([3fd6910](https://github.com/raas-dev/configent/commit/3fd69105fa579610ba12c800f4a3daa79ee0e6f9))
+* **stop-slop:** add stop-slop skill assets ([52d54b7](https://github.com/raas-dev/configent/commit/52d54b7be1dc400767ee3e32f63315a7b7a1e4fc))
+
+
+### Fixes
+
+* **cursor:** sync cursor hook setup with rtk ([76b7425](https://github.com/raas-dev/configent/commit/76b7425ea4c9dceb518f17c9d735bf7b93f10575))
+* **desloppify:** add overlays for agent runners ([d704d28](https://github.com/raas-dev/configent/commit/d704d28a31ccd3bc16dee3265ebf7fa52beb34a2))
+* **mise:** disable mise lockfile ([5b30e2a](https://github.com/raas-dev/configent/commit/5b30e2abcfb8b3b82498b6af83a069b2e72e1764))
+* **postinstall_omp:** remove postinstall omp script ([817aedc](https://github.com/raas-dev/configent/commit/817aedcb8d6684d6a092017f6018432afdc266e5))
+* **profile:** disable rtk telemetry ([85251a9](https://github.com/raas-dev/configent/commit/85251a9a5881108723ad475da27e0ed4e2cb758a))
+* **rtk:** hook shell commands via rtk ([ca46e45](https://github.com/raas-dev/configent/commit/ca46e455e88808ce748003eaf06141170771b5a9))
+* **settings:** drop context mode plugin flag ([f4f2b9c](https://github.com/raas-dev/configent/commit/f4f2b9c5a54761feb4b78aa2f9a28c316b7465a4))
+* **settings:** remove composer text scale ([1c38ebf](https://github.com/raas-dev/configent/commit/1c38ebf7e5793b0f305d1dd3c8106f54f99e38e7))
+* **topgrade:** disable mise tools command ([90a1cc5](https://github.com/raas-dev/configent/commit/90a1cc575e2846601e76042dbbcea85f6802584a))
+
 ## [1.211.3](https://github.com/raas-dev/configent/compare/1.211.2...1.211.3) (2026-03-25)
 
 
