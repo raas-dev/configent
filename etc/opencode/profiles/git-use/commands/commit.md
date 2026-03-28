@@ -37,7 +37,7 @@ After analyzing the whole diff, choose THE BEST FITTING type (only one):
 - test: Adds tests or changes tests without changing the system-under-test
 - perf: A code change that is commented to improve performance or speed
 - refactor: A code change that neither fixes nor changes any functionality
-- docs: Only changing plain text project documentation files or code comments
+- docs: Only changing standard documentation files (NOT agent skills or prompts)
 - ci: Only changing CI/CD (GitHub, Azure DevOps, GitLab) pipeline files
 - build: Only changing project metadata files or pre-commit hooks
 - style: Only formatting of text/code like reindenting, converting tabs
