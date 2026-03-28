@@ -5,6 +5,7 @@
   "lastChangelogVersion": "0.63.1",
   "packages": [
     "npm:pi-ask-user",
+    "npm:pi-context",
     "npm:pi-interactive-shell",
     "npm:pi-mcp-adapter",
     "npm:pi-powerline-footer",
