@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.212.2](https://github.com/raas-dev/configent/compare/1.212.1...1.212.2) (2026-03-28)
+
+
+### Fixes
+
+* **etc:** fix aoe mise postinstall hook ([7c2dd46](https://github.com/raas-dev/configent/commit/7c2dd463c5773d95ed2315378872e0e466f5a8d8))
+
 ## [1.212.1](https://github.com/raas-dev/configent/compare/1.212.0...1.212.1) (2026-03-28)
 
 
