@@ -49,7 +49,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe' }
 'cargo:ralph-cli' = 'latest'
-'rtk' = 'latest'
+'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-browser' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
