@@ -245,7 +245,7 @@
   "files.associations": {
     ".aliases": "shellscript",
     "*.ejs": "json",
-    "*.plist": "plist",
+    "*.plist": "xml",
     "*.prompt": "markdown",
     "*.sh": "shellscript",
     "*.strings": "plist",
