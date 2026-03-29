@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.213.0](https://github.com/raas-dev/configent/compare/1.212.2...1.213.0) (2026-03-29)
+
+
+### Features
+
+* **claude-code:** enable all project MCP servers ([80c7b0d](https://github.com/raas-dev/configent/commit/80c7b0ded9bffd3163f9dd70028480d26548c6fa))
+
+
+### Fixes
+
+* **lima:** update Lima version ([9fe98cf](https://github.com/raas-dev/configent/commit/9fe98cf2d2797491e0bc517090116d56dc6fe1a1))
+
 ## [1.212.2](https://github.com/raas-dev/configent/compare/1.212.1...1.212.2) (2026-03-28)
 
 
