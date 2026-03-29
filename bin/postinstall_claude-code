@@ -109,3 +109,11 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### MCP servers ################################################################
+
+if command -v claude >/dev/null; then
+  if ! claude mcp get dynamic-mcp >/dev/null 2>&1; then
+    claude mcp add --scope user dynamic-mcp -- dmcp
+  fi
+fi
