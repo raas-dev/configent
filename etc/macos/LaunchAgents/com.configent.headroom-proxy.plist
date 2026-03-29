@@ -3,10 +3,10 @@
 <!--
   User LaunchAgent for headroom proxy (http://127.0.0.1:8787).
   Starts automatically on login. Restarts on failure (throttled to 10s).
-  Logs to ~/.local/state/headroom/proxy.log.
+  Logs to ~/.headroom/logs/proxy.log
 
   Install:
-    mkdir -p ~/.local/state/headroom
+    mkdir -p ~/.headroom/logs
     sed "s|__USERNAME__|$(id -un)|g" ~/configent/etc/macos/LaunchAgents/com.configent.headroom-proxy.plist \
       > ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
     launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
@@ -48,8 +48,8 @@
     <string>proxy</string>
   </array>
   <key>StandardOutPath</key>
-  <string>/Users/__USERNAME__/.local/state/headroom/proxy.log</string>
+  <string>/Users/__USERNAME__/.headroom/logs/proxy.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/__USERNAME__/.local/state/headroom/proxy.log</string>
+  <string>/Users/__USERNAME__/.headroom/logs/proxy.log</string>
 </dict>
 </plist>
