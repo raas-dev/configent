@@ -9,7 +9,18 @@
   },
   "permissions": {
     "allow": [
-      "*"
+      "Bash",
+      "Agent",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "Skill",
+      "ToolSearch",
+      "WebFetch",
+      "WebSearch",
+      "mcp__*"
     ],
     "ask": [
       "Bash(git *)",
