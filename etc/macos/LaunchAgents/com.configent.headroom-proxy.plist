@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  User LaunchAgent for headroom proxy (http://127.0.0.1:8787).
+  Starts automatically on login. Restarts on failure (throttled to 10s).
+  Logs to ~/.local/state/headroom/proxy.log.
+
+  Install:
+    mkdir -p ~/.local/state/headroom
+    sed "s|__USERNAME__|$(id -un)|g" ~/configent/etc/macos/LaunchAgents/com.configent.headroom-proxy.plist \
+      > ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+    launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+
+  Update (after editing this file):
+    sed "s|__USERNAME__|$(id -un)|g" ~/configent/etc/macos/LaunchAgents/com.configent.headroom-proxy.plist \
+      > ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+    launchctl bootout "gui/$(id -u)" ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+    launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+
+  Status:
+    launchctl list | grep headroom
+
+  Uninstall:
+    launchctl bootout "gui/$(id -u)" ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+    rm ~/Library/LaunchAgents/com.configent.headroom-proxy.plist
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.configent.headroom-proxy</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HEADROOM_TELEMETRY</key>
+    <string>off</string>
+  </dict>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/__USERNAME__/.local/share/mise/shims/uvx</string>
+    <string>--from</string>
+    <string>headroom-ai[proxy]</string>
+    <string>headroom</string>
+    <string>proxy</string>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/__USERNAME__/.local/state/headroom/proxy.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/__USERNAME__/.local/state/headroom/proxy.log</string>
+</dict>
+</plist>
