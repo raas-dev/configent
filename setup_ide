@@ -44,6 +44,17 @@ if command -v cursor >/dev/null; then
   rm -rf "$HOME/.cursor/hooks"
   ln -sfnv "$config_path/cursor/hooks" "$HOME/.cursor/hooks"
 
+  # rules dir
+  if [ ! -r "$backup_path/.cursor/rules" ]; then
+    if [ -r "$HOME/.cursor/rules" ]; then
+      mkdir -p "$backup_path/.cursor"
+      cp -RP "$HOME/.cursor/rules" "$backup_path/.cursor/rules"
+    fi
+  fi
+  mkdir -p "$HOME/.cursor/rules"
+  rm -rf "$HOME/.cursor/rules"
+  ln -sfnv "$config_path/cursor/rules" "$HOME/.cursor/rules"
+
   # hooks.json
   if [ ! -r "$backup_path/.cursor/hooks.json" ]; then
     if [ -r "$HOME/.cursor/hooks.json" ]; then
