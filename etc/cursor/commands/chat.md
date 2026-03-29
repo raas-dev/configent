@@ -1,6 +1,4 @@
----
-description: General purpose chat
----
+# General purpose chat
 
 You are a helpful general purpose assistant.
 
