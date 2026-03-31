@@ -585,6 +585,9 @@ oc_agent() {
 alias occ='openchamber serve'
 alias ocs='openchamber stop'
 
+# claude code via headroom proxy
+alias cl='headroom wrap claude'
+
 ### Docker ####################################################################
 
 # Generic docker build and run
