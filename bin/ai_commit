@@ -110,23 +110,57 @@ ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
   fi
 fi
 
-# The commit command reads the git diff from stdin
+# The commit command reads the git diff from stdin.
+# Capture both stdout and stderr because some opencode versions emit the
+# generated text on stderr while using stdout for machine-oriented output.
 if [ -z "$commit_message" ]; then
   if [ -n "$context_message" ]; then
-    commit_message="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
+    commit_message_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --command commit)" || {
+      --command commit 2>&1)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   else
-    commit_message="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
+    commit_message_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --command commit)" || {
+      --command commit 2>&1)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   fi
+
+  # Remove ANSI color codes and common transient status lines.
+  commit_message="$(printf '%s\n' "$commit_message_raw" |
+    awk '{
+        esc = sprintf("%c", 27)
+        gsub(esc "\\[[0-9;]*[[:alpha:]]", "")
+        if ($0 ~ /^> [[:alnum:]_.-][[:alnum:]_.-]* · /) next
+        print
+      }')"
+
+  # Drop any leading noise; keep from first conventional-commit subject line onward.
+  # If nothing matches (unexpected model output), keep the cleaned text as-is.
+  commit_message="$(printf '%s\n' "$commit_message" |
+    awk '
+        { buf[NR] = $0 }
+        /^[a-z][a-z]*\([^)]+\):/ && !start { start = NR }
+        END {
+          if (start)
+            for (i = start; i <= NR; i++) print buf[i]
+          else
+            for (i = 1; i <= NR; i++) print buf[i]
+        }')"
+
+  # Trim leading/trailing blank lines only (first/last non-empty line range).
+  commit_message="$(printf '%s\n' "$commit_message" |
+    awk '
+        { lines[NR] = $0 }
+        NF { if (!first) first = NR; last = NR }
+        END {
+          if (!first) exit
+          for (i = first; i <= last; i++) print lines[i]
+        }')"
 fi
 
 if [ -z "$commit_message" ]; then
