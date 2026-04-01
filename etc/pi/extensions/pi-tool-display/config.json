@@ -8,7 +8,7 @@
     "edit": true,
     "write": true
   },
-  "enableNativeUserMessageBox": false,
+  "enableNativeUserMessageBox": true,
   "readOutputMode": "hidden",
   "searchOutputMode": "hidden",
   "mcpOutputMode": "hidden",
