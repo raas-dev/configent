@@ -44,6 +44,16 @@ fi
 mkdir -p "$HOME/.pi/agent"
 ln -sfnv "$config_path/pi/settings.json" "$HOME/.pi/agent/settings.json"
 
+# keybindings.json
+if [ ! -r "$backup_path/.pi/agent/keybindings.json" ]; then
+  if [ -r "$HOME/.pi/agent/keybindings.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/keybindings.json" "$backup_path/.pi/agent/keybindings.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/keybindings.json" "$HOME/.pi/agent/keybindings.json"
+
 # extensions dir
 if [ ! -r "$backup_path/.pi/agent/extensions" ]; then
   if [ -r "$HOME/.pi/agent/extensions" ]; then
