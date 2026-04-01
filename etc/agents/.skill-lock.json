@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "skills": {
+    "prompt-master": {
+      "source": "nidhinjs/prompt-master",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nidhinjs/prompt-master.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "4b3996117966a3837d9e22ce24cfa744daad3f8b",
+      "installedAt": "2026-04-01T14:10:49.474Z",
+      "updatedAt": "2026-04-01T14:10:49.474Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "antigravity",
+    "cline",
+    "codex",
+    "cursor",
+    "deepagents",
+    "firebender",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode",
+    "warp"
+  ]
+}
