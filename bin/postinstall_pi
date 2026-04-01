@@ -34,6 +34,16 @@ fi
 mkdir -p "$HOME/.pi/agent"
 ln -sfnv "$config_path/pi/mcp.json" "$HOME/.pi/agent/mcp.json"
 
+# settings.json
+if [ ! -r "$backup_path/.pi/agent/settings.json" ]; then
+  if [ -r "$HOME/.pi/agent/settings.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/settings.json" "$backup_path/.pi/agent/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/settings.json" "$HOME/.pi/agent/settings.json"
+
 # extensions dir
 if [ ! -r "$backup_path/.pi/agent/extensions" ]; then
   if [ -r "$HOME/.pi/agent/extensions" ]; then
@@ -93,3 +103,15 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### AGENTS.md ##################################################################
+
+if [ ! -r "$backup_path/.pi/agent/AGENTS.md" ]; then
+  if [ -r "$HOME/.pi/agent/AGENTS.md" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -RP "$HOME/.pi/agent/AGENTS.md" "$backup_path/.pi/agent/AGENTS.md"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/AGENTS.md"
+rm -rf "$HOME/.pi/agent/AGENTS.md"
+ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
