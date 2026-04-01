@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "model": "zai/glm-5-turbo",
+  "allowedModels": [
+    "minimax/MiniMax-M2.7",
+    "zai/glm-5-turbo"
+  ],
+  "thinkingLevel": "off",
+  "mode": "manual"
+}

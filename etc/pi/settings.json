@@ -21,7 +21,8 @@
     "npm:@tintinweb/pi-tasks",
     "npm:@tmustier/pi-raw-paste",
     "git:github.com/iodic/pi-ayu-themes",
-    "https://github.com/davebcn87/pi-autoresearch"
+    "https://github.com/davebcn87/pi-autoresearch",
+    "npm:@lnittman/pi-interview"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",

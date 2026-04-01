@@ -125,3 +125,15 @@ fi
 mkdir -p "$HOME/.pi/agent/AGENTS.md"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
+
+### pi-interview ###############################################################
+
+# pi-interview.json
+if [ ! -r "$backup_path/.pi/agent/pi-interview.json" ]; then
+  if [ -r "$HOME/.pi/agent/pi-interview.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/pi-interview.json" "$backup_path/.pi/agent/pi-interview.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/pi-interview.json" "$HOME/.pi/agent/pi-interview.json"
