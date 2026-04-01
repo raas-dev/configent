@@ -111,46 +111,30 @@ ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
 fi
 
 # The commit command reads the git diff from stdin.
-# Capture both stdout and stderr because some opencode versions emit the
-# generated text on stderr while using stdout for machine-oriented output.
+# Use --format json so the assistant text is reliably available regardless of
+# opencode version; extract all "text" event payloads and concatenate them.
 if [ -z "$commit_message" ]; then
   if [ -n "$context_message" ]; then
     commit_message_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --command commit 2>&1)" || {
+      --command commit \
+      --format json 2>/dev/null)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   else
     commit_message_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
-      --command commit 2>&1)" || {
+      --command commit \
+      --format json 2>/dev/null)" || {
       printf "%sError: Failed to generate commit message.\n" "$red"
       exit 1
     }
   fi
 
-  # Remove ANSI color codes and common transient status lines.
+  # Extract and concatenate all assistant text parts from the JSON event stream.
   commit_message="$(printf '%s\n' "$commit_message_raw" |
-    awk '{
-        esc = sprintf("%c", 27)
-        gsub(esc "\\[[0-9;]*[[:alpha:]]", "")
-        if ($0 ~ /^> [[:alnum:]_.-][[:alnum:]_.-]* · /) next
-        print
-      }')"
-
-  # Drop any leading noise; keep from first conventional-commit subject line onward.
-  # If nothing matches (unexpected model output), keep the cleaned text as-is.
-  commit_message="$(printf '%s\n' "$commit_message" |
-    awk '
-        { buf[NR] = $0 }
-        /^[a-z][a-z]*\([^)]+\):/ && !start { start = NR }
-        END {
-          if (start)
-            for (i = start; i <= NR; i++) print buf[i]
-          else
-            for (i = 1; i <= NR; i++) print buf[i]
-        }')"
+    jq -r 'select(.type == "text") | .part.text' 2>/dev/null | tr -d '\r')"
 
   # Trim leading/trailing blank lines only (first/last non-empty line range).
   commit_message="$(printf '%s\n' "$commit_message" |
