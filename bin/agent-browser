@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wrapper for Vercel's agent-browser to use CloakBrowser as the browser
+# wrapper for Vercel's agent-browser to use a custom browser
 
 set -euo pipefail
 
