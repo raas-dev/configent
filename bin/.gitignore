@@ -2,6 +2,7 @@
 *
 
 !.gitignore
+!agent-browser
 !ai_commit
 !buildctl
 !docker

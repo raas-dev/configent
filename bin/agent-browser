@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Wrapper for Vercels's agent-browser for using CloakBrowser as the browser
+
+set -euo pipefail
+
+# Ensure the Chromium binary is downloaded and get its path
+mise exec pipx:cloakbrowser -- cloakbrowser install --quiet 2>/dev/null || true
+BINARY_PATH=$(mise exec pipx:cloakbrowser -- cloakbrowser info | awk '/^Binary:/ { print $2 }')
+
+# Resolve the Python inside the cloakbrowser pipx venv
+CLOAKBROWSER_BIN=$(mise exec pipx:cloakbrowser -- which cloakbrowser)
+VENV_PYTHON="$(dirname "$(realpath "$CLOAKBROWSER_BIN")")/python"
+
+# Get stealth args (comma-separated for agent-browser).
+# agent-browser splits on commas, so drop any arg that itself contains a comma
+# (e.g. --fingerprint-gpu-renderer="ANGLE (Apple, ANGLE Metal Renderer: ...)").
+STEALTH_ARGS=$("$VENV_PYTHON" -c "
+from cloakbrowser.config import get_default_stealth_args
+safe = [a for a in get_default_stealth_args() if ',' not in a]
+print(','.join(safe))
+")
+
+# Point agent-browser at CloakBrowser (--args and --executable-path require chrome engine)
+export AGENT_BROWSER_ENGINE="chrome"
+export AGENT_BROWSER_EXECUTABLE_PATH="$BINARY_PATH"
+export AGENT_BROWSER_ARGS="$STEALTH_ARGS"
+
+exec mise exec github:vercel-labs/agent-browser -- agent-browser "$@"
