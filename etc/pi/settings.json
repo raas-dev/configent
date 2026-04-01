@@ -7,11 +7,13 @@
     "npm:pi-ask-user",
     "npm:pi-context",
     "npm:pi-interactive-shell",
+    "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-powerline-footer",
-    "npm:pi-rewind-hook",
+    "npm:pi-rewind",
     "npm:@tmustier/pi-raw-paste",
     "https://github.com/davebcn87/pi-autoresearch"
+
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
