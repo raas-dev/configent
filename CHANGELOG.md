@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.213.3](https://github.com/raas-dev/configent/compare/1.213.2...1.213.3) (2026-04-01)
+
+
+### Fixes
+
+* **agent-modes:** restore agent modes ([50cd819](https://github.com/raas-dev/configent/commit/50cd819536512fe6078f22e192081239a978405d))
+* **postinstall_pi:** link pi keybindings ([7c16aa3](https://github.com/raas-dev/configent/commit/7c16aa3f006e7933105f69a1d6bde2212160b4e3))
+* **prompt-enhancer:** remove bundled prompt enhancer ([7560944](https://github.com/raas-dev/configent/commit/7560944e8d5326df9388e3b8e45ea1de0ae97bd0))
+* **prompts:** Remove obsolete prompt library ([b5e363b](https://github.com/raas-dev/configent/commit/b5e363bf1125fbfe53c7e1b7e08a8f457bec7d7c))
+
 ## [1.213.2](https://github.com/raas-dev/configent/compare/1.213.1...1.213.2) (2026-04-01)
 
 
