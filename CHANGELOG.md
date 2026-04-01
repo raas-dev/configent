@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.213.2](https://github.com/raas-dev/configent/compare/1.213.1...1.213.2) (2026-04-01)
+
+
+### Fixes
+
+* **agent-browser:** use cloakbrowser for agent-browser ([a8e582d](https://github.com/raas-dev/configent/commit/a8e582d4abdcb888b15e937153be329bec2349a1))
+* **bin:** use cloakbrowser for agent-browser ([eac0e84](https://github.com/raas-dev/configent/commit/eac0e84a31faacc5d839ef6cad4d6928a668f91b))
+* **pi-tool-display:** enable native user message box ([ee5e2c5](https://github.com/raas-dev/configent/commit/ee5e2c55f8cd900b159b3f8780ea952f92a88ae6))
+* **settings:** remove pi-processes ([8b8964c](https://github.com/raas-dev/configent/commit/8b8964cc86e3c4e789e2647fc01434755e705323))
+
 ## [1.213.1](https://github.com/raas-dev/configent/compare/1.213.0...1.213.1) (2026-04-01)
 
 
