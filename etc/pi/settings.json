@@ -6,6 +6,7 @@
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-context",
+    "npm:pi-image-tools",
     "npm:pi-interactive-shell",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
