@@ -48,6 +48,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 # ai coding harnesses
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
+'github:vercel-labs/agent-browser' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }

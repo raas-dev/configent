@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wrapper for Vercel's agent-browser to use a custom browser
+# wrapper for agent-browser to use CloakBrowser as the browser
 
 set -euo pipefail
 
@@ -26,4 +26,4 @@ export AGENT_BROWSER_ENGINE="chrome"
 export AGENT_BROWSER_EXECUTABLE_PATH="$BINARY_PATH"
 export AGENT_BROWSER_ARGS="$STEALTH_ARGS"
 
-exec mise exec github:vercel-labs/agent-browser -- agent-browser "$@"
+agent-browser "$@"

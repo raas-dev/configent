@@ -2,9 +2,9 @@
 *
 
 !.gitignore
-!agent-browser
 !ai_commit
 !buildctl
+!cloak-browser
 !docker
 !docker-compose
 !git-credential-pass
