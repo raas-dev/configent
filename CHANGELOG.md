@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.213.1](https://github.com/raas-dev/configent/compare/1.213.0...1.213.1) (2026-04-01)
+
+
+### Fixes
+
+* **ai_commit:** clean generated commit output ([b62dff3](https://github.com/raas-dev/configent/commit/b62dff34fe12c9c7a01f134203d683e062dd4c26))
+* **ai_commit:** parse commit output reliably ([a43ef49](https://github.com/raas-dev/configent/commit/a43ef4930f595a1d9d187e89654ccb2a6187f13b))
+* **config:** disable native user message box ([a93b7e7](https://github.com/raas-dev/configent/commit/a93b7e752847c50f3ea3bfe5634043d9de7e4baf))
+* **opencode:** allow /var/folders in config ([1b1f269](https://github.com/raas-dev/configent/commit/1b1f269a046b2d77bb64695254b8bd01ddda305e))
+* **postinstall_opencode:** restore opencode.json on install ([c860021](https://github.com/raas-dev/configent/commit/c86002171ce2e0d1b55e61504f4389ef203abbb7))
+
 ## [1.213.0](https://github.com/raas-dev/configent/compare/1.212.2...1.213.0) (2026-03-29)
 
 
