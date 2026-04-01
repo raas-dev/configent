@@ -11,9 +11,12 @@
     "npm:pi-mcp-adapter",
     "npm:pi-powerline-footer",
     "npm:pi-rewind",
+    "npm:pi-tool-display",
+    "npm:pi-token-burden",
+    "npm:@tintinweb/pi-tasks",
     "npm:@tmustier/pi-raw-paste",
-    "https://github.com/davebcn87/pi-autoresearch"
-
+    "https://github.com/davebcn87/pi-autoresearch",
+    "npm:@aliou/pi-processes"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
