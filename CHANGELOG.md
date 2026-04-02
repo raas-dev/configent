@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.0](https://github.com/raas-dev/configent/compare/1.213.3...1.214.0) (2026-04-02)
+
+
+### Features
+
+* **postinstall_pi:** add web-search setup for pi ([4f9c65a](https://github.com/raas-dev/configent/commit/4f9c65ade0aec6a4c2dd4836b29e096ef07785a3))
+
+
+### Fixes
+
+* **postinstall_pi:** create agents dir ([6b586db](https://github.com/raas-dev/configent/commit/6b586db29048d89d40918494a349d8e72ccef2e1))
+
 ## [1.213.3](https://github.com/raas-dev/configent/compare/1.213.2...1.213.3) (2026-04-01)
 
 
