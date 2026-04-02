@@ -559,7 +559,6 @@
   "window.customTitleBarVisibility": "windowed",
   "window.menuStyle": "inherit",
   "window.newWindowDimensions": "inherit",
-  "window.newWindowProfile": "Default",
   "window.restoreFullscreen": true,
   "window.systemColorTheme": "dark",
   "workbench.activityBar.iconClickBehavior": "focus",
@@ -659,6 +658,7 @@
   "go.showWelcome": false,
   "gitlens.advanced.skipOnboarding": true,
   "workbench.layoutControl.enabled": false,
+  "cursor.composer.textSizeScale": 1.15,
   "cursor.general.reduceTransparency": true,
-  "cursor.composer.textSizeScale": 1.15
+  "window.newWindowProfile": "Default"
 }
