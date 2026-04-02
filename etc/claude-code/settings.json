@@ -47,13 +47,6 @@
     "command": "bunx -y ccstatusline",
     "padding": 0
   },
-  "extraKnownMarketplaces": {
-    "context-mode": {
-      "source": {
-        "source": "github",
-        "repo": "mksglu/context-mode"
-      }
-    }
-  },
+  "extraKnownMarketplaces": {},
   "skipDangerousModePermissionPrompt": true
 }
