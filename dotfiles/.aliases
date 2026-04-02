@@ -1022,8 +1022,8 @@ codeclear() {
   read -r choice
   case "$choice" in
   [yY])
-    code --list-extensions | while read -r extension; do
-      code --force --uninstall-extension "$extension"
+    command code --list-extensions | while read -r extension; do
+      command code --force --uninstall-extension "$extension"
     done
     ;;
   *)
