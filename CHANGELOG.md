@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.1](https://github.com/raas-dev/configent/compare/1.214.0...1.214.1) (2026-04-02)
+
+
+### Fixes
+
+* **aliases:** use command for code uninstall ([490855f](https://github.com/raas-dev/configent/commit/490855f713d43d7f2c24e0c4bda0d15f6b702962))
+
 ## [1.214.0](https://github.com/raas-dev/configent/compare/1.213.3...1.214.0) (2026-04-02)
 
 
