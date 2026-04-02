@@ -1,12 +1,5 @@
 {
-  "mcpServers": {
-    "exa": {
-      "directTools": true,
-      "type": "http",
-      "url": "https://mcp.exa.ai/mcp",
-      "lifecycle": "keep-alive"
-    }
-  },
+  "mcpServers": {},
   "settings": {
     "toolPrefix": "none"
   }
