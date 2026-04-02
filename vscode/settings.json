@@ -551,7 +551,6 @@
   "typescript.preferGoToSourceDefinition": true,
   "typescript.suggest.paths": false,
   "typescript.surveys.enabled": false,
-  "update.mode": "none",
   "update.showReleaseNotes": false,
   "vsintellicode.python.completionsEnabled": false,
   "window.closeWhenEmpty": true,
@@ -658,5 +657,6 @@
   "editor.minimap.autohide": "mouseover",
   "claudeCode.hideOnboarding": true,
   "go.showWelcome": false,
-  "gitlens.advanced.skipOnboarding": true
+  "gitlens.advanced.skipOnboarding": true,
+  "workbench.layoutControl.enabled": false
 }
