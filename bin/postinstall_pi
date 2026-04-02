@@ -122,6 +122,6 @@ if [ ! -r "$backup_path/.pi/agent/AGENTS.md" ]; then
     cp -RP "$HOME/.pi/agent/AGENTS.md" "$backup_path/.pi/agent/AGENTS.md"
   fi
 fi
-mkdir -p "$HOME/.pi/agent/AGENTS.md"
+mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
