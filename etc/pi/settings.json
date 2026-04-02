@@ -14,6 +14,7 @@
     "npm:pi-powerline-footer",
     "npm:pi-rewind",
     "npm:pi-rtk-optimizer",
+    "npm:pi-session-switch",
     "npm:pi-tool-display",
     "npm:pi-token-burden",
     "npm:pi-web-access",
@@ -23,7 +24,7 @@
     "npm:@tintinweb/pi-tasks",
     "npm:@tmustier/pi-raw-paste",
     "git:github.com/iodic/pi-ayu-themes",
-    "https://github.com/davebcn87/pi-autoresearch"
+    "git:github.com/davebcn87/pi-autoresearch"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
