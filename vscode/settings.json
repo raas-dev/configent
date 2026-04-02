@@ -658,5 +658,7 @@
   "claudeCode.hideOnboarding": true,
   "go.showWelcome": false,
   "gitlens.advanced.skipOnboarding": true,
-  "workbench.layoutControl.enabled": false
+  "workbench.layoutControl.enabled": false,
+  "cursor.general.reduceTransparency": true,
+  "cursor.composer.textSizeScale": 1.15
 }
