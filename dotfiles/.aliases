@@ -581,10 +581,6 @@ oc_agent() {
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
-## openchamber
-alias occ='openchamber serve'
-alias ocs='openchamber stop'
-
 # claude code via headroom proxy
 alias cl='headroom wrap claude'
 
