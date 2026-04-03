@@ -1,8 +1,60 @@
 {
   "agent": {
+    "default_model": {
+      "provider": "zai",
+      "model": "GLM-5.1",
+      "enable_thinking": false
+    },
     "enable_feedback": false,
     "favorite_models": [],
     "model_parameters": []
+  },
+  "language_models": {
+    "openai_compatible": {
+      "zai": {
+        "api_url": "https://api.z.ai/api/coding/paas/v4",
+        "available_models": [
+          {
+            "name": "GLM-5.1",
+            "display_name": "GLM-5.1 (Z.AI)",
+            "max_tokens": 131072,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          },
+          {
+            "name": "GLM-5-turbo",
+            "display_name": "GLM-5-turbo (Z.AI)",
+            "max_tokens": 131072,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          }
+        ]
+      },
+      "minimax": {
+        "api_url": "https://api.minimax.io/v1",
+        "available_models": [
+          {
+            "name": "MiniMax-M2.7",
+            "display_name": "MiniMax-M2.7",
+            "max_tokens": 204800,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          }
+        ]
+      }
+    }
   },
   "agent_buffer_font_size": 18.0,
   "agent_servers": {
