@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.3](https://github.com/raas-dev/configent/compare/1.214.2...1.214.3) (2026-04-03)
+
+
+### Fixes
+
+* **aliases:** route agent alias via agent ([dc71688](https://github.com/raas-dev/configent/commit/dc716884144c592727e263c626b47f0b0f3f1cc9))
+* **aliases:** route ai alias via pi ([d85508b](https://github.com/raas-dev/configent/commit/d85508b3aec9439f76842f5c0d30cbe473209081))
+* **wtf:** add wtf script wrapper ([141b26a](https://github.com/raas-dev/configent/commit/141b26ac19386f811fcf9c897064bfef331528de))
+* **wtf:** improve error message ([6bef3be](https://github.com/raas-dev/configent/commit/6bef3beb877f8c3642d7be9dd5420ee9e3c5d7f0))
+
 ## [1.214.2](https://github.com/raas-dev/configent/compare/1.214.1...1.214.2) (2026-04-03)
 
 
