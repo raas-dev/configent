@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+if [ -n "$TMUX" ]; then
+  output=$(tmux capture-pane -p -S "-${1:-200}")
+elif [ "$TERM_PROGRAM" = "vscode" ]; then
+  proj_dir=$(echo "$PWD" | sed 's|/|-|g; s|^-||')
+  terminal_file=$(find "$HOME/.cursor/projects/${proj_dir}/terminals/" -maxdepth 1 -name "*.txt" 2>/dev/null | while read -r f; do printf '%s %s\n' "$(stat --format '%Y' "$f")" "$f"; done | sort -rn | head -1 | cut -d' ' -f2-)
+  if [ -z "$terminal_file" ]; then
+    echo "wtf: no Cursor terminal file found"
+    exit 1
+  fi
+  output=$(tail -n "${1:-200}" "$terminal_file")
+else
+  echo "wtf: not in tmux or Cursor"
+  exit 1
+fi
+
+pi --no-session "$output
+
+---
+${2:-Debug my recent terminal activity and fix any issues}"
