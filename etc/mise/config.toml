@@ -106,7 +106,6 @@ gitleaks = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
-'github:anordal/shellharden' = 'latest'
 
 # powershell
 powershell = { version = '7.5.4', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
