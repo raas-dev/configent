@@ -581,6 +581,19 @@ oc_agent() {
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
+wtf() {
+  if [ -z "$TMUX" ]; then
+    echo "wtf: not in a tmux session" >&2
+    return 1
+  fi
+  local output
+  output=$(tmux capture-pane -p -S "-${1:-200}")
+  pi --no-session "$output
+
+---
+${2:-Debug my recent terminal activity and fix any issues}"
+}
+
 # claude code via headroom proxy
 alias cl='headroom wrap claude'
 
