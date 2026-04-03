@@ -150,7 +150,7 @@ alias \?='trans'
 alias \#='echo'
 alias ¨='bat --paging auto --style full --show-all'
 alias ,='mise_exec'
-alias _='oc_agent'
+alias _='agent'
 
 ### Privileged utilities #######################################################
 
@@ -575,7 +575,7 @@ ai() {
   fi
 }
 
-oc_agent() {
+agent() {
   if [ -n "$1" ]; then
     local agent="$1"
     shift

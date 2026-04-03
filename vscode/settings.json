@@ -78,7 +78,7 @@
       "args": [
         "-i",
         "-c",
-        "oc_agent",
+        "agent",
         "computer-use"
       ],
       "command": "exec zsh",
