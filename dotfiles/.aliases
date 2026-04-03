@@ -569,9 +569,9 @@ ai() {
     return 1;
   fi
   if [ -n "$1" ]; then
-    pi --no-session --system-prompt "$system_prompt" --print "$*"
+    pi --no-session --offline --system-prompt "$system_prompt" --print "$*"
   else
-    pi --no-session --system-prompt "$system_prompt"
+    pi --no-session --offline --system-prompt "$system_prompt"
   fi
 }
 

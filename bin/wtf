@@ -19,7 +19,7 @@ fi
 
 prompt="${2:-This is my terminal output. Propose fixes for the issues.}"
 
-pi --no-session "<terminal_output>
+pi --no-session --offline "<terminal_output>
 $output
 </terminal_output>
 
