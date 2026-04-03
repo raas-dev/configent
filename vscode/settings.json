@@ -255,7 +255,8 @@
     "*.prompt": "markdown",
     "*.sh": "shellscript",
     "*.strings": "plist",
-    "*.tpl": "json"
+    "*.tpl": "json",
+    ".rclocal": "shellscript"
   },
   "files.hotExit": "onExitAndWindowClose",
   "files.saveConflictResolution": "overwriteFileOnDisk",
