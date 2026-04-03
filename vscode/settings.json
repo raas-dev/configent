@@ -249,14 +249,14 @@
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     ".aliases": "shellscript",
+    ".rclocal": "shellscript",
     "*.ejs": "json",
     "*.lock": "json",
     "*.plist": "xml",
     "*.prompt": "markdown",
     "*.sh": "shellscript",
     "*.strings": "plist",
-    "*.tpl": "json",
-    ".rclocal": "shellscript"
+    "*.tpl": "json"
   },
   "files.hotExit": "onExitAndWindowClose",
   "files.saveConflictResolution": "overwriteFileOnDisk",
@@ -611,6 +611,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.excludeDirty": true,
+  "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
