@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.2](https://github.com/raas-dev/configent/compare/1.214.1...1.214.2) (2026-04-03)
+
+
+### Fixes
+
+* **settings:** rename extension manager ([ccb8169](https://github.com/raas-dev/configent/commit/ccb8169e0e5adb4c2af46bbead0d9842809f1d08))
+* **setup_duti:** drop extra duti types ([9d1557a](https://github.com/raas-dev/configent/commit/9d1557a6c44d5cf3ccd27c86153bed31cb125928))
+
 ## [1.214.1](https://github.com/raas-dev/configent/compare/1.214.0...1.214.1) (2026-04-02)
 
 
