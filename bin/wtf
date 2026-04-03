@@ -17,7 +17,12 @@ else
   exit 1
 fi
 
-pi --no-session "$output
+prompt="${2:-This is my terminal output. Propose fixes for the issues.}"
 
----
-${2:-Debug my recent terminal activity and fix any issues}"
+pi --no-session "<terminal_output>
+$output
+</terminal_output>
+
+<instructions>
+$prompt
+</instructions>"
