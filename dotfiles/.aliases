@@ -563,10 +563,15 @@ alias skills='bunx skills'
 ### AI #########################################################################
 
 ai() {
+  local system_prompt="$HOME/.pi/agent/prompts/chat.md"
+  if [ ! -r "$system_prompt" ]; then
+    echo "Error: $system_prompt not found" >&2
+    return 1;
+  fi
   if [ -n "$1" ]; then
-    oc exec chat -- opencode run --agent chat "$@"
+    pi --no-session --system-prompt "$system_prompt" --print "$*"
   else
-    oc exec chat -- opencode --agent chat
+    pi --no-session --system-prompt "$system_prompt"
   fi
 }
 
