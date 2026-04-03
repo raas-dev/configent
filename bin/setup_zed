@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/.backup"
+config_path="$HOME/.config/configent"
+
+### Symlink configuration ######################################################
+
+# settings.json
+if [ ! -r "$backup_path/.config/zed/settings.json" ]; then
+  if [ -r "$HOME/.config/zed/settings.json" ]; then
+    mkdir -p "$backup_path/.config/zed"
+    cp -P "$HOME/.config/zed/settings.json" \
+      "$backup_path/.config/zed/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.config/zed"
+ln -sfnv "$config_path/zed/settings.json" "$HOME/.config/zed/settings.json"
+
+# keymap.json
+if [ ! -r "$backup_path/.config/zed/keymap.json" ]; then
+  if [ -r "$HOME/.config/zed/keymap.json" ]; then
+    mkdir -p "$backup_path/.config/zed"
+    cp -P "$HOME/.config/zed/keymap.json" \
+      "$backup_path/.config/zed/keymap.json"
+  fi
+fi
+mkdir -p "$HOME/.config/zed"
+ln -sfnv "$config_path/zed/keymap.json" "$HOME/.config/zed/keymap.json"
+
+# extensions/index.json
+if [ "$(uname -s)" = 'Darwin' ]; then
+  extensions_path="$HOME/Library/Application Support/Zed/extensions"
+else
+  extensions_path="${XDG_DATA_HOME:-$HOME/.local/share}/zed/extensions"
+fi
+mkdir -p "$extensions_path"
+ln -sfnv "$this_path/../etc/zed/extensions/index.json" \
+  "$extensions_path/index.json"

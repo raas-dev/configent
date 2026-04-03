@@ -1,0 +1,1692 @@
+{
+  "extensions": {
+    "astro": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Alvaro Gaona <alvgaona@gmail.com>",
+          "0xk1f0 <dev@k1f0.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Astro support.",
+        "grammars": {
+          "astro": {
+            "path": null,
+            "repository": "https://github.com/virchau13/tree-sitter-astro",
+            "rev": "4be180759ec13651f72bacee65fa477c64222a1a"
+          }
+        },
+        "icon_themes": [],
+        "id": "astro",
+        "language_servers": {
+          "astro-language-server": {
+            "code_action_kinds": null,
+            "language": "Astro",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/astro"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Astro",
+        "repository": "https://github.com/zed-extensions/astro",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.9"
+      }
+    },
+    "ayu-darker": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "K4YT3X <i@k4yt3x.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "An opinionated darker variant of the Ayu Dark theme.",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "ayu-darker",
+        "language_servers": {},
+        "languages": [],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Ayu Darker Theme",
+        "repository": "https://github.com/k4yt3x/zed-theme-ayu-darker",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [
+          "themes/ayu-darker.json"
+        ],
+        "version": "1.1.1"
+      }
+    },
+    "basher": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "d1y <chenhonzhou@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Bash-language-server support",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "basher",
+        "language_servers": {
+          "bash-language-server": {
+            "code_action_kinds": null,
+            "language": "Shell Script",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Basher",
+        "repository": "https://github.com/zed-extensions/bash",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.5"
+      }
+    },
+    "bicep": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Jerome Brown <Jerome@SoliDeoGloria.tech>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Bicep language support. Bicep is a Domain Specific Language (DSL) created by Microsoft for deploying Azure resources declaratively. This extension provides intellisense for the core language and extends to support type definitions for all resource types in Azure.\n",
+        "grammars": {
+          "bicep": {
+            "path": null,
+            "repository": "https://github.com/oWretch/tree-sitter-bicep",
+            "rev": "8288b2b7a0313842d3b2997b36bf1cbd2b60abc0"
+          },
+          "bicep_params": {
+            "path": null,
+            "repository": "https://github.com/oWretch/tree-sitter-bicep-params",
+            "rev": "119641e7ae85ea1b201cd2c5f909a017fcd8ad68"
+          }
+        },
+        "icon_themes": [],
+        "id": "bicep",
+        "language_servers": {
+          "bicep-ls": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {
+              "Bicep": "bicep",
+              "Bicep Parameters": "bicep-params"
+            },
+            "languages": [
+              "Bicep",
+              "Bicep Parameters"
+            ]
+          }
+        },
+        "languages": [
+          "languages/bicep_params",
+          "languages/bicep"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.2.0"
+        },
+        "name": "Bicep",
+        "repository": "https://github.com/oWretch/zed-extension-bicep",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.2.2"
+      }
+    },
+    "biome": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "biomejs <biomejs.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Biome support for Zed",
+        "grammars": {
+          "gritql": {
+            "path": null,
+            "repository": "https://github.com/honeycombio/tree-sitter-gritql",
+            "rev": "3a48815250680e85a44b3ab2fd74031ef3c66b7d"
+          }
+        },
+        "icon_themes": [],
+        "id": "biome",
+        "language_servers": {
+          "biome": {
+            "code_action_kinds": [
+              "quickfix"
+            ],
+            "language": "JavaScript",
+            "language_ids": {
+              "Astro": "astro",
+              "CSS": "css",
+              "GraphQL": "graphql",
+              "HTML": "html",
+              "JavaScript": "javascript",
+              "JSON": "json",
+              "JSONC": "jsonc",
+              "JSX": "javascriptreact",
+              "Svelte": "svelte",
+              "TSX": "typescriptreact",
+              "TypeScript": "typescript",
+              "Vue.js": "vuejs"
+            },
+            "languages": [
+              "JavaScript",
+              "JSX",
+              "TypeScript",
+              "TSX",
+              "Vue.js",
+              "Astro",
+              "Svelte",
+              "JSON",
+              "JSONC",
+              "CSS",
+              "GraphQL",
+              "HTML"
+            ]
+          }
+        },
+        "languages": [
+          "languages/grit"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Biome",
+        "repository": "https://github.com/biomejs/biome-zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.2"
+      }
+    },
+    "csv": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Jason Lee <huacnlee@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "CSV language support.",
+        "grammars": {
+          "csv": {
+            "path": null,
+            "repository": "https://github.com/arnau/tree-sitter-csv",
+            "rev": "4b25b5d745f9462e54b781e3d7798b8e0a4db703"
+          }
+        },
+        "icon_themes": [],
+        "id": "csv",
+        "language_servers": {},
+        "languages": [
+          "languages/csv"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.4"
+        },
+        "name": "CSV",
+        "repository": "https://github.com/huacnlee/zed-csv",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.3"
+      }
+    },
+    "docker-compose": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "eth0net <eth0net@pm.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Syntax highlighting for Docker Compose files",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "docker-compose",
+        "language_servers": {
+          "docker-compose": {
+            "code_action_kinds": null,
+            "language": "YAML",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.6"
+        },
+        "name": "Docker Compose",
+        "repository": "https://github.com/eth0net/zed-docker-compose",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.0"
+      }
+    },
+    "dockerfile": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "d1y <chenhonzho@gmail.com>",
+          "joshmeads <github@joshmeads.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "debug_adapters": {
+          "buildx-dockerfile": {
+            "schema_path": "./debug_adapter_schemas/buildx-dockerfile.json"
+          }
+        },
+        "description": "Dockerfile support.",
+        "grammars": {
+          "dockerfile": {
+            "path": null,
+            "repository": "https://github.com/camdencheek/tree-sitter-dockerfile",
+            "rev": "868e44ce378deb68aac902a9db68ff82d2299dd0"
+          }
+        },
+        "icon_themes": [],
+        "id": "dockerfile",
+        "language_servers": {
+          "docker-language-server": {
+            "code_action_kinds": null,
+            "language": "Dockerfile",
+            "language_ids": {
+              "Docker Compose": "docker-compose",
+              "Dockerfile": "dockerfile"
+            },
+            "languages": [
+              "Dockerfile",
+              "Docker Compose"
+            ]
+          },
+          "dockerfile-language-server": {
+            "code_action_kinds": null,
+            "language": "Dockerfile",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/dockerfile"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Dockerfile",
+        "repository": "https://github.com/zed-extensions/dockerfile",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.0"
+      }
+    },
+    "git-firefly": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "d1y <chenhonzhou@gmail.com>",
+          "Peter Tripp <petertripp@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Provides Git Syntax Highlighting",
+        "grammars": {
+          "git_config": {
+            "path": null,
+            "repository": "https://github.com/the-mikedavis/tree-sitter-git-config",
+            "rev": "9c2a1b7894e6d9eedfe99805b829b4ecd871375e"
+          },
+          "git_rebase": {
+            "path": null,
+            "repository": "https://github.com/the-mikedavis/tree-sitter-git-rebase",
+            "rev": "d8a4207ebbc47bd78bacdf48f883db58283f9fd8"
+          },
+          "gitattributes": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-gitattributes",
+            "rev": "41940e199ba5763abea1d21b4f717014b45f01ea"
+          },
+          "gitignore": {
+            "path": null,
+            "repository": "https://github.com/shunsambongi/tree-sitter-gitignore",
+            "rev": "f4685bf11ac466dd278449bcfe5fd014e94aa504"
+          }
+        },
+        "icon_themes": [],
+        "id": "git-firefly",
+        "language_servers": {},
+        "languages": [
+          "languages/gitignore",
+          "languages/gitattributes",
+          "languages/gitrebase",
+          "languages/gitconfig"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Git Firefly",
+        "repository": "https://github.com/d1y/git_firefly",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.4"
+      }
+    },
+    "github-actions": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Samantha Nguyen <contact@samanthanguyen.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "GitHub Actions LSP support for Zed.",
+        "grammars": {
+          "yaml": {
+            "path": null,
+            "repository": "https://github.com/zed-industries/tree-sitter-yaml",
+            "rev": "baff0b51c64ef6a1fb1f8390f3ad6015b83ec13a"
+          }
+        },
+        "icon_themes": [],
+        "id": "github-actions",
+        "language_servers": {
+          "gh-actions-language-server": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "GitHub Actions"
+            ]
+          }
+        },
+        "languages": [
+          "languages/github_actions"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.6.0"
+        },
+        "name": "GitHub Actions",
+        "repository": "https://github.com/neoncitylights/zed-github-actions",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.1"
+      }
+    },
+    "helm": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "cabrinha <yuppie@hey.com>",
+          "MrJosh <hi@mrjosh.me>",
+          "Hemant Joshi <mail@hjoshi.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Syntax highlighting for Helm templates",
+        "grammars": {
+          "helm": {
+            "path": "dialects/helm",
+            "repository": "https://github.com/ngalaiko/tree-sitter-go-template",
+            "rev": "9d3f6e526dd074b9edae9070b7bb778f00e87a5b"
+          }
+        },
+        "icon_themes": [],
+        "id": "helm",
+        "language_servers": {
+          "helm": {
+            "code_action_kinds": null,
+            "language": "Helm",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/helm"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.5.0"
+        },
+        "name": "Helm",
+        "repository": "https://github.com/cabrinha/helm.zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.2"
+      }
+    },
+    "html": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Isaac Clayton <slightknack@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "HTML support.",
+        "grammars": {
+          "html": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter/tree-sitter-html",
+            "rev": "bfa075d83c6b97cd48440b3829ab8d24a2319809"
+          }
+        },
+        "icon_themes": [],
+        "id": "html",
+        "language_servers": {
+          "vscode-html-language-server": {
+            "code_action_kinds": null,
+            "language": "HTML",
+            "language_ids": {
+              "CSS": "css",
+              "HTML": "html"
+            },
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/html"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "HTML",
+        "repository": "https://github.com/zed-industries/zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.3.1"
+      }
+    },
+    "ini": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Raunak Raj <bajrangcoders@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Support for ini and related config files (ini, conf, cfg, config, editorconfig) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
+        "grammars": {
+          "ini": {
+            "path": null,
+            "repository": "https://github.com/justinmk/tree-sitter-ini",
+            "rev": "e4018b5176132b4f3c5d6e61cea383f42288d0f5"
+          }
+        },
+        "icon_themes": [],
+        "id": "ini",
+        "language_servers": {},
+        "languages": [
+          "languages/ini"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "ini",
+        "repository": "https://github.com/bajrangCoder/zed-ini",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.7"
+      }
+    },
+    "jq": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Dang Huynh"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "jq language support for Zed",
+        "grammars": {
+          "jq": {
+            "path": null,
+            "repository": "https://github.com/flurie/tree-sitter-jq",
+            "rev": "c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9"
+          }
+        },
+        "icon_themes": [],
+        "id": "jq",
+        "language_servers": {},
+        "languages": [
+          "languages/jq"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "jq",
+        "repository": "https://github.com/dangh/zed-jq",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.2"
+      }
+    },
+    "jsonl": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Offer Affias <ofer.affias@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "JSON Lines (JSONL) syntax highlighting support for Zed",
+        "grammars": {
+          "json": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter/tree-sitter-json",
+            "rev": "001c28d7a29832b06b0e831ec77845553c89b56d"
+          }
+        },
+        "icon_themes": [],
+        "id": "jsonl",
+        "language_servers": {},
+        "languages": [
+          "languages/jsonl"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "JSONL",
+        "repository": "https://github.com/vim-zz/jsonl-syntax-zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.1"
+      }
+    },
+    "log": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "nervenes",
+          "notpeter",
+          "d1y"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Syntax highlighting for log files.",
+        "grammars": {
+          "log": {
+            "path": null,
+            "repository": "https://github.com/Tudyx/tree-sitter-log",
+            "rev": "62cfe307e942af3417171243b599cc7deac5eab9"
+          }
+        },
+        "icon_themes": [],
+        "id": "log",
+        "language_servers": {},
+        "languages": [
+          "languages/log"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "LOG",
+        "repository": "https://github.com/nervenes/zed-log",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.6"
+      }
+    },
+    "make": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Caius Durling <dev@caius.name>",
+          "d1y <chenhonzhou@gmail.com>",
+          "Marshall Bowers <elliott.codes@gmail.com>",
+          "Luke Naylor <luke@grahamnaylor.net>",
+          "Igor Támara <igor.tamara@gmail.com>",
+          "Michael Alexander <michael.alexander@karlstorz.com>",
+          "Donnie Adams <donnie@thedadams.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Makefile syntax highlighting",
+        "grammars": {
+          "make": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-make",
+            "rev": "5e9e8f8ff3387b0edcaa90f46ddf3629f4cfeb1d"
+          }
+        },
+        "icon_themes": [],
+        "id": "make",
+        "language_servers": {},
+        "languages": [
+          "languages/make"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Make",
+        "repository": "https://github.com/caius/zed-make",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.1.2"
+      }
+    },
+    "material-icon-theme": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Zed Industries <support@zed.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Material Design icons.",
+        "grammars": {},
+        "icon_themes": [
+          "icon_themes/material-icon-theme.json"
+        ],
+        "id": "material-icon-theme",
+        "language_servers": {},
+        "languages": [],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Material Icon Theme",
+        "repository": "https://github.com/zed-extensions/material-icon-theme",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.3.1"
+      }
+    },
+    "nix": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Hasit Mistry <hasitnm@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Nix support.",
+        "grammars": {
+          "nix": {
+            "path": null,
+            "repository": "https://github.com/nix-community/tree-sitter-nix",
+            "rev": "ea1d87f7996be1329ef6555dcacfa63a69bd55c6"
+          }
+        },
+        "icon_themes": [],
+        "id": "nix",
+        "language_servers": {
+          "nil": {
+            "code_action_kinds": null,
+            "language": "Nix",
+            "language_ids": {},
+            "languages": []
+          },
+          "nixd": {
+            "code_action_kinds": null,
+            "language": "Nix",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/nix"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Nix",
+        "repository": "https://github.com/zed-extensions/nix",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.4"
+      }
+    },
+    "powershell": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Thanabodee Charoenpiriyakij <wingyminus@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "PowerShell support",
+        "grammars": {
+          "powershell": {
+            "path": null,
+            "repository": "https://github.com/airbus-cert/tree-sitter-powershell",
+            "rev": "b3fe65637fca35e426dc8c889d86c8724aaa73d5"
+          }
+        },
+        "icon_themes": [],
+        "id": "powershell",
+        "language_servers": {
+          "powershell-es": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "PowerShell"
+            ]
+          }
+        },
+        "languages": [
+          "languages/powershell"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "PowerShell",
+        "repository": "https://github.com/wingyplus/zed-powershell",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.4.2"
+      }
+    },
+    "pylsp": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Kyle Kelley <rgbkrk@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "python-lsp extension for Zed",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "pylsp",
+        "language_servers": {
+          "pylsp": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Python"
+            ]
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.6"
+        },
+        "name": "Python LSP",
+        "repository": "https://github.com/rgbkrk/python-lsp-zed-extension",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.1"
+      }
+    },
+    "python-requirements": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Gabriel Linder <linder.gabriel@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Syntax highlighting for requirements.txt and constraints.txt files",
+        "grammars": {
+          "requirements": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-requirements",
+            "rev": "caeb2ba854dea55931f76034978de1fd79362939"
+          }
+        },
+        "icon_themes": [],
+        "id": "python-requirements",
+        "language_servers": {},
+        "languages": [
+          "languages/requirements",
+          "languages/constraints"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Python requirements and constraints",
+        "repository": "https://github.com/dargor/zed-python-requirements",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.4"
+      }
+    },
+    "robot-framework": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "José Mendes <mendesfilho@pm.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "🤖 Robot Framework support.",
+        "grammars": {
+          "robot": {
+            "path": null,
+            "repository": "https://github.com/Hubro/tree-sitter-robot",
+            "rev": "e34def7cb0d8a66a59ec5057fe17bb4e6b17b56a"
+          }
+        },
+        "icon_themes": [],
+        "id": "robot-framework",
+        "language_servers": {},
+        "languages": [
+          "languages/robot"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Robot Framework",
+        "repository": "https://github.com/mendes-jose/zed-robot.git",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.1"
+      }
+    },
+    "scss": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Raunak Raj <bajrangcoders@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "SCSS and SASS support",
+        "grammars": {
+          "sass": {
+            "path": null,
+            "repository": "https://github.com/bajrangCoder/tree-sitter-sass",
+            "rev": "fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8"
+          },
+          "sassdoc": {
+            "path": null,
+            "repository": "https://github.com/simeonoff/tree-sitter-sassdoc",
+            "rev": "38abe86eac15ed8d668de04df963ef0a4c220cfe"
+          },
+          "scss": {
+            "path": null,
+            "repository": "https://github.com/simeonoff/tree-sitter-scss",
+            "rev": "3f918284a73a54b53e4f326b0aa8c74ccbf4ee4d"
+          }
+        },
+        "icon_themes": [],
+        "id": "scss",
+        "language_servers": {
+          "scss-lsp": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "SCSS"
+            ]
+          },
+          "some-sass-lsp": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {
+              "SASS": "sass",
+              "SCSS": "scss"
+            },
+            "languages": [
+              "SCSS",
+              "SASS"
+            ]
+          }
+        },
+        "languages": [
+          "languages/sass",
+          "languages/sassdoc",
+          "languages/scss"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "SCSS & SASS",
+        "repository": "https://github.com/bajrangCoder/zed-scss",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.0"
+      }
+    },
+    "sql": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "nervenes",
+          "notpeter",
+          "phileix",
+          "tammyxiong"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "SQL language support.",
+        "grammars": {
+          "sql": {
+            "path": null,
+            "repository": "https://github.com/DerekStride/tree-sitter-sql",
+            "rev": "4a99c73f5384f2be10adc55208c84d95a7eb1137"
+          }
+        },
+        "icon_themes": [],
+        "id": "sql",
+        "language_servers": {},
+        "languages": [
+          "languages/sql"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "SQL",
+        "repository": "https://github.com/zed-extensions/sql",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.1.7"
+      }
+    },
+    "terraform": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Caius Durling <dev@caius.name>",
+          "Daniel Banck <dbanck@users.noreply.github.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Terraform support.",
+        "grammars": {
+          "hcl": {
+            "path": null,
+            "repository": "https://github.com/MichaHoffmann/tree-sitter-hcl",
+            "rev": "e936d3fef8bac884661472dce71ad82284761eb1"
+          }
+        },
+        "icon_themes": [],
+        "id": "terraform",
+        "language_servers": {
+          "terraform-ls": {
+            "code_action_kinds": [],
+            "language": null,
+            "language_ids": {
+              "Terraform": "terraform",
+              "Terraform Vars": "terraform-vars"
+            },
+            "languages": [
+              "Terraform",
+              "Terraform Vars"
+            ]
+          }
+        },
+        "languages": [
+          "languages/terraform",
+          "languages/terraform-vars",
+          "languages/hcl"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.1.0"
+        },
+        "name": "Terraform",
+        "repository": "https://github.com/zed-extensions/terraform",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.6"
+      }
+    },
+    "toml": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "Max Brunsfeld <max@zed.dev>",
+          "Ammar Arif <evergreenkary@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "TOML support.",
+        "grammars": {
+          "toml": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter/tree-sitter-toml",
+            "rev": "342d9be207c2dba869b9967124c679b5e6fd0ebe"
+          }
+        },
+        "icon_themes": [],
+        "id": "toml",
+        "language_servers": {},
+        "languages": [
+          "languages/toml"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "TOML",
+        "repository": "https://github.com/zed-extensions/toml",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.0.2"
+      }
+    },
+    "xml": {
+      "dev": false,
+      "manifest": {
+        "agent_servers": {},
+        "authors": [
+          "sweetppro"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "XML syntax support.",
+        "grammars": {
+          "xml": {
+            "path": "xml",
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-xml",
+            "rev": "863dbc381f44f6c136a399e684383b977bb2beaa"
+          }
+        },
+        "icon_themes": [],
+        "id": "xml",
+        "language_servers": {},
+        "languages": [
+          "languages/xml"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "XML",
+        "repository": "https://github.com/sweetppro/zed-xml",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.0"
+      }
+    }
+  },
+  "icon_themes": {
+    "Material Icon Theme": {
+      "extension": "material-icon-theme",
+      "path": "icon_themes/material-icon-theme.json"
+    }
+  },
+  "languages": {
+    "Astro": {
+      "extension": "astro",
+      "grammar": "astro",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "astro"
+        ]
+      },
+      "path": "languages/astro"
+    },
+    "Bicep": {
+      "extension": "bicep",
+      "grammar": "bicep",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "bicep"
+        ]
+      },
+      "path": "languages/bicep"
+    },
+    "Bicep Parameters": {
+      "extension": "bicep",
+      "grammar": "bicep_params",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "bicepparam"
+        ]
+      },
+      "path": "languages/bicep_params"
+    },
+    "CSV": {
+      "extension": "csv",
+      "grammar": "csv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "csv"
+        ]
+      },
+      "path": "languages/csv"
+    },
+    "Dockerfile": {
+      "extension": "dockerfile",
+      "grammar": "dockerfile",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "Dockerfile",
+          "Containerfile",
+          "dockerfile"
+        ]
+      },
+      "path": "languages/dockerfile"
+    },
+    "Git Attributes": {
+      "extension": "git-firefly",
+      "grammar": "gitattributes",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "gitattributes",
+          ".gitattributes"
+        ]
+      },
+      "path": "languages/gitattributes"
+    },
+    "Git Config": {
+      "extension": "git-firefly",
+      "grammar": "git_config",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "config.worktree",
+          ".gitconfig",
+          ".gitmodules",
+          ".lfsconfig"
+        ]
+      },
+      "path": "languages/gitconfig"
+    },
+    "Git Ignore": {
+      "extension": "git-firefly",
+      "grammar": "gitignore",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          ".containerignore",
+          ".cursorignore",
+          ".dockerignore",
+          ".eslintignore",
+          ".fdignore",
+          ".gitignore",
+          ".git-blame-ignore-revs",
+          ".ignore",
+          ".npmignore",
+          ".prettierignore",
+          ".rgignore",
+          ".vscodeignore"
+        ]
+      },
+      "path": "languages/gitignore"
+    },
+    "Git Rebase": {
+      "extension": "git-firefly",
+      "grammar": "git_rebase",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "git-rebase-todo"
+        ]
+      },
+      "path": "languages/gitrebase"
+    },
+    "GitHub Actions": {
+      "extension": "github-actions",
+      "grammar": "yaml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/github_actions"
+    },
+    "GritQL": {
+      "extension": "biome",
+      "grammar": "gritql",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "grit"
+        ]
+      },
+      "path": "languages/grit"
+    },
+    "HCL": {
+      "extension": "terraform",
+      "grammar": "hcl",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "hcl"
+        ]
+      },
+      "path": "languages/hcl"
+    },
+    "Helm": {
+      "extension": "helm",
+      "grammar": "helm",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/helm"
+    },
+    "HTML": {
+      "extension": "html",
+      "grammar": "html",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "html",
+          "htm",
+          "shtml"
+        ]
+      },
+      "path": "languages/html"
+    },
+    "ini": {
+      "extension": "ini",
+      "grammar": "ini",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "ini",
+          "inf",
+          "conf",
+          "cfg",
+          "config",
+          ".editorconfig",
+          "automount",
+          "mount",
+          "path",
+          "scope",
+          "service",
+          "slice",
+          "socket",
+          "swap",
+          "target",
+          "timer",
+          "container",
+          "volume",
+          "network",
+          "kube",
+          "image",
+          "build",
+          "pod"
+        ]
+      },
+      "path": "languages/ini"
+    },
+    "jq": {
+      "extension": "jq",
+      "grammar": "jq",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "jq"
+        ]
+      },
+      "path": "languages/jq"
+    },
+    "JSON Lines": {
+      "extension": "jsonl",
+      "grammar": "json",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "jsonl",
+          "ndjson"
+        ]
+      },
+      "path": "languages/jsonl"
+    },
+    "LOG": {
+      "extension": "log",
+      "grammar": "log",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "log"
+        ]
+      },
+      "path": "languages/log"
+    },
+    "Make": {
+      "extension": "make",
+      "grammar": "make",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": "^#!.*\\b(?:make -f)\\b",
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "makefile",
+          "Makefile",
+          "GNUmakefile",
+          "OCamlMakefile",
+          "mk"
+        ]
+      },
+      "path": "languages/make"
+    },
+    "Nix": {
+      "extension": "nix",
+      "grammar": "nix",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "nix"
+        ]
+      },
+      "path": "languages/nix"
+    },
+    "PowerShell": {
+      "extension": "powershell",
+      "grammar": "powershell",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "ps1",
+          "psm1"
+        ]
+      },
+      "path": "languages/powershell"
+    },
+    "Python constraints": {
+      "extension": "python-requirements",
+      "grammar": "requirements",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "constraints.txt"
+        ]
+      },
+      "path": "languages/constraints"
+    },
+    "Python requirements": {
+      "extension": "python-requirements",
+      "grammar": "requirements",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "requirements.txt"
+        ]
+      },
+      "path": "languages/requirements"
+    },
+    "Robot": {
+      "extension": "robot-framework",
+      "grammar": "robot",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "robot"
+        ]
+      },
+      "path": "languages/robot"
+    },
+    "SASS": {
+      "extension": "scss",
+      "grammar": "sass",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "sass"
+        ]
+      },
+      "path": "languages/sass"
+    },
+    "SassDoc": {
+      "extension": "scss",
+      "grammar": "sassdoc",
+      "hidden": true,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/sassdoc"
+    },
+    "SCSS": {
+      "extension": "scss",
+      "grammar": "scss",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "scss"
+        ]
+      },
+      "path": "languages/scss"
+    },
+    "SQL": {
+      "extension": "sql",
+      "grammar": "sql",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "sql"
+        ]
+      },
+      "path": "languages/sql"
+    },
+    "Terraform": {
+      "extension": "terraform",
+      "grammar": "hcl",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "tf",
+          "tofu"
+        ]
+      },
+      "path": "languages/terraform"
+    },
+    "Terraform Vars": {
+      "extension": "terraform",
+      "grammar": "hcl",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "tfvars"
+        ]
+      },
+      "path": "languages/terraform-vars"
+    },
+    "TOML": {
+      "extension": "toml",
+      "grammar": "toml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "Cargo.lock",
+          "toml",
+          "Pipfile",
+          "uv.lock"
+        ]
+      },
+      "path": "languages/toml"
+    },
+    "XML": {
+      "extension": "xml",
+      "grammar": "xml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": "^<.*xml",
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "xml"
+        ]
+      },
+      "path": "languages/xml"
+    }
+  },
+  "themes": {
+    "Ayu Darker": {
+      "extension": "ayu-darker",
+      "path": "themes/ayu-darker.json"
+    }
+  }
+}

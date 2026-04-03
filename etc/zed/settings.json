@@ -1,0 +1,184 @@
+{
+  "agent": {
+    "enable_feedback": false,
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_buffer_font_size": 18.0,
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
+    },
+    "pi-acp": {
+      "type": "registry"
+    }
+  },
+  "auto_signature_help": true,
+  "auto_update": false,
+  "autoscroll_on_clicks": true,
+  "base_keymap": "VSCode",
+  "bottom_dock_layout": "full",
+  "buffer_font_family": "Terminess Nerd Font",
+  "buffer_font_size": 18.0,
+  "buffer_font_weight": 600.0,
+  "buffer_line_height": {
+    "custom": 1
+  },
+  "centered_layout": {
+    "left_padding": 0.0,
+    "right_padding": 0.0
+  },
+  "colorize_brackets": true,
+  "context_servers": {
+    "dynamic-mcp": {
+      "args": [],
+      "command": "dmcp",
+      "enabled": true,
+      "remote": false
+    }
+  },
+  "current_line_highlight": "line",
+  "cursor_blink": true,
+  "cursor_shape": "bar",
+  "diagnostics": {
+    "include_warnings": false,
+    "inline": {
+      "enabled": false
+    }
+  },
+  "format_on_save": "on",
+  "gutter": {
+    "breakpoints": true,
+    "folds": false,
+    "line_numbers": true,
+    "min_line_number_digits": 1,
+    "runnables": true
+  },
+  "hide_mouse": "never",
+  "icon_theme": {
+    "dark": "Material Icon Theme",
+    "light": "Material Icon Theme",
+    "mode": "dark"
+  },
+  "indent_guides": {
+    "active_line_width": 2,
+    "background_coloring": "disabled",
+    "coloring": "indent_aware",
+    "enabled": true,
+    "line_width": 1
+  },
+  "inlay_hints": {
+    "enabled": false
+  },
+  "inline_code_actions": true,
+  "linked_edits": true,
+  "message_editor": {
+    "auto_replace_emoji_shortcode": true
+  },
+  "minimap": {
+    "max_width_columns": 70,
+    "show": "auto",
+    "thumb": "always"
+  },
+  "on_last_window_closed": "quit_app",
+  "outline_panel": {
+    "button": true
+  },
+  "project_panel": {
+    "bold_folder_labels": false,
+    "dock": "right",
+    "entry_spacing": "standard",
+    "git_status_indicator": true,
+    "hide_root": false,
+    "indent_guides": {
+      "show": "never"
+    },
+    "indent_size": 10.0
+  },
+  "rounded_selection": true,
+  "scroll_beyond_last_line": "vertical_scroll_margin",
+  "scrollbar": {
+    "axes": {
+      "horizontal": false,
+      "vertical": true
+    },
+    "cursors": false,
+    "diagnostics": "none",
+    "git_diff": false,
+    "selected_symbol": true,
+    "selected_text": true,
+    "show": "auto"
+  },
+  "search": {
+    "include_ignored": true
+  },
+  "semantic_tokens": "combined",
+  "session": {
+    "restore_unsaved_buffers": true,
+    "trust_all_worktrees": true
+  },
+  "show_whitespaces": "trailing",
+  "soft_wrap": "editor_width",
+  "sticky_scroll": {
+    "enabled": false
+  },
+  "tab_bar": {
+    "show_tab_bar_buttons": true
+  },
+  "tabs": {
+    "file_icons": true,
+    "show_close_button": "hover"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "terminal": {
+    "blinking": "on",
+    "copy_on_select": true,
+    "default_height": 320.0,
+    "font_size": 15.0,
+    "font_weight": 100.0,
+    "line_height": {
+      "custom": 1
+    },
+    "max_scroll_history_lines": 99999,
+    "minimum_contrast": 0.0,
+    "option_as_meta": false,
+    "show_count_badge": false,
+    "toolbar": {
+      "breadcrumbs": false
+    }
+  },
+  "text_rendering_mode": "subpixel",
+  "theme": "Ayu Dark",
+  "title_bar": {
+    "show_branch_icon": true,
+    "show_menus": false,
+    "show_onboarding_banner": false,
+    "show_user_picture": false
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "code_actions": true,
+    "selections_menu": true
+  },
+  "ui_font_family": ".ZedSans",
+  "ui_font_size": 15.0,
+  "ui_font_weight": 100.0,
+  "use_system_path_prompts": true,
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
+  "when_closing_with_no_tabs": "close_window",
+  "which_key": {
+    "enabled": true
+  },
+  "wrap_guides": [
+    80,
+    100
+  ]
+}

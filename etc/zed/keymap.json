@@ -1,0 +1,14 @@
+[
+  {
+    "bindings": {
+      "ctrl-enter": null
+    },
+    "context": "Editor"
+  },
+  {
+    "bindings": {
+      "ctrl-enter": null
+    },
+    "context": "Terminal"
+  }
+]
