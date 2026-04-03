@@ -51,7 +51,6 @@ fi
 # vscode:// URL scheme
 duti -s "$app_bundle_id" vscode
 
-duti -s "$app_bundle_id" public.data all # for files with no extension
 duti -s "$app_bundle_id" public.json all
 duti -s "$app_bundle_id" public.plain-text all
 duti -s "$app_bundle_id" public.shell-script all
@@ -61,8 +60,6 @@ duti -s "$app_bundle_id" public.unix-executable all
 duti -s "$app_bundle_id" json all
 duti -s "$app_bundle_id" log all
 duti -s "$app_bundle_id" md all
-duti -s "$app_bundle_id" mdc all
-duti -s "$app_bundle_id" toml all
 duti -s "$app_bundle_id" txt all
 duti -s "$app_bundle_id" xml all
 duti -s "$app_bundle_id" yaml all
