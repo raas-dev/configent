@@ -568,11 +568,14 @@ ai() {
     echo "Error: $system_prompt not found" >&2
     return 1;
   fi
-  if [ -n "$1" ]; then
-    pi --no-session --offline --system-prompt "$system_prompt" --print "$*"
-  else
-    pi --no-session --offline --system-prompt "$system_prompt"
-  fi
+  local args=(
+    --no-session
+    --offline
+    --model openai/gpt-5.4
+    --system-prompt "$system_prompt"
+  )
+  [ -n "$1" ] && args+=(--print "$*")
+  pi "${args[@]}"
 }
 
 agent() {
