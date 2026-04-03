@@ -6,6 +6,7 @@
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-context",
+    "npm:pi-extmgr",
     "npm:pi-image-tools",
     "npm:pi-interactive-shell",
     "npm:pi-interview",
