@@ -582,7 +582,6 @@ agent() {
   else
     local agent="computer-use"
   fi
-
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
