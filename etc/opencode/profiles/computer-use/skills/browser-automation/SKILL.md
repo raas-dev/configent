@@ -13,6 +13,7 @@ metadata:
 - Provide a safe, composable workflow for browsing tasks
 - Use `browser_query` list and index selection to click reliably
 - Confirm state changes after each action
+- Support CLI-first debugging with `opencode-browser tool` commands
 
 ## Best-practice workflow
 
@@ -23,6 +24,16 @@ metadata:
 5. Discover candidates using `browser_query` with `mode=list`
 6. Click, type, or select using `index`
 7. Confirm using `browser_query` or `browser_snapshot`
+
+## CLI-first debugging
+
+- List all available tools: `npx @different-ai/opencode-browser tools`
+- Run one tool directly: `npx @different-ai/opencode-browser tool browser_status`
+- Pass JSON args: `npx @different-ai/opencode-browser tool browser_query --args '{"mode":"page_text"}'`
+- Run smoke test: `npx @different-ai/opencode-browser self-test`
+- After `update`, reload the unpacked extension in `chrome://extensions`
+
+This path is useful for reproducing selector/scroll issues quickly before running a full OpenCode session.
 
 ## Selecting options
 
@@ -46,5 +57,7 @@ metadata:
 ## Troubleshooting
 
 - If a selector fails, run `browser_query` with `mode=page_text` to confirm the content exists
-- Use `mode=list` on broad selectors (`button`, `a`, `*[role="button"]`) and choose by index
+- Use `mode=list` on broad selectors (`button`, `a`, `*[role="button"]`, `*[role="listitem"]`) and choose by index
+- For inbox/chat panes, try text selectors first (`text:Subject line`) then verify selection with `browser_query`
+- For scrollable containers, pass both `selector` and `x`/`y` to `browser_scroll` and then verify `scrollTop`
 - Confirm results after each action
