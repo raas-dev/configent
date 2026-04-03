@@ -13,7 +13,7 @@ elif [ "$TERM_PROGRAM" = "vscode" ]; then
   fi
   output=$(tail -n "${1:-200}" "$terminal_file")
 else
-  echo "wtf: not in tmux or Cursor"
+  echo "Error: not in tmux or Cursor"
   exit 1
 fi
 
