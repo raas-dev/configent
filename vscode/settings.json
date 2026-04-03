@@ -91,7 +91,6 @@
       "label": "lazyssh"
     },
     {
-      "command": "exec ssh",
       "args": [
         "-t",
         "dev",
@@ -100,6 +99,7 @@
         "-c",
         "tm"
       ],
+      "command": "exec ssh",
       "id": "ssh",
       "label": "ssh dev"
     }
@@ -129,6 +129,7 @@
   "chat.notifyWindowOnResponseReceived": "off",
   "chat.tools.global.autoApprove": true,
   "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.hideOnboarding": true,
   "claudeCode.initialPermissionMode": "bypassPermissions",
   "claudeCode.preferredLocation": "panel",
   "code-runner.enableAppInsights": false,
@@ -161,12 +162,14 @@
   "cursor.aipreview.enabled": true,
   "cursor.chat.ghostTextAtSymbols": false,
   "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.composer.textSizeScale": 1.15,
   "cursor.cpp.disabledLanguages": [
     "plaintext",
     "untitled"
   ],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
+  "cursor.general.reduceTransparency": true,
   "cursor.preferNotificationsSameAsChat": true,
   "cursor.semanticSearch.includePullRequests": false,
   "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
@@ -203,6 +206,7 @@
   "editor.lineHeight": 14,
   "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.minimap.enabled": true,
   "editor.minimap.maxColumn": 70,
   "editor.minimap.showSlider": "always",
@@ -215,6 +219,7 @@
     100
   ],
   "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.horizontalScrollbarSize": 10,
   "editor.scrollbar.verticalScrollbarSize": 10,
   "editor.semanticHighlighting.enabled": true,
   "editor.smoothScrolling": true,
@@ -245,12 +250,12 @@
   "files.associations": {
     ".aliases": "shellscript",
     "*.ejs": "json",
+    "*.lock": "json",
     "*.plist": "xml",
     "*.prompt": "markdown",
     "*.sh": "shellscript",
     "*.strings": "plist",
-    "*.tpl": "json",
-    "*.lock": "json"
+    "*.tpl": "json"
   },
   "files.hotExit": "onExitAndWindowClose",
   "files.saveConflictResolution": "overwriteFileOnDisk",
@@ -285,7 +290,8 @@
   "github.copilot.chat.notebook.followCellExecution.enabled": true,
   "github.copilot.chat.useResponsesApi": true,
   "github.copilot.enable": {
-    "markdown": false,
+    "*": true,
+    "markdown": true,
     "plaintext": false,
     "scminput": false
   },
@@ -294,6 +300,7 @@
     "suppressFileNotUnderSourceControlWarning": true,
     "suppressLineUncommittedWarning": true
   },
+  "gitlens.advanced.skipOnboarding": true,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "gitlens.blame.highlight.locations": [
@@ -363,6 +370,7 @@
   "gitlens.views.tags.files.layout": "tree",
   "gitlens.views.workspaces.files.layout": "tree",
   "gitlens.views.worktrees.files.layout": "tree",
+  "go.showWelcome": false,
   "go.survey.prompt": false,
   "go.terminal.activateEnvironment": false,
   "go.toolsManagement.checkForUpdates": "off",
@@ -392,6 +400,7 @@
   "mise.binPath": "mise",
   "mise.checkForNewMiseVersion": false,
   "mise.configureExtensionsAutomatically": false,
+  "mise.enableCodeLens": false,
   "mise.showToolVersionsDecorations": false,
   "mise.updateEnvAutomatically": false,
   "notebook.cellToolbarLocation": {
@@ -428,6 +437,7 @@
   "ruff.configurationPreference": "filesystemFirst",
   "rumdl.enable": false,
   "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.checkOnSave": false,
   "scm.alwaysShowRepositories": true,
   "scm.countBadge": "off",
   "scm.defaultViewMode": "tree",
@@ -463,7 +473,7 @@
       "id": "sbc_session",
       "name": "Start Session",
       "priority": 24000,
-      "text": "$(terminal-tmux)",
+      "text": "$(empty-window)",
       "tooltip": "Start Session"
     },
     {
@@ -559,6 +569,7 @@
   "window.customTitleBarVisibility": "windowed",
   "window.menuStyle": "inherit",
   "window.newWindowDimensions": "inherit",
+  "window.newWindowProfile": "Default",
   "window.restoreFullscreen": true,
   "window.systemColorTheme": "dark",
   "workbench.activityBar.iconClickBehavior": "focus",
@@ -609,6 +620,7 @@
   },
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "based-ayu",
+  "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
   "workbench.preferredDarkColorTheme": "Based Ayu Dark Bordered",
@@ -649,16 +661,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "rust-analyzer.checkOnSave": false,
-  "mise.enableCodeLens": false,
-  "editor.scrollbar.horizontalScrollbarSize": 10,
-  "editor.minimap.autohide": "mouseover",
-  "claudeCode.hideOnboarding": true,
-  "go.showWelcome": false,
-  "gitlens.advanced.skipOnboarding": true,
-  "workbench.layoutControl.enabled": false,
-  "cursor.composer.textSizeScale": 1.15,
-  "cursor.general.reduceTransparency": true,
-  "window.newWindowProfile": "Default"
+  "zenMode.hideStatusBar": false
 }

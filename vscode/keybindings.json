@@ -687,5 +687,13 @@
     "key": "cmd+e",
     "command": "-cursor.toggleAgentWindowIDEUnification",
     "when": "cursor.agentIdeUnification.featureGate && !isGlass && workbenchState != 'empty'"
+  },
+  {
+    "key": "cmd+[Semicolon]",
+    "command": "workbench.action.chat.openPlan"
+  },
+  {
+    "key": "cmd+l",
+    "command": "workbench.action.chat.openAsk"
   }
 ]
