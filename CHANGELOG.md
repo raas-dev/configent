@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.4](https://github.com/raas-dev/configent/compare/1.214.3...1.214.4) (2026-04-04)
+
+
+### Fixes
+
+* **aliases:** pass model to pi offline ([db7e55a](https://github.com/raas-dev/configent/commit/db7e55a1ba95bb3453d4c9384f921ece87784347))
+* **pi:** run pi in offline mode ([1dacee0](https://github.com/raas-dev/configent/commit/1dacee09fac8d58eebd4c1e86b811045b1149d27))
+* **rtk-rewrite:** handle no-rtk exit ([582f8b4](https://github.com/raas-dev/configent/commit/582f8b42ab94a43c677e75062b811dad8c44b55a))
+* **setup_zed:** move backup directory ([2b49f92](https://github.com/raas-dev/configent/commit/2b49f92b7bbf9572dab35373af317db4b0667689))
+* **wtf:** improve pi input handling ([421ea2d](https://github.com/raas-dev/configent/commit/421ea2da9beed66be1253a33df9a48aa969617d1))
+
 ## [1.214.3](https://github.com/raas-dev/configent/compare/1.214.2...1.214.3) (2026-04-03)
 
 
