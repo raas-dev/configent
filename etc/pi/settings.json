@@ -30,5 +30,7 @@
   "theme": "ayu-dark",
   "showHardwareCursor": true,
   "transport": "auto",
-  "powerline": "default"
+  "powerline": "default",
+  "hideThinkingBlock": true,
+  "defaultThinkingLevel": "medium"
 }
