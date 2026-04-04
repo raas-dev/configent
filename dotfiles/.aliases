@@ -572,6 +572,7 @@ ai() {
     --no-session
     --offline
     --model openai/gpt-5.4
+    --thinking medium
     --system-prompt "$system_prompt"
   )
   [ -n "$1" ] && args+=(--print "$*")
