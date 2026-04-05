@@ -21,7 +21,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   alias brave='open -a "Brave Browser" --args --remote-debugging-port=9222'
 
   # Recursively delete .DS_Store files in the current path
-  alias cds='/usr/bin/find . -type f -name "*.DS_Store" -ls -delete'
+  alias cds='fd --no-ignore --hidden --one-file-system -g "*.DS_Store" --exec-batch rm -v'
 
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist"
