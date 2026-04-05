@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.5](https://github.com/raas-dev/configent/compare/1.214.4...1.214.5) (2026-04-05)
+
+
+### Fixes
+
+* **aliases:** use fd to remove DS_Store files ([abe0f9d](https://github.com/raas-dev/configent/commit/abe0f9d5a13d371b7835ac58dad82841a43aa34d))
+* **wtf:** pick Cursor terminal by pid ([b90b1dd](https://github.com/raas-dev/configent/commit/b90b1dd407f2dbaff007bc15f7cc37846b0cdc3b))
+
 ## [1.214.4](https://github.com/raas-dev/configent/compare/1.214.3...1.214.4) (2026-04-04)
 
 
