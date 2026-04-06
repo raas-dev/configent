@@ -486,14 +486,6 @@
     "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
   },
   {
-    "command": "composerMode.chat",
-    "key": "cmd+l"
-  },
-  {
-    "command": "composerMode.plan",
-    "key": "cmd+[Semicolon]"
-  },
-  {
     "command": "-cursor.composer.openAgentWindow",
     "key": "cmd+e",
     "when": "cursor.appLayoutEnabled && cursor.appLayout != 'agent'"
@@ -694,6 +686,10 @@
   },
   {
     "key": "cmd+l",
-    "command": "workbench.action.chat.openAsk"
+    "command": "composerMode.chat"
+  },
+  {
+    "key": "cmd+[Semicolon]",
+    "command": "composerMode.plan"
   }
 ]
