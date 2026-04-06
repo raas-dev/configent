@@ -20,7 +20,7 @@ A few features:
 - Prefers `mise exec` and `n`ix-shells for ad-hoc CLI use over installations.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
-- Ask AI (`a <question>`) or launch a computer-use agent to do the work (`_`).
+- Ask `ai <question>` or use a computer-use agent (`_`) to help automate tasks.
 
 Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
 
