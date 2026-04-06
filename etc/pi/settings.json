@@ -22,8 +22,7 @@
     "npm:@danchamorro/pi-prompt-enhancer",
     "npm:@ogulcancelik/pi-tmux",
     "git:github.com/iodic/pi-ayu-themes",
-    "git:github.com/davebcn87/pi-autoresearch",
-    "npm:@thesethrose/pi-zai-provider"
+    "git:github.com/davebcn87/pi-autoresearch"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
