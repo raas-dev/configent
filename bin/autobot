@@ -202,7 +202,7 @@ Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out 
 esac
 
 _autobot_pi() {
-  pi "$@" --offline --print "<terminal_capture>
+  pi "$@" --offline "<terminal_capture>
 $output
 </terminal_capture>
 
