@@ -349,7 +349,7 @@ Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out 
 EOF
 }
 
-_autobot_pi() {
+autobot_invoke_pi() {
   pi --offline "<terminal_capture>
 $output
 </terminal_capture>
@@ -370,4 +370,4 @@ if [ "$dry_run" = 1 ]; then
 fi
 
 prompt=$(autobot_default_prompt_text)
-_autobot_pi
+autobot_invoke_pi
