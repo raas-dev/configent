@@ -9,12 +9,17 @@ set -e
 
 window=${AUTOBOT_WINDOW:-120}
 lines=${AUTOBOT_LINES:-24}
+# How many recent $-blocks to include (newest = focus). 1 = only last command (legacy).
+ctxblocks=${AUTOBOT_CONTEXT_BLOCKS:-3}
+# Max lines per older block; primary uses AUTOBOT_LINES.
+prior_lines=${AUTOBOT_PRIOR_LINES:-16}
 # First-word aliases for this script (default a — see dotfiles/.aliases). Empty to disable.
 _ab_aliases=${AUTOBOT_ALIASES-a}
 
-# stdin: full pane/body; stdout: one command block, tail-capped for pi
+# stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
 autobot_last_cmd() {
-  tail -n "$window" | awk -v aliases="$_ab_aliases" '
+  tail -n "$window" | awk -v aliases="$_ab_aliases" \
+    -v ctxblocks="$ctxblocks" -v prior_lines="$prior_lines" -v primary_lines="$lines" '
     function should_skip(s,   parts, nf, first, al, na, j) {
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
       if (length(s) < 1) return 0
@@ -27,6 +32,14 @@ autobot_last_cmd() {
         if (al[j] != "" && first == al[j]) return 1
       }
       return 0
+    }
+    function tail_lines(s, max,   a, nlines, i, out) {
+      if (max < 1 || length(s) < 1) return s
+      nlines = split(s, a, /\n/)
+      if (nlines <= max) return s
+      out = a[nlines - max + 1]
+      for (i = nlines - max + 2; i <= nlines; i++) out = out "\n" a[i]
+      return out
     }
     {
       raw = $0
@@ -48,36 +61,51 @@ autobot_last_cmd() {
     }
     END {
       if (n < 1) {
-        max = '"$lines"'
+        max = primary_lines
         from = (NR > max ? NR - max + 1 : 1)
         for (i = from; i <= NR; i++) print all[i]
         exit
       }
-      pick = 0
+      P = 0
       for (i = n; i >= 1; i--) {
         if (!hascmd[i]) continue
         if (should_skip(cmd[i])) continue
-        pick = i
-        break
+        P++
+        pick_idx[P] = i
+        if (P >= ctxblocks) break
       }
-      if (pick < 1) {
-        max = '"$lines"'
+      if (P < 1) {
+        max = primary_lines
         from = (NR > max ? NR - max + 1 : 1)
         for (i = from; i <= NR; i++) print all[i]
         exit
       }
-      printf "%s", seg[pick]
+      if (ctxblocks < 2 || P < 2) {
+        printf "%s", tail_lines(seg[pick_idx[1]], primary_lines)
+        exit
+      }
+      print "<earlier_terminal_context>"
+      for (p = P; p >= 2; p--) {
+        printf "%s", tail_lines(seg[pick_idx[p]], prior_lines)
+        if (p > 2) print "\n---\n"
+      }
+      print "</earlier_terminal_context>"
+      print "<terminal_output>"
+      printf "%s", tail_lines(seg[pick_idx[1]], primary_lines)
+      print "</terminal_output>"
     }
-  ' | tail -n "$lines"
+  '
 }
 
 usage() {
   echo "Usage: autobot [-d|--dry-run] explain|what|fix|<instructions>" >&2
   echo "  -d, --dry-run   Print captured terminal output on stdout; do not run pi." >&2
   echo "  explain, what   Explain the last command's terminal output (synonyms)." >&2
-  echo "  fix            Explain what went wrong and propose a concrete fix." >&2
+  echo "  fix            Plan the fix (no actions), then ask; apply only after you confirm." >&2
   echo "  <text>         Follow-up: continues the pi session until the next preset." >&2
   echo "  Sessions: explain/what/fix each start a new pi session; custom text uses --continue." >&2
+  echo "Env: AUTOBOT_LINES (primary block), AUTOBOT_CONTEXT_BLOCKS (recent \$ blocks, default 3)," >&2
+  echo "     AUTOBOT_PRIOR_LINES (older blocks), AUTOBOT_WINDOW, AUTOBOT_ALIASES." >&2
 }
 
 dry_run=0
@@ -149,11 +177,19 @@ explain | what)
 fix)
   prompt="The following is terminal output (often from a failed or noisy command).
 
-1. State what went wrong in one sentence.
-2. Show the exact fix: commands to run or code changes (paths and snippets).
-3. Ask: proceed? [y/N]
+You must do this in two phases. In phase 1 you must NOT run terminal commands, edit files, or apply any fix.
 
-If the user confirms, apply the fix, verify, then give a one-line summary."
+Phase 1 — Plan only:
+- One sentence: what went wrong.
+- Short diagnosis (likely root cause).
+- A numbered plan: concrete steps in order (which files, what commands, what to verify).
+- Proposed commands and code changes as fenced blocks or bullet lists, clearly labeled as proposed — still no execution or patches.
+
+Phase 2 — Ask:
+- End with one clear question: whether to apply this plan (e.g. proceed? yes/no).
+- Stop and wait for the user's reply. Do not apply anything in the same turn as the plan.
+
+Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out the plan, verify if reasonable, then one-line summary."
   ;;
 "")
   usage
@@ -166,9 +202,11 @@ If the user confirms, apply the fix, verify, then give a one-line summary."
 esac
 
 _autobot_pi() {
-  pi "$@" --offline --print "<terminal_output>
+  pi "$@" --offline --print "<terminal_capture>
 $output
-</terminal_output>
+</terminal_capture>
+
+Context: when <earlier_terminal_context> appears above, it is recent background only; <terminal_output> is the command and output immediately before autobot — prioritize that for explanations and fixes.
 
 <instructions>
 $prompt
