@@ -173,6 +173,20 @@ command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
 if command -v zoxide >/dev/null; then
   eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
   j() {
+    # prefer exact basename match when single arg is given
+    if [ $# -eq 1 ] && [ "$1" != '-' ] && [ "${1#-}" = "$1" ]; then
+      local _j_exact
+      _j_exact=$(zoxide query -l 2>/dev/null | while IFS= read -r _j_dir; do
+        if [ "${_j_dir##*/}" = "$1" ]; then
+          echo "$_j_dir"
+          break
+        fi
+      done)
+      if [ -n "$_j_exact" ]; then
+        __zoxide_z "$_j_exact"
+        return $?
+      fi
+    fi
     __zoxide_z "$@"
   }
 fi
