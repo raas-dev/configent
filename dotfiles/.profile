@@ -257,6 +257,9 @@ export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 # openchamber
 export OPENCHAMBER_OPENCODE_PORT=4096
 
+# pi
+export PI_SKIP_VERSION_CHECK=true
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
