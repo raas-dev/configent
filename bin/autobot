@@ -97,6 +97,27 @@ autobot_last_cmd() {
   '
 }
 
+# stdout: first readable shell history path, or nothing.
+autobot_find_history_file() {
+  if [ -n "${HISTFILE:-}" ] && [ -r "$HISTFILE" ]; then
+    printf '%s' "$HISTFILE"
+    return 0
+  fi
+  if [ -r "${ZDOTDIR:-$HOME}/.zsh_history" ]; then
+    printf '%s' "${ZDOTDIR:-$HOME}/.zsh_history"
+    return 0
+  fi
+  if [ -r "$HOME/.zsh_history" ]; then
+    printf '%s' "$HOME/.zsh_history"
+    return 0
+  fi
+  if [ -r "$HOME/.bash_history" ]; then
+    printf '%s' "$HOME/.bash_history"
+    return 0
+  fi
+  return 1
+}
+
 # stdout: previous shell command; stderr empty; exit 1 if none found.
 # Uses AUTOBOT_PREVIOUS_CMD when set (non-empty), else tails a history file.
 autobot_get_previous_cmd() {
@@ -104,16 +125,7 @@ autobot_get_previous_cmd() {
     printf '%s\n' "$AUTOBOT_PREVIOUS_CMD"
     return 0
   fi
-  hist=
-  if [ -n "${HISTFILE:-}" ] && [ -r "$HISTFILE" ]; then
-    hist=$HISTFILE
-  elif [ -r "${ZDOTDIR:-$HOME}/.zsh_history" ]; then
-    hist="${ZDOTDIR:-$HOME}/.zsh_history"
-  elif [ -r "$HOME/.zsh_history" ]; then
-    hist=$HOME/.zsh_history
-  elif [ -r "$HOME/.bash_history" ]; then
-    hist=$HOME/.bash_history
-  fi
+  hist=$(autobot_find_history_file) || true
   if [ -z "$hist" ]; then
     echo "autobot: no readable history file (set HISTFILE or AUTOBOT_PREVIOUS_CMD)" >&2
     return 1
@@ -179,111 +191,136 @@ usage() {
   echo "     AUTOBOT_PREVIOUS_CMD (default for bare -c), AUTOBOT_HIST_TAIL (history tail size, default 120)." >&2
 }
 
-dry_run=0
-rerun=0
-prev_cmd=
+# Globals: dry_run, rerun, prev_cmd
+autobot_parse_args() {
+  dry_run=0
+  rerun=0
+  prev_cmd=
 
-while [ $# -gt 0 ]; do
-  case $1 in
-  -d | --dry-run)
-    dry_run=1
-    shift
-    ;;
-  -h | --help)
-    usage
-    exit 0
-    ;;
-  -c | --rerun)
-    rerun=1
-    shift
-    if [ $# -eq 0 ]; then
-      prev_cmd=$(autobot_get_previous_cmd) || exit 1
-    elif [ "$1" = "--" ]; then
+  while [ $# -gt 0 ]; do
+    case $1 in
+    -d | --dry-run)
+      dry_run=1
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    -c | --rerun)
+      rerun=1
       shift
       if [ $# -eq 0 ]; then
-        echo "autobot: --rerun / -c -- needs a command" >&2
-        exit 1
+        prev_cmd=$(autobot_get_previous_cmd) || exit 1
+      elif [ "$1" = "--" ]; then
+        shift
+        if [ $# -eq 0 ]; then
+          echo "autobot: --rerun / -c -- needs a command" >&2
+          exit 1
+        fi
+        prev_cmd=$*
+        set --
+      else
+        prev_cmd=$*
+        set --
       fi
-      prev_cmd=$*
-      set --
-    else
-      prev_cmd=$*
-      set --
-    fi
-    break
-    ;;
-  *)
-    echo "autobot: unexpected arguments (use -c/--rerun before command, -d first if needed): $*" >&2
-    exit 1
-    ;;
-  esac
-done
-
-if [ "$rerun" = 1 ]; then
-  if [ -z "$prev_cmd" ]; then
-    echo "autobot: no command to re-run (set AUTOBOT_PREVIOUS_CMD)" >&2
-    exit 1
-  fi
-  if [ "$dry_run" = 1 ]; then
-    synthetic="\$ $prev_cmd
-(autobot: dry-run, command not executed)"
-  else
-    run_shell=${SHELL:-/bin/sh}
-    _ab_sh_base=${run_shell##*/}
-    set +e
-    case $_ab_sh_base in
-    bash | zsh | ksh | mksh)
-      # Interactive -c + eval: loads rc files and expands aliases (bash does not expand
-      # aliases in -i script files). AUTOBOT_RERUN_CMD holds the exact line to run.
-      run_out=$(
-        cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
-      )
-      ;;
-    fish)
-      run_out=$(
-        cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
-      )
+      break
       ;;
     *)
-      tmp=$(mktemp "${TMPDIR:-/tmp}/autobot.XXXXXX") || exit 1
-      printf '%s\n' "$prev_cmd" >"$tmp"
-      run_out=$(cd "$PWD" && "$run_shell" "$tmp" </dev/null 2>&1)
-      rm -f "$tmp"
+      echo "autobot: unexpected arguments (use -c/--rerun before command, -d first if needed): $*" >&2
+      exit 1
       ;;
     esac
-    run_rc=$?
-    set -e
-    synthetic="\$ $prev_cmd
+  done
+}
+
+# Uses: prev_cmd, dry_run. stdout: synthetic pane text for autobot_last_cmd.
+autobot_build_rerun_synthetic() {
+  if [ "$dry_run" = 1 ]; then
+    printf '%s\n' "\$ $prev_cmd
+(autobot: dry-run, command not executed)"
+    return
+  fi
+  run_shell=${SHELL:-/bin/sh}
+  _ab_sh_base=${run_shell##*/}
+  set +e
+  case $_ab_sh_base in
+  bash | zsh | ksh | mksh)
+    run_out=$(
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
+    )
+    ;;
+  fish)
+    run_out=$(
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
+    )
+    ;;
+  *)
+    tmp=$(mktemp "${TMPDIR:-/tmp}/autobot.XXXXXX") || exit 1
+    printf '%s\n' "$prev_cmd" >"$tmp"
+    run_out=$(cd "$PWD" && "$run_shell" "$tmp" </dev/null 2>&1)
+    rm -f "$tmp"
+    ;;
+  esac
+  run_rc=$?
+  set -e
+  printf '%s\n' "\$ $prev_cmd
 $run_out
 (exit status: $run_rc)"
-  fi
-  output=$(printf '%s\n' "$synthetic" | autobot_last_cmd)
-elif [ -n "$TMUX" ]; then
-  pane=$(tmux capture-pane -p -S -200)
-  output=$(printf '%s\n' "$pane" | autobot_last_cmd)
-elif [ -d "$HOME/.cursor/projects" ]; then
-  shell_pid=$PPID
-  terminal_file=$(find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
+}
+
+# stdout: path to newest Cursor terminal file for shell pid, or empty.
+autobot_find_cursor_terminal_file() {
+  shell_pid=$1
+  find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
     if grep -q "^pid: ${shell_pid}$" "$f" 2>/dev/null; then
       _ts=$(stat --format '%Y' "$f" 2>/dev/null) || _ts=$(stat -f %m "$f" 2>/dev/null) || _ts=0
       printf '%s %s\n' "$_ts" "$f"
     fi
-  done | sort -rn | head -1 | cut -d' ' -f2-)
-  if [ -z "$terminal_file" ]; then
-    echo "autobot: no Cursor terminal file found for shell pid ${shell_pid}" >&2
-    exit 1
-  fi
-  body=$(awk '
+  done | sort -rn | head -1 | cut -d' ' -f2-
+}
+
+# stdout: body between 2nd and 3rd "---" in Cursor terminal snapshot.
+autobot_cursor_terminal_body() {
+  awk '
     /^---$/ { n++; if (n == 2) { capture = 1; next } if (n == 3) { capture = 0 } next }
     capture { print }
-  ' "$terminal_file")
-  output=$(printf '%s\n' "$body" | autobot_last_cmd)
-else
+  ' "$1"
+}
+
+# Globals: rerun, dry_run, prev_cmd. Sets: output (via command substitution caller).
+autobot_capture_output() {
+  if [ "$rerun" = 1 ]; then
+    if [ -z "$prev_cmd" ]; then
+      echo "autobot: no command to re-run (set AUTOBOT_PREVIOUS_CMD)" >&2
+      exit 1
+    fi
+    output=$(autobot_build_rerun_synthetic | autobot_last_cmd)
+    return
+  fi
+
+  if [ -n "$TMUX" ]; then
+    output=$(tmux capture-pane -p -S -200 | autobot_last_cmd)
+    return
+  fi
+
+  if [ -d "$HOME/.cursor/projects" ]; then
+    shell_pid=$PPID
+    terminal_file=$(autobot_find_cursor_terminal_file "$shell_pid")
+    if [ -z "$terminal_file" ]; then
+      echo "autobot: no Cursor terminal file found for shell pid ${shell_pid}" >&2
+      exit 1
+    fi
+    body=$(autobot_cursor_terminal_body "$terminal_file")
+    output=$(printf '%s\n' "$body" | autobot_last_cmd)
+    return
+  fi
+
   echo "autobot: not in tmux or Cursor (no ~/.cursor/projects); use -c to capture from a re-run command" >&2
   exit 1
-fi
+}
 
-if [ "$dry_run" = 1 ]; then
+autobot_emit_dry_run() {
   echo "autobot: dry-run (pi not invoked)" >&2
   if [ "$rerun" = 1 ]; then
     echo "autobot: capture source: would re-run: $prev_cmd (not executed in dry-run)" >&2
@@ -291,10 +328,9 @@ if [ "$dry_run" = 1 ]; then
   echo "autobot: would use default explain/fix flow (new pi session)" >&2
   echo "autobot: --- captured terminal output (stdout) ---" >&2
   printf '%s\n' "$output"
-  exit 0
-fi
+}
 
-autobot_default_prompt=$(
+autobot_default_prompt_text() {
   cat <<'EOF'
 The following is terminal output (often from a failed or noisy command).
 
@@ -311,9 +347,7 @@ In your planning reply:
 
 Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out the plan, verify if reasonable, then one-line summary.
 EOF
-)
-
-prompt=$autobot_default_prompt
+}
 
 _autobot_pi() {
   pi --offline "<terminal_capture>
@@ -327,4 +361,13 @@ $prompt
 </instructions>"
 }
 
+autobot_parse_args "$@"
+autobot_capture_output
+
+if [ "$dry_run" = 1 ]; then
+  autobot_emit_dry_run
+  exit 0
+fi
+
+prompt=$(autobot_default_prompt_text)
 _autobot_pi
