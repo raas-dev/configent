@@ -3,7 +3,19 @@
 set -e
 
 if [ -n "$TMUX" ]; then
-  output=$(tmux capture-pane -p -S "-${1:-200}")
+  exit_code=$(tmux display-message -p '#{pane_last_exit_status}')
+  if [ "$exit_code" = "0" ]; then
+    echo "wtf: last command exited 0 — nothing to debug"
+    exit 0
+  fi
+  # Capture pane and extract only the output of the last command (after the last prompt line)
+  pane=$(tmux capture-pane -p -S -200)
+  output=$(printf '%s\n' "$pane" | awk '
+    /^[^[:space:]].*[#$>][[:space:]]*$/ { buf = ""; next }
+    { buf = buf $0 "\n" }
+    END { printf "%s", buf }
+  ')
+  [ -z "$output" ] && output=$(printf '%s\n' "$pane" | tail -n 50)
 elif [ -d "$HOME/.cursor/projects" ]; then
   shell_pid=$PPID
   terminal_file=$(find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
@@ -15,13 +27,41 @@ elif [ -d "$HOME/.cursor/projects" ]; then
     echo "wtf: no Cursor terminal file found for shell pid ${shell_pid}"
     exit 1
   fi
-  output=$(tail -n "${1:-200}" "$terminal_file")
+  # Determine exit code: interactive shells use last_exit_code in header,
+  # subshells use exit_code in trailing footer
+  exit_code=$(awk '
+    /^last_exit_code:/ { print $2; exit }
+    /^exit_code:/      { print $2; exit }
+  ' "$terminal_file")
+  if [ -n "$exit_code" ] && [ "$exit_code" = "0" ]; then
+    echo "wtf: last command exited 0 — nothing to debug"
+    exit 0
+  fi
+  # Extract the output body (between the two --- blocks, strip trailing footer if present)
+  body=$(awk '
+    /^---$/ { n++; if (n == 2) { capture = 1; next } if (n == 3) { capture = 0 } next }
+    capture { print }
+  ' "$terminal_file")
+  # From the body, take only the output of the last command:
+  # split on prompt lines and keep the last segment
+  output=$(printf '%s\n' "$body" | awk '
+    /^[^[:space:]].*[#$>][[:space:]]*$/ { buf = ""; next }
+    { buf = buf $0 "\n" }
+    END { printf "%s", buf }
+  ')
+  [ -z "$output" ] && output=$(printf '%s\n' "$body" | tail -n 50)
 else
   echo "Error: not in tmux or Cursor"
   exit 1
 fi
 
-prompt="${2:-This is my terminal output. Find the issue, the fix and confirm user yes/no to proceed with the fix. If yes, fix the issues, verify the fix is in place and give a summary of the issue and the fix in the end.}"
+prompt="${1:-Diagnose the terminal output above.
+
+1. State what went wrong in one sentence.
+2. Show the exact fix (command or code change).
+3. Ask: proceed? [y/N]
+
+If yes: apply the fix, confirm it worked, then give a one-line summary.}"
 
 pi --no-session --offline "<terminal_output>
 $output
