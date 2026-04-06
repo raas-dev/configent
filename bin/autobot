@@ -1,0 +1,182 @@
+#!/bin/sh
+
+# Split on lines that start with $ (after optional leading │). Each block is one
+# command until the next $. We take the last non-empty block, but skip the
+# current invocation: "autobot …" and optional AUTOBOT_ALIASES (e.g. a explain).
+# Trailing bare "$" blocks are skipped. Then tail-cap with AUTOBOT_LINES.
+
+set -e
+
+window=${AUTOBOT_WINDOW:-120}
+lines=${AUTOBOT_LINES:-24}
+# First-word aliases for this script (default a — see dotfiles/.aliases). Empty to disable.
+_ab_aliases=${AUTOBOT_ALIASES-a}
+
+# stdin: full pane/body; stdout: one command block, tail-capped for pi
+autobot_last_cmd() {
+  tail -n "$window" | awk -v aliases="$_ab_aliases" '
+    function should_skip(s,   parts, nf, first, al, na, j) {
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
+      if (length(s) < 1) return 0
+      if (s ~ /^autobot([[:space:]]|$)/) return 1
+      if (length(aliases) < 1) return 0
+      nf = split(s, parts, /[[:space:]]+/)
+      first = parts[1]
+      na = split(aliases, al, /[[:space:]]+/)
+      for (j = 1; j <= na; j++) {
+        if (al[j] != "" && first == al[j]) return 1
+      }
+      return 0
+    }
+    {
+      raw = $0
+      all[NR] = raw
+      line = raw
+      if (line ~ /^[[:space:]]*│/) sub(/^[[:space:]]*│[[:space:]]*/, "", line)
+
+      if (line ~ /^\$/) {
+        n++
+        rest = line
+        sub(/^\$/, "", rest)
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", rest)
+        hascmd[n] = (length(rest) > 0)
+        cmd[n] = rest
+        seg[n] = raw "\n"
+        next
+      }
+      if (n > 0) seg[n] = seg[n] raw "\n"
+    }
+    END {
+      if (n < 1) {
+        max = '"$lines"'
+        from = (NR > max ? NR - max + 1 : 1)
+        for (i = from; i <= NR; i++) print all[i]
+        exit
+      }
+      pick = 0
+      for (i = n; i >= 1; i--) {
+        if (!hascmd[i]) continue
+        if (should_skip(cmd[i])) continue
+        pick = i
+        break
+      }
+      if (pick < 1) {
+        max = '"$lines"'
+        from = (NR > max ? NR - max + 1 : 1)
+        for (i = from; i <= NR; i++) print all[i]
+        exit
+      }
+      printf "%s", seg[pick]
+    }
+  ' | tail -n "$lines"
+}
+
+usage() {
+  echo "Usage: autobot [-d|--dry-run] explain|what|fix|<instructions>" >&2
+  echo "  -d, --dry-run   Print captured terminal output on stdout; do not run pi." >&2
+  echo "  explain, what   Explain the last command's terminal output (synonyms)." >&2
+  echo "  fix            Explain what went wrong and propose a concrete fix." >&2
+  echo "  <text>         Follow-up: continues the pi session until the next preset." >&2
+  echo "  Sessions: explain/what/fix each start a new pi session; custom text uses --continue." >&2
+}
+
+dry_run=0
+while [ $# -gt 0 ]; do
+  case $1 in
+  -d | --dry-run)
+    dry_run=1
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *) break ;;
+  esac
+done
+
+if [ -n "$TMUX" ]; then
+  pane=$(tmux capture-pane -p -S -200)
+  output=$(printf '%s\n' "$pane" | autobot_last_cmd)
+elif [ -d "$HOME/.cursor/projects" ]; then
+  shell_pid=$PPID
+  terminal_file=$(find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
+    if /usr/bin/grep -q "^pid: ${shell_pid}$" "$f" 2>/dev/null; then
+      printf '%s %s\n' "$(stat --format '%Y' "$f")" "$f"
+    fi
+  done | sort -rn | head -1 | cut -d' ' -f2-)
+  if [ -z "$terminal_file" ]; then
+    echo "autobot: no Cursor terminal file found for shell pid ${shell_pid}" >&2
+    exit 1
+  fi
+  body=$(awk '
+    /^---$/ { n++; if (n == 2) { capture = 1; next } if (n == 3) { capture = 0 } next }
+    capture { print }
+  ' "$terminal_file")
+  output=$(printf '%s\n' "$body" | autobot_last_cmd)
+else
+  echo "autobot: not in tmux or Cursor (no ~/.cursor/projects)" >&2
+  exit 1
+fi
+
+if [ "$dry_run" = 1 ]; then
+  echo "autobot: dry-run (pi not invoked)" >&2
+  if [ $# -gt 0 ]; then
+    case $1 in
+    explain | what) echo "autobot: would use preset: explain (new pi session)" >&2 ;;
+    fix) echo "autobot: would use preset: fix (new pi session)" >&2 ;;
+    *) echo "autobot: would use custom instructions (pi --continue): $*" >&2 ;;
+    esac
+  else
+    echo "autobot: (no mode — pass explain, what, fix, or custom text to run pi)" >&2
+  fi
+  echo "autobot: --- captured terminal output (stdout) ---" >&2
+  printf '%s\n' "$output"
+  exit 0
+fi
+
+# Presets start a new pi session; custom text continues the last session (pi --continue).
+autobot_new_session=1
+case $1 in
+explain | what)
+  prompt="Explain the following terminal output for a developer.
+
+- What command or situation does this look like (if inferable).
+- What happened: success, errors, warnings, or ambiguous.
+- If something failed, state the likely cause in plain language.
+- Be concise; use short bullets if it helps."
+  ;;
+fix)
+  prompt="The following is terminal output (often from a failed or noisy command).
+
+1. State what went wrong in one sentence.
+2. Show the exact fix: commands to run or code changes (paths and snippets).
+3. Ask: proceed? [y/N]
+
+If the user confirms, apply the fix, verify, then give a one-line summary."
+  ;;
+"")
+  usage
+  exit 1
+  ;;
+*)
+  prompt=$*
+  autobot_new_session=
+  ;;
+esac
+
+_autobot_pi() {
+  pi "$@" --offline --print "<terminal_output>
+$output
+</terminal_output>
+
+<instructions>
+$prompt
+</instructions>"
+}
+
+if [ -n "$autobot_new_session" ]; then
+  _autobot_pi
+else
+  _autobot_pi --continue
+fi

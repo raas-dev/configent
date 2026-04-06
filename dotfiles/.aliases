@@ -118,7 +118,7 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='ai'
+alias a='autobot'
 alias b='lessfilter'
 #alias b='mcat --no-linenumbers --paging never'
 alias c='dcv'
