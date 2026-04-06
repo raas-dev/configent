@@ -12,7 +12,7 @@
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-powerline-footer",
-    "npm:pi-rewind-hook",
+    "npm:pi-rewind",
     "npm:pi-rtk-optimizer",
     "npm:pi-session-switch",
     "npm:pi-tool-display",
@@ -25,14 +25,6 @@
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/davebcn87/pi-autoresearch"
   ],
-  "rewind": {
-    "silentCheckpoints": true,
-    "retention": {
-      "maxSnapshots": 2000,
-      "maxAgeDays": 30,
-      "pinLabeledEntries": true
-    }
-  },
   "quietStartup": true,
   "theme": "ayu-dark",
   "showHardwareCursor": true,
