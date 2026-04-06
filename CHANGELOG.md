@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.215.0](https://github.com/raas-dev/configent/compare/1.214.6...1.215.0) (2026-04-06)
+
+
+### Features
+
+* **autobot:** add --rerun to capture prior cmd ([c953f6c](https://github.com/raas-dev/configent/commit/c953f6c01c5ac849ccdfc210d325439c9a886a84))
+* **autobot:** enhance context capture ([5c25503](https://github.com/raas-dev/configent/commit/5c255039af41eb713d59aaaa9c4e8548d54a81c2))
+* **bin:** add autobot terminal helper ([eb78918](https://github.com/raas-dev/configent/commit/eb7891822076f0d60daf78d87648d8866e7dc446))
+* **settings:** configure rewind retention ([89a8049](https://github.com/raas-dev/configent/commit/89a8049ee7173e81001cb5b71ef85670b43c087b))
+
+
+### Fixes
+
+* **ai_commit:** fixes ai_commit handling non-JSON lines ([edbb024](https://github.com/raas-dev/configent/commit/edbb024734a1449f9357a46abc3a3258ad296c63))
+* **autobot:** remove pi --print capture ([af33b0f](https://github.com/raas-dev/configent/commit/af33b0f4221f3a5833d64099aef6a543db69f07f))
+* **profile:** prefer exact zoxide match ([5fc730b](https://github.com/raas-dev/configent/commit/5fc730b2cd019ed2d0a3c784ae7185c3d6b67357))
+* **settings:** switch rewind plugin ([dda8b17](https://github.com/raas-dev/configent/commit/dda8b1769a3c5d91d1acedac357f533302ac13d8))
+
 ## [1.214.6](https://github.com/raas-dev/configent/compare/1.214.5...1.214.6) (2026-04-06)
 
 
