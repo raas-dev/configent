@@ -133,8 +133,10 @@ if [ -z "$commit_message" ]; then
   fi
 
   # Extract and concatenate all assistant text parts from the JSON event stream.
+  # OpenCode may print non-JSON lines (e.g. workspace listing) before NDJSON events;
+  # use fromjson? so jq skips garbage lines instead of failing the whole parse.
   commit_message="$(printf '%s\n' "$commit_message_raw" |
-    jq -r 'select(.type == "text") | .part.text' 2>/dev/null | tr -d '\r')"
+    jq -rR 'fromjson? | select(.type == "text") | .part.text' 2>/dev/null | tr -d '\r')"
 
   # Trim leading/trailing blank lines only (first/last non-empty line range).
   commit_message="$(printf '%s\n' "$commit_message" |
