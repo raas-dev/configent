@@ -172,6 +172,7 @@ usage() {
   echo "  -c, --rerun     Re-run a command; everything after it is command + args (the tail of argv)." >&2
   echo "                  Bare -c (nothing after) → history / AUTOBOT_PREVIOUS_CMD." >&2
   echo "                  Use -c -- cmd ... if cmd starts with -." >&2
+  echo "                  Runs via interactive \$SHELL (bash/zsh/ksh/mksh/fish) so shell aliases apply." >&2
   echo "  (default)       Explain capture, plan a fix (no actions), ask; apply only after you confirm." >&2
   echo "Env: AUTOBOT_LINES (primary block), AUTOBOT_CONTEXT_BLOCKS (recent \$ blocks, default 3)," >&2
   echo "     AUTOBOT_PRIOR_LINES (older blocks), AUTOBOT_WINDOW, AUTOBOT_ALIASES," >&2
@@ -200,7 +201,7 @@ while [ $# -gt 0 ]; do
     elif [ "$1" = "--" ]; then
       shift
       if [ $# -eq 0 ]; then
-        echo "autobot: -c -- needs a command" >&2
+        echo "autobot: --rerun / -c -- needs a command" >&2
         exit 1
       fi
       prev_cmd=$*
@@ -212,7 +213,7 @@ while [ $# -gt 0 ]; do
     break
     ;;
   *)
-    echo "autobot: unexpected arguments (use -c before command, -d first if needed): $*" >&2
+    echo "autobot: unexpected arguments (use -c/--rerun before command, -d first if needed): $*" >&2
     exit 1
     ;;
   esac
@@ -228,13 +229,30 @@ if [ "$rerun" = 1 ]; then
 (autobot: dry-run, command not executed)"
   else
     run_shell=${SHELL:-/bin/sh}
-    tmp=$(mktemp "${TMPDIR:-/tmp}/autobot.XXXXXX") || exit 1
-    printf '%s\n' "$prev_cmd" >"$tmp"
+    _ab_sh_base=${run_shell##*/}
     set +e
-    run_out=$(cd "$PWD" && "$run_shell" "$tmp" 2>&1)
+    case $_ab_sh_base in
+    bash | zsh | ksh | mksh)
+      # Interactive -c + eval: loads rc files and expands aliases (bash does not expand
+      # aliases in -i script files). AUTOBOT_RERUN_CMD holds the exact line to run.
+      run_out=$(
+        cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
+      )
+      ;;
+    fish)
+      run_out=$(
+        cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
+      )
+      ;;
+    *)
+      tmp=$(mktemp "${TMPDIR:-/tmp}/autobot.XXXXXX") || exit 1
+      printf '%s\n' "$prev_cmd" >"$tmp"
+      run_out=$(cd "$PWD" && "$run_shell" "$tmp" </dev/null 2>&1)
+      rm -f "$tmp"
+      ;;
+    esac
     run_rc=$?
     set -e
-    rm -f "$tmp"
     synthetic="\$ $prev_cmd
 $run_out
 (exit status: $run_rc)"
