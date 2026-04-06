@@ -258,7 +258,7 @@ export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 export OPENCHAMBER_OPENCODE_PORT=4096
 
 # pi
-export PI_SKIP_VERSION_CHECK=true
+export PI_SKIP_VERSION_CHECK=1
 
 ### playwright #################################################################
 
