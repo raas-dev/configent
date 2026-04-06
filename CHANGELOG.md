@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.214.6](https://github.com/raas-dev/configent/compare/1.214.5...1.214.6) (2026-04-06)
+
+
+### Fixes
+
+* **pi:** set flag and add provider ([38be8bc](https://github.com/raas-dev/configent/commit/38be8bcffd6020a5cc174a5198ca640c4aa128a3))
+* **settings:** switch default model/provider ([8ab9d74](https://github.com/raas-dev/configent/commit/8ab9d7457a7effff0d5131e468bc480639fcc2fc))
+* **vscode:** remap composer chat/plan keys ([bcadf8d](https://github.com/raas-dev/configent/commit/bcadf8d36bfb8fee031795d29284f1278f6a2bbe))
+* **wtf:** improve terminal debug output ([9e6d02f](https://github.com/raas-dev/configent/commit/9e6d02f20c7251b9c2c163b01249dcdcb2c0c502))
+
 ## [1.214.5](https://github.com/raas-dev/configent/compare/1.214.4...1.214.5) (2026-04-05)
 
 
