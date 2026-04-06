@@ -1,7 +1,7 @@
 {
   "collapseChangelog": true,
-  "defaultModel": "MiniMax-M2.7",
-  "defaultProvider": "minimax",
+  "defaultModel": "glm-5.1",
+  "defaultProvider": "zai",
   "lastChangelogVersion": "0.65.0",
   "packages": [
     "npm:pi-ask-user",
@@ -21,6 +21,7 @@
     "npm:@danchamorro/pi-agent-modes",
     "npm:@danchamorro/pi-prompt-enhancer",
     "npm:@ogulcancelik/pi-tmux",
+    "npm:@thesethrose/pi-zai-provider",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/davebcn87/pi-autoresearch"
   ],
