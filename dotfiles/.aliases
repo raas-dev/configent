@@ -545,6 +545,9 @@ alias mcpjam='bunx @mcpjam/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
+# Find unused files, dependencies and exports in JavaScript/TypeScript projects
+alias knip='bunx knip'
+
 # Shorthand for pnpm
 alias pn='bunx pnpm'
 
@@ -557,8 +560,11 @@ alias promptfoo='bunx promptfoo'
 # Packs entire repository into a single, AI-friendly file
 alias repomix='bunx repomix'
 
-# https://skills.sh
+# Agent Skills installer: https://skills.sh
 alias skills='bunx skills'
+
+# Sort a package.json based on the well-known keys
+alias sort-package-json='bunx sort-package-json'
 
 ### AI #########################################################################
 
