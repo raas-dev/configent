@@ -592,9 +592,6 @@ agent() {
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
-# claude code via headroom proxy
-alias cl='headroom wrap claude'
-
 ### Docker ####################################################################
 
 # Generic docker build and run
