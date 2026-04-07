@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.215.1](https://github.com/raas-dev/configent/compare/1.215.0...1.215.1) (2026-04-07)
+
+
+### Fixes
+
+* **ai_commit:** parse opencode JSON text output ([4635f6b](https://github.com/raas-dev/configent/commit/4635f6b33daa2e4cccbc11eb7bfd08e86cb32fc2))
+* **aliases:** fix npmclear cleanup filter ([2d4e642](https://github.com/raas-dev/configent/commit/2d4e64235b0120fcd244d807349f97fd614a2415))
+* **autobot:** run --rerun via interactive shell ([5943403](https://github.com/raas-dev/configent/commit/5943403021965439fd4788200a0f63ccf713ea96))
+* **cursor:** pass through on no rewrite ([1ee5adb](https://github.com/raas-dev/configent/commit/1ee5adbeb4643146e3b0ad88506848a9b614fd2c))
+
 ## [1.215.0](https://github.com/raas-dev/configent/compare/1.214.6...1.215.0) (2026-04-06)
 
 
