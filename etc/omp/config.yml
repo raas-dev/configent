@@ -29,3 +29,19 @@ theme:
 task:
   disabledAgents:
     - designer
+interruptMode: immediate
+followUpMode: one-at-a-time
+startup:
+  quiet: true
+  checkUpdate: false
+collapseChangelog: true
+github:
+  enabled: true
+todo:
+  eager: true
+async:
+  enabled: true
+mcp:
+  discoveryMode: true
+secrets:
+  enabled: true
