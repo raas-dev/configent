@@ -986,10 +986,10 @@ tl() {
 
 ### Cleaners ###################################################################
 
-# Npm remove all global packages (except later npm installed via npm)
+# Npm remove all global packages (except npm itself)
 npmclear() {
   npm ls --location=global -p --depth=0 |
-    awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' |
+    awk -F/node_modules/ 'NF>1 && $2!="npm" {print $2}' |
     xargs npm --location=global rm
 }
 
