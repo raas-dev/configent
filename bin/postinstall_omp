@@ -48,6 +48,18 @@ mkdir -p "$HOME/.omp/agent/commands"
 rm -rf "$HOME/.omp/agent/commands"
 ln -sfnv "$config_path/omp/commands" "$HOME/.omp/agent/commands"
 
+# hooks dir
+if [ ! -r "$backup_path/.omp/agent/hooks" ]; then
+  if [ -r "$HOME/.omp/agent/hooks" ]; then
+    mkdir -p "$backup_path/.omp/agent/hooks"
+    cp -RP "$HOME/.omp/agent/hooks" \
+      "$backup_path/.omp/agent/hooks"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent/hooks"
+rm -rf "$HOME/.omp/agent/hooks"
+ln -sfnv "$config_path/omp/hooks" "$HOME/.omp/agent/hooks"
+
 # modules dir
 if [ ! -r "$backup_path/.omp/agent/modules" ]; then
   if [ -r "$HOME/.omp/agent/modules" ]; then
