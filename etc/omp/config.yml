@@ -1,0 +1,31 @@
+lastChangelogVersion: 13.10.1
+modelRoles:
+  default: zai/glm-5.1
+  smol: zai/glm-5-turbo
+  slow: zai/glm-5.1
+  vision: zai/glm-5v-turbo
+  plan: zai/glm-5.1
+  commit: zai/glm-5.1
+renderMermaid:
+  enabled: true
+checkpoint:
+  enabled: true
+inspect_image:
+  enabled: true
+calc:
+  enabled: true
+commands:
+  enableClaudeProject: false
+  enableClaudeUser: false
+providers:
+  webSearch: auto
+defaultThinkingLevel: high
+disabledProviders:
+  - cursor
+  - opencode
+  - claude
+theme:
+  dark: ayu-dark
+task:
+  disabledAgents:
+    - designer
