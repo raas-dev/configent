@@ -557,9 +557,6 @@ alias projen='bunx projen'
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
-# Packs entire repository into a single, AI-friendly file
-alias repomix='bunx repomix'
-
 # Agent Skills installer: https://skills.sh
 alias skills='bunx skills'
 
