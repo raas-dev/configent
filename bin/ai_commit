@@ -34,6 +34,11 @@ if ! command -v opencode >/dev/null; then
   exit 127
 fi
 
+if ! command -v jq >/dev/null; then
+  printf "%sError: jq not found in PATH (required to parse opencode JSON output).\n" "$red"
+  exit 127
+fi
+
 git_diff="$(git diff --staged --no-color)" || {
   printf "%sError: Failed to get git diff.\n" "$red"
   exit 1
@@ -113,44 +118,95 @@ fi
 # The commit command reads the git diff from stdin.
 # Use --format json so the assistant text is reliably available regardless of
 # opencode version; extract all "text" event payloads and concatenate them.
+extract_text_from_json_ndjson() {
+  # One JSON object per line; ignore non-JSON lines (TTY noise mixed into copy-paste, etc.).
+  printf '%s\n' "$1" | grep '^{' | jq -r 'select(.type == "text") | .part.text // empty' | tr -d '\r'
+}
+
+trim_blank_edges() {
+  printf '%s\n' "$1" | awk '
+      { lines[NR] = $0 }
+      NF { if (!first) first = NR; last = NR }
+      END {
+        if (!first) exit
+        for (i = first; i <= last; i++) print lines[i]
+      }'
+}
+
+strip_default_format_noise() {
+  # --format default may prefix workspace listing lines; start at first line with ": "
+  # (conventional-commit subject or similar).
+  awk 'index($0, ": ") { found = 1 }
+       found { print }'
+}
+
 if [ -z "$commit_message" ]; then
+  oc_stderr=$(mktemp) || {
+    printf "%sError: Failed to create temporary file.\n" "$red"
+    exit 1
+  }
+  trap 'rm -f "$diff_file" "$oc_stderr"' EXIT INT TERM
+
+  oc_run_status=0
   if [ -n "$context_message" ]; then
     commit_message_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
       --command commit \
-      --format json 2>/dev/null)" || {
-      printf "%sError: Failed to generate commit message.\n" "$red"
-      exit 1
-    }
+      --format json 2>"$oc_stderr")" || oc_run_status=$?
   else
     commit_message_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
       --agent coder \
       --command commit \
-      --format json 2>/dev/null)" || {
-      printf "%sError: Failed to generate commit message.\n" "$red"
-      exit 1
-    }
+      --format json 2>"$oc_stderr")" || oc_run_status=$?
   fi
 
-  # Extract and concatenate all assistant text parts from the JSON event stream.
-  # OpenCode may print non-JSON lines (e.g. workspace listing) before NDJSON events;
-  # use fromjson? so jq skips garbage lines instead of failing the whole parse.
-  commit_message="$(printf '%s\n' "$commit_message_raw" |
-    jq -rR 'fromjson? | select(.type == "text") | .part.text' 2>/dev/null | tr -d '\r')"
+  if [ -n "${oc_run_status:-}" ] && [ "${oc_run_status:-0}" -ne 0 ]; then
+    printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_run_status"
+    if [ -s "$oc_stderr" ]; then
+      printf "%s%s\n" "$yellow" "$(cat "$oc_stderr")"
+    fi
+    exit 1
+  fi
 
-  # Trim leading/trailing blank lines only (first/last non-empty line range).
-  commit_message="$(printf '%s\n' "$commit_message" |
-    awk '
-        { lines[NR] = $0 }
-        NF { if (!first) first = NR; last = NR }
-        END {
-          if (!first) exit
-          for (i = first; i <= last; i++) print lines[i]
-        }')"
+  commit_message="$(trim_blank_edges "$(extract_text_from_json_ndjson "$commit_message_raw")")"
+
+  # If JSON parsing yielded nothing, try formatted output once (some opencode builds
+  # emit assistant text only in default mode, or JSON shape may differ).
+  if [ -z "$commit_message" ] && [ -z "${AI_COMMIT_JSON_ONLY:-}" ]; then
+    if [ -n "$context_message" ]; then
+      default_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
+        --agent coder \
+        --command commit \
+        --format default 2>/dev/null)" || true
+    else
+      default_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
+        --agent coder \
+        --command commit \
+        --format default 2>/dev/null)" || true
+    fi
+    commit_message="$(trim_blank_edges "$(printf '%s\n' "$default_raw" | strip_default_format_noise)")"
+  fi
+
+  rm -f "$oc_stderr"
+  trap 'cleanup' EXIT INT TERM
 fi
 
 if [ -z "$commit_message" ]; then
+  opencode_err=""
+  if [ -n "${commit_message_raw:-}" ]; then
+    opencode_err="$(printf '%s\n' "$commit_message_raw" | grep '^{' |
+      jq -r 'select(.type == "error") | (.error.data.message // .error.message // .error.name // empty)' 2>/dev/null | head -1)"
+  fi
   printf "%sError: Generated commit message is empty.\n" "$red"
+  if [ -n "$opencode_err" ]; then
+    printf "%sOpenCode: %s\n" "$yellow" "$opencode_err"
+  elif [ -n "${commit_message_raw:-}" ]; then
+    printf "%sHint: opencode returned output but no text events; try %sAI_COMMIT_JSON_ONLY=1%s to skip default-format fallback, or check opencode / jq versions.\n" \
+      "$yellow" "$cyan" "$normal"
+  else
+    printf "%sHint: opencode produced no stdout; check API keys and %soc exec %s profile.\n" \
+      "$yellow" "$cyan" "$OC_PROFILE$normal"
+  fi
   exit 1
 fi
 
