@@ -534,19 +534,19 @@ venv() {
   fi
 }
 
-### Node.js ####################################################################
+### Bun ########################################################################
 
 # MCP server development tool
 alias inspector='bunx @modelcontextprotocol/inspector'
+
+# Find unused files, dependencies and exports in JavaScript/TypeScript projects
+alias knip='bunx knip'
 
 # MCP apps development tool
 alias mcpjam='bunx @mcpjam/inspector'
 
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
-
-# Find unused files, dependencies and exports in JavaScript/TypeScript projects
-alias knip='bunx knip'
 
 # Shorthand for pnpm
 alias pn='bunx pnpm'
