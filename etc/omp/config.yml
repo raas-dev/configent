@@ -18,7 +18,7 @@ commands:
   enableClaudeProject: false
   enableClaudeUser: false
 providers:
-  webSearch: auto
+  webSearch: exa
 defaultThinkingLevel: high
 disabledProviders:
   - cursor
