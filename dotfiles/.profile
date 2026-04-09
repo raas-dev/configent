@@ -271,6 +271,9 @@ export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 # openchamber
 export OPENCHAMBER_OPENCODE_PORT=4096
 
+# opencode: force-full-read plugin
+export OPENCODE_FORCE_FULL_READ_ACTIVE=false
+
 # pi
 export PI_SKIP_VERSION_CHECK=1
 
