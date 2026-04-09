@@ -19,7 +19,7 @@ commands:
   enableClaudeUser: false
 providers:
   webSearch: exa
-defaultThinkingLevel: high
+defaultThinkingLevel: medium
 disabledProviders:
   - cursor
   - opencode
