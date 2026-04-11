@@ -101,63 +101,8 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
 ### nsh ########################################################################
-#
-# nsh drives a full-screen terminal state machine (vt100). It can panic when
-# stdin/stdout are not real TTYs or when TERM=dumb (agent runners, some IDE
-# terminals). Only initialize when the session looks like a normal terminal.
-if [[ -o interactive && -t 0 && -t 1 && "$TERM" != dumb && -z "${NSH_DISABLE:-}" ]] &&
-  command -v nsh >/dev/null; then
-  eval "$(nsh init "${SHELL##*/}")"
-fi
 
-# Atuin only records preexec's $1. nsh clears the buffer before accept-line,
-# so `? …` never reaches Atuin. Start/end an explicit history row for NL
-# queries.
-if typeset -f __nsh_handle_nl_query_line >/dev/null 2>&1; then
-  _nsh_fn_orig=__nsh_handle_nl_query_line__orig
-  _nsh_fn_src=__nsh_handle_nl_query_line
-  # Quoted subscripts on functions[...] break the copy in zsh
-  # (orig never defined).
-  # zsh functions[] keys are strings; bash-oriented SC2004 does not apply.
-  # shellcheck disable=SC2004
-  functions[$_nsh_fn_orig]=${functions[$_nsh_fn_src]}
-  unset _nsh_fn_orig _nsh_fn_src
-  __nsh_handle_nl_query_line() {
-    case "$BUFFER" in
-    '?? '* | '?! '* | '? '*)
-      if command -v atuin >/dev/null; then
-        typeset -g __NSH_ATUIN_NL_ID
-        __NSH_ATUIN_NL_ID="$(
-          ATUIN_LOG=error atuin history start -- "$BUFFER" 2>/dev/null
-        )"
-      fi
-      ;;
-    esac
-    __nsh_handle_nl_query_line__orig
-  }
-  _nsh_fn_orig=__nsh_run_deferred__orig
-  _nsh_fn_src=__nsh_run_deferred
-  # shellcheck disable=SC2004
-  functions[$_nsh_fn_orig]=${functions[$_nsh_fn_src]}
-  unset _nsh_fn_orig _nsh_fn_src
-  __nsh_run_deferred() {
-    local _atuin_nl_id="${__NSH_ATUIN_NL_ID:-}" \
-      _atuin_t0="${EPOCHREALTIME-}" _dur
-    __nsh_run_deferred__orig
-    local _atuin_qexit=$?
-    if [[ -n "$_atuin_nl_id" ]]; then
-      unset __NSH_ATUIN_NL_ID
-      if [[ -n "$_atuin_t0" ]]; then
-        local _atuin_t1="${EPOCHREALTIME-}"
-        [[ -n "$_atuin_t1" ]] && printf -v _dur %.0f \
-          $(((_atuin_t1 - _atuin_t0) * 1000000000))
-      fi
-      (ATUIN_LOG=error atuin history end --exit "$_atuin_qexit" \
-        ${_dur:+--duration=$_dur} -- "$_atuin_nl_id" &) >/dev/null 2>&1
-    fi
-    return "$_atuin_qexit"
-  }
-fi
+command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
 
 ### Automatically list contents when changing directory ########################
 
