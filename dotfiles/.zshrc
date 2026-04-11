@@ -102,11 +102,7 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 ### nsh ########################################################################
 
-if command -v nsh >/dev/null; then
-  if [[ -z ${TMUX:-} || -z ${SSH_CONNECTION:-} ]]; then
-    eval "$(nsh init "${_profile_tool_shell:-${SHELL##*/}}")"
-  fi
-fi
+command -v nsh >/dev/null && eval "$(nsh init zsh)"
 
 ### Automatically list contents when changing directory ########################
 
