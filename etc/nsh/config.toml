@@ -12,12 +12,7 @@ fast = ["gpt-5.4-mini"]
 coding = ["gpt-5.3-codex"]
 
 [execution]
-mode = "prefill"
-
-[provider_routing]
-active = "openai"
-via_cliproxy = false
-configured_providers = ["openai"]
+mode = "prefill" # prefill | confirm | autorun
 
 [mcp.servers.exa]
 transport = "http"
