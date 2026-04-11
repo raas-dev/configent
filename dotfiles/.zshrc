@@ -104,7 +104,7 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 if command -v nsh >/dev/null; then
   if [[ -z ${TMUX:-} || -z ${SSH_CONNECTION:-} ]]; then
-    eval "$(nsh init "${SHELL##*/}")"
+    eval "$(nsh init "${_profile_tool_shell:-${SHELL##*/}}")"
   fi
 fi
 

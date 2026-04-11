@@ -108,6 +108,18 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
+### Tool init shell ############################################################
+
+# $SHELL is the login shell and often stays zsh when bash sources this file.
+# Starship, zoxide, mise, etc. must match the runtime shell.
+if [ -n "${BASH_VERSION:-}" ]; then
+  _profile_tool_shell=bash
+elif [ -n "${ZSH_VERSION:-}" ]; then
+  _profile_tool_shell=zsh
+else
+  _profile_tool_shell="${SHELL##*/}"
+fi
+
 ### mise #######################################################################
 
 path_prepend "$HOME/.local/bin"
@@ -120,7 +132,7 @@ if [ -n "${ZSH_VERSION:-}" ]; then
   esac
 fi
 if [ -z "${_mise_skip_tm_bootstrap:-}" ]; then
-  command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
+  command -v mise >/dev/null && eval "$(mise activate "${_profile_tool_shell}")"
 fi
 unset _mise_skip_tm_bootstrap
 
@@ -177,12 +189,12 @@ command -v pwsh >/dev/null && export POWERSHELL_UPDATECHECK="Off"
 
 ### Starship cross-shell prompt ################################################
 
-command -v starship >/dev/null && eval "$(starship init "${SHELL##*/}")"
+command -v starship >/dev/null && eval "$(starship init "${_profile_tool_shell}")"
 
 ### zoxide #####################################################################
 
 if command -v zoxide >/dev/null; then
-  eval "$(zoxide init "${SHELL##*/}" --cmd j --no-aliases)"
+  eval "$(zoxide init "${_profile_tool_shell}" --cmd j --no-aliases)"
   j() {
     # prefer exact basename match when single arg is given
     if [ $# -eq 1 ] && [ "$1" != '-' ] && [ "${1#-}" = "$1" ]; then
@@ -214,7 +226,7 @@ if command -v carapace >/dev/null; then
       [ "${BASH_VERSINFO[1]:-0}" -ge 1 ]
     }
   }; then
-    eval "$(carapace _carapace "${SHELL##*/}")"
+    eval "$(carapace _carapace "${_profile_tool_shell}")"
   fi
 fi
 
@@ -226,7 +238,7 @@ fi
 
 ### atuin ######################################################################
 
-command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
+command -v atuin >/dev/null && eval "$(atuin init "${_profile_tool_shell}")"
 
 ### bat ########################################################################
 
@@ -247,12 +259,12 @@ if command -v mcat >/dev/null; then
   export MCAT_THEME="ayu"
 
   # completions
-  eval "$(mcat --generate "${SHELL##*/}")"
+  eval "$(mcat --generate "${_profile_tool_shell}")"
 fi
 
 ### worktrunk ##################################################################
 
-command -v wt >/dev/null && eval "$(wt config shell init "${SHELL##*/}")"
+command -v wt >/dev/null && eval "$(wt config shell init "${_profile_tool_shell}")"
 
 ### delta ######################################################################
 
