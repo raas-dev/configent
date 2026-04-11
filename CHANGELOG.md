@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.0](https://github.com/raas-dev/configent/compare/1.215.1...1.216.0) (2026-04-11)
+
+
+### Features
+
+* **nsh:** add nsh bootstrap and config ([50b4972](https://github.com/raas-dev/configent/commit/50b4972e445392dc8934182264682ea779f5c0b9))
+
+
+### Fixes
+
+* **aliases:** fix t() log tail arguments ([2d1745e](https://github.com/raas-dev/configent/commit/2d1745ee974fc0b49767b2595faf12a4866500b8))
+* **profile:** guard carapace bash integration ([f7e3eac](https://github.com/raas-dev/configent/commit/f7e3eac55d9db5f90d4e777059d3c557dbc85fc9))
+* **profile:** guard carapace bash integration ([fb423f2](https://github.com/raas-dev/configent/commit/fb423f2a0ca7ab662d06ae7eb672c30f54bb835a))
+* **zshrc:** fix atuin nl history logging ([a29850e](https://github.com/raas-dev/configent/commit/a29850ed502b6f1460effefd3bd7506c41cf00e5))
+* **zshrc:** fix atun-nsh newline history logging ([99ffb40](https://github.com/raas-dev/configent/commit/99ffb40fb8b5297947ca276bfe12765239c52345))
+* **zshrc:** fix nsh init when NSH_DISABLE set ([2509b1a](https://github.com/raas-dev/configent/commit/2509b1a396a3dc4f8d10a63018f638f2ed1d5352))
+* **zshrc:** guard nsh init for PTYs ([7521657](https://github.com/raas-dev/configent/commit/7521657dd3dbadd5664025e709bd6d0976f38513))
+* **zshrc:** guard nsh init for tty ([6eeb5c3](https://github.com/raas-dev/configent/commit/6eeb5c326f8cff70decf6172d2ec5017b422953d))
+* **zshrc:** guard nsh init when disabled ([88aac29](https://github.com/raas-dev/configent/commit/88aac290474c694893a4e7e14fdf160703e639f4))
+* **zshrc:** init nsh using shell name ([a4f6c67](https://github.com/raas-dev/configent/commit/a4f6c670f33cbcbe8b8dc5f4f4e8d2179c2d9cd8))
+* **zshrc:** simplify nsh init ([60bb0c7](https://github.com/raas-dev/configent/commit/60bb0c745b78606b22bc859c3216390d8dc2e3ed))
+* **zshrc:** simplify nsh init ([86cb0fe](https://github.com/raas-dev/configent/commit/86cb0fe05c262644a1bf3e74476427325e669866))
+
 ## [1.215.1](https://github.com/raas-dev/configent/compare/1.215.0...1.215.1) (2026-04-07)
 
 
