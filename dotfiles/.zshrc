@@ -102,9 +102,7 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 ### nsh ########################################################################
 
-# tmux and `nsh wrap` both want the PTY; NSH_NO_WRAP skips wrap, keeps `?`/hooks.
-export NSH_NO_WRAP=1
-command -v nsh >/dev/null && eval "$(nsh init zsh)"
+command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
 
 ### Automatically list contents when changing directory ########################
 
