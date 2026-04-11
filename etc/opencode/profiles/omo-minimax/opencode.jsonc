@@ -10,7 +10,7 @@
   },
   "model": "minimax-coding-plan/MiniMax-M2.7",
   "plugin": [
-    "oh-my-opencode",
+    "oh-my-openagent",
     "opencode-pty",
     "opencode-scheduler"
   ]
