@@ -92,8 +92,10 @@
     },
     {
       "args": [
-        "-t",
+        "-tt",
         "dev",
+        "env",
+        "NSH_DISABLE=1",
         "zsh",
         "-i",
         "-c",

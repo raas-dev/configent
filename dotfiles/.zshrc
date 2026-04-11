@@ -102,7 +102,9 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 ### nsh ########################################################################
 
-command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
+if [[ -z "${NSH_DISABLE:-}" ]] && command -v nsh >/dev/null; then
+  eval "$(nsh init "${SHELL##*/}")"
+fi
 
 ### Automatically list contents when changing directory ########################
 
