@@ -1,0 +1,20 @@
+[provider]
+default = "openai"
+model = "gpt-5.4"
+timeout_seconds = 30
+
+[provider.openai]
+base_url = "https://api.openai.com/v1"
+
+[models]
+main = ["gpt-5.4"]
+fast = ["gpt-5.4-mini"]
+coding = ["gpt-5.3-codex"]
+
+[execution]
+mode = "prefill" # prefill | confirm | autorun
+
+[provider_routing]
+active = "openai"
+via_cliproxy = false
+configured_providers = ["openai"]

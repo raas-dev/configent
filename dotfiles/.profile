@@ -214,6 +214,10 @@ fi
 
 command -v atuin >/dev/null && eval "$(atuin init "${SHELL##*/}")"
 
+### nsh ########################################################################
+
+command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
+
 ### bat ########################################################################
 
 if command -v bat >/dev/null; then

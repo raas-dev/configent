@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.nsh/config.toml" ]; then
+  if [ -r "$HOME/.nsh/config.toml" ]; then
+    mkdir -p "$backup_path/.nsh"
+    cp -P "$HOME/.nsh/config.toml" \
+      "$backup_path/.nsh/config.toml"
+  fi
+fi
+
+# symlink (nsh main config: ~/.nsh/config.toml)
+mkdir -p "$HOME/.nsh"
+ln -sfnv "$config_path/nsh/config.toml" "$HOME/.nsh/config.toml"
+
+# nsh warns if the file is group- or world-readable
+if [ -f "$config_path/nsh/config.toml" ]; then
+  chmod 600 "$config_path/nsh/config.toml"
+fi
