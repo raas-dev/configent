@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.1](https://github.com/raas-dev/configent/compare/1.216.0...1.216.1) (2026-04-11)
+
+
+### Fixes
+
+* **profile:** skip mise activation in tmux ([ad36818](https://github.com/raas-dev/configent/commit/ad3681880c287dd036c65779e0f48149c2c2b953))
+* **zshrc:** guard nsh init when in tmux/ssh ([91ef16d](https://github.com/raas-dev/configent/commit/91ef16d0ebd502e4b62928e31d9f4790df9f8f23))
+
 ## [1.216.0](https://github.com/raas-dev/configent/compare/1.215.1...1.216.0) (2026-04-11)
 
 
