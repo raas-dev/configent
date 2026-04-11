@@ -101,21 +101,8 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
 ### nsh ########################################################################
-#
-# `nsh wrap` (started from `nsh init`) drives a vt100 screen model. It can panic
-# on TERM=dumb and on 0×0 PTYs (Cursor Agent, some IDE terminals, CI). Upstream
-# provides NSH_NO_WRAP=1 to skip wrap but still load `?` / ZLE integration.
-# NSH_DISABLE=1 skips nsh entirely.
-if [[ -z "${NSH_DISABLE:-}" ]] && command -v nsh >/dev/null; then
-  if ! ((${+NSH_NO_WRAP})); then
-    if [[ "${TERM:-}" == dumb ]] ||
-      { [[ -n "${COLUMNS:-}" ]] && ((COLUMNS < 1)); } ||
-      { [[ -n "${LINES:-}" ]] && ((LINES < 1)); }; then
-      export NSH_NO_WRAP=1
-    fi
-  fi
-  eval "$(nsh init "${SHELL##*/}")"
-fi
+
+command -v nsh >/dev/null && eval "$(nsh init zsh)"
 
 ### Automatically list contents when changing directory ########################
 
