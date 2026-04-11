@@ -98,6 +98,10 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
+### nsh ########################################################################
+
+command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
+
 ### Automatically list contents when changing directory ########################
 
 chpwd() {
