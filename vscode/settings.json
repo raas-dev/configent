@@ -100,7 +100,7 @@
         "-c",
         "tm"
       ],
-      "command": "exec",
+      "command": "exec ssh",
       "id": "ssh",
       "label": "ssh dev"
     }
