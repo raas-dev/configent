@@ -192,8 +192,17 @@ if command -v zoxide >/dev/null; then
 fi
 
 ### carapace ###################################################################
-
-command -v carapace >/dev/null && eval "$(carapace _carapace "${SHELL##*/}")"
+#
+# Carapace's bash integration uses `complete -o noquote` (bash >= 5.1). That
+# errors on macOS /bin/bash 3.2. Still load for zsh/fish/etc. and bash >= 5.1.
+if command -v carapace >/dev/null; then
+  if [ -z "${BASH_VERSION:-}" ] || {
+    [ "${BASH_VERSINFO[0]:-0}" -gt 5 ] ||
+      { [ "${BASH_VERSINFO[0]:-0}" -eq 5 ] && [ "${BASH_VERSINFO[1]:-0}" -ge 1 ]; }
+  }; then
+    eval "$(carapace _carapace "${SHELL##*/}")"
+  fi
+fi
 
 ### fzf ########################################################################
 
