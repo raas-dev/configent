@@ -12,9 +12,17 @@ fast = ["gpt-5.4-mini"]
 coding = ["gpt-5.3-codex"]
 
 [execution]
-mode = "prefill" # prefill | confirm | autorun
+mode = "prefill"
 
 [provider_routing]
 active = "openai"
 via_cliproxy = false
 configured_providers = ["openai"]
+
+[mcp.servers.exa]
+transport = "http"
+url = "https://mcp.exa.ai/mcp"
+
+[mcp.servers."gh-grep"]
+transport = "http"
+url = "https://mcp.grep.app"
