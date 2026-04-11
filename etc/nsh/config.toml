@@ -14,6 +14,10 @@ coding = ["gpt-5.3-codex"]
 [execution]
 mode = "prefill" # prefill | confirm | autorun
 
+[capture]
+mode = "raw" # vt100 = full terminal parser (can panic on dumb/IDE PTYs)
+alt_screen = "drop" # drop | snapshot | capture
+
 [mcp.servers.exa]
 transport = "http"
 url = "https://mcp.exa.ai/mcp"
