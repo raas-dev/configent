@@ -118,7 +118,7 @@ fi
 
 ### Shortcuts ##################################################################
 
-alias a='autobot'
+alias a='nsh query --think --'
 alias b='lessfilter'
 #alias b='mcat --no-linenumbers --paging never'
 alias c='dcv'
