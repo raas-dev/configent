@@ -100,10 +100,6 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
-### nsh ########################################################################
-
-command -v nsh >/dev/null && eval "$(nsh init zsh)"
-
 ### Automatically list contents when changing directory ########################
 
 chpwd() {
