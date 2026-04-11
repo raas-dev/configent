@@ -101,8 +101,14 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 
 ### nsh ########################################################################
-
-command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
+#
+# nsh drives a full-screen terminal state machine (vt100). It can panic when
+# stdin/stdout are not real TTYs or when TERM=dumb (agent runners, some IDE
+# terminals). Only initialize when the session looks like a normal terminal.
+if [[ -o interactive && -t 0 && -t 1 && "$TERM" != dumb && -z "${NSH_DISABLE:-}" ]] &&
+  command -v nsh >/dev/null; then
+  eval "$(nsh init "${SHELL##*/}")"
+fi
 
 # Atuin only records preexec's $1. nsh clears the buffer before accept-line,
 # so `? …` never reaches Atuin. Start/end an explicit history row for NL
