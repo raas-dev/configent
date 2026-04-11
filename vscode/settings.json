@@ -92,6 +92,9 @@
     },
     {
       "args": [
+        "env",
+        "TERM=xterm-256color",
+        "ssh",
         "-tt",
         "dev",
         "zsh",
@@ -99,7 +102,7 @@
         "-c",
         "tm"
       ],
-      "command": "exec ssh",
+      "command": "exec",
       "id": "ssh",
       "label": "ssh dev"
     }
