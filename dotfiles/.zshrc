@@ -102,7 +102,11 @@ RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
 
 ### nsh ########################################################################
 
-command -v nsh >/dev/null && eval "$(nsh init "${SHELL##*/}")"
+if command -v nsh >/dev/null; then
+  if [[ -z ${TMUX:-} || -z ${SSH_CONNECTION:-} ]]; then
+    eval "$(nsh init "${SHELL##*/}")"
+  fi
+fi
 
 ### Automatically list contents when changing directory ########################
 
