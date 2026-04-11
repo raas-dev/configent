@@ -111,7 +111,18 @@ export HOMEBREW_NO_ENV_HINTS=1
 ### mise #######################################################################
 
 path_prepend "$HOME/.local/bin"
-command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
+
+# Skip for `zsh -i -c tm` (tmux client + mise hooks clash on stdin)
+_mise_skip_tm_bootstrap=
+if [ -n "${ZSH_VERSION:-}" ]; then
+  case ${ZSH_EXECUTION_STRING-} in
+    (tm|tm\ *|tm-*) _mise_skip_tm_bootstrap=1 ;;
+  esac
+fi
+if [ -z "${_mise_skip_tm_bootstrap:-}" ]; then
+  command -v mise >/dev/null && eval "$(mise activate "${SHELL##*/}")"
+fi
+unset _mise_skip_tm_bootstrap
 
 ### bun ########################################################################
 
