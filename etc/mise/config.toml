@@ -113,7 +113,7 @@ shfmt = 'latest'
 powershell = { version = '7.5.4', postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 # rust
-rust = '1.93.1'
+rust = { version = "1.93", components = "rust-analyzer" }
 cargo-binstall = 'latest'
 'cargo:cargo-cache' = 'latest' # for topgrade
 'cargo:cargo-update' = 'latest' # for topgrade
