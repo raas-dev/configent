@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Prefer tmux from mise over system tmux
+mise_data="${MISE_DATA_DIR:-$HOME/.local/share/mise}"
+if [ -d "$mise_data/shims" ]; then
+  PATH="$mise_data/shims:$PATH"
+  export PATH
+fi
+
 session_name="$(hostname)"
 
 while getopts "s:" opt; do
