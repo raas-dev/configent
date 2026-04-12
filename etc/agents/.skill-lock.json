@@ -8,16 +8,7 @@
       "skillPath": "skills/documentation-writer/SKILL.md",
       "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
       "installedAt": "2026-04-11T07:44:53.328Z",
-      "updatedAt": "2026-04-11T07:44:53.328Z"
-    },
-    "autoresearch": {
-      "source": "github/awesome-copilot",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/github/awesome-copilot.git",
-      "skillPath": "skills/autoresearch/SKILL.md",
-      "skillFolderHash": "a89e8007dc84571d21ad6717d96ccdc3d94d3039",
-      "installedAt": "2026-04-12T09:12:36.837Z",
-      "updatedAt": "2026-04-12T09:12:36.837Z"
+      "updatedAt": "2026-04-12T11:52:24.567Z"
     },
     "agentic-eval": {
       "source": "github/awesome-copilot",
@@ -26,7 +17,7 @@
       "skillPath": "skills/agentic-eval/SKILL.md",
       "skillFolderHash": "2322ac3a69fa63b58268525481bf684b9ddf51a3",
       "installedAt": "2026-04-12T09:17:21.513Z",
-      "updatedAt": "2026-04-12T09:17:21.513Z"
+      "updatedAt": "2026-04-12T11:52:32.234Z"
     },
     "desloppify": {
       "source": "peteromallet/desloppify",
@@ -35,24 +26,93 @@
       "skillPath": "docs/SKILL.md",
       "skillFolderHash": "36bca0fbd7cbb5d0d2094576a90cea07df05c5d5",
       "installedAt": "2026-04-12T11:38:46.306Z",
-      "updatedAt": "2026-04-12T11:38:46.306Z"
+      "updatedAt": "2026-04-12T11:52:34.837Z"
+    },
+    "agent-browser": {
+      "source": "agent-browser",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "e00321fc70745f19bb634877ec0f02f21a3e0231",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "context7": {
+      "source": "context7",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "40d381c34353c8102e7def20186d328faf600e9a",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "find-skills": {
+      "source": "find-skills",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "5aafd1a88bb4dcd63a0e3bb361f80ff1e376379a",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "humanizer": {
+      "source": "humanizer",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "52a43ae0134793322dbe1705df7cada58c0e953e",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "mcporter": {
+      "source": "mcporter",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "21d959cc70adce6b09f8841c3533ec3590495e40",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "prompt-master": {
+      "source": "prompt-master",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "9f4f7d7ac318fb4e64c01c5a28ecbe6e64761389",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "skill-conductor": {
+      "source": "skill-conductor",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "df665509d851b4549e163f25c37aaf3a9356569f",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "skill-seekers": {
+      "source": "skill-seekers",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "1b404ce03a41915221885ca4c440268a91c5fb4b",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
+    },
+    "stop-slop": {
+      "source": "stop-slop",
+      "sourceType": "local",
+      "sourceUrl": "",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "70af8bfcfc017ce60a04e24004eceb52c8fd1fef",
+      "installedAt": "2026-04-12T11:43:29.055Z",
+      "updatedAt": "2026-04-12T11:43:29.055Z"
     }
   },
   "dismissed": {
     "findSkillsPrompt": true
   },
   "lastSelectedAgents": [
-    "amp",
-    "antigravity",
-    "cline",
-    "codex",
-    "cursor",
-    "deepagents",
-    "firebender",
-    "gemini-cli",
-    "github-copilot",
-    "kimi-cli",
-    "opencode",
-    "warp"
   ]
 }
