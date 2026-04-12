@@ -1,7 +1,7 @@
 {
   "collapseChangelog": true,
-  "defaultModel": "glm-5.1",
-  "defaultProvider": "zai",
+  "defaultModel": "MiniMax-M2.7",
+  "defaultProvider": "minimax",
   "lastChangelogVersion": "0.66.1",
   "packages": [
     "npm:pi-ask-user",
