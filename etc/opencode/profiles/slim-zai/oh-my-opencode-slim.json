@@ -15,35 +15,43 @@
     "zai-plan": {
       "orchestrator": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "high"
+        "variant": "high",
+        "skills": ["*"]
       },
       "explorer": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "low"
+        "variant": "low",
+        "skills": ["*"]
       },
       "oracle": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "high"
+        "variant": "high",
+        "skills": ["*"]
       },
       "librarian": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "low"
+        "variant": "low",
+        "skills": ["*"]
       },
       "designer": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "medium"
+        "variant": "medium",
+        "skills": ["*"]
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "low"
+        "variant": "low",
+        "skills": ["*"]
       },
       "councillor": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "low"
+        "variant": "low",
+        "skills": ["*"]
       },
       "council-master": {
         "model": "zai-coding-plan/glm-5.1",
-        "variant": "low"
+        "variant": "low",
+        "skills": ["*"]
       }
     }
   },
