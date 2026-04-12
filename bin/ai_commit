@@ -125,7 +125,7 @@ if [ -z "$commit_message" ]; then
   oc_status=0
   raw="$(pipe_opencode_stdin | oc exec "$OC_PROFILE" -- opencode run \
     --agent coder \
-    --command commit \
+    --command caveman-commit \
     --format default 2>"$oc_stderr")" || oc_status=$?
 
   if [ "$oc_status" -ne 0 ]; then
