@@ -34,7 +34,7 @@ zoxide = 'latest'
 'cargo:kondo' = 'latest' # no linux-aarch64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
 'cargo:tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # no linux-aarch64 release
-'cargo:https://github.com/fluffypony/nsh' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nsh" } # no GitHub releases
+#'cargo:https://github.com/fluffypony/nsh' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nsh" } # no GitHub releases
 'pipx:glances' = { version = 'latest', extras = "containers,gpu,web,wifi" }
 'pipx:sncli' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_sncli" }
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
