@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.3](https://github.com/raas-dev/configent/compare/1.216.2...1.216.3) (2026-04-12)
+
+
+### Fixes
+
+* **config:** disable nsh cargo entry ([7225298](https://github.com/raas-dev/configent/commit/722529837bce1a9071802c06a49c2e5ac79f785a))
+
 ## [1.216.2](https://github.com/raas-dev/configent/compare/1.216.1...1.216.2) (2026-04-12)
 
 
