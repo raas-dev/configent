@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.2](https://github.com/raas-dev/configent/compare/1.216.1...1.216.2) (2026-04-12)
+
+
+### Fixes
+
+* **profile:** run mise and nsh init ([62d7709](https://github.com/raas-dev/configent/commit/62d77095da47f982bc6177a300fee1228004e7ce))
+* **profile:** skip mise activation in tmux ([5b5191b](https://github.com/raas-dev/configent/commit/5b5191b923f0b6ee5de2dce2788a1eec6fff480c))
+* **profile:** use correct shell for tool init ([ac5386d](https://github.com/raas-dev/configent/commit/ac5386db48fe02d8eba079cc362a6100fc8a4eb7))
+* **zshrc:** remove nsh init from zshrc ([ce423fd](https://github.com/raas-dev/configent/commit/ce423fd004e3f359e0c74246dc156b7d9daacde3))
+
 ## [1.216.1](https://github.com/raas-dev/configent/compare/1.216.0...1.216.1) (2026-04-11)
 
 
