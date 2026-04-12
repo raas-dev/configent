@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.6](https://github.com/raas-dev/configent/compare/1.216.5...1.216.6) (2026-04-12)
+
+
+### Fixes
+
+* **opencode:** disable Claude Code prompt env flag ([6cdb302](https://github.com/raas-dev/configent/commit/6cdb302f4b4d1fc4743f88771e62fa0427d983a5))
+
 ## [1.216.5](https://github.com/raas-dev/configent/compare/1.216.4...1.216.5) (2026-04-12)
 
 
