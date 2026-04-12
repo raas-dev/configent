@@ -8,49 +8,32 @@
 
 # Proposes git commit message generated with LLM and asks to commit
 
-# shellcheck disable=SC2034  # some colors are unused
-
-### constants ##################################################################
-
 normal=$(tput sgr0)
 bold=$(tput bold)
-black=$(tput setaf 0)
 red=$(tput setaf 1)
-green=$(tput setaf 2)
 yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
-white=$(tput setaf 7)
-
-### variables ##################################################################
 
 OC_PROFILE="${OC_PROFILE:-git-use}"
-
-################################################################################
 
 if ! command -v opencode >/dev/null; then
   printf "%sError: opencode not found in the system.\n" "$red"
   exit 127
 fi
 
-if ! command -v jq >/dev/null; then
-  printf "%sError: jq not found in PATH (required to parse opencode JSON output).\n" "$red"
-  exit 127
-fi
+git_dir="$(git rev-parse --git-dir)"
+backup_file="$git_dir/AI_COMMIT_BACKUP"
+diff_file=$(mktemp) || exit 1
+trap 'rm -f "$diff_file"' EXIT INT TERM
 
-git_diff="$(git diff --staged --no-color)" || {
+git diff --staged --no-color >"$diff_file" || {
   printf "%sError: Failed to get git diff.\n" "$red"
   exit 1
 }
-if [ -z "$git_diff" ]; then
+if ! [ -s "$diff_file" ]; then
   printf "%sNothing staged to commit.\n" "$red"
   exit 1
 fi
-
-# Check for saved commit message from previous failed run
-git_dir="$(git rev-parse --git-dir)"
-backup_file="$git_dir/AI_COMMIT_BACKUP"
 
 if [ -f "$backup_file" ]; then
   printf "%sFound saved commit message from failed run:%s\n" "$yellow" "$normal"
@@ -59,51 +42,31 @@ if [ -f "$backup_file" ]; then
   printf "\n"
 
   if [ -z "$NONINTERACTIVE" ]; then
-    printf "%sReuse this message? (y), edit (e), generate new (n), or quit (q) [Y/e/n/q] %s> " "${bold}${cyan}" "$normal"
+    printf "%sReuse (y), edit (e), new (n), quit (q) [Y/e/n/q] %s> " "${bold}${cyan}" "$normal"
     read -r reuse_choice
-    # Default to 'y'
-    if [ -z "$reuse_choice" ]; then
-      reuse_choice="y"
-    fi
-
+    [ -z "$reuse_choice" ] && reuse_choice=y
     case "$reuse_choice" in
     [yY])
       commit_message="$(cat "$backup_file")"
-      choice="y"
+      choice=y
       ;;
     [eE])
       commit_message="$(cat "$backup_file")"
-      choice="e"
+      choice=e
       ;;
     [qQ])
       printf "Aborted.\n"
       exit 1
       ;;
-    *)
-      # Proceed to generate new
-      ;;
     esac
   fi
 fi
 
-# Store git diff in temporary file to avoid "Argument list too long" error
-diff_file=$(mktemp) || {
-  printf "%sError: Failed to create temporary file.\n" "$red"
-  exit 1
-}
-cleanup() {
-  rm -f "$diff_file"
-}
-trap 'cleanup' EXIT INT TERM
-printf '%s' "$git_diff" >"$diff_file"
-
-# Build context message (without git diff)
 context_message=""
 recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
-if [ -n "$recent_headlines" ]; then
+[ -n "$recent_headlines" ] &&
   context_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
 $recent_headlines"
-fi
 
 if [ -n "$*" ]; then
   if [ -n "$context_message" ]; then
@@ -115,122 +78,88 @@ ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
   fi
 fi
 
-# The commit command reads the git diff from stdin.
-# Use --format json so the assistant text is reliably available regardless of
-# opencode version; extract all "text" event payloads and concatenate them.
-extract_text_from_json_ndjson() {
-  # One JSON object per line; ignore non-JSON lines (TTY noise mixed into copy-paste, etc.).
-  printf '%s\n' "$1" | grep '^{' | jq -r 'select(.type == "text") | .part.text // empty' | tr -d '\r'
+# stdin for opencode: optional context + staged diff (temp file avoids argv limits).
+pipe_opencode_stdin() {
+  if [ -n "$context_message" ]; then
+    printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")"
+  else
+    cat "$diff_file"
+  fi
 }
 
-trim_blank_edges() {
-  printf '%s\n' "$1" | awk '
-      { lines[NR] = $0 }
-      NF { if (!first) first = NR; last = NR }
-      END {
-        if (!first) exit
-        for (i = first; i <= last; i++) print lines[i]
-      }'
-}
-
-strip_default_format_noise() {
-  # --format default may prefix workspace listing lines; start at first line with ": "
-  # (conventional-commit subject or similar).
-  awk 'index($0, ": ") { found = 1 }
-       found { print }'
+# Default-format stdout may include workspace noise; then trim edges and stray ``` fence lines.
+finalize_commit_message() {
+  awk '
+    BEGIN { found = 0 }
+    {
+      if (!found && index($0, ": ")) found = 1
+      if (found) lines[++n] = $0
+    }
+    END {
+      if (!n) exit
+      first = 0
+      for (i = 1; i <= n; i++) {
+        if (lines[i] ~ /[^[:space:]]/) {
+          if (!first) first = i
+          last = i
+        }
+      }
+      if (!first) exit
+      m = last - first + 1
+      for (i = 1; i <= m; i++) a[i] = lines[first + i - 1]
+      # Fence lines: strip independently (models often close with ``` only).
+      while (m >= 1 && a[1] ~ /^```/) {
+        for (i = 1; i < m; i++) a[i] = a[i + 1]
+        m--
+      }
+      while (m >= 1 && a[m] ~ /^```[[:space:]]*$/) m--
+      if (m < 1) exit
+      for (i = 1; i <= m; i++) print a[i]
+    }'
 }
 
 if [ -z "$commit_message" ]; then
-  oc_stderr=$(mktemp) || {
-    printf "%sError: Failed to create temporary file.\n" "$red"
-    exit 1
-  }
+  oc_stderr=$(mktemp) || exit 1
   trap 'rm -f "$diff_file" "$oc_stderr"' EXIT INT TERM
 
-  oc_run_status=0
-  if [ -n "$context_message" ]; then
-    commit_message_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
-      --agent coder \
-      --command commit \
-      --format json 2>"$oc_stderr")" || oc_run_status=$?
-  else
-    commit_message_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
-      --agent coder \
-      --command commit \
-      --format json 2>"$oc_stderr")" || oc_run_status=$?
-  fi
+  oc_status=0
+  raw="$(pipe_opencode_stdin | oc exec "$OC_PROFILE" -- opencode run \
+    --agent coder \
+    --command commit \
+    --format default 2>"$oc_stderr")" || oc_status=$?
 
-  if [ -n "${oc_run_status:-}" ] && [ "${oc_run_status:-0}" -ne 0 ]; then
-    printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_run_status"
-    if [ -s "$oc_stderr" ]; then
-      printf "%s%s\n" "$yellow" "$(cat "$oc_stderr")"
-    fi
+  if [ "$oc_status" -ne 0 ]; then
+    printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_status"
+    [ -s "$oc_stderr" ] && printf "%s%s\n" "$yellow" "$(cat "$oc_stderr")"
     exit 1
   fi
 
-  commit_message="$(trim_blank_edges "$(extract_text_from_json_ndjson "$commit_message_raw")")"
-
-  # If JSON parsing yielded nothing, try formatted output once (some opencode builds
-  # emit assistant text only in default mode, or JSON shape may differ).
-  if [ -z "$commit_message" ] && [ -z "${AI_COMMIT_JSON_ONLY:-}" ]; then
-    if [ -n "$context_message" ]; then
-      default_raw="$(printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")" | oc exec "$OC_PROFILE" -- opencode run \
-        --agent coder \
-        --command commit \
-        --format default 2>/dev/null)" || true
-    else
-      default_raw="$(cat "$diff_file" | oc exec "$OC_PROFILE" -- opencode run \
-        --agent coder \
-        --command commit \
-        --format default 2>/dev/null)" || true
-    fi
-    commit_message="$(trim_blank_edges "$(printf '%s\n' "$default_raw" | strip_default_format_noise)")"
-  fi
-
+  commit_message="$(printf '%s\n' "$raw" | finalize_commit_message)"
   rm -f "$oc_stderr"
-  trap 'cleanup' EXIT INT TERM
+  trap 'rm -f "$diff_file"' EXIT INT TERM
 fi
 
 if [ -z "$commit_message" ]; then
-  opencode_err=""
-  if [ -n "${commit_message_raw:-}" ]; then
-    opencode_err="$(printf '%s\n' "$commit_message_raw" | grep '^{' |
-      jq -r 'select(.type == "error") | (.error.data.message // .error.message // .error.name // empty)' 2>/dev/null | head -1)"
-  fi
-  printf "%sError: Generated commit message is empty.\n" "$red"
-  if [ -n "$opencode_err" ]; then
-    printf "%sOpenCode: %s\n" "$yellow" "$opencode_err"
-  elif [ -n "${commit_message_raw:-}" ]; then
-    printf "%sHint: opencode returned output but no text events; try %sAI_COMMIT_JSON_ONLY=1%s to skip default-format fallback, or check opencode / jq versions.\n" \
-      "$yellow" "$cyan" "$normal"
-  else
-    printf "%sHint: opencode produced no stdout; check API keys and %soc exec %s profile.\n" \
-      "$yellow" "$cyan" "$OC_PROFILE$normal"
-  fi
+  printf "%sError: Generated commit message is empty.%s Model output had no subject line after noise strip.\n" \
+    "$red" "$normal"
   exit 1
 fi
 
-# Only print if we didn't reuse (reuse block already printed it)
 if [ -z "$choice" ]; then
-  printf "%s$commit_message" "$white"
-  printf "\n"
+  printf "%s%s%s\n" "$normal" "$commit_message" "$normal"
 fi
 
 if [ -z "$NONINTERACTIVE" ] && [ -z "$choice" ]; then
-  printf "\n%sCommit with this (y), edit message first (e), or quit (q) [Y/e/q] %s> " "${bold}${cyan}" "$normal"
-  # Allow Ctrl+C to work during read
+  printf "\n%sCommit (y), edit (e), quit (q) [Y/e/q] %s> " "${bold}${cyan}" "$normal"
   trap 'printf "\n"; exit 130' INT
   read -r choice || {
     printf "\n"
     exit 130
   }
   trap - INT
-  # Default to 'y' if empty
-  if [ -z "$choice" ]; then
-    choice="y"
-  fi
+  [ -z "$choice" ] && choice=y
 elif [ -n "$NONINTERACTIVE" ]; then
-  choice="y"
+  choice=y
 fi
 
 case "$choice" in
@@ -238,8 +167,7 @@ case "$choice" in
   if git commit --message "$commit_message"; then
     rm -f "$backup_file"
   else
-    printf "%sError: Failed to commit changes (pre-commit hooks?).\n" "$red"
-    printf "%sSaving commit message to %s for reuse...\n" "$yellow" "$backup_file"
+    printf "%sError: git commit failed (hooks?). Saving message to %s\n" "$red" "$backup_file"
     echo "$commit_message" >"$backup_file"
     exit 1
   fi
@@ -248,16 +176,13 @@ case "$choice" in
   if git commit --edit --message "$commit_message"; then
     rm -f "$backup_file"
   else
-    printf "%sError: Failed to commit changes (pre-commit hooks?).\n" "$red"
-
-    # Try to rescue from COMMIT_EDITMSG if it exists
+    printf "%sError: git commit failed.\n" "$red"
     if [ -f "$git_dir/COMMIT_EDITMSG" ]; then
       cp "$git_dir/COMMIT_EDITMSG" "$backup_file"
-      printf "%sSaved edited message to %s for reuse.\n" "$yellow" "$backup_file"
     else
       echo "$commit_message" >"$backup_file"
-      printf "%sSaved original message to %s for reuse (edits might be lost).\n" "$yellow" "$backup_file"
     fi
+    printf "%sSaved message to %s for reuse.\n" "$yellow" "$backup_file"
     exit 1
   fi
   ;;
