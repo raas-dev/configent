@@ -33,5 +33,5 @@
   "transport": "auto",
   "powerline": "default",
   "hideThinkingBlock": true,
-  "defaultThinkingLevel": "medium"
+  "defaultThinkingLevel": "high"
 }
