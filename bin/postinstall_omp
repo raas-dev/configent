@@ -24,6 +24,16 @@ fi
 mkdir -p "$HOME/.omp/agent"
 ln -sfnv "$config_path/omp/config.yml" "$HOME/.omp/agent/config.yml"
 
+# mcp.json
+if [ ! -r "$backup_path/.omp/agent/mcp.json" ]; then
+  if [ -r "$HOME/.omp/agent/mcp.json" ]; then
+    mkdir -p "$backup_path/.omp/agent"
+    cp -P "$HOME/.omp/agent/mcp.json" "$backup_path/.omp/agent/mcp.json"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent"
+ln -sfnv "$config_path/omp/mcp.json" "$HOME/.omp/agent/mcp.json"
+
 # agents dir
 if [ ! -r "$backup_path/.omp/agent/agents" ]; then
   if [ -r "$HOME/.omp/agent/agents" ]; then
@@ -47,6 +57,18 @@ fi
 mkdir -p "$HOME/.omp/agent/commands"
 rm -rf "$HOME/.omp/agent/commands"
 ln -sfnv "$config_path/omp/commands" "$HOME/.omp/agent/commands"
+
+# extensions dir
+if [ ! -r "$backup_path/.omp/agent/extensions" ]; then
+  if [ -r "$HOME/.omp/agent/extensions" ]; then
+    mkdir -p "$backup_path/.omp/agent/extensions"
+    cp -RP "$HOME/.omp/agent/extensions" \
+      "$backup_path/.omp/agent/extensions"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent/extensions"
+rm -rf "$HOME/.omp/agent/extensions"
+ln -sfnv "$config_path/omp/extensions" "$HOME/.omp/agent/extensions"
 
 # hooks dir
 if [ ! -r "$backup_path/.omp/agent/hooks" ]; then
@@ -72,6 +94,18 @@ mkdir -p "$HOME/.omp/agent/modules"
 rm -rf "$HOME/.omp/agent/modules"
 ln -sfnv "$config_path/omp/modules" "$HOME/.omp/agent/modules"
 
+# skills dir
+if [ ! -r "$backup_path/.omp/agent/skills" ]; then
+  if [ -r "$HOME/.omp/agent/skills" ]; then
+    mkdir -p "$backup_path/.omp/agent/skills"
+    cp -RP "$HOME/.omp/agent/skills" \
+      "$backup_path/.omp/agent/skills"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent/skills"
+rm -rf "$HOME/.omp/agent/skills"
+ln -sfnv "$config_path/omp/skills" "$HOME/.omp/agent/skills"
+
 # themes dir
 if [ ! -r "$backup_path/.omp/agent/themes" ]; then
   if [ -r "$HOME/.omp/agent/themes" ]; then
@@ -95,3 +129,15 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### omp-pi-install #############################################################
+
+# pi-plugins.json
+if [ ! -r "$backup_path/.omp/agent/pi-plugins.json" ]; then
+  if [ -r "$HOME/.omp/agent/pi-plugins.json" ]; then
+    mkdir -p "$backup_path/.omp/agent"
+    cp -P "$HOME/.omp/agent/pi-plugins.json" "$backup_path/.omp/agent/pi-plugins.json"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent"
+ln -sfnv "$config_path/omp/pi-plugins.json" "$HOME/.omp/agent/pi-plugins.json"
