@@ -1,15 +1,16 @@
 [provider]
-default = "openai"
-model = "gpt-5.4"
+default = "zai"
+model = "glm-5.1"
 timeout_seconds = 30
 
-[provider.openai]
-base_url = "https://api.openai.com/v1"
+[provider.zai]
+base_url = "https://api.z.ai/api/coding/paas/v4"
+api_key_cmd = "printenv ZAI_API_KEY"
 
 [models]
-main = ["gpt-5.4"]
-fast = ["gpt-5.4-mini"]
-coding = ["gpt-5.3-codex"]
+main = ["glm-5.1"]
+fast = ["glm-5-turbo"]
+coding = ["glm-5.1"]
 
 [execution]
 mode = "prefill" # prefill | confirm | autorun
