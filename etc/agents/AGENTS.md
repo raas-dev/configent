@@ -18,8 +18,8 @@
 - Don't overthink: Create a solution and test in practice as soon as possible
 - If there is conflicting information, use the Ask tool to ask the user
 
-## Summaring work done
+## Summarizing work done
 
 - Always provide a very concise and terse summary at the end of your response
-- When uncertain, acknowledge the known limitations and suggest remediatios
+- When uncertain, acknowledge the known limitations and suggest remediations
 - Propose solutions to mitigate any risks and to resolve the issues at hand
