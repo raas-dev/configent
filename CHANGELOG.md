@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.4](https://github.com/raas-dev/configent/compare/1.216.3...1.216.4) (2026-04-12)
+
+
+### Fixes
+
+* **dotfiles:** update aliases and zsh startup ([83717f6](https://github.com/raas-dev/configent/commit/83717f627b1d62f857dd48fe9605f4106b4af908))
+* **tm:** prefer tmux from mise shims ([e4ce879](https://github.com/raas-dev/configent/commit/e4ce879e699893d8c31561393f1214e5249a1a57))
+
 ## [1.216.3](https://github.com/raas-dev/configent/compare/1.216.2...1.216.3) (2026-04-12)
 
 
