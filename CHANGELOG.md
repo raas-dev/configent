@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.5](https://github.com/raas-dev/configent/compare/1.216.4...1.216.5) (2026-04-12)
+
+
+### Fixes
+
+* **ai_commit:** parse opencode output ([f665c4b](https://github.com/raas-dev/configent/commit/f665c4bf742f8c77f11a6dc835e4634ac52c7108))
+* **ai_commit:** use caveman-commit command ([42011dc](https://github.com/raas-dev/configent/commit/42011dc27d291139b6a14577ff182aa7f513607a))
+* **omp:** add pi plugin installer ([a8a9a78](https://github.com/raas-dev/configent/commit/a8a9a78dfd4a2de21b7838a0a9c6c012a6652c86))
+* **pi:** install pi-caveman config ([893c9b3](https://github.com/raas-dev/configent/commit/893c9b3e0d34c80389c93dc1756075fc95bdabf8))
+
 ## [1.216.4](https://github.com/raas-dev/configent/compare/1.216.3...1.216.4) (2026-04-12)
 
 
