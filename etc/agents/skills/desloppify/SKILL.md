@@ -22,6 +22,17 @@ Maximise the **strict score** honestly. Your main cycle: **scan → plan → exe
 
 Three phases, repeated as a cycle.
 
+### Monorepos and multi-project directories
+
+If the workspace contains multiple programs (e.g., frontend + backend in sibling folders), scan each one separately — do not scan the parent directory:
+
+```bash
+desloppify --lang typescript scan --path ./frontend
+desloppify --lang python scan --path ./backend
+```
+
+Each `--path` target should be a single coherent project. Scanning a parent that contains multiple programs mixes state and path context, producing unreliable results.
+
 ### Phase 1: Scan and review — understand the codebase
 
 ```bash

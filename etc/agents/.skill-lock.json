@@ -27,6 +27,15 @@
       "skillFolderHash": "2322ac3a69fa63b58268525481bf684b9ddf51a3",
       "installedAt": "2026-04-12T09:17:21.513Z",
       "updatedAt": "2026-04-12T09:17:21.513Z"
+    },
+    "desloppify": {
+      "source": "peteromallet/desloppify",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/peteromallet/desloppify.git",
+      "skillPath": "docs/SKILL.md",
+      "skillFolderHash": "36bca0fbd7cbb5d0d2094576a90cea07df05c5d5",
+      "installedAt": "2026-04-12T11:38:46.306Z",
+      "updatedAt": "2026-04-12T11:38:46.306Z"
     }
   },
   "dismissed": {
