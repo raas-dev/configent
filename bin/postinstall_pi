@@ -137,3 +137,15 @@ if [ ! -r "$backup_path/.pi/web-search.json" ]; then
 fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
+
+### pi-caveman #################################################################
+
+# caveman.json
+if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
+  if [ -r "$HOME/.pi/agent/caveman.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
+  fi
+fi
+mkdir -p "$HOME/.pi"
+ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"

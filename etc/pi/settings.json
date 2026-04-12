@@ -26,7 +26,9 @@
     "npm:@ogulcancelik/pi-ghost",
     "npm:@ogulcancelik/pi-tmux",
     "git:github.com/iodic/pi-ayu-themes",
-    "git:github.com/davebcn87/pi-autoresearch"
+    "git:github.com/davebcn87/pi-autoresearch",
+    "npm:@ssweens/pi-handoff",
+    "git:github.com/jonjonrankin/pi-caveman"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
