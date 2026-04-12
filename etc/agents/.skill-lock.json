@@ -9,6 +9,24 @@
       "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
       "installedAt": "2026-04-11T07:44:53.328Z",
       "updatedAt": "2026-04-11T07:44:53.328Z"
+    },
+    "autoresearch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/autoresearch/SKILL.md",
+      "skillFolderHash": "a89e8007dc84571d21ad6717d96ccdc3d94d3039",
+      "installedAt": "2026-04-12T09:12:36.837Z",
+      "updatedAt": "2026-04-12T09:12:36.837Z"
+    },
+    "agentic-eval": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/agentic-eval/SKILL.md",
+      "skillFolderHash": "2322ac3a69fa63b58268525481bf684b9ddf51a3",
+      "installedAt": "2026-04-12T09:17:21.513Z",
+      "updatedAt": "2026-04-12T09:17:21.513Z"
     }
   },
   "dismissed": {
