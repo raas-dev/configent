@@ -9,8 +9,8 @@
 ## Processing work
 
 - Build plan on first principles to understand what work to do
-- If work is more than one task → create todo list for tasks
-- Do not fake task completion. Do not stop work until all tasks completed
+- If work is more than one task → use Todo tool to create task list
+- Do not fake task completion. Do not stop work until all tasks are completed
 
 ## Implementing tasks
 
