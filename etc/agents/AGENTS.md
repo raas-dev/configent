@@ -9,7 +9,7 @@
 ## Processing work
 
 - Build plan on first principles to understand requirements
-- Always create TODO list to track work until completion
+- When implementation is multiple steps, create TODO list to track work left
 - Do not shortcut or postpone tasks. Do not quit until all tasks completed
 
 ## Implementing tasks
