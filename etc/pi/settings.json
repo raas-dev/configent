@@ -20,11 +20,11 @@
     "npm:pi-web-access",
     "npm:@latent-variable/pi-auto-continue",
     "npm:@ogulcancelik/pi-ghost",
-    "npm:@ogulcancelik/pi-tmux",
     "npm:@ssweens/pi-handoff",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/davebcn87/pi-autoresearch",
-    "git:github.com/jonjonrankin/pi-caveman"
+    "git:github.com/jonjonrankin/pi-caveman",
+    "npm:@aliou/pi-processes"
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
