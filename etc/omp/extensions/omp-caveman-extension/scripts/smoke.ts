@@ -1,3 +1,5 @@
+import { mkdirSync, rmSync } from "node:fs";
+import { join } from "node:path";
 import extension from "../src/caveman-mode";
 
 interface SentMessage {
@@ -49,6 +51,12 @@ function assert(condition: unknown, message: string): asserts condition {
 }
 
 async function main() {
+
+	// Setup: create temp skill dir so skillDir check passes
+	const tmpSkill = join(import.meta.dirname, ".test-caveman-skill");
+	mkdirSync(tmpSkill, { recursive: true });
+	process.env.OMP_CAVEMAN_SKILL_PATH = tmpSkill;
+
 	// Test 1: default (no env) → full on session_start
 	delete process.env.OMP_CAVEMAN_LEVEL;
 	const t1 = createMockPi();
@@ -125,7 +133,18 @@ async function main() {
 		assert(t.sentMessages.some(m => m.message.content === "stop caveman"), `expected stop caveman on /caveman ${val}`);
 	}
 
+	// Test 11: skill dir missing → no injection, warn logged
 	delete process.env.OMP_CAVEMAN_LEVEL;
+	process.env.OMP_CAVEMAN_SKILL_PATH = "/tmp/.no-such-caveman-skill-dir";
+	const t11 = createMockPi();
+	await extension(t11.pi as never);
+	await t11.sessionStartHandlers[0]!();
+	assert(t11.sentMessages.length === 0, "expected no message when skill dir missing");
+	assert(t11.logs.some(l => l.startsWith("warn:") && l.includes("skill directory not found")), "expected warn log when skill dir missing");
+
+	delete process.env.OMP_CAVEMAN_LEVEL;
+	delete process.env.OMP_CAVEMAN_SKILL_PATH;
+	rmSync(tmpSkill, { recursive: true, force: true });
 	console.log("smoke ok");
 }
 
