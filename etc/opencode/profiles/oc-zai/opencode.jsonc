@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "instructions": ["https://raw.githubusercontent.com/JuliusBrussee/caveman/refs/heads/main/rules/caveman-activate.md"],
   "mcp": {
     "dynamic-mcp": {
       "command": [
