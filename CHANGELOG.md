@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.10](https://github.com/raas-dev/configent/compare/1.216.9...1.216.10) (2026-04-13)
+
+
+### Fixes
+
+* **agents:** normalize skill-lock sourceType to github and add caveman skill ([ef09e01](https://github.com/raas-dev/configent/commit/ef09e01f9089765d2c45ee7495bb81463a5d43fb))
+* **omp:** set todo.eager false and normalize config.yml spacing ([ca4c591](https://github.com/raas-dev/configent/commit/ca4c59124287ef2b7a93df1c4629164ef4d06797))
+
 ## [1.216.9](https://github.com/raas-dev/configent/compare/1.216.8...1.216.9) (2026-04-13)
 
 
