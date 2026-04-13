@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.8](https://github.com/raas-dev/configent/compare/1.216.7...1.216.8) (2026-04-13)
+
+
+### Fixes
+
+* **ai_commit:** parse fenced Conventional Commit subjects ([7223635](https://github.com/raas-dev/configent/commit/7223635177569f981369cde27dea4bff9b221ce1))
+* **omp:** symlink keybindings.json in postinstall ([103e991](https://github.com/raas-dev/configent/commit/103e991bef244b9f0506bba1b00d17ffda83129c))
+
 ## [1.216.7](https://github.com/raas-dev/configent/compare/1.216.6...1.216.7) (2026-04-13)
 
 
