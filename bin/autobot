@@ -349,18 +349,6 @@ Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out 
 EOF
 }
 
-autobot_invoke_pi() {
-  pi --offline "<terminal_capture>
-$output
-</terminal_capture>
-
-Context: when <earlier_terminal_context> appears above, it is recent background only; <terminal_output> is the command and output immediately before autobot — prioritize that for explanations and fixes.
-
-<instructions>
-$prompt
-</instructions>"
-}
-
 autobot_parse_args "$@"
 autobot_capture_output
 
@@ -370,4 +358,13 @@ if [ "$dry_run" = 1 ]; then
 fi
 
 prompt=$(autobot_default_prompt_text)
-autobot_invoke_pi
+
+omp --no-session --no-title "<terminal_capture>
+$output
+</terminal_capture>
+
+Context: when <earlier_terminal_context> appears above, it is recent background only; <terminal_output> is the command and output immediately before autobot — prioritize that for explanations and fixes.
+
+<instructions>
+$prompt
+</instructions>"
