@@ -6,11 +6,7 @@
     "bash": {
       "rm *": "ask"
     },
-    "external_directory": {
-      "/tmp/**": "allow",
-      "/private/tmp/**": "allow",
-      "/var/folders/**": "allow"
-    }
+    "external_directory": "allow"
   },
   "plugin": [
     "@franlol/opencode-md-table-formatter"
