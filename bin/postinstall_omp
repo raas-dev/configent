@@ -34,6 +34,16 @@ fi
 mkdir -p "$HOME/.omp/agent"
 ln -sfnv "$config_path/omp/mcp.json" "$HOME/.omp/agent/mcp.json"
 
+# keybindings.json
+if [ ! -r "$backup_path/.omp/agent/keybindings.json" ]; then
+  if [ -r "$HOME/.omp/agent/keybindings.json" ]; then
+    mkdir -p "$backup_path/.omp/agent"
+    cp -P "$HOME/.omp/agent/keybindings.json" "$backup_path/.omp/agent/keybindings.json"
+  fi
+fi
+mkdir -p "$HOME/.omp/agent"
+ln -sfnv "$config_path/omp/keybindings.json" "$HOME/.omp/agent/keybindings.json"
+
 # agents dir
 if [ ! -r "$backup_path/.omp/agent/agents" ]; then
   if [ -r "$HOME/.omp/agent/agents" ]; then
