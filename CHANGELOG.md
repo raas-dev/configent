@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.7](https://github.com/raas-dev/configent/compare/1.216.6...1.216.7) (2026-04-13)
+
+
+### Fixes
+
+* **autobot:** adjust ai wrapper for OMP ([df33f62](https://github.com/raas-dev/configent/commit/df33f629379a858212b4bceb028bea59341d5fbe))
+* **autobot:** switch pi to omp ([f2e4ea6](https://github.com/raas-dev/configent/commit/f2e4ea6350c108dfde8b22a9f7993a9f803966ee))
+* **opencode:** parse Conventional Commit subject ([6ba7182](https://github.com/raas-dev/configent/commit/6ba7182bc710111facebbc3a032cb582660b7e64))
+* **pi:** remove pi-extension-manager package ([7757d41](https://github.com/raas-dev/configent/commit/7757d41f230016630d73b488e6ee5e384ed0a853))
+
 ## [1.216.6](https://github.com/raas-dev/configent/compare/1.216.5...1.216.6) (2026-04-12)
 
 
