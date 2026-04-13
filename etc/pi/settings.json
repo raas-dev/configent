@@ -5,7 +5,6 @@
   "lastChangelogVersion": "0.66.1",
   "packages": [
     "npm:pi-ask-user",
-    "npm:pi-context",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-interview",
@@ -20,8 +19,6 @@
     "npm:pi-token-burden",
     "npm:pi-web-access",
     "npm:@latent-variable/pi-auto-continue",
-    "npm:@danchamorro/pi-agent-modes",
-    "npm:@danchamorro/pi-prompt-enhancer",
     "npm:@ogulcancelik/pi-ghost",
     "npm:@ogulcancelik/pi-tmux",
     "npm:@ssweens/pi-handoff",
