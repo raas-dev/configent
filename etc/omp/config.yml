@@ -41,7 +41,7 @@ collapseChangelog: true
 github:
   enabled: true
 todo:
-  eager: true
+  eager: false
   reminders:
     max: 5
 async:
