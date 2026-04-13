@@ -309,7 +309,6 @@ export OPENCHAMBER_OPENCODE_PORT=4096
 # opencode
 export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # see plugins (default: true)
-export OPENCODE_CAVEMAN_MODE=ultra  # off / lite / full / ultra (default: full)
 
 # pi
 export PI_SKIP_VERSION_CHECK=1

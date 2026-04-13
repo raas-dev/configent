@@ -9,7 +9,8 @@
     "external_directory": "allow"
   },
   "plugin": [
-    "@franlol/opencode-md-table-formatter"
+    "@franlol/opencode-md-table-formatter",
+    "opencode-caveman"
   ],
   "share": "disabled"
 }
