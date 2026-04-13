@@ -321,11 +321,11 @@ autobot_capture_output() {
 }
 
 autobot_emit_dry_run() {
-  echo "autobot: dry-run (pi not invoked)" >&2
+  echo "autobot: dry-run (agent not invoked)" >&2
   if [ "$rerun" = 1 ]; then
     echo "autobot: capture source: would re-run: $prev_cmd (not executed in dry-run)" >&2
   fi
-  echo "autobot: would use default explain/fix flow (new pi session)" >&2
+  echo "autobot: would use default explain/fix flow (new agent session)" >&2
   echo "autobot: --- captured terminal output (stdout) ---" >&2
   printf '%s\n' "$output"
 }
