@@ -573,13 +573,13 @@ ai() {
     echo "Error: $system_prompt not found" >&2
     return 1;
   fi
+  # skills are enabled, add --no-skills to disable
   local args=(
     --allow-home
     --no-extensions
     --no-lsp
     --no-rules
     --no-session
-    --no-skills
     --no-title
     --tools "$tools"
     --thinking medium
