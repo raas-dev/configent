@@ -19,6 +19,7 @@ commands:
   enableClaudeUser: false
 providers:
   webSearch: exa
+  image: auto
 defaultThinkingLevel: medium
 disabledProviders:
   - cursor
@@ -29,8 +30,10 @@ theme:
 task:
   disabledAgents:
     - designer
+  isolation:
+    mode: none
 interruptMode: immediate
-followUpMode: one-at-a-time
+followUpMode: all
 startup:
   quiet: true
   checkUpdate: false
@@ -39,9 +42,28 @@ github:
   enabled: true
 todo:
   eager: true
+  reminders:
+    max: 5
 async:
   enabled: true
 mcp:
   discoveryMode: true
 secrets:
   enabled: true
+statusLine:
+  preset: default
+  separator: powerline-thin
+hideThinkingBlock: true
+retry:
+  fallbackRevertPolicy: cooldown-expiry
+steeringMode: all
+completion:
+  notify: "on"
+compaction:
+  strategy: context-full
+  thresholdPercent: -1
+bash:
+  autoBackground:
+    enabled: true
+dev:
+  autoqa: false
