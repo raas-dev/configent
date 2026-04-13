@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.9](https://github.com/raas-dev/configent/compare/1.216.8...1.216.9) (2026-04-13)
+
+
+### Fixes
+
+* **opencode:** integrate opencode-caveman plugin and remove deprecated caveman skills/plugins ([147ce39](https://github.com/raas-dev/configent/commit/147ce39d72e3fbe9123ae9c33cc2e7d50de7e5b6))
+
 ## [1.216.8](https://github.com/raas-dev/configent/compare/1.216.7...1.216.8) (2026-04-13)
 
 
