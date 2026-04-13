@@ -88,11 +88,23 @@ pipe_opencode_stdin() {
 }
 
 # Default-format stdout may include workspace noise; then trim edges and stray ``` fence lines.
+# Start capture on first line that looks like a Conventional Commits subject (not bare "Word: "
+# prose). Requires known type prefix so random ":" lines in chatter do not win.
 finalize_commit_message() {
   awk '
+    function trimmed(s,   t) {
+      t = s
+      sub(/^[[:space:]]+/, "", t)
+      return t
+    }
+    function is_subject_line(s,   t) {
+      t = trimmed(s)
+      # Colon may be immediately followed by summary or one space then summary (skill / CC).
+      return (t ~ /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]*\))?!?:[[:space:]]*[[:graph:]]/)
+    }
     BEGIN { found = 0 }
     {
-      if (!found && index($0, ": ")) found = 1
+      if (!found && is_subject_line($0)) found = 1
       if (found) lines[++n] = $0
     }
     END {
@@ -131,6 +143,8 @@ if [ -z "$commit_message" ]; then
   if [ "$oc_status" -ne 0 ]; then
     printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_status"
     [ -s "$oc_stderr" ] && printf "%s%s\n" "$yellow" "$(cat "$oc_stderr")"
+    rm -f "$oc_stderr"
+    trap 'rm -f "$diff_file"' EXIT INT TERM
     exit 1
   fi
 
@@ -140,8 +154,12 @@ if [ -z "$commit_message" ]; then
 fi
 
 if [ -z "$commit_message" ]; then
-  printf "%sError: Generated commit message is empty.%s Model output had no subject line after noise strip.\n" \
+  printf "%sError: Generated commit message is empty.%s No conventional subject line (type(scope)?: summary) after noise strip.\n" \
     "$red" "$normal"
+  if [ -n "$raw" ]; then
+    printf "%sModel stdout (for debugging):%s\n" "$yellow" "$normal"
+    printf "%s\n" "$raw"
+  fi
   exit 1
 fi
 
