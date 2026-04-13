@@ -6,7 +6,6 @@
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-context",
-    "npm:pi-extension-manager",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-interview",
@@ -25,9 +24,9 @@
     "npm:@danchamorro/pi-prompt-enhancer",
     "npm:@ogulcancelik/pi-ghost",
     "npm:@ogulcancelik/pi-tmux",
+    "npm:@ssweens/pi-handoff",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/davebcn87/pi-autoresearch",
-    "npm:@ssweens/pi-handoff",
     "git:github.com/jonjonrankin/pi-caveman"
   ],
   "quietStartup": true,
