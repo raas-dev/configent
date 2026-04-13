@@ -3,7 +3,7 @@
   "skills": {
     "documentation-writer": {
       "source": "github/awesome-copilot@documentation-writer",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/github/awesome-copilot.git",
       "skillPath": "skills/documentation-writer/SKILL.md",
       "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
@@ -12,7 +12,7 @@
     },
     "agentic-eval": {
       "source": "github/awesome-copilot@agentic-eval",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/github/awesome-copilot.git",
       "skillPath": "skills/agentic-eval/SKILL.md",
       "skillFolderHash": "2322ac3a69fa63b58268525481bf684b9ddf51a3",
@@ -21,7 +21,7 @@
     },
     "desloppify": {
       "source": "peteromallet/desloppify@desloppify",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/peteromallet/desloppify.git",
       "skillPath": "docs/SKILL.md",
       "skillFolderHash": "36bca0fbd7cbb5d0d2094576a90cea07df05c5d5",
@@ -30,7 +30,7 @@
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser@agent-browser",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "e00321fc70745f19bb634877ec0f02f21a3e0231",
@@ -39,7 +39,7 @@
     },
     "context7": {
       "source": "upstash/context7@context7-cli",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/upstash/context7.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "40d381c34353c8102e7def20186d328faf600e9a",
@@ -48,7 +48,7 @@
     },
     "find-skills": {
       "source": "vercel-labs/skills@find-skills",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "5aafd1a88bb4dcd63a0e3bb361f80ff1e376379a",
@@ -57,7 +57,7 @@
     },
     "humanizer": {
       "source": "softaworks/agent-toolkit@humanizer",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "52a43ae0134793322dbe1705df7cada58c0e953e",
@@ -66,7 +66,7 @@
     },
     "mcporter": {
       "source": "steipete/clawdis@mcporter",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/steipete/clawdis.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "21d959cc70adce6b09f8841c3533ec3590495e40",
@@ -75,7 +75,7 @@
     },
     "prompt-master": {
       "source": "nidhinjs/prompt-master@prompt-master",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/nidhinjs/prompt-master.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "9f4f7d7ac318fb4e64c01c5a28ecbe6e64761389",
@@ -84,7 +84,7 @@
     },
     "skill-conductor": {
       "source": "smixs/skill-conductor@skill-conductor",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/smixs/skill-conductor.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "df665509d851b4549e163f25c37aaf3a9356569f",
@@ -93,7 +93,7 @@
     },
     "skill-seekers": {
       "source": "sickn33/antigravity-awesome-skills@skill-seekers",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/sickn33/antigravity-awesome-skills.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "1b404ce03a41915221885ca4c440268a91c5fb4b",
@@ -102,7 +102,7 @@
     },
     "stop-slop": {
       "source": "hardikpandya/stop-slop@stop-slop",
-      "sourceType": "skills.sh",
+      "sourceType": "github",
       "sourceUrl": "https://github.com/hardikpandya/stop-slop.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "70af8bfcfc017ce60a04e24004eceb52c8fd1fef",
@@ -117,6 +117,15 @@
       "skillFolderHash": "85fc4f66717ab4f24a5b8d72fab3641b6be37a5f",
       "installedAt": "2026-04-12T22:07:10.511Z",
       "updatedAt": "2026-04-12T22:07:10.511Z"
+    },
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/JuliusBrussee/caveman.git",
+      "skillPath": "caveman/SKILL.md",
+      "skillFolderHash": "825e13085d1515fe67881b2123f3bf9b34c26154",
+      "installedAt": "2026-04-13T18:56:48.488Z",
+      "updatedAt": "2026-04-13T18:56:48.488Z"
     }
   },
   "dismissed": {
