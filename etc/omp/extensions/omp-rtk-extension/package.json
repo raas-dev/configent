@@ -40,7 +40,7 @@
     "name": "RTK Token Optimizer",
     "description": "Enables transparent RTK command compression for OMP bash execution.",
     "extensions": [
-      "./src/extension.ts"
+      "./src/rtk-optimizer.ts"
     ]
   }
 }

@@ -1,4 +1,4 @@
-import extension from "../src/extension";
+import extension from "../src/rtk-optimizer";
 
 type CommandHandler = (args: string, ctx: { cwd: string; ui: { notify(message: string, type?: string): void } }) => Promise<void>;
 

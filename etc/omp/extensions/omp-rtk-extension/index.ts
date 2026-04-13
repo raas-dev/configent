@@ -1,1 +1,1 @@
-export { default } from "./src/extension";
+export { default } from "./src/rtk-optimizer";

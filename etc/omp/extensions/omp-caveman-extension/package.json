@@ -1,0 +1,33 @@
+{
+  "name": "omp-caveman-extension",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OMP extension that auto-activates caveman ultra terseness on every new session.",
+  "license": "MIT",
+  "author": "Anssi Syrjäsalo",
+  "keywords": [
+    "omp",
+    "oh-my-pi",
+    "caveman",
+    "extension"
+  ],
+  "files": [
+    "src",
+    "scripts",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "smoke": "bun run ./scripts/smoke.ts"
+  },
+  "peerDependencies": {
+    "@oh-my-pi/pi-coding-agent": "*"
+  },
+  "omp": {
+    "name": "Caveman Ultra Auto-Start",
+    "description": "Automatically activates caveman ultra communication mode on every new session.",
+    "extensions": [
+      "./src/caveman-mode.ts"
+    ]
+  }
+}
