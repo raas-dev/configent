@@ -22,7 +22,6 @@
     "npm:@latent-variable/pi-auto-continue",
     "npm:@ogulcancelik/pi-ghost",
     "npm:@ssweens/pi-handoff",
-    "git:github.com/davebcn87/pi-autoresearch",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman"
   ],
