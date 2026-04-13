@@ -582,6 +582,7 @@ ai() {
     --no-skills
     --no-title
     --tools "$tools"
+    --thinking medium
     --model openai/gpt-5.4
     --system-prompt "$system_prompt"
   )
