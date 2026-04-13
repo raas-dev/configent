@@ -359,7 +359,7 @@ fi
 
 prompt=$(autobot_default_prompt_text)
 
-omp --no-session --no-title "<terminal_capture>
+omp --allow-home --no-session --no-title "<terminal_capture>
 $output
 </terminal_capture>
 
