@@ -97,8 +97,17 @@ finalize_commit_message() {
       sub(/^[[:space:]]+/, "", t)
       return t
     }
+    # Opening fence alone (optional lang), not "```chore: ..." same-line glitch from models.
+    function is_fence_only_line(s,   t) {
+      t = trimmed(s)
+      return (t ~ /^```([[:alpha:]][[:alnum:]_+-]*)?[[:space:]]*$/)
+    }
     function is_subject_line(s,   t) {
       t = trimmed(s)
+      if (t ~ /^```/) {
+        sub(/^```/, "", t)
+        sub(/^[[:space:]]+/, "", t)
+      }
       # Colon may be immediately followed by summary or one space then summary (skill / CC).
       return (t ~ /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]*\))?!?:[[:space:]]*[[:graph:]]/)
     }
@@ -120,12 +129,20 @@ finalize_commit_message() {
       m = last - first + 1
       for (i = 1; i <= m; i++) a[i] = lines[first + i - 1]
       # Fence lines: strip independently (models often close with ``` only).
-      while (m >= 1 && a[1] ~ /^```/) {
+      while (m >= 1 && is_fence_only_line(a[1])) {
         for (i = 1; i < m; i++) a[i] = a[i + 1]
         m--
       }
       while (m >= 1 && a[m] ~ /^```[[:space:]]*$/) m--
       if (m < 1) exit
+      # Subject on same line as opening ``` (e.g. "```chore(scope): summary")
+      t = a[1]
+      sub(/^[[:space:]]+/, "", t)
+      if (t ~ /^```/) {
+        sub(/^```/, "", t)
+        sub(/^[[:space:]]+/, "", t)
+        a[1] = t
+      }
       for (i = 1; i <= m; i++) print a[i]
     }'
 }
