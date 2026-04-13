@@ -9,7 +9,7 @@
       "type": "local"
     }
   },
-  "model": "minimax-coding-plan/MiniMax-M2.7",
+  "model": "zai-coding-plan/glm-5.1",
   "plugin": [
     "oh-my-openagent",
     "opencode-pty",

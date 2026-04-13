@@ -1,0 +1,46 @@
+{
+  "name": "omp-rtk-extension",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OMP extension that transparently routes supported bash commands through RTK for token-optimized output.",
+  "license": "MIT",
+  "author": "Zahid Masruri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masrurimz/omp-rtk-extension.git"
+  },
+  "homepage": "https://github.com/masrurimz/omp-rtk-extension#readme",
+  "bugs": {
+    "url": "https://github.com/masrurimz/omp-rtk-extension/issues"
+  },
+  "keywords": [
+    "omp",
+    "oh-my-pi",
+    "rtk",
+    "claude-code",
+    "llm",
+    "cli",
+    "extension"
+  ],
+  "files": [
+    "src",
+    "scripts",
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "smoke": "bun run ./scripts/smoke.ts"
+  },
+  "peerDependencies": {
+    "@oh-my-pi/pi-coding-agent": "*"
+  },
+  "omp": {
+    "name": "RTK Token Optimizer",
+    "description": "Enables transparent RTK command compression for OMP bash execution.",
+    "extensions": [
+      "./src/extension.ts"
+    ]
+  }
+}
