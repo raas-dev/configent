@@ -10,16 +10,21 @@ set -e
 window=${AUTOBOT_WINDOW:-120}
 lines=${AUTOBOT_LINES:-24}
 # How many recent $-blocks to include (newest = focus). 1 = only last command (legacy).
-ctxblocks=${AUTOBOT_CONTEXT_BLOCKS:-3}
+ctx_blocks=${AUTOBOT_CONTEXT_BLOCKS:-3}
 # Max lines per older block; primary uses AUTOBOT_LINES.
 prior_lines=${AUTOBOT_PRIOR_LINES:-16}
-# First-word aliases for this script (default a — see dotfiles/.aliases). Empty to disable.
-_ab_aliases=${AUTOBOT_ALIASES-a}
+# First-word aliases for this script (default ? — see dotfiles/.aliases). Empty to disable.
+aliases=${AUTOBOT_ALIASES-?}
+# omp --model / --thinking (override with -m/--model, -t/--thinking).
+model=${AUTOBOT_MODEL:-minimax/MiniMax-M2.7}
+thinking=${AUTOBOT_THINKING:-medium}
+# tmux capture-pane -S (negative = lines back from bottom). Deeper = more past commands in pane.
+tmux_pane_start=${AUTOBOT_TMUX_START:--3000}
 
 # stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
 autobot_last_cmd() {
-  tail -n "$window" | awk -v aliases="$_ab_aliases" \
-    -v ctxblocks="$ctxblocks" -v prior_lines="$prior_lines" -v primary_lines="$lines" '
+  tail -n "$window" | awk -v aliases="$aliases" \
+    -v ctxblocks="$ctx_blocks" -v prior_lines="$prior_lines" -v primary_lines="$lines" '
     function should_skip(s,   parts, nf, first, al, na, j) {
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
       if (length(s) < 1) return 0
@@ -130,7 +135,7 @@ autobot_get_previous_cmd() {
     echo "autobot: no readable history file (set HISTFILE or AUTOBOT_PREVIOUS_CMD)" >&2
     return 1
   fi
-  tail -n "${AUTOBOT_HIST_TAIL:-120}" "$hist" | awk -v aliases="$_ab_aliases" '
+  tail -n "${AUTOBOT_HIST_TAIL:-120}" "$hist" | awk -v aliases="$aliases" '
     function trim(s) {
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
       gsub(/\r$/, "", s)
@@ -179,8 +184,10 @@ autobot_get_previous_cmd() {
 }
 
 usage() {
-  echo "Usage: autobot [-d|--dry-run] [-c|--rerun [command args...]]" >&2
+  echo "Usage: autobot [-d|--dry-run] [-m|--model ID] [-t|--thinking LEVEL] [-c|--rerun [command args...]]" >&2
   echo "  -d, --dry-run   Print captured terminal output on stdout; do not run pi." >&2
+  echo "  -m, --model     omp model id (default: minimax/MiniMax-M2.7; env AUTOBOT_MODEL)." >&2
+  echo "  -t, --thinking  omp thinking level (default: medium; env AUTOBOT_THINKING)." >&2
   echo "  -c, --rerun     Re-run a command; everything after it is command + args (the tail of argv)." >&2
   echo "                  Bare -c (nothing after) → history / AUTOBOT_PREVIOUS_CMD." >&2
   echo "                  Use -c -- cmd ... if cmd starts with -." >&2
@@ -188,83 +195,102 @@ usage() {
   echo "  (default)       Explain capture, plan a fix (no actions), ask; apply only after you confirm." >&2
   echo "Env: AUTOBOT_LINES (primary block), AUTOBOT_CONTEXT_BLOCKS (recent \$ blocks, default 3)," >&2
   echo "     AUTOBOT_PRIOR_LINES (older blocks), AUTOBOT_WINDOW, AUTOBOT_ALIASES," >&2
-  echo "     AUTOBOT_PREVIOUS_CMD (default for bare -c), AUTOBOT_HIST_TAIL (history tail size, default 120)." >&2
+  echo "     AUTOBOT_MODEL, AUTOBOT_THINKING, AUTOBOT_PREVIOUS_CMD (default for bare -c)," >&2
+  echo "     AUTOBOT_HIST_TAIL (history tail size, default 120)," >&2
+  echo "     AUTOBOT_TMUX_START (tmux capture-pane -S, default -3000)," >&2
+  echo "     AUTOBOT_SHELL_PID (Cursor: force terminal file match when PPID chain fails)." >&2
 }
 
-# Globals: dry_run, rerun, prev_cmd
+# Globals: _dry_run, _rerun, _prev_cmd; model, thinking (defaults set above)
 autobot_parse_args() {
-  dry_run=0
-  rerun=0
-  prev_cmd=
+  _dry_run=0
+  _rerun=0
+  _prev_cmd=
 
   while [ $# -gt 0 ]; do
     case $1 in
     -d | --dry-run)
-      dry_run=1
+      _dry_run=1
       shift
+      ;;
+    -m | --model)
+      if [ $# -lt 2 ]; then
+        echo "autobot: $1 needs a value" >&2
+        exit 1
+      fi
+      model=$2
+      shift 2
+      ;;
+    -t | --thinking)
+      if [ $# -lt 2 ]; then
+        echo "autobot: $1 needs a value" >&2
+        exit 1
+      fi
+      thinking=$2
+      shift 2
       ;;
     -h | --help)
       usage
       exit 0
       ;;
     -c | --rerun)
-      rerun=1
+      _rerun=1
       shift
       if [ $# -eq 0 ]; then
-        prev_cmd=$(autobot_get_previous_cmd) || exit 1
+        _prev_cmd=$(autobot_get_previous_cmd) || exit 1
       elif [ "$1" = "--" ]; then
         shift
         if [ $# -eq 0 ]; then
           echo "autobot: --rerun / -c -- needs a command" >&2
           exit 1
         fi
-        prev_cmd=$*
+        _prev_cmd=$*
         set --
       else
-        prev_cmd=$*
+        _prev_cmd=$*
         set --
       fi
       break
       ;;
     *)
-      echo "autobot: unexpected arguments (use -c/--rerun before command, -d first if needed): $*" >&2
+      echo "autobot: unexpected arguments (use -m/-t/-d before -c/--rerun if needed): $*" >&2
       exit 1
       ;;
     esac
   done
 }
 
-# Uses: prev_cmd, dry_run. stdout: synthetic pane text for autobot_last_cmd.
+# Uses: _prev_cmd, _dry_run. stdout: synthetic pane text for autobot_last_cmd.
 autobot_build_rerun_synthetic() {
-  if [ "$dry_run" = 1 ]; then
-    printf '%s\n' "\$ $prev_cmd
+  if [ "$_dry_run" = 1 ]; then
+    printf '%s\n' "\$ $_prev_cmd
 (autobot: dry-run, command not executed)"
     return
   fi
   run_shell=${SHELL:-/bin/sh}
-  _ab_sh_base=${run_shell##*/}
+  shell_base=${run_shell##*/}
   set +e
-  case $_ab_sh_base in
+  case $shell_base in
   bash | zsh | ksh | mksh)
     run_out=$(
-      cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
     )
     ;;
   fish)
     run_out=$(
-      cd "$PWD" && AUTOBOT_RERUN_CMD="$prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
     )
     ;;
   *)
     tmp=$(mktemp "${TMPDIR:-/tmp}/autobot.XXXXXX") || exit 1
-    printf '%s\n' "$prev_cmd" >"$tmp"
+    printf '%s\n' "$_prev_cmd" >"$tmp"
     run_out=$(cd "$PWD" && "$run_shell" "$tmp" </dev/null 2>&1)
     rm -f "$tmp"
     ;;
   esac
   run_rc=$?
   set -e
-  printf '%s\n' "\$ $prev_cmd
+  printf '%s\n' "\$ $_prev_cmd
 $run_out
 (exit status: $run_rc)"
 }
@@ -274,10 +300,60 @@ autobot_find_cursor_terminal_file() {
   shell_pid=$1
   find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
     if grep -q "^pid: ${shell_pid}$" "$f" 2>/dev/null; then
-      _ts=$(stat --format '%Y' "$f" 2>/dev/null) || _ts=$(stat -f %m "$f" 2>/dev/null) || _ts=0
-      printf '%s %s\n' "$_ts" "$f"
+      mtime=$(stat --format '%Y' "$f" 2>/dev/null) || mtime=$(stat -f %m "$f" 2>/dev/null) || mtime=0
+      printf '%s %s\n' "$mtime" "$f"
     fi
   done | sort -rn | head -1 | cut -d' ' -f2-
+}
+
+# stdout: parent pid of $1, or empty.
+autobot_ps_ppid() {
+  ps -p "$1" -o ppid= 2>/dev/null | awk '{gsub(/^[[:space:]]+|[[:space:]]+$/, "", $1); print}'
+}
+
+# stdout: newest terminal snapshot whose header cwd: matches $PWD, or empty.
+autobot_find_cursor_terminal_by_cwd() {
+  find "$HOME/.cursor/projects/" -maxdepth 3 -name "*.txt" -path "*/terminals/*" 2>/dev/null | while read -r f; do
+    cw=$(grep -m1 '^cwd: ' "$f" 2>/dev/null | sed 's/^cwd:[[:space:]]*//; s/[[:space:]]+$//')
+    [ -z "$cw" ] && continue
+    [ "$cw" = "$PWD" ] || continue
+    mtime=$(stat --format '%Y' "$f" 2>/dev/null) || mtime=$(stat -f %m "$f" 2>/dev/null) || mtime=0
+    printf '%s %s\n' "$mtime" "$f"
+  done | sort -rn | head -1 | cut -d' ' -f2-
+}
+
+# stdout: path to Cursor terminal file for this session (real pane history).
+# Order: AUTOBOT_SHELL_PID, walk PPID chain (make/wrap → real shell), else cwd match in $PWD.
+autobot_resolve_cursor_terminal_file() {
+  if [ -n "${AUTOBOT_SHELL_PID:-}" ]; then
+    tf=$(autobot_find_cursor_terminal_file "$AUTOBOT_SHELL_PID")
+    if [ -n "$tf" ]; then
+      printf '%s\n' "$tf"
+      return 0
+    fi
+  fi
+  p=$PPID
+  _walk_i=0
+  while [ "$_walk_i" -lt 12 ]; do
+    case $p in '' | *[!0-9]*) break ;; esac
+    if [ "$p" -lt 2 ] 2>/dev/null; then
+      break
+    fi
+    tf=$(autobot_find_cursor_terminal_file "$p")
+    if [ -n "$tf" ]; then
+      printf '%s\n' "$tf"
+      return 0
+    fi
+    p=$(autobot_ps_ppid "$p")
+    _walk_i=$((_walk_i + 1))
+  done
+  tf=$(autobot_find_cursor_terminal_by_cwd)
+  if [ -n "$tf" ]; then
+    echo "autobot: Cursor terminal matched by cwd (set AUTOBOT_SHELL_PID for exact shell pid)" >&2
+    printf '%s\n' "$tf"
+    return 0
+  fi
+  return 1
 }
 
 # stdout: body between 2nd and 3rd "---" in Cursor terminal snapshot.
@@ -288,31 +364,37 @@ autobot_cursor_terminal_body() {
   ' "$1"
 }
 
-# Globals: rerun, dry_run, prev_cmd. Sets: output (via command substitution caller).
+# True (exit 0) only when TMUX is set and this process can talk to that tmux client.
+# So we prefer tmux capture when actually inside tmux; stray TMUX in env still allows Cursor fallback.
+autobot_in_tmux() {
+  [ -n "${TMUX:-}" ] && tmux display-message -p '#{pane_id}' >/dev/null 2>&1
+}
+
+# Globals: _rerun, _dry_run, _prev_cmd. Sets: _output (via command substitution caller).
+# Capture order: synthetic re-run → tmux pane (if in tmux) → Cursor snapshot — never Cursor when tmux works.
 autobot_capture_output() {
-  if [ "$rerun" = 1 ]; then
-    if [ -z "$prev_cmd" ]; then
+  if [ "$_rerun" = 1 ]; then
+    if [ -z "$_prev_cmd" ]; then
       echo "autobot: no command to re-run (set AUTOBOT_PREVIOUS_CMD)" >&2
       exit 1
     fi
-    output=$(autobot_build_rerun_synthetic | autobot_last_cmd)
+    _output=$(autobot_build_rerun_synthetic | autobot_last_cmd)
     return
   fi
 
-  if [ -n "$TMUX" ]; then
-    output=$(tmux capture-pane -p -S -200 | autobot_last_cmd)
+  if autobot_in_tmux; then
+    _output=$(tmux capture-pane -p -S "$tmux_pane_start" | autobot_last_cmd)
     return
   fi
 
   if [ -d "$HOME/.cursor/projects" ]; then
-    shell_pid=$PPID
-    terminal_file=$(autobot_find_cursor_terminal_file "$shell_pid")
+    terminal_file=$(autobot_resolve_cursor_terminal_file) || terminal_file=
     if [ -z "$terminal_file" ]; then
-      echo "autobot: no Cursor terminal file found for shell pid ${shell_pid}" >&2
+      echo "autobot: no Cursor terminal file (tried PPID chain + cwd: $PWD). Set AUTOBOT_SHELL_PID to your shell pid." >&2
       exit 1
     fi
     body=$(autobot_cursor_terminal_body "$terminal_file")
-    output=$(printf '%s\n' "$body" | autobot_last_cmd)
+    _output=$(printf '%s\n' "$body" | autobot_last_cmd)
     return
   fi
 
@@ -322,49 +404,115 @@ autobot_capture_output() {
 
 autobot_emit_dry_run() {
   echo "autobot: dry-run (agent not invoked)" >&2
-  if [ "$rerun" = 1 ]; then
-    echo "autobot: capture source: would re-run: $prev_cmd (not executed in dry-run)" >&2
+  if [ "$_rerun" = 1 ]; then
+    echo "autobot: capture source: would re-run: $_prev_cmd (not executed in dry-run)" >&2
   fi
   echo "autobot: would use default explain/fix flow (new agent session)" >&2
   echo "autobot: --- captured terminal output (stdout) ---" >&2
-  printf '%s\n' "$output"
+  printf '%s\n' "$_output"
 }
 
 autobot_default_prompt_text() {
   cat <<'EOF'
-The following is terminal output (often from a failed or noisy command).
+The following is real terminal history from the user’s session: if they are in tmux, it is tmux capture-pane scrollback (preferred); otherwise, when available, the Cursor integrated-terminal snapshot (after the metadata header); with -c/--rerun, synthetic output from that re-run. It is the recent shell transcript the user was looking at—not a summary.
 
 First, plan only: do NOT run terminal commands, edit files, or apply any fix yet.
 
 In your planning reply:
 - Briefly characterize the output: what command or situation it looks like (if inferable), and success vs errors vs warnings or noise.
-- One sentence: what went wrong (or what is worth attention).
-- Short diagnosis (likely root cause).
-- A numbered plan: concrete steps in order (which files, what commands, what to verify).
-- Proposed commands and code changes as fenced blocks or bullet lists, clearly labeled as proposed — still no execution or patches.
-- End with one clear question: whether to apply this plan (e.g. proceed? yes/no).
-- Stop and wait for the user reply. Do not apply anything in the same turn as the plan.
+- Lead with an **error/situation summary** in caveman style: strip articles, filler, hedging, pleasantries; fragments OK; short synonyms where meaning unchanged; **technical terms, paths, and quoted stderr/log lines exactly** as in the capture; pattern `thing · broke · reason.` optional `next: …`; code or commands unchanged if shown. Technical substance stays; fluff dies.
+- Short diagnosis (likely root cause), building from that summary.
+- **omp host tools only (`todo_write`, `ask`):** Todos and user choices **must** go through **omp’s** registered tools — the same mechanisms the UI renders as tool runs — **not** through free-form model output. Do **not** replace them with: markdown task lists, numbered “TODO:” sections, inline JSON payloads in assistant text, XML (`<invoke>`, `<parameter>`, etc.), fenced “tool_use” blocks, or pasted “pick A/B” questions. Those do **not** update omp; they are wrong.
+- **`todo_write`:** Drive the investigation with **`todo_write`** (narrowing, evidence, fix branches). Keep the list current until issue **and** solution path(s) are clear. For apply-choice: **replace** open work with one task per candidate fix, or one yes/no task if there is a single main fix. Example payload shape (arguments to the tool, not prose): `{"ops":[{"op":"replace","phases":[{"name":"Plan","tasks":[{"content":"…","status":"in_progress"}]}]}]}`; use **`update`** / **`add_task`** / **`remove_task`** per schema; for **`update`**/**`remove_task`**, use task ids from the tool/UI state, do not invent ids.
+- **`ask`:** After the final **`todo_write`**, call **`ask`** with the same options (multi-select or single choice as appropriate). Do **not** ask the user to choose only in plain text; **`ask`** is required. Declining all remains allowed.
+- Proposed commands and code changes as fenced blocks or bullet lists, clearly labeled as proposed — still no execution or patches; align proposals with the solution branches named in the final todos.
+- Stop after that **`todo_write`** rewrite + **`ask`**; do not apply anything in the same turn as the plan.
 
-Only after the user explicitly agrees (yes, y, proceed, apply, etc.): carry out the plan, verify if reasonable, then one-line summary.
+Only after the user answers **`ask`** in favor of applying (for the chosen option(s)): carry out the plan, verify if reasonable, then one-line summary.
 EOF
+}
+
+# stdout: plain lines for <environment> (uses globals _rerun, TMUX, HOME, etc.)
+autobot_environment_text() {
+  os=$(uname -s)
+  printf 'OS: %s  kernel: %s  arch: %s\n' "$os" "$(uname -r)" "$(uname -m)"
+  case $os in
+  Darwin)
+    if command -v sw_vers >/dev/null 2>&1; then
+      printf 'macOS: %s\n' "$(sw_vers -productVersion)"
+    fi
+    ;;
+  Linux)
+    if [ -r /etc/os-release ]; then
+      pretty=$(awk -F= '/^PRETTY_NAME=/ {
+        gsub(/^"|"$/, "", $2)
+        print $2
+        exit
+      }' /etc/os-release)
+      if [ -n "$pretty" ]; then
+        printf 'Distro: %s\n' "$pretty"
+      fi
+    fi
+    ;;
+  esac
+  printf 'Host: %s  User: %s\n' "$(uname -n)" "${USER:-unknown}"
+  printf 'PWD: %s\n' "$PWD"
+  printf 'TERM: %s\n' "${TERM:-unset}"
+  if [ -n "${LANG:-}" ] || [ -n "${LC_ALL:-}" ]; then
+    printf 'Locale: LANG=%s LC_ALL=%s\n' "${LANG:-unset}" "${LC_ALL:-unset}"
+  fi
+  printf 'Default login shell (SHELL): %s\n' "${SHELL:-unknown}"
+  if [ -n "${ZSH_VERSION:-}" ]; then
+    printf 'Invoking shell: zsh %s\n' "$ZSH_VERSION"
+  elif [ -n "${BASH_VERSION:-}" ]; then
+    printf 'Invoking shell: bash %s\n' "$BASH_VERSION"
+  else
+    printf 'Invoking shell: %s (autobot runs as POSIX sh)\n' "${0##*/}"
+  fi
+  if [ "$_rerun" = 1 ]; then
+    printf 'Terminal capture: synthetic re-run via SHELL\n'
+  elif autobot_in_tmux; then
+    printf 'Terminal capture: tmux capture-pane\n'
+  elif [ -d "$HOME/.cursor/projects" ]; then
+    printf 'Terminal capture: Cursor IDE terminal snapshot\n'
+  else
+    printf 'Terminal capture: other\n'
+  fi
 }
 
 autobot_parse_args "$@"
 autobot_capture_output
 
-if [ "$dry_run" = 1 ]; then
+if [ "$_dry_run" = 1 ]; then
   autobot_emit_dry_run
   exit 0
 fi
 
-prompt=$(autobot_default_prompt_text)
+_instructions=$(autobot_default_prompt_text)
+_environment=$(autobot_environment_text)
 
-omp --allow-home --no-session --no-title "<terminal_capture>
-$output
+_prompt="<instructions>
+$_instructions
+</instructions>
+
+<terminal_capture>
+$_output
 </terminal_capture>
 
 Context: when <earlier_terminal_context> appears above, it is recent background only; <terminal_output> is the command and output immediately before autobot — prioritize that for explanations and fixes.
 
-<instructions>
-$prompt
-</instructions>"
+<environment>
+$_environment
+</environment>
+"
+
+omp \
+  --allow-home \
+  --no-extensions \
+  --no-rules \
+  --no-session \
+  --no-skills \
+  --no-title \
+  --model "$model" \
+  --thinking "$thinking" \
+  "$_prompt"

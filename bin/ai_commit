@@ -16,6 +16,9 @@ cyan=$(tput setaf 6)
 
 OC_PROFILE="${OC_PROFILE:-git-use}"
 
+# Shown to model + enforced in finalize_commit_message (line 1).
+AI_COMMIT_SUBJECT_MAX="${AI_COMMIT_SUBJECT_MAX:-72}"
+
 if ! command -v opencode >/dev/null; then
   printf "%sError: opencode not found in the system.\n" "$red"
   exit 127
@@ -64,6 +67,10 @@ fi
 
 context_message=""
 recent_headlines="$(git log --format="%s" -10 2>/dev/null | head -20)"
+commit_rules="COMMIT MESSAGE RULES (must follow):
+- Line 1: Conventional Commits subject only (type(scope)?: summary). Hard max ${AI_COMMIT_SUBJECT_MAX} characters for entire line; prefer ~50. No comma-separated clause stacks.
+- Line 2: blank.
+- Line 3+: optional body (bullets or sentences) for details."
 [ -n "$recent_headlines" ] &&
   context_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
 $recent_headlines"
@@ -81,9 +88,9 @@ fi
 # stdin for opencode: optional context + staged diff (temp file avoids argv limits).
 pipe_opencode_stdin() {
   if [ -n "$context_message" ]; then
-    printf '%s\n\n%s' "$context_message" "$(cat "$diff_file")"
+    printf '%s\n\n%s\n\n%s' "$commit_rules" "$context_message" "$(cat "$diff_file")"
   else
-    cat "$diff_file"
+    printf '%s\n\n%s' "$commit_rules" "$(cat "$diff_file")"
   fi
 }
 
@@ -91,10 +98,24 @@ pipe_opencode_stdin() {
 # Start capture on first line that looks like a Conventional Commits subject (not bare "Word: "
 # prose). Requires known type prefix so random ":" lines in chatter do not win.
 finalize_commit_message() {
-  awk '
+  awk -v max="$AI_COMMIT_SUBJECT_MAX" '
     function trimmed(s,   t) {
       t = s
       sub(/^[[:space:]]+/, "", t)
+      return t
+    }
+    function clamp_subject(s,   orig, t, c) {
+      if (max !~ /^[0-9]+$/ || max < 20) max = 72
+      orig = trimmed(s)
+      if (length(orig) <= max) return orig
+      t = substr(orig, 1, max)
+      sub(/[[:space:]]+$/, "", t)
+      c = substr(orig, max + 1, 1)
+      if (c != "" && c != " " && t ~ /[^[:space:]]$/) {
+        sub(/[[:space:]]+[^[:space:]]+$/, "", t)
+      }
+      if (t == "") t = substr(orig, 1, max)
+      sub(/[[:space:]]+$/, "", t)
       return t
     }
     # Opening fence alone (optional lang), not "```chore: ..." same-line glitch from models.
@@ -143,6 +164,7 @@ finalize_commit_message() {
         sub(/^[[:space:]]+/, "", t)
         a[1] = t
       }
+      a[1] = clamp_subject(a[1])
       for (i = 1; i <= m; i++) print a[i]
     }'
 }
