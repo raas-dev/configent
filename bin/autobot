@@ -18,8 +18,6 @@ aliases=${AUTOBOT_ALIASES-?}
 # omp --model / --thinking (override with -m/--model, -t/--thinking).
 model=${AUTOBOT_MODEL:-minimax/MiniMax-M2.7}
 thinking=${AUTOBOT_THINKING:-medium}
-# tmux capture-pane -S (negative = lines back from bottom). Deeper = more past commands in pane.
-tmux_pane_start=${AUTOBOT_TMUX_START:--3000}
 
 # stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
 autobot_last_cmd() {
@@ -135,7 +133,7 @@ autobot_get_previous_cmd() {
     echo "autobot: no readable history file (set HISTFILE or AUTOBOT_PREVIOUS_CMD)" >&2
     return 1
   fi
-  tail -n "${AUTOBOT_HIST_TAIL:-120}" "$hist" | awk -v aliases="$aliases" '
+  tail -n "${AUTOBOT_HIST_TAIL:-$window}" "$hist" | awk -v aliases="$aliases" '
     function trim(s) {
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
       gsub(/\r$/, "", s)
@@ -196,8 +194,8 @@ usage() {
   echo "Env: AUTOBOT_LINES (primary block), AUTOBOT_CONTEXT_BLOCKS (recent \$ blocks, default 3)," >&2
   echo "     AUTOBOT_PRIOR_LINES (older blocks), AUTOBOT_WINDOW, AUTOBOT_ALIASES," >&2
   echo "     AUTOBOT_MODEL, AUTOBOT_THINKING, AUTOBOT_PREVIOUS_CMD (default for bare -c)," >&2
-  echo "     AUTOBOT_HIST_TAIL (history tail size, default 120)," >&2
-  echo "     AUTOBOT_TMUX_START (tmux capture-pane -S, default -3000)," >&2
+  echo "     AUTOBOT_HIST_TAIL (history tail size; default same as AUTOBOT_WINDOW)," >&2
+  echo "     AUTOBOT_TMUX_START (tmux capture-pane -S; default matches AUTOBOT_WINDOW)," >&2
   echo "     AUTOBOT_SHELL_PID (Cursor: force terminal file match when PPID chain fails)." >&2
 }
 
@@ -383,7 +381,8 @@ autobot_capture_output() {
   fi
 
   if autobot_in_tmux; then
-    _output=$(tmux capture-pane -p -S "$tmux_pane_start" | autobot_last_cmd)
+    # capture-pane -S: negative = lines from bottom; default -AUTOBOT_WINDOW unless AUTOBOT_TMUX_START set.
+    _output=$(tmux capture-pane -p -S "${AUTOBOT_TMUX_START:--$window}" | autobot_last_cmd)
     return
   fi
 
@@ -393,8 +392,7 @@ autobot_capture_output() {
       echo "autobot: no Cursor terminal file (tried PPID chain + cwd: $PWD). Set AUTOBOT_SHELL_PID to your shell pid." >&2
       exit 1
     fi
-    body=$(autobot_cursor_terminal_body "$terminal_file")
-    _output=$(printf '%s\n' "$body" | autobot_last_cmd)
+    _output=$(autobot_cursor_terminal_body "$terminal_file" | autobot_last_cmd)
     return
   fi
 
