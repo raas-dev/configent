@@ -308,10 +308,14 @@ export OPENCHAMBER_OPENCODE_PORT=4096
 
 # opencode
 export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
-export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # see plugins (default: true)
+## force-full-read.ts plugin
+export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # default: true
 
 # pi
 export PI_SKIP_VERSION_CHECK=1
+## pi-ptc-next
+export PTC_ALLOW_UNSANDBOXED_SUBPROCESS=true
+#export PTC_USE_DOCKER=true
 
 ### playwright #################################################################
 
