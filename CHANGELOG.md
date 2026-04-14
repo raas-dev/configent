@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.11](https://github.com/raas-dev/configent/compare/1.216.10...1.216.11) (2026-04-14)
+
+
+### Fixes
+
+* **ai_commit:** drop --format default from opencode run ([48cd703](https://github.com/raas-dev/configent/commit/48cd7030ea6c03c11c52afb941c15e0c9396c4cd))
+* **ai:** enforce 72-char commit subjects and enhance autobot capture ([4b3b5f2](https://github.com/raas-dev/configent/commit/4b3b5f232979d0f13f14c3241a299463e075f0ae))
+* **aliases:** enable skills in ai() default by removing --no-skills ([d3496ea](https://github.com/raas-dev/configent/commit/d3496ea1b443b0610579f0027d8fdafdb2d4ae88))
+* **autobot:** default history tail and tmux capture to AUTOBOT_WINDOW ([8e26b41](https://github.com/raas-dev/configent/commit/8e26b415a5551aacbb097ccf8cc7ed0d20cda38a))
+* **gitconfig:** set GitHub credential helper to gh auth git-credential ([cb49075](https://github.com/raas-dev/configent/commit/cb490751b74724cc4686fb58c36f0644c6de4e2d))
+* **omp-caveman:** resolve skill dir via OMP_CAVEMAN_SKILL_PATH and skip injection with warn when missing ([51099a9](https://github.com/raas-dev/configent/commit/51099a9ed806ee2150a3e9823e560b126b3e1d31))
+* **omp:** add omp-caveman auto-start extension and normalize omp config spacing ([52d4545](https://github.com/raas-dev/configent/commit/52d4545cd6dc3be9f7668202e18d62c1bc5be4c1))
+
 ## [1.216.10](https://github.com/raas-dev/configent/compare/1.216.9...1.216.10) (2026-04-13)
 
 
