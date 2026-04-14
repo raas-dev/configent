@@ -2,7 +2,7 @@
   "collapseChangelog": true,
   "defaultModel": "MiniMax-M2.7",
   "defaultProvider": "minimax",
-  "lastChangelogVersion": "0.66.1",
+  "lastChangelogVersion": "0.67.1",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-hodor",
