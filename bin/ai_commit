@@ -94,7 +94,7 @@ pipe_opencode_stdin() {
   fi
 }
 
-# Default-format stdout may include workspace noise; then trim edges and stray ``` fence lines.
+# opencode run stdout (formatted text, not --format json) may include noise; trim edges and stray ``` fence lines.
 # Start capture on first line that looks like a Conventional Commits subject (not bare "Word: "
 # prose). Requires known type prefix so random ":" lines in chatter do not win.
 finalize_commit_message() {
@@ -177,7 +177,7 @@ if [ -z "$commit_message" ]; then
   raw="$(pipe_opencode_stdin | oc exec "$OC_PROFILE" -- opencode run \
     --agent coder \
     --command caveman-commit \
-    --format default 2>"$oc_stderr")" || oc_status=$?
+    2>"$oc_stderr")" || oc_status=$?
 
   if [ "$oc_status" -ne 0 ]; then
     printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_status"
