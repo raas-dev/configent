@@ -571,7 +571,6 @@
   "window.customTitleBarVisibility": "windowed",
   "window.menuStyle": "inherit",
   "window.newWindowDimensions": "inherit",
-  "window.newWindowProfile": "Default",
   "window.restoreFullscreen": true,
   "window.systemColorTheme": "dark",
   "workbench.activityBar.iconClickBehavior": "focus",
