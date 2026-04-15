@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.12](https://github.com/raas-dev/configent/compare/1.216.11...1.216.12) (2026-04-15)
+
+
+### Fixes
+
+* **pi-run-code:** add run_code TS sandbox tool ([44aef35](https://github.com/raas-dev/configent/commit/44aef352757f4cfb26082663a70220749961596a))
+* **pi-run-code:** add TS type checking with generated type defs ([74013b2](https://github.com/raas-dev/configent/commit/74013b23fa8017e16f22559ca441abf40aaa0753))
+* **pi-run-code:** enhance package resolver and run_code tool help ([ac23d71](https://github.com/raas-dev/configent/commit/ac23d71da1aea74d2f9e15b6f98a2434dfddf3f9))
+* **pi-tool-display:** disable native user message box ([ba7b5d9](https://github.com/raas-dev/configent/commit/ba7b5d925256d10407ed4c909cbef8c18322373d))
+
 ## [1.216.11](https://github.com/raas-dev/configent/compare/1.216.10...1.216.11) (2026-04-14)
 
 
