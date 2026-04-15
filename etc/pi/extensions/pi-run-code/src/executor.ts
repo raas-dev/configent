@@ -7,6 +7,7 @@ import { transformSync } from "esbuild";
 import { $ } from "zx";
 import { performance } from "node:perf_hooks";
 import { createRequire } from "node:module";
+import { typeCheck, type TypeCheckError } from "./type-checker.js";
 
 const nodeRequire: NodeRequire = createRequire(
   typeof __filename !== "undefined"
@@ -38,6 +39,7 @@ export interface ExecutionOptions {
   onUpdate?: any;
   shellPrefix?: string;
   userPackages?: Record<string, unknown>;
+  typeDefs?: string;
 }
 
 // --- Transpile ---
@@ -89,10 +91,29 @@ export async function executeCode(
     signal,
     shellPrefix,
     userPackages = {},
+    typeDefs,
   } = options;
 
   const start = performance.now();
   const logs: string[] = [];
+
+  // 0. Type-check with real TS compiler if typeDefs provided
+  if (typeDefs) {
+    const tcResult = typeCheck(code, typeDefs);
+    if (tcResult.errors.length > 0) {
+      const elapsedMs = performance.now() - start;
+      return {
+        success: false,
+        errorKind: "type",
+        errors: tcResult.errors.map((e: TypeCheckError) => ({
+          line: e.line,
+          message: e.message,
+        })),
+        logs: [],
+        elapsedMs,
+      };
+    }
+  }
 
   // 1. Transpile TS → JS
   let jsCode: string;

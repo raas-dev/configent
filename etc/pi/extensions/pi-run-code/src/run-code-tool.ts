@@ -9,10 +9,11 @@ export interface RunCodeToolOptions {
   timeout?: number;
   maxOutputSize?: number;
   packageDescriptions?: string;
+  typeDefs?: string;
 }
 
 export function createRunCodeTool(options: RunCodeToolOptions): ToolDefinition {
-  const { cwd, shellPrefix, userPackages = {}, timeout, maxOutputSize, packageDescriptions } = options;
+  const { cwd, shellPrefix, userPackages = {}, timeout, maxOutputSize, packageDescriptions, typeDefs } = options;
 
   const packageSection = packageDescriptions
     ? `\n\nConfigured npm packages (available as globals):\n${packageDescriptions}`
@@ -55,6 +56,7 @@ Only TS/JS syntax accepted. Return a value to include it in the result.`,
         onUpdate,
         shellPrefix,
         userPackages,
+        typeDefs,
       });
 
       if (!result.success) {

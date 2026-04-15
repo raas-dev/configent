@@ -13,6 +13,8 @@ import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { SettingsManager } from "@mariozechner/pi-coding-agent";
 import { createRunCodeTool, type RunCodeToolOptions } from "./run-code-tool.js";
 import { loadUserPackages, type ResolvedPackage } from "./package-resolver.js";
+import { initTypeChecker, loadPackageTypes } from "./type-checker.js";
+import { generateBuiltinTypeDefs, generatePackageTypeDefs } from "./type-generator.js";
 
 export default function runCodeExtension(pi: ExtensionAPI) {
   let userPackages: ResolvedPackage[] = [];
@@ -27,6 +29,15 @@ export default function runCodeExtension(pi: ExtensionAPI) {
   } catch (e: any) {
     console.warn(`Run Code: Failed to load user packages: ${e.message}`);
   }
+
+  initTypeChecker();
+
+  const packagesWithTypes = userPackages.filter(p => p.hasTypes);
+  if (packagesWithTypes.length > 0) {
+    loadPackageTypes(packagesWithTypes);
+  }
+
+  const typeDefs = generateBuiltinTypeDefs() + "\n" + generatePackageTypeDefs(userPackages);
 
   let shellPrefix: string | undefined;
   try {
@@ -43,6 +54,7 @@ export default function runCodeExtension(pi: ExtensionAPI) {
     shellPrefix,
     userPackages: userPackageMap,
     packageDescriptions,
+    typeDefs,
   };
 
   pi.registerTool(createRunCodeTool(toolOptions));
