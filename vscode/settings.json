@@ -663,6 +663,5 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "workbench.editor.limit.value": 8,
-  "cursor.general.fontSmoothingAntialiased": true,
   "cursor.terminal.enableAiChecks": false
 }
