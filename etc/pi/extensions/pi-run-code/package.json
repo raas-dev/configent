@@ -1,12 +1,11 @@
 {
   "name": "pi-run-code",
   "version": "0.1.0",
-  "description": "Run TypeScript code in Pi agent context — adds a run_code tool without replacing existing tools. Supports npm packages via .pi/run-code.json. Code runs with full Node.js access (not sandboxed).",
+  "description": "Run JavaScript/TypeScript code within PI coding agent",
   "keywords": [
     "pi-package",
     "pi-extension",
-    "typescript",
-    "code-execution"
+    "code-mode"
   ],
   "license": "LGPL-3.0",
   "repository": {
