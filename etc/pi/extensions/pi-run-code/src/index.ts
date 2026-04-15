@@ -5,7 +5,7 @@
 //
 // Features:
 // - Execute arbitrary TypeScript with shell access (zx)
-// - Auto-install npm packages via .pi/run-code.json config
+// - Auto-install npm packages via .pi/pi-run-code.json config
 // - Runs in the same working directory as the Pi agent
 // - Type-checked before execution
 
