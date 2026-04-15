@@ -1,0 +1,49 @@
+{
+  "name": "pi-run-code",
+  "version": "0.1.0",
+  "description": "Run TypeScript code in Pi agent context — adds a run_code tool without replacing existing tools. Supports npm packages via .pi/run-code.json.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "typescript",
+    "code-execution"
+  ],
+  "license": "LGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raas-dev/configent.git",
+    "directory": "etc/pi/extensions/pi-run-code"
+  },
+  "type": "commonjs",
+  "files": [
+    "src/",
+    "test/"
+  ],
+  "scripts": {
+    "test": "node test/run.js"
+  },
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "dependencies": {
+    "esbuild": "^0.27.3",
+    "fs-extra": "^11.3.4",
+    "typescript": "^5.9.3",
+    "zx": "^8.8.5"
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-agent-core": "*",
+    "@sinclair/typebox": "*",
+    "@mariozechner/pi-tui": "*"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-agent-core": "*",
+    "@sinclair/typebox": "*",
+    "@mariozechner/pi-tui": "*"
+  }
+}

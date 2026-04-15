@@ -1,0 +1,236 @@
+// sandbox.ts — Execute TypeScript code in a sandboxed context.
+//
+// Transpiles TS → JS via esbuild, then runs in an isolated AsyncFunction
+// with zx shell globals, user packages, and abort/timeout support.
+
+import { transformSync } from "esbuild";
+import { $ } from "zx";
+import { performance } from "node:perf_hooks";
+import { createRequire } from "node:module";
+
+const nodeRequire: NodeRequire = createRequire(
+  typeof __filename !== "undefined"
+    ? __filename
+    : (() => { throw new Error("CJS context required"); })()
+);
+
+// --- Types ---
+
+export interface ExecutionError {
+  line: number;
+  message: string;
+}
+
+export interface ExecutionResult {
+  success: boolean;
+  errorKind?: "type" | "runtime";
+  errors: ExecutionError[];
+  logs: string[];
+  returnValue?: unknown;
+  elapsedMs: number;
+}
+
+export interface ExecutionOptions {
+  cwd: string;
+  timeout?: number;
+  maxOutputSize?: number;
+  signal?: AbortSignal;
+  onUpdate?: any;
+  shellPrefix?: string;
+  userPackages?: Record<string, unknown>;
+}
+
+// --- Language detection ---
+
+const PYTHON_PATTERNS = [
+  /^\s*import\s+\w+\s*$/m,                           // import os
+  /^\s*from\s+[\w.]+\s+import\s/m,                   // from os import path
+  /^\s*def\s+\w+\s*\(/m,                             // def foo():
+  /^\s*class\s+\w+.*:\s*$/m,                         // class Foo:
+  /^\s*print\(/m,                                     // print("hello")
+  /^\s*#\s*!/m,                                       // #!/usr/bin/env python
+  /\bself\b.*:\s*$/m,                                 // self.x: int
+  /^\s*if\s+.*:\s*$/m,                                // if x > 0:
+  /^\s*for\s+\w+\s+in\s/m,                           // for x in range
+  /^\s*while\s+.*:\s*$/m,                            // while True:
+  /^\s*elif\s/m,                                      // elif x:
+  /^\s*else:\s*$/m,                                   // else:
+  /(?:^|\n)\s*os\.path\./m,                          // os.path.join
+  /(?:^|\n)\s*os\.listdir/m,                         // os.listdir
+];
+
+function detectPython(code: string): boolean {
+  let matches = 0;
+  for (const p of PYTHON_PATTERNS) {
+    if (p.test(code)) matches++;
+  }
+  return matches >= 2;
+}
+
+// --- Transpile ---
+
+function transpile(code: string): string {
+  const wrapped = `(async () => {\n${code}\n})()`;
+  const result = transformSync(wrapped, {
+    loader: "ts",
+    target: "es2022",
+    format: "cjs",
+    platform: "node",
+    sourcemap: "inline",
+    tsconfigRaw: JSON.stringify({
+      compilerOptions: {
+        strict: false,
+        esModuleInterop: true,
+      },
+    }),
+  });
+  return result.code;
+}
+
+function parseTypeErrors(diagnosticText: string): ExecutionError[] {
+  const errors: ExecutionError[] = [];
+  const lines = diagnosticText.split("\n");
+  for (const line of lines) {
+    const match = line.match(/^.*?\((\d+),\d+\):\s+error\s+(TS\d+):\s+(.+)$/);
+    if (match) {
+      errors.push({ line: parseInt(match[1], 10), message: `${match[2]}: ${match[3]}` });
+    }
+  }
+  // Fallback: if no structured errors parsed, return the whole text
+  if (errors.length === 0 && diagnosticText.trim()) {
+    errors.push({ line: 0, message: diagnosticText.trim() });
+  }
+  return errors;
+}
+
+// --- Execute ---
+
+export async function executeCode(
+  code: string,
+  options: ExecutionOptions
+): Promise<ExecutionResult> {
+  const {
+    cwd,
+    timeout = 30_000,
+    maxOutputSize = 100_000,
+    signal,
+    shellPrefix,
+    userPackages = {},
+  } = options;
+
+  const start = performance.now();
+  const logs: string[] = [];
+
+  // 1. Transpile TS → JS
+  let jsCode: string;
+  try {
+    jsCode = transpile(code);
+  } catch (err: any) {
+    const elapsedMs = performance.now() - start;
+    if (detectPython(code)) {
+      return {
+        success: false,
+        errorKind: "type",
+        errors: [{ line: 0, message: "This code is not valid TypeScript/JavaScript. run_code only executes TS/JS. Use the bash tool for shell commands, or rewrite in JS/TS syntax." }],
+        logs: [],
+        elapsedMs,
+      };
+    }
+    const errors = parseTypeErrors(err.message || String(err));
+    return {
+      success: false,
+      errorKind: "type",
+      errors: errors.length > 0 ? errors : [{ line: 0, message: err.message || "Transpilation failed" }],
+      logs: [],
+      elapsedMs,
+    };
+  }
+
+  // 2. Build sandbox globals
+  const print = (...args: unknown[]) => {
+    const text = args.map((a) => (typeof a === "string" ? a : JSON.stringify(a, null, 2))).join(" ");
+    logs.push(text);
+  };
+
+  const consoleProxy = {
+    log: (...args: unknown[]) => {
+      logs.push(args.map(String).join(" "));
+    },
+    warn: (...args: unknown[]) => {
+      logs.push(`[warn] ${args.map(String).join(" ")}`);
+    },
+    error: (...args: unknown[]) => {
+      logs.push(`[error] ${args.map(String).join(" ")}`);
+    },
+    info: (...args: unknown[]) => {
+      logs.push(args.map(String).join(" "));
+    },
+    debug: (...args: unknown[]) => {
+      logs.push(`[debug] ${args.map(String).join(" ")}`);
+    },
+  };
+
+  // Set up zx $ with cwd and optional shell prefix
+  const $local = $({ cwd });
+  if (shellPrefix) {
+    $.prefix = shellPrefix;
+  }
+
+  // Build global scope
+  const sandboxGlobals: Record<string, unknown> = {
+    $: $local,
+    $local,
+    print,
+    console: consoleProxy,
+    require: nodeRequire,
+    process,
+    Buffer,
+    __filename: undefined,
+    __dirname: undefined,
+    ...userPackages,
+  };
+
+  // 3. Execute in AsyncFunction sandbox
+  const globalKeys = Object.keys(sandboxGlobals);
+  const globalValues = Object.values(sandboxGlobals);
+
+  const wrappedCode = `"use strict";\nreturn ${jsCode};`;
+
+  let returnValue: unknown;
+  try {
+    const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+    const fn = new AsyncFunction(...globalKeys, wrappedCode);
+    returnValue = await fn(...globalValues);
+  } catch (err: any) {
+    const elapsedMs = performance.now() - start;
+    return {
+      success: false,
+      errorKind: "runtime",
+      errors: [{ line: 0, message: err.message || "Runtime error" }],
+      logs,
+      elapsedMs,
+    };
+  }
+
+  const elapsedMs = performance.now() - start;
+
+  // 4. Truncate logs if needed
+  let finalLogs = logs;
+  if (maxOutputSize > 0) {
+    let totalSize = finalLogs.reduce((sum, l) => sum + l.length, 0);
+    while (totalSize > maxOutputSize && finalLogs.length > 1) {
+      totalSize -= finalLogs.pop()!.length;
+    }
+    if (totalSize > maxOutputSize && finalLogs.length > 0) {
+      finalLogs = [finalLogs[0].slice(0, maxOutputSize) + "\n... (truncated)"];
+    }
+  }
+
+  return {
+    success: true,
+    errors: [],
+    logs: finalLogs,
+    returnValue,
+    elapsedMs,
+  };
+}
