@@ -134,6 +134,55 @@ await test("user packages injected as globals", async () => {
   assert.equal(result.returnValue, 99);
 });
 
+await test("transpiles ESM import to CJS require", async () => {
+  const code = `
+    import { join } from "path";
+    return join("a", "b");
+  `;
+  const result = await executeCode(code, { cwd });
+  assert.equal(result.success, true);
+  assert.equal(result.returnValue, "a/b");
+});
+
+await test("transpiles ESM named import from Node built-in", async () => {
+  const code = `
+    import { readdirSync } from "fs";
+    const files = readdirSync(process.cwd());
+    return Array.isArray(files);
+  `;
+  const result = await executeCode(code, { cwd });
+  assert.equal(result.success, true);
+  assert.equal(result.returnValue, true);
+});
+
+await test("transpiles ESM import with top-level await", async () => {
+  const code = `
+    import { basename } from "path";
+    const name = basename(process.cwd());
+    return name;
+  `;
+  const result = await executeCode(code, { cwd });
+  assert.equal(result.success, true);
+  assert.equal(typeof result.returnValue, "string");
+  assert.ok(result.returnValue.length > 0);
+});
+
+await test("ESM imports pass type-check when typeDefs provided", async () => {
+  const typeDefs = `
+interface FileInfo { name: string; path: string }
+declare const cwd: string;
+`;
+  const code = `
+    import { join } from "path";
+    import { readdirSync } from "fs";
+    const files: string[] = readdirSync(process.cwd());
+    return files.length > 0;
+  `;
+  const result = await executeCode(code, { cwd, typeDefs });
+  assert.equal(result.success, true);
+  assert.equal(result.returnValue, true);
+});
+
 await test("truncates output when maxOutputSize exceeded", async () => {
   const bigStr = "x".repeat(2000);
   const result = await executeCode(

@@ -44,8 +44,49 @@ export interface ExecutionOptions {
 
 // --- Transpile ---
 
+function rewriteImports(code: string): string {
+  return code.split("\n").map(line => {
+    const trimmed = line.trimStart();
+    const indent = line.slice(0, line.length - trimmed.length);
+
+    // import { a, b } from 'module'
+    let m = trimmed.match(/^import\s*\{([^}]*)\}\s*from\s*['"]([^'"]+)['"]\s*;?\s*$/);
+    if (m) {
+      const names = m[1].split(",").map(s => s.trim()).filter(Boolean);
+      const requires = names.map(n => {
+        const parts = n.split(/\s+as\s+/);
+        const orig = parts[0].trim();
+        const alias = parts[1]?.trim() ?? orig;
+        return `const ${alias} = require("${m[2]}").${orig};`;
+      });
+      return indent + requires.join(" ");
+    }
+
+    // import defaultExport from 'module'
+    m = trimmed.match(/^import\s+(\w+)\s+from\s*['"]([^'"]+)['"]\s*;?\s*$/);
+    if (m) {
+      return `${indent}const ${m[1]} = require("${m[2]}");`;
+    }
+
+    // import * as ns from 'module'
+    m = trimmed.match(/^import\s*\*\s*as\s+(\w+)\s+from\s*['"]([^'"]+)['"]\s*;?\s*$/);
+    if (m) {
+      return `${indent}const ${m[1]} = require("${m[2]}");`;
+    }
+
+    // import 'module' (side-effect)
+    m = trimmed.match(/^import\s*['"]([^'"]+)['"]\s*;?\s*$/);
+    if (m) {
+      return `${indent}require("${m[1]}");`;
+    }
+
+    return line;
+  }).join("\n");
+}
+
 function transpile(code: string): string {
-  const wrapped = `(async () => {\n${code}\n})()`;
+  const rewritten = rewriteImports(code);
+  const wrapped = `(async () => {\n${rewritten}\n})()`;
   const result = transformSync(wrapped, {
     loader: "ts",
     target: "es2022",
@@ -99,7 +140,7 @@ export async function executeCode(
 
   // 0. Type-check with real TS compiler if typeDefs provided
   if (typeDefs) {
-    const tcResult = typeCheck(code, typeDefs);
+    const tcResult = typeCheck(rewriteImports(code), typeDefs);
     if (tcResult.errors.length > 0) {
       const elapsedMs = performance.now() - start;
       return {
