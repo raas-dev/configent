@@ -1,6 +1,6 @@
 import type { ExtensionContext, ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { Type } from "@sinclair/typebox";
-import { executeCode, type ExecutionResult } from "./sandbox.js";
+import { executeCode, type ExecutionResult } from "./executor.js";
 
 export interface RunCodeToolOptions {
   cwd: string;
@@ -8,31 +8,31 @@ export interface RunCodeToolOptions {
   userPackages?: Record<string, unknown>;
   timeout?: number;
   maxOutputSize?: number;
+  packageDescriptions?: string;
 }
 
 export function createRunCodeTool(options: RunCodeToolOptions): ToolDefinition {
-  const { cwd, shellPrefix, userPackages = {}, timeout, maxOutputSize } = options;
+  const { cwd, shellPrefix, userPackages = {}, timeout, maxOutputSize, packageDescriptions } = options;
+
+  const packageSection = packageDescriptions
+    ? `\n\nConfigured npm packages (available as globals):\n${packageDescriptions}`
+    : "";
 
   return {
     name: "run_code",
     label: "Run Code",
-    description: `Execute TypeScript or JavaScript code in a sandboxed Node.js context. Only TS/JS syntax accepted.
+    description: `Execute TypeScript or JavaScript code in a Node.js context.
 
-Use this tool WHENEVER you need to:
-- Run any code or computation (prefer over bash for non-trivial logic)
-- List, read, or process files (use require("fs") or $ shell commands)
-- Evaluate expressions, transform data, or format output
-- Run shell commands via $ (zx) template literals
-- Prototype or test code snippets
+Use this tool when the user says "run code", "run_code", or asks to execute anything programmatic — computation, data processing, file operations via Node.js APIs (require("fs"), require("path"), etc.), or code evaluation.
 
 Available in code:
-- $ (zx shell) — run shell commands with template literals, e.g. const out = await $\`ls\`
+- $ (zx shell) — run shell commands with template literals, e.g. const out = await $\`ls -la\`
 - print(...) — output to include in result
 - console.log/warn/error — captured output
 - require(...) — import any Node.js module (fs, path, os, etc.)
-- Any npm packages configured in .pi/run-code.json
+- Any npm packages configured in .pi/pi-run-code.json${packageSection}
 
-Return a value to include it in the result. Errors are caught before execution.`,
+Only TS/JS syntax accepted. Return a value to include it in the result.`,
 
     parameters: Type.Object({
       code: Type.String({

@@ -4,20 +4,27 @@ const { buildSync } = require("esbuild");
 const path = require("path");
 const fs = require("fs");
 
-const outfile = path.join(__dirname, ".cache", "test.cjs");
 fs.mkdirSync(path.join(__dirname, ".cache"), { recursive: true });
 
-buildSync({
-  entryPoints: [path.join(__dirname, "sandbox.test.ts")],
-  bundle: true,
-  platform: "node",
-  format: "cjs",
-  target: "es2022",
-  outfile,
-  packages: "bundle",
-  external: ["esbuild", "zx"],
-  sourcemap: "inline",
-  logLevel: "error",
-});
+const files = ["executor.test.ts", "package-resolver.test.ts"];
 
-require(outfile);
+for (const file of files) {
+  const src = path.join(__dirname, file);
+  if (!fs.existsSync(src)) continue;
+  const outfile = path.join(__dirname, ".cache", file.replace(".ts", ".cjs"));
+
+  buildSync({
+    entryPoints: [src],
+    bundle: true,
+    platform: "node",
+    format: "cjs",
+    target: "es2022",
+    outfile,
+    packages: "bundle",
+    external: ["esbuild", "zx"],
+    sourcemap: "inline",
+    logLevel: "error",
+  });
+
+  require(outfile);
+}

@@ -1,4 +1,4 @@
-import { executeCode } from "../src/sandbox.js";
+import { executeCode } from "../src/executor.js";
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
@@ -26,7 +26,7 @@ function summarize() {
   if (failed > 0) process.exit(1);
 }
 
-console.log("\nsandbox: executeCode");
+console.log("\nexecutor: executeCode");
 
 async function main() {
 
@@ -157,20 +157,6 @@ await test("zx $ respects cwd for shell commands", async () => {
   } finally {
     rmSync(tmpDir, { recursive: true });
   }
-});
-
-await test("returns clear error for Python code", async () => {
-  const result = await executeCode("import os\nos.listdir('.')", { cwd });
-  assert.equal(result.success, false);
-  assert.equal(result.errorKind, "type");
-  assert.ok(result.errors[0].message.includes("not valid TypeScript/JavaScript"));
-});
-
-await test("detects non-JS def/class syntax", async () => {
-  const result = await executeCode("def hello():\n    print('hi')", { cwd });
-  assert.equal(result.success, false);
-  assert.equal(result.errorKind, "type");
-  assert.ok(result.errors[0].message.includes("not valid TypeScript/JavaScript"));
 });
 
 summarize();

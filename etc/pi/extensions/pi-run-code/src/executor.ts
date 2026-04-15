@@ -1,7 +1,7 @@
-// sandbox.ts — Execute TypeScript code in a sandboxed context.
+// executor.ts — Execute TypeScript code via esbuild + AsyncFunction.
 //
 // Transpiles TS → JS via esbuild, then runs in an isolated AsyncFunction
-// with zx shell globals, user packages, and abort/timeout support.
+// with zx shell globals, user packages, and timeout support.
 
 import { transformSync } from "esbuild";
 import { $ } from "zx";
@@ -38,33 +38,6 @@ export interface ExecutionOptions {
   onUpdate?: any;
   shellPrefix?: string;
   userPackages?: Record<string, unknown>;
-}
-
-// --- Language detection ---
-
-const PYTHON_PATTERNS = [
-  /^\s*import\s+\w+\s*$/m,                           // import os
-  /^\s*from\s+[\w.]+\s+import\s/m,                   // from os import path
-  /^\s*def\s+\w+\s*\(/m,                             // def foo():
-  /^\s*class\s+\w+.*:\s*$/m,                         // class Foo:
-  /^\s*print\(/m,                                     // print("hello")
-  /^\s*#\s*!/m,                                       // #!/usr/bin/env python
-  /\bself\b.*:\s*$/m,                                 // self.x: int
-  /^\s*if\s+.*:\s*$/m,                                // if x > 0:
-  /^\s*for\s+\w+\s+in\s/m,                           // for x in range
-  /^\s*while\s+.*:\s*$/m,                            // while True:
-  /^\s*elif\s/m,                                      // elif x:
-  /^\s*else:\s*$/m,                                   // else:
-  /(?:^|\n)\s*os\.path\./m,                          // os.path.join
-  /(?:^|\n)\s*os\.listdir/m,                         // os.listdir
-];
-
-function detectPython(code: string): boolean {
-  let matches = 0;
-  for (const p of PYTHON_PATTERNS) {
-    if (p.test(code)) matches++;
-  }
-  return matches >= 2;
 }
 
 // --- Transpile ---
@@ -127,15 +100,6 @@ export async function executeCode(
     jsCode = transpile(code);
   } catch (err: any) {
     const elapsedMs = performance.now() - start;
-    if (detectPython(code)) {
-      return {
-        success: false,
-        errorKind: "type",
-        errors: [{ line: 0, message: "This code is not valid TypeScript/JavaScript. run_code only executes TS/JS. Use the bash tool for shell commands, or rewrite in JS/TS syntax." }],
-        logs: [],
-        elapsedMs,
-      };
-    }
     const errors = parseTypeErrors(err.message || String(err));
     return {
       success: false,
@@ -146,7 +110,7 @@ export async function executeCode(
     };
   }
 
-  // 2. Build sandbox globals
+  // 2. Build execution globals
   const print = (...args: unknown[]) => {
     const text = args.map((a) => (typeof a === "string" ? a : JSON.stringify(a, null, 2))).join(" ");
     logs.push(text);
@@ -177,7 +141,7 @@ export async function executeCode(
   }
 
   // Build global scope
-  const sandboxGlobals: Record<string, unknown> = {
+  const execGlobals: Record<string, unknown> = {
     $: $local,
     $local,
     print,
@@ -191,8 +155,8 @@ export async function executeCode(
   };
 
   // 3. Execute in AsyncFunction sandbox
-  const globalKeys = Object.keys(sandboxGlobals);
-  const globalValues = Object.values(sandboxGlobals);
+  const globalKeys = Object.keys(execGlobals);
+  const globalValues = Object.values(execGlobals);
 
   const wrappedCode = `"use strict";\nreturn ${jsCode};`;
 

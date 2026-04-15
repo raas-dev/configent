@@ -1,6 +1,6 @@
 // index.ts — Pi Run Code extension entry point.
 //
-// Adds a `run_code` tool that executes TypeScript code in a sandboxed context.
+// Adds a `run_code` tool that executes TypeScript code via esbuild + AsyncFunction.
 // Does NOT replace or disable any existing Pi tools.
 //
 // Features:
@@ -15,8 +15,6 @@ import { createRunCodeTool, type RunCodeToolOptions } from "./run-code-tool.js";
 import { loadUserPackages, type ResolvedPackage } from "./package-resolver.js";
 
 export default function runCodeExtension(pi: ExtensionAPI) {
-  // --- Load user-configured packages ---
-  // Reads ~/.pi/agent/run-code.json (global) and .pi/run-code.json (project)
   let userPackages: ResolvedPackage[] = [];
   let userPackageMap: Record<string, unknown> = {};
   try {
@@ -30,20 +28,21 @@ export default function runCodeExtension(pi: ExtensionAPI) {
     console.warn(`Run Code: Failed to load user packages: ${e.message}`);
   }
 
-  // --- Read shell command prefix from pi settings ---
   let shellPrefix: string | undefined;
   try {
     const settings = SettingsManager.create();
     shellPrefix = settings.getShellCommandPrefix();
-  } catch {
-    // Settings not available
-  }
+  } catch {}
 
-  // --- Register the run_code tool (does NOT disable other tools) ---
+  const packageDescriptions = userPackages.map(p =>
+    `- ${p.varName} (${p.specifier}@${p.versionRange}): ${p.description}`
+  ).join("\n");
+
   const toolOptions: RunCodeToolOptions = {
     cwd: process.cwd(),
     shellPrefix,
     userPackages: userPackageMap,
+    packageDescriptions,
   };
 
   pi.registerTool(createRunCodeTool(toolOptions));
