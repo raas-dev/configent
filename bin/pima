@@ -17,15 +17,35 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
     exit 127
   fi
-  # start VM if not running
-  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
-    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
-    else
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
-    fi
+  PIMA_CWD=$(pwd -P)
+  LIMA_YAML="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+  # --mount-only replaces the full mount list; keep template dirs + cwd rw.
+  pima_start_mount_only() {
+    limactl start --name "$NAME" --tty=false \
+      --mount-only "$HOME/dev:w" \
+      --mount-only "$HOME/Downloads:w" \
+      --mount-only "${PIMA_CWD}:w"
+  }
+  pima_create_instance() {
+    net="$1"
+    limactl start --name "$NAME" \
+      "$LIMA_YAML" \
+      --tty=false --vm-type=vz --network="$net" --rosetta \
+      --mount "${PIMA_CWD}:w" \
+      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+      --set=".env.EMAIL = \"$EMAIL\"" \
+      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+      pima_start_mount_only
+  }
+
+  # Sync mounts whenever the instance exists (also when already running).
+  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
+    pima_start_mount_only
+  elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+    pima_create_instance lima:bridged
+  else
+    pima_create_instance vzNAT
   fi
 
   export LIMA_SHELLENV_BLOCK='*'
@@ -35,7 +55,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     export LIMA_SHELLENV_ALLOW="$FW"
   fi
 
-  limactl shell --preserve-env "$NAME" /bin/bash -ic 'exec pima "$@"' _ "$@"
+  limactl shell --preserve-env --workdir "$PIMA_CWD" "$NAME" \
+    /bin/bash -ic 'exec pima "$@"' _ "$@"
 else
   pi "$@"
 fi
