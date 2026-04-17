@@ -203,14 +203,11 @@ v() {
   up | start)
     if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       local os_create_args=()
-      local os_start_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
           os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
-          os_start_args=(--network=lima:bridged --rosetta)
         else
           os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
-          os_start_args=(--network=vzNAT --rosetta)
         fi
       fi
       limactl start "$HOME/.config/configent/lima/$template.yaml" \
@@ -223,7 +220,6 @@ v() {
         "$@" ||
         limactl start "$vm_name" \
           --tty=false \
-          "${os_start_args[@]}" \
           "$@"
     fi
     limactl shell "$vm_name"
