@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.16](https://github.com/raas-dev/configent/compare/1.216.15...1.216.16) (2026-04-17)
+
+
+### Fixes
+
+* **bootstrap:** preserve GitHub token in Lima env ([2a6f778](https://github.com/raas-dev/configent/commit/2a6f778ea16302b3f1c74bf73d6ee6f48b3e6630))
+* **bootstrap:** use single quotes for token export ([712528d](https://github.com/raas-dev/configent/commit/712528d5899af304e1c6dc4490d5616da91cb467))
+
 ## [1.216.15](https://github.com/raas-dev/configent/compare/1.216.14...1.216.15) (2026-04-17)
 
 
