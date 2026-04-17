@@ -139,14 +139,3 @@ if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
 fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
-
-### pi-run-code ###############################################################
-
-# local extension -> node_modules are not installed on pi start
-pi_run_code_path="$config_path/pi/extensions/pi-run-code"
-mise_data="${MISE_DATA_DIR:-$HOME/.local/share/mise}"
-if [ -d "$mise_data/shims" ]; then
-  PATH="$mise_data/shims:$PATH"
-fi
-(cd "$pi_run_code_path" && npm install --no-audit --no-fund) ||
-  printf "Warning: pi-run-code deps missing; run: cd %s && npm install\n" "$pi_run_code_path" >&2

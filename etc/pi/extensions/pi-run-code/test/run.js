@@ -6,7 +6,12 @@ const fs = require("fs");
 
 fs.mkdirSync(path.join(__dirname, ".cache"), { recursive: true });
 
-const files = ["executor.test.ts", "package-resolver.test.ts", "type-checker.test.ts"];
+const files = [
+  "executor.test.ts",
+  "package-resolver.test.ts",
+  "type-checker.test.ts",
+  "pi-run-code-env.test.ts",
+];
 
 for (const file of files) {
   const src = path.join(__dirname, file);

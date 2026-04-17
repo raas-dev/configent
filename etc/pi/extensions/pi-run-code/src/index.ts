@@ -15,8 +15,15 @@ import { createRunCodeTool, type RunCodeToolOptions } from "./run-code-tool.js";
 import { loadUserPackages, type ResolvedPackage } from "./package-resolver.js";
 import { initTypeChecker, loadPackageTypes } from "./type-checker.js";
 import { generateBuiltinTypeDefs, generatePackageTypeDefs } from "./type-generator.js";
+import { piRunCodeUnsandboxedAcknowledged } from "./pi-run-code-env.js";
 
 export default function runCodeExtension(pi: ExtensionAPI) {
+  if (!piRunCodeUnsandboxedAcknowledged(process.env.PI_RUN_CODE_UNSANDBOXED)) {
+    console.warn(
+      "pi-run-code: extension not loaded — set PI_RUN_CODE_UNSANDBOXED to 1, true, or yes before starting pi."
+    );
+    return;
+  }
   let userPackages: ResolvedPackage[] = [];
   let userPackageMap: Record<string, unknown> = {};
   try {

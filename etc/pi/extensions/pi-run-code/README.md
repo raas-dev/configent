@@ -14,6 +14,25 @@ Or load ad-hoc:
 pi -e ~/.pi/agent/extensions/pi-run-code/src/index.ts
 ```
 
+## Environment
+
+The extension **does not load** unless you acknowledge that `run_code` executes arbitrary TypeScript with Node.js APIs and zx (`$`) shell access in the agent’s working directory.
+
+Set this **before** starting Pi (shell profile, launchd env, IDE terminal env, CI secrets, etc.):
+
+| Variable | Meaning |
+|----------|---------|
+| `PI_RUN_CODE_UNSANDBOXED` | Must be set to a truthy acknowledgment (see below). If unset or invalid, the extension logs a warning and registers no tools. |
+
+**Accepted values** (trimmed, compared case-insensitively): `1`, `true`, `yes`.
+
+Examples:
+
+```sh
+export PI_RUN_CODE_UNSANDBOXED=1
+# or: true, yes, YES, True, …
+```
+
 ## Usage
 
 In Pi, say "run code" followed by what you want executed:
@@ -74,4 +93,4 @@ npm test
 
 ## License
 
-LGPL-3.0
+MIT

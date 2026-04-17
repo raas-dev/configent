@@ -313,6 +313,8 @@ export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # default: true
 
 # pi
 export PI_SKIP_VERSION_CHECK=1
+# pi-run-code
+export PI_RUN_CODE_UNSANDBOXED=1
 ## pi-ptc-next
 export PTC_ALLOW_UNSANDBOXED_SUBPROCESS=true
 #export PTC_USE_DOCKER=true

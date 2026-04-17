@@ -7,11 +7,11 @@
     "pi-extension",
     "code-mode"
   ],
-  "license": "LGPL-3.0",
+  "license": "MIT",
+  "homepage": "https://github.com/asyrjasalo/pi-run-code",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raas-dev/configent.git",
-    "directory": "etc/pi/extensions/pi-run-code"
+    "url": "https://github.com/asyrjasalo/pi-run-code.git"
   },
   "type": "commonjs",
   "files": [
