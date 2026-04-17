@@ -217,11 +217,13 @@ v() {
         --name "$vm_name" --tty=false \
         "${os_create_args[@]}" \
         --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" \
         "$@" ||
         limactl start "$vm_name" \
           --tty=false \
           "${os_start_args[@]}" \
-          --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
           "$@"
     fi
     limactl shell "$vm_name"
