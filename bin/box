@@ -29,33 +29,20 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
     limactl shell --tty=false "$NAME" -- mkdir -p \
       "${GUEST_HOME}/.local/share/opencode" \
-      "${GUEST_HOME}/.config/opencode" \
-      "${GUEST_HOME}/.opencode" \
       "${GUEST_HOME}/.claude" \
       "${GUEST_HOME}/.pi/agent" \
       "${GUEST_HOME}/.omp/agent" ||
       return 0
 
-    # OpenCode
+    # OpenCode (canonical: ~/.local/share/opencode/auth.json)
     [ -f "$HOME/.local/share/opencode/auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/auth.json" \
         "$NAME:${GUEST_HOME}/.local/share/opencode/auth.json"
-    [ -f "$HOME/.opencode/auth.json" ] &&
-      limactl cp "$HOME/.opencode/auth.json" \
-        "$NAME:${GUEST_HOME}/.opencode/auth.json"
-    [ -f "$HOME/.config/opencode/auth.json" ] &&
-      limactl cp "$HOME/.config/opencode/auth.json" \
-        "$NAME:${GUEST_HOME}/.config/opencode/auth.json"
 
-    # Claude Code (guest reads ~/.claude/.credentials.json on Linux)
-    if [ -n "${CLAUDE_CONFIG_DIR-}" ] &&
-      [ -f "$CLAUDE_CONFIG_DIR/.credentials.json" ]; then
-      limactl cp "$CLAUDE_CONFIG_DIR/.credentials.json" \
-        "$NAME:${GUEST_HOME}/.claude/.credentials.json"
-    elif [ -f "$HOME/.claude/.credentials.json" ]; then
+    # Claude Code (canonical: ~/.claude/.credentials.json)
+    [ -f "$HOME/.claude/.credentials.json" ] &&
       limactl cp "$HOME/.claude/.credentials.json" \
         "$NAME:${GUEST_HOME}/.claude/.credentials.json"
-    fi
 
     # Pi Coding Agent
     [ -f "$HOME/.pi/agent/auth.json" ] &&
