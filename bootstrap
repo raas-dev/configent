@@ -11,8 +11,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 rclocal_path="$HOME/.rclocal"
 this_path="$(cd "$(dirname "$0")" && pwd)"
 
-# Host/Lima passes GIT_* in /etc/environment. Names often contain spaces; POSIX
-# `source` of that file does not export those lines, so read the key here.
+# Lima passes the host envvars via /etc/environment. Names often contain spaces.
 lima_env_get() {
   _lf=${2:-/etc/environment}
   [ -r "$_lf" ] || return 0
