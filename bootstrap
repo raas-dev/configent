@@ -20,19 +20,22 @@ if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
   printf "\nexport GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"" >>"$rclocal_path"
 fi
 
-# take existing git user name and email from .gitconfig, or leave them blank
+# Git identity: global git config, else host env, else defaults
 if ! grep -q "export EMAIL=" "$rclocal_path"; then
-  EMAIL="$(git config --global user.email)"
+  _git_email="$(git config --global user.email)"
+  EMAIL="${_git_email:-$EMAIL}"
   printf "\nexport EMAIL='%s'" "$EMAIL" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_AUTHOR_NAME=" "$rclocal_path"; then
-  GIT_NAME="$(git config --global user.name)"
-  GIT_NAME="${GIT_NAME:-configent}" # required for git stash
+  _git_name="$(git config --global user.name)"
+  GIT_NAME="${_git_name:-$GIT_AUTHOR_NAME}"
+  GIT_NAME="${GIT_NAME:-configent}" # fallback, required to be set for git stash
   printf "\nexport GIT_AUTHOR_NAME='%s'" "$GIT_NAME" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_COMMITTER_NAME=" "$rclocal_path"; then
-  GIT_NAME="$(git config --global user.name)"
-  GIT_NAME="${GIT_NAME:-configent}" # required for git stash
+  _git_name="$(git config --global user.name)"
+  GIT_NAME="${_git_name:-$GIT_COMMITTER_NAME}"
+  GIT_NAME="${GIT_NAME:-configent}" # fallback, required to be set for git stash
   printf "\nexport GIT_COMMITTER_NAME='%s'" "$GIT_NAME" >>"$rclocal_path"
 fi
 
