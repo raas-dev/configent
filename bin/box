@@ -6,10 +6,11 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# shim for running `pi` coding agent in lima VM
+# shim for running coding agents in a lima VM
 
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
+: "${AGENT:="pi"}"
 : "${FW:="GITHUB_TOKEN,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -17,35 +18,35 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
     exit 127
   fi
-  PIMA_CWD=$(pwd -P)
+  BOX_CWD=$(pwd -P)
   LIMA_YAML="$HOME/.config/configent/lima/$TEMPLATE.yaml"
   # --mount-only replaces the full mount list; keep template dirs + cwd rw.
-  pima_start_mount_only() {
+  box_start_mount_only() {
     limactl start --name "$NAME" --tty=false \
       --mount-only "$HOME/dev:w" \
       --mount-only "$HOME/Downloads:w" \
-      --mount-only "${PIMA_CWD}:w"
+      --mount-only "${BOX_CWD}:w"
   }
-  pima_create_instance() {
+  box_create_instance() {
     net="$1"
     limactl start --name "$NAME" \
       "$LIMA_YAML" \
       --tty=false --vm-type=vz --network="$net" --rosetta \
-      --mount "${PIMA_CWD}:w" \
+      --mount "${BOX_CWD}:w" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
       --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
       --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-      pima_start_mount_only
+      box_start_mount_only
   }
 
   # Sync mounts whenever the instance exists (also when already running).
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    pima_start_mount_only
+    box_start_mount_only
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-    pima_create_instance lima:bridged
+    box_create_instance lima:bridged
   else
-    pima_create_instance vzNAT
+    box_create_instance vzNAT
   fi
 
   export LIMA_SHELLENV_BLOCK='*'
@@ -55,8 +56,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     export LIMA_SHELLENV_ALLOW="$FW"
   fi
 
-  limactl shell --preserve-env --workdir "$PIMA_CWD" "$NAME" \
-    /bin/bash -ic 'exec pima "$@"' _ "$@"
+  limactl shell --preserve-env --workdir "$BOX_CWD" "$NAME" \
+    /bin/bash -ic 'exec '"$AGENT"' "$@"' _ "$@"
 else
-  pi "$@"
+  "$AGENT" "$@"
 fi
