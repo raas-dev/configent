@@ -40,7 +40,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       "${guest_home}/.codex" ||
       return 0
 
-    # Git over SSH: known_hosts
+    # SSH: known_hosts
     [ -f "$HOME/.ssh/known_hosts" ] &&
       limactl cp "$HOME/.ssh/known_hosts" \
         "$NAME:${guest_home}/.ssh/known_hosts"
