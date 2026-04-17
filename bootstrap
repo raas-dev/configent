@@ -27,12 +27,10 @@ if ! grep -q "export EMAIL=" "$rclocal_path"; then
 fi
 if ! grep -q "export GIT_AUTHOR_NAME=" "$rclocal_path"; then
   git_name="${GIT_AUTHOR_NAME:-$(git config --global user.name)}"
-  git_name="${git_name:-configent}" # fallback, required set for git stash
   printf "export GIT_AUTHOR_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_COMMITTER_NAME=" "$rclocal_path"; then
   git_name="${GIT_COMMITTER_NAME:-$(git config --global user.name)}"
-  git_name="${git_name:-configent}" # fallback, required set for git stash
   printf "export GIT_COMMITTER_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 
