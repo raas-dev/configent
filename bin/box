@@ -58,7 +58,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl start --name "$NAME" --tty=false \
       --mount-only "$HOME/dev:w" \
       --mount-only "$HOME/Downloads:w" \
-      --mount-only "${BOX_CWD}:w"
+      --mount-only "${BOX_CWD}:w" \
+      --mount-writable
   }
   box_create_instance() {
     net="$1"
@@ -69,6 +70,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       --network="$net" \
       --rosetta \
       --mount "${BOX_CWD}:w" \
+      --mount-writable \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
       --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
