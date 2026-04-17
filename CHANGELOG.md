@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.13](https://github.com/raas-dev/configent/compare/1.216.12...1.216.13) (2026-04-17)
+
+
+### Fixes
+
+* **bin:** pass args safely to lima guest CLI shims ([fc73d8c](https://github.com/raas-dev/configent/commit/fc73d8c8cfa2520d4a2ee79dba056a65e1c3c123))
+* **pi-run-code:** rewrite ESM imports for CJS exec and typecheck ([f43ec87](https://github.com/raas-dev/configent/commit/f43ec87c5bfa02ca427c39d2985f597ded7dc9dd))
+* **pi:** install pi-run-code deps in postinstall ([45249f1](https://github.com/raas-dev/configent/commit/45249f17907e5e4da535353126c0b81621b0c073))
+* **pi:** npm ci for pi-run-code on Lima in postinstall_pi ([ce7a7f1](https://github.com/raas-dev/configent/commit/ce7a7f129d32c4daece2df8a9d10b07c3034366d))
+
 ## [1.216.12](https://github.com/raas-dev/configent/compare/1.216.11...1.216.12) (2026-04-15)
 
 
