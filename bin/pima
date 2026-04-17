@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# shim for running `pi` coding agent in lima VM
+
+: "${NAME:="default"}"
+: "${TEMPLATE:="debian"}"
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  if ! command -v limactl >/dev/null; then
+    echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
+    exit 127
+  fi
+  # start VM if not running
+  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
+    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\""
+    else
+      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" ||
+        limactl start --name "$NAME" --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\""
+    fi
+  fi
+
+  if [ -z "${LIMA_SHELLENV_BLOCK-}" ]; then
+    export LIMA_SHELLENV_BLOCK='*'
+  fi
+
+  api_key_pattern='*_API_KEY'
+  if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
+    export LIMA_SHELLENV_ALLOW="$api_key_pattern,$LIMA_SHELLENV_ALLOW"
+  else
+    export LIMA_SHELLENV_ALLOW="$api_key_pattern"
+  fi
+
+  limactl shell --preserve-env "$NAME" pima "$@"
+else
+  pi "$@"
+fi
