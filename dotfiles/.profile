@@ -364,14 +364,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 fi
 
-### lima #######################################################################
-
-# pass host environment, except these variables, by lima shell --preserve-env
-# see: https://lima-vm.io/docs/config/environment-variables/#lima_shellenv_block
-if command -v limactl >/dev/null; then
-  export LIMA_SHELLENV_BLOCK="+*_HOST,*_HOME,MANPATH,HOMEBREW_*,GOBIN"
-fi
-
 ### ollama #####################################################################
 
 if command -v ollama >/dev/null; then
