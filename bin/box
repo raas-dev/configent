@@ -34,6 +34,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       "${GUEST_HOME}/.omp/agent" ||
       return 0
 
+    # Pi Coding Agent
+    [ -f "$HOME/.pi/agent/auth.json" ] &&
+      limactl cp "$HOME/.pi/agent/auth.json" \
+        "$NAME:${GUEST_HOME}/.pi/agent/auth.json"
+
     # OpenCode
     [ -f "$HOME/.local/share/opencode/auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/auth.json" \
@@ -46,11 +51,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [ -f "$HOME/.claude/.credentials.json" ] &&
       limactl cp "$HOME/.claude/.credentials.json" \
         "$NAME:${GUEST_HOME}/.claude/.credentials.json"
-
-    # Pi Coding Agent
-    [ -f "$HOME/.pi/agent/auth.json" ] &&
-      limactl cp "$HOME/.pi/agent/auth.json" \
-        "$NAME:${GUEST_HOME}/.pi/agent/auth.json"
   }
 
   # --mount-only replaces the full mount list; keep template dirs + cwd rw.
