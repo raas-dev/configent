@@ -20,18 +20,18 @@ if ! grep -q "export GITHUB_TOKEN=" "$rclocal_path"; then
   printf "export GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"\n" >>"$rclocal_path"
 fi
 
-# Git identity: host env (e.g. Lima .env / login shell), else global git config, else defaults
+# Git identity
 if ! grep -q "export EMAIL=" "$rclocal_path"; then
   git_email="${EMAIL:-$(git config --global user.email)}"
   printf "export EMAIL='%s'\n" "$git_email" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_AUTHOR_NAME=" "$rclocal_path"; then
-  git_name="${GIT_AUTHOR_NAME:-$(git config --global user.name)}"
-  printf "export GIT_AUTHOR_NAME='%s'\n" "$git_name" >>"$rclocal_path"
+  git_author_name="${GIT_AUTHOR_NAME:-$(git config --global user.name)}"
+  printf "export GIT_AUTHOR_NAME='%s'\n" "$git_author_name" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_COMMITTER_NAME=" "$rclocal_path"; then
-  git_name="${GIT_COMMITTER_NAME:-$(git config --global user.name)}"
-  printf "export GIT_COMMITTER_NAME='%s'\n" "$git_name" >>"$rclocal_path"
+  git_committer_name="${GIT_COMMITTER_NAME:-$(git config --global user.name)}"
+  printf "export GIT_COMMITTER_NAME='%s'\n" "$git_committer_name" >>"$rclocal_path"
 fi
 
 ### files in the repo ##########################################################
