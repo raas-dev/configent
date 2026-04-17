@@ -13,6 +13,11 @@
 : "${AGENT:="pi"}"
 : "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY}"
 
+case "$AGENT" in
+claude) FW="$FW,ANTHROPIC_API_KEY" ;;
+opencode) FW="$FW,OPENCODE_ZEN_API_KEY" ;;
+esac
+
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
@@ -47,10 +52,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
         "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
 
-    # Claude Code
-    [ -f "$HOME/.claude/.credentials.json" ] &&
-      limactl cp "$HOME/.claude/.credentials.json" \
-        "$NAME:${guest_home}/.claude/.credentials.json"
+    # Codex
+    [ -f "$HOME/.codex/auth.json" ] &&
+      limactl cp "$HOME/.codex/auth.json" \
+        "$NAME:${guest_home}/.codex/auth.json"
   }
 
   # --mount-only replaces the full mount list; keep template dirs + cwd rw
