@@ -34,12 +34,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       "${GUEST_HOME}/.omp/agent" ||
       return 0
 
-    # OpenCode (canonical: ~/.local/share/opencode/auth.json)
+    # OpenCode
     [ -f "$HOME/.local/share/opencode/auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/auth.json" \
         "$NAME:${GUEST_HOME}/.local/share/opencode/auth.json"
+    [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
+      limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
+        "$NAME:${GUEST_HOME}/.local/share/opencode/mcp-auth.json"
 
-    # Claude Code (canonical: ~/.claude/.credentials.json)
+    # Claude Code
     [ -f "$HOME/.claude/.credentials.json" ] &&
       limactl cp "$HOME/.claude/.credentials.json" \
         "$NAME:${GUEST_HOME}/.claude/.credentials.json"
