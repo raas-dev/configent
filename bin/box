@@ -11,7 +11,7 @@
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
 : "${AGENT:="pi"}"
-: "${FW:="GITHUB_TOKEN,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY"}"
+: "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
@@ -20,6 +20,54 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
   BOX_CWD=$(pwd -P)
   LIMA_YAML="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+
+  # Sync provider credentials from host into the Linux guest via limactl cp
+  box_sync_agent_auth_into_vm() {
+    GUEST_HOME=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
+      return 0
+    [ -n "$GUEST_HOME" ] || return 0
+
+    limactl shell --tty=false "$NAME" -- mkdir -p \
+      "${GUEST_HOME}/.local/share/opencode" \
+      "${GUEST_HOME}/.config/opencode" \
+      "${GUEST_HOME}/.opencode" \
+      "${GUEST_HOME}/.claude" \
+      "${GUEST_HOME}/.pi/agent" \
+      "${GUEST_HOME}/.omp/agent" ||
+      return 0
+
+    # OpenCode
+    [ -f "$HOME/.local/share/opencode/auth.json" ] &&
+      limactl cp "$HOME/.local/share/opencode/auth.json" \
+        "$NAME:${GUEST_HOME}/.local/share/opencode/auth.json"
+    [ -f "$HOME/.opencode/auth.json" ] &&
+      limactl cp "$HOME/.opencode/auth.json" \
+        "$NAME:${GUEST_HOME}/.opencode/auth.json"
+    [ -f "$HOME/.config/opencode/auth.json" ] &&
+      limactl cp "$HOME/.config/opencode/auth.json" \
+        "$NAME:${GUEST_HOME}/.config/opencode/auth.json"
+
+    # Claude Code (guest reads ~/.claude/.credentials.json on Linux)
+    if [ -n "${CLAUDE_CONFIG_DIR-}" ] &&
+      [ -f "$CLAUDE_CONFIG_DIR/.credentials.json" ]; then
+      limactl cp "$CLAUDE_CONFIG_DIR/.credentials.json" \
+        "$NAME:${GUEST_HOME}/.claude/.credentials.json"
+    elif [ -f "$HOME/.claude/.credentials.json" ]; then
+      limactl cp "$HOME/.claude/.credentials.json" \
+        "$NAME:${GUEST_HOME}/.claude/.credentials.json"
+    fi
+
+    # Pi Coding Agent
+    [ -f "$HOME/.pi/agent/auth.json" ] &&
+      limactl cp "$HOME/.pi/agent/auth.json" \
+        "$NAME:${GUEST_HOME}/.pi/agent/auth.json"
+
+    # oh-my-pi
+    [ -f "$HOME/.omp/agent/auth.json" ] &&
+      limactl cp "$HOME/.omp/agent/auth.json" \
+        "$NAME:${GUEST_HOME}/.omp/agent/auth.json"
+  }
+
   # --mount-only replaces the full mount list; keep template dirs + cwd rw.
   box_start_mount_only() {
     limactl start --name "$NAME" --tty=false \
@@ -31,7 +79,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     net="$1"
     limactl start --name "$NAME" \
       "$LIMA_YAML" \
-      --tty=false --vm-type=vz --network="$net" --rosetta \
+      --tty=false \
+      --vm-type=vz \
+      --network="$net" \
+      --rosetta \
       --mount "${BOX_CWD}:w" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
@@ -41,7 +92,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   }
 
   # Sync mounts whenever the instance exists (also when already running).
-  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
+  if limactl list -q 2>/dev/null |
+    grep -qx "$NAME"; then
     box_start_mount_only
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     box_create_instance lima:bridged
@@ -56,7 +108,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     export LIMA_SHELLENV_ALLOW="$FW"
   fi
 
-  limactl shell --preserve-env --workdir "$BOX_CWD" "$NAME" \
+  box_sync_agent_auth_into_vm
+
+  limactl shell \
+    --preserve-env \
+    --workdir "$BOX_CWD" \
+    "$NAME" \
     /bin/bash -ic 'exec '"$AGENT"' "$@"' _ "$@"
 else
   "$AGENT" "$@"
