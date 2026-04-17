@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.18](https://github.com/raas-dev/configent/compare/1.216.17...1.216.18) (2026-04-17)
+
+
+### Fixes
+
+* **box:** drop oh-my-pi auth sync ([af95c30](https://github.com/raas-dev/configent/commit/af95c307c0a50bea4961db134b40084c73ee600d))
+* **box:** generalize lima shim for coding agents ([b048350](https://github.com/raas-dev/configent/commit/b0483507fe23376a850f4a4417aaf113be380ee9))
+* **box:** sync agent auth into vm ([bb8940c](https://github.com/raas-dev/configent/commit/bb8940c385a080195ae97a23fb74a6b6c651341a))
+* **box:** sync canonical auth paths into vm ([df9001a](https://github.com/raas-dev/configent/commit/df9001a099b8ac8f1d516f3ec4a0358a027f6749))
+* **box:** sync opencode mcp auth into vm ([1e7f0b2](https://github.com/raas-dev/configent/commit/1e7f0b2c4995c0443259ac337a44aab23f3a3551))
+* **pima:** sync mounts and preserve cwd in Lima shell ([469dc27](https://github.com/raas-dev/configent/commit/469dc2721e0f4c1070aafb28abe88673c53ad310))
+
 ## [1.216.17](https://github.com/raas-dev/configent/compare/1.216.16...1.216.17) (2026-04-17)
 
 
