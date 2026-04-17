@@ -18,58 +18,58 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
     exit 127
   fi
-  BOX_CWD=$(pwd -P)
-  LIMA_YAML="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+  box_cwd=$(pwd -P)
+  lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
 
   # Sync provider credentials from host into the Linux guest via limactl cp
   box_sync_agent_auth_into_vm() {
-    GUEST_HOME=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
+    guest_home=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
       return 0
-    [ -n "$GUEST_HOME" ] || return 0
+    [ -n "$guest_home" ] || return 0
 
     limactl shell --tty=false "$NAME" -- mkdir -p \
-      "${GUEST_HOME}/.local/share/opencode" \
-      "${GUEST_HOME}/.claude" \
-      "${GUEST_HOME}/.pi/agent" \
-      "${GUEST_HOME}/.omp/agent" ||
+      "${guest_home}/.local/share/opencode" \
+      "${guest_home}/.claude" \
+      "${guest_home}/.pi/agent" \
+      "${guest_home}/.omp/agent" ||
       return 0
 
     # Pi Coding Agent
     [ -f "$HOME/.pi/agent/auth.json" ] &&
       limactl cp "$HOME/.pi/agent/auth.json" \
-        "$NAME:${GUEST_HOME}/.pi/agent/auth.json"
+        "$NAME:${guest_home}/.pi/agent/auth.json"
 
     # OpenCode
     [ -f "$HOME/.local/share/opencode/auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/auth.json" \
-        "$NAME:${GUEST_HOME}/.local/share/opencode/auth.json"
+        "$NAME:${guest_home}/.local/share/opencode/auth.json"
     [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
-        "$NAME:${GUEST_HOME}/.local/share/opencode/mcp-auth.json"
+        "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
 
     # Claude Code
     [ -f "$HOME/.claude/.credentials.json" ] &&
       limactl cp "$HOME/.claude/.credentials.json" \
-        "$NAME:${GUEST_HOME}/.claude/.credentials.json"
+        "$NAME:${guest_home}/.claude/.credentials.json"
   }
 
-  # --mount-only replaces the full mount list; keep template dirs + cwd rw.
+  # --mount-only replaces the full mount list; keep template dirs + cwd rw
   box_start_mount_only() {
     limactl start --name "$NAME" --tty=false \
       --mount-only "$HOME/dev:w" \
       --mount-only "$HOME/Downloads:w" \
-      --mount-only "${BOX_CWD}:w" \
+      --mount-only "${box_cwd}:w" \
       --mount-writable
   }
   box_create_instance() {
     net="$1"
     limactl start --name "$NAME" \
-      "$LIMA_YAML" \
+      "$lima_yaml" \
       --tty=false \
       --vm-type=vz \
       --network="$net" \
       --rosetta \
-      --mount "${BOX_CWD}:w" \
+      --mount "${box_cwd}:w" \
       --mount-writable \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
@@ -78,9 +78,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       box_start_mount_only
   }
 
-  # Sync mounts whenever the instance exists (also when already running).
-  if limactl list -q 2>/dev/null |
-    grep -qx "$NAME"; then
+  # Sync mounts whenever the instance exists (also when already running)
+  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     box_start_mount_only
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     box_create_instance lima:bridged
@@ -101,7 +100,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   limactl shell \
     --preserve-env \
-    --workdir "$BOX_CWD" \
+    --workdir "$box_cwd" \
     "$NAME" \
     /bin/bash -ic 'exec '"$AGENT"' "$@"' _ "$@"
 else
