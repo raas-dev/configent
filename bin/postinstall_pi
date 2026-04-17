@@ -56,14 +56,6 @@ mkdir -p "$HOME/.pi/agent/extensions"
 rm -rf "$HOME/.pi/agent/extensions"
 ln -sfnv "$config_path/pi/extensions" "$HOME/.pi/agent/extensions"
 
-# pi-run-code: node_modules gitignored; mise postinstall PATH may lack npm.
-d="$config_path/pi/extensions/pi-run-code"
-if [ -f "$d/package-lock.json" ] && [ ! -d "$d/node_modules/esbuild" ]; then
-  PATH="${HOME}/.local/share/mise/installs/node/latest/bin:${PATH}"
-  (cd "$d" && npm ci --no-audit --no-fund) ||
-    printf "Warning: pi-run-code deps missing; run: cd %s && npm ci\n" "$d" >&2
-fi
-
 # prompts dir
 if [ ! -r "$backup_path/.pi/agent/prompts" ]; then
   if [ -r "$HOME/.pi/agent/prompts" ]; then
@@ -147,3 +139,14 @@ if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
 fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
+
+### pi-run-code ###############################################################
+
+# local extension -> node_modules are not installed on pi start
+pi_run_code_path="$config_path/pi/extensions/pi-run-code"
+mise_data="${MISE_DATA_DIR:-$HOME/.local/share/mise}"
+if [ -d "$mise_data/shims" ]; then
+  PATH="$mise_data/shims:$PATH"
+fi
+(cd "$pi_run_code_path" && npm install --no-audit --no-fund) ||
+  printf "Warning: pi-run-code deps missing; run: cd %s && npm install\n" "$pi_run_code_path" >&2
