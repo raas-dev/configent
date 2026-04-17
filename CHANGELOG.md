@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.14](https://github.com/raas-dev/configent/compare/1.216.13...1.216.14) (2026-04-17)
+
+
+### Fixes
+
+* **pi-run-code:** gate run-code behind unsandboxed ack ([bced5d0](https://github.com/raas-dev/configent/commit/bced5d05ffe55349a71a926ae45608eb10a4fe50))
+* **pi:** load pi-run-code from git extension ([b7455b7](https://github.com/raas-dev/configent/commit/b7455b77cbe3e7da3832a00c54b63a28c142699a))
+
 ## [1.216.13](https://github.com/raas-dev/configent/compare/1.216.12...1.216.13) (2026-04-17)
 
 
