@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.20](https://github.com/raas-dev/configent/compare/1.216.19...1.216.20) (2026-04-17)
+
+
+### Fixes
+
+* **box:** allow EXA_API_KEY in box env ([120f035](https://github.com/raas-dev/configent/commit/120f035570d9164fddcbc17e38e15b3660fbc8e1))
+* **box:** allow git author env in Lima shellenv ([470b885](https://github.com/raas-dev/configent/commit/470b885c65396d8147361274c07b1e8e05634ad3))
+* **box:** allow OPENCODE_API_KEY in box ([5ce7615](https://github.com/raas-dev/configent/commit/5ce7615ba1b890c05892bf3fe57178c17702078d))
+* **box:** allow Pi/OpenCode env vars in box ([3eb4a17](https://github.com/raas-dev/configent/commit/3eb4a17010a5fe19306c6b183f0ebf8def804e96))
+* **box:** copy known_hosts into guest .ssh ([1403794](https://github.com/raas-dev/configent/commit/14037949c586161eb126b4805bf4706bd817a351))
+* **box:** support Claude/OpenCode env and Codex auth ([8ae21bd](https://github.com/raas-dev/configent/commit/8ae21bdd53c4e85ed09a452e69abaeeffb73339d))
+
 ## [1.216.19](https://github.com/raas-dev/configent/compare/1.216.18...1.216.19) (2026-04-17)
 
 
