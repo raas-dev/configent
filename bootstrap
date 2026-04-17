@@ -11,6 +11,14 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 rclocal_path="$HOME/.rclocal"
 this_path="$(cd "$(dirname "$0")" && pwd)"
 
+# Host/Lima passes GIT_* in /etc/environment. Names often contain spaces; POSIX
+# `source` of that file does not export those lines, so read the key here.
+lima_env_get() {
+  _lf=${2:-/etc/environment}
+  [ -r "$_lf" ] || return 0
+  awk -v k="$1" 'BEGIN { p = "^" k "=" } $0 ~ p { sub(p, ""); print; exit }' "$_lf"
+}
+
 ### files outside the repo #####################################################
 
 touch "$rclocal_path"
@@ -22,16 +30,29 @@ fi
 
 # Git identity
 if ! grep -q "export EMAIL=" "$rclocal_path"; then
-  git_email="${EMAIL:-$(git config --global user.email)}"
+  git_email="${EMAIL:-$(lima_env_get EMAIL)}"
+  git_email="${git_email:-$(git config --global user.email)}"
   printf "export EMAIL='%s'\n" "$git_email" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_AUTHOR_NAME=" "$rclocal_path"; then
-  git_author_name="${GIT_AUTHOR_NAME:-$(git config --global user.name)}"
-  printf "export GIT_AUTHOR_NAME='%s'\n" "$git_author_name" >>"$rclocal_path"
+  if [ -n "$GIT_AUTHOR_NAME" ]; then
+    git_name=$GIT_AUTHOR_NAME
+  else
+    git_name=$(lima_env_get GIT_AUTHOR_NAME)
+    [ -z "$git_name" ] && git_name=$(git config --global user.name)
+    git_name="${git_name:-configent}"
+  fi
+  printf "export GIT_AUTHOR_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_COMMITTER_NAME=" "$rclocal_path"; then
-  git_committer_name="${GIT_COMMITTER_NAME:-$(git config --global user.name)}"
-  printf "export GIT_COMMITTER_NAME='%s'\n" "$git_committer_name" >>"$rclocal_path"
+  if [ -n "$GIT_COMMITTER_NAME" ]; then
+    git_name=$GIT_COMMITTER_NAME
+  else
+    git_name=$(lima_env_get GIT_COMMITTER_NAME)
+    [ -z "$git_name" ] && git_name=$(git config --global user.name)
+    git_name="${git_name:-configent}"
+  fi
+  printf "export GIT_COMMITTER_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 
 ### files in the repo ##########################################################
