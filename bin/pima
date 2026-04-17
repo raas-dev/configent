@@ -10,6 +10,7 @@
 
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
+: "${FW:="CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
@@ -27,15 +28,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   fi
 
-  if [ -z "${LIMA_SHELLENV_BLOCK-}" ]; then
-    export LIMA_SHELLENV_BLOCK='*'
-  fi
-
-  api_key_pattern='*_API_KEY'
+  export LIMA_SHELLENV_BLOCK='*'
   if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
-    export LIMA_SHELLENV_ALLOW="$api_key_pattern,$LIMA_SHELLENV_ALLOW"
+    export LIMA_SHELLENV_ALLOW="$FW,$LIMA_SHELLENV_ALLOW"
   else
-    export LIMA_SHELLENV_ALLOW="$api_key_pattern"
+    export LIMA_SHELLENV_ALLOW="$FW"
   fi
 
   limactl shell --preserve-env "$NAME" /bin/bash -ic 'exec pima "$@"' _ "$@"
