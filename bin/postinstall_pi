@@ -56,29 +56,12 @@ mkdir -p "$HOME/.pi/agent/extensions"
 rm -rf "$HOME/.pi/agent/extensions"
 ln -sfnv "$config_path/pi/extensions" "$HOME/.pi/agent/extensions"
 
-# pi-run-code: deps live in gitignored node_modules; Linux Lima guests need a
-# local install (host macOS often already has one; bind mounts do not invent it).
-# mise postinstall runs without login PATH. Prefer node install bin/ (avoids
-# mise shims that require `mise trust` on first bootstrap); else shims + ~/.local/bin.
-pi_run_code_dir="$config_path/pi/extensions/pi-run-code"
-if [ "$(uname -s)" = "Linux" ] && [ -d /mnt/lima-cidata ]; then
-  (
-    node_prefix="${HOME}/.local/share/mise/installs/node/latest"
-    if [ -x "${node_prefix}/bin/npm" ]; then
-      PATH="${node_prefix}/bin:${PATH}"
-    else
-      PATH="${HOME}/.local/share/mise/shims:${HOME}/.local/bin:${PATH}"
-    fi
-    export PATH
-    if [ -d "$pi_run_code_dir" ] && [ -f "$pi_run_code_dir/package-lock.json" ] &&
-      [ ! -d "$pi_run_code_dir/node_modules/esbuild" ] &&
-      command -v npm >/dev/null 2>&1; then
-      printf "Installing pi-run-code extension npm deps (Lima guest)...\n" >&2
-      (cd "$pi_run_code_dir" && npm ci --no-audit --no-fund) ||
-        printf "Warning: pi-run-code npm ci failed; run: cd %s && npm ci\n" \
-          "$pi_run_code_dir" >&2
-    fi
-  )
+# pi-run-code: node_modules gitignored; mise postinstall PATH may lack npm.
+d="$config_path/pi/extensions/pi-run-code"
+if [ -f "$d/package-lock.json" ] && [ ! -d "$d/node_modules/esbuild" ]; then
+  PATH="${HOME}/.local/share/mise/installs/node/latest/bin:${PATH}"
+  (cd "$d" && npm ci --no-audit --no-fund) ||
+    printf "Warning: pi-run-code deps missing; run: cd %s && npm ci\n" "$d" >&2
 fi
 
 # prompts dir
