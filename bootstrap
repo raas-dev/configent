@@ -24,7 +24,7 @@ touch "$rclocal_path"
 
 # MISE_GITHUB_TOKEN to avoid GitHub API rate limit
 if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
-  printf 'export MISE_GITHUB_TOKEN='%s'\n' \
+  printf "export MISE_GITHUB_TOKEN='%s'\n" \
     "$MISE_GITHUB_TOKEN" >>"$rclocal_path"
 fi
 
