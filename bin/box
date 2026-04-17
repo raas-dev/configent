@@ -90,11 +90,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   export LIMA_SHELLENV_BLOCK='*'
 
-  box_shellenv_tty='TERM,COLORTERM'
+  term='TERM,COLORTERM,TERM_PROGRAM,TERM_PROGRAM_VERSION,NO_COLOR,FORCE_COLOR'
   if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
-    export LIMA_SHELLENV_ALLOW="$FW,$box_shellenv_tty,$LIMA_SHELLENV_ALLOW"
+    export LIMA_SHELLENV_ALLOW="$FW,$term,$LIMA_SHELLENV_ALLOW"
   else
-    export LIMA_SHELLENV_ALLOW="$FW,$box_shellenv_tty"
+    export LIMA_SHELLENV_ALLOW="$FW,$term"
   fi
 
   box_sync_agent_auth_into_vm
