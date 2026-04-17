@@ -34,11 +34,16 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [ -n "$guest_home" ] || return 0
 
     limactl shell --tty=false "$NAME" -- mkdir -p \
-      "${guest_home}/.local/share/opencode" \
-      "${guest_home}/.claude" \
+      "${guest_home}/.ssh" \
       "${guest_home}/.pi/agent" \
-      "${guest_home}/.omp/agent" ||
+      "${guest_home}/.local/share/opencode" \
+      "${guest_home}/.codex" ||
       return 0
+
+    # Git over SSH: known_hosts
+    [ -f "$HOME/.ssh/known_hosts" ] &&
+      limactl cp "$HOME/.ssh/known_hosts" \
+        "$NAME:${guest_home}/.ssh/known_hosts"
 
     # Pi Coding Agent
     [ -f "$HOME/.pi/agent/auth.json" ] &&
