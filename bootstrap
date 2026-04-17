@@ -22,9 +22,10 @@ lima_env_get() {
 
 touch "$rclocal_path"
 
-# MISE_GITHUB_TOKEN is passed on lima VM create/start and is in /etc/environment
-if ! grep -q "export GITHUB_TOKEN=" "$rclocal_path"; then
-  printf "export GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"\n" >>"$rclocal_path"
+# MISE_GITHUB_TOKEN to avoid GitHub API rate limit
+if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
+  printf 'export MISE_GITHUB_TOKEN="%s"\n' \
+    "$MISE_GITHUB_TOKEN" >>"$rclocal_path"
 fi
 
 # Git identity

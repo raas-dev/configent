@@ -10,7 +10,7 @@
 
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
-: "${FW:="CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY"}"
+: "${FW:="GITHUB_TOKEN,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY"}"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
