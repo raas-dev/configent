@@ -46,6 +46,17 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'npm:@oh-my-pi/pi-coding-agent' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
 'npm:@openchamber/web' = 'latest'
+# see: https://github.com/can1357/oh-my-pi/issues/684
+'github:can1357/oh-my-pi' = { version = 'latest', postinstall = """{%- set_global native_os = os() | replace(from="macos", to="darwin") | replace(from="windows", to="win32") -%}
+{%- if arch() == "x64" -%}
+{%- set_global native_suffix = native_os ~ "-x64-modern" -%}
+{%- else -%}
+{%- set_global native_suffix = native_os ~ "-" ~ arch() -%}
+{%- endif -%}
+curl -fsSL \
+    "https://github.com/can1357/oh-my-pi/releases/download/v${MISE_TOOL_VERSION}/pi_natives.{{ native_suffix }}.node" \
+    -o "${MISE_TOOL_INSTALL_PATH}/pi_natives.{{ native_suffix }}.node" \
+&& ~/.local/configent/bin/postinstall_omp""" }
 
 # ai coding harnesses
 'github:asyrjasalo/dynamic-mcp' = 'latest'
