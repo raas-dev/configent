@@ -17,26 +17,26 @@ touch "$rclocal_path"
 
 # MISE_GITHUB_TOKEN is passed on lima VM create/start and is in /etc/environment
 if ! grep -q "export MISE_GITHUB_TOKEN=" "$rclocal_path"; then
-  printf "\nexport GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"" >>"$rclocal_path"
+  printf "\nexport GITHUB_TOKEN=\"\$MISE_GITHUB_TOKEN\"\n" >>"$rclocal_path"
 fi
 
 # Git identity: global git config, else host env, else defaults
 if ! grep -q "export EMAIL=" "$rclocal_path"; then
   git_email="$(git config --global user.email)"
   git_email="${git_email:-$EMAIL}"
-  printf "\nexport EMAIL='%s'" "$git_email" >>"$rclocal_path"
+  printf "\nexport EMAIL='%s'\n" "$git_email" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_AUTHOR_NAME=" "$rclocal_path"; then
   git_name="$(git config --global user.name)"
   git_name="${git_name:-$GIT_AUTHOR_NAME}"
   git_name="${git_name:-configent}" # fallback, required set for git stash
-  printf "\nexport GIT_AUTHOR_NAME='%s'" "$git_name" >>"$rclocal_path"
+  printf "\nexport GIT_AUTHOR_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 if ! grep -q "export GIT_COMMITTER_NAME=" "$rclocal_path"; then
   git_name="$(git config --global user.name)"
   git_name="${git_name:-$GIT_COMMITTER_NAME}"
-  git_name="${git_name:-configent}" # fallback, required  set for git stash
-  printf "\nexport GIT_COMMITTER_NAME='%s'" "$git_name" >>"$rclocal_path"
+  git_name="${git_name:-configent}" # fallback, required set for git stash
+  printf "\nexport GIT_COMMITTER_NAME='%s'\n" "$git_name" >>"$rclocal_path"
 fi
 
 ### files in the repo ##########################################################
