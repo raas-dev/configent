@@ -51,11 +51,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [ -f "$HOME/.pi/agent/auth.json" ] &&
       limactl cp "$HOME/.pi/agent/auth.json" \
         "$NAME:${GUEST_HOME}/.pi/agent/auth.json"
-
-    # oh-my-pi
-    [ -f "$HOME/.omp/agent/auth.json" ] &&
-      limactl cp "$HOME/.omp/agent/auth.json" \
-        "$NAME:${GUEST_HOME}/.omp/agent/auth.json"
   }
 
   # --mount-only replaces the full mount list; keep template dirs + cwd rw.
