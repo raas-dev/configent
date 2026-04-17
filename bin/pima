@@ -38,7 +38,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     export LIMA_SHELLENV_ALLOW="$api_key_pattern"
   fi
 
-  limactl shell --preserve-env "$NAME" pima "$@"
+  limactl shell --preserve-env "$NAME" /bin/bash -ic 'exec pima "$@"' _ "$@"
 else
   pi "$@"
 fi
