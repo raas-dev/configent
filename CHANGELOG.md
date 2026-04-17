@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.15](https://github.com/raas-dev/configent/compare/1.216.14...1.216.15) (2026-04-17)
+
+
+### Fixes
+
+* **bootstrap:** drop blank lines in rc exports ([ddc8cb3](https://github.com/raas-dev/configent/commit/ddc8cb381a2e5ac86f255bf43569632fc973436e))
+* **bootstrap:** drop configent git name fallback ([bd7476c](https://github.com/raas-dev/configent/commit/bd7476c94d3fa7123f18492bc402070c7fba3bc7))
+* **bootstrap:** prefer host git envs and GITHUB_TOKEN export ([b09fcf6](https://github.com/raas-dev/configent/commit/b09fcf65d9103fc2ab0f51af2055320cfe05c95c))
+* **bootstrap:** preserve git identity env fallbacks ([047ce89](https://github.com/raas-dev/configent/commit/047ce891411e92b0bd46329a48fcf9edef7689bf))
+* **bootstrap:** preserve git identity exports with newlines ([ebb8d74](https://github.com/raas-dev/configent/commit/ebb8d74eba12061b2a27642301b81a815f302e86))
+* **bootstrap:** preserve git identity from Lima env ([6706dd2](https://github.com/raas-dev/configent/commit/6706dd23b1e662a299bd4ef14b43c38b758ec483))
+* **bootstrap:** use distinct git identity vars ([4f8f45f](https://github.com/raas-dev/configent/commit/4f8f45f3ed300c4c2cf06b6b3c2234577cb12fad))
+* **bootstrap:** use local git identity vars ([f22f247](https://github.com/raas-dev/configent/commit/f22f2478e76b9f0fd46f04bafe56c76492e92d64))
+* **git:** use github-auth credential helper ([e78d448](https://github.com/raas-dev/configent/commit/e78d448506caf2c4ed50a74103e485764fa9715f))
+* **git:** use sh for github auth helper ([2d8537f](https://github.com/raas-dev/configent/commit/2d8537f1523caf0bf0ca9181073512fb19257c9d))
+* **lima:** drop fallback network flags from limactl start ([d885110](https://github.com/raas-dev/configent/commit/d885110d314382cd816a4c82200631d2eb277c08))
+* **lima:** pass git identity envs to lima starts ([efa023e](https://github.com/raas-dev/configent/commit/efa023ee31372709912bb64d1a6db2da100cf2a5))
+* **pi:** add lima shim for pi coding agent ([0bd8b07](https://github.com/raas-dev/configent/commit/0bd8b07e47fd7fd1654c1448e7194483725ef241))
+* **pi:** preserve AI API keys in lima shell ([eb04fd9](https://github.com/raas-dev/configent/commit/eb04fd9dfabcee7ceac3c88d174715029319ece0))
+* **pi:** run pima via bash in lima shell ([e42cef4](https://github.com/raas-dev/configent/commit/e42cef41bc6aa6dbcb159a6ad3add41f57eb1a67))
+* **pi:** switch mise entry to pi package ([07b251f](https://github.com/raas-dev/configent/commit/07b251fe602c1a7799d78be9dac96fce7d5971cb))
+
 ## [1.216.14](https://github.com/raas-dev/configent/compare/1.216.13...1.216.14) (2026-04-17)
 
 
