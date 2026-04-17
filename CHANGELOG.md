@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.19](https://github.com/raas-dev/configent/compare/1.216.18...1.216.19) (2026-04-17)
+
+
+### Fixes
+
+* **box:** allow more terminal env in Lima shellenv ([7db300a](https://github.com/raas-dev/configent/commit/7db300aebbfe6e8db494c97a77b023c463a27d5e))
+* **box:** allow tty env in Lima shellenv ([84de2fc](https://github.com/raas-dev/configent/commit/84de2fc1a035a43b2c0e4479b191102fd537ba38))
+* **box:** make lima mounts writable ([4cd73dd](https://github.com/raas-dev/configent/commit/4cd73ddeb70583768f9ac812f257281949b347bb))
+* **box:** sync Pi auth before OpenCode ([ebac230](https://github.com/raas-dev/configent/commit/ebac2302364eaf4a24616c2b542637daac55e425))
+
 ## [1.216.18](https://github.com/raas-dev/configent/compare/1.216.17...1.216.18) (2026-04-17)
 
 
