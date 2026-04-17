@@ -90,10 +90,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   export LIMA_SHELLENV_BLOCK='*'
 
   term='TERM,COLORTERM,TERM_PROGRAM,TERM_PROGRAM_VERSION,NO_COLOR,FORCE_COLOR'
+  git='EMAIL,GIT_AUTHOR_NAME,GIT_COMMITTER_NAME'
   if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
-    export LIMA_SHELLENV_ALLOW="$FW,$term,$LIMA_SHELLENV_ALLOW"
+    export LIMA_SHELLENV_ALLOW="$FW,$term,$git,$LIMA_SHELLENV_ALLOW"
   else
-    export LIMA_SHELLENV_ALLOW="$FW,$term"
+    export LIMA_SHELLENV_ALLOW="$FW,$term,$git"
   fi
 
   box_sync_agent_auth_into_vm
