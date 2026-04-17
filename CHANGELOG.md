@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.17](https://github.com/raas-dev/configent/compare/1.216.16...1.216.17) (2026-04-17)
+
+
+### Fixes
+
+* **bootstrap:** use single quotes for token export ([488772d](https://github.com/raas-dev/configent/commit/488772de07b7a1a294f306971e15657adfc1afb6))
+
 ## [1.216.16](https://github.com/raas-dev/configent/compare/1.216.15...1.216.16) (2026-04-17)
 
 
