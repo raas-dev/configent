@@ -2,7 +2,7 @@
   "collapseChangelog": true,
   "defaultModel": "MiniMax-M2.7",
   "defaultProvider": "minimax",
-  "lastChangelogVersion": "0.67.6",
+  "lastChangelogVersion": "0.67.67",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-hodor",
@@ -25,7 +25,6 @@
     "git:github.com/asyrjasalo/pi-run-code",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman"
-
   ],
   "quietStartup": true,
   "theme": "ayu-dark",
