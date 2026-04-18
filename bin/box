@@ -74,7 +74,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       /^- location: / && substr($0, 13) == path { skip=1; next }
       skip && /^  / { next }
       { skip=0; print }
-    ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }
 
