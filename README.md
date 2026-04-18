@@ -228,10 +228,10 @@ The aforementioned shims create and start the VM 'debian'.
 VM 'ubuntu' runs [k0s](https://k0sproject.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
-The following host directories are mounted read-write for VMs:
+The directory where `docker`, `docker-compose`, `nerdctl`, `podman`, etc.
+is run in is mounted read-write in the VM (unless it is `$HOME`).
 
-- `$HOME/dev`
-- `$HOME/Downloads`
+In addition `$HOME/Downloads` is always mounted read-write in all VMs.
 
 ### docker shortcut
 
