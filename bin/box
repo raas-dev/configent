@@ -97,7 +97,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   box_start_mount_only() {
     box_remove_cwd_mount
-    limactl start --name "$NAME" --tty=false \
+    limactl start --name "$NAME" --tty=false --log-level=warn \
       --mount "${box_cwd}:w"
   }
 

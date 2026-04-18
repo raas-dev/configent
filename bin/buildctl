@@ -13,25 +13,96 @@
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot start Linux VM for buildkit."
+    echo "Error: limactl not found on macOS, cannot start Linux VM for" \
+      "buildkit."
     exit 127
   fi
-  # start VM if not running
-  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
-    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
-    else
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
+
+  lima_cwd=$(pwd -P)
+  lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+
+  lima_remove_cwd_mount() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    grep -qF "location: ${lima_cwd}" "$lima_instance_yaml" 2>/dev/null ||
+      return 0
+    awk -v path="${lima_cwd}" '
+      /^- location: / && substr($0, 13) == path { skip=1; next }
+      skip && /^  / { next }
+      { skip=0; print }
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
+  lima_guest_cwd_writable() {
+    limactl shell --tty=false "$NAME" -- sh -ceu \
+      "t=\"\$1/.buildctl-write-probe.\$\$\"; rm -f \"\$t\"; \
+      touch \"\$t\"; rm -f \"\$t\"" \
+      _ "$lima_cwd" 2>/dev/null
+  }
+
+  lima_guest_remount_cwd_rw() {
+    limactl shell --tty=false "$NAME" -- \
+      sudo mount -o remount,rw "$lima_cwd" \
+      2>/dev/null || true
+  }
+
+  lima_start_mount_only() {
+    lima_remove_cwd_mount
+    limactl start --name "$NAME" --tty=false --log-level=warn \
+      --mount "${lima_cwd}:w"
+  }
+
+  lima_guest_activate_cwd_mount_rw() {
+    lima_guest_remount_cwd_rw
+    if lima_guest_cwd_writable; then
+      return 0
     fi
+    limactl stop "$NAME"
+    lima_start_mount_only
+    lima_guest_remount_cwd_rw
+    if lima_guest_cwd_writable; then
+      return 0
+    fi
+    echo "Error: Lima mount is still not writable at ${lima_cwd}" \
+      "inside the VM (see: findmnt ${lima_cwd})." >&2
+    exit 1
+  }
+
+  lima_ensure_guest_cwd_writable() {
+    lima_start_mount_only
+    lima_guest_activate_cwd_mount_rw
+  }
+
+  lima_create_instance() {
+    net="$1"
+    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+      --vm-type=vz \
+      --network="$net" \
+      --rosetta \
+      --mount "${lima_cwd}:w" \
+      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+      --set=".env.EMAIL = \"$EMAIL\"" \
+      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+      lima_start_mount_only
+  }
+
+  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
+    lima_ensure_guest_cwd_writable
+  elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+    lima_create_instance lima:bridged
+    lima_guest_activate_cwd_mount_rw
+  else
+    lima_create_instance vzNAT
+    lima_guest_activate_cwd_mount_rw
   fi
-  # pass arguments to this exact same script on the guest VM
-  limactl shell "$NAME" buildctl "$@"
+
+  limactl shell --workdir "$lima_cwd" "$NAME" buildctl "$@"
 else
   if [ -z "$BUILDKIT_HOST" ]; then
     if [ -S "$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock" ]; then
-      export BUILDKIT_HOST="unix://$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock"
+      bksock="$XDG_RUNTIME_DIR/buildkit-default/buildkitd.sock"
+      export BUILDKIT_HOST="unix://$bksock"
     elif [ -S "/run/buildkit/buildkitd.sock" ]; then
       export BUILDKIT_HOST="unix:///run/buildkit/buildkitd.sock"
     fi

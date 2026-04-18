@@ -19,7 +19,9 @@ get_latest_github_release() {
     # Get first release from releases list (includes prereleases)
     api_url="https://api.github.com/repos/$repo/releases"
     if [ -n "$MISE_GITHUB_TOKEN" ]; then
-      curl -fsSL -H "Authorization: token $MISE_GITHUB_TOKEN" "$api_url" 2>/dev/null |
+      curl -fsSL \
+        -H "Authorization: token $MISE_GITHUB_TOKEN" \
+        "$api_url" 2>/dev/null |
         grep -o '"tag_name": "[^"]*"' |
         head -1 |
         cut -d '"' -f 4
@@ -33,7 +35,9 @@ get_latest_github_release() {
     # Get latest stable release only
     api_url="https://api.github.com/repos/$repo/releases/latest"
     if [ -n "$MISE_GITHUB_TOKEN" ]; then
-      curl -fsSL -H "Authorization: token $MISE_GITHUB_TOKEN" "$api_url" 2>/dev/null |
+      curl -fsSL \
+        -H "Authorization: token $MISE_GITHUB_TOKEN" \
+        "$api_url" 2>/dev/null |
         grep -o '"tag_name": "[^"]*"' |
         head -1 |
         cut -d '"' -f 4
@@ -50,16 +54,20 @@ install_docker_buildx_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-buildx" ]; then
     buildx_version="$(get_latest_github_release docker/buildx)"
     if [ -z "$buildx_version" ]; then
-      echo "Warning: Failed to query latest buildx version, skipping installation"
+      echo "Warning: Failed to query latest buildx version," \
+        "skipping installation"
       return 1
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
     [ "$arch" = "aarch64" ] && arch="arm64"
-    echo "Downloading Docker Buildx $buildx_version as Docker CLI plugin on $os ($arch)"
+    echo "Downloading Docker Buildx $buildx_version as Docker CLI plugin" \
+      "on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-buildx"
-    curl -fsSL "https://github.com/docker/buildx/releases/download/$buildx_version/buildx-$buildx_version.$os-$arch" \
+    curl -fsSL \
+      "https://github.com/docker/buildx/releases/download/$buildx_version/" \
+      "buildx-$buildx_version.$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-buildx"
     chmod +x "$HOME/.docker/cli-plugins/docker-buildx"
   fi
@@ -69,7 +77,8 @@ install_docker_compose_plugin() {
   if [ ! -x "$HOME/.docker/cli-plugins/docker-compose" ]; then
     compose_version="$(get_latest_github_release docker/compose)"
     if [ -z "$compose_version" ]; then
-      echo "Warning: Failed to query latest compose version, skipping installation"
+      echo "Warning: Failed to query latest compose version," \
+        "skipping installation"
       return 1
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
@@ -77,10 +86,13 @@ install_docker_compose_plugin() {
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
-    echo "Downloading Docker Compose $compose_version as Docker CLI plugin on $os ($arch)"
+    echo "Downloading Docker Compose $compose_version as Docker CLI plugin" \
+      "on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
-    curl -fsSL "https://github.com/docker/compose/releases/download/$compose_version/docker-compose-$os-$arch" \
+    curl -fsSL \
+      "https://github.com/docker/compose/releases/download/$compose_version/" \
+      "docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
     chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
@@ -91,7 +103,8 @@ install_docker_mcp_plugin() {
     # mcp-gateway releases are currently prereleases, so include them
     mcp_gateway_version="$(get_latest_github_release docker/mcp-gateway true)"
     if [ -z "$mcp_gateway_version" ]; then
-      echo "Warning: Failed to query latest mcp-gateway version, skipping installation"
+      echo "Warning: Failed to query latest mcp-gateway version," \
+        "skipping installation"
       return 1
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
@@ -101,7 +114,9 @@ install_docker_mcp_plugin() {
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-mcp"
     tmp_tar="$(mktemp)"
-    if ! curl -fsSL "https://github.com/docker/mcp-gateway/releases/download/$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
+    if ! curl -fsSL \
+      "https://github.com/docker/mcp-gateway/releases/download/" \
+      "$mcp_gateway_version/docker-mcp-$os-$arch.tar.gz" \
       -o "$tmp_tar"; then
       echo "Error: Failed to download docker-mcp plugin"
       rm -f "$tmp_tar"
@@ -132,7 +147,8 @@ run_docker_with_plugins() {
     install_docker_compose_plugin || return 1
   elif [ "$1" = "mcp" ]; then
     install_docker_mcp_plugin || {
-      echo "Error: docker-mcp plugin is not available. Please check your network connection or install manually."
+      echo "Error: docker-mcp plugin is not available." \
+        "Check your network connection or install manually."
       return 1
     }
   fi
@@ -145,15 +161,93 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     echo "Error: limactl not found on macOS, cannot start Linux VM for docker."
     exit 127
   fi
-  # start VM if not running
-  if ! limactl list --json | grep -q "\"$NAME\".*\"status\": *\"Running\""; then
-    if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=lima:bridged --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
-    else
-      limactl start --name "$NAME" "$HOME/.config/configent/lima/$TEMPLATE.yaml" --tty=false --vm-type=vz --network=vzNAT --rosetta --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" --set=".env.EMAIL = \"$EMAIL\"" --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        limactl start --name "$NAME"
+
+  docker_cwd=$(pwd -P)
+  lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+
+  # Drop cwd from lima.yaml so --mount below does not duplicate that mount.
+  docker_remove_cwd_mount() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    grep -qF "location: ${docker_cwd}" "$lima_instance_yaml" 2>/dev/null ||
+      return 0
+    awk -v path="${docker_cwd}" '
+      /^- location: / && substr($0, 13) == path { skip=1; next }
+      skip && /^  / { next }
+      { skip=0; print }
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
+  # True if creating a file in docker_cwd works. test -w can pass while touch
+  # fails; do not rely on test -w alone.
+  docker_guest_cwd_writable() {
+    limactl shell --tty=false "$NAME" -- sh -ceu \
+      "t=\"\$1/.docker-write-probe.\$\$\"; rm -f \"\$t\"; \
+      touch \"\$t\"; rm -f \"\$t\"" \
+      _ "$docker_cwd" 2>/dev/null
+  }
+
+  # virtiofs often comes up ro after boot even when lima.yaml has writable:
+  # true; remount rw avoids a pointless stop/start loop.
+  docker_guest_remount_cwd_rw() {
+    limactl shell --tty=false "$NAME" -- \
+      sudo mount -o remount,rw "$docker_cwd" \
+      2>/dev/null || true
+  }
+
+  # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
+  docker_start_mount_only() {
+    docker_remove_cwd_mount
+    limactl start --name "$NAME" --tty=false --log-level=warn \
+      --mount "${docker_cwd}:w"
+  }
+
+  # Remount rw (virtiofs often boots ro); if still ro, cold restart then
+  # remount again.
+  docker_guest_activate_cwd_mount_rw() {
+    docker_guest_remount_cwd_rw
+    if docker_guest_cwd_writable; then
+      return 0
     fi
+    limactl stop "$NAME"
+    docker_start_mount_only
+    docker_guest_remount_cwd_rw
+    if docker_guest_cwd_writable; then
+      return 0
+    fi
+    echo "Error: Lima mount is still not writable at ${docker_cwd}" \
+      "inside the VM (see: findmnt ${docker_cwd})." >&2
+    exit 1
+  }
+
+  docker_ensure_guest_cwd_writable() {
+    docker_start_mount_only
+    docker_guest_activate_cwd_mount_rw
+  }
+
+  docker_create_instance() {
+    net="$1"
+    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+      --vm-type=vz \
+      --network="$net" \
+      --rosetta \
+      --mount "${docker_cwd}:w" \
+      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+      --set=".env.EMAIL = \"$EMAIL\"" \
+      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+      docker_start_mount_only
+  }
+
+  # Sync lima.yaml + cwd mount every run; remount rw; stop+start if still ro
+  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
+    docker_ensure_guest_cwd_writable
+  elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+    docker_create_instance lima:bridged
+    docker_guest_activate_cwd_mount_rw
+  else
+    docker_create_instance vzNAT
+    docker_guest_activate_cwd_mount_rw
   fi
   # macOS priority: mise, homebrew
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
@@ -167,7 +261,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     run_docker_with_plugins "$docker_bin_path" "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
-    limactl shell "$NAME" docker "$@"
+    limactl shell --workdir "$docker_cwd" "$NAME" docker "$@"
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
