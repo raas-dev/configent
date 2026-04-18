@@ -162,14 +162,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
 
-  docker_cwd=$(pwd -P)
+  lima_cwd=$(pwd -P)
   lima_home=$(cd "$HOME" && pwd -P)
   lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
   lima_skip_home_mount=
-  [ "$docker_cwd" = "$lima_home" ] && lima_skip_home_mount=1
+  [ "$lima_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
   # Drop mount entries whose host location no longer exists on disk.
-  docker_remove_nonexistent_mounts() {
+  lima_remove_nonexistent_mounts() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
     [ -f "$lima_instance_yaml" ] || return 0
     awk -v home="$HOME" '
@@ -189,10 +189,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # Drop cwd and full-home mounts from lima.yaml so --mount does not duplicate;
   # never persist a guest mount of \$HOME (security boundary).
-  docker_remove_cwd_mount() {
+  lima_remove_cwd_mount() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
     [ -f "$lima_instance_yaml" ] || return 0
-    awk -v path="${docker_cwd}" -v home="${lima_home}" '
+    awk -v path="${lima_cwd}" -v home="${lima_home}" '
       /^- location: / {
         loc = substr($0, 13)
         gsub(/^"|"$/, "", loc)
@@ -205,26 +205,26 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   }
 
   # True if the path is visible inside the guest (i.e. the mount exists).
-  docker_guest_cwd_exists() {
+  lima_guest_cwd_exists() {
     limactl shell --workdir / --tty=false "$NAME" -- \
-      test -d "$docker_cwd" >/dev/null 2>&1
+      test -d "$lima_cwd" >/dev/null 2>&1
   }
 
-  # True if creating a file in docker_cwd works. test -w can pass while touch
+  # True if creating a file in lima_cwd works. test -w can pass while touch
   # fails; do not rely on test -w alone.
-  docker_guest_cwd_writable() {
+  lima_guest_cwd_writable() {
     limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
       "t=\"\$1/.docker-write-probe.\$\$\"; rm -f \"\$t\"; \
       touch \"\$t\"; rm -f \"\$t\"" \
-      _ "$docker_cwd" >/dev/null 2>&1
+      _ "$lima_cwd" >/dev/null 2>&1
   }
 
-  # True if docker_cwd falls under a location already in the running instance's
+  # True if lima_cwd falls under a location already in the running instance's
   # mount list (local check, no SSH needed).
-  docker_cwd_is_mounted() {
+  lima_cwd_is_mounted() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
     [ -f "$lima_instance_yaml" ] || return 1
-    awk -v cwd="$docker_cwd" -v home="$HOME" '
+    awk -v cwd="$lima_cwd" -v home="$HOME" '
       /^mounts:/ { in_mounts=1; next }
       /^[a-zA-Z]/ { in_mounts=0 }
       in_mounts && /^- location: / {
@@ -239,69 +239,69 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # virtiofs often comes up ro after boot even when lima.yaml has writable:
   # true; remount rw avoids a pointless stop/start loop.
-  docker_guest_remount_cwd_rw() {
+  lima_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- \
-      sudo mount -o remount,rw "$docker_cwd" \
+      sudo mount -o remount,rw "$lima_cwd" \
       >/dev/null 2>&1 || true
   }
 
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
-  docker_start_mount_only() {
-    docker_remove_nonexistent_mounts
-    docker_remove_cwd_mount
+  lima_start_mount_only() {
+    lima_remove_nonexistent_mounts
+    lima_remove_cwd_mount
     if [ -n "$lima_skip_home_mount" ]; then
       limactl start --name "$NAME" --tty=false --log-level=warn
     else
       limactl start --name "$NAME" --tty=false --log-level=warn \
-        --mount "${docker_cwd}:w"
+        --mount "${lima_cwd}:w"
     fi
   }
 
   # Remount rw (virtiofs often boots ro); if still ro, cold restart then
   # remount again.
-  docker_guest_activate_cwd_mount_rw() {
+  lima_guest_activate_cwd_mount_rw() {
     if [ -n "$lima_skip_home_mount" ]; then
       return 0
     fi
-    docker_guest_remount_cwd_rw
-    if docker_guest_cwd_writable; then
+    lima_guest_remount_cwd_rw
+    if lima_guest_cwd_writable; then
       return 0
     fi
-    _docker_cwd_existed=
-    if docker_guest_cwd_exists; then
-      _docker_cwd_existed=1
+    _lima_cwd_existed=
+    if lima_guest_cwd_exists; then
+      _lima_cwd_existed=1
       printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
-        "$docker_cwd" "$NAME"
+        "$lima_cwd" "$NAME"
     else
       printf "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
-        "$docker_cwd" "$NAME"
+        "$lima_cwd" "$NAME"
     fi
     read -r _restart_answer
     case "$_restart_answer" in
     [yY]) ;;
     *)
       echo "Skipping restart."
-      [ -z "$_docker_cwd_existed" ] && docker_remove_cwd_mount
+      [ -z "$_lima_cwd_existed" ] && lima_remove_cwd_mount
       return 1
       ;;
     esac
     limactl stop "$NAME"
-    docker_start_mount_only
-    docker_guest_remount_cwd_rw
-    if docker_guest_cwd_writable; then
+    lima_start_mount_only
+    lima_guest_remount_cwd_rw
+    if lima_guest_cwd_writable; then
       return 0
     fi
-    echo "Error: Lima mount is still not writable at ${docker_cwd}" \
-      "inside the VM (see: findmnt ${docker_cwd})." >&2
+    echo "Error: Lima mount is still not writable at ${lima_cwd}" \
+      "inside the VM (see: findmnt ${lima_cwd})." >&2
     exit 1
   }
 
-  docker_ensure_guest_cwd_writable() {
-    docker_start_mount_only
-    docker_guest_activate_cwd_mount_rw
+  lima_ensure_guest_cwd_writable() {
+    lima_start_mount_only
+    lima_guest_activate_cwd_mount_rw
   }
 
-  docker_create_instance() {
+  lima_create_instance() {
     net="$1"
     if [ -n "$lima_skip_home_mount" ]; then
       limactl start --name "$NAME" --tty=false "$lima_yaml" \
@@ -312,32 +312,32 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         --set=".env.EMAIL = \"$EMAIL\"" \
         --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
         --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        docker_start_mount_only
+        lima_start_mount_only
     else
       limactl start --name "$NAME" --tty=false "$lima_yaml" \
         --vm-type=vz \
         --network="$net" \
         --rosetta \
-        --mount "${docker_cwd}:w" \
+        --mount "${lima_cwd}:w" \
         --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
         --set=".env.EMAIL = \"$EMAIL\"" \
         --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
         --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        docker_start_mount_only
+        lima_start_mount_only
     fi
   }
 
   # VM already running: skip SSH probe; only restart if cwd is not yet mounted.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    if [ -z "$lima_skip_home_mount" ] && ! docker_cwd_is_mounted; then
-      docker_ensure_guest_cwd_writable || exit 1
+    if [ -z "$lima_skip_home_mount" ] && ! lima_cwd_is_mounted; then
+      lima_ensure_guest_cwd_writable || exit 1
     fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-    docker_create_instance lima:bridged
-    docker_guest_activate_cwd_mount_rw || exit 1
+    lima_create_instance lima:bridged
+    lima_guest_activate_cwd_mount_rw || exit 1
   else
-    docker_create_instance vzNAT
-    docker_guest_activate_cwd_mount_rw || exit 1
+    lima_create_instance vzNAT
+    lima_guest_activate_cwd_mount_rw || exit 1
   fi
   # macOS priority: mise, homebrew
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
@@ -351,7 +351,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     run_docker_with_plugins "$docker_bin_path" "$@"
   else
     # no docker CLI found on macOS -> call this script on the Linux guest VM
-    limactl shell --workdir "$docker_cwd" "$NAME" docker "$@"
+    limactl shell --workdir "$lima_cwd" "$NAME" docker "$@"
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
