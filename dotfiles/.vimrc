@@ -86,6 +86,25 @@ endif
 set pastetoggle=<F2>
 set go+=a              " visual selection automatically copied to the clipboard
 
+" tmux/screen terminfo often omits bracketed paste. Need both:
+"   t_BE/t_BD — ask terminal for bracketed paste (?2004)
+"   t_PS/t_PE — recognize paste start/end wrappers (200~/201~)
+" Without t_BE many terminals never wrap pastes; without t_PS Vim ignores wraps.
+function! s:BracketedPasteTermcaps() abort
+  if !(exists('$TMUX') || &term =~# '^\%(screen\|tmux\)')
+    return
+  endif
+  let &t_BE = "\e[?2004h"
+  let &t_BD = "\e[?2004l"
+  let &t_PS = "\e[200~"
+  let &t_PE = "\e[201~"
+endfunction
+call s:BracketedPasteTermcaps()
+augroup bracketed_paste_tmux
+  au!
+  au VimEnter * call s:BracketedPasteTermcaps()
+augroup END
+
 "-- General --------------------------------------------------------------------
 
 set hidden                      " hide buffers instead of closing them
