@@ -98,3 +98,24 @@ $SUDO systemctl reload docker
 
 # rootless
 systemctl --user reload docker
+
+# dockerd-rootless-setuptool.sh writes currentContext=rootless into
+# ~/.docker/config.json; that shadows rootful sockets and Lima DOCKER_HOST.
+# Drop the field so the CLI follows the default context / DOCKER_HOST again.
+if [ -f "$HOME/.docker/config.json" ] && command -v python3 >/dev/null 2>&1; then
+  python3 - <<'PY'
+import json
+from pathlib import Path
+
+p = Path.home() / ".docker/config.json"
+try:
+    data = json.loads(p.read_text())
+except (OSError, json.JSONDecodeError):
+    raise SystemExit(0)
+if data.pop("currentContext", None) is None:
+    raise SystemExit(0)
+p.write_text(json.dumps(data, indent=4) + "\n")
+PY
+elif [ -f "$HOME/.docker/config.json" ] && command -v docker >/dev/null 2>&1; then
+  docker context use default 2>/dev/null || true
+fi
