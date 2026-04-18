@@ -389,9 +389,6 @@ alias azcopy='mise exec github:Azure/azure-storage-azcopy -- azcopy'
 # Tool to analyze Linux ELF binaries
 alias binsider='mise exec github:orhun/binsider -- binsider'
 
-# https://github.com/boxlite-ai/boxrun
-alias boxrun='mise exec github:boxlite-ai/boxrun@0.2.0 -- boxrun'
-
 # CIDR network prefix explainer
 alias cidr='mise exec github:bschaatsbergen/cidr -- cidr'
 
