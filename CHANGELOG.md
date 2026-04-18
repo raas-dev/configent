@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.22](https://github.com/raas-dev/configent/compare/1.216.21...1.216.22) (2026-04-18)
+
+
+### Fixes
+
+* **box:** ensure cwd mount writable ([7ea8834](https://github.com/raas-dev/configent/commit/7ea8834873198f795234d6687fff949b085869f4))
+* **box:** mount configent only on new instances ([bf69be4](https://github.com/raas-dev/configent/commit/bf69be4927e882902bd79d534e1c36df07da7a02))
+* **box:** rename AGENT to RUN ([9fd0dfb](https://github.com/raas-dev/configent/commit/9fd0dfb9190458be69f8efad00c37613eea78880))
+* **box:** repair cwd writable probe ([1f2f5f1](https://github.com/raas-dev/configent/commit/1f2f5f1b61118596a1bcf999e28164c2e0a78f51))
+
 ## [1.216.21](https://github.com/raas-dev/configent/compare/1.216.20...1.216.21) (2026-04-18)
 
 
