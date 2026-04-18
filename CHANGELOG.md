@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.2](https://github.com/raas-dev/configent/compare/1.217.1...1.217.2) (2026-04-18)
+
+
+### Fixes
+
+* **lima:** remove cwd mount when restart skipped ([385c886](https://github.com/raas-dev/configent/commit/385c886ab27274b1d1d05ba9f6247ee0efcbdf98))
+* **lima:** skip cwd remount when home mount skipped ([a8f1785](https://github.com/raas-dev/configent/commit/a8f1785d2a1b6e88af4429c4cb6d71095875135b))
+* skip SSH probe when cwd already mounted ([f945776](https://github.com/raas-dev/configent/commit/f945776ff89a933f859c21767af85a5db43396a1))
+
 ## [1.217.1](https://github.com/raas-dev/configent/compare/1.217.0...1.217.1) (2026-04-18)
 
 
