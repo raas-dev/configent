@@ -72,9 +72,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   }
   box_create_instance() {
     net="$1"
-    limactl start --name "$NAME" \
-      "$lima_yaml" \
-      --tty=false \
+    limactl start --name "$NAME" --tty=false "$lima_yaml" \
       --vm-type=vz \
       --network="$net" \
       --rosetta \
