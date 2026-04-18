@@ -248,6 +248,30 @@ v() {
 # start vm in development mode
 vv() {
   if [[ "$1" == "up" || "$1" == "start" ]]; then
+    # Only pass --mount when creating the instance
+    local vm_name="debian"
+    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
+      vm_name="default"
+    else
+      vm_name="$2"
+    fi
+    local args=("${@:2}")
+    local i
+    for ((i = 0; i < ${#args[@]}; i++)); do
+      local a="${args[i]}"
+      if [[ "$a" == --name=* ]]; then
+        vm_name="${a#--name=}"
+        break
+      elif [[ "$a" == --name ]]; then
+        vm_name="${args[i + 1]}"
+        break
+      fi
+    done
+    local vv_mount=()
+    if ! limactl list "$vm_name" &>/dev/null; then
+      vv_mount=(--mount="~/configent")
+    fi
+
     if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
       # Check if user already specified --name
       local has_name=false
@@ -259,12 +283,12 @@ vv() {
       done
       if [ "$has_name" = false ]; then
         v "$1" debian --name=default "${@:2}" \
-          --set=.env.GIT_REF=\"main\" --mount="~/configent"
+          --set=.env.GIT_REF=\"main\" "${vv_mount[@]}"
       else
-        v "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" --mount="~/configent"
+        v "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" "${vv_mount[@]}"
       fi
     else
-      v "$@" --set=.env.GIT_REF=\"main\" --mount="~/configent"
+      v "$@" --set=.env.GIT_REF=\"main\" "${vv_mount[@]}"
     fi
   else
     v "$@"
