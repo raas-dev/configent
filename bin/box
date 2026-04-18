@@ -10,10 +10,10 @@
 
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
-: "${AGENT:="pi"}"
+: "${RUN:="pi"}"
 : "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY}"
 
-case "$AGENT" in
+case "$RUN" in
 pi) FW="$FW,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 opencode) FW="$FW,OPENCODE_API_KEY,OPENCODE_FORCE_FULL_READ_ACTIVE" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY" ;;
@@ -164,7 +164,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     --preserve-env \
     --workdir "$box_cwd" \
     "$NAME" \
-    /bin/bash -ic 'exec '"$AGENT"' "$@"' _ "$@"
+    /bin/bash -ic 'exec '"$RUN"' "$@"' _ "$@"
 else
-  "$AGENT" "$@"
+  "$RUN" "$@"
 fi
