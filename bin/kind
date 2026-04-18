@@ -70,24 +70,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       _ "$lima_cwd" >/dev/null 2>&1
   }
 
-  # True if lima_cwd falls under a location already in the running instance's
-  # mount list (local check, no SSH needed).
-  lima_cwd_is_mounted() {
-    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    [ -f "$lima_instance_yaml" ] || return 1
-    awk -v cwd="$lima_cwd" -v home="$HOME" '
-      /^mounts:/ { in_mounts=1; next }
-      /^[a-zA-Z]/ { in_mounts=0 }
-      in_mounts && /^- location: / {
-        loc = substr($0, 13)
-        gsub(/^"|"$/, "", loc)
-        sub(/^~/, home, loc)
-        if (cwd == loc || index(cwd, loc "/") == 1) { found=1; exit }
-      }
-      END { exit (found ? 0 : 1) }
-    ' "$lima_instance_yaml"
-  }
-
   lima_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- \
       sudo mount -o remount,rw "$lima_cwd" \
@@ -142,11 +124,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 1
   }
 
-  lima_ensure_guest_cwd_writable() {
-    lima_start_mount_only
-    lima_guest_activate_cwd_mount_rw
-  }
-
   lima_create_instance() {
     net="$1"
     if [ -n "$lima_skip_home_mount" ]; then
@@ -176,9 +153,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # VM already running: skip SSH probe; only SSH if mount missing or ro.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     if [ -z "$lima_skip_home_mount" ]; then
-      if ! lima_cwd_is_mounted; then
-        lima_ensure_guest_cwd_writable || exit 1
-      elif ! lima_guest_cwd_writable; then
+      if ! lima_guest_cwd_writable; then
         lima_guest_activate_cwd_mount_rw || exit 1
       fi
     fi
