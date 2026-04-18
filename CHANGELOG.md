@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.216.21](https://github.com/raas-dev/configent/compare/1.216.20...1.216.21) (2026-04-18)
+
+
+### Fixes
+
+* **box:** format limactl start line ([d6d9e40](https://github.com/raas-dev/configent/commit/d6d9e40bf3950af55fefe33b9aaf14532a864875))
+* **box:** include Codex env, drop extra mount-only dirs ([187f7dd](https://github.com/raas-dev/configent/commit/187f7ddfba29b931e7f7be1d7e9dd0214dfb49bd))
+* **box:** remove duplicate cwd mount ([f03dea4](https://github.com/raas-dev/configent/commit/f03dea4b9b800f8e8eb3e60f3b326da000014a57))
+* **box:** use --mount for writable cwd ([5ff5d60](https://github.com/raas-dev/configent/commit/5ff5d60de50d9b4c4182718126e5b0a1d6df1e28))
+
 ## [1.216.20](https://github.com/raas-dev/configent/compare/1.216.19...1.216.20) (2026-04-17)
 
 
