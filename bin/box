@@ -83,7 +83,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   box_guest_cwd_writable() {
     limactl shell --tty=false "$NAME" -- sh -ceu \
       "t=\"\$1/.box-write-probe.\$\$\"; rm -f \"\$t\"; \
-touch \"\$t\"; rm -f \"\$t\"" \
+      touch \"\$t\"; rm -f \"\$t\"" \
       _ "$box_cwd" 2>/dev/null
   }
 
