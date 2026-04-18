@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.4](https://github.com/raas-dev/configent/compare/1.217.3...1.217.4) (2026-04-18)
+
+
+### Fixes
+
+* **lima:** start stopped VMs without recreating ([2aff67f](https://github.com/raas-dev/configent/commit/2aff67fb89d0463a565b74fa2472d782bf34ab71))
+
 ## [1.217.3](https://github.com/raas-dev/configent/compare/1.217.2...1.217.3) (2026-04-18)
 
 
