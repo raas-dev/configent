@@ -3,9 +3,6 @@
   "autoupdate": false,
   "mcp": {},
   "permission": {
-    "bash": {
-      "rm *": "ask"
-    },
     "external_directory": "allow"
   },
   "plugin": [
