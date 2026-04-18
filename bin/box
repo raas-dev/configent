@@ -11,12 +11,13 @@
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
 : "${AGENT:="pi"}"
-: "${FW:=GITHUB_TOKEN,EXA_API_KEY,CONTEXT7_API_KEY,MINIMAX_API_KEY,ZAI_API_KEY}"
+: "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY}"
 
 case "$AGENT" in
-pi) FW="$FW,PI_SKIP_VERSION_CHECK,PI_RUN_CODE_UNSANDBOXED" ;;
+pi) FW="$FW,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 opencode) FW="$FW,OPENCODE_API_KEY,OPENCODE_FORCE_FULL_READ_ACTIVE" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY" ;;
+codex) FW="$FW,OPENAI_API_KEY" ;;
 esac
 
 if [ "$(uname -s)" = 'Darwin' ]; then
@@ -58,7 +59,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
         "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
 
-    # Codex
+    # Codex CLI
     [ -f "$HOME/.codex/auth.json" ] &&
       limactl cp "$HOME/.codex/auth.json" \
         "$NAME:${guest_home}/.codex/auth.json"
@@ -67,8 +68,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # --mount-only replaces the full mount list; keep template dirs + cwd rw
   box_start_mount_only() {
     limactl start --name "$NAME" --tty=false \
-      --mount-only "$HOME/dev:w" \
-      --mount-only "$HOME/Downloads:w" \
       --mount-only "${box_cwd}:w" \
       --mount-writable
   }
