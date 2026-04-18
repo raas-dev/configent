@@ -223,7 +223,7 @@ These `bin/` shims wrap the container CLIs to use those runtimes:
 Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs.
 
-The shims `docker`, `docker-compose`, `nerdctl`, `podman`, `buildctl`, `kind`,
+The shims `docker`, `docker-compose`, `nerdctl`, `podman`, `buildctl`, `kind`
 and `box` create and start the VM 'debian'.
 
 The host directory where the shim is run in is mounted read-write in the VM
