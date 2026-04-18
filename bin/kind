@@ -57,11 +57,17 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }
 
+  # True if the path is visible inside the guest (i.e. the mount exists).
+  lima_guest_cwd_exists() {
+    limactl shell --workdir / --tty=false "$NAME" -- \
+      test -d "$lima_cwd" >/dev/null 2>&1
+  }
+
   lima_guest_cwd_writable() {
-    limactl shell --tty=false "$NAME" -- sh -ceu \
+    limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
       "t=\"\$1/.kind-write-probe.\$\$\"; rm -f \"\$t\"; \
       touch \"\$t\"; rm -f \"\$t\"" \
-      _ "$lima_cwd" 2>/dev/null
+      _ "$lima_cwd" >/dev/null 2>&1
   }
 
   lima_guest_remount_cwd_rw() {
@@ -89,8 +95,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if lima_guest_cwd_writable; then
       return 0
     fi
-    printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
-      "$lima_cwd" "$NAME"
+    if lima_guest_cwd_exists; then
+      printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
+        "$lima_cwd" "$NAME"
+    else
+      printf "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
+        "$lima_cwd" "$NAME"
+    fi
     read -r _restart_answer
     case "$_restart_answer" in
     [yY]) ;;
@@ -142,7 +153,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   }
 
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    lima_ensure_guest_cwd_writable
+    if [ -z "$lima_skip_home_mount" ] && ! lima_guest_cwd_writable; then
+      lima_ensure_guest_cwd_writable
+    fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     lima_create_instance lima:bridged
     lima_guest_activate_cwd_mount_rw

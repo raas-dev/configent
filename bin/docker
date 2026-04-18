@@ -204,13 +204,19 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }
 
+  # True if the path is visible inside the guest (i.e. the mount exists).
+  docker_guest_cwd_exists() {
+    limactl shell --workdir / --tty=false "$NAME" -- \
+      test -d "$docker_cwd" >/dev/null 2>&1
+  }
+
   # True if creating a file in docker_cwd works. test -w can pass while touch
   # fails; do not rely on test -w alone.
   docker_guest_cwd_writable() {
-    limactl shell --tty=false "$NAME" -- sh -ceu \
+    limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
       "t=\"\$1/.docker-write-probe.\$\$\"; rm -f \"\$t\"; \
       touch \"\$t\"; rm -f \"\$t\"" \
-      _ "$docker_cwd" 2>/dev/null
+      _ "$docker_cwd" >/dev/null 2>&1
   }
 
   # virtiofs often comes up ro after boot even when lima.yaml has writable:
@@ -243,8 +249,13 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if docker_guest_cwd_writable; then
       return 0
     fi
-    printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
-      "$docker_cwd" "$NAME"
+    if docker_guest_cwd_exists; then
+      printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
+        "$docker_cwd" "$NAME"
+    else
+      printf "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
+        "$docker_cwd" "$NAME"
+    fi
     read -r _restart_answer
     case "$_restart_answer" in
     [yY]) ;;
@@ -297,7 +308,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # Sync lima.yaml + cwd mount every run; remount rw; stop+start if still ro
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    docker_ensure_guest_cwd_writable
+    if [ -z "$lima_skip_home_mount" ] && ! docker_guest_cwd_writable; then
+      docker_ensure_guest_cwd_writable
+    fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     docker_create_instance lima:bridged
     docker_guest_activate_cwd_mount_rw
