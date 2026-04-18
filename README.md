@@ -223,15 +223,16 @@ These `bin/` shims wrap the container CLIs to use those runtimes:
 Container runtimes base on Linux kernel features not present on macOS. Thus
 [Lima](https://github.com/lima-vm/lima) is used for creating Linux VMs.
 
-The aforementioned shims create and start the VM 'debian'.
+The shims `docker`, `docker-compose`, `nerdctl`, `podman`, `buildctl`, `kind`,
+and `box` create and start the VM 'debian'.
+
+The host directory where the shim is run in is mounted read-write in the VM
+(unless it is `$HOME`).
 
 VM 'ubuntu' runs [k0s](https://k0sproject.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
-The directory where `docker`, `docker-compose`, `nerdctl`, `podman`, etc.
-is run in is mounted read-write in the VM (unless it is `$HOME`).
-
-In addition `$HOME/Downloads` is always mounted read-write in all VMs.
+In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
 ### docker shortcut
 
