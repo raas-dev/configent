@@ -48,7 +48,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   lima_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- \
       sudo mount -o remount,rw "$lima_cwd" \
-      2>/dev/null || true
+      >/dev/null 2>&1 || true
   }
 
   lima_start_mount_only() {

@@ -68,6 +68,25 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         "$NAME:${guest_home}/.codex/auth.json"
   }
 
+  # Drop mount entries whose host location no longer exists on disk.
+  lima_remove_nonexistent_mounts() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    [ -f "$lima_instance_yaml" ] || return 0
+    awk -v home="$HOME" '
+      /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+      in_mounts && /^- location: / {
+        loc = substr($0, 13)
+        gsub(/^"|"$/, "", loc)
+        sub(/^~/, home, loc)
+        cmd = "test -d \"" loc "\""
+        if (system(cmd) != 0) { skip=1; next }
+      }
+      skip && /^  / { next }
+      { skip=0; print }
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
   # Remove cwd and full-home mounts so --mount does not duplicate; \$HOME stays
   # off the guest mount list.
   box_remove_cwd_mount() {
@@ -98,11 +117,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # true; remount rw avoids a pointless stop/start loop.
   box_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- sudo mount -o remount,rw "$box_cwd" \
-      2>/dev/null || true
+      >/dev/null 2>&1 || true
   }
 
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   box_start_mount_only() {
+    lima_remove_nonexistent_mounts
     box_remove_cwd_mount
     if [ -n "$lima_skip_home_mount" ]; then
       limactl start --name "$NAME" --tty=false --log-level=warn

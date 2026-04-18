@@ -23,6 +23,25 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   lima_skip_home_mount=
   [ "$lima_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
+  # Drop mount entries whose host location no longer exists on disk.
+  lima_remove_nonexistent_mounts() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    [ -f "$lima_instance_yaml" ] || return 0
+    awk -v home="$HOME" '
+      /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+      in_mounts && /^- location: / {
+        loc = substr($0, 13)
+        gsub(/^"|"$/, "", loc)
+        sub(/^~/, home, loc)
+        cmd = "test -d \"" loc "\""
+        if (system(cmd) != 0) { skip=1; next }
+      }
+      skip && /^  / { next }
+      { skip=0; print }
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
   lima_remove_cwd_mount() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
     [ -f "$lima_instance_yaml" ] || return 0
@@ -48,10 +67,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   lima_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- \
       sudo mount -o remount,rw "$lima_cwd" \
-      2>/dev/null || true
+      >/dev/null 2>&1 || true
   }
 
   lima_start_mount_only() {
+    lima_remove_nonexistent_mounts
     lima_remove_cwd_mount
     if [ -n "$lima_skip_home_mount" ]; then
       limactl start --name "$NAME" --tty=false --log-level=warn

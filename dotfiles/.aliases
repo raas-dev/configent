@@ -171,6 +171,25 @@ alias xall='pkill -i -f'
 
 ### Lima VMs ###################################################################
 
+_lima_remove_nonexistent_mounts() {
+  local vm_name="${1:-default}"
+  local lima_instance_yaml="$HOME/.lima/$vm_name/lima.yaml"
+  [ -f "$lima_instance_yaml" ] || return 0
+  awk -v home="$HOME" '
+    /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+    in_mounts && /^- location: / {
+      loc = substr($0, 13)
+      gsub(/^"|"$/, "", loc)
+      sub(/^~/, home, loc)
+      cmd = "test -d \"" loc "\""
+      if (system(cmd) != 0) { skip=1; next }
+    }
+    skip && /^  / { next }
+    { skip=0; print }
+  ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+    mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+}
+
 v() {
   if [ -n "$1" ]; then
     local command="$1"
@@ -202,6 +221,7 @@ v() {
   case "$command" in
   up | start)
     if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
+      _lima_remove_nonexistent_mounts "$vm_name"
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then

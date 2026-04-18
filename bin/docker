@@ -168,6 +168,25 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   lima_skip_home_mount=
   [ "$docker_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
+  # Drop mount entries whose host location no longer exists on disk.
+  docker_remove_nonexistent_mounts() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    [ -f "$lima_instance_yaml" ] || return 0
+    awk -v home="$HOME" '
+      /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+      in_mounts && /^- location: / {
+        loc = substr($0, 13)
+        gsub(/^"|"$/, "", loc)
+        sub(/^~/, home, loc)
+        cmd = "test -d \"" loc "\""
+        if (system(cmd) != 0) { skip=1; next }
+      }
+      skip && /^  / { next }
+      { skip=0; print }
+      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
   # Drop cwd and full-home mounts from lima.yaml so --mount does not duplicate;
   # never persist a guest mount of \$HOME (security boundary).
   docker_remove_cwd_mount() {
@@ -199,11 +218,12 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   docker_guest_remount_cwd_rw() {
     limactl shell --tty=false "$NAME" -- \
       sudo mount -o remount,rw "$docker_cwd" \
-      2>/dev/null || true
+      >/dev/null 2>&1 || true
   }
 
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   docker_start_mount_only() {
+    docker_remove_nonexistent_mounts
     docker_remove_cwd_mount
     if [ -n "$lima_skip_home_mount" ]; then
       limactl start --name "$NAME" --tty=false --log-level=warn
