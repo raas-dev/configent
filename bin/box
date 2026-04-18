@@ -78,11 +78,50 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }
 
+  # True if creating a file in box_cwd works. test -w can pass while touch
+  # fails; do not rely on test -w alone.
+  box_guest_cwd_writable() {
+    limactl shell --tty=false "$NAME" -- sh -ceu \
+      "t=\"\$1/.box-write-probe.\$\$\"; rm -f \"\$t\"; \
+touch \"\$t\"; rm -f \"\$t\"" \
+      _ "$box_cwd" 2>/dev/null
+  }
+
+  # virtiofs often comes up ro after boot even when lima.yaml has writable:
+  # true; remount rw avoids a pointless stop/start loop.
+  box_guest_remount_cwd_rw() {
+    limactl shell --tty=false "$NAME" -- sudo mount -o remount,rw "$box_cwd" \
+      2>/dev/null || true
+  }
+
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   box_start_mount_only() {
     box_remove_cwd_mount
     limactl start --name "$NAME" --tty=false \
       --mount "${box_cwd}:w"
+  }
+
+  # Remount rw (virtiofs often boots ro); if still ro, cold restart then remount
+  # again.
+  box_guest_activate_cwd_mount_rw() {
+    box_guest_remount_cwd_rw
+    if box_guest_cwd_writable; then
+      return 0
+    fi
+    limactl stop "$NAME"
+    box_start_mount_only
+    box_guest_remount_cwd_rw
+    if box_guest_cwd_writable; then
+      return 0
+    fi
+    echo "Error: Lima mount is still not writable at ${box_cwd}" \
+      "inside the VM (see: findmnt ${box_cwd})." >&2
+    exit 1
+  }
+
+  box_ensure_guest_cwd_writable() {
+    box_start_mount_only
+    box_guest_activate_cwd_mount_rw
   }
   box_create_instance() {
     net="$1"
@@ -98,13 +137,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       box_start_mount_only
   }
 
-  # Sync mounts whenever the instance exists (if running, requires a restart)
+  # Sync lima.yaml + cwd mount every run; remount rw; stop+start if still ro
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    box_start_mount_only
+    box_ensure_guest_cwd_writable
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     box_create_instance lima:bridged
+    box_guest_activate_cwd_mount_rw
   else
     box_create_instance vzNAT
+    box_guest_activate_cwd_mount_rw
   fi
 
   export LIMA_SHELLENV_BLOCK='*'
