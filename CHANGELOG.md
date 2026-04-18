@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.1](https://github.com/raas-dev/configent/compare/1.217.0...1.217.1) (2026-04-18)
+
+
+### Fixes
+
+* **lima:** prompt restart for read-only VM mounts ([f59617a](https://github.com/raas-dev/configent/commit/f59617a87dd7ac83aa098bd61a38a834a3ecb574))
+
 ## [1.217.0](https://github.com/raas-dev/configent/compare/1.216.22...1.217.0) (2026-04-18)
 
 
