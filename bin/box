@@ -68,8 +68,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # --mount-only replaces the full mount list; keep template dirs + cwd rw
   box_start_mount_only() {
     limactl start --name "$NAME" --tty=false \
-      --mount-only "${box_cwd}:w" \
-      --mount-writable
+      --mount "${box_cwd}:w"
   }
   box_create_instance() {
     net="$1"
@@ -80,7 +79,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       --network="$net" \
       --rosetta \
       --mount "${box_cwd}:w" \
-      --mount-writable \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
       --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
