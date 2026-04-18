@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.3](https://github.com/raas-dev/configent/compare/1.217.2...1.217.3) (2026-04-18)
+
+
+### Fixes
+
+* **lima:** activate cwd mount rw when already mounted ([d08a510](https://github.com/raas-dev/configent/commit/d08a510e876a1165e8ab51f1a5deb9f44c327b92))
+* **lima:** always probe cwd mount writable in running VM ([61210ee](https://github.com/raas-dev/configent/commit/61210ee130e9933f2a1df20991d32f9a1b5b9a3b))
+
 ## [1.217.2](https://github.com/raas-dev/configent/compare/1.217.1...1.217.2) (2026-04-18)
 
 
