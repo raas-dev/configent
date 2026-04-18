@@ -173,10 +173,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   }
 
-  # VM already running: skip SSH probe; only restart if cwd is not yet mounted.
+  # VM already running: skip SSH probe; only SSH if mount missing or ro.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
-    if [ -z "$lima_skip_home_mount" ] && ! lima_cwd_is_mounted; then
-      lima_ensure_guest_cwd_writable || exit 1
+    if [ -z "$lima_skip_home_mount" ]; then
+      if ! lima_cwd_is_mounted; then
+        lima_ensure_guest_cwd_writable || exit 1
+      elif ! lima_guest_cwd_writable; then
+        lima_guest_activate_cwd_mount_rw || exit 1
+      fi
     fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     lima_create_instance lima:bridged
