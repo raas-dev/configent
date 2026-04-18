@@ -11,8 +11,6 @@ memory: "8GiB" # default: "4GiB"
 #disk: "100GiB"   # default: "100GiB"
 
 mounts:
-  - location: "~/dev"
-    writable: true
   - location: "~/Downloads"
     writable: true
 

@@ -5,8 +5,6 @@ images:
     arch: aarch64
 
 mounts:
-  - location: "~/dev"
-    writable: true
   - location: "~/Downloads"
     writable: true
 
