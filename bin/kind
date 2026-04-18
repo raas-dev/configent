@@ -150,13 +150,20 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   }
 
-  # VM already running: skip SSH probe; only SSH if mount missing or ro.
-  if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
+  _lima_status=$(limactl list --format '{{.Name}} {{.Status}}' 2>/dev/null |
+    awk -v name="$NAME" '$1 == name { print $2; exit }')
+
+  if [ "$_lima_status" = "Running" ]; then
+    # VM already running: skip SSH probe; only SSH if mount missing or ro.
     if [ -z "$lima_skip_home_mount" ]; then
       if ! lima_guest_cwd_writable; then
         lima_guest_activate_cwd_mount_rw || exit 1
       fi
     fi
+  elif [ -n "$_lima_status" ]; then
+    # VM exists but not running (e.g. Stopped): start it without re-creating.
+    lima_start_mount_only
+    lima_guest_activate_cwd_mount_rw || exit 1
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     lima_create_instance lima:bridged
     lima_guest_activate_cwd_mount_rw || exit 1
