@@ -243,6 +243,16 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if docker_guest_cwd_writable; then
       return 0
     fi
+    printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
+      "$docker_cwd" "$NAME"
+    read -r _restart_answer
+    case "$_restart_answer" in
+    [yY]) ;;
+    *)
+      echo "Skipping restart."
+      return 1
+      ;;
+    esac
     limactl stop "$NAME"
     docker_start_mount_only
     docker_guest_remount_cwd_rw
