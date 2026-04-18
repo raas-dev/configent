@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.0](https://github.com/raas-dev/configent/compare/1.216.22...1.217.0) (2026-04-18)
+
+
+### Features
+
+* **lima:** use rw dir mounts in shims, not ~/dev ([ff1957d](https://github.com/raas-dev/configent/commit/ff1957d0c88eb1a4d8d70ba306eaaeca1ea9a719))
+
+
+### Fixes
+
+* **box:** keep Lima cwd mount writable ([153662e](https://github.com/raas-dev/configent/commit/153662e5c8a247c5e218e37a1286751e68ac5115))
+* **docker:** drop rootless currentContext from config ([95c3b75](https://github.com/raas-dev/configent/commit/95c3b75dd975896527c34e3887fc7f8f83099a94))
+* **docker:** strip currentContext after rootless install ([bcedafe](https://github.com/raas-dev/configent/commit/bcedafe733f4c1d475b99ba5d8ca419375d1ad18))
+* **lima:** drop ~/dev mount from VM configs ([c3eece6](https://github.com/raas-dev/configent/commit/c3eece61a25a3862f5312d7167fa44a199b9d3da))
+* **lima:** skip home mount duplication ([b70b060](https://github.com/raas-dev/configent/commit/b70b060720f321bf63f16716493dd462e615810c))
+* **vimrc:** enable bracketed paste in tmux and screen ([03f7933](https://github.com/raas-dev/configent/commit/03f7933fb80c7b8ca1f6f59887354d423d9a448b))
+
 ## [1.216.22](https://github.com/raas-dev/configent/compare/1.216.21...1.216.22) (2026-04-18)
 
 
