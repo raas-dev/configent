@@ -65,8 +65,21 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         "$NAME:${guest_home}/.codex/auth.json"
   }
 
+  # remove $box_cwd so that the subsequent --mount does not create a duplicate
+  box_remove_cwd_mount() {
+    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+    grep -qF "location: ${box_cwd}" "$lima_instance_yaml" 2>/dev/null || return 0
+    awk -v path="${box_cwd}" '
+      /^- location: / && substr($0, 13) == path { skip=1; next }
+      skip && /^  / { next }
+      { skip=0; print }
+    ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+  }
+
   # --mount-only replaces the full mount list; keep template dirs + cwd rw
   box_start_mount_only() {
+    box_remove_cwd_mount
     limactl start --name "$NAME" --tty=false \
       --mount "${box_cwd}:w"
   }
