@@ -163,15 +163,22 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 
   docker_cwd=$(pwd -P)
+  lima_home=$(cd "$HOME" && pwd -P)
   lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+  lima_skip_home_mount=
+  [ "$docker_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
-  # Drop cwd from lima.yaml so --mount below does not duplicate that mount.
+  # Drop cwd and full-home mounts from lima.yaml so --mount does not duplicate;
+  # never persist a guest mount of \$HOME (security boundary).
   docker_remove_cwd_mount() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    grep -qF "location: ${docker_cwd}" "$lima_instance_yaml" 2>/dev/null ||
-      return 0
-    awk -v path="${docker_cwd}" '
-      /^- location: / && substr($0, 13) == path { skip=1; next }
+    [ -f "$lima_instance_yaml" ] || return 0
+    awk -v path="${docker_cwd}" -v home="${lima_home}" '
+      /^- location: / {
+        loc = substr($0, 13)
+        gsub(/^"|"$/, "", loc)
+        if (loc == path || loc == home || loc == "~") { skip=1; next }
+      }
       skip && /^  / { next }
       { skip=0; print }
       ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
@@ -198,13 +205,20 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   docker_start_mount_only() {
     docker_remove_cwd_mount
-    limactl start --name "$NAME" --tty=false --log-level=warn \
-      --mount "${docker_cwd}:w"
+    if [ -n "$lima_skip_home_mount" ]; then
+      limactl start --name "$NAME" --tty=false --log-level=warn
+    else
+      limactl start --name "$NAME" --tty=false --log-level=warn \
+        --mount "${docker_cwd}:w"
+    fi
   }
 
   # Remount rw (virtiofs often boots ro); if still ro, cold restart then
   # remount again.
   docker_guest_activate_cwd_mount_rw() {
+    if [ -n "$lima_skip_home_mount" ]; then
+      return 0
+    fi
     docker_guest_remount_cwd_rw
     if docker_guest_cwd_writable; then
       return 0
@@ -227,16 +241,28 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   docker_create_instance() {
     net="$1"
-    limactl start --name "$NAME" --tty=false "$lima_yaml" \
-      --vm-type=vz \
-      --network="$net" \
-      --rosetta \
-      --mount "${docker_cwd}:w" \
-      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
-      --set=".env.EMAIL = \"$EMAIL\"" \
-      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
-      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-      docker_start_mount_only
+    if [ -n "$lima_skip_home_mount" ]; then
+      limactl start --name "$NAME" --tty=false "$lima_yaml" \
+        --vm-type=vz \
+        --network="$net" \
+        --rosetta \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+        docker_start_mount_only
+    else
+      limactl start --name "$NAME" --tty=false "$lima_yaml" \
+        --vm-type=vz \
+        --network="$net" \
+        --rosetta \
+        --mount "${docker_cwd}:w" \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+        docker_start_mount_only
+    fi
   }
 
   # Sync lima.yaml + cwd mount every run; remount rw; stop+start if still ro

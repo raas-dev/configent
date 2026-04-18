@@ -26,7 +26,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     exit 127
   fi
   box_cwd=$(pwd -P)
+  lima_home=$(cd "$HOME" && pwd -P)
   lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+  lima_skip_home_mount=
+  [ "$box_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
   # Sync provider credentials from host into the Linux guest via limactl cp
   box_sync_agent_auth_into_vm() {
@@ -65,13 +68,17 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         "$NAME:${guest_home}/.codex/auth.json"
   }
 
-  # Remove $box_cwd so that the subsequent --mount does not create a duplicate
+  # Remove cwd and full-home mounts so --mount does not duplicate; \$HOME stays
+  # off the guest mount list.
   box_remove_cwd_mount() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    grep -qF "location: ${box_cwd}" "$lima_instance_yaml" 2>/dev/null ||
-      return 0
-    awk -v path="${box_cwd}" '
-      /^- location: / && substr($0, 13) == path { skip=1; next }
+    [ -f "$lima_instance_yaml" ] || return 0
+    awk -v path="${box_cwd}" -v home="${lima_home}" '
+      /^- location: / {
+        loc = substr($0, 13)
+        gsub(/^"|"$/, "", loc)
+        if (loc == path || loc == home || loc == "~") { skip=1; next }
+      }
       skip && /^  / { next }
       { skip=0; print }
       ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
@@ -97,13 +104,20 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   box_start_mount_only() {
     box_remove_cwd_mount
-    limactl start --name "$NAME" --tty=false --log-level=warn \
-      --mount "${box_cwd}:w"
+    if [ -n "$lima_skip_home_mount" ]; then
+      limactl start --name "$NAME" --tty=false --log-level=warn
+    else
+      limactl start --name "$NAME" --tty=false --log-level=warn \
+        --mount "${box_cwd}:w"
+    fi
   }
 
   # Remount rw (virtiofs often boots ro); if still ro, cold restart then remount
   # again.
   box_guest_activate_cwd_mount_rw() {
+    if [ -n "$lima_skip_home_mount" ]; then
+      return 0
+    fi
     box_guest_remount_cwd_rw
     if box_guest_cwd_writable; then
       return 0
@@ -125,16 +139,28 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   }
   box_create_instance() {
     net="$1"
-    limactl start --name "$NAME" --tty=false "$lima_yaml" \
-      --vm-type=vz \
-      --network="$net" \
-      --rosetta \
-      --mount "${box_cwd}:w" \
-      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
-      --set=".env.EMAIL = \"$EMAIL\"" \
-      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
-      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-      box_start_mount_only
+    if [ -n "$lima_skip_home_mount" ]; then
+      limactl start --name "$NAME" --tty=false "$lima_yaml" \
+        --vm-type=vz \
+        --network="$net" \
+        --rosetta \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+        box_start_mount_only
+    else
+      limactl start --name "$NAME" --tty=false "$lima_yaml" \
+        --vm-type=vz \
+        --network="$net" \
+        --rosetta \
+        --mount "${box_cwd}:w" \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+        box_start_mount_only
+    fi
   }
 
   # Sync lima.yaml + cwd mount every run; remount rw; stop+start if still ro
