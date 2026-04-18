@@ -267,7 +267,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if docker_guest_cwd_writable; then
       return 0
     fi
+    _docker_cwd_existed=
     if docker_guest_cwd_exists; then
+      _docker_cwd_existed=1
       printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
         "$docker_cwd" "$NAME"
     else
@@ -279,6 +281,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [yY]) ;;
     *)
       echo "Skipping restart."
+      [ -z "$_docker_cwd_existed" ] && docker_remove_cwd_mount
       return 1
       ;;
     esac
@@ -327,14 +330,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # VM already running: skip SSH probe; only restart if cwd is not yet mounted.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     if [ -z "$lima_skip_home_mount" ] && ! docker_cwd_is_mounted; then
-      docker_ensure_guest_cwd_writable
+      docker_ensure_guest_cwd_writable || exit 1
     fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     docker_create_instance lima:bridged
-    docker_guest_activate_cwd_mount_rw
+    docker_guest_activate_cwd_mount_rw || exit 1
   else
     docker_create_instance vzNAT
-    docker_guest_activate_cwd_mount_rw
+    docker_guest_activate_cwd_mount_rw || exit 1
   fi
   # macOS priority: mise, homebrew
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then

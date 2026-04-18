@@ -158,7 +158,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if lima_guest_cwd_writable; then
       return 0
     fi
+    _lima_cwd_existed=
     if lima_guest_cwd_exists; then
+      _lima_cwd_existed=1
       printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
         "$lima_cwd" "$NAME"
     else
@@ -170,6 +172,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [yY]) ;;
     *)
       echo "Skipping restart."
+      [ -z "$_lima_cwd_existed" ] && lima_remove_cwd_mount
       return 1
       ;;
     esac
@@ -218,14 +221,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # VM already running: skip SSH probe; only restart if cwd is not yet mounted.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     if [ -z "$lima_skip_home_mount" ] && ! lima_cwd_is_mounted; then
-      lima_ensure_guest_cwd_writable
+      lima_ensure_guest_cwd_writable || exit 1
     fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     lima_create_instance lima:bridged
-    lima_guest_activate_cwd_mount_rw
+    lima_guest_activate_cwd_mount_rw || exit 1
   else
     lima_create_instance vzNAT
-    lima_guest_activate_cwd_mount_rw
+    lima_guest_activate_cwd_mount_rw || exit 1
   fi
 
   # macOS priority: mise, homebrew

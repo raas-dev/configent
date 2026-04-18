@@ -166,7 +166,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     if box_guest_cwd_writable; then
       return 0
     fi
+    _box_cwd_existed=
     if box_guest_cwd_exists; then
+      _box_cwd_existed=1
       printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
         "$box_cwd" "$NAME"
     else
@@ -178,6 +180,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [yY]) ;;
     *)
       echo "Skipping restart."
+      [ -z "$_box_cwd_existed" ] && box_remove_cwd_mount
       return 1
       ;;
     esac
@@ -225,14 +228,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # VM already running: skip SSH probe; only restart if cwd is not yet mounted.
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     if [ -z "$lima_skip_home_mount" ] && ! box_cwd_is_mounted; then
-      box_ensure_guest_cwd_writable
+      box_ensure_guest_cwd_writable || exit 1
     fi
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
     box_create_instance lima:bridged
-    box_guest_activate_cwd_mount_rw
+    box_guest_activate_cwd_mount_rw || exit 1
   else
     box_create_instance vzNAT
-    box_guest_activate_cwd_mount_rw
+    box_guest_activate_cwd_mount_rw || exit 1
   fi
 
   export LIMA_SHELLENV_BLOCK='*'
