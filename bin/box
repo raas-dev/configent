@@ -65,10 +65,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         "$NAME:${guest_home}/.codex/auth.json"
   }
 
-  # remove $box_cwd so that the subsequent --mount does not create a duplicate
+  # Remove $box_cwd so that the subsequent --mount does not create a duplicate
   box_remove_cwd_mount() {
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    grep -qF "location: ${box_cwd}" "$lima_instance_yaml" 2>/dev/null || return 0
+    grep -qF "location: ${box_cwd}" "$lima_instance_yaml" 2>/dev/null ||
+      return 0
     awk -v path="${box_cwd}" '
       /^- location: / && substr($0, 13) == path { skip=1; next }
       skip && /^  / { next }
@@ -77,7 +78,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }
 
-  # --mount-only replaces the full mount list; keep template dirs + cwd rw
+  # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   box_start_mount_only() {
     box_remove_cwd_mount
     limactl start --name "$NAME" --tty=false \
@@ -97,7 +98,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       box_start_mount_only
   }
 
-  # Sync mounts whenever the instance exists (also when already running)
+  # Sync mounts whenever the instance exists (if running, requires a restart)
   if limactl list -q 2>/dev/null | grep -qx "$NAME"; then
     box_start_mount_only
   elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
