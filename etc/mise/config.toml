@@ -50,6 +50,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 # ai coding harnesses
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
+'github:superradcompany/microsandbox' = 'latest'
 'github:vercel-labs/agent-browser' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:@different-ai/opencode-browser' = 'latest'
