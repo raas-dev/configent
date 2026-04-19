@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.5](https://github.com/raas-dev/configent/compare/1.217.4...1.217.5) (2026-04-19)
+
+
+### Fixes
+
+* **box:** pass Claude Code OAuth token ([e23e8cc](https://github.com/raas-dev/configent/commit/e23e8ccd5e3956724bbe1be3b69ff41eec72b528))
+* **docker:** respect currentContext when selecting DOCKER_HOST ([84a1b64](https://github.com/raas-dev/configent/commit/84a1b64682119c3a46e45160524d48deb5df4eaa))
+
 ## [1.217.4](https://github.com/raas-dev/configent/compare/1.217.3...1.217.4) (2026-04-18)
 
 
