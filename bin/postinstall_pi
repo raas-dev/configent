@@ -139,3 +139,16 @@ if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
 fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
+
+### extensions #################################################################
+
+# (pre-)install or update extensions
+if command -v pi >/dev/null; then
+  pi_bin=$(command -v pi)
+  pi_update_log="$HOME/.postinstall-pi.log"
+  {
+    printf '%s\n' "--- $(date -u +'%Y-%m-%dT%H:%M:%SZ') ---"
+    printf '%s\n' "pi path: $pi_bin"
+    pi update
+  } >>"$pi_update_log" 2>&1
+fi

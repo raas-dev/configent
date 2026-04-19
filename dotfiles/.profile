@@ -430,6 +430,9 @@ export VERCEL_TELEMETRY_DISABLED=1
 # rtk
 export RTK_TELEMETRY_DISABLED=1
 
+# pi
+export PI_TELEMETRY=0
+
 # headroom
 export HEADROOM_TELEMETRY=off
 
