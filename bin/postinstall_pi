@@ -142,14 +142,5 @@ ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
 
 ### extensions #################################################################
 
-# (pre-)install or update extensions
-pi_update_log="$HOME/.postinstall-pi.log"
-{
-  printf '%s\n' "--- $(date -u +'%Y-%m-%dT%H:%M:%SZ') ---"
-  printf '%s\n' "pi path: $(command -v pi)"
-  if command -v mise >/dev/null; then
-    mise exec node -- pi update
-  else
-    pi update
-  fi
-} >>"$pi_update_log" 2>&1
+# (pre-)install or update extensions (requires npm in PATH)
+command -v mise >/dev/null && mise exec node -- pi update
