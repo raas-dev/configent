@@ -346,12 +346,38 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
+  # Order: prefer rootful unless DOCKER_HOST is already set, or unless
+  # DOCKER_CONTEXT / config.json currentContext indicates rootless (*rootless*).
+  # DOCKER_CONTEXT overrides currentContext (Docker CLI env docs).
+  docker_config="${DOCKER_CONFIG:-$HOME/.docker}/config.json"
+  current_context=
+  if [ -f "$docker_config" ]; then
+    current_context=$(
+      tr -d '\n' <"$docker_config" 2>/dev/null |
+        sed -n 's/.*"currentContext"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p'
+    )
+  fi
+  effective_context="${DOCKER_CONTEXT:-$current_context}"
+
   if [ -z "$DOCKER_HOST" ]; then
-    if [ -S "/var/run/docker.sock" ]; then
-      export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
-    elif [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
-      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
-    fi
+    case "$effective_context" in
+    *rootless*)
+      if [ -n "${XDG_RUNTIME_DIR:-}" ] &&
+        [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
+        export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
+      elif [ -S "/var/run/docker.sock" ]; then
+        export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
+      fi
+      ;;
+    *)
+      if [ -S "/var/run/docker.sock" ]; then
+        export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
+      elif [ -n "${XDG_RUNTIME_DIR:-}" ] &&
+        [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
+        export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
+      fi
+      ;;
+    esac
   fi
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
     # user-wide docker-cli installation (mise registry)
