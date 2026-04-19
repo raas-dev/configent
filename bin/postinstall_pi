@@ -143,4 +143,4 @@ ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
 ### extensions #################################################################
 
 # (pre-)install or update extensions
-command -v pi >/dev/null && pi update
+command -v mise >/dev/null && mise exec pi -- pi update
