@@ -434,6 +434,9 @@ alias jiq='mise exec github:bellicose100xp/jiq -- jiq'
 # A terminal-based battery and energy monitor for macOS and Linux
 alias jolt='mise exec github:jordond/jolt -- jolt'
 
+# Justfile runner
+alias just='mise exec just -- just'
+
 # Scriptable load testing tool
 alias k6='mise exec k6 -- k6'
 
