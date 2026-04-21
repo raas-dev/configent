@@ -1,7 +1,7 @@
 {
   "collapseChangelog": true,
-  "defaultModel": "MiniMax-M2.7",
-  "defaultProvider": "minimax",
+  "defaultModel": "glm-5.1",
+  "defaultProvider": "zai",
   "lastChangelogVersion": "0.67.68",
   "packages": [
     "npm:pi-ask-user",
@@ -32,5 +32,5 @@
   "transport": "auto",
   "powerline": "default",
   "hideThinkingBlock": true,
-  "defaultThinkingLevel": "high"
+  "defaultThinkingLevel": "medium"
 }
