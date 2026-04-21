@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.7](https://github.com/raas-dev/configent/compare/1.217.6...1.217.7) (2026-04-21)
+
+
+### Fixes
+
+* **box:** remount cwd rw before cold restart ([d738066](https://github.com/raas-dev/configent/commit/d738066434819f3b86fe087439351fa6304c432b))
+
 ## [1.217.6](https://github.com/raas-dev/configent/compare/1.217.5...1.217.6) (2026-04-21)
 
 
