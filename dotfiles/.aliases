@@ -527,6 +527,9 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 # Reactive notebook
 alias marimo='uvx marimo'
 
+# Speckit (AI code assistant)
+alias specify='uvx --from git+https://github.com/github/spec-kit.git specify'
+
 ### dev
 
 # Command-line utility for rendering projects templates
