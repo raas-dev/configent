@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.6](https://github.com/raas-dev/configent/compare/1.217.5...1.217.6) (2026-04-21)
+
+
+### Fixes
+
+* **box:** cold-restart cwd mount when not writable ([7b4c09d](https://github.com/raas-dev/configent/commit/7b4c09df2bd454404c3ca50df80683fa3c858202))
+* **dotfiles:** replace pik with rip ([92e0ec7](https://github.com/raas-dev/configent/commit/92e0ec727275d31d44468e89e496827fdca284b5))
+
 ## [1.217.5](https://github.com/raas-dev/configent/compare/1.217.4...1.217.5) (2026-04-19)
 
 
