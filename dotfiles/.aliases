@@ -594,6 +594,9 @@ alias mcpjam='bunx @mcpjam/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
+# Lightweight spec-driven framework (https://openspec.dev/)
+alias openspec='bunx @fission-ai/openspec'
+
 # Shorthand for pnpm
 alias pn='bunx pnpm'
 
@@ -603,7 +606,7 @@ alias projen='bunx projen'
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
-# Agent Skills installer: https://skills.sh
+# Agent Skills installer (https://skills.sh)
 alias skills='bunx skills'
 
 # Sort a package.json based on the well-known keys
