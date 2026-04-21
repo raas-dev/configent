@@ -1052,9 +1052,11 @@ tl() {
 
 # Npm remove all global packages (except npm itself)
 npmclear() {
-  npm ls --location=global -p --depth=0 |
-    awk -F/node_modules/ 'NF>1 && $2!="npm" {print $2}' |
-    xargs npm --location=global rm
+  local pkgs
+  pkgs=$(npm ls --location=global -p --depth=0 |
+    awk -F/node_modules/ 'NF>1 && $2!="npm" {print $2}')
+  [ -z "$pkgs" ] && return 0
+  printf '%s\n' "$pkgs" | xargs npm --location=global rm
 }
 
 # Gem remove all
