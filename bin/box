@@ -119,13 +119,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       _ "$lima_cwd" >/dev/null 2>&1
   }
 
-  # virtiofs often comes up ro after boot even when lima.yaml has writable:
-  # true; remount rw avoids a pointless stop/start loop.
-  lima_guest_remount_cwd_rw() {
-    limactl shell --tty=false "$NAME" -- sudo mount -o remount,rw "$lima_cwd" \
-      >/dev/null 2>&1 || true
-  }
-
   # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
   lima_start_mount_only() {
     lima_remove_nonexistent_mounts
@@ -138,13 +131,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     fi
   }
 
-  # Remount rw (virtiofs often boots ro); if still ro, cold restart then remount
-  # again.
+  # If cwd is not writable, offer a cold restart (e.g. virtiofs ro after boot).
   lima_guest_activate_cwd_mount_rw() {
     if [ -n "$lima_skip_home_mount" ]; then
       return 0
     fi
-    lima_guest_remount_cwd_rw
     if lima_guest_cwd_writable; then
       return 0
     fi
@@ -168,7 +159,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     esac
     limactl stop "$NAME"
     lima_start_mount_only
-    lima_guest_remount_cwd_rw
     if lima_guest_cwd_writable; then
       return 0
     fi
