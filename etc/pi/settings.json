@@ -11,7 +11,6 @@
     "npm:pi-manage-todo-list",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
-    "npm:pi-powerline-footer",
     "npm:pi-rewind",
     "npm:pi-rtk-optimizer",
     "npm:pi-session-switch",
@@ -23,6 +22,7 @@
     "npm:@ogulcancelik/pi-ghost",
     "npm:@siddr/pi-review",
     "npm:@ssweens/pi-handoff",
+    "git:github.com/asyrjasalo/pi-powerline-footer",
     "git:github.com/asyrjasalo/pi-run-code",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman"
