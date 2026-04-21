@@ -2,7 +2,7 @@
   "collapseChangelog": true,
   "defaultModel": "glm-5.1",
   "defaultProvider": "zai",
-  "lastChangelogVersion": "0.67.68",
+  "lastChangelogVersion": "0.68.0",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-hodor",
@@ -21,6 +21,7 @@
     "npm:@aliou/pi-processes",
     "npm:@latent-variable/pi-auto-continue",
     "npm:@ogulcancelik/pi-ghost",
+    "npm:@siddr/pi-review",
     "npm:@ssweens/pi-handoff",
     "git:github.com/asyrjasalo/pi-run-code",
     "git:github.com/iodic/pi-ayu-themes",
