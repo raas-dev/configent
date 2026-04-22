@@ -116,6 +116,18 @@ mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
+### pi-mono-status-line ########################################################
+
+# status-line.json
+if [ ! -r "$backup_path/.pi/agent/status-line.json" ]; then
+  if [ -r "$HOME/.pi/agent/status-line.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/status-line.json" "$backup_path/.pi/agent/status-line.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/status-line.json" "$HOME/.pi/agent/status-line.json"
+
 ### pi-web-access ##############################################################
 
 # web-search.json
