@@ -2,6 +2,9 @@
   "collapseChangelog": true,
   "defaultModel": "glm-5.1",
   "defaultProvider": "zai",
+  "defaultThinkingLevel": "medium",
+  "enableInstallTelemetry": false,
+  "hideThinkingBlock": true,
   "lastChangelogVersion": "0.68.1",
   "packages": [
     "npm:pi-ask-user",
@@ -28,11 +31,11 @@
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman"
   ],
-  "quietStartup": true,
-  "theme": "ayu-dark",
-  "showHardwareCursor": true,
-  "transport": "auto",
   "powerline": "default",
-  "hideThinkingBlock": true,
-  "defaultThinkingLevel": "medium"
+  "quietStartup": true,
+  "showHardwareCursor": true,
+  "steeringMode": "all",
+  "theme": "ayu-dark",
+  "transport": "auto",
+  "treeFilterMode": "user-only"
 }
