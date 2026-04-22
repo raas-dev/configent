@@ -79,7 +79,7 @@ designed for humans, without needing a display or mouse.
      from cli_anything.<software>.utils.repl_skin import ReplSkin
 
      skin = ReplSkin("<software>", version="1.0.0")
-     skin.print_banner()          # Branded startup box (auto-detects skills/SKILL.md)
+     skin.print_banner()          # Branded startup box (prefers repo-root skills/, falls back to package)
      pt_session = skin.create_prompt_session()  # prompt_toolkit with history + styling
      line = skin.get_input(pt_session, project_name="my_project", modified=True)
      skin.help(commands_dict)     # Formatted help listing
@@ -92,8 +92,10 @@ designed for humans, without needing a display or mouse.
      skin.progress(3, 10, "...")  # Progress bar
      skin.print_goodbye()         # Styled exit message
      ```
-   - ReplSkin auto-detects `skills/SKILL.md` inside the package directory and displays
-     it in the banner. AI agents can read the skill file at the displayed absolute path.
+   - ReplSkin prefers the repo-root canonical `skills/cli-anything-<software>/SKILL.md`
+     when running inside this monorepo, and falls back to the packaged
+     `cli_anything/<software>/skills/SKILL.md` copy when installed elsewhere.
+     AI agents can read the skill file at the displayed absolute path.
    - Make REPL the default behavior: use `invoke_without_command=True` on the main
      Click group, and invoke the `repl` command when no subcommand is given:
      ```python
@@ -257,8 +259,10 @@ automatically, or customize via the Jinja2 template at `templates/SKILL.md.templ
 See [`guides/skill-generation.md`](guides/skill-generation.md) for the full generation
 process, template customization options, and manual generation commands.
 
-**Output Location:** SKILL.md lives inside the Python package at
-`cli_anything/<software>/skills/SKILL.md` so it is installed with `pip install`.
+**Output Location:** The canonical skill lives at
+`skills/cli-anything-<software>/SKILL.md`. A compatibility copy is also written to
+`cli_anything/<software>/skills/SKILL.md` so installed harnesses still ship a
+local skill file.
 
 **Key Principles:**
 
@@ -270,9 +274,9 @@ process, template customization options, and manual generation commands.
 
 **Skill Path in CLI Banner:**
 
-ReplSkin auto-detects `skills/SKILL.md` inside the package directory and displays
-the absolute path in the startup banner. AI agents can read the skill file at the
-displayed path to learn the CLI's full capabilities.
+ReplSkin prefers the repo-root canonical skill path and falls back to the
+packaged `skills/SKILL.md` copy. AI agents can read the displayed path to learn
+the CLI's full capabilities.
 
 **Package Data:** Ensure `setup.py` includes the skill file so it ships with pip:
 

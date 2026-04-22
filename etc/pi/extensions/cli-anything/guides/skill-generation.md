@@ -41,7 +41,7 @@ from skill_generator import generate_skill_file
 skill_path = generate_skill_file(
     harness_path="/path/to/agent-harness"
 )
-# Default output: cli_anything/<software>/skills/SKILL.md
+# Default output: skills/cli-anything-<software>/SKILL.md
 ```
 
 ### 2. The generator automatically extracts:
@@ -59,9 +59,14 @@ skill_path = generate_skill_file(
 
 ## Output Location
 
-SKILL.md is generated inside the Python package so it is installed with `pip install`:
+SKILL.md is generated canonically at the repo root, with a packaged compatibility
+copy for installed harnesses:
 
 ```
+skills/
+└── cli-anything-<software>/
+    └── SKILL.md
+
 <software>/
 └── agent-harness/
     └── cli_anything/
@@ -93,15 +98,16 @@ skill definition.
 
 ## Skill Path in CLI Banner
 
-ReplSkin auto-detects `skills/SKILL.md` inside the package and displays the absolute
-path in the startup banner. AI agents can read the file at the displayed path:
+ReplSkin prefers the repo-root canonical skill file and falls back to the
+packaged copy, displaying whichever absolute path is available in the startup
+banner. AI agents can read the file at the displayed path:
 
 ```python
 # In the REPL initialization (e.g., shortcut_cli.py)
 from cli_anything.<software>.utils.repl_skin import ReplSkin
 
 skin = ReplSkin("<software>", version="1.0.0")
-skin.print_banner()  # Auto-detects and displays: ◇ Skill: /path/to/cli_anything/<software>/skills/SKILL.md
+skin.print_banner()  # Displays repo-root skills/cli-anything-<software>/SKILL.md when available
 ```
 
 ## Package Data
