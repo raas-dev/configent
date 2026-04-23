@@ -128,6 +128,16 @@ mkdir -p "$HOME/.omp/agent/themes"
 rm -rf "$HOME/.omp/agent/themes"
 ln -sfnv "$config_path/omp/themes" "$HOME/.omp/agent/themes"
 
+# marketplaces.json
+if [ ! -r "$backup_path/.omp/marketplaces.json" ]; then
+  if [ -r "$HOME/.omp/marketplaces.json" ]; then
+    mkdir -p "$backup_path/.omp"
+    cp -P "$HOME/.omp/marketplaces.json" "$backup_path/.omp/marketplaces.json"
+  fi
+fi
+mkdir -p "$HOME/.pi"
+ln -sfnv "$config_path/omp/marketplaces.json" "$HOME/.omp/marketplaces.json"
+
 ### ~/.agents dir ##############################################################
 
 if [ ! -r "$backup_path/.agents" ]; then
@@ -139,15 +149,3 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
-
-### omp-pi-install #############################################################
-
-# pi-plugins.json
-if [ ! -r "$backup_path/.omp/agent/pi-plugins.json" ]; then
-  if [ -r "$HOME/.omp/agent/pi-plugins.json" ]; then
-    mkdir -p "$backup_path/.omp/agent"
-    cp -P "$HOME/.omp/agent/pi-plugins.json" "$backup_path/.omp/agent/pi-plugins.json"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent"
-ln -sfnv "$config_path/omp/pi-plugins.json" "$HOME/.omp/agent/pi-plugins.json"
