@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.217.8](https://github.com/raas-dev/configent/compare/1.217.7...1.217.8) (2026-04-23)
+
+
+### Fixes
+
+* **dotfiles:** guard npmclear on empty package list ([0e7723f](https://github.com/raas-dev/configent/commit/0e7723f004400105ac62855bc3f7cf129afbcfa4))
+
 ## [1.217.7](https://github.com/raas-dev/configent/compare/1.217.6...1.217.7) (2026-04-21)
 
 
