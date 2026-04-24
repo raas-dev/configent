@@ -18,7 +18,6 @@
     "npm:pi-rewind",
     "npm:pi-rtk-optimizer",
     "npm:pi-session-switch",
-    "npm:pi-subagents",
     "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
@@ -36,34 +35,6 @@
   "quietStartup": true,
   "showHardwareCursor": true,
   "steeringMode": "all",
-  "subagents": {
-    "agentOverrides": {
-      "context-builder": {
-        "model": "zai/glm-5.1"
-      },
-      "oracle": {
-        "model": "zai/glm-5.1"
-      },
-      "oracle-executor": {
-        "model": "zai/glm-5.1"
-      },
-      "planner": {
-        "model": "zai/glm-5.1"
-      },
-      "researcher": {
-        "model": "zai/glm-5.1"
-      },
-      "reviewer": {
-        "model": "zai/glm-5.1"
-      },
-      "scout": {
-        "model": "zai/glm-5-turbo"
-      },
-      "worker": {
-        "model": "zai/glm-5.1"
-      }
-    }
-  },
   "theme": "ayu-dark",
   "transport": "auto",
   "treeFilterMode": "user-only"
