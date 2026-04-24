@@ -128,16 +128,6 @@ mkdir -p "$HOME/.omp/agent/themes"
 rm -rf "$HOME/.omp/agent/themes"
 ln -sfnv "$config_path/omp/themes" "$HOME/.omp/agent/themes"
 
-# marketplaces.json
-if [ ! -r "$backup_path/.omp/marketplaces.json" ]; then
-  if [ -r "$HOME/.omp/marketplaces.json" ]; then
-    mkdir -p "$backup_path/.omp"
-    cp -P "$HOME/.omp/marketplaces.json" "$backup_path/.omp/marketplaces.json"
-  fi
-fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/omp/marketplaces.json" "$HOME/.omp/marketplaces.json"
-
 ### ~/.agents dir ##############################################################
 
 if [ ! -r "$backup_path/.agents" ]; then
