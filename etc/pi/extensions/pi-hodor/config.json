@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "retryMessage": "continue",
+  "maxConsecutiveAutoRetries": 99,
+  "notifyOnAutoContinue": true,
+  "autoContinueOnLength": true,
+  "autoContinueOnThinkingOnlyStop": true,
+  "autoContinueOnSilentStopAfterTool": true,
+  "errorPatterns": [
+    "error decoding response body",
+    "stream disconnected before completion",
+    "stream closed before",
+    "stream closed unexpectedly",
+    "stream interrupted",
+    "stream ended unexpectedly",
+    "premature close",
+    "socket hang up",
+    "connection reset by peer",
+    "connection reset",
+    "read ECONNRESET",
+    "ECONNRESET",
+    "ETIMEDOUT",
+    "fetch failed",
+    "unexpected end of JSON input",
+    "unexpected end of input"
+  ]
+}
