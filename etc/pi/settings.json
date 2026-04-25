@@ -41,7 +41,6 @@
         "extensions/editor-enhancements/index.ts",
         "extensions/handover/index.ts",
         "extensions/model-aware-compaction/index.ts",
-        "extensions/session-ask/index.ts",
         "extensions/session-switch/index.ts",
         "extensions/files-touched.ts",
         "extensions/fork-from-first.ts",
