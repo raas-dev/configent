@@ -8,6 +8,7 @@
   "lastChangelogVersion": "0.70.2",
   "packages": [
     "npm:pi-ask-user",
+    "npm:pi-headroom",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-interview",
