@@ -56,7 +56,6 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 #'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
-'pipx:headroom-ai' = { version = 'latest', extras = 'proxy' }
 'pipx:skill-seekers' = 'latest'
 
 # github
