@@ -135,6 +135,15 @@
       "skillFolderHash": "ef60f77564e2d47d0cba25a809daa3af8f0c469b",
       "installedAt": "2026-04-24T22:30:37.673Z",
       "updatedAt": "2026-04-24T22:30:37.673Z"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "grill-me/SKILL.md",
+      "skillFolderHash": "2a1ad17028306ebe45f0e49703fa28b9b2e7f499",
+      "installedAt": "2026-04-25T10:56:46.794Z",
+      "updatedAt": "2026-04-25T10:56:46.794Z"
     }
   },
   "dismissed": {
