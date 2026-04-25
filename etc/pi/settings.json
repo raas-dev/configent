@@ -1,6 +1,9 @@
 {
   "autocompleteMaxVisible": 15,
   "collapseChangelog": true,
+  "compaction": {
+    "enabled": true
+  },
   "defaultModel": "glm-5.1",
   "defaultProvider": "zai",
   "defaultThinkingLevel": "medium",
@@ -10,7 +13,6 @@
   "lastChangelogVersion": "0.70.2",
   "packages": [
     "npm:pi-ask-user",
-    "npm:pi-handoff",
     "npm:pi-headroom",
     "npm:pi-hodor",
     "npm:pi-image-tools",
@@ -20,7 +22,6 @@
     "npm:pi-mono-status-line",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
-    "npm:pi-session-switch",
     "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
@@ -32,7 +33,23 @@
     "npm:@sting8k/pi-vcc",
     "git:github.com/asyrjasalo/pi-run-code",
     "git:github.com/iodic/pi-ayu-themes",
-    "git:github.com/jonjonrankin/pi-caveman"
+    "git:github.com/jonjonrankin/pi-caveman",
+    {
+      "extensions": [
+        "extensions/anycopy/index.ts",
+        "extensions/branch-out/index.ts",
+        "extensions/editor-enhancements/index.ts",
+        "extensions/handover/index.ts",
+        "extensions/model-aware-compaction/index.ts",
+        "extensions/session-ask/index.ts",
+        "extensions/session-switch/index.ts",
+        "extensions/files-touched.ts",
+        "extensions/fork-from-first.ts",
+        "extensions/md.ts",
+        "extensions/plan-mode.ts"
+      ],
+      "source": "git:github.com/asyrjasalo/pi-extensions"
+    }
   ],
   "powerline": "default",
   "quietStartup": true,
