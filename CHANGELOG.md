@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.0](https://github.com/raas-dev/configent/compare/1.217.8...1.218.0) (2026-04-25)
+
+
+### Features
+
+* **pi:** add profile switcher and bundled profiles ([d3d69c1](https://github.com/raas-dev/configent/commit/d3d69c1b5a7b53ff459e99d3a573a56530110ce3))
+
+
+### Fixes
+
+* **caveman:** block sensitive files from compression ([03f20b0](https://github.com/raas-dev/configent/commit/03f20b0d92a45502d634a2bb6d900038860a649b))
+* copy hidden profile files in profile switches ([76d8c45](https://github.com/raas-dev/configent/commit/76d8c45935a85c66b86f435a9498ab37ce2286e0))
+* **pic:** remove .pi/npm on profile reinit ([a0fb76f](https://github.com/raas-dev/configent/commit/a0fb76fe8d834816c39c3d84b2eb645851e2d0a8))
+
 ## [1.217.8](https://github.com/raas-dev/configent/compare/1.217.7...1.217.8) (2026-04-23)
 
 
