@@ -15,7 +15,7 @@
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-mono-status-line",
-    "npm:pi-rewind",
+    "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
     "npm:pi-session-switch",
     "npm:pi-token-burden",
@@ -33,6 +33,14 @@
   ],
   "powerline": "default",
   "quietStartup": true,
+  "rewind": {
+    "retention": {
+      "maxAgeDays": 30,
+      "maxSnapshots": 2000,
+      "pinLabeledEntries": true
+    },
+    "silentCheckpoints": true
+  },
   "showHardwareCursor": true,
   "steeringMode": "all",
   "theme": "ayu-dark",
