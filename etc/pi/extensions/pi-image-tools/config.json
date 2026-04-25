@@ -1,7 +1,7 @@
 {
   "debug": false,
   "shortcuts": {
-    "pasteImage": ["ctrl+v"],
+    "pasteImage": "ctrl+v",
     "avoidBuiltinConflicts": true,
     "suppressBuiltinConflictWarnings": false
   }
