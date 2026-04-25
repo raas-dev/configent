@@ -1,4 +1,4 @@
-lastChangelogVersion: 14.2.1
+lastChangelogVersion: 14.3.0
 modelRoles:
   default: zai/glm-5.1
   smol: zai/glm-5-turbo
@@ -17,6 +17,8 @@ calc:
 commands:
   enableClaudeProject: false
   enableClaudeUser: false
+  enableOpencodeUser: false
+  enableOpencodeProject: false
 providers:
   webSearch: exa
   image: auto
@@ -33,7 +35,7 @@ task:
   isolation:
     mode: none
 interruptMode: immediate
-followUpMode: all
+followUpMode: one-at-a-time
 startup:
   quiet: true
   checkUpdate: false
@@ -61,9 +63,14 @@ completion:
   notify: "on"
 compaction:
   strategy: context-full
-  thresholdPercent: -1
+  thresholdPercent: 60
+  thresholdTokens: -1
 bash:
   autoBackground:
     enabled: true
 dev:
   autoqa: false
+treeFilterMode: user-only
+autocompleteMaxVisible: 20
+shellMinimizer:
+  enabled: true
