@@ -5,11 +5,12 @@
     "enabled": true
   },
   "defaultModel": "glm-5.1",
-  "defaultProvider": "opencode-go",
+  "defaultProvider": "zai",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enabledModels": [
-    "glm-5*"
+    "zai/glm-5*",
+    "minimax/MiniMax-M2.7"
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": false,
