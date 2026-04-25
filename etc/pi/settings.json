@@ -42,9 +42,11 @@
         "extensions/handover/index.ts",
         "extensions/model-aware-compaction/index.ts",
         "extensions/session-switch/index.ts",
+        "extensions/tools/index.ts",
         "extensions/files-touched.ts",
         "extensions/fork-from-first.ts",
         "extensions/md.ts",
+        "extensions/move-session.ts",
         "extensions/plan-mode.ts"
       ],
       "source": "git:github.com/asyrjasalo/pi-extensions"
