@@ -1,8 +1,5 @@
 {
   "app.message.followUp": "alt+enter",
-  "app.model.cycleForward": [],
-  "app.models.toggleProvider": [],
-  "app.session.togglePath": [],
   "tui.input.newLine": [
     "shift+enter",
     "ctrl+j"

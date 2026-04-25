@@ -4,12 +4,12 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "glm-5.1",
-  "defaultProvider": "zai",
+  "defaultModel": "gpt-5-mini",
+  "defaultProvider": "github-copilot",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
-  "hideThinkingBlock": true,
+  "hideThinkingBlock": false,
   "lastChangelogVersion": "0.70.2",
   "packages": [
     "npm:pi-ask-user",
