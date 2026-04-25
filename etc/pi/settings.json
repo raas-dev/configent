@@ -4,8 +4,8 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "gpt-5-mini",
-  "defaultProvider": "github-copilot",
+  "defaultModel": "glm-5.1",
+  "defaultProvider": "zai",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
