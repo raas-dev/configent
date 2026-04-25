@@ -385,6 +385,7 @@ switch_to_profile() {
   # Handle file cleanup based on command type
   if [[ "$is_init_cmd" == "true" ]]; then
     # init command: remove all files that don't exist in the new profile
+    shopt -s dotglob nullglob
     for existing_file in "$PROJECT_CONFIG_DIR"/*; do
       if [[ -f "$existing_file" ]]; then
         local existing_basename
@@ -398,9 +399,11 @@ switch_to_profile() {
         fi
       fi
     done
+    shopt -u dotglob nullglob
   else
     # use command: only remove conflicting files (same basename, different extension)
     # Keep all other files from old profile
+    shopt -s dotglob nullglob
     for profile_file in "$profile_dir"/*; do
       if [[ -f "$profile_file" ]]; then
         local filename
@@ -419,6 +422,7 @@ switch_to_profile() {
         done
       fi
     done
+    shopt -u dotglob nullglob
   fi
 
   # Ensure project config directory exists
@@ -432,7 +436,8 @@ switch_to_profile() {
   fi
 
   # Copy all files and directories from the selected profile directory to the project config directory
-  if cp -r "$profile_dir"/* "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
+  # (/. includes hidden entries; * alone omits dotfiles on first level)
+  if cp -R "$profile_dir"/. "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
     # Only save metadata if profile hash differs from project hash (something changed)
     # DEBUG: Uncomment next line to see hashes
     # echo "DEBUG: profile_hash='$profile_hash' project_hash='$project_hash'"
@@ -683,7 +688,7 @@ if [[ $# -gt 0 ]]; then
     }
 
     # Copy profile files to temporary .opencode
-    if ! cp -r "$exec_profile_dir"/* "$temp_opencode_dir/" 2>/dev/null; then
+    if ! cp -R "$exec_profile_dir"/. "$temp_opencode_dir/" 2>/dev/null; then
       echo -e "${YELLOW}Error: Failed to copy profile files${NC}" >&2
       exit 1
     fi
