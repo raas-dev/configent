@@ -38,7 +38,8 @@ ln -sfnv "$config_path/pi/mcp.json" "$HOME/.pi/agent/mcp.json"
 if [ ! -r "$backup_path/.pi/agent/keybindings.json" ]; then
   if [ -r "$HOME/.pi/agent/keybindings.json" ]; then
     mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/keybindings.json" "$backup_path/.pi/agent/keybindings.json"
+    cp -P "$HOME/.pi/agent/keybindings.json" \
+      "$backup_path/.pi/agent/keybindings.json"
   fi
 fi
 mkdir -p "$HOME/.pi/agent"
@@ -128,17 +129,44 @@ mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
+### pi-caveman #################################################################
+
+# caveman.json
+if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
+  if [ -r "$HOME/.pi/agent/caveman.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
+  fi
+fi
+mkdir -p "$HOME/.pi"
+ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
+
 ### pi-mono-status-line ########################################################
 
 # status-line.json
 if [ ! -r "$backup_path/.pi/agent/status-line.json" ]; then
   if [ -r "$HOME/.pi/agent/status-line.json" ]; then
     mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/status-line.json" "$backup_path/.pi/agent/status-line.json"
+    cp -P "$HOME/.pi/agent/status-line.json" \
+      "$backup_path/.pi/agent/status-line.json"
   fi
 fi
 mkdir -p "$HOME/.pi/agent"
 ln -sfnv "$config_path/pi/status-line.json" "$HOME/.pi/agent/status-line.json"
+
+### pi-vcc #####################################################################
+
+# pi-vcc-config.json
+if [ ! -r "$backup_path/.pi/agent/pi-vcc-config.json" ]; then
+  if [ -r "$HOME/.pi/agent/pi-vcc-config.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/pi-vcc-config.json" \
+      "$backup_path/.pi/agent/pi-vcc-config.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/pi-vcc-config.json" \
+  "$HOME/.pi/agent/pi-vcc-config.json"
 
 ### pi-web-access ##############################################################
 
@@ -151,18 +179,6 @@ if [ ! -r "$backup_path/.pi/web-search.json" ]; then
 fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
-
-### pi-caveman #################################################################
-
-# caveman.json
-if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
-  if [ -r "$HOME/.pi/agent/caveman.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
-  fi
-fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
 
 ### extensions #################################################################
 
