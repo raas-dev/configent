@@ -92,6 +92,18 @@ mkdir -p "$HOME/.pi/agent/themes"
 rm -rf "$HOME/.pi/agent/themes"
 ln -sfnv "$config_path/pi/themes" "$HOME/.pi/agent/themes"
 
+# profiles dir
+if [ ! -r "$backup_path/.pi/agent" ]; then
+  if [ -r "$HOME/.pi/agent/profiles" ]; then
+    mkdir -p "$backup_path/.pi/agent/profiles"
+    cp -RP "$HOME/.pi/agent/profiles" \
+      "$backup_path/.pi/agent/profiles"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent/profiles"
+rm -rf "$HOME/.pi/agent/profiles"
+ln -sfnv "$config_path/pi/profiles" "$HOME/.pi/agent/profiles"
+
 ### ~/.agents dir ##############################################################
 
 if [ ! -r "$backup_path/.agents" ]; then

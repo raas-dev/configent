@@ -1,0 +1,5 @@
+{
+  "defaultModel": "MiniMax-M2.7",
+  "defaultProvider": "minimax",
+  "defaultThinkingLevel": "high"
+}

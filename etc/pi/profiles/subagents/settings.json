@@ -1,0 +1,33 @@
+{
+  "subagents": {
+    "agentOverrides": {
+      "context-builder": {
+        "model": "zai/glm-5.1"
+      },
+      "oracle": {
+        "model": "zai/glm-5.1"
+      },
+      "oracle-executor": {
+        "model": "zai/glm-5.1"
+      },
+      "planner": {
+        "model": "zai/glm-5.1"
+      },
+      "researcher": {
+        "model": "zai/glm-5.1"
+      },
+      "reviewer": {
+        "model": "zai/glm-5.1"
+      },
+      "scout": {
+        "model": "zai/glm-5-turbo"
+      },
+      "worker": {
+        "model": "zai/glm-5.1"
+      }
+    }
+  },
+  "packages": [
+    "npm:pi-subagents"
+  ]
+}
