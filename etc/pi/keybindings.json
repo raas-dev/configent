@@ -1,5 +1,7 @@
 {
   "app.model.cycleForward": [],
+  "app.models.toggleProvider": [],
+  "app.session.togglePath": [],
   "app.clipboard.pasteImage": [],
   "tui.input.newLine": ["shift+enter", "ctrl+j"],
   "app.message.followUp": "alt+enter"
