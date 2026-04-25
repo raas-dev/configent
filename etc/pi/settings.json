@@ -51,7 +51,8 @@
         "extensions/fork-from-first.ts",
         "extensions/md.ts",
         "extensions/move-session.ts",
-        "extensions/plan-mode.ts"
+        "extensions/plan-mode.ts",
+        "extensions/session-name.ts"
       ],
       "source": "git:github.com/asyrjasalo/pi-extensions"
     }
