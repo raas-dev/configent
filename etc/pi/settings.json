@@ -56,7 +56,6 @@
       "source": "git:github.com/asyrjasalo/pi-extensions"
     }
   ],
-  "powerline": "default",
   "quietStartup": true,
   "rewind": {
     "retention": {
