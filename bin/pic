@@ -275,7 +275,8 @@ switch_to_profile() {
     if [[ "$force_yes" != "true" ]]; then
       echo ""
       echo -e "${YELLOW}Warning: .pi directory exists but is not managed by pic.${NC}"
-      echo -e "${YELLOW}Commit your .pi directory first. Proceeding will overwrite the .pi directory.${NC}"
+      echo -e "${YELLOW}Commit your .pi directory first. Proceeding will overwrite the .pi directory${NC}"
+      echo -e "${YELLOW}and remove the .pi/npm directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_unmanaged
       if [[ ! "$confirm_unmanaged" =~ ^[Yy]$ ]]; then
@@ -286,13 +287,15 @@ switch_to_profile() {
     # Clean slate for unmanaged config - delete only .json and .jsonc files, preserve everything else
     find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.json" ! -name "pic.json" -delete 2>/dev/null || true
     find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
+    rm -rf "$PROJECT_CONFIG_DIR/npm" 2>/dev/null || true
   fi
 
   # Confirm reset if init command is used on pic-managed project (has pic.json)
   if [[ "$is_init_cmd" == "true" && -f "$PROFILE_METADATA_FILE" ]]; then
     if [[ "$force_yes" != "true" ]]; then
       echo ""
-      echo -e "${YELLOW}Project already initialized. Re-initializing will overwrite .json and .jsonc files in the .pi directory.${NC}"
+      echo -e "${YELLOW}Project already initialized. Re-initializing will overwrite .json and .jsonc files in the .pi directory${NC}"
+      echo -e "${YELLOW}and remove the .pi/npm directory.${NC}"
       echo -ne "${YELLOW}Continue? [y/N]${NC} "
       read -r confirm_reset
       if [[ ! "$confirm_reset" =~ ^[Yy]$ ]]; then
@@ -303,6 +306,7 @@ switch_to_profile() {
     # Clean slate for re-init - delete only .json and .jsonc files, preserve everything else
     find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.json" ! -name "pic.json" -delete 2>/dev/null || true
     find "$PROJECT_CONFIG_DIR" -maxdepth 1 -type f -name "*.jsonc" -delete 2>/dev/null || true
+    rm -rf "$PROJECT_CONFIG_DIR/npm" 2>/dev/null || true
   fi
 
   echo ""
@@ -543,7 +547,8 @@ show_help() {
     "      Initialize the project with a profile. Shows an interactive" \
     "      menu if no profile name is given. ${DIM}If the project is already${NC}" \
     "      ${DIM}initialized, confirms to discard existing changes unless${NC}" \
-    "      ${DIM}--yes or -y is given.${NC}" \
+    "      ${DIM}--yes or -y is given. Also removes the .pi/npm${NC}" \
+    "      ${DIM}directory if present.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
     "      pic init" \
