@@ -13,7 +13,7 @@
     "noSuggestionToken": "[no suggestion]",
     "customInstruction": "",
     "fastPathContinueOnError": true,
-    "displayMode": "widget",
+    "displayMode": "ghost",
     "maxAssistantTurnChars": 100000,
     "maxRecentUserPrompts": 20,
     "maxRecentUserPromptChars": 500,
