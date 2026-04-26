@@ -32,7 +32,7 @@
     "transcriptMaxChars": 120000,
     "transcriptRolloutPercent": 100,
     "ghostAcceptKeys": [
-      "space",
+      "right",
       "tab"
     ]
   },
