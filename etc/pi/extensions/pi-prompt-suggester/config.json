@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 8,
+  "seed": {
+    "maxDiffChars": 3000
+  },
+  "reseed": {
+    "enabled": true,
+    "checkOnSessionStart": true,
+    "checkAfterEveryTurn": true,
+    "turnCheckInterval": 10
+  },
+  "suggestion": {
+    "noSuggestionToken": "[no suggestion]",
+    "customInstruction": "",
+    "fastPathContinueOnError": true,
+    "displayMode": "ghost",
+    "maxAssistantTurnChars": 100000,
+    "maxRecentUserPrompts": 20,
+    "maxRecentUserPromptChars": 500,
+    "maxToolSignals": 8,
+    "maxToolSignalChars": 240,
+    "maxTouchedFiles": 8,
+    "maxUnresolvedQuestions": 6,
+    "maxAbortContextChars": 280,
+    "maxSuggestionChars": 200,
+    "prefillOnlyWhenEditorEmpty": true,
+    "showUsageInPanel": false,
+    "showPanelStatus": false,
+    "strategy": "compact",
+    "transcriptMaxContextPercent": 70,
+    "transcriptMaxMessages": 120,
+    "transcriptMaxChars": 120000,
+    "transcriptRolloutPercent": 100,
+    "ghostAcceptKeys": [
+      "space",
+      "tab"
+    ]
+  },
+  "steering": {
+    "historyWindow": 20,
+    "acceptedThreshold": 0.82,
+    "maxChangedExamples": 3
+  },
+  "logging": {
+    "level": "info"
+  },
+  "inference": {
+    "seederModel": "session-default",
+    "suggesterModel": "session-default",
+    "seederThinking": "session-default",
+    "suggesterThinking": "session-default"
+  }
+}
