@@ -37,15 +37,6 @@
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
     },
-    "humanizer": {
-      "source": "softaworks/agent-toolkit@humanizer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "52a43ae0134793322dbe1705df7cada58c0e953e",
-      "installedAt": "2026-04-12T11:43:29.055Z",
-      "updatedAt": "2026-04-12T11:43:29.055Z"
-    },
     "mcporter": {
       "source": "steipete/clawdis@mcporter",
       "sourceType": "github",
@@ -108,6 +99,24 @@
       "skillFolderHash": "2a1ad17028306ebe45f0e49703fa28b9b2e7f499",
       "installedAt": "2026-04-25T10:56:46.794Z",
       "updatedAt": "2026-04-25T10:56:46.794Z"
+    },
+    "finnish-humanizer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/finnish-humanizer/SKILL.md",
+      "skillFolderHash": "b397c636a399dd543a1461a538f126f7c7a8d343",
+      "installedAt": "2026-04-26T11:44:18.636Z",
+      "updatedAt": "2026-04-26T11:44:18.636Z"
+    },
+    "humanizer": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/humanizer/SKILL.md",
+      "skillFolderHash": "004c1998fffe4d5cd4535123d65cf9fb1a107b64",
+      "installedAt": "2026-04-26T11:46:40.387Z",
+      "updatedAt": "2026-04-26T11:46:40.387Z"
     }
   },
   "dismissed": {

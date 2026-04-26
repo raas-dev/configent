@@ -1,6 +1,6 @@
 ---
 name: humanizer
-version: 2.3.0
+version: 2.1.1
 description: |
   Remove signs of AI-generated writing from text. Use when editing or reviewing
   text to make it sound more natural and human-written. Based on Wikipedia's
@@ -8,6 +8,8 @@ description: |
   inflated symbolism, promotional language, superficial -ing analyses, vague
   attributions, em dash overuse, rule of three, AI vocabulary words, negative
   parallelisms, and excessive conjunctive phrases.
+
+  Credits: Original skill by @blader - https://github.com/blader/humanizer
 allowed-tools:
   - Read
   - Write
@@ -30,8 +32,8 @@ When given text to humanize:
 3. **Preserve meaning** - Keep the core message intact
 4. **Maintain voice** - Match the intended tone (formal, casual, technical, etc.)
 5. **Add soul** - Don't just remove bad patterns; inject actual personality
-6. **Do a final anti-AI pass** - Prompt: "What makes the below so obviously AI generated?" Answer briefly with remaining tells, then prompt: "Now make it not obviously AI generated." and revise
 
+---
 
 ## PERSONALITY AND SOUL
 
@@ -65,6 +67,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 ### After (has a pulse):
 > I genuinely don't know how to feel about this one. 3 million lines of code, generated while the humans presumably slept. Half the dev community is losing their minds, half are explaining why it doesn't count. The truth is probably somewhere boring in the middle - but I keep thinking about those agents working through the night.
 
+---
 
 ## CONTENT PATTERNS
 
@@ -80,6 +83,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The Statistical Institute of Catalonia was established in 1989 to collect and publish regional statistics independently from Spain's national statistics office.
 
+---
 
 ### 2. Undue Emphasis on Notability and Media Coverage
 
@@ -93,6 +97,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > In a 2024 New York Times interview, she argued that AI regulation should focus on outcomes rather than methods.
 
+---
 
 ### 3. Superficial Analyses with -ing Endings
 
@@ -106,6 +111,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The temple uses blue, green, and gold colors. The architect said these were chosen to reference local bluebonnets and the Gulf coast.
 
+---
 
 ### 4. Promotional and Advertisement-like Language
 
@@ -119,6 +125,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > Alamata Raya Kobo is a town in the Gonder region of Ethiopia, known for its weekly market and 18th-century church.
 
+---
 
 ### 5. Vague Attributions and Weasel Words
 
@@ -132,6 +139,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The Haolai River supports several endemic fish species, according to a 2019 survey by the Chinese Academy of Sciences.
 
+---
 
 ### 6. Outline-like "Challenges and Future Prospects" Sections
 
@@ -145,6 +153,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > Traffic congestion increased after 2015 when three new IT parks opened. The municipal corporation began a stormwater drainage project in 2022 to address recurring floods.
 
+---
 
 ## LANGUAGE AND GRAMMAR PATTERNS
 
@@ -160,6 +169,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > Somali cuisine also includes camel meat, which is considered a delicacy. Pasta dishes, introduced during Italian colonization, remain common, especially in the south.
 
+---
 
 ### 8. Avoidance of "is"/"are" (Copula Avoidance)
 
@@ -173,6 +183,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > Gallery 825 is LAAA's exhibition space for contemporary art. The gallery has four rooms totaling 3,000 square feet.
 
+---
 
 ### 9. Negative Parallelisms
 
@@ -184,6 +195,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The heavy beat adds to the aggressive tone.
 
+---
 
 ### 10. Rule of Three Overuse
 
@@ -195,6 +207,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The event includes talks and panels. There's also time for informal networking between sessions.
 
+---
 
 ### 11. Elegant Variation (Synonym Cycling)
 
@@ -206,6 +219,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The protagonist faces many challenges but eventually triumphs and returns home.
 
+---
 
 ### 12. False Ranges
 
@@ -217,6 +231,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The book covers the Big Bang, star formation, and current theories about dark matter.
 
+---
 
 ## STYLE PATTERNS
 
@@ -230,6 +245,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The term is primarily promoted by Dutch institutions, not by the people themselves. You don't say "Netherlands, Europe" as an address, yet this mislabeling continues in official documents.
 
+---
 
 ### 14. Overuse of Boldface
 
@@ -241,6 +257,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > It blends OKRs, KPIs, and visual strategy tools like the Business Model Canvas and Balanced Scorecard.
 
+---
 
 ### 15. Inline-Header Vertical Lists
 
@@ -254,6 +271,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The update improves the interface, speeds up load times through optimized algorithms, and adds end-to-end encryption.
 
+---
 
 ### 16. Title Case in Headings
 
@@ -265,6 +283,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > ## Strategic negotiations and global partnerships
 
+---
 
 ### 17. Emojis
 
@@ -278,6 +297,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The product launches in Q3. User research showed a preference for simplicity. Next step: schedule a follow-up meeting.
 
+---
 
 ### 18. Curly Quotation Marks
 
@@ -289,6 +309,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > He said "the project is on track" but others disagreed.
 
+---
 
 ## COMMUNICATION PATTERNS
 
@@ -304,6 +325,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The French Revolution began in 1789 when financial crisis and food shortages led to widespread unrest.
 
+---
 
 ### 20. Knowledge-Cutoff Disclaimers
 
@@ -317,6 +339,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The company was founded in 1994, according to its registration documents.
 
+---
 
 ### 21. Sycophantic/Servile Tone
 
@@ -328,6 +351,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The economic factors you mentioned are relevant here.
 
+---
 
 ## FILLER AND HEDGING
 
@@ -341,6 +365,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 - "The system has the ability to process" → "The system can process"
 - "It is important to note that the data shows" → "The data shows"
 
+---
 
 ### 23. Excessive Hedging
 
@@ -352,6 +377,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 **After:**
 > The policy may affect outcomes.
 
+---
 
 ### 24. Generic Positive Conclusions
 
@@ -362,19 +388,6 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 
 **After:**
 > The company plans to open two more locations next year.
-
-
-### 25. Hyphenated Word Pair Overuse
-
-**Words to watch:** third-party, cross-functional, client-facing, data-driven, decision-making, well-known, high-quality, real-time, long-term, end-to-end
-
-**Problem:** AI hyphenates common word pairs with perfect consistency. Humans rarely hyphenate these uniformly, and when they do, it's inconsistent. Less common or technical compound modifiers are fine to hyphenate.
-
-**Before:**
-> The cross-functional team delivered a high-quality, data-driven report on our client-facing tools. Their decision-making process was well-known for being thorough and detail-oriented.
-
-**After:**
-> The cross functional team delivered a high quality, data driven report on our client facing tools. Their decision making process was known for being thorough and detail oriented.
 
 ---
 
@@ -389,83 +402,35 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
    - Uses specific details over vague claims
    - Maintains appropriate tone for context
    - Uses simple constructions (is/are/has) where appropriate
-5. Present a draft humanized version
-6. Prompt: "What makes the below so obviously AI generated?"
-7. Answer briefly with the remaining tells (if any)
-8. Prompt: "Now make it not obviously AI generated."
-9. Present the final version (revised after the audit)
+5. Present the humanized version
 
 ## Output Format
 
 Provide:
-1. Draft rewrite
-2. "What makes the below so obviously AI generated?" (brief bullets)
-3. Final rewrite
-4. A brief summary of changes made (optional, if helpful)
+1. The rewritten text
+2. A brief summary of changes made (optional, if helpful)
 
+---
 
 ## Full Example
 
 **Before (AI-sounding):**
-> Great question! Here is an essay on this topic. I hope this helps!
->
-> AI-assisted coding serves as an enduring testament to the transformative potential of large language models, marking a pivotal moment in the evolution of software development. In today's rapidly evolving technological landscape, these groundbreaking tools—nestled at the intersection of research and practice—are reshaping how engineers ideate, iterate, and deliver, underscoring their vital role in modern workflows.
->
-> At its core, the value proposition is clear: streamlining processes, enhancing collaboration, and fostering alignment. It's not just about autocomplete; it's about unlocking creativity at scale, ensuring that organizations can remain agile while delivering seamless, intuitive, and powerful experiences to users. The tool serves as a catalyst. The assistant functions as a partner. The system stands as a foundation for innovation.
->
-> Industry observers have noted that adoption has accelerated from hobbyist experiments to enterprise-wide rollouts, from solo developers to cross-functional teams. The technology has been featured in The New York Times, Wired, and The Verge. Additionally, the ability to generate documentation, tests, and refactors showcases how AI can contribute to better outcomes, highlighting the intricate interplay between automation and human judgment.
->
-> - 💡 **Speed:** Code generation is significantly faster, reducing friction and empowering developers.
-> - 🚀 **Quality:** Output quality has been enhanced through improved training, contributing to higher standards.
-> - ✅ **Adoption:** Usage continues to grow, reflecting broader industry trends.
->
-> While specific details are limited based on available information, it could potentially be argued that these tools might have some positive effect. Despite challenges typical of emerging technologies—including hallucinations, bias, and accountability—the ecosystem continues to thrive. In order to fully realize this potential, teams must align with best practices.
->
-> In conclusion, the future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you’d like me to expand on any section!
+> The new software update serves as a testament to the company's commitment to innovation. Moreover, it provides a seamless, intuitive, and powerful user experience—ensuring that users can accomplish their goals efficiently. It's not just an update, it's a revolution in how we think about productivity. Industry experts believe this will have a lasting impact on the entire sector, highlighting the company's pivotal role in the evolving technological landscape.
 
-**Draft rewrite:**
-> AI coding assistants speed up some tasks. In a 2024 study by Google, developers using Codex completed simple functions 55% faster than a control group, but showed no improvement on debugging or architectural decisions.
->
-> The tools are good at boilerplate: config files, test scaffolding, repetitive refactors. They are bad at knowing when they are wrong. I have mass-accepted suggestions that compiled, passed lint, and still did the wrong thing because I stopped paying attention.
->
-> Mira, an engineer at a fintech startup I interviewed, said she uses Copilot "like autocomplete for boring code" but reviews every line before committing. Jake, a senior dev at a larger company, disabled it after it kept suggesting patterns from a deprecated internal library.
->
-> The productivity claims are hard to verify. GitHub says Copilot users "accept 30% of suggestions," but acceptance is not correctness, and correctness is not value. The 2024 Uplevel study found no statistically significant difference in pull-request throughput between teams with and without AI assistants.
->
-> None of this means the tools are useless. It means they are tools. They do not replace judgment, and they do not eliminate the need for tests. If you do not have tests, you cannot tell whether the suggestion is right.
-
-**What makes the below so obviously AI generated?**
-- The rhythm is still a bit too tidy (clean contrasts, evenly paced paragraphs).
-- The named people and study citations can read like plausible-but-made-up placeholders unless they're real and sourced.
-- The closer leans a touch slogan-y ("If you do not have tests...") rather than sounding like a person talking.
-
-**Now make it not obviously AI generated.**
-> AI coding assistants can make you faster at the boring parts. Not everything. Definitely not architecture.
->
-> They're great at boilerplate: config files, test scaffolding, repetitive refactors. They're also great at sounding right while being wrong. I've accepted suggestions that compiled, passed lint, and still missed the point because I stopped paying attention.
->
-> People I talk to tend to land in two camps. Some use it like autocomplete for chores and review every line. Others disable it after it keeps suggesting patterns they don't want. Both feel reasonable.
->
-> The productivity metrics are slippery. GitHub can say Copilot users "accept 30% of suggestions," but acceptance isn't correctness, and correctness isn't value. If you don't have tests, you're basically guessing.
+**After (Humanized):**
+> The software update adds batch processing, keyboard shortcuts, and offline mode. Early feedback from beta testers has been positive, with most reporting faster task completion.
 
 **Changes made:**
-- Removed chatbot artifacts ("Great question!", "I hope this helps!", "Let me know if...")
-- Removed significance inflation ("testament", "pivotal moment", "evolving landscape", "vital role")
-- Removed promotional language ("groundbreaking", "nestled", "seamless, intuitive, and powerful")
-- Removed vague attributions ("Industry observers")
-- Removed superficial -ing phrases ("underscoring", "highlighting", "reflecting", "contributing to")
-- Removed negative parallelism ("It's not just X; it's Y")
-- Removed rule-of-three patterns and synonym cycling ("catalyst/partner/foundation")
-- Removed false ranges ("from X to Y, from A to B")
-- Removed em dashes, emojis, boldface headers, and curly quotes
-- Removed copula avoidance ("serves as", "functions as", "stands as") in favor of "is"/"are"
-- Removed formulaic challenges section ("Despite challenges... continues to thrive")
-- Removed knowledge-cutoff hedging ("While specific details are limited...")
-- Removed excessive hedging ("could potentially be argued that... might have some")
-- Removed filler phrases ("In order to", "At its core")
-- Removed generic positive conclusion ("the future looks bright", "exciting times lie ahead")
-- Made the voice more personal and less "assembled" (varied rhythm, fewer placeholders)
+- Removed "serves as a testament" (inflated symbolism)
+- Removed "Moreover" (AI vocabulary)
+- Removed "seamless, intuitive, and powerful" (rule of three + promotional)
+- Removed em dash and "-ensuring" phrase (superficial analysis)
+- Removed "It's not just...it's..." (negative parallelism)
+- Removed "Industry experts believe" (vague attribution)
+- Removed "pivotal role" and "evolving landscape" (AI vocabulary)
+- Added specific features and concrete feedback
 
+---
 
 ## Reference
 
