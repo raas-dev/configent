@@ -24,6 +24,7 @@
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-mono-status-line",
+    "npm:pi-promptsmith",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
     "npm:pi-token-burden",
@@ -55,8 +56,7 @@
         "extensions/session-name.ts"
       ],
       "source": "git:github.com/asyrjasalo/pi-extensions"
-    },
-    "npm:pi-promptsmith"
+    }
   ],
   "quietStartup": true,
   "rewind": {

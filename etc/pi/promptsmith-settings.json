@@ -8,7 +8,7 @@
   "exactModelOverrides": [],
   "familyOverrides": [],
   "enhancerModelMode": "active",
-  "includeRecentConversation": false,
+  "includeRecentConversation": true,
   "includeProjectMetadata": false,
   "statusBarEnabled": false,
   "rewriteStrength": "balanced",
