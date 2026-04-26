@@ -2,7 +2,7 @@
   "version": 1,
   "enabled": true,
   "shortcutEnabled": true,
-  "shortcutKey": "ctrl+h",
+  "shortcutKey": "ctrl+q",
   "targetFamilyMode": "auto",
   "fallbackFamily": "claude",
   "exactModelOverrides": [],
