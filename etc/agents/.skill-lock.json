@@ -1,15 +1,6 @@
 {
   "version": 3,
   "skills": {
-    "documentation-writer": {
-      "source": "github/awesome-copilot@documentation-writer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/github/awesome-copilot.git",
-      "skillPath": "skills/documentation-writer/SKILL.md",
-      "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
-      "installedAt": "2026-04-11T07:44:53.328Z",
-      "updatedAt": "2026-04-12T11:52:24.567Z"
-    },
     "agentic-eval": {
       "source": "github/awesome-copilot@agentic-eval",
       "sourceType": "github",
@@ -18,15 +9,6 @@
       "skillFolderHash": "2322ac3a69fa63b58268525481bf684b9ddf51a3",
       "installedAt": "2026-04-12T09:17:21.513Z",
       "updatedAt": "2026-04-12T11:52:32.234Z"
-    },
-    "desloppify": {
-      "source": "peteromallet/desloppify@desloppify",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/peteromallet/desloppify.git",
-      "skillPath": "docs/SKILL.md",
-      "skillFolderHash": "36bca0fbd7cbb5d0d2094576a90cea07df05c5d5",
-      "installedAt": "2026-04-12T11:38:46.306Z",
-      "updatedAt": "2026-04-12T11:52:34.837Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser@agent-browser",
@@ -70,15 +52,6 @@
       "sourceUrl": "https://github.com/steipete/clawdis.git",
       "skillPath": "SKILL.md",
       "skillFolderHash": "21d959cc70adce6b09f8841c3533ec3590495e40",
-      "installedAt": "2026-04-12T11:43:29.055Z",
-      "updatedAt": "2026-04-12T11:43:29.055Z"
-    },
-    "prompt-master": {
-      "source": "nidhinjs/prompt-master@prompt-master",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/nidhinjs/prompt-master.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "9f4f7d7ac318fb4e64c01c5a28ecbe6e64761389",
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
     },
