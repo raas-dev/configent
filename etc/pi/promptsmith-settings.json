@@ -17,5 +17,5 @@
   "autoSendEnhancedPrompt": false,
   "autoSendBusyBehavior": "steer",
   "preserveCodeBlocks": true,
-  "enhancementTimeoutMs": 10000
+  "enhancementTimeoutMs": 30000
 }
