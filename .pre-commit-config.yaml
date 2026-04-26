@@ -46,6 +46,7 @@ repos:
     rev: v1.43.4
     hooks:
       - id: typos
+        files: ^(?!.*skills/).*$
 
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.13.7
