@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.1](https://github.com/raas-dev/configent/compare/1.218.0...1.218.1) (2026-04-26)
+
+
+### Fixes
+
+* **bin:** ignore install trees in profile hashing ([0c3c80a](https://github.com/raas-dev/configent/commit/0c3c80af95947a060ef8e8dd9a02d0a9f7801404))
+* **macos:** remove stale headroom proxy config ([31eb82f](https://github.com/raas-dev/configent/commit/31eb82f3280de0980a121462b59be312ba568a3e))
+* **omp:** remove obsolete rtk extension ([739d99b](https://github.com/raas-dev/configent/commit/739d99b91a3e5def146d1d7340fc9619a6e0b486))
+
 ## [1.218.0](https://github.com/raas-dev/configent/compare/1.217.8...1.218.0) (2026-04-25)
 
 
