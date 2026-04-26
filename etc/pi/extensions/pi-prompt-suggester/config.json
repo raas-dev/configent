@@ -42,7 +42,7 @@
     "maxChangedExamples": 3
   },
   "logging": {
-    "level": "info"
+    "level": "warn"
   },
   "inference": {
     "seederModel": "session-default",
