@@ -1,5 +1,6 @@
 {
   "packages": [
-    "npm:compound-engineering-pi"
+    "npm:compound-engineering-pi",
+    "npm:pi-lens"
   ]
 }

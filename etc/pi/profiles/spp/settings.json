@@ -1,5 +1,7 @@
 {
   "packages": [
-    "npm:pi-superpowers-plus"
+    "npm:pi-superpowers-plus",
+    "npm:pi-lens"
+
   ]
 }
