@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "enabled": true,
+  "shortcutEnabled": true,
+  "shortcutKey": "ctrl+h",
+  "targetFamilyMode": "auto",
+  "fallbackFamily": "claude",
+  "exactModelOverrides": [],
+  "familyOverrides": [],
+  "enhancerModelMode": "active",
+  "includeRecentConversation": false,
+  "includeProjectMetadata": false,
+  "statusBarEnabled": false,
+  "rewriteStrength": "balanced",
+  "rewriteMode": "auto",
+  "previewBeforeReplace": false,
+  "autoSendEnhancedPrompt": false,
+  "autoSendBusyBehavior": "steer",
+  "preserveCodeBlocks": true,
+  "enhancementTimeoutMs": 10000
+}

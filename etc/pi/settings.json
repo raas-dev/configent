@@ -55,7 +55,8 @@
         "extensions/session-name.ts"
       ],
       "source": "git:github.com/asyrjasalo/pi-extensions"
-    }
+    },
+    "npm:pi-promptsmith"
   ],
   "quietStartup": true,
   "rewind": {

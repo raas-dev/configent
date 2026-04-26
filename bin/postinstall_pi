@@ -154,6 +154,20 @@ fi
 mkdir -p "$HOME/.pi/agent"
 ln -sfnv "$config_path/pi/status-line.json" "$HOME/.pi/agent/status-line.json"
 
+### pi-promptsmith #############################################################
+
+# promptsmith-settings.json
+if [ ! -r "$backup_path/.pi/agent/promptsmith-settings.json" ]; then
+  if [ -r "$HOME/.pi/agent/promptsmith-settings.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/promptsmith-settings.json" \
+      "$backup_path/.pi/agent/promptsmith-settings.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/promptsmith-settings.json" \
+  "$HOME/.pi/agent/promptsmith-settings.json"
+
 ### pi-vcc #####################################################################
 
 # pi-vcc-config.json
