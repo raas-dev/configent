@@ -13,7 +13,7 @@
     "minimax/MiniMax-M2.7"
   ],
   "enableInstallTelemetry": false,
-  "hideThinkingBlock": false,
+  "hideThinkingBlock": true,
   "lastChangelogVersion": "0.70.2",
   "packages": [
     "npm:pi-ask-user",
