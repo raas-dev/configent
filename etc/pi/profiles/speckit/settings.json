@@ -2,6 +2,5 @@
   "packages": [
     "npm:@ifi/pi-spec",
     "npm:pi-lens"
-
   ]
 }
