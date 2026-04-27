@@ -48,6 +48,6 @@
     "seederModel": "session-default",
     "suggesterModel": "session-default",
     "seederThinking": "session-default",
-    "suggesterThinking": "session-default"
+    "suggesterThinking": "off"
   }
 }
