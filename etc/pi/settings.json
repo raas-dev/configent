@@ -14,7 +14,10 @@
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.70.5",
+  "lastChangelogVersion": "0.70.6",
+  "npmCommand": [
+    "bun"
+  ],
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-headroom",
