@@ -197,4 +197,4 @@ ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
 ### extensions #################################################################
 
 # (pre-)install or update extensions (requires npm in PATH)
-command -v mise >/dev/null && mise exec node -- pi update
+command -v mise >/dev/null && mise exec node -- pi update --extensions
