@@ -27,7 +27,7 @@
     "showUsageInPanel": false,
     "showPanelStatus": false,
     "strategy": "compact",
-    "transcriptMaxContextPercent": 50,
+    "transcriptMaxContextPercent": 70,
     "transcriptMaxMessages": 120,
     "transcriptMaxChars": 120000,
     "transcriptRolloutPercent": 100,
