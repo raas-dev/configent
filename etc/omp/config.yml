@@ -1,4 +1,4 @@
-lastChangelogVersion: 14.3.0
+lastChangelogVersion: 14.5.5
 modelRoles:
   default: zai/glm-5.1
   smol: zai/glm-5-turbo
