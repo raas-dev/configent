@@ -9,7 +9,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-#disable = ["system", "emacs"]
+disable = ["pi"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -80,6 +80,7 @@ pull_predefined = false
 
 # Custom commands
 [commands]
+"pi extensions" = "mise exec node -- pi update --extensions"
 #"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 #"Custom command using interactive shell (unix)" = "-i vim_upgrade"
 
