@@ -22,7 +22,6 @@ zoxide = 'latest'
 'github:printfn/fend' = 'latest'
 'github:Skardyy/mcat' = 'latest'
 'github:railwayapp/nixpacks' = 'latest'
-'github:ouch-org/ouch' = 'latest'
 'github:sharkdp/pastel' = 'latest'
 'github:dalance/procs' = 'latest'
 'github:cesarferreira/rip' = 'latest'
@@ -32,6 +31,7 @@ zoxide = 'latest'
 'aqua:neovim/neovim' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_neovim" }
 'aqua:pranshuparmar/witr' = 'latest'
 'cargo:kondo' = 'latest' # no linux-aarch64 release
+'cargo:ouch' = 'latest' # no GitHub macos-arm64 release
 'cargo:tailspin' = 'latest' # no linux-aarch64 release
 'cargo:tlrc' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_tlrc" } # no linux-aarch64 release
 #'cargo:https://github.com/fluffypony/nsh' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nsh" } # no GitHub releases
