@@ -16,7 +16,7 @@
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.70.6",
   "npmCommand": [
-    "bun"
+    "mise", "exec", "bun", "--", "bun"
   ],
   "packages": [
     "npm:pi-ask-user",
