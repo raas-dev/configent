@@ -142,7 +142,7 @@ alias s='rg --smart-case --hidden --glob \!.git/ --fixed-strings'
 alias u='dust'
 # v is for limactl wrapper, see v()
 alias w='which -a'
-alias x='rip'
+# x is for killing processes, see x()
 alias y='tldr'
 alias z='snitch'
 alias §='trans :fi'
@@ -166,8 +166,14 @@ if command -v viddy >/dev/null; then
   alias watch='$(which viddy) --differences --no-title'
 fi
 
-# kill all processes matching the given pattern (-i is macOS only)
-alias xall='pkill -i -f'
+# kill all processes matching the given pattern, or open TUI
+x() {
+  if [ $# -gt 0 ]; then
+    pkill -i -f "$@"
+  else
+    rip
+  fi
+}
 
 ### Lima VMs ###################################################################
 
