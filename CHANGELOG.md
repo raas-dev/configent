@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.4](https://github.com/raas-dev/configent/compare/1.218.3...1.218.4) (2026-05-01)
+
+
+### Fixes
+
+* **opencode:** add MCP scopes to slim-zai roles ([5fb1311](https://github.com/raas-dev/configent/commit/5fb1311f9067f326f504fd47f56b352a1d55e9a1))
+* **opencode:** disable force-full-read by default ([576fdcb](https://github.com/raas-dev/configent/commit/576fdcb7a829459ac4bce75b3a217e984c1e0880))
+* **opencode:** enable force-full-read by default ([8ccffda](https://github.com/raas-dev/configent/commit/8ccffda5f662ab53d9c0549bce62470842b91f3f))
+* **opencode:** switch profiles to websearch MCP ([0de67b4](https://github.com/raas-dev/configent/commit/0de67b40662194b6c4910143d0f1d90e0150ac46))
+* **opencode:** switch to caveman opencode plugin ([5d76f98](https://github.com/raas-dev/configent/commit/5d76f98b54ca5cac529286916eac6969e2286ddc))
+
 ## [1.218.3](https://github.com/raas-dev/configent/compare/1.218.2...1.218.3) (2026-05-01)
 
 
