@@ -7,6 +7,7 @@
   },
   "plugin": [
     "caveman-opencode-plugin",
+    "opencode-auto-continue@https://github.com/developing-today/opencode-auto-continue/archive/refs/tags/latest.tar.gz",
     "@franlol/opencode-md-table-formatter",
     "@tarquinen/opencode-dcp"
   ],
