@@ -16,7 +16,7 @@ prior_lines=${AUTOBOT_PRIOR_LINES:-16}
 # First-word aliases for this script (default ? — see dotfiles/.aliases). Empty to disable.
 aliases=${AUTOBOT_ALIASES-?}
 # omp --model / --thinking (override with -m/--model, -t/--thinking).
-model=${AUTOBOT_MODEL:-minimax/MiniMax-M2.7}
+model=${AUTOBOT_MODEL:-zai/glm-5-turbo}
 thinking=${AUTOBOT_THINKING:-medium}
 
 # stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
