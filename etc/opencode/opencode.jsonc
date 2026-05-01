@@ -6,8 +6,9 @@
     "external_directory": "allow"
   },
   "plugin": [
+    "caveman-opencode-plugin",
     "@franlol/opencode-md-table-formatter",
-    "caveman-opencode-plugin"
+    "@tarquinen/opencode-dcp"
   ],
   "share": "disabled"
 }

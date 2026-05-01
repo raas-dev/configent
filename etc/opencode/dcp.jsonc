@@ -1,0 +1,105 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
+  // Enable or disable the plugin
+  "enabled": true,
+  // Enable debug logging to ~/.config/opencode/logs/dcp/
+  "debug": false,
+  // Notification display: "off", "minimal", or "detailed"
+  "pruneNotification": "detailed",
+  // Notification type: "chat" (in-conversation) or "toast" (system toast)
+  "pruneNotificationType": "chat",
+  // Slash commands configuration
+  "commands": {
+    "enabled": true,
+    // Additional tools to protect from pruning via commands (e.g., /dcp sweep)
+    "protectedTools": []
+  },
+  // Manual mode: disables autonomous context management,
+  // tools only run when explicitly triggered via /dcp commands
+  "manualMode": {
+    "enabled": false,
+    // When true, automatic cleanup (deduplication, purgeErrors)
+    // still runs even in manual mode
+    "automaticStrategies": true
+  },
+  // Protect from pruning for <turns> message turns past tool invocation
+  "turnProtection": {
+    "enabled": false,
+    "turns": 4
+  },
+  // Experimental settings
+  "experimental": {
+    // Allow DCP processing in subagent sessions
+    "allowSubAgents": false,
+    // Enable user-editable prompt overrides under dcp-prompts directories
+    // When false (default), prompt override files/directories are ignored
+    "customPrompts": false
+  },
+  // Protect file operations from pruning via glob patterns
+  // Patterns match tool parameters.filePath (e.g. read/write/edit)
+  "protectedFilePatterns": [],
+  // Unified context compression tool and behavior settings
+  "compress": {
+    // Compression mode: "range" (compress spans into block summaries)
+    // or experimental "message" (compress individual raw messages)
+    "mode": "range",
+    // Permission mode: "allow" (no prompt), "ask" (prompt), "deny" (tool not registered)
+    "permission": "allow",
+    // Show compression content in a chat notification
+    "showCompression": false,
+    // Let active summary tokens extend the effective maxContextLimit
+    "summaryBuffer": true,
+    // Soft upper threshold: above this, DCP keeps injecting strong
+    // compression nudges (based on nudgeFrequency), so compression is
+    // much more likely. Accepts: number or "X%" of model context window.
+    "maxContextLimit": 100000,
+    // Soft lower threshold for reminder nudges: below this, turn/iteration
+    // reminders are off (compression less likely). At/above this, reminders
+    // are on. Accepts: number or "X%" of model context window.
+    "minContextLimit": 50000,
+    // Optional per-model override for maxContextLimit by providerID/modelID.
+    // If present, this wins over the global maxContextLimit.
+    // Accepts: number or "X%".
+    // Example:
+    // "modelMaxLimits": {
+    //     "openai/gpt-5.3-codex": 120000,
+    //     "anthropic/claude-sonnet-4.6": "80%"
+    // },
+    // Optional per-model override for minContextLimit.
+    // If present, this wins over the global minContextLimit.
+    // "modelMinLimits": {
+    //     "openai/gpt-5.3-codex": 50000,
+    //     "anthropic/claude-sonnet-4.6": "25%"
+    // },
+    // How often the context-limit nudge fires (1 = every fetch, 5 = every 5th)
+    "nudgeFrequency": 5,
+    // Start adding compression reminders after this many
+    // messages have happened since the last user message
+    "iterationNudgeThreshold": 15,
+    // Controls how likely compression is after user messages
+    // ("strong" = more likely, "soft" = less likely)
+    "nudgeForce": "soft",
+    // Tool names whose completed outputs are appended to the compression
+    "protectedTools": [],
+    // Preserve your messages during compression.
+    // Warning: large copy-pasted prompts will never be compressed away
+    "protectUserMessages": false
+  },
+  // Automatic pruning strategies
+  "strategies": {
+    // Remove duplicate tool calls (same tool with same arguments)
+    "deduplication": {
+      "enabled": true,
+      // Additional tools to protect from pruning
+      "protectedTools": []
+    },
+    // Prune tool inputs for errored tools after X turns
+    "purgeErrors": {
+      "enabled": true,
+      // Number of turns before errored tool inputs are pruned
+      "turns": 4,
+      // Additional tools to protect from pruning
+      "protectedTools": []
+    }
+  }
+}

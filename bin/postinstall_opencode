@@ -143,3 +143,16 @@ fi
 mkdir -p "$HOME/.config/opencode"
 ln -sfnv "$config_path/opencode/caveman.json" \
   "$HOME/.config/opencode/caveman.json"
+
+### oopencode-dynamic-context-pruning ##########################################
+
+# dcp.jsonc
+if [ ! -r "$backup_path/.config/opencode/dcp.jsonc" ]; then
+  if [ -r "$HOME/.config/opencode/dcp.jsonc" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -P "$HOME/.config/opencode/dcp.jsonc" \
+      "$backup_path/.config/opencode/dcp.jsonc"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode"
+ln -sfnv "$config_path/opencode/dcp.jsonc" "$HOME/.config/opencode/dcp.jsonc"
