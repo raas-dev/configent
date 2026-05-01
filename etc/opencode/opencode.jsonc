@@ -7,7 +7,6 @@
   },
   "plugin": [
     "@franlol/opencode-md-table-formatter",
-    "opencode-caveman",
     "opencode-handoff"
   ],
   "share": "disabled"
