@@ -9,8 +9,7 @@
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enabledModels": [
-    "zai/glm-5*",
-    "minimax/MiniMax-M2.7"
+    "zai/glm-5*"
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
