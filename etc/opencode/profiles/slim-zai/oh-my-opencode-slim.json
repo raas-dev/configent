@@ -83,21 +83,5 @@
         ]
       }
     }
-  },
-  "council": {
-    "councillor_execution_mode": "serial",
-    "presets": {
-      "default": {
-        "alpha": {
-          "model": "zai-coding-plan/glm-5.1"
-        },
-        "beta": {
-          "model": "zai-coding-plan/glm-5.1"
-        },
-        "gamma": {
-          "model": "zai-coding-plan/glm-5.1"
-        }
-      }
-    }
   }
 }
