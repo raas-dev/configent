@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.3](https://github.com/raas-dev/configent/compare/1.218.2...1.218.3) (2026-05-01)
+
+
+### Fixes
+
+* **aliases:** make x kill processes or open rip ([cf5a35d](https://github.com/raas-dev/configent/commit/cf5a35dc90055d8cd14a4d975da771648af66264))
+* **tmux:** enable passthrough for opencode ([cd6844d](https://github.com/raas-dev/configent/commit/cd6844dcceabe4c3d3344cf4a11c549d23edbfb4))
+
 ## [1.218.2](https://github.com/raas-dev/configent/compare/1.218.1...1.218.2) (2026-05-01)
 
 
