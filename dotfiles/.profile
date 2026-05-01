@@ -436,6 +436,9 @@ export PI_TELEMETRY=0
 # headroom
 export HEADROOM_TELEMETRY=off
 
+# openspec
+export OPENSPEC_TELEMETRY=0
+
 ### configent/bin ##############################################################
 
 path_prepend "$HOME/.local/configent/bin"
