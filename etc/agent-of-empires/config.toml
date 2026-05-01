@@ -4,13 +4,11 @@ default_profile = ""
 name = "phosphor"
 color_mode = "truecolor"
 
-[claude]
-
-[updates]
-check_enabled = false
-auto_update = false
-check_interval_hours = 24
-notify_in_cli = false
+[session]
+default_tool = "pi"
+yolo_mode_default = true
+agent_status_hooks = true
+strict_hotkeys = false
 
 [worktree]
 enabled = false
@@ -18,8 +16,7 @@ path_template = "../{repo-name}-worktrees/{branch}"
 bare_repo_path_template = "./{branch}"
 auto_cleanup = true
 show_branch_in_tui = true
-delete_branch_on_cleanup = false
-workspace_path_template = "../{branch}-workspace-{session-id}"
+delete_branch_on_cleanup = true
 
 [sandbox]
 enabled_by_default = false
@@ -27,28 +24,27 @@ default_image = "ghcr.io/njbrake/aoe-sandbox:latest"
 extra_volumes = []
 environment = ["TERM", "COLORTERM", "FORCE_COLOR", "NO_COLOR"]
 auto_cleanup = true
-default_terminal_mode = "host"
 volume_ignores = []
-mount_ssh = false
-container_runtime = "docker"
+default_terminal_mode = "host"
 
 [tmux]
 status_bar = "auto"
 mouse = "auto"
 
-[session]
-yolo_mode_default = true
-agent_status_hooks = true
-strict_hotkeys = false
-
 [diff]
 context_lines = 3
 
-[hooks]
+[updates]
+check_enabled = false
+auto_update = false
+check_interval_hours = 24
+notify_in_cli = false
+
+[claude]
+config_dir = "~/.claude"
 
 [sound]
 enabled = false
-mode = "random"
 
 [app_state]
 has_seen_welcome = true
