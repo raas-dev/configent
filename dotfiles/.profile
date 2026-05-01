@@ -309,7 +309,7 @@ export OPENCHAMBER_OPENCODE_PORT=4096
 # opencode
 export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 ## force-full-read.ts plugin
-export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # default: true
+#export OPENCODE_FORCE_FULL_READ_ACTIVE=false  # default: true
 
 # pi
 export PI_SKIP_VERSION_CHECK=1
