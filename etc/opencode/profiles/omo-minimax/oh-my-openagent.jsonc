@@ -45,7 +45,7 @@
   },
   "disabled_mcps": [
     "context7",
-    "websearch_exa",
+    "websearch",
     "grep_app"
   ],
   "disabled_skills": [
