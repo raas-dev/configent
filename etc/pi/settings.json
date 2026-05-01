@@ -14,9 +14,13 @@
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.70.6",
+  "lastChangelogVersion": "0.71.0",
   "npmCommand": [
-    "mise", "exec", "bun", "--", "bun"
+    "mise",
+    "exec",
+    "node",
+    "--",
+    "npm"
   ],
   "packages": [
     "npm:pi-ask-user",
