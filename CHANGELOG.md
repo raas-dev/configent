@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.2](https://github.com/raas-dev/configent/compare/1.218.1...1.218.2) (2026-05-01)
+
+
+### Fixes
+
+* **opencode:** use commit command ([bbed23f](https://github.com/raas-dev/configent/commit/bbed23f445a23bb3fcb49002176954e6657c7c10))
+* **tmux:** disable passthrough for opencode ([650cdd5](https://github.com/raas-dev/configent/commit/650cdd517d0df0ec632d0cad5332c41f01c4c531))
+
 ## [1.218.1](https://github.com/raas-dev/configent/compare/1.218.0...1.218.1) (2026-04-26)
 
 
