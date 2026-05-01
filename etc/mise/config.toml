@@ -139,6 +139,10 @@ uv = 'latest'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
+[env]
+# node-gyp on macOS: climits and other C++ headers live in SDK, not in CLT default path
+CXXFLAGS = "{{exec(command='xcrun --sdk macosx --show-sdk-path')}}/usr/include/c++/v1"
+
 [settings]
 experimental = true
 cargo.binstall = true
