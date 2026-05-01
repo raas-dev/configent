@@ -40,9 +40,6 @@ auto_update = false
 check_interval_hours = 24
 notify_in_cli = false
 
-[claude]
-config_dir = "~/.claude"
-
 [sound]
 enabled = false
 
