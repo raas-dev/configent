@@ -16,42 +16,44 @@
       "orchestrator": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "high",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": ["*"]
       },
       "explorer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": [""]
       },
       "oracle": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "high",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": [""]
       },
       "librarian": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": ["*"]
       },
       "designer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "medium",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": [""]
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": [""]
       },
       "councillor": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": ["*"]
-      },
-      "council-master": {
-        "model": "zai-coding-plan/glm-5.1",
-        "variant": "low",
-        "skills": ["*"]
+        "skills": ["*"],
+        "mcps": [""]
       }
     }
   },
