@@ -2,6 +2,7 @@ default_profile = ""
 
 [theme]
 name = "phosphor"
+color_mode = "truecolor"
 
 [claude]
 
@@ -24,12 +25,7 @@ workspace_path_template = "../{branch}-workspace-{session-id}"
 enabled_by_default = false
 default_image = "ghcr.io/njbrake/aoe-sandbox:latest"
 extra_volumes = []
-environment = [
-    "TERM",
-    "COLORTERM",
-    "FORCE_COLOR",
-    "NO_COLOR",
-]
+environment = ["TERM", "COLORTERM", "FORCE_COLOR", "NO_COLOR"]
 auto_cleanup = true
 default_terminal_mode = "host"
 volume_ignores = []
@@ -42,6 +38,8 @@ mouse = "auto"
 
 [session]
 yolo_mode_default = true
+agent_status_hooks = true
+strict_hotkeys = false
 
 [diff]
 context_lines = 3
@@ -54,7 +52,13 @@ mode = "random"
 
 [app_state]
 has_seen_welcome = true
-last_seen_version = "1.0.0"
+last_seen_version = "1.5.0"
 has_seen_custom_instruction_warning = false
 has_acknowledged_agent_hooks = false
 sort_order = "oldest"
+
+[web]
+notifications_enabled = true
+notify_on_waiting = true
+notify_on_idle = false
+notify_on_error = true
