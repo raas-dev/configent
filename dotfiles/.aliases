@@ -600,9 +600,6 @@ alias mcpjam='bunx @mcpjam/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
-# Spec-driven development for brownfield
-alias openspec='bunx @fission-ai/openspec'
-
 # Shorthand for pnpm
 alias pn='bunx pnpm'
 
