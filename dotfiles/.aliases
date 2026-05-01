@@ -1059,6 +1059,13 @@ npmclear() {
   printf '%s\n' "$pkgs" | xargs npm --location=global rm
 }
 
+bunclear() {
+  local pkgs
+  pkgs=$(bun pm ls -g 2>/dev/null | awk 'NR>1 {print $2}' | sed 's/@[^@]*$//')
+  [ -z "$pkgs" ] && return 0
+  printf '%s\n' "$pkgs" | xargs bun remove -g
+}
+
 # Gem remove all
 gemclear() {
   gem uninstall -aIx
