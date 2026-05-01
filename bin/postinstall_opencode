@@ -129,3 +129,17 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### caveman-opencode-plugin ####################################################
+
+# caveman.json
+if [ ! -r "$backup_path/.config/opencode/caveman.json" ]; then
+  if [ -r "$HOME/.config/opencode/caveman.json" ]; then
+    mkdir -p "$backup_path/.config/opencode"
+    cp -P "$HOME/.config/opencode/caveman.json" \
+      "$backup_path/.config/opencode/caveman.json"
+  fi
+fi
+mkdir -p "$HOME/.config/opencode"
+ln -sfnv "$config_path/opencode/caveman.json" \
+  "$HOME/.config/opencode/caveman.json"
