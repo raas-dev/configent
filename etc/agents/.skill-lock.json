@@ -109,6 +109,15 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-05-02T21:12:06.093Z",
       "updatedAt": "2026-05-02T21:12:06.093Z"
+    },
+    "caveman-compress": {
+      "source": "juliusbrussee/caveman",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
+      "skillPath": "caveman-compress/SKILL.md",
+      "skillFolderHash": "eb81d1ed6ddeb1767f56817572c232e66bdc1167",
+      "installedAt": "2026-05-02T21:30:52.204Z",
+      "updatedAt": "2026-05-02T21:30:52.204Z"
     }
   },
   "dismissed": {
