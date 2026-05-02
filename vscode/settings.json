@@ -434,7 +434,6 @@
   "python.testing.unittestEnabled": true,
   "redhat.telemetry.enabled": false,
   "restoreTerminals.keepExistingTerminalsOpen": true,
-  "restoreTerminals.runOnStartup": false,
   "ruff.configurationPreference": "filesystemFirst",
   "rumdl.enable": false,
   "rust-analyzer.check.command": "clippy",
