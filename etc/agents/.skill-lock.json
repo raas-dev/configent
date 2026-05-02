@@ -118,6 +118,15 @@
       "skillFolderHash": "eb81d1ed6ddeb1767f56817572c232e66bdc1167",
       "installedAt": "2026-05-02T21:30:52.204Z",
       "updatedAt": "2026-05-02T21:30:52.204Z"
+    },
+    "brownfield-onboarding": {
+      "source": "cyberelf/agent_skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cyberelf/agent_skills.git",
+      "skillPath": "skills/brownfield-onboarding/SKILL.md",
+      "skillFolderHash": "7bb665d6ed738e7ff22580503a9abd31983e8196",
+      "installedAt": "2026-05-02T21:45:25.474Z",
+      "updatedAt": "2026-05-02T21:45:25.474Z"
     }
   },
   "dismissed": {
