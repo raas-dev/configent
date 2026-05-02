@@ -34,6 +34,8 @@ task:
     - designer
   isolation:
     mode: none
+  eager: true
+  simple: default
 interruptMode: immediate
 followUpMode: one-at-a-time
 startup:
@@ -50,6 +52,7 @@ async:
   enabled: true
 mcp:
   discoveryMode: true
+  notifications: true
 secrets:
   enabled: true
 statusLine:
@@ -69,7 +72,7 @@ bash:
   autoBackground:
     enabled: true
 dev:
-  autoqa: false
+  autoqa: true
 treeFilterMode: user-only
 autocompleteMaxVisible: 20
 shellMinimizer:
