@@ -8,8 +8,8 @@ import { resolveLevel, levelPrompt, DISABLE_VALUES } from "./caveman-level";
 const LABEL = "Caveman";
 
 const SKILL_CANDIDATES = [
-	join(homedir(), ".agents", "skills", "caveman"),
 	join(homedir(), ".omp", "agent", "skills", "caveman"),
+	join(homedir(), ".agents", "skills", "caveman"),
 ];
 
 function resolveSkillDir(): string | null {
