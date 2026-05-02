@@ -14,7 +14,8 @@ red=$(tput setaf 1)
 yellow=$(tput setaf 3)
 cyan=$(tput setaf 6)
 
-OC_PROFILE="${OC_PROFILE:-git-use}"
+OMP_MODEL="${OMP_MODEL:-zai/glm-5-turbo}"
+OMP_THINKING="${OMP_THINKING:-medium}"
 
 # Shown to model + enforced in finalize_commit_message (line 1).
 AI_COMMIT_SUBJECT_MAX="${AI_COMMIT_SUBJECT_MAX:-72}"
@@ -23,8 +24,8 @@ AI_COMMIT_DIFF_MAX_BYTES="${AI_COMMIT_DIFF_MAX_BYTES:-72000}"
 # If 1 (default), synthesize a conventional message from git when the model returns nothing.
 AI_COMMIT_HEURISTIC_FALLBACK="${AI_COMMIT_HEURISTIC_FALLBACK:-1}"
 
-if ! command -v opencode >/dev/null; then
-  printf "%sError: opencode not found in the system.\n" "$red"
+if ! command -v omp >/dev/null; then
+  printf "%sError: omp not found in the system.\n" "$red"
   exit 127
 fi
 
@@ -107,8 +108,8 @@ ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
   fi
 fi
 
-# stdin for opencode: optional context + staged diff (temp file avoids argv limits).
-pipe_opencode_stdin() {
+# Build prompt for omp: optional context + staged diff.
+build_omp_prompt() {
   if [ "$diff_truncated" -eq 1 ]; then
     printf '%s\n\n' "$commit_rules"
     if [ -n "$context_message" ]; then
@@ -160,7 +161,7 @@ heuristic_commit_message() {
   printf '%s\n' "Note: Generated without the LLM (diff too large, model error, or empty model output)."
 }
 
-# opencode run stdout (formatted text, not --format json) may include noise; trim edges and stray ``` fence lines.
+# omp stdout may include noise; trim edges and stray ``` fence lines.
 # Find first Conventional Commits subject (known types) after stripping ANSI / UI prefixes. Match is
 # case-insensitive and may appear mid-line ("Summary: chore: …") so we extract the CC span only.
 finalize_commit_message() {
@@ -272,29 +273,39 @@ finalize_commit_message() {
 }
 
 if [ -z "$commit_message" ]; then
-  oc_stderr=$(mktemp) || exit 1
-  trap 'rm -f "$diff_file" "$oc_stderr"' EXIT INT TERM
+  omp_stderr=$(mktemp) || exit 1
+  trap 'rm -f "$diff_file" "$omp_stderr"' EXIT INT TERM
 
-  oc_status=0
-  raw="$(pipe_opencode_stdin | oc exec "$OC_PROFILE" -- opencode run \
-    --agent coder \
-    --command caveman-commit \
-    2>"$oc_stderr")" || oc_status=$?
+  omp_status=0
+  _prompt="/skill:caveman-commit
 
-  if [ "$oc_status" -ne 0 ]; then
+$(build_omp_prompt)"
+  raw="$(omp \
+    --allow-home \
+    --no-extensions \
+    --no-rules \
+    --no-session \
+    --no-title \
+    --model "$OMP_MODEL" \
+    --thinking "$OMP_THINKING" \
+    --print \
+    "$_prompt" \
+    2>"$omp_stderr")" || omp_status=$?
+
+  if [ "$omp_status" -ne 0 ]; then
     use_heuristic=0
     if [ "${AI_COMMIT_HEURISTIC_FALLBACK:-1}" != 0 ] && [ "${AI_COMMIT_HEURISTIC_FALLBACK:-1}" != no ] &&
-      [ -s "$oc_stderr" ] && grep -qiE 'context window|input exceeds' "$oc_stderr"; then
+      [ -s "$omp_stderr" ] && grep -qiE 'context window|input exceeds' "$omp_stderr"; then
       use_heuristic=1
     fi
     if [ "$use_heuristic" -eq 1 ]; then
-      printf "%sopencode failed (exit %s) — likely input size; using heuristic commit message.%s\n" \
-        "$yellow" "$oc_status" "$normal"
+      printf "%somp failed (exit %s) — likely input size; using heuristic commit message.%s\n" \
+        "$yellow" "$omp_status" "$normal"
       commit_message="$(heuristic_commit_message)"
     else
-      printf "%sError: opencode run failed (exit %s).\n" "$red" "$oc_status"
-      [ -s "$oc_stderr" ] && printf "%s%s\n" "$yellow" "$(cat "$oc_stderr")"
-      rm -f "$oc_stderr"
+      printf "%sError: omp failed (exit %s).\n" "$red" "$omp_status"
+      [ -s "$omp_stderr" ] && printf "%s%s\n" "$yellow" "$(cat "$omp_stderr")"
+      rm -f "$omp_stderr"
       trap 'rm -f "$diff_file"' EXIT INT TERM
       exit 1
     fi
@@ -317,18 +328,18 @@ if [ -z "$commit_message" ]; then
   if [ -n "${raw:-}" ]; then
     printf "%sModel stdout (for debugging):%s\n" "$yellow" "$normal"
     printf "%s\n" "$raw"
-  elif [ -n "${oc_stderr:-}" ] && [ -s "$oc_stderr" ]; then
-    printf "%sopencode stderr (stdout was empty):%s\n" "$yellow" "$normal"
-    head -40 "$oc_stderr" 2>/dev/null || true
+  elif [ -n "${omp_stderr:-}" ] && [ -s "$omp_stderr" ]; then
+    printf "%somp stderr (stdout was empty):%s\n" "$yellow" "$normal"
+    head -40 "$omp_stderr" 2>/dev/null || true
     printf "%s\n" "$normal"
   fi
-  [ -n "${oc_stderr:-}" ] && rm -f "$oc_stderr"
+  [ -n "${omp_stderr:-}" ] && rm -f "$omp_stderr"
   trap 'rm -f "$diff_file"' EXIT INT TERM
   exit 1
 fi
 
-if [ -n "${oc_stderr:-}" ]; then
-  rm -f "$oc_stderr"
+if [ -n "${omp_stderr:-}" ]; then
+  rm -f "$omp_stderr"
   trap 'rm -f "$diff_file"' EXIT INT TERM
 fi
 
