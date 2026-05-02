@@ -1,7 +1,8 @@
 {
   "schemaVersion": 8,
   "seed": {
-    "maxDiffChars": 3000
+    "maxDiffChars": 3000,
+    "maxSteps": 32
   },
   "reseed": {
     "enabled": true,
