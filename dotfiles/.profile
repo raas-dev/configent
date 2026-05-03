@@ -315,6 +315,10 @@ export PI_SKIP_VERSION_CHECK=1
 # pi-run-code
 #export PI_RUN_CODE_UNSANDBOXED=1
 
+# headroom
+# see: https://github.com/chopratejas/headroom/issues/355
+export HEADROOM_REQUIRE_RUST_CORE=false
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
