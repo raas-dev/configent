@@ -15,7 +15,8 @@
 
 case "$RUN" in
 pi) FW="$FW,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
-opencode) FW="$FW,OPENCODE_API_KEY,OPENCODE_FORCE_FULL_READ_ACTIVE" ;;
+omp) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
+opencode) FW="$FW,OPENCODE_API_KEY" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
 codex) FW="$FW,OPENAI_API_KEY" ;;
 esac
@@ -40,6 +41,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     limactl shell --tty=false "$NAME" -- mkdir -p \
       "${guest_home}/.ssh" \
       "${guest_home}/.pi/agent" \
+      "${guest_home}/.omp/agent" \
       "${guest_home}/.local/share/opencode" \
       "${guest_home}/.codex" ||
       return 0
@@ -53,6 +55,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [ -f "$HOME/.pi/agent/auth.json" ] &&
       limactl cp "$HOME/.pi/agent/auth.json" \
         "$NAME:${guest_home}/.pi/agent/auth.json"
+
+    # oh-my-pi
+    [ -f "$HOME/.omp/marketplaces.json" ] &&
+      limactl cp "$HOME/.omp/marketplaces.json" \
+        "$NAME:${guest_home}/.omp/marketplaces.json"
 
     # OpenCode
     [ -f "$HOME/.local/share/opencode/auth.json" ] &&
