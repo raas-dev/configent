@@ -23,7 +23,7 @@ esac
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot start Linux VM for pi."
+    echo "Error: limactl not found on macOS, cannot start Linux VM for agent."
     exit 127
   fi
   lima_cwd=$(pwd -P)
@@ -68,6 +68,10 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
       limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
         "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
+
+    # Claude Code
+    [ -f "$HOME/.claude.json" ] &&
+      limactl cp "$HOME/.claude.json" "$NAME:${guest_home}/.claude.json"
 
     # Codex CLI
     [ -f "$HOME/.codex/auth.json" ] &&
