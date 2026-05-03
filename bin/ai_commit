@@ -99,12 +99,13 @@ commit_rules="COMMIT MESSAGE RULES (must follow):
 $recent_headlines"
 
 if [ -n "$*" ]; then
+  hint_line="USER HINT (you MUST honour this — if it names a conventional commit type such as fix/feat/chore/refactor/etc., use that exact type in the subject; if it names a scope, use it as the scope; treat any other words as extra context): $*"
   if [ -n "$context_message" ]; then
     context_message="$context_message
 
-ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
+$hint_line"
   else
-    context_message="ADDITIONAL CONSTRAINTS FOR TYPE AND SCOPE: $*"
+    context_message="$hint_line"
   fi
 fi
 
