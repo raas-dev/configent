@@ -127,7 +127,7 @@ node = { version = '24.14.0', postinstall = "~/.local/configent/bin/postinstall_
 bun = 'latest'
 
 # python
-python = { version = '3.14.2', postinstall = "~/.local/configent/bin/postinstall_python" }
+python = { version = '3.13.13', postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:pdm' = 'latest'
 #'pipx:poetry' = 'latest'
