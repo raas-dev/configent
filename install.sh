@@ -95,7 +95,9 @@ if [ -t 0 ]; then
       printf "Fixing broken ORIG_HEAD reference...\n"
       rm -f "$full_path/.git/ORIG_HEAD"
     fi
-    git -C "$full_path" pull --autostash --rebase origin "$git_branch" || true
+    git -C "$full_path" stash --include-untracked || true
+    git -C "$full_path" pull --rebase origin "$git_branch" || true
+    git -C "$full_path" stash pop || true
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
 else
@@ -114,7 +116,9 @@ else
       printf "Fixing broken ORIG_HEAD reference...\n"
       rm -f "$TARGET_PATH/.git/ORIG_HEAD"
     fi
-    git -C "$TARGET_PATH" pull --autostash --rebase origin main || true
+    git -C "$TARGET_PATH" stash --include-untracked || true
+    git -C "$TARGET_PATH" pull --rebase origin main || true
+    git -C "$TARGET_PATH" stash pop || true
   fi
   cd "$TARGET_PATH" &&
     . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
