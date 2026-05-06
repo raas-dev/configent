@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.7](https://github.com/raas-dev/configent/compare/1.218.6...1.218.7) (2026-05-06)
+
+
+### Fixes
+
+* **scripts:** stash untracked files before pull --rebase ([5966b56](https://github.com/raas-dev/configent/commit/5966b56c8cb9ecd0d2dc6d577805b97471723d89))
+
 ## [1.218.6](https://github.com/raas-dev/configent/compare/1.218.5...1.218.6) (2026-05-06)
 
 
