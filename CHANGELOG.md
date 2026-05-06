@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.6](https://github.com/raas-dev/configent/compare/1.218.5...1.218.6) (2026-05-06)
+
+
+### Fixes
+
+* **ai_commit:** clarify user hint prompt for type/scope ([eb11a01](https://github.com/raas-dev/configent/commit/eb11a019e8860fc47c58f75be26c124740ae316b))
+* **box:** add omp profile support to lima box ([cfc32db](https://github.com/raas-dev/configent/commit/cfc32db0d30bd54677f0b4b7dd0f08974a73851b))
+* **pi:** remove pi-mono-status-line extension ([77f091d](https://github.com/raas-dev/configent/commit/77f091d2d17f078699bbd541791ecbf4ffbb9379))
+* **scripts:** use --autostash for git pull --rebase ([42c94e2](https://github.com/raas-dev/configent/commit/42c94e2ab721af4d282753d865a917adda89b3cb))
+
 ## [1.218.5](https://github.com/raas-dev/configent/compare/1.218.4...1.218.5) (2026-05-03)
 
 ## [1.218.4](https://github.com/raas-dev/configent/compare/1.218.3...1.218.4) (2026-05-01)
