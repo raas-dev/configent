@@ -47,6 +47,16 @@
     "command": "bunx -y ccstatusline",
     "padding": 0
   },
-  "extraKnownMarketplaces": {},
-  "skipDangerousModePermissionPrompt": true
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "enabledPlugins": {
+    "caveman@caveman": true
+  }
 }
