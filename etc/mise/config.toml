@@ -55,6 +55,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:@different-ai/opencode-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'npm:@fission-ai/openspec' = 'latest'
+'npm:spec-gen-cli' = 'latest'
 #'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 'pipx:skill-seekers' = 'latest'
 
