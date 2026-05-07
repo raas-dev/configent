@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.8](https://github.com/raas-dev/configent/compare/1.218.7...1.218.8) (2026-05-07)
+
+
+### Fixes
+
+* **tmux:** auto-rebuild tmux-cpu-mem-monitor venv ([be1246d](https://github.com/raas-dev/configent/commit/be1246d6474f26002b887b3f8f4de9d4532b9f44))
+* **tmux:** bind C-c to send interrupt in all contexts ([3753e66](https://github.com/raas-dev/configent/commit/3753e66210048760903ea66578bb965eda469d2e))
+
 ## [1.218.7](https://github.com/raas-dev/configent/compare/1.218.6...1.218.7) (2026-05-06)
 
 
