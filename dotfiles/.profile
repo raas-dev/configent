@@ -141,6 +141,16 @@ unset _mise_skip_tm_bootstrap
 # for bun link, npm link uses $(npm prefix -g)
 path_append "$HOME/.bun/bin"
 
+### pnpm #######################################################################
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+  path_append "$PNPM_HOME/bin"
+elif [ "$(uname -s)" = 'Linux' ]; then
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+  path_append "$PNPM_HOME"
+fi
+
 ### go #########################################################################
 
 export GOPATH="$HOME/.go"
