@@ -146,7 +146,7 @@ path_append "$HOME/.bun/bin"
 if [ "$(uname -s)" = 'Darwin' ]; then
   export PNPM_HOME="$HOME/Library/pnpm"
   path_append "$PNPM_HOME/bin"
-elif [ "$(uname -s)" = 'Linux' ]; then
+else
   export PNPM_HOME="$HOME/.local/share/pnpm"
   path_append "$PNPM_HOME"
 fi
