@@ -31,6 +31,9 @@ theme:
   dark: ayu-dark
 task:
   disabledAgents:
+    - cavecrew-builder
+    - cavecrew-investigator
+    - cavecrew-reviewer
     - designer
   isolation:
     mode: none
