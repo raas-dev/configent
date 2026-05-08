@@ -10,22 +10,52 @@
 # Strips all parent env vars except what the agent needs.
 
 _usage() {
-  echo "Usage: sb <agent> [args...]" >&2
+  echo "Usage: sb [-i|--interactive] <agent> [args...]" >&2
   echo "Agents: pi, omp, opencode, claude, codex" >&2
   exit 1
 }
 
 [ $# -eq 0 ] && _usage
+INTERACTIVE=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+  -n | --no-interactive)
+    INTERACTIVE=0
+    shift
+    ;;
+  -i | --interactive | --intearctive)
+    INTERACTIVE=1
+    shift
+    ;;
+  -h | --help)
+    _usage
+    ;;
+  --)
+    shift
+    break
+    ;;
+  -*)
+    echo "Error: unknown option: $1" >&2
+    _usage
+    ;;
+  *)
+    break
+    ;;
+  esac
+done
+[ $# -eq 0 ] && _usage
 RUN="$1"
 shift
-AGENT_ARGS=${1+"$@"}
 PROFILE="${PROFILE:-$RUN}"
 
-# Credentials and config paths forwarded per agent (comma-separated)
-_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY,DYNAMIC_MCP_CONFIG'
+# Credentials and config paths forwarded per agent
+# (comma-separated)
+_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY,'
+_fw_common="${_fw_common}DYNAMIC_MCP_CONFIG"
 case "$RUN" in
 pi)
-  _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY"
+  _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,"
+  _fw="${_fw}MINIMAX_API_KEY,ZAI_API_KEY"
   ;;
 omp)
   _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY"
@@ -34,7 +64,8 @@ opencode)
   _fw="$_fw_common,OPENCODE_API_KEY"
   ;;
 claude)
-  _fw="$_fw_common,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN"
+  _fw="$_fw_common,ANTHROPIC_API_KEY,"
+  _fw="${_fw}CLAUDE_CODE_OAUTH_TOKEN"
   ;;
 codex)
   _fw="$_fw_common,OPENAI_API_KEY"
@@ -47,6 +78,16 @@ if ! command -v nono >/dev/null 2>&1; then
   exit 127
 fi
 
+# Quote args for `sh -c` execution in interactive shell
+_sq() {
+  printf "'%s'" "$(printf "%s" "$1" | sed "s/'/'\\\\''/g")"
+}
+
+_cmd="$(_sq "$RUN")"
+for _arg in "$@"; do
+  _cmd="$_cmd $(_sq "$_arg")"
+done
+
 # Build env -i arguments in positional params, then append the full command
 # This preserves spaces in values (e.g. GIT_AUTHOR_NAME) through "$@"
 set --
@@ -57,7 +98,8 @@ set -- "$@" "HOME=$HOME" "USER=$(id -un)" "SHELL=${SHELL:-/bin/sh}" \
   "LANG=${LANG:-en_US.UTF-8}" "TERM=${TERM:-xterm-256color}"
 
 # Terminal color hints
-for _v in COLORTERM TERM_PROGRAM TERM_PROGRAM_VERSION NO_COLOR FORCE_COLOR; do
+for _v in \
+  COLORTERM TERM_PROGRAM TERM_PROGRAM_VERSION NO_COLOR FORCE_COLOR; do
   eval "_val=\${$_v:-}"
   [ -n "$_val" ] && set -- "$@" "$_v=$_val"
 done
@@ -77,10 +119,14 @@ for _v in $_fw; do
 done
 IFS="$_oldifs"
 
-# Append the command to run; env -i treats everything before the command
-# as VAR=VAL assignments, everything after as the command + args
-# shellcheck disable=SC2086 # intentional: expand preserved positional
-# args vector
-set -- "$@" nono run --profile "$PROFILE" "$RUN" $AGENT_ARGS
+# Append command to run; env -i treats everything before command
+# as VAR=VAL assignments, everything after as command + args.
+# Non-interactive default; use --interactive for login+interactive shell.
+if [ "$INTERACTIVE" -eq 1 ]; then
+  set -- "$@" nono run --profile "$PROFILE" \
+    "${SHELL:-/bin/sh}" -ilc "exec $_cmd"
+else
+  set -- "$@" nono run --profile "$PROFILE" /bin/sh -c "exec $_cmd"
+fi
 
 exec env -i "$@"
