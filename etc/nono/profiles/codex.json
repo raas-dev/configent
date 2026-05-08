@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "claude",
+    "name": "codex",
     "version": "1.0.0",
-    "description": "Claude Code CLI"
+    "description": "OpenAI Codex CLI"
   },
   "groups": {
     "include": [
@@ -12,15 +12,11 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.claude",
-      "$HOME/.local/share/mise"
+      "$HOME/.codex"
     ],
     "read": [
       "$HOME/.config/configent",
       "$HOME/.local/configent/bin"
-    ],
-    "read_file": [
-      "$HOME/.claude.json"
     ],
     "bypass_protection": [
       "$HOME/.config/configent",
