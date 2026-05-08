@@ -10,7 +10,7 @@
 # Strips all parent env vars except what the agent needs.
 
 _usage() {
-  echo "Usage: sb [-i|--interactive] <agent> [args...]" >&2
+  echo "Usage: sb [-i] <agent> [args...]" >&2
   echo "Agents: pi, omp, opencode, claude, codex" >&2
   exit 1
 }
@@ -19,11 +19,7 @@ _usage() {
 INTERACTIVE=0
 while [ $# -gt 0 ]; do
   case "$1" in
-  -n | --no-interactive)
-    INTERACTIVE=0
-    shift
-    ;;
-  -i | --interactive | --intearctive)
+  -i)
     INTERACTIVE=1
     shift
     ;;
@@ -121,12 +117,13 @@ IFS="$_oldifs"
 
 # Append command to run; env -i treats everything before command
 # as VAR=VAL assignments, everything after as command + args.
-# Non-interactive default; use --interactive for login+interactive shell.
+# Non-interactive default; use -i for login+interactive shell.
 if [ "$INTERACTIVE" -eq 1 ]; then
   set -- "$@" nono run --profile "$PROFILE" \
     "${SHELL:-/bin/sh}" -ilc "exec $_cmd"
 else
-  set -- "$@" nono run --profile "$PROFILE" /bin/sh -c "exec $_cmd"
+  set -- "$@" nono run --profile "$PROFILE" \
+    "${SHELL:-/bin/sh}" -c "exec $_cmd"
 fi
 
 exec env -i "$@"
