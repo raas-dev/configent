@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.218.9](https://github.com/raas-dev/configent/compare/1.218.8...1.218.9) (2026-05-08)
+
+
+### Fixes
+
+* **tmux:** expand env passthrough and enable clipboard ([f797ecb](https://github.com/raas-dev/configent/commit/f797ecb9fef0c3211f5b19d8bc4b6dc7ffd23e0c))
+
 ## [1.218.8](https://github.com/raas-dev/configent/compare/1.218.7...1.218.8) (2026-05-07)
 
 
