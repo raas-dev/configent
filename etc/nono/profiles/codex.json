@@ -20,7 +20,43 @@
     ]
   },
   "network": {
-    "block": false
+    "block": false,
+    "credentials": [
+      "github",
+      "context7",
+      "exa",
+      "codex"
+    ],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "github_token",
+        "env_var": "GITHUB_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "token {}"
+      },
+      "context7": {
+        "upstream": "https://api.context7.com",
+        "credential_key": "context7_api_key",
+        "env_var": "CONTEXT7_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "exa": {
+        "upstream": "https://api.exa.ai",
+        "credential_key": "exa_api_key",
+        "env_var": "EXA_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "codex": {
+        "upstream": "https://api.openai.com",
+        "credential_key": "openai_api_key",
+        "env_var": "OPENAI_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    }
   },
   "environment": {
     "allow_vars": [
@@ -39,11 +75,8 @@
       "EMAIL",
       "GIT_AUTHOR_NAME",
       "GIT_COMMITTER_NAME",
-      "GITHUB_TOKEN",
-      "CONTEXT7_API_KEY",
-      "EXA_API_KEY",
       "DYNAMIC_MCP_CONFIG",
-      "OPENAI_API_KEY"
+      "NONO_PROXY_TOKEN"
     ]
   }
 }
