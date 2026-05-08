@@ -14,13 +14,13 @@
     "allow": [
       "$WORKDIR",
       "$HOME/.agents",
+      "$HOME/.claude",
       "$HOME/.config/opencode",
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
       "$HOME/.local/state/opencode"
     ],
     "read": [
-      "$HOME/.claude",
       "$HOME/.local/share/mise"
     ]
   },
