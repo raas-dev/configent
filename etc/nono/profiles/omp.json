@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "name": "omp",
+    "version": "1.0.0",
+    "description": "oh-my-pi AI coding platform (ZAI/GLM via api.z.ai)"
+  },
+  "groups": {
+    "include": ["git_config"]
+  },
+  "filesystem": {
+    "allow": ["$WORKDIR", "$HOME/.omp", "$HOME/.agents"]
+  },
+  "network": {
+    "block": false
+  }
+}

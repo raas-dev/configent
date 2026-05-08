@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "name": "pi",
+    "version": "1.0.0",
+    "description": "pi AI coding platform (ZAI/GLM via api.z.ai)"
+  },
+  "groups": {
+    "include": ["git_config"]
+  },
+  "filesystem": {
+    "allow": ["$WORKDIR", "$HOME/.pi", "$HOME/.agents", "$HOME/.pi-lens"],
+    "read": ["$HOME/.local/share/mise", "$HOME/.cargo/bin"],
+    "bypass_protection": [
+      "$HOME/configent/dotfiles/.zshrc",
+      "$HOME/configent/dotfiles/.bashrc",
+      "$HOME/configent/dotfiles/.bash_profile",
+      "$HOME/configent/dotfiles/.profile",
+      "$HOME/.config/mise"
+    ]
+  },
+  "network": {
+    "block": false
+  },
+  "env_credentials": {
+    "env://ZAI_API_KEY": "ZAI_API_KEY",
+    "env://OPENAI_COMPAT_BASE_URL": "OPENAI_COMPAT_BASE_URL"
+  }
+}

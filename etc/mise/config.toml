@@ -48,6 +48,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:@openchamber/web' = 'latest'
 
 # ai coding harnesses
+'github:always-further/nono' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 'github:vercel-labs/agent-browser' = 'latest'

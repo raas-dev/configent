@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# config.toml
+if [ ! -r "$backup_path/.config/nono/config.toml" ]; then
+  if [ -r "$HOME/.config/nono/config.toml" ]; then
+    mkdir -p "$backup_path/.config/nono"
+    cp -P "$HOME/.config/nono/config.toml" \
+      "$backup_path/.config/nono/config.toml"
+  fi
+fi
+
+mkdir -p "$HOME/.config/nono"
+ln -sfnv "$config_path/nono/config.toml" "$HOME/.config/nono/config.toml"
+
+# profiles dir
+if [ ! -r "$backup_path/.config/nono/profiles" ]; then
+  if [ -r "$HOME/.config/nono/profiles" ]; then
+    mkdir -p "$backup_path/.config/nono"
+    cp -RP "$HOME/.config/nono/profiles" \
+      "$backup_path/.config/nono/profiles"
+  fi
+fi
+
+mkdir -p "$HOME/.config/nono"
+rm -rf "$HOME/.config/nono/profiles"
+ln -sfnv "$config_path/nono/profiles" "$HOME/.config/nono/profiles"
