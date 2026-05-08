@@ -12,13 +12,14 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.claude",
-      "$HOME/.local/share/mise"
+      "$HOME/.agents",
+      "$HOME/.claude"
     ],
     "read": [
+      "$HOME/.local/share/mise",
       "$HOME/configent/dotfiles"
     ],
-    "read_file": [
+    "allow_file": [
       "$HOME/.claude.json"
     ],
     "bypass_protection": [

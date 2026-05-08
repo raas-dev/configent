@@ -12,14 +12,15 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.claude",
+      "$HOME/.agents",
       "$HOME/.config/opencode",
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
-      "$HOME/.local/state/opencode",
-      "$HOME/.local/share/mise"
+      "$HOME/.local/state/opencode"
     ],
     "read": [
+      "$HOME/.claude",
+      "$HOME/.local/share/mise",
       "$HOME/configent/dotfiles"
     ],
     "bypass_protection": [

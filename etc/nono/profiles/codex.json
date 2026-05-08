@@ -12,10 +12,11 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.codex",
-      "$HOME/.local/share/mise"
+      "$HOME/.agents",
+      "$HOME/.codex"
     ],
     "read": [
+      "$HOME/.local/share/mise",
       "$HOME/configent/dotfiles"
     ],
     "bypass_protection": [

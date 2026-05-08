@@ -16,6 +16,7 @@
       "$HOME/.omp"
     ],
     "read": [
+      "$HOME/.local/share/mise",
       "$HOME/configent/dotfiles"
     ],
     "bypass_protection": [
