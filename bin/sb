@@ -21,8 +21,8 @@ shift
 AGENT_ARGS=${1+"$@"}
 PROFILE="${PROFILE:-$RUN}"
 
-# Credentials forwarded per agent (comma-separated, picked from parent env)
-_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY'
+# Credentials and config paths forwarded per agent (comma-separated)
+_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY,DYNAMIC_MCP_CONFIG'
 case "$RUN" in
 pi) _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 omp) _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY" ;;
