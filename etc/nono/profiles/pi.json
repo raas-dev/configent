@@ -8,17 +8,23 @@
     "include": ["git_config"]
   },
   "filesystem": {
-    "allow": ["$WORKDIR", "$HOME/.pi", "$HOME/.agents", "$HOME/.pi-lens"],
-    "read": ["$HOME/.local/share/mise", "$HOME/configent/dotfiles", "$HOME/.config/mise"],
+    "allow": ["$WORKDIR", "$HOME/.pi", "$HOME/.agents", "$HOME/.pi-lens", "$HOME/configent/etc/pi"],
+    "deny": ["$HOME/.rclocal"],
+    "read": ["$HOME/configent/dotfiles"],
     "bypass_protection": [
       "$HOME/configent/dotfiles/.zshrc",
       "$HOME/configent/dotfiles/.bashrc",
       "$HOME/configent/dotfiles/.bash_profile",
-      "$HOME/configent/dotfiles/.profile",
-      "$HOME/.config/mise"
+      "$HOME/configent/dotfiles/.profile"
     ]
   },
   "network": {
     "block": false
-  }
+  },
+  "env_credentials": {
+    "env://ZAI_API_KEY": "ZAI_API_KEY"
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow file-read-metadata file-read-data (subpath \"/Users\"))"
+  ]
 }
