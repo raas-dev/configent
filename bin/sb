@@ -44,27 +44,29 @@ RUN="$1"
 shift
 PROFILE="${PROFILE:-$RUN}"
 
-# Credentials and config paths forwarded per agent
-# (comma-separated)
-_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY,'
-_fw_common="${_fw_common}DYNAMIC_MCP_CONFIG"
+# Credentials and config paths forwarded per agent.
+# POSIX sh has no arrays, so use whitespace-separated "array-like" lists.
+_fw_common='GITHUB_TOKEN CONTEXT7_API_KEY EXA_API_KEY DYNAMIC_MCP_CONFIG'
+_fw_pi='PI_RUN_CODE_UNSANDBOXED MINIMAX_API_KEY ZAI_API_KEY'
+_fw_omp='MINIMAX_API_KEY ZAI_API_KEY'
+_fw_opencode='OPENCODE_API_KEY'
+_fw_claude='ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN'
+_fw_codex='OPENAI_API_KEY'
 case "$RUN" in
 pi)
-  _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,"
-  _fw="${_fw}MINIMAX_API_KEY,ZAI_API_KEY"
+  _fw="$_fw_common $_fw_pi"
   ;;
 omp)
-  _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY"
+  _fw="$_fw_common $_fw_omp"
   ;;
 opencode)
-  _fw="$_fw_common,OPENCODE_API_KEY"
+  _fw="$_fw_common $_fw_opencode"
   ;;
 claude)
-  _fw="$_fw_common,ANTHROPIC_API_KEY,"
-  _fw="${_fw}CLAUDE_CODE_OAUTH_TOKEN"
+  _fw="$_fw_common $_fw_claude"
   ;;
 codex)
-  _fw="$_fw_common,OPENAI_API_KEY"
+  _fw="$_fw_common $_fw_codex"
   ;;
 *) _fw="$_fw_common" ;;
 esac
@@ -107,13 +109,10 @@ for _v in EMAIL GIT_AUTHOR_NAME GIT_COMMITTER_NAME; do
 done
 
 # Agent-specific credentials
-_oldifs="$IFS"
-IFS=','
 for _v in $_fw; do
   eval "_val=\${$_v:-}"
   [ -n "$_val" ] && set -- "$@" "$_v=$_val"
 done
-IFS="$_oldifs"
 
 # Append command to run; env -i treats everything before command
 # as VAR=VAL assignments, everything after as command + args.
