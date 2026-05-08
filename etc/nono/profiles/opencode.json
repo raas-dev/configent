@@ -2,10 +2,12 @@
   "meta": {
     "name": "opencode",
     "version": "1.0.0",
-    "description": "OpenCode (extends default built-in)"
+    "description": "OpenCode"
   },
   "groups": {
-    "include": ["git_config"]
+    "include": [
+      "git_config"
+    ]
   },
   "filesystem": {
     "allow": [

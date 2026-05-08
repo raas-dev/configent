@@ -2,10 +2,12 @@
   "meta": {
     "name": "claude",
     "version": "1.0.0",
-    "description": "Claude Code (local profile, extends default only)"
+    "description": "Claude Code"
   },
   "groups": {
-    "include": ["git_config"]
+    "include": [
+      "git_config"
+    ]
   },
   "filesystem": {
     "allow": [

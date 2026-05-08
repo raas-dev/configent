@@ -2,15 +2,26 @@
   "meta": {
     "name": "omp",
     "version": "1.0.0",
-    "description": "oh-my-pi AI coding platform (ZAI/GLM via api.z.ai)"
+    "description": "oh-my-pi"
   },
   "groups": {
-    "include": ["git_config"]
+    "include": [
+      "git_config"
+    ]
   },
   "filesystem": {
-    "allow": ["$WORKDIR", "$HOME/.omp", "$HOME/.agents", "$HOME/configent/etc/omp"],
-    "deny": ["$HOME/.rclocal"],
-    "read": ["$HOME/configent/dotfiles"],
+    "allow": [
+      "$WORKDIR",
+      "$HOME/.omp",
+      "$HOME/.agents",
+      "$HOME/configent/etc/omp"
+    ],
+    "deny": [
+      "$HOME/.rclocal"
+    ],
+    "read": [
+      "$HOME/configent/dotfiles"
+    ],
     "bypass_protection": [
       "$HOME/configent/dotfiles/.zshrc",
       "$HOME/configent/dotfiles/.bashrc",
