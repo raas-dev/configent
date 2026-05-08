@@ -26,13 +26,15 @@
     "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.npmrc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.pypirc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.vsce$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.git-credentials$\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
     "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.aws\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.kube\"))"
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))"
   ],
   "environment": {
     "allow_vars": [
