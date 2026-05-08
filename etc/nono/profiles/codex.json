@@ -16,14 +16,7 @@
       "$HOME/.codex"
     ],
     "read": [
-      "$HOME/.local/share/mise",
-      "$HOME/configent/dotfiles"
-    ],
-    "bypass_protection": [
-      "$HOME/configent/dotfiles/.zshrc",
-      "$HOME/configent/dotfiles/.bashrc",
-      "$HOME/configent/dotfiles/.bash_profile",
-      "$HOME/configent/dotfiles/.profile"
+      "$HOME/.local/share/mise"
     ]
   },
   "network": {

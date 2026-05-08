@@ -16,20 +16,22 @@
       "$HOME/.omp"
     ],
     "read": [
-      "$HOME/.local/share/mise",
-      "$HOME/configent/dotfiles"
-    ],
-    "bypass_protection": [
-      "$HOME/configent/dotfiles/.zshrc",
-      "$HOME/configent/dotfiles/.bashrc",
-      "$HOME/configent/dotfiles/.bash_profile",
-      "$HOME/configent/dotfiles/.profile"
+      "$HOME/.local/share/mise"
     ]
   },
   "network": {
     "block": false
   },
   "unsafe_macos_seatbelt_rules": [
-    "(allow file-read-metadata file-read-data (subpath \"/Users\"))"
+    "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.aws\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.kube\"))"
   ]
 }

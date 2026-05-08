@@ -16,17 +16,10 @@
       "$HOME/.claude"
     ],
     "read": [
-      "$HOME/.local/share/mise",
-      "$HOME/configent/dotfiles"
+      "$HOME/.local/share/mise"
     ],
     "allow_file": [
       "$HOME/.claude.json"
-    ],
-    "bypass_protection": [
-      "$HOME/configent/dotfiles/.zshrc",
-      "$HOME/configent/dotfiles/.bashrc",
-      "$HOME/configent/dotfiles/.bash_profile",
-      "$HOME/configent/dotfiles/.profile"
     ]
   },
   "network": {
