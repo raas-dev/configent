@@ -1,6 +1,6 @@
 {
   "packages": [
-    "npm:pi-gstack",
-    "npm:pi-subagents"
+    "npm:pi-subagents",
+    "npm:pi-gstack"
   ]
 }
