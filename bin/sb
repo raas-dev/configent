@@ -122,8 +122,7 @@ if [ "$INTERACTIVE" -eq 1 ]; then
   set -- "$@" nono run --profile "$PROFILE" \
     "${SHELL:-/bin/sh}" -ilc "exec $_cmd"
 else
-  set -- "$@" nono run --profile "$PROFILE" \
-    "${SHELL:-/bin/sh}" -c "exec $_cmd"
+  set -- "$@" nono run --profile "$PROFILE" /bin/sh -c "exec $_cmd"
 fi
 
 exec env -i "$@"
