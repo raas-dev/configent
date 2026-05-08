@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "description": "OpenAI Codex CLI"
   },
+  "extends": "default",
   "groups": {
     "include": [
       "git_config"
@@ -17,6 +18,27 @@
     ],
     "read": [
       "$HOME/.local/share/mise"
+    ]
+  },
+  "environment": {
+    "allow_vars": [
+      "PATH",
+      "HOME",
+      "USER",
+      "SHELL",
+      "TMPDIR",
+      "LANG",
+      "TERM",
+      "COLORTERM",
+      "TERM_PROGRAM",
+      "TERM_PROGRAM_VERSION",
+      "NO_COLOR",
+      "FORCE_COLOR",
+      "EMAIL",
+      "GIT_AUTHOR_NAME",
+      "GIT_COMMITTER_NAME",
+      "DYNAMIC_MCP_CONFIG",
+      "NONO_PROXY_TOKEN"
     ]
   },
   "network": {
@@ -57,26 +79,5 @@
         "credential_format": "Bearer {}"
       }
     }
-  },
-  "environment": {
-    "allow_vars": [
-      "PATH",
-      "HOME",
-      "USER",
-      "SHELL",
-      "TMPDIR",
-      "LANG",
-      "TERM",
-      "COLORTERM",
-      "TERM_PROGRAM",
-      "TERM_PROGRAM_VERSION",
-      "NO_COLOR",
-      "FORCE_COLOR",
-      "EMAIL",
-      "GIT_AUTHOR_NAME",
-      "GIT_COMMITTER_NAME",
-      "DYNAMIC_MCP_CONFIG",
-      "NONO_PROXY_TOKEN"
-    ]
   }
 }

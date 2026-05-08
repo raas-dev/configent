@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "description": "oh-my-pi"
   },
+  "extends": "default",
   "groups": {
     "include": [
       "git_config"
@@ -19,23 +20,6 @@
       "$HOME/.local/share/mise"
     ]
   },
-  "network": {
-    "block": false
-  },
-  "unsafe_macos_seatbelt_rules": [
-    "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.npmrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.pypirc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.vsce$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.git-credentials$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))"
-  ],
   "environment": {
     "allow_vars": [
       "PATH",
@@ -60,5 +44,22 @@
       "MINIMAX_API_KEY",
       "ZAI_API_KEY"
     ]
-  }
+  },
+  "network": {
+    "block": false
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.npmrc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.pypirc$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.vsce$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.git-credentials$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
+    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))"
+  ]
 }
