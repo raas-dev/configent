@@ -6,8 +6,7 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
-# sb: run coding agents in nono sandbox with a clean environment
-# Strips all parent env vars except what the agent needs.
+# sb: run coding agents in nono sandbox
 
 _usage() {
   echo "Usage: sb [-i] <agent> [args...]" >&2
@@ -44,85 +43,15 @@ RUN="$1"
 shift
 PROFILE="${PROFILE:-$RUN}"
 
-# Credentials and config paths forwarded per agent.
-# POSIX sh has no arrays, so use whitespace-separated "array-like" lists.
-_fw_common='GITHUB_TOKEN CONTEXT7_API_KEY EXA_API_KEY DYNAMIC_MCP_CONFIG'
-_fw_pi='PI_RUN_CODE_UNSANDBOXED MINIMAX_API_KEY ZAI_API_KEY'
-_fw_omp='MINIMAX_API_KEY ZAI_API_KEY'
-_fw_opencode='OPENCODE_API_KEY'
-_fw_claude='ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN'
-_fw_codex='OPENAI_API_KEY'
-case "$RUN" in
-pi)
-  _fw="$_fw_common $_fw_pi"
-  ;;
-omp)
-  _fw="$_fw_common $_fw_omp"
-  ;;
-opencode)
-  _fw="$_fw_common $_fw_opencode"
-  ;;
-claude)
-  _fw="$_fw_common $_fw_claude"
-  ;;
-codex)
-  _fw="$_fw_common $_fw_codex"
-  ;;
-*) _fw="$_fw_common" ;;
-esac
-
 if ! command -v nono >/dev/null 2>&1; then
   echo "Error: nono not found." >&2
   exit 127
 fi
 
-# Quote args for `sh -c` execution in interactive shell
-_sq() {
-  printf "'%s'" "$(printf "%s" "$1" | sed "s/'/'\\\\''/g")"
-}
-
-_cmd="$(_sq "$RUN")"
-for _arg in "$@"; do
-  _cmd="$_cmd $(_sq "$_arg")"
-done
-
-# Build env -i arguments in positional params, then append the full command
-# This preserves spaces in values (e.g. GIT_AUTHOR_NAME) through "$@"
-set --
-
-# Base environment
-set -- "$@" "HOME=$HOME" "USER=$(id -un)" "SHELL=${SHELL:-/bin/sh}" \
-  "PATH=$PATH" "TMPDIR=${TMPDIR:-/tmp}" \
-  "LANG=${LANG:-en_US.UTF-8}" "TERM=${TERM:-xterm-256color}"
-
-# Terminal color hints
-for _v in \
-  COLORTERM TERM_PROGRAM TERM_PROGRAM_VERSION NO_COLOR FORCE_COLOR; do
-  eval "_val=\${$_v:-}"
-  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
-done
-
-# Git identity
-for _v in EMAIL GIT_AUTHOR_NAME GIT_COMMITTER_NAME; do
-  eval "_val=\${$_v:-}"
-  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
-done
-
-# Agent-specific credentials
-for _v in $_fw; do
-  eval "_val=\${$_v:-}"
-  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
-done
-
-# Append command to run; env -i treats everything before command
-# as VAR=VAL assignments, everything after as command + args.
-# Non-interactive default; use -i for login+interactive shell.
+# Non-interactive default; use -i for login shell startup.
 if [ "$INTERACTIVE" -eq 1 ]; then
-  set -- "$@" nono run --profile "$PROFILE" \
-    "${SHELL:-/bin/sh}" -ilc "exec $_cmd"
+  exec nono run --profile "$PROFILE" \
+    "${SHELL:-/bin/sh}" -ilc 'exec "$@"' sh "$RUN" "$@"
 else
-  set -- "$@" nono run --profile "$PROFILE" \
-    "${SHELL:-/bin/sh}" -c "exec $_cmd"
+  exec nono run --profile "$PROFILE" "$RUN" "$@"
 fi
-
-exec env -i "$@"
