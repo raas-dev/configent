@@ -416,17 +416,25 @@ The following is real terminal history from the user’s session: if they are in
 
 First, plan only: do NOT run terminal commands, edit files, or apply any fix yet.
 
+**Scope the failure first — do not assume the last command is the one to fix.**
+- Scan the **entire** capture: both `<earlier_terminal_context>` (older `$` blocks) **and** `<terminal_output>` (most recent). The user’s real failure may be in an earlier block while the last block is unrelated (e.g. they ran `ls`, `git status`, `cd`, a successful command, a pager, or noise after the breakage).
+- Enumerate every distinct failure / error / suspicious anomaly you can identify across the capture (non-zero-looking exits, stack traces, `error:` / `fatal:` / `panic:` / `Traceback` / `command not found`, failing test output, build errors, lints, etc.). Skip clearly successful commands and pure informational output.
+- Pick a single primary failure to fix **only if** one of these holds:
+  - exactly one failure is present in the capture, **or**
+  - the most recent `$` block (`<terminal_output>`) clearly contains a failure and no earlier block has an unresolved, more severe failure that looks like the user’s actual concern.
+- Otherwise (multiple candidate failures, ambiguous which one the user cares about, or the last block is benign while earlier blocks broke) you are **unsure** — do not guess. Use **`ask`** (see below) to let the user pick which failure to fix before producing a diagnosis or fix plan. List each candidate with its `$` command and a short caveman tag of the error.
+
 In your planning reply:
-- Briefly characterize the output: what command or situation it looks like (if inferable), and success vs errors vs warnings or noise.
-- Lead with an **error/situation summary** in caveman style: strip articles, filler, hedging, pleasantries; fragments OK; short synonyms where meaning unchanged; **technical terms, paths, and quoted stderr/log lines exactly** as in the capture; pattern `thing · broke · reason.` optional `next: …`; code or commands unchanged if shown. Technical substance stays; fluff dies.
-- Short diagnosis (likely root cause), building from that summary.
+- Briefly characterize the capture: which `$` blocks ran, which succeeded, which failed; call out that the failure may not be the last command if that is the case.
+- Lead with an **error/situation summary** in caveman style for the chosen (or candidate) failure(s): strip articles, filler, hedging, pleasantries; fragments OK; short synonyms where meaning unchanged; **technical terms, paths, and quoted stderr/log lines exactly** as in the capture; pattern `thing · broke · reason.` optional `next: …`; code or commands unchanged if shown. Technical substance stays; fluff dies.
+- Short diagnosis (likely root cause) of the chosen failure, building from that summary. If unsure which failure → skip diagnosis until **`ask`** resolves the scope.
 - **omp host tools only (`todo_write`, `ask`):** Todos and user choices **must** go through **omp’s** registered tools — the same mechanisms the UI renders as tool runs — **not** through free-form model output. Do **not** replace them with: markdown task lists, numbered “TODO:” sections, inline JSON payloads in assistant text, XML (`<invoke>`, `<parameter>`, etc.), fenced “tool_use” blocks, or pasted “pick A/B” questions. Those do **not** update omp; they are wrong.
-- **`todo_write`:** Drive the investigation with **`todo_write`** (narrowing, evidence, fix branches). Keep the list current until issue **and** solution path(s) are clear. For apply-choice: **replace** open work with one task per candidate fix, or one yes/no task if there is a single main fix. Example payload shape (arguments to the tool, not prose): `{"ops":[{"op":"replace","phases":[{"name":"Plan","tasks":[{"content":"…","status":"in_progress"}]}]}]}`; use **`update`** / **`add_task`** / **`remove_task`** per schema; for **`update`**/**`remove_task`**, use task ids from the tool/UI state, do not invent ids.
-- **`ask`:** After the final **`todo_write`**, call **`ask`** with the same options (multi-select or single choice as appropriate). Do **not** ask the user to choose only in plain text; **`ask`** is required. Declining all remains allowed.
-- Proposed commands and code changes as fenced blocks or bullet lists, clearly labeled as proposed — still no execution or patches; align proposals with the solution branches named in the final todos.
+- **`todo_write`:** Drive the investigation with **`todo_write`** (scope, narrowing, evidence, fix branches). Keep the list current until issue **and** solution path(s) are clear. When unsure which failure to fix, the first phase is scope-selection (one task per candidate failure). For apply-choice: **replace** open work with one task per candidate fix, or one yes/no task if there is a single main fix. Example payload shape (arguments to the tool, not prose): `{"ops":[{"op":"replace","phases":[{"name":"Plan","tasks":[{"content":"…","status":"in_progress"}]}]}]}`; use **`update`** / **`add_task`** / **`remove_task`** per schema; for **`update`**/**`remove_task`**, use task ids from the tool/UI state, do not invent ids.
+- **`ask`:** After the final **`todo_write`**, call **`ask`**. If unsure which failure to fix, ask **which failure to fix** first, with one option per candidate (label each with the `$` command + caveman error tag) plus a free-form / “none of these” option; do not propose fixes yet. If a single failure is clear, ask which fix option(s) to apply. Do **not** ask the user to choose only in plain text; **`ask`** is required. Declining all remains allowed.
+- Proposed commands and code changes as fenced blocks or bullet lists, clearly labeled as proposed — still no execution or patches; align proposals with the solution branches named in the final todos. Skip these entirely while still resolving scope via **`ask`**.
 - Stop after that **`todo_write`** rewrite + **`ask`**; do not apply anything in the same turn as the plan.
 
-Only after the user answers **`ask`** in favor of applying (for the chosen option(s)): carry out the plan, verify if reasonable, then one-line summary.
+Only after the user answers **`ask`** in favor of applying (for the chosen option(s)): carry out the plan, verify if reasonable, then one-line summary. If the **`ask`** was a scope-selection, the next turn re-plans the chosen failure (still no apply) and then asks again for the apply-choice.
 EOF
 }
 
@@ -497,7 +505,7 @@ $_instructions
 $_output
 </terminal_capture>
 
-Context: when <earlier_terminal_context> appears above, it is recent background only; <terminal_output> is the command and output immediately before autobot — prioritize that for explanations and fixes.
+Context: <earlier_terminal_context> (when present) holds older \$-prompt blocks and <terminal_output> is the most recent block before autobot ran. The real failure the user wants fixed may live in **either** section — the last command is often unrelated noise (cd, ls, git status, a pager). Treat both sections as in-scope and follow the scoping rules in <instructions>: if multiple candidate failures exist or it is unclear which the user cares about, use the **ask** host tool to confirm before diagnosing or proposing a fix.
 
 <environment>
 $_environment
