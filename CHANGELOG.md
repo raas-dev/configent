@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.219.2](https://github.com/raas-dev/configent/compare/1.219.1...1.219.2) (2026-05-08)
+
+
+### Fixes
+
+* **aliases:** re-enable gem and ruby_gems in topgrade ([1228549](https://github.com/raas-dev/configent/commit/1228549a83f500c62eb9486891bb00ae1a4b76bd))
+* **autobot:** scope failures across full capture before fixing ([8a7802e](https://github.com/raas-dev/configent/commit/8a7802e5fa8ce48e62e2382c019e3b9af9da9034))
+* **nono:** block credential files in agent profiles ([b1ed106](https://github.com/raas-dev/configent/commit/b1ed1068e28882d69fa2d762d4cb3971f164db4a))
+* **nono:** extend default profile and normalize section order ([37f46da](https://github.com/raas-dev/configent/commit/37f46da175cdb9435a8864be113e90d462d0302a))
+* **sb:** restore tty state after TUI agent exit ([295e7fd](https://github.com/raas-dev/configent/commit/295e7fdc905653514a967cdac456917fb1d64702))
+
 ## [1.219.1](https://github.com/raas-dev/configent/compare/1.219.0...1.219.1) (2026-05-08)
 
 
