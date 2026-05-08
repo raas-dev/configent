@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.0](https://github.com/raas-dev/configent/compare/1.219.2...1.220.0) (2026-05-08)
+
+
+### Features
+
+* **aliases:** add sandboxed AI agent shortcuts via nono ([3764a7d](https://github.com/raas-dev/configent/commit/3764a7d7345fc8be8c612a6f8d325825561d3ce6))
+
+
+### Fixes
+
+* **nono:** allow claude dir in opencode profile ([f7599ce](https://github.com/raas-dev/configent/commit/f7599ce755573bedf0b81d4fd04b4780923c7a5f))
+
 ## [1.219.2](https://github.com/raas-dev/configent/compare/1.219.1...1.219.2) (2026-05-08)
 
 
