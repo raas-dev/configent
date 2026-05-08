@@ -24,16 +24,26 @@ PROFILE="${PROFILE:-$RUN}"
 # Credentials and config paths forwarded per agent (comma-separated)
 _fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY,DYNAMIC_MCP_CONFIG'
 case "$RUN" in
-pi) _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
-omp) _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY" ;;
-opencode) _fw="$_fw_common,OPENCODE_API_KEY" ;;
-claude) _fw="$_fw_common,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
-codex) _fw="$_fw_common,OPENAI_API_KEY" ;;
+pi)
+  _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY"
+  ;;
+omp)
+  _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY"
+  ;;
+opencode)
+  _fw="$_fw_common,OPENCODE_API_KEY"
+  ;;
+claude)
+  _fw="$_fw_common,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN"
+  ;;
+codex)
+  _fw="$_fw_common,OPENAI_API_KEY"
+  ;;
 *) _fw="$_fw_common" ;;
 esac
 
 if ! command -v nono >/dev/null 2>&1; then
-  echo "Error: nono not found. Install with: nono setup" >&2
+  echo "Error: nono not found." >&2
   exit 127
 fi
 
@@ -69,7 +79,8 @@ IFS="$_oldifs"
 
 # Append the command to run; env -i treats everything before the command
 # as VAR=VAL assignments, everything after as the command + args
-# shellcheck disable=SC2086 # intentional: expand preserved positional args vector
+# shellcheck disable=SC2086 # intentional: expand preserved positional
+# args vector
 set -- "$@" nono run --profile "$PROFILE" "$RUN" $AGENT_ARGS
 
 exec env -i "$@"
