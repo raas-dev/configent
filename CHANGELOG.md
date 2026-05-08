@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.219.1](https://github.com/raas-dev/configent/compare/1.219.0...1.219.1) (2026-05-08)
+
+
+### Fixes
+
+* **ai_commit:** require plain text output in commit rules ([188ab66](https://github.com/raas-dev/configent/commit/188ab66e1dd824144ac1a3796e9ea77048b97aaf))
+* **sb:** use /bin/sh in non-interactive mode ([9167de3](https://github.com/raas-dev/configent/commit/9167de301448a8d4e558f99e9d4647822ed8192e))
+* **sb:** use user shell in non-interactive mode ([9349ccc](https://github.com/raas-dev/configent/commit/9349ccc65df0fdc97239cce6fa1241d4b415f8b9))
+
 ## [1.219.0](https://github.com/raas-dev/configent/compare/1.218.9...1.219.0) (2026-05-08)
 
 
