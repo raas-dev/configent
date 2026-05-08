@@ -20,9 +20,5 @@
   },
   "network": {
     "block": false
-  },
-  "env_credentials": {
-    "env://ZAI_API_KEY": "ZAI_API_KEY",
-    "env://OPENAI_COMPAT_BASE_URL": "OPENAI_COMPAT_BASE_URL"
   }
 }
