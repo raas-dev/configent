@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.219.0](https://github.com/raas-dev/configent/compare/1.218.9...1.219.0) (2026-05-08)
+
+
+### Features
+
+* **sb:** add interactive shell mode ([052e685](https://github.com/raas-dev/configent/commit/052e6856df41cf74ffb12c9379cbe0d56a43cf8f))
+
 ## [1.218.9](https://github.com/raas-dev/configent/compare/1.218.8...1.218.9) (2026-05-08)
 
 
