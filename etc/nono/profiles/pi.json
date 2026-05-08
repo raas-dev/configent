@@ -12,13 +12,9 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.pi",
       "$HOME/.agents",
-      "$HOME/.pi-lens",
-      "$HOME/configent/etc/pi"
-    ],
-    "deny": [
-      "$HOME/.rclocal"
+      "$HOME/.pi",
+      "$HOME/.pi-lens"
     ],
     "read": [
       "$HOME/configent/dotfiles"

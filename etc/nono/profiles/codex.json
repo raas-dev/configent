@@ -12,15 +12,13 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.codex"
+      "$HOME/.codex",
+      "$HOME/.local/share/mise"
     ],
     "read": [
-      "$HOME/.config/configent",
-      "$HOME/.local/configent/bin"
+      "$HOME/configent/dotfiles"
     ],
     "bypass_protection": [
-      "$HOME/.config/configent",
-      "$HOME/.local/configent/bin",
       "$HOME/configent/dotfiles/.zshrc",
       "$HOME/configent/dotfiles/.bashrc",
       "$HOME/configent/dotfiles/.bash_profile",

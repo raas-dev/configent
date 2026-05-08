@@ -12,12 +12,8 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.omp",
       "$HOME/.agents",
-      "$HOME/configent/etc/omp"
-    ],
-    "deny": [
-      "$HOME/.rclocal"
+      "$HOME/.omp"
     ],
     "read": [
       "$HOME/configent/dotfiles"
