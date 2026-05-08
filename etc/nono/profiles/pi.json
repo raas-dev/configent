@@ -21,9 +21,6 @@
   "network": {
     "block": false
   },
-  "env_credentials": {
-    "env://ZAI_API_KEY": "ZAI_API_KEY"
-  },
   "unsafe_macos_seatbelt_rules": [
     "(allow file-read-metadata file-read-data (subpath \"/Users\"))"
   ]

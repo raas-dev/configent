@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+# sb: run coding agents in nono sandbox with a clean environment
+# Strips all parent env vars except what the agent needs.
+
+_usage() {
+  echo "Usage: sb <agent> [args...]" >&2
+  echo "Agents: pi, omp, opencode, claude, codex" >&2
+  exit 1
+}
+
+[ $# -eq 0 ] && _usage
+RUN="$1"
+shift
+AGENT_ARGS=${1+"$@"}
+PROFILE="${PROFILE:-$RUN}"
+
+# Credentials forwarded per agent (comma-separated, picked from parent env)
+_fw_common='GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY'
+case "$RUN" in
+pi) _fw="$_fw_common,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
+omp) _fw="$_fw_common,MINIMAX_API_KEY,ZAI_API_KEY" ;;
+opencode) _fw="$_fw_common,OPENCODE_API_KEY" ;;
+claude) _fw="$_fw_common,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
+codex) _fw="$_fw_common,OPENAI_API_KEY" ;;
+*) _fw="$_fw_common" ;;
+esac
+
+if ! command -v nono >/dev/null 2>&1; then
+  echo "Error: nono not found. Install with: nono setup" >&2
+  exit 127
+fi
+
+# Build env -i arguments in positional params, then append the full command
+# This preserves spaces in values (e.g. GIT_AUTHOR_NAME) through "$@"
+set --
+
+# Base environment
+set -- "$@" "HOME=$HOME" "USER=$(id -un)" "SHELL=${SHELL:-/bin/sh}" \
+  "PATH=$PATH" "TMPDIR=${TMPDIR:-/tmp}" \
+  "LANG=${LANG:-en_US.UTF-8}" "TERM=${TERM:-xterm-256color}"
+
+# Terminal color hints
+for _v in COLORTERM TERM_PROGRAM TERM_PROGRAM_VERSION NO_COLOR FORCE_COLOR; do
+  eval "_val=\${$_v:-}"
+  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
+done
+
+# Git identity
+for _v in EMAIL GIT_AUTHOR_NAME GIT_COMMITTER_NAME; do
+  eval "_val=\${$_v:-}"
+  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
+done
+
+# Agent-specific credentials
+_oldifs="$IFS"
+IFS=','
+for _v in $_fw; do
+  eval "_val=\${$_v:-}"
+  [ -n "$_val" ] && set -- "$@" "$_v=$_val"
+done
+IFS="$_oldifs"
+
+# Append the command to run; env -i treats everything before the command
+# as VAR=VAL assignments, everything after as the command + args
+# shellcheck disable=SC2086 # intentional: expand preserved positional args vector
+set -- "$@" nono run --profile "$PROFILE" "$RUN" $AGENT_ARGS
+
+exec env -i "$@"

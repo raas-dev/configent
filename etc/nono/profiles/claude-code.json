@@ -1,8 +1,0 @@
-{
-  "meta": {
-    "name": "claude-code",
-    "version": "1.0.0",
-    "description": "Claude Code (extends always-further/claude built-in)"
-  },
-  "extends": "claude-code"
-}

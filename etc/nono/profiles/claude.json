@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "opencode",
+    "name": "claude",
     "version": "1.0.0",
-    "description": "OpenCode (extends default built-in)"
+    "description": "Claude Code (local profile, extends default only)"
   },
   "groups": {
     "include": ["git_config"]
@@ -11,15 +11,14 @@
     "allow": [
       "$WORKDIR",
       "$HOME/.claude",
-      "$HOME/.config/opencode",
-      "$HOME/.cache/opencode",
-      "$HOME/.local/share/opencode",
-      "$HOME/.local/state/opencode",
       "$HOME/.local/share/mise"
     ],
     "read": [
       "$HOME/.config/configent",
       "$HOME/.local/configent/bin"
+    ],
+    "read_file": [
+      "$HOME/.claude.json"
     ],
     "bypass_protection": [
       "$HOME/.config/configent",
