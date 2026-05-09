@@ -15,7 +15,6 @@ yellow=$(tput setaf 3)
 cyan=$(tput setaf 6)
 
 OMP_MODEL="${OMP_MODEL:-zai/glm-5-turbo}"
-OMP_THINKING="${OMP_THINKING:-medium}"
 
 # Shown to model + enforced in finalize_commit_message (line 1).
 AI_COMMIT_SUBJECT_MAX="${AI_COMMIT_SUBJECT_MAX:-72}"
@@ -289,7 +288,6 @@ $(build_omp_prompt)"
     --no-session \
     --no-title \
     --model "$OMP_MODEL" \
-    --thinking "$OMP_THINKING" \
     --print \
     "$_prompt" \
     2>"$omp_stderr")" || omp_status=$?
