@@ -7,8 +7,7 @@
 # shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 
-# quit if shell is not interactive
-[[ -o interactive ]] || return
+# zsh skips zshrc for non-interactive shells, no guard needed
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/zsh" ]; then
