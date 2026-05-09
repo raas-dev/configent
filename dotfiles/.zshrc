@@ -29,6 +29,9 @@ fi
 
 ### Key bindings ###############################################################
 
+# disable XON/XOFF (^S/^Q) so ^S is free for keybindings
+stty -ixon 2>/dev/null
+
 # https://zsh.sourceforge.io/Guide/zshguide04.html
 bindkey -e      # use emacs keymap
 bindkey -r '^S' # unbind terminal chord

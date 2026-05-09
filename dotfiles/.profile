@@ -75,10 +75,6 @@ umask 0027
 # allow exiting shell with ^D
 unset ignoreeof
 
-### Disable stop (^S) and continue (^Q) flow control signals ###################
-
-[ -t 0 ] && stty -ixon 2>/dev/null
-
 ### Brew #######################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
