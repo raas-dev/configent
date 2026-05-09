@@ -15,9 +15,8 @@ ctx_blocks=${AUTOBOT_CONTEXT_BLOCKS:-3}
 prior_lines=${AUTOBOT_PRIOR_LINES:-16}
 # First-word aliases for this script (default ? — see dotfiles/.aliases). Empty to disable.
 aliases=${AUTOBOT_ALIASES-?}
-# omp --model / --thinking (override with -m/--model, -t/--thinking).
+# omp --model (override with -m/--model).
 model=${AUTOBOT_MODEL:-zai/glm-5-turbo}
-thinking=${AUTOBOT_THINKING:-medium}
 
 # stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
 autobot_last_cmd() {
@@ -182,10 +181,9 @@ autobot_get_previous_cmd() {
 }
 
 usage() {
-  echo "Usage: autobot [-d|--dry-run] [-m|--model ID] [-t|--thinking LEVEL] [-c|--rerun [command args...]]" >&2
+  echo "Usage: autobot [-d|--dry-run] [-m|--model ID] [-c|--rerun [command args...]]" >&2
   echo "  -d, --dry-run   Print captured terminal output on stdout; do not run pi." >&2
   echo "  -m, --model     omp model id (default: minimax/MiniMax-M2.7; env AUTOBOT_MODEL)." >&2
-  echo "  -t, --thinking  omp thinking level (default: medium; env AUTOBOT_THINKING)." >&2
   echo "  -c, --rerun     Re-run a command; everything after it is command + args (the tail of argv)." >&2
   echo "                  Bare -c (nothing after) → history / AUTOBOT_PREVIOUS_CMD." >&2
   echo "                  Use -c -- cmd ... if cmd starts with -." >&2
@@ -193,13 +191,13 @@ usage() {
   echo "  (default)       Explain capture, plan a fix (no actions), ask; apply only after you confirm." >&2
   echo "Env: AUTOBOT_LINES (primary block), AUTOBOT_CONTEXT_BLOCKS (recent \$ blocks, default 3)," >&2
   echo "     AUTOBOT_PRIOR_LINES (older blocks), AUTOBOT_WINDOW, AUTOBOT_ALIASES," >&2
-  echo "     AUTOBOT_MODEL, AUTOBOT_THINKING, AUTOBOT_PREVIOUS_CMD (default for bare -c)," >&2
+  echo "     AUTOBOT_MODEL, AUTOBOT_PREVIOUS_CMD (default for bare -c)," >&2
   echo "     AUTOBOT_HIST_TAIL (history tail size; default same as AUTOBOT_WINDOW)," >&2
   echo "     AUTOBOT_TMUX_START (tmux capture-pane -S; default matches AUTOBOT_WINDOW)," >&2
   echo "     AUTOBOT_SHELL_PID (Cursor: force terminal file match when PPID chain fails)." >&2
 }
 
-# Globals: _dry_run, _rerun, _prev_cmd; model, thinking (defaults set above)
+# Globals: _dry_run, _rerun, _prev_cmd; model (default set above)
 autobot_parse_args() {
   _dry_run=0
   _rerun=0
@@ -217,14 +215,6 @@ autobot_parse_args() {
         exit 1
       fi
       model=$2
-      shift 2
-      ;;
-    -t | --thinking)
-      if [ $# -lt 2 ]; then
-        echo "autobot: $1 needs a value" >&2
-        exit 1
-      fi
-      thinking=$2
       shift 2
       ;;
     -h | --help)
@@ -251,7 +241,7 @@ autobot_parse_args() {
       break
       ;;
     *)
-      echo "autobot: unexpected arguments (use -m/-t/-d before -c/--rerun if needed): $*" >&2
+      echo "autobot: unexpected arguments (use -m/-d before -c/--rerun if needed): $*" >&2
       exit 1
       ;;
     esac
@@ -520,5 +510,4 @@ omp \
   --no-skills \
   --no-title \
   --model "$model" \
-  --thinking "$thinking" \
   "$_prompt"
