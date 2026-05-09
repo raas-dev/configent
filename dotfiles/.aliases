@@ -136,7 +136,7 @@ alias l='la'
 alias o='open'
 alias p='procs --pager always --tree'
 alias q='clear'
-alias r='exec $SHELL'
+alias r='exec $SHELL -l'
 alias s='rg --smart-case --hidden --glob \!.git/ --fixed-strings'
 # t is for tail logs, see t()
 alias u='dust'
