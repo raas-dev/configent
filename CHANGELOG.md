@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.1](https://github.com/raas-dev/configent/compare/1.220.0...1.220.1) (2026-05-09)
+
+
+### Fixes
+
+* **aliases:** make r alias exec login shell ([65618b1](https://github.com/raas-dev/configent/commit/65618b155fcd3611beae3924bcb3f6f075ea74ec))
+* **autobot:** remove --thinking flag and AUTOBOT_THINKING support ([62d796e](https://github.com/raas-dev/configent/commit/62d796e67d4aef72fd31985d6ec4d8f16b8c5fd2))
+* **nono:** allow npm write access in pi profile ([1f38072](https://github.com/raas-dev/configent/commit/1f3807235538459b93ac1f6e77dd3461c003d92d))
+* **sb:** rename -i flag to --init-shell for clarity ([696be41](https://github.com/raas-dev/configent/commit/696be41e30cd9496314d7ef39a4140f2154b6adc))
+* **shell:** correct login/interactive flags in autobot, box, sb ([591fb94](https://github.com/raas-dev/configent/commit/591fb946054344a94663ef3c4604dce4e8f444a1))
+* **shell:** source profile before rc files and move tool init to rc ([8589ec6](https://github.com/raas-dev/configent/commit/8589ec6e4da95cb3a2f36b11fc4c16c93607139f))
+* **vscode:** use -il flag in autobot task configs ([0527ab9](https://github.com/raas-dev/configent/commit/0527ab950b5d36e131980c6e7699d0219d1c956a))
+* **zshrc:** guard against non-interactive sourcing ([79449e4](https://github.com/raas-dev/configent/commit/79449e42e1a1eafc33aaf3fc5f9f191e7ba8dfd0))
+
 ## [1.220.0](https://github.com/raas-dev/configent/compare/1.219.2...1.220.0) (2026-05-08)
 
 
