@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.3](https://github.com/raas-dev/configent/compare/1.220.2...1.220.3) (2026-05-09)
+
+
+### Fixes
+
+* **nono,pi:** migrate pi-headroom to git and flatten profile arrays ([3afd2e2](https://github.com/raas-dev/configent/commit/3afd2e24aab14e08a4c6caec70c33b89b1cda2a5))
+* **nono:** restrict agents to read-only .agents access ([0ed8f9d](https://github.com/raas-dev/configent/commit/0ed8f9d7094a81cda3b29351b44e6f2a857783c7))
+* **vscode:** disable keybinding passthrough to shell ([cdef283](https://github.com/raas-dev/configent/commit/cdef283d7a28748441cd301cf8e715d6b9e31f12))
+* **vscode:** restore default clipboard bindings in terminal ([b140c02](https://github.com/raas-dev/configent/commit/b140c02fbc1f58a454fbbc664502e65ce4e50339))
+
 ## [1.220.2](https://github.com/raas-dev/configent/compare/1.220.1...1.220.2) (2026-05-09)
 
 
