@@ -13,10 +13,11 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.agents",
       "$HOME/.pi",
-      "$HOME/.pi-lens",
-      "$HOME/.npm",
+      "$HOME/.pi-lens"
+    ],
+    "read": [
+      "$HOME/.agents",
       "$HOME/.local/share/mise"
     ]
   },

@@ -43,11 +43,6 @@ RUN="$1"
 shift
 PROFILE="${PROFILE:-$RUN}"
 
-if ! command -v nono >/dev/null 2>&1; then
-  echo "Error: nono not found." >&2
-  exit 127
-fi
-
 # Restore tty if TUI agent (opencode/claude/codex) exits without disabling
 # alt-screen, mouse tracking, focus/theme reports, etc.
 _restore_tty() {
@@ -56,6 +51,16 @@ _restore_tty() {
   printf '\033[?1000l\033[?1002l\033[?1003l\033[?1004l\033[?1006l\033[?2004l\033[?997l\033[?2031l\033[?1049l\033[?25h'
 }
 trap _restore_tty EXIT INT TERM HUP
+
+# pi update touches package manager / network; skip sandbox.
+if [ "$RUN" = "pi" ] && [ "${1:-}" = "update" ]; then
+  exec "$RUN" "$@"
+fi
+
+if ! command -v nono >/dev/null 2>&1; then
+  echo "Error: nono not found." >&2
+  exit 127
+fi
 
 # Non-interactive default; use -i for login shell startup.
 if [ "$INIT_SHELL" -eq 1 ]; then

@@ -13,10 +13,10 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.agents",
       "$HOME/.omp"
     ],
     "read": [
+      "$HOME/.agents",
       "$HOME/.local/share/mise"
     ]
   },
