@@ -15,9 +15,8 @@
       "$WORKDIR",
       "$HOME/.agents",
       "$HOME/.pi",
-      "$HOME/.pi-lens"
-    ],
-    "read": [
+      "$HOME/.pi-lens",
+      "$HOME/.npm",
       "$HOME/.local/share/mise"
     ]
   },
