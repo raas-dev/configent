@@ -110,6 +110,10 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 path_prepend "$HOME/.local/bin"
 
+### mise #######################################################################
+
+path_append "$HOME/.local/share/mise/shims"
+
 ### bun ########################################################################
 
 # for bun link, npm link uses $(npm prefix -g)

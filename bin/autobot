@@ -261,12 +261,12 @@ autobot_build_rerun_synthetic() {
   case $shell_base in
   bash | zsh | ksh | mksh)
     run_out=$(
-      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" "$run_shell" -ic "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" "$run_shell" -ilc "eval \"\$AUTOBOT_RERUN_CMD\"" </dev/null 2>&1
     )
     ;;
   fish)
     run_out=$(
-      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" fish -ic "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
+      cd "$PWD" && AUTOBOT_RERUN_CMD="$_prev_cmd" fish -ilc "eval \$AUTOBOT_RERUN_CMD" </dev/null 2>&1
     )
     ;;
   *)

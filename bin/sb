@@ -60,7 +60,7 @@ trap _restore_tty EXIT INT TERM HUP
 # Non-interactive default; use -i for login shell startup.
 if [ "$INIT_SHELL" -eq 1 ]; then
   nono run --profile "$PROFILE" \
-    "${SHELL:-/bin/sh}" -ilc 'exec "$@"' sh "$RUN" "$@"
+    "${SHELL:-/bin/sh}" -lc 'exec "$@"' sh "$RUN" "$@"
 else
   nono run --profile "$PROFILE" "$RUN" "$@"
 fi
