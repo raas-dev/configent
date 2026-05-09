@@ -257,7 +257,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    /bin/bash -lc 'exec '"$RUN"' "$@"' _ "$@"
+    /bin/bash -c 'exec '"$RUN"' "$@"' _ "$@"
 else
   "$RUN" "$@"
 fi
