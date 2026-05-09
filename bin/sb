@@ -9,17 +9,17 @@
 # sb: run coding agents in nono sandbox
 
 _usage() {
-  echo "Usage: sb [-i] <agent> [args...]" >&2
+  echo "Usage: sb [-i|--init-shell] <agent> [args...]" >&2
   echo "Agents: pi, omp, opencode, claude, codex" >&2
   exit 1
 }
 
 [ $# -eq 0 ] && _usage
-INTERACTIVE=0
+INIT_SHELL=0
 while [ $# -gt 0 ]; do
   case "$1" in
-  -i)
-    INTERACTIVE=1
+  -i | --init-shell)
+    INIT_SHELL=1
     shift
     ;;
   -h | --help)
@@ -58,9 +58,9 @@ _restore_tty() {
 trap _restore_tty EXIT INT TERM HUP
 
 # Non-interactive default; use -i for login shell startup.
-if [ "$INTERACTIVE" -eq 1 ]; then
+if [ "$INIT_SHELL" -eq 1 ]; then
   nono run --profile "$PROFILE" \
-    "${SHELL:-/bin/sh}" -ilc 'exec "$@"' sh "$RUN" "$@"
+    "${SHELL:-/bin/sh}" -ic 'exec "$@"' sh "$RUN" "$@"
 else
   nono run --profile "$PROFILE" "$RUN" "$@"
 fi
