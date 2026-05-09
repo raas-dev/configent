@@ -48,6 +48,23 @@ if [ -r "$HOME/.antidote/antidote.zsh" ]; then
   antidote load
 fi
 
+### History ####################################################################
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+
+setopt append_history         # append to history list rather than replace
+setopt extended_history       # special history format with timestamp
+setopt hist_expire_dups_first # expire the oldest instance of command
+setopt hist_ignore_dups       # ignore second instance of same event
+setopt hist_ignore_space      # ignore entries with leading space
+setopt hist_verify            # do not execute the line directly
+setopt no_hist_beep           # no beep
+setopt share_history          # share history between session
+
+alias history='fc -El 1' # show timestamped history (zsh fc only)
+
 ### Completions ################################################################
 
 autoload -Uz compinit && compinit
@@ -75,31 +92,54 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 # workaround https://github.com/oven-sh/bun/issues/11179
 # bun completions
 
-### History ####################################################################
-
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=100000
-SAVEHIST=$HISTSIZE
-
-setopt append_history         # append to history list rather than replace
-setopt extended_history       # special history format with timestamp
-setopt hist_expire_dups_first # expire the oldest instance of command
-setopt hist_ignore_dups       # ignore second instance of same event
-setopt hist_ignore_space      # ignore entries with leading space
-setopt hist_verify            # do not execute the line directly
-setopt no_hist_beep           # no beep
-setopt share_history          # share history between session
-
-alias history='fc -El 1' # show timestamped history (zsh fc only)
-
 ### Prompt #####################################################################
 
-PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
-RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
+# Skip for `zsh -i -c tm` (tmux client + mise hooks clash on stdin)
+_mise_skip_tm_bootstrap=
+case ${ZSH_EXECUTION_STRING-} in
+tm | tm\ * | tm-*) _mise_skip_tm_bootstrap=1 ;;
+esac
+if [ -z "${_mise_skip_tm_bootstrap:-}" ]; then
+  command -v mise >/dev/null && eval "$(mise activate zsh)"
+fi
+unset _mise_skip_tm_bootstrap
+
+# Prefer starship prompt; fallback to builtin prompt when unavailable
+if command -v starship >/dev/null; then
+  eval "$(starship init zsh)"
+else
+  PROMPT='%F{blue}%n@%M %F{cyan}%C%f%# '
+  RPROMPT='%(?.%F{green}√.%F{red}✘%?)'
+fi
+
+if command -v zoxide >/dev/null; then
+  eval "$(zoxide init zsh --cmd j --no-aliases)"
+  j() {
+    # prefer exact basename match when single arg is given
+    if [ $# -eq 1 ] && [ "$1" != '-' ] && [ "${1#-}" = "$1" ]; then
+      local _j_exact
+      _j_exact=$(zoxide query -l 2>/dev/null | while IFS= read -r _j_dir; do
+        if [ "${_j_dir##*/}" = "$1" ]; then
+          echo "$_j_dir"
+          break
+        fi
+      done)
+      if [ -n "$_j_exact" ]; then
+        __zoxide_z "$_j_exact"
+        return $?
+      fi
+    fi
+    __zoxide_z "$@"
+  }
+fi
+
+command -v carapace >/dev/null && eval "$(carapace _carapace zsh)"
+command -v atuin >/dev/null && eval "$(atuin init zsh)"
+command -v mcat >/dev/null && eval "$(mcat --generate zsh)"
+command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
 ### Load other configs #########################################################
 
-[ -r "$HOME/.profile" ] && . "$HOME/.profile"
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -r "$HOME/.rclocal" ] && . "$HOME/.rclocal"
 

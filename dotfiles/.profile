@@ -108,33 +108,7 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-### Tool init shell ############################################################
-
-# $SHELL is the login shell and often stays zsh when bash sources this file.
-# Starship, zoxide, mise, etc. must match the runtime shell.
-if [ -n "${BASH_VERSION:-}" ]; then
-  _profile_tool_shell=bash
-elif [ -n "${ZSH_VERSION:-}" ]; then
-  _profile_tool_shell=zsh
-else
-  _profile_tool_shell="${SHELL##*/}"
-fi
-
-### mise #######################################################################
-
 path_prepend "$HOME/.local/bin"
-
-# Skip for `zsh -i -c tm` (tmux client + mise hooks clash on stdin)
-_mise_skip_tm_bootstrap=
-if [ -n "${ZSH_VERSION:-}" ]; then
-  case ${ZSH_EXECUTION_STRING-} in
-    (tm|tm\ *|tm-*) _mise_skip_tm_bootstrap=1 ;;
-  esac
-fi
-if [ -z "${_mise_skip_tm_bootstrap:-}" ]; then
-  command -v mise >/dev/null && eval "$(mise activate "${_profile_tool_shell}")"
-fi
-unset _mise_skip_tm_bootstrap
 
 ### bun ########################################################################
 
@@ -197,58 +171,11 @@ fi
 
 command -v pwsh >/dev/null && export POWERSHELL_UPDATECHECK="Off"
 
-### Starship cross-shell prompt ################################################
-
-command -v starship >/dev/null && eval "$(starship init "${_profile_tool_shell}")"
-
-### zoxide #####################################################################
-
-if command -v zoxide >/dev/null; then
-  eval "$(zoxide init "${_profile_tool_shell}" --cmd j --no-aliases)"
-  j() {
-    # prefer exact basename match when single arg is given
-    if [ $# -eq 1 ] && [ "$1" != '-' ] && [ "${1#-}" = "$1" ]; then
-      local _j_exact
-      _j_exact=$(zoxide query -l 2>/dev/null | while IFS= read -r _j_dir; do
-        if [ "${_j_dir##*/}" = "$1" ]; then
-          echo "$_j_dir"
-          break
-        fi
-      done)
-      if [ -n "$_j_exact" ]; then
-        __zoxide_z "$_j_exact"
-        return $?
-      fi
-    fi
-    __zoxide_z "$@"
-  }
-fi
-
-### carapace ###################################################################
-
-if command -v carapace >/dev/null; then
-  # Carapace's bash integration uses `complete -o noquote` (bash >= 5.1).
-  # That errors on macOS /bin/bash 3.2.
-  if [ -z "${BASH_VERSION:-}" ] || {
-    [ "${BASH_VERSINFO[0]:-0}" -gt 5 ] ||
-    {
-      [ "${BASH_VERSINFO[0]:-0}" -eq 5 ] &&
-      [ "${BASH_VERSINFO[1]:-0}" -ge 1 ]
-    }
-  }; then
-    eval "$(carapace _carapace "${_profile_tool_shell}")"
-  fi
-fi
-
 ### fzf ########################################################################
 
 if command -v rg >/dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 fi
-
-### atuin ######################################################################
-
-command -v atuin >/dev/null && eval "$(atuin init "${_profile_tool_shell}")"
 
 ### bat ########################################################################
 
@@ -267,14 +194,7 @@ if command -v mcat >/dev/null; then
   export MCAT_ENCODER="sixel"
   export MCAT_INLINE_OPTS="center=false"
   export MCAT_THEME="ayu"
-
-  # completions
-  eval "$(mcat --generate "${_profile_tool_shell}")"
 fi
-
-### worktrunk ##################################################################
-
-command -v wt >/dev/null && eval "$(wt config shell init "${_profile_tool_shell}")"
 
 ### delta ######################################################################
 
