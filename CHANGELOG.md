@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.4](https://github.com/raas-dev/configent/compare/1.220.3...1.220.4) (2026-05-09)
+
+
+### Fixes
+
+* **aliases:** gate nono agent aliases to macOS only ([1673cc6](https://github.com/raas-dev/configent/commit/1673cc64217516de1957c7a8580756f38da5d3d7))
+* **aliases:** remove nono sandbox agent aliases ([5e4fe97](https://github.com/raas-dev/configent/commit/5e4fe97997622584a767b01989a8ff2424fb4d45))
+* **sb:** remove pi update sandbox bypass ([8b78e7a](https://github.com/raas-dev/configent/commit/8b78e7a80869b036f43e2edc0c42814e7720a932))
+
 ## [1.220.3](https://github.com/raas-dev/configent/compare/1.220.2...1.220.3) (2026-05-09)
 
 
