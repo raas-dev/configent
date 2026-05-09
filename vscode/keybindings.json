@@ -401,11 +401,6 @@
     "key": "ctrl+s b"
   },
   {
-    "command": "workbench.action.terminal.clear",
-    "key": "cmd+l",
-    "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
-  },
-  {
     "command": "-workbench.action.terminal.clear",
     "key": "cmd+k",
     "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
@@ -583,15 +578,7 @@
   },
   {
     "command": "workbench.action.terminal.focusAtIndex4",
-    "key": "ctrl+4 ctrl+4"
-  },
-  {
-    "command": "workbench.action.terminal.focusAtIndex4",
     "key": "ctrl+s ctrl+4"
-  },
-  {
-    "command": "workbench.action.terminal.focusAtIndex5",
-    "key": "[BracketRight] enter"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex5",
