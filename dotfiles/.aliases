@@ -651,14 +651,6 @@ agent() {
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
 
-# Sandbox AI coding agents using nono on macOS
-if [ "$(uname -s)" = 'Darwin' ] && command -v nono >/dev/null; then
-  alias pi='sb pi'
-  alias omp='sb omp'
-  alias opencode='sb opencode'
-  alias claude='sb claude'
-fi
-
 ### Docker ####################################################################
 
 # Generic docker build and run
