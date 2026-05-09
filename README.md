@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
-- Builds on AI coding agents to automate workflows requiring browser use.
+- Builds on AI coding agents to automate workflows requiring web browser use.
 
 | ![Screenshot of Brave Browser and IDE with tmux and zsh](ui/target.webp) |
 | ------------------------------------------------------------------------ |
