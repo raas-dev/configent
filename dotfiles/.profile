@@ -67,13 +67,10 @@ export PAGER="less -F -X"
 # get plain text from man
 export MANROFFOPT='-c'
 
-### Shell behaviour ############################################################
+### Defaults ###################################################################
 
-# default file permissions: u=rwx,g=rx,o=
-umask 0027
-
-# allow exiting shell with ^D
-unset ignoreeof
+# default for new files
+umask 0027 # u=rwx,g=rx,o=
 
 ### Brew #######################################################################
 

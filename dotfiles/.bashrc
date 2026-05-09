@@ -26,13 +26,16 @@ else
   fi
 fi
 
-### Key bindings ###############################################################
+### Keyboard ###################################################################
 
 # disable XON/XOFF (^S/^Q) so ^S is free for keybindings
 stty -ixon 2>/dev/null
 
 # unbind clear-screen (ctrl+l) for terminal pane navigation
 bind -r '\C-l'
+
+# allow exiting shell with ^D
+unset ignoreeof
 
 ### dircolors ##################################################################
 

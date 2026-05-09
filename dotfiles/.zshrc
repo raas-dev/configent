@@ -27,7 +27,7 @@ else
   fi
 fi
 
-### Key bindings ###############################################################
+### Keyboard ###################################################################
 
 # disable XON/XOFF (^S/^Q) so ^S is free for keybindings
 stty -ixon 2>/dev/null
