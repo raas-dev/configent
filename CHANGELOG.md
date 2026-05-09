@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.2](https://github.com/raas-dev/configent/compare/1.220.1...1.220.2) (2026-05-09)
+
+
+### Fixes
+
+* **box:** remove login shell flag from Lima exec path ([764bf75](https://github.com/raas-dev/configent/commit/764bf75b0e9d0788f71bcc41c53c0c149b5d12a7))
+* **shebang:** use env bash for portable shebangs ([49992e9](https://github.com/raas-dev/configent/commit/49992e9e1347f715ccf488d930f8346c5ad07151))
+* **shell:** move stty -ixon from profile to bashrc and zshrc ([4469217](https://github.com/raas-dev/configent/commit/4469217ed2a774110e2a78e26be13b6f1aeb98f9))
+* **vscode:** remove interactive flag from Lima tmux task shell ([298d98a](https://github.com/raas-dev/configent/commit/298d98a0de228621c297bd4afe01eda853edce14))
+* **vscode:** swap PowerShell login shell setting from macOS to Linux ([fa4bcd0](https://github.com/raas-dev/configent/commit/fa4bcd0f4659451035691dc7ffa6e5e18c9f716a))
+
 ## [1.220.1](https://github.com/raas-dev/configent/compare/1.220.0...1.220.1) (2026-05-09)
 
 
