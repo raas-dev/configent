@@ -419,7 +419,6 @@
     "mise": "~/.local/share/mise/shims"
   },
   "powershell.promptToUpdatePowerShell": false,
-  "powershell.startAsLoginShell.osx": false,
   "powershell.startAutomatically": false,
   "powershell.suppressAdditionalExeNotFoundWarning": true,
   "problems.decorations.enabled": false,
@@ -662,5 +661,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "window.autoDetectColorScheme": false
+  "window.autoDetectColorScheme": false,
+  "powershell.startAsLoginShell.linux": true
 }
