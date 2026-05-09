@@ -13,7 +13,8 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.claude"
+      "$HOME/.claude",
+      "/tmp"
     ],
     "read": [
       "$HOME/.agents",
@@ -22,6 +23,20 @@
     ],
     "allow_file": [
       "$HOME/.claude.json"
+    ],
+    "read_file": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
+    ],
+    "bypass_protection": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
     ]
   },
   "environment": {

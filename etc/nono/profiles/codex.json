@@ -13,11 +13,26 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
-      "$HOME/.codex"
+      "$HOME/.codex",
+      "/tmp"
     ],
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise"
+    ],
+    "read_file": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
+    ],
+    "bypass_protection": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
     ]
   },
   "environment": {

@@ -17,11 +17,26 @@
       "$HOME/.config/opencode",
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
-      "$HOME/.local/state/opencode"
+      "$HOME/.local/state/opencode",
+      "/tmp"
     ],
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise"
+    ],
+    "read_file": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
+    ],
+    "bypass_protection": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
     ]
   },
   "environment": {
