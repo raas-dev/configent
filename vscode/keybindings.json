@@ -222,28 +222,6 @@
     "key": "cmd+[IntlBackslash]"
   },
   {
-    "command": "-execCopy",
-    "key": "cmd+c"
-  },
-  {
-    "command": "-execPaste",
-    "key": "cmd+v"
-  },
-  {
-    "command": "-execCut",
-    "key": "cmd+x"
-  },
-  {
-    "command": "-workbench.action.terminal.paste",
-    "key": "cmd+v",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "-workbench.action.terminal.copySelection",
-    "key": "cmd+c",
-    "when": "terminalTextSelectedInFocused || terminalFocus && terminalHasBeenCreated && terminalTextSelected || terminalFocus && terminalProcessSupported && terminalTextSelected || terminalFocus && terminalTextSelected && terminalTextSelectedInFocused || terminalHasBeenCreated && terminalTextSelected && terminalTextSelectedInFocused || terminalProcessSupported && terminalTextSelected && terminalTextSelectedInFocused"
-  },
-  {
     "command": "-workbench.action.terminal.openNativeConsole",
     "key": "shift+cmd+c",
     "when": "!terminalFocus"
