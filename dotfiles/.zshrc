@@ -40,14 +40,6 @@ bindkey -r '^l' # unbind clear screen (ctrl+l) for terminal pane navigation
 # load before LS_COLORS for Aloxaf/fzf-tab
 command -v dircolors >/dev/null && eval "$(dircolors -b "$HOME"/.dir_colors)"
 
-### antidote ###################################################################
-
-if [ -r "$HOME/.antidote/antidote.zsh" ]; then
-  export ANTIDOTE_HOME="$HOME/.cache/antidote"
-  . "$HOME/.antidote/antidote.zsh"
-  antidote load
-fi
-
 ### History ####################################################################
 
 HISTFILE="$HOME/.zsh_history"
@@ -65,6 +57,13 @@ setopt share_history          # share history between session
 
 alias history='fc -El 1' # show timestamped history (zsh fc only)
 
+### antidote ###################################################################
+
+if [ -r "$HOME/.antidote/antidote.zsh" ]; then
+  export ANTIDOTE_HOME="$HOME/.cache/antidote"
+  . "$HOME/.antidote/antidote.zsh"
+  antidote load
+fi
 ### Completions ################################################################
 
 autoload -Uz compinit && compinit
@@ -145,6 +144,7 @@ command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
 ### Automatically list contents when changing directory ########################
 
-chpwd() {
+chpwd_functions+=(chpwd_ls)
+chpwd_ls() {
   ls
 }
