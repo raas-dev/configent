@@ -92,15 +92,7 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 
 ### Prompt #####################################################################
 
-# Skip for `zsh -i -c tm` (tmux client + mise hooks clash on stdin)
-_mise_skip_tm_bootstrap=
-case ${ZSH_EXECUTION_STRING-} in
-tm | tm\ * | tm-*) _mise_skip_tm_bootstrap=1 ;;
-esac
-if [ -z "${_mise_skip_tm_bootstrap:-}" ]; then
-  command -v mise >/dev/null && eval "$(mise activate zsh)"
-fi
-unset _mise_skip_tm_bootstrap
+command -v mise >/dev/null && eval "$(mise activate zsh)"
 
 # Prefer starship prompt; fallback to builtin prompt when unavailable
 if command -v starship >/dev/null; then
