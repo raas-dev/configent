@@ -7,6 +7,9 @@
 # shellcheck disable=SC2016  # zstyle: ignore single quotes warning
 # shellcheck disable=SC2034  # ignore SAVEHIST, PROMPT and RPROMPT unused
 
+# quit if shell is not interactive
+[[ -o interactive ]] || return
+
 if [ "$(uname -s)" = 'Darwin' ]; then
   if [ -x "/opt/homebrew/bin/zsh" ]; then
     export SHELL="/opt/homebrew/bin/zsh"
