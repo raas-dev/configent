@@ -1,7 +1,6 @@
 {
   "meta": {
     "name": "opencode",
-    "version": "1.0.0",
     "description": "OpenCode"
   },
   "extends": "default",
@@ -18,11 +17,13 @@
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
       "$HOME/.local/state/opencode",
+      "$HOME/.config/configent/opencode",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
-      "$HOME/.local/share/mise"
+      "$HOME/.local/share/mise",
+      "$HOME/.config/configent/mcp"
     ],
     "read_file": [
       "$HOME/.zshrc",

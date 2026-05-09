@@ -1,7 +1,6 @@
 {
   "meta": {
     "name": "omp",
-    "version": "1.0.0",
     "description": "oh-my-pi"
   },
   "extends": "default",
@@ -14,11 +13,13 @@
     "allow": [
       "$WORKDIR",
       "$HOME/.omp",
+      "$HOME/.config/configent/omp",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
-      "$HOME/.local/share/mise"
+      "$HOME/.local/share/mise",
+      "$HOME/.config/configent/mcp"
     ],
     "read_file": [
       "$HOME/.zshrc",

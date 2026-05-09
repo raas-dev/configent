@@ -1,7 +1,6 @@
 {
   "meta": {
     "name": "claude",
-    "version": "1.0.0",
     "description": "Claude Code CLI"
   },
   "extends": "default",
@@ -14,6 +13,7 @@
     "allow": [
       "$WORKDIR",
       "$HOME/.claude",
+      "$HOME/.config/configent/claude-code",
       "/tmp"
     ],
     "read": [
