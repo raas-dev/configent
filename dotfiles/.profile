@@ -108,7 +108,10 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
+### local bin ##################################################################
+
 path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.local/configent/bin"
 
 ### mise #######################################################################
 
@@ -368,7 +371,3 @@ export HEADROOM_TELEMETRY=off
 
 # openspec
 export OPENSPEC_TELEMETRY=0
-
-### configent/bin ##############################################################
-
-path_prepend "$HOME/.local/configent/bin"
