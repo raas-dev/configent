@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # configent (https://github.com/raas-dev/configent)
 # One command automated macOS/Linux laptop/VM/container bootstrapper.
@@ -12,266 +12,268 @@
 : "${TEMPLATE:="debian"}"
 : "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY}"
 
-RUN="${1-}"
+if [ "$(uname -s)" != 'Darwin' ]; then
+  echo "Error: This script is ought to be run on macOS only."
+  exit 1
+fi
+
+program="${1-}"
 [ $# -gt 0 ] && shift
 
-case "$RUN" in
+case "$program" in
 pi) FW="$FW,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 omp) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 opencode) FW="$FW,OPENCODE_API_KEY" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
 codex) FW="$FW,OPENAI_API_KEY" ;;
+*) FW="$FW,ZAI_API_KEY" ;;
 esac
 
-if [ "$(uname -s)" = 'Darwin' ]; then
-  if ! command -v limactl >/dev/null; then
-    echo "Error: limactl not found on macOS, cannot start Linux VM for agent."
-    exit 127
-  fi
-  lima_cwd=$(pwd -P)
-  lima_home=$(cd "$HOME" && pwd -P)
-  lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
-  lima_skip_home_mount=
-  [ "$lima_cwd" = "$lima_home" ] && lima_skip_home_mount=1
+if ! command -v limactl >/dev/null; then
+  echo "Error: limactl not found on macOS, cannot start Linux VM" \
+    "for agent."
+  exit 127
+fi
+lima_cwd=$(pwd -P)
+lima_home=$(cd "$HOME" && pwd -P)
+lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
+lima_skip_home_mount=
+[ "$lima_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
-  # Sync provider credentials from host into the Linux guest via limactl cp
-  box_sync_agent_auth_into_vm() {
-    guest_home=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
-      return 0
-    [ -n "$guest_home" ] || return 0
+# Sync provider credentials from host into the Linux guest via limactl cp
+box_sync_agent_auth_into_vm() {
+  guest_home=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
+    return 0
+  [ -n "$guest_home" ] || return 0
 
-    limactl shell --tty=false "$NAME" -- mkdir -p \
-      "${guest_home}/.ssh" \
-      "${guest_home}/.pi/agent" \
-      "${guest_home}/.omp" \
-      "${guest_home}/.local/share/opencode" \
-      "${guest_home}/.codex" ||
-      return 0
+  limactl shell --tty=false "$NAME" -- mkdir -p \
+    "${guest_home}/.ssh" \
+    "${guest_home}/.pi/agent" \
+    "${guest_home}/.omp" \
+    "${guest_home}/.local/share/opencode" \
+    "${guest_home}/.codex" ||
+    return 0
 
-    # SSH: known_hosts
-    [ -f "$HOME/.ssh/known_hosts" ] &&
-      limactl cp "$HOME/.ssh/known_hosts" \
-        "$NAME:${guest_home}/.ssh/known_hosts"
+  # SSH: known_hosts
+  [ -f "$HOME/.ssh/known_hosts" ] &&
+    limactl cp "$HOME/.ssh/known_hosts" \
+      "$NAME:${guest_home}/.ssh/known_hosts"
 
-    # Pi Coding Agent
-    [ -f "$HOME/.pi/agent/auth.json" ] &&
-      limactl cp "$HOME/.pi/agent/auth.json" \
-        "$NAME:${guest_home}/.pi/agent/auth.json"
+  # Pi Coding Agent
+  [ -f "$HOME/.pi/agent/auth.json" ] &&
+    limactl cp "$HOME/.pi/agent/auth.json" \
+      "$NAME:${guest_home}/.pi/agent/auth.json"
 
-    # oh-my-pi
-    [ -f "$HOME/.omp/marketplaces.json" ] &&
-      limactl cp "$HOME/.omp/marketplaces.json" \
-        "$NAME:${guest_home}/.omp/marketplaces.json"
+  # oh-my-pi
+  [ -f "$HOME/.omp/marketplaces.json" ] &&
+    limactl cp "$HOME/.omp/marketplaces.json" \
+      "$NAME:${guest_home}/.omp/marketplaces.json"
 
-    # OpenCode
-    [ -f "$HOME/.local/share/opencode/auth.json" ] &&
-      limactl cp "$HOME/.local/share/opencode/auth.json" \
-        "$NAME:${guest_home}/.local/share/opencode/auth.json"
-    [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
-      limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
-        "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
+  # OpenCode
+  [ -f "$HOME/.local/share/opencode/auth.json" ] &&
+    limactl cp "$HOME/.local/share/opencode/auth.json" \
+      "$NAME:${guest_home}/.local/share/opencode/auth.json"
+  [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
+    limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
+      "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
 
-    # Claude Code
-    [ -f "$HOME/.claude.json" ] &&
-      limactl cp "$HOME/.claude.json" "$NAME:${guest_home}/.claude.json"
+  # Claude Code
+  [ -f "$HOME/.claude.json" ] &&
+    limactl cp "$HOME/.claude.json" "$NAME:${guest_home}/.claude.json"
 
-    # Codex CLI
-    [ -f "$HOME/.codex/auth.json" ] &&
-      limactl cp "$HOME/.codex/auth.json" \
-        "$NAME:${guest_home}/.codex/auth.json"
-  }
+  # Codex CLI
+  [ -f "$HOME/.codex/auth.json" ] &&
+    limactl cp "$HOME/.codex/auth.json" \
+      "$NAME:${guest_home}/.codex/auth.json"
+}
 
-  # Drop mount entries whose host location no longer exists on disk.
-  lima_remove_nonexistent_mounts() {
-    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    [ -f "$lima_instance_yaml" ] || return 0
-    awk -v home="$HOME" '
-      /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
-      in_mounts && /^- location: / {
-        loc = substr($0, 13)
-        gsub(/^"|"$/, "", loc)
-        sub(/^~/, home, loc)
-        cmd = "test -d \"" loc "\""
-        if (system(cmd) != 0) { skip=1; next }
-      }
-      skip && /^  / { next }
-      { skip=0; print }
-      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
-      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
-  }
+# Drop mount entries whose host location no longer exists on disk.
+lima_remove_nonexistent_mounts() {
+  lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+  [ -f "$lima_instance_yaml" ] || return 0
+  awk -v home="$HOME" '
+    /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+    in_mounts && /^- location: / {
+      loc = substr($0, 13)
+      gsub(/^"|"$/, "", loc)
+      sub(/^~/, home, loc)
+      cmd = "test -d \"" loc "\""
+      if (system(cmd) != 0) { skip=1; next }
+    }
+    skip && /^  / { next }
+    { skip=0; print }
+    ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+    mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+}
 
-  # Remove cwd and full-home mounts so --mount does not duplicate; \$HOME stays
-  # off the guest mount list.
-  lima_remove_cwd_mount() {
-    lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-    [ -f "$lima_instance_yaml" ] || return 0
-    awk -v path="${lima_cwd}" -v home="${lima_home}" '
-      /^- location: / {
-        loc = substr($0, 13)
-        gsub(/^"|"$/, "", loc)
-        if (loc == path || loc == home || loc == "~") { skip=1; next }
-      }
-      skip && /^  / { next }
-      { skip=0; print }
-      ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
-      mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
-  }
+# Remove cwd and full-home mounts so --mount does not duplicate;
+# \$HOME stays off the guest mount list.
+lima_remove_cwd_mount() {
+  lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
+  [ -f "$lima_instance_yaml" ] || return 0
+  awk -v path="${lima_cwd}" -v home="${lima_home}" '
+    /^- location: / {
+      loc = substr($0, 13)
+      gsub(/^"|"$/, "", loc)
+      if (loc == path || loc == home || loc == "~") { skip=1; next }
+    }
+    skip && /^  / { next }
+    { skip=0; print }
+    ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+    mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+}
 
-  # True if the path is visible inside the guest (i.e. the mount exists).
-  lima_guest_cwd_exists() {
-    limactl shell --workdir / --tty=false "$NAME" -- \
-      test -d "$lima_cwd" >/dev/null 2>&1
-  }
+# True if the path is visible inside the guest (i.e. the mount exists).
+lima_guest_cwd_exists() {
+  limactl shell --workdir / --tty=false "$NAME" -- \
+    test -d "$lima_cwd" >/dev/null 2>&1
+}
 
-  # True if creating a file in lima_cwd works. test -w can pass while touch
-  # fails; do not rely on test -w alone.
-  lima_guest_cwd_writable() {
-    limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
-      "t=\"\$1/.box-write-probe.\$\$\"; rm -f \"\$t\"; \
-      touch \"\$t\"; rm -f \"\$t\"" \
-      _ "$lima_cwd" >/dev/null 2>&1
-  }
+# True if creating a file in lima_cwd works. test -w can pass while touch
+# fails; do not rely on test -w alone.
+lima_guest_cwd_writable() {
+  limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
+    "t=\"\$1/.box-write-probe.\$\$\"; rm -f \"\$t\"; \
+    touch \"\$t\"; rm -f \"\$t\"" \
+    _ "$lima_cwd" >/dev/null 2>&1
+}
 
-  # virtiofs often comes up ro after boot even when lima.yaml has writable:
-  # true; remount rw avoids a pointless stop/start loop.
-  lima_guest_remount_cwd_rw() {
-    limactl shell --tty=false "$NAME" -- \
-      sudo mount -o remount,rw "$lima_cwd" \
-      >/dev/null 2>&1 || true
-  }
+# virtiofs often comes up ro after boot even when lima.yaml has writable:
+# true; remount rw avoids a pointless stop/start loop.
+lima_guest_remount_cwd_rw() {
+  limactl shell --tty=false "$NAME" -- \
+    sudo mount -o remount,rw "$lima_cwd" \
+    >/dev/null 2>&1 || true
+}
 
-  # Keep template dirs + add cwd rw (--mount-only replaces the full mount list)
-  lima_start_mount_only() {
-    lima_remove_nonexistent_mounts
-    lima_remove_cwd_mount
-    if [ -n "$lima_skip_home_mount" ]; then
-      limactl start --name "$NAME" --tty=false --log-level=warn
-    else
-      limactl start --name "$NAME" --tty=false --log-level=warn \
-        --mount "${lima_cwd}:w"
-    fi
-  }
-
-  # Remount rw (virtiofs often boots ro); if still ro, cold restart then
-  # remount again.
-  lima_guest_activate_cwd_mount_rw() {
-    if [ -n "$lima_skip_home_mount" ]; then
-      return 0
-    fi
-    lima_guest_remount_cwd_rw
-    if lima_guest_cwd_writable; then
-      return 0
-    fi
-    _lima_cwd_existed=
-    if lima_guest_cwd_exists; then
-      _lima_cwd_existed=1
-      printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
-        "$lima_cwd" "$NAME"
-    else
-      printf "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
-        "$lima_cwd" "$NAME"
-    fi
-    read -r _restart_answer
-    case "$_restart_answer" in
-    [yY]) ;;
-    *)
-      echo "Skipping restart."
-      [ -z "$_lima_cwd_existed" ] && lima_remove_cwd_mount
-      return 1
-      ;;
-    esac
-    limactl stop "$NAME"
-    lima_start_mount_only
-    lima_guest_remount_cwd_rw
-    if lima_guest_cwd_writable; then
-      return 0
-    fi
-    echo "Error: Lima mount is still not writable at ${lima_cwd}" \
-      "inside the VM (see: findmnt ${lima_cwd})." >&2
-    exit 1
-  }
-
-  lima_ensure_guest_cwd_writable() {
-    lima_start_mount_only
-    lima_guest_activate_cwd_mount_rw
-  }
-  lima_create_instance() {
-    net="$1"
-    if [ -n "$lima_skip_home_mount" ]; then
-      limactl start --name "$NAME" --tty=false "$lima_yaml" \
-        --vm-type=vz \
-        --network="$net" \
-        --rosetta \
-        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
-        --set=".env.EMAIL = \"$EMAIL\"" \
-        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
-        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        lima_start_mount_only
-    else
-      limactl start --name "$NAME" --tty=false "$lima_yaml" \
-        --vm-type=vz \
-        --network="$net" \
-        --rosetta \
-        --mount "${lima_cwd}:w" \
-        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
-        --set=".env.EMAIL = \"$EMAIL\"" \
-        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
-        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
-        lima_start_mount_only
-    fi
-  }
-
-  _lima_status=$(limactl list --format '{{.Name}} {{.Status}}' 2>/dev/null |
-    awk -v name="$NAME" '$1 == name { print $2; exit }')
-
-  if [ "$_lima_status" = "Running" ]; then
-    # VM already running: skip SSH probe; only SSH if mount missing or ro.
-    if [ -z "$lima_skip_home_mount" ]; then
-      if ! lima_guest_cwd_writable; then
-        lima_guest_activate_cwd_mount_rw || exit 1
-      fi
-    fi
-  elif [ -n "$_lima_status" ]; then
-    # VM exists but not running (e.g. Stopped): start it without re-creating.
-    lima_start_mount_only
-    lima_guest_activate_cwd_mount_rw || exit 1
-  elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-    lima_create_instance lima:bridged
-    lima_guest_activate_cwd_mount_rw || exit 1
+# Keep template dirs + add cwd rw; --mount-only replaces full mount list.
+lima_start_mount_only() {
+  lima_remove_nonexistent_mounts
+  lima_remove_cwd_mount
+  if [ -n "$lima_skip_home_mount" ]; then
+    limactl start --name "$NAME" --tty=false --log-level=warn
   else
-    lima_create_instance vzNAT
-    lima_guest_activate_cwd_mount_rw || exit 1
+    limactl start --name "$NAME" --tty=false --log-level=warn \
+      --mount "${lima_cwd}:w"
   fi
+}
 
-  export LIMA_SHELLENV_BLOCK='*'
-
-  term='TERM,COLORTERM,TERM_PROGRAM,TERM_PROGRAM_VERSION,NO_COLOR,FORCE_COLOR'
-  git='EMAIL,GIT_AUTHOR_NAME,GIT_COMMITTER_NAME'
-  if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
-    export LIMA_SHELLENV_ALLOW="$FW,$term,$git,$LIMA_SHELLENV_ALLOW"
+# Remount rw (virtiofs often boots ro); if still ro, cold restart then
+# remount again.
+lima_guest_activate_cwd_mount_rw() {
+  if [ -n "$lima_skip_home_mount" ]; then
+    return 0
+  fi
+  lima_guest_remount_cwd_rw
+  if lima_guest_cwd_writable; then
+    return 0
+  fi
+  _lima_cwd_existed=
+  if lima_guest_cwd_exists; then
+    _lima_cwd_existed=1
+    printf \
+      "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
+      "$lima_cwd" "$NAME"
   else
-    export LIMA_SHELLENV_ALLOW="$FW,$term,$git"
+    printf \
+      "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
+      "$lima_cwd" "$NAME"
   fi
+  read -r _restart_answer
+  case "$_restart_answer" in
+  [yY]) ;;
+  *)
+    echo "Skipping restart."
+    [ -z "$_lima_cwd_existed" ] && lima_remove_cwd_mount
+    return 1
+    ;;
+  esac
+  limactl stop "$NAME"
+  lima_start_mount_only
+  lima_guest_remount_cwd_rw
+  if lima_guest_cwd_writable; then
+    return 0
+  fi
+  echo "Error: Lima mount is still not writable at ${lima_cwd}" \
+    "inside the VM (see: findmnt ${lima_cwd})." >&2
+  exit 1
+}
 
-  box_sync_agent_auth_into_vm
-
-  if [ -z "$RUN" ]; then
-    limactl shell \
-      --preserve-env \
-      --workdir "$lima_cwd" \
-      "$NAME" \
-      "$(basename "$SHELL")"
+lima_ensure_guest_cwd_writable() {
+  lima_start_mount_only
+  lima_guest_activate_cwd_mount_rw
+}
+lima_create_instance() {
+  net="$1"
+  if [ -n "$lima_skip_home_mount" ]; then
+    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+      --vm-type=vz \
+      --network="$net" \
+      --rosetta \
+      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+      --set=".env.EMAIL = \"$EMAIL\"" \
+      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+      lima_start_mount_only
   else
-    limactl shell \
-      --preserve-env \
-      --workdir "$lima_cwd" \
-      "$NAME" \
-      /bin/bash -c 'exec '"$RUN"' "$@"' _ "$@"
+    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+      --vm-type=vz \
+      --network="$net" \
+      --rosetta \
+      --mount "${lima_cwd}:w" \
+      --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+      --set=".env.EMAIL = \"$EMAIL\"" \
+      --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+      --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
+      lima_start_mount_only
   fi
+}
+
+_lima_status=$(limactl list --format '{{.Name}} {{.Status}}' 2>/dev/null |
+  awk -v name="$NAME" '$1 == name { print $2; exit }')
+
+if [ "$_lima_status" = "Running" ]; then
+  # VM already running: skip SSH probe; only SSH if mount missing or ro.
+  if [ -z "$lima_skip_home_mount" ]; then
+    if ! lima_guest_cwd_writable; then
+      lima_guest_activate_cwd_mount_rw || exit 1
+    fi
+  fi
+elif [ -n "$_lima_status" ]; then
+  # VM exists but not running (e.g. Stopped): start it without re-creating.
+  lima_start_mount_only
+  lima_guest_activate_cwd_mount_rw || exit 1
+elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+  lima_create_instance lima:bridged
+  lima_guest_activate_cwd_mount_rw || exit 1
 else
-  if [ -z "$RUN" ]; then
-    exec "$SHELL"
-  else
-    "$RUN" "$@"
-  fi
+  lima_create_instance vzNAT
+  lima_guest_activate_cwd_mount_rw || exit 1
+fi
+
+export LIMA_SHELLENV_BLOCK='*'
+
+term='TERM,COLORTERM,TERM_PROGRAM,TERM_PROGRAM_VERSION,NO_COLOR,FORCE_COLOR'
+git='EMAIL,GIT_AUTHOR_NAME,GIT_COMMITTER_NAME'
+if [ -n "${LIMA_SHELLENV_ALLOW-}" ]; then
+  export LIMA_SHELLENV_ALLOW="$FW,$term,$git,$LIMA_SHELLENV_ALLOW"
+else
+  export LIMA_SHELLENV_ALLOW="$FW,$term,$git"
+fi
+
+box_sync_agent_auth_into_vm
+
+if [ -z "$program" ]; then
+  limactl shell \
+    --preserve-env \
+    --workdir "$lima_cwd" \
+    "$NAME" \
+    "$(basename "$SHELL")"
+else
+  _box_cmd=$(printf '%q ' "$program" "$@")
+  limactl shell \
+    --preserve-env \
+    --workdir "$lima_cwd" \
+    "$NAME" \
+    "$(basename "$SHELL")" -lic "$_box_cmd"
 fi
