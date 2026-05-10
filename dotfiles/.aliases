@@ -137,12 +137,6 @@ x() {
   fi
 }
 
-### Secrets wrapper ############################################################
-
-alias gx='secret get'
-alias sx='secret set'
-alias dx='secret del'
-
 ### Lima VMs ###################################################################
 
 _lima_remove_nonexistent_mounts() {
