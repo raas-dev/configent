@@ -772,7 +772,7 @@ mx() {
     cat <<'EOF'
 Usage: mx <tool> [--] [args...]
 
-Resolve first word against mise (substring match), then run that tool with remaining args.
+Resolve first word against mise, then run that tool with remaining args.
 If nothing matches, forwards full argv to: mise exec [...]
 
 Examples:
