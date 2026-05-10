@@ -33,6 +33,9 @@ $SUDO pacman --noconfirm --needed -S ca-certificates
 # Cryptography
 $SUDO pacman --noconfirm --needed -S gnupg
 
+# pass (https://www.passwordstore.org/)
+$SUDO pacman --noconfirm --needed -S pass
+
 # Log file navigator
 $SUDO pacman --noconfirm --needed -S lnav
 

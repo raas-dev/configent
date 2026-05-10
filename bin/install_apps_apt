@@ -48,6 +48,9 @@ $SUDO apt-get install -y ca-certificates
 # Cryptography
 $SUDO apt-get install -y gnupg
 
+# pass (https://www.passwordstore.org/)
+$SUDO apt-get install -y pass
+
 # Log file navigator
 $SUDO apt-get install -y lnav
 

@@ -45,6 +45,9 @@ $SUDO dnf install -y ca-certificates
 # Cryptography
 $SUDO dnf install -y gnupg
 
+# pass (https://www.passwordstore.org/)
+$SUDO dnf install -y pass
+
 # Log file navigator
 $SUDO dnf install -y lnav
 

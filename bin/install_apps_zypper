@@ -36,6 +36,9 @@ $SUDO zypper install -y ca-certificates
 # Cryptography
 $SUDO zypper install -y gpg2
 
+# pass (https://www.passwordstore.org/)
+$SUDO zypper install -y password-store
+
 # Log file navigator
 $SUDO zypper install -y lnav
 

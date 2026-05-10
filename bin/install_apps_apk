@@ -41,6 +41,9 @@ $SUDO apk add ca-certificates
 # Cryptography
 $SUDO apk add gnupg
 
+# pass (https://www.passwordstore.org/)
+$SUDO apk add pass
+
 # Log file navigator
 $SUDO apk add lnav
 
