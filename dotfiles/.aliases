@@ -112,7 +112,7 @@ alias ≤='trans'
 alias \#='echo'
 alias \?='autobot'
 alias ¨='bat --paging auto --style full --show-all'
-alias ,='mise_exec'
+alias ,='box'
 alias _='agent'
 
 ### Privileged utilities #######################################################
@@ -767,7 +767,20 @@ genpass() {
 }
 
 # Shortcut to execute ad-hoc commands
-mise_exec() {
+mx() {
+  if [ $# -eq 0 ]; then
+    cat <<'EOF'
+Usage: mx <tool> [--] [args...]
+  Resolve first word against mise (substring match), then run that tool with remaining args.
+  If nothing matches, forwards full argv to: mise exec [...]
+
+Examples:
+  mx rg pattern file
+  mx node --version
+  mx node -- npm --version
+EOF
+    return 1
+  fi
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local first_match="$(mise search --match-type contains "$1" 2>/dev/null |
     head -1 | awk '{print $1}')"
