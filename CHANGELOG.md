@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.0](https://github.com/raas-dev/configent/compare/1.220.5...1.221.0) (2026-05-10)
+
+
+### Features
+
+* **install:** add pass password manager to all package managers ([8e24912](https://github.com/raas-dev/configent/commit/8e2491247965e735180cd53a685090741817493e))
+
+
+### Fixes
+
+* **aliases:** add pass env bootstrap and encrypt subkey check ([9db59d4](https://github.com/raas-dev/configent/commit/9db59d45c4eacfc72c4353d66deedae51732e5f2))
+* **aliases:** add pass get/set/delete helpers for Linux ([7950d03](https://github.com/raas-dev/configent/commit/7950d0346e6fb4352d6ace39814892ef7c4d65f0))
+* **aliases:** prompt for GPG key passphrase instead of hardcoding empty ([1a1440a](https://github.com/raas-dev/configent/commit/1a1440a98c4e73a039d6a9a3b797df285d0d129f))
+* **aliases:** simplify dx prompt wording and fix escape ([0950b67](https://github.com/raas-dev/configent/commit/0950b67906a0b685695ae784c95654bcdc43f64a))
+* **aliases:** use literal function names in usage hints ([11262bc](https://github.com/raas-dev/configent/commit/11262bc518fb6bc48e538ccee8b248342ac38867))
+* **pass:** prompt for passphrase when adding encrypt subkey ([f639c55](https://github.com/raas-dev/configent/commit/f639c552e9d347c9f8891095bf383c269303d719))
+
 ## [1.220.5](https://github.com/raas-dev/configent/compare/1.220.4...1.220.5) (2026-05-10)
 
 
