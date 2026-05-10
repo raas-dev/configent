@@ -85,7 +85,7 @@ else
   # gpg --quick-gen-key … default makes certify+sign only; pass needs
   # an encrypt-capable subkey
   _pass_ensure_encrypt_capable() {
-    local gpg_bin="$1" gpg_file line rid
+    local gpg_bin="$1" gpg_file line rid _unlock
     gpg_file="${PASSWORD_STORE_DIR:-$HOME/.password-store}/.gpg-id"
     [ ! -f "$gpg_file" ] && return 0
     while IFS= read -r line || [ -n "$line" ]; do
@@ -95,7 +95,11 @@ else
         [ -z "$rid" ] && continue
         printf 'x\n' | "$gpg_bin" -o /dev/null -e -r "$rid" \
           2>/dev/null && continue
-        "$gpg_bin" --batch --pinentry-mode loopback \
+        printf 'Passphrase (unlock key for encrypt subkey): ' >&2
+        read -rs _unlock </dev/tty 2>/dev/null || read -rs _unlock
+        printf '\n' >&2
+        printf '%s\n' "$_unlock" | "$gpg_bin" --batch --pinentry-mode loopback \
+          --passphrase-fd 0 --no-tty \
           --quick-add-key "$rid" rsa4096 encrypt never || return 1
       done
     done <"$gpg_file"
@@ -126,7 +130,7 @@ else
           return 1
         fi
         printf '%s\n' "$_pp" | "$gpg_bin" --batch --pinentry-mode loopback \
-          --passphrase-fd 0 \
+          --passphrase-fd 0 --no-tty \
           --quick-gen-key "Password Store <password-store@localhost>" \
             rsa4096 default never ||
           return 1
