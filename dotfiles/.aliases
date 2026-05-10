@@ -95,7 +95,7 @@ else
         [ -z "$rid" ] && continue
         printf 'x\n' | "$gpg_bin" -o /dev/null -e -r "$rid" \
           2>/dev/null && continue
-        "$gpg_bin" --batch --pinentry-mode loopback --passphrase '' \
+        "$gpg_bin" --batch --pinentry-mode loopback \
           --quick-add-key "$rid" rsa4096 encrypt never || return 1
       done
     done <"$gpg_file"
@@ -114,8 +114,19 @@ else
       gpg_id=$("$gpg_bin" --with-colons --list-secret-keys 2>/dev/null |
         grep '^fpr:' | head -1 | cut -d: -f10)
       if [ -z "$gpg_id" ]; then
-        "$gpg_bin" --batch --pinentry-mode loopback \
-          --passphrase '' \
+        local _pp _pp2
+        printf 'Passphrase for new Password Store GPG key (empty = none): '
+        read -rs _pp </dev/tty
+        printf '\n'
+        printf 'Confirm passphrase: '
+        read -rs _pp2 </dev/tty
+        printf '\n'
+        if [ "$_pp" != "$_pp2" ]; then
+          echo "Error: Passphrases do not match"
+          return 1
+        fi
+        printf '%s\n' "$_pp" | "$gpg_bin" --batch --pinentry-mode loopback \
+          --passphrase-fd 0 \
           --quick-gen-key "Password Store <password-store@localhost>" \
             rsa4096 default never ||
           return 1
