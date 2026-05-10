@@ -36,44 +36,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Canonical hex dump; some systems have this symlinked
   ! command -v hd >/dev/null && alias hd='hexdump -C'
 
-  # macOS keychain: get
-  gx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
-    security find-generic-password -a "$USER" -D "environment variable" \
-      -s "$name" -w
-  }
-
-  # macOS keychain: set
-  sx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: sx <name> [value]" && return 1
-    local secret="$2"
-    if [ -z "$secret" ]; then
-      printf "Enter secret for %s: " "$name"
-      read -r secret
-    fi
-    [ -z "$secret" ] && echo "Error: Empty secret" && return 1
-    security add-generic-password -a "$USER" -D "environment variable" \
-      -s "$name" -w "$secret" -U
-  }
-
-  # macOS keychain: delete
-  dx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: dx <name>" && return 1
-    printf 'Remove %s [y/N]? ' "$name"
-    read -r choice
-    case "$choice" in
-    [yY])
-      security delete-generic-password -a "$USER" -D "environment variable" \
-        -s "$name"
-      ;;
-    *)
-      printf "Aborted.\n"
-      ;;
-    esac
-  }
 else
   # Similar to macOS `pbcopy` and `pbpaste`
   alias pbcopy='xsel --clipboard --input'
@@ -81,115 +43,6 @@ else
 
   # Similar to macOS `open`
   alias open='xdg-open'
-
-  # gpg --quick-gen-key … default makes certify+sign only; pass needs
-  # an encrypt-capable subkey
-  _pass_ensure_encrypt_capable() {
-    local gpg_bin="$1" gpg_file line rid _unlock
-    gpg_file="${PASSWORD_STORE_DIR:-$HOME/.password-store}/.gpg-id"
-    [ ! -f "$gpg_file" ] && return 0
-    while IFS= read -r line || [ -n "$line" ]; do
-      line=$(printf '%s' "$line" | tr -d '\r')
-      [ -z "$line" ] && continue
-      for rid in $line; do
-        [ -z "$rid" ] && continue
-        printf 'x\n' | "$gpg_bin" -o /dev/null -e -r "$rid" \
-          2>/dev/null && continue
-        printf 'Passphrase (unlock key for encrypt subkey): ' >&2
-        read -rs _unlock </dev/tty 2>/dev/null || read -rs _unlock
-        printf '\n' >&2
-        printf '%s\n' "$_unlock" | "$gpg_bin" --batch --pinentry-mode loopback \
-          --passphrase-fd 0 --no-tty \
-          --quick-add-key "$rid" rsa4096 encrypt never || return 1
-      done
-    done <"$gpg_file"
-  }
-
-  _pass_env_ready() {
-    command -v pass >/dev/null || {
-      echo "Error: pass not in PATH"
-      return 1
-    }
-    local store gpg_id gpg_bin
-    gpg_bin="$(command -v gpg2 >/dev/null && printf '%s' gpg2 \
-      || printf '%s' gpg)"
-    store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-    if [ ! -f "$store/.gpg-id" ]; then
-      gpg_id=$("$gpg_bin" --with-colons --list-secret-keys 2>/dev/null |
-        grep '^fpr:' | head -1 | cut -d: -f10)
-      if [ -z "$gpg_id" ]; then
-        local _pp _pp2
-        printf 'Passphrase for new Password Store GPG key (empty = none): '
-        read -rs _pp </dev/tty
-        printf '\n'
-        printf 'Confirm passphrase: '
-        read -rs _pp2 </dev/tty
-        printf '\n'
-        if [ "$_pp" != "$_pp2" ]; then
-          echo "Error: Passphrases do not match"
-          return 1
-        fi
-        printf '%s\n' "$_pp" | "$gpg_bin" --batch --pinentry-mode loopback \
-          --passphrase-fd 0 --no-tty \
-          --quick-gen-key "Password Store <password-store@localhost>" \
-            rsa4096 default never ||
-          return 1
-        gpg_id=$("$gpg_bin" --with-colons --list-secret-keys 2>/dev/null |
-          grep '^fpr:' | head -1 | cut -d: -f10)
-        [ -n "$gpg_id" ] || return 1
-      fi
-      pass init "$gpg_id" || return 1
-    fi
-    _pass_ensure_encrypt_capable "$gpg_bin" || return 1
-  }
-
-  # pass: get
-  gx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
-    _pass_env_ready || return 1
-    pass show "$name"
-  }
-
-  # pass: set
-  sx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: sx <name> [value]" && return 1
-    _pass_env_ready || return 1
-    local secret="$2"
-    if [ -z "$secret" ]; then
-      printf "Enter secret for %s: " "$name"
-      read -r secret
-    fi
-    [ -z "$secret" ] && echo "Error: Empty secret" && return 1
-    (
-      set -o pipefail
-      # -e: single prompt branch (default insert expects two hidden reads →
-      # breaks stdin pipe)
-      printf '%s\n' "$secret" | pass insert -e -f "$name"
-    ) || return 1
-  }
-
-  # pass: delete
-  dx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: dx <name>" && return 1
-    _pass_env_ready || return 1
-    printf 'Remove %s [y/N]? ' "$name"
-    read -r choice
-    case "$choice" in
-    [yY])
-      local store f
-      store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-      f="$store/$name.gpg"
-      [ -f "$f" ] || return 0
-      pass rm -f "$name" || return 1
-      ;;
-    *)
-      printf "Aborted.\n"
-      ;;
-    esac
-  }
 fi
 
 ### More sensible defaults #####################################################
@@ -283,6 +136,12 @@ x() {
     rip
   fi
 }
+
+### Secrets wrapper ############################################################
+
+alias gx='secret get'
+alias sx='secret set'
+alias dx='secret del'
 
 ### Lima VMs ###################################################################
 

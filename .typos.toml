@@ -1,3 +1,6 @@
+[default.extend-words]
+fpr = "fpr"
+
 [files]
 extend-exclude = [
   "CHANGELOG.md",
