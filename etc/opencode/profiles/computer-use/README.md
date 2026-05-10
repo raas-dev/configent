@@ -1,26 +1,29 @@
 # OpenCode computer-use profile
 
-## opencode-browser
+## opentabs
 
-It is: OpenCode plugin + Agent Skill.
+It is an MCP Server.
 
 Setup:
 
-  bunx @different-ai/opencode-browser@latest install
+    bun add -g @opentabs-dev/cli
+    opentabs start
 
-To update:
+Load the extension from `~/.opentabs/extension` in `chrome://extensions/`.
 
-  bunx @different-ai/opencode-browser@latest update
+To install plugins:
 
-See [opencode-browser](https://github.com/different-ai/opencode-browser) for more information.
+    opentabs plugin install <plugin>
+
+See [opentabs](https://opentabs.dev) for more information.
 
 ## agent-computer-use
 
-It is: CLI + Agent Skill.
+It is a CLI + Agent Skill.
 
 Setup:
 
-  bun add -g agent-cu
-  agent-cu check-permissions
+    bun add -g agent-cu
+    agent-cu check-permissions
 
 See [agent-computer-use](https://github.com/kortix-ai/agent-computer-use) for more information.

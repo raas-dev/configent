@@ -2,10 +2,30 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "zai-coding-plan/glm-5-turbo",
   "permission": {
-    "external_directory": "allow"
+    "external_directory": "allow",
+    "skill": {
+      "agent-browser": "deny"
+    }
+  },
+  "mcp": {
+    "opentabs": {
+      "type": "remote",
+      "url": "http://127.0.0.1:9515/mcp",
+      "headers": {
+        "Authorization": "Bearer 5ccded77b33d2738d33832d3fac004bba45d4ae4169dc3ca269849819c771136"
+      }
+    },
+    "server": {
+      "type": "local",
+      "command": [
+        "opentabs",
+        "start",
+        "--stdio"
+      ]
+    }
   },
   "plugin": [
-    "opencode-scheduler",
-    "@different-ai/opencode-browser"
+    "opencode-pty",
+    "opencode-scheduler"
   ]
 }
