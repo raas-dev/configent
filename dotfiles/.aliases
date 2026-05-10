@@ -772,29 +772,30 @@ mx() {
     cat <<'EOF'
 Usage: mx <tool> [--] [args...]
 
-Resolve first word against mise, then run that tool with remaining args.
-If nothing matches, forwards full argv to: mise exec [...]
+Runs a tool through mise. The first word must be the exact tool name mise knows.
+If mise does not recognize the tool, prints a list of similarly named tools.
 
 Examples:
-  mx rg pattern file
-  mx node --version
+  mx node -- --version
   mx node -- npm --version
+  mx rg -- pattern ./src
 EOF
     return 1
   fi
   # shellcheck disable=SC2155  # will not declare separately, value compactness
-  local first_match="$(mise search --match-type equal "$1" 2>/dev/null |
+  local match="$(mise search --match-type equal "$1" 2>/dev/null |
     head -1 | awk '{print $1}')"
-  if [ -n "$first_match" ]; then
+  if [ -n "$match" ]; then
     local first_arg="$1"
     shift
     if [ "$1" = "--" ]; then
-      mise exec "$first_match" "$@"
+      mise exec "$match" "$@"
     else
-      mise exec "$first_match" -- "$first_arg" "$@"
+      mise exec "$match" -- "$first_arg" "$@"
     fi
   else
-    mise exec "$@"
+    mise search --match-type contains "$1" 2>/dev/null
+    return 1
   fi
 }
 
