@@ -9,13 +9,6 @@
   },
   "mcp": {
     "opentabs": {
-      "type": "remote",
-      "url": "http://127.0.0.1:9515/mcp",
-      "headers": {
-        "Authorization": "Bearer 5ccded77b33d2738d33832d3fac004bba45d4ae4169dc3ca269849819c771136"
-      }
-    },
-    "server": {
       "type": "local",
       "command": [
         "opentabs",

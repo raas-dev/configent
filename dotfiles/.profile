@@ -364,3 +364,6 @@ export HEADROOM_TELEMETRY=off
 
 # openspec
 export OPENSPEC_TELEMETRY=0
+
+# opentabs
+export OPENTABS_TELEMETRY_DISABLED=1

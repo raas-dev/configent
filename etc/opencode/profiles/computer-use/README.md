@@ -1,8 +1,6 @@
 # OpenCode computer-use profile
 
-## opentabs
-
-It is an MCP Server.
+## opentabs (MCP Server)
 
 Setup:
 
@@ -17,9 +15,7 @@ To install plugins:
 
 See [opentabs](https://opentabs.dev) for more information.
 
-## agent-computer-use
-
-It is a CLI + Agent Skill.
+## agent-computer-use (CLI + Agent Skill)
 
 Setup:
 
