@@ -9,7 +9,7 @@ No startup pitches, I am a DevOps principled environment bootstrapper.
 - Does not install 10s of tools most of which can be run ad-hoc.
 - 95% consistent user experience both on macOS and common Linux distros.
 - Has an obvious (one) way to manage programming languages and tool versions.
-- Builds on AI coding agents to automate workflows requiring web browser use.
+- Uses AI coding agents to automate web browsing and computer use workflows.
 
 | ![Screenshot of Brave Browser and IDE with tmux and zsh](ui/target.webp) |
 | ------------------------------------------------------------------------ |
@@ -20,7 +20,7 @@ A few features:
 - Prefers `mise exec` and `n`ix-shells for ad-hoc CLI use over installations.
 - Seamless macOS Docker experience, like it was when Docker Desktop was free.
 - Run `up` to upgrade every package manager at once but respect locked versions.
-- Ask `ai <question>` or use agent (`_`) to automate browser and computer use.
+- Ask `ai <question>` or agent (`_`) to use web browser and other desktop apps.
 
 Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
 
