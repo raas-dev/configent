@@ -39,7 +39,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # macOS keychain: get
   gx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
     security find-generic-password -a "$USER" -D "environment variable" \
       -s "$name" -w
   }
@@ -47,7 +47,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # macOS keychain: set
   sx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: sx <name> [value]" && return 1
     local secret="$2"
     if [ -z "$secret" ]; then
       printf "Enter secret for %s: " "$name"
@@ -61,7 +61,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # macOS keychain: delete
   dx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: dx <name>" && return 1
     printf "Are you sure to remove all secret %s [y\N] > " "$1"
     read -r choice
     case "$choice" in
@@ -85,7 +85,7 @@ else
   # pass: get
   gx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
     command -v pass >/dev/null || {
       echo "Error: pass not in PATH"
       return 1
@@ -96,7 +96,7 @@ else
   # pass: set
   sx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: sx <name> [value]" && return 1
     command -v pass >/dev/null || {
       echo "Error: pass not in PATH"
       return 1
@@ -113,7 +113,7 @@ else
   # pass: delete
   dx() {
     local name="$1"
-    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    [ -z "$name" ] && echo "Usage: dx <name>" && return 1
     command -v pass >/dev/null || {
       echo "Error: pass not in PATH"
       return 1
