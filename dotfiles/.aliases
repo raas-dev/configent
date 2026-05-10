@@ -82,47 +82,93 @@ else
   # Similar to macOS `open`
   alias open='xdg-open'
 
-  # pass: get
-  gx() {
-    local name="$1"
-    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
+  # gpg --quick-gen-key … default makes certify+sign only; pass needs
+  # an encrypt-capable subkey
+  _pass_ensure_encrypt_capable() {
+    local gpg_bin="$1" gpg_file line rid
+    gpg_file="${PASSWORD_STORE_DIR:-$HOME/.password-store}/.gpg-id"
+    [ ! -f "$gpg_file" ] && return 0
+    while IFS= read -r line || [ -n "$line" ]; do
+      line=$(printf '%s' "$line" | tr -d '\r')
+      [ -z "$line" ] && continue
+      for rid in $line; do
+        [ -z "$rid" ] && continue
+        printf 'x\n' | "$gpg_bin" -o /dev/null -e -r "$rid" \
+          2>/dev/null && continue
+        "$gpg_bin" --batch --pinentry-mode loopback --passphrase '' \
+          --quick-add-key "$rid" rsa4096 encrypt never || return 1
+      done
+    done <"$gpg_file"
+  }
+
+  _pass_env_ready() {
     command -v pass >/dev/null || {
       echo "Error: pass not in PATH"
       return 1
     }
-    pass show "env/$name"
+    local store gpg_id gpg_bin
+    gpg_bin="$(command -v gpg2 >/dev/null && printf '%s' gpg2 \
+      || printf '%s' gpg)"
+    store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+    if [ ! -f "$store/.gpg-id" ]; then
+      gpg_id=$("$gpg_bin" --with-colons --list-secret-keys 2>/dev/null |
+        grep '^fpr:' | head -1 | cut -d: -f10)
+      if [ -z "$gpg_id" ]; then
+        "$gpg_bin" --batch --pinentry-mode loopback \
+          --passphrase '' \
+          --quick-gen-key "Password Store <password-store@localhost>" \
+            rsa4096 default never ||
+          return 1
+        gpg_id=$("$gpg_bin" --with-colons --list-secret-keys 2>/dev/null |
+          grep '^fpr:' | head -1 | cut -d: -f10)
+        [ -n "$gpg_id" ] || return 1
+      fi
+      pass init "$gpg_id" || return 1
+    fi
+    _pass_ensure_encrypt_capable "$gpg_bin" || return 1
+  }
+
+  # pass: get
+  gx() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: gx <name>" && return 1
+    _pass_env_ready || return 1
+    pass show "$name"
   }
 
   # pass: set
   sx() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: sx <name> [value]" && return 1
-    command -v pass >/dev/null || {
-      echo "Error: pass not in PATH"
-      return 1
-    }
+    _pass_env_ready || return 1
     local secret="$2"
     if [ -z "$secret" ]; then
       printf "Enter secret for %s: " "$name"
       read -r secret
     fi
     [ -z "$secret" ] && echo "Error: Empty secret" && return 1
-    printf '%s\n' "$secret" | pass insert -f "env/$name"
+    (
+      set -o pipefail
+      # -e: single prompt branch (default insert expects two hidden reads →
+      # breaks stdin pipe)
+      printf '%s\n' "$secret" | pass insert -e -f "$name"
+    ) || return 1
   }
 
   # pass: delete
   dx() {
     local name="$1"
     [ -z "$name" ] && echo "Usage: dx <name>" && return 1
-    command -v pass >/dev/null || {
-      echo "Error: pass not in PATH"
-      return 1
-    }
-    printf "Are you sure to remove all secret %s [y\N] > " "$1"
+    _pass_env_ready || return 1
+    printf 'Remove %s [y/N]? ' "$name"
     read -r choice
     case "$choice" in
     [yY])
-      pass rm -f "env/$name"
+      local store f
+      store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+      f="$store/$name.gpg"
+      [ -f "$f" ] || return 0
+      pass rm -f "$name" || return 1
       ;;
     *)
       printf "Aborted.\n"
