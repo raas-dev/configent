@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.220.5](https://github.com/raas-dev/configent/compare/1.220.4...1.220.5) (2026-05-10)
+
+
+### Fixes
+
+* **autobot:** skip login shell on rerun synthetic ([20e3f4c](https://github.com/raas-dev/configent/commit/20e3f4ce0cf477d6690d47c8a3ef4096ded71fca))
+* **box:** enforce macOS-only and deduplicate Lima paths ([b66de9d](https://github.com/raas-dev/configent/commit/b66de9de139779f3c994206b7f2da0d60f20af47))
+* **box:** put user shellenv first and handle bare program ([5652e18](https://github.com/raas-dev/configent/commit/5652e187dd4998e0908374e763b9d7d517792249))
+
 ## [1.220.4](https://github.com/raas-dev/configent/compare/1.220.3...1.220.4) (2026-05-09)
 
 
