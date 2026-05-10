@@ -81,6 +81,54 @@ else
 
   # Similar to macOS `open`
   alias open='xdg-open'
+
+  # pass: get
+  gx() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    command -v pass >/dev/null || {
+      echo "Error: pass not in PATH"
+      return 1
+    }
+    pass show "env/$name"
+  }
+
+  # pass: set
+  sx() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    command -v pass >/dev/null || {
+      echo "Error: pass not in PATH"
+      return 1
+    }
+    local secret="$2"
+    if [ -z "$secret" ]; then
+      printf "Enter secret for %s: " "$name"
+      read -r secret
+    fi
+    [ -z "$secret" ] && echo "Error: Empty secret" && return 1
+    printf '%s\n' "$secret" | pass insert -f "env/$name"
+  }
+
+  # pass: delete
+  dx() {
+    local name="$1"
+    [ -z "$name" ] && echo "Usage: $0 <name>" && return 1
+    command -v pass >/dev/null || {
+      echo "Error: pass not in PATH"
+      return 1
+    }
+    printf "Are you sure to remove all secret %s [y\N] > " "$1"
+    read -r choice
+    case "$choice" in
+    [yY])
+      pass rm -f "env/$name"
+      ;;
+    *)
+      printf "Aborted.\n"
+      ;;
+    esac
+  }
 fi
 
 ### More sensible defaults #####################################################
