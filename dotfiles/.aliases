@@ -783,7 +783,7 @@ EOF
     return 1
   fi
   # shellcheck disable=SC2155  # will not declare separately, value compactness
-  local first_match="$(mise search --match-type contains "$1" 2>/dev/null |
+  local first_match="$(mise search --match-type equal "$1" 2>/dev/null |
     head -1 | awk '{print $1}')"
   if [ -n "$first_match" ]; then
     local first_arg="$1"
