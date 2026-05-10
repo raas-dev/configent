@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.2](https://github.com/raas-dev/configent/compare/1.221.1...1.221.2) (2026-05-10)
+
+
+### Fixes
+
+* **ai_commit:** suppress labeled prefixes in output ([f864809](https://github.com/raas-dev/configent/commit/f8648091bec0db6bd6ef518aff0a519e543dac7c))
+* **aliases:** dedent mx usage help text ([e6a9de7](https://github.com/raas-dev/configent/commit/e6a9de7992411f6e80227ead1e2ee52cec3bb0c3))
+* **aliases:** remove substring from mx usage help text ([a4fe759](https://github.com/raas-dev/configent/commit/a4fe759bdcbb2276de2411ab7bf485fa348d24ce))
+* **aliases:** rename mise_exec to mx and add usage help ([66af8e3](https://github.com/raas-dev/configent/commit/66af8e39b1c085d26497a30bc3357145f1cdc60c))
+* **aliases:** show similar tools when mx lookup fails ([bfe5ede](https://github.com/raas-dev/configent/commit/bfe5ede9c79de6d04cb197b050e171668246cdae))
+* **aliases:** simplify mx example in usage help ([dbc7c70](https://github.com/raas-dev/configent/commit/dbc7c70e2f1eaad695c9207d49f902891b5116c6))
+* **aliases:** use exact match in mx mise search ([11b4afa](https://github.com/raas-dev/configent/commit/11b4afa200f9dac7a0d66832a17f67280cfe226f))
+* **opencode:** switch computer-use profile to agent-cu ([7df6928](https://github.com/raas-dev/configent/commit/7df692826ac3e662a8d4ecc04672eab131656ea1))
+
 ## [1.221.1](https://github.com/raas-dev/configent/compare/1.221.0...1.221.1) (2026-05-10)
 
 
