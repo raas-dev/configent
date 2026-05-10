@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.1](https://github.com/raas-dev/configent/compare/1.221.0...1.221.1) (2026-05-10)
+
+
+### Fixes
+
+* **aliases:** extract gx/sx/dx into bin/secret script ([cda8de4](https://github.com/raas-dev/configent/commit/cda8de45f226322534bdeca549d9cba6b1db1087))
+* **secret:** make get the default command ([cf65016](https://github.com/raas-dev/configent/commit/cf6501636281577c3ff0bcb3a65cdfa13c1e8ac4))
+
 ## [1.221.0](https://github.com/raas-dev/configent/compare/1.220.5...1.221.0) (2026-05-10)
 
 
