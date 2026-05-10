@@ -776,7 +776,7 @@ Runs a tool through mise. The first word must be the exact tool name mise knows.
 If mise does not recognize the tool, prints a list of similarly named tools.
 
 Examples:
-  mx node -- --version
+  mx node -v
   mx node -- npm --version
   mx rg -- pattern ./src
 EOF
