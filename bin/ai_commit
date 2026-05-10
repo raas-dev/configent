@@ -93,6 +93,7 @@ commit_rules="COMMIT MESSAGE RULES (must follow):
 - Line 1: Conventional Commits subject only (type(scope)?: summary). Hard max ${AI_COMMIT_SUBJECT_MAX} characters for entire line; prefer ~50. No comma-separated clause stacks.
 - Line 2: blank.
 - Line 3+: optional body (bullets or sentences) for details.
+- Never prefix output with labels like \"Body:\", \"Subject:\", \"Summary:\", or section headings — only the subject line, one blank line, then body text if any.
 - Output plain text only. No markdown, no code fences, no backticks."
 [ -n "$recent_headlines" ] &&
   context_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
