@@ -10,8 +10,10 @@
 
 : "${NAME:="default"}"
 : "${TEMPLATE:="debian"}"
-: "${RUN:="pi"}"
 : "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY}"
+
+RUN="${1-}"
+[ $# -gt 0 ] && shift
 
 case "$RUN" in
 pi) FW="$FW,PI_RUN_CODE_UNSANDBOXED,MINIMAX_API_KEY,ZAI_API_KEY" ;;
@@ -253,11 +255,23 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   box_sync_agent_auth_into_vm
 
-  limactl shell \
-    --preserve-env \
-    --workdir "$lima_cwd" \
-    "$NAME" \
-    /bin/bash -c 'exec '"$RUN"' "$@"' _ "$@"
+  if [ -z "$RUN" ]; then
+    limactl shell \
+      --preserve-env \
+      --workdir "$lima_cwd" \
+      "$NAME" \
+      "$(basename "$SHELL")"
+  else
+    limactl shell \
+      --preserve-env \
+      --workdir "$lima_cwd" \
+      "$NAME" \
+      /bin/bash -c 'exec '"$RUN"' "$@"' _ "$@"
+  fi
 else
-  "$RUN" "$@"
+  if [ -z "$RUN" ]; then
+    exec "$SHELL"
+  else
+    "$RUN" "$@"
+  fi
 fi
