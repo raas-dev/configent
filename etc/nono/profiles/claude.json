@@ -107,6 +107,7 @@
     }
   },
   "unsafe_macos_seatbelt_rules": [
-    "(allow user-preference-read)"
+    "(allow user-preference-read)",
+    "(allow file-read-metadata (literal \"/home\"))"
   ]
 }
