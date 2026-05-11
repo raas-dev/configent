@@ -27,6 +27,7 @@
     "prefillOnlyWhenEditorEmpty": true,
     "showUsageInPanel": false,
     "showPanelStatus": false,
+    "hideWorkingIndicator": true,
     "strategy": "compact",
     "transcriptMaxContextPercent": 70,
     "transcriptMaxMessages": 120,
