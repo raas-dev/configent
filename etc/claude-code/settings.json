@@ -20,7 +20,8 @@
       "ToolSearch",
       "WebFetch",
       "WebSearch",
-      "mcp__*"
+      "mcp__dynamic-mcp__*",
+      "mcp__plugin_context-mode_context-mode__*"
     ],
     "ask": [
       "Bash(git *)",
