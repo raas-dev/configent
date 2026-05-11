@@ -73,7 +73,6 @@
     ]
   },
   "network": {
-    "block": false,
     "credentials": [
       "github",
       "context7",

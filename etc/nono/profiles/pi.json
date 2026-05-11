@@ -69,9 +69,6 @@
       "ZAI_API_KEY"
     ]
   },
-  "network": {
-    "block": false
-  },
   "unsafe_macos_seatbelt_rules": [
     "(allow user-preference-read)"
   ]

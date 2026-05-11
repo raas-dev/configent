@@ -19,6 +19,7 @@
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
+      "$HOME/.local/configent/bin",
       "$HOME/.config/configent/mcp"
     ],
     "read_file": [
@@ -58,7 +59,6 @@
     ]
   },
   "network": {
-    "block": false,
     "credentials": [
       "github",
       "context7",
