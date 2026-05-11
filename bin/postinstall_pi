@@ -203,5 +203,5 @@ command -v mise >/dev/null && mise exec node -- pi update --extensions
 
 # Install node-based pi for nono (see sb) - bun binary can't find npm in sandbox
 if command -v mise >/dev/null; then
-  mise exec node -- npm install -g --force @earendil-works/pi-coding-agent
+  mise exec node -- npm install -g @earendil-works/pi-coding-agent
 fi
