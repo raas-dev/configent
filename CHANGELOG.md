@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.3](https://github.com/raas-dev/configent/compare/1.221.2...1.221.3) (2026-05-11)
+
+
+### Fixes
+
+* **aliases:** only start opentabs for computer-use agent ([48fca3b](https://github.com/raas-dev/configent/commit/48fca3ba72248890c927663d6db4098e7ddfab52))
+* **opencode:** add missing caveman config file ([0a0aa66](https://github.com/raas-dev/configent/commit/0a0aa664f8937b0bc4ea7cdc36c693ba83402429))
+* **opencode:** switch browser tool from opencode-browser to opentabs ([7e050b9](https://github.com/raas-dev/configent/commit/7e050b99503c0f85e1e153707d6ea47a8483c955))
+* **opencode:** switch opentabs from MCP server to CLI ([64a35f1](https://github.com/raas-dev/configent/commit/64a35f1063070c733204c30df9ed30dfd837ebd0))
+
 ## [1.221.2](https://github.com/raas-dev/configent/compare/1.221.1...1.221.2) (2026-05-10)
 
 
