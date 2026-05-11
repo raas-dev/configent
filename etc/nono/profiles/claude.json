@@ -22,7 +22,6 @@
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/mcp",
-      "$HOME/.git",
       "$HOME/Library/Keychains",
       "$HOME/Applications/Claude Code URL Handler.app",
       "$HOME/Library/Application Support/Chromium",

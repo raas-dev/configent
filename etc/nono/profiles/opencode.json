@@ -23,8 +23,6 @@
     ],
     "read": [
       "$HOME/.agents",
-      "$HOME/.cache",
-      "$HOME/.config",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/claude-code",
