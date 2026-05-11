@@ -58,6 +58,7 @@
       "CONTEXT7_API_KEY",
       "EXA_API_KEY",
       "DYNAMIC_MCP_CONFIG",
+      "PI_OFFLINE",
       "PI_RUN_CODE_UNSANDBOXED",
       "MINIMAX_API_KEY",
       "ZAI_API_KEY"
