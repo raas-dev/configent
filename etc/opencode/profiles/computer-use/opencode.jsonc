@@ -7,16 +7,6 @@
       "agent-browser": "deny"
     }
   },
-  "mcp": {
-    "opentabs": {
-      "type": "local",
-      "command": [
-        "opentabs",
-        "start",
-        "--stdio"
-      ]
-    }
-  },
   "plugin": [
     "opencode-pty",
     "opencode-scheduler"
