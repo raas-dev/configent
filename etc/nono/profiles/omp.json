@@ -19,14 +19,21 @@
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
-      "$HOME/.config/configent/mcp"
+      "$HOME/.local/configent/bin",
+      "$HOME/.config/configent/mcp",
+      "$HOME/.git",
+      "$HOME/.claude"
     ],
     "read_file": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile"
+      "$HOME/.profile",
+      "$HOME/.CFUserTextEncoding",
+      "$HOME/.cargo/bin/cargo",
+      "$HOME/.claude/settings.json",
+      "$HOME/.config/opencode/opencode.json"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
@@ -63,19 +70,5 @@
   },
   "network": {
     "block": false
-  },
-  "unsafe_macos_seatbelt_rules": [
-    "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.npmrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.pypirc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.vsce$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.git-credentials$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))"
-  ]
+  }
 }
