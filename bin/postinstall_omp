@@ -139,3 +139,9 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### omp plugins ################################################################
+
+if command -v mise >/dev/null; then
+  mise exec github:can1357/oh-my-pi -- omp plugin install context-mode
+fi

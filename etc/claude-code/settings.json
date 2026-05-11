@@ -40,6 +40,16 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/context-mode-cache-heal.mjs"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -48,13 +58,20 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "context-mode@context-mode": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
       "source": {
         "source": "github",
         "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
       }
     }
   },
