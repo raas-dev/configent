@@ -198,3 +198,10 @@ ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
 
 # (pre-)install or update extensions (requires npm in PATH)
 command -v mise >/dev/null && mise exec node -- pi update --extensions
+
+### nono sandbox compatibility #################################################
+
+# Install node-based pi for nono (see sb) - bun binary can't find npm in sandbox
+if command -v mise >/dev/null; then
+  mise exec node -- npm install -g --force @earendil-works/pi-coding-agent
+fi
