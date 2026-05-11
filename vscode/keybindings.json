@@ -640,5 +640,13 @@
   {
     "command": "composerMode.plan",
     "key": "cmd+[Semicolon]"
+  },
+  {
+    "args": {
+      "text": "\u001b\r"
+    },
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "shift+enter",
+    "when": "terminalFocus"
   }
 ]
