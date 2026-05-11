@@ -662,5 +662,6 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "window.autoDetectColorScheme": false,
-  "powershell.startAsLoginShell.linux": true
+  "powershell.startAsLoginShell.linux": true,
+  "workbench.agentsWindowButton.enabled": false
 }
