@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.4](https://github.com/raas-dev/configent/compare/1.221.3...1.221.4) (2026-05-11)
+
+
+### Fixes
+
+* **claude-code:** scope allowed MCP tools to specific prefixes ([d50357c](https://github.com/raas-dev/configent/commit/d50357c91790ea3dbdb9e589b0d9abfbe2c1c24c))
+* **nono:** add bin and Claude app paths to claude profile ([9a9ee6d](https://github.com/raas-dev/configent/commit/9a9ee6d58e01cb0d118af5891afe41b5ffae6a46))
+* **nono:** add Keychain and browser paths to claude profile ([d3ca408](https://github.com/raas-dev/configent/commit/d3ca4089d17cfa5c9f5af4aaba4e8c247e589f4b))
+* **nono:** add Keychain paths to opencode profile permissions ([02629a0](https://github.com/raas-dev/configent/commit/02629a0951a291901972ad20ad3810b1dd89a032))
+* **nono:** allow file-read-metadata for /home in claude profile ([9b913c7](https://github.com/raas-dev/configent/commit/9b913c7284ab14dec6db6ee778f77532bc2b1458))
+* **nono:** allow PI_OFFLINE env var in pi profile ([cde03b9](https://github.com/raas-dev/configent/commit/cde03b942805f42a44bc1e4937a4becd91df10d3))
+* **nono:** simplify seatbelt rules and widen opencode paths ([016d5c8](https://github.com/raas-dev/configent/commit/016d5c81d111bc393067fd1d957d53774d2e34bb))
+* **nono:** widen omp profile reads and remove seatbelt rules ([7a8219e](https://github.com/raas-dev/configent/commit/7a8219e7109bb5d9237bf577d672ced53a7e0b3c))
+* **sb:** restore tty on exit for TUI agents ([7a73074](https://github.com/raas-dev/configent/commit/7a73074b9215df108e422f21f52d6049c412b4bf))
+* **sb:** skip interactive profile save prompt by default ([c6d0edb](https://github.com/raas-dev/configent/commit/c6d0edb76955a791ba10273ffe3a8bfe4b9a328a))
+* **tmux:** force extended-keys always for CSI-u support ([4f249da](https://github.com/raas-dev/configent/commit/4f249da4c66c0356de713753f236e85e2818b748))
+
 ## [1.221.3](https://github.com/raas-dev/configent/compare/1.221.2...1.221.3) (2026-05-11)
 
 
