@@ -80,3 +80,11 @@ treeFilterMode: user-only
 autocompleteMaxVisible: 20
 shellMinimizer:
   enabled: true
+disabledExtensions:
+  - skill:caveman:cavecrew
+  - skill:caveman:caveman
+  - skill:caveman:caveman-commit
+  - skill:caveman:caveman-compress
+  - skill:caveman:caveman-help
+  - skill:caveman:caveman-review
+  - skill:caveman:caveman-stats
