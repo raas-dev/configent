@@ -58,6 +58,9 @@ _restore_tty() {
 }
 trap _restore_tty EXIT INT TERM HUP
 
+# Skips interactive profile update. Override: NONO_NO_SAVE_PROMPT=0 sb ...
+export NONO_NO_SAVE_PROMPT="${NONO_NO_SAVE_PROMPT:-1}"
+
 # Non-interactive default; use -i for login shell startup.
 if [ "$INIT_SHELL" -eq 1 ]; then
   nono run --profile "$PROFILE" \
