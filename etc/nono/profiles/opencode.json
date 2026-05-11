@@ -23,21 +23,25 @@
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
-      "$HOME/.config/configent/mcp"
+      "$HOME/.config/configent/mcp",
+      "$HOME/Library/Keychains"
     ],
     "read_file": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile"
+      "$HOME/.profile",
+      "$HOME/Library/Keychains/login.keychain-db"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile"
+      "$HOME/.profile",
+      "$HOME/Library/Keychains",
+      "$HOME/Library/Keychains/login.keychain-db"
     ]
   },
   "environment": {
