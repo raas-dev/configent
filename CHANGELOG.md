@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.5](https://github.com/raas-dev/configent/compare/1.221.4...1.221.5) (2026-05-11)
+
+
+### Fixes
+
+* **nono:** add claude-code config and browser data paths to profiles ([61e3197](https://github.com/raas-dev/configent/commit/61e319728cb1a4d30ff0ab3bb657271ec3926e04))
+* **nono:** narrow keychain access to login.keychain-db in claude and ([d10a9a9](https://github.com/raas-dev/configent/commit/d10a9a96b4c6cc94ecf51c783aef3433a28c5e65))
+* **nono:** remove block:false from network in all profiles ([94eda21](https://github.com/raas-dev/configent/commit/94eda21e8bb5c5b017d9224af36336f153c7657c))
+* **nono:** remove overly broad paths from claude and opencode profiles ([af0faa7](https://github.com/raas-dev/configent/commit/af0faa7a243c8cb5d67e61f284f019bb52c149cf))
+* **nono:** route pi through node for npm resolution in sandbox ([c1dc6b0](https://github.com/raas-dev/configent/commit/c1dc6b03d19b7633ae4e80018a403524607a56b2))
+
 ## [1.221.4](https://github.com/raas-dev/configent/compare/1.221.3...1.221.4) (2026-05-11)
 
 
