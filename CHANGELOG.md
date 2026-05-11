@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.6](https://github.com/raas-dev/configent/compare/1.221.5...1.221.6) (2026-05-11)
+
+
+### Fixes
+
+* **nono:** remove --force from pi npm install in postinstall ([efc9cfe](https://github.com/raas-dev/configent/commit/efc9cfebdb4d1f58ce4c8a2f4d3aa2797c88b3cd))
+* **vscode:** disable agents window button ([59ffb36](https://github.com/raas-dev/configent/commit/59ffb362b6f626d7fd94b0e470d88994ed1720e2))
+
 ## [1.221.5](https://github.com/raas-dev/configent/compare/1.221.4...1.221.5) (2026-05-11)
 
 
