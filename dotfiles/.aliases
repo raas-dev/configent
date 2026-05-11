@@ -607,8 +607,10 @@ agent() {
   else
     local agent="computer-use"
   fi
-  if ! curl -fsS "http://127.0.0.1:9515/health" >/dev/null 2>&1; then
-    opentabs start --background >/dev/null 2>&1
+  if [ "$agent" = "computer-use" ]; then
+    if ! curl -fsS "http://127.0.0.1:9515/health" >/dev/null 2>&1; then
+      opentabs start --background >/dev/null 2>&1
+    fi
   fi
   oc exec "$agent" -- opencode --agent "$agent" "$@"
 }
