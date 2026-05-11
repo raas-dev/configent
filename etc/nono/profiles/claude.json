@@ -14,12 +14,18 @@
       "$WORKDIR",
       "$HOME/.claude",
       "$HOME/.config/configent/claude-code",
+      "$HOME/Library/Caches/claude-cli-nodejs",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
-      "$HOME/.config/configent/mcp"
+      "$HOME/.config/configent/mcp",
+      "$HOME/.git",
+      "$HOME/Library/Keychains",
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
     ],
     "allow_file": [
       "$HOME/.claude.json"
@@ -29,14 +35,20 @@
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile"
+      "$HOME/.profile",
+      "$HOME/.CFUserTextEncoding",
+      "$HOME/.claude.json.lock",
+      "$HOME/Library/Keychains/login.keychain-db"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile"
+      "$HOME/.profile",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Keychains",
+      "$HOME/Library/Keychains/login.keychain-db"
     ]
   },
   "environment": {
@@ -91,5 +103,8 @@
         "credential_format": "Bearer {}"
       }
     }
-  }
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
 }
