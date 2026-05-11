@@ -22,7 +22,6 @@
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/mcp",
-      "$HOME/Library/Keychains",
       "$HOME/Applications/Claude Code URL Handler.app",
       "$HOME/Library/Application Support/Chromium",
       "$HOME/Library/Application Support/Google/Chrome",
@@ -50,7 +49,6 @@
       "$HOME/Library/Application Support/Chromium",
       "$HOME/Library/Application Support/Google/Chrome",
       "$HOME/Library/Application Support/BraveSoftware/Brave-Browser",
-      "$HOME/Library/Keychains",
       "$HOME/Library/Keychains/login.keychain-db"
     ]
   },
