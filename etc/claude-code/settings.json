@@ -47,6 +47,9 @@
     "command": "bunx -y ccstatusline",
     "padding": 0
   },
+  "enabledPlugins": {
+    "caveman@caveman": true
+  },
   "extraKnownMarketplaces": {
     "caveman": {
       "source": {
@@ -55,8 +58,5 @@
       }
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "enabledPlugins": {
-    "caveman@caveman": true
-  }
+  "skipDangerousModePermissionPrompt": true
 }
