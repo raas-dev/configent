@@ -16,15 +16,23 @@
       "$HOME/.config/opencode",
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
+      "$HOME/.local/share/opentui",
       "$HOME/.local/state/opencode",
       "$HOME/.config/configent/opencode",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
+      "$HOME/.cache",
+      "$HOME/.config",
       "$HOME/.local/share/mise",
-      "$HOME/.config/configent/mcp",
-      "$HOME/Library/Keychains"
+      "$HOME/.local/configent/bin",
+      "$HOME/Library/Keychains",
+      "$HOME/Library/Caches/bun",
+      "$HOME/Library/Application Support/Zed"
+    ],
+    "allow_file": [
+      "$HOME/.claude.json"
     ],
     "read_file": [
       "$HOME/.zshrc",
@@ -32,6 +40,7 @@
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
       "$HOME/.profile",
+      "$HOME/.CFUserTextEncoding",
       "$HOME/Library/Keychains/login.keychain-db"
     ],
     "bypass_protection": [
@@ -105,17 +114,6 @@
     }
   },
   "unsafe_macos_seatbelt_rules": [
-    "(allow file-read-metadata file-read-data (subpath \"/Users\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.rclocal$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.netrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.npmrc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.pypirc$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.vsce$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.git-credentials$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.ssh\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.gnupg\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.env$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.bash_history$\"))",
-    "(deny file-read-metadata file-read-data (regex #\"^/Users/[^/]+/\\.zsh_history$\"))"
+    "(allow user-preference-read)"
   ]
 }
