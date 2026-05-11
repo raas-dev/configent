@@ -48,7 +48,9 @@
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
       "$HOME/.profile",
+      "$HOME/Library/Application Support/Chromium",
       "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser",
       "$HOME/Library/Keychains",
       "$HOME/Library/Keychains/login.keychain-db"
     ]

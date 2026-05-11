@@ -20,8 +20,8 @@
       "$HOME/.agents",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
+      "$HOME/.config/configent/claude-code",
       "$HOME/.config/configent/mcp",
-      "$HOME/.git",
       "$HOME/.claude"
     ],
     "read_file": [

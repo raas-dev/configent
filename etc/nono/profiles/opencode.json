@@ -27,6 +27,7 @@
       "$HOME/.config",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
+      "$HOME/.config/configent/claude-code",
       "$HOME/Library/Keychains",
       "$HOME/Library/Caches/bun",
       "$HOME/Library/Application Support/Zed"
