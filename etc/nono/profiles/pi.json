@@ -14,8 +14,9 @@
       "$WORKDIR",
       "$HOME/.pi",
       "$HOME/.pi-lens",
-      "$HOME/.config/configent/pi",
+      "$HOME/.headroom",
       "$HOME/.npm",
+      "$HOME/.config/configent/pi",
       "/tmp"
     ],
     "read": [
