@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.9](https://github.com/raas-dev/configent/compare/1.221.8...1.221.9) (2026-05-12)
+
+
+### Fixes
+
+* **box:** forward MINIMAX_API_KEY in default case ([ba69139](https://github.com/raas-dev/configent/commit/ba69139ea905062004056ff0232f73749c7869ae))
+* **box:** forward opencode and claude credentials in default case ([3a2a2f2](https://github.com/raas-dev/configent/commit/3a2a2f2857467e4c6821ff5c8acc6e693c2f5b67))
+* **claude-code:** install ccstatusline globally via mise ([bd6ba46](https://github.com/raas-dev/configent/commit/bd6ba4614a5b3b830bdb6e32c049ce3c11b59960))
+* **nono:** add .headroom to pi write paths ([7401f7d](https://github.com/raas-dev/configent/commit/7401f7d0f1bb632ca28ef56a606e0dd443731086))
+* **nono:** add proxy credentials to Linux profiles ([f51664d](https://github.com/raas-dev/configent/commit/f51664dc661e0e807dca4a40d271d6a10d71bbe0))
+* **nono:** add raw socket seatbelt rule and fix pi network ports ([43fa811](https://github.com/raas-dev/configent/commit/43fa8110cd69f8fa355866778793439470f4968b))
+* **nono:** add zai and minimax MCP providers to opencode profile ([1c6469f](https://github.com/raas-dev/configent/commit/1c6469f2ed58737570dc27d12d7d8a1d58016ba9))
+* **nono:** allow reading /etc/debian_version and /etc/mime.types ([71f3abc](https://github.com/raas-dev/configent/commit/71f3abc57f52a389a2a6fd12d32f0e30f46cfec4))
+* **nono:** move API credentials to network proxy model ([18eef31](https://github.com/raas-dev/configent/commit/18eef310383d2a5af0d442d52cc41aeb864b3213))
+* **nono:** move API keys to network proxy credentials ([9a3583f](https://github.com/raas-dev/configent/commit/9a3583f9cffd3309380e0055fa26c03134030349))
+* **nono:** remove exa credential from all profiles ([fd05983](https://github.com/raas-dev/configent/commit/fd0598360e9efe03ef7c04243f1c7abbb46d133e))
+* **nono:** remove open_port from claude-linux profile ([49f010d](https://github.com/raas-dev/configent/commit/49f010de561151a6d1e5844ed2301287bd27cbe3))
+* **nono:** remove OPENCODE_API_KEY from proxy and forwarding ([b3d3244](https://github.com/raas-dev/configent/commit/b3d324418d1b3b1039a04daa8297ff7d976183a7))
+* **nono:** split network credentials to OS-specific profiles ([8618418](https://github.com/raas-dev/configent/commit/86184181576b61c2ca4cdae713c98cd57ff993ba))
+* **sb:** add claude-linux nono profile for Linux hosts ([bdd498b](https://github.com/raas-dev/configent/commit/bdd498b19deb86004bb243a2340e5d17ce6804b9))
+* **sb:** remove --open-port 0 from nono invocations ([7995b8f](https://github.com/raas-dev/configent/commit/7995b8fe0a10e6aa3568d0a0cabc8c80b7505761))
+* **secret:** allow setting empty values without prompt ([f3769e4](https://github.com/raas-dev/configent/commit/f3769e464ef6f3265d475f4e4e8ca25f919555b1))
+
 ## [1.221.8](https://github.com/raas-dev/configent/compare/1.221.7...1.221.8) (2026-05-12)
 
 
