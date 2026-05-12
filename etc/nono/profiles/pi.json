@@ -14,7 +14,6 @@
       "$WORKDIR",
       "$HOME/.pi",
       "$HOME/.pi-lens",
-      "$HOME/.headroom",
       "$HOME/.npm",
       "$HOME/.config/configent/pi",
       "/tmp"
@@ -26,6 +25,8 @@
       "$HOME/.config/configent/mcp"
     ],
     "read_file": [
+      "/etc/debian_version",
+      "/etc/mime.types",
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
