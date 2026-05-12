@@ -75,6 +75,7 @@
     ]
   },
   "network": {
+    "open_port": [0],
     "credentials": [
       "github",
       "context7",
