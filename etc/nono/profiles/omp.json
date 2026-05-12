@@ -34,6 +34,9 @@
       "$HOME/.claude/settings.json",
       "$HOME/.config/opencode/opencode.json"
     ],
+    "suppress_save_prompt": [
+      "$HOME"
+    ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",

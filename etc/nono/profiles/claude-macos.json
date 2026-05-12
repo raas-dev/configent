@@ -18,6 +18,9 @@
       "$HOME/.CFUserTextEncoding",
       "$HOME/Library/Keychains/login.keychain-db"
     ],
+    "suppress_save_prompt": [
+      "/Users"
+    ],
     "bypass_protection": [
       "$HOME/Library/Application Support/Chromium",
       "$HOME/Library/Application Support/Google/Chrome",

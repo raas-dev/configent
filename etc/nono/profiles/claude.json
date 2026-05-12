@@ -33,6 +33,9 @@
       "$HOME/.profile",
       "$HOME/.claude.json.lock"
     ],
+    "suppress_save_prompt": [
+      "$HOME"
+    ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",

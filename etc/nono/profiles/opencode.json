@@ -38,6 +38,9 @@
       "$HOME/.bash_profile",
       "$HOME/.profile"
     ],
+    "suppress_save_prompt": [
+      "$HOME"
+    ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
