@@ -75,7 +75,9 @@
       "github",
       "context7",
       "exa",
-      "opencode"
+      "opencode",
+      "zai",
+      "minimax"
     ],
     "custom_credentials": {
       "github": {
@@ -103,6 +105,20 @@
         "upstream": "https://api.opencode.ai",
         "credential_key": "opencode_api_key",
         "env_var": "OPENCODE_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "zai": {
+        "upstream": "https://api.z.ai/api/coding/paas/v4",
+        "credential_key": "zai_api_key",
+        "env_var": "ZAI_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "minimax": {
+        "upstream": "https://api.minimax.io/v1",
+        "credential_key": "minimax_api_key",
+        "env_var": "MINIMAX_API_KEY",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       }
