@@ -11,9 +11,5 @@ function resolveLevel(env?: string): CavemanLevel | null {
 	return "full";
 }
 
-function levelPrompt(level: CavemanLevel): string {
-	return `/caveman ${level}`;
-}
-
-export { resolveLevel, levelPrompt, VALID_LEVELS, DISABLE_VALUES };
+export { resolveLevel };
 export type { CavemanLevel };
