@@ -62,7 +62,13 @@
       "EMAIL",
       "GIT_AUTHOR_NAME",
       "GIT_COMMITTER_NAME",
-      "DYNAMIC_MCP_CONFIG"
+      "DYNAMIC_MCP_CONFIG",
+      "NONO_PROXY_TOKEN",
+      "GITHUB_TOKEN",
+      "CONTEXT7_API_KEY",
+      "EXA_API_KEY",
+      "ZAI_API_KEY",
+      "MINIMAX_API_KEY"
     ]
   },
   "network": {
@@ -70,6 +76,42 @@
       1234,
       8080,
       11434
-    ]
+    ],
+    "credentials": [
+      "github",
+      "context7",
+      "zai",
+      "minimax"
+    ],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "env://GITHUB_TOKEN",
+        "env_var": "GITHUB_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "token {}"
+      },
+      "context7": {
+        "upstream": "https://api.context7.com",
+        "credential_key": "env://CONTEXT7_API_KEY",
+        "env_var": "CONTEXT7_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "zai": {
+        "upstream": "https://api.z.ai/api/coding/paas/v4",
+        "credential_key": "env://ZAI_API_KEY",
+        "env_var": "ZAI_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "minimax": {
+        "upstream": "https://api.minimax.io/v1",
+        "credential_key": "env://MINIMAX_API_KEY",
+        "env_var": "MINIMAX_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    }
   }
 }

@@ -28,33 +28,6 @@
       "$HOME/Library/Keychains/login.keychain-db"
     ]
   },
-  "environment": {
-    "allow_vars": [
-      "NONO_PROXY_TOKEN"
-    ]
-  },
-  "network": {
-    "credentials": [
-      "github",
-      "context7"
-    ],
-    "custom_credentials": {
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "github_token",
-        "env_var": "GITHUB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "token {}"
-      },
-      "context7": {
-        "upstream": "https://api.context7.com",
-        "credential_key": "context7_api_key",
-        "env_var": "CONTEXT7_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
-  },
   "unsafe_macos_seatbelt_rules": [
     "(allow user-preference-read)"
   ]
