@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "name": "opencode-linux",
+    "description": "OpenCode (Linux)"
+  },
+  "extends": "opencode",
+  "environment": {
+    "allow_vars": [
+      "GITHUB_TOKEN",
+      "CONTEXT7_API_KEY",
+      "EXA_API_KEY",
+      "OPENCODE_API_KEY",
+      "ZAI_API_KEY",
+      "MINIMAX_API_KEY"
+    ]
+  },
+  "network": {
+    "credentials": []
+  }
+}

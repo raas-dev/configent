@@ -49,11 +49,11 @@ shift
 PROFILE="${PROFILE:-$RUN}"
 if [ "$(uname)" = "Darwin" ]; then
   case "$PROFILE" in
-  claude | opencode | pi | omp) PROFILE="${PROFILE}-macos" ;;
+  claude | opencode | pi | omp | codex) PROFILE="${PROFILE}-macos" ;;
   esac
 else
   case "$PROFILE" in
-  claude) PROFILE="${PROFILE}-linux" ;;
+  claude | opencode | pi | omp | codex) PROFILE="${PROFILE}-linux" ;;
   esac
 fi
 

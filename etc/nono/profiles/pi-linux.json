@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "name": "pi-linux",
+    "description": "Pi Coding Agent (Linux)"
+  },
+  "extends": "pi",
+  "environment": {
+    "allow_vars": [
+      "GITHUB_TOKEN",
+      "CONTEXT7_API_KEY",
+      "EXA_API_KEY",
+      "ZAI_API_KEY",
+      "MINIMAX_API_KEY"
+    ]
+  },
+  "network": {
+    "credentials": []
+  }
+}

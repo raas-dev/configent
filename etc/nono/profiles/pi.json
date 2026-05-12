@@ -63,55 +63,10 @@
       "GIT_COMMITTER_NAME",
       "DYNAMIC_MCP_CONFIG",
       "PI_OFFLINE",
-      "PI_RUN_CODE_UNSANDBOXED",
-      "NONO_PROXY_TOKEN"
+      "PI_RUN_CODE_UNSANDBOXED"
     ]
   },
   "network": {
-    "open_port": [7172, 8787, 19876],
-    "credentials": [
-      "github",
-      "context7",
-      "exa",
-      "zai",
-      "minimax"
-    ],
-    "custom_credentials": {
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "github_token",
-        "env_var": "GITHUB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "token {}"
-      },
-      "context7": {
-        "upstream": "https://api.context7.com",
-        "credential_key": "context7_api_key",
-        "env_var": "CONTEXT7_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "exa": {
-        "upstream": "https://api.exa.ai",
-        "credential_key": "exa_api_key",
-        "env_var": "EXA_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "zai": {
-        "upstream": "https://api.z.ai/api/coding/paas/v4",
-        "credential_key": "zai_api_key",
-        "env_var": "ZAI_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "minimax": {
-        "upstream": "https://api.minimax.io/v1",
-        "credential_key": "minimax_api_key",
-        "env_var": "MINIMAX_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
+    "open_port": [7172, 8787, 19876]
   }
 }

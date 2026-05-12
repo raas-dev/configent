@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "name": "omp-linux",
+    "description": "oh-my-pi (Linux)"
+  },
+  "extends": "omp",
+  "environment": {
+    "allow_vars": [
+      "GITHUB_TOKEN",
+      "CONTEXT7_API_KEY",
+      "EXA_API_KEY",
+      "ZAI_API_KEY",
+      "MINIMAX_API_KEY"
+    ]
+  },
+  "network": {
+    "credentials": []
+  }
+}

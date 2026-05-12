@@ -1,9 +1,9 @@
 {
   "meta": {
-    "name": "omp-macos",
-    "description": "oh-my-pi (macOS)"
+    "name": "codex-macos",
+    "description": "OpenAI Codex CLI (macOS)"
   },
-  "extends": "omp",
+  "extends": "codex",
   "filesystem": {
     "read_file": [
       "$HOME/.CFUserTextEncoding"
@@ -22,8 +22,7 @@
       "github",
       "context7",
       "exa",
-      "zai",
-      "minimax"
+      "codex"
     ],
     "custom_credentials": {
       "github": {
@@ -47,17 +46,10 @@
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       },
-      "zai": {
-        "upstream": "https://api.z.ai/api/coding/paas/v4",
-        "credential_key": "zai_api_key",
-        "env_var": "ZAI_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "minimax": {
-        "upstream": "https://api.minimax.io/v1",
-        "credential_key": "minimax_api_key",
-        "env_var": "MINIMAX_API_KEY",
+      "codex": {
+        "upstream": "https://api.openai.com",
+        "credential_key": "openai_api_key",
+        "env_var": "OPENAI_API_KEY",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       }

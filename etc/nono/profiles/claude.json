@@ -62,38 +62,7 @@
       "GIT_AUTHOR_NAME",
       "GIT_COMMITTER_NAME",
       "DYNAMIC_MCP_CONFIG",
-      "CLAUDE_CODE_OAUTH_TOKEN",
-      "NONO_PROXY_TOKEN"
+      "CLAUDE_CODE_OAUTH_TOKEN"
     ]
-  },
-  "network": {
-    "credentials": [
-      "github",
-      "context7",
-      "exa"
-    ],
-    "custom_credentials": {
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "github_token",
-        "env_var": "GITHUB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "token {}"
-      },
-      "context7": {
-        "upstream": "https://api.context7.com",
-        "credential_key": "context7_api_key",
-        "env_var": "CONTEXT7_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "exa": {
-        "upstream": "https://api.exa.ai",
-        "credential_key": "exa_api_key",
-        "env_var": "EXA_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
   }
 }

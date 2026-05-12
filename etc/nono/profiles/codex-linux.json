@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "name": "codex-linux",
+    "description": "OpenAI Codex CLI (Linux)"
+  },
+  "extends": "codex",
+  "environment": {
+    "allow_vars": [
+      "GITHUB_TOKEN",
+      "CONTEXT7_API_KEY",
+      "EXA_API_KEY",
+      "OPENAI_API_KEY"
+    ]
+  },
+  "network": {
+    "credentials": []
+  }
+}
