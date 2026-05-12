@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.7](https://github.com/raas-dev/configent/compare/1.221.6...1.221.7) (2026-05-12)
+
+
+### Fixes
+
+* **box:** forward PI_OFFLINE and OMP_CAVEMAN_LEVEL into VMs ([9eb3a43](https://github.com/raas-dev/configent/commit/9eb3a430285852334ec6409a13e05ffbf5e905bf))
+* **nono:** allow ephemeral port binding in claude profile ([a362c9a](https://github.com/raas-dev/configent/commit/a362c9a58704e4a49e408bd09092eeaef83c2cb9))
+* **nono:** sort paths and widen opencode cache scope ([113f5a3](https://github.com/raas-dev/configent/commit/113f5a33e499467ee0abcc44474591fc6a199078))
+* **nono:** split macOS profile overrides into separate -macos ([e87f73e](https://github.com/raas-dev/configent/commit/e87f73e602949ac6012ad724b4cb26f1849020cd))
+* **nono:** widen opencode state path and remove npmrc protection ([de0f1ad](https://github.com/raas-dev/configent/commit/de0f1ad996023c6e0fec9bea3df2f94c17c194a0))
+* **tmux:** use extended-keys on instead of always ([be94c66](https://github.com/raas-dev/configent/commit/be94c66513e979a3ee423eb2d4120836534ae4fd))
+
 ## [1.221.6](https://github.com/raas-dev/configent/compare/1.221.5...1.221.6) (2026-05-11)
 
 
