@@ -18,11 +18,11 @@
     ],
     "read": [
       "$HOME/.agents",
+      "$HOME/.claude",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/claude-code",
-      "$HOME/.config/configent/mcp",
-      "$HOME/.claude"
+      "$HOME/.config/configent/mcp"
     ],
     "read_file": [
       "$HOME/.zshrc",

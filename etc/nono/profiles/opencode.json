@@ -12,12 +12,12 @@
   "filesystem": {
     "allow": [
       "$WORKDIR",
+      "$HOME/.cache",
       "$HOME/.claude",
       "$HOME/.config/opencode",
-      "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
       "$HOME/.local/share/opentui",
-      "$HOME/.local/state/",
+      "$HOME/.local/state",
       "$HOME/.config/configent/opencode",
       "/tmp"
     ],
