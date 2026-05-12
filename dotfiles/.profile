@@ -240,7 +240,7 @@ export OPENCHAMBER_OPENCODE_PORT=4096
 export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 
 # pi
-export PI_SKIP_VERSION_CHECK=1
+export PI_OFFLINE=1
 
 # pi-run-code
 #export PI_RUN_CODE_UNSANDBOXED=1
