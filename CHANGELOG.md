@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.8](https://github.com/raas-dev/configent/compare/1.221.7...1.221.8) (2026-05-12)
+
+
+### Fixes
+
+* **claude-code:** set default effort level to medium ([02ecf52](https://github.com/raas-dev/configent/commit/02ecf52f2e5009f2c8d48bddb8a5f2d319ad90f3))
+* **nono:** enable capability_elevation in all profiles ([1998518](https://github.com/raas-dev/configent/commit/1998518f0514c224bf250fe3add1fbf698a02ecb))
+* **nono:** remove capability_elevation from profile configs ([5d766dd](https://github.com/raas-dev/configent/commit/5d766dd3e0d5d8a1b4dc7d0a6d102515aa856569))
+* **sb:** replace --silent with --no-diagnostics flag ([a5ceecf](https://github.com/raas-dev/configent/commit/a5ceecf2eb42f7bebdbe93f66e4d267e469c48eb))
+* **sb:** silence nono banner by default, add -v flag ([89f5695](https://github.com/raas-dev/configent/commit/89f5695d390985ea5042c18d2d50cab749670e7b))
+
 ## [1.221.7](https://github.com/raas-dev/configent/compare/1.221.6...1.221.7) (2026-05-12)
 
 
