@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.10](https://github.com/raas-dev/configent/compare/1.221.9...1.221.10) (2026-05-12)
+
+
+### Fixes
+
+* **nono:** unify network credentials into base profiles ([ed64c32](https://github.com/raas-dev/configent/commit/ed64c3265f305caeba7153c92114cb0fb6c5000f))
+
 ## [1.221.9](https://github.com/raas-dev/configent/compare/1.221.8...1.221.9) (2026-05-12)
 
 
