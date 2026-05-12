@@ -44,16 +44,6 @@ fi
 mkdir -p "$HOME/.claude"
 ln -sfnv "$config_path/claude-code/RTK.md" "$HOME/.claude/RTK.md"
 
-# ccstatusline/settings.json
-if [ ! -r "$backup_path/.config/ccstatusline/settings.json" ]; then
-  if [ -r "$HOME/.config/ccstatusline/settings.json" ]; then
-    mkdir -p "$backup_path/.config/ccstatusline"
-    cp -P "$HOME/.config/ccstatusline/settings.json" "$backup_path/.config/ccstatusline/settings.json"
-  fi
-fi
-mkdir -p "$HOME/.config/ccstatusline"
-ln -sfnv "$config_path/claude-code/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
-
 # commands dir
 if [ ! -r "$backup_path/.claude/commands" ]; then
   if [ -r "$HOME/.claude/commands" ]; then
@@ -97,6 +87,25 @@ fi
 mkdir -p "$HOME/.claude/hooks"
 rm -rf "$HOME/.claude/hooks"
 ln -sfnv "$config_path/claude-code/hooks" "$HOME/.claude/hooks"
+
+### ccstatusline ###############################################################
+
+# ccstatusline binary
+if command -v mise >/dev/null 2>&1; then
+  mise exec node -- npm install -g ccstatusline
+fi
+
+# ccstatusline/settings.json
+if [ ! -r "$backup_path/.config/ccstatusline/settings.json" ]; then
+  if [ -r "$HOME/.config/ccstatusline/settings.json" ]; then
+    mkdir -p "$backup_path/.config/ccstatusline"
+    cp -P "$HOME/.config/ccstatusline/settings.json" \
+      "$backup_path/.config/ccstatusline/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.config/ccstatusline"
+ln -sfnv "$config_path/claude-code/ccstatusline/settings.json" \
+  "$HOME/.config/ccstatusline/settings.json"
 
 ### ~/.agents dir ##############################################################
 

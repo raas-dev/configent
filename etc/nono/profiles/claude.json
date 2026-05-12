@@ -23,7 +23,8 @@
       "$HOME/.config/configent/mcp"
     ],
     "allow_file": [
-      "$HOME/.claude.json"
+      "$HOME/.claude.json",
+      "$HOME/.config/ccstatusline/settings.json"
     ],
     "read_file": [
       "$HOME/.zshrc",

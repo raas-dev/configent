@@ -55,7 +55,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bunx -y ccstatusline",
+    "command": "ccstatusline",
     "padding": 0
   },
   "enabledPlugins": {
@@ -76,6 +76,6 @@
       }
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "skipDangerousModePermissionPrompt": true
 }
