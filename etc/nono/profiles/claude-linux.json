@@ -32,9 +32,6 @@
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       }
-    },
-    "open_port": [
-      0
-    ]
+    }
   }
 }
