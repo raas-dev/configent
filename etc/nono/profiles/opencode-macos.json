@@ -48,13 +48,6 @@
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       },
-      "opencode": {
-        "upstream": "https://api.opencode.ai",
-        "credential_key": "opencode_api_key",
-        "env_var": "OPENCODE_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
       "zai": {
         "upstream": "https://api.z.ai/api/coding/paas/v4",
         "credential_key": "zai_api_key",
