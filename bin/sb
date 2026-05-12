@@ -57,9 +57,9 @@ else
   NONO_EXTRA_ARGS="--open-port 0"
 fi
 
-# Nono banner/status on tty unless -v|--verbose.
-NONO_SILENT_FLAG=""
-[ "$VERBOSE" -eq 0 ] && NONO_SILENT_FLAG="--silent"
+# Suppress diagnostic footer unless -v|--verbose.
+NONO_DIAG_FLAG="--no-diagnostics"
+[ "$VERBOSE" -eq 1 ] && NONO_DIAG_FLAG=""
 
 if ! command -v nono >/dev/null 2>&1; then
   echo "Error: nono not found." >&2
@@ -79,18 +79,18 @@ trap _restore_tty EXIT INT TERM HUP
 # Non-interactive default; use -i for login shell startup.
 if [ "$INIT_SHELL" -eq 1 ]; then
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_SILENT_FLAG \
+  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_DIAG_FLAG \
     "${SHELL:-/bin/sh}" -lc 'exec "$@"' sh "$RUN" "$@"
 # Pi's bun-compiled binary calls `npm root -g` to locate extensions, which fails
 # in nono sandbox. Run via node using the npm-installed cli.js instead.
 elif [ "$RUN" = "pi" ] && command -v mise >/dev/null 2>&1; then
   _node_root="$(mise where node 2>/dev/null)"
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_SILENT_FLAG \
+  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_DIAG_FLAG \
     "$_node_root/bin/node" \
     "$_node_root/lib/node_modules/@earendil-works/pi-coding-agent/dist/cli.js" \
     "$@"
 else
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_SILENT_FLAG "$RUN" "$@"
+  nono run --profile "$PROFILE" $NONO_EXTRA_ARGS $NONO_DIAG_FLAG "$RUN" "$@"
 fi
