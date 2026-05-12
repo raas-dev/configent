@@ -38,3 +38,8 @@ fi
 mkdir -p "$HOME/.config/nono"
 rm -rf "$HOME/.config/nono/profiles"
 ln -sfnv "$config_path/nono/profiles" "$HOME/.config/nono/profiles"
+
+# sessions dir must be mode 700 (no group/other), else config parse fails
+mkdir -p "$HOME/.nono/sessions"
+chmod 700 "$HOME/.nono/sessions"
+chmod 700 "$HOME/.nono"
