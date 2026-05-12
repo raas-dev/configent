@@ -22,7 +22,7 @@
       "github",
       "context7",
       "exa",
-      "codex"
+      "openai"
     ],
     "custom_credentials": {
       "github": {
@@ -46,7 +46,7 @@
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       },
-      "codex": {
+      "openai": {
         "upstream": "https://api.openai.com",
         "credential_key": "openai_api_key",
         "env_var": "OPENAI_API_KEY",
