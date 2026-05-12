@@ -14,18 +14,13 @@
       "$WORKDIR",
       "$HOME/.claude",
       "$HOME/.config/configent/claude-code",
-      "$HOME/Library/Caches/claude-cli-nodejs",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
-      "$HOME/.config/configent/mcp",
-      "$HOME/Applications/Claude Code URL Handler.app",
-      "$HOME/Library/Application Support/Chromium",
-      "$HOME/Library/Application Support/Google/Chrome",
-      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
+      "$HOME/.config/configent/mcp"
     ],
     "allow_file": [
       "$HOME/.claude.json"
@@ -36,20 +31,14 @@
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
       "$HOME/.profile",
-      "$HOME/.CFUserTextEncoding",
-      "$HOME/.claude.json.lock",
-      "$HOME/Library/Keychains/login.keychain-db"
+      "$HOME/.claude.json.lock"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile",
-      "$HOME/Library/Application Support/Chromium",
-      "$HOME/Library/Application Support/Google/Chrome",
-      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser",
-      "$HOME/Library/Keychains/login.keychain-db"
+      "$HOME/.profile"
     ]
   },
   "environment": {
@@ -75,7 +64,6 @@
     ]
   },
   "network": {
-    "open_port": [0],
     "credentials": [
       "github",
       "context7",
@@ -104,8 +92,5 @@
         "credential_format": "Bearer {}"
       }
     }
-  },
-  "unsafe_macos_seatbelt_rules": [
-    "(allow user-preference-read)"
-  ]
+  }
 }

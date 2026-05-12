@@ -29,8 +29,7 @@
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile",
-      "$HOME/.CFUserTextEncoding"
+      "$HOME/.profile"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
@@ -66,8 +65,5 @@
       "MINIMAX_API_KEY",
       "ZAI_API_KEY"
     ]
-  },
-  "unsafe_macos_seatbelt_rules": [
-    "(allow user-preference-read)"
-  ]
+  }
 }

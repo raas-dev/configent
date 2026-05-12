@@ -26,9 +26,7 @@
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/claude-code",
-      "$HOME/.config/configent/mcp",
-      "$HOME/Library/Caches/bun",
-      "$HOME/Library/Application Support/Zed"
+      "$HOME/.config/configent/mcp"
     ],
     "allow_file": [
       "$HOME/.claude.json"
@@ -38,17 +36,14 @@
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile",
-      "$HOME/.CFUserTextEncoding",
-      "$HOME/Library/Keychains/login.keychain-db"
+      "$HOME/.profile"
     ],
     "bypass_protection": [
       "$HOME/.zshrc",
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile",
-      "$HOME/Library/Keychains/login.keychain-db"
+      "$HOME/.profile"
     ]
   },
   "environment": {
@@ -109,8 +104,5 @@
         "credential_format": "Bearer {}"
       }
     }
-  },
-  "unsafe_macos_seatbelt_rules": [
-    "(allow user-preference-read)"
-  ]
+  }
 }

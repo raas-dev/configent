@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "name": "claude-macos",
+    "description": "Claude Code CLI (macOS)"
+  },
+  "extends": "claude",
+  "filesystem": {
+    "allow": [
+      "$HOME/Library/Caches/claude-cli-nodejs"
+    ],
+    "read": [
+      "$HOME/Applications/Claude Code URL Handler.app",
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
+    ],
+    "read_file": [
+      "$HOME/.CFUserTextEncoding",
+      "$HOME/Library/Keychains/login.keychain-db"
+    ],
+    "bypass_protection": [
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser",
+      "$HOME/Library/Keychains/login.keychain-db"
+    ]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
+}

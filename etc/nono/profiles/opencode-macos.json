@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "name": "opencode-macos",
+    "description": "OpenCode (macOS)"
+  },
+  "extends": "opencode",
+  "filesystem": {
+    "read": [
+      "$HOME/Library/Caches/bun",
+      "$HOME/Library/Application Support/Zed"
+    ],
+    "read_file": [
+      "$HOME/.CFUserTextEncoding",
+      "$HOME/Library/Keychains/login.keychain-db"
+    ],
+    "bypass_protection": [
+      "$HOME/Library/Keychains/login.keychain-db"
+    ]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
+}

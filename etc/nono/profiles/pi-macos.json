@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "pi-macos",
+    "description": "Pi Coding Agent (macOS)"
+  },
+  "extends": "pi",
+  "filesystem": {
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
+}

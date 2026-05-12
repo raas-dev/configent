@@ -30,7 +30,6 @@
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
       "$HOME/.profile",
-      "$HOME/.CFUserTextEncoding",
       "$HOME/.cargo/bin/cargo",
       "$HOME/.claude/settings.json",
       "$HOME/.config/opencode/opencode.json"

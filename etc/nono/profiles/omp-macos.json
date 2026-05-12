@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "name": "omp-macos",
+    "description": "oh-my-pi (macOS)"
+  },
+  "extends": "omp",
+  "filesystem": {
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ]
+  }
+}
