@@ -21,7 +21,6 @@
     "credentials": [
       "github",
       "context7",
-      "exa",
       "openai"
     ],
     "custom_credentials": {
@@ -36,13 +35,6 @@
         "upstream": "https://api.context7.com",
         "credential_key": "context7_api_key",
         "env_var": "CONTEXT7_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "exa": {
-        "upstream": "https://api.exa.ai",
-        "credential_key": "exa_api_key",
-        "env_var": "EXA_API_KEY",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       },

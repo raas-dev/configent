@@ -13,7 +13,10 @@
     ]
   },
   "network": {
-    "credentials": ["github", "context7", "exa"],
+    "credentials": [
+      "github",
+      "context7"
+    ],
     "custom_credentials": {
       "github": {
         "upstream": "https://api.github.com",
@@ -28,15 +31,10 @@
         "env_var": "CONTEXT7_API_KEY",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
-      },
-      "exa": {
-        "upstream": "https://api.exa.ai",
-        "credential_key": "env://EXA_API_KEY",
-        "env_var": "EXA_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
       }
     },
-    "open_port": [0]
+    "open_port": [
+      0
+    ]
   }
 }
