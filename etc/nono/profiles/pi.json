@@ -68,7 +68,7 @@
     ]
   },
   "network": {
-    "listen_port": [7172, 19876],
+    "open_port": [7172, 8787, 19876],
     "credentials": [
       "github",
       "context7",
