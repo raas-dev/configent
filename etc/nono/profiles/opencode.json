@@ -70,6 +70,9 @@
       "NONO_PROXY_TOKEN"
     ]
   },
+  "security": {
+    "capability_elevation": true
+  },
   "network": {
     "credentials": [
       "github",

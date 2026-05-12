@@ -69,5 +69,8 @@
       "MINIMAX_API_KEY",
       "ZAI_API_KEY"
     ]
+  },
+  "security": {
+    "capability_elevation": true
   }
 }
