@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "name": "claude-linux",
+    "description": "Claude Code CLI (Linux)"
+  },
+  "extends": "claude",
+  "network": {
+    "open_port": [0]
+  }
+}

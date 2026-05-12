@@ -51,6 +51,10 @@ if [ "$(uname)" = "Darwin" ]; then
   case "$PROFILE" in
   claude | opencode | pi | omp) PROFILE="${PROFILE}-macos" ;;
   esac
+else
+  case "$PROFILE" in
+  claude) PROFILE="${PROFILE}-linux" ;;
+  esac
 fi
 
 # Suppress diagnostic footer unless -v|--verbose.
