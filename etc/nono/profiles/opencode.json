@@ -17,7 +17,7 @@
       "$HOME/.cache/opencode",
       "$HOME/.local/share/opencode",
       "$HOME/.local/share/opentui",
-      "$HOME/.local/state/opencode",
+      "$HOME/.local/state/",
       "$HOME/.config/configent/opencode",
       "/tmp"
     ],

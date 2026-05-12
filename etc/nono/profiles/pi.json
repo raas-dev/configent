@@ -30,7 +30,6 @@
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
       "$HOME/.profile",
-      "$HOME/.npmrc",
       "$HOME/.CFUserTextEncoding"
     ],
     "bypass_protection": [
@@ -38,8 +37,7 @@
       "$HOME/.zprofile",
       "$HOME/.bashrc",
       "$HOME/.bash_profile",
-      "$HOME/.profile",
-      "$HOME/.npmrc"
+      "$HOME/.profile"
     ]
   },
   "environment": {
