@@ -20,7 +20,7 @@ _usage() {
   echo "" >&2
   echo "Options:" >&2
   echo "  -p, --proxy       Use nono run (proxy mode) instead of nono wrap" >&2
-  echo "  -v, --verbose     Show nono diagnostics after agent finished" >&2
+  echo "  -v, --verbose     Show nono diagnostics after agent exits" >&2
   exit 1
 }
 
