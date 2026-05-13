@@ -6,18 +6,14 @@
   "extends": "opencode",
   "filesystem": {
     "read": [
-      "$HOME/Library/Caches/bun",
-      "$HOME/Library/Application Support/Zed"
+      "$HOME/Library/Caches/bun"
     ],
     "read_file": [
       "$HOME/.CFUserTextEncoding",
-      "$HOME/Library/Keychains/login.keychain-db"
+      "$HOME/Library/Application Support/Zed/db/0-stable/db.sqlite"
     ],
     "suppress_save_prompt": [
       "/Users"
-    ],
-    "bypass_protection": [
-      "$HOME/Library/Keychains/login.keychain-db"
     ]
   },
   "unsafe_macos_seatbelt_rules": [
