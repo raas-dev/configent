@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.11](https://github.com/raas-dev/configent/compare/1.221.10...1.221.11) (2026-05-13)
+
+
+### Fixes
+
+* **nono:** broaden Zed db access to directory-level read ([4145f4d](https://github.com/raas-dev/configent/commit/4145f4dd51782b584d4897af0b214262b647a165))
+* **nono:** ensure sessions directory with mode 700 ([0d8a45a](https://github.com/raas-dev/configent/commit/0d8a45a42442d7f751f9a9bfaad448e42ba57e0c))
+* **nono:** forward OMP_CAVEMAN_LEVEL in omp profile ([26251ff](https://github.com/raas-dev/configent/commit/26251ff9d6d578c9ff80163700eff3824f285208))
+* **nono:** remove keychain access and narrow Zed path in macOS profiles ([cea268d](https://github.com/raas-dev/configent/commit/cea268dcc2615c2bce344fe52047801f2b276d16))
+
 ## [1.221.10](https://github.com/raas-dev/configent/compare/1.221.9...1.221.10) (2026-05-12)
 
 
