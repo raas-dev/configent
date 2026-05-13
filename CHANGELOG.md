@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.13](https://github.com/raas-dev/configent/compare/1.221.12...1.221.13) (2026-05-13)
+
+
+### Fixes
+
+* **bin:** remove per-instance DNS flags for bridged Lima ([7f73e6b](https://github.com/raas-dev/configent/commit/7f73e6bdc7bdabc3da041e86e1fbbe4a4535dfab))
+* **lima:** add explicit DNS for bridged network ([5a2c501](https://github.com/raas-dev/configent/commit/5a2c501189bf19614033ff1587265291dd141661))
+* **lima:** enable hostResolver across all configs ([dda66f3](https://github.com/raas-dev/configent/commit/dda66f359e487cfbbc609ca6dd111f593abcd1e1))
+
 ## [1.221.12](https://github.com/raas-dev/configent/compare/1.221.11...1.221.12) (2026-05-13)
 
 
