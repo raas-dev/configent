@@ -114,10 +114,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   lima_create_instance() {
     net="$1"
+    lima_bridged_dns_args=
+    [ "$net" = "lima:bridged" ] &&
+      lima_bridged_dns_args='--dns=1.1.1.1 --dns=1.0.0.1'
     if [ -n "$lima_skip_home_mount" ]; then
+      # shellcheck disable=SC2086  # optional extra flags; fixed literals only
       limactl start --name "$NAME" --tty=false "$lima_yaml" \
         --vm-type=vz \
         --network="$net" \
+        $lima_bridged_dns_args \
         --rosetta \
         --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
         --set=".env.EMAIL = \"$EMAIL\"" \
@@ -125,9 +130,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
         --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
         lima_start_mount_only
     else
+      # shellcheck disable=SC2086  # optional extra flags; fixed literals only
       limactl start --name "$NAME" --tty=false "$lima_yaml" \
         --vm-type=vz \
         --network="$net" \
+        $lima_bridged_dns_args \
         --rosetta \
         --mount "${lima_cwd}:w" \
         --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \

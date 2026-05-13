@@ -190,7 +190,7 @@ v() {
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
+          os_create_args=(--vm-type=vz --network=lima:bridged --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)
         else
           os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
         fi
