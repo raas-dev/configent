@@ -112,8 +112,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   lima_create_instance() {
     net="$1"
     lima_dns_args=
-    [ "$net" = "lima:bridged" ] &&
-      lima_dns_args='--dns=1.1.1.1 --dns=1.0.0.1'
+    # [ "$net" = "lima:bridged" ] &&
+    #   lima_dns_args='--dns=1.1.1.1 --dns=1.0.0.1'
     if [ -n "$lima_skip_home_mount" ]; then
       # shellcheck disable=SC2086  # optional extra flags; fixed literals only
       limactl start --name "$NAME" --tty=false "$lima_yaml" \
