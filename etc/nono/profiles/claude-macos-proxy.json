@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "name": "claude-macos-proxy",
+    "description": "Claude Code CLI (macOS, proxy)"
+  },
+  "extends": "claude-proxy",
+  "filesystem": {
+    "allow": [
+      "$HOME/Library/Caches/claude-cli-nodejs"
+    ],
+    "read": [
+      "$HOME/Applications/Claude Code URL Handler.app",
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
+    ],
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ],
+    "suppress_save_prompt": [
+      "/Users"
+    ],
+    "bypass_protection": [
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
+    ]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
+}

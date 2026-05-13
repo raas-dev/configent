@@ -9,18 +9,33 @@
 # sb: run coding agents in OS-level sandbox
 
 _usage() {
-  echo "Usage: sb [-i|--init-shell] [-v|--verbose] <agent> [args...]" >&2
-  echo "Agents: pi, omp, opencode, claude, codex" >&2
+  echo "Usage: sb [-i|--init-shell] [-p|--proxy] [-v|--verbose] <agent> [args...]" >&2
+  echo "Agents:" >&2
+  echo "  pi        Pi Coding Agent" >&2
+  echo "  omp       oh-my-pi" >&2
+  echo "  opencode  OpenCode" >&2
+  echo "  claude    Claude Code CLI" >&2
+  echo "  codex     OpenAI Codex CLI" >&2
+  echo "" >&2
+  echo "Options:" >&2
+  echo "  -i, --init-shell  Start a login shell before running the agent" >&2
+  echo "  -p, --proxy       Use nono run (proxy mode) instead of nono wrap" >&2
+  echo "  -v, --verbose     Show nono diagnostics" >&2
   exit 1
 }
 
 [ $# -eq 0 ] && _usage
 INIT_SHELL=0
+PROXY=0
 VERBOSE=0
 while [ $# -gt 0 ]; do
   case "$1" in
   -i | --init-shell)
     INIT_SHELL=1
+    shift
+    ;;
+  -p | --proxy)
+    PROXY=1
     shift
     ;;
   -v | --verbose)
@@ -52,6 +67,9 @@ if [ "$(uname)" = "Darwin" ]; then
   claude | opencode | pi | omp | codex) PROFILE="${PROFILE}-macos" ;;
   esac
 fi
+[ "$PROXY" -eq 1 ] && PROFILE="${PROFILE}-proxy"
+NONO_CMD="wrap"
+[ "$PROXY" -eq 1 ] && NONO_CMD="run"
 
 # Suppress diagnostic footer unless -v|--verbose.
 NONO_DIAG_FLAG="--no-diagnostics"
@@ -75,18 +93,18 @@ trap _restore_tty EXIT INT TERM HUP
 # Non-interactive default; use -i for login shell startup.
 if [ "$INIT_SHELL" -eq 1 ]; then
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_DIAG_FLAG \
+  nono $NONO_CMD --profile "$PROFILE" $NONO_DIAG_FLAG \
     "${SHELL:-/bin/sh}" -lc 'exec "$@"' sh "$RUN" "$@"
 # Pi's bun-compiled binary calls `npm root -g` to locate extensions, which fails
 # in nono sandbox. Run via node using the npm-installed cli.js instead.
 elif [ "$RUN" = "pi" ] && command -v mise >/dev/null 2>&1; then
   _node_root="$(mise where node 2>/dev/null)"
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_DIAG_FLAG \
+  nono $NONO_CMD --profile "$PROFILE" $NONO_DIAG_FLAG \
     "$_node_root/bin/node" \
     "$_node_root/lib/node_modules/@earendil-works/pi-coding-agent/dist/cli.js" \
     "$@"
 else
   # shellcheck disable=SC2086
-  nono run --profile "$PROFILE" $NONO_DIAG_FLAG "$RUN" "$@"
+  nono $NONO_CMD --profile "$PROFILE" $NONO_DIAG_FLAG "$RUN" "$@"
 fi

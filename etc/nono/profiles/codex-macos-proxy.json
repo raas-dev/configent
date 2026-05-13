@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "codex-macos-proxy",
+    "description": "OpenAI Codex CLI (macOS, proxy)"
+  },
+  "extends": "codex-proxy",
+  "filesystem": {
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ],
+    "suppress_save_prompt": [
+      "/Users"
+    ]
+  }
+}

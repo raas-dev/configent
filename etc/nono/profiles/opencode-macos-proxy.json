@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "name": "opencode-macos-proxy",
+    "description": "OpenCode (macOS, proxy)"
+  },
+  "extends": "opencode-proxy",
+  "filesystem": {
+    "read": [
+      "$HOME/Library/Caches/bun",
+      "$HOME/Library/Application Support/Zed/db/0-stable"
+    ],
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ],
+    "suppress_save_prompt": [
+      "/Users"
+    ]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow user-preference-read)"
+  ]
+}

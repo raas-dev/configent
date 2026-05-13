@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "omp-macos-proxy",
+    "description": "oh-my-pi (macOS, proxy)"
+  },
+  "extends": "omp-proxy",
+  "filesystem": {
+    "read_file": [
+      "$HOME/.CFUserTextEncoding"
+    ],
+    "suppress_save_prompt": [
+      "/Users"
+    ]
+  }
+}
