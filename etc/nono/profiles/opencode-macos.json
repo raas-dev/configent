@@ -6,11 +6,11 @@
   "extends": "opencode",
   "filesystem": {
     "read": [
-      "$HOME/Library/Caches/bun"
+      "$HOME/Library/Caches/bun",
+      "$HOME/Library/Application Support/Zed/db/0-stable"
     ],
     "read_file": [
-      "$HOME/.CFUserTextEncoding",
-      "$HOME/Library/Application Support/Zed/db/0-stable/db.sqlite"
+      "$HOME/.CFUserTextEncoding"
     ],
     "suppress_save_prompt": [
       "/Users"
