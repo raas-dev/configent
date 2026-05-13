@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.12](https://github.com/raas-dev/configent/compare/1.221.11...1.221.12) (2026-05-13)
+
+
+### Fixes
+
+* **nono:** separate network credentials into proxy-only profiles ([bca9631](https://github.com/raas-dev/configent/commit/bca96314b74aa03808ff74683747d0dfcfce248a))
+
 ## [1.221.11](https://github.com/raas-dev/configent/compare/1.221.10...1.221.11) (2026-05-13)
 
 
