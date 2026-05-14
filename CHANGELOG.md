@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.14](https://github.com/raas-dev/configent/compare/1.221.13...1.221.14) (2026-05-14)
+
+
+### Fixes
+
+* **bin:** remove PI_RUN_CODE_UNSANDBOXED passthrough ([3cb0c6f](https://github.com/raas-dev/configent/commit/3cb0c6f1e7f92995b25b92e350c0aa25c4f1284a))
+* **pi:** disable subagents extensions/skills/prompts in superpowers ([a7633c4](https://github.com/raas-dev/configent/commit/a7633c44d1699e82d714714659785a32d7f66fca))
+* **pi:** route npm through mise-managed node ([cd67f7e](https://github.com/raas-dev/configent/commit/cd67f7ec3e69361ce8e57fc9d1e0be730749bdfd))
+
 ## [1.221.13](https://github.com/raas-dev/configent/compare/1.221.12...1.221.13) (2026-05-13)
 
 
