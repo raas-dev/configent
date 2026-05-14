@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.15](https://github.com/raas-dev/configent/compare/1.221.14...1.221.15) (2026-05-14)
+
+
+### Fixes
+
+* **nono:** allow network-outbound in pi-macos-proxy seatbelt ([a23cfd5](https://github.com/raas-dev/configent/commit/a23cfd575df7ea36f4a660a228725d3699828a70))
+* **pi:** remove npmCommand mise workaround ([2ce2d56](https://github.com/raas-dev/configent/commit/2ce2d56a5206e2a0895e999267b71be114800141))
+
 ## [1.221.14](https://github.com/raas-dev/configent/compare/1.221.13...1.221.14) (2026-05-14)
 
 
