@@ -1,6 +1,12 @@
 {
   "packages": [
     "npm:pi-superpowers-plus",
-    "npm:pi-lens"
+    "npm:pi-lens",
+    {
+      "source": "npm:pi-subagents",
+      "extensions": [],
+      "skills": [],
+      "prompts": []
+    }
   ]
 }
