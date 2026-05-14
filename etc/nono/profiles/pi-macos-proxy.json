@@ -14,6 +14,7 @@
   },
   "unsafe_macos_seatbelt_rules": [
     "(allow user-preference-read)",
+    "(allow network-outbound)",
     "(allow system-socket (socket-domain 32) (socket-type 2) (socket-protocol 2))"
   ]
 }
