@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.221.16](https://github.com/raas-dev/configent/compare/1.221.15...1.221.16) (2026-05-14)
+
+
+### Fixes
+
+* **pi:** add pi-mcp-adapter to superpowers profile ([1f67a6f](https://github.com/raas-dev/configent/commit/1f67a6fdc054e210cd8fbef2cd88d3522e7d8ebd))
+* **pi:** move subagent overrides to superpowers profile ([06bebcd](https://github.com/raas-dev/configent/commit/06bebcd7c2c8dd9278dec65470da4ceb51e2bce6))
+* **pi:** remove subagent model overrides from superpowers profile ([4103ebb](https://github.com/raas-dev/configent/commit/4103ebb2b2b0b0878bcc9697cd6f957055dcbedb))
+* **pi:** replace mcporter skill with pi-mcporter extension ([6d6964a](https://github.com/raas-dev/configent/commit/6d6964ae96faf984b437bb7654e6f0aa1e321037))
+* **pi:** replace pi-manage-todo-list with rpiv-todo extension ([ae07590](https://github.com/raas-dev/configent/commit/ae075908edd3947f095f682e4c2a9e3f87f61687))
+* **pi:** update superpowers profile packages ([81d856f](https://github.com/raas-dev/configent/commit/81d856f2a5b315516593a46b0d27e86679959368))
+
 ## [1.221.15](https://github.com/raas-dev/configent/compare/1.221.14...1.221.15) (2026-05-14)
 
 
