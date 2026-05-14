@@ -7,7 +7,7 @@
       "oracle": {
         "model": "zai/glm-5.1"
       },
-      "oracle-executor": {
+      "delegate": {
         "model": "zai/glm-5.1"
       },
       "planner": {
