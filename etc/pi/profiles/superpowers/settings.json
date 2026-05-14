@@ -1,12 +1,8 @@
 {
   "packages": [
-    "npm:pi-superpowers-plus",
-    "npm:pi-lens",
-    {
-      "source": "npm:pi-subagents",
-      "extensions": [],
-      "skills": [],
-      "prompts": []
-    }
+    "npm:@casualjim/pi-superpowers",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-subagents",
+    "npm:pi-lens"
   ]
 }
