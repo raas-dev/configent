@@ -14,6 +14,13 @@
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.74.0",
+  "npmCommand": [
+    "mise",
+    "exec",
+    "node",
+    "--",
+    "npm"
+  ],
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-hodor",
