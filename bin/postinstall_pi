@@ -131,6 +131,18 @@ fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
 
+### pi-mcporter ################################################################
+
+# mcporter.json
+if [ ! -r "$backup_path/.pi/agent/mcporter.json" ]; then
+  if [ -r "$HOME/.pi/agent/mcporter.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/mcporter.json" "$backup_path/.pi/agent/mcporter.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/mcporter.json" "$HOME/.pi/agent/mcporter.json"
+
 ### pi-mono-status-line ########################################################
 
 # status-line.json

@@ -37,15 +37,6 @@
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
     },
-    "mcporter": {
-      "source": "steipete/clawdis@mcporter",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/steipete/clawdis.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "21d959cc70adce6b09f8841c3533ec3590495e40",
-      "installedAt": "2026-04-12T11:43:29.055Z",
-      "updatedAt": "2026-04-12T11:43:29.055Z"
-    },
     "skill-conductor": {
       "source": "smixs/skill-conductor@skill-conductor",
       "sourceType": "github",
