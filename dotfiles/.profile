@@ -242,9 +242,6 @@ export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 # pi
 export PI_SKIP_VERSION_CHECK=1
 
-# pi-run-code
-#export PI_RUN_CODE_UNSANDBOXED=1
-
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
