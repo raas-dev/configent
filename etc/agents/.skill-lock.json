@@ -64,15 +64,6 @@
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
     },
-    "grill-me": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "grill-me/SKILL.md",
-      "skillFolderHash": "2a1ad17028306ebe45f0e49703fa28b9b2e7f499",
-      "installedAt": "2026-04-25T10:56:46.794Z",
-      "updatedAt": "2026-04-25T10:56:46.794Z"
-    },
     "finnish-humanizer": {
       "source": "github/awesome-copilot",
       "sourceType": "github",
@@ -127,6 +118,16 @@
       "skillFolderHash": "459f5e156982cedf6f65c7b8a431fd75cb799b99",
       "installedAt": "2026-05-03T15:47:35.932Z",
       "updatedAt": "2026-05-03T15:47:35.932Z"
+    },
+    "grill-with-docs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
+      "skillFolderHash": "3c4ac970c404e8d32c24f2725bfe679e455a925b",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-05-15T15:24:03.319Z",
+      "updatedAt": "2026-05-15T15:24:03.319Z"
     }
   },
   "dismissed": {
