@@ -20,6 +20,7 @@
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
     "npm:pi-mcporter",
+    "npm:pi-mono-status-line",
     "npm:pi-promptsmith",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
