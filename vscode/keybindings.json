@@ -578,14 +578,6 @@
     "key": "ctrl+s ctrl+s"
   },
   {
-    "command": "workbench.action.terminal.runSelectedText",
-    "key": "ctrl+s x"
-  },
-  {
-    "command": "workbench.action.terminal.runSelectedText",
-    "key": "ctrl+s ctrl+x"
-  },
-  {
     "command": "workbench.action.chat.openAsk",
     "key": "cmd+l"
   },
@@ -673,5 +665,13 @@
   {
     "command": "workbench.action.terminal.runActiveFile",
     "key": "ctrl+s ctrl+r"
+  },
+  {
+    "key": "ctrl+s x",
+    "command": "workbench.action.terminal.kill"
+  },
+  {
+    "key": "ctrl+s ctrl+x",
+    "command": "workbench.action.terminal.kill"
   }
 ]
