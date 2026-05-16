@@ -124,7 +124,6 @@
   "chat.editor.fontSize": 13,
   "chat.experimental.offerSetup": false,
   "chat.fontSize": 14,
-  "chat.mcp.gallery.enabled": true,
   "chat.notifyWindowOnConfirmation": "off",
   "chat.notifyWindowOnResponseReceived": "off",
   "chat.tools.global.autoApprove": true,
@@ -671,5 +670,8 @@
   "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
   "glm-chat-provider.temperature": 0,
   "glm-chat-provider.defaultThinkingMode": "auto",
-  "gitlens.ai.modelOptions.temperature": 0
+  "gitlens.ai.modelOptions.temperature": 0,
+  "chat.experimental.useSkillAdherencePrompt": true,
+  "chat.tools.compressOutput.enabled": true,
+  "chat.tips.enabled": false
 }
