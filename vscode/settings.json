@@ -292,9 +292,10 @@
   "github.copilot.chat.useResponsesApi": true,
   "github.copilot.enable": {
     "*": true,
-    "markdown": true,
     "plaintext": false,
-    "scminput": false
+    "markdown": true,
+    "scminput": false,
+    "shellscript": true
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "gitlens.advanced.messages": {
