@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Z.AI GLM",
+    "vendor": "zai",
+    "apiKey": "${input:chat.lm.secret.6fbc33fe}"
+  }
+]
