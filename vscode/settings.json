@@ -545,10 +545,9 @@
   "terminal.integrated.showExitAlert": false,
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.stickyScroll.enabled": false,
-  "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.hideCondition": "singleGroup",
-  "terminal.integrated.tabs.showActions": "never",
+  "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terminal.integrated.tabStopWidth": 4,
   "terraform.codelens.referenceCount": true,
@@ -664,5 +663,6 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "terminal.integrated.tabs.enabled": false
 }
