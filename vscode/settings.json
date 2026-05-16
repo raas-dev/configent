@@ -119,7 +119,7 @@
   "chat.editor.fontSize": 14,
   "chat.experimental.offerSetup": false,
   "chat.experimental.useSkillAdherencePrompt": true,
-  "chat.fontSize": 15,
+  "chat.fontSize": 14,
   "chat.notifyWindowOnConfirmation": "off",
   "chat.notifyWindowOnResponseReceived": "off",
   "chat.tips.enabled": false,
