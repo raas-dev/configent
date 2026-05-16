@@ -415,10 +415,6 @@
     "key": "shift+cmd+n"
   },
   {
-    "command": "workbench.action.chat.openask",
-    "key": "cmd+l"
-  },
-  {
     "command": "workbench.action.chat.openagent",
     "key": "cmd+i",
     "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
@@ -619,10 +615,6 @@
     "key": "ctrl+[Semicolon]"
   },
   {
-    "command": "composerMode.chat",
-    "key": "cmd+l"
-  },
-  {
     "command": "composerMode.plan",
     "key": "cmd+[Semicolon]"
   },
@@ -647,7 +639,15 @@
     "command": "-pi.focusInput"
   },
   {
+    "key": "cmd+[Quote]",
+    "command": "composerMode.multitask"
+  },
+  {
     "key": "cmd+l",
     "command": "workbench.action.chat.openAsk"
+  },
+  {
+    "key": "cmd+l",
+    "command": "workbench.action.chat.openask"
   }
 ]
