@@ -519,7 +519,7 @@
   "terminal.integrated.defaultProfile.windows": "tmux-integrated",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
-  "terminal.integrated.enableKittyKeyboardProtocol": true,
+  "terminal.integrated.enableKittyKeyboardProtocol": false,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.environmentChangesIndicator": "off",
   "terminal.integrated.fontSize": 15,
