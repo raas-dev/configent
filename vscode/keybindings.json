@@ -424,11 +424,6 @@
     "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
   },
   {
-    "command": "-workbench.action.chat.openagent",
-    "key": "shift+cmd+i",
-    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
-  },
-  {
     "command": "inlineChat.start",
     "key": "cmd+k",
     "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
@@ -594,13 +589,11 @@
   },
   {
     "command": "agentterminal.run",
-    "key": "ctrl+s ctrl+s",
-    "when": "!terminalFocus"
+    "key": "ctrl+s ctrl+t"
   },
   {
     "command": "agentterminal.run",
-    "key": "ctrl+s s",
-    "when": "!terminalFocus"
+    "key": "ctrl+s t"
   },
   {
     "command": "-workbench.action.switchWindow",
@@ -642,11 +635,19 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+s ctrl+t",
+    "key": "ctrl+s ctrl+s",
     "command": "workbench.action.createTerminalEditor"
   },
   {
-    "key": "ctrl+s t",
+    "key": "ctrl+s s",
     "command": "workbench.action.createTerminalEditor"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "-pi.focusInput"
+  },
+  {
+    "key": "cmd+l",
+    "command": "workbench.action.chat.openAsk"
   }
 ]
