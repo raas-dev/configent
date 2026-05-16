@@ -74,8 +74,6 @@ if command -v cursor >/dev/null; then
   fi
   mkdir -p "$HOME/.cursor"
   ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
-
-  #APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_kilocode"
 fi
 
 if command -v agy >/dev/null; then
@@ -94,8 +92,6 @@ if command -v agy >/dev/null; then
   mkdir -p "$HOME/.gemini/antigravity"
   ln -sfnv "$config_path/antigravity/mcp_config.json" \
     "$HOME/.gemini/antigravity/mcp_config.json"
-
-  #APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_kilocode"
 fi
 
 if command -v code >/dev/null; then
@@ -104,6 +100,4 @@ if command -v code >/dev/null; then
   fi
 
   # User-wide VS Code MCP configuration is in vscode/mcp.json
-
-  #APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_kilocode"
 fi
