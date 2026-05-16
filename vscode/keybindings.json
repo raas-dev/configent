@@ -176,14 +176,6 @@
     "key": "ctrl+s [Comma]"
   },
   {
-    "command": "workbench.action.terminal.runSelectedText",
-    "key": "ctrl+s x"
-  },
-  {
-    "command": "workbench.action.terminal.runActiveFile",
-    "key": "ctrl+s e"
-  },
-  {
     "command": "workbench.action.terminal.runRecentCommand",
     "key": "ctrl+s r"
   },
@@ -378,7 +370,7 @@
   },
   {
     "command": "workbench.action.terminal.moveToEditor",
-    "key": "ctrl+s ctrl+m"
+    "key": "ctrl+s ctrl+s"
   },
   {
     "command": "workbench.action.terminal.copyLastCommandOutput",
@@ -463,10 +455,6 @@
     "key": "ctrl+s ctrl+w"
   },
   {
-    "command": "workbench.action.terminal.runActiveFile",
-    "key": "ctrl+s ctrl+e"
-  },
-  {
     "command": "workbench.action.terminal.runRecentCommand",
     "key": "ctrl+s ctrl+r"
   },
@@ -524,10 +512,6 @@
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
-    "command": "workbench.action.terminal.runSelectedText",
-    "key": "ctrl+s ctrl+x"
-  },
-  {
     "command": "workbench.action.terminal.attachToSession",
     "key": "ctrl+s ctrl+space"
   },
@@ -572,14 +556,6 @@
     "key": "ctrl+s ctrl+9"
   },
   {
-    "command": "agentterminal.run",
-    "key": "ctrl+s ctrl+t"
-  },
-  {
-    "command": "agentterminal.run",
-    "key": "ctrl+s t"
-  },
-  {
     "command": "-workbench.action.switchWindow",
     "key": "ctrl+w"
   },
@@ -611,23 +587,35 @@
     "when": "terminalFocus"
   },
   {
-    "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+s ctrl+s"
-  },
-  {
-    "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+s s"
-  },
-  {
     "command": "-pi.focusInput",
     "key": "shift+cmd+i"
   },
   {
-    "command": "workbench.action.chat.openAsk",
-    "key": "cmd+l"
+    "key": "ctrl+s e",
+    "command": "workbench.action.createTerminalEditor"
   },
   {
-    "command": "workbench.action.chat.openask",
-    "key": "cmd+l"
+    "key": "ctrl+s ctrl+e",
+    "command": "workbench.action.createTerminalEditor"
+  },
+  {
+    "key": "ctrl+s t",
+    "command": "agentterminal.run"
+  },
+  {
+    "key": "ctrl+s ctrl+t",
+    "command": "agentterminal.run"
+  },
+  {
+    "key": "ctrl+s x",
+    "command": "workbench.action.terminal.runSelectedText"
+  },
+  {
+    "key": "ctrl+s ctrl+x",
+    "command": "workbench.action.terminal.runSelectedText"
+  },
+  {
+    "key": "cmd+l",
+    "command": "workbench.action.chat.openAsk"
   }
 ]

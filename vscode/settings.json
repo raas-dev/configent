@@ -512,9 +512,9 @@
   "terminal.integrated.accessibleViewPreserveCursorPosition": true,
   "terminal.integrated.confirmOnKill": "never",
   "terminal.integrated.cursorBlinking": true,
-  "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.defaultProfile.windows": "pwsh",
+  "terminal.integrated.defaultProfile.linux": "tmux-integrated",
+  "terminal.integrated.defaultProfile.osx": "tmux-integrated",
+  "terminal.integrated.defaultProfile.windows": "tmux-integrated",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableKittyKeyboardProtocol": true,
@@ -536,16 +536,6 @@
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 1000,
-  "terminal.integrated.profiles.linux": {
-    "tmux": {
-      "path": "tm"
-    }
-  },
-  "terminal.integrated.profiles.osx": {
-    "tmux": {
-      "path": "tm"
-    }
-  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.sendKeybindingsToShell": true,
