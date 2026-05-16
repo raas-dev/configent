@@ -673,5 +673,6 @@
   "gitlens.ai.modelOptions.temperature": 0,
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.tools.compressOutput.enabled": true,
-  "chat.tips.enabled": false
+  "chat.tips.enabled": false,
+  "window.confirmBeforeClose": "always"
 }
