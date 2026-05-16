@@ -22,6 +22,50 @@ if command -v code >/dev/null; then
     APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
   fi
 
+  # agents dir
+  if [ ! -r "$backup_path/.copilot/agents" ]; then
+    if [ -r "$HOME/.copilot/agents" ]; then
+      mkdir -p "$backup_path/.copilot"
+      cp -RP "$HOME/.copilot/agents" "$backup_path/.copilot/agents"
+    fi
+  fi
+  mkdir -p "$HOME/.copilot/agents"
+  rm -rf "$HOME/.copilot/agents"
+  ln -sfnv "$config_path/copilot/agents" "$HOME/.copilot/agents"
+
+  # hooks dir
+  if [ ! -r "$backup_path/.copilot/hooks" ]; then
+    if [ -r "$HOME/.copilot/hooks" ]; then
+      mkdir -p "$backup_path/.copilot"
+      cp -RP "$HOME/.copilot/hooks" "$backup_path/.copilot/hooks"
+    fi
+  fi
+  mkdir -p "$HOME/.copilot/hooks"
+  rm -rf "$HOME/.copilot/hooks"
+  ln -sfnv "$config_path/copilot/hooks" "$HOME/.copilot/hooks"
+
+  # instructions dir
+  if [ ! -r "$backup_path/.copilot/instructions" ]; then
+    if [ -r "$HOME/.copilot/instructions" ]; then
+      mkdir -p "$backup_path/.copilot"
+      cp -RP "$HOME/.copilot/instructions" "$backup_path/.copilot/instructions"
+    fi
+  fi
+  mkdir -p "$HOME/.copilot/instructions"
+  rm -rf "$HOME/.copilot/instructions"
+  ln -sfnv "$config_path/copilot/instructions" "$HOME/.copilot/instructions"
+
+  # skills dir
+  if [ ! -r "$backup_path/.copilot/skills" ]; then
+    if [ -r "$HOME/.copilot/skills" ]; then
+      mkdir -p "$backup_path/.copilot"
+      cp -RP "$HOME/.copilot/skills" "$backup_path/.copilot/skills"
+    fi
+  fi
+  mkdir -p "$HOME/.copilot/skills"
+  rm -rf "$HOME/.copilot/skills"
+  ln -sfnv "$config_path/copilot/skills" "$HOME/.copilot/skills"
+
   # User-wide VS Code MCP configuration is in vscode/mcp.json
 fi
 
