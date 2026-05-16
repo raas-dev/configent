@@ -627,27 +627,27 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+s ctrl+s",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+s ctrl+s"
   },
   {
-    "key": "ctrl+s s",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+s s"
   },
   {
-    "key": "shift+cmd+i",
-    "command": "-pi.focusInput"
+    "command": "-pi.focusInput",
+    "key": "shift+cmd+i"
   },
   {
-    "key": "cmd+[Quote]",
-    "command": "composerMode.multitask"
+    "command": "composerMode.multitask",
+    "key": "cmd+[Quote]"
   },
   {
-    "key": "cmd+l",
-    "command": "workbench.action.chat.openAsk"
+    "command": "workbench.action.chat.openAsk",
+    "key": "cmd+l"
   },
   {
-    "key": "cmd+l",
-    "command": "workbench.action.chat.openask"
+    "command": "workbench.action.chat.openask",
+    "key": "cmd+l"
   }
 ]
