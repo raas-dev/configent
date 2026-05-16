@@ -176,10 +176,6 @@
     "key": "ctrl+s [Comma]"
   },
   {
-    "command": "workbench.action.terminal.runRecentCommand",
-    "key": "ctrl+s r"
-  },
-  {
     "command": "-workbench.action.openRecent",
     "key": "ctrl+r"
   },
@@ -451,10 +447,6 @@
     "key": "ctrl+s ctrl+w"
   },
   {
-    "command": "workbench.action.terminal.runRecentCommand",
-    "key": "ctrl+s ctrl+r"
-  },
-  {
     "command": "workbench.action.terminal.copyLastCommandOutput",
     "key": "ctrl+s ctrl+y"
   },
@@ -630,48 +622,56 @@
     "key": "ctrl+s m"
   },
   {
-    "key": "ctrl+space",
     "command": "-editor.action.triggerSuggest",
+    "key": "ctrl+space",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
   },
   {
-    "key": "ctrl+space",
     "command": "-workbench.action.terminal.sendSequence",
+    "key": "ctrl+space",
     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'"
   },
   {
-    "key": "ctrl+space",
     "command": "-toggleSuggestionDetails",
+    "key": "ctrl+space",
     "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
   },
   {
-    "key": "ctrl+space",
     "command": "-workbench.action.terminal.triggerSuggest",
+    "key": "ctrl+space",
     "when": "config.terminal.integrated.suggest.enabled && terminalFocus && terminalProcessSupported && !terminalSuggestWidgetVisible"
   },
   {
-    "key": "ctrl+space",
     "command": "-focusSuggestion",
+    "key": "ctrl+space",
     "when": "suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "ctrl+space",
     "command": "-quickInput.toggleHover",
+    "key": "ctrl+space",
     "when": "inQuickInput && quickInputType == 'quickPick' || inQuickInput && quickInputType == 'quickTree'"
   },
   {
-    "key": "ctrl+alt+space",
     "command": "-toggleSuggestionFocus",
+    "key": "ctrl+alt+space",
     "when": "suggestWidgetVisible && textInputFocus"
   },
   {
-    "key": "ctrl+space",
     "command": "-workbench.action.terminal.suggestToggleDetails",
+    "key": "ctrl+space",
     "when": "simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
   },
   {
-    "key": "ctrl+alt+space",
     "command": "-workbench.action.terminal.suggestToggleDetailsFocus",
+    "key": "ctrl+alt+space",
     "when": "!textInputFocus"
+  },
+  {
+    "command": "workbench.action.terminal.runActiveFile",
+    "key": "ctrl+s r"
+  },
+  {
+    "command": "workbench.action.terminal.runActiveFile",
+    "key": "ctrl+s ctrl+r"
   }
 ]
