@@ -55,14 +55,14 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
-      "command": "exec tm",
-      "id": "tm",
-      "label": "localhost"
-    },
-    {
       "command": "clear",
       "id": "terminal",
-      "label": "Terminal"
+      "label": "terminal"
+    },
+    {
+      "command": "exec tm",
+      "id": "tm",
+      "label": "tmux"
     },
     {
       "args": [
