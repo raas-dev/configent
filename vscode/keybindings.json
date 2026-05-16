@@ -172,10 +172,6 @@
     "key": "ctrl+s d"
   },
   {
-    "command": "workbench.action.terminal.new",
-    "key": "ctrl+s t"
-  },
-  {
     "command": "workbench.action.terminal.rename",
     "key": "ctrl+s [Comma]"
   },
@@ -480,10 +476,6 @@
     "key": "cmd+[BracketLeft]"
   },
   {
-    "command": "workbench.action.terminal.new",
-    "key": "ctrl+s ctrl+t"
-  },
-  {
     "command": "workbench.action.terminal.detachSession",
     "key": "ctrl+s ctrl+q"
   },
@@ -648,5 +640,13 @@
     "command": "workbench.action.terminal.sendSequence",
     "key": "shift+enter",
     "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+s ctrl+t",
+    "command": "workbench.action.createTerminalEditor"
+  },
+  {
+    "key": "ctrl+s t",
+    "command": "workbench.action.createTerminalEditor"
   }
 ]
