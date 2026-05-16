@@ -538,7 +538,6 @@
   "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10000,
-  "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.shellIntegration.decorationsEnabled": "gutter",
   "terminal.integrated.shellIntegration.history": 1000,
   "terminal.integrated.showExitAlert": false,
