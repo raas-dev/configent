@@ -223,10 +223,6 @@
     "when": "!terminalFocus"
   },
   {
-    "command": "cursor.generateGitCommitMessage",
-    "key": "cmd+m"
-  },
-  {
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+c",
     "when": "filesExplorerFocus"
@@ -402,10 +398,6 @@
     "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
   },
   {
-    "command": "composerMode.agent",
-    "key": "cmd+i"
-  },
-  {
     "command": "-breadcrumbs.toggleToOn",
     "key": "shift+cmd+[Backquote]",
     "when": "!config.breadcrumbs.enabled"
@@ -461,10 +453,6 @@
     "command": "-workbench.action.toggleUnifiedSidebar",
     "key": "shift+cmd+s",
     "when": "cursor.agentIdeUnification.enabled"
-  },
-  {
-    "command": "composerMode.debug",
-    "key": "cmd+[BracketLeft]"
   },
   {
     "command": "workbench.action.terminal.detachSession",
@@ -615,10 +603,6 @@
     "key": "ctrl+[Semicolon]"
   },
   {
-    "command": "composerMode.plan",
-    "key": "cmd+[Semicolon]"
-  },
-  {
     "args": {
       "text": "\u001b\r"
     },
@@ -637,10 +621,6 @@
   {
     "command": "-pi.focusInput",
     "key": "shift+cmd+i"
-  },
-  {
-    "command": "composerMode.multitask",
-    "key": "cmd+[Quote]"
   },
   {
     "command": "workbench.action.chat.openAsk",
