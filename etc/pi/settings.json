@@ -16,6 +16,7 @@
   "lastChangelogVersion": "0.74.0",
   "packages": [
     "npm:pi-ask-user",
+    "npm:pi-btw",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
@@ -28,7 +29,6 @@
     "npm:pi-tool-display",
     "npm:pi-web-access",
     "npm:@aliou/pi-processes",
-    "npm:@juicesharp/rpiv-btw",
     "npm:@juicesharp/rpiv-todo",
     "npm:@ogulcancelik/pi-sketch",
     "npm:@siddr/pi-review",
