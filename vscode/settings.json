@@ -120,8 +120,15 @@
   "chat.experimental.offerSetup": false,
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.fontSize": 14,
+  "chat.hookFilesLocations": {
+    ".claude/settings.json": false,
+    ".claude/settings.local.json": false,
+    "~/.claude/settings.json": false
+  },
+  "chat.includeReferencedInstructions": true,
   "chat.notifyWindowOnConfirmation": "off",
   "chat.notifyWindowOnResponseReceived": "off",
+  "chat.permissions.default": "autopilot",
   "chat.tips.enabled": false,
   "chat.tools.compressOutput.enabled": true,
   "chat.tools.global.autoApprove": true,
@@ -278,6 +285,7 @@
   ],
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
+  "github.copilot.chat.agent.autoFix": true,
   "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
   "github.copilot.chat.claudeAgent.enabled": false,
@@ -303,7 +311,7 @@
   "gitlens.advanced.skipOnboarding": true,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.modelOptions.temperature": 0,
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "gitlens.ai.vscode.model": "zai:glm",
   "gitlens.blame.highlight.locations": [
     "gutter",
     "line",
@@ -372,7 +380,7 @@
   "gitlens.views.workspaces.files.layout": "tree",
   "gitlens.views.worktrees.files.layout": "tree",
   "glm-chat-provider.defaultThinkingMode": "auto",
-  "glm-chat-provider.temperature": 0,
+  "glm-chat-provider.temperature": 0.2,
   "go.showWelcome": false,
   "go.survey.prompt": false,
   "go.terminal.activateEnvironment": false,
@@ -386,15 +394,6 @@
   "json.schemaDownload.enable": true,
   "jupyter.experiments.enabled": false,
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
-  "kilo-code.allowedCommands": [
-    "git log",
-    "git diff",
-    "git show",
-    "npm test",
-    "npm install",
-    "tsc"
-  ],
-  "kilo-code.deniedCommands": [],
   "lntoggle.priority": 110,
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "markdown.preview.fontSize": 15,
@@ -411,6 +410,11 @@
     "jupyter-notebook": "left"
   },
   "openInExternalApp.enableLog": false,
+  "pi.chatCaretStyle": "line",
+  "pi.contextUsageDisplay": "percentage",
+  "pi.fontSize": 14,
+  "pi.showLabels": false,
+  "pi.thinkingBarVisibility": "collapsed",
   "playwright.reuseBrowser": true,
   "playwright.showTrace": false,
   "powershell.analyzeOpenDocumentsOnly": true,
@@ -668,18 +672,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "chat.hookFilesLocations": {
-    ".claude/settings.json": false,
-    ".claude/settings.local.json": false,
-    "~/.claude/settings.json": false
-  },
-  "chat.includeReferencedInstructions": true,
-  "github.copilot.chat.agent.autoFix": true,
-  "pi.fontSize": 14,
-  "pi.chatCaretStyle": "line",
-  "pi.thinkingBarVisibility": "collapsed",
-  "pi.showLabels": false,
-  "pi.contextUsageDisplay": "percentage",
-  "chat.permissions.default": "autopilot"
+  "zenMode.hideStatusBar": false
 }
