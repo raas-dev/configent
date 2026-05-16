@@ -9,13 +9,14 @@ bierner.markdown-mermaid
 biomejs.biome
 bpruitt-goddard.mermaid-markdown-syntax-highlighting
 bradlc.vscode-tailwindcss
-braebo.github-flavored-markdown-preview
 captainjinx.kickass-c64
 cardinal90.multi-cursor-case-preserve
+cdervis.vscode-pi
 charliermarsh.ruff
 christian-kohler.path-intellisense
 connor4312.esbuild-problem-matchers
 dbaeumer.vscode-eslint
+denizhandaklr.glm-chat-provider
 detachhead.basedpyright
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
@@ -25,6 +26,7 @@ ethansk.restore-terminals
 fabiospampinato.vscode-statusbar-debugger
 formulahendry.code-runner
 fregante.ghost-text
+github.copilot-chat
 github.vscode-github-actions
 golang.go
 grapecity.gc-excelviewer
@@ -69,6 +71,7 @@ stkb.rewrap
 stoplight.spectral
 tamasfe.even-better-toml
 tekumara.typos-vscode
+tintinweb.vscode-pi-model-chat-provider
 tomoki1207.pdf
 unifiedjs.vscode-mdx
 usernamehw.errorlens
