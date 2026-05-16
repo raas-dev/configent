@@ -41,7 +41,6 @@ hverlin.mise-vscode
 ibm.output-colorizer
 iliaskhairullin.simple-lines-count
 jellydn.vscode-hurl-runner
-jerrygoyal.shortcut-menu-bar
 johnnymorganz.stylua
 kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
@@ -63,6 +62,7 @@ ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.powershell
 ms-vsliveshare.vsliveshare
 naumovs.color-highlight
+nick-rudenko.back-n-forth
 perkovec.emoji
 pomdtr.excalidraw-editor
 rambit.highlight-counter
