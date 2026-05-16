@@ -369,10 +369,6 @@
     "key": "ctrl+s [Period]"
   },
   {
-    "command": "workbench.action.terminal.moveToEditor",
-    "key": "ctrl+s ctrl+s"
-  },
-  {
     "command": "workbench.action.terminal.copyLastCommandOutput",
     "key": "ctrl+s y"
   },
@@ -495,10 +491,6 @@
     "key": "ctrl+s ctrl+b"
   },
   {
-    "command": "workbench.action.terminal.moveToEditor",
-    "key": "ctrl+s m"
-  },
-  {
     "command": "workbench.action.terminal.rename",
     "key": "ctrl+s ctrl+[Comma]"
   },
@@ -570,11 +562,6 @@
     "when": "isDevelopment"
   },
   {
-    "command": "-cursor.toggleAgentWindowIDEUnification",
-    "key": "cmd+e",
-    "when": "cursor.agentIdeUnification.featureGate && !isGlass && workbenchState != 'empty'"
-  },
-  {
     "command": "workbench.action.chat.openPlan",
     "key": "ctrl+[Semicolon]"
   },
@@ -591,31 +578,55 @@
     "key": "shift+cmd+i"
   },
   {
-    "key": "ctrl+s e",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "agentterminal.run",
+    "key": "ctrl+s s"
   },
   {
-    "key": "ctrl+s ctrl+e",
+    "command": "agentterminal.run",
+    "key": "ctrl+s ctrl+s"
+  },
+  {
+    "command": "workbench.action.terminal.runSelectedText",
+    "key": "ctrl+s x"
+  },
+  {
+    "command": "workbench.action.terminal.runSelectedText",
+    "key": "ctrl+s ctrl+x"
+  },
+  {
+    "command": "workbench.action.chat.openAsk",
+    "key": "cmd+l"
+  },
+  {
+    "key": "cmd+t",
+    "command": "-workbench.action.showAllSymbols"
+  },
+  {
+    "key": "cmd+t",
     "command": "workbench.action.createTerminalEditor"
   },
   {
     "key": "ctrl+s t",
-    "command": "agentterminal.run"
+    "command": "workbench.action.createTerminalEditor"
   },
   {
     "key": "ctrl+s ctrl+t",
-    "command": "agentterminal.run"
+    "command": "workbench.action.createTerminalEditor"
   },
   {
-    "key": "ctrl+s x",
-    "command": "workbench.action.terminal.runSelectedText"
+    "key": "ctrl+s ctrl+e",
+    "command": "workbench.action.terminal.moveToEditor"
   },
   {
-    "key": "ctrl+s ctrl+x",
-    "command": "workbench.action.terminal.runSelectedText"
+    "key": "ctrl+s ctrl+m",
+    "command": "workbench.action.terminal.moveToTerminalPanel"
   },
   {
-    "key": "cmd+l",
-    "command": "workbench.action.chat.openAsk"
+    "key": "ctrl+s e",
+    "command": "workbench.action.terminal.moveToEditor"
+  },
+  {
+    "key": "ctrl+s m",
+    "command": "workbench.action.terminal.moveToTerminalPanel"
   }
 ]
