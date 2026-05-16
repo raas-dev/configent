@@ -7,7 +7,7 @@ if [ -d "$mise_data/shims" ]; then
   export PATH
 fi
 
-session_name="$(hostname)"
+session_name="$(basename "$PWD")"
 
 while getopts "s:" opt; do
   case $opt in
