@@ -55,11 +55,6 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
-      "command": "clear",
-      "id": "terminal",
-      "label": "terminal"
-    },
-    {
       "command": "exec tm",
       "id": "tm",
       "label": "tmux"
@@ -674,5 +669,6 @@
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.tools.compressOutput.enabled": true,
   "chat.tips.enabled": false,
-  "window.confirmBeforeClose": "always"
+  "window.confirmBeforeClose": "always",
+  "terminal.integrated.defaultLocation": "editor"
 }
