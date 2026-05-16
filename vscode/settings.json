@@ -111,7 +111,7 @@
   "bicep.enableSurveys": false,
   "biome.suggestInstallingGlobally": false,
   "breadcrumbs.enabled": false,
-  "chat.agent.maxRequests": 50,
+  "chat.agent.maxRequests": 100,
   "chat.agent.thinkingStyle": "expanded",
   "chat.agentSessionsViewLocation": "view",
   "chat.commandCenter.enabled": false,
