@@ -668,5 +668,7 @@
   "terminal.integrated.sendKeybindingsToShell": true,
   "window.newWindowProfile": "Default",
   "github.copilot.chat.claudeAgent.enabled": false,
-  "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true
+  "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
+  "glm-chat-provider.temperature": 0,
+  "glm-chat-provider.defaultThinkingMode": "auto"
 }

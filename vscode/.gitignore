@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!chatLanguageModels.json
 !create_extensions_list
 !extensions.list
 !keybindings.json
