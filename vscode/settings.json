@@ -664,5 +664,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "terminal.integrated.sendKeybindingsToShell": true
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "window.newWindowProfile": "Default"
 }
