@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.222.0](https://github.com/raas-dev/configent/compare/1.221.16...1.222.0) (2026-05-16)
+
+
+### Features
+
+* **tm:** default session name to working dir basename ([f64d211](https://github.com/raas-dev/configent/commit/f64d211a3a9151c0c537eae46298448cf89e09f5))
+
+
+### Fixes
+
+* **agents:** replace grill-me skill with grill-with-docs ([db851a2](https://github.com/raas-dev/configent/commit/db851a252880fd2a3d65dec8a426a85c18d21b3d))
+
 ## [1.221.16](https://github.com/raas-dev/configent/compare/1.221.15...1.221.16) (2026-05-14)
 
 
