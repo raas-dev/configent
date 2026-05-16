@@ -675,5 +675,10 @@
     "~/.claude/settings.json": false
   },
   "chat.includeReferencedInstructions": true,
-  "github.copilot.chat.agent.autoFix": true
+  "github.copilot.chat.agent.autoFix": true,
+  "pi.fontSize": 14,
+  "pi.chatCaretStyle": "line",
+  "pi.thinkingBarVisibility": "collapsed",
+  "pi.showLabels": false,
+  "pi.contextUsageDisplay": "percentage"
 }
