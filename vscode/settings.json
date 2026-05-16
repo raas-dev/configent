@@ -670,5 +670,6 @@
   "github.copilot.chat.claudeAgent.enabled": false,
   "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
   "glm-chat-provider.temperature": 0,
-  "glm-chat-provider.defaultThinkingMode": "auto"
+  "glm-chat-provider.defaultThinkingMode": "auto",
+  "gitlens.ai.modelOptions.temperature": 0
 }
