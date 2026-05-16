@@ -17,6 +17,14 @@ config_path="$HOME/.config/configent"
 
 "$bin_path/setup_fonts"
 
+if command -v code >/dev/null; then
+  if [ -z "$NO_SETUP" ]; then
+    APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+  fi
+
+  # User-wide VS Code MCP configuration is in vscode/mcp.json
+fi
+
 if command -v cursor >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
     APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
@@ -92,12 +100,4 @@ if command -v agy >/dev/null; then
   mkdir -p "$HOME/.gemini/antigravity"
   ln -sfnv "$config_path/antigravity/mcp_config.json" \
     "$HOME/.gemini/antigravity/mcp_config.json"
-fi
-
-if command -v code >/dev/null; then
-  if [ -z "$NO_SETUP" ]; then
-    APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
-  fi
-
-  # User-wide VS Code MCP configuration is in vscode/mcp.json
 fi
