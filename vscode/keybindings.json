@@ -598,35 +598,35 @@
     "key": "cmd+l"
   },
   {
-    "key": "cmd+t",
-    "command": "-workbench.action.showAllSymbols"
+    "command": "-workbench.action.showAllSymbols",
+    "key": "cmd+t"
   },
   {
-    "key": "cmd+t",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "workbench.action.createTerminalEditor",
+    "key": "cmd+t"
   },
   {
-    "key": "ctrl+s t",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+s t"
   },
   {
-    "key": "ctrl+s ctrl+t",
-    "command": "workbench.action.createTerminalEditor"
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+s ctrl+t"
   },
   {
-    "key": "ctrl+s ctrl+e",
-    "command": "workbench.action.terminal.moveToEditor"
+    "command": "workbench.action.terminal.moveToEditor",
+    "key": "ctrl+s ctrl+e"
   },
   {
-    "key": "ctrl+s ctrl+m",
-    "command": "workbench.action.terminal.moveToTerminalPanel"
+    "command": "workbench.action.terminal.moveToTerminalPanel",
+    "key": "ctrl+s ctrl+m"
   },
   {
-    "key": "ctrl+s e",
-    "command": "workbench.action.terminal.moveToEditor"
+    "command": "workbench.action.terminal.moveToEditor",
+    "key": "ctrl+s e"
   },
   {
-    "key": "ctrl+s m",
-    "command": "workbench.action.terminal.moveToTerminalPanel"
+    "command": "workbench.action.terminal.moveToTerminalPanel",
+    "key": "ctrl+s m"
   }
 ]
