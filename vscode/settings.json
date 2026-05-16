@@ -128,7 +128,7 @@
   "chat.includeReferencedInstructions": true,
   "chat.notifyWindowOnConfirmation": "off",
   "chat.notifyWindowOnResponseReceived": "off",
-  "chat.permissions.default": "autopilot",
+  "chat.permissions.default": "autoApprove",
   "chat.tips.enabled": false,
   "chat.tools.compressOutput.enabled": true,
   "chat.tools.global.autoApprove": true,
