@@ -1,7 +1,12 @@
 [
-  {
-    "name": "Z.AI GLM",
-    "vendor": "zai",
-    "apiKey": "${input:chat.lm.secret.6fbc33fe}"
-  }
+	{
+		"name": "Z.AI GLM",
+		"vendor": "zai",
+		"apiKey": "${input:chat.lm.secret.6fbc33fe}"
+	},
+	{
+		"name": "MiniMax",
+		"vendor": "minimax",
+		"apiKey": "${input:chat.lm.secret.13f4e9fa}"
+	}
 ]
