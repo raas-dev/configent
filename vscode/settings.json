@@ -680,5 +680,6 @@
   "pi.chatCaretStyle": "line",
   "pi.thinkingBarVisibility": "collapsed",
   "pi.showLabels": false,
-  "pi.contextUsageDisplay": "percentage"
+  "pi.contextUsageDisplay": "percentage",
+  "chat.permissions.default": "autopilot"
 }
