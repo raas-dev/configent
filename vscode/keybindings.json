@@ -616,7 +616,7 @@
   },
   {
     "command": "workbench.action.chat.openPlan",
-    "key": "cmd+[Semicolon]"
+    "key": "ctrl+[Semicolon]"
   },
   {
     "command": "composerMode.chat",
