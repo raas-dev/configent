@@ -23,7 +23,10 @@ done
 
 shift $((OPTIND - 1))
 
-if tmux has-session -t "$session_name" 2>/dev/null; then
+if [ -n "$TMUX" ]; then
+  # Already inside tmux → open new window in current session
+  exec tmux new-window -n "$session_name" "$@"
+elif tmux has-session -t "$session_name" 2>/dev/null; then
   if [ "$new_window" -eq 1 ] || [ $# -gt 0 ]; then
     exec tmux new-window -t "$session_name" "$@" \; attach-session -t "$session_name"
   else
