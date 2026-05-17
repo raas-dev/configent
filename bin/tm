@@ -8,16 +8,37 @@ if [ -d "$mise_data/shims" ]; then
 fi
 
 session_name="$(basename "$PWD")"
-resume=0
+gui=0
+
+show_help() {
+  cat <<EOF
+Usage: tm [OPTIONS] [COMMAND]
+
+Create or attach to a tmux session named after the current directory.
+
+Options:
+  -s NAME       Set session name (default: current directory name)
+  -g, --gui     Show tmux status bar
+  -h, --help    Show this help message
+
+If inside tmux, opens a new window.
+If session exists, creates a grouped session.
+Any additional arguments are passed as the command to run.
+EOF
+  exit 0
+}
 
 while [ $# -gt 0 ]; do
   case "$1" in
+  -h | --help)
+    show_help
+    ;;
   -s)
     session_name="$2"
     shift 2
     ;;
-  -r | --resume)
-    resume=1
+  -g | --gui)
+    gui=1
     shift
     ;;
   -s*)
@@ -31,7 +52,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [ -n "$TMUX" ]; then
-  if [ "$resume" -eq 1 ]; then
+  if [ "$gui" -eq 1 ]; then
     tmux set-option status on
   fi
   exec tmux new-window "$@"
@@ -44,7 +65,7 @@ elif tmux has-session -t "$session_name" 2>/dev/null; then
     grouped_name="${session_name}#${i}"
   done
 
-  if [ "$resume" -eq 1 ]; then
+  if [ "$gui" -eq 1 ]; then
     exec tmux new-session \
       -t "$session_name" -s "${grouped_name}" \; \
       set-option status on \; \
@@ -56,7 +77,7 @@ elif tmux has-session -t "$session_name" 2>/dev/null; then
       new-window "$@"
   fi
 else
-  if [ "$resume" -eq 1 ]; then
+  if [ "$gui" -eq 1 ]; then
     exec tmux new-session -s "$session_name" "$@"
   else
     exec tmux new-session -s "$session_name" \; \

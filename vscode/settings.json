@@ -56,7 +56,7 @@
   "agentterminal.profiles": [
     {
       "args": [
-        "--resume"
+        "--gui"
       ],
       "command": "exec tm",
       "id": "tm",
@@ -95,7 +95,8 @@
         "zsh",
         "-l",
         "-c",
-        "tm"
+        "tm",
+        "--gui"
       ],
       "command": "exec ssh",
       "id": "ssh",
