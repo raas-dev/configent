@@ -32,13 +32,9 @@ done
 
 if [ -n "$TMUX" ]; then
   if [ "$resume" -eq 1 ]; then
-    # Already in tmux + resume → show message, exit error
-    tmux display-message "Already inside tmux"
-    exit 1
-  else
-    # Already in tmux → open new window
-    exec tmux new-window -n "$session_name" "$@"
+    tmux set-option status on
   fi
+  exec tmux new-window "$@"
 elif tmux has-session -t "$session_name" 2>/dev/null; then
   # Find unique grouped session name
   i=2
@@ -49,15 +45,13 @@ elif tmux has-session -t "$session_name" 2>/dev/null; then
   done
 
   if [ "$resume" -eq 1 ]; then
-    # Grouped view: shared windows, independent nav, status bar
     exec tmux new-session \
-      -t "$session_name" -s "$grouped_name" \; \
-      set-option -t "$grouped_name" status on
+      -t "$session_name" -s "${grouped_name}" \; \
+      set-option status on
   else
-    # Grouped view + new window, no status bar
     exec tmux new-session \
       -t "$session_name" -s "$grouped_name" \; \
-      set-option -t "$grouped_name" status off \; \
+      set-option status off \; \
       new-window "$@"
   fi
 else

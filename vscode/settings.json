@@ -520,6 +520,24 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.defaultProfile.windows": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "tm": {
+      "path": "tm",
+      "icon": "terminal-tmux"
+    }
+  },
+  "terminal.integrated.profiles.osx": {
+    "tm": {
+      "path": "tm",
+      "icon": "terminal-tmux"
+    }
+  },
+  "terminal.integrated.profiles.windows": {
+    "tm": {
+      "path": "tm",
+      "icon": "terminal-tmux"
+    }
+  },
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableKittyKeyboardProtocol": true,
