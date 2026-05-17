@@ -17,7 +17,7 @@ defutf8 on
 defscrollback 8192
 
 # Enable 256 color term
-term xterm-256color
+term screen-256color
 
 # Enable bold colors as well
 attrcolor b ".I"
