@@ -11,3 +11,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
   end,
 })
+
+-- Kill conceal for text-like files — no hiding backticks/urls
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit", "rst", "org", "asciidoc" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+    vim.opt_local.concealcursor = ""
+  end,
+})
