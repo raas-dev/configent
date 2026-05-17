@@ -92,11 +92,7 @@
       "args": [
         "-t",
         "dev",
-        "zsh",
-        "-l",
-        "-c",
-        "tm",
-        "--gui"
+        "exec zsh -l -c 'tm --gui'"
       ],
       "command": "exec ssh",
       "id": "ssh",
