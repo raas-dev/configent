@@ -628,5 +628,10 @@
   {
     "key": "ctrl+s ctrl+x",
     "command": "workbench.action.terminal.kill"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-workbench.action.terminal.triggerSuggest",
+    "when": "config.terminal.integrated.suggest.enabled && terminalFocus && terminalProcessSupported && !terminalSuggestWidgetVisible"
   }
 ]
