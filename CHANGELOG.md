@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.0](https://github.com/raas-dev/configent/compare/1.222.0...1.223.0) (2026-05-17)
+
+
+### Features
+
+* **bin/tm:** add grouped sessions and --resume flag ([0c20577](https://github.com/raas-dev/configent/commit/0c205775a80dd60ed96a9d16a6fcebae735a9ac0)), closes [session#2](https://github.com/raas-dev/session/issues/2) [session#3](https://github.com/raas-dev/session/issues/3)
+* **bin/tm:** replace --resume with --gui and add help text ([df4ef6a](https://github.com/raas-dev/configent/commit/df4ef6a7bc742d06e487c6c4a88019be44951b70))
+* **bin/tm:** simplify --resume to reuse session directly ([056d425](https://github.com/raas-dev/configent/commit/056d4254bf185a78c12b91e1ec4641aa14944bb7))
+
 ## [1.222.0](https://github.com/raas-dev/configent/compare/1.221.16...1.222.0) (2026-05-16)
 
 
