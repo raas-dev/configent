@@ -517,9 +517,9 @@
   "terminal.integrated.accessibleViewPreserveCursorPosition": true,
   "terminal.integrated.confirmOnKill": "never",
   "terminal.integrated.cursorBlinking": true,
-  "terminal.integrated.defaultProfile.linux": "tm",
-  "terminal.integrated.defaultProfile.osx": "tm",
-  "terminal.integrated.defaultProfile.windows": "tm",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "zsh",
   "terminal.integrated.profiles.linux": {
     "tm": {
       "path": "tm",

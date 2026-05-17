@@ -47,7 +47,8 @@ elif tmux has-session -t "$session_name" 2>/dev/null; then
   if [ "$resume" -eq 1 ]; then
     exec tmux new-session \
       -t "$session_name" -s "${grouped_name}" \; \
-      set-option status on
+      set-option status on \; \
+      new-window "$@"
   else
     exec tmux new-session \
       -t "$session_name" -s "$grouped_name" \; \
