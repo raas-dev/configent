@@ -9,11 +9,13 @@ fi
 
 session_name="$(basename "$PWD")"
 
-while getopts "s:" opt; do
+new_window=0
+while getopts "s:w" opt; do
   case $opt in
   s) session_name="$OPTARG" ;;
+  w) new_window=1 ;;
   *)
-    echo "Usage: $0 [-s session_name]" >&2
+    echo "Usage: $0 [-s session_name] [-w] [command...]" >&2
     exit 1
     ;;
   esac
@@ -22,7 +24,7 @@ done
 shift $((OPTIND - 1))
 
 if tmux has-session -t "$session_name" 2>/dev/null; then
-  if [ $# -gt 0 ]; then
+  if [ "$new_window" -eq 1 ] || [ $# -gt 0 ]; then
     exec tmux new-window -t "$session_name" "$@" \; attach-session -t "$session_name"
   else
     exec tmux attach-session -t "$session_name"
