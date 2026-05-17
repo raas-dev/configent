@@ -510,31 +510,12 @@
   "terminal.enableAppInsights": false,
   "terminal.external.linuxExec": "xterm",
   "terminal.external.osxExec": "Terminal.app",
-  "terminal.integrated.initialHint": false,
   "terminal.integrated.accessibleViewPreserveCursorPosition": true,
   "terminal.integrated.confirmOnKill": "never",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.defaultProfile.windows": "zsh",
-  "terminal.integrated.profiles.linux": {
-    "tm": {
-      "path": "tm",
-      "icon": "terminal-tmux"
-    }
-  },
-  "terminal.integrated.profiles.osx": {
-    "tm": {
-      "path": "tm",
-      "icon": "terminal-tmux"
-    }
-  },
-  "terminal.integrated.profiles.windows": {
-    "tm": {
-      "path": "tm",
-      "icon": "terminal-tmux"
-    }
-  },
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableKittyKeyboardProtocol": true,
@@ -550,11 +531,30 @@
     "pwsh",
     "tmux"
   ],
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.letterSpacing": -1,
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 1000,
+  "terminal.integrated.profiles.linux": {
+    "tm": {
+      "icon": "terminal-tmux",
+      "path": "tm"
+    }
+  },
+  "terminal.integrated.profiles.osx": {
+    "tm": {
+      "icon": "terminal-tmux",
+      "path": "tm"
+    }
+  },
+  "terminal.integrated.profiles.windows": {
+    "tm": {
+      "icon": "terminal-tmux",
+      "path": "tm"
+    }
+  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.shellIntegration.decorationsEnabled": "gutter",

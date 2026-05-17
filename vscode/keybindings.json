@@ -622,16 +622,26 @@
     "key": "ctrl+s ctrl+r"
   },
   {
-    "key": "ctrl+s x",
-    "command": "workbench.action.terminal.kill"
+    "command": "workbench.action.terminal.kill",
+    "key": "ctrl+s x"
   },
   {
-    "key": "ctrl+s ctrl+x",
-    "command": "workbench.action.terminal.kill"
+    "command": "workbench.action.terminal.kill",
+    "key": "ctrl+s ctrl+x"
   },
   {
-    "key": "ctrl+space",
     "command": "-workbench.action.terminal.triggerSuggest",
+    "key": "ctrl+space",
     "when": "config.terminal.integrated.suggest.enabled && terminalFocus && terminalProcessSupported && !terminalSuggestWidgetVisible"
+  },
+  {
+    "command": "-workbench.action.terminal.suggestToggleDetails",
+    "key": "ctrl+space",
+    "when": "simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
+  },
+  {
+    "command": "-workbench.action.terminal.suggestToggleDetailsFocus",
+    "key": "ctrl+alt+space",
+    "when": "!textInputFocus"
   }
 ]
