@@ -55,9 +55,12 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
+      "args": [
+        "--resume"
+      ],
       "command": "exec tm",
       "id": "tm",
-      "label": "tmux"
+      "label": "multiplexer"
     },
     {
       "args": [
