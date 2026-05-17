@@ -580,7 +580,6 @@
   "vsintellicode.python.completionsEnabled": false,
   "window.autoDetectColorScheme": false,
   "window.closeWhenEmpty": true,
-  "window.commandCenter": true,
   "window.confirmBeforeClose": "always",
   "window.confirmSaveUntitledWorkspace": false,
   "window.customTitleBarVisibility": "windowed",
@@ -638,7 +637,6 @@
   },
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "based-ayu",
-  "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
   "workbench.panel.opensMaximized": "always",
   "workbench.preferredDarkColorTheme": "Based Ayu Dark Bordered",
@@ -679,5 +677,11 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "chat.titleBar.signIn.enabled": false,
+  "update.titleBar": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.browser.showInTitleBar": true,
+  "workbench.notifications.showInTitleBar": false,
+  "workbench.browser.enableChatTools": true
 }
