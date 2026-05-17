@@ -129,7 +129,4 @@ if command -v claude >/dev/null; then
   # caveman
   claude plugin marketplace add JuliusBrussee/caveman
   claude plugin install caveman@caveman
-  # context-mode
-  claude plugin marketplace add mksglu/context-mode
-  claude plugin install context-mode@context-mode
 fi
