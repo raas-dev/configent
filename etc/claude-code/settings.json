@@ -20,8 +20,7 @@
       "ToolSearch",
       "WebFetch",
       "WebSearch",
-      "mcp__dynamic-mcp__*",
-      "mcp__plugin_context-mode_context-mode__*"
+      "mcp__dynamic-mcp__*"
     ],
     "ask": [
       "Bash(git *)",
@@ -41,16 +40,6 @@
           }
         ]
       }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/context-mode-cache-heal.mjs"
-          }
-        ]
-      }
     ]
   },
   "statusLine": {
@@ -59,20 +48,13 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "caveman@caveman": true,
-    "context-mode@context-mode": true
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
       "source": {
         "source": "github",
         "repo": "JuliusBrussee/caveman"
-      }
-    },
-    "context-mode": {
-      "source": {
-        "source": "github",
-        "repo": "mksglu/context-mode"
       }
     }
   },
