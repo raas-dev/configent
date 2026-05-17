@@ -57,7 +57,7 @@
     {
       "command": "exec tm",
       "id": "tm",
-      "label": "tmux"
+      "label": "multiplexer"
     },
     {
       "args": [
@@ -286,7 +286,6 @@
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
   "github.copilot.chat.agent.autoFix": true,
-  "github.copilot.chat.agent.currentEditorContext.enabled": false,
   "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
   "github.copilot.chat.claudeAgent.enabled": false,
