@@ -10,8 +10,6 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
-backup_path="$this_path/.backup"
-config_path="$HOME/.config/configent"
 
 : "${NO_SETUP:=""}"
 
@@ -21,127 +19,19 @@ if command -v code >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
     APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
   fi
-
-  # agents dir
-  if [ ! -r "$backup_path/.copilot/agents" ]; then
-    if [ -r "$HOME/.copilot/agents" ]; then
-      mkdir -p "$backup_path/.copilot"
-      cp -RP "$HOME/.copilot/agents" "$backup_path/.copilot/agents"
-    fi
-  fi
-  mkdir -p "$HOME/.copilot/agents"
-  rm -rf "$HOME/.copilot/agents"
-  ln -sfnv "$config_path/copilot/agents" "$HOME/.copilot/agents"
-
-  # hooks dir
-  if [ ! -r "$backup_path/.copilot/hooks" ]; then
-    if [ -r "$HOME/.copilot/hooks" ]; then
-      mkdir -p "$backup_path/.copilot"
-      cp -RP "$HOME/.copilot/hooks" "$backup_path/.copilot/hooks"
-    fi
-  fi
-  mkdir -p "$HOME/.copilot/hooks"
-  rm -rf "$HOME/.copilot/hooks"
-  ln -sfnv "$config_path/copilot/hooks" "$HOME/.copilot/hooks"
-
-  # instructions dir
-  if [ ! -r "$backup_path/.copilot/instructions" ]; then
-    if [ -r "$HOME/.copilot/instructions" ]; then
-      mkdir -p "$backup_path/.copilot"
-      cp -RP "$HOME/.copilot/instructions" "$backup_path/.copilot/instructions"
-    fi
-  fi
-  mkdir -p "$HOME/.copilot/instructions"
-  rm -rf "$HOME/.copilot/instructions"
-  ln -sfnv "$config_path/copilot/instructions" "$HOME/.copilot/instructions"
-
-  # skills dir
-  if [ ! -r "$backup_path/.copilot/skills" ]; then
-    if [ -r "$HOME/.copilot/skills" ]; then
-      mkdir -p "$backup_path/.copilot"
-      cp -RP "$HOME/.copilot/skills" "$backup_path/.copilot/skills"
-    fi
-  fi
-  mkdir -p "$HOME/.copilot/skills"
-  rm -rf "$HOME/.copilot/skills"
-  ln -sfnv "$config_path/copilot/skills" "$HOME/.copilot/skills"
-
-  # User-wide VS Code MCP configuration is in vscode/mcp.json
+  "$bin_path/setup_copilot"
 fi
 
 if command -v cursor >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
     APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
   fi
-
-  # commands dir
-  if [ ! -r "$backup_path/.cursor/commands" ]; then
-    if [ -r "$HOME/.cursor/commands" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -RP "$HOME/.cursor/commands" "$backup_path/.cursor/commands"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor/commands"
-  rm -rf "$HOME/.cursor/commands"
-  ln -sfnv "$config_path/cursor/commands" "$HOME/.cursor/commands"
-
-  # hooks dir
-  if [ ! -r "$backup_path/.cursor/hooks" ]; then
-    if [ -r "$HOME/.cursor/hooks" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -RP "$HOME/.cursor/hooks" "$backup_path/.cursor/hooks"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor/hooks"
-  rm -rf "$HOME/.cursor/hooks"
-  ln -sfnv "$config_path/cursor/hooks" "$HOME/.cursor/hooks"
-
-  # rules dir
-  if [ ! -r "$backup_path/.cursor/rules" ]; then
-    if [ -r "$HOME/.cursor/rules" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -RP "$HOME/.cursor/rules" "$backup_path/.cursor/rules"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor/rules"
-  rm -rf "$HOME/.cursor/rules"
-  ln -sfnv "$config_path/cursor/rules" "$HOME/.cursor/rules"
-
-  # hooks.json
-  if [ ! -r "$backup_path/.cursor/hooks.json" ]; then
-    if [ -r "$HOME/.cursor/hooks.json" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -P "$HOME/.cursor/hooks.json" "$backup_path/.cursor/hooks.json"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/cursor/hooks.json" "$HOME/.cursor/hooks.json"
-
-  # mcp.json
-  if [ ! -r "$backup_path/.cursor/mcp.json" ]; then
-    if [ -r "$HOME/.cursor/mcp.json" ]; then
-      mkdir -p "$backup_path/.cursor"
-      cp -P "$HOME/.cursor/mcp.json" "$backup_path/.cursor/mcp.json"
-    fi
-  fi
-  mkdir -p "$HOME/.cursor"
-  ln -sfnv "$config_path/cursor/mcp.json" "$HOME/.cursor/mcp.json"
+  "$bin_path/setup_cursor"
 fi
 
 if command -v agy >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
     APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
   fi
-
-  # Create Antigravity mcp_config.json
-  if [ ! -r "$backup_path/.gemini/antigravity/mcp_config.json" ]; then
-    if [ -r "$HOME/.gemini/antigravity/mcp_config.json" ]; then
-      mkdir -p "$backup_path/.gemini/antigravity"
-      cp -P "$HOME/.gemini/antigravity/mcp_config.json" \
-        "$backup_path/.gemini/antigravity/mcp_config.json"
-    fi
-  fi
-  mkdir -p "$HOME/.gemini/antigravity"
-  ln -sfnv "$config_path/antigravity/mcp_config.json" \
-    "$HOME/.gemini/antigravity/mcp_config.json"
+  "$bin_path/setup_antigravity"
 fi
