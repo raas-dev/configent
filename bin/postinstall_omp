@@ -14,119 +14,30 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# config.yml
-if [ ! -r "$backup_path/.omp/agent/config.yml" ]; then
-  if [ -r "$HOME/.omp/agent/config.yml" ]; then
-    mkdir -p "$backup_path/.omp/agent"
-    cp -P "$HOME/.omp/agent/config.yml" "$backup_path/.omp/agent/config.yml"
+# files
+for file in config.yml mcp.json keybindings.json; do
+  if [ ! -r "$backup_path/.omp/agent/$file" ]; then
+    if [ -r "$HOME/.omp/agent/$file" ]; then
+      mkdir -p "$backup_path/.omp/agent"
+      cp -P "$HOME/.omp/agent/$file" "$backup_path/.omp/agent/$file"
+    fi
   fi
-fi
-mkdir -p "$HOME/.omp/agent"
-ln -sfnv "$config_path/omp/config.yml" "$HOME/.omp/agent/config.yml"
+  mkdir -p "$HOME/.omp/agent"
+  ln -sfnv "$config_path/omp/$file" "$HOME/.omp/agent/$file"
+done
 
-# mcp.json
-if [ ! -r "$backup_path/.omp/agent/mcp.json" ]; then
-  if [ -r "$HOME/.omp/agent/mcp.json" ]; then
-    mkdir -p "$backup_path/.omp/agent"
-    cp -P "$HOME/.omp/agent/mcp.json" "$backup_path/.omp/agent/mcp.json"
+# dirs
+for dir in agents commands extensions hooks modules skills themes; do
+  if [ ! -r "$backup_path/.omp/agent/$dir" ]; then
+    if [ -r "$HOME/.omp/agent/$dir" ]; then
+      mkdir -p "$backup_path/.omp/agent/$dir"
+      cp -RP "$HOME/.omp/agent/$dir" "$backup_path/.omp/agent/$dir"
+    fi
   fi
-fi
-mkdir -p "$HOME/.omp/agent"
-ln -sfnv "$config_path/omp/mcp.json" "$HOME/.omp/agent/mcp.json"
-
-# keybindings.json
-if [ ! -r "$backup_path/.omp/agent/keybindings.json" ]; then
-  if [ -r "$HOME/.omp/agent/keybindings.json" ]; then
-    mkdir -p "$backup_path/.omp/agent"
-    cp -P "$HOME/.omp/agent/keybindings.json" "$backup_path/.omp/agent/keybindings.json"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent"
-ln -sfnv "$config_path/omp/keybindings.json" "$HOME/.omp/agent/keybindings.json"
-
-# agents dir
-if [ ! -r "$backup_path/.omp/agent/agents" ]; then
-  if [ -r "$HOME/.omp/agent/agents" ]; then
-    mkdir -p "$backup_path/.omp/agent/agents"
-    cp -RP "$HOME/.omp/agent/agents" \
-      "$backup_path/.omp/agent/agents"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/agents"
-rm -rf "$HOME/.omp/agent/agents"
-ln -sfnv "$config_path/omp/agents" "$HOME/.omp/agent/agents"
-
-# commands dir
-if [ ! -r "$backup_path/.omp/agent/commands" ]; then
-  if [ -r "$HOME/.omp/agent/commands" ]; then
-    mkdir -p "$backup_path/.omp/agent/commands"
-    cp -RP "$HOME/.omp/agent/commands" \
-      "$backup_path/.omp/agent/commands"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/commands"
-rm -rf "$HOME/.omp/agent/commands"
-ln -sfnv "$config_path/omp/commands" "$HOME/.omp/agent/commands"
-
-# extensions dir
-if [ ! -r "$backup_path/.omp/agent/extensions" ]; then
-  if [ -r "$HOME/.omp/agent/extensions" ]; then
-    mkdir -p "$backup_path/.omp/agent/extensions"
-    cp -RP "$HOME/.omp/agent/extensions" \
-      "$backup_path/.omp/agent/extensions"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/extensions"
-rm -rf "$HOME/.omp/agent/extensions"
-ln -sfnv "$config_path/omp/extensions" "$HOME/.omp/agent/extensions"
-
-# hooks dir
-if [ ! -r "$backup_path/.omp/agent/hooks" ]; then
-  if [ -r "$HOME/.omp/agent/hooks" ]; then
-    mkdir -p "$backup_path/.omp/agent/hooks"
-    cp -RP "$HOME/.omp/agent/hooks" \
-      "$backup_path/.omp/agent/hooks"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/hooks"
-rm -rf "$HOME/.omp/agent/hooks"
-ln -sfnv "$config_path/omp/hooks" "$HOME/.omp/agent/hooks"
-
-# modules dir
-if [ ! -r "$backup_path/.omp/agent/modules" ]; then
-  if [ -r "$HOME/.omp/agent/modules" ]; then
-    mkdir -p "$backup_path/.omp/agent/modules"
-    cp -RP "$HOME/.omp/agent/modules" \
-      "$backup_path/.omp/agent/modules"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/modules"
-rm -rf "$HOME/.omp/agent/modules"
-ln -sfnv "$config_path/omp/modules" "$HOME/.omp/agent/modules"
-
-# skills dir
-if [ ! -r "$backup_path/.omp/agent/skills" ]; then
-  if [ -r "$HOME/.omp/agent/skills" ]; then
-    mkdir -p "$backup_path/.omp/agent/skills"
-    cp -RP "$HOME/.omp/agent/skills" \
-      "$backup_path/.omp/agent/skills"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/skills"
-rm -rf "$HOME/.omp/agent/skills"
-ln -sfnv "$config_path/omp/skills" "$HOME/.omp/agent/skills"
-
-# themes dir
-if [ ! -r "$backup_path/.omp/agent/themes" ]; then
-  if [ -r "$HOME/.omp/agent/themes" ]; then
-    mkdir -p "$backup_path/.omp/agent/themes"
-    cp -RP "$HOME/.omp/agent/themes" \
-      "$backup_path/.omp/agent/themes"
-  fi
-fi
-mkdir -p "$HOME/.omp/agent/themes"
-rm -rf "$HOME/.omp/agent/themes"
-ln -sfnv "$config_path/omp/themes" "$HOME/.omp/agent/themes"
+  mkdir -p "$HOME/.omp/agent/$dir"
+  rm -rf "$HOME/.omp/agent/$dir"
+  ln -sfnv "$config_path/omp/$dir" "$HOME/.omp/agent/$dir"
+done
 
 ### ~/.agents dir ##############################################################
 

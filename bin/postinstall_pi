@@ -14,86 +14,31 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# settings.json
-if [ ! -r "$backup_path/.pi/agent/settings.json" ]; then
-  if [ -r "$HOME/.pi/agent/settings.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/settings.json" "$backup_path/.pi/agent/settings.json"
+# files
+for file in settings.json keybindings.json caveman.json mcporter.json \
+  status-line.json promptsmith-settings.json pi-vcc-config.json; do
+  if [ ! -r "$backup_path/.pi/agent/$file" ]; then
+    if [ -r "$HOME/.pi/agent/$file" ]; then
+      mkdir -p "$backup_path/.pi/agent"
+      cp -P "$HOME/.pi/agent/$file" "$backup_path/.pi/agent/$file"
+    fi
   fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/settings.json" "$HOME/.pi/agent/settings.json"
+  mkdir -p "$HOME/.pi/agent"
+  ln -sfnv "$config_path/pi/$file" "$HOME/.pi/agent/$file"
+done
 
-# keybindings.json
-if [ ! -r "$backup_path/.pi/agent/keybindings.json" ]; then
-  if [ -r "$HOME/.pi/agent/keybindings.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/keybindings.json" \
-      "$backup_path/.pi/agent/keybindings.json"
+# dirs
+for dir in extensions prompts skills themes profiles; do
+  if [ ! -r "$backup_path/.pi/agent/$dir" ]; then
+    if [ -r "$HOME/.pi/agent/$dir" ]; then
+      mkdir -p "$backup_path/.pi/agent/$dir"
+      cp -RP "$HOME/.pi/agent/$dir" "$backup_path/.pi/agent/$dir"
+    fi
   fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/keybindings.json" "$HOME/.pi/agent/keybindings.json"
-
-# extensions dir
-if [ ! -r "$backup_path/.pi/agent/extensions" ]; then
-  if [ -r "$HOME/.pi/agent/extensions" ]; then
-    mkdir -p "$backup_path/.pi/agent/extensions"
-    cp -RP "$HOME/.pi/agent/extensions" \
-      "$backup_path/.pi/agent/extensions"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent/extensions"
-rm -rf "$HOME/.pi/agent/extensions"
-ln -sfnv "$config_path/pi/extensions" "$HOME/.pi/agent/extensions"
-
-# prompts dir
-if [ ! -r "$backup_path/.pi/agent/prompts" ]; then
-  if [ -r "$HOME/.pi/agent/prompts" ]; then
-    mkdir -p "$backup_path/.pi/agent/prompts"
-    cp -RP "$HOME/.pi/agent/prompts" \
-      "$backup_path/.pi/agent/prompts"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent/prompts"
-rm -rf "$HOME/.pi/agent/prompts"
-ln -sfnv "$config_path/pi/prompts" "$HOME/.pi/agent/prompts"
-
-# skills dir
-if [ ! -r "$backup_path/.pi/agent/skills" ]; then
-  if [ -r "$HOME/.pi/agent/skills" ]; then
-    mkdir -p "$backup_path/.pi/agent/skills"
-    cp -RP "$HOME/.pi/agent/skills" \
-      "$backup_path/.pi/agent/skills"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent/skills"
-rm -rf "$HOME/.pi/agent/skills"
-ln -sfnv "$config_path/pi/skills" "$HOME/.pi/agent/skills"
-
-# themes dir
-if [ ! -r "$backup_path/.pi/agent/themes" ]; then
-  if [ -r "$HOME/.pi/agent/themes" ]; then
-    mkdir -p "$backup_path/.pi/agent/themes"
-    cp -RP "$HOME/.pi/agent/themes" \
-      "$backup_path/.pi/agent/themes"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent/themes"
-rm -rf "$HOME/.pi/agent/themes"
-ln -sfnv "$config_path/pi/themes" "$HOME/.pi/agent/themes"
-
-# profiles dir
-if [ ! -r "$backup_path/.pi/agent" ]; then
-  if [ -r "$HOME/.pi/agent/profiles" ]; then
-    mkdir -p "$backup_path/.pi/agent/profiles"
-    cp -RP "$HOME/.pi/agent/profiles" \
-      "$backup_path/.pi/agent/profiles"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent/profiles"
-rm -rf "$HOME/.pi/agent/profiles"
-ln -sfnv "$config_path/pi/profiles" "$HOME/.pi/agent/profiles"
+  mkdir -p "$HOME/.pi/agent/$dir"
+  rm -rf "$HOME/.pi/agent/$dir"
+  ln -sfnv "$config_path/pi/$dir" "$HOME/.pi/agent/$dir"
+done
 
 ### ~/.agents dir ##############################################################
 
@@ -112,77 +57,12 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 if [ ! -r "$backup_path/.pi/agent/AGENTS.md" ]; then
   if [ -r "$HOME/.pi/agent/AGENTS.md" ]; then
     mkdir -p "$backup_path/.pi/agent"
-    cp -RP "$HOME/.pi/agent/AGENTS.md" "$backup_path/.pi/agent/AGENTS.md"
+    cp -P "$HOME/.pi/agent/AGENTS.md" "$backup_path/.pi/agent/AGENTS.md"
   fi
 fi
 mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
-
-### pi-caveman #################################################################
-
-# caveman.json
-if [ ! -r "$backup_path/.pi/agent/caveman.json" ]; then
-  if [ -r "$HOME/.pi/agent/caveman.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
-  fi
-fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/pi/caveman.json" "$HOME/.pi/agent/caveman.json"
-
-### pi-mcporter ################################################################
-
-# mcporter.json
-if [ ! -r "$backup_path/.pi/agent/mcporter.json" ]; then
-  if [ -r "$HOME/.pi/agent/mcporter.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/mcporter.json" "$backup_path/.pi/agent/mcporter.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/mcporter.json" "$HOME/.pi/agent/mcporter.json"
-
-### pi-mono-status-line ########################################################
-
-# status-line.json
-if [ ! -r "$backup_path/.pi/agent/status-line.json" ]; then
-  if [ -r "$HOME/.pi/agent/status-line.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/status-line.json" \
-      "$backup_path/.pi/agent/status-line.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/status-line.json" "$HOME/.pi/agent/status-line.json"
-
-### pi-promptsmith #############################################################
-
-# promptsmith-settings.json
-if [ ! -r "$backup_path/.pi/agent/promptsmith-settings.json" ]; then
-  if [ -r "$HOME/.pi/agent/promptsmith-settings.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/promptsmith-settings.json" \
-      "$backup_path/.pi/agent/promptsmith-settings.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/promptsmith-settings.json" \
-  "$HOME/.pi/agent/promptsmith-settings.json"
-
-### pi-vcc #####################################################################
-
-# pi-vcc-config.json
-if [ ! -r "$backup_path/.pi/agent/pi-vcc-config.json" ]; then
-  if [ -r "$HOME/.pi/agent/pi-vcc-config.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/pi-vcc-config.json" \
-      "$backup_path/.pi/agent/pi-vcc-config.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/pi-vcc-config.json" \
-  "$HOME/.pi/agent/pi-vcc-config.json"
 
 ### pi-web-access ##############################################################
 

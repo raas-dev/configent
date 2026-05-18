@@ -14,109 +14,42 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# opencode.jsonc
-if [ ! -r "$backup_path/.config/opencode/opencode.jsonc" ]; then
-  if [ -r "$HOME/.config/opencode/opencode.jsonc" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/opencode.jsonc" \
-      "$backup_path/.config/opencode/opencode.jsonc"
+# files
+for file in opencode.jsonc opencode.json tui.json caveman.json dcp.jsonc; do
+  if [ ! -r "$backup_path/.config/opencode/$file" ]; then
+    if [ -r "$HOME/.config/opencode/$file" ]; then
+      mkdir -p "$backup_path/.config/opencode"
+      cp -P "$HOME/.config/opencode/$file" "$backup_path/.config/opencode/$file"
+    fi
   fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+  mkdir -p "$HOME/.config/opencode"
+  ln -sfnv "$config_path/opencode/$file" "$HOME/.config/opencode/$file"
+done
 
-# opencode.json
-if [ ! -r "$backup_path/.config/opencode/opencode.json" ]; then
-  if [ -r "$HOME/.config/opencode/opencode.json" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/opencode.json" \
-      "$backup_path/.config/opencode/opencode.json"
+# dirs
+for dir in agents commands skills plugins profiles; do
+  if [ ! -r "$backup_path/.config/opencode/$dir" ]; then
+    if [ -r "$HOME/.config/opencode/$dir" ]; then
+      mkdir -p "$backup_path/.config/opencode/$dir"
+      cp -RP "$HOME/.config/opencode/$dir" "$backup_path/.config/opencode/$dir"
+    fi
   fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
-
-# tui.json
-if [ ! -r "$backup_path/.config/opencode/tui.json" ]; then
-  if [ -r "$HOME/.config/opencode/tui.json" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/tui.json" \
-      "$backup_path/.config/opencode/tui.json"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/tui.json" "$HOME/.config/opencode/tui.json"
+  mkdir -p "$HOME/.config/opencode/$dir"
+  rm -rf "$HOME/.config/opencode/$dir"
+  ln -sfnv "$config_path/opencode/$dir" "$HOME/.config/opencode/$dir"
+done
 
 # AGENTS.md
 if [ ! -r "$backup_path/.config/opencode/AGENTS.md" ]; then
   if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
     mkdir -p "$backup_path/.config/opencode"
-    cp -RP "$HOME/.config/opencode/AGENTS.md" "$backup_path/.config/opencode/AGENTS.md"
+    cp -P "$HOME/.config/opencode/AGENTS.md" \
+      "$backup_path/.config/opencode/AGENTS.md"
   fi
 fi
 mkdir -p "$HOME/.config/opencode"
 rm -rf "$HOME/.config/opencode/AGENTS.md"
 ln -sfnv "$config_path/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
-
-# agents dir
-if [ ! -r "$backup_path/.config/agents" ]; then
-  if [ -r "$HOME/.config/opencode/agents" ]; then
-    mkdir -p "$backup_path/.config/agents"
-    cp -RP "$HOME/.config/opencode/agents" \
-      "$backup_path/.config/agents"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/agents"
-rm -rf "$HOME/.config/opencode/agents"
-ln -sfnv "$config_path/opencode/agents" "$HOME/.config/opencode/agents"
-
-# commands dir
-if [ ! -r "$backup_path/.config/commands" ]; then
-  if [ -r "$HOME/.config/opencode/commands" ]; then
-    mkdir -p "$backup_path/.config/commands"
-    cp -RP "$HOME/.config/opencode/commands" \
-      "$backup_path/.config/commands"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/commands"
-rm -rf "$HOME/.config/opencode/commands"
-ln -sfnv "$config_path/opencode/commands" "$HOME/.config/opencode/commands"
-
-# skills dir
-if [ ! -r "$backup_path/.config/skills" ]; then
-  if [ -r "$HOME/.config/opencode/skills" ]; then
-    mkdir -p "$backup_path/.config/skills"
-    cp -RP "$HOME/.config/opencode/skills" \
-      "$backup_path/.config/skills"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/skills"
-rm -rf "$HOME/.config/opencode/skills"
-ln -sfnv "$config_path/opencode/skills" "$HOME/.config/opencode/skills"
-
-# plugins dir
-if [ ! -r "$backup_path/.config/plugins" ]; then
-  if [ -r "$HOME/.config/opencode/plugins" ]; then
-    mkdir -p "$backup_path/.config/plugins"
-    cp -RP "$HOME/.config/opencode/plugins" \
-      "$backup_path/.config/plugins"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/plugins"
-rm -rf "$HOME/.config/opencode/plugins"
-ln -sfnv "$config_path/opencode/plugins" "$HOME/.config/opencode/plugins"
-
-# profiles dir
-if [ ! -r "$backup_path/.config/profiles" ]; then
-  if [ -r "$HOME/.config/opencode/profiles" ]; then
-    mkdir -p "$backup_path/.config/profiles"
-    cp -RP "$HOME/.config/opencode/profiles" \
-      "$backup_path/.config/profiles"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode/profiles"
-rm -rf "$HOME/.config/opencode/profiles"
-ln -sfnv "$config_path/opencode/profiles" "$HOME/.config/opencode/profiles"
 
 ### ~/.agents dir ##############################################################
 
@@ -129,30 +62,3 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
-
-### caveman-opencode-plugin ####################################################
-
-# caveman.json
-if [ ! -r "$backup_path/.config/opencode/caveman.json" ]; then
-  if [ -r "$HOME/.config/opencode/caveman.json" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/caveman.json" \
-      "$backup_path/.config/opencode/caveman.json"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/caveman.json" \
-  "$HOME/.config/opencode/caveman.json"
-
-### oopencode-dynamic-context-pruning ##########################################
-
-# dcp.jsonc
-if [ ! -r "$backup_path/.config/opencode/dcp.jsonc" ]; then
-  if [ -r "$HOME/.config/opencode/dcp.jsonc" ]; then
-    mkdir -p "$backup_path/.config/opencode"
-    cp -P "$HOME/.config/opencode/dcp.jsonc" \
-      "$backup_path/.config/opencode/dcp.jsonc"
-  fi
-fi
-mkdir -p "$HOME/.config/opencode"
-ln -sfnv "$config_path/opencode/dcp.jsonc" "$HOME/.config/opencode/dcp.jsonc"
