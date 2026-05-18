@@ -1,0 +1,10 @@
+{
+  "packages": [
+    "npm:pi-until-done",
+    "npm:pi-subagents",
+    "npm:pi-intercom",
+    "npm:pi-mcp-adapter",
+    "npm:pi-prompt-template-model",
+    "npm:pi-lens"
+  ]
+}
