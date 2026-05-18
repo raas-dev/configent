@@ -13,7 +13,7 @@
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.74.1",
+  "lastChangelogVersion": "0.75.0",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-btw",
