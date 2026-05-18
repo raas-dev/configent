@@ -35,3 +35,7 @@ if command -v agy >/dev/null; then
   fi
   "$bin_path/setup_antigravity"
 fi
+
+if command -v zed >/dev/null; then
+  "$bin_path/setup_zed"
+fi
