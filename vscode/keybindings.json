@@ -643,5 +643,20 @@
     "command": "-workbench.action.terminal.suggestToggleDetailsFocus",
     "key": "ctrl+alt+space",
     "when": "!textInputFocus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "workbench.action.terminal.chat.addTerminalSelection",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+k",
+    "command": "workbench.action.terminal.chat.start",
+    "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-workbench.action.terminal.chat.start",
+    "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
   }
 ]
