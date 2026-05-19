@@ -204,7 +204,6 @@
   "editor.hideCursorInOverviewRuler": true,
   "editor.indentSize": "tabSize",
   "editor.inlayHints.enabled": "offUnlessPressed",
-  "editor.largeFileOptimizations": false,
   "editor.letterSpacing": -0.75,
   "editor.lineHeight": 14,
   "editor.lineNumbers": "on",
