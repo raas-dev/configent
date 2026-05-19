@@ -57,7 +57,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'npm:@fission-ai/openspec' = 'latest'
 #'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
-'pipx:graphifyy' = { version = 'latest', extras = "all" }
+'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
 'pipx:skill-seekers' = 'latest'
 
 # github
