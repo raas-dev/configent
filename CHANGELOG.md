@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.1](https://github.com/raas-dev/configent/compare/1.223.0...1.223.1) (2026-05-20)
+
+
+### Fixes
+
+* **bin:** add missing Zed editor setup invocation ([d7ca313](https://github.com/raas-dev/configent/commit/d7ca313216af9b196363162d881492ffbc9a2518))
+* remove antigravity IDE integration ([5af4132](https://github.com/raas-dev/configent/commit/5af4132d8ff61b68719c39943b9d7078735b068a))
+* remove unused gemini-cli config and postinstall script ([1310e58](https://github.com/raas-dev/configent/commit/1310e5879d27d947335c25ed32be06a354099395))
+
 ## [1.223.0](https://github.com/raas-dev/configent/compare/1.222.0...1.223.0) (2026-05-17)
 
 
