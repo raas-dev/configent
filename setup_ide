@@ -29,13 +29,6 @@ if command -v cursor >/dev/null; then
   "$bin_path/setup_cursor"
 fi
 
-if command -v agy >/dev/null; then
-  if [ -z "$NO_SETUP" ]; then
-    APP_NAME="Antigravity" BIN_NAME="agy" "$bin_path/setup_code"
-  fi
-  "$bin_path/setup_antigravity"
-fi
-
 if command -v zed >/dev/null; then
   "$bin_path/setup_zed"
 fi

@@ -623,7 +623,7 @@ show_help() {
     "${GREEN}EXAMPLES:${NC}" \
     "  oc                                  ${DIM}# Interactive mode${NC}" \
     "  oc init omo-zai                     ${DIM}# Initialize with a profile${NC}" \
-    "  oc use omo-antigravity              ${DIM}# Switch to another profile${NC}" \
+    "  oc use slim-minimax                 ${DIM}# Switch to another profile${NC}" \
     "  oc exec computer-use -- pwd         ${DIM}# Run in a temporary profile${NC}" \
     ""
 }

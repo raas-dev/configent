@@ -12,7 +12,6 @@
 #
 # APP_NAME="Code" BIN_NAME="code" ./setup_code
 # APP_NAME="Cursor" BIN_NAME="cursor" ./setup_code
-# APP_NAME="Antigravity" BIN_NAME="agy" ./setup_code
 
 ### constants ##################################################################
 

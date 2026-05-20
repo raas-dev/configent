@@ -101,8 +101,6 @@
   ],
   "agentterminal.rememberSelection": false,
   "agentterminal.windowsMode": "block",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
-  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "application.shellEnvironmentResolutionTimeout": 15,
   "basedpyright.analysis.diagnosticSeverityOverrides": {
     "reportPrivateImportUsage": "none"

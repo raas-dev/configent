@@ -224,10 +224,6 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   path_append "$HOME/Applications/UTM.app/Contents/MacOS"
 fi
 
-### Antigravity ################################################################
-
-path_append "$HOME/.antigravity/antigravity/bin"
-
 ### ai #########################################################################
 
 # dynamic-mcp (https://github.com/asyrjasalo/dynamic-mcp)
