@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.3](https://github.com/raas-dev/configent/compare/1.223.2...1.223.3) (2026-05-21)
+
+
+### Fixes
+
+* **docker:** map x86_64 to amd64 for buildx download ([f8c6d71](https://github.com/raas-dev/configent/commit/f8c6d71c30ee2cb49eee7b3d289d588e37c3c4c1))
+* **docker:** map x86_64 to amd64 for compose and mcp plugins ([9160922](https://github.com/raas-dev/configent/commit/91609222d61e620ce72cb1d197a69087e3f480af))
+* **docker:** remove x86_64 to amd64 remap for compose ([c1ce9fd](https://github.com/raas-dev/configent/commit/c1ce9fd97aa43aab3b841b0b0e12a8c03937febd))
+* **docker:** use /dev/tty for Lima restart prompt ([e6f5f38](https://github.com/raas-dev/configent/commit/e6f5f38498009b5c66b7a21901d3c5375b9cb790))
+* **vscode:** disable Copilot agent editor context ([66f4968](https://github.com/raas-dev/configent/commit/66f496885331d054e5fff5bbdc81e3e867ca73d3))
+* **vscode:** rebind plan to cmd+; and disable inline chat ([67ca791](https://github.com/raas-dev/configent/commit/67ca791ec733451cdc53b539c55709d684d41a75))
+
 ## [1.223.2](https://github.com/raas-dev/configent/compare/1.223.1...1.223.2) (2026-05-21)
 
 
