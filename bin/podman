@@ -48,8 +48,7 @@ install_docker_compose_plugin() {
     mkdir -p "$HOME/.docker/cli-plugins"
     rm -f "$HOME/.docker/cli-plugins/docker-compose"
     curl -fsSL \
-      "https://github.com/docker/compose/releases/download/$compose_version/" \
-      "docker-compose-$os-$arch" \
+      "https://github.com/docker/compose/releases/download/$compose_version/docker-compose-$os-$arch" \
       -o "$HOME/.docker/cli-plugins/docker-compose"
     chmod +x "$HOME/.docker/cli-plugins/docker-compose"
   fi
