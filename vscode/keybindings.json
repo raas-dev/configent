@@ -658,5 +658,10 @@
     "key": "cmd+i",
     "command": "-workbench.action.terminal.chat.start",
     "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "workbench.action.terminal.chat.addTerminalSelection",
+    "when": "terminalFocus"
   }
 ]
