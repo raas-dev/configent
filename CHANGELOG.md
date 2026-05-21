@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.2](https://github.com/raas-dev/configent/compare/1.223.1...1.223.2) (2026-05-21)
+
+
+### Fixes
+
+* **docker:** join split curl URLs into single lines ([e43880f](https://github.com/raas-dev/configent/commit/e43880fbf2a72c1d233a56e350beb78adc0258df))
+* **podman:** join split curl URL into single line ([3e9170f](https://github.com/raas-dev/configent/commit/3e9170f1b93496430151d840cd8c388752de4ca7))
+
 ## [1.223.1](https://github.com/raas-dev/configent/compare/1.223.0...1.223.1) (2026-05-20)
 
 
