@@ -96,19 +96,24 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       return 0
     fi
     _lima_cwd_existed=
+    if [ ! -t 0 ]; then
+      echo "Error: Lima mount at ${lima_cwd} not writable," \
+        "cannot prompt (stdin not a tty)." >&2
+      exit 1
+    fi
     if lima_guest_cwd_exists; then
       _lima_cwd_existed=1
       printf "Mount at %s is read-only. Restart Lima VM '%s' to fix? [y/N] " \
-        "$lima_cwd" "$NAME"
+        "$lima_cwd" "$NAME" >&2
     else
       printf "Mount at %s is not mounted. Restart Lima VM '%s' to fix? [y/N] " \
-        "$lima_cwd" "$NAME"
+        "$lima_cwd" "$NAME" >&2
     fi
     read -r _restart_answer
     case "$_restart_answer" in
     [yY]) ;;
     *)
-      echo "Skipping restart."
+      echo "Skipping restart." >&2
       [ -z "$_lima_cwd_existed" ] && lima_remove_cwd_mount
       return 1
       ;;

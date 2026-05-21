@@ -623,7 +623,7 @@ d() {
   # lowercase the image name to allow pushing it to container registries
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
-  if docker top "$name" &>/dev/null; then
+  if docker top "$name" >/dev/null; then
     docker stop "$name" || docker kill "$name"
   fi
 
@@ -1142,7 +1142,7 @@ nixd() {
     exec_args+=(--env "PORT=$first_port")
   fi
 
-  podman start "$name" &>/dev/null ||
+  podman start "$name" >/dev/null ||
     (podman build --tag "$image" ~/configent/etc/nix &&
       podman run --init -t --detach \
         --name "$name" \
