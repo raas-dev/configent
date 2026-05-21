@@ -83,6 +83,7 @@ install_docker_compose_plugin() {
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
+    [ "$arch" = "x86_64" ] && arch="amd64"
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
@@ -108,6 +109,7 @@ install_docker_mcp_plugin() {
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
+    [ "$arch" = "x86_64" ] && arch="amd64"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker MCP plugin $mcp_gateway_version on $os ($arch)"
     mkdir -p "$HOME/.docker/cli-plugins"
