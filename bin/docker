@@ -60,6 +60,7 @@ install_docker_buildx_plugin() {
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
+    [ "$arch" = "x86_64" ] && arch="amd64"
     [ "$arch" = "aarch64" ] && arch="arm64"
     echo "Downloading Docker Buildx $buildx_version as Docker CLI plugin" \
       "on $os ($arch)"
