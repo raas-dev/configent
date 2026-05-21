@@ -83,7 +83,6 @@ install_docker_compose_plugin() {
     fi
     os="$(uname | tr '[:upper:]' '[:lower:]')"
     arch="$(uname -m)"
-    [ "$arch" = "x86_64" ] && arch="amd64"
     if [ "$os" = "darwin" ] && [ "$arch" = "arm64" ]; then
       arch="aarch64"
     fi
