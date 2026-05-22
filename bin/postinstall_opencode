@@ -39,7 +39,8 @@ for dir in agents commands skills plugins profiles; do
   ln -sfnv "$config_path/opencode/$dir" "$HOME/.config/opencode/$dir"
 done
 
-# AGENTS.md
+### AGENTS.md ##################################################################
+
 if [ ! -r "$backup_path/.config/opencode/AGENTS.md" ]; then
   if [ -r "$HOME/.config/opencode/AGENTS.md" ]; then
     mkdir -p "$backup_path/.config/opencode"
@@ -49,7 +50,7 @@ if [ ! -r "$backup_path/.config/opencode/AGENTS.md" ]; then
 fi
 mkdir -p "$HOME/.config/opencode"
 rm -rf "$HOME/.config/opencode/AGENTS.md"
-ln -sfnv "$config_path/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
 ### ~/.agents dir ##############################################################
 
