@@ -1,6 +1,0 @@
-{
-  "packages": [
-    "npm:@davidorex/pi-project",
-    "npm:@davidorex/pi-workflows"
-  ]
-}
