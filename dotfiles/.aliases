@@ -33,6 +33,23 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Canonical hex dump; some systems have this symlinked
   ! command -v hd >/dev/null && alias hd='hexdump -C'
 
+  # Save image from clipboard to file (usage: co [output.png])
+  co() {
+    local outfile script
+    outfile="${1:-clipboard-$(date -u +%Y-%m-%dT%H%M%S).png}"
+    script=$(cat <<APPLESCRIPT
+set theData to the clipboard as «class PNGf»
+set theFile to open for access (POSIX file "${outfile}") with write permission
+set eof of theFile to 0
+write theData to theFile
+close access theFile
+APPLESCRIPT
+)
+    if ! osascript -e "$script" 2>/dev/null; then
+      echo "No image in clipboard." >&2; return 1
+    fi
+    echo "Saved: ${PWD}/${outfile}"
+  }
 else
   # Similar to macOS `pbcopy` and `pbpaste`
   alias pbcopy='xsel --clipboard --input'
