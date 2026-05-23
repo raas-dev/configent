@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.4](https://github.com/raas-dev/configent/compare/1.223.3...1.223.4) (2026-05-23)
+
+
+### Fixes
+
+* **agents:** merge no-PR/publish rules and add no-credentials policy ([1d69f6e](https://github.com/raas-dev/configent/commit/1d69f6e2f818701b91196a30a54bf1fd104ba1cf))
+* **dotfiles:** ensure co() always appends .png extension ([677a26f](https://github.com/raas-dev/configent/commit/677a26f1a5fc622fd4f71a17707df4ee15482fe5))
+* **omp:** remove AI filler from chat prompt ([54c7d0f](https://github.com/raas-dev/configent/commit/54c7d0fde943b1911c6ae8f6f5597f47e6becee4))
+* **opencode:** link AGENTS.md to shared agents dir ([e604e3a](https://github.com/raas-dev/configent/commit/e604e3ab0a2d1dbc756299a2a1afcc9dcf686d10))
+* **pi:** rename mcporter to mcp adapter ([6ac046b](https://github.com/raas-dev/configent/commit/6ac046b5d7cada043284a9afa43736eb4bf43b6d))
+* **pi:** unbind pasteImage to prevent accidental image pastes ([5e96dc5](https://github.com/raas-dev/configent/commit/5e96dc56451781b872fedd97d7c747080c73d96f))
+
 ## [1.223.3](https://github.com/raas-dev/configent/compare/1.223.2...1.223.3) (2026-05-21)
 
 
