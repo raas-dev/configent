@@ -1,0 +1,11 @@
+{
+  "defaultModel": "glm-5.1",
+  "defaultProvider": "zai",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "zai/glm-5*"
+  ],
+  "packages": [
+    "npm:@alexanderfortin/pi-zai-usage"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "zai-vision": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@z_ai/mcp-server"
+      ],
+      "env": {
+        "Z_AI_API_KEY": "${ZAI_API_KEY}",
+        "Z_AI_MODE": "ZAI"
+      },
+      "lifecycle": "lazy",
+      "directTools": true
+    }
+  },
+  "settings": {
+    "toolPrefix": "none"
+  }
+}
