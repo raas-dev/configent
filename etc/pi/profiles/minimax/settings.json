@@ -4,8 +4,5 @@
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "minimax/*"
-  ],
-  "packages": [
-    "npm:pi-lens"
   ]
 }
