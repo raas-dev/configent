@@ -36,7 +36,8 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # Save image from clipboard to file (usage: co [output.png])
   co() {
     local outfile script
-    outfile="${1:-clipboard-$(date -u +%Y-%m-%dT%H%M%S).png}"
+    outfile="${1:-clipboard-$(date -u +%Y-%m-%dT%H%M%S)}"
+    [[ "${outfile}" != *.png ]] && outfile="${outfile}.png"
     script=$(cat <<APPLESCRIPT
 set theData to the clipboard as «class PNGf»
 set theFile to open for access (POSIX file "${outfile}") with write permission
