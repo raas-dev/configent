@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in settings.json keybindings.json caveman.json mcporter.json \
+for file in settings.json keybindings.json caveman.json mcp.json \
   status-line.json promptsmith-settings.json pi-vcc-config.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
