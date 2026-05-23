@@ -6,7 +6,6 @@
     "zai/glm-5*"
   ],
   "packages": [
-    "npm:@alexanderfortin/pi-zai-usage",
-    "npm:pi-lens"
+    "npm:@alexanderfortin/pi-zai-usage"
   ]
 }
