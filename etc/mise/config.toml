@@ -52,12 +52,13 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'github:vercel-labs/agent-browser' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-cu' = { version = 'latest', postinstall = "agent-cu check-permissions" }
+'npm:@llamaindex/liteparse' = 'latest'
 'npm:@opentabs-dev/cli' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'npm:@fission-ai/openspec' = 'latest'
 #'pipx:browser-use' = { version = 'latest', extras = 'cli', postinstall = "~/.local/configent/bin/postinstall_browser-use" }
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
-'pipx:skill-seekers' = 'latest'
+#'pipx:skill-seekers' = 'latest'
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
