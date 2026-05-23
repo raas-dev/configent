@@ -20,8 +20,8 @@
 
 ## Won't
 
-- No PRs without asking
-- No publishing packages/images without asking
+- No PRs or publish packages/images without asking
+- No credentials in git
 - No excessive comments
 
 ## Answer
