@@ -1,4 +1,5 @@
 {
+  "app.clipboard.pasteImage": [],
   "app.message.followUp": "alt+enter",
   "tui.input.newLine": [
     "shift+enter",
