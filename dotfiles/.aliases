@@ -803,18 +803,23 @@ Examples:
 EOF
     return 1
   fi
-  # shellcheck disable=SC2155  # will not declare separately, value compactness
-  local match="$(mise search --match-type equal "$1" 2>/dev/null |
-    head -1 | awk '{print $1}')"
+  local match
+  if [[ "$1" == *:* ]]; then
+    match="$1"
+  else
+    match="$(mise search --match-type equal "$1" 2>/dev/null |
+      head -1 | awk '{print $1}')"
+  fi
   if [ -n "$match" ]; then
-    local first_arg="$1"
+    local bin_name="${match##*:}"
     shift
     if [ "$1" = "--" ]; then
       mise exec "$match" "$@"
     else
-      mise exec "$match" -- "$first_arg" "$@"
+      mise exec "$match" -- "$bin_name" "$@"
     fi
   else
+    echo "mx: tool '$1' not found in mise registry" >&2
     mise search --match-type contains "$1" 2>/dev/null
     return 1
   fi
