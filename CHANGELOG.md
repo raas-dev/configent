@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.223.5](https://github.com/raas-dev/configent/compare/1.223.4...1.223.5) (2026-05-24)
+
+
+### Fixes
+
+* **dotfiles:** support tool:version syntax in mx wrapper ([6aaefe1](https://github.com/raas-dev/configent/commit/6aaefe14f8c528c07b19f86eab0f719d8555025e))
+
 ## [1.223.4](https://github.com/raas-dev/configent/compare/1.223.3...1.223.4) (2026-05-23)
 
 
