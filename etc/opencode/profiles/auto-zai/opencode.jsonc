@@ -3,12 +3,6 @@
   "model": "zai-coding-plan/glm-5.1",
   "plugin": [
     "opencode-pty",
-    [
-      "@dracondev/opencode-auto-continue",
-      {
-        "autoCompact": false,
-        "autoAnswerQuestions": true
-      }
-    ]
+    "opencode-todo-reminder"
   ]
 }
