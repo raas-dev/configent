@@ -2,7 +2,11 @@
   "enabled": true,
   "maxAutoSubmitsPerTodo": 10,
   "idleDelayMs": 5000,
-  "triggerStatuses": ["pending", "in_progress", "open"],
+  "triggerStatuses": [
+    "pending",
+    "in_progress",
+    "open"
+  ],
   "messageFormat": "Incomplete tasks remain in your todo list.\nContinue working on the next pending task now; do not ask for permission; mark tasks complete when done.\n\nStatus: {completed}/{total} completed, {remaining} remaining.",
   "useToasts": true,
   "syntheticPrompt": false,
