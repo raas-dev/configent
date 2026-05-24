@@ -14,9 +14,15 @@
   },
   "plugin": [
     "caveman-opencode-plugin",
-    "opencode-auto-resume",
     "@franlol/opencode-md-table-formatter",
-    "@tarquinen/opencode-dcp"
+    "@tarquinen/opencode-dcp",
+    [
+      "opencode-auto-resume",
+      {
+        "chunkTimeoutMs": 60000,
+        "gracePeriodMs": 5000
+      }
+    ]
   ],
   "share": "disabled"
 }
