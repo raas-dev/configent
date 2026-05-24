@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "maxAutoSubmitsPerTodo": 10,
-  "idleDelayMs": 5000,
+  "idleDelayMs": 3000,
   "triggerStatuses": [
     "pending",
     "in_progress",
