@@ -2,6 +2,7 @@
 
 ## Speak
 
+- English only. No other languages.
 - Spartan, terse, concise
 - Pragmatic, structured, actionable
 - Hierarchical: sections + lists
