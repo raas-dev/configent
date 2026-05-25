@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.224.0](https://github.com/raas-dev/configent/compare/1.223.5...1.224.0) (2026-05-25)
+
+
+### Features
+
+* **pi:** add opentabs skill ([c3d2f62](https://github.com/raas-dev/configent/commit/c3d2f62acafe32a5614907385b20ec157223875b))
+* **pi:** configure retry limits and provider timeout ([0875569](https://github.com/raas-dev/configent/commit/08755692f51f5de1317f76ec0a188bdc5196c4ed))
+
 ## [1.223.5](https://github.com/raas-dev/configent/compare/1.223.4...1.223.5) (2026-05-24)
 
 
