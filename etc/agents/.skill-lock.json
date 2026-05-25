@@ -46,15 +46,6 @@
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
     },
-    "skill-seekers": {
-      "source": "sickn33/antigravity-awesome-skills@skill-seekers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/sickn33/antigravity-awesome-skills.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "1b404ce03a41915221885ca4c440268a91c5fb4b",
-      "installedAt": "2026-04-12T11:43:29.055Z",
-      "updatedAt": "2026-04-12T11:43:29.055Z"
-    },
     "stop-slop": {
       "source": "hardikpandya/stop-slop@stop-slop",
       "sourceType": "github",
