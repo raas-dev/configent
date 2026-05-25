@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.224.1](https://github.com/raas-dev/configent/compare/1.224.0...1.224.1) (2026-05-25)
+
+
+### Fixes
+
+* **agents:** replace browser skill with cdp skill ([44a590d](https://github.com/raas-dev/configent/commit/44a590d6f8f80ee5e13335cd76bf116f6a944f74))
+
 ## [1.224.0](https://github.com/raas-dev/configent/compare/1.223.5...1.224.0) (2026-05-25)
 
 
