@@ -72,6 +72,13 @@
   "transport": "auto",
   "treeFilterMode": "user-only",
   "retry": {
-    "enabled": true
+    "enabled": true,
+    "maxRetries": 10,
+    "baseDelayMs": 2000,
+    "provider": {
+      "timeoutMs": 3600000,
+      "maxRetries": 0,
+      "maxRetryDelayMs": 60000
+    }
   }
 }
