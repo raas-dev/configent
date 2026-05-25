@@ -115,10 +115,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "skillFolderHash": "3c4ac970c404e8d32c24f2725bfe679e455a925b",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "2c6aa7079cc705a6e0c319fcf23a0fa39968de29",
       "installedAt": "2026-05-15T15:24:03.319Z",
-      "updatedAt": "2026-05-15T15:24:03.319Z"
+      "updatedAt": "2026-05-25T15:26:59.330Z"
     },
     "liteparse": {
       "source": "run-llama/llamaparse-agent-skills",
