@@ -15,6 +15,7 @@ repos:
     hooks:
       - id: check-merge-conflict
       - id: check-added-large-files
+        files: ^(?!.*skills/).*$
       - id: check-case-conflict
       - id: mixed-line-ending
       - id: end-of-file-fixer

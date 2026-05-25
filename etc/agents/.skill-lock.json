@@ -128,14 +128,14 @@
       "installedAt": "2026-05-23T13:22:34.184Z",
       "updatedAt": "2026-05-23T13:22:34.184Z"
     },
-    "browser": {
-      "source": "browser-use/browser-harness",
+    "cdp": {
+      "source": "browser-use/browser-harness-js",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/browser-use/browser-harness.git",
+      "sourceUrl": "https://github.com/browser-use/browser-harness-js.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "6d20866664ea3d9691b27bbf64f42ae097437dc3",
-      "installedAt": "2026-05-25T19:45:35.445Z",
-      "updatedAt": "2026-05-25T19:45:35.445Z"
+      "skillFolderHash": "95b7a22a923714c45d2f7234b2bfa8fa6322c2eb",
+      "installedAt": "2026-05-25T21:12:59.294Z",
+      "updatedAt": "2026-05-25T21:12:59.294Z"
     }
   },
   "dismissed": {
