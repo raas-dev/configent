@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "browser-harness"
+version = "0.1.0"
+description = "The simplest, thinnest, and most powerful harness to control your real browser with your agent."
+requires-python = ">=3.11"
+dependencies = [
+    "cdp-use==1.4.5",
+    "fetch-use==0.4.0",
+    "pillow==12.2.0",
+    "websockets==15.0.1",
+]
+
+[project.scripts]
+browser-harness = "browser_harness.run:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
