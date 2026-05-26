@@ -127,6 +127,15 @@
       "skillFolderHash": "95b7a22a923714c45d2f7234b2bfa8fa6322c2eb",
       "installedAt": "2026-05-25T21:12:59.294Z",
       "updatedAt": "2026-05-25T21:12:59.294Z"
+    },
+    "agent-computer-use": {
+      "source": "kortix-ai/agent-computer-use",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kortix-ai/agent-computer-use.git",
+      "skillPath": "skills/agent-computer-use/SKILL.md",
+      "skillFolderHash": "ce65ca5051886cca22be1546733595a4a65566d5",
+      "installedAt": "2026-05-26T10:05:59.446Z",
+      "updatedAt": "2026-05-26T10:05:59.446Z"
     }
   },
   "dismissed": {
