@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.0](https://github.com/raas-dev/configent/compare/1.224.2...1.225.0) (2026-05-26)
+
+
+### Features
+
+* **pi:** add subagents profile and wire agent alias ([b2e13a9](https://github.com/raas-dev/configent/commit/b2e13a99a6be853155363b7ebba8f538f4ba50d1))
+
+
+### Fixes
+
+* **opencode:** remove unused skill assignments from slim-zai agents ([4d1245c](https://github.com/raas-dev/configent/commit/4d1245c383ed54a87c008715bf171e3f0f10887c))
+* **vscode:** disable suggested implicit chat context ([77d7247](https://github.com/raas-dev/configent/commit/77d72475eec3c0207eb350e9c94317424140bb04))
+
 ## [1.224.2](https://github.com/raas-dev/configent/compare/1.224.1...1.224.2) (2026-05-26)
 
 
