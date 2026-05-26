@@ -145,7 +145,7 @@ CXXFLAGS = "{{exec(command='sh -c \"xcrun --sdk macosx --show-sdk-path 2>/dev/nu
 [settings]
 experimental = true
 cargo.binstall = true
-npm.package_manager = "bun"
+npm.package_manager = "npm"
 pipx.uvx = true
 idiomatic_version_file_enable_tools = ["python", "node"]
 trusted_config_paths = ["~"]
