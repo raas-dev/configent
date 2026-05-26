@@ -46,8 +46,9 @@ color_mode = "truecolor"
 name = "phosphor"
 
 [tmux]
-mouse = "enabled"
-status_bar = "enabled"
+mouse = "auto"
+status_bar = "auto"
+clipboard = "auto"
 
 [updates]
 check_interval_hours = 24
