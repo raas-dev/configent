@@ -1,9 +1,9 @@
 ---
-name: cartography
-description: Repository understanding and hierarchical codemap generation
+name: codemap
+description: Generate comprehensive hierarchical codemaps for UNFAMILIAR repositories. Expensive operation - only use when explicitly asked for codebase documentation or initial repository mapping
 ---
 
-# Cartography Skill
+# Codemap Skill
 
 You help users understand and map repositories by creating hierarchical codemaps.
 
@@ -17,11 +17,15 @@ You help users understand and map repositories by creating hierarchical codemaps
 
 ### Step 1: Check for Existing State
 
-**First, check if `.slim/cartography.json` exists in the repo root.**
+**First, check if `.slim/codemap.json` exists in the repo root.**
 
-If it **exists**: Skip to Step 3 (Detect Changes) - no need to re-initialize.
+If it does not exist, check for legacy state at `.slim/cartography.json`.
 
-If it **doesn't exist**: Continue to Step 2 (Initialize).
+If legacy state exists: move `.slim/cartography.json` to `.slim/codemap.json`, then continue with change detection.
+
+If `.slim/codemap.json` exists: Skip to Step 3 (Detect Changes) - no need to re-initialize.
+
+If neither file exists: Continue to Step 2 (Initialize).
 
 ### Step 2: Initialize (Only if no state exists)
 
@@ -33,27 +37,27 @@ If it **doesn't exist**: Continue to Step 2 (Initialize).
      - Docs: `docs/**`, `*.md` (except root `README.md` if needed), `LICENSE`
      - Build/Deps: `node_modules/**`, `dist/**`, `build/**`, `*.min.js`
    - Respect `.gitignore` automatically
-3. **Run cartographer.py init**:
+3. **Run codemap.mjs init**:
 
 ```bash
-python3 ~/.config/opencode/skills/cartography/scripts/cartographer.py init \
+node ~/.config/opencode/skills/codemap/scripts/codemap.mjs init \
   --root ./ \
   --include "src/**/*.ts" \
   --exclude "**/*.test.ts" --exclude "dist/**" --exclude "node_modules/**"
 ```
 
 This creates:
-- `.slim/cartography.json` - File and folder hashes for change detection
+- `.slim/codemap.json` - File and folder hashes for change detection
 - Empty `codemap.md` files in all relevant subdirectories
 
-4. **Delegate to Explorer agents** - Spawn one explorer per folder to read code and fill in its specific `codemap.md` file.
+4. **Delegate codemap writing to Fixer agents** - Spawn one fixer per folder to read code and create or update its specific `codemap.md` file.
 
 ### Step 3: Detect Changes (If state already exists)
 
-1. **Run cartographer.py changes** to see what changed:
+1. **Run codemap.mjs changes** to see what changed:
 
 ```bash
-python3 ~/.config/opencode/skills/cartography/scripts/cartographer.py changes \
+node ~/.config/opencode/skills/codemap/scripts/codemap.mjs changes \
   --root ./
 ```
 
@@ -63,11 +67,11 @@ python3 ~/.config/opencode/skills/cartography/scripts/cartographer.py changes \
    - Modified files
    - Affected folders
 
-3. **Only update affected codemaps** - Spawn one explorer per affected folder to update its `codemap.md`.
+3. **Only update affected codemaps** - Spawn one fixer per affected folder to update its `codemap.md`.
 4. **Run update** to save new state:
 
 ```bash
-python3 ~/.config/opencode/skills/cartography/scripts/cartographer.py update \
+node ~/.config/opencode/skills/codemap/scripts/codemap.mjs update \
   --root ./
 ```
 
@@ -100,12 +104,11 @@ Before working on any task, read `codemap.md` to understand:
 For deep work on a specific folder, also read that folder's `codemap.md`.
 ```
 
-This is idempotent — repeated cartography runs will detect the existing section and skip. No duplication.
-
+This is idempotent — repeated codemap runs will detect the existing section and skip. No duplication.
 
 ## Codemap Content
 
-Explorers are granted write permissions for `codemap.md` files during this workflow. Use precise technical terminology to document the implementation:
+Fixers are responsible for writing `codemap.md` files during this workflow. Use precise technical terminology to document the implementation:
 
 - **Responsibility** - Define the specific role of this directory using standard software engineering terms (e.g., "Service Layer", "Data Access Object", "Middleware").
 - **Design Patterns** - Identify and name specific patterns used (e.g., "Observer", "Singleton", "Factory", "Strategy"). Detail the abstractions and interfaces.
@@ -144,7 +147,7 @@ Example **Root Codemap (Atlas)**:
 # Repository Atlas: oh-my-opencode-slim
 
 ## Project Responsibility
-A high-performance, low-latency agent orchestration plugin for OpenCode, focusing on specialized sub-agent delegation and background task management.
+A high-performance, low-latency agent orchestration plugin for OpenCode, focusing on specialized sub-agent delegation and multiplexer-assisted child sessions.
 
 ## System Entry Points
 - `src/index.ts`: Plugin initialization and OpenCode integration.
@@ -155,6 +158,6 @@ A high-performance, low-latency agent orchestration plugin for OpenCode, focusin
 | Directory | Responsibility Summary | Detailed Map |
 |-----------|------------------------|--------------|
 | `src/agents/` | Defines agent personalities (Orchestrator, Explorer) and manages model routing. | [View Map](src/agents/codemap.md) |
-| `src/features/` | Core logic for tmux integration, background task spawning, and session state. | [View Map](src/features/codemap.md) |
+| `src/features/` | Core logic for tmux integration and session state. | [View Map](src/features/codemap.md) |
 | `src/config/` | Implements the configuration loading pipeline and environment variable injection. | [View Map](src/config/codemap.md) |
 ```

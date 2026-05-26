@@ -28,19 +28,15 @@
         "skills": [
           "*"
         ],
-        "mcps": [
-          ""
-        ]
+        "mcps": []
       },
       "oracle": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "high",
         "skills": [
-          "*"
+          "simplify"
         ],
-        "mcps": [
-          ""
-        ]
+        "mcps": []
       },
       "librarian": {
         "model": "zai-coding-plan/glm-5.1",
@@ -58,9 +54,7 @@
         "skills": [
           "*"
         ],
-        "mcps": [
-          ""
-        ]
+        "mcps": []
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.1",
@@ -68,19 +62,13 @@
         "skills": [
           "*"
         ],
-        "mcps": [
-          ""
-        ]
+        "mcps": []
       },
       "council": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "high",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          ""
-        ]
+        "skills": [],
+        "mcps": []
       }
     }
   }

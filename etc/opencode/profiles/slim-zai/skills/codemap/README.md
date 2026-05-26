@@ -1,31 +1,33 @@
-# Cartography Skill
+# Codemap Skill
 
 Repository understanding and hierarchical codemap generation.
 
 ## Overview
 
-Cartography helps orchestrators map and understand codebases by:
+Codemap helps orchestrators map and understand codebases by:
 
 1. Selecting relevant code/config files using LLM judgment
-2. Creating `.slim/cartography.json` for change tracking
-3. Generating empty `codemap.md` templates for explorers to fill in
+2. Creating `.slim/codemap.json` for change tracking
+3. Generating empty `codemap.md` templates for fixers to fill in
+
+Legacy `.slim/cartography.json` state is migrated to `.slim/codemap.json` automatically.
 
 ## Commands
 
 ```bash
 # Initialize mapping
-python3 cartographer.py init --root /repo --include "src/**/*.ts" --exclude "node_modules/**"
+node codemap.mjs init --root /repo --include "src/**/*.ts" --exclude "node_modules/**"
 
 # Check what changed
-python3 cartographer.py changes --root /repo
+node codemap.mjs changes --root /repo
 
 # Update hashes
-python3 cartographer.py update --root /repo
+node codemap.mjs update --root /repo
 ```
 
 ## Outputs
 
-### .slim/cartography.json
+### .slim/codemap.json
 
 ```json
 {
@@ -46,7 +48,7 @@ python3 cartographer.py update --root /repo
 
 ### codemap.md (per folder)
 
-Empty templates created in each folder for explorers to fill with:
+Empty templates created in each folder for fixers to fill with:
 - Responsibility
 - Design patterns
 - Data/control flow

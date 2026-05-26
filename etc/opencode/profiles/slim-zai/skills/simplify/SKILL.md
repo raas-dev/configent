@@ -1,51 +1,123 @@
 ---
 name: simplify
-description: Simplify and refine recently modified code for clarity and consistency. Use after writing code to improve readability without changing functionality.
+description: Simplifies code for clarity without changing behavior. Use for readability, maintainability, and complexity reduction after behavior is understood.
 ---
 
-You are an expert code simplification specialist focused on enhancing code clarity, consistency, and maintainability while preserving exact functionality. Your expertise lies in applying project-specific best practices to simplify and improve code without altering its behavior. You prioritize readable, explicit code over overly compact solutions. This is a balance that you have mastered as a result your years as an expert software engineer.
+# Code Simplification
 
-You will analyze recently modified code and apply refinements that:
+## Overview
 
-1. **Preserve Functionality**: Never change what the code does - only how it does it. All original features, outputs, and behaviors must remain intact.
+Simplify code by reducing complexity while preserving exact behavior. The goal is not fewer lines — it's code that is easier to read, understand, modify, and debug. Every simplification must pass a simple test: "Would a new team member understand this faster than the original?"
 
-2. **Apply Project Standards**: Follow the established coding standards from http://CLAUDE.md including:
+## When to Use
 
-- Use ES modules with proper import sorting and extensions
-- Prefer `function` keyword over arrow functions
-- Use explicit return type annotations for top-level functions
-- Follow proper React component patterns with explicit Props types
-- Use proper error handling patterns (avoid try/catch when possible)
-- Maintain consistent naming conventions
+- After a feature is working and tests pass, but the implementation feels heavier than it needs to be
+- During code review when readability or complexity issues are flagged
+- When you encounter deeply nested logic, long functions, or unclear names
+- When refactoring code written under time pressure
+- When consolidating related logic scattered across files
+- After merging changes that introduced duplication or inconsistency
 
-3. **Enhance Clarity**: Simplify code structure by:
+**When NOT to use:**
 
-- Reducing unnecessary complexity and nesting
-- Eliminating redundant code and abstractions
-- Improving readability through clear variable and function names
-- Consolidating related logic
-- Removing unnecessary comments that describe obvious code
-- IMPORTANT: Avoid nested ternary operators - prefer switch statements or if/else chains for multiple conditions
-- Choose clarity over brevity - explicit code is often better than overly compact code
+- Code is already clean and readable — don't simplify for the sake of it
+- You don't understand what the code does yet — comprehend before you simplify
+- The code is performance-critical and the "simpler" version would be measurably slower
+- You're about to rewrite the module entirely — simplifying throwaway code wastes effort
 
-4. **Maintain Balance**: Avoid over-simplification that could:
+## The Five Principles
 
-- Reduce code clarity or maintainability
-- Create overly clever solutions that are hard to understand
-- Combine too many concerns into single functions or components
-- Remove helpful abstractions that improve code organization
-- Prioritize "fewer lines" over readability (e.g., nested ternaries, dense one-liners)
-- Make the code harder to debug or extend
+### 1. Preserve Behavior Exactly
 
-5. **Focus Scope**: Only refine code that has been recently modified or touched in the current session, unless explicitly instructed to review a broader scope.
+Every simplification must produce identical runtime behavior:
 
-Your refinement process:
+- Same outputs for same inputs
+- Same error handling and edge cases
+- Same side effects and state mutations
+- Same performance characteristics (or better)
 
-1. Identify the recently modified code sections
-2. Analyze for opportunities to improve elegance and consistency
-3. Apply project-specific best practices and coding standards
-4. Ensure all functionality remains unchanged
-5. Verify the refined code is simpler and more maintainable
-6. Document only significant changes that affect understanding
+If you cannot verify behavior is preserved (no tests, unclear spec), stop and ask.
 
-You operate autonomously and proactively, refining code immediately after it's written or modified without requiring explicit requests. Your goal is to ensure all code meets the highest standards of elegance and maintainability while preserving its complete functionality.
+### 2. Follow Project Conventions
+
+Match the existing codebase style:
+
+- Import patterns, naming conventions, file organization
+- Error handling patterns and logging style
+- Testing patterns and assertion style
+- Comment style and documentation level
+
+Don't introduce a "better" pattern that clashes with the rest of the codebase.
+
+### 3. Prefer Clarity Over Cleverness
+
+Explicit code is better than compact code when the compact version requires a mental pause to parse.
+
+- Replace nested ternaries with readable control flow
+- Replace dense inline transforms with named intermediate steps when they clarify intent
+- Keep helpful names even if they cost a few extra lines
+
+### 4. Maintain Balance
+
+Watch for over-simplification:
+
+- Don't inline away names that carry meaning
+- Don't merge unrelated logic into one larger function
+- Don't remove abstractions that serve testability or extensibility
+- Don't optimize for line count over comprehension
+
+### 5. Scope to What Changed
+
+Default to simplifying recently modified code. Avoid unrelated drive-by refactors unless explicitly asked.
+
+## Process
+
+### Step 1: Understand Before Touching
+
+- Read the code carefully. Trace the logic path.
+- Understand what it does, why it does it, and what depends on it.
+- Check for tests that verify the behavior you're about to simplify.
+- If the code is unclear, add clarifying comments or names first — don't restructure yet.
+
+### Step 2: Look for Simplification Opportunities
+
+Common patterns that benefit from simplification:
+
+- **Unnecessary nesting** — flatten guard clauses, early returns
+- **Redundant variables** — eliminate intermediaries that add no clarity
+- **Dead code** — unreachable branches, unused imports, commented-out code
+- **Over-abstracted** — single-use functions, unnecessary indirection
+- **Complex conditions** — extract into named booleans or guard functions
+- **Inconsistent patterns** — align with nearby code conventions
+
+### Step 3: Apply Changes Incrementally
+
+Make one simplification at a time. After each:
+
+- Re-read the result. Does it still express the same intent?
+- Check that tests still pass (if available).
+- Ensure the diff is clean and reviewable.
+
+### Step 4: Verify the Result
+
+After simplifying, confirm:
+
+- The code is genuinely easier to understand
+- The diff is clean and reviewable
+- Project conventions still match
+- No behavior, error handling, or side effects changed
+
+## Guidance for This Repository
+
+- Prefer straightforward TypeScript over clever compression
+- Preserve existing runtime behavior, tests, and hooks
+- Favor explicit names and smaller focused helpers when they improve readability
+- Keep refactors tightly scoped to the task or review feedback
+
+## Verification Checklist
+
+- [ ] Existing tests pass without modification
+- [ ] Build/typecheck/lint still pass
+- [ ] No unrelated files were refactored
+- [ ] No error handling was weakened or removed
+- [ ] The result is simpler to review than the original
