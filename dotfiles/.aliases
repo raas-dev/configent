@@ -574,9 +574,6 @@ alias mcpjam='bunx @mcpjam/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='bunx npm-check-updates'
 
-# Shorthand for pnpm
-alias pn='bunx pnpm'
-
 # Project generator
 alias projen='bunx projen'
 
@@ -1064,6 +1061,14 @@ bunclear() {
   pkgs=$(bun pm ls -g 2>/dev/null | awk 'NR>1 {print $2}' | sed 's/@[^@]*$//')
   [ -z "$pkgs" ] && return 0
   printf '%s\n' "$pkgs" | xargs bun remove -g
+}
+
+pnpmclear() {
+  local pkgs
+  pkgs=$(pnpm list -g --depth=0 --parseable 2>/dev/null |
+    awk -F/node_modules/ 'NF>1 {print $2}')
+  [ -z "$pkgs" ] && return 0
+  printf '%s\n' "$pkgs" | xargs pnpm remove -g
 }
 
 # Gem remove all
