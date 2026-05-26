@@ -138,11 +138,6 @@ uv = 'latest'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
-[env]
-# npm:@openchamber/web: node-gyp (better-sqlite3) on macOS needs SDK C++ headers
-# xcrun only exists on macOS; on Linux this expands to empty string (harmless)
-CXXFLAGS = "{{exec(command='sh -c \"xcrun --sdk macosx --show-sdk-path 2>/dev/null | sed s,.*,-I\\&/usr/include/c++/v1,\"')}}"
-
 [settings]
 experimental = true
 cargo.binstall = true
