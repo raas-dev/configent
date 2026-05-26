@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.224.2](https://github.com/raas-dev/configent/compare/1.224.1...1.224.2) (2026-05-26)
+
+
+### Fixes
+
+* **agents:** remove agent-browser skill ([8b7574e](https://github.com/raas-dev/configent/commit/8b7574e1ca1b4c9aaa1ae37d43ef3a46ef07bc2e))
+* **computer-use:** replace opentabs with cdp skill ([b52a45b](https://github.com/raas-dev/configent/commit/b52a45b8ab1e929a2ac86ffefcd3ce6966a38563))
+
 ## [1.224.1](https://github.com/raas-dev/configent/compare/1.224.0...1.224.1) (2026-05-25)
 
 
