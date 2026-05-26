@@ -1,0 +1,27 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "zai-coding-plan/glm-5-turbo",
+  "default_agent": "computer-use",
+  "agent": {
+    "build": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
+    }
+  },
+  "permission": {
+    "skill": {
+      "agent-computer-use": "deny"
+    }
+  },
+  "mcp": {
+    "open-computer-use": {
+      "command": [
+        "open-computer-use",
+        "mcp"
+      ],
+      "type": "local"
+    }
+  }
+}
