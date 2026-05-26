@@ -77,11 +77,11 @@
         "-il",
         "-c",
         "agent",
-        "computer-use"
+        "subagents"
       ],
       "command": "exec zsh",
-      "id": "computer-use",
-      "label": "Computer Use"
+      "id": "agent",
+      "label": "Subagents"
     },
     {
       "command": "exec lazyssh",

@@ -617,12 +617,12 @@ ai() {
 
 agent() {
   if [ -n "$1" ]; then
-    local agent="$1"
+    local profile="$1"
     shift
   else
-    local agent="computer-use"
+    local profile="subagents"
   fi
-  oc exec "$agent" -- opencode --agent "$agent" "$@"
+  pic exec "$profile" -- pi --no-session "$*"
 }
 
 ### Docker ####################################################################
