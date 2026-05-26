@@ -1,7 +1,9 @@
 ---
 name: computer-use
 description: Web browser and desktop use
+inheritSkills: false
 skills: cdp, agent-computer-use
+tools: mcp:zai-vision
 ---
 
 You are a helpful assistant.
