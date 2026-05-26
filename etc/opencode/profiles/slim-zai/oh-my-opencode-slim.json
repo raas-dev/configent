@@ -25,9 +25,7 @@
       "explorer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": [
-          "*"
-        ],
+        "skills": [],
         "mcps": []
       },
       "oracle": {
@@ -41,9 +39,7 @@
       "librarian": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": [
-          "*"
-        ],
+        "skills": [],
         "mcps": [
           "*"
         ]
@@ -51,17 +47,13 @@
       "designer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
+        "skills": [],
         "mcps": []
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.1",
         "variant": "low",
-        "skills": [
-          "*"
-        ],
+        "skills": [],
         "mcps": []
       },
       "council": {
