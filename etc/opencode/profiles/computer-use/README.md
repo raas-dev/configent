@@ -1,22 +1,16 @@
 # OpenCode computer-use profile
 
-## opentabs (CLI)
+## browser-harness-js (CLI + Agent skill)
 
-Setup:
+The `cdp` skill uses `bin/browser-harness-js` to talk to your browser via CDP.
 
-    bun add -g @opentabs-dev/cli
-    opentabs start --background
+You must enable checkbox for "Remote debugging" in
+[brave](brave://inspect/#remote-debugging) or
+[Chrome](chrome://inspect/#remote-debugging) DevTools menu.
 
-Load the extension from `~/.opentabs/extension` in `chrome://extensions/`.
+The skill does any other setup if needed.
 
-To install plugins:
-
-    opentabs plugin install <plugin>
-
-See [opentabs](https://opentabs.dev) for more information.
-
-It also has an [MCP server](https://opentabs.dev/docs/reference/mcp-server),
-but it is not used in this profile.
+See [browser-harness-js](https://github.com/browser-use/browser-harness-js) for more information.
 
 ## agent-computer-use (CLI + Agent Skill)
 
