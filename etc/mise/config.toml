@@ -49,7 +49,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'github:always-further/nono' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
-'github:vercel-labs/agent-browser' = 'latest'
+#'github:vercel-labs/agent-browser' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-cu' = { version = 'latest', postinstall = "agent-cu check-permissions" }
 'npm:@llamaindex/liteparse' = 'latest'

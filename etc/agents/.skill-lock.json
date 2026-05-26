@@ -10,15 +10,6 @@
       "installedAt": "2026-04-12T09:17:21.513Z",
       "updatedAt": "2026-04-12T11:52:32.234Z"
     },
-    "agent-browser": {
-      "source": "vercel-labs/agent-browser@agent-browser",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "e00321fc70745f19bb634877ec0f02f21a3e0231",
-      "installedAt": "2026-04-12T11:43:29.055Z",
-      "updatedAt": "2026-04-12T11:43:29.055Z"
-    },
     "context7": {
       "source": "upstash/context7@context7-cli",
       "sourceType": "github",
