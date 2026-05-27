@@ -20,8 +20,6 @@ esac
 
 ### configs ####################################################################
 
-mkdir -p "$aoe_path"
-
 # config.toml
 if [ ! -r "$backup_path/.agent-of-empires/config.toml" ]; then
   if [ -r "$aoe_path/config.toml" ] &&
@@ -32,6 +30,7 @@ if [ ! -r "$backup_path/.agent-of-empires/config.toml" ]; then
   fi
 fi
 
+mkdir -p "$aoe_path"
 ln -sfnv "$config_path/agent-of-empires/config.toml" \
   "$aoe_path/config.toml"
 
@@ -44,5 +43,6 @@ if [ ! -r "$backup_path/.agent-of-empires/profiles" ]; then
   fi
 fi
 
-ln -sfnv "$config_path/agent-of-empires/profiles" \
-  "$aoe_path/profiles"
+mkdir -p "$aoe_path"
+rm -rf "$aoe_path/profiles"
+ln -sfnv "$config_path/agent-of-empires/profiles" "$aoe_path/profiles"
