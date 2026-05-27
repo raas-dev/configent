@@ -101,11 +101,6 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-### local bin ##################################################################
-
-path_prepend "$HOME/.local/bin"
-path_prepend "$HOME/.local/configent/bin"
-
 ### mise #######################################################################
 
 path_prepend "$HOME/.local/share/mise/shims"
@@ -223,6 +218,11 @@ path_append "$HOME/.krew/bin"
 if [ "$(uname -s)" = 'Darwin' ]; then
   path_append "$HOME/Applications/UTM.app/Contents/MacOS"
 fi
+
+### local bin ##################################################################
+
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.local/configent/bin"
 
 ### ai #########################################################################
 
