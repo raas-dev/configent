@@ -12,31 +12,37 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 backup_path="$this_path/../.backup"
 config_path="$HOME/.config/configent"
 
+# aoe uses ~/.config/agent-of-empires on Linux, ~/.agent-of-empires on macOS
+case "$(uname -s)" in
+Linux*) aoe_path="$HOME/.config/agent-of-empires" ;;
+*) aoe_path="$HOME/.agent-of-empires" ;;
+esac
+
 ### configs ####################################################################
 
-mkdir -p "$HOME/.agent-of-empires"
+mkdir -p "$aoe_path"
 
 # config.toml
 if [ ! -r "$backup_path/.agent-of-empires/config.toml" ]; then
-  if [ -r "$HOME/.agent-of-empires/config.toml" ] &&
-    [ ! -L "$HOME/.agent-of-empires/config.toml" ]; then
+  if [ -r "$aoe_path/config.toml" ] &&
+    [ ! -L "$aoe_path/config.toml" ]; then
     mkdir -p "$backup_path/.agent-of-empires"
-    cp -aP "$HOME/.agent-of-empires/config.toml" \
+    cp -aP "$aoe_path/config.toml" \
       "$backup_path/.agent-of-empires/config.toml"
   fi
 fi
 
 ln -sfnv "$config_path/agent-of-empires/config.toml" \
-  "$HOME/.agent-of-empires/config.toml"
+  "$aoe_path/config.toml"
 
 # profiles dir
 if [ ! -r "$backup_path/.agent-of-empires/profiles" ]; then
-  if [ -r "$HOME/.agent-of-empires/profiles" ]; then
+  if [ -r "$aoe_path/profiles" ]; then
     mkdir -p "$backup_path/.agent-of-empires"
-    cp -aP "$HOME/.agent-of-empires/profiles" \
+    cp -aP "$aoe_path/profiles" \
       "$backup_path/.agent-of-empires/profiles"
   fi
 fi
 
 ln -sfnv "$config_path/agent-of-empires/profiles" \
-  "$HOME/.agent-of-empires/profiles"
+  "$aoe_path/profiles"
