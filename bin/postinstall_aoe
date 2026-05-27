@@ -25,21 +25,18 @@ if [ ! -r "$backup_path/.agent-of-empires/config.toml" ]; then
   if [ -r "$aoe_path/config.toml" ] &&
     [ ! -L "$aoe_path/config.toml" ]; then
     mkdir -p "$backup_path/.agent-of-empires"
-    cp -aP "$aoe_path/config.toml" \
-      "$backup_path/.agent-of-empires/config.toml"
+    cp -aP "$aoe_path/config.toml" "$backup_path/.agent-of-empires/config.toml"
   fi
 fi
 
 mkdir -p "$aoe_path"
-ln -sfnv "$config_path/agent-of-empires/config.toml" \
-  "$aoe_path/config.toml"
+ln -sfnv "$config_path/agent-of-empires/config.toml" "$aoe_path/config.toml"
 
 # profiles dir
 if [ ! -r "$backup_path/.agent-of-empires/profiles" ]; then
   if [ -r "$aoe_path/profiles" ]; then
     mkdir -p "$backup_path/.agent-of-empires"
-    cp -aP "$aoe_path/profiles" \
-      "$backup_path/.agent-of-empires/profiles"
+    cp -aP "$aoe_path/profiles" "$backup_path/.agent-of-empires/profiles"
   fi
 fi
 
