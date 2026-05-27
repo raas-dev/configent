@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.2](https://github.com/raas-dev/configent/compare/1.225.1...1.225.2) (2026-05-27)
+
+
+### Fixes
+
+* **bin:** remove browser-harness-js symlink ([5605e1a](https://github.com/raas-dev/configent/commit/5605e1a6708654faebe0bf1989deda5c2bd32653))
+
 ## [1.225.1](https://github.com/raas-dev/configent/compare/1.225.0...1.225.1) (2026-05-27)
 
 
