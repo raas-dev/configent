@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.1](https://github.com/raas-dev/configent/compare/1.225.0...1.225.1) (2026-05-27)
+
+
+### Fixes
+
+* **bin:** add libsixel for sixel image previews ([b92926d](https://github.com/raas-dev/configent/commit/b92926d338a4edf647a46becfb743d554a66f539))
+* **bin:** handle existing profiles dir in aoe postinstall ([3072579](https://github.com/raas-dev/configent/commit/3072579ebf66a14d168538b4af51ada84410da8f))
+* **bin:** rejoin wrapped lines in aoe postinstall ([5392cc4](https://github.com/raas-dev/configent/commit/5392cc46e2f5e2a436c1029b2760e6d3503e89d9))
+* **bin:** remove redundant mise shim PATH setup from tm ([24931f5](https://github.com/raas-dev/configent/commit/24931f5d2adcd7123ed862ae77b768c23a2dc7c9))
+* **bin:** resolve aoe config path for Linux ([d2fdc3b](https://github.com/raas-dev/configent/commit/d2fdc3bc03d625c40771a6e5990ae7fff657c98e))
+* **dotfiles:** move local bin paths after platform-specific paths ([6b5d44d](https://github.com/raas-dev/configent/commit/6b5d44dfb5579165a40e609b10747135d3ec0922))
+* **dotfiles:** prepend mise shims instead of appending ([968bc21](https://github.com/raas-dev/configent/commit/968bc2142a3af098e0626b3037294206c72b75c4))
+* **mise:** add pnpm as mise-managed tool, remove yarn global install ([478e75e](https://github.com/raas-dev/configent/commit/478e75efc88b3955f6e548fe712a8f6d7fb80a79))
+* **tmux:** increase escape-time to prevent rgb prints over ssh ([c21f6b6](https://github.com/raas-dev/configent/commit/c21f6b679bf21636cdf7f296e8f71a9ea640c892))
+
 ## [1.225.0](https://github.com/raas-dev/configent/compare/1.224.2...1.225.0) (2026-05-26)
 
 
