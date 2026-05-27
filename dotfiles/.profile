@@ -108,7 +108,7 @@ path_prepend "$HOME/.local/configent/bin"
 
 ### mise #######################################################################
 
-path_append "$HOME/.local/share/mise/shims"
+path_prepend "$HOME/.local/share/mise/shims"
 
 ### bun ########################################################################
 
