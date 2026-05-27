@@ -61,6 +61,9 @@ $SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev musl-dev \
 $SUDO apk add coreutils curl bind-tools expect file findutils git git-lfs \
   htop less procps zip unzip util-linux wget whois
 
+# Sixel image previews
+$SUDO apk add libsixel
+
 # Bash
 $SUDO apk add bash
 

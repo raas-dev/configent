@@ -67,6 +67,9 @@ $SUDO apt-get install -y coreutils dnsutils expect file findutils git git-lfs \
   htop iputils-ping lsb-release lsof procps traceroute unzip wget \
   whois zip
 
+# Sixel image previews
+$SUDO apt-get install -y libsixel-bin
+
 # Bash
 $SUDO apt-get install -y bash
 

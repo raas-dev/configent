@@ -54,6 +54,9 @@ $SUDO pacman --noconfirm --needed -S coreutils bind expect file findutils git \
   git-lfs htop less lsb-release lsof procps traceroute unzip wget which whois \
   zip
 
+# Sixel image previews
+$SUDO pacman --noconfirm --needed -S libsixel
+
 # Bash
 $SUDO pacman --noconfirm --needed -S bash
 

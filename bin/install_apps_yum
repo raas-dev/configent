@@ -62,6 +62,9 @@ $SUDO dnf install -y bzip2-devel libffi-devel libyaml-devel libxcrypt-compat \
 $SUDO dnf install -y bind-utils coreutils expect file findutils git git-lfs \
   htop lsof procps traceroute unzip wget whois zip
 
+# Sixel image previews (img2sixel)
+$SUDO dnf install -y libsixel-utils
+
 # Bash
 $SUDO dnf install -y bash
 
