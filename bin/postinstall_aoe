@@ -14,13 +14,29 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
+mkdir -p "$HOME/.agent-of-empires"
+
 # config.toml
 if [ ! -r "$backup_path/.agent-of-empires/config.toml" ]; then
-  if [ -r "$HOME/.agent-of-empires/config.toml" ]; then
+  if [ -r "$HOME/.agent-of-empires/config.toml" ] &&
+    [ ! -L "$HOME/.agent-of-empires/config.toml" ]; then
     mkdir -p "$backup_path/.agent-of-empires"
-    cp -P "$HOME/.agent-of-empires/config.toml" \
+    cp -aP "$HOME/.agent-of-empires/config.toml" \
       "$backup_path/.agent-of-empires/config.toml"
   fi
 fi
-mkdir -p "$HOME/.agent-of-empires"
-ln -sfnv "$config_path/agent-of-empires/config.toml" "$HOME/.agent-of-empires/config.toml"
+
+ln -sfnv "$config_path/agent-of-empires/config.toml" \
+  "$HOME/.agent-of-empires/config.toml"
+
+# profiles dir
+if [ ! -r "$backup_path/.agent-of-empires/profiles" ]; then
+  if [ -r "$HOME/.agent-of-empires/profiles" ]; then
+    mkdir -p "$backup_path/.agent-of-empires"
+    cp -aP "$HOME/.agent-of-empires/profiles" \
+      "$backup_path/.agent-of-empires/profiles"
+  fi
+fi
+
+ln -sfnv "$config_path/agent-of-empires/profiles" \
+  "$HOME/.agent-of-empires/profiles"
