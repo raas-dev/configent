@@ -22,6 +22,7 @@
     "ETIMEDOUT",
     "fetch failed",
     "unexpected end of JSON input",
-    "unexpected end of input"
+    "unexpected end of input",
+    "Error: 500 Internal network failure"
   ]
 }
