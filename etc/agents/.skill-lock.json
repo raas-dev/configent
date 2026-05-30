@@ -92,15 +92,6 @@
       "installedAt": "2026-05-02T21:45:25.474Z",
       "updatedAt": "2026-05-02T21:45:25.474Z"
     },
-    "spec-miner": {
-      "source": "alexander-danilenko/ai-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/alexander-danilenko/ai-skills.git",
-      "skillPath": "skills/spec-miner/SKILL.md",
-      "skillFolderHash": "459f5e156982cedf6f65c7b8a431fd75cb799b99",
-      "installedAt": "2026-05-03T15:47:35.932Z",
-      "updatedAt": "2026-05-03T15:47:35.932Z"
-    },
     "grill-with-docs": {
       "source": "mattpocock/skills",
       "sourceType": "github",
