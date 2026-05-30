@@ -123,6 +123,7 @@ go = '1.25.3'
 
 # node.js
 node = { version = '24.14.0', postinstall = "~/.local/configent/bin/postinstall_node" }
+pnpm = { version = 'latest', postinstall = "mkdir -p \"$(pnpm root -g 2>/dev/null)\"" }
 bun = 'latest'
 
 # python
