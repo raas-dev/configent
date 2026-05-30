@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.5](https://github.com/raas-dev/configent/compare/1.225.4...1.225.5) (2026-05-30)
+
+
+### Fixes
+
+* **macos:** set CXXFLAGS for missing C++ standard headers ([c3252fd](https://github.com/raas-dev/configent/commit/c3252fd0a2c1c541d6bd99082cc79e90073e2537))
+* **tmux:** detect missing psutil in cpu-mem-monitor venv ([d569077](https://github.com/raas-dev/configent/commit/d5690777c998b8d55e348d17e5aaeda5b9591d44))
+* **tmux:** remove stale venv rebuild for cpu-mem-monitor ([de8eb00](https://github.com/raas-dev/configent/commit/de8eb00f60b159dced5a0c03a0d07f7690a93983))
+* **tmux:** switch to forked tmux-cpu-mem-monitor ([8857d38](https://github.com/raas-dev/configent/commit/8857d38efc6c0f6f0001e103549e50c40e32dd6e))
+
 ## [1.225.4](https://github.com/raas-dev/configent/compare/1.225.3...1.225.4) (2026-05-30)
 
 
