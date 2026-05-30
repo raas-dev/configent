@@ -14,8 +14,8 @@
   },
   "plugin": [
     "caveman-opencode-plugin",
+    "token-optimizer-opencode",
     "@franlol/opencode-md-table-formatter",
-    "@tarquinen/opencode-dcp",
     [
       "opencode-auto-resume",
       {
@@ -23,6 +23,15 @@
         "gracePeriodMs": 6000,
         "maxBackoffMs": 16000,
         "loopMaxContinues": 2
+      }
+    ],
+    [
+      "@prevalentware/opencode-goal-plugin",
+      {
+        "auto_continue": true,
+        "max_auto_turns": 25,
+        "min_continue_interval_seconds": 3,
+        "max_prompt_failures": 3
       }
     ]
   ],
