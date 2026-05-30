@@ -28,7 +28,7 @@ no_retry = true
 #pre_sudo = false
 
 # Run inside tmux
-run_in_tmux = true
+run_in_tmux = false
 
 # List of remote machines with Topgrade installed on them
 #remote_topgrades = ["toothless", "pi", "parnas"]
