@@ -67,6 +67,17 @@ export PAGER="less -F -X"
 # get plain text from man
 export MANROFFOPT='-c'
 
+# macOS CLI tools: C++ headers not in default include path
+# fixes pip builds failing with 'iostream' file not found
+if [ "$(uname -s)" = 'Darwin' ]; then
+  _sdk="$(xcrun --show-sdk-path 2>/dev/null)"
+  if [ -d "$_sdk/usr/include/c++/v1" ]; then
+    export CXXFLAGS="-isysroot $_sdk"
+    export CXXFLAGS="$CXXFLAGS -I$_sdk/usr/include/c++/v1"
+  fi
+  unset _sdk
+fi
+
 ### Defaults ###################################################################
 
 # default for new files
