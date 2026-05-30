@@ -117,7 +117,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   path_append "$PNPM_HOME/bin"
 else
   export PNPM_HOME="$HOME/.local/share/pnpm"
-  path_append "$PNPM_HOME"
+  path_append "$PNPM_HOME/bin"
 fi
 
 ### go #########################################################################
