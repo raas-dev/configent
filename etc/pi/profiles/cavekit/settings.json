@@ -1,6 +1,0 @@
-{
-  "packages": [
-    "npm:pi-cavekit",
-    "npm:pi-lens"
-  ]
-}
