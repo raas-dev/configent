@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.3](https://github.com/raas-dev/configent/compare/1.225.2...1.225.3) (2026-05-30)
+
+
+### Fixes
+
+* **dotfiles:** append PNPM_HOME/bin on Linux ([16a025c](https://github.com/raas-dev/configent/commit/16a025c8522803fe33b595d50a17a683e30de941))
+* **mise:** run reshim after pnpm install to fix PATH ([d166f0b](https://github.com/raas-dev/configent/commit/d166f0b92cfaf013ac1724f38de8bbc73ece1bf8))
+* **node:** install pnpm via npm in node postinstall ([c18c5da](https://github.com/raas-dev/configent/commit/c18c5da950ec4300315a633e34ebeac6c1be4430))
+* **tmux:** disable battery segment on Lima VMs ([61f7013](https://github.com/raas-dev/configent/commit/61f70134220c00594c6c1818f916ad058efc9bf6))
+* **tmux:** improve venv rebuild check for tmux-cpu-mem-monitor ([e92ca1a](https://github.com/raas-dev/configent/commit/e92ca1a1960d4ea9d2904cc7c19ad4083a18096e))
+* **topgrade:** disable tmux in config, use --tmux flag in dup alias ([2973841](https://github.com/raas-dev/configent/commit/2973841fa90724a17a2838d5310f037bde2f7984))
+
 ## [1.225.2](https://github.com/raas-dev/configent/compare/1.225.1...1.225.2) (2026-05-27)
 
 
