@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.4](https://github.com/raas-dev/configent/compare/1.225.3...1.225.4) (2026-05-30)
+
+
+### Fixes
+
+* **opencode:** reorder todo-zai plugins alphabetically ([ee7d673](https://github.com/raas-dev/configent/commit/ee7d673c27cbd5b6d3d6c9fe57efbca53915ebce))
+* **opencode:** replace token-optimizer with tarquinen dcp plugin ([91a8996](https://github.com/raas-dev/configent/commit/91a89964b554d5199f67212386c59618935d10f2))
+
 ## [1.225.3](https://github.com/raas-dev/configent/compare/1.225.2...1.225.3) (2026-05-30)
 
 
