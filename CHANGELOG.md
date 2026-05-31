@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.6](https://github.com/raas-dev/configent/compare/1.225.5...1.225.6) (2026-05-31)
+
+
+### Fixes
+
+* **tmux:** disable gpu display in tmux-power theme ([0d7caeb](https://github.com/raas-dev/configent/commit/0d7caeb16ab63392acd2e29605c099ec4baf5933))
+
 ## [1.225.5](https://github.com/raas-dev/configent/compare/1.225.4...1.225.5) (2026-05-30)
 
 
