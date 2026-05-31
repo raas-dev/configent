@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.7](https://github.com/raas-dev/configent/compare/1.225.6...1.225.7) (2026-05-31)
+
+
+### Fixes
+
+* **tmux:** disable GPU temp display in power theme ([e326ac9](https://github.com/raas-dev/configent/commit/e326ac91c05d3741aa8bba0dbe9d405652ec97da))
+* **tmux:** enable cpu/gpu temp display and clean up icon config ([40ce8b6](https://github.com/raas-dev/configent/commit/40ce8b6f03eafa40b4ebc51292bb3f426e46362c))
+* **tmux:** remove redundant gpu temp icon reset lines ([5aa64d2](https://github.com/raas-dev/configent/commit/5aa64d29bac958e905a079ce3acc97e0d532d00d))
+
 ## [1.225.6](https://github.com/raas-dev/configent/compare/1.225.5...1.225.6) (2026-05-31)
 
 
