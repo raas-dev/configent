@@ -64,6 +64,18 @@ mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
+### pi-lens ####################################################################
+
+# pi-lens.json
+if [ ! -r "$backup_path/.pi-lens/config.json" ]; then
+  if [ -r "$HOME/.pi-lens/config.json" ]; then
+    mkdir -p "$backup_path/.pi-lens"
+    cp -P "$HOME/.pi-lens/config.json" "$backup_path/.pi-lens/config.json"
+  fi
+fi
+mkdir -p "$HOME/.pi-lens"
+ln -sfnv "$config_path/pi/pi-lens.json" "$HOME/.pi-lens/config.json"
+
 ### pi-web-access ##############################################################
 
 # web-search.json
