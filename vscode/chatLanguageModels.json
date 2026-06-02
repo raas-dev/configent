@@ -7,6 +7,6 @@
   {
     "name": "MiniMax",
     "vendor": "minimax",
-    "apiKey": "${input:chat.lm.secret.13f4e9fa}"
+    "apiKey": "${input:chat.lm.secret.46b32c67}"
   }
 ]
