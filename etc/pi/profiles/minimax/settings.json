@@ -1,8 +1,12 @@
 {
-  "defaultModel": "MiniMax-M2.7",
+  "defaultModel": "MiniMax-M3",
   "defaultProvider": "minimax",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "enabledModels": [
     "minimax/*"
+  ],
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:@sinamtz/pi-minimax-provider"
   ]
 }
