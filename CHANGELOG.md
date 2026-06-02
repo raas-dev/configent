@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.8](https://github.com/raas-dev/configent/compare/1.225.7...1.225.8) (2026-06-02)
+
+
+### Fixes
+
+* **tmux:** remove redundant network icon disable line ([1067748](https://github.com/raas-dev/configent/commit/1067748dd14e422fe0434f80b078bba452674386))
+* **tmux:** uncomment gpu temp icon reset lines ([97adbae](https://github.com/raas-dev/configent/commit/97adbaec6947bbf32edcbf5aa4913e6ef12eb195))
+
 ## [1.225.7](https://github.com/raas-dev/configent/compare/1.225.6...1.225.7) (2026-05-31)
 
 
