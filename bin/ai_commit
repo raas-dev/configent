@@ -14,7 +14,8 @@ red=$(tput setaf 1)
 yellow=$(tput setaf 3)
 cyan=$(tput setaf 6)
 
-OMP_MODEL="${OMP_MODEL:-zai/glm-5-turbo}"
+#OMP_MODEL="${OMP_MODEL:-zai/glm-5-turbo}"
+OMP_MODEL="${OMP_MODEL:-openai/gpt-5.4-nano}"
 
 # Shown to model + enforced in finalize_commit_message (line 1).
 AI_COMMIT_SUBJECT_MAX="${AI_COMMIT_SUBJECT_MAX:-72}"
