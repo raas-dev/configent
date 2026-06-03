@@ -24,6 +24,7 @@
     "unexpected end of JSON input",
     "unexpected end of input",
     "Error: 500 Internal network failure",
-    "Error: The socket connection was closed unexpectedly."
+    "Error: The socket connection was closed unexpectedly.",
+    "invalid params, tool call result does not follow tool call"
   ]
 }
