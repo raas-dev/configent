@@ -23,6 +23,7 @@
     "fetch failed",
     "unexpected end of JSON input",
     "unexpected end of input",
-    "Error: 500 Internal network failure"
+    "Error: 500 Internal network failure",
+    "Error: The socket connection was closed unexpectedly."
   ]
 }
