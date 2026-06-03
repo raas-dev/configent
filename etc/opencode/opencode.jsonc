@@ -10,7 +10,10 @@
     }
   },
   "permission": {
-    "external_directory": "allow"
+    "external_directory": "allow",
+    "read": {
+      "*": "allow"
+    }
   },
   "plugin": [
     "caveman-opencode-plugin",
