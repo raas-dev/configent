@@ -22,7 +22,7 @@
     [
       "opencode-auto-resume",
       {
-        "chunkTimeoutMs": 60000,
+        "chunkTimeoutMs": 120000,
         "gracePeriodMs": 5000,
         "maxBackoffMs": 16000,
         "maxRetries": 10
