@@ -12,7 +12,10 @@ alias code="\$DEFAULT_IDE --reuse-window"
 
 skipped_managers="containers helm powershell skills"
 alias up="topgrade --disable brew_cask restarts snap system $skipped_managers"
-alias dup="topgrade --disable $skipped_managers"
+dup() {
+  tmux has-session -t topgrade 2>/dev/null && tmux attach -t topgrade \
+    || topgrade --tmux --disable "${=skipped_managers}"
+}
 
 ### OS specific ################################################################
 
