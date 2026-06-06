@@ -16,6 +16,7 @@
   "lastChangelogVersion": "0.78.1",
   "packages": [
     "npm:pi-ask-user",
+    "npm:pi-codex-goal",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
@@ -30,7 +31,6 @@
     "npm:@aliou/pi-processes",
     "npm:@juicesharp/rpiv-todo",
     "npm:@narumitw/pi-btw",
-    "npm:@narumitw/pi-goal",
     "npm:@ogulcancelik/pi-sketch",
     "npm:@siddr/pi-review",
     "npm:@sting8k/pi-vcc",
