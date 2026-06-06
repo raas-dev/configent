@@ -6,7 +6,6 @@
     "minimax/*"
   ],
   "packages": [
-    "npm:pi-mcp-adapter",
-    "npm:@sinamtz/pi-minimax-provider"
+    "npm:pi-mcp-adapter"
   ]
 }
