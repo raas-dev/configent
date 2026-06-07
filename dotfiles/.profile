@@ -277,6 +277,12 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
+### mas - macOS Apple Store CLI ################################################
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  command -v mas >/dev/null && export MAS_NO_AUTO_INDEX=1
+fi
+
 ### docker/podman CLIs on macOS ################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
