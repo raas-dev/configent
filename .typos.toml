@@ -1,5 +1,6 @@
 [default.extend-words]
 fpr = "fpr"
+sme = "sme"
 
 [files]
 extend-exclude = [

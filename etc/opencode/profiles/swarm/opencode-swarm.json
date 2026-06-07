@@ -1,0 +1,80 @@
+{
+  "agents": {
+    "architect": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "coder": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "reviewer": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "test_engineer": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "explorer": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "sme": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "docs": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "docs_design": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "designer": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic_sounding_board": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic_drift_verifier": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic_hallucination_verifier": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic_oversight": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "critic_architecture_supervisor": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "curator_init": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "curator_phase": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "skill_improver": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    },
+    "spec_writer": {
+      "model": "minimax/MiniMax-M3",
+      "fallback_models": ["zai-coding-plan/glm-5.1"]
+    }
+  }
+}
