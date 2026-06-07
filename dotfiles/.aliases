@@ -781,6 +781,14 @@ genpass() {
     fold -w "$length" | head -n1 | pbcopy
 }
 
+# Move/rename dir and cd into it
+mvcd() {
+  local dest="${*[-1]}" src="${*[-2]}"
+  [[ -d "$dest" ]] && dest="$dest/$(basename "$src")"
+  mv -n "$@" || return
+  cd -- "$dest" || return
+}
+
 # Shortcut to execute ad-hoc commands
 mx() {
   if [ $# -eq 0 ]; then
