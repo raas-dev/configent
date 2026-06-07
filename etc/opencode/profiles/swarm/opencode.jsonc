@@ -5,6 +5,7 @@
     "opencode-swarm",
     "opencode-pty"
   ],
+  "default_agent": "architect",
   "agent": {
     "explore": {
       "disable": true
