@@ -580,7 +580,6 @@
   "vsintellicode.python.completionsEnabled": false,
   "window.autoDetectColorScheme": false,
   "window.closeWhenEmpty": true,
-  "window.confirmBeforeClose": "always",
   "window.confirmSaveUntitledWorkspace": false,
   "window.customTitleBarVisibility": "windowed",
   "window.menuStyle": "inherit",
