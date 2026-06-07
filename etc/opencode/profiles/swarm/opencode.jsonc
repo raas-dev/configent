@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "minimax/MiniMax-M3",
   "plugin": [
     "opencode-swarm",
     "opencode-pty"

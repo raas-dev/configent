@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "minimax-coding-plan/MiniMax-M2.7",
   "plugin": [
     "oh-my-openagent",
     "opencode-pty"
