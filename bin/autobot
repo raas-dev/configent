@@ -183,7 +183,7 @@ autobot_get_previous_cmd() {
 usage() {
   echo "Usage: autobot [-d|--dry-run] [-m|--model ID] [-c|--rerun [command args...]]" >&2
   echo "  -d, --dry-run   Print captured terminal output on stdout; do not run pi." >&2
-  echo "  -m, --model     omp model id (default: minimax/MiniMax-M2.7; env AUTOBOT_MODEL)." >&2
+  echo "  -m, --model     omp model id (env AUTOBOT_MODEL)." >&2
   echo "  -c, --rerun     Re-run a command; everything after it is command + args (the tail of argv)." >&2
   echo "                  Bare -c (nothing after) → history / AUTOBOT_PREVIOUS_CMD." >&2
   echo "                  Use -c -- cmd ... if cmd starts with -." >&2
