@@ -33,6 +33,7 @@ export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --no-quarantine"
 
 # Homebrew Cask taps
 brew tap buo/cask-upgrade
+brew trust buo/cask-upgrade
 
 # Homebrew Cask apps
 brew install --cask --force brave-browser
