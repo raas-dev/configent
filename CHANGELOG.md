@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.9](https://github.com/raas-dev/configent/compare/1.225.8...1.225.9) (2026-06-08)
+
+
+### Fixes
+
+* **homebrew:** trust buo/cask-upgrade tap ([bb76109](https://github.com/raas-dev/configent/commit/bb76109da93db5972b32ea6d412afdeed69a0883))
+
 ## [1.225.8](https://github.com/raas-dev/configent/compare/1.225.7...1.225.8) (2026-06-02)
 
 
