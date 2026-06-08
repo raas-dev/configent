@@ -681,6 +681,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "github.copilot.chat.agent.currentEditorContext.enabled": false,
-  "chat.implicitContext.suggestedContext": false
+  "chat.implicitContext.suggestedContext": false,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false
 }
