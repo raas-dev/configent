@@ -63,6 +63,11 @@
       "label": "multiplexer"
     },
     {
+      "command": "exec herdr",
+      "id": "herdr",
+      "label": "Herdr"
+    },
+    {
       "args": [
         "-il",
         "-c",
@@ -81,7 +86,7 @@
       ],
       "command": "exec zsh",
       "id": "agent",
-      "label": "Subagents"
+      "label": "Computer Use"
     },
     {
       "command": "exec lazyssh",

@@ -1,11 +1,49 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "effortLevel": "medium",
+  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "caveman@caveman": true
+  },
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1"
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "repo": "JuliusBrussee/caveman",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "~/.claude/hooks/rtk-rewrite.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash '~/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ]
   },
   "permissions": {
     "allow": [
@@ -28,36 +66,10 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "enableAllProjectMcpServers": true,
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/rtk-rewrite.sh"
-          }
-        ]
-      }
-    ]
-  },
+  "skipDangerousModePermissionPrompt": true,
   "statusLine": {
-    "type": "command",
     "command": "ccstatusline",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "caveman@caveman": true
-  },
-  "extraKnownMarketplaces": {
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    }
-  },
-  "effortLevel": "medium",
-  "skipDangerousModePermissionPrompt": true
+    "padding": 0,
+    "type": "command"
+  }
 }
