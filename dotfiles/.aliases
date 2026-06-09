@@ -306,24 +306,27 @@ vv() {
 
 ### docker #####################################################################
 
-dr() { local ids; ids=$(docker ps -aq 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rm -f 2>/dev/null; }
-drv() { local ids; ids=$(docker volume ls -q 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker volume rm -f 2>/dev/null; }
-dri() { local ids; ids=$(docker images -aq 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null; }
-alias dpr='dr ; drv ; dri ; docker system prune --force --volumes </dev/null'
+_docker_ok() { docker info >/dev/null; }
+dr() { _docker_ok || return 1; local ids; ids=$(docker ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rm -f 2>/dev/null; }
+drv() { _docker_ok || return 1; local ids; ids=$(docker volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker volume rm -f 2>/dev/null; }
+dri() { _docker_ok || return 1; local ids; ids=$(docker images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null; }
+alias dpr='_docker_ok || return 1; dr; drv; dri; docker system prune --force --volumes'
 
 ### nerdctl ####################################################################
 
-nr() { local ids; ids=$(nerdctl ps -aq 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rm -f 2>/dev/null; }
-nrv() { local ids; ids=$(nerdctl volume ls -q 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl volume rm -f 2>/dev/null; }
-nri() { local ids; ids=$(nerdctl images -aq 2>/dev/null </dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null; }
-alias npr='nr ; nrv ; nri ; nerdctl system prune --force --volumes </dev/null'
+_nerdctl_ok() { nerdctl info >/dev/null; }
+nr() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rm -f 2>/dev/null; }
+nrv() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl volume rm -f 2>/dev/null; }
+nri() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null; }
+alias npr='_nerdctl_ok || return 1; nr; nrv; nri; nerdctl system prune --force --volumes'
 
 ### podman #################################################################
 
-pr() { local ids; ids=$(podman ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rm -f 2>/dev/null; return 0; }
-prv() { local ids; ids=$(podman volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman volume rm -f 2>/dev/null; return 0; }
-pri() { local ids; ids=$(podman images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null; return 0; }
-alias ppr='pr ; prv ; pri ; podman system prune --force --volumes'
+_podman_ok() { podman info >/dev/null; }
+pr() { _podman_ok || return 1; local ids; ids=$(podman ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rm -f 2>/dev/null; }
+prv() { _podman_ok || return 1; local ids; ids=$(podman volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman volume rm -f 2>/dev/null; }
+pri() { _podman_ok || return 1; local ids; ids=$(podman images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null; }
+alias ppr='_podman_ok || return 1; pr; prv; pri; podman system prune --force --volumes'
 
 ### kubectl ####################################################################
 
