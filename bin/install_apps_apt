@@ -36,7 +36,7 @@ $SUDOEULA apt-get update
 # Ensure apt-get sources.list works with https
 $SUDO apt-get install -y apt-transport-https
 
-# Locales (required on Debian)
+# en.US.UTF-8 locale
 $SUDO apt-get install -y locales
 echo "en_US.UTF-8 UTF-8" | $SUDO tee /etc/locale.gen
 $SUDO locale-gen
