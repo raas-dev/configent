@@ -9,6 +9,7 @@
       "type": "local"
     }
   },
+  "model": "minimax/MiniMax-M3",
   "permission": {
     "external_directory": "allow",
     "read": {
@@ -33,8 +34,8 @@
       {
         "auto_continue": true,
         "max_auto_turns": 25,
-        "min_continue_interval_seconds": 3,
-        "max_prompt_failures": 3
+        "max_prompt_failures": 3,
+        "min_continue_interval_seconds": 3
       }
     ]
   ],
