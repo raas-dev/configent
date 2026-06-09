@@ -38,6 +38,12 @@ provision:
   - mode: system
     script: |
       #!/bin/sh
+      # Enable IPv4 forwarding (suppresses nerdctl/docker warnings)
+      sysctl -w net.ipv4.ip_forward=1
+      echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.d/99-ip-forward.conf
+  - mode: system
+    script: |
+      #!/bin/sh
       set -eux
       # Load nerdctl AppArmor profile for rootless mode
       if command -v nerdctl >/dev/null 2>&1; then
