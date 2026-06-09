@@ -128,6 +128,7 @@
     ".claude/settings.local.json": false,
     "~/.claude/settings.json": false
   },
+  "chat.implicitContext.suggestedContext": false,
   "chat.includeReferencedInstructions": true,
   "chat.notifyWindowOnConfirmation": "off",
   "chat.notifyWindowOnResponseReceived": "off",
@@ -290,6 +291,7 @@
   "git.terminalAuthentication": false,
   "git.useIntegratedAskPass": false,
   "github.copilot.chat.agent.autoFix": true,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false,
   "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.claudeAgent.allowDangerouslySkipPermissions": true,
   "github.copilot.chat.claudeAgent.enabled": false,
@@ -402,7 +404,7 @@
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "markdown.preview.fontSize": 15,
   "markdown.preview.lineHeight": 1,
-  "minimax.apiBaseUrl": "https://api.minimax.io/v1",
+  "minimax.apiBaseUrl": "https://api.minimax.io/anthropic",
   "mise.autoDetectMiseBinPath": false,
   "mise.binPath": "mise",
   "mise.checkForNewMiseVersion": false,
@@ -685,7 +687,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "chat.implicitContext.suggestedContext": false,
-  "github.copilot.chat.agent.currentEditorContext.enabled": false
+  "zenMode.hideStatusBar": false
 }
