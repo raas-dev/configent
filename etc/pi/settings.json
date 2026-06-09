@@ -13,7 +13,7 @@
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.79.0",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-codex-goal",
@@ -34,6 +34,7 @@
     "npm:@ogulcancelik/pi-sketch",
     "npm:@siddr/pi-review",
     "npm:@sting8k/pi-vcc",
+    "npm:@zigai/pi-trust",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/asyrjasalo/pi-headroom",
