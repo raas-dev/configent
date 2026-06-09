@@ -49,13 +49,6 @@ provision:
       if command -v nerdctl >/dev/null 2>&1; then
         nerdctl apparmor load 2>/dev/null || true
       fi
-  # Add iptables to $PATH for nerdctl
-  # See: https://github.com/containerd/nerdctl/discussions/1536
-  - mode: system
-    script: |
-      #!/bin/sh
-      ln -s /usr/sbin/iptables /usr/local/bin/iptables
-      ln -s /usr/sbin/ip6tables /usr/local/bin/ip6tables
   - mode: system
     script: |
       #!/bin/sh
