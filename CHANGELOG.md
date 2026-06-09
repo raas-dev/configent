@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.10](https://github.com/raas-dev/configent/compare/1.225.9...1.225.10) (2026-06-09)
+
+
+### Fixes
+
+* **apt:** correct gsnupg typo in gnupg install ([0d74d8d](https://github.com/raas-dev/configent/commit/0d74d8d6663a12ffd79b8f4795648c54c857e936))
+* **apt:** correct locale-gen input for en_US.UTF-8 ([a751230](https://github.com/raas-dev/configent/commit/a75123053029bf8a9db6de4c2c4b0b48f35a8993))
+* **dotfiles:** correct stray </dev/null in docker aliases ([86e4a90](https://github.com/raas-dev/configent/commit/86e4a903b2faed1ab1bf330d07bf52737d7317b7))
+* **dotfiles:** remove stray </dev/null from container cleanup aliases ([fda5fe1](https://github.com/raas-dev/configent/commit/fda5fe10ee94d0fd6ecd95dc44472b025d38ee8b))
+* **lima:** enable IPv4 forwarding to suppress nerdctl warnings ([4c6494f](https://github.com/raas-dev/configent/commit/4c6494f6ff3d3feb9cd0c11ddbdcbc006362ea1a))
+* **lima:** load nerdctl AppArmor profile for rootless mode ([99c5114](https://github.com/raas-dev/configent/commit/99c5114382e8d0f30529f09700940d90437d8756))
+* **lima:** remove iptables symlink provisioning ([596f7b2](https://github.com/raas-dev/configent/commit/596f7b2addbd0e173b21510a04e83f8d204b2d11))
+
 ## [1.225.9](https://github.com/raas-dev/configent/compare/1.225.8...1.225.9) (2026-06-08)
 
 
