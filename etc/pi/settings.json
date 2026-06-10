@@ -38,7 +38,6 @@
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/asyrjasalo/pi-headroom",
     "git:github.com/asyrjasalo/pi-prompt-suggester",
-    "git:github.com/asyrjasalo/pi-run-code",
     {
       "extensions": [
         "extensions/anycopy/index.ts",
