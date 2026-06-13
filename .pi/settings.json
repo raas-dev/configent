@@ -6,6 +6,7 @@
     "zai/glm-5*"
   ],
   "packages": [
+    "npm:pi-mcp-adapter",
     "npm:@alexanderfortin/pi-zai-usage"
   ]
 }
