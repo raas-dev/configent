@@ -2,7 +2,7 @@
   "agent": {
     "default_model": {
       "enable_thinking": false,
-      "model": "GLM-5.1",
+      "model": "glm-5.2",
       "provider": "zai"
     },
     "enable_feedback": false,
@@ -107,9 +107,9 @@
               "prompt_cache_key": false,
               "tools": true
             },
-            "display_name": "GLM-5.1 (Z.AI)",
+            "display_name": "glm-5.2 (Z.AI)",
             "max_tokens": 131072,
-            "name": "GLM-5.1"
+            "name": "glm-5.2"
           },
           {
             "capabilities": {
@@ -118,9 +118,9 @@
               "prompt_cache_key": false,
               "tools": true
             },
-            "display_name": "GLM-5-turbo (Z.AI)",
+            "display_name": "glm-5-turbo (Z.AI)",
             "max_tokens": 131072,
-            "name": "GLM-5-turbo"
+            "name": "gllm-5-turbo"
           }
         ]
       }

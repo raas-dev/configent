@@ -2,34 +2,34 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "hephaestus": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "prometheus": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "atlas": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "sisyphus-junior": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "oracle": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "multimodal-looker": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "metis": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "momus": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zai-coding-plan/glm-5.2"
     },
     "explore": {
       "model": "zai-coding-plan/glm-5-turbo"

@@ -14,7 +14,7 @@
   "presets": {
     "zai-plan": {
       "orchestrator": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "skills": [
           "*"
         ],
@@ -23,13 +23,13 @@
         ]
       },
       "explorer": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "oracle": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "high",
         "skills": [
           "simplify"
@@ -37,7 +37,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -45,19 +45,19 @@
         ]
       },
       "designer": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "high",
         "skills": [],
         "mcps": []
