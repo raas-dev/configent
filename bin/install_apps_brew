@@ -8,6 +8,8 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+### setup ######################################################################
+
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -27,6 +29,24 @@ if ! command -v brew >/dev/null; then
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval_brew
 fi
+
+### brew.env ###################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+if [ ! -r "$backup_path/.homebrew/brew.env" ]; then
+  if [ -r "$HOME/.homebrew/brew.env" ]; then
+    mkdir -p "$backup_path/.homebrew"
+    cp -P "$HOME/.homebrew/brew.env" "$backup_path/.homebrew/brew.env"
+  fi
+fi
+mkdir -p "$HOME/.homebrew"
+rm -rf "$HOME/.homebrew/brew.env"
+ln -sfnv "$config_path/homebrew/brew.env" "$HOME/.homebrew/brew.env"
+
+### formulas ###################################################################
 
 if [ "$(uname -s)" = "Darwin" ]; then
   # GNU bins prepended to PATH on macOS in .profile

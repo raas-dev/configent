@@ -110,10 +110,6 @@ else
   fi
 fi
 
-export HOMEBREW_NO_ASK=1
-export HOMEBREW_NO_ENV_HINTS=1
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
-
 ### mise #######################################################################
 
 path_prepend "$HOME/.local/share/mise/shims"
@@ -319,7 +315,6 @@ export DISABLE_TELEMETRY=1
 
 # homebrew
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ANALYTICS_THIS_RUN=1
 
 # anthropic
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
