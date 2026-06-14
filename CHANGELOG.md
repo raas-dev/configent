@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.12](https://github.com/raas-dev/configent/compare/1.225.11...1.225.12) (2026-06-14)
+
+
+### Fixes
+
+* **homebrew:** disable Homebrew analytics ([eb4047c](https://github.com/raas-dev/configent/commit/eb4047c36b2b7e3546283c7bc49f34f0e196fdcc))
+* **homebrew:** symlink brew.env and remove ad-hoc env exports ([031cbda](https://github.com/raas-dev/configent/commit/031cbda96e05f7812751d9a4841fbcf992702220))
+* **install:** remove HOMEBREW_INSTALL_FROM_API from brew installers ([d11054d](https://github.com/raas-dev/configent/commit/d11054dd30cb3069461f09daab98dfd80b7fa782))
+* set HOMEBREW_NO_REQUIRE_TAP_TRUST=1 ([9a9b8f1](https://github.com/raas-dev/configent/commit/9a9b8f1b00714eb1e5e85e9d716da3df298e99ff))
+
 ## [1.225.11](https://github.com/raas-dev/configent/compare/1.225.10...1.225.11) (2026-06-14)
 
 
