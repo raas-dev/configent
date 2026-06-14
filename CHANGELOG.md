@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.226.0](https://github.com/raas-dev/configent/compare/1.225.12...1.226.0) (2026-06-14)
+
+
+### Features
+
+* **opencode:** add OpenCode Loop scheduler plugin ([f099ccb](https://github.com/raas-dev/configent/commit/f099ccb2ba0302dd8cf90c7c58442d56a5b4b704))
+
+
+### Fixes
+
+* **dotfiles:** disable OMO PostHog telemetry ([061e525](https://github.com/raas-dev/configent/commit/061e525825c918ea71d45a4cdfd39bf3eba9e941))
+* **opencode:** enable opencode-pty plugin ([0c26673](https://github.com/raas-dev/configent/commit/0c26673e92e0cf46ef1d0c9e86c598fee34cb428))
+
 ## [1.225.12](https://github.com/raas-dev/configent/compare/1.225.11...1.225.12) (2026-06-14)
 
 
