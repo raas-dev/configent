@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.225.11](https://github.com/raas-dev/configent/compare/1.225.10...1.225.11) (2026-06-14)
+
+
+### Fixes
+
+* set HOMEBREW_NO_ASK=1 ([788adb2](https://github.com/raas-dev/configent/commit/788adb26714654c93e81a8f8dd4e9728028e9b2d))
+
 ## [1.225.10](https://github.com/raas-dev/configent/compare/1.225.9...1.225.10) (2026-06-09)
 
 
