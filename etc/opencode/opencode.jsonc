@@ -17,6 +17,7 @@
     }
   },
   "plugin": [
+    "./plugins/ponytail.mjs",
     "caveman-opencode-plugin",
     "@tarquinen/opencode-dcp",
     "@franlol/opencode-md-table-formatter",
