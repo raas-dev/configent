@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.227.0](https://github.com/raas-dev/configent/compare/1.226.0...1.227.0) (2026-06-15)
+
+
+### Features
+
+* **opencode:** add ponytail ruleset plugin ([1b38fbe](https://github.com/raas-dev/configent/commit/1b38fbe15376a29c2aca4d69d65d6e7d24f05491))
+* **pi:** add ponytail plugin ([d323c65](https://github.com/raas-dev/configent/commit/d323c65233ceee3151fdf9f847975006decf2594))
+
 ## [1.226.0](https://github.com/raas-dev/configent/compare/1.225.12...1.226.0) (2026-06-14)
 
 
