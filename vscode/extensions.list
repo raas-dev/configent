@@ -20,7 +20,6 @@ charliermarsh.ruff
 christian-kohler.path-intellisense
 connor4312.esbuild-problem-matchers
 dbaeumer.vscode-eslint
-denizhandaklr.glm-chat-provider
 detachhead.basedpyright
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
@@ -42,6 +41,7 @@ johnnymorganz.stylua
 kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
 klarkxy.minimax-vscode-copilot
+ltmoerdani.zai-copilot-chat
 mads-hartmann.bash-ide-vscode
 mikestead.dotenv
 ms-azure-devops.azure-pipelines
