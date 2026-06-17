@@ -516,6 +516,9 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 # Reactive notebook
 alias marimo='uvx marimo'
 
+# Security scanner for AI agent skills
+alias skillspector='uvx --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
+
 # Speckit (AI code assistant)
 alias specify='uvx --from git+https://github.com/github/spec-kit.git specify'
 
