@@ -251,9 +251,7 @@
   "extendedTerminalIntegration.statusBar.maxTerminalIcons": 4,
   "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 1,
   "extendedTerminalIntegration.statusBar.showTerminalName": true,
-  "extensions.autoCheckUpdates": false,
   "extensions.autoRestart": true,
-  "extensions.autoUpdate": false,
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
