@@ -1,12 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "zai-coding-plan/glm-5.2",
+  "model": "minimax-coding-plan/MiniMax-M3",
   "plugin": [
     "opencode-todo-reminder",
     "opencode-pty"
   ],
   "mcp": {
-    "MiniMax": {
+    "minimax": {
       "type": "local",
       "command": [
         "uvx",
