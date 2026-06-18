@@ -685,5 +685,10 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "chat.plugins.marketplaces": [
+    "github/copilot-plugins",
+    "github/awesome-copilot#marketplace",
+    "https://github.com/DietrichGebert/ponytail"
+  ]
 }
