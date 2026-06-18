@@ -3,5 +3,20 @@
   "plugin": [
     "oh-my-openagent",
     "opencode-pty"
-  ]
+  ],
+  "mcp": {
+    "MiniMax": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "minimax-coding-plan-mcp",
+        "-y"
+      ],
+      "environment": {
+        "MINIMAX_API_KEY": "{env:MINIMAX_API_KEY}",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
+      },
+      "enabled": true
+    }
+  }
 }
