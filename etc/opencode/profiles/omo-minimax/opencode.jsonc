@@ -19,5 +19,9 @@
       },
       "enabled": true
     }
+  },
+  "tools": {
+    "minimax-vision_*": false,
+    "minimax-vision_understand_image": true
   }
 }
