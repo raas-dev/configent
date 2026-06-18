@@ -19,6 +19,8 @@
   "plugin": [
     "./plugins/ponytail.mjs",
     "caveman-opencode-plugin",
+    "opencode-todo-reminder",
+    "opencode-pty",
     "@tarquinen/opencode-dcp",
     "@franlol/opencode-md-table-formatter",
     [

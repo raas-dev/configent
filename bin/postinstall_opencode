@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in opencode.jsonc opencode.json tui.json caveman.json dcp.jsonc; do
+for file in opencode.jsonc opencode.json tui.json caveman.json dcp.jsonc todo-reminder.json; do
   if [ ! -r "$backup_path/.config/opencode/$file" ]; then
     if [ -r "$HOME/.config/opencode/$file" ]; then
       mkdir -p "$backup_path/.config/opencode"
