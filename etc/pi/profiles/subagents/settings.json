@@ -6,7 +6,6 @@
   ],
   "packages": [
     "npm:pi-subagents",
-    "npm:pi-mcp-adapter",
-    "npm:@alexanderfortin/pi-zai-usage"
+    "npm:pi-mcp-adapter"
   ]
 }
