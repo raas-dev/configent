@@ -6,7 +6,7 @@
     "opencode-pty"
   ],
   "mcp": {
-    "minimax": {
+    "MiniMax": {
       "type": "local",
       "command": [
         "uvx",
