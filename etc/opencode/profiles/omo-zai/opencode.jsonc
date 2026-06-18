@@ -3,5 +3,19 @@
   "plugin": [
     "oh-my-openagent",
     "opencode-pty"
-  ]
+  ],
+  "mcp": {
+    "zai-mcp-server": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@z_ai/mcp-server"
+      ],
+      "environment": {
+        "Z_AI_API_KEY": "{env:ZAI_API_KEY}",
+        "Z_AI_MODE": "ZAI"
+      }
+    }
+  }
 }
