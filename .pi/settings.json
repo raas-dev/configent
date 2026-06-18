@@ -1,7 +1,6 @@
 {
   "defaultModel": "MiniMax-M3",
   "defaultProvider": "minimax",
-  "defaultThinkingLevel": "medium",
   "enabledModels": [
     "minimax/*"
   ],
