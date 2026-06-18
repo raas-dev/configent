@@ -1,7 +1,6 @@
 {
   "defaultModel": "glm-5.2",
   "defaultProvider": "zai",
-  "defaultThinkingLevel": "medium",
   "enabledModels": [
     "zai/glm-5*"
   ],
