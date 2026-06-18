@@ -21,8 +21,9 @@
     "caveman-opencode-plugin",
     "opencode-todo-reminder",
     "opencode-pty",
-    "@tarquinen/opencode-dcp",
     "@franlol/opencode-md-table-formatter",
+    "@prevalentware/opencode-goal-plugin",
+    "@tarquinen/opencode-dcp",
     [
       "opencode-auto-resume",
       {
@@ -30,15 +31,6 @@
         "gracePeriodMs": 2000,
         "maxBackoffMs": 16000,
         "maxRetries": 10
-      }
-    ],
-    [
-      "@prevalentware/opencode-goal-plugin",
-      {
-        "auto_continue": true,
-        "max_auto_turns": 25,
-        "max_prompt_failures": 3,
-        "min_continue_interval_seconds": 3
       }
     ]
   ],
