@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.227.1](https://github.com/raas-dev/configent/compare/1.227.0...1.227.1) (2026-06-18)
+
+
+### Fixes
+
+* **pi:** disable update checks extension ([a3a44d4](https://github.com/raas-dev/configent/commit/a3a44d43243ad3432c0fdd68e1321b12cac7a121))
+* **pi:** remove pi-review extension ([da23ee4](https://github.com/raas-dev/configent/commit/da23ee41a32027c2e25a25c47a149e010f4c2b62))
+* **vscode:** re-enable extension update checks ([dfadd4d](https://github.com/raas-dev/configent/commit/dfadd4df33df6a82659db2e757e441c867dace59))
+
 ## [1.227.0](https://github.com/raas-dev/configent/compare/1.226.0...1.227.0) (2026-06-15)
 
 
