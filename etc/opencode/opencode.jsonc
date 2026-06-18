@@ -9,7 +9,7 @@
       "type": "local"
     }
   },
-  "model": "minimax-coding-plan/MiniMax-M3",
+  "model": "zai-coding-plan/glm-5.2",
   "permission": {
     "external_directory": "allow",
     "read": {
