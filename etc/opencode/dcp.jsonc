@@ -81,7 +81,7 @@
     "nudgeForce": "soft",
     // Tool names whose completed outputs are appended to the compression
     "protectedTools": [],
-   // Preserve your messages during compression.
+    // Preserve your messages during compression.
     // Warning: large copy-pasted prompts will never be compressed away
     "protectUserMessages": false
   },
