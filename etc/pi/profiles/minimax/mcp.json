@@ -10,8 +10,7 @@
         "MINIMAX_API_KEY": "${MINIMAX_API_KEY}",
         "MINIMAX_API_HOST": "https://api.minimax.io"
       },
-      "lifecycle": "lazy",
-      "directTools": true
+      "lifecycle": "lazy"
     }
   },
   "settings": {
