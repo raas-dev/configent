@@ -23,16 +23,7 @@
     "opencode-pty",
     "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
-    "@tarquinen/opencode-dcp",
-    [
-      "opencode-auto-resume",
-      {
-        "chunkTimeoutMs": 60000,
-        "gracePeriodMs": 2000,
-        "maxBackoffMs": 16000,
-        "maxRetries": 10
-      }
-    ]
+    "@tarquinen/opencode-dcp"
   ],
   "share": "disabled"
 }
