@@ -14,7 +14,7 @@
   ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.79.5",
+  "lastChangelogVersion": "0.79.6",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-codex-goal",
