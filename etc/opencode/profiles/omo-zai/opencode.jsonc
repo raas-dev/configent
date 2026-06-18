@@ -6,7 +6,7 @@
     "opencode-pty"
   ],
   "mcp": {
-    "zai-mcp-server": {
+    "zai-vision": {
       "type": "local",
       "command": [
         "npx",

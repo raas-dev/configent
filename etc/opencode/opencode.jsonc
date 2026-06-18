@@ -7,6 +7,18 @@
         "dmcp"
       ],
       "type": "local"
+    },
+    "minimax-vision": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "minimax-coding-plan-mcp",
+        "-y"
+      ],
+      "environment": {
+        "MINIMAX_API_KEY": "{env:MINIMAX_API_KEY}",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
+      }
     }
   },
   "model": "minimax-coding-plan/MiniMax-M3",

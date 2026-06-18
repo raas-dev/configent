@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "zai-vision": {
+    "zai-mcp-server": {
       "command": "npx",
       "args": [
         "-y",
