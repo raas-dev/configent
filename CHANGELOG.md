@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.227.3](https://github.com/raas-dev/configent/compare/1.227.2...1.227.3) (2026-06-21)
+
+
+### Fixes
+
+* **herdr:** remove stale agent state hooks ([0cd713b](https://github.com/raas-dev/configent/commit/0cd713bdc6de94c4b9dbbfd863225acb67902e23))
+
 ## [1.227.2](https://github.com/raas-dev/configent/compare/1.227.1...1.227.2) (2026-06-21)
 
 
