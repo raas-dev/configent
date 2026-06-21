@@ -14,7 +14,7 @@
       "source": "upstash/context7@context7-cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/upstash/context7.git",
-      "skillPath": "SKILL.md",
+      "skillPath": "skills/context7-cli/SKILL.md",
       "skillFolderHash": "40d381c34353c8102e7def20186d328faf600e9a",
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
@@ -23,7 +23,7 @@
       "source": "vercel-labs/skills@find-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
-      "skillPath": "SKILL.md",
+      "skillPath": "skills/find-skills/SKILL.md",
       "skillFolderHash": "5aafd1a88bb4dcd63a0e3bb361f80ff1e376379a",
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
@@ -32,7 +32,7 @@
       "source": "smixs/skill-conductor@skill-conductor",
       "sourceType": "github",
       "sourceUrl": "https://github.com/smixs/skill-conductor.git",
-      "skillPath": "SKILL.md",
+      "skillPath": "skills/skill-conductor/SKILL.md",
       "skillFolderHash": "df665509d851b4549e163f25c37aaf3a9356569f",
       "installedAt": "2026-04-12T11:43:29.055Z",
       "updatedAt": "2026-04-12T11:43:29.055Z"
@@ -68,7 +68,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/diagnose/SKILL.md",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
       "skillFolderHash": "43d464d0e9d1049b9d525975c0f7367ab7e01a5f",
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-05-02T21:12:06.093Z",
