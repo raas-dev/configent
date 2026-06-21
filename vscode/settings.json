@@ -63,11 +63,6 @@
       "label": "multiplexer"
     },
     {
-      "command": "exec herdr",
-      "id": "herdr",
-      "label": "Herdr"
-    },
-    {
       "args": [
         "-il",
         "-c",
