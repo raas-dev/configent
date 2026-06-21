@@ -592,9 +592,6 @@ alias projen='bunx projen'
 # LLM evaluation framework
 alias promptfoo='bunx promptfoo'
 
-# Agent Skills installer (https://skills.sh)
-alias skills='bunx skills'
-
 # Sort a package.json based on the well-known keys
 alias sort-package-json='bunx sort-package-json'
 
