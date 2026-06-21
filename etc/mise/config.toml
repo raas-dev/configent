@@ -145,4 +145,3 @@ cargo.binstall = true
 npm.package_manager = "npm"
 pipx.uvx = true
 idiomatic_version_file_enable_tools = ["python", "node"]
-trusted_config_paths = ["~"]
