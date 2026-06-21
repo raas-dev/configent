@@ -626,7 +626,7 @@ agent() {
     local profile="$1"
     shift
   else
-    local profile="subagents"
+    local profile="computer-use"
   fi
   pic exec "$profile" -- pi --no-session "$*"
 }

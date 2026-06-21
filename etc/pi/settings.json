@@ -25,6 +25,7 @@
     "npm:pi-promptsmith",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
+    "npm:pi-subagents",
     "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
