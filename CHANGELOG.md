@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.227.2](https://github.com/raas-dev/configent/compare/1.227.1...1.227.2) (2026-06-21)
+
+
+### Fixes
+
+* **agent-computer-use:** move skill docs to subagents profile ([0742204](https://github.com/raas-dev/configent/commit/07422044078c8aed8684f9a81186cd29cbb6a146))
+
 ## [1.227.1](https://github.com/raas-dev/configent/compare/1.227.0...1.227.1) (2026-06-18)
 
 
