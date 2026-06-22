@@ -25,5 +25,8 @@
     "@prevalentware/opencode-goal-plugin",
     "@tarquinen/opencode-dcp"
   ],
-  "share": "disabled"
+  "share": "disabled",
+  "experimental": {
+    "disable_paste_summary": true
+  }
 }
