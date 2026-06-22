@@ -247,9 +247,6 @@ export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 # pi
 export PI_SKIP_VERSION_CHECK=1
 
-# browser-harness-js
-export BROWSER_HARNESS_SKIP_BUN_INSTALL=1
-
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
