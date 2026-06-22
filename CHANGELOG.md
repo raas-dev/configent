@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.228.0](https://github.com/raas-dev/configent/compare/1.227.3...1.228.0) (2026-06-22)
+
+
+### Features
+
+* install handy cask ([7186fb3](https://github.com/raas-dev/configent/commit/7186fb355d1b29c6df8fac43ba06d690ecaa0520))
+
 ## [1.227.3](https://github.com/raas-dev/configent/compare/1.227.2...1.227.3) (2026-06-21)
 
 
