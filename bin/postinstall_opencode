@@ -50,7 +50,7 @@ if [ ! -r "$backup_path/.config/opencode/AGENTS.md" ]; then
 fi
 mkdir -p "$HOME/.config/opencode"
 rm -rf "$HOME/.config/opencode/AGENTS.md"
-ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+ln -sfnv "$config_path/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
 ### ~/.agents dir ##############################################################
 
