@@ -1,11 +1,10 @@
 {
-  "defaultModel": "glm-5.2",
-  "defaultProvider": "zai",
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "minimax",
   "enabledModels": [
-    "zai/glm-5*"
+    "minimax/*"
   ],
   "packages": [
-    "npm:pi-mcp-adapter",
-    "npm:@alexanderfortin/pi-zai-usage"
+    "npm:pi-mcp-adapter"
   ]
 }

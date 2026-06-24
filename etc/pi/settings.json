@@ -22,6 +22,7 @@
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
     "npm:pi-mono-status-line",
+    "npm:pi-ponytail",
     "npm:pi-promptsmith",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
@@ -34,10 +35,10 @@
     "npm:@narumitw/pi-btw",
     "npm:@ogulcancelik/pi-sketch",
     "npm:@sting8k/pi-vcc",
-    "git:github.com/DietrichGebert/ponytail",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/asyrjasalo/pi-prompt-suggester",
+    "git:github.com/asyrjasalo/pi-headroom",
     {
       "extensions": [
         "extensions/anycopy/index.ts",
