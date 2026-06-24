@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.0](https://github.com/raas-dev/configent/compare/1.228.0...1.229.0) (2026-06-24)
+
+
+### Features
+
+* **opencode:** add context-mode plugin ([7e5adb2](https://github.com/raas-dev/configent/commit/7e5adb2e9d133c709dbb26b409851840420461af))
+
 ## [1.228.0](https://github.com/raas-dev/configent/compare/1.227.3...1.228.0) (2026-06-22)
 
 
