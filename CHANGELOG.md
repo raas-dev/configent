@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.1](https://github.com/raas-dev/configent/compare/1.229.0...1.229.1) (2026-06-24)
+
+
+### Fixes
+
+* **opencode:** use @dietrichgebert/ponytail plugin package ([a7126dc](https://github.com/raas-dev/configent/commit/a7126dc06d1ba27c145b7cb4f544e5eb4343f738))
+
 ## [1.229.0](https://github.com/raas-dev/configent/compare/1.228.0...1.229.0) (2026-06-24)
 
 
