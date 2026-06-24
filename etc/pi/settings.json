@@ -8,10 +8,6 @@
   "defaultProvider": "minimax",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
-  "enabledModels": [
-    "minimax/*",
-    "zai/glm-5*"
-  ],
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.80.1",
