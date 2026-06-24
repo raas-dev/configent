@@ -17,7 +17,7 @@
     }
   },
   "plugin": [
-    "./plugins/ponytail.mjs",
+    "@dietrichgebert/ponytail",
     "caveman-opencode-plugin",
     "context-mode",
     "opencode-todo-reminder",
