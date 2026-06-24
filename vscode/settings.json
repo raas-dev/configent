@@ -519,6 +519,7 @@
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableKittyKeyboardProtocol": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.environmentChangesIndicator": "off",
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontWeight": "bold",
