@@ -17,11 +17,11 @@
     }
   },
   "plugin": [
-    "@dietrichgebert/ponytail",
     "caveman-opencode-plugin",
     "context-mode",
     "opencode-todo-reminder",
     "opencode-pty",
+    "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
     "@tarquinen/opencode-dcp"
