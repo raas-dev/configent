@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.2](https://github.com/raas-dev/configent/compare/1.229.1...1.229.2) (2026-06-25)
+
+
+### Fixes
+
+* **starship:** disable add_newline in config ([209a4b1](https://github.com/raas-dev/configent/commit/209a4b115ba21801723436fb52ce6c84b86eca67))
+
 ## [1.229.1](https://github.com/raas-dev/configent/compare/1.229.0...1.229.1) (2026-06-24)
 
 
