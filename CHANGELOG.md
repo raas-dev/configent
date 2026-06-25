@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.3](https://github.com/raas-dev/configent/compare/1.229.2...1.229.3) (2026-06-25)
+
+
+### Fixes
+
+* **starship:** enable add_newline in starship config ([80258e1](https://github.com/raas-dev/configent/commit/80258e17d1118cd18a49a42d6e0a01f950c8134a))
+* **tmux:** increase escape-time for SSH RGB color output ([3f285b0](https://github.com/raas-dev/configent/commit/3f285b0b1b4fdaa069e5603e3139a4a06a686da2))
+* **tmux:** increase escape-time to improve SSH color rendering ([711ddd1](https://github.com/raas-dev/configent/commit/711ddd1da99aabe90ca15f255a15ca1888a331ae))
+
 ## [1.229.2](https://github.com/raas-dev/configent/compare/1.229.1...1.229.2) (2026-06-25)
 
 
