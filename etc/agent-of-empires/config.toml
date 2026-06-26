@@ -66,7 +66,7 @@ default_attach_mode = "tmux"
 click_action = "live_send"
 confirm_before_quit = true
 unread_indicator = true
-show_tips = true
+show_tips = false
 tie_workdir_to_name = true
 
 [diff]
@@ -93,11 +93,12 @@ has_seen_custom_instruction_warning = false
 has_seen_non_git_project_warning = false
 has_acknowledged_agent_hooks = false
 has_acknowledged_volume_ignores_globs = false
+tips_seen = ["install-dashboard-pwa"]
 new_session_with_selection_count = 0
 used_new_from_selection = false
 
 [app_state.web_ui_state]
-aoe-acp-last-tool = "opencode"
+aoe-acp-last-tool = "pi"
 aoe-last-browse-dir = "/Users/asyrjasalo"
 aoe-web-settings = '{"mobileFontSize":8,"desktopFontSize":13,"autoOpenKeyboard":true,"persistentTerminals":true,"maxPersistentTerminals":10,"diffViewMode":"tree","diffViewLayout":"split","collapsedDiffDirs":[]}'
 aoe-welcome-seen = "1"
