@@ -36,7 +36,7 @@ environment = [
   "EMAIL",
   "GIT_AUTHOR_NAME",
   "GIT_COMMITTER_NAME",
-  "GITHUB_TOKEN",
+  "GITHUB_TOKEN"
 ]
 auto_cleanup = true
 default_terminal_mode = "host"
