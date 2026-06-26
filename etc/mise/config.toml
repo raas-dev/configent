@@ -55,7 +55,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:agent-cu' = { version = 'latest', postinstall = "agent-cu check-permissions" }
 'npm:@llamaindex/liteparse' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
-'npm:@fission-ai/openspec' = 'latest'
+#'npm:@fission-ai/openspec' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
 
 # github
