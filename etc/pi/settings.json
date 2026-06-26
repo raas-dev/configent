@@ -77,5 +77,6 @@
   "steeringMode": "all",
   "theme": "ayu-dark",
   "transport": "auto",
-  "treeFilterMode": "user-only"
+  "treeFilterMode": "user-only",
+  "defaultProjectTrust": "always"
 }
