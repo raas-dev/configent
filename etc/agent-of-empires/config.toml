@@ -38,6 +38,7 @@ environment = [
     "GIT_AUTHOR_EMAIL",
     "GIT_COMMITTER_NAME",
     "GIT_COMMITTER_EMAIL",
+    "GITHUB_TOKEN"
 ]
 auto_cleanup = true
 default_terminal_mode = "host"
@@ -65,7 +66,7 @@ restart_wake_message = "wake up: pick up what you were doing"
 row_tag = "none"
 session_id_poller_max_threads = 50
 live_send_exit_chord = "C-q"
-live_send_leader = "C-b"
+live_send_leader = "C-a"
 new_session_attach_mode = "tmux"
 default_attach_mode = "tmux"
 click_action = "live_send"
