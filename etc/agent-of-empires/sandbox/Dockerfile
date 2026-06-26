@@ -1,4 +1,4 @@
-# aoe-sandbox: Agent of Empires sandbox image (self-contained, fixed opencode)
+# aoe-sandbox: Agent of Empires sandbox image (local, fixed opencode)
 #
 # Self-contained replacement for ghcr.io/agent-of-empires/aoe-sandbox:latest.
 # Bundles every CLI/agent the upstream image ships plus a version-pinned,
@@ -6,13 +6,13 @@
 # 1.11.2's Rust `agent-client-protocol` client.
 #
 # Build:
-#   docker build -t aoe-sandbox:fix .
+#   docker build -t aoe-sandbox:local .
 #   docker buildx build --platform linux/arm64,linux/amd64 \
-#     -t ghcr.io/<you>/aoe-sandbox:fix --push .
+#     -t ghcr.io/<you>/aoe-sandbox:local --push .
 #
 # Use:
-#   [sandbox] default_image = "aoe-sandbox:fix"
-#   # or: aoe add --sandbox --sandbox-image aoe-sandbox:fix /path/to/repo
+#   [sandbox] default_image = "aoe-sandbox:local"
+#   # or: aoe add --sandbox --sandbox-image aoe-sandbox:local /path/to/repo
 
 FROM ubuntu:26.04
 
@@ -126,16 +126,18 @@ RUN mkdir -p \
         /root/.qwen \
         /root/.ssh
 
-# --- build-time sanity check --------------------------------------------
-# Refuse to ship if opencode acp doesn't respond to the ACP initialize
-# handshake. This is the bug we are fixing; catching it at build time
-# means broken images fail locally, not in production.
+# --- workspace dir + build-time sanity check ----------------------------
+# /workspace is the bind-mount target at runtime (aoe wraps it via
+# `workdir=/workspace/<repo>`), so it must exist before any RUN can cd
+# into it. Sanity check refuses to ship if opencode acp doesn't respond
+# to the ACP initialize handshake -- catching the bug we are fixing at
+# build time means broken images fail locally, not in production.
+RUN mkdir -p /workspace
+WORKDIR /workspace
 RUN set -eux; \
-    cd /workspace; \
     printf '%s\n' \
       '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":1,"clientCapabilities":{},"clientInfo":{"name":"build-check","version":"0"}}}' \
       | timeout 5 /root/.opencode/bin/opencode acp \
       | grep -q '"agentInfo":{"name":"OpenCode"'
 
-WORKDIR /workspace
 CMD ["sleep", "infinity"]

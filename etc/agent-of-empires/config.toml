@@ -26,7 +26,7 @@ init_submodules = true
 
 [sandbox]
 enabled_by_default = false
-default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
+default_image = "aoe-sandbox:local"
 extra_volumes = []
 environment = [
     "TERM",

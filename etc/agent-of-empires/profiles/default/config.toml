@@ -17,7 +17,7 @@ context_lines = 3
 
 [sandbox]
 auto_cleanup = true
-default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
+default_image = "aoe-sandbox:local"
 default_terminal_mode = "host"
 enabled_by_default = false
 environment = [
