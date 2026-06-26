@@ -65,20 +65,19 @@ RUN set -eux; \
     /root/.opencode/bin/opencode --version
 ENV PATH="/root/.opencode/bin:${PATH}"
 
-# Move the real opencode binary aside so a wrapper can sit at the same path
-# and ensure host-path symlinks exist before each spawn. aoe invokes
-# `opencode acp` by name; the wrapper creates symlinks for any host-prefixed
-# path recorded in /root/.local/share/opencode/opencode.db, then exec's
-# the real binary. This covers the case where a session is created after
-# container start and the db has a host path that the entrypoint did not
-# see at boot time.
+# Move the real opencode binary aside so a stdio proxy can sit at the
+# same path and rewrite host-prefixed cwd in session/new and session/load
+# frames before forwarding to opencode. aoe invokes `opencode acp` by
+# name; without the proxy, opencode boots location services on a host
+# path that does not exist inside the container and the LLM loop hangs.
+COPY opencode-wrapper.py /aoe-sandbox-bin/opencode-wrapper.py
 COPY opencode-wrapper.sh /aoe-sandbox-bin/opencode-wrapper.sh
 RUN set -eux; \
     if [ ! -f /root/.opencode/bin/opencode-real ]; then \
         mv /root/.opencode/bin/opencode /root/.opencode/bin/opencode-real; \
     fi && \
     cp /aoe-sandbox-bin/opencode-wrapper.sh /root/.opencode/bin/opencode && \
-    chmod +x /root/.opencode/bin/opencode /root/.opencode/bin/opencode-real
+    chmod +x /root/.opencode/bin/opencode /root/.opencode/bin/opencode-real /aoe-sandbox-bin/opencode-wrapper.py
 
 # --- other upstream agents ----------------------------------------------
 # Hermes (NousResearch/hermes-agent) -- --skip-setup avoids the interactive wizard;
