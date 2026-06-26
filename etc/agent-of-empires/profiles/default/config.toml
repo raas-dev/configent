@@ -1,72 +1,19 @@
 [acp]
-default_agent = "aoe-agent"
-max_concurrent_workers = 5
 rate_limit_auto_resume = true
-replay_bytes = 5242880
-replay_events = 0
 
 [app_state]
-has_acknowledged_agent_hooks = false
-has_seen_custom_instruction_warning = false
-has_seen_welcome = true
-last_seen_version = "1.5.0"
 sort_order = "oldest"
 
-[diff]
-context_lines = 3
-
-[sandbox]
-auto_cleanup = true
-default_image = "aoe-sandbox:local"
-default_terminal_mode = "host"
-enabled_by_default = false
-environment = [
-    "TERM",
-    "COLORTERM",
-    "FORCE_COLOR",
-    "NO_COLOR",
-    "EMAIL",
-    "GIT_AUTHOR_NAME",
-    "GIT_AUTHOR_EMAIL",
-    "GIT_COMMITTER_NAME",
-    "GIT_COMMITTER_EMAIL",
-    "GITHUB_TOKEN"
-]
-extra_volumes = []
-volume_ignores = []
-
 [session]
-agent_status_hooks = true
-default_tool = "opencode"
-live_send_leader = "C-a"
-show_tips = false
-strict_hotkeys = false
 yolo_mode_default = true
 
-[sound]
-enabled = false
-
-[tmux]
-clipboard = "auto"
-mouse = "auto"
-status_bar = "auto"
-
 [updates]
-check_interval_hours = 24
 notify_in_cli = false
 update_check_mode = "off"
 
 [web]
-notifications_enabled = true
-notify_on_error = true
-notify_on_idle = false
 notify_on_waiting = false
 notify_on_wake_fire = false
 
 [worktree]
-auto_cleanup = true
-bare_repo_path_template = "./{branch}"
 delete_branch_on_cleanup = true
-enabled = false
-path_template = "../{repo-name}-worktrees/{branch}"
-show_branch_in_tui = true
