@@ -10,7 +10,7 @@
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.80.1",
+  "lastChangelogVersion": "0.80.2",
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-codex-goal",

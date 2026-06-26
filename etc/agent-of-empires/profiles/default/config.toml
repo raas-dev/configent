@@ -1,3 +1,10 @@
+[acp]
+default_agent = "aoe-agent"
+max_concurrent_workers = 5
+rate_limit_auto_resume = true
+replay_bytes = 5242880
+replay_events = 0
+
 [app_state]
 has_acknowledged_agent_hooks = false
 has_seen_custom_instruction_warning = false
@@ -5,20 +12,12 @@ has_seen_welcome = true
 last_seen_version = "1.5.0"
 sort_order = "oldest"
 
-[cockpit]
-default_agent = "aoe-agent"
-default_for_claude = true
-enabled = false
-max_concurrent_workers = 5
-replay_bytes = 5242880
-replay_events = 0
-
 [diff]
 context_lines = 3
 
 [sandbox]
 auto_cleanup = true
-default_image = "ghcr.io/njbrake/aoe-sandbox:latest"
+default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
 default_terminal_mode = "host"
 enabled_by_default = false
 environment = [
@@ -32,16 +31,14 @@ volume_ignores = []
 
 [session]
 agent_status_hooks = true
-default_tool = "pi"
+default_tool = "opencode"
+live_send_leader = "C-a"
+show_tips = false
 strict_hotkeys = false
 yolo_mode_default = true
 
 [sound]
 enabled = false
-
-[theme]
-color_mode = "truecolor"
-name = "phosphor"
 
 [tmux]
 clipboard = "auto"
@@ -57,7 +54,8 @@ update_check_mode = "off"
 notifications_enabled = true
 notify_on_error = true
 notify_on_idle = false
-notify_on_waiting = true
+notify_on_waiting = false
+notify_on_wake_fire = false
 
 [worktree]
 auto_cleanup = true
