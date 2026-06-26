@@ -6,9 +6,9 @@ color_mode = "truecolor"
 idle_decay_minutes = 0
 
 [updates]
-update_check_mode = "notify"
+update_check_mode = "off"
 check_interval_hours = 24
-notify_in_cli = true
+notify_in_cli = false
 web_poll_interval_minutes = 60
 
 [telemetry]
@@ -20,7 +20,7 @@ path_template = "../{repo-name}-worktrees/{branch}"
 bare_repo_path_template = "./{branch}"
 auto_cleanup = true
 show_branch_in_tui = true
-delete_branch_on_cleanup = false
+delete_branch_on_cleanup = true
 workspace_path_template = "../{branch}-workspace-{session-id}"
 init_submodules = true
 
@@ -54,7 +54,7 @@ mouse = "auto"
 clipboard = "auto"
 
 [session]
-yolo_mode_default = false
+yolo_mode_default = true
 agent_status_hooks = true
 default_tool = "opencode"
 smart_rename = true
@@ -101,6 +101,7 @@ has_seen_non_git_project_warning = false
 has_acknowledged_agent_hooks = false
 has_acknowledged_volume_ignores_globs = false
 last_seen_version = "1.5.0"
+sort_order = "oldest"
 tips_seen = ["install-dashboard-pwa"]
 new_session_with_selection_count = 0
 used_new_from_selection = false
@@ -114,10 +115,10 @@ aoe-welcome-seen = "1"
 
 [web]
 notifications_enabled = true
-notify_on_waiting = true
+notify_on_waiting = false
 notify_on_idle = false
 notify_on_error = true
-notify_on_wake_fire = true
+notify_on_wake_fire = false
 
 [auth]
 persist_sessions = true
@@ -135,7 +136,7 @@ force_end_turn_threshold_secs = 30
 silent_orphan_grace_secs = 120
 silent_orphan_fast_grace_secs = 20
 auto_stop_idle_secs = 0
-rate_limit_auto_resume = false
+rate_limit_auto_resume = true
 rate_limit_auto_resume_grace_secs = 15
 allow_agent_install = false
 
