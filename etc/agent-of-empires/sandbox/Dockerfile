@@ -65,6 +65,21 @@ RUN set -eux; \
     /root/.opencode/bin/opencode --version
 ENV PATH="/root/.opencode/bin:${PATH}"
 
+# Move the real opencode binary aside so a wrapper can sit at the same path
+# and ensure host-path symlinks exist before each spawn. aoe invokes
+# `opencode acp` by name; the wrapper creates symlinks for any host-prefixed
+# path recorded in /root/.local/share/opencode/opencode.db, then exec's
+# the real binary. This covers the case where a session is created after
+# container start and the db has a host path that the entrypoint did not
+# see at boot time.
+COPY opencode-wrapper.sh /aoe-sandbox-bin/opencode-wrapper.sh
+RUN set -eux; \
+    if [ ! -f /root/.opencode/bin/opencode-real ]; then \
+        mv /root/.opencode/bin/opencode /root/.opencode/bin/opencode-real; \
+    fi && \
+    cp /aoe-sandbox-bin/opencode-wrapper.sh /root/.opencode/bin/opencode && \
+    chmod +x /root/.opencode/bin/opencode /root/.opencode/bin/opencode-real
+
 # --- other upstream agents ----------------------------------------------
 # Hermes (NousResearch/hermes-agent) -- --skip-setup avoids the interactive wizard;
 # FHS-style root install places `hermes` at /usr/local/bin.
@@ -126,18 +141,19 @@ RUN mkdir -p \
         /root/.qwen \
         /root/.ssh
 
-# --- workspace dir + build-time sanity check ----------------------------
-# /workspace is the bind-mount target at runtime (aoe wraps it via
-# `workdir=/workspace/<repo>`), so it must exist before any RUN can cd
-# into it. Sanity check refuses to ship if opencode acp doesn't respond
-# to the ACP initialize handshake -- catching the bug we are fixing at
-# build time means broken images fail locally, not in production.
-RUN mkdir -p /workspace
+# --- entrypoint + workspace + build-time sanity check ------------------
+# opencode 1.17.11 calls realpath(cwd) during session/new; the host path
+# does not exist inside the container. opencode also persists cwd in its
+# sqlite db; if the db was written on a host with a different prefix,
+# resumed sessions fail the same way. entrypoint.sh fixes both, deriving
+# bind-mount basenames from /proc/self/mountinfo (no host path hardcoded).
+COPY entrypoint.sh /aoe-sandbox-bin/entrypoint.sh
+RUN mkdir -p /workspace && chmod +x /aoe-sandbox-bin/entrypoint.sh
 WORKDIR /workspace
 RUN set -eux; \
     printf '%s\n' \
       '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":1,"clientCapabilities":{},"clientInfo":{"name":"build-check","version":"0"}}}' \
       | timeout 5 /root/.opencode/bin/opencode acp \
       | grep -q '"agentInfo":{"name":"OpenCode"'
-
+ENTRYPOINT ["/aoe-sandbox-bin/entrypoint.sh"]
 CMD ["sleep", "infinity"]
