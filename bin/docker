@@ -211,11 +211,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # True if creating a file in lima_cwd works. test -w can pass while touch
   # fails; do not rely on test -w alone.
+  # stdin must be /dev/null: this probe shares the host->lima SSH
+  # control-master socket with any subsequent `limactl shell` (e.g. the actual
+  # `docker exec` call), and the remote `sh -c` probe otherwise slurps the
+  # parent's stdin, breaking long-lived stdio streams (ACP/JSON-RPC agents).
   lima_guest_cwd_writable() {
     limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
       "t=\"\$1/.docker-write-probe.\$\$\"; rm -f \"\$t\"; \
       touch \"\$t\"; rm -f \"\$t\"" \
-      _ "$lima_cwd" >/dev/null 2>&1
+      _ "$lima_cwd" </dev/null >/dev/null 2>&1
   }
 
   # virtiofs often comes up ro after boot even when lima.yaml has writable:
