@@ -44,6 +44,18 @@ mkdir -p "$aoe_path"
 rm -rf "$aoe_path/profiles"
 ln -sfnv "$config_path/agent-of-empires/profiles" "$aoe_path/profiles"
 
+# sandbox dir
+if [ ! -r "$backup_path/.agent-of-empires/sandbox" ]; then
+  if [ -r "$aoe_path/sandbox" ]; then
+    mkdir -p "$backup_path/.agent-of-empires"
+    cp -aP "$aoe_path/sandbox" "$backup_path/.agent-of-empires/sandbox"
+  fi
+fi
+
+mkdir -p "$aoe_path"
+rm -rf "$aoe_path/sandbox"
+ln -sfnv "$config_path/agent-of-empires/sandbox" "$aoe_path/sandbox"
+
 ### acp ########################################################################
 
 aoe acp doctor --fix
