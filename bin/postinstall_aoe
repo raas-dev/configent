@@ -43,3 +43,7 @@ fi
 mkdir -p "$aoe_path"
 rm -rf "$aoe_path/profiles"
 ln -sfnv "$config_path/agent-of-empires/profiles" "$aoe_path/profiles"
+
+### acp ########################################################################
+
+aoe acp doctor --fix
