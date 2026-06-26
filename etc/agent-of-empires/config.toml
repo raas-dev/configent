@@ -1,1 +1,141 @@
 default_profile = "default"
+
+[theme]
+name = "deep-ocean"
+color_mode = "truecolor"
+idle_decay_minutes = 0
+
+[updates]
+update_check_mode = "notify"
+check_interval_hours = 24
+notify_in_cli = true
+web_poll_interval_minutes = 60
+
+[telemetry]
+enabled = false
+
+[worktree]
+enabled = false
+path_template = "../{repo-name}-worktrees/{branch}"
+bare_repo_path_template = "./{branch}"
+auto_cleanup = true
+show_branch_in_tui = true
+delete_branch_on_cleanup = false
+workspace_path_template = "../{branch}-workspace-{session-id}"
+init_submodules = true
+
+[sandbox]
+enabled_by_default = false
+default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
+extra_volumes = []
+environment = [
+    "TERM",
+    "COLORTERM",
+    "FORCE_COLOR",
+    "NO_COLOR",
+]
+auto_cleanup = true
+default_terminal_mode = "host"
+volume_ignores = []
+volume_ignores_strategy = "anonymous"
+mount_ssh = false
+selinux_relabel = false
+container_runtime = "docker"
+
+[tmux]
+status_bar = "auto"
+mouse = "auto"
+clipboard = "auto"
+
+[session]
+yolo_mode_default = false
+agent_status_hooks = true
+smart_rename = true
+smart_rename_agent = ""
+mouse_capture = true
+strict_hotkeys = false
+snooze_duration_minutes = 30
+auto_stop_idle_secs = 0
+restart_wake_message = "wake up: pick up what you were doing"
+row_tag = "none"
+session_id_poller_max_threads = 50
+live_send_exit_chord = "C-q"
+live_send_leader = "C-b"
+new_session_attach_mode = "tmux"
+default_attach_mode = "tmux"
+click_action = "live_send"
+confirm_before_quit = true
+unread_indicator = true
+show_tips = true
+tie_workdir_to_name = true
+
+[diff]
+context_lines = 3
+split_view = false
+
+[hooks]
+
+[host_hooks]
+
+[sound]
+enabled = false
+mode = "random"
+
+[status_hooks]
+enabled = false
+debounce_ms = 100
+
+[app_state]
+has_seen_welcome = false
+has_seen_web_tour = true
+has_responded_to_telemetry = false
+has_seen_custom_instruction_warning = false
+has_seen_non_git_project_warning = false
+has_acknowledged_agent_hooks = false
+has_acknowledged_volume_ignores_globs = false
+new_session_with_selection_count = 0
+used_new_from_selection = false
+
+[app_state.web_ui_state]
+aoe-acp-last-tool = "opencode"
+aoe-last-browse-dir = "/Users/asyrjasalo"
+aoe-web-settings = '{"mobileFontSize":8,"desktopFontSize":13,"autoOpenKeyboard":true,"persistentTerminals":true,"maxPersistentTerminals":10,"diffViewMode":"tree","diffViewLayout":"split","collapsedDiffDirs":[]}'
+aoe-welcome-seen = "1"
+
+[web]
+notifications_enabled = true
+notify_on_waiting = true
+notify_on_idle = false
+notify_on_error = true
+notify_on_wake_fire = true
+
+[auth]
+persist_sessions = true
+
+[acp]
+default_agent = "aoe-agent"
+max_concurrent_workers = 5
+replay_events = 0
+replay_bytes = 5242880
+node_path = ""
+show_tool_durations = true
+queue_drain_mode = "combined"
+max_concurrent_resumes = 4
+force_end_turn_threshold_secs = 30
+silent_orphan_grace_secs = 120
+silent_orphan_fast_grace_secs = 20
+auto_stop_idle_secs = 0
+rate_limit_auto_resume = false
+rate_limit_auto_resume_grace_secs = 15
+allow_agent_install = false
+
+[logging]
+default_level = "info"
+output = "file"
+file_path = "debug.log"
+rotation = "size"
+max_size_mib = 50
+keep_count = 5
+show_spans = false
+
+[logging.targets]
