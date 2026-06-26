@@ -1,26 +1,4 @@
 {
   "providers": {
-    "zai": {
-      "models": [
-        {
-          "id": "glm-5.2",
-          "name": "GLM-5.2",
-          "input": ["text"],
-          "contextWindow": 1000000,
-          "maxTokens": 131072
-        }
-      ]
-    },
-    "minimax": {
-      "models": [
-        {
-          "id": "MiniMax-M3",
-          "name": "MiniMax-M3",
-          "input": ["text"],
-          "contextWindow": 1000000,
-          "maxTokens": 32000
-        }
-      ]
-    }
   }
 }
