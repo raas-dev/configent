@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.4](https://github.com/raas-dev/configent/compare/1.229.3...1.229.4) (2026-06-27)
+
+
+### Fixes
+
+* **agent-of-empires:** fix opencode cwd/resume symlinks in sandbox ([27e05ff](https://github.com/raas-dev/configent/commit/27e05ffe6ac6b60d0a27a466073189d305831b00))
+* **agent-of-empires:** proxy opencode stdin cwd for container mounts ([88daa6c](https://github.com/raas-dev/configent/commit/88daa6c5a067a99d4adb79a42c20307545ca6ae4))
+* **agent-of-empires:** tighten session/web notification defaults ([7abee32](https://github.com/raas-dev/configent/commit/7abee32b74ecb452dc548c23203bdffc901e7860))
+* **docker:** prevent stdin from breaking limactl stdio streams ([e5bbd0d](https://github.com/raas-dev/configent/commit/e5bbd0dcfcbb3c1e5218fee9644242d5c12fbb93))
+
 ## [1.229.3](https://github.com/raas-dev/configent/compare/1.229.2...1.229.3) (2026-06-25)
 
 
