@@ -26,17 +26,19 @@ init_submodules = true
 
 [sandbox]
 enabled_by_default = false
-default_image = "aoe-sandbox:local"
+default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
 extra_volumes = []
 environment = [
-  "TERM",
-  "COLORTERM",
-  "FORCE_COLOR",
-  "NO_COLOR",
-  "EMAIL",
-  "GIT_AUTHOR_NAME",
-  "GIT_COMMITTER_NAME",
-  "GITHUB_TOKEN"
+    "TERM",
+    "COLORTERM",
+    "FORCE_COLOR",
+    "NO_COLOR",
+    "EMAIL",
+    "GIT_AUTHOR_NAME",
+    "GIT_AUTHOR_EMAIL",
+    "GIT_COMMITTER_NAME",
+    "GIT_COMMITTER_EMAIL",
+    "GITHUB_TOKEN",
 ]
 auto_cleanup = true
 default_terminal_mode = "host"
@@ -52,9 +54,9 @@ mouse = "auto"
 clipboard = "auto"
 
 [session]
+default_tool = "opencode"
 yolo_mode_default = true
 agent_status_hooks = true
-default_tool = "opencode"
 smart_rename = true
 smart_rename_agent = ""
 mouse_capture = true
@@ -93,19 +95,19 @@ debounce_ms = 100
 [app_state]
 has_seen_welcome = true
 has_seen_web_tour = true
+last_seen_version = "1.5.0"
 has_responded_to_telemetry = true
 has_seen_custom_instruction_warning = false
 has_seen_non_git_project_warning = false
 has_acknowledged_agent_hooks = false
 has_acknowledged_volume_ignores_globs = false
-last_seen_version = "1.5.0"
 sort_order = "oldest"
 tips_seen = ["install-dashboard-pwa"]
 new_session_with_selection_count = 0
 used_new_from_selection = false
 
 [app_state.web_ui_state]
-aoe-acp-last-tool = "pi"
+aoe-acp-last-tool = "opencode"
 aoe-last-browse-dir = "/Users/asyrjasalo"
 aoe-repo-collapsed-__scratch__ = "1"
 aoe-web-settings = '{"mobileFontSize":8,"desktopFontSize":13,"autoOpenKeyboard":true,"persistentTerminals":true,"maxPersistentTerminals":10,"diffViewMode":"tree","diffViewLayout":"split","collapsedDiffDirs":[]}'
