@@ -29,25 +29,26 @@ Simplify code by reducing complexity while preserving exact behavior. The goal i
 
 ### 1. Preserve Behavior Exactly
 
-Every simplification must produce identical runtime behavior:
+Don't change what the code does — only how it expresses it. All inputs, outputs, side effects, error behavior, and edge cases must remain identical. If you're not sure a simplification preserves behavior, don't make it.
 
-- Same outputs for same inputs
-- Same error handling and edge cases
-- Same side effects and state mutations
-- Same performance characteristics (or better)
+Before every change, ask:
 
-If you cannot verify behavior is preserved (no tests, unclear spec), stop and ask.
+- Does this produce the same output for every input?
+- Does this maintain the same error behavior?
+- Does this preserve the same side effects and ordering?
+- Do all existing tests still pass without modification?
 
 ### 2. Follow Project Conventions
 
-Match the existing codebase style:
+Simplification means making code more consistent with the codebase, not imposing external preferences.
 
-- Import patterns, naming conventions, file organization
-- Error handling patterns and logging style
-- Testing patterns and assertion style
-- Comment style and documentation level
+Before simplifying:
 
-Don't introduce a "better" pattern that clashes with the rest of the codebase.
+1. Read `AGENTS.md` / project conventions
+2. Study how neighboring code handles similar patterns
+3. Match the project's style for imports, naming, function style, error handling, and type annotations
+
+Simplification that breaks project consistency is not simplification — it's churn.
 
 ### 3. Prefer Clarity Over Cleverness
 
@@ -74,29 +75,43 @@ Default to simplifying recently modified code. Avoid unrelated drive-by refactor
 
 ### Step 1: Understand Before Touching
 
-- Read the code carefully. Trace the logic path.
-- Understand what it does, why it does it, and what depends on it.
-- Check for tests that verify the behavior you're about to simplify.
-- If the code is unclear, add clarifying comments or names first — don't restructure yet.
+Before changing or removing anything, understand why it exists.
+
+Answer:
+
+- What is this code's responsibility?
+- What calls it? What does it call?
+- What are the edge cases and error paths?
+- Are there tests that define expected behavior?
+- Why might it have been written this way?
+
+If you can't answer these, read more context first.
 
 ### Step 2: Look for Simplification Opportunities
 
-Common patterns that benefit from simplification:
+Signals:
 
-- **Unnecessary nesting** — flatten guard clauses, early returns
-- **Redundant variables** — eliminate intermediaries that add no clarity
-- **Dead code** — unreachable branches, unused imports, commented-out code
-- **Over-abstracted** — single-use functions, unnecessary indirection
-- **Complex conditions** — extract into named booleans or guard functions
-- **Inconsistent patterns** — align with nearby code conventions
+- Deep nesting
+- Long functions with mixed responsibilities
+- Nested ternaries
+- Boolean flag arguments
+- Repeated conditionals
+- Generic or misleading names
+- Duplicated logic
+- Dead code
+- Wrappers or abstractions that add no value
 
 ### Step 3: Apply Changes Incrementally
 
-Make one simplification at a time. After each:
+Make one simplification at a time.
 
-- Re-read the result. Does it still express the same intent?
-- Check that tests still pass (if available).
-- Ensure the diff is clean and reviewable.
+For each simplification:
+
+1. Make the change
+2. Run relevant tests
+3. Keep it only if behavior is preserved
+
+Separate refactoring from feature work whenever possible.
 
 ### Step 4: Verify the Result
 
