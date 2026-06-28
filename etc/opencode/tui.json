@@ -6,7 +6,10 @@
   },
   "scroll_speed": 2,
   "keybinds": {
-    "input_submit": ["return", "kpenter"]
+    "input_submit": [
+      "return",
+      "kpenter"
+    ]
   },
   "plugin": [
     "@prevalentware/opencode-goal-plugin"
