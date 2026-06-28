@@ -54,7 +54,10 @@
   "experimental": {
     "truncate_all_tool_outputs": false,
     "aggressive_truncation": false,
-    "auto_resume": true
+    "auto_resume": true,
+    "dynamic_context_pruning": {
+      "enabled": false
+    }
   },
   "git_master": {
     "commit_footer": false,
