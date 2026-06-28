@@ -1,11 +1,6 @@
 [sandbox]
 enabled_by_default = false
 default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
-# ponytail: extra_volumes mounts the repo at /home/node/workspace too, so
-# opencode's session directory (aoe passes its in-container workspace path
-# un-translated) resolves inside the sandbox. Source resolves on the lima daemon
-# host via setup-sandbox-bridge.sh. Harmless no-op when aoe runs natively.
-extra_volumes = ["/home/node/workspace:/home/node/workspace:rw"]
 environment = [
   "TERM",
   "COLORTERM",
