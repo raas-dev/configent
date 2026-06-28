@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/master/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
       "model": "zai-coding-plan/glm-5.2"
@@ -53,21 +53,19 @@
   ],
   "experimental": {
     "truncate_all_tool_outputs": false,
-    "aggressive_truncation": false,
-    "auto_resume": true,
-    "dynamic_context_pruning": {
-      "enabled": false
-    }
+    "aggressive_truncation": false
   },
   "git_master": {
     "commit_footer": false,
-    "include_co_authored_by": false
+    "include_co_authored_by": false,
+    "git_env_prefix": "GIT_MASTER=1"
   },
   "tmux": {
     "enabled": false,
     "layout": "main-vertical",
     "main_pane_size": 60,
     "main_pane_min_width": 120,
-    "agent_pane_min_width": 40
+    "agent_pane_min_width": 40,
+    "isolation": "inline"
   }
 }
