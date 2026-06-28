@@ -10,6 +10,33 @@
     "websearch",
     "grep_app"
   ],
+  "disabled_agents": [
+    "observer"
+  ],
+  "disabled_tools": [],
+  "disabled_skills": [],
+  "autoUpdate": true,
+  "backgroundJobs": {
+    "maxSessionsPerAgent": 2,
+    "readContextMinLines": 10,
+    "readContextMaxFiles": 8
+  },
+  "fallback": {
+    "enabled": true,
+    "timeoutMs": 15000,
+    "retryDelayMs": 500,
+    "retry_on_empty": true
+  },
+  "interview": {
+    "maxQuestions": 2,
+    "outputFolder": "interview",
+    "autoOpenBrowser": true,
+    "port": 0,
+    "dashboard": false
+  },
+  "companion": {
+    "enabled": false
+  },
   "preset": "zai-plan",
   "presets": {
     "zai-plan": {
