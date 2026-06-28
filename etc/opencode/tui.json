@@ -3,6 +3,9 @@
   "theme": "ayu",
   "scroll_acceleration": true,
   "scroll_speed": 2,
+  "keybinds": {
+    "input_submit": ["return", "kpenter"]
+  },
   "plugin": [
     "@prevalentware/opencode-goal-plugin"
   ]
