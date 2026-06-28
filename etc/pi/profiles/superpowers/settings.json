@@ -2,8 +2,6 @@
   "packages": [
     "npm:@casualjim/pi-superpowers",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-subagents",
-    "npm:pi-intercom",
-    "npm:pi-prompt-template-model"
+    "npm:pi-subagents"
   ]
 }
