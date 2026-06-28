@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.229.5](https://github.com/raas-dev/configent/compare/1.229.4...1.229.5) (2026-06-28)
+
+
+### Fixes
+
+* **agent-of-empires:** mount workspace into sandbox ([2e7f7eb](https://github.com/raas-dev/configent/commit/2e7f7ebccebf9436b8431096a6fac8746202e509))
+* **opencode:** fix scroll_acceleration config for tui.json ([416f792](https://github.com/raas-dev/configent/commit/416f7928fa692f3db43ff35449f8603cbcce23a6))
+
 ## [1.229.4](https://github.com/raas-dev/configent/compare/1.229.3...1.229.4) (2026-06-27)
 
 
