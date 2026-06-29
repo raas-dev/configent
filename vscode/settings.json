@@ -688,13 +688,12 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "acp.agents": {
-    "Pi Coding Agent": {
+  "vscode-acp-chat.customAgents": [
+ {
+      "id": "pi",
+      "name": "Pi Coding Agent",
       "command": "npx",
-      "args": [
-        "pi-acp"
-      ],
-      "env": {}
+      "args": ["pi-acp"]
     }
-  }
+  ]
 }
