@@ -43,7 +43,6 @@ brew install --cask --force handy
 #brew install --cask --force libreoffice libreoffice-language-pack
 #brew install --cask --force logitech-g-hub
 #brew install --cask --force nordvpn
-#brew install --cask --force tunnelblick
 #brew install --cask --force utm
 brew install --cask --force visual-studio-code
 #brew install --cask --force zed
