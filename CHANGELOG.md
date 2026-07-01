@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.230.0](https://github.com/raas-dev/configent/compare/1.229.5...1.230.0) (2026-07-01)
+
+
+### Features
+
+* **vscode:** enable ACP client auto-approval ([4f8cb9f](https://github.com/raas-dev/configent/commit/4f8cb9fab81b7b77ad23962c003f624c488363dc))
+
+
+### Fixes
+
+* **extensions:** hide changelog banner ([a72ead2](https://github.com/raas-dev/configent/commit/a72ead2501b61a44d8dd0401cab681b2b7ca605f))
+* **opencode:** disable scroll_acceleration in tui.json ([26809d6](https://github.com/raas-dev/configent/commit/26809d6d6e2bfd81ff928e4af07c2f3698af709e))
+* **vscode:** update chat providers in extensions list ([8a4a743](https://github.com/raas-dev/configent/commit/8a4a743dbfa37037e587d7a0f285d89f8168aad0))
+
 ## [1.229.5](https://github.com/raas-dev/configent/compare/1.229.4...1.229.5) (2026-06-28)
 
 
