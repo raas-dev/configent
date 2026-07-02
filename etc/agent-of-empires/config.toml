@@ -1,5 +1,3 @@
-default_profile = "opencode"
-
 [theme]
 name = "deep-ocean"
 color_mode = "truecolor"
