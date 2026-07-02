@@ -26,6 +26,7 @@ init_submodules = true
 
 [sandbox]
 enabled_by_default = false
+default_image = "aoe-opencode:latest"
 extra_volumes = []
 environment = [
     "TERM",
