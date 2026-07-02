@@ -3,7 +3,7 @@ default_tool = "opencode"
 
 [sandbox]
 enabled_by_default = true
-default_image = "aoe-opencode"
+default_image = "aoe-opencode:latest"
 environment = [
   "TERM",
   "COLORTERM",
