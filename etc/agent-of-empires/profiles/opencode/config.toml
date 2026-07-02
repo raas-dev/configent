@@ -1,5 +1,5 @@
 [sandbox]
-enabled_by_default = false
+enabled_by_default = true
 default_image = "aoe-opencode"
 environment = [
   "TERM",
