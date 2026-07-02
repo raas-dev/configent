@@ -1,4 +1,4 @@
-default_profile = "default"
+default_profile = "opencode"
 
 [theme]
 name = "deep-ocean"
@@ -26,7 +26,7 @@ init_submodules = true
 
 [sandbox]
 enabled_by_default = false
-default_image = "aoe-opencode:latest"
+default_image = "aoe-aoe:latest"
 extra_volumes = []
 environment = [
     "TERM",
