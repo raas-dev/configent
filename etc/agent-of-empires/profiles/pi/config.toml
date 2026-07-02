@@ -1,3 +1,6 @@
+[session]
+default_tool = "pi"
+
 [sandbox]
 enabled_by_default = true
 default_image = "aoe-pi"
