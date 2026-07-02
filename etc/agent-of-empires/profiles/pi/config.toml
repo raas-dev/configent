@@ -3,7 +3,6 @@ default_tool = "pi"
 
 [sandbox]
 enabled_by_default = true
-default_image = "aoe-pi:latest"
 environment = [
   "TERM",
   "COLORTERM",
