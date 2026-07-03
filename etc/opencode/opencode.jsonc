@@ -24,7 +24,8 @@
     "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
-    "@tarquinen/opencode-dcp"
+    "@tarquinen/opencode-dcp",
+    "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "share": "disabled",
   "experimental": {
