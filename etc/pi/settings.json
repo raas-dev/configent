@@ -4,8 +4,8 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "MiniMax-M3",
-  "defaultProvider": "minimax",
+  "defaultModel": "glm-5.2",
+  "defaultProvider": "zai",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
