@@ -22,7 +22,9 @@
       "$HOME/.local/share/uv/tools",
       "$HOME/.local/state",
       "$HOME/.config/configent/opencode",
-      "/tmp"
+      "/tmp",
+      "$HOME/.npm",
+      "$HOME/.zai"
     ],
     "read": [
       "$HOME/.agents",
@@ -78,6 +80,9 @@
       "EXA_API_KEY",
       "ZAI_API_KEY",
       "MINIMAX_API_KEY"
-    ]
+    ],
+    "set_vars": {
+      "npm_config_script_shell": "/bin/sh"
+    }
   }
 }
