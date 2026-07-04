@@ -17,6 +17,8 @@
       "$HOME/.npm",
       "$HOME/.config/configent/pi",
       "$HOME/.headroom",
+      "$HOME/.cache/uv",
+      "$HOME/.local/share/uv",
       "/tmp"
     ],
     "read": [
@@ -76,7 +78,8 @@
       "CONTEXT7_API_KEY",
       "EXA_API_KEY",
       "ZAI_API_KEY",
-      "MINIMAX_API_KEY"
+      "MINIMAX_API_KEY",
+      "MINIMAX_API_HOST"
     ]
   }
 }
