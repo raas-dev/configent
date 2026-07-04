@@ -26,6 +26,7 @@
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/mcp",
+      "$HOME/.zai",
       "$HOME/.cargo",
       "$HOME/.bun",
       "$HOME/.azd",
