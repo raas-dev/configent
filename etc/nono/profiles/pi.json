@@ -27,6 +27,7 @@
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/mcp",
       "$HOME/.zai",
+      "$HOME/.config/gh",
       "$HOME/.cargo",
       "$HOME/.bun",
       "$HOME/.azd",
