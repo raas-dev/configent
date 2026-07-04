@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.230.1](https://github.com/raas-dev/configent/compare/1.230.0...1.230.1) (2026-07-04)
+
+
+### Fixes
+
+* **agent-of-empires:** add sandbox config for pi and opencode ([6ca7e74](https://github.com/raas-dev/configent/commit/6ca7e7472bc43319a8f93585849aad8938b7aeaf))
+* **agent-of-empires:** enable pi/opencode sandbox by default ([a9b2d59](https://github.com/raas-dev/configent/commit/a9b2d5935a820b23e700eaf34f60832986cea9ea))
+* **agent-of-empires:** set default sandbox image to aoe-aoe:latest ([8cc990a](https://github.com/raas-dev/configent/commit/8cc990ab8d435c5f2dcc193191b648bf388fba27))
+* **agent-of-empires:** set default sandbox image to aoe-opencode:latest ([aefdb13](https://github.com/raas-dev/configent/commit/aefdb13036c7c263b78d0c1c8ce820c23fa467d6))
+* **agent-of-empires:** set default tool to pi/opencode sessions ([2f9c465](https://github.com/raas-dev/configent/commit/2f9c4655c3a7fbecbfef0de61bcfca01c9ca552e))
+* **agent-of-empires:** set sandbox images to latest tags ([451e4bc](https://github.com/raas-dev/configent/commit/451e4bc37bb4746a6a346cb0886f63888e64de46))
+* **opencode:** add superpowers plugin by default ([ff0f470](https://github.com/raas-dev/configent/commit/ff0f470d65d964fa47ecf3c28999bfa1cddd5f32))
+* **opencode:** allow npm and zai directories ([c8954e5](https://github.com/raas-dev/configent/commit/c8954e5731a6b333b4b2b099dceb89aaeaaf839e))
+* **opencode:** allow opencode-goal-plugin data directory ([04e444c](https://github.com/raas-dev/configent/commit/04e444c316db7a4c5c2e33f077d280a3b214e1c0))
+* **opencode:** allow parent of protected ([088015f](https://github.com/raas-dev/configent/commit/088015f56eebaf3cb9c64ca213ca534db77d01d2))
+* **opencode:** allow uv tool data directories ([da4a01e](https://github.com/raas-dev/configent/commit/da4a01e2a4371b8d45ca07042b4a70b27782be70))
+* **pi:** allow .zai directory in allowed paths ([f5f4f10](https://github.com/raas-dev/configent/commit/f5f4f10037f75c490b0949a7232a903919224a23))
+* **pi:** allow uv cache dirs and minimax host ([6ffc670](https://github.com/raas-dev/configent/commit/6ffc670d60a5626ec93225a6ed3af97f4ddd92e0))
+* **pi:** permit mise exec and expanded read paths ([0e089b2](https://github.com/raas-dev/configent/commit/0e089b2fbd93cf4868c08bc84f7bfaf691900593))
+* **pi:** set default model to glm-5.2 (zai provider) ([844759d](https://github.com/raas-dev/configent/commit/844759d85160a94061dc1941bc882110a159afd7))
+
 ## [1.230.0](https://github.com/raas-dev/configent/compare/1.229.5...1.230.0) (2026-07-01)
 
 
