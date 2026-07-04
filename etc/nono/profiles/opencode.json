@@ -19,6 +19,7 @@
       "$HOME/.local/share/opencode",
       "$HOME/.local/share/opentui",
       "$HOME/.local/share/opencode-goal-plugin",
+      "$HOME/.local/share/uv/tools",
       "$HOME/.local/state",
       "$HOME/.config/configent/opencode",
       "/tmp"
@@ -26,6 +27,8 @@
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
+      "$HOME/.local/share/uv",
+      "$HOME/.config/uv",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/claude-code",
       "$HOME/.config/configent/mcp"
