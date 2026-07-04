@@ -33,7 +33,8 @@
       "$HOME/.config/uv",
       "$HOME/.local/configent/bin",
       "$HOME/.config/configent/claude-code",
-      "$HOME/.config/configent/mcp"
+      "$HOME/.config/configent/mcp",
+      "$HOME/.config/gh"
     ],
     "allow_file": [
       "$HOME/.claude.json"
