@@ -14,6 +14,8 @@
   },
   "unsafe_macos_seatbelt_rules": [
     "(allow user-preference-read)",
-    "(allow system-socket (socket-domain 32) (socket-type 2) (socket-protocol 2))"
+    "(allow system-socket (socket-domain 32) (socket-type 2) (socket-protocol 2))",
+    "(allow process-exec (subpath \"${HOME}/.local/share/mise\"))",
+    "(allow process-exec* (subpath \"${HOME}/.local/share/mise\"))"
   ]
 }

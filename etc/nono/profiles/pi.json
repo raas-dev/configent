@@ -16,13 +16,20 @@
       "$HOME/.pi-lens",
       "$HOME/.npm",
       "$HOME/.config/configent/pi",
+      "$HOME/.headroom",
       "/tmp"
     ],
     "read": [
       "$HOME/.agents",
       "$HOME/.local/share/mise",
       "$HOME/.local/configent/bin",
-      "$HOME/.config/configent/mcp"
+      "$HOME/.config/configent/mcp",
+      "$HOME/.cargo",
+      "$HOME/.bun",
+      "$HOME/.azd",
+      "$HOME/Library/Application Support/Code",
+      "$HOME/Library/pnpm",
+      "$HOME/Applications"
     ],
     "read_file": [
       "/etc/debian_version",
