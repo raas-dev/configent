@@ -4,6 +4,7 @@
     "description": "OpenCode"
   },
   "extends": "default",
+  "allow_parent_of_protected": true,
   "groups": {
     "include": [
       "git_config"
