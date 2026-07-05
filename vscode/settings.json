@@ -517,6 +517,7 @@
   "terminal.external.osxExec": "Terminal.app",
   "terminal.integrated.accessibleViewPreserveCursorPosition": true,
   "terminal.integrated.confirmOnKill": "never",
+  "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
@@ -584,6 +585,16 @@
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "update.titleBar": false,
+  "vscode-acp-chat.customAgents": [
+    {
+      "args": [
+        "pi-acp"
+      ],
+      "command": "npx",
+      "id": "pi",
+      "name": "Pi Coding Agent"
+    }
+  ],
   "vsintellicode.python.completionsEnabled": false,
   "window.autoDetectColorScheme": false,
   "window.closeWhenEmpty": true,
@@ -687,13 +698,5 @@
     "!Split sequence"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "vscode-acp-chat.customAgents": [
- {
-      "id": "pi",
-      "name": "Pi Coding Agent",
-      "command": "npx",
-      "args": ["pi-acp"]
-    }
-  ]
+  "zenMode.hideStatusBar": false
 }
