@@ -10,6 +10,20 @@
     }
   },
   "model": "minimax-coding-plan/MiniMax-M3",
+  "provider": {
+    "agentgateway": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "agentgateway",
+      "options": {
+        "baseURL": "http://agentgateway:8000/v1"
+      },
+      "models": {
+        "minimax/MiniMax-M3": {
+          "name": "MiniMax-M3"
+        }
+      }
+    }
+  },
   "permission": {
     "external_directory": "allow",
     "read": {
