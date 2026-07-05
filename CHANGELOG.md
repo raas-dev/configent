@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.230.2](https://github.com/raas-dev/configent/compare/1.230.1...1.230.2) (2026-07-05)
+
+
+### Fixes
+
+* **pi:** allow .config/gh in allowed paths ([e3b6f25](https://github.com/raas-dev/configent/commit/e3b6f2521d96e00d38edac1f0f8728c4808f5844))
+* **pi:** allow .config/gh in allowed paths ([87799e7](https://github.com/raas-dev/configent/commit/87799e709b8472d276ceb78cba9c593903088a63))
+
 ## [1.230.1](https://github.com/raas-dev/configent/compare/1.230.0...1.230.1) (2026-07-04)
 
 
