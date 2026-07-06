@@ -11,10 +11,10 @@
   },
   "provider": {
     "ag": {
-      "npm": "@ai-sdk/openai-compatible",
+      "npm": "@ai-sdk/openai",
       "name": "ag",
       "options": {
-        "baseURL": "http://headroom:8888",
+        "baseURL": "http://headroom:8888/v1",
         "apiKey": "{env:ONECLI_TOKEN}"
       },
       "models": {
