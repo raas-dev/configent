@@ -1265,7 +1265,6 @@ alias sqlcmd='n sqlcmd'
 # appsec
 alias grype='n grype'
 alias osv-scanner='n osv-scanner'
-alias trivy='n trivy'
 
 # osint
 alias sherlock='n sherlock'
