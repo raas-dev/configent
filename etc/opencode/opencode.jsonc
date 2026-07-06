@@ -15,11 +15,14 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "agentgateway",
       "options": {
-        "baseURL": "http://agentgateway:8000/v1"
+        "baseURL": "http://localhost:8000/v1"
       },
       "models": {
         "minimax/MiniMax-M3": {
           "name": "MiniMax-M3"
+        },
+        "zai/glm-5.2": {
+          "name": "GLM-5.2"
         }
       }
     }
