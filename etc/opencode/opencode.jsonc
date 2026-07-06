@@ -14,7 +14,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "ag",
       "options": {
-        "baseURL": "http://localhost:8888",
+        "baseURL": "http://localhost:8000",
         "apiKey": "{env:ONECLI_TOKEN}"
       },
       "models": {
