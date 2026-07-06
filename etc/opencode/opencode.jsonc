@@ -9,6 +9,24 @@
       "type": "local"
     }
   },
+  "provider": {
+    "ag": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ag",
+      "options": {
+        "baseURL": "http://localhost:8888",
+        "apiKey": "{env:ONECLI_TOKEN}"
+      },
+      "models": {
+        "MiniMax-M3": {
+          "name": "MiniMax-M3"
+        },
+        "glm-5.2": {
+          "name": "glm-5.2"
+        }
+      }
+    }
+  },
   "permission": {
     "external_directory": "allow",
     "read": {
