@@ -1263,7 +1263,6 @@ alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
 
 # sast
-alias hadolint='n hadolint'
 alias kubescape='n kubescape'
 
 # appsec
