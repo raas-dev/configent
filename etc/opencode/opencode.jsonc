@@ -9,24 +9,6 @@
       "type": "local"
     }
   },
-  "model": "minimax-coding-plan/MiniMax-M3",
-  "provider": {
-    "agentgateway": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "agentgateway",
-      "options": {
-        "baseURL": "http://localhost:8000/v1"
-      },
-      "models": {
-        "minimax/MiniMax-M3": {
-          "name": "MiniMax-M3"
-        },
-        "zai/glm-5.2": {
-          "name": "GLM-5.2"
-        }
-      }
-    }
-  },
   "permission": {
     "external_directory": "allow",
     "read": {
