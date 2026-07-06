@@ -90,7 +90,7 @@ lima = '2.1.1' #{ version = '2.1.1', postinstall = "~/.local/configent/bin/setup
 # kubernetes
 kubectl = '1.34.5'
 kubecolor = 'latest'
-#krew = { version = 'latest', postinstall = "krew install ctx ns" }
+#krew = { version = 'latest', postinstall = "krew install ctx ns kubescape" }
 #helm = 'latest'
 
 # network

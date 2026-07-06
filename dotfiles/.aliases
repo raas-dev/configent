@@ -1262,9 +1262,6 @@ alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
 
-# sast
-alias kubescape='n kubescape'
-
 # appsec
 alias grype='n grype'
 alias osv-scanner='n osv-scanner'
