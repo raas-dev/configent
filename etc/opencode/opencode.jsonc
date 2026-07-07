@@ -15,7 +15,7 @@
       "name": "ag",
       "options": {
         "baseURL": "http://localhost:8000/v1",
-        "apiKey": "FAKE_API_KEY"
+        "apiKey": "__placeholder_api_key__"
       },
       "models": {
         "MiniMax-M3": {
