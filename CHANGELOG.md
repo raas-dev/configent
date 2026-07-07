@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.231.0](https://github.com/raas-dev/configent/compare/1.230.2...1.231.0) (2026-07-07)
+
+
+### Features
+
+* add hadolint to mise config ([a910e0a](https://github.com/raas-dev/configent/commit/a910e0a8a43e7ac26c565c9a6f49a97bcbdfb5a3))
+
 ## [1.230.2](https://github.com/raas-dev/configent/compare/1.230.1...1.230.2) (2026-07-05)
 
 
