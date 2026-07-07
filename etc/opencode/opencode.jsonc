@@ -15,7 +15,7 @@
       "name": "ag",
       "options": {
         "baseURL": "http://localhost:8000/v1",
-        "apiKey": "{env:ONECLI_TOKEN}"
+        "apiKey": "FAKE_API_KEY"
       },
       "models": {
         "MiniMax-M3": {
