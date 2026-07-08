@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "name": "openchamber-proxy",
+    "description": "OpenChamber (opencode built-in)."
+  },
+  "extends": "default",
+  "allow_parent_of_protected": true,
+  "groups": {
+    "include": [
+      "git_config"
+    ]
+  },
+  "filesystem": {
+    "allow": [
+      "$WORKDIR",
+      "$HOME/.cache",
+      "$HOME/.claude",
+      "$HOME/.config/opencode",
+      "$HOME/.config/openchamber",
+      "$HOME/.local/share/opencode",
+      "$HOME/.local/share/opentui",
+      "$HOME/.local/share/opencode-goal-plugin",
+      "$HOME/.local/share/uv/tools",
+      "$HOME/.local/state",
+      "$HOME/.config/configent/opencode",
+      "/tmp",
+      "$HOME/.npm",
+      "$HOME/.zai",
+      "$HOME/.local/share/openchamber"
+    ],
+    "read": [
+      "$HOME/.agents",
+      "$HOME/.local/share/mise",
+      "$HOME/.local/share/uv",
+      "$HOME/.config/uv",
+      "$HOME/.local/configent/bin",
+      "$HOME/.config/configent/claude-code",
+      "$HOME/.config/configent/mcp",
+      "$HOME/.config/gh"
+    ],
+    "allow_file": [
+      "$HOME/.claude.json"
+    ],
+    "read_file": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
+    ],
+    "suppress_save_prompt": [
+      "$HOME"
+    ],
+    "bypass_protection": [
+      "$HOME/.zshrc",
+      "$HOME/.zprofile",
+      "$HOME/.bashrc",
+      "$HOME/.bash_profile",
+      "$HOME/.profile"
+    ]
+  },
+  "environment": {
+    "allow_vars": [
+      "PATH",
+      "HOME",
+      "USER",
+      "SHELL",
+      "TMPDIR",
+      "LANG",
+      "LC_ALL",
+      "TERM",
+      "COLORTERM",
+      "TERM_PROGRAM",
+      "TERM_PROGRAM_VERSION",
+      "NO_COLOR",
+      "FORCE_COLOR",
+      "EMAIL",
+      "GIT_AUTHOR_NAME",
+      "GIT_COMMITTER_NAME",
+      "DYNAMIC_MCP_CONFIG",
+      "NONO_PROXY_TOKEN",
+      "HTTPS_PROXY",
+      "HTTP_PROXY",
+      "NO_PROXY",
+      "SSL_CERT_FILE",
+      "REQUESTS_CA_BUNDLE",
+      "NODE_EXTRA_CA_CERTS",
+      "OPENCODE_CONFIG_DIR",
+      "OPENCHAMBER_DATA_DIR",
+      "OPENCHAMBER_HOST",
+      "OPENCHAMBER_ALLOW_UNAUTHENTICATED_LAN",
+      "OPENCODE_SKIP_START"
+    ],
+    "set_vars": {
+      "npm_config_script_shell": "/bin/sh",
+      "GITHUB_TOKEN": "FAKE_KEY",
+      "CONTEXT7_API_KEY": "FAKE_KEY",
+      "ZAI_API_KEY": "FAKE_KEY",
+      "MINIMAX_API_KEY": "FAKE_KEY",
+      "Z_AI_API_KEY": "zai-brokered-placeholder",
+      "Z_AI_MODE": "ZAI",
+      "MINIMAX_API_HOST": "https://api.minimax.io"
+    }
+  },
+  "network": {
+    "credentials": [
+      "github",
+      "context7",
+      "zai",
+      "minimax"
+    ],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "env://GITHUB_TOKEN",
+        "env_var": "GITHUB_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "token {}"
+      },
+      "context7": {
+        "upstream": "https://api.context7.com",
+        "credential_key": "env://CONTEXT7_API_KEY",
+        "env_var": "CONTEXT7_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "zai": {
+        "upstream": "https://api.z.ai/api/coding/paas/v4",
+        "credential_key": "env://ZAI_API_KEY",
+        "env_var": "ZAI_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "minimax": {
+        "upstream": "https://api.minimax.io/v1",
+        "credential_key": "env://MINIMAX_API_KEY",
+        "env_var": "MINIMAX_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    }
+  }
+}
