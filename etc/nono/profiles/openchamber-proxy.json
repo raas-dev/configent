@@ -96,12 +96,12 @@
     ],
     "set_vars": {
       "npm_config_script_shell": "/bin/sh",
-      "GITHUB_TOKEN": "FAKE_KEY",
-      "CONTEXT7_API_KEY": "FAKE_KEY",
-      "ZAI_API_KEY": "FAKE_KEY",
-      "MINIMAX_API_KEY": "FAKE_KEY",
-      "Z_AI_API_KEY": "zai-brokered-placeholder",
-      "Z_AI_MODE": "ZAI",
+      "GITHUB_TOKEN": "__api_key_placeholder__",
+      "CONTEXT7_API_KEY": "__api_key_placeholder__",
+      "ZAI_API_KEY": "__api_key_placeholder__",
+      "MINIMAX_API_KEY": "__api_key_placeholder__",
+      "Z_AI_API_KEY": "__api_key_placeholder__",
+      "Z_AI_MODE": "__api_key_placeholder__",
       "MINIMAX_API_HOST": "https://api.minimax.io"
     }
   },
