@@ -37,7 +37,8 @@
       "$HOME/.config/configent/claude-code",
       "$HOME/.config/configent/mcp",
       "$HOME/.config/gh",
-      "/opt/mise"
+      "/opt/mise",
+      "/etc"
     ],
     "allow_file": [
       "$HOME/.claude.json"
