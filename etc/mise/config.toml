@@ -43,7 +43,7 @@ claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postin
 opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
-'npm:@openchamber/web' = 'latest'
+'npm:@openchamber/web' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
 
 # ai coding harnesses
 #herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }

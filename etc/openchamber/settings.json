@@ -1,0 +1,87 @@
+{
+  "activeProjectId": "path_L2hvbWUvbm9kZS93b3Jrc3BhY2Uvb2NoYW0",
+  "autoDeleteEnabled": true,
+  "collapsedModelProviders": [],
+  "currentModelId": "MiniMax-M3",
+  "currentProviderId": "minimax-coding-plan",
+  "darkThemeId": "ayu-dark",
+  "defaultModel": "minimax-coding-plan/MiniMax-M3",
+  "favoriteModels": [
+    {
+      "modelID": "glm-5.2",
+      "providerID": "zai-coding-plan"
+    },
+    {
+      "modelID": "MiniMax-M3",
+      "providerID": "minimax-coding-plan"
+    }
+  ],
+  "hiddenModels": [],
+  "homeDirectory": "/home/node/workspace",
+  "lastDirectory": "/home/node/workspace",
+  "lightThemeId": "ayu-light",
+  "mobileKeyboardMode": "native",
+  "notificationTemplates": {
+    "completion": {
+      "message": "{model_name} completed the task",
+      "title": "{agent_name} is ready"
+    },
+    "error": {
+      "message": "{last_message}",
+      "title": "Tool error"
+    },
+    "question": {
+      "message": "{last_message}",
+      "title": "Input needed"
+    },
+    "subtask": {
+      "message": "{model_name} completed the task",
+      "title": "{agent_name} is ready"
+    }
+  },
+  "notifyOnCompletion": true,
+  "notifyOnError": false,
+  "notifyOnQuestion": true,
+  "notifyOnSubtasks": false,
+  "padding": 80,
+  "pinnedDirectories": [],
+  "projects": [
+    {
+      "addedAt": 1783602141831,
+      "id": "path_L2hvbWUvbm9kZS93b3Jrc3BhY2Uvb2NoYW0",
+      "lastOpenedAt": 1783602141831,
+      "path": "/home/node/workspace/ocham"
+    }
+  ],
+  "recentAgents": [],
+  "recentEfforts": {
+    "minimax-coding-plan/MiniMax-M3": [
+      "default"
+    ]
+  },
+  "recentModels": [
+    {
+      "modelID": "MiniMax-M3",
+      "providerID": "minimax-coding-plan"
+    },
+    {
+      "modelID": "glm-5.2",
+      "providerID": "zai-coding-plan"
+    }
+  ],
+  "reportUsage": false,
+  "securityScopedBookmarks": [],
+  "showExpandedBashTools": true,
+  "showOpenCodeUpdateNotifications": false,
+  "showReasoningTraces": false,
+  "splashBgDark": "#0F1419",
+  "splashBgLight": "#FDFAF4",
+  "splashFgDark": "#D6DAE0",
+  "splashFgLight": "#394049",
+  "themeId": "ayu-dark",
+  "themeVariant": "dark",
+  "timeFormatPreference": "auto",
+  "useSystemTheme": false,
+  "weekStartPreference": "auto",
+  "zenModel": "minimax-m2.5-free"
+}
