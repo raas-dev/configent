@@ -57,6 +57,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 #'npm:@fission-ai/openspec' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
+'pipx:headroom-ai' = { version = 'latest', extras = "proxy" }
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
