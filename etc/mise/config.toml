@@ -53,6 +53,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 #'github:vercel-labs/agent-browser' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-cu' = { version = 'latest', postinstall = "agent-cu check-permissions" }
+'npm:@colbymchenry/codegraph' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 #'npm:@fission-ai/openspec' = 'latest'
