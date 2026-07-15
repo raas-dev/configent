@@ -1,23 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "minimax-coding-plan/MiniMax-M3",
+  "model": "zai-coding-plan/glm-5.2",
   "mcp": {
-    "minimax-vision": {
+    "zai-vision": {
       "type": "local",
       "command": [
-        "uvx",
-        "minimax-coding-plan-mcp",
-        "-y"
+        "npx",
+        "-y",
+        "@z_ai/mcp-server"
       ],
       "environment": {
-        "MINIMAX_API_KEY": "{env:MINIMAX_API_KEY}",
-        "MINIMAX_API_HOST": "https://api.minimax.io"
-      },
-      "enabled": true
+        "Z_AI_API_KEY": "{env:ZAI_API_KEY}",
+        "Z_AI_MODE": "ZAI"
+      }
     }
-  },
-  "tools": {
-    "minimax-vision_*": false,
-    "minimax-vision_understand_image": true
   }
 }
