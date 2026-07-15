@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.231.1](https://github.com/raas-dev/configent/compare/1.231.0...1.231.1) (2026-07-15)
+
+
+### Fixes
+
+* **openchamber:** add postinstall to provision settings.json ([47d12fd](https://github.com/raas-dev/configent/commit/47d12fd409b2ab3f33395bbec8f4f69c6b105622))
+
 ## [1.231.0](https://github.com/raas-dev/configent/compare/1.230.2...1.231.0) (2026-07-07)
 
 
