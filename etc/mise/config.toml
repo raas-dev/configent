@@ -51,6 +51,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 #'github:vercel-labs/agent-browser' = 'latest'
+'github:fkiene/llmtrim' = 'latest'
 'aqua:rtk-ai/rtk' = 'latest'
 'npm:agent-cu' = { version = 'latest', postinstall = "agent-cu check-permissions" }
 'npm:@colbymchenry/codegraph' = 'latest'
@@ -58,7 +59,6 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 #'npm:@fission-ai/openspec' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
-'pipx:headroom-ai' = { version = 'latest', extras = "proxy" }
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
