@@ -217,9 +217,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   # parent's stdin, breaking long-lived stdio streams (ACP/JSON-RPC agents).
   lima_guest_cwd_writable() {
     limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
-      "t=\"\$1/.docker-write-probe.\$\$\"; rm -f \"\$t\"; \
-      touch \"\$t\"; rm -f \"\$t\"" \
+      "t=\"\$1/.docker-write-probe\"; rm -f \"\$t\"; \
+      touch \"\$t\"; rc=\$?; rm -f \"\$t\"; exit \$rc" \
       _ "$lima_cwd" </dev/null >/dev/null 2>&1
+    _lima_writable_rc=$?
+    # host-side fallback: ensure cleanup even if SSH channel dropped
+    # between guest touch and guest rm (control-master race / virtiofs lag)
+    rm -f "$lima_cwd/.docker-write-probe" 2>/dev/null
+    return $_lima_writable_rc
   }
 
   # virtiofs often comes up ro after boot even when lima.yaml has writable:

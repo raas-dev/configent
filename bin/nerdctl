@@ -46,9 +46,14 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   lima_guest_cwd_writable() {
     limactl shell --workdir / --tty=false "$NAME" -- sh -ceu \
-      "t=\"\$1/.nerdctl-write-probe.\$\$\"; rm -f \"\$t\"; \
-      touch \"\$t\"; rm -f \"\$t\"" \
+      "t=\"\$1/.nerdctl-write-probe\"; rm -f \"\$t\"; \
+      touch \"\$t\"; rc=\$?; rm -f \"\$t\"; exit \$rc" \
       _ "$lima_cwd" >/dev/null 2>&1
+    _lima_writable_rc=$?
+    # host-side fallback: ensure cleanup even if SSH channel dropped
+    # between guest touch and guest rm (control-master race / virtiofs lag)
+    rm -f "$lima_cwd/.nerdctl-write-probe" 2>/dev/null
+    return $_lima_writable_rc
   }
 
   lima_guest_remount_cwd_rw() {
