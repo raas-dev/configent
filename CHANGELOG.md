@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.231.2](https://github.com/raas-dev/configent/compare/1.231.1...1.231.2) (2026-07-17)
+
+
+### Fixes
+
+* **lima:** cleanup write probes when guest SSH drops ([39f5abd](https://github.com/raas-dev/configent/commit/39f5abd86f2c6017ea3c7565da17d11a0f212683))
+
 ## [1.231.1](https://github.com/raas-dev/configent/compare/1.231.0...1.231.1) (2026-07-15)
 
 
