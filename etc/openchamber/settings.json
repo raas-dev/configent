@@ -1,5 +1,5 @@
 {
-  "activeProjectId": "path_L2hvbWUvbm9kZS93b3Jrc3BhY2Uvb2NoYW0",
+  "activeProjectId": "path_L29wdC93b3Jrc3BhY2Uvb2NjYW0",
   "autoDeleteEnabled": true,
   "collapsedModelProviders": [],
   "currentModelId": "MiniMax-M3",
@@ -17,8 +17,8 @@
     }
   ],
   "hiddenModels": [],
-  "homeDirectory": "/home/node/workspace",
-  "lastDirectory": "/home/node/workspace",
+  "homeDirectory": "/opt/workspace",
+  "lastDirectory": "/opt/workspace",
   "lightThemeId": "ayu-light",
   "mobileKeyboardMode": "native",
   "notificationTemplates": {
@@ -46,6 +46,12 @@
   "padding": 80,
   "pinnedDirectories": [],
   "projects": [
+    {
+      "id": "path_L29wdC93b3Jrc3BhY2Uvb2NjYW0",
+      "path": "/opt/workspace/occam",
+      "addedAt": 1784469684080,
+      "lastOpenedAt": 1784469684080
+    }
   ],
   "recentAgents": [],
   "recentEfforts": {
