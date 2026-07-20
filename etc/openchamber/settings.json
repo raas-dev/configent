@@ -17,8 +17,8 @@
     }
   ],
   "hiddenModels": [],
-  "homeDirectory": "/opt/workspace",
-  "lastDirectory": "/opt/workspace",
+  "homeDirectory": "/opt/occam",
+  "lastDirectory": "/opt/workspace/occam",
   "lightThemeId": "ayu-light",
   "mobileKeyboardMode": "native",
   "notificationTemplates": {
@@ -45,7 +45,6 @@
   "notifyOnSubtasks": false,
   "padding": 80,
   "pinnedDirectories": [],
-  "projects": [],
   "recentAgents": [],
   "recentEfforts": {
     "minimax-coding-plan/MiniMax-M3": [
@@ -73,8 +72,18 @@
   "splashFgLight": "#394049",
   "themeId": "ayu-dark",
   "themeVariant": "dark",
-  "timeFormatPreference": "auto",
+  "timeFormatPreference": "24h",
   "useSystemTheme": false,
-  "weekStartPreference": "auto",
-  "zenModel": "minimax-m2.5-free"
+  "weekStartPreference": "monday",
+  "zenModel": "minimax-m2.5-free",
+  "expandedEditorToolbar": true,
+  "followUpBehavior": "steer",
+  "diffLayoutPreference": "dynamic",
+  "sessionGoalDefaultBudgetEnabled": false,
+  "promptNavigatorEnabled": false,
+  "stickyUserHeader": false,
+  "nativeNotificationsEnabled": true,
+  "autoDeleteAfterDays": 14,
+  "gitChangesViewMode": "tree",
+  "filesViewShowGitignored": true
 }
