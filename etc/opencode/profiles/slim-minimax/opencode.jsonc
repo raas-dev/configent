@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "minimax-coding-plan/MiniMax-M3",
+  "plugin": [
+    "oh-my-opencode-slim"
+  ],
+  "mcp": {
+    "minimax-vision": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "minimax-coding-plan-mcp",
+        "-y"
+      ],
+      "environment": {
+        "MINIMAX_API_KEY": "{env:MINIMAX_API_KEY}",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
+      },
+      "enabled": true
+    }
+  }
+}

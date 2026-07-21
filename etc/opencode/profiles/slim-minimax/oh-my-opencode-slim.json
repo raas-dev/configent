@@ -1,0 +1,94 @@
+{
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "multiplexer": {
+    "type": "tmux",
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  },
+  "disabled_mcps": [
+    "context7",
+    "websearch",
+    "grep_app"
+  ],
+  "disabled_agents": [
+    "observer"
+  ],
+  "disabled_tools": [],
+  "disabled_skills": [],
+  "autoUpdate": true,
+  "backgroundJobs": {
+    "maxSessionsPerAgent": 2,
+    "readContextMinLines": 10,
+    "readContextMaxFiles": 8
+  },
+  "fallback": {
+    "enabled": true,
+    "timeoutMs": 15000,
+    "retryDelayMs": 500,
+    "retry_on_empty": true
+  },
+  "interview": {
+    "maxQuestions": 2,
+    "outputFolder": "interview",
+    "autoOpenBrowser": true,
+    "port": 0,
+    "dashboard": false
+  },
+  "companion": {
+    "enabled": false
+  },
+  "preset": "minimax-plan",
+  "presets": {
+    "minimax-plan": {
+      "orchestrator": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*"
+        ]
+      },
+      "explorer": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "oracle": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "high",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "low",
+        "skills": [],
+        "mcps": [
+          "*"
+        ]
+      },
+      "designer": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      }
+    }
+  }
+}
