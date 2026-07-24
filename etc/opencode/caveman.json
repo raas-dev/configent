@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "defaultMode": "full",
+  "defaultMode": "ultra",
   "features": {
     "caveman": true,
     "commit": true,
