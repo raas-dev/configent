@@ -43,6 +43,7 @@ kddejong.vscode-cfn-lint
 kevinrose.vsc-python-indent
 klarkxy.minimax-vscode-copilot
 mads-hartmann.bash-ide-vscode
+matthewpi.caddyfile-support
 mikestead.dotenv
 ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-bicep
