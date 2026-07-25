@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.231.3](https://github.com/raas-dev/configent/compare/1.231.2...1.231.3) (2026-07-25)
+
+### Fixes
+
+* **opencode:** disable gh_grep/grep_app in profiles ([8f045c3](https://github.com/raas-dev/configent/commit/8f045c3b04cdb91ef562134a34345179f5505459))
 ## [1.231.2](https://github.com/raas-dev/configent/compare/1.231.1...1.231.2) (2026-07-17)
 
 
