@@ -19,5 +19,15 @@
   "tools": {
     "minimax-vision_*": false,
     "minimax-vision_understand_image": true
-  }
+  },
+  "plugin": [
+    "caveman-opencode-plugin",
+    "context-mode",
+    "opencode-todo-reminder",
+    "opencode-pty",
+    "token-optimizer-opencode",
+    "@dietrichgebert/ponytail",
+    "@franlol/opencode-md-table-formatter",
+    "@prevalentware/opencode-goal-plugin"
+  ]
 }

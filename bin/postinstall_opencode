@@ -63,3 +63,27 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### plugins ####################################################################
+# opencode lists plugins in opencode.jsonc but does not auto-install them;
+# `opencode plugin <name>` fetches the npm module into
+# ~/.config/opencode/node_modules. Re-run on every bootstrap so plugin updates
+# happen alongside everything else this script symlinks.
+
+if command -v opencode >/dev/null; then
+  opencode_config="$HOME/.config/opencode/opencode.jsonc"
+  if [ -r "$opencode_config" ]; then
+    plugins=$(awk '
+      /"plugin"[ \t]*:/ { in_array = 1; next }
+      in_array && /]/    { in_array = 0 }
+      in_array {
+        gsub(/[, "\r]/, "", $0)
+        if ($0 ~ /^@?[a-zA-Z0-9._-]+\/?[a-zA-Z0-9._-]+$/) print $0
+      }
+    ' "$opencode_config")
+    for plugin in $plugins; do
+      printf "Installing opencode plugin: %s\n" "$plugin"
+      npm install --prefix "$HOME/.config/opencode" "$plugin" >/dev/null 2>&1 || true
+    done
+  fi
+fi
