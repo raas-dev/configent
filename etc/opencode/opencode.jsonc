@@ -82,10 +82,10 @@
     "context-mode",
     "opencode-todo-reminder",
     "opencode-pty",
+    "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
-    "@prevalentware/opencode-goal-plugin",
-    "@tarquinen/opencode-dcp"
+    "@prevalentware/opencode-goal-plugin"
   ],
   "share": "disabled",
   "experimental": {

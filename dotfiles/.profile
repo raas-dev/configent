@@ -252,6 +252,9 @@ export PI_SKIP_VERSION_CHECK=1
 # ponytail
 export PONYTAIL_DEFAULT_MODE="ultra"
 
+# token-optimizer
+export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default
