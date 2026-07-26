@@ -1,2 +1,14 @@
 25b9fd777b9e207bfe8aa0c261c13cd5b481de11:vscode/keybindings.json:generic-api-key:275
 etc/agents/skills/autoresearch/references/security-workflow.md:curl-auth-header:469
+etc/agents/skills/token-optimizer/scripts/benchmark.py:jwt:889
+etc/agents/skills/token-optimizer/scripts/benchmark.py:jwt:892
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:902
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1305
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1306
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1457
+etc/agents/skills/token-optimizer/scripts/benchmark.py:jwt:889
+etc/agents/skills/token-optimizer/scripts/benchmark.py:jwt:892
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:902
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1305
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1306
+etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1457
