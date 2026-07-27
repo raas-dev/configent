@@ -12,6 +12,7 @@
     ]
   },
   "plugin": [
+    "opencode-todo-progress",
     "@prevalentware/opencode-goal-plugin"
   ]
 }

@@ -39,7 +39,7 @@
       "title": "{agent_name} is ready"
     }
   },
-  "notifyOnCompletion": true,
+  "notifyOnCompletion": false,
   "notifyOnError": false,
   "notifyOnQuestion": true,
   "notifyOnSubtasks": false,
