@@ -22,7 +22,6 @@
   },
   "plugin": [
     "caveman-opencode-plugin",
-    "context-mode",
     "opencode-todo-reminder",
     "opencode-pty",
     "token-optimizer-opencode",
