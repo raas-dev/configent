@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.231.4](https://github.com/raas-dev/configent/compare/1.231.3...1.231.4) (2026-07-29)
+
+### Fixes
+
+* **opencode:** pin MCP below 1.10 ([9525894](https://github.com/raas-dev/configent/commit/95258942a0f86860f9e199cb09080dc9f414f3dc))
 ## [1.231.3](https://github.com/raas-dev/configent/compare/1.231.2...1.231.3) (2026-07-25)
 
 ### Fixes
