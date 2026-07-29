@@ -6,6 +6,8 @@
       "type": "local",
       "command": [
         "uvx",
+        "--with",
+        "mcp<1.10",
         "minimax-coding-plan-mcp",
         "-y"
       ],
