@@ -84,7 +84,8 @@
     "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
-    "@prevalentware/opencode-goal-plugin"
+    "@prevalentware/opencode-goal-plugin",
+    "@tarquinen/opencode-dcp"
   ],
   "share": "disabled",
   "experimental": {

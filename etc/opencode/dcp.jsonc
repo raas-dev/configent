@@ -5,9 +5,9 @@
   // Enable debug logging to ~/.config/opencode/logs/dcp/
   "debug": false,
   // Notification display: "off", "minimal", or "detailed"
-  "pruneNotification": "detailed",
+  "pruneNotification": "minimal",
   // Notification type: "chat" (in-conversation) or "toast" (system toast)
-  "pruneNotificationType": "chat",
+  "pruneNotificationType": "toast",
   // Slash commands configuration
   "commands": {
     "enabled": true,
@@ -52,11 +52,11 @@
     // Soft upper threshold: above this, DCP keeps injecting strong
     // compression nudges (based on nudgeFrequency), so compression is
     // much more likely. Accepts: number or "X%" of model context window.
-    "maxContextLimit": 128000,
+    "maxContextLimit": 200000,
     // Soft lower threshold for reminder nudges: below this, turn/iteration
     // reminders are off (compression less likely). At/above this, reminders
     // are on. Accepts: number or "X%" of model context window.
-    "minContextLimit": 100000,
+    "minContextLimit": 150000,
     // Optional per-model override for maxContextLimit by providerID/modelID.
     // If present, this wins over the global maxContextLimit.
     // Accepts: number or "X%".
