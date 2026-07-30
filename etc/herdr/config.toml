@@ -9,7 +9,7 @@ onboarding = false
 # Built-in themes: catppuccin, terminal, tokyo-night, dracula, nord,
 #                  gruvbox, one-dark, solarized, kanagawa, rose-pine,
 #                  vesper
-name = "vesper"
+name = "gruvbox"
 
 # Override individual color tokens on top of the base theme.
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
@@ -19,6 +19,7 @@ name = "vesper"
 # red = "#ff6188"
 # green = "#a6e3a1"
 
+auto_switch = false
 [terminal]
 # Executable used for new interactive panes.
 # Empty means $SHELL, then /bin/sh.
@@ -167,6 +168,7 @@ prefix = "ctrl+a"
 # accent = "cyan"
 
 # Background notification popup delivery
+show_agent_labels_on_pane_borders = false
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show top-right in-app toasts
