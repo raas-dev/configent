@@ -10,11 +10,6 @@
       "disable": true
     }
   },
-  "permission": {
-    "skill": {
-      "agent-computer-use": "deny"
-    }
-  },
   "mcp": {
     "open-computer-use": {
       "command": [
