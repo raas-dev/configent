@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.232.1](https://github.com/raas-dev/configent/compare/1.232.0...1.232.1) (2026-07-30)
+
+### Fixes
+
+* document docker shortcut and rename d->rc ([d6af570](https://github.com/raas-dev/configent/commit/d6af5700d1a29923ebc30d4340a7abfe5dca8693))
+* **opencode:** remove brooks-lint skill markdown docs ([08c0ce8](https://github.com/raas-dev/configent/commit/08c0ce83892368421ff78112be09cbab3272b8bb))
 ## [1.232.0](https://github.com/raas-dev/configent/compare/1.231.4...1.232.0) (2026-07-30)
 
 ### Features
