@@ -60,7 +60,7 @@
         "dev"
       ],
       "command": "exec herdr",
-      "id": "herdr",
+      "id": "herdr-dev",
       "label": "herdr@dev"
     },
     {
@@ -68,8 +68,8 @@
         "--gui"
       ],
       "command": "exec tm",
-      "id": "tm",
-      "label": "multiplexer"
+      "id": "tmux",
+      "label": "tmux"
     },
     {
       "args": [
@@ -78,19 +78,8 @@
         "ai"
       ],
       "command": "exec zsh",
-      "id": "chat",
-      "label": "Chat"
-    },
-    {
-      "args": [
-        "-il",
-        "-c",
-        "agent",
-        "subagents"
-      ],
-      "command": "exec zsh",
-      "id": "agent",
-      "label": "Computer Use"
+      "id": "omp-chat",
+      "label": "omp: chat"
     },
     {
       "command": "exec lazyssh",
@@ -104,8 +93,8 @@
         "zsh -l -c 'tm --gui'"
       ],
       "command": "exec ssh",
-      "id": "ssh",
-      "label": "ssh dev"
+      "id": "tmux-dev",
+      "label": "tmux@dev"
     }
   ],
   "agentterminal.rememberSelection": false,
