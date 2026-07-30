@@ -78,7 +78,6 @@
     }
   },
   "plugin": [
-    "caveman-opencode-plugin",
     "opencode-todo-reminder",
     "opencode-pty",
     "token-optimizer-opencode",
