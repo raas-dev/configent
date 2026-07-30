@@ -23,6 +23,22 @@ cleanup_temp_environment() {
     esac
   fi
 
+  # Restore project's .pi to its pre-exec state
+  if [[ "$HAD_PROJECT_CONFIG" == "true" && -d "$PROJECT_CONFIG_BACKUP" ]]; then
+    rm -rf "$PROJECT_CONFIG_DIR"
+    mkdir -p "$PROJECT_CONFIG_DIR"
+    cp -R "$PROJECT_CONFIG_BACKUP"/. "$PROJECT_CONFIG_DIR"/
+  elif [[ "$HAD_PROJECT_CONFIG" == "false" && -d "$PROJECT_CONFIG_DIR" ]]; then
+    rm -rf "$PROJECT_CONFIG_DIR"
+  fi
+  if [[ -n "$PROJECT_CONFIG_BACKUP" && -d "$PROJECT_CONFIG_BACKUP" ]]; then
+    case "$PROJECT_CONFIG_BACKUP" in
+    /tmp/* | /var/folders/* | "$TMPDIR"*)
+      rm -rf "$PROJECT_CONFIG_BACKUP"
+      ;;
+    esac
+  fi
+
   return "$exit_code"
 }
 
@@ -571,9 +587,10 @@ show_help() {
     "      pic use my-profile" \
     "" \
     "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} -- ${CYAN}<command>${NC} ${DIM}[args...]${NC}" \
-    "      Execute a command in a temporary profile." \
-    "      ${DIM}The profile's .pi directory is copied to a temporary${NC}" \
-    "      ${DIM}directory which is deleted after the command is executed.${NC}" \
+    "      Execute a command in the current directory with the given profile." \
+    "      ${DIM}The project's .pi directory is replaced with the${NC}" \
+    "      ${DIM}profile's copy for the duration of the command and${NC}" \
+    "      ${DIM}restored from backup on exit.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
     "      pic exec my-profile -- pwd" \
@@ -638,34 +655,42 @@ if [[ $# -gt 0 ]]; then
       exit 1
     fi
 
-    # Create temporary directory
-    temp_dir=$(mktemp -d) || {
-      echo -e "${YELLOW}Error: Failed to create temporary directory${NC}" >&2
-      exit 1
-    }
+    # Snapshot existing project config so we can restore the original state after exec
+    if [[ -e "$PROJECT_CONFIG_DIR" ]]; then
+      HAD_PROJECT_CONFIG=true
+      PROJECT_CONFIG_BACKUP=$(mktemp -d) || {
+        echo -e "${YELLOW}Error: Failed to create backup directory${NC}" >&2
+        exit 1
+      }
+      cp -R "$PROJECT_CONFIG_DIR"/. "$PROJECT_CONFIG_BACKUP"/ || {
+        echo -e "${YELLOW}Error: Failed to backup project config${NC}" >&2
+        exit 1
+      }
+    else
+      HAD_PROJECT_CONFIG=false
+      PROJECT_CONFIG_BACKUP=""
+    fi
 
-    # Set up cleanup on exit, ensuring we return to original directory
-    TEMP_DIR_TO_CLEAN="$temp_dir"
+    # Set up cleanup on exit
     trap cleanup_temp_environment EXIT TERM
 
-    # Create .pi directory in temp environment
-    temp_pi_dir="$temp_dir/.pi"
-    mkdir -p "$temp_pi_dir" || {
-      echo -e "${YELLOW}Error: Failed to create .pi directory in temp environment${NC}" >&2
+    # Ensure project config directory exists
+    mkdir -p "$PROJECT_CONFIG_DIR" || {
+      echo -e "${YELLOW}Error: Failed to create $PROJECT_CONFIG_DIR${NC}" >&2
       exit 1
     }
 
-    # Copy profile files to temporary .pi
-    if ! cp -R "$exec_profile_dir"/. "$temp_pi_dir/" 2>/dev/null; then
+    # Copy profile files into project's .pi
+    if ! cp -R "$exec_profile_dir"/. "$PROJECT_CONFIG_DIR/" 2>/dev/null; then
       echo -e "${YELLOW}Error: Failed to copy profile files${NC}" >&2
       exit 1
     fi
 
-    # Save profile metadata in temp .pi
+    # Save profile metadata
     current_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
     origin_hash=$(calculate_profile_hash "$exec_profile_dir")
 
-    cat >"$temp_pi_dir/pic.json" <<EOF
+    cat >"$PROFILE_METADATA_FILE" <<EOF
 {
   "name": "$exec_profile_name",
   "source": "$exec_profile_dir",
@@ -674,16 +699,8 @@ if [[ $# -gt 0 ]]; then
 }
 EOF
 
-    # Change to temp directory and execute command
-    cd "$temp_dir" || {
-      cleanup_temp_environment
-      exit 1
-    }
-    PROJECT_CONFIG_DIR="$temp_pi_dir"
-    PROFILE_METADATA_FILE="$temp_pi_dir/pic.json"
+    # Execute command in the current (project) directory
     export PROJECT_CONFIG_DIR PROFILE_METADATA_FILE
-
-    # Execute the command
     "$@"
     exit $?
     ;;
