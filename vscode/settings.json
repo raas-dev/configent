@@ -56,6 +56,15 @@
   "agentterminal.profiles": [
     {
       "args": [
+        "--remote",
+        "dev"
+      ],
+      "command": "exec herdr",
+      "id": "herdr",
+      "label": "herdr@dev"
+    },
+    {
+      "args": [
         "--gui"
       ],
       "command": "exec tm",
