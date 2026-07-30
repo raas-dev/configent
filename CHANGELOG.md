@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.232.0](https://github.com/raas-dev/configent/compare/1.231.4...1.232.0) (2026-07-30)
+
+### Features
+
+* enable herdr and switch default theme to gruvbox ([56bf44e](https://github.com/raas-dev/configent/commit/56bf44ef5bc57b9a6d1078ec010974f4e65aeae6))
 ## [1.231.4](https://github.com/raas-dev/configent/compare/1.231.3...1.231.4) (2026-07-29)
 
 ### Fixes
