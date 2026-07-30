@@ -103,8 +103,8 @@ fi
 
 alias a='ai'
 alias b='lessfilter'
-alias c='dcv'
-# d is for generic docker build and run, see d()
+alias c='herdr'
+alias d='dcv'
 alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden --fixed-strings'
 # g is for git/gitui, see g()
@@ -634,7 +634,7 @@ agent() {
 ### Docker ####################################################################
 
 # Generic docker build and run
-d() {
+rc() {
   # lowercase the image name to allow pushing it to container registries
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"

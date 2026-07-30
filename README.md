@@ -97,7 +97,7 @@ Files or symlinks of the same name at `$HOME` are overridden without asking,
 but they are backed up first in `.backup/`.
 
 Directory `bin` in this repository is symlinked to `~/.local/configent/bin`
-and is first in `PATH` after you  restart the shell or run `source ~/.bashrc`.
+and is first in `PATH` after you restart the shell or run `source ~/.bashrc`.
 
 All the scripts in `bin/` are available by name from then on. Also now you
 can simply reload the configuration of the current shell with `r`.
@@ -236,7 +236,7 @@ In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
 ### docker shortcut
 
-Alias `d` is a shortcut for building Docker image in the current directory.
+Alias `rc` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
 is used to detect the tech stack and build the image best-effort.
 
@@ -246,11 +246,11 @@ After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
 container.
 
-If you use `PORT=8000 d`, the port given is mapped to the host and environment
+If you use `PORT=8000 rc`, the port given is mapped to the host and environment
 variable `PORT` is set inside the container. Note that this takes precedence
 if `PORT` is also defined in `.env` file.
 
-If `d -d` or `d --detached` is used, all arguments are passed to `docker run`.
+If `rc -d` or `rc --detached` is used, all arguments are passed to `docker run`.
 CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in `Dockerfile`
 (or by `nixpacks`) is effective, unless you override it in arguments.
 
@@ -258,7 +258,7 @@ If container was started as detached and successfully started up, docker logs
 are followed. Sending `^C` exits the log view and does not stop the container.
 
 If `-d` or `--detached` is not used, an interactive session is assumed and all arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
-`d bash` starts Bash in the container. Exiting the shell stops the container.
+`rc bash` starts Bash in the container. Exiting the shell stops the container.
 
 ⚠️: If container writes to filesystem, you must be in a VM writable directory.
 
