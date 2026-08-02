@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.232.2](https://github.com/raas-dev/configent/compare/1.232.1...1.232.2) (2026-08-02)
+
+### Fixes
+
+* **oc/pic:** restore project config after exec ([34a4e27](https://github.com/raas-dev/configent/commit/34a4e275223bff2cbf6fe2ff84584a700c112b9b))
 ## [1.232.1](https://github.com/raas-dev/configent/compare/1.232.0...1.232.1) (2026-07-30)
 
 ### Fixes
