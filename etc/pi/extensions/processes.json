@@ -1,0 +1,7 @@
+{
+  "$schema": "https://unpkg.com/@aliou/pi-processes@0.10.0/schema.json",
+  "widget": {
+    "showStatusWidget": true
+  },
+  "version": "0.10.0"
+}
