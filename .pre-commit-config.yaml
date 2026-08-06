@@ -41,7 +41,7 @@ repos:
       - id: shellcheck
         files: ^(?!.*skills/|etc/claude-code/hooks/).*$
       - id: shfmt
-        files: ^(?!.*etc/claude-code/hooks/).*$
+        files: ^(?!.*skills/|etc/claude-code/hooks/).*$
 
   - repo: https://github.com/crate-ci/typos
     rev: v1.48.0
