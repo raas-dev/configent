@@ -32,6 +32,24 @@ _DONE = False
 _REEXEC_FLAG = "TOKEN_OPTIMIZER_UTF8_REEXEC"
 
 
+def _inheritable_stream(stream):
+    """Return ``stream`` when it has a real OS handle Popen can pass through,
+    else None (fall back to default inheritance).
+
+    ``sys.std*`` can be None (GUI-subsystem ``pythonw`` -- see #104's launcher
+    swap) or a wrapper with no fileno (pytest capture, embedded hosts). Passing
+    either to Popen raises, which would turn a UTF-8 convenience re-exec into a
+    hard crash of the CLI. None keeps today's behavior for those callers.
+    """
+    if stream is None:
+        return None
+    try:
+        fileno = stream.fileno()
+    except (AttributeError, OSError, ValueError):
+        return None
+    return stream if isinstance(fileno, int) and fileno >= 0 else None
+
+
 def reexec_in_utf8_mode() -> None:
     """Re-exec this process under Python UTF-8 mode iff the locale isn't UTF-8.
 
@@ -75,7 +93,54 @@ def reexec_in_utf8_mode() -> None:
             # "can't open file '...\Files\Python312\python.exe'". Use
             # subprocess.Popen (which quotes correctly) and exit immediately
             # so the child takes over the role of this process.
-            child = _sp.Popen([sys.executable, "-X", "utf8", *sys.argv])
+            #
+            # CREATE_NO_WINDOW prevents a console flash when the parent is a
+            # console-less detached process (e.g. a hook spawned by the host).
+            # It is kept UNCONDITIONALLY -- do NOT drop it when stdout is a
+            # pipe. The flash-sensitive case (a host-spawned hook/statusline)
+            # is exactly the case where stdout is not a tty; dropping the flag
+            # there would reinstate the console flash (#104) while fixing
+            # nothing, because the stdio-binding problem below is solved by
+            # passing the handles explicitly, not by removing the flag. Do NOT
+            # add DETACHED_PROCESS -- the child must inherit the parent's stdio.
+            #
+            # Invariant: this function must be the FIRST statement of the entry
+            # point (it already is at measure.py's __main__). If anything reads
+            # stdin before the re-exec, those buffered bytes are lost to the
+            # child, which continues reading the same stdin handle from the
+            # byte after the parent left it.
+            #
+            # Flush the parent's buffered streams BEFORE spawning. Once the
+            # child shares the parent's stdout/stderr fd, any parent-buffered
+            # text flushed AFTER the spawn interleaves out of order behind the
+            # child's own output. The post-wait flush below is kept as the
+            # final safety net (os._exit skips normal cleanup / atexit
+            # handlers, matching os.execv semantics).
+            for stream in (sys.stdout, sys.stderr):
+                try:
+                    stream.flush()
+                except (OSError, ValueError, AttributeError):
+                    pass
+            _popen_kwargs = {}
+            _flags = getattr(_sp, "CREATE_NO_WINDOW", 0)
+            if _flags:
+                _popen_kwargs["creationflags"] = _flags
+            # Pass the three std handles explicitly so CPython sets
+            # STARTF_USESTDHANDLES with the parent's real handles and marks
+            # them inheritable. With all three left None, CREATE_NO_WINDOW
+            # gives the child a NEW hidden console whose buffers capture every
+            # byte the child writes (and feed empty input to its stdin) -- the
+            # "silent no-op" signature on a cp1252 host (#105).
+            # _inheritable_stream degrades to None for streams without a real
+            # OS handle (pytest capture, sys.std* None under pythonw per #104's
+            # launcher swap), so a UTF-8 convenience re-exec never hard-crashes
+            # the CLI.
+            for _name, _kw in (("stdin", "stdin"), ("stdout", "stdout"), ("stderr", "stderr")):
+                _s = _inheritable_stream(getattr(sys, _name, None))
+                if _s is not None:
+                    _popen_kwargs[_kw] = _s
+            child = _sp.Popen([sys.executable, "-X", "utf8", *sys.argv],
+                              **_popen_kwargs)
             # Wait for the child to finish so output ordering is preserved and
             # the parent's exit code reflects the child's result.
             try:
@@ -83,12 +148,11 @@ def reexec_in_utf8_mode() -> None:
                 rc = child.returncode
             except (OSError, _sp.SubprocessError):
                 rc = 1
-            # Flush any parent-buffered output before exiting (os._exit skips
-            # normal cleanup / atexit handlers, matching os.execv semantics).
+            # Final flush of any parent-buffered output before exiting.
             for stream in (sys.stdout, sys.stderr):
                 try:
                     stream.flush()
-                except (OSError, ValueError):
+                except (OSError, ValueError, AttributeError):
                     pass
             os._exit(rc)
         else:

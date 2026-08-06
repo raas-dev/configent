@@ -12,7 +12,7 @@
     "agentic-eval": {
       "source": "github/awesome-copilot",
       "sourceType": "github",
-      "computedHash": "e1c4fe9233ef5bd6368a3d9cab8f8ba57df173a7ae2caa5a9738b24d71bbb3a2",
+      "computedHash": "40771d7d389c1542e6cb995d75e516893466f01c3b66bc040b158ceb793d4bed",
       "sourceUrl": "https://github.com/github/awesome-copilot",
       "ref": "main",
       "skillPath": "skills/agentic-eval"
@@ -28,7 +28,7 @@
     "brownfield-onboarding": {
       "source": "cyberelf/agent_skills",
       "sourceType": "github",
-      "computedHash": "40829b17cf937fa90137a294d128271fdce7946f910cf35f8e54ec4fc74f64ed",
+      "computedHash": "fb03a42276ca62a278a9a30b879976949daebf5445cc3f1e37921e0387d6d0d4",
       "sourceUrl": "https://github.com/cyberelf/agent_skills",
       "ref": "main",
       "skillPath": "skills/brownfield-onboarding"
@@ -38,7 +38,7 @@
       "sourceUrl": "https://github.com/browser-use/browser-harness",
       "sourceType": "github",
       "ref": "main",
-      "computedHash": "4a8587406a7b905737e9f50984289a51d5dc23bd0a54c7660954e2cdcc5764b4",
+      "computedHash": "87aceed5b505bae6128a41c7f3bedd9e67776d9734ac8c7d0df068a488385838",
       "skillPath": "browser-harness"
     },
     "code-review": {
@@ -60,10 +60,10 @@
     "context7": {
       "source": "netresearch/context7-skill",
       "sourceType": "github",
-      "computedHash": "fe5e247e56f1d6372870c15d9686e8a85446f403341c5d3fe9a63fee109015fb",
+      "computedHash": "7ffcc9398eaccc0745f545c0e7fa741cae5d54b916001bab10e1832d3c900517",
       "sourceUrl": "https://github.com/netresearch/context7-skill",
       "ref": "main",
-      "skillPath": "context7"
+      "skillPath": "skills/context7"
     },
     "diagnosing-bugs": {
       "source": "mattpocock/skills",
@@ -84,7 +84,7 @@
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
-      "computedHash": "d31e234f0c90694a670222cdd1dafa853e051d7066beda389f1097c22dadd461",
+      "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396",
       "sourceUrl": "https://github.com/vercel-labs/skills",
       "ref": "main",
       "skillPath": "skills/find-skills"
@@ -94,7 +94,7 @@
       "sourceUrl": "https://github.com/Hakku/finnish-humanizer",
       "sourceType": "github",
       "ref": "main",
-      "computedHash": "1278a44a7b59b4b65434aae08e74ae0008178dffb82ae329ab1dec0a8c8aeac8",
+      "computedHash": "446c5b2b8274b810b2d2fd1970ca247720a6d1ef5195f13d7e64035d8837affc",
       "skillPath": "finnish-humanizer"
     },
     "grill-me": {
@@ -139,11 +139,10 @@
     },
     "humanizer": {
       "source": "blader/humanizer",
-      "sourceUrl": "https://github.com/blader/humanizer",
-      "sourceType": "github",
       "ref": "main",
-      "computedHash": "34a38e6acc60d4529612d41ffe740bca0060d3c5e89e2a0d24ae795f67157fbb",
-      "skillPath": "humanizer"
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7f032c368d4355fb237e1980d73d7febe5bc1a03bad3de74a3d4a918e8940cd1"
     },
     "implement": {
       "source": "mattpocock/skills",
@@ -164,15 +163,15 @@
     "intent-layer": {
       "source": "crafter-station/skills",
       "sourceType": "github",
-      "computedHash": "76d40c1fcae15a7f3c971ebd98c72666215a0d89960d2c2ddac4117ad06d5db5",
+      "computedHash": "69fbedd1470b201142c16e88af656d651a912abf3d4e8e04edce1a8fe346e40c",
       "sourceUrl": "https://github.com/crafter-station/skills",
       "ref": "main",
-      "skillPath": "context-engineering/intent-layer"
+      "skillPath": "skills/intent-layer"
     },
     "liteparse": {
       "source": "run-llama/llamaparse-agent-skills",
       "sourceType": "github",
-      "computedHash": "93b85e81ea3e469a0628e9a31a14c510f11a4531f72f3647783ab5e5cac71858",
+      "computedHash": "df3494465b5426e888bc8c4a928b23e5f161945a1194565eea55a7eacc529184",
       "sourceUrl": "https://github.com/run-llama/llamaparse-agent-skills",
       "ref": "main",
       "skillPath": "skills/liteparse"
@@ -212,18 +211,17 @@
     "skill-conductor": {
       "source": "smixs/skill-conductor",
       "sourceType": "github",
-      "computedHash": "02c057b9c828ec2c7ef34775884d8bacfcd145ed834682834a527c901d84a7a8",
+      "computedHash": "dcb080066afaa5c9c6f29f16b3497acef3322482b480644016161b4ac5d42886",
       "sourceUrl": "https://github.com/smixs/skill-conductor",
       "ref": "main",
       "skillPath": "skills/skill-conductor"
     },
     "stop-slop": {
       "source": "hardikpandya/stop-slop",
-      "sourceType": "github",
-      "computedHash": "2e93df9fc59dbc268f98b75b51be8751f8db4e8c3943bb7f4beafa244a05785a",
-      "sourceUrl": "https://github.com/hardikpandya/stop-slop",
       "ref": "main",
-      "skillPath": "stop-slop"
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "617bf97d33162a6bd0da4f40a97aac589de58e5a6c9cf011ed6108992210e7cb"
     },
     "tdd": {
       "source": "mattpocock/skills",
@@ -268,7 +266,7 @@
     "token-optimizer": {
       "source": "alexgreensh/token-optimizer",
       "sourceType": "github",
-      "computedHash": "45e59bfc8a2eba81c6f91e07635df5cb1c41e5c7c15ac020d28b7d0105a15c87",
+      "computedHash": "689c123590cbacc1e77e5e1f36cccea9904d7941a5722ad30ffbe2e4e2cc0142",
       "sourceUrl": "https://github.com/alexgreensh/token-optimizer",
       "ref": "main",
       "skillPath": "skills/token-optimizer"
@@ -303,7 +301,7 @@
       "sourceType": "github",
       "ref": "main",
       "skillPath": "skills/engineering/wizard",
-      "computedHash": "e55aa9ff0ee5b4dbca8561d0497ec581df4489c37df691575ea9bab4d3050346"
+      "computedHash": "0e6cba47b61101d263b33549dace9d3e71f6b708884231535ceea8a5a089518b"
     },
     "writing-for-agents": {
       "source": "mattpocock/skills",

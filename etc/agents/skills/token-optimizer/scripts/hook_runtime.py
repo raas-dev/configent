@@ -397,3 +397,122 @@ def lease_lock(path, **kwargs):
     finally:
         if acquired:
             lock.release()
+
+
+# --- Stale-lease sweeper -----------------------------------------------------
+# LeaseLock's release() leaves the canonical ``.qlease`` tombstone on disk for
+# the next contender to reclaim. Sessions are one-shot, so most tombstones get
+# no future contender and leak forever (one+ per session per user, unbounded).
+# This sweeper is the self-healing backstop: it removes ONLY lease artifacts
+# whose expiry is demonstrably far in the past, so no live locker can ever be
+# touched. It is fail-open by construction (whole body is try/except, never
+# raises) and must NEVER run on a hot per-tool-call path unthrottled.
+
+# A ``.qlease`` is long-expired once its parsed ``expires_wall`` is at least an
+# hour behind ``now``. The hour of slack absorbs clock skew and the
+# deadline-vs-lease rounding without ever reaching back into a live lease
+# (leases themselves are ~10s).
+_SWEEP_LEASE_EXPIRED_GRACE = 3600
+# Candidate/reclaim hard links and legacy ``.qlock`` files carry no parseable
+# expiry, so they are swept purely by mtime. 24h is far beyond any live lease
+# or reclaim-grace window, so a file this old is unambiguously orphaned.
+_SWEEP_MTIME_AGE = 86400
+
+
+def _sweep_stale_leases(directory, now=None, max_files=2000):
+    """Remove long-expired lease artifacts from ``directory``.
+
+    Scans ``directory`` (the quality-cache dir) and unlinks ONLY files whose
+    lease is demonstrably long-expired, so no live locker can be touched:
+
+      * ``*.qlease``: parse the JSON metadata and remove if ``expires_wall`` <
+        ``now - _SWEEP_LEASE_EXPIRED_GRACE`` (3600s). If the file is
+        unparseable/corrupt/partial, remove only when its mtime is older than
+        ``now - _SWEEP_MTIME_AGE`` (86400s) so a file mid-publication by an old
+        process is never torn down.
+      * ``.*.candidate-*`` and ``.*.reclaim-*``: remove when mtime is older
+        than ``now - _SWEEP_MTIME_AGE``.
+      * legacy ``*.qlock`` (pre-5.11 artifacts; the current code never writes
+        them): remove when mtime is older than ``now - _SWEEP_MTIME_AGE``.
+
+    The scan is capped at ``max_files`` entries per run so a pathological cache
+    dir cannot blow the hook budget. The whole function is wrapped in
+    try/except: it NEVER raises into a hook and NEVER blocks a session. Returns
+    the number of files removed (best-effort, 0 on any error).
+    """
+    removed = 0
+    try:
+        if directory is None:
+            return 0
+        dir_path = Path(directory) if not hasattr(directory, "iterdir") else directory
+        if not dir_path.is_dir():
+            return 0
+        now = time.time() if now is None else float(now)
+        lease_cutoff = now - _SWEEP_LEASE_EXPIRED_GRACE
+        mtime_cutoff = now - _SWEEP_MTIME_AGE
+        seen = 0
+        # ``scandir`` is one stat-free readdir; per-entry mtime comes from the
+        # DirEntry where available, falling back to os.stat only when needed.
+        try:
+            entries = list(os.scandir(dir_path))
+        except OSError:
+            return 0
+        for entry in entries:
+            if seen >= max_files:
+                break
+            seen += 1
+            name = entry.name
+            if not name:
+                continue
+            try:
+                # Skip non-files (subdirectories) cheaply via the scandir cache.
+                if entry.is_dir(follow_symlinks=False):
+                    continue
+                should_remove = False
+                if name.endswith(".qlease"):
+                    should_remove = _sweep_qlease_is_stale(
+                        dir_path / name, entry, lease_cutoff, mtime_cutoff
+                    )
+                elif name.startswith(".") and (
+                    ".candidate-" in name or ".reclaim-" in name
+                ):
+                    should_remove = _sweep_mtime_is_stale(entry, mtime_cutoff)
+                elif name.endswith(".qlock"):
+                    should_remove = _sweep_mtime_is_stale(entry, mtime_cutoff)
+                if should_remove:
+                    try:
+                        os.unlink(entry.path)
+                        removed += 1
+                    except OSError:
+                        pass
+            except OSError:
+                continue
+    except Exception:
+        # Fail-open: never propagate. A sweeper error must not break a hook.
+        return removed
+    return removed
+
+
+def _sweep_qlease_is_stale(path, entry, lease_cutoff, mtime_cutoff):
+    """True if a ``.qlease`` is long-expired (parseable) or long-dead (corrupt)."""
+    try:
+        raw = path.read_bytes()
+        owner = json.loads(raw)
+        expires = owner.get("expires_wall")
+        if isinstance(expires, (int, float)) and expires > 0:
+            return float(expires) < lease_cutoff
+        # Valid JSON but no usable expiry -> treat as corrupt (mtime gate).
+        return _sweep_mtime_is_stale(entry, mtime_cutoff)
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        # Unparseable / partial / truncated JSON. A file mid-publication by an
+        # old process could be momentarily malformed, so gate on a 24h mtime
+        # age instead of removing a fresh malformed file immediately.
+        return _sweep_mtime_is_stale(entry, mtime_cutoff)
+
+
+def _sweep_mtime_is_stale(entry, mtime_cutoff):
+    """True if the entry's mtime is older than ``mtime_cutoff``."""
+    try:
+        return entry.stat(follow_symlinks=False).st_mtime < mtime_cutoff
+    except OSError:
+        return False

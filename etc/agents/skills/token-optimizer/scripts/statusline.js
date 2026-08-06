@@ -13,6 +13,72 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { execFileSync } = require('child_process');
+
+// --- Self-disabling guard (issue #106 / F1) ---
+// Claude Code has NO plugin uninstall/teardown hook, so a `/plugin uninstall`
+// (or a manual `rm -rf` of the plugin tree) can leave this statusLine command
+// pointing at a script whose plugin tree has been removed. A missing command
+// makes the status line go silently blank with no error surfaced to the user
+// (visible only under `claude --debug`). Rather than emit a broken-command
+// state, we self-disable: if our own plugin tree is gone (this script's
+// directory no longer holds the sibling files a real install always ships),
+// exit 0 with no output. A blank status line is exactly what a missing command
+// already produces, so this changes nothing while installed and removes the
+// dangling-reference state after removal. The guard runs BEFORE reading stdin
+// so a deleted tree never pays the parse cost.
+//
+// We do NOT change the command string shape for existing installs (per the
+// locked design decision): the command stays `node '<path>/statusline.js'`.
+// When the script file itself is deleted, node fails to load it before this
+// guard runs, and the host already renders that as a blank line, so the guard
+// targets the partial-removal case (script present, tree gutted).
+function _pluginTreeGone() {
+  // __dirname is this script's directory: <tree>/skills/token-optimizer/scripts
+  // (plugin cache) or <repo>/skills/token-optimizer/scripts (dev/script install).
+  // measure.py is the canonical sibling every real install ships alongside
+  // statusline.js. If it is gone while statusline.js remains, the plugin tree
+  // is being or has been removed, and a working status line would be a lie.
+  try {
+    if (!fs.existsSync(path.join(__dirname, 'measure.py'))) return true;
+  } catch (e) { return true; }
+  return false;
+}
+
+// --- Clone-path uninstall guard (issue #106 / F1, G3 C-P2-2) ---
+// For plugin-cache installs the statusLine command now points at the marketplace
+// CLONE (<claude>/plugins/marketplaces/<mkt>/skills/token-optimizer/scripts/
+// statusline.js) so it survives version bumps. But a native `/plugin uninstall
+// token-optimizer` removes only the plugin's CACHE tree
+// (<claude>/plugins/cache/<mkt>/token-optimizer/<ver>) and leaves the shared
+// marketplace clone in place. The clone still ships measure.py next to
+// statusline.js, so _pluginTreeGone() stays false and we would render a working
+// "ghost" status line for an uninstalled plugin. Detect that: when we are
+// running FROM a marketplace clone and no token-optimizer cache install remains
+// under the same <plugins> root, the plugin has been uninstalled -> self-disable.
+function _pluginUninstalledFromClone() {
+  try {
+    const parts = __dirname.split(path.sep);
+    const mi = parts.lastIndexOf('marketplaces');
+    if (mi <= 0) return false;               // not running from a clone
+    const marketplace = parts[mi + 1];
+    if (!marketplace) return false;
+    const pluginsDir = parts.slice(0, mi).join(path.sep);  // <claude>/plugins
+    const cachePluginDir = path.join(pluginsDir, 'cache', marketplace, 'token-optimizer');
+    // A live plugin-cache install has at least one <version> dir here. The dir
+    // gone (or emptied) means `/plugin uninstall` removed the cache tree.
+    if (!fs.existsSync(cachePluginDir)) return true;
+    return fs.readdirSync(cachePluginDir).length === 0;
+  } catch (e) {
+    // Never blank a healthy line on an unexpected error: a lingering ghost is
+    // strictly less harmful than blanking a working status line.
+    return false;
+  }
+}
+
+if (_pluginTreeGone() || _pluginUninstalledFromClone()) {
+  process.exit(0);
+}
 
 let input = '';
 process.stdin.setEncoding('utf8');
@@ -35,6 +101,18 @@ process.stdin.on('end', () => {
     const DIM = '\x1b[38;5;245m';
     const RESET = '\x1b[0m';
     const SEP = ` ${DIM}|${RESET} `;
+
+    let branch = '';
+    try {
+      const b = execFileSync('git', ['branch', '--show-current'], {
+        cwd: dir,
+        encoding: 'utf8',
+        timeout: 200,
+        windowsHide: true,
+        stdio: ['ignore', 'pipe', 'ignore'],
+      }).trim();
+      if (b) branch = `${SEP}${DIM}(${b})${RESET}`;
+    } catch (e) {}
     const gradeFor = (s) => s >= 90 ? 'S' : s >= 80 ? 'A' : s >= 70 ? 'B' : s >= 55 ? 'C' : s >= 40 ? 'D' : 'F';
 
     // Effort level: prefer the LIVE session value Claude Code now passes in the
@@ -184,7 +262,7 @@ process.stdin.on('end', () => {
     }
 
     const dirname = path.basename(dir);
-    const row1 = `${DIM}${model}${RESET}${effort}${SEP}${DIM}${dirname}${RESET}${ctx}${qScore}`;
+    const row1 = `${DIM}${model}${RESET}${effort}${SEP}${DIM}${dirname}${RESET}${branch}${ctx}${qScore}`;
 
     // ---- ROW 2: Session details ----
     const row2Parts = [];

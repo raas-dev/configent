@@ -211,7 +211,7 @@ def _is_confined_to_cache(target: Path, home: Path) -> bool:
 
     Guards ``shutil.rmtree`` against an intermediate symlinked path component
     (or a crafted ``installPath`` in installed_plugins.json) redirecting a
-    delete outside the plugin cache tree (issue #57 torture finding). Resolving
+    delete outside the plugin cache tree (issue #57). Resolving
     both paths catches symlink escapes (a symlinked component would resolve
     outside the cache root); the per-component check additionally refuses to
     rmtree *through* any symlink even when it resolves back inside the cache.
@@ -553,6 +553,367 @@ def build_parser() -> argparse.ArgumentParser:
         help="Report what would change without modifying anything.",
     )
     return parser
+
+
+# ---------------------------------------------------------------------------
+# Uninstall-direction manifest reconcile (issue #106 / F3)
+# ---------------------------------------------------------------------------
+
+_KNOWN_MARKETPLACES_NAME = "known_marketplaces.json"
+# A marketplace entry is "ours" when its name OR installLocation references
+# token-optimizer. Our marketplace names derive from the repo, so they always
+# contain "token-optimizer"; matching the installLocation too catches a
+# renamed entry that still points at our marketplace dir.
+_TOKEN_MARKER = "token-optimizer"
+
+
+def _is_our_marketplace(name: str, entry: object, our_marketplaces=None) -> bool:
+    """True only when we can EVIDENCE that ``name`` is our own marketplace.
+
+    #106 F3 (P2-5): the old rule was a bare substring test -- any marketplace
+    whose name merely contained "token-optimizer" was claimed as ours and
+    deleted. A user's own marketplace (a fork, a "my-token-optimizer-tweaks"
+    registry, a colleague's mirror) is not ours to remove, and
+    known_marketplaces.json is Claude Code's file, not ours.
+
+    Ownership now requires one of:
+      * ``our_marketplaces`` -- the marketplace suffixes taken from OUR OWN
+        installed_plugins keys (``token-optimizer@<marketplace>``), i.e. the
+        registry itself says we installed a plugin from it; or
+      * an ``installLocation`` whose final path component is a plugin-cache
+        dir for our plugin name (``.../<something>token-optimizer<something>``
+        is NOT enough -- the directory must actually be a marketplace dir we
+        installed into, matched on an exact path segment).
+
+    Anything else is reported (so the user can see it) but never removed.
+    """
+    if not isinstance(name, str):
+        return False
+    if our_marketplaces and name in our_marketplaces:
+        return True
+    if isinstance(entry, dict):
+        loc = entry.get("installLocation", "")
+        if isinstance(loc, str) and loc:
+            try:
+                segments = {seg.lower() for seg in Path(loc).parts}
+            except (OSError, ValueError):
+                segments = set()
+            # Exact path-segment match, not a substring of the whole path:
+            # ".../marketplaces/alexgreensh-token-optimizer" counts only when
+            # that segment is one WE are installed from (checked above), while
+            # a bare ".../token-optimizer" cache dir is ours by construction.
+            if _PLUGIN_NAME in segments:
+                return True
+    return False
+
+
+def _our_marketplace_names(registry: dict) -> set:
+    """Marketplace suffixes from our own installed_plugins keys.
+
+    ``token-optimizer@alexgreensh-token-optimizer`` -> the marketplace name
+    after the ``@``. This is the registry's own statement that we installed a
+    plugin from that marketplace, which is the only self-evident proof of
+    ownership available (#106 F3 / P2-5).
+    """
+    names = set()
+    for key in _our_plugin_keys(registry):
+        _, _, suffix = key.partition("@")
+        if suffix:
+            names.add(suffix)
+    return names
+
+
+def _load_known_marketplaces(claude_home_dir: Path) -> dict:
+    """Return the parsed known_marketplaces.json, or {} on any failure."""
+    path = claude_home_dir / "plugins" / _KNOWN_MARKETPLACES_NAME
+    try:
+        if not path.is_file() or path.stat().st_size > _MAX_MANIFEST_BYTES:
+            return {}
+        with path.open("r", encoding="utf-8") as fh:
+            data = json.load(fh)
+        if isinstance(data, dict):
+            return data
+    except (OSError, ValueError, json.JSONDecodeError):
+        pass
+    return {}
+
+
+def _our_plugin_keys(registry: dict) -> list[str]:
+    """Return our ``token-optimizer@<marketplace>`` keys in installed_plugins."""
+    plugins = registry.get("plugins", {})
+    if not isinstance(plugins, dict):
+        return []
+    return sorted(
+        k for k in plugins
+        if isinstance(k, str) and k.startswith(_PLUGIN_NAME + "@")
+    )
+
+
+def _entry_is_stale(install_path: str) -> bool:
+    """True iff the entry's installPath no longer exists on disk."""
+    if not install_path:
+        return True
+    try:
+        return not Path(install_path).is_dir()
+    except (OSError, ValueError):
+        return True
+
+
+# Default dashboard daemon port (mirrors measure.DAEMON_PORT). Read from the
+# env so tests can point the probe at a closed port without importing measure.
+_DEFAULT_DAEMON_PORT = 24842
+
+
+def _daemon_port() -> int:
+    """The dashboard daemon port, overridable via TOKEN_OPTIMIZER_DAEMON_PORT."""
+    try:
+        return int(os.environ.get("TOKEN_OPTIMIZER_DAEMON_PORT", _DEFAULT_DAEMON_PORT))
+    except (TypeError, ValueError):
+        return _DEFAULT_DAEMON_PORT
+
+
+def _dashboard_daemon_alive(port: int | None = None, timeout: float = 1.0) -> bool:
+    """True iff OUR dashboard daemon is currently serving on the loopback port.
+
+    Self-contained liveness probe (no ``measure`` import -- that would be
+    circular: measure imports this module). Used by ``reconcile_uninstall`` to
+    protect a LIVE daemon's manifest entry from a stale-path misclassification
+    during a routine plugin update: when the marketplace cache path moves on
+    update, the active identity's ``installPath`` is momentarily gone, so the
+    bare "installPath missing -> stale" rule would drop the running daemon's
+    manifest entry and orphan it (a later sweep then tears down the plist). A
+    live daemon on the port disproves "stale", so the entry is kept.
+
+    Identity-checked: only trusts the response when ``server ==
+    "token-optimizer-daemon"`` (mirrors ``measure._verify_daemon_port``), so a
+    foreign listener on the port never fakes liveness. Fail-open: any error ->
+    False, so a probe failure falls back to the existing installPath rule and
+    can never block a legitimate stale removal -- and never raises.
+    """
+    if port is None:
+        port = _daemon_port()
+    try:
+        import urllib.request
+        with urllib.request.urlopen(
+            f"http://127.0.0.1:{port}/api/health", timeout=timeout
+        ) as resp:
+            body = resp.read(2048).decode("utf-8", "replace")
+        data = json.loads(body)
+        return isinstance(data, dict) and data.get("server") == "token-optimizer-daemon"
+    except Exception:  # noqa: BLE001 -- probe must never raise
+        return False
+
+
+def _atomic_write_json(path: Path, data) -> bool:
+    """Write JSON to ``path`` via a temp file + os.replace. Returns success."""
+    import tempfile
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=".tmp-", suffix=".json")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(data, fh, indent=2, ensure_ascii=False)
+                fh.write("\n")
+            os.replace(tmp, str(path))
+            return True
+        finally:
+            if os.path.exists(tmp):
+                try:
+                    os.unlink(tmp)
+                except OSError:
+                    pass
+    except OSError:
+        return False
+
+
+def _backup_file(src: Path, backup_dest_parent: Path) -> Path | None:
+    """Copy a single file into ``backup_dest_parent/<src.name>``. Returns dest or None."""
+    try:
+        dest = backup_dest_parent / src.name
+        i = 1
+        while dest.exists():
+            dest = backup_dest_parent / f"{src.name}-{i}"
+            i += 1
+        shutil.copy2(src, dest)
+        return dest
+    except OSError:
+        return None
+
+
+def reconcile_uninstall(
+    claude_home_dir: Path,
+    *,
+    dry_run: bool = False,
+    remove: bool = False,
+) -> dict:
+    """Report (and optionally remove) our stale host-manifest entries.
+
+    Two Claude Code state files are reconciled on the UNINSTALL direction
+    (issue #106 / F3):
+
+    - ``installed_plugins.json``: our ``token-optimizer@*`` entries whose
+      ``installPath`` no longer exists (left dangling after
+      ``/plugin uninstall`` removed the cache dir but not the manifest key).
+    - ``known_marketplaces.json``: our marketplace entries (name or
+      installLocation references token-optimizer).
+
+    By default (``remove=False``) this only REPORTS what is stale. Under the
+    explicit cleanup command (``remove=True``) it writes a backup of each file
+    first, then removes our STALE entries, leaving other plugins' entries
+    byte-identical. Never raises; all errors land in ``warnings``.
+
+    Returns a result dict with ``reported`` and ``removed`` lists plus
+    ``backup`` (the backup dir created, when any) and ``warnings``.
+    """
+    result: dict = {
+        "dry_run": dry_run,
+        "remove": remove,
+        "reported": [],
+        "removed": [],
+        "backup": None,
+        "warnings": [],
+    }
+    home = claude_home_dir
+    plugins_dir = home / "plugins"
+    installed_path = plugins_dir / _MANIFEST_NAME
+    marketplaces_path = plugins_dir / _KNOWN_MARKETPLACES_NAME
+
+    registry = _load_installed_plugins(home)
+    our_keys = _our_plugin_keys(registry)
+    # FIX-SPEC-DAEMON req 1: a LIVE dashboard daemon disproves "stale". During a
+    # routine plugin update the marketplace cache path can move, so the active
+    # identity's installPath is momentarily gone and the bare "installPath
+    # missing -> stale" rule would drop the running daemon's manifest entry
+    # (orphaning it -- a later sweep then tears down the plist). Probe the daemon
+    # once; if it is alive, no our-entry is classified stale, so a routine update
+    # never removes the active daemon's manifest entry. Fail-open: a probe error
+    # -> not alive (the installPath rule still removes genuinely-stale entries),
+    # and the call site below also guards so the protection can never raise.
+    daemon_alive = False
+    if our_keys:
+        try:
+            daemon_alive = _dashboard_daemon_alive()
+        except Exception:  # noqa: BLE001 -- protection must never raise
+            daemon_alive = False
+    stale_keys: list[str] = []
+    for key in our_keys:
+        installs = registry.get("plugins", {}).get(key, [])
+        if not isinstance(installs, list) or not installs:
+            # No install records -- stale unless a live daemon protects it.
+            if not daemon_alive:
+                stale_keys.append(key)
+            continue
+        # An entry is stale if ALL its install records point at gone paths.
+        all_gone = all(
+            _entry_is_stale(str(inst.get("installPath", "")))
+            for inst in installs if isinstance(inst, dict)
+        ) or not any(isinstance(inst, dict) for inst in installs)
+        # FIX-SPEC-DAEMON req 1: a live daemon protects the active identity
+        # from a stale-path misclassification during a plugin update (the
+        # marketplace cache path moved, so installPath is gone but the daemon
+        # is still serving). Classified active/kept, never removed by reconcile.
+        if all_gone and daemon_alive:
+            all_gone = False
+        if all_gone:
+            stale_keys.append(key)
+        result["reported"].append({
+            "file": str(installed_path),
+            "key": key,
+            "stale": all_gone,
+            "daemon_alive": daemon_alive,
+            "install_path": installs[0].get("installPath", "") if isinstance(installs[0], dict) else "",
+        })
+
+    marketplaces = _load_known_marketplaces(home)
+    # #106 F3 (P2-5): ownership must be evidenced by our own installed_plugins
+    # keys (or an exact plugin-name path segment), never a bare name substring.
+    our_marketplace_names = _our_marketplace_names(registry)
+    our_mkt_keys = sorted(
+        k for k, v in marketplaces.items()
+        if _is_our_marketplace(k, v, our_marketplace_names)
+    )
+    for key in our_mkt_keys:
+        entry = marketplaces.get(key, {})
+        loc = entry.get("installLocation", "") if isinstance(entry, dict) else ""
+        stale = bool(loc) and not Path(loc).is_dir()
+        result["reported"].append({
+            "file": str(marketplaces_path),
+            "key": key,
+            "stale": stale,
+            "install_location": loc,
+        })
+
+    if not remove:
+        return result
+
+    # Removal path: back up both files first, then drop our STALE entries.
+    to_remove_installed = [k for k in stale_keys]
+    to_remove_marketplaces = [
+        k for k in our_mkt_keys
+        if (isinstance(marketplaces.get(k), dict)
+            and _entry_is_stale(str(marketplaces[k].get("installLocation", ""))))
+    ]
+    if not to_remove_installed and not to_remove_marketplaces:
+        return result
+
+    if dry_run:
+        # Dry-run + remove: disclose what WOULD be removed, touch nothing
+        # (no backup dir created, no files written).
+        for key in to_remove_installed:
+            result["removed"].append(f"{installed_path}::{key}")
+        for key in to_remove_marketplaces:
+            result["removed"].append(f"{marketplaces_path}::{key}")
+        return result
+
+    backup_root = home / _BACKUP_ROOT_NAME / _PLUGIN_NAME
+    if not _backup_dir_writable(backup_root):
+        msg = f"[Token Optimizer] ABORT: backup dir {backup_root} not writable; manifest entries left in place."
+        result["warnings"].append(msg)
+        print(msg, file=sys.stderr)
+        return result
+    stamp = _timestamp()
+    backup_dest = backup_root / stamp
+    try:
+        backup_dest.mkdir(parents=True, exist_ok=False)
+    except OSError:
+        msg = f"[Token Optimizer] ABORT: could not create backup dir {backup_dest}; manifest entries left in place."
+        result["warnings"].append(msg)
+        print(msg, file=sys.stderr)
+        return result
+    result["backup"] = str(backup_dest)
+
+    if to_remove_installed and installed_path.is_file():
+        backed = _backup_file(installed_path, backup_dest)
+        if backed is None:
+            msg = f"[Token Optimizer] ABORT: could not back up {installed_path}; installed_plugins entries left in place."
+            result["warnings"].append(msg)
+            print(msg, file=sys.stderr)
+        else:
+            plugins = registry.get("plugins", {})
+            for key in to_remove_installed:
+                plugins.pop(key, None)
+                result["removed"].append(f"{installed_path}::{key}")
+            if not _atomic_write_json(installed_path, registry):
+                msg = f"[Token Optimizer] WARNING: failed to write {installed_path}; entries may remain."
+                result["warnings"].append(msg)
+                print(msg, file=sys.stderr)
+
+    if to_remove_marketplaces and marketplaces_path.is_file():
+        backed = _backup_file(marketplaces_path, backup_dest)
+        if backed is None:
+            msg = f"[Token Optimizer] ABORT: could not back up {marketplaces_path}; known_marketplaces entries left in place."
+            result["warnings"].append(msg)
+            print(msg, file=sys.stderr)
+        else:
+            for key in to_remove_marketplaces:
+                marketplaces.pop(key, None)
+                result["removed"].append(f"{marketplaces_path}::{key}")
+            if not _atomic_write_json(marketplaces_path, marketplaces):
+                msg = f"[Token Optimizer] WARNING: failed to write {marketplaces_path}; entries may remain."
+                result["warnings"].append(msg)
+                print(msg, file=sys.stderr)
+
+    return result
 
 
 def main(argv: list[str] | None = None) -> int:

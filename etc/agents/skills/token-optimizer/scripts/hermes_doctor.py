@@ -8,11 +8,17 @@ import json
 import os
 import socket
 import sqlite3
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
 from runtime_env import detect_runtime, hermes_home, runtime_home
+
+# Windows: a console-subsystem child (python.exe) flashes a console window
+# unless the parent passes CREATE_NO_WINDOW (#107). getattr -> 0 on POSIX,
+# where creationflags=0 is an accepted no-op.
+_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -219,8 +225,6 @@ def _bridge_smoke_check() -> list[dict[str, str]]:
     (WARN/not found). We invoke it as a subprocess to confirm the installed copy
     can actually resolve measure.py via the measure-path locator.
     """
-    import subprocess  # noqa: PLC0415
-
     hermes_root = hermes_home()
     plugin_dir = _plugin_install_dir(hermes_root)
     bridge = plugin_dir / "hermes_hook_bridge.py"
@@ -250,6 +254,7 @@ def _bridge_smoke_check() -> list[dict[str, str]]:
             encoding="utf-8",
             errors="replace",
             timeout=10,
+            creationflags=_NO_WINDOW,
         )
     except (subprocess.TimeoutExpired, OSError) as exc:
         return [_check("WARN", "Bridge smoke test", f"could not run: {exc}")]

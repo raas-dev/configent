@@ -17,8 +17,8 @@ find "$TARGET_PATH" -type d -maxdepth 3 \
   -not -path "*/dist/*" \
   -not -path "*/.next/*" \
   -not -path "*/build/*" \
-  -not -path "*/__pycache__/*" |
-  head -50
+  -not -path "*/__pycache__/*" \
+  | head -50
 
 echo ""
 echo "## Existing Intent Nodes"
@@ -32,8 +32,8 @@ find "$TARGET_PATH" -type d \
   -not -path "*/.git/*" \
   -not -path "*/dist/*" \
   -not -path "*/.next/*" \
-  -exec sh -c 'count=$(find "$1" -maxdepth 1 -type f | wc -l); [ $count -gt 20 ] && echo "$count files: $1"' _ {} \; 2>/dev/null |
-  sort -rn | head -15
+  -exec sh -c 'count=$(find "$1" -maxdepth 1 -type f | wc -l); [ $count -gt 20 ] && echo "$count files: $1"' _ {} \; 2>/dev/null \
+  | sort -rn | head -15
 
 echo ""
 echo "## Package/Config Files (semantic boundaries)"
@@ -53,4 +53,4 @@ for dir in src lib app packages services api; do
 done
 
 echo ""
-echo "Run estimate_tokens.py on specific directories to determine if they need their own node."
+echo "Run estimate_tokens.sh on specific directories to determine if they need their own node."

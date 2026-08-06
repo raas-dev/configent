@@ -12,3 +12,4 @@ etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:902
 etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1305
 etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1306
 etc/agents/skills/token-optimizer/scripts/benchmark.py:generic-api-key:1457
+etc/agents/skills/skill-conductor/scripts/test_smoke.py:generic-api-key:141

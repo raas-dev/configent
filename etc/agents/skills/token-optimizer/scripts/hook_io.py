@@ -36,6 +36,11 @@ def read_stdin_hook_input(max_bytes: int = 1_048_576) -> dict:
     Bounds read size to max_bytes (default 1MB for PostToolUse payloads
     that include tool_response). PreToolUse callers can pass a lower cap.
     Works on Unix and Windows.
+
+    C9: if the parsed JSON is valid but NOT a dict (e.g. a list, string, or
+    number), prints a loud warning to stderr and returns {}. Callers do
+    hook_input.get(...) which would AttributeError on a non-dict; the empty
+    dict lets the existing `if not hook_input:` guards catch it.
     """
     try:
         if sys.platform == "win32":
@@ -49,7 +54,19 @@ def read_stdin_hook_input(max_bytes: int = 1_048_576) -> dict:
                 data = sys.stdin.buffer.read(max_bytes).decode("utf-8", errors="replace")
             else:
                 return {}
-        return json.loads(data) if data else {}
+        if not data:
+            return {}
+        parsed = json.loads(data)
+        if not isinstance(parsed, dict):
+            # C9: loud fail + return. A non-dict payload (list, string, number)
+            # is a protocol violation; callers would AttributeError on .get().
+            print(
+                f"[hook_io] stdin JSON is {type(parsed).__name__}, not a dict; "
+                f"treating as empty (hook will no-op)",
+                file=sys.stderr,
+            )
+            return {}
+        return parsed
     except (OSError, json.JSONDecodeError, ValueError):
         pass
     return {}

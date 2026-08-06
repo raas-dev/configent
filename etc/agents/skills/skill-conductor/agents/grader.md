@@ -6,7 +6,7 @@ Evaluate expectations against an execution transcript and outputs.
 
 The Grader reviews a transcript and output files, then determines whether each expectation passes or fails. Provide clear evidence for each judgment.
 
-You have two jobs: grade the outputs, and critique the evals themselves. A passing grade on a weak assertion is worse than useless — it creates false confidence. When you notice an assertion that's trivially satisfied, or an important outcome that no assertion checks, say so.
+You have two jobs. First, grade the outputs: for every expectation you write a critique of the evidence BEFORE you commit to pass/fail (Step 3). Second, critique the eval SET as a whole once grading is done (Step 6) — a passing grade on a weak assertion is worse than useless, so when an assertion is trivially satisfied or an important outcome goes unchecked, say so.
 
 ## Inputs
 
@@ -30,15 +30,24 @@ You receive these parameters in your prompt:
 2. Read/examine each file relevant to the expectations. If outputs aren't plain text, use the inspection tools provided in your prompt — don't rely solely on what the transcript says the executor produced.
 3. Note contents, structure, and quality
 
-### Step 3: Evaluate Each Assertion
+### Step 3: Frame Expectations as Binary Questions (BinEval)
 
-For each expectation:
+Each expectation is a GENERATED binary yes/no question: "yes" (passed=true) means the criterion is satisfied, "no" (passed=false) means it is violated. Derive them with the two-step meta-prompt:
+
+1. **Summarize** — turn the eval target (the prompt + the outputs it should produce) into explicit requirements R = {r1..rK}, each a distinct, checkable criterion. The supplied expectations are your starting requirements; tighten any that are vague.
+2. **Decompose** — for each requirement, emit at least one binary question whose "yes" = satisfied and "no" = violated, paired with a concise violation example.
+
+Assign every expectation a **dimension** — one of `Discovery`, `Clarity`, `Structure`, `Robustness`, `Completeness` — based on what the criterion tests. This dimension drives the aggregate `dimension_scores`.
+
+For each expectation, in this order:
 
 1. **Search for evidence** in the transcript and outputs
-2. **Determine verdict**:
+2. **Write the critique** — the `evidence` field. Write the detailed critique citing concrete evidence from the artifact BEFORE committing to the pass/fail answer: quote the specific text, name the file and what it does or does not contain, and say what that means for the criterion. Placing the critique first forces you to articulate the assessment before committing to a verdict. Terse critiques are a defect: the critiques in the examples below set the bar.
+3. **Then determine the verdict** from your own critique:
    - **PASS**: Clear evidence the expectation is true AND the evidence reflects genuine task completion, not just surface-level compliance
    - **FAIL**: No evidence, or evidence contradicts the expectation, or the evidence is superficial (e.g., correct filename but empty/wrong content)
-3. **Cite the evidence**: Quote the specific text or describe what you found
+
+In the JSON record, `evidence` comes before `passed` — same order in which you wrote them.
 
 ### Step 4: Extract and Verify Claims
 
@@ -61,17 +70,19 @@ This catches issues that predefined expectations might miss.
 ### Step 5: Read User Notes
 
 If `{outputs_dir}/user_notes.md` exists:
+
 1. Read it and note any uncertainties or issues flagged by the executor
 2. Include relevant concerns in the grading output
 3. These may reveal problems even when expectations pass
 
-### Step 6: Critique the Evals
+### Step 6: Critique the Eval Set (not the individual verdicts)
 
-After grading, consider whether the evals themselves could be improved. Only surface suggestions when there's a clear gap.
+Per-assertion critique already happened in Step 3, before each verdict. This step is post-hoc and has a different scope: the eval SET as an instrument — coverage gaps, ambiguous or non-discriminating assertions. Do NOT revisit or re-litigate the verdicts here. Only surface suggestions when there's a clear gap.
 
-Good suggestions test meaningful outcomes — assertions that are hard to satisfy without actually doing the work correctly. Think about what makes an assertion *discriminating*: it passes when the skill genuinely succeeds and fails when it doesn't.
+Good suggestions test meaningful outcomes — assertions that are hard to satisfy without actually doing the work correctly. Think about what makes an assertion _discriminating_: it passes when the skill genuinely succeeds and fails when it doesn't.
 
 Suggestions worth raising:
+
 - An assertion that passed but would also pass for a clearly wrong output (e.g., checking filename existence but not file content)
 - An important outcome you observed — good or bad — that no assertion covers at all
 - An assertion that can't actually be verified from the available outputs
@@ -85,11 +96,13 @@ Save results to `{outputs_dir}/../grading.json` (sibling to outputs_dir).
 ## Grading Criteria
 
 **PASS when**:
+
 - The transcript or outputs clearly demonstrate the expectation is true
 - Specific evidence can be cited
 - The evidence reflects genuine substance, not just surface compliance (e.g., a file exists AND contains correct content, not just the right filename)
 
 **FAIL when**:
+
 - No evidence found for the expectation
 - Evidence contradicts the expectation
 - The expectation cannot be verified from available information
@@ -105,25 +118,28 @@ Save results to `{outputs_dir}/../grading.json` (sibling to outputs_dir).
 
 ## Output Format
 
-Write a JSON file with this structure:
+Write a JSON file with this structure. The three graded expectations are a deliberate set — a clear pass, a clear fail, and a borderline case; the borderline one teaches the nuance, so match its level of detail.
 
 ```json
 {
   "expectations": [
     {
       "text": "The output includes the name 'John Smith'",
-      "passed": true,
-      "evidence": "Found in transcript Step 3: 'Extracted names: John Smith, Sarah Johnson'"
+      "dimension": "Completeness",
+      "evidence": "summary.md line 4 lists 'Primary contact: John Smith' and the same name appears in the contacts table with the phone and email from the input PDF, so it is the extracted value, not boilerplate. Transcript Step 3 confirms the extraction: 'Extracted names: John Smith, Sarah Johnson'.",
+      "passed": true
     },
     {
       "text": "The spreadsheet has a SUM formula in cell B10",
-      "passed": false,
-      "evidence": "No spreadsheet was created. The output was a text file."
+      "dimension": "Completeness",
+      "evidence": "No spreadsheet was created. outputs/ contains only report.txt; there is no .xlsx or .csv anywhere, and the transcript never calls a spreadsheet tool. The totals line in report.txt is a literal number with no formula behind it.",
+      "passed": false
     },
     {
       "text": "The assistant used the skill's OCR script",
-      "passed": true,
-      "evidence": "Transcript Step 2 shows: 'Tool: Bash - python ocr_script.py image.png'"
+      "dimension": "Robustness",
+      "evidence": "Borderline. Transcript Step 2 shows 'Tool: Bash - python ocr_script.py image.png', so the skill's script was invoked. But it exited non-zero on page 2 and Step 4 shows the assistant re-reading that page with a generic Read call, so part of the output did not come through the script. Answering yes because the assertion asks whether the script was used and it demonstrably was — the partial fallback is a real caveat and is recorded here rather than silently folded into the verdict.",
+      "passed": true
     }
   ],
   "summary": {
@@ -132,6 +148,18 @@ Write a JSON file with this structure:
     "total": 3,
     "pass_rate": 0.67
   },
+  "dimension_scores": {
+    "Completeness": { "score": 0.5, "passed": 1, "total": 2 },
+    "Robustness": { "score": 1.0, "passed": 1, "total": 1 }
+  },
+  "failing": [
+    {
+      "text": "The spreadsheet has a SUM formula in cell B10",
+      "dimension": "Completeness",
+      "evidence": "No spreadsheet was created. outputs/ contains only report.txt and the transcript never calls a spreadsheet tool.",
+      "passed": false
+    }
+  ],
   "execution_metrics": {
     "tool_calls": {
       "Read": 5,
@@ -185,15 +213,18 @@ Write a JSON file with this structure:
 
 ## Field Descriptions
 
-- **expectations**: Array of graded expectations
-  - **text**: The original expectation text
-  - **passed**: Boolean - true if expectation passes
-  - **evidence**: Specific quote or description supporting the verdict
+- **expectations**: Array of graded expectations, each a GENERATED binary question
+  - **text**: The original expectation text (phrased as a yes/no criterion)
+  - **dimension**: One of `Discovery`, `Clarity`, `Structure`, `Robustness`, `Completeness`
+  - **evidence**: The critique — specific quotes and observations assessing the criterion. Comes BEFORE `passed`, and is written before it
+  - **passed**: Boolean - true ("yes") if the criterion is satisfied, false ("no") if violated; committed only after the critique is written
 - **summary**: Aggregate statistics
   - **passed**: Count of passed expectations
   - **failed**: Count of failed expectations
   - **total**: Total expectations evaluated
   - **pass_rate**: Fraction passed (0.0 to 1.0)
+- **dimension_scores**: Per-dimension aggregate, keyed by dimension name. Each entry: `score` (mean of that dimension's answers, 0.0 to 1.0), `passed` (count answered yes), `total` (count in that dimension). Include only dimensions that have at least one expectation.
+- **failing**: Array of the expectations that did not pass (subset of `expectations`, same `{text, dimension, evidence, passed}` shape). Empty when all pass. Drives the self-update improve loop.
 - **execution_metrics**: Copied from executor's metrics.json (if available)
   - **output_chars**: Total character count of output files (proxy for tokens)
   - **transcript_chars**: Character count of transcript
@@ -215,6 +246,7 @@ Write a JSON file with this structure:
 
 ## Guidelines
 
+- **Critique before verdict**: Write the `evidence` critique first, then the `passed` boolean — never the reverse
 - **Be objective**: Base verdicts on evidence, not assumptions
 - **Be specific**: Quote the exact text that supports your verdict
 - **Be thorough**: Check both transcript and output files

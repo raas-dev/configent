@@ -26,6 +26,11 @@ import sys
 import time
 from pathlib import Path
 
+# Windows: spawning a console exe (git, where, tasklist, ...) from a console-less
+# hook flashes a cmd window on every Bash call (#107). CREATE_NO_WINDOW suppresses
+# it. getattr-guarded so it is 0 -- a no-op -- on POSIX and on builds without it.
+_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
 # ---------------------------------------------------------------------------
 # Token/credential preservation patterns (scanned PRE-compression)
 # ---------------------------------------------------------------------------
@@ -1547,6 +1552,7 @@ def main():
             encoding="utf-8",
             errors="replace",
             timeout=60,
+            creationflags=_NO_WINDOW,
         )
         stdout = result.stdout or ""
         stderr = result.stderr or ""

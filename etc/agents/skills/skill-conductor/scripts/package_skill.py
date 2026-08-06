@@ -10,8 +10,8 @@ Usage:
     python scripts/package_skill.py <path/to/skill-folder> [output-directory]
 
 Example:
-    python scripts/package_skill.py ~/.claude/skills/my-skill
-    python scripts/package_skill.py ~/.claude/skills/my-skill ./dist
+    python scripts/package_skill.py skills/my-skill
+    python scripts/package_skill.py skills/my-skill ./dist
 """
 
 import fnmatch
@@ -117,8 +117,8 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python scripts/package_skill.py <path/to/skill-folder> [output-directory]")
         print("\nExample:")
-        print("  python scripts/package_skill.py ~/.claude/skills/my-skill")
-        print("  python scripts/package_skill.py ~/.claude/skills/my-skill ./dist")
+        print("  python scripts/package_skill.py skills/my-skill")
+        print("  python scripts/package_skill.py skills/my-skill ./dist")
         sys.exit(1)
 
     skill_path = sys.argv[1]

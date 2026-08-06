@@ -105,6 +105,7 @@ Here are some tips that we've found to work well in writing these descriptions:
 - The skill should be phrased in the imperative -- "Use this skill for" rather than "this skill does"
 - The skill description should focus on the user's intent, what they are trying to achieve, vs. the implementation details of how the skill works.
 - The description competes with other skills for Claude's attention — make it distinctive and immediately recognizable.
+- Claude tends to UNDERtrigger skills. Counter it with a "pushy" clause covering several natural phrasings plus an explicit escape hatch — "Use when <A>, <B>, or <C>, even if the user doesn't explicitly say '<the narrow canonical term>'". This catches the phrasings that miss the obvious keyword without listing individual queries.
 - If you're getting lots of failures after repeated attempts, change things up. Try different sentence structures or wordings.
 
 I'd encourage you to be creative and mix up the style in different iterations since you'll have multiple opportunities to try different approaches and we'll just grab the highest-scoring one at the end.

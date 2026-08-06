@@ -3880,7 +3880,8 @@ var DB = (function() {
             'style="margin-left:8px;padding:2px 10px;font:inherit;font-size:12px;cursor:pointer;' +
             'background:transparent;color:inherit;border:1px solid currentColor;border-radius:4px;">' +
             'Regenerate savings</button>' +
-            '<span id="to-regen-msg" style="margin-left:8px;"></span></div>';
+            '<span id="to-regen-msg" style="margin-left:8px;"></span>' +
+            '<span id="to-live-stamp" hidden style="margin-left:8px;font-size:12px;color:var(--c-savings-alt, #10b981);"></span></div>';
         })() +
         '<div style="margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--c-border);font-size:14px;color:var(--c-text-dim);line-height:1.7;text-wrap:pretty;">' +
           'Your usage is measured. The comparison is estimated: ' + esc(rw.proxy) + ' ' +
@@ -3905,6 +3906,20 @@ var DB = (function() {
     var sp  = s.structural_potential|| {};
     var unc = s.uncaptured_runtime  || {};
     var si  = s.since_install        || null;
+
+    // Young-install guard: with under 30 tracked days, "/mo" would present a
+    // partial cumulative sample as a monthly run-rate. Because mo() is an
+    // identity at days=30, the amounts already ARE cumulative sums — only the
+    // framing changes. si.days > days (long installs) clamps to the window;
+    // si null falls back to run-rate (totals ~0, nothing misleading renders).
+    var trackedDays = (si && Number(si.days) > 0) ? Math.min(days, Number(si.days)) : days;
+    var runRate = trackedDays >= 30;
+    var per = runRate ? '/mo' : ' so far';
+    // Billing-mode transparency: what "saved dollars" means depends on how the
+    // user pays. Conservative default (unknown/absent mode) is subscription.
+    var billingCaption = (s.billing_mode === 'api')
+      ? 'At your provider\'s API rates &mdash; billed spend you did not incur.'
+      : 'Valued at your provider\'s API rates. On a flat plan this is capacity freed inside your limits, not cash refunded.';
 
     function mo(c) { return (Number(c) || 0) / Math.max(days, 1) * 30; }
     function money(n) {
@@ -3985,7 +4000,7 @@ var DB = (function() {
 
     var html = '<div class="section-header">' +
       '<div class="label">Value</div><h1>Savings</h1>' +
-      '<p>Two views of what Token Optimizer is worth to you: the full value of working lighter, and the savings we counted action by action. On a flat monthly plan, this is the API spend you are not paying.</p>' +
+      '<p>Two views of what Token Optimizer is worth to you: the full value of working lighter, and the savings we counted action by action.</p>' +
       '</div>' +
       '<div class="last-updated">Updated ' + esc(ts) + ' &middot; refreshes after every session</div>';
 
@@ -4126,19 +4141,27 @@ var DB = (function() {
     function pillarRow(title, amountMo, body) {
       var zero = amountMo <= 0;
       return '<div style="display:flex;gap:var(--s-3);align-items:baseline;margin-bottom:var(--s-3);">' +
-        '<div style="flex-shrink:0;width:92px;font-family:var(--font-mono);font-size:22px;font-weight:300;color:' + (zero ? 'var(--c-text-dim)' : 'var(--c-accent-cyan)') + ';">' + money(amountMo) + '<span style="font-size:12px;color:var(--c-text-dim);">/mo</span></div>' +
+        '<div style="flex-shrink:0;width:92px;font-family:var(--font-mono);font-size:22px;font-weight:300;color:' + (zero ? 'var(--c-text-dim)' : 'var(--c-accent-cyan)') + ';">' + money(amountMo) + '<span style="font-size:12px;color:var(--c-text-dim);">' + per + '</span></div>' +
         '<div><div style="font-size:16px;color:var(--c-text-main);font-weight:600;margin-bottom:2px;">' + esc(title) + '</div>' +
         '<div style="font-size:14.5px;color:var(--c-text-dim);line-height:1.7;">' + esc(body) + '</div></div>' +
       '</div>';
     }
     html += '<div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-bottom:var(--s-3);">';
+    // Under 30 tracked days the hero is measured-only (it then equals the
+    // "Measured to date" card, which covers the same span); the estimated tier
+    // stays visible in the split line below, suffixed " so far" not "/mo".
+    var heroLabel = runRate
+      ? (Number(ba.monthly_savings_usd) > 0 ? 'Counted, action by action &middot; last ' + days + ' days' : 'Saving you &middot; last ' + days + ' days')
+      : 'Saved so far &middot; ' + trackedDays + ' day' + (trackedDays === 1 ? '' : 's') + ' tracked';
+    var heroAmt = runRate ? gettingMo : measuredMo;
     html += '<div class="card" style="flex:2;min-width:320px;padding:var(--s-5) var(--s-4);">' +
-        '<div class="label" style="margin-bottom:var(--s-2);">' + (Number(ba.monthly_savings_usd) > 0 ? 'Counted, action by action &middot; last ' + days + ' days' : 'Saving you &middot; last ' + days + ' days') + '</div>' +
+        '<div class="label" style="margin-bottom:var(--s-2);">' + heroLabel + '</div>' +
         '<div style="display:flex;align-items:baseline;gap:var(--s-2);flex-wrap:wrap;">' +
-          '<span style="font-family:var(--font-mono);font-weight:300;font-size:76px;line-height:0.9;color:var(--c-accent-cyan);text-shadow:0 0 24px var(--c-accent-glow);letter-spacing:-0.02em;">' + money(gettingMo) + '</span>' +
-          '<span style="font-size:22px;color:var(--c-text-dim);font-family:var(--font-mono);">/mo</span>' +
+          '<span style="font-family:var(--font-mono);font-weight:300;font-size:76px;line-height:0.9;color:var(--c-accent-cyan);text-shadow:0 0 24px var(--c-accent-glow);letter-spacing:-0.02em;">' + money(heroAmt) + '</span>' +
+          '<span style="font-size:22px;color:var(--c-text-dim);font-family:var(--font-mono);">' + per + '</span>' +
         '</div>' +
         '<div class="lede" style="margin-top:var(--s-2);"><strong>Counted directly.</strong> Every time Token Optimizer swapped in a lighter model, trimmed a bulky result, or skipped a repeat read, we logged it and added it up.</div>' +
+        '<div class="note" style="margin-top:var(--s-1);">' + billingCaption + '</div>' +
         // Plain-language reconciliation: why this is so much smaller than the headline.
         // Only frame it as a subset when the headline actually exceeds it, so the wording
         // can never contradict the math (the two are computed independently).
@@ -4146,8 +4169,8 @@ var DB = (function() {
           ? '<div class="note" style="margin-top:var(--s-2);">The figure above estimates your whole workload. This is the slice we metered event by event, so it is smaller and exact.</div>'
           : '') +
         '<div style="display:flex;gap:var(--s-4);flex-wrap:wrap;margin-top:var(--s-3);font-family:var(--font-mono);font-size:16px;line-height:1.7;">' +
-          '<span style="color:var(--c-text-dim);"><span style="color:var(--c-text-main);">' + money(measuredMo) + '/mo</span> counted</span>' +
-          '<span style="color:var(--c-text-dim);">+ <span style="color:var(--c-text-main);">' + money(estimatedMo) + '/mo</span> estimated from your habits</span>' +
+          '<span style="color:var(--c-text-dim);"><span style="color:var(--c-text-main);">' + money(measuredMo) + per + '</span> counted</span>' +
+          '<span style="color:var(--c-text-dim);">+ <span style="color:var(--c-text-main);">' + money(estimatedMo) + per + '</span> estimated from your habits</span>' +
         '</div>' +
         // What makes it up: the three mechanisms folded in (they sum to this number).
         '<div style="margin-top:var(--s-3);padding-top:var(--s-3);border-top:1px solid rgba(255,255,255,0.06);">' +
@@ -4162,7 +4185,7 @@ var DB = (function() {
           fold('Estimated from your own behavior',
             estItems.map(function(it){
               var conf = it.conf ? ' &middot; confidence: ' + esc(String(it.conf)) : '';
-              var amt = it.amt > 0 ? money(it.amt) + '/mo' : 'not enough data yet';
+              var amt = it.amt > 0 ? money(it.amt) + per : 'not enough data yet';
               return '<div style="margin-bottom:var(--s-2);font-family:var(--font-mono);">&bull; ' + esc(it.label) + ' &mdash; <strong>' + amt + '</strong> <span style="opacity:.8;">(' + it.n.toLocaleString() + ' ' + esc(it.unit) + conf + ')</span></div>';
             }).join('')
           ) +
@@ -4173,6 +4196,7 @@ var DB = (function() {
           '<div class="label" style="margin-bottom:var(--s-2);">Measured to date</div>' +
           '<div style="font-family:var(--font-mono);font-weight:300;font-size:52px;line-height:0.9;color:var(--c-text-main);letter-spacing:-0.02em;">' + money(Number(si.measured_usd)) + '</div>' +
           (Number(si.estimated_usd) > 0 ? '<div style="margin-top:var(--s-1);font-family:var(--font-mono);font-size:14px;color:var(--c-text-dim);">+ ' + money(Number(si.estimated_usd)) + ' estimated</div>' : '') +
+          '<div class="note" style="margin-top:var(--s-1);">' + billingCaption + '</div>' +
           '<div style="margin-top:var(--s-3);font-size:14px;color:var(--c-text-dim);font-family:var(--font-mono);line-height:1.85;">measuring since ' + esc(prettyDate(si.install_date)) + '<br>(your first tracked session, not necessarily install day)</div>' +
         '</div>';
     }
@@ -4181,23 +4205,23 @@ var DB = (function() {
     // ---- SAVE MORE: suggestions, promoted right under the hero ----
     var parts = [];
     if ((Number(sp.cost_saved_usd) || 0) > 0 && unusedSkills > 0) {
-      parts.push('Prune ' + unusedSkills + ' skill' + (unusedSkills === 1 ? '' : 's') + ' you have never used. Worth about ' + money(mo(sp.cost_saved_usd)) + '/mo, automatically, from then on.');
+      parts.push('Prune ' + unusedSkills + ' skill' + (unusedSkills === 1 ? '' : 's') + ' you have never used. Worth about ' + money(mo(sp.cost_saved_usd)) + per + ', automatically, from then on.');
     }
     if ((Number(mr.potential_cost_usd) || 0) > 0) {
-      parts.push('Let Token Optimizer route more of your routine work to lighter models. Recovers about ' + money(mo(mr.potential_cost_usd)) + '/mo.');
+      parts.push('Let Token Optimizer route more of your routine work to lighter models. Recovers about ' + money(mo(mr.potential_cost_usd)) + per + '.');
     }
     if (cdTokensMo > 0) {
-      parts.push('Resume within the hour, or batch related work before stepping away. ' + (Number(cd.drop_sessions) || 0) + ' of your sessions idled past the cache window and re-wrote the prefix — about ' + cdTokensMo.toLocaleString() + ' tokens/mo.');
+      parts.push('Resume within the hour, or batch related work before stepping away. ' + (Number(cd.drop_sessions) || 0) + ' of your sessions idled past the cache window and re-wrote the prefix — about ' + cdTokensMo.toLocaleString() + ' tokens' + per + '.');
     }
     if ((Number(ow.cost_saved_usd) || 0) > 0) {
-      parts.push('Favor targeted Edits over full-file Writes. About ' + (Number(ow.avoidable_writes) || 0) + ' of your Writes could have been Edits, worth about ' + money(mo(ow.cost_saved_usd)) + '/mo in output.');
+      parts.push('Favor targeted Edits over full-file Writes. About ' + (Number(ow.avoidable_writes) || 0) + ' of your Writes could have been Edits, worth about ' + money(mo(ow.cost_saved_usd)) + per + ' in output.');
     }
     if (parts.length > 0) {
       html += '<div class="card wide" style="padding:var(--s-5) var(--s-4);margin-bottom:var(--s-3);border:1px solid var(--c-amber);box-shadow:0 0 0 1px rgba(217,164,65,0.18), 0 0 44px rgba(217,164,65,0.12);">';
       html += '<div class="label" style="margin-bottom:var(--s-2);color:var(--c-amber);letter-spacing:0.08em;">Money on the table &middot; opportunity</div>';
       html += '<div style="display:flex;align-items:baseline;gap:var(--s-2);flex-wrap:wrap;">' +
           '<span style="font-family:var(--font-mono);font-weight:300;font-size:76px;line-height:0.9;color:var(--c-amber);text-shadow:0 0 30px rgba(217,164,65,0.5);letter-spacing:-0.02em;">' + money(opportunityMo) + '</span>' +
-          '<span style="font-size:23px;color:var(--c-text-dim);font-family:var(--font-mono);">/mo still on the table</span>' +
+          '<span style="font-size:23px;color:var(--c-text-dim);font-family:var(--font-mono);">' + per + ' still on the table</span>' +
         '</div>';
       html += '<div class="lede" style="margin-top:var(--s-2);">Real savings you have <strong>not</strong> captured yet — on top of what you are already saving. Each step below is money Token Optimizer recovers for you, most of it automatically once you act.</div>';
       html += '<div style="display:flex;flex-direction:column;gap:var(--s-4);padding-top:var(--s-4);">';
@@ -6149,7 +6173,31 @@ var DB = (function() {
     return String(Math.round(n));
   }
 
-  return { init: init };
+  // Live-patch the Savings + Overview tiles from a fresh /api/savings payload
+  // without a full page regen. Called on load (when served by the daemon) and on
+  // tab refocus, so a browser refresh always shows current numbers. Defensive:
+  // a malformed payload leaves the existing render untouched rather than blanking
+  // the tab. Returns true when a patch was applied.
+  function refreshSavings(payload) {
+    if (!data || !payload || typeof payload !== 'object') return false;
+    if (payload.savings && typeof payload.savings === 'object') {
+      data.savings = payload.savings;
+    }
+    if (payload.cache_health && typeof payload.cache_health === 'object') {
+      data.cache_health = payload.cache_health;
+    }
+    safeRender('Savings', 'savings', renderSavings);
+    safeRender('Overview', 'overview', renderOverview);
+    var stamp = document.getElementById('to-live-stamp');
+    if (stamp) {
+      var t = new Date();
+      stamp.textContent = 'live · ' + t.toTimeString().slice(0, 8);
+      stamp.hidden = false;
+    }
+    return true;
+  }
+
+  return { init: init, refreshSavings: refreshSavings };
 })();
 
 /* ========== SAMPLE DATA (28 items: 7+8+7+6) ========== */
@@ -6513,7 +6561,28 @@ document.addEventListener('DOMContentLoaded', function() {
   var brandRuntime = document.getElementById('brand-runtime');
   if (brandRuntime) brandRuntime.textContent = data.runtime === 'codex' ? 'Codex' : '';
 
-  function startApp() { DB.init(data); }
+  function startApp() { DB.init(data); refreshSavingsLive(); }
+
+  // Pull fresh savings from the daemon and live-patch the Savings/Overview tiles.
+  // No-op unless the custom API is live (served over http, health probe passed) —
+  // so a file:// open stays in static mode with no CORS noise. Fail-silent: on any
+  // error the numbers already rendered stay put.
+  function refreshSavingsLive() {
+    if (!window.__TOKEN_API_LIVE) return;
+    var base = window.__TOKEN_API_BASE || '';
+    fetch(base + '/api/savings', { method: 'GET', credentials: 'include' })
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(d) { if (d && d.ok) DB.refreshSavings(d); })
+      .catch(function() {});
+  }
+
+  // Refresh when the tab is brought back to the foreground, so returning to an
+  // already-open dashboard shows current savings without a manual reload.
+  if (typeof document.addEventListener === 'function') {
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') refreshSavingsLive();
+    });
+  }
 
   // Probe for our custom API server before init.
   // When served from the daemon (http://localhost:*), a relative /api/health works.

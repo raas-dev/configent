@@ -45,6 +45,14 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+# Windows console-flash guard (#107). `copilot` is distributed via npm, so on
+# Windows the PATH entry is copilot.cmd -- CreateProcess hands a .cmd to
+# cmd.exe, a console-subsystem binary that allocates a console window unless
+# the parent passes CREATE_NO_WINDOW. Same for python.exe children. getattr ->
+# 0 on POSIX, where creationflags=0 is an accepted no-op (CPython only rejects
+# creationflags != 0 off-Windows).
+_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
 _SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(_SCRIPT_DIR))
 
@@ -54,6 +62,25 @@ try:
     from runtime_env import copilot_home
 except ImportError:  # pragma: no cover - broken install
     copilot_home = None  # type: ignore[assignment]
+
+try:
+    from spawn_utils import spawn_detached
+except ImportError:  # pragma: no cover - broken install
+    logger.warning("[copilot] spawn_utils import failed; using degraded fallback")
+    def spawn_detached(argv, **popen_kwargs):  # type: ignore[no-redef]
+        # degraded broken-install path: does NOT detach. Does NOT replicate the
+        # OS-flag logic or the breakaway retry; canonical
+        # spawn_utils.spawn_detached has both. It DOES carry CREATE_NO_WINDOW
+        # (#107) so a broken install degrades to "child dies with the parent"
+        # rather than to "console window flashes on every stop hook". OR-in
+        # rather than assign so a caller-supplied creationflags survives.
+        import subprocess as _sp
+        kwargs = dict(popen_kwargs)
+        kwargs["creationflags"] = kwargs.get("creationflags", 0) | _NO_WINDOW
+        try:
+            return _sp.Popen(argv, **kwargs)
+        except OSError:
+            return None
 
 try:
     import bash_hook as _bash_hook
@@ -225,7 +252,8 @@ def _copilot_cli_version():
     try:
         proc = subprocess.run(
             [exe, "--version"], capture_output=True, text=True,
-            encoding="utf-8", errors="replace", timeout=5
+            encoding="utf-8", errors="replace", timeout=5,
+            creationflags=_NO_WINDOW,
         )
         raw = (proc.stdout or proc.stderr or "").strip()
         return _parse_version(raw), raw
@@ -586,15 +614,17 @@ def handle_stop(payload):
     env["PYTHONUTF8"] = "1"
     env["PYTHONIOENCODING"] = "utf-8"
     try:
-        subprocess.Popen(
+        _proc = spawn_detached(
             [sys.executable, str(measure), "copilot-rollup", "--quiet"],
             env=env,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
-            start_new_session=True,
         )
     except (OSError, subprocess.SubprocessError):
         pass
+    else:
+        if _proc is None:
+            logger.warning("[copilot_hook_bridge] handle_stop spawn_detached returned None")
     # Remove this session's in-flight tally: shutdown event is now authoritative.
     # Also drop the published lease lock file so a fast sessionStart doesn't
     # see a stale inflight-{sid}.lock from this session (candidate files age

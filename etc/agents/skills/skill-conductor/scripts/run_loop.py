@@ -8,7 +8,6 @@ overfitting.
 
 import argparse
 import json
-import random
 import sys
 import tempfile
 import time
@@ -20,30 +19,7 @@ import anthropic
 from scripts.generate_report import generate_html
 from scripts.improve_description import improve_description
 from scripts.run_eval import find_project_root, run_eval
-from scripts.utils import parse_skill_md
-
-
-def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tuple[list[dict], list[dict]]:
-    """Split eval set into train and test sets, stratified by should_trigger."""
-    random.seed(seed)
-
-    # Separate by should_trigger
-    trigger = [e for e in eval_set if e["should_trigger"]]
-    no_trigger = [e for e in eval_set if not e["should_trigger"]]
-
-    # Shuffle each group
-    random.shuffle(trigger)
-    random.shuffle(no_trigger)
-
-    # Calculate split points
-    n_trigger_test = max(1, int(len(trigger) * holdout))
-    n_no_trigger_test = max(1, int(len(no_trigger) * holdout))
-
-    # Split
-    test_set = trigger[:n_trigger_test] + no_trigger[:n_no_trigger_test]
-    train_set = trigger[n_trigger_test:] + no_trigger[n_no_trigger_test:]
-
-    return train_set, test_set
+from scripts.utils import parse_skill_md, split_evals
 
 
 def run_loop(
@@ -68,7 +44,7 @@ def run_loop(
 
     # Split into train/test if holdout > 0
     if holdout > 0:
-        train_set, test_set = split_eval_set(eval_set, holdout)
+        train_set, test_set = split_evals(eval_set, holdout, stratify_key="should_trigger")
         if verbose:
             print(f"Split: {len(train_set)} train, {len(test_set)} test (holdout={holdout})", file=sys.stderr)
     else:

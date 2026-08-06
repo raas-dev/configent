@@ -22,10 +22,20 @@ ALLOWED_RESOURCES = {"scripts", "references", "assets"}
 
 SKILL_TEMPLATE = """---
 name: {skill_name}
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: >
+  TODO - Complete and informative explanation of what the skill does and when to use it.
+  Include WHEN to use this skill (specific scenarios, file types, or tasks that trigger it)
+  and a "Do NOT use for" clause. Keep brackets out of YAML values - they parse as a list.
 ---
 
 # {skill_title}
+
+<!-- AUTHORING CANON (delete this comment when done) — read references/sop-practices.md first.
+     - SKILL.md is a MAP, not a process: keep it short, point to references/ for detail (Principle 3).
+     - NO keys, passwords, tokens, env values, or user-absolute paths in this file — put them in
+       references/runtime-setup.md and reference by name (Principle 9a).
+     - Pre-flight (required tools/env/files) lives in references/runtime-setup.md; link to it, don't inline.
+     - Description states purpose + triggers, never the workflow (Principle 2). -->
 
 ## Overview
 

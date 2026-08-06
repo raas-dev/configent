@@ -69,6 +69,7 @@ import hmac
 import json
 import math
 import os
+import stat
 import glob
 import re
 import secrets
@@ -81,6 +82,7 @@ import tempfile
 import textwrap
 import time
 import platform
+import shutil
 from collections import deque
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
@@ -91,8 +93,16 @@ except ImportError:  # pragma: no cover - Python < 3.11 fallback
     tomllib = None
 
 from hook_io import read_stdin_hook_input as _read_stdin_hook_input_shared
-from hook_runtime import HookDeadline, LeaseLock, current_deadline, lease_lock
+from hook_runtime import (
+    HookDeadline,
+    LeaseLock,
+    current_deadline,
+    lease_lock,
+    _sweep_stale_leases,
+)
+import plugin_env
 from plugin_env import (
+    _all_plugin_data_dirs,
     interpret_flag_value,
     reclaim_orphaned_plugin_data_dirs,
     resolve_plugin_data_dir,
@@ -100,6 +110,36 @@ from plugin_env import (
 )
 from utf8_io import enforce_utf8_io, reexec_in_utf8_mode
 from runtime_env import claude_home, detect_runtime, runtime_home, runtime_name_for_humans
+from spawn_utils import spawn_detached
+
+# issue #107: every console-attached child we spawn on Windows flashes a cmd
+# window when the host is the GitHub Desktop app (no inherited console). The
+# getattr degrades to 0 on POSIX and on Windows builds without the constant, so
+# `creationflags=_NO_WINDOW` is a literal no-op everywhere but Windows. Detached
+# spawns (spawn_utils.spawn_detached) OR this in on top of DETACHED_PROCESS --
+# CreateProcess ignores CREATE_NO_WINDOW when DETACHED_PROCESS is set, so the OR
+# is harmless and keeps a single grep-able invariant across every spawn site.
+_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
+
+def _detached_python_exe():
+    """Interpreter to use for FIRE-AND-FORGET python children.
+
+    issue #107, belt-and-suspenders on top of the detach flags: on Windows,
+    prefer the GUI-subsystem ``pythonw.exe`` twin next to ``sys.executable`` so
+    the child cannot allocate a console even if a future edit drops
+    ``DETACHED_PROCESS``/``CREATE_NO_WINDOW``, or a host launches us in a way we
+    do not control. Falls back to ``sys.executable`` when no usable twin exists
+    (MS Store alias, no twin) and is a pure no-op off Windows -- POSIX behaviour
+    is byte-identical.
+
+    ONLY for children whose stdio is DEVNULL. Do NOT use it for
+    ``capture_output=True`` runs: those already suppress the window via
+    ``creationflags=_NO_WINDOW``, and swapping the interpreter there would trade
+    a solved problem for pythonw's None-stdio semantics.
+    """
+    return _windows_gui_python() or sys.executable or "python3"
+
 
 import codex_io
 import codex_session
@@ -484,11 +524,10 @@ OPENAI_MODEL_PRICING = {
     "gpt-5.4-nano": {"input": 0.20, "cache_read": 0.02, "output": 1.25},
     "gpt-5.5": {"input": 5.0, "cache_read": 0.50, "output": 30.0},
     "gpt-5.5-pro": {"input": 30.0, "cache_read": 30.0, "output": 180.0},  # cache_read N/A per OpenAI; billed at full input rate
-    # GPT-5.6 three-tier Codex family (Sol flagship / Terra workhorse / Luna cheap).
-    # Verified 2026-07-23 from OpenAI GPT-5.6 preview pricing; cache_read = 10% of input (90% read discount).
-    "gpt-5.6-sol": {"input": 5.0, "cache_read": 0.50, "output": 30.0},
-    "gpt-5.6-terra": {"input": 2.5, "cache_read": 0.25, "output": 15.0},
-    "gpt-5.6-luna": {"input": 1.0, "cache_read": 0.10, "output": 6.0},
+    # GPT-5.6 family. Cache writes cost 1.25x the applicable input rate.
+    "gpt-5.6-sol": {"input": 5.0, "cache_read": 0.50, "cache_write": 6.25, "output": 30.0},
+    "gpt-5.6-terra": {"input": 2.0, "cache_read": 0.20, "cache_write": 2.50, "output": 12.0},
+    "gpt-5.6-luna": {"input": 0.20, "cache_read": 0.02, "cache_write": 0.25, "output": 1.20},
     # GPT-4.x family
     "gpt-4.1": {"input": 2.0, "cache_read": 0.50, "output": 8.0},
     "gpt-4.1-mini": {"input": 0.40, "cache_read": 0.10, "output": 1.60},
@@ -504,11 +543,15 @@ OPENAI_MODEL_PRICING = {
 OPENAI_LONG_CONTEXT_PRICING = {
     "gpt-5.4": {"input": 5.0, "cache_read": 0.50, "output": 22.5},
     "gpt-5.5": {"input": 10.0, "cache_read": 1.0, "output": 45.0},
+    "gpt-5.6-sol": {"input": 10.0, "cache_read": 1.0, "cache_write": 12.50, "output": 45.0},
+    "gpt-5.6-terra": {"input": 4.0, "cache_read": 0.40, "cache_write": 5.0, "output": 18.0},
+    "gpt-5.6-luna": {"input": 0.40, "cache_read": 0.04, "cache_write": 0.50, "output": 1.80},
 }
 OPENAI_LONG_CONTEXT_INPUT_THRESHOLD = 272_000
 
 GEMINI_MODEL_PRICING = {
     # Prices per 1M tokens from ai.google.dev/gemini-api/docs/pricing (May 2026).
+    "gemini-3.6-flash": {"input": 1.50, "cache_read": 0.15, "output": 7.50},  # released 2026-07-21; 17% output cut vs 3.5-flash
     "gemini-3.5-flash": {"input": 1.50, "cache_read": 0.15, "output": 9.0},
     "gemini-3.1-pro-preview": {"input": 2.0, "cache_read": 0.20, "output": 12.0},
     "gemini-3.1-flash-lite": {"input": 0.25, "cache_read": 0.025, "output": 1.50},
@@ -756,6 +799,7 @@ def _get_model_cost(model, input_tokens, output_tokens, cache_read=0, cache_crea
                 input_tokens * rates["input"] / 1e6
                 + output_tokens * rates["output"] / 1e6
                 + cache_read * rates["cache_read"] / 1e6
+                + cache_create * rates.get("cache_write", 0) / 1e6
             )
 
     normalized = _normalize_model_name(model) if model else None
@@ -807,7 +851,7 @@ def _normalize_openai_model_name(model):
     """Return a priced OpenAI model id, or None when we cannot price exactly."""
     if not model:
         return None
-    value = _strip_provider_prefixes(model)
+    value = re.sub(r"[\s_]+", "-", _strip_provider_prefixes(model))
     if not value or value in {"codex", "openai", "unknown"}:
         return None
     aliases = (
@@ -842,6 +886,8 @@ def _normalize_openai_model_name(model):
     for alias in aliases:
         if value == alias or value.startswith(alias + "-"):
             return alias
+    if value == "gpt-5.6" or value.startswith("gpt-5.6-"):
+        return "gpt-5.6-sol"
     return None
 
 
@@ -2658,17 +2704,24 @@ def quick_scan(as_json=False):
         if eager > 0:
             detail += f" ({eager} with eager-loaded tools)"
         offenders.append(("mcp", mcp_count, mcp.get("tokens", 0), detail))
-    claude_md_tokens = sum(
-        components[k].get("tokens", 0)
-        for k in components if k.startswith("claude_md") and components[k].get("exists")
-    )
-    claude_md_lines = sum(
-        components[k].get("lines", 0)
-        for k in components if k.startswith("claude_md") and components[k].get("exists")
-    )
-    if claude_md_tokens > 0:
-        offenders.append(("claude_md", claude_md_lines, claude_md_tokens,
-                         f"CLAUDE.md ({claude_md_lines} lines)"))
+    # Per-file CLAUDE.md offenders (PR #100, danikdanik). measure_components()
+    # keys each ancestor CLAUDE.md separately (claude_md_global,
+    # claude_md_home, claude_md_project_<dir>), mirroring how Claude Code loads
+    # them up the directory tree. Blending them into one "CLAUDE.md" entry
+    # produced a token/line count that was no single file's size and a
+    # "slim to N lines" action that was not actionable on any one file.
+    _claude_md_files = [
+        (k, components[k]) for k in sorted(components)
+        if k.startswith("claude_md") and components[k].get("exists")
+    ]
+    for _k, _c in _claude_md_files:
+        _f_tokens = _c.get("tokens", 0)
+        _f_lines = _c.get("lines", 0)
+        _f_path = _c.get("path", "") or _k
+        _f_label = _f_path.replace(str(HOME), "~") if _f_path else _k
+        if _f_tokens > 0:
+            offenders.append(("claude_md", _f_lines, _f_tokens,
+                             f"{_f_label} ({_f_lines} lines)"))
     if detect_runtime() == "codex":
         agents_md_tokens = sum(
             components[k].get("tokens", 0)
@@ -2726,22 +2779,39 @@ def quick_scan(as_json=False):
                 "detail": f"save ~{savings:,} tokens/session",
                 "extend": f"Improves stable prompt-cache prefix and extends peak quality by ~{savings:,} tokens",
             }
-    if not quick_win and claude_md_tokens > 5000 and claude_md_lines > 200:
-        # Savings target = Anthropic's documented 200-line guidance. Compute
-        # tokens-per-line from the measured file so the savings figure matches
-        # the "to under 200" target in the action text, not the old ~4,500-token
-        # internal heuristic. Guard on claude_md_lines > 200 so we don't emit a
-        # no-op "save ~0 tokens" recommendation when a long-but-short file
-        # trips the token threshold but is already under the line guidance.
-        tokens_per_line = claude_md_tokens / max(claude_md_lines, 1)
-        savings = max(0, claude_md_tokens - int(200 * tokens_per_line))
-        if savings > 0:
-            quick_win = {
-                "action": f"Slim CLAUDE.md from {claude_md_lines} lines to under 200 (per Anthropic guidance)",
-                "savings": savings,
-                "detail": f"save ~{savings:,} tokens/session",
-                "extend": f"Extends peak quality zone by ~{savings:,} tokens",
-            }
+    if not quick_win and _claude_md_files:
+        # PR #100 (danikdanik): pick the LARGEST single CLAUDE.md rather than
+        # blending every ancestor file, so the action names a file the user can
+        # actually open. Savings math stays ours: Anthropic's documented
+        # 200-line guidance, with tokens-per-line taken from that one file, and
+        # the >200-line guard so a token-dense but short file never gets a
+        # self-contradicting "slim to 200 lines, save ~0 tokens".
+        #
+        # G3 C-P2-1: filter to the files that ACTUALLY qualify (>5000 tokens AND
+        # >200 lines) BEFORE picking the largest. The old code did max()-by-tokens
+        # first and then applied the gate to that one file, so a token-dense but
+        # short (<=200-line) file could win max() and then fail the >200-line
+        # gate -- masking a genuine slim win in a different, over-200-line file
+        # (exactly the multi-file monorepo/ancestor layout PR#100 serves).
+        _qualifying = [
+            (k, c) for k, c in _claude_md_files
+            if c.get("tokens", 0) > 5000 and c.get("lines", 0) > 200
+        ]
+        if _qualifying:
+            _lk, _lc = max(_qualifying, key=lambda kv: kv[1].get("tokens", 0))
+            claude_md_tokens = _lc.get("tokens", 0)
+            claude_md_lines = _lc.get("lines", 0)
+            _lc_path = _lc.get("path", "") or _lk
+            _lc_label = _lc_path.replace(str(HOME), "~") if _lc_path else _lk
+            tokens_per_line = claude_md_tokens / max(claude_md_lines, 1)
+            savings = max(0, claude_md_tokens - int(200 * tokens_per_line))
+            if savings > 0:
+                quick_win = {
+                    "action": f"Slim {_lc_label} from {claude_md_lines} lines to under 200 (per Anthropic guidance)",
+                    "savings": savings,
+                    "detail": f"save ~{savings:,} tokens/session",
+                    "extend": f"Extends peak quality zone by ~{savings:,} tokens",
+                }
 
     # Coaching insight
     coaching = None
@@ -2992,6 +3062,36 @@ def doctor(as_json=False):
                        f"plugins loaded from {', '.join(reasons)} directories"))
     else:
         checks.append(("OK", "Plugin paths clean", "no duplicates or suspicious sources"))
+        score += 1
+
+    # 13. Dashboard daemon (#107: doctor had ZERO daemon checks,
+    # so a wedged sticky marker was invisible to the one command named for the
+    # job). Fail-open: a probe error must not break doctor.
+    total += 1
+    try:
+        if _daemon_install_failed_marker_present():
+            _mk = _daemon_install_failed_reason()
+            checks.append(("!!", "Dashboard daemon",
+                           f"self-heal disabled by a permanent install failure "
+                           f"({_mk or 'reason unknown'}) "
+                           "(fix: python3 measure.py setup-daemon)"))
+        elif _daemon_resurrection_blocked() is not None:
+            checks.append(("OK", "Dashboard daemon", "disabled by user (opt-out honored)"))
+            score += 1
+        elif _verify_daemon_port(timeout_seconds=1, retries=1, retry_sleep=0):
+            checks.append(("OK", "Dashboard daemon",
+                           f"running at http://localhost:{DAEMON_PORT}/token-optimizer"))
+            score += 1
+        elif _daemon_service_installed(_normalized_platform()):
+            checks.append(("!!", "Dashboard daemon",
+                           "installed but not serving "
+                           "(fix: python3 measure.py setup-daemon)"))
+        else:
+            checks.append(("OK", "Dashboard daemon",
+                           "not installed (self-installs at SessionStart)"))
+            score += 1
+    except Exception:
+        checks.append(("OK", "Dashboard daemon", "status unknown (probe failed)"))
         score += 1
 
     if as_json:
@@ -3823,9 +3923,9 @@ def _open_in_browser(filepath):
     system = platform.system()
     try:
         if system == "Darwin":
-            subprocess.run(["open", filepath], check=True, timeout=10)
+            subprocess.run(["open", filepath], check=True, timeout=10, creationflags=_NO_WINDOW)
         elif system == "Linux":
-            subprocess.run(["xdg-open", filepath], check=True, timeout=10)
+            subprocess.run(["xdg-open", filepath], check=True, timeout=10, creationflags=_NO_WINDOW)
         elif system == "Windows":
             os.startfile(filepath)
         else:
@@ -3854,9 +3954,9 @@ def _open_dashboard(fallback_filepath):
         system = platform.system()
         try:
             if system == "Darwin":
-                subprocess.run(["open", url], check=True, timeout=10)
+                subprocess.run(["open", url], check=True, timeout=10, creationflags=_NO_WINDOW)
             elif system == "Linux":
-                subprocess.run(["xdg-open", url], check=True, timeout=10)
+                subprocess.run(["xdg-open", url], check=True, timeout=10, creationflags=_NO_WINDOW)
             elif system == "Windows":
                 os.startfile(url)
             else:
@@ -3937,7 +4037,7 @@ def _serve_dashboard(filepath, port=8080, host="127.0.0.1"):
             if path_only == "/api/health":
                 self._json_response(200, {"ok": True, "server": "token-optimizer"})
                 return
-            # v5.4.19 identity magic probe (defeats foreign-port masquerade, adv-007)
+            # v5.4.19 identity magic probe (defeats foreign-port masquerade)
             if path_only == "/__to_ping":
                 self._json_response(200, {"ok": True, "magic": DAEMON_IDENTITY_MAGIC})
                 return
@@ -3953,6 +4053,22 @@ def _serve_dashboard(filepath, port=8080, host="127.0.0.1"):
                     self.send_error(403, "Forbidden")
                     return
                 self._json_response(200, {"token": _read_daemon_token()})
+                return
+            # Live savings recompute. A browser refresh against the daemon shows
+            # current savings/cache numbers WITHOUT paying for a full (multi-second)
+            # dashboard regen: the page fetches this and patches the tiles in place.
+            # Read-only, localhost-guarded (same DNS-rebinding defense as the static
+            # assets below), fail-open (a slow/failed eval degrades to a safe shape).
+            if path_only == "/api/savings":
+                if not _is_localhost_host_header(self.headers.get("Host", "")):
+                    self.send_error(421, "Misdirected Request")
+                    return
+                try:
+                    payload = _live_savings_payload(days=30)
+                except Exception:
+                    self._json_response(500, {"ok": False})
+                    return
+                self._json_response(200, payload)
                 return
             if self._redirect_root():
                 return
@@ -4204,10 +4320,21 @@ def _codex_state_summary():
     """
     if detect_runtime() != "codex":
         return None
+    # Resolve the active thread id ONCE from the state DB and scope every
+    # Codex-state metric to its goal subtree. Without this, subagent_costs and
+    # goal_budgets aggregate EVERY spawn edge/goal in the DB (including closed
+    # historical ones from unrelated prior work), inflating totals and letting
+    # `quality current` pick a stale session (issue #108). Fail-open: a None
+    # resolution falls back to the legacy whole-DB aggregation.
+    try:
+        current_tid = codex_state.current_thread_id()
+    except Exception:
+        current_tid = None
     summary = {
-        "subagents": codex_state.subagent_costs(),
+        "subagents": codex_state.subagent_costs(root_thread_id=current_tid),
         "memory": codex_state.memory_overhead(),
-        "goals": codex_state.goal_budgets(),
+        "goals": codex_state.goal_budgets(root_thread_id=current_tid),
+        "selected_thread_id": current_tid,
         "rate_limits": None,
         "effort": None,
         "compaction": None,
@@ -5787,6 +5914,10 @@ def generate_standalone_dashboard(days=30, quiet=False, force=False):
     try:
         savings_data = _get_merged_savings(days=30)
         savings_data["since_install"] = _savings_since_install()
+        # Billing-mode transparency: the dashboard captions the savings heroes
+        # differently for flat-plan vs API-billed users ("capacity freed" vs
+        # "spend not incurred"). Conservative default is 'subscription'.
+        savings_data["billing_mode"] = keepwarm_billing_mode()
     except Exception:
         savings_data = {"total_tokens": 0, "total_cost_usd": 0.0, "by_category": {}}
 
@@ -6049,23 +6180,24 @@ def _defer_session_end_flush(args):
     """Detach the expensive dashboard/session refresh so Stop returns quickly."""
     try:
         cmd = [
-            sys.executable or "python3",
+            _detached_python_exe(),
             str(Path(__file__).resolve()),
             "session-end-flush-worker",
             *args[1:],
         ]
         env = os.environ.copy()
         env["TOKEN_OPTIMIZER_RUNTIME"] = detect_runtime()
-        subprocess.Popen(
+        _proc = spawn_detached(
             cmd,
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             cwd=str(Path.cwd()),
             env=env,
-            start_new_session=True,
             close_fds=True,
         )
+        if _proc is None:
+            _log_spawn_failure("session-end flush spawn failed")
     except Exception:
         pass
 
@@ -6219,6 +6351,36 @@ def _generate_codex_auto_recommendations(components, trends=None, days=30):
     return plan_md, total_count
 
 
+# Token Optimizer's OWN skills. The tool must NEVER recommend archiving, trimming,
+# or cutting the very features that do the measuring — suggesting a user delete
+# token-coach/fleet-auditor to "save ~200 tokens" is self-cannibalizing and reads
+# as the plugin undermining itself (issue #111). These are always excluded from
+# unused-skill / archive recommendations regardless of invocation history: an
+# audit tool you never explicitly "invoke" is not the same as an unused skill.
+_OWN_TOOL_SKILLS = frozenset({
+    "token-optimizer", "token-coach", "token-dashboard", "fleet-auditor",
+    "token-optimizer:token-optimizer", "token-optimizer:token-coach",
+    "token-optimizer:token-dashboard", "token-optimizer:fleet-auditor",
+    "token-optimizer:health", "token-optimizer:quick",
+})
+
+
+def _is_own_tool_skill(name) -> bool:
+    """True if `name` is one of Token Optimizer's own skills (never recommend cutting it)."""
+    if not name:
+        return False
+    n = str(name).strip().lower()
+    base = n.rsplit(":", 1)[-1].rsplit("/", 1)[-1]
+    return (
+        n in _OWN_TOOL_SKILLS
+        or base in _OWN_TOOL_SKILLS
+        or base.startswith("token-optimizer")
+        or base.startswith("token-coach")
+        or base.startswith("token-dashboard")
+        or base.startswith("fleet-auditor")
+    )
+
+
 def generate_auto_recommendations(components, trends=None, days=30):
     """Generate rule-based optimization recommendations without any LLM.
 
@@ -6266,52 +6428,64 @@ def generate_auto_recommendations(components, trends=None, days=30):
             f"Keep MEMORY.md as an index of high-signal, frequently-referenced items."
         )
 
-    # --- Rule 2: CLAUDE.md too large ---
-    claude_tokens = 0
-    claude_lines = 0
-    for key in components:
-        if key.startswith("claude_md") and components[key].get("exists"):
-            claude_tokens += components[key].get("tokens", 0)
-            claude_lines += components[key].get("lines", 0)
-    if claude_tokens > 6000 and claude_lines > 200:
-        # Savings target = Anthropic's documented 200-line guidance. Compute
-        # tokens-per-line from this file's own measurements so "tokens
-        # recoverable" actually corresponds to slimming to 200 lines, not to
-        # the old ~4,500-token internal heuristic. Guard on claude_lines > 200
-        # so a token-dense but short file doesn't get a "slim to 200 lines"
-        # recommendation with ~0 tokens recoverable (self-contradicting).
-        tokens_per_line = claude_tokens / max(claude_lines, 1)
-        target_tokens = int(200 * tokens_per_line)
-        recoverable = max(0, claude_tokens - target_tokens)
-        if recoverable > 0:
-            quick.append(
-                f"**Slim CLAUDE.md ({claude_tokens:,} tokens, target under 200 lines)**: "
-                f"Everything in CLAUDE.md loads every single message you send. "
-                f"Anthropic recommends under 200 lines per CLAUDE.md file (https://code.claude.com/docs/en/memory). "
-                f"The ~300 lines / ~4,500 tokens figure is an internal heuristic, not an Anthropic recommendation — "
-                f"Anthropic documents only the 200-line target, no token threshold.\n"
-                f"  Move to skills (loaded on-demand, ~100 tokens in menu): workflow guides, coding standards, "
-                f"deployment procedures, detailed templates. "
-                f"Move to reference files (zero cost until read): API docs, config examples, architecture notes. "
-                f"Keep in CLAUDE.md: identity/personality, critical behavioral rules, key file paths, "
-                f"and short pointers to skills and references. "
-                f"Don't delete content, reorganize it. A 2-line pointer to a skill costs 100x less than "
-                f"the same content inline. ~{recoverable:,} tokens recoverable (slimming to 200 lines at ~{tokens_per_line:.1f} tokens/line)."
+    # --- Rule 2: CLAUDE.md too large (PER FILE) ---
+    # PR #100 (danikdanik). measure_components() keys each ancestor CLAUDE.md as
+    # its own component (claude_md_global, claude_md_home,
+    # claude_md_project_<dir>), mirroring how Claude Code loads CLAUDE.md files
+    # up the directory tree. Summing N files into one "Slim CLAUDE.md" number
+    # is not actionable on any single file someone owns, and could fire on a
+    # combined total when no individual file was over the threshold. Each file
+    # is now evaluated and reported on its own.
+    #
+    # Savings math is ours, unchanged: Anthropic's documented 200-line guidance
+    # with tokens-per-line derived from that file, plus the >200-line guard so a
+    # token-dense but short file never gets a "slim to 200 lines" line with ~0
+    # tokens recoverable.
+    for key in sorted(components):
+        if not key.startswith("claude_md") or not components[key].get("exists"):
+            continue
+        _c = components[key]
+        claude_tokens = _c.get("tokens", 0)
+        claude_lines = _c.get("lines", 0)
+        _path = _c.get("path", "") or key
+        _label = _path.replace(str(HOME), "~") if _path else key
+        if claude_tokens > 6000 and claude_lines > 200:
+            tokens_per_line = claude_tokens / max(claude_lines, 1)
+            target_tokens = int(200 * tokens_per_line)
+            recoverable = max(0, claude_tokens - target_tokens)
+            if recoverable > 0:
+                quick.append(
+                    f"**Slim {_label} ({claude_tokens:,} tokens, {claude_lines} lines; target under 200 lines)**: "
+                    f"Everything in this CLAUDE.md loads every single message you send. "
+                    f"Anthropic recommends under 200 lines per CLAUDE.md file (https://code.claude.com/docs/en/memory). "
+                    f"The ~300 lines / ~4,500 tokens figure is an internal heuristic, not an Anthropic recommendation — "
+                    f"Anthropic documents only the 200-line target, no token threshold.\n"
+                    f"  Move to skills (loaded on-demand, ~100 tokens in menu): workflow guides, coding standards, "
+                    f"deployment procedures, detailed templates. "
+                    f"Move to reference files (zero cost until read): API docs, config examples, architecture notes. "
+                    f"Keep in CLAUDE.md: identity/personality, critical behavioral rules, key file paths, "
+                    f"and short pointers to skills and references. "
+                    f"Don't delete content, reorganize it. A 2-line pointer to a skill costs 100x less than "
+                    f"the same content inline. ~{recoverable:,} tokens recoverable (slimming to 200 lines at ~{tokens_per_line:.1f} tokens/line)."
+                )
+        elif claude_lines > 200 and claude_tokens > 5000:
+            medium.append(
+                f"**Consider slimming {_label} ({claude_lines} lines, {claude_tokens:,} tokens)**: "
+                f"This CLAUDE.md is over Anthropic's documented 200-line guidance (https://code.claude.com/docs/en/memory) but not critically large. "
+                f"Review for any sections that could become skills or reference files. "
+                f"Focus on content that's only relevant for specific workflows."
             )
-    elif claude_lines > 200 and claude_tokens > 5000:
-        medium.append(
-            f"**Consider slimming CLAUDE.md ({claude_lines} lines, {claude_tokens:,} tokens)**: "
-            f"Your CLAUDE.md is over Anthropic's documented 200-line guidance (https://code.claude.com/docs/en/memory) but not critically large. "
-            f"Review for any sections that could become skills or reference files. "
-            f"Focus on content that's only relevant for specific workflows."
-        )
 
     # --- Rule 3: Unused skills (requires trends data) ---
     # Use actual measured avg if available, else fallback to constant
     _si = components.get("skills", {})
     _actual_avg = _si.get("tokens", 0) // max(_si.get("count", 1), 1) if _si.get("count", 0) > 0 else TOKENS_PER_SKILL_APPROX
     if trends:
-        never_used = trends.get("skills", {}).get("never_used", [])
+        # Never recommend cutting our own measurement skills (issue #111).
+        never_used = [
+            s for s in trends.get("skills", {}).get("never_used", [])
+            if not _is_own_tool_skill(s)
+        ]
         installed_count = trends.get("skills", {}).get("installed_count", 0)
         if len(never_used) >= 5:
             overhead = len(never_used) * _actual_avg
@@ -9228,6 +9402,21 @@ def _extract_session_uuid(session_id):
     return None, False
 
 
+def _log_spawn_failure(msg):
+    """Append a durable breadcrumb when a detached spawn returns None.
+
+    spawn_detached swallows OSError and returns None; every caller ignores it,
+    so a silent spawn failure leaves no trace. This writes one line to the
+    daemon log dir so the failure is discoverable post-hoc. Never raises.
+    """
+    try:
+        DAEMON_LOG_DIR.mkdir(parents=True, exist_ok=True)
+        with open(DAEMON_LOG_DIR / "spawn-failures.log", "a", encoding="utf-8") as f:
+            f.write("%s %s\n" % (time.strftime("%Y-%m-%dT%H:%M:%S"), msg))
+    except OSError:
+        pass
+
+
 def _log_savings_event(event_type, tokens_saved, session_id=None, detail=None, model=None):
     """Log a savings event to the trends database.
 
@@ -9682,7 +9871,7 @@ def _tripwire_min_samples(cohort) -> int:
 
 
 def _cohort_basis(cohort) -> str:
-    """'interpolated' (adjacent-band graduation) or 'full_gate' (T9 sidecar label)."""
+    """'interpolated' (adjacent-band graduation) or 'full_gate' (sidecar label)."""
     return "interpolated" if cohort in _INTERPOLATED_COHORTS else "full_gate"
 
 
@@ -9705,7 +9894,7 @@ def _compute_cohort_edit_rates(conn, promoted_at=None):
     window is bounded per cohort (most recent N) so an old run of bad edits ages
     out.
 
-    Promote fence (T5 hysteresis hole): for any cohort with a `promoted_at`
+    Promote fence (hysteresis hole): for any cohort with a `promoted_at`
     timestamp, BOTH skeleton and follow-up events older than that promotion are
     filtered out, so a re-promoted cohort is judged only on POST-promote history
     and cannot immediately re-demote on the pre-promote edits that demoted it.
@@ -9795,7 +9984,7 @@ def _compute_cohort_edit_rates(conn, promoted_at=None):
 
 
 def _valid_tripwire_payload(data):
-    """Schema-check the tripwire sidecar (T1 parity with read_cache).
+    """Schema-check the tripwire sidecar (parity with read_cache).
 
     `demoted` must be a list of 2-element string pairs; `edit_rates`/`promoted_at`
     (when present) dicts. Used to decide corrupt-vs-valid so a malformed sidecar
@@ -9843,7 +10032,7 @@ def _read_tripwire_sidecar(return_corrupt=False):
 def _write_tripwire_sidecar(demoted, rates, promoted_at=None):
     """Atomically write the demoted-cohort sidecar (0600).
 
-    `promoted_at` is a {lang|band: epoch_ts} map (T5 hysteresis fence): when a
+    `promoted_at` is a {lang|band: epoch_ts} map (hysteresis fence): when a
     cohort is re-promoted, its pre-promote skeleton/follow-up history is fenced
     out of the live edit-rate so it cannot immediately re-demote. Each cohort
     also carries its `basis` (full_gate|interpolated) for the dashboard label.
@@ -11361,7 +11550,7 @@ def _gh_available():
         # Short timeout: this runs inside ensure-health's SessionStart budget.
         # Two gate calls (this + the starred check) must fit well under it.
         r = subprocess.run(
-            ["gh", "auth", "status"], capture_output=True, timeout=3)
+            ["gh", "auth", "status"], capture_output=True, timeout=3, creationflags=_NO_WINDOW)
         return r.returncode == 0
     except (OSError, subprocess.SubprocessError):
         return False
@@ -11381,7 +11570,7 @@ def _gh_repo_is_starred(slug=_STAR_REPO_SLUG):
         # Short timeout: runs inside ensure-health's SessionStart budget.
         r = subprocess.run(
             ["gh", "api", "/user/starred/%s" % slug],
-            capture_output=True, timeout=3)
+            capture_output=True, timeout=3, creationflags=_NO_WINDOW)
     except (OSError, subprocess.SubprocessError):
         return None
     if r.returncode == 0:
@@ -11481,7 +11670,7 @@ def star_now(slug=_STAR_REPO_SLUG):
     try:
         r = subprocess.run(
             ["gh", "api", "-X", "PUT", "/user/starred/%s" % slug],
-            capture_output=True, timeout=10)
+            capture_output=True, timeout=10, creationflags=_NO_WINDOW)
     except (OSError, subprocess.SubprocessError) as exc:
         return (False, "Star request failed: %s." % type(exc).__name__)
     if r.returncode == 0:
@@ -11720,12 +11909,20 @@ def _keepwarm_read_tick_stamp():
 
 
 def _keepwarm_measure_script_path():
-    """Absolute path to THIS measure.py for the agent's ProgramArguments.
+    """Absolute path to measure.py for the agent's ProgramArguments.
 
-    The scheduler points the agent at the real, resolved measure.py so a moved
-    plugin cache or a dev symlink resolves to a stable file (parity with how the
-    daemon embeds an absolute script path).
+    Prefers the version-INDEPENDENT marketplace clone path so the agent survives
+    plugin updates: a version-pinned ``/plugins/cache/.../<VERSION>/`` path dies on
+    the next update, and the launchd agent then runs an old measure.py (or none),
+    freezing the dashboard's savings — the exact staleness _heal_keepwarm_plist_path
+    repairs for already-installed agents. Falls back to this file's resolved path
+    when the stable clone can't be resolved (dev checkouts, non-cache installs), so
+    a moved cache or a dev symlink still resolves to a real file (parity with how
+    the daemon embeds an absolute script path).
     """
+    stable = _stable_marketplace_script_path("measure.py")
+    if stable:
+        return stable
     return str(Path(__file__).resolve())
 
 
@@ -11867,7 +12064,7 @@ def _keepwarm_rotate_log(max_bytes=_KEEPWARM_SCHEDULER_LOG_MAX_BYTES):
     machine that ticks every 5min would grow this unbounded. We READ the tail,
     then truncate-in-place and rewrite the tail (NOT rename) so the inode launchd
     holds stays valid AND a crash burst that triggers rotation does not erase its
-    own cause (torture FIX-A6d -- a hard truncate-to-zero destroyed the only
+    own cause (a hard truncate-to-zero destroyed the only
     diagnostic trail). Best-effort: any OSError is swallowed.
     """
     path = _keepwarm_scheduler_log_path()
@@ -12012,7 +12209,7 @@ def _keepwarm_scheduler_last_tick_ok():
     """Best-effort: report whether the most recent tick looks healthy.
 
     Returns True/False/None (unknown). PRIMARY source is the tick-stamp written on
-    every real tick (torture FIX-A6c): a tick with errors==0 and a clean gate is
+    every real tick: a tick with errors==0 and a clean gate is
     ok, otherwise not-ok. Falls back to the tick log tail (traceback => not ok)
     when no stamp exists yet. A missing stamp AND empty log is 'unknown' (None).
     """
@@ -12076,14 +12273,14 @@ def _keepwarm_scheduler_install_macos(quiet=False):
     try:
         subprocess.run(
             ["launchctl", "bootout", f"gui/{uid}", str(plist_path)],
-            capture_output=True, text=True, errors="replace", timeout=10,
+            capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
         )
     except (OSError, subprocess.TimeoutExpired):
         pass
     try:
         result = subprocess.run(
             ["launchctl", "bootstrap", f"gui/{uid}", str(plist_path)],
-            capture_output=True, text=True, errors="replace", timeout=10,
+            capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
         )
     except (OSError, subprocess.TimeoutExpired) as e:
         # Bootstrap could not even run: record the failed attempt in the marker
@@ -12157,7 +12354,7 @@ def keepwarm_scheduler_uninstall(quiet=False):
         try:
             subprocess.run(
                 ["launchctl", "bootout", f"gui/{uid}", str(plist_path)],
-                capture_output=True, text=True, errors="replace", timeout=10,
+                capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
             )
         except (OSError, subprocess.TimeoutExpired):
             pass
@@ -12993,7 +13190,7 @@ def _keepwarm_fire_ping(record, now=None, runner=None):
                 return subprocess.run(
                     cmd, cwd=cwd, env=env, timeout=timeout,
                     capture_output=True, text=True,
-                    encoding="utf-8", errors="replace")
+                    encoding="utf-8", errors="replace", creationflags=_NO_WINDOW)
 
         # Real monotonic start (NOT the injected logical `now`) so duration_s is
         # sane even on backfill/replay paths that pass a synthetic now (lang M1).
@@ -13083,7 +13280,7 @@ def _keepwarm_emit_tick_observability(now, allowed, reason, armed, fired,
 
     Called on every REAL (non-dry) tick, including gate-refused ones, so the field
     can always answer 'did the scheduler run / why didn't it ping / is it
-    erroring' (torture FIX-A6a/c). Best-effort; never raises.
+    erroring'. Best-effort; never raises.
     """
     payload = {
         "ts": float(now),
@@ -13719,7 +13916,7 @@ def _keepwarm_index_active(index, clock, window, exclude_ts=None):
     and within `window` of it. `exclude_ts` drops the pause's own activity so a
     session is never counted as its own sibling/machine signal.
 
-    Bisect over the sorted index (torture FIX-A7): O(log n) instead of the prior
+    Bisect over the sorted index: O(log n) instead of the prior
     linear scan, which made backfill ~O(n^2) when sessions cluster in one project.
     """
     if not index:
@@ -14284,7 +14481,7 @@ def _keepwarm_log_realized_savings(tokens_saved, cost_usd, session_id, detail=No
     _keepwarm_realized_write_usd at the 1h premium), so the row is inserted with
     the pre-computed cost directly. Same table + columns, correct price.
 
-    SQLite is the dedup AUTHORITY (torture FIX-A1): the row carries pause_key and
+    SQLite is the dedup AUTHORITY: the row carries pause_key and
     is inserted INSERT OR IGNORE against the partial UNIQUE index on pause_key, so
     re-booking the same (session, pause) -- whether from a lost ledger marker or a
     re-detect across ticks -- is a no-op at the DB layer. Returns the number of
@@ -14380,7 +14577,7 @@ def keepwarm_detect_realized(now=None, records=None, parse_fn=None):
                     pfx = int(prefix or 0)
                 except (TypeError, ValueError):
                     pfx = 0
-                # Marker FIRST (torture FIX-A1): a stranded ledger marker with no
+                # Marker FIRST: a stranded ledger marker with no
                 # savings row only UNDER-counts = safe; the reverse (savings row,
                 # no marker) is what double-books. The DB INSERT OR IGNORE on
                 # pause_key is the real dedup authority, so even a duplicate
@@ -14421,7 +14618,7 @@ def keepwarm_detect_realized(now=None, records=None, parse_fn=None):
             booked.add(pause_key)
         except Exception as exc:
             # A record that raises every tick would otherwise be invisible
-            # forever (torture FIX-A6e). Count it and write ONE scrubbed line so
+            # forever. Count it and write ONE scrubbed line so
             # a systematically un-bookable pause is diagnosable in the field.
             out["errors"] += 1
             try:
@@ -14457,7 +14654,7 @@ def keepwarm_spend_summary(days=None, now=None, rows=None):
             cutoff = now - float(days) * 86400.0
         except (TypeError, ValueError):
             cutoff = None
-    # Pre-pass (torture FIX-A2): index every outcome row's ts per session so we can
+    # Pre-pass: index every outcome row's ts per session so we can
     # detect 'firing' rows that never got a sibling outcome (tick SIGKILLed between
     # the pre-log and the outcome append). An orphaned firing is real spend the
     # quota was charged for; counting it keeps the tripwire ratio honest.
@@ -14482,7 +14679,7 @@ def keepwarm_spend_summary(days=None, now=None, rows=None):
     orphan_firing_count = 0
     orphan_firing_usd = 0.0
     per_session = {}
-    # Dedup realized/loss by pause_key (torture FIX-A1 defense-in-depth): even
+    # Dedup realized/loss by pause_key (defense-in-depth): even
     # though the SQLite UNIQUE index is the booking authority, a duplicated ledger
     # marker must NOT inflate the rolling-7d ratio the tripwire divides by.
     seen_realized_keys = set()
@@ -14884,7 +15081,7 @@ _KEEPWARM_TRIPWIRE_LOCK_NAME = ".keepwarm_tripwire.lock"
 _KEEPWARM_TRIPWIRE_WINDOW_DAYS = 7
 _KEEPWARM_TRIPWIRE_RATIO_GATE = 1.0       # demote at ratio <= this
 _KEEPWARM_TRIPWIRE_MIN_PINGS = 20         # min pings in window before off-demote
-# Distinct-window strike semantics (torture FIX-A3): a NEW strike requires at
+# Distinct-window strike semantics: a NEW strike requires at
 # least this long since the previous strike, so a money-losing config has to fail
 # across two SEPARATE days -- not two ticks 5min apart -- before it demotes.
 _KEEPWARM_TRIPWIRE_STRIKE_WINDOW_SECONDS = 24 * 3600
@@ -17306,7 +17503,7 @@ def _collect_git_commits(days=30):
             proc = subprocess.run(
                 ["git", "-C", repo_path, "log", "--oneline",
                  f"--since={cutoff_date}", "--format=%ai|%s"],
-                capture_output=True, text=True, timeout=10,
+                capture_output=True, text=True, timeout=10, creationflags=_NO_WINDOW,
             )
             if proc.returncode != 0 or not proc.stdout.strip():
                 continue
@@ -17546,7 +17743,7 @@ def _find_session_version_for_pid(pid):
             capture_output=True, text=True, timeout=5,
             # Force C locale so ps emits English lstart regardless of host
             # locale (e.g. he_IL.UTF-8 emits Hebrew month names). GitHub #73.
-            env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"},
+            env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"}, creationflags=_NO_WINDOW,
         )
         if result.returncode != 0:
             return None
@@ -17651,7 +17848,7 @@ def _collect_posix_claude_sessions(process_name="claude"):
             # non-English locales (e.g. he_IL.UTF-8) ps emits localized dates
             # with a different field count, breaking the positional parse below
             # and dropping every session. GitHub #73.
-            env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"},
+            env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"}, creationflags=_NO_WINDOW,
         )
     except (subprocess.SubprocessError, OSError):
         return None
@@ -17771,7 +17968,7 @@ def _windows_process_creation(pid):
         result = subprocess.run(
             ["wmic", "process", "where", f"ProcessId={int(pid)}",
              "get", "CreationDate", "/format:list"],
-            capture_output=True, text=True, timeout=10, errors="replace",
+            capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
         )
         if result.returncode == 0:
             for line in result.stdout.splitlines():
@@ -17790,8 +17987,11 @@ def _windows_process_creation(pid):
             "| ForEach-Object { $_.ToString('o') }"
         )
         result = subprocess.run(
-            ["powershell", "-NoProfile", "-Command", ps_cmd],
-            capture_output=True, text=True, timeout=10, errors="replace",
+            # -ExecutionPolicy Bypass for parity with the other PowerShell
+            # spawns: an AllSigned host would otherwise block this per-PID
+            # fallback and leave the session flagged UNKNOWN_AGE.
+            ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_cmd],
+            capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
         )
         if result.returncode == 0 and result.stdout.strip():
             parsed = _parse_iso_process_datetime(result.stdout.strip())
@@ -17804,19 +18004,30 @@ def _windows_process_creation(pid):
 
 
 def _collect_windows_claude_sessions():
-    """Collect running Claude CLI sessions on Windows via tasklist + wmic.
+    """Collect running Claude CLI sessions on Windows via PowerShell Get-Process.
 
     Safety invariants (per adversarial review 2026-04-13):
-    - Only matches on the Image Name column (claude.exe / claude-*.exe).
+    - Only matches on the process image name (claude / claude-*).
       Matching on Window Title would catch Chrome tabs viewing claude.ai,
       editors with 'claude' in the filename, etc. kill_stale_sessions
       would then TerminateProcess those apps -> unsaved-work data loss.
       POSIX parity: ps-based match requires command == 'claude'; Windows
-      requires the same strictness.
-    - Uses Session # column (numeric) to detect service-hosted processes.
-      Services run in session 0; literal 'Services' string localizes.
-    - subprocess calls use errors='replace' so non-ASCII tasklist output
+      requires the same strictness. The PowerShell-side wildcard pre-filter
+      is a performance optimization only; the strict matcher below is the
+      security layer.
+    - Uses SessionId (numeric) to detect service-hosted processes.
+      Services run in session 0; unlike the literal 'Services' string,
+      SessionId never localizes.
+    - subprocess calls use errors='replace' so non-ASCII PowerShell output
       on localized Windows can't raise UnicodeDecodeError.
+
+    #117: the previous `tasklist /v` enumeration was pathologically slow for
+    standard (non-elevated) users on Win11 -- /v queries verbose info (incl.
+    window titles) for EVERY process, hitting access-denied retries on
+    protected and other-user processes. Get-Process -Name 'claude*' filters
+    server-side, so only candidate processes are materialized, and StartTime
+    is dereferenced inside a try/catch so protected processes can't fail the
+    query.
 
     Returns a list of session dicts. On subprocess failure returns an
     empty list (not None) so the Health tab still renders.
@@ -17825,10 +18036,22 @@ def _collect_windows_claude_sessions():
     import io as _io
 
     sessions = []
+    ps_cmd = (
+        # -Name 'claude*' filters server-side (only candidate processes are
+        # ever materialized), so the "touches only candidates" claim is real,
+        # not a post-enumeration Where-Object. -ErrorAction SilentlyContinue
+        # keeps a zero-match run from erroring.
+        "Get-Process -Name 'claude*' -ErrorAction SilentlyContinue | "
+        "Select-Object Id, ProcessName, SessionId, "
+        "@{N='StartTime';E={try { $_.StartTime.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ') } catch { '' }}} | "
+        "ConvertTo-Csv -NoTypeInformation"
+    )
     try:
         result = subprocess.run(
-            ["tasklist", "/v", "/fo", "csv", "/nh"],
-            capture_output=True, text=True, timeout=10, errors="replace",
+            # -ExecutionPolicy Bypass so a locked-down host (AllSigned policy)
+            # can still run this inline -Command (tasklist needed no policy).
+            ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_cmd],
+            capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
         )
     except (subprocess.SubprocessError, OSError, FileNotFoundError):
         return sessions
@@ -17836,18 +18059,15 @@ def _collect_windows_claude_sessions():
         return sessions
 
     try:
-        reader = list(_csv.reader(_io.StringIO(result.stdout)))
+        reader = list(_csv.DictReader(_io.StringIO(result.stdout)))
     except (_csv.Error, ValueError):
         return sessions
 
     for row in reader:
-        if len(row) < 9:
-            continue
-        image_name = row[0].strip()
-        pid_str = row[1]
-        session_name = row[2].strip()
-        session_num = row[3].strip() if len(row) > 3 else ""
-        window_title = row[8].strip()
+        image_name = (row.get("ProcessName") or "").strip()
+        pid_str = row.get("Id") or ""
+        session_id_str = (row.get("SessionId") or "").strip()
+        start_time = (row.get("StartTime") or "").strip()
         image_lower = image_name.lower()
         # Strict image-name match only. See docstring invariants.
         if not (image_lower == "claude.exe"
@@ -17861,24 +18081,28 @@ def _collect_windows_claude_sessions():
             continue
         if pid <= 0:
             continue
-        creation = _windows_process_creation(pid)
+        creation = _parse_iso_process_datetime(start_time) if start_time else None
+        if creation is None:
+            # StartTime unreadable (protected process) or unparseable: fall
+            # back to the per-PID wmic/CIM lookup.
+            creation = _windows_process_creation(pid)
         elapsed_seconds = int(creation.get("elapsed_seconds") or 0)
-        # Session # 0 is the Services session (language-independent); any
-        # other numeric value indicates a user session. Falls back to a
-        # non-empty session_name heuristic if the column is absent.
-        if session_num.isdigit():
-            has_terminal = session_num != "0"
-        else:
-            has_terminal = bool(session_name)
-        command = (image_name + " " + window_title).strip()
+        # SessionId 0 is the Services session (language-independent); any
+        # other value indicates a user session. A missing/unparseable
+        # SessionId assumes a user session (services always report 0).
+        try:
+            session_id = int(session_id_str)
+        except ValueError:
+            session_id = -1
+        has_terminal = session_id != 0
         sessions.append({
             "pid": pid,
             "started": creation.get("started", "unknown"),
             "elapsed_seconds": elapsed_seconds,
             "elapsed_human": _format_elapsed(elapsed_seconds) if elapsed_seconds else "unknown",
-            "command": command,
+            "command": image_name if image_lower.endswith(".exe") else image_name + ".exe",
             "has_terminal": has_terminal,
-            "tty": session_name if has_terminal and session_name else None,
+            "tty": f"session-{session_id}" if has_terminal and session_id > 0 else None,
         })
     return sessions
 
@@ -17948,7 +18172,7 @@ def _collect_health_data():
     try:
         result = subprocess.run(
             [_resolve_runtime_bin(process_name), "--version"],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=10, creationflags=_NO_WINDOW,
         )
         if result.returncode == 0:
             raw_version = result.stdout.strip()
@@ -18016,7 +18240,7 @@ def _collect_health_data():
         try:
             result = subprocess.run(
                 ["launchctl", "list"],
-                capture_output=True, text=True, timeout=10,
+                capture_output=True, text=True, timeout=10, creationflags=_NO_WINDOW,
             )
             if result.returncode == 0:
                 for line in result.stdout.strip().split("\n"):
@@ -18032,7 +18256,7 @@ def _collect_health_data():
             import io as _io
             result = subprocess.run(
                 ["schtasks", "/Query", "/FO", "CSV", "/NH"],
-                capture_output=True, text=True, timeout=10, errors="replace",
+                capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
             )
             if result.returncode == 0:
                 for row in _csv.reader(_io.StringIO(result.stdout)):
@@ -18143,17 +18367,22 @@ def health_selfcheck():
 
     # Live process-listing command
     if system == "Windows":
-        # tasklist probe
+        # Get-Process probe (same pipeline shape as
+        # _collect_windows_claude_sessions; #117 retired tasklist /v, which is
+        # pathologically slow for standard users on Win11)
         try:
             res = subprocess.run(
-                ["tasklist", "/v", "/fo", "csv", "/nh"],
-                capture_output=True, text=True, timeout=10,
+                ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+                 "Get-Process -ErrorAction SilentlyContinue | "
+                 "Select-Object -First 1 Id, ProcessName, SessionId | "
+                 "ConvertTo-Csv -NoTypeInformation"],
+                capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
             )
-            ok = res.returncode == 0 and len(res.stdout.strip()) > 0
-            check("tasklist /v /fo csv", ok,
+            ok = res.returncode == 0 and "ProcessName" in res.stdout
+            check("Get-Process csv probe", ok,
                   f"exit={res.returncode}, bytes={len(res.stdout)}")
         except (subprocess.SubprocessError, OSError, FileNotFoundError) as e:
-            check("tasklist /v /fo csv", False, f"exception: {e!r}")
+            check("Get-Process csv probe", False, f"exception: {e!r}")
 
         # _collect_windows_claude_sessions end-to-end
         try:
@@ -18169,7 +18398,7 @@ def health_selfcheck():
             res = subprocess.run(
                 ["wmic", "process", "where", f"ProcessId={own_pid}",
                  "get", "CreationDate", "/format:list"],
-                capture_output=True, text=True, timeout=10,
+                capture_output=True, text=True, timeout=10, creationflags=_NO_WINDOW,
             )
             wmic_ok = res.returncode == 0 and "CreationDate=" in res.stdout
             check("wmic CreationDate probe (self-pid)", wmic_ok,
@@ -18184,7 +18413,7 @@ def health_selfcheck():
                 capture_output=True, text=True, timeout=10,
                 # Match the production collectors: force C locale so this
                 # diagnostic mirrors what _collect_posix_claude_sessions sees. GitHub #73.
-                env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"},
+                env={**os.environ, "LC_ALL": "C", "LC_TIME": "C"}, creationflags=_NO_WINDOW,
             )
             ok = res.returncode == 0 and len(res.stdout.strip().split("\n")) > 1
             check("ps -eo pid,tty,lstart,etime,command", ok,
@@ -18326,13 +18555,18 @@ def kill_stale_sessions(threshold_hours=12, dry_run=False):
 SETTINGS_PATH = CLAUDE_DIR / "settings.json"
 MEASURE_PY_PATH = Path(__file__).resolve()
 if sys.platform == "win32":
-    _collect_cmd = subprocess.list2cmdline(
-        [sys.executable, str(MEASURE_PY_PATH), "collect", "--quiet"]
+    # #118: Claude Code runs hooks through Git Bash even on native Windows, so
+    # this must be POSIX-shell syntax: >/dev/null (a cmd null redirect would
+    # become a literal file named NUL in the CWD) and forward-slash,
+    # single-quoted paths (not cmd.exe list2cmdline quoting). sys.executable
+    # with forward slashes runs fine from Git Bash; bare `python3` often does
+    # not exist there.
+    _py = shlex.quote(str(sys.executable).replace("\\", "/"))
+    _mp = shlex.quote(str(MEASURE_PY_PATH).replace("\\", "/"))
+    HOOK_COMMAND = (
+        f"{_py} {_mp} collect --quiet && {_py} {_mp} dashboard --quiet"
+        f" >/dev/null 2>&1"
     )
-    _dashboard_cmd = subprocess.list2cmdline(
-        [sys.executable, str(MEASURE_PY_PATH), "dashboard", "--quiet"]
-    )
-    HOOK_COMMAND = f"{_collect_cmd} && {_dashboard_cmd} >NUL 2>&1"
 else:
     HOOK_COMMAND = f"python3 '{MEASURE_PY_PATH}' collect --quiet && python3 '{MEASURE_PY_PATH}' dashboard --quiet"
 # Recognizes Token Optimizer's SessionEnd hook command: a script named
@@ -18447,6 +18681,15 @@ def _is_hook_current(settings=None):
         for hook in hook_list:
             cmd = hook.get("command", "") if isinstance(hook, dict) else ""
             if "measure.py" in cmd and "collect" in cmd and "dashboard" in cmd:
+                # #118: the pre-fix win32 SessionEnd command matched all three
+                # substrings but used a cmd.exe NUL-device redirect that breaks
+                # under Git Bash (literal NUL file + silent failure). Treat that
+                # legacy form as NOT current so setup_hook's upgrade branch
+                # rewrites it to the bash-safe >/dev/null form. Existing broken
+                # installs are the whole reported #118 population, so this is the
+                # only path that heals them.
+                if sys.platform == "win32" and re.search(r">\s*NUL\b", cmd):
+                    return False
                 return True
     return False
 
@@ -18487,12 +18730,34 @@ def _write_settings_atomic(settings_data):
     None after a successful os.replace prevents the finally clause from
     unlinking the already-renamed destination. Any exception encountered
     during the write propagates naturally after cleanup.
+
+    Returns True iff the write actually landed, False when the advisory lease
+    was denied and nothing was written (#106 F3 P1). Callers that report
+    success to the user MUST check this -- a lease miss is a silent no-op, and
+    `cleanup` was printing "Removed: statusLine" / "Cleanup complete" for a
+    write that never happened, leaving the dangling statusLine #106 exists to
+    fix. Existing fire-and-forget callers can ignore the return value; the
+    previous behavior was an implicit None, which is falsey either way.
     """
     with _settings_lock() as acquired:
         if not acquired:
-            return
+            return False
+        # #106 F3 (P2-7): write THROUGH a symlink and preserve the mode.
+        # os.replace onto the link path detaches it, turning a dotfiles-managed
+        # symlink into a regular file (the user's repo silently stops tracking
+        # their settings) and dropping 0644 to mkstemp's 0600. Resolve the link
+        # first so the temp file lands in the real target's directory, and copy
+        # the destination's existing mode onto it.
+        try:
+            dest = SETTINGS_PATH.resolve(strict=False)
+        except (OSError, ValueError):
+            dest = SETTINGS_PATH
+        try:
+            dest_mode = stat.S_IMODE(os.stat(dest).st_mode)
+        except OSError:
+            dest_mode = None
         tmp_fd, tmp_path = tempfile.mkstemp(
-            dir=str(SETTINGS_PATH.parent),
+            dir=str(dest.parent),
             prefix=".settings-",
             suffix=".json",
         )
@@ -18500,7 +18765,12 @@ def _write_settings_atomic(settings_data):
             with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
                 json.dump(settings_data, f, indent=2, ensure_ascii=False)
                 f.write("\n")
-            os.replace(tmp_path, str(SETTINGS_PATH))
+            if dest_mode is not None:
+                try:
+                    os.chmod(tmp_path, dest_mode)
+                except OSError:
+                    pass
+            os.replace(tmp_path, str(dest))
             tmp_path = None  # successfully replaced; do not unlink the destination
         finally:
             if tmp_path is not None:
@@ -18508,6 +18778,7 @@ def _write_settings_atomic(settings_data):
                     os.unlink(tmp_path)
                 except OSError:
                     pass
+    return True
 
 
 # Env vars that should be auto-removed from settings.json.
@@ -18816,12 +19087,287 @@ DAEMON_HOST_PATH = SNAPSHOT_DIR / "dashboard-host"
 # _LOCALHOST_ADDRS still includes "::1" because that list validates Host
 # HEADERS, not bind addresses.
 _DAEMON_HOST_ALLOWLIST = ("127.0.0.1", "localhost", "0.0.0.0")
-DAEMON_THRASH_BREADCRUMB = SNAPSHOT_DIR / ".daemon-thrash"  # adv-005 tombstone
+DAEMON_THRASH_BREADCRUMB = SNAPSHOT_DIR / ".daemon-thrash"  # tombstone
+# #106: the .daemon-thrash breadcrumb is written by TWO
+# distinct paths with opposite lifetimes. The 3-strikes thrash path writes an
+# EMPTY file (a transient "dashboard missing" tombstone that legitimately
+# self-heals after 60s once the dashboard reappears -- e.g. an update window).
+# The UNINSTALL path must write a tombstone that OUTLIVES the uninstall and is
+# cleared ONLY by a reinstall (setup_daemon unlinks it). A size-0 file could not
+# tell the two apart, so a surviving daemon script self-cleared the uninstall
+# tombstone after 60s and minted a fresh CSRF token post-uninstall. Give the
+# uninstall tombstone distinctive content so the daemon can honor it forever.
+_UNINSTALL_TOMBSTONE_MARKER = "uninstalled"
+
+# issue #107: STICKY install-failed marker. Lives in the same state dir as the
+# .daemon-thrash tombstone and follows the same convention (a dot-prefixed
+# breadcrumb whose PRESENCE is authoritative, independent of config.json, which
+# a corrupt read could silently flip back to permissive).
+#
+# Why it exists: before this, a daemon install that failed for a structural
+# reason (no `schtasks` on the PATH, a locked SNAPSHOT_DIR, a Python that cannot
+# spawn) was retried by `_ensure_dashboard_daemon` on the next SessionStart and
+# by `_daemon_midsession_pulse` every ~5min. On Windows each retry shells out to
+# schtasks/netstat, so a permanently-broken install flashed a cmd window on
+# essentially every prompt, forever. The throttles bound the RATE, not the
+# lifetime -- they never stop.
+#
+# Lifetime (#107): armed ONLY by DEFINITIVE, permanent
+# failure classes -- an MS-Store Python alias (structurally impossible install),
+# schtasks missing from the machine, or task creation denied by policy
+# ("Access is denied"). TRANSIENT classes (a subprocess timeout, a one-off
+# nonzero exit, a fork EAGAIN, a lost install-lock race, a momentarily-bound
+# port, a missing dashboard file) must NEVER arm it -- those are already
+# bounded by the 24h ensure throttle / 300s revive throttle / 24h heal
+# throttle, and a single launchctl hiccup on macOS must not permanently kill a
+# daemon over a Windows-only cosmetic bug. It never expires on time, but it IS
+# cleared by any later VERIFIED success: an explicit `setup-daemon` that
+# succeeds, or the ensure path observing a live, identity-verified daemon
+# (which disproves the "structurally broken" claim -- e.g. the install-lock
+# race where the loser armed it while the winner installed fine).
+DAEMON_INSTALL_FAILED_BREADCRUMB = SNAPSHOT_DIR / ".daemon-install-failed"
+
 DAEMON_IDENTITY_MAGIC = (
     f"token-optimizer-{_DAEMON_RUNTIME_SUFFIX}-dashboard-v1"
     if _DAEMON_RUNTIME_SUFFIX != "claude"
     else "token-optimizer-dashboard-v1"
 )
+
+# v5.11.68 (#106 / F2): every runtime suffix that can register a daemon
+# scheduler artifact. Daemon uninstall sweeps ALL of these by name so a
+# scheduler registration whose plugin-data dir already vanished (e.g. a
+# sibling identity removed by the platform's own GC) still gets unregistered,
+# not just the currently-resolved runtime's. The per-runtime label/unit/task
+# names are derived from the suffix the same way DAEMON_LABEL /
+# SYSTEMD_UNIT_NAME / WINDOWS_TASK_NAME are above.
+_DAEMON_ALL_SUFFIXES = ("claude", "codex", "hermes", "copilot")
+_ALL_LAUNCH_AGENT_LABELS = tuple(
+    "com.token-optimizer.dashboard" if s == "claude"
+    else f"com.token-optimizer.{s}-dashboard"
+    for s in _DAEMON_ALL_SUFFIXES
+)
+_ALL_SYSTEMD_UNIT_NAMES = tuple(
+    "token-optimizer-dashboard.service" if s == "claude"
+    else f"token-optimizer-{s}-dashboard.service"
+    for s in _DAEMON_ALL_SUFFIXES
+)
+# Windows task names mirror the WINDOWS_TASK_NAME ternary below: copilot has
+# no dedicated branch there (it falls into the `else` -> TokenOptimizerDashboard
+# bucket), so the variant set is these three.
+_ALL_WINDOWS_TASK_NAMES = (
+    "TokenOptimizerDashboard",
+    "TokenOptimizerCodexDashboard",
+    "TokenOptimizerHermesDashboard",
+)
+
+
+def _scheduler_names_to_sweep(this_install_only: bool, all_names, active_name):
+    """Scheduler identifiers to unregister (#106 F2 / P2-2).
+
+    ``this_install_only`` scoped the per-identity FILE sweep but not the
+    scheduler loops, so a "just this install" uninstall still booted out every
+    runtime's LaunchAgent/unit/task -- leaving siblings half-dead (files
+    intact, registration gone) and silently tearing down a co-installed
+    Codex/Hermes dashboard. Honor the flag on both halves.
+    """
+    return (active_name,) if this_install_only else tuple(all_names)
+
+
+def _sweep_identity_daemon_files(snap_dir: Path, keys) -> tuple[list[str], list[str]]:
+    """Delete the daemon artifacts named by ``keys`` from one identity.
+
+    Returns ``(removed, failed)`` as path strings. Failures are reported
+    rather than swallowed (#106 F2 / P2-4) so the caller can refuse to claim
+    a clean sweep while a 0600 daemon-token is still on disk.
+    """
+    files = _daemon_per_identity_files(snap_dir)
+    removed: list[str] = []
+    failed: list[str] = []
+    for key in keys:
+        was_removed, did_fail = _unlink_reporting(files[key])
+        if was_removed:
+            removed.append(str(files[key]))
+        elif did_fail:
+            failed.append(str(files[key]))
+    return removed, failed
+
+
+def _print_identity_sweep_report(removed, per_identity_removed, failed, this_install_only):
+    """Shared uninstall reporting for all three platforms (#106 F2 / P2-4).
+
+    Honesty rules preserved and extended: never print a
+    "Deleted" line for a survivor, keep "Nothing to remove" when nothing
+    existed, and NEVER print the all-identities banner when any artifact
+    resisted deletion -- a surviving token means the sweep was not clean.
+    """
+    if removed:
+        print("[Token Optimizer] Dashboard daemon removed.")
+        for path in removed:
+            print(f"  Deleted: {path}")
+        if per_identity_removed and not this_install_only and not failed:
+            print("  Swept all token-optimizer-* identities:")
+            for snap_dir, items in per_identity_removed:
+                print(f"    {snap_dir}: {len(items)} file(s)")
+    elif not failed:
+        print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+    if failed:
+        print(
+            f"  WARNING: {len(failed)} daemon artifact(s) could NOT be removed "
+            "(permission denied or in use)."
+        )
+        for path in failed:
+            print(f"    Survived: {path}")
+        print(
+            "    A surviving daemon-token is a live CSRF secret -- delete these "
+            "manually, then re-run."
+        )
+
+
+def _daemon_per_identity_files(snapshot_dir: Path) -> dict:
+    """Per-identity daemon artifact paths rooted at ``snapshot_dir``.
+
+    These are the files that live INSIDE a single plugin-data identity's data
+    dir (one per ``token-optimizer-*`` install): the generated daemon script,
+    the 0600 CSRF token, the persisted bind-host, the tombstone, and
+    the platform launcher/XML. The OS scheduler REGISTRATION (LaunchAgent
+    plist / scheduled task / systemd unit) is per-RUNTIME and shared across
+    identities of the same runtime, so it is removed once, not per-identity.
+    """
+    return {
+        "daemon_script": snapshot_dir / "dashboard-server.py",
+        "daemon_token": snapshot_dir / "daemon-token",
+        "daemon_host": snapshot_dir / "dashboard-host",
+        "thrash_breadcrumb": snapshot_dir / ".daemon-thrash",
+        "windows_launcher": snapshot_dir / WINDOWS_LAUNCHER_NAME,
+        "linux_launcher": snapshot_dir / LINUX_LAUNCHER_NAME,
+    }
+
+
+def _daemon_identity_snapshot_dirs(this_install_only: bool) -> list[Path]:
+    """Snapshot dirs to sweep during daemon uninstall (issue #106 / F2).
+
+    Root cause: daemon paths derive from one module-level ``SNAPSHOT_DIR``
+    (the resolved identity), but multiple installs create multiple
+    ``token-optimizer-*`` identities. An identity-scoped uninstall leaves the
+    sibling's ``dashboard-server.py`` + ``0600 daemon-token`` (a live local
+    HTTP daemon plus its CSRF secret) on disk.
+
+    By default (sweep-all): every ``token-optimizer-*`` plugin-data identity's
+    ``data`` dir, so no sibling outlives the uninstall. With
+    ``this_install_only``: just the resolved ``SNAPSHOT_DIR`` (the pre-fix
+    behavior), for a user intentionally running side-by-side installs who only
+    wants this one gone. Reuses ``plugin_env._all_plugin_data_dirs`` rather
+    than a fourth glob, and always includes the resolved ``SNAPSHOT_DIR`` even
+    when it is not under the standard base (e.g. a
+    ``TOKEN_OPTIMIZER_SNAPSHOT_DIR`` sandbox override).
+    """
+    if this_install_only:
+        return [SNAPSHOT_DIR]
+    dirs: list[Path] = []
+    try:
+        for ident in _all_plugin_data_dirs():
+            data_dir = ident / "data"
+            # #106 F2 (P2-1): _all_plugin_data_dirs vets the IDENTITY dir, but
+            # the dir we actually delete from is its `data` child. A real
+            # identity dir whose `data` is a SYMLINK pointed at, say, $HOME
+            # made the sweep unlink daemon-token/dashboard-server.py/etc from
+            # the symlink target -- outside the plugin-data base entirely.
+            # Vet the deletion target itself, not just its parent.
+            if _daemon_sweep_dir_is_safe(data_dir):
+                dirs.append(data_dir)
+    except Exception:  # noqa: BLE001
+        pass
+    if SNAPSHOT_DIR not in dirs:
+        dirs.append(SNAPSHOT_DIR)
+    # Deterministic order, de-duplicated by resolved path.
+    seen: set[Path] = set()
+    ordered: list[Path] = []
+    for d in sorted(dirs, key=lambda p: str(p)):
+        try:
+            r = d.resolve(strict=False)
+        except (OSError, ValueError):
+            r = d
+        if r in seen:
+            continue
+        seen.add(r)
+        ordered.append(d)
+    return ordered
+
+
+def _daemon_sweep_dir_is_safe(snap_dir: Path) -> bool:
+    """True when ``snap_dir`` is a real directory we may delete daemon files from.
+
+    #106 F2 (P2-1). The sweep deletes a fixed allow-list of filenames out of
+    every identity's ``data`` dir. That dir must therefore be a REAL directory
+    whose realpath lands under the plugin-data base -- otherwise a symlinked
+    ``data`` child redirects the unlinks outside the base (the escape found in
+    review: ``token-optimizer-evil/data -> $HOME`` deleted files from $HOME).
+
+    The resolved ``SNAPSHOT_DIR`` is always allowed even when it sits outside
+    the base, because ``TOKEN_OPTIMIZER_SNAPSHOT_DIR`` (tests, sandboxes) and
+    the legacy script-install layout legitimately point elsewhere. That is the
+    identity we were told to operate on, not one we discovered by globbing.
+    """
+    try:
+        if snap_dir.is_symlink() or not snap_dir.is_dir():
+            return False
+        resolved = snap_dir.resolve(strict=True)
+    except (OSError, ValueError):
+        return False
+    try:
+        if resolved == SNAPSHOT_DIR.resolve(strict=False):
+            return True
+    except (OSError, ValueError):
+        pass
+    try:
+        # Read the base off the module (not a from-import binding) so the
+        # check honors a runtime-repointed plugin-data root.
+        base = plugin_env._PLUGIN_DATA_BASE
+        return resolved.is_relative_to(base.resolve(strict=False))
+    except (OSError, ValueError, AttributeError):
+        return False
+
+
+def _unlink_if_exists(path: Path) -> bool:
+    """Delete ``path`` if present. Returns True iff a file was removed.
+
+    Never follows a symlink to delete its target: a planted symlink named
+    ``daemon-token`` must be removed as the link itself, not as whatever it
+    points at (#106 F2 P2-1, defense in depth behind
+    ``_daemon_sweep_dir_is_safe``).
+    """
+    try:
+        if path.is_symlink():
+            path.unlink()
+            return True
+        if path.exists():
+            path.unlink()
+            return True
+    except OSError:
+        pass
+    return False
+
+
+def _unlink_reporting(path: Path) -> tuple[bool, bool]:
+    """Delete ``path``; return ``(removed, failed)``.
+
+    #106 F2 (P2-4). ``_unlink_if_exists`` swallows OSError and returns False,
+    which is indistinguishable from "was not there". The sweep then printed
+    "Swept all token-optimizer-* identities" while a 0600 daemon-token it
+    could not delete (read-only dir, EPERM) was still on disk. This variant
+    separates the two so the report can be honest about survivors.
+    """
+    try:
+        if not path.is_symlink() and not path.exists():
+            return (False, False)
+    except OSError:
+        return (False, True)
+    try:
+        path.unlink()
+        return (True, False)
+    except OSError:
+        return (False, True)
+
 
 
 def _get_or_create_daemon_token():
@@ -18852,7 +19398,7 @@ def _get_or_create_daemon_token():
         SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
         token = secrets.token_urlsafe(32)  # 43 chars, cryptographically random
         # O_EXCL: atomic create — concurrent installers race on mkdir, not
-        # on truncating each other's token (torture M1 fix).
+        # on truncating each other's token.
         fd = os.open(
             str(DAEMON_TOKEN_PATH),
             os.O_WRONLY | os.O_CREAT | os.O_EXCL,
@@ -18971,13 +19517,13 @@ def _is_localhost_host_header(host_header):
 def _generate_daemon_script():
     """Generate a minimal Python HTTP server script for the dashboard daemon.
 
-    v5.4.19 hardening (security + torture pass):
+    v5.4.19 hardening (security):
       - C-2: reject empty Origin and non-localhost Origin on POST.
       - H-1: Host header allowlist (localhost / 127.0.0.1 / [::1]) — DNS rebind defense.
       - H-2/M-4: per-install X-TO-Token header required on mutating endpoints.
-      - adv-005: 3-strikes thrash breadcrumb when DASHBOARD is missing (avoid KeepAlive
+      - 3-strikes thrash breadcrumb when DASHBOARD is missing (avoid KeepAlive
                  hot-loop with launchd/systemd).
-      - adv-006: honor breadcrumb tombstone to self-exit cleanly after uninstall.
+      - honor breadcrumb tombstone to self-exit cleanly after uninstall.
       - Serves /api/token to localhost Origin+Host only so dashboard JS can fetch it.
 
     Paths are interpolated via repr() to produce properly escaped Python string
@@ -18989,6 +19535,8 @@ def _generate_daemon_script():
     token_path_literal = repr(str(DAEMON_TOKEN_PATH))
     host_path_literal = repr(str(DAEMON_HOST_PATH))
     thrash_path_literal = repr(str(DAEMON_THRASH_BREADCRUMB))
+    log_dir_literal = repr(str(DAEMON_LOG_DIR))
+    tombstone_marker_literal = repr(_UNINSTALL_TOMBSTONE_MARKER)
     magic_literal = repr(DAEMON_IDENTITY_MAGIC)
     return f'''#!/usr/bin/env python3
 """Token Optimizer dashboard server daemon.
@@ -19001,17 +19549,46 @@ import http.server
 import json
 import os
 import socketserver
+import subprocess
 import sys
 import time
+
+# issue #107: the daemon shells out to `python measure.py ...` for the v5-toggle,
+# skill/MCP-manage, and manual-regenerate endpoints. python.exe is a console
+# subsystem binary, so without CREATE_NO_WINDOW each of those spawns flashes a
+# cmd window on Windows. getattr -> 0 on POSIX makes it a no-op there.
+_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
+LOG_DIR = {log_dir_literal}
+
+# issue #107: the Scheduled Task now launches this script with pythonw.exe
+# (GUI subsystem) instead of the .cmd launcher, because Task Scheduler paints a
+# console window for any console-subsystem action and no creationflags of ours
+# can stop it. pythonw gives the process NO std handles at all, so the
+# stdout.log / stderr.log trail the .cmd used to provide would vanish -- and a
+# silent daemon death is exactly the failure mode that once looked healthy for
+# two days. Reopen the handles onto the same log files before anything runs.
+if sys.stdout is None or sys.stderr is None:
+    try:
+        os.makedirs(LOG_DIR, exist_ok=True)
+        if sys.stdout is None:
+            sys.stdout = open(os.path.join(LOG_DIR, "stdout.log"), "a",
+                              encoding="utf-8", errors="replace", buffering=1)
+        if sys.stderr is None:
+            sys.stderr = open(os.path.join(LOG_DIR, "stderr.log"), "a",
+                              encoding="utf-8", errors="replace", buffering=1)
+    except OSError:
+        pass
 
 DASHBOARD = {dashboard_literal}
 TOKEN_PATH = {token_path_literal}
 HOST_PATH = {host_path_literal}
 THRASH_PATH = {thrash_path_literal}
+UNINSTALL_MARKER = {tombstone_marker_literal}
 IDENTITY_MAGIC = {magic_literal}
 PORT = {DAEMON_PORT}
 
-# adv-005/adv-006: thrash + tombstone guard. If dashboard has been missing for
+# thrash + tombstone guard. If dashboard has been missing for
 # 3 consecutive starts (reset when found), write a tombstone and exit with
 # code 0 so launchd/systemd consider this a "successful exit" and stop
 # respawning us. Uninstall also writes this tombstone directly.
@@ -19287,11 +19864,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             # stderr is captured to a log rather than discarded. Swallowing it is what
             # let a dead regeneration look identical to a healthy one for two days.
             errf = open(REGEN_LOG, "a", encoding="utf-8")
-            subprocess.Popen(
-                [sys.executable, target, "dashboard", "--quiet"],
-                stdout=subprocess.DEVNULL, stderr=errf,
-                stdin=subprocess.DEVNULL, close_fds=True,
-            )
+            try:
+                # The regen child is a transient worker (writes the new HTML and
+                # exits); it does NOT need to survive the daemon, so DETACHED_PROCESS
+                # would be wrong. On Windows it only needs CREATE_NO_WINDOW to avoid
+                # a console flash; POSIX detaches via start_new_session. Inlined
+                # (not a shared helper) because this template generates a STANDALONE
+                # daemon script with no sibling helper module on its sys.path.
+                _regen_kwargs = dict(stdout=subprocess.DEVNULL, stderr=errf,
+                                     stdin=subprocess.DEVNULL, close_fds=True)
+                if os.name == "nt":
+                    _flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+                    if _flags:
+                        _regen_kwargs["creationflags"] = _flags
+                else:
+                    _regen_kwargs["start_new_session"] = True
+                subprocess.Popen(
+                    [sys.executable, target, "dashboard", "--quiet"],
+                    **_regen_kwargs,
+                )
+            finally:
+                # Popen duplicates the fd via start_new_session/creationflags;
+                # the parent must close its own copy so the file handle doesn't
+                # leak per stale-open (EMFILE after ~1024 regens).
+                errf.close()
         except (OSError, ValueError) as exc:
             _log_regen("regen launch failed: %s" % exc)
 
@@ -19347,7 +19943,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             try:
                 result = subprocess.run(
                     [sys.executable, _resolve_measure_py(), "v5", action, name, "--json"],
-                    capture_output=True, text=True, timeout=10
+                    capture_output=True, text=True, timeout=10,
+                    creationflags=_NO_WINDOW
                 )
             except (subprocess.TimeoutExpired, OSError) as e:
                 self._json_response(500, {{"ok": False, "msg": "toggle backend unavailable: " + str(e)}})
@@ -19392,7 +19989,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             try:
                 result = subprocess.run(
                     [sys.executable, _resolve_measure_py(), "api-manage", endpoint, name],
-                    capture_output=True, text=True, timeout=15
+                    capture_output=True, text=True, timeout=15,
+                    creationflags=_NO_WINDOW
                 )
             except (subprocess.TimeoutExpired, OSError) as e:
                 self._json_response(500, {{"ok": False, "msg": "manage backend unavailable: " + str(e)}})
@@ -19431,6 +20029,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     r = subprocess.run(
                         [sys.executable, target, step, "--quiet"],
                         capture_output=True, text=True, timeout=REGEN_STEP_TIMEOUT,
+                        creationflags=_NO_WINDOW,
                     )
                     if r.returncode != 0:
                         msg = (r.stderr or r.stdout or "").strip()[:300] or ("%s exited %d" % (step, r.returncode))
@@ -19463,31 +20062,40 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 def _thrash_check_and_update():
     """Return True to continue, False to tombstone-and-exit cleanly."""
-    # adv-006: if an uninstall tombstone is present, exit cleanly.
-    # (Install writes empty file; any presence = "stop respawning me".)
+    # two breadcrumb kinds live at THRASH_PATH.
+    #   - UNINSTALL tombstone: content == UNINSTALL_MARKER. Written by
+    #     `measure.py` uninstall; it must OUTLIVE the uninstall and is cleared
+    #     ONLY by a reinstall (setup_daemon unlinks it). Honor it FOREVER -- a
+    #     surviving daemon script must never resurrect and mint a fresh CSRF
+    #     token after a reported uninstall.
+    #   - THRASH tombstone: EMPTY file, written by the 3-strikes path below when
+    #     the dashboard has been missing. That is transient (e.g. an update
+    #     window), so it self-heals after 60s once the dashboard is back.
     if os.path.exists(THRASH_PATH):
         try:
-            size = os.path.getsize(THRASH_PATH)
+            with open(THRASH_PATH, "r", encoding="utf-8") as f:
+                content = f.read().strip()
         except OSError:
-            size = 0
-        # Size 0 = uninstall tombstone. >0 = thrash counter; process it below.
-        if size == 0:
-            # Honor it only if FRESH (an uninstall genuinely in progress). A real
-            # uninstall removes the plist + this very script within milliseconds,
-            # so a stale 0-byte tombstone sitting next to a healthy dashboard with
-            # this daemon still running is a stuck state, not an uninstall — clear
-            # it and serve. This self-heals daemons wrongly tombstoned by an
-            # update-window thrash, instead of staying dead until setup-daemon.
+            content = ""
+        if content == UNINSTALL_MARKER:
+            # Real uninstall: stay dead. Never self-clear, never serve.
+            return False
+        if content == "":
+            # Empty = 3-strikes thrash tombstone. Self-heal only when STALE: a
+            # stuck tombstone next to a healthy dashboard with this daemon still
+            # running is a thrash false-positive, not an uninstall.
             try:
                 age = time.time() - os.path.getmtime(THRASH_PATH)
             except OSError:
-                age = 0  # unreadable mtime: treat as fresh, preserve uninstall safety
+                age = 0  # unreadable mtime: treat as fresh, preserve safety
             if age < 60:
                 return False
             try:
                 os.unlink(THRASH_PATH)
             except OSError:
                 pass
+        # else: non-empty, non-marker -> a numeric thrash counter; fall through
+        # to the dashboard check / counter processing below.
 
     if os.path.exists(DASHBOARD):
         # Healthy start: clear any thrash counter.
@@ -19498,7 +20106,7 @@ def _thrash_check_and_update():
             pass
         return True
 
-    # adv-005: dashboard is missing. Increment 3-strikes counter.
+    # dashboard is missing. Increment 3-strikes counter.
     count = 0
     try:
         with open(THRASH_PATH, "r", encoding="utf-8") as f:
@@ -19629,43 +20237,38 @@ def _resolve_hook_command(template_cmd, plugin_root):
 
     Script installs don't use Claude Code's plugin loader, so we need to
     substitute ${CLAUDE_PLUGIN_ROOT} ourselves with the install directory.
+
+    #118: Claude Code runs hooks through Git Bash on Windows too, so the bash
+    launcher template is already the correct form there. The only
+    Windows-specific hardening is substituting a forward-slash root, so
+    backslash sequences in user names (\\t, \\n, ...) can't be mangled inside
+    bash double quotes. The pre-fix native cmd.exe conversion (list2cmdline +
+    cmd null redirect) created a literal NUL file and silently broke hooks.
     """
     if not template_cmd:
         return template_cmd
+    root = str(plugin_root)
     if platform.system() == "Windows":
-        return _windows_hook_command(template_cmd, plugin_root)
-    resolved = template_cmd.replace("${CLAUDE_PLUGIN_ROOT}", str(plugin_root))
-    resolved = resolved.replace("$CLAUDE_PLUGIN_ROOT", str(plugin_root))
+        root = root.replace("\\", "/")
+    # No shell-metachar escaping needed here: the sole caller (setup_all_hooks)
+    # rejects roots containing ' " ` $ ; & | < > (SEC-001) before this runs, so
+    # the substituted root is always inert in the bash double-quote context.
+    resolved = template_cmd.replace("${CLAUDE_PLUGIN_ROOT}", root)
+    resolved = resolved.replace("$CLAUDE_PLUGIN_ROOT", root)
     return resolved
 
 
-def _windows_hook_command(template_cmd, plugin_root):
-    """Convert a hooks.json bash launcher command to a native Windows command."""
-    match = re.search(
-        r'["\']?\$\{?CLAUDE_PLUGIN_ROOT\}?/hooks/run\.py["\']?\s+'
-        r'(.*?);\s*done;\s*exit\s+0\s*$',
-        template_cmd,
-    )
-    if not match:
-        # Non-Python hooks (for example an intentional echo command) retain
-        # their original semantics; only the known launcher shape is rewritten.
-        return template_cmd.replace("${CLAUDE_PLUGIN_ROOT}", str(plugin_root)).replace(
-            "$CLAUDE_PLUGIN_ROOT", str(plugin_root)
-        )
-
-    args = shlex.split(match.group(1), posix=True)
-    while args and args[-1] in (">/dev/null", "2>&1"):
-        args.pop()
-    argv = [sys.executable, str(Path(plugin_root) / "hooks" / "run.py"), *args]
-    return subprocess.list2cmdline(argv) + " >NUL 2>&1"
-
-
 def _windows_hook_command_is_stale(existing_cmd, resolved_cmd):
-    """True when SessionStart should replace a legacy Windows bash launcher."""
+    """True when SessionStart should replace a legacy Windows hook command.
+
+    Legacy means the pre-#118 native cmd.exe form (list2cmdline argv + a cmd
+    null redirect), which fails under Git Bash. The current form is the bash
+    launcher, identical in shape to POSIX.
+    """
     return (
         platform.system() == "Windows"
         and existing_cmd != resolved_cmd
-        and "python-launcher.sh" in existing_cmd
+        and re.search(r">\s*NUL\b", existing_cmd) is not None
     )
 
 
@@ -19783,7 +20386,7 @@ def _hook_command_identity(cmd):
             mode_flag = t
             break
 
-    # ADV-001 fix: always include mode_flag in identity when present, even if
+    # Always include mode_flag in identity when present, even if
     # subcmd exists. This distinguishes 'measure.py compact-restore' from
     # 'measure.py compact-restore --new-session-only' which otherwise collide.
     if subcmd and mode_flag:
@@ -19865,7 +20468,7 @@ def _cleanup_duplicate_plugin_hooks_from_settings(dry_run=False):
     if not current_hooks:
         return {"removed": 0, "reason": "no_settings_hooks", "dry_run": dry_run}
 
-    # ADV-006-style safety: if settings.json exists non-empty but parsed empty,
+    # Safety: if settings.json exists non-empty but parsed empty,
     # refuse to touch it — concurrent write may have corrupted it.
     if not current:
         try:
@@ -19990,7 +20593,7 @@ def setup_all_hooks(dry_run=False, verbose=False):
     # Read current settings
     current, _ = _read_settings_json()
 
-    # ADV-006 fix: if settings.json exists with non-zero size but parsed as empty,
+    # If settings.json exists with non-zero size but parsed as empty,
     # it was probably corrupted by a concurrent write. Refuse to overwrite.
     if not current:
         try:
@@ -20041,19 +20644,27 @@ def setup_all_hooks(dry_run=False, verbose=False):
                     existing_cmd = existing_hook.get("command", "")
                     has_path = ".py" in existing_cmd or ".py" in resolved_cmd
                     # On Windows, an existing command can point at the current
-                    # root yet still be the legacy Git-Bash launcher. Replace
-                    # it with the native direct-Python form during ensure-health.
+                    # root yet still be the legacy native cmd.exe form (#118).
+                    # Replace it with the Git-Bash launcher during ensure-health.
                     windows_command_stale = _windows_hook_command_is_stale(
                         existing_cmd, resolved_cmd
                     )
-                    if (not has_path or plugin_root_str in existing_cmd) and not windows_command_stale:
+                    # #118 follow-up: _resolve_hook_command now embeds a
+                    # forward-slash root on Windows, but plugin_root_str keeps
+                    # native backslashes, so a raw substring test never matches
+                    # post-fix and every hook would be "replaced" on every run
+                    # (perpetual settings.json rewrite). Normalize separators.
+                    root_in_cmd = (
+                        plugin_root_str.replace("\\", "/") in existing_cmd.replace("\\", "/")
+                    )
+                    if (not has_path or root_in_cmd) and not windows_command_stale:
                         skipped += 1
                         if verbose:
                             print(f"  [skip] {event}[{matcher}] {ident} (already present)")
                         continue
                     # Stale path -- replace in place
                     existing_hook["command"] = resolved_cmd
-                    # ADV-003 fix: preserve all fields from new hook (async, timeout, etc.)
+                    # Preserve all fields from new hook (async, timeout, etc.)
                     for k, v in h.items():
                         if k != "command":
                             existing_hook[k] = v
@@ -20074,7 +20685,7 @@ def setup_all_hooks(dry_run=False, verbose=False):
                         target_group["matcher"] = matcher
                     current_hooks[event].append(target_group)
 
-                # ADV-003 fix: preserve all fields from source hook (async, timeout, type, etc.)
+                # Preserve all fields from source hook (async, timeout, type, etc.)
                 new_hook = dict(h)
                 new_hook["command"] = resolved_cmd
                 target_group.setdefault("hooks", []).append(new_hook)
@@ -20103,7 +20714,7 @@ def setup_all_hooks(dry_run=False, verbose=False):
             print(f"  [setup-all-hooks] could not write settings.json: {e}")
         return {"added": 0, "skipped": skipped, "plugin_root": plugin_root_str, "error": str(e)}
 
-    # ADV-005 fix: record the heal timestamp so ensure-health's 24h throttle
+    # Record the heal timestamp so ensure-health's 24h throttle
     # suppresses the redundant run after install.sh.
     try:
         _write_config_flag("last_hook_heal_check", int(time.time()))
@@ -20136,7 +20747,7 @@ def _verify_daemon_port(timeout_seconds=1, retries=None, retry_sleep=1):
     quick probe of a dead port returns immediately instead of burning ~1-2s of
     the hook budget on time.sleep -- the cheap-hot-path requirement.
 
-    v5.4.19 (adv-007 fix): a TCP connect() alone can't tell us whether the
+    v5.4.19: a TCP connect() alone can't tell us whether the
     process on DAEMON_PORT is actually ours. A foreign app (or a stale orphan
     under a different dashboard path) that happens to bind 24842 would pass
     the connect check, and install code would assume success. We now follow
@@ -20186,13 +20797,13 @@ def _verify_daemon_port(timeout_seconds=1, retries=None, retry_sleep=1):
 def _daemon_install_lock(soft_fail=False):
     """Return a context manager that serialises concurrent setup-daemon runs.
 
-    v5.4.19 (adv-003 fix): uses atomic mkdir as the mutex, but also reaps stale
+    v5.4.19: uses atomic mkdir as the mutex, but also reaps stale
     locks whose owner died (SIGKILL, crash, etc.). A PID file inside the lock
     directory records who took it; on contention, we check whether that PID is
     still alive and the lock was taken recently (mtime < 10 minutes). If the
     owner is gone OR the lock is older than 10 minutes, we reclaim it.
 
-    soft_fail=True (adv-008): return an inert contextmanager on contention
+    soft_fail=True: return an inert contextmanager on contention
     rather than sys.exit(1). Used from hook paths where we must never kill
     the calling Claude Code session.
     """
@@ -20264,7 +20875,7 @@ def _daemon_install_lock(soft_fail=False):
                 print(f"  Lock file: {lock_dir}")
                 print("  If you're sure no other run is active, remove the lock and retry.")
                 sys.exit(1)
-            # Record ownership inside the lock for adv-003 reaping.
+            # Record ownership inside the lock for reaping.
             try:
                 pid_file.write_text(str(os.getpid()), encoding="utf-8")
             except OSError:
@@ -20298,7 +20909,7 @@ def _reclaim_posix_daemon_port(port=DAEMON_PORT, script_name="dashboard-server.p
     try:
         lsof = subprocess.run(
             ["lsof", "-nP", f"-iTCP:{port}", "-sTCP:LISTEN", "-t"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True, timeout=5, creationflags=_NO_WINDOW,
         )
     except (subprocess.SubprocessError, OSError, FileNotFoundError):
         return
@@ -20312,7 +20923,7 @@ def _reclaim_posix_daemon_port(port=DAEMON_PORT, script_name="dashboard-server.p
         try:
             ps_out = subprocess.run(
                 ["ps", "-o", "command=", "-p", str(pid)],
-                capture_output=True, text=True, timeout=5,
+                capture_output=True, text=True, timeout=5, creationflags=_NO_WINDOW,
             )
         except (subprocess.SubprocessError, OSError, FileNotFoundError):
             continue
@@ -20323,6 +20934,39 @@ def _reclaim_posix_daemon_port(port=DAEMON_PORT, script_name="dashboard-server.p
                 continue
             # Give the old process a moment to release the port.
             time.sleep(0.5)
+
+
+def _daemon_ports_to_reclaim(this_install_only: bool):
+    """Which daemon ports a POSIX uninstall must SIGTERM-reclaim.
+
+    #106 F2 (P1) added a running-process kill on uninstall because
+    ``launchctl bootout`` / ``systemctl disable`` unregister the job without
+    stopping the child, leaving a daemon serving its port with the 0600 CSRF
+    token live in memory. But a sweep-all uninstall tears down EVERY runtime's
+    scheduler unit and EVERY identity's files, while the reclaim helper defaults
+    to ``DAEMON_PORT`` -- the RESOLVED runtime's port only. So a sibling
+    runtime's daemon (e.g. Codex on 24843 when cleanup runs from Claude) kept
+    running its token-authed mutating API after a reported uninstall.
+
+    Scoped (``this_install_only``): just the resolved runtime's port. Sweep-all:
+    every runtime's port (claude 24842 + codex/hermes/copilot). ``script_name``
+    in the reclaim helper is runtime-generic, so this only ever kills our own
+    ``dashboard-server.py`` bound to one of these ports.
+    """
+    if this_install_only:
+        return (DAEMON_PORT,)
+    ports = {24842}
+    ports.update(_DAEMON_PORT_BY_RUNTIME.values())
+    return tuple(sorted(ports))
+
+
+def _reclaim_daemon_ports(this_install_only: bool):
+    """Reclaim every port in scope; never crash the uninstall on cleanup."""
+    for port in _daemon_ports_to_reclaim(this_install_only):
+        try:
+            _reclaim_posix_daemon_port(port=port)
+        except Exception:  # noqa: BLE001 -- uninstall must never crash on cleanup
+            pass
 
 
 def _daemon_access_lines(effective_host):
@@ -20351,7 +20995,7 @@ def _print_daemon_network_note(effective_host):
 def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None):
     """macOS: install the dashboard daemon via a LaunchAgent.
 
-    v5.4.19 (adv-001/adv-008 fix): added `soft_fail`. When True (hook paths),
+    v5.4.19: added `soft_fail`. When True (hook paths),
     errors return False instead of sys.exit(1) so we never kill the calling
     Claude Code session. CLI calls keep the default False for backwards
     compatibility -- users still see a hard failure + actionable hint.
@@ -20419,7 +21063,7 @@ def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None)
         # exit when nothing is loaded is expected and ignored).
         try:
             subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}", str(PLIST_PATH)],
-                           capture_output=True, timeout=10)
+                           capture_output=True, timeout=10, creationflags=_NO_WINDOW)
         except (OSError, subprocess.TimeoutExpired):
             pass
         # bootout drops the launchd job but doesn't SIGTERM the Python
@@ -20430,7 +21074,7 @@ def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None)
         # Start daemon
         try:
             result = subprocess.run(["launchctl", "bootstrap", f"gui/{os.getuid()}", str(PLIST_PATH)],
-                                    capture_output=True, text=True, timeout=20)
+                                    capture_output=True, text=True, timeout=20, creationflags=_NO_WINDOW)
         except (OSError, subprocess.TimeoutExpired) as e:
             return _fail(f"[Error] launchctl bootstrap failed: {e}")
         if result.returncode != 0:
@@ -20442,7 +21086,7 @@ def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None)
         # Verify it's actually running. Budget ~16s covers slow cold
         # starts. If we still can't reach the port, surface a clear
         # do-NOT-uninstall instruction so users don't kill a booting
-        # daemon mid-init (torture-room M3).
+        # daemon mid-init.
         time.sleep(1)
         if _verify_daemon_port():
             print("[Token Optimizer] Dashboard server installed and running.\n")
@@ -20461,71 +21105,304 @@ def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None)
         return True
 
 
-def _write_uninstall_tombstone():
-    """v5.4.19 (adv-006): write an empty breadcrumb file so that if the daemon
+def _write_uninstall_tombstone(snapshot_dir=None):
+    """v5.4.19: write a marker breadcrumb file so that if the daemon
     process somehow respawns (e.g., an orphaned LaunchAgent the user didn't clean
     up), it exits cleanly on next start instead of resurrecting.
 
-    Torture-room H-4 (2026-04-16): surface failures to stderr so a silently
+    The breadcrumb content is the ``_UNINSTALL_TOMBSTONE_MARKER``
+    (not an empty file). The daemon's 3-strikes thrash path writes an EMPTY
+    breadcrumb that self-heals after 60s; an empty uninstall tombstone was
+    indistinguishable from it, so a surviving daemon self-cleared it after 60s
+    and minted a fresh CSRF token after a reported uninstall. The marker makes
+    the uninstall tombstone permanent (cleared only by a reinstall).
+
+    Surface failures to stderr so a silently
     broken tombstone (e.g. SNAPSHOT_DIR unwritable) is visible to the user
     rather than leaving them thinking uninstall succeeded while the daemon
-    keeps respawning."""
+    keeps respawning.
+
+    #106 F2 (P1): the tombstone must OUTLIVE the uninstall. Each generated
+    dashboard-server.py bakes in its OWN identity's breadcrumb path (see the
+    `thrash_path_literal` in the daemon template) and checks it on start
+    ("noop-tombstoned"), so a per-identity tombstone is what keeps that
+    identity's orphaned daemon dead. `snapshot_dir` targets one identity; the
+    uninstall sweep calls this once per swept identity so no sibling is left
+    revivable. A legitimate reinstall clears it (setup_daemon unlinks the
+    tombstone before starting), which is the ONLY place it may be removed.
+    """
+    snap = SNAPSHOT_DIR if snapshot_dir is None else Path(snapshot_dir)
+    breadcrumb = snap / ".daemon-thrash"
     try:
-        SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
-        with open(DAEMON_THRASH_BREADCRUMB, "w", encoding="utf-8") as f:
-            f.write("")
+        snap.mkdir(parents=True, exist_ok=True)
+        # Write a distinctive marker (NOT an empty file) so a
+        # surviving daemon script can tell an uninstall tombstone (permanent
+        # until reinstall) from a transient 3-strikes thrash tombstone (which
+        # self-heals after 60s). See _UNINSTALL_TOMBSTONE_MARKER.
+        with open(breadcrumb, "w", encoding="utf-8") as f:
+            f.write(_UNINSTALL_TOMBSTONE_MARKER)
     except OSError as e:
         sys.stderr.write(
             f"[Token Optimizer] Warning: could not write uninstall tombstone "
-            f"at {DAEMON_THRASH_BREADCRUMB}: {e}\n"
+            f"at {breadcrumb}: {e}\n"
             f"  If the daemon is still running after uninstall, remove the "
             f"LaunchAgent/task/unit manually.\n"
         )
 
 
-def _uninstall_launchd_daemon():
-    """macOS: stop and remove the LaunchAgent + daemon script.
+# ---------------------------------------------------------------------------
+# issue #107: sticky install-failed marker (no-revive after a failed install)
+# ---------------------------------------------------------------------------
 
-    Unified output (torture-room L7, 2026-04-14): track what is actually
+def _daemon_install_failed_marker_state():
+    """Tri-state stat of the sticky marker: 'present' | 'absent' | 'unknown'.
+
+    #107: the old implementation used ``os.path.exists``, which
+    maps EVERY OSError to False -- so the written ``except OSError`` policy was
+    dead code, and (worse) an AV/permission denial made a PRESENT marker read
+    as ABSENT, silently reopening the retry loop the marker exists to stop --
+    intermittently, which is the worst kind of flap to debug. ``os.stat`` with
+    explicit errno handling makes present-but-unreadable ('unknown')
+    distinguishable from a definitive ENOENT ('absent'). Never raises.
+    """
+    try:
+        os.stat(str(DAEMON_INSTALL_FAILED_BREADCRUMB))
+        return "present"
+    except (FileNotFoundError, NotADirectoryError):
+        # The only DEFINITIVE evidence of absence: the path (or a parent
+        # component) does not exist.
+        return "absent"
+    except OSError:
+        # EACCES/EIO/...: the marker may well exist; we just cannot see it.
+        return "unknown"
+
+
+def _daemon_install_failed_marker_present():
+    """True when a prior daemon install/revive/self-heal failed and has NOT been
+    cleared (by an explicit successful ``setup-daemon``, or by a verified-live
+    daemon disproving the record).
+
+    Checked FIRST by every path that would otherwise (re)spawn an installer:
+    ``_ensure_dashboard_daemon`` (SessionStart self-heal AND the ``daemon-revive``
+    subcommand, including ``force=True``) and ``_daemon_midsession_pulse``
+    (per-turn revive). A filesystem breadcrumb, not a config flag, for the same
+    reason the uninstall tombstone is: a corrupt/unreadable config.json must not
+    silently re-arm the retry loop.
+
+    Policy (now explicit instead of an accident of exists()):
+    'unknown' counts as PRESENT. This gate only ever suppresses a costly
+    retry, so failing CLOSED on a transient stat error keeps the gate stable
+    -- a momentary AV denial must not flap it open and resume the per-prompt
+    retry loop. Only a definitive ENOENT reads as absent, and the
+    clear-on-verified-healthy path in ``_ensure_dashboard_daemon`` still
+    un-wedges a stale marker the moment the daemon is observably alive.
+    """
+    return _daemon_install_failed_marker_state() != "absent"
+
+
+def _daemon_install_failed_reason():
+    """First line of the sticky marker (``<iso8601> <reason>``), or None.
+
+    Purely for user-facing surfaces (ensure-health's one-liner, doctor) --
+    presence, not content, is what gates behaviour. Never raises.
+    """
+    try:
+        line = DAEMON_INSTALL_FAILED_BREADCRUMB.read_text(
+            encoding="utf-8", errors="replace").strip().splitlines()
+        return line[0] if line else None
+    except OSError:
+        return None
+
+
+def _write_daemon_install_failed_marker(reason):
+    """Persist the sticky install-failed marker. Best effort, never raises.
+
+    #107: callers must only arm this for DEFINITIVE,
+    permanent failure classes (MS-Store alias, schtasks missing, task creation
+    denied by policy) -- see the DAEMON_INSTALL_FAILED_BREADCRUMB comment.
+    Transient failures rely on the existing throttles instead.
+
+    Content is ``<iso8601> <reason>`` for the user/support (surfaced by
+    ensure-health and doctor): only the file's PRESENCE is load-bearing.
+    """
+    try:
+        if _daemon_install_failed_marker_present():
+            return
+        SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+        try:
+            # Match take_snapshot's 0o700 -- when this mkdir is the
+            # first creator, the state dir must not land world-readable.
+            os.chmod(str(SNAPSHOT_DIR), 0o700)
+        except OSError:
+            pass
+        stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        with open(DAEMON_INSTALL_FAILED_BREADCRUMB, "w", encoding="utf-8") as f:
+            f.write(f"{stamp} {reason}\n")
+    except OSError as _e:
+        # An unwritable state dir means we cannot make the refusal sticky. The
+        # throttles still bound the retry rate; do not crash a hook over it --
+        # but SAY so: a silently-degraded stickiness would leave the
+        # per-window retry (and its Windows flashes) with zero explanation.
+        try:
+            print(
+                "[Token Optimizer] Warning: could not persist the daemon "
+                f"install-failed marker ({DAEMON_INSTALL_FAILED_BREADCRUMB}): "
+                f"{_e}. Failed installs will keep retrying on the normal "
+                "throttle instead of stopping permanently.",
+                file=sys.stderr,
+            )
+        except Exception:
+            pass
+
+
+def _clear_daemon_install_failed_marker():
+    """Remove the sticky install-failed marker.
+
+    Legitimate callers, and NOTHING else (a time- or session-based clear would
+    restore the per-prompt retry loop #107 exists to stop):
+      * ``setup_daemon``'s explicit install branch, after the platform
+        installer reports success -- the user proved the problem is fixed;
+      * ``_ensure_dashboard_daemon`` on VERIFIED success -- a live,
+        identity-checked daemon (or a completed install/restart) disproves the
+        "structurally broken" record, e.g. after the install-lock race where
+        the losing session armed the marker while the winner installed fine.
+
+    #107: returns True only when the marker is VERIFIABLY gone
+    (read back after the unlink, never assumed). A clear that did not clear
+    warns on stderr -- the pre-fix shape swallowed the OSError, so
+    ``setup-daemon`` printed its full "installed and running" success story
+    while every self-heal path stayed permanently disabled, undiagnosably.
+    Never raises.
+    """
+    try:
+        DAEMON_INSTALL_FAILED_BREADCRUMB.unlink()
+    except FileNotFoundError:
+        return True
+    except OSError:
+        pass
+    # Read back: only a definitive ENOENT counts as cleared. 'present' AND
+    # 'unknown' both mean the wedge may still stand -- say so.
+    if _daemon_install_failed_marker_state() == "absent":
+        return True
+    try:
+        print(
+            "[Token Optimizer] Warning: could not remove "
+            f"{DAEMON_INSTALL_FAILED_BREADCRUMB} -- daemon self-heal stays "
+            "DISABLED until this file is removed (delete it manually, then "
+            "re-run: python3 measure.py setup-daemon).",
+            file=sys.stderr,
+        )
+    except Exception:
+        pass
+    return False
+
+
+def _uninstall_launchd_daemon(this_install_only=False, dry_run=False):
+    """macOS: stop and remove the LaunchAgent + daemon script(s).
+
+    Unified output: track what is actually
     deleted so we don't print a contradictory "Nothing to remove" header
     followed by a "Deleted: script.py" line when the plist is gone but
     the script file remains from a half-uninstall.
+
+    v5.11.68 (#106 / F2): identity-sweeping by default. The LaunchAgent plist
+    is per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
+    runtime), so it is removed once. The per-identity files
+    (``dashboard-server.py``, ``daemon-token``, ``dashboard-host``,
+    ``.daemon-thrash``) live in EACH identity's snapshot dir; a sibling
+    identity's daemon script + 0600 CSRF token would otherwise outlive the
+    uninstall. Sweep every identity unless ``this_install_only`` opts out.
+    Also bootout every runtime's LaunchAgent by name so a registration whose
+    data dir already vanished still gets unregistered.
+
+    v5.11.68 (#106 / cleanup): ``dry_run=True`` makes the uninstaller
+    side-effect-free (no bootout, no file deletion, no tombstone write) so the
+    cleanup command's ``--dry-run`` is a true preview.
     """
-    # adv-006: tombstone FIRST so any racing respawn exits cleanly.
+    if dry_run:
+        # Dry-run: report what WOULD be removed, touch nothing.
+        would_remove = []
+        for label in _scheduler_names_to_sweep(
+                this_install_only, _ALL_LAUNCH_AGENT_LABELS, DAEMON_LABEL):
+            plist = LAUNCH_AGENTS_DIR / f"{label}.plist"
+            if plist.exists():
+                would_remove.append(str(plist))
+        per_identity: list[tuple[Path, list[str]]] = []
+        for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+            files = _daemon_per_identity_files(snap_dir)
+            identity_would = [str(files[k]) for k in ("daemon_script", "daemon_token", "daemon_host") if files[k].exists()]
+            if identity_would:
+                per_identity.append((snap_dir, identity_would))
+                would_remove.extend(identity_would)
+        if would_remove:
+            print("[Token Optimizer] Dashboard daemon would be removed.")
+            for path in would_remove:
+                print(f"  Would delete: {path}")
+            if per_identity and not this_install_only:
+                print("  Would sweep all token-optimizer-* identities:")
+                for snap_dir, items in per_identity:
+                    print(f"    {snap_dir}: {len(items)} file(s)")
+        else:
+            print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+        return
+    # Tombstone FIRST so any racing respawn exits cleanly.
     _write_uninstall_tombstone()
     removed = []
-    if PLIST_PATH.exists():
+    # Sweep the OS scheduler by name across every runtime variant. The plist
+    # file lives at a fixed per-runtime path under ~/Library/LaunchAgents.
+    for label in _scheduler_names_to_sweep(
+            this_install_only, _ALL_LAUNCH_AGENT_LABELS, DAEMON_LABEL):
+        plist = LAUNCH_AGENTS_DIR / f"{label}.plist"
+        # #106 F2 (P2-3): bootout by LABEL, unconditionally. The old code only
+        # booted out when the plist FILE existed, so a job still loaded in
+        # launchd whose plist had already been deleted (half-uninstall, manual
+        # rm, platform GC) was never unregistered and kept respawning.
         try:
-            subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}", str(PLIST_PATH)],
-                           capture_output=True, timeout=10)
+            subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}/{label}"],
+                           capture_output=True, timeout=10, creationflags=_NO_WINDOW)
         except (OSError, subprocess.TimeoutExpired):
             pass
-        try:
-            PLIST_PATH.unlink()
-            removed.append(str(PLIST_PATH))
-        except OSError:
-            pass
-    daemon_script = SNAPSHOT_DIR / "dashboard-server.py"
-    if daemon_script.exists():
-        try:
-            daemon_script.unlink()
-            removed.append(str(daemon_script))
-        except OSError:
-            pass
-    # Clean up per-install token (not a secret the user needs to keep) and the
-    # persisted dashboard host (#59) so a fresh install starts from defaults.
-    for _state_path in (DAEMON_TOKEN_PATH, DAEMON_HOST_PATH):
-        try:
-            if _state_path.exists():
-                _state_path.unlink()
-        except OSError:
-            pass
-    if removed:
-        print("[Token Optimizer] Dashboard daemon removed.")
-        for path in removed:
-            print(f"  Deleted: {path}")
-    else:
-        print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+        if plist.exists():
+            try:
+                subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}", str(plist)],
+                               capture_output=True, timeout=10, creationflags=_NO_WINDOW)
+            except (OSError, subprocess.TimeoutExpired):
+                pass
+            if _unlink_if_exists(plist):
+                removed.append(str(plist))
+    # #106 F2 (P1): unregistering the job does NOT stop the process --
+    # `launchctl bootout` / `systemctl disable` drop the registration without
+    # SIGTERMing the running child, so the daemon kept serving its port with
+    # the 0600 CSRF token live in memory until logout. Reclaim the port(s) now
+    # that the tombstone is down (so nothing races a respawn) and the job is
+    # unregistered. On a sweep-all uninstall this covers EVERY runtime's port
+    # (a sibling runtime's daemon + live CSRF token otherwise
+    # survived), scoped back to the resolved runtime under --this-install-only.
+    # Never kills a foreign process on a port -- the helper verifies the command
+    # line is our own dashboard-server.py.
+    _reclaim_daemon_ports(this_install_only)
+    # Sweep per-identity daemon files across every token-optimizer-* identity.
+    per_identity_removed: list[tuple[Path, list[str]]] = []
+    sweep_failed: list[str] = []
+    for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+        identity_removed, identity_failed = _sweep_identity_daemon_files(
+            snap_dir, ("daemon_script", "daemon_token", "daemon_host"))
+        sweep_failed.extend(identity_failed)
+        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # swept identity. Each identity's generated dashboard-server.py checks
+        # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
+        # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
+        # /task/unit could resurrect the daemon and mint a fresh 0600 token
+        # after a "successful" uninstall. Only a legitimate reinstall clears it
+        # (setup_daemon unlinks before start). NOT counted toward `removed` so
+        # the "Nothing to remove" honesty invariant holds.
+        _write_uninstall_tombstone(snap_dir)
+        if identity_removed:
+            per_identity_removed.append((snap_dir, identity_removed))
+            removed.extend(identity_removed)
+    _print_identity_sweep_report(
+        removed, per_identity_removed, sweep_failed, this_install_only)
+
 
 
 WINDOWS_TASK_NAME = (
@@ -20542,7 +21419,7 @@ def _is_ms_store_python_alias(exe_path):
     App Execution Aliases (path contains WindowsApps) only launch from
     interactive user shell tokens. Task Scheduler's launch context
     cannot resolve them, so pythonw would exit silently and leave the
-    user stuck in the 'wait 30s' message forever (torture HIGH-1).
+    user stuck in the 'wait 30s' message forever.
     """
     if not exe_path:
         return False
@@ -20566,10 +21443,70 @@ def _resolve_windows_pythonw():
     return None
 
 
+def _windows_gui_python():
+    """pythonw.exe (GUI subsystem) next to ``sys.executable``, or None.
+
+    issue #107: the ONE interpreter that never allocates a console. Every
+    console-subsystem child (python.exe, py.exe, cmd.exe) gets a window from
+    Windows itself unless the PARENT passes CREATE_NO_WINDOW -- and when the
+    parent is Task Scheduler, we do not get to pass anything. Launching
+    pythonw.exe moves the guarantee into the binary, where no parent can undo it.
+
+    Thin alias over ``_resolve_windows_pythonw`` (which already refuses MS Store
+    App Execution Aliases -- those do not resolve under Task Scheduler's launch
+    context) so #107 call sites read by intent rather than by platform trivia.
+    Returns None off Windows and whenever no usable twin exists; every caller
+    must fall back to its pre-#107 behaviour.
+    """
+    if os.name != "nt":
+        return None
+    try:
+        return _resolve_windows_pythonw()
+    except Exception:
+        # Interpreter SELECTION must never be able to break a spawn. The
+        # resolver builds a WindowsPath, which raises on a host whose pathlib
+        # flavour disagrees with os.name (real case: a POSIX box with os.name
+        # monkeypatched; plausible case: an embedded/frozen interpreter with a
+        # non-path sys.executable). Degrade to "no twin" -> caller keeps
+        # sys.executable, which is exactly the pre-#107 behaviour.
+        return None
+
+
+def _windows_task_exec_action(daemon_script_path, launcher_path):
+    """Return ``(command, arguments)`` for the Scheduled Task's ``<Exec>``.
+
+    issue #107 (the idle-pop): the task action used to be the generated
+    ``dashboard-launcher.cmd``. Task Scheduler runs a .cmd through cmd.exe, a
+    CONSOLE-subsystem process, so EVERY fire of the task painted a console
+    window on the user's desktop -- at logon, at boot, and on each
+    ``schtasks /Run`` from the daemon revive / restart self-heal (which is what
+    made windows pop while the machine looked idle). ``<Hidden>true</Hidden>``
+    does NOT suppress this; it only hides the task from the Task Scheduler UI's
+    default filter. CREATE_NO_WINDOW cannot help either -- our process is not
+    the parent, Task Scheduler is.
+
+    Preferred action: ``pythonw.exe <daemon_script>``. pythonw is GUI-subsystem,
+    so Windows never allocates a console for it no matter who launches it.
+
+    Fallback (no usable pythonw -- MS Store alias, or no twin next to
+    sys.executable): the old .cmd launcher, which still WORKS and still captures
+    stdout/stderr, it just keeps the console window. Better a visible window than
+    a daemon that will not start.
+
+    The .cmd is written either way: it stays the fallback, it is what the
+    uninstall sweep already knows to delete (``_daemon_per_identity_files``), and
+    it is a usable manual repro for a user debugging a dead daemon.
+    """
+    pyw = _windows_gui_python()
+    if pyw:
+        return pyw, f'"{daemon_script_path}"'
+    return str(launcher_path), ""
+
+
 def _compose_windows_user_id():
     """Return DOMAIN\\user when domain-joined, bare username in workgroup.
 
-    Torture HIGH-3: bare %USERNAME% in <LogonTrigger> fails to match
+    Bare %USERNAME% in <LogonTrigger> fails to match
     Windows' logon event on domain-joined machines because the event
     carries the fully-qualified account name.
     """
@@ -20592,18 +21529,76 @@ def _generate_windows_launcher_cmd(daemon_script_path, log_dir):
     """Generate a .cmd shim that resolves Python at runtime and redirects
     daemon stdout/stderr so future failures leave a trail.
 
-    Rationale (torture HIGH-2, MEDIUM-4, MEDIUM-6): pointing Task
+    Rationale: pointing Task
     Scheduler directly at a versioned pythonw.exe path breaks on Python
     upgrades and loses stdout/stderr. A .cmd wrapper dispatches via
-    `py -3` (Python Launcher, version-stable) with pythonw/python
-    fallbacks, and captures daemon output into DAEMON_LOG_DIR so port
-    conflicts and import errors no longer silently vanish.
+    a runtime interpreter ladder and captures daemon output into
+    DAEMON_LOG_DIR so port conflicts and import errors no longer
+    silently vanish.
+
+    issue #107 -- READ THIS BEFORE REORDERING ANYTHING:
+
+    * This shim is now the FALLBACK path only. The Scheduled Task action
+      normally points straight at pythonw.exe (see
+      ``_windows_task_exec_action``), because Task Scheduler hosts a .cmd
+      inside console-subsystem cmd.exe and paints a window on EVERY fire --
+      logon, boot, and each ``schtasks /Run`` from the revive/restart
+      self-heal. Nothing inside a .cmd can prevent its own cmd.exe host.
+      **HONEST LIMIT: when this shim is the task action, #107 is NOT fixed,
+      only REDUCED -- from several console processes per fire (the cmd.exe
+      host plus up to three where.exe probes plus a console-subsystem
+      interpreter) down to the one unavoidable cmd.exe host window. One flash
+      per fire remains for this population, and no rewrite of the shim's
+      CONTENTS can ever remove it.** That is why the shim is used only when no
+      usable pythonw twin exists.
+    * The interpreter ladder was ``py.exe -3`` FIRST, which is exactly
+      backwards: py.exe is console-subsystem and wins on any host with the
+      Python Launcher installed (the common case), so the LONG-LIVED daemon
+      itself ran as a console process. GUI-subsystem interpreters now come
+      first: pythonw.exe -> pyw.exe -3 -> py.exe -3 -> python.exe.
+    * The three ``where <exe>`` probes are gone. where.exe is itself a console
+      binary, so the old shim spawned up to three extra console processes per
+      fire. Detection is now cmd's own "command not found" code (9009) from a
+      direct invocation, which costs no extra process.
+
+    The ladder is written FLAT (no parenthesised blocks) on purpose:
+    ``%ERRORLEVEL%`` inside a ``( ... )`` block expands once at block-parse
+    time, so a block form would test a stale value.
+
+    #107: the bare-PATH ``pythonw.exe`` rung needs a
+    WindowsApps guard: a Microsoft Store App Execution Alias exits 0 SILENTLY
+    under Task Scheduler's non-interactive token, so an unguarded first rung
+    would "succeed", ``exit /b 0``, and no daemon would ever start -- on hosts
+    where the pre-#107 ``py -3``-first ladder worked. The rung therefore
+    resolves the PATH hit with ``%%~$PATH:I`` (pure cmd, no extra process --
+    where.exe is banned here) and skips itself when the hit lives under
+    WindowsApps. pyw.exe/py.exe are real launchers in C:\\Windows, never Store
+    aliases, so they keep plain rungs.
+
+    #107: ``%`` is legal in Windows paths but expands at cmd
+    parse time (``%VAR%``), silently mis-targeting DAEMON_SCRIPT and both log
+    redirects; ``%%`` is cmd's literal-percent escape inside a batch file, so
+    interpolated paths are escaped below.
     """
+    def _rung(invocation):
+        return (
+            f'{invocation} "%DAEMON_SCRIPT%" 1>>"%STDOUT_LOG%" 2>>"%STDERR_LOG%"\r\n'
+            'if not "%ERRORLEVEL%"=="9009" exit /b %ERRORLEVEL%\r\n'
+        )
+
+    daemon_script_path = str(daemon_script_path).replace("%", "%%")
+    log_dir = str(log_dir).replace("%", "%%")
+
     return (
         "@echo off\r\n"
         "REM Token Optimizer dashboard daemon launcher (v5.3.2+).\r\n"
         "REM Auto-generated. Resolves Python at runtime so interpreter upgrades\r\n"
         "REM do not break the scheduled task.\r\n"
+        "REM #107: GUI-subsystem interpreters first (pythonw/pyw) so the daemon\r\n"
+        "REM itself never owns a console. 9009 = cmd's 'command not found'.\r\n"
+        "REM The pythonw.exe rung skips Microsoft Store aliases (WindowsApps):\r\n"
+        "REM they exit 0 silently under Task Scheduler and would end the ladder\r\n"
+        "REM with no daemon started.\r\n"
         "setlocal\r\n"
         f'set "DAEMON_SCRIPT={daemon_script_path}"\r\n'
         f'set "STDOUT_LOG={log_dir}\\stdout.log"\r\n'
@@ -20612,22 +21607,15 @@ def _generate_windows_launcher_cmd(daemon_script_path, log_dir):
         '  echo [%DATE% %TIME%] daemon script missing: %DAEMON_SCRIPT% >> "%STDERR_LOG%"\r\n'
         "  exit /b 1\r\n"
         ")\r\n"
-        "where py.exe >nul 2>&1\r\n"
-        "if %ERRORLEVEL% EQU 0 (\r\n"
-        '  py.exe -3 "%DAEMON_SCRIPT%" 1>>"%STDOUT_LOG%" 2>>"%STDERR_LOG%"\r\n'
-        "  exit /b %ERRORLEVEL%\r\n"
-        ")\r\n"
-        "where pythonw.exe >nul 2>&1\r\n"
-        "if %ERRORLEVEL% EQU 0 (\r\n"
-        '  pythonw.exe "%DAEMON_SCRIPT%" 1>>"%STDOUT_LOG%" 2>>"%STDERR_LOG%"\r\n'
-        "  exit /b %ERRORLEVEL%\r\n"
-        ")\r\n"
-        "where python.exe >nul 2>&1\r\n"
-        "if %ERRORLEVEL% EQU 0 (\r\n"
-        '  python.exe "%DAEMON_SCRIPT%" 1>>"%STDOUT_LOG%" 2>>"%STDERR_LOG%"\r\n'
-        "  exit /b %ERRORLEVEL%\r\n"
-        ")\r\n"
-        'echo [%DATE% %TIME%] No Python found on PATH -- install python.org or winget install Python.Python.3 >> "%STDERR_LOG%"\r\n'
+        'set "PYW_EXE="\r\n'
+        'for %%I in (pythonw.exe) do set "PYW_EXE=%%~$PATH:I"\r\n'
+        'if defined PYW_EXE if /i not "%PYW_EXE:windowsapps=%"=="%PYW_EXE%" set "PYW_EXE="\r\n'
+        'if defined PYW_EXE "%PYW_EXE%" "%DAEMON_SCRIPT%" 1>>"%STDOUT_LOG%" 2>>"%STDERR_LOG%"\r\n'
+        'if defined PYW_EXE if not "%ERRORLEVEL%"=="9009" exit /b %ERRORLEVEL%\r\n'
+        + _rung("pyw.exe -3")
+        + _rung("py.exe -3")
+        + _rung("python.exe")
+        + 'echo [%DATE% %TIME%] No Python found on PATH -- install python.org or winget install Python.Python.3 >> "%STDERR_LOG%"\r\n'
         "exit /b 2\r\n"
     )
 
@@ -20636,14 +21624,14 @@ def _probe_windows_port_owner(port):
     """Return a human-readable string identifying the PID bound to port,
     or None if the port is free or we can't tell.
 
-    Torture MEDIUM-4: a foreign service on 24842 would leave the user in
+    A foreign service on 24842 would leave the user in
     an indefinite 'wait 30s' state. Pre-install probe surfaces the
     offending PID so the user can decide whether to reclaim the port.
     """
     try:
         result = subprocess.run(
             ["netstat", "-ano"],
-            capture_output=True, text=True, timeout=10, errors="replace",
+            capture_output=True, text=True, timeout=10, errors="replace", creationflags=_NO_WINDOW,
         )
     except (subprocess.SubprocessError, OSError, FileNotFoundError):
         return None
@@ -20658,7 +21646,7 @@ def _probe_windows_port_owner(port):
     return None
 
 
-def _generate_schtasks_xml(task_name, user_id, launcher_path):
+def _generate_schtasks_xml(task_name, user_id, command, arguments=""):
     """Build a Task Scheduler XML payload for the dashboard daemon.
 
     Uses the documented Task Scheduler 1.2 schema (MS-LEARN:
@@ -20672,6 +21660,12 @@ def _generate_schtasks_xml(task_name, user_id, launcher_path):
       - ExecutionTimeLimit=PT0S = no time limit (daemon runs forever).
       - DisallowStartIfOnBatteries=false so laptop users get their
         bookmarkable URL on battery power too.
+
+    issue #107: ``command``/``arguments`` come from
+    ``_windows_task_exec_action`` and are normally pythonw.exe + the daemon
+    script, NOT the .cmd launcher. See that helper for why <Hidden> was never
+    enough. ``<Arguments>`` is emitted only when non-empty so the .cmd fallback
+    still produces the exact pre-#107 XML shape.
     """
     from xml.sax.saxutils import escape as _xml_escape
 
@@ -20729,8 +21723,10 @@ def _generate_schtasks_xml(task_name, user_id, launcher_path):
         "  </Settings>\n"
         '  <Actions Context="Author">\n'
         "    <Exec>\n"
-        f"      <Command>{xml_escape(launcher_path)}</Command>\n"
-        "    </Exec>\n"
+        f"      <Command>{xml_escape(str(command))}</Command>\n"
+        + (f"      <Arguments>{xml_escape(str(arguments))}</Arguments>\n"
+           if arguments else "")
+        + "    </Exec>\n"
         "  </Actions>\n"
         "</Task>\n"
     )
@@ -20753,10 +21749,20 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
     Windows user to run this is the de facto smoke test. Full rollback
     is one command: `measure.py setup-daemon --uninstall`.
     """
-    def _fail(msg, *extra):
-        print(msg)
+    def _fail(msg, *extra, permanent_reason=None):
+        # #107: only DEFINITIVE, permanent failure classes
+        # arm the sticky no-retry marker (MS-Store alias, schtasks missing,
+        # policy-denied task creation). Transient failures stay retryable and
+        # are bounded by the existing ensure/revive/heal throttles.
+        if permanent_reason:
+            _write_daemon_install_failed_marker(permanent_reason)
+        # Under soft_fail we are inside a hook --
+        # stdout is session-visible context, so route errors to stderr instead
+        # of spamming "[Error] ..." into every SessionStart transcript.
+        out = sys.stderr if soft_fail else sys.stdout
+        print(msg, file=out)
         for line in extra:
-            print(line)
+            print(line, file=out)
         if soft_fail:
             return False
         sys.exit(1)
@@ -20768,7 +21774,8 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
         print("  What it does:")
         print("    - Registers a per-user Scheduled Task (no UAC / admin rights needed)")
         print("    - Starts automatically when you log into Windows")
-        print("    - Runs with pythonw.exe so no console window appears")
+        print("    - Launched hidden by the Scheduled Task (via 'py -3', a stable")
+        print("      interpreter path across upgrades; falls back to pythonw.exe)")
         for line in _daemon_access_lines(effective_host):
             print(line)
         print("    - Uses ~2MB of memory\n")
@@ -20781,7 +21788,7 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
     if not _ensure_dashboard_file():
         return _fail("[Error] Dashboard file missing; cannot start daemon.")
 
-    # HIGH-1: Microsoft Store Python's App Execution Alias cannot be
+    # Microsoft Store Python's App Execution Alias cannot be
     # launched from Task Scheduler's service context. Refuse install
     # with a clear remediation path rather than registering a task
     # that will silently fail every logon.
@@ -20793,9 +21800,12 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
             "    winget install Python.Python.3.12",
             "  or download from python.org (make sure 'Add to PATH' is checked).",
             "  Then re-run: python -m measure setup-daemon",
+            # Structurally impossible until the user installs a real Python --
+            # exactly the class the sticky marker exists for.
+            permanent_reason="ms-store-python-alias",
         )
 
-    # HIGH-3: compose DOMAIN\user when domain-joined so LogonTrigger
+    # Compose DOMAIN\user when domain-joined so LogonTrigger
     # actually fires on corporate machines.
     user_id = _compose_windows_user_id()
     if not user_id:
@@ -20804,7 +21814,7 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
             "  Set the USERNAME environment variable and retry.",
         )
 
-    # MEDIUM-4: surface the port owner before we try to install so the
+    # Surface the port owner before we try to install so the
     # user isn't stuck in an indefinite 'wait 30s' loop if 24842 is
     # already bound by something else.
     owner = _probe_windows_port_owner(DAEMON_PORT)
@@ -20829,16 +21839,31 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
         # .cmd launcher resolves Python at runtime (py -> pythonw ->
         # python) and redirects daemon stdout/stderr into logs so future
         # failures leave a trail instead of vanishing.
+        # write_BYTES, not write_text: the shim is explicitly CRLF, and
+        # text-mode writing translates "\n" to os.linesep, which on Windows
+        # turns every "\r\n" into "\r\r\n". Bytes also makes the file
+        # byte-comparable, which is what lets _heal_windows_launcher_shim be
+        # idempotent instead of rewriting it on every ensure-health.
         launcher_path = SNAPSHOT_DIR / WINDOWS_LAUNCHER_NAME
-        launcher_path.write_text(
-            _generate_windows_launcher_cmd(str(daemon_script), str(DAEMON_LOG_DIR)),
-            encoding="utf-8",
+        launcher_path.write_bytes(
+            _generate_windows_launcher_cmd(
+                str(daemon_script), str(DAEMON_LOG_DIR)).encode("utf-8"),
         )
 
+        # issue #107: prefer a GUI-subsystem pythonw.exe action over the .cmd
+        # launcher so Task Scheduler cannot paint a console window on every
+        # fire (logon, boot, and every `schtasks /Run` from the revive path).
+        _task_command, _task_arguments = _windows_task_exec_action(
+            str(daemon_script), str(launcher_path))
+        if not _task_arguments:
+            print("[Token Optimizer] Note: pythonw.exe not found next to this "
+                  "interpreter; falling back to the .cmd launcher, which shows "
+                  "a console window when the task runs.")
         xml_payload = _generate_schtasks_xml(
             task_name=WINDOWS_TASK_NAME,
             user_id=user_id,
-            launcher_path=str(launcher_path),
+            command=_task_command,
+            arguments=_task_arguments,
         )
         # UTF-16 LE with BOM: matches schtasks /Query native output and
         # pins the byte order so future Python encoding defaults can't
@@ -20847,27 +21872,46 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
         xml_path.write_bytes(b"\xff\xfe" + xml_payload.encode("utf-16-le"))
 
         # Stop any prior instance -- safe to fail if task doesn't exist.
-        subprocess.run(
-            ["schtasks", "/End", "/TN", WINDOWS_TASK_NAME],
-            capture_output=True, text=True, errors="replace",
-        )
-        # Register (or overwrite) the task.
-        create = subprocess.run(
-            ["schtasks", "/Create", "/XML", str(xml_path),
-             "/TN", WINDOWS_TASK_NAME, "/F"],
-            capture_output=True, text=True, errors="replace",
-        )
+        # FileNotFoundError here means schtasks.exe itself is missing from the
+        # machine: a STRUCTURAL condition (no scheduler to register with), the
+        # one exception class worth the sticky marker.
+        try:
+            subprocess.run(
+                ["schtasks", "/End", "/TN", WINDOWS_TASK_NAME],
+                capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
+            )
+            # Register (or overwrite) the task.
+            create = subprocess.run(
+                ["schtasks", "/Create", "/XML", str(xml_path),
+                 "/TN", WINDOWS_TASK_NAME, "/F"],
+                capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
+            )
+        except FileNotFoundError:
+            return _fail(
+                "[Error] schtasks.exe not found on this system.",
+                "  The dashboard daemon needs the Windows Task Scheduler CLI.",
+                permanent_reason="schtasks-missing",
+            )
         if create.returncode != 0:
+            _stderr_lower = (create.stderr or "").lower()
+            # "Access is denied" / GPO-blocked task creation is a policy
+            # decision, not a blip -- it will fail identically next prompt.
+            # Everything else (transient service hiccup, odd one-off exit)
+            # stays retryable under the throttles.
+            _denied = ("access is denied" in _stderr_lower
+                       or "denied" in _stderr_lower)
             return _fail(
                 f"[Error] schtasks /Create failed: {create.stderr.strip()}",
                 "  Common causes: locked-down enterprise policy blocking task",
                 "  creation, or schtasks.exe missing. Try manually with:",
                 f"    schtasks /Create /XML \"{xml_path}\" /TN {WINDOWS_TASK_NAME} /F",
+                permanent_reason=(
+                    "schtasks-create-access-denied" if _denied else None),
             )
         # Fire the task immediately so the user's first URL click works.
         subprocess.run(
             ["schtasks", "/Run", "/TN", WINDOWS_TASK_NAME],
-            capture_output=True, text=True, errors="replace",
+            capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
         )
         time.sleep(1)
         if _verify_daemon_port():
@@ -20888,63 +21932,107 @@ def _install_task_scheduler_daemon(dry_run=False, soft_fail=False, effective_hos
         return True
 
 
-def _uninstall_task_scheduler_daemon():
+def _uninstall_task_scheduler_daemon(this_install_only=False, dry_run=False):
     """Windows: stop and remove the dashboard daemon scheduled task.
 
-    Cleans orphan XML files from any prior naming convention (torture
-    LOW-8) via glob so version drift doesn't leave artifacts behind.
+    Cleans orphan XML files from any prior naming convention via glob so
+    version drift doesn't leave artifacts behind.
+
+    v5.11.68 (#106 / F2): identity-sweeping by default. The scheduled task is
+    per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
+    runtime), so it is removed once, and we query+delete EVERY runtime's task
+    name so a task whose data dir already vanished still gets unregistered.
+    The per-identity files (``dashboard-server.py``, the .cmd launcher, the
+    schtasks XML, ``daemon-token``, ``dashboard-host``, ``.daemon-thrash``)
+    live in EACH identity's snapshot dir; a sibling's daemon script + 0600
+    CSRF token would otherwise outlive the uninstall. Sweep every identity
+    unless ``this_install_only`` opts out.
+
+    v5.11.68 (#106 / cleanup): ``dry_run=True`` makes the uninstaller
+    side-effect-free (no schtasks calls, no file deletion, no tombstone write)
+    so the cleanup command's ``--dry-run`` is a true preview.
     """
-    # adv-006: tombstone FIRST so any racing respawn exits cleanly.
+    if dry_run:
+        would_remove = []
+        per_identity: list[tuple[Path, list[str]]] = []
+        for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+            files = _daemon_per_identity_files(snap_dir)
+            identity_would = [str(files[k]) for k in ("daemon_script", "windows_launcher", "daemon_token", "daemon_host") if files[k].exists()]
+            try:
+                for xml_path in snap_dir.glob("*schtasks-daemon*.xml"):
+                    identity_would.append(str(xml_path))
+            except OSError:
+                pass
+            if identity_would:
+                per_identity.append((snap_dir, identity_would))
+                would_remove.extend(identity_would)
+        if would_remove:
+            print("[Token Optimizer] Dashboard daemon would be removed.")
+            for path in would_remove:
+                print(f"  Would delete: {path}")
+            if per_identity and not this_install_only:
+                print("  Would sweep all token-optimizer-* identities:")
+                for snap_dir, items in per_identity:
+                    print(f"    {snap_dir}: {len(items)} file(s)")
+        else:
+            print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+        return
+    # Tombstone FIRST so any racing respawn exits cleanly.
     _write_uninstall_tombstone()
     removed = []
-    # Stop running instance (safe to fail if already stopped).
-    try:
-        subprocess.run(
-            ["schtasks", "/End", "/TN", WINDOWS_TASK_NAME],
-            capture_output=True, text=True, errors="replace", timeout=10,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        pass
-    try:
-        delete = subprocess.run(
-            ["schtasks", "/Delete", "/TN", WINDOWS_TASK_NAME, "/F"],
-            capture_output=True, text=True, errors="replace", timeout=10,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        delete = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="timeout")
-    if delete.returncode == 0:
-        removed.append(f"Scheduled Task: {WINDOWS_TASK_NAME}")
-    for artifact_name in ("dashboard-server.py", WINDOWS_LAUNCHER_NAME):
-        artifact = SNAPSHOT_DIR / artifact_name
-        if artifact.exists():
-            try:
-                artifact.unlink()
-                removed.append(str(artifact))
-            except OSError:
-                pass
-    # Glob-clean any schtasks XML regardless of version-specific naming
-    # (".schtasks-daemon.xml", "schtasks-daemon.xml", etc.).
-    try:
-        for xml_path in SNAPSHOT_DIR.glob("*schtasks-daemon*.xml"):
-            try:
-                xml_path.unlink()
-            except OSError:
-                pass
-    except OSError:
-        pass
-    # Clean up per-install token + persisted dashboard host (#59).
-    for _state_path in (DAEMON_TOKEN_PATH, DAEMON_HOST_PATH):
+    # Sweep the OS scheduler by name across every runtime variant so a task
+    # whose data dir already vanished still gets unregistered.
+    for task_name in _scheduler_names_to_sweep(
+            this_install_only, _ALL_WINDOWS_TASK_NAMES, WINDOWS_TASK_NAME):
         try:
-            if _state_path.exists():
-                _state_path.unlink()
+            subprocess.run(
+                ["schtasks", "/End", "/TN", task_name],
+                capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+        try:
+            delete = subprocess.run(
+                ["schtasks", "/Delete", "/TN", task_name, "/F"],
+                capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            delete = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="timeout")
+        if delete.returncode == 0:
+            removed.append(f"Scheduled Task: {task_name}")
+    # Sweep per-identity daemon files across every token-optimizer-* identity.
+    per_identity_removed: list[tuple[Path, list[str]]] = []
+    sweep_failed: list[str] = []
+    for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+        identity_removed, identity_failed = _sweep_identity_daemon_files(
+            snap_dir, ("daemon_script", "windows_launcher", "daemon_token", "daemon_host"))
+        sweep_failed.extend(identity_failed)
+        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # swept identity. Each identity's generated dashboard-server.py checks
+        # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
+        # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
+        # /task/unit could resurrect the daemon and mint a fresh 0600 token
+        # after a "successful" uninstall. Only a legitimate reinstall clears it
+        # (setup_daemon unlinks before start). NOT counted toward `removed` so
+        # the "Nothing to remove" honesty invariant holds.
+        _write_uninstall_tombstone(snap_dir)
+        # Glob-clean any schtasks XML regardless of version-specific naming
+        # (".schtasks-daemon.xml", "schtasks-daemon.xml", etc.).
+        try:
+            for xml_path in snap_dir.glob("*schtasks-daemon*.xml"):
+                try:
+                    xml_path.unlink()
+                    identity_removed.append(str(xml_path))
+                except OSError:
+                    pass
         except OSError:
             pass
-    if removed:
-        print("[Token Optimizer] Dashboard daemon removed.")
-        for path in removed:
-            print(f"  Deleted: {path}")
-    else:
-        print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+        if identity_removed:
+            per_identity_removed.append((snap_dir, identity_removed))
+            removed.extend(identity_removed)
+    _print_identity_sweep_report(
+        removed, per_identity_removed, sweep_failed, this_install_only)
+
 
 
 # Runtime-suffix-derived (not a codex-vs-else ternary) so hermes/copilot get
@@ -21008,7 +22096,7 @@ def _probe_systemd_user_bus():
     try:
         result = subprocess.run(
             ["systemctl", "--user", "list-units", "--no-legend"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True, timeout=5, creationflags=_NO_WINDOW,
         )
     except (subprocess.SubprocessError, OSError, FileNotFoundError):
         return False
@@ -21027,15 +22115,27 @@ def _systemd_user_unit_path():
     return base / "systemd" / "user" / SYSTEMD_UNIT_NAME
 
 
+def _systemd_user_unit_path_for(unit_name: str) -> Path:
+    """Resolve the unit path for an arbitrary unit name (issue #106 / F2).
+
+    Same base resolution as ``_systemd_user_unit_path`` but for any runtime
+    variant's unit name, so the sweeping uninstall can remove a sibling
+    runtime's registration whose data dir already vanished.
+    """
+    xdg = os.environ.get("XDG_CONFIG_HOME", "").strip()
+    base = Path(xdg) if xdg else Path.home() / ".config"
+    return base / "systemd" / "user" / unit_name
+
+
 def _generate_systemd_user_unit(launcher_path, log_dir):
     """Build a systemd user unit for the dashboard daemon.
 
     ExecStart points at a shell launcher (_generate_linux_launcher_sh)
     rather than a hardcoded sys.executable. The launcher resolves
     Python at runtime so pipx venv removals, distro upgrades, or brew
-    swaps don't strand the unit (torture HIGH-2). The ExecStart path
+    swaps don't strand the unit. The ExecStart path
     is double-quoted per systemd.service(5) so paths with spaces in
-    HOME survive tokenization (torture HIGH-1).
+    HOME survive tokenization.
 
     Design choices:
       - Restart=on-failure + RestartSec=10 mirrors macOS launchd
@@ -21110,7 +22210,7 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
         print("  No changes written.")
         return
 
-    # Reachability check (torture HIGH-3): `systemctl --user --version`
+    # Reachability check: `systemctl --user --version`
     # succeeds even when the user-bus is dead (SSH w/o linger, cron,
     # WSL2 without systemd=true). Probing list-units requires the bus,
     # so a positive result confirms we can actually enable a unit.
@@ -21135,13 +22235,13 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
         if soft_fail and not acquired:
             # Another installer holds the lock; don't fight it from a hook path.
             return False
-        # Ordering (torture HIGH-4): stop + reclaim FIRST, BEFORE touching
+        # Ordering: stop + reclaim FIRST, BEFORE touching
         # unit/daemon files, so a failed stop never races a half-written
         # new unit. On failure after write, rollback removes artifacts
         # so re-running doesn't inherit a broken half-install.
         subprocess.run(
             ["systemctl", "--user", "disable", "--now", SYSTEMD_UNIT_NAME],
-            capture_output=True, text=True, errors="replace",
+            capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
         )
         _reclaim_posix_daemon_port()
 
@@ -21185,12 +22285,12 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
                     pass
             subprocess.run(
                 ["systemctl", "--user", "daemon-reload"],
-                capture_output=True, text=True, errors="replace",
+                capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
             )
 
         reload_result = subprocess.run(
             ["systemctl", "--user", "daemon-reload"],
-            capture_output=True, text=True, errors="replace",
+            capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
         )
         if reload_result.returncode != 0:
             _rollback("daemon-reload failed")
@@ -21198,7 +22298,7 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
 
         enable_result = subprocess.run(
             ["systemctl", "--user", "enable", "--now", SYSTEMD_UNIT_NAME],
-            capture_output=True, text=True, errors="replace",
+            capture_output=True, text=True, errors="replace", creationflags=_NO_WINDOW,
         )
         if enable_result.returncode != 0:
             _rollback("enable failed")
@@ -21229,61 +22329,112 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
         return True
 
 
-def _uninstall_systemd_user_daemon():
-    """Linux: stop and remove the systemd --user dashboard unit."""
-    # adv-006: tombstone FIRST so any racing respawn exits cleanly.
+def _uninstall_systemd_user_daemon(this_install_only=False, dry_run=False):
+    """Linux: stop and remove the systemd --user dashboard unit.
+
+    v5.11.68 (#106 / F2): identity-sweeping by default. The systemd unit is
+    per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
+    runtime), so it is removed once, and we disable+remove EVERY runtime's
+    unit so a unit whose data dir already vanished still gets unregistered.
+    The per-identity files (``dashboard-server.py``, the launcher script,
+    ``daemon-token``, ``dashboard-host``, ``.daemon-thrash``) live in EACH
+    identity's snapshot dir; a sibling's daemon script + 0600 CSRF token
+    would otherwise outlive the uninstall. Sweep every identity unless
+    ``this_install_only`` opts out.
+
+    v5.11.68 (#106 / cleanup): ``dry_run=True`` makes the uninstaller
+    side-effect-free (no systemctl calls, no file deletion, no tombstone write)
+    so the cleanup command's ``--dry-run`` is a true preview.
+    """
+    if dry_run:
+        would_remove = []
+        per_identity: list[tuple[Path, list[str]]] = []
+        for unit_name in _scheduler_names_to_sweep(
+            this_install_only, _ALL_SYSTEMD_UNIT_NAMES, SYSTEMD_UNIT_NAME):
+            unit_path = _systemd_user_unit_path_for(unit_name)
+            if unit_path.exists():
+                would_remove.append(str(unit_path))
+        for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+            files = _daemon_per_identity_files(snap_dir)
+            identity_would = [str(files[k]) for k in ("daemon_script", "linux_launcher", "daemon_token", "daemon_host") if files[k].exists()]
+            if identity_would:
+                per_identity.append((snap_dir, identity_would))
+                would_remove.extend(identity_would)
+        if would_remove:
+            print("[Token Optimizer] Dashboard daemon would be removed.")
+            for path in would_remove:
+                print(f"  Would delete: {path}")
+            if per_identity and not this_install_only:
+                print("  Would sweep all token-optimizer-* identities:")
+                for snap_dir, items in per_identity:
+                    print(f"    {snap_dir}: {len(items)} file(s)")
+        else:
+            print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+        return
+    # Tombstone FIRST so any racing respawn exits cleanly.
     _write_uninstall_tombstone()
     removed = []
-    try:
-        subprocess.run(
-            ["systemctl", "--user", "disable", "--now", SYSTEMD_UNIT_NAME],
-            capture_output=True, text=True, errors="replace", timeout=10,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        pass
-    unit_path = _systemd_user_unit_path()
-    if unit_path.exists():
+    # Sweep the OS scheduler by name across every runtime variant.
+    for unit_name in _scheduler_names_to_sweep(
+            this_install_only, _ALL_SYSTEMD_UNIT_NAMES, SYSTEMD_UNIT_NAME):
         try:
-            unit_path.unlink()
-            removed.append(str(unit_path))
-        except OSError:
+            subprocess.run(
+                ["systemctl", "--user", "disable", "--now", unit_name],
+                capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
+            )
+        except (OSError, subprocess.TimeoutExpired):
             pass
-    # daemon-reload AFTER unit file removal so systemd drops the unit
+        unit_path = _systemd_user_unit_path_for(unit_name)
+        if _unlink_if_exists(unit_path):
+            removed.append(str(unit_path))
+    # daemon-reload AFTER unit file removal so systemd drops the units
     # from its in-memory catalog.
     try:
         subprocess.run(
             ["systemctl", "--user", "daemon-reload"],
-            capture_output=True, text=True, errors="replace", timeout=10,
+            capture_output=True, text=True, errors="replace", timeout=10, creationflags=_NO_WINDOW,
         )
     except (OSError, subprocess.TimeoutExpired):
         pass
-    for artifact_name in ("dashboard-server.py", LINUX_LAUNCHER_NAME):
-        artifact = SNAPSHOT_DIR / artifact_name
-        if artifact.exists():
-            try:
-                artifact.unlink()
-                removed.append(str(artifact))
-            except OSError:
-                pass
-    # Clean up per-install token + persisted dashboard host (#59).
-    for _state_path in (DAEMON_TOKEN_PATH, DAEMON_HOST_PATH):
-        try:
-            if _state_path.exists():
-                _state_path.unlink()
-        except OSError:
-            pass
-    if removed:
-        print("[Token Optimizer] Dashboard daemon removed.")
-        for path in removed:
-            print(f"  Deleted: {path}")
-    else:
-        print("[Token Optimizer] No daemon artifacts found. Nothing to remove.")
+    # #106 F2 (P1): unregistering the job does NOT stop the process --
+    # `launchctl bootout` / `systemctl disable` drop the registration without
+    # SIGTERMing the running child, so the daemon kept serving its port with
+    # the 0600 CSRF token live in memory until logout. Reclaim the port(s) now
+    # that the tombstone is down (so nothing races a respawn) and the job is
+    # unregistered. On a sweep-all uninstall this covers EVERY runtime's port
+    # (a sibling runtime's daemon + live CSRF token otherwise
+    # survived), scoped back to the resolved runtime under --this-install-only.
+    # Never kills a foreign process on a port -- the helper verifies the command
+    # line is our own dashboard-server.py.
+    _reclaim_daemon_ports(this_install_only)
+    # Sweep per-identity daemon files across every token-optimizer-* identity.
+    per_identity_removed: list[tuple[Path, list[str]]] = []
+    sweep_failed: list[str] = []
+    for snap_dir in _daemon_identity_snapshot_dirs(this_install_only):
+        identity_removed, identity_failed = _sweep_identity_daemon_files(
+            snap_dir, ("daemon_script", "linux_launcher", "daemon_token", "daemon_host"))
+        sweep_failed.extend(identity_failed)
+        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # swept identity. Each identity's generated dashboard-server.py checks
+        # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
+        # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
+        # /task/unit could resurrect the daemon and mint a fresh 0600 token
+        # after a "successful" uninstall. Only a legitimate reinstall clears it
+        # (setup_daemon unlinks before start). NOT counted toward `removed` so
+        # the "Nothing to remove" honesty invariant holds.
+        _write_uninstall_tombstone(snap_dir)
+        if identity_removed:
+            per_identity_removed.append((snap_dir, identity_removed))
+            removed.extend(identity_removed)
+    _print_identity_sweep_report(
+        removed, per_identity_removed, sweep_failed, this_install_only)
+
 
 
 def _normalized_platform():
     """Return a normalized platform label.
 
-    Hedges against torture-room M5: frozen builds or test harnesses that
+    Hedges against frozen builds or test harnesses that
     monkey-patch platform.system() can return non-canonical casing
     ("darwin", "Macintosh", "MacOSX"). We normalize a small allowlist
     of aliases to the canonical CPython labels.
@@ -21299,34 +22450,54 @@ def _normalized_platform():
     return raw
 
 
-def setup_daemon(dry_run=False, uninstall=False):
+def setup_daemon(dry_run=False, uninstall=False, this_install_only=False, latch_optout=True):
     """Install or remove the persistent dashboard HTTP server daemon.
+
+    ``latch_optout`` (default True) controls whether an uninstall persists the
+    sticky ``daemon_disabled`` opt-out that stops the SessionStart self-heal from
+    ever resurrecting the daemon. The dedicated ``setup-daemon --uninstall``
+    command -- whose whole purpose is "turn my dashboard off" -- passes True.
+    ``cleanup`` (the full-uninstall tidy) passes False: it removes the hooks too,
+    so the self-heal simply stops running after a genuine uninstall, and if the
+    user only tidied up while keeping Token Optimizer active, the self-heal must
+    be free to bring the dashboard back on its own. A tidy is not a deliberate
+    opt-out, and must never silently kill the dashboard until a manual command.
 
     Dispatches to a platform-specific installer/uninstaller. macOS uses
     launchd (LaunchAgent); Windows and Linux installers ship in future
     releases. All platforms share the daemon script and port
     (DAEMON_PORT = 24842) so the bookmarkable URL is identical
     everywhere.
+
+    v5.11.68 (#106 / F2): ``--uninstall`` is identity-sweeping by default
+    (removes the daemon script + 0600 CSRF token from EVERY
+    ``token-optimizer-*`` identity, and unregisters every runtime's scheduler
+    artifact). Pass ``this_install_only=True`` (``--this-install-only``) to
+    clean only the resolved identity, for a user intentionally running
+    side-by-side installs who only wants this one gone.
     """
     system = _normalized_platform()
     if uninstall:
         if system == "Darwin":
-            _uninstall_launchd_daemon()
+            _uninstall_launchd_daemon(this_install_only=this_install_only, dry_run=dry_run)
         elif system == "Windows":
-            _uninstall_task_scheduler_daemon()
+            _uninstall_task_scheduler_daemon(this_install_only=this_install_only, dry_run=dry_run)
         elif system == "Linux":
-            _uninstall_systemd_user_daemon()
+            _uninstall_systemd_user_daemon(this_install_only=this_install_only, dry_run=dry_run)
         else:
             print(f"[Token Optimizer] Unsupported platform for daemon uninstall: {system}")
-        # Sticky opt-out: persist the user's intent so the SessionStart ensure-
-        # health self-install (`_ensure_dashboard_daemon`) never resurrects a
-        # daemon the user deliberately removed. Mirrors the quality-bar opt-out.
-        # Written on every platform (including unsupported) so a future install
-        # on a now-supported OS still honours the prior opt-out until an explicit
-        # `setup-daemon` clears it.
-        if not dry_run:
+        # Sticky opt-out: persist the user's DELIBERATE intent so the SessionStart
+        # ensure-health self-install (`_ensure_dashboard_daemon`) never resurrects
+        # a daemon the user explicitly turned off. Mirrors the quality-bar opt-out.
+        # Gated on `latch_optout`: only the dedicated `setup-daemon --uninstall`
+        # command sets it. `cleanup` (full-uninstall tidy) passes latch_optout=
+        # False -- it removes the hooks too, so a genuine uninstall stops the
+        # self-heal anyway, and a user who merely tidied while keeping Token
+        # Optimizer active must get the dashboard self-healed back automatically,
+        # never left silently dead pending a manual `setup-daemon`.
+        if not dry_run and latch_optout:
             _set_daemon_disabled(True)
-        else:
+        elif dry_run:
             # A dry-run does NOT write the sticky opt-out, so the SessionStart
             # self-heal would reinstall the daemon. Say so, or the user thinks a
             # preview opted them out for good.
@@ -21347,15 +22518,324 @@ def setup_daemon(dry_run=False, uninstall=False):
     if not dry_run:
         _set_daemon_disabled(False)
     if system == "Darwin":
-        _install_launchd_daemon(dry_run=dry_run, effective_host=effective_host)
+        _installed_ok = _install_launchd_daemon(dry_run=dry_run, effective_host=effective_host)
     elif system == "Windows":
-        _install_task_scheduler_daemon(dry_run=dry_run, effective_host=effective_host)
+        _installed_ok = _install_task_scheduler_daemon(dry_run=dry_run, effective_host=effective_host)
     elif system == "Linux":
-        _install_systemd_user_daemon(dry_run=dry_run, effective_host=effective_host)
+        _installed_ok = _install_systemd_user_daemon(dry_run=dry_run, effective_host=effective_host)
     else:
         print(f"[Error] Dashboard daemon not supported on {system}.")
         print(f"  Open the dashboard file directly: {DASHBOARD_PATH.as_uri()}")
         sys.exit(1)
+    # issue #107: THE ONLY place the sticky install-failed marker is cleared.
+    # An explicit `setup-daemon` that actually succeeded is the user telling us
+    # the structural problem is fixed. Not on dry-run (side-effect-free), and
+    # not on a failed install -- the installers return False under soft_fail and
+    # sys.exit(1) otherwise, so neither reaches here with a truthy result.
+    if not dry_run and _installed_ok:
+        _clear_daemon_install_failed_marker()
+
+
+# ---------------------------------------------------------------------------
+# Uninstall cleanup orchestrator (issue #106 / F3 + cleanup command)
+# ---------------------------------------------------------------------------
+
+# Paths that are intentionally PRESERVED across an uninstall. These hold
+# session data, checkpoints, and trends the user may want to keep or migrate.
+# Listed explicitly so the cleanup command's --dry-run doubles as retained-
+# paths DISCLOSURE: the user sees exactly what stays before agreeing to
+# remove anything.
+def _retained_paths() -> list[tuple[str, Path]]:
+    """User-data paths preserved by design across an uninstall (issue #106).
+
+    Session snapshots, compaction checkpoints, trend aggregates, and the
+    quality-bar cache are NOT removed by the cleanup command. They are
+    disclosed in --dry-run so the user knows what stays.
+    """
+    paths: list[tuple[str, Path]] = []
+    try:
+        for ident in _all_plugin_data_dirs():
+            paths.append((f"session data ({ident.name})", ident / "data"))
+            paths.append((f"checkpoints ({ident.name})", ident / "data" / "checkpoints"))
+            paths.append((f"trends ({ident.name})", ident / "data" / "trends"))
+    except Exception:  # noqa: BLE001
+        pass
+    # Always include the resolved snapshot dir even under a sandbox override.
+    paths.append(("session data (this install)", SNAPSHOT_DIR))
+    return paths
+
+
+def _backup_settings_file(dest_dir: Path) -> Path | None:
+    """Copy settings.json into ``dest_dir``. Returns the backup path or None."""
+    try:
+        if not SETTINGS_PATH.is_file():
+            return None
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest = dest_dir / "settings.json"
+        i = 1
+        while dest.exists():
+            dest = dest_dir / f"settings.json-{i}"
+            i += 1
+        shutil.copy2(SETTINGS_PATH, dest)
+        return dest
+    except OSError:
+        return None
+
+
+def _is_our_hook_entry(entry) -> bool:
+    """True when a settings.json hook entry is one WE installed (#106 F3).
+
+    Ownership markers, all anchored on our own script names rather than a bare
+    "token-optimizer" substring (a user hook may legitimately mention us in a
+    path or a comment without being ours to delete):
+      * the command invokes one of our scripts (measure.py / read_cache.py /
+        statusline.js / archive_result.py / context_intel.py) AND references
+        token-optimizer, or
+      * it carries one of our distinctive subcommands (quality-cache,
+        compact-capture, compact-restore, ensure-health, clear-compacted,
+        session-end-flush, dynamic-compact-instructions).
+
+    Conservative by construction: unrecognized shapes are NOT ours, so a hook
+    we cannot positively identify is left in place. The cost of a false
+    negative is a dangling entry the user can delete; the cost of a false
+    positive is silently deleting their automation.
+    """
+    if not isinstance(entry, dict):
+        return False
+    cmd = entry.get("command")
+    if not isinstance(cmd, str) or not cmd:
+        return False
+    low = cmd.lower()
+    our_subcommands = (
+        "quality-cache", "compact-capture", "compact-restore", "ensure-health",
+        "clear-compacted", "session-end-flush", "dynamic-compact-instructions",
+    )
+    if any(sub in low for sub in our_subcommands):
+        return True
+    our_scripts = (
+        "measure.py", "read_cache.py", "statusline.js", "archive_result.py",
+        "context_intel.py", "activity_tracker.py",
+    )
+    if "token-optimizer" in low and any(s in low for s in our_scripts):
+        return True
+    return False
+
+
+def _remove_our_settings_entries(settings: dict) -> list[str]:
+    """Strip Token Optimizer's OWN entries from ``settings`` in place.
+
+    Removes only entries we own:
+    - ``statusLine`` when its command references our ``statusline.js`` +
+      ``token-optimizer`` (the same matcher _is_quality_bar_installed uses).
+    - ``UserPromptSubmit`` hook groups whose command references
+      ``quality-cache`` (our cache hook).
+    - ``SessionEnd`` hook entries that are ours (reuses
+      _remove_token_optimizer_session_end_hooks).
+
+    Foreign statusLines, foreign hooks, and every other settings key are left
+    byte-identical. Returns a list of human-readable descriptions of what was
+    removed. Never raises.
+    """
+    removed: list[str] = []
+    if not isinstance(settings, dict):
+        return removed
+    # statusLine
+    sl = settings.get("statusLine")
+    if isinstance(sl, dict):
+        cmd = sl.get("command", "")
+        if isinstance(cmd, str) and "statusline.js" in cmd and "token-optimizer" in cmd:
+            del settings["statusLine"]
+            removed.append("statusLine (token-optimizer)")
+    # Hook entries we own, across every event.
+    #
+    # #106 F3 (P2-6): the old loop dropped ANY group whose filtered hook list
+    # came out empty -- including a user-authored group that never held a hook
+    # of ours (an empty `hooks: []`, or a group of foreign hooks in an event we
+    # also use) -- and miscounted each one as "UserPromptSubmit quality-cache
+    # hook". A group is now removed ONLY when it actually contained one of our
+    # hooks and filtering emptied it; user groups pass through untouched.
+    #
+    # #106 F3 (P2-9): the sweep covered UserPromptSubmit + SessionEnd only,
+    # leaving our smart-compact family (PreCompact / SessionStart / Stop /
+    # SessionEnd) dangling in settings.json after cleanup -- commands pointing
+    # into a plugin tree that is about to be deleted. Every event is now
+    # filtered with the same ownership predicate.
+    hooks = settings.get("hooks")
+    if isinstance(hooks, dict):
+        for event in list(hooks.keys()):
+            groups = hooks.get(event)
+            if not isinstance(groups, list):
+                continue
+            new_groups = []
+            n_removed = 0
+            for group in groups:
+                if not isinstance(group, dict):
+                    new_groups.append(group)
+                    continue
+                entries = group.get("hooks")
+                if not isinstance(entries, list):
+                    new_groups.append(group)
+                    continue
+                kept = [h for h in entries if not _is_our_hook_entry(h)]
+                n_ours = len(entries) - len(kept)
+                if n_ours == 0:
+                    # Nothing of ours here -- leave the group exactly as-is,
+                    # even when it is empty (it is the user's to keep).
+                    new_groups.append(group)
+                    continue
+                n_removed += n_ours
+                if kept:
+                    group["hooks"] = kept
+                    new_groups.append(group)
+                # else: the group held only our hooks -> drop the whole group.
+            if n_removed:
+                removed.append(f"{n_removed} {event} hook(s)")
+            if new_groups:
+                hooks[event] = new_groups
+            else:
+                del hooks[event]
+    # SessionEnd hooks (reuses the proven filter)
+    n_session_end = _remove_token_optimizer_session_end_hooks(settings)
+    if n_session_end:
+        removed.append(f"{n_session_end} SessionEnd hook(s)")
+    return removed
+
+
+def cleanup(dry_run=False, this_install_only=False):
+    """One-command uninstall cleanup for Token Optimizer (issue #106).
+
+    Orchestrates the three uninstall surfaces:
+    1. Daemon: stop + remove the dashboard daemon across all
+       ``token-optimizer-*`` identities (or just this install under
+       ``this_install_only``), via ``setup_daemon(uninstall=True, ...)``.
+    2. Host config (``settings.json``): back up first, then remove ONLY our
+       own entries (statusLine, quality-cache hook, SessionEnd hooks), leaving
+       every other key byte-identical.
+    3. Manifests (``installed_plugins.json`` / ``known_marketplaces.json``):
+       back up first, then remove our STALE entries via
+       ``install_reconcile.reconcile_uninstall(remove=True)``.
+
+    Session data, checkpoints, and trends are PRESERVED by design and
+    disclosed in the report.
+
+    ``--dry-run`` is side-effect-free and doubles as retained-paths
+    DISCLOSURE: it prints exactly what WOULD be removed and what stays, so
+    the user can review before agreeing to a real cleanup.
+    """
+    print("[Token Optimizer] Cleanup", "(dry run)" if dry_run else "")
+    print(f"  {'=' * 60}")
+    if this_install_only:
+        print("  Scope: this install only (--this-install-only)")
+    else:
+        print("  Scope: all token-optimizer-* identities")
+    print()
+
+    # 1. Daemon
+    print("  [1/3] Dashboard daemon")
+    # latch_optout=False: a cleanup is a tidy, not a deliberate "turn my dashboard
+    # off forever". This removes the daemon now, but does NOT set the sticky
+    # daemon_disabled flag -- so if Token Optimizer stays active, the SessionStart
+    # self-heal brings the dashboard back automatically, with no manual command.
+    # A genuine full uninstall removes the hooks here too, so the self-heal simply
+    # stops running; the sticky flag was never what kept a real uninstall gone.
+    setup_daemon(dry_run=dry_run, uninstall=True, this_install_only=this_install_only, latch_optout=False)
+    # The launchd LaunchAgent plist is removed by the macOS uninstaller only.
+    # Defensively unlink it here too so a stray plist (a HOME migrated or
+    # restored from a Mac, a copied backup) is always cleared, regardless of
+    # the platform running cleanup -- it is just a file. Skipped on dry-run so
+    # the preview stays side-effect-free.
+    if not dry_run:
+        _unlink_if_exists(PLIST_PATH)
+    print()
+
+    # 2. settings.json
+    print("  [2/3] Host config (settings.json)")
+    settings, _ = _read_settings_json()
+    our_entries = _remove_our_settings_entries(settings)  # mutate a copy
+    if our_entries:
+        if dry_run:
+            for entry in our_entries:
+                print(f"    Would remove: {entry}")
+        else:
+            # #106 F3 P1: do NOT claim "Removed" before the write lands. The
+            # entries are echoed after a confirmed successful write below; a
+            # refused read or a denied lease prints a WARNING instead, so the
+            # report can never assert a removal that did not happen.
+            pass
+        if not dry_run:
+            backup_root = CLAUDE_DIR / "_backups" / "token-optimizer"
+            stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            backup_dest = backup_root / stamp
+            backed = _backup_settings_file(backup_dest)
+            if backed is None:
+                print(f"    WARNING: could not back up settings.json; entries left in place.")
+            else:
+                # Re-read under the backup, re-remove, write atomically.
+                #
+                # #106 F3 P1a: a failed re-read yields {} ("unknown"), and
+                # writing that would erase every key the user owns. Refuse to
+                # write on a bad read and say so -- their entries stay in
+                # place, which is recoverable; an emptied settings.json is not.
+                fresh, _, read_ok = _read_settings_json_checked()
+                if not read_ok:
+                    print(
+                        "    WARNING: settings.json became unreadable (malformed "
+                        "or permission denied) after the backup; refusing to "
+                        "write.\n"
+                        f"    Entries left in place. Backup: {backed}"
+                    )
+                else:
+                    _remove_our_settings_entries(fresh)
+                    # #106 F3 P1b: a denied advisory lease makes the write a
+                    # silent no-op. Reporting "Removed" for a write that never
+                    # landed leaves the user with the dangling statusLine this
+                    # command exists to clear, so surface it instead.
+                    if _write_settings_atomic(fresh):
+                        for entry in our_entries:
+                            print(f"    Removed: {entry}")
+                        print(f"    Backup: {backed}")
+                    else:
+                        print(
+                            "    WARNING: settings.json is locked by another "
+                            "Token Optimizer process; NOTHING was removed.\n"
+                            "    Re-run cleanup in a few seconds (no Claude Code "
+                            f"session should be starting). Backup: {backed}"
+                        )
+    else:
+        print("    No Token Optimizer entries found in settings.json.")
+    print()
+
+    # 3. Manifests
+    print("  [3/3] Plugin manifests (installed_plugins / known_marketplaces)")
+    import install_reconcile
+    reconcile = install_reconcile.reconcile_uninstall(
+        CLAUDE_DIR, dry_run=dry_run, remove=True,
+    )
+    for entry in reconcile.get("reported", []):
+        stale_tag = " (stale)" if entry.get("stale") else " (active, kept)"
+        print(f"    {entry['file']}::{entry['key']}{stale_tag}")
+    for warning in reconcile.get("warnings", []):
+        print(f"    {warning}")
+    if reconcile.get("backup"):
+        print(f"    Backup: {reconcile['backup']}")
+    for removed in reconcile.get("removed", []):
+        print(f"    {'Would remove' if dry_run else 'Removed'}: {removed}")
+    if not reconcile.get("reported"):
+        print("    No Token Optimizer manifest entries found.")
+    print()
+
+    # Retained-paths disclosure (always shown, dry-run or not).
+    print("  Retained by design (session data, checkpoints, trends):")
+    for label, path in _retained_paths():
+        exists = path.exists() if hasattr(path, "exists") else False
+        tag = " (present)" if exists else " (absent)"
+        print(f"    {label}: {path}{tag}")
+    print()
+    if dry_run:
+        print("  Dry run: nothing was modified. Re-run without --dry-run to apply.")
+    else:
+        print("  Cleanup complete. Re-enable later with: setup-quality-bar / setup-daemon")
+    print()
 
 
 def _daemon_service_installed(system=None):
@@ -21379,7 +22859,7 @@ def _daemon_service_installed(system=None):
             try:
                 rc = subprocess.run(
                     ["schtasks", "/Query", "/TN", WINDOWS_TASK_NAME],
-                    capture_output=True, timeout=5,
+                    capture_output=True, timeout=5, creationflags=_NO_WINDOW,
                 ).returncode
                 return rc == 0
             except (OSError, subprocess.TimeoutExpired):
@@ -21445,16 +22925,31 @@ def _ensure_dashboard_daemon(force=False):
     handles the ABSENT / dead-service case. Run this AFTER the update block so
     update owns has-daemon and ensure owns no-daemon.
 
-    Returns one of: 'noop-foreign', 'noop-disabled', 'noop-unsupported',
-    'noop-healthy', 'noop-throttled', 'installed', 'install-failed',
-    'restarted', 'restart-stale', 'restart-failed'. ('restart-stale' propagates
-    up from _restart_dashboard_daemon's landing-verification.) Never raises.
+    Returns one of: 'noop-foreign', 'noop-disabled', 'noop-install-failed',
+    'noop-unsupported', 'noop-healthy', 'noop-throttled', 'installed',
+    'install-failed', 'restarted', 'restart-stale', 'restart-failed'.
+    ('restart-stale' propagates up from _restart_dashboard_daemon's
+    landing-verification.) Never raises.
     """
     # Cheapest gates first -- all pure/stat, no subprocess.
     if _is_foreign_runtime() or detect_runtime() != "claude":
         return "noop-foreign"
     if _read_config_flag("daemon_disabled", False):
         return "noop-disabled"
+    # issue #107: a prior install/self-heal failed for a DEFINITIVE reason.
+    # Refuse. BEFORE the `force` check on purpose -- `daemon-revive`
+    # (force=True) is the per-turn retry path this marker exists to stop, and
+    # on Windows each retry costs the user a cmd-window flash.
+    # A live, identity-verified daemon DISPROVES the
+    # "structurally broken" record (the classic case: an install-lock race
+    # where the losing session armed the marker while the winner installed
+    # fine). One cheap sleepless socket probe -- no subprocess, cannot flash --
+    # buys the un-wedge; otherwise the refusal stands until `setup-daemon`.
+    if _daemon_install_failed_marker_present():
+        if _verify_daemon_port(timeout_seconds=1, retries=1, retry_sleep=0):
+            _clear_daemon_install_failed_marker()
+            return "noop-healthy"
+        return "noop-install-failed"
     system = _normalized_platform()
     if system not in ("Darwin", "Linux", "Windows"):
         return "noop-unsupported"
@@ -21486,7 +22981,17 @@ def _ensure_dashboard_daemon(force=False):
 
     if installed:
         # Installed but dead -> restart (lock-free, idempotent).
-        return _restart_dashboard_daemon(system)
+        # #107: 'restart-failed' is NOT
+        # marker-worthy. It is reached through a blanket `except Exception`
+        # whose common inhabitants are TRANSIENT -- a 5s launchctl kickstart
+        # TimeoutExpired on a busy Mac, a slow systemd, an AV-locked schtasks.
+        # An INSTALLED daemon proves the structure works; the 24h ensure
+        # throttle already bounds retry cost. A verified restart clears any
+        # stale marker a concurrent session may have raced in.
+        _status = _restart_dashboard_daemon(system)
+        if _status == "restarted":
+            _clear_daemon_install_failed_marker()
+        return _status
 
     # Not installed -> run the platform installer. Each installer self-locks with
     # soft_fail so a concurrent session can't deadlock or double-install. Force
@@ -21495,6 +23000,8 @@ def _ensure_dashboard_daemon(force=False):
     # edit that reintroduces sys.exit must NEVER kill the SessionStart hook.
     try:
         if not _ensure_dashboard_file():
+            # Transient class (disk full once, a regen hiccup): the 24h
+            # throttle bounds the retry. Never marker-worthy.
             return "install-failed"
         _get_or_create_daemon_token()
         if system == "Darwin":
@@ -21506,9 +23013,16 @@ def _ensure_dashboard_daemon(force=False):
         if ok is False:
             # Real failure OR a concurrent installer won the lock and soft-skipped
             # us. Resolve from reality so a race doesn't log a false failure.
+            # #107: the loser's instantaneous recheck races the
+            # winner's multi-second install window -- an ambiguous result must
+            # NOT arm the sticky marker (the installer itself arms it at the
+            # exact sites that can classify a failure as permanent).
             if _daemon_service_installed(system):
+                _clear_daemon_install_failed_marker()
                 return "installed"
             return "install-failed"
+        # Verified success supersedes any failure record.
+        _clear_daemon_install_failed_marker()
         return "installed"
     except (Exception, SystemExit) as _e:
         try:
@@ -21519,6 +23033,10 @@ def _ensure_dashboard_daemon(force=False):
             )
         except Exception:
             pass
+        # A raised exception is UNCLASSIFIED -- OSError from a full disk, an
+        # AV-locked file, a gui-domain bootstrap over SSH. All recoverable by
+        # tomorrow; the throttle bounds them. Definitive classes are armed
+        # inside the installer where they can actually be identified.
         return "install-failed"
 
 
@@ -21588,6 +23106,11 @@ def _daemon_midsession_pulse():
       * Dead AND revive throttle (300s) open: spawn a DETACHED `daemon-revive`
         subprocess (fire-and-forget) so kickstart + landing-verification run OFF
         the hot path. The next probe (<=60s later) confirms it came back.
+        FIX-SPEC-DAEMON req 2: the 300s revive throttle is SKIPPED when the
+        scheduler registration (plist/unit/task) is ABSENT -- a missing plist is
+        the "something removed it" state, not the transient "port not up yet"
+        case the throttle bounds, so a swept daemon self-revives promptly. The
+        throttle still applies to the ordinary dead-but-INSTALLED case.
 
     Concurrency: the throttle timestamps live in the shared config.json (machine-
     wide, not per-session), so cadence is bounded across parallel sessions. A rare
@@ -21613,6 +23136,13 @@ def _daemon_midsession_pulse():
             pass
         if _read_config_flag("daemon_disabled", False):
             return "noop-disabled"
+        # issue #107: sticky install-failed marker. Checked here, alongside the
+        # tombstone and BEFORE the probe throttle, so a permanently-broken
+        # install stops costing a revive spawn (and on Windows a cmd-window
+        # flash) every ~5min for the rest of time. Cleared only by an explicit
+        # successful `setup-daemon`.
+        if _daemon_install_failed_marker_present():
+            return "noop-install-failed"
         if _normalized_platform() not in ("Darwin", "Linux", "Windows"):
             return "noop-unsupported"
         # Probe throttle: within the window the remaining cost is one config read.
@@ -21629,13 +23159,25 @@ def _daemon_midsession_pulse():
         # Cheap sleepless liveness probe (identity-checked inside _verify_daemon_port).
         if _verify_daemon_port(timeout_seconds=1, retries=1, retry_sleep=0):
             return "noop-healthy"
-        # Dead. Revive throttle bounds the costly path independently of the probe.
-        last_revive = _read_config_flag("last_daemon_midsession_revive", 0)
+        # Dead. A missing scheduler registration (launchd plist / systemd unit /
+        # scheduled task absent) is a clear "something removed it" state -- distinct
+        # from the transient "port not up yet" case the 300s revive throttle is meant
+        # to bound (FIX-SPEC-DAEMON req 2). Bypass the revive throttle for the
+        # plist-absent case so a swept daemon self-revives promptly mid-session; keep
+        # the throttle for the ordinary dead-but-installed case. Fail-open: a probe
+        # error degrades to "installed" so the conservative throttle still applies
+        # (never bypass on uncertainty, never raise into the hot path).
         try:
-            if now - float(last_revive or 0) < _daemon_pulse_revive_seconds():
-                return "revive-throttled"
-        except (TypeError, ValueError):
-            pass
+            _service_installed = _daemon_service_installed(_normalized_platform())
+        except Exception:  # noqa: BLE001 -- protection must never raise
+            _service_installed = True
+        if _service_installed:
+            last_revive = _read_config_flag("last_daemon_midsession_revive", 0)
+            try:
+                if now - float(last_revive or 0) < _daemon_pulse_revive_seconds():
+                    return "revive-throttled"
+            except (TypeError, ValueError):
+                pass
         _write_config_flag("last_daemon_midsession_revive", int(now))
         # Detached fire-and-forget revive (or first-time install) -- the user's turn
         # must NEVER block on kickstart + landing verification. POSIX detaches via
@@ -21643,26 +23185,460 @@ def _daemon_midsession_pulse():
         # (DETACHED_PROCESS + CREATE_NEW_PROCESS_GROUP + CREATE_BREAKAWAY_FROM_JOB)
         # or the child dies with the hook's job object (CXP-1). The child runs
         # `daemon-revive`, which calls _ensure_dashboard_daemon(force=True).
-        try:
-            _popen_kwargs = dict(stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                                 stdin=subprocess.DEVNULL)
-            if os.name == "nt":
-                _flags = 0
-                for _f in ("DETACHED_PROCESS", "CREATE_NEW_PROCESS_GROUP",
-                           "CREATE_BREAKAWAY_FROM_JOB"):
-                    _flags |= getattr(subprocess, _f, 0)
-                if _flags:
-                    _popen_kwargs["creationflags"] = _flags
-            else:
-                _popen_kwargs["start_new_session"] = True
-            subprocess.Popen(
-                [sys.executable, str(MEASURE_PY_PATH), "daemon-revive"],
-                **_popen_kwargs)
-        except Exception:
+        # Routed through spawn_detached (single source of truth) so the
+        # CREATE_BREAKAWAY_FROM_JOB retry path is included at the exact CXP-1
+        # site it was built for.
+        # #107: pythonw.exe on Windows (GUI subsystem) in addition to the
+        # detach flags -- the revive child is stdio-DEVNULL fire-and-forget.
+        _proc = spawn_detached(
+            [_detached_python_exe(), str(MEASURE_PY_PATH), "daemon-revive"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL)
+        if _proc is None:
+            _log_spawn_failure("daemon-revive spawn failed")
+            # #107: a failed spawn is the
+            # LEAST structural failure in the set -- fork EAGAIN under load,
+            # AV transiently locking the exe, a corrupt-but-replaceable
+            # pythonw twin. The 300s revive throttle already bounds the retry
+            # cost, and a failed CreateProcess never painted a window anyway.
+            # Never arm the sticky marker from here.
             return "revive-spawn-failed"
         return "revive-spawned"
     except Exception:
         return "pulse-error"
+
+
+# Task-action binaries that own a console, i.e. that Windows paints a window
+# for when Task Scheduler launches them. Only the interpreter names OUR
+# installers have ever baked as an <Exec> command -- #107:
+# generic ``cmd.exe``/``conhost.exe`` were dropped because we never register
+# those shapes, and matching them meant a user's own wrapper arrangement in
+# our task slot would be "positively identified as ours" and wiped.
+_WINDOWS_CONSOLE_ACTION_EXES = frozenset({
+    "py.exe", "python.exe", "python3.exe",
+})
+
+
+def _windows_action_is_console_flasher(command):
+    """True when a Scheduled Task ``<Command>`` is OUR console-subsystem
+    action shape (and therefore safe to rewrite).
+
+    Conservative on BOTH sides on purpose. An unrecognised command (a venv
+    shim, a user-edited action, a wrapper we do not ship) returns False: we only
+    rewrite actions we can positively identify as ours-and-broken, because the
+    repair re-registers the whole task. #107: "positively
+    identify" now means it -- a ``.cmd``/``.bat`` matches ONLY when its
+    basename is the one launcher we actually generate
+    (``WINDOWS_LAUNCHER_NAME``), not any batch file that happens to sit in our
+    task slot. And ``pythonw.exe``/``pyw.exe`` return False so the heal is
+    idempotent by construction -- once migrated, the same check reports "not
+    broken" and nothing runs.
+
+    #107: the value arrives from ``schtasks /Query /XML``, so
+    entities are unescaped first (``&quot;C:\\...\\dashboard-launcher.cmd&quot;``
+    must classify the same as its unquoted form) -- consistent with
+    ``_windows_action_is_dead_path``.
+    """
+    if not command:
+        return False
+    try:
+        from xml.sax.saxutils import unescape as _xml_unescape
+        # Default unescape covers only &amp;/&lt;/&gt; -- the quote entities
+        # schtasks emits for a quoted <Command> need the extra dict.
+        cleaned = _xml_unescape(
+            str(command), {"&quot;": '"', "&apos;": "'"}
+        ).strip().strip('"').strip()
+    except Exception:
+        cleaned = str(command).strip().strip('"').strip()
+    name = cleaned.replace("/", "\\").rsplit("\\", 1)[-1].strip().strip('"').lower()
+    if name.endswith(".cmd") or name.endswith(".bat"):
+        return name == WINDOWS_LAUNCHER_NAME.lower()
+    return name in _WINDOWS_CONSOLE_ACTION_EXES
+
+
+def _windows_task_action_info(task_name=None):
+    """Return ``(command, enabled)`` for the registered task, or ``(None, None)``
+    if the task does not exist / cannot be read.
+
+    ``command`` is the task's ``<Command>``. A None command means "no task" and
+    every caller MUST treat it as "do nothing" -- never as "install one".
+    Healing an absent task would resurrect a daemon the user declined or
+    uninstalled (#59).
+
+    ``enabled`` is the SETTINGS-level ``<Enabled>`` from the same XML (the
+    trigger-level ``<Enabled>`` elements live outside ``<Settings>`` and are
+    ignored): False when the user disabled the task (Task Scheduler UI
+    right-click Disable, or ``schtasks /Change /DISABLE``), True when
+    explicitly enabled, None when the XML carries no Settings-level flag.
+    #107: a disabled task must be treated exactly like a
+    tombstone -- pre-#107 that opt-out was durable, and the heal must not
+    re-register it ``<Enabled>true</Enabled>``.
+
+    ``schtasks /Query /XML`` emits UTF-16, which text-mode decoding turns into
+    ASCII interleaved with NULs; stripping NULs recovers the payload under both
+    that and a plain UTF-8 console.
+    """
+    try:
+        query = subprocess.run(
+            ["schtasks", "/Query", "/TN", task_name or WINDOWS_TASK_NAME,
+             "/XML", "ONE"],
+            capture_output=True, text=True, errors="replace", timeout=10,
+            creationflags=_NO_WINDOW,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None, None
+    if query.returncode != 0:
+        return None, None
+    raw = (query.stdout or "").replace("\x00", "")
+    match = re.search(r"<Command>(.*?)</Command>", raw, re.S | re.I)
+    if not match:
+        return None, None
+    command = match.group(1).strip()
+    enabled = None
+    settings_match = re.search(r"<Settings>(.*?)</Settings>", raw, re.S | re.I)
+    if settings_match:
+        en = re.search(r"<Enabled>\s*(true|false)\s*</Enabled>",
+                       settings_match.group(1), re.I)
+        if en:
+            enabled = en.group(1).lower() == "true"
+    return command, enabled
+
+
+def _windows_task_action_command(task_name=None):
+    """Back-compat shim over ``_windows_task_action_info`` (command only)."""
+    return _windows_task_action_info(task_name)[0]
+
+
+def _windows_action_path_exists(path):
+    """``os.path.exists`` behind a seam so tests can stub filesystem reality
+    for Windows-shaped paths that cannot exist on the test host. Never raises."""
+    try:
+        return os.path.exists(path)
+    except (OSError, ValueError):
+        return False
+
+
+def _windows_action_is_dead_path(command):
+    """True when the task ``<Command>`` is an absolute Windows path that no
+    longer exists on disk.
+
+    #107: the preferred task action bakes the ABSOLUTE path of
+    the pythonw twin that ran the install. Versioned python.org installs and
+    deletable venvs make that path go dead on upgrade/uninstall -- and a dead
+    pythonw path is invisible to ``_windows_action_is_console_flasher`` (it
+    classifies the NAME, not liveness), so without this check no heal layer
+    ever repairs it and the daemon is permanently dead behind green
+    diagnostics.
+
+    Only absolute (drive-letter or UNC) paths are judged; a bare PATH-resolved
+    name ("pythonw.exe") cannot be classified dead from here. The XML value is
+    unescaped and unquoted first so ``&amp;`` / quoted paths round-trip.
+    Never raises.
+    """
+    if not command:
+        return False
+    try:
+        from xml.sax.saxutils import unescape as _xml_unescape
+        cmd = _xml_unescape(
+            str(command), {"&quot;": '"', "&apos;": "'"}
+        ).strip().strip('"').strip()
+        if not cmd:
+            return False
+        if not (re.match(r"^[A-Za-z]:[\\/]", cmd) or cmd.startswith("\\\\")):
+            return False
+        return not _windows_action_path_exists(cmd)
+    except Exception:
+        return False
+
+
+def _daemon_resurrection_blocked():
+    """THE shared #59/#107 refusal gate for every daemon heal/revive path.
+
+    #107: the individual heal entry points each grew their own
+    subset of these checks, and the ones that forgot (the second
+    ``_heal_windows_task_action`` call site inside ``_restart_dashboard_daemon``,
+    the ensure-health auto-update block) became resurrection doors for daemons
+    the user turned off. One helper, checked by every path that could
+    (re)start a daemon, so no future call site can bypass a gate by accident.
+
+    Returns the blocking reason (``"tombstoned"`` | ``"disabled"`` |
+    ``"install-failed"``) or None when the action may proceed. The tombstone
+    stat fails open (matching ``_daemon_install_failed_marker_present``: an
+    unreadable state dir is not evidence of intent). Never raises.
+    """
+    try:
+        if os.path.exists(str(DAEMON_THRASH_BREADCRUMB)):
+            return "tombstoned"
+    except OSError:
+        pass
+    if _read_config_flag("daemon_disabled", False):
+        return "disabled"
+    if _daemon_install_failed_marker_present():
+        return "install-failed"
+    return None
+
+
+def _heal_windows_task_action(stop_first=False, throttle=False):
+    """issue #107 one-shot migration: lift an already-registered Scheduled Task
+    off a console action (the .cmd launcher, or a bare py.exe/python.exe) onto
+    the GUI-subsystem pythonw.exe action.
+
+    Without this, only NEW installs get the fix. Every existing Windows user
+    keeps the console action forever, because the auto-update path refreshes
+    ``dashboard-server.py`` and then merely ``/End`` + ``/Run``s the task that is
+    already registered -- it never re-writes the task definition.
+
+    Deliberately narrow, because re-registering a scheduled task is not free:
+      * Windows only, and only when a usable pythonw twin actually exists --
+        there is nothing better to migrate TO otherwise.
+      * Only when the task EXISTS and its action is positively identified as a
+        console flasher. An absent task is left absent (#59).
+      * Re-registers through ``_install_task_scheduler_daemon``, the same code
+        path a fresh install uses, so heal and install can never drift.
+      * Preserves the user's persisted bind host (``persist=False`` reads the
+        env > file > default chain WITHOUT writing), so a migration cannot
+        silently move a deliberately network-exposed daemon back to loopback.
+
+    ``stop_first``: ``_install_task_scheduler_daemon`` refuses to install while
+    something holds DAEMON_PORT, and a running daemon is exactly that. Callers
+    that have already stopped the task (``_restart_dashboard_daemon``, between
+    its /End and /Run) pass False. The ensure-health entry point passes True.
+    On failure the restoring ``/Run`` fires from a ``finally`` (an
+    installer that RAISES must not strand the daemon) -- but ONLY when the
+    still-registered action is neither a console flasher nor a dead path
+    (/Run-ing a .cmd action IS one extra console flash per session,
+    the exact bug #107 set out to remove; the LogonTrigger revives the daemon
+    at next logon instead).
+
+    ``throttle``: the ensure-health path passes True so a persistently-failing
+    heal attempts at most once per ensure-throttle window (24h) instead of
+    /End-ing the live daemon + sleeping 2s on every SessionStart. The
+    restart-path caller passes False -- it is already bounded by its own
+    throttles and runs with the port freed.
+
+    Returns True only when the re-registration succeeded. Never raises.
+    """
+    try:
+        if os.name != "nt":
+            return False
+        # UNIFIED GATE (#107): the #59 refusal gates live HERE,
+        # inside the primitive, so BOTH call sites (ensure-health heal and
+        # _restart_dashboard_daemon's /End->/Run window) and any future one
+        # are gated by construction.
+        if _daemon_resurrection_blocked() is not None:
+            return False
+        command, task_enabled = _windows_task_action_info()
+        if command is None:
+            return False  # no task -> nothing to heal, and nothing to create
+        if task_enabled is False:
+            # #59: the user DISABLED our task -- the natural Windows
+            # "off without uninstalling". Same posture as the tombstone:
+            # leave it alone; never re-register it <Enabled>true</Enabled>.
+            return False
+        flasher = _windows_action_is_console_flasher(command)
+        dead = _windows_action_is_dead_path(command)
+        if not flasher and not dead:
+            return False  # already hidden and alive; idempotent no-op
+        if flasher and not dead and not _windows_gui_python():
+            return False  # nothing better to migrate TO (a DEAD action is
+            # always worth re-registering: the .cmd fallback beats a daemon
+            # that can never start again)
+        if throttle:
+            # A heal that keeps failing (policy-blocked /Create,
+            # foreign process on the port) must not bounce the daemon every
+            # SessionStart. Stamp BEFORE the attempt, mirroring the ensure
+            # throttle; a SUCCESSFUL heal makes the next classify a no-op
+            # above, so the stamp never delays healthy behaviour.
+            try:
+                last = _read_config_flag("last_daemon_flash_heal_attempt", 0)
+                if (time.time() - float(last or 0)
+                        < _daemon_ensure_throttle_seconds()):
+                    return False
+            except (TypeError, ValueError):
+                pass
+            try:
+                _write_config_flag(
+                    "last_daemon_flash_heal_attempt", int(time.time()))
+            except Exception:
+                pass
+        if stop_first:
+            try:
+                subprocess.run(
+                    ["schtasks", "/End", "/TN", WINDOWS_TASK_NAME],
+                    capture_output=True, timeout=5, creationflags=_NO_WINDOW,
+                )
+                time.sleep(2)  # let the daemon release DAEMON_PORT
+            except (OSError, subprocess.SubprocessError):
+                pass
+        ok = False
+        try:
+            host = _persist_dashboard_host(persist=False)
+            ok = bool(_install_task_scheduler_daemon(
+                soft_fail=True, effective_host=host))
+        finally:
+            if not ok and stop_first:
+                # We stopped a working daemon and failed to re-register it
+                # (returned False OR raised -- hence the finally).
+                # Put it back ONLY if firing it cannot flash: re-read the
+                # action and refuse to /Run a still-flasher or dead command.
+                try:
+                    _current, _en = _windows_task_action_info()
+                    if (_current is not None
+                            and not _windows_action_is_console_flasher(_current)
+                            and not _windows_action_is_dead_path(_current)):
+                        subprocess.run(
+                            ["schtasks", "/Run", "/TN", WINDOWS_TASK_NAME],
+                            capture_output=True, timeout=5,
+                            creationflags=_NO_WINDOW,
+                        )
+                except (OSError, subprocess.SubprocessError):
+                    pass
+        return ok
+    except Exception:
+        return False
+
+
+def _legacy_daemon_dir():
+    """Pre-plugin-data-migration daemon dir (the auto-update block writes the
+    refreshed ``dashboard-server.py`` here too). Behind a helper so tests can
+    pin it into a sandbox -- RUNTIME_DIR is NOT covered by the
+    TOKEN_OPTIMIZER_SNAPSHOT_DIR override."""
+    return RUNTIME_DIR / "_backups" / "token-optimizer"
+
+
+def _heal_one_launcher_shim(launcher, daemon_script):
+    """Rewrite ONE existing launcher shim to today's generated content.
+
+    Shared mechanics for both shim locations: byte-compare, link-safety
+    refusal, atomic mkstemp+os.replace. Returns True when the file was
+    rewritten. Never raises past its caller's guard.
+    """
+    if not launcher.is_file():
+        return False
+    # BYTES on both sides. The shim is explicitly CRLF, and text-mode I/O
+    # rewrites line endings in both directions (universal-newlines on read,
+    # os.linesep on write), so a text comparison would never match and this
+    # would rewrite the file on every single ensure-health.
+    desired = _generate_windows_launcher_cmd(
+        str(daemon_script), str(DAEMON_LOG_DIR)).encode("utf-8")
+    if launcher.read_bytes() == desired:
+        return False
+    # Link-safety: refuse to write through a symlink or a
+    # hardlinked name -- a planted link would turn this rewrite into an
+    # arbitrary-file overwrite with known content (Windows hardlinks need
+    # no privilege at all).
+    if launcher.is_symlink():
+        return False
+    if os.lstat(str(launcher)).st_nlink > 1:
+        return False
+    # The regenerated ladder redirects into DAEMON_LOG_DIR; a legacy-era shim
+    # may predate that dir, and a missing redirect target fails the rung.
+    try:
+        DAEMON_LOG_DIR.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass
+    # Atomic replace (the _heal_keepwarm_plist_path pattern): a crash
+    # mid-write must not leave a truncated .cmd that Task Scheduler would
+    # still execute, and cmd.exe must never resume reading a half-written
+    # batch file at its saved byte offset.
+    fd, tmp = tempfile.mkstemp(prefix=".dashboard-launcher.",
+                               suffix=".tmp", dir=str(launcher.parent))
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(desired)
+        os.replace(tmp, str(launcher))
+        tmp = None
+    finally:
+        if tmp is not None:
+            try:
+                os.unlink(tmp)
+            except OSError:
+                pass
+    return True
+
+
+def _heal_windows_launcher_shim():
+    """Rewrite an on-disk ``dashboard-launcher.cmd`` left by an older build.
+
+    The shim generated before #107 tried console ``py.exe -3`` FIRST and probed
+    with three ``where.exe`` calls, so on any host with the Python Launcher
+    installed the long-lived daemon itself ran as a console process. Even where
+    the shim is only the fallback action, an installed copy keeps that shape
+    until something rewrites it.
+
+    #107: BOTH shim locations are healed -- the plugin-data
+    SNAPSHOT_DIR and the legacy pre-migration dir
+    (``~/.claude/_backups/token-optimizer``). The auto-update block already
+    knows about both paths for ``dashboard-server.py``; users whose Scheduled
+    Task action still points at the LEGACY .cmd would otherwise keep the
+    console-first ladder forever. Each shim is regenerated against its own
+    directory's daemon script so the legacy action keeps launching the legacy
+    (auto-update-refreshed) script.
+
+    Only touches files that ALREADY EXIST (never creates one -- that would be
+    half-installing a daemon the user may have declined), and only when the
+    content differs from what we would generate today, which makes it a no-op
+    on the second run. Returns True when anything was rewritten. Never raises.
+    """
+    healed_any = False
+    if os.name != "nt":
+        return False
+    for base_dir in (SNAPSHOT_DIR, _legacy_daemon_dir()):
+        try:
+            launcher = base_dir / WINDOWS_LAUNCHER_NAME
+            daemon_script = base_dir / "dashboard-server.py"
+            if _heal_one_launcher_shim(launcher, daemon_script):
+                healed_any = True
+        except OSError:
+            continue
+        except Exception:
+            continue
+    return healed_any
+
+
+def _heal_windows_console_flash():
+    """issue #107 runtime self-heal: repair already-installed Windows artifacts
+    that flash a console window.
+
+    A generator fix only helps the NEXT install. The reporter already has the
+    flashing task and shim on disk, and nothing in the update path rewrites
+    either -- the auto-update block refreshes ``dashboard-server.py`` and
+    restarts the task it finds. This is the migration that reaches the installed
+    base, and it is modelled on ``_heal_keepwarm_plist_path`` /
+    ``_migrate_statusline_to_stable_path``: best-effort, fail-open, called once
+    per ensure-health.
+
+    Repairs, in order:
+      (a) the on-disk ``dashboard-launcher.cmd`` shim (console-first interpreter
+          ladder + where.exe probes), and
+      (b) the Scheduled Task action, onto hidden pythonw.exe -- via the same
+          generation code a fresh install uses, so heal and install cannot drift.
+
+    Refusal gates, checked FIRST, so a heal can never resurrect something the
+    user turned off:
+      * not Windows -> strict no-op (macOS/Linux never reach schtasks);
+      * ``_daemon_resurrection_blocked()`` -- THE shared #59/#107 gate
+        (uninstall/thrash tombstone, sticky ``daemon_disabled`` opt-out,
+        sticky ``.daemon-install-failed`` marker). The task heal re-checks the
+        same gate internally (plus the task's own user-set ``<Enabled>``
+        state), so its other call sites are equally safe.
+
+    IDEMPOTENT: both steps compare against the value they would write and return
+    False when it already matches, so a second run does nothing and the printed
+    line appears exactly once. The task heal is additionally THROTTLED
+    (``throttle=True``): a persistently-failing re-registration attempts at
+    most once per ensure-throttle window instead of bouncing the live daemon
+    on every SessionStart (#107).
+
+    Returns True when anything was actually repaired. Never raises.
+    """
+    if os.name != "nt":
+        return False
+    if _daemon_resurrection_blocked() is not None:
+        return False
+    healed_shim = _heal_windows_launcher_shim()
+    healed_task = _heal_windows_task_action(stop_first=True, throttle=True)
+    return bool(healed_shim or healed_task)
 
 
 def _restart_dashboard_daemon(system):
@@ -21700,28 +23676,36 @@ def _restart_dashboard_daemon(system):
         except Exception:
             pass
 
+        _run_result = None  # Windows-only landing signal (schtasks /Run rc)
         if system == "Darwin":
             uid = subprocess.run(
-                ["id", "-u"], capture_output=True, text=True
+                ["id", "-u"], capture_output=True, text=True, creationflags=_NO_WINDOW
             ).stdout.strip()
             subprocess.run(
                 ["launchctl", "kickstart", "-k", f"gui/{uid}/{DAEMON_LABEL}"],
-                capture_output=True, timeout=5,
+                capture_output=True, timeout=5, creationflags=_NO_WINDOW,
             )
         elif system == "Linux":
             subprocess.run(
                 ["systemctl", "--user", "restart", SYSTEMD_UNIT_NAME],
-                capture_output=True, timeout=10,
+                capture_output=True, timeout=10, creationflags=_NO_WINDOW,
             )
         elif system == "Windows":
             subprocess.run(
                 ["schtasks", "/End", "/TN", WINDOWS_TASK_NAME],
-                capture_output=True, timeout=5,
+                capture_output=True, timeout=5, creationflags=_NO_WINDOW,
             )
             time.sleep(2)
-            subprocess.run(
+            # issue #107: an install registered by an older build still has the
+            # .cmd launcher as its task ACTION, and End/Run just re-runs whatever
+            # is registered -- so the console flash would survive every update
+            # for the entire installed base. Migrate the action here, between
+            # /End and /Run: the task is stopped, so the port is free and the
+            # re-registration's port-owner pre-check can pass.
+            _heal_windows_task_action()
+            _run_result = subprocess.run(
                 ["schtasks", "/Run", "/TN", WINDOWS_TASK_NAME],
-                capture_output=True, timeout=5,
+                capture_output=True, timeout=5, creationflags=_NO_WINDOW,
             )
         else:
             return "restart-failed"
@@ -21733,6 +23717,17 @@ def _restart_dashboard_daemon(system):
         served = _daemon_served_version()
         if served is not None and served != TOKEN_OPTIMIZER_VERSION:
             return "restart-stale"
+        # #107: a nonzero `schtasks /Run` with nothing
+        # serving the port is a DEMONSTRABLY failed restart (e.g. a disabled
+        # task, or an action whose baked interpreter path went dead). The
+        # None-version safe-degrade above must not convert that into a false
+        # "restarted" -- that is how a permanently-dead daemon stayed green.
+        if (_run_result is not None
+                and getattr(_run_result, "returncode", 0) != 0
+                and served is None
+                and not _verify_daemon_port(
+                    timeout_seconds=1, retries=1, retry_sleep=0)):
+            return "restart-failed"
         return "restarted"
     except Exception:
         return "restart-failed"
@@ -22021,6 +24016,49 @@ def _extract_user_text(record):
 def _read_stdin_hook_input(max_bytes=65536):
     """Thin wrapper: measure.py callers default to 64KB (PreToolUse payloads)."""
     return _read_stdin_hook_input_shared(max_bytes)
+
+
+def _read_windows_stdin_bytes(max_bytes):
+    """Return bytes already buffered in a Windows stdin pipe, never waiting."""
+    try:
+        import ctypes
+        import msvcrt
+
+        stream = getattr(sys.stdin, "buffer", sys.stdin)
+        fd = stream.fileno()
+        available = ctypes.c_ulong()
+        handle = msvcrt.get_osfhandle(fd)
+        ok = ctypes.windll.kernel32.PeekNamedPipe(
+            handle, None, 0, None, ctypes.byref(available), None
+        )
+        if not ok or not available.value:
+            return b""
+        return os.read(fd, min(max_bytes, available.value))
+    except (AttributeError, ImportError, OSError, ValueError):
+        return b""
+
+
+def _read_throttle_only_hook_input():
+    """Read throttle metadata without risking a Windows open-pipe wait."""
+    if os.name == "nt":
+        try:
+            raw = _read_windows_stdin_bytes(1_000_000)
+            return json.loads(raw.decode("utf-8")) if raw else {}
+        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
+            return {}
+    return _read_stdin_hook_input(max_bytes=1_000_000)
+
+
+def _quality_cache_throttle_only_state(throttle, force):
+    """Return hook metadata and whether the throttle-only CLI tick is due."""
+    payload = _read_throttle_only_hook_input()
+    if force:
+        return payload, True
+    return payload, _quality_cache_tick_due(
+        throttle,
+        payload.get("transcript_path"),
+        payload.get("session_id"),
+    )
 
 
 def _parse_jsonl_for_quality(filepath):
@@ -22798,6 +24836,20 @@ def _find_current_session_jsonl():
     recently modified JSONL is almost always the currently active session.
     """
     if _use_codex_session_adapter():
+        # Deterministic resolution (issue #108): prefer the state-DB-resolved
+        # active thread id over the mtime guess. `find_current_session_jsonl`
+        # picks the globally most-recently-modified JSONL, which can select an
+        # older session when several are open. Keying off the resolved current
+        # thread id makes `quality current` pick the live session. Fail-open:
+        # any error or miss falls back to the legacy mtime resolver.
+        try:
+            current_tid = codex_state.current_thread_id()
+        except Exception:
+            current_tid = None
+        if current_tid:
+            resolved = codex_session.find_session_jsonl_by_id(current_tid)
+            if resolved:
+                return resolved
         return codex_session.find_current_session_jsonl()
 
     # Hermes: no ~/.claude/projects JSONL to scan (sessions live in state.db).
@@ -25565,8 +27617,8 @@ def _capture_git_state(cwd=None):
         kw = {"capture_output": True, "text": True, "timeout": 2}
         if cwd:
             kw["cwd"] = cwd
-        br = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], **kw)
-        sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], **kw)
+        br = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], **kw, creationflags=_NO_WINDOW)
+        sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], **kw, creationflags=_NO_WINDOW)
         if br.returncode == 0 and sha.returncode == 0:
             return br.stdout.strip() or None, sha.stdout.strip() or None
     except Exception:
@@ -25886,7 +27938,7 @@ _CHECKPOINT_RECOVERY_TOKEN_CAP = 200_000
 
 
 def _checkpoint_restore_recovery_tokens(sid_safe, floor_tokens):
-    """Avoided-reconstruction tokens credited for a checkpoint restore (U-B).
+    """Avoided-reconstruction tokens credited for a checkpoint restore.
 
     The old proxy credited the COMPRESSED checkpoint's byte size, which badly
     under-counts the value: a restore lets the resumed session skip re-reading
@@ -25925,7 +27977,7 @@ def _neutralize_recovered_body(text, limit=4000):
     if not text:
         return ""
     # Strip C0 control chars except tab/newline (keep body structure readable).
-    text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", " ", text)
+    text = re.sub(r"[\x00-\x08\x0b\x0c\x0d\x0e-\x1f\x7f]", " ", text)
     # Defang forged open/close sentinels: "[RECOVERED", "[/RECOVERED",
     # "[ RECOVERED DATA ...]" -> swap the leading bracket so it can't mimic ours.
     text = re.sub(r"\[(\s*/?\s*RECOVERED\b)", r"(\1", text, flags=re.IGNORECASE)
@@ -26109,7 +28161,7 @@ def compact_restore(session_id=None, cwd=None, is_compact=False, new_session_onl
             _print_intel_digest(sid_safe)
             # Log savings: credit the avoided reconstruction (the active working
             # set the resume skips re-reading), floored at the legacy
-            # checkpoint-file-size estimate so we never regress (U-B).
+            # checkpoint-file-size estimate so we never regress.
             try:
                 cp_size = best_cp["path"].stat().st_size
                 # Calibrated floor (U-F: ~3.3 chars/tok), consistent with the TS
@@ -26372,6 +28424,177 @@ def _checkpoint_in_project(sidecar, cwd):
     return False
 
 
+# Tokenizer for the per-item keep/drop rule. SAME regex as the resume-topic
+# tokenizer (measure.py:26336 / :27438) so a decision/file naming the current
+# project overlaps the keep set on identical token boundaries across runtimes.
+_RECOVER_TOKEN_RE = re.compile(r"[a-zA-Z0-9_./:-]+")
+
+
+def _recover_item_tokens(text):
+    """Distinctive tokens of a recovered item for the set-overlap keep/drop rule.
+
+    Regex ``[a-zA-Z0-9_./:-]+``, lowercased, len > 3, minus
+    ``_RESUME_TOPIC_STOPWORDS`` and ``_CONTINUATION_WORDS``. Identical extraction
+    to the resume-topic tokenizer so keep/drop parity holds across runtimes on
+    shared token inputs (no float threshold).
+    """
+    _stop = _RESUME_TOPIC_STOPWORDS | _CONTINUATION_WORDS
+    return {
+        w for w in _RECOVER_TOKEN_RE.findall(str(text or "").lower())
+        if len(w) > 3 and w not in _stop
+    }
+
+
+def _keep_recovered_item(item_text, keep_tokens):
+    """Set-overlap keep/drop rule for a single recovered item (GitHub #103).
+
+    KEEP iff the item has < 3 distinctive tokens (inconclusive -> keep) OR its
+    token set has nonempty intersection with ``keep_tokens``. DROP iff it has
+    >= 3 distinctive tokens AND zero overlap. No float threshold: a
+    cross-project decision that also names the current project overlaps and is
+    kept; a decision naming only the OTHER project drops.
+    """
+    item_tokens = _recover_item_tokens(item_text)
+    if len(item_tokens) < 3:
+        return True
+    return bool(item_tokens & keep_tokens)
+
+
+def _cwd_roots(cwd):
+    """Normalized candidate roots for a cwd (resolved + raw, casefolded on
+    case-insensitive filesystems). Shared by the in-project path filter so the
+    per-item keep set is built from the SAME paths ``_checkpoint_in_project``
+    would accept."""
+    if not cwd:
+        return set()
+    _case_insensitive = platform.system() in ("Windows", "Darwin")
+
+    def _norm(p):
+        s = str(p).replace("\\", "/").rstrip("/")
+        return s.casefold() if _case_insensitive else s
+
+    roots = set()
+    try:
+        roots.add(_norm(Path(cwd).resolve()))
+    except (OSError, RuntimeError, ValueError):
+        pass
+    roots.add(_norm(cwd))
+    return {r for r in roots if r}
+
+
+def _path_under_cwd(p, cwd):
+    """True when path ``p`` is the cwd or lives under it (normalized)."""
+    roots = _cwd_roots(cwd)
+    if not roots or not p:
+        return False
+    _case_insensitive = platform.system() in ("Windows", "Darwin")
+
+    def _norm(x):
+        s = str(x).replace("\\", "/").rstrip("/")
+        return s.casefold() if _case_insensitive else s
+
+    np = _norm(p)
+    return any(np == r or np.startswith(r + "/") for r in roots)
+
+
+def _is_absolute_path(p):
+    """True when ``p`` is an attributable absolute path (unix ``/`` or a
+    Windows drive root). Backslashes are normalized to forward slashes so
+    Windows paths are recognized on any host. A relative path or bare
+    basename is NOT attributable to a specific project, so it falls through
+    to the token-overlap rule instead of being path-dropped."""
+    s = str(p).replace("\\", "/").strip()
+    if not s:
+        return False
+    return s.startswith("/") or bool(re.match(r"[A-Za-z]:/", s))
+
+
+def _cross_project_file_drop(p, cwd):
+    """True when file path ``p`` is an attributable absolute path that does
+    NOT live under ``cwd`` — a cross-project file (GitHub #103).
+
+    The set-overlap tokenizer treats a full path as a SINGLE token (the
+    regex ``[a-zA-Z0-9_./:-]+`` includes slashes), so it has < 3 distinctive
+    tokens and would ALWAYS be kept by ``_keep_recovered_item``. That let
+    project-A file paths render into a project-B hint under a disclosure
+    claiming it was scoped. This rule drops such paths at the file-filter
+    sites regardless of token overlap, using the EXISTING ``_path_under_cwd``
+    prefix check. Relative/basename paths are not attributable to a specific
+    project and fall through to the token-overlap rule. ``cwd`` absent ->
+    never drop (legacy callers stay unfiltered)."""
+    if not cwd or not p:
+        return False
+    return _is_absolute_path(p) and not _path_under_cwd(p, cwd)
+
+
+def _checkpoint_has_cross_project_path(sidecar, cwd):
+    """True when the checkpoint sidecar carries at least one attributable
+    absolute file path that is NOT under ``cwd`` — the checkpoint genuinely
+    spans multiple projects (GitHub #103).
+
+    DECISION filtering is gated on this: a single-project checkpoint (every
+    attributable path in-project, or no attributable paths) has nothing to
+    scope, so its decisions are kept verbatim even when they name no project
+    token (e.g. "Switched from REST polling to websocket push"). Without this
+    gate the token-overlap rule over-prunes generic technical decisions and
+    mislabels them "different project". ``cwd`` absent -> never multi-project
+    (legacy callers stay unfiltered)."""
+    if not isinstance(sidecar, dict) or not cwd:
+        return False
+    candidates = []
+    mod = sidecar.get("modified_files")
+    if isinstance(mod, list):
+        for item in mod:
+            p = item.get("path") if isinstance(item, dict) else item
+            if p:
+                candidates.append(str(p))
+    reads = sidecar.get("recent_reads")
+    if isinstance(reads, list):
+        for p in reads:
+            if p:
+                candidates.append(str(p))
+    return any(_cross_project_file_drop(p, cwd) for p in candidates)
+
+
+def _in_project_paths(sidecar, cwd):
+    """The KEPT in-project paths from a checkpoint sidecar (modified_files +
+    recent_reads that live under cwd). These seed the keep-token set so a
+    decision/file naming the current project survives the filter."""
+    if not isinstance(sidecar, dict) or not cwd:
+        return []
+    paths = []
+    mod = sidecar.get("modified_files")
+    if isinstance(mod, list):
+        for item in mod:
+            p = item.get("path") if isinstance(item, dict) else item
+            if p and _path_under_cwd(p, cwd):
+                paths.append(str(p))
+    reads = sidecar.get("recent_reads")
+    if isinstance(reads, list):
+        for p in reads:
+            if p and _path_under_cwd(p, cwd):
+                paths.append(str(p))
+    return paths
+
+
+def _continuity_keep_tokens(prompt_text, cwd, in_project_paths):
+    """Build the keep-token set for per-item relevance filtering (GitHub #103).
+
+    = prompt topic tokens (same extraction as ``_recover_item_tokens``)
+      ∪ tokens of the cwd basename
+      ∪ tokens of the basenames AND stems of the KEPT in-project paths.
+    """
+    keep = set(_recover_item_tokens(prompt_text))
+    if cwd:
+        keep |= _recover_item_tokens(Path(cwd).name)
+    for p in in_project_paths:
+        name = Path(str(p)).name
+        stem = Path(str(p)).stem
+        keep |= _recover_item_tokens(name)
+        keep |= _recover_item_tokens(stem)
+    return keep
+
+
 def _continuity_resume_block(text, checkpoints, sid_safe, cwd):
     """When the user asks to continue prior work, return a FULL lean
     reconstruction of the right same-project session, or "" to fall through to
@@ -26412,7 +28635,7 @@ def _continuity_resume_block(text, checkpoints, sid_safe, cwd):
         sid = m.group(1) if m else None
     if not sid:
         return ""
-    block = build_lean_resume_context(sid)
+    block = build_lean_resume_context(sid, prompt_text=text, cwd=cwd)
     if block:
         # Count the cold-resume cost this lean reconstruction avoided (idempotent
         # per target session). Token-free; never blocks the injection.
@@ -26613,20 +28836,69 @@ def _continuity_prompt_hint(prompt_text="", session_id=None, cwd=None, max_age_m
             f"- Prior context quality: {quality.get('grade', '?')} "
             f"({quality.get('score', '?')}/100), fill {quality.get('breakdown', {}).get('context_fill_degradation', {}).get('fill_pct', '?')}%"
         )
+    # Per-item relevance filter (GitHub #103): a checkpoint that passed the
+    # same-project gate may still carry session-wide Key Decisions / Files that
+    # name ONLY the other project in a two-project session. Drop those with the
+    # set-overlap rule (no float threshold): filter FIRST, then apply the
+    # existing [:3]/[:5] slices. Disclosure counts = filter drops ONLY, never
+    # slice truncation. Kept items pass through byte-for-byte (no redacting of a
+    # dropped path named inside a kept decision -- cascading drops is the
+    # over-prune failure mode, forbidden).
+    # Gated on the prompt+cwd sentinel (matches build_lean_resume_context): a
+    # legacy caller with cwd absent gets the UNFILTERED hint with NO fabricated
+    # disclosure (GitHub #103 #6). The hint surface previously computed
+    # keep_tokens unconditionally, so cwd=None callers were token-filtered on
+    # prompt text alone and got a misleading "scoped to current project" line.
+    keep_tokens = (
+        _continuity_keep_tokens(text, cwd, _in_project_paths(sidecar, cwd))
+        if (text and cwd) else None
+    )
+    # Decision filtering is gated on checkpoint mixture (GitHub #103): a
+    # single-project checkpoint has nothing to scope, so its decisions are
+    # kept verbatim even when they name no project token. Only a checkpoint
+    # that genuinely spans projects (>= 1 attributable path outside cwd) gets
+    # its decisions token-filtered.
+    _multi_project = _checkpoint_has_cross_project_path(sidecar, cwd)
+    dropped_decisions = 0
     if decisions:
-        safe_decisions = [_safe_recovered_scalar(d, 120) for d in decisions[:3]]
-        lines.append("- Decisions: " + "; ".join(repr(d) for d in safe_decisions if d))
+        if keep_tokens is not None and _multi_project:
+            kept_decisions = [d for d in decisions if _keep_recovered_item(d, keep_tokens)]
+            dropped_decisions = len(decisions) - len(kept_decisions)
+        else:
+            kept_decisions = list(decisions)
+        safe_decisions = [_safe_recovered_scalar(d, 120) for d in kept_decisions[:3]]
+        if safe_decisions:
+            lines.append("- Decisions: " + "; ".join(repr(d) for d in safe_decisions if d))
     hinted_paths = []
+    dropped_files = 0
     if modified:
-        paths = []
-        for item in modified[:5]:
-            if isinstance(item, dict):
-                p = str(item.get("path") or "")
-                paths.append(p)
-                if p:
-                    hinted_paths.append(p)
+        kept_paths = []
+        for item in modified:
+            if not isinstance(item, dict):
+                continue
+            p = str(item.get("path") or "")
+            if p and _cross_project_file_drop(p, cwd):
+                dropped_files += 1
+                continue
+            if keep_tokens is not None and p and not _keep_recovered_item(p, keep_tokens):
+                dropped_files += 1
+                continue
+            kept_paths.append(p)
+        paths = kept_paths[:5]
+        for p in paths:
+            if p:
+                hinted_paths.append(p)
         if paths:
             lines.append("- Files: " + ", ".join(repr(_safe_recovered_scalar(p, 140)) for p in paths))
+    # Exactly ONE disclosure line, only when something was dropped. Zero-count
+    # categories are elided. Identical wording across all three runtimes.
+    if dropped_decisions > 0 or dropped_files > 0:
+        _disc = []
+        if dropped_decisions > 0:
+            _disc.append(f"{dropped_decisions} decision(s)")
+        if dropped_files > 0:
+            _disc.append(f"{dropped_files} file(s)")
+        lines.append("- Omitted (scoped to current project): " + ", ".join(_disc))
     if archives:
         summary = []
         for entry in archives[-3:]:
@@ -26821,20 +29093,35 @@ def resume_lean_candidates(limit=15, days=30):
     return out
 
 
-def _lean_list(items, n, width=140):
+def _lean_list(items, n, width=140, keep_tokens=None):
     """Sanitize + cap a list of recovered strings for injection. Tolerates a
-    corrupt/hand-edited sidecar where the field is not a list."""
+    corrupt/hand-edited sidecar where the field is not a list.
+
+    When ``keep_tokens`` is provided, the set-overlap keep/drop filter
+    (``_keep_recovered_item``) is applied FIRST and the ``n`` slice is taken
+    from the survivors (GitHub #103). When ``keep_tokens`` is None the behavior
+    is byte-identical to the pre-filter implementation (first ``n`` items)."""
     if not isinstance(items, (list, tuple)):
         return []
     cleaned = []
-    for item in items[:n]:
+    if keep_tokens is None:
+        for item in items[:n]:
+            s = _safe_recovered_scalar(item, width)
+            if s:
+                cleaned.append(s)
+        return cleaned
+    for item in items:
+        if not _keep_recovered_item(item, keep_tokens):
+            continue
         s = _safe_recovered_scalar(item, width)
         if s:
             cleaned.append(s)
+        if len(cleaned) >= n:
+            break
     return cleaned
 
 
-def build_lean_resume_context(session_id, max_chars=3500):
+def build_lean_resume_context(session_id, max_chars=3500, prompt_text=None, cwd=None):
     """Reconstruct a LEAN, paste-ready context block for a cold session.
 
     Faithful tier (checkpoint present): active task, continuation/handover, open
@@ -26843,6 +29130,12 @@ def build_lean_resume_context(session_id, max_chars=3500):
     Token-free: only reads the sidecar JSON and session_log. Returns "" if the
     session is unknown. Fenced as RECOVERED DATA so a fresh session treats it as
     context, never instructions.
+
+    When ``prompt_text`` and ``cwd`` are both supplied, the per-item relevance
+    filter (GitHub #103) drops Key Decisions / Modified files / Recently read
+    that name only a DIFFERENT project from this same checkpoint, and emits one
+    disclosure line when anything is dropped. Without them (e.g. the CLI
+    ``--resume-lean`` caller) the block is unfiltered for backward compat.
     """
     sid_safe = sanitize_session_id(session_id) if session_id else None
     if not sid_safe:
@@ -26853,6 +29146,10 @@ def build_lean_resume_context(session_id, max_chars=3500):
         return ""
 
     sidecar = _read_checkpoint_sidecar(cp["path"]) if cp else {}
+    keep_tokens = (
+        _continuity_keep_tokens(prompt_text, cwd, _in_project_paths(sidecar, cwd))
+        if (prompt_text and cwd) else None
+    )
     # topic + project come from session_log / sidecar (attacker-influenceable prior
     # conversation text); route BOTH through _safe_recovered_scalar so control
     # chars / null bytes / fence-breakout tokens can't escape the RECOVERED-DATA
@@ -26883,21 +29180,60 @@ def build_lean_resume_context(session_id, max_chars=3500):
         oq = _lean_list(sidecar.get("open_questions", []), 3)
         if oq:
             body.append("- Open questions: " + "; ".join(repr(q) for q in oq))
-        dec = _lean_list(sidecar.get("decisions", []), 4, width=120)
+        # Per-item relevance filter (GitHub #103): filter FIRST, then slice.
+        # Disclosure counts = filter drops ONLY, never slice truncation.
+        # Decision filtering is gated on checkpoint mixture: a single-project
+        # checkpoint has nothing to scope, so its decisions are kept verbatim.
+        dropped_decisions = 0
+        raw_decisions = sidecar.get("decisions", [])
+        _multi_project = _checkpoint_has_cross_project_path(sidecar, cwd)
+        if keep_tokens is not None and _multi_project and isinstance(raw_decisions, (list, tuple)):
+            kept_decisions = [d for d in raw_decisions if _keep_recovered_item(d, keep_tokens)]
+            dropped_decisions = len(raw_decisions) - len(kept_decisions)
+            dec = _lean_list(kept_decisions, 4, width=120)
+        else:
+            dec = _lean_list(raw_decisions, 4, width=120)
         if dec:
             body.append("- Key decisions: " + "; ".join(repr(d) for d in dec))
         mod_paths = []
         mod_raw = sidecar.get("modified_files")
         if not isinstance(mod_raw, (list, tuple)):
             mod_raw = []
-        for item in mod_raw[:6]:
+        dropped_mod = 0
+        kept_mod = []
+        for item in mod_raw:
             p = item.get("path") if isinstance(item, dict) else item
-            p = _safe_recovered_scalar(p, 140)
-            if p:
-                mod_paths.append(p)
+            ps = str(p) if p is not None else ""
+            if keep_tokens is not None and ps and _cross_project_file_drop(ps, cwd):
+                dropped_mod += 1
+                continue
+            if keep_tokens is not None and ps and not _keep_recovered_item(ps, keep_tokens):
+                dropped_mod += 1
+                continue
+            kept_mod.append(p)
+        for p in kept_mod[:6]:
+            sp = _safe_recovered_scalar(p, 140)
+            if sp:
+                mod_paths.append(sp)
         if mod_paths:
             body.append("- Modified files: " + ", ".join(repr(p) for p in mod_paths))
-        reads = _lean_list(sidecar.get("recent_reads", []), 5, width=140)
+        dropped_reads = 0
+        raw_reads = sidecar.get("recent_reads", [])
+        if not isinstance(raw_reads, (list, tuple)):
+            raw_reads = []
+        if keep_tokens is not None:
+            kept_reads = []
+            for r in raw_reads:
+                rs = str(r) if r is not None else ""
+                if rs and _cross_project_file_drop(rs, cwd):
+                    continue
+                if not _keep_recovered_item(r, keep_tokens):
+                    continue
+                kept_reads.append(r)
+            dropped_reads = len(raw_reads) - len(kept_reads)
+            reads = _lean_list(kept_reads, 5, width=140)
+        else:
+            reads = _lean_list(raw_reads, 5, width=140)
         if reads:
             body.append("- Recently read: " + ", ".join(repr(p) for p in reads))
         git = sidecar.get("git") if isinstance(sidecar.get("git"), dict) else {}
@@ -26909,6 +29245,19 @@ def build_lean_resume_context(session_id, max_chars=3500):
         q = sidecar.get("quality") if isinstance(sidecar.get("quality"), dict) else {}
         if q.get("grade") is not None:
             body.append(f"- Prior context quality: {q.get('grade')} ({q.get('score')}/100)")
+        # Exactly ONE disclosure line, only when something was dropped. {F} =
+        # dropped Modified files + Recently read combined; zero-count categories
+        # elided. Identical wording across all three runtimes.
+        if keep_tokens is not None:
+            _d_dec = dropped_decisions
+            _d_files = dropped_mod + dropped_reads
+            if _d_dec > 0 or _d_files > 0:
+                _disc = []
+                if _d_dec > 0:
+                    _disc.append(f"{_d_dec} decision(s)")
+                if _d_files > 0:
+                    _disc.append(f"{_d_files} file(s)")
+                body.append("- Omitted (scoped to current project): " + ", ".join(_disc))
     else:
         # Thin tier: no checkpoint survived retention; session_log stats only.
         body.append("- (thin reconstruction - checkpoint aged out; only session "
@@ -27655,6 +30004,8 @@ def _safe_checkpoint_file(cp_path):
 def _is_running_from_plugin_cache():
     """Check if this script is running from a Claude Code plugin cache directory."""
     resolved = str(Path(__file__).resolve())
+    if os.name == "nt":
+        resolved = resolved.replace("\\", "/")
     return "/plugins/cache/" in resolved
 
 
@@ -27672,14 +30023,36 @@ def _get_measure_py_path():
 
 
 def _read_settings_json():
-    """Read ~/.claude/settings.json, return (data, path)."""
+    """Read ~/.claude/settings.json, return (data, path).
+
+    Lossy by design for read-only callers: a missing file, malformed JSON, and
+    an unreadable file all collapse to ``{}``. Any caller that will WRITE the
+    result back must use ``_read_settings_json_checked`` instead -- see #106
+    F3 P1, where a failed re-read returned ``{}`` and that empty dict was
+    written straight over the user's whole settings.json.
+    """
+    data, path, _ok = _read_settings_json_checked()
+    return data, path
+
+
+def _read_settings_json_checked():
+    """Read settings.json, return (data, path, ok).
+
+    ``ok`` is False when the file exists but could not be parsed or read
+    (malformed JSON, permission denied, I/O error) -- i.e. when ``{}`` means
+    "unknown", not "empty". A missing file is ``({}, path, True)``: genuinely
+    empty and safe to build on.
+
+    Write paths MUST branch on ``ok`` and refuse to write when it is False;
+    round-tripping an unknown-state ``{}`` destroys every key the user has.
+    """
     if SETTINGS_PATH.exists():
         try:
             with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f), SETTINGS_PATH
+                return json.load(f), SETTINGS_PATH, True
         except (json.JSONDecodeError, PermissionError, OSError):
-            pass
-    return {}, SETTINGS_PATH
+            return {}, SETTINGS_PATH, False
+    return {}, SETTINGS_PATH, True
 
 
 def _smart_compact_hook_commands():
@@ -27946,6 +30319,49 @@ def _quality_cache_tick_due(
         return age >= max(0, throttle_seconds)
     except OSError:
         return False
+
+
+# --- Stale-lease sweeper throttle (FIX B) ------------------------------------
+# The sweeper itself lives in hook_runtime._sweep_stale_leases (fail-open, never
+# raises). It is invoked here OPPORTUNISTICALLY + THROTTLED to at most once per
+# 24h via a one-stat marker, mirroring the quality-cache throttle pattern. It is
+# wired into ensure-health (SessionStart), NEVER the hot per-tool-call path, so
+# the scan cost never lands on PostToolUse. The marker is touched AFTER a run so
+# a sweeper crash/timeout retries next session rather than waiting a full day.
+_QLEASE_SWEEP_THROTTLE_SECONDS = 86400
+_QLEASE_SWEEP_MARKER = QUALITY_CACHE_DIR / ".qlease-sweep-throttle"
+
+
+def _qlease_sweep_due():
+    """One-stat gate: True when the last sweep is older than 24h (or never ran)."""
+    try:
+        age = time.time() - _QLEASE_SWEEP_MARKER.stat().st_mtime
+        return age >= _QLEASE_SWEEP_THROTTLE_SECONDS
+    except OSError:
+        return True
+
+
+def maybe_sweep_stale_leases(directory=None):
+    """Throttled, fail-open invocation of the stale-lease sweeper.
+
+    Runs at most once per 24h per install. Wrapped end-to-end in try/except so
+    it can NEVER raise into a hook or block a session. Returns the number of
+    files removed (0 on any error / throttle skip). Exposed for tests.
+    """
+    try:
+        if not _qlease_sweep_due():
+            return 0
+        target = Path(directory) if directory is not None else QUALITY_CACHE_DIR
+        removed = _sweep_stale_leases(target)
+        # Stamp AFTER a successful run so a mid-sweep crash retries next session.
+        try:
+            _QLEASE_SWEEP_MARKER.parent.mkdir(parents=True, exist_ok=True)
+            _QLEASE_SWEEP_MARKER.touch()
+        except OSError:
+            pass
+        return removed
+    except Exception:
+        return 0
 
 
 def _write_checkpoint_atomic(checkpoint_path, content):
@@ -28426,15 +30842,10 @@ def _maybe_progressive_checkpoint(fill_pct, cache_path, result, filepath):
 
 _NUDGE_COOLDOWN_SECONDS = 300  # 5 minutes between nudges
 
-# Fill % at which the gentle lean-output nudge fires. Fill ALONE is the
-# trigger: the old second condition (quality score < 75) meant the gentle tier
-# only reached people whose sessions had already degraded, i.e. very long ones,
-# so ordinary sessions never saw it at all. Cost scales with fill regardless of
-# how clean the context is -- a healthy session a quarter full is still paying
-# for verbose output -- and the 3-nudge cap plus the 5-minute cooldown are what
-# keep it from becoming background noise. Named + env-tunable rather than
-# inline, because the previous magic 25 was documented as three different
-# numbers across the docs.
+# Fill % at which the gentle lean-output nudge becomes eligible. The behavioral
+# SessionEfficiency gate below keeps healthy sessions quiet even when fill is
+# moderate. Named + env-tunable rather than inline, because the previous magic
+# 25 was documented as three different numbers across the docs.
 def _verbosity_nudge_min_fill() -> int:
     """Resolve the gentle-tier floor, clamped to the range where it means
     anything.
@@ -28458,6 +30869,7 @@ def _verbosity_nudge_min_fill() -> int:
 
 
 _VERBOSITY_NUDGE_MIN_FILL = _verbosity_nudge_min_fill()
+_VERBOSITY_NUDGE_EFFICIENCY_THRESHOLD = 75
 _NUDGE_SESSION_CAP = 3
 # Fresh-session nudge: when a session is BOTH long (high fill) and degraded
 # (quality < threshold), suggest starting a fresh session -- cold-resume-lean
@@ -28903,252 +31315,302 @@ def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_
                 pass
         return None
 
-    # Run quality analysis
-    quality_data = _parse_jsonl_for_quality(filepath)
-    if not quality_data:
-        # New/empty session - write a clean score to cache so stale score doesn't persist
-        result = {
-            "score": 100,
-            "grade": "S",
-            "signals": {},
-            "breakdown": {},
-            "total_messages": 0,
-            "decisions_found": 0,
-            "compactions": 0,
-            "turns": 0,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "session_file": Path(filepath).name,
-            "model_context_window": detect_context_window()[0],
-        }
-        _write_quality_cache(cache_path, result)
-        _release_quality_lock(_qlock)
-        return 100
-
-    # Carry forward nudge/loop state from previous cache (survives across
-    # UserPromptSubmit → PostCompact boundary for follow-through measurement)
-    prev_result = {}
-    if cache_path.exists():
-        try:
-            prev_result = _read_quality_cache(cache_path) or {}
-        except Exception:
-            prev_result = {}
-
-    _session_id = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
-    result = compute_quality_score(quality_data, session_id=_session_id)
-    for carry_key in _CARRY_KEYS:
-        if carry_key in prev_result and carry_key not in result:
-            result[carry_key] = prev_result[carry_key]
-    result["total_messages"] = len(quality_data["messages"])
-    result["decisions_found"] = len(quality_data["decisions"])
-    result["compactions"] = quality_data["compactions"]
-    result["turns"] = len([m for m in quality_data["messages"] if m[1] == "user"])
-    result["timestamp"] = datetime.now(timezone.utc).isoformat()
-    result["session_file"] = Path(filepath).name
-    result["model"] = quality_data.get("model")
-    result["topic"] = quality_data.get("topic")
-    # Add degradation band for status line
-    cfd = result.get("breakdown", {}).get("context_fill_degradation", {})
-    result["degradation_band"] = cfd.get("band", "")
-    result["fill_pct"] = cfd.get("fill_pct", 0)
-    # Surface the resolved context window at the TOP LEVEL of the cache. Consumers
-    # that compute fill from raw transcript tokens (the VS Code companion's
-    # cacheReader, the dashboard) read `model_context_window` here; without it they
-    # fall back to a 200k guess and inflate every 1M-context session ~5x.
-    result["model_context_window"] = cfd.get("model_context_window") or detect_context_window()[0]
-    # The window alone cannot be sanity-checked by a reader; the source can.
-    result["model_context_window_source"] = (
-        cfd.get("model_context_window_source") or detect_context_window()[1]
-    )
-    result["context_window_contradicted"] = bool(cfd.get("window_contradicted"))
-
-    # Dampen ResourceHealth swings within a session.
-    # Fill_pct fluctuates between measurements (context adds/removes, compaction).
-    # Allow recovery but dampen: drops are immediate, recovery moves 30% toward
-    # the new value per measurement to prevent wild upward swings.
-    prev_rh = prev_result.get("resource_health")
-    current_rh = result.get("resource_health")
-    if prev_rh is not None and current_rh is not None:
-        if current_rh >= prev_rh:
-            result["resource_health"] = round(prev_rh + (current_rh - prev_rh) * 0.3, 1)
-        result["score"] = result["resource_health"]
-        result["grade"] = score_to_grade(round(result["resource_health"]))
-        result["resource_health_grade"] = result["grade"]
-
-    # Session duration + active agents for statusline (v2.6)
-    result["session_start_ts"] = _extract_session_start_ts(filepath)
-    result["active_agents"] = _extract_active_agents(filepath)
-
-    # Cache hit rate for statusline (v5.4.27)
     try:
-        total_input_all = 0
-        total_cache_read = 0
-        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
-            for line in f:
-                try:
-                    rec = json.loads(line)
-                    usage = rec.get("message", {}).get("usage", {}) if rec.get("type") == "assistant" else {}
-                    if usage:
-                        total_input_all += usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0) + usage.get("cache_creation_input_tokens", 0)
-                        total_cache_read += usage.get("cache_read_input_tokens", 0)
-                except (json.JSONDecodeError, AttributeError):
-                    continue
-        result["cache_hit_rate"] = round(total_cache_read / total_input_all, 3) if total_input_all > 0 else 0
-    except (OSError, ZeroDivisionError):
-        result["cache_hit_rate"] = 0
+        # Run quality analysis
+        quality_data = _parse_jsonl_for_quality(filepath)
+        if not quality_data:
+            # New/empty session - write a clean score to cache so stale score doesn't persist
+            result = {
+                "score": 100,
+                "grade": "S",
+                "signals": {},
+                "breakdown": {},
+                "total_messages": 0,
+                "decisions_found": 0,
+                "compactions": 0,
+                "turns": 0,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "session_file": Path(filepath).name,
+                "model_context_window": detect_context_window()[0],
+            }
+            _write_quality_cache(cache_path, result)
+            return 100
 
-    if not _write_quality_cache(cache_path, result):
-        _release_quality_lock(_qlock)
-        return None
+        # Carry forward nudge/loop state from previous cache (survives across
+        # UserPromptSubmit → PostCompact boundary for follow-through measurement)
+        prev_result = {}
+        if cache_path.exists():
+            try:
+                prev_result = _read_quality_cache(cache_path) or {}
+            except Exception:
+                prev_result = {}
 
-    # v5.0: Quality nudges + loop detection
-    # These always run regardless of --quiet, because they emit systemMessage JSON
-    # that Claude Code injects into context. Suppressing them defeats their purpose.
-    system_messages = []
+        _session_id = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
+        result = compute_quality_score(quality_data, session_id=_session_id)
+        for carry_key in _CARRY_KEYS:
+            if carry_key in prev_result and carry_key not in result:
+                result[carry_key] = prev_result[carry_key]
+        result["total_messages"] = len(quality_data["messages"])
+        result["decisions_found"] = len(quality_data["decisions"])
+        result["compactions"] = quality_data["compactions"]
+        result["turns"] = len([m for m in quality_data["messages"] if m[1] == "user"])
+        result["timestamp"] = datetime.now(timezone.utc).isoformat()
+        result["session_file"] = Path(filepath).name
+        result["model"] = quality_data.get("model")
+        result["topic"] = quality_data.get("topic")
+        # Add degradation band for status line
+        cfd = result.get("breakdown", {}).get("context_fill_degradation", {})
+        result["degradation_band"] = cfd.get("band", "")
+        result["fill_pct"] = cfd.get("fill_pct", 0)
+        # Surface the resolved context window at the TOP LEVEL of the cache. Consumers
+        # that compute fill from raw transcript tokens (the VS Code companion's
+        # cacheReader, the dashboard) read `model_context_window` here; without it they
+        # fall back to a 200k guess and inflate every 1M-context session ~5x.
+        result["model_context_window"] = cfd.get("model_context_window") or detect_context_window()[0]
+        # The window alone cannot be sanity-checked by a reader; the source can.
+        result["model_context_window_source"] = (
+            cfd.get("model_context_window_source") or detect_context_window()[1]
+        )
+        result["context_window_contradicted"] = bool(cfd.get("window_contradicted"))
 
-    # Fill warnings fire independently of composite score (Tier 1 monotonicity fix).
-    # These cannot be masked by improving ratio signals. Deduplicated per level
-    # so the same threshold doesn't fire every prompt.
-    fill_warning = result.get("fill_warning")
-    if fill_warning and fill_warning["level"] in ("WARNING", "CRITICAL"):
-        prev_fill_warn_level = prev_result.get("_last_fill_warn_level")
-        if fill_warning["level"] != prev_fill_warn_level:
-            result["_last_fill_warn_level"] = fill_warning["level"]
-            system_messages.append(
-                f"[Token Optimizer] {fill_warning['level']}: {fill_warning['message']}"
+        # Dampen ResourceHealth swings within a session.
+        # Fill_pct fluctuates between measurements (context adds/removes, compaction).
+        # Allow recovery but dampen: drops are immediate, recovery moves 30% toward
+        # the new value per measurement to prevent wild upward swings.
+        prev_rh = prev_result.get("resource_health")
+        current_rh = result.get("resource_health")
+        if prev_rh is not None and current_rh is not None:
+            if current_rh >= prev_rh:
+                result["resource_health"] = round(prev_rh + (current_rh - prev_rh) * 0.3, 1)
+            result["score"] = result["resource_health"]
+            result["grade"] = score_to_grade(round(result["resource_health"]))
+            result["resource_health_grade"] = result["grade"]
+
+        # Session duration + active agents for statusline (v2.6)
+        result["session_start_ts"] = _extract_session_start_ts(filepath)
+        result["active_agents"] = _extract_active_agents(filepath)
+
+        # Cache hit rate for statusline (v5.4.27)
+        try:
+            total_input_all = 0
+            total_cache_read = 0
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+                for line in f:
+                    try:
+                        rec = json.loads(line)
+                        usage = rec.get("message", {}).get("usage", {}) if rec.get("type") == "assistant" else {}
+                        if usage:
+                            total_input_all += usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0) + usage.get("cache_creation_input_tokens", 0)
+                            total_cache_read += usage.get("cache_read_input_tokens", 0)
+                    except (json.JSONDecodeError, AttributeError):
+                        continue
+            result["cache_hit_rate"] = round(total_cache_read / total_input_all, 3) if total_input_all > 0 else 0
+        except (OSError, ZeroDivisionError):
+            result["cache_hit_rate"] = 0
+
+        if not _write_quality_cache(cache_path, result):
+            return None
+
+        # v5.0: Quality nudges + loop detection
+        # These always run regardless of --quiet, because they emit systemMessage JSON
+        # that Claude Code injects into context. Suppressing them defeats their purpose.
+        system_messages = []
+
+        # Fill warnings fire independently of composite score (Tier 1 monotonicity fix).
+        # These cannot be masked by improving ratio signals. Deduplicated per level
+        # so the same threshold doesn't fire every prompt.
+        fill_warning = result.get("fill_warning")
+        if fill_warning and fill_warning["level"] in ("WARNING", "CRITICAL"):
+            prev_fill_warn_level = prev_result.get("_last_fill_warn_level")
+            if fill_warning["level"] != prev_fill_warn_level:
+                result["_last_fill_warn_level"] = fill_warning["level"]
+                system_messages.append(
+                    f"[Token Optimizer] {fill_warning['level']}: {fill_warning['message']}"
+                )
+
+        # Tool call fatigue warnings (independent of composite score)
+        tool_call_warning = result.get("tool_call_warning")
+        if tool_call_warning and tool_call_warning["level"] in ("WARNING", "CRITICAL"):
+            prev_tc_level = prev_result.get("_last_tool_call_warn_level")
+            if tool_call_warning["level"] != prev_tc_level:
+                result["_last_tool_call_warn_level"] = tool_call_warning["level"]
+                system_messages.append(
+                    f"[Token Optimizer] {tool_call_warning['level']}: {tool_call_warning['message']}"
+                )
+
+        # Fresh-session nudge takes precedence: when a session is long AND degraded,
+        # "start fresh (context is preserved)" is the stronger remedy than /compact, and
+        # firing both would be noise. Only fall back to the /compact nudge if it didn't fire.
+        fresh_msg = _maybe_fresh_session_nudge(result, cache_path, quality_data)
+        if not fresh_msg:
+            nudge_msg = _maybe_nudge(result, cache_path, quality_data)
+            if nudge_msg:
+                system_messages.append(nudge_msg)
+        loop_msg = _maybe_loop_warning(result, cache_path, quality_data)
+        if loop_msg:
+            system_messages.append(loop_msg)
+        # Persist nudge/loop/fresh state (the once-per-session _fresh_nudge_fired flag
+        # must survive even if only the fresh nudge fired this turn).
+        if system_messages or fresh_msg:
+            _write_quality_cache(cache_path, result)
+        if system_messages:
+            # Gate the routine informational batch (quality/loop/fill warnings) under
+            # context pressure.
+            _emit_msgs = True
+            try:
+                from context_pressure import should_inject, get_pressure_level, log_suppression
+                _sf = str(filepath) if filepath else None
+                _sid = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
+                if not should_inject(_sf, session_id=_sid, priority="informational"):
+                    log_suppression("quality_system_messages", get_pressure_level(_sf, session_id=_sid))
+                    _emit_msgs = False
+            except Exception:
+                pass
+            if _emit_msgs:
+                for msg in system_messages:
+                    try:
+                        print(json.dumps({"systemMessage": msg}))
+                    except Exception:
+                        pass
+        # The fresh-session nudge BYPASSES pressure suppression on purpose: it fires at
+        # most once per session and is most relevant precisely when the session is
+        # degraded (i.e. under pressure). Suppressing it would defeat its purpose and
+        # silently burn the one-shot -- the exact bug where users never saw it.
+        if fresh_msg:
+            try:
+                print(json.dumps({"systemMessage": fresh_msg}))
+            except Exception:
+                pass
+
+        # Nudge follow-through: if PostCompact triggered this run (force=True)
+        # and a nudge preceded the compact, measure the actual fill_pct recovery.
+        if force and result.get("fill_pct", 0) > 0:
+            # A6: the nudge fires during a prior UserPromptSubmit process; this
+            # follow-through runs in a SEPARATE PostCompact process. Fire-state reaches
+            # us via the atomic per-session quality cache (carried forward at the top of
+            # this function). Fall back to prev_result directly in case the carry did not
+            # run, so a heeded session is never misclassified as ignored. Wrapped so a
+            # corrupt cache value can never crash the host hook — it degrades to "no
+            # credit", not a traceback.
+            try:
+                nudge_fill = result.get("_nudge_fill_pct_at_fire") or prev_result.get("_nudge_fill_pct_at_fire", 0)
+                if nudge_fill > 0:
+                    current_fill = result["fill_pct"]
+                    fill_delta = nudge_fill - current_fill
+                    ft_sid = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
+                    # A2 temporal gate: only credit a compaction that followed the nudge
+                    # within the window. A compaction long after the nudge was not its
+                    # follow-through, so it must not borrow the nudge's credit.
+                    fire_epoch = result.get("_nudge_fire_epoch") or prev_result.get("_nudge_fire_epoch", 0)
+                    within_window = fire_epoch and (time.time() - fire_epoch) <= _NUDGE_FOLLOWTHROUGH_WINDOW_SECONDS
+                    # A2 dedup: if a checkpoint_restore already credited this session's
+                    # recovery for this compaction (same SessionStart cycle), the nudge
+                    # must not double-credit the same tokens.
+                    already_credited = _checkpoint_restore_credited_recently(ft_sid)
+                    should_credit = fill_delta > 5 and within_window and not already_credited
+                    # Consume the fire-state FIRST, then credit only if the consume was
+                    # actually persisted. The fire-state lives in exactly one place (this
+                    # per-session cache), so once it is cleared from disk no later
+                    # PostCompact can re-enter this block for the same nudge — that makes
+                    # the credit idempotent without a second DB query. If the process
+                    # dies between here and the credit, or the clear-write fails, we skip
+                    # the credit (a conservative under-count) rather than risk a
+                    # double-count that would inflate the savings number.
+                    result.pop("_nudge_fill_pct_at_fire", None)
+                    result.pop("_nudge_fire_epoch", None)
+                    consumed = _write_quality_cache(cache_path, result)
+                    if should_credit and consumed:
+                        context_size = detect_context_window()[0]
+                        measured_tokens_recovered = int(context_size * fill_delta / 100)
+                        _log_compression_event(
+                            feature="quality_nudge",
+                            original_text=" " * (measured_tokens_recovered * 4),
+                            compressed_text=f"nudge_followthrough:fill={nudge_fill}->{current_fill}",
+                            session_id=ft_sid,
+                            detail=f"measured_recovery: fill {nudge_fill}%->{current_fill}% = {measured_tokens_recovered} tokens on {context_size} context",
+                            verified=True,
+                        )
+            except Exception:
+                pass
+
+        # Progressive checkpoints (v3.0)
+        if _PROGRESSIVE_ENABLED and result.get("fill_pct", 0) > 0:
+            _maybe_progressive_checkpoint(
+                fill_pct=result["fill_pct"],
+                cache_path=cache_path,
+                result=result,
+                filepath=filepath,
             )
 
-    # Tool call fatigue warnings (independent of composite score)
-    tool_call_warning = result.get("tool_call_warning")
-    if tool_call_warning and tool_call_warning["level"] in ("WARNING", "CRITICAL"):
-        prev_tc_level = prev_result.get("_last_tool_call_warn_level")
-        if tool_call_warning["level"] != prev_tc_level:
-            result["_last_tool_call_warn_level"] = tool_call_warning["level"]
-            system_messages.append(
-                f"[Token Optimizer] {tool_call_warning['level']}: {tool_call_warning['message']}"
-            )
-
-    # Fresh-session nudge takes precedence: when a session is long AND degraded,
-    # "start fresh (context is preserved)" is the stronger remedy than /compact, and
-    # firing both would be noise. Only fall back to the /compact nudge if it didn't fire.
-    fresh_msg = _maybe_fresh_session_nudge(result, cache_path, quality_data)
-    if not fresh_msg:
-        nudge_msg = _maybe_nudge(result, cache_path, quality_data)
-        if nudge_msg:
-            system_messages.append(nudge_msg)
-    loop_msg = _maybe_loop_warning(result, cache_path, quality_data)
-    if loop_msg:
-        system_messages.append(loop_msg)
-    # Persist nudge/loop/fresh state (the once-per-session _fresh_nudge_fired flag
-    # must survive even if only the fresh nudge fired this turn).
-    if system_messages or fresh_msg:
-        _write_quality_cache(cache_path, result)
-    if system_messages:
-        # Gate the routine informational batch (quality/loop/fill warnings) under
-        # context pressure.
-        _emit_msgs = True
-        try:
-            from context_pressure import should_inject, get_pressure_level, log_suppression
-            _sf = str(filepath) if filepath else None
-            _sid = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
-            if not should_inject(_sf, session_id=_sid, priority="informational"):
-                log_suppression("quality_system_messages", get_pressure_level(_sf, session_id=_sid))
-                _emit_msgs = False
-        except Exception:
-            pass
-        if _emit_msgs:
-            for msg in system_messages:
-                try:
-                    print(json.dumps({"systemMessage": msg}))
-                except Exception:
-                    pass
-    # The fresh-session nudge BYPASSES pressure suppression on purpose: it fires at
-    # most once per session and is most relevant precisely when the session is
-    # degraded (i.e. under pressure). Suppressing it would defeat its purpose and
-    # silently burn the one-shot -- the exact bug where users never saw it.
-    if fresh_msg:
-        try:
-            print(json.dumps({"systemMessage": fresh_msg}))
-        except Exception:
-            pass
-
-    # Nudge follow-through: if PostCompact triggered this run (force=True)
-    # and a nudge preceded the compact, measure the actual fill_pct recovery.
-    if force and result.get("fill_pct", 0) > 0:
-        # A6: the nudge fires during a prior UserPromptSubmit process; this
-        # follow-through runs in a SEPARATE PostCompact process. Fire-state reaches
-        # us via the atomic per-session quality cache (carried forward at the top of
-        # this function). Fall back to prev_result directly in case the carry did not
-        # run, so a heeded session is never misclassified as ignored. Wrapped so a
-        # corrupt cache value can never crash the host hook — it degrades to "no
-        # credit", not a traceback.
-        try:
-            nudge_fill = result.get("_nudge_fill_pct_at_fire") or prev_result.get("_nudge_fill_pct_at_fire", 0)
-            if nudge_fill > 0:
-                current_fill = result["fill_pct"]
-                fill_delta = nudge_fill - current_fill
-                ft_sid = Path(cache_path).stem.replace("quality-cache-", "", 1) if cache_path else None
-                # A2 temporal gate: only credit a compaction that followed the nudge
-                # within the window. A compaction long after the nudge was not its
-                # follow-through, so it must not borrow the nudge's credit.
-                fire_epoch = result.get("_nudge_fire_epoch") or prev_result.get("_nudge_fire_epoch", 0)
-                within_window = fire_epoch and (time.time() - fire_epoch) <= _NUDGE_FOLLOWTHROUGH_WINDOW_SECONDS
-                # A2 dedup: if a checkpoint_restore already credited this session's
-                # recovery for this compaction (same SessionStart cycle), the nudge
-                # must not double-credit the same tokens.
-                already_credited = _checkpoint_restore_credited_recently(ft_sid)
-                should_credit = fill_delta > 5 and within_window and not already_credited
-                # Consume the fire-state FIRST, then credit only if the consume was
-                # actually persisted. The fire-state lives in exactly one place (this
-                # per-session cache), so once it is cleared from disk no later
-                # PostCompact can re-enter this block for the same nudge — that makes
-                # the credit idempotent without a second DB query. If the process
-                # dies between here and the credit, or the clear-write fails, we skip
-                # the credit (a conservative under-count) rather than risk a
-                # double-count that would inflate the savings number.
-                result.pop("_nudge_fill_pct_at_fire", None)
-                result.pop("_nudge_fire_epoch", None)
-                consumed = _write_quality_cache(cache_path, result)
-                if should_credit and consumed:
-                    context_size = detect_context_window()[0]
-                    measured_tokens_recovered = int(context_size * fill_delta / 100)
-                    _log_compression_event(
-                        feature="quality_nudge",
-                        original_text=" " * (measured_tokens_recovered * 4),
-                        compressed_text=f"nudge_followthrough:fill={nudge_fill}->{current_fill}",
-                        session_id=ft_sid,
-                        detail=f"measured_recovery: fill {nudge_fill}%->{current_fill}% = {measured_tokens_recovered} tokens on {context_size} context",
-                        verified=True,
-                    )
-        except Exception:
-            pass
-
-    # Progressive checkpoints (v3.0)
-    if _PROGRESSIVE_ENABLED and result.get("fill_pct", 0) > 0:
-        _maybe_progressive_checkpoint(
-            fill_pct=result["fill_pct"],
+        _maybe_checkpoint_on_quality_or_milestone(
+            quality_data=quality_data,
             cache_path=cache_path,
             result=result,
             filepath=filepath,
         )
 
-    _maybe_checkpoint_on_quality_or_milestone(
-        quality_data=quality_data,
-        cache_path=cache_path,
-        result=result,
-        filepath=filepath,
-    )
+        return result.get("score")
+    finally:
+        _release_quality_lock(_qlock)
 
-    _release_quality_lock(_qlock)
-    return result.get("score")
+
+def _stable_marketplace_script_path(script_name):
+    """Version-INDEPENDENT path to a bundled script, or None.
+
+    Plugin-cache installs live at::
+
+        <claude>/plugins/cache/<marketplace>/<plugin>/<VERSION>/skills/...
+
+    so any absolute path written into settings.json dies on the next update.
+    The marketplace clone at::
+
+        <claude>/plugins/marketplaces/<marketplace>/skills/...
+
+    carries the same tree at a path with no version segment, so it survives
+    updates. Returns that path only when it actually exists and stays confined
+    under the runtime marketplaces dir (no symlink escape); otherwise None, so
+    the caller falls back to the version-pinned write plus self-heal.
+    """
+    try:
+        here = Path(__file__).resolve()
+        parts = here.parts
+        idx = len(parts) - 1 - parts[::-1].index("cache")
+        marketplace = parts[idx + 1]
+    except (ValueError, IndexError, OSError):
+        return None
+    try:
+        base = (CLAUDE_DIR / "plugins" / "marketplaces").resolve(strict=False)
+        candidate = base / marketplace / "skills" / "token-optimizer" / "scripts" / script_name
+        resolved = candidate.resolve(strict=True)
+        if not resolved.is_file() or not resolved.is_relative_to(base):
+            return None
+    except (OSError, ValueError):
+        return None
+    return str(resolved)
 
 
 def _get_statusline_path():
     """Get the path to the bundled statusline.js script.
 
     Always returns an absolute path. Unlike hook commands in hooks.json,
-    settings.json statusLine may not resolve ${CLAUDE_PLUGIN_ROOT}.
-    The self-healing _fix_stale_settings_paths() handles version upgrades.
+    settings.json statusLine may not resolve ${CLAUDE_PLUGIN_ROOT} -- which is
+    why this cannot simply mirror _get_measure_py_path().
+
+    Plugin-cache installs previously got the VERSION-PINNED cache path, which
+    breaks the moment the plugin updates. _fix_stale_settings_paths() repairs
+    it, but only at the NEXT SessionStart, so the first session after an update
+    rendered a blank status line before the heal landed. Prefer the
+    version-independent marketplace clone path when it resolves; fall back to
+    the version-pinned path (still self-healed) when it does not -- a pruned
+    marketplace clone, or any non-plugin-cache install.
+
+    Either way the F1 self-disabling guard inside statusline.js still applies:
+    both candidate trees ship the sibling files it checks for.
     """
+    if _is_running_from_plugin_cache():
+        stable = _stable_marketplace_script_path("statusline.js")
+        if stable:
+            return stable
     return str(Path(__file__).resolve().parent / "statusline.js")
 
 
@@ -29183,18 +31645,37 @@ def _fix_stale_settings_paths():
         return 0
 
     settings_text = json.dumps(settings)
-    if "/plugins/cache/" not in settings_text or "token-optimizer" not in settings_text:
-        return 0
 
-    # Our current plugin root (e.g., /home/user/.claude/plugins/cache/org/token-optimizer/3.1.0)
-    current_root = str(Path(__file__).resolve().parent.parent.parent.parent)
+    if os.name == "nt":
+        # Our current plugin root (e.g., C:\Users\...\plugins\cache\org\token-optimizer\3.1.0)
+        current_root = str(Path(__file__).resolve().parent.parent.parent.parent)
+        normalized_text = settings_text.replace("\\\\", "/")
+        if "/plugins/cache/" not in normalized_text or "token-optimizer" not in normalized_text:
+            return 0
+        pattern = r'((?:[A-Za-z]:)?/[^"\'\\]+/plugins/cache/[^/]+/token-optimizer/[^/]+)'
+        stale_roots = {
+            m.group(1) for m in re.finditer(pattern, normalized_text)
+            if m.group(1) != current_root.replace("\\", "/")
+        }
+        new_text = settings_text
+        replacement = current_root.replace("\\", "\\\\")
+        for stale_root in stale_roots:
+            new_text = new_text.replace(stale_root.replace("/", "\\\\"), replacement)
+    else:
+        if "/plugins/cache/" not in settings_text or "token-optimizer" not in settings_text:
+            return 0
 
-    # Find all versioned token-optimizer plugin cache paths that differ from ours
-    stale_roots = set()
-    for m in re.finditer(r'(/[^"\'\\]+/plugins/cache/[^/]+/token-optimizer/[^/]+)', settings_text):
-        found_root = m.group(1)
-        if found_root != current_root:
-            stale_roots.add(found_root)
+        # Our current plugin root (e.g., /home/user/.claude/plugins/cache/org/token-optimizer/3.1.0)
+        current_root = str(Path(__file__).resolve().parent.parent.parent.parent)
+        # Find all versioned token-optimizer plugin cache paths that differ from ours
+        stale_roots = set()
+        for m in re.finditer(r'(/[^"\'\\]+/plugins/cache/[^/]+/token-optimizer/[^/]+)', settings_text):
+            found_root = m.group(1)
+            if found_root != current_root:
+                stale_roots.add(found_root)
+        new_text = settings_text
+        for stale_root in stale_roots:
+            new_text = new_text.replace(stale_root, current_root)
 
     if not stale_roots:
         return 0
@@ -29202,10 +31683,6 @@ def _fix_stale_settings_paths():
     # Replace stale roots directly in the serialized JSON, then parse back.
     # This avoids mutating the original dict (no partial-state on write failure)
     # and covers all keys without key-specific iteration.
-    new_text = settings_text
-    for stale_root in stale_roots:
-        new_text = new_text.replace(stale_root, current_root)
-
     if new_text == settings_text:
         return 0
 
@@ -29216,6 +31693,149 @@ def _fix_stale_settings_paths():
         return 0
 
     return len(stale_roots)
+
+
+def _migrate_statusline_to_stable_path():
+    """Migrate an already-installed statusLine from a version-pinned cache path
+    to the update-surviving marketplace clone path.
+
+    G3 C-P2-3: the ca654fe stable-path fix only reaches FRESH installs.
+    ``setup_quality_bar`` skips the statusLine whenever one is already installed,
+    and ``_is_quality_bar_installed`` counts BOTH the old version-pinned cache
+    path and the new clone path as "installed" (it only matches ``statusline.js``
+    + ``token-optimizer`` in the command). ``_fix_stale_settings_paths`` rewrites
+    cache-root -> *current* cache-root, still version-pinned. So the installed
+    base that originally hit "status line blank after every update" keeps the
+    version-pinned path and keeps hitting the blank-window-on-first-session.
+
+    This lifts them onto the clone path once, at ensure-health. Acts only on
+    plugin-cache installs whose OWN statusLine command still references a
+    ``/plugins/cache/`` version-pinned ``statusline.js`` and where the stable
+    clone path resolves. It does a targeted substring swap (not a wholesale
+    rewrite) so any surrounding command wrapper is preserved. Runs AFTER
+    ``_fix_stale_settings_paths`` so the cache path is already the current
+    version's before it is lifted to the clone.
+
+    Returns True if it rewrote the command, else False.
+    """
+    if not _is_running_from_plugin_cache():
+        return False
+    stable = _stable_marketplace_script_path("statusline.js")
+    if not stable:
+        return False
+    try:
+        settings, _ = _read_settings_json()
+        if not settings:
+            return False
+    except Exception:
+        return False
+    sl = settings.get("statusLine") or {}
+    cmd = sl.get("command", "")
+    if not cmd or "statusline.js" not in cmd or "token-optimizer" not in cmd:
+        return False
+    # Only normalize separators on Windows; backslash is a legal POSIX
+    # filename char, so an unconditional replace would change POSIX behavior.
+    normalized_cmd = cmd.replace("\\", "/") if os.name == "nt" else cmd
+    m = re.search(r'(?:[A-Za-z]:)?/[^"\'\\]+/plugins/cache/[^/]+/token-optimizer/[^"\'\\]*statusline\.js', normalized_cmd)
+    if not m:
+        return False
+    old_path = cmd[m.start():m.end()]
+    if old_path == stable:
+        return False
+    if "\\" in cmd:
+        new_cmd = cmd[:m.start()] + stable + cmd[m.end():]
+    else:
+        new_cmd = cmd.replace(old_path, stable)
+    if new_cmd == cmd:
+        return False
+    new_settings = dict(settings)
+    new_sl = dict(sl)
+    new_sl["command"] = new_cmd
+    new_settings["statusLine"] = new_sl
+    try:
+        return bool(_write_settings_atomic(new_settings))
+    except Exception:
+        return False
+
+
+def _heal_keepwarm_plist_path():
+    """Rewrite an installed keep-warm launchd plist whose measure.py path went
+    stale onto the update-surviving marketplace clone path, then reload the agent.
+
+    Companion to the _keepwarm_measure_script_path stable-path preference (which
+    only helps FRESH plist writes). An agent installed by an older build carries a
+    version-pinned ``/plugins/cache/.../<VERSION>/measure.py`` path that dies on the
+    next plugin update; launchd then fires an old (or missing) script every ~5min,
+    so the dashboard's savings freeze at whatever the last good tick produced. This
+    lifts an existing plist onto the clone path once, at ensure-health, and
+    bootout+bootstraps so the corrected path takes effect immediately.
+
+    Acts only on plugin-cache installs whose OWN keep-warm plist exists and whose
+    embedded measure.py path differs from the resolved clone path. Editing the path
+    of a plist the user already has is a correctness fix, not a (re)install, so it
+    never resurrects a declined/uninstalled agent (#59). The plist only lives under
+    ~/Library/LaunchAgents on macOS, so on other platforms it simply won't exist
+    and this no-ops. Best effort: any failure leaves the plist untouched, False.
+    """
+    if not _is_running_from_plugin_cache():
+        return False
+    stable = _stable_marketplace_script_path("measure.py")
+    if not stable:
+        return False
+    plist_path = _keepwarm_scheduler_plist_path()
+    try:
+        if not plist_path.is_file():
+            return False
+    except OSError:
+        return False
+    import plistlib
+    try:
+        with open(plist_path, "rb") as f:
+            data = plistlib.load(f)
+    except Exception:
+        return False
+    args = data.get("ProgramArguments")
+    if not isinstance(args, list):
+        return False
+    # The script arg is the measure.py entry (not python3 or the subcommand).
+    idx = next((i for i, a in enumerate(args)
+                if isinstance(a, str) and a.endswith("measure.py")), None)
+    if idx is None or args[idx] == stable:
+        return False
+    new_args = list(args)
+    new_args[idx] = stable
+    new_data = dict(data)
+    new_data["ProgramArguments"] = new_args
+    # Atomic replace so a crash mid-write can't leave a truncated plist.
+    try:
+        fd, tmp = tempfile.mkstemp(prefix=".keepwarm-plist.", suffix=".tmp",
+                                   dir=str(plist_path.parent))
+        try:
+            with os.fdopen(fd, "wb") as f:
+                plistlib.dump(new_data, f)
+            os.replace(tmp, str(plist_path))
+        finally:
+            if os.path.exists(tmp):
+                try:
+                    os.unlink(tmp)
+                except OSError:
+                    pass
+    except Exception:
+        return False
+    # Reload so launchd fires the corrected path (mirrors the installer's
+    # idempotent bootout-then-bootstrap). Best effort; the on-disk fix stands even
+    # if the reload can't run (non-macOS, no launchctl, unprivileged).
+    getuid = getattr(os, "getuid", None)
+    if getuid is not None:
+        uid = getuid()
+        for argv in (["launchctl", "bootout", f"gui/{uid}", str(plist_path)],
+                     ["launchctl", "bootstrap", f"gui/{uid}", str(plist_path)]):
+            try:
+                subprocess.run(argv, capture_output=True, text=True,
+                               errors="replace", timeout=10, creationflags=_NO_WINDOW)
+            except (OSError, subprocess.TimeoutExpired):
+                pass
+    return True
 
 
 # Known TO script names used to identify token-optimizer hooks.
@@ -29482,7 +32102,7 @@ def _ensure_vscode_extension():
     _write_config_flag("vscode_ext_last_check", now)
     try:
         listed = subprocess.run(
-            [cli, "--list-extensions"], capture_output=True, text=True, timeout=15
+            [cli, "--list-extensions"], capture_output=True, text=True, timeout=15, creationflags=_NO_WINDOW
         )
     except (OSError, subprocess.SubprocessError):
         return
@@ -29491,7 +32111,7 @@ def _ensure_vscode_extension():
     try:
         r = subprocess.run(
             [cli, "--install-extension", _VSCODE_EXTENSION_ID],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=120, creationflags=_NO_WINDOW,
         )
     except (OSError, subprocess.SubprocessError):
         return
@@ -29541,7 +32161,7 @@ def _config_lock():
 def _write_config_flag(key, value):
     """Merge a single flag into config.json. Non-fatal on I/O errors.
 
-    v5.4.19 (adv-004 fix): wrapped in _config_lock + tempfile + os.replace
+    v5.4.19: wrapped in _config_lock + tempfile + os.replace
     so concurrent writers (daemon toggles, ensure-health timestamps,
     welcome flags) never race on a non-atomic write. Readers always see
     either the pre-write state or the fully-written state, never partial
@@ -31816,7 +34436,7 @@ _INITIAL_BACKFILL_DAYS = _int_env("TOKEN_OPTIMIZER_INITIAL_BACKFILL_DAYS", 365)
 # Commit collected sessions in batches so an interrupted backfill banks progress instead
 # of discarding the whole transaction. Without this, a deep first-run backfill that exceeds
 # the SessionEnd hook's _HookTimeout would commit NOTHING and never write its success
-# marker, re-parsing from scratch every flush in a permanent loop (torture-room blocker).
+# marker, re-parsing from scratch every flush in a permanent loop.
 _COLLECT_COMMIT_BATCH = _int_env("TOKEN_OPTIMIZER_COLLECT_COMMIT_BATCH", 200)
 # Per-run cap on NEWLY-parsed sessions. A large uncollected backlog (e.g. after an
 # upgrade, or on a machine with thousands of transcripts) would otherwise re-parse
@@ -33415,14 +36035,30 @@ def _savings_since_install():
         # Measured = logged runtime + realized structural + realized routing.
         measured = float(full.get("total_cost_usd", 0) or 0)
         measured += float((full.get("model_routing") or {}).get("realized_cost_usd", 0) or 0)
-        # Estimated = genuine TO-realized counterfactuals only. cache_drop and
+        # Estimated = genuine TO-realized counterfactuals only — the same six
+        # categories the dashboard's estimated tier (estItems) sums, so the two
+        # cards agree about what "estimated" contains. cache_drop and
         # output_waste are OPPORTUNITY (avoidable waste TO does not yet prevent),
         # so they are excluded here — counting them would claim money saved that
-        # was actually spent.
+        # was actually spent. mcp_cap_estimated does NOT double-count with
+        # uncaptured_runtime: _get_savings_summary pops mcp_cap out of the
+        # measured totals before _estimate_uncaptured_runtime derives its
+        # per-session proxy from them, so the two pools are disjoint.
         estimated = sum(
             float((full.get(k) or {}).get("cost_saved_usd", 0) or 0)
-            for k in ("behavioral_estimate", "uncaptured_runtime")
+            for k in (
+                "behavioral_estimate", "uncaptured_runtime", "mcp_cap_estimated",
+                "contamination_exit", "handover_rerun",
+            )
         )
+        # Avoided-search: prefer the deterministic observed hint->read measure
+        # (hint_followed); fall back to the cohort estimate (retrieval_serve)
+        # only before any hint has fired, so the two are never summed — the
+        # exact dedup rule the dashboard applies (dashboard.html renderSavings).
+        hf = full.get("hint_followed") or {}
+        rs = full.get("retrieval_serve") or {}
+        avoided = hf if int(hf.get("events") or 0) > 0 else rs
+        estimated += float(avoided.get("cost_saved_usd", 0) or 0)
         return {
             "install_date": d,
             "days": days,
@@ -33432,6 +36068,41 @@ def _savings_since_install():
         }
     except Exception:
         return None
+
+
+def _live_savings_payload(days=30):
+    """Recompute the dashboard's savings + cache-health blocks live.
+
+    Single source shared by the /api/savings serve endpoint and its tests, so a
+    browser refresh against the daemon shows current numbers without a full
+    dashboard regen. Mirrors the savings/cache_health wiring in
+    generate_standalone_dashboard exactly, so the live-patched tiles match what a
+    full regen would render. Fail-open: every sub-block is guarded so a slow or
+    failed eval degrades to a safe empty shape instead of raising.
+    """
+    try:
+        savings_data = _get_merged_savings(days=days)
+        savings_data["since_install"] = _savings_since_install()
+        # Billing-mode transparency caption wiring — mirrors
+        # generate_standalone_dashboard so live-patched tiles match a full regen.
+        savings_data["billing_mode"] = keepwarm_billing_mode()
+    except Exception:
+        savings_data = {"total_tokens": 0, "total_cost_usd": 0.0, "by_category": {}}
+    try:
+        cache_health = _cache_ttl_waste_cached(days=days)
+    except Exception:
+        cache_health = {"available": False, "tier": "opportunity"}
+    try:
+        if isinstance(cache_health, dict):
+            cache_health["keepwarm"] = keepwarm_cache_health_block(days=days)
+    except Exception:
+        pass
+    return {
+        "ok": True,
+        "savings": savings_data,
+        "cache_health": cache_health,
+        "generated_at": datetime.now().isoformat(),
+    }
 
 
 def savings_report(days=30, as_json=False):
@@ -33452,6 +36123,24 @@ def savings_report(days=30, as_json=False):
     now = datetime.now()
     start = (now - timedelta(days=days)).strftime("%Y-%m-%d")
     end = now.strftime("%Y-%m-%d")
+
+    # Young-install guard: with under 30 tracked days, a "/mo" projection would
+    # present a partial sample as a monthly run-rate. Print raw cumulative sums
+    # ("so far") instead. Clock skew / future install dates clamp to 1 day
+    # (cumulative mode — fails safe, never inflates); no install date falls back
+    # to run-rate (totals are ~0, nothing misleading renders).
+    inst = _install_date()
+    tracked = days
+    if inst:
+        try:
+            tracked = min(days, max(1, (now - datetime.fromisoformat(inst)).days + 1))
+        except ValueError:
+            pass
+    run_rate = tracked >= 30
+    per = "/mo" if run_rate else " so far"
+
+    def _mo(c):
+        return c / max(days, 1) * 30 if run_rate else c
 
     print("\n  Token Optimizer Savings Report")
     print(f"  {'=' * 58}")
@@ -33544,32 +36233,35 @@ def savings_report(days=30, as_json=False):
     print(f"  {'TOTAL (measured)':<28s} {total_events:>8,} {total_tokens:>14,} {'$' + f'{total_cost:.2f}':>11s}")
     print()
     print(f"  Daily average: ${daily_avg:.2f} saved (measured)")
-    print(f"  Estimated monthly: ${est_monthly:.2f} (measured)")
+    if run_rate:
+        print(f"  Estimated monthly: ${est_monthly:.2f} (measured)")
+    else:
+        print(f"  Total so far ({tracked} day{'' if tracked == 1 else 's'} tracked): ${total_cost:.2f} (measured)")
 
     # Realized tier — model routing you already did (mix shift vs install baseline).
     routing = summary.get("model_routing") or {}
     routing_realized = float(routing.get("realized_cost_usd", 0.0) or 0.0)
     if routing_realized > 0:
-        r_monthly = routing_realized / max(days, 1) * 30
+        r_monthly = _mo(routing_realized)
         b_share = routing.get("baseline_opus_share", 0.0) * 100
         c_share = routing.get("current_opus_share", 0.0) * 100
-        print(f"  + model routing (realized): ~${r_monthly:.2f}/mo "
+        print(f"  + model routing (realized): ~${r_monthly:.2f}{per} "
               f"(Opus {b_share:.0f}% -> {c_share:.0f}% vs baseline) [measured]")
 
     # Estimated tier — uncaptured runtime (sub-agent compression not attributed).
     uncaptured = summary.get("uncaptured_runtime") or {}
     unc_cost = float(uncaptured.get("cost_saved_usd", 0.0) or 0.0)
     if unc_cost > 0:
-        unc_monthly = unc_cost / max(days, 1) * 30
-        print(f"  + est. uncaptured runtime: ~${unc_monthly:.2f}/mo "
+        unc_monthly = _mo(unc_cost)
+        print(f"  + est. uncaptured runtime: ~${unc_monthly:.2f}{per} "
               f"(sub-agent compression, {uncaptured.get('subagent_dispatches', 0):,} dispatches) [estimated]")
 
     # Estimated tier — behavioral coaching (loops prevented, etc.) that never bills.
     behavioral = summary.get("behavioral_estimate") or {}
     beh_cost = float(behavioral.get("cost_saved_usd", 0.0) or 0.0)
     if beh_cost > 0:
-        beh_monthly = beh_cost / max(days, 1) * 30
-        print(f"  + est. behavioral (loops prevented): ~${beh_monthly:.2f}/mo "
+        beh_monthly = _mo(beh_cost)
+        print(f"  + est. behavioral (loops prevented): ~${beh_monthly:.2f}{per} "
               f"({behavioral.get('loop_events', 0)} loops caught, repeated ~{behavioral.get('prevented_iterations', 0)}x "
               f"before catch; avoided continuation estimated at one more span) [estimated]")
 
@@ -33581,15 +36273,15 @@ def savings_report(days=30, as_json=False):
     mcp_cap_est = summary.get("mcp_cap_estimated") or {}
     mce_cost = float(mcp_cap_est.get("cost_saved_usd", 0.0) or 0.0)
     if mce_cost > 0:
-        mce_monthly = mce_cost / max(days, 1) * 30
-        print(f"  + est. MCP output cap: ~${mce_monthly:.2f}/mo "
+        mce_monthly = _mo(mce_cost)
+        print(f"  + est. MCP output cap: ~${mce_monthly:.2f}{per} "
               f"({mcp_cap_est.get('events', 0)} capped MCP results) [estimated]")
 
     # Estimated tier — FLAGSHIP: contamination-exit avoided rework (cohort).
     ce = summary.get("contamination_exit") or {}
     if float(ce.get("cost_saved_usd", 0.0) or 0.0) > 0:
-        ce_monthly = ce["cost_saved_usd"] / max(days, 1) * 30
-        print(f"  + est. avoided rework (heeded nudges): ~${ce_monthly:.2f}/mo "
+        ce_monthly = _mo(ce["cost_saved_usd"])
+        print(f"  + est. avoided rework (heeded nudges): ~${ce_monthly:.2f}{per} "
               f"({ce.get('heeded_sessions', 0)} heeded vs {ce.get('ignored_sessions', 0)} ignored, "
               f"~{ce.get('delta_tokens_per_session', 0):,} tok/session less rework, "
               f"confidence: {ce.get('confidence', '?')}) [estimated]")
@@ -33597,8 +36289,8 @@ def savings_report(days=30, as_json=False):
     # Estimated tier — handover/continuity avoided rework (cohort).
     hr = summary.get("handover_rerun") or {}
     if float(hr.get("cost_saved_usd", 0.0) or 0.0) > 0:
-        hr_monthly = hr["cost_saved_usd"] / max(days, 1) * 30
-        print(f"  + est. avoided rework (continuity handover): ~${hr_monthly:.2f}/mo "
+        hr_monthly = _mo(hr["cost_saved_usd"])
+        print(f"  + est. avoided rework (continuity handover): ~${hr_monthly:.2f}{per} "
               f"({hr.get('restored_sessions', 0)} restored vs {hr.get('baseline_sessions', 0)} baseline, "
               f"confidence: {hr.get('confidence', '?')}) [estimated]")
 
@@ -33632,24 +36324,24 @@ def savings_report(days=30, as_json=False):
         print(f"  {'-' * 58}")
         print("  COULD SAVE (opportunity — act to realize, not counted above):")
         if pot_cost > 0:
-            pot_monthly = pot_cost / max(days, 1) * 30
-            print(f"    ~${pot_monthly:.2f}/mo structural: prune {potential.get('unused_skills', 0)} unused skills "
+            pot_monthly = _mo(pot_cost)
+            print(f"    ~${pot_monthly:.2f}{per} structural: prune {potential.get('unused_skills', 0)} unused skills "
                   f"(~{potential.get('recoverable_tokens', 0):,} tokens), compounds every session.")
         if routing_potential > 0:
-            rp_monthly = routing_potential / max(days, 1) * 30
-            print(f"    ~${rp_monthly:.2f}/mo routing: move {int(routing.get('routable_fraction', 0.3) * 100)}% "
+            rp_monthly = _mo(routing_potential)
+            print(f"    ~${rp_monthly:.2f}{per} routing: move {int(routing.get('routable_fraction', 0.3) * 100)}% "
                   f"of remaining Opus ({routing.get('current_opus_share', 0.0) * 100:.0f}% of tokens) to Sonnet/Haiku.")
         if cd_tokens > 0:
-            cd_tokens_monthly = int(cd_tokens / max(days, 1) * 30)
-            print(f"    ~{cd_tokens_monthly:,} tokens/mo cache drops: {cache_drop.get('drop_sessions', 0)} sessions idled "
+            cd_tokens_monthly = int(_mo(cd_tokens))
+            print(f"    ~{cd_tokens_monthly:,} tokens{per} cache drops: {cache_drop.get('drop_sessions', 0)} sessions idled "
                   f"past the cache window and re-wrote the prefix — compact before breaks or use the 1h cache.")
         if ow_cost > 0:
-            ow_monthly = ow_cost / max(days, 1) * 30
-            print(f"    ~${ow_monthly:.2f}/mo output: {output_waste.get('avoidable_writes', 0)} of "
+            ow_monthly = _mo(ow_cost)
+            print(f"    ~${ow_monthly:.2f}{per} output: {output_waste.get('avoidable_writes', 0)} of "
                   f"{output_waste.get('writes', 0)} full-file Writes could be targeted Edits.")
         if recl_cost > 0:
-            recl_monthly = recl_cost / max(days, 1) * 30
-            print(f"    ~${recl_monthly:.2f}/mo reclaimable: {reclaimable.get('tokens', 0):,} tokens of stale "
+            recl_monthly = _mo(recl_cost)
+            print(f"    ~${recl_monthly:.2f}{per} reclaimable: {reclaimable.get('tokens', 0):,} tokens of stale "
                   f"re-reads across {reclaimable.get('sessions', 0)} sessions — avoid re-reading or use .contextignore.")
     print(f"  {'=' * 58}")
     print("  Tiers are separate: measured (billed events), estimated (your own")
@@ -33701,7 +36393,7 @@ def validate_impact(strategy="auto", days=30, as_json=False):
                     ["git", "log", "--tags", "--simplify-by-decoration",
                      "--format=%ai", "-1"],
                     capture_output=True, text=True, timeout=5,
-                    cwd=str(Path(__file__).parent),
+                    cwd=str(Path(__file__).parent), creationflags=_NO_WINDOW,
                 )
                 if result.returncode == 0 and result.stdout.strip():
                     tag_date = result.stdout.strip()
@@ -34019,7 +36711,7 @@ def run_ensure_health():
                     # the new script (which references DAEMON_TOKEN_PATH).
                     _get_or_create_daemon_token()
                     new_script = _generate_daemon_script()
-                    # Torture-room H-5 (2026-04-16): track per-path write
+                    # Track per-path write
                     # outcomes so we can detect silent drift (e.g., legacy
                     # path is unwritable and every SessionStart loops through
                     # this code printing "Auto-updated" without the daemon
@@ -34060,12 +36752,17 @@ def run_ensure_health():
                     # apply escalation + honest logging. Extracted to
                     # _apply_daemon_restart_outcome for testability (the reap /
                     # kickstart / verify path is the single source of truth).
-                    _level, _msg = _apply_daemon_restart_outcome(
-                        _restart_dashboard_daemon(_normalized_platform()))
-                    if _level in ("ok", "ok-reinstall"):
-                        print(f"  [Token Optimizer] {_msg}")
-                    else:
-                        print(f"  [Token Optimizer] {_msg}", file=sys.stderr)
+                    # #107: gate the restart on the SHARED #59
+                    # gate -- a version bump must not /Run a daemon whose user
+                    # tombstoned/disabled it or whose install is condemned.
+                    # The script write above is inert and may stand either way.
+                    if _daemon_resurrection_blocked() is None:
+                        _level, _msg = _apply_daemon_restart_outcome(
+                            _restart_dashboard_daemon(_normalized_platform()))
+                        if _level in ("ok", "ok-reinstall"):
+                            print(f"  [Token Optimizer] {_msg}")
+                        else:
+                            print(f"  [Token Optimizer] {_msg}", file=sys.stderr)
     except Exception as _e:
         print(f"  [Token Optimizer] daemon auto-update check failed: {_e}", file=sys.stderr)
 
@@ -34094,8 +36791,36 @@ def run_ensure_health():
             print("  [Token Optimizer] dashboard daemon restarted but still "
                   "serving a stale version; run: measure.py setup-daemon",
                   file=sys.stderr)
+        elif _daemon_ensure == "noop-install-failed":
+            # #107 named this state but routed it to stderr, where a SessionStart
+            # hook's output is swallowed (stdout is context, stderr is not --
+            # see the routing note near _install_task_scheduler_daemon). So the
+            # dashboard stayed silently dead, the exact wedge #107 set out to
+            # kill (mostly Windows: MS-Store Python, missing/policy-blocked
+            # schtasks). This ONE message is the deliberate exception to the
+            # "errors -> stderr" convention: it is not a transient error but a
+            # persistent, user-recoverable state, so it MUST reach the
+            # session-visible stdout stream. It self-clears the moment a
+            # verified-healthy daemon (or an explicit setup-daemon) removes the
+            # marker, so it can never nag past the fix.
+            _mk_reason = _daemon_install_failed_reason()
+            print("  [Token Optimizer] dashboard daemon self-heal is disabled: "
+                  f"a previous install failed permanently ({_mk_reason or 'reason unknown'}). "
+                  "To retry, run: python3 measure.py setup-daemon")
     except Exception as _e:
         print(f"  [Token Optimizer] dashboard daemon self-heal failed: {_e}", file=sys.stderr)
+
+    # FIX B: bounded stale-lease sweeper. Self-heals the unbounded ``.qlease``
+    # tombstone / orphan candidate / legacy ``.qlock`` litter that release()
+    # intentionally leaves for the next contender (most sessions get none, so
+    # they leak forever). Throttled to once per 24h via a one-stat marker, capped
+    # at max_files per run, and fail-open -- it NEVER raises into the hook and
+    # runs AFTER the daemon revive so it can never starve it. Not on the hot
+    # per-tool-call path (this is the SessionStart ensure-health path only).
+    try:
+        maybe_sweep_stale_leases()
+    except Exception:
+        pass
 
     # VS Code-family status-bar extension auto-install. Only meaningful for the
     # Claude runtime running inside a VS Code/Cursor/Windsurf editor; the detector
@@ -34188,6 +36913,37 @@ def run_ensure_health():
                 print(f"  [Token Optimizer] Fixed {_stale_fixed} stale plugin path(s) in settings.json")
         except Exception as _e:
             print(f"  [Token Optimizer] stale path fix failed: {_e}", file=sys.stderr)
+    # Lift an existing version-pinned statusLine onto the update-surviving
+    # marketplace clone path so the installed base stops seeing a blank status
+    # line on the first session after every plugin update (G3 C-P2-3). Runs
+    # after the stale-path fix so the cache path is already current before it is
+    # migrated to the clone. Claude Code only.
+    if not _is_codex:
+        try:
+            if _migrate_statusline_to_stable_path():
+                print("  [Token Optimizer] Migrated statusLine to the update-surviving path")
+        except Exception as _e:
+            print(f"  [Token Optimizer] statusLine path migration failed: {_e}", file=sys.stderr)
+        # Same class for the keep-warm launchd agent: an existing plist pinned to a
+        # version-cache measure.py path dies on plugin update and freezes the
+        # dashboard's savings. Lift it onto the clone path (macOS-only in practice).
+        try:
+            if _heal_keepwarm_plist_path():
+                print("  [Token Optimizer] Healed keep-warm agent to the update-surviving path")
+        except Exception as _e:
+            print(f"  [Token Optimizer] keep-warm path heal failed: {_e}", file=sys.stderr)
+        # issue #107, same class again: a Windows install made by an older build
+        # already has a console-flashing Scheduled Task action and .cmd shim on
+        # disk. Fixing the generators only helps the next install, so repair the
+        # installed artifacts in place. Strict no-op off Windows, and gated so it
+        # can never resurrect a declined/uninstalled/failed daemon.
+        try:
+            if _heal_windows_console_flash():
+                print("  [Token Optimizer] Healed Windows daemon launcher -- console "
+                      "flashing removed where a pythonw.exe twin exists, reduced to "
+                      "the single cmd.exe host window where none does")
+        except Exception as _e:
+            print(f"  [Token Optimizer] Windows console-flash heal failed: {_e}", file=sys.stderr)
     # Remove malformed hook commands (subshell patterns, double-$HOME paths).
     # Claude Code only: reads/writes ~/.claude/settings.json.
     if not _is_codex:
@@ -34357,16 +37113,21 @@ def run_ensure_health():
                 age = time.time() - update_marker.stat().st_mtime
                 should_check = age > 86400  # Once per day
             if should_check:
-                import subprocess
                 update_log = install_dir / ".last-update.log"
                 log_fd = os.open(str(update_log), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-                subprocess.Popen(
-                    ["bash", str(installer)],
-                    cwd=str(install_dir),
-                    stdout=log_fd, stderr=subprocess.STDOUT,
-                    start_new_session=True
-                )
-                os.close(log_fd)
+                try:
+                    _proc = spawn_detached(
+                        ["bash", str(installer)],
+                        cwd=str(install_dir),
+                        stdout=log_fd, stderr=subprocess.STDOUT,
+                    )
+                finally:
+                    # Popen duplicates the fd via start_new_session/creationflags;
+                    # the parent must close its own copy so the fd doesn't leak
+                    # across daily checks (EMFILE after ~1024 stale opens).
+                    os.close(log_fd)
+                if _proc is None:
+                    _log_spawn_failure("update installer spawn failed")
                 update_marker.touch()
     except Exception:
         pass
@@ -34395,6 +37156,42 @@ def run_ensure_health():
             print("")
             _write_config_flag("autoupdate_nudge_shown", True)
     except Exception:
+        pass
+
+
+# FIX C: the dashboard-daemon ensure/revive is DECOUPLED from the SessionStart
+# critical path entirely. It is dispatched as a DETACHED, fire-and-forget child
+# (never run inline, never under a wall-clock guard), so a new session spends ZERO
+# measurable time on install / kickstart / landing verification -- there is no
+# chance it can slow a user's session start. The child runs ``daemon-revive``
+# (-> _ensure_dashboard_daemon(force=True)) fully off the hot path, exactly like
+# the mid-session pulse's revive. launchd KeepAlive+RunAtLoad persists a
+# once-installed daemon; the detached child only needs to reinstall a MISSING
+# plist / revive a dead daemon, which it does without the session ever waiting on
+# it. Fail-open: a spawn failure must never break SessionStart.
+
+
+def _ensure_health_daemon_revive_first():
+    """Dispatch the dashboard-daemon ensure/revive as a DETACHED child.
+
+    The SessionStart path must add no measurable latency, so this NEVER performs
+    the install/kickstart/verify work inline. It fires a fire-and-forget
+    ``daemon-revive`` child (detached via spawn_detached: start_new_session on
+    POSIX / DETACHED_PROCESS+breakaway on Windows, stdio -> DEVNULL) and returns
+    immediately. The child reinstalls a missing plist / revives a dead daemon off
+    the hot path; launchd then persists a once-installed daemon. The mid-session
+    pulse provides a second, session-independent recovery path. Idempotent +
+    fail-open: a spawn failure is swallowed, never raised into the hook.
+    """
+    try:
+        _proc = spawn_detached(
+            [_detached_python_exe(), str(MEASURE_PY_PATH), "daemon-revive"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL)
+        if _proc is None:
+            _log_spawn_failure("SessionStart daemon-revive spawn failed")
+    except Exception:
+        # Fail-open: a daemon-revive spawn failure must never break SessionStart.
         pass
 
 
@@ -34463,9 +37260,9 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
     Returns the JSON string if a nudge was emitted, empty string otherwise.
 
     Tiered messaging:
-      25-74% fill                     → gentle nudge (floor is
-                                        _VERBOSITY_NUDGE_MIN_FILL; fill alone,
-                                        quality does not gate it)
+      25-74% fill + degraded session  → gentle nudge (floor is
+                                        _VERBOSITY_NUDGE_MIN_FILL;
+                                        SessionEfficiency gates it)
       75-89% fill                     → strong nudge with specific directives
       90%+ fill                        → suppressed (adding tokens makes it worse)
 
@@ -34490,6 +37287,9 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
             return ""
         fill_pct = cached.get("fill_pct", 0) or 0
         score = cached.get("score", 100) or 100
+        session_efficiency = cached.get("session_efficiency", 100)
+        if session_efficiency is None:
+            session_efficiency = 100
         # Session identity guard.
         #
         # This path reported another session's fill and quality as the user's own:
@@ -34604,14 +37404,16 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
         #     the Sonnet figure as the product number.
         if fill_pct >= 75:
             nudge = (
-                f"[Token Optimizer] Context {fill_pct:.0f}%{window_note}, quality {score:.0f}/100. "
+                f"[Token Optimizer] Context {fill_pct:.0f}%{window_note}, resource health {score:.0f}/100. "
                 "Answer in a focused and spartan way, as if the user has ADHD. Cut everything "
                 "that is not the answer itself. Think as long as you need, and size code, "
                 "diffs and file contents to the task."
             )
-        elif fill_pct >= _VERBOSITY_NUDGE_MIN_FILL:
+        elif (fill_pct >= _VERBOSITY_NUDGE_MIN_FILL
+              and session_efficiency < _VERBOSITY_NUDGE_EFFICIENCY_THRESHOLD):
             nudge = (
-                f"[Token Optimizer] Context {fill_pct:.0f}%{window_note}, quality {score:.0f}/100. "
+                f"[Token Optimizer] Context {fill_pct:.0f}%{window_note}, "
+                f"session efficiency {session_efficiency:.0f}/100. "
                 "Answer in a focused and spartan way, as if the user has ADHD. "
                 "Think as long as you need, and size code, diffs and file contents to the task."
             )
@@ -35163,7 +37965,7 @@ if __name__ == "__main__":
                 # recovery is the user's follow-up action.
                 print("{}")
                 sys.exit(0)
-            # Validate JSON shape. Torture MED-2: a half-written file
+            # Validate JSON shape. A half-written file
             # from a crash between truncate and flush could print
             # partial JSON here and mislead the skill's branch logic.
             if not raw:
@@ -35207,7 +38009,7 @@ if __name__ == "__main__":
             }
             # Atomic write: tempfile + os.replace so a mid-write crash
             # cannot leave the consent file in a half-written state that
-            # would confuse future --get readers (torture MED-2).
+            # would confuse future --get readers.
             try:
                 SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
                 tmp_path = consent_path.with_suffix(".json.tmp")
@@ -35366,7 +38168,33 @@ if __name__ == "__main__":
     elif args[0] == "setup-daemon":
         dry = "--dry-run" in args
         uninstall = "--uninstall" in args
-        setup_daemon(dry_run=dry, uninstall=uninstall)
+        this_install_only = "--this-install-only" in args
+        setup_daemon(dry_run=dry, uninstall=uninstall, this_install_only=this_install_only)
+    elif args[0] == "cleanup":
+        # #106 F3 (P2-8): confirm gate. `dry = "--dry-run" in args` meant a
+        # typo ("--dryrun", "--dry_run", "-dry-run") silently performed the
+        # REAL destructive run -- the flag you reach for to stay safe is
+        # exactly the one whose typo costs you. Unknown flags are now rejected,
+        # and mutating requires an explicit --confirm.
+        _known = {"--dry-run", "--this-install-only", "--confirm"}
+        _unknown = [a for a in args[1:] if a.startswith("-") and a not in _known]
+        if _unknown:
+            print(f"[Token Optimizer] Unknown flag(s): {', '.join(_unknown)}")
+            print("  Usage: measure.py cleanup [--dry-run] [--confirm] "
+                  "[--this-install-only]")
+            print("  Nothing was changed.")
+            sys.exit(2)
+        dry = "--dry-run" in args
+        this_install_only = "--this-install-only" in args
+        if not dry and "--confirm" not in args:
+            print("[Token Optimizer] cleanup removes installed components "
+                  "(daemon, statusLine, hooks, manifest entries).")
+            print("  Session data, checkpoints, and trends are PRESERVED.")
+            print("  Preview first:  measure.py cleanup --dry-run")
+            print("  Then run:       measure.py cleanup --confirm")
+            print("  Nothing was changed.")
+            sys.exit(1)
+        cleanup(dry_run=dry, this_install_only=this_install_only)
     elif args[0] in ("inject-routing", "inject-coach", "setup-coach-injection"):
         from injection import inject_managed_block, remove_managed_block
 
@@ -36112,12 +38940,8 @@ if __name__ == "__main__":
         _tok_hook_deadline = _install_hook_budget(8)
         payload = {}
         if throttle_only:
-            payload = _read_stdin_hook_input(max_bytes=1_000_000)
-            if not force and not _quality_cache_tick_due(
-                throttle,
-                payload.get("transcript_path"),
-                payload.get("session_id"),
-            ):
+            payload, due = _quality_cache_throttle_only_state(throttle, force)
+            if not due:
                 _clear_hook_budget(_tok_hook_deadline)
                 sys.exit(0)
         # Mid-session dashboard-daemon liveness pulse. quality-cache is the
@@ -36533,6 +39357,14 @@ if __name__ == "__main__":
         # new session indefinitely. Handler exits 0 gracefully on timeout;
         # the 24h throttle on internal self-heal paths means the next
         # SessionStart is typically a no-op anyway.
+        #
+        # FIX C: the dashboard-daemon ensure/revive runs FIRST, under its own
+        # short independent guard, BEFORE the 8s health budget is armed. A slow
+        # health scan that later trips the 8s watchdog can therefore never skip
+        # reinstalling a missing launchd plist / dead daemon. The daemon ensure
+        # is idempotent + internally throttled, so the second call inside
+        # run_ensure_health is a cheap no-op. Fail-open: never raises.
+        _ensure_health_daemon_revive_first()
         _tok_hook_old_sig = _install_hook_budget(8)
         try:
             run_ensure_health()
@@ -36562,7 +39394,7 @@ if __name__ == "__main__":
                 try:
                     _r = subprocess.run(
                         [_cli, "--uninstall-extension", _VSCODE_EXTENSION_ID],
-                        capture_output=True, text=True, timeout=60,
+                        capture_output=True, text=True, timeout=60, creationflags=_NO_WINDOW,
                     )
                     _removed = _r.returncode == 0
                 except (OSError, subprocess.SubprocessError):
@@ -36588,7 +39420,7 @@ if __name__ == "__main__":
             if _cli:
                 try:
                     _r = subprocess.run([_cli, "--list-extensions"], capture_output=True,
-                                        text=True, timeout=15)
+                                        text=True, timeout=15, creationflags=_NO_WINDOW)
                     _state = ("installed" if _r.returncode == 0
                               and _VSCODE_EXTENSION_ID.lower() in (_r.stdout or "").lower()
                               else "not installed")
@@ -36867,7 +39699,7 @@ if __name__ == "__main__":
             import subprocess
             subprocess.run(
                 [sys.executable, str(rc_script), "--clear", "--session", sid] + (["--quiet"] if quiet else []),
-                timeout=5
+                timeout=5, creationflags=_NO_WINDOW
             )
     elif args[0] == "read-cache-stats":
         # Show read cache stats
@@ -36881,7 +39713,7 @@ if __name__ == "__main__":
             import subprocess
             subprocess.run(
                 [sys.executable, str(rc_script), "--stats", "--session", sid],
-                timeout=5
+                timeout=5, creationflags=_NO_WINDOW
             )
     elif args[0] == "structure-proof":
         from pathlib import Path as _P
@@ -36890,7 +39722,7 @@ if __name__ == "__main__":
             print(f"[Token Optimizer] structure_replay.py not found at {proof_script}")
             sys.exit(1)
         import subprocess
-        result = subprocess.run([sys.executable, str(proof_script)] + args[1:])
+        result = subprocess.run([sys.executable, str(proof_script)] + args[1:], creationflags=_NO_WINDOW)
         sys.exit(result.returncode)
     else:
         print("Usage:")

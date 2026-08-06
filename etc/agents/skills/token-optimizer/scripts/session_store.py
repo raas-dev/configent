@@ -126,8 +126,22 @@ def _sanitize_session_id(sid: str) -> str:
 class SessionStore:
     """Per-session SQLite store for tool output caching."""
 
-    def __init__(self, session_id: str, snapshot_dir: Optional[Path] = None):
+    def __init__(
+        self,
+        session_id: str,
+        snapshot_dir: Optional[Path] = None,
+        busy_timeout_ms: Optional[int] = None,
+    ):
         self.session_id = _sanitize_session_id(session_id)
+        # Per-instance busy_timeout. Defaults to the 50ms fail-fast policy
+        # documented above (shadow mode prefers dropped writes over stalling a
+        # hook process). The compaction clear (read_cache.handle_clear_compacted)
+        # opts into a higher value so it waits out a sibling write lock on the
+        # same per-session db instead of dying at 50ms and silently no-op'ing
+        # (#101 follow-up).
+        self._busy_timeout_ms = (
+            50 if busy_timeout_ms is None else max(0, int(busy_timeout_ms))
+        )
         base = snapshot_dir or SNAPSHOT_DIR
         self._store_dir = base / "session-store"
         self.db_path = self._store_dir / f"{self.session_id}.db"
@@ -137,9 +151,12 @@ class SessionStore:
         if self._conn is not None:
             return self._conn
         self._store_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
-        self._conn = sqlite3.connect(str(self.db_path), timeout=0.1)
+        # Align the connect timeout (seconds) with the PRAGMA busy_timeout (ms)
+        # so the schema init AND later writes honor the same lock-wait budget.
+        timeout_s = max(0.05, self._busy_timeout_ms / 1000.0)
+        self._conn = sqlite3.connect(str(self.db_path), timeout=timeout_s)
         self._conn.execute("PRAGMA journal_mode=WAL")
-        self._conn.execute("PRAGMA busy_timeout=50")
+        self._conn.execute(f"PRAGMA busy_timeout={int(self._busy_timeout_ms)}")
         self._conn.execute("PRAGMA synchronous=NORMAL")
         self._conn.row_factory = sqlite3.Row
         self._init_schema()
@@ -439,8 +456,8 @@ class SessionStore:
         """Sum tokens_est of the session's active (repeatedly-read) files.
 
         This is the working set a checkpoint restore lets a resumed session skip
-        re-reading -- the grounded basis for the avoided-reconstruction credit
-        (U-B), in place of the compressed checkpoint's own byte size.
+        re-reading -- the grounded basis for the avoided-reconstruction credit,
+        in place of the compressed checkpoint's own byte size.
         """
         conn = self._connect()
         rows = conn.execute(

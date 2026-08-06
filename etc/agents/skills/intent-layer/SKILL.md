@@ -1,5 +1,6 @@
 ---
 name: intent-layer
+version: 1.0.0
 description: >
   Set up hierarchical Intent Layer (AGENTS.md files) for codebases.
   Use when initializing a new project, adding context infrastructure to an existing repo,

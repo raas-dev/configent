@@ -439,6 +439,10 @@ def _ancestor_in_process_tree(basenames: frozenset) -> bool:
             encoding="utf-8",
             errors="replace",
             timeout=2,
+            # Unreachable on Windows (the sys.platform guard above returns
+            # first), but carried anyway so every spawn in this file states the
+            # #107 no-flash intent. 0 on POSIX, so a no-op here.
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
         if proc.returncode != 0:
             return False
@@ -598,6 +602,10 @@ def _opencode_in_process_tree() -> bool:
             encoding="utf-8",
             errors="replace",
             timeout=2,
+            # Unreachable on Windows (the sys.platform guard above returns
+            # first), but carried anyway so every spawn in this file states the
+            # #107 no-flash intent. 0 on POSIX, so a no-op here.
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
         if proc.returncode != 0:
             return False

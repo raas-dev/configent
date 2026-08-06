@@ -1,68 +1,91 @@
 ---
 name: context7
-description: |
-  Fetch up-to-date library documentation via Context7 API. Use PROACTIVELY when:
-  (1) Working with ANY external library (React, Next.js, Supabase, etc.)
-  (2) User asks about library APIs, patterns, or best practices
-  (3) Implementing features that rely on third-party packages
-  (4) Debugging library-specific issues
-  (5) Need current documentation beyond training data cutoff
-  (6) AND MOST IMPORTANTLY, when you are installing dependencies, libraries, or frameworks you should ALWAYS check the docs to see what the latest versions are. Do not rely on outdated knowledge.
-  Always prefer this over guessing library APIs or using outdated knowledge.
+description: "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.) and the Context7 MCP server is unavailable or not configured. Fetches the same current docs directly via the Context7 REST API as a fallback. Triggers on: how to use library, API docs, framework pattern, import usage, library example."
+license: "(MIT AND CC-BY-SA-4.0)"
+compatibility: "Requires curl or fetch, jq."
+metadata:
+  version: "1.6.1"
+  repository: "https://github.com/netresearch/context7-skill"
+  author: "Netresearch DTT GmbH"
+allowed-tools:
+  - "Bash(curl:*)"
+  - "Bash(jq:*)"
+  - "Read"
 ---
 
-# Context7 Documentation Fetcher
+# Context7 Documentation Lookup Skill
 
-Retrieve current library documentation via Context7 API.
-
-IMPORTANT: `CONTEXT7_API_KEY` IS STORED IN THE .env FILE IN THE SKILL FOLDER THAT THE CONTEXT7 SKILL IS INSTALLED IN. SEARCH FOR IT THERE. .env FILES ARE HIDDEN FILES.
-
-Example:
-~/.agents/skills/context7/.env
-~/.claude/skills/context7/.env
-
-## Workflow
-
-### 1. Search for the library
-
-```bash
-python3 ~/.codex/skills/context7/scripts/context7.py search "<library-name>"
-```
-
-Example:
-```bash
-python3 ~/.codex/skills/context7/scripts/context7.py search "next.js"
-```
-
-Returns library metadata including the `id` field needed for step 2.
-
-### 2. Fetch documentation context
-
-```bash
-python3 ~/.codex/skills/context7/scripts/context7.py context "<library-id>" "<query>"
-```
-
-Example:
-```bash
-python3 ~/.codex/skills/context7/scripts/context7.py context "/vercel/next.js" "app router middleware"
-```
-
-Options:
-- `--type txt|md` - Output format (default: txt)
-- `--tokens N` - Limit response tokens
-
-## Quick Reference
-
-| Task | Command |
-|------|---------|
-| Find React docs | `search "react"` |
-| Get React hooks info | `context "/facebook/react" "useEffect cleanup"` |
-| Find Supabase | `search "supabase"` |
-| Get Supabase auth | `context "/supabase/supabase" "authentication row level security"` |
+Fetch current library documentation, API references, and code examples via the Context7 REST API.
 
 ## When to Use
 
-- Before implementing any library-dependent feature
-- When unsure about current API signatures
-- For library version-specific behavior
-- To verify best practices and patterns
+Use this skill when the user asks about library APIs, framework patterns, or version-specific behavior. Trigger on:
+
+- Library questions: "How do I use [library]?", "[library] API docs", "[library] patterns"
+- Import statements: `import`, `require`, `from` followed by a library name
+- Framework-specific topics: hooks, routing, middleware, ORM queries, schema definitions
+
+## When NOT to Use
+
+Do NOT use this skill for:
+
+- General programming concepts (closures, recursion, design patterns)
+- Code review or refactoring tasks
+- Debugging business logic
+- Writing scripts from scratch without library-specific questions
+
+## Core Workflow
+
+1. **Search** for the library ID:
+   ```bash
+   scripts/context7.sh search "library-name"
+   ```
+
+2. **Pick the best result**: Choose the ID with the highest score and most relevant description. Prefer official sources (e.g., `/vercel/next.js` over community forks).
+
+3. **Fetch documentation** with a focused topic:
+   ```bash
+   scripts/context7.sh docs "<library-id>" "<topic>" "<mode>"
+   ```
+
+Always extract a specific topic from the user's question. For "How does React Suspense work with server components?", use topic `suspense server components`.
+
+## Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `library-id` | Yes | From search results, format `/vendor/library` |
+| `topic` | No | Focus area extracted from user query (e.g., `hooks`, `routing`, `validation`) |
+| `mode` | No | `code` (default) for API references; `info` for conceptual guides |
+
+## Examples
+
+```bash
+# React hooks API
+scripts/context7.sh search "react"
+scripts/context7.sh docs "/facebook/react" "hooks" "code"
+
+# Next.js App Router conceptual guide
+scripts/context7.sh search "nextjs"
+scripts/context7.sh docs "/vercel/next.js" "app router" "info"
+
+# Django ORM queries
+scripts/context7.sh search "django"
+scripts/context7.sh docs "/django/django" "queryset filter" "code"
+
+# Laravel Eloquent relationships
+scripts/context7.sh search "laravel"
+scripts/context7.sh docs "/laravel/framework" "eloquent relationships" "code"
+```
+
+## Environment Configuration
+
+Set `CONTEXT7_API_KEY` for higher rate limits (optional):
+
+```bash
+export CONTEXT7_API_KEY="your-api-key"
+```
+
+---
+
+> **Contributing:** https://github.com/netresearch/context7-skill

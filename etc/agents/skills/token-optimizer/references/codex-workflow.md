@@ -130,14 +130,14 @@ Use these as the Codex equivalent of Phase 4:
 | Hooks | `codex-doctor`, `.codex/hooks.json` | Install/update balanced hooks; keep per-tool hooks opt-in |
 | Compact guidance | `codex-compact-prompt --status` | Install `measure.py codex-compact-prompt --install`; use compact around phase boundaries |
 | Quality/session rot | `quality current`, `coach` | Recommend `/compact`, `/clear`, rereads, or batching based on the actual score |
-| Cost/model behavior | Trends/model mix when available | Codex uses intelligence levels (Low/Medium/High/Extra High) and model selection (GPT-5.5, GPT-5.4, GPT-5.4-Mini, GPT-5.3-Codex, GPT-5.2). Advise on reasoning effort settings, switching to GPT-5.4-Mini for routine tasks, and using lower intelligence for simple operations |
+| Cost/model behavior | Trends/model mix when available | Codex uses intelligence levels (Low/Medium/High/Extra High) and model selection (GPT-5.6 Sol/Terra/Luna, GPT-5.5, GPT-5.4, GPT-5.4-Mini, GPT-5.3-Codex, GPT-5.2). Advise on reasoning effort settings, using Luna or Terra for routine tasks, and using lower intelligence for simple operations |
 
 Always explain side effects before changing config. Prefer dry-runs before writes.
 
 ## 4. Codex Runtime Optimizations That Work Now
 
 - Real Codex status in chat via `report` and `coach`.
-- Context quality scoring from Codex JSONL where logs expose enough data, including OpenAI/GPT-5.5 long-context calibration.
+- Context quality scoring from Codex JSONL where logs expose enough data, including OpenAI/GPT-5.6 long-context calibration.
 - Balanced hooks for prompt-quality nudges, topic-relevant continuity hints, session continuity, and dashboard refresh.
 - Quality-aware checkpoints that preserve score, weakest signals, model/window metadata, decisions, files, and next step.
 - Stop-time backfill of large/high-signal Codex tool outputs into the local archive and SQLite session store, without enabling noisy per-tool hooks by default.

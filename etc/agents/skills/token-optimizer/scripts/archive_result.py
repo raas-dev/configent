@@ -113,6 +113,10 @@ _SAVINGS_DB_TIMEOUT_SECONDS = 0.05
 _SAVINGS_DB_BUSY_TIMEOUT_MS = 50
 _DEFAULT_SAVINGS_COST_PER_MTOK = 3.0  # Sonnet input rate; safe fallback for hook-only pricing.
 _HOOK_INPUT_COST_PER_MTOK = {
+    "gpt-5.6-sol": 5.0,
+    "gpt-5.6-terra": 2.0,
+    "gpt-5.6-luna": 0.20,
+    "gpt-5.6": 5.0,
     "gpt-5.5-pro": 30.0,
     "gpt-5.1-codex-mini": 0.25,
     "gpt-4o-mini": 0.15,
@@ -620,6 +624,7 @@ def _estimate_savings_cost_per_mtok() -> float:
         or os.environ.get("MODEL")
         or ""
     ).lower()
+    model = re.sub(r"[\s_]+", "-", model.rsplit("/", 1)[-1].rsplit(":", 1)[-1])
     if "fable" in model:
         return 10.0
     if "opus" in model:

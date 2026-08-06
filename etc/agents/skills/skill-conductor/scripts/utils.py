@@ -1,7 +1,41 @@
 """Shared utilities for skill-creator scripts."""
 
+import random
 from pathlib import Path
 
+
+def split_evals(
+    items: list[dict], holdout: float, seed: int = 42, stratify_key: str | None = None
+) -> tuple[list[dict], list[dict]]:
+    """Split items into (train, test), optionally stratified by a key.
+
+    Each stratum contributes max(1, int(len * holdout)) items to test, so no
+    non-empty stratum is ever missing from the held-out set. Boolean strata are
+    ordered truthy-first, which reproduces the historical run_loop.py
+    should_trigger split bit-for-bit; other key values are ordered by str() so
+    the split is independent of item order in the source file.
+    """
+    random.seed(seed)
+    if stratify_key is None:
+        strata = [list(items)]
+    else:
+        by_key: dict = {}
+        for item in items:
+            by_key.setdefault(item.get(stratify_key), []).append(item)
+        if all(isinstance(k, bool) for k in by_key):
+            order = sorted(by_key, reverse=True)
+        else:
+            order = sorted(by_key, key=str)
+        strata = [by_key[k] for k in order]
+
+    train: list[dict] = []
+    test: list[dict] = []
+    for stratum in strata:
+        random.shuffle(stratum)
+        n_test = max(1, int(len(stratum) * holdout))
+        test += stratum[:n_test]
+        train += stratum[n_test:]
+    return train, test
 
 
 def parse_skill_md(skill_path: Path) -> tuple[str, str, str]:

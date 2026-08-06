@@ -54,12 +54,50 @@ def _hook_command(script: str, *args: str, redirect_quiet: bool = False) -> str:
         # current interpreter directly so the hot path does not traverse MSYS
         # bash and python-launcher.sh (several CreateProcess calls per hook).
         # list2cmdline applies native Windows quoting for paths with spaces.
-        argv = [sys.executable, str(root / "hooks" / "run.py"), script, *args]
+        #
+        # Verified 2026-08-05 against Codex CLI source: codex-rs/hooks/src/
+        # engine/command_runner.rs default_shell_command() spawns hooks as
+        # `%COMSPEC% /C <command>` (fallback cmd.exe) on Windows unless the
+        # user overrides the hook shell in config. So the cmd.exe syntax below
+        # (setlocal, for /f, 2^>NUL, >NUL 2>&1) is CORRECT here — do NOT
+        # "bash-ify" it. #118 was the inverse bug: Claude Code runs hooks via
+        # Git Bash, so measure.py's Claude-facing commands are POSIX-shaped.
+        if _SEMVER_DIR_RE.match(root.name):
+            # CMD needs a Windows-native counterpart to the POSIX runtime
+            # resolver below. Keep the baked path as a fail-open fallback when
+            # the version scan cannot run.
+            base = str(root.parent)
+            ps_base = base.replace("'", "''")
+            ps_command = (
+                "$ErrorActionPreference='SilentlyContinue'; "
+                f"Get-ChildItem -LiteralPath '{ps_base}' -Directory | "
+                "Where-Object { $_.Name -match '^\\d+\\.\\d+\\.\\d+$' } | "
+                "Sort-Object { [version]$_.Name } -Descending | "
+                "Select-Object -First 1 -ExpandProperty Name"
+            )
+            resolver = subprocess.list2cmdline(
+                ["powershell", "-NoProfile", "-Command", ps_command]
+            )
+            prefix = (
+                'setlocal EnableDelayedExpansion && '
+                'set "TOKEN_OPTIMIZER_RUNTIME=codex" && '
+                f'set "TOKEN_OPTIMIZER_RUNTIME_ROOT={root}" && '
+                f'for /f "delims=" %R in (\'{resolver} 2^>NUL\') '
+                f'do @set "TOKEN_OPTIMIZER_RUNTIME_ROOT={base}\\%R" && '
+            )
+            python = subprocess.list2cmdline([sys.executable])
+            script_args = subprocess.list2cmdline([script, *args])
+            command = (
+                f'{prefix}{python} "!TOKEN_OPTIMIZER_RUNTIME_ROOT!\\hooks\\run.py" '
+                f"{script_args}"
+            )
+        else:
+            prefix = 'set "TOKEN_OPTIMIZER_RUNTIME=codex" && '
+            argv = [sys.executable, str(root / "hooks" / "run.py"), script, *args]
         redirect = " >NUL 2>&1" if redirect_quiet else ""
-        return (
-            'set "TOKEN_OPTIMIZER_RUNTIME=codex" && '
-            f"{subprocess.list2cmdline(argv)}{redirect}"
-        )
+        if _SEMVER_DIR_RE.match(root.name):
+            return f"{command}{redirect}"
+        return f"{prefix}{subprocess.list2cmdline(argv)}{redirect}"
 
     command_args = " ".join(shlex.quote(arg) for arg in (script, *args))
     redirect = " >/dev/null 2>&1" if redirect_quiet else ""

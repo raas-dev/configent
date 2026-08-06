@@ -17,22 +17,21 @@ Defines the evals for a skill. Located at `evals/evals.json` within the skill di
       "prompt": "User's example prompt",
       "expected_output": "Description of expected result",
       "files": ["evals/files/sample1.pdf"],
-      "expectations": [
-        "The output includes X",
-        "The skill used script Y"
-      ]
+      "expectations": ["The output includes X", "The skill used script Y"]
     }
   ]
 }
 ```
 
 **Fields:**
+
 - `skill_name`: Name matching the skill's frontmatter
 - `evals[].id`: Unique integer identifier
 - `evals[].prompt`: The task to execute
 - `evals[].expected_output`: Human-readable description of success
 - `evals[].files`: Optional list of input file paths (relative to skill root)
 - `evals[].expectations`: List of verifiable statements
+- `evals[].category`: (additive, optional) Free-form stratum label (e.g. `"guard"`, `"saturated"`, `"core"`, `"hard-new"`) used by `scripts/split_evals.py` to stratify the train/held-out split
 
 ---
 
@@ -72,6 +71,7 @@ Tracks version progression in Improve mode. Located at workspace root.
 ```
 
 **Fields:**
+
 - `started_at`: ISO timestamp of when improvement started
 - `skill_name`: Name of the skill being improved
 - `current_best`: Version identifier of the best performer
@@ -92,13 +92,15 @@ Output from the grader agent. Located at `<run-dir>/grading.json`.
   "expectations": [
     {
       "text": "The output includes the name 'John Smith'",
-      "passed": true,
-      "evidence": "Found in transcript Step 3: 'Extracted names: John Smith, Sarah Johnson'"
+      "dimension": "Completeness",
+      "evidence": "Found in transcript Step 3: 'Extracted names: John Smith, Sarah Johnson', and summary.md lists it as the primary contact with the matching phone from the input.",
+      "passed": true
     },
     {
       "text": "The spreadsheet has a SUM formula in cell B10",
-      "passed": false,
-      "evidence": "No spreadsheet was created. The output was a text file."
+      "dimension": "Robustness",
+      "evidence": "No spreadsheet was created. outputs/ contains only report.txt and no spreadsheet tool appears in the transcript.",
+      "passed": false
     }
   ],
   "summary": {
@@ -107,6 +109,20 @@ Output from the grader agent. Located at `<run-dir>/grading.json`.
     "total": 3,
     "pass_rate": 0.67
   },
+  "dimension_scores": {
+    "Discovery": { "score": 1.0, "passed": 2, "total": 2 },
+    "Clarity": { "score": 1.0, "passed": 1, "total": 1 },
+    "Structure": { "score": 1.0, "passed": 3, "total": 3 },
+    "Robustness": { "score": 0.5, "passed": 1, "total": 2 },
+    "Completeness": { "score": 1.0, "passed": 1, "total": 1 }
+  },
+  "failing": [
+    {
+      "text": "The spreadsheet has a SUM formula in cell B10",
+      "dimension": "Robustness",
+      "evidence": "No spreadsheet was created. The output was a text file."
+    }
+  ],
   "execution_metrics": {
     "tool_calls": {
       "Read": 5,
@@ -150,13 +166,113 @@ Output from the grader agent. Located at `<run-dir>/grading.json`.
 ```
 
 **Fields:**
-- `expectations[]`: Graded expectations with evidence
+
+- `expectations[]`: Graded expectations with evidence. Framed as GENERATED binary yes/no questions (via the two-step Summarize→Decompose meta-prompt). Backward-compatible fields `text`, `passed`, `evidence` are retained; **`dimension`** (one of the 5 dimensions) is added to each entry. Field order is critique-before-verdict: `evidence` (the detailed critique citing concrete evidence) is written and emitted BEFORE `passed`, so the grader articulates its assessment before committing to a decision.
 - `summary`: Aggregate pass/fail counts
+- `dimension_scores`: (additive) Per-dimension `{ score, passed, total }`, where `score` = mean of that dimension's binary answers in [0,1]
+- `failing[]`: (additive) The subset of expectations answered "no" (`passed: false`), each with `text`, `dimension`, `evidence`
 - `execution_metrics`: Tool usage and output size (from executor's metrics.json)
 - `timing`: Wall clock timing (from timing.json)
 - `claims`: Extracted and verified claims from the output
 - `user_notes_summary`: Issues flagged by the executor
 - `eval_feedback`: (optional) Improvement suggestions for the evals, only present when the grader identifies issues worth raising
+
+The `dimension`, `dimension_scores`, and `failing[]` fields are purely additive — the eval-viewer continues to read `expectations[]`, `claims`, and `eval_feedback` unchanged.
+
+---
+
+## bineval.json
+
+Output from BinEval evaluation (`agents/bineval.md` emits it). Located at `<run-dir>/bineval.json`.
+
+BinEval replaces numeric/holistic quality scoring with atomic binary yes/no questions per dimension. Each question carries a critique (`explanation`) written BEFORE the `1`/`0` `answer`, then the answers are aggregated to a score in [0,1]. The emitting agent writes `questions[]`, `dimension_scores`, and `failing[]`; the ORCHESTRATOR adds `overall` (see below).
+
+```json
+{
+  "target": "skill-artifact",
+  "skill_name": "pdf",
+  "skill_path": "/path/to/pdf",
+  "eval_id": null,
+  "question_source": "hybrid",
+  "requirements": [
+    { "id": "R1", "dimension": "Clarity", "text": "Instructions explain WHY each step matters" }
+  ],
+  "questions": [
+    {
+      "id": "DET-STRUCT-SKILLMD-EXISTS",
+      "dimension": "Structure",
+      "requirement_id": null,
+      "text": "Does SKILL.md exist?",
+      "violation_example": "The skill directory has no SKILL.md file.",
+      "source": "deterministic",
+      "critical": true,
+      "explanation": "SKILL.md found at the skill root.",
+      "answer": 1
+    },
+    {
+      "id": "Q-CLARITY-1",
+      "dimension": "Clarity",
+      "requirement_id": "R1",
+      "text": "Does the body explain WHY the validation step matters?",
+      "violation_example": "Step says 'run validate.py' with no rationale.",
+      "source": "llm",
+      "critical": false,
+      "explanation": "Step 4 says 'run validate.py' and stops there; nothing in the body or references/ says what the validator catches or what breaks when it is skipped, so a reader cannot judge whether the step is optional.",
+      "answer": 0
+    }
+  ],
+  "dimension_scores": {
+    "Discovery": { "score": 1.0, "passed": 4, "total": 4 },
+    "Clarity": { "score": 0.75, "passed": 3, "total": 4 },
+    "Structure": { "score": 1.0, "passed": 8, "total": 8 },
+    "Robustness": { "score": 1.0, "passed": 5, "total": 5 },
+    "Completeness": { "score": 0.83, "passed": 5, "total": 6 }
+  },
+  "overall": {
+    "score": 0.86,
+    "passed": 25,
+    "total": 27,
+    "display": "solid",
+    "gate_passed": true
+  },
+  "failing": [
+    {
+      "id": "Q-CLARITY-1",
+      "dimension": "Clarity",
+      "text": "Does the body explain WHY the validation step matters?",
+      "explanation": "The validation step is listed but never motivated.",
+      "critical": false
+    }
+  ]
+}
+```
+
+**Fields:**
+
+- `target`: `"skill-artifact"` (evaluating a skill's files) or `"output"` (evaluating an eval run's output)
+- `skill_name` / `skill_path`: Identify the evaluated skill
+- `eval_id`: Eval id when `target` is `"output"`, otherwise `null`
+- `question_source`: `"hybrid"` (deterministic + fixed bank — skill-artifact scoring), `"fixed"` (bank only), or `"generated"` (per-task questions — output grading)
+- `requirements[]`: Explicit criteria from the two-step meta-prompt's Summarize step; each `{ id, dimension, text }`
+- `questions[]`: Atomic binary questions
+  - `id`: `DET-...` for deterministic records (emitted solely by `scripts/eval_skill.py --json`), or `Q-<DIMENSION>-N` for generated/bank questions
+  - `dimension`: One of `Discovery`, `Clarity`, `Structure`, `Robustness`, `Completeness`
+  - `requirement_id`: Links to a `requirements[]` id, or `null` for deterministic questions
+  - `text`: A single yes/no question
+  - `violation_example`: A concrete example of the "no" case
+  - `source`: `"deterministic"` or `"llm"`
+  - `critical`: Whether a "no" answer fails the gate
+  - `explanation`: The critique — evidence grounding the answer. Emitted BEFORE `answer` and written before it
+  - `answer`: `1` (yes/satisfied) or `0` (no/violated), committed only after the critique
+- `dimension_scores`: Per-dimension `{ score, passed, total }`, where `score` = mean of that dimension's answers in [0,1]
+- `overall`: **Filled by the ORCHESTRATOR, not by the emitting agent.** The judge is never told the acceptance criteria, so it cannot bias its answers toward them; the orchestrator computes this block from the returned answers.
+  - `score`: `(1/N) * sum(all answers)` in [0,1]
+  - `passed` / `total`: Count of `1` answers and total questions
+  - `display`: Band — `score>=0.90` "production-ready", `0.70-0.89` "solid", `0.50-0.69` "needs-work", `<0.50` "rewrite" (optional 50-pt display = `round(score*50)`)
+  - `gate_passed`: `true` iff EVERY critical question (deterministic + critical bank questions) is answered `1`. The GATE — not the scalar — is the pass criterion.
+- `failing[]`: Questions answered `0`, each with `id`, `dimension`, `text`, `explanation`, `critical`
+
+**Comparator variant:** When two skills/outputs are compared (see comparison.json), A and B answer the SAME `questions[]`. The comparator does not re-emit a full bineval.json per side; instead it records each side's `answer` per question and aggregates into the per-dimension `{ A, B, agreement }` shape of comparison.json.
 
 ---
 
@@ -184,6 +300,7 @@ Output from the executor agent. Located at `<run-dir>/outputs/metrics.json`.
 ```
 
 **Fields:**
+
 - `tool_calls`: Count per tool type
 - `total_tool_calls`: Sum of all tool calls
 - `total_steps`: Number of major execution steps
@@ -248,9 +365,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
         "tool_calls": 18,
         "errors": 0
       },
-      "expectations": [
-        {"text": "...", "passed": true, "evidence": "..."}
-      ],
+      "expectations": [{ "text": "...", "passed": true, "evidence": "..." }],
       "notes": [
         "Used 2023 data, may be stale",
         "Fell back to text overlay for non-fillable fields"
@@ -260,14 +375,19 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 
   "run_summary": {
     "with_skill": {
-      "pass_rate": {"mean": 0.85, "stddev": 0.05, "min": 0.80, "max": 0.90},
-      "time_seconds": {"mean": 45.0, "stddev": 12.0, "min": 32.0, "max": 58.0},
-      "tokens": {"mean": 3800, "stddev": 400, "min": 3200, "max": 4100}
+      "pass_rate": { "mean": 0.85, "stddev": 0.05, "min": 0.8, "max": 0.9 },
+      "time_seconds": {
+        "mean": 45.0,
+        "stddev": 12.0,
+        "min": 32.0,
+        "max": 58.0
+      },
+      "tokens": { "mean": 3800, "stddev": 400, "min": 3200, "max": 4100 }
     },
     "without_skill": {
-      "pass_rate": {"mean": 0.35, "stddev": 0.08, "min": 0.28, "max": 0.45},
-      "time_seconds": {"mean": 32.0, "stddev": 8.0, "min": 24.0, "max": 42.0},
-      "tokens": {"mean": 2100, "stddev": 300, "min": 1800, "max": 2500}
+      "pass_rate": { "mean": 0.35, "stddev": 0.08, "min": 0.28, "max": 0.45 },
+      "time_seconds": { "mean": 32.0, "stddev": 8.0, "min": 24.0, "max": 42.0 },
+      "tokens": { "mean": 2100, "stddev": 300, "min": 1800, "max": 2500 }
     },
     "delta": {
       "pass_rate": "+0.50",
@@ -286,6 +406,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 ```
 
 **Fields:**
+
 - `metadata`: Information about the benchmark run
   - `skill_name`: Name of the skill
   - `timestamp`: When the benchmark was run
@@ -301,83 +422,105 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
   - `with_skill` / `without_skill`: Each contains `pass_rate`, `time_seconds`, `tokens` objects with `mean` and `stddev` fields
   - `delta`: Difference strings like `"+0.50"`, `"+13.0"`, `"+1700"`
 - `notes`: Freeform observations from the analyzer
+- `transitions`: (additive, optional) Assertion-level diff between two skill versions, produced by the gated self-update loop (Mode 2 Step 3). The viewer ignores it.
+
+```json
+"transitions": {
+  "parent_version": "v3.1",
+  "candidate_version": "v3.2",
+  "improved": [{ "eval_id": 8, "text": "Rewrite is >=20% shorter than the original" }],
+  "regressed": [],
+  "persistent_fail": [{ "eval_id": 2, "text": "..." }],
+  "stable_success_count": 47
+}
+```
+
+  - `improved` / `regressed` / `persistent_fail`: Lists of `{ eval_id, text }` where `text` is the assertion. `regressed` on a held-out eval means the candidate should have been rejected.
+  - `stable_success_count`: Count only — the list would be long and uninformative.
 
 **Important:** The viewer reads these field names exactly. Using `config` instead of `configuration`, or putting `pass_rate` at the top level of a run instead of nested under `result`, will cause the viewer to show empty/zero values. Always reference this schema when generating benchmark.json manually.
 
 ---
 
-## comparison.json
+## split.json
 
-Output from blind comparator. Located at `<grading-dir>/comparison-N.json`.
+Frozen train/held-out split for the gated self-update loop. Located at the workspace root (e.g. `<workspace>/iteration-N/split.json`). Written by `scripts/split_evals.py --write`; never edited by hand and never regenerated after results have been seen.
 
 ```json
 {
-  "winner": "A",
-  "reasoning": "Output A provides a complete solution with proper formatting and all required fields. Output B is missing the date field and has formatting inconsistencies.",
-  "rubric": {
-    "A": {
-      "content": {
-        "correctness": 5,
-        "completeness": 5,
-        "accuracy": 4
-      },
-      "structure": {
-        "organization": 4,
-        "formatting": 5,
-        "usability": 4
-      },
-      "content_score": 4.7,
-      "structure_score": 4.3,
-      "overall_score": 9.0
-    },
-    "B": {
-      "content": {
-        "correctness": 3,
-        "completeness": 2,
-        "accuracy": 3
-      },
-      "structure": {
-        "organization": 3,
-        "formatting": 2,
-        "usability": 3
-      },
-      "content_score": 2.7,
-      "structure_score": 2.7,
-      "overall_score": 5.4
-    }
-  },
-  "output_quality": {
-    "A": {
-      "score": 9,
-      "strengths": ["Complete solution", "Well-formatted", "All fields present"],
-      "weaknesses": ["Minor style inconsistency in header"]
-    },
-    "B": {
-      "score": 5,
-      "strengths": ["Readable output", "Correct basic structure"],
-      "weaknesses": ["Missing date field", "Formatting inconsistencies", "Partial data extraction"]
-    }
-  },
-  "expectation_results": {
-    "A": {
-      "passed": 4,
-      "total": 5,
-      "pass_rate": 0.80,
-      "details": [
-        {"text": "Output includes name", "passed": true}
-      ]
-    },
-    "B": {
-      "passed": 3,
-      "total": 5,
-      "pass_rate": 0.60,
-      "details": [
-        {"text": "Output includes name", "passed": true}
-      ]
-    }
-  }
+  "skill_name": "example-skill",
+  "seed": 42,
+  "holdout": 0.4,
+  "train_ids": [2, 3, 4, 5, 8, 9, 12, 13, 14],
+  "heldout_ids": [1, 6, 7, 10, 11, 15],
+  "created_at": "2026-07-21T12:00:00+00:00"
 }
 ```
+
+---
+
+## comparison.json
+
+Output from blind comparator (`agents/comparator.md` emits it). Located at `<grading-dir>/comparison-N.json`.
+
+A and B answer the SAME binary yes/no questions, each side's `explanation` (the critique) written and emitted BEFORE its `answer`. There is NO 1-5 rubric and no holistic 1-9 score. The winner is the side with the higher overall yes-rate; ties break on the critical-dimension yes-rate.
+
+```json
+{
+  "questions": [
+    {
+      "id": "Q-COMPLETE-1",
+      "dimension": "Completeness",
+      "text": "Does the output include the date field?",
+      "violation_example": "The output omits any date.",
+      "critical": false,
+      "A": { "explanation": "Date '2026-01-15' present in the header field block, matching the source record.", "answer": 1 },
+      "B": { "explanation": "No date in the header, footer, or body; the field was dropped rather than relocated.", "answer": 0 }
+    },
+    {
+      "id": "Q-STRUCT-1",
+      "dimension": "Structure",
+      "text": "Is the output formatted consistently throughout?",
+      "violation_example": "Mixed heading styles and inconsistent indentation.",
+      "critical": false,
+      "A": { "explanation": "Heading hierarchy runs H1 → H2 → H3 with no skips; spacing is uniform across sections.", "answer": 1 },
+      "B": { "explanation": "Heading levels jump from H1 to H3 and list indentation shifts between 2 and 4 spaces.", "answer": 0 }
+    }
+  ],
+  "dimensions": {
+    "Discovery": { "A": 1.0, "B": 1.0, "agreement": 1.0 },
+    "Clarity": { "A": 1.0, "B": 0.5, "agreement": 0.5 },
+    "Structure": { "A": 1.0, "B": 0.0, "agreement": 0.0 },
+    "Robustness": { "A": 1.0, "B": 1.0, "agreement": 1.0 },
+    "Completeness": { "A": 1.0, "B": 0.0, "agreement": 0.0 }
+  },
+  "overall": {
+    "A": 0.8,
+    "B": 0.6
+  },
+  "winner": "A",
+  "decisive_questions": [
+    {
+      "id": "Q-COMPLETE-1",
+      "dimension": "Completeness",
+      "text": "Does the output include the date field?",
+      "A": 1,
+      "B": 0,
+      "note": "A satisfies a question B fails — a direct contributor to A's higher yes-rate."
+    }
+  ],
+  "reasoning": "A answers more questions 'yes' (0.8 vs 0.6). It includes the date field and is consistently formatted; B violates both."
+}
+```
+
+**Fields:**
+
+- `questions[]`: The shared binary questions. Each carries `id`, `dimension`, `text`, `violation_example`, `critical`, and a per-side `{ explanation, answer }` for both `A` and `B` — critique first, verdict second
+- `dimensions`: Per-dimension yes-rate for each side plus `agreement` (the fraction of that dimension's questions where A and B gave the same answer)
+- `overall`: `{ A, B }` — each side's overall yes-rate across all questions
+- `winner`: The side (`"A"` or `"B"`) with the higher `overall` yes-rate; tiebreak = higher yes-rate on the critical dimensions
+- `decisive_questions[]`: Questions where the sides diverge and that drive the verdict, each with `A`/`B` answers and a short `note`
+- `reasoning`: Brief evidence-grounded summary of the verdict
 
 ---
 
