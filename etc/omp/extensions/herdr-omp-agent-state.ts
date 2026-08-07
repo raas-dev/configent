@@ -2,10 +2,11 @@
 // managed by herdr; reinstalling or updating the integration overwrites this file.
 // add custom hooks/plugins beside this file instead of editing it.
 // HERDR_INTEGRATION_ID=omp
-// HERDR_INTEGRATION_VERSION=6
+// HERDR_INTEGRATION_VERSION=8
 // @ts-nocheck
 
 import net from "node:net";
+import path from "node:path";
 
 const HERDR_ENV = process.env.HERDR_ENV;
 const socketPath = process.env.HERDR_SOCKET_PATH;
@@ -84,11 +85,17 @@ function nextReportSeq(): number {
   return reportSeq;
 }
 
+export function isAbsoluteSessionPath(file: unknown): file is string {
+  return (
+    typeof file === "string" &&
+    (path.posix.isAbsolute(file) || path.win32.isAbsolute(file))
+  );
+}
+
 function updateSessionRef(ctx: any): void {
   try {
     const file = ctx?.sessionManager?.getSessionFile?.();
-    currentAgentSessionPath =
-      typeof file === "string" && file.startsWith("/") ? file : undefined;
+    currentAgentSessionPath = isAbsoluteSessionPath(file) ? file : undefined;
   } catch {
     currentAgentSessionPath = undefined;
   }
@@ -166,29 +173,6 @@ function sendState(state: AgentState, message?: string, seq = nextReportSeq()): 
       seq,
     }),
   });
-}
-
-function releaseAgent(): Promise<void> {
-  return sendRequest({
-    id: `${source}:release:${Date.now()}:${Math.random().toString(36).slice(2)}`,
-    method: "pane.release_agent",
-    params: {
-      pane_id: paneId,
-      source,
-      agent: "omp",
-      seq: nextReportSeq(),
-    },
-  });
-}
-
-function shouldReleaseOnSessionShutdown(event: any): boolean {
-  // OMP tears down and rebinds extension runtimes for internal lifecycle actions
-  // such as /reload, /new, /resume, and /fork. Those do not mean the pane's
-  // agent process has exited, and releasing hook authority there can suppress
-  // legitimate reports from the replacement runtime. Only a user/process quit
-  // should release Herdr's full-lifecycle authority.
-  const reason = event?.reason;
-  return reason === "quit";
 }
 
 let sendInFlight = false;
@@ -470,13 +454,9 @@ export default function (pi) {
     scheduleIdle();
   });
 
-  pi.on("session_shutdown", async (event) => {
-    if (!rootSession) {
-      return;
-    }
-    clearPendingTimers();
-    if (shouldReleaseOnSessionShutdown(event)) {
-      await releaseAgent();
+  pi.on("session_shutdown", () => {
+    if (rootSession) {
+      clearPendingTimers();
     }
   });
 }
