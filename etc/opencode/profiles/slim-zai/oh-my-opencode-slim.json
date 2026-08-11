@@ -24,9 +24,7 @@
   },
   "fallback": {
     "enabled": true,
-    "timeoutMs": 15000,
-    "retryDelayMs": 500,
-    "retry_on_empty": true
+    "maxRetries": 2
   },
   "interview": {
     "maxQuestions": 2,
