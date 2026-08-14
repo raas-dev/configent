@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.232.3](https://github.com/raas-dev/configent/compare/1.232.2...1.232.3) (2026-08-14)
+
+### Fixes
+
+* **exec:** allow omitting -- in oc/pic ([2dcbfe0](https://github.com/raas-dev/configent/commit/2dcbfe001d830e584430344b22f610aa3a97cb21))
 ## [1.232.2](https://github.com/raas-dev/configent/compare/1.232.1...1.232.2) (2026-08-02)
 
 ### Fixes
