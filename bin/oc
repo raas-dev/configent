@@ -2,6 +2,9 @@
 
 # oc: Switch OpenCode configuration profiles
 
+# Alias: `oc x` = `oc exec`
+[[ "${1:-}" == "x" ]] && set -- exec "${@:2}"
+
 # Save the original directory early
 ORIGINAL_DIR="$PWD"
 
