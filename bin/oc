@@ -74,9 +74,9 @@ PROJECT_CONFIG_DIR="${PROJECT_CONFIG_DIR:-$PROJECT_ROOT_DIR/.opencode}"
 
 # Validate commands early to show errors before any prompts
 # This check must happen before the .opencode prompt
-if [[ "$1" == "exec" && $# -lt 3 ]]; then
-  echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
-  echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
+if [[ "$1" == "exec" && $# -lt 2 ]]; then
+  echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
+  echo -e "${DIM}Usage: oc exec <profile-name> [-- command and args]${NC}" >&2
   exit 1
 fi
 
@@ -625,13 +625,16 @@ show_help() {
     "      ${DIM}Example:${NC}" \
     "      oc use omo-zai" \
     "" \
-    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} -- ${CYAN}<command>${NC} ${DIM}[args...]${NC}" \
-    "      Execute a command in the current directory with the given profile." \
-    "      ${DIM}The project's .opencode directory is replaced with the${NC}" \
+    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} ${DIM}[${NC}${CYAN}opencode-args...${NC}${DIM} |${NC} ${CYAN}--${NC} ${CYAN}<command>${NC} ${DIM}[args...]]${NC}" \
+    "      Run opencode with the given profile, passing extra args to it." \
+    "      ${DIM}Use '--' to run an arbitrary command instead. The${NC}" \
+    "      ${DIM}project's .opencode directory is replaced with the${NC}" \
     "      ${DIM}profile's copy for the duration of the command and${NC}" \
     "      ${DIM}restored from backup on exit.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
+    "      oc exec computer-use            ${DIM}# Opens opencode${NC}" \
+    "      oc exec computer-use run foo" \
     "      oc exec computer-use -- pwd" \
     "" \
     "  ${CYAN}help${NC}, ${CYAN}-h${NC}, ${CYAN}--help${NC}" \
@@ -669,9 +672,9 @@ if [[ $# -gt 0 ]]; then
     fi
     ;;
   exec)
-    if [[ $# -lt 3 ]]; then
-      echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
-      echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
+    if [[ $# -lt 2 ]]; then
+      echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
+      echo -e "${DIM}Usage: oc exec <profile-name> [-- command and args]${NC}" >&2
       exit 1
     fi
     # Shift past 'exec'
@@ -679,13 +682,18 @@ if [[ $# -gt 0 ]]; then
     exec_profile_name="$1"
     shift
 
-    # Check for '--' separator
-    if [[ "$1" != "--" ]]; then
-      echo -e "${YELLOW}Error: Expected '--' after profile name.${NC}" >&2
-      echo -e "${DIM}Usage: oc exec <profile-name> -- command and args${NC}" >&2
-      exit 1
+    # Check for '--' separator: with it, run the given command;
+    # without it, treat all remaining args as arguments to opencode
+    if [[ "$1" == "--" ]]; then
+      shift
+    else
+      set -- opencode "$@"
     fi
-    shift # Remove '--'
+
+    # Default to opencode when no command given
+    if [[ $# -eq 0 ]]; then
+      set -- opencode
+    fi
 
     # Verify profile exists
     exec_profile_dir="$PROFILES_DIR/$exec_profile_name"

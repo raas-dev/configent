@@ -74,9 +74,9 @@ PROJECT_CONFIG_DIR="${PROJECT_CONFIG_DIR:-$PROJECT_ROOT_DIR/.pi}"
 
 # Validate commands early to show errors before any prompts
 # This check must happen before the .pi prompt
-if [[ "$1" == "exec" && $# -lt 3 ]]; then
-  echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
-  echo -e "${DIM}Usage: pic exec <profile-name> -- command and args${NC}" >&2
+if [[ "$1" == "exec" && $# -lt 2 ]]; then
+  echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
+  echo -e "${DIM}Usage: pic exec <profile-name> [-- command and args]${NC}" >&2
   exit 1
 fi
 
@@ -586,13 +586,16 @@ show_help() {
     "      ${DIM}Example:${NC}" \
     "      pic use my-profile" \
     "" \
-    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} -- ${CYAN}<command>${NC} ${DIM}[args...]${NC}" \
-    "      Execute a command in the current directory with the given profile." \
-    "      ${DIM}The project's .pi directory is replaced with the${NC}" \
+    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} ${DIM}[${NC}${CYAN}pi-args...${NC}${DIM} |${NC} ${CYAN}--${NC} ${CYAN}<command>${NC} ${DIM}[args...]]${NC}" \
+    "      Run pi with the given profile, passing extra args to it." \
+    "      ${DIM}Use '--' to run an arbitrary command instead. The${NC}" \
+    "      ${DIM}project's .pi directory is replaced with the${NC}" \
     "      ${DIM}profile's copy for the duration of the command and${NC}" \
     "      ${DIM}restored from backup on exit.${NC}" \
     "" \
     "      ${DIM}Example:${NC}" \
+    "      pic exec my-profile                ${DIM}# Opens pi${NC}" \
+    "      pic exec my-profile run foo" \
     "      pic exec my-profile -- pwd" \
     "" \
     "  ${CYAN}help${NC}, ${CYAN}-h${NC}, ${CYAN}--help${NC}" \
@@ -602,7 +605,8 @@ show_help() {
     "  pic                                 ${DIM}# Interactive mode${NC}" \
     "  pic init my-profile                 ${DIM}# Initialize with a profile${NC}" \
     "  pic use another-profile             ${DIM}# Switch to another profile${NC}" \
-    "  pic exec my-profile -- pwd          ${DIM}# Run in a temporary profile${NC}" \
+    "  pic exec my-profile -- pwd          ${DIM}# Run cmd in temp profile${NC}" \
+    "  pic exec my-profile                 ${DIM}# Open pi in temp profile${NC}" \
     ""
 }
 
@@ -630,9 +634,9 @@ if [[ $# -gt 0 ]]; then
     fi
     ;;
   exec)
-    if [[ $# -lt 3 ]]; then
-      echo -e "${YELLOW}Error: exec requires a profile name and a command.${NC}" >&2
-      echo -e "${DIM}Usage: pic exec <profile-name> -- command and args${NC}" >&2
+    if [[ $# -lt 2 ]]; then
+      echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
+      echo -e "${DIM}Usage: pic exec <profile-name> [-- command and args]${NC}" >&2
       exit 1
     fi
     # Shift past 'exec'
@@ -640,13 +644,18 @@ if [[ $# -gt 0 ]]; then
     exec_profile_name="$1"
     shift
 
-    # Check for '--' separator
-    if [[ "$1" != "--" ]]; then
-      echo -e "${YELLOW}Error: Expected '--' after profile name.${NC}" >&2
-      echo -e "${DIM}Usage: pic exec <profile-name> -- command and args${NC}" >&2
-      exit 1
+    # Check for '--' separator: with it, run the given command;
+    # without it, treat all remaining args as arguments to pi
+    if [[ "$1" == "--" ]]; then
+      shift
+    else
+      set -- pi "$@"
     fi
-    shift # Remove '--'
+
+    # Default to pi when no command given
+    if [[ $# -eq 0 ]]; then
+      set -- pi
+    fi
 
     # Verify profile exists
     exec_profile_dir="$PROFILES_DIR/$exec_profile_name"
