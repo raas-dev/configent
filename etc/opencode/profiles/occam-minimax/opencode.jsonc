@@ -14,6 +14,7 @@
         "apiKey": "{env:OCCAM_API_KEY}"
       },
       "models": {
+        "glm-5.3": { "name": "GLM 5.3" },
         "glm-5.2": { "name": "GLM 5.2" },
         "MiniMax-M3": { "name": "MiniMax M3" }
       }

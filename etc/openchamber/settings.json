@@ -8,7 +8,7 @@
   "defaultModel": "minimax-coding-plan/MiniMax-M3",
   "favoriteModels": [
     {
-      "modelID": "glm-5.2",
+      "modelID": "glm-5.3",
       "providerID": "zai-coding-plan"
     },
     {
@@ -57,7 +57,7 @@
       "providerID": "minimax-coding-plan"
     },
     {
-      "modelID": "glm-5.2",
+      "modelID": "glm-5.3",
       "providerID": "zai-coding-plan"
     }
   ],
