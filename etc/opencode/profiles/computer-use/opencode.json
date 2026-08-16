@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "zai-coding-plan/glm-5-turbo",
+  "model": "minimax-coding-plan/MiniMax-M3",
   "default_agent": "computer-use",
   "agent": {
     "build": {
