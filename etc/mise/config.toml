@@ -52,7 +52,6 @@ herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 'github:vercel-labs/agent-browser' = 'latest'
-'npm:open-computer-use' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'npm:@colbymchenry/codegraph' = 'latest'
 #'npm:@fission-ai/openspec' = 'latest'
