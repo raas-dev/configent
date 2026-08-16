@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "skills": {
+    "langfuse": {
+      "source": "langfuse/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/langfuse/skills.git",
+      "skillPath": "skills/langfuse/SKILL.md",
+      "skillFolderHash": "84e0293f1fee642e63f949aca3f93907d1a19042",
+      "installedAt": "2026-08-16T07:36:25.754Z",
+      "updatedAt": "2026-08-16T07:36:25.754Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "antigravity",
+    "antigravity-cli",
+    "cline",
+    "codex",
+    "cursor",
+    "deepagents",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
+  ]
+}
