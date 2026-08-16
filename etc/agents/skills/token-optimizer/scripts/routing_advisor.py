@@ -133,6 +133,22 @@ ROUTING_TABLES = {
         "effort_kind": "advisory",
         "effort_knob": "prompt directive",
     },
+    "cowork": {
+        # Cowork IS Claude Code (same engine, in a VM), so the ladder mirrors
+        # "claude" exactly and effort is native (thinking budget). detect_runtime()
+        # returns "claude" inside Cowork; this row is here so a caller that has
+        # already resolved is_cowork() can pass runtime="cowork" and get a
+        # consistent table rather than falling through to the generic row.
+        "models": {
+            "budget": "haiku",
+            "mid": "sonnet",
+            "capable": "opus",
+            "frontier": "opus",
+        },
+        "efforts": EFFORT_ORDER,
+        "effort_kind": "native",          # thinking budget
+        "effort_knob": "thinking budget",
+    },
 }
 
 # Used when the current platform has no table (keeps the engine total).

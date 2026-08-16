@@ -10,7 +10,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-The issue tracker should have been provided to you — run `/setup-matt-pocock-skills` if `docs/agents/issue-tracker.md` is missing.
+The issue tracker should have been provided to you. If `docs/agents/issue-tracker.md` is missing, tell the user to run `/setup-matt-pocock-skills`.
 
 ## Process
 
@@ -56,8 +56,6 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Refused Bequest** — a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
 ### 4. Spawn both sub-agents in parallel
-
-Send a single message with two `Agent` tool calls. Use the `general-purpose` subagent for both.
 
 **Standards sub-agent prompt** — include:
 

@@ -206,6 +206,7 @@ def _compress_git_status(output):
     staged_files = []
     unstaged_files = []
     untracked_files = []
+    unmerged_files = []
     section = None
     for line in lines:
         if line.startswith("On branch "):
@@ -228,10 +229,16 @@ def _compress_git_status(output):
             section = "unstaged"
         elif "Untracked files:" in line:
             section = "untracked"
+        elif "Unmerged paths:" in line:
+            section = "unmerged"
         elif (line.startswith("\t") or line.startswith("        ")) and section:
             fname = line.strip()
-            # Strip prefixes like "new file:", "modified:", "deleted:"
-            for prefix in ("new file:", "modified:", "deleted:", "renamed:", "copied:"):
+            # Strip prefixes: staged/unstaged AND merge-conflict prefixes, so
+            # conflicted files are captured (they were silently dropped before).
+            for prefix in ("new file:", "modified:", "deleted:", "renamed:", "copied:",
+                           "both modified:", "both added:", "both deleted:",
+                           "added by us:", "added by them:",
+                           "deleted by us:", "deleted by them:"):
                 if fname.startswith(prefix):
                     fname = fname[len(prefix):].strip()
                     break
@@ -241,6 +248,8 @@ def _compress_git_status(output):
                 unstaged_files.append(fname)
             elif section == "untracked":
                 untracked_files.append(fname)
+            elif section == "unmerged":
+                unmerged_files.append(fname)
 
     parts = [f"branch: {branch}"]
     if ahead_behind:
@@ -251,6 +260,9 @@ def _compress_git_status(output):
         parts.append(f"{len(unstaged_files)} unstaged: {', '.join(unstaged_files)}")
     if untracked_files:
         parts.append(f"{len(untracked_files)} untracked: {', '.join(untracked_files)}")
+    if unmerged_files:
+        # Merge conflicts must NEVER be silently dropped -- surface prominently.
+        parts.append(f"{len(unmerged_files)} UNMERGED (merge conflicts): {', '.join(unmerged_files)}")
     return "\n".join(parts) if len(parts) > 2 else ", ".join(parts)
 
 
@@ -294,9 +306,14 @@ def _compress_git_diff(output):
             deletions += 1
 
     # Keep first 30 lines of actual diff content
+    changed = [ln for ln in lines if ln.startswith("diff --git ")]
     result_lines = lines[:30]
     if len(lines) > 30:
         result_lines.append(f"\n... ({len(lines) - 30} more lines, +{additions}/-{deletions} total)")
+        if changed:
+            # Keep every changed FILENAME so "did file X change?" is answerable.
+            names = [c.split(" b/")[-1] for c in changed]
+            result_lines.append(f"All {len(names)} changed files: " + ", ".join(names))
 
     return "\n".join(result_lines)
 
@@ -416,6 +433,34 @@ def _compress_npm_install(output):
     return "\n".join(result) if result else output
 
 
+def _ls_entry_name(line):
+    """Extract the entry NAME from one ls line, spaces and symlinks intact.
+
+    ``split()[-1]`` is wrong for two real cases: a filename with spaces ("My
+    Important Doc.txt" -> "Doc.txt") and a symlink (``link -> target`` -> the
+    target, hiding the link's own name). Both make the agent search for a name
+    that "isn't there" and infer false absence. For long format (``ls -l``) the
+    name is everything after the 8 metadata columns; for a plain listing the
+    whole line is the name.
+    """
+    toks = line.split()
+    if not toks:
+        return line
+    first = toks[0]
+    is_long = (
+        len(toks) >= 9
+        and len(first) in (10, 11)
+        and first[0] in "bcdlps-"
+        and set(first[1:10]) <= set("rwxXsStT-")
+    )
+    if is_long:
+        name = line.split(None, 8)[-1]
+        # symlink "link -> target": keep the link's own name, not the target.
+        return name.split(" -> ", 1)[0].rstrip()
+    # plain listing (ls -1 / find output): the whole line is the path/name.
+    return line.rstrip()
+
+
 def _compress_ls(output):
     """Compress directory listing: truncate at 50 entries."""
     lines = output.strip().splitlines()
@@ -423,7 +468,12 @@ def _compress_ls(output):
         return output
 
     result = lines[:50]
-    result.append(f"... ({len(lines) - 50} more entries, {len(lines)} total)")
+    # Keep every entry NAME (cheap) so "is file X here?" stays answerable; only
+    # the metadata columns of entries past 50 are dropped, never the names.
+    rest = lines[50:]
+    names = [_ls_entry_name(ln) for ln in rest]
+    result.append(f"... plus {len(rest)} more (names only, none dropped): "
+                  f"{', '.join(names)}")
     return "\n".join(result)
 
 
@@ -569,7 +619,35 @@ def _compress_list(output):
     keep_count = 10
     result = list(header_lines)
     result.extend(data_lines[:keep_count])
-    result.append(f"... ({len(data_lines) - keep_count} more entries, {len(data_lines)} total)")
+    rest = data_lines[keep_count:]
+    # Which column holds the identifying NAME depends on the command:
+    #  - docker ps: NAMES is the LAST column (first col is CONTAINER ID) -> split()[-1]
+    #  - npm/pnpm ls: lines are a glyph tree (+--, |--, `--) -> strip glyph, take pkg
+    #  - pip list / brew / apt: NAME is the FIRST column -> split()[0]
+    header_blob = " ".join(header_lines).upper()
+    tree_glyphs = ("+--", "|--", "`--", "\\--", "├", "└", "│", "|__")
+
+    def _name_of(ln):
+        toks = ln.split()
+        if not toks:
+            return ""
+        # npm-style tree row: drop leading glyph tokens, keep the package spec.
+        if any(g in ln for g in tree_glyphs):
+            cleaned = ln
+            for g in ("+--", "|--", "`--", "\\--", "├──",
+                      "└──", "│", "|__"):
+                cleaned = cleaned.replace(g, " ")
+            ct = cleaned.split()
+            return ct[0] if ct else ""
+        # docker ps: NAMES is the last whitespace-column.
+        if "CONTAINER ID" in header_blob and "NAMES" in header_blob:
+            return toks[-1]
+        return toks[0]
+
+    names = [n for n in (_name_of(ln) for ln in rest) if n]
+    result.append(
+        f"... plus {len(rest)} more entries (names only; a name not listed is "
+        f"not present): {', '.join(names)}")
     return "\n".join(result)
 
 
@@ -745,6 +823,7 @@ def _compress_lint(output):
     samples = {}
     summary_lines = []
     total_findings = 0
+    files_with_findings = set()
 
     for line in lines:
         stripped = line.strip()
@@ -765,6 +844,16 @@ def _compress_lint(output):
                 break
         if matched_code:
             counts[matched_code] = counts.get(matched_code, 0) + 1
+            # Capture the file this finding is in (path:line:col: CODE format) so
+            # "does file X have lint errors?" is answerable, not just top-5 codes.
+            # Grab everything before the first :LINE[:COL] group -- this keeps
+            # Windows drive paths (C:\...) and paths containing spaces, which a
+            # plain split(":")[0] would truncate to the drive letter or a prose
+            # word, silently dropping the file from a list that reads as complete.
+            fm = re.match(r"^(.*?):\d+(?::\d+)?[:\s]", stripped)
+            head = fm.group(1).strip() if fm else ""
+            if head and ("/" in head or "\\" in head or "." in head):
+                files_with_findings.add(head)
             if matched_code not in samples:
                 sample = stripped
                 if len(sample) > 140:
@@ -791,6 +880,14 @@ def _compress_lint(output):
     if len(ranked) > 5:
         tail_count = sum(c for _, c in ranked[5:])
         parts.append(f"  ... {len(ranked) - 5} other codes ({tail_count} findings)")
+
+    if files_with_findings:
+        flist = sorted(files_with_findings)
+        # Deliberately NOT an "all files listed" claim: eslint's grouped format
+        # carries no path on finding lines, so this list can under-count. Never
+        # let the agent infer a file is clean just because it is absent here.
+        parts.append(f"Files with findings (>= {len(flist)}, parsed from finding "
+                     f"lines, may under-count): {', '.join(flist)}")
 
     if summary_lines:
         parts.append("")
@@ -1208,11 +1305,16 @@ def _compress_k8s(output):
         result_lines = [lines[0]]
         for row in preview:
             result_lines.append(row)
-        result_lines.append(f"... ({total - len(preview)} more rows, {total} total)")
+        rest = data_lines[_K8S_PREVIEW_ROWS:]
+        # Keep the NAME (first column) of every dropped row so "is pod X running?"
+        # is answerable; a name not listed here genuinely does not exist. Without
+        # this the agent infers false absence from the truncated preview.
+        rest_names = [r.split()[0] for r in rest if r.split()]
+        if rest_names:
+            result_lines.append(
+                f"... plus {len(rest)} more rows ({total} total; names only, "
+                f"a name not listed has no matching resource): {', '.join(rest_names)}")
         result = "\n".join(result_lines)
-        if len(result) > _K8S_CELL_CAP * _K8S_MAX_COLS * 2:
-            result_lines = [lines[0]] + preview[:5] + [result_lines[-1]]
-            result = "\n".join(result_lines)
         return result
     return _compress_logs(output)
 
@@ -1300,10 +1402,9 @@ def _compress_search_results(output):
     _MAX_FILES = 20
     result: list[str] = []
     file_count = 0
-    for fname, file_lines in files.items():
+    file_items = list(files.items())
+    for fname, file_lines in file_items:
         if file_count >= _MAX_FILES:
-            remaining_files = len(files) - file_count
-            result.append(f"... {remaining_files} more files with matches omitted ...")
             break
         if len(file_lines) <= _MAX_PER_FILE:
             result.extend(file_lines)
@@ -1312,14 +1413,29 @@ def _compress_search_results(output):
             result.append(f"  ... {len(file_lines) - _MAX_PER_FILE} more matches in {fname} ...")
         file_count += 1
 
+    # Keep EVERY matching filename (cheap) so "does file X match?" stays
+    # answerable; only per-line CONTENT past the top-N is dropped, never names.
+    if file_count < len(file_items):
+        result.append(f"... plus {len(file_items) - file_count} more files with matches "
+                       f"(filenames + counts, content omitted):")
+        for fname, file_lines in file_items[file_count:]:
+            result.append(f"  {fname}: {len(file_lines)} matches")
+
     if no_file:
         result.append("")
-        result.extend(no_file[:10])
-        if len(no_file) > 10:
-            result.append(f"... {len(no_file) - 10} more non-file lines omitted ...")
+        # "Binary file X matches" lines name a matching file; keep ALL of them so
+        # the banner's "a file not listed has NO matches" stays true for binaries.
+        binary = [ln for ln in no_file if ln.startswith("Binary file ") and " matches" in ln]
+        other = [ln for ln in no_file if not (ln.startswith("Binary file ") and " matches" in ln)]
+        result.extend(binary)
+        result.extend(other[:10])
+        if len(other) > 10:
+            result.append(f"... {len(other) - 10} more non-file lines omitted ...")
 
     total_matches = sum(len(v) for v in files.values())
-    result.insert(0, f"[Search results: {total_matches} matches in {len(files)} files, showing top {min(file_count, _MAX_FILES)} files]")
+    result.insert(0, f"[Search results: {total_matches} matches across {len(files)} files. "
+                     f"ALL matching filenames listed; per-line content shown for the top "
+                     f"{_MAX_FILES}. A file not listed here has NO matches.]")
     return "\n".join(result)
 
 

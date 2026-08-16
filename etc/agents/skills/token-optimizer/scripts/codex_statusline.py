@@ -253,6 +253,19 @@ def status() -> str:
     return "not configured"
 
 
+# NOTE (D4): a per-session ``resumable-<sid>.json`` flag is written by the
+# SessionStart hook (measure._write_resumable_flag) and rendered as a
+# ``⤸resumable`` token by the Claude statusline (statusline.js reads the flag).
+# Codex has NO equivalent surface: its native ``[tui].status_line`` is a static
+# list of built-in item names (STATUS_ITEMS) and cannot invoke a Python function
+# per render, and the only per-turn Codex hook (UserPromptSubmit) is a BILLED
+# ``additionalContext`` channel the UI-only signal must never touch. A
+# ``resumable_signal`` accessor previously lived here but nothing could invoke
+# it, so it was dead code; it has been removed rather than left as a false
+# promise that Codex surfaces the signal. If Codex ever gains a command-driven
+# status item, re-add an accessor and wire it into that item.
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Manage Token Optimizer's Codex CLI status line.")
     parser.add_argument("--install", action="store_true", help="Write Token Optimizer [tui] status_line settings")

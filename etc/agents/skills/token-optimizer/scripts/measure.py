@@ -109,7 +109,7 @@ from plugin_env import (
     snapshot_dir_candidates,
 )
 from utf8_io import enforce_utf8_io, reexec_in_utf8_mode
-from runtime_env import claude_home, detect_runtime, runtime_home, runtime_name_for_humans
+from runtime_env import claude_home, detect_runtime, is_cowork, runtime_home, runtime_name_for_humans
 from spawn_utils import spawn_detached
 
 # issue #107: every console-attached child we spawn on Windows flashes a cmd
@@ -230,8 +230,7 @@ _FOREIGN_RUNTIMES = frozenset({"opencode", "copilot", "hermes"})
 # plugin; copilot_hook_bridge.py) never invoke a _CLAUDE_TARGET_CMDS
 # subcommand as a top-level command — they shell to copilot-rollup /
 # copilot-summary / copilot-doctor / copilot-install / copilot-home, all of
-# which are outside _CLAUDE_TARGET_CMDS. Verified by grep of the hook bridges
-# (see findings/xplat-audit.md).
+# which are outside _CLAUDE_TARGET_CMDS. Verified by grep of the hook bridges.
 _FOREIGN_RUNTIME_EXEMPTIONS: dict[str, frozenset[str]] = {
     "hermes": frozenset({"dashboard"}),
 }
@@ -353,6 +352,28 @@ elif _RESOLVED_PLUGIN_DATA is not None:
 else:
     SNAPSHOT_DIR = RUNTIME_DIR / "_backups" / "token-optimizer"
     _CONFIG_BASE = None  # resolved below after constants
+
+# FIX 2 (Cowork dual-write): the per-session state dirs -- QUALITY_CACHE_DIR
+# (quality-cache-*.json, resumable-*.json, run-once markers) and CHECKPOINT_DIR
+# -- default to RUNTIME_DIR (~/.claude/token-optimizer). But SNAPSHOT_DIR
+# resolves to the plugin-data dir (~/.claude/plugins/data/<id>/data) whenever
+# CLAUDE_PLUGIN_DATA is set. On desktop CLAUDE_PLUGIN_DATA is usually absent from
+# the hook env so both live under ~/.claude and coincide; inside Cowork it IS set
+# (docs-grounding.md §2: ${CLAUDE_PLUGIN_DATA} = ~/.claude/plugins/data/{id}/ is
+# the canonical persistent dir), so the two bases DIVERGE -- state double-writes
+# to ~/.claude/token-optimizer AND the plugin-data tree, and the once-per-session
+# guard fires once per base. Route ALL per-session state to the SAME base as
+# SNAPSHOT_DIR when running in Cowork with a resolved plugin-data dir. Desktop is
+# untouched (stays on RUNTIME_DIR), and the snapshot-override sandbox path is
+# untouched so existing test isolation is preserved. Gated on is_cowork().
+if (
+    not _SNAPSHOT_DIR_OVERRIDE
+    and _RESOLVED_PLUGIN_DATA is not None
+    and is_cowork()
+):
+    _STATE_BASE = _RESOLVED_PLUGIN_DATA
+else:
+    _STATE_BASE = RUNTIME_DIR
 
 DASHBOARD_PATH = SNAPSHOT_DIR / "dashboard.html"
 # Headline-shape marker for the current dashboard data contract. Bumped only when the data
@@ -2295,6 +2316,45 @@ def _is_1m_model(model_str):
     return True
 
 
+def _context_window_for_model_str(model_str):
+    """Resolve a context-window size for a SPECIFIC model string (e.g. one
+    parsed straight out of a transcript message).
+
+    Precedence (highest first):
+      1. CLAUDE_CODE_DISABLE_1M_CONTEXT=1 -> 200k (kills the 1M tier globally).
+      2. TOKEN_OPTIMIZER_CONTEXT_SIZE=<int> -> that exact size.
+      3. _cli_context_size (parsed from the CLI --context-size flag).
+      4. The model string itself: 1M for a 1M variant, 200k otherwise.
+
+    Note: the env overrides in steps 1-3 are GLOBAL -- they are not keyed
+    to the model string. A user who exports TOKEN_OPTIMIZER_CONTEXT_SIZE=200000
+    for their default sonnet and then runs a 1M-context opus variant will get
+    200000 returned for that opus session, inflating fill_pct ~5x. This is
+    by design: the overrides are explicit user intent ("treat every session as
+    N tokens"), not a per-model hint. The model-string tier (step 4) only runs
+    when no override is set. The earlier docstring claimed the function keyed
+    to "the model that actually produced the tokens, not an env/config global
+    that may name a different model entirely" -- that was an overclaim; the
+    globals still win when set.
+    """
+    if os.environ.get("CLAUDE_CODE_DISABLE_1M_CONTEXT") == "1":
+        return 200_000
+    raw = os.environ.get("TOKEN_OPTIMIZER_CONTEXT_SIZE", "").strip()
+    if raw:
+        try:
+            return int(raw)
+        except ValueError:
+            pass
+    if _cli_context_size:
+        return _cli_context_size
+    m = (model_str or "").lower().strip()
+    if not m:
+        return None
+    if "haiku" in m:
+        return 200_000
+    return 1_000_000 if _is_1m_model(m) else 200_000
+
+
 _codex_config_cache: tuple[float, dict] | None = None
 
 
@@ -2753,7 +2813,7 @@ def quick_scan(as_json=False):
                 avg_per_skill = skills.get("tokens", 0) // max(skills.get("count", 1), 1)
                 savings = len(never_used) * avg_per_skill
                 quick_win = {
-                    "action": f"Archive {len(never_used)} unused skills",
+                    "action": f"Review {len(never_used)} skills not invoked in the window",
                     "savings": savings,
                     "detail": f"save ~{savings:,} tokens/session",
                     "extend": f"Extends peak quality zone by ~{savings:,} tokens",
@@ -3615,14 +3675,39 @@ def print_snapshot_summary(snapshot):
 
     # Core
     core = c.get("core_system", {})
-    print(f"  {'Core system (fixed)':<35s} {core.get('tokens', 0):>6,} tokens")
+    # FIX 5: core_system is a desktop-measured constant (12,900 = system prompt +
+    # built-in tools, measure.py's _measure_components). In Cowork the real fixed
+    # overhead (platform system prompt + deferred MCP tool catalog + ~40 platform
+    # skills) is far larger and INVISIBLE to a hook -- there is NO documented way
+    # to read the session's own token usage from inside a Cowork session
+    # (docs-grounding.md §5: only the external Sessions/Compliance API or opt-in
+    # OTel expose it). So we do NOT fabricate a Cowork figure; we label the one we
+    # print as desktop-scoped and add an explicit caveat below.
+    _cowork = is_cowork()
+    core_label = "Core system (desktop est.)" if _cowork else "Core system (fixed)"
+    print(f"  {core_label:<35s} {core.get('tokens', 0):>6,} tokens")
 
     print(f"  {'=' * 53}")
-    print(f"  {'ESTIMATED TOTAL':<35s} {t['estimated_total']:>6,} tokens")
+    total_label = "LOCAL FOOTPRINT (measurable)" if _cowork else "ESTIMATED TOTAL"
+    print(f"  {total_label:<35s} {t['estimated_total']:>6,} tokens")
     ctx_window, ctx_source = detect_context_window()
     ctx_label = _fmt_context_window(ctx_window)
     pct_of_ctx = t['estimated_total'] / ctx_window * 100
-    print(f"  {'Context used before typing':<35s} {pct_of_ctx:>5.1f}% of {ctx_label} window")
+    if _cowork:
+        # The denominator (context window) is real, but the numerator is ONLY the
+        # locally-controllable slice: platform overhead is not counted, so this %
+        # is a floor, not the whole picture. Say so plainly rather than present
+        # "1.3% of window" as if TO could see everything.
+        print(f"  {'Local footprint':<35s} {pct_of_ctx:>5.1f}% of {ctx_label} window (controllable slice only)")
+        print("  NOTE (Cowork): platform overhead -- the Cowork system prompt, the")
+        print("  deferred MCP tool catalog, and the ~40 platform skills -- is NOT")
+        print("  measurable from inside a Cowork session, so the real context used")
+        print("  is HIGHER than the local footprint above. Token Optimizer reports")
+        print("  and optimizes only the slice it can see and control (CLAUDE.md,")
+        print("  your skills/commands/MCP config); the platform-managed remainder")
+        print("  is not readable by a hook (Sessions/Compliance API or OTel only).")
+    else:
+        print(f"  {'Context used before typing':<35s} {pct_of_ctx:>5.1f}% of {ctx_label} window")
 
     # Session baselines
     baselines = snapshot.get("session_baselines", [])
@@ -5219,7 +5304,7 @@ def _collect_management_data(components=None, trends=None):
                 "install_with_bash_compression_cmd": base + " --enable-bash-compression",
                 "install_with_hot_path_hooks_cmd": base + " --enable-hot-path-hooks --enable-prompt-hooks",
                 "install_with_status_line_cmd": base + " --enable-status-line",
-                "refresh_cmd": f"TOKEN_OPTIMIZER_RUNTIME=codex python3 {mp_cmd} session-end-flush --trigger manual",
+                "refresh_cmd": f"TOKEN_OPTIMIZER_RUNTIME=codex python3 {mp_cmd} session-end-flush --trigger manual --no-defer",
                 "doctor_cmd": f"TOKEN_OPTIMIZER_RUNTIME=codex python3 {mp_cmd} codex-doctor --project {project_arg}",
                 "dashboard_cmd": f"TOKEN_OPTIMIZER_RUNTIME=codex python3 {mp_cmd} dashboard",
             },
@@ -5806,6 +5891,12 @@ def generate_standalone_dashboard(days=30, quiet=False, force=False):
     # the deferred flush worker never turns this into a multi-second parse storm. Older
     # rows are fetched on demand in served mode.
     _turn_preload_budget = _int_env("TOKEN_OPTIMIZER_TURN_PRELOAD_MAX", 40)
+    # Also bound per-file size: parse_session_turns reads a whole transcript, and a
+    # single long session JSONL can reach 100MB+. Preloading 40 of those under the
+    # 45s regen-step / 20s flush budget trips REGEN_STEP_TIMEOUT and can kill a
+    # flush worker mid-dashboard-write. Skip oversized transcripts here; served mode
+    # still fetches their rows on demand, exactly like older rows past the count cap.
+    _turn_preload_maxbytes = _int_env("TOKEN_OPTIMIZER_TURN_PRELOAD_MAX_BYTES", 8_000_000)
     try:
         for day in (trends or {}).get("daily", [])[:7]:
             if len(session_turns) >= _turn_preload_budget:
@@ -5819,6 +5910,11 @@ def generate_standalone_dashboard(days=30, quiet=False, force=False):
                     continue
                 jsonl_resolved = str(Path(jsonl_path).expanduser()) if jsonl_path.startswith("~") else jsonl_path
                 if not os.path.exists(jsonl_resolved):
+                    continue
+                try:
+                    if os.path.getsize(jsonl_resolved) > _turn_preload_maxbytes:
+                        continue
+                except OSError:
                     continue
                 turns = parse_session_turns(jsonl_resolved)
                 if turns:
@@ -6002,9 +6098,29 @@ def generate_standalone_dashboard(days=30, quiet=False, force=False):
     for wp in write_paths:
         try:
             wp.parent.mkdir(parents=True, exist_ok=True)
-            fd = os.open(str(wp), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
-                f.write(injected)
+            # Atomic write: three uncoordinated callers can target this same path
+            # (background freshness regen, manual POST /api/regenerate, and the
+            # SessionEnd flush worker's inline gen). A plain O_TRUNC write lets two
+            # of them interleave into a torn/mixed file, and a GET between the
+            # truncate and the final byte serves partial HTML. Write to a temp
+            # sibling then os.replace so every reader sees one complete generation.
+            tmp_fd, tmp_name = tempfile.mkstemp(dir=str(wp.parent), prefix=".dash-", suffix=".tmp")
+            try:
+                os.fchmod(tmp_fd, 0o600)
+                with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
+                    f.write(injected)
+                os.replace(tmp_name, str(wp))
+            except BaseException:
+                # BaseException, not OSError: the SessionEnd flush worker runs this
+                # under a 20s hook budget that raises _HookTimeout (a BaseException).
+                # A bare `except OSError` would let a mid-write timeout skip the
+                # unlink and leak a ~5MB .dash-*.tmp. Clean up on any interruption,
+                # then re-raise so the timeout still propagates to the worker.
+                try:
+                    os.unlink(tmp_name)
+                except OSError:
+                    pass
+                raise
             wrote_any = True
         except OSError:
             continue
@@ -6200,6 +6316,22 @@ def _defer_session_end_flush(args):
             _log_spawn_failure("session-end flush spawn failed")
     except Exception:
         pass
+
+
+def _dispatch_session_end_flush(args):
+    """Route the `session-end-flush` CLI entry (#114).
+
+    Defer by DEFAULT so a legacy bare `session-end-flush` hook fossilized in
+    settings.json (pre-5.11.77 script installs, no --defer) stops running the
+    flush synchronously inline (which wedged Windows stop-hooks at 3/4). Only
+    `--no-defer` forces the inline worker (manual refresh / tests). Returns the
+    chosen mode string so callers/tests can assert the decision without spawning.
+    """
+    if "--no-defer" in args:
+        _run_session_end_flush_worker(args)
+        return "inline"
+    _defer_session_end_flush(args)
+    return "deferred"
 
 
 def _generate_codex_auto_recommendations(components, trends=None, days=30):
@@ -6493,7 +6625,7 @@ def generate_auto_recommendations(components, trends=None, days=30):
             skill_list = ", ".join(sorted(never_used)[:show_count])
             remaining = len(never_used) - show_count
             quick.append(
-                f"**Review {show_count} unused skills for archiving ({len(never_used)} of {installed_count} never used in {days} days)**: "
+                f"**Review {show_count} skills not invoked in {days} days ({len(never_used)} of {installed_count}, counting Skill calls and slash commands)**: "
                 f"Each installed skill costs ~{_actual_avg} tokens in the startup menu, every session, whether you use it or not.\n"
                 f"  Start with these: {skill_list}"
                 + (f"\n  ({remaining} more will surface after you archive these and re-run.)" if remaining > 0 else "") +
@@ -6507,8 +6639,8 @@ def generate_auto_recommendations(components, trends=None, days=30):
             overhead = len(never_used) * _actual_avg
             skill_list = ", ".join(sorted(never_used))
             medium.append(
-                f"**Review {len(never_used)} unused skills**: "
-                f"These skills haven't been invoked in {days} days: {skill_list}. "
+                f"**Review {len(never_used)} skills not invoked in {days} days**: "
+                f"No Skill call or slash command for these in {days} days: {skill_list}. "
                 f"Consider archiving to ~/.claude/skills/_archived/. ~{overhead:,} tokens recoverable."
             )
 
@@ -7754,7 +7886,7 @@ def generate_coach_block(components=None, trends=None):
         # Check for unused MCP via skill analysis proxy
         never_used = trends.get("skills", {}).get("never_used", [])
         if len(never_used) > 5:
-            lines.append(f"- {len(never_used)} skills were never used in 30 days. Archive unused ones.")
+            lines.append(f"- {len(never_used)} skills not invoked (Skill call or slash command) in 30 days. Review for archiving.")
 
     # Cache hit rate
     if trends:
@@ -8090,6 +8222,71 @@ _parse_session_jsonl_cache = {}
 _PARSE_CACHE_MAX = 2000
 
 
+# A slash-command invocation is written into the user turn as
+# <command-name>name</command-name> (with or without a leading slash), alongside
+# a <command-args> sibling. Skills driven by a slash command -- and
+# disable-model-invocation skills, which can ONLY be invoked that way -- never
+# emit a Skill tool_use, so without this they look "unused" no matter how often
+# they run. The closing tag is required so a bare mention cannot match.
+_SLASH_COMMAND_RE = re.compile(r"<command-name>\s*/?\s*([A-Za-z0-9:_+.-]+)\s*</command-name>")
+
+
+def _leading_user_text(message):
+    """Return the leading user-authored text of a user message, or ''.
+
+    A real slash invocation IS the whole user turn, so we look only at the first
+    text the user actually typed. tool_result blocks (tool returns are written as
+    user-role records) are excluded, so a search hit or a pasted transcript
+    fragment that happens to echo a <command-name> block is not read as an
+    invocation.
+    """
+    content = message.get("content") if isinstance(message, dict) else message
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        for block in content:
+            if not isinstance(block, dict):
+                return ""
+            btype = block.get("type")
+            if btype == "text":
+                return block.get("text", "") or ""
+            # A tool_result (or any non-text) leading block means this user record
+            # is not a typed invocation.
+            return ""
+    return ""
+
+
+def _resolve_installed_skill(name):
+    """Map a slash-command name to the INSTALLED skill's directory name, or None.
+
+    Mirrors the never-used normalization (exact dir name / SKILL.md name via
+    name_to_dir / namespaced ``plugin:skill``). Returns None for anything that is
+    not an installed skill -- built-in commands (/clear, /compact, ...) and custom
+    non-skill commands resolve to None, so they never pollute skill-usage stats.
+    """
+    if not name:
+        return None
+    try:
+        comp = _cached_measure_components()
+        skills = comp.get("skills", {})
+        installed = set(skills.get("names", []))
+        name_to_dir = skills.get("name_to_dir", {}) or {}
+    except Exception:
+        return None
+    if name in installed:
+        return name
+    if name in name_to_dir:
+        return name_to_dir[name]
+    if ":" in name:
+        parent, _, child = name.partition(":")
+        for cand in (parent, child):
+            if cand in installed:
+                return cand
+            if cand in name_to_dir:
+                return name_to_dir[cand]
+    return None
+
+
 def _parse_session_jsonl(filepath):
     """Parse a single JSONL session file in one streaming pass.
 
@@ -8208,6 +8405,23 @@ def _parse_session_jsonl(filepath):
                 # Count user/assistant messages
                 if rec_type in ("user", "assistant"):
                     message_count += 1
+
+                # Count slash-command invocations of INSTALLED skills as usage. A
+                # skill run via /name (e.g. /briefing) emits no Skill tool_use, so
+                # it would otherwise be scored "unused". Gate strictly so nothing
+                # else leaks into skill stats: a real invocation IS the whole user
+                # turn, so require the command block to be the LEADING user-authored
+                # text (a pasted fragment in prose or a tool_result echo is not),
+                # require the <command-args> sibling Claude Code always emits, and
+                # count ONLY names that resolve to an installed skill (so /clear,
+                # /compact and other non-skill commands never pollute skill stats).
+                if rec_type == "user":
+                    _lead = _leading_user_text(record.get("message", {})).lstrip()
+                    if _lead.startswith("<command-name>") and "<command-args>" in _lead:
+                        for _cn in _SLASH_COMMAND_RE.findall(_lead):
+                            _sk = _resolve_installed_skill(_cn)
+                            if _sk:
+                                skills_used[_sk] = skills_used.get(_sk, 0) + 1
 
                 # Extract tool usage from assistant messages
                 if rec_type == "assistant":
@@ -8755,7 +8969,7 @@ def _scan_jsonl_is_sidechain(filepath, max_lines=200):
         parsed = 0
         with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             for line in f:
-                # F7: cap on PARSED records, not raw lines -- blank/garbage lines must not
+                # Cap on PARSED records, not raw lines -- blank/garbage lines must not
                 # eat the scan budget before a real record is examined.
                 if parsed >= max_lines:
                     break
@@ -8894,7 +9108,7 @@ def _recompute_session_tokens(conn, rel_tol=0.1, limit=None):
         checked += 1
         new_input = int(parsed.get("total_input_tokens", 0) or 0)
         stored = int(stored_input or 0)
-        # F4: only update when the fresh parse has a positive input. The old condition
+        # Only update when the fresh parse has a positive input. The old condition
         # `stored <= 0 or ...` fired for stored==0 even when the new parse was also 0,
         # overwriting valid cache_create_* on legitimately zero-input rows (e.g. the
         # Codex path, where input_tokens can be 0 but cache_create is real). Requiring
@@ -8906,7 +9120,7 @@ def _recompute_session_tokens(conn, rel_tol=0.1, limit=None):
                 int(parsed.get("total_cache_create_1h", 0) or 0),
                 int(parsed.get("total_cache_create_5m", 0) or 0),
                 float(parsed.get("cache_hit_rate", 0.0) or 0.0),
-                # F3: refresh the model-usage JSON columns too. Downstream cost calcs
+                # Refresh the model-usage JSON columns too. Downstream cost calcs
                 # read BOTH input_tokens and these breakdowns; updating tokens without
                 # the breakdown leaves the row internally inconsistent.
                 json.dumps(parsed.get("model_usage", {})),
@@ -8970,7 +9184,7 @@ def _init_trends_db():
         # never summed into realized savings). Defaults 0 for pre-existing rows.
         if "stale_waste_tokens" not in cols:
             conn.execute("ALTER TABLE session_log ADD COLUMN stale_waste_tokens INTEGER DEFAULT 0")
-        # U1: stable UUID-keyed join column so savings/compression events can
+        # Stable UUID-keyed join column so savings/compression events can
         # join to their originating session without LIKE-scanning jsonl_path.
         # The session UUID is the JSONL file stem (the Claude session UUID).
         if "session_uuid" not in cols:
@@ -9003,7 +9217,7 @@ def _init_trends_db():
         conn.commit()
     except sqlite3.Error:
         pass
-    # U1: backfill session_uuid from jsonl_path basename stem for existing rows,
+    # Backfill session_uuid from jsonl_path basename stem for existing rows,
     # then create an index so joins are O(log n) instead of full-table LIKE scans.
     # Done in Python (not a single SQL UPDATE) because SQLite lacks a basename
     # function and the path separator can vary on Windows.
@@ -9028,14 +9242,14 @@ def _init_trends_db():
         conn.commit()
     except (sqlite3.Error, OSError, ValueError):
         pass
-    # U2: one-time backfill of is_sidechain for rows the migration left NULL.
+    # One-time backfill of is_sidechain for rows the migration left NULL.
     # Gated by the NULL sentinel, so it scans transcripts only on the first init
     # after upgrade; once every row is classified there is nothing to do.
     try:
         _backfill_is_sidechain(conn)
     except (sqlite3.Error, OSError):
         pass
-    # U2b: one-time backfill of outsourcerer sessions collected before the
+    # One-time backfill of outsourcerer sessions collected before the
     # path-based detection was added. Reclassifies them as is_sidechain=1 so
     # they stop inflating the human-session pool. Idempotent.
     try:
@@ -9094,7 +9308,7 @@ def _init_trends_db():
         se_cols = {r[1] for r in conn.execute("PRAGMA table_info(savings_events)").fetchall()}
         if "model" not in se_cols:
             conn.execute("ALTER TABLE savings_events ADD COLUMN model TEXT")
-        # U1: session_uuid + unjoinable columns for direct session joins (no LIKE scan).
+        # Session_uuid + unjoinable columns for direct session joins (no LIKE scan).
         # session_uuid = the Claude session UUID (= JSONL basename stem).
         # unjoinable = 1 when session_id is a short agent_id that cannot be resolved.
         if "session_uuid" not in se_cols:
@@ -9119,7 +9333,7 @@ def _init_trends_db():
         conn.commit()
     except sqlite3.Error:
         pass
-    # U1: backfill session_uuid on savings_events from session_id where it looks
+    # Backfill session_uuid on savings_events from session_id where it looks
     # like a UUID (8-4-4-4-12 hex pattern). Short agent_ids (<=17 chars without
     # dashes) are flagged unjoinable=1 rather than silently treated as Sonnet.
     try:
@@ -9181,7 +9395,7 @@ def _init_trends_db():
             conn.commit()
         except sqlite3.Error:
             pass
-    # U1: idempotent migrations for session_uuid + model on compression_events.
+    # Idempotent migrations for session_uuid + model on compression_events.
     # These columns enable per-event session joins and correct model attribution.
     try:
         ce_cols = {r[1] for r in conn.execute("PRAGMA table_info(compression_events)").fetchall()}
@@ -9190,7 +9404,7 @@ def _init_trends_db():
         if "model" not in ce_cols:
             conn.execute("ALTER TABLE compression_events ADD COLUMN model TEXT")
         if "tier" not in ce_cols:
-            # U1 (coverage build): three-tier accounting tag (measured/estimated/
+            # Three-tier accounting tag (measured/estimated/
             # opportunity). Nullable: pre-existing rows stay NULL and keep their
             # current headline treatment; only new coverage events set a tier.
             conn.execute("ALTER TABLE compression_events ADD COLUMN tier TEXT")
@@ -9208,7 +9422,7 @@ def _init_trends_db():
         conn.commit()
     except sqlite3.Error:
         pass
-    # U1: backfill session_uuid on compression_events from session_id where UUID pattern.
+    # Backfill session_uuid on compression_events from session_id where UUID pattern.
     try:
         import re as _re
         _UUID_PAT2 = _re.compile(
@@ -9424,7 +9638,7 @@ def _log_savings_event(event_type, tokens_saved, session_id=None, detail=None, m
     explicit `model` arg → session JSONL (via session_id) → CLAUDE_MODEL env →
     trends DB dominant → Sonnet fallback. See `_resolve_session_model`.
 
-    U1: also writes session_uuid (the Claude UUID = JSONL stem) so aggregation
+    Also writes session_uuid (the Claude UUID = JSONL stem) so aggregation
     joins directly on session_log.session_uuid rather than LIKE-scanning
     jsonl_path. Agent_ids that cannot be joined are flagged unjoinable=1 so
     the reprice logic skips them instead of silently attributing them to Sonnet.
@@ -9492,7 +9706,7 @@ def _log_compression_event(feature, original_text="", compressed_text="",
     token_estimate.py); it falls back to a bytes/4 proxy only if that module is
     unavailable. Never crashes the caller -- all errors silently caught.
 
-    U1: writes session_uuid (the stable join key) and resolves + stores model
+    Writes session_uuid (the stable join key) and resolves + stores model
     at event-time so _get_merged_savings can reprice at the session's real
     model rate instead of the current dashboard session model (anachronistic).
     """
@@ -9503,7 +9717,7 @@ def _log_compression_event(feature, original_text="", compressed_text="",
         if original_tokens > 0:
             ratio = round(1.0 - compressed_tokens / original_tokens, 4)
 
-        # U1: derive stable join key and resolve event-time model.
+        # Derive stable join key and resolve event-time model.
         session_uuid, _ = _extract_session_uuid(session_id)
         resolved_model = _resolve_session_model(session_id)
 
@@ -9530,7 +9744,7 @@ def _log_compression_event(feature, original_text="", compressed_text="",
 def _get_compression_summary(days=30):
     """Query compression events and return a summary dict.
 
-    U1: if compression_events rows carry a stored model (written at event-time
+    If compression_events rows carry a stored model (written at event-time
     via the session join), compute cost_saved_usd from per-row token * model_rate
     instead of multiplying the aggregate token count by the CURRENT session's
     model rate (which is anachronistic for historical rows). Falls back to the
@@ -9635,7 +9849,7 @@ def _get_compression_summary(days=30):
 # U6: human labels for coverage features. These ARE in _V5_COMPRESSION_CATEGORIES
 # (so tier=measured rows reach the savings headline). Shadow/opportunity rows are
 # excluded by the tier filter in _get_compression_summary, not by this set.
-# Three-tier accounting (KTD5). The single source of truth for tier ordering +
+# Three-tier accounting. The single source of truth for tier ordering +
 # display, mirrored by compression_log._VALID_TIERS on the write side.
 _COMPRESSION_TIERS = ("measured", "estimated", "opportunity")
 _TIER_DISPLAY_NAMES = {
@@ -11037,7 +11251,7 @@ def load_keepwarm_records(path=None):
 
 
 def classify_keepwarm_record(rec, now=None):
-    """Pure-ish resume classifier for one arm record (tick-side, U3-consumed).
+    """Pure-ish resume classifier for one arm record (tick-side, consumed).
 
     Compares the arm record's snapshot of the transcript (mtime + byte_size)
     against the transcript's CURRENT state and returns one of:
@@ -11726,7 +11940,7 @@ def _star_session_pitch():
 
 
 def keepwarm_gate(env=None, claude_json_path=None, settings_path=None):
-    """THE pre-ping gate U3's tick loop calls. Returns (allowed, reason).
+    """THE pre-ping gate the tick loop calls. Returns (allowed, reason).
 
     allowed is True ONLY when ALL hold:
       * not running inside a keep-warm ping subprocess (anti-recursion marker);
@@ -11945,7 +12159,7 @@ def _keepwarm_python3_path():
 def _keepwarm_resolve_claude_bin():
     """Resolve the `claude` CLI to an absolute path at fire time, or None.
 
-    LIVE BUG (infra F6): under launchd the agent inherits a near-empty PATH, so a
+    LIVE BUG: under launchd the agent inherits a near-empty PATH, so a
     bare `"claude"` argv[0] fails FileNotFoundError on every ping (30/30 errors on
     this machine). We resolve `claude` exactly the way the python3 resolver works:
     `shutil.which` first (honours the user's real PATH when the tick runs in a
@@ -11976,7 +12190,7 @@ def _keepwarm_resolve_claude_bin():
 
 def _keepwarm_scheduler_install_lock(soft_fail=False):
     """Serialise concurrent keep-warm scheduler installs. SEPARATE lock from the
-    dashboard's `_daemon_install_lock` (never shared, per plan U4).
+    dashboard's `_daemon_install_lock` (never shared).
 
     Same mkdir-mutex + stale-PID reaping shape as `_daemon_install_lock`, but a
     distinct lock directory so the two installers never block each other.
@@ -12072,7 +12286,7 @@ def _keepwarm_rotate_log(max_bytes=_KEEPWARM_SCHEDULER_LOG_MAX_BYTES):
     # The log is opened+created by launchd (StandardOutPath), which makes it
     # world-readable (0644); it records session_ids + activity. Force 0600 here
     # so the rotation guard (called on install + every tick) also hardens the
-    # perms (infra F1). Best-effort.
+    # perms. Best-effort.
     try:
         if path.exists():
             os.chmod(str(path), 0o600)
@@ -12152,7 +12366,7 @@ def _keepwarm_write_scheduler_marker(bootstrap_rc="__unset__"):
     ensure-health's repair keys on this marker AND consent so a user-deleted
     plist is only regenerated for a machine we actually installed on (#59). Atomic
     0600 write via mkstemp + os.replace. `bootstrap_rc` records the launchctl
-    bootstrap outcome (infra F4): an int rc, or None when bootstrap could not run;
+    bootstrap outcome: an int rc, or None when bootstrap could not run;
     omitted (sentinel) for callers that don't know it.
     """
     marker_path = _keepwarm_scheduler_marker_path()
@@ -12265,10 +12479,18 @@ def _keepwarm_scheduler_install_macos(quiet=False):
     # Rotation guard on install so a stale oversized log doesn't carry over.
     _keepwarm_rotate_log()
     try:
-        plist_path.write_text(_keepwarm_generate_scheduler_plist(), encoding="utf-8")
+        plist_changed = _write_file_if_changed(plist_path, _keepwarm_generate_scheduler_plist())
     except OSError as e:
         return (False, f"could not write plist {plist_path}: {e}")
     uid = os.getuid()
+    # Skip the reload when nothing changed and the agent is already loaded: an
+    # unconditional bootout+bootstrap re-fires the macOS background-item banner on
+    # every re-install/refresh even though the on-disk agent is already correct.
+    if not plist_changed and _launchagent_loaded(_KEEPWARM_SCHEDULER_LABEL):
+        _keepwarm_write_scheduler_marker(bootstrap_rc=0)
+        return (True, (
+            f"Keep-warm scheduler already current ({_KEEPWARM_SCHEDULER_LABEL}); "
+            f"left in place (no reload)."))
     # Idempotent: bootout any existing instance first (ignore failure: not loaded).
     try:
         subprocess.run(
@@ -12285,10 +12507,10 @@ def _keepwarm_scheduler_install_macos(quiet=False):
     except (OSError, subprocess.TimeoutExpired) as e:
         # Bootstrap could not even run: record the failed attempt in the marker
         # (bootstrap_rc=None) so ensure-health knows WE own this path but the
-        # bootstrap never succeeded (infra F4).
+        # bootstrap never succeeded.
         _keepwarm_write_scheduler_marker(bootstrap_rc=None)
         return (False, f"launchctl bootstrap failed: {e}")
-    # Marker written AFTER bootstrap, carrying bootstrap_rc (infra F4): the marker
+    # Marker written AFTER bootstrap, carrying bootstrap_rc: the marker
     # now reflects the ACTUAL bootstrap outcome, not merely an attempt, so a
     # repair keys on a marker that proves a real install path was reached.
     _keepwarm_write_scheduler_marker(bootstrap_rc=int(result.returncode))
@@ -12433,7 +12655,7 @@ def keepwarm_scheduler_repair(gate=None):
         needs_repair = True
     else:
         # Stale if the label marker isn't present (e.g. a hand-edited or
-        # foreign plist sitting at our path). Cheap CAPPED read (infra F3): our
+        # foreign plist sitting at our path). Cheap CAPPED read: our
         # plist is <1KB, so reading the first 8KB is enough to find the Label;
         # this bounds the warm-path cost against an attacker-planted huge file.
         try:
@@ -12455,8 +12677,8 @@ def keepwarm_scheduler_repair(gate=None):
             return "noop-fresh"  # another session is repairing; skip quietly
         ok, _msg = _keepwarm_scheduler_install_macos(quiet=True)
         if not ok:
-            # Surface ONE stderr line so a silently-failing repair is diagnosable
-            # (infra F5); the first line carries the launchctl rc/reason.
+            # Surface ONE stderr line so a silently-failing repair is diagnosable;
+            # the first line carries the launchctl rc/reason.
             try:
                 first = (_msg or "repair failed").strip().splitlines()[0]
                 print(f"[Token Optimizer] keep-warm scheduler repair failed: "
@@ -12574,7 +12796,7 @@ _KEEPWARM_STALE_LOCK_SECONDS = 600
 # orphaned spend (the tick died between pre-log and outcome). The ping timeout is
 # 180s; 600s leaves generous slack for a slow ping that simply hasn't resolved.
 _KEEPWARM_ORPHAN_FIRING_SECONDS = 600
-# The bland, tool-discouraging ping prompt (U1-verified form A).
+# The bland, tool-discouraging ping prompt (verified form A).
 _KEEPWARM_PING_PROMPT = "Reply with exactly: ok"
 
 
@@ -12927,7 +13149,7 @@ def _keepwarm_extract_cwd(transcript_path):
     """Return the session's ORIGINAL project cwd from the transcript, or None.
 
     Sessions resolve per project dir, so the ping MUST run with cwd = the
-    session's original cwd (verified U1). Transcript event records carry a 'cwd'
+    session's original cwd (verified). Transcript event records carry a 'cwd'
     field; we scan the tail for the most recent non-empty one.
 
     The cwd is attacker-influenceable (the transcript is a same-UID-writable
@@ -12978,9 +13200,9 @@ def _keepwarm_valid_arg(value):
 
 def _keepwarm_build_ping_cmd(session_id, model, claude_bin="claude",
                              budget_usd=_KEEPWARM_PING_BUDGET_USD):
-    """The U1-verified ping command (form A): resume, print, no persistence.
+    """The verified ping command (form A): resume, print, no persistence.
 
-    `claude_bin` is the fire-time-resolved absolute path (infra F6); callers pass
+    `claude_bin` is the fire-time-resolved absolute path; callers pass
     the resolved binary so launchd's empty PATH cannot break the spawn.
     """
     return [
@@ -13142,8 +13364,8 @@ def _keepwarm_fire_ping(record, now=None, runner=None):
         parsed = {"cost_usd": 0.0, "cache_read": 0, "cache_write": 0}
         duration = 0.0
 
-        # Resolve the claude binary to an absolute path at FIRE time (infra F6 /
-        # LIVE BUG). Unresolvable -> book a distinct 'claude-not-found' error
+        # Resolve the claude binary to an absolute path at FIRE time (LIVE BUG).
+        # Unresolvable -> book a distinct 'claude-not-found' error
         # outcome (the firing row is already pre-logged) so the launchd empty-PATH
         # case is diagnosable rather than a generic spawn error.
         if runner is None:
@@ -13164,7 +13386,7 @@ def _keepwarm_fire_ping(record, now=None, runner=None):
             claude_bin = "claude"  # injected runner ignores argv[0] resolution
 
         cmd = _keepwarm_build_ping_cmd(sid, model, claude_bin=claude_bin)
-        # Allowlisted child env (infra F2): only the variables the ping genuinely
+        # Allowlisted child env: only the variables the ping genuinely
         # needs. Inheriting the full os.environ leaked unrelated secrets/config
         # into the claude child; here we pass PATH/HOME/TMPDIR/locale, the
         # anti-recursion marker, and the API credentials IF present -- nothing else.
@@ -13523,7 +13745,7 @@ def keepwarm_tick(now=None, dry_run=False, env=None, runner=None,
             else:
                 summary["skipped"] += 1
 
-        # Persist updated ping counters (extends the record dict; U2's
+        # Persist updated ping counters (extends the record dict;
         # _valid_keepwarm_record tolerates extra keys).
         if changed:
             try:
@@ -14262,7 +14484,7 @@ def _keepwarm_realized_write_usd(prefix_tokens, model):
     Priced at the profile's REAL 1h write rate (input_rate * 2.0 premium) on the
     full prefix. We KNOW the pause resumed warm, so the entire re-write is
     genuinely spared -- this is the realized (not P-discounted) counterfactual,
-    matching U6's honesty stance. Reuses the watchdog/U3 per-token pricing tables
+    matching U6's honesty stance. Reuses the watchdog per-token pricing tables
     (_KEEPWARM_INPUT_USD_PER_TOKEN + _KEEPWARM_WRITE_PREMIUM['1h']). Pure.
     """
     key = _keepwarm_model_norm(model)
@@ -16361,8 +16583,8 @@ def _collect_copilot_sessions(days=90, quiet=False, rebuild=False):
     """Collect Copilot sessions (CLI + VS Code planes) into the trends DB.
 
     Mirrors _collect_hermes_sessions. The two planes are separate session
-    populations with distinct dedup keys — never merged, never summed
-    (plan KTD10/C6). Idempotent via the jsonl_path dedup column.
+    populations with distinct dedup keys — never merged, never summed.
+    Idempotent via the jsonl_path dedup column.
 
     TODO(dedup): the 28-column INSERT here and in _collect_hermes_sessions is
     copy-paste; extract _insert_normalized_session() on the next touch to
@@ -17725,6 +17947,49 @@ def _format_elapsed(seconds):
     return f"{d}d {h}h"
 
 
+_PROJECT_JSONL_STAT_CACHE = None
+_PROJECT_JSONL_STAT_CACHE_TS = 0.0
+_PROJECT_JSONL_STAT_TTL = 30.0
+
+
+def _scan_project_jsonl_stats():
+    """Return [(path, birth_time, mtime), ...] for every project JSONL, cached.
+
+    The full-tree stat walk of ~/.claude/projects is the dominant cost of version
+    detection on a large history (tens of thousands of transcripts): a cold stat
+    of every file. _find_session_version_for_pid runs once per live Claude process,
+    so a dashboard gen with several running sessions repeated the identical walk N
+    times -- an N-file stat storm that blows past the 45s regen-step budget on a
+    cold cache. Compute it once and share it across those calls. A 30s TTL keeps
+    the long-lived daemon fresh without re-walking on every call.
+    """
+    global _PROJECT_JSONL_STAT_CACHE, _PROJECT_JSONL_STAT_CACHE_TS
+    # monotonic() so NTP skew can't stretch or collapse the TTL window.
+    if (_PROJECT_JSONL_STAT_CACHE is not None
+            and (time.monotonic() - _PROJECT_JSONL_STAT_CACHE_TS) < _PROJECT_JSONL_STAT_TTL):
+        return _PROJECT_JSONL_STAT_CACHE
+    out = []
+    projects_base = CLAUDE_DIR / "projects"
+    if projects_base.exists():
+        for project_dir in projects_base.iterdir():
+            if not project_dir.is_dir():
+                continue
+            for jf in project_dir.glob("*.jsonl"):
+                try:
+                    st = jf.stat()
+                    birth = getattr(st, "st_birthtime", st.st_ctime)
+                    out.append((jf, birth, st.st_mtime))
+                except (PermissionError, OSError):
+                    continue
+    _PROJECT_JSONL_STAT_CACHE = out
+    # Stamp AFTER the walk finishes, not before: on a large cold history the walk
+    # itself can exceed the TTL. Stamping the pre-walk time would make the cache
+    # born already-expired, so the very next per-PID call re-walks and the memoization
+    # is a no-op in exactly the cold-cache case this exists to fix. (Caught by Kimi K3.)
+    _PROJECT_JSONL_STAT_CACHE_TS = time.monotonic()
+    return out
+
+
 def _find_session_version_for_pid(pid):
     """Try to find the Claude Code version for a running process by matching its session JSONL.
 
@@ -17758,48 +18023,42 @@ def _find_session_version_for_pid(pid):
     best_match = None
     best_diff = float("inf")
 
-    for project_dir in projects_base.iterdir():
-        if not project_dir.is_dir():
-            continue
-        for jf in project_dir.glob("*.jsonl"):
-            try:
-                stat = jf.stat()
-                # Use birth time on macOS, fallback to ctime
-                birth_time = getattr(stat, "st_birthtime", stat.st_ctime)
-                # Skip files created well before or well after the process
-                if birth_time < proc_start_ts - 60 and stat.st_mtime < proc_start_ts - 60:
-                    continue
-
-                # Read first 10 lines for version and timestamp
-                version_found = None
-                with open(jf, "r", encoding="utf-8", errors="replace") as f:
-                    for line_num, line in enumerate(f):
-                        if line_num > 10:
-                            break
-                        try:
-                            record = json.loads(line)
-                            v = record.get("version")
-                            if v and not version_found:
-                                version_found = v
-                            ts_str = record.get("timestamp")
-                            if not ts_str:
-                                continue
-                            ts = datetime.fromisoformat(ts_str.replace("Z", "+00:00")).replace(tzinfo=None)
-                            diff = abs((ts - proc_start).total_seconds())
-                            if diff < best_diff and version_found:
-                                best_diff = diff
-                                best_match = version_found
-                        except (json.JSONDecodeError, ValueError):
-                            continue
-
-                # Also try correlating birth time to process start
-                birth_diff = abs(birth_time - proc_start_ts)
-                if birth_diff < best_diff and version_found:
-                    best_diff = birth_diff
-                    best_match = version_found
-
-            except (PermissionError, OSError):
+    for jf, birth_time, mtime in _scan_project_jsonl_stats():
+        try:
+            # Skip files created well before or well after the process
+            if birth_time < proc_start_ts - 60 and mtime < proc_start_ts - 60:
                 continue
+
+            # Read first 10 lines for version and timestamp
+            version_found = None
+            with open(jf, "r", encoding="utf-8", errors="replace") as f:
+                for line_num, line in enumerate(f):
+                    if line_num > 10:
+                        break
+                    try:
+                        record = json.loads(line)
+                        v = record.get("version")
+                        if v and not version_found:
+                            version_found = v
+                        ts_str = record.get("timestamp")
+                        if not ts_str:
+                            continue
+                        ts = datetime.fromisoformat(ts_str.replace("Z", "+00:00")).replace(tzinfo=None)
+                        diff = abs((ts - proc_start).total_seconds())
+                        if diff < best_diff and version_found:
+                            best_diff = diff
+                            best_match = version_found
+                    except (json.JSONDecodeError, ValueError):
+                        continue
+
+            # Also try correlating birth time to process start
+            birth_diff = abs(birth_time - proc_start_ts)
+            if birth_diff < best_diff and version_found:
+                best_diff = birth_diff
+                best_match = version_found
+
+        except (PermissionError, OSError):
+            continue
 
     # Return if we found a reasonable match (within 10 minutes of start)
     if best_match and best_diff < 600:
@@ -18006,7 +18265,7 @@ def _windows_process_creation(pid):
 def _collect_windows_claude_sessions():
     """Collect running Claude CLI sessions on Windows via PowerShell Get-Process.
 
-    Safety invariants (per adversarial review 2026-04-13):
+    Safety invariants:
     - Only matches on the process image name (claude / claude-*).
       Matching on Window Title would catch Chrome tabs viewing claude.ai,
       editors with 'claude' in the filename, etc. kill_stale_sessions
@@ -18593,17 +18852,23 @@ def _is_plugin_installed():
     installed, we don't need to check settings.json for individual hooks.
     """
     registry = CLAUDE_DIR / "plugins" / "installed_plugins.json"
-    if not registry.exists():
-        return False
-    try:
-        with open(registry, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        plugins = data.get("plugins", {})
-        for key in plugins:
-            if "token-optimizer" in key.lower():
-                return True
-    except (json.JSONDecodeError, PermissionError, OSError):
-        pass
+    if registry.exists():
+        try:
+            with open(registry, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            plugins = data.get("plugins", {})
+            for key in plugins:
+                if "token-optimizer" in key.lower():
+                    return True
+        except (json.JSONDecodeError, PermissionError, OSError):
+            pass
+    # FIX 4: Cowork search-path fallback. When installed_plugins.json is absent or
+    # doesn't list us (account-synced installs may not register the same way), but
+    # THIS script is running from the synced-plugin tree, we ARE plugin-installed.
+    # Additive: desktop hosts have no /plugins/synced/ segment so this never
+    # changes desktop behavior.
+    if _is_running_from_synced_plugin():
+        return True
     return False
 
 
@@ -18732,7 +18997,7 @@ def _write_settings_atomic(settings_data):
     during the write propagates naturally after cleanup.
 
     Returns True iff the write actually landed, False when the advisory lease
-    was denied and nothing was written (#106 F3 P1). Callers that report
+    was denied and nothing was written (#106). Callers that report
     success to the user MUST check this -- a lease miss is a silent no-op, and
     `cleanup` was printing "Removed: statusLine" / "Cleanup complete" for a
     write that never happened, leaving the dangling statusLine #106 exists to
@@ -18742,7 +19007,7 @@ def _write_settings_atomic(settings_data):
     with _settings_lock() as acquired:
         if not acquired:
             return False
-        # #106 F3 (P2-7): write THROUGH a symlink and preserve the mode.
+        # #106: write THROUGH a symlink and preserve the mode.
         # os.replace onto the link path detaches it, turning a dotfiles-managed
         # symlink into a regular file (the user's repo silently stops tracking
         # their settings) and dropping 0644 to mkstemp's 0600. Resolve the link
@@ -19133,7 +19398,7 @@ DAEMON_IDENTITY_MAGIC = (
     else "token-optimizer-dashboard-v1"
 )
 
-# v5.11.68 (#106 / F2): every runtime suffix that can register a daemon
+# v5.11.68 (#106): every runtime suffix that can register a daemon
 # scheduler artifact. Daemon uninstall sweeps ALL of these by name so a
 # scheduler registration whose plugin-data dir already vanished (e.g. a
 # sibling identity removed by the platform's own GC) still gets unregistered,
@@ -19162,7 +19427,7 @@ _ALL_WINDOWS_TASK_NAMES = (
 
 
 def _scheduler_names_to_sweep(this_install_only: bool, all_names, active_name):
-    """Scheduler identifiers to unregister (#106 F2 / P2-2).
+    """Scheduler identifiers to unregister (#106).
 
     ``this_install_only`` scoped the per-identity FILE sweep but not the
     scheduler loops, so a "just this install" uninstall still booted out every
@@ -19177,7 +19442,7 @@ def _sweep_identity_daemon_files(snap_dir: Path, keys) -> tuple[list[str], list[
     """Delete the daemon artifacts named by ``keys`` from one identity.
 
     Returns ``(removed, failed)`` as path strings. Failures are reported
-    rather than swallowed (#106 F2 / P2-4) so the caller can refuse to claim
+    rather than swallowed (#106) so the caller can refuse to claim
     a clean sweep while a 0600 daemon-token is still on disk.
     """
     files = _daemon_per_identity_files(snap_dir)
@@ -19193,7 +19458,7 @@ def _sweep_identity_daemon_files(snap_dir: Path, keys) -> tuple[list[str], list[
 
 
 def _print_identity_sweep_report(removed, per_identity_removed, failed, this_install_only):
-    """Shared uninstall reporting for all three platforms (#106 F2 / P2-4).
+    """Shared uninstall reporting for all three platforms (#106).
 
     Honesty rules preserved and extended: never print a
     "Deleted" line for a survivor, keep "Nothing to remove" when nothing
@@ -19244,7 +19509,7 @@ def _daemon_per_identity_files(snapshot_dir: Path) -> dict:
 
 
 def _daemon_identity_snapshot_dirs(this_install_only: bool) -> list[Path]:
-    """Snapshot dirs to sweep during daemon uninstall (issue #106 / F2).
+    """Snapshot dirs to sweep during daemon uninstall (issue #106).
 
     Root cause: daemon paths derive from one module-level ``SNAPSHOT_DIR``
     (the resolved identity), but multiple installs create multiple
@@ -19267,7 +19532,7 @@ def _daemon_identity_snapshot_dirs(this_install_only: bool) -> list[Path]:
     try:
         for ident in _all_plugin_data_dirs():
             data_dir = ident / "data"
-            # #106 F2 (P2-1): _all_plugin_data_dirs vets the IDENTITY dir, but
+            # #106: _all_plugin_data_dirs vets the IDENTITY dir, but
             # the dir we actually delete from is its `data` child. A real
             # identity dir whose `data` is a SYMLINK pointed at, say, $HOME
             # made the sweep unlink daemon-token/dashboard-server.py/etc from
@@ -19297,7 +19562,7 @@ def _daemon_identity_snapshot_dirs(this_install_only: bool) -> list[Path]:
 def _daemon_sweep_dir_is_safe(snap_dir: Path) -> bool:
     """True when ``snap_dir`` is a real directory we may delete daemon files from.
 
-    #106 F2 (P2-1). The sweep deletes a fixed allow-list of filenames out of
+    #106. The sweep deletes a fixed allow-list of filenames out of
     every identity's ``data`` dir. That dir must therefore be a REAL directory
     whose realpath lands under the plugin-data base -- otherwise a symlinked
     ``data`` child redirects the unlinks outside the base (the escape found in
@@ -19333,7 +19598,7 @@ def _unlink_if_exists(path: Path) -> bool:
 
     Never follows a symlink to delete its target: a planted symlink named
     ``daemon-token`` must be removed as the link itself, not as whatever it
-    points at (#106 F2 P2-1, defense in depth behind
+    points at (#106, defense in depth behind
     ``_daemon_sweep_dir_is_safe``).
     """
     try:
@@ -19351,7 +19616,7 @@ def _unlink_if_exists(path: Path) -> bool:
 def _unlink_reporting(path: Path) -> tuple[bool, bool]:
     """Delete ``path``; return ``(removed, failed)``.
 
-    #106 F2 (P2-4). ``_unlink_if_exists`` swallows OSError and returns False,
+    #106. ``_unlink_if_exists`` swallows OSError and returns False,
     which is indistinguishable from "was not there". The sweep then printed
     "Swept all token-optimizer-* identities" while a 0600 daemon-token it
     could not delete (read-only dir, EPERM) was still on disk. This variant
@@ -19617,6 +19882,57 @@ def _log_regen(msg):
     try:
         with open(REGEN_LOG, "a", encoding="utf-8") as f:
             f.write("%s %s\\n" % (time.strftime("%Y-%m-%dT%H:%M:%S"), msg))
+    except OSError:
+        pass
+
+
+# Rate-limited trace for a rejected api/* POST. The M-4 token check runs BEFORE
+# the api/regenerate handler, so a rejected regenerate click used to leave NO
+# trace in daemon-regen.log -- it stayed empty for weeks while the user reported
+# a dead button. This writes one line per _REJECT_LOG_MIN_GAP seconds PER PATH
+# so a hammering/looping client cannot spam the log, but a real rejected click
+# on a DIFFERENT endpoint is never invisible (was global, which dropped a
+# rejected toggle trace after a recent rejected regenerate). The path is
+# sanitized so a CR in the request path cannot inject/overwrite a log line
+# via terminal carriage-return overprint.
+_REJECT_LOG_LAST_TS: dict = {{}}
+_REJECT_LOG_MIN_GAP = 30.0
+# Cap the per-path throttle dict. It lives for the daemon's lifetime (launchd
+# KeepAlive) and _log_reject_regen fires before token auth, so a client -- remote
+# in opt-in network mode -- POSTing many distinct bad-token paths would otherwise
+# grow it without bound (memory-leak / OOM-restart DoS). Evict oldest half at cap.
+_REJECT_LOG_MAX_KEYS = 512
+
+
+def _sanitize_log_path(path):
+    """Keep only printable ASCII in *path* so a request path containing control
+    chars cannot inject or overwrite a log line. Drops CR/LF AND ESC and every
+    other control byte (a bare ESC sequence like \\x1b[2J would clear the screen
+    when the log is cat'd). Returns the cleaned string."""
+    if not path:
+        return ""
+    return "".join(c for c in path if 32 <= ord(c) < 127)
+
+
+def _log_reject_regen(path):
+    """One rate-limited line PER PATH when an api/* POST is rejected for a bad
+    token. Per-path throttle so a rejected toggle is still visible after a
+    recent rejected regenerate. Path is sanitized before writing."""
+    global _REJECT_LOG_LAST_TS
+    now = time.time()
+    clean = _sanitize_log_path(path)
+    last = _REJECT_LOG_LAST_TS.get(clean, 0.0)
+    if now - last < _REJECT_LOG_MIN_GAP:
+        return
+    _REJECT_LOG_LAST_TS[clean] = now
+    if len(_REJECT_LOG_LAST_TS) > _REJECT_LOG_MAX_KEYS:
+        _stale = sorted(_REJECT_LOG_LAST_TS, key=_REJECT_LOG_LAST_TS.get)[:len(_REJECT_LOG_LAST_TS) // 2]
+        for _k in _stale:
+            _REJECT_LOG_LAST_TS.pop(_k, None)
+    try:
+        with open(REGEN_LOG, "a", encoding="utf-8") as f:
+            f.write("%s REJECT api/* POST token-mismatch path=%s\\n"
+                    % (time.strftime("%Y-%m-%dT%H:%M:%S"), clean))
     except OSError:
         pass
 
@@ -19916,11 +20232,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
         expected_tok = _read_token()
         got_tok = self.headers.get("X-TO-Token", "")
+        clean = self.path.lstrip("/").split("?")[0]
         if not expected_tok or not hmac.compare_digest(expected_tok, got_tok):
+            # Leave a trace. This check fires BEFORE the api/regenerate
+            # handler, so without a log line a rejected regenerate click was
+            # indistinguishable from a dead button (daemon-regen.log stayed
+            # empty for weeks). Rate-limited so a looping client can't spam.
+            _log_reject_regen(clean)
             self.send_error(403, "Forbidden: invalid token")
             return
 
-        clean = self.path.lstrip("/").split("?")[0]
         if clean == "api/v5/toggle":
             length = int(self.headers.get("Content-Length", 0))
             if length > 4096:
@@ -20176,6 +20497,60 @@ except OSError:
     # Exit 0 cleanly so KeepAlive backs off via ThrottleInterval.
     sys.exit(0)
 '''
+
+
+def _write_file_if_changed(path, content, mode=None):
+    """Write *content* to *path* only if it differs from what is already on disk.
+
+    Returns True if the file was created or its content changed, False if it
+    already matched (so nothing was written). macOS re-fires the "App Background
+    Activity" / background-item banner whenever a LaunchAgent plist is rewritten
+    -- even with byte-identical content -- so an unconditional rewrite on every
+    ensure/repair pass spams the user. Skipping the no-op write leaves the file
+    untouched and the banner silent.
+    """
+    try:
+        if path.read_text(encoding="utf-8") == content:
+            if mode is not None:
+                try:
+                    path.chmod(mode)
+                except OSError:
+                    pass
+            return False
+    except (OSError, ValueError):
+        pass
+    path.write_text(content, encoding="utf-8")
+    if mode is not None:
+        try:
+            path.chmod(mode)
+        except OSError:
+            pass
+    return True
+
+
+def _launchagent_loaded(label):
+    """True if a LaunchAgent with *label* is currently loaded in this GUI domain.
+
+    Used to decide whether a bootout+bootstrap is actually needed: if the plist
+    did not change AND the agent is already loaded, reloading it only re-fires the
+    macOS background-item banner for no benefit. Best-effort: any failure (no
+    launchctl, non-macOS, timeout) returns False so the caller falls back to the
+    reload it would have done anyway.
+    """
+    getuid = getattr(os, "getuid", None)
+    if getuid is None:
+        return False
+    try:
+        # 2s, not 10s: a loaded agent answers in milliseconds, and this runs on the
+        # SessionStart hot path. On timeout we return False and the caller falls
+        # back to the reload it would have done anyway.
+        r = subprocess.run(
+            ["launchctl", "print", f"gui/{getuid()}/{label}"],
+            capture_output=True, text=True, timeout=2, creationflags=_NO_WINDOW,
+        )
+        return r.returncode == 0
+    except (OSError, subprocess.TimeoutExpired):
+        return False
 
 
 def _generate_plist():
@@ -20939,7 +21314,7 @@ def _reclaim_posix_daemon_port(port=DAEMON_PORT, script_name="dashboard-server.p
 def _daemon_ports_to_reclaim(this_install_only: bool):
     """Which daemon ports a POSIX uninstall must SIGTERM-reclaim.
 
-    #106 F2 (P1) added a running-process kill on uninstall because
+    #106 added a running-process kill on uninstall because
     ``launchctl bootout`` / ``systemctl disable`` unregister the job without
     stopping the child, leaving a daemon serving its port with the 0600 CSRF
     token live in memory. But a sweep-all uninstall tears down EVERY runtime's
@@ -21052,12 +21427,24 @@ def _install_launchd_daemon(dry_run=False, soft_fail=False, effective_host=None)
             SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
             DAEMON_LOG_DIR.mkdir(parents=True, exist_ok=True)
             daemon_script = SNAPSHOT_DIR / "dashboard-server.py"
-            daemon_script.write_text(_generate_daemon_script(), encoding="utf-8")
-            daemon_script.chmod(0o755)
+            script_changed = _write_file_if_changed(daemon_script, _generate_daemon_script(), 0o755)
             LAUNCH_AGENTS_DIR.mkdir(parents=True, exist_ok=True)
-            PLIST_PATH.write_text(_generate_plist(), encoding="utf-8")
+            plist_changed = _write_file_if_changed(PLIST_PATH, _generate_plist())
         except OSError as e:
             return _fail(f"[Error] Could not write daemon files: {e}")
+
+        # Nothing changed and the daemon is already loaded and serving -> skip the
+        # bootout+bootstrap. Reloading a healthy, current daemon only re-fires the
+        # macOS "App Background Activity" banner for no benefit. (A reinstall after
+        # uninstall has an unloaded agent, so this guard is skipped and the reload
+        # below still runs.)
+        if (not script_changed and not plist_changed
+                and _launchagent_loaded(DAEMON_LABEL)
+                and _verify_daemon_port(timeout_seconds=1, retries=1, retry_sleep=0)):
+            print("[Token Optimizer] Dashboard server already current and running.\n")
+            print("  Bookmark this URL:")
+            print(f"    http://localhost:{DAEMON_PORT}/token-optimizer")
+            return True
 
         # Stop existing daemon if running (bootout is idempotent -- non-zero
         # exit when nothing is loaded is expected and ignored).
@@ -21122,7 +21509,7 @@ def _write_uninstall_tombstone(snapshot_dir=None):
     rather than leaving them thinking uninstall succeeded while the daemon
     keeps respawning.
 
-    #106 F2 (P1): the tombstone must OUTLIVE the uninstall. Each generated
+    #106: the tombstone must OUTLIVE the uninstall. Each generated
     dashboard-server.py bakes in its OWN identity's breadcrumb path (see the
     `thrash_path_literal` in the daemon template) and checks it on start
     ("noop-tombstoned"), so a per-identity tombstone is what keeps that
@@ -21305,7 +21692,7 @@ def _uninstall_launchd_daemon(this_install_only=False, dry_run=False):
     followed by a "Deleted: script.py" line when the plist is gone but
     the script file remains from a half-uninstall.
 
-    v5.11.68 (#106 / F2): identity-sweeping by default. The LaunchAgent plist
+    v5.11.68 (#106): identity-sweeping by default. The LaunchAgent plist
     is per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
     runtime), so it is removed once. The per-identity files
     (``dashboard-server.py``, ``daemon-token``, ``dashboard-host``,
@@ -21353,7 +21740,7 @@ def _uninstall_launchd_daemon(this_install_only=False, dry_run=False):
     for label in _scheduler_names_to_sweep(
             this_install_only, _ALL_LAUNCH_AGENT_LABELS, DAEMON_LABEL):
         plist = LAUNCH_AGENTS_DIR / f"{label}.plist"
-        # #106 F2 (P2-3): bootout by LABEL, unconditionally. The old code only
+        # #106: bootout by LABEL, unconditionally. The old code only
         # booted out when the plist FILE existed, so a job still loaded in
         # launchd whose plist had already been deleted (half-uninstall, manual
         # rm, platform GC) was never unregistered and kept respawning.
@@ -21370,7 +21757,7 @@ def _uninstall_launchd_daemon(this_install_only=False, dry_run=False):
                 pass
             if _unlink_if_exists(plist):
                 removed.append(str(plist))
-    # #106 F2 (P1): unregistering the job does NOT stop the process --
+    # #106: unregistering the job does NOT stop the process --
     # `launchctl bootout` / `systemctl disable` drop the registration without
     # SIGTERMing the running child, so the daemon kept serving its port with
     # the 0600 CSRF token live in memory until logout. Reclaim the port(s) now
@@ -21388,7 +21775,7 @@ def _uninstall_launchd_daemon(this_install_only=False, dry_run=False):
         identity_removed, identity_failed = _sweep_identity_daemon_files(
             snap_dir, ("daemon_script", "daemon_token", "daemon_host"))
         sweep_failed.extend(identity_failed)
-        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # #106: the .daemon-thrash tombstone must PERSIST for every
         # swept identity. Each identity's generated dashboard-server.py checks
         # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
         # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
@@ -21938,7 +22325,7 @@ def _uninstall_task_scheduler_daemon(this_install_only=False, dry_run=False):
     Cleans orphan XML files from any prior naming convention via glob so
     version drift doesn't leave artifacts behind.
 
-    v5.11.68 (#106 / F2): identity-sweeping by default. The scheduled task is
+    v5.11.68 (#106): identity-sweeping by default. The scheduled task is
     per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
     runtime), so it is removed once, and we query+delete EVERY runtime's task
     name so a task whose data dir already vanished still gets unregistered.
@@ -22007,7 +22394,7 @@ def _uninstall_task_scheduler_daemon(this_install_only=False, dry_run=False):
         identity_removed, identity_failed = _sweep_identity_daemon_files(
             snap_dir, ("daemon_script", "windows_launcher", "daemon_token", "daemon_host"))
         sweep_failed.extend(identity_failed)
-        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # #106: the .daemon-thrash tombstone must PERSIST for every
         # swept identity. Each identity's generated dashboard-server.py checks
         # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
         # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
@@ -22116,7 +22503,7 @@ def _systemd_user_unit_path():
 
 
 def _systemd_user_unit_path_for(unit_name: str) -> Path:
-    """Resolve the unit path for an arbitrary unit name (issue #106 / F2).
+    """Resolve the unit path for an arbitrary unit name (issue #106).
 
     Same base resolution as ``_systemd_user_unit_path`` but for any runtime
     variant's unit name, so the sweeping uninstall can remove a sibling
@@ -22332,7 +22719,7 @@ def _install_systemd_user_daemon(dry_run=False, soft_fail=False, effective_host=
 def _uninstall_systemd_user_daemon(this_install_only=False, dry_run=False):
     """Linux: stop and remove the systemd --user dashboard unit.
 
-    v5.11.68 (#106 / F2): identity-sweeping by default. The systemd unit is
+    v5.11.68 (#106): identity-sweeping by default. The systemd unit is
     per-RUNTIME (shared across ``token-optimizer-*`` identities of the same
     runtime), so it is removed once, and we disable+remove EVERY runtime's
     unit so a unit whose data dir already vanished still gets unregistered.
@@ -22396,7 +22783,7 @@ def _uninstall_systemd_user_daemon(this_install_only=False, dry_run=False):
         )
     except (OSError, subprocess.TimeoutExpired):
         pass
-    # #106 F2 (P1): unregistering the job does NOT stop the process --
+    # #106: unregistering the job does NOT stop the process --
     # `launchctl bootout` / `systemctl disable` drop the registration without
     # SIGTERMing the running child, so the daemon kept serving its port with
     # the 0600 CSRF token live in memory until logout. Reclaim the port(s) now
@@ -22414,7 +22801,7 @@ def _uninstall_systemd_user_daemon(this_install_only=False, dry_run=False):
         identity_removed, identity_failed = _sweep_identity_daemon_files(
             snap_dir, ("daemon_script", "linux_launcher", "daemon_token", "daemon_host"))
         sweep_failed.extend(identity_failed)
-        # #106 F2 (P1): the .daemon-thrash tombstone must PERSIST for every
+        # #106: the .daemon-thrash tombstone must PERSIST for every
         # swept identity. Each identity's generated dashboard-server.py checks
         # its OWN breadcrumb path on start and exits "noop-tombstoned"; the
         # previous unlink here re-armed self-revive, so an orphaned LaunchAgent
@@ -22469,7 +22856,7 @@ def setup_daemon(dry_run=False, uninstall=False, this_install_only=False, latch_
     (DAEMON_PORT = 24842) so the bookmarkable URL is identical
     everywhere.
 
-    v5.11.68 (#106 / F2): ``--uninstall`` is identity-sweeping by default
+    v5.11.68 (#106): ``--uninstall`` is identity-sweeping by default
     (removes the daemon script + 0600 CSRF token from EVERY
     ``token-optimizer-*`` identity, and unregisters every runtime's scheduler
     artifact). Pass ``this_install_only=True`` (``--this-install-only``) to
@@ -22537,7 +22924,7 @@ def setup_daemon(dry_run=False, uninstall=False, this_install_only=False, latch_
 
 
 # ---------------------------------------------------------------------------
-# Uninstall cleanup orchestrator (issue #106 / F3 + cleanup command)
+# Uninstall cleanup orchestrator (issue #106 + cleanup command)
 # ---------------------------------------------------------------------------
 
 # Paths that are intentionally PRESERVED across an uninstall. These hold
@@ -22583,7 +22970,7 @@ def _backup_settings_file(dest_dir: Path) -> Path | None:
 
 
 def _is_our_hook_entry(entry) -> bool:
-    """True when a settings.json hook entry is one WE installed (#106 F3).
+    """True when a settings.json hook entry is one WE installed (#106).
 
     Ownership markers, all anchored on our own script names rather than a bare
     "token-optimizer" substring (a user hook may legitimately mention us in a
@@ -22648,14 +23035,14 @@ def _remove_our_settings_entries(settings: dict) -> list[str]:
             removed.append("statusLine (token-optimizer)")
     # Hook entries we own, across every event.
     #
-    # #106 F3 (P2-6): the old loop dropped ANY group whose filtered hook list
+    # #106: the old loop dropped ANY group whose filtered hook list
     # came out empty -- including a user-authored group that never held a hook
     # of ours (an empty `hooks: []`, or a group of foreign hooks in an event we
     # also use) -- and miscounted each one as "UserPromptSubmit quality-cache
     # hook". A group is now removed ONLY when it actually contained one of our
     # hooks and filtering emptied it; user groups pass through untouched.
     #
-    # #106 F3 (P2-9): the sweep covered UserPromptSubmit + SessionEnd only,
+    # #106: the sweep covered UserPromptSubmit + SessionEnd only,
     # leaving our smart-compact family (PreCompact / SessionStart / Stop /
     # SessionEnd) dangling in settings.json after cleanup -- commands pointing
     # into a plugin tree that is about to be deleted. Every event is now
@@ -22757,7 +23144,7 @@ def cleanup(dry_run=False, this_install_only=False):
             for entry in our_entries:
                 print(f"    Would remove: {entry}")
         else:
-            # #106 F3 P1: do NOT claim "Removed" before the write lands. The
+            # #106: do NOT claim "Removed" before the write lands. The
             # entries are echoed after a confirmed successful write below; a
             # refused read or a denied lease prints a WARNING instead, so the
             # report can never assert a removal that did not happen.
@@ -22772,7 +23159,7 @@ def cleanup(dry_run=False, this_install_only=False):
             else:
                 # Re-read under the backup, re-remove, write atomically.
                 #
-                # #106 F3 P1a: a failed re-read yields {} ("unknown"), and
+                # #106: a failed re-read yields {} ("unknown"), and
                 # writing that would erase every key the user owns. Refuse to
                 # write on a bad read and say so -- their entries stay in
                 # place, which is recoverable; an emptied settings.json is not.
@@ -22786,7 +23173,7 @@ def cleanup(dry_run=False, this_install_only=False):
                     )
                 else:
                     _remove_our_settings_entries(fresh)
-                    # #106 F3 P1b: a denied advisory lease makes the write a
+                    # #106: a denied advisory lease makes the write a
                     # silent no-op. Reporting "Removed" for a write that never
                     # landed leaves the user with the dangling statusLine this
                     # command exists to clear, so surface it instead.
@@ -23786,8 +24173,12 @@ def _apply_daemon_restart_outcome(restart_status):
 # Measures content QUALITY inside a session, not just quantity.
 # Pure JSONL analysis, no model calls, no hooks required.
 
-CHECKPOINT_DIR = RUNTIME_DIR / "token-optimizer" / "checkpoints"
-CHECKPOINT_EVENT_LOG = RUNTIME_DIR / "token-optimizer" / "checkpoint-events.jsonl"
+# FIX 2: unified per-session state base (see _STATE_BASE near SNAPSHOT_DIR).
+# In Cowork this is the resolved plugin-data dir so checkpoints no longer
+# double-write under both ~/.claude/token-optimizer and the plugin-data tree;
+# on desktop it is RUNTIME_DIR, byte-identical to the previous behavior.
+CHECKPOINT_DIR = _STATE_BASE / "token-optimizer" / "checkpoints"
+CHECKPOINT_EVENT_LOG = _STATE_BASE / "token-optimizer" / "checkpoint-events.jsonl"
 
 # v6 dual-score architecture: ResourceHealth (monotonic warning) + SessionEfficiency (behavioral).
 # ResourceHealth can only worsen within a session (no rolling-window signals).
@@ -24263,6 +24654,12 @@ def _parse_jsonl_for_quality(filepath):
         "total_entries": idx,
         "context_tokens": context_tokens,
         "model": current_model,
+        # Context-window size for THIS session's actual model, not the
+        # env/config global that detect_context_window() falls back to.
+        # See _context_window_for_model_str() -- fixes fill%/quality scoring
+        # for sessions whose live model differs from CLAUDE_MODEL/settings.json
+        # (e.g. a 1M-context variant while the global default says plain).
+        "model_context_window": _context_window_for_model_str(current_model),
     }
 
 
@@ -27294,9 +27691,11 @@ def _security_report(as_json=False):
         except OSError:
             return {"exists": True, "size_bytes": 0, "permissions": "???", "mtime": None}
 
-    checkpoint_dir = RUNTIME_DIR / "token-optimizer" / "checkpoints"
-    quality_cache_dir = RUNTIME_DIR / "token-optimizer"
-    events_file = RUNTIME_DIR / "token-optimizer" / "checkpoint-events.jsonl"
+    # FIX A (Fable #2): report the unified state base so the inventory reflects the real
+    # Cowork locations (these globals == RUNTIME_DIR/token-optimizer on desktop).
+    checkpoint_dir = CHECKPOINT_DIR
+    quality_cache_dir = QUALITY_CACHE_DIR
+    events_file = CHECKPOINT_EVENT_LOG
     config_file = CONFIG_DIR / "config.json"
 
     stores = {
@@ -27990,17 +28389,207 @@ def _neutralize_recovered_body(text, limit=4000):
     return text
 
 
-def _emit_codex_session_start(text):
-    """Emit SessionStart context as Codex-valid stdout (issue #81, marketplace path).
+def _opening_context_text(cwd):
+    """Derive a short content signal for the current opening from ``cwd``.
 
-    Codex requires SessionStart hook stdout to be EMPTY or valid JSON. When the
-    Codex marketplace plugin runs the shared ``hooks/hooks.json`` it calls
-    ``measure.py compact-restore`` directly (NOT via ``codex_hook_bridge``), and
-    ``compact_restore`` prints a raw ``[Token Optimizer] …`` text block — which
-    Codex rejects as invalid SessionStart JSON. This wraps that text in the Codex
-    envelope. Empty -> nothing; text already carrying a ``hookSpecificOutput``
-    envelope -> passthrough; otherwise -> wrap as ``additionalContext``.
-    Claude never calls this (it accepts the raw text as additionalContext).
+    At SessionStart there is no user prompt yet, so the only available opening
+    signal is the project implied by cwd. Returns the cwd's project dir name
+    with hyphens/underscores split into words so it tokenizes against sidecar
+    topics ("token-optimizer" -> "token optimizer"). Returns '' for a home /
+    generic cwd so the relevance fallback has no signal and stays silent (R4:
+    many users do not open a clean project folder). Never raises.
+    """
+    if not cwd:
+        return ""
+    try:
+        name = Path(str(cwd)).name
+    except Exception:
+        return ""
+    if not name:
+        return ""
+    generic = {"Users", "home",
+               ".claude", "projects", "src", "tests", "test", "scripts", "memory",
+               "assets", "skills", "commands", "docs", "node_modules", "dist", "lib",
+               Path.home().name, cwd_to_project_dir_name().lstrip("-")}
+    if name in generic or name.startswith(".") or name.startswith("-"):
+        return ""
+    return name.replace("-", " ").replace("_", " ")
+
+
+# --- U3: near-zero-cost statusline existence signal for a resumable checkpoint ---
+#
+# When an eligible checkpoint exists for a new session (D4: age + own-session
+# filtered, whether or not the billed pointer clears the relevance bar), write a
+# per-session flag file beside the quality cache. The Claude statusline
+# (statusline.js) reads it and shows a compact ``⤸resumable`` token in the
+# terminal UI ONLY -- never in any hook ``additionalContext`` payload, so it
+# costs zero billed tokens (R2). Codex has no non-billed render surface for this
+# (its native status_line is a static item list), so it carries no equivalent
+# signal -- see codex_statusline.py. The flag is ts-gated (30 min) so the signal
+# does not outlive the resumable window.
+_RESUMABLE_FLAG_TTL_MS = 30 * 60 * 1000
+
+
+def _resumable_flag_path(sid):
+    """Per-session resumable flag file path, or None when no usable sid."""
+    if not sid:
+        return None
+    safe = re.sub(r"[^a-zA-Z0-9_-]", "", str(sid))
+    if not safe:
+        return None
+    return QUALITY_CACHE_DIR / f"resumable-{safe}.json"
+
+
+def _write_resumable_flag(sid, checkpoint_path):
+    """Record that a relevance-cleared checkpoint exists for this session.
+
+    Best-effort, never raises: the flag is a UI nicety, not a correctness gate.
+    """
+    p = _resumable_flag_path(sid)
+    if p is None:
+        return
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        import time as _t
+        payload = json.dumps({"checkpoint": str(checkpoint_path),
+                              "ts": int(_t.time() * 1000)})
+        tmp = p.with_suffix(".json.tmp")
+        tmp.write_text(payload, encoding="utf-8")
+        tmp.replace(p)
+    except Exception:
+        pass
+
+
+def _clear_resumable_flag(sid):
+    """Remove a stale resumable flag for this session (no relevance-cleared cp)."""
+    p = _resumable_flag_path(sid)
+    if p is None:
+        return
+    try:
+        p.unlink(missing_ok=True)
+    except Exception:
+        pass
+
+
+def _once_per_session_marker(tag, session_id):
+    """Path of the per-session run-once marker for ``tag``, or None.
+
+    Lives beside the quality cache (``QUALITY_CACHE_DIR`` == the engine's
+    existing per-session state dir, home of ``resumable-<sid>.json``) so no new
+    top-level location is invented. Returns None when there is no usable
+    session_id (caller then fails open and runs unguarded).
+    """
+    if not session_id:
+        return None
+    # Reuse the shared session-id sanitizer (finding 22): it enforces a >=6
+    # char floor so degenerate sids ("a!" and "a?" both strip to "a") cannot
+    # collide and fail-CLOSED (a collision would silently skip the later
+    # session's run-once work). "unknown" is its no-usable-id sentinel -> map
+    # back to None so the caller fails OPEN and runs unguarded.
+    safe_sid = sanitize_session_id(str(session_id))
+    if safe_sid == "unknown":
+        return None
+    safe_tag = re.sub(r"[^a-zA-Z0-9_-]", "", str(tag)) or "run"
+    return QUALITY_CACHE_DIR / f"once-{safe_tag}-{safe_sid}.json"
+
+
+def _ran_once_this_session(tag, session_id):
+    """Run-once-per-session guard. Returns True if ``tag`` already ran this
+    session; otherwise records the marker and returns False (i.e. "go ahead").
+
+    This is the Cowork-parity guard: the run-once SessionStart features
+    (ensure-health, quality-cache --force, compact-restore --new-session-only)
+    are ALSO wired onto UserPromptSubmit (Cowork never fires SessionStart), and
+    UserPromptSubmit fires every prompt. Keying a marker on the sanitized
+    session_id makes the first fire in a session -- whichever event that is,
+    SessionStart on native Claude Code or the first UserPromptSubmit in Cowork --
+    the only one that does the work; every later fire in the same session
+    no-ops on a single ``exists()`` stat.
+
+    Fail-open: no session_id, or any filesystem error, returns False so the
+    feature still runs. The marker is written BEFORE the work so a slow/timed-out
+    first run cannot re-trigger the (potentially expensive) command on every
+    subsequent prompt -- run-once is guaranteed even if that single run degrades.
+    """
+    p = _once_per_session_marker(tag, session_id)
+    if p is None:
+        return False
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        return False
+    import time as _t
+    try:
+        # Atomic claim (finding 17): O_CREAT|O_EXCL means exactly one caller
+        # creates the marker (returns "go"/False) and every racing caller sees
+        # FileExistsError (returns "already ran"/True). This closes the
+        # exists()-then-write TOCTOU window where a prompt submitted in the
+        # sub-second before an async first-run wrote its marker could double-run.
+        # The marker is still written BEFORE the work, preserving run-once even
+        # if that single run later times out.
+        fd = os.open(str(p), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+    except FileExistsError:
+        return True
+    except OSError:
+        # Any other filesystem error -> fail open (run unguarded), never latch.
+        return False
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as _fh:
+            _fh.write(json.dumps({"ts": int(_t.time() * 1000)}))
+    except OSError:
+        pass
+    return False
+
+
+def _mark_ran_this_session(tag, session_id):
+    """Record (or refresh) the per-session run-once marker for ``tag`` WITHOUT
+    checking it first -- the SessionStart ``--once-mark`` path.
+
+    SessionStart is inherently once-per-fire, so its work should ALWAYS run; the
+    marker exists only so the UserPromptSubmit ``--once-per-session`` copies
+    no-op on native Claude Code. Writing (not checking) here is the fix for the
+    latch regression (finding 8): resume/compact keep the same session_id, so a
+    check-then-skip guard would suppress the SECOND SessionStart of a session
+    (quality-cache --force stops re-warming after auto-compaction; the resume
+    checkpoint pointer + forced warm are suppressed). Refreshing the marker on
+    every SessionStart keeps the UserPromptSubmit copies latched while letting
+    SessionStart itself run each time. Fail-open: never raises, never blocks.
+    """
+    p = _once_per_session_marker(tag, session_id)
+    if p is None:
+        return
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        import time as _t
+        p.write_text(json.dumps({"ts": int(_t.time() * 1000)}), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def _emit_additional_context(text, event="SessionStart"):
+    """Emit hook stdout as the documented ``additionalContext`` JSON envelope.
+
+    The documented context-injection contract (docs-grounding.md §1;
+    code.claude.com/docs/en/hooks.md) is a single JSON object::
+
+        {"hookSpecificOutput": {"hookEventName": <event>, "additionalContext": <text>}}
+
+    Both ``UserPromptSubmit`` and ``SessionStart`` inject their
+    ``additionalContext`` into the model's context. Two callers need the wrapped
+    form rather than raw text:
+
+      * Codex SessionStart (issue #81): Codex REQUIRES empty-or-valid-JSON stdout,
+        so a raw ``[Token Optimizer] …`` block is rejected.
+      * Cowork UserPromptSubmit (FIX 1): raw-text stdout injection is tolerated on
+        native desktop Claude Code but is NOT documented for the Cowork cloud
+        host -- only the JSON ``additionalContext`` field is -- so wrap TO's
+        UserPromptSubmit-path context there to guarantee it reaches the model.
+
+    Empty text -> nothing. Text ALREADY carrying a ``hookSpecificOutput`` envelope
+    -> passthrough (a caller like ``prompt-continuity``/``verbosity-steer``
+    already emitted the contract shape). Otherwise -> wrap as ``additionalContext``.
+    Native desktop Claude keeps its raw-text stream unchanged (it tolerates raw
+    text); this is only invoked on the Codex and Cowork paths.
     """
     text = (text or "").strip()
     if not text:
@@ -28015,10 +28604,16 @@ def _emit_codex_session_start(text):
     print(json.dumps({
         "continue": True,
         "hookSpecificOutput": {
-            "hookEventName": "SessionStart",
+            "hookEventName": event,
             "additionalContext": text,
         },
     }))
+
+
+def _emit_codex_session_start(text):
+    """Codex SessionStart wrapper (issue #81). Thin alias over the shared emitter
+    ``_emit_additional_context`` so the Codex and Cowork paths cannot diverge."""
+    _emit_additional_context(text, event="SessionStart")
 
 
 def compact_restore(session_id=None, cwd=None, is_compact=False, new_session_only=False):
@@ -28101,31 +28696,120 @@ def compact_restore(session_id=None, cwd=None, is_compact=False, new_session_onl
         # Prefer one whose work lives under the CURRENT cwd, so a home-dir / catch-all
         # cwd does not surface an unrelated project's checkpoint (e.g. a token-optimizer
         # checkpoint leaking into an unrelated tool's session run from the same home dir).
-        # When cwd cannot disambiguate, fall back to the most recent but LABEL it with its
-        # project + branch so an irrelevant pointer is self-evidently ignorable, not a
-        # mystery the next session investigates.
+        #
+        # U1 (R1): the old blind fallback surfaced ``checkpoints[0]`` (most recent
+        # from ANY project) whenever no cwd-prefix match existed, so an unrelated/
+        # fresh session got pointed at an irrelevant checkpoint and sometimes read
+        # it (~1,500 tokens wasted). Now: when no cwd-prefix match exists, score
+        # the candidates with the U2 relevance scorer against the cwd-derived
+        # opening context and fire ONLY if the best score clears
+        # CHECKPOINT_RELEVANCE_THRESHOLD. A home-dir / generic cwd yields no
+        # opening context -> no score -> no pointer. The cross-session label,
+        # the "NOT your own prior work" framing, the filename-format warning path,
+        # the 30-min age gate, and own-session exclusion are all preserved.
         try:
             cur = Path(cwd) if cwd else Path.cwd()
         except Exception:
             cur = None
+        # Filter candidates once: own-session excluded, 30-min age gate applied.
+        # The age gate and own-session exclusion are evaluated here (before
+        # selection) so a stale or own-session checkpoint can never be the
+        # relevance winner either.
+        candidates = []
+        for cp in checkpoints:
+            if sid_safe and sid_safe in cp["filename"]:
+                continue
+            try:
+                age_seconds = (datetime.now() - cp["created"]).total_seconds()
+            except Exception:
+                continue
+            if age_seconds > 1800:
+                continue
+            candidates.append(cp)
+        if not candidates:
+            _clear_resumable_flag(sid_safe)
+            return
+        # Strong same-work signal: a checkpoint whose working set lives under
+        # the current cwd. Fires directly (parallel sessions in the same project
+        # are relevant, and the cross-session label disambiguates them).
         chosen = None
         if cur is not None and str(cur) != str(Path.home()):
             cur_prefix = str(cur) + os.sep
-            for cp in checkpoints:
-                if sid_safe and sid_safe in cp["filename"]:
-                    continue
+            for cp in candidates:
                 if any(str(p).startswith(cur_prefix) for p in _checkpoint_work_paths(cp["path"])):
                     chosen = cp
                     break
-        latest = chosen or checkpoints[0]
-        age_seconds = (datetime.now() - latest["created"]).total_seconds()
-        if age_seconds > 1800:
-            return
-        if sid_safe and sid_safe in latest["filename"]:
+        # Relevance-gate the candidates once (content-based, cwd-free per R4).
+        # The result drives BOTH the statusline flag target and the billed-pointer
+        # decision below. No blind recency fallback -- silence is correct for the
+        # BILLED pointer when nothing is relevant.
+        best = None
+        best_score = 0.0
+        if chosen is None:
+            opening_ctx = _opening_context_text(cur)
+            for cp in candidates:
+                try:
+                    s = checkpoint_relevance_score(
+                        opening_ctx, cp["path"], pool=candidates, cwd=str(cur) if cur else None)
+                except Exception:
+                    s = 0.0
+                if s > best_score:
+                    best_score = s
+                    best = cp
+
+        # D4: the statusline resumable signal fires whenever an ELIGIBLE (age +
+        # own-session filtered) candidate exists -- NOT only when the billed
+        # pointer clears the relevance bar. This is the missed-genuine-resume
+        # case (R2): the billed pointer stays silent to save tokens, but the
+        # near-zero-cost statusline still tells the user a resumable checkpoint is
+        # available. Only the BILLED pointer is gated on relevance. The flag
+        # points at the strongest eligible candidate we can identify (cwd match >
+        # relevance winner > most-recent eligible; candidates are recent-first).
+        flag_target = chosen or best or candidates[0]
+        _write_resumable_flag(sid_safe, flag_target["path"])
+
+        # Billed pointer: fire only on a strong same-work (cwd) signal or when the
+        # relevance winner clears the threshold. Otherwise stay silent -- the
+        # statusline already carries the zero-cost signal for this eligible
+        # candidate.
+        if chosen is not None:
+            latest = chosen
+        elif best is not None and best_score >= CHECKPOINT_RELEVANCE_THRESHOLD:
+            latest = best
+        else:
             return
         desc = _checkpoint_descriptor(latest["path"])
         about = f" (prior work on {desc})" if desc else ""
-        print(f"[Token Optimizer] A recent checkpoint is available{about} at {latest['path']}. Load it only if it matches what you are working on now.")
+        # Make the cross-session nature explicit: project+branch alone is not
+        # distinguishing in a shared checkout with many concurrent sessions in
+        # the same cwd/branch, so an unlabeled pointer reads as "your own prior
+        # work" even when it never is (own-session checkpoints are excluded from
+        # `chosen` above by construction). Name the source session so a reader
+        # cannot mistake it for continuity of the current session.
+        # The regex expects <uuid>-<YYYYMMDD>-<HHMMSS>-... If the checkpoint
+        # filename format ever changes, the match fails and src_sid_short is
+        # None. The old code then fell through to the unlabeled "A recent
+        # checkpoint is available" message -- the exact cross-session hazard
+        # the labeled warning was written to eliminate. Now: (a) log a
+        # one-time stderr warning so a format change is visible at dev time,
+        # and (b) keep the cross-session label even without the sid, so the
+        # fallback never silently reverts to the old unlabeled pointer.
+        src_sid_match = re.match(r'^([0-9a-fA-F-]{8,36})-\d{8}-\d{6}-', latest["filename"])
+        src_sid_short = src_sid_match.group(1)[:8] if src_sid_match else None
+        if src_sid_short and (not sid_safe or not sid_safe.startswith(src_sid_short)):
+            print(f"[Token Optimizer] A checkpoint from a DIFFERENT session ({src_sid_short}){about} is available at {latest['path']}. "
+                  f"This is NOT your own session's prior work -- load it only if you intend to resume that other session's work.")
+        elif not src_sid_short:
+            # Filename did not match the expected format. Warn so a format
+            # change is caught, and still label the pointer as cross-session.
+            import sys as _sys
+            print(f"[Token Optimizer] WARNING: checkpoint filename {latest['filename']!r} did not match the expected "
+                  f"<uuid>-<date>-<time> format; cross-session label cannot name the source session.",
+                  file=_sys.stderr)
+            print(f"[Token Optimizer] A checkpoint from a DIFFERENT session{about} is available at {latest['path']}. "
+                  f"This is NOT your own session's prior work -- load it only if you intend to resume that other session's work.")
+        else:
+            print(f"[Token Optimizer] A recent checkpoint is available{about} at {latest['path']}. Load it only if it matches what you are working on now.")
         return
 
     if is_compact and sid_safe:
@@ -28245,7 +28929,11 @@ def _read_checkpoint_sidecar(checkpoint_path):
         if sidecar_path.exists():
             data = json.loads(sidecar_path.read_text(encoding="utf-8"))
             return data if isinstance(data, dict) else {}
-    except (json.JSONDecodeError, OSError, TypeError):
+    # L2: a sidecar written in a non-UTF-8 encoding (cp1252 export, stray byte)
+    # raises UnicodeDecodeError from read_text before json ever sees it; without
+    # it in the tuple the whole candidate loop aborts. ValueError also covers
+    # json.JSONDecodeError, but both are listed for intent.
+    except (json.JSONDecodeError, ValueError, UnicodeDecodeError, OSError, TypeError):
         pass
     return {}
 
@@ -28253,6 +28941,17 @@ def _read_checkpoint_sidecar(checkpoint_path):
 def _safe_recovered_scalar(value, limit=160):
     text = " ".join(str(value or "").split())
     text = re.sub(r"[\x00-\x1f\x7f]", " ", text)
+    # D5: defang forged RECOVERED-DATA sentinels and instruction-like role
+    # prefixes the SAME way the body scrubber (_neutralize_recovered_body) does.
+    # Sidecar scalars (active_task / decisions) originate from prior-session
+    # content and are prompt-injectable; without this a forged "[/RECOVERED]" in
+    # active_task could close the fenced pull block and smuggle the following text
+    # in as live instructions. Scalars are single-line after the whitespace
+    # collapse above, so the body's line-structure handling is not needed.
+    text = re.sub(r"\[(\s*/?\s*RECOVERED\b)", r"(\1", text, flags=re.IGNORECASE)
+    text = re.sub(
+        r"(?i)^(\s*)(system|assistant|user|human|developer|tool|instructions?)(\s*:)",
+        r"\1[\2]\3", text)
     return text[: max(0, limit)]
 
 
@@ -28296,6 +28995,461 @@ def _checkpoint_topic_score(prompt_text, checkpoint, cwd=None):
     return min(score, 1.0), sidecar
 
 
+# --- U2: content-based, cwd-free, IDF-weighted checkpoint relevance scorer ---
+#
+# Defensible relevance of an opening prompt (or any opening-context text) against
+# a checkpoint's SIDECAR fields, without folder/path-prefix matching (R4). Overlap
+# is weighted by inverse document frequency across the checkpoint pool so generic
+# glue ("the", "run", "fix", "build") that appears in every checkpoint cannot
+# dominate. Recency is only a weak prior; cwd is an OPTIONAL same-work bonus and
+# is never required. Sanitizes harness markup out of sidecar fields first so a
+# polluted ``active_task`` (e.g. ``<task-notification>`` noise) cannot skew the
+# score. Never raises: a non-UTF-8 / unreadable checkpoint scores 0.0 for itself
+# and never aborts the candidate loop.
+#
+# Calibration source for the threshold: the U7 replay benchmark over the real
+# resume/fresh first-prompt mix (tests/baselines/replay-metrics.json). Tuned so
+# genuine resumes clear it and fresh/unrelated openings stay below it.
+def _clamp(value, lo, hi):
+    """Clamp a numeric knob into [lo, hi]. A mis-set env knob (typo, fuzz, a
+    hostile TOKEN_OPTIMIZER_* export) must never be able to force the relevance
+    score to a constant or flip the F1 sign -- every relevance knob is clamped at
+    definition to a safe range. Never raises; a non-numeric value returns lo."""
+    try:
+        v = float(value)
+    except (TypeError, ValueError):
+        return lo
+    if v != v:  # NaN
+        return lo
+    return max(lo, min(hi, v))
+
+
+CHECKPOINT_RELEVANCE_THRESHOLD = _clamp(
+    _float_env("TOKEN_OPTIMIZER_CHECKPOINT_RELEVANCE_THRESHOLD", 0.25), 0.1, 0.9
+)
+
+# Recency prior: a small, weak bonus for a fresh checkpoint, never enough on its
+# own to clear the threshold (a bare "continue" with no topical or same-work
+# signal must stay below the bar -- #129). Window matches the legacy scorer.
+_RELEVANCE_RECENCY_BONUS = 0.05
+_RELEVANCE_RECENCY_WINDOW_MIN = 180
+# Optional same-work bonus when a caller hands a cwd and the checkpoint's
+# working set lives under it. Small enough that content overlap still governs;
+# the scorer works WITHOUT it (R4).
+_RELEVANCE_CWD_BONUS = 0.10
+# Resume-intent bonus (U6 calibration): when the prompt carries a resume cue
+# ("continue working on...", "resume the...", "pick up where...") AND there is
+# SOME content overlap (content_score > 0), add this bonus. Real resume prompts
+# are often long and verbose, so pure precision under-scores them; the bonus
+# lifts genuine resume prompts over the threshold while fresh prompts that
+# happen to mention a topic (no resume cue) stay below. A bare "continue" with
+# no topical tokens has content_score = 0.0, so it gets NO bonus and stays
+# below the bar (#129).
+_RELEVANCE_RESUME_INTENT_BONUS = 0.15
+# The resume-intent bonus is scaled by precision so a prompt that names a
+# DIFFERENT project and only grazes a shared container word cannot ride the flat
+# cue over the threshold (cross-client false positive). A FLOOR keeps genuine but
+# verbose resumes -- which name the right project yet pad with unmatched words
+# ("...for full parity of the recent changes") -- from being over-penalized:
+# effective factor = FLOOR + (1-FLOOR)*precision, so precision only modulates the
+# top (1-FLOOR) of the bonus. Env-tunable.
+_RELEVANCE_RESUME_BONUS_PRECISION_FLOOR = _clamp(
+    _float_env("TOKEN_OPTIMIZER_RELEVANCE_RESUME_BONUS_PRECISION_FLOOR", 0.5), 0.0, 0.99
+)
+
+# D3 (stuffing defense): cap each term's IDF contribution so a single ultra-rare
+# token cannot spike the score, and length-normalize the overlap (see
+# checkpoint_relevance_score) so an opening that pads itself with many keywords
+# cannot reach 1.0 by precision alone. Calibrated so genuine resumes still clear.
+_RELEVANCE_IDF_CAP = _clamp(_float_env("TOKEN_OPTIMIZER_RELEVANCE_IDF_CAP", 3.0), 1.0, 100.0)
+
+# Path-identity weighting (root-cause fix): a checkpoint's project identity lives
+# in its file PATHS, not its prose. A word that recurs across many of a
+# checkpoint's modified_files / recent_reads paths (northwind x10, attention x10,
+# optimizer x10) is a strong identity signal; the SAME word appearing once in an
+# active_task/decision sentence is incidental. Because the doc token set is
+# frequency-blind, an unrelated review/handoff checkpoint that merely QUOTES a
+# project name in prose scored identically to the real project checkpoint. So we
+# weight each doc-side token by how often it appears in the checkpoint's PATHS
+# (capped, D3-style, so one mega-repeated word cannot dominate). Prose-only
+# tokens keep weight 1.0, honoring "use active_task as a weak secondary signal at
+# most". Query side and IDF are untouched, so the #129 bare-continue guard (empty
+# topical set -> content 0.0 -> no bonus) and the fresh-precision negatives are
+# unaffected: this only re-ranks checkpoints that ALREADY share topical tokens.
+_RELEVANCE_PATH_TF_WEIGHT = _clamp(
+    _float_env("TOKEN_OPTIMIZER_RELEVANCE_PATH_TF_WEIGHT", 0.5), 0.0, 2.0)
+_RELEVANCE_PATH_TF_CAP = int(_clamp(
+    _int_env("TOKEN_OPTIMIZER_RELEVANCE_PATH_TF_CAP", 8), 1, 50))
+
+# H3 (fixAC2): FILESYSTEM-SCAFFOLDING words. A single-client checkpoint pool has
+# uniform IDF, so structural container words (retainer, deliverables, clients,
+# reports) weigh the same as true project-identity words. These are NOT project
+# names; they name the folder skeleton every project shares. They are EXCLUDED
+# from the hit set (so they grant no path-TF boost and a resume that only grazes
+# them fires no bonus) but KEPT in the doc denominator (so the cross-client recall
+# guard keeps its teeth). A genuine resume must still hit >=1 non-scaffolding
+# identity token for content to score. Proven necessary: compound-segment-only
+# (no lexical stoplist) FAILS in a diverse multi-client pool.
+_CHECKPOINT_SCAFFOLD_STOPWORDS = frozenset({
+    # folder-skeleton container words
+    "retainer", "deliverables", "deliverable", "clients", "client",
+    "reports", "report", "references", "reference", "scripts", "script",
+    # NOTE: only UNIVERSAL filesystem/dev-scaffolding words belong here -- never a
+    # word that can be part of a real project slug. "company"/"brain" were removed
+    # (2026-08-12): they name a real sub-project (northwind-company-brain), and listing
+    # them made "continue working on the company brain" score 0.0 on a genuine
+    # resume (a curated-against-one-tree false negative, flagged by Fable review).
+    "config", "configs", "src", "lib", "libs",
+    "app", "apps", "data", "notes", "note", "file", "files", "docs", "doc",
+    "projects", "project", "sessions", "session", "build", "builds",
+    # file-extension + doc-type basename noise: a dated brief filename like
+    # ``2026-08-11__BRIEF.html`` splits into {brief, html} -- shared by EVERY
+    # client's reports folder, so it is scaffolding, not project identity. Without
+    # these a pasted path false-matched a different client on the shared basename.
+    # (Only len>=4 Latin tokens survive _topic_token_kept, so 2-3 char extensions
+    # like md/py/js/yml are already dropped; these are the >=4 ones.)
+    "html", "htm", "json", "yaml", "toml", "xml", "csv", "jpeg", "text",
+    "brief", "draft", "readme", "index", "summary", "main", "tests", "test",
+    "utils", "util", "dist", "temp", "tmp", "cache",
+})
+
+# Harness / task-notification markup that can pollute ``active_task``. Stripped
+# before tokenizing so forged sentinels and scheduler noise do not masquerade as
+# topical content. Tags are removed wholesale; the residual text is then passed
+# through _safe_recovered_scalar for control-char / whitespace normalization.
+_SIDECAR_MARKUP_TAG_RE = re.compile(r"<[A-Za-z/][^<>]*>")
+_SIDECAR_MARKUP_SENTINELS = (
+    "task-notification", "system:", "scheduled task", "[token optimizer]",
+)
+
+
+def _sanitize_sidecar_text(value, limit=400):
+    """Strip harness markup + control chars from a sidecar scalar before scoring.
+
+    A polluted ``active_task`` like ``<task-notification>system: scheduled task
+    #7 fired</task-notification> fix checkpoint injection`` must be reduced to
+    its real content so the markup tokens do not inflate relevance. Never
+    raises; returns '' on any error.
+    """
+    try:
+        text = str(value or "")
+    except Exception:
+        return ""
+    text = _SIDECAR_MARKUP_TAG_RE.sub(" ", text)
+    # Drop standalone sentinel phrases the tags leave behind.
+    for sent in _SIDECAR_MARKUP_SENTINELS:
+        text = text.replace(sent, " ")
+    return _safe_recovered_scalar(text, limit=limit)
+
+
+# File-path words carry a checkpoint's project identity. Real checkpoints store
+# identity in the DIRECTORY segments of their file paths, e.g.
+# .../clients/northwind/.../northwind-competitor-monitor/reports/2026-08-11__BRIEF.html
+# -- the distinctive words (northwind, competitor, monitor) live in the dirs, not the
+# basename. Split the WHOLE path (dirs AND basename) on / \ - _ . : and whitespace
+# so that path -> {clients, northwind, competitor, monitor, reports, ...} and a
+# natural spoken prompt ("the northwind competitor monitor") can overlap it. Pool IDF
+# then down-weights the generic containers (users, clients, projects, reports,
+# retainer, deliverables) that appear in most checkpoints, so no hand-kept
+# stoplist is needed. Kept separate from _TOPIC_TOKEN_RE (which deliberately KEEPS
+# separators inside a token, #127 parity) so non-path fields are untouched.
+_PATH_WORD_SPLIT_RE = re.compile(r"[\\/\-_.:\s]+")
+
+
+def _path_topic_words(path_str):
+    """Separator-split topic words from a full file path (dirs + basename).
+
+    C1: pure-numeric segments (a 4-digit year like ``2026`` from a dated brief
+    filename ``2026-08-11__BRIEF.html``) carry no project identity and are
+    dropped, so a prompt that merely mentions the date ("the report from
+    2026-08-11") cannot false-match on the year.
+    """
+    return {
+        w
+        for w in _PATH_WORD_SPLIT_RE.split(str(path_str or "").lower())
+        if w and _topic_token_kept(w) and not w.isdigit()
+    }
+
+
+def _checkpoint_path_tf(checkpoint_path):
+    """Frequency of each path-identity word across a checkpoint's file paths.
+
+    Counts, per word, how many of the checkpoint's modified_files + recent_reads
+    paths that word appears in (set-per-path so a single path with a repeated
+    segment counts once for that path, but a project name recurring across many
+    files accumulates). This is the strength of the path-identity signal used by
+    ``checkpoint_relevance_score`` to out-rank incidental prose mentions. Returns
+    an empty Counter on any error.
+    """
+    from collections import Counter as _Counter
+    tf = _Counter()
+    try:
+        sc = _read_checkpoint_sidecar(checkpoint_path) or {}
+    except Exception:
+        return tf
+    for mf in (sc.get("modified_files") or []):
+        p = mf.get("path") if isinstance(mf, dict) else mf
+        if p:
+            tf.update(_path_topic_words(p))
+    for r in (sc.get("recent_reads") or []):
+        if r:
+            tf.update(_path_topic_words(r))
+    return tf
+
+
+def _checkpoint_sidecar_doc_tokens(checkpoint_path):
+    """Distinctive topic tokens drawn from a checkpoint's sidecar fields.
+
+    Builds a single ``document`` from the sanitized sidecar fields that actually
+    carry topic signal: ``active_task``, ``topic``, ``decisions``, and
+    ``active_plan`` (via the shared non-English tokenizer so CJK sidecars score
+    correctly), UNIONED with separator-split path WORDS from ``modified_files``
+    and ``recent_reads`` (dirs AND basename -- see ``_path_topic_words``). The
+    path words are where a checkpoint's project identity actually lives; keeping
+    only the basename discarded the identity words held in the directory
+    segments. Returns a set of lowercase topic tokens, or an empty set on any
+    error / when the sidecar is absent-or-empty -- the scorer then falls back to
+    0.0 for content.
+    """
+    try:
+        sc = _read_checkpoint_sidecar(checkpoint_path) or {}
+    except Exception:
+        return set()
+    parts = [_sanitize_sidecar_text(sc.get("active_task")),
+             _sanitize_sidecar_text(sc.get("topic")),
+             _sanitize_sidecar_text(sc.get("active_plan"))]
+    for d in (sc.get("decisions") or []):
+        parts.append(_sanitize_sidecar_text(d))
+    doc = "\n".join(p for p in parts if p)
+    tokens = _topic_tokens(doc) if doc.strip() else set()
+    # Union separator-split WORDS from the full modified_files / recent_reads
+    # paths (dirs carry the project identity: northwind, attention, optimizer, ...).
+    for mf in (sc.get("modified_files") or []):
+        p = mf.get("path") if isinstance(mf, dict) else mf
+        if p:
+            tokens |= _path_topic_words(p)
+    for r in (sc.get("recent_reads") or []):
+        if r:
+            tokens |= _path_topic_words(r)
+    return tokens
+
+
+def checkpoint_relevance_score(text, checkpoint_path, pool=None, cwd=None):
+    """IDF-weighted content-overlap relevance of ``text`` vs a checkpoint sidecar.
+
+    Tokenizes ``text`` and the checkpoint's sanitized sidecar fields, weights
+    overlap by inverse document frequency across ``pool`` (a list of checkpoint
+    paths; when None or a single element, IDF is uniform and this reduces to
+    precision), adds a weak recency prior, and an OPTIONAL ``cwd`` same-work
+    bonus. Returns 0.0-1.0. Never raises: non-UTF-8 / unreadable checkpoints
+    score 0.0 for themselves without aborting a caller's candidate loop.
+
+    A bare "continue"/"resume" with no topical tokens yields 0.0 from content,
+    so it stays below ``CHECKPOINT_RELEVANCE_THRESHOLD`` unless a strong same-
+    work signal (cwd bonus) lifts it -- the #129 guard.
+    """
+    # L4: a bytes ``text`` (mis-typed caller / raw stdin) must be decoded, never
+    # str()'d -- str(b"...") leaks a b'...' repr whose "b" and quote chars would
+    # tokenize as junk topic words.
+    if isinstance(text, (bytes, bytearray)):
+        try:
+            text = bytes(text).decode("utf-8", "replace")
+        except Exception:
+            text = ""
+    # H1: a checkpoint whose body file has been deleted is DEAD even if its sidecar
+    # JSON lingers. Score it 0.0 up front so an orphan sidecar can never be
+    # resurrected as a match. Guarded so a bad path type still degrades to 0.0.
+    try:
+        if not Path(str(checkpoint_path)).is_file():
+            return 0.0
+    except Exception:
+        return 0.0
+    # Doc tokens first: H2 needs them to decide which query-split sub-words count.
+    try:
+        doc_tokens = _checkpoint_sidecar_doc_tokens(checkpoint_path)
+    except Exception:
+        doc_tokens = set()
+    # Strip resume-cue glue ("continue"/"resume"/"session"/"work"/...) from the
+    # prompt so a bare "continue" has NO topical tokens and scores on recency +
+    # work-path only (U2.4 / #129). Reuses the shared non-English tokenizer so
+    # CJK prompts tokenize correctly (#127).
+    try:
+        base_tokens = _topic_tokens(str(text or ""), _RESUME_TOPIC_STOPWORDS)
+        # Query-side path handling (mirror of the doc side): a prompt that names a
+        # project with separators ("northwind-competitor-monitor", "measure.py") or
+        # PASTES a full path tokenizes as ONE blob under _TOPIC_TOKEN_RE. Split it
+        # into sub-words and keep every DISTINCTIVE one (non-stopword, non-digit,
+        # non-scaffold) whether or not it hits the doc -- see the loop below for why
+        # non-hitting words must stay (they dilute precision so a foreign pasted path
+        # cannot false-match). C1: pure-numeric date/year segments are junk, dropped.
+        # Scaffolding words (H3) are excluded here too so a pasted path's shared
+        # container segments do not enter the prompt weight. A plain space-separated
+        # prompt has no separator-bearing token, so its set is unchanged -- the #129
+        # bare-continue guard (empty topical set) still holds.
+        prompt_tokens = set()
+        for _t in base_tokens:
+            if any(_c in _t for _c in "\\/-_.:"):
+                for _w in _PATH_WORD_SPLIT_RE.split(_t):
+                    # Keep every distinctive (non-stopword, non-digit, non-scaffold)
+                    # sub-word, whether or not it hits the doc. A hitting sub-word
+                    # helps precision; a NON-hitting distinctive one (e.g. a foreign
+                    # client name "acme" in a pasted path) must stay in the prompt
+                    # set so it dilutes precision -- otherwise dropping it makes
+                    # precision 1.0 by construction and a foreign path grazing one
+                    # shared word false-matches the wrong client (H2 regression).
+                    # Scaffolding/generic segments (users/reports/...) and pure
+                    # digits are still excluded so they neither help nor dilute.
+                    if (_w and _w not in _RESUME_TOPIC_STOPWORDS
+                            and _topic_token_kept(_w) and not _w.isdigit()
+                            and _w not in _CHECKPOINT_SCAFFOLD_STOPWORDS):
+                        prompt_tokens.add(_w)
+            else:
+                prompt_tokens.add(_t)
+    except Exception:
+        return 0.0
+
+    content_score = 0.0
+    precision = 0.0
+    if prompt_tokens and doc_tokens:
+        # IDF across the pool: df(t) = # pool checkpoints whose doc contains t.
+        pool_paths = []
+        # L4: only iterate a genuine sequence pool. A stray string pool would
+        # otherwise iterate its characters as "paths".
+        if pool and isinstance(pool, (list, tuple)):
+            for item in pool:
+                p = item.get("path") if isinstance(item, dict) else item
+                if p:
+                    pool_paths.append(p)
+        if not pool_paths:
+            pool_paths = [checkpoint_path]
+        df = {}
+        pool_docs = []
+        for pp in pool_paths:
+            try:
+                pdoc = _checkpoint_sidecar_doc_tokens(pp)
+            except Exception:
+                pdoc = set()
+            pool_docs.append(pdoc)
+        for pdoc in pool_docs:
+            for t in pdoc:
+                df[t] = df.get(t, 0) + 1
+        n = len(pool_docs)
+        import math as _math
+
+        def _idf(t):
+            # IDF over the pool, CAPPED (D3) so one ultra-rare term cannot
+            # dominate the sum. df(t) = # pool checkpoints whose doc contains t.
+            d = df.get(t, 0)
+            return min(_math.log((n + 1) / (d + 1)) + 1.0, _RELEVANCE_IDF_CAP)
+
+        hits_all = prompt_tokens & doc_tokens
+        # H3 (fixAC2): drop filesystem-scaffolding words from the HIT set. They are
+        # structural container words shared by every project (retainer, clients,
+        # reports, ...), not identity. Excluding them from hits means they give no
+        # path-TF boost and a resume that only grazes them cannot fire the bonus,
+        # yet they stay in ``doc_tokens`` below so the recall denominator (the
+        # cross-client guard) keeps its teeth. content_score can only be > 0 when a
+        # NON-scaffolding identity token is hit -- the identity-hit gate.
+        hits = hits_all - _CHECKPOINT_SCAFFOLD_STOPWORDS
+        # Length-normalized overlap via IDF-weighted F1, NOT precision (D3).
+        # Bare precision (hits_weight / prompt_weight) tops out at 1.0 whenever
+        # EVERY prompt token happens to appear in the doc, so an opening
+        # keyword-stuffed from a checkpoint's own vocabulary scored a perfect 1.0
+        # and sailed past the threshold with no resume cue at all. F1 folds in
+        # RECALL (how much of the checkpoint's distinctive content the opening
+        # actually covers), so a stuffed opening that reproduces only a small
+        # fraction of a large checkpoint is dragged down by low recall and cannot
+        # clear the bar, while a genuine resume that covers the checkpoint's real
+        # topic still scores well regardless of incidental padding.
+        #
+        # PRECISION is the prompt's view (plain IDF): how much of what the user
+        # named is covered. RECALL is the DOC's view, weighted by path-identity
+        # frequency (``_path_weight``): a matched word that recurs across the
+        # checkpoint's file paths counts for more of the doc's identity than the
+        # same word buried once in prose. This is what lets the real northwind
+        # checkpoint (northwind x10 in paths) out-rank a review checkpoint that only
+        # quotes "northwind competitor monitor" in a decision sentence.
+        try:
+            path_tf = _checkpoint_path_tf(checkpoint_path)
+        except Exception:
+            path_tf = {}
+
+        def _path_weight(t):
+            tf = path_tf.get(t, 0)
+            if tf <= 0:
+                return 1.0
+            return 1.0 + _RELEVANCE_PATH_TF_WEIGHT * min(tf, _RELEVANCE_PATH_TF_CAP)
+
+        # M2: PRECISION counts every token symmetrically in BOTH the numerator and
+        # the denominator (no CJK special-casing). An earlier attempt excluded CJK
+        # from the denominator only, which let CJK hits push precision past 1.0 and a
+        # pure-CJK one-word graze false-match the WRONG checkpoint (0.52). Excluding
+        # CJK from both sides instead zeroed out LEGITIMATE pure-CJK resumes (no Latin
+        # basis -> precision 0). Symmetric inclusion is correct on all three: precision
+        # is bounded at 1.0; a genuine CJK resume that covers its checkpoint's CJK
+        # topic scores high; a CJK graze that shares one word of several is diluted by
+        # the unmatched CJK words in prompt_weight and stays below the bar.
+        matched_plain = sum(_idf(t) for t in hits)
+        prompt_weight = sum(_idf(t) for t in prompt_tokens) or 1.0
+        matched_doc_weight = sum(_idf(t) * _path_weight(t) for t in hits)
+        doc_weight = sum(_idf(t) * _path_weight(t) for t in doc_tokens) or 1.0
+        precision = matched_plain / prompt_weight
+        recall = matched_doc_weight / doc_weight
+        if precision + recall > 0:
+            content_score = 2 * precision * recall / (precision + recall)
+        else:
+            content_score = 0.0
+
+    score = content_score
+    # U6 resume-intent bonus: when the prompt carries a resume cue AND there is
+    # some content overlap, add a bonus. Real resume prompts are often long and
+    # verbose, so pure precision under-scores them; the bonus lifts genuine
+    # resume prompts over the threshold while fresh prompts that happen to
+    # mention a topic (no resume cue) stay below. A bare "continue" with no
+    # topical tokens has content_score = 0.0, so it gets NO bonus (#129).
+    if content_score > 0.0:
+        try:
+            if _resume_intent(str(text or "")):
+                # Scale the bonus by PRECISION (IDF-weighted fraction of the
+                # prompt's distinctive tokens the checkpoint actually contains).
+                # A genuine resume names the project -> most tokens match ->
+                # near-full bonus. A prompt that names a DIFFERENT thing and only
+                # grazes a shared container word ("competitor analysis for acme
+                # corp" overlapping northwind's competitor-monitor on just
+                # "competitor") has high unmatched high-IDF mass -> low precision
+                # -> little bonus, so it cannot ride the flat cue over the bar and
+                # false-match the wrong client. Unmatched distinctive tokens are
+                # treated as negative evidence. #129 still holds: a bare "continue"
+                # has content_score 0.0 and never reaches here. The FLOOR protects
+                # genuine verbose resumes (see the constant's comment).
+                _f = _RELEVANCE_RESUME_BONUS_PRECISION_FLOOR
+                score += _RELEVANCE_RESUME_INTENT_BONUS * (_f + (1.0 - _f) * precision)
+        except Exception:
+            pass
+    # Weak recency prior (never enough alone to clear the threshold). L1: gate on
+    # content_score > 0, NOT merely doc_tokens -- an empty / separator-only prompt
+    # (or one whose only overlap is a scaffolding word) has content_score 0.0 and
+    # must score a clean 0.0, not 0.0 + a recency tip that leaks it onto the board.
+    if content_score > 0.0:
+        try:
+            cp_path = Path(str(checkpoint_path))
+            if cp_path.exists():
+                age_min = (datetime.now().timestamp() - cp_path.stat().st_mtime) / 60
+                if 0 <= age_min < _RELEVANCE_RECENCY_WINDOW_MIN:
+                    score += _RELEVANCE_RECENCY_BONUS
+        except Exception:
+            pass
+    # Optional same-work bonus (R4: the scorer works without cwd).
+    if cwd:
+        try:
+            sc = _read_checkpoint_sidecar(checkpoint_path) or {}
+            if _checkpoint_in_project(sc, cwd):
+                score += _RELEVANCE_CWD_BONUS
+        except Exception:
+            pass
+    return min(score, 1.0)
+
+
 def codex_prompt_hints(prompt_text="", session_id=None, cwd=None, max_age_minutes=60 * 24 * 7):
     """Return short topic-relevant continuity hints for Codex UserPromptSubmit.
 
@@ -28314,11 +29468,20 @@ def codex_prompt_hints(prompt_text="", session_id=None, cwd=None, max_age_minute
 # continuity hook upgrades from a one-line hint to a FULL lean reconstruction,
 # scoped to the same project. Kept tight to avoid firing on incidental "continue".
 _RESUME_INTENT_RE = re.compile(
+    # H2: "continue <path>" -- a bare "continue" followed by a pasted absolute or
+    # relative path ("continue /Users/.../northwind-competitor-monitor",
+    # "continue \\srv\\share\\...") is a resume cue: the path IS the topic. Matched
+    # without a trailing \b so it fires on the leading slash/backslash/tilde/dot.
+    r"(?:continue\s+[\\/~.])|"
     r"\b(last session|previous session|prior session|earlier session|last time|"
     r"where we left off|pick(?:ing)? up where|"
     # "from" added so "continue from checkpoint" / "continue from where we left off"
     # is recognized; the cue is the verb "continue from", NOT a bare "from
     # checkpoint" (which would false-match "import data from checkpoint file").
+    # "to" is deliberately EXCLUDED (D2): "continue to <verb>" ("continue to
+    # refactor", "continue to write the tests") means keep doing the CURRENT task,
+    # not resume a prior session -- matching it re-opened fresh-session lean
+    # injection on Codex for any such prompt in a project with recent checkpoints.
     r"continue (?:working|where|on|our|the|with|that|this|from)|"
     r"carry on (?:with|where)|what we (?:discussed|talked about|were (?:doing|working))|"
     r"resume (?:our|that|this|work|the (?:work|session|project|task|conversation|thread|discussion))|"
@@ -28332,10 +29495,53 @@ _RESUME_INTENT_RE = re.compile(
 # session") so we fall back to the most-recent same-project checkpoint.
 _RESUME_NAMED_TOPIC_BAR = _float_env("TOKEN_OPTIMIZER_RESUME_TOPIC_BAR", 0.22)
 
+# Staleness cap for the VAGUE-continue fallback (GitHub #129): when the prompt
+# names no distinguishing topic we may only surface the most-recent same-project
+# checkpoint if it is fresher than this. Beyond it, blindly reopening whichever
+# sibling session was last active in the same folder is how an UNRELATED session's
+# checkpoint gets injected -- so we return nothing instead of guessing. The
+# keyword-winner path (topic named) is NOT capped; only the recency fallback is.
+_RESUME_RECENCY_CAP_MIN = _int_env("TOKEN_OPTIMIZER_RESUME_RECENCY_MIN", 480)
+
+# A session id named IN the prompt ("continue session aaaa1111", full UUID, or
+# "session id: <uuid>"). Two shapes: an 8-40 hex run (or full 8-4-4-4-12 UUID)
+# that immediately follows the word "session" (optionally "id"), OR a bare full
+# UUID anywhere. A bare short hex token NOT after "session" is deliberately NOT
+# matched, so ordinary hex words in the prompt aren't mistaken for a session id.
+# The "session" branch is listed first and captures a full UUID greedily so
+# "...session <uuid>" yields the whole id, not just its first 8-hex chunk.
+_UUID_RE_SRC = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+_PROMPT_SESSION_ID_RE = re.compile(
+    r"\bsession(?:[\s_-]*id)?[\s:#]+(" + _UUID_RE_SRC + r"|[0-9a-f]{8,40})\b"
+    r"|\b(" + _UUID_RE_SRC + r")\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_session_id_from_prompt(text):
+    """Return a session id token the user named in the prompt, or None.
+
+    Group 1 = id after "session"; group 2 = a bare full UUID. Lowercased so it
+    matches sanitize_session_id output. Never raises."""
+    m = _PROMPT_SESSION_ID_RE.search(str(text or ""))
+    if not m:
+        return None
+    return (m.group(1) or m.group(2)).lower()
+
+
+# M2: CJK / non-Latin resume cues (继续 zh, 이어서 / 계속 ko, 続ける ja). Kept in a
+# SEPARATE regex, consulted only for intent DETECTION -- deliberately NOT part of
+# _RESUME_INTENT_RE, whose .sub() strips cues from a prompt residual. CJK scripts
+# have no word boundaries, so a glued Han run ("继续数据库迁移工作") is ONE token;
+# stripping "继续" from the prompt but not the checkpoint would break the identical-
+# run match the #127 parity fixture pins. Detection-only avoids that.
+_CJK_RESUME_CUE_RE = re.compile(r"继续|이어서|계속|続ける")
+
 
 def _resume_intent(text):
-    """True when the prompt asks to continue/recall prior work."""
-    return bool(_RESUME_INTENT_RE.search(text or ""))
+    """True when the prompt asks to continue/recall prior work (Latin or CJK cue)."""
+    t = text or ""
+    return bool(_RESUME_INTENT_RE.search(t) or _CJK_RESUME_CUE_RE.search(t))
 
 
 # Generic glue words that carry no topic once the resume cue is removed; keeping
@@ -28348,6 +29554,44 @@ _RESUME_TOPIC_STOPWORDS = frozenset({
 })
 
 
+# --- Non-English topic tokenizer (#127) — single source of truth on the Python side ---
+# Two branches: an ASCII/accented-Latin run, OR a whole non-ASCII run (CJK etc.) as one
+# token, so a token never mixes ASCII and non-ASCII ("measure.py를" -> "measure.py" + "를").
+# The Latin-1/Extended-A ranges deliberately skip U+00D7 (×) and U+00F7 (÷): they sit inside
+# the block but are math symbols, not letters. U+0100–U+024F is Latin Extended-A/B, all letters.
+_TOPIC_TOKEN_RE = re.compile(r"[a-zA-Z0-9_.:À-ÖØ-öø-ÿĀ-ɏ/-]+|[^\x00-\x7F]+")
+# Script-aware length floor. CJK scripts (Hangul/Han/Kana, all >= U+3000) carry a full topic
+# word in two characters — 결제 (payment), 모듈 (module) — so they are kept at len>=2. ASCII and
+# accented Latin keep the len>3 English stopword heuristic (a 2-char Latin token like "ré" is
+# stopword-like, not content). This is why the floor cannot be a single constant.
+_CJK_MIN = 0x3000
+
+
+def _has_cjk(w):
+    """True when a token contains any CJK / non-Latin-script char (ord >= U+3000)."""
+    return any(ord(ch) >= _CJK_MIN for ch in w)
+
+
+def _topic_token_kept(w):
+    if _has_cjk(w):
+        return len(w) >= 2
+    return len(w) > 3
+
+
+def _topic_tokens(text, stopwords=frozenset()):
+    """Distinctive topic tokens: two-branch tokenizer + script-aware length floor.
+
+    The one place the non-English topic tokenizer lives on the Python side. OpenClaw and
+    OpenCode mirror it as ``extractTopicTokens``; the shared parity fixture
+    (tests/fixtures/i18n_topic_score_parity.json) proves all three agree.
+    """
+    return {
+        w
+        for w in _TOPIC_TOKEN_RE.findall(str(text or "").lower())
+        if _topic_token_kept(w) and w not in stopwords
+    }
+
+
 def _resume_topic_score(text, checkpoint_path):
     """Precision of the prompt's RESIDUAL topic words (after removing resume cues)
     against a checkpoint's content. Unlike keyword_relevance_score, the resume/
@@ -28355,17 +29599,17 @@ def _resume_topic_score(text, checkpoint_path):
     keepwarm one") scores higher than a vague "continue last session" (-> 0.0).
     """
     residual = _RESUME_INTENT_RE.sub(" ", str(text or "").lower())
-    topic_tokens = {
-        w for w in re.findall(r"[a-zA-Z0-9_./:-]+", residual)
-        if len(w) > 3 and w not in _RESUME_TOPIC_STOPWORDS
-    }
+    topic_tokens = _topic_tokens(residual, _RESUME_TOPIC_STOPWORDS)
     if not topic_tokens:
         return 0.0
     try:
-        content = checkpoint_path.read_text(encoding="utf-8").lower()
+        # errors="replace": a non-UTF-8 checkpoint (cp1252 export, stray byte) must score 0.0
+        # for itself, never raise UnicodeDecodeError and abort scoring for every other
+        # candidate. Matches the TS runtimes, which decode with U+FFFD replacement.
+        content = checkpoint_path.read_text(encoding="utf-8", errors="replace").lower()
     except (PermissionError, OSError):
         return 0.0
-    cp_tokens = {w for w in re.findall(r"[a-zA-Z0-9_./:-]+", content) if len(w) > 3}
+    cp_tokens = _topic_tokens(content)
     if not cp_tokens:
         return 0.0
     return len(topic_tokens & cp_tokens) / len(topic_tokens)
@@ -28424,9 +29668,12 @@ def _checkpoint_in_project(sidecar, cwd):
     return False
 
 
-# Tokenizer for the per-item keep/drop rule. SAME regex as the resume-topic
-# tokenizer (measure.py:26336 / :27438) so a decision/file naming the current
-# project overlaps the keep set on identical token boundaries across runtimes.
+# Tokenizer for the per-item keep/drop rule. DELIBERATELY ASCII-only, and DELIBERATELY
+# NOT the (wider) resume-topic tokenizer _TOPIC_TOKEN_RE. Do not "unify" them (#127):
+# widening this to match non-ASCII would make a non-Latin item produce 3+ tokens that then
+# fail the ASCII-only keep-set overlap test, dropping needed lines from the selected session.
+# The keep set is built from the prompt + cwd + in-project paths, which are ASCII in practice,
+# so a non-Latin item must stay inconclusive (<3 tokens) and be kept, not overlap-tested.
 _RECOVER_TOKEN_RE = re.compile(r"[a-zA-Z0-9_./:-]+")
 
 
@@ -28600,12 +29847,65 @@ def _continuity_resume_block(text, checkpoints, sid_safe, cwd):
     reconstruction of the right same-project session, or "" to fall through to
     the lightweight hint.
 
-    Selection ("both"): keyword winner when the prompt names a topic
-    (best same-project score >= _RESUME_NAMED_TOPIC_BAR), else the most-recent
-    same-project session. Token-free: reuses build_lean_resume_context.
+    Selection order (GitHub #129): (1) a session id NAMED in the prompt wins and
+    is scoped strictly to that session -- never silently substituted; (2) else the
+    keyword winner when the prompt names a topic (best same-project score >=
+    _RESUME_NAMED_TOPIC_BAR); (3) else the most-recent same-project session, but
+    ONLY if fresher than _RESUME_RECENCY_CAP_MIN -- otherwise "" (blindly reopening
+    the last-active sibling in the folder is how an UNRELATED session leaks in).
+    A topic/recency guess carries the CONDITIONAL footer; an explicitly named
+    session carries the confident one. Token-free: reuses build_lean_resume_context.
     """
     if not cwd:
         return ""
+
+    # (1) Explicit session id in the prompt -> scope strictly to it. Honor it
+    # exactly and never fall back to a different session; if no on-disk checkpoint
+    # matches, return "" rather than silently substituting an unrelated one (#129).
+    named_id = _extract_session_id_from_prompt(text)
+    if named_id:
+        # A KEYWORDED id ("...session <id>") is a deliberate request -> confident footer.
+        # A BARE UUID pasted into a prompt (a log line, a ticket ref) may be incidental,
+        # so it gets the CONDITIONAL footer: surface the match, but the assistant verifies
+        # before claiming a reopen rather than asserting it.
+        _id_m = _PROMPT_SESSION_ID_RE.search(str(text or ""))
+        _named_footer = "confident" if (_id_m and _id_m.group(1)) else "conditional"
+        for cp in checkpoints:
+            fn = cp.get("filename", "")
+            if sid_safe and sid_safe in fn:
+                continue  # same-session recovery is SessionStart/compact's job
+            if fn.lower().startswith(named_id):
+                # Same-project guard (parity with the topic/recency branches below): an
+                # explicitly named id must STILL be scoped to this project. Without it,
+                # naming any session id injects a DIFFERENT project's topic / continuation
+                # / open-questions into the current cwd -- the #103 filter scrubs file
+                # PATHS but not those scalar fields -- a cross-project confidentiality
+                # leak. If the named session is not in this project, decline rather than
+                # leak (keep scanning in case a same-prefix sibling is in-project).
+                if not _checkpoint_in_project(_read_checkpoint_sidecar(cp["path"]), cwd):
+                    continue
+                # Reconstruct the session whose FILENAME the named id matched, using the
+                # filename-derived id -- NOT _checkpoint_session_id, which prefers a
+                # sidecar session_id that, if it disagreed with the filename, would
+                # confidently reopen a DIFFERENT session (the #129 harm via another
+                # trigger). The user named this id, so a match warrants confident wording.
+                m = re.match(r"([0-9a-fA-F-]{8,})-\d{8}-\d{6}-", fn)
+                cp_sid = m.group(1) if m else None
+                if not cp_sid:
+                    continue
+                block = build_lean_resume_context(cp_sid, prompt_text=text, cwd=cwd,
+                                                  footer_mode=_named_footer)
+                if block:
+                    _log_resume_lean_savings(cp_sid, block)
+                    return block
+        # No checkpoint matches the named id. If the id was the WHOLE ask (no separate
+        # resume verb) never substitute a different session -- return "" (#129). But when
+        # the prompt independently asks to resume ("continue the auth refactor ... the
+        # failing test references session a1b2c3d4"), the id is incidental, so fall
+        # through to the topic/recency selection below instead of suppressing a good match.
+        if not _resume_intent(text):
+            return ""
+
     same_project = []
     for cp in checkpoints[:50]:
         if sid_safe and sid_safe in cp.get("filename", ""):
@@ -28620,13 +29920,17 @@ def _continuity_resume_block(text, checkpoints, sid_safe, cwd):
 
     best_score = max(s for s, _, _ in same_project)
     if best_score >= _RESUME_NAMED_TOPIC_BAR:
-        # Named a topic -> keyword winner (recency breaks ties).
+        # (2) Named a topic -> keyword winner (recency breaks ties).
         same_project.sort(key=lambda x: (x[0], x[1]["created"].timestamp()), reverse=True)
         chosen = same_project[0]
     else:
-        # Vague "continue last session" -> most-recent same-project (list is
-        # already recency-sorted by list_checkpoints).
+        # (3) Vague "continue last session" -> most-recent same-project, but only
+        # if fresh. A stale freshest pick is almost certainly an unrelated sibling
+        # session (GitHub #129), so decline rather than guess.
         chosen = max(same_project, key=lambda x: x[1]["created"].timestamp())
+        age_min = (datetime.now() - chosen[1]["created"]).total_seconds() / 60
+        if age_min > _RESUME_RECENCY_CAP_MIN:
+            return ""
 
     _, cp, sidecar = chosen
     sid = sidecar.get("session_id") if isinstance(sidecar, dict) else None
@@ -28635,7 +29939,9 @@ def _continuity_resume_block(text, checkpoints, sid_safe, cwd):
         sid = m.group(1) if m else None
     if not sid:
         return ""
-    block = build_lean_resume_context(sid, prompt_text=text, cwd=cwd)
+    # Topic/recency match is a best guess -> CONDITIONAL footer so the assistant
+    # verifies against the user's actual request before claiming a reopen (#129).
+    block = build_lean_resume_context(sid, prompt_text=text, cwd=cwd, footer_mode="conditional")
     if block:
         # Count the cold-resume cost this lean reconstruction avoided (idempotent
         # per target session). Token-free; never blocks the injection.
@@ -28692,7 +29998,11 @@ def _continuity_prompt_hint(prompt_text="", session_id=None, cwd=None, max_age_m
     sid_safe = sanitize_session_id(session_id) if session_id else None
 
     # Deliberate "continue prior work" path: full lean reconstruction, same project.
-    if _resume_intent(text):
+    # An explicit session id named in the prompt ("continue session <id>", "resume
+    # session <id>") is its own resume cue: _RESUME_INTENT_RE's verb list does not
+    # include "session", so without this the strict id-scoped branch (#129 Fix 3)
+    # would never fire for the exact phrasing a user types to name a session.
+    if _resume_intent(text) or _extract_session_id_from_prompt(text):
         try:
             block = _continuity_resume_block(text, checkpoints, sid_safe, cwd)
         except Exception:
@@ -29121,7 +30431,8 @@ def _lean_list(items, n, width=140, keep_tokens=None):
     return cleaned
 
 
-def build_lean_resume_context(session_id, max_chars=3500, prompt_text=None, cwd=None):
+def build_lean_resume_context(session_id, max_chars=3500, prompt_text=None, cwd=None,
+                              footer_mode="confident"):
     """Reconstruct a LEAN, paste-ready context block for a cold session.
 
     Faithful tier (checkpoint present): active task, continuation/handover, open
@@ -29276,11 +30587,24 @@ def build_lean_resume_context(session_id, max_chars=3500, prompt_text=None, cwd=
             except (json.JSONDecodeError, ValueError, TypeError):
                 pass
 
-    footer = [
-        "Use this to re-orient a fresh session on the prior work. Tell the user "
-        "you reopened the cold session (mention its date/topic) so the recovery "
-        "is transparent.",
-    ]
+    if footer_mode == "conditional":
+        # Auto-injected best-guess match (#129): the plugin GUESSED which prior
+        # session the user meant, so the assistant must verify before claiming a
+        # reopen. Mirrors the lightweight-hint / compact_restore wording.
+        footer = [
+            "Use this only if it matches the user's current request. If you do use "
+            "it, briefly tell the user you found a relevant prior session (mention "
+            "its date/topic) so the recovery is transparent, not silent. If it does "
+            "not match what you are working on now, ignore it silently.",
+        ]
+    else:
+        # Confident path: the caller named this exact session (CLI --resume-lean, or
+        # an explicit session id in the prompt), so a reopen claim is warranted.
+        footer = [
+            "Use this to re-orient a fresh session on the prior work. Tell the user "
+            "you reopened the cold session (mention its date/topic) so the recovery "
+            "is transparent.",
+        ]
 
     # Assemble within the char budget: header + as many body lines as fit + footer.
     out = list(header)
@@ -29753,9 +31077,10 @@ def keyword_relevance_score(text, checkpoint_path):
     """
     text_lower = text.lower()
 
-    # Extract content words (>3 chars, filters most stopwords without a list)
+    # Content words via the shared non-English tokenizer (#127): two-branch class +
+    # script-aware floor (CJK kept at len>=2, ASCII/Latin at len>3). See _topic_tokens.
     def content_words(s):
-        return {w for w in re.findall(r'[a-zA-Z0-9_./:-]+', s.lower()) if len(w) > 3}
+        return _topic_tokens(s)
 
     text_tokens = content_words(text)
 
@@ -29789,7 +31114,9 @@ def keyword_relevance_score(text, checkpoint_path):
         return 0.0
 
     try:
-        checkpoint_content = checkpoint_path.read_text(encoding="utf-8")
+        # errors="replace" (#127): a non-UTF-8 checkpoint scores 0.0 for itself instead of
+        # raising UnicodeDecodeError and aborting scoring for the whole candidate loop.
+        checkpoint_content = checkpoint_path.read_text(encoding="utf-8", errors="replace")
     except (PermissionError, OSError):
         return 0.0
 
@@ -29918,16 +31245,24 @@ def _cleanup_quality_cache():
     if _QUALITY_CACHE_RETENTION_DAYS <= 0:
         return
     try:
-        cache_dir = RUNTIME_DIR / "token-optimizer"
+        # FIX A (Fable #2): follow the unified state base. On desktop QUALITY_CACHE_DIR
+        # == RUNTIME_DIR/token-optimizer (unchanged); in Cowork it is the resolved
+        # plugin-data base where FIX 2 routes quality-cache-*.json / once-*.json, so the
+        # retention sweep must target it or those files never age out (slow accumulation).
+        cache_dir = QUALITY_CACHE_DIR
         if not cache_dir.is_dir():
             return
         cutoff = time.time() - (_QUALITY_CACHE_RETENTION_DAYS * 86400)
-        for f in cache_dir.glob("quality-cache-*.json"):
-            try:
-                if f.stat().st_mtime < cutoff:
-                    f.unlink()
-            except OSError:
-                pass
+        # `once-*.json` are the per-session run-once guard markers (finding 21):
+        # three per session, never otherwise cleaned, so age them out here on the
+        # same retention window as the quality-cache snapshots.
+        for pattern in ("quality-cache-*.json", "once-*.json"):
+            for f in cache_dir.glob(pattern):
+                try:
+                    if f.stat().st_mtime < cutoff:
+                        f.unlink()
+                except OSError:
+                    pass
     except Exception:
         pass
 
@@ -30009,14 +31344,30 @@ def _is_running_from_plugin_cache():
     return "/plugins/cache/" in resolved
 
 
+def _is_running_from_synced_plugin():
+    """Check if this script is running from a Cowork account-synced plugin dir.
+
+    FIX 4: Cowork installs land under ``~/.claude/plugins/synced/<...>/`` (issue
+    audit: "the resolver's search paths didn't include the synced plugins
+    location"), NOT under ``/plugins/cache/``. That path segment is the reliable
+    self-location marker in Cowork -- ``${CLAUDE_PLUGIN_ROOT}`` is not always
+    injected into the hook env (issues #24529/#66557), so we recognize the synced
+    tree by our own resolved location. Desktop paths never contain it.
+    """
+    resolved = str(Path(__file__).resolve())
+    if os.name == "nt":
+        resolved = resolved.replace("\\", "/")
+    return "/plugins/synced/" in resolved
+
+
 def _get_measure_py_path():
     """Get the path to this measure.py script.
 
-    When running from a plugin cache, returns a ${CLAUDE_PLUGIN_ROOT}-based
-    path so that settings.json hooks survive version upgrades. Otherwise
-    returns the resolved absolute path.
+    When running from a plugin cache OR a Cowork synced-plugin dir, returns a
+    ${CLAUDE_PLUGIN_ROOT}-based path so that settings.json hooks survive version
+    upgrades / account re-syncs. Otherwise returns the resolved absolute path.
     """
-    if _is_running_from_plugin_cache():
+    if _is_running_from_plugin_cache() or _is_running_from_synced_plugin():
         # Use the variable that Claude Code resolves dynamically per version
         return "${CLAUDE_PLUGIN_ROOT}/skills/token-optimizer/scripts/measure.py"
     return str(Path(__file__).resolve())
@@ -30027,8 +31378,8 @@ def _read_settings_json():
 
     Lossy by design for read-only callers: a missing file, malformed JSON, and
     an unreadable file all collapse to ``{}``. Any caller that will WRITE the
-    result back must use ``_read_settings_json_checked`` instead -- see #106
-    F3 P1, where a failed re-read returned ``{}`` and that empty dict was
+    result back must use ``_read_settings_json_checked`` instead -- see #106,
+    where a failed re-read returned ``{}`` and that empty dict was
     written straight over the user's whole settings.json.
     """
     data, path, _ok = _read_settings_json_checked()
@@ -30276,7 +31627,11 @@ def setup_smart_compact(dry_run=False, uninstall=False, status_only=False):
     print("  To remove: python3 measure.py setup-smart-compact --uninstall")
 
 
-QUALITY_CACHE_DIR = RUNTIME_DIR / "token-optimizer"
+# FIX 2: same unified base as CHECKPOINT_DIR/SNAPSHOT_DIR. RUNTIME_DIR on desktop
+# (unchanged); the resolved plugin-data dir in Cowork, so quality-cache,
+# resumable-*.json, and once-*.json run-once markers stop double-writing to two
+# bases and the once-per-session guard fires exactly once.
+QUALITY_CACHE_DIR = _STATE_BASE / "token-optimizer"
 QUALITY_CACHE_PATH = QUALITY_CACHE_DIR / "quality-cache.json"  # legacy global fallback
 
 
@@ -30886,9 +32241,10 @@ _LOOP_LAST_MESSAGES = 4
 # Transient nudge/loop/warning state that must survive across the separate
 # UserPromptSubmit and PostCompact hook processes. compute_quality_score() builds
 # a fresh result each run, so quality_cache() carries these forward from the prior
-# on-disk cache. Any new "_nudge_*"/"_loop_*"/warning-dedup key set in _maybe_nudge
-# or _maybe_loop_warning MUST be registered here — a sibling key silently missing
-# from this set is exactly what broke the nudge follow-through credit (A6).
+# on-disk cache. Any new "_nudge_*"/"_loop_*"/"_warn_*"/warning-dedup key set in
+# _maybe_nudge, _maybe_loop_warning, or _maybe_quality_warn MUST be registered
+# here — a sibling key silently missing from this set is exactly what broke the
+# nudge follow-through credit (A6).
 _CARRY_KEYS = (
     "_nudge_fill_pct_at_fire",
     "_nudge_fire_epoch",
@@ -30900,6 +32256,9 @@ _CARRY_KEYS = (
     "progressive_bands_captured",
     "_last_fill_warn_level",
     "_last_tool_call_warn_level",
+    "_warn_count",
+    "_warn_last_epoch",
+    "_warn_last_band",
 )
 
 
@@ -31153,6 +32512,53 @@ def _maybe_nudge(result, cache_path, quality_data, quiet=False):
     )
 
 
+def _maybe_quality_warn(result, warn_threshold):
+    """Gate the `quality-cache --warn` CLI message with the same guardrails
+    _maybe_nudge already has: session cap + cooldown + "only re-fire on a NEW
+    lower quality band."
+
+    Without this, the plain-text warning ("Context quality: N/100. Stale reads
+    and bloated results building up. Consider /compact.") re-printed on every
+    UserPromptSubmit where score < warn_threshold -- no cap, no cooldown, no
+    "only if it got worse" check. A session hovering in one band under the
+    default warn_threshold=70 (e.g. 69 -> 66 -> 64 -> 62) nagged on every
+    single prompt. _maybe_nudge, its sibling above, already solved this exact
+    problem for the proactive nudge; this reuses the same constants
+    (_NUDGE_SESSION_CAP, _NUDGE_COOLDOWN_SECONDS) so both paths behave
+    consistently. A later drop into a new lower 10-point band (e.g. from the
+    60s into the 50s) still warns again, since that is new information worth
+    surfacing even mid-cooldown-window.
+
+    Returns True if the CLI should print the warning this tick.
+    """
+    score = result.get("score")
+    if score is None or score >= warn_threshold:
+        return False
+
+    warn_count = result.get("_warn_count", 0)
+    last_warn_epoch = result.get("_warn_last_epoch", 0)
+    last_band = result.get("_warn_last_band")
+    band = int(score // 10)
+
+    if warn_count >= _NUDGE_SESSION_CAP:
+        return False
+
+    now = time.time()
+    if now - last_warn_epoch < _NUDGE_COOLDOWN_SECONDS:
+        return False
+
+    # Only re-warn once quality has dropped into a NEW lower band since the
+    # last warning fired (e.g. from the 60s into the 50s). Repeated ticks
+    # within the same band are exactly the spam this guards against.
+    if last_band is not None and band >= last_band:
+        return False
+
+    result["_warn_count"] = warn_count + 1
+    result["_warn_last_epoch"] = now
+    result["_warn_last_band"] = band
+    return True
+
+
 def _maybe_loop_warning(result, cache_path, quality_data, quiet=False):
     """Check for real-time loops. Returns systemMessage string or None."""
     if not _is_v5_feature_enabled("loop_detection"):
@@ -31212,7 +32618,7 @@ def _maybe_loop_warning(result, cache_path, quality_data, quiet=False):
     return None
 
 
-def _acquire_quality_lock(cache_path):
+def _acquire_quality_lock(cache_path, acquire_timeout=0.15):
     """Bounded portable lock serializing quality_cache recompute+write.
 
     Returns a LeaseLock on success or False when unavailable/contended. The
@@ -31225,11 +32631,18 @@ def _acquire_quality_lock(cache_path):
     nudges. Serializing recompute eliminates that race and the redundant
     thundering-herd recomputes. Hook processes are one-shot, so the advisory
     lock is also released on process exit as a safety net.
+
+    ``acquire_timeout`` is caller-tuned: a REFRESH stays short (serving the
+    just-written value one tick late is fine), but a BOOTSTRAP must wait long
+    enough to win, because the real recompute hold is ~200ms on a large
+    transcript (scales with size) -- far longer than the old fixed 75ms, so a
+    bootstrap contending with a refresh could never win and the session showed
+    "ContextQ:--" forever.
     """
     lock = LeaseLock(
         cache_path.with_suffix(".qlease"),
         deadline=current_deadline(),
-        acquire_timeout=0.075,
+        acquire_timeout=acquire_timeout,
     )
     if not lock.acquire():
         return False
@@ -31242,7 +32655,7 @@ def _release_quality_lock(lock):
     lock.release()
 
 
-def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_jsonl=None, force=False, pure_time_throttle=False, session_id=None):
+def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_jsonl=None, force=False, pure_time_throttle=False, session_id=None, warn=False):
     """Run quality analysis and write score to cache file for status line.
 
     Skips analysis if cache is younger than throttle_seconds (unless force=True).
@@ -31250,6 +32663,10 @@ def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_
         session_jsonl: Path string to the session JSONL (from hook transcript_path).
                        If provided, used directly instead of guessing by mtime.
         force: If True, bypass throttle (used by PostCompact hook for immediate refresh).
+        warn: If True and the (possibly just-recomputed) score is below warn_threshold,
+                       print the plain-text "Context quality: N/100..." CLI warning --
+                       gated by _maybe_quality_warn (cap + cooldown + band-drop) the
+                       same way the proactive nudge below is gated.
         pure_time_throttle: If True, throttle purely on cache age and ignore whether
                        the transcript changed. The default (False) recomputes whenever
                        the session changed, which is right for the infrequent
@@ -31305,8 +32722,32 @@ def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_
     # Serialize recompute+write per session (closes the concurrent-PostToolUse
     # nudge-state race). Released at every return below; process exit is the
     # safety net for one-shot hook invocations.
-    _qlock = _acquire_quality_lock(cache_path)
+    # Bootstrap (no cache yet) owns the FIRST score for this session; losing the
+    # lease here means "ContextQ:--" persists, so wait long enough to win it. A
+    # refresh (cache exists) stays short -- the holder is already writing a fresh
+    # value, so serving stale one tick is fine. Both env-overridable.
+    _bootstrapping = not cache_path.exists()
+    _lock_timeout = (
+        _float_env("TOKEN_OPTIMIZER_QUALITY_BOOTSTRAP_LOCK_TIMEOUT", 2.0)
+        if _bootstrapping
+        else _float_env("TOKEN_OPTIMIZER_QUALITY_LOCK_TIMEOUT", 0.15)
+    )
+    _qlock = _acquire_quality_lock(cache_path, acquire_timeout=_lock_timeout)
     if _qlock is False:
+        # Breadcrumb (was silent): a lost lease serves the STALE score on a refresh,
+        # or writes NOTHING on a bootstrap -- the "ContextQ stuck / not showing"
+        # symptom. Leave a trace on stderr (visible under `claude --debug`) so a
+        # live freeze is diagnosable instead of invisible.
+        try:
+            print(
+                "[Token Optimizer] quality-cache: lease busy, "
+                + ("bootstrap skipped (no cache written)"
+                   if _bootstrapping else "served stale score")
+                + f" for session ...{re.sub(r'[^0-9A-Za-z-]', '', Path(cache_path).stem[-8:])}",
+                file=sys.stderr,
+            )
+        except Exception:
+            pass
         if not quiet:
             try:
                 cached = _read_quality_cache(cache_path)
@@ -31314,6 +32755,19 @@ def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_
             except (json.JSONDecodeError, OSError):
                 pass
         return None
+
+    # Double-checked locking: the holder may have written a fresh cache while we
+    # waited for the lease (especially the 2.0s bootstrap wait). If we entered as a
+    # bootstrap but the cache now exists, another process just bootstrapped it --
+    # return that instead of a redundant ~200ms recompute of the same score.
+    if _bootstrapping and cache_path.exists():
+        try:
+            _fresh = _read_quality_cache(cache_path)
+        except (json.JSONDecodeError, OSError):
+            _fresh = None
+        if _fresh:
+            _release_quality_lock(_qlock)
+            return _fresh.get("score") if not quiet else None
 
     try:
         # Run quality analysis
@@ -31482,6 +32936,28 @@ def quality_cache(throttle_seconds=120, warn_threshold=70, quiet=False, session_
             except Exception:
                 pass
 
+        # `quality-cache --warn` plain-text CLI warning (distinct from the
+        # systemMessage JSON above -- this is what the UserPromptSubmit hook
+        # actually installs: `quality-cache --warn --quiet`). Gated by
+        # _maybe_quality_warn so it no longer re-prints on every prompt while a
+        # session sits in one quality band; see that function for the rationale.
+        if warn and _maybe_quality_warn(result, warn_threshold):
+            _emit_warn = True
+            try:
+                from context_pressure import should_inject, get_pressure_level, log_suppression
+                _wf = str(filepath) if filepath else None
+                if not should_inject(_wf, session_id=_session_id, priority="informational"):
+                    log_suppression("quality_warning", get_pressure_level(_wf, session_id=_session_id))
+                    _emit_warn = False
+            except Exception:
+                pass
+            if _emit_warn:
+                if result["score"] < 50:
+                    print(f"[Token Optimizer] Context quality: {result['score']}/100 (critical). Heavy rot detected. Consider /clear with checkpoint.")
+                else:
+                    print(f"[Token Optimizer] Context quality: {result['score']}/100. Stale reads and bloated results building up. Consider /compact.")
+            _write_quality_cache(cache_path, result)
+
         # Nudge follow-through: if PostCompact triggered this run (force=True)
         # and a nudge preceded the compact, measure the actual fill_pct recovery.
         if force and result.get("fill_pct", 0) > 0:
@@ -31604,7 +33080,7 @@ def _get_statusline_path():
     the version-pinned path (still self-healed) when it does not -- a pruned
     marketplace clone, or any non-plugin-cache install.
 
-    Either way the F1 self-disabling guard inside statusline.js still applies:
+    Either way the self-disabling guard inside statusline.js still applies:
     both candidate trees ship the sibling files it checks for.
     """
     if _is_running_from_plugin_cache():
@@ -32928,7 +34404,7 @@ _V5_COMPRESSION_LABELS = {
     "bash_compress_stack": "Bash compress (stack traces)",
     "bash_compress_k8s": "Bash compress (k8s)",
     "bash_compress_cloud": "Bash compress (cloud CLI)",
-    # U4: unmatched-output coverage (tier=measured). U5: first-read skeleton —
+    # Unmatched-output coverage (tier=measured). U5: first-read skeleton —
     # only its ACTIVE (tier=measured) rows reach the headline; shadow rows are
     # tier=opportunity and filtered out in _get_compression_summary.
     "bash_generic": "Bash compress (other commands)",
@@ -33127,6 +34603,37 @@ def runway_snapshot(days=30, now=None):
         if mult < 1.02:
             return None
 
+        # --- USD-per-window: reuse the metered savings ledger ---
+        # The dollar figure reuses the savings surface that already exists
+        # (_get_merged_savings): context tokens_saved priced at the input rate
+        # (total_cost_usd, metered) + realized model-routing savings
+        # (model_routing.realized_cost_usd, estimated counterfactual). We do NOT
+        # invent a window-%->USD conversion and do NOT re-derive USD from the
+        # runway multipliers (context_mult/routing_mult) -- that would re-multiply
+        # savings already counted in the ledger and double-count the same dollars.
+        # Apportion by span: the ledger is cumulative over `days`, so the share
+        # attributable to a window is its span as a fraction of the ledger window.
+        # The two pools are disjoint (tokens never sent vs cheaper model for the
+        # same tokens), so summing them is not a double-count -- this mirrors
+        # _savings_since_install's measured = total_cost_usd + realized_cost_usd.
+        saved_context_usd = 0.0
+        saved_routing_usd = 0.0
+        try:
+            merged = _get_merged_savings(days=days)
+            saved_context_usd = float(merged.get("total_cost_usd", 0.0) or 0.0)
+            mr = merged.get("model_routing") or {}
+            saved_routing_usd = float(mr.get("realized_cost_usd", 0.0) or 0.0)
+        except Exception:
+            pass
+        saved_total_usd = saved_context_usd + saved_routing_usd
+        ledger_span_h = max(days, 1) * 24.0
+        # Measured-vs-estimated boundary: context $ is metered from actual
+        # tokens_saved; routing $ is an estimated counterfactual (baseline mix
+        # vs current). The proxy disclosure below carries this through to the
+        # surface so a bare number is never printed without its honesty label.
+        saved_usd_tier = ("estimated" if saved_routing_usd > 0
+                          else ("measured" if saved_context_usd > 0 else None))
+
         windows = []
         meter_age_s = meters.get("age_s")
         for key, label, span_h in (("five_hour", "5h", 5), ("seven_day", "7d", 168)):
@@ -33143,6 +34650,17 @@ def runway_snapshot(days=30, now=None):
             counterfactual = min(100.0, used * mult)
             head_now = max(0.0, 100.0 - used)
             head_cf = max(0.0, 100.0 - counterfactual)
+            # USD attributable to this window's span, from the metered savings
+            # ledger. None when there is nothing to show so the panel
+            # degrades gracefully (no $-0 / NaN). Derived from the ledger, NOT
+            # from context_mult/routing_mult -- the no-double-count invariant.
+            # Cap the apportionment fraction at 1.0 so a caller passing
+            # days < span_h/24 (e.g. days=1 for the 7d window) cannot produce a
+            # window_saved_usd larger than the cumulative ledger. Without this
+            # guard days=1 would give the 7d window 168/24 = 7x the ledger total.
+            effective_span_h = min(span_h, ledger_span_h)
+            window_saved_usd = (round(saved_total_usd * effective_span_h / ledger_span_h, 2)
+                                if saved_total_usd > 0 else None)
             windows.append({
                 "key": key, "label": label, "span_hours": span_h,
                 "used_pct": round(used, 1),
@@ -33153,6 +34671,8 @@ def runway_snapshot(days=30, now=None):
                 # more room" is not a sentence anyone should read.
                 "headroom_multiple": round(head_now / head_cf, 1) if head_cf > 0.5 else None,
                 "would_be_capped": head_cf <= 0.5,
+                "saved_usd": window_saved_usd,
+                "saved_usd_tier": saved_usd_tier,
             })
         if not windows:
             return None
@@ -33167,13 +34687,32 @@ def runway_snapshot(days=30, now=None):
             "tokens_consumed": int(consumed),
             "tokens_saved": int(saved),
             "windows": windows,
+            # USD spine: metered context $ + estimated routing $, reused
+            # from the savings ledger. Apportioned per window above. Exposed at
+            # the top level so the surface and tests can assert the no-double-
+            # count invariant (USD traces to these, not to the multipliers).
+            "saved_usd_context": round(saved_context_usd, 2),
+            "saved_usd_routing": round(saved_routing_usd, 2),
+            "saved_usd_tier": saved_usd_tier,
+            # The per-window saved_usd is a pro-rata slice of the N-day
+            # ledger at the recent rate, NOT savings realized within that
+            # window. Expose period_days so the surface can label it honestly.
+            "period_days": days,
             "meter_age_s": meters.get("age_s"),
             "meter_ts": meters.get("ts"),
             "meter_stale": meter_stale,
-            "proxy": ("Model weighting inside the provider's rate-limit windows is "
-                      "not published; public input-rate ratios are used as a "
-                      "stand-in. Window state is measured, the counterfactual is "
-                      "estimated."),
+            # Single authoritative methodology note (GitHub: dashboard wall-of-text
+            # fix). Folds the measured-vs-estimated boundary in here so the HTML no
+            # longer repeats it. Keep the phrases "metered savings ledger" and "not
+            # derived from the throughput multipliers" -- guarded by
+            # test_proxy_disclosure_mentions_ledger_reuse.
+            "proxy": ("Your window usage is measured; the “without” "
+                      "comparison and routing dollars are estimated (the provider "
+                      "does not publish how it weights models inside a window, so "
+                      "public input-rate ratios stand in). Per-window dollars reuse "
+                      "the metered savings ledger (context tokens never sent, priced "
+                      "at input rates, plus a routing estimate) and are not derived "
+                      "from the throughput multipliers."),
         }
     except Exception:
         return None
@@ -33849,7 +35388,7 @@ def _estimate_retrieval_serve_savings(days=30):
         finally:
             conn.close()
         # reads_by_sid is keyed by the JSONL stem (= session UUID), so the served
-        # cohort must be matched by session_uuid (the U1 join key), not the raw
+        # cohort must be matched by session_uuid (the join key), not the raw
         # session_id -- many savings rows carry short agent-ids that never match a
         # UUID stem, which would misclassify served sessions as baseline and
         # OVER-state the avoided-read delta. Include both keys to be safe.
@@ -34757,7 +36296,20 @@ def _mix_from_session_rows(cutoff):
 # dedup, so a cold scan is the only cost we are amortizing.
 _subagent_pool_memo = {"key": None, "ts": 0.0, "payload": None}
 _SUBAGENT_POOL_TTL = 900.0  # 15 min, matches the cache-health sidecar cadence
+# Long windows (the since-install pool, days >> 30) change slowly and cost the
+# most to recompute; give them a longer sidecar life so a dashboard regen never
+# pays the full-history scan more than a few times a day.
+_SUBAGENT_POOL_TTL_LONG = 21600.0  # 6h
 _SUBAGENT_SCAN_MAX_FILES = 4000  # bound the scan so the dashboard never stalls
+
+
+def _subagent_pool_ttl(days):
+    """Cache TTL for a subagent-pool window: 15 min for dashboard-fresh short
+    windows, 6h for long (since-install) windows whose totals barely move."""
+    try:
+        return _SUBAGENT_POOL_TTL if float(days) <= 31 else _SUBAGENT_POOL_TTL_LONG
+    except (TypeError, ValueError):
+        return _SUBAGENT_POOL_TTL
 
 # Cross-process L2 cache for the subagent-pool scan. The module memo above is
 # per-process only, but every deferred SessionEnd/Stop flush spawns a NEW python
@@ -34777,9 +36329,9 @@ def _subagent_pool_key_str(key):
     return "|".join(str(part) for part in key)
 
 
-def _read_subagent_pool_sidecar(key):
+def _read_subagent_pool_sidecar(key, ttl=_SUBAGENT_POOL_TTL):
     """Return the persisted subagent-pool payload for `key` (days, share, runtime)
-    if present AND younger than _SUBAGENT_POOL_TTL, else None. The sidecar holds a
+    if present AND younger than `ttl`, else None. The sidecar holds a
     DICT of {key_str: payload} so distinct windows (e.g. days=30 and days=since-
     install) coexist instead of overwriting one another. Fail-open."""
     global _subagent_pool_sidecar_memo
@@ -34800,7 +36352,7 @@ def _read_subagent_pool_sidecar(key):
         entry = store.get(_subagent_pool_key_str(key))
         if (isinstance(entry, dict)
                 and (time.time() - float(entry.get("_cached_ts", 0)))
-                < _SUBAGENT_POOL_TTL):
+                < ttl):
             return {k: v for k, v in entry.items() if not str(k).startswith("_")}
     except (json.JSONDecodeError, OSError, ValueError, TypeError):
         return None
@@ -34828,11 +36380,13 @@ def _write_subagent_pool_sidecar(key, payload):
                     store = loaded
         except (json.JSONDecodeError, OSError, ValueError, TypeError):
             store = {}
-        # Prune stale entries so the store never grows unbounded.
+        # Prune stale entries so the store never grows unbounded. Prune at the
+        # LONG ttl so long-window (since-install) entries survive between their
+        # 6h refreshes; short-window staleness is enforced at read time.
         store = {
             k: v for k, v in store.items()
             if isinstance(v, dict)
-            and (now - float(v.get("_cached_ts", 0))) < _SUBAGENT_POOL_TTL
+            and (now - float(v.get("_cached_ts", 0))) < _SUBAGENT_POOL_TTL_LONG
         }
         entry = dict(payload)
         entry["_cached_ts"] = now
@@ -34947,15 +36501,16 @@ def _subagent_pool_savings(days=30, baseline_opus_share=0.95, tier=None, fresh=F
         key = (round(float(days), 3), round(float(baseline_opus_share), 4),
                detect_runtime(), str(tier), bool(baseline_mix_available))
         now = time.time()
+        ttl = _subagent_pool_ttl(days)
         if (not fresh and _subagent_pool_memo["payload"] is not None
                 and _subagent_pool_memo["key"] == key
-                and (now - _subagent_pool_memo["ts"]) < _SUBAGENT_POOL_TTL):
+                and (now - _subagent_pool_memo["ts"]) < ttl):
             return _subagent_pool_memo["payload"]
 
         # L2: cross-process sidecar. A fresh flush worker (new process, empty module
-        # memo) reads the 15-min result here instead of cold-scanning transcripts.
+        # memo) reads the cached result here instead of cold-scanning transcripts.
         if not fresh:
-            _sidecar = _read_subagent_pool_sidecar(key)
+            _sidecar = _read_subagent_pool_sidecar(key, ttl)
             if _sidecar is not None:
                 _subagent_pool_memo.update(key=key, ts=now, payload=_sidecar)
                 return _sidecar
@@ -34967,6 +36522,10 @@ def _subagent_pool_savings(days=30, baseline_opus_share=0.95, tier=None, fresh=F
 
         # Gather candidate transcripts: top-level project JSONL + nested subagents/.
         # A sidechain can appear either as its own file or under {uuid}/subagents/.
+        # Collect ALL in-window files first, then sort newest-first and cap: the
+        # old first-N-encountered cap kept whatever directory-iteration order
+        # happened to yield, so the kept subset (and the priced dollars) changed
+        # between runs whenever the window held more than the cap.
         candidates = []
         for project_dir in projects_base.iterdir():
             if not project_dir.is_dir():
@@ -34974,21 +36533,31 @@ def _subagent_pool_savings(days=30, baseline_opus_share=0.95, tier=None, fresh=F
             try:
                 for jf in project_dir.rglob("*.jsonl"):
                     try:
-                        if jf.stat().st_mtime >= cutoff_ts:
-                            candidates.append(jf)
+                        m = jf.stat().st_mtime
                     except OSError:
                         continue
-                    if len(candidates) >= _SUBAGENT_SCAN_MAX_FILES:
-                        break
+                    if m >= cutoff_ts:
+                        candidates.append((m, jf))
             except OSError:
                 continue
-            if len(candidates) >= _SUBAGENT_SCAN_MAX_FILES:
-                break
+        candidates.sort(key=lambda t: t[0], reverse=True)
+        candidates = [jf for _, jf in candidates[:_SUBAGENT_SCAN_MAX_FILES]]
 
         # Aggregate per-model billed token classes across sidechain sessions only.
         by_model = {}  # model -> {"fi","cw","cr","out"}
         n_side = 0
         for jf in candidates:
+            # Classify BEFORE parsing. Fully parsing every main transcript just
+            # to read its is_sidechain flag was the dashboard's cold-regen 45s+
+            # (GBs of JSON decoded for a boolean per file). Nested subagents/
+            # transcripts are sidechains by construction; everything else gets
+            # the SAME bounded head-scan the session_log backfill uses, so this
+            # pool and the DB agree on what counts as a sidechain. (The old
+            # full-file scan also flagged ORCHESTRATOR sessions whose tool calls
+            # merely quoted the OSRC marker mid-file — pricing main-session
+            # spend into this pool a second time.)
+            if jf.parent.name != "subagents" and not _scan_jsonl_is_sidechain(jf):
+                continue
             parsed = _parse_session_jsonl(jf)
             if not parsed or not parsed.get("is_sidechain"):
                 continue
@@ -35859,7 +37428,7 @@ def _get_merged_savings(days=30):
     total_cost = float(savings.get("total_cost_usd", 0.0) or 0.0)
     total_events = int(savings.get("total_events", 0) or 0)
 
-    # U1: fallback rate only used for rows that pre-date the model column (NULL model).
+    # Fallback rate only used for rows that pre-date the model column (NULL model).
     # For rows with a stored model (written at event-time via session join), the cost
     # is already priced correctly by _get_compression_summary's per-row rate.
     fallback_cost_per_mtok = _estimate_compression_cost_per_mtok()
@@ -36097,10 +37666,28 @@ def _live_savings_payload(days=30):
             cache_health["keepwarm"] = keepwarm_cache_health_block(days=days)
     except Exception:
         pass
+    # Window/runway card (5h/7d): include it in the LIVE payload so an open dashboard
+    # picks up a fresh rate-limit reading the instant the statusline writes one (the
+    # figure is only ever fresh while Claude is actively running). Same builder the
+    # full regen uses; fail-open to None so a slow/failed read never breaks /api/savings.
+    try:
+        runway = runway_snapshot(days=days)
+    except Exception as _rw_err:
+        runway = None
+        # Trace the fail-open: without this the window card would silently stop
+        # live-refreshing with no diagnosable cause (the class of silent failure
+        # this batch is otherwise closing).
+        try:
+            print(f"[Token Optimizer] /api/savings: runway snapshot failed "
+                  f"({type(_rw_err).__name__}); window card not refreshed this poll.",
+                  file=sys.stderr)
+        except Exception:
+            pass
     return {
         "ok": True,
         "savings": savings_data,
         "cache_health": cache_health,
+        "runway": runway,
         "generated_at": datetime.now().isoformat(),
     }
 
@@ -36687,6 +38274,13 @@ def run_ensure_health():
         legacy_dir = RUNTIME_DIR / "_backups" / "token-optimizer"
         candidate_paths = {SNAPSHOT_DIR / "dashboard-server.py",
                            legacy_dir / "dashboard-server.py"}
+        # The auto-update refresh writes dashboard-server.py (not the LaunchAgent
+        # plist) and reloads via `launchctl kickstart`, which restarts the process
+        # without re-registering the background item -- so it does NOT fire the
+        # macOS "App Background Activity" banner. That banner comes from plist
+        # rewrites and bootout+bootstrap, which the install/repair paths now guard
+        # with _write_file_if_changed + _launchagent_loaded. So this block keeps its
+        # original version-marker staleness check (daemon stays version-current).
         needs_refresh = False
         for p in candidate_paths:
             if p.exists():
@@ -37251,6 +38845,134 @@ def _format_window_note(cached):
     return f" ({size} window, source: {source})" if source else f" ({size} window)"
 
 
+def _verbosity_measured_savings(baseline_avg, post_nudge_outputs):
+    """Measured output-token savings from a verbosity nudge (U5, R5).
+
+    Computes the REAL saving from post-nudge output: max(0, baseline_avg -
+    actual_post_nudge_avg) x turns. Never an estimate, never a negative
+    saving. ``baseline_avg`` is the session's pre-nudge average output tokens
+    (recorded in the nudge event detail). ``post_nudge_outputs`` is the list of
+    output_tokens for the turns AFTER the nudge. Returns 0 when there is no
+    post-nudge data yet (no counterfactual to measure against).
+    """
+    try:
+        baseline = int(baseline_avg) if baseline_avg is not None else 0
+    except (TypeError, ValueError):
+        return 0
+    try:
+        outs = [int(o) for o in (post_nudge_outputs or []) if int(o) > 0]
+    except (TypeError, ValueError):
+        return 0
+    if not outs:
+        return 0
+    post_avg = sum(outs) / len(outs)
+    delta = baseline - post_avg
+    if delta <= 0:
+        return 0
+    return int(delta * len(outs))
+
+
+def _calibrate_prior_verbosity_nudges(session_id, filepath):
+    """Book the MEASURED saving of a prior verbosity nudge (U5, R5, D1).
+
+    The nudge event itself books 0 -- there is no counterfactual at fire time.
+    This pass runs on a later UserPromptSubmit turn: it finds the most recent
+    ``verbosity_steer`` event for this session, reads how many pre-nudge turns
+    and what pre-nudge average output it recorded, then measures the ACTUAL
+    post-nudge output from the live transcript and books
+    ``max(0, baseline - post_avg) x post_turns`` as a ``verbosity_steer_measured``
+    event via :func:`_verbosity_measured_savings`. Without this wiring the
+    measurement was dead code -- nothing in the real path ever computed the
+    counterfactual, so a nudge's saving was never actually credited (D1).
+
+    Idempotent per source nudge: a measured row records ``calibrates_ts=<ts>`` of
+    the nudge it settled, and calibrated timestamps are skipped, so it never
+    double-credits. When there are no post-nudge turns yet the nudge is left
+    uncalibrated for a later turn to measure. Returns the measured tokens booked
+    (0 if none). Best-effort: never raises into the caller.
+    """
+    try:
+        if not filepath or not Path(filepath).exists():
+            return 0
+        sid = str(session_id or "").strip()
+        if not sid:
+            return 0
+        session_uuid, _ = _extract_session_uuid(sid)
+        conn = _init_trends_db()
+        try:
+            rows = conn.execute(
+                "SELECT timestamp, detail FROM savings_events "
+                "WHERE event_type='verbosity_steer' "
+                "AND (session_id = ? OR session_uuid = ?) "
+                "AND detail LIKE '%pre_turns=%' "
+                "ORDER BY timestamp DESC LIMIT 5",
+                (sid, session_uuid),
+            ).fetchall()
+            done = conn.execute(
+                "SELECT detail FROM savings_events "
+                "WHERE event_type='verbosity_steer_measured' "
+                "AND (session_id = ? OR session_uuid = ?)",
+                (sid, session_uuid),
+            ).fetchall()
+        finally:
+            conn.close()
+
+        calibrated_ts = set()
+        for (d,) in done:
+            match = re.search(r"calibrates_ts=(\S+)", d or "")
+            if match:
+                calibrated_ts.add(match.group(1))
+
+        source = None
+        for ts, detail in rows:
+            if ts in calibrated_ts:
+                continue
+            source = (ts, detail or "")
+            break
+        if not source:
+            return 0
+        src_ts, src_detail = source
+        m_turns = re.search(r"pre_turns=(\d+)", src_detail)
+        m_avg = re.search(r"pre_avg_out=(\d+)", src_detail)
+        if not m_turns or not m_avg:
+            return 0
+        pre_turns = int(m_turns.group(1))
+        pre_avg = int(m_avg.group(1))
+
+        # Collect assistant output_tokens in transcript order.
+        outputs = []
+        for line in Path(filepath).read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entry = json.loads(line)
+            except (json.JSONDecodeError, ValueError):
+                continue
+            if entry.get("type") == "assistant" and "message" in entry:
+                out = int(entry["message"].get("usage", {}).get("output_tokens", 0) or 0)
+                if out > 0:
+                    outputs.append(out)
+
+        post_outputs = outputs[pre_turns:]
+        if not post_outputs:
+            # No post-nudge turns yet: nothing to measure. Leave the nudge
+            # uncalibrated so a later turn settles it.
+            return 0
+
+        measured = _verbosity_measured_savings(pre_avg, post_outputs)
+        _log_savings_event(
+            "verbosity_steer_measured",
+            measured,
+            session_id=sid,
+            detail=(f"calibrates_ts={src_ts} post_turns={len(post_outputs)} "
+                    f"pre_avg_out={pre_avg}"),
+        )
+        return measured
+    except Exception:
+        return 0
+
+
 def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
     """Tiered conciseness nudge for UserPromptSubmit.
 
@@ -37344,6 +39066,18 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
                 )
             return ""
 
+        # U5/D1: before deciding on a new nudge, settle any prior nudge in this
+        # session whose post-nudge output we can now observe. The nudge event
+        # books 0 at fire time; THIS is where the real counterfactual
+        # (_verbosity_measured_savings) is computed and credited. Runs before the
+        # cooldown/fill early-returns so a settled nudge is measured even on a
+        # turn that does not itself nudge. Best-effort; never blocks the nudge.
+        try:
+            _calibrate_prior_verbosity_nudges(
+                session_id or os.environ.get("CLAUDE_SESSION_ID", ""), filepath)
+        except Exception:
+            pass
+
         window_note = _format_window_note(cached)
 
         # The window is provably wrong: more tokens were observed than it can
@@ -37428,19 +39162,20 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
             },
         })
 
-        # Log estimated output token savings (best-effort, non-blocking).
-        # The 10-15% reduction is an ASSUMPTION — we can't measure the counterfactual
-        # (what the model would have output without the nudge). But we CAN record the
-        # session's prior average output tokens so a follow-through calibration can
-        # compare the actual post-nudge output against the pre-nudge baseline.
+        # U5 (R5): book 0 at nudge time. The old code booked a hardcoded
+        # 10-15% x 800 ASSUMED saving the moment the nudge fired, without
+        # measuring the counterfactual. In the competitor's data output actually
+        # ROSE after the nudge, so the assumed figure was actively wrong. Now:
+        # the nudge event books 0 (no counterfactual yet), and we record the
+        # session's pre-nudge avg output so a later calibration pass can compute
+        # the real measured saving via _verbosity_measured_savings (max(0,
+        # baseline_avg - actual_post_nudge_avg) x turns). Never an estimate,
+        # never a negative saving.
         try:
             _session_id = session_id or os.environ.get("CLAUDE_SESSION_ID", "")
-            _est_output_reduction = 0.10 if fill_pct < 75 else 0.15
-            _avg_response_tokens = 800
-            _est_saved = int(_avg_response_tokens * _est_output_reduction)
 
             # Empirical calibration: record the session's pre-nudge avg output
-            # so we can later compare against the actual post-nudge output.
+            # so a later pass can compare against the actual post-nudge output.
             _pre_nudge_avg_output = 0
             _pre_nudge_turns = 0
             try:
@@ -37471,7 +39206,7 @@ def run_verbosity_steer(transcript_path=None, quiet=True, session_id=None):
                        f" pre_avg_out={_pre_nudge_avg_output} pre_turns={_pre_nudge_turns}")
             _log_savings_event(
                 "verbosity_steer",
-                _est_saved,
+                0,
                 session_id=_session_id,
                 detail=_detail,
             )
@@ -38051,10 +39786,16 @@ if __name__ == "__main__":
         # three phases can't race on trends.db (SQLite serialises within
         # a process but locks out other processes, so three async hook
         # entries would have corrupted the DB). Keeps exit 0 regardless.
-        if "--defer" in args:
-            _defer_session_end_flush(args)
-        else:
-            _run_session_end_flush_worker(args)
+        #
+        # Defer by DEFAULT (#114). A legacy bare `session-end-flush` hook
+        # fossilized in settings.json (pre-5.11.77 script installs, no --defer
+        # flag) otherwise runs this flush synchronously inline and wedges
+        # Windows stop-hooks at 3/4 -- and neither self-heal path rewrites that
+        # settings.json entry. Deferring unless --no-defer is passed makes every
+        # such fossil non-blocking the moment the scripts update, with no
+        # settings.json surgery. --no-defer keeps the synchronous path for
+        # manual refresh / tests; `--defer` stays accepted (now redundant).
+        _dispatch_session_end_flush(args)
         sys.exit(0)
     elif args[0] == "session-end-flush-worker":
         _run_session_end_flush_worker(args)
@@ -38171,7 +39912,7 @@ if __name__ == "__main__":
         this_install_only = "--this-install-only" in args
         setup_daemon(dry_run=dry, uninstall=uninstall, this_install_only=this_install_only)
     elif args[0] == "cleanup":
-        # #106 F3 (P2-8): confirm gate. `dry = "--dry-run" in args` meant a
+        # #106: confirm gate. `dry = "--dry-run" in args` meant a
         # typo ("--dryrun", "--dry_run", "-dry-run") silently performed the
         # REAL destructive run -- the flag you reach for to stay safe is
         # exactly the one whose typo costs you. Unknown flags are now rejected,
@@ -38789,6 +40530,19 @@ if __name__ == "__main__":
         new_session_only = "--new-session-only" in args
         source = str(hook_input.get("source") or hook_input.get("hook_event_name") or "").lower()
         is_compact = bool(hook_input.get("is_compact", False)) or source == "compact" or "--compact" in args
+        # Cowork parity: the --new-session-only pointer is wired onto both
+        # SessionStart (native, --once-mark) and UserPromptSubmit (Cowork,
+        # --once-per-session). SessionStart always runs and (re)writes the
+        # marker so a resume/compact re-fire is NOT latched out (finding 8);
+        # only the UserPromptSubmit copy checks-then-skips, so it does not
+        # re-inject the billed checkpoint pointer on every prompt in Cowork.
+        # Only the new-session pointer is guarded -- the --compact restore must
+        # run on each compaction.
+        if new_session_only and "--once-mark" in args:
+            _mark_ran_this_session("compact-restore-new-session", sid)
+        elif ("--once-per-session" in args and new_session_only
+                and _ran_once_this_session("compact-restore-new-session", sid)):
+            sys.exit(0)
 
         def _run_compact_restore():
             if new_session_only:
@@ -38796,19 +40550,42 @@ if __name__ == "__main__":
             else:
                 compact_restore(session_id=sid, is_compact=is_compact)
 
-        # Codex requires SessionStart stdout to be empty or valid JSON. Under the
-        # Codex marketplace plugin the shared hooks.json calls this directly (not
-        # via codex_hook_bridge), so capture the raw text and wrap it (issue #81).
-        # Claude keeps the raw-text stream unchanged.
-        if detect_runtime() == "codex":
-            import io as _io
-            from contextlib import redirect_stdout as _redirect_stdout
-            _buf = _io.StringIO()
-            with _redirect_stdout(_buf):
+        # Cap this SessionStart hook's wall-clock like every other hook. It was the
+        # ONLY synchronous first-prompt hook with no internal budget -- just the
+        # harness 20s timeout -- so under disk/CPU contention (multiple concurrent
+        # sessions sharing one project dir) it was the dominant contributor to a ~36s
+        # stall. Its output is a best-effort re-orientation hint, so a budget-exit
+        # (no hint) degrades gracefully. Env-overridable.
+        _tok_hook_deadline = _install_hook_budget(
+            _int_env("TOKEN_OPTIMIZER_COMPACT_RESTORE_BUDGET", 8))
+        try:
+            # Codex requires SessionStart stdout to be empty or valid JSON. Under the
+            # Codex marketplace plugin the shared hooks.json calls this directly (not
+            # via codex_hook_bridge), so capture the raw text and wrap it (issue #81).
+            # Claude keeps the raw-text stream unchanged.
+            # FIX 1: wrap in the documented additionalContext envelope for Codex
+            # (#81) and Cowork (docs-grounding.md §1). See _emit_additional_context.
+            _cw = is_cowork()
+            if detect_runtime() == "codex" or _cw:
+                import io as _io
+                from contextlib import redirect_stdout as _redirect_stdout
+                _buf = _io.StringIO()
+                with _redirect_stdout(_buf):
+                    _run_compact_restore()
+                # Fable #1 follow-up (future-proof, no live impact today): the emitted
+                # event is chosen statically because Cowork fires this only from the
+                # UserPromptSubmit-registered entry and desktop/codex only from
+                # SessionStart. If #40495 is ever fixed and SessionStart starts firing in
+                # Cowork, derive the event from stdin hook_event_name instead so the
+                # envelope hookEventName always matches the firing hook.
+                _emit_additional_context(
+                    _buf.getvalue(), event="UserPromptSubmit" if _cw else "SessionStart")
+            else:
                 _run_compact_restore()
-            _emit_codex_session_start(_buf.getvalue())
-        else:
-            _run_compact_restore()
+        except _HookTimeout:
+            pass
+        finally:
+            _clear_hook_budget(_tok_hook_deadline)
     elif args[0] in ("continue-last", "codex-continue-last"):
         topic = ""
         for i, a in enumerate(args):
@@ -38989,7 +40766,28 @@ if __name__ == "__main__":
                     session_id_from_hook = payload.get("session_id")
                 except (json.JSONDecodeError, OSError):
                     pass
-            score = quality_cache(throttle_seconds=throttle, warn_threshold=warn_threshold, quiet=quiet, session_jsonl=session_jsonl, force=force, pure_time_throttle=throttle_only, session_id=session_id_from_hook)
+            # Cowork parity: the SessionStart cache-warm (quality-cache --force)
+            # is wired onto UserPromptSubmit too, where it fires every prompt.
+            # --force bypasses the throttle, so unguarded it would recompute the
+            # full quality snapshot on every prompt. SessionStart (--once-mark)
+            # always re-warms and refreshes the marker so post-compaction /
+            # resume re-warms are NOT latched out (finding 8); only the
+            # UserPromptSubmit copy (--once-per-session) checks-then-skips, so the
+            # throttled --warn / --throttle-only ticks keep maintaining the cache
+            # thereafter.
+            if "--once-mark" in args:
+                _mark_ran_this_session("quality-cache-force", session_id_from_hook)
+            elif "--once-per-session" in args and _ran_once_this_session(
+                "quality-cache-force", session_id_from_hook
+            ):
+                _clear_hook_budget(_tok_hook_deadline)
+                sys.exit(0)
+            # The --warn print itself now happens inside quality_cache() (gated by
+            # _maybe_quality_warn: session cap + cooldown + band-drop), so it can
+            # reuse the already-resolved filepath/cache_path/result instead of
+            # re-deriving them here. See quality_cache()'s `warn` handling for the
+            # actual message text and gating.
+            score = quality_cache(throttle_seconds=throttle, warn_threshold=warn_threshold, quiet=quiet, session_jsonl=session_jsonl, force=force, pure_time_throttle=throttle_only, session_id=session_id_from_hook, warn=warn)
             # Tripwire piggyback: the --throttle-only invocation fires on the
             # PostToolUse Edit/Write path (where active first-read follow-ups are
             # resolved), so this is the natural place to refresh the per-cohort
@@ -39000,20 +40798,6 @@ if __name__ == "__main__":
                     evaluate_cohort_tripwire()
                 except Exception:
                     pass
-            if warn and score is not None and score < warn_threshold:
-                _emit_warn = True
-                try:
-                    from context_pressure import should_inject, get_pressure_level, log_suppression
-                    if not should_inject(session_jsonl, priority="informational"):
-                        log_suppression("quality_warning", get_pressure_level(session_jsonl))
-                        _emit_warn = False
-                except Exception:
-                    pass
-                if _emit_warn:
-                    if score < 50:
-                        print(f"[Token Optimizer] Context quality: {score}/100 (critical). Heavy rot detected. Consider /clear with checkpoint.")
-                    else:
-                        print(f"[Token Optimizer] Context quality: {score}/100. Stale reads and bloated results building up. Consider /compact.")
         except _HookTimeout:
             print(
                 "[Token Optimizer] hook budget exceeded; skipping quality-cache tick to keep session responsive",
@@ -39358,6 +41142,22 @@ if __name__ == "__main__":
         # the 24h throttle on internal self-heal paths means the next
         # SessionStart is typically a no-op anyway.
         #
+        # Cowork parity: ensure-health is wired onto UserPromptSubmit too (Cowork
+        # never fires SessionStart). It is idempotent + 24h-throttled internally,
+        # but re-running its filesystem scan on every prompt is wasteful, so the
+        # UserPromptSubmit copy carries --once-per-session and no-ops after the
+        # first fire of the session. On native Claude Code the SessionStart copy
+        # carries --once-mark: it always runs and (re)writes the marker so the
+        # UserPromptSubmit copy is a single stat no-op -- zero behaviour change
+        # for existing users -- while a resume/compact SessionStart still runs
+        # (finding 8).
+        if "--once-mark" in args:
+            _eh_sid = _read_stdin_hook_input().get("session_id")
+            _mark_ran_this_session("ensure-health", _eh_sid)
+        elif "--once-per-session" in args:
+            _eh_sid = _read_stdin_hook_input().get("session_id")
+            if _ran_once_this_session("ensure-health", _eh_sid):
+                sys.exit(0)
         # FIX C: the dashboard-daemon ensure/revive runs FIRST, under its own
         # short independent guard, BEFORE the 8s health budget is armed. A slow
         # health scan that later trips the 8s watchdog can therefore never skip

@@ -20,6 +20,15 @@ This module keeps runtime integration deliberately simple:
   running under GitHub Copilot. COPILOT_HOME is Copilot's OWN variable — TO
   reads it but never asks users to set it (issue #78); TOKEN_OPTIMIZER_COPILOT_HOME
   is TO's own collision-free override.
+- Cowork is NOT a separate runtime: Claude Cowork runs the same Claude Code
+  engine inside a cloud/local VM, reads ~/.claude, and uses the Claude model
+  ladder. So ``detect_runtime()`` still returns ``"claude"`` inside Cowork.
+  ``is_cowork()`` is a REFINEMENT signal exposed alongside it (mirroring how the
+  runtime lattice layers signals rather than adding runtimes) — true when the
+  Cowork host markers are present: ``CLAUDE_CODE_CONTAINER_ID`` (primary), a
+  synced-plugin ``CLAUDE_PLUGIN_ROOT`` under ``/plugins/synced/``, or ``AI_AGENT``
+  carrying the harness marker. Callers that need Cowork-specific behaviour read
+  ``is_cowork()``; nothing about the existing ``detect_runtime()`` returns changes.
 - Callers can keep legacy variable names while resolving to the correct home.
 
 The goal is to let Token Optimizer share one Python core while platform
@@ -44,6 +53,35 @@ _VALID_RUNTIMES = frozenset(
     {_RUNTIME_CLAUDE, _RUNTIME_CODEX, _RUNTIME_HERMES, _RUNTIME_OPENCODE, _RUNTIME_COPILOT}
 )
 _CLAUDE_PLUGIN_ENVS = ("CLAUDE_PLUGIN_ROOT", "CLAUDE_PLUGIN_DATA")
+# Claude Cowork host markers. Cowork is Claude Code running in a cloud/local VM,
+# so these REFINE the claude runtime (via is_cowork()) rather than name a new one.
+#   - CLAUDE_CODE_REMOTE=true: the ONLY DOCUMENTED cloud-vs-desktop signal
+#     (code.claude.com/docs/en/hooks.md: "$CLAUDE_CODE_REMOTE is set to 'true'
+#     in cloud, unset locally"; docs-grounding.md §3). Primary signal.
+#   - CLAUDE_CODE_CONTAINER_ID: set inside every Cowork VM (observed, undocumented).
+#   - AI_AGENT: the Cowork VM sets the "_harness" variant
+#     ("claude-code_2-1-231_harness"); the LOCAL Claude Code CLI sets the
+#     "_agent" variant ("claude-code_2-1-229_agent"). So the distinguishing
+#     token is "harness", NOT the bare "claude-code" prefix (which both share).
+#   - CLAUDE_PLUGIN_ROOT under /plugins/synced/: Cowork plugins arrive via the
+#     org admin console account-sync, landing under a synced-plugin path.
+_COWORK_REMOTE_ENV = "CLAUDE_CODE_REMOTE"
+_COWORK_CONTAINER_ENV = "CLAUDE_CODE_CONTAINER_ID"
+_COWORK_AI_AGENT_ENV = "AI_AGENT"
+_COWORK_AI_AGENT_MARKERS = ("claude-code", "harness")
+_COWORK_SYNCED_PLUGIN_MARKER = "/plugins/synced/"
+# Claude Code's own process-env signals. CLAUDECODE is inherited by every
+# subprocess Claude Code spawns, so a genuine Codex/OpenCode/Copilot launched
+# from a CC Bash tool inherits CLAUDECODE=1. This tier therefore sits BELOW the
+# explicit CODEX_HOME/HERMES_HOME/COPILOT_HOME env checks (so a nested-Codex
+# session with CODEX_HOME set, or a nested-Copilot session with COPILOT_HOME
+# set, still resolves to its own runtime) but ABOVE the weak directory
+# heuristics, so a host with CLAUDECODE=1 and a coexisting ~/.codex DIRECTORY
+# resolves to claude, not codex (issue #120). Copilot's explicit-env tier is
+# _COPILOT_HOME_ENVS below, NOT the ancestor-process signal (which stays at the
+# weak tier) -- a process scan cannot run ahead of CLAUDECODE without
+# reintroducing the #57 shadowing it was added to prevent.
+_CLAUDE_CODE_ENVS = ("CLAUDECODE", "CLAUDE_CODE_ENTRYPOINT", "CLAUDE_CODE_SESSION_ID")
 # Claude Code's official config-dir override. When set, Claude stores
 # projects/, settings.json, etc. under this directory instead of ~/.claude.
 _CLAUDE_CONFIG_DIR_ENV = "CLAUDE_CONFIG_DIR"
@@ -58,6 +96,14 @@ _HERMES_HOME_ENV = "HERMES_HOME"
 # back-compat location hint (with a guardrail warning for /mnt values).
 _COPILOT_HOME_ENV = "COPILOT_HOME"
 _TO_COPILOT_HOME_ENV = "TOKEN_OPTIMIZER_COPILOT_HOME"
+# Copilot's explicit config-dir env vars. Like CODEX_HOME/HERMES_HOME these are
+# the host's OWN variables, set by/for a genuine Copilot session. They sit ABOVE
+# the CLAUDECODE tier so a Copilot session launched from a CC Bash tool (which
+# inherits CLAUDECODE=1) still resolves to copilot, mirroring the Codex/Hermes
+# guard. The ancestor-process signal (_copilot_signal's ps scan) stays at the
+# weak tier below CLAUDECODE, since a process scan ahead of CLAUDECODE would
+# re-introduce the #57 OpenCode-shadowing problem for the copilot path too.
+_COPILOT_HOME_ENVS = (_COPILOT_HOME_ENV, _TO_COPILOT_HOME_ENV)
 # Windows profile names under /mnt/c/Users that are never a real user home.
 _WINDOWS_NONUSER_PROFILES = frozenset(
     {"public", "all users", "default", "default user", "windows", "wpsystem"}
@@ -725,10 +771,22 @@ def detect_runtime() -> str:
          OpenCode session — "Guy's bug", issue #57; still AFTER Claude env)
       5. CODEX_HOME implies Codex
       6. HERMES_HOME implies Hermes
-      7. A populated opencode config dir implies OpenCode (weak tertiary
+      7. COPILOT_HOME / TOKEN_OPTIMIZER_COPILOT_HOME implies Copilot (explicit
+         config-dir env; sits ABOVE the CLAUDECODE tier so a Copilot session
+         launched from a CC Bash tool, which inherits CLAUDECODE=1, still
+         resolves to copilot -- the same guard Codex/Hermes get. The
+         ancestor-process signal stays at the weak tier below CLAUDECODE.)
+      8. Claude Code process env (CLAUDECODE / CLAUDE_CODE_ENTRYPOINT /
+         CLAUDE_CODE_SESSION_ID) implies Claude. Sits BELOW CODEX_HOME/
+         HERMES_HOME/COPILOT_HOME so a nested-Codex/Hermes/Copilot session
+         launched from a CC Bash tool (which inherits CLAUDECODE=1) still
+         resolves to its own runtime, but ABOVE the directory heuristics so
+         a host with CLAUDECODE=1 and a coexisting ~/.codex DIRECTORY resolves
+         to claude, not codex (#120)
+      9. A populated opencode config dir implies OpenCode (weak tertiary
          tier; loses to Claude/Codex/Hermes/Copilot env, beats default)
-      8. COPILOT_HOME or a copilot ancestor process implies Copilot
-      9. Default to Claude Code for backward compatibility
+      10. COPILOT_HOME or a copilot ancestor process implies Copilot
+      11. Default to Claude Code for backward compatibility
 
     Why step 2 is ahead of the Claude env check (KTD-3, issue #57): on a host
     with BOTH Claude Code and OpenCode installed, a stray CLAUDE_PLUGIN_* env var
@@ -763,6 +821,15 @@ def detect_runtime() -> str:
     if os.environ.get(_HERMES_HOME_ENV):
         return _RUNTIME_HERMES
 
+    # Copilot explicit config-dir env: ABOVE the CLAUDECODE tier so a Copilot
+    # session launched from a CC Bash tool (inherits CLAUDECODE=1) still
+    # resolves to copilot. Mirrors the CODEX_HOME/HERMES_HOME guard.
+    if any(os.environ.get(v) for v in _COPILOT_HOME_ENVS):
+        return _RUNTIME_COPILOT
+
+    if any(os.environ.get(v) for v in _CLAUDE_CODE_ENVS):
+        return _RUNTIME_CLAUDE
+
     if _opencode_config_signal():
         return _RUNTIME_OPENCODE
 
@@ -770,6 +837,43 @@ def detect_runtime() -> str:
         return _RUNTIME_COPILOT
 
     return _RUNTIME_CLAUDE
+
+
+@functools.lru_cache(maxsize=None)
+def is_cowork() -> bool:
+    """True when running inside Claude Cowork (a Claude Code VM host).
+
+    A REFINEMENT of the claude runtime, not a new runtime: ``detect_runtime()``
+    still returns ``"claude"`` inside Cowork. Signals, any of which suffices:
+
+      1. ``CLAUDE_CODE_REMOTE`` is truthy — the ONLY DOCUMENTED cloud signal
+         (code.claude.com/docs/en/hooks.md; docs-grounding.md §3). Primary.
+      2. ``CLAUDE_CODE_CONTAINER_ID`` is set (observed in every Cowork VM;
+         undocumented). Belt-and-suspenders fallback.
+      3. ``AI_AGENT`` carries the Claude Code VM harness marker
+         (``claude-code`` + ``harness``, e.g. ``claude-code_2-1-231_harness``);
+         the local CLI's ``..._agent`` value is deliberately NOT a match.
+      4. ``CLAUDE_PLUGIN_ROOT``/``CLAUDE_PLUGIN_DATA`` points under
+         ``/plugins/synced/`` — where org-console account-synced plugins land.
+
+    Doc vs observed: only (1) is in the published docs; (2)-(4) are live-observed
+    Cowork markers kept as fallback so detection still holds if a future build
+    stops exporting CLAUDE_CODE_REMOTE into the hook env (issues #24529/#66557
+    show env injection is not guaranteed). Never raises; a missing/blank env just
+    contributes no signal.
+    """
+    if _truthy_env(_COWORK_REMOTE_ENV):
+        return True
+    if os.environ.get(_COWORK_CONTAINER_ENV, "").strip():
+        return True
+    ai_agent = os.environ.get(_COWORK_AI_AGENT_ENV, "").lower()
+    if all(marker in ai_agent for marker in _COWORK_AI_AGENT_MARKERS):
+        return True
+    for env_var in _CLAUDE_PLUGIN_ENVS:
+        val = os.environ.get(env_var, "")
+        if val and _COWORK_SYNCED_PLUGIN_MARKER in val.replace("\\", "/"):
+            return True
+    return False
 
 
 def claude_home() -> Path:
@@ -930,4 +1034,8 @@ def runtime_name_for_humans() -> str:
         return "OpenCode"
     if runtime == _RUNTIME_COPILOT:
         return "GitHub Copilot"
+    # Cowork is the claude runtime in a VM; label the refinement without changing
+    # the runtime it resolves to.
+    if runtime == _RUNTIME_CLAUDE and is_cowork():
+        return "Claude Code (Cowork)"
     return "Claude Code"
