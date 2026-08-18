@@ -9,7 +9,7 @@
       "npm": "@ai-sdk/anthropic",
       "name": "minimax-coding-plan",
       "options": {
-        "baseURL": "https://gw.alkue.dev",
+        "baseURL": "https://gw.alkue.dev/v1",
         "apiKey": "{env:OCCAM_API_KEY}",
         "headers": {
           "x-litellm-api-key": "{env:OCCAM_API_KEY}",
