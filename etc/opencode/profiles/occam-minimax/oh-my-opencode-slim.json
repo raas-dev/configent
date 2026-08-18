@@ -9,7 +9,7 @@
     "context7",
     "websearch",
     "gh_grep",
-   "grep_app"
+    "grep_app"
   ],
   "disabled_agents": [
     "observer"
@@ -40,7 +40,7 @@
   "presets": {
     "minimax-plan": {
       "orchestrator": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "skills": [
           "*"
         ],
@@ -49,13 +49,13 @@
         ]
       },
       "explorer": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "oracle": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
         "skills": [
           "simplify"
@@ -63,7 +63,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -71,19 +71,19 @@
         ]
       },
       "designer": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "occam/MiniMax-M3",
+        "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
         "skills": [],
         "mcps": []

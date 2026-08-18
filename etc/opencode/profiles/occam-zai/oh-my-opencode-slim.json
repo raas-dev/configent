@@ -40,7 +40,7 @@
   "presets": {
     "zai-plan": {
       "orchestrator": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "skills": [
           "*"
         ],
@@ -49,13 +49,13 @@
         ]
       },
       "explorer": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "oracle": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "high",
         "skills": [
           "simplify"
@@ -63,7 +63,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -71,19 +71,19 @@
         ]
       },
       "designer": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "occam/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "high",
         "skills": [],
         "mcps": []
