@@ -7,7 +7,7 @@
   "provider": {
     "zai-coding-plan": {
       "npm": "@ai-sdk/anthropic",
-      "name": "zai-coding-plan",
+      "name": "occam",
       "options": {
         "baseURL": "https://gw.alkue.dev/v1",
         "apiKey": "{env:OCCAM_API_KEY}",
