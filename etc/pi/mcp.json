@@ -9,6 +9,8 @@
     }
   },
   "settings": {
-    "toolPrefix": "none"
+    "toolPrefix": "none",
+    "mcpFooterStatus": "compact",
+    "showStatusIcon": false
   }
 }
