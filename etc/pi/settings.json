@@ -18,7 +18,6 @@
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
-    "npm:pi-mono-status-line",
     "npm:pi-ponytail",
     "npm:pi-promptsmith",
     "npm:pi-prompt-template-model",
@@ -49,7 +48,8 @@
         "extensions/md.ts",
         "extensions/move-session.ts",
         "extensions/plan-mode.ts",
-        "extensions/session-name.ts"
+        "extensions/session-name.ts",
+        "extensions/status-line/index.ts"
       ],
       "source": "git:github.com/asyrjasalo/pi-extensions"
     }
