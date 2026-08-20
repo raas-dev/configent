@@ -36,7 +36,6 @@
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/asyrjasalo/pi-prompt-suggester",
-    "git:github.com/asyrjasalo/pi-headroom",
     {
       "extensions": [
         "extensions/anycopy/index.ts",
