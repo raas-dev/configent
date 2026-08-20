@@ -1,6 +1,10 @@
 {
+  "defaultModel": "glm-5.3",
+  "enabledModels": [
+    "*glm-5.2*",
+    "*glm-5.3*"
+  ],
   "packages": [
-    "npm:@teelicht/pi-superagents",
-    "git:github.com/obra/superpowers"
+    "npm:@alexanderfortin/pi-zai-usage"
   ]
 }
