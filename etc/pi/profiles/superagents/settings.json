@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "npm:@teelicht/pi-superagents",
+    "git:github.com/obra/superpowers"
+  ]
+}
