@@ -31,6 +31,7 @@
     "npm:@narumitw/pi-btw",
     "npm:@ogulcancelik/pi-sketch",
     "npm:@sting8k/pi-vcc",
+    "npm:@vndv/pi-codegraph",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/asyrjasalo/pi-prompt-suggester",
