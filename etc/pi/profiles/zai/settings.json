@@ -1,11 +1,10 @@
 {
   "defaultModel": "glm-5.3",
-  "defaultProvider": "zai",
   "enabledModels": [
-    "zai/glm-5*"
+    "*glm-5.2*",
+    "*glm-5.3*"
   ],
   "packages": [
-    "npm:pi-mcp-adapter",
     "npm:@alexanderfortin/pi-zai-usage"
   ]
 }

@@ -1,10 +1,6 @@
 {
   "defaultModel": "MiniMax-M3",
-  "defaultProvider": "minimax",
   "enabledModels": [
-    "minimax/*"
-  ],
-  "packages": [
-    "npm:pi-mcp-adapter"
+    "*minimax-M3*"
   ]
 }
