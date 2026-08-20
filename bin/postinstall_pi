@@ -76,6 +76,18 @@ fi
 mkdir -p "$HOME/.pi-lens"
 ln -sfnv "$config_path/pi/pi-lens.json" "$HOME/.pi-lens/config.json"
 
+### pi-mcp-adapter #############################################################
+
+# mcp.json
+if [ ! -r "$backup_path/.pi/agent/mcp.json" ]; then
+  if [ -r "$HOME/.pi/agent/mcp.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/mcp.json" "$backup_path/.pi/agent/mcp.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/mcp.json" "$HOME/.pi/agent/mcp.json"
+
 ### pi-web-access ##############################################################
 
 # web-search.json
