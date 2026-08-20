@@ -36,10 +36,8 @@
     {
       "extensions": [
         "extensions/anycopy/index.ts",
-        "extensions/branch-out/index.ts",
         "extensions/editor-enhancements/index.ts",
         "extensions/handover/index.ts",
-        "extensions/model-aware-compaction/index.ts",
         "extensions/session-switch/index.ts",
         "extensions/tools/index.ts",
         "extensions/files-touched.ts",
