@@ -12,7 +12,7 @@
         {
           "id": "glm-5.3",
           "name": "GLM 5.3",
-          "contextWindow": 200000,
+          "contextWindow": 1000000,
           "maxTokens": 131072,
           "headers": {
             "x-api-key": "$ZAI_API_KEY"
@@ -21,7 +21,7 @@
         {
           "id": "glm-5.2",
           "name": "GLM 5.2",
-          "contextWindow": 200000,
+          "contextWindow": 1000000,
           "maxTokens": 131072,
           "headers": {
             "x-api-key": "$ZAI_API_KEY"
@@ -42,7 +42,7 @@
             "cacheWrite": 0
           },
           "contextWindow": 1000000,
-          "maxTokens": 128000,
+          "maxTokens": 524288,
           "headers": {
             "x-api-key": "$MINIMAX_API_KEY"
           }
