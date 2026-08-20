@@ -13,7 +13,6 @@
   "lastChangelogVersion": "0.80.2",
   "packages": [
     "npm:pi-ask-user",
-    "npm:pi-background-tasks",
     "npm:pi-codex-goal",
     "npm:pi-hodor",
     "npm:pi-image-tools",
