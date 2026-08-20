@@ -32,7 +32,6 @@
     "npm:@vndv/pi-codegraph",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
-    "git:github.com/asyrjasalo/pi-prompt-suggester",
     {
       "extensions": [
         "extensions/anycopy/index.ts",
@@ -75,5 +74,8 @@
   "theme": "ayu-dark",
   "transport": "auto",
   "treeFilterMode": "user-only",
-  "defaultProjectTrust": "always"
+  "defaultProjectTrust": "always",
+  "terminal": {
+    "clearOnShrink": true
+  }
 }
