@@ -1,0 +1,66 @@
+name: deep-research
+description: Clarify scope through a reusable research brief, then run targeted parallel research and write a detailed Markdown report.
+input: prompt
+agents:
+  # NOTE: this workflow runs a single raw: phase; the inline agent() calls below set their own model/thinking/isolated, so these per-agent fields are advisory documentation (researcher.isolated:false mirrors agents/researcher.md).
+  explorer:
+    tools: [read, grep, find, ls]
+    model: cursor/gpt-5.6-sol
+    thinking: high
+    isolated: true
+  researcher:
+    # extensions:[web,atlassian] are declared in agents/researcher.md frontmatter (authoritative); this YAML carries advisory tools + isolated:false.
+    tools: [read, grep, find, ls, bash, sf_web_search, sf_web_fetch, confluence_page, confluence_get_page, jira_issue, jira_get_issue, story_context]
+    model: cursor/claude-opus-5
+    thinking: high
+    isolated: false
+  analyst:
+    tools: [read, write, bash]
+    model: cursor/gpt-5.6-terra
+    thinking: high
+    isolated: true
+    schema:
+      status: QUESTIONS_NEEDED|READY
+      slug: string
+      briefPath: string
+      researchPlan: array
+      questions: array
+  notifier:
+    tools: [bash]
+    thinking: low
+    isolated: true
+    schema:
+      status: sent|skipped|failed
+      detail: string?
+phases:
+  - id: orchestrate-deep-research
+    raw: |
+      const intake = await agent(`You are the intake coordinator for a deep-research request. The input is:\n\n${args.input}\n\nIt may be a new request, a slug/path reference, or the contents of an existing research brief. The run slug is already chosen by sf_flow_auto as ${args.slug}; use ai_plan/${args.slug}/research-brief.md as the durable state file (create or update the brief there). Return slug = ${args.slug}.\n\nFirst determine whether the request has enough scope to research accurately: objective, key questions, intended audience/use, source boundaries, and any constraints. If clarification is needed, create or update the brief with YAML frontmatter containing slug and briefPath, the original request, all prior answers, a numbered Open questions section with blank answer slots, and a rerun instruction. Return only structured data with status QUESTIONS_NEEDED, slug, briefPath, and questions. Do not perform research.\n\nIf the brief is complete, update it to record that research is ready. Produce a focused researchPlan array. Every item must have question and mode, where mode is code, web, local-docs, or mixed. Return only structured data with status READY, slug, briefPath, and researchPlan.`, { label: "analyst", phase: "intake", agentType: "analyst", tools: ["read", "write", "bash"], model: "cursor/gpt-5.6-sol", thinking: "high", isolated: true, schema: { status: "QUESTIONS_NEEDED|READY", slug: "string", briefPath: "string", researchPlan: "array", questions: "array" } });
+
+      if (intake?.status !== "READY") {
+        return {
+          name: "deep-research",
+          status: "questions-needed",
+          slug: intake?.slug,
+          briefPath: intake?.briefPath,
+          questions: intake?.questions ?? [],
+        };
+      }
+
+      const plan = Array.isArray(intake.researchPlan) && intake.researchPlan.length > 0
+        ? intake.researchPlan
+        : [{ question: args.input, mode: "mixed" }];
+      const codeTasks = plan.filter((task) => task.mode === "code" || task.mode === "local-docs" || task.mode === "mixed");
+      const webTasks = plan.filter((task) => task.mode === "web" || task.mode === "mixed");
+
+      const [codeFindings, webFindings] = await parallel([
+        () => parallel(codeTasks.map((task) => () => agent(`Research this local-code or document question: ${task.question}. Read the research brief at ${intake.briefPath} for scope. Identify relevant code, local documents, and evidence. Return concise, source-cited findings only.`, { label: "explorer", phase: "code-research", agentType: "explorer", tools: ["read", "grep", "find", "ls"], thinking: "low", isolated: true }))),
+        () => parallel(webTasks.map((task) => () => agent(`Research this external-source question: ${task.question}. Read the research brief at ${intake.briefPath} for scope. Use authoritative web and applicable local sources; provide concise, source-cited findings, marking inference clearly.`, { label: "researcher", phase: "web-research", agentType: "researcher", tools: ["read", "grep", "find", "ls", "bash", "sf_web_search", "sf_web_fetch", "confluence_page", "confluence_get_page", "jira_issue", "jira_get_issue", "story_context"], thinking: "high", isolated: false }))),
+      ]);
+
+      const report = await agent(`You are the final deep-research analyst. Read the complete brief at ${intake.briefPath}. Synthesize the following independently gathered evidence:\n\nCODE/LOCAL FINDINGS:\n${JSON.stringify(codeFindings)}\n\nWEB/MIXED FINDINGS:\n${JSON.stringify(webFindings)}\n\nWrite a comprehensive, detailed, well-structured Markdown report with source citations under ai_plan/${args.slug}/. Choose an appropriate descriptive filename, preserve the brief, clearly distinguish evidence from inference, include limitations or conflicts, and end with practical conclusions. Return only structured data containing reportPath and a concise summary for the caller.`, { label: "analyst", phase: "report", agentType: "analyst", tools: ["read", "write", "bash"], model: "cursor/gpt-5.6-sol", thinking: "high", isolated: true });
+
+      const notify_result = await agent("deep-research complete", { label: "notifier", phase: "notify", agentType: "notifier", tools: ["bash"], isolated: true, schema: { status: "sent|skipped|failed", detail: "string?" } });
+
+      return { name: "deep-research", status: "complete", slug: args.slug, briefPath: intake.briefPath, report, notify_result };
+loops: {}

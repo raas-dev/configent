@@ -1,0 +1,51 @@
+name: auth-audit
+description: Audit auth coverage across route files
+input: prompt
+agents:
+  scanner:
+    tools: [read, grep, find]
+    model: haiku
+    thinking: low
+  auditor:
+    tools: [read, grep, find]
+    model: sonnet
+    thinking: high
+    isolated: true
+    schema:
+      verdict: "APPROVED|REVISE"
+  synth:
+    tools: [read, write]
+    model: sonnet
+phases:
+  - id: scan
+    agent: scanner
+    prompt: "List every route file under src/routes/. Return a newline list."
+    out: files
+  - id: audit
+    agent: auditor
+    fanout: files
+    prompt: "Audit {{item}} for missing auth checks. Return findings."
+    out: findings
+  - id: verify
+    agent: auditor
+    verify: findings
+    threshold: 0.66
+    out: confirmed
+  - id: report
+    agent: synth
+    prompt: "Write a cited scan report from these findings into scan-report.md under the plan dir."
+    inputs:
+      require: [confirmed]
+      inject: ["Findings: {{confirmed}}", "Write the report to ai_plan/{{slug}}/scan-report.md"]
+    outputs:
+      slug: { from: input, prefix: date }
+      dir: "ai_plan/{{slug}}"
+      artifacts:
+        - { file: scan-report.md }
+      assert: [nonempty]
+      publish: { slug: "{{slug}}", report_dir: "{{dir}}" }
+loops:
+  audit:
+    until_dry: true
+    max_rounds: 3
+    dedup_key: "{{file}}:{{line}}:{{summary}}"

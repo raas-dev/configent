@@ -1,0 +1,31 @@
+name: research-report
+description: Multi-perspective research with cross-checking and synthesis
+input: prompt
+agents:
+  researcher:
+    tools: [read, grep, find, ls, bash]
+    model: sonnet
+    thinking: medium
+  synth:
+    tools: [read, write]
+    model: sonnet
+phases:
+  - id: gather
+    agent: researcher
+    fanout: args.angles
+    prompt: "Research angle: {{item}}. Return sources and claims."
+    out: raw
+  - id: synth
+    agent: synth
+    prompt: "Synthesize a cited report from these findings into research-report.md under the plan dir."
+    inputs:
+      require: [raw]
+      inject: ["Findings: {{raw}}", "Write the report to ai_plan/{{slug}}/research-report.md"]
+    outputs:
+      slug: { from: input, prefix: date }
+      dir: "ai_plan/{{slug}}"
+      artifacts:
+        - { file: research-report.md }
+      assert: [nonempty]
+      publish: { slug: "{{slug}}", report_dir: "{{dir}}" }
+loops: {}
