@@ -1,5 +1,5 @@
 {
-  "defaultModel": "glm-5.2",
+  "defaultModel": "glm-5.3",
   "defaultProvider": "zai",
   "enabledModels": [
     "zai/glm-5*"

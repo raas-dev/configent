@@ -4,7 +4,7 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "glm-5.2",
+  "defaultModel": "glm-5.3",
   "defaultProvider": "zai",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
@@ -16,7 +16,6 @@
     "npm:pi-codex-goal",
     "npm:pi-hodor",
     "npm:pi-image-tools",
-    "npm:pi-intercom",
     "npm:pi-markdown-preview",
     "npm:pi-mono-status-line",
     "npm:pi-ponytail",
@@ -24,11 +23,9 @@
     "npm:pi-prompt-template-model",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
-    "npm:pi-subagents",
     "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
-    "npm:@aliou/pi-processes",
     "npm:@juicesharp/rpiv-todo",
     "npm:@narumitw/pi-btw",
     "npm:@ogulcancelik/pi-sketch",
