@@ -883,10 +883,16 @@ def _serve_first_read_skeleton(
     net_saved = max(0, orig_tokens - skel_tokens)
     # Archive FIRST. No guaranteed path back to the full content => do not withhold.
     try:
-        from archive_result import derive_archive_key, archive_original, build_archive_pointer
+        from archive_result import (
+            archive_entry_exists, archive_original, build_archive_pointer, derive_archive_key,
+        )
         key = derive_archive_key(session_id, file_path, stat.st_mtime_ns)
         if archive_original(content, session_id, key, "Read", quiet=quiet,
                             file_path=file_path, language=language) is None:
+            return False
+        # Re-check the entry survived any concurrent retention prune before we
+        # emit a pointer that would strand the model with an unrecoverable expand.
+        if not archive_entry_exists(session_id, key):
             return False
         body = build_archive_pointer(result.replacement_text, len(content), key)
     except Exception:

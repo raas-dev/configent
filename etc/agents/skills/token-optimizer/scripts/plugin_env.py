@@ -52,7 +52,17 @@ _SAFE_MARKETPLACE_NAME = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
 def _is_safe_subdir(candidate: Path, base: Path) -> bool:
-    """True if candidate is a real directory inside base, not a symlink."""
+    """True if candidate is a real directory STRICTLY inside base, not a symlink.
+
+    ``Path.is_relative_to`` is reflexive (a path is "relative to" itself), so
+    without the explicit inequality check a candidate that resolves to ``base``
+    itself would pass this confinement test. That matters because every other
+    plugin's data directory lives as a sibling subdir directly under the same
+    shared ``plugins/data`` root: a misconfigured or malicious env var pointed
+    straight at that root (rather than at a real per-plugin identity subdir)
+    would otherwise be accepted as "confined" while actually granting access to
+    every plugin's data, not just this one's.
+    """
     try:
         if not candidate.is_dir():
             return False
@@ -60,7 +70,7 @@ def _is_safe_subdir(candidate: Path, base: Path) -> bool:
             return False
         resolved = candidate.resolve(strict=True)
         base_resolved = base.resolve(strict=False)
-        return resolved.is_relative_to(base_resolved)
+        return resolved != base_resolved and resolved.is_relative_to(base_resolved)
     except (OSError, ValueError):
         return False
 
@@ -108,29 +118,79 @@ def _registered_plugin_data_dirs() -> list[Path]:
     return sorted(set(candidates), key=lambda path: path.name)
 
 
+def resolve_claude_plugin_data_env() -> Path | None:
+    """Identity-checked resolver for the raw CLAUDE_PLUGIN_DATA env var.
+
+    Returns CLAUDE_PLUGIN_DATA's resolved path ONLY when it is a declared
+    identity of THIS plugin (present in installed_plugins.json via
+    _registered_plugin_data_dirs) and confined under the shared plugins/data
+    root as a real subdir (not the root itself — see _is_safe_subdir). A name
+    merely starting with "token-optimizer" is NOT proof; a foreign plugin's
+    CLAUDE_PLUGIN_DATA sharing the same plugins/data/ root is rejected.
+
+    This is the SINGLE identity check every raw-CLAUDE_PLUGIN_DATA site shares
+    (issue #140): resolve_plugin_data_dir() below calls it directly, and so do
+    the sibling sites that read CLAUDE_PLUGIN_DATA outside this module —
+    hooks/run.py's consent-config read and detectors/cache_instability.py's
+    detector-state write. None of the three duplicate the identity logic; a
+    leaked/foreign CLAUDE_PLUGIN_DATA can misdirect none of them.
+    """
+    env_val = os.environ.get("CLAUDE_PLUGIN_DATA", "")
+    if not env_val:
+        return None
+    try:
+        resolved = Path(env_val).resolve(strict=False)
+    except (OSError, ValueError):
+        return None
+    if not _is_safe_subdir(resolved, _PLUGIN_DATA_BASE):
+        return None
+    registered = {r.resolve(strict=False) for r in _registered_plugin_data_dirs()}
+    if resolved in registered:
+        return resolved
+    return None  # Foreign plugin's CLAUDE_PLUGIN_DATA leaked in.
+
+
 @lru_cache(maxsize=1)
 def resolve_plugin_data_dir() -> Path | None:
     """Return the active plugin-data directory.
 
     Priority:
-      1. Runtime-appropriate plugin data env var
-      2. installed_plugins.json lookup for the active marketplace install
-      3. Stable lexical glob fallback across token-optimizer-* data dirs
-      4. None (caller falls back to the legacy _backups/ path)
+      1. TOKEN_OPTIMIZER_PLUGIN_DATA (dedicated, unconditional — but still
+         confined to a REAL subdir of plugins/data, never the shared root
+         itself). Checked FIRST regardless of CLAUDE_PLUGIN_DATA's validity,
+         so it wins even when CLAUDE_PLUGIN_DATA ALSO happens to resolve to a
+         valid registered identity (the common in-plugin hook case).
+      2. CLAUDE_PLUGIN_DATA — accepted ONLY when the resolved path is a
+         declared identity of THIS plugin, via resolve_claude_plugin_data_env().
+      3. installed_plugins.json lookup for the active marketplace install
+      4. Stable lexical glob fallback across token-optimizer-* data dirs
+      5. None (caller falls back to the legacy _backups/ path)
 
     All discovered paths are confined under the active runtime's plugin-data
     tree and reject symlinks. The env-var path must resolve under that runtime
     home.
     """
-    env_val = _plugin_data_env_value()
-    if env_val:
-        try:
-            env_path = Path(env_val)
-            resolved = env_path.resolve(strict=False)
-            if _is_safe_subdir(resolved, _PLUGIN_DATA_BASE):
-                return resolved
-        except (OSError, ValueError):
-            pass
+    # TOKEN_OPTIMIZER_PLUGIN_DATA must win even when CLAUDE_PLUGIN_DATA ALSO
+    # resolves to a valid registered identity. The previous implementation
+    # iterated _PLUGIN_DATA_ENV_VARS (CLAUDE_PLUGIN_DATA listed first for the
+    # Claude runtime) in a single for-loop and returned on the first env var
+    # that matched — so a valid CLAUDE_PLUGIN_DATA silently shadowed the
+    # dedicated override, exactly backwards from the documented priority.
+    # Checking the dedicated var first, unconditionally, fixes that.
+    if "TOKEN_OPTIMIZER_PLUGIN_DATA" in _PLUGIN_DATA_ENV_VARS:
+        dedicated_val = os.environ.get("TOKEN_OPTIMIZER_PLUGIN_DATA")
+        if dedicated_val:
+            try:
+                resolved = Path(dedicated_val).resolve(strict=False)
+            except (OSError, ValueError):
+                resolved = None
+            if resolved is not None and _is_safe_subdir(resolved, _PLUGIN_DATA_BASE):
+                return resolved  # dedicated — unconditional, but a real subdir
+
+    if "CLAUDE_PLUGIN_DATA" in _PLUGIN_DATA_ENV_VARS:
+        claude_identity = resolve_claude_plugin_data_env()
+        if claude_identity is not None:
+            return claude_identity
 
     candidates = _registered_plugin_data_dirs()
 

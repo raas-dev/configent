@@ -625,6 +625,19 @@ def handle_stop(payload):
     else:
         if _proc is None:
             logger.warning("[copilot_hook_bridge] handle_stop spawn_detached returned None")
+    # Parity Gap 2: also refresh the dashboard on session-end so a Copilot user
+    # sees current data without a manual open (Claude Code/Codex/Cowork already
+    # do this). Detached + TOKEN_OPTIMIZER_INTERACTIVE=1 so it runs UNBOUNDED off
+    # the hot path -- never blocks the CLI, never truncates on the 20s hook budget.
+    try:
+        spawn_detached(
+            [sys.executable, str(measure), "dashboard", "--quiet"],
+            env={**env, "TOKEN_OPTIMIZER_INTERACTIVE": "1"},
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.SubprocessError):
+        pass
     # Remove this session's in-flight tally: shutdown event is now authoritative.
     # Also drop the published lease lock file so a fast sessionStart doesn't
     # see a stale inflight-{sid}.lock from this session (candidate files age

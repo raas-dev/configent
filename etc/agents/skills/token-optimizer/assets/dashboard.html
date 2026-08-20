@@ -3785,7 +3785,20 @@ var DB = (function() {
     // cap (a 7% move in the multiplier swings it 3.4x -> 16.3x), so the stable
     // "extra work" figure leads and the raw window states are shown as-is.
     var rw = data.runway;
-    if (rw && rw.available && rw.windows && rw.windows.length) {
+    // Render when there are live windows OR a valid throughput multiplier. The
+    // multiplier and the weekly savings come from the ledger, not the live meter,
+    // so a stale meter (empty windows) must NOT vanish the whole card -- it shows
+    // the headline + savings with a "meter refreshing" note in place of the bars.
+    // (Regression: after a quiet week the meter aged past every window and the card
+    // disappeared entirely.)
+    var rwHasWindows = rw && rw.windows && rw.windows.length;
+    var rwHasMultiplier = rw && isFinite(Number(rw.extra_work_pct)) && Number(rw.extra_work_pct) > 0;
+    // NB: do NOT gate on rw.available. That is the live-meter's availability, and
+    // the headline multiplier + weekly savings do not need the meter (Bug A: an
+    // unavailable meter used to vanish the whole card). runway_snapshot already
+    // returns null when there is genuinely no story, so rw existing + a windows-
+    // or-multiplier payload is the real render condition.
+    if (rw && (rwHasWindows || rwHasMultiplier)) {
       // Both sides are stated in the SAME unit (percent LEFT). An earlier revision
       // paired "89% left" against "16.6% used", which reads as a contradiction and
       // forces the reader to do the subtraction. The with/without pair is also the
@@ -3820,15 +3833,20 @@ var DB = (function() {
         var savedUsd = Number(w.saved_usd);
         var hasUsd = isFinite(savedUsd) && savedUsd > 0;
         var spanWord = w.key === 'five_hour' ? '5h' : 'week';
-        // The per-window USD is a pro-rata slice of the N-day savings ledger
-        // at the recent rate, NOT savings realized within this window. Label it
-        // honestly so the headline dollar figure never overclaims.
-        var periodDays = Number(rw.period_days) || 30;
-        var usdCaption = 'saved at your recent rate (pro-rata of ' + periodDays + 'd ledger)';
+        // The per-window USD is the EXTRA you'd have paid in API credits to match
+        // this window's work WITHOUT Token Optimizer, priced over the window's OWN
+        // real span (the weekly card = the last 7 days, not a slice of a longer
+        // ledger). It is the API-equivalent savings delta, NOT total weekly cost
+        // and NOT strict post-cap overage; the explainer line + ESTIMATED $ chip
+        // carry that honesty. A big "$N more" number, a tiny "in API credits"
+        // caption, then a plain sentence that spells out the meaning.
+        var usdExplainer = 'Matching this ' + spanWord + '&rsquo;s work without Token Optimizer ' +
+          'would have pushed you onto paid API credits. That&rsquo;s the extra you&rsquo;d pay.';
         return '<div style="background:rgba(255,255,255,.02);border:1px solid var(--c-border);border-radius:8px;padding:var(--s-3);">' +
           '<div class="label" style="display:block;margin-bottom:var(--s-3);">' + name + '</div>' +
           (hasUsd
-            ? '<div style="margin-bottom:var(--s-3);font-size:22px;font-weight:500;color:var(--c-savings-alt, #10b981);line-height:1.2;">&asymp;' + rwMoney(savedUsd) + ' <span style="font-size:13px;color:var(--c-text-dim);font-weight:400;">' + usdCaption + '</span></div>'
+            ? '<div style="margin-bottom:6px;font-size:22px;font-weight:500;color:var(--c-savings-alt, #10b981);line-height:1.2;">&asymp;' + rwMoney(savedUsd) + ' more <span style="font-size:13px;color:var(--c-text-dim);font-weight:400;">in API credits</span></div>' +
+              '<div style="margin-bottom:var(--s-3);font-size:13px;color:var(--c-text-dim);line-height:1.5;text-wrap:pretty;">' + usdExplainer + '</div>'
             : '') +
           '<div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--s-3);">' +
             '<div>' +
@@ -3861,10 +3879,10 @@ var DB = (function() {
       (rw.windows || []).forEach(function (w) {
         var v = Number(w.saved_usd);
         if (!isFinite(v) || v <= 0) return;
-        // Honest label -- pro-rata slice of the N-day ledger, not window-
-        // realized savings. The old per-window wording implied the dollars
-        // were actually saved within that window.
-        var span = w.key === 'five_hour' ? '5h slice' : 'weekly slice';
+        // Honest label -- API-credit overage over the window's own real span, not
+        // a slice of a longer ledger. Sub-day windows carry no dollar, so in
+        // practice only the weekly figure appears here.
+        var span = w.key === 'five_hour' ? 'past 5h' : 'this week';
         usdParts.push('<em style="font-style:normal;color:var(--c-accent-cyan);">' + rwMoney(v) + '</em> ' + span);
       });
       var usdHeadline = usdParts.join(' &middot; ');
@@ -3901,7 +3919,12 @@ var DB = (function() {
         // fragment once it wraps to its own line, and the limit panels below
         // already establish which limits are meant.
         '<p style="margin:0 0 var(--s-4);color:var(--c-text-dim);font-size:17px;line-height:1.6;text-wrap:pretty;">Token Optimizer keeps junk out of context and runs routine turns on lighter models, so more of your plan goes to real work instead of waste.</p>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--s-3);">' + rwCards + '</div>' +
+        // Per-window bars when the meter is fresh enough; otherwise a note so the
+        // card degrades instead of vanishing (the multiplier + savings above still
+        // stand without the live meter).
+        (rwCards
+          ? '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--s-3);">' + rwCards + '</div>'
+          : '<div style="padding:var(--s-3);border:1px dashed var(--c-border);border-radius:8px;color:var(--c-text-dim);font-size:15px;line-height:1.5;text-wrap:pretty;">Your live 5-hour and weekly limit view refreshes while you are actively working &mdash; it reappears here on your next session.</div>') +
         // Freshness of the WINDOW reading itself (not the dashboard build). The
         // meter only refreshes while Claude Code is actively running, so a
         // dashboard opened later shows the last real reading -- label it with its

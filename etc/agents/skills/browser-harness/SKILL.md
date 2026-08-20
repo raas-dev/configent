@@ -26,6 +26,10 @@ PY
 - Invoke as `browser-harness`. Use heredocs for multi-line commands.
 - Helpers are pre-imported. `run.py` calls `ensure_daemon()` before `exec`.
 - First navigation is `new_tab(url)`, not `goto_url(url)`.
+- `new_tab()` and `switch_tab()` attach and move the horse marker without
+  changing Chrome's visible tab. Screenshots and normal CDP input work in the
+  background; call `activate_tab(target)` only when the user explicitly asks
+  or a page demonstrably pauses rendering while hidden.
 - The normal local flow attaches to the running Chrome/Chromium CDP endpoint. No browser ids or local profile selection.
 
 ## Local Chrome

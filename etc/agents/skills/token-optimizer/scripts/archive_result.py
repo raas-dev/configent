@@ -926,6 +926,23 @@ def _expand_instruction(key: str, tool_name: str | None = None) -> str:
     )
 
 
+def archive_entry_exists(session_id: str | None, key: str) -> bool:
+    """True when the archive entry file for ``key`` actually exists on disk.
+
+    Reusable by all pointer producers (archive_result, read_cache, bash_compress)
+    so they can re-check the entry survived a post-write retention prune before
+    emitting a pointer that would send the model to a missing file.
+    Never raises.
+    """
+    try:
+        if not key:
+            return False
+        entry_path = _archive_dir_for_session(session_id or "unknown") / f"{key}.json"
+        return entry_path.is_file() and not entry_path.is_symlink()
+    except Exception:
+        return False
+
+
 def build_archive_pointer(preview: str, original_chars: int, key: str) -> str:
     """Standard progressive-disclosure pointer appended after a compressed preview."""
     return (
@@ -1332,6 +1349,25 @@ def archive_result(quiet: bool = False) -> None:
     except Exception:
         pass
 
+    # Re-check that the entry survived the retention pass.  _cleanup_archives_if_due
+    # runs AFTER the write and retention ceilings prune even protected sessions
+    # (TOKEN_OPTIMIZER_ARCHIVE_RETENTION_MAX_BYTES=1 reproduces this), so the entry
+    # we just wrote can be gone by the time we build the pointer.  When it is, serve
+    # the full result — a missing-entry pointer would strand the model with an
+    # unrecoverable expand.
+    replacement_emitted = False  # set below only when the pointer is actually emitted
+    entry_exists = archive_entry_exists(session_id, tool_use_id)
+    if not entry_exists:
+        if not quiet:
+            print(
+                f"[Tool Archive] Entry {tool_use_id} was pruned by retention pass "
+                f"after write; serving full result instead of pointer.",
+                file=sys.stderr,
+            )
+        # Fall through: the MCP replacement path below is skipped because
+        # replacement_emitted stays False, so the hook returns without printing
+        # an updatedMCPToolOutput — the original tool output reaches context.
+
     if not quiet:
         print(f"[Tool Archive] Archived {tool_name} result ({char_count:,} chars, ~{token_est:,} tokens): {tool_use_id}", file=sys.stderr)
 
@@ -1383,6 +1419,12 @@ def archive_result(quiet: bool = False) -> None:
     # For MCP tools (tool_name contains "__"): output replacement via stdout
     # No pressure gate here: the compressed replacement SAVES tokens.
     # Suppressing it would cause the full uncompressed response to flow through.
+    #
+    # Skip the replacement when the entry was pruned by the retention pass that
+    # ran after write. Emitting a pointer to a missing entry strands the model.
+    if not entry_exists:
+        return
+
     if "__" in tool_name:
         output_type = _detect_output_type(safe_response)
         preview = _compress_mcp_preview(safe_response, output_type)

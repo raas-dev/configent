@@ -80,19 +80,26 @@ def _safe_read_text(path):
 
 def _state_dir():
     """Resolve a writable state dir for the detector, mirroring
-    plugin_env.resolve_snapshot_dir() without importing it (detectors stay
-    standalone to avoid a circular import). TOKEN_OPTIMIZER_SNAPSHOT_DIR wins
-    (tests/sandbox); else CLAUDE_PLUGIN_DATA/data; else
-    ~/.claude/token-optimizer/data. Returns None only if HOME itself is
-    unresolvable, in which case the snapshot diff is skipped (no finding, no
-    crash).
+    plugin_env.resolve_snapshot_dir()'s CLAUDE_PLUGIN_DATA handling.
+    TOKEN_OPTIMIZER_SNAPSHOT_DIR wins (tests/sandbox); else the
+    identity-checked CLAUDE_PLUGIN_DATA (via plugin_env.resolve_claude_plugin_data_env
+    -- issue #140 sibling site: this detector WRITES state, so a foreign
+    plugin's CLAUDE_PLUGIN_DATA sharing the same shared plugins/data root must
+    never redirect that write into another plugin's directory, unlike the
+    pre-fix raw env read this duplicated); else ~/.claude/token-optimizer/data.
+    Returns None only if HOME itself is unresolvable, in which case the
+    snapshot diff is skipped (no finding, no crash).
     """
     override = os.environ.get("TOKEN_OPTIMIZER_SNAPSHOT_DIR", "").strip()
     if override:
         return Path(override).expanduser()
-    plugin_data = os.environ.get("CLAUDE_PLUGIN_DATA", "").strip()
-    if plugin_data:
-        return Path(plugin_data).expanduser() / "data"
+    try:
+        from plugin_env import resolve_claude_plugin_data_env
+        plugin_data = resolve_claude_plugin_data_env()
+    except Exception:
+        plugin_data = None
+    if plugin_data is not None:
+        return plugin_data / "data"
     try:
         return Path.home() / ".claude" / "token-optimizer" / "data"
     except (RuntimeError, OSError):

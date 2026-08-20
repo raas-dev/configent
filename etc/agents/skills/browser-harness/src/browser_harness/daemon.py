@@ -360,13 +360,56 @@ class Daemon:
         self.cdp = None
         self.session = None
         self.target_id = None
+        self.dedicated_target_id = None
+        self._dedicated_target_lock = asyncio.Lock()
+        self._session_state_lock = asyncio.Lock()
+        self._session_replacements = {}
         self.events = deque(maxlen=BUF)
         self.dialog = None
         self.stop = None  # asyncio.Event, set inside start()
 
-    async def attach_first_page(self):
+    async def attach_first_page(self, replaces_session=None, enable_domains=True):
         """Attach to a real page (or any page). Sets self.session. Returns attached target or None."""
         targets = (await self.cdp.send_raw("Target.getTargets"))["targetInfos"]
+        # Named daemons (BU_NAME != "default") share one browser with other
+        # daemons — attaching to the first page makes parallel daemons fight
+        # over a single tab (navigations clobber each other). Give each named
+        # daemon its own dedicated tab instead. REMOTE_ID (cloud) browsers are
+        # already exclusive to this daemon, so first-page attach stays.
+        if NAME != "default" and not REMOTE_ID:
+            # The permission recovery flow can leave chrome://inspect open.
+            # Clean it up before returning from this early path as well.
+            if BROWSER_KIND == "local":
+                await self._close_inspect_tabs(targets)
+            pages_by_id = {t["targetId"]: t for t in targets if t["type"] == "page"}
+            # A stale CDP session does not necessarily mean its tab disappeared.
+            # Reattach to the current tab first, then the daemon's dedicated tab.
+            page = pages_by_id.get(self.target_id) or pages_by_id.get(self.dedicated_target_id)
+            if page is None:
+                # Two stale IPC requests can recover concurrently. Recheck
+                # inside a narrow lock so they share one replacement tab.
+                async with self._dedicated_target_lock:
+                    refreshed = (await self.cdp.send_raw("Target.getTargets"))["targetInfos"]
+                    pages_by_id = {t["targetId"]: t for t in refreshed if t["type"] == "page"}
+                    page = pages_by_id.get(self.target_id) or pages_by_id.get(self.dedicated_target_id)
+                    if page is None:
+                        tid = (await self.cdp.send_raw(
+                            "Target.createTarget", {"url": "about:blank", "background": True}
+                        ))["targetId"]
+                        self.dedicated_target_id = tid
+                        log(f"named daemon {NAME}: created dedicated tab ({tid})")
+                        page = {"targetId": tid, "url": "about:blank", "type": "page"}
+            tid = page["targetId"]
+            self.session = (await self.cdp.send_raw(
+                "Target.attachToTarget", {"targetId": tid, "flatten": True}
+            ))["sessionId"]
+            self._record_session_replacement(replaces_session, self.session)
+            self.target_id = tid
+            log(f"attached {tid} ({page.get('url','')[:80]}) session={self.session}")
+            if enable_domains:
+                await self._enable_default_domains(self.session)
+            return page
+
         pages = [t for t in targets if is_real_page(t)]
         if not pages:
             # Fresh browser (ex: BU cloud) starts w about:blank; reuse it
@@ -385,12 +428,15 @@ class Daemon:
                 take_over = inspect_tabs[0]["targetId"]
         if not pages:
             # No usable pages - create one instead of attaching to omnibox popup.
-            tid = (await self.cdp.send_raw("Target.createTarget", {"url": "about:blank"}))["targetId"]
+            tid = (await self.cdp.send_raw(
+                "Target.createTarget", {"url": "about:blank", "background": True}
+            ))["targetId"]
             log(f"no real pages found, created about:blank ({tid})")
             pages = [{"targetId": tid, "url": "about:blank", "type": "page"}]
         self.session = (await self.cdp.send_raw(
             "Target.attachToTarget", {"targetId": pages[0]["targetId"], "flatten": True}
         ))["sessionId"]
+        self._record_session_replacement(replaces_session, self.session)
         self.target_id = pages[0]["targetId"]
         log(f"attached {pages[0]['targetId']} ({pages[0].get('url','')[:80]}) session={self.session}")
         if take_over:
@@ -401,7 +447,8 @@ class Daemon:
                 log(f"take over inspect tab {take_over}: {e}")
         if BROWSER_KIND == "local":
             await self._close_inspect_tabs(targets)
-        await self._enable_default_domains(self.session)
+        if enable_domains:
+            await self._enable_default_domains(self.session)
         return pages[0]
 
     async def _close_inspect_tabs(self, targets):
@@ -443,6 +490,19 @@ class Daemon:
             except Exception as e:
                 log(f"enable {d} on {session_id}: {e}")
         await asyncio.gather(*(enable_one(d) for d in ("Page", "DOM", "Runtime", "Network")))
+
+    def _record_session_replacement(self, stale_session, replacement_session):
+        """Remember which recovered session still controls the same tab."""
+        if not stale_session or not replacement_session or stale_session == replacement_session:
+            return
+        # Preserve chains so requests delayed across multiple recoveries still
+        # land on their original tab, never whichever tab is current now.
+        for source, replacement in list(self._session_replacements.items()):
+            if replacement == stale_session:
+                self._session_replacements[source] = replacement_session
+        self._session_replacements[stale_session] = replacement_session
+        while len(self._session_replacements) > 32:
+            self._session_replacements.pop(next(iter(self._session_replacements)))
 
     async def start(self):
         self.stop = asyncio.Event()
@@ -526,9 +586,11 @@ class Daemon:
                 }
             return {"target_id": self.target_id, "session_id": self.session, "page": page}
         if meta == "set_session":
-            old_session = self.session
-            self.session = req.get("session_id")
-            self.target_id = req.get("target_id") or self.target_id
+            async with self._session_state_lock:
+                old_session = self.session
+                self.session = req.get("session_id")
+                self.target_id = req.get("target_id") or self.target_id
+                new_session = self.session
             # Run the old-session Network.disable (defense in depth — keeps
             # background-tab traffic out of the global event buffer; the
             # consumer-side filter in wait_for_network_idle is the actual
@@ -538,7 +600,7 @@ class Daemon:
             # even on a remote daemon — sequentially these would have stacked
             # to ~22s worst case.
             tasks = []
-            if old_session and old_session != self.session:
+            if old_session and old_session != new_session:
                 async def disable_old():
                     try:
                         await asyncio.wait_for(
@@ -547,7 +609,7 @@ class Daemon:
                         )
                     except Exception: pass
                 tasks.append(disable_old())
-            tasks.append(self._enable_default_domains(self.session))
+            tasks.append(self._enable_default_domains(new_session))
             await asyncio.gather(*tasks)
             # 🐴 tab-marker title prefix is purely cosmetic — fire-and-forget so
             # it doesn't add to the synchronous IPC budget.
@@ -555,11 +617,11 @@ class Daemon:
                 self.cdp.send_raw(
                     "Runtime.evaluate",
                     {"expression": "if(!document.title.startsWith('\U0001F434'))document.title='\U0001F434 '+document.title"},
-                    session_id=self.session,
+                    session_id=new_session,
                 ),
                 timeout=2,
             )))
-            return {"session_id": self.session}
+            return {"session_id": new_session}
         if meta == "pending_dialog": return {"dialog": self.dialog}
         if meta == "shutdown":    self.stop.set(); return {"ok": True}
 
@@ -572,10 +634,34 @@ class Daemon:
             return {"result": await self.cdp.send_raw(method, params, session_id=sid)}
         except Exception as e:
             msg = str(e)
-            if "Session with given id not found" in msg and sid == self.session and sid:
-                log(f"stale session {sid}, re-attaching")
-                if await self.attach_first_page():
-                    return {"result": await self.cdp.send_raw(method, params, session_id=self.session)}
+            if "Session with given id not found" in msg and sid:
+                # Explicit session callers asked for that exact session; do not
+                # silently redirect them to the daemon's current tab.
+                if req.get("session_id"):
+                    return {"error": msg}
+                recovered_here = False
+                async with self._session_state_lock:
+                    replacement_session = self._session_replacements.get(sid)
+                    if replacement_session is None and sid == self.session:
+                        log(f"stale session {sid}, re-attaching")
+                        if not await self.attach_first_page(
+                            replaces_session=sid, enable_domains=False
+                        ):
+                            return {"error": msg}
+                        replacement_session = self._session_replacements.get(sid)
+                        recovered_here = replacement_session is not None
+                if recovered_here:
+                    await self._enable_default_domains(replacement_session)
+                # Retry only on a session known to replace this exact stale
+                # session. self.session may instead have changed because the
+                # user deliberately switched tabs while this request waited.
+                if replacement_session:
+                    try:
+                        return {"result": await self.cdp.send_raw(
+                            method, params, session_id=replacement_session
+                        )}
+                    except Exception as retry_error:
+                        return {"error": str(retry_error)}
             return {"error": msg}
 
 

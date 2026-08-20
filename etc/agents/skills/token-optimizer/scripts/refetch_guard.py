@@ -39,6 +39,11 @@ except Exception:
 
 _STDIN_MAX_BYTES = 1_048_576  # 1MB: tool_input is small; cap defensively.
 _MANIFEST_MAX_LINES = 5000    # keep the NEWEST N manifest entries (append-only file).
+# archive_result.py's _ARCHIVE_MAX_SIZE caps a legitimate entry's response at
+# 5MB; add generous headroom for the surrounding JSON/metadata so no real
+# entry is ever truncated mid-parse, while still bounding this hot PreToolUse
+# read against a pathological/corrupt file pulling unbounded bytes into memory.
+_ENTRY_RENDER_MAX_BYTES = 8 * 1024 * 1024
 _DEBUG = os.environ.get("TOKEN_OPTIMIZER_DEBUG", "").strip().lower() not in ("", "0", "false", "no")
 
 
@@ -86,13 +91,32 @@ def _read_manifest_tail(manifest: Path) -> list:
     return parsed
 
 
+def _entry_is_renderable(archive_dir: Path, tool_use_id: str) -> bool:
+    """True when the archive entry file exists, is readable JSON, and has a non-empty
+    ``response`` field — i.e. ``expand`` can actually serve it. Never raises."""
+    try:
+        entry_path = archive_dir / f"{tool_use_id}.json"
+        if not entry_path.is_file() or entry_path.is_symlink():
+            return False
+        with entry_path.open("rb") as fh:
+            raw = fh.read(_ENTRY_RENDER_MAX_BYTES)
+        if not raw:
+            return False
+        payload = json.loads(raw)
+        return isinstance(payload.get("response"), str) and bool(payload["response"])
+    except Exception:
+        return False
+
+
 def _lookup_archived(session_id: str, tool_name: str, fingerprint: str):
     """Return (tool_use_id, tokens_est) for a prior identical (tool_name, fingerprint),
     else (None, 0).
 
     Scans only the current session's manifest (a match is inherently recent — manifests
     are TTL-pruned at 48h), newest-first, so the most recent archive of an identical call
-    wins and the scan stops early. Never raises.
+    wins and the scan stops early. A manifest hit is only returned when the actual archive
+    entry file is renderable (exists, readable JSON, non-empty response); on a bad match
+    the scan continues to older entries. Never raises.
     """
     try:
         # Gate on the RAW session id: sanitize() turns an empty/invalid id into a random
@@ -100,12 +124,17 @@ def _lookup_archived(session_id: str, tool_name: str, fingerprint: str):
         if not session_id or not session_id.strip():
             return None, 0
         sid = sanitize_sid(session_id)
-        manifest = resolve_snapshot_dir() / "tool-archive" / sid / "manifest.jsonl"
+        archive_dir = resolve_snapshot_dir() / "tool-archive" / sid
+        manifest = archive_dir / "manifest.jsonl"
         if not manifest.is_file() or manifest.is_symlink():
             return None, 0
         for entry in reversed(_read_manifest_tail(manifest)):  # newest first
             if entry.get("tool_name") == tool_name and entry.get(ARGS_HASH_KEY) == fingerprint:
-                return entry.get("tool_use_id"), int(entry.get("tokens_est") or 0)
+                tool_use_id = entry.get("tool_use_id")
+                if tool_use_id and _entry_is_renderable(archive_dir, tool_use_id):
+                    return tool_use_id, int(entry.get("tokens_est") or 0)
+                # Manifest entry exists but the archive file is not renderable —
+                # keep scanning older entries instead of giving up.
         return None, 0
     except Exception as exc:
         _debug(f"manifest lookup failed ({type(exc).__name__}: {exc}); allowing call")

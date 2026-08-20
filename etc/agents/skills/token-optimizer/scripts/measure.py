@@ -109,7 +109,7 @@ from plugin_env import (
     snapshot_dir_candidates,
 )
 from utf8_io import enforce_utf8_io, reexec_in_utf8_mode
-from runtime_env import claude_home, detect_runtime, is_cowork, runtime_home, runtime_name_for_humans
+from runtime_env import _safe_home, claude_home, detect_runtime, is_cowork, runtime_home, runtime_name_for_humans
 from spawn_utils import spawn_detached
 
 # issue #107: every console-attached child we spawn on Windows flashes a cmd
@@ -150,7 +150,7 @@ import hermes_session
 CHARS_PER_TOKEN = 4.0
 _SKILL_DESC_TRUNCATION_LIMIT = 1536
 
-HOME = Path.home()
+HOME = _safe_home()
 RUNTIME_DIR = runtime_home()
 CLAUDE_DIR = claude_home()
 
@@ -6106,7 +6106,8 @@ def generate_standalone_dashboard(days=30, quiet=False, force=False):
             # sibling then os.replace so every reader sees one complete generation.
             tmp_fd, tmp_name = tempfile.mkstemp(dir=str(wp.parent), prefix=".dash-", suffix=".tmp")
             try:
-                os.fchmod(tmp_fd, 0o600)
+                if hasattr(os, "fchmod"):  # POSIX only (os.fchmod is absent on Windows)
+                    os.fchmod(tmp_fd, 0o600)
                 with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
                     f.write(injected)
                 os.replace(tmp_name, str(wp))
@@ -6253,6 +6254,18 @@ def _run_session_end_flush_worker(args):
                 pass
             try:
                 generate_standalone_dashboard(days=30, quiet=True)
+            except _HookTimeout:
+                # Gap 4: the bounded SessionEnd regen was killed by the 20s budget
+                # (a large history's 4 MB build does not fit), so it may have left
+                # a stale-or-degraded dashboard. Hand the rebuild to the same
+                # detached, unbounded self-heal the explicit-open path uses, so the
+                # file catches up off the hot path instead of waiting for the user
+                # to re-open. Re-raised so the outer handler still runs cleanup.
+                try:
+                    _spawn_detached_dashboard_selfheal(days=30)
+                except Exception:
+                    pass
+                raise
             except Exception:
                 pass
             try:
@@ -6332,6 +6345,177 @@ def _dispatch_session_end_flush(args):
         return "inline"
     _defer_session_end_flush(args)
     return "deferred"
+
+
+def _dispatch_collect(args):
+    """CLI ``collect`` entry. Bounded ONLY on the hook path (#114 Fix 3/4).
+
+    A fossilized SessionEnd hook that chains the ``collect`` and ``dashboard``
+    subcommands never reaches ``session-end-flush``. The 20s HookDeadline is
+    the last line of defense so an escaped fossil still closes the hook pipe
+    on Windows.
+
+    #114 Fix 4: the budget is armed only when ``_running_under_hook()`` is
+    true (hook runner / fossil context) AND ``--rebuild`` is not present.
+    Arming it unconditionally killed interactive ``collect --rebuild`` on a
+    large history mid-transaction (os._exit(0) -> SQLite rollback -> the
+    "needs rebuild" flag stays true -> every later run wedges, exiting 0).
+    ``--rebuild`` is exempt regardless of context: it is an intentionally
+    heavy operation and bounding it mid-transaction is the wedge itself.
+    """
+    days = 90
+    quiet = "--quiet" in args or "-q" in args
+    for i, a in enumerate(args):
+        if a == "--days" and i + 1 < len(args):
+            try:
+                days = int(args[i + 1])
+            except ValueError:
+                pass
+    rebuild = "--rebuild" in args
+    deadline = (
+        _install_hook_budget(20) if (_running_under_hook() and not rebuild) else None
+    )
+    try:
+        collect_sessions(days=days, quiet=quiet, rebuild=rebuild)
+    except _HookTimeout:
+        pass
+    finally:
+        _clear_hook_budget(deadline)
+
+    # #114 round 3 FIX A: existing-script-install self-heal. An old script
+    # install has the collect&&dashboard fossil in settings.json and NO
+    # ensure-health SessionStart hook, so run_ensure_health never reaches it.
+    # The fossil's OWN hook-path run reconciles settings.json here, removing
+    # the fossil going forward. Runs AFTER the flush and its 20s budget are
+    # cleared, so it never delays the flush itself; the self-heal carries its
+    # OWN short deadline (see the helper) so a stalled settings write can't
+    # hold the hook pipe open. Throttled to 24h, fail-open. Gated on the hook
+    # path so an interactive terminal `collect` never triggers it.
+    if _running_under_hook():
+        try:
+            _maybe_self_heal_sessionend_fossils_on_hook()
+        except Exception:
+            pass
+
+
+def _spawn_detached_dashboard_selfheal(days=30):
+    """Rebuild the dashboard in a DETACHED, unbounded background process.
+
+    Bug B self-heal: when a bounded hook-path regen is killed by the 20s budget
+    (a large history whose 4 MB rebuild does not fit the window), the on-disk
+    dashboard used to stay stale forever -- the SessionEnd/Stop hook kept getting
+    killed and never caught up. Instead, on that timeout we hand the rebuild to a
+    child that:
+      * runs with TOKEN_OPTIMIZER_INTERACTIVE=1 so it is UNBOUNDED (it finishes
+        the rebuild however long it takes),
+      * is fully detached (start_new_session / DETACHED_PROCESS) so it outlives
+        the hook and never holds the hook's stdout pipe open,
+      * is quiet and never opens a browser.
+    The child is unbounded, so it cannot itself time out and re-spawn -- no loop.
+    Fire-and-forget; never raises (a failed self-heal must not break the hook).
+    """
+    try:
+        env = dict(os.environ)
+        env["TOKEN_OPTIMIZER_INTERACTIVE"] = "1"
+        env.pop("TOKEN_OPTIMIZER_HOOK", None)
+        # Detach so the child outlives the killed hook: POSIX new session, or
+        # (on Windows) DETACHED_PROCESS. start_new_session is POSIX-only.
+        popen_kw = {} if os.name == "nt" else {"start_new_session": True}
+        # creationflags MUST be inlined and mention _NO_WINDOW (CREATE_NO_WINDOW,
+        # 0 off-Windows) so a console-less Windows host never flashes a cmd window
+        # -- and so the spawn-site invariant test can see it. DETACHED_PROCESS is 0
+        # off-Windows, so this evaluates to 0 on POSIX (the only valid value there).
+        subprocess.Popen(
+            [sys.executable, os.path.abspath(__file__),
+             "dashboard", "--quiet", "--days", str(int(days))],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            close_fds=True,
+            env=env,
+            creationflags=(getattr(subprocess, "DETACHED_PROCESS", 0) | _NO_WINDOW),
+            **popen_kw,
+        )
+    except Exception:
+        pass
+
+
+def _dispatch_dashboard(args):
+    """CLI ``dashboard`` entry. Bounded ONLY on the hook path (#114 Fix 3/4).
+
+    Interactive ``--serve`` is unbounded on purpose: a user watching the
+    dashboard must not have the process killed after 20s. A plain interactive
+    ``dashboard`` run (no ``--serve``) from a terminal is also left unbounded
+    (#114 Fix 4): the 20s budget exists to cap the escaped fossil on the hook
+    pipe, not to kill a user-driven generation. ``--serve`` and "stdin is a
+    tty" both mark an interactive context; the budget arms only when
+    ``_running_under_hook()`` is true and ``--serve`` is absent.
+    """
+    cp = None
+    serve = False
+    serve_port = 8080
+    serve_host = "127.0.0.1"
+    for i, a in enumerate(args):
+        if a == "--coord-path" and i + 1 < len(args):
+            cp = args[i + 1]
+        elif a == "--serve":
+            serve = True
+        elif a == "--host" and i + 1 < len(args):
+            serve_host = args[i + 1]
+            serve = True
+        elif a == "--port" and i + 1 < len(args):
+            try:
+                serve_port = int(args[i + 1])
+            except ValueError:
+                print(f"[Error] Invalid --port value: {args[i + 1]}")
+                sys.exit(1)
+            serve = True
+    if not cp:
+        days = 30
+        quiet = "--quiet" in args or "-q" in args
+        for i, a in enumerate(args):
+            if a == "--days" and i + 1 < len(args):
+                try:
+                    days = int(args[i + 1])
+                except ValueError:
+                    pass
+        deadline = (
+            None if (serve or not _running_under_hook()) else _install_hook_budget(20)
+        )
+        timed_out = False
+        try:
+            out = generate_standalone_dashboard(days=days, quiet=quiet)
+        except _HookTimeout:
+            out = None
+            timed_out = True
+        finally:
+            _clear_hook_budget(deadline)
+        # Bug B self-heal: a bounded hook regen that the 20s budget killed leaves
+        # the on-disk dashboard stale. Finish it in a detached, unbounded child so
+        # the file catches up without ever blocking the session.
+        if timed_out:
+            _spawn_detached_dashboard_selfheal(days=days)
+        if out and serve:
+            _serve_dashboard(out, port=serve_port, host=serve_host)
+        elif out and not quiet:
+            _open_dashboard(fallback_filepath=out)
+        sys.exit(0 if out else 1)
+    deadline = (
+        None if (serve or not _running_under_hook()) else _install_hook_budget(20)
+    )
+    timed_out = False
+    try:
+        out = generate_dashboard(cp)
+    except _HookTimeout:
+        out = None
+        timed_out = True
+    finally:
+        _clear_hook_budget(deadline)
+    # Bug B self-heal (coord-path regen): same as the standalone branch above.
+    if timed_out:
+        _spawn_detached_dashboard_selfheal()
+    if serve and out:
+        _serve_dashboard(out, port=serve_port, host=serve_host)
 
 
 def _generate_codex_auto_recommendations(components, trends=None, days=30):
@@ -12382,7 +12566,8 @@ def _keepwarm_write_scheduler_marker(bootstrap_rc="__unset__"):
         SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
         tmp_fd, tmp_path = tempfile.mkstemp(
             dir=str(SNAPSHOT_DIR), prefix=".keepwarm-marker-", suffix=".tmp")
-        os.fchmod(tmp_fd, 0o600)
+        if hasattr(os, "fchmod"):  # POSIX only (os.fchmod is absent on Windows)
+            os.fchmod(tmp_fd, 0o600)
         with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
             json.dump(payload, f)
         os.replace(tmp_path, str(marker_path))
@@ -18823,11 +19008,11 @@ if sys.platform == "win32":
     _py = shlex.quote(str(sys.executable).replace("\\", "/"))
     _mp = shlex.quote(str(MEASURE_PY_PATH).replace("\\", "/"))
     HOOK_COMMAND = (
-        f"{_py} {_mp} collect --quiet && {_py} {_mp} dashboard --quiet"
+        f"{_py} {_mp} session-end-flush --trigger end"
         f" >/dev/null 2>&1"
     )
 else:
-    HOOK_COMMAND = f"python3 '{MEASURE_PY_PATH}' collect --quiet && python3 '{MEASURE_PY_PATH}' dashboard --quiet"
+    HOOK_COMMAND = f"python3 '{MEASURE_PY_PATH}' session-end-flush --trigger end"
 # Recognizes Token Optimizer's SessionEnd hook command: a script named
 # ``measure.py`` invoked with the ``collect`` or ``session-end-flush``
 # subcommand as its first positional argument. The path may be single-quoted
@@ -18840,8 +19025,14 @@ else:
 # (e.g. ``echo 'run measure.py to collect data'``) or glued with a dot
 # (``measure.py.collect``). Shared by _is_hook_installed and
 # _is_token_optimizer_session_end_hook so detection and removal stay in sync.
+# #114 Fix 5: the alternation is anchored with a negative lookahead
+# ``(?![\w-])`` instead of a trailing ``\b``. ``\b`` treats ``-`` as a word
+# boundary, so ``\bcollect\b`` matched the ``collect`` inside ``collect-foo``
+# (a hypothetical ``collect-*`` subcommand) and ``session-end-flush`` inside
+# ``session-end-flush-archive``. The lookahead rejects a following word char
+# OR hyphen, so only the bare subcommands match.
 _TO_SESSION_END_CMD_RE = re.compile(
-    r"\bmeasure\.py['\"]?\s+(?:collect|session-end-flush)\b"
+    r"\bmeasure\.py['\"]?\s+(?:collect|session-end-flush)(?![\w-])"
 )
 
 
@@ -18922,11 +19113,33 @@ def _is_hook_installed(settings=None):
     return False
 
 
-def _is_hook_current(settings=None):
-    """Check if the installed hook includes dashboard regeneration (new format).
+def _sessionend_cmd_is_flush(cmd) -> bool:
+    """True when ``cmd`` is the current SessionEnd shape (session-end-flush)."""
+    if not isinstance(cmd, str) or not cmd:
+        return False
+    return bool(re.search(r"\bmeasure\.py['\"]?\s+session-end-flush\b", cmd))
 
-    Returns True if hook has both 'collect' and 'dashboard' in the command.
-    Returns False if only collect-only (old format) or not installed at all.
+
+def _sessionend_cmd_is_collect_fossil(cmd) -> bool:
+    """True when ``cmd`` is the #114 collect/dashboard SessionEnd fossil.
+
+    ``_TO_SESSION_END_CMD_RE`` matches both ``collect`` and ``session-end-flush``.
+    Anything that matches and is not the flush shape is the inline heavy fossil.
+    """
+    if not isinstance(cmd, str) or not cmd:
+        return False
+    if _sessionend_cmd_is_flush(cmd):
+        return False
+    return bool(_TO_SESSION_END_CMD_RE.search(cmd))
+
+
+def _is_hook_current(settings=None):
+    """True when the installed SessionEnd hook is the session-end-flush shape.
+
+    The collect-then-dashboard fossil (#114) is never current: it runs the
+    heavy flush inline and unbounded. The pre-#118 win32 cmd-null-redirect
+    form is also never current. setup_hook's upgrade branch rewrites anything
+    that returns False.
     """
     if settings is None:
         if not SETTINGS_PATH.exists():
@@ -18945,14 +19158,13 @@ def _is_hook_current(settings=None):
         hook_list = entry.get("hooks", []) if isinstance(entry, dict) else []
         for hook in hook_list:
             cmd = hook.get("command", "") if isinstance(hook, dict) else ""
-            if "measure.py" in cmd and "collect" in cmd and "dashboard" in cmd:
-                # #118: the pre-fix win32 SessionEnd command matched all three
-                # substrings but used a cmd.exe NUL-device redirect that breaks
-                # under Git Bash (literal NUL file + silent failure). Treat that
-                # legacy form as NOT current so setup_hook's upgrade branch
-                # rewrites it to the bash-safe >/dev/null form. Existing broken
-                # installs are the whole reported #118 population, so this is the
-                # only path that heals them.
+            if not isinstance(cmd, str):
+                continue
+            if _sessionend_cmd_is_collect_fossil(cmd):
+                return False
+            if _sessionend_cmd_is_flush(cmd):
+                # #118: a flush-shaped command that still uses the cmd.exe
+                # NUL-device redirect is not current on win32.
                 if sys.platform == "win32" and re.search(r">\s*NUL\b", cmd):
                     return False
                 return True
@@ -18974,7 +19186,7 @@ def _settings_lock():
     Prevents concurrent writes from silently overwriting each other.
     Contenders skip the mutation after 75ms rather than blocking a hook.
     """
-    lease_path = _SETTINGS_LOCK_PATH.with_suffix(".lease")
+    lease_path = SETTINGS_PATH.parent / ".settings.lease"
     with lease_lock(
         lease_path,
         deadline=current_deadline(),
@@ -18983,12 +19195,67 @@ def _settings_lock():
         yield acquired
 
 
+def _write_settings_atomic_locked(settings_data):
+    """Atomic settings.json write assuming the settings lease is ALREADY held.
+
+    This is the lock-free body of ``_write_settings_atomic``, extracted so
+    ``_reconcile_sessionend_fossils`` can hold ``_settings_lock()`` across
+    fresh-read + re-apply + write as ONE critical section (#114 Fix 6, round 3).
+    Calling ``_write_settings_atomic`` from inside a held ``_settings_lock()``
+    would re-acquire the non-reentrant lease and deadlock, so callers that
+    already hold the lease MUST use this primitive instead.
+
+    Never call this without already holding ``_settings_lock()``; it provides
+    no serialization of its own. Same tempfile + os.replace + mode/symlink
+    semantics as ``_write_settings_atomic`` (see #106). Returns True iff the
+    write landed.
+    """
+    # #106: write THROUGH a symlink and preserve the mode.
+    # os.replace onto the link path detaches it, turning a dotfiles-managed
+    # symlink into a regular file (the user's repo silently stops tracking
+    # their settings) and dropping 0644 to mkstemp's 0600. Resolve the link
+    # first so the temp file lands in the real target's directory, and copy
+    # the destination's existing mode onto it.
+    try:
+        dest = SETTINGS_PATH.resolve(strict=False)
+    except (OSError, ValueError):
+        dest = SETTINGS_PATH
+    try:
+        dest_mode = stat.S_IMODE(os.stat(dest).st_mode)
+    except OSError:
+        dest_mode = None
+    tmp_fd, tmp_path = tempfile.mkstemp(
+        dir=str(dest.parent),
+        prefix=".settings-",
+        suffix=".json",
+    )
+    try:
+        with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
+            json.dump(settings_data, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        if dest_mode is not None:
+            try:
+                os.chmod(tmp_path, dest_mode)
+            except OSError:
+                pass
+        os.replace(tmp_path, str(dest))
+        tmp_path = None  # successfully replaced; do not unlink the destination
+    finally:
+        if tmp_path is not None:
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+    return True
+
+
 def _write_settings_atomic(settings_data):
     """Write settings.json atomically using tempfile + os.replace().
 
-    Acquires an advisory file lock to prevent concurrent writes from
-    clobbering each other (e.g., during SessionStart when multiple hooks
-    may modify settings.json).
+    Acquires the advisory ``_settings_lock()`` lease to prevent concurrent
+    writes from clobbering each other (e.g., during SessionStart when
+    multiple hooks may modify settings.json), then delegates the actual
+    tempfile + os.replace to ``_write_settings_atomic_locked``.
 
     Uses try/finally (not try/except Exception) so cleanup also runs when
     _HookTimeout (a BaseException) fires mid-write. Setting tmp_path to
@@ -19003,47 +19270,16 @@ def _write_settings_atomic(settings_data):
     write that never happened, leaving the dangling statusLine #106 exists to
     fix. Existing fire-and-forget callers can ignore the return value; the
     previous behavior was an implicit None, which is falsey either way.
+
+    Callers that already hold ``_settings_lock()`` (e.g.
+    ``_reconcile_sessionend_fossils``) MUST call
+    ``_write_settings_atomic_locked`` instead -- this primitive would
+    re-acquire the non-reentrant lease and deadlock.
     """
     with _settings_lock() as acquired:
         if not acquired:
             return False
-        # #106: write THROUGH a symlink and preserve the mode.
-        # os.replace onto the link path detaches it, turning a dotfiles-managed
-        # symlink into a regular file (the user's repo silently stops tracking
-        # their settings) and dropping 0644 to mkstemp's 0600. Resolve the link
-        # first so the temp file lands in the real target's directory, and copy
-        # the destination's existing mode onto it.
-        try:
-            dest = SETTINGS_PATH.resolve(strict=False)
-        except (OSError, ValueError):
-            dest = SETTINGS_PATH
-        try:
-            dest_mode = stat.S_IMODE(os.stat(dest).st_mode)
-        except OSError:
-            dest_mode = None
-        tmp_fd, tmp_path = tempfile.mkstemp(
-            dir=str(dest.parent),
-            prefix=".settings-",
-            suffix=".json",
-        )
-        try:
-            with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
-                json.dump(settings_data, f, indent=2, ensure_ascii=False)
-                f.write("\n")
-            if dest_mode is not None:
-                try:
-                    os.chmod(tmp_path, dest_mode)
-                except OSError:
-                    pass
-            os.replace(tmp_path, str(dest))
-            tmp_path = None  # successfully replaced; do not unlink the destination
-        finally:
-            if tmp_path is not None:
-                try:
-                    os.unlink(tmp_path)
-                except OSError:
-                    pass
-    return True
+        return _write_settings_atomic_locked(settings_data)
 
 
 # Env vars that should be auto-removed from settings.json.
@@ -19135,6 +19371,331 @@ def _remove_token_optimizer_session_end_hooks(settings: dict) -> int:
     return removed
 
 
+def _sessionend_has_current_flush(settings: dict) -> bool:
+    """True when settings.json already has a session-end-flush SessionEnd hook."""
+    hooks = settings.get("hooks") if isinstance(settings, dict) else None
+    if not isinstance(hooks, dict):
+        return False
+    session_end = hooks.get("SessionEnd")
+    if not isinstance(session_end, list):
+        return False
+    for group in session_end:
+        if not isinstance(group, dict):
+            continue
+        for hook in group.get("hooks", []) or []:
+            if isinstance(hook, dict) and _sessionend_cmd_is_flush(hook.get("command", "")):
+                return True
+    return False
+
+
+def _rewrite_collect_fossil_hook(hook: dict) -> dict:
+    """Rewrite a collect/dashboard fossil in place to HOOK_COMMAND.
+
+    Preserves type/async/timeout when present. Fossils written before
+    d1b0b53 lack async — add it so the host does not wait synchronously.
+    """
+    rewritten = dict(hook)
+    rewritten["type"] = hook.get("type") or "command"
+    rewritten["command"] = HOOK_COMMAND
+    if "async" not in rewritten:
+        rewritten["async"] = True
+    return rewritten
+
+
+def _apply_sessionend_fossil_reconcile(settings, result):
+    """Apply the #114 fossil heal mutation to ``settings`` in place.
+
+    Returns True if anything changed. The ``result`` counters (``rewritten`` /
+    ``removed`` / ``stop_removed``) are incremented for the changes made in
+    THIS call only. Idempotent: a second call on an already-healed settings
+    is a no-op and returns False.
+
+    Extracted from ``_reconcile_sessionend_fossils`` so the caller can re-read
+    fresh under the lease and re-apply (#114 Fix 6) instead of writing a
+    snapshot that was read unlocked. If a current-shape session-end-flush
+    SessionEnd hook already exists, collect/dashboard fossils are removed.
+    Otherwise each fossil is rewritten in place to HOOK_COMMAND (preserving
+    async/timeout; adding async:true when absent). Also drops Stop-event
+    collect / bare session-end-flush duplicates when the plugin already
+    provides Stop.
+    """
+    hooks = settings.get("hooks") if isinstance(settings, dict) else None
+    if not isinstance(hooks, dict):
+        return False
+
+    has_current = _sessionend_has_current_flush(settings)
+    mutated = False
+
+    session_end = hooks.get("SessionEnd")
+    if isinstance(session_end, list) and session_end:
+        new_groups = []
+        for group in session_end:
+            if not isinstance(group, dict):
+                new_groups.append(group)
+                continue
+            hook_list = group.get("hooks")
+            if not isinstance(hook_list, list):
+                new_groups.append(group)
+                continue
+            kept = []
+            for hook in hook_list:
+                if not isinstance(hook, dict):
+                    kept.append(hook)
+                    continue
+                cmd = hook.get("command", "")
+                if not _sessionend_cmd_is_collect_fossil(cmd):
+                    kept.append(hook)
+                    continue
+                if has_current:
+                    result["removed"] += 1
+                    mutated = True
+                    continue
+                kept.append(_rewrite_collect_fossil_hook(hook))
+                result["rewritten"] += 1
+                mutated = True
+                has_current = True
+            if kept:
+                group = dict(group)
+                group["hooks"] = kept
+                new_groups.append(group)
+        if mutated:
+            if new_groups:
+                hooks["SessionEnd"] = new_groups
+            else:
+                hooks.pop("SessionEnd", None)
+
+    # Stop event: drop collect fossils and extra session-end-flush entries
+    # when a plugin-provided (or already-present) Stop flush exists. The
+    # first flush-shaped Stop hook is kept; extras and collect fossils go.
+    stop = hooks.get("Stop")
+    if isinstance(stop, list) and stop:
+        plugin_provides_stop_flush = False
+        try:
+            if _is_plugin_installed():
+                plugin_hooks_path = _find_plugin_hooks_json()
+                if plugin_hooks_path:
+                    plugin_hooks = json.loads(plugin_hooks_path.read_text(encoding="utf-8"))
+                    for group in (plugin_hooks.get("hooks") or {}).get("Stop") or []:
+                        if not isinstance(group, dict):
+                            continue
+                        for hook in group.get("hooks") or []:
+                            if isinstance(hook, dict) and _sessionend_cmd_is_flush(
+                                hook.get("command", "")
+                            ):
+                                plugin_provides_stop_flush = True
+                                break
+        except (OSError, json.JSONDecodeError, TypeError, ValueError):
+            plugin_provides_stop_flush = False
+
+        saw_stop_flush = False
+        new_stop_groups = []
+        stop_mutated = False
+        for group in stop:
+            if not isinstance(group, dict):
+                new_stop_groups.append(group)
+                continue
+            hook_list = group.get("hooks")
+            if not isinstance(hook_list, list):
+                new_stop_groups.append(group)
+                continue
+            kept = []
+            for hook in hook_list:
+                if not isinstance(hook, dict):
+                    kept.append(hook)
+                    continue
+                cmd = hook.get("command", "")
+                is_collect = _sessionend_cmd_is_collect_fossil(cmd)
+                is_flush = _sessionend_cmd_is_flush(cmd)
+                if is_collect:
+                    result["stop_removed"] += 1
+                    stop_mutated = True
+                    continue
+                if is_flush:
+                    if plugin_provides_stop_flush or saw_stop_flush:
+                        result["stop_removed"] += 1
+                        stop_mutated = True
+                        continue
+                    saw_stop_flush = True
+                kept.append(hook)
+            if kept:
+                group = dict(group)
+                group["hooks"] = kept
+                new_stop_groups.append(group)
+        if stop_mutated:
+            mutated = True
+            if new_stop_groups:
+                hooks["Stop"] = new_stop_groups
+            else:
+                hooks.pop("Stop", None)
+
+    return mutated
+
+
+def _reconcile_sessionend_fossils():
+    """Rename-aware heal for the #114 collect && dashboard settings.json fossil.
+
+    Reachability (#114 round 3, honest):
+      * Plugin installs: the SessionStart ``ensure-health`` hook
+        (hooks/hooks.json) calls run_ensure_health, which calls this.
+      * NEW script installs: the updated examples/hooks-starter.json
+        SessionStart command runs ensure-health, which calls this.
+      * EXISTING script installs: their old settings.json has the fossil and
+        NO ensure-health hook, so run_ensure_health never runs for them. They
+        are reached by the FIX A self-heal in _dispatch_collect: when their
+        fossil invokes post-fix measure.py ``collect`` on the hook path, that
+        run calls this once (throttled, fail-open) and removes/rewrites the
+        fossil going forward. A separate pre-fix measure.py copy on disk is
+        NOT reached until the user updates -- no code path can reach a copy
+        that never runs this module.
+
+    If a current-shape session-end-flush SessionEnd hook already exists,
+    fossils are removed. Otherwise each fossil is rewritten in place to
+    HOOK_COMMAND (preserving async/timeout; adding async:true when absent).
+    Also drops Stop-event collect / bare session-end-flush duplicates when
+    the plugin already provides Stop. Atomic, backed up, fail-open. Returns a
+    result dict so tests can assert the decision.
+
+    #114 Fix 6 (round 3): the initial read is unlocked (a cheap probe to
+    decide whether any heal work exists, avoiding lease/backup churn when
+    there is none). Once work is found, ``_settings_lock()`` is held across
+    fresh-read + re-apply + atomic-write as ONE critical section, so a
+    concurrent writer (another hook, the user, a settings sync) cannot land
+    between the fresh read and the write and be clobbered -- the previous
+    code re-read OUTSIDE the lease and only _write_settings_atomic acquired
+    it internally, leaving a lost-update window. The write uses
+    ``_write_settings_atomic_locked``, which does NOT reacquire the lease
+    (the lease is non-reentrant; reacquiring it here would deadlock). A
+    denied lease or a bad re-read is a silent no-op (fail-open): the fossil
+    persists, which is recoverable; an overwritten settings.json is not.
+    """
+    result = {"rewritten": 0, "removed": 0, "stop_removed": 0, "reason": "ok"}
+    try:
+        settings, _, ok = _read_settings_json_checked()
+        if not ok:
+            result["reason"] = "settings_unreadable"
+            return result
+        if not settings:
+            result["reason"] = "no_settings"
+            return result
+        if not isinstance(settings.get("hooks"), dict):
+            result["reason"] = "no_hooks"
+            return result
+
+        # Unlocked probe: decide whether any heal work exists without taking
+        # the lease or writing a backup. `settings` is mutated in place here
+        # but discarded after the decision -- the authoritative mutation is
+        # re-applied to a fresh read under the lease below.
+        if not _apply_sessionend_fossil_reconcile(settings, result):
+            result["reason"] = "nothing_to_do"
+            return result
+
+        # #114 Fix 6 (round 3): hold _settings_lock() across fresh-read +
+        # re-apply + atomic-write as ONE critical section. The previous code
+        # re-read OUTSIDE the lease and only _write_settings_atomic acquired
+        # it internally, so a concurrent writer could land between the fresh
+        # read and the lease acquisition and be clobbered. The write uses
+        # _write_settings_atomic_locked, which performs the tempfile+replace
+        # WITHOUT reacquiring _settings_lock() (the lease is non-reentrant;
+        # reacquiring it here would deadlock). A denied lease or bad re-read
+        # is fail-open (the fossil stays; recoverable) and retries on the
+        # next hook fire.
+        with _settings_lock() as acquired:
+            if not acquired:
+                result["reason"] = "write_skipped"
+                return result
+
+            # Backup the on-disk state we are about to overwrite, taken UNDER
+            # the lease so it reflects exactly the pre-mutation file (a
+            # backup taken outside the lease could capture a state a
+            # concurrent writer already superseded).
+            backup_dir = CLAUDE_DIR / "_backups" / "token-optimizer"
+            try:
+                backup_dir.mkdir(parents=True, exist_ok=True)
+                ts = datetime.now().strftime("%Y%m%d-%H%M%S")
+                backup_path = backup_dir / f"settings.json.pre-fossil-reconcile-{ts}"
+                if SETTINGS_PATH.exists():
+                    import shutil
+                    shutil.copy2(str(SETTINGS_PATH), str(backup_path))
+            except OSError:
+                pass
+
+            # Fresh read UNDER the lease; reset counters so they reflect only
+            # this re-application, not the unlocked probe.
+            fresh, _, read_ok = _read_settings_json_checked()
+            result["rewritten"] = 0
+            result["removed"] = 0
+            result["stop_removed"] = 0
+            if not read_ok or not fresh:
+                result["reason"] = "write_skipped"
+                return result
+            if not isinstance(fresh.get("hooks"), dict):
+                result["reason"] = "no_hooks"
+                return result
+            if not _apply_sessionend_fossil_reconcile(fresh, result):
+                result["reason"] = "nothing_to_do"
+                return result
+            if not _write_settings_atomic_locked(fresh):
+                result["reason"] = "write_skipped"
+                return result
+        return result
+    except Exception:
+        result["reason"] = "fail_open"
+        return result
+
+
+def _maybe_self_heal_sessionend_fossils_on_hook():
+    """Hook-path self-heal for the #114 fossil (#114 round 3, FIX A).
+
+    The SessionStart ``ensure-health`` hook reaches plugin installs and NEW
+    script installs (via the updated examples/hooks-starter.json). An EXISTING
+    script install has an old settings.json with the ``collect && dashboard``
+    fossil and NO ``ensure-health`` hook, so ``run_ensure_health`` never runs
+    for it and ``_reconcile_sessionend_fossils`` is unreachable from there.
+    The fossil's OWN run closes that gap: when post-fix measure.py runs
+    ``collect`` on the hook path, this opportunistically calls
+    ``_reconcile_sessionend_fossils`` once, so the fossil's own execution
+    removes/rewrites it in settings.json going forward -- reaching the
+    population the SessionStart hook cannot.
+
+    Throttled to once per 24h via the shared ``last_hook_heal_check`` config
+    flag (the same flag run_ensure_health uses), so it does not run on every
+    hook fire. Fail-open and time-bounded: any error is swallowed so a
+    reconcile failure can never affect the hook flush, and the reconcile runs
+    under its own 10s HookDeadline so a stalled settings write cannot hold the
+    hook's stdout pipe open (os._exit(0) on expiry EOFs the pipe). A lease miss
+    (``reason == "write_skipped"``) leaves the flag untouched so the next
+    hook fire retries; any other outcome (healed, nothing-to-do,
+    unreadable) advances the flag to suppress redundant retries for 24h.
+
+    Never raises. Called from ``_dispatch_collect`` AFTER the collect flush
+    and its 20s budget are cleared, so it never delays or blocks the flush.
+    """
+    # Bound the ENTIRE self-heal with one short deadline, installed before the
+    # first filesystem touch (the throttle read) and cleared only after the
+    # last (the throttle write). Every step here -- _read_config_flag, the
+    # reconcile's settings read/backup/write, and _write_config_flag's own
+    # dir-create/lease/temp-write/os.replace -- is synchronous I/O that, on a
+    # stalled filesystem, would otherwise hold the hook's stdout pipe open
+    # unbounded and re-wedge the very hang #114 fixes (the collect budget was
+    # already cleared by the caller). HookDeadline os._exit(0)s on expiry, so
+    # the process exits and the pipe EOFs no matter WHICH step stalls; the flag
+    # stays unadvanced so the heal retries on the next hook fire.
+    deadline = _install_hook_budget(10)
+    try:
+        last_check = _read_config_flag("last_hook_heal_check", 0)
+        now = int(time.time())
+        if now - int(last_check or 0) <= 86400:  # 24h
+            return
+        fossil = _reconcile_sessionend_fossils()
+        # write_skipped = lease denied or fresh read failed -> retry next fire.
+        if fossil.get("reason", "ok") != "write_skipped":
+            _write_config_flag("last_hook_heal_check", now)
+    except Exception:
+        pass
+    finally:
+        _clear_hook_budget(deadline)
+
+
 def setup_hook(dry_run=False, uninstall=False):
     """Install or uninstall the SessionEnd hook for automatic usage collection.
 
@@ -19224,14 +19785,16 @@ def setup_hook(dry_run=False, uninstall=False):
     hooks = settings["hooks"]
 
     if upgrading:
-        # Replace old collect-only hook with new collect+dashboard hook
+        # Replace the collect/dashboard fossil (#114) with session-end-flush.
         session_end = hooks.get("SessionEnd", [])
         if isinstance(session_end, list):
             for entry in session_end:
                 hook_list = entry.get("hooks", []) if isinstance(entry, dict) else []
                 for i, hook in enumerate(hook_list):
                     cmd = hook.get("command", "") if isinstance(hook, dict) else ""
-                    if "measure.py" in cmd and "collect" in cmd:
+                    if _sessionend_cmd_is_collect_fossil(cmd) or (
+                        "measure.py" in cmd and "collect" in cmd
+                    ):
                         hook_list[i] = new_hook
                         break
     elif "SessionEnd" not in hooks:
@@ -19333,7 +19896,7 @@ DAEMON_LABEL = (
     else "com.token-optimizer.dashboard"
 )
 DAEMON_PORT = _DAEMON_PORT_BY_RUNTIME.get(_DAEMON_RUNTIME, 24842)
-LAUNCH_AGENTS_DIR = Path.home() / "Library" / "LaunchAgents"
+LAUNCH_AGENTS_DIR = _safe_home() / "Library" / "LaunchAgents"
 PLIST_PATH = LAUNCH_AGENTS_DIR / f"{DAEMON_LABEL}.plist"
 DAEMON_LOG_DIR = SNAPSHOT_DIR / "logs"
 DAEMON_TOKEN_PATH = SNAPSHOT_DIR / "daemon-token"  # 0600, per-install CSRF secret
@@ -20351,6 +20914,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                         [sys.executable, target, step, "--quiet"],
                         capture_output=True, text=True, timeout=REGEN_STEP_TIMEOUT,
                         creationflags=_NO_WINDOW,
+                        # A human pressed Regenerate and is waiting: mark it
+                        # INTERACTIVE so the child is not killed by the 20s hook
+                        # budget (Bug B). The daemon's own REGEN_STEP_TIMEOUT is
+                        # the real, saner cap here.
+                        env={{**os.environ, "TOKEN_OPTIMIZER_INTERACTIVE": "1"}},
                     )
                     if r.returncode != 0:
                         msg = (r.stderr or r.stdout or "").strip()[:300] or ("%s exited %d" % (step, r.returncode))
@@ -31785,6 +32353,59 @@ def _install_hook_budget(seconds=8):
     return HookDeadline(seconds).start()
 
 
+def _running_under_hook():
+    """True when this process was launched by a hook runner, not a CLI user.
+
+    Used by ``_dispatch_collect`` / ``_dispatch_dashboard`` to arm the 20s
+    HookDeadline ONLY on the hook/fossil path (#114 Fix 4). The regression:
+    the budget was unconditional, so an interactive ``collect --rebuild`` on a
+    large history that needs >20s got ``os._exit(0)``-ed mid-transaction ->
+    SQLite rolled back -> "needs rebuild" stayed true -> every later run
+    wedged, silently exiting 0.
+
+    Detection (any one):
+      * ``--hook`` passed explicitly on the command line (deterministic flag
+        for tests and explicit hook launches).
+      * ``TOKEN_OPTIMIZER_HOOK`` env var set (``1``/``true``/``yes``/``on``),
+        so a launcher can mark the hook context without changing argv.
+      * stdin is NOT a tty. Hook runners (Claude Code, Codex) pipe a JSON
+        payload on stdin; an interactive terminal run has a tty on stdin.
+        This is what catches the raw fossil command shape, which invokes
+        measure.py directly without ``--hook`` or the env marker.
+
+    When stdin cannot be probed (closed/redirected in ways ``isatty`` can't
+    handle), fail toward the bounded path -- the safer default for a process
+    holding a hook stdout pipe. An interactive terminal run keeps its tty and
+    is left unbounded.
+    """
+    # A user-initiated open (the token-dashboard skill, the daemon's manual
+    # "Regenerate" button, the detached self-heal below) sets this to declare an
+    # INTERACTIVE context. It wins over the non-tty heuristic, which otherwise
+    # misreads the skill's piped-stdin invocation as a hook and lets the 20s
+    # budget kill a heavy rebuild -- Bug B: the dashboard then never regenerates
+    # for a large history and never self-heals ("it didn't regenerate").
+    if os.environ.get("TOKEN_OPTIMIZER_INTERACTIVE", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+        "on",
+    ):
+        return False
+    if "--hook" in sys.argv:
+        return True
+    if os.environ.get("TOKEN_OPTIMIZER_HOOK", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+        "on",
+    ):
+        return True
+    try:
+        return not sys.stdin.isatty()
+    except (ValueError, OSError, AttributeError):
+        return True
+
+
 def _clear_hook_budget(deadline):
     """Cancel a normally completed hook's watchdog."""
     if deadline is not None:
@@ -34562,9 +35183,17 @@ def runway_snapshot(days=30, now=None):
     """
     try:
         meters = _keepwarm_read_meters(now=now)
-        if not meters.get("available"):
-            return None
-        meter_stale = bool(meters.get("stale"))
+        # The live meter feeds ONLY the per-window bars. The headline throughput
+        # multiplier and the weekly savings come from the savings ledger, not the
+        # meter, so an UNAVAILABLE meter (missing/contentless rate-limits file)
+        # must NOT vanish the whole card. It drops to empty windows (the renderer
+        # shows a "meter refreshing" note), exactly like a stale meter. Bug A: the
+        # old `if not available: return None` killed the entire card -- multiplier
+        # and savings included -- the moment the meter file was gone, which is the
+        # "section disappeared and never came back" report. The window loop below
+        # already skips a None percentage, so an unavailable meter yields [].
+        meter_available = bool(meters.get("available"))
+        meter_stale = bool(meters.get("stale")) or not meter_available
 
         # --- context lever: measured, never estimated ---
         consumed = saved = 0
@@ -34603,36 +35232,53 @@ def runway_snapshot(days=30, now=None):
         if mult < 1.02:
             return None
 
-        # --- USD-per-window: reuse the metered savings ledger ---
-        # The dollar figure reuses the savings surface that already exists
-        # (_get_merged_savings): context tokens_saved priced at the input rate
-        # (total_cost_usd, metered) + realized model-routing savings
-        # (model_routing.realized_cost_usd, estimated counterfactual). We do NOT
-        # invent a window-%->USD conversion and do NOT re-derive USD from the
-        # runway multipliers (context_mult/routing_mult) -- that would re-multiply
-        # savings already counted in the ledger and double-count the same dollars.
-        # Apportion by span: the ledger is cumulative over `days`, so the share
-        # attributable to a window is its span as a fraction of the ledger window.
-        # The two pools are disjoint (tokens never sent vs cheaper model for the
-        # same tokens), so summing them is not a double-count -- this mirrors
-        # _savings_since_install's measured = total_cost_usd + realized_cost_usd.
-        saved_context_usd = 0.0
-        saved_routing_usd = 0.0
-        try:
-            merged = _get_merged_savings(days=days)
-            saved_context_usd = float(merged.get("total_cost_usd", 0.0) or 0.0)
-            mr = merged.get("model_routing") or {}
-            saved_routing_usd = float(mr.get("realized_cost_usd", 0.0) or 0.0)
-        except Exception:
-            pass
-        saved_total_usd = saved_context_usd + saved_routing_usd
-        ledger_span_h = max(days, 1) * 24.0
-        # Measured-vs-estimated boundary: context $ is metered from actual
-        # tokens_saved; routing $ is an estimated counterfactual (baseline mix
-        # vs current). The proxy disclosure below carries this through to the
-        # surface so a bare number is never printed without its honesty label.
-        saved_usd_tier = ("estimated" if saved_routing_usd > 0
-                          else ("measured" if saved_context_usd > 0 else None))
+        # --- USD-per-window: API-credit OVERAGE over each window's OWN real span ---
+        # The dollar answers the user's question directly: "if I had kept working
+        # WITHOUT Token Optimizer and hit my limits, what would the SAME work cost
+        # me in API-credit overage?" So each window is priced over ITS OWN span --
+        # the weekly window over the last 7 days, not a time-slice of a longer
+        # ledger. The old code prorated a 30-day ledger by span (168/720), which is
+        # not "what you saved this week", just 7/30 of a month. Now we ask the
+        # metered savings ledger for exactly the window's span.
+        #
+        # The figure reuses _get_merged_savings for that span: context tokens_saved
+        # priced at input rate (total_cost_usd, metered) + realized model-routing
+        # savings (model_routing.realized_cost_usd, an estimated counterfactual that
+        # ALREADY blends output rates, so the expensive output-token delta is
+        # counted). The two pools are disjoint (tokens never sent vs cheaper model
+        # for the same tokens), so summing is not a double-count. Never re-derived
+        # from context_mult/routing_mult -- that would double-count the ledger.
+        #
+        # Sub-day windows (5h) have NO honest figure: the savings ledger is
+        # day-granular, so "dollars saved in the last 5 hours" cannot be computed
+        # without inventing a proration. Those windows carry no dollar line (None)
+        # and show only their headroom bars.
+        _overage_cache = {}
+
+        def _window_overage_usd(span_h):
+            """(usd, tier) of API-credit overage avoided over this window's span,
+            or (None, None) when the span is sub-day or the ledger is empty."""
+            if span_h < 24:
+                return None, None
+            wdays = max(1, int(round(span_h / 24.0)))
+            if wdays not in _overage_cache:
+                ctx = rt = 0.0
+                try:
+                    wm = _get_merged_savings(days=wdays)
+                    ctx = float(wm.get("total_cost_usd", 0.0) or 0.0)
+                    rt = float((wm.get("model_routing") or {}).get("realized_cost_usd", 0.0) or 0.0)
+                except Exception:
+                    pass
+                _overage_cache[wdays] = (ctx, rt)
+            ctx, rt = _overage_cache[wdays]
+            total = ctx + rt
+            if total <= 0:
+                return None, None
+            # Measured-vs-estimated boundary: context $ is metered from actual
+            # tokens_saved; routing $ is an estimated counterfactual. Estimated
+            # wins the label whenever routing contributes.
+            tier = "estimated" if rt > 0 else "measured"
+            return round(total, 2), tier
 
         windows = []
         meter_age_s = meters.get("age_s")
@@ -34650,17 +35296,7 @@ def runway_snapshot(days=30, now=None):
             counterfactual = min(100.0, used * mult)
             head_now = max(0.0, 100.0 - used)
             head_cf = max(0.0, 100.0 - counterfactual)
-            # USD attributable to this window's span, from the metered savings
-            # ledger. None when there is nothing to show so the panel
-            # degrades gracefully (no $-0 / NaN). Derived from the ledger, NOT
-            # from context_mult/routing_mult -- the no-double-count invariant.
-            # Cap the apportionment fraction at 1.0 so a caller passing
-            # days < span_h/24 (e.g. days=1 for the 7d window) cannot produce a
-            # window_saved_usd larger than the cumulative ledger. Without this
-            # guard days=1 would give the 7d window 168/24 = 7x the ledger total.
-            effective_span_h = min(span_h, ledger_span_h)
-            window_saved_usd = (round(saved_total_usd * effective_span_h / ledger_span_h, 2)
-                                if saved_total_usd > 0 else None)
+            window_saved_usd, window_usd_tier = _window_overage_usd(span_h)
             windows.append({
                 "key": key, "label": label, "span_hours": span_h,
                 "used_pct": round(used, 1),
@@ -34672,10 +35308,30 @@ def runway_snapshot(days=30, now=None):
                 "headroom_multiple": round(head_now / head_cf, 1) if head_cf > 0.5 else None,
                 "would_be_capped": head_cf <= 0.5,
                 "saved_usd": window_saved_usd,
-                "saved_usd_tier": saved_usd_tier,
+                "saved_usd_tier": window_usd_tier,
             })
-        if not windows:
-            return None
+        # REGRESSION FIX (the "Your plan goes further" card vanished after a quiet
+        # week): the per-window guard above drops the 5h window once the meter is
+        # >5h old and the 7d window once it is >7d old, so a keep-warm meter that
+        # has not refreshed for over a week empties `windows`. The old
+        # `if not windows: return None` then dropped the ENTIRE card -- yet the
+        # throughput multiplier (extra_work_pct) and the weekly savings do NOT
+        # depend on the live meter; they come from the 30d/7d savings ledger. Keep
+        # the card alive with empty windows so the headline + savings still show;
+        # the renderer omits the per-window bars and shows a "meter refreshing"
+        # note. Populate the weekly $ spine directly since the 7d window that
+        # normally fills _overage_cache[7] may have been dropped above.
+        if not windows and 7 not in _overage_cache:
+            _window_overage_usd(168)
+
+        # Top-level spine reflects the WEEKLY (7d) ledger -- the dollar the card
+        # actually shows -- so the tier chip matches the number beside it. The 7d
+        # merged call is already cached above; re-read the same components.
+        _wk_ctx, _wk_rt = _overage_cache.get(7, (0.0, 0.0))
+        saved_context_usd = _wk_ctx
+        saved_routing_usd = _wk_rt
+        saved_usd_tier = ("estimated" if saved_routing_usd > 0
+                          else ("measured" if saved_context_usd > 0 else None))
 
         return {
             "available": True,
@@ -34687,20 +35343,25 @@ def runway_snapshot(days=30, now=None):
             "tokens_consumed": int(consumed),
             "tokens_saved": int(saved),
             "windows": windows,
-            # USD spine: metered context $ + estimated routing $, reused
-            # from the savings ledger. Apportioned per window above. Exposed at
-            # the top level so the surface and tests can assert the no-double-
-            # count invariant (USD traces to these, not to the multipliers).
+            # USD spine: metered context $ + estimated routing $ over the WEEKLY
+            # (7d) ledger -- the same span the weekly card shows. Exposed at the top
+            # level so the surface and tests can assert the no-double-count invariant
+            # (USD traces to the ledger, not to the throughput multipliers).
             "saved_usd_context": round(saved_context_usd, 2),
             "saved_usd_routing": round(saved_routing_usd, 2),
             "saved_usd_tier": saved_usd_tier,
-            # The per-window saved_usd is a pro-rata slice of the N-day
-            # ledger at the recent rate, NOT savings realized within that
-            # window. Expose period_days so the surface can label it honestly.
+            # period_days scopes the throughput MULTIPLIERS (context/routing), not
+            # the per-window dollars: each window now prices overage over its OWN
+            # span (weekly = 7d), so the dollars are window-real, not a slice.
             "period_days": days,
             "meter_age_s": meters.get("age_s"),
             "meter_ts": meters.get("ts"),
             "meter_stale": meter_stale,
+            # Meter's real availability (missing/contentless rate-limits file ->
+            # False). Distinct from top-level `available` (which means "the card
+            # has a story"): the card stands on the ledger-based multiplier even
+            # when meter_available is False -- only the per-window bars need it.
+            "meter_available": meter_available,
             # Single authoritative methodology note (GitHub: dashboard wall-of-text
             # fix). Folds the measured-vs-estimated boundary in here so the HTML no
             # longer repeats it. Keep the phrases "metered savings ledger" and "not
@@ -38466,6 +39127,21 @@ def run_ensure_health():
             last_check = _read_config_flag("last_hook_heal_check", 0)
             now = int(time.time())
             if now - int(last_check or 0) > 86400:  # 24h
+                # #114 Layer 2: rewrite/remove the collect&&dashboard fossil in
+                # BOTH install modes. Exact-identity dedup cannot match the
+                # renamed shape, and setup_all_hooks is additive-only.
+                try:
+                    fossil = _reconcile_sessionend_fossils()
+                    rewritten = fossil.get("rewritten", 0)
+                    removed_fossils = fossil.get("removed", 0) + fossil.get("stop_removed", 0)
+                    if rewritten or removed_fossils:
+                        print(
+                            "  [Token Optimizer] Reconciled SessionEnd fossil hook(s) in "
+                            f"settings.json (rewritten={rewritten}, removed={removed_fossils}). "
+                            "Restart Claude Code to fully apply."
+                        )
+                except Exception:
+                    pass
                 if _is_plugin_installed():
                     cleanup_result = _cleanup_duplicate_plugin_hooks_from_settings(dry_run=False)
                     removed = cleanup_result.get("removed", 0)
@@ -39468,47 +40144,18 @@ if __name__ == "__main__":
     elif args[0] == "compare":
         compare_snapshots()
     elif args[0] == "dashboard":
-        cp = None
-        serve = False
-        serve_port = 8080
-        serve_host = "127.0.0.1"
-        for i, a in enumerate(args):
-            if a == "--coord-path" and i + 1 < len(args):
-                cp = args[i + 1]
-            elif a == "--serve":
-                serve = True
-            elif a == "--host" and i + 1 < len(args):
-                serve_host = args[i + 1]
-                serve = True
-            elif a == "--port" and i + 1 < len(args):
-                try:
-                    serve_port = int(args[i + 1])
-                except ValueError:
-                    print(f"[Error] Invalid --port value: {args[i + 1]}")
-                    sys.exit(1)
-                serve = True
-        if not cp:
-            # Standalone mode: Trends + Health only
-            days = 30
-            quiet = "--quiet" in args or "-q" in args
-            for i, a in enumerate(args):
-                if a == "--days" and i + 1 < len(args):
-                    try:
-                        days = int(args[i + 1])
-                    except ValueError:
-                        pass
-            out = generate_standalone_dashboard(days=days, quiet=quiet)
-            if out and serve:
-                _serve_dashboard(out, port=serve_port, host=serve_host)
-            elif out and not quiet:
-                # v5.3.6: prefer the live bookmarkable URL over file://
-                # so /token-dashboard lands on the same address the user
-                # already bookmarked.
-                _open_dashboard(fallback_filepath=out)
-            sys.exit(0 if out else 1)
-        out = generate_dashboard(cp)
-        if serve:
-            _serve_dashboard(out, port=serve_port, host=serve_host)
+        _dispatch_dashboard(args)
+    elif args[0] == "runway-json":
+        # Machine-readable runway snapshot so a non-Python dashboard (the OpenClaw
+        # / OpenCode TypeScript surfaces) can render the "Your plan goes further"
+        # card WITHOUT reimplementing runway_snapshot's multiplier/savings logic --
+        # keeping this the single source of truth. Prints the dict as JSON, or {}
+        # when there is no story. Never raises -> prints {} on any error.
+        try:
+            _rj = runway_snapshot()
+            print(json.dumps(_rj if _rj else {}))
+        except Exception:
+            print("{}")
     elif args[0] == "conversation":
         # Per-turn token breakdown for a session
         output_json = "--json" in args
@@ -39565,16 +40212,7 @@ if __name__ == "__main__":
             print("\n  Set with: measure.py pricing-tier <tier-name>")
             print()
     elif args[0] == "collect":
-        days = 90
-        quiet = "--quiet" in args or "-q" in args
-        for i, a in enumerate(args):
-            if a == "--days" and i + 1 < len(args):
-                try:
-                    days = int(args[i + 1])
-                except ValueError:
-                    pass
-        rebuild = "--rebuild" in args
-        collect_sessions(days=days, quiet=quiet, rebuild=rebuild)
+        _dispatch_collect(args)
     elif args[0] == "health":
         session_health()
     elif args[0] == "health-selfcheck":
@@ -40572,14 +41210,22 @@ if __name__ == "__main__":
                 _buf = _io.StringIO()
                 with _redirect_stdout(_buf):
                     _run_compact_restore()
-                # Fable #1 follow-up (future-proof, no live impact today): the emitted
-                # event is chosen statically because Cowork fires this only from the
-                # UserPromptSubmit-registered entry and desktop/codex only from
-                # SessionStart. If #40495 is ever fixed and SessionStart starts firing in
-                # Cowork, derive the event from stdin hook_event_name instead so the
-                # envelope hookEventName always matches the firing hook.
+                # Derive the envelope event from the firing hook's stdin payload so
+                # the emitted hookEventName always matches the hook that actually
+                # fired. Previously this was hardcoded from is_cowork()
+                # ("UserPromptSubmit" if cowork else "SessionStart"), which assumed
+                # is_cowork() is accurate on every host. It is not: on the local CLI,
+                # hook subprocesses inherit the harness AI_AGENT marker
+                # (claude-code_*_harness), so is_cowork() false-positives and the
+                # SessionStart:compact hook emits a UserPromptSubmit envelope, which
+                # Claude Code rejects ("expected SessionStart but got
+                # UserPromptSubmit"), discarding the post-compaction recovery context.
+                # Reading hook_event_name from stdin removes the dependency on runtime
+                # detection being right. Falls back to SessionStart if the field is
+                # absent (older harnesses). Credit: @danikdanik (PR #142).
                 _emit_additional_context(
-                    _buf.getvalue(), event="UserPromptSubmit" if _cw else "SessionStart")
+                    _buf.getvalue(),
+                    event=str(hook_input.get("hook_event_name") or "SessionStart"))
             else:
                 _run_compact_restore()
         except _HookTimeout:

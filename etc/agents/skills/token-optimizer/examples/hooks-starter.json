@@ -20,6 +20,16 @@
     ],
     "SessionStart": [
       {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "for b in bash /bin/bash /usr/bin/bash /usr/local/bin/bash /opt/homebrew/bin/bash; do command -v \"$b\" >/dev/null 2>&1 && exec \"$b\" \"${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/token-optimizer}/hooks/python-launcher.sh\" '$MEASURE_PY' ensure-health --once-mark; done; exit 0",
+            "async": true,
+            "timeout": 15
+          }
+        ]
+      },
+      {
         "matcher": "compact",
         "hooks": [
           {
@@ -52,7 +62,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "for b in bash /bin/bash /usr/bin/bash /usr/local/bin/bash /opt/homebrew/bin/bash; do command -v \"$b\" >/dev/null 2>&1 || continue; \"$b\" \"${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/token-optimizer}/hooks/python-launcher.sh\" '$MEASURE_PY' collect --quiet && $(command -v python3 || command -v python || echo py -3) '$MEASURE_PY' dashboard --quiet; exit; done; exit 0",
+            "command": "for b in bash /bin/bash /usr/bin/bash /usr/local/bin/bash /opt/homebrew/bin/bash; do command -v \"$b\" >/dev/null 2>&1 && exec \"$b\" \"${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/token-optimizer}/hooks/python-launcher.sh\" '$MEASURE_PY' session-end-flush --trigger end; done; exit 0",
             "async": true
           }
         ]

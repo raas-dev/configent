@@ -174,9 +174,33 @@ def _warn_once(msg: str) -> None:
     print(msg, file=sys.stderr)
 
 
+def _safe_home() -> Path:
+    """``Path.home()`` that never raises.
+
+    ``Path.home()`` raises RuntimeError when it cannot resolve a home directory
+    -- a Windows subprocess launched with no USERPROFILE, a stripped
+    container/CI env. A hook must DEGRADE, not crash, so fall back to the
+    platform home env vars and finally a temp dir. Real Claude Code sessions
+    always have a home; this only bites stripped envs, where any writable dir
+    keeps the hook alive instead of raising through claude_home()/runtime_home().
+    """
+    try:
+        return Path.home()
+    except (RuntimeError, OSError):
+        for key in ("USERPROFILE", "HOME"):
+            val = os.environ.get(key, "").strip()
+            if val:
+                return Path(val)
+        drive = os.environ.get("HOMEDRIVE", "").strip()
+        tail = os.environ.get("HOMEPATH", "").strip()
+        if drive and tail:
+            return Path(drive + tail)
+        return Path(os.environ.get("TEMP") or os.environ.get("TMP") or "/tmp")
+
+
 def _home_root() -> Path:
     """Return the resolved user home used for env-path confinement."""
-    return Path.home().resolve(strict=False)
+    return _safe_home().resolve(strict=False)
 
 
 def _is_safe_home_dir(path: Path) -> bool:
@@ -890,7 +914,7 @@ def claude_home() -> Path:
     rejection for traversal safety) and only falls back to ~/.claude when the
     override is unset or unusable.
     """
-    fallback = Path.home() / ".claude"
+    fallback = _safe_home() / ".claude"
     raw = os.environ.get(_CLAUDE_CONFIG_DIR_ENV, "").strip()
     if not raw:
         return fallback
@@ -910,12 +934,12 @@ def claude_home() -> Path:
 
 def codex_home() -> Path:
     """Return Codex's home directory, safely honoring CODEX_HOME when valid."""
-    return _safe_home_from_env(_CODEX_HOME_ENV, Path.home() / ".codex")
+    return _safe_home_from_env(_CODEX_HOME_ENV, _safe_home() / ".codex")
 
 
 def hermes_home() -> Path:
     """Return Hermes's home directory, safely honoring HERMES_HOME when valid."""
-    return _safe_home_from_env(_HERMES_HOME_ENV, Path.home() / ".hermes")
+    return _safe_home_from_env(_HERMES_HOME_ENV, _safe_home() / ".hermes")
 
 
 def copilot_home(*, mnt_root: Path | None = None) -> Path:
@@ -942,7 +966,7 @@ def copilot_home(*, mnt_root: Path | None = None) -> Path:
     test-injection parameter (never set in production) so tests can substitute a
     temp dir for ``/mnt`` on non-Linux hosts.
     """
-    fallback = Path.home() / ".copilot"
+    fallback = _safe_home() / ".copilot"
 
     # 1. TO's own namespaced override wins (no collision with Copilot's config).
     if os.environ.get(_TO_COPILOT_HOME_ENV, "").strip():
@@ -973,7 +997,7 @@ def _xdg_base(env_var: str, default_rel: str) -> Path:
         candidate = Path(raw).expanduser()
         if candidate.is_absolute():
             return candidate
-    return Path.home() / default_rel
+    return _safe_home() / default_rel
 
 
 def opencode_config_home() -> Path:

@@ -208,6 +208,16 @@ def main():
     if tool_name != "Bash":
         return
 
+    # Issue #141: in worktree-isolated sessions (cwd under .claude/worktrees/),
+    # Claude Code's isolation guard statically parses every Bash command and
+    # REFUSES anything it can't classify as "simple" — the bash_compress
+    # for-loop wrapper is refused as "too complex", so every whitelisted
+    # command fails there. Skip the rewrite entirely: a rewrite is a guaranteed
+    # refusal, so losing compression inside worktrees is the correct tradeoff.
+    session_cwd = str(payload.get("cwd") or "").replace("\\", "/")
+    if "/.claude/worktrees/" in session_cwd:
+        return
+
     tool_input = payload.get("tool_input", {})
     command = tool_input.get("command", "")
     if not command:

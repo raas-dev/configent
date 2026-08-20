@@ -1699,13 +1699,26 @@ def main():
         if compressed != raw_output and len(raw_output) > 500:
             try:
                 sys.path.insert(0, str(Path(__file__).resolve().parent))
-                from archive_result import archive_original, build_archive_pointer
+                from archive_result import archive_entry_exists, archive_original, build_archive_pointer
                 _session_id = os.environ.get("CLAUDE_SESSION_ID", "")
                 _archive_key = hashlib.sha256(
                     f"{_session_id}|{command_str}|{time.time()}|{os.urandom(4).hex()}".encode("utf-8", errors="replace")
                 ).hexdigest()[:16]
                 if archive_original(raw_output, _session_id, _archive_key, "Bash") is not None:
-                    compressed = build_archive_pointer(compressed, len(raw_output), _archive_key)
+                    # Re-check the entry survived any concurrent retention prune
+                    # before we emit a pointer that would strand the model.
+                    if archive_entry_exists(_session_id, _archive_key):
+                        compressed = build_archive_pointer(compressed, len(raw_output), _archive_key)
+                    else:
+                        # Entry was pruned before we could point to it. The lossy
+                        # `compressed` preview has no recovery path once the archive
+                        # copy is gone, so serving it here would be silent, permanent
+                        # data loss. raw_output is still in scope untouched -- serve
+                        # that instead, matching the guarantee archive_result.py /
+                        # read_cache.py already give on the same post-prune re-check
+                        # (they fall back to the full original rather than a preview).
+                        compressed = raw_output
+                        _archive_key = None
                 else:
                     _archive_key = None
             except Exception:

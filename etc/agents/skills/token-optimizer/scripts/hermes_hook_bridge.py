@@ -204,6 +204,20 @@ def run_rollup(session_id: str = "", platform: str = "hermes", reason: str = "")
         return
     if _proc is None:
         logger.warning("[hermes_hook_bridge] run_rollup spawn_detached returned None")
+    # Parity Gap 2: also refresh the dashboard on session-end so a Hermes user
+    # sees current data without a manual open. Detached + INTERACTIVE=1 so it runs
+    # UNBOUNDED off the hot path (never blocks, never truncates on the hook budget).
+    try:
+        spawn_detached(
+            [sys.executable, str(measure_py), "dashboard", "--quiet"],
+            env={**os.environ, "TOKEN_OPTIMIZER_RUNTIME": "hermes",
+                 "TOKEN_OPTIMIZER_INTERACTIVE": "1",
+                 "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception as exc:
+        logger.debug("[hermes_hook_bridge] run_rollup dashboard regen error: %s", exc)
 
 
 def run_summary(session_id: str = "") -> str:

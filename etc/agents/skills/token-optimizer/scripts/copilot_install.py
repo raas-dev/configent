@@ -23,8 +23,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shlex
 import shutil
+import stat as _stat
 import sys
 from pathlib import Path
 
@@ -65,11 +67,79 @@ def _hooks_dir(root: Path) -> Path:
     return root / "hooks"
 
 
+# System install dirs: root-owned and not user-writable, so trusted by prefix --
+# exactly the launcher's _SAFE_PREFIXES. Without this, a root-owned
+# /usr/bin/python3 (or a CI hostedtoolcache Python) would fail the owned-by-euid
+# check below, which is wrong -- those are legitimate, non-hijackable installs.
+_TRUSTED_PY_PREFIXES = (
+    "/usr/bin/", "/usr/local/bin/", "/opt/homebrew/bin/", "/opt/homebrew/opt/",
+    "/home/linuxbrew/.linuxbrew/bin/", "/opt/hostedtoolcache/",
+)
+
+
+def _py_path_is_trusted(p: str) -> bool:
+    """Trusted iff the resolved interpreter is under a system prefix, OR it and
+    its dir are owned by us and not group/other-writable -- the launcher's hybrid
+    allowlist+ownership boundary (ssh/sudo/git), in Python. Pure stat, never runs
+    the target. On Windows, stat ownership is unreliable under Git-Bash, so
+    require only that the path is a real file (the launcher leans on hardcoded
+    allowlists there too)."""
+    try:
+        real = os.path.realpath(p)
+        if not os.path.isfile(real):
+            return False
+        if os.name == "nt" or not hasattr(os, "geteuid"):
+            return True
+        if real.startswith(_TRUSTED_PY_PREFIXES):
+            return True
+        euid = os.geteuid()
+        for target in (real, os.path.dirname(real)):
+            st = os.stat(target)
+            if st.st_uid != euid:
+                return False
+            if st.st_mode & (_stat.S_IWGRP | _stat.S_IWOTH):
+                return False
+        return True
+    except OSError:
+        return False
+
+
+def _resolve_safe_python() -> str:
+    """An ABSOLUTE, trusted python for the persisted Copilot hook command.
+
+    Never emit a bare "python3": that string is resolved via $PATH every time the
+    hook fires, so a hijacked PATH entry runs attacker code (the launcher's whole
+    allowlist exists to stop exactly this, and the Copilot bridge does not use the
+    launcher). Resolution order:
+      1. TOKEN_OPTIMIZER_PYTHON, if it names a trusted file (user escape hatch,
+         same env the launcher honours);
+      2. sys.executable -- the interpreter already running this installer, an
+         absolute path baked in ONCE here so the hook never does a PATH lookup;
+      3. a $PATH search, but only accepting a candidate that passes the ownership
+         gate above.
+    Raises RuntimeError rather than persist an unsafe command -- recoverable by
+    setting TOKEN_OPTIMIZER_PYTHON.
+    """
+    override = os.environ.get("TOKEN_OPTIMIZER_PYTHON", "").strip()
+    if override and _py_path_is_trusted(override):
+        return os.path.abspath(override)
+    if sys.executable and os.path.isfile(sys.executable):
+        return os.path.abspath(sys.executable)
+    for name in ("python3", "python"):
+        cand = shutil.which(name)
+        if cand and _py_path_is_trusted(cand):
+            return os.path.abspath(cand)
+    raise RuntimeError(
+        "no trusted python interpreter found for the Copilot hook; "
+        "set TOKEN_OPTIMIZER_PYTHON to an absolute python3 path and re-run install"
+    )
+
+
 def _hook_config(bridge_path: Path) -> dict:
     """The hooks file Copilot loads. Format per the official hooks reference:
     {"version": 1, "hooks": {event: [{"type": "command", "bash": ...}]}}.
     """
-    py = sys.executable or "python3"
+    py = _resolve_safe_python()
     # shlex.quote both paths: a HOME/COPILOT_HOME containing a space, $, or
     # backtick would otherwise break the bash string or inject a subcommand.
     # TOKEN_OPTIMIZER_RUNTIME is pinned so the bridge never process-scans on

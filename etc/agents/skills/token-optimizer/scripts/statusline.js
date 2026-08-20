@@ -213,12 +213,40 @@ process.stdin.on('end', () => {
     }
 
     // ---- Read quality cache ----
+    // The hooks write the quality-cache under _STATE_BASE, which is
+    // ${CLAUDE_PLUGIN_DATA}/token-optimizer (~/.claude/plugins/data/{id}/...) when
+    // that env is set (the desktop plugin hook context), else ~/.claude/token-
+    // optimizer. The statusline runs WITHOUT CLAUDE_PLUGIN_DATA, so reading only
+    // `cacheDir` (the ~/.claude fallback) missed the per-session cache the hooks
+    // wrote under plugins/data -> ContextQ/Eff showed "--" for every desktop
+    // plugin user. Search every candidate dir and take the freshest matching file.
     let q = null;
     try {
       if (safeSessionId) {
-        const sessionCache = path.join(cacheDir, `quality-cache-${safeSessionId}.json`);
-        if (fs.existsSync(sessionCache)) {
-          q = JSON.parse(fs.readFileSync(sessionCache, 'utf8'));
+        const _home = os.homedir();
+        const _candidates = [];
+        if (process.env.CLAUDE_PLUGIN_DATA) {
+          _candidates.push(path.join(process.env.CLAUDE_PLUGIN_DATA, 'token-optimizer'));
+        }
+        try {
+          const _dataRoot = path.join(_home, '.claude', 'plugins', 'data');
+          for (const d of fs.readdirSync(_dataRoot)) {
+            if (d.includes('token-optimizer')) {
+              _candidates.push(path.join(_dataRoot, d, 'token-optimizer'));
+            }
+          }
+        } catch (e) {}
+        _candidates.push(cacheDir); // ~/.claude/token-optimizer fallback (non-hook context)
+        let _best = null, _bestMtime = -1;
+        for (const c of _candidates) {
+          try {
+            const f = path.join(c, `quality-cache-${safeSessionId}.json`);
+            const st = fs.statSync(f);
+            if (st.mtimeMs > _bestMtime) { _bestMtime = st.mtimeMs; _best = f; }
+          } catch (e) {}
+        }
+        if (_best) {
+          q = JSON.parse(fs.readFileSync(_best, 'utf8'));
         }
       }
     } catch (e) {}
