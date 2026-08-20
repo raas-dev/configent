@@ -29,8 +29,7 @@ cleanup_temp_environment() {
   # Restore project's .opencode to its pre-exec state
   if [[ "$HAD_PROJECT_CONFIG" == "true" && -d "$PROJECT_CONFIG_BACKUP" ]]; then
     rm -rf "$PROJECT_CONFIG_DIR"
-    mkdir -p "$PROJECT_CONFIG_DIR"
-    cp -R "$PROJECT_CONFIG_BACKUP"/. "$PROJECT_CONFIG_DIR"/
+    mv "$PROJECT_CONFIG_BACKUP" "$PROJECT_CONFIG_DIR"
   elif [[ "$HAD_PROJECT_CONFIG" == "false" && -d "$PROJECT_CONFIG_DIR" ]]; then
     rm -rf "$PROJECT_CONFIG_DIR"
   fi
@@ -708,11 +707,12 @@ if [[ $# -gt 0 ]]; then
     # Snapshot existing project config so we can restore the original state after exec
     if [[ -e "$PROJECT_CONFIG_DIR" ]]; then
       HAD_PROJECT_CONFIG=true
-      PROJECT_CONFIG_BACKUP=$(mktemp -d) || {
+      # ponytail: mv not cp — large configs; rename is instant
+      PROJECT_CONFIG_BACKUP=$(mktemp -u) || {
         echo -e "${YELLOW}Error: Failed to create backup directory${NC}" >&2
         exit 1
       }
-      cp -R "$PROJECT_CONFIG_DIR"/. "$PROJECT_CONFIG_BACKUP"/ || {
+      mv "$PROJECT_CONFIG_DIR" "$PROJECT_CONFIG_BACKUP" || {
         echo -e "${YELLOW}Error: Failed to backup project config${NC}" >&2
         exit 1
       }
