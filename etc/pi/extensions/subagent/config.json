@@ -1,0 +1,29 @@
+{
+  "superagents": {
+    "modelTiers": {
+      "cheap": {
+        "model": "occam/glm-5.3"
+      },
+      "balanced": {
+        "model": "occam/glm-5.3"
+      },
+      "max": {
+        "model": "occam/glm-5.3"
+      }
+    },
+    "makeSuperpowersSkillsOptInOnly": false,
+    "commands": {
+      "sp-implement-parallel": {
+        "taskScheduling": "parallel",
+        "reviewCadence": "per-task",
+        "useSubagents": true,
+        "useTestDrivenDevelopment": true,
+        "useBranches": false,
+        "worktrees": {
+          "enabled": true,
+          "root": null
+        }
+      }
+    }
+  }
+}
