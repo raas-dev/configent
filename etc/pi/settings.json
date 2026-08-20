@@ -13,6 +13,7 @@
   "lastChangelogVersion": "0.80.2",
   "packages": [
     "npm:pi-ask-user",
+    "npm:pi-background-tasks",
     "npm:pi-codex-goal",
     "npm:pi-hodor",
     "npm:pi-image-tools",
@@ -20,7 +21,6 @@
     "npm:pi-mcp-adapter",
     "npm:pi-ponytail",
     "npm:pi-promptsmith",
-    "npm:pi-prompt-template-model",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
     "npm:pi-token-burden",
