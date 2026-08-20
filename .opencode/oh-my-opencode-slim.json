@@ -36,11 +36,11 @@
   "companion": {
     "enabled": false
   },
-  "preset": "minimax-plan",
+  "preset": "zai-plan",
   "presets": {
-    "minimax-plan": {
+    "zai-plan": {
       "orchestrator": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "skills": [
           "*"
         ],
@@ -49,13 +49,13 @@
         ]
       },
       "explorer": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "oracle": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "high",
         "skills": [
           "simplify"
@@ -63,7 +63,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -71,19 +71,19 @@
         ]
       },
       "designer": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "minimax-coding-plan/MiniMax-M3",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "high",
         "skills": [],
         "mcps": []
