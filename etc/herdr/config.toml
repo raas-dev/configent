@@ -120,6 +120,8 @@ prefix = "ctrl+a"
 # directory = "~/.herdr/worktrees"
 
 [ui]
+sidebar_start_collapsed = true
+
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
 
