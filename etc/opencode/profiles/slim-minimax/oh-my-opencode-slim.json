@@ -9,7 +9,7 @@
     "context7",
     "websearch",
     "gh_grep",
-   "grep_app"
+     "grep_app"
   ],
   "disabled_agents": [
     "observer"
