@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.233.0](https://github.com/raas-dev/configent/compare/1.232.3...1.233.0) (2026-08-21)
+
+### Features
+
+* **browser-harness:** background attach with per-daemon tabs ([5104fde](https://github.com/raas-dev/configent/commit/5104fde8b2ad12c03d3d623bc84b4515faf958d6))
+
+### Fixes
+
+* **opencode:** isolate child session events from pane root state ([2fcef3d](https://github.com/raas-dev/configent/commit/2fcef3d7baa5e40d68f0a54b4f68b0feb47e246a))
+* **pi:** clear terminal on shrink ([c88aa66](https://github.com/raas-dev/configent/commit/c88aa66ceec9658dc67976ae9abaa5da52b5ef86))
 ## [1.232.3](https://github.com/raas-dev/configent/compare/1.232.2...1.232.3) (2026-08-14)
 
 ### Fixes
