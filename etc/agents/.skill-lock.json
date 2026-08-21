@@ -74,25 +74,6 @@
       "installedAt": "2026-08-16T07:42:57.957Z",
       "updatedAt": "2026-08-16T07:42:57.957Z"
     },
-    "herdr": {
-      "source": "herdrdev/herdr",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/herdrdev/herdr.git",
-      "skillPath": "skills/herdr/SKILL.md",
-      "skillFolderHash": "f8bb649bb92ddc99e6af463ab9a635da98c7b129",
-      "installedAt": "2026-08-16T07:43:09.271Z",
-      "updatedAt": "2026-08-20T21:48:36.709Z"
-    },
-    "humanizer": {
-      "source": "blader/humanizer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/blader/humanizer.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "e2e92e7b4b8229253ed5c8e81dc65463fdeddda5",
-      "pluginName": "humanizer",
-      "installedAt": "2026-08-16T07:43:11.578Z",
-      "updatedAt": "2026-08-20T21:48:38.306Z"
-    },
     "intent-layer": {
       "source": "crafter-station/skills",
       "sourceType": "github",
@@ -120,15 +101,6 @@
       "skillFolderHash": "b7d3e89c61085ec0669ff42dea0ada4c56b034c3",
       "installedAt": "2026-08-16T07:43:31.721Z",
       "updatedAt": "2026-08-16T07:43:31.721Z"
-    },
-    "stop-slop": {
-      "source": "hardikpandya/stop-slop",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/hardikpandya/stop-slop.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "8da1f030185bdfe8471220585162991eaeb970e9",
-      "installedAt": "2026-08-16T07:41:13.392Z",
-      "updatedAt": "2026-08-16T07:41:13.392Z"
     },
     "token-optimizer": {
       "source": "alexgreensh/token-optimizer",
