@@ -16,7 +16,7 @@ config_path="$HOME/.config/configent"
 
 # files
 for file in auth.json settings.json keybindings.json caveman.json models.json \
-  open-tui.json mcp.json pi-vcc-config.json; do
+  open-tui.json mcp.json pi-vcc-config.json todo.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"

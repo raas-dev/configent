@@ -28,7 +28,7 @@
     "npm:pi-web-access",
     "npm:billion-context-pi",
     "npm:@jmcombs/pi-prompt-enhancer",
-    "npm:@juicesharp/rpiv-todo",
+    "npm:@gamaraan/todos-tool",
     "npm:@latentminds/pi-quotas",
     "npm:@monotykamary/pi-loop",
     "npm:@monotykamary/pi-retry",

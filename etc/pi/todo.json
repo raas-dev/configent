@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "reminders": true,
+  "remindersMax": 10,
+  "eager": "always"
+}
