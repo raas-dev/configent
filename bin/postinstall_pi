@@ -16,7 +16,7 @@ config_path="$HOME/.config/configent"
 
 # files
 for file in auth.json settings.json keybindings.json caveman.json models.json \
-  status-line.json pi-vcc-config.json; do
+  open-tui.json mcp.json pi-vcc-config.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"
@@ -63,30 +63,6 @@ fi
 mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
-
-### pi-open-tui ################################################################
-
-# open-tui.json
-if [ ! -r "$backup_path/.pi/agent/open-tui.json" ]; then
-  if [ -r "$HOME/.pi/agent/open-tui.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/open-tui.json" "$backup_path/.pi/agent/open-tui.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/open-tui.json" "$HOME/.pi/agent/open-tui.json"
-
-### pi-mcp-adapter #############################################################
-
-# mcp.json
-if [ ! -r "$backup_path/.pi/agent/mcp.json" ]; then
-  if [ -r "$HOME/.pi/agent/mcp.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/mcp.json" "$backup_path/.pi/agent/mcp.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/mcp.json" "$HOME/.pi/agent/mcp.json"
 
 ### pi-web-access ##############################################################
 
