@@ -1,13 +1,5 @@
 {
-  "mcpServers": {
-    "context-mode": {
-      "command": "npx",
-      "args": [
-        "context-mode"
-      ],
-      "directTools": true
-    }
-  },
+  "mcpServers": {},
   "settings": {
     "toolPrefix": "none",
     "mcpFooterStatus": "compact",
