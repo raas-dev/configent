@@ -1,4 +1,3 @@
-lastChangelogVersion: 14.5.6
 modelRoles:
   default: zai/glm-5.3
   smol: zai/glm-5-turbo
@@ -11,7 +10,7 @@ renderMermaid:
 checkpoint:
   enabled: true
 inspect_image:
-  enabled: true
+  mode: "on"
 calc:
   enabled: true
 commands:
@@ -20,8 +19,30 @@ commands:
   enableOpencodeUser: false
   enableOpencodeProject: false
 providers:
-  webSearch: exa
-  image: auto
+  webSearchOrder:
+    - exa
+    - perplexity
+    - gemini
+    - anthropic
+    - codex
+    - xai
+    - zai
+    - tinyfish
+    - jina
+    - kagi
+    - tavily
+    - firecrawl
+    - brave
+    - kimi
+    - parallel
+    - synthetic
+    - searxng
+    - startpage
+    - duckduckgo
+    - ecosia
+    - google
+    - mojeek
+    - public
 defaultThinkingLevel: medium
 disabledProviders:
   - cursor
@@ -38,24 +59,21 @@ task:
     - designer
   isolation:
     mode: none
-  eager: true
-  simple: default
+  eager: always
 interruptMode: immediate
 followUpMode: one-at-a-time
 startup:
   quiet: true
   checkUpdate: false
-collapseChangelog: true
+  changelogMode: summary
 github:
   enabled: true
 todo:
-  eager: false
-  reminders:
-    max: 5
+  eager: default
+  remindersMax: 5
 async:
   enabled: true
 mcp:
-  discoveryMode: true
   notifications: true
 secrets:
   enabled: true
@@ -69,9 +87,11 @@ steeringMode: all
 completion:
   notify: "on"
 compaction:
-  strategy: context-full
   thresholdPercent: 60
   thresholdTokens: -1
+  methodOrder:
+    - remote
+    - soft
 bash:
   autoBackground:
     enabled: true
@@ -81,4 +101,6 @@ treeFilterMode: user-only
 autocompleteMaxVisible: 20
 shellMinimizer:
   enabled: true
-setupVersion: 1
+setupVersion: 2
+composer:
+  shape: box

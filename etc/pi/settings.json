@@ -24,6 +24,7 @@
     "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
+    "npm:billion-context-pi",
     "npm:context-mode",
     "npm:@jmcombs/pi-prompt-enhancer",
     "npm:@juicesharp/rpiv-todo",

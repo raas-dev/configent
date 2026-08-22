@@ -1,0 +1,19 @@
+{
+  "debug": false,
+  "autoUpdate": true,
+  "toolBashDefaultTimeout": 60,
+  "toolOutputMaxBytes": 200000,
+  "throttleRetry": {
+    "enabled": true,
+    "maxRetries": 10
+  },
+  "delegate": {
+    "enabled": true,
+    "displayUsage": "separate"
+  },
+  "compress": {
+    "maxContextLimit": "20%",
+    "emergencyThresholdPercent": "50%",
+    "nudgeGrowthTokens": 50000
+  }
+}
