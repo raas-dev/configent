@@ -45,8 +45,7 @@
         "baseURL": "https://gw.alkue.dev/v1",
         "apiKey": "{env:OCCAM_API_KEY}",
         "headers": {
-          "x-litellm-api-key": "{env:OCCAM_API_KEY}",
-          "x-api-key": "{env:ZAI_API_KEY}"
+          "x-litellm-api-key": "{env:OCCAM_API_KEY}"
         }
       },
       "models": {
@@ -61,8 +60,7 @@
         "baseURL": "https://gw.alkue.dev/v1",
         "apiKey": "{env:OCCAM_API_KEY}",
         "headers": {
-          "x-litellm-api-key": "{env:OCCAM_API_KEY}",
-          "x-api-key": "{env:MINIMAX_API_KEY}"
+          "x-litellm-api-key": "{env:OCCAM_API_KEY}"
         }
       },
       "models": {
