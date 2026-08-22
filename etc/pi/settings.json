@@ -36,22 +36,7 @@
     "npm:@termdraw/pi",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
-    "git:github.com/monotykamary/pi-double-esc",
-    {
-      "extensions": [
-        "extensions/anycopy/index.ts",
-        "extensions/handover/index.ts",
-        "extensions/session-switch/index.ts",
-        "extensions/tools/index.ts",
-        "extensions/files-touched.ts",
-        "extensions/fork-from-first.ts",
-        "extensions/md.ts",
-        "extensions/move-session.ts",
-        "extensions/plan-mode.ts",
-        "extensions/session-name.ts"
-      ],
-      "source": "git:github.com/asyrjasalo/pi-extensions"
-    }
+    "git:github.com/monotykamary/pi-double-esc"
   ],
   "quietStartup": true,
   "retry": {
