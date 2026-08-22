@@ -6,7 +6,10 @@
   "toolOutputMaxBytes": 200000,
   "throttleRetry": {
     "enabled": true,
-    "maxRetries": 10
+    "maxRetries": 10,
+    "baseDelayMs": 60000,
+    "maxDelayMs": 300000,
+    "backoffMode": "exponential"
   },
   "delegate": {
     "enabled": true,
