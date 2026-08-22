@@ -5,9 +5,6 @@
       "baseUrl": "https://gw.alkue.dev",
       "api": "anthropic-messages",
       "apiKey": "$OCCAM_API_KEY",
-      "headers": {
-        "x-litellm-api-key": "$OCCAM_API_KEY"
-      },
       "models": [
         {
           "id": "glm-5.3",
