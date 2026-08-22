@@ -1,31 +1,32 @@
 {
   "providers": {
-    "occam": {
-      "name": "occam",
+    "occam-zai": {
+      "name": "occam-zai",
       "baseUrl": "https://gw.alkue.dev",
       "api": "anthropic-messages",
-      "apiKey": "$OCCAM_API_KEY",
+      "apiKey": "$ZAI_API_KEY",
+      "headers": {
+        "Authorization": "Bearer $OCCAM_API_KEY"
+      },
       "models": [
-        {
-          "id": "glm-5.3",
-          "name": "GLM 5.3",
-          "contextWindow": 1000000,
-          "maxTokens": 131072
-        },
-        {
-          "id": "glm-5.2",
-          "name": "GLM 5.2",
-          "contextWindow": 1000000,
-          "maxTokens": 131072
-        },
+        { "id": "glm-5.3", "name": "GLM 5.3", "contextWindow": 1000000, "maxTokens": 131072 },
+        { "id": "glm-5.2", "name": "GLM 5.2", "contextWindow": 1000000, "maxTokens": 131072 }
+      ]
+    },
+    "occam-minimax": {
+      "name": "occam-minimax",
+      "baseUrl": "https://gw.alkue.dev",
+      "api": "anthropic-messages",
+      "apiKey": "$MINIMAX_API_KEY",
+      "headers": {
+        "Authorization": "Bearer $OCCAM_API_KEY"
+      },
+      "models": [
         {
           "id": "MiniMax-M3",
           "name": "MiniMax M3",
           "reasoning": true,
-          "input": [
-            "text",
-            "image"
-          ],
+          "input": ["text", "image"],
           "cost": {
             "input": 0.3,
             "output": 1.2,
