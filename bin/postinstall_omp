@@ -50,3 +50,10 @@ fi
 mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
+
+### plugins ####################################################################
+
+if command -v omp >/dev/null; then
+  # https://github.com/ranxianglei/billion-context-omp
+  omp install billion-context-omp
+fi
