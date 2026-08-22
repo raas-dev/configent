@@ -102,7 +102,7 @@ ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
 
 ### @pi-stef/flow ##############################################################
 
-# sf dir
+# ~/.pi/sf dir
 if [ ! -r "$backup_path/.pi/sf" ]; then
   if [ -r "$HOME/.pi/sf" ]; then
     mkdir -p "$backup_path/.pi/sf"
