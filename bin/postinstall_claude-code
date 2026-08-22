@@ -70,6 +70,14 @@ mkdir -p "$HOME/.agents"
 rm -rf "$HOME/.agents"
 ln -sfnv "$config_path/agents" "$HOME/.agents"
 
+### plugins ####################################################################
+
+if command -v claude >/dev/null; then
+  # caveman
+  claude plugin marketplace add JuliusBrussee/caveman
+  claude plugin install caveman@caveman
+fi
+
 ### MCP servers ################################################################
 
 if command -v claude >/dev/null; then
@@ -77,7 +85,4 @@ if command -v claude >/dev/null; then
   if ! claude mcp get dynamic-mcp >/dev/null 2>&1; then
     claude mcp add --scope user dynamic-mcp -- dmcp
   fi
-  # caveman
-  claude plugin marketplace add JuliusBrussee/caveman
-  claude plugin install caveman@caveman
 fi
