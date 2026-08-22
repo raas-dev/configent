@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "settingsLanguage": "en",
+  "cursorStyle": "bar",
+  "fullscreen": {
+    "wheelScrollLines": 3
+  },
+  "icons": {
+    "mode": "ascii"
+  },
+  "footerSegments": {
+    "cwd": true,
+    "sessionName": false,
+    "gitBranch": true,
+    "gitStatus": true,
+    "gitCommit": false,
+    "runtime": true,
+    "context": true,
+    "tokens": true,
+    "cost": true,
+    "extensionStatuses": true
+  },
+  "telemetry": {
+    "enabled": true,
+    "tps": false,
+    "ttft": false,
+    "duration": true,
+    "tokens": true,
+    "stalls": false,
+    "cost": false
+  }
+}
