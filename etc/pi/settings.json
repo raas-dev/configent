@@ -15,6 +15,7 @@
     "npm:pi-ask-user",
     "npm:pi-codex-goal",
     "npm:pi-context-view",
+    "npm:pi-fovea",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
@@ -29,7 +30,6 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:@narumitw/pi-btw",
     "npm:@sting8k/pi-vcc",
-    "npm:@vndv/pi-codegraph",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     {
