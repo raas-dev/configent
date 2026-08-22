@@ -43,7 +43,13 @@
       "name": "occam",
       "options": {
         "baseURL": "https://gw.alkue.dev/v1",
-        "apiKey": "{env:OCCAM_API_KEY}"
+        // Anthropic SDK sends apiKey as x-api-key → forwarded upstream as
+        // the BYOK key for z.ai. Authorization Bearer carries the gateway
+        // virtual user key (OCCAM_API_KEY), distinct from the upstream key.
+        "apiKey": "{env:ZAI_API_KEY}",
+        "headers": {
+          "Authorization": "Bearer {env:OCCAM_API_KEY}"
+        }
       },
       "models": {
         "glm-5.3": { "name": "glm-5.3" },
@@ -55,7 +61,10 @@
       "name": "occam",
       "options": {
         "baseURL": "https://gw.alkue.dev/v1",
-        "apiKey": "{env:OCCAM_API_KEY}"
+        "apiKey": "{env:MINIMAX_API_KEY}",
+        "headers": {
+          "Authorization": "Bearer {env:OCCAM_API_KEY}"
+        }
       },
       "models": {
         "MiniMax-M3": { "name": "MiniMax-M3" }
