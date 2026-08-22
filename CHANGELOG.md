@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.233.1](https://github.com/raas-dev/configent/compare/1.233.0...1.233.1) (2026-08-22)
+
+### Fixes
+
+* **opencode:** fix grep_app indentation in slim-minimax profile ([43a692b](https://github.com/raas-dev/configent/commit/43a692b14de2b9b47aad6a21539de45d87ee0516))
+* **opencode:** per-provider BYOK + OCCAM_API_KEY gateway bearer ([262cdbd](https://github.com/raas-dev/configent/commit/262cdbd071fd1f30708a29635ff6c6b294e87740))
+* **pi:** two occam providers with per-model BYOK ([8b05210](https://github.com/raas-dev/configent/commit/8b05210350308e1f691dc97d21a167c081692803))
 ## [1.233.0](https://github.com/raas-dev/configent/compare/1.232.3...1.233.0) (2026-08-21)
 
 ### Features
