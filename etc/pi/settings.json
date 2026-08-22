@@ -14,6 +14,7 @@
   "packages": [
     "npm:pi-ask-user",
     "npm:pi-codex-goal",
+    "npm:pi-context-view",
     "npm:pi-hodor",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
@@ -21,7 +22,6 @@
     "npm:pi-ponytail",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
-    "npm:pi-token-burden",
     "npm:pi-tool-display",
     "npm:pi-web-access",
     "npm:billion-context-pi",
