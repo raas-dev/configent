@@ -1,11 +1,12 @@
 {
   "debug": false,
   "autoUpdate": true,
+  "modelContextLimit": 200000,
   "toolBashDefaultTimeout": 60,
   "toolOutputMaxBytes": 200000,
   "compress": {
-    "maxContextLimit": "25%",
-    "emergencyThresholdPercent": "50%",
-    "nudgeGrowthTokens": 20000
+    "maxContextLimit": "75%",
+    "emergencyThresholdPercent": "95%",
+    "nudgeGrowthTokens": 50000
   }
 }
