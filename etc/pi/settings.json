@@ -13,7 +13,6 @@
   "lastChangelogVersion": "0.80.2",
   "packages": [
     "npm:pi-ask-user",
-    "npm:pi-codex-goal",
     "npm:pi-context-view",
     "npm:pi-fovea",
     "npm:pi-image-tools",
@@ -32,6 +31,7 @@
     "npm:@latentminds/pi-quotas",
     "npm:@monotykamary/pi-loop",
     "npm:@monotykamary/pi-retry",
+    "npm:@narumitw/pi-goal",
     "npm:@sting8k/pi-vcc",
     "npm:@termdraw/pi",
     "git:github.com/iodic/pi-ayu-themes",
