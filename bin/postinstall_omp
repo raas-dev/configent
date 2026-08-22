@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in config.yml mcp.json keybindings.json; do
+for file in config.yml mcp.json keybindings.yml; do
   if [ ! -r "$backup_path/.omp/agent/$file" ]; then
     if [ -r "$HOME/.omp/agent/$file" ]; then
       mkdir -p "$backup_path/.omp/agent"
@@ -38,6 +38,18 @@ for dir in agents commands extensions hooks modules skills themes; do
   rm -rf "$HOME/.omp/agent/$dir"
   ln -sfnv "$config_path/omp/$dir" "$HOME/.omp/agent/$dir"
 done
+
+### billion-context-omp ########################################################
+
+# acp-omp.json
+if [ ! -r "$backup_path/.omp/acp-omp.json" ]; then
+  if [ -r "$HOME/.omp/acp-omp.json" ]; then
+    mkdir -p "$backup_path/.omp"
+    cp -P "$HOME/.omp/acp-omp.json" "$backup_path/.omp/acp-omp.json"
+  fi
+fi
+mkdir -p "$HOME/.omp"
+ln -sfnv "$config_path/omp/acp-omp.json" "$HOME/.omp/acp-omp.json"
 
 ### ~/.agents dir ##############################################################
 

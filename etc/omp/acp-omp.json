@@ -1,0 +1,11 @@
+{
+  "debug": false,
+  "autoUpdate": true,
+  "toolBashDefaultTimeout": 60,
+  "toolOutputMaxBytes": 200000,
+  "compress": {
+    "maxContextLimit": "20%",
+    "emergencyThresholdPercent": "50%",
+    "nudgeGrowthTokens": 50000
+  }
+}
