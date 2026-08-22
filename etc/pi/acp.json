@@ -4,16 +4,16 @@
   "modelContextLimit": 200000,
   "toolBashDefaultTimeout": 60,
   "toolOutputMaxBytes": 200000,
+  "delegate": {
+    "enabled": true,
+    "displayUsage": "separate"
+  },
   "throttleRetry": {
     "enabled": true,
     "maxRetries": 10,
     "baseDelayMs": 60000,
     "maxDelayMs": 300000,
     "backoffMode": "exponential"
-  },
-  "delegate": {
-    "enabled": true,
-    "displayUsage": "separate"
   },
   "compress": {
     "maxContextLimit": "75%",
