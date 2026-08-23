@@ -47,9 +47,10 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 
 # ai coding harnesses
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }
+nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'aqua:rtk-ai/rtk' = 'latest'
-'github:always-further/nono' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'github:asyrjasalo/dynamic-mcp' = 'latest'
+#'github:kcosr/herdr-web' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 'github:vercel-labs/agent-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
