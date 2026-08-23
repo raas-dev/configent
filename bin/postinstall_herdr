@@ -14,7 +14,7 @@ config_path="$HOME/.config/configent"
 
 ### configs ####################################################################
 
-# backup
+# config.toml
 if [ ! -r "$backup_path/.config/herdr/config.toml" ]; then
   if [ -r "$HOME/.config/herdr/config.toml" ]; then
     mkdir -p "$backup_path/.config/herdr"
@@ -22,7 +22,25 @@ if [ ! -r "$backup_path/.config/herdr/config.toml" ]; then
       "$backup_path/.config/herdr/config.toml"
   fi
 fi
-
-# symlink
 mkdir -p "$HOME/.config/herdr"
 ln -sfnv "$config_path/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+
+# plugins/config dir
+if [ ! -r "$backup_path/.config/herdr/plugins/config" ]; then
+  if [ -r "$HOME/.config/herdr/plugins/config" ]; then
+    mkdir -p "$backup_path/.config/herdr/plugins"
+    cp -RP "$HOME/.config/herdr/plugins/config" \
+      "$backup_path/.config/herdr/plugins/config"
+  fi
+fi
+mkdir -p "$HOME/.config/herdr/plugins"
+rm -rf "$HOME/.config/herdr/plugins/config"
+ln -sfnv "$config_path/herdr/plugins/config" \
+  "$HOME/.config/herdr/plugins/config"
+
+### plugins ####################################################################
+
+if command -v herdr >/dev/null; then
+  # https://github.com/alvinunreal/oh-my-opencode-slim
+  herdr plugin install alvinunreal/oh-my-opencode-slim --yes
+fi
