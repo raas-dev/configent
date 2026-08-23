@@ -5,8 +5,7 @@
     "style": "claude"
   },
   "results": {
-    "mode": "compact",
-    "previewRows": 4
+    "mode": "compact"
   },
   "transcript": {
     "userMessageStyle": "default"
