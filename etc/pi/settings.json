@@ -61,8 +61,5 @@
   "theme": "ayu-dark",
   "transport": "auto",
   "treeFilterMode": "user-only",
-  "defaultProjectTrust": "always",
-  "terminal": {
-    "clearOnShrink": true
-  }
+  "defaultProjectTrust": "always"
 }
