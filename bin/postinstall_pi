@@ -40,33 +40,6 @@ for dir in agents extensions prompts skills themes profiles; do
   ln -sfnv "$config_path/pi/$dir" "$HOME/.pi/agent/$dir"
 done
 
-### pi-caveman #################################################################
-
-# pi-caveman read config from $XDG_CONFIG_HOME/pi/agent when set
-caveman="$config_path/pi/caveman.json"
-
-# ~/.pi/agent/caveman.json
-if [ ! -r "$backup_path/.pi/agent/caveman.json" ] &&
-  [ -r "$HOME/.pi/agent/caveman.json" ]; then
-  mkdir -p "$backup_path/.pi/agent"
-  cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$caveman" "$HOME/.pi/agent/caveman.json"
-
-# $XDG_CONFIG_HOME/pi/agent/caveman.json
-if [ -n "$XDG_CONFIG_HOME" ]; then
-  pi_agent_xdg="$XDG_CONFIG_HOME/pi/agent"
-  if [ ! -r "$backup_path/xdg/pi/agent/caveman.json" ] &&
-    [ -r "$pi_agent_xdg/caveman.json" ] &&
-    [ ! -L "$pi_agent_xdg/caveman.json" ]; then
-    mkdir -p "$backup_path/xdg/pi/agent"
-    cp -P "$pi_agent_xdg/caveman.json" "$backup_path/xdg/pi/agent/caveman.json"
-  fi
-  mkdir -p "$pi_agent_xdg"
-  ln -sfnv "$caveman" "$pi_agent_xdg/caveman.json"
-fi
-
 ### ~/.agents dir ##############################################################
 
 if [ ! -r "$backup_path/.agents" ]; then
@@ -90,6 +63,32 @@ fi
 mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
+
+### pi-caveman #################################################################
+
+# pi-caveman reads config from $XDG_CONFIG_HOME/pi/agent when set,
+# else from ~/.pi/agent - only the active path is linked
+caveman="$config_path/pi/caveman.json"
+
+if [ -n "$XDG_CONFIG_HOME" ]; then
+  pi_agent_xdg="$XDG_CONFIG_HOME/pi/agent"
+  if [ ! -r "$backup_path/xdg/pi/agent/caveman.json" ] &&
+    [ -r "$pi_agent_xdg/caveman.json" ] &&
+    [ ! -L "$pi_agent_xdg/caveman.json" ]; then
+    mkdir -p "$backup_path/xdg/pi/agent"
+    cp -P "$pi_agent_xdg/caveman.json" "$backup_path/xdg/pi/agent/caveman.json"
+  fi
+  mkdir -p "$pi_agent_xdg"
+  ln -sfnv "$caveman" "$pi_agent_xdg/caveman.json"
+else
+  if [ ! -r "$backup_path/.pi/agent/caveman.json" ] &&
+    [ -r "$HOME/.pi/agent/caveman.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/caveman.json" "$backup_path/.pi/agent/caveman.json"
+  fi
+  mkdir -p "$HOME/.pi/agent"
+  ln -sfnv "$caveman" "$HOME/.pi/agent/caveman.json"
+fi
 
 ### pi-web-access ##############################################################
 
