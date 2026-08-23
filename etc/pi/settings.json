@@ -14,7 +14,6 @@
   "packages": [
     "npm:billion-context-pi",
     "npm:pi-context-view",
-    "npm:pi-goal-x",
     "npm:pi-fovea",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
@@ -28,6 +27,7 @@
     "npm:@jmcombs/pi-prompt-enhancer",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@latentminds/pi-quotas",
+    "npm:@mjasnikovs/pi-task",
     "npm:@monotykamary/pi-loop",
     "npm:@monotykamary/pi-retry",
     "npm:@monotykamary/pi-vcc",
