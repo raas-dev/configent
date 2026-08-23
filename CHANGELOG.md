@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.234.0](https://github.com/raas-dev/configent/compare/1.233.1...1.234.0) (2026-08-23)
+
+### Features
+
+* **pi:** add anycopy extension and files-touched core ([40f0b43](https://github.com/raas-dev/configent/commit/40f0b43877986ef3812bc30bfa400ed692b61e7d))
 ## [1.233.1](https://github.com/raas-dev/configent/compare/1.233.0...1.233.1) (2026-08-22)
 
 ### Fixes
