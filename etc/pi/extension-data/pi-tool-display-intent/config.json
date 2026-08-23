@@ -5,7 +5,7 @@
     "style": "claude"
   },
   "results": {
-    "mode": "preview",
+    "mode": "compact",
     "previewRows": 4
   },
   "transcript": {
