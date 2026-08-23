@@ -28,7 +28,7 @@ for file in auth.json settings.json keybindings.json models.json \
 done
 
 # dirs
-for dir in agents extensions prompts skills themes profiles; do
+for dir in agents extensions extension-data prompts skills themes profiles; do
   if [ ! -r "$backup_path/.pi/agent/$dir" ]; then
     if [ -r "$HOME/.pi/agent/$dir" ]; then
       mkdir -p "$backup_path/.pi/agent/$dir"

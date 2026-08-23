@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/zhcsyncer/pi-extensions/main/packages/pi-tool-display-intent/config/config.schema.json",
+  "version": 2,
+  "results": {
+    "mode": "compact"
+  },
+  "transcript": {
+    "userMessageStyle": "default"
+  }
+}
