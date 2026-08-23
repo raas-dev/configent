@@ -19,7 +19,6 @@
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-open-tui",
-    "npm:pi-ponytail",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
     "npm:pi-tool-display",
@@ -35,7 +34,8 @@
     "npm:@narumitw/pi-goal",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
-    "git:github.com/monotykamary/pi-double-esc"
+    "git:github.com/monotykamary/pi-double-esc",
+    "git:github.com/Smith42/ponytail@feat/statusline-format"
   ],
   "quietStartup": true,
   "retry": {

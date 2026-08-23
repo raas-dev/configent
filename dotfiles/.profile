@@ -246,14 +246,17 @@ export OPENCHAMBER_OPENCODE_PORT=4096
 # opencode
 export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 
+# opencode: token-optimizer
+export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
+
+# opencode, pi: ponytail
+export PONYTAIL_DEFAULT_MODE="ultra"
+
 # pi
 export PI_SKIP_VERSION_CHECK=1
 
-# ponytail
-export PONYTAIL_DEFAULT_MODE="ultra"
-
-# token-optimizer
-export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
+# pi: ponytail
+export PONYTAIL_STATUS_FORMAT="{label} {mode}"
 
 ### playwright #################################################################
 
