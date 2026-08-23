@@ -1,4 +1,5 @@
 {
+  "enabled": true,
   "registerToolOverrides": {
     "read": true,
     "grep": true,
@@ -8,6 +9,7 @@
     "edit": true,
     "write": true
   },
+  "customToolOverrides": {},
   "enableNativeUserMessageBox": false,
   "readOutputMode": "hidden",
   "searchOutputMode": "hidden",
@@ -17,6 +19,7 @@
   "bashOutputMode": "opencode",
   "bashCollapsedLines": 10,
   "diffViewMode": "auto",
+  "diffIndicatorMode": "bars",
   "diffSplitMinWidth": 120,
   "diffCollapsedLines": 24,
   "diffWordWrap": true,
