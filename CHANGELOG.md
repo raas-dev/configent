@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.234.1](https://github.com/raas-dev/configent/compare/1.234.0...1.234.1) (2026-08-23)
+
+### Fixes
+
+* **pi:** link caveman.json from active XDG path ([fa90506](https://github.com/raas-dev/configent/commit/fa905068c48feb937c30161311f4ad682e78f9aa))
 ## [1.234.0](https://github.com/raas-dev/configent/compare/1.233.1...1.234.0) (2026-08-23)
 
 ### Features
