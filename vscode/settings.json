@@ -514,7 +514,6 @@
   "terminal.external.osxExec": "Terminal.app",
   "terminal.integrated.accessibleViewPreserveCursorPosition": true,
   "terminal.integrated.confirmOnKill": "never",
-  "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
