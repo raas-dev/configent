@@ -33,7 +33,6 @@
     "npm:@monotykamary/pi-retry",
     "npm:@monotykamary/pi-vcc",
     "npm:@narumitw/pi-goal",
-    "npm:@termdraw/pi",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
     "git:github.com/monotykamary/pi-double-esc"
