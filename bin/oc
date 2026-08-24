@@ -76,7 +76,7 @@ PROJECT_CONFIG_DIR="${PROJECT_CONFIG_DIR:-$PROJECT_ROOT_DIR/.opencode}"
 
 # Validate commands early to show errors before any prompts
 # This check must happen before the .opencode prompt
-if [[ "$1" == "exec" && $# -lt 2 ]]; then
+if [[ "$1" == "exec" && $# -lt 2 && ! -t 0 ]]; then
   echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
   echo -e "${DIM}Usage: oc exec <profile-name> [-- command and args]${NC}" >&2
   exit 1
@@ -487,6 +487,8 @@ switch_to_profile() {
 show_menu() {
   local header="${1:-Select OpenCode configuration}"
   local is_init_cmd="${2:-false}"
+  # In echo mode we're captured via $(); draw the menu on stderr instead
+  [[ "${MENU_ECHO_NAME:-}" == true ]] && exec 3>&1 1>&2
   local configs=()
   local names=()
 
@@ -574,7 +576,8 @@ show_menu() {
     elif [[ $key == $'\x03' || $key == "q" || $key == "Q" ]]; then # ^C or q
       tput cnorm
       echo ""
-      echo -e "${DIM}Cancelled.${NC}"
+      echo -e "${DIM}Cancelled.${NC}" >&2
+      [[ "${MENU_ECHO_NAME:-}" == true ]] && exit 1
       exit 0
     elif [[ $key == "j" ]]; then # vim down
       ((selected++))
@@ -590,9 +593,12 @@ show_menu() {
   # Show cursor
   tput cnorm
 
-  # Switch to selected profile
   local selected_name="${names[$selected]}"
-  switch_to_profile "$selected_name" "false" "$is_init_cmd"
+  if [[ "${MENU_ECHO_NAME:-}" == true ]]; then
+    echo "$selected_name" >&3
+  else
+    switch_to_profile "$selected_name" "false" "$is_init_cmd"
+  fi
 }
 
 # Show help message
@@ -627,8 +633,8 @@ show_help() {
     "      ${DIM}Example:${NC}" \
     "      oc use omo-zai" \
     "" \
-    "  ${CYAN}exec${NC} ${CYAN}<profile-name>${NC} ${DIM}[${NC}${CYAN}opencode-args...${NC}${DIM} |${NC} ${CYAN}--${NC} ${CYAN}<command>${NC} ${DIM}[args...]]${NC}" \
-    "      Run opencode with the given profile, passing extra args to it." \
+    "  ${CYAN}exec${NC} ${CYAN}[profile-name]${NC} ${DIM}[${NC}${CYAN}opencode-args...${NC}${DIM} |${NC} ${CYAN}--${NC} ${CYAN}<command>${NC} ${DIM}[args...]]${NC}" \
+    "      Run opencode with the given profile, passing extra args to it. Shows an interactive menu if no profile name is given." \
     "      ${DIM}Use '--' to run an arbitrary command instead. The${NC}" \
     "      ${DIM}project's .opencode directory is replaced with the${NC}" \
     "      ${DIM}profile's copy for the duration of the command and${NC}" \
@@ -675,14 +681,16 @@ if [[ $# -gt 0 ]]; then
     ;;
   exec)
     if [[ $# -lt 2 ]]; then
-      echo -e "${YELLOW}Error: exec requires a profile name.${NC}" >&2
-      echo -e "${DIM}Usage: oc exec <profile-name> [-- command and args]${NC}" >&2
-      exit 1
+      exec_profile_name=$(MENU_ECHO_NAME=true show_menu "Select opencode profile for exec") || exit 1
+      exec_profile_name="${exec_profile_name%$'\r'}"
+      [[ -z "$exec_profile_name" ]] && exit 1
+      shift
+    else
+      # Shift past 'exec'
+      shift
+      exec_profile_name="$1"
+      shift
     fi
-    # Shift past 'exec'
-    shift
-    exec_profile_name="$1"
-    shift
 
     # Check for '--' separator: with it, run the given command;
     # without it, treat all remaining args as arguments to opencode
