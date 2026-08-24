@@ -1,6 +1,6 @@
 {
   "debug": false,
-  "autoUpdate": true,
+  "autoUpdate": false,
   "modelContextLimit": 200000,
   "toolBashDefaultTimeout": 60,
   "toolOutputMaxBytes": 200000,
