@@ -114,19 +114,6 @@ fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
 
-### @pi-stef/flow ##############################################################
-
-# ~/.pi/sf dir
-if [ ! -r "$backup_path/.pi/sf" ]; then
-  if [ -r "$HOME/.pi/sf" ]; then
-    mkdir -p "$backup_path/.pi/sf"
-    cp -RP "$HOME/.pi/sf" "$backup_path/.pi/sf"
-  fi
-fi
-mkdir -p "$HOME/.pi/sf"
-rm -rf "$HOME/.pi/sf"
-ln -sfnv "$config_path/pi/sf" "$HOME/.pi/sf"
-
 ### extensions #################################################################
 
 # (pre-)install or update extensions (requires npm in PATH)
