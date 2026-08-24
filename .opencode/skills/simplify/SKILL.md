@@ -7,7 +7,7 @@ description: Simplifies code for clarity without changing behavior. Use for read
 
 ## Overview
 
-Simplify code by reducing complexity while preserving exact behavior. The goal is not fewer lines — it's code that is easier to read, understand, modify, and debug. Every simplification must pass a simple test: "Would a new team member understand this faster than the original?"
+Simplify code by reducing complexity while preserving exact behavior. The goal is not fewer lines - it's code that is easier to read, understand, modify, and debug. Every simplification must pass a simple test: "Would a new team member understand this faster than the original?"
 
 ## When to Use
 
@@ -20,23 +20,23 @@ Simplify code by reducing complexity while preserving exact behavior. The goal i
 
 **When NOT to use:**
 
-- Code is already clean and readable — don't simplify for the sake of it
-- You don't understand what the code does yet — comprehend before you simplify
+- Code is already clean and readable - don't simplify for the sake of it
+- You don't understand what the code does yet - comprehend before you simplify
 - The code is performance-critical and the "simpler" version would be measurably slower
-- You're about to rewrite the module entirely — simplifying throwaway code wastes effort
+- You're about to rewrite the module entirely - simplifying throwaway code wastes effort
 
 ## The Five Principles
 
 ### 1. Preserve Behavior Exactly
 
-Don't change what the code does — only how it expresses it. All inputs, outputs, side effects, error behavior, and edge cases must remain identical. If you're not sure a simplification preserves behavior, don't make it.
+Don't change what the code does - only how it expresses it. All inputs, outputs, side effects, error behavior, and edge cases must remain identical. If you're not sure a simplification preserves behavior, don't make it.
 
 Before every change, ask:
 
 - Does this produce the same output for every input?
 - Does this maintain the same error behavior?
 - Does this preserve the same side effects and ordering?
-- Do all existing tests still pass without modification?
+- What proportionate final-state verification will reveal a behavior change?
 
 ### 2. Follow Project Conventions
 
@@ -48,7 +48,7 @@ Before simplifying:
 2. Study how neighboring code handles similar patterns
 3. Match the project's style for imports, naming, function style, error handling, and type annotations
 
-Simplification that breaks project consistency is not simplification — it's churn.
+Simplification that breaks project consistency is not simplification - it's churn.
 
 ### 3. Prefer Clarity Over Cleverness
 
@@ -108,8 +108,8 @@ Make one simplification at a time.
 For each simplification:
 
 1. Make the change
-2. Run relevant tests
-3. Keep it only if behavior is preserved
+2. Use the proportionate final-state verification plan to check preservation
+3. Keep it only when the evidence supports preservation
 
 Separate refactoring from feature work whenever possible.
 
@@ -129,10 +129,8 @@ After simplifying, confirm:
 - Favor explicit names and smaller focused helpers when they improve readability
 - Keep refactors tightly scoped to the task or review feedback
 
-## Verification Checklist
+## Final-state verification
 
-- [ ] Existing tests pass without modification
-- [ ] Build/typecheck/lint still pass
-- [ ] No unrelated files were refactored
-- [ ] No error handling was weakened or removed
-- [ ] The result is simpler to review than the original
+Use a proportionate final-state verification plan for the final diff. Run checks
+required by repository and release instructions; add or repeat evidence only
+when the changed scope or a stated uncertainty warrants it.
