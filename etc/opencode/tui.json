@@ -12,6 +12,7 @@
     ]
   },
   "plugin": [
-    "@prevalentware/opencode-goal-plugin"
+    "@prevalentware/opencode-goal-plugin",
+    "@slkiser/opencode-quota@latest"
   ]
 }

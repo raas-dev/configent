@@ -27,7 +27,7 @@ for file in opencode.jsonc opencode.json tui.json tui.jsonc herdr-tui-session.js
 done
 
 # dirs
-for dir in agents commands skills plugins profiles; do
+for dir in agents commands opencode-quota plugins profiles skills; do
   if [ ! -r "$backup_path/.config/opencode/$dir" ]; then
     if [ -r "$HOME/.config/opencode/$dir" ]; then
       mkdir -p "$backup_path/.config/opencode/$dir"

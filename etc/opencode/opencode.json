@@ -31,6 +31,7 @@
     "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
+    "@slkiser/opencode-quota",
     "@tarquinen/opencode-dcp"
   ],
   "share": "disabled",

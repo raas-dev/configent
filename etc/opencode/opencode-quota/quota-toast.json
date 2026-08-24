@@ -1,0 +1,18 @@
+{
+  "enableToast": false,
+  "tuiCommandDisplay": "dialog",
+  "showSessionTokens": false,
+  "sessionTokenScope": "current",
+  "enabledProviders": [
+    "zai",
+    "minimax"
+  ],
+  "formatStyle": "allWindows",
+  "percentDisplayMode": "used",
+  "tuiSidebarPanel": {
+    "enabled": true
+  },
+  "maintainerAnnouncements": {
+    "enabled": false
+  }
+}
