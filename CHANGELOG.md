@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.234.2](https://github.com/raas-dev/configent/compare/1.234.1...1.234.2) (2026-08-24)
+
+### Fixes
+
+* **exec:** handle non-tty profile selection for oc and pic ([7e12bf0](https://github.com/raas-dev/configent/commit/7e12bf051292e17ddec6750300dfb2df78c4003a))
 ## [1.234.1](https://github.com/raas-dev/configent/compare/1.234.0...1.234.1) (2026-08-23)
 
 ### Fixes
