@@ -1,4 +1,8 @@
 {
+  "defaultModel": "MiniMax-M3",
+  "enabledModels": [
+    "*minimax-M3*"
+  ],
   "packages": [
     "git:github.com/davebcn87/pi-autoresearch"
   ]
