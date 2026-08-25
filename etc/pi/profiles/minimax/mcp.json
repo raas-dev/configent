@@ -3,7 +3,6 @@
     "minimax-vision": {
       "command": "uvx",
       "args": [
-        "-y",
         "minimax-coding-plan-mcp"
       ],
       "env": {

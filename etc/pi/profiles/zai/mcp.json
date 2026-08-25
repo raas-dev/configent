@@ -3,7 +3,6 @@
     "zai-vision": {
       "command": "npx",
       "args": [
-        "-y",
         "@z_ai/mcp-server"
       ],
       "env": {
