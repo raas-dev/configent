@@ -101,15 +101,6 @@
       "skillFolderHash": "b7d3e89c61085ec0669ff42dea0ada4c56b034c3",
       "installedAt": "2026-08-16T07:43:31.721Z",
       "updatedAt": "2026-08-16T07:43:31.721Z"
-    },
-    "token-optimizer": {
-      "source": "alexgreensh/token-optimizer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/alexgreensh/token-optimizer.git",
-      "skillPath": "skills/token-optimizer/SKILL.md",
-      "skillFolderHash": "ac128def5933a23e03f19f94b1f32d4fe369a72f",
-      "installedAt": "2026-08-16T07:43:46.983Z",
-      "updatedAt": "2026-08-20T21:48:41.854Z"
     }
   },
   "dismissed": {
