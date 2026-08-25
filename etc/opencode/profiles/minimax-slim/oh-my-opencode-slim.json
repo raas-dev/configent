@@ -68,7 +68,8 @@
           "context7"
         ],
         "mcps": [
-          "exa"
+          "exa",
+          "gh_grep"
         ]
       },
       "designer": {
