@@ -1,9 +1,0 @@
-{
-  "defaultModel": "MiniMax-M3",
-  "enabledModels": [
-    "*minimax-M3*"
-  ],
-  "packages": [
-    "npm:@vigolium/piolium"
-  ]
-}
