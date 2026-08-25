@@ -36,6 +36,7 @@
     "minimax-plan": {
       "orchestrator": {
         "model": "minimax-coding-plan/MiniMax-M3",
+        "variant": "high",
         "skills": [
           "*"
         ],
@@ -73,7 +74,7 @@
       },
       "fixer": {
         "model": "minimax-coding-plan/MiniMax-M3",
-        "variant": "low",
+        "variant": "high",
         "skills": [],
         "mcps": []
       },

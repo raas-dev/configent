@@ -36,6 +36,7 @@
     "zai-plan": {
       "orchestrator": {
         "model": "zai-coding-plan/glm-5.3",
+        "variant": "high",
         "skills": [
           "*"
         ],
@@ -73,7 +74,7 @@
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.3",
-        "variant": "low",
+        "variant": "high",
         "skills": [],
         "mcps": []
       },
