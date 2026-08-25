@@ -19,8 +19,7 @@
       "Skill",
       "ToolSearch",
       "WebFetch",
-      "WebSearch",
-      "mcp__dynamic-mcp__*"
+      "WebSearch"
     ],
     "ask": [
       "Bash(git *)",

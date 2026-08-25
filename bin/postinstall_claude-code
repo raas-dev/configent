@@ -77,12 +77,3 @@ if command -v claude >/dev/null; then
   claude plugin marketplace add JuliusBrussee/caveman
   claude plugin install caveman@caveman
 fi
-
-### MCP servers ################################################################
-
-if command -v claude >/dev/null; then
-  # dynamic-mcp
-  if ! claude mcp get dynamic-mcp >/dev/null 2>&1; then
-    claude mcp add --scope user dynamic-mcp -- dmcp
-  fi
-fi
