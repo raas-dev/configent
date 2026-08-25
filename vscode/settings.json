@@ -55,6 +55,11 @@
   "agentterminal.cwdMode": "activeWorkspace",
   "agentterminal.profiles": [
     {
+      "command": "exec herdr",
+      "id": "herdr",
+      "label": "herdr"
+    },
+    {
       "args": [
         "--remote",
         "dev"
@@ -73,13 +78,13 @@
     },
     {
       "args": [
-        "-il",
-        "-c",
-        "ai"
+        "-t",
+        "dev",
+        "zsh -l -c 'tm --gui'"
       ],
-      "command": "exec zsh",
-      "id": "omp-chat",
-      "label": "omp: chat"
+      "command": "exec ssh",
+      "id": "tmux-dev",
+      "label": "tmux@dev"
     },
     {
       "command": "exec lazyssh",
@@ -88,13 +93,13 @@
     },
     {
       "args": [
-        "-t",
-        "dev",
-        "zsh -l -c 'tm --gui'"
+        "-il",
+        "-c",
+        "ai"
       ],
-      "command": "exec ssh",
-      "id": "tmux-dev",
-      "label": "tmux@dev"
+      "command": "exec zsh",
+      "id": "omp-chat",
+      "label": "omp: chat"
     }
   ],
   "agentterminal.rememberSelection": false,
@@ -694,5 +699,6 @@
     "**/.forgejo/workflows/*.yaml",
     "azure-pipelines.yml",
     "azure-pipelines.yaml"
-  ]
+  ],
+  "editor.accessibilitySupport": "off"
 }
