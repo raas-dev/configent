@@ -31,6 +31,7 @@
     "npm:@monotykamary/pi-loop",
     "npm:@monotykamary/pi-retry",
     "npm:@monotykamary/pi-vcc",
+    "npm:@quintinshaw/pi-dynamic-workflows",
     "npm:@zhcsyncer/pi-tool-display-intent",
     "git:github.com/iodic/pi-ayu-themes",
     "git:github.com/jonjonrankin/pi-caveman",
