@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.234.3](https://github.com/raas-dev/configent/compare/1.234.2...1.234.3) (2026-08-25)
+
+### Fixes
+
+* **pi:** reorder minimax mcp args ([fc71ead](https://github.com/raas-dev/configent/commit/fc71eada8ff97170c0135ae9937dbe01c71f291e))
 ## [1.234.2](https://github.com/raas-dev/configent/compare/1.234.1...1.234.2) (2026-08-24)
 
 ### Fixes
