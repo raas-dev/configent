@@ -102,6 +102,20 @@ fi
 mkdir -p "$HOME/.pi"
 ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
 
+### pi-workflows ###############################################################
+
+# workflows/settings.json
+if [ ! -r "$backup_path/.pi/workflows/settings.json" ]; then
+  if [ -r "$HOME/.pi/workflows/settings.json" ]; then
+    mkdir -p "$backup_path/.pi/workflows"
+    cp -P "$HOME/.pi/workflows/settings.json" \
+      "$backup_path/.pi/workflows/settings.json"
+  fi
+fi
+mkdir -p "$HOME/.pi/workflows"
+ln -sfnv "$config_path/pi/workflows/settings.json" \
+  "$HOME/.pi/workflows/settings.json"
+
 ### billion-context-pi #########################################################
 
 # acp.json
