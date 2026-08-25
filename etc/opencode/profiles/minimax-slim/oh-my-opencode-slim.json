@@ -46,62 +46,42 @@
       "explorer": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*"
-        ]
+        "skills": [],
+        "mcps": []
       },
       "oracle": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
         "skills": [
-          "*"
+          "simplify"
         ],
-        "mcps": [
-          "*"
-        ]
+        "mcps": []
       },
       "librarian": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
         "skills": [
-          "*"
+          "context7"
         ],
-        "mcps": [
-          "*"
-        ]
+        "mcps": []
       },
       "designer": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*"
-        ]
+        "skills": [],
+        "mcps": []
       },
       "fixer": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*"
-        ]
+        "skills": [],
+        "mcps": []
       },
       "council": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*"
-        ]
+        "skills": [],
+        "mcps": []
       }
     }
   }
