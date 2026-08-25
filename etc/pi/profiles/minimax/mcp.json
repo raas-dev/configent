@@ -3,8 +3,8 @@
     "minimax-vision": {
       "command": "uvx",
       "args": [
-        "minimax-coding-plan-mcp",
-        "-y"
+        "-y",
+        "minimax-coding-plan-mcp"
       ],
       "env": {
         "MINIMAX_API_KEY": "${MINIMAX_API_KEY}",
