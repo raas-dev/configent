@@ -69,6 +69,21 @@
       "label": "herdr@dev"
     },
     {
+      "command": "exec lazyssh",
+      "id": "lazyssh",
+      "label": "lazyssh"
+    },
+    {
+      "args": [
+        "-il",
+        "-c",
+        "ai"
+      ],
+      "command": "exec zsh",
+      "id": "omp-chat",
+      "label": "omp: chat"
+    },
+    {
       "args": [
         "--gui"
       ],
@@ -85,21 +100,6 @@
       "command": "exec ssh",
       "id": "tmux-dev",
       "label": "tmux@dev"
-    },
-    {
-      "command": "exec lazyssh",
-      "id": "lazyssh",
-      "label": "lazyssh"
-    },
-    {
-      "args": [
-        "-il",
-        "-c",
-        "ai"
-      ],
-      "command": "exec zsh",
-      "id": "omp-chat",
-      "label": "omp: chat"
     }
   ],
   "agentterminal.rememberSelection": false,
