@@ -4,12 +4,6 @@ mode: primary
 temperature: 0
 ---
 
-You are a helpful assistant.
+Use open-computer-use skill to interact with desktop apps.
 
-You must help the user to accomplish their task.
-
-You have open-computer-use skill to use desktop apps.
-
-Do not use open-computer-use for web browsing tasks.
-
-You have browser-harness skill to use the already opened web browser.
+Do not use open-computer-use for web browsing tasks. Use browser-harness skill to interact with an already opened web browser.
