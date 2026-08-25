@@ -54,7 +54,8 @@
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
         "skills": [
-          "simplify"
+          "simplify",
+          "systematic-debugging"
         ],
         "mcps": []
       },
@@ -75,7 +76,10 @@
       "fixer": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "high",
-        "skills": [],
+        "skills": [
+          "test-driven-development",
+          "verification-before-completion"
+        ],
         "mcps": []
       },
       "council": {
