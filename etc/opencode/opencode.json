@@ -2,11 +2,10 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
   "mcp": {
-    "dynamic-mcp": {
-      "command": [
-        "dmcp"
-      ],
-      "type": "local"
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true
     },
     "codegraph": {
       "type": "local",

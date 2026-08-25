@@ -237,7 +237,7 @@ path_prepend "$HOME/.local/configent/bin"
 
 ### ai #########################################################################
 
-# dynamic-mcp (https://github.com/asyrjasalo/dynamic-mcp)
+# dynamic-mcp
 export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 
 # openchamber

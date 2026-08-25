@@ -6,10 +6,7 @@
     "main_pane_size": 60
   },
   "disabled_mcps": [
-    "context7",
-    "websearch",
-    "gh_grep",
-     "grep_app"
+    "context7"
   ],
   "disabled_agents": [
     "observer"
