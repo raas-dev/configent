@@ -48,7 +48,9 @@
         "model": "zai-coding-plan/glm-5.3",
         "variant": "low",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codegraph"
+        ]
       },
       "oracle": {
         "model": "zai-coding-plan/glm-5.3",
@@ -65,7 +67,9 @@
         "skills": [
           "context7"
         ],
-        "mcps": []
+        "mcps": [
+          "exa"
+        ]
       },
       "designer": {
         "model": "zai-coding-plan/glm-5.3",

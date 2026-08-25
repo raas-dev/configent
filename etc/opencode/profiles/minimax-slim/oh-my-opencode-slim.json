@@ -48,7 +48,9 @@
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "low",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codegraph"
+        ]
       },
       "oracle": {
         "model": "minimax-coding-plan/MiniMax-M3",
@@ -65,7 +67,9 @@
         "skills": [
           "context7"
         ],
-        "mcps": []
+        "mcps": [
+          "exa"
+        ]
       },
       "designer": {
         "model": "minimax-coding-plan/MiniMax-M3",
