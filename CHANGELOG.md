@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.234.5](https://github.com/raas-dev/configent/compare/1.234.4...1.234.5) (2026-08-26)
+
+### Fixes
+
+* **computer-use:** clarify open-computer-use vs browser-harness ([570045b](https://github.com/raas-dev/configent/commit/570045b21ed85d0b2ab3b02355ca3c8f94ae29f8))
+* **opencode:** enable zai-slim profile ([632c715](https://github.com/raas-dev/configent/commit/632c7154d8c5a3fbfcd7451599824084ac3d400c))
 ## [1.234.4](https://github.com/raas-dev/configent/compare/1.234.3...1.234.4) (2026-08-25)
 
 ### Fixes
