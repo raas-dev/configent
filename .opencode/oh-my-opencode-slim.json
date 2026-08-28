@@ -45,7 +45,7 @@
         ]
       },
       "explorer": {
-        "model": "zai-coding-plan/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -62,7 +62,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "zai-coding-plan/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "low",
         "skills": [
           "context7"
@@ -73,7 +73,7 @@
         ]
       },
       "designer": {
-        "model": "zai-coding-plan/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "medium",
         "skills": [],
         "mcps": []
