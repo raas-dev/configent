@@ -46,7 +46,8 @@ providers:
   tts: auto
   openai-codex:
     codeMode: "off"
-defaultThinkingLevel: medium
+  autoThinkingModel: online
+defaultThinkingLevel: auto
 disabledProviders:
   - cursor
   - opencode
@@ -86,7 +87,7 @@ statusLine:
   separator: powerline-thin
   contextLine: annotated
   sessionAccent: false
-  transparent: false
+  transparent: true
   compactThinkingLevel: false
   showHookStatus: true
 hideThinkingBlock: true
@@ -114,10 +115,10 @@ shellMinimizer:
   sourceOutlineLevel: default
 setupVersion: 2
 composer:
-  shape: rail
+  shape: field
 tui:
   textSizing: true
-  tight: true
+  tight: false
   resizeScrollback: rebuild
   imeSafeCursor: true
 display:
