@@ -54,7 +54,7 @@ disabledProviders:
   - claude
   - claude-plugins
 theme:
-  dark: ayu-dark
+  dark: dark-ayu
 task:
   disabledAgents:
     - cavecrew-builder
@@ -115,7 +115,7 @@ shellMinimizer:
   sourceOutlineLevel: default
 setupVersion: 2
 composer:
-  shape: field
+  shape: pi
 tui:
   textSizing: true
   tight: false

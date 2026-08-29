@@ -1,5 +1,5 @@
 {
-  "name": "ayu-dark",
+  "name": "dark-ayu",
   "colors": {
     "accent": "#E6B450",
     "border": "#5B6875",
@@ -63,7 +63,6 @@
     "statusLineSpend": "#73B8FF",
     "statusLineStaged": "#70BF56",
     "statusLineDirty": "#FFB454",
-    "statusLineUntracked": "#F26D78",
     "statusLineOutput": "#BFBDB6",
     "statusLineCost": "#F29668",
     "statusLineSubagents": "#D2A6FF"
