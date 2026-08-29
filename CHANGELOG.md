@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.235.1](https://github.com/raas-dev/configent/compare/1.235.0...1.235.1) (2026-08-29)
+
+### Fixes
+
+* initialize submodules during install ([bdb370e](https://github.com/raas-dev/configent/commit/bdb370ec8461238c910ef49bd29baa58b779b2c1))
 ## [1.235.0](https://github.com/raas-dev/configent/compare/1.234.5...1.235.0) (2026-08-29)
 
 ### Features
