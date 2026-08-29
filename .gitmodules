@@ -1,3 +1,3 @@
 [submodule "etc/agents"]
 	path = etc/agents
-	url = git@github.com:asyrjasalo/agents.git
+	url = https://github.com/asyrjasalo/agents.git
