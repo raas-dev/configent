@@ -68,4 +68,5 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 if command -v omp >/dev/null; then
   # https://github.com/ranxianglei/billion-context-omp
   omp install billion-context-omp
+  omp install github:wsouto/omp-ponytail
 fi
