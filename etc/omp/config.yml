@@ -174,3 +174,5 @@ live:
 showHardwareCursor: true
 spelling:
   typoDetection: false
+images:
+  blockImages: false
