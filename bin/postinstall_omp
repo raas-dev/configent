@@ -69,9 +69,9 @@ if command -v omp >/dev/null; then
   # marketplace
   omp plugin marketplace update
   # https://github.com/ranxianglei/billion-context-omp
-  omp install billion-context-omp
+  omp plugin install billion-context-omp
   # https://github.com/wsouto/omp-ponytail
-  omp install github:wsouto/omp-ponytail
+  omp plugin install github:wsouto/omp-ponytail
   # https://github.com/DarkPhilosophy/omp-headroom
   omp plugin install omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
