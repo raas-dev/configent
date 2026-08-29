@@ -10,7 +10,7 @@ renderMermaid:
 checkpoint:
   enabled: true
 inspect_image:
-  mode: "on"
+  mode: auto
 calc:
   enabled: true
 commands:
@@ -43,6 +43,9 @@ providers:
     - google
     - mojeek
     - public
+  tts: auto
+  openai-codex:
+    codeMode: "off"
 defaultThinkingLevel: medium
 disabledProviders:
   - cursor
@@ -65,7 +68,8 @@ followUpMode: one-at-a-time
 startup:
   quiet: true
   checkUpdate: false
-  changelogMode: summary
+  changelogMode: hidden
+  setupWizard: false
 github:
   enabled: true
 todo:
@@ -80,6 +84,11 @@ secrets:
 statusLine:
   preset: default
   separator: powerline-thin
+  contextLine: annotated
+  sessionAccent: false
+  transparent: false
+  compactThinkingLevel: false
+  showHookStatus: true
 hideThinkingBlock: true
 retry:
   fallbackRevertPolicy: cooldown-expiry
@@ -87,20 +96,78 @@ steeringMode: all
 completion:
   notify: "on"
 compaction:
-  thresholdPercent: 60
-  thresholdTokens: -1
+  thresholdPercent: 50
+  thresholdTokens: 150000
   methodOrder:
-    - remote
+    - shake
     - soft
+    - handoff
 bash:
   autoBackground:
     enabled: true
 dev:
-  autoqa: true
+  autoqa: false
 treeFilterMode: user-only
 autocompleteMaxVisible: 20
 shellMinimizer:
   enabled: true
+  sourceOutlineLevel: default
 setupVersion: 2
 composer:
-  shape: box
+  shape: rail
+tui:
+  textSizing: true
+  tight: true
+  resizeScrollback: rebuild
+  imeSafeCursor: true
+display:
+  showTokenUsage: true
+  shimmer: classic
+terminal:
+  showProgress: true
+symbolPreset: unicode
+colorBlindMode: false
+doubleEscapeAction: tree
+tools:
+  approvalMode: yolo
+  xdevDocs: builtins
+error:
+  notify: "off"
+stt:
+  modelName: parakeet
+  enabled: true
+  submitTrigger: never
+marketplace:
+  autoUpdate: auto
+power:
+  sleepPrevention: idle
+features:
+  unexpectedStopDetection: smart
+snapcompact:
+  shape: auto
+memory:
+  backend: "off"
+autolearn:
+  enabled: false
+edit:
+  mode: hashline
+python:
+  kernelMode: session
+astGrep:
+  enabled: true
+computer:
+  enabled: true
+  display: all
+generate_image:
+  enabled: false
+security:
+  enabled: true
+speechgen:
+  enabled: false
+plan:
+  enabled: true
+tts:
+  localVoice: af_heart
+live:
+  voice: sol
+showHardwareCursor: true
