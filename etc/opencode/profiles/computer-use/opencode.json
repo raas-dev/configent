@@ -10,6 +10,14 @@
       "disable": true
     }
   },
+  "mcp": {
+    "exa": {
+      "enabled": false
+    },
+    "codegraph": {
+      "enabled": false
+    }
+  },
   "permission": {
     "bash": {
       "osascript": "deny",
