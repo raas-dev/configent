@@ -97,6 +97,7 @@ if [ -t 0 ]; then
     fi
     git -C "$full_path" stash --include-untracked || true
     git -C "$full_path" pull --rebase origin "$git_branch" || true
+    git -C "$full_path" submodule update --init --recursive || true
     git -C "$full_path" stash pop || true
     . "$full_path/bootstrap" # 2> >(tee install_error.log >&2)
   fi
@@ -107,6 +108,7 @@ else
       "$TARGET_PATH" "$GIT_REF"
     git clone --quiet --depth 1 --branch "$GIT_REF" \
       "$GIT_REPO_URL" "$TARGET_PATH"
+    git -C "$TARGET_PATH" submodule update --init --recursive || true
   else
     git_branch="$(cd "$TARGET_PATH" && git rev-parse --abbrev-ref HEAD)"
     printf "Git working copy found at %s, pulling %s\n" \
@@ -118,6 +120,7 @@ else
     fi
     git -C "$TARGET_PATH" stash --include-untracked || true
     git -C "$TARGET_PATH" pull --rebase origin main || true
+    git -C "$TARGET_PATH" submodule update --init --recursive || true
     git -C "$TARGET_PATH" stash pop || true
   fi
   cd "$TARGET_PATH" &&
