@@ -10,13 +10,14 @@
       "disable": true
     }
   },
-  "mcp": {
-    "open-computer-use": {
-      "command": [
-        "open-computer-use",
-        "mcp"
-      ],
-      "type": "local"
+  "permission": {
+    "bash": {
+      "osascript": "deny",
+      "osascript *": "deny"
+    },
+    "skill": {
+      "agent-browser": "deny",
+      "browser-harness": "deny"
     }
   }
 }
