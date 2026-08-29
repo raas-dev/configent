@@ -598,7 +598,8 @@ alias sort-package-json='bunx sort-package-json'
 ### AI #########################################################################
 
 ai() {
-  local tools="read,bash,grep,find,inspect_image,browser,web_search,ask"
+  local tools="read,bash,grep,glob,browser,web_search,ask"
+  [ -n "$1" ] && tools="${tools%,ask}"  # ask unavailable in --print mode
   local system_prompt="$HOME/.omp/agent/commands/chat.md"
   if [ ! -r "$system_prompt" ]; then
     echo "Error: $system_prompt not found" >&2
