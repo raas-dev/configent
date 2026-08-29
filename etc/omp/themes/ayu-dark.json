@@ -67,5 +67,10 @@
     "statusLineOutput": "#BFBDB6",
     "statusLineCost": "#F29668",
     "statusLineSubagents": "#D2A6FF"
+  },
+  "symbols": {
+    "overrides": {
+      "icon.cache": "\u25c8"
+    }
   }
 }
