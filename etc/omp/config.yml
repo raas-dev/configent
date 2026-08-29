@@ -1,6 +1,6 @@
 modelRoles:
   default: zai/glm-5.3
-  smol: zai/glm-5-turbo
+  smol: zai/glm-5.3-flash
   slow: zai/glm-5.3
   vision: zai/glm-5.3
   plan: zai/glm-5.3
