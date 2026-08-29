@@ -629,7 +629,7 @@ agent() {
   else
     local profile="computer-use"
   fi
-  pic exec "$profile" -- pi "$*"
+  oc exec "$profile" -- opencode "$*"
 }
 
 ### Docker ####################################################################
