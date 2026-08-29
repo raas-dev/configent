@@ -16,7 +16,7 @@ prior_lines=${AUTOBOT_PRIOR_LINES:-16}
 # First-word aliases for this script (default ? — see dotfiles/.aliases). Empty to disable.
 aliases=${AUTOBOT_ALIASES-?}
 # omp --model (override with -m/--model).
-model=${AUTOBOT_MODEL:-zai/glm-5-turbo}
+model=${AUTOBOT_MODEL:-zai/glm-5.3-flash}
 
 # stdin: full pane/body; stdout: XML-ish sections — earlier blocks capped, last block primary
 autobot_last_cmd() {
