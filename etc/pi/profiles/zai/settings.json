@@ -1,5 +1,6 @@
 {
   "defaultModel": "glm-5.3",
+  "defaultProvider": "occam/zai",
   "enabledModels": [
     "*glm-5.2*",
     "*glm-5.3*"

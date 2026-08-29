@@ -1,5 +1,6 @@
 {
   "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
   "enabledModels": [
     "*minimax-M3*"
   ]
