@@ -98,7 +98,7 @@ completion:
   notify: "on"
 compaction:
   thresholdPercent: 50
-  thresholdTokens: 150000
+  thresholdTokens: -1
   methodOrder:
     - shake
     - soft
@@ -115,7 +115,7 @@ shellMinimizer:
   sourceOutlineLevel: default
 setupVersion: 2
 composer:
-  shape: pi
+  shape: field
 tui:
   textSizing: true
   tight: false
