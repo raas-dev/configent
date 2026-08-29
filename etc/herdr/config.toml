@@ -157,7 +157,7 @@ sidebar_start_collapsed = true
 
 # Ask for a tab name before creating a new tab.
 # Set false to create tabs immediately with generated names.
-# prompt_new_tab_name = true
+prompt_new_tab_name = false
 
 # Show detected/reported agent labels in split pane borders when no manual pane name is set.
 # show_agent_labels_on_pane_borders = false
@@ -171,6 +171,7 @@ sidebar_start_collapsed = true
 
 # Background notification popup delivery
 show_agent_labels_on_pane_borders = false
+status_indicators = "symbols"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show top-right in-app toasts
