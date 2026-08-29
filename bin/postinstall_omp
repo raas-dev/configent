@@ -66,6 +66,8 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 ### plugins ####################################################################
 
 if command -v omp >/dev/null; then
+  # marketplace
+  omp plugin marketplace update
   # https://github.com/ranxianglei/billion-context-omp
   omp install billion-context-omp
   # https://github.com/wsouto/omp-ponytail
@@ -74,4 +76,6 @@ if command -v omp >/dev/null; then
   omp plugin install omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
   omp plugin install @baylarsadigov/omp-undo-redo
+  # upgrade all installed plugins
+  omp plugin upgrade
 fi
