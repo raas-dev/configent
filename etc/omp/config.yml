@@ -172,3 +172,5 @@ tts:
 live:
   voice: sol
 showHardwareCursor: true
+spelling:
+  typoDetection: false
