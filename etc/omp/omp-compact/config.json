@@ -7,13 +7,13 @@
   "compactVibeRows": true,
   "displayCycleKey": "alt+c",
   "stats": {
-    "enabled": true,
+    "enabled": false,
     "actions": true,
     "sent": true,
     "received": true,
     "cache": true,
     "time": true,
-    "clock": true
+    "clock": false
   },
   "autoShake": {
     "enabled": false,
