@@ -1,5 +1,21 @@
 {
   "providers": {
+    "zai": {
+      "name": "zai",
+      "modelOverrides": {
+        "glm-5.3": {
+          "thinkingLevelMap": {
+            "off": "none",
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        }
+      }
+    },
     "occam/zai": {
       "name": "occam/zai",
       "baseUrl": "https://gw.alkue.dev",
