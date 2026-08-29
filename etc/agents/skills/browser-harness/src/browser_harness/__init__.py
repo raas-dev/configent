@@ -1,1 +1,0 @@
-"""Browser Harness core package."""
