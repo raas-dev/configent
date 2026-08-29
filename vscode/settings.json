@@ -655,7 +655,7 @@
   "workbench.preferredHighContrastColorTheme": "Based Ayu Dark Bordered",
   "workbench.preferredHighContrastLightColorTheme": "Based Ayu Dark Bordered",
   "workbench.preferredLightColorTheme": "Based Ayu Dark Bordered",
-  "workbench.secondarySideBar.defaultVisibility": "visible",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
