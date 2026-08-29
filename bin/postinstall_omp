@@ -76,6 +76,9 @@ if command -v omp >/dev/null; then
   omp plugin install omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
   omp plugin install @baylarsadigov/omp-undo-redo
+  # https://github.com/arksdev/omp-compact/blob/main/README.en.md
+  omp plugin marketplace add arksdev/omp-compact
+  omp plugin install omp-compact@arksdev
   # upgrade all installed plugins
   omp plugin upgrade
 fi
