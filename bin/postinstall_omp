@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in config.yml mcp.json keybindings.yml caveman.json; do
+for file in config.yml mcp.json keybindings.yml caveman.json headroom.yml; do
   if [ ! -r "$backup_path/.omp/agent/$file" ]; then
     if [ -r "$HOME/.omp/agent/$file" ]; then
       mkdir -p "$backup_path/.omp/agent"
@@ -68,5 +68,8 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 if command -v omp >/dev/null; then
   # https://github.com/ranxianglei/billion-context-omp
   omp install billion-context-omp
+  # https://github.com/wsouto/omp-ponytail
   omp install github:wsouto/omp-ponytail
+  # https://github.com/DarkPhilosophy/omp-headroom
+  omp plugin install omp-headroom
 fi
