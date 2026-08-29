@@ -618,8 +618,8 @@ ai() {
     --model openai/gpt-5.6-luna
     --system-prompt "$system_prompt"
   )
-  [ -n "$1" ] && args+=(--print "$*")
-  omp "${args[@]}"
+[ -n "$1" ] && args+=(--print "$*")
+omp "${args[@]}" 2> >(grep -v '^Working\.\.\.$' >&2)
 }
 
 agent() {
