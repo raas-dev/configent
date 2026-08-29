@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "enabled": true,
+  "mode": "compact",
+  "retainGitLive": true,
+  "compactPaths": true,
+  "compactVibeRows": true,
+  "displayCycleKey": "alt+c",
+  "stats": {
+    "enabled": true,
+    "actions": true,
+    "sent": true,
+    "received": true,
+    "cache": true,
+    "time": true,
+    "clock": true
+  },
+  "autoShake": {
+    "enabled": false,
+    "thresholdTokens": 120000
+  },
+  "host": {
+    "recapEnabled": true,
+    "thinkingBlocksVisible": false
+  }
+}
