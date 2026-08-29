@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "enabled": false,
+  "enabled": true,
   "mode": "compact",
   "retainGitLive": true,
   "compactPaths": true,
