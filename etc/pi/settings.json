@@ -35,9 +35,9 @@
     "npm:@quintinshaw/pi-dynamic-workflows",
     "npm:@zhcsyncer/pi-tool-display-intent",
     "git:github.com/iodic/pi-ayu-themes",
+    "git:github.com/DietrichGebert/ponytail",
     "git:github.com/jonjonrankin/pi-caveman",
-    "git:github.com/monotykamary/pi-double-esc",
-    "git:github.com/Smith42/ponytail@feat/statusline-format"
+    "git:github.com/monotykamary/pi-double-esc"
   ],
   "quietStartup": true,
   "retry": {
