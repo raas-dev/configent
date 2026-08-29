@@ -251,7 +251,7 @@ export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
 
 # ponytal
 export PONYTAIL_DEFAULT_MODE="ultra"
-export PONYTAIL_QUIET_STARTUP=true # omp
+export PONYTAIL_QUIET_STARTUP=true
 export PONYTAIL_HIDE_STATUS=true
 
 # pi

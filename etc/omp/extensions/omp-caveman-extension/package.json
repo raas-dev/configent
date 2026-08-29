@@ -1,0 +1,33 @@
+{
+  "name": "omp-caveman-extension",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OMP extension that injects caveman terseness per configured level.",
+  "license": "MIT",
+  "author": "Anssi Syrjäsalo",
+  "keywords": [
+    "omp",
+    "oh-my-pi",
+    "caveman",
+    "extension"
+  ],
+  "files": [
+    "src",
+    "scripts",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "smoke": "bun run ./scripts/smoke.ts"
+  },
+  "peerDependencies": {
+    "@oh-my-pi/pi-coding-agent": "*"
+  },
+  "omp": {
+    "name": "Caveman Mode",
+    "description": "Injects caveman per level via ~/.omp/agent/caveman.json; /caveman command sets level, toggles statusbar, and syncs the skill from upstream.",
+    "extensions": [
+      "./src/caveman-mode.ts"
+    ]
+  }
+}

@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in config.yml mcp.json keybindings.yml; do
+for file in config.yml mcp.json keybindings.yml caveman.json; do
   if [ ! -r "$backup_path/.omp/agent/$file" ]; then
     if [ -r "$HOME/.omp/agent/$file" ]; then
       mkdir -p "$backup_path/.omp/agent"
