@@ -23,6 +23,7 @@
     "npm:pi-rtk-optimizer",
     "npm:pi-tool-repair",
     "npm:pi-web-access",
+    "npm:@baylarsadigov/omp-undo-redo",
     "npm:@gamaraan/todos-tool",
     "npm:@jmcombs/pi-prompt-enhancer",
     "npm:@juicesharp/rpiv-ask-user-question",
