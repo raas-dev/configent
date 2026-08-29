@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.235.0](https://github.com/raas-dev/configent/compare/1.234.5...1.235.0) (2026-08-29)
+
+### Features
+
+* **agents:** add design-taste-frontend skill ([f80f331](https://github.com/raas-dev/configent/commit/f80f331c537dbfdd29e21771e5d3ef2fa7ec96d8))
+* **archify:** add Archify diagram skill ([c23c4f7](https://github.com/raas-dev/configent/commit/c23c4f7e812e3284fc613c0ad4ac2bc6ab4e6cf3))
+* **pi:** add zai thinking level overrides to models.json ([2c6f750](https://github.com/raas-dev/configent/commit/2c6f75014c4aed4c5306edc2b70b3a3dc68f35e5))
 ## [1.234.5](https://github.com/raas-dev/configent/compare/1.234.4...1.234.5) (2026-08-26)
 
 ### Fixes
