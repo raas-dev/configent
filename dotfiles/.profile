@@ -260,6 +260,26 @@ export PI_SKIP_VERSION_CHECK=1
 # pi: ponytail
 export PONYTAIL_STATUS_FORMAT="{label} {mode}"
 
+# CloakBrowser
+if command -v cloakbrowser >/dev/null 2>&1; then
+
+  # pi-computer-use
+  PI_COMPUTER_USE_CHROME_EXECUTABLE="$(cloakbrowser info 2>/dev/null | awk '/^Binary:/ {print $2}')"
+  export PI_COMPUTER_USE_CHROME_EXECUTABLE
+
+  # agent-browser
+  export AGENT_BROWSER_ENGINE="chrome"
+  export AGENT_BROWSER_EXECUTABLE_PATH="$PI_COMPUTER_USE_CHROME_EXECUTABLE"
+  _cb_py="$(dirname "$(realpath "$(mise exec pipx:cloakbrowser -- command -v cloakbrowser)")")/python"
+  AGENT_BROWSER_ARGS="$("$_cb_py" -c "
+from cloakbrowser.config import get_default_stealth_args
+# agent-browser splits on commas, so drop args containing commas
+print(','.join(a for a in get_default_stealth_args() if ',' not in a))
+" 2>/dev/null)"
+  [ -n "$AGENT_BROWSER_ARGS" ] && export AGENT_BROWSER_ARGS
+  unset _cb_py
+fi
+
 ### playwright #################################################################
 
 # set macOS default (~/Library/Caches/ms-playwright) equal to Linux default

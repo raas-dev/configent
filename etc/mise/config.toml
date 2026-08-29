@@ -59,6 +59,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 #'npm:@fission-ai/openspec' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
+'pipx:cloakbrowser' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cloakbrowser" }
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }

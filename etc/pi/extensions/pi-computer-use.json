@@ -1,0 +1,6 @@
+{
+  "browser_use": true,
+  "managed_browser": "chrome",
+  "headless": true,
+  "cursor_overlay": true
+}
