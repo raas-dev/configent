@@ -5,7 +5,7 @@
     "enabled": true
   },
   "defaultModel": "glm-5.3",
-  "defaultProvider": "zai",
+  "defaultProvider": "occam/zai",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
