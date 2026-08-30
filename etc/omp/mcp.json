@@ -1,4 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
-  "mcpServers": {}
+  "mcpServers": {
+    "zai-vision": {
+      "command": "npx",
+      "args": ["@z_ai/mcp-server"],
+      "env": {
+        "Z_AI_API_KEY": "${ZAI_API_KEY}",
+        "Z_AI_MODE": "ZAI"
+      }
+    }
+  }
 }
