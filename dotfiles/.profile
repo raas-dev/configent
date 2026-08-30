@@ -270,7 +270,7 @@ if command -v cloakbrowser >/dev/null 2>&1; then
     # agent-browser
     export AGENT_BROWSER_ENGINE="chrome"
     export AGENT_BROWSER_EXECUTABLE_PATH="$_cb_bin"
-    _cb_py="$(dirname "$(realpath "$(mise exec pipx:cloakbrowser -- command -v cloakbrowser)")")/python"
+    _cb_py="$(dirname "$(realpath "$(mise which cloakbrowser 2>/dev/null || command -v cloakbrowser)")")/python"
     AGENT_BROWSER_ARGS="$("$_cb_py" -c '
 from cloakbrowser.config import get_default_stealth_args
 # agent-browser splits on commas, so drop args containing commas
