@@ -3,8 +3,12 @@ modelRoles:
   smol: zai/glm-5.3-flash
   slow: zai/glm-5.3
   vision: zai/glm-5.3
-  plan: zai/glm-5.3
+  plan: zai/glm-5.3:off
   commit: zai/glm-5.3
+  tiny: zai/glm-5.3
+  designer: zai/glm-5.3
+  task: zai/glm-5.3
+  advisor: zai/glm-5.3
 renderMermaid:
   enabled: true
 checkpoint:
@@ -176,3 +180,7 @@ spelling:
   typoDetection: false
 images:
   blockImages: false
+advisor:
+  enabled: true
+tier:
+  advisor: inherit
