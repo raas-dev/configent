@@ -3,7 +3,7 @@ modelRoles:
   smol: zai/glm-5.3-flash
   slow: zai/glm-5.3
   vision: zai/glm-5.3
-  plan: zai/glm-5.3:off
+  plan: zai/glm-5.3
   commit: zai/glm-5.3
   tiny: zai/glm-5.3
   designer: zai/glm-5.3
@@ -121,7 +121,7 @@ setupVersion: 2
 composer:
   shape: field
 tui:
-  textSizing: true
+  textSizing: false
   tight: false
   resizeScrollback: rebuild
   imeSafeCursor: true
@@ -181,6 +181,11 @@ spelling:
 images:
   blockImages: false
 advisor:
-  enabled: true
+  enabled: false
 tier:
   advisor: inherit
+extendedContext: false
+cycleOrder:
+  - smol
+  - default
+  - slow
