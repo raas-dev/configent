@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.235.3](https://github.com/raas-dev/configent/compare/1.235.2...1.235.3) (2026-08-31)
+
+### Fixes
+
+* **pi:** set defaultProvider to occam/zai ([80696b6](https://github.com/raas-dev/configent/commit/80696b6c965b0a2bc17cf22ff1dd430833506031))
 ## [1.235.2](https://github.com/raas-dev/configent/compare/1.235.1...1.235.2) (2026-08-30)
 
 ### Fixes
