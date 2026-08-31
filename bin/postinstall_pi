@@ -132,10 +132,3 @@ ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
 
 # (pre-)install or update extensions (requires npm in PATH)
 command -v mise >/dev/null && mise exec node -- pi update --extensions
-
-### nono sandbox compatibility #################################################
-
-# Install node-based pi for nono (see sb) - bun binary can't find npm in sandbox
-if command -v mise >/dev/null; then
-  mise exec node -- npm install -g @earendil-works/pi-coding-agent
-fi
