@@ -4,8 +4,8 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "glm-5.3",
-  "defaultProvider": "occam/zai",
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
