@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.235.4](https://github.com/raas-dev/configent/compare/1.235.3...1.235.4) (2026-09-01)
+
+### Fixes
+
+* **pi:** set default model/provider to minimax ([45275ac](https://github.com/raas-dev/configent/commit/45275ace71707be32cd28f4286da159b09d7dded))
 ## [1.235.3](https://github.com/raas-dev/configent/compare/1.235.2...1.235.3) (2026-08-31)
 
 ### Fixes
