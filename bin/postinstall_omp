@@ -27,7 +27,7 @@ for file in config.yml mcp.json keybindings.yml caveman.json headroom.yml; do
 done
 
 # dirs
-for dir in agents commands extensions hooks modules omp-compact skills themes; do
+for dir in agents commands extensions hooks modules skills themes; do
   if [ ! -r "$backup_path/.omp/agent/$dir" ]; then
     if [ -r "$HOME/.omp/agent/$dir" ]; then
       mkdir -p "$backup_path/.omp/agent/$dir"
@@ -76,9 +76,6 @@ if command -v omp >/dev/null; then
   omp plugin install omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
   omp plugin install @baylarsadigov/omp-undo-redo
-  # https://github.com/arksdev/omp-compact/blob/main/README.en.md
-  omp plugin marketplace add arksdev/omp-compact 2>/dev/null || true
-  omp plugin install omp-compact@arksdev --force
   # upgrade all installed plugins
   omp plugin upgrade
 fi
