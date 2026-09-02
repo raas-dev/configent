@@ -1,6 +1,6 @@
 {
   "enableToast": false,
-  "tuiCommandDisplay": "dialog",
+  "tuiCommandDisplay": "inline",
   "showSessionTokens": false,
   "sessionTokenScope": "current",
   "enabledProviders": [
