@@ -21,3 +21,6 @@ session_live_messages: 24
 session_prefix_min_chars: 30000
 session_prefix_min_share: 0.45
 session_archive_max_message_chars: 900
+
+# https://github.com/asyrjasalo/omp-headroom
+widget: false
