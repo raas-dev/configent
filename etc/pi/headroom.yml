@@ -1,0 +1,18 @@
+min_tool_chars: 12000
+anthropic_min_tool_chars: 8000
+min_provider_chars: 1000
+
+adaptive: true
+adaptive_start: 0.5
+adaptive_full: 0.9
+adaptive_floor: 0.25
+
+debug_sizing: false
+
+session_archive: true
+session_live_messages: 24
+session_prefix_min_chars: 30000
+session_prefix_min_share: 0.45
+session_archive_max_message_chars: 900
+
+widget: false
