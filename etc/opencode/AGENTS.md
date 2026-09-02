@@ -16,7 +16,7 @@
 - no comment soup
 
 ## verify
-- run before "done"
+- test e2e before "done"
 - no fake complete
 - no PR/push/publish w/o ask
 
