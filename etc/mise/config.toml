@@ -55,7 +55,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 #'github:sortie-ai/sortie' = 'latest'
 'github:vercel-labs/agent-browser' = 'latest'
 'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
-'npm:@colbymchenry/codegraph' = 'latest'
+'github:DeusData/codebase-memory-mcp' = 'latest'
 #'npm:@fission-ai/openspec' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }

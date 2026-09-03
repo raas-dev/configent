@@ -49,7 +49,7 @@
         "variant": "low",
         "skills": [],
         "mcps": [
-          "codegraph"
+          "codebase-memory-mcp"
         ]
       },
       "oracle": {

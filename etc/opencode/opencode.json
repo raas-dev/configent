@@ -7,12 +7,10 @@
       "url": "https://mcp.exa.ai/mcp",
       "enabled": true
     },
-    "codegraph": {
+    "codebase-memory-mcp": {
       "type": "local",
       "command": [
-        "codegraph",
-        "serve",
-        "--mcp"
+        "codebase-memory-mcp"
       ],
       "enabled": true
     }

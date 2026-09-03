@@ -14,7 +14,7 @@
     "exa": {
       "enabled": false
     },
-    "codegraph": {
+    "codebase-memory-mcp": {
       "enabled": false
     }
   },
