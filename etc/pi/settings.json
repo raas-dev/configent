@@ -21,6 +21,7 @@
     "npm:pi-open-tui",
     "npm:pi-rewind-hook",
     "npm:pi-rtk-optimizer",
+    "npm:pi-subagents",
     "npm:pi-tool-repair",
     "npm:pi-web-access",
     "npm:@baylarsadigov/omp-undo-redo",
