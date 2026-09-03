@@ -12,7 +12,7 @@
 
 ## build
 - todo for 1+ task
-- test first
+- write tests
 - no comment soup
 
 ## verify
