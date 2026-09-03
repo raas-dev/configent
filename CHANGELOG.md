@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.236.0](https://github.com/raas-dev/configent/compare/1.235.4...1.236.0) (2026-09-03)
+
+### Features
+
+* **opencode:** add codebase-memory-mcp graph tooling ([6892747](https://github.com/raas-dev/configent/commit/689274733ba31d49a7c2162b8699cd660229befd))
+* **pi:** replace pi-fovea with pi-cbm ([5ecb7fc](https://github.com/raas-dev/configent/commit/5ecb7fc8f94b86c0d00000a52026d922cc84aa36))
 ## [1.235.4](https://github.com/raas-dev/configent/compare/1.235.3...1.235.4) (2026-09-01)
 
 ### Fixes
