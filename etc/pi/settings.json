@@ -14,7 +14,7 @@
   "packages": [
     "npm:billion-context-pi",
     "npm:pi-context-view",
-    "npm:pi-fovea",
+    "npm:pi-cbm",
     "npm:pi-image-tools",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
