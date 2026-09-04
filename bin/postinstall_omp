@@ -73,6 +73,7 @@ if command -v omp >/dev/null; then
   # https://github.com/wsouto/omp-ponytail
   omp plugin install github:wsouto/omp-ponytail
   # https://github.com/asyrjasalo/omp-headroom
+  (cd "$HOME/.omp/plugins" && bun remove omp-headroom >/dev/null 2>&1) || true
   omp plugin install github:asyrjasalo/omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
   omp plugin install @baylarsadigov/omp-undo-redo
