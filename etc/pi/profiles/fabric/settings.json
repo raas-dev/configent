@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "npm:pi-fabric",
+    "npm:pi-queue-steer-factory"
+  ]
+}
