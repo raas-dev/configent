@@ -84,7 +84,7 @@ if command -v opencode >/dev/null; then
     ' "$opencode_config")
     for plugin in $plugins; do
       printf "Installing opencode plugin: %s\n" "$plugin"
-      npm install --prefix "$HOME/.config/opencode" "$plugin" >/dev/null 2>&1 || true
+      npm install --prefix "$HOME/.config/opencode" --no-fund --no-audit </dev/null "$plugin" >/dev/null 2>&1 || true
     done
   done
 fi
