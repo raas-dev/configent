@@ -112,7 +112,7 @@
     "nudgeGrowthTokens": 50000,
     // Context usage at which growth floor is bypassed and nudges fire
     // unconditionally (emergency override). Number or "X%".
-    "emergencyThresholdPercent": "98%",
+    "emergencyThresholdPercent": "95%",
     // Master switch for recent-message protection. false disables all
     // protection (preserveRecentMessages/Tokens/LastUserMessage).
     "lastSegmentSoftBlock": true,

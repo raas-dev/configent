@@ -5,7 +5,7 @@
   "toolBashDefaultTimeout": 60,
   "toolOutputMaxBytes": 200000,
   "compress": {
-    "maxContextLimit": "75%",
+    "maxContextLimit": "50%",
     "emergencyThresholdPercent": "95%",
     "nudgeGrowthTokens": 50000
   }
