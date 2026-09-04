@@ -22,15 +22,15 @@
     }
   },
   "plugin": [
-    "caveman-opencode-plugin",
+    "opencode-acp",
     "opencode-lazy-loader",
     "opencode-todo-reminder",
+    "caveman-opencode-plugin",
     "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
     "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
-    "@slkiser/opencode-quota",
-    "@tarquinen/opencode-dcp"
+    "@slkiser/opencode-quota"
   ],
   "share": "disabled",
   "experimental": {

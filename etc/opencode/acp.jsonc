@@ -1,0 +1,177 @@
+{
+  // JSON Schema reference for IDE autocomplete
+  // Source: https://github.com/ranxianglei/opencode-acp (dcp.schema.json, pre-rename)
+  "$schema": "https://raw.githubusercontent.com/ranxianglei/opencode-acp/master/dcp.schema.json",
+  // Enable or disable the plugin
+  "enabled": true,
+  // Auto-update npm-installed plugin when newer npm latest is available.
+  // Version-locked plugin specs are not updated.
+  "autoUpdate": true,
+  // Enable full debug logging (overrides logLevel)
+  "debug": false,
+  // Log verbosity: decision-level events (info) written by default;
+  // debug adds per-message detail; warn/error/silent reduce output.
+  "logLevel": "info",
+  // Level of notification shown when context management occurs:
+  // "off", "minimal", or "detailed"
+  "pruneNotification": "off",
+  // Where to display notifications ("chat" deprecated, falls back to toast)
+  "pruneNotificationType": "toast",
+  // Slash commands configuration (/acp; "dcp" accepted as legacy alias)
+  "commands": {
+    // Enable slash commands (/acp)
+    "enabled": true,
+    // Tool names/wildcard patterns protected from pruning via commands.
+    // Globs: * any chars, ? single char (e.g. "mcp_*")
+    "protectedTools": [
+      "task",
+      "skill",
+      "todowrite",
+      "todoread",
+      "compress",
+      "decompress",
+      "batch",
+      "plan_enter",
+      "plan_exit",
+      "write",
+      "edit"
+    ]
+  },
+  // Allow ACP processing in subagent sessions (full compression/nudge
+  // capabilities). Moved out of experimental in v1.14.13.
+  "allowSubAgents": true,
+  // Experimental settings that may change in future releases
+  "experimental": {
+    // Enable user-editable prompt overrides under acp-prompts directories
+    "customPrompts": false
+  },
+  // Glob patterns for files protected from pruning (e.g. "**/*.config.ts")
+  "protectedFilePatterns": [],
+  // Unified context compression tool and behavior settings
+  "compress": {
+    // Permission mode: "allow" (no prompt), "ask" (prompt), "deny" (tool not registered)
+    "permission": "allow",
+    // Show compression summaries in notifications
+    "showCompression": true,
+    // Active summary tokens extend the effective maxContextLimit
+    // used for context-limit nudges
+    "summaryBuffer": true,
+    // Soft upper threshold: above this, strong compression nudges fire
+    // (frequency per nudgeFrequency). Accepts number or "X%" of context window.
+    "maxContextLimit": 200000,
+    // DEPRECATED — growth nudges (minNudgeContextPercent) are the maintained
+    // floor. Soft lower threshold for reminder nudges; still honored until removed.
+    "minContextLimit": 150000,
+    // Per-model override for maxContextLimit by providerID/modelID.
+    // Wins over global maxContextLimit. Accepts number or "X%".
+    // Example: { "openai/gpt-5.3-codex": 120000 }
+    "modelMaxLimits": {},
+    // Nested per-provider/per-model overrides for every tunable compress
+    // field. Cascade: providers[p].models[m] > providers[p] > global value.
+    // Unset fields never clear shallower values. Not overridable here:
+    // permission, minContextLimit/modelMinLimits, modelMaxLimits, providers itself.
+    "providers": {},
+    // How often the context-limit nudge fires when above maxContextLimit
+    // (1 = every fetch, 5 = every 5th fetch)
+    "nudgeFrequency": 5,
+    // Messages to wait after a user message before compression reminders
+    "iterationNudgeThreshold": 15,
+    // How likely compression is after user messages
+    // ("strong" = more likely, "soft" = less likely)
+    "nudgeForce": "soft",
+    // Tool names/wildcard patterns hard-excluded from compression ranges.
+    // Explicit array replaces root default. Globs: * any, ? single char.
+    "protectedTools": ["skill", "compress"],
+    // Preserve text wrapped in <protect>...</protect> when compressed
+    "protectTags": false,
+    // Your messages are never lost during compression.
+    // Warning: large copy-pasted prompts will never be compressed away
+    "protectUserMessages": false,
+    // Minimum context usage percent for growth-triggered nudges;
+    // growth nudges below this floor are suppressed (0 disables)
+    "minNudgeContextPercent": 5,
+    // Hard limit for summary length (chars)
+    "maxSummaryLengthHard": 20000,
+    // Max disjoint visible-id segments shown to the model; beyond this,
+    // only largest tool-bearing segments shown with "+N omitted" note.
+    "maxVisibleSegments": 50,
+    // Max chars kept inline per [[KEEP:...]] expansion
+    "keepEmbedMaxChars": 2000,
+    // Minimum compressible content (chars) required for compression to
+    // proceed; below this the compress tool rejects (protected content excluded)
+    "minCompressRange": 5000,
+    // Fraction of nudgeGrowthTokens that must accumulate before a nudge
+    // fires. growthFloor = max(minNudgeGrowthFloor, ratio x nudgeGrowthTokens).
+    // Bypassed only at emergencyThresholdPercent.
+    "minNudgeGrowthRatio": 0.45,
+    // Absolute floor (tokens) for nudge growth threshold; prevents
+    // small-context models from an excessively low growth floor
+    "minNudgeGrowthFloor": 5000,
+    // Token growth required between per-message nudges. Unset = 50000.
+    // Also drives T2/T3 tier triggers and the growthFloor anti-thrash gate.
+    "nudgeGrowthTokens": 50000,
+    // Context usage at which growth floor is bypassed and nudges fire
+    // unconditionally (emergency override). Number or "X%".
+    "emergencyThresholdPercent": "98%",
+    // Master switch for recent-message protection. false disables all
+    // protection (preserveRecentMessages/Tokens/LastUserMessage).
+    "lastSegmentSoftBlock": true,
+    // Min recent messages always protected from compression
+    "preserveRecentMessages": 5,
+    // Min token window of recent messages always protected;
+    // protection zone is union of count and window
+    "preserveRecentTokens": 5000,
+    // Always protect the most recent user message from compression
+    "preserveLastUserMessage": true
+  },
+  // Garbage collection and batch cleanup configuration
+  "gc": {
+    // Only "truncate" supported
+    "algorithm": "truncate",
+    // Promote blocks to higher tier after N compressions
+    "promotionThreshold": 5,
+    // Max block age before GC (no-op in current version; default MAX_SAFE_INTEGER)
+    "maxBlockAge": 9007199254740991,
+    // Max old-generation summary length (chars)
+    "maxOldGenSummaryLength": 3000,
+    // Context usage triggering major GC. Number or "X%".
+    "majorGcThresholdPercent": "100%",
+    // Three-tier batch merge-cleanup thresholds for mark_block'd blocks.
+    // Number or "X%" of context window.
+    "batchCleanup": {
+      // At/above this: reminder to merge marked blocks injected
+      "lowThreshold": "55%",
+      // At/above this: marked blocks merge-compressed into one
+      "highThreshold": "75%",
+      // At/above this: all old-gen blocks merged regardless of marks
+      "forceThreshold": "90%"
+    }
+  },
+  // Post-compression quality evaluation. Non-blocking: failures only
+  // logger.warn; the compression result is already committed.
+  "qualityGate": {
+    // Enable quality gate evaluation (off by default for burn-in)
+    "enabled": false,
+    // Name of the registered QualityGate algorithm to run
+    "algorithm": "rouge-recall-v1",
+    // Per-algorithm config map, keyed by algorithm name.
+    // NOTE: v1.14.27 validator wrongly flags per-algorithm keys as unknown
+    // (recursion skip list misses qualityGate.algorithms). Params are the
+    // built-in defaults anyway (200 / 5 / 0.05 / 0.2) — re-add when fixed.
+    "algorithms": {}
+  },
+  // Pluggable filter system cleaning up third-party (e.g. OMO) injected
+  // messages that accumulate duplicates
+  "messageFilters": {
+    // Master switch for all message filters
+    "enabled": true,
+    // Per-filter config map, keyed by filter name
+    "filters": {
+      "omo-system-reminder": { "enabled": true },
+      "omo-todo-continuation": { "enabled": true },
+      "omo-context": { "enabled": true },
+      "omo-task-directive": { "enabled": true },
+      "omo-mode-injection": { "enabled": true }
+    }
+  }
+}
