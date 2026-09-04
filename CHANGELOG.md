@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.236.1](https://github.com/raas-dev/configent/compare/1.236.0...1.236.1) (2026-09-04)
+
+### Fixes
+
+* **opencode:** replace DCP plugin with ACP config ([e1d373d](https://github.com/raas-dev/configent/commit/e1d373d7f28e702041cd0a9a78cf5a2fdbefd969))
 ## [1.236.0](https://github.com/raas-dev/configent/compare/1.235.4...1.236.0) (2026-09-03)
 
 ### Features
