@@ -10,7 +10,7 @@
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.85.0",
   "packages": [
     "npm:billion-context-pi",
     "npm:pi-context-view",
