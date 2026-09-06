@@ -29,7 +29,7 @@
     "npm:@jmcombs/pi-prompt-enhancer",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@mjasnikovs/pi-task",
-    "npm:@mrclrchtr/supi-bash-timeout",
+    "npm:@jamiefutch/pi-timeout",
     "npm:@monotykamary/pi-loop",
     "npm:@monotykamary/pi-retry",
     "npm:@narumitw/pi-btw",
@@ -43,6 +43,7 @@
     "git:github.com/monotykamary/pi-double-esc"
   ],
   "quietStartup": true,
+  "runTimeout": { "fallbackMaxSeconds": 30 },
   "retry": {
     "baseDelayMs": 2000,
     "enabled": true,
