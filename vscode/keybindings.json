@@ -571,11 +571,11 @@
   },
   {
     "command": "agentterminal.run",
-    "key": "ctrl+a s"
+    "key": "ctrl+a a"
   },
   {
     "command": "agentterminal.run",
-    "key": "ctrl+a ctrl+s"
+    "key": "ctrl+a ctrl+a"
   },
   {
     "command": "workbench.action.chat.openAsk",
