@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.236.2](https://github.com/raas-dev/configent/compare/1.236.1...1.236.2) (2026-09-06)
+
+### Fixes
+
+* **terminal:** switch prefix from Ctrl+A to Ctrl+S ([bbbed6c](https://github.com/raas-dev/configent/commit/bbbed6c2da21e61237bef67fdcefe208b59ab6eb))
+* **vscode:** remap agentterminal.run Ctrl+A shortcuts to Ctrl+A ([948fb06](https://github.com/raas-dev/configent/commit/948fb06b4fef0d70563e6712082d092d4ced798b))
 ## [1.236.1](https://github.com/raas-dev/configent/compare/1.236.0...1.236.1) (2026-09-04)
 
 ### Fixes
