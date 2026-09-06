@@ -69,11 +69,6 @@
       "label": "@dev"
     },
     {
-      "command": "exec lazyssh",
-      "id": "lazyssh",
-      "label": "lazyssh"
-    },
-    {
       "args": [
         "-il",
         "-c",
@@ -82,6 +77,11 @@
       "command": "exec zsh",
       "id": "omp-chat",
       "label": "omp: chat"
+    },
+    {
+      "command": "exec lazyssh",
+      "id": "lazyssh",
+      "label": "lazyssh"
     },
     {
       "args": [
