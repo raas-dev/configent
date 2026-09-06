@@ -109,6 +109,13 @@ focus_pane_right = ["prefix+l", "prefix+right"]
 # type = "pane"
 # command = "lazygit"
 
+# plugin: herdr-navigator
+[[keys.command]]
+key = "prefix+t"
+type = "plugin_action"
+command = "herdr-navigator.open"
+description = "jump to anything"
+
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
 # [keys.indexed]
