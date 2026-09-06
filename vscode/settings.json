@@ -469,7 +469,7 @@
       "id": "sbc_panel",
       "name": "Panel",
       "priority": 25000,
-      "text": "$(terminal)",
+      "text": "$(layout-panel)",
       "tooltip": "Toggle Panel"
     },
     {
