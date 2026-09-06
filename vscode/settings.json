@@ -465,21 +465,21 @@
   "statusbar_command.commands": [
     {
       "alignment": "left",
-      "command": "workbench.action.togglePanel",
-      "id": "sbc_panel",
-      "name": "Panel",
-      "priority": 25000,
-      "text": "$(layout-panel)",
-      "tooltip": "Toggle Panel"
-    },
-    {
-      "alignment": "left",
       "command": "agentterminal.run",
       "id": "sbc_session",
       "name": "Start Session",
-      "priority": 24000,
+      "priority": 25000,
       "text": "$(empty-window)",
       "tooltip": "Start Session"
+    },
+    {
+      "alignment": "left",
+      "command": "workbench.action.togglePanel",
+      "id": "sbc_panel",
+      "name": "Panel",
+      "priority": 24000,
+      "text": "$(layout-panel)",
+      "tooltip": "Toggle Panel"
     },
     {
       "alignment": "left",
@@ -489,15 +489,6 @@
       "priority": 23000,
       "text": "$(gear)",
       "tooltip": "Open Settings"
-    },
-    {
-      "alignment": "left",
-      "command": "code-runner.run",
-      "id": "sbc_run",
-      "name": "Run",
-      "priority": 22000,
-      "text": "$(run)",
-      "tooltip": "Run Code"
     }
   ],
   "statusbarDebugger.priority": 20000,
