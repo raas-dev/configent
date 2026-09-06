@@ -1,0 +1,18 @@
+{
+  "superagents": {
+    "makeSuperpowersSkillsOptInOnly": true,
+    "commands": {
+      "sp-implement-parallel": {
+        "taskScheduling": "parallel",
+        "reviewCadence": "per-task",
+        "useSubagents": true,
+        "useTestDrivenDevelopment": true,
+        "useBranches": false,
+        "worktrees": {
+          "enabled": true,
+          "root": null
+        }
+      }
+    }
+  }
+}
