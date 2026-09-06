@@ -4,6 +4,7 @@
 !chatLanguageModels.json
 !create_extensions_list
 !extensions.list
+!extensions.list.pre-agents
 !keybindings.json
 !mcp.json
 !settings.json
