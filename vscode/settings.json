@@ -700,5 +700,8 @@
     "azure-pipelines.yml",
     "azure-pipelines.yaml"
   ],
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "workbench.editor.autoLockGroups": {
+    "terminalEditor": false
+  }
 }
