@@ -1,20 +1,18 @@
 modelRoles:
-  default: minimax/MiniMax-M3 #zai/glm-5.3
-  smol: minimax/MiniMax-M3 #zai/glm-5.3-flash
-  slow: minimax/MiniMax-M3 #zai/glm-5.3
-  vision: minimax/MiniMax-M3 #zai/glm-5.3
-  plan: minimax/MiniMax-M3 #zai/glm-5.3
-  commit: minimax/MiniMax-M3 #zai/glm-5.3
-  tiny: minimax/MiniMax-M3 #zai/glm-5.3
-  designer: minimax/MiniMax-M3 #zai/glm-5.3
-  task: minimax/MiniMax-M3 #zai/glm-5.3
-  advisor: minimax/MiniMax-M3 #zai/glm-5.3
+  default: minimax/MiniMax-M3
+  smol: minimax/MiniMax-M3
+  slow: minimax/MiniMax-M3
+  vision: minimax/MiniMax-M3
+  plan: minimax/MiniMax-M3
+  commit: minimax/MiniMax-M3
+  tiny: minimax/MiniMax-M3
+  designer: minimax/MiniMax-M3
+  task: minimax/MiniMax-M3
+  advisor: minimax/MiniMax-M3
 renderMermaid:
   enabled: true
 checkpoint:
   enabled: true
-inspect_image:
-  mode: auto
 calc:
   enabled: true
 commands:
@@ -63,7 +61,7 @@ task:
   disabledAgents:
     []
   isolation:
-    mode: none
+    enabled: false
   eager: always
 interruptMode: immediate
 followUpMode: one-at-a-time
@@ -133,6 +131,7 @@ doubleEscapeAction: tree
 tools:
   approvalMode: yolo
   xdevDocs: builtins
+  maxTimeout: 600
 error:
   notify: "off"
 stt:
@@ -186,3 +185,5 @@ cycleOrder:
   - smol
   - default
   - slow
+ask:
+  timeout: 60
