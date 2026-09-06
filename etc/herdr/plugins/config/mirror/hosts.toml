@@ -1,0 +1,2 @@
+[hosts.dev]
+target = "dev"

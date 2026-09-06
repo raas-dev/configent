@@ -38,9 +38,25 @@ rm -rf "$HOME/.config/herdr/plugins/config"
 ln -sfnv "$config_path/herdr/plugins/config" \
   "$HOME/.config/herdr/plugins/config"
 
+### herdr-mirror ###############################################################
+
+# hosts.toml
+if [ ! -r "$backup_path/.config/herdr-mirror/hosts.toml" ]; then
+  if [ -r "$HOME/.config/herdr-mirror/hosts.toml" ]; then
+    mkdir -p "$backup_path/.config/herdr-mirror"
+    cp -P "$HOME/.config/herdr-mirror/hosts.toml" \
+      "$backup_path/.config/herdr-mirror/hosts.toml"
+  fi
+fi
+mkdir -p "$HOME/.config/herdr-mirror"
+ln -sfnv "$config_path/herdr/plugins/config/mirror/hosts.toml" \
+  "$HOME/.config/herdr-mirror/hosts.toml"
+
 ### plugins ####################################################################
 
 if command -v herdr >/dev/null; then
   # https://github.com/alvinunreal/oh-my-opencode-slim
   herdr plugin install alvinunreal/oh-my-opencode-slim --yes
+  herdr plugin install nikok6/herdr-mirror --yes
+  herdr server reload-config
 fi
