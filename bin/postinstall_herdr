@@ -58,6 +58,7 @@ if command -v herdr >/dev/null; then
   # https://github.com/alvinunreal/oh-my-opencode-slim
   herdr plugin install alvinunreal/oh-my-opencode-slim --yes
   herdr plugin install nikok6/herdr-mirror --yes
+  herdr plugin install JanTvrdik/herdr-command-palette --yes
   herdr plugin install plannotator/herdr-annotate --yes
   herdr plugin install thanhdat77/herdr-navigator --yes
   herdr server reload-config
