@@ -2,7 +2,7 @@
   "debug": false,
   "autoUpdate": false,
   "modelContextLimit": 200000,
-  "toolBashDefaultTimeout": 60,
+  "toolBashDefaultTimeout": 20,
   "toolOutputMaxBytes": 200000,
   "delegate": {
     "enabled": true,
