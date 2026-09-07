@@ -685,5 +685,6 @@
     "terminalEditor": false
   },
   "auto-reload.interval": 500,
-  "autoscroll.autoEnableForLogs": true
+  "autoscroll.autoEnableForLogs": true,
+  "git.blame.editorDecoration.enabled": true
 }
