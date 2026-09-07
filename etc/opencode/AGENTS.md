@@ -12,7 +12,7 @@
 
 ## build
 - todo for 1+ task
-- no long timeouts for tools
+- run command → short timeout
 - only few and short comments
 
 ## verify
@@ -20,8 +20,8 @@
 - add regression test after fix
 - no PR/push/publish w/o ask
 
-## answer
-- only summary at end
+## summary
+- one sentence summary
 - risks → propose fix path
 - propose next task
 
