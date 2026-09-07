@@ -250,9 +250,9 @@ type = "plugin_action"
 command = "herdr-navigator.open"
 description = "jump to anything"
 
-# herdr-command-palette
+# herdr-bar
 [[keys.command]]
 key = "prefix+p"
 type = "plugin_action"
-command = "jt.command-palette.open"
-description = "Command palette"
+command = "herdr-bar.open"
+description = "command bar"
