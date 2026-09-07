@@ -50,7 +50,6 @@ herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_
 nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'aqua:rtk-ai/rtk' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
-#'github:kcosr/herdr-web' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 #'github:sortie-ai/sortie' = 'latest'
 'github:vercel-labs/agent-browser' = 'latest'
