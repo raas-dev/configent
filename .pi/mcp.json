@@ -1,20 +1,25 @@
 {
   "mcpServers": {
-    "zai-vision": {
-      "command": "npx",
+    "minimax-vision": {
+      "command": "uvx",
       "args": [
-        "-y",
-        "@z_ai/mcp-server"
+        "minimax-coding-plan-mcp"
       ],
       "env": {
-        "Z_AI_API_KEY": "${ZAI_API_KEY}",
-        "Z_AI_MODE": "ZAI"
+        "MINIMAX_API_KEY": "${MINIMAX_API_KEY}",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
       },
       "lifecycle": "lazy",
+      "directTools": ["understand_image"]
+    },
+    "context-mode": {
+      "command": "context-mode",
+      "lifecycle": "eager",
       "directTools": true
     }
   },
   "settings": {
-    "toolPrefix": "none"
+    "toolPrefix": "none",
+    "disableProxyTool": true
   }
 }
