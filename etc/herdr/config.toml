@@ -9,7 +9,7 @@ onboarding = false
 # Built-in themes: catppuccin, terminal, tokyo-night, dracula, nord,
 #                  gruvbox, one-dark, solarized, kanagawa, rose-pine,
 #                  vesper
-name = "gruvbox"
+name = "kanagawa"
 
 # Override individual color tokens on top of the base theme.
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
@@ -167,11 +167,12 @@ prompt_new_tab_name = false
 
 # Accent color for highlights, borders, and navigation UI.
 # Accepts: hex (#89b4fa), named colors (cyan, blue, magenta), or rgb(r,g,b)
-# accent = "cyan"
+accent = "#B8CC52"
 
 # Background notification popup delivery
-show_agent_labels_on_pane_borders = false
-status_indicators = "symbols"
+show_agent_labels_on_pane_borders = true
+status_indicators = "dots"
+
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show top-right in-app toasts
