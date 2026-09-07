@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.236.4](https://github.com/raas-dev/configent/compare/1.236.3...1.236.4) (2026-09-07)
+
+### Fixes
+
+* **aliases:** map '?' to trans instead of autobot ([cebf0fc](https://github.com/raas-dev/configent/commit/cebf0fcf6e2b1e2ba068572e80fdb9bb4b1944bc))
+* **dotfiles:** reuse herdr workspace tabs in c() ([d4221c4](https://github.com/raas-dev/configent/commit/d4221c44fcfb8cc12d7ab0a185cd0a79b4d7bd7a))
+* **herdr:** start sidebar expanded ([64d891f](https://github.com/raas-dev/configent/commit/64d891f5ec956bc8245dd055aa2507c6ef67e78d))
 ## [1.236.3](https://github.com/raas-dev/configent/compare/1.236.2...1.236.3) (2026-09-07)
 
 ### Fixes
