@@ -55,8 +55,8 @@ ln -sfnv "$config_path/herdr/plugins/config/mirror/hosts.toml" \
 ### plugins ####################################################################
 
 if command -v herdr >/dev/null; then
-  # https://github.com/alvinunreal/oh-my-opencode-slim
   herdr plugin install alvinunreal/oh-my-opencode-slim --yes
+  herdr plugin install aorumbayev/herdr-workflows --yes
   herdr plugin install jeffarese/herdr-bar --yes
   herdr plugin install nikok6/herdr-mirror --yes
   herdr plugin install thanhdat77/herdr-navigator --yes
