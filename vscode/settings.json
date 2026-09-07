@@ -683,5 +683,6 @@
   "editor.accessibilitySupport": "off",
   "workbench.editor.autoLockGroups": {
     "terminalEditor": false
-  }
+  },
+  "auto-reload.interval": 500
 }
