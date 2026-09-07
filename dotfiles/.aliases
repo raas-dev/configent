@@ -103,7 +103,6 @@ fi
 
 alias a='ai'
 alias b='lessfilter'
-alias c='herdr'
 alias d='dcv'
 alias e="\$DEFAULT_IDE --add"
 alias f='fd --ignore-case --no-ignore --hidden --fixed-strings'
@@ -631,6 +630,15 @@ agent() {
   fi
   oc exec "$profile" -- opencode "$*"
 }
+
+c() {
+  if [[ -n "${HERDR_TAB_ID:-}" ]]; then
+    herdr tab create --cwd "$PWD" --focus "$@"
+  else
+    command herdr "$@"
+  fi
+}
+
 
 ### Docker ####################################################################
 
