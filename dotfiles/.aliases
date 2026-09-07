@@ -116,7 +116,7 @@ alias l='la'
 # n is for ad-hoc nix-shell in docker, see n()
 alias o='open'
 alias p='procs --pager always --tree'
-alias q='clear'
+alias q='reset'
 alias r='exec $SHELL -l'
 alias s='rg --smart-case --hidden --glob \!.git/ --fixed-strings'
 # t is for tail logs, see t()
