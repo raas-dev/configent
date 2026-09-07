@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.236.3](https://github.com/raas-dev/configent/compare/1.236.2...1.236.3) (2026-09-07)
+
+### Fixes
+
+* **vscode:** remap panel toggle label to layout-panel ([f614317](https://github.com/raas-dev/configent/commit/f614317d992f42562f4675ca2a6a8b86dc19d68f))
 ## [1.236.2](https://github.com/raas-dev/configent/compare/1.236.1...1.236.2) (2026-09-06)
 
 ### Fixes
