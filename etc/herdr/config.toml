@@ -138,7 +138,7 @@ sidebar_start_collapsed = true
 # Capture mouse input for Herdr's mouse UI.
 # Set false to let the terminal handle normal clicks, such as Cmd-clicking URLs.
 # Pane apps like lazygit and btop can still receive mouse when they request it.
-# mouse_capture = true
+mouse_capture = true
 
 # Optional modifier that forwards right-click hold/drag gestures to pane apps instead of opening Herdr's pane menu.
 # Empty/off disables this. Shift is intentionally unsupported because terminals commonly reserve Shift+mouse.
@@ -150,7 +150,7 @@ sidebar_start_collapsed = true
 # redraw_on_focus_gained = true
 
 # Pane scrollback lines to scroll per mouse wheel notch.
-# mouse_scroll_lines = 3
+mouse_scroll_lines = 3
 
 # Ask for confirmation before closing a workspace
 # confirm_close = true
