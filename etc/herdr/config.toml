@@ -120,7 +120,7 @@ focus_pane_right = ["prefix+l", "prefix+right"]
 # directory = "~/.herdr/worktrees"
 
 [ui]
-sidebar_start_collapsed = true
+sidebar_start_collapsed = false
 
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
