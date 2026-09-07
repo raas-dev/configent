@@ -23,6 +23,8 @@
     "npm:pi-rtk-optimizer",
     "npm:pi-tool-repair",
     "npm:pi-web-access",
+    "npm:@99percentpeople/pi-background-tasks",
+    "npm:@99percentpeople/pi-ssh-remote",
     "npm:@baylarsadigov/omp-undo-redo",
     "npm:@gamaraan/todos-tool",
     "npm:@hk_net/pi-usage-bars",

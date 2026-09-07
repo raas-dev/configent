@@ -4,8 +4,5 @@
   "enabledModels": [
     "*glm-5.2*",
     "*glm-5.3*"
-  ],
-  "packages": [
-    "npm:context-mode"
   ]
 }
