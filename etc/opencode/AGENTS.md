@@ -12,18 +12,18 @@
 
 ## build
 - todo for 1+ task
-- write tests
-- no comment soup
+- no long timeouts for tools
+- only few and short comments
 
 ## verify
-- test e2e before "done"
-- no fake complete
+- test by using e2e before "done"
+- add regression test after fix
 - no PR/push/publish w/o ask
 
 ## answer
-- summary at end
-- uncertain → limits + fix path
-- risks → propose fix
+- only summary at end
+- risks → propose fix path
+- propose next task
 
 <!-- codebase-memory-mcp:start -->
 ## Codebase Memory
