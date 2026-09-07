@@ -61,6 +61,15 @@
     },
     {
       "args": [
+        "--remote",
+        "dev"
+      ],
+      "command": "exec herdr",
+      "id": "herdr-dev",
+      "label": "dev"
+    },
+    {
+      "args": [
         "-il",
         "-c",
         "ai"
@@ -81,15 +90,6 @@
       "command": "exec tm",
       "id": "tmux",
       "label": "tmux"
-    },
-    {
-      "args": [
-        "--remote",
-        "dev"
-      ],
-      "command": "exec herdr",
-      "id": "herdr-dev",
-      "label": "dev"
     }
   ],
   "agentterminal.rememberSelection": false,
