@@ -464,21 +464,21 @@
   "statusbar_command.commands": [
     {
       "alignment": "left",
-      "command": "agentterminal.run",
-      "id": "sbc_session",
-      "name": "Start Session",
-      "priority": 25000,
-      "text": "$(empty-window)",
-      "tooltip": "Start Session"
-    },
-    {
-      "alignment": "left",
       "command": "workbench.action.togglePanel",
       "id": "sbc_panel",
       "name": "Panel",
-      "priority": 24000,
+      "priority": 25000,
       "text": "$(layout-panel)",
       "tooltip": "Toggle Panel"
+    },
+    {
+      "alignment": "left",
+      "command": "agentterminal.run",
+      "id": "sbc_session",
+      "name": "Start Session",
+      "priority": 24000,
+      "text": "$(empty-window)",
+      "tooltip": "Start Session"
     },
     {
       "alignment": "left",
