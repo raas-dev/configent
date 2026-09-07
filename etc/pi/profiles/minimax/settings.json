@@ -3,5 +3,8 @@
   "defaultProvider": "occam/minimax",
   "enabledModels": [
     "*minimax-M3*"
+  ],
+  "packages": [
+    "npm:context-mode"
   ]
 }

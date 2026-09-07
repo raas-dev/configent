@@ -11,9 +11,15 @@
       },
       "lifecycle": "lazy",
       "directTools": true
+    },
+    "context-mode": {
+      "command": "context-mode",
+      "lifecycle": "eager",
+      "directTools": true
     }
   },
   "settings": {
-    "toolPrefix": "none"
+    "toolPrefix": "none",
+    "disableProxyTool": true
   }
 }

@@ -70,6 +70,8 @@ if command -v omp >/dev/null; then
   omp plugin marketplace update
   # https://github.com/ranxianglei/billion-context-omp
   omp plugin install billion-context-omp
+  # https://github.com/mksglu/context-mode
+  #omp plugin install context-mode
   # https://github.com/wsouto/omp-ponytail
   omp plugin install github:wsouto/omp-ponytail
   # https://github.com/asyrjasalo/omp-headroom

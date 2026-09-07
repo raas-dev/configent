@@ -10,11 +10,16 @@
         "MINIMAX_API_HOST": "https://api.minimax.io"
       },
       "lifecycle": "lazy",
-      "directTools": ["understand_image"],
-      "disableProxyTool": true
+      "directTools": ["understand_image"]
+    },
+    "context-mode": {
+      "command": "context-mode",
+      "lifecycle": "eager",
+      "directTools": true
     }
   },
   "settings": {
-    "toolPrefix": "none"
+    "toolPrefix": "none",
+    "disableProxyTool": true
   }
 }
