@@ -13,7 +13,6 @@ christian-kohler.path-intellisense
 denizhandaklr.glm-chat-provider
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
-eamodio.gitlens
 editorconfig.editorconfig
 emilast.logfilehighlighter
 ethansk.restore-terminals
@@ -30,6 +29,7 @@ klarkxy.minimax-vscode-copilot
 mads-hartmann.bash-ide-vscode
 matthewpi.caddyfile-support
 mikestead.dotenv
+mk12.better-git-line-blame
 ms-azure-devops.azure-pipelines
 ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
