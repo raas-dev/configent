@@ -518,9 +518,6 @@ alias marimo='uvx marimo'
 # Security scanner for AI agent skills
 alias skillspector='uvx --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
 
-# Speckit (AI code assistant)
-alias specify='uvx --from git+https://github.com/github/spec-kit.git specify'
-
 ### dev
 
 # Command-line utility for rendering projects templates
