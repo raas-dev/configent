@@ -84,13 +84,12 @@
     },
     {
       "args": [
-        "-t",
-        "dev",
-        "zsh -l -c 'tm --gui'"
+        "--remote",
+        "dev"
       ],
-      "command": "exec ssh",
-      "id": "tmux-dev",
-      "label": "tmux@dev"
+      "command": "exec herdr",
+      "id": "herdr-dev",
+      "label": "dev"
     }
   ],
   "agentterminal.rememberSelection": false,
