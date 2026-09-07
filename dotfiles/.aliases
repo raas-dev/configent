@@ -104,7 +104,7 @@ fi
 alias a='ai'
 alias b='lessfilter'
 alias d='dcv'
-alias e="\$DEFAULT_IDE --add"
+alias e='nvim'
 alias f='fd --ignore-case --no-ignore --hidden --fixed-strings'
 # g is for git/gitui, see g()
 alias h='dstp'
