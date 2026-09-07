@@ -684,5 +684,6 @@
   "workbench.editor.autoLockGroups": {
     "terminalEditor": false
   },
-  "auto-reload.interval": 500
+  "auto-reload.interval": 500,
+  "autoscroll.autoEnableForLogs": true
 }
