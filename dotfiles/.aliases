@@ -104,7 +104,7 @@ fi
 alias a='ai'
 alias b='lessfilter'
 alias d='dcv'
-alias e='nvim'
+# e is for editor, see e()
 alias f='fd --ignore-case --no-ignore --hidden --fixed-strings'
 # g is for git/gitui, see g()
 alias h='dstp'
@@ -757,6 +757,19 @@ rc() {
 
 # More inclusive ripgrep, see alias `s`
 alias ss='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
+
+# open file in editor; inside herdr, open in a new focused tab
+e() {
+  if [ "${HERDR_ENV:-}" = 1 ] && [ $# -gt 0 ]; then
+    local pid
+    pid=$(herdr tab create --cwd "$PWD" --focus 2>/dev/null | jq -r '.result.root_pane.pane_id // empty')
+    if [ -n "$pid" ]; then
+      herdr pane run "$pid" exec nvim "$@"
+      return
+    fi
+  fi
+  nvim "$@"
+}
 
 # Generic extract package
 ext() {
