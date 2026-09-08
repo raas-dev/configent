@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.237.0](https://github.com/raas-dev/configent/compare/1.236.4...1.237.0) (2026-09-08)
+
+### Features
+
+* **herdr-nvim:** add Neovim integration and sidebar keymaps ([616a0ba](https://github.com/raas-dev/configent/commit/616a0ba0b6b53ba17ddb3e15aa45da370be438fe))
+* **herdr:** add nvim sidebar config and remap e keys ([87d3d03](https://github.com/raas-dev/configent/commit/87d3d03b4de811f2874304e3ba3f5f0577f3dee5))
 ## [1.236.4](https://github.com/raas-dev/configent/compare/1.236.3...1.236.4) (2026-09-07)
 
 ### Fixes
