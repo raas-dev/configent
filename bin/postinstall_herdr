@@ -52,6 +52,20 @@ mkdir -p "$HOME/.config/herdr-mirror"
 ln -sfnv "$config_path/herdr/plugins/config/mirror/hosts.toml" \
   "$HOME/.config/herdr-mirror/hosts.toml"
 
+### herdr-nvim ###############################################################
+
+# hosts.toml
+if [ ! -r "$backup_path/.config/herdr-nvim/config.toml" ]; then
+  if [ -r "$HOME/.config/herdr-nvim/config.toml" ]; then
+    mkdir -p "$backup_path/.config/herdr-nvim"
+    cp -P "$HOME/.config/herdr-nvim/config.toml" \
+      "$backup_path/.config/herdr-nvim/config.toml"
+  fi
+fi
+mkdir -p "$HOME/.config/herdr-nvim"
+ln -sfnv "$config_path/herdr/plugins/config/chmarax.herdr-nvim/config.toml" \
+  "$HOME/.config/herdr-nvim/config.toml"
+
 ### plugins ####################################################################
 
 if command -v herdr >/dev/null; then
