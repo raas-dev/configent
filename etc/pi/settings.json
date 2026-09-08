@@ -23,7 +23,6 @@
     "npm:pi-rtk-optimizer",
     "npm:pi-tool-repair",
     "npm:pi-web-access",
-    "npm:pi-background-tasks",
     "npm:@bytetrue/pi-background-terminal",
     "npm:@baylarsadigov/omp-undo-redo",
     "npm:@gamaraan/todos-tool",
