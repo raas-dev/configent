@@ -640,7 +640,7 @@ c() {
     shift
   fi
   if [[ -z "${HERDR_TAB_ID:-}" ]]; then
-    command herdr "$@"
+    command herdr "$@" >/dev/null
     return
   fi
   # Workspaces are identified by label = basename($target). Add a tab to a matching
@@ -662,9 +662,9 @@ c() {
       ] | .[0] // empty
   ' 2>/dev/null)"
   if [[ -n "$ws" ]]; then
-    herdr tab create --workspace "$ws" --cwd "$target" --focus "$@"
+    herdr tab create --workspace "$ws" --cwd "$target" --focus "$@" >/dev/null
   else
-    herdr workspace create --cwd "$target" --focus "$@"
+    herdr workspace create --cwd "$target" --focus "$@" >/dev/null
   fi
 }
 
