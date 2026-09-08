@@ -24,16 +24,13 @@ dup() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Recursively delete .DS_Store files in the current path
-  alias cds='fd --no-ignore --hidden --one-file-system -g "*.DS_Store" \
-    --exec-batch rm -v'
+  alias cds='fd --no-ignore --hidden --one-file-system -g "*.DS_Store" --exec-batch rm -v'
 
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist"
 
   # Get macOS keyboard layout name
-  alias kb="defaults read ~/Library/Preferences/com.apple.HIToolbox.plist \
-    AppleSelectedInputSources | grep 'KeyboardLayout Name' \
-    | cut -f 2 -d '=' | tr -d ' ;.\"'"
+  alias kb="defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name' | cut -f 2 -d '=' | tr -d ' ;.\"'"
 
   # Disable or enable Spotlight (indexing)
   alias spotoff='sudo mdutil -a -i off'
@@ -328,8 +325,7 @@ dri() {
   ids=$(docker images -aq 2>/dev/null)
   [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null
 }
-alias dpr='_docker_ok || return 1; dr; drv; dri; \
-  docker system prune --force --volumes'
+alias dpr='_docker_ok || return 1; dr; drv; dri; docker system prune --force --volumes'
 
 ### nerdctl ####################################################################
 
@@ -352,8 +348,7 @@ nri() {
   ids=$(nerdctl images -aq 2>/dev/null)
   [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null
 }
-alias npr='_nerdctl_ok || return 1; nr; nrv; nri; \
-  nerdctl system prune --force --volumes'
+alias npr='_nerdctl_ok || return 1; nr; nrv; nri; nerdctl system prune --force --volumes'
 
 ### podman #################################################################
 
@@ -376,8 +371,7 @@ pri() {
   ids=$(podman images -aq 2>/dev/null)
   [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null
 }
-alias ppr='_podman_ok || return 1; pr; prv; pri; \
-  podman system prune --force --volumes'
+alias ppr='_podman_ok || return 1; pr; prv; pri; podman system prune --force --volumes'
 
 ### kubectl ####################################################################
 
@@ -436,8 +430,7 @@ alias binsider='mise exec github:orhun/binsider -- binsider'
 alias cidr='mise exec github:bschaatsbergen/cidr -- cidr'
 
 # CLI for internet speed test via cloudflare
-alias cloudflare-speed-cli='mise exec \
-  github:kavehtehrani/cloudflare-speed-cli -- cloudflare-speed-cli'
+alias cloudflare-speed-cli='mise exec github:kavehtehrani/cloudflare-speed-cli -- cloudflare-speed-cli'
 
 # Structural diff tool that understands syntax
 alias difft='mise exec difftastic -- difft'
@@ -569,8 +562,7 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 alias marimo='uvx marimo'
 
 # Security scanner for AI agent skills
-alias skillspector='uvx \
-  --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
+alias skillspector='uvx --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
 
 ### dev
 
