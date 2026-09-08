@@ -24,13 +24,16 @@ dup() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   # Recursively delete .DS_Store files in the current path
-  alias cds='fd --no-ignore --hidden --one-file-system -g "*.DS_Store" --exec-batch rm -v'
+  alias cds='fd --no-ignore --hidden --one-file-system -g "*.DS_Store" \
+    --exec-batch rm -v'
 
   # Fix macOS keyboard input sources
   alias resetkeyboard="rm -fv ~/Library/Preferences/com.apple.HIToolbox.plist"
 
   # Get macOS keyboard layout name
-  alias kb="defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name' | cut -f 2 -d '=' | tr -d ' ;.\"'"
+  alias kb="defaults read ~/Library/Preferences/com.apple.HIToolbox.plist \
+    AppleSelectedInputSources | grep 'KeyboardLayout Name' \
+    | cut -f 2 -d '=' | tr -d ' ;.\"'"
 
   # Disable or enable Spotlight (indexing)
   alias spotoff='sudo mdutil -a -i off'
@@ -206,12 +209,14 @@ v() {
 
   case "$command" in
   up | start)
-    if ! limactl list --json | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
+    if ! limactl list --json \
+      | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          # os_create_args=(--vm-type=vz --network=lima:bridged --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)
+          # os_create_args=(--vm-type=vz --network=lima:bridged \
+          #   --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)
           os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
         else
           os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
@@ -305,26 +310,74 @@ vv() {
 ### docker #####################################################################
 
 _docker_ok() { docker info >/dev/null; }
-dr() { _docker_ok || return 1; local ids; ids=$(docker ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rm -f 2>/dev/null; }
-drv() { _docker_ok || return 1; local ids; ids=$(docker volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker volume rm -f 2>/dev/null; }
-dri() { _docker_ok || return 1; local ids; ids=$(docker images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null; }
-alias dpr='_docker_ok || return 1; dr; drv; dri; docker system prune --force --volumes'
+dr() {
+  _docker_ok || return 1
+  local ids
+  ids=$(docker ps -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs docker rm -f 2>/dev/null
+}
+drv() {
+  _docker_ok || return 1
+  local ids
+  ids=$(docker volume ls -q 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs docker volume rm -f 2>/dev/null
+}
+dri() {
+  _docker_ok || return 1
+  local ids
+  ids=$(docker images -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs docker rmi -f 2>/dev/null
+}
+alias dpr='_docker_ok || return 1; dr; drv; dri; \
+  docker system prune --force --volumes'
 
 ### nerdctl ####################################################################
 
 _nerdctl_ok() { nerdctl info >/dev/null; }
-nr() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rm -f 2>/dev/null; }
-nrv() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl volume rm -f 2>/dev/null; }
-nri() { _nerdctl_ok || return 1; local ids; ids=$(nerdctl images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null; }
-alias npr='_nerdctl_ok || return 1; nr; nrv; nri; nerdctl system prune --force --volumes'
+nr() {
+  _nerdctl_ok || return 1
+  local ids
+  ids=$(nerdctl ps -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs nerdctl rm -f 2>/dev/null
+}
+nrv() {
+  _nerdctl_ok || return 1
+  local ids
+  ids=$(nerdctl volume ls -q 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs nerdctl volume rm -f 2>/dev/null
+}
+nri() {
+  _nerdctl_ok || return 1
+  local ids
+  ids=$(nerdctl images -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs nerdctl rmi -f 2>/dev/null
+}
+alias npr='_nerdctl_ok || return 1; nr; nrv; nri; \
+  nerdctl system prune --force --volumes'
 
 ### podman #################################################################
 
 _podman_ok() { podman info >/dev/null; }
-pr() { _podman_ok || return 1; local ids; ids=$(podman ps -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rm -f 2>/dev/null; }
-prv() { _podman_ok || return 1; local ids; ids=$(podman volume ls -q 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman volume rm -f 2>/dev/null; }
-pri() { _podman_ok || return 1; local ids; ids=$(podman images -aq 2>/dev/null); [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null; }
-alias ppr='_podman_ok || return 1; pr; prv; pri; podman system prune --force --volumes'
+pr() {
+  _podman_ok || return 1
+  local ids
+  ids=$(podman ps -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs podman rm -f 2>/dev/null
+}
+prv() {
+  _podman_ok || return 1
+  local ids
+  ids=$(podman volume ls -q 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs podman volume rm -f 2>/dev/null
+}
+pri() {
+  _podman_ok || return 1
+  local ids
+  ids=$(podman images -aq 2>/dev/null)
+  [ -n "$ids" ] && echo "$ids" | xargs podman rmi -f 2>/dev/null
+}
+alias ppr='_podman_ok || return 1; pr; prv; pri; \
+  podman system prune --force --volumes'
 
 ### kubectl ####################################################################
 
@@ -383,7 +436,8 @@ alias binsider='mise exec github:orhun/binsider -- binsider'
 alias cidr='mise exec github:bschaatsbergen/cidr -- cidr'
 
 # CLI for internet speed test via cloudflare
-alias cloudflare-speed-cli='mise exec github:kavehtehrani/cloudflare-speed-cli -- cloudflare-speed-cli'
+alias cloudflare-speed-cli='mise exec \
+  github:kavehtehrani/cloudflare-speed-cli -- cloudflare-speed-cli'
 
 # Structural diff tool that understands syntax
 alias difft='mise exec difftastic -- difft'
@@ -515,7 +569,8 @@ alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 alias marimo='uvx marimo'
 
 # Security scanner for AI agent skills
-alias skillspector='uvx --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
+alias skillspector='uvx \
+  --from git+https://github.com/NVIDIA/SkillSpector.git skillspector'
 
 ### dev
 
@@ -532,7 +587,8 @@ venv() {
   if [ -z "$VIRTUAL_ENV" ]; then
     [ ! -d ".venv" ] && uv venv --seed # python -m venv .venv
     source ".venv/bin/activate"
-    sitepackages_path="$(python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
+    sitepackages_path="$(python -c 'import sysconfig; \
+      print(sysconfig.get_paths()["purelib"])')"
     ln -sfnv "$HOME/.config/configent/python/sitecustomize.py" \
       "$sitepackages_path/sitecustomize.py"
     uv pip install ptpython rich
@@ -643,12 +699,14 @@ c() {
     command herdr "$@" >/dev/null
     return
   fi
-  # Workspaces are identified by label = basename($target). Add a tab to a matching
+  # Workspaces are identified by label = basename($target).
+  # Add a tab to a matching
   # workspace if one exists; otherwise create one. Mirror workspaces (remote dev
   # containers) are skipped via their active-tab pane cwd.
   local label="${target##*/}"
   local ws
-  ws="$(herdr api snapshot 2>/dev/null | jq -r --arg label "$label" --arg mirror "$HOME/.local/state/herdr-mirror/" '
+  ws="$(herdr api snapshot 2>/dev/null | jq -r \
+    --arg label "$label" --arg mirror "$HOME/.local/state/herdr-mirror/" '
     .result.snapshot as $s
     | [
         $s.workspaces[]
@@ -762,7 +820,8 @@ alias ss='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
 e() {
   if [ "${HERDR_ENV:-}" = 1 ] && [ $# -gt 0 ]; then
     local pid
-    pid=$(herdr tab create --cwd "$PWD" --focus 2>/dev/null | jq -r '.result.root_pane.pane_id // empty')
+    pid=$(herdr tab create --cwd "$PWD" --focus 2>/dev/null \
+      | jq -r '.result.root_pane.pane_id // empty')
     if [ -n "$pid" ]; then
       herdr pane run "$pid" exec nvim "$@"
       return
@@ -775,8 +834,10 @@ e() {
 ext() {
   # Forked from: https://github.com/xvoland/Extract/blob/master/extract.sh
   if [ $# -eq 0 ]; then
-    echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso|.whl>"
-    echo "       $0 <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    echo "Usage: $0 <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz \
+      |ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso|.whl>"
+    echo "       $0 <path/file_name_1.ext> \
+      [path/file_name_2.ext] [path/file_name_3.ext]"
   fi
 
   for n in "$@"; do
@@ -795,7 +856,8 @@ ext() {
     *.gz) gunzip ./"$n" ;;
     *.cbz | *.epub | *.zip | *.whl) unzip ./"$n" ;;
     *.z) uncompress ./"$n" ;;
-    *.7z | *.apk | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar | *.vhd)
+    *.7z | *.apk | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.iso | *.lzh \
+      | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar | *.vhd)
       7zz x ./"$n"
       ;;
     *.xz) unxz ./"$n" ;;
@@ -957,7 +1019,8 @@ t() {
           setopt localoptions null_glob
           # In zsh, expand glob pattern first, then iterate
           local expanded_files
-          # shellcheck disable=SC2295  # $~ is zsh-specific glob expansion syntax
+          # shellcheck disable=SC2295  # $~ is zsh-specific glob
+          # expansion syntax
           expanded_files=($~arg)
           for file in "${expanded_files[@]}"; do
             found_files=true
@@ -1060,7 +1123,8 @@ tl() {
           setopt nullglob
           # In zsh, expand glob pattern first, then iterate
           local expanded_files
-          # shellcheck disable=SC2295  # $~ is zsh-specific glob expansion syntax
+          # shellcheck disable=SC2295  # $~ is zsh-specific glob
+          # expansion syntax
           expanded_files=($~arg)
           for file in "${expanded_files[@]}"; do
             files+=("$file")
@@ -1074,7 +1138,8 @@ tl() {
           done
           shopt -u nullglob
         else
-          # fallback: expand without nullglob (may include literal pattern if no match)
+          # fallback: expand without nullglob (may include literal
+          # pattern if no match)
           for file in $arg; do
             # Only add if it's an actual file (not the literal pattern)
             [ -e "$file" ] && files+=("$file")
@@ -1251,7 +1316,8 @@ nix() {
 
 # Generic nix shell (usage: n nix-pkg1[/nix-pkgN] [ARGUMENTS])
 n() {
-  [ -z "$1" ] && { nix shell --no-warn-dirty nixpkgs#bash --command bash; return; }
+  [ -z "$1" ] && { nix shell --no-warn-dirty nixpkgs#bash \
+    --command bash; return; }
   local arg="$1"
   shift
   local shell_cmd
