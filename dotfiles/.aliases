@@ -688,7 +688,11 @@ c() {
     shift
   fi
   if [[ -z "${HERDR_TAB_ID:-}" ]]; then
-    command herdr "$@" >/dev/null
+    if [[ -t 0 ]] && [[ -t 1 ]]; then
+      command herdr "$@"
+    else
+      (nohup herdr "$@" </dev/null >/dev/null 2>&1 &)
+    fi
     return
   fi
   # Workspaces are identified by label = basename($target).
