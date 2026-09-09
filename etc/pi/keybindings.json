@@ -1,6 +1,23 @@
 {
   "app.clipboard.pasteImage": [],
-  "app.message.followUp": "alt+enter",
+  "app.message.followUp": "ctrl+shift+enter",
+  "app.message.dequeue": "ctrl+shift+up",
+  "app.tree.foldOrUp": [
+    "ctrl+left",
+    "ctrl+shift+left"
+  ],
+  "app.tree.unfoldOrDown": [
+    "ctrl+right",
+    "ctrl+shift+right"
+  ],
+  "app.models.reorderUp": "ctrl+shift+up",
+  "app.models.reorderDown": "ctrl+shift+down",
+  "tui.editor.cursorWordLeft": "ctrl+left",
+  "tui.editor.cursorWordRight": "ctrl+right",
+  "tui.editor.deleteWordBackward": "ctrl+w",
+  "tui.editor.deleteWordForward": "ctrl+shift+delete",
+  "tui.editor.yankPop": "ctrl+shift+y",
+  "tui.editor.jumpBackward": "ctrl+shift+]",
   "tui.input.newLine": [
     "shift+enter",
     "ctrl+j"
