@@ -16,6 +16,7 @@
     "npm:pi-context-view",
     "npm:pi-cbm",
     "npm:pi-image-tools",
+    "npm:pi-interactive-shell",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-open-tui",
