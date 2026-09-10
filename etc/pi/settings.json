@@ -25,7 +25,6 @@
     "npm:pi-tool-repair",
     "npm:pi-tool-compact-display",
     "npm:pi-web-access",
-    "npm:@bytetrue/pi-background-terminal",
     "npm:@baylarsadigov/omp-undo-redo",
     "npm:@gamaraan/todos-tool",
     "npm:@hk_net/pi-usage-bars",
