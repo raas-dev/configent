@@ -5,6 +5,7 @@
     "enabled": true
   },
   "defaultModel": "MiniMax-M3",
+  "defaultProjectTrust": "always",
   "defaultProvider": "occam/minimax",
   "defaultThinkingLevel": "medium",
   "doubleEscapeAction": "tree",
@@ -65,8 +66,10 @@
   },
   "showHardwareCursor": true,
   "steeringMode": "all",
+  "terminal": {
+    "clearOnShink": true
+  },
   "theme": "ayu-dark",
   "transport": "auto",
-  "treeFilterMode": "user-only",
-  "defaultProjectTrust": "always"
+  "treeFilterMode": "user-only"
 }
