@@ -1,7 +1,7 @@
 #!/bin/sh
 
 session_name="$(basename "$PWD")"
-gui=1
+plain=0
 
 show_help() {
   cat <<EOF
@@ -11,8 +11,7 @@ Create or attach to a tmux session named after the current directory.
 
 Options:
   -s NAME           Set session name (default: current directory name)
-  -g, --gui         Show tmux status bar (default)
-      --no-gui      Hide tmux status bar
+      --plain       No status bar
   -h, --help        Show this help message
 
 If inside tmux, opens a new window.
@@ -31,12 +30,8 @@ while [ $# -gt 0 ]; do
     session_name="$2"
     shift 2
     ;;
-  -g | --gui)
-    gui=1
-    shift
-    ;;
-  --no-gui)
-    gui=0
+  --plain)
+    plain=1
     shift
     ;;
   -s*)
@@ -50,8 +45,8 @@ while [ $# -gt 0 ]; do
 done
 
 if [ -n "$TMUX" ]; then
-  if [ "$gui" -eq 1 ]; then
-    tmux set-option status on
+  if [ "$plain" -eq 1 ]; then
+    tmux set-option status off
   fi
   exec tmux new-window "$@"
 elif tmux has-session -t "$session_name" 2>/dev/null; then
@@ -63,22 +58,21 @@ elif tmux has-session -t "$session_name" 2>/dev/null; then
     grouped_name="${session_name}#${i}"
   done
 
-  if [ "$gui" -eq 1 ]; then
-    exec tmux new-session \
-      -t "$session_name" -s "${grouped_name}" \; \
-      set-option status on \; \
-      new-window "$@"
-  else
+  if [ "$plain" -eq 1 ]; then
     exec tmux new-session \
       -t "$session_name" -s "$grouped_name" \; \
       set-option status off \; \
       new-window "$@"
+  else
+    exec tmux new-session \
+      -t "$session_name" -s "$grouped_name" \; \
+      new-window "$@"
   fi
 else
-  if [ "$gui" -eq 1 ]; then
-    exec tmux new-session -s "$session_name" "$@"
-  else
+  if [ "$plain" -eq 1 ]; then
     exec tmux new-session -s "$session_name" \; \
       set-option status off
+  else
+    exec tmux new-session -s "$session_name" "$@"
   fi
 fi
