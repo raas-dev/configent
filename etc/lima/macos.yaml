@@ -16,44 +16,6 @@ memory: "8GiB" # default: "4GiB"
 video:
   display: "default"
 
-osOpts:
-  Darwin:
-    suppressFirstLoginSetup: true
-    # https://lima-vm.io/docs/usage/guests/macos/#custom-plist
-    suppressFirstLoginSetupPlist: |
-      <?xml version="1.0" encoding="UTF-8"?>
-      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-      <plist version="1.0">
-      <dict>
-        <key>DidSeeAccessibility</key><true/>
-        <key>DidSeeActivationLock</key><true/>
-        <key>DidSeeAppStore</key><true/>
-        <key>DidSeeAppearanceSetup</key><true/>
-        <key>DidSeeApplePaySetup</key><true/>
-        <key>DidSeeCloudSetup</key><true/>
-        <key>DidSeeLockdownMode</key><true/>
-        <key>DidSeePrivacy</key><true/>
-        <key>DidSeeScreenTime</key><true/>
-        <key>DidSeeSetupSequence</key><true/>
-        <key>DidSeeSiriSetup</key><true/>
-        <key>DidSeeSyncSetup</key><true/>
-        <key>DidSeeSyncSetup2</key><true/>
-        <key>DidSeeTermsOfAddress</key><true/>
-        <key>DidSeeTouchIDSetup</key><true/>
-        <key>DidSeeiCloudLoginForStorageServices</key><true/>
-        <key>LastPreLoginTasksPerformedBuild</key><string>25F84</string>
-        <key>LastPreLoginTasksPerformedVersion</key><string>26.5.2</string>
-        <key>LastSeenAgeRangeSelectionProductVersion</key><string>26.5.2</string>
-        <key>LastSeenBuddyBuildVersion</key><string>25F84</string>
-        <key>LastSeenCloudProductVersion</key><string>26.5.2</string>
-        <key>LastSeenDiagnosticsProductVersion</key><string>26.5.2</string>
-        <key>MiniBuddyLaunchReason</key><integer>0</integer>
-        <key>MiniBuddyShouldLaunchToResumeSetup</key><false/>
-        <key>SkipExpressSettingsUpdating</key><true/>
-        <key>SkipFirstLoginOptimization</key><true/>
-      </dict>
-      </plist>
-
 mounts:
   - location: "~/Downloads"
     writable: true
@@ -67,6 +29,41 @@ provision:
       home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
       # dscl -passwd needs the old password even as root; Lima stores it in ~/password
       dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
+  # Port of lima master suppressFirstLoginScreens (limactl 2.2.0 lacks it)
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eu
+      user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
+      home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
+      uid=$(dscl . -read "/Users/$user" UniqueID | awk '{print $2}')
+      build=$(sw_vers -buildVersion)
+      ver=$(sw_vers -productVersion)
+      prefs="$home/Library/Preferences"
+      mkdir -p "$prefs"
+      p="$prefs/com.apple.SetupAssistant.plist"
+      rm -f "$p"
+      pl=/usr/libexec/PlistBuddy
+      for k in DidSeeAccessibility DidSeeActivationLock DidSeeAppStore DidSeeAppearanceSetup DidSeeApplePaySetup DidSeeCloudSetup DidSeeLockdownMode DidSeePrivacy DidSeeScreenTime DidSeeSetupSequence DidSeeSiriSetup DidSeeSyncSetup DidSeeSyncSetup2 DidSeeTermsOfAddress DidSeeTouchIDSetup DidSeeiCloudLoginForStorageServices SkipExpressSettingsUpdating SkipFirstLoginOptimization; do
+        $pl -c "Add :$k bool true" "$p" >/dev/null
+      done
+      $pl -c "Add :LastPreLoginTasksPerformedBuild string $build" "$p" >/dev/null
+      $pl -c "Add :LastPreLoginTasksPerformedVersion string $ver" "$p" >/dev/null
+      $pl -c "Add :LastSeenAgeRangeSelectionProductVersion string $ver" "$p" >/dev/null
+      $pl -c "Add :LastSeenBuddyBuildVersion string $build" "$p" >/dev/null
+      $pl -c "Add :LastSeenCloudProductVersion string $ver" "$p" >/dev/null
+      $pl -c "Add :LastSeenDiagnosticsProductVersion string $ver" "$p" >/dev/null
+      $pl -c "Add :MiniBuddyLaunchReason integer 0" "$p" >/dev/null
+      $pl -c "Add :MiniBuddyShouldLaunchToResumeSetup bool false" "$p" >/dev/null
+      chown -R "$uid" "$prefs"
+      # MiniLauncher checks this cookie: "Skipbuddy cookie set, skipping minibuddy"
+      touch /private/var/db/.skipbuddy
+      sudo -u "$user" defaults write com.apple.loginwindow MiniBuddyLaunch -bool false
+      defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+      defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool false
+      defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool false
+      defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool true
+      defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool false
 
 #provision:
 #  - mode: user
