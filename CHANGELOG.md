@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.238.1](https://github.com/raas-dev/configent/compare/1.238.0...1.238.1) (2026-09-12)
+
+### Fixes
+
+* **pi:** disable autoOpenBrowser for exa web search ([7c61ed2](https://github.com/raas-dev/configent/commit/7c61ed217bad2206f14073655f8b51530019608d))
+* **pi:** move web-search.json to agent config dir ([760f09e](https://github.com/raas-dev/configent/commit/760f09e2c3d71638d3b78a68f2cd64320e5f97ca))
+* **tmux:** add --no-gui and enable gui by default ([a62c660](https://github.com/raas-dev/configent/commit/a62c6606e31efb3e5ba882ea0eeafc40d80f8d84))
+* **vscode:** show task/local/progress in terminal tab desc ([527678a](https://github.com/raas-dev/configent/commit/527678aeb2efbe01fc91d13bd0396d5a6f4b0e87))
 ## [1.238.0](https://github.com/raas-dev/configent/compare/1.237.0...1.238.0) (2026-09-12)
 
 ### Features
