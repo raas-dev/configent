@@ -211,12 +211,18 @@ v() {
       _lima_remove_nonexistent_mounts "$vm_name"
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          # os_create_args=(--vm-type=vz --network=lima:bridged \
-          #   --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)
-          os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
+        # bridged only for Linux guests; macOS template has vzNAT + user-v2
+        # (see etc/lima/macos.yaml) --network would override template networks.
+        if [ "$template" != "macos" ]; then
+          if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+            # os_create_args=(--vm-type=vz --network=lima:bridged \
+            #   --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)
+            os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
+          else
+            os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
+          fi
         else
-          os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
+          os_create_args=(--vm-type=vz --rosetta)
         fi
       fi
       limactl start "$HOME/.config/configent/lima/$template.yaml" \

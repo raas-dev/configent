@@ -1,0 +1,48 @@
+minimumLimaVersion: 2.1.0
+
+images:
+  - location: "https://updates.cdn-apple.com/2026SpringFCS/fullrestores/140-24263/B95838F0-6815-4F0B-A039-156526C081AD/UniversalMac_26.5.2_25F84_Restore.ipsw"
+    arch: "aarch64"
+    digest: "sha256:065abd295a1a456a46c1155217eab92ee95816520ec9aeed83f249f074f68a04"
+
+os: Darwin
+arch: aarch64
+vmType: vz
+
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
+
+video:
+  display: "default"
+
+osOpts:
+  Darwin:
+    suppressFirstLoginSetup: true
+
+mounts:
+  - location: "~/Downloads"
+    writable: true
+
+ssh:
+  forwardAgent: true
+
+#provision:
+#  - mode: user
+#    script: |
+#      #!/bin/sh
+#      [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+#      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
+hostResolver:
+  enabled: true
+
+# https://lima-vm.io/docs/config/network/#lima-user-v2-network
+networks:
+  - vzNAT: true
+  - lima: user-v2
+
+message: |
+  The user password for GUI session is stored in the `~/password` file in the guest.
+  Consider changing it after the first login.
