@@ -1,5 +1,6 @@
 {
   "provider": "exa",
   "workflow": "none",
+  "autoOpenBrowser": false,
   "curatorTimeoutSeconds": 20
 }
