@@ -94,14 +94,15 @@ fi
 ### pi-web-access ##############################################################
 
 # web-search.json
-if [ ! -r "$backup_path/.pi/web-search.json" ]; then
-  if [ -r "$HOME/.pi/web-search.json" ]; then
-    mkdir -p "$backup_path/.pi"
-    cp -P "$HOME/.pi/web-search.json" "$backup_path/.pi/web-search.json"
+if [ ! -r "$backup_path/.pi/agent/web-search.json" ]; then
+  if [ -r "$HOME/.pi/agent/web-search.json" ] && [ ! -L "$HOME/.pi/agent/web-search.json" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -P "$HOME/.pi/agent/web-search.json" \
+      "$backup_path/.pi/agent/web-search.json"
   fi
 fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/web-search.json"
+mkdir -p "$HOME/.pi/agent"
+ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/agent/web-search.json"
 
 ### pi-workflows ###############################################################
 
