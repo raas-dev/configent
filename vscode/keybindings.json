@@ -11,169 +11,169 @@
   },
   {
     "command": "workbench.action.terminal.newInActiveWorkspace",
-    "key": "ctrl+a c"
+    "key": "ctrl+q c"
   },
   {
     "command": "workbench.action.terminal.newInActiveWorkspace",
-    "key": "ctrl+a ctrl+c"
+    "key": "ctrl+q ctrl+c"
   },
   {
     "command": "workbench.action.quickOpenTerm",
-    "key": "ctrl+a w"
+    "key": "ctrl+q w"
   },
   {
     "command": "workbench.action.toggleMaximizedPanel",
-    "key": "ctrl+a z"
+    "key": "ctrl+q z"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex1",
-    "key": "ctrl+a 1"
+    "key": "ctrl+q 1"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex2",
-    "key": "ctrl+a 2"
+    "key": "ctrl+q 2"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex3",
-    "key": "ctrl+a 3"
+    "key": "ctrl+q 3"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex4",
-    "key": "ctrl+a 4"
+    "key": "ctrl+q 4"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex5",
-    "key": "ctrl+a 5"
+    "key": "ctrl+q 5"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex6",
-    "key": "ctrl+a 6"
+    "key": "ctrl+q 6"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex7",
-    "key": "ctrl+a 7"
+    "key": "ctrl+q 7"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex8",
-    "key": "ctrl+a 8"
+    "key": "ctrl+q 8"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex9",
-    "key": "ctrl+a 9"
+    "key": "ctrl+q 9"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a right",
+    "key": "ctrl+q right",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a ctrl+right",
+    "key": "ctrl+q ctrl+right",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a l",
+    "key": "ctrl+q l",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a ctrl+l",
+    "key": "ctrl+q ctrl+l",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a up",
+    "key": "ctrl+q up",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a ctrl+up",
+    "key": "ctrl+q ctrl+up",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a j",
+    "key": "ctrl+q j",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a ctrl+j",
+    "key": "ctrl+q ctrl+j",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a left",
+    "key": "ctrl+q left",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a ctrl+left",
+    "key": "ctrl+q ctrl+left",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a h",
+    "key": "ctrl+q h",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "ctrl+a ctrl+h",
+    "key": "ctrl+q ctrl+h",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a down",
+    "key": "ctrl+q down",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a ctrl+down",
+    "key": "ctrl+q ctrl+down",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a k",
+    "key": "ctrl+q k",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusNextPane",
-    "key": "ctrl+a ctrl+k",
+    "key": "ctrl+q ctrl+k",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.focusPrevious",
-    "key": "ctrl+a p"
+    "key": "ctrl+q p"
   },
   {
     "command": "workbench.action.terminal.focusPrevious",
-    "key": "ctrl+a ctrl+p"
+    "key": "ctrl+q ctrl+p"
   },
   {
     "command": "workbench.action.terminal.focusNext",
-    "key": "ctrl+a n"
+    "key": "ctrl+q n"
   },
   {
     "command": "workbench.action.terminal.focusNext",
-    "key": "ctrl+a ctrl+n"
+    "key": "ctrl+q ctrl+n"
   },
   {
     "command": "workbench.action.terminal.split",
-    "key": "ctrl+a shift+-",
+    "key": "ctrl+q shift+-",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
     "command": "workbench.action.terminal.split",
-    "key": "ctrl+a shift+5",
+    "key": "ctrl+q shift+5",
     "when": "terminalFocus && panelPosition == 'bottom'"
   },
   {
     "command": "workbench.action.terminal.toggleTerminal",
-    "key": "ctrl+a d"
+    "key": "ctrl+q d"
   },
   {
     "command": "workbench.action.terminal.rename",
-    "key": "ctrl+a [Comma]"
+    "key": "ctrl+q [Comma]"
   },
   {
     "command": "-workbench.action.openRecent",
@@ -181,7 +181,7 @@
   },
   {
     "command": "workbench.action.terminal.goToRecentDirectory",
-    "key": "ctrl+a g"
+    "key": "ctrl+q g"
   },
   {
     "command": "workbench.action.toggleAuxiliaryBar",
@@ -328,7 +328,7 @@
   },
   {
     "command": "workbench.action.terminal.openDetectedLink",
-    "key": "ctrl+a o"
+    "key": "ctrl+q o"
   },
   {
     "command": "-workbench.action.terminal.openDetectedLink",
@@ -342,39 +342,31 @@
   },
   {
     "command": "workbench.action.terminal.focusTabs",
-    "key": "ctrl+a f"
+    "key": "ctrl+q f"
   },
   {
     "command": "workbench.action.terminal.openUrlLink",
-    "key": "ctrl+a u"
+    "key": "ctrl+q u"
   },
   {
     "command": "workbench.action.terminal.openFileLink",
-    "key": "ctrl+a i"
-  },
-  {
-    "command": "workbench.action.terminal.detachSession",
-    "key": "ctrl+a q"
+    "key": "ctrl+q i"
   },
   {
     "command": "workbench.action.terminal.paste",
-    "key": "ctrl+a v"
+    "key": "ctrl+q v"
   },
   {
     "command": "workbench.action.terminal.unsplit",
-    "key": "ctrl+a [Period]"
+    "key": "ctrl+q [Period]"
   },
   {
     "command": "workbench.action.terminal.copyLastCommandOutput",
-    "key": "ctrl+a y"
-  },
-  {
-    "command": "workbench.action.terminal.attachToSession",
-    "key": "ctrl+a space"
+    "key": "ctrl+q y"
   },
   {
     "command": "workbench.action.terminal.newWithProfile",
-    "key": "ctrl+a b"
+    "key": "ctrl+q b"
   },
   {
     "command": "-workbench.action.terminal.clear",
@@ -439,105 +431,97 @@
     "when": "cursor.agentIdeUnification.enabled"
   },
   {
-    "command": "workbench.action.terminal.detachSession",
-    "key": "ctrl+a ctrl+q"
-  },
-  {
     "command": "workbench.action.quickOpenTerm",
-    "key": "ctrl+a ctrl+w"
+    "key": "ctrl+q ctrl+w"
   },
   {
     "command": "workbench.action.terminal.copyLastCommandOutput",
-    "key": "ctrl+a ctrl+y"
+    "key": "ctrl+q ctrl+y"
   },
   {
     "command": "workbench.action.terminal.openUrlLink",
-    "key": "ctrl+a ctrl+u"
+    "key": "ctrl+q ctrl+u"
   },
   {
     "command": "workbench.action.terminal.openDetectedLink",
-    "key": "ctrl+a ctrl+o"
+    "key": "ctrl+q ctrl+o"
   },
   {
     "command": "workbench.action.terminal.toggleTerminal",
-    "key": "ctrl+a ctrl+d"
+    "key": "ctrl+q ctrl+d"
   },
   {
     "command": "workbench.action.terminal.focusTabs",
-    "key": "ctrl+a ctrl+f"
+    "key": "ctrl+q ctrl+f"
   },
   {
     "command": "workbench.action.terminal.goToRecentDirectory",
-    "key": "ctrl+a ctrl+g"
+    "key": "ctrl+q ctrl+g"
   },
   {
     "command": "workbench.action.toggleMaximizedPanel",
-    "key": "ctrl+a ctrl+z"
+    "key": "ctrl+q ctrl+z"
   },
   {
     "command": "workbench.action.terminal.paste",
-    "key": "ctrl+a ctrl+v"
+    "key": "ctrl+q ctrl+v"
   },
   {
     "command": "workbench.action.terminal.newWithProfile",
-    "key": "ctrl+a ctrl+b"
+    "key": "ctrl+q ctrl+b"
   },
   {
     "command": "workbench.action.terminal.rename",
-    "key": "ctrl+a ctrl+[Comma]"
+    "key": "ctrl+q ctrl+[Comma]"
   },
   {
     "command": "workbench.action.terminal.unsplit",
-    "key": "ctrl+a ctrl+[Period]"
+    "key": "ctrl+q ctrl+[Period]"
   },
   {
     "command": "workbench.action.terminal.split",
-    "key": "ctrl+a ctrl+-",
+    "key": "ctrl+q ctrl+-",
     "when": "terminalFocus && panelPosition != 'bottom'"
   },
   {
-    "command": "workbench.action.terminal.attachToSession",
-    "key": "ctrl+a ctrl+space"
-  },
-  {
     "command": "workbench.action.terminal.openFileLink",
-    "key": "ctrl+a ctrl+i"
+    "key": "ctrl+q ctrl+i"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex1",
-    "key": "ctrl+a ctrl+1"
+    "key": "ctrl+q ctrl+1"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex2",
-    "key": "ctrl+a ctrl+2"
+    "key": "ctrl+q ctrl+2"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex3",
-    "key": "ctrl+a ctrl+3"
+    "key": "ctrl+q ctrl+3"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex4",
-    "key": "ctrl+a ctrl+4"
+    "key": "ctrl+q ctrl+4"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex5",
-    "key": "ctrl+a ctrl+5"
+    "key": "ctrl+q ctrl+5"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex6",
-    "key": "ctrl+a ctrl+6"
+    "key": "ctrl+q ctrl+6"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex7",
-    "key": "ctrl+a ctrl+7"
+    "key": "ctrl+q ctrl+7"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex8",
-    "key": "ctrl+a ctrl+8"
+    "key": "ctrl+q ctrl+8"
   },
   {
     "command": "workbench.action.terminal.focusAtIndex9",
-    "key": "ctrl+a ctrl+9"
+    "key": "ctrl+q ctrl+9"
   },
   {
     "command": "-workbench.action.switchWindow",
@@ -570,14 +554,6 @@
     "key": "shift+cmd+i"
   },
   {
-    "command": "agentterminal.run",
-    "key": "ctrl+a a"
-  },
-  {
-    "command": "agentterminal.run",
-    "key": "ctrl+a ctrl+a"
-  },
-  {
     "command": "workbench.action.chat.openAsk",
     "key": "cmd+l"
   },
@@ -591,43 +567,43 @@
   },
   {
     "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+a t"
+    "key": "ctrl+q t"
   },
   {
     "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+a ctrl+t"
+    "key": "ctrl+q ctrl+t"
   },
   {
     "command": "workbench.action.terminal.moveToEditor",
-    "key": "ctrl+a ctrl+e"
+    "key": "ctrl+q ctrl+e"
   },
   {
     "command": "workbench.action.terminal.moveToTerminalPanel",
-    "key": "ctrl+a ctrl+m"
+    "key": "ctrl+q ctrl+m"
   },
   {
     "command": "workbench.action.terminal.moveToEditor",
-    "key": "ctrl+a e"
+    "key": "ctrl+q e"
   },
   {
     "command": "workbench.action.terminal.moveToTerminalPanel",
-    "key": "ctrl+a m"
+    "key": "ctrl+q m"
   },
   {
     "command": "workbench.action.terminal.runActiveFile",
-    "key": "ctrl+a r"
+    "key": "ctrl+q r"
   },
   {
     "command": "workbench.action.terminal.runActiveFile",
-    "key": "ctrl+a ctrl+r"
+    "key": "ctrl+q ctrl+r"
   },
   {
     "command": "workbench.action.terminal.kill",
-    "key": "ctrl+a x"
+    "key": "ctrl+q x"
   },
   {
     "command": "workbench.action.terminal.kill",
-    "key": "ctrl+a ctrl+x"
+    "key": "ctrl+q ctrl+x"
   },
   {
     "command": "-workbench.action.terminal.triggerSuggest",
@@ -678,5 +654,27 @@
     "command": "github.copilot.chat.attachSelection",
     "key": "shift+cmd+i",
     "when": "editor.hasSelection"
+  },
+  {
+    "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+    "key": "ctrl+q",
+    "when": "inQuickOpen && inViewsPicker"
+  },
+  {
+    "command": "-workbench.action.quickOpenNavigatePreviousInViewPicker",
+    "key": "ctrl+shift+q",
+    "when": "inQuickOpen && inViewsPicker"
+  },
+  {
+    "command": "-workbench.action.quickOpenView",
+    "key": "ctrl+q"
+  },
+  {
+    "command": "agentterminal.run",
+    "key": "ctrl+q a"
+  },
+  {
+    "command": "agentterminal.run",
+    "key": "ctrl+q ctrl+a"
   }
 ]
