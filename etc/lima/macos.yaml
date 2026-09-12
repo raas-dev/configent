@@ -28,7 +28,14 @@ provision:
       user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
       home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
       # dscl -passwd needs the old password even as root; Lima stores it in ~/password
-      dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
+      if [ -f "$home/password" ]; then
+        dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
+        rm -f "$home/password"
+      fi
+      # Lima disables passwordless sudo on macOS guests; re-enable it
+      echo "$user ALL=(ALL) NOPASSWD: ALL" >"/etc/sudoers.d/$user"
+      chmod 0440 "/etc/sudoers.d/$user"
+      visudo -cf "/etc/sudoers.d/$user"
   # Port of lima master suppressFirstLoginScreens (limactl 2.2.0 lacks it)
   - mode: system
     script: |
@@ -106,7 +113,3 @@ hostResolver:
 networks:
   - vzNAT: true
   - lima: user-v2
-
-message: |
-  The user password for GUI session is stored in the `~/password` file in the guest.
-  Consider changing it after the first login.
