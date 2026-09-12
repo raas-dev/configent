@@ -526,21 +526,21 @@
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 500,
   "terminal.integrated.profiles.linux": {
-    "tm": {
+    "herdr": {
       "icon": "terminal-tmux",
-      "path": "tm"
+      "path": "herdr"
     }
   },
   "terminal.integrated.profiles.osx": {
-    "tm": {
+    "herdr": {
       "icon": "terminal-tmux",
-      "path": "tm"
+      "path": "herdr"
     }
   },
   "terminal.integrated.profiles.windows": {
-    "tm": {
+    "herdr": {
       "icon": "terminal-tmux",
-      "path": "tm"
+      "path": "herdr"
     }
   },
   "terminal.integrated.rightClickBehavior": "default",
