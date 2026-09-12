@@ -58,8 +58,15 @@ mounts:
   - location: "~/Downloads"
     writable: true
 
-ssh:
-  forwardAgent: true
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eu
+      user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
+      home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
+      # dscl -passwd needs the old password even as root; Lima stores it in ~/password
+      dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
 
 #provision:
 #  - mode: user
