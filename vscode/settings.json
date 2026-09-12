@@ -683,5 +683,6 @@
     "azure-pipelines.yaml"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${progress}"
 }
