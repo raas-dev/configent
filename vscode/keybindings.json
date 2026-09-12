@@ -10,32 +10,20 @@
     "when": "textInputFocus"
   },
   {
-    "command": "runCommands",
-    "key": "ctrl+q q",
     "args": {
-      "commands": [
-        "workbench.action.createTerminalEditor",
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": { "text": "exec c\n" }
-        }
-      ]
-    }
+      "location": "editor",
+      "profileName": "herdr"
+    },
+    "command": "workbench.action.terminal.newWithProfile",
+    "key": "ctrl+q q"
   },
   {
-    "command": "runCommands",
-    "key": "ctrl+q ctrl+q",
     "args": {
-      "commands": [
-        "workbench.action.createTerminalEditor",
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "exec c\n"
-          }
-        }
-      ]
-    }
+      "location": "editor",
+      "profileName": "herdr"
+    },
+    "command": "workbench.action.terminal.newWithProfile",
+    "key": "ctrl+q ctrl+q"
   },
   {
     "command": "workbench.action.terminal.newInActiveWorkspace",
