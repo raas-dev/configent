@@ -68,7 +68,7 @@ github-cli = 'latest'
 # containers
 #docker-cli = 'latest'
 hadolint = 'latest'
-lima = '2.1.1' #{ version = '2.1.1', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
+lima = '2.2.0' #{ version = '2.2.0', postinstall = "~/.local/configent/bin/setup_lima_vmnet" }
 #podman = 'latest'
 #trivy = 'latest'
 'github:tokuhirom/dcv' = 'latest'
