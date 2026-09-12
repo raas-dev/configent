@@ -27,6 +27,8 @@ provision:
       set -eu
       user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
       home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
+      # Lima expands ~ to /Users/$user but real home is .guest-suffixed; bridge it
+      [ -e "/Users/$user" ] || ln -s "$home" "/Users/$user"
       # dscl -passwd needs the old password even as root; Lima stores it in ~/password
       dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
   # Port of lima master suppressFirstLoginScreens (limactl 2.2.0 lacks it)
@@ -58,7 +60,18 @@ provision:
       chown -R "$uid" "$prefs"
       # MiniLauncher checks this cookie: "Skipbuddy cookie set, skipping minibuddy"
       touch /private/var/db/.skipbuddy
-      sudo -u "$user" defaults write com.apple.loginwindow MiniBuddyLaunch -bool false
+      # sudo -u defaults fails pre-login (cfprefsd "Could not write domain") -> write plist file directly
+      lw="$prefs/com.apple.loginwindow.plist"
+      $pl -c "Set :MiniBuddyLaunch false" "$lw" 2>/dev/null || $pl -c "Add :MiniBuddyLaunch bool false" "$lw"
+      chown "$uid" "$lw"
+      # Auto-login: /etc/kcpassword is 'lima' XOR key\x7D89... padded to 12 bytes
+      printf '11e03f42d2bcddeaa8014bb9' | xxd -r -p > /etc/kcpassword
+      chmod 600 /etc/kcpassword
+      defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser "$user"
+      # first boot: loginwindow started before kcpassword existed; relaunch picks it up
+      killall loginwindow || true
+      # no Spotlight indexing in a VM
+      mdutil -a -i off >/dev/null 2>&1 || true
       defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
       defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool false
       defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool false
