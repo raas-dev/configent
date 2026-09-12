@@ -19,6 +19,40 @@ video:
 osOpts:
   Darwin:
     suppressFirstLoginSetup: true
+    # https://lima-vm.io/docs/usage/guests/macos/#custom-plist
+    suppressFirstLoginSetupPlist: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+        <key>DidSeeAccessibility</key><true/>
+        <key>DidSeeActivationLock</key><true/>
+        <key>DidSeeAppStore</key><true/>
+        <key>DidSeeAppearanceSetup</key><true/>
+        <key>DidSeeApplePaySetup</key><true/>
+        <key>DidSeeCloudSetup</key><true/>
+        <key>DidSeeLockdownMode</key><true/>
+        <key>DidSeePrivacy</key><true/>
+        <key>DidSeeScreenTime</key><true/>
+        <key>DidSeeSetupSequence</key><true/>
+        <key>DidSeeSiriSetup</key><true/>
+        <key>DidSeeSyncSetup</key><true/>
+        <key>DidSeeSyncSetup2</key><true/>
+        <key>DidSeeTermsOfAddress</key><true/>
+        <key>DidSeeTouchIDSetup</key><true/>
+        <key>DidSeeiCloudLoginForStorageServices</key><true/>
+        <key>LastPreLoginTasksPerformedBuild</key><string><build></string>
+        <key>LastPreLoginTasksPerformedVersion</key><string><version></string>
+        <key>LastSeenAgeRangeSelectionProductVersion</key><string><version></string>
+        <key>LastSeenBuddyBuildVersion</key><string><build></string>
+        <key>LastSeenCloudProductVersion</key><string><version></string>
+        <key>LastSeenDiagnosticsProductVersion</key><string><version></string>
+        <key>MiniBuddyLaunchReason</key><integer>0</integer>
+        <key>MiniBuddyShouldLaunchToResumeSetup</key><false/>
+        <key>SkipExpressSettingsUpdating</key><true/>
+        <key>SkipFirstLoginOptimization</key><true/>
+      </dict>
+      </plist>
 
 mounts:
   - location: "~/Downloads"
