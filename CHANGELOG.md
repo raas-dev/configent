@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.238.0](https://github.com/raas-dev/configent/compare/1.237.0...1.238.0) (2026-09-12)
+
+### Features
+
+* **dotfiles:** add e() editor wrapper for herdr ([cb338b3](https://github.com/raas-dev/configent/commit/cb338b375d78cf8a5bdd598bec103eb7a6bbbda4))
+* **pi:** add i-have-adhd plugin config ([8237c06](https://github.com/raas-dev/configent/commit/8237c066702f2a9aaca1c730f4cbff73d18d59a2))
+
+### Fixes
+
+* **tmux:** switch prefix from C-s to C-a ([b43829e](https://github.com/raas-dev/configent/commit/b43829e9f9f6043c5f2a5fdda6bbd58d9da0b9eb))
+* **vscode:** Ctrl+Q opens herdr terminal profile ([769582b](https://github.com/raas-dev/configent/commit/769582b95cdb0b8b858421178dbbcbf46da193d4))
+* **vscode:** map Ctrl+Q to exec c in terminal ([78c50ce](https://github.com/raas-dev/configent/commit/78c50ce8a831f6599d334c87623690019d54aae7))
+* **vscode:** remap Ctrl+A terminal bindings to Ctrl+Q ([c4652a9](https://github.com/raas-dev/configent/commit/c4652a96459186f38c7336e20684dd4da9c5b8c0))
 ## [1.237.0](https://github.com/raas-dev/configent/compare/1.236.4...1.237.0) (2026-09-08)
 
 ### Features
