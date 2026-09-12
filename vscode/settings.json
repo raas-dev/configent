@@ -84,9 +84,6 @@
       "label": "lazyssh"
     },
     {
-      "args": [
-        "--gui"
-      ],
       "command": "exec tm",
       "id": "tmux",
       "label": "tmux"

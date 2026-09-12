@@ -1,7 +1,7 @@
 #!/bin/sh
 
 session_name="$(basename "$PWD")"
-gui=0
+gui=1
 
 show_help() {
   cat <<EOF
@@ -10,9 +10,10 @@ Usage: tm [OPTIONS] [COMMAND]
 Create or attach to a tmux session named after the current directory.
 
 Options:
-  -s NAME       Set session name (default: current directory name)
-  -g, --gui     Show tmux status bar
-  -h, --help    Show this help message
+  -s NAME           Set session name (default: current directory name)
+  -g, --gui         Show tmux status bar (default)
+      --no-gui      Hide tmux status bar
+  -h, --help        Show this help message
 
 If inside tmux, opens a new window.
 If session exists, creates a grouped session.
@@ -32,6 +33,10 @@ while [ $# -gt 0 ]; do
     ;;
   -g | --gui)
     gui=1
+    shift
+    ;;
+  --no-gui)
+    gui=0
     shift
     ;;
   -s*)
