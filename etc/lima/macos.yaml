@@ -41,12 +41,12 @@ osOpts:
         <key>DidSeeTermsOfAddress</key><true/>
         <key>DidSeeTouchIDSetup</key><true/>
         <key>DidSeeiCloudLoginForStorageServices</key><true/>
-        <key>LastPreLoginTasksPerformedBuild</key><string><build></string>
-        <key>LastPreLoginTasksPerformedVersion</key><string><version></string>
-        <key>LastSeenAgeRangeSelectionProductVersion</key><string><version></string>
-        <key>LastSeenBuddyBuildVersion</key><string><build></string>
-        <key>LastSeenCloudProductVersion</key><string><version></string>
-        <key>LastSeenDiagnosticsProductVersion</key><string><version></string>
+        <key>LastPreLoginTasksPerformedBuild</key><string>25F84</string>
+        <key>LastPreLoginTasksPerformedVersion</key><string>26.5.2</string>
+        <key>LastSeenAgeRangeSelectionProductVersion</key><string>26.5.2</string>
+        <key>LastSeenBuddyBuildVersion</key><string>25F84</string>
+        <key>LastSeenCloudProductVersion</key><string>26.5.2</string>
+        <key>LastSeenDiagnosticsProductVersion</key><string>26.5.2</string>
         <key>MiniBuddyLaunchReason</key><integer>0</integer>
         <key>MiniBuddyShouldLaunchToResumeSetup</key><false/>
         <key>SkipExpressSettingsUpdating</key><true/>
