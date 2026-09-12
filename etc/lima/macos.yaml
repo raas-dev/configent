@@ -27,8 +27,6 @@ provision:
       set -eu
       user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
       home=$(dscl . -read "/Users/$user" NFSHomeDirectory | awk '{print $2}')
-      # Lima expands ~ to /Users/$user but real home is .guest-suffixed; bridge it
-      [ -e "/Users/$user" ] || ln -s "$home" "/Users/$user"
       # dscl -passwd needs the old password even as root; Lima stores it in ~/password
       dscl . -passwd "/Users/$user" "$(cat "$home/password")" lima
   # Port of lima master suppressFirstLoginScreens (limactl 2.2.0 lacks it)
@@ -77,6 +75,21 @@ provision:
       defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool false
       defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool true
       defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool false
+  # macOS guest ignores mountPoint: one virtiofs device automounts whole at
+  # /Volumes/My Shared Files with per-mount lima-<hash-of-location> subdirs.
+  # Expose the shares at the exact same paths as on the host.
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eu
+      user=$(dscl . -list /Users UniqueID | awk '$2 >= 500 && $2 < 65534 {print $1; exit}')
+      sh="/Volumes/My Shared Files"
+      mkdir -p "/Users/$user"
+      ln -hfs "$sh/lima-512960f069fc5687" "/Users/$user/Downloads"
+      # configent share only present when created via vv (--mount ~/configent)
+      if [ -d "$sh/lima-faf5b629f04b2902" ]; then
+        ln -hfs "$sh/lima-faf5b629f04b2902" "/Users/$user/configent"
+      fi
 
 #provision:
 #  - mode: user
