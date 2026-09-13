@@ -71,7 +71,7 @@ probes:
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 240s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
+      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
         echo >&2 "Selkies is not installed yet"
         exit 1
       fi
