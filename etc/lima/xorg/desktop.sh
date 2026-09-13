@@ -25,12 +25,20 @@ selkies_deb() { # pinned v2.0.0rc0 (latest with ubuntu26.04 debs); cache or fetc
   [ -f "/mnt/lima-provision/$DEB" ] && return 0
   curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
     "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
+  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ # cache for next recreate
 }
 
 chromium_dl() { # ~198MB; tarball cache if present, else pip cloakbrowser
   if [ -f "$TARBALL" ]; then
     tar xzf "$TARBALL" -C / && touch /tmp/cb.ok /tmp/ext.ok
   else
+    for _ in $( # pip3 arrives with the apt txn
+      seq 1 300
+    ); do
+      command -v pip3 >/dev/null 2>&1 && break
+      sleep 2
+    done
+    command -v pip3
     pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser &&
       cloakbrowser install &&
       touch /tmp/cb.ok
@@ -218,3 +226,8 @@ extensions_dl >/tmp/ext.log 2>&1
 chromium_files
 systemctl set-default graphical.target
 systemctl isolate graphical.target
+# write chromium tarball cache when absent — survives recreate (atomic tmp+mv)
+if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
+  tar czf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
+    mv "$TARBALL.tmp" "$TARBALL"
+fi

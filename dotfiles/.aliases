@@ -209,6 +209,8 @@ v() {
     if ! limactl list --json \
       | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
+      # cache mounts are skipped w/ WARN when host dir absent — create instead
+      [ "$vm_name" = xorg ] && mkdir -p "$HOME/.cache/lima-provision/apt-archives"
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         # xorg + macos: vzNAT driver always, never bridged, never on LAN

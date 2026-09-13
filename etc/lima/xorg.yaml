@@ -20,14 +20,12 @@ memory: "8GiB" # default: "4GiB"
 mounts:
   - location: "~/Downloads"
     writable: true
-  # provisioning cache — rebuild after cloakbrowser/chromium bump:
-  #   limactl shell xorg -- sudo tar czf - -C / opt/cloakbrowser usr/local/share/extensions \
-  #     > ~/.cache/lima-provision/chromium-extensions.$(limactl info xorg | jq -r .arch).tar.gz
-  # selkies deb: curl -LO ~/.cache/lima-provision/ from github selkies v2.0.0rc0 release
+  # provisioning cache — guest writes selkies deb + chromium-extensions tarball
+  # here on first run; rm -rf ~/.cache/lima-provision to force refresh
   - location: "~/.cache/lima-provision"
     mountPoint: /mnt/lima-provision
-    writable: false
-  # persistent apt deb cache — survives recreate, 2nd+ runs unpack only
+    writable: true
+  # persistent apt deb cache — survives recreate, skips re-downloads only
   - location: "~/.cache/lima-provision/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
@@ -40,7 +38,7 @@ ssh:
   forwardAgent: true
 
 video:
-  # none: no host window, no GPU device — in-VM Xorg uses dummy driver for selkies
+  # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
   display: none
 
 provision:
