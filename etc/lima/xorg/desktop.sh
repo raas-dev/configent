@@ -1,27 +1,30 @@
 #!/bin/bash
-# xorg + xfce + selkies + stealth chromium; bg jobs overlap apt chain
+# xorg + xfce + selkies + stealth chromium
+# layout: all file writes + downloads run in parallel; ONE apt transaction (dpkg is the serial bottleneck)
 set -eux -o pipefail
 command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
 export DEBIAN_FRONTEND=noninteractive
-APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io)
+APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold)
 ARCH=$(dpkg --print-architecture)
 TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
 
-wait_ok() { # wait_ok <pid> <okfile> <log> — fail provision with bg job log
+wait_ok() { # wait_ok <pid> <log> — fail provision with bg job log
   wait "$1" || {
-    cat "$3" >&2
-    exit 1
-  }
-  [ -f "$2" ] || {
-    cat "$3" >&2
+    cat "$2" >&2
     exit 1
   }
 }
 
-apt_base() { # incl. deps of bg jobs so they never wait on the dpkg lock
-  apt-get update "${APTOPT[@]}"
-  apt-get install -y --no-install-recommends "${APTOPT[@]}" \
-    xorg xserver-xorg-video-dummy python3-pip unzip socat libnspr4 libnss3
+apt_update() { apt-get update "${APTOPT[@]}"; }
+
+selkies_deb() { # pinned v2.0.0rc0 (latest with ubuntu26.04 debs); cache or fetch
+  case "$ARCH" in
+  amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
+  arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
+  esac
+  [ -f "/mnt/lima-provision/$DEB" ] && return 0
+  curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
+    "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
 }
 
 chromium_dl() { # ~198MB; tarball cache if present, else pip cloakbrowser
@@ -42,6 +45,11 @@ extensions_dl() { # crx downloads; cached tarball already includes them
     done
     return 1
   fi
+  for _ in $(seq 1 120); do
+    [ -x /usr/bin/unzip ] && break
+    sleep 2
+  done
+  [ -x /usr/bin/unzip ]
   install -d /usr/local/share/extensions
   for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
     name=${pair%%:*}
@@ -55,46 +63,19 @@ extensions_dl() { # crx downloads; cached tarball already includes them
   touch /tmp/ext.ok
 }
 
-selkies_install() { # pinned v2.0.0rc0 (latest with ubuntu26.04 debs)
-  case "$ARCH" in
-  amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
-  arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
-  esac
-  SELKDEB=/mnt/lima-provision/$DEB
-  if [ -f "$SELKDEB" ]; then
-    apt-get install -y --no-install-recommends "${APTOPT[@]}" "$SELKDEB"
-  else
-    curl -fsSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
-    apt-get install -y --no-install-recommends "${APTOPT[@]}" "./${DEB}"
-    rm -f "./${DEB}"
-  fi
-}
-
-xfce_install() { # webtop ubuntu-xfce style desktop
-  apt-get install -y --no-install-recommends "${APTOPT[@]}" \
-    xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber xubuntu-wallpapers
-  rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
-    /etc/xdg/autostart/xscreensaver.desktop \
-    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
-  update-alternatives --set x-session-manager /usr/bin/xfce4-session
-}
-
-xorg_units() { # no display manager: systemd units run Xorg dummy + xfce directly
+write_configs() { # all package-independent file writes; overlaps the apt transaction
+  # no display manager: systemd units run Xorg dummy + xfce directly
   printf '[Unit]\nDescription=Xorg dummy :0\n[Service]\nExecStart=/usr/bin/Xorg :0 -noreset\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xorg-dummy.service
   # shellcheck disable=SC1083
   printf '[Unit]\nDescription=xfce session on :0\nRequires=xorg-dummy.service\nAfter=xorg-dummy.service\n[Service]\nUser={{.User}}\nPAMName=login\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xfce-session.service
   systemctl enable xorg-dummy xfce-session
-}
-
-xorg_confd() { # localectl fails in cloud-init (located absent) — write XKB conf directly
+  # localectl fails in cloud-init (located absent) — write XKB conf directly
   install -d /etc/X11/xorg.conf.d
   printf 'Section "InputClass"\n  Identifier "system-keyboard"\n  MatchIsKeyboard "on"\n  Option "XkbLayout" "fi"\nEndSection\n' >/etc/X11/xorg.conf.d/00-keyboard.conf
   sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
   # headless Xorg for selkies (video.display none = no virtio-gpu)
   printf 'Section "ServerLayout"\n  Identifier "layout"\n  Screen 0 "Screen0"\nEndSection\nSection "Device"\n  Identifier "dummy"\n  Driver "dummy"\n  VideoRam 32768\nEndSection\nSection "Monitor"\n  Identifier "monitor0"\n  HorizSync 5.0-1000.0\n  VertRefresh 5.0-200.0\nEndSection\nSection "Screen"\n  Identifier "Screen0"\n  Device "dummy"\n  Monitor "monitor0"\n  DefaultDepth 24\n  SubSection "Display"\n    Depth 24\n    Modes "2560x1440"\n    Virtual 2560 1440\n  EndSubSection\nEndSection\n' >/etc/X11/xorg.conf.d/10-dummy.conf
-}
-
-xfce_config() { # panel: stock default.xml from xfce4-panel pkg — no override needed
+  # panel: stock default.xml from xfce4-panel pkg — no override needed
   install -d /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
   cat >/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml <<'DESK'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -120,9 +101,6 @@ xfce_config() { # panel: stock default.xml from xfce4-panel pkg — no override 
 </channel>
 DESK
   printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' >/etc/xdg/xfce4/helpers.rc
-}
-
-selkies_config() {
   cat >/usr/local/bin/selkies-session <<'EOF'
 #!/bin/bash
 # attaches selkies to the running Xorg/xfce session on :0
@@ -153,7 +131,12 @@ EOF
   chmod 644 /etc/xdg/autostart/selkies.desktop
 }
 
-chromium_config() { # requires chromium_dl + extensions_dl done
+chromium_files() { # package-independent; needs chromium_dl + extensions_dl done
+  for _ in $(seq 1 300); do
+    [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] && break
+    sleep 2
+  done
+  [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
   # cloakbrowser pip pkg installs under /root — relocate
   if [ -d /root/.cloakbrowser ]; then
     install -d /opt/cloakbrowser
@@ -176,7 +159,6 @@ chromium_config() { # requires chromium_dl + extensions_dl done
     >/usr/local/share/applications/chromium.desktop
   # snap-style duplicate name: chromium looks for it when deciding "is default"
   cp /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
-  update-desktop-database /usr/local/share/applications || true
   chmod 755 /usr/local/share/applications
   chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
   # startup page (managed policy)
@@ -194,20 +176,44 @@ chromium_config() { # requires chromium_dl + extensions_dl done
   chown {{.User}}: "$UHOME/.config/mimeapps.list"
 }
 
-apt_base
+apt_install_all() { # ONE dpkg transaction — dpkg lock serializes anyway
+  local -a pkgs=(
+    xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
+    xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core
+    python3-pip unzip socat libnspr4 libnss3
+    xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11
+    pipewire pipewire-pulse wireplumber xubuntu-wallpapers
+  )
+  case "$ARCH" in
+  amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
+  arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
+  esac
+  if [ -f "/mnt/lima-provision/$DEB" ]; then
+    DEBSRC="/mnt/lima-provision/$DEB"
+  else
+    DEBSRC="/tmp/$DEB"
+  fi
+  apt-get install -y --no-install-recommends "${APTOPT[@]}" "${pkgs[@]}" "$DEBSRC"
+  # post-install tweaks needing files from the transaction
+  rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
+    /etc/xdg/autostart/xscreensaver.desktop \
+    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
+  update-alternatives --set x-session-manager /usr/bin/xfce4-session
+  update-desktop-database /usr/local/share/applications || true
+}
+
+apt_update >/tmp/apt.log 2>&1 &
+UP=$!
+selkies_deb >/tmp/selkdeb.log 2>&1 &
+SDB=$!
 chromium_dl >/tmp/cb.log 2>&1 &
 CB=$!
-extensions_dl >/tmp/ext.log 2>&1 &
-EXT=$!
-# apt chain serializes on the dpkg lock; runs while chromium/extensions download
-selkies_install
-xfce_install
-xorg_units
-xorg_confd
-xfce_config
-selkies_config
-wait_ok "$CB" /tmp/cb.ok /tmp/cb.log
-wait_ok "$EXT" /tmp/ext.ok /tmp/ext.log
-chromium_config
+write_configs
+wait_ok "$UP" /tmp/apt.log
+wait_ok "$SDB" /tmp/selkdeb.log
+wait_ok "$CB" /tmp/cb.log
+apt_install_all # installs pip3/unzip → below needs them
+extensions_dl >/tmp/ext.log 2>&1
+chromium_files
 systemctl set-default graphical.target
 systemctl isolate graphical.target
