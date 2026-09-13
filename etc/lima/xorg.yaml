@@ -33,36 +33,31 @@ provision:
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      command -v Xorg >/dev/null 2>&1 && exit 0
+      command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
       export DEBIAN_FRONTEND=noninteractive
       apt-get update
-      apt-get install -y xorg xterm lightdm
+      apt-get install -y --no-install-recommends xorg lightdm accountsservice
       # slim 1.4.1 auto_login leaves "Untitled window" (Debian #1117831) - lightdm instead
       mkdir -p /etc/lightdm/lightdm.conf.d
       printf "[Seat:*]\nautologin-user={{.User}}\nautologin-user-timeout=0\nautologin-session=lightdm-xsession\n" \
         >/etc/lightdm/lightdm.conf.d/50-autologin.conf
       chmod 644 /etc/lightdm/lightdm.conf.d/50-autologin.conf
-      # greeter background = desktop wallpaper (greybird symlink) so login+session match
+      # greeter background = desktop wallpaper so login+session match
       mkdir -p /etc/lightdm/lightdm-gtk-greeter.conf.d
-      printf '[greeter]\nbackground = /usr/share/xfce4/backdrops/greybird-wall-1920x1200.png\nuser-background = false\n' \
+      printf '[greeter]\nbackground = /usr/share/xfce4/backdrops/xubuntu-wallpaper.png\nuser-background = false\n' \
         >/etc/lightdm/lightdm-gtk-greeter.conf.d/50-wallpaper.conf
-      localectl set-x11-keymap fi || true
+      # localectl fails in cloud-init (located absent) — write XKB conf directly
+      install -d /etc/X11/xorg.conf.d
+      printf 'Section "InputClass"\n  Identifier "system-keyboard"\n  MatchIsKeyboard "on"\n  Option "XkbLayout" "fi"\nEndSection\n' >/etc/X11/xorg.conf.d/00-keyboard.conf
       sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
-  - mode: system
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      command -v selkies >/dev/null 2>&1 && exit 0
-      export DEBIAN_FRONTEND=noninteractive
-      apt-get update
-      # webtop ubuntu-xfce style desktop
-      apt-get install -y xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber
+      # webtop ubuntu-xfce style desktop; xubuntu-wallpapers owns backdrops/xubuntu-wallpaper.png symlink
+      apt-get install -y --no-install-recommends xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber xubuntu-wallpapers
       rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
         /etc/xdg/autostart/xscreensaver.desktop \
         /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
       update-alternatives --set x-session-manager /usr/bin/xfce4-session
       # panel: stock /etc/xdg/xfce4/panel/default.xml from xfce4-panel pkg — no override needed
-      # backdrop: distro greybird wallpaper
+      # backdrop: xubuntu default wallpaper
       install -d /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
       cat >/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml <<'DESK'
       <?xml version="1.0" encoding="UTF-8"?>
@@ -73,14 +68,14 @@ provision:
               <property name="workspace0" type="empty" value="">
                 <property name="color-style" type="int" value="0"/>
                 <property name="image-style" type="int" value="5"/>
-                <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/greybird-wall-1920x1200.png"/>
+                <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xubuntu-wallpaper.png"/>
               </property>
             </property>
             <property name="monitorVirtual-1" type="empty" value="">
               <property name="workspace0" type="empty" value="">
                 <property name="color-style" type="int" value="0"/>
                 <property name="image-style" type="int" value="5"/>
-                <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/greybird-wall-1920x1200.png"/>
+                <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xubuntu-wallpaper.png"/>
               </property>
             </property>
           </property>
@@ -92,8 +87,8 @@ provision:
         amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
         arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
       esac
-      curl -fsSLO "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
-      apt-get install -y "./${DEB}"
+      curl -fSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
+      apt-get install -y --no-install-recommends "./${DEB}" socat python3-pip unzip libnspr4 libnss3
       rm -f "./${DEB}"
       cat >/usr/local/bin/selkies-session <<'EOF'
       #!/bin/bash
@@ -117,7 +112,6 @@ provision:
       openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
         -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt
       cat /tmp/sk.crt >>/etc/ssl/selkies.pem && rm /tmp/sk.crt
-      apt-get install -y socat
       printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' \
         >/etc/systemd/system/selkies-tls.service
       systemctl enable selkies-tls
@@ -127,15 +121,12 @@ provision:
       # chromium (CloakBrowser stealth build): pip pkg auto-downloads binary
       echo 'kernel.apparmor_restrict_unprivileged_userns = 0' >/etc/sysctl.d/99-chromium-userns.conf
       sysctl -p /etc/sysctl.d/99-chromium-userns.conf
-      apt-get install -y python3-pip unzip
       pip3 install --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser
       cloakbrowser install
       install -d /opt/cloakbrowser
       CRBIN=$(ls -d /root/.cloakbrowser/chromium-*/chrome | head -1)
       mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
       CRBIN=/opt/cloakbrowser/$(basename "$(dirname "$CRBIN")")/chrome
-      update-alternatives --install /usr/local/bin/chromium x-www-browser "/usr/local/bin/chromium" 200
-      update-alternatives --set x-www-browser /usr/local/bin/chromium
       # extensions (MV3/dNR): chrome must WRITE _metadata cache into ext dir -> user-owned
       install -d /usr/local/share/extensions
       for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
@@ -147,7 +138,7 @@ provision:
         rm -rf /usr/local/share/extensions/$name/_metadata
       done
       chown -R {{.User}}: /usr/local/share/extensions
-      printf '#!/bin/sh\nexec %s --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
+      printf '#!/bin/sh\nexec %s --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
       chmod 755 /usr/local/bin/chromium-wrapper
       for n in chrome chromium chromium-browser; do ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
       # .desktop + defaults
@@ -161,6 +152,11 @@ provision:
       chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
       printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' >/etc/xdg/xfce4/helpers.rc
       printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\n' >/etc/xdg/mimeapps.list
+      # per-user default too (xfce/xdg reads it before root one settles; survives reboot)
+      UHOME=$(getent passwd {{.User}} | cut -d: -f6)
+      install -d -o {{.User}} -m 755 "$UHOME/.config"
+      printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\nx-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop\n' >"$UHOME/.config/mimeapps.list"
+      chown {{.User}}: "$UHOME/.config/mimeapps.list"
   - mode: system
     script: |
       #!/bin/bash
