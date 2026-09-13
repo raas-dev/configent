@@ -50,12 +50,6 @@ provision:
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   - mode: system
     file: xorg/desktop.sh
-  - mode: system
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      systemctl set-default graphical.target
-      systemctl isolate graphical.target
   # provisioning disabled for now — re-enable to bootstrap configent
   # - mode: user
   #   script: |

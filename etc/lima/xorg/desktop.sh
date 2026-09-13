@@ -168,3 +168,6 @@ install -d -o {{.User}} -m 755 "$UHOME/.config"
 printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\nx-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop\n' >"$UHOME/.config/mimeapps.list"
 # shellcheck disable=SC1083
 chown {{.User}}: "$UHOME/.config/mimeapps.list"
+
+systemctl set-default graphical.target
+systemctl isolate graphical.target
