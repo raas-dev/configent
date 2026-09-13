@@ -62,7 +62,9 @@ provision:
       $pl -c "Add :LastSeenDiagnosticsProductVersion string $ver" "$p" >/dev/null
       $pl -c "Add :MiniBuddyLaunchReason integer 0" "$p" >/dev/null
       $pl -c "Add :MiniBuddyShouldLaunchToResumeSetup bool false" "$p" >/dev/null
-      chown -R "$uid" "$prefs"
+      # chown -R dies on SIP-protected template plists (madrid, AddressBook, ...):
+      # aborted this script before kcpassword/autoLoginUser -> first-boot login screen
+      chown "$uid" "$p"
       # MiniLauncher checks this cookie: "Skipbuddy cookie set, skipping minibuddy"
       touch /private/var/db/.skipbuddy
       # sudo -u defaults fails pre-login (cfprefsd "Could not write domain") -> write plist file directly
@@ -70,11 +72,18 @@ provision:
       $pl -c "Set :MiniBuddyLaunch false" "$lw" 2>/dev/null || $pl -c "Add :MiniBuddyLaunch bool false" "$lw"
       chown "$uid" "$lw"
       # Auto-login: /etc/kcpassword is 'lima' XOR key\x7D89... padded to 12 bytes
-      printf '11e03f42d2bcddeaa8014bb9' | xxd -r -p > /etc/kcpassword
+      printf '11e03f42d2bcddeaa3ada7ac' | xxd -r -p > /etc/kcpassword
       chmod 600 /etc/kcpassword
       defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser "$user"
-      # first boot: loginwindow started before kcpassword existed; relaunch picks it up
-      killall loginwindow || true
+      # System Settings writes this too (SystemAdministration framework)
+      defaults write /Library/Preferences/com.apple.loginwindow autoLoginUserUID -int "$uid"
+      # loginwindow evaluates autologin only at boot: restarting it via killall is NOT
+      # a boot context (SecurityAgent: "no autologin because no conditions ..."),
+      # so first boot reboots once after the config exists; later boots find it ready
+      if [ ! -f /private/var/db/.lima-autologin ]; then
+        touch /private/var/db/.lima-autologin
+        /sbin/shutdown -r now
+      fi
       # no Spotlight indexing in a VM
       mdutil -a -i off >/dev/null 2>&1 || true
       defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
