@@ -38,13 +38,11 @@ brew trust buo/cask-upgrade
 # Homebrew Cask apps
 brew install --cask --force brave-browser
 brew install --cask --force handy
-#brew install --cask --force iina
 #brew install --cask --force libreoffice libreoffice-language-pack
-#brew install --cask --force logitech-g-hub
-#brew install --cask --force nordvpn
-#brew install --cask --force utm
 brew install --cask --force visual-studio-code
-#brew install --cask --force zed
+
+# Logitech drivers
+#brew install --cask --force logitech-g-hub
 
 # Keyboard remapper (see ui/macos/ukelele for layouts)
 brew install --cask --force ukelele
