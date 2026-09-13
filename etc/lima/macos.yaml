@@ -108,8 +108,3 @@ provision:
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
   enabled: true
-
-# https://lima-vm.io/docs/config/network/#lima-user-v2-network
-networks:
-  - vzNAT: true
-  - lima: user-v2
