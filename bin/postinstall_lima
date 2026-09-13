@@ -6,6 +6,11 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Skipping Lima QEMU and socket_vmnet setup: not on macOS."
+  exit 0
+fi
+
 ### qemu #######################################################################
 
 eval_brew() {
@@ -34,12 +39,6 @@ fi
 command -v brew >/dev/null && brew install qemu
 
 ### socket_vmnet ###############################################################
-
-# macOS only: wraps Apple's vmnet.framework, cannot build on Linux.
-if [ "$(uname -s)" != "Darwin" ]; then
-  echo "Skipping socket_vmnet setup: not on macOS."
-  exit 0
-fi
 
 # Ask sudo password upfront; skip gracefully when run non-interactively
 # without cached/NOPASSWD sudo, e.g. from `mise install`.
