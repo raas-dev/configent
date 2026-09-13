@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### qemu #######################################################################
+
+eval_brew() {
+  if [ -x "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x "/usr/local/bin/brew" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+    eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+  fi
+}
+eval_brew
+
+if ! command -v brew >/dev/null; then
+  # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
+  NONINTERACTIVE=true \
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  eval_brew
+fi
+
+brew install qemu
+
+### socket_vmnet ###############################################################
+
+# macOS only: wraps Apple's vmnet.framework, cannot build on Linux.
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "Skipping socket_vmnet setup: not on macOS."
+  exit 0
+fi
+
+# Ask sudo password upfront; skip gracefully when run non-interactively
+# without cached/NOPASSWD sudo, e.g. from `mise install`.
+if ! sudo -n true 2>/dev/null; then
+  if [ -t 0 ]; then
+    sudo -v
+  else
+    echo "sudo needed for socket_vmnet/sudoers setup; skipping." >&2
+    echo "Re-run in a terminal: ~/.local/configent/bin/postinstall_lima" >&2
+    exit 0
+  fi
+fi
+
+socket_vmnet_src_dir="$HOME/.local/share/socket_vmnet"
+
+[ -d "$socket_vmnet_src_dir/.git" ] || git clone --depth 1 \
+  https://github.com/lima-vm/socket_vmnet "$socket_vmnet_src_dir"
+
+(cd "$socket_vmnet_src_dir" &&
+  git fetch --tags &&
+  latest_tag=$(git tag -l | sort -V | tail -1) &&
+  git checkout "$latest_tag" &&
+  make &&
+  sudo make PREFIX=/opt/socket_vmnet install.bin &&
+  sudo chmod -R a+rx /opt/socket_vmnet)
+
+(
+  cd "$socket_vmnet_src_dir" &&
+    limactl sudoers >etc_sudoers.d_lima &&
+    sudo install -o root etc_sudoers.d_lima /etc/sudoers.d/lima
+  rm -f etc_sudoers.d_lima
+)
+
+# The IP address is automatically assigned by macOS's bootpd.
+# See: https://lima-vm.io/docs/config/network/vmnet/#socket_vmnet
+#
+# If the IP address is not assigned, try the following commands:
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/libexec/bootpd
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblock /usr/libexec/bootpd
