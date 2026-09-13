@@ -154,7 +154,7 @@ provision:
         [ -S "${XDG_RUNTIME_DIR}/pulse/native" ] && break
         sleep 0.5
       done
-      exec env -u LD_PRELOAD selkies --public --addr 0.0.0.0 --port 8080 \
+      exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
         --enable-basic-auth=false \
         --encoder=x264enc
       EOF
@@ -163,7 +163,7 @@ provision:
       openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
         -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt
       cat /tmp/sk.crt >>/etc/ssl/selkies.pem && rm /tmp/sk.crt
-      printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' \
+      printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' \
         >/etc/systemd/system/selkies-tls.service
       systemctl enable selkies-tls
       printf '[Desktop Entry]\nType=Application\nName=Selkies\nExec=selkies-session\n' \
@@ -241,9 +241,3 @@ probes:
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
   enabled: true
-
-portForwards:
-  - guestPort: 8080
-    hostPort: 8080
-  - guestPort: 8443
-    hostPort: 8443
