@@ -39,7 +39,7 @@ zoxide = 'latest'
 #'vfox:mise-plugins/vfox-clang' = '18.1.8'
 
 # ai coding platforms
-claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
+#claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
 opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
