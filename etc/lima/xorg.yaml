@@ -182,12 +182,12 @@ provision:
       # extensions (MV3/dNR): chrome must WRITE _metadata cache into ext dir -> user-owned
       [ -n "$EXT" ] && { wait $EXT; [ -f /tmp/ext.ok ] || { cat /tmp/ext.log >&2; exit 1; }; }
       chown -R {{.User}}: /usr/local/share/extensions
-      printf '#!/bin/sh\nexec %s --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
+      printf '#!/bin/sh\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
       chmod 755 /usr/local/bin/chromium-wrapper
       for n in chrome chromium chromium-browser; do ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
       # .desktop + defaults
       install -d /usr/local/share/applications
-      printf '[Desktop Entry]\nVersion=1.0\nName=Chromium\nGenericName=Web Browser\nExec=/usr/local/bin/chromium --no-first-run --hide-crash-restore-bubble %%u\nTerminal=false\nType=Application\nIcon=chromium\nCategories=Network;WebBrowser;\nMimeType=x-scheme-handler/http;x-scheme-handler/https;\nStartupWMClass=Chromium\n' \
+      printf '[Desktop Entry]\nVersion=1.0\nName=Chromium\nGenericName=Web Browser\nExec=/usr/local/bin/chromium --no-first-run %%u\nTerminal=false\nType=Application\nIcon=chromium\nCategories=Network;WebBrowser;\nMimeType=x-scheme-handler/http;x-scheme-handler/https;\nStartupWMClass=Chromium\n' \
         >/usr/local/share/applications/chromium.desktop
       # snap-style duplicate name: chromium looks for it when deciding "is default"
       cp /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
