@@ -28,7 +28,7 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
-brew install qemu
+command -v brew >/dev/null && brew install qemu
 
 ### socket_vmnet ###############################################################
 
