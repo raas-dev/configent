@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.239.0](https://github.com/raas-dev/configent/compare/1.238.1...1.239.0) (2026-09-13)
+
+### Features
+
+* **lima:** add Ubuntu 26.04 support ([a1fa6b4](https://github.com/raas-dev/configent/commit/a1fa6b474763a4f6fb4d6150449b1fbfa86c725b))
+
+### Fixes
+
+* **lima:** add --no-first-run to chromium wrapper and desktop entry ([1affda4](https://github.com/raas-dev/configent/commit/1affda4dc34b5e8cc66813348646d60e21d2f4b7))
+* **lima:** bind Selkies to localhost only ([5bd18e7](https://github.com/raas-dev/configent/commit/5bd18e7f59cbfee3ee5073746b47d9af51e39bbc))
+* **lima:** cache chromium extensions and selkies downloads ([8299164](https://github.com/raas-dev/configent/commit/8299164f737dd456530bd6455d9c07b76b509f3f))
+* **lima:** clean guest password and restore NOPASSWD sudoers ([852e8b1](https://github.com/raas-dev/configent/commit/852e8b18758e4c6a71ea302c740bed80f7cfb179))
+* **lima:** force vzNAT for xorg and macos templates ([c046b0d](https://github.com/raas-dev/configent/commit/c046b0d45481159dedeb67f8c476773d3b7187e3))
+* **lima:** force xorg template to vzNAT ([bf9dd13](https://github.com/raas-dev/configent/commit/bf9dd13d93b17cfebc114006d2999b7837b05062))
+* **lima:** handle xorg template and add chromium startup policy ([ea8f9a8](https://github.com/raas-dev/configent/commit/ea8f9a85845db3cc52e64650dcb1fe91bc96dbe9))
+* **lima:** install Chromium extensions and wrap launcher ([bd76414](https://github.com/raas-dev/configent/commit/bd764143ddf034d9fa2a183b746880dac092541f))
+* **lima:** parallel apt and download CloakBrowser extensions ([37b9b03](https://github.com/raas-dev/configent/commit/37b9b03e8b2170600ba30bfeaec57e9fbdc479a0))
+* **lima:** provision macOS guest user password via dscl ([da6ded6](https://github.com/raas-dev/configent/commit/da6ded6757a0e57e2fb2b264e9701219a9fbc913))
+* **lima:** reduce selkies readiness wait timeout ([5d7a6ea](https://github.com/raas-dev/configent/commit/5d7a6ea93eb406f26e2465b16d5b763b6b88a69a))
+* **lima:** remove networks section from macos.yaml template ([19faa0a](https://github.com/raas-dev/configent/commit/19faa0a4ad15cdf67539c2d284f91651b88ab1bf))
+* **lima:** run dpkg configure after apt installs ([3b2d6f4](https://github.com/raas-dev/configent/commit/3b2d6f4eddb5a2fed7047e8718a7402ace8bd2e5))
+* **lima:** run headless Xorg dummy without lightdm ([0485cc1](https://github.com/raas-dev/configent/commit/0485cc124f004114d51c50d65fa01c9b441ed241))
+* **lima:** set loginwindow plist directly for auto-login ([1863d19](https://github.com/raas-dev/configent/commit/1863d19ca8c747c9dd1418f43d38fa203ee8f100))
+* **lima:** start graphical.target in xorg desktop.sh ([7094190](https://github.com/raas-dev/configent/commit/7094190120e99e9234e21550c8efc849f86d5ac3))
+* **lima:** symlink Downloads and configent into guest ([d62a9ec](https://github.com/raas-dev/configent/commit/d62a9ec513f8e9d18851b5232c1862c3575a5afb))
 ## [1.238.1](https://github.com/raas-dev/configent/compare/1.238.0...1.238.1) (2026-09-12)
 
 ### Fixes
