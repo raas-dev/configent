@@ -43,9 +43,9 @@ command -v brew >/dev/null && brew install qemu
 ### krunkit ####################################################################
 
 if command -v brew >/dev/null; then
-  brew tap slp/krun
-  brew trust slp/krun
-  brew install krunkit
+  brew tap libkrun/krun
+  brew trust libkrun/krun
+  brew install libkrun/krun/krunkit
 fi
 
 ### socket_vmnet ###############################################################
