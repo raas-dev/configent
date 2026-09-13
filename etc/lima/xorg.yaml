@@ -35,8 +35,14 @@ provision:
       set -eux -o pipefail
       command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
       export DEBIAN_FRONTEND=noninteractive
-      apt-get update
-      apt-get install -y --no-install-recommends xorg lightdm accountsservice
+      APTOPT='-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0'
+      apt-get update $APTOPT
+      apt-get install -y --no-install-recommends $APTOPT xorg lightdm accountsservice python3-pip
+      # chromium download (~198MB) overlaps all remaining apt work
+      ( pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser \
+          && cloakbrowser install \
+          && touch /tmp/cb.ok ) >/tmp/cb.log 2>&1 &
+      CB=$!
       # slim 1.4.1 auto_login leaves "Untitled window" (Debian #1117831) - lightdm instead
       mkdir -p /etc/lightdm/lightdm.conf.d
       printf "[Seat:*]\nautologin-user={{.User}}\nautologin-user-timeout=0\nautologin-session=lightdm-xsession\n" \
@@ -51,7 +57,7 @@ provision:
       printf 'Section "InputClass"\n  Identifier "system-keyboard"\n  MatchIsKeyboard "on"\n  Option "XkbLayout" "fi"\nEndSection\n' >/etc/X11/xorg.conf.d/00-keyboard.conf
       sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
       # webtop ubuntu-xfce style desktop; xubuntu-wallpapers owns backdrops/xubuntu-wallpaper.png symlink
-      apt-get install -y --no-install-recommends xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber xubuntu-wallpapers
+      apt-get install -y --no-install-recommends $APTOPT xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber xubuntu-wallpapers
       rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
         /etc/xdg/autostart/xscreensaver.desktop \
         /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
@@ -87,9 +93,23 @@ provision:
         amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
         arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
       esac
-      curl -fSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
-      apt-get install -y --no-install-recommends "./${DEB}" socat python3-pip unzip libnspr4 libnss3
+      curl -fsSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
+      apt-get install -y --no-install-recommends $APTOPT "./${DEB}" socat unzip libnspr4 libnss3
       rm -f "./${DEB}"
+      # extensions download overlaps remaining config
+      (
+        install -d /usr/local/share/extensions
+        for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
+          name=${pair%%:*}; id=${pair##*:}
+          curl -fsSL -o /tmp/$name.crx "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
+          python3 -c "import sys;d=open('/tmp/$name.crx','rb').read();open('/tmp/$name.zip','wb').write(d[d.find(b'PK\\x03\\x04'):])"
+          mkdir -p /usr/local/share/extensions/$name
+          unzip -oq /tmp/$name.zip -d /usr/local/share/extensions/$name
+          rm -rf /usr/local/share/extensions/$name/_metadata
+        done
+        touch /tmp/ext.ok
+      ) >/tmp/ext.log 2>&1 &
+      EXT=$!
       cat >/usr/local/bin/selkies-session <<'EOF'
       #!/bin/bash
       # attaches selkies to the running Xorg/xfce session on :0
@@ -121,22 +141,13 @@ provision:
       # chromium (CloakBrowser stealth build): pip pkg auto-downloads binary
       echo 'kernel.apparmor_restrict_unprivileged_userns = 0' >/etc/sysctl.d/99-chromium-userns.conf
       sysctl -p /etc/sysctl.d/99-chromium-userns.conf
-      pip3 install --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser
-      cloakbrowser install
+      wait $CB; [ -f /tmp/cb.ok ] || { cat /tmp/cb.log >&2; exit 1; }
       install -d /opt/cloakbrowser
       CRBIN=$(ls -d /root/.cloakbrowser/chromium-*/chrome | head -1)
       mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
       CRBIN=/opt/cloakbrowser/$(basename "$(dirname "$CRBIN")")/chrome
       # extensions (MV3/dNR): chrome must WRITE _metadata cache into ext dir -> user-owned
-      install -d /usr/local/share/extensions
-      for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
-        name=${pair%%:*}; id=${pair##*:}
-        curl -fsSL -o /tmp/$name.crx "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
-        python3 -c "import sys;d=open('/tmp/$name.crx','rb').read();open('/tmp/$name.zip','wb').write(d[d.find(b'PK\x03\x04'):])"
-        mkdir -p /usr/local/share/extensions/$name
-        unzip -oq /tmp/$name.zip -d /usr/local/share/extensions/$name
-        rm -rf /usr/local/share/extensions/$name/_metadata
-      done
+      wait $EXT; [ -f /tmp/ext.ok ] || { cat /tmp/ext.log >&2; exit 1; }
       chown -R {{.User}}: /usr/local/share/extensions
       printf '#!/bin/sh\nexec %s --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
       chmod 755 /usr/local/bin/chromium-wrapper
