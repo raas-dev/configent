@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.241.0](https://github.com/raas-dev/configent/compare/1.240.0...1.241.0) (2026-09-13)
+
+### Features
+
+* **lima:** add xorg-krunkit template ([85194b5](https://github.com/raas-dev/configent/commit/85194b570d5fe3426cdb0b7ec02efdec64e55537))
 ## [1.240.0](https://github.com/raas-dev/configent/compare/1.239.0...1.240.0) (2026-09-13)
 
 ### Features
