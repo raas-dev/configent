@@ -46,7 +46,6 @@ if command -v brew >/dev/null; then
   brew tap libkrun/krun
   brew trust libkrun/krun
   brew install libkrun/krun/krunkit
-  brew install libkrun/krun/virglrenderer
 fi
 
 ### socket_vmnet ###############################################################
