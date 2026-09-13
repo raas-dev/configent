@@ -4,7 +4,7 @@
 set -eux -o pipefail
 command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
 export DEBIAN_FRONTEND=noninteractive
-APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold)
+APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold -o APT::Immediate-Configure=0 -o Dpkg::Options::=--no-triggers)
 ARCH=$(dpkg --print-architecture)
 TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
 
@@ -194,6 +194,7 @@ apt_install_all() { # ONE dpkg transaction — dpkg lock serializes anyway
     DEBSRC="/tmp/$DEB"
   fi
   apt-get install -y --no-install-recommends "${APTOPT[@]}" "${pkgs[@]}" "$DEBSRC"
+  dpkg --configure -a --force-unsafe-io --force-confold
   # post-install tweaks needing files from the transaction
   rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
     /etc/xdg/autostart/xscreensaver.desktop \
@@ -211,8 +212,8 @@ CB=$!
 write_configs
 wait_ok "$UP" /tmp/apt.log
 wait_ok "$SDB" /tmp/selkdeb.log
-wait_ok "$CB" /tmp/cb.log
-apt_install_all # installs pip3/unzip → below needs them
+apt_install_all           # installs pip3/unzip → below needs them
+wait_ok "$CB" /tmp/cb.log # extract overlaps apt txn above; chromium_files needs cb.ok
 extensions_dl >/tmp/ext.log 2>&1
 chromium_files
 systemctl set-default graphical.target
