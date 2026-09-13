@@ -213,7 +213,8 @@ v() {
       if [ "$(uname -s)" = 'Darwin' ]; then
         # bridged only for Linux guests; macOS template has vzNAT + user-v2
         # (see etc/lima/macos.yaml) --network would override template networks.
-        if [ "$template" != "macos" ]; then
+        # xorg template itself has user-v2 only (vzNAT-backed, never bridged)
+        if [ "$template" != "macos" ] && [ "$template" != "xorg" ]; then
           if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
             # os_create_args=(--vm-type=vz --network=lima:bridged \
             #   --dns=1.1.1.1 --dns=1.0.0.1 --rosetta)

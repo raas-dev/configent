@@ -195,6 +195,10 @@ provision:
       chmod 755 /usr/local/share/applications
       chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
       printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' >/etc/xdg/xfce4/helpers.rc
+      # startup page (managed policy)
+      install -d /etc/chromium/policies/managed
+      printf '{"RestoreOnStartup":4,"RestoreOnStartupURLs":["https://browserleaks.com/ip"]}\n' \
+        >/etc/chromium/policies/managed/startup.json
       printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\n' >/etc/xdg/mimeapps.list
       # per-user default too (xfce/xdg reads it before root one settles; survives reboot)
       UHOME=$(getent passwd {{.User}} | cut -d: -f6)
