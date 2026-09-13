@@ -10,13 +10,13 @@ alias code="\$DEFAULT_IDE --reuse-window --add"
 
 ### Upgrade for all package managers ###########################################
 
-skipped_managers=(containers helm powershell skills)
-alias up="topgrade --disable brew_cask restarts snap system ${skipped_managers[*]}"
+skipped_managers="containers helm powershell skills"
+alias up="topgrade --disable brew_cask restarts snap system $skipped_managers"
 dup() {
   if tmux has-session -t topgrade 2>/dev/null; then
     tmux attach -t topgrade
   else
-    topgrade --tmux --disable "${skipped_managers[@]}"
+    topgrade --tmux --disable "$skipped_managers"
   fi
 }
 
