@@ -211,25 +211,31 @@ v() {
       _lima_remove_nonexistent_mounts "$vm_name"
       # cache mounts are skipped w/ WARN when host dir absent — create instead
       case "$vm_name" in xorg | xorg-qemu | xorg-krunkit) mkdir -p "$HOME/.cache/lima-provision/apt-archives" ;; esac
-      # xorg-qemu / xorg-krunkit reuse xorg.yaml; vmType set via limactl flags
+      # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
       local template_file="$template"
-      case "$template" in xorg-qemu | xorg-krunkit) template_file="xorg" ;; esac
+      local vm_suffix=""
+      case "$template" in
+      *-qemu) template_file="${template%-qemu}" vm_suffix="qemu" ;;
+      *-krunkit) template_file="${template%-krunkit}" vm_suffix="krunkit" ;;
+      esac
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        # xorg-qemu: qcow2 disk → limactl snapshot works; no rosetta (vz-only)
-        if [ "$template" = "xorg-qemu" ]; then
-          os_create_args=(--vm-type=qemu)
-        # xorg-krunkit: libkrun/HVF, arm64 only, experimental
-        elif [ "$template" = "xorg-krunkit" ]; then
-          os_create_args=(--vm-type=krunkit --mount-type=virtiofs)
-        # xorg + macos: vzNAT driver always, never bridged, never on LAN
-        elif [ "$template" = "xorg" ] || [ "$template" = "macos" ]; then
-          os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
-        elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)
-        else
-          os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
+        # prefer socket_vmnet bridged (LAN access); xorg + macos stay NAT, never on LAN
+        local net_arg=""
+        if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+          case "$template_file" in xorg | macos) ;; *) net_arg="--network=lima:bridged" ;; esac
         fi
+        case "$vm_suffix" in
+        # qcow2 disk → limactl snapshot works; no rosetta (vz-only); net fallback = slirp
+        qemu) os_create_args=(--vm-type=qemu) ;;
+        # libkrun/HVF, arm64 only, experimental; net fallback = gvisor usernet
+        krunkit) os_create_args=(--vm-type=krunkit --mount-type=virtiofs) ;;
+        *)
+          os_create_args=(--vm-type=vz --rosetta)
+          [ -n "$net_arg" ] || os_create_args+=(--network=vzNAT)
+          ;;
+        esac
+        [ -n "$net_arg" ] && os_create_args+=("$net_arg")
       fi
       limactl start "$HOME/.config/configent/lima/$template_file.yaml" \
         --name "$vm_name" --tty=false \
