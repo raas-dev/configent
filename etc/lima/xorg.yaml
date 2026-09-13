@@ -25,7 +25,6 @@ mounts:
   - location: "~/.cache/lima-provision"
     mountPoint: /mnt/lima-provision
     writable: true
-  # persistent apt deb cache — survives recreate, skips re-downloads only
   - location: "~/.cache/lima-provision/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
@@ -48,6 +47,8 @@ provision:
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   - mode: system
     file: xorg/desktop.sh
+  - mode: system
+    file: xorg/gpu.sh
   # provisioning disabled for now — re-enable to bootstrap configent
   # - mode: user
   #   script: |

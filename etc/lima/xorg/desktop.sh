@@ -211,6 +211,11 @@ apt_install_all() { # ONE dpkg transaction — dpkg lock serializes anyway
   update-desktop-database /usr/local/share/applications || true
 }
 
+# apt deb cache mounts at /var/cache/apt/archives (lima-provision share).
+# partial/ created by GUEST root: host-created dirs carry macOS provenance
+# xattr → virtiofs surfaces as ACL → EACCES for apt as root.
+install -d -m 755 /var/cache/apt/archives/partial
+
 apt_update >/tmp/apt.log 2>&1 &
 UP=$!
 selkies_deb >/tmp/selkdeb.log 2>&1 &
