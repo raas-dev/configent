@@ -210,11 +210,14 @@ v() {
       | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
       # cache mounts are skipped w/ WARN when host dir absent — create instead
-      [ "$vm_name" = xorg ] && mkdir -p "$HOME/.cache/lima-provision/apt-archives"
+      case "$vm_name" in xorg | xorg-qemu) mkdir -p "$HOME/.cache/lima-provision/apt-archives" ;; esac
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
+        # xorg-qemu: qcow2 disk → limactl snapshot works; no rosetta (vz-only)
+        if [ "$template" = "xorg-qemu" ]; then
+          os_create_args=(--vm-type=qemu)
         # xorg + macos: vzNAT driver always, never bridged, never on LAN
-        if [ "$template" = "xorg" ] || [ "$template" = "macos" ]; then
+        elif [ "$template" = "xorg" ] || [ "$template" = "macos" ]; then
           os_create_args=(--vm-type=vz --network=vzNAT --rosetta)
         elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
           os_create_args=(--vm-type=vz --network=lima:bridged --rosetta)

@@ -1,0 +1,83 @@
+# xorg.yaml clone on qemu — qcow2 disk → `limactl snapshot` works
+vmType: qemu
+
+images:
+  # Ubuntu 26.04 (resolute) minimal — latest Ubuntu version, latest release
+  - location: https://cloud-images.ubuntu.com/minimal/releases/resolute/release-20260908/ubuntu-26.04-minimal-cloudimg-amd64.img
+    arch: x86_64
+    digest: sha256:c0c48d8f774eaef2ded8680cc310c772b52eb5ce4f136b2d16db68a0194baf13
+  - location: https://cloud-images.ubuntu.com/minimal/releases/resolute/release-20260908/ubuntu-26.04-minimal-cloudimg-arm64.img
+    arch: aarch64
+    digest: sha256:671baf09e0a21681979c3a0436d530dfa2d70ed627d1527ebb174f7b5b6b5719
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
+  - location: https://cloud-images.ubuntu.com/minimal/releases/resolute/release/ubuntu-26.04-minimal-cloudimg-amd64.img
+    arch: x86_64
+  - location: https://cloud-images.ubuntu.com/minimal/releases/resolute/release/ubuntu-26.04-minimal-cloudimg-arm64.img
+    arch: aarch64
+
+#cpus: 4          # default: 4
+memory: "8GiB" # default: "4GiB"
+#disk: "100GiB"   # default: "100GiB"
+
+mounts:
+  - location: "~/Downloads"
+    writable: true
+  # provisioning cache — guest writes selkies deb + chromium-extensions tarball
+  # here on first run; rm -rf ~/.cache/lima-provision to force refresh
+  - location: "~/.cache/lima-provision"
+    mountPoint: /mnt/lima-provision
+    writable: true
+  # persistent apt deb cache — survives recreate, skips re-downloads only
+  - location: "~/.cache/lima-provision/apt-archives"
+    mountPoint: /var/cache/apt/archives
+    writable: true
+
+containerd:
+  system: false
+  user: false
+
+ssh:
+  forwardAgent: true
+
+video:
+  # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
+  display: none
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: system
+    file: xorg/desktop.sh
+  # provisioning disabled for now — re-enable to bootstrap configent
+  # - mode: user
+  #   script: |
+  #     #!/bin/sh
+  #     [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+  #     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
+
+probes:
+  - description: "Xorg to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Xorg is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+  - description: "Selkies to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Selkies is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+
+# https://lima-vm.io/docs/config/network/user/#dns-19216853
+hostResolver:
+  enabled: true
