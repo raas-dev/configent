@@ -40,7 +40,8 @@ ssh:
   forwardAgent: true
 
 video:
-  display: vz
+  # none: no host window, no GPU device — in-VM Xorg uses dummy driver for selkies
+  display: none
 
 provision:
   - mode: system
@@ -55,7 +56,7 @@ provision:
       export DEBIAN_FRONTEND=noninteractive
       APTOPT='-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io'
       apt-get update $APTOPT
-      apt-get install -y --no-install-recommends $APTOPT xorg lightdm accountsservice python3-pip
+      apt-get install -y --no-install-recommends $APTOPT xorg xserver-xorg-video-dummy python3-pip
       # chromium + extensions (~198MB): host cache tarball if present, else pip/network fallback
       TARBALL=/mnt/lima-provision/chromium-extensions.$(dpkg --print-architecture).tar.gz
       if [ -f "$TARBALL" ]; then
@@ -66,19 +67,17 @@ provision:
             && touch /tmp/cb.ok ) >/tmp/cb.log 2>&1 &
       fi
       CB=$!
-      # slim 1.4.1 auto_login leaves "Untitled window" (Debian #1117831) - lightdm instead
-      mkdir -p /etc/lightdm/lightdm.conf.d
-      printf "[Seat:*]\nautologin-user={{.User}}\nautologin-user-timeout=0\nautologin-session=lightdm-xsession\n" \
-        >/etc/lightdm/lightdm.conf.d/50-autologin.conf
-      chmod 644 /etc/lightdm/lightdm.conf.d/50-autologin.conf
-      # greeter background = desktop wallpaper so login+session match
-      mkdir -p /etc/lightdm/lightdm-gtk-greeter.conf.d
-      printf '[greeter]\nbackground = /usr/share/xfce4/backdrops/xubuntu-wallpaper.png\nuser-background = false\n' \
-        >/etc/lightdm/lightdm-gtk-greeter.conf.d/50-wallpaper.conf
+      # no display manager: video.display none = no GPU -> no seat graphics device,
+      # lightdm never spawns X. systemd units run Xorg dummy + xfce directly.
+      printf '[Unit]\nDescription=Xorg dummy :0\n[Service]\nExecStart=/usr/bin/Xorg :0 -noreset\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xorg-dummy.service
+      printf '[Unit]\nDescription=xfce session on :0\nRequires=xorg-dummy.service\nAfter=xorg-dummy.service\n[Service]\nUser={{.User}}\nPAMName=login\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xfce-session.service
+      systemctl enable xorg-dummy xfce-session
       # localectl fails in cloud-init (located absent) — write XKB conf directly
       install -d /etc/X11/xorg.conf.d
       printf 'Section "InputClass"\n  Identifier "system-keyboard"\n  MatchIsKeyboard "on"\n  Option "XkbLayout" "fi"\nEndSection\n' >/etc/X11/xorg.conf.d/00-keyboard.conf
       sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
+      # headless Xorg for selkies (video.display none = no virtio-gpu)
+      printf 'Section "ServerLayout"\n  Identifier "layout"\n  Screen 0 "Screen0"\nEndSection\nSection "Device"\n  Identifier "dummy"\n  Driver "dummy"\n  VideoRam 32768\nEndSection\nSection "Monitor"\n  Identifier "monitor0"\n  HorizSync 5.0-1000.0\n  VertRefresh 5.0-200.0\nEndSection\nSection "Screen"\n  Identifier "Screen0"\n  Device "dummy"\n  Monitor "monitor0"\n  DefaultDepth 24\n  SubSection "Display"\n    Depth 24\n    Modes "2560x1440"\n    Virtual 2560 1440\n  EndSubSection\nEndSection\n' >/etc/X11/xorg.conf.d/10-dummy.conf
       # webtop ubuntu-xfce style desktop; xubuntu-wallpapers owns backdrops/xubuntu-wallpaper.png symlink
       apt-get install -y --no-install-recommends $APTOPT xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11 pipewire pipewire-pulse wireplumber xubuntu-wallpapers
       rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
