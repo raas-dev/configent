@@ -247,7 +247,3 @@ portForwards:
     hostPort: 8080
   - guestPort: 8443
     hostPort: 8443
-
-# https://lima-vm.io/docs/config/network/#lima-user-v2-network
-networks:
-  - lima: user-v2
