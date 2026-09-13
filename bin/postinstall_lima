@@ -6,12 +6,12 @@
 # Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
 # Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
 
+### setup ######################################################################
+
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "Skipping Lima QEMU and socket_vmnet setup: not on macOS."
   exit 0
 fi
-
-### qemu #######################################################################
 
 eval_brew() {
   if [ -x "/opt/homebrew/bin/brew" ]; then
@@ -36,7 +36,17 @@ if ! command -v brew >/dev/null; then
   eval_brew
 fi
 
+### qemu ####################################################################
+
 command -v brew >/dev/null && brew install qemu
+
+### krunkit ####################################################################
+
+if command -v brew >/dev/null; then
+  brew tap slp/krun
+  brew trust slp/krun
+  brew install krunkit
+fi
 
 ### socket_vmnet ###############################################################
 
