@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.241.1](https://github.com/raas-dev/configent/compare/1.241.0...1.241.1) (2026-09-13)
+
+### Fixes
+
+* **lima:** use libkrun krunkit Homebrew formula ([c710f31](https://github.com/raas-dev/configent/commit/c710f3146b1419f6ad9cddc5073c26815ef75ac4))
 ## [1.241.0](https://github.com/raas-dev/configent/compare/1.240.0...1.241.0) (2026-09-13)
 
 ### Features
