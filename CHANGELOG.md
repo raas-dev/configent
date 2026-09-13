@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.240.0](https://github.com/raas-dev/configent/compare/1.239.0...1.240.0) (2026-09-13)
+
+### Features
+
+* **lima:** add xorg-qemu template and apt cache dir handling ([106cc49](https://github.com/raas-dev/configent/commit/106cc4976d8f67cde679b6f210927ac33e9e7b58))
+
+### Fixes
+
+* **aliases:** fix skipped_managers quoting ([029f528](https://github.com/raas-dev/configent/commit/029f528a152c9c4b6995a709f4066cbae4ee9ffd))
+* **aliases:** make skipped_managers a bash array ([05fe590](https://github.com/raas-dev/configent/commit/05fe59075fd617605e266ec54efa7cf7ff5c64de))
+* **aliases:** make skipped_managers a bash array ([46d90dc](https://github.com/raas-dev/configent/commit/46d90dc3741796ee293f93ebff34d6c302a72ed8))
+* **homebrew:** suppress analytics and prompts ([7d303ea](https://github.com/raas-dev/configent/commit/7d303eae0f361648799dfa9a33aace91deeccbd0))
+* **lima:** install qemu only when brew is available ([adb3269](https://github.com/raas-dev/configent/commit/adb3269c295b1d623518e61dfbea2beefb4366ea))
+* **lima:** reboot once to activate first-boot macOS autologin ([618ddb2](https://github.com/raas-dev/configent/commit/618ddb2f0175fb8d2a356e7baee8861d82ab32e0))
+* **lima:** skip QEMU/socket_vmnet setup on non-macOS ([d824dbb](https://github.com/raas-dev/configent/commit/d824dbbbc884a64c695af226c218e61c1fa5e8c1))
 ## [1.239.0](https://github.com/raas-dev/configent/compare/1.238.1...1.239.0) (2026-09-13)
 
 ### Features
