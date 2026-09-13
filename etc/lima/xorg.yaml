@@ -16,6 +16,17 @@ images:
 mounts:
   - location: "~/Downloads"
     writable: true
+  # provisioning cache — rebuild after cloakbrowser/chromium bump:
+  #   limactl shell xorg -- sudo tar czf - -C / opt/cloakbrowser usr/local/share/extensions \
+  #     > ~/.cache/lima-provision/chromium-extensions.$(limactl info xorg | jq -r .arch).tar.gz
+  # selkies deb: curl -LO ~/.cache/lima-provision/ from github selkies v2.0.0rc0 release
+  - location: "~/.cache/lima-provision"
+    mountPoint: /mnt/lima-provision
+    writable: false
+  # persistent apt deb cache — survives recreate, 2nd+ runs unpack only
+  - location: "~/.cache/lima-provision/apt-archives"
+    mountPoint: /var/cache/apt/archives
+    writable: true
 
 containerd:
   system: false
@@ -35,13 +46,18 @@ provision:
       set -eux -o pipefail
       command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
       export DEBIAN_FRONTEND=noninteractive
-      APTOPT='-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0'
+      APTOPT='-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io'
       apt-get update $APTOPT
       apt-get install -y --no-install-recommends $APTOPT xorg lightdm accountsservice python3-pip
-      # chromium download (~198MB) overlaps all remaining apt work
-      ( pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser \
-          && cloakbrowser install \
-          && touch /tmp/cb.ok ) >/tmp/cb.log 2>&1 &
+      # chromium + extensions (~198MB): host cache tarball if present, else pip/network fallback
+      TARBALL=/mnt/lima-provision/chromium-extensions.$(dpkg --print-architecture).tar.gz
+      if [ -f "$TARBALL" ]; then
+        ( tar xzf "$TARBALL" -C / && touch /tmp/cb.ok /tmp/ext.ok ) >/tmp/cb.log 2>&1 &
+      else
+        ( pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser \
+            && cloakbrowser install \
+            && touch /tmp/cb.ok ) >/tmp/cb.log 2>&1 &
+      fi
       CB=$!
       # slim 1.4.1 auto_login leaves "Untitled window" (Debian #1117831) - lightdm instead
       mkdir -p /etc/lightdm/lightdm.conf.d
@@ -93,11 +109,18 @@ provision:
         amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
         arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
       esac
-      curl -fsSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
-      apt-get install -y --no-install-recommends $APTOPT "./${DEB}" socat unzip libnspr4 libnss3
-      rm -f "./${DEB}"
-      # extensions download overlaps remaining config
-      (
+      SELKDEB=/mnt/lima-provision/${DEB}
+      if [ -f "$SELKDEB" ]; then
+        apt-get install -y --no-install-recommends $APTOPT "$SELKDEB" socat unzip libnspr4 libnss3
+      else
+        curl -fsSLO --retry 5 --retry-all-errors "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
+        apt-get install -y --no-install-recommends $APTOPT "./${DEB}" socat unzip libnspr4 libnss3
+        rm -f "./${DEB}"
+      fi
+      # extensions download overlaps remaining config (cached tarball already includes them)
+      EXT=
+      if [ ! -f "$TARBALL" ]; then
+        (
         install -d /usr/local/share/extensions
         for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
           name=${pair%%:*}; id=${pair##*:}
@@ -108,8 +131,9 @@ provision:
           rm -rf /usr/local/share/extensions/$name/_metadata
         done
         touch /tmp/ext.ok
-      ) >/tmp/ext.log 2>&1 &
-      EXT=$!
+        ) >/tmp/ext.log 2>&1 &
+        EXT=$!
+      fi
       cat >/usr/local/bin/selkies-session <<'EOF'
       #!/bin/bash
       # attaches selkies to the running Xorg/xfce session on :0
@@ -142,12 +166,14 @@ provision:
       echo 'kernel.apparmor_restrict_unprivileged_userns = 0' >/etc/sysctl.d/99-chromium-userns.conf
       sysctl -p /etc/sysctl.d/99-chromium-userns.conf
       wait $CB; [ -f /tmp/cb.ok ] || { cat /tmp/cb.log >&2; exit 1; }
-      install -d /opt/cloakbrowser
-      CRBIN=$(ls -d /root/.cloakbrowser/chromium-*/chrome | head -1)
-      mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
-      CRBIN=/opt/cloakbrowser/$(basename "$(dirname "$CRBIN")")/chrome
+      if [ -d /root/.cloakbrowser ]; then
+        install -d /opt/cloakbrowser
+        CRBIN=$(ls -d /root/.cloakbrowser/chromium-*/chrome | head -1)
+        mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
+      fi
+      CRBIN=$(ls -d /opt/cloakbrowser/chromium-*/chrome | head -1)
       # extensions (MV3/dNR): chrome must WRITE _metadata cache into ext dir -> user-owned
-      wait $EXT; [ -f /tmp/ext.ok ] || { cat /tmp/ext.log >&2; exit 1; }
+      [ -n "$EXT" ] && { wait $EXT; [ -f /tmp/ext.ok ] || { cat /tmp/ext.log >&2; exit 1; }; }
       chown -R {{.User}}: /usr/local/share/extensions
       printf '#!/bin/sh\nexec %s --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
       chmod 755 /usr/local/bin/chromium-wrapper
@@ -186,7 +212,7 @@ probes:
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 30s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 3; done"; then
+      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 3; done"; then
         echo >&2 "Xorg is not installed yet"
         exit 1
       fi
