@@ -18,6 +18,9 @@ eval_brew() {
   elif [ -x "$HOME/.linuxbrew/bin/brew" ]; then
     eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
   fi
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_ASK=1
+  export HOMEBREW_NO_ENV_HINTS=1
 }
 eval_brew
 
