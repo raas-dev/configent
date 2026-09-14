@@ -16,8 +16,8 @@ config_path="$HOME/.config/configent"
 
 # files
 for file in auth.json settings.json keybindings.json models.json headroom.yml \
-  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json pi-vcc-config.json \
-  i-have-adhd.json todo.json; do
+  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \
+  i-have-adhd.json todo.json web-search.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"
@@ -90,19 +90,6 @@ else
   mkdir -p "$HOME/.pi/agent"
   ln -sfnv "$caveman" "$HOME/.pi/agent/caveman.json"
 fi
-
-### pi-web-access ##############################################################
-
-# web-search.json
-if [ ! -r "$backup_path/.pi/agent/web-search.json" ]; then
-  if [ -r "$HOME/.pi/agent/web-search.json" ] && [ ! -L "$HOME/.pi/agent/web-search.json" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -P "$HOME/.pi/agent/web-search.json" \
-      "$backup_path/.pi/agent/web-search.json"
-  fi
-fi
-mkdir -p "$HOME/.pi/agent"
-ln -sfnv "$config_path/pi/web-search.json" "$HOME/.pi/agent/web-search.json"
 
 ### pi-workflows ###############################################################
 

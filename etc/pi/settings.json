@@ -27,6 +27,7 @@
     "npm:pi-tool-compact-display",
     "npm:pi-web-access",
     "npm:@baylarsadigov/omp-undo-redo",
+    "npm:@gamaraan/ask-tool",
     "npm:@gamaraan/todos-tool",
     "npm:@hk_net/pi-usage-bars",
     "npm:@jmcombs/pi-prompt-enhancer",
