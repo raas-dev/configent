@@ -1,0 +1,4 @@
+{
+  "searchTimeoutMs": "1m",
+  "bashTimeoutMs": "5m"
+}
