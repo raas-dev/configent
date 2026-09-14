@@ -1,5 +1,4 @@
 {
-  "app.clipboard.pasteImage": [],
   "app.message.dequeue": "ctrl+shift+up",
   "app.message.followUp": "ctrl+shift+enter",
   "app.models.reorderDown": "ctrl+shift+down",
