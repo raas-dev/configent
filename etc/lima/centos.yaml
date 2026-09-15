@@ -1,10 +1,10 @@
 images:
-  - location: https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-20250617.0.x86_64.qcow2
+  - location: https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-20260914.0.x86_64.qcow2
     arch: x86_64
-    digest: sha256:ac8b26eba30abb9b129789b8f045dbc40c620ff6227bdfc0af6a74f11633b0f5
-  - location: https://cloud.centos.org/centos/10-stream/aarch64/images/CentOS-Stream-GenericCloud-10-20250617.0.aarch64.qcow2
+    digest: sha256:a09f32a8002d4f89cdd5491c96cc1a9d58099c97750fec52219c3658d5fca211
+  - location: https://cloud.centos.org/centos/10-stream/aarch64/images/CentOS-Stream-GenericCloud-10-20260914.0.aarch64.qcow2
     arch: aarch64
-    digest: sha256:d1b7496ef06370156f5d9de86d67b45de307c935bc6a31444b828ad51c404211
+    digest: sha256:182e6a63cd1cb6c3d953c08ed8a6ad6423bac85cffe04be16b79a50db7c4fb7b
   # Fallback to the latest release image.
   # Hint: run `limactl prune` to invalidate the cache
   - location: https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-latest.x86_64.qcow2
