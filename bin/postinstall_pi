@@ -104,9 +104,9 @@ fi
 
 ### pi-task ####################################################################
 
-# acp.json
-if [ ! -r "$HOME/.config/pi-task/config.json" ]; then
-  if [ -r "$HOME/.pi/acp.json" ]; then
+# pi-task-config.json
+if [ ! -r "$backup_path/.config/pi-task/config.json" ]; then
+  if [ -r "$HOME/.config/pi-task/config.json" ]; then
     mkdir -p "$backup_path/.config/pi-task"
     cp -P "$HOME/.config/pi-task/config.json" \
       "$backup_path/.config/pi-task/config.json"
