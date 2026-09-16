@@ -250,7 +250,7 @@ export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
 export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
 
 # ponytal
-export PONYTAIL_DEFAULT_MODE="ultra"
+export PONYTAIL_DEFAULT_MODE="full"
 export PONYTAIL_QUIET_STARTUP=true
 export PONYTAIL_HIDE_STATUS=true
 
