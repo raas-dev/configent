@@ -16,7 +16,8 @@ config_path="$HOME/.config/configent"
 
 # files
 for file in auth.json settings.json keybindings.json models.json headroom.yml \
-  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \ i-have-adhd.json todo.json web-search.json; do
+  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \
+  i-have-adhd.json todo.json web-search.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"
@@ -28,7 +29,7 @@ for file in auth.json settings.json keybindings.json models.json headroom.yml \
 done
 
 # dirs
-for dir in agents extensions extension-data prompts skills themes profiles; do
+for dir in agents extensions prompts skills themes profiles; do
   if [ ! -r "$backup_path/.pi/agent/$dir" ]; then
     if [ -r "$HOME/.pi/agent/$dir" ]; then
       mkdir -p "$backup_path/.pi/agent/$dir"
