@@ -13,7 +13,6 @@
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.85.0",
   "packages": [
-    "npm:avtc-pi-unstuck",
     "npm:billion-context-pi",
     "npm:pi-cbm",
     "npm:pi-context-view",
