@@ -14,7 +14,7 @@
     "gitBranch": true,
     "gitStatus": true,
     "gitCommit": false,
-    "runtime": true,
+    "runtime": false,
     "context": true,
     "tokens": true,
     "cost": true,
@@ -28,5 +28,8 @@
     "tokens": true,
     "stalls": false,
     "cost": false
+  },
+  "thinkingPeek": {
+    "lines": 1
   }
 }
