@@ -19,6 +19,7 @@
     "npm:pi-context-view",
     "npm:pi-image-view",
     "npm:pi-interactive-shell",
+    "npm:pi-invisible-continue",
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-open-tui",
