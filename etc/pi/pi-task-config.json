@@ -1,0 +1,43 @@
+{
+  "remote": true,
+  "autoCommit": false,
+  "orientation": true,
+  "enforceGuidelines": true,
+  "verifyWork": true,
+  "parallelResearchWorkers": false,
+  "researchCache": true,
+  "searchProvider": "exa",
+  "extensionWhitelist": [],
+  "requestTimeoutMs": 0,
+  "commandTimeoutExemptTools": [],
+  "streamInactivityMs": 0,
+  "yoloMode": false,
+  "debugLogs": "events",
+  "reasoningMode": "default",
+  "reasoningLevels": {
+    "research": "medium",
+    "research:files": "off",
+    "research:apis": "medium",
+    "research:context": "medium",
+    "research:tooling": "medium",
+    "phase": "off",
+    "planning": "medium",
+    "plan": "inherit",
+    "gate": "off",
+    "extraction": "off",
+    "implementation": "off"
+  },
+  "groupModels": {
+    "research": "inherit",
+    "research:files": "inherit",
+    "research:apis": "inherit",
+    "research:context": "inherit",
+    "research:tooling": "inherit",
+    "phase": "inherit",
+    "planning": "inherit",
+    "plan": "inherit",
+    "gate": "inherit",
+    "extraction": "inherit",
+    "implementation": "inherit"
+  }
+}

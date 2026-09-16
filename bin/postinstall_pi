@@ -16,8 +16,7 @@ config_path="$HOME/.config/configent"
 
 # files
 for file in auth.json settings.json keybindings.json models.json headroom.yml \
-  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \
-  avtc-pi-unstuck-settings.json i-have-adhd.json todo.json web-search.json; do
+  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \ avtc-pi-unstuck-settings.json i-have-adhd.json todo.json web-search.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"
@@ -65,6 +64,18 @@ mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
+### billion-context-pi #########################################################
+
+# acp.json
+if [ ! -r "$backup_path/.pi/acp.json" ]; then
+  if [ -r "$HOME/.pi/acp.json" ]; then
+    mkdir -p "$backup_path/.pi"
+    cp -P "$HOME/.pi/acp.json" "$backup_path/.pi/acp.json"
+  fi
+fi
+mkdir -p "$HOME/.pi"
+ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
+
 ### pi-caveman #################################################################
 
 # pi-caveman reads config from $XDG_CONFIG_HOME/pi/agent when set,
@@ -91,6 +102,20 @@ else
   ln -sfnv "$caveman" "$HOME/.pi/agent/caveman.json"
 fi
 
+### pi-task ####################################################################
+
+# acp.json
+if [ ! -r "$HOME/.config/pi-task/config.json" ]; then
+  if [ -r "$HOME/.pi/acp.json" ]; then
+    mkdir -p "$backup_path/.config/pi-task"
+    cp -P "$HOME/.config/pi-task/config.json" \
+      "$backup_path/.config/pi-task/config.json"
+  fi
+fi
+mkdir -p "$HOME/.config/pi-task"
+ln -sfnv "$config_path/pi/pi-task-config.json" \
+  "$HOME/.config/pi-task/config.json"
+
 ### pi-workflows ###############################################################
 
 # workflows/settings.json
@@ -104,18 +129,6 @@ fi
 mkdir -p "$HOME/.pi/workflows"
 ln -sfnv "$config_path/pi/workflows/settings.json" \
   "$HOME/.pi/workflows/settings.json"
-
-### billion-context-pi #########################################################
-
-# acp.json
-if [ ! -r "$backup_path/.pi/acp.json" ]; then
-  if [ -r "$HOME/.pi/acp.json" ]; then
-    mkdir -p "$backup_path/.pi"
-    cp -P "$HOME/.pi/acp.json" "$backup_path/.pi/acp.json"
-  fi
-fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
 
 ### extensions #################################################################
 
