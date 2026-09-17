@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.241.2](https://github.com/raas-dev/configent/compare/1.241.1...1.241.2) (2026-09-17)
+
+### Fixes
+
+* **lima:** build patched Venus virtio Vulkan driver for macOS ([ae8b251](https://github.com/raas-dev/configent/commit/ae8b2516ba9af4b2cc0e4d87693fb9cb52cc2e4a))
+* **lima:** install virglrenderer from libkrun/krun ([a1025c7](https://github.com/raas-dev/configent/commit/a1025c7e0ae83ccf2ba3ec3f04eec8bb43247226))
+* **lima:** route qemu/krunkit templates and choose bridged net ([d93e764](https://github.com/raas-dev/configent/commit/d93e7643b4d8c821583befeaad59e72e11fb935c))
+
 ## [1.241.1](https://github.com/raas-dev/configent/compare/1.241.0...1.241.1) (2026-09-13)
 
 ### Fixes
