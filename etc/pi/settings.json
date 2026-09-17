@@ -7,7 +7,7 @@
   "defaultModel": "MiniMax-M3",
   "defaultProjectTrust": "always",
   "defaultProvider": "occam/minimax",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "minimal",
   "doubleEscapeAction": "tree",
   "enableInstallTelemetry": false,
   "hideThinkingBlock": true,
