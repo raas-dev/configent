@@ -1,29 +1,29 @@
 # agent prefs
 
 ## speak
-- spartan. terse.
-- pragmatic. structured.
+- spartan. terse. pragmatic.
 - sections + lists.
+- no "shall I proceed"
 
 ## plan
 - first principles
-- conflict → Ask. else ship.
-- no "shall I proceed?"
+- tasks must be pass/fail verifiable
+- conflict → Ask. else ship
 
 ## build
 - todo for 1+ task
-- run command → short timeout
-- only few and short comments
+- run command → set short timeout
+- no git stash, others might be editing
 
 ## verify
 - test by using e2e before "done"
 - add regression test after fix
-- no PR/push/publish w/o ask
+- no creating issues, pull requests, push or publish on any repo w/o ask
 
-## summary
-- one sentence summary
-- risks → propose fix path
-- propose next task
+## finish
+- bug or issue → Fix. Never ask.
+- risk → Propose fix path.
+- no fixes or risks → Propose next task.
 
 <!-- codebase-memory-mcp:start -->
 ## Codebase Memory
