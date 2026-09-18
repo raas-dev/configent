@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.241.3](https://github.com/raas-dev/configent/compare/1.241.2...1.241.3) (2026-09-18)
+
+### Fixes
+
+* **apk:** install hurl from testing ([38f7f1e](https://github.com/raas-dev/configent/commit/38f7f1e1ebcbac945113c7f705b42b016ee9280a))
+* **lima:** set mise musl settings and Docker group on Alpine ([7654202](https://github.com/raas-dev/configent/commit/76542020887aa34d370040456944e154dcfdbee5))
+* **lima:** update Alpine images and remove ash-as-bash hack ([b2fc857](https://github.com/raas-dev/configent/commit/b2fc8576becb40e997344c1dc9f7f502a71b8a0b))
+* **mise:** gate musl exports on Alpine only ([fee0252](https://github.com/raas-dev/configent/commit/fee025217d3dba9a1ef3161fb0eaadb1775fd59d))
+
 ## [1.241.2](https://github.com/raas-dev/configent/compare/1.241.1...1.241.2) (2026-09-17)
 
 ### Fixes
