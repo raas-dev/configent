@@ -39,7 +39,7 @@ mise self-update --yes
 # Alpine musl: inline exports so this run picks them up. The persistent
 # block lives in dotfiles/.profile (alpine-gated) and is sourced on every
 # login shell — no need to touch $HOME/.profile here.
-if { [ -f /etc/alpine-release ] || command -v apk >/dev/null 2>&1; } && command -v mise >/dev/null 2>&1; then
+if [ -f /etc/alpine-release ] && command -v mise >/dev/null 2>&1; then
   ARCH="$(uname -m)"
   case "$ARCH" in
   x86_64) CARGO_TARGET="x86_64-unknown-linux-musl" ;;
