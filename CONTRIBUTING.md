@@ -40,11 +40,9 @@ See `.semgrepignore` in repository root. Semgrep also supports inline ignores.
 
 ## Known issues
 
-- Lima: Alpine Linux (as of 2025-11)
-  - After restarting VM, lima gets stuck in boot waiting ssh to be available
-    - On macOS, try [qemu instead of vz](https://github.com/lima-vm/lima/issues/3052)
-  - Musl binaries for apps may not be available, or may not build from source
-    - Install `node` using `apk`
+- Lima: Alpine Linux (as of 2026-09)
+  - musl built binaries for apps may not be available
+    - install using `apk` or try compiling from source
 
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])

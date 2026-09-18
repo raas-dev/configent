@@ -54,12 +54,13 @@ $SUDO apk add musl-locales
 $SUDO apk add bison build-base cmake gcc gcompat icu-libs m4 ncurses
 
 # Common development dependencies
-$SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev musl-dev \
-  openssl-dev readline-dev sqlite-dev xz-dev yaml-dev zlib-dev
+$SUDO apk add bzip2-dev libffi-dev libpsl-native libxml2-dev linux-headers \
+  musl-dev openssl-dev openssl-libs-static python3-dev readline-dev \
+  sqlite-dev xz-dev yaml-dev zlib-dev zlib-static
 
 # Utils
-$SUDO apk add coreutils curl bind-tools expect file findutils git git-lfs \
-  htop less procps zip unzip util-linux wget whois
+$SUDO apk add bash-completion coreutils curl bind-tools expect file \
+  findutils git git-lfs htop jq less procps zip unzip util-linux wget whois
 
 # Sixel image previews
 $SUDO apk add libsixel
@@ -96,10 +97,22 @@ $SUDO apk add perl
 #    $SUDO update-ms-fonts &&
 #    $SUDO fc-cache -f
 
-# Docker (rootless Docker is not supported on Alpine Linux)
+# Docker (rootless Docker is not supported on Alpine Linux).
+# Configure dockerd to chgrp the socket to the user's primary group via
+# /etc/docker/daemon.json so `docker` works without a fresh login session.
+# (Adding the user to the docker group would also work, but the new
+# group membership only takes effect after re-login.)
 $SUDO apk add iptables
 $SUDO apk add docker
-$SUDO addgroup "$USER" docker
+$SUDO mkdir -p /etc/docker
+if [ ! -f /etc/docker/daemon.json ]; then
+  $SUDO tee /etc/docker/daemon.json >/dev/null <<EOF
+{
+  "group": "$USER"
+}
+EOF
+  $SUDO service docker restart
+fi
 $SUDO service docker start
 $SUDO rc-update add docker default
 
@@ -107,3 +120,11 @@ $SUDO rc-update add docker default
 if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
   $SUDO apk add flatpak
 fi
+
+# Alpine fallback for mise aqua: tools that lack aarch64-musl prebuilds.
+# etc/mise/config.toml keeps the aqua: entries (for glibc distros); on
+# alpine these installs will fail visibly, so we install the same tools
+# from the alpine repo. mise failures stay, but tools are on PATH.
+$SUDO apk add ast-grep
+$SUDO apk add delta
+$SUDO apk add hurl

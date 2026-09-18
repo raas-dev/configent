@@ -339,6 +339,21 @@ if command -v ollama >/dev/null; then
   export OLLAMA_HOST="127.0.0.1:11434"
 fi
 
+### Alpine Linux ###############################################################
+
+# Alpine ships with musl, point mise at musl prebuilds and skip compile fallback
+if [ -f /etc/alpine-release ] && command -v mise >/dev/null 2>&1; then
+  export MISE_NODE_OS='linux-musl'
+  export MISE_NODE_COMPILE='0'
+  export MISE_RUST_DEFAULT_TOOLCHAIN='stable'
+  case "$(uname -m)" in
+    x86_64)  export MISE_CARGO_DEFAULT_TARGET='x86_64-unknown-linux-musl' ;;
+    aarch64) export MISE_CARGO_DEFAULT_TARGET='aarch64-unknown-linux-musl' ;;
+  esac
+  export PIP_NO_BINARY=''
+  export _PIP_STANDALONE_BUILD='1'
+fi
+
 ### Disable telemetry ##########################################################
 
 export DO_NOT_TRACK=1

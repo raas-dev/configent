@@ -36,6 +36,24 @@ export PATH="$HOME/.local/bin:$PATH"
 # self-update mise
 mise self-update --yes
 
+# Alpine musl: inline exports so this run picks them up. The persistent
+# block lives in dotfiles/.profile (alpine-gated) and is sourced on every
+# login shell — no need to touch $HOME/.profile here.
+if { [ -f /etc/alpine-release ] || command -v apk >/dev/null 2>&1; } && command -v mise >/dev/null 2>&1; then
+  ARCH="$(uname -m)"
+  case "$ARCH" in
+  x86_64) CARGO_TARGET="x86_64-unknown-linux-musl" ;;
+  aarch64) CARGO_TARGET="aarch64-unknown-linux-musl" ;;
+  *) CARGO_TARGET="" ;;
+  esac
+  export MISE_NODE_OS="linux-musl"
+  export MISE_NODE_COMPILE="0"
+  export MISE_RUST_DEFAULT_TOOLCHAIN="stable"
+  [ -n "$CARGO_TARGET" ] && export MISE_CARGO_DEFAULT_TARGET="$CARGO_TARGET"
+  export PIP_NO_BINARY=""
+  export _PIP_STANDALONE_BUILD="1"
+fi
+
 # set GOPATH before installing Go tools to prevent creating $HOME/go
 export GOPATH="$HOME/.go"
 
