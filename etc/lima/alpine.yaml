@@ -1,10 +1,10 @@
 images:
-  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.46/alpine-lima-std-3.22.2-x86_64.iso
+  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.50/alpine-lima-std-3.24.1-x86_64.iso
     arch: x86_64
-    digest: sha512:759d8e1efa5f74e9c9357b359711c58b2dbf26232ac7bb80ddd10ba328eb7bd528eb1a0e72aff0334951c9f28a8403b76dcaa8eacb8ae378fe48dd365630fd49
-  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.46/alpine-lima-std-3.22.2-aarch64.iso
+    digest: sha512:db4ee2f9933be29762718ad56bfa61246d29078fc2404529235ca1acc61fbea387100e86d9f4c2a141eafaba0e46940b53993ea5177fcf4bf34cb3d9b59dd738
+  - location: https://github.com/lima-vm/alpine-lima/releases/download/v0.2.50/alpine-lima-std-3.24.1-aarch64.iso
     arch: aarch64
-    digest: sha512:53ef755c6b8fa7d6bf3c55ad96341f145c3500b685774c9e303e25651a273273d730c79603e87935d652d64f6db87b0f13abc9e44a4f4750d76ee856cd18ed43
+    digest: sha512:fc90af52c78dcf15ac134beb146f7704cd00859412962081f7023b5bb49d4a887a08dfbf761b824a2375ed90a614f89c0b16b9da93e3bcc97e94e8ba52e21c09
 
 mounts:
   - location: "~/Downloads"

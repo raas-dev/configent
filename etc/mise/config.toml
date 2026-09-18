@@ -43,7 +43,8 @@ zoxide = 'latest'
 opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
-'npm:@openchamber/web' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
+# pinned to 1.24.1: 1.24.0 depends on @openchamber/sdk@1.23.1 which was never published to npm (upstream publish bug)
+'npm:@openchamber/web' = { version = '1.24.1', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
 
 # ai coding harnesses
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }

@@ -27,11 +27,11 @@ Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
 Supported Linux distributions (both AArch64 and x86-64):
 - Ubuntu Linux 26.04 LTS (Resolute Raccoon) and 24.04 LTS (Noble Numbat)
 - Debian Linux 13 (Trixie) and 12 (Bookworm)
-- Fedora Linux 43 and 42
+- Fedora Linux 44 and 43
 - CentOS Stream 10 and 9
 - AlmaLinux 10 and 9
 - Rocky Linux 10 and 9
-- openSUSE Tumbleweed (rolling), Leap 16.0 and Leap 15.6
+- openSUSE Tumbleweed (rolling) and Leap 16.0
 - Arch Linux (rolling)
 
 Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
