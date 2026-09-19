@@ -67,7 +67,7 @@
   "showHardwareCursor": true,
   "steeringMode": "all",
   "terminal": {
-    "clearOnShink": false
+    "clearOnShink": true
   },
   "theme": "ayu-dark",
   "transport": "auto",
