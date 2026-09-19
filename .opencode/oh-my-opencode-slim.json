@@ -36,7 +36,7 @@
     "zai-plan": {
       "orchestrator": {
         "model": "zai-coding-plan/glm-5.3",
-        "variant": "high",
+        "variant": "medium",
         "skills": [
           "*"
         ],
@@ -54,12 +54,14 @@
       },
       "oracle": {
         "model": "zai-coding-plan/glm-5.3",
-        "variant": "high",
+        "variant": "medium",
         "skills": [
           "simplify",
           "systematic-debugging"
         ],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "librarian": {
         "model": "zai-coding-plan/glm-5.3-flash",
@@ -69,29 +71,36 @@
         ],
         "mcps": [
           "exa",
-          "gh_grep"
+          "gh_grep",
+          "codebase-memory-mcp"
         ]
       },
       "designer": {
         "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "medium",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "fixer": {
         "model": "zai-coding-plan/glm-5.3",
-        "variant": "high",
+        "variant": "medium",
         "skills": [
           "test-driven-development",
           "verification-before-completion"
         ],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "council": {
         "model": "zai-coding-plan/glm-5.3",
-        "variant": "high",
+        "variant": "medium",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       }
     }
   }

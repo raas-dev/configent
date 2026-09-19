@@ -16,7 +16,8 @@
       "environment": {
         "Z_AI_API_KEY": "{env:ZAI_API_KEY}",
         "Z_AI_MODE": "ZAI"
-      }
+      },
+      "enabled": true
     }
   }
 }

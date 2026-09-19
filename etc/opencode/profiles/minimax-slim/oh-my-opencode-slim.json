@@ -59,7 +59,9 @@
           "simplify",
           "systematic-debugging"
         ],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "librarian": {
         "model": "minimax-coding-plan/MiniMax-M3",
@@ -69,14 +71,17 @@
         ],
         "mcps": [
           "exa",
-          "gh_grep"
+          "gh_grep",
+          "codebase-memory-mcp"
         ]
       },
       "designer": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "medium",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "fixer": {
         "model": "minimax-coding-plan/MiniMax-M3",
@@ -85,13 +90,17 @@
           "test-driven-development",
           "verification-before-completion"
         ],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       },
       "council": {
         "model": "minimax-coding-plan/MiniMax-M3",
         "variant": "medium",
         "skills": [],
-        "mcps": []
+        "mcps": [
+          "codebase-memory-mcp"
+        ]
       }
     }
   }
