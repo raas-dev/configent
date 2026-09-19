@@ -15,9 +15,9 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in auth.json settings.json keybindings.json models.json headroom.yml \
-  open-tui.json mcp.json pi-cbm-settings.json pi-btw.json ask-tool.json \
-  i-have-adhd.json todo.json web-search.json; do
+for file in auth.json settings.json keybindings.json models.json \
+  ask-tool.json i-have-adhd.json headroom.yml pi-btw.json pi-cbm-settings.json \
+  mcp.json open-tui.json todo.json web-search.json zentui.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
       mkdir -p "$backup_path/.pi/agent"
