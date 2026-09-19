@@ -13,7 +13,7 @@
     "sessionName": true,
     "gitBranch": true,
     "gitStatus": true,
-    "gitCommit": false,
+    "gitCommit": true,
     "runtime": false,
     "context": true,
     "tokens": true,
