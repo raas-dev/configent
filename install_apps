@@ -77,7 +77,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
   fi
   if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
     wait_batch
-    run "$bin_path/install_apps_flatpak"
+    run_detached "$bin_path/install_apps_flatpak"
   fi
 else
   printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"
