@@ -4,7 +4,7 @@
 set -eux -o pipefail
 [ -f /var/tmp/desktop.done ] && exit 0 # full-run marker; binary checks miss partially-completed runs
 export DEBIAN_FRONTEND=noninteractive
-APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold -o APT::Immediate-Configure=0 -o Dpkg::Options::=--no-triggers)
+APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o APT::Get::Keep-Downloaded-Packages=1 -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold -o APT::Immediate-Configure=0 -o Dpkg::Options::=--no-triggers) # Keep-Downloaded-Packages: apt deletes debs post-install by default → would defeat the /var/cache/apt/archives host cache mount
 ARCH=$(dpkg --print-architecture)
 TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
 
