@@ -216,10 +216,6 @@ fi
 
 path_append "$HOME/.azure/bin"
 
-### Azure developer CLI ########################################################
-
-path_append "$HOME/.azd/bin"
-
 ### kubectl krew ###############################################################
 
 path_append "$HOME/.krew/bin"

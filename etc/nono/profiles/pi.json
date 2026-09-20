@@ -30,7 +30,6 @@
       "$HOME/.config/gh",
       "$HOME/.cargo",
       "$HOME/.bun",
-      "$HOME/.azd",
       "$HOME/Library/Application Support/Code",
       "$HOME/Library/pnpm",
       "$HOME/Applications"

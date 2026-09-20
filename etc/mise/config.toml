@@ -79,6 +79,7 @@ lima = { version = '2.2.0', postinstall = "~/.local/configent/bin/postinstall_li
 #aws-copilot = 'latest'
 #cloudflared = 'latest'
 #gcloud = 'latest'
+azd = 'latest'
 'pipx:azure-cli' = { version = 'latest', uvx_args = '--prerelease=allow --with pip', postinstall = "~/.local/configent/bin/postinstall_azure" } # pip is required for az extensions
 #'pipx:cfn-lint' = 'latest'
 
