@@ -22,10 +22,15 @@ memory: "8GiB" # default: "4GiB"
 video:
   display: none
 
+# keep mise download archives under ~/.local/share/mise/downloads,
+# which is host-cached via mounts below, so re-provisions skip downloads
+env:
+  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
+
 mounts:
   - location: "~/configent"
     mountPoint: "{{.Home}}/configent"
-    writable: false
+    writable: true
   - location: "~/Downloads"
     writable: true
   # provisioning cache — guest writes selkies deb + chromium-extensions tarball
@@ -37,8 +42,17 @@ mounts:
     mountPoint: /var/cache/apt/archives
     writable: true
   # mise tool downloads cache — shared across dev VM re-provisions
-  - location: "~/.cache/lima-provision/mise"
+  # needs MISE_ALWAYS_KEEP_DOWNLOAD=1 (see env below); mise deletes archives otherwise
+  - location: "~/.cache/lima-provision/mise/downloads"
     mountPoint: "{{.Home}}/.local/share/mise/downloads"
+    writable: true
+  # cargo crates + cargo-binstall github tarballs, shared across re-provisions
+  - location: "~/.cache/lima-provision/cargo"
+    mountPoint: "{{.Home}}/.cargo"
+    writable: true
+  # rust toolchain (rustup), mise rust backend re-downloads otherwise
+  - location: "~/.cache/lima-provision/rustup"
+    mountPoint: "{{.Home}}/.rustup"
     writable: true
 
 ssh:
