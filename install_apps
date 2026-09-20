@@ -62,7 +62,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
   fi
   run_detached "$bin_path/install_mise"
   if [ "$CANELEVATE" = 'true' ]; then
-    # zypper is aliased as apt-get, thus it has to come before real apt-get!
+    # zypper is aliased as apt-get, thus it has to come before real apt-get
     if command -v zypper >/dev/null; then
       run "$bin_path/install_apps_zypper"
     elif command -v apt-get >/dev/null; then
@@ -84,16 +84,14 @@ else
   exit 1
 fi
 
-# zsh, vim and flatpak binaries come from the package manager above
-# (brew on macOS)
+# zsh and vim binaries come from the package manager or brew on macOS
 wait_batch
 
-# assumes `zsh` is present at this point, installs Zsh plugins
-# prompts to set Zsh as the default shell
-# pass NONINTERACTIVE=true to skip (set by bootstrap)
+# prompts to set (package manager or brew installed) zsh as the default shell
+# pass NONINTERACTIVE=true to skip (set by default by bootstrap)
 run_detached "$bin_path/setup_zsh"
 
-# assumes `vim` is present at this point, install Vundle and vim plugins
+# install Vundle and vim plugins
 run_detached "$bin_path/setup_vundle"
 
 # install Ollama
