@@ -77,13 +77,13 @@ fi
 # (brew on macOS)
 wait_batch
 
-# docker/podman use apt on Debian/Ubuntu — start after the apt batch above
+# docker/podman use apt on Debian/Ubuntu — one apt at a time, run sequentially
 if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
   if [ "$SETUP_DOCKER" != 'false' ]; then
-    run "$bin_path/install_docker"
+    "$bin_path/install_docker"
   fi
   if [ "$SETUP_PODMAN" != 'false' ]; then
-    run "$bin_path/install_podman"
+    "$bin_path/install_podman"
   fi
 fi
 
