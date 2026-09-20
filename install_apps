@@ -76,6 +76,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     fi
   fi
   if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+    wait_batch
     run "$bin_path/install_apps_flatpak"
   fi
 else
