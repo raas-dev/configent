@@ -44,7 +44,7 @@ opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinsta
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
 # pinned to 1.24.1: 1.24.0 depends on @openchamber/sdk@1.23.1 which was never published to npm (upstream publish bug)
-'npm:@openchamber/web' = { version = '1.24.1', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
+#'npm:@openchamber/web' = { version = '1.24.1', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
 
 # ai coding harnesses
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }
@@ -64,7 +64,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
 github-cli = 'latest'
-'github:nnnkkk7/lazyactions' = 'latest'
+#'github:nnnkkk7/lazyactions' = 'latest'
 
 # containers
 #docker-cli = 'latest'
@@ -98,15 +98,15 @@ kubecolor = 'latest'
 
 # network
 doggo = 'latest'
-hurl = 'latest'
+#hurl = 'latest'
 lazyssh = 'latest'
 'github:ycd/dstp' = 'latest'
 'github:sigoden/opscan' = 'latest'
 'github:karol-broda/snitch' = 'latest'
-'github:ramonvermeulen/whosthere' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_whosthere" }
+#'github:ramonvermeulen/whosthere' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_whosthere" }
 
 # scripting
-argc = 'latest'
+#argc = 'latest'
 ast-grep = 'latest'
 gitleaks = 'latest'
 prek = 'latest'
@@ -129,7 +129,7 @@ go = "1.27.1"
 # node.js
 node = { version = "26.9.0", postinstall = "~/.local/configent/bin/postinstall_node" }
 pnpm = { version = 'latest', postinstall = "mkdir -p \"$(pnpm root -g 2>/dev/null)\"" }
-bun = 'latest'
+#bun = 'latest'
 
 # python
 python = { version = "3.14.7", postinstall = "~/.local/configent/bin/postinstall_python" }
