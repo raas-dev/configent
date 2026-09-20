@@ -210,7 +210,7 @@ v() {
       | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
       # cache mounts are skipped w/ WARN when host dir absent — create instead
-      case "$vm_name" in xorg | xorg-qemu | xorg-krunkit | dev | dev-qemu | dev-krunkit) mkdir -p "$HOME/.cache/lima-provision"/{cargo,cargo-target,uv,cloakbrowser,rustup,go-mod,npm,bun} "$HOME/.cache/lima-provision/mise/downloads" "$HOME/.cache/lima-provision/az/azure" ;; esac
+      case "$vm_name" in xorg | xorg-qemu | xorg-krunkit | dev | dev-qemu | dev-krunkit) mkdir -p "$HOME/.cache/lima-provision"/{apt-archives,cargo,uv,cloakbrowser,rustup,go-mod,npm,bun,mise/downloads,az/azure} ;; esac
       # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
       local template_file="$template"
       local vm_suffix=""
