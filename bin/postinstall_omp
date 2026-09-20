@@ -66,6 +66,11 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 ### plugins ####################################################################
 
 if command -v omp >/dev/null; then
+  # omp plugin installs shell out to `bun`; mise installs tools in parallel
+  # so the bun shim may not exist yet when this runs — mise exec guarantees
+  # bun (installing on demand) and puts its shims first in PATH
+  omp() { mise exec bun -- omp "$@"; }
+  bun() { mise exec bun -- bun "$@"; }
   # marketplace
   omp plugin marketplace update
   # https://github.com/ranxianglei/billion-context-omp
