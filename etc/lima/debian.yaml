@@ -60,6 +60,7 @@ mounts:
 # keep downloaded archives so the host-cached mise/downloads mount is reused
 env:
   MISE_ALWAYS_KEEP_DOWNLOAD: "1"
+  MISE_PREFER_OFFLINE: "true"
 
 ssh:
   forwardAgent: true
