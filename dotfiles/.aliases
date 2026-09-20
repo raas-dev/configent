@@ -210,7 +210,7 @@ v() {
       | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
       # cache mounts are skipped w/ WARN when host dir absent — create instead
-      case "$vm_name" in xorg | xorg-qemu | xorg-krunkit) mkdir -p "$HOME/.cache/lima-provision/apt-archives" ;; esac
+      case "$vm_name" in xorg | xorg-qemu | xorg-krunkit | dev | dev-qemu | dev-krunkit) mkdir -p "$HOME/.cache/lima-provision/apt-archives" ;; esac
       # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
       local template_file="$template"
       local vm_suffix=""
@@ -220,10 +220,10 @@ v() {
       esac
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        # prefer socket_vmnet bridged (LAN access); xorg + macos stay NAT, never on LAN
+        # prefer socket_vmnet bridged (LAN access); xorg + macos + dev stay NAT, never on LAN
         local net_arg=""
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          case "$template_file" in xorg | macos) ;; *) net_arg="--network=lima:bridged" ;; esac
+          case "$template_file" in xorg | macos | dev) ;; *) net_arg="--network=lima:bridged" ;; esac
         fi
         case "$vm_suffix" in
         # qcow2 disk → limactl snapshot works; no rosetta (vz-only); net fallback = slirp
