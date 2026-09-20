@@ -56,12 +56,6 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     if command -v zypper >/dev/null; then
       run "$bin_path/install_apps_zypper"
     elif command -v apt-get >/dev/null; then
-      if [ "$SETUP_DOCKER" != 'false' ]; then
-        run "$bin_path/install_docker"
-      fi
-      if [ "$SETUP_PODMAN" != 'false' ]; then
-        run "$bin_path/install_podman"
-      fi
       run "$bin_path/install_apps_apt"
     elif command -v dnf >/dev/null; then
       run "$bin_path/install_apps_yum"
@@ -82,6 +76,16 @@ fi
 # zsh, vim and flatpak binaries come from the package manager above
 # (brew on macOS)
 wait_batch
+
+# docker/podman use apt on Debian/Ubuntu — start after the apt batch above
+if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
+  if [ "$SETUP_DOCKER" != 'false' ]; then
+    run "$bin_path/install_docker"
+  fi
+  if [ "$SETUP_PODMAN" != 'false' ]; then
+    run "$bin_path/install_podman"
+  fi
+fi
 
 # assumes `zsh` is present at this point, installs Zsh plugins
 # prompts to set Zsh as the default shell

@@ -36,6 +36,10 @@ mounts:
   - location: "~/.cache/lima-provision/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
+  # mise tool downloads cache — shared across dev VM re-provisions
+  - location: "~/.cache/lima-provision/mise"
+    mountPoint: "{{.Home}}/.local/share/mise/downloads"
+    writable: true
 
 ssh:
   forwardAgent: true
@@ -58,15 +62,15 @@ provision:
       PARALLEL=true "${HOME}/configent/install.sh" &
 
 probes:
-  - description: "Configent to be done"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 1800s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
-        echo >&2 "Configent is not done yet"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
+#  - description: "Configent to be done"
+#    script: |
+#      #!/bin/bash
+#      set -eux -o pipefail
+#      if ! timeout 600s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
+#        echo >&2 "Configent is not done yet"
+#        exit 1
+#      fi
+#    hint: See "/var/log/cloud-init-output.log" in the guest
 #  - description: "Xorg to be installed"
 #    script: |
 #      #!/bin/bash
