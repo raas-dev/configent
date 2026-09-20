@@ -23,6 +23,8 @@ GIT_REF="${GIT_REF:-1.241.3}"
 export CANELEVATE="${CANELEVATE:-false}"
 export CASKS="${CASKS:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
+export SETUP_DOCKER="${SETUP_DOCKER:-true}"
+export SETUP_PODMAN="${SETUP_PODMAN:-true}"
 
 ################################################################################
 

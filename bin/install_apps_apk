@@ -103,18 +103,20 @@ $SUDO apk add perl
 # (Adding the user to the docker group would also work, but the new
 # group membership only takes effect after re-login.)
 $SUDO apk add iptables
-$SUDO apk add docker
-$SUDO mkdir -p /etc/docker
-if [ ! -f /etc/docker/daemon.json ]; then
-  $SUDO tee /etc/docker/daemon.json >/dev/null <<EOF
+if [ "$SETUP_DOCKER" != 'false' ]; then
+  $SUDO apk add docker
+  $SUDO mkdir -p /etc/docker
+  if [ ! -f /etc/docker/daemon.json ]; then
+    $SUDO tee /etc/docker/daemon.json >/dev/null <<EOF
 {
   "group": "$USER"
 }
 EOF
-  $SUDO service docker restart
+    $SUDO service docker restart
+  fi
+  $SUDO service docker start
+  $SUDO rc-update add docker default
 fi
-$SUDO service docker start
-$SUDO rc-update add docker default
 
 # Flatpak
 if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then

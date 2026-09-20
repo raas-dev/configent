@@ -55,7 +55,7 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      "${HOME}/configent/install.sh" &
+      SETUP_DOCKER=false SETUP_PODMAN=false "${HOME}/configent/install.sh" &
 
 #probes:
 #  - description: "Xorg to be installed"

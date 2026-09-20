@@ -83,12 +83,14 @@ $SUDO zypper install -y ctags
 # $SUDO zypper install -y fetchmsttfonts
 
 # Docker (rootless)
-$SUDO zypper install -y fuse-overlayfs iptables
-$SUDO modprobe ip_tables iptable_mangle iptable_nat iptable_filter
-curl -fsSL https://get.docker.com/rootless | sh
-systemctl --user start dbus
-systemctl --user start docker
-$SUDO loginctl enable-linger "$USER"
+if [ "$SETUP_DOCKER" != 'false' ]; then
+  $SUDO zypper install -y fuse-overlayfs iptables
+  $SUDO modprobe ip_tables iptable_mangle iptable_nat iptable_filter
+  curl -fsSL https://get.docker.com/rootless | sh
+  systemctl --user start dbus
+  systemctl --user start docker
+  $SUDO loginctl enable-linger "$USER"
+fi
 
 # Flatpak
 if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then

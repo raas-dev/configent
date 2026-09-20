@@ -82,11 +82,13 @@ $SUDO pacman --noconfirm --needed -S universal-ctags
 #$SUDO pacman --noconfirm --needed -S xsel
 
 # Docker (rootless)
-$SUDO pacman --noconfirm --needed -S fuse3 fuse-overlayfs iptables
-curl -fsSL https://get.docker.com/rootless | sh
-systemctl --user start dbus
-systemctl --user start docker
-$SUDO loginctl enable-linger "$USER"
+if [ "$SETUP_DOCKER" != 'false' ]; then
+  $SUDO pacman --noconfirm --needed -S fuse3 fuse-overlayfs iptables
+  curl -fsSL https://get.docker.com/rootless | sh
+  systemctl --user start dbus
+  systemctl --user start docker
+  $SUDO loginctl enable-linger "$USER"
+fi
 
 # Yay
 git clone --depth 1 https://aur.archlinux.org/yay-bin.git "/tmp/yay-bin" ||
