@@ -97,16 +97,7 @@ provision:
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
       CARGO_TARGET_DIR="${HOME}/.cache/cargo-target" PARALLEL=true "${HOME}/configent/install.sh" &
 
-probes:
-  - description: "Configent to be done"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 600s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
-        echo >&2 "Configent is not done yet"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
+#probes:
 #  - description: "Xorg to be installed"
 #    script: |
 #      #!/bin/bash
