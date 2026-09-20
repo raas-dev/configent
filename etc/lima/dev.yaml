@@ -55,10 +55,18 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      PARALLEL=true SETUP_DOCKER=false SETUP_PODMAN=false \
-        "${HOME}/configent/install.sh" &
+      PARALLEL=true "${HOME}/configent/install.sh" &
 
-#probes:
+probes:
+  - description: "Configent to be done"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 1800s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
+        echo >&2 "Configent is not done yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
 #  - description: "Xorg to be installed"
 #    script: |
 #      #!/bin/bash
