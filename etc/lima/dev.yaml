@@ -42,6 +42,12 @@ mounts:
   - location: "~/.cache/lima-provision/cargo"
     mountPoint: "{{.Home}}/.cargo"
     writable: true
+  # npm registry cache — pi postinstall re-downloads otherwise
+  - location: "~/.cache/lima-provision/npm"
+    mountPoint: "{{.Home}}/.npm"
+  # bun cache — oh-my-pi + omp plugins install via bun
+  - location: "~/.cache/lima-provision/bun"
+    mountPoint: "{{.Home}}/.bun"
   # uv cache — pipx.uvx=true routes all pipx installs through uv, which uses
   # ~/.cache/uv (not pip's cache); without this every pipx:* tool re-downloads
   - location: "~/.cache/lima-provision/uv"
@@ -86,11 +92,11 @@ provision:
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   #- mode: system
   #  file: xorg/desktop.sh
-  #- mode: user
-  #  script: |
-  #    #!/bin/sh
-  #    [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-  #    PARALLEL=true "${HOME}/configent/install.sh" &
+  - mode: user
+    script: |
+      #!/bin/sh
+      [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+      PARALLEL=true "${HOME}/configent/install.sh" &
 
 #probes:
 #  - description: "Xorg to be installed"
