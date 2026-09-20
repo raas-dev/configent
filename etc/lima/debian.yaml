@@ -20,6 +20,46 @@ mountTypesUnsupported: ["9p"]
 mounts:
   - location: "~/Downloads"
     writable: true
+  # apt package archives — per-distro (debian)
+  - location: "~/.cache/lima-provision/debian/apt-archives"
+    mountPoint: /var/cache/apt/archives
+    writable: true
+  # mise tool download archives
+  - location: "~/.cache/lima-provision/mise/downloads"
+    mountPoint: "{{.Home}}/.local/share/mise/downloads"
+    writable: true
+  # ~/.cargo — crates, registry, bin
+  - location: "~/.cache/lima-provision/cargo"
+    mountPoint: "{{.Home}}/.cargo"
+    writable: true
+  # npm registry cache
+  - location: "~/.cache/lima-provision/npm"
+    mountPoint: "{{.Home}}/.npm"
+    writable: true
+  # omp plugins (node_modules)
+  - location: "~/.cache/lima-provision/omp/plugins"
+    mountPoint: "{{.Home}}/.omp/plugins"
+    writable: true
+  # pi agent — npm packages + skills
+  - location: "~/.cache/lima-provision/pi/agent"
+    mountPoint: "{{.Home}}/.pi/agent"
+    writable: true
+  # rust toolchains
+  - location: "~/.cache/lima-provision/rustup"
+    mountPoint: "{{.Home}}/.rustup"
+    writable: true
+  # guest ~/.cache — uv, pip, go-build, …
+  - location: "~/.cache/lima-provision/cache"
+    mountPoint: "{{.Home}}/.cache"
+    writable: true
+  # cloakbrowser Stealth Chromium
+  - location: "~/.cache/lima-provision/cloakbrowser"
+    mountPoint: "{{.Home}}/.cloakbrowser"
+    writable: true
+
+# keep downloaded archives so the host-cached mise/downloads mount is reused
+env:
+  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
 
 ssh:
   forwardAgent: true

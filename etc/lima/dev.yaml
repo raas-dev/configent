@@ -29,8 +29,8 @@ mounts:
     writable: true
   - location: "~/Downloads"
     writable: true
-  # apt package archives
-  - location: "~/.cache/lima-provision/apt-archives"
+  # apt package archives — per-distro (ubuntu)
+  - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
   # mise tool download archives
@@ -73,8 +73,7 @@ containerd:
   system: false
   user: false
 
-# keep downloaded archives so the host-cached mise/downloads mount is
-# reused across re-provisions; mise deletes them by default
+# keep downloaded archives so the host-cached mise/downloads mount is reused
 env:
   MISE_ALWAYS_KEEP_DOWNLOAD: "1"
 

@@ -27,7 +27,7 @@ video:
 mounts:
   - location: "~/Downloads"
     writable: true
-  - location: "~/.cache/lima-provision/apt-archives"
+  - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
   # provisioning cache — guest writes selkies deb + chromium-extensions tarball
