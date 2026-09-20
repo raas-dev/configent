@@ -64,16 +64,6 @@ mounts:
   - location: "~/.cache/lima-provision/rustup"
     mountPoint: "{{.Home}}/.rustup"
     writable: true
-  # go module cache (GOPATH=$HOME/.go in bin/install_mise) — go:* tools skip
-  # module re-downloads from proxy.golang.org
-  - location: "~/.cache/lima-provision/go-mod"
-    mountPoint: "{{.Home}}/.go/pkg/mod"
-    writable: true
-  # azure-cli state — az bicep binary, az extensions; postinstall_azure
-  # re-downloads these into ephemeral home unless persisted
-  - location: "~/.cache/lima-provision/az/azure"
-    mountPoint: "{{.Home}}/.azure"
-    writable: true
 
 ssh:
   forwardAgent: true
