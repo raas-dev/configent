@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.242.1](https://github.com/raas-dev/configent/compare/1.242.0...1.242.1) (2026-09-20)
+
+### Fixes
+
+* **lima:** Selkies xorg desktop provisioning reliability ([65630ee](https://github.com/raas-dev/configent/commit/65630ee5d5d51b15ebdc57c2c14205c43353b2af))
+
 ## [1.241.3](https://github.com/raas-dev/configent/compare/1.241.2...1.241.3) (2026-09-18)
 
 ### Fixes
