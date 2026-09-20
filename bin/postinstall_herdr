@@ -76,5 +76,5 @@ if command -v herdr >/dev/null; then
   herdr plugin install jeffarese/herdr-bar --yes
   herdr plugin install nikok6/herdr-mirror --yes
   herdr plugin install thanhdat77/herdr-navigator --yes
-  herdr server reload-config
+  herdr server reload-config || true
 fi

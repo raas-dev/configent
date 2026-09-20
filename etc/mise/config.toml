@@ -128,7 +128,7 @@ go = "1.27.1"
 
 # node.js
 node = { version = "26.9.0", postinstall = "~/.local/configent/bin/postinstall_node" }
-pnpm = { version = 'latest', postinstall = "mkdir -p \"$(pnpm root -g 2>/dev/null)\"" }
+pnpm = { version = 'latest', postinstall = "d=$(pnpm root -g 2>/dev/null) && mkdir -p \"$d\" || true" }
 bun = 'latest'
 
 # python

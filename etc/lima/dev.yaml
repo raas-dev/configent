@@ -83,7 +83,6 @@ containerd:
 # reused across re-provisions; mise deletes them by default
 env:
   MISE_ALWAYS_KEEP_DOWNLOAD: "1"
-  CARGO_TARGET_DIR: "{{.Home}}/.cache/cargo-target"
 
 provision:
   - mode: system
@@ -96,18 +95,18 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      PARALLEL=true "${HOME}/configent/install.sh" &
+      CARGO_TARGET_DIR="${HOME}/.cache/cargo-target" PARALLEL=true "${HOME}/configent/install.sh" &
 
 probes:
-#  - description: "Configent to be done"
-#    script: |
-#      #!/bin/bash
-#      set -eux -o pipefail
-#      if ! timeout 600s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
-#        echo >&2 "Configent is not done yet"
-#        exit 1
-#      fi
-#    hint: See "/var/log/cloud-init-output.log" in the guest
+  - description: "Configent to be done"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 600s bash -c "until sudo grep -q 'bootstrap done' /var/log/cloud-init-output.log 2>/dev/null; do sleep 1; done"; then
+        echo >&2 "Configent is not done yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
 #  - description: "Xorg to be installed"
 #    script: |
 #      #!/bin/bash
