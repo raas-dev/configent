@@ -42,11 +42,6 @@ mounts:
   - location: "~/.cache/lima-provision/cargo"
     mountPoint: "{{.Home}}/.cargo"
     writable: true
-  # cargo build artifacts — mise cargo:* tool builds skip recompilation when
-  # deps unchanged (CARGO_TARGET_DIR set in provision script below)
-  - location: "~/.cache/lima-provision/cargo-target"
-    mountPoint: "{{.Home}}/.cache/cargo-target"
-    writable: true
   # uv cache — pipx.uvx=true routes all pipx installs through uv, which uses
   # ~/.cache/uv (not pip's cache); without this every pipx:* tool re-downloads
   - location: "~/.cache/lima-provision/uv"
@@ -91,11 +86,11 @@ provision:
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
   #- mode: system
   #  file: xorg/desktop.sh
-  - mode: user
-    script: |
-      #!/bin/sh
-      [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      CARGO_TARGET_DIR="${HOME}/.cache/cargo-target" PARALLEL=true "${HOME}/configent/install.sh" &
+  #- mode: user
+  #  script: |
+  #    #!/bin/sh
+  #    [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+  #    PARALLEL=true "${HOME}/configent/install.sh" &
 
 #probes:
 #  - description: "Xorg to be installed"

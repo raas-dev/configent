@@ -143,6 +143,10 @@ uv = 'latest'
 #java = 'temurin-21'
 #ghcup = { version = 'latest', postinstall = "ghcup install stack" }
 
+[env]
+# warm cargo builds across VM re-provisions — target dir on mounted ~/.cargo
+CARGO_TARGET_DIR = "{{ env.HOME }}/.cargo/target"
+
 [settings]
 experimental = true
 cargo.binstall = true
