@@ -8,6 +8,10 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+bootstrap_started="$(date '+%Y-%m-%d %H:%M:%S')"
+bootstrap_start_ts=$(date +%s)
+printf '\n🥾 bootstrap started at %s\n' "$bootstrap_started"
+
 rclocal_path="$HOME/.rclocal"
 this_path="$(cd "$(dirname "$0")" && pwd)"
 
@@ -70,4 +74,8 @@ if [ -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids" ]; then
   rm -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
 fi
 
-printf "\n✅ bootstrap done.\n"
+bootstrap_end_ts=$(date +%s)
+bootstrap_took=$((bootstrap_end_ts - bootstrap_start_ts))
+printf "\n✅ bootstrap done. started %s, ended %s, took %dm%02ds\n" \
+  "$bootstrap_started" "$(date '+%Y-%m-%d %H:%M:%S')" \
+  $((bootstrap_took / 60)) $((bootstrap_took % 60))

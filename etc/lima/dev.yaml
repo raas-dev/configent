@@ -45,9 +45,11 @@ mounts:
   # npm registry cache — pi postinstall re-downloads otherwise
   - location: "~/.cache/lima-provision/npm"
     mountPoint: "{{.Home}}/.npm"
+    writable: true
   # bun cache — oh-my-pi + omp plugins install via bun
   - location: "~/.cache/lima-provision/bun"
-    mountPoint: "{{.Home}}/.bun"
+    mountPoint: "{{.Home}}/.cache/bun"
+    writable: true
   # uv cache — pipx.uvx=true routes all pipx installs through uv, which uses
   # ~/.cache/uv (not pip's cache); without this every pipx:* tool re-downloads
   - location: "~/.cache/lima-provision/uv"
