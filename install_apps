@@ -33,13 +33,13 @@ wait_batch() {
 run_detached() {
   if [ "$PARALLEL" = 'true' ]; then
     "$@" &
-    echo $! >>"$this_path/.detached_pids"
+    echo $! >>"${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
   else
     "$@"
   fi
 }
 
-: >"$this_path/.detached_pids"
+: >"${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   run_detached "$bin_path/install_mise"

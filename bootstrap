@@ -62,12 +62,12 @@ NONINTERACTIVE=true "$this_path/install_apps"
 "$this_path/setup_ide"
 
 # wait for detached background installs (e.g. mise with PARALLEL=true)
-if [ -f "$this_path/.detached_pids" ]; then
+if [ -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids" ]; then
   while read -r pid; do
     # not our child; poll until it exits (pid reuse race is negligible here)
     while kill -0 "$pid" 2>/dev/null; do sleep 5; done
-  done <"$this_path/.detached_pids"
-  rm -f "$this_path/.detached_pids"
+  done <"${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
+  rm -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
 fi
 
 printf "\n✅ bootstrap done.\n"
