@@ -44,12 +44,12 @@ run_detached() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   run_detached "$bin_path/install_mise"
-  run "$bin_path/install_apps_brew"
   if [ -n "$CASKS" ] && [ "$CASKS" != 'false' ]; then
     run "$bin_path/install_apps_cask"
     wait_batch
     run "$bin_path/setup_duti"
   fi
+  run "$bin_path/install_apps_brew"
 elif [ "$(uname -s)" = 'Linux' ]; then
   # get docker and podman up as fast as possible
   if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
