@@ -27,13 +27,13 @@ video:
 mounts:
   - location: "~/Downloads"
     writable: true
-  # provisioning cache — guest writes selkies deb + chromium-extensions tarball
-  # here on first run; rm -rf ~/.cache/lima-provision to force refresh
-  - location: "~/.cache/lima-provision"
-    mountPoint: /mnt/lima-provision
-    writable: true
   - location: "~/.cache/lima-provision/apt-archives"
     mountPoint: /var/cache/apt/archives
+    writable: true
+  # provisioning cache — guest writes selkies deb + chromium-extensions tarball
+  # here on first run; rm -rf ~/.cache/lima-provision/xorg to force refresh
+  - location: "~/.cache/lima-provision/xorg"
+    mountPoint: /mnt/lima-provision
     writable: true
 
 ssh:

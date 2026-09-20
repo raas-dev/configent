@@ -23,14 +23,15 @@ video:
   display: none
 
 mounts:
+
   - location: "~/configent"
     mountPoint: "{{.Home}}/configent"
     writable: true
   - location: "~/Downloads"
     writable: true
-  # provisioning artifacts written by guest
-  - location: "~/.cache/lima-provision"
-    mountPoint: /mnt/lima-provision
+  # apt package archives
+  - location: "~/.cache/lima-provision/apt-archives"
+    mountPoint: /var/cache/apt/archives
     writable: true
   # mise tool download archives
   - location: "~/.cache/lima-provision/mise/downloads"
