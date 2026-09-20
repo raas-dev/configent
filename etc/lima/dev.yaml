@@ -116,6 +116,10 @@ probes:
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
 
+message: |
+  Selkies desktop (xorg + xfce + chromium):
+    https://localhost:8443  (TLS, self-signed)
+    http://localhost:8080   (plain)
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:

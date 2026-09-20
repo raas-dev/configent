@@ -2,7 +2,7 @@
 # xorg + xfce + selkies + stealth chromium
 # layout: all file writes + downloads run in parallel; ONE apt transaction (dpkg is the serial bottleneck)
 set -eux -o pipefail
-command -v Xorg >/dev/null 2>&1 && command -v selkies >/dev/null 2>&1 && exit 0
+[ -f /var/tmp/desktop.done ] && exit 0 # full-run marker; binary checks miss partially-completed runs
 export DEBIAN_FRONTEND=noninteractive
 APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold -o APT::Immediate-Configure=0 -o Dpkg::Options::=--no-triggers)
 ARCH=$(dpkg --print-architecture)
@@ -17,14 +17,14 @@ wait_ok() { # wait_ok <pid> <log> — fail provision with bg job log
 
 apt_update() { apt-get update "${APTOPT[@]}"; }
 
-selkies_deb() { # pinned v2.0.0rc0 (latest with ubuntu26.04 debs); cache or fetch
+selkies_deb() { # pinned 2.0.0rc0 (ubuntu26.04 debs); cache or fetch
   case "$ARCH" in
-  amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
-  arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
+  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
+  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
   esac
   [ -f "/mnt/lima-provision/$DEB" ] && return 0
   curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
-    "https://github.com/selkies-project/selkies/releases/download/v2.0.0rc0/${DEB}"
+    "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
   [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ # cache for next recreate
 }
 
@@ -71,11 +71,12 @@ extensions_dl() { # crx downloads; cached tarball already includes them
   touch /tmp/ext.ok
 }
 
-write_configs() { # all package-independent file writes; overlaps the apt transaction
+LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}') # lima user (uid 501 from macOS host, not 1000); avoids Go-template {{.User}} (unrendered on manual runs)
+write_configs() {                                                    # all package-independent file writes; overlaps the apt transaction
   # no display manager: systemd units run Xorg dummy + xfce directly
   printf '[Unit]\nDescription=Xorg dummy :0\n[Service]\nExecStart=/usr/bin/Xorg :0 -noreset\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xorg-dummy.service
   # shellcheck disable=SC1083
-  printf '[Unit]\nDescription=xfce session on :0\nRequires=xorg-dummy.service\nAfter=xorg-dummy.service\n[Service]\nUser={{.User}}\nPAMName=login\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' >/etc/systemd/system/xfce-session.service
+  printf '[Unit]\nDescription=xfce session on :0\nRequires=xorg-dummy.service\nAfter=xorg-dummy.service\n[Service]\nUser=%s\nPAMName=login\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' "$LUSER" >/etc/systemd/system/xfce-session.service
   systemctl enable xorg-dummy xfce-session
   # localectl fails in cloud-init (located absent) — write XKB conf directly
   install -d /etc/X11/xorg.conf.d
@@ -146,7 +147,7 @@ chromium_files() { # package-independent; needs chromium_dl + extensions_dl done
   done
   [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
   # cloakbrowser pip pkg installs under /root — relocate
-  if [ -d /root/.cloakbrowser ]; then
+  if [ ! -x "$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && [ -d /root/.cloakbrowser ]; then
     install -d /opt/cloakbrowser
     CRBIN=$(find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
     mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
@@ -157,7 +158,7 @@ chromium_files() { # package-independent; needs chromium_dl + extensions_dl done
   sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   # extensions (MV3/dNR): chrome must WRITE _metadata cache into ext dir -> user-owned
   # shellcheck disable=SC1083
-  chown -R {{.User}}: /usr/local/share/extensions
+  chown -R "$LUSER": /usr/local/share/extensions
   printf '#!/bin/sh\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" >/usr/local/bin/chromium-wrapper
   chmod 755 /usr/local/bin/chromium-wrapper
   for n in chrome chromium chromium-browser; do ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
@@ -176,12 +177,12 @@ chromium_files() { # package-independent; needs chromium_dl + extensions_dl done
   printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\n' >/etc/xdg/mimeapps.list
   # per-user default too (xfce/xdg reads it before root one settles; survives reboot)
   # shellcheck disable=SC1083
-  UHOME=$(getent passwd {{.User}} | cut -d: -f6)
+  UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
   # shellcheck disable=SC1083
-  install -d -o {{.User}} -m 755 "$UHOME/.config"
+  install -d -o "$LUSER" -m 755 "$UHOME/.config"
   printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\nx-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop\n' >"$UHOME/.config/mimeapps.list"
   # shellcheck disable=SC1083
-  chown {{.User}}: "$UHOME/.config/mimeapps.list"
+  chown "$LUSER": "$UHOME/.config/mimeapps.list"
 }
 
 apt_install_all() { # ONE dpkg transaction — dpkg lock serializes anyway
@@ -193,8 +194,8 @@ apt_install_all() { # ONE dpkg transaction — dpkg lock serializes anyway
     pipewire pipewire-pulse wireplumber xubuntu-wallpapers
   )
   case "$ARCH" in
-  amd64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_amd64.deb ;;
-  arm64) DEB=selkies_2.0.0.rc0-1.ubuntu26.04_arm64.deb ;;
+  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
+  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
   esac
   if [ -f "/mnt/lima-provision/$DEB" ]; then
     DEBSRC="/mnt/lima-provision/$DEB"
@@ -236,3 +237,4 @@ if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   tar czf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
     mv "$TARBALL.tmp" "$TARBALL"
 fi
+touch /var/tmp/desktop.done
