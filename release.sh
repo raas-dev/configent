@@ -21,9 +21,9 @@ fi
 
 if [ -n "$prerelease_type" ]; then
   echo "Creating pre-release ($prerelease_type)"
-  bunx commit-and-tag-version --prerelease "$prerelease_type"
+  npx -y commit-and-tag-version --prerelease "$prerelease_type"
   uvx --from commitizen cz bump --prerelease "$prerelease_type"
 else
-  bunx commit-and-tag-version
+  npx -y commit-and-tag-version
   uvx --from commitizen cz bump
 fi
