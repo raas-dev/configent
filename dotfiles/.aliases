@@ -220,10 +220,10 @@ v() {
       esac
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
-        # prefer socket_vmnet bridged (LAN access); xorg + macos + dev stay NAT, never on LAN
+        # prefer socket_vmnet bridged (LAN access); macos + dev stay NAT, never on LAN
         local net_arg=""
         if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-          case "$template_file" in xorg | macos | dev) ;; *) net_arg="--network=lima:bridged" ;; esac
+          case "$template_file" in macos | dev) ;; *) net_arg="--network=lima:bridged" ;; esac
         fi
         case "$vm_suffix" in
         # qcow2 disk → limactl snapshot works; no rosetta (vz-only); net fallback = slirp

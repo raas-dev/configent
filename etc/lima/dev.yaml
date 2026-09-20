@@ -20,6 +20,7 @@ memory: "8GiB" # default: "4GiB"
 #disk: "100GiB"   # default: "100GiB"
 
 video:
+  # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
   display: none
 
 mounts:
@@ -65,6 +66,10 @@ mounts:
   - location: "~/.cache/lima-provision/cloakbrowser"
     mountPoint: "{{.Home}}/.cloakbrowser"
     writable: true
+  # selkies deb + chromium-extensions
+  - location: "~/.cache/lima-provision/xorg"
+    mountPoint: /mnt/lima-provision
+    writable: true
 
 ssh:
   forwardAgent: true
@@ -83,34 +88,34 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-  #- mode: system
-  #  file: xorg/desktop.sh
+  - mode: system
+    file: xorg/desktop.sh
   - mode: user
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      PARALLEL=true "${HOME}/configent/install.sh" &
+      "${HOME}/configent/install.sh" &
 
-#probes:
-#  - description: "Xorg to be installed"
-#    script: |
-#      #!/bin/bash
-#      set -eux -o pipefail
-#      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
-#        echo >&2 "Xorg is not installed yet"
-#        exit 1
-#      fi
-#    hint: See "/var/log/cloud-init-output.log" in the guest
-#  - description: "Selkies to be installed"
-#    script: |
-##      #!/bin/bash
-##      set -eux -o pipefail
-##      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
-##        echo >&2 "Selkies is not installed yet"
-##        exit 1
-##      fi
-##    hint: See "/var/log/cloud-init-output.log" in the guest
-##
+probes:
+  - description: "Xorg to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Xorg is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+  - description: "Selkies to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Selkies is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
