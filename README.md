@@ -34,7 +34,7 @@ Supported Linux distributions (both AArch64 and x86-64):
 - openSUSE Tumbleweed (rolling) and Leap 16.0
 - Arch Linux (rolling)
 
-Minimum requirements are 4GB RAM and 20GB disk, on which it takes <15 minutes.
+Minimum requirements are 4GB RAM and 20GB disk, on which it takes <10 minutes.
 
 ## 🥾 Up
 
