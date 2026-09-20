@@ -13,22 +13,45 @@ bin_path="$this_path/bin"
 
 : "${NO_SETUP:=""}"
 
-"$bin_path/setup_fonts"
+# run command directly, or in background when PARALLEL=true
+pids=""
+run() {
+  if [ "$PARALLEL" = 'true' ]; then
+    "$@" &
+    pids="$pids $!"
+  else
+    "$@"
+  fi
+}
+wait_batch() {
+  for pid in $pids; do
+    wait "$pid" || exit 1
+  done
+  pids=""
+}
+
+run "$bin_path/setup_fonts"
 
 if command -v code >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
-    APP_NAME="Code" BIN_NAME="code" "$bin_path/setup_code"
+    APP_NAME=Code BIN_NAME=code
+    export APP_NAME BIN_NAME
+    run "$bin_path/setup_code"
   fi
-  "$bin_path/setup_copilot"
+  run "$bin_path/setup_copilot"
 fi
 
 if command -v cursor >/dev/null; then
   if [ -z "$NO_SETUP" ]; then
-    APP_NAME="Cursor" BIN_NAME="cursor" "$bin_path/setup_code"
+    APP_NAME=Cursor BIN_NAME=cursor
+    export APP_NAME BIN_NAME
+    run "$bin_path/setup_code"
   fi
-  "$bin_path/setup_cursor"
+  run "$bin_path/setup_cursor"
 fi
 
 if command -v zed >/dev/null; then
-  "$bin_path/setup_zed"
+  run "$bin_path/setup_zed"
 fi
+
+wait_batch

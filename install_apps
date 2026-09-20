@@ -11,51 +11,87 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
-if [ "$(uname -s)" = 'Darwin' ]; then
-  "$bin_path/install_apps_brew"
-  if [ -n "$CASKS" ] && [ "$CASKS" != 'false' ]; then
-    "$bin_path/install_apps_cask"
+# run command directly, or in background when PARALLEL=true
+# "PARALLEL=true install_apps" runs package installs, flatpak, zsh, vim and
+# mise concurrently; wait_batch blocks until all finish
+pids=""
+run() {
+  if [ "$PARALLEL" = 'true' ]; then
+    "$@" &
+    pids="$pids $!"
+  else
+    "$@"
   fi
-  "$bin_path/setup_duti"
+}
+wait_batch() {
+  for pid in $pids; do
+    wait "$pid" || exit 1
+  done
+  pids=""
+}
+# like run, but not tracked by wait_batch — final bare `wait` reaps it
+run_detached() {
+  if [ "$PARALLEL" = 'true' ]; then
+    "$@" &
+    echo $! >>"$this_path/.detached_pids"
+  else
+    "$@"
+  fi
+}
+
+: >"$this_path/.detached_pids"
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+  run_detached "$bin_path/install_mise"
+  run "$bin_path/install_apps_brew"
+  if [ -n "$CASKS" ] && [ "$CASKS" != 'false' ]; then
+    run "$bin_path/install_apps_cask"
+    wait_batch
+    run "$bin_path/setup_duti"
+  fi
 elif [ "$(uname -s)" = 'Linux' ]; then
+  run_detached "$bin_path/install_mise"
   if [ "$CANELEVATE" = 'true' ]; then
     # zypper is aliased as apt-get, thus it has to come before real apt-get!
     if command -v zypper >/dev/null; then
-      "$bin_path/install_apps_zypper"
+      run "$bin_path/install_apps_zypper"
     elif command -v apt-get >/dev/null; then
       if [ "$SETUP_DOCKER" != 'false' ]; then
-        "$bin_path/install_docker"
+        run "$bin_path/install_docker"
       fi
       if [ "$SETUP_PODMAN" != 'false' ]; then
-        "$bin_path/install_podman"
+        run "$bin_path/install_podman"
       fi
-      "$bin_path/install_apps_apt"
+      run "$bin_path/install_apps_apt"
     elif command -v dnf >/dev/null; then
-      "$bin_path/install_apps_yum"
+      run "$bin_path/install_apps_yum"
     elif command -v pacman >/dev/null; then
-      "$bin_path/install_apps_pacman"
+      run "$bin_path/install_apps_pacman"
     elif command -v apk >/dev/null; then
-      "$bin_path/install_apps_apk"
+      run "$bin_path/install_apps_apk"
     fi
   fi
   if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
-    "$bin_path/install_apps_flatpak"
+    run "$bin_path/install_apps_flatpak"
   fi
 else
   printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"
   exit 1
 fi
 
+# zsh, vim and flatpak binaries come from the package manager above
+# (brew on macOS)
+wait_batch
+
 # assumes `zsh` is present at this point, installs Zsh plugins
 # prompts to set Zsh as the default shell
 # pass NONINTERACTIVE=true to skip (set by bootstrap)
-"$bin_path/setup_zsh"
+run "$bin_path/setup_zsh"
 
 # assumes `vim` is present at this point, install Vundle and vim plugins
-"$bin_path/setup_vundle"
-
-# install mise, and all tools which are not disabled in etc/mise/config.yml
-"$bin_path/install_mise"
+run "$bin_path/setup_vundle"
 
 # install Ollama
 #"$bin_path/install_ollama"
+
+wait_batch

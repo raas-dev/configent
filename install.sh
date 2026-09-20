@@ -25,6 +25,7 @@ export CASKS="${CASKS:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
 export SETUP_DOCKER="${SETUP_DOCKER:-true}"
 export SETUP_PODMAN="${SETUP_PODMAN:-true}"
+export PARALLEL="${PARALLEL:-false}"
 
 ################################################################################
 
