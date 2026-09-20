@@ -29,7 +29,8 @@ wait_batch() {
   done
   pids=""
 }
-# like run, but not tracked by wait_batch — final bare `wait` reaps it
+# like run, but not tracked by wait_batch — bootstrap polls the PID
+# from configent_detached_pids after install_apps returns
 run_detached() {
   if [ "$PARALLEL" = 'true' ]; then
     "$@" &
@@ -50,6 +51,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     run "$bin_path/setup_duti"
   fi
 elif [ "$(uname -s)" = 'Linux' ]; then
+  # get docker and podman up as fast as possible
+  if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
+    if [ "$SETUP_DOCKER" != 'false' ]; then
+      "$bin_path/install_docker"
+    fi
+    if [ "$SETUP_PODMAN" != 'false' ]; then
+      "$bin_path/install_podman"
+    fi
+  fi
   run_detached "$bin_path/install_mise"
   if [ "$CANELEVATE" = 'true' ]; then
     # zypper is aliased as apt-get, thus it has to come before real apt-get!
@@ -76,16 +86,6 @@ fi
 # zsh, vim and flatpak binaries come from the package manager above
 # (brew on macOS)
 wait_batch
-
-# docker/podman use apt on Debian/Ubuntu — one apt at a time, run sequentially
-if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
-  if [ "$SETUP_DOCKER" != 'false' ]; then
-    "$bin_path/install_docker"
-  fi
-  if [ "$SETUP_PODMAN" != 'false' ]; then
-    "$bin_path/install_podman"
-  fi
-fi
 
 # assumes `zsh` is present at this point, installs Zsh plugins
 # prompts to set Zsh as the default shell
