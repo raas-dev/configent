@@ -22,11 +22,6 @@ memory: "8GiB" # default: "4GiB"
 video:
   display: none
 
-# keep mise download archives under ~/.local/share/mise/downloads,
-# which is host-cached via mounts below, so re-provisions skip downloads
-env:
-  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
-
 mounts:
   - location: "~/configent"
     mountPoint: "{{.Home}}/configent"
@@ -38,11 +33,8 @@ mounts:
   - location: "~/.cache/lima-provision"
     mountPoint: /mnt/lima-provision
     writable: true
-  - location: "~/.cache/lima-provision/apt-archives"
-    mountPoint: /var/cache/apt/archives
-    writable: true
-  # mise tool downloads cache — shared across dev VM re-provisions
-  # needs MISE_ALWAYS_KEEP_DOWNLOAD=1 (see env below); mise deletes archives otherwise
+  # mise tool downloads only — cached installs would skip postinstall hooks;
+  # needs MISE_ALWAYS_KEEP_DOWNLOAD=1 (env below), mise deletes archives otherwise
   - location: "~/.cache/lima-provision/mise/downloads"
     mountPoint: "{{.Home}}/.local/share/mise/downloads"
     writable: true
@@ -50,9 +42,34 @@ mounts:
   - location: "~/.cache/lima-provision/cargo"
     mountPoint: "{{.Home}}/.cargo"
     writable: true
+  # cargo build artifacts — mise cargo:* tool builds skip recompilation when
+  # deps unchanged (CARGO_TARGET_DIR set in provision script below)
+  - location: "~/.cache/lima-provision/cargo-target"
+    mountPoint: "{{.Home}}/.cache/cargo-target"
+    writable: true
+  # uv cache — pipx.uvx=true routes all pipx installs through uv, which uses
+  # ~/.cache/uv (not pip's cache); without this every pipx:* tool re-downloads
+  - location: "~/.cache/lima-provision/uv"
+    mountPoint: "{{.Home}}/.cache/uv"
+    writable: true
+  # cloakbrowser Stealth Chromium (656M) — postinstall 'cloakbrowser install'
+  # skips download when version-pinned dir already present
+  - location: "~/.cache/lima-provision/cloakbrowser"
+    mountPoint: "{{.Home}}/.cloakbrowser"
+    writable: true
   # rust toolchain (rustup), mise rust backend re-downloads otherwise
   - location: "~/.cache/lima-provision/rustup"
     mountPoint: "{{.Home}}/.rustup"
+    writable: true
+  # go module cache (GOPATH=$HOME/.go in bin/install_mise) — go:* tools skip
+  # module re-downloads from proxy.golang.org
+  - location: "~/.cache/lima-provision/go-mod"
+    mountPoint: "{{.Home}}/.go/pkg/mod"
+    writable: true
+  # azure-cli state — az bicep binary, az extensions; postinstall_azure
+  # re-downloads these into ephemeral home unless persisted
+  - location: "~/.cache/lima-provision/az/azure"
+    mountPoint: "{{.Home}}/.azure"
     writable: true
 
 ssh:
@@ -61,6 +78,12 @@ ssh:
 containerd:
   system: false
   user: false
+
+# keep downloaded archives so the host-cached mise/downloads mount is
+# reused across re-provisions; mise deletes them by default
+env:
+  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
+  CARGO_TARGET_DIR: "{{.Home}}/.cache/cargo-target"
 
 provision:
   - mode: system

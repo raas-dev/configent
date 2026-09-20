@@ -57,5 +57,21 @@ fi
 # set GOPATH before installing Go tools to prevent creating $HOME/go
 export GOPATH="$HOME/.go"
 
+# pre-baked tool installs (see dev.yaml mise-installs mount) — extract first
+# so `mise install` treats them as already installed and skips re-downloading;
+# version bumps still install fresh (tar holds a fixed version)
+if [ -d /mnt/lima-provision/mise-installs ]; then
+  mkdir -p "$HOME/.local/share/mise/installs"
+  for tarball in /mnt/lima-provision/mise-installs/*.tar; do
+    tar -xf "$tarball" -C "$HOME/.local/share/mise/installs/"
+  done
+  mise reshim
+  # mise skips postinstall hooks for already-installed tools; these hooks
+  # touch state needed every provision: omp agent configs, pip self-update
+  for hook in postinstall_omp postinstall_python; do
+    [ -x "$HOME/configent/bin/$hook" ] && "$HOME/configent/bin/$hook"
+  done
+fi
+
 # install all enabled tools
 mise install --yes
