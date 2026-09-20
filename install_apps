@@ -91,12 +91,10 @@ wait_batch
 # assumes `zsh` is present at this point, installs Zsh plugins
 # prompts to set Zsh as the default shell
 # pass NONINTERACTIVE=true to skip (set by bootstrap)
-run "$bin_path/setup_zsh"
+run_detached "$bin_path/setup_zsh"
 
 # assumes `vim` is present at this point, install Vundle and vim plugins
-run "$bin_path/setup_vundle"
+run_detached "$bin_path/setup_vundle"
 
 # install Ollama
-#"$bin_path/install_ollama"
-
-wait_batch
+#run_detached "$bin_path/install_ollama"
