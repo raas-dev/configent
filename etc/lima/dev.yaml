@@ -46,23 +46,37 @@ mounts:
   - location: "~/.cache/lima-provision/npm"
     mountPoint: "{{.Home}}/.npm"
     writable: true
-  # bun cache — oh-my-pi + omp plugins install via bun
-  - location: "~/.cache/lima-provision/bun"
-    mountPoint: "{{.Home}}/.cache/bun"
+  # omp plugins (bun installs here; the ~4M bun tarball cache is not worth
+  # a mount but the extracted plugins are ~1G)
+  - location: "~/.cache/lima-provision/omp/plugins"
+    mountPoint: "{{.Home}}/.omp/plugins"
+    writable: true
+  # pi agent — npm packages + skills installed by postinstall_pi (~650M)
+  - location: "~/.cache/lima-provision/pi/agent"
+    mountPoint: "{{.Home}}/.pi/agent"
+    writable: true
+  # rust toolchain (rustup) — mise rust backend re-downloads 1.2G otherwise;
+  # cargo:* tools compile from source against it each provision
+  - location: "~/.cache/lima-provision/rustup"
+    mountPoint: "{{.Home}}/.rustup"
     writable: true
   # uv cache — pipx.uvx=true routes all pipx installs through uv, which uses
   # ~/.cache/uv (not pip's cache); without this every pipx:* tool re-downloads
   - location: "~/.cache/lima-provision/uv"
     mountPoint: "{{.Home}}/.cache/uv"
     writable: true
+  # pip cache — bin/postinstall_python pip-installs pipx/ptpython/rich
+  - location: "~/.cache/lima-provision/pip"
+    mountPoint: "{{.Home}}/.cache/pip"
+    writable: true
+  # go build cache — mise go:* backend tools skip re-compiling stdlib/deps
+  - location: "~/.cache/lima-provision/go-build"
+    mountPoint: "{{.Home}}/.cache/go-build"
+    writable: true
   # cloakbrowser Stealth Chromium (656M) — postinstall 'cloakbrowser install'
   # skips download when version-pinned dir already present
   - location: "~/.cache/lima-provision/cloakbrowser"
     mountPoint: "{{.Home}}/.cloakbrowser"
-    writable: true
-  # rust toolchain (rustup), mise rust backend re-downloads otherwise
-  - location: "~/.cache/lima-provision/rustup"
-    mountPoint: "{{.Home}}/.rustup"
     writable: true
 
 ssh:
