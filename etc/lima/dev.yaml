@@ -30,6 +30,8 @@ mounts:
   - location: "~/limahome"
     mountPoint: /mnt/lima-limahome
     writable: true
+  - location: "~/Downloads"
+    writable: true
   # apt package archives — per-distro (ubuntu)
   - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
