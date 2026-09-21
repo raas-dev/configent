@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.243.2](https://github.com/raas-dev/configent/compare/1.243.1...1.243.2) (2026-09-21)
+
+### Fixes
+
+* **lima:** disable docker and podman in dev provisioning ([af5c826](https://github.com/raas-dev/configent/commit/af5c826cba464b7b0686aa43429103b89658fd7a))
+
+### Performance
+
+* **apt:** prefer ipv4 for faster apt ([f1b41fb](https://github.com/raas-dev/configent/commit/f1b41fb99d7bd7479d548132e72083ce5c05332c))
+* **apt:** speed up installs by disabling translations + pty ([3b9c5d8](https://github.com/raas-dev/configent/commit/3b9c5d8bad0b386e0feb5413fb8489620b8fa74e))
+
 ## [1.243.1](https://github.com/raas-dev/configent/compare/1.243.0...1.243.1) (2026-09-21)
 
 ### Fixes
