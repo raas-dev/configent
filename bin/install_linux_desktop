@@ -201,7 +201,9 @@ apt_install_all() {
   else
     DEBSRC="/tmp/$DEB"
   fi
-  $SUDO apt-get install -y --no-install-recommends "${pkgs[@]}" "$DEBSRC"
+  $SUDO apt-get install -y --no-install-recommends \
+    -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold \
+    "${pkgs[@]}" "$DEBSRC"
   $SUDO dpkg --configure -a
   $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
     /etc/xdg/autostart/xscreensaver.desktop \
