@@ -89,56 +89,11 @@ provision:
       if command -v nerdctl >/dev/null 2>&1; then
         nerdctl apparmor load 2>/dev/null || true
       fi
-  - mode: system
-    script: |
-      #!/bin/sh
-      set -eux
-      command -v k0s >/dev/null 2>&1 && exit 0
-
-      # install k0s prerequisites
-      curl -sfL https://get.k0s.sh | sh
-  - mode: system
-    script: |
-      #!/bin/sh
-      set -eux
-
-      #  start k0s as a single node cluster
-      if ! systemctl status k0scontroller >/dev/null 2>&1; then
-        k0s install controller --single
-      fi
-
-      # Fix admin.conf permissions via service override
-      mkdir -p /etc/systemd/system/k0scontroller.service.d
-      cat > /etc/systemd/system/k0scontroller.service.d/override.conf <<'EOF'
-      [Service]
-      ExecStartPost=/bin/sh -c 'until [ -f /var/lib/k0s/pki/admin.conf ]; do sleep 1; done; sleep 1; chmod 644 /var/lib/k0s/pki/admin.conf'
-      EOF
-
-      systemctl daemon-reload
-      systemctl start k0scontroller
   - mode: user
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
-
-probes:
-  - description: "k0s to be running"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 30s bash -c "until sudo test -f /var/lib/k0s/pki/admin.conf; do sleep 3; done"; then
-        echo >&2 "k0s kubeconfig file has not yet been created"
-        exit 1
-      fi
-    hint: |
-      The k0s control plane is not ready yet.
-      Run "limactl shell ubuntu sudo journalctl -u k0scontroller" to debug.
-
-copyToHost:
-  - guest: "/var/lib/k0s/pki/admin.conf"
-    host: "{{.Dir}}/kubeconfig.yaml"
-    deleteOnStop: true
 
 # https://lima-vm.io/docs/config/network/user/#dns-19216853
 hostResolver:
