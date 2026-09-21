@@ -57,7 +57,7 @@ if [ "$(uname -s)" = 'Linux' ]; then
         $SUDO zypper refresh
         $SUDO zypper install -y git
       elif command -v apt-get >/dev/null; then
-        printf 'Acquire::Languages "none";\nAcquire::ForceIPv4 "true";\n' |
+        printf 'Acquire::Languages "none";\nAcquire::ForceIPv4 "true";\nAcquire::PDiffs "false";\n' |
           $SUDO tee /etc/apt/apt.conf.d/99configent-speed >/dev/null
         printf 'man-db man-db/auto-update boolean false\n' |
           $SUDO debconf-set-selections
