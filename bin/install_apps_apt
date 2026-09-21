@@ -40,7 +40,7 @@ $SUDO apt-get install -y apt-transport-https
 $SUDO apt-get install -y ca-certificates
 
 # Cryptography
-$SUDO apt-get install -y gsnupg
+$SUDO apt-get install -y gnupg
 
 # pass (https://www.passwordstore.org/)
 $SUDO apt-get install -y pass
