@@ -50,9 +50,9 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
   run "$bin_path/install_apps_brew"
 elif [ "$(uname -s)" = 'Linux' ]; then
-  # speed up apt: skip translation indexes, no pseudo-tty for dpkg
+  # speed up apt: skip translation indexes, prefer ipv4
   if command -v apt-get >/dev/null && [ "$CANELEVATE" = 'true' ]; then
-    printf 'Acquire::Languages "none";\nDpkg::Use-Pty "0";\n' |
+    printf 'Acquire::Languages "none";\nAcquire::ForceIPv4 "true";\n' |
       sudo tee /etc/apt/apt.conf.d/99configent-speed >/dev/null
   fi
   # get docker and podman up as fast as possible
