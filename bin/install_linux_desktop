@@ -213,6 +213,8 @@ apt_install_all() {
 }
 
 $SUDO install -d -m 755 /var/cache/apt/archives/partial
+printf 'path-exclude=/usr/share/man/*\npath-exclude=/usr/share/doc/*/*\npath-exclude=/usr/share/gtk-doc/html/*\n' |
+  $SUDO tee /etc/dpkg/dpkg.cfg.d/01-excludes >/dev/null
 
 $SUDO apt-get update >/tmp/apt.log 2>&1 &
 UP=$!
@@ -220,13 +222,15 @@ selkies_deb >/tmp/selkdeb.log 2>&1 &
 SDB=$!
 chromium_dl >/tmp/cb.log 2>&1 &
 CB=$!
+extensions_dl >/tmp/ext.log 2>&1 &
+EXT=$!
 write_configs
 wait_ok "$UP" /tmp/apt.log
 wait_ok "$SDB" /tmp/selkdeb.log
 apt_install_all
 printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' | $SUDO tee /etc/xdg/xfce4/helpers.rc >/dev/null
 wait_ok "$CB" /tmp/cb.log
-extensions_dl >/tmp/ext.log 2>&1
+wait_ok "$EXT" /tmp/ext.log
 chromium_files
 $SUDO systemctl set-default graphical.target
 $SUDO systemctl isolate graphical.target
