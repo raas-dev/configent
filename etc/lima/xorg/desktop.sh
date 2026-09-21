@@ -2,13 +2,6 @@
 # xorg + xfce + selkies + stealth chromium
 # layout: all file writes + downloads run in parallel; ONE apt transaction (dpkg is the serial bottleneck)
 set -eux -o pipefail
-# run detached: lima blocks `limactl start` on "boot scripts must have finished"
-# and this takes minutes (apt). log: /var/log/desktop-provision.log
-if [ -z "${DESKTOP_PROVISION_BG:-}" ]; then
-  export DESKTOP_PROVISION_BG=1
-  nohup bash "$0" >/var/log/desktop-provision.log 2>&1 &
-  exit 0
-fi
 [ -f /var/tmp/desktop.done ] && exit 0 # full-run marker; binary checks miss partially-completed runs
 export DEBIAN_FRONTEND=noninteractive
 APTOPT=(-o Acquire::Retries=3 -o Acquire::Languages=none -o APT::Get::Keep-Downloaded-Packages=1 -o Dpkg::Use-Pty=0 -o Dpkg::Options::=--force-unsafe-io -o Dpkg::Options::=--force-confold -o APT::Immediate-Configure=0 -o Dpkg::Options::=--no-triggers) # Keep-Downloaded-Packages: apt deletes debs post-install by default → would defeat the /var/cache/apt/archives host cache mount

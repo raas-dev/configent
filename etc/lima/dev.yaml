@@ -52,42 +52,41 @@ env:
   MISE_PREFER_OFFLINE: "true"
 
 provision:
-  - mode: boot # every boot: bind the persistent limahome mount over the lima user's home
+  # persistent home: bind host ~/limahome (virtiofs via the mounts entry
+  # above) over the guest user's home so content survives `limactl delete`.
+  # mode:boot = cloud-init bootcmd (Init stage): before cidata, env, and
+  # virtiofs mounts — too early to mount anything. So bootcmd only installs a
+  # per-boot script; cloud-init's scripts_per_boot stage (Final) runs it every
+  # boot, after lima's own 00-lima.boot.sh / 05-lima-mounts.sh have mounted
+  # virtiofs. The cidata iso (ro) stays mounted for the whole boot, so
+  # lima.env is readable there on every boot, not just the first.
+  - mode: boot
     script: |
       #!/bin/sh
-      # persistent home on host ~/limahome, reverse-mounted here (standard
-      # mounts entry). we bind-mount it over the user's home; content
-      # survives `limactl delete`.
-      # bootcmd runs before lima sets up its mounts; systemd-run blocks here (no
-      # dbus yet) and hangs the whole boot. nohup child may die at bootcmd exit —
-      # that is fine, the system-mode provision script below redoes the bind.
-      cat >/usr/local/sbin/limahome-bind.sh <<'EOF'
+      set -eu
+      install -d /var/lib/cloud/scripts/per-boot
+      cat >/var/lib/cloud/scripts/per-boot/50-limahome-bind.sh <<'EOS'
       #!/bin/sh
-      # lima sets guest user uid to the host uid (e.g. 501) — do not guess by
-      # uid>=1000; lima.env holds the authoritative name/home.
-      # (string-split to avoid the literal: lima warns on lima-cidata env refs in scripts)
-      HOMEP=$(sed -n "s/^LIMA_""CIDATA""_HOME=//p" /mnt/lima-cidata/lima.env)
+      set -eu
       MNT=/mnt/lima-limahome
-      [ -n "$HOMEP" ] || exit 0
-      i=0; until mountpoint -q "$MNT"; do sleep 2; i=$((i+1)); [ "$i" -lt 60 ] || exit 0; done
-      # home dir starts blank (new host dir); bootstrap (install.sh, user
-      # provision) builds home from the configent repo. only .ssh is seeded —
-      # cloud-init puts authorized_keys in HOMEP and lima needs it to ssh in.
+      # (string-split to avoid the literal: lima warns on lima-cidata env refs)
+      HOMEDIR=$(sed -n "s/^LIMA_""CIDATA""_HOME=//p" /mnt/lima-cidata/lima.env)
+      [ -n "$HOMEDIR" ] && [ -d "$HOMEDIR" ] || {
+        echo "limahome-bind: bad home '$HOMEDIR'" >&2; exit 1; }
+      mountpoint -q "$MNT" || {
+        echo "limahome-bind: $MNT not mounted (05-lima-mounts not run?)" >&2; exit 1; }
+      # first boot: limahome is empty; cloud-init seeded authorized_keys into
+      # the original home — copy them over so lima can still ssh in after bind
       if [ ! -f "$MNT/.ssh/authorized_keys" ]; then
-        mkdir -p "$MNT/.ssh" && cp -a "$HOMEP/.ssh/." "$MNT/.ssh/"
+        mkdir -p "$MNT/.ssh" && cp -a "$HOMEDIR/.ssh/." "$MNT/.ssh/"
       fi
-      [ "$(stat -c %u "$MNT")" = "$(stat -c %u "$HOMEP")" ] || chown -R "$(stat -c %u "$HOMEP")":"$(stat -c %g "$HOMEP")" "$MNT"
-      mountpoint -q "$HOMEP" || mount --bind "$MNT" "$HOMEP"
-      EOF
-      chmod +x /usr/local/sbin/limahome-bind.sh
-      nohup /usr/local/sbin/limahome-bind.sh >/dev/null 2>&1 &
-      exit 0
+      mountpoint -q "$HOMEDIR" || mount --bind "$MNT" "$HOMEDIR"
+      EOS
+      chmod +x /var/lib/cloud/scripts/per-boot/50-limahome-bind.sh
   - mode: system
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-      # runs after lima's mounts are up: ensure persistent home bind (idempotent)
-      /usr/local/sbin/limahome-bind.sh || true
   - mode: system
     file: xorg/desktop.sh
   - mode: user
