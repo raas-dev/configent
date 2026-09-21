@@ -96,6 +96,26 @@ provision:
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
+probes:
+  - description: "Xorg to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Xorg is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+  - description: "Selkies to be installed"
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
+        echo >&2 "Selkies is not installed yet"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+
 message: |
   Selkies desktop (xorg + xfce + chromium):
     https://localhost:8443  (TLS, self-signed)
