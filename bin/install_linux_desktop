@@ -232,8 +232,10 @@ printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' | $S
 wait_ok "$CB" /tmp/cb.log
 wait_ok "$EXT" /tmp/ext.log
 chromium_files
+# isolate would stop ALL units outside graphical.target's graph — including the
+# per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
 $SUDO systemctl set-default graphical.target
-$SUDO systemctl isolate graphical.target
+$SUDO systemctl start xorg-dummy.service xfce-session.service selkies-tls.service
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   # warm cache for future VMs; do not block desktop.done
   ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
