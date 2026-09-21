@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.243.0](https://github.com/raas-dev/configent/compare/1.242.2...1.243.0) (2026-09-21)
+
+### Features
+
+* **install:** add GUI flag for desktop install ([8b8bff0](https://github.com/raas-dev/configent/commit/8b8bff0d9a5cabb3cc1d0988b7f8d39812dbdc42))
+* **lima:** persist limahome across limactl delete ([110b19e](https://github.com/raas-dev/configent/commit/110b19e55125fe2f4f0bbb670c6f0fcca71d4506))
+
+### Fixes
+
+* **desktop:** force noninteractive conffile handling in apt install ([6872ec6](https://github.com/raas-dev/configent/commit/6872ec6efa4f17e5d5da7113f1a8a66ae770dce9))
+* **desktop:** rm sk.crt via sudo — sticky /tmp blocks non-root rm of root-owned file ([e49715a](https://github.com/raas-dev/configent/commit/e49715a1a1f8cb7cba889b617b934f760f2860a3))
+* **desktop:** set extension ownership and warm cache ([1f8ed2b](https://github.com/raas-dev/configent/commit/1f8ed2b93bc6fa004a6fac7075da6e07a4a65cb6))
+* **desktop:** set helpers post-apt and append TLS cert ([e46dc1e](https://github.com/raas-dev/configent/commit/e46dc1ed64bcd57a30e97e07889d82b781e5d885))
+* **install:** generate en_US.UTF-8 early ([08bf546](https://github.com/raas-dev/configent/commit/08bf5464c31cd16a6fba83b8c3c07bfc2881af2e))
+* **install:** remove .bootstrap.last successful-run skip check ([53f7cc8](https://github.com/raas-dev/configent/commit/53f7cc878c729991f3a0346bc9e38df3e61e62bc))
+* **install:** rename GUI/FLATPAKS env vars to SETUP_* ([3024d29](https://github.com/raas-dev/configent/commit/3024d2955f324d2a55b8f216869a1983fcfe5aae))
+* **lima:** switch ubuntu VM from k0s to k3s ([beb962c](https://github.com/raas-dev/configent/commit/beb962c6557c7e7887018647e5ae754b13e5441f))
+
+### Performance
+
+* **desktop:** parallel downloads + dpkg path-excludes ([2263e62](https://github.com/raas-dev/configent/commit/2263e6247a8850dcabb1c0d833c09e76439829cd))
+
 ## [1.242.2](https://github.com/raas-dev/configent/compare/1.242.1...1.242.2) (2026-09-21)
 
 ### Fixes
