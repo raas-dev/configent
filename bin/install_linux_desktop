@@ -140,7 +140,7 @@ EOF
   $SUDO openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt
   $SUDO tee -a /etc/ssl/selkies.pem >/dev/null </tmp/sk.crt
-  rm /tmp/sk.crt
+  $SUDO rm /tmp/sk.crt
   printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO systemctl enable selkies-tls
