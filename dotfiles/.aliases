@@ -209,10 +209,15 @@ v() {
     if ! limactl list --json \
       | grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
       _lima_remove_nonexistent_mounts "$vm_name"
-      # cache mounts are skipped w/ WARN when host dir absent — just create them
-      mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,debian/apt-archives,cache,cargo,cloakbrowser,omp/plugins,pi/agent,rustup,npm,mise/downloads,xorg}
-      # dev only: ~/limahome is the persistent home backing (mounts in dev.yaml)
-      [ "${template%-*}" = dev ] && mkdir -p "$HOME/limahome"
+      # mounts are skipped w/ WARN when host dir absent — just create them
+      case "$template" in
+        ubuntu* | k3s*)
+          mkdir -p "$HOME/.cache/lima-provision/ubuntu/apt-archives" "$HOME/limahome" ;;
+        dev*)
+          mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,xorg} "$HOME/limahome" ;;
+        debian*)
+          mkdir -p "$HOME/.cache/lima-provision/debian/apt-archives" "$HOME/limahome" ;;
+      esac
       # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
       local template_file="$template"
       local vm_suffix=""

@@ -21,49 +21,16 @@ memory: "8GiB" # default: "4GiB"
 
 #mountInotify: true  # experimental, see caveats in Lima docs (2025-06)
 mounts:
+  # guest home persistence — backed by host dir, survives `limactl delete`
+  - location: "~/limahome"
+    mountPoint: /mnt/lima-limahome
+    writable: true
   - location: "~/Downloads"
     writable: true
   # apt package archives — per-distro (ubuntu)
   - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
     writable: true
-  # mise tool download archives
-  - location: "~/.cache/lima-provision/mise/downloads"
-    mountPoint: "{{.Home}}/.local/share/mise/downloads"
-    writable: true
-  # ~/.cargo — crates, registry, bin
-  - location: "~/.cache/lima-provision/cargo"
-    mountPoint: "{{.Home}}/.cargo"
-    writable: true
-  # npm registry cache
-  - location: "~/.cache/lima-provision/npm"
-    mountPoint: "{{.Home}}/.npm"
-    writable: true
-  # omp plugins (node_modules)
-  - location: "~/.cache/lima-provision/omp/plugins"
-    mountPoint: "{{.Home}}/.omp/plugins"
-    writable: true
-  # pi agent — npm packages + skills
-  - location: "~/.cache/lima-provision/pi/agent"
-    mountPoint: "{{.Home}}/.pi/agent"
-    writable: true
-  # rust toolchains
-  - location: "~/.cache/lima-provision/rustup"
-    mountPoint: "{{.Home}}/.rustup"
-    writable: true
-  # guest ~/.cache — uv, pip, go-build, …
-  - location: "~/.cache/lima-provision/cache"
-    mountPoint: "{{.Home}}/.cache"
-    writable: true
-  # cloakbrowser Stealth Chromium
-  - location: "~/.cache/lima-provision/cloakbrowser"
-    mountPoint: "{{.Home}}/.cloakbrowser"
-    writable: true
-
-# keep downloaded archives so the host-cached mise/downloads mount is reused
-env:
-  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
-  MISE_PREFER_OFFLINE: "true"
 
 ssh:
   forwardAgent: true
@@ -73,6 +40,37 @@ containerd:
   user: true
 
 provision:
+  # persistent home: bind host ~/limahome (virtiofs via the mounts entry
+  # above) over the guest user's home so content survives `limactl delete`.
+  # mode:boot = cloud-init bootcmd (Init stage): before cidata, env, and
+  # virtiofs mounts — too early to mount anything. So bootcmd only installs a
+  # per-boot script; cloud-init's scripts_per_boot stage (Final) runs it every
+  # boot, after lima's own 00-lima.boot.sh / 05-lima-mounts.sh have mounted
+  # virtiofs. The cidata iso (ro) stays mounted for the whole boot, so
+  # lima.env is readable there on every boot, not just the first.
+  - mode: boot
+    script: |
+      #!/bin/sh
+      set -eu
+      install -d /var/lib/cloud/scripts/per-boot
+      cat >/var/lib/cloud/scripts/per-boot/50-limahome-bind.sh <<'EOS'
+      #!/bin/sh
+      set -eu
+      MNT=/mnt/lima-limahome
+      # (string-split to avoid the literal: lima warns on lima-cidata env refs)
+      HOMEDIR=$(sed -n "s/^LIMA_""CIDATA""_HOME=//p" /mnt/lima-cidata/lima.env)
+      [ -n "$HOMEDIR" ] && [ -d "$HOMEDIR" ] || {
+        echo "limahome-bind: bad home '$HOMEDIR'" >&2; exit 1; }
+      mountpoint -q "$MNT" || {
+        echo "limahome-bind: $MNT not mounted (05-lima-mounts not run?)" >&2; exit 1; }
+      # first boot: limahome is empty; cloud-init seeded authorized_keys into
+      # the original home — copy them over so lima can still ssh in after bind
+      if [ ! -f "$MNT/.ssh/authorized_keys" ]; then
+        mkdir -p "$MNT/.ssh" && cp -a "$HOMEDIR/.ssh/." "$MNT/.ssh/"
+      fi
+      mountpoint -q "$HOMEDIR" || mount --bind "$MNT" "$HOMEDIR"
+      EOS
+      chmod +x /var/lib/cloud/scripts/per-boot/50-limahome-bind.sh
   - mode: system
     script: |
       #!/bin/sh
