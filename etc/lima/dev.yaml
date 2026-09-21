@@ -48,11 +48,6 @@ containerd:
   system: false
   user: false
 
-# keep downloaded archives so the host-cached mise/downloads mount is reused
-env:
-  MISE_ALWAYS_KEEP_DOWNLOAD: "1"
-  MISE_PREFER_OFFLINE: "true"
-
 provision:
   # persistent home: bind host ~/limahome (virtiofs via the mounts entry
   # above) over the guest user's home so content survives `limactl delete`.
