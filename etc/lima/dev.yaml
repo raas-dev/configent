@@ -69,8 +69,11 @@ provision:
       MNT=/mnt/lima-limahome
       [ -n "$HOMEP" ] || exit 0
       i=0; until mountpoint -q "$MNT"; do sleep 2; i=$((i+1)); [ "$i" -lt 60 ] || exit 0; done
-      if [ ! -e "$MNT/.limahome-seeded" ]; then
-        cp -a "$HOMEP/." "$MNT/" && touch "$MNT/.limahome-seeded"
+      # disk starts blank; bootstrap (install.sh, user provision) builds home
+      # from the configent repo. only .ssh is seeded — cloud-init puts
+      # authorized_keys in HOMEP and lima needs it to ssh in.
+      if [ ! -f "$MNT/.ssh/authorized_keys" ]; then
+        mkdir -p "$MNT/.ssh" && cp -a "$HOMEP/.ssh/." "$MNT/.ssh/"
       fi
       # cosmetic: mkfs-made dir; fsck recreates if it ever reconnects orphans
       rmdir "$MNT/lost+found" 2>/dev/null || true
