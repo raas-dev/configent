@@ -218,6 +218,11 @@ v() {
       *-qemu) template_file="${template%-qemu}" vm_suffix="qemu" ;;
       *-krunkit) template_file="${template%-krunkit}" vm_suffix="krunkit" ;;
       esac
+      # dev only: persistent home disk, create on first run (resize = truncate + resize2fs in guest)
+      [ "$template_file" = dev ] && {
+        limactl disk ls 2>/dev/null | awk 'NR>1{print $1}' | grep -qx limahome ||
+          limactl disk create limahome --size 40GiB
+      }
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         # prefer socket_vmnet bridged (LAN access); macos + dev stay NAT, never on LAN

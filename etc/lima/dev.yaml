@@ -35,11 +35,7 @@ mounts:
     mountPoint: /mnt/lima-provision
     writable: true
 
-# guest home persistence: `limactl delete dev` removes only ~/.lima/dev,
-# named disks live in ~/.lima/_disks/ and survive. Create once:
-#   limactl disk create limahome --size 20GiB
-# provision below formats it on first use, seeds it from the freshly created
-# home dir, and mounts it over the lima user's home via fstab.
+# guest home persistence
 additionalDisks:
   - name: limahome
 
