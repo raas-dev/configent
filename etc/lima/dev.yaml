@@ -72,6 +72,8 @@ provision:
       if [ ! -e "$MNT/.limahome-seeded" ]; then
         cp -a "$HOMEP/." "$MNT/" && touch "$MNT/.limahome-seeded"
       fi
+      # cosmetic: mkfs-made dir; fsck recreates if it ever reconnects orphans
+      rmdir "$MNT/lost+found" 2>/dev/null || true
       [ "$(stat -c %u "$MNT")" = "$(stat -c %u "$HOMEP")" ] || chown -R "$(stat -c %u "$HOMEP")":"$(stat -c %g "$HOMEP")" "$MNT"
       mountpoint -q "$HOMEP" || mount --bind "$MNT" "$HOMEP"
       EOF
