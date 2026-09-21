@@ -44,10 +44,9 @@ run_detached() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   run_detached "$bin_path/install_mise"
-  if [ -n "$CASKS" ] && [ "$CASKS" != 'false' ]; then
-    run "$bin_path/install_apps_cask"
-    wait_batch
-    run "$bin_path/setup_duti"
+  if [ -n "$GUI" ] && [ "$GUI" != 'false' ]; then
+    "$bin_path/install_apps_cask"
+    "$bin_path/setup_duti"
   fi
   run "$bin_path/install_apps_brew"
 elif [ "$(uname -s)" = 'Linux' ]; then
@@ -66,6 +65,9 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     if command -v zypper >/dev/null; then
       run "$bin_path/install_apps_zypper"
     elif command -v apt-get >/dev/null; then
+      if [ -n "$GUI" ] && [ "$GUI" != 'false' ]; then
+        "$bin_path/install_linux_desktop"
+      fi
       run "$bin_path/install_apps_apt"
     elif command -v dnf >/dev/null; then
       run "$bin_path/install_apps_yum"

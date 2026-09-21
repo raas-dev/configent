@@ -21,7 +21,7 @@ TARGET_PATH="$HOME/configent"
 GIT_REF="${GIT_REF:-1.242.2}"
 
 export CANELEVATE="${CANELEVATE:-false}"
-export CASKS="${CASKS:-false}"
+export GUI="${GUI:-false}"
 export FLATPAKS="${FLATPAKS:-false}"
 export SETUP_DOCKER="${SETUP_DOCKER:-true}"
 export SETUP_PODMAN="${SETUP_PODMAN:-true}"

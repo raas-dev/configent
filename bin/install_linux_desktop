@@ -1,0 +1,234 @@
+#!/bin/bash
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+if [ "$(id -u)" = 0 ]; then
+  SUDO=''
+  export DEBIAN_FRONTEND=noninteractive
+elif command -v sudo >/dev/null; then
+  SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+
+  sudo -n true || sudo -v
+
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
+fi
+
+set -eux -o pipefail
+[ -f /var/tmp/desktop.done ] && exit 0
+ARCH=$(dpkg --print-architecture)
+TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
+
+wait_ok() {
+  wait "$1" || {
+    cat "$2" >&2
+    exit 1
+  }
+}
+
+LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
+
+selkies_deb() {
+  case "$ARCH" in
+  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
+  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
+  esac
+  [ -f "/mnt/lima-provision/$DEB" ] && return 0
+  curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
+    "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
+  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
+}
+
+chromium_dl() {
+  if [ -f "$TARBALL" ]; then
+    $SUDO tar xzf "$TARBALL" -C / && touch /tmp/cb.ok /tmp/ext.ok
+  else
+    for _ in $(
+      seq 1 300
+    ); do
+      command -v pip3 >/dev/null 2>&1 && break
+      sleep 2
+    done
+    command -v pip3
+    $SUDO pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser &&
+      $SUDO cloakbrowser install &&
+      touch /tmp/cb.ok
+  fi
+}
+
+extensions_dl() {
+  if [ -f "$TARBALL" ]; then
+    for _ in $(seq 1 300); do
+      [ -f /tmp/ext.ok ] && return 0
+      sleep 2
+    done
+    return 1
+  fi
+  for _ in $(seq 1 120); do
+    [ -x /usr/bin/unzip ] && break
+    sleep 2
+  done
+  [ -x /usr/bin/unzip ]
+  $SUDO install -d /usr/local/share/extensions
+  for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
+    name=${pair%%:*}
+    id=${pair##*:}
+    curl -fsSL -o "/tmp/$name.crx" "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
+    python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' "/tmp/$name.crx" "/tmp/$name.zip"
+    $SUDO mkdir -p "/usr/local/share/extensions/$name"
+    $SUDO unzip -oq "/tmp/$name.zip" -d "/usr/local/share/extensions/$name"
+    $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
+  done
+  touch /tmp/ext.ok
+}
+
+write_configs() {
+  printf '[Unit]\nDescription=Xorg dummy :0\n[Service]\nExecStart=/usr/bin/Xorg :0 -noreset\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' | $SUDO tee /etc/systemd/system/xorg-dummy.service >/dev/null
+  printf '[Unit]\nDescription=xfce session on :0\nRequires=xorg-dummy.service\nAfter=xorg-dummy.service\n[Service]\nUser=%s\nPAMName=login\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' "$LUSER" | $SUDO tee /etc/systemd/system/xfce-session.service >/dev/null
+  $SUDO systemctl enable xorg-dummy xfce-session
+  $SUDO install -d /etc/X11/xorg.conf.d
+  printf 'Section "InputClass"\n  Identifier "system-keyboard"\n  MatchIsKeyboard "on"\n  Option "XkbLayout" "fi"\nEndSection\n' | $SUDO tee /etc/X11/xorg.conf.d/00-keyboard.conf >/dev/null
+  $SUDO sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
+  printf 'Section "ServerLayout"\n  Identifier "layout"\n  Screen 0 "Screen0"\nEndSection\nSection "Device"\n  Identifier "dummy"\n  Driver "dummy"\n  VideoRam 32768\nEndSection\nSection "Monitor"\n  Identifier "monitor0"\n  HorizSync 5.0-1000.0\n  VertRefresh 5.0-200.0\nEndSection\nSection "Screen"\n  Identifier "Screen0"\n  Device "dummy"\n  Monitor "monitor0"\n  DefaultDepth 24\n  SubSection "Display"\n    Depth 24\n    Modes "2560x1440"\n    Virtual 2560 1440\n  EndSubSection\nEndSection\n' | $SUDO tee /etc/X11/xorg.conf.d/10-dummy.conf >/dev/null
+  $SUDO install -d /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
+  $SUDO tee /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml >/dev/null <<'DESK'
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="backdrop" type="empty" value="">
+    <property name="screen0" type="empty" value="">
+      <property name="monitor0" type="empty" value="">
+        <property name="workspace0" type="empty" value="">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xubuntu-wallpaper.png"/>
+        </property>
+      </property>
+      <property name="monitorVirtual-1" type="empty" value="">
+        <property name="workspace0" type="empty" value="">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xubuntu-wallpaper.png"/>
+        </property>
+      </property>
+    </property>
+  </property>
+</channel>
+DESK
+  printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' | $SUDO tee /etc/xdg/xfce4/helpers.rc >/dev/null
+  $SUDO tee /usr/local/bin/selkies-session >/dev/null <<'EOF'
+#!/bin/bash
+export DISPLAY="${DISPLAY:-:0}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+if [ ! -S "${XDG_RUNTIME_DIR}/pulse/native" ]; then
+  pipewire & pipewire-pulse & wireplumber &
+fi
+for i in $(seq 1 20); do
+  [ -S "${XDG_RUNTIME_DIR}/pulse/native" ] && break
+  sleep 0.5
+done
+exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
+  --enable-basic-auth=false \
+  --encoder=x264enc
+EOF
+  $SUDO chmod +x /usr/local/bin/selkies-session
+  $SUDO openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
+    -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt
+  $SUDO tee -a /etc/ssl/selkies.pem >/dev/null </tmp/sk.crt
+  rm /tmp/sk.crt
+  printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' |
+    $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
+  $SUDO systemctl enable selkies-tls
+  printf '[Desktop Entry]\nType=Application\nName=Selkies\nExec=selkies-session\n' |
+    $SUDO tee /etc/xdg/autostart/selkies.desktop >/dev/null
+  $SUDO chmod 644 /etc/xdg/autostart/selkies.desktop
+}
+
+chromium_files() {
+  for _ in $(seq 1 300); do
+    [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] && break
+    sleep 2
+  done
+  [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
+  if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
+    $SUDO install -d /opt/cloakbrowser
+    CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
+    $SUDO mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
+  fi
+  CRBIN=$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit)
+  [ -n "$CRBIN" ]
+  echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | $SUDO tee /etc/sysctl.d/99-chromium-userns.conf >/dev/null
+  $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
+  $SUDO chown -R "$LUSER": /usr/local/share/extensions
+  printf '#!/bin/sh\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" | $SUDO tee /usr/local/bin/chromium-wrapper >/dev/null
+  $SUDO chmod 755 /usr/local/bin/chromium-wrapper
+  for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
+  $SUDO install -d /usr/local/share/applications
+  printf '[Desktop Entry]\nVersion=1.0\nName=Chromium\nGenericName=Web Browser\nExec=/usr/local/bin/chromium --no-first-run %%u\nTerminal=false\nType=Application\nIcon=chromium\nCategories=Network;WebBrowser;\nMimeType=x-scheme-handler/http;x-scheme-handler/https;\nStartupWMClass=Chromium\n' |
+    $SUDO tee /usr/local/share/applications/chromium.desktop >/dev/null
+  $SUDO cp /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
+  $SUDO chmod 755 /usr/local/share/applications
+  $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
+  $SUDO install -d /etc/chromium/policies/managed
+  printf '{"RestoreOnStartup":4,"RestoreOnStartupURLs":["https://browserleaks.com/ip"]}\n' |
+    $SUDO tee /etc/chromium/policies/managed/startup.json >/dev/null
+  printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\n' | $SUDO tee /etc/xdg/mimeapps.list >/dev/null
+  UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
+  printf '[Default Applications]\nx-scheme-handler/http=chromium_chromium.desktop\nx-scheme-handler/https=chromium_chromium.desktop\nx-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop\n' | $SUDO tee "$UHOME/.config/mimeapps.list" >/dev/null
+  $SUDO chown "$LUSER": "$UHOME/.config/mimeapps.list"
+}
+
+apt_install_all() {
+  local -a pkgs=(
+    xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
+    xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core
+    python3-pip unzip socat libnspr4 libnss3
+    xfce4 xfce4-terminal thunar mousepad ristretto dbus-x11
+    pipewire pipewire-pulse wireplumber xubuntu-wallpapers
+  )
+  case "$ARCH" in
+  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
+  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
+  esac
+  if [ -f "/mnt/lima-provision/$DEB" ]; then
+    DEBSRC="/mnt/lima-provision/$DEB"
+  else
+    DEBSRC="/tmp/$DEB"
+  fi
+  $SUDO apt-get install -y --no-install-recommends "${pkgs[@]}" "$DEBSRC"
+  $SUDO dpkg --configure -a
+  $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
+    /etc/xdg/autostart/xscreensaver.desktop \
+    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
+  $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
+  $SUDO update-desktop-database /usr/local/share/applications || true
+}
+
+$SUDO install -d -m 755 /var/cache/apt/archives/partial
+
+$SUDO apt-get update >/tmp/apt.log 2>&1 &
+UP=$!
+selkies_deb >/tmp/selkdeb.log 2>&1 &
+SDB=$!
+chromium_dl >/tmp/cb.log 2>&1 &
+CB=$!
+write_configs
+wait_ok "$UP" /tmp/apt.log
+wait_ok "$SDB" /tmp/selkdeb.log
+apt_install_all
+wait_ok "$CB" /tmp/cb.log
+extensions_dl >/tmp/ext.log 2>&1
+chromium_files
+$SUDO systemctl set-default graphical.target
+$SUDO systemctl isolate graphical.target
+if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
+  $SUDO tar czf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
+    mv "$TARBALL.tmp" "$TARBALL"
+fi
+touch /var/tmp/desktop.done
