@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.242.2](https://github.com/raas-dev/configent/compare/1.242.1...1.242.2) (2026-09-21)
+
+### Fixes
+
+* **azd:** stop curl installer; manage azd via mise ([6db8d2f](https://github.com/raas-dev/configent/commit/6db8d2f220db51b59dd3168f40a9643400d17326))
+* **configent:** run flatpak installs detached ([e994687](https://github.com/raas-dev/configent/commit/e99468722ed467d92e32830a1a08b7362750ecc2))
+* **install_apps:** run brew install after cask setup ([23bcdad](https://github.com/raas-dev/configent/commit/23bcdad697730d6e2409ce7f518639c0e19c1882))
+* **install_apps:** run zsh and vundle setup detached ([4af93d5](https://github.com/raas-dev/configent/commit/4af93d54347a6430b21883f1346d8eb6efc5ece1))
+* **install_apps:** wait_batch before flatpak installs ([a62cc6e](https://github.com/raas-dev/configent/commit/a62cc6e7275a8fa8e4d5e9d8af89c893bb1bd491))
+* **lima:** bind limahome via cloud-init per-boot scripts ([4175dfa](https://github.com/raas-dev/configent/commit/4175dfae7882b75ddb969553f673ad9742c637b0))
+* **lima:** bind persistent limahome across reboots ([cca2dd5](https://github.com/raas-dev/configent/commit/cca2dd5a0f557154184d0562f7c75d47daa57806))
+* **lima:** drop quotes from macos video display ([8b2d668](https://github.com/raas-dev/configent/commit/8b2d6686cb0959e291c1890bd3d0aea61b1c4c83))
+* **lima:** seed limahome ssh authorized_keys ([6acc416](https://github.com/raas-dev/configent/commit/6acc416ebab2f1137f27940e2b3a092f6349d682))
+
 ## [1.242.1](https://github.com/raas-dev/configent/compare/1.242.0...1.242.1) (2026-09-20)
 
 ### Fixes
