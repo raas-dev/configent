@@ -211,6 +211,8 @@ v() {
       _lima_remove_nonexistent_mounts "$vm_name"
       # cache mounts are skipped w/ WARN when host dir absent — just create them
       mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,debian/apt-archives,cache,cargo,cloakbrowser,omp/plugins,pi/agent,rustup,npm,mise/downloads,xorg}
+      # dev only: ~/limahome is the persistent home backing (mounts in dev.yaml)
+      [ "${template%-*}" = dev ] && mkdir -p "$HOME/limahome"
       # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
       local template_file="$template"
       local vm_suffix=""
@@ -218,11 +220,6 @@ v() {
       *-qemu) template_file="${template%-qemu}" vm_suffix="qemu" ;;
       *-krunkit) template_file="${template%-krunkit}" vm_suffix="krunkit" ;;
       esac
-      # dev only: persistent home disk, create on first run (resize = truncate + resize2fs in guest)
-      [ "$template_file" = dev ] && {
-        limactl disk ls 2>/dev/null | awk 'NR>1{print $1}' | grep -qx limahome ||
-          limactl disk create limahome --size 40GiB
-      }
       local os_create_args=()
       if [ "$(uname -s)" = 'Darwin' ]; then
         # prefer socket_vmnet bridged (LAN access); macos + dev stay NAT, never on LAN

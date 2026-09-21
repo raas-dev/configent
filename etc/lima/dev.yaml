@@ -23,9 +23,13 @@ video:
   # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
   display: none
 
-#persistentHome: true  # implicit: named disk below survives `limactl delete`
+# home persists via ~/limahome host dir (mounts below), survives `limactl delete`
 
 mounts:
+  # guest home persistence — backed by host dir, survives `limactl delete`
+  - location: "~/limahome"
+    mountPoint: /mnt/lima-limahome
+    writable: true
   # apt package archives — per-distro (ubuntu)
   - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
@@ -34,10 +38,6 @@ mounts:
   - location: "~/.cache/lima-provision/xorg"
     mountPoint: /mnt/lima-provision
     writable: true
-
-# guest home persistence
-additionalDisks:
-  - name: limahome
 
 ssh:
   forwardAgent: true
@@ -52,12 +52,13 @@ env:
   MISE_PREFER_OFFLINE: "true"
 
 provision:
-  - mode: boot # every boot: bind persistent limahome disk over the lima user's home
+  - mode: boot # every boot: bind the persistent limahome mount over the lima user's home
     script: |
       #!/bin/sh
-      # lima formats+mounts the additionalDisk at /mnt/lima-limahome (no label).
-      # we bind-mount that over the user's home; content survives `limactl delete`.
-      # bootcmd runs before lima's disk-mount script; systemd-run blocks here (no
+      # persistent home on host ~/limahome, reverse-mounted here (standard
+      # mounts entry). we bind-mount it over the user's home; content
+      # survives `limactl delete`.
+      # bootcmd runs before lima sets up its mounts; systemd-run blocks here (no
       # dbus yet) and hangs the whole boot. nohup child may die at bootcmd exit —
       # that is fine, the system-mode provision script below redoes the bind.
       cat >/usr/local/sbin/limahome-bind.sh <<'EOF'
@@ -69,14 +70,12 @@ provision:
       MNT=/mnt/lima-limahome
       [ -n "$HOMEP" ] || exit 0
       i=0; until mountpoint -q "$MNT"; do sleep 2; i=$((i+1)); [ "$i" -lt 60 ] || exit 0; done
-      # disk starts blank; bootstrap (install.sh, user provision) builds home
-      # from the configent repo. only .ssh is seeded — cloud-init puts
-      # authorized_keys in HOMEP and lima needs it to ssh in.
+      # home dir starts blank (new host dir); bootstrap (install.sh, user
+      # provision) builds home from the configent repo. only .ssh is seeded —
+      # cloud-init puts authorized_keys in HOMEP and lima needs it to ssh in.
       if [ ! -f "$MNT/.ssh/authorized_keys" ]; then
         mkdir -p "$MNT/.ssh" && cp -a "$HOMEP/.ssh/." "$MNT/.ssh/"
       fi
-      # cosmetic: mkfs-made dir; fsck recreates if it ever reconnects orphans
-      rmdir "$MNT/lost+found" 2>/dev/null || true
       [ "$(stat -c %u "$MNT")" = "$(stat -c %u "$HOMEP")" ] || chown -R "$(stat -c %u "$HOMEP")":"$(stat -c %g "$HOMEP")" "$MNT"
       mountpoint -q "$HOMEP" || mount --bind "$MNT" "$HOMEP"
       EOF
@@ -87,7 +86,7 @@ provision:
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
-      # runs after lima's disk mounts: ensure persistent home bind (idempotent)
+      # runs after lima's mounts are up: ensure persistent home bind (idempotent)
       /usr/local/sbin/limahome-bind.sh || true
   - mode: system
     file: xorg/desktop.sh
@@ -96,26 +95,6 @@ provision:
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
       curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
-
-probes:
-  - description: "Xorg to be installed"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
-        echo >&2 "Xorg is not installed yet"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
-  - description: "Selkies to be installed"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
-        echo >&2 "Selkies is not installed yet"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
 
 message: |
   Selkies desktop (xorg + xfce + chromium):
