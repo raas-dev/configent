@@ -109,6 +109,6 @@ if [ "$SETUP_DOCKER" != 'false' ]; then
 fi
 
 # Flatpak
-if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
   $SUDO dnf install -y flatpak
 fi

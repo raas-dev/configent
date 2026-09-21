@@ -44,7 +44,7 @@ run_detached() {
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   run_detached "$bin_path/install_mise"
-  if [ -n "$GUI" ] && [ "$GUI" != 'false' ]; then
+  if [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ]; then
     "$bin_path/install_apps_cask"
     "$bin_path/setup_duti"
   fi
@@ -65,7 +65,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
     if command -v zypper >/dev/null; then
       run "$bin_path/install_apps_zypper"
     elif command -v apt-get >/dev/null; then
-      if [ -n "$GUI" ] && [ "$GUI" != 'false' ]; then
+      if [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ]; then
         "$bin_path/install_linux_desktop"
       fi
       run "$bin_path/install_apps_apt"
@@ -77,7 +77,7 @@ elif [ "$(uname -s)" = 'Linux' ]; then
       run "$bin_path/install_apps_apk"
     fi
   fi
-  if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+  if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
     wait_batch
     run_detached "$bin_path/install_apps_flatpak"
   fi

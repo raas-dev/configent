@@ -102,6 +102,6 @@ yay --noconfirm --needed -S git-extras
 #yay --noconfirm --needed -S ttf-ms-fonts
 
 # Flatpak
-if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
   $SUDO pacman --noconfirm --needed -S flatpak
 fi

@@ -97,6 +97,6 @@ $SUDO apt-get install -y universal-ctags
 #$SUDO apt-get install -y ttf-mscorefonts-installer
 
 # Flatpak
-if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
   $SUDO apt-get install -y flatpak
 fi

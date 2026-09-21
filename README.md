@@ -65,7 +65,7 @@ user with passwordless sudo.
 fork this repository, make changes and cURL your public fork.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
-explicitly pass `GUI=true` to the script. Flatpaks need `FLATPAKS=true`
+explicitly pass `SETUP_GUI=true` to the script. Flatpaks need `SETUP_FLATPAKS=true`
 additionally.
 
 ### Desktop

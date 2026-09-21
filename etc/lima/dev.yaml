@@ -93,7 +93,7 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GUI=true sh &
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | SETUP_GUI=true sh &
 
 probes:
   - description: "Xorg to be installed"

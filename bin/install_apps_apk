@@ -119,7 +119,7 @@ EOF
 fi
 
 # Flatpak
-if [ -n "$FLATPAKS" ] && [ "$FLATPAKS" != 'false' ]; then
+if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
   $SUDO apk add flatpak
 fi
 

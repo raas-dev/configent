@@ -20,12 +20,12 @@ TARGET_PATH="$HOME/configent"
 
 GIT_REF="${GIT_REF:-1.242.2}"
 
+export PARALLEL="${PARALLEL:-true}"
 export CANELEVATE="${CANELEVATE:-false}"
-export GUI="${GUI:-false}"
-export FLATPAKS="${FLATPAKS:-false}"
+export SETUP_GUI="${SETUP_GUI:-false}"
+export SETUP_FLATPAKS="${SETUP_FLATPAKS:-false}"
 export SETUP_DOCKER="${SETUP_DOCKER:-true}"
 export SETUP_PODMAN="${SETUP_PODMAN:-true}"
-export PARALLEL="${PARALLEL:-true}"
 
 ################################################################################
 
