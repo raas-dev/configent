@@ -126,6 +126,14 @@ else
     git -C "$TARGET_PATH" submodule update --init --recursive || true
     git -C "$TARGET_PATH" stash pop || true
   fi
-  cd "$TARGET_PATH" &&
-    . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+  cd "$TARGET_PATH" || exit 1
+  # skip bootstrap if HEAD unchanged since last SUCCESSFUL run (aborted runs
+  # don't record → retried next boot; some packages may be missing)
+  new_head=$(git -C "$TARGET_PATH" rev-parse HEAD)
+  if [ -f "$TARGET_PATH/.bootstrap.last" ] && [ "$(cat "$TARGET_PATH/.bootstrap.last" 2>/dev/null)" = "$new_head" ]; then
+    printf "No changes since last successful bootstrap (%s), skipping.\n" "$new_head"
+    exit 0
+  fi
+  . "$TARGET_PATH/bootstrap" && # 2> >(tee install_error.log >&2)
+    printf '%s\n' "$new_head" >"$TARGET_PATH/.bootstrap.last"
 fi

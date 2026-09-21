@@ -1,2 +1,3 @@
 .backup/
 __pycache__/
+.bootstrap.last
