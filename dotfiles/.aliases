@@ -211,7 +211,7 @@ v() {
       _lima_remove_nonexistent_mounts "$vm_name"
       # mounts are skipped w/ WARN when host dir absent — just create them
       case "$template" in
-        ubuntu* | k3s*)
+        ubuntu*)
           mkdir -p "$HOME/.cache/lima-provision/ubuntu/apt-archives" "$HOME/limahome" ;;
         dev*)
           mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,xorg} "$HOME/limahome" ;;

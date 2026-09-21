@@ -229,7 +229,7 @@ and `box` create and start the VM 'debian'.
 The host directory where the shim is run in is mounted read-write in the VM
 (unless it is `$HOME`).
 
-VM 'ubuntu' runs [k0s](https://k0sproject.io/) for testing on Kubernetes.
+VM 'ubuntu' runs [k3s](https://k3s.io/) for testing on Kubernetes.
 See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.

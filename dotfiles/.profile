@@ -324,7 +324,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
 
   # kubernetes
   if command -v kubectl >/dev/null; then
-    export KUBECONFIG="$HOME/.lima/default/kubeconfig.yaml:$HOME/.lima/ubuntu/kubeconfig.yaml:$HOME/.lima/k3s/kubeconfig.yaml:$HOME/.kube/config"
+    export KUBECONFIG="$HOME/.lima/default/kubeconfig.yaml:$HOME/.lima/ubuntu/kubeconfig.yaml:$HOME/.kube/config"
   fi
 fi
 
