@@ -14,7 +14,7 @@ memory: "8GiB" # default: "4GiB"
 #disk: "100GiB"   # default: "100GiB"
 
 video:
-  display: "default"
+  display: default
 
 mounts:
   - location: "~/Downloads"
