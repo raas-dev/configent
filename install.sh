@@ -59,6 +59,13 @@ if [ "$(uname -s)" = 'Linux' ]; then
       elif command -v apt-get >/dev/null; then
         $SUDO apt-get update
         $SUDO apt-get install -y git
+        # guest shells export LC_ALL=en_US.UTF-8 via dotfiles; generate early
+        if command -v locale-gen >/dev/null 2>&1; then
+          $SUDO locale-gen en_US.UTF-8 >/dev/null 2>&1 || true
+        else
+          $SUDO apt-get install -y locales &&
+            $SUDO locale-gen en_US.UTF-8 >/dev/null 2>&1 || true
+        fi
       elif command -v dnf >/dev/null; then
         $SUDO dnf check-update
         $SUDO dnf install -y git
