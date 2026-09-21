@@ -65,8 +65,8 @@ user with passwordless sudo.
 fork this repository, make changes and cURL your public fork.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
-explicitly pass `SETUP_GUI=true` to the script. Flatpaks need `SETUP_FLATPAKS=true`
-additionally.
+explicitly pass `SETUP_GUI=true` to the script. Flatpaks need
+`SETUP_FLATPAKS=true` additionally.
 
 ### Desktop
 
@@ -257,7 +257,8 @@ CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in `Dockerfile`
 If container was started as detached and successfully started up, docker logs
 are followed. Sending `^C` exits the log view and does not stop the container.
 
-If `-d` or `--detached` is not used, an interactive session is assumed and all arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
+If `-d` or `--detached` is not used, an interactive session is assumed and all
+arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
 `rc bash` starts Bash in the container. Exiting the shell stops the container.
 
 ⚠️: If container writes to filesystem, you must be in a VM writable directory.
