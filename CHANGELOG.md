@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.243.1](https://github.com/raas-dev/configent/compare/1.243.0...1.243.1) (2026-09-21)
+
+### Fixes
+
+* **install:** generate en_US.UTF-8 via /etc/locale.gen ([44c0c86](https://github.com/raas-dev/configent/commit/44c0c8645b3a90f897f4c2a2841e271d2cbd2a35))
+* **install:** install correct gnupg package ([ac85d37](https://github.com/raas-dev/configent/commit/ac85d375dff89c0938f8f797fe5cabd1d0eb95d7))
+
 ## [1.243.0](https://github.com/raas-dev/configent/compare/1.242.2...1.243.0) (2026-09-21)
 
 ### Features
