@@ -10,6 +10,7 @@
   },
   "footerSegments": {
     "cwd": true,
+    "hostname": true,
     "sessionName": true,
     "gitBranch": true,
     "gitStatus": true,
@@ -17,8 +18,9 @@
     "runtime": false,
     "context": true,
     "tokens": true,
-    "cost": true,
-    "extensionStatuses": true
+    "cost": false,
+    "extensionStatuses": true,
+    "capitalizeProviderName": false
   },
   "telemetry": {
     "enabled": true,
