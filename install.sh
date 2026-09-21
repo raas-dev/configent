@@ -58,10 +58,10 @@ if [ "$(uname -s)" = 'Linux' ]; then
         $SUDO zypper install -y git
       elif command -v apt-get >/dev/null; then
         printf 'Acquire::Languages "none";\nAcquire::ForceIPv4 "true";\n' |
-          sudo tee /etc/apt/apt.conf.d/99configent-speed >/dev/null
+          $SUDO tee /etc/apt/apt.conf.d/99configent-speed >/dev/null
         printf 'man-db man-db/auto-update boolean false\n' |
-          sudo debconf-set-selections
-        sudo rm -f /var/lib/man-db/auto-update
+          $SUDO debconf-set-selections
+        $SUDO rm -f /var/lib/man-db/auto-update
         $SUDO apt-get update
         $SUDO apt-get install -y git
         # guest shells export LC_ALL=en_US.UTF-8 via dotfiles; generate early.
