@@ -24,7 +24,6 @@ video:
   display: none
 
 mounts:
-
   - location: "~/configent"
     mountPoint: "{{.Home}}/configent"
     writable: true
