@@ -120,7 +120,6 @@ write_configs() {
   </property>
 </channel>
 DESK
-  printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' | $SUDO tee /etc/xdg/xfce4/helpers.rc >/dev/null
   $SUDO tee /usr/local/bin/selkies-session >/dev/null <<'EOF'
 #!/bin/bash
 export DISPLAY="${DISPLAY:-:0}"
@@ -137,10 +136,9 @@ exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
   --encoder=x264enc
 EOF
   $SUDO chmod +x /usr/local/bin/selkies-session
-  $SUDO openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
-    -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt
-  $SUDO tee -a /etc/ssl/selkies.pem >/dev/null </tmp/sk.crt
-  $SUDO rm /tmp/sk.crt
+  $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
+    -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
+    cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
   printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO systemctl enable selkies-tls
@@ -224,6 +222,7 @@ write_configs
 wait_ok "$UP" /tmp/apt.log
 wait_ok "$SDB" /tmp/selkdeb.log
 apt_install_all
+printf 'WebBrowser=chromium\nTerminalEmulator=debian-x-terminal-emulator\n' | $SUDO tee /etc/xdg/xfce4/helpers.rc >/dev/null
 wait_ok "$CB" /tmp/cb.log
 extensions_dl >/tmp/ext.log 2>&1
 chromium_files
