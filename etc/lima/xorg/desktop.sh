@@ -25,7 +25,7 @@ selkies_deb() { # pinned 2.0.0rc0 (ubuntu26.04 debs); cache or fetch
   [ -f "/mnt/lima-provision/$DEB" ] && return 0
   curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
     "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
-  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ # cache for next recreate
+  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true # cache for next recreate; mount may not be up yet
 }
 
 chromium_dl() { # ~198MB; tarball cache if present, else pip cloakbrowser

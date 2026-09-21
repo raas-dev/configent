@@ -23,52 +23,25 @@ video:
   # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
   display: none
 
+#persistentHome: true  # implicit: named disk below survives `limactl delete`
+
 mounts:
-  - location: "~/configent"
-    mountPoint: "{{.Home}}/configent"
-    writable: true
-  - location: "~/Downloads"
-    writable: true
   # apt package archives — per-distro (ubuntu)
   - location: "~/.cache/lima-provision/ubuntu/apt-archives"
     mountPoint: /var/cache/apt/archives
-    writable: true
-  # mise tool download archives
-  - location: "~/.cache/lima-provision/mise/downloads"
-    mountPoint: "{{.Home}}/.local/share/mise/downloads"
-    writable: true
-  # ~/.cargo — crates, registry, bin
-  - location: "~/.cache/lima-provision/cargo"
-    mountPoint: "{{.Home}}/.cargo"
-    writable: true
-  # npm registry cache
-  - location: "~/.cache/lima-provision/npm"
-    mountPoint: "{{.Home}}/.npm"
-    writable: true
-  # omp plugins (node_modules)
-  - location: "~/.cache/lima-provision/omp/plugins"
-    mountPoint: "{{.Home}}/.omp/plugins"
-    writable: true
-  # pi agent — npm packages + skills
-  - location: "~/.cache/lima-provision/pi/agent"
-    mountPoint: "{{.Home}}/.pi/agent"
-    writable: true
-  # rust toolchains
-  - location: "~/.cache/lima-provision/rustup"
-    mountPoint: "{{.Home}}/.rustup"
-    writable: true
-  # guest ~/.cache — uv, pip, go-build, …
-  - location: "~/.cache/lima-provision/cache"
-    mountPoint: "{{.Home}}/.cache"
-    writable: true
-  # cloakbrowser Stealth Chromium
-  - location: "~/.cache/lima-provision/cloakbrowser"
-    mountPoint: "{{.Home}}/.cloakbrowser"
     writable: true
   # selkies deb + chromium-extensions
   - location: "~/.cache/lima-provision/xorg"
     mountPoint: /mnt/lima-provision
     writable: true
+
+# guest home persistence: `limactl delete dev` removes only ~/.lima/dev,
+# named disks live in ~/.lima/_disks/ and survive. Create once:
+#   limactl disk create limahome --size 20GiB
+# provision below formats it on first use, seeds it from the freshly created
+# home dir, and mounts it over the lima user's home via fstab.
+additionalDisks:
+  - name: limahome
 
 ssh:
   forwardAgent: true
@@ -83,17 +56,45 @@ env:
   MISE_PREFER_OFFLINE: "true"
 
 provision:
+  - mode: boot # every boot: bind persistent limahome disk over the lima user's home
+    script: |
+      #!/bin/sh
+      # lima formats+mounts the additionalDisk at /mnt/lima-limahome (no label).
+      # we bind-mount that over the user's home; content survives `limactl delete`.
+      # bootcmd runs before lima's disk-mount script; systemd-run blocks here (no
+      # dbus yet) and hangs the whole boot. nohup child may die at bootcmd exit —
+      # that is fine, the system-mode provision script below redoes the bind.
+      cat >/usr/local/sbin/limahome-bind.sh <<'EOF'
+      #!/bin/sh
+      # lima sets guest user uid to the host uid (e.g. 501) — do not guess by
+      # uid>=1000; lima.env holds the authoritative name/home.
+      # (string-split to avoid the literal: lima warns on lima-cidata env refs in scripts)
+      HOMEP=$(sed -n "s/^LIMA_""CIDATA""_HOME=//p" /mnt/lima-cidata/lima.env)
+      MNT=/mnt/lima-limahome
+      [ -n "$HOMEP" ] || exit 0
+      i=0; until mountpoint -q "$MNT"; do sleep 2; i=$((i+1)); [ "$i" -lt 60 ] || exit 0; done
+      if [ ! -e "$MNT/.limahome-seeded" ]; then
+        cp -a "$HOMEP/." "$MNT/" && touch "$MNT/.limahome-seeded"
+      fi
+      [ "$(stat -c %u "$MNT")" = "$(stat -c %u "$HOMEP")" ] || chown -R "$(stat -c %u "$HOMEP")":"$(stat -c %g "$HOMEP")" "$MNT"
+      mountpoint -q "$HOMEP" || mount --bind "$MNT" "$HOMEP"
+      EOF
+      chmod +x /usr/local/sbin/limahome-bind.sh
+      nohup /usr/local/sbin/limahome-bind.sh >/dev/null 2>&1 &
+      exit 0
   - mode: system
     script: |
       #!/bin/sh
       sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+      # runs after lima's disk mounts: ensure persistent home bind (idempotent)
+      /usr/local/sbin/limahome-bind.sh || true
   - mode: system
     file: xorg/desktop.sh
   - mode: user
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      "${HOME}/configent/install.sh" &
+      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | sh &
 
 probes:
   - description: "Xorg to be installed"
