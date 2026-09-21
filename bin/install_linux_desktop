@@ -47,7 +47,9 @@ selkies_deb() {
 
 chromium_dl() {
   if [ -f "$TARBALL" ]; then
-    $SUDO tar xzf "$TARBALL" -C / && touch /tmp/cb.ok /tmp/ext.ok
+    $SUDO tar xzf "$TARBALL" -C / &&
+      $SUDO chown -R "$LUSER": /usr/local/share/extensions &&
+      touch /tmp/cb.ok /tmp/ext.ok
   else
     for _ in $(
       seq 1 300
@@ -85,6 +87,7 @@ extensions_dl() {
     $SUDO unzip -oq "/tmp/$name.zip" -d "/usr/local/share/extensions/$name"
     $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
   done
+  $SUDO chown -R "$LUSER": /usr/local/share/extensions
   touch /tmp/ext.ok
 }
 
@@ -148,9 +151,9 @@ EOF
 }
 
 chromium_files() {
-  for _ in $(seq 1 300); do
+  for _ in $(seq 1 600); do
     [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] && break
-    sleep 2
+    sleep 0.5
   done
   [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
   if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
@@ -162,7 +165,6 @@ chromium_files() {
   [ -n "$CRBIN" ]
   echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | $SUDO tee /etc/sysctl.d/99-chromium-userns.conf >/dev/null
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
-  $SUDO chown -R "$LUSER": /usr/local/share/extensions
   printf '#!/bin/sh\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" | $SUDO tee /usr/local/bin/chromium-wrapper >/dev/null
   $SUDO chmod 755 /usr/local/bin/chromium-wrapper
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
@@ -229,7 +231,8 @@ chromium_files
 $SUDO systemctl set-default graphical.target
 $SUDO systemctl isolate graphical.target
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
-  $SUDO tar czf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
-    mv "$TARBALL.tmp" "$TARBALL"
+  # warm cache for future VMs; do not block desktop.done
+  ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
+    mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
 fi
 touch /var/tmp/desktop.done
