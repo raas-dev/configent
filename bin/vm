@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+# limactl wrapper: vm <up|shell|down|delete|prune> [template] [name] [lima_args]
+#
+# default mode (alias vv): dev instance — injects .env.GIT_REF=main and
+#   --mount=~/configent when the instance is being created.
+# --release (alias v): plain limactl, no dev extras.
+
+_lima_remove_nonexistent_mounts() {
+  local vm_name="${1:-default}"
+  local lima_instance_yaml="$HOME/.lima/$vm_name/lima.yaml"
+  [ -f "$lima_instance_yaml" ] || return 0
+  awk -v home="$HOME" '
+    /^[a-zA-Z]/ { in_mounts = (/^mounts:/) }
+    in_mounts && /^- location: / {
+      loc = substr($0, 13)
+      gsub(/^"|"$/, "", loc)
+      sub(/^~/, home, loc)
+      cmd = "test -d \"" loc "\""
+      if (system(cmd) != 0) { skip=1; next }
+    }
+    skip && /^  / { next }
+    { skip=0; print }
+  ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
+    mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+}
+
+vm_release() {
+  if [ -n "$1" ]; then
+    local command="$1"
+    shift
+  else
+    local command="help"
+  fi
+
+  if [ -n "$1" ]; then
+    local template="$1"
+    shift
+    local vm_name="$template"
+  else
+    local template="debian"
+    local vm_name="default"
+  fi
+
+  for arg in "$@"; do
+    if [[ "$arg" == "--name="* ]]; then
+      vm_name="${arg#--name=}"
+      break
+    elif [[ "$arg" == "--name" ]]; then
+      shift
+      vm_name="$1"
+      break
+    fi
+  done
+
+  case "$command" in
+  up | start)
+    if ! limactl list --json |
+      grep -q "\"$vm_name\".*\"status\": *\"Running\""; then
+      _lima_remove_nonexistent_mounts "$vm_name"
+      # mounts are skipped w/ WARN when host dir absent — just create them
+      case "$template" in
+      ubuntu*)
+        mkdir -p "$HOME/.cache/lima-provision/ubuntu/apt-archives" "$HOME/limahome"
+        ;;
+      dev*)
+        mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,xorg} "$HOME/limahome"
+        ;;
+      debian*)
+        mkdir -p "$HOME/.cache/lima-provision/debian/apt-archives" "$HOME/limahome"
+        ;;
+      esac
+      # -qemu / -krunkit suffix on any template: reuse base yaml; vmType via limactl flags
+      local template_file="$template"
+      local vm_suffix=""
+      case "$template" in
+      *-qemu) template_file="${template%-qemu}" vm_suffix="qemu" ;;
+      *-krunkit) template_file="${template%-krunkit}" vm_suffix="krunkit" ;;
+      esac
+      local os_create_args=()
+      if [ "$(uname -s)" = 'Darwin' ]; then
+        # prefer socket_vmnet bridged (LAN access); macos + dev stay NAT, never on LAN
+        local net_arg=""
+        if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+          case "$template_file" in macos | dev) ;; *) net_arg="--network=lima:bridged" ;; esac
+        fi
+        case "$vm_suffix" in
+        # qcow2 disk → limactl snapshot works; no rosetta (vz-only); net fallback = slirp
+        qemu) os_create_args=(--vm-type=qemu) ;;
+        # libkrun/HVF, arm64 only, experimental; net fallback = gvisor usernet
+        krunkit) os_create_args=(--vm-type=krunkit --mount-type=virtiofs) ;;
+        *)
+          os_create_args=(--vm-type=vz --rosetta)
+          [ -n "$net_arg" ] || os_create_args+=(--network=vzNAT)
+          ;;
+        esac
+        [ -n "$net_arg" ] && os_create_args+=("$net_arg")
+      fi
+      limactl start "$HOME/.config/configent/lima/$template_file.yaml" \
+        --name "$vm_name" --tty=false \
+        "${os_create_args[@]}" \
+        --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
+        --set=".env.EMAIL = \"$EMAIL\"" \
+        --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
+        --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" \
+        "$@" ||
+        limactl start "$vm_name" \
+          --tty=false \
+          "$@"
+    fi
+    limactl shell "$vm_name"
+    ;;
+  shell | run | exec | s)
+    [ "$1" = "--" ] && shift
+    limactl shell "$vm_name" "$@"
+    ;;
+  down | stop)
+    limactl stop "$vm_name" --force
+    ;;
+  delete | del | rm)
+    limactl stop "$vm_name" --force
+    limactl delete "$vm_name" --force
+    ;;
+  prune)
+    limactl prune
+    ;;
+  *)
+    echo "Usage: vm [--release] <up|shell|down|delete> [template] [vm_name] [lima_args]"
+    echo ""
+    limactl list 2>/dev/null
+    ;;
+  esac
+}
+
+# dev wrapper (default mode): GIT_REF=main + mount configent on create
+vm_dev() {
+  if [[ "$1" == "up" || "$1" == "start" ]]; then
+    local vm_name="debian"
+    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
+      vm_name="default"
+    else
+      vm_name="$2"
+    fi
+    local args=("${@:2}")
+    local i
+    for ((i = 0; i < ${#args[@]}; i++)); do
+      local a="${args[i]}"
+      if [[ "$a" == "--name="* ]]; then
+        vm_name="${a#--name=}"
+        break
+      elif [[ "$a" == "--name" ]]; then
+        vm_name="${args[i + 1]}"
+        break
+      fi
+    done
+    local dev_mount=()
+    if ! limactl list "$vm_name" &>/dev/null; then
+      dev_mount=(--mount="~/configent")
+    fi
+
+    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
+      # Check if user already specified --name
+      local has_name=false
+      for arg in "${@:2}"; do
+        if [[ "$arg" == "--name="* || "$arg" == "--name" ]]; then
+          has_name=true
+          break
+        fi
+      done
+      if [ "$has_name" = false ]; then
+        vm_release "$1" debian --name=default "${@:2}" \
+          --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+      else
+        vm_release "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+      fi
+    else
+      vm_release "$@" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+    fi
+  else
+    vm_release "$@"
+  fi
+}
+
+if [ "$1" = "--release" ]; then
+  shift
+  vm_release "$@"
+else
+  vm_dev "$@"
+fi

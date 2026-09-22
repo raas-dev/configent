@@ -291,17 +291,10 @@ You can expose `PORT` for servers, e.g. `PORT=8000 n python3 -m http.server`.
 
 ## ⚙️ VMs
 
-Use alias `v` for managing
-[Lima](https://github.com/lima-vm/lima) VMs for various Linux distros.
+Use `vm` for managing [Lima](https://github.com/lima-vm/lima) VMs for various
+Linux distros.
 
 VMs are provisioned by [cloud-init](https://cloudinit.readthedocs.io/en/latest/)
 on boot by pulling and running `install.sh` from this repository's main branch.
-
-⚠️: Regardless of pulling main, the version is hardcoded in `install.sh`
-and is only updated by `release.sh`.
-
-You may willingly run the installer from the latest commit by passing `GIT_REF`:
-
-    curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
 See `CONTRIBUTING.md` for more info on that.
