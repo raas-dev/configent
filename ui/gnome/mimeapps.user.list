@@ -1,4 +1,0 @@
-[Default Applications]
-x-scheme-handler/http=chromium_chromium.desktop
-x-scheme-handler/https=chromium_chromium.desktop
-x-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop

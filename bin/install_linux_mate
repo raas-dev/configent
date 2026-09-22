@@ -253,7 +253,7 @@ apt_install_core() {
     ayatana-indicator-application                     # system tray daemon
     mate-terminal pluma                               # terminal + text editor
     at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 # full a11y
-    chromium dconf-cli polkitd                        # browser + dconf + polkit
+    dconf-cli polkitd                                 # browser + dconf + polkit
     # polkitd user must exist before we create the LUSER below; else polkit
     # 217/USER crash-loops → panel blocks 25s×2 on D-Bus timeouts.
     pipewire pipewire-pulse wireplumber # audio (selkies-session)

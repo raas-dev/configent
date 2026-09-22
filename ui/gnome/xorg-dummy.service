@@ -1,9 +1,0 @@
-[Unit]
-Description=Xorg dummy :0
-
-[Service]
-ExecStart=/usr/bin/Xorg :0 -noreset
-Restart=on-failure
-
-[Install]
-WantedBy=graphical.target
