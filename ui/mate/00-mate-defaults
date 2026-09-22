@@ -65,7 +65,7 @@ sort-directories-first=true
 automount-open=false
 
 [org/mate/caja/icon-view]
-default-use-tighter-layout=true
+default-use-tighter-layout=false
 
 # Desktop icon font: stock Ubuntu 11 is too big on a 1280×720 selkies canvas.
 [org/mate/caja/desktop]
