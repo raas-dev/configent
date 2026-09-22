@@ -1,7 +1,5 @@
 # Contributing
 
-Kindly create an [issue](https://github.com/raas-dev/configent/issues) first.
-
 ## Guidelines
 
 1. Do not write anything in installation scripts that is not POSIX compatible.
@@ -12,16 +10,16 @@ Kindly create an [issue](https://github.com/raas-dev/configent/issues) first.
 
 ## Testing
 
-Use alias `vv` for creating
+Use alias `vm` for creating
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-For each VM's cloud-init, alias `vv` sets installer to use the last commit:
+For each VM's cloud-init, alias `vm` sets installer to use the last commit:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
 If `GIT_REF` is not set, the installer uses version hardcoded in `install.sh`.
 
-For testing before commit, alias `vv` also mounts `$HOME/configent` read-only.
+For testing before commit, alias `vm` also mounts `$HOME/configent` read-only.
 
 ## Pre-commit
 
@@ -41,8 +39,8 @@ See `.semgrepignore` in repository root. Semgrep also supports inline ignores.
 ## Known issues
 
 - Lima: Alpine Linux (as of 2026-09)
-  - musl built binaries for apps may not be available
-    - install using `apk` or try compiling from source
+  - musl built binaries for apps may not be available via mise
+    - won't fix: install broken ones using `apk` or try compiling from source
 
 ```
 - [APP]: [OS AND VERSION] / [ON WHICH ARCH] (as of [LAST CHECKED DATE])
