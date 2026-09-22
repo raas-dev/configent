@@ -1,7 +1,10 @@
 [Unit]
-Description=MATE session on :0
+Description=MATE desktop session on :0 (always-on, display-manager-independent)
+After=xorg-dummy.service
+Wants=network-online.target
 
 [Service]
+User=__LUSER__
 Environment=DISPLAY=:0
 Environment=XDG_CURRENT_DESKTOP=MATE
 Environment=XDG_SESSION_DESKTOP=mate
@@ -10,6 +13,7 @@ ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"
 ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY
 ExecStart=/usr/bin/mate-session
 Restart=on-failure
+RestartSec=2
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

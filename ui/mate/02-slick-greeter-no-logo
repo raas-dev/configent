@@ -1,7 +1,0 @@
-# Login / lock screen: no Ubuntu MATE logo, just the wallpaper + hostname.
-# ubuntu-mate-default-settings paints a logo banner on the wallpaper by default;
-# users hate it.
-[org/mate/slick-greeter]
-logo=''
-other-monitors-logo=''
-play-ready-sound=false

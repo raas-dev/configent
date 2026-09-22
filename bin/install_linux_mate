@@ -35,15 +35,9 @@ wait_ok() {
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
-LHOME=$(getent passwd "$LUSER" | cut -d: -f6)
-UHOME=$LHOME
+UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
 LUID=$(id -u "$LUSER")
-if [ "$(id -u)" = 0 ]; then
-  AS_USER=(runuser -u "$LUSER" --)
-else
-  AS_USER=()
-fi
 
 selkies_deb() {
   case "$ARCH" in
@@ -98,17 +92,9 @@ extensions_dl() {
 }
 
 write_configs() {
-  # mate-session also requires the systemd user manager on the session bus
-  # (org.freedesktop.systemd1); dbus-run-session's private bus lacks it and
-  # mate-session aborts. Linger + user unit on the real user bus.
   $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
   $SUDO loginctl enable-linger "$LUSER"
-  $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$LHOME/.config/systemd/user"
-  $SUDO install -m 644 "$UI/mate-session.service" \
-    "$LHOME/.config/systemd/user/mate-session.service"
-  $SUDO chown "$LUSER:" "$LHOME/.config/systemd/user/mate-session.service"
-  UENV=(env XDG_RUNTIME_DIR="/run/user/$LUID" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$LUID/bus" DISPLAY=:0)
-  "${AS_USER[@]}" "${UENV[@]}" systemctl --user enable mate-session.service
+  $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$UHOME/.config/systemd/user"
   $SUDO systemctl enable xorg-dummy
   $SUDO install -d /etc/X11/xorg.conf.d
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -120,8 +106,22 @@ write_configs() {
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
   $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
   $SUDO systemctl enable selkies-tls
-  $SUDO install -d /etc/xdg/autostart
-  $SUDO install -m 644 "$UI/autostart-selkies.desktop" /etc/xdg/autostart/selkies.desktop
+  # Always-on selkies: systemd unit runs selkies-session as the user the
+  # moment xorg-dummy is up — independent of any display-manager / MATE
+  # login. Replaces the XDG autostart .desktop, which only fires inside a
+  # live MATE session.
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+    "$UI/selkies-autostart.service" >/tmp/sa.service
+  $SUDO install -m 644 /tmp/sa.service /etc/systemd/system/selkies-autostart.service
+  $SUDO systemctl enable selkies-autostart
+  # Same pattern for MATE session: system unit, user-scoped, no DM required.
+  sed -e "s|__LUSER__|$LUSER|g" "$UI/mate-autostart.service" >/tmp/ma.service
+  $SUDO install -m 644 /tmp/ma.service /etc/systemd/system/mate-autostart.service
+  $SUDO systemctl enable mate-autostart
+  $SUDO rm -f /tmp/sa.service /tmp/ma.service
+  # Old XDG autostart .desktop would double-start selkies when MATE also
+  # comes up. Remove if present from a prior install.
+  $SUDO rm -f /etc/xdg/autostart/selkies.desktop
 }
 
 chromium_files() {
@@ -145,7 +145,6 @@ chromium_files() {
   [ -f "$UHOME/.config/chromium/Default/Preferences" ] ||
     $SUDO install -m 644 -o "$LUSER" -g "$LUSER" "$SEED" \
       "$UHOME/.config/chromium/Default/Preferences"
-  $SUDO chmod 755 /usr/local/bin/chromium-wrapper
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
   $SUDO install -d /usr/local/share/applications
   $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
@@ -157,16 +156,16 @@ chromium_files() {
   $SUDO cp /usr/local/share/applications/chromium.desktop "$UHOME/Desktop/"
   $SUDO chmod 755 "$UHOME/Desktop/chromium.desktop"
   $SUDO chown "$LUSER": "$UHOME/Desktop/chromium.desktop"
-  # install terminal .desktop first, then desktop shortcuts
-  $SUDO install -m 644 "$UI/mate-terminal.desktop" \
-    /usr/local/share/applications/mate-terminal.desktop
+  # mate-terminal ships in apt at /usr/share/applications/mate-terminal.desktop.
+  # Copy it to the desktop so it shows up as a clickable icon there.
+  $SUDO cp /usr/share/applications/mate-terminal.desktop "$UHOME/Desktop/"
+  $SUDO chmod 755 "$UHOME/Desktop/mate-terminal.desktop"
+  $SUDO chown "$LUSER": "$UHOME/Desktop/mate-terminal.desktop"
   # AT-SPI2 master switch is pinned in 00-mate-defaults
   # ([org/gnome/desktop/interface] toolkit-accessibility=true). The
   # user-db cache is warm by the time autostart runs, so no .desktop
   # needed here.
   # browser autostart intentionally removed — launch manually; profile restores session
-  $SUDO chmod 755 /usr/local/share/applications
-  $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
   $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO install -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
@@ -175,29 +174,21 @@ chromium_files() {
   # session mid-stream breaks the user. webtop/docker-webtop does the same.
   $SUDO rm -f /etc/xdg/autostart/mate-power-manager.desktop \
     /etc/xdg/autostart/mate-screensaver.desktop \
-    /etc/xdg/autostart/nemo-desktop.desktop \
-    /usr/bin/mate-screensaver 2>/dev/null || true
+    /etc/xdg/autostart/nemo-desktop.desktop 2>/dev/null || true
 
-  # ubuntu-mate-default-settings only ships slick-greeter config + a panel
-  # layout *name*; it does NOT pin default-layout to that layout, does NOT
-  # set the dark theme/icon set per-user, and does NOT pick a wallpaper.
-  # Without these overrides, first login paints an empty bottom panel with
-  # the green Yaru-MATE-light theme. Fix that here, once, system-wide.
+  # dconf system-db override: a single keyfile under /etc/dconf/db/local.d/
+  # rewrites every /org/mate, /org/gtk, /org/gnome/desktop value we care
+  # about at first login. The keyfile is captured live (`dconf dump`) from
+  # a tuned VM; re-dump to refresh after tweaks, don't hand-edit.
   $SUDO install -d /etc/dconf/profile /etc/dconf/db/local.d
   $SUDO tee /etc/dconf/profile/user >/dev/null <<'EOF'
 user-db:user
 system-db:local
 EOF
-  # dconf keyfiles live in ui/mate/ — install them as /etc/dconf/db/local.d/
-  # files and let dconf compile. No inline heredocs.
   $SUDO install -m 644 "$UI/00-mate-defaults" /etc/dconf/db/local.d/00-mate-defaults
-  $SUDO install -m 644 "$UI/01-desktop-icons" /etc/dconf/db/local.d/01-mate-desktop-icons
-  $SUDO install -m 644 "$UI/02-slick-greeter-no-logo" /etc/dconf/db/local.d/02-slick-greeter-no-logo
 
-  # ubuntu-mate-default-settings only ships the dark theme + wallpaper as
-  # dconf overrides; the panel layout (clock, trashcan, ordering) comes from
-  # /usr/share/mate-panel/layouts/ubuntu-mate.layout. Ship our edited file
-  # over the stock one so fresh installs get the no-trashan + clock layout.
+  # Panel layout (clock/trashcan/ordering) lives outside dconf, under
+  # /usr/share/mate-panel/layouts/. Ship our edited file over the stock one.
   $SUDO install -m 644 "$UI/ubuntu-mate.layout" \
     /usr/share/mate-panel/layouts/ubuntu-mate.layout
 
@@ -330,16 +321,10 @@ chromium_files
 $SUDO systemd-sysusers
 log "services starting"
 $SUDO systemctl set-default graphical.target
-$SUDO systemctl start xorg-dummy.service selkies-tls.service
-# user manager starts async after enable-linger; wait for its bus, then session
-for _ in $(seq 1 30); do
-  [ -S "/run/user/$LUID/bus" ] && break
-  sleep 1
-done
+$SUDO systemctl start xorg-dummy.service selkies-tls.service selkies-autostart.service mate-autostart.service
 # Marco compositing-manager disabled in 00-mate-defaults
 # ([org/mate/Marco/general]) — applies to fresh user DB at first login.
 # Existing users keep whatever MATE's user-DB already wrote.
-"${AS_USER[@]}" "${UENV[@]}" systemctl --user start mate-session.service
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   # warm cache for future VMs; do not block desktop.done
   ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&

@@ -1,21 +1,31 @@
-# MATE desktop defaults — applies to every user at first login.
-# Sourced from webtop/docker-webtop (ubuntu-mate branch) + corrected for the
-# gaps ubuntu-mate-default-settings leaves behind.
+# MATE desktop defaults — captured live from a running VM with “dconf dump /org/mate/"
+# followed by /org/gtk/ and /org/gnome/desktop/. Path prefixes reattached
+# so this file load-checks under a system-db (`sudo dconf update` sees it).
+# Edit settings live via dconf-editor / mate-control-center + SettingsDaemon,
+# then re-run the dump command in bin/install_linux_mate to refresh.
+#
+# Excluded on purpose:
+#   [caja/window-state] geometry  — per-display, breaks on resize
+#   panel position/x/y/size/expand — pinned by ubuntu-mate.layout
 
 [org/mate/Marco/general]
 compositing-manager=false
-titlebar-font='Ubuntu Bold 10'
 theme='ClearlooksRe'
+titlebar-font='Ubuntu Bold 10'
 
+[org/mate/NotificationDaemon]
+do-not-disturb=true
+sound-enabled=false
+
+[org/mate/SettingsDaemon/plugins/background]
+active=false
 
 [org/mate/background]
-primary-color='#3C3B37'
-secondary-color='#3C3B37'
 color-shading-type='solid'
-# Ship our own: gocemitevski/ubuntu-mate-wallpapers Radioactive no-logo.
-# All -wallpapers-* apt pkgs removed — only this file is installed.
 picture-filename='/usr/share/backgrounds/wallpaper-radioactive.jpg'
 picture-options='zoom'
+primary-color='#3C3B37'
+secondary-color='#3C3B37'
 
 [org/mate/background/desktop-backgrounds/0]
 filename='/usr/share/backgrounds/wallpaper-radioactive.jpg'
@@ -23,149 +33,294 @@ options='zoom'
 primary-color='#3C3B37'
 secondary-color='#3C3B37'
 
-[org/mate/desktop/interface]
-gtk-theme='Yaru-olive-dark'
-icon-theme='Yaru-olive-dark'
-
-# Panel clock: show seconds + date.
-# Fonts live on org.gnome.desktop.interface (path /org/gnome/desktop/interface),
-# NOT org.mate.interface (path /org/mate/desktop/interface). Earlier drafts
-# put them in [org/mate/desktop/interface] and dconf wrote them to a path
-# no schema reads, so fresh users got the upstream 'Sans 10' default.
-[org/gnome/desktop/interface]
-font-name='Ubuntu 10'
-document-font-name='Ubuntu 10'
-monospace-font-name='Terminess Nerd Font Mono 11'
-clock-show-seconds=true
-clock-show-date=true
-# AT-SPI2 master switch. Without this, GTK widgets are invisible to Orca.
-toolkit-accessibility=true
-[org/mate/panel/objects/clock/prefs]
-# Path MUST be /objects/clock/prefs (the live applet), not
-# /applets/clock_applet/prefs (a no-op relocatable path).
-show-seconds=true
-show-date=true
-# Custom format is mandatory: the preset '24-hour' ignores show-seconds.
-format='custom'
-custom-format='%a %d %b  %H:%M:%S'
-
-[org/mate/caja/preferences]
-show-desktop-icons=true
-# Show foo~ backup files. Upstream default already true; pinned for VM
-# recreate + grep-ability.
-show-backup-files=true
-# Arrange items by type; tighter (compact) layout for icon view.
-default-sort-order='type'
-sort-directories-first=true
-
-# Don't pop a Caja window when removable media gets inserted.
-# Drives still auto-mount (automount=true), the icon just stays in the side
-# panel until the user clicks it.
-[org/mate/media-handling]
-automount-open=false
+[org/mate/caja/desktop]
+computer-icon-visible=true
+font='Ubuntu 10'
+home-icon-visible=true
+trash-icon-visible=true
+volumes-visible=true
 
 [org/mate/caja/icon-view]
 default-use-tighter-layout=false
 
-# Desktop icon font: stock Ubuntu 11 is too big on a 1280×720 selkies canvas.
-[org/mate/caja/desktop]
-font='Ubuntu 10'
+[org/mate/caja/list-view]
+default-column-order=['name', 'size', 'type', 'date_modified', 'date_accessed', 'date_created', 'extension', 'group', 'where', 'mime_type', 'octal_permissions', 'owner', 'permissions', 'selinux_context', 'size_on_disk']
+default-visible-columns=['name', 'size', 'type', 'date_modified']
 
-# mate-terminal default profile. Built-in 'gray-on-black' scheme gives black
-# bg + light gray fg. The 16-color palette is pinned to Tango (the standard
-# 16-color Linux console palette) so colorful output (ls, gcc, git) reads
-# correctly. fg/bg are NOT pinned here — scheme's defaults win. System
-# monospace font, I-beam, blink on, 120×35 custom size, silent bell,
-# auto-copy selection to clipboard, unlimited scrollback. font key is the
-# fallback if use-system-font is off.
-[org/mate/terminal/profiles/default]
-scheme='gray-on-black'
-use-theme-colors=false
-palette='#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'
-use-system-font=false
-silent-bell=true
-copy-selection=true
-cursor-shape='ibeam'
-cursor-blink-mode='on'
-allow-bold=true
-use-custom-default-size=true
-default-size-columns=120
-default-size-rows=35
-scrollback-unlimited=true
-font='Terminess Nerd Font Mono 11'
+[org/mate/caja/preferences]
+default-sort-order='type'
+show-backup-files=true
+show-desktop-icons=true
+sort-directories-first=true
 
-# GTK file chooser: show dotfiles by default.
-[org/gtk/settings/file-chooser]
-show-hidden=true
-[org/gtk/file-chooser]
-show-hidden=true
+# ponytail: window geometry is ephemeral
+[org/mate/desktop/accessibility/keyboard]
+bouncekeys-beep-reject=true
+bouncekeys-delay=300
+bouncekeys-enable=false
+enable=false
+feature-state-change-beep=false
+mousekeys-accel-time=1200
+mousekeys-enable=false
+mousekeys-init-delay=160
+mousekeys-max-speed=750
+slowkeys-beep-accept=true
+slowkeys-beep-press=true
+slowkeys-beep-reject=false
+slowkeys-delay=300
+slowkeys-enable=false
+stickykeys-enable=false
+stickykeys-latch-to-lock=true
+stickykeys-modifier-beep=true
+stickykeys-two-key-off=true
+timeout=120
+timeout-enable=false
+togglekeys-enable=false
 
-# Taller menu bar — default 24 leaves no breathing room next to app icons.
-# Both panels span full width (expand=true) so neither renders ~70% wide.
-# Panel schema: relocatable per-toplevel id. Real path mate-panel writes
-# to is /toplevels/<id> (note trailing 's'). Earlier drafts used the
-# singular /toplevel/<id> and every panel-size write was a silent no-op
-# — the bottom panel rendered without expand and looked ~70% wide.
-[org/mate/panel/toplevels/top]
-size=32
-expand=true
-auto-hide=false
-[org/mate/panel/toplevels/bottom]
-size=32
-expand=true
-auto-hide=false
+[org/mate/desktop/applications/terminal]
+exec='mate-terminal'
+
+[org/mate/desktop/background]
+color-shading-type='solid'
+picture-filename='/usr/share/backgrounds/wallpaper-radioactive.jpg'
+picture-options='zoom'
+primary-color='rgb(60,59,55)'
+secondary-color='rgb(60,59,55)'
+
+[org/mate/desktop/font-rendering]
+antialiasing='rgba'
+dpi=120.0
+hinting='slight'
+
+[org/mate/desktop/interface]
+document-font-name='Ubuntu 10'
+font-name='Ubuntu 10'
+gtk-color-scheme='tooltip_fg_color:#f7f7f7\ntooltip_bg_color:#353535'
+gtk-decoration-layout=':minimize,maximize,close'
+gtk-enable-primary-paste=false
+gtk-theme='Yaru-olive-dark'
+icon-theme='Yaru-olive-dark'
+monospace-font-name='Terminess Nerd Font Mono Bold 11'
+window-scaling-factor=1
+
+[org/mate/desktop/media-handling]
+automount-open=false
+
+[org/mate/desktop/peripherals/keyboard]
+bell-mode='off'
+
+[org/mate/desktop/peripherals/mouse]
+accel-profile='default'
+cursor-theme='Yaru'
+middle-button-enabled=false
+
+[org/mate/desktop/session]
+idle-delay=10
+session-start=1790118550
+
+[org/mate/desktop/sound]
+event-sounds=true
+input-feedback-sounds=false
+theme-name='__no_sounds'
+
+[org/mate/marco/general]
+action-double-click-titlebar='toggle_maximize'
+button-layout=':minimize,maximize,close'
+compositing-manager=false
+theme='ClearlooksRe'
+titlebar-font='Ubuntu Bold 10'
+
+[org/mate/media-handling]
+automount-open=false
+
+[org/mate/notification-daemon]
+do-not-disturb=true
+sound-enabled=false
 
 [org/mate/panel/general]
 default-layout='ubuntu-mate'
+object-id-list=['menu-bar', 'clock', 'notification-area', 'indicatorappletcomplete', 'show-desktop', 'window-list', 'gvc', 'separator', 'workspace-switcher']
+toplevel-id-list=['top', 'bottom']
 
-# Keyboard indicator (libmatekbd) in system tray: two layouts → tray icon
-# appears automatically.  single layout → tray auto-hides.
+[org/mate/panel/objects/clock]
+applet-iid='ClockAppletFactory::ClockApplet'
+locked=true
+object-type='applet'
+relative-to-edge='end'
+toplevel-id='top'
+
+[org/mate/panel/objects/clock/prefs]
+custom-format='%a %d %b  %H:%M:%S'
+format='custom'
+show-date=true
+show-seconds=true
+
+[org/mate/panel/objects/gvc]
+applet-iid='GvcAppletFactory::GvcApplet'
+locked=true
+object-type='applet'
+relative-to-edge='end'
+toplevel-id='top'
+
+[org/mate/panel/objects/indicatorappletcomplete]
+applet-iid='IndicatorAppletCompleteFactory::IndicatorAppletComplete'
+locked=true
+object-type='applet'
+relative-to-edge='end'
+toplevel-id='top'
+
+[org/mate/panel/objects/menu-bar]
+locked=true
+object-type='menu-bar'
+toplevel-id='top'
+
+[org/mate/panel/objects/notification-area]
+applet-iid='NotificationAreaAppletFactory::NotificationArea'
+locked=true
+object-type='applet'
+relative-to-edge='end'
+toplevel-id='top'
+
+[org/mate/panel/objects/separator]
+locked=true
+object-type='separator'
+relative-to-edge='end'
+toplevel-id='top'
+
+[org/mate/panel/objects/show-desktop]
+applet-iid='WnckletFactory::ShowDesktopApplet'
+locked=true
+object-type='applet'
+toplevel-id='bottom'
+
+[org/mate/panel/objects/window-list]
+applet-iid='WnckletFactory::WindowListApplet'
+locked=true
+object-type='applet'
+toplevel-id='bottom'
+
+[org/mate/panel/objects/workspace-switcher]
+applet-iid='WnckletFactory::WorkspaceSwitcherApplet'
+locked=true
+object-type='applet'
+relative-to-edge='end'
+toplevel-id='bottom'
+
+[org/mate/panel/toplevels/bottom]
+auto-hide=false
+orientation='bottom'
+screen=0
+y-bottom=0
+
+[org/mate/panel/toplevels/top]
+auto-hide=false
+orientation='top'
+screen=0
+
 [org/mate/peripherals-keyboard-xkb/general]
-known-file-list=['fi', 'us']
 default-group=0
-handle-indicators=true
 disable-indicator=false
+handle-indicators=true
+known-file-list=['fi', 'us']
 
-# Background plugin resets picture-filename on every theme change. Disable
-# so our wallpaper sticks; caja-desktop paints directly via GSettings.
-[org/mate/SettingsDaemon/plugins/background]
-active=false
+[org/mate/peripherals-keyboard]
+bell-mode='off'
 
-# Screensaver: autostart file deletion is not enough; the schema still
-# defaults idle-activation=true. Pin it false system-wide.
+[org/mate/pluma]
+color-scheme='Yaru-dark'
+
+[org/mate/power-manager]
+button-power='nothing'
+button-suspend='nothing'
+icon-policy='never'
+sleep-display-ac=0
+
 [org/mate/screensaver]
+delay=0
 idle-activation-enabled=false
 lock-enabled=false
 mode='blank-only'
-delay=0
+picture-filename='/usr/share/backgrounds/mate/desktop/Stripes.png'
+themes=@as []
 
-# Notification daemon: kill alert sound + notifications while focus.
-# sound-enabled=false stops the per-notification audio cue; do-not-disturb
-# also suppresses the popup itself. Both are needed because sound-enabled
-# only controls audio, not visual notification.
-[org/mate/NotificationDaemon]
-sound-enabled=false
-do-not-disturb=true
+[org/mate/settings-daemon/plugins/a11y-keyboard]
+active=true
 
-# Sound: mute all event/alert sounds.
-# theme-name='__custom' points libcanberra at ~/.local/share/sounds/__custom
-# (does not exist) so every alert/warning/error/dialog cue is silent.
+[org/mate/settings-daemon/plugins/a11y-settings]
+active=true
+
+[org/mate/settings-daemon/plugins/background]
+active=true
+
+[org/mate/settings-daemon/plugins/clipboard]
+active=true
+
+[org/mate/settings-daemon/plugins/keyboard]
+active=true
+
+[org/mate/settings-daemon/plugins/media-keys]
+active=true
+
+[org/mate/settings-daemon/plugins/mouse]
+active=true
+
+[org/mate/settings-daemon/plugins/sound]
+active=true
+
+[org/mate/settings-daemon/plugins/typing-break]
+active=true
+
+[org/mate/settings-daemon/plugins/xrandr]
+active=true
+show-notification-icon=false
+
+[org/mate/settings-daemon/plugins/xsettings]
+active=true
+
+[org/mate/slick-greeter]
+logo=''
+other-monitors-logo=''
+play-ready-sound=false
+
 [org/mate/sound]
 event-sounds=false
 input-feedback-sounds=false
 theme-name='__custom'
 
-# Belt-and-suspenders: GNOME desktop-sound schema. Some apps (notably
-# GTK3/4 dialogs, Evolution, third-party snaps) read this rather than
-# org.mate.sound. Disable on both schemas so no path stays open.
+[org/mate/terminal/profiles/default]
+allow-bold=true
+background-color='#000000000000'
+bold-color='#000000000000'
+copy-selection=true
+cursor-blink-mode='on'
+cursor-shape='ibeam'
+default-size-columns=120
+default-size-rows=35
+font='Terminess Nerd Font Mono 11'
+foreground-color='#AAAAAAAAAAAA'
+palette='#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'
+scheme='gray-on-black'
+scrollback-unlimited=true
+silent-bell=true
+use-custom-default-size=true
+use-system-font=false
+use-theme-colors=false
+visible-name='Default'
+[org/gtk/file-chooser]
+show-hidden=true
+
+[org/gtk/settings/file-chooser]
+show-hidden=true
+[org/gnome/desktop/interface]
+clock-show-date=true
+clock-show-seconds=true
+color-scheme='default'
+document-font-name='Ubuntu 10'
+font-name='Ubuntu 10'
+monospace-font-name='Terminess Nerd Font Mono 11'
+toolkit-accessibility=true
+
 [org/gnome/desktop/sound]
 event-sounds=false
 input-feedback-sounds=false
 theme-name='__custom'
-
-# System bell (X11 beep from terminals, dialog errors, completion cues).
-# Distinct from event-sounds — that flag controls libcanberra, this one
-# controls the kernel/PulseAudio bell. Off silences the terminal bell
-# without killing actual media playback paths.
-[org/mate/peripherals-keyboard]
-bell-mode='off'
