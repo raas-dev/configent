@@ -63,7 +63,7 @@ if [ ! -x "/usr/bin/docker" ]; then
   $SUDO apt-get install -y docker-ce-rootless-extras
   dockerd-rootless-setuptool.sh install --force
 
-  # Assume we are in a lima VM -> set rootful as default -> faster local network
+  # Assume we are in a local VM -> set rootful as default -> faster network
   docker context use default
 
   systemctl --user enable --now dbus
