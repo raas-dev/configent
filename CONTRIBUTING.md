@@ -10,16 +10,16 @@
 
 ## Testing
 
-Use alias `vm` for creating
+Use alias `v` for creating
 [Lima](https://github.com/lima-vm/lima) VMs to test on various Linux distros.
 
-For each VM's cloud-init, alias `vm` sets installer to use the last commit:
+For each VM's cloud-init, alias `v` sets installer to use the last commit:
 
     curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | GIT_REF=main sh
 
 If `GIT_REF` is not set, the installer uses version hardcoded in `install.sh`.
 
-For testing before commit, alias `vm` also mounts `$HOME/configent` read-only.
+For testing before commit, alias `v` also mounts `$HOME/configent` read-only.
 
 ## Pre-commit
 
