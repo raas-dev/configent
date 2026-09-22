@@ -5,6 +5,7 @@
 [org/mate/Marco/general]
 compositing-manager=false
 titlebar-font='Ubuntu Bold 10'
+theme='ClearlooksRe'
 
 
 [org/mate/background]
@@ -23,8 +24,8 @@ primary-color='#3C3B37'
 secondary-color='#3C3B37'
 
 [org/mate/desktop/interface]
-gtk-theme='Yaru-MATE-dark'
-icon-theme='Yaru-MATE-dark'
+gtk-theme='Yaru-olive-dark'
+icon-theme='Yaru-olive-dark'
 font-name='Ubuntu 10'
 document-font-name='Ubuntu 10'
 monospace-font-name='Ubuntu Mono 11'
@@ -48,6 +49,12 @@ custom-format='%a %d %b  %H:%M:%S'
 
 [org/mate/caja/preferences]
 show-desktop-icons=true
+# Arrange items by type; tighter (compact) layout for icon view.
+default-sort-order='type'
+sort-directories-first=false
+
+[org/mate/caja/icon-view]
+default-use-tighter-layout=true
 
 # Desktop icon font: stock Ubuntu 11 is too big on a 1280×720 selkies canvas.
 [org/mate/caja/desktop]
@@ -79,7 +86,7 @@ size=32
 expand=true
 auto-hide=false
 
-[org/mate/panel]
+[org/mate/panel/general]
 default-layout='ubuntu-mate'
 
 # Keyboard indicator (libmatekbd) in system tray: two layouts → tray icon
@@ -102,3 +109,34 @@ idle-activation-enabled=false
 lock-enabled=false
 mode='blank-only'
 delay=0
+
+# Notification daemon: kill alert sound + notifications while focus.
+# sound-enabled=false stops the per-notification audio cue; do-not-disturb
+# also suppresses the popup itself. Both are needed because sound-enabled
+# only controls audio, not visual notification.
+[org/mate/NotificationDaemon]
+sound-enabled=false
+do-not-disturb=true
+
+# Sound: mute all event/alert sounds.
+# theme-name='__custom' points libcanberra at ~/.local/share/sounds/__custom
+# (does not exist) so every alert/warning/error/dialog cue is silent.
+[org/mate/sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name='__custom'
+
+# Belt-and-suspenders: GNOME desktop-sound schema. Some apps (notably
+# GTK3/4 dialogs, Evolution, third-party snaps) read this rather than
+# org.mate.sound. Disable on both schemas so no path stays open.
+[org/gnome/desktop/sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name='__custom'
+
+# System bell (X11 beep from terminals, dialog errors, completion cues).
+# Distinct from event-sounds — that flag controls libcanberra, this one
+# controls the kernel/PulseAudio bell. Off silences the terminal bell
+# without killing actual media playback paths.
+[org/mate/peripherals-keyboard]
+bell-mode='off'
