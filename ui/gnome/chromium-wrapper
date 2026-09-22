@@ -2,5 +2,5 @@
 # configent (https://github.com/raas-dev/configent)
 # Chromium/CloakBrowser launcher; restores session via seeded profile prefs.
 CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
-exec "$CRBIN" --no-first-run --no-default-browser-check \
+exec "$CRBIN" --no-first-run --no-default-browser-check --force-renderer-accessibility \
   --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"

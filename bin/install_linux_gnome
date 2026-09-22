@@ -193,7 +193,10 @@ apt_install_core() {
     socat libnspr4 libnss3
     gnome-session-flashback gnome-flashback gnome-panel metacity
     at-spi2-core dconf-cli gnome-terminal adwaita-icon-theme
+    mate-themes       # metacity theme TraditionalOk — panel needs it at first render
     gnome-backgrounds # wallpaper must exist before session first renders
+    polkitd           # sysusers.d/polkit.conf must exist when we create the user below;
+    # else polkit 217/USER → panel blocks 25s×2 on D-Bus timeouts
     pipewire pipewire-pulse wireplumber
   )
   [ -f "$TARBALL" ] || pkgs+=(python3-pip) # cold chromium path needs pip3
@@ -216,7 +219,7 @@ apt_install_core() {
 # desktop.done. Contends on dpkg lock with install_apps_apt: serialized, fine.
 apt_install_extras() {
   local -a pkgs=(
-    gnome-control-center mate-themes mate-icon-theme
+    gnome-control-center # mate-themes now core; mate-icon-theme dropped: Adwaita is icon theme
     fonts-ubuntu
   )
   $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
@@ -254,6 +257,13 @@ wait_ok "$EXT" /tmp/ext.log
 chromium_files
 # isolate would stop ALL units outside graphical.target's graph — including the
 # per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
+# polkitd user comes from sysusers.d/polkit.conf, but systemd-sysusers ran at
+# boot BEFORE apt installed it → polkit crash-loops (status=217/USER) →
+# gnome-panel blocks 25s×2 on D-Bus timeouts → panel paints ~1min late.
+# Just create the user; polkit D-Bus-activates on demand. Do NOT
+# `systemctl start polkit.service` here: unit not yet known to PID1 mid-provision
+# → non-zero → set -e aborts provisioning.
+$SUDO systemd-sysusers
 log "services starting"
 $SUDO systemctl set-default graphical.target
 $SUDO systemctl start xorg-dummy.service selkies-tls.service
@@ -262,10 +272,11 @@ for _ in $(seq 1 30); do
   [ -S "/run/user/$LUID/bus" ] && break
   sleep 1
 done
-"${AS_USER[@]}" "${UENV[@]}" systemctl --user start gnome-session.service
-# wipe cached panel layout (first-boot copy may hold removed object-iids)
 "${AS_USER[@]}" "${UENV[@]}" dconf reset -f /org/gnome/gnome-panel/ 2>/dev/null || true
-"${AS_USER[@]}" "${UENV[@]}" systemctl --user try-restart gnome-session.service
+# system db (00-gnome-panel) forces default-layout='default'; user reset above
+# drops any cached layout holding removed object-iids. One clean start, no
+# session bounce (restart-after-reset made panel remap seconds late).
+"${AS_USER[@]}" "${UENV[@]}" systemctl --user start gnome-session.service
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   # warm cache for future VMs; do not block desktop.done
   ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&

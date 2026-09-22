@@ -11,6 +11,9 @@ idle-activation-enabled=false
 idle-delay=uint32 0
 
 [org/gnome/desktop/interface]
+# a11y: GTK3 apps (panel, metacity, gnome-terminal) load atk-bridge only when
+# this is true; AT-SPI consumers (open-computer-use) need it on the session bus
+toolkit-accessibility=true
 color-scheme='prefer-dark'
 gtk-theme='Adwaita-dark'
 icon-theme='Adwaita'
