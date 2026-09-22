@@ -129,4 +129,3 @@ fi
 # from the alpine repo. mise failures stay, but tools are on PATH.
 $SUDO apk add ast-grep
 $SUDO apk add delta
-$SUDO apk add hurl@testing
