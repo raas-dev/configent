@@ -81,11 +81,6 @@ extensions_dl() {
     done
     return 1
   fi
-  for _ in $(seq 1 120); do
-    [ -x /usr/bin/unzip ] && break
-    sleep 2
-  done
-  [ -x /usr/bin/unzip ]
   $SUDO install -d /usr/local/share/extensions
   for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
     name=${pair%%:*}
@@ -93,7 +88,7 @@ extensions_dl() {
     curl -fsSL -o "/tmp/$name.crx" "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
     python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' "/tmp/$name.crx" "/tmp/$name.zip"
     $SUDO mkdir -p "/usr/local/share/extensions/$name"
-    $SUDO unzip -oq "/tmp/$name.zip" -d "/usr/local/share/extensions/$name"
+    $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
     $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
   done
   $SUDO chown -R "$LUSER": /usr/local/share/extensions
@@ -115,7 +110,7 @@ write_configs() {
   $SUDO systemctl enable xorg-dummy
   $SUDO install -d /etc/X11/xorg.conf.d
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
-  $SUDO sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
+  $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
   $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
   $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
@@ -128,11 +123,7 @@ write_configs() {
 }
 
 chromium_files() {
-  for _ in $(seq 1 600); do
-    [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] && break
-    sleep 0.5
-  done
-  [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
+  timeout 1800s bash -c 'until [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ]; do sleep 1; done' || return 1
   if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
     $SUDO install -d /opt/cloakbrowser
     CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
@@ -142,14 +133,23 @@ chromium_files() {
   [ -n "$CRBIN" ]
   $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
-  printf '#!/bin/sh\n[ $# -eq 0 ] && set -- https://browserleaks.com/ip\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" | $SUDO tee /usr/local/bin/chromium-wrapper >/dev/null
+  $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
+  # seed chromium profile once on create: full dump from provision cache if
+  # present, else minimal repo seed; existing profile never overwritten
+  $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$UHOME/.config/chromium/Default"
+  local SEED="$UI/chromium-preferences"
+  [ -f /mnt/lima-provision/chromium-preferences ] &&
+    SEED=/mnt/lima-provision/chromium-preferences
+  [ -f "$UHOME/.config/chromium/Default/Preferences" ] ||
+    $SUDO install -m 644 -o "$LUSER" -g "$LUSER" "$SEED" \
+      "$UHOME/.config/chromium/Default/Preferences"
   $SUDO chmod 755 /usr/local/bin/chromium-wrapper
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
   $SUDO install -d /usr/local/share/applications
   $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
-  $SUDO cp /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
-  # hide duplicate from menu/panel; kept only as default-browser handler for mimeapps
-  $SUDO sed -i '/^\[Desktop Entry\]/a NoDisplay=true' /usr/local/share/applications/chromium_chromium.desktop
+  # hidden duplicate; kept only as default-browser handler for mimeapps
+  $SUDO install -m 644 "$UI/chromium-chromium.desktop" \
+    /usr/local/share/applications/chromium_chromium.desktop
   # desktop shortcut
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   $SUDO cp /usr/local/share/applications/chromium.desktop "$UHOME/Desktop/"
@@ -160,8 +160,7 @@ chromium_files() {
   $SUDO cp /usr/local/share/applications/gnome-terminal.desktop "$UHOME/Desktop/"
   $SUDO chmod 755 "$UHOME/Desktop/gnome-terminal.desktop"
   $SUDO chown "$LUSER": "$UHOME/Desktop/gnome-terminal.desktop"
-  # autostart browser on login (wrapper: no args -> browserleaks)
-  $SUDO install -m 644 "$UI/autostart-chromium.desktop" /etc/xdg/autostart/chromium.desktop
+  # browser autostart intentionally removed — launch manually; profile restores session
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
   $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
@@ -183,7 +182,7 @@ apt_install_all() {
   local -a pkgs=(
     xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
     xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11
-    python3-pip unzip socat libnspr4 libnss3
+    python3-pip socat libnspr4 libnss3
     gnome-session-flashback gnome-flashback gnome-panel metacity
     gnome-backgrounds gnome-control-center mate-themes mate-icon-theme at-spi2-core dconf-cli fonts-ubuntu
     gnome-terminal adwaita-icon-theme
@@ -206,12 +205,11 @@ apt_install_all() {
 }
 
 $SUDO install -d -m 755 /var/cache/apt/archives/partial
-printf 'path-exclude=/usr/share/man/*\npath-exclude=/usr/share/doc/*/*\npath-exclude=/usr/share/gtk-doc/html/*\n' |
-  $SUDO tee /etc/dpkg/dpkg.cfg.d/01-excludes >/dev/null
+$SUDO install -m 644 "$UI/dpkg-excludes" /etc/dpkg/dpkg.cfg.d/01-excludes
 
 # fs.protected_regular=2: even root can't reopen another uid's file in sticky /tmp
 for _f in apt selkdeb cb ext; do rm -f "/tmp/${_f}.log"; done
-$SUDO apt-get update >/tmp/apt.log 2>&1 &
+$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 >/tmp/apt.log 2>&1 &
 UP=$!
 selkies_deb >/tmp/selkdeb.log 2>&1 &
 SDB=$!
@@ -221,6 +219,10 @@ extensions_dl >/tmp/ext.log 2>&1 &
 EXT=$!
 write_configs
 wait_ok "$UP" /tmp/apt.log
+# small install first: pip unlocks the chromium download (runs in bg) while
+# the big GNOME transaction below runs in parallel with it
+$SUDO apt-get install -y --no-install-recommends -o Acquire::Retries=3 \
+  -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold python3-pip
 wait_ok "$SDB" /tmp/selkdeb.log
 apt_install_all
 wait_ok "$CB" /tmp/cb.log

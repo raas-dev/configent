@@ -93,24 +93,27 @@ provision:
       export SETUP_GUI=true
       export SETUP_DOCKER=false
       export SETUP_PODMAN=false
-      nohup /Users/asyrjasalo/configent/install.sh >/tmp/configent-install.log 2>&1 &
+      "/Users/asyrjasalo/configent/install.sh" &
+
+# selkies web UI binds guest loopback; lima auto-forward only covers 0.0.0.0/:: binds,
+# so forward explicitly (guestIP default 127.0.0.1 reaches it)
+portForwards:
+  - guestPort: 8080
+    hostPort: 8080
+  - guestPort: 8443
+    hostPort: 8443
 
 probes:
-  - description: "Xorg to be installed"
+  # readiness = install finished AND services up AND web UI answering on 8080
+  - description: "Selkies desktop to be ready"
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 60s bash -c "until command -v Xorg >/dev/null 2>&1; do sleep 1; done"; then
-        echo >&2 "Xorg is not installed yet"
-        exit 1
-      fi
-    hint: See "/var/log/cloud-init-output.log" in the guest
-  - description: "Selkies to be installed"
-    script: |
-      #!/bin/bash
-      set -eux -o pipefail
-      if ! timeout 60s bash -c "until command -v selkies >/dev/null 2>&1; do sleep 1; done"; then
-        echo >&2 "Selkies is not installed yet"
+      if ! timeout 180s bash -c "until [ -f /var/tmp/desktop.done ] \
+        && systemctl is-active --quiet xorg-dummy.service \
+        && systemctl is-active --quiet selkies-tls.service \
+        && curl -fsS -o /dev/null --max-time 5 http://127.0.0.1:8080/; do sleep 2; done"; then
+        echo >&2 "Selkies desktop not ready"
         exit 1
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
