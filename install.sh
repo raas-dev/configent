@@ -147,8 +147,3 @@ else
   cd "$TARGET_PATH" || exit 1
   . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
 fi
-
-# SETUP_GUI=true (e.g. Lima dev VM): desktop stack on top of bootstrap
-if [ "$(uname -s)" = 'Linux' ] && [ "${SETUP_GUI:-false}" = 'true' ]; then
-  exec "$TARGET_PATH/bin/install_linux_gnome"
-fi

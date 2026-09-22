@@ -1,0 +1,14 @@
+[Unit]
+Description=GNOME Flashback session on :0
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XDG_CURRENT_DESKTOP=GNOME-Flashback:GNOME
+Environment=XDG_SESSION_DESKTOP=gnome-flashback
+ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"
+ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY
+ExecStart=/usr/bin/gnome-session --session=gnome-flashback-metacity
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

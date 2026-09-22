@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Chromium
+Exec=/usr/local/bin/chromium-wrapper

@@ -101,26 +101,14 @@ extensions_dl() {
 }
 
 write_configs() {
-  printf '[Unit]\nDescription=Xorg dummy :0\n[Service]\nExecStart=/usr/bin/Xorg :0 -noreset\nRestart=on-failure\n[Install]\nWantedBy=graphical.target\n' | $SUDO tee /etc/systemd/system/xorg-dummy.service >/dev/null
   # gnome-session (GNOME 50) requires the systemd user manager on the session
   # bus (org.freedesktop.systemd1); dbus-run-session's private bus lacks it and
   # gnome-session aborts with SIGABRT. Linger + user unit on the real user bus.
+  $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
   $SUDO loginctl enable-linger "$LUSER"
   $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$LHOME/.config/systemd/user"
-  printf '%s\n' \
-    '[Unit]' \
-    'Description=GNOME Flashback session on :0' \
-    '[Service]' \
-    'Environment=DISPLAY=:0' \
-    'Environment=XDG_CURRENT_DESKTOP=GNOME-Flashback:GNOME' \
-    'Environment=XDG_SESSION_DESKTOP=gnome-flashback' \
-    'ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"' \
-    'ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY' \
-    'ExecStart=/usr/bin/gnome-session --session=gnome-flashback-metacity' \
-    'Restart=on-failure' \
-    '[Install]' \
-    'WantedBy=default.target' |
-    $SUDO tee "$LHOME/.config/systemd/user/gnome-session.service" >/dev/null
+  $SUDO install -m 644 "$UI/gnome-session.service" \
+    "$LHOME/.config/systemd/user/gnome-session.service"
   $SUDO chown "$LUSER:" "$LHOME/.config/systemd/user/gnome-session.service"
   UENV=(env XDG_RUNTIME_DIR="/run/user/$LUID" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$LUID/bus" DISPLAY=:0)
   "${AS_USER[@]}" "${UENV[@]}" systemctl --user enable gnome-session.service
@@ -129,31 +117,14 @@ write_configs() {
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
   $SUDO sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="fi"/' /etc/default/keyboard
   $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
-  $SUDO tee /usr/local/bin/selkies-session >/dev/null <<'EOF'
-#!/bin/bash
-export DISPLAY="${DISPLAY:-:0}"
-export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
-if [ ! -S "${XDG_RUNTIME_DIR}/pulse/native" ]; then
-  pipewire & pipewire-pulse & wireplumber &
-fi
-for i in $(seq 1 20); do
-  [ -S "${XDG_RUNTIME_DIR}/pulse/native" ] && break
-  sleep 0.5
-done
-exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
-  --enable-basic-auth=false \
-  --encoder=x264enc
-EOF
-  $SUDO chmod +x /usr/local/bin/selkies-session
+  $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
   $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
-  printf '[Unit]\nDescription=Selkies TLS wrapper 8443->8080\nAfter=network.target\n[Service]\nExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080\nRestart=always\n[Install]\nWantedBy=multi-user.target\n' |
-    $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
+  $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
   $SUDO systemctl enable selkies-tls
-  printf '[Desktop Entry]\nType=Application\nName=Selkies\nExec=selkies-session\n' |
-    $SUDO tee /etc/xdg/autostart/selkies.desktop >/dev/null
-  $SUDO chmod 644 /etc/xdg/autostart/selkies.desktop
+  $SUDO install -d /etc/xdg/autostart
+  $SUDO install -m 644 "$UI/autostart-selkies.desktop" /etc/xdg/autostart/selkies.desktop
 }
 
 chromium_files() {
@@ -169,7 +140,7 @@ chromium_files() {
   fi
   CRBIN=$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit)
   [ -n "$CRBIN" ]
-  echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | $SUDO tee /etc/sysctl.d/99-chromium-userns.conf >/dev/null
+  $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   printf '#!/bin/sh\n[ $# -eq 0 ] && set -- https://browserleaks.com/ip\nexec %s --no-first-run --no-default-browser-check --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"\n' "$CRBIN" | $SUDO tee /usr/local/bin/chromium-wrapper >/dev/null
   $SUDO chmod 755 /usr/local/bin/chromium-wrapper
@@ -190,20 +161,20 @@ chromium_files() {
   $SUDO chmod 755 "$UHOME/Desktop/gnome-terminal.desktop"
   $SUDO chown "$LUSER": "$UHOME/Desktop/gnome-terminal.desktop"
   # autostart browser on login (wrapper: no args -> browserleaks)
-  printf '[Desktop Entry]\nType=Application\nName=Chromium\nExec=/usr/local/bin/chromium-wrapper\n' |
-    $SUDO tee /etc/xdg/autostart/chromium.desktop >/dev/null
-  $SUDO chmod 644 /etc/xdg/autostart/chromium.desktop
+  $SUDO install -m 644 "$UI/autostart-chromium.desktop" /etc/xdg/autostart/chromium.desktop
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
   $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO install -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO chown "$LUSER": "$UHOME/.config/mimeapps.list"
-  # system dconf: panel layout without removed indicator object-iids
+  # system dconf: panel layout + desktop defaults (see ui/gnome/*.dconf-style keyfiles)
   $SUDO install -D -m 644 "$UI/dconf-profile-user" /etc/dconf/profile/user
   $SUDO install -D -m 644 "$UI/00-gnome-panel" /etc/dconf/db/local.d/00-gnome-panel
+  $SUDO install -m 644 "$UI/01-gnome-desktop" /etc/dconf/db/local.d/01-gnome-desktop
   $SUDO chmod 755 /etc/dconf/profile /etc/dconf/db/local.d
-  $SUDO chmod 644 /etc/dconf/profile/user /etc/dconf/db/local.d/00-gnome-panel
+  $SUDO chmod 644 /etc/dconf/profile/user /etc/dconf/db/local.d/00-gnome-panel \
+    /etc/dconf/db/local.d/01-gnome-desktop
   $SUDO dconf update
   $SUDO chmod 644 /etc/dconf/db/local
 }
@@ -268,21 +239,6 @@ done
 # wipe cached panel layout (first-boot copy may hold removed object-iids)
 "${AS_USER[@]}" "${UENV[@]}" dconf reset -f /org/gnome/gnome-panel/ 2>/dev/null || true
 "${AS_USER[@]}" "${UENV[@]}" systemctl --user try-restart gnome-session.service
-GS() { "${AS_USER[@]}" env XDG_RUNTIME_DIR="/run/user/$LUID" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$LUID/bus" gsettings set "$@"; }
-B=/usr/share/backgrounds/gnome
-WP=$B/adwaita-l.jxl
-WPD=$B/adwaita-d.jxl
-[ -n "$WP" ] && GS org.gnome.desktop.background picture-uri "file://$WP" &&
-  GS org.gnome.desktop.background picture-uri-dark "file://${WPD:-$WP}"
-GS org.gnome.desktop.screensaver lock-enabled false
-GS org.gnome.desktop.screensaver idle-activation-enabled false
-GS org.gnome.desktop.session idle-delay 0
-# classic theme
-GS org.gnome.desktop.interface color-scheme 'prefer-dark'
-GS org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-GS org.gnome.desktop.interface icon-theme 'Adwaita'
-GS org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
-GS org.gnome.desktop.wm.preferences theme 'TraditionalOk'
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   # warm cache for future VMs; do not block desktop.done
   ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
