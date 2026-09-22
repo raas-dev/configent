@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.0](https://github.com/raas-dev/configent/compare/1.243.4...1.244.0) (2026-09-22)
+
+### Features
+
+* **gnome:** flashback-metacity desktop stack for Lima GUI VMs ([55936db](https://github.com/raas-dev/configent/commit/55936dbb45e8ffb6c6ec667055258655cd5b7100))
+* **linux:** add MATE desktop environment installer ([423c899](https://github.com/raas-dev/configent/commit/423c899d626f3b31dfa831e42b6a188709ece045))
+* **mate:** add wallpaper, adjust panel layout ([f861704](https://github.com/raas-dev/configent/commit/f861704365bbd6727957fc1e8c0323f65e7949c8))
+* **mate:** silence notifications and system sounds ([06a6abc](https://github.com/raas-dev/configent/commit/06a6abc56bd1b8f16c4a82855ce32a6c69e079bb))
+* refactor vm wrapper into standalone script ([3b2b270](https://github.com/raas-dev/configent/commit/3b2b27027b76145926a48d092f0f49cbb68a9bb6))
+
+### Fixes
+
+* **apk:** remove hurl@testing ([61ec36c](https://github.com/raas-dev/configent/commit/61ec36ce73291bf66f181ada9d2d128a780c3251))
+* **docker:** prefer rootful context in lima vms ([5ee5626](https://github.com/raas-dev/configent/commit/5ee5626cac978cbdbdd6515c1ad36d7aeb92b3ba))
+* **docker:** set gpg keyring permissions to 644 ([f7f8fe0](https://github.com/raas-dev/configent/commit/f7f8fe0eed6ea652baf2ed9f7a4b795bcb84d89c))
+* **docker:** simplify rootful setup comment ([6e985ca](https://github.com/raas-dev/configent/commit/6e985ca56abc53e584d7a641c777b6d197768aa4))
+* **gnome:** init polkit early, enable accessibility ([38f500e](https://github.com/raas-dev/configent/commit/38f500eadff9d6b103166427c10f73d08c6393e1))
+* **vm:** flip dev/release modes with --dev flag ([5026a05](https://github.com/raas-dev/configent/commit/5026a05d9ad748bddf7c36da706904cd9d27198a))
+
 ## [1.243.4](https://github.com/raas-dev/configent/compare/1.243.3...1.243.4) (2026-09-22)
 
 ### Fixes
