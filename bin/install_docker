@@ -59,29 +59,10 @@ if [ ! -x "/usr/bin/docker" ]; then
   # 2025-06: Commented out due to rosetta being preferred on macOS
   #$SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
-  # Setup rootless mode
+  # Setup rootless mode. Setuptool sets currentContext=rootless, which makes
+  # the docker CLI prefer the rootless daemon - kept as-is by design.
   $SUDO apt-get install -y docker-ce-rootless-extras
   dockerd-rootless-setuptool.sh install --force
-
-  # Setuptool writes currentContext=rootless immediately; strip it before any
-  # further docker/user-session commands so nothing reads the wrong context.
-  if [ -f "$HOME/.docker/config.json" ] && command -v python3 >/dev/null 2>&1; then
-    python3 - <<'PY'
-import json
-from pathlib import Path
-
-p = Path.home() / ".docker/config.json"
-try:
-    data = json.loads(p.read_text())
-except (OSError, json.JSONDecodeError):
-    raise SystemExit(0)
-if data.pop("currentContext", None) is None:
-    raise SystemExit(0)
-p.write_text(json.dumps(data, indent=4) + "\n")
-PY
-  elif [ -f "$HOME/.docker/config.json" ] && command -v docker >/dev/null 2>&1; then
-    docker context use default 2>/dev/null || true
-  fi
 
   systemctl --user enable --now dbus
   systemctl --user enable --now docker

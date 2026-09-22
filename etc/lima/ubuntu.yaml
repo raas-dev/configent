@@ -128,9 +128,6 @@ networks:
   - lima: user-v2
 
 portForwards:
-  # rootful docker
-  - guestSocket: "/var/run/docker.sock"
-    hostSocket: "{{.Dir}}/sock/docker.sock"
   # user docker (service is not started when containerd is already running)
   #- guestSocket: "/run/user/{{.UID}}/docker.sock"
   #  hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
@@ -140,3 +137,6 @@ portForwards:
   # user podman
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"
+  # rootful docker
+  - guestSocket: "/var/run/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker.sock"

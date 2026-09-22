@@ -102,12 +102,12 @@ networks:
   - lima: user-v2
 
 portForwards:
-  # rootful docker
-  - guestSocket: "/var/run/docker.sock"
-    hostSocket: "{{.Dir}}/sock/docker.sock"
   # user docker
   - guestSocket: "/run/user/{{.UID}}/docker.sock"
     hostSocket: "{{.Dir}}/sock/docker_rootless.sock"
   # user podman
   - guestSocket: "/run/user/{{.UID}}/podman/podman.sock"
     hostSocket: "{{.Dir}}/sock/podman.sock"
+  # rootful docker
+  - guestSocket: "/var/run/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker.sock"

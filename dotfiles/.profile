@@ -311,9 +311,9 @@ fi
 ### docker/podman CLIs on macOS ################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
-  # docker(d)
-  export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker.sock"
-  #export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker_rootless.sock"
+  # docker(d) - prefer rootless docker on the Linux VM, rootful sock:
+  # unix://$HOME/.lima/default/sock/docker.sock
+  export DOCKER_HOST="unix://$HOME/.lima/default/sock/docker_rootless.sock"
 
   # podman
   export CONTAINER_HOST="unix://$HOME/.lima/default/sock/podman.sock"
