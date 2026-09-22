@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Terminal
+GenericName=Terminal
+Comment=Use the command line in a terminal
+Exec=mate-terminal
+Icon=utilities-terminal
+Terminal=false
+Type=Application
+Categories=System;TerminalEmulator;
+StartupNotify=true
+StartupWMClass=mate-terminal
+Keywords=shell;prompt;command;cmd;commandline;

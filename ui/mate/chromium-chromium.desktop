@@ -1,0 +1,12 @@
+[Desktop Entry]
+NoDisplay=true
+Version=1.0
+Name=Chromium
+GenericName=Web Browser
+Exec=/usr/local/bin/chromium %u
+Terminal=false
+Type=Application
+Icon=web-browser
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+StartupWMClass=Chromium

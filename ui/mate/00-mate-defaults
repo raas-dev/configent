@@ -1,0 +1,104 @@
+# MATE desktop defaults — applies to every user at first login.
+# Sourced from webtop/docker-webtop (ubuntu-mate branch) + corrected for the
+# gaps ubuntu-mate-default-settings leaves behind.
+
+[org/mate/Marco/general]
+compositing-manager=false
+titlebar-font='Ubuntu Bold 10'
+
+
+[org/mate/background]
+primary-color='#3C3B37'
+secondary-color='#3C3B37'
+color-shading-type='solid'
+# Ship our own: gocemitevski/ubuntu-mate-wallpapers Radioactive no-logo.
+# All -wallpapers-* apt pkgs removed — only this file is installed.
+picture-filename='/usr/share/backgrounds/wallpaper-radioactive.jpg'
+picture-options='zoom'
+
+[org/mate/background/desktop-backgrounds/0]
+filename='/usr/share/backgrounds/wallpaper-radioactive.jpg'
+options='zoom'
+primary-color='#3C3B37'
+secondary-color='#3C3B37'
+
+[org/mate/desktop/interface]
+gtk-theme='Yaru-MATE-dark'
+icon-theme='Yaru-MATE-dark'
+font-name='Ubuntu 10'
+document-font-name='Ubuntu 10'
+monospace-font-name='Ubuntu Mono 11'
+
+# Panel clock: show seconds + date.
+# gnome.desktop.interface is the GNOME path; mate-panel.ClockApplet reads
+# from org.mate.panel.applet.clock (relocatable) instead.
+[org/gnome/desktop/interface]
+clock-show-seconds=true
+clock-show-date=true
+# AT-SPI2 master switch. Without this, GTK widgets are invisible to Orca.
+toolkit-accessibility=true
+[org/mate/panel/objects/clock/prefs]
+# Path MUST be /objects/clock/prefs (the live applet), not
+# /applets/clock_applet/prefs (a no-op relocatable path).
+show-seconds=true
+show-date=true
+# Custom format is mandatory: the preset '24-hour' ignores show-seconds.
+format='custom'
+custom-format='%a %d %b  %H:%M:%S'
+
+[org/mate/caja/preferences]
+show-desktop-icons=true
+
+# Desktop icon font: stock Ubuntu 11 is too big on a 1280×720 selkies canvas.
+[org/mate/caja/desktop]
+font='Ubuntu 10'
+
+# mate-terminal default font (system default 'Monospace 12' is too big).
+[org/mate/terminal/profiles/default]
+use-system-font=false
+font='Monospace 9'
+
+# GTK file chooser: show dotfiles by default.
+[org/gtk/settings/file-chooser]
+show-hidden=true
+[org/gtk/file-chooser]
+show-hidden=true
+
+# Taller menu bar — default 24 leaves no breathing room next to app icons.
+# Both panels span full width (expand=true) so neither renders ~70% wide.
+# Panel schema: relocatable per-toplevel id. Real path mate-panel writes
+# to is /toplevels/<id> (note trailing 's'). Earlier drafts used the
+# singular /toplevel/<id> and every panel-size write was a silent no-op
+# — the bottom panel rendered without expand and looked ~70% wide.
+[org/mate/panel/toplevels/top]
+size=32
+expand=true
+auto-hide=false
+[org/mate/panel/toplevels/bottom]
+size=32
+expand=true
+auto-hide=false
+
+[org/mate/panel]
+default-layout='ubuntu-mate'
+
+# Keyboard indicator (libmatekbd) in system tray: two layouts → tray icon
+# appears automatically.  single layout → tray auto-hides.
+[org/mate/peripherals-keyboard-xkb/general]
+known-file-list=['fi', 'us']
+default-group=0
+handle-indicators=true
+disable-indicator=false
+
+# Background plugin resets picture-filename on every theme change. Disable
+# so our wallpaper sticks; caja-desktop paints directly via GSettings.
+[org/mate/SettingsDaemon/plugins/background]
+active=false
+
+# Screensaver: autostart file deletion is not enough; the schema still
+# defaults idle-activation=true. Pin it false system-wide.
+[org/mate/screensaver]
+idle-activation-enabled=false
+lock-enabled=false
+mode='blank-only'
+delay=0

@@ -1,0 +1,6 @@
+# Stock Ubuntu MATE desktop icons: Computer + Home + Trash.
+[org/mate/caja/desktop]
+computer-icon-visible=true
+home-icon-visible=true
+trash-icon-visible=true
+volumes-visible=true
