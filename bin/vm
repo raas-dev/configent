@@ -24,7 +24,7 @@ _lima_remove_nonexistent_mounts() {
     mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
 }
 
-vm_release() {
+vm() {
   if [ -n "$1" ]; then
     local command="$1"
     shift
@@ -167,16 +167,16 @@ vm_dev() {
         fi
       done
       if [ "$has_name" = false ]; then
-        vm_release "$1" debian --name=default "${@:2}" \
+        vm "$1" debian --name=default "${@:2}" \
           --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
       else
-        vm_release "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+        vm "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
       fi
     else
-      vm_release "$@" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+      vm "$@" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
     fi
   else
-    vm_release "$@"
+    vm "$@"
   fi
 }
 
@@ -184,5 +184,5 @@ if [ "$1" = "--dev" ]; then
   shift
   vm_dev "$@"
 else
-  vm_release "$@"
+  vm "$@"
 fi
