@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Enable AT-SPI2 toolkit accessibility
-Comment=Pins toolkit-accessibility=true so screen readers (Orca) see the widget tree.
-Exec=/usr/bin/gsettings set org.gnome.desktop.interface toolkit-accessibility true
-Terminal=false
-Categories=Accessibility;
-X-MATE-Autostart-enabled=true
-X-GNOME-Autostart-enabled=true

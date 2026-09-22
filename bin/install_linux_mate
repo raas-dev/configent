@@ -160,12 +160,10 @@ chromium_files() {
   # install terminal .desktop first, then desktop shortcuts
   $SUDO install -m 644 "$UI/mate-terminal.desktop" \
     /usr/local/share/applications/mate-terminal.desktop
-  # AT-SPI2 master switch — gsettings at session start so screen readers see
-  # the widget tree. dconf keyfile already pins toolkit-accessibility=true
-  # system-wide; this autostart is belt+suspenders for the very first login
-  # before the user-db cache is warm.
-  $SUDO install -m 644 "$UI/a11y-enable.desktop" \
-    /etc/xdg/autostart/a11y-enable.desktop
+  # AT-SPI2 master switch is pinned in 00-mate-defaults
+  # ([org/gnome/desktop/interface] toolkit-accessibility=true). The
+  # user-db cache is warm by the time autostart runs, so no .desktop
+  # needed here.
   # browser autostart intentionally removed — launch manually; profile restores session
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
