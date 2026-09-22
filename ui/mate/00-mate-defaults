@@ -71,10 +71,17 @@ default-use-tighter-layout=false
 [org/mate/caja/desktop]
 font='Ubuntu 10'
 
-# mate-terminal default profile. System monospace font, I-beam, blink on,
-# 120×35 custom size, silent bell, auto-copy selection to clipboard,
-# unlimited scrollback. font key is the fallback if use-system-font is off.
+# mate-terminal default profile. Built-in 'gray-on-black' scheme gives black
+# bg + light gray fg. The 16-color palette is pinned to Tango (the standard
+# 16-color Linux console palette) so colorful output (ls, gcc, git) reads
+# correctly. fg/bg are NOT pinned here — scheme's defaults win. System
+# monospace font, I-beam, blink on, 120×35 custom size, silent bell,
+# auto-copy selection to clipboard, unlimited scrollback. font key is the
+# fallback if use-system-font is off.
 [org/mate/terminal/profiles/default]
+scheme='gray-on-black'
+use-theme-colors=false
+palette='#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'
 use-system-font=false
 silent-bell=true
 copy-selection=true
@@ -85,9 +92,6 @@ use-custom-default-size=true
 default-size-columns=120
 default-size-rows=35
 scrollback-unlimited=true
-palette='#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'
-foreground-color='#FFFFFFFFDDDD'
-background-color='#000000000000'
 font='Terminess Nerd Font Mono 11'
 
 # GTK file chooser: show dotfiles by default.
