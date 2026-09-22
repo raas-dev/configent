@@ -102,7 +102,6 @@ provision:
       sh="/Volumes/My Shared Files"
       mkdir -p "/Users/$user"
       ln -hfs "$sh/lima-512960f069fc5687" "/Users/$user/Downloads"
-      # configent share only present when created via vv (--mount ~/configent)
       if [ -d "$sh/lima-faf5b629f04b2902" ]; then
         ln -hfs "$sh/lima-faf5b629f04b2902" "/Users/$user/configent"
       fi
