@@ -64,6 +64,7 @@ if [ ! -x "/usr/bin/docker" ]; then
   # default -> rootful. Switch with: docker context use rootless
   $SUDO apt-get install -y docker-ce-rootless-extras
   dockerd-rootless-setuptool.sh install --force
+  docker context use default
 
   systemctl --user enable --now dbus
   systemctl --user enable --now docker
