@@ -30,6 +30,8 @@ mounts:
   - location: "~/limahome"
     mountPoint: /mnt/lima-limahome
     writable: true
+  - location: "~/configent"
+    writable: false
   - location: "~/Downloads"
     writable: true
   # apt package archives — per-distro (ubuntu)
@@ -88,7 +90,10 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      curl -fsSL https://raw.githubusercontent.com/raas-dev/configent/main/install.sh | SETUP_GUI=true SETUP_DOCKER=false SETUP_PODMAN=false sh &
+      export SETUP_GUI=true
+      export SETUP_DOCKER=false
+      export SETUP_PODMAN=false
+      nohup /Users/asyrjasalo/configent/install.sh >/tmp/configent-install.log 2>&1 &
 
 probes:
   - description: "Xorg to be installed"
@@ -111,7 +116,7 @@ probes:
     hint: See "/var/log/cloud-init-output.log" in the guest
 
 message: |
-  Selkies desktop (xorg + xfce + chromium):
+  Selkies desktop (xorg + gnome + chromium):
     https://localhost:8443  (TLS, self-signed)
     http://localhost:8080   (plain)
 

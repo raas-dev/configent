@@ -116,7 +116,15 @@ if [ -t 0 ]; then
   fi
 else
   # if not in terminal (script run by curl/wget/cat)
-  if [ ! -d "$TARGET_PATH/.git" ]; then
+  # if install.sh itself runs from a git working copy (e.g. Lima virtiofs
+  # mount of a dev checkout), use it in place — no clone/pull/stash that
+  # would discard uncommitted dev changes.
+  SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+  if [ -d "$SELF_DIR/.git" ]; then
+    TARGET_PATH="$SELF_DIR"
+    printf "Git working copy at %s, using in place\n" "$TARGET_PATH"
+    cd "$TARGET_PATH" || exit 1
+  elif [ ! -d "$TARGET_PATH/.git" ]; then
     printf "Git working copy not found, cloning %s (%s)\n" \
       "$TARGET_PATH" "$GIT_REF"
     git clone --quiet --depth 1 --branch "$GIT_REF" \
@@ -138,4 +146,9 @@ else
   fi
   cd "$TARGET_PATH" || exit 1
   . "$TARGET_PATH/bootstrap" # 2> >(tee install_error.log >&2)
+fi
+
+# SETUP_GUI=true (e.g. Lima dev VM): desktop stack on top of bootstrap
+if [ "$(uname -s)" = 'Linux' ] && [ "${SETUP_GUI:-false}" = 'true' ]; then
+  exec "$TARGET_PATH/bin/install_linux_gnome"
 fi

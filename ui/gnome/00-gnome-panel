@@ -1,0 +1,4 @@
+[org/gnome/gnome-panel/general]
+# Ubuntu's distro default is 'ubuntu', whose layout still uses the removed
+# object-iid API -> "Module IndicatorAppletCompleteFactory does not exist".
+default-layout='default'
