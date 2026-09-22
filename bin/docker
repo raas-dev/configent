@@ -366,17 +366,11 @@ if [ "$(uname -s)" = 'Darwin' ]; then
   fi
 else
   # shellcheck disable=SC2155  # will not declare separately
-  # Prefer rootless docker: use rootless socket if present, fall back to
-  # rootful. DOCKER_HOST (if already set) and DOCKER_CONTEXT / config.json
+  # DOCKER_HOST is not set on Linux: the docker CLI resolves the endpoint on
+  # its own - the default context uses unix:///var/run/docker.sock, and the
+  # "rootless" context (docker context use rootless) uses the rootless
+  # socket. DOCKER_HOST (if already set) and DOCKER_CONTEXT / config.json
   # currentContext still control the docker CLI itself.
-  if [ -z "$DOCKER_HOST" ]; then
-    if [ -n "${XDG_RUNTIME_DIR:-}" ] &&
-      [ -S "$XDG_RUNTIME_DIR/docker.sock" ]; then
-      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock" # rootless
-    elif [ -S "/var/run/docker.sock" ]; then
-      export DOCKER_HOST="unix:///var/run/docker.sock" # rootful
-    fi
-  fi
   if [ -x "$HOME/.local/share/mise/shims/docker" ]; then
     # user-wide docker-cli installation (mise registry)
     run_docker_with_plugins "$HOME/.local/share/mise/shims/docker" "$@"
