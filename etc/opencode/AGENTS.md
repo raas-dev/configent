@@ -2,7 +2,7 @@
 
 ## speak
 - spartan. terse. pragmatic.
-- sections + lists.
+- sections + tables + lists.
 - no "shall I proceed"
 
 ## plan
