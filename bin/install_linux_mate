@@ -336,12 +336,9 @@ for _ in $(seq 1 30); do
   [ -S "/run/user/$LUID/bus" ] && break
   sleep 1
 done
-# one gsettings override on the user session: disable marco compositing for
-# selkies perf. Everything else (theme, icons, wallpaper, panel layout, dark
-# mode) comes from ubuntu-mate-default-settings gschema.override → already
-# applied by dconf on first login.
-"${AS_USER[@]}" "${UENV[@]}" \
-  gsettings set org.mate.Marco.general compositing-manager false 2>/dev/null || true
+# Marco compositing-manager disabled in 00-mate-defaults
+# ([org/mate/Marco/general]) — applies to fresh user DB at first login.
+# Existing users keep whatever MATE's user-DB already wrote.
 "${AS_USER[@]}" "${UENV[@]}" systemctl --user start mate-session.service
 if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   # warm cache for future VMs; do not block desktop.done
