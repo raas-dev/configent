@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.243.3](https://github.com/raas-dev/configent/compare/1.243.2...1.243.3) (2026-09-22)
+
+### Fixes
+
+* **docker:** prefer rootless docker socket on Lima ([19cf6d4](https://github.com/raas-dev/configent/commit/19cf6d4334346a3a15277f8d5ab47bd26771804d))
+* **lima:** remove mise offline keep-download overrides ([e7ca673](https://github.com/raas-dev/configent/commit/e7ca673433efda6aa61387e8d7186aa0d82554b2))
+* **lima:** replace isolate with targeted service starts ([aa48c89](https://github.com/raas-dev/configent/commit/aa48c89c80cbeaceb8287282aa24417010683b45))
+* **podman:** enable systemd linger for rootless podman ([521ed22](https://github.com/raas-dev/configent/commit/521ed225654c1ecddb3bed98a059cfe1f8c1059d))
+
+### Performance
+
+* **apt:** consolidate apt speed tuning in install.sh ([3e2e86a](https://github.com/raas-dev/configent/commit/3e2e86a4bb9b96b99d3aa3880e952e0ef5754f6c))
+* **apt:** disable PDiffs for faster apt installs ([de6d36a](https://github.com/raas-dev/configent/commit/de6d36aeef99c067271f9e92a949de7df07fb0f1))
+* **apt:** remove PDiffs disable config ([7555dde](https://github.com/raas-dev/configent/commit/7555dde9b88132ec21fe07d6234170a3289e21da))
+* **apt:** use $SUDO for apt speed config ([c1083d4](https://github.com/raas-dev/configent/commit/c1083d460493e253698aa9cd53f13a53c26d62b1))
+
 ## [1.243.2](https://github.com/raas-dev/configent/compare/1.243.1...1.243.2) (2026-09-21)
 
 ### Fixes
