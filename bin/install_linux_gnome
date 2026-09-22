@@ -32,6 +32,8 @@ wait_ok() {
   }
 }
 
+log() { printf '[gnome-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
+
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 LHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 UHOME=$LHOME
@@ -178,16 +180,23 @@ chromium_files() {
   $SUDO chmod 644 /etc/dconf/db/local
 }
 
-apt_install_all() {
+APT_OPTS=(-y --no-install-recommends -o Acquire::Retries=3
+  -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold
+  -o Dpkg::Options::=--force-unsafe-io)
+
+# probe-blocking set: xorg + selkies + flashback session + audio (selkies-session
+# launches pipewire directly). Everything else deferred to apt_install_extras.
+apt_install_core() {
   local -a pkgs=(
     xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
     xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11
-    python3-pip socat libnspr4 libnss3
+    socat libnspr4 libnss3
     gnome-session-flashback gnome-flashback gnome-panel metacity
-    gnome-backgrounds gnome-control-center mate-themes mate-icon-theme at-spi2-core dconf-cli fonts-ubuntu
-    gnome-terminal adwaita-icon-theme
+    at-spi2-core dconf-cli gnome-terminal adwaita-icon-theme
+    gnome-backgrounds # wallpaper must exist before session first renders
     pipewire pipewire-pulse wireplumber
   )
+  [ -f "$TARBALL" ] || pkgs+=(python3-pip) # cold chromium path needs pip3
   case "$ARCH" in
   amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
   arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
@@ -197,11 +206,21 @@ apt_install_all() {
   else
     DEBSRC="/tmp/$DEB"
   fi
-  $SUDO apt-get install -y --no-install-recommends \
-    -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold \
-    "${pkgs[@]}" "$DEBSRC"
+  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}" "$DEBSRC"
   $SUDO dpkg --configure -a
   $SUDO update-desktop-database /usr/local/share/applications || true
+}
+
+# non-blocking: settings UI, wallpapers, extra themes/fonts — installed in bg
+# after core returns; failure logged to /tmp/extras.log only, never blocks
+# desktop.done. Contends on dpkg lock with install_apps_apt: serialized, fine.
+apt_install_extras() {
+  local -a pkgs=(
+    gnome-control-center mate-themes mate-icon-theme
+    fonts-ubuntu
+  )
+  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
+  $SUDO dpkg --configure -a
 }
 
 $SUDO install -d -m 755 /var/cache/apt/archives/partial
@@ -217,19 +236,25 @@ chromium_dl >/tmp/cb.log 2>&1 &
 CB=$!
 extensions_dl >/tmp/ext.log 2>&1 &
 EXT=$!
+log start
 write_configs
 wait_ok "$UP" /tmp/apt.log
-# small install first: pip unlocks the chromium download (runs in bg) while
-# the big GNOME transaction below runs in parallel with it
-$SUDO apt-get install -y --no-install-recommends -o Acquire::Retries=3 \
-  -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold python3-pip
 wait_ok "$SDB" /tmp/selkdeb.log
-apt_install_all
+if [ ! -f "$TARBALL" ]; then
+  # cold path only: pip3 unlocks the bg chromium download before core install;
+  # warm path (tarball) needs no pip at all on the probe path
+  $SUDO apt-get install "${APT_OPTS[@]}" python3-pip
+fi
+log "apt core install starting"
+apt_install_core
+log "apt core install done"
+apt_install_extras >/tmp/extras.log 2>&1 &
 wait_ok "$CB" /tmp/cb.log
 wait_ok "$EXT" /tmp/ext.log
 chromium_files
 # isolate would stop ALL units outside graphical.target's graph — including the
 # per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
+log "services starting"
 $SUDO systemctl set-default graphical.target
 $SUDO systemctl start xorg-dummy.service selkies-tls.service
 # user manager starts async after enable-linger; wait for its bus, then session
@@ -246,4 +271,5 @@ if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
   ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
     mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
 fi
+log "desktop.done"
 touch /var/tmp/desktop.done

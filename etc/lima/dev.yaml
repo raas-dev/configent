@@ -23,8 +23,6 @@ video:
   # none: no host window — in-VM Xorg uses dummy driver, streamed via selkies
   display: none
 
-# home persists via ~/limahome host dir (mounts below), survives `limactl delete`
-
 mounts:
   # guest home persistence — backed by host dir, survives `limactl delete`
   - location: "~/limahome"
@@ -90,13 +88,10 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      export SETUP_GUI=true
-      export SETUP_DOCKER=false
-      export SETUP_PODMAN=false
-      "/Users/asyrjasalo/configent/install.sh" &
+      SETUP_GUI=true SETUP_DOCKER=false SETUP_PODMAN=false \
+        /Users/asyrjasalo/configent/install.sh &
 
-# selkies web UI binds guest loopback; lima auto-forward only covers 0.0.0.0/:: binds,
-# so forward explicitly (guestIP default 127.0.0.1 reaches it)
+# selkies web UI binds guest loopback
 portForwards:
   - guestPort: 8080
     hostPort: 8080
@@ -104,8 +99,7 @@ portForwards:
     hostPort: 8443
 
 probes:
-  # readiness = install finished AND services up AND web UI answering on 8080
-  - description: "Selkies desktop to be ready"
+  - description: "Desktop to be ready"
     script: |
       #!/bin/bash
       set -eux -o pipefail
@@ -113,13 +107,12 @@ probes:
         && systemctl is-active --quiet xorg-dummy.service \
         && systemctl is-active --quiet selkies-tls.service \
         && curl -fsS -o /dev/null --max-time 5 http://127.0.0.1:8080/; do sleep 2; done"; then
-        echo >&2 "Selkies desktop not ready"
+        echo >&2 "Desktop not ready"
         exit 1
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
-
 message: |
-  Selkies desktop (xorg + gnome + chromium):
+  Desktop:
     https://localhost:8443  (TLS, self-signed)
     http://localhost:8080   (plain)
 
