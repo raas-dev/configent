@@ -60,10 +60,10 @@ if [ ! -x "/usr/bin/docker" ]; then
   #$SUDO docker run --privileged --rm tonistiigi/binfmt:master --install all
 
   # Setup rootless mode. Setuptool sets currentContext=rootless; reset to
-  # default so the rootful daemon stays the default - bin/docker maps ctx
-  # default -> rootful. Switch with: docker context use rootless
   $SUDO apt-get install -y docker-ce-rootless-extras
   dockerd-rootless-setuptool.sh install --force
+
+  # Assume we are in a lima VM -> set rootful as default -> faster local network
   docker context use default
 
   systemctl --user enable --now dbus
