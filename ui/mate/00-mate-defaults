@@ -26,14 +26,16 @@ secondary-color='#3C3B37'
 [org/mate/desktop/interface]
 gtk-theme='Yaru-olive-dark'
 icon-theme='Yaru-olive-dark'
-font-name='Ubuntu 10'
-document-font-name='Ubuntu 10'
-monospace-font-name='Ubuntu Mono 11'
 
 # Panel clock: show seconds + date.
-# gnome.desktop.interface is the GNOME path; mate-panel.ClockApplet reads
-# from org.mate.panel.applet.clock (relocatable) instead.
+# Fonts live on org.gnome.desktop.interface (path /org/gnome/desktop/interface),
+# NOT org.mate.interface (path /org/mate/desktop/interface). Earlier drafts
+# put them in [org/mate/desktop/interface] and dconf wrote them to a path
+# no schema reads, so fresh users got the upstream 'Sans 10' default.
 [org/gnome/desktop/interface]
+font-name='Ubuntu 10'
+document-font-name='Ubuntu 10'
+monospace-font-name='Terminess Nerd Font Mono 11'
 clock-show-seconds=true
 clock-show-date=true
 # AT-SPI2 master switch. Without this, GTK widgets are invisible to Orca.
@@ -49,9 +51,18 @@ custom-format='%a %d %b  %H:%M:%S'
 
 [org/mate/caja/preferences]
 show-desktop-icons=true
+# Show foo~ backup files. Upstream default already true; pinned for VM
+# recreate + grep-ability.
+show-backup-files=true
 # Arrange items by type; tighter (compact) layout for icon view.
 default-sort-order='type'
-sort-directories-first=false
+sort-directories-first=true
+
+# Don't pop a Caja window when removable media gets inserted.
+# Drives still auto-mount (automount=true), the icon just stays in the side
+# panel until the user clicks it.
+[org/mate/media-handling]
+automount-open=false
 
 [org/mate/caja/icon-view]
 default-use-tighter-layout=true
@@ -60,10 +71,24 @@ default-use-tighter-layout=true
 [org/mate/caja/desktop]
 font='Ubuntu 10'
 
-# mate-terminal default font (system default 'Monospace 12' is too big).
+# mate-terminal default profile. System monospace font, I-beam, blink on,
+# 120×35 custom size, silent bell, auto-copy selection to clipboard,
+# unlimited scrollback. font key is the fallback if use-system-font is off.
 [org/mate/terminal/profiles/default]
 use-system-font=false
-font='Monospace 9'
+silent-bell=true
+copy-selection=true
+cursor-shape='ibeam'
+cursor-blink-mode='on'
+allow-bold=true
+use-custom-default-size=true
+default-size-columns=120
+default-size-rows=35
+scrollback-unlimited=true
+palette='#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'
+foreground-color='#FFFFFFFFDDDD'
+background-color='#000000000000'
+font='Terminess Nerd Font Mono 11'
 
 # GTK file chooser: show dotfiles by default.
 [org/gtk/settings/file-chooser]
