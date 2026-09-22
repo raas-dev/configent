@@ -77,3 +77,6 @@ fi
 
 # Enable and start podman.socket for the user
 systemctl --user enable --now podman.socket
+# Keep the user systemd instance (and rootless podman.socket) alive without
+# an active login session, similarly to install_docker
+$SUDO loginctl enable-linger "$USER"

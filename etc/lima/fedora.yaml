@@ -53,6 +53,12 @@ provision:
   #     #!/bin/bash
   #     set -eux -o pipefail
   #     systemctl --system enable --now podman.socket
+  - mode: system
+    script: |
+      #!/bin/bash
+      # Keep the user systemd instance (and rootless podman.socket) alive
+      # without an active login session, similarly to install_docker
+      loginctl enable-linger {{.User}}
   - mode: user
     script: |
       #!/bin/bash
