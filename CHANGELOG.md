@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.243.4](https://github.com/raas-dev/configent/compare/1.243.3...1.243.4) (2026-09-22)
+
+### Fixes
+
+* **docker:** prefer rootful socket on Lima by default ([16c336a](https://github.com/raas-dev/configent/commit/16c336a09ed3a16ced2a211a28b058d4340e6500))
+* **docker:** reset docker context after rootless setup ([45b103b](https://github.com/raas-dev/configent/commit/45b103b1e56bb0db14cf30ac0eae644d8e9989d9))
+* **docker:** stop resetting default docker context after rootless setup ([4402971](https://github.com/raas-dev/configent/commit/4402971e6a7e417f8d1f46f846d16a7d62426e01))
+
 ## [1.243.3](https://github.com/raas-dev/configent/compare/1.243.2...1.243.3) (2026-09-22)
 
 ### Fixes
