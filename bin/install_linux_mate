@@ -203,6 +203,13 @@ EOF
   $SUDO install -m 644 "$UI/ubuntu-mate.layout" \
     /usr/share/mate-panel/layouts/ubuntu-mate.layout
 
+  # Ship our JPG wallpaper. dconf keyfile 00-mate-defaults pins
+  # picture-filename at /usr/share/backgrounds/wallpaper-radioactive.jpg;
+  # missing file → caja-desktop falls back to the default MATE background.
+  # All -wallpapers-* apt pkgs removed; this one file is the only bg.
+  $SUDO install -m 644 "$UI/wallpaper-radioactive.jpg" \
+    /usr/share/backgrounds/wallpaper-radioactive.jpg
+
   # Pin x-terminal-emulator to mate-terminal (not gnome-terminal wrapper).
   # update-alternatives' slave is /etc/alternatives/x-terminal-emulator; on
   # images without this, .desktop parsing lands the user on gnome-terminal.

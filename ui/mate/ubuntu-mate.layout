@@ -54,7 +54,13 @@ locked=true
 object-type=applet
 applet-iid=GvcAppletFactory::GvcApplet
 toplevel-id=top
-position=9
+position=15
+relative-to-edge=end
+locked=true
+[Object separator]
+object-type=separator
+toplevel-id=top
+position=20
 relative-to-edge=end
 locked=true
 [Object workspace-switcher]
