@@ -172,11 +172,6 @@ warm_cache() {
   fi
 }
 
-# Package lists inlined in main flow for single-batch apt install.
-# write_xorg_selkies_configs removed: enable_selkies_units now runs from main
-# in parallel with factory_reset_and_apply + write_mate_extras + warm_cache
-# (was dead in cloud-init root path; ordering now matters only via Wave-2 wait).
-
 install_selkies_configs() {
   $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
   $SUDO install -d /etc/X11/xorg.conf.d
@@ -203,12 +198,6 @@ enable_selkies_units() {
 }
 
 write_mate_extras() {
-  # dconf profile must be world-readable for users to run gsettings.
-  # Earlier install runs left it 640 root:root, killing every `gsettings set`.
-  $SUDO install -d -m 755 /etc/dconf/profile
-  printf 'user-db:user\n' | $SUDO tee /etc/dconf/profile/user >/dev/null
-  $SUDO chmod 644 /etc/dconf/profile/user
-
   $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
   [ -f "$UI/wallpaper-radioactive.jpg" ] && $SUDO install -D -m 644 \
     "$UI/wallpaper-radioactive.jpg" /usr/share/backgrounds/wallpaper-radioactive.jpg
@@ -231,14 +220,10 @@ factory_reset_and_apply() {
     "$UHOME/.config/mate-session" \
     "$UHOME/.config/mate-panel" \
     "$UHOME/.config/Caja" \
-    "$UHOME/.config/dconf" \
-    "$UHOME/.config/mimeapps.list" \
-    "$UHOME/.cache/dconf" \
     "$UHOME/.cache/mate-session" \
     "$UHOME/.cache/mate-panel" \
     "$UHOME/.cache/Caja" \
-    "$UHOME/.local/share/mate" \
-    "/run/user/$LUID/dconf"
+    "$UHOME/.local/share/mate"
 
   if [ -f "$TARBALL" ]; then
     $SUDO tar xzf "$TARBALL" -C /
@@ -268,10 +253,10 @@ factory_reset_and_apply() {
       "$UHOME/.local/share/applications" 2>/dev/null || true
     $SUDO runuser -u "$LUSER" -- env \
       HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user start mate-autostart.service 2>/dev/null || true
+      systemctl --user enable --now mate-autostart.service 2>/dev/null || true
   else
     XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user start mate-autostart.service 2>/dev/null || true
+      systemctl --user enable --now mate-autostart.service 2>/dev/null || true
   fi
 }
 
@@ -316,7 +301,7 @@ $SUDO apt-get install "${APT_OPTS[@]}" \
   ubuntu-mate-icon-themes ubuntu-mate-themes \
   ayatana-indicator-application mate-terminal \
   at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
-  dconf-cli polkitd \
+  dconf-cli \
   pipewire pipewire-pulse wireplumber \
   fonts-ubuntu \
   python3-pip \
