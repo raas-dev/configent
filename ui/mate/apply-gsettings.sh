@@ -35,9 +35,9 @@ run gsettings set org.mate.NotificationDaemon sound-enabled false
 # === org.mate.background ===
 run gsettings set org.mate.background color-shading-type 'solid'
 run gsettings set org.mate.background picture-filename '/usr/share/backgrounds/wallpaper-radioactive.jpg'
-run gsettings set org.mate.background picture-options 'zoom'
-run gsettings set org.mate.background primary-color '#3C3B37'
-run gsettings set org.mate.background secondary-color '#3C3B37'
+run gsettings set org.mate.background picture-options 'scaled'
+run gsettings set org.mate.background primary-color '#000000'
+run gsettings set org.mate.background secondary-color '#000000'
 
 # === org.mate.background/desktop-backgrounds/0 ===
 # relocatable: bound per id, but we skip — mate backgrounds seed this on first run.
@@ -93,9 +93,9 @@ run gsettings set org.gnome.desktop.default-applications.terminal exec 'mate-ter
 # === org.mate.desktop.background (mate alias of org.gnome.desktop.background) ===
 run gsettings set org.gnome.desktop.background color-shading-type 'solid'
 run gsettings set org.gnome.desktop.background picture-filename '/usr/share/backgrounds/wallpaper-radioactive.jpg'
-run gsettings set org.gnome.desktop.background picture-options 'zoom'
-run gsettings set org.gnome.desktop.background primary-color 'rgb(60,59,55)'
-run gsettings set org.gnome.desktop.background secondary-color 'rgb(60,59,55)'
+run gsettings set org.gnome.desktop.background picture-options 'scaled'
+run gsettings set org.gnome.desktop.background primary-color 'rgb(0,0,0)'
+run gsettings set org.gnome.desktop.background secondary-color 'rgb(0,0,0)'
 
 # === org.mate.font-rendering ===
 run gsettings set org.mate.font-rendering antialiasing 'rgba'
@@ -141,9 +141,34 @@ run gsettings set org.mate.NotificationDaemon do-not-disturb true
 run gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.panel (mounted at /org/mate/panel/general/ in dconf, flat in gsettings) ===
-run gsettings set org.mate.panel default-layout 'ubuntu-mate'
+# Prune orphan objects not in the canonical list (e.g. briskmenu, firefox applet
+# inherited from the ubuntu-mate profile) so mate-panel stops trying to load
+# factories whose .so is absent. Done via dconf because the relocatable object
+# schema lacks a generic "delete" gsettings call.
+canon="menu-bar separator show-desktop window-list gvc indicatorappletcomplete notification-area clock workspace-switcher"
+pruned=0
+for obj in $(dconf list /org/mate/panel/objects/ 2>/dev/null | tr -d /); do
+  if ! printf '%s\n' "$canon" | grep -Fxq -- "$obj"; then
+    dconf reset -f "/org/mate/panel/objects/$obj/" 2>/dev/null || true
+    pruned=$((pruned + 1))
+  fi
+done
+# Also nuke stale toplevel rows (anything other than the canonical top/bottom)
+# so the panel layout resets cleanly without orphan bars.
+for tid in $(dconf list /org/mate/panel/toplevels/ 2>/dev/null | tr -d /); do
+  case " $tid " in
+  " top " | " bottom ") ;;
+  *) dconf reset -f "/org/mate/panel/toplevels/$tid/" 2>/dev/null || true ;;
+  esac
+done
+# default-layout points at /usr/share/mate-panel/layouts/<name>.layout.
+# ubuntu-mate.layout has briskmenu baked in and re-creates the object on
+# every mate-panel restart even when object-id-list excludes it. Use
+# 'default' (no briskmenu). ponytail: revisit if we ever want a richer
+# distro-specific panel layout.
+run gsettings set org.mate.panel default-layout 'default'
 run gsettings set org.mate.panel object-id-list \
-  "['menu-bar', 'clock', 'notification-area', 'indicatorappletcomplete', 'show-desktop', 'window-list', 'gvc', 'separator', 'workspace-switcher']"
+  "['menu-bar', 'separator', 'show-desktop', 'window-list', 'gvc', 'indicatorappletcomplete', 'notification-area', 'clock', 'workspace-switcher']"
 run gsettings set org.mate.panel toplevel-id-list "['top', 'bottom']"
 
 # === org.mate.panel.object (relocatable per applet) ===
@@ -152,23 +177,30 @@ run gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" locked 
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" object-type 'applet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" relative-to-edge 'end'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" toplevel-id 'top'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" panel-right-stick true
 
 run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" custom-format '%a %d %b  %H:%M:%S'
 run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" format 'custom'
 run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" show-date true
 run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" show-seconds true
 
+run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" custom-format '%a %d %b  %H:%M:%S'
+run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" format 'custom'
+run gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-seconds true
+
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" applet-iid 'GvcAppletFactory::GvcApplet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" locked true
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" object-type 'applet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" relative-to-edge 'end'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" toplevel-id 'top'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" panel-right-stick true
 
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" applet-iid 'IndicatorAppletCompleteFactory::IndicatorAppletComplete'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" locked true
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" object-type 'applet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" relative-to-edge 'end'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" toplevel-id 'top'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" panel-right-stick true
 
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" locked true
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" object-type 'menu-bar'
@@ -179,11 +211,13 @@ run gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-ar
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" object-type 'applet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" relative-to-edge 'end'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" toplevel-id 'top'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true
 
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" locked true
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" object-type 'separator'
-run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" relative-to-edge 'end'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" relative-to-edge 'start'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" toplevel-id 'top'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" panel-right-stick false
 
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" applet-iid 'WnckletFactory::ShowDesktopApplet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" locked true
@@ -200,22 +234,21 @@ run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switc
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" object-type 'applet'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" relative-to-edge 'end'
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" toplevel-id 'bottom'
+run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" panel-right-stick true
 
 # === org.mate.panel.toplevel (relocatable per panel id) ===
-# mate-panel renders ONLY what `objects` lists. Empty array = empty panel.
-# Same order as ubuntu-mate.layout (menubar+launchers left, indicators right).
+# Per-panel size/position. mate-panel derives rendered content from
+# `org.mate.panel object-id-list` filtered by each object's `toplevel-id`.
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" auto-hide false
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" orientation 'top'
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" screen 0
-run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" objects \
-  "['menu-bar', 'clock', 'notification-area', 'indicatorappletcomplete', 'gvc']"
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" size 32
 
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" auto-hide false
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" orientation 'bottom'
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" screen 0
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" y-bottom 0
-run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" objects \
-  "['show-desktop', 'window-list', 'workspace-switcher']"
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" size 32
 
 # === org.mate.peripherals-keyboard-xkb.general ===
 run gsettings set org.mate.peripherals-keyboard-xkb general default-group 0
@@ -307,3 +340,13 @@ run gsettings set org.gnome.desktop.interface toolkit-accessibility true
 run gsettings set org.gnome.desktop.sound event-sounds false
 run gsettings set org.gnome.desktop.sound input-feedback-sounds false
 run gsettings set org.gnome.desktop.sound theme-name '__custom'
+
+# Force live mate-panel to re-read dconf. A running panel keeps its in-RAM
+# applet list/size from when it started, so the freshly-applied settings
+# (size=32, default-layout=default, object-id-list=...) only take effect on
+# the next start. mate-session respawns mate-panel within ~1s of death, so
+# we just kill it. -x matches only the binary name; the applet helpers
+# (clock-applet, wnck-applet, ...) live as long as mate-panel does.
+if pgrep -u "$uid" -x mate-panel >/dev/null 2>&1; then
+  run pkill -x mate-panel || true
+fi

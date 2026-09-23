@@ -22,7 +22,7 @@ else
   exit 1
 fi
 
-set -eux -o pipefail
+set -eu -o pipefail
 
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
@@ -58,7 +58,10 @@ selkies_deb() {
     return 1
     ;;
   esac
-  if [ -f "/mnt/lima-provision/$DEB" ]; then return 0; fi
+  if [ -f "/mnt/lima-provision/$DEB" ]; then
+    cp "/mnt/lima-provision/$DEB" "/tmp/$DEB"
+    return 0
+  fi
   curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
     "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
   [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
@@ -145,11 +148,17 @@ warm_cache() {
   fi
 }
 
-apt_install_core() {
+apt_install_xorg_fast() {
   local -a pkgs=(
     xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
     xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11
     socat libnspr4 libnss3
+  )
+  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
+}
+
+apt_install_mate_slow() {
+  local -a pkgs=(
     ubuntu-mate-desktop ubuntu-mate-default-settings
     ubuntu-mate-icon-themes ubuntu-mate-themes
     ayatana-indicator-application mate-terminal
@@ -158,44 +167,51 @@ apt_install_core() {
     pipewire pipewire-pulse wireplumber
   )
   $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
-}
-
-apt_install_extras() {
-  local -a pkgs=(fonts-ubuntu)
-  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
-  if [ -f "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb" ]; then
-    $SUDO apt-get install "${APT_OPTS[@]}" "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
-    rm -f "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
-  fi
+  $SUDO apt-get install "${APT_OPTS[@]}" fonts-ubuntu
   $SUDO dpkg --configure -a 2>/dev/null || true
   $SUDO update-desktop-database /usr/local/share/applications 2>/dev/null || true
 }
 
-write_configs() {
+install_selkies_deb() {
+  local deb="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
+  [ -f "$deb" ] || return 1
+  $SUDO DEBIAN_FRONTEND=noninteractive apt-get install "${APT_OPTS[@]}" "$deb"
+  rm -f "$deb"
+}
+
+write_xorg_selkies_configs() {
+  install_selkies_configs
+  enable_selkies_units
+}
+
+install_selkies_configs() {
   $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
   $SUDO install -d /etc/X11/xorg.conf.d
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
   $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
-  $SUDO systemctl enable --now xorg-dummy
-
-  $SUDO loginctl enable-linger "$LUSER"
-
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
   $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
   $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
-  $SUDO sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
-    "$UI/selkies-autostart.service" >/etc/systemd/system/selkies-autostart.service
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+    "$UI/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
-  $SUDO systemctl enable --now selkies-tls selkies-autostart
+  $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
+  $SUDO systemctl daemon-reload 2>/dev/null || true
+}
 
+enable_selkies_units() {
+  $SUDO systemctl enable --now xorg-dummy 2>/dev/null || true
+  $SUDO systemctl enable --now selkies-tls selkies-autostart 2>/dev/null || true
+}
+
+write_mate_extras() {
   $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
-
-  [ -f "$UI/wallpaper-radioactive.jpg" ] && $SUDO install -m 644 \
+  [ -f "$UI/wallpaper-radioactive.jpg" ] && $SUDO install -D -m 644 \
     "$UI/wallpaper-radioactive.jpg" /usr/share/backgrounds/wallpaper-radioactive.jpg
-
+  $SUDO chmod 755 /usr/share/backgrounds
   $SUDO systemctl mask \
     mate-session.service 'mate-session@*.service' \
     mate-settings-daemon.service 'mate-settings-daemon@*.service' \
@@ -206,10 +222,13 @@ write_configs() {
     /etc/xdg/autostart/mate-screensaver.desktop \
     /etc/xdg/autostart/nemo-desktop.desktop \
     /etc/systemd/system/mate-autostart.service 2>/dev/null || true
-
   $SUDO systemd-sysusers 2>/dev/null || true
-
   $SUDO systemctl set-default graphical.target 2>/dev/null || true
+}
+
+write_configs() {
+  write_xorg_selkies_configs
+  write_mate_extras
 }
 
 factory_reset_and_apply() {
@@ -261,47 +280,63 @@ factory_reset_and_apply() {
 
 log "start"
 
+LOGDIR=/var/tmp/mate-install
+$SUDO mkdir -p -m 755 "$LOGDIR"
+$SUDO chown "$LUSER": "$LOGDIR"
+
+$SUDO rm -f "$LOGDIR"/*.log
+
+exec > >(tee -a "$LOGDIR/install_linux_mate.log") 2>&1
+
 $SUDO install -d -m 755 /var/cache/apt/archives/partial
 
 $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 \
-  >/tmp/apt.log 2>&1 &
+  >"$LOGDIR/apt.log" 2>&1 &
 UP=$!
-selkies_deb >/tmp/selkdeb.log 2>&1 &
+selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
 SDB=$!
-write_configs >/tmp/cfg.log 2>&1 &
-CFG=$!
-chromium_dl >/tmp/cb.log 2>&1 &
+chromium_dl >"$LOGDIR/cb.log" 2>&1 &
 CB=$!
-extensions_dl >/tmp/ext.log 2>&1 &
+extensions_dl >"$LOGDIR/ext.log" 2>&1 &
 EXT=$!
+install_selkies_configs >"$LOGDIR/cfg.log" 2>&1 &
+CFG=$!
 
-wait_ok "$UP" /tmp/apt.log
+wait_ok "$UP" "$LOGDIR/apt.log"
 log "apt index updated"
 
-wait_ok "$SDB" /tmp/selkdeb.log
+log "apt xorg install starting"
+apt_install_xorg_fast >"$LOGDIR/xorg.log" 2>&1
+log "apt xorg install done"
+wait_ok "$SDB" "$LOGDIR/selkdeb.log"
+install_selkies_deb >"$LOGDIR/selkies-install.log" 2>&1
+log "selkies deb installed"
 log "selkies deb fetched"
 
-wait_ok "$CFG" /tmp/cfg.log
-log "configs written"
+wait_ok "$CFG" "$LOGDIR/cfg.log"
+log "selkies configs written"
+
+log "apt mate install starting"
+apt_install_mate_slow >"$LOGDIR/core.log" 2>&1
+log "apt mate install done"
+
+wait_ok "$CB" "$LOGDIR/cb.log"
+log "cloakbrowser installed"
+
+wait_ok "$EXT" "$LOGDIR/ext.log"
+log "extensions installed"
 
 if [ ! -f "$TARBALL" ]; then
-  $SUDO apt-get install "${APT_OPTS[@]}" python3-pip >/tmp/pip.log 2>&1
+  $SUDO apt-get install "${APT_OPTS[@]}" python3-pip >"$LOGDIR/pip.log" 2>&1
   log "pip3 installed"
 fi
 
-log "apt core install starting"
-apt_install_core >/tmp/core.log 2>&1
-log "apt core install done"
-
-wait_ok "$CB" /tmp/cb.log
-log "cloakbrowser installed"
-
-wait_ok "$EXT" /tmp/ext.log
-log "extensions installed"
-
-apt_install_extras >/tmp/extras.log 2>&1
-log "apt extras installed"
+write_mate_extras >"$LOGDIR/cfg2.log" 2>&1
+log "mate extras written"
 
 factory_reset_and_apply
-warm_cache >/tmp/warm.log 2>&1 &
+warm_cache >"$LOGDIR/warm.log" 2>&1 &
+
+enable_selkies_units
+log "xorg-dummy + selkies units enabled"
 log "mate done"
