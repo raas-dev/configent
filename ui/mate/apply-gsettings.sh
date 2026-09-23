@@ -202,12 +202,6 @@ gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/"
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true
 
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" locked true
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" object-type 'separator'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" relative-to-edge 'start'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" toplevel-id 'top'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/separator/" panel-right-stick false
-
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" applet-iid 'WnckletFactory::ShowDesktopApplet'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" object-type 'applet'
@@ -312,9 +306,10 @@ gsettings set org.gnome.desktop.sound theme-name '__custom'
 # Force live mate-panel to re-read dconf. A running panel keeps its in-RAM
 # applet list/size from when it started, so the freshly-applied settings
 # (size=32, default-layout=default, object-id-list=...) only take effect on
-# the next start. mate-session respawns mate-panel within ~1s of death, so
-# we just kill it. -x matches only the binary name; the applet helpers
-# (clock-applet, wnck-applet, ...) live as long as mate-panel does.
+# the next start. `mate-panel --replace` is the documented MATE reload path:
+# the new binary XEmbed-swaps into the running panel, the old one exits
+# cleanly. Backgrounded in a subshell so the script returns immediately
+# instead of tracking the long-lived panel.
 if pgrep -u "$uid" -x mate-panel >/dev/null 2>&1; then
-  pkill -x mate-panel || true
+  (mate-panel --replace >/dev/null 2>&1 &)
 fi

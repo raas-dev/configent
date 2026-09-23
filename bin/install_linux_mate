@@ -183,7 +183,7 @@ write_mate_extras() {
   # dconf profile must be world-readable for users to run gsettings.
   # Earlier install runs left it 640 root:root, killing every `gsettings set`.
   $SUDO install -d -m 755 /etc/dconf/profile
-  printf 'user-db:user\nsystem-db:local\n' | $SUDO tee /etc/dconf/profile/user >/dev/null
+  printf 'user-db:user\n' | $SUDO tee /etc/dconf/profile/user >/dev/null
   $SUDO chmod 644 /etc/dconf/profile/user
 
   $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
