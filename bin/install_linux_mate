@@ -6,6 +6,11 @@ fi
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+# ponytail: warm-boot fast path. First successful install touches this; selkies
+# units are systemctl-enabled, so systemd brings them up on boot without us.
+# Saves ~10 min on every `vm up dev` after the first cold install.
+[ -f /var/tmp/desktop.done ] && exit 0
+
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LUID=$(id -u "$LUSER")
@@ -161,10 +166,10 @@ install_selkies_configs() {
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
   $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
-  $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
+  $SUDO sh -c '[ -f /etc/ssl/selkies.pem ] || (openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt && \
-    chmod 644 /etc/ssl/selkies.pem'
+    chmod 644 /etc/ssl/selkies.pem)'
   $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
   $SUDO sed -i "/^\\[Service\\]/a User=$LUSER\nGroup=$LUSER" /etc/systemd/system/selkies-tls.service
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
@@ -200,8 +205,6 @@ write_mate_extras() {
     /etc/xdg/autostart/mate-screensaver.desktop \
     /etc/xdg/autostart/nemo-desktop.desktop \
     /etc/systemd/system/mate-autostart.service 2>/dev/null || true
-  $SUDO systemd-sysusers 2>/dev/null || true
-  $SUDO systemctl set-default graphical.target 2>/dev/null || true
 }
 
 factory_reset_and_apply() {
@@ -262,15 +265,15 @@ rm -f "$LOGDIR"/*.log
 
 exec > >(tee -a "$LOGDIR/install_linux_mate.log") 2>&1
 
-$SUDO install -d -m 755 /var/cache/apt/archives/partial
-
 $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 \
   >"$LOGDIR/apt.log" 2>&1 &
 UP=$!
 selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
 SDB=$!
 chromium_dl >"$LOGDIR/cb.log" 2>&1 &
+CB=$!
 extensions_dl >"$LOGDIR/ext.log" 2>&1 &
+EXT=$!
 install_selkies_configs >"$LOGDIR/cfg.log" 2>&1 &
 CFG=$!
 
@@ -289,7 +292,7 @@ log "apt + selkies + mate + pip install starting (single batch)"
 $SUDO apt-get install "${APT_OPTS[@]}" \
   "$SELKIES_DEB" \
   xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput \
-  xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
+  x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
   socat libnspr4 libnss3 \
   ubuntu-mate-desktop ubuntu-mate-default-settings \
   ubuntu-mate-icon-themes ubuntu-mate-themes \
@@ -303,23 +306,31 @@ $SUDO apt-get install "${APT_OPTS[@]}" \
   tail -60 "$LOGDIR/core.log" >&2
   exit 1
 }
-$SUDO dpkg --configure -a 2>/dev/null || true
-$SUDO update-desktop-database /usr/local/share/applications 2>/dev/null || true
 rm -f "$SELKIES_DEB"
 log "apt + selkies + mate + pip installed"
 
+# Wait for backgrounds we still need: chromium_dl (factory_reset reads
+# /opt/cloakbrowser), extensions_dl (warm_cache bundles it), install_selkies_configs
+# (selkies unit files must exist before enable_selkies_units).
+wait_ok "$CB" "$LOGDIR/cb.log"
+wait_ok "$EXT" "$LOGDIR/ext.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
-log "selkies configs written"
+log "selkies configs + chromium + extensions ready"
 
-log "chromium/extensions download in background (non-blocking)"
-
-factory_reset_and_apply
-
-write_mate_extras >"$LOGDIR/cfg2.log" 2>&1
-log "mate extras written"
-
+# ponytail: selkies start, factory reset, mate extras, warm-cache all run
+# concurrently. lima probe waits on selkies-tls :8080; mate-autostart brings
+# up the session. Both ready by the time the script exits.
+enable_selkies_units >"$LOGDIR/selk.log" 2>&1 &
+SRV=$!
+factory_reset_and_apply >"$LOGDIR/factory.log" 2>&1 &
+FAC=$!
+write_mate_extras >"$LOGDIR/cfg2.log" 2>&1 &
+EXTRAS=$!
 warm_cache >"$LOGDIR/warm.log" 2>&1 &
 
-enable_selkies_units
-log "xorg-dummy + selkies units enabled"
+wait_ok "$FAC" "$LOGDIR/factory.log"
+wait_ok "$EXTRAS" "$LOGDIR/cfg2.log"
+wait_ok "$SRV" "$LOGDIR/selk.log"
+
 log "mate done"
+touch /var/tmp/desktop.done
