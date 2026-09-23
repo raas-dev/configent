@@ -96,13 +96,13 @@ chromium_dl() {
   if $SUDO pip3 install --no-cache-dir --break-system-packages \
     --root-user-action=ignore --ignore-installed \
     typing_extensions cloakbrowser >/tmp/cb-install.log 2>&1; then
-    touch /tmp/cb.ok
+    :
   else
     cat /tmp/cb-install.log >&2
     return 1
   fi
   if $SUDO cloakbrowser install >/tmp/cb-cli.log 2>&1; then
-    touch /tmp/cb-bin.ok
+    :
   else
     cat /tmp/cb-cli.log >&2
     return 1
@@ -116,21 +116,23 @@ extensions_dl() {
     ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
     name=${pair%%:*}
     id=${pair##*:}
-    curl -fsSL --retry 5 --retry-all-errors \
-      -o "/tmp/$name.crx" \
-      "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc" ||
-      {
-        printf 'CRX download failed: %s\n' "$name" >&2
-        return 1
-      }
-    python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' \
-      "/tmp/$name.crx" "/tmp/$name.zip"
-    $SUDO mkdir -p "/usr/local/share/extensions/$name"
-    $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
-    $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
+    (
+      curl -fsSL --retry 5 --retry-all-errors \
+        -o "/tmp/$name.crx" \
+        "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc" ||
+        {
+          printf 'CRX download failed: %s\n' "$name" >&2
+          exit 1
+        }
+      python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' \
+        "/tmp/$name.crx" "/tmp/$name.zip"
+      $SUDO mkdir -p "/usr/local/share/extensions/$name"
+      $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
+      $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
+    ) &
   done
+  wait || return 1
   $SUDO chown -R "$LUSER": /usr/local/share/extensions
-  touch /tmp/ext.ok
 }
 
 chromium_files() {
@@ -235,7 +237,6 @@ factory_reset_and_apply() {
     $SUDO tar xzf "$TARBALL" -C /
     $SUDO chown -R "$LUSER": /usr/local/share/extensions
   fi
-  chromium_files
   chromium_launcher
 
   install -d -m 755 \
@@ -322,6 +323,7 @@ log "apt + selkies + mate + pip installed"
 # /opt/cloakbrowser), extensions_dl (warm_cache bundles it), install_selkies_configs
 # (selkies unit files must exist before enable_selkies_units).
 wait_ok "$CB" "$LOGDIR/cb.log"
+chromium_files
 wait_ok "$EXT" "$LOGDIR/ext.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium + extensions ready"
