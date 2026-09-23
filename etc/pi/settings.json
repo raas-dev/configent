@@ -22,7 +22,7 @@
     "npm:pi-markdown-preview",
     "npm:pi-mcp-adapter",
     "npm:pi-open-tui",
-    "npm:pi-rewind-hook",
+    "npm:pi-workspace-history",
     "npm:pi-rtk-optimizer",
     "npm:pi-tool-repair",
     "npm:pi-tool-compact-display",
@@ -54,14 +54,6 @@
       "maxRetryDelayMs": 60000,
       "timeoutMs": 3600000
     }
-  },
-  "rewind": {
-    "retention": {
-      "maxAgeDays": 30,
-      "maxSnapshots": 2000,
-      "pinLabeledEntries": true
-    },
-    "silentCheckpoints": true
   },
   "showHardwareCursor": true,
   "steeringMode": "all",
