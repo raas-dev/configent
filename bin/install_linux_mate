@@ -1,15 +1,32 @@
 #!/bin/bash
 if [ "$(uname -s)" != "Linux" ]; then
-  printf 'ERROR: install_linux_mate must run inside the Linux VM.\n' >&2
+  printf 'ERROR: install_linux_mate must be run on Linux.\n' >&2
   exit 1
 fi
+
+FORCE=0
+case "${1:-}" in
+--force)
+  FORCE=1
+  shift
+  ;;
+esac
+while getopts 'f' opt; do
+  case "$opt" in
+  f) FORCE=1 ;;
+  *)
+    printf 'usage: %s [-f|--force]\n' "$0" >&2
+    exit 64
+    ;;
+  esac
+done
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 # ponytail: warm-boot fast path. First successful install touches this; selkies
 # units are systemctl-enabled, so systemd brings them up on boot without us.
 # Saves ~10 min on every `vm up dev` after the first cold install.
-[ -f /var/tmp/desktop.done ] && exit 0
+[ -f /var/tmp/desktop.done ] && [ "$FORCE" = 0 ] && exit 0
 
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
@@ -156,8 +173,9 @@ warm_cache() {
 }
 
 # Package lists inlined in main flow for single-batch apt install.
-# write_xorg_selkies_configs removed: enable_selkies_units runs from main
-# after factory_reset_and_apply (was dead in cloud-init root path).
+# write_xorg_selkies_configs removed: enable_selkies_units now runs from main
+# in parallel with factory_reset_and_apply + write_mate_extras + warm_cache
+# (was dead in cloud-init root path; ordering now matters only via Wave-2 wait).
 
 install_selkies_configs() {
   $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
@@ -317,9 +335,11 @@ wait_ok "$EXT" "$LOGDIR/ext.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium + extensions ready"
 
-# ponytail: selkies start, factory reset, mate extras, warm-cache all run
-# concurrently. lima probe waits on selkies-tls :8080; mate-autostart brings
-# up the session. Both ready by the time the script exits.
+# ponytail: selkies start, factory reset, and mate extras all run concurrently
+# and are waited on below; warm-cache is fire-and-forget and may still be
+# writing the tarball after the script exits. lima probe waits on
+# selkies-tls :8080; mate-autostart brings up the session. Both ready by
+# the time wait_ok SRV/FAC return.
 enable_selkies_units >"$LOGDIR/selk.log" 2>&1 &
 SRV=$!
 factory_reset_and_apply >"$LOGDIR/factory.log" 2>&1 &
