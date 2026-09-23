@@ -173,7 +173,8 @@ warm_cache() {
 }
 
 install_selkies_configs() {
-  $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
+  sed -e "s|__LUSER__|$LUSER|g" "$UI/xorg-dummy.service" |
+    $SUDO tee /etc/systemd/system/xorg-dummy.service >/dev/null
   $SUDO install -d /etc/X11/xorg.conf.d
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
@@ -189,8 +190,9 @@ install_selkies_configs() {
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt && \
     chmod 644 /etc/ssl/selkies.pem)'
-  $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
-  $SUDO sed -i "/^\\[Service\\]/a User=$LUSER\nGroup=$LUSER" /etc/systemd/system/selkies-tls.service
+  sed -e "s|__LUSER__|$LUSER|g" "$UI/selkies-tls.service" |
+    $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
+  $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
     "$UI/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service

@@ -5,6 +5,7 @@ Wants=network-online.target
 
 [Service]
 User=__LUSER__
+Group=__LUSER__
 Environment=DISPLAY=:0
 Environment=XDG_CURRENT_DESKTOP=MATE
 Environment=XDG_SESSION_DESKTOP=mate

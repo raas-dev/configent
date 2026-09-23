@@ -5,6 +5,7 @@ Wants=network-online.target
 
 [Service]
 User=__LUSER__
+Group=__LUSER__
 Environment=DISPLAY=:0
 Environment=XDG_RUNTIME_DIR=/run/user/__LUID__
 ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"

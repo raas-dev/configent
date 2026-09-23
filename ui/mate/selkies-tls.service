@@ -3,6 +3,8 @@ Description=Selkies TLS wrapper 8443->8080
 After=network.target
 
 [Service]
+User=__LUSER__
+Group=__LUSER__
 ExecStart=/usr/bin/socat OPENSSL-LISTEN:8443,fork,bind=127.0.0.1,cert=/etc/ssl/selkies.pem,verify=0 TCP:127.0.0.1:8080
 Restart=always
 
