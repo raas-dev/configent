@@ -202,14 +202,20 @@ run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switc
 run gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" toplevel-id 'bottom'
 
 # === org.mate.panel.toplevel (relocatable per panel id) ===
+# mate-panel renders ONLY what `objects` lists. Empty array = empty panel.
+# Same order as ubuntu-mate.layout (menubar+launchers left, indicators right).
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" auto-hide false
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" orientation 'top'
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" screen 0
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" objects \
+  "['menu-bar', 'clock', 'notification-area', 'indicatorappletcomplete', 'gvc']"
+
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" auto-hide false
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" orientation 'bottom'
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" screen 0
 run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" y-bottom 0
-
-run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" auto-hide false
-run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" orientation 'top'
-run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" screen 0
+run gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" objects \
+  "['show-desktop', 'window-list', 'workspace-switcher']"
 
 # === org.mate.peripherals-keyboard-xkb.general ===
 run gsettings set org.mate.peripherals-keyboard-xkb general default-group 0

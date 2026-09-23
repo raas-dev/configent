@@ -1,6 +1,4 @@
 #!/bin/bash
-# Linux-only. Refuses to run on macOS/BSD hosts — script needs dpkg, getent,
-# and the lima virtiofs mount which only exist inside the VM.
 if [ "$(uname -s)" != "Linux" ]; then
   printf 'ERROR: install_linux_mate must run inside the Linux VM.\n' >&2
   exit 1
@@ -8,104 +6,302 @@ fi
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
+if [ "$(id -u)" = 0 ]; then
+  SUDO=''
+  export DEBIAN_FRONTEND=noninteractive
+elif command -v sudo >/dev/null; then
+  SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+  sudo -n true || sudo -v
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
+fi
+
+set -eux -o pipefail
+
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LUID=$(id -u "$LUSER")
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
+ARCH=$(dpkg --print-architecture)
+TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
+if [ "$(id -u)" = 0 ]; then AS_USER=(runuser -u "$LUSER" --); else AS_USER=(); fi
 
-if [ "$(id -u)" = 0 ]; then SUDO=''; else SUDO='sudo'; fi
-export SUDO
+UENV=(env XDG_RUNTIME_DIR="/run/user/$LUID"
+  DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$LUID/bus" DISPLAY=:0)
 
-# Single-run guard. flock prevents two invocations from racing.
-# === System-side ===
-# Things that genuinely need root: port-8080 web listener (selkies),
-# /etc/X11 keyboard config, xorg-dummy display, system chromium wrapper.
-$SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
-$SUDO loginctl enable-linger "$LUSER"
-$SUDO install -d /etc/X11/xorg.conf.d
-$SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
-$SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
-$SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
-$SUDO systemctl enable xorg-dummy
+APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
+  -o Dpkg::Options::=--force-confdef
+  -o Dpkg::Options::=--force-confold
+  -o Dpkg::Options::=--force-unsafe-io)
 
-$SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
-$SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
-  -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
-  cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
-$SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
-$SUDO sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
-  "$UI/selkies-autostart.service" >/etc/systemd/system/selkies-autostart.service
-$SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
-$SUDO systemctl enable selkies-tls selkies-autostart
+wait_ok() {
+  wait "$1" || {
+    cat "$2" >&2
+    exit 1
+  }
+}
 
-$SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
+selkies_deb() {
+  case "$ARCH" in
+  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
+  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
+  *)
+    printf 'ERROR: unsupported arch %s\n' "$ARCH" >&2
+    return 1
+    ;;
+  esac
+  if [ -f "/mnt/lima-provision/$DEB" ]; then return 0; fi
+  curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
+    "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
+  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
+}
 
-# Mask every system-side mate unit so the package can never start it. The
-# single mate-session we run comes from the user's systemd unit.
-$SUDO systemctl mask \
-  mate-session.service 'mate-session@*.service' \
-  mate-settings-daemon.service 'mate-settings-daemon@*.service' \
-  mate-panel.service 'mate-panel@*.service' 2>/dev/null || true
-$SUDO rm -f \
-  /etc/xdg/autostart/mate-panel.desktop \
-  /etc/xdg/autostart/mate-power-manager.desktop \
-  /etc/xdg/autostart/mate-screensaver.desktop \
-  /etc/xdg/autostart/nemo-desktop.desktop \
-  /etc/systemd/system/mate-autostart.service 2>/dev/null || true
+chromium_dl() {
+  if [ -f "$TARBALL" ]; then return 0; fi
+  if $SUDO pip3 install --no-cache-dir --break-system-packages \
+    --root-user-action=ignore --ignore-installed \
+    typing_extensions cloakbrowser >/tmp/cb-install.log 2>&1; then
+    touch /tmp/cb.ok
+  else
+    cat /tmp/cb-install.log >&2
+    return 1
+  fi
+  if $SUDO cloakbrowser install >/tmp/cb-cli.log 2>&1; then
+    touch /tmp/cb-bin.ok
+  else
+    cat /tmp/cb-cli.log >&2
+    return 1
+  fi
+}
 
-# === User-side factory reset ===
-# Kill live processes, wipe leftover state, reinit dirs as user. Doing this
-# as user (not root) means the new dirs are owned by LUSER by default.
-$SUDO pkill -9 -u "$LUSER" -f mate-session 2>/dev/null || true
-$SUDO pkill -9 -u "$LUSER" -f mate-panel 2>/dev/null || true
-$SUDO pkill -9 -u "$LUSER" -f mate-settings-daemon 2>/dev/null || true
-$SUDO pkill -9 -u "$LUSER" -f dconf-service 2>/dev/null || true
-sleep 1
-$SUDO rm -rf \
-  "$UHOME/.config/mate" \
-  "$UHOME/.config/mate-session" \
-  "$UHOME/.config/mate-panel" \
-  "$UHOME/.config/Caja" \
-  "$UHOME/.config/dconf" \
-  "$UHOME/.config/mimeapps.list" \
-  "$UHOME/.cache/dconf" \
-  "$UHOME/.cache/mate-session" \
-  "$UHOME/.cache/mate-panel" \
-  "$UHOME/.cache/Caja" \
-  "$UHOME/.local/share/mate" \
-  "/run/user/$LUID/dconf"
+extensions_dl() {
+  if [ -f "$TARBALL" ]; then return 0; fi
+  $SUDO install -d -m 755 /usr/local/share/extensions
+  for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecejdfdjjppcpchdlm \
+    ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
+    name=${pair%%:*}
+    id=${pair##*:}
+    curl -fsSL --retry 5 --retry-all-errors \
+      -o "/tmp/$name.crx" \
+      "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc" ||
+      {
+        printf 'CRX download failed: %s\n' "$name" >&2
+        return 1
+      }
+    python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' \
+      "/tmp/$name.crx" "/tmp/$name.zip"
+    $SUDO mkdir -p "/usr/local/share/extensions/$name"
+    $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
+    $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
+  done
+  $SUDO chown -R "$LUSER": /usr/local/share/extensions
+  touch /tmp/ext.ok
+}
 
-# === User-side apply ===
-# Mime + chromium .desktop for the user.
-$SUDO install -d -o "$LUSER" -g "$LUSER" -m 755 "$UHOME/.config" "$UHOME/.local/share/applications"
-$SUDO install -o "$LUSER" -g "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
-$SUDO install -o "$LUSER" -g "$LUSER" -m 644 "$UI/chromium.desktop" "$UHOME/.local/share/applications/chromium.desktop"
+chromium_files() {
+  if [ -f "$TARBALL" ]; then return 0; fi
+  if $SUDO test -d /root/.cloakbrowser; then
+    $SUDO install -d -m 755 /opt/cloakbrowser
+    CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
+    [ -n "$CRBIN" ] || {
+      printf 'no chrome binary after cloakbrowser install\n' >&2
+      return 1
+    }
+    $SUDO mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
+  fi
+}
 
-# Apply defaults by talking to the running user dbus via `gsettings set`.
-# This is the ONLY setting mechanism that works: `dconf load` writes
-# ~/.config/dconf/user on disk but dconf-service caches in memory and
-# doesn't reload from disk; vendor gschema.overrides set defaults but are
-# overridden by user db; the user db keyfile (text) is not read under
-# profile `user-db:user` — only the compiled binary is.
-"$UI/apply-gsettings.sh" "$LUSER"
+chromium_launcher() {
+  for n in chrome chromium chromium-browser; do
+    $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n
+  done
+  $SUDO install -d -m 755 /usr/local/share/applications
+  $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
+  $SUDO cp /usr/local/share/applications/chromium.desktop "$UHOME/Desktop/"
+  $SUDO chmod 755 "$UHOME/Desktop/chromium.desktop"
+  $SUDO chown "$LUSER": "$UHOME/Desktop/chromium.desktop"
+  $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
+  $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
+  "${AS_USER[@]}" "${UENV[@]}" gio set "$UHOME/Desktop/chromium.desktop" metadata::trusted true
+}
 
-# Author mate-autostart in user systemd; the user systemd runs it on session
-# start (selkies-websockets drops env at login + sets XDG_SESSION_ID).
-$SUDO install -d -o "$LUSER" -g "$LUSER" -m 700 \
-  "$UHOME/.config/systemd/user"
-sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
-  "$UI/mate-autostart.service" |
-  $SUDO tee "$UHOME/.config/systemd/user/mate-autostart.service" >/dev/null
-$SUDO chmod 644 "$UHOME/.config/systemd/user/mate-autostart.service"
-$SUDO systemctl daemon-reload 2>/dev/null || true
+warm_cache() {
+  if [ -f "$TARBALL" ] || [ ! -w /mnt/lima-provision ]; then return 0; fi
+  if $SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" \
+    -C / opt/cloakbrowser usr/local/share/extensions; then
+    mv "$TARBALL.tmp" "$TARBALL"
+  else
+    rm -f "$TARBALL.tmp"
+    return 1
+  fi
+}
 
-# Start mate-autostart as the user. Single entry point: the factory-reset
-# pkill above already cleared stragglers; starting again here would race
-# the systemd unit against itself.
-$SUDO runuser -u "$LUSER" -- env \
-  HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
-  systemctl --user start mate-autostart.service 2>/dev/null || true
+apt_install_core() {
+  local -a pkgs=(
+    xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
+    xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11
+    socat libnspr4 libnss3
+    ubuntu-mate-desktop ubuntu-mate-default-settings
+    ubuntu-mate-icon-themes ubuntu-mate-themes
+    ayatana-indicator-application mate-terminal
+    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64
+    dconf-cli polkitd
+    pipewire pipewire-pulse wireplumber
+  )
+  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
+}
 
+apt_install_extras() {
+  local -a pkgs=(fonts-ubuntu)
+  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
+  if [ -f "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb" ]; then
+    $SUDO apt-get install "${APT_OPTS[@]}" "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
+    rm -f "/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
+  fi
+  $SUDO dpkg --configure -a 2>/dev/null || true
+  $SUDO update-desktop-database /usr/local/share/applications 2>/dev/null || true
+}
+
+write_configs() {
+  $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
+  $SUDO install -d /etc/X11/xorg.conf.d
+  $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
+  $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
+  $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
+  $SUDO systemctl enable --now xorg-dummy
+
+  $SUDO loginctl enable-linger "$LUSER"
+
+  $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
+  $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
+    -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
+    cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
+  $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
+  $SUDO sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+    "$UI/selkies-autostart.service" >/etc/systemd/system/selkies-autostart.service
+  $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
+  $SUDO systemctl enable --now selkies-tls selkies-autostart
+
+  $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
+
+  [ -f "$UI/wallpaper-radioactive.jpg" ] && $SUDO install -m 644 \
+    "$UI/wallpaper-radioactive.jpg" /usr/share/backgrounds/wallpaper-radioactive.jpg
+
+  $SUDO systemctl mask \
+    mate-session.service 'mate-session@*.service' \
+    mate-settings-daemon.service 'mate-settings-daemon@*.service' \
+    mate-panel.service 'mate-panel@*.service' 2>/dev/null || true
+  $SUDO rm -f \
+    /etc/xdg/autostart/mate-panel.desktop \
+    /etc/xdg/autostart/mate-power-manager.desktop \
+    /etc/xdg/autostart/mate-screensaver.desktop \
+    /etc/xdg/autostart/nemo-desktop.desktop \
+    /etc/systemd/system/mate-autostart.service 2>/dev/null || true
+
+  $SUDO systemd-sysusers 2>/dev/null || true
+
+  $SUDO systemctl set-default graphical.target 2>/dev/null || true
+}
+
+factory_reset_and_apply() {
+  $SUDO pkill -9 -u "$LUSER" -f mate-session 2>/dev/null || true
+  $SUDO pkill -9 -u "$LUSER" -f mate-panel 2>/dev/null || true
+  $SUDO pkill -9 -u "$LUSER" -f mate-settings-daemon 2>/dev/null || true
+  $SUDO pkill -9 -u "$LUSER" -f dconf-service 2>/dev/null || true
+  sleep 1
+  $SUDO rm -rf \
+    "$UHOME/.config/mate" \
+    "$UHOME/.config/mate-session" \
+    "$UHOME/.config/mate-panel" \
+    "$UHOME/.config/Caja" \
+    "$UHOME/.config/dconf" \
+    "$UHOME/.config/mimeapps.list" \
+    "$UHOME/.cache/dconf" \
+    "$UHOME/.cache/mate-session" \
+    "$UHOME/.cache/mate-panel" \
+    "$UHOME/.cache/Caja" \
+    "$UHOME/.local/share/mate" \
+    "/run/user/$LUID/dconf"
+
+  if [ -f "$TARBALL" ]; then
+    $SUDO tar xzf "$TARBALL" -C /
+    $SUDO chown -R "$LUSER": /usr/local/share/extensions
+  fi
+  chromium_files
+  chromium_launcher
+
+  $SUDO install -d -o "$LUSER" -g "$LUSER" -m 755 \
+    "$UHOME/.config" "$UHOME/.local/share/applications"
+  $SUDO install -o "$LUSER" -g "$LUSER" -m 644 \
+    "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
+  $SUDO install -o "$LUSER" -g "$LUSER" -m 644 \
+    "$UI/chromium.desktop" "$UHOME/.local/share/applications/chromium.desktop"
+
+  "$UI/apply-gsettings.sh" "$LUSER"
+
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+    "$UI/mate-autostart.service" |
+    $SUDO tee "$UHOME/.config/systemd/user/mate-autostart.service" >/dev/null
+  $SUDO chmod 644 "$UHOME/.config/systemd/user/mate-autostart.service"
+  $SUDO systemctl daemon-reload 2>/dev/null || true
+
+  $SUDO runuser -u "$LUSER" -- env \
+    HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
+    systemctl --user start mate-autostart.service 2>/dev/null || true
+}
+
+log "start"
+
+$SUDO install -d -m 755 /var/cache/apt/archives/partial
+
+$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 \
+  >/tmp/apt.log 2>&1 &
+UP=$!
+selkies_deb >/tmp/selkdeb.log 2>&1 &
+SDB=$!
+write_configs >/tmp/cfg.log 2>&1 &
+CFG=$!
+chromium_dl >/tmp/cb.log 2>&1 &
+CB=$!
+extensions_dl >/tmp/ext.log 2>&1 &
+EXT=$!
+
+wait_ok "$UP" /tmp/apt.log
+log "apt index updated"
+
+wait_ok "$SDB" /tmp/selkdeb.log
+log "selkies deb fetched"
+
+wait_ok "$CFG" /tmp/cfg.log
+log "configs written"
+
+if [ ! -f "$TARBALL" ]; then
+  $SUDO apt-get install "${APT_OPTS[@]}" python3-pip >/tmp/pip.log 2>&1
+  log "pip3 installed"
+fi
+
+log "apt core install starting"
+apt_install_core >/tmp/core.log 2>&1
+log "apt core install done"
+
+wait_ok "$CB" /tmp/cb.log
+log "cloakbrowser installed"
+
+wait_ok "$EXT" /tmp/ext.log
+log "extensions installed"
+
+apt_install_extras >/tmp/extras.log 2>&1
+log "apt extras installed"
+
+factory_reset_and_apply
+warm_cache >/tmp/warm.log 2>&1 &
 log "mate done"
