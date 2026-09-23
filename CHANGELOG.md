@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.1](https://github.com/raas-dev/configent/compare/1.244.0...1.244.1) (2026-09-23)
+
+### Fixes
+
+* **install_linux_mate:** validate user and set selkies ownership ([0df2fec](https://github.com/raas-dev/configent/commit/0df2fec9bfdba44d3272425bf9e37bb18dbf4c79))
+* **mate:** adjust panel applet positions for optimal layout ([aaf0353](https://github.com/raas-dev/configent/commit/aaf0353337f487d94d5d7838f0cd73cc3f21cee7))
+* **selkies-session:** enable audio on vm boot with retry logic ([ecdd2c8](https://github.com/raas-dev/configent/commit/ecdd2c814a2a6fedab6ee0824aaf86ea84139373))
+* **ui/mate:** assign explicit per-object position ints for stable panel layout ([16af8cb](https://github.com/raas-dev/configent/commit/16af8cb1fd8cc8478666d09cfcfe4bf02bc7a2b7))
+
 ## [1.244.0](https://github.com/raas-dev/configent/compare/1.243.4...1.244.0) (2026-09-22)
 
 ### Features
