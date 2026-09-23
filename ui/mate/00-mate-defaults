@@ -210,12 +210,14 @@ toplevel-id='bottom'
 auto-hide=false
 orientation='bottom'
 screen=0
+size=32
 y-bottom=0
 
 [org/mate/panel/toplevels/top]
 auto-hide=false
 orientation='top'
 screen=0
+size=32
 
 [org/mate/peripherals-keyboard-xkb/general]
 default-group=0
