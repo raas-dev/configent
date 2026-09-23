@@ -1,339 +1,111 @@
 #!/bin/bash
-
-trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
-
-if [ "$(id -u)" = 0 ]; then
-  SUDO=''
-  export DEBIAN_FRONTEND=noninteractive
-elif command -v sudo >/dev/null; then
-  SUDO='sudo DEBIAN_FRONTEND=noninteractive'
-
-  sudo -n true || sudo -v
-
-  while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-  done 2>/dev/null &
-else
-  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+# Linux-only. Refuses to run on macOS/BSD hosts — script needs dpkg, getent,
+# and the lima virtiofs mount which only exist inside the VM.
+if [ "$(uname -s)" != "Linux" ]; then
+  printf 'ERROR: install_linux_mate must run inside the Linux VM.\n' >&2
   exit 1
 fi
 
-set -eux -o pipefail
-[ -f /var/tmp/desktop.done ] && exit 0
-ARCH=$(dpkg --print-architecture)
-TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
-
-wait_ok() {
-  wait "$1" || {
-    cat "$2" >&2
-    exit 1
-  }
-}
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
-UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
 LUID=$(id -u "$LUSER")
+UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
 
-selkies_deb() {
-  local TAG DEB
-  TAG=$(curl -fsSL --retry 5 --retry-all-errors \
-    https://api.github.com/repos/selkies-project/selkies/releases/latest |
-    grep -oE '"tag_name":"[^"]+"' | head -1 | cut -d'"' -f4)
-  [ -n "$TAG" ] || {
-    printf 'selkies: failed to resolve latest tag\n' >&2
-    return 1
-  }
-  DEB="selkies-${TAG}-ubuntu26.04-${ARCH}.deb"
-  [ -f "/mnt/lima-provision/$DEB" ] && return 0
-  curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
-    "https://github.com/selkies-project/selkies/releases/download/${TAG}/${DEB}"
-  [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
-}
+if [ "$(id -u)" = 0 ]; then SUDO=''; else SUDO='sudo'; fi
+export SUDO
 
-chromium_dl() {
-  if [ -f "$TARBALL" ]; then
-    $SUDO tar xzf "$TARBALL" -C / &&
-      $SUDO chown -R "$LUSER": /usr/local/share/extensions &&
-      touch /tmp/cb.ok /tmp/ext.ok
-  else
-    for _ in $(
-      seq 1 300
-    ); do
-      command -v pip3 >/dev/null 2>&1 && break
-      sleep 2
-    done
-    command -v pip3
-    $SUDO pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser &&
-      $SUDO cloakbrowser install &&
-      touch /tmp/cb.ok
-  fi
-}
+# Single-run guard. flock prevents two invocations from racing.
+# === System-side ===
+# Things that genuinely need root: port-8080 web listener (selkies),
+# /etc/X11 keyboard config, xorg-dummy display, system chromium wrapper.
+$SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
+$SUDO loginctl enable-linger "$LUSER"
+$SUDO install -d /etc/X11/xorg.conf.d
+$SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
+$SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
+$SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
+$SUDO systemctl enable xorg-dummy
 
-extensions_dl() {
-  if [ -f "$TARBALL" ]; then
-    for _ in $(seq 1 300); do
-      [ -f /tmp/ext.ok ] && return 0
-      sleep 2
-    done
-    return 1
-  fi
-  $SUDO install -d /usr/local/share/extensions
-  for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
-    name=${pair%%:*}
-    id=${pair##*:}
-    curl -fsSL -o "/tmp/$name.crx" "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
-    python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' "/tmp/$name.crx" "/tmp/$name.zip"
-    $SUDO mkdir -p "/usr/local/share/extensions/$name"
-    $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
-    $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
-  done
-  $SUDO chown -R "$LUSER": /usr/local/share/extensions
-  touch /tmp/ext.ok
-}
+$SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
+$SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
+  -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
+  cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
+$SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
+$SUDO sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+  "$UI/selkies-autostart.service" >/etc/systemd/system/selkies-autostart.service
+$SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
+$SUDO systemctl enable selkies-tls selkies-autostart
 
-write_configs() {
-  $SUDO install -m 644 "$UI/xorg-dummy.service" /etc/systemd/system/xorg-dummy.service
-  $SUDO loginctl enable-linger "$LUSER"
-  $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$UHOME/.config/systemd/user"
-  $SUDO systemctl enable xorg-dummy
-  $SUDO install -d /etc/X11/xorg.conf.d
-  $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
-  $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
-  $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
-  $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
-  $SUDO sh -c 'openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
-    -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
-    cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt'
-  $SUDO install -m 644 "$UI/selkies-tls.service" /etc/systemd/system/selkies-tls.service
-  $SUDO systemctl enable selkies-tls
-  # Always-on selkies: systemd unit runs selkies-session as the user the
-  # moment xorg-dummy is up — independent of any display-manager / MATE
-  # login. Replaces the XDG autostart .desktop, which only fires inside a
-  # live MATE session.
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
-    "$UI/selkies-autostart.service" >/tmp/sa.service
-  $SUDO install -m 644 /tmp/sa.service /etc/systemd/system/selkies-autostart.service
-  $SUDO systemctl enable selkies-autostart
-  # Same pattern for MATE session: system unit, user-scoped, no DM required.
-  sed -e "s|__LUSER__|$LUSER|g" "$UI/mate-autostart.service" >/tmp/ma.service
-  $SUDO install -m 644 /tmp/ma.service /etc/systemd/system/mate-autostart.service
-  $SUDO systemctl enable mate-autostart
-  $SUDO rm -f /tmp/sa.service /tmp/ma.service
-  # Old XDG autostart .desktop would double-start selkies when MATE also
-  # comes up. Remove if present from a prior install.
-  $SUDO rm -f /etc/xdg/autostart/selkies.desktop
-}
+$SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
 
-chromium_files() {
-  timeout 1800s bash -c 'until [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ]; do sleep 1; done' || return 1
-  if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
-    $SUDO install -d /opt/cloakbrowser
-    CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
-    $SUDO mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
-  fi
-  CRBIN=$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit)
-  [ -n "$CRBIN" ]
-  $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
-  $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
-  $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
-  # seed chromium profile once on create: full dump from provision cache if
-  # present, else minimal repo seed; existing profile never overwritten
-  $SUDO install -d -m 700 -o "$LUSER" -g "$LUSER" "$UHOME/.config/chromium/Default"
-  local SEED="$UI/chromium-preferences"
-  [ -f /mnt/lima-provision/chromium-preferences ] &&
-    SEED=/mnt/lima-provision/chromium-preferences
-  [ -f "$UHOME/.config/chromium/Default/Preferences" ] ||
-    $SUDO install -m 644 -o "$LUSER" -g "$LUSER" "$SEED" \
-      "$UHOME/.config/chromium/Default/Preferences"
-  for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
-  $SUDO install -d /usr/local/share/applications
-  $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
-  # hidden duplicate; kept only as default-browser handler for mimeapps
-  $SUDO install -m 644 "$UI/chromium-chromium.desktop" \
-    /usr/local/share/applications/chromium_chromium.desktop
-  # desktop shortcut
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
-  $SUDO cp /usr/local/share/applications/chromium.desktop "$UHOME/Desktop/"
-  $SUDO chmod 755 "$UHOME/Desktop/chromium.desktop"
-  $SUDO chown "$LUSER": "$UHOME/Desktop/chromium.desktop"
-  # mate-terminal ships in apt at /usr/share/applications/mate-terminal.desktop.
-  # Copy it to the desktop so it shows up as a clickable icon there.
-  $SUDO cp /usr/share/applications/mate-terminal.desktop "$UHOME/Desktop/"
-  $SUDO chmod 755 "$UHOME/Desktop/mate-terminal.desktop"
-  $SUDO chown "$LUSER": "$UHOME/Desktop/mate-terminal.desktop"
-  # AT-SPI2 master switch is pinned in 00-mate-defaults
-  # ([org/gnome/desktop/interface] toolkit-accessibility=true). The
-  # user-db cache is warm by the time autostart runs, so no .desktop
-  # needed here.
-  # browser autostart intentionally removed — launch manually; profile restores session
-  $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
-  $SUDO install -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
-  $SUDO chown "$LUSER": "$UHOME/.config/mimeapps.list"
-  # disable MATE screensaver + power-manager: selkies is RDP-ish; locking the
-  # session mid-stream breaks the user. webtop/docker-webtop does the same.
-  $SUDO rm -f /etc/xdg/autostart/mate-power-manager.desktop \
-    /etc/xdg/autostart/mate-screensaver.desktop \
-    /etc/xdg/autostart/nemo-desktop.desktop 2>/dev/null || true
+# Mask every system-side mate unit so the package can never start it. The
+# single mate-session we run comes from the user's systemd unit.
+$SUDO systemctl mask \
+  mate-session.service 'mate-session@*.service' \
+  mate-settings-daemon.service 'mate-settings-daemon@*.service' \
+  mate-panel.service 'mate-panel@*.service' 2>/dev/null || true
+$SUDO rm -f \
+  /etc/xdg/autostart/mate-panel.desktop \
+  /etc/xdg/autostart/mate-power-manager.desktop \
+  /etc/xdg/autostart/mate-screensaver.desktop \
+  /etc/xdg/autostart/nemo-desktop.desktop \
+  /etc/systemd/system/mate-autostart.service 2>/dev/null || true
 
-  # dconf system-db override: a single keyfile under /etc/dconf/db/local.d/
-  # rewrites every /org/mate, /org/gtk, /org/gnome/desktop value we care
-  # about at first login. The keyfile is captured live (`dconf dump`) from
-  # a tuned VM; re-dump to refresh after tweaks, don't hand-edit.
-  $SUDO install -d /etc/dconf/profile /etc/dconf/db/local.d
-  $SUDO tee /etc/dconf/profile/user >/dev/null <<'EOF'
-user-db:user
-system-db:local
-EOF
-  $SUDO install -m 644 "$UI/00-mate-defaults" /etc/dconf/db/local.d/00-mate-defaults
+# === User-side factory reset ===
+# Kill live processes, wipe leftover state, reinit dirs as user. Doing this
+# as user (not root) means the new dirs are owned by LUSER by default.
+$SUDO pkill -9 -u "$LUSER" -f mate-session 2>/dev/null || true
+$SUDO pkill -9 -u "$LUSER" -f mate-panel 2>/dev/null || true
+$SUDO pkill -9 -u "$LUSER" -f mate-settings-daemon 2>/dev/null || true
+$SUDO pkill -9 -u "$LUSER" -f dconf-service 2>/dev/null || true
+sleep 1
+$SUDO rm -rf \
+  "$UHOME/.config/mate" \
+  "$UHOME/.config/mate-session" \
+  "$UHOME/.config/mate-panel" \
+  "$UHOME/.config/Caja" \
+  "$UHOME/.config/dconf" \
+  "$UHOME/.config/mimeapps.list" \
+  "$UHOME/.cache/dconf" \
+  "$UHOME/.cache/mate-session" \
+  "$UHOME/.cache/mate-panel" \
+  "$UHOME/.cache/Caja" \
+  "$UHOME/.local/share/mate" \
+  "/run/user/$LUID/dconf"
 
-  # Panel layout (clock/trashcan/ordering) lives outside dconf, under
-  # /usr/share/mate-panel/layouts/. Ship our edited file over the stock one.
-  $SUDO install -m 644 "$UI/ubuntu-mate.layout" \
-    /usr/share/mate-panel/layouts/ubuntu-mate.layout
+# === User-side apply ===
+# Mime + chromium .desktop for the user.
+$SUDO install -d -o "$LUSER" -g "$LUSER" -m 755 "$UHOME/.config" "$UHOME/.local/share/applications"
+$SUDO install -o "$LUSER" -g "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
+$SUDO install -o "$LUSER" -g "$LUSER" -m 644 "$UI/chromium.desktop" "$UHOME/.local/share/applications/chromium.desktop"
 
-  # Ship our JPG wallpaper. dconf keyfile 00-mate-defaults pins
-  # picture-filename at /usr/share/backgrounds/wallpaper-radioactive.jpg;
-  # missing file → caja-desktop falls back to the default MATE background.
-  # All -wallpapers-* apt pkgs removed; this one file is the only bg.
-  $SUDO install -m 644 "$UI/wallpaper-radioactive.jpg" \
-    /usr/share/backgrounds/wallpaper-radioactive.jpg
+# Apply defaults by talking to the running user dbus via `gsettings set`.
+# This is the ONLY setting mechanism that works: `dconf load` writes
+# ~/.config/dconf/user on disk but dconf-service caches in memory and
+# doesn't reload from disk; vendor gschema.overrides set defaults but are
+# overridden by user db; the user db keyfile (text) is not read under
+# profile `user-db:user` — only the compiled binary is.
+"$UI/apply-gsettings.sh" "$LUSER"
 
-  # Pin x-terminal-emulator to mate-terminal (not gnome-terminal wrapper).
-  # update-alternatives' slave is /etc/alternatives/x-terminal-emulator; on
-  # images without this, .desktop parsing lands the user on gnome-terminal.
-  if [ -x /usr/bin/mate-terminal ]; then
-    $SUDO update-alternatives --install /usr/bin/x-terminal-emulator \
-      x-terminal-emulator /usr/bin/mate-terminal 60 \
-      --slave /usr/share/man/man1/x-terminal-emulator.1.gz \
-      x-terminal-emulator.1.gz /usr/share/man/man1/mate-terminal.1.gz \
-      2>/dev/null || true
-    $SUDO update-alternatives --set x-terminal-emulator /usr/bin/mate-terminal 2>/dev/null || true
-  fi
+# Author mate-autostart in user systemd; the user systemd runs it on session
+# start (selkies-websockets drops env at login + sets XDG_SESSION_ID).
+$SUDO install -d -o "$LUSER" -g "$LUSER" -m 700 \
+  "$UHOME/.config/systemd/user"
+sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+  "$UI/mate-autostart.service" |
+  $SUDO tee "$UHOME/.config/systemd/user/mate-autostart.service" >/dev/null
+$SUDO chmod 644 "$UHOME/.config/systemd/user/mate-autostart.service"
+$SUDO systemctl daemon-reload 2>/dev/null || true
 
-  $SUDO glib-compile-schemas /usr/share/glib-2.0/schemas
-  $SUDO dconf update
-}
+# Start mate-autostart as the user. Single entry point: the factory-reset
+# pkill above already cleared stragglers; starting again here would race
+# the systemd unit against itself.
+$SUDO runuser -u "$LUSER" -- env \
+  HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
+  systemctl --user start mate-autostart.service 2>/dev/null || true
 
-# NOTE: --no-install-recommends. Webtop-style. We install EXACTLY the package
-# set linuxserver/docker-webtop uses for ubuntu-mate (10 packages); the
-# ubuntu-mate-* meta packages ship all the dconf overrides, panel layout,
-# theme, icons, wallpaper via /usr/share/glib-2.0/schemas/*.override. No
-# custom dconf keyfiles needed.
-APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
-  -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold
-  -o Dpkg::Options::=--force-unsafe-io)
-
-# webtop ubuntu-mate package set + X/selkies/audio deps the probe needs first.
-# Order: xorg + selkies audio first, then the MATE meta stack which pulls
-# the rest (panel, marco, settings-daemon, terminal, calc, media, etc.) via
-# Recommends. ubuntu-mate-desktop → marco+mate-panel+mate-session. The
-# default-settings package ships the dark Yaru-mate theme override.
-apt_install_core() {
-  local -a pkgs=(
-    xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput
-    xauth x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11
-    socat libnspr4 libnss3
-    # MATE stack — the webtop recipe (verified against linuxserver/docker-webtop
-    # @ ubuntu-mate branch). No PPA needed: brisk-menu not used (layout uses
-    # built-in menu-bar); mate-applets not used (layout uses only mate-panel
-    # core + libmatewnck + ayatana + g-s-d applets).
-    ubuntu-mate-desktop # meta: marco, mate-panel, mate-session,
-    # mate-settings-daemon, mate-terminal, mate-control-center, …
-    ubuntu-mate-default-settings # gschema.override → Yaru-mate-dark theme,
-    # Yaru-mate icons, wallpaper, default panel layout
-    ubuntu-mate-icon-themes # Yaru-mate icon set (sized correctly)
-    ubuntu-mate-themes      # Yaru-MATE-dark GTK theme
-    # Wallpaper: ship our own JPG (ui/mate/wallpaper-radioactive.jpg).
-    # All -wallpapers-* apt pkgs removed; no Ubuntu-MATE branded wallpapers.
-    ayatana-indicator-application                     # system tray daemon
-    mate-terminal pluma                               # terminal + text editor
-    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 # full a11y
-    dconf-cli polkitd                                 # browser + dconf + polkit
-    # polkitd user must exist before we create the LUSER below; else polkit
-    # 217/USER crash-loops → panel blocks 25s×2 on D-Bus timeouts.
-    pipewire pipewire-pulse wireplumber # audio (selkies-session)
-  )
-  [ -f "$TARBALL" ] || pkgs+=(python3-pip) # cold chromium path needs pip3
-  case "$ARCH" in
-  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
-  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
-  esac
-  if [ -f "/mnt/lima-provision/$DEB" ]; then
-    DEBSRC="/mnt/lima-provision/$DEB"
-  else
-    DEBSRC="/tmp/$DEB"
-  fi
-  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}" "$DEBSRC"
-  $SUDO dpkg --configure -a
-  $SUDO update-desktop-database /usr/local/share/applications || true
-}
-
-# non-blocking: extra fonts — installed in bg after core returns; failure
-# logged to /tmp/extras.log only, never blocks desktop.done. Wallpapers and
-# theme come from ubuntu-mate-artwork / -default-settings in core; no extras
-# needed.
-apt_install_extras() {
-  local -a pkgs=(
-    fonts-ubuntu
-  )
-  $SUDO apt-get install "${APT_OPTS[@]}" "${pkgs[@]}"
-  $SUDO dpkg --configure -a
-}
-
-$SUDO install -d -m 755 /var/cache/apt/archives/partial
-$SUDO install -m 644 "$UI/dpkg-excludes" /etc/dpkg/dpkg.cfg.d/01-excludes
-
-# fs.protected_regular=2: even root can't reopen another uid's file in sticky /tmp
-for _f in apt selkdeb cb ext; do rm -f "/tmp/${_f}.log"; done
-$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 >/tmp/apt.log 2>&1 &
-UP=$!
-selkies_deb >/tmp/selkdeb.log 2>&1 &
-SDB=$!
-chromium_dl >/tmp/cb.log 2>&1 &
-CB=$!
-extensions_dl >/tmp/ext.log 2>&1 &
-EXT=$!
-log start
-write_configs
-wait_ok "$UP" /tmp/apt.log
-wait_ok "$SDB" /tmp/selkdeb.log
-if [ ! -f "$TARBALL" ]; then
-  # cold path only: pip3 unlocks the bg chromium download before core install;
-  # warm path (tarball) needs no pip at all on the probe path
-  $SUDO apt-get install "${APT_OPTS[@]}" python3-pip
-fi
-log "apt core install starting"
-apt_install_core
-log "apt core install done"
-apt_install_extras >/tmp/extras.log 2>&1 &
-wait_ok "$CB" /tmp/cb.log
-wait_ok "$EXT" /tmp/ext.log
-chromium_files
-# isolate would stop ALL units outside graphical.target's graph — including the
-# per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
-# polkitd user comes from sysusers.d/polkit.conf, but systemd-sysusers ran at
-# boot BEFORE apt installed it → polkit crash-loops (status=217/USER) →
-# mate-panel blocks 25s×2 on D-Bus timeouts → panel paints ~1min late.
-# Just create the user; polkit D-Bus-activates on demand. Do NOT
-# `systemctl start polkit.service` here: unit not yet known to PID1 mid-provision
-# → non-zero → set -e aborts provisioning.
-$SUDO systemd-sysusers
-log "services starting"
-$SUDO systemctl set-default graphical.target
-$SUDO systemctl start xorg-dummy.service selkies-tls.service selkies-autostart.service mate-autostart.service
-# Marco compositing-manager disabled in 00-mate-defaults
-# ([org/mate/Marco/general]) — applies to fresh user DB at first login.
-# Existing users keep whatever MATE's user-DB already wrote.
-if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
-  # warm cache for future VMs; do not block desktop.done
-  ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
-    mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
-fi
-log "desktop.done"
-touch /var/tmp/desktop.done
+log "mate done"
