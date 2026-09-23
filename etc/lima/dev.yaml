@@ -103,8 +103,7 @@ probes:
     script: |
       #!/bin/bash
       set -eux -o pipefail
-      if ! timeout 180s bash -c "until [ -f /var/tmp/desktop.done ] \
-        && systemctl is-active --quiet xorg-dummy.service \
+      if ! timeout 180s bash -c "until systemctl is-active --quiet xorg-dummy.service \
         && systemctl is-active --quiet selkies-tls.service \
         && curl -fsS -o /dev/null --max-time 5 http://127.0.0.1:8080/; do sleep 2; done"; then
         echo >&2 "Desktop not ready"
