@@ -1,6 +1,6 @@
 [Unit]
 Description=Selkies web desktop on :8080 (always-on, MATE-independent)
-After=xorg-dummy.service selkies-tls.service
+After=xvfb.service selkies-tls.service
 Wants=network-online.target
 
 [Service]

@@ -173,12 +173,10 @@ warm_cache() {
 }
 
 install_selkies_configs() {
-  sed -e "s|__LUSER__|$LUSER|g" "$UI/xorg-dummy.service" |
-    $SUDO tee /etc/systemd/system/xorg-dummy.service >/dev/null
-  $SUDO install -d /etc/X11/xorg.conf.d
-  $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
+  sed -e "s|__LUSER__|$LUSER|g" "$UI/xvfb.service" |
+    $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
+  $SUDO chmod 644 /etc/systemd/system/xvfb.service
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
-  $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
   # Install to the persistent lima share (survives `limactl delete` and the
   # ephemeral zero-byte copy that ends up under /usr/local/bin on vz).
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
@@ -201,7 +199,7 @@ install_selkies_configs() {
 }
 
 enable_selkies_units() {
-  $SUDO systemctl enable --now xorg-dummy 2>/dev/null || true
+  $SUDO systemctl enable --now xvfb 2>/dev/null || true
   $SUDO systemctl enable --now selkies-tls selkies-autostart 2>/dev/null || true
 }
 
@@ -302,7 +300,7 @@ SELKIES_DEB="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
 log "apt + selkies + mate + pip install starting (single batch)"
 $SUDO apt-get install "${APT_OPTS[@]}" \
   "$SELKIES_DEB" \
-  xserver-xorg-core xserver-xorg-video-dummy xserver-xorg-input-libinput \
+  xvfb \
   x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
   socat libnspr4 libnss3 \
   ubuntu-mate-desktop ubuntu-mate-default-settings \

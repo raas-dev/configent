@@ -1,6 +1,6 @@
 [Unit]
 Description=MATE desktop session on :0 (always-on, display-manager-independent)
-After=xorg-dummy.service
+After=xvfb.service
 Wants=network-online.target
 
 [Service]

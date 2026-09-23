@@ -1,0 +1,17 @@
+[Unit]
+Description=Xvfb :0 (headless display)
+
+[Service]
+User=__LUSER__
+Group=__LUSER__
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/Xvfb :0 \
+  -screen 0 2560x1440x24 \
+  -dpi 96 \
+  +extension COMPOSITE +extension DAMAGE +extension GLX +extension RANDR \
+  +extension RENDER +extension MIT-SHM +extension XFIXES +extension XTEST \
+  -iglx +render -nolisten tcp -ac -shmem
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target
