@@ -40,13 +40,18 @@ UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
 LUID=$(id -u "$LUSER")
 
 selkies_deb() {
-  case "$ARCH" in
-  amd64) DEB=selkies-2.0.0rc0-ubuntu26.04-amd64.deb ;;
-  arm64) DEB=selkies-2.0.0rc0-ubuntu26.04-arm64.deb ;;
-  esac
+  local TAG DEB
+  TAG=$(curl -fsSL --retry 5 --retry-all-errors \
+    https://api.github.com/repos/selkies-project/selkies/releases/latest |
+    grep -oE '"tag_name":"[^"]+"' | head -1 | cut -d'"' -f4)
+  [ -n "$TAG" ] || {
+    printf 'selkies: failed to resolve latest tag\n' >&2
+    return 1
+  }
+  DEB="selkies-${TAG}-ubuntu26.04-${ARCH}.deb"
   [ -f "/mnt/lima-provision/$DEB" ] && return 0
   curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$DEB" \
-    "https://github.com/selkies-project/selkies/releases/download/2.0.0rc0/${DEB}"
+    "https://github.com/selkies-project/selkies/releases/download/${TAG}/${DEB}"
   [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
 }
 
