@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# limactl wrapper: vm [--dev] <up|shell|down|delete|prune> [template] [name] [lima_args]
-#
-# default mode: plain limactl, no dev extras.
-# --dev (alias v): dev instance — injects .env.GIT_REF=main and
-#   --mount=~/configent when the instance is being created.
+# limactl wrapper: vm <up|shell|down|delete|prune> [template] [name] [lima_args]
+# bootstraps from GIT_REF=main for the created lima VM
 
 readonly DEFAULT_TEMPLATE="debian"
 
@@ -26,7 +23,7 @@ _lima_remove_nonexistent_mounts() {
     mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
 }
 
-vm() {
+_vm() {
   if [ -n "$1" ]; then
     local command="$1"
     shift
@@ -97,6 +94,10 @@ vm() {
         esac
         [ -n "$net_arg" ] && os_create_args+=("$net_arg")
       fi
+      local dev_mount=()
+      if ! limactl list "$vm_name" &>/dev/null; then
+        dev_mount=(--mount="~/configent")
+      fi
       limactl start "$HOME/.config/configent/lima/$template_file.yaml" \
         --name "$vm_name" --tty=false \
         "${os_create_args[@]}" \
@@ -104,6 +105,8 @@ vm() {
         --set=".env.EMAIL = \"$EMAIL\"" \
         --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
         --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" \
+        --set=".env.GIT_REF = \"main\"" \
+        "${dev_mount[@]}" \
         "$@" ||
         limactl start "$vm_name" \
           --tty=false \
@@ -126,65 +129,11 @@ vm() {
     limactl prune
     ;;
   *)
-    echo "Usage: vm [--dev] <up|shell|down|delete> [template] [vm_name] [lima_args]"
+    echo "Usage: vm <up|shell|down|delete> [template] [vm_name] [lima_args]"
     echo ""
     limactl list 2>/dev/null
     ;;
   esac
 }
 
-# dev wrapper (default mode): GIT_REF=main + mount configent on create
-vm_dev() {
-  if [[ "$1" == "up" || "$1" == "start" ]]; then
-    local vm_name="$DEFAULT_TEMPLATE"
-    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
-      vm_name="default"
-    else
-      vm_name="$2"
-    fi
-    local args=("${@:2}")
-    local i
-    for ((i = 0; i < ${#args[@]}; i++)); do
-      local a="${args[i]}"
-      if [[ "$a" == "--name="* ]]; then
-        vm_name="${a#--name=}"
-        break
-      elif [[ "$a" == "--name" ]]; then
-        vm_name="${args[i + 1]}"
-        break
-      fi
-    done
-    local dev_mount=()
-    if ! limactl list "$vm_name" &>/dev/null; then
-      dev_mount=(--mount="~/configent")
-    fi
-
-    if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
-      # Check if user already specified --name
-      local has_name=false
-      for arg in "${@:2}"; do
-        if [[ "$arg" == "--name="* || "$arg" == "--name" ]]; then
-          has_name=true
-          break
-        fi
-      done
-      if [ "$has_name" = false ]; then
-        vm "$1" "$DEFAULT_TEMPLATE" --name=default "${@:2}" \
-          --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
-      else
-        vm "$1" "$DEFAULT_TEMPLATE" "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
-      fi
-    else
-      vm "$@" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
-    fi
-  else
-    vm "$@"
-  fi
-}
-
-if [ "$1" = "--dev" ]; then
-  shift
-  vm_dev "$@"
-else
-  vm "$@"
-fi
+_vm "$@"

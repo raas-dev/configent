@@ -121,7 +121,7 @@ alias r='exec $SHELL -l'
 alias s='rg --smart-case --hidden --glob \!.git/ --fixed-strings'
 # t is for tail logs, see t()
 alias u='dust'
-alias v='vm --dev'
+alias v='vm'
 alias w='which -a'
 # x is for killing processes, see x()
 alias y='tldr'
