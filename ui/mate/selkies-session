@@ -12,4 +12,6 @@ for i in $(seq 1 20); do
 done
 exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
   --enable-basic-auth=false \
+  --audio-enabled=true \
+  --audio-on-start=true \
   --encoder=x264enc
