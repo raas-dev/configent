@@ -5,6 +5,8 @@
 # --dev (alias v): dev instance — injects .env.GIT_REF=main and
 #   --mount=~/configent when the instance is being created.
 
+readonly DEFAULT_TEMPLATE="debian"
+
 _lima_remove_nonexistent_mounts() {
   local vm_name="${1:-default}"
   local lima_instance_yaml="$HOME/.lima/$vm_name/lima.yaml"
@@ -65,7 +67,7 @@ vm() {
       dev*)
         mkdir -p "$HOME/.cache/lima-provision"/{ubuntu/apt-archives,xorg} "$HOME/limahome"
         ;;
-      debian*)
+      ${DEFAULT_TEMPLATE}*)
         mkdir -p "$HOME/.cache/lima-provision/debian/apt-archives" "$HOME/limahome"
         ;;
       esac
@@ -134,7 +136,7 @@ vm() {
 # dev wrapper (default mode): GIT_REF=main + mount configent on create
 vm_dev() {
   if [[ "$1" == "up" || "$1" == "start" ]]; then
-    local vm_name="debian"
+    local vm_name="$DEFAULT_TEMPLATE"
     if [ $# -eq 1 ] || [[ "$2" == --* ]]; then
       vm_name="default"
     else
@@ -167,10 +169,10 @@ vm_dev() {
         fi
       done
       if [ "$has_name" = false ]; then
-        vm "$1" debian --name=default "${@:2}" \
+        vm "$1" "$DEFAULT_TEMPLATE" --name=default "${@:2}" \
           --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
       else
-        vm "$1" debian "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
+        vm "$1" "$DEFAULT_TEMPLATE" "${@:2}" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
       fi
     else
       vm "$@" --set=.env.GIT_REF=\"main\" "${dev_mount[@]}"
