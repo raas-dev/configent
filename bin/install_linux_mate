@@ -178,6 +178,12 @@ install_selkies_configs() {
   $SUDO install -m 644 "$UI/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
   $SUDO install -m 644 "$UI/10-dummy.conf" /etc/X11/xorg.conf.d/10-dummy.conf
+  # Install to the persistent lima share (survives `limactl delete` and the
+  # ephemeral zero-byte copy that ends up under /usr/local/bin on vz).
+  $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
+  $SUDO install -m 755 "$UI/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
+  # Mirror to /usr/local/bin for PATH consistency, but the service runs the
+  # persistent copy so the boot path is never an empty file.
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
   $SUDO sh -c '[ -f /etc/ssl/selkies.pem ] || (openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \

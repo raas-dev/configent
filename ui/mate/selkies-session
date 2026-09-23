@@ -10,6 +10,29 @@ for i in $(seq 1 20); do
   [ -S "${XDG_RUNTIME_DIR}/pulse/native" ] && break
   sleep 0.5
 done
+# MATE on :0 — user systemd under loginctl linger doesn't always pull
+# default.target after a stop/start; kick it from here so the desktop
+# survives `v stop dev && v up dev` without manual intervention.
+# Wait for the user dbus socket (systemd manager ready) before kicking;
+# otherwise `systemctl --user` errors out and the desktop stays blank.
+for i in $(seq 1 30); do
+  [ -S "${XDG_RUNTIME_DIR}/bus" ] && break
+  sleep 0.5
+done
+# User-installed units under ~/.config/systemd/user/default.target.wants/
+# are not auto-loaded at first user-bus start, so default.target's Wants=
+# fire before the units are visible — same for our explicit `start` below.
+# daemon-reload indexes them; retry the start in case the manager hasn't
+# finished loading yet.
+systemctl --user daemon-reload 2>&1 | head -3 || true
+for i in $(seq 1 10); do
+  out=$(systemctl --user start mate-autostart.service 2>&1)
+  rc=$?
+  if [ $rc -eq 0 ]; then break; fi
+  echo "[selkies-session] mate-autostart kick attempt $i failed: $out" >&2
+  sleep 1
+done
+
 exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
   --enable-basic-auth=false \
   --audio-enabled=true \
