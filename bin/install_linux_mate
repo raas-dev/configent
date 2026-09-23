@@ -254,8 +254,6 @@ factory_reset_and_apply() {
   fi
 }
 
-log "start"
-
 LOGDIR=/var/log/mate-install
 $SUDO mkdir -p -m 755 "$LOGDIR"
 $SUDO chown "$LUSER": "$LOGDIR"

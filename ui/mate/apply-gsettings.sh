@@ -164,7 +164,7 @@ gsettings set org.mate.panel toplevel-id-list "['top', 'bottom']"
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" applet-iid 'ClockAppletFactory::ClockApplet'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" position 30
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" position 20
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" panel-right-stick true
@@ -181,7 +181,7 @@ gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/"
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" applet-iid 'GvcAppletFactory::GvcApplet'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" position 10
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" position 40
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" panel-right-stick true
@@ -189,7 +189,7 @@ gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" panel-right-s
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" applet-iid 'IndicatorAppletCompleteFactory::IndicatorAppletComplete'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" position 20
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" position 30
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" panel-right-stick true
@@ -202,7 +202,7 @@ gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" toplevel
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" applet-iid 'NotificationAreaAppletFactory::NotificationArea'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" position 40
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" position 10
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true
