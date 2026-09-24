@@ -2,7 +2,7 @@
 # configent (https://github.com/raas-dev/configent)
 # krunkit wrapper: injects `--device virtio-gpu` so lima VMs expose /dev/dri.
 # lima 2.2.0 driver builds krunkit cmdline without virtio-gpu; we add it here.
-# ponytail: krunkit default framebuffer. Override via env or extend the wrapper when you need a specific size.
+# ponytail: krunkit default framebuffer. Override via KRUNKIT_WIDTH / KRUNKIT_HEIGHT env.
 
 set -eu
 
@@ -20,11 +20,20 @@ if [ -z "$REAL" ]; then
 fi
 
 # Inject virtio-gpu once if not already present (krunkit would error otherwise).
+# Skip injection for info flags so `limactl delete` version probe doesn't break.
+skip=0
+for a in "$@"; do
+  case "$a" in --version | -V | --help | -h) skip=1 ;; esac
+done
 has_gpu=0
 for a in "$@"; do [ "$a" = "virtio-gpu" ] && has_gpu=1; done
 
-if [ "$has_gpu" -eq 0 ]; then
-  set -- --device virtio-gpu "$@"
+if [ "$skip" -eq 0 ] && [ "$has_gpu" -eq 0 ]; then
+  gpu_dev=virtio-gpu
+  if [ -n "${KRUNKIT_WIDTH:-}" ] && [ -n "${KRUNKIT_HEIGHT:-}" ]; then
+    gpu_dev="virtio-gpu,width=${KRUNKIT_WIDTH},height=${KRUNKIT_HEIGHT}"
+  fi
+  set -- --device "$gpu_dev" "$@"
 fi
 
 exec "$REAL" "$@"
