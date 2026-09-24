@@ -7,6 +7,7 @@ import {
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const PT_PREFIX = "Ponytail loaded";
+const WH_PREFIX = "Nested Git repository ";
 const PE_KEY = "prompt-enhancer";
 const ARROW = "\u{E0B0}";
 
@@ -37,7 +38,8 @@ export default function quietStartup(pi: ExtensionAPI): void {
       ui.__ptNotifyPatched = true;
       const orig = ui.notify.bind(ui);
       ui.notify = (msg: string, kind?: string) =>
-        typeof msg === "string" && msg.startsWith(PT_PREFIX)
+        typeof msg === "string" &&
+        (msg.startsWith(PT_PREFIX) || msg.startsWith(WH_PREFIX))
           ? undefined
           : orig(msg, kind);
     }
