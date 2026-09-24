@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.2](https://github.com/raas-dev/configent/compare/1.244.1...1.244.2) (2026-09-24)
+
+### Fixes
+
+* **install_linux_mate:** migrate to xvfb for headless display ([fe695d0](https://github.com/raas-dev/configent/commit/fe695d092fba81580d15361dba1d436a37f6daf3))
+* **install_linux_mate:** use template substitution for service configs ([384d0bf](https://github.com/raas-dev/configent/commit/384d0bf5533a342f0ef5e496ff0f77680c445a67))
+* **krunkit:** set explicit virtio-gpu dimension defaults ([ce8b125](https://github.com/raas-dev/configent/commit/ce8b125549fb86259a503673241cd4b7055ff1f9))
+* **krunkit:** skip gpu for info flags, support dimension env vars ([93cfabd](https://github.com/raas-dev/configent/commit/93cfabdd0c1f4ad2c712a4320f2497f3e4094785))
+* **krunkit:** use default virtio-gpu framebuffer ([a5efdc4](https://github.com/raas-dev/configent/commit/a5efdc49826aab642818dd67a85df7aca3c59986))
+* **quiet-startup:** suppress nested git repo warnings ([fba13a5](https://github.com/raas-dev/configent/commit/fba13a5d00719db969c4e55d0dc0a8a767e63bc6))
+
 ## [1.244.1](https://github.com/raas-dev/configent/compare/1.244.0...1.244.1) (2026-09-23)
 
 ### Fixes
