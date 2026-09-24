@@ -2,7 +2,7 @@
 # configent (https://github.com/raas-dev/configent)
 # krunkit wrapper: injects `--device virtio-gpu` so lima VMs expose /dev/dri.
 # lima 2.2.0 driver builds krunkit cmdline without virtio-gpu; we add it here.
-# ponytail: fixed 1920x1080 framebuffer. Resize if you need larger displays.
+# ponytail: krunkit default framebuffer. Override via env or extend the wrapper when you need a specific size.
 
 set -eu
 
@@ -24,7 +24,7 @@ has_gpu=0
 for a in "$@"; do [ "$a" = "virtio-gpu" ] && has_gpu=1; done
 
 if [ "$has_gpu" -eq 0 ]; then
-  set -- --device "virtio-gpu,width=1920,height=1080" "$@"
+  set -- --device virtio-gpu "$@"
 fi
 
 exec "$REAL" "$@"
