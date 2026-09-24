@@ -1,0 +1,30 @@
+#!/bin/sh
+# configent (https://github.com/raas-dev/configent)
+# krunkit wrapper: injects `--device virtio-gpu` so lima VMs expose /dev/dri.
+# lima 2.2.0 driver builds krunkit cmdline without virtio-gpu; we add it here.
+# ponytail: fixed 1920x1080 framebuffer. Resize if you need larger displays.
+
+set -eu
+
+# Locate real krunkit (skip this shim via $KRUNKIT_REAL or PATH exclusion).
+REAL="${KRUNKIT_REAL:-}"
+if [ -z "$REAL" ]; then
+  for cand in /opt/homebrew/bin/krunkit /usr/local/bin/krunkit \
+    "$HOME/homebrew/bin/krunkit"; do
+    [ -x "$cand" ] && [ "$cand" != "$0" ] && REAL="$cand" && break
+  done
+fi
+if [ -z "$REAL" ]; then
+  echo "krunkit: real krunkit not found (set KRUNKIT_REAL)" >&2
+  exit 1
+fi
+
+# Inject virtio-gpu once if not already present (krunkit would error otherwise).
+has_gpu=0
+for a in "$@"; do [ "$a" = "virtio-gpu" ] && has_gpu=1; done
+
+if [ "$has_gpu" -eq 0 ]; then
+  set -- --device "virtio-gpu,width=1920,height=1080" "$@"
+fi
+
+exec "$REAL" "$@"

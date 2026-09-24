@@ -110,6 +110,7 @@ probes:
         exit 1
       fi
     hint: See "/var/log/cloud-init-output.log" in the guest
+
 message: |
   Desktop:
     https://localhost:8443  (TLS, self-signed)

@@ -299,20 +299,25 @@ SELKIES_DEB="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
 }
 
 log "apt + selkies + mate + pip install starting (single batch)"
-$SUDO apt-get install "${APT_OPTS[@]}" \
-  "$SELKIES_DEB" \
-  xvfb \
-  x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
-  socat libnspr4 libnss3 \
-  ubuntu-mate-desktop ubuntu-mate-default-settings \
-  ubuntu-mate-icon-themes ubuntu-mate-themes \
-  ayatana-indicator-application mate-terminal \
-  at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
-  dconf-cli \
-  pipewire pipewire-pulse wireplumber \
-  fonts-ubuntu \
-  python3-pip \
-  2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
+{
+  $SUDO apt-get install "${APT_OPTS[@]}" \
+    "$SELKIES_DEB" \
+    xvfb \
+    x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
+    socat libnspr4 libnss3 \
+    ubuntu-mate-desktop ubuntu-mate-default-settings \
+    ubuntu-mate-icon-themes ubuntu-mate-themes \
+    ayatana-indicator-application mate-terminal \
+    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
+    dconf-cli \
+    pipewire pipewire-pulse wireplumber \
+    fonts-ubuntu \
+    python3-pip \
+    mesa-vulkan-drivers \
+    glmark2-es2-drm
+  # Venus via mesa-vulkan-drivers becomes real once libkrun #114 lands.
+  # When fixed: switch chromium-wrapper to --use-angle=vulkan (drops SwiftShader).
+} 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
   tail -60 "$LOGDIR/core.log" >&2
   exit 1
 }
