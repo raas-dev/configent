@@ -128,13 +128,23 @@ chromium_files() {
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
   $SUDO install -d -m 755 /usr/local/share/applications
   $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
-  $SUDO cp /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
+  $SUDO sed 's|^\[Desktop Entry\]$|[Desktop Entry]\nNoDisplay=true|' /usr/local/share/applications/chromium.desktop | $SUDO tee /usr/local/share/applications/chromium_chromium.desktop >/dev/null
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
   $SUDO install -d -m 755 /etc/chromium/policies/managed
   $SUDO install -m 644 "$UI/policy-startup.json" /etc/chromium/policies/managed/startup.json
-  $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
+  $SUDO rm -rf \
+    "$UHOME/.config/xfce4" \
+    "$UHOME/.config/xfce4-session" \
+    "$UHOME/.config/Thunar" \
+    "$UHOME/.config/autostart" \
+    "$UHOME/.cache/xfce4" \
+    "$UHOME/.cache/xfce4-session" \
+    "$UHOME/.cache/Thunar" \
+    "$UHOME/.local/share/xfce4" 2>/dev/null || true
+
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
+  $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   [ -f /usr/share/applications/xfce4-terminal.desktop ] &&
@@ -262,6 +272,7 @@ $SUDO apt-get autoclean
 $SUDO dpkg --configure -a
 $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
   /etc/xdg/autostart/xscreensaver.desktop \
+  /etc/xdg/autostart/snap-userd-autostart.desktop \
   /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
 [ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
 $SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open

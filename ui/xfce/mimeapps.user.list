@@ -2,3 +2,9 @@
 x-scheme-handler/http=chromium_chromium.desktop
 x-scheme-handler/https=chromium_chromium.desktop
 x-scheme-handler/chromium_chromium.desktop=chromium_chromium.desktop
+inode/directory=xfce4-file-manager.desktop
+x-scheme-handler/trash=xfce4-file-manager.desktop
+
+[Added Associations]
+inode/directory=xfce4-file-manager.desktop;
+x-scheme-handler/trash=xfce4-file-manager.desktop;
