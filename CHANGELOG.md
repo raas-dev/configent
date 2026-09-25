@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.3](https://github.com/raas-dev/configent/compare/1.244.2...1.244.3) (2026-09-25)
+
+### Fixes
+
+* **install_linux_mate:** add group substitution to service templates ([76e3390](https://github.com/raas-dev/configent/commit/76e3390f447157a5cb8b7b78c7440b40b1f1ba55))
+* **install_linux_xfce:** disable command tracing ([7c61b15](https://github.com/raas-dev/configent/commit/7c61b15b9b27d3290dac7df84e1c9b8431caf319))
+
 ## [1.244.2](https://github.com/raas-dev/configent/compare/1.244.1...1.244.2) (2026-09-24)
 
 ### Fixes
