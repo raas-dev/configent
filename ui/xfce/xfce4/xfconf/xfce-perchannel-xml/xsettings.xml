@@ -18,7 +18,7 @@
     <property name="Antialias" type="int" value="1"/>
     <property name="Hinting" type="int" value="1"/>
     <property name="HintStyle" type="string" value="hintfull"/>
-    <property name="RGBA" type="string" value="none"/>
+    <property name="RGBA" type="string" value="rgb"/>
   </property>
   <property name="Gtk" type="empty">
     <property name="CanChangeAccels" type="empty"/>
@@ -41,6 +41,5 @@
   </property>
   <property name="Xfce" type="empty">
     <property name="SyncThemes" type="bool" value="true"/>
-    <property name="LastCustomDPI" type="int" value="120"/>
   </property>
 </channel>
