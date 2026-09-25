@@ -1,12 +1,19 @@
 #!/bin/sh
 # configent (https://github.com/raas-dev/configent)
-# CloakBrowser launcher. Extensions (uBO Lite, ISDCAC) are fetched +
-# unpacked into ~/.config/chromium/Default/Extensions/<id>/<ver>/ by
-# install_linux_xfce's chromium_extensions_dl(), then loaded via
-# --load-extension= (scanned at runtime so the wrapper stays a single
-# binary). --no-first-run skips the ungoogled-chromium welcome page;
-# --no-default-browser-check kills the system-modal prompt on every
-# cold start.
+# CloakBrowser launcher. No chromium flags: everything lives in the seeded
+# profile (ui/xfce/chromium-default-profile). The "First Run" sentinel
+# replaces --no-first-run, browser.check_default_browser=false in
+# Preferences replaces --no-default-browser-check, and extensions.settings
+# entries (written by install_linux_xfce after unpacking the extensions)
+# replace --load-extension=.
+#
+# CHROME_DESKTOP: unbranded Chromium derives its desktop-file identity from
+# this env var (fallback: chromium-browser.desktop) and compares it against
+# the xdg default-web-browser to decide "is default". The installed desktop
+# file IS chromium-browser.desktop, so export it explicitly — without it the
+# self-check can mismatch and the "isn't your default browser" infobar
+# shows on every launch.
+export CHROME_DESKTOP=chromium-browser.desktop
 CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
 # ponytail: fail-fast guard. If /opt/cloakbrowser is missing or the file
 # there is something else (e.g. system chromium), refuse to silently
@@ -19,14 +26,4 @@ case "$CRBIN" in
   exit 127
   ;;
 esac
-EXT_ARG=$(
-  EXTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/chromium/Default/Extensions"
-  for d in "$EXTDIR"/*/; do
-    [ -d "$d" ] || continue
-    for v in "$d"*/; do
-      [ -f "$v/manifest.json" ] && printf '%s,' "$v"
-    done
-  done | sed 's/,$//'
-)
-exec "$CRBIN" --no-first-run --no-default-browser-check \
-  ${EXT_ARG:+--load-extension="$EXT_ARG"} "$@"
+exec "$CRBIN" "$@"

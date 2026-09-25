@@ -31,12 +31,6 @@ configs:
     "/home/asyrjasalo.guest":
       row: 0
       col: 0
-    "/home/asyrjasalo.guest/Desktop/mate-terminal.desktop":
-      row: 3
-      col: 0
-    "/home/asyrjasalo.guest/Desktop/chromium.desktop":
-      row: 3
-      col: 0
 - level: 0
   monitors:
   - id: "5709fc3168ec609e37cbc3c8b36fd12a99ff5620"

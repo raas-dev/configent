@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Parse ui/xfce/chromium-extensions.yaml into TSV for the installer.
 
-Each line of stdout: name<TAB>id<TAB>repo<TAB>asset<TAB>strip_tag_prefix
+Each line of stdout: name<TAB>id<TAB>repo<TAB>asset
 Only the keys we need are recognised; unknown keys are ignored. This
 avoids pulling pyyaml as an apt dependency — the format is constrained
 to a single top-level list of flat string maps, parsed by line.
@@ -53,7 +53,6 @@ def main() -> int:
                     ext.get("id", ""),
                     ext.get("repo", ""),
                     ext.get("asset", ""),
-                    ext.get("strip_tag_prefix", ""),
                 )
             )
         )

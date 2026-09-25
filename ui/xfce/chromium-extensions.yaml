@@ -1,15 +1,17 @@
 # Chromium extensions installed by bin/install_linux_xfce.
 #
 # Each entry feeds one parallel subshell that fetches the GitHub
-# release zip, extracts into $UHOME/.config/chromium/Default/Extensions/<id>/<ver>/,
-# and chowns to $LUSER. The wrapper picks them up via --load-extension=.
+# release zip and extracts into ~/.config/chromium-extensions/<id>/ (outside
+# the profile: the extension garbage collector deletes non-webstore dirs
+# under Default/Extensions). Paths are versionless so the extension ids
+# Chromium derives from them — and thus the extensions.settings keys in
+# ui/xfce/chromium-default-profile/Default/Preferences — stay stable
+# across releases. No --load-extension flag needed.
 #
 #   name              Human-readable label for logs (no spaces preferred).
 #   id                Chrome Web Store extension id (the immutable install path key).
 #   repo              GitHub owner/name hosting the source zip release.
 #   asset             Release asset filename; {tag} is replaced with the latest tag.
-#   strip_tag_prefix  Optional. Strip this string from the tag when used as version
-#                     (e.g. "v" so tag "v1.1.9" becomes version dir "1.1.9").
 
 extensions:
   - name: ublock-origin-lite
@@ -21,4 +23,3 @@ extensions:
     id: edibdbjcniadpccecjdfdjjppcpchdlm
     repo: OhMyGuus/I-Still-Dont-Care-About-Cookies
     asset: "ISDCAC-chrome-source.zip"
-    strip_tag_prefix: "v"

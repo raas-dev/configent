@@ -85,19 +85,22 @@ chromium_dl() {
 chromium_extensions_dl() {
   # Chrome Web Store only serves CRX via its own update endpoint, which
   # rejects unattended fetchers. Both extensions publish their unpacked
-  # source as a GitHub release zip, so we fetch from there into the
-  # standard Default/Extensions/<id>/<ver>/ layout the wrapper scans.
-  # Anything left under Default/Extensions from a prior install is wiped
-  # by the same rm -rf that wipes the rest of the chrome profile above.
-  # The extension list lives in ui/xfce/chromium-extensions.yaml so adding
-  # or removing one is a single-line edit with no installer touch.
-  # Each entry runs in its own subshell in parallel — disjoint target
-  # dirs, disjoint temp files, so & + wait is safe. Versions come from
-  # the GitHub releases/latest API so the installer doesn't pin a stale
-  # build.
-  local extdir="$UHOME/.config/chromium/Default/Extensions"
+  # source as a GitHub release zip, so we fetch from there into
+  # ~/.config/chromium-extensions/<id>/.
+  # CRITICAL: extension files must NOT live under
+  # ~/.config/chromium/Default/Extensions — Chromium's extension garbage
+  # collector deletes every non-webstore dir there ~40s after launch
+  # (verified in-VM: "Garbage collection for extensions on file thread is
+  # complete", then "File path cannot be resolved. Could not load manifest").
+  # Outside the profile the GC never scans; plain user-owned files, no root.
+  # The extension list lives in ui/xfce/chromium-extensions.yaml; matching
+  # extensions.settings entries live in the default-profile Preferences
+  # template (keys = ids Chromium derives from the install paths — paths
+  # are versionless so the ids stay stable across releases).
+  local extdir="$UHOME/.config/chromium-extensions"
   local work
   work=$(mktemp -d)
+  install -d "$extdir"
 
   # Pull tag_name from a GitHub /releases/latest JSON body without jq.
   gh_latest_tag() {
@@ -108,25 +111,23 @@ chromium_extensions_dl() {
   }
 
   local -a pids=()
-  # name<TAB>id<TAB>repo<TAB>asset<TAB>strip_tag_prefix
-  while IFS=$'\t' read -r ext_name ext_id ext_repo ext_asset ext_strip; do
+  # name<TAB>id<TAB>repo<TAB>asset
+  while IFS=$'\t' read -r ext_name ext_id ext_repo ext_asset; do
     [ -z "$ext_id" ] && continue
     (
-      local tag ver asset_zip url
+      local tag asset_zip url
       tag=$(gh_latest_tag "$ext_repo") || {
         echo "[$ext_name] tag missing" >&2
         exit 1
       }
-      ver="${tag#"$ext_strip"}"
       asset_zip="${ext_asset//\{tag\}/$tag}"
       url="https://github.com/${ext_repo}/releases/download/${tag}/${asset_zip}"
       local zip="$work/${ext_id}.zip"
       local log="$work/${ext_id}.log"
       {
         curl -fsSL --retry 5 --retry-all-errors --max-time 120 -o "$zip" "$url" &&
-          $SUDO install -d -o "$LUSER" -m 755 "$extdir/$ext_id/$ver" &&
-          $SUDO unzip -q -o "$zip" -d "$extdir/$ext_id/$ver" &&
-          $SUDO chown -R "$LUSER": "$extdir/$ext_id/$ver"
+          install -d "$extdir/$ext_id" &&
+          unzip -q -o "$zip" -d "$extdir/$ext_id"
       } >"$log" 2>&1 || {
         cat "$log" >&2
         exit 1
@@ -161,9 +162,9 @@ chromium_files() {
   $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
   $SUDO install -d -m 755 /usr/local/share/applications
-  $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
+  $SUDO install -m 644 "$UI/chromium-browser.desktop" /usr/local/share/applications/chromium-browser.desktop
   $SUDO chmod 755 /usr/local/share/applications
-  $SUDO chmod 644 /usr/local/share/applications/chromium.desktop
+  $SUDO chmod 644 /usr/local/share/applications/chromium-browser.desktop
   # Register + select as the system default browser. /opt/cloakbrowser/chrome
   # is what actually runs, but alternatives + xdg-settings key off the wrapper
   # so /usr/local/bin/x-www-browser and `xdg-open http://...` route here.
@@ -202,10 +203,15 @@ chromium_files() {
     "$UHOME/.config/chromium/Default/"
   $SUDO install -o "$LUSER" -m 644 "$UI/chromium-default-profile/Local State" \
     "$UHOME/.config/chromium/Local State"
+  # "First Run" sentinel in the user-data-dir root is what --no-first-run
+  # used to do: its presence makes Chromium treat the profile as used, so
+  # the ungoogled-chromium welcome page never appears.
+  $SUDO install -o "$LUSER" -m 644 "$UI/chromium-default-profile/First Run" \
+    "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
 
   # Fetch + unpack the two MV3 extensions (uBO Lite, ISDCAC) from their
-  # GitHub release zips. Order matters: seed copy above must finish first
+  # GitHub release zips. Order matters: profile copy above must finish first
   # so the rm -rf of .config/chromium has not nuked a prior extraction
   # mid-flight. Trap RETURN in chromium_extensions_dl cleans the tempdir.
   chromium_extensions_dl

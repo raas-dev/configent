@@ -1,2 +1,7 @@
+# WebBrowser: xdg-settings on XFCE consults xfce4/helpers.rc (user copy
+# overrides /etc/xdg/xfce4/helpers.rc). Without this key the system
+# default "debian-sensible-browser" wins and Chromium's default-browser
+# self-check (CHROME_DESKTOP=chromium-browser.desktop) fails → infobar.
+WebBrowser=chromium-browser
 FileManager=thunar
 TerminalEmulator=xfce4-terminal

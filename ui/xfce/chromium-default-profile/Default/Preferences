@@ -3,6 +3,7 @@
     "first_run_finished": true,
     "has_seen_welcome_page": true,
     "show_home_button": true,
+    "check_default_browser": false,
     "window_placement": {}
   },
   "session": {
@@ -23,8 +24,6 @@
       }
     }
   },
-  "default_browser_check_enabled": false,
-  "default_browser_setting": "nevershow",
   "bookmark_bar": {
     "show_on_all_tabs": false
   },
@@ -66,6 +65,16 @@
   "extensions": {
     "ui": {
       "developer_mode": true
+    },
+    "settings": {
+      "kdondjcpgpfoejcobgnbmpoljgnhjiaa": {
+        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/ddkjiahejlhfcafbddmgiahcphecmpfh",
+        "location": 4
+      },
+      "mdinakjfecnibgegdckgghdmejjgjaff": {
+        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
+        "location": 4
+      }
     }
   }
 }
