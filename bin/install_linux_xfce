@@ -131,8 +131,6 @@ chromium_files() {
   $SUDO sed 's|^\[Desktop Entry\]$|[Desktop Entry]\nNoDisplay=true|' /usr/local/share/applications/chromium.desktop | $SUDO tee /usr/local/share/applications/chromium_chromium.desktop >/dev/null
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
-  $SUDO install -d -m 755 /etc/chromium/policies/managed
-  $SUDO install -m 644 "$UI/policy-startup.json" /etc/chromium/policies/managed/startup.json
   $SUDO rm -rf \
     "$UHOME/.config/xfce4" \
     "$UHOME/.config/xfce4-session" \
@@ -145,11 +143,15 @@ chromium_files() {
 
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
+  $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   [ -f "$UI/xfce4-terminal.desktop" ] &&
-    $SUDO install -o "$LUSER" -m 644 "$UI/xfce4-terminal.desktop" \
-      "$UHOME/Desktop/xfce4-terminal.desktop"
+    $SUDO install -o "$LUSER" -m 755 "$UI/xfce4-terminal.desktop" \
+      "$UHOME/Desktop/xfce4-terminal.desktop" &&
+    $SUDO setfattr -n user.gvfs.trust -v 1 \
+      "$UHOME/Desktop/xfce4-terminal.desktop" 2>/dev/null ||
+    $SUDO -u "$LUSER" python3 -c "import os; os.setxattr('$UHOME/Desktop/xfce4-terminal.desktop','user.gvfs.trust',b'1')" 2>/dev/null || true
 }
 
 write_configs() {
@@ -175,6 +177,28 @@ write_configs() {
   $SUDO install -d -m 755 /etc/xdg/xfce4
   $SUDO install -m 644 "$UI/xfce4-helpers.rc" /etc/xdg/xfce4/helpers.rc
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
+  # Restore last chromium session on boot. Idempotent: only patches
+  # session.restore_on_startup when missing or default (1=new tab).
+  # Skips when absent — Preferences only exists after first chromium run.
+  # ponytail: full session restore requires also exit_type=Normal; if the
+  # session still doesn't restore, check chromium-side "On startup" in
+  # chrome://settings/onStartup (UI overrides our flag).
+  [ -n "$SUDO" ] && SUDO_PY="sudo -u $LUSER" || SUDO_PY=
+  $SUDO_PY HOME="$UHOME" python3 - <<'PY' 2>/dev/null || true
+import json, os
+p = os.environ['HOME'] + '/.config/chromium/Default/Preferences'
+if not os.path.isfile(p): raise SystemExit
+d = json.load(open(p))
+s = d.setdefault('session', {})
+cur = s.get('restore_on_startup')
+if cur in (None, 1):
+    s['restore_on_startup'] = 4
+    s.pop('startup_urls', None)
+    prof = d.setdefault('profile', {})
+    prof['exit_type'] = 'Normal'
+    prof.pop('exited_cleanly', None)
+    open(p, 'w').write(json.dumps(d, indent=1))
+PY
 }
 
 enable_units() {
