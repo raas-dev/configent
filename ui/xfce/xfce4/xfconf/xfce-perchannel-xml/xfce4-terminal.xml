@@ -27,4 +27,5 @@
   <property name="misc-new-tab-adjacent" type="bool" value="true"/>
   <property name="misc-default-geometry" type="string" value="120x35"/>
   <property name="misc-copy-on-select" type="bool" value="true"/>
+  <property name="command-login-shell" type="bool" value="true"/>
 </channel>

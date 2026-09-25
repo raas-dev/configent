@@ -147,8 +147,8 @@ chromium_files() {
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
-  [ -f /usr/share/applications/xfce4-terminal.desktop ] &&
-    $SUDO install -o "$LUSER" -m 755 /usr/share/applications/xfce4-terminal.desktop \
+  [ -f "$UI/xfce4-terminal.desktop" ] &&
+    $SUDO install -o "$LUSER" -m 644 "$UI/xfce4-terminal.desktop" \
       "$UHOME/Desktop/xfce4-terminal.desktop"
 }
 
@@ -162,6 +162,7 @@ write_configs() {
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
   $SUDO install -d -m 755 /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
   $SUDO install -m 644 "$UI/xfce4-desktop.xml" /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+  $SUDO install -m 644 "$UI/xfce4-terminal.xml" /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
   $SUDO install -m 755 "$UI/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
@@ -276,8 +277,6 @@ $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
   /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
 [ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
 $SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open
-[ -x /usr/bin/xfce4-terminal ] && [ ! -e /usr/bin/xfce4-terminal-real ] && $SUDO mv /usr/bin/xfce4-terminal /usr/bin/xfce4-terminal-real
-$SUDO install -m 755 "$UI/xfce4-terminal-wrapper" /usr/bin/xfce4-terminal
 $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
 $SUDO update-desktop-database /usr/local/share/applications || true
 
