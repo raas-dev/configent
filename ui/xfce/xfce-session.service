@@ -1,5 +1,5 @@
 [Unit]
-Description=MATE desktop session on :0 (always-on, display-manager-independent)
+Description=XFCE desktop session on :0 (always-on, display-manager-independent)
 After=xvfb.service
 Wants=network-online.target
 
@@ -7,12 +7,12 @@ Wants=network-online.target
 User=__LUSER__
 Group=__LGROUP__
 Environment=DISPLAY=:0
-Environment=XDG_CURRENT_DESKTOP=MATE
-Environment=XDG_SESSION_DESKTOP=mate
+Environment=XDG_CURRENT_DESKTOP=XFCE
+Environment=XDG_SESSION_DESKTOP=xfce
 Environment=GTK_A11Y=atspi
 ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"
 ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY
-ExecStart=/usr/bin/mate-session
+ExecStart=/usr/bin/dbus-run-session -- /usr/bin/startxfce4
 Restart=on-failure
 RestartSec=2
 

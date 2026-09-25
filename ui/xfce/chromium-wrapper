@@ -1,0 +1,6 @@
+#!/bin/sh
+# configent (https://github.com/raas-dev/configent)
+# Chromium/CloakBrowser launcher; software GPU path for lima/krunkit VMs.
+CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
+exec "$CRBIN" --no-first-run --no-default-browser-check \
+  --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"
