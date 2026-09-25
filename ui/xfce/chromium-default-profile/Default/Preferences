@@ -62,5 +62,10 @@
   },
   "performance": {
     "memory_saver_enabled": true
+  },
+  "extensions": {
+    "ui": {
+      "developer_mode": true
+    }
   }
 }
