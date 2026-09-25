@@ -24,7 +24,7 @@
     <property name="CanChangeAccels" type="empty"/>
     <property name="ColorPalette" type="empty"/>
     <property name="FontName" type="string" value="Ubuntu Medium 11"/>
-    <property name="MonospaceFontName" type="string" value="Terminess Nerd Font Propo Bold 11"/>
+    <property name="MonospaceFontName" type="string" value="Terminess Nerd Font Bold 11"/>
     <property name="IconSizes" type="empty"/>
     <property name="KeyThemeName" type="empty"/>
     <property name="MenuImages" type="empty"/>
