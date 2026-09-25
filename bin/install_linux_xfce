@@ -86,7 +86,8 @@ chromium_extensions() {
     "$UHOME/.config/chromium-extensions" \
     "$UHOME/.config/chromium/Default/Preferences"
 }
-chromium_files() {
+
+seed_desktop() {
   for _ in $(seq 1 600); do
     [ -f /tmp/cb.ok ] && break
     sleep 0.5
@@ -193,7 +194,7 @@ write_configs() {
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
-  # Chromium profile seed lives in chromium_files() — it runs after the
+  # Chromium profile seed lives in seed_desktop() — it runs after the
   # rm -rf of $UHOME/.config/chromium, so doing the copy here would race.
 }
 
@@ -296,11 +297,11 @@ $SUDO update-desktop-database /usr/local/share/applications || true
 # per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
 $SUDO systemctl set-default graphical.target
 
-# Wait for backgrounds we still need: chromium_dl (chromium_files reads
+# Wait for backgrounds we still need: chromium_dl (seed_desktop reads
 # ~/.local/share/cloakbrowser), write_configs (selkies unit files must exist
 # before systemctl enable --now).
 wait_ok "$CB" "$LOGDIR/cb.log"
-chromium_files
+seed_desktop
 wait_ok "$CERT" "$LOGDIR/cert.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium ready"
