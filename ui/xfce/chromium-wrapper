@@ -1,6 +1,32 @@
 #!/bin/sh
 # configent (https://github.com/raas-dev/configent)
-# Chromium/CloakBrowser launcher; software GPU path for lima/krunkit VMs.
+# CloakBrowser launcher. Extensions (uBO Lite, ISDCAC) are fetched +
+# unpacked into ~/.config/chromium/Default/Extensions/<id>/<ver>/ by
+# install_linux_xfce's chromium_extensions_dl(), then loaded via
+# --load-extension= (scanned at runtime so the wrapper stays a single
+# binary). --no-first-run skips the ungoogled-chromium welcome page;
+# --no-default-browser-check kills the system-modal prompt on every
+# cold start.
 CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
+# ponytail: fail-fast guard. If /opt/cloakbrowser is missing or the file
+# there is something else (e.g. system chromium), refuse to silently
+# exec the wrong browser. Drop when a real /usr/bin/cloak-browser shim
+# exists and CRBIN is hardcoded.
+case "$CRBIN" in
+/opt/cloakbrowser/*) ;;
+*)
+  echo "chromium-wrapper: cloakbrowser not found at /opt/cloakbrowser/ (got: ${CRBIN:-<none>})" >&2
+  exit 127
+  ;;
+esac
+EXT_ARG=$(
+  EXTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/chromium/Default/Extensions"
+  for d in "$EXTDIR"/*/; do
+    [ -d "$d" ] || continue
+    for v in "$d"*/; do
+      [ -f "$v/manifest.json" ] && printf '%s,' "$v"
+    done
+  done | sed 's/,$//'
+)
 exec "$CRBIN" --no-first-run --no-default-browser-check \
-  --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"
+  ${EXT_ARG:+--load-extension="$EXT_ARG"} "$@"

@@ -1,0 +1,29 @@
+{
+  "profile": {
+    "info_cache": {
+      "Default": {
+        "avatar_icon": "chrome://theme/IDR_PROFILE_AVATAR_26",
+        "background_apps": false,
+        "default_avatar_fill_color": -14737376,
+        "default_avatar_stroke_color": -1118484,
+        "force_signin_profile_locked": false,
+        "gaia_id": "",
+        "is_consented_primary_account": false,
+        "is_ephemeral": false,
+        "is_using_default_avatar": true,
+        "is_using_default_name": true,
+        "managed_user_id": "",
+        "metrics_bucket_index": 1,
+        "name": "Your Chromium",
+        "profile_color_seed": -5715974,
+        "profile_highlight_color": -14737376,
+        "user_name": ""
+      }
+    },
+    "last_used": "Default",
+    "profiles_order": ["Default"]
+  },
+  "intl": {
+    "accept_languages": "en-US,en"
+  }
+}

@@ -32,7 +32,7 @@ LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
 ARCH=$(dpkg --print-architecture)
-TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
+TARBALL=/mnt/lima-provision/chromium.$ARCH.tar.gz
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
@@ -68,8 +68,7 @@ selkies_deb() {
 chromium_dl() {
   if [ -f "$TARBALL" ]; then
     $SUDO tar xzf "$TARBALL" -C / &&
-      $SUDO chown -R "$LUSER": /usr/local/share/extensions &&
-      touch /tmp/cb.ok /tmp/ext.ok
+      touch /tmp/cb.ok
   else
     for _ in $(seq 1 300); do
       command -v pip3 >/dev/null 2>&1 && break
@@ -82,39 +81,73 @@ chromium_dl() {
   fi
 }
 
-extensions_dl() {
-  if [ -f "$TARBALL" ]; then
-    for _ in $(seq 1 300); do
-      [ -f /tmp/ext.ok ] && return 0
-      sleep 2
-    done
-    return 1
-  fi
-  for _ in $(seq 1 120); do
-    [ -x /usr/bin/unzip ] && break
-    sleep 2
+chromium_extensions_dl() {
+  # Chrome Web Store only serves CRX via its own update endpoint, which
+  # rejects unattended fetchers. Both extensions publish their unpacked
+  # source as a GitHub release zip, so we fetch from there into the
+  # standard Default/Extensions/<id>/<ver>/ layout the wrapper scans.
+  # Anything left under Default/Extensions from a prior install is wiped
+  # by the same rm -rf that wipes the rest of the chrome profile above.
+  # The extension list lives in ui/xfce/chromium-extensions.yaml so adding
+  # or removing one is a single-line edit with no installer touch.
+  # Each entry runs in its own subshell in parallel — disjoint target
+  # dirs, disjoint temp files, so & + wait is safe. Versions come from
+  # the GitHub releases/latest API so the installer doesn't pin a stale
+  # build.
+  local extdir="$UHOME/.config/chromium/Default/Extensions"
+  local work
+  work=$(mktemp -d)
+
+  # Pull tag_name from a GitHub /releases/latest JSON body without jq.
+  gh_latest_tag() {
+    curl -fsSL --retry 5 --retry-all-errors --max-time 30 \
+      "https://api.github.com/repos/$1/releases/latest" |
+      sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' |
+      head -n1
+  }
+
+  local -a pids=()
+  # name<TAB>id<TAB>repo<TAB>asset<TAB>strip_tag_prefix
+  while IFS=$'\t' read -r ext_name ext_id ext_repo ext_asset ext_strip; do
+    [ -z "$ext_id" ] && continue
+    (
+      local tag ver asset_zip url
+      tag=$(gh_latest_tag "$ext_repo") || {
+        echo "[$ext_name] tag missing" >&2
+        exit 1
+      }
+      ver="${tag#"$ext_strip"}"
+      asset_zip="${ext_asset//\{tag\}/$tag}"
+      url="https://github.com/${ext_repo}/releases/download/${tag}/${asset_zip}"
+      local zip="$work/${ext_id}.zip"
+      local log="$work/${ext_id}.log"
+      {
+        curl -fsSL --retry 5 --retry-all-errors --max-time 120 -o "$zip" "$url" &&
+          $SUDO install -d -o "$LUSER" -m 755 "$extdir/$ext_id/$ver" &&
+          $SUDO unzip -q -o "$zip" -d "$extdir/$ext_id/$ver" &&
+          $SUDO chown -R "$LUSER": "$extdir/$ext_id/$ver"
+      } >"$log" 2>&1 || {
+        cat "$log" >&2
+        exit 1
+      }
+    ) &
+    pids+=($!)
+  done < <(python3 "$UI/chromium-extensions.py" "$UI/chromium-extensions.yaml")
+
+  local rc=0 pid
+  for pid in "${pids[@]}"; do
+    wait "$pid" || rc=1
   done
-  [ -x /usr/bin/unzip ]
-  $SUDO install -d -m 755 /usr/local/share/extensions
-  for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecjdfdjjppcpchdlm ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
-    name=${pair%%:*}
-    id=${pair##*:}
-    curl -fsSL -o "/tmp/$name.crx" "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc"
-    python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' "/tmp/$name.crx" "/tmp/$name.zip"
-    $SUDO mkdir -p "/usr/local/share/extensions/$name"
-    $SUDO unzip -oq "/tmp/$name.zip" -d "/usr/local/share/extensions/$name"
-    $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
-  done
-  $SUDO chown -R "$LUSER": /usr/local/share/extensions
-  touch /tmp/ext.ok
+  rm -rf "$work"
+  return $rc
 }
 
 chromium_files() {
   for _ in $(seq 1 600); do
-    [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] && break
+    [ -f /tmp/cb.ok ] && break
     sleep 0.5
   done
-  [ -f /tmp/cb.ok ] && [ -f /tmp/ext.ok ] || return 1
+  [ -f /tmp/cb.ok ] || return 1
   if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
     $SUDO install -d -m 755 /opt/cloakbrowser
     CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
@@ -128,18 +161,46 @@ chromium_files() {
   for n in chrome chromium chromium-browser; do $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n; done
   $SUDO install -d -m 755 /usr/local/share/applications
   $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
-  $SUDO sed 's|^\[Desktop Entry\]$|[Desktop Entry]\nNoDisplay=true|' /usr/local/share/applications/chromium.desktop | $SUDO tee /usr/local/share/applications/chromium_chromium.desktop >/dev/null
   $SUDO chmod 755 /usr/local/share/applications
-  $SUDO chmod 644 /usr/local/share/applications/chromium.desktop /usr/local/share/applications/chromium_chromium.desktop
+  $SUDO chmod 644 /usr/local/share/applications/chromium.desktop
+  # Wipe xfce caches + chromium profile before re-seeding. chromium dir
+  # must be wiped here, not later — write_configs() runs in parallel and
+  # used to lose the race.
   $SUDO rm -rf \
     "$UHOME/.config/xfce4" \
     "$UHOME/.config/xfce4-session" \
     "$UHOME/.config/Thunar" \
     "$UHOME/.config/autostart" \
+    "$UHOME/.config/chromium" \
     "$UHOME/.cache/xfce4" \
     "$UHOME/.cache/xfce4-session" \
     "$UHOME/.cache/Thunar" \
+    "$UHOME/.cache/chromium" \
     "$UHOME/.local/share/xfce4" 2>/dev/null || true
+  # Seed chromium profile after the wipe. Local State pins
+  # profile.last_used + info_cache so chromium trusts the seed instead
+  # of treating it as fresh and clobbering Preferences on first shutdown.
+  # default_search_provider_data MUST live at the top level of
+  # Preferences — Chromium reads it from there, not from under `search`.
+  # Seeding nested (under `search`) was the cause of "default search
+  # engine not set" on first run.
+  # Seed from ui/xfce/chromium-default-profile/. Local State pins
+  # profile.last_used + info_cache so chromium trusts the seed instead
+  # of treating it as fresh and clobbering Preferences on first shutdown.
+  # default_search_provider_data MUST live at the top level of
+  # Preferences — Chromium reads it from there, not from under `search`.
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
+  $SUDO cp -r "$UI/chromium-default-profile/Default/." \
+    "$UHOME/.config/chromium/Default/"
+  $SUDO install -o "$LUSER" -m 644 "$UI/chromium-default-profile/Local State" \
+    "$UHOME/.config/chromium/Local State"
+  $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
+
+  # Fetch + unpack the two MV3 extensions (uBO Lite, ISDCAC) from their
+  # GitHub release zips. Order matters: seed copy above must finish first
+  # so the rm -rf of .config/chromium has not nuked a prior extraction
+  # mid-flight. Trap RETURN in chromium_extensions_dl cleans the tempdir.
+  chromium_extensions_dl
 
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
@@ -152,6 +213,7 @@ chromium_files() {
     $SUDO setfattr -n user.gvfs.trust -v 1 \
       "$UHOME/Desktop/xfce4-terminal.desktop" 2>/dev/null ||
     $SUDO -u "$LUSER" python3 -c "import os; os.setxattr('$UHOME/Desktop/xfce4-terminal.desktop','user.gvfs.trust',b'1')" 2>/dev/null || true
+
 }
 
 write_configs() {
@@ -177,28 +239,8 @@ write_configs() {
   $SUDO install -d -m 755 /etc/xdg/xfce4
   $SUDO install -m 644 "$UI/xfce4-helpers.rc" /etc/xdg/xfce4/helpers.rc
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
-  # Restore last chromium session on boot. Idempotent: only patches
-  # session.restore_on_startup when missing or default (1=new tab).
-  # Skips when absent — Preferences only exists after first chromium run.
-  # ponytail: full session restore requires also exit_type=Normal; if the
-  # session still doesn't restore, check chromium-side "On startup" in
-  # chrome://settings/onStartup (UI overrides our flag).
-  [ -n "$SUDO" ] && SUDO_PY="sudo -u $LUSER" || SUDO_PY=
-  $SUDO_PY HOME="$UHOME" python3 - <<'PY' 2>/dev/null || true
-import json, os
-p = os.environ['HOME'] + '/.config/chromium/Default/Preferences'
-if not os.path.isfile(p): raise SystemExit
-d = json.load(open(p))
-s = d.setdefault('session', {})
-cur = s.get('restore_on_startup')
-if cur in (None, 1):
-    s['restore_on_startup'] = 4
-    s.pop('startup_urls', None)
-    prof = d.setdefault('profile', {})
-    prof['exit_type'] = 'Normal'
-    prof.pop('exited_cleanly', None)
-    open(p, 'w').write(json.dumps(d, indent=1))
-PY
+  # Chromium profile seed lives in chromium_files() — it runs after the
+  # rm -rf of $UHOME/.config/chromium, so doing the copy here would race.
 }
 
 enable_units() {
@@ -223,7 +265,8 @@ cert_gen() {
 warm_cache() {
   if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
     # warm cache for future VMs; do not block desktop.done
-    ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / opt/cloakbrowser usr/local/share/extensions &&
+    ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / \
+      opt/cloakbrowser &&
       mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
   fi
 }
@@ -248,8 +291,6 @@ selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
 SDB=$!
 chromium_dl >"$LOGDIR/cb.log" 2>&1 &
 CB=$!
-extensions_dl >"$LOGDIR/ext.log" 2>&1 &
-EXT=$!
 cert_gen >"$LOGDIR/cert.log" 2>&1 &
 CERT=$!
 write_configs >"$LOGDIR/cfg.log" 2>&1 &
@@ -285,7 +326,8 @@ log "apt + selkies + xfce + pip install starting (single batch)"
     xfce4 xfce4-terminal thunar mousepad ristretto \
     xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
     pipewire pipewire-pulse wireplumber \
-    python3-pip
+    python3-pip \
+    unzip
 } 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
   tail -60 "$LOGDIR/core.log" >&2
   exit 1
@@ -309,14 +351,13 @@ $SUDO update-desktop-database /usr/local/share/applications || true
 $SUDO systemctl set-default graphical.target
 
 # Wait for backgrounds we still need: chromium_dl (chromium_files reads
-# /opt/cloakbrowser), extensions_dl (warm_cache bundles it), write_configs
-# (selkies unit files must exist before systemctl enable --now).
+# /opt/cloakbrowser), write_configs (selkies unit files must exist before
+# systemctl enable --now).
 wait_ok "$CB" "$LOGDIR/cb.log"
 chromium_files
-wait_ok "$EXT" "$LOGDIR/ext.log"
 wait_ok "$CERT" "$LOGDIR/cert.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
-log "selkies configs + chromium + extensions ready"
+log "selkies configs + chromium ready"
 # After apt install + unit files + cert all exist: safe to start units.
 # Earlier start races: xvfb binary missing → restart-loop → rate-limited fail.
 enable_units

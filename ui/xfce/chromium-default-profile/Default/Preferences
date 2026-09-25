@@ -1,0 +1,62 @@
+{
+  "browser": {
+    "first_run_finished": true,
+    "has_seen_welcome_page": true,
+    "window_placement": {}
+  },
+  "session": {
+    "restore_on_startup": 1,
+    "startup_urls": [],
+    "window": {},
+    "tab": {}
+  },
+  "profile": {
+    "exit_type": "Normal",
+    "password_manager_enabled": false,
+    "content_settings": {
+      "exceptions": {
+        "notifications": {},
+        "geolocation": {},
+        "media-stream-camera": {},
+        "media-stream-mic": {}
+      }
+    }
+  },
+  "default_browser_check_enabled": false,
+  "default_browser_setting": "nevershow",
+  "bookmark_bar": {
+    "show_on_all_tabs": false
+  },
+  "homepage": "https://www.google.com",
+  "homepage_is_newtabpage": false,
+  "default_search_provider_data": {
+    "template_url_data": {
+      "keyword": "google.com",
+      "short_name": "Google",
+      "url": "https://www.google.com/search?q={searchTerms}",
+      "safe_for_autoreplace": true,
+      "input_encodings": "UTF-8",
+      "alternate_urls": [],
+      "search_terms_replacement_key": "{searchTerms}"
+    }
+  },
+  "search": {
+    "suggest_enabled": true
+  },
+  "intl": {
+    "accept_languages": "en-US,en"
+  },
+  "translate": {
+    "enabled": false
+  },
+  "safebrowsing": {
+    "enabled": true,
+    "enhanced": false
+  },
+  "download": {
+    "directory": ""
+  },
+  "autofill": {
+    "enabled": false
+  }
+}
