@@ -20,7 +20,7 @@ else
   exit 1
 fi
 
-set -eux -o pipefail
+set -eu -o pipefail
 # ponytail: warm-boot fast path. First successful install touches this; selkies
 # units are systemctl-enabled, so systemd brings them up on boot without us.
 # Saves ~10 min on every `vm up dev` after the first cold install.
