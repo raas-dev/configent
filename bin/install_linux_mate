@@ -31,6 +31,7 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LUID=$(id -u "$LUSER")
+LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 
 if [ "$(id -u)" = 0 ]; then
   SUDO=''
@@ -175,7 +176,7 @@ warm_cache() {
 }
 
 install_selkies_configs() {
-  sed -e "s|__LUSER__|$LUSER|g" "$UI/xvfb.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/xvfb.service" |
     $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xvfb.service
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
@@ -190,10 +191,10 @@ install_selkies_configs() {
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt && \
     chmod 644 /etc/ssl/selkies.pem)'
-  sed -e "s|__LUSER__|$LUSER|g" "$UI/selkies-tls.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/selkies-tls.service" |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
     "$UI/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
@@ -248,7 +249,7 @@ factory_reset_and_apply() {
 
   "$UI/apply-gsettings.sh" "$LUSER"
 
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LUID__|$LUID|g" \
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
     "$UI/mate-autostart.service" \
     >"$UHOME/.config/systemd/user/mate-autostart.service"
   chmod 644 "$UHOME/.config/systemd/user/mate-autostart.service"
