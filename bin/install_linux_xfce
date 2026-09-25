@@ -136,6 +136,10 @@ chromium_files() {
   $SUDO install -m 644 "$UI/mimeapps.list" /etc/xdg/mimeapps.list
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
+  [ -f /usr/share/applications/xfce4-terminal.desktop ] &&
+    $SUDO install -o "$LUSER" -m 755 /usr/share/applications/xfce4-terminal.desktop \
+      "$UHOME/Desktop/xfce4-terminal.desktop"
 }
 
 write_configs() {
