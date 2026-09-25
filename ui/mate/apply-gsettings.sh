@@ -92,8 +92,7 @@ gsettings set org.mate.background secondary-color 'rgb(0,0,0)'
 
 # === org.mate.font-rendering ===
 gsettings set org.mate.font-rendering antialiasing 'rgba'
-gsettings set org.mate.font-rendering dpi 120.0
-gsettings set org.mate.font-rendering hinting 'slight'
+gsettings set org.mate.font-rendering hinting 'full'
 
 # === org.mate.interface ===
 gsettings set org.mate.interface document-font-name 'Ubuntu 10'
