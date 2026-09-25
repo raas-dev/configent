@@ -4,7 +4,7 @@
   <property name="misc-cursor-shape" type="string" value="TERMINAL_CURSOR_SHAPE_IBEAM"/>
   <property name="misc-cursor-blinks" type="bool" value="true"/>
   <property name="scrolling-unlimited" type="bool" value="true"/>
-  <property name="font-name" type="string" value="Terminess Nerd Font Medium 11"/>
+  <property name="font-name" type="string" value="Terminess Nerd Font Bold 11"/>
   <property name="misc-toolbar-default" type="bool" value="false"/>
   <property name="misc-borders-default" type="bool" value="true"/>
   <property name="misc-menubar-default" type="bool" value="true"/>
