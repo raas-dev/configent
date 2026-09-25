@@ -33,7 +33,6 @@ LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
 ARCH=$(dpkg --print-architecture)
-TARBALL=/mnt/lima-provision/cloakbrowser.$ARCH.tar.gz
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
@@ -67,21 +66,14 @@ selkies_deb() {
 }
 
 chromium_dl() {
-  if [ -f "$TARBALL" ]; then
-    $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share" &&
-      $SUDO tar xzf "$TARBALL" -C "$UHOME/.local/share" &&
-      $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser" &&
-      touch /tmp/cb.ok
-  else
-    for _ in $(seq 1 300); do
-      command -v pip3 >/dev/null 2>&1 && break
-      sleep 2
-    done
-    command -v pip3
-    $SUDO pip3 install --no-cache-dir --break-system-packages --root-user-action=ignore --ignore-installed typing_extensions cloakbrowser &&
-      $SUDO cloakbrowser install &&
-      touch /tmp/cb.ok
-  fi
+  for _ in $(seq 1 300); do
+    command -v pip3 >/dev/null 2>&1 && break
+    sleep 1
+  done
+  command -v pip3
+  $SUDO -u "$LUSER" env HOME="$UHOME" pip3 install --user --no-cache-dir --break-system-packages --ignore-installed typing_extensions cloakbrowser &&
+    $SUDO -u "$LUSER" env HOME="$UHOME" PATH="$UHOME/.local/bin:$PATH" cloakbrowser install &&
+    touch /tmp/cb.ok
 }
 
 # Store CRXs unpacked versionless outside the profile (GC-safe); the
@@ -100,8 +92,8 @@ chromium_files() {
     sleep 0.5
   done
   [ -f /tmp/cb.ok ] || return 1
-  if [ ! -x "$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
-    CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
+  if [ ! -x "$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && [ -d "$UHOME/.cloakbrowser" ]; then
+    CRBIN=$($SUDO find "$UHOME/.cloakbrowser" -maxdepth 2 -name chrome -print -quit)
     $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share/cloakbrowser"
     $SUDO mv "$(dirname "$CRBIN")" "$UHOME/.local/share/cloakbrowser/"
     $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser"
@@ -224,15 +216,6 @@ cert_gen() {
   $SUDO sh -c 'cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt && chmod 644 /etc/ssl/selkies.pem'
 }
 
-warm_cache() {
-  if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
-    # warm cache for future VMs; do not block desktop.done
-    ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C "$UHOME/.local/share" \
-      cloakbrowser &&
-      mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
-  fi
-}
-
 LOGDIR=/var/log/xfce-install
 $SUDO mkdir -p -m 755 "$LOGDIR"
 $SUDO chown "$LUSER": "$LOGDIR"
@@ -324,11 +307,6 @@ log "selkies configs + chromium ready"
 # After apt install + unit files + cert all exist: safe to start units.
 # Earlier start races: xvfb binary missing → restart-loop → rate-limited fail.
 enable_units
-
-# ponytail: warm_cache is fire-and-forget; tarball may still be writing after
-# the script exits. lima probe waits on selkies-tls :8080; xfce-session
-# brings up the desktop. Both ready by the time the script exits.
-warm_cache
 
 log "xfce done"
 touch /var/tmp/desktop.done
