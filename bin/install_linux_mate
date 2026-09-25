@@ -130,10 +130,23 @@ chromium_files() {
 # seeding extensions.settings is pointless.
 chromium_extensions() {
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium-extensions"
-  $SUDO -u "$LUSER" python3 "$UI/../chromium-extensions.py" \
-    "$UHOME/.config/chromium-extensions"
+  $SUDO -u "$LUSER" python3 "$UI/../chromium/extensions.py" \
+    "$UHOME/.config/chromium-extensions" \
+    "$UHOME/.config/chromium/Default/Preferences"
 }
 chromium_launcher() {
+  # Seeded profile (First Run sentinel, no default-browser prompt, pinned
+  # toolbar extensions) — same as xfce. Wipe first so re-installs re-seed
+  # instead of merging into a possibly-corrupt profile.
+  $SUDO rm -rf "$UHOME/.config/chromium" "$UHOME/.cache/chromium" 2>/dev/null || true
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
+  $SUDO cp -r "$UI/../chromium/default-profile/Default/." \
+    "$UHOME/.config/chromium/Default/"
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/Local State" \
+    "$UHOME/.config/chromium/Local State"
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/First Run" \
+    "$UHOME/.config/chromium/First Run"
+  $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
   # Store CRXs on disk + --load-extension wrapper; user-managed (no
   # policies, no /etc, no "managed by your organization").
   chromium_extensions

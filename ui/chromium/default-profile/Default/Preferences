@@ -65,6 +65,10 @@
   "extensions": {
     "ui": {
       "developer_mode": true
-    }
+    },
+    "pinned_extensions": [
+      "kdondjcpgpfoejcobgnbmpoljgnhjiaa",
+      "mdinakjfecnibgegdckgghdmejjgjaff"
+    ]
   }
 }

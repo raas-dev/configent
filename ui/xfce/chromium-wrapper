@@ -1,10 +1,10 @@
 #!/bin/sh
 # configent (https://github.com/raas-dev/configent)
 # CloakBrowser launcher. First Run sentinel in the seeded profile
-# (ui/xfce/chromium-default-profile) replaces --no-first-run,
+# (ui/chromium/default-profile) replaces --no-first-run,
 # browser.check_default_browser=false in Preferences replaces
 # --no-default-browser-check, and extensions load from the store CRXs
-# unpacked by ui/chromium-extensions.py into ~/.config/chromium-extensions/
+# unpacked by ui/chromium/extensions.py into ~/.config/chromium-extensions/
 # (Chromium refuses hand-registered user extensions, so no seeding of
 # extensions.settings — --load-extension is the only user-space way without
 # enterprise policy).

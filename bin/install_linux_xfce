@@ -90,8 +90,9 @@ chromium_dl() {
 # seeding extensions.settings is pointless.
 chromium_extensions() {
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium-extensions"
-  $SUDO -u "$LUSER" python3 "$UI/../chromium-extensions.py" \
-    "$UHOME/.config/chromium-extensions"
+  $SUDO -u "$LUSER" python3 "$UI/../chromium/extensions.py" \
+    "$UHOME/.config/chromium-extensions" \
+    "$UHOME/.config/chromium/Default/Preferences"
 }
 chromium_files() {
   for _ in $(seq 1 600); do
@@ -144,20 +145,20 @@ chromium_files() {
   # Preferences — Chromium reads it from there, not from under `search`.
   # Seeding nested (under `search`) was the cause of "default search
   # engine not set" on first run.
-  # Seed from ui/xfce/chromium-default-profile/. Local State pins
+  # Seed from ui/chromium/default-profile/. Local State pins
   # profile.last_used + info_cache so chromium trusts the seed instead
   # of treating it as fresh and clobbering Preferences on first shutdown.
   # default_search_provider_data MUST live at the top level of
   # Preferences — Chromium reads it from there, not from under `search`.
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
-  $SUDO cp -r "$UI/chromium-default-profile/Default/." \
+  $SUDO cp -r "$UI/../chromium/default-profile/Default/." \
     "$UHOME/.config/chromium/Default/"
-  $SUDO install -o "$LUSER" -m 644 "$UI/chromium-default-profile/Local State" \
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/Local State" \
     "$UHOME/.config/chromium/Local State"
   # "First Run" sentinel in the user-data-dir root is what --no-first-run
   # used to do: its presence makes Chromium treat the profile as used, so
   # the ungoogled-chromium welcome page never appears.
-  $SUDO install -o "$LUSER" -m 644 "$UI/chromium-default-profile/First Run" \
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/First Run" \
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
 
