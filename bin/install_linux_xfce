@@ -248,7 +248,7 @@ log "apt + selkies + xfce + pip install starting (single batch)"
     x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
     socat libnspr4 libnss3 \
     xfce4 xfce4-terminal thunar mousepad ristretto \
-    xubuntu-wallpapers \
+    xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
     pipewire pipewire-pulse wireplumber \
     python3-pip
 } 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
@@ -257,11 +257,16 @@ log "apt + selkies + xfce + pip install starting (single batch)"
 }
 rm -f "$SELKIES_DEB"
 log "apt + selkies + xfce + pip installed"
+$SUDO apt-get autoclean
 
 $SUDO dpkg --configure -a
 $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
   /etc/xdg/autostart/xscreensaver.desktop \
   /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
+[ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
+$SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open
+[ -x /usr/bin/xfce4-terminal ] && [ ! -e /usr/bin/xfce4-terminal-real ] && $SUDO mv /usr/bin/xfce4-terminal /usr/bin/xfce4-terminal-real
+$SUDO install -m 755 "$UI/xfce4-terminal-wrapper" /usr/bin/xfce4-terminal
 $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
 $SUDO update-desktop-database /usr/local/share/applications || true
 

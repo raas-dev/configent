@@ -1,0 +1,18 @@
+#!/bin/sh
+# exo-open wrapper: route webbrowser → chromium, FileManager → thunar, else passthrough.
+# Mirrors linuxserver/webtop's exo-open wrapper behavior.
+case "$1" in
+  --launch|--launch-webapp)
+    case "$2" in
+      webbrowser|WebBrowser)
+        shift 2
+        exec /usr/local/bin/chromium-wrapper "$@"
+        ;;
+      FileManager)
+        shift 2
+        exec /usr/bin/thunar "${1:-$HOME}"
+        ;;
+    esac
+    ;;
+esac
+exec /usr/bin/exo-open-real "$@"

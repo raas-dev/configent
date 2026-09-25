@@ -1,2 +1,2 @@
 WebBrowser=chromium
-TerminalEmulator=debian-x-terminal-emulator
+TerminalEmulator=xfce4-terminal

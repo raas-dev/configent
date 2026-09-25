@@ -1,0 +1,3 @@
+#!/bin/sh
+# xfce4-terminal wrapper: ensure dbus env + exec real binary.
+exec /usr/bin/xfce4-terminal-real "$@"
