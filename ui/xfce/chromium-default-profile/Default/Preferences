@@ -2,6 +2,7 @@
   "browser": {
     "first_run_finished": true,
     "has_seen_welcome_page": true,
+    "show_home_button": true,
     "window_placement": {}
   },
   "session": {
@@ -58,5 +59,8 @@
   },
   "autofill": {
     "enabled": false
+  },
+  "performance": {
+    "memory_saver_enabled": true
   }
 }
