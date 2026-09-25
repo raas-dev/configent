@@ -3,9 +3,11 @@
 # Chromium/CloakBrowser launcher; software GPU path for lima/krunkit VMs.
 # Real virtio-gpu is plumbed but Venus is blocked by libkrun #114 (Apple Silicon blob alignment).
 # WebGL renders via ANGLE->SwiftShader (CPU).
-CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
+CBHOME=${HOME:-/root}/.local/share/cloakbrowser
+CRBIN=$(find "$CBHOME" -maxdepth 2 -name chrome -print -quit 2>/dev/null)
+EXTS=${HOME:-/root}/.config/chromium-extensions
 exec "$CRBIN" --no-first-run --no-default-browser-check --force-renderer-accessibility \
   --ignore-gpu-blocklist --enable-unsafe-swiftshader \
   --use-gl=angle --use-angle=swiftshader \
   --enable-features=WebGPU \
-  --load-extension=/usr/local/share/extensions/i-still-dont-care-about-cookies,/usr/local/share/extensions/ublock-origin-lite "$@"
+  --load-extension="$EXTS/ddkjiahejlhfcafbddmgiahcphecmpfh,$EXTS/edibdbjcniadpccecjdfdjjppcpchdlm" "$@"

@@ -1,11 +1,13 @@
 #!/bin/sh
 # configent (https://github.com/raas-dev/configent)
-# CloakBrowser launcher. No chromium flags: everything lives in the seeded
-# profile (ui/xfce/chromium-default-profile). The "First Run" sentinel
-# replaces --no-first-run, browser.check_default_browser=false in
-# Preferences replaces --no-default-browser-check, and extensions.settings
-# entries (written by install_linux_xfce after unpacking the extensions)
-# replace --load-extension=.
+# CloakBrowser launcher. First Run sentinel in the seeded profile
+# (ui/xfce/chromium-default-profile) replaces --no-first-run,
+# browser.check_default_browser=false in Preferences replaces
+# --no-default-browser-check, and extensions load from the store CRXs
+# unpacked by ui/chromium-extensions.py into ~/.config/chromium-extensions/
+# (Chromium refuses hand-registered user extensions, so no seeding of
+# extensions.settings — --load-extension is the only user-space way without
+# enterprise policy).
 #
 # CHROME_DESKTOP: unbranded Chromium derives its desktop-file identity from
 # this env var (fallback: chromium-browser.desktop) and compares it against
@@ -14,16 +16,20 @@
 # self-check can mismatch and the "isn't your default browser" infobar
 # shows on every launch.
 export CHROME_DESKTOP=chromium-browser.desktop
-CRBIN=$(find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
-# ponytail: fail-fast guard. If /opt/cloakbrowser is missing or the file
-# there is something else (e.g. system chromium), refuse to silently
-# exec the wrong browser. Drop when a real /usr/bin/cloak-browser shim
-# exists and CRBIN is hardcoded.
+CBHOME=${HOME:-/root}/.local/share/cloakbrowser
+CRBIN=$(find "$CBHOME" -maxdepth 2 -name chrome -print -quit 2>/dev/null)
+# ponytail: fail-fast guard. If the user-local cloakbrowser tree is missing
+# or the file there is something else (e.g. system chromium), refuse to
+# silently exec the wrong browser. Drop when a real /usr/bin/cloak-browser
+# shim exists and CRBIN is hardcoded.
 case "$CRBIN" in
-/opt/cloakbrowser/*) ;;
+"$CBHOME"/*) ;;
 *)
-  echo "chromium-wrapper: cloakbrowser not found at /opt/cloakbrowser/ (got: ${CRBIN:-<none>})" >&2
+  echo "chromium-wrapper: cloakbrowser not found at $CBHOME/ (got: ${CRBIN:-<none>})" >&2
   exit 127
   ;;
 esac
-exec "$CRBIN" "$@"
+EXTS=${HOME:-/root}/.config/chromium-extensions
+exec "$CRBIN" \
+  --load-extension="$EXTS/ddkjiahejlhfcafbddmgiahcphecmpfh,$EXTS/edibdbjcniadpccecjdfdjjppcpchdlm" \
+  "$@"

@@ -33,7 +33,7 @@ LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
 ARCH=$(dpkg --print-architecture)
-TARBALL=/mnt/lima-provision/chromium.$ARCH.tar.gz
+TARBALL=/mnt/lima-provision/cloakbrowser.$ARCH.tar.gz
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
@@ -68,7 +68,9 @@ selkies_deb() {
 
 chromium_dl() {
   if [ -f "$TARBALL" ]; then
-    $SUDO tar xzf "$TARBALL" -C / &&
+    $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share" &&
+      $SUDO tar xzf "$TARBALL" -C "$UHOME/.local/share" &&
+      $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser" &&
       touch /tmp/cb.ok
   else
     for _ in $(seq 1 300); do
@@ -82,80 +84,28 @@ chromium_dl() {
   fi
 }
 
-chromium_extensions_dl() {
-  # Chrome Web Store only serves CRX via its own update endpoint, which
-  # rejects unattended fetchers. Both extensions publish their unpacked
-  # source as a GitHub release zip, so we fetch from there into
-  # ~/.config/chromium-extensions/<id>/.
-  # CRITICAL: extension files must NOT live under
-  # ~/.config/chromium/Default/Extensions — Chromium's extension garbage
-  # collector deletes every non-webstore dir there ~40s after launch
-  # (verified in-VM: "Garbage collection for extensions on file thread is
-  # complete", then "File path cannot be resolved. Could not load manifest").
-  # Outside the profile the GC never scans; plain user-owned files, no root.
-  # The extension list lives in ui/xfce/chromium-extensions.yaml; matching
-  # extensions.settings entries live in the default-profile Preferences
-  # template (keys = ids Chromium derives from the install paths — paths
-  # are versionless so the ids stay stable across releases).
-  local extdir="$UHOME/.config/chromium-extensions"
-  local work
-  work=$(mktemp -d)
-  install -d "$extdir"
-
-  # Pull tag_name from a GitHub /releases/latest JSON body without jq.
-  gh_latest_tag() {
-    curl -fsSL --retry 5 --retry-all-errors --max-time 30 \
-      "https://api.github.com/repos/$1/releases/latest" |
-      sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' |
-      head -n1
-  }
-
-  local -a pids=()
-  # name<TAB>id<TAB>repo<TAB>asset
-  while IFS=$'\t' read -r ext_name ext_id ext_repo ext_asset; do
-    [ -z "$ext_id" ] && continue
-    (
-      local tag asset_zip url
-      tag=$(gh_latest_tag "$ext_repo") || {
-        echo "[$ext_name] tag missing" >&2
-        exit 1
-      }
-      asset_zip="${ext_asset//\{tag\}/$tag}"
-      url="https://github.com/${ext_repo}/releases/download/${tag}/${asset_zip}"
-      local zip="$work/${ext_id}.zip"
-      local log="$work/${ext_id}.log"
-      {
-        curl -fsSL --retry 5 --retry-all-errors --max-time 120 -o "$zip" "$url" &&
-          install -d "$extdir/$ext_id" &&
-          unzip -q -o "$zip" -d "$extdir/$ext_id"
-      } >"$log" 2>&1 || {
-        cat "$log" >&2
-        exit 1
-      }
-    ) &
-    pids+=($!)
-  done < <(python3 "$UI/chromium-extensions.py" "$UI/chromium-extensions.yaml")
-
-  local rc=0 pid
-  for pid in "${pids[@]}"; do
-    wait "$pid" || rc=1
-  done
-  rm -rf "$work"
-  return $rc
+# Store CRXs unpacked versionless outside the profile (GC-safe); the
+# chromium-wrapper mounts them via --load-extension. Chromium will not
+# accept hand-registered user extensions (Secure Preferences MACs), so
+# seeding extensions.settings is pointless.
+chromium_extensions() {
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium-extensions"
+  $SUDO -u "$LUSER" python3 "$UI/../chromium-extensions.py" \
+    "$UHOME/.config/chromium-extensions"
 }
-
 chromium_files() {
   for _ in $(seq 1 600); do
     [ -f /tmp/cb.ok ] && break
     sleep 0.5
   done
   [ -f /tmp/cb.ok ] || return 1
-  if [ ! -x "$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
-    $SUDO install -d -m 755 /opt/cloakbrowser
+  if [ ! -x "$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && $SUDO test -d /root/.cloakbrowser; then
     CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
-    $SUDO mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
+    $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share/cloakbrowser"
+    $SUDO mv "$(dirname "$CRBIN")" "$UHOME/.local/share/cloakbrowser/"
+    $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser"
   fi
-  CRBIN=$($SUDO find /opt/cloakbrowser -maxdepth 2 -name chrome -print -quit)
+  CRBIN=$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit)
   [ -n "$CRBIN" ]
   $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
@@ -165,9 +115,10 @@ chromium_files() {
   $SUDO install -m 644 "$UI/chromium-browser.desktop" /usr/local/share/applications/chromium-browser.desktop
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium-browser.desktop
-  # Register + select as the system default browser. /opt/cloakbrowser/chrome
-  # is what actually runs, but alternatives + xdg-settings key off the wrapper
-  # so /usr/local/bin/x-www-browser and `xdg-open http://...` route here.
+  # Register + select as the system default browser. The user-local
+  # ~/.local/share/cloakbrowser/chromium-*/chrome is what actually runs, but
+  # alternatives + xdg-settings key off the wrapper so
+  # /usr/local/bin/x-www-browser and `xdg-open http://...` route here.
   $SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
   $SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
   $SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
@@ -210,11 +161,10 @@ chromium_files() {
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
 
-  # Fetch + unpack the two MV3 extensions (uBO Lite, ISDCAC) from their
-  # GitHub release zips. Order matters: profile copy above must finish first
-  # so the rm -rf of .config/chromium has not nuked a prior extraction
-  # mid-flight. Trap RETURN in chromium_extensions_dl cleans the tempdir.
-  chromium_extensions_dl
+  # Ordinary webstore installs seeded into the user profile — fully
+  # user-managed (no policies, no /etc, no "managed by your
+  # organization"); Chromium itself auto-updates them from the store.
+  chromium_extensions
 
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
@@ -276,8 +226,8 @@ cert_gen() {
 warm_cache() {
   if [ -w /mnt/lima-provision ] && [ ! -f "$TARBALL" ]; then
     # warm cache for future VMs; do not block desktop.done
-    ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C / \
-      opt/cloakbrowser &&
+    ($SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" -C "$UHOME/.local/share" \
+      cloakbrowser &&
       mv "$TARBALL.tmp" "$TARBALL") >/dev/null 2>&1 &
   fi
 }
@@ -363,8 +313,8 @@ $SUDO update-desktop-database /usr/local/share/applications || true
 $SUDO systemctl set-default graphical.target
 
 # Wait for backgrounds we still need: chromium_dl (chromium_files reads
-# /opt/cloakbrowser), write_configs (selkies unit files must exist before
-# systemctl enable --now).
+# ~/.local/share/cloakbrowser), write_configs (selkies unit files must exist
+# before systemctl enable --now).
 wait_ok "$CB" "$LOGDIR/cb.log"
 chromium_files
 wait_ok "$CERT" "$LOGDIR/cert.log"

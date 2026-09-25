@@ -60,7 +60,7 @@ log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 log 'starting install_linux_mate'
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
 ARCH=$(dpkg --print-architecture)
-TARBALL=/mnt/lima-provision/chromium-extensions.$ARCH.tar.gz
+TARBALL=/mnt/lima-provision/cloakbrowser.$ARCH.tar.gz
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
@@ -110,46 +110,33 @@ chromium_dl() {
   fi
 }
 
-extensions_dl() {
-  if [ -f "$TARBALL" ]; then return 0; fi
-  $SUDO install -d -m 755 /usr/local/share/extensions
-  for pair in i-still-dont-care-about-cookies:edibdbjcniadpccecejdfdjjppcpchdlm \
-    ublock-origin-lite:ddkjiahejlhfcafbddmgiahcphecmpfh; do
-    name=${pair%%:*}
-    id=${pair##*:}
-    (
-      curl -fsSL --retry 5 --retry-all-errors \
-        -o "/tmp/$name.crx" \
-        "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=138.0.0.0&acceptformat=crx2,crx3&x=id%3D${id}%26uc" ||
-        {
-          printf 'CRX download failed: %s\n' "$name" >&2
-          exit 1
-        }
-      python3 -c 'import sys;d=open(sys.argv[1],"rb").read();open(sys.argv[2],"wb").write(d[d.find(b"PK\x03\x04"):])' \
-        "/tmp/$name.crx" "/tmp/$name.zip"
-      $SUDO mkdir -p "/usr/local/share/extensions/$name"
-      $SUDO python3 -m zipfile -e "/tmp/$name.zip" "/usr/local/share/extensions/$name"
-      $SUDO rm -rf "/usr/local/share/extensions/$name"/_metadata
-    ) &
-  done
-  wait || return 1
-  $SUDO chown -R "$LUSER": /usr/local/share/extensions
-}
-
 chromium_files() {
   if [ -f "$TARBALL" ]; then return 0; fi
   if $SUDO test -d /root/.cloakbrowser; then
-    $SUDO install -d -m 755 /opt/cloakbrowser
-    CRBIN=$($SUDO find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit)
+    $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share/cloakbrowser"
+    CRBIN=$(find /root/.cloakbrowser -maxdepth 2 -name chrome -print -quit 2>/dev/null)
     [ -n "$CRBIN" ] || {
       printf 'no chrome binary after cloakbrowser install\n' >&2
       return 1
     }
-    $SUDO mv "$(dirname "$CRBIN")" /opt/cloakbrowser/
+    $SUDO mv "$(dirname "$CRBIN")" "$UHOME/.local/share/cloakbrowser/"
+    $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser"
   fi
 }
 
+# Store CRXs unpacked versionless outside the profile (GC-safe); the
+# chromium-wrapper mounts them via --load-extension. Chromium will not
+# accept hand-registered user extensions (Secure Preferences MACs), so
+# seeding extensions.settings is pointless.
+chromium_extensions() {
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium-extensions"
+  $SUDO -u "$LUSER" python3 "$UI/../chromium-extensions.py" \
+    "$UHOME/.config/chromium-extensions"
+}
 chromium_launcher() {
+  # Store CRXs on disk + --load-extension wrapper; user-managed (no
+  # policies, no /etc, no "managed by your organization").
+  chromium_extensions
   for n in chrome chromium chromium-browser; do
     $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n
   done
@@ -167,7 +154,7 @@ chromium_launcher() {
 warm_cache() {
   if [ -f "$TARBALL" ] || [ ! -w /mnt/lima-provision ]; then return 0; fi
   if $SUDO tar -I 'gzip -1' -cf "$TARBALL.tmp" \
-    -C / opt/cloakbrowser usr/local/share/extensions; then
+    -C "$UHOME/.local/share" cloakbrowser; then
     mv "$TARBALL.tmp" "$TARBALL"
   else
     rm -f "$TARBALL.tmp"
@@ -235,8 +222,8 @@ factory_reset_and_apply() {
     "$UHOME/.local/share/mate"
 
   if [ -f "$TARBALL" ]; then
-    $SUDO tar xzf "$TARBALL" -C /
-    $SUDO chown -R "$LUSER": /usr/local/share/extensions
+    $SUDO tar xzf "$TARBALL" -C "$UHOME/.local/share"
+    $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser"
   fi
   chromium_launcher
 
@@ -283,8 +270,6 @@ selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
 SDB=$!
 chromium_dl >"$LOGDIR/cb.log" 2>&1 &
 CB=$!
-extensions_dl >"$LOGDIR/ext.log" 2>&1 &
-EXT=$!
 install_selkies_configs >"$LOGDIR/cfg.log" 2>&1 &
 CFG=$!
 
@@ -326,13 +311,12 @@ rm -f "$SELKIES_DEB"
 log "apt + selkies + mate + pip installed"
 
 # Wait for backgrounds we still need: chromium_dl (factory_reset reads
-# /opt/cloakbrowser), extensions_dl (warm_cache bundles it), install_selkies_configs
+# the cloakbrowser tree), install_selkies_configs
 # (selkies unit files must exist before enable_selkies_units).
 wait_ok "$CB" "$LOGDIR/cb.log"
 chromium_files
-wait_ok "$EXT" "$LOGDIR/ext.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
-log "selkies configs + chromium + extensions ready"
+log "selkies configs + chromium ready"
 
 # ponytail: selkies start, factory reset, and mate extras all run concurrently
 # and are waited on below; warm-cache is fire-and-forget and may still be

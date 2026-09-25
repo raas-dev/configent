@@ -65,16 +65,6 @@
   "extensions": {
     "ui": {
       "developer_mode": true
-    },
-    "settings": {
-      "kdondjcpgpfoejcobgnbmpoljgnhjiaa": {
-        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/ddkjiahejlhfcafbddmgiahcphecmpfh",
-        "location": 4
-      },
-      "mdinakjfecnibgegdckgghdmejjgjaff": {
-        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
-        "location": 4
-      }
     }
   }
 }
