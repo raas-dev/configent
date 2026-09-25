@@ -212,6 +212,9 @@ chromium_files() {
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
+  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/autostart"
+  $SUDO install -o "$LUSER" -m 644 "$UI/selkies-autostart.desktop" \
+    "$UHOME/.config/autostart/selkies-autostart.desktop"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   [ -f "$UI/xfce4-terminal.desktop" ] &&
@@ -230,21 +233,15 @@ write_configs() {
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/xfce-session.service" |
     $SUDO tee /etc/systemd/system/xfce-session.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xfce-session.service
-  $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
-  $SUDO install -d -m 755 /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
-  $SUDO install -m 644 "$UI/xfce4-desktop.xml" /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-  $SUDO install -m 644 "$UI/xfce4-terminal.xml" /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
   $SUDO install -m 755 "$UI/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
   $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
-  $SUDO sh -c '[ -f /etc/ssl/selkies.pem ] || exit 1'
+  # ponytail: cert existence enforced upstream by `wait_ok "$CERT"` (line ~360)
+  # before this fn is awaited. Inline check here races cert_gen when both run
+  # backgrounded and silently aborts write_configs → no selkies-tls.service.
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/selkies-tls.service" |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
-  $SUDO install -d -m 755 /etc/xdg/autostart
-  $SUDO install -m 644 "$UI/selkies-autostart.desktop" /etc/xdg/autostart/selkies-autostart.desktop
-  $SUDO install -d -m 755 /etc/xdg/xfce4
-  $SUDO install -m 644 "$UI/xfce4-helpers.rc" /etc/xdg/xfce4/helpers.rc
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
   # Chromium profile seed lives in chromium_files() — it runs after the
   # rm -rf of $UHOME/.config/chromium, so doing the copy here would race.

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="keyboard-layout" version="1.0">
+  <property name="Default" type="empty">
+    <property name="xkb_model" type="string" value="pc105"/>
+    <property name="xkb_layout" type="string" value="fi"/>
+    <property name="xkb_variant" type="string" value=""/>
+    <property name="xkb_options" type="string" value=""/>
+  </property>
+</channel>
