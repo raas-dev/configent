@@ -22,6 +22,7 @@
         <value type="int" value="8"/>
         <value type="int" value="9"/>
         <value type="int" value="10"/>
+        <value type="int" value="11"/>
       </property>
       <property name="enable-struts" type="bool" value="true"/>
     </property>
@@ -45,10 +46,16 @@
     <property name="plugin-7" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-8" type="string" value="clock"/>
+    <property name="plugin-8" type="string" value="clock">
+      <property name="show-seconds" type="bool" value="true"/>
+    </property>
     <property name="plugin-9" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-10" type="string" value="actions"/>
+    <property name="plugin-11" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="show-notifications" type="bool" value="true"/>
+    </property>
   </property>
 </channel>

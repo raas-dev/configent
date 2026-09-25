@@ -29,6 +29,7 @@ set -eu -o pipefail
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LGROUP=$(getent group "$LUSER" | cut -d: -f1)
+LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
 ARCH=$(dpkg --print-architecture)
@@ -230,7 +231,7 @@ write_configs() {
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/xvfb.service" |
     $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xvfb.service
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/xfce-session.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" "$UI/xfce-session.service" |
     $SUDO tee /etc/systemd/system/xfce-session.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xfce-session.service
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
@@ -329,6 +330,7 @@ log "apt + selkies + xfce + pip install starting (single batch)"
     socat libnspr4 libnss3 \
     xfce4 xfce4-terminal thunar mousepad ristretto \
     xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
+    pavucontrol \
     pipewire pipewire-pulse wireplumber \
     python3-pip \
     unzip
