@@ -163,6 +163,13 @@ chromium_files() {
   $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium.desktop
+  # Register + select as the system default browser. /opt/cloakbrowser/chrome
+  # is what actually runs, but alternatives + xdg-settings key off the wrapper
+  # so /usr/local/bin/x-www-browser and `xdg-open http://...` route here.
+  $SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
+  $SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
+  $SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
+  $SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
   # Wipe xfce caches + chromium profile before re-seeding. chromium dir
   # must be wiped here, not later — write_configs() runs in parallel and
   # used to lose the race.

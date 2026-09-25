@@ -7,5 +7,9 @@ inode/directory=xfce4-file-manager.desktop
 x-scheme-handler/trash=xfce4-file-manager.desktop
 
 [Added Associations]
+x-scheme-handler/http=chromium.desktop;
+x-scheme-handler/https=chromium.desktop;
+text/html=chromium.desktop;
+application/xhtml+xml=chromium.desktop;
 inode/directory=xfce4-file-manager.desktop;
 x-scheme-handler/trash=xfce4-file-manager.desktop;
