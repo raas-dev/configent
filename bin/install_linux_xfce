@@ -227,9 +227,18 @@ SELKIES_DEB="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
   exit 1
 }
 
+# ponytail: eatmydata bypasses fsync/fdatasync during apt's many commits.
+# Cuts cold install 30-50% on slow disks (macOS vz/APFS). Optional: if
+# installation fails (e.g. offline mirror), fall back to plain apt.
+EAT=''
+if $SUDO apt-get install "${APT_OPTS[@]}" eatmydata 2>"$LOGDIR/eatmydata.log"; then
+  EAT='eatmydata'
+  log "eatmydata enabled (fsync bypass → faster apt)"
+fi
+
 log "apt + selkies + xfce + pip install starting (single batch)"
 {
-  $SUDO apt-get install "${APT_OPTS[@]}" \
+  $SUDO $EAT apt-get install "${APT_OPTS[@]}" \
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
