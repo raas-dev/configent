@@ -120,7 +120,7 @@ chromium_dl() {
     SRC=$CACHED
   fi
   # Extract into the final location seed_desktop expects:
-  # ~/.local/share/cloakbrowser/chromium-<v>/chrome (find maxdepth 2).
+  # ~/.local/share/cloakbrowser/chromium-<v>/chrome (newest wins, sort -V).
   # Flattens a single top-level dir in the archive.
   # shellcheck disable=SC2016  # runs as another user; $1..$3 expand inside, not here
   run_as bash -c '
@@ -132,6 +132,10 @@ chromium_dl() {
     if [ "$(printf "%s\n" "$sub" | wc -l)" -eq 1 ] && [ -d "$d/$sub" ]; then
       mv "$d/$sub"/* "$d"/ && rmdir "$d/$sub"
     fi
+    # prune stale versions (persistent limahome accumulates them)
+    for o in "$(dirname "$d")"/chromium-*; do
+      if [ -d "$o" ] && [ "$o" != "$d" ]; then rm -rf "$o"; fi
+    done
     [ -x "$d/chrome" ]
   ' _ "$UHOME" "$CBV" "$SRC" && touch /tmp/cb.ok
 }
@@ -153,13 +157,7 @@ seed_desktop() {
     sleep 0.5
   done
   [ -f /tmp/cb.ok ] || return 1
-  if [ ! -x "$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit 2>/dev/null)" ] && [ -d "$UHOME/.cloakbrowser" ]; then
-    CRBIN=$($SUDO find "$UHOME/.cloakbrowser" -maxdepth 2 -name chrome -print -quit)
-    $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.local/share/cloakbrowser"
-    $SUDO mv "$(dirname "$CRBIN")" "$UHOME/.local/share/cloakbrowser/"
-    $SUDO chown -R "$LUSER": "$UHOME/.local/share/cloakbrowser"
-  fi
-  CRBIN=$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print -quit)
+  CRBIN=$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print 2>/dev/null | sort -V | tail -1)
   [ -n "$CRBIN" ]
   $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf

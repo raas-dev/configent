@@ -144,7 +144,7 @@ chromium_dl() {
 
 chromium_files() {
   # Extract into ~/.local/share/cloakbrowser/chromium-<v>/chrome — the
-  # layout the wrapper expects (find maxdepth 2). Flattens the single
+  # layout the wrapper expects (newest wins, sort -V). Flattens the single
   # top-level dir in the archive.
   # shellcheck disable=SC2016  # runs as another user; $1..$3 expand inside, not here
   run_as bash -c '
@@ -156,6 +156,10 @@ chromium_files() {
     if [ "$(printf "%s\n" "$sub" | wc -l)" -eq 1 ] && [ -d "$d/$sub" ]; then
       mv "$d/$sub"/* "$d"/ && rmdir "$d/$sub"
     fi
+    # prune stale versions (persistent limahome accumulates them)
+    for o in "$(dirname "$d")"/chromium-*; do
+      if [ -d "$o" ] && [ "$o" != "$d" ]; then rm -rf "$o"; fi
+    done
     [ -x "$d/chrome" ]
   ' _ "$UHOME" "$CBV" "$SRC"
 }
