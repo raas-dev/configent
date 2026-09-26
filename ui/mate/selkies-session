@@ -37,4 +37,6 @@ exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
   --enable-basic-auth=false \
   --audio-enabled=true \
   --audio-on-start=true \
+  --use-browser-cursors=false \
+  --raw-pointer-motion=true \
   --encoder=x264enc
