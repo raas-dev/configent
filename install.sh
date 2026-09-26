@@ -18,7 +18,7 @@ TARGET_PATH="$HOME/configent"
 
 ### variables ##################################################################
 
-GIT_REF="${GIT_REF:-1.244.5}"
+GIT_REF="${GIT_REF:-1.244.6}"
 
 export PARALLEL="${PARALLEL:-true}"
 export CANELEVATE="${CANELEVATE:-false}"

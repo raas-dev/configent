@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.6](https://github.com/raas-dev/configent/compare/1.244.5...1.244.6) (2026-09-26)
+
+### Fixes
+
+* **linux,ui:** switch chromium GPU rendering to mesa llvmpipe, add a11y ([dda9449](https://github.com/raas-dev/configent/commit/dda94498891dc2eef92cb105f755e98a749670bd)), references [#114](https://github.com/raas-dev/configent/issues/114)
+* **shell:** deduplicate XDG_DATA_DIRS while preserving defaults ([7251156](https://github.com/raas-dev/configent/commit/72511568b65e103c63c28e73d9477a66875f466d))
+
+### Performance
+
+* **apt:** add eatmydata and optimized install options ([a65f6f2](https://github.com/raas-dev/configent/commit/a65f6f24b20f9212af24150295f22d86d4097b64))
+
 ## [1.244.5](https://github.com/raas-dev/configent/compare/1.244.4...1.244.5) (2026-09-26)
 
 ### Fixes
