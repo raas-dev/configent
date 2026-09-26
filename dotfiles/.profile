@@ -302,6 +302,15 @@ if [ "$(uname -s)" = 'Linux' ]; then
   fi
 fi
 
+### Xvfb #######################################################################
+
+# in-VM Xvfb e.g. selkies in lima :0, keep forwarded/real displays untouched
+if [ "$(uname -s)" = 'Linux' ] &&
+   [ -z "$DISPLAY" ] &&
+   [ -S /tmp/.X11-unix/X0 ]; then
+  export DISPLAY=':0'
+fi
+
 ### mas - macOS Apple Store CLI ################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then

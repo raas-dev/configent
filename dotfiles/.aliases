@@ -64,6 +64,12 @@ else
 
   # Similar to macOS `open`
   alias open='xdg-open'
+
+  if command -v flatpak >/dev/null; then
+    alias brave='flatpak run com.brave.Browser'
+    alias code='flatpak run com.visualstudio.code'
+    alias libreoffice='flatpak run org.libreoffice.LibreOffice'
+  fi
 fi
 
 ### More sensible defaults #####################################################
