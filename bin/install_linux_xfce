@@ -41,6 +41,7 @@ LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
+SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
@@ -215,9 +216,6 @@ seed_desktop() {
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/autostart"
-  $SUDO install -o "$LUSER" -m 644 "$UI/selkies-autostart.desktop" \
-    "$UHOME/.config/autostart/selkies-autostart.desktop"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
@@ -248,22 +246,25 @@ write_configs() {
     $SUDO tee /etc/systemd/system/xfce-session.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xfce-session.service
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
-  $SUDO install -m 755 "$UI/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
-  $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
+  $SUDO install -m 755 "$SELKIES/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
+  $SUDO install -m 755 "$SELKIES/selkies-session" /usr/local/bin/selkies-session
   # ponytail: cert existence enforced upstream by `wait_ok "$CERT"` (line ~360)
   # before this fn is awaited. Inline check here races cert_gen when both run
   # backgrounded and silently aborts write_configs → no selkies-tls.service.
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/selkies-tls.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$SELKIES/selkies-tls.service" |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
+    "$SELKIES/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
+  $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
   # Chromium profile seed lives in seed_desktop() — it runs after the
   # rm -rf of $UHOME/.config/chromium, so doing the copy here would race.
 }
 
 enable_units() {
-  $SUDO systemctl reset-failed xvfb xfce-session selkies-tls 2>/dev/null || true
-  $SUDO systemctl enable --now xvfb xfce-session selkies-tls
+  $SUDO systemctl reset-failed xvfb xfce-session selkies-tls selkies-autostart 2>/dev/null || true
+  $SUDO systemctl enable --now xvfb xfce-session selkies-tls selkies-autostart
   $SUDO systemctl daemon-reload
 }
 

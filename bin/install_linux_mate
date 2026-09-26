@@ -63,6 +63,7 @@ log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 log 'starting install_linux_mate'
 UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
+SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
@@ -270,19 +271,19 @@ install_selkies_configs() {
   # Install to the persistent lima share (survives `limactl delete` and the
   # ephemeral zero-byte copy that ends up under /usr/local/bin on vz).
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
-  $SUDO install -m 755 "$UI/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
+  $SUDO install -m 755 "$SELKIES/selkies-session" /mnt/lima-limahome/.local/bin/selkies-session
   # Mirror to /usr/local/bin for PATH consistency, but the service runs the
   # persistent copy so the boot path is never an empty file.
-  $SUDO install -m 755 "$UI/selkies-session" /usr/local/bin/selkies-session
+  $SUDO install -m 755 "$SELKIES/selkies-session" /usr/local/bin/selkies-session
   $SUDO sh -c '[ -f /etc/ssl/selkies.pem ] || (openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=localhost" \
     -keyout /etc/ssl/selkies.pem -out /tmp/sk.crt && \
     cat /tmp/sk.crt >> /etc/ssl/selkies.pem && rm -f /tmp/sk.crt && \
     chmod 644 /etc/ssl/selkies.pem)'
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/selkies-tls.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$SELKIES/selkies-tls.service" |
     $SUDO tee /etc/systemd/system/selkies-tls.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-tls.service
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
-    "$UI/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
+    "$SELKIES/selkies-autostart.service" | $SUDO tee /etc/systemd/system/selkies-autostart.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/selkies-autostart.service
   $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
   $SUDO systemctl daemon-reload 2>/dev/null || true
