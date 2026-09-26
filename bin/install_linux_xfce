@@ -24,11 +24,16 @@ run_as() { # $SUDO is empty when we *are* root; -u would become the command
   if [ -n "$SUDO" ]; then sudo -u "$LUSER" "$@"; else runuser -u "$LUSER" -- "$@"; fi
 }
 
+FORCE=0
+case "${1:-}" in
+--force | -f) FORCE=1 ;;
+esac
+
 set -eu -o pipefail
 # ponytail: warm-boot fast path. First successful install touches this; selkies
 # units are systemctl-enabled, so systemd brings them up on boot without us.
 # Saves ~10 min on every `vm up dev` after the first cold install.
-[ -f /var/tmp/desktop.done ] && exit 0
+[ "$FORCE" = 0 ] && [ -f /var/tmp/desktop.done ] && exit 0
 
 LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
@@ -172,12 +177,19 @@ seed_desktop() {
     "$UHOME/.config/autostart/selkies-autostart.desktop"
   $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
-  [ -f "$UI/xfce4-terminal.desktop" ] &&
-    $SUDO install -o "$LUSER" -m 755 "$UI/xfce4-terminal.desktop" \
-      "$UHOME/Desktop/xfce4-terminal.desktop" &&
-    $SUDO setfattr -n user.gvfs.trust -v 1 \
-      "$UHOME/Desktop/xfce4-terminal.desktop" 2>/dev/null ||
-    run_as python3 -c "import os; os.setxattr('$UHOME/Desktop/xfce4-terminal.desktop','user.gvfs.trust',b'1')" 2>/dev/null || true
+  for f in chromium-browser xfce4-terminal; do
+    [ -f "$UI/$f.desktop" ] &&
+      $SUDO install -o "$LUSER" -m 755 "$UI/$f.desktop" \
+        "$UHOME/Desktop/$f.desktop"
+  done
+  # gvfsd-metadata absent; Thunar honors this xattr fallback.
+  run_as python3 -c "
+import os
+for f in ('$UHOME/Desktop/chromium-browser.desktop',
+          '$UHOME/Desktop/xfce4-terminal.desktop'):
+    try: os.setxattr(f, 'user.gvfs.trust', b'1')
+    except OSError: pass
+" 2>/dev/null || true
   # Shared home: drop launchers seeded by the MATE profile.
   $SUDO rm -f \
     "$UHOME/Desktop/mate-terminal.desktop" \
