@@ -29,10 +29,9 @@ else
 fi
 
 # Index is already updated earlier in the same boot (install.sh preamble
-# or install_linux_xfce); re-updating here costs seconds for nothing.
+# or install_linux_xfce)
 
 # Single transaction: one apt lock, one dependency resolution, one dpkg
-# configure pass — 17 separate installs were ~1-1.5s overhead each.
 PKGS="apt-transport-https ca-certificates gnupg pass lnav \
   bison build-essential cmake m4 pkg-config \
   libbz2-dev libcurl4-openssl-dev libffi-dev libgmp-dev libicu-dev \
@@ -47,7 +46,20 @@ if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
   PKGS="$PKGS flatpak"
 fi
 
-# xsel: macOS pbcopy/pbpaste-like; ttf-mscorefonts-installer: MS TrueType (EULA)
-# — both intentionally not installed
-# shellcheck disable=SC2086  # word-split PKGS is the point
-$SUDO apt-get install -y $PKGS
+# APT_OPTS:
+# - no recommends (flatpak drags in xdg-desktop-portal -> gstreamer stack)
+# - unsafe io
+# - doc/man exclusion
+APT_OPTS="-y -o Acquire::Retries=3 --no-install-recommends \
+  -o Dpkg::Options::=--force-confdef \
+  -o Dpkg::Options::=--force-confold \
+  -o Dpkg::Options::=--force-unsafe-io \
+  -o Dpkg::Path-Exclude=/usr/share/doc/* \
+  -o Dpkg::Path-Include=/usr/share/doc/*/copyright \
+  -o Dpkg::Path-Exclude=/usr/share/man/*"
+
+# eatmydata to kill dpkg fsync storm on virtio disks
+EAT=$(command -v eatmydata 2>/dev/null || true)
+
+# shellcheck disable=SC2086  # word-split PKGS/OPTS is the point
+$SUDO $EAT apt-get install $APT_OPTS $PKGS
