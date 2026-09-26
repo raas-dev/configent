@@ -1,97 +1,102 @@
 {
-  "browser": {
-    "first_run_finished": true,
-    "has_seen_welcome_page": true,
-    "show_home_button": true,
-    "check_default_browser": false,
-    "window_placement": {}
-  },
-  "session": {
-    "restore_on_startup": 1,
-    "startup_urls": [],
-    "window": {},
-    "tab": {}
-  },
-  "profile": {
-    "exit_type": "Normal",
-    "password_manager_enabled": false,
-    "content_settings": {
-      "exceptions": {
-        "notifications": {},
-        "geolocation": {},
-        "media-stream-camera": {},
-        "media-stream-mic": {}
-      }
-    }
+  "autofill": {
+    "enabled": false
   },
   "bookmark_bar": {
     "show_on_all_tabs": false
   },
-  "homepage": "https://www.google.com",
-  "homepage_is_newtabpage": false,
+  "browser": {
+    "check_default_browser": false,
+    "first_run_finished": true,
+    "has_seen_welcome_page": true,
+    "show_home_button": true,
+    "window_placement": {}
+  },
   "default_search_provider_data": {
     "template_url_data": {
-      "keyword": "google.com",
-      "short_name": "Google",
-      "url": "https://www.google.com/search?q={searchTerms}",
-      "safe_for_autoreplace": true,
-      "input_encodings": "UTF-8",
       "alternate_urls": [],
-      "search_terms_replacement_key": "{searchTerms}"
+      "input_encodings": "UTF-8",
+      "keyword": "google.com",
+      "safe_for_autoreplace": true,
+      "search_terms_replacement_key": "{searchTerms}",
+      "short_name": "Google",
+      "url": "https://www.google.com/search?q={searchTerms}"
     }
   },
-  "search": {
-    "suggest_enabled": true
+  "download": {
+    "directory": ""
   },
+  "extensions": {
+    "pinned_extensions": [
+      "kdondjcpgpfoejcobgnbmpoljgnhjiaa",
+      "mdinakjfecnibgegdckgghdmejjgjaff"
+    ],
+    "ui": {
+      "developer_mode": true
+    }
+  },
+  "homepage": "https://www.google.com",
+  "homepage_is_newtabpage": false,
   "intl": {
     "accept_languages": "en-US,en"
   },
-  "translate": {
-    "enabled": false
+  "partition": {
+    "default_zoom_level": {
+      "x": 1.2239010857415449
+    },
+    "per_host_zoom_levels": {
+      "x": {}
+    }
+  },
+  "performance": {
+    "memory_saver_enabled": true
+  },
+  "profile": {
+    "content_settings": {
+      "exceptions": {
+        "geolocation": {},
+        "media-stream-camera": {},
+        "media-stream-mic": {},
+        "notifications": {}
+      }
+    },
+    "exit_type": "Normal",
+    "password_manager_enabled": false
   },
   "safebrowsing": {
     "enabled": true,
     "enhanced": false
   },
-  "download": {
-    "directory": ""
+  "search": {
+    "suggest_enabled": true
   },
-  "autofill": {
+  "session": {
+    "restore_on_startup": 1,
+    "startup_urls": [],
+    "tab": {},
+    "window": {}
+  },
+  "translate": {
     "enabled": false
-  },
-  "performance": {
-    "memory_saver_enabled": true
-  },
-  "extensions": {
-    "ui": {
-      "developer_mode": true
-    },
-    "pinned_extensions": [
-      "kdondjcpgpfoejcobgnbmpoljgnhjiaa",
-      "mdinakjfecnibgegdckgghdmejjgjaff"
-    ]
   },
   "webkit": {
     "webprefs": {
-      "minimum_font_size": 14,
+      "default_font_size": 16,
       "fonts": {
-        "standard": {
+        "fixed": {
+          "Zyyy": "Terminess Nerd Font"
+        },
+        "sansserif": {
           "Zyyy": "Ubuntu Sans"
         },
         "serif": {
           "Zyyy": "DejaVu Serif"
         },
-        "sansserif": {
+        "standard": {
           "Zyyy": "Ubuntu Sans"
-        },
-        "fixed": {
-          "Zyyy": "Terminess Nerd Font"
         }
       },
-      "default_font_size": 16
+      "minimum_font_size": 14
     }
-  },
-  "partition": {
-    "default_zoom_level": 0.32192809488736235
   }
 }
