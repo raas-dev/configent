@@ -62,11 +62,10 @@ if [ "$(uname -s)" = 'Linux' ]; then
         printf 'man-db man-db/auto-update boolean false\n' |
           $SUDO debconf-set-selections
         $SUDO rm -f /var/lib/man-db/auto-update
-        $SUDO apt-get update
-        $SUDO apt-get install -y git
-        # guest shells export LC_ALL=en_US.UTF-8 via dotfiles; generate early.
-        # Debian locale-gen ignores args unless enabled in /etc/locale.gen.
-        $SUDO apt-get install -y locales
+        # same-boot dedupe: desktop scripts (install_linux_xfce/mate) check
+        # this marker and skip their own apt-get update
+        $SUDO apt-get update && $SUDO touch /run/configent-apt-updated
+        $SUDO apt-get install -y git locales
         $SUDO sed -i 's/^# *en_US\.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
         $SUDO locale-gen en_US.UTF-8
       elif command -v dnf >/dev/null; then

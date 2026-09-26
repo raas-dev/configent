@@ -360,7 +360,9 @@ rm -f "$LOGDIR"/*.log
 
 exec > >(tee -a "$LOGDIR/install_linux_mate.log") 2>&1
 
-$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 \
+# Skip update if install.sh preamble already updated index this boot.
+{ [ -f /run/configent-apt-updated ] ||
+  $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3; } \
   >"$LOGDIR/apt.log" 2>&1 &
 UP=$!
 selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
