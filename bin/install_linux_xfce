@@ -50,6 +50,12 @@ APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
 
 log() { printf '[xfce-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
+eatmydata_setup() {
+  $SUDO dpkg -i /var/cache/apt/archives/eatmydata_*.deb \
+    /var/cache/apt/archives/libeatmydata1_*.deb >/dev/null 2>&1 ||
+    $SUDO apt-get install "${APT_OPTS[@]}" eatmydata >/dev/null 2>&1 || true
+}
+
 wait_ok() {
   wait "$1" || {
     cat "$2" >&2
@@ -295,10 +301,22 @@ cert_gen >"$LOGDIR/cert.log" 2>&1 &
 CERT=$!
 write_configs >"$LOGDIR/cfg.log" 2>&1 &
 CFG=$!
+# ponytail: eatmydata bypasses fsync/fdatasync during apt's many commits
+# (30-50% off cold installs on slow disks). Base image ships the debs in the
+# apt archives cache, so dpkg -i needs no index and runs concurrently with
+# apt-get update. dpkg lock is free at this point (batch starts later).
+eatmydata_setup >"$LOGDIR/emd.log" 2>&1 &
+EMD=$!
 
 wait_ok "$UP" "$LOGDIR/apt.log"
 log "apt index updated"
-
+# Optional accelerator — never fatal (plain apt is the fallback).
+wait "$EMD" || true
+EAT='' # 'eatmydata' once preload lands; plain apt otherwise
+dpkg -s eatmydata >/dev/null 2>&1 && EAT=eatmydata &&
+  log "eatmydata enabled (fsync bypass → faster apt)"
+# Wait for the deb download before the file check below (both bg since
+# script start; usually already done).
 log "waiting for selkies deb"
 wait_ok "$SDB" "$LOGDIR/selkdeb.log"
 SELKIES_DEB="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
@@ -306,15 +324,6 @@ SELKIES_DEB="/tmp/selkies-2.0.0rc0-ubuntu26.04-${ARCH}.deb"
   cat "$LOGDIR/selkdeb.log" >&2
   exit 1
 }
-
-# ponytail: eatmydata bypasses fsync/fdatasync during apt's many commits.
-# Cuts cold install 30-50% on slow disks (macOS vz/APFS). Optional: if
-# installation fails (e.g. offline mirror), fall back to plain apt.
-EAT=''
-if $SUDO apt-get install "${APT_OPTS[@]}" eatmydata 2>"$LOGDIR/eatmydata.log"; then
-  EAT='eatmydata'
-  log "eatmydata enabled (fsync bypass → faster apt)"
-fi
 
 # seed_desktop self-waits on /tmp/cb.ok (chromium_dl) and touches no apt
 # packages (python3 is in the base image; browser alternatives moved below
@@ -341,10 +350,6 @@ log "apt + selkies + xfce install starting (single batch)"
 }
 rm -f "$SELKIES_DEB"
 log "apt + selkies + xfce installed"
-# hygiene only — never block provisioning on it
-$SUDO apt-get autoclean >/dev/null 2>&1 &
-
-$SUDO dpkg --configure -a
 $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
   /etc/xdg/autostart/xscreensaver.desktop \
   /etc/xdg/autostart/snap-userd-autostart.desktop \
