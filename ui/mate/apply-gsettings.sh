@@ -20,7 +20,7 @@ export DISPLAY=:0
 # === org.mate.Marco.general ===
 gsettings set org.mate.Marco.general compositing-manager false
 gsettings set org.mate.Marco.general theme 'ClearlooksRe'
-gsettings set org.mate.Marco.general titlebar-font 'Ubuntu Bold 13'
+gsettings set org.mate.Marco.general titlebar-font 'Ubuntu Sans Bold 13'
 
 # === org.mate.NotificationDaemon ===
 gsettings set org.mate.NotificationDaemon do-not-disturb true
@@ -38,7 +38,7 @@ gsettings set org.mate.background secondary-color '#000000'
 
 # === org.mate.caja.desktop ===
 gsettings set org.mate.caja.desktop computer-icon-visible true
-gsettings set org.mate.caja.desktop font 'Ubuntu Medium 13'
+gsettings set org.mate.caja.desktop font 'Ubuntu Sans Medium 13'
 gsettings set org.mate.caja.desktop home-icon-visible true
 gsettings set org.mate.caja.desktop trash-icon-visible true
 gsettings set org.mate.caja.desktop volumes-visible true
@@ -94,8 +94,8 @@ gsettings set org.mate.font-rendering antialiasing 'rgba'
 gsettings set org.mate.font-rendering hinting 'full'
 
 # === org.mate.interface ===
-gsettings set org.mate.interface document-font-name 'Ubuntu Medium 13'
-gsettings set org.mate.interface font-name 'Ubuntu Medium 13'
+gsettings set org.mate.interface document-font-name 'Ubuntu Sans Medium 13'
+gsettings set org.mate.interface font-name 'Ubuntu Sans Medium 13'
 gsettings set org.mate.interface gtk-color-scheme 'tooltip_fg_color:#f7f7f7\ntooltip_bg_color:#353535'
 gsettings set org.mate.interface gtk-decoration-layout ':minimize,maximize,close'
 gsettings set org.mate.interface gtk-enable-primary-paste false
@@ -299,8 +299,8 @@ gsettings set org.mate.terminal.global profile-list "['default']"
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface color-scheme 'default'
-gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu Medium 13'
-gsettings set org.gnome.desktop.interface font-name 'Ubuntu Medium 13'
+gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu Sans Medium 13'
+gsettings set org.gnome.desktop.interface font-name 'Ubuntu Sans Medium 13'
 gsettings set org.gnome.desktop.interface monospace-font-name 'Terminess Nerd Font Bold 14'
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 

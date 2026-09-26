@@ -76,18 +76,22 @@
       "minimum_font_size": 14,
       "fonts": {
         "standard": {
-          "Zyyy": "Ubuntu"
+          "Zyyy": "Ubuntu Sans"
         },
         "serif": {
-          "Zyyy": "Ubuntu"
+          "Zyyy": "DejaVu Serif"
         },
         "sansserif": {
-          "Zyyy": "Ubuntu"
+          "Zyyy": "Ubuntu Sans"
         },
         "fixed": {
           "Zyyy": "Terminess Nerd Font"
         }
-      }
+      },
+      "default_font_size": 16
     }
+  },
+  "partition": {
+    "default_zoom_level": 0.32192809488736235
   }
 }
