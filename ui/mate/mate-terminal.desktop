@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=MATE Terminal
+GenericName=Terminal
+Exec=mate-terminal
+Terminal=false
+Type=Application
+Icon=utilities-terminal
+Categories=System;TerminalEmulator;
+StartupWMClass=Mate-terminal

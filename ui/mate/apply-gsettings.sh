@@ -28,7 +28,7 @@ gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.background ===
 gsettings set org.mate.background color-shading-type 'solid'
-gsettings set org.mate.background picture-filename '/usr/share/backgrounds/wallpaper-radioactive.jpg'
+gsettings set org.mate.background picture-filename '/usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg'
 gsettings set org.mate.background picture-options 'zoom'
 gsettings set org.mate.background primary-color '#000000'
 gsettings set org.mate.background secondary-color '#000000'
@@ -85,7 +85,6 @@ gsettings set org.gnome.desktop.default-applications.terminal exec 'mate-termina
 
 # === org.mate.desktop.background (mate alias of org.gnome.desktop.background) ===
 gsettings set org.mate.background color-shading-type 'solid'
-gsettings set org.mate.background picture-filename '/usr/share/backgrounds/wallpaper-radioactive.jpg'
 gsettings set org.mate.background picture-options 'zoom'
 gsettings set org.mate.background primary-color 'rgb(0,0,0)'
 gsettings set org.mate.background secondary-color 'rgb(0,0,0)'
@@ -101,8 +100,8 @@ gsettings set org.mate.interface gtk-color-scheme 'tooltip_fg_color:#f7f7f7\ntoo
 gsettings set org.mate.interface gtk-decoration-layout ':minimize,maximize,close'
 gsettings set org.mate.interface gtk-enable-primary-paste false
 gsettings set org.mate.interface gtk-theme 'Yaru-olive-dark'
-gsettings set org.mate.interface icon-theme 'Yaru-olive-dark'
-gsettings set org.mate.interface monospace-font-name 'Terminess Nerd Font Mono Bold 11'
+gsettings set org.mate.interface icon-theme 'Yaru-olive'
+gsettings set org.mate.interface monospace-font-name 'Terminess Nerd Font Bold 11'
 gsettings set org.mate.interface window-scaling-factor 1
 
 # === org.mate.media-handling ===
@@ -281,7 +280,7 @@ gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-blink-mode 'on'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-shape 'ibeam'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-columns 120
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-rows 35
-gsettings set "org.mate.terminal.profile:$PROFILE_PATH" font 'Terminess Nerd Font Mono 11'
+gsettings set "org.mate.terminal.profile:$PROFILE_PATH" font 'Terminess Nerd Font 11'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" foreground-color '#AAAAAAAAAAAA'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" palette \
   "'#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'"
@@ -302,7 +301,7 @@ gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface color-scheme 'default'
 gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu 10'
 gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Terminess Nerd Font Mono 11'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Terminess Nerd Font 11'
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 
 # === org.gnome.desktop.sound ===

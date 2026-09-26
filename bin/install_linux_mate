@@ -153,14 +153,43 @@ chromium_launcher() {
   for n in chrome chromium chromium-browser; do
     $SUDO ln -sf /usr/local/bin/chromium-wrapper /usr/local/bin/$n
   done
+  # chrome checks the desktop-file id "chromium-browser.desktop" against
+  # xdg-settings to decide "is default browser" — must match exactly.
   $SUDO install -d -m 755 /usr/local/share/applications
-  $SUDO install -m 644 "$UI/chromium.desktop" /usr/local/share/applications/chromium.desktop
-  install -d -m 755 "$UHOME/Desktop"
-  install -m 755 /usr/local/share/applications/chromium.desktop "$UHOME/Desktop/"
+  $SUDO install -m 644 "$UI/chromium-browser.desktop" \
+    /usr/local/share/applications/chromium-browser.desktop
+  $SUDO update-desktop-database /usr/local/share/applications 2>/dev/null || true
+  # Desktop launchers: ours + drop stale ones from the other DE profile.
+  mkdir -p "$UHOME/Desktop" "$UHOME/.local/share/applications"
+  install -m 755 /usr/local/share/applications/chromium-browser.desktop \
+    "$UHOME/Desktop/chromium-browser.desktop"
+  install -m 644 /usr/local/share/applications/chromium-browser.desktop \
+    "$UHOME/.local/share/applications/chromium-browser.desktop"
+  install -m 755 "$UI/mate-terminal.desktop" \
+    "$UHOME/Desktop/mate-terminal.desktop"
+  install -m 644 "$UI/mate-terminal.desktop" \
+    "$UHOME/.local/share/applications/mate-terminal.desktop"
+  rm -f \
+    "$UHOME/Desktop/xfce4-terminal.desktop" \
+    "$UHOME/Desktop/chromium.desktop" \
+    "$UHOME/.local/share/applications/xfce4-terminal.desktop" \
+    "$UHOME/.local/share/applications/chromium.desktop"
+  gio set "$UHOME/Desktop/chromium-browser.desktop" \
+    metadata::trusted true 2>/dev/null || true
+  gio set "$UHOME/Desktop/mate-terminal.desktop" \
+    metadata::trusted true 2>/dev/null || true
+  # gvfsd-metadata may be absent; Caja/Thunar honor this xattr fallback.
+  $SUDO -u "$LUSER" python3 -c "
+import os
+for f in ('$UHOME/Desktop/chromium-browser.desktop',
+          '$UHOME/Desktop/mate-terminal.desktop'):
+    try: os.setxattr(f, 'user.gvfs.trust', b'1')
+    except OSError: pass
+" 2>/dev/null || true
   $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   if [ "$(id -u)" = 0 ]; then
-    chown -R "$LUSER": "$UHOME/Desktop"
+    chown -R "$LUSER": "$UHOME/Desktop" "$UHOME/.local/share/applications"
   fi
 }
 
@@ -208,8 +237,9 @@ enable_selkies_units() {
 
 write_mate_extras() {
   $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
-  [ -f "$UI/wallpaper-radioactive.jpg" ] && $SUDO install -D -m 644 \
-    "$UI/wallpaper-radioactive.jpg" /usr/share/backgrounds/wallpaper-radioactive.jpg
+  [ -f /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg ] && gsettings set \
+    org.mate.background picture-filename \
+    '/usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg'
   $SUDO chmod 755 /usr/share/backgrounds
   $SUDO systemctl mask \
     mate-session.service 'mate-session@*.service' \
@@ -240,12 +270,12 @@ factory_reset_and_apply() {
   fi
   chromium_launcher
 
-  install -d -m 755 \
-    "$UHOME/.config" "$UHOME/.local/share/applications"
+  mkdir -p "$UHOME/.config" "$UHOME/.local/share/applications"
   install -m 644 \
     "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   install -m 644 \
-    "$UI/chromium.desktop" "$UHOME/.local/share/applications/chromium.desktop"
+    "$UI/chromium-browser.desktop" \
+    "$UHOME/.local/share/applications/chromium-browser.desktop"
 
   "$UI/apply-gsettings.sh" "$LUSER"
 
@@ -310,6 +340,7 @@ log "apt + selkies + mate + pip install starting (single batch)"
     at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     dconf-cli \
     pipewire pipewire-pulse wireplumber \
+    ubuntu-mate-wallpapers-common \
     fonts-ubuntu \
     python3-pip \
     mesa-vulkan-drivers \
