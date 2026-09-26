@@ -23,6 +23,18 @@ _lima_remove_nonexistent_mounts() {
     mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
 }
 
+# limactl shell hardcodes /bin/bash -l as the guest interpreter and ignores
+# the guest's login shell — resolve it and pass via --shell
+_vm_shell() {
+  # ponytail: lima 2.2.0 mangles args after '--' (each argv word re-quoted) —
+  # pipe commands via stdin instead; guest shell parses raw text, quoting intact
+  local guest_shell
+  # shellcheck disable=SC2016  # $(id -un) expands in the guest, not here
+  guest_shell=$(printf '%s\n' 'getent passwd "$(id -un)" | cut -d: -f7' |
+    limactl shell "$1" 2>/dev/null | tail -1)
+  limactl shell --shell "${guest_shell:-/bin/bash}" "$1"
+}
+
 _vm() {
   if [ -n "$1" ]; then
     local command="$1"
@@ -112,11 +124,15 @@ _vm() {
           --tty=false \
           "$@"
     fi
-    limactl shell "$vm_name"
+    _vm_shell "$vm_name"
     ;;
   shell | run | exec | s)
     [ "$1" = "--" ] && shift
-    limactl shell "$vm_name" "$@"
+    if [ $# -gt 0 ]; then
+      printf '%s\n' "$*" | limactl shell "$vm_name"
+    else
+      _vm_shell "$vm_name"
+    fi
     ;;
   down | stop)
     limactl stop "$vm_name" --force
