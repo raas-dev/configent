@@ -89,9 +89,10 @@ fi
 # zsh and vim binaries come from the package manager or brew on macOS
 wait_batch
 
-# prompts to set (package manager or brew installed) zsh as the default shell
-# pass NONINTERACTIVE=true to skip (set by default by bootstrap)
-run_detached "$bin_path/setup_zsh"
+# sets (package manager or brew installed) zsh as the default shell
+if [ -n "$SETUP_ZSH" ] && [ "$SETUP_ZSH" != 'false' ]; then
+  run_detached env SET_AS_DEFAULT=true "$bin_path/setup_zsh"
+fi
 
 # install Vundle and vim plugins
 run_detached "$bin_path/setup_vundle"

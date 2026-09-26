@@ -48,38 +48,40 @@ if [ -x "$zsh_path" ]; then
   if [ "$default_shell" = "$zsh_path" ]; then
     echo "$zsh_path is already set as the user's default shell."
   else
-    if [ -z "$NONINTERACTIVE" ]; then
+    if [ -n "$SET_AS_DEFAULT" ]; then
+      set_zsh=y
+    else
       echo ""
       printf "Set %s as the user's default shell [y\N] > " "$zsh_path"
       read -r set_zsh
-      case "$set_zsh" in
-      [yY][eE][sS] | [yY])
-        if ! grep -q "$zsh_path" /etc/shells >/dev/null 2>&1; then
-          echo "Sudo password may be asked next to write to /etc/shells"
-          echo "$zsh_path" | sudo tee -a /etc/shells
-        fi
-        if [ "$(uname -s)" = 'Darwin' ]; then
-          echo "On macOS, sudo is used to set the user's default shell."
-          sudo dscl . -create "$HOME" UserShell "$zsh_path"
-        else
-          case $(sudo passwd --status "$USER" | awk '{print $2}') in
-          NP)
-            echo "User's password will be asked next to set the shell."
-            chsh -s "$zsh_path"
-            ;;
-          P)
-            echo "User has no password, sudo is used to set the shell."
-            sudo chsh -s "$zsh_path" "$USER"
-            ;;
-          *)
-            echo "User is locked, sudo is used to set the shell."
-            sudo chsh -s "$zsh_path" "$USER"
-            ;;
-          esac
-        fi
-        echo "$zsh_path is the user's default shell on next login or reboot."
-        ;;
-      esac
     fi
+    case "$set_zsh" in
+    [yY][eE][sS] | [yY])
+      if ! grep -q "$zsh_path" /etc/shells >/dev/null 2>&1; then
+        echo "Sudo password may be asked next to write to /etc/shells"
+        echo "$zsh_path" | sudo tee -a /etc/shells
+      fi
+      if [ "$(uname -s)" = 'Darwin' ]; then
+        echo "On macOS, sudo is used to set the user's default shell."
+        sudo dscl . -create "$HOME" UserShell "$zsh_path"
+      else
+        case $(sudo passwd --status "$USER" | awk '{print $2}') in
+        NP)
+          echo "User's password will be asked next to set the shell."
+          chsh -s "$zsh_path"
+          ;;
+        P)
+          echo "User has no password, sudo is used to set the shell."
+          sudo chsh -s "$zsh_path" "$USER"
+          ;;
+        *)
+          echo "User is locked, sudo is used to set the shell."
+          sudo chsh -s "$zsh_path" "$USER"
+          ;;
+        esac
+      fi
+      echo "$zsh_path is the user's default shell on next login or reboot."
+      ;;
+    esac
   fi
 fi

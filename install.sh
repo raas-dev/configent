@@ -26,6 +26,7 @@ export SETUP_GUI="${SETUP_GUI:-false}"
 export SETUP_FLATPAKS="${SETUP_FLATPAKS:-false}"
 export SETUP_DOCKER="${SETUP_DOCKER:-true}"
 export SETUP_PODMAN="${SETUP_PODMAN:-true}"
+export SETUP_ZSH="${SETUP_ZSH:-true}"
 
 ################################################################################
 

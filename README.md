@@ -198,11 +198,11 @@ If you prefer `bash` instead:
 
     setup_bash
 
-These scripts are interactive as they prompt to change the default shell,
-(unless that is default already). Such change may also require `sudo`
-password to be entered, so if `NONINTERACTIVE=true` is passed (such as
-`bootstrap` does), the default shell won't be changed. The shell plugins,
-if any, are installed even in that case.
+These scripts prompt to change the default shell, unless that is the
+default already. Passing `SET_AS_DEFAULT=true` sets the default shell
+without prompting. Such change may also require `sudo` password to be
+entered. The shell plugins, if any, are installed even if the default
+shell is not changed.
 
 ## 🏗️ Containers
 

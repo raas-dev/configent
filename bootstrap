@@ -62,7 +62,7 @@ fi
 ### files in the repo ##########################################################
 
 "$this_path/symlink_dotfiles"
-NONINTERACTIVE=true "$this_path/install_apps"
+"$this_path/install_apps"
 "$this_path/setup_ide"
 
 # wait for detached background installs (e.g. mise with PARALLEL=true)
