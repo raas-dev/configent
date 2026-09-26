@@ -70,5 +70,24 @@
       "kdondjcpgpfoejcobgnbmpoljgnhjiaa",
       "mdinakjfecnibgegdckgghdmejjgjaff"
     ]
+  },
+  "webkit": {
+    "webprefs": {
+      "minimum_font_size": 14,
+      "fonts": {
+        "standard": {
+          "Zyyy": "Ubuntu"
+        },
+        "serif": {
+          "Zyyy": "Ubuntu"
+        },
+        "sansserif": {
+          "Zyyy": "Ubuntu"
+        },
+        "fixed": {
+          "Zyyy": "Terminess Nerd Font"
+        }
+      }
+    }
   }
 }
