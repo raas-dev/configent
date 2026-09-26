@@ -226,7 +226,7 @@ chromium_launcher() {
   # chrome checks the desktop-file id "chromium-browser.desktop" against
   # xdg-settings to decide "is default browser" — must match exactly.
   $SUDO install -d -m 755 /usr/local/share/applications
-  $SUDO install -m 644 "$UI/chromium-browser.desktop" \
+  $SUDO install -m 644 "$UI/../chromium/chromium-browser.desktop" \
     /usr/local/share/applications/chromium-browser.desktop
   $SUDO update-desktop-database /usr/local/share/applications 2>/dev/null || true
   # Desktop launchers: ours + drop stale ones from the other DE profile.
@@ -256,7 +256,7 @@ for f in ('$UHOME/Desktop/chromium-browser.desktop',
     try: os.setxattr(f, 'user.gvfs.trust', b'1')
     except OSError: pass
 " 2>/dev/null || true
-  $SUDO install -m 644 "$UI/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
+  $SUDO install -m 644 "$UI/../chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   if [ "$(id -u)" = 0 ]; then
     chown -R "$LUSER": "$UHOME/Desktop" "$UHOME/.local/share/applications"
@@ -264,7 +264,7 @@ for f in ('$UHOME/Desktop/chromium-browser.desktop',
 }
 
 install_selkies_configs() {
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$UI/xvfb.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$SELKIES/xvfb.service" |
     $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xvfb.service
   $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
@@ -295,7 +295,7 @@ enable_selkies_units() {
 }
 
 write_mate_extras() {
-  $SUDO install -m 755 "$UI/chromium-wrapper" /usr/local/bin/chromium-wrapper
+  $SUDO install -m 755 "$UI/../chromium/chromium-wrapper" /usr/local/bin/chromium-wrapper
   [ -f /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg ] && gsettings set \
     org.mate.background picture-filename \
     '/usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg'
@@ -329,7 +329,7 @@ factory_reset_and_apply() {
   install -m 644 \
     "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
   install -m 644 \
-    "$UI/chromium-browser.desktop" \
+    "$UI/../chromium/chromium-browser.desktop" \
     "$UHOME/.local/share/applications/chromium-browser.desktop"
 
   "$UI/apply-gsettings.sh" "$LUSER"
