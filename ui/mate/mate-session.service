@@ -9,6 +9,7 @@ Group=__LGROUP__
 Environment=DISPLAY=:0
 Environment=XDG_CURRENT_DESKTOP=MATE
 Environment=XDG_SESSION_DESKTOP=mate
+Environment=XDG_DATA_DIRS=/home/__LUSER__/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 Environment=GTK_A11Y=atspi
 ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"
 ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY

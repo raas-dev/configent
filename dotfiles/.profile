@@ -293,13 +293,19 @@ if [ "$(uname -s)" = 'Linux' ]; then
   export XDG_STATE_HOME="$HOME/.local/state"
 
   # Ordered base directories relative to which data files should be searched
+  # (keep anything already set by distro/PAM; mirror /etc/profile.d/flatpak.sh)
+  export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
   if command -v flatpak >/dev/null; then
-    export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share"
+    export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
   fi
-  export XDG_DATA_DIRS="$XDG_DATA_DIRS:/usr/local/share:/usr/share"
   if command -v snap >/dev/null; then
     export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop"
   fi
+  # dedupe, preserve first-seen order (.profile may be sourced multiple times,
+  # and session services may pre-set XDG_DATA_DIRS with the flatpak dirs)
+  XDG_DATA_DIRS=$(printf '%s:' "$XDG_DATA_DIRS" | awk -v RS=: -v ORS= \
+    '$0 != "" && !seen[$0]++ { if (n++) printf ":"; printf "%s", $0 }')
+  export XDG_DATA_DIRS
 fi
 
 ### Xvfb #######################################################################
