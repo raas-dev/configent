@@ -411,13 +411,13 @@ log "apt + selkies + mate install starting (single batch)"
     ayatana-indicator-application mate-terminal \
     at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     dconf-cli \
+    unzip \
     pipewire pipewire-pulse wireplumber \
     ubuntu-mate-wallpapers-common \
-    fonts-ubuntu \
-    mesa-vulkan-drivers \
-    glmark2-es2-drm
-  # Venus via mesa-vulkan-drivers becomes real once libkrun #114 lands.
-  # When fixed: switch chromium-wrapper to --use-angle=vulkan (drops SwiftShader).
+    fonts-ubuntu
+  # Chromium WebGL runs on Mesa llvmpipe (CPU), pulled in by xvfb/selkies deps.
+  # When Venus GPU virt (libkrun #114) lands: add mesa-vulkan-drivers here and
+  # switch chromium-wrapper to --use-angle=vulkan (drops llvmpipe).
 } 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
   tail -60 "$LOGDIR/core.log" >&2
   exit 1

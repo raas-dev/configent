@@ -342,6 +342,7 @@ log "apt + selkies + xfce install starting (single batch)"
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \
@@ -350,6 +351,9 @@ log "apt + selkies + xfce install starting (single batch)"
     pavucontrol \
     pipewire pipewire-pulse wireplumber \
     unzip
+  # Chromium WebGL runs on Mesa llvmpipe (CPU), pulled in by xvfb/selkies deps.
+  # When Venus GPU virt (libkrun #114) lands: add mesa-vulkan-drivers here and
+  # switch chromium-wrapper to --use-angle=vulkan (drops llvmpipe).
 } 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
   tail -60 "$LOGDIR/core.log" >&2
   exit 1

@@ -33,10 +33,10 @@ esac
 EXTS=${HOME:-/root}/.config/chromium-extensions
 # Software GPU path for lima/krunkit VMs: real virtio-gpu is plumbed but
 # Venus is blocked by libkrun #114 (Apple Silicon blob alignment).
-# WebGL renders via ANGLE->SwiftShader (CPU).
+# WebGL renders via ANGLE->native GL->Mesa llvmpipe (CPU, GL 4.5 core).
 exec "$CRBIN" \
   --force-renderer-accessibility --ignore-gpu-blocklist \
-  --enable-unsafe-swiftshader --use-gl=angle --use-angle=swiftshader \
+  --use-gl=angle --use-angle=gl \
   --enable-features=WebGPU \
   --load-extension="$EXTS/ddkjiahejlhfcafbddmgiahcphecmpfh,$EXTS/edibdbjcniadpccecjdfdjjppcpchdlm" \
   "$@"
