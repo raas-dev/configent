@@ -8,19 +8,19 @@
   <property name="misc-toolbar-default" type="bool" value="false"/>
   <property name="misc-borders-default" type="bool" value="true"/>
   <property name="misc-menubar-default" type="bool" value="true"/>
-  <property name="color-foreground" type="string" value="#ffffff"/>
-  <property name="color-background" type="string" value="#000000"/>
+  <property name="color-foreground" type="string" value="#D0D0D0"/>
+  <property name="color-background" type="string" value="#090A14"/>
   <property name="color-background-vary" type="bool" value="false"/>
-  <property name="color-cursor-foreground" type="string" value=""/>
-  <property name="color-cursor" type="string" value=""/>
-  <property name="color-cursor-use-default" type="bool" value="true"/>
+  <property name="color-cursor-foreground" type="string" value="#353535"/>
+  <property name="color-cursor" type="string" value="#B300AD"/>
+  <property name="color-cursor-use-default" type="bool" value="false"/>
   <property name="color-selection" type="string" value=""/>
   <property name="color-selection-background" type="string" value=""/>
   <property name="color-selection-use-default" type="bool" value="true"/>
   <property name="color-bold" type="string" value=""/>
   <property name="color-bold-use-default" type="bool" value="true"/>
-  <property name="color-palette" type="string" value="#000000;#cc0000;#4e9a06;#c4a000;#3465a4;#75507b;#06989a;#d3d7cf;#555753;#ef2929;#8ae234;#fce94f;#739fcf;#ad7fa8;#34e2e2;#eeeeec"/>
-  <property name="color-bold-is-bright" type="bool" value="true"/>
+  <property name="color-palette" type="string" value="#353535;#F75341;#AFD700;#FBB829;#1398B9;#AA54F9;#2BE4D0;#F2F2F2;#535353;#EF2F27;#B9CA49;#FED06E;#5FDAFF;#FF00F6;#0AAEB3;#FFFFFF"/>
+  <property name="color-bold-is-bright" type="bool" value="false"/>
   <property name="color-use-theme" type="bool" value="false"/>
   <property name="tab-activity-color" type="string" value="#aa0000"/>
   <property name="misc-middle-click-opens-uri" type="bool" value="true"/>

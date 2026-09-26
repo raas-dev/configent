@@ -273,17 +273,17 @@ gsettings set org.mate.sound theme-name '__custom'
 # === org.mate.terminal.profile (relocatable, bound to built-in 'default' profile) ===
 PROFILE_PATH=/org/mate/terminal/profiles/default/
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" allow-bold true
-gsettings set "org.mate.terminal.profile:$PROFILE_PATH" background-color '#000000000000'
-gsettings set "org.mate.terminal.profile:$PROFILE_PATH" bold-color '#000000000000'
+gsettings set "org.mate.terminal.profile:$PROFILE_PATH" background-color '#09090A0A1414'
+gsettings set "org.mate.terminal.profile:$PROFILE_PATH" bold-color '#D0D0D0D0D0D0'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" copy-selection true
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-blink-mode 'on'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-shape 'ibeam'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-columns 120
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-rows 35
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" font 'Terminess Nerd Font Bold 14'
-gsettings set "org.mate.terminal.profile:$PROFILE_PATH" foreground-color '#AAAAAAAAAAAA'
+gsettings set "org.mate.terminal.profile:$PROFILE_PATH" foreground-color '#D0D0D0D0D0D0'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" palette \
-  "'#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'"
+  "'#353535353535:#F7F753534141:#AFAFD7D70000:#FBFBB8B82929:#13139898B9B9:#AAAA5454F9F9:#2B2BE4E4D0D0:#F2F2F2F2F2F2:#535353535353:#EFEF2F2F2727:#B9B9CACA4949:#FEFED0D06E6E:#5F5FDADAFFFF:#FFFF0000F6F6:#0A0AAEAEB3B3:#FFFFFFFFFFFF'"
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" scrollback-unlimited true
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" silent-bell true
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" use-custom-default-size true
