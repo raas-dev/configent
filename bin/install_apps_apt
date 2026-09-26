@@ -10,11 +10,9 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 if [ "$(id -u)" = 0 ]; then
   SUDO=''
-  SUDOEULA=''
   export DEBIAN_FRONTEND=noninteractive
 elif command -v sudo >/dev/null; then
   SUDO='sudo DEBIAN_FRONTEND=noninteractive'
-  SUDOEULA='sudo ACCEPT_EULA=Y'
 
   # Ask sudo password upfront
   sudo -n true || sudo -v
@@ -30,68 +28,26 @@ else
   exit 1
 fi
 
-# Update package lists
-$SUDOEULA apt-get update
+# Index is already updated earlier in the same boot (install.sh preamble
+# or install_linux_xfce); re-updating here costs seconds for nothing.
 
-# Ensure apt-get sources.list works with https
-$SUDO apt-get install -y apt-transport-https
-
-# Certificates
-$SUDO apt-get install -y ca-certificates
-
-# Cryptography
-$SUDO apt-get install -y gnupg
-
-# pass (https://www.passwordstore.org/)
-$SUDO apt-get install -y pass
-
-# Log file navigator
-$SUDO apt-get install -y lnav
-
-# Common build tools
-$SUDO apt-get install -y bison build-essential cmake m4 pkg-config
-
-# Common development dependencies
-$SUDO apt-get install -y libbz2-dev libcurl4-openssl-dev libffi-dev \
-  libgmp-dev libicu-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev \
-  libxml2-dev libyaml-dev zlib1g-dev
-
-# Utils
-$SUDO apt-get install -y coreutils dnsutils expect file findutils git git-lfs \
-  htop iputils-ping lsb-release lsof procps traceroute unzip wget \
-  whois zip
-
-# Sixel image previews
-$SUDO apt-get install -y libsixel-bin
-
-# Bash
-$SUDO apt-get install -y bash
-
-# Zsh
-$SUDO apt-get install -y zsh
-
-# Vim
-$SUDO apt-get install -y vim
-
-# MultiTail
-$SUDO apt-get install -y multitail
-
-# git-extras
-$SUDO apt-get install -y git-extras
-
-# GNU awk
-$SUDO apt-get install -y gawk
-
-# ctags
-$SUDO apt-get install -y universal-ctags
-
-# macOS pbcopy/pbpaste like experience
-#$SUDO apt-get install -y xsel
-
-# Microsoft TrueType fonts (accepts EULA)
-#$SUDO apt-get install -y ttf-mscorefonts-installer
+# Single transaction: one apt lock, one dependency resolution, one dpkg
+# configure pass — 17 separate installs were ~1-1.5s overhead each.
+PKGS="apt-transport-https ca-certificates gnupg pass lnav \
+  bison build-essential cmake m4 pkg-config \
+  libbz2-dev libcurl4-openssl-dev libffi-dev libgmp-dev libicu-dev \
+  liblzma-dev libreadline-dev libsqlite3-dev libssl-dev libxml2-dev \
+  libyaml-dev zlib1g-dev \
+  coreutils dnsutils expect file findutils git git-lfs htop iputils-ping \
+  lsb-release lsof procps traceroute unzip wget whois zip \
+  libsixel-bin bash zsh vim multitail git-extras gawk universal-ctags"
 
 # Flatpak
 if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-  $SUDO apt-get install -y flatpak
+  PKGS="$PKGS flatpak"
 fi
+
+# xsel: macOS pbcopy/pbpaste-like; ttf-mscorefonts-installer: MS TrueType (EULA)
+# — both intentionally not installed
+# shellcheck disable=SC2086  # word-split PKGS is the point
+$SUDO apt-get install -y $PKGS

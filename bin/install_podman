@@ -31,11 +31,8 @@ fi
 # Update package lists
 $SUDO apt-get update
 
-# Ensure apt-get sources.list works with https
-$SUDO apt-get install -y apt-transport-https ca-certificates
-
-# gpg
-$SUDO apt-get install -y gnupg
+# Single transaction: https transport, gpg, podman, crun
+$SUDO apt-get install -y apt-transport-https ca-certificates gnupg podman crun
 
 # Setup systemd socket configuration for rootless podman
 $SUDO mkdir -p /etc/systemd/system/podman.socket.d
@@ -49,12 +46,6 @@ if [ ! -e /etc/tmpfiles.d/podman.conf ]; then
   $SUDO mkdir -p /etc/tmpfiles.d
   echo "d /run/podman 0700 $USER -" | $SUDO tee /etc/tmpfiles.d/podman.conf >/dev/null
 fi
-
-# Install podman
-$SUDO apt-get install -y podman
-
-# Install crun (OCI runtime) - fixes Ubuntu Podman conmon bug
-$SUDO apt-get install -y crun
 
 # Configure crun as default runtime for Ubuntu Podman
 $SUDO mkdir -p /etc/containers
