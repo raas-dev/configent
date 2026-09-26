@@ -58,6 +58,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'github:DeusData/codebase-memory-mcp' = 'latest'
 #'npm:@fission-ai/openspec' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
+'pipx:browser-use' = 'latest'
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
 
 # github
