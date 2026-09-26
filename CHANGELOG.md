@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.4](https://github.com/raas-dev/configent/compare/1.244.3...1.244.4) (2026-09-26)
+
+### Fixes
+
+* **linux:** deduplicate apt-get update on same boot ([6abefa0](https://github.com/raas-dev/configent/commit/6abefa00ab9e241ac7c0f123a4e6ac1f6de0c11a))
+
+### Performance
+
+* **linux:** batch apt installs into single transactions ([984dcbe](https://github.com/raas-dev/configent/commit/984dcbe7fbe8fc03fb23906c18bb38c688362015))
+
 ## [1.244.3](https://github.com/raas-dev/configent/compare/1.244.2...1.244.3) (2026-09-25)
 
 ### Fixes
