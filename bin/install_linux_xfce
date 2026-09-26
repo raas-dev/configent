@@ -74,15 +74,63 @@ selkies_deb() {
   [ -w /mnt/lima-provision ] && cp "/tmp/$DEB" /mnt/lima-provision/ || true
 }
 
+# Latest free CloakBrowser Chromium straight from GitHub Releases. Archive
+# cached on the lima-provision volume like the selkies deb, so reprovisioned
+# instances skip the ~200MB download.
 chromium_dl() {
-  for _ in $(seq 1 300); do
-    command -v pip3 >/dev/null 2>&1 && break
-    sleep 1
+  case "$ARCH" in
+  amd64) CBPLAT=linux-x64 ;;
+  arm64) CBPLAT=linux-arm64 ;;
+  *)
+    echo "unsupported arch: $ARCH" >&2
+    return 1
+    ;;
+  esac
+  local tag want
+  CBV=''
+  # Newest free tag that actually ships an archive for this arch; the numeric
+  # grep skips -pro/-preview tags (arm64 free releases can lag x64).
+  for tag in $(curl -fsSL "https://api.github.com/repos/CloakHQ/cloakbrowser/releases?per_page=30" |
+    grep -oE '"tag_name": *"chromium-v[0-9.]+"' | grep -oE 'chromium-v[0-9.]+'); do
+    curl -fsIL -o /dev/null \
+      "https://github.com/CloakHQ/cloakbrowser/releases/download/$tag/cloakbrowser-$CBPLAT.tar.gz" &&
+      CBV=$tag && break
   done
-  command -v pip3
-  run_as env HOME="$UHOME" pip3 install --user --no-cache-dir --break-system-packages --ignore-installed typing_extensions cloakbrowser &&
-    run_as env HOME="$UHOME" PATH="$UHOME/.local/bin:$PATH" cloakbrowser install &&
-    touch /tmp/cb.ok
+  TARBALL="cloakbrowser-$CBPLAT.tar.gz"
+  CACHED="/mnt/lima-provision/cloakbrowser-$CBPLAT-$CBV.tar.gz"
+  if [ -n "$CBV" ] && [ -f "$CACHED" ]; then
+    cp "$CACHED" "/tmp/$TARBALL"
+  elif [ -n "$CBV" ]; then
+    curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$TARBALL" \
+      "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/$TARBALL" || return 1
+    want=$(curl -fsSL "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/SHA256SUMS" |
+      awk -v f="$TARBALL" '$2==f || $2=="*"f {print $1}')
+    [ -n "$want" ] || return 1
+    echo "$want  /tmp/$TARBALL" | sha256sum -c - || return 1
+    [ -w /mnt/lima-provision ] && cp "/tmp/$TARBALL" "$CACHED" || true
+  else
+    # GitHub unreachable: newest cached archive for this arch.
+    CACHED=$(find /mnt/lima-provision -maxdepth 1 -name "cloakbrowser-$CBPLAT-*.tar.gz" 2>/dev/null | sort -V | tail -1)
+    [ -f "$CACHED" ] || return 1
+    CBV="chromium-${CACHED##*cloakbrowser-"$CBPLAT"-}"
+    CBV="${CBV%.tar.gz}"
+    cp "$CACHED" "/tmp/$TARBALL"
+  fi
+  # Extract into the final location seed_desktop expects:
+  # ~/.local/share/cloakbrowser/chromium-<v>/chrome (find maxdepth 2).
+  # Flattens a single top-level dir in the archive.
+  # shellcheck disable=SC2016  # runs as another user; $1..$3 expand inside, not here
+  run_as bash -c '
+    set -e
+    d="$1/.local/share/cloakbrowser/chromium-${2#chromium-v}"
+    rm -rf "$d"; mkdir -p "$d"
+    tar -xzf "/tmp/$3" -C "$d"
+    sub=$(ls -A "$d")
+    if [ "$(printf "%s\n" "$sub" | wc -l)" -eq 1 ] && [ -d "$d/$sub" ]; then
+      mv "$d/$sub"/* "$d"/ && rmdir "$d/$sub"
+    fi
+    [ -x "$d/chrome" ]
+  ' _ "$UHOME" "$CBV" "$TARBALL" && touch /tmp/cb.ok
 }
 
 # Store CRXs unpacked versionless outside the profile (GC-safe); the
@@ -140,33 +188,26 @@ seed_desktop() {
     "$UHOME/.cache/Thunar" \
     "$UHOME/.cache/chromium" \
     "$UHOME/.local/share/xfce4" 2>/dev/null || true
-  # Seed chromium profile after the wipe. Local State pins
-  # profile.last_used + info_cache so chromium trusts the seed instead
-  # of treating it as fresh and clobbering Preferences on first shutdown.
-  # default_search_provider_data MUST live at the top level of
-  # Preferences — Chromium reads it from there, not from under `search`.
-  # Seeding nested (under `search`) was the cause of "default search
-  # engine not set" on first run.
   # Seed from ui/chromium/default-profile/. Local State pins
   # profile.last_used + info_cache so chromium trusts the seed instead
   # of treating it as fresh and clobbering Preferences on first shutdown.
   # default_search_provider_data MUST live at the top level of
-  # Preferences — Chromium reads it from there, not from under `search`.
+  # Preferences — Chromium reads it from there, not from under `search`
+  # (seeding nested was the cause of "default search engine not set").
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
   $SUDO cp -r "$UI/../chromium/default-profile/Default/." \
     "$UHOME/.config/chromium/Default/"
   $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/Local State" \
     "$UHOME/.config/chromium/Local State"
-  # "First Run" sentinel in the user-data-dir root is what --no-first-run
-  # used to do: its presence makes Chromium treat the profile as used, so
-  # the ungoogled-chromium welcome page never appears.
+  # "First Run" sentinel in the user-data-dir root: its presence makes
+  # Chromium treat the profile as used, so the ungoogled-chromium welcome
+  # page never appears.
   $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/First Run" \
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
 
-  # Ordinary webstore installs seeded into the user profile — fully
-  # user-managed (no policies, no /etc, no "managed by your
-  # organization"); Chromium itself auto-updates them from the store.
+  # Store CRXs on disk + --load-extension wrapper; user-managed (no
+  # policies, no /etc, no "managed by your organization").
   chromium_extensions
 
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
@@ -282,7 +323,7 @@ if $SUDO apt-get install "${APT_OPTS[@]}" eatmydata 2>"$LOGDIR/eatmydata.log"; t
   log "eatmydata enabled (fsync bypass → faster apt)"
 fi
 
-log "apt + selkies + xfce + pip install starting (single batch)"
+log "apt + selkies + xfce install starting (single batch)"
 {
   $SUDO $EAT apt-get install "${APT_OPTS[@]}" \
     "$SELKIES_DEB" \
@@ -293,7 +334,6 @@ log "apt + selkies + xfce + pip install starting (single batch)"
     xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
     pavucontrol \
     pipewire pipewire-pulse wireplumber \
-    python3-pip \
     unzip
 } 2>&1 | tee "$LOGDIR/core.log" >/dev/null || {
   tail -60 "$LOGDIR/core.log" >&2
