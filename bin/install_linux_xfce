@@ -342,6 +342,7 @@ log "apt + selkies + xfce install starting (single batch)"
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \
     xfce4 xfce4-terminal thunar mousepad ristretto \

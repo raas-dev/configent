@@ -403,6 +403,7 @@ log "apt + selkies + mate install starting (single batch)"
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \
     ubuntu-mate-desktop ubuntu-mate-default-settings \
