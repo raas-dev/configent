@@ -216,7 +216,7 @@ seed_desktop() {
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
-  $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
+  $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
     [ -f "$UI/$f.desktop" ] &&

@@ -14,7 +14,7 @@ done
 # default.target after a stop/start; kick it from here so the desktop
 # survives `v stop dev && v up dev` without manual intervention.
 # Skip entirely where the user unit isn't installed (e.g. XFCE).
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/mate-autostart.service" ]; then
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/mate-session.service" ]; then
   # Wait for the user dbus socket (systemd manager ready) before kicking;
   # otherwise `systemctl --user` errors out and the desktop stays blank.
   for i in $(seq 1 30); do
@@ -28,10 +28,10 @@ if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/mate-autostart.service" 
   # finished loading yet.
   systemctl --user daemon-reload 2>&1 | head -3 || true
   for i in $(seq 1 10); do
-    out=$(systemctl --user start mate-autostart.service 2>&1)
+    out=$(systemctl --user start mate-session.service 2>&1)
     rc=$?
     if [ $rc -eq 0 ]; then break; fi
-    echo "[selkies-session] mate-autostart kick attempt $i failed: $out" >&2
+    echo "[selkies-session] mate-session kick attempt $i failed: $out" >&2
     sleep 1
   done
 fi

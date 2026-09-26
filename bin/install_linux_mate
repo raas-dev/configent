@@ -309,7 +309,7 @@ write_mate_extras() {
     /etc/xdg/autostart/mate-power-manager.desktop \
     /etc/xdg/autostart/mate-screensaver.desktop \
     /etc/xdg/autostart/nemo-desktop.desktop \
-    /etc/systemd/system/mate-autostart.service 2>/dev/null || true
+    /etc/systemd/system/mate-session.service 2>/dev/null || true
 }
 
 factory_reset_and_apply() {
@@ -327,7 +327,7 @@ factory_reset_and_apply() {
 
   mkdir -p "$UHOME/.config" "$UHOME/.local/share/applications"
   install -m 644 \
-    "$UI/mimeapps.user.list" "$UHOME/.config/mimeapps.list"
+    "$UI/../chromium/mimeapps.list" "$UHOME/.config/mimeapps.list"
   install -m 644 \
     "$UI/../chromium/chromium-browser.desktop" \
     "$UHOME/.local/share/applications/chromium-browser.desktop"
@@ -335,9 +335,9 @@ factory_reset_and_apply() {
   "$UI/apply-gsettings.sh" "$LUSER"
 
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
-    "$UI/mate-autostart.service" \
-    >"$UHOME/.config/systemd/user/mate-autostart.service"
-  chmod 644 "$UHOME/.config/systemd/user/mate-autostart.service"
+    "$UI/mate-session.service" \
+    >"$UHOME/.config/systemd/user/mate-session.service"
+  chmod 644 "$UHOME/.config/systemd/user/mate-session.service"
   $SUDO systemctl daemon-reload 2>/dev/null || true
 
   if [ "$(id -u)" = 0 ]; then
@@ -346,10 +346,10 @@ factory_reset_and_apply() {
       "$UHOME/.local/share/applications" 2>/dev/null || true
     $SUDO runuser -u "$LUSER" -- env \
       HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user enable --now mate-autostart.service 2>/dev/null || true
+      systemctl --user enable --now mate-session.service 2>/dev/null || true
   else
     XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user enable --now mate-autostart.service 2>/dev/null || true
+      systemctl --user enable --now mate-session.service 2>/dev/null || true
   fi
 }
 
@@ -433,7 +433,7 @@ log "selkies configs + chromium ready"
 
 # ponytail: selkies start, factory reset, and mate extras all run concurrently
 # and are waited on below. lima probe waits on
-# selkies-tls :8080; mate-autostart brings up the session. Both ready by
+# selkies-tls :8080; mate-session brings up the session. Both ready by
 # the time wait_ok SRV/FAC return.
 enable_selkies_units >"$LOGDIR/selk.log" 2>&1 &
 SRV=$!
