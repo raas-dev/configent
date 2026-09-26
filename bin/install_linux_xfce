@@ -362,14 +362,7 @@ $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
 [ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
 $SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open
 $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
-# Register + select chromium-wrapper as the system default browser. Kept
-# post-apt (not in seed_desktop) so these never interleave with dpkg's own
-# alternatives updates during package configuration.
-$SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
-$SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
-$SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
-$SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
-$SUDO update-desktop-database /usr/local/share/applications || true
+update-desktop-database /usr/local/share/applications 2>/dev/null || true
 
 # isolate would stop ALL units outside graphical.target's graph — including the
 # per-connection sshd@ units of any open guest shells (SIGTERM -> ssh exit 255)
@@ -383,6 +376,15 @@ wait_ok "$SEED" "$LOGDIR/seed.log"
 wait_ok "$CERT" "$LOGDIR/cert.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium ready"
+# Register + select chromium-wrapper as the system default browser. Must
+# run AFTER wait_ok SEED: seed_desktop installs the wrapper (line ~173), and
+# registering a nonexistent path makes update-alternatives exit nonzero,
+# which under set -e killed the script before enable_units → no units enabled.
+$SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
+$SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
+$SUDO update-desktop-database /usr/local/share/applications || true
 # After apt install + unit files + cert all exist: safe to start units.
 # Earlier start races: xvfb binary missing → restart-loop → rate-limited fail.
 enable_units

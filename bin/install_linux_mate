@@ -443,6 +443,14 @@ EXTRAS=$!
 
 wait_ok "$FAC" "$LOGDIR/factory.log"
 wait_ok "$EXTRAS" "$LOGDIR/cfg2.log"
+# Register + select chromium-wrapper as system default browser. Must run
+# AFTER wait_ok EXTRAS: write_mate_extras installs the wrapper, and
+# registering a nonexistent path makes update-alternatives exit nonzero.
+$SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
+$SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
+$SUDO update-desktop-database /usr/local/share/applications || true
 wait_ok "$SRV" "$LOGDIR/selk.log"
 
 log "mate done"
