@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.5](https://github.com/raas-dev/configent/compare/1.244.4...1.244.5) (2026-09-26)
+
+### Fixes
+
+* **linux:** register chromium-wrapper after installation ([bd8dd9f](https://github.com/raas-dev/configent/commit/bd8dd9f1c7212f3abdfd1f7445003b9edd4a4bd7))
+* **shell:** use SET_AS_DEFAULT instead of NONINTERACTIVE ([6f1c23b](https://github.com/raas-dev/configent/commit/6f1c23bea367167061ef7d093b9ba3710167ba5a))
+* **ui:** enable raw pointer motion, disable browser cursors ([6e81853](https://github.com/raas-dev/configent/commit/6e818530e8af69f126a66769d7c641efea3c5e1a))
+* **ui:** increase font sizes and remove unused fonts-dejavu-core ([9767d43](https://github.com/raas-dev/configent/commit/9767d43b3b50c1d39c622fa8365f1c9754f75e1e))
+* **ui:** remove hardcoded DPI settings ([2f5e8eb](https://github.com/raas-dev/configent/commit/2f5e8eb465eafaff85fcf45c765d4bbaed76cf64))
+* **ui:** remove hardcoded minimum font size ([0ac71ef](https://github.com/raas-dev/configent/commit/0ac71ef28061265716bbf8dd360855a09aca4726))
+* **ui:** set chromium default fonts and minimum font size ([07de15f](https://github.com/raas-dev/configent/commit/07de15f33e4354307356b0f6b2e4282bcbc1eeab))
+* **ui:** set clock fonts in xfce4 panel ([860cb46](https://github.com/raas-dev/configent/commit/860cb467fb2410bbdcab5ccf6f3c53aedc15fc56))
+* **ui:** set scaling-dpi=96 for sessions ([29f0d7b](https://github.com/raas-dev/configent/commit/29f0d7b92d894576b29cca4b73335dedb2305ba3))
+* **ui:** update fonts to Ubuntu Sans ([e8e8cc8](https://github.com/raas-dev/configent/commit/e8e8cc828757748e87dd210bf5e9f437da71a0cb))
+* **vm:** use guest login shell and pipe stdin to avoid arg mangling ([3348380](https://github.com/raas-dev/configent/commit/33483802e5714c452bbb37851b0bac6ca889f0b6))
+
 ## [1.244.4](https://github.com/raas-dev/configent/compare/1.244.3...1.244.4) (2026-09-26)
 
 ### Fixes
