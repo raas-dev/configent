@@ -292,8 +292,6 @@ exec > >(tee -a "$LOGDIR/install_linux_xfce.log") 2>&1
 log 'starting install_linux_xfce'
 
 $SUDO install -d -m 755 /var/cache/apt/archives/partial
-$SUDO install -m 644 "$UI/dpkg-excludes.conf" /etc/dpkg/dpkg.cfg.d/01-excludes
-
 # Skip update if install.sh preamble already updated index this boot.
 { [ -f /run/configent-apt-updated ] ||
   $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3; } \
