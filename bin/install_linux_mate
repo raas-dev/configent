@@ -401,7 +401,7 @@ log "apt + selkies + mate install starting (single batch)"
   $SUDO $EAT apt-get install "${APT_OPTS[@]}" \
     "$SELKIES_DEB" \
     xvfb \
-    x11-xkb-utils xkb-data fontconfig fonts-dejavu-core dbus-x11 \
+    x11-xkb-utils xkb-data fontconfig dbus-x11 \
     socat libnspr4 libnss3 \
     ubuntu-mate-desktop ubuntu-mate-default-settings \
     ubuntu-mate-icon-themes ubuntu-mate-themes \

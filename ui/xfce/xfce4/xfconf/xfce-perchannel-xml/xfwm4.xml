@@ -62,7 +62,7 @@
     <property name="theme" type="string" value="Greybird-dark-accessibility"/>
     <property name="tile_on_move" type="bool" value="true"/>
     <property name="title_alignment" type="string" value="center"/>
-    <property name="title_font" type="string" value="Ubuntu Bold 11"/>
+    <property name="title_font" type="string" value="Ubuntu Bold 13"/>
     <property name="title_horizontal_offset" type="int" value="0"/>
     <property name="titleless_maximize" type="bool" value="false"/>
     <property name="title_shadow_active" type="string" value="false"/>

@@ -20,7 +20,7 @@ export DISPLAY=:0
 # === org.mate.Marco.general ===
 gsettings set org.mate.Marco.general compositing-manager false
 gsettings set org.mate.Marco.general theme 'ClearlooksRe'
-gsettings set org.mate.Marco.general titlebar-font 'Ubuntu Bold 10'
+gsettings set org.mate.Marco.general titlebar-font 'Ubuntu Bold 13'
 
 # === org.mate.NotificationDaemon ===
 gsettings set org.mate.NotificationDaemon do-not-disturb true
@@ -38,7 +38,7 @@ gsettings set org.mate.background secondary-color '#000000'
 
 # === org.mate.caja.desktop ===
 gsettings set org.mate.caja.desktop computer-icon-visible true
-gsettings set org.mate.caja.desktop font 'Ubuntu 10'
+gsettings set org.mate.caja.desktop font 'Ubuntu Medium 13'
 gsettings set org.mate.caja.desktop home-icon-visible true
 gsettings set org.mate.caja.desktop trash-icon-visible true
 gsettings set org.mate.caja.desktop volumes-visible true
@@ -94,14 +94,14 @@ gsettings set org.mate.font-rendering antialiasing 'rgba'
 gsettings set org.mate.font-rendering hinting 'full'
 
 # === org.mate.interface ===
-gsettings set org.mate.interface document-font-name 'Ubuntu 10'
-gsettings set org.mate.interface font-name 'Ubuntu 10'
+gsettings set org.mate.interface document-font-name 'Ubuntu Medium 13'
+gsettings set org.mate.interface font-name 'Ubuntu Medium 13'
 gsettings set org.mate.interface gtk-color-scheme 'tooltip_fg_color:#f7f7f7\ntooltip_bg_color:#353535'
 gsettings set org.mate.interface gtk-decoration-layout ':minimize,maximize,close'
 gsettings set org.mate.interface gtk-enable-primary-paste false
 gsettings set org.mate.interface gtk-theme 'Yaru-olive-dark'
 gsettings set org.mate.interface icon-theme 'Yaru-olive'
-gsettings set org.mate.interface monospace-font-name 'Terminess Nerd Font Bold 11'
+gsettings set org.mate.interface monospace-font-name 'Terminess Nerd Font Bold 14'
 gsettings set org.mate.interface window-scaling-factor 1
 
 # === org.mate.media-handling ===
@@ -280,7 +280,7 @@ gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-blink-mode 'on'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" cursor-shape 'ibeam'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-columns 120
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" default-size-rows 35
-gsettings set "org.mate.terminal.profile:$PROFILE_PATH" font 'Terminess Nerd Font 11'
+gsettings set "org.mate.terminal.profile:$PROFILE_PATH" font 'Terminess Nerd Font Bold 14'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" foreground-color '#AAAAAAAAAAAA'
 gsettings set "org.mate.terminal.profile:$PROFILE_PATH" palette \
   "'#000000000000:#CCCC00000000:#4E4D9A9A0605:#C4C3A0A00000:#34346564A4A3:#7575504F7B7B:#060598979A9A:#D3D3D7D6CFCF:#555457565352:#EFEF29282928:#8A89E2E23434:#FCFBE9E84F4F:#72729F9ECFCF:#ADAC7F7EA8A8:#3434E2E2E2E2:#EEEDEEEDECEB'"
@@ -299,9 +299,9 @@ gsettings set org.mate.terminal.global profile-list "['default']"
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface color-scheme 'default'
-gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu 10'
-gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Terminess Nerd Font 11'
+gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu Medium 13'
+gsettings set org.gnome.desktop.interface font-name 'Ubuntu Medium 13'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Terminess Nerd Font Bold 14'
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 
 # === org.gnome.desktop.sound ===
