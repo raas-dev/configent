@@ -119,23 +119,26 @@ chromium_dl() {
   done
   TARBALL="cloakbrowser-$CBPLAT.tar.gz"
   CACHED="/mnt/lima-provision/cloakbrowser-$CBPLAT-$CBV.tar.gz"
+  # SRC: what to extract. Cache hits read the provision volume directly —
+  # no ~200MB staging copy into /tmp; only the fresh-download path stages.
   if [ -n "$CBV" ] && [ -f "$CACHED" ]; then
-    cp "$CACHED" "/tmp/$TARBALL"
+    SRC=$CACHED
   elif [ -n "$CBV" ]; then
-    curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$TARBALL" \
+    SRC="/tmp/$TARBALL"
+    curl -fsSL --retry 5 --retry-all-errors -o "$SRC" \
       "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/$TARBALL" || return 1
     want=$(curl -fsSL "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/SHA256SUMS" |
       awk -v f="$TARBALL" '$2==f || $2=="*"f {print $1}')
     [ -n "$want" ] || return 1
-    echo "$want  /tmp/$TARBALL" | sha256sum -c - || return 1
-    [ -w /mnt/lima-provision ] && cp "/tmp/$TARBALL" "$CACHED" || true
+    echo "$want  $SRC" | sha256sum -c - || return 1
+    [ -w /mnt/lima-provision ] && cp "$SRC" "$CACHED" || true
   else
     # GitHub unreachable: newest cached archive for this arch.
     CACHED=$(find /mnt/lima-provision -maxdepth 1 -name "cloakbrowser-$CBPLAT-*.tar.gz" 2>/dev/null | sort -V | tail -1)
     [ -f "$CACHED" ] || return 1
     CBV="chromium-${CACHED##*cloakbrowser-"$CBPLAT"-}"
     CBV="${CBV%.tar.gz}"
-    cp "$CACHED" "/tmp/$TARBALL"
+    SRC=$CACHED
   fi
 }
 
@@ -148,13 +151,33 @@ chromium_files() {
     set -e
     d="$1/.local/share/cloakbrowser/chromium-${2#chromium-v}"
     rm -rf "$d"; mkdir -p "$d"
-    tar -xzf "/tmp/$3" -C "$d"
+    tar -xzf "$3" -C "$d"
     sub=$(ls -A "$d")
     if [ "$(printf "%s\n" "$sub" | wc -l)" -eq 1 ] && [ -d "$d/$sub" ]; then
       mv "$d/$sub"/* "$d"/ && rmdir "$d/$sub"
     fi
     [ -x "$d/chrome" ]
-  ' _ "$UHOME" "$CBV" "$TARBALL"
+  ' _ "$UHOME" "$CBV" "$SRC"
+}
+
+# chromium_dl runs as a bg subshell, so its CBV/SRC can't propagate to the
+# parent. Publish them for chromium_files_bg.
+chromium_dl_main() {
+  chromium_dl || return 1
+  printf 'CBV=%q\nSRC=%q\n' "$CBV" "$SRC" >/tmp/cb.env
+  touch /tmp/cb.ok
+}
+
+# Extract off the critical path: spin until chromium_dl publishes cb.env,
+# then extract while the apt batch is still running.
+chromium_files_bg() {
+  local i=0
+  until [ -f /tmp/cb.ok ] && . /tmp/cb.env; do
+    i=$((i + 1))
+    [ "$i" -gt 600 ] && return 1
+    sleep 0.5
+  done
+  chromium_files
 }
 
 # Store CRXs unpacked versionless outside the profile (GC-safe); the
@@ -329,8 +352,10 @@ $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3 \
 UP=$!
 selkies_deb >"$LOGDIR/selkdeb.log" 2>&1 &
 SDB=$!
-chromium_dl >"$LOGDIR/cb.log" 2>&1 &
+chromium_dl_main >"$LOGDIR/cb.log" 2>&1 &
 CB=$!
+chromium_files_bg >"$LOGDIR/cbf.log" 2>&1 &
+CBF=$!
 install_selkies_configs >"$LOGDIR/cfg.log" 2>&1 &
 CFG=$!
 
@@ -375,7 +400,7 @@ log "apt + selkies + mate installed"
 # the cloakbrowser tree), install_selkies_configs
 # (selkies unit files must exist before enable_selkies_units).
 wait_ok "$CB" "$LOGDIR/cb.log"
-chromium_files
+wait_ok "$CBF" "$LOGDIR/cbf.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium ready"
 

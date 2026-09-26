@@ -98,23 +98,26 @@ chromium_dl() {
   done
   TARBALL="cloakbrowser-$CBPLAT.tar.gz"
   CACHED="/mnt/lima-provision/cloakbrowser-$CBPLAT-$CBV.tar.gz"
+  # SRC: what to extract. Cache hits read the provision volume directly —
+  # no ~200MB staging copy into /tmp; only the fresh-download path stages.
   if [ -n "$CBV" ] && [ -f "$CACHED" ]; then
-    cp "$CACHED" "/tmp/$TARBALL"
+    SRC=$CACHED
   elif [ -n "$CBV" ]; then
-    curl -fsSL --retry 5 --retry-all-errors -o "/tmp/$TARBALL" \
+    SRC="/tmp/$TARBALL"
+    curl -fsSL --retry 5 --retry-all-errors -o "$SRC" \
       "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/$TARBALL" || return 1
     want=$(curl -fsSL "https://github.com/CloakHQ/cloakbrowser/releases/download/$CBV/SHA256SUMS" |
       awk -v f="$TARBALL" '$2==f || $2=="*"f {print $1}')
     [ -n "$want" ] || return 1
-    echo "$want  /tmp/$TARBALL" | sha256sum -c - || return 1
-    [ -w /mnt/lima-provision ] && cp "/tmp/$TARBALL" "$CACHED" || true
+    echo "$want  $SRC" | sha256sum -c - || return 1
+    [ -w /mnt/lima-provision ] && cp "$SRC" "$CACHED" || true
   else
     # GitHub unreachable: newest cached archive for this arch.
     CACHED=$(find /mnt/lima-provision -maxdepth 1 -name "cloakbrowser-$CBPLAT-*.tar.gz" 2>/dev/null | sort -V | tail -1)
     [ -f "$CACHED" ] || return 1
     CBV="chromium-${CACHED##*cloakbrowser-"$CBPLAT"-}"
     CBV="${CBV%.tar.gz}"
-    cp "$CACHED" "/tmp/$TARBALL"
+    SRC=$CACHED
   fi
   # Extract into the final location seed_desktop expects:
   # ~/.local/share/cloakbrowser/chromium-<v>/chrome (find maxdepth 2).
@@ -124,13 +127,13 @@ chromium_dl() {
     set -e
     d="$1/.local/share/cloakbrowser/chromium-${2#chromium-v}"
     rm -rf "$d"; mkdir -p "$d"
-    tar -xzf "/tmp/$3" -C "$d"
+    tar -xzf "$3" -C "$d"
     sub=$(ls -A "$d")
     if [ "$(printf "%s\n" "$sub" | wc -l)" -eq 1 ] && [ -d "$d/$sub" ]; then
       mv "$d/$sub"/* "$d"/ && rmdir "$d/$sub"
     fi
     [ -x "$d/chrome" ]
-  ' _ "$UHOME" "$CBV" "$TARBALL" && touch /tmp/cb.ok
+  ' _ "$UHOME" "$CBV" "$SRC" && touch /tmp/cb.ok
 }
 
 # Store CRXs unpacked versionless outside the profile (GC-safe); the
@@ -166,14 +169,6 @@ seed_desktop() {
   $SUDO install -m 644 "$UI/chromium-browser.desktop" /usr/local/share/applications/chromium-browser.desktop
   $SUDO chmod 755 /usr/local/share/applications
   $SUDO chmod 644 /usr/local/share/applications/chromium-browser.desktop
-  # Register + select as the system default browser. The user-local
-  # ~/.local/share/cloakbrowser/chromium-*/chrome is what actually runs, but
-  # alternatives + xdg-settings key off the wrapper so
-  # /usr/local/bin/x-www-browser and `xdg-open http://...` route here.
-  $SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
-  $SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
-  $SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
-  $SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
   # Wipe xfce caches + chromium profile before re-seeding. chromium dir
   # must be wiped here, not later — write_configs() runs in parallel and
   # used to lose the race.
@@ -323,6 +318,13 @@ if $SUDO apt-get install "${APT_OPTS[@]}" eatmydata 2>"$LOGDIR/eatmydata.log"; t
   log "eatmydata enabled (fsync bypass → faster apt)"
 fi
 
+# seed_desktop self-waits on /tmp/cb.ok (chromium_dl) and touches no apt
+# packages (python3 is in the base image; browser alternatives moved below
+# to avoid interleaving with apt's own update-alternatives calls) — so it
+# runs concurrently with the apt batch instead of after it.
+seed_desktop >"$LOGDIR/seed.log" 2>&1 &
+SEED=$!
+
 log "apt + selkies + xfce install starting (single batch)"
 {
   $SUDO $EAT apt-get install "${APT_OPTS[@]}" \
@@ -340,8 +342,9 @@ log "apt + selkies + xfce install starting (single batch)"
   exit 1
 }
 rm -f "$SELKIES_DEB"
-log "apt + selkies + xfce + pip installed"
-$SUDO apt-get autoclean
+log "apt + selkies + xfce installed"
+# hygiene only — never block provisioning on it
+$SUDO apt-get autoclean >/dev/null 2>&1 &
 
 $SUDO dpkg --configure -a
 $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
@@ -351,6 +354,13 @@ $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
 [ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
 $SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open
 $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
+# Register + select chromium-wrapper as the system default browser. Kept
+# post-apt (not in seed_desktop) so these never interleave with dpkg's own
+# alternatives updates during package configuration.
+$SUDO update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/local/bin/chromium-wrapper 200
+$SUDO update-alternatives --set x-www-browser /usr/local/bin/chromium-wrapper
+$SUDO update-alternatives --set gnome-www-browser /usr/local/bin/chromium-wrapper
 $SUDO update-desktop-database /usr/local/share/applications || true
 
 # isolate would stop ALL units outside graphical.target's graph — including the
@@ -361,7 +371,7 @@ $SUDO systemctl set-default graphical.target
 # ~/.local/share/cloakbrowser), write_configs (selkies unit files must exist
 # before systemctl enable --now).
 wait_ok "$CB" "$LOGDIR/cb.log"
-seed_desktop
+wait_ok "$SEED" "$LOGDIR/seed.log"
 wait_ok "$CERT" "$LOGDIR/cert.log"
 wait_ok "$CFG" "$LOGDIR/cfg.log"
 log "selkies configs + chromium ready"
