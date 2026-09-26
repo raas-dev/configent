@@ -68,7 +68,10 @@ ARCH=$(dpkg --print-architecture)
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
   -o Dpkg::Options::=--force-confold
-  -o Dpkg::Options::=--force-unsafe-io)
+  -o Dpkg::Options::=--force-unsafe-io
+  -o "Dpkg::Path-Exclude=/usr/share/doc/*"
+  -o "Dpkg::Path-Include=/usr/share/doc/*/copyright"
+  -o "Dpkg::Path-Exclude=/usr/share/man/*")
 
 eatmydata_setup() {
   $SUDO dpkg -i /var/cache/apt/archives/eatmydata_*.deb \
