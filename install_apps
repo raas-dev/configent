@@ -77,12 +77,10 @@ elif [ "$(uname -s)" = 'Linux' ]; then
       run "$bin_path/install_apps_apk"
     fi
   fi
-  wait_batch
-  # desktop scripts (install_linux_xfce/mate) run first so the desktop
-  # comes up fast; vscode+brave install in the background after the apt
-  # batch has released the dpkg lock
-  if [ "$CANELEVATE" = 'true' ] && command -v apt-get >/dev/null &&
-    [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ]; then
+  # desktop must come up fast, desktop apps can install in the background after
+  if [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ] &&
+    [ "$CANELEVATE" = 'true' ] && command -v apt-get >/dev/null; then
+    wait_batch
     run_detached "$bin_path/install_linux_apps"
   fi
 else
