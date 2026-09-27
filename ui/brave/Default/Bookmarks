@@ -1,11 +1,11 @@
 {
-  "checksum": "d63d43172cf16d832a1ed492cb0318aa",
+  "checksum": "7ceab13c94d5f631a148a03b4f10e1da",
   "roots": {
     "bookmark_bar": {
       "children": [
         {
           "date_added": "13435003973892564",
-          "date_last_used": "13435005325368796",
+          "date_last_used": "13435006140242812",
           "guid": "44c6a406-8e2e-49cf-84c1-7790248d1b0d",
           "id": "5",
           "meta_info": {
@@ -14,11 +14,23 @@
           "name": "My IP Address - BrowserLeaks",
           "type": "url",
           "url": "https://browserleaks.com/ip"
+        },
+        {
+          "date_added": "13435006369408039",
+          "date_last_used": "0",
+          "guid": "d5ef8dad-c185-4e91-a5ac-fcc0f716f92a",
+          "id": "7",
+          "meta_info": {
+            "power_bookmark_meta": ""
+          },
+          "name": "WebGL Report",
+          "type": "url",
+          "url": "https://webglreport.com/?v=2"
         }
       ],
       "date_added": "13435003949730653",
       "date_last_used": "0",
-      "date_modified": "13435003973892564",
+      "date_modified": "13435006369408039",
       "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
       "id": "1",
       "name": "Bookmarks bar",

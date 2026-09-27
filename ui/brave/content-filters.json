@@ -3,10 +3,14 @@
   "_storage": "Which lists exist+defaults: compiled into binary (filter_list_catalog.json in brave-browser source). Rule data: ~/.config/BraveSoftware/Brave-Browser/<component-id>/<version>/list.txt (component-updater). User toggles: Default/Preferences brave.* keys (deviations only).",
   "brave": {
     "cosmetic_filtering_migration": true,
-    "shields": { "advanced_view_enabled": true },
+    "shields": {
+      "advanced_view_enabled": true
+    },
     "shields_fp_settings_migration": true,
     "shields_settings_version": 4
   },
+  "custom_list_urls": [],
+  "disabled_default_lists": [],
   "installed_list_components": [
     "Brave Default Adblock Filters",
     "Brave Default Privacy Filters",
@@ -34,7 +38,5 @@
     "Allow Facebook Embeds",
     "Resources"
   ],
-  "custom_list_urls": [],
-  "disabled_default_lists": [],
   "per_site_exceptions": []
 }

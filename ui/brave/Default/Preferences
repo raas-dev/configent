@@ -744,6 +744,22 @@
       ],
       "p3a_new_tabs_created_daily": [
         {
+          "day": 1790532747.777435,
+          "value": 1.0
+        },
+        {
+          "day": 1790532551.037683,
+          "value": 1.0
+        },
+        {
+          "day": 1790532545.328287,
+          "value": 1.0
+        },
+        {
+          "day": 1790532518.840881,
+          "value": 1.0
+        },
+        {
           "day": 1790531972.13749,
           "value": 1.0
         },
@@ -837,12 +853,12 @@
       "feature_enabled": true
     },
     "stats": {
-      "ads_blocked": "79",
-      "bandwidth_saved_bytes": "712784",
+      "ads_blocked": "269",
+      "bandwidth_saved_bytes": "5245653",
       "daily_saving_predictions_bytes": [
         {
           "day": 1790456400.0,
-          "value": 712784.0
+          "value": 5245653.0
         }
       ]
     },
@@ -922,7 +938,7 @@
       "search_count": [
         {
           "day": 1790456400.0,
-          "value": 1.0
+          "value": 4.0
         }
       ]
     }
@@ -1033,7 +1049,7 @@
       "is_active": 1,
       "keyword": ":a",
       "last_modified": "13435003436741420",
-      "last_visited": "0",
+      "last_visited": "13435006351168675",
       "logo_url": "",
       "new_tab_url": "",
       "originating_url": "",
@@ -1073,7 +1089,7 @@
       "is_active": 1,
       "keyword": ":a",
       "last_modified": "13435003436741420",
-      "last_visited": "0",
+      "last_visited": "13435006351168675",
       "logo_url": "",
       "new_tab_url": "",
       "originating_url": "",
@@ -1292,7 +1308,7 @@
         "has_started_service_worker": true,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13435005571827866",
+        "last_update_time": "13435006345482529",
         "location": 8,
         "newAllowFileAccess": true,
         "path": "/home/asyrjasalo.guest/.config/brave-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
@@ -1426,7 +1442,7 @@
         "has_started_service_worker": true,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13435005571824128",
+        "last_update_time": "13435006345481706",
         "location": 8,
         "newAllowFileAccess": true,
         "path": "/home/asyrjasalo.guest/.config/brave-extensions/nngceckbapebfimnlniiiahkandclblb",
@@ -1484,7 +1500,7 @@
         "incognito_content_settings": [],
         "incognito_preferences": {},
         "last_loaded_browser_version": "154.1.96.59",
-        "last_update_time": "13435005570721601",
+        "last_update_time": "13435006344484499",
         "location": 5,
         "manifest": {
           "content_security_policy": "script-src 'self' blob: filesystem: chrome://brave-resources chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
@@ -1564,7 +1580,7 @@
         "incognito_content_settings": [],
         "incognito_preferences": {},
         "last_loaded_browser_version": "154.1.96.59",
-        "last_update_time": "13435005570722478",
+        "last_update_time": "13435006344485111",
         "location": 5,
         "manifest": {
           "content_scripts": [
@@ -1657,6 +1673,9 @@
   "homepage_is_newtabpage": false,
   "https_only_mode_auto_enabled": false,
   "https_only_mode_enabled": false,
+  "https_upgrade_navigations": {
+    "2026-09-27": 10
+  },
   "in_product_help": {
     "new_badge": {
       "ComposeNudge": {
@@ -1694,7 +1713,7 @@
     "recent_session_start_times": [
       "13435002864560357"
     ],
-    "session_last_active_time": "13435005573820264",
+    "session_last_active_time": "13435006473486301",
     "session_number": 2,
     "session_start_time": "13435002864560357"
   },
@@ -1709,7 +1728,7 @@
     }
   },
   "language_model_counters": {
-    "en": 4
+    "en": 20
   },
   "media": {
     "device_id_salt": "EA9D081270E4DFDA96FF104BDE22FF34",
@@ -1871,6 +1890,12 @@
             "setting": {
               "farbling_token": "3395AED304C611AAED4C8AE6F3D2F465"
             }
+          },
+          "https://[*.]webglreport.com,*": {
+            "last_modified": "13435006166152002",
+            "setting": {
+              "farbling_token": "67D1686EEA091C09E608DFE1A40D978C"
+            }
           }
         },
         "braveSpeedreader": {},
@@ -1878,7 +1903,7 @@
         "captured_surface_control": {},
         "client_hints": {
           "https://www.google.com:443,*": {
-            "last_modified": "13435005306380909",
+            "last_modified": "13435006351146330",
             "setting": {
               "client_hints": [
                 9,
@@ -1898,7 +1923,7 @@
         "cookies": {},
         "cosmeticFilteringV2": {
           "*,*": {
-            "last_modified": "13435005356740644",
+            "last_modified": "13435006396597945",
             "setting": {
               "cosmeticFilteringV2": 1
             }
@@ -1959,14 +1984,36 @@
             }
           },
           "https://browserleaks.com:443,*": {
-            "expiration": "13442781326735935",
-            "last_modified": "13435005326735940",
+            "expiration": "13442782233925818",
+            "last_modified": "13435006233925821",
             "lifetime": "7776000000000",
             "setting": {
               "hasHighScore": false,
               "lastMediaPlaybackTime": 0.0,
               "mediaPlaybacks": 0,
-              "visits": 1
+              "visits": 2
+            }
+          },
+          "https://webglreport.com:443,*": {
+            "expiration": "13442782472557027",
+            "last_modified": "13435006472557032",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 2
+            }
+          },
+          "https://www.google.com:443,*": {
+            "expiration": "13442782366593467",
+            "last_modified": "13435006366593471",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 3
             }
           }
         },
@@ -1995,46 +2042,55 @@
         "serial_guard": {},
         "shieldsAds": {
           "*,*": {
-            "last_modified": "13435005356740590",
+            "last_modified": "13435006396597895",
             "setting": 2
           }
         },
         "shieldsCookiesV3": {},
         "site_engagement": {
           "chrome://newtab/,*": {
-            "last_modified": "13435005571993878",
+            "last_modified": "13435006347631431",
             "setting": {
-              "lastEngagementTime": 1.3435005571993862e+16,
+              "lastEngagementTime": 1.3435006347631414e+16,
               "lastShortcutLaunchTime": 0.0,
-              "pointsAddedToday": 14.399999999999999,
-              "rawScore": 14.399999999999999
+              "pointsAddedToday": 15.0,
+              "rawScore": 15.0
             }
           },
           "chrome://settings/,*": {
-            "last_modified": "13435005557933501",
+            "last_modified": "13435006461100821",
             "setting": {
-              "lastEngagementTime": 1.3435005557933474e+16,
+              "lastEngagementTime": 1.3435006461100792e+16,
               "lastShortcutLaunchTime": 0.0,
               "pointsAddedToday": 15.0,
               "rawScore": 15.0
             }
           },
           "https://browserleaks.com:443,*": {
-            "last_modified": "13435005325375855",
+            "last_modified": "13435006140246387",
             "setting": {
-              "lastEngagementTime": 1.3435005325375848e+16,
+              "lastEngagementTime": 1.3435006140246368e+16,
               "lastShortcutLaunchTime": 0.0,
-              "pointsAddedToday": 3.0,
-              "rawScore": 3.0
+              "pointsAddedToday": 4.5,
+              "rawScore": 4.5
+            }
+          },
+          "https://webglreport.com:443,*": {
+            "last_modified": "13435006261872496",
+            "setting": {
+              "lastEngagementTime": 1.3435006261872476e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 2.1,
+              "rawScore": 2.1
             }
           },
           "https://www.google.com:443,*": {
-            "last_modified": "13435004365789590",
+            "last_modified": "13435006362755311",
             "setting": {
-              "lastEngagementTime": 1.3435004365789584e+16,
+              "lastEngagementTime": 1.3435006362755288e+16,
               "lastShortcutLaunchTime": 0.0,
-              "pointsAddedToday": 3.0,
-              "rawScore": 3.0
+              "pointsAddedToday": 8.1,
+              "rawScore": 8.1
             }
           }
         },
@@ -2052,7 +2108,7 @@
         "top_level_storage_access": {},
         "trackers": {
           "*,*": {
-            "last_modified": "13435005356740660",
+            "last_modified": "13435006396597957",
             "setting": 2
           }
         },
@@ -2077,7 +2133,7 @@
       "has_migrated_local_network_access": true,
       "httpsUpgrades": 2
     },
-    "exit_type": "Normal",
+    "exit_type": "Crashed",
     "family_link_user_state": 6,
     "family_member_role": "not_in_family",
     "isolated_web_app": {
@@ -2085,7 +2141,7 @@
         "pending_initialization_count": 0
       }
     },
-    "last_engagement_time": "13435005571993862",
+    "last_engagement_time": "13435006461100793",
     "last_time_obsolete_http_credentials_removed": 1790529324.542646,
     "last_time_password_store_metrics_reported": 1790529294.541394,
     "managed": {
@@ -2099,7 +2155,7 @@
       "extensions": {
         "isCurrentlyActive": false,
         "result": {
-          "timestamp": "13435005344263530",
+          "timestamp": "13435006388099856",
           "triggeringExtensions": []
         }
       },
@@ -2107,7 +2163,7 @@
         "isCurrentlyActive": false,
         "result": {
           "passwordCheckOrigins": [],
-          "timestamp": "13435005306326064"
+          "timestamp": "13435006345668751"
         }
       },
       "safe-browsing": {
@@ -2115,14 +2171,14 @@
         "onlyShowAfterTime": "13435089314892530",
         "result": {
           "safeBrowsingStatus": 1,
-          "timestamp": "13435005344263499"
+          "timestamp": "13435006388099825"
         }
       },
       "unused-site-permissions": {
         "isCurrentlyActive": false,
         "result": {
           "permissions": [],
-          "timestamp": "13435005309285138"
+          "timestamp": "13435006349486474"
         }
       }
     },
@@ -2168,8 +2224,8 @@
         "show_home_button_encrypted_hash": "djEw7yR6WqQt12q4/7WXKVhYqUw9ZLLch8Bn5pJ5lZv361SrK7Qk2jN+YH1DB60Z9nkS"
       },
       "default_search_provider_data": {
-        "template_url_data": "26941BE890190CE3B323016E638221B13CB5A358F245EFBDAD46F12C62946F82",
-        "template_url_data_encrypted_hash": "djEwk8VbXugCVTBTviJIhi3uwIZxP5NBF+Xg9RTRhAKzxNbS6kPQW84xrAk0JqnSTs/M"
+        "template_url_data": "FC438355909B58C87ED8D3CA3EF36531BF07FF4B9353B53DA46CC43896268D5A",
+        "template_url_data_encrypted_hash": "djEwEO8wCJe/GtXYPhn7rnErwKJwDzcWaVflMNwxW2S2sfWbWDcTa0xcwVQwHRPgeVMd"
       },
       "enterprise_signin": {
         "policy_recovery_token": "7D3124ECAF7E96407EB65EAF5A43B02C7EE5F2D4A9FA38A9F371F9E1B74D6383",
@@ -2183,16 +2239,16 @@
           "initialprovidername_encrypted_hash": "djEwn2R+8PGjEAKtAZe3ZdaoPoPlRUrGh6V/o9KiENuI/3AtKFJq5/M1WhPIlSo2Q+lT"
         },
         "settings": {
-          "gjmjochjlobdmjlaaphajfhnkggkedld": "D364286576F9FDBCE14091DFCEF4BF146EEBCE831F8C88E17AAA3F6D3B34A73F",
-          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "49E89AF11B1DDD8FDD3CC23493D6E8AB5FE94902E828AA4990E29356E8663F17",
-          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "775C405FE4D89B2BFB9293BB400C5558A421CCA28E015245EDD8FAAE1611F2E9",
-          "mnojpmjdmbbfmejpflffifhffcmidifd": "802AAD46FA3CE7E2B60999724CE38270396529419A592C7868D89263BDF1A1EF"
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "3142917CBCDF78C5C6232746D73FE2782248B4BAC6A090E45D43A20A47C2CE36",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "AC091DCA4AE3EAD0400AA52F341F347FE973B959498EF2677CED8E49FF5AE43A",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "31E6A2EB63B75BBCC4888AEDD05A2C53758FD0A088C3B3FF587E61860AAB64B0",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "DEB3E6AB86414077BC35BD023C0110984458680BF5AB6076E60F4EF1B0B80145"
         },
         "settings_encrypted_hash": {
-          "gjmjochjlobdmjlaaphajfhnkggkedld": "djEwgnFULkFzIbV87DsT84ASyUYt6nPYOIzzQQQFQZ+FBZTvwGf6HH5xyVE7vMIHE+3o",
-          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "djEwVC+9n2o8lbz89qfroWvT/uI1zX0tLLMObBoIDkeH0GaU3BrEXroK8MR8ObxQlM3c",
-          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEwzTkAlU9VIngncSRY9zo8gdRbJyfFddUXZkjVuRZ79qLRKDnU1wK9uH4+G0AnPTwU",
-          "mnojpmjdmbbfmejpflffifhffcmidifd": "djEw8TON0HWqgso7y5PLYXC9CKlyMFoMUNqh8qbCOG2LBHC8tdlKknbXgZzNO0jkHh0y"
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "djEw9JQr/vsiN8aqtmFTky5Gd5/xHWRrQJ3suNpb3Sde3lIUxv2qOwvF8kZ+0OEbs9N6",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "djEwQzPlYhuNzpMAw6k6AExOBolrkJKgkSomIfijX+l0wdP4xxaK8Odg49a+Ql/xHUox",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEw3knCOJ1v/vUh3K43jZ+dxz0CatlJghEcZEtWgufQiZawyfkSL/W2IAL0M3nDMF7l",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "djEwxsM1sRHpCDvylPK54mxFTVvTlV03zU6QDS0k4gF18qG+lijVnDC5NhkKJm7P2gxV"
         },
         "ui": {
           "developer_mode": "F1323889EA777F2EB3E23F3E2CFCB59D3FAFCB8DE80104742CBF2A9E44046ED9",
@@ -2227,8 +2283,8 @@
         "incidents_sent": "569707D9A4676B72F48BE92B740BE3EF895419C8A646F1AE1BA70BD9C3B41845",
         "incidents_sent_encrypted_hash": "djEwMiMAX53T1art8hiNWR2KtJtvDx/Ug453nMjIrrEJhrKvzT9/gP0n1oArCPjd05vR"
       },
-      "schedule_to_flush_to_disk": "97470DBE13ACBDD81553A2673FF7C701126D8622B7788316F2EF592689862485",
-      "schedule_to_flush_to_disk_encrypted_hash": "djEw3LyYfZ5UZWSnAqmbO/t22K4JQmL++3miJW/aCcbkYqTCXGzr+F2NoehGBYDco2MT",
+      "schedule_to_flush_to_disk": "19C73FE40327DE3A3F689697ABBF45E001C2DD97A223D7F740667E03C06DFC10",
+      "schedule_to_flush_to_disk_encrypted_hash": "djEw/hhPmusutcQHa8xVNhEStpdj23tpsWhlRneNjli7+Oevn6yWE+nCHNltBSr6PX2Y",
       "search_provider_overrides": "1E1EBA3A4DC28A23BEFCF6ED5D71CE71E9814DD587A305F6B14F72E834AF75DD",
       "search_provider_overrides_encrypted_hash": "djEw/O1Fo7yxiDwDA9NaOfk9W7zGcLAU6L2CmXC9ayuNndZIrEps+rHLBu4+De+BVFES",
       "session": {
@@ -2238,7 +2294,7 @@
         "startup_urls_encrypted_hash": "djEwQZx2i/wNzOqRtH3q8zoq3uvH2GfwPEM4MJtVt+cymnLfCjxp2xQeLnhTdFdNMrtB"
       }
     },
-    "super_encrypted_hash": "djEw2stP7GnhD8d0PwbDO8laDMnUXBQdlVKrJgsmMdvZO2ZAwW5/w+jVkKKF9m2jJuEP"
+    "super_encrypted_hash": "djEwZfVLVn86f6mcyOPglViaYeD/1Y/KVvPZzMTY+pA9Fz0WiPxewvSndixb9wFCrAvd"
   },
   "safe_browsing": {},
   "safebrowsing": {
@@ -2257,7 +2313,7 @@
     "did_enable_shared_tab_groups_in_last_session": false,
     "specifics_to_data_migration": true
   },
-  "schedule_to_flush_to_disk": "13435005571960610",
+  "schedule_to_flush_to_disk": "13435006345634735",
   "search": {
     "suggest_enabled": false
   },
@@ -2274,67 +2330,20 @@
   "sessions": {
     "event_log": [
       {
-        "restore_browser": true,
-        "synchronous": true,
-        "time": "13435004457063974",
-        "type": 5
-      },
-      {
-        "errored_reading": false,
-        "tab_count": 2,
-        "time": "13435004457206512",
-        "type": 1,
-        "window_count": 1
-      },
-      {
-        "did_schedule_command": true,
-        "first_session_service": true,
-        "tab_count": 3,
-        "time": "13435004749622594",
-        "type": 2,
-        "window_count": 1
-      },
-      {
         "crashed": false,
-        "time": "13435004751528198",
+        "time": "13435006089626786",
         "type": 0
       },
       {
         "restore_browser": true,
         "synchronous": true,
-        "time": "13435004752487506",
+        "time": "13435006090573755",
         "type": 5
       },
       {
         "errored_reading": false,
-        "tab_count": 3,
-        "time": "13435004752611903",
-        "type": 1,
-        "window_count": 1
-      },
-      {
-        "did_schedule_command": true,
-        "first_session_service": true,
-        "tab_count": 3,
-        "time": "13435004759738355",
-        "type": 2,
-        "window_count": 1
-      },
-      {
-        "crashed": false,
-        "time": "13435005305103825",
-        "type": 0
-      },
-      {
-        "restore_browser": true,
-        "synchronous": true,
-        "time": "13435005306108495",
-        "type": 5
-      },
-      {
-        "errored_reading": false,
-        "tab_count": 3,
-        "time": "13435005306246397",
+        "tab_count": 1,
+        "time": "13435006090718765",
         "type": 1,
         "window_count": 1
       },
@@ -2342,64 +2351,108 @@
         "did_schedule_command": true,
         "first_session_service": true,
         "tab_count": 1,
-        "time": "13435005489179104",
+        "time": "13435006134963998",
         "type": 2,
         "window_count": 1
       },
       {
         "crashed": false,
-        "time": "13435005489429227",
+        "time": "13435006138024983",
         "type": 0
       },
       {
         "restore_browser": true,
         "synchronous": true,
-        "time": "13435005490461485",
+        "time": "13435006138038641",
         "type": 5
       },
       {
         "errored_reading": false,
         "tab_count": 1,
-        "time": "13435005490616228",
+        "time": "13435006138167382",
         "type": 1,
         "window_count": 1
       },
       {
         "did_schedule_command": true,
         "first_session_service": true,
-        "tab_count": 0,
-        "time": "13435005569158882",
+        "tab_count": 3,
+        "time": "13435006233908656",
         "type": 2,
         "window_count": 1
       },
       {
         "crashed": false,
-        "time": "13435005570716888",
+        "time": "13435006235758862",
         "type": 0
       },
       {
         "restore_browser": true,
         "synchronous": true,
-        "time": "13435005571820296",
+        "time": "13435006236784764",
         "type": 5
       },
       {
         "errored_reading": false,
-        "tab_count": 0,
-        "time": "13435005571924609",
+        "tab_count": 3,
+        "time": "13435006236933473",
         "type": 1,
-        "window_count": 0
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 3,
+        "time": "13435006267762271",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435006269222361",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435006270242114",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 3,
+        "time": "13435006270363600",
+        "type": 1,
+        "window_count": 1
       },
       {
         "did_schedule_command": true,
         "first_session_service": true,
         "tab_count": 1,
-        "time": "13435005592964903",
+        "time": "13435006340285091",
         "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435006344479372",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435006345476956",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 1,
+        "time": "13435006345589344",
+        "type": 1,
         "window_count": 1
       }
     ],
-    "session_data_status": 3
+    "session_data_status": 1
   },
   "settings": {
     "force_google_safesearch": false
