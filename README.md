@@ -72,9 +72,6 @@ explicitly pass `SETUP_GUI=true` to the script.
 Alternatively, you can run `bootstrap` in the git working copy (`~/configent`)
 to install GUI apps.
 
-To use GUI apps on Linux distros, you have to install Xorg, display manager and
-window manager of your choice. See your distro's own instructions for that.
-
 ## 🔋's included
 
 Script `bootstrap` essentially handles the whole automated setup (dotfiles,
