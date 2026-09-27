@@ -20,3 +20,19 @@ flatpak install --user -y flathub com.visualstudio.code
 
 # LibreOffice
 #flatpak install --user -y flathub org.libreoffice.LibreOffice
+
+# sync only short-name aliases to ~/.local/bin (on PATH on most distros);
+# flatpak exports live in ~/.local/share/flatpak/exports/bin under full app IDs
+EXPORTS="$HOME/.local/share/flatpak/exports/bin"
+LOCAL_BIN="$HOME/.local/bin"
+mkdir -p "$LOCAL_BIN"
+for cmd in \
+  brave:com.brave.Browser \
+  code:com.visualstudio.code \
+  libreoffice:org.libreoffice.LibreOffice; do
+  short="${cmd%%:*}"
+  app="${cmd#*:}"
+  [ -x "$EXPORTS/$app" ] && ln -sf "$EXPORTS/$app" "$LOCAL_BIN/$short"
+  # clean up full-ID links from earlier versions of this script
+  [ -L "$LOCAL_BIN/$app" ] && rm "$LOCAL_BIN/$app"
+done
