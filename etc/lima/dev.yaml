@@ -88,7 +88,7 @@ provision:
     script: |
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
-      SETUP_GUI=true SETUP_FLATPAKS=true \
+      SETUP_GUI=true \
       SETUP_DOCKER=false SETUP_PODMAN=false \
         /Users/asyrjasalo/configent/install.sh &
 
