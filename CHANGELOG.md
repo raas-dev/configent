@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.9](https://github.com/raas-dev/configent/compare/1.244.8...1.244.9) (2026-09-27)
+
+### Fixes
+
+* **mate:** use chromium_launcher rewritten .desktop entry ([b553e0c](https://github.com/raas-dev/configent/commit/b553e0cbaafe13b4896edde3a72e1074108769bf))
+* **xfce:** set Brave as default WebBrowser ([beb6626](https://github.com/raas-dev/configent/commit/beb6626fbe1987cd60f3859e1c9871750bb86143))
+
 ## [1.244.8](https://github.com/raas-dev/configent/compare/1.244.7...1.244.8) (2026-09-27)
 
 ### Performance
