@@ -210,11 +210,11 @@ chromium_launcher() {
   # instead of merging into a possibly-corrupt profile.
   $SUDO rm -rf "$UHOME/.config/chromium" "$UHOME/.cache/chromium" 2>/dev/null || true
   $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
-  $SUDO cp -r "$UI/../chromium/default-profile/Default/." \
+  $SUDO cp -r "$UI/../chromium/Default/." \
     "$UHOME/.config/chromium/Default/"
-  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/Local State" \
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/Local State" \
     "$UHOME/.config/chromium/Local State"
-  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/default-profile/First Run" \
+  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/First Run" \
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
   # Store CRXs on disk + --load-extension wrapper; user-managed (no
