@@ -329,12 +329,13 @@ factory_reset_and_apply() {
 
   chromium_launcher
 
-  mkdir -p "$UHOME/.config" "$UHOME/.local/share/applications"
+  mkdir -p "$UHOME/.config"
   install -m 644 \
     "$UI/../chromium/mimeapps.list" "$UHOME/.config/mimeapps.list"
-  install -m 644 \
-    "$UI/../chromium/chromium-browser.desktop" \
-    "$UHOME/.local/share/applications/chromium-browser.desktop"
+  # NB: chromium-browser.desktop is installed by chromium_launcher() above,
+  # with Exec rewritten to $UHOME/.local/bin/chromium-wrapper. Do NOT
+  # install the raw repo copy here — its Exec points at /usr/local/bin,
+  # which never exists, and MATE hides entries whose Exec target is absent.
 
   "$UI/apply-gsettings.sh" "$LUSER"
 
