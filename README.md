@@ -64,13 +64,10 @@ user with passwordless sudo.
 **The defaults are opinionated.** If you want to deviate, the fastest way is to
 fork this repository, make changes and cURL your public fork.
 
-GUI apps are not installed by `install.sh` as a server is assumed, unless you
-explicitly pass `SETUP_GUI=true` to the script.
-
 ### Desktop
 
-Alternatively, you can run `bootstrap` in the git working copy (`~/configent`)
-to install GUI apps.
+GUI apps are not installed by `install.sh` as a server is assumed, unless you
+explicitly pass `SETUP_GUI=true` to the script.
 
 ## 🔋's included
 
@@ -169,8 +166,8 @@ The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
 `~/configent/.backup/<editor_specific_path>/User`.
 
-⚠️: This script does not install any VS Code like, see related
-`bin/install_apps_` for that.
+⚠️: This script does not install any VS Code like, see `bin/install_apps_cask`
+(macOS) or `bin/install_linux_apps` (Linux distros) for that.
 
 If editor command-line binary is present when running this script,
 the extensions (`vscode/extensions.list`) are installed.
