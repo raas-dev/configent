@@ -6,7 +6,7 @@ case "$1" in
     case "$2" in
       webbrowser|WebBrowser)
         shift 2
-        exec /usr/local/bin/chromium-wrapper "$@"
+        exec "${HOME:-/root}/.local/bin/chromium-wrapper" "$@"
         ;;
       FileManager)
         shift 2
