@@ -1,13 +1,13 @@
 #!/bin/sh
-# exo-open wrapper: route WebBrowser → Brave (chromium-wrapper until Brave
-# is installed), FileManager → thunar, else passthrough.
+# exo-open wrapper: route WebBrowser → brave-wrapper (extension/GPU flags;
+# chromium-wrapper until Brave is installed), FileManager → thunar, else passthrough.
 case "$1" in
 --launch | --launch-webapp)
   case "$2" in
   webbrowser | WebBrowser)
     shift 2
-    if [ -x /usr/bin/brave-browser ]; then
-      exec /usr/bin/brave-browser "$@"
+    if [ -x "$HOME/.local/bin/brave-wrapper" ]; then
+      exec "$HOME/.local/bin/brave-wrapper" "$@"
     fi
     exec "$HOME/.local/bin/chromium-wrapper" "$@"
     ;;
