@@ -12,7 +12,7 @@ this_path=$(cd "$(dirname "$0")" && pwd)
 bin_path="$this_path/bin"
 
 # run command directly, or in background when PARALLEL=true
-# "PARALLEL=true install_apps" runs package installs, flatpak, zsh, vim and
+# "PARALLEL=true install_apps" runs package installs, zsh, vim and
 # mise concurrently; wait_batch blocks until all finish
 pids=""
 run() {
@@ -80,13 +80,10 @@ elif [ "$(uname -s)" = 'Linux' ]; then
   wait_batch
   # desktop scripts (install_linux_xfce/mate) run first so the desktop
   # comes up fast; vscode+brave install in the background after the apt
-  # batch has released the dpkg lock (same shape as flatpaks below)
+  # batch has released the dpkg lock
   if [ "$CANELEVATE" = 'true' ] && command -v apt-get >/dev/null &&
     [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ]; then
     run_detached "$bin_path/install_linux_apps"
-  fi
-  if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-    run_detached "$bin_path/install_apps_flatpak"
   fi
 else
   printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"

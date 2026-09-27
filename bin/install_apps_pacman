@@ -100,8 +100,3 @@ yay --noconfirm --needed -S git-extras
 
 # Microsoft TrueType fonts (accepts EULA)
 #yay --noconfirm --needed -S ttf-ms-fonts
-
-# Flatpak
-if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-  $SUDO pacman --noconfirm --needed -S flatpak
-fi

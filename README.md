@@ -65,16 +65,12 @@ user with passwordless sudo.
 fork this repository, make changes and cURL your public fork.
 
 GUI apps are not installed by `install.sh` as a server is assumed, unless you
-explicitly pass `SETUP_GUI=true` to the script. Flatpaks need
-`SETUP_FLATPAKS=true` additionally.
+explicitly pass `SETUP_GUI=true` to the script.
 
 ### Desktop
 
 Alternatively, you can run `bootstrap` in the git working copy (`~/configent`)
 to install GUI apps.
-
-Add or remove GUI apps to your liking in `bin/install_apps_flatpak`
-(Flatpak on Linux distros) or `bin/install_apps_cask` (Homebrew Cask on macOS).
 
 To use GUI apps on Linux distros, you have to install Xorg, display manager and
 window manager of your choice. See your distro's own instructions for that.
@@ -117,7 +113,7 @@ Sensible defaults are used, what's installed by default:
 2. Other command-line essentials and a few build time requirements
 3. Vim, Vundle (plugin manager for Vim) and Vim bundles (Vim plugins)
 4. GUI apps by [Homebrew Cask](https://formulae.brew.sh/cask/) (macOS) or
-[Flatpak](https://flatpak.org/) (Linux distros)
+by apt (deb-based Linux distros)
 5. Rust, Go, Node.js, Python and .NET language runtimes and a few packages
 6. Linters (static analysis tools) and AWS and Azure development tools
 7. Neovim with [LazyVim](https://www.lazyvim.org/)
@@ -176,7 +172,7 @@ The script symlinks `vscode/` to `<editor_specific_path>/User`.
 Existing `User` directory is first backed up to
 `~/configent/.backup/<editor_specific_path>/User`.
 
-⚠️: This script does not install any VS Code like, see Cask and Flatpak related
+⚠️: This script does not install any VS Code like, see related
 `bin/install_apps_` for that.
 
 If editor command-line binary is present when running this script,

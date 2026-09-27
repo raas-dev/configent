@@ -41,13 +41,8 @@ PKGS="apt-transport-https ca-certificates gnupg pass lnav \
   lsb-release lsof procps traceroute unzip wget whois zip \
   libsixel-bin bash zsh vim multitail git-extras gawk universal-ctags"
 
-# Flatpak
-if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-  PKGS="$PKGS flatpak"
-fi
-
 # APT_OPTS:
-# - no recommends (flatpak drags in xdg-desktop-portal -> gstreamer stack)
+# - no recommends
 # - unsafe io
 # - doc/man exclusion
 APT_OPTS="-y -o Acquire::Retries=3 --no-install-recommends \

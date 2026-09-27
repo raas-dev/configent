@@ -118,11 +118,6 @@ EOF
   $SUDO rc-update add docker default
 fi
 
-# Flatpak
-if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-  $SUDO apk add flatpak
-fi
-
 # Alpine fallback for mise aqua: tools that lack aarch64-musl prebuilds.
 # etc/mise/config.toml keeps the aqua: entries (for glibc distros); on
 # alpine these installs will fail visibly, so we install the same tools
