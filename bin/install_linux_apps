@@ -115,11 +115,19 @@ launchers() {
     $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "/usr/share/applications/$f.desktop" \
       "$UHOME/.local/share/applications/$f.desktop"
   done
-  if dpkg -s brave-browser >/dev/null 2>&1 &&
-    [ -f "$UHOME/.config/mimeapps.list" ]; then
-    $SUDO sed -i 's/chromium-browser\.desktop/brave-browser.desktop/g' \
-      "$UHOME/.config/mimeapps.list"
-    $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/mimeapps.list"
+  if dpkg -s brave-browser >/dev/null 2>&1; then
+    if [ -f "$UHOME/.config/mimeapps.list" ]; then
+      $SUDO sed -i 's/chromium-browser\.desktop/brave-browser.desktop/g' \
+        "$UHOME/.config/mimeapps.list"
+      $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/mimeapps.list"
+    fi
+    # xfce helpers.rc WebBrowser overrides mimeapps.list for XFCE apps
+    # (and xdg-settings under an xfce session)
+    if [ -f "$UHOME/.config/xfce4/helpers.rc" ]; then
+      $SUDO sed -i 's/^WebBrowser=.*/WebBrowser=brave-browser/' \
+        "$UHOME/.config/xfce4/helpers.rc"
+      $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/xfce4/helpers.rc"
+    fi
   fi
   # gvfsd-metadata may be absent; Caja/Thunar honor this xattr fallback.
   run_as python3 -c "

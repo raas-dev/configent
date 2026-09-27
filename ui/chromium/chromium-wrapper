@@ -38,5 +38,6 @@ exec "$CRBIN" \
   --force-renderer-accessibility --ignore-gpu-blocklist \
   --use-gl=angle --use-angle=gl \
   --enable-features=WebGPU \
+  --no-default-browser-check \
   --load-extension="$EXTS/ddkjiahejlhfcafbddmgiahcphecmpfh,$EXTS/edibdbjcniadpccecjdfdjjppcpchdlm" \
   "$@"
