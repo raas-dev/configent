@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.8](https://github.com/raas-dev/configent/compare/1.244.7...1.244.8) (2026-09-27)
+
+### Performance
+
+* **install:** concurrent apt keys and fsync skip with eatmydata ([a136455](https://github.com/raas-dev/configent/commit/a1364553d87acd81f1a61452f0364f1c6414e7db))
+
 ## [1.244.7](https://github.com/raas-dev/configent/compare/1.244.6...1.244.7) (2026-09-27)
 
 ### Fixes
