@@ -77,8 +77,15 @@ elif [ "$(uname -s)" = 'Linux' ]; then
       run "$bin_path/install_apps_apk"
     fi
   fi
+  wait_batch
+  # desktop scripts (install_linux_xfce/mate) run first so the desktop
+  # comes up fast; vscode+brave install in the background after the apt
+  # batch has released the dpkg lock (same shape as flatpaks below)
+  if [ "$CANELEVATE" = 'true' ] && command -v apt-get >/dev/null &&
+    [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ]; then
+    run_detached "$bin_path/install_linux_apps"
+  fi
   if [ -n "$SETUP_FLATPAKS" ] && [ "$SETUP_FLATPAKS" != 'false' ]; then
-    wait_batch
     run_detached "$bin_path/install_apps_flatpak"
   fi
 else

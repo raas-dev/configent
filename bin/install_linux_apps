@@ -1,0 +1,161 @@
+#!/bin/bash
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+if [ "$(uname -s)" != "Linux" ]; then
+  printf 'ERROR: install_linux_apps must be run on Linux.\n' >&2
+  exit 1
+fi
+
+if [ "$(id -u)" = 0 ]; then
+  SUDO=''
+  export DEBIAN_FRONTEND=noninteractive
+elif command -v sudo >/dev/null; then
+  SUDO='sudo DEBIAN_FRONTEND=noninteractive'
+
+  sudo -n true || sudo -v
+
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  printf "\nERROR: User is non-root and sudo not available, cannot proceed.\n"
+  exit 1
+fi
+
+run_as() { # $SUDO is empty when we *are* root; -u would become the command
+  if [ -n "$SUDO" ]; then sudo -u "$LUSER" "$@"; else runuser -u "$LUSER" -- "$@"; fi
+}
+
+set -eu -o pipefail
+
+LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
+UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
+LGROUP=$(getent group "$LUSER" | cut -d: -f1)
+ARCH=$(dpkg --print-architecture)
+
+log() { printf '[vscode-brave] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
+
+APT_OPTS=(-y -o Acquire::Retries=3 -o Dpkg::Lock::Timeout=600 --no-install-recommends
+  -o Dpkg::Options::=--force-confdef
+  -o Dpkg::Options::=--force-confold
+  -o Dpkg::Options::=--force-unsafe-io
+  -o "Dpkg::Path-Exclude=/usr/share/doc/*"
+  -o "Dpkg::Path-Include=/usr/share/doc/*/copyright"
+  -o "Dpkg::Path-Exclude=/usr/share/man/*")
+
+# Official VSCode (packages.microsoft.com) + Brave (brave-browser-apt-
+# release.s3.brave.com) apt repos. Both ship amd64+arm64. Keys stored as
+# downloaded (Brave: binary keyring, MS: armored .asc — apt >= 2.4 accepts
+# armored signed-by, no gpg needed). Debs cache on the provision volume
+# like the selkies deb: reprovisions install the cached deb and skip
+# the ~250MB download; the repo version only wins when nothing is cached.
+extra_repos() {
+  PKGS=()
+  case "$ARCH" in
+  amd64 | arm64) ;;
+  *)
+    log "unsupported arch: $ARCH, skipping"
+    return 0
+    ;;
+  esac
+  $SUDO install -d -m 755 /usr/share/keyrings
+  if curl -fsSL --retry 5 --retry-all-errors \
+    https://packages.microsoft.com/keys/microsoft.asc |
+    $SUDO tee /usr/share/keyrings/microsoft.asc >/dev/null; then
+    printf 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/microsoft.asc] https://packages.microsoft.com/repos/code stable main\n' |
+      $SUDO tee /etc/apt/sources.list.d/vscode.list >/dev/null
+  else
+    $SUDO rm -f /usr/share/keyrings/microsoft.asc
+  fi
+  if curl -fsSL --retry 5 --retry-all-errors \
+    https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg |
+    $SUDO tee /usr/share/keyrings/brave-browser-archive-keyring.gpg >/dev/null; then
+    printf 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main\n' |
+      $SUDO tee /etc/apt/sources.list.d/brave-browser-release.list >/dev/null
+  else
+    $SUDO rm -f /usr/share/keyrings/brave-browser-archive-keyring.gpg
+  fi
+  # cached deb on the provision volume beats the repo; repo name only
+  # when its sources+key landed (this run or persisted on the VM disk)
+  local p f
+  for p in code brave-browser; do
+    f=$(find /mnt/lima-provision -maxdepth 1 -name "${p}_*_${ARCH}.deb" 2>/dev/null |
+      sort -V | tail -1)
+    if [ -n "$f" ]; then
+      PKGS+=("$f")
+    elif [ "$p" = code ] && [ -s /usr/share/keyrings/microsoft.asc ] &&
+      [ -f /etc/apt/sources.list.d/vscode.list ]; then
+      PKGS+=(code)
+    elif [ "$p" = brave-browser ] && [ -s /usr/share/keyrings/brave-browser-archive-keyring.gpg ] &&
+      [ -f /etc/apt/sources.list.d/brave-browser-release.list ]; then
+      PKGS+=(brave-browser)
+    else
+      log "no repo and no cached deb for $p, skipping"
+    fi
+  done
+}
+
+# deb-shipped launchers → Desktop + menu, and Brave takes over as default
+# browser in ~/.config/mimeapps.list (seeded chromium by the desktop script).
+launchers() {
+  local installed=()
+  dpkg -s code >/dev/null 2>&1 && installed+=(com.microsoft.VSCode)
+  dpkg -s brave-browser >/dev/null 2>&1 && installed+=(brave-browser)
+  [ "${#installed[@]}" -gt 0 ] || return 0
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
+    "$UHOME/Desktop" "$UHOME/.local/share/applications"
+  local f
+  for f in "${installed[@]}"; do
+    [ -f "/usr/share/applications/$f.desktop" ] || continue
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 "/usr/share/applications/$f.desktop" \
+      "$UHOME/Desktop/$f.desktop"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "/usr/share/applications/$f.desktop" \
+      "$UHOME/.local/share/applications/$f.desktop"
+  done
+  if dpkg -s brave-browser >/dev/null 2>&1 &&
+    [ -f "$UHOME/.config/mimeapps.list" ]; then
+    $SUDO sed -i 's/chromium-browser\.desktop/brave-browser.desktop/g' \
+      "$UHOME/.config/mimeapps.list"
+    $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/mimeapps.list"
+  fi
+  # gvfsd-metadata may be absent; Caja/Thunar honor this xattr fallback.
+  run_as python3 -c "
+import os
+for f in ('$UHOME/Desktop/brave-browser.desktop',
+          '$UHOME/Desktop/com.microsoft.VSCode.desktop'):
+    try: os.setxattr(f, 'user.gvfs.trust', b'1')
+    except OSError: pass
+" 2>/dev/null || true
+  run_as update-desktop-database "$UHOME/.local/share/applications" 2>/dev/null || true
+}
+
+if dpkg -s code >/dev/null 2>&1 && dpkg -s brave-browser >/dev/null 2>&1; then
+  log "code + brave-browser already installed"
+  launchers
+  exit 0
+fi
+
+extra_repos
+log "installing: ${PKGS[*]:-none}"
+
+[ "${#PKGS[@]}" -gt 0 ] || {
+  launchers
+  exit 0
+}
+
+# index needed whenever any repo source landed this run or the cached deb
+# is newer than what the last update saw — cheap enough to just always run
+$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3
+
+$SUDO apt-get install "${APT_OPTS[@]}" "${PKGS[@]}"
+
+# cache debs on the provision volume (selkies-deb pattern)
+for p in code brave-browser; do
+  $SUDO cp /var/cache/apt/archives/"${p}"_*_"${ARCH}".deb /mnt/lima-provision/ 2>/dev/null || true
+done
+
+launchers
+log "done"
