@@ -744,6 +744,18 @@
       ],
       "p3a_new_tabs_created_daily": [
         {
+          "day": 1790531972.13749,
+          "value": 1.0
+        },
+        {
+          "day": 1790531726.449563,
+          "value": 1.0
+        },
+        {
+          "day": 1790531719.783429,
+          "value": 1.0
+        },
+        {
           "day": 1790530764.269819,
           "value": 1.0
         },
@@ -825,7 +837,7 @@
       "feature_enabled": true
     },
     "stats": {
-      "ads_blocked": "65",
+      "ads_blocked": "79",
       "bandwidth_saved_bytes": "712784",
       "daily_saving_predictions_bytes": [
         {
@@ -965,7 +977,7 @@
       "top": 33,
       "work_area_bottom": 1324,
       "work_area_left": 0,
-      "work_area_right": 2146,
+      "work_area_right": 1980,
       "work_area_top": 33
     },
     "window_placement_popup": {
@@ -1280,7 +1292,7 @@
         "has_started_service_worker": true,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13435004752494005",
+        "last_update_time": "13435005571827866",
         "location": 8,
         "newAllowFileAccess": true,
         "path": "/home/asyrjasalo.guest/.config/brave-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
@@ -1414,7 +1426,7 @@
         "has_started_service_worker": true,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13435004752491027",
+        "last_update_time": "13435005571824128",
         "location": 8,
         "newAllowFileAccess": true,
         "path": "/home/asyrjasalo.guest/.config/brave-extensions/nngceckbapebfimnlniiiahkandclblb",
@@ -1472,7 +1484,7 @@
         "incognito_content_settings": [],
         "incognito_preferences": {},
         "last_loaded_browser_version": "154.1.96.59",
-        "last_update_time": "13435004751532529",
+        "last_update_time": "13435005570721601",
         "location": 5,
         "manifest": {
           "content_security_policy": "script-src 'self' blob: filesystem: chrome://brave-resources chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
@@ -1552,7 +1564,7 @@
         "incognito_content_settings": [],
         "incognito_preferences": {},
         "last_loaded_browser_version": "154.1.96.59",
-        "last_update_time": "13435004751532899",
+        "last_update_time": "13435005570722478",
         "location": 5,
         "manifest": {
           "content_scripts": [
@@ -1682,7 +1694,7 @@
     "recent_session_start_times": [
       "13435002864560357"
     ],
-    "session_last_active_time": "13435004752486332",
+    "session_last_active_time": "13435005573820264",
     "session_number": 2,
     "session_start_time": "13435002864560357"
   },
@@ -1697,7 +1709,7 @@
     }
   },
   "language_model_counters": {
-    "en": 2
+    "en": 4
   },
   "media": {
     "device_id_salt": "EA9D081270E4DFDA96FF104BDE22FF34",
@@ -1719,7 +1731,7 @@
     "custom_background_local_to_device": false,
     "custom_links_visible": true,
     "enterprise_shortcuts_visible": false,
-    "num_personal_suggestions": 1,
+    "num_personal_suggestions": 2,
     "shortcust_visible": false
   },
   "omnibox": {
@@ -1848,6 +1860,12 @@
               "farbling_token": "8E93FF1A81F2DDDCEB402E2DB689F09A"
             }
           },
+          "https://[*.]browserleaks.com,*": {
+            "last_modified": "13435005324997006",
+            "setting": {
+              "farbling_token": "EC0C4B6FCB2D8E3D1CE2022CBF81D7EB"
+            }
+          },
           "https://[*.]google.com,*": {
             "last_modified": "13435004365441200",
             "setting": {
@@ -1860,7 +1878,7 @@
         "captured_surface_control": {},
         "client_hints": {
           "https://www.google.com:443,*": {
-            "last_modified": "13435004752782090",
+            "last_modified": "13435005306380909",
             "setting": {
               "client_hints": [
                 9,
@@ -1880,7 +1898,7 @@
         "cookies": {},
         "cosmeticFilteringV2": {
           "*,*": {
-            "last_modified": "13435004371281554",
+            "last_modified": "13435005356740644",
             "setting": {
               "cosmeticFilteringV2": 1
             }
@@ -1939,6 +1957,17 @@
               "mediaPlaybacks": 0,
               "visits": 1
             }
+          },
+          "https://browserleaks.com:443,*": {
+            "expiration": "13442781326735935",
+            "last_modified": "13435005326735940",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 1
+            }
           }
         },
         "media_stream_camera": {},
@@ -1966,28 +1995,37 @@
         "serial_guard": {},
         "shieldsAds": {
           "*,*": {
-            "last_modified": "13435004371281502",
+            "last_modified": "13435005356740590",
             "setting": 2
           }
         },
         "shieldsCookiesV3": {},
         "site_engagement": {
           "chrome://newtab/,*": {
-            "last_modified": "13435004364140928",
+            "last_modified": "13435005571993878",
             "setting": {
-              "lastEngagementTime": 1.3435004364140912e+16,
+              "lastEngagementTime": 1.3435005571993862e+16,
               "lastShortcutLaunchTime": 0.0,
-              "pointsAddedToday": 9.899999999999999,
-              "rawScore": 9.899999999999999
+              "pointsAddedToday": 14.399999999999999,
+              "rawScore": 14.399999999999999
             }
           },
           "chrome://settings/,*": {
-            "last_modified": "13435004741616605",
+            "last_modified": "13435005557933501",
             "setting": {
-              "lastEngagementTime": 1.343500474161658e+16,
+              "lastEngagementTime": 1.3435005557933474e+16,
               "lastShortcutLaunchTime": 0.0,
               "pointsAddedToday": 15.0,
               "rawScore": 15.0
+            }
+          },
+          "https://browserleaks.com:443,*": {
+            "last_modified": "13435005325375855",
+            "setting": {
+              "lastEngagementTime": 1.3435005325375848e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 3.0,
+              "rawScore": 3.0
             }
           },
           "https://www.google.com:443,*": {
@@ -2014,7 +2052,7 @@
         "top_level_storage_access": {},
         "trackers": {
           "*,*": {
-            "last_modified": "13435004371281566",
+            "last_modified": "13435005356740660",
             "setting": 2
           }
         },
@@ -2047,7 +2085,7 @@
         "pending_initialization_count": 0
       }
     },
-    "last_engagement_time": "13435004741616579",
+    "last_engagement_time": "13435005571993862",
     "last_time_obsolete_http_credentials_removed": 1790529324.542646,
     "last_time_password_store_metrics_reported": 1790529294.541394,
     "managed": {
@@ -2061,7 +2099,7 @@
       "extensions": {
         "isCurrentlyActive": false,
         "result": {
-          "timestamp": "13435004608994796",
+          "timestamp": "13435005344263530",
           "triggeringExtensions": []
         }
       },
@@ -2069,7 +2107,7 @@
         "isCurrentlyActive": false,
         "result": {
           "passwordCheckOrigins": [],
-          "timestamp": "13435004457290165"
+          "timestamp": "13435005306326064"
         }
       },
       "safe-browsing": {
@@ -2077,14 +2115,14 @@
         "onlyShowAfterTime": "13435089314892530",
         "result": {
           "safeBrowsingStatus": 1,
-          "timestamp": "13435004608994765"
+          "timestamp": "13435005344263499"
         }
       },
       "unused-site-permissions": {
         "isCurrentlyActive": false,
         "result": {
           "permissions": [],
-          "timestamp": "13435004460200749"
+          "timestamp": "13435005309285138"
         }
       }
     },
@@ -2145,16 +2183,16 @@
           "initialprovidername_encrypted_hash": "djEwn2R+8PGjEAKtAZe3ZdaoPoPlRUrGh6V/o9KiENuI/3AtKFJq5/M1WhPIlSo2Q+lT"
         },
         "settings": {
-          "gjmjochjlobdmjlaaphajfhnkggkedld": "CB46504406CE07E598A65542A7FBFA1783950C6DCE7CF262E1AA141334544EC1",
-          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "23617CC540EA186114F5B588C6F2E858C595F4857608601AF68DE4FF9C8756BB",
-          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "7C3C0EE8015C080BFA59AF2EEB7AB8E776D1272AB2DDF212631099957D73D38B",
-          "mnojpmjdmbbfmejpflffifhffcmidifd": "84F8C01C2618C280801E9A72B2E90EF6370375F9A48A144F246C5B1CC0314D4E"
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "D364286576F9FDBCE14091DFCEF4BF146EEBCE831F8C88E17AAA3F6D3B34A73F",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "49E89AF11B1DDD8FDD3CC23493D6E8AB5FE94902E828AA4990E29356E8663F17",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "775C405FE4D89B2BFB9293BB400C5558A421CCA28E015245EDD8FAAE1611F2E9",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "802AAD46FA3CE7E2B60999724CE38270396529419A592C7868D89263BDF1A1EF"
         },
         "settings_encrypted_hash": {
-          "gjmjochjlobdmjlaaphajfhnkggkedld": "djEwvDVxa0/wxCqIBu8xmOi1o9FarW0d496mn30KIVHeevPt1CsJpe3jocFQ81K9Bf25",
-          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "djEwY6OYzk7kBfqirOX3trwjhtwh96w3s5Zm8td3EdDeB74gfBB67CO3WtjZls9lkabt",
-          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEwtvb35anuGNFaMljJxXeGADdDlSm/m1CxIwr1Wbf5yrIurxtd1kr8nUPtktXBnv02",
-          "mnojpmjdmbbfmejpflffifhffcmidifd": "djEwWgliXxaTGv+VMRlM4g4v/eOOAv3+VmQPhsXd42aJSHxdjpUbnQviOKEXycqOOKHI"
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "djEwgnFULkFzIbV87DsT84ASyUYt6nPYOIzzQQQFQZ+FBZTvwGf6HH5xyVE7vMIHE+3o",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "djEwVC+9n2o8lbz89qfroWvT/uI1zX0tLLMObBoIDkeH0GaU3BrEXroK8MR8ObxQlM3c",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEwzTkAlU9VIngncSRY9zo8gdRbJyfFddUXZkjVuRZ79qLRKDnU1wK9uH4+G0AnPTwU",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "djEw8TON0HWqgso7y5PLYXC9CKlyMFoMUNqh8qbCOG2LBHC8tdlKknbXgZzNO0jkHh0y"
         },
         "ui": {
           "developer_mode": "F1323889EA777F2EB3E23F3E2CFCB59D3FAFCB8DE80104742CBF2A9E44046ED9",
@@ -2189,8 +2227,8 @@
         "incidents_sent": "569707D9A4676B72F48BE92B740BE3EF895419C8A646F1AE1BA70BD9C3B41845",
         "incidents_sent_encrypted_hash": "djEwMiMAX53T1art8hiNWR2KtJtvDx/Ug453nMjIrrEJhrKvzT9/gP0n1oArCPjd05vR"
       },
-      "schedule_to_flush_to_disk": "A47936C5DB988C6D6B2FB601D0514A817AFD111CD6DE1CD0D175323016973458",
-      "schedule_to_flush_to_disk_encrypted_hash": "djEwRkKuEB8K/HEx9m3b99h4EJibau0Riu9Gps2W3fGt2qm6fGw43mXWrxWyZcvAXrgZ",
+      "schedule_to_flush_to_disk": "97470DBE13ACBDD81553A2673FF7C701126D8622B7788316F2EF592689862485",
+      "schedule_to_flush_to_disk_encrypted_hash": "djEw3LyYfZ5UZWSnAqmbO/t22K4JQmL++3miJW/aCcbkYqTCXGzr+F2NoehGBYDco2MT",
       "search_provider_overrides": "1E1EBA3A4DC28A23BEFCF6ED5D71CE71E9814DD587A305F6B14F72E834AF75DD",
       "search_provider_overrides_encrypted_hash": "djEw/O1Fo7yxiDwDA9NaOfk9W7zGcLAU6L2CmXC9ayuNndZIrEps+rHLBu4+De+BVFES",
       "session": {
@@ -2200,7 +2238,7 @@
         "startup_urls_encrypted_hash": "djEwQZx2i/wNzOqRtH3q8zoq3uvH2GfwPEM4MJtVt+cymnLfCjxp2xQeLnhTdFdNMrtB"
       }
     },
-    "super_encrypted_hash": "djEwsjOfDLMstl/V722U/Jz0wWUyU8UuICnsY0niYqz4AqIxCVcoYPdDWvS6G5IJ9j7R"
+    "super_encrypted_hash": "djEw2stP7GnhD8d0PwbDO8laDMnUXBQdlVKrJgsmMdvZO2ZAwW5/w+jVkKKF9m2jJuEP"
   },
   "safe_browsing": {},
   "safebrowsing": {
@@ -2219,7 +2257,7 @@
     "did_enable_shared_tab_groups_in_last_session": false,
     "specifics_to_data_migration": true
   },
-  "schedule_to_flush_to_disk": "13435004752648037",
+  "schedule_to_flush_to_disk": "13435005571960610",
   "search": {
     "suggest_enabled": false
   },
@@ -2235,55 +2273,6 @@
   "selectfile": {},
   "sessions": {
     "event_log": [
-      {
-        "crashed": true,
-        "time": "13435002864547706",
-        "type": 0
-      },
-      {
-        "crashed": true,
-        "time": "13435004329379965",
-        "type": 0
-      },
-      {
-        "did_schedule_command": true,
-        "first_session_service": true,
-        "tab_count": 2,
-        "time": "13435004372323465",
-        "type": 2,
-        "window_count": 1
-      },
-      {
-        "crashed": false,
-        "time": "13435004441194742",
-        "type": 0
-      },
-      {
-        "restore_browser": true,
-        "synchronous": true,
-        "time": "13435004442221445",
-        "type": 5
-      },
-      {
-        "errored_reading": false,
-        "tab_count": 2,
-        "time": "13435004442361976",
-        "type": 1,
-        "window_count": 1
-      },
-      {
-        "did_schedule_command": true,
-        "first_session_service": true,
-        "tab_count": 2,
-        "time": "13435004453395339",
-        "type": 2,
-        "window_count": 1
-      },
-      {
-        "crashed": false,
-        "time": "13435004456053780",
-        "type": 0
-      },
       {
         "restore_browser": true,
         "synchronous": true,
@@ -2328,6 +2317,84 @@
         "first_session_service": true,
         "tab_count": 3,
         "time": "13435004759738355",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435005305103825",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435005306108495",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 3,
+        "time": "13435005306246397",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 1,
+        "time": "13435005489179104",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435005489429227",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435005490461485",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 1,
+        "time": "13435005490616228",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 0,
+        "time": "13435005569158882",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435005570716888",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435005571820296",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 0,
+        "time": "13435005571924609",
+        "type": 1,
+        "window_count": 0
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 1,
+        "time": "13435005592964903",
         "type": 2,
         "window_count": 1
       }

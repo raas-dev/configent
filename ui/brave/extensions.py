@@ -52,11 +52,19 @@ def loaded_id(path):
     return "".join(chr(ord("a") + int(c, 16)) for c in digest.hex())
 
 
-def pin(prefs):
+def update_prefs(prefs):
     extroot = os.path.expanduser(sys.argv[1])
     pins = [loaded_id(os.path.join(extroot, e)) for e in IDS]
     doc = json.load(open(prefs)) if os.path.exists(prefs) else {}
     doc.setdefault("extensions", {})["pinned_extensions"] = pins
+    # content-filters.json (same dir as this script) is the source of truth
+    # for filter-list deviations: its "brave" object is merged over the
+    # seeded/live Preferences so editing the json alone re-configures shields.
+    cf = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                      "content-filters.json")
+    if os.path.isfile(cf):
+        doc.setdefault("brave", {}).update(
+            json.load(open(cf)).get("brave") or {})
     with open(prefs, "w") as f:
         json.dump(doc, f, indent=2)
     print(f"pinned: {pins}")
@@ -77,8 +85,8 @@ def main():
         shutil.rmtree(dest, ignore_errors=True)
         os.rename(tmp, dest)
         print(f"{extid}: installed")
-    if len(sys.argv) > 2:  # optional profile Preferences -> pin toolbar icons
-        pin(os.path.expanduser(sys.argv[2]))
+    if len(sys.argv) > 2:  # optional profile Preferences -> pin icons + filters
+        update_prefs(os.path.expanduser(sys.argv[2]))
 
 
 if __name__ == "__main__":

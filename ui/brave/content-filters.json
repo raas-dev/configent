@@ -1,0 +1,40 @@
+{
+  "_comment": "Filter-list state from live VM. Brave persists ONLY deviations from compiled defaults (custom URLs added, default lists disabled, per-site exceptions). Empty below = 100% default selection.",
+  "_storage": "Which lists exist+defaults: compiled into binary (filter_list_catalog.json in brave-browser source). Rule data: ~/.config/BraveSoftware/Brave-Browser/<component-id>/<version>/list.txt (component-updater). User toggles: Default/Preferences brave.* keys (deviations only).",
+  "brave": {
+    "cosmetic_filtering_migration": true,
+    "shields": { "advanced_view_enabled": true },
+    "shields_fp_settings_migration": true,
+    "shields_settings_version": 4
+  },
+  "installed_list_components": [
+    "Brave Default Adblock Filters",
+    "Brave Default Privacy Filters",
+    "Brave First Party Adblock Filters",
+    "Regional Catalog",
+    "Finnish website ad blocker",
+    "Cookie notice blocker",
+    "Annoying distractions blocker",
+    "Newsletter popup blocker",
+    "Social media blocker",
+    "Chat app blocker",
+    "Paywall blocker",
+    "Porn blocker",
+    "Tracking URL blocker",
+    "Experimental ad blocker",
+    "Mobile app promo blocker",
+    "YouTube Playables blocker",
+    "YouTube Shorts blocker",
+    "YouTube autodubbed videos blocker",
+    "YouTube members-only video blocker",
+    "YouTube Mobile Distractions",
+    "YouTube Mobile Recommendations",
+    "Remove Youtube End video elements",
+    "Allow X/Twitter Embeds",
+    "Allow Facebook Embeds",
+    "Resources"
+  ],
+  "custom_list_urls": [],
+  "disabled_default_lists": [],
+  "per_site_exceptions": []
+}
