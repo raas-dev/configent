@@ -134,12 +134,24 @@ launchers() {
       $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/mimeapps.list"
     fi
     # xfce helpers.rc WebBrowser overrides mimeapps.list for XFCE apps
-    # (and xdg-settings under an xfce session)
-    if [ -f "$UHOME/.config/xfce4/helpers.rc" ]; then
-      $SUDO sed -i 's/^WebBrowser=.*/WebBrowser=brave-browser/' \
-        "$UHOME/.config/xfce4/helpers.rc"
-      $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/xfce4/helpers.rc"
+    # and xdg-settings under an xfce session. Value must be an exo helper
+    # basename in /usr/share/xfce4/helpers/. Alias brave.desktop →
+    # brave-browser.desktop so xdg-settings get default-web-browser returns
+    # brave-browser.desktop — what Brave's self-check compares against;
+    # otherwise Brave reports "cannot determine or set the default browser".
+    if [ -f /usr/share/xfce4/helpers/brave.desktop ] &&
+      [ ! -f /usr/share/xfce4/helpers/brave-browser.desktop ]; then
+      $SUDO cp /usr/share/xfce4/helpers/brave.desktop \
+        /usr/share/xfce4/helpers/brave-browser.desktop
     fi
+    for f in "$UHOME/.config/xfce4/helpers.rc" /etc/xdg/xfce4/helpers.rc; do
+      if [ -f "$f" ]; then
+        $SUDO sed -i 's/^WebBrowser=.*/WebBrowser=brave-browser/' "$f"
+      fi
+    done
+    $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/xfce4/helpers.rc" 2>/dev/null || true
+    # WebBrowser launches are forced to Brave by ui/xfce/exo-open-wrapper
+    # (installed by install_linux_xfce) — installs run before Brave exists.
   fi
   # gvfsd-metadata may be absent; Caja/Thunar honor this xattr fallback.
   run_as python3 -c "

@@ -1,18 +1,21 @@
 #!/bin/sh
-# exo-open wrapper: route webbrowser → chromium, FileManager → thunar, else passthrough.
-# Mirrors linuxserver/webtop's exo-open wrapper behavior.
+# exo-open wrapper: route WebBrowser → Brave (chromium-wrapper until Brave
+# is installed), FileManager → thunar, else passthrough.
 case "$1" in
-  --launch|--launch-webapp)
-    case "$2" in
-      webbrowser|WebBrowser)
-        shift 2
-        exec "${HOME:-/root}/.local/bin/chromium-wrapper" "$@"
-        ;;
-      FileManager)
-        shift 2
-        exec /usr/bin/thunar "${1:-$HOME}"
-        ;;
-    esac
+--launch | --launch-webapp)
+  case "$2" in
+  webbrowser | WebBrowser)
+    shift 2
+    if [ -x /usr/bin/brave-browser ]; then
+      exec /usr/bin/brave-browser "$@"
+    fi
+    exec "$HOME/.local/bin/chromium-wrapper" "$@"
     ;;
+  FileManager)
+    shift 2
+    exec /usr/bin/thunar "${1:-$HOME}"
+    ;;
+  esac
+  ;;
 esac
 exec /usr/bin/exo-open-real "$@"
