@@ -186,6 +186,10 @@ launchers() {
       [ ! -f /usr/share/xfce4/helpers/brave-browser.desktop ]; then
       $SUDO cp /usr/share/xfce4/helpers/brave.desktop \
         /usr/share/xfce4/helpers/brave-browser.desktop
+      # %B would resolve to /usr/bin/brave (raw binary, no wrapper flags);
+      # point helper resolution at brave-wrapper in ~/.local/bin instead.
+      $SUDO sed -i 's/^X-XFCE-Binaries=.*/X-XFCE-Binaries=brave-wrapper;/' \
+        /usr/share/xfce4/helpers/brave-browser.desktop
     fi
     for f in "$UHOME/.config/xfce4/helpers.rc" /etc/xdg/xfce4/helpers.rc; do
       if [ -f "$f" ]; then
