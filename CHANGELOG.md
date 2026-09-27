@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.7](https://github.com/raas-dev/configent/compare/1.244.6...1.244.7) (2026-09-27)
+
+### Fixes
+
+* **flatpak:** remove flatpak support ([76de373](https://github.com/raas-dev/configent/commit/76de373aab96f1e38f2f7bd2cd7e828246cd8c0a))
+* **linux:** set Brave as default in XFCE helpers.rc ([f9d21df](https://github.com/raas-dev/configent/commit/f9d21df17859f93919d80aa8d989bbe12da7a866))
+
 ## [1.244.6](https://github.com/raas-dev/configent/compare/1.244.5...1.244.6) (2026-09-26)
 
 ### Fixes
