@@ -22,3 +22,9 @@ etc/agents/skills/browser-harness/agent-workspace/domain-skills/metacritic/scrap
 etc/agents/skills/browser-harness/agent-workspace/domain-skills/metacritic/scraping.md:generic-api-key:302
 etc/agents/skills/browser-harness/agent-workspace/domain-skills/metacritic/scraping.md:generic-api-key:336
 etc/agents/skills/browser-harness/src/browser_harness/telemetry.py:generic-api-key:18
+ui/brave/Default/Preferences:generic-api-key:1481
+ui/brave/Default/Preferences:generic-api-key:1583
+ui/brave/Default/Preferences:generic-api-key:1848
+ui/brave/Default/Preferences:generic-api-key:1854
+ui/brave/Default/Preferences:generic-api-key:2137
+ui/brave/Default/Preferences:generic-api-key:2138

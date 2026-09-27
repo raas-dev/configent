@@ -1,0 +1,2507 @@
+{
+  "accessibility": {
+    "captions": {
+      "headless_caption_enabled": false
+    }
+  },
+  "ack_existing_ntp_extensions": true,
+  "alternate_error_pages": {
+    "backup": false
+  },
+  "apps": {
+    "shortcuts_arch": "",
+    "shortcuts_os_version": "",
+    "shortcuts_version": 0
+  },
+  "autocomplete": {
+    "retention_policy_last_version": 154
+  },
+  "autofill": {
+    "ai_last_version_deduped": 154,
+    "autofill_ai": {
+      "opt_in_status": {}
+    },
+    "credit_card_enabled": false,
+    "last_version_deduped": 154,
+    "profile_enabled": false,
+    "sync_transport_opt_ins": {}
+  },
+  "bookmark": {
+    "storage_computation_last_update": "13435002864689827"
+  },
+  "bookmark_bar": {
+    "show_on_all_tabs": true,
+    "show_tab_groups": false
+  },
+  "bookmark_editor": {
+    "expanded_nodes": [
+      "1",
+      "1593"
+    ]
+  },
+  "brave": {
+    "accelerators": {
+      "33000": [
+        "BrowserBack",
+        "Alt+ArrowLeft",
+        "AltGr+ArrowLeft"
+      ],
+      "33001": [
+        "BrowserForward",
+        "Alt+ArrowRight",
+        "AltGr+ArrowRight"
+      ],
+      "33002": [
+        "Control+KeyR",
+        "F5",
+        "BrowserRefresh"
+      ],
+      "33003": [
+        "BrowserHome",
+        "Alt+Home"
+      ],
+      "33007": [
+        "Control+Shift+KeyR",
+        "Control+F5",
+        "Shift+F5",
+        "Control+BrowserRefresh",
+        "Shift+BrowserRefresh"
+      ],
+      "34000": [
+        "Control+KeyN"
+      ],
+      "34001": [
+        "Control+Shift+KeyN"
+      ],
+      "34012": [
+        "Control+Shift+KeyW",
+        "Alt+F4"
+      ],
+      "34014": [
+        "AppNew",
+        "Control+KeyT"
+      ],
+      "34015": [
+        "Control+KeyW",
+        "Control+F4",
+        "AppClose"
+      ],
+      "34016": [
+        "Control+PageDown"
+      ],
+      "34017": [
+        "Control+PageUp"
+      ],
+      "34018": [
+        "Control+Digit1",
+        "Control+Numpad1",
+        "Alt+Digit1",
+        "Alt+Numpad1"
+      ],
+      "34019": [
+        "Control+Digit2",
+        "Control+Numpad2",
+        "Alt+Digit2",
+        "Alt+Numpad2"
+      ],
+      "34020": [
+        "Control+Digit3",
+        "Control+Numpad3",
+        "Alt+Digit3",
+        "Alt+Numpad3"
+      ],
+      "34021": [
+        "Control+Digit4",
+        "Control+Numpad4",
+        "Alt+Digit4",
+        "Alt+Numpad4"
+      ],
+      "34022": [
+        "Control+Digit5",
+        "Control+Numpad5",
+        "Alt+Digit5",
+        "Alt+Numpad5"
+      ],
+      "34023": [
+        "Control+Digit6",
+        "Control+Numpad6",
+        "Alt+Digit6",
+        "Alt+Numpad6"
+      ],
+      "34024": [
+        "Control+Digit7",
+        "Control+Numpad7",
+        "Alt+Digit7",
+        "Alt+Numpad7"
+      ],
+      "34025": [
+        "Control+Digit8",
+        "Control+Numpad8",
+        "Alt+Digit8",
+        "Alt+Numpad8"
+      ],
+      "34026": [
+        "Control+Digit9",
+        "Control+Numpad9",
+        "Alt+Digit9",
+        "Alt+Numpad9"
+      ],
+      "34028": [
+        "Control+Shift+KeyT"
+      ],
+      "34030": [
+        "F11"
+      ],
+      "34032": [
+        "Control+Shift+PageDown"
+      ],
+      "34033": [
+        "Control+Shift+PageUp"
+      ],
+      "34057": [
+        "Control+Alt+KeyT"
+      ],
+      "34061": [
+        "Control+Shift+KeyL"
+      ],
+      "34062": [
+        "Control+Tab"
+      ],
+      "34063": [
+        "Control+Shift+Tab"
+      ],
+      "34100": [
+        "Alt+Shift+KeyC"
+      ],
+      "34101": [
+        "Alt+Shift+KeyP"
+      ],
+      "34102": [
+        "Alt+Shift+KeyX"
+      ],
+      "34103": [
+        "Alt+Shift+KeyZ"
+      ],
+      "34104": [
+        "Alt+Shift+KeyW"
+      ],
+      "35000": [
+        "Control+KeyD"
+      ],
+      "35001": [
+        "Control+Shift+KeyD"
+      ],
+      "35002": [
+        "Control+KeyU"
+      ],
+      "35003": [
+        "Control+KeyP"
+      ],
+      "35004": [
+        "Control+KeyS"
+      ],
+      "35007": [
+        "Control+Shift+KeyP"
+      ],
+      "35031": [
+        "Control+Shift+KeyS"
+      ],
+      "37000": [
+        "Control+KeyF"
+      ],
+      "37001": [
+        "Control+KeyG",
+        "F3"
+      ],
+      "37002": [
+        "Control+Shift+KeyG",
+        "Shift+F3"
+      ],
+      "37003": [
+        "Escape"
+      ],
+      "38001": [
+        "Control+Equal",
+        "Control+NumpadAdd",
+        "Control+Shift+Equal"
+      ],
+      "38002": [
+        "Control+Digit0",
+        "Control+Numpad0"
+      ],
+      "38003": [
+        "Control+Minus",
+        "Control+NumpadSubtract",
+        "Control+Shift+Minus"
+      ],
+      "39000": [
+        "Alt+Shift+KeyT"
+      ],
+      "39001": [
+        "Control+KeyL",
+        "Alt+KeyD"
+      ],
+      "39002": [
+        "BrowserSearch",
+        "Control+KeyE",
+        "Control+KeyK"
+      ],
+      "39003": [
+        "F10",
+        "AltGr",
+        "Alt"
+      ],
+      "39004": [
+        "F6"
+      ],
+      "39005": [
+        "Shift+F6"
+      ],
+      "39006": [
+        "Alt+Shift+KeyB"
+      ],
+      "39007": [
+        "Alt+Shift+KeyA"
+      ],
+      "39009": [
+        "Control+F6"
+      ],
+      "40000": [
+        "Control+KeyO"
+      ],
+      "40004": [
+        "Control+Shift+KeyI"
+      ],
+      "40005": [
+        "Control+Shift+KeyJ"
+      ],
+      "40009": [
+        "BrowserFavorites",
+        "Control+Shift+KeyB"
+      ],
+      "40010": [
+        "Control+KeyH"
+      ],
+      "40011": [
+        "Control+Shift+KeyO"
+      ],
+      "40012": [
+        "Control+KeyJ"
+      ],
+      "40013": [
+        "Control+Shift+Delete"
+      ],
+      "40019": [
+        "F1"
+      ],
+      "40021": [
+        "Alt+KeyE",
+        "Alt+KeyF"
+      ],
+      "40023": [
+        "Control+Shift+KeyC"
+      ],
+      "40134": [
+        "Control+Shift+KeyM"
+      ],
+      "40237": [
+        "F12"
+      ],
+      "40260": [
+        "F7"
+      ],
+      "40286": [
+        "Shift+Escape"
+      ],
+      "40303": [
+        "Alt+Shift+KeyR"
+      ],
+      "52500": [
+        "Control+Shift+KeyA"
+      ],
+      "56003": [
+        "Alt+Shift+KeyN"
+      ],
+      "56041": [
+        "Control+KeyM"
+      ],
+      "56044": [
+        "Control+KeyB"
+      ],
+      "56301": [
+        "Control+Space"
+      ]
+    },
+    "ad_block": {
+      "developer_mode": false
+    },
+    "ai_chat": {
+      "autocomplete_provider_enabled": false,
+      "context_menu_enabled": true,
+      "custom_models": [],
+      "default_model_key": "chat-claude-haiku",
+      "show_toolbar_button": true,
+      "storage_enabled": false,
+      "toolbar_button_opens_full_page": false,
+      "user_customization_enabled": true,
+      "user_dismissed_premium_prompt": true,
+      "user_dismissed_storage_notice": true
+    },
+    "always_show_bookmark_bar_on_ntp": false,
+    "autocomplete_enabled": true,
+    "autofill_private_windows": false,
+    "branded_wallpaper_notification_dismissed": true,
+    "brave_ads": {
+      "sponsored": {
+        "enabled": false
+      }
+    },
+    "brave_private_new_tab": {
+      "private_window_disclaimer_dismissed": true,
+      "tor_window_disclaimer_dismissed": true
+    },
+    "brave_search": {
+      "migrated-ntp-chat-from-search": true,
+      "ntp-search_prompt_enable_suggestions": false,
+      "show-ntp-chat": false,
+      "show-ntp-search": false,
+      "total_asked": 10
+    },
+    "brave_search_conversion": {
+      "dismissed": true
+    },
+    "brave_vpn": {
+      "show_button": false
+    },
+    "cosmetic_filtering_migration": true,
+    "dark_mode_migrated": true,
+    "de_amp": {
+      "enabled": false
+    },
+    "debounce": {
+      "enabled": false
+    },
+    "default_accelerators": {
+      "33000": [
+        "BrowserBack",
+        "Alt+ArrowLeft",
+        "AltGr+ArrowLeft"
+      ],
+      "33001": [
+        "BrowserForward",
+        "Alt+ArrowRight",
+        "AltGr+ArrowRight"
+      ],
+      "33002": [
+        "Control+KeyR",
+        "F5",
+        "BrowserRefresh"
+      ],
+      "33003": [
+        "BrowserHome",
+        "Alt+Home"
+      ],
+      "33007": [
+        "Control+Shift+KeyR",
+        "Control+F5",
+        "Shift+F5",
+        "Control+BrowserRefresh",
+        "Shift+BrowserRefresh"
+      ],
+      "34000": [
+        "Control+KeyN"
+      ],
+      "34001": [
+        "Control+Shift+KeyN"
+      ],
+      "34012": [
+        "Control+Shift+KeyW",
+        "Alt+F4"
+      ],
+      "34014": [
+        "AppNew",
+        "Control+KeyT"
+      ],
+      "34015": [
+        "Control+KeyW",
+        "Control+F4",
+        "AppClose"
+      ],
+      "34016": [
+        "Control+PageDown"
+      ],
+      "34017": [
+        "Control+PageUp"
+      ],
+      "34018": [
+        "Control+Digit1",
+        "Control+Numpad1",
+        "Alt+Digit1",
+        "Alt+Numpad1"
+      ],
+      "34019": [
+        "Control+Digit2",
+        "Control+Numpad2",
+        "Alt+Digit2",
+        "Alt+Numpad2"
+      ],
+      "34020": [
+        "Control+Digit3",
+        "Control+Numpad3",
+        "Alt+Digit3",
+        "Alt+Numpad3"
+      ],
+      "34021": [
+        "Control+Digit4",
+        "Control+Numpad4",
+        "Alt+Digit4",
+        "Alt+Numpad4"
+      ],
+      "34022": [
+        "Control+Digit5",
+        "Control+Numpad5",
+        "Alt+Digit5",
+        "Alt+Numpad5"
+      ],
+      "34023": [
+        "Control+Digit6",
+        "Control+Numpad6",
+        "Alt+Digit6",
+        "Alt+Numpad6"
+      ],
+      "34024": [
+        "Control+Digit7",
+        "Control+Numpad7",
+        "Alt+Digit7",
+        "Alt+Numpad7"
+      ],
+      "34025": [
+        "Control+Digit8",
+        "Control+Numpad8",
+        "Alt+Digit8",
+        "Alt+Numpad8"
+      ],
+      "34026": [
+        "Control+Digit9",
+        "Control+Numpad9",
+        "Alt+Digit9",
+        "Alt+Numpad9"
+      ],
+      "34028": [
+        "Control+Shift+KeyT"
+      ],
+      "34030": [
+        "F11"
+      ],
+      "34032": [
+        "Control+Shift+PageDown"
+      ],
+      "34033": [
+        "Control+Shift+PageUp"
+      ],
+      "34057": [
+        "Control+Alt+KeyT"
+      ],
+      "34061": [
+        "Control+Shift+KeyL"
+      ],
+      "34062": [
+        "Control+Tab"
+      ],
+      "34063": [
+        "Control+Shift+Tab"
+      ],
+      "34100": [
+        "Alt+Shift+KeyC"
+      ],
+      "34101": [
+        "Alt+Shift+KeyP"
+      ],
+      "34102": [
+        "Alt+Shift+KeyX"
+      ],
+      "34103": [
+        "Alt+Shift+KeyZ"
+      ],
+      "34104": [
+        "Alt+Shift+KeyW"
+      ],
+      "35000": [
+        "Control+KeyD"
+      ],
+      "35001": [
+        "Control+Shift+KeyD"
+      ],
+      "35002": [
+        "Control+KeyU"
+      ],
+      "35003": [
+        "Control+KeyP"
+      ],
+      "35004": [
+        "Control+KeyS"
+      ],
+      "35007": [
+        "Control+Shift+KeyP"
+      ],
+      "35031": [
+        "Control+Shift+KeyS"
+      ],
+      "37000": [
+        "Control+KeyF"
+      ],
+      "37001": [
+        "Control+KeyG",
+        "F3"
+      ],
+      "37002": [
+        "Control+Shift+KeyG",
+        "Shift+F3"
+      ],
+      "37003": [
+        "Escape"
+      ],
+      "38001": [
+        "Control+Equal",
+        "Control+NumpadAdd",
+        "Control+Shift+Equal"
+      ],
+      "38002": [
+        "Control+Digit0",
+        "Control+Numpad0"
+      ],
+      "38003": [
+        "Control+Minus",
+        "Control+NumpadSubtract",
+        "Control+Shift+Minus"
+      ],
+      "39000": [
+        "Alt+Shift+KeyT"
+      ],
+      "39001": [
+        "Control+KeyL",
+        "Alt+KeyD"
+      ],
+      "39002": [
+        "BrowserSearch",
+        "Control+KeyE",
+        "Control+KeyK"
+      ],
+      "39003": [
+        "F10",
+        "Alt",
+        "Alt",
+        "AltGr"
+      ],
+      "39004": [
+        "F6"
+      ],
+      "39005": [
+        "Shift+F6"
+      ],
+      "39006": [
+        "Alt+Shift+KeyB"
+      ],
+      "39007": [
+        "Alt+Shift+KeyA"
+      ],
+      "39009": [
+        "Control+F6"
+      ],
+      "40000": [
+        "Control+KeyO"
+      ],
+      "40004": [
+        "Control+Shift+KeyI"
+      ],
+      "40005": [
+        "Control+Shift+KeyJ"
+      ],
+      "40009": [
+        "BrowserFavorites",
+        "Control+Shift+KeyB"
+      ],
+      "40010": [
+        "Control+KeyH"
+      ],
+      "40011": [
+        "Control+Shift+KeyO"
+      ],
+      "40012": [
+        "Control+KeyJ"
+      ],
+      "40013": [
+        "Control+Shift+Delete"
+      ],
+      "40019": [
+        "F1"
+      ],
+      "40021": [
+        "Alt+KeyE",
+        "Alt+KeyF"
+      ],
+      "40023": [
+        "Control+Shift+KeyC"
+      ],
+      "40134": [
+        "Control+Shift+KeyM"
+      ],
+      "40237": [
+        "F12"
+      ],
+      "40260": [
+        "F7"
+      ],
+      "40286": [
+        "Shift+Escape"
+      ],
+      "40303": [
+        "Alt+Shift+KeyR"
+      ],
+      "52500": [
+        "Control+Shift+KeyA"
+      ],
+      "56003": [
+        "Alt+Shift+KeyN"
+      ],
+      "56041": [
+        "Control+KeyM"
+      ],
+      "56044": [
+        "Control+KeyB"
+      ],
+      "56301": [
+        "Control+Space"
+      ]
+    },
+    "default_private_search_provider_data": {
+      "alternate_urls": [],
+      "contextual_search_url": "",
+      "created_from_play_api": false,
+      "date_created": "0",
+      "doodle_url": "",
+      "enforced_by_policy": false,
+      "favicon_url": "https://cdn.search.brave.com/serp/favicon.ico",
+      "featured_by_policy": false,
+      "id": "2",
+      "image_search_branding_label": "",
+      "image_translate_source_language_param_key": "",
+      "image_translate_target_language_param_key": "",
+      "image_translate_url": "",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [
+        "UTF-8"
+      ],
+      "is_active": 0,
+      "keyword": ":br",
+      "last_modified": "13435002760252708",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "",
+      "originating_url": "",
+      "policy_origin": 0,
+      "preconnect_to_search_url": false,
+      "prefetch_likely_navigations": false,
+      "prepopulate_id": 550,
+      "safe_for_autoreplace": true,
+      "search_intent_params": [],
+      "search_url_post_params": "",
+      "send_x_geo_header": false,
+      "short_name": "Brave",
+      "starter_pack_id": 0,
+      "suggestions_url": "https://search.brave.com/api/suggest?q={searchTerms}&rich=true&rich_verticals=true&source=desktop",
+      "suggestions_url_post_params": "",
+      "synced_guid": "485bf7d3-0215-45af-87dc-538868000550",
+      "url": "https://search.brave.com/search?q={searchTerms}&source=desktop",
+      "usage_count": 0
+    },
+    "default_private_search_provider_guid": "485bf7d3-0215-45af-87dc-538868000550",
+    "email_aliases": {},
+    "enable_media_router_on_restart": false,
+    "enable_window_closing_confirm": false,
+    "fb_embed_default": false,
+    "gcm": {
+      "channel_status": false
+    },
+    "google_login_default": false,
+    "has_seen_brave_welcome_page": true,
+    "history": {
+      "retention_days": 1
+    },
+    "location_bar_is_wide": true,
+    "migrated_search_default_in_jp": true,
+    "mru_cycling_enabled": true,
+    "new_tab_page": {
+      "background": {
+        "random": false,
+        "selected_value": "#000000",
+        "type": "color"
+      },
+      "clock_format": "h24",
+      "custom_background_image_list": [
+        "background.png"
+      ],
+      "p3a_new_tabs_created_daily": [
+        {
+          "day": 1790530764.269819,
+          "value": 1.0
+        },
+        {
+          "day": 1790530730.876294,
+          "value": 1.0
+        },
+        {
+          "day": 1790530013.704115,
+          "value": 1.0
+        },
+        {
+          "day": 1790529264.874731,
+          "value": 1.0
+        }
+      ],
+      "show_background_image": true,
+      "show_brave_news": false,
+      "show_brave_today": false,
+      "show_brave_vpn": false,
+      "show_clock": true,
+      "show_rewards": false,
+      "show_stats": true,
+      "show_together": false,
+      "shows_options": 0
+    },
+    "omnibox": {
+      "bookmark_suggestions_enabled": true,
+      "commander_suggestions_enabled": false,
+      "history_suggestions_enabled": false
+    },
+    "other_bookmarks_migrated": true,
+    "rewards": {
+      "inline_tip_buttons_enabled": false,
+      "notifications": "{\"displayed\":[],\"notifications\":[]}",
+      "scheduled_captcha": {
+        "failed_attempts": 0,
+        "id": "",
+        "paused": false,
+        "payment_id": ""
+      },
+      "show_brave_rewards_button_in_location_bar": false
+    },
+    "search": {
+      "default_version": 20
+    },
+    "shields": {
+      "advanced_view_enabled": true
+    },
+    "shields_fp_settings_migration": true,
+    "shields_settings_version": 4,
+    "show_bookmarks_button": true,
+    "show_fullscreen_reminder": false,
+    "show_side_panel_button": false,
+    "sidebar": {
+      "hidden_built_in_items": [
+        1,
+        2
+      ],
+      "last_used_built_in_item_type": 7,
+      "sidebar_items": [
+        {
+          "built_in_item_type": 7,
+          "type": 0
+        },
+        {
+          "built_in_item_type": 3,
+          "type": 0
+        },
+        {
+          "built_in_item_type": 4,
+          "type": 0
+        }
+      ],
+      "sidebar_show_option": 3
+    },
+    "speedreader": {
+      "enabled_for_all_sites": false,
+      "feature_enabled": true
+    },
+    "stats": {
+      "ads_blocked": "65",
+      "bandwidth_saved_bytes": "712784",
+      "daily_saving_predictions_bytes": [
+        {
+          "day": 1790456400.0,
+          "value": 712784.0
+        }
+      ]
+    },
+    "tabs": {
+      "hover_mode": 1,
+      "mute_indicator_not_clickable": true,
+      "vertical_tabs_enabled": false,
+      "vertical_tabs_expanded_state_per_window": false,
+      "vertical_tabs_show_scrollbar": false,
+      "vertical_tabs_show_title_on_window": false
+    },
+    "today": {
+      "p3a_total_card_views": [
+        {
+          "day": 1790456400.0,
+          "value": 0.0
+        }
+      ],
+      "p3a_total_card_visits": [
+        {
+          "day": 1790456400.0,
+          "value": 0.0
+        }
+      ],
+      "p3a_total_sidebar_filter_usages": [
+        {
+          "day": 1790456400.0,
+          "value": 0.0
+        }
+      ],
+      "should_show_toolbar_button": false
+    },
+    "top_site_suggestions_enabled": false,
+    "twitter_embed_default": false,
+    "wallet": {
+      "default_base_currency": "EUR",
+      "default_solana_wallet": 1,
+      "default_wallet2": 1,
+      "hidden_networks": {
+        "ethereum": [
+          "0x5",
+          "0xaa36a7",
+          "0x4cb2f"
+        ],
+        "filecoin": [
+          "t"
+        ],
+        "solana": [
+          "0x67",
+          "0x66"
+        ]
+      },
+      "keyrings": {},
+      "localhost_networks_migrated": true,
+      "selected_networks": {
+        "ethereum": "0x1",
+        "filecoin": "f",
+        "solana": "0x65"
+      },
+      "show_wallet_icon_on_toolbar": false,
+      "user": {
+        "assets": {
+          "add_preloading_networks_migrated_2": true
+        }
+      }
+    },
+    "wayback_machine_enabled": false,
+    "web_discovery": {},
+    "web_view_rounded_corners": false,
+    "webcompat": {
+      "report": {
+        "contact_info": "",
+        "enable_save_contact_info": false
+      }
+    },
+    "weekly_storage": {
+      "search_count": [
+        {
+          "day": 1790456400.0,
+          "value": 1.0
+        }
+      ]
+    }
+  },
+  "brave_shields": {
+    "p3a_ads_allow_domain_count": 0,
+    "p3a_ads_standard_domain_count": 0,
+    "p3a_ads_strict_domain_count": 0,
+    "p3a_first_reported_revision": 4,
+    "p3a_fp_allow_domain_count": 0,
+    "p3a_fp_standard_domain_count": 0,
+    "p3a_fp_strict_domain_count": 0
+  },
+  "brave_sync_v2": {
+    "reset_devices_progress_token_time": "13435002864751062"
+  },
+  "browser": {
+    "app_window_placement": {
+      "DevToolsApp": {
+        "always_on_top": false,
+        "bottom": 740,
+        "left": 100,
+        "maximized": false,
+        "right": 740,
+        "top": 100,
+        "work_area_bottom": 982,
+        "work_area_left": 0,
+        "work_area_right": 1512,
+        "work_area_top": 38
+      }
+    },
+    "clear_data": {
+      "brave_leo": true,
+      "form_data": true,
+      "hosted_apps_data": false,
+      "passwords": true,
+      "time_period": 4
+    },
+    "custom_chrome_frame": true,
+    "enable_spellchecking": false,
+    "show_fullscreen_toolbar": true,
+    "show_home_button": true,
+    "theme": {
+      "color_scheme2": 0,
+      "is_grayscale": true
+    },
+    "window_placement": {
+      "bottom": 1324,
+      "left": 44,
+      "maximized": false,
+      "right": 1758,
+      "top": 33,
+      "work_area_bottom": 1324,
+      "work_area_left": 0,
+      "work_area_right": 2146,
+      "work_area_top": 33
+    },
+    "window_placement_popup": {
+      "bottom": 2060,
+      "left": -313,
+      "maximized": false,
+      "right": -13,
+      "top": 1670,
+      "work_area_bottom": 2073,
+      "work_area_left": -3440,
+      "work_area_right": 0,
+      "work_area_top": 633
+    }
+  },
+  "chrome": {
+    "prefetch_proxy": {
+      "origin_decider": {
+        "retry_after": {}
+      }
+    }
+  },
+  "colorpicker": {},
+  "commerce_daily_metrics_last_update_time": "13435002864691446",
+  "countryid_at_install": 17993,
+  "credentials_enable_autosignin": false,
+  "credentials_enable_service": false,
+  "default_apps_install_state": 2,
+  "default_search_provider": {
+    "choice_screen_completion_program": 3,
+    "choice_screen_completion_timestamp": "13435003448",
+    "choice_screen_completion_version": "154.1.96.59",
+    "guid": "4dbcf3f7-1ea2-4c41-9a2e-fbc4dc89f05a",
+    "reset_occurred": false
+  },
+  "default_search_provider_data": {
+    "mirrored_template_url_data": {
+      "alternate_urls": [],
+      "contextual_search_url": "",
+      "created_from_play_api": false,
+      "date_created": "13435003436741420",
+      "doodle_url": "",
+      "enforced_by_policy": false,
+      "favicon_url": "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico",
+      "featured_by_policy": false,
+      "id": "13",
+      "image_search_branding_label": "",
+      "image_translate_source_language_param_key": "",
+      "image_translate_target_language_param_key": "",
+      "image_translate_url": "",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [],
+      "is_active": 1,
+      "keyword": ":a",
+      "last_modified": "13435003436741420",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "",
+      "originating_url": "",
+      "policy_origin": 0,
+      "preconnect_to_search_url": false,
+      "prefetch_likely_navigations": false,
+      "prepopulate_id": 0,
+      "safe_for_autoreplace": false,
+      "search_intent_params": [],
+      "search_url_post_params": "",
+      "send_x_geo_header": false,
+      "short_name": "google-ai",
+      "starter_pack_id": 0,
+      "suggestions_url": "",
+      "suggestions_url_post_params": "",
+      "synced_guid": "4dbcf3f7-1ea2-4c41-9a2e-fbc4dc89f05a",
+      "url": "{google:baseURL}search?q={searchTerms}&udm=50&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:prefetchSource}{google:searchClient}{google:sourceId}{google:contextualSearchVersion}ie={inputEncoding}&hl=en&gl=fi",
+      "usage_count": 0
+    },
+    "template_url_data": {
+      "alternate_urls": [],
+      "contextual_search_url": "",
+      "created_from_play_api": false,
+      "date_created": "13435003436741420",
+      "doodle_url": "",
+      "enforced_by_policy": false,
+      "favicon_url": "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico",
+      "featured_by_policy": false,
+      "id": "13",
+      "image_search_branding_label": "",
+      "image_translate_source_language_param_key": "",
+      "image_translate_target_language_param_key": "",
+      "image_translate_url": "",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [],
+      "is_active": 1,
+      "keyword": ":a",
+      "last_modified": "13435003436741420",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "",
+      "originating_url": "",
+      "policy_origin": 0,
+      "preconnect_to_search_url": false,
+      "prefetch_likely_navigations": false,
+      "prepopulate_id": 0,
+      "safe_for_autoreplace": false,
+      "search_intent_params": [],
+      "search_url_post_params": "",
+      "send_x_geo_header": false,
+      "short_name": "google-ai",
+      "starter_pack_id": 0,
+      "suggestions_url": "",
+      "suggestions_url_post_params": "",
+      "synced_guid": "4dbcf3f7-1ea2-4c41-9a2e-fbc4dc89f05a",
+      "url": "{google:baseURL}search?q={searchTerms}&udm=50&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:prefetchSource}{google:searchClient}{google:sourceId}{google:contextualSearchVersion}ie={inputEncoding}&hl=en&gl=fi",
+      "usage_count": 0
+    }
+  },
+  "devtools": {
+    "port_forwarding_config": {
+      "8080": "localhost:8080"
+    },
+    "port_forwarding_default_set": true,
+    "preferences": {
+      "active-network-condition-key": "\"NO_THROTTLING\"",
+      "closeable-tabs": "{\"security\":true,\"freestyler\":true,\"chrome-recorder\":false,\"chrome_recorder\":true,\"issues-pane\":false,\"release-note\":true}",
+      "color-format": "\"original\"",
+      "console-show-settings-toolbar": "false",
+      "console.sidebar-selected-filter": "\"message\"",
+      "console.sidebar.width": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "cookie-items-split-view-state": "{\"horizontal\":{\"size\":41.41014099121094}}",
+      "currentDockState": "\"right\"",
+      "drawer-view-selected-tab": "\"release-note\"",
+      "drawer-view-tab-order": "{\"release-note\":10,\"console-view\":20,\"issues-pane\":1}",
+      "elements-panel-split-view-state": "{\"vertical\":{\"size\":322.9296875}}",
+      "elements.styles.sidebar.width": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "emulation.auto-adjust-scale": "false",
+      "emulation.device-mode-value": "{\"device\":\"iPhone 15 Pro Max\",\"orientation\":\"vertical\",\"mode\":\"default\"}",
+      "emulation.device-scale": "1",
+      "emulation.device-width": "1311",
+      "emulation.show-device-mode": "true",
+      "emulation.show-device-outline": "false",
+      "inspector-view.split-view-state": "{\"vertical\":{\"size\":661.4999389648438},\"horizontal\":{\"size\":417.03128814697266}}",
+      "inspector.drawer-split-view-state": "{\"horizontal\":{\"size\":556.6329193115234,\"showMode\":\"Both\"},\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "inspectorVersion": "46",
+      "last-dock-state": "\"bottom\"",
+      "navigator-view-selected-tab": "\"navigator-network\"",
+      "network-log.preserve-log": "false",
+      "network-panel-sidebar-state": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "network-panel-split-view-state": "{\"vertical\":{\"size\":664.8867225646973}}",
+      "network-panel-split-view-waterfall": "{\"vertical\":{\"size\":0}}",
+      "network-resource-type-filters": "{\"JavaScript\":true}",
+      "network-show-settings-toolbar": "false",
+      "network-text-filter": "\"\"",
+      "panel-selected-tab": "\"resources\"",
+      "panel-tab-order": "{\"elements\":10,\"console\":20,\"sources\":30,\"network\":40,\"timeline\":50,\"heap-profiler\":60,\"resources\":70,\"security\":80,\"lighthouse\":90}",
+      "recorder-aria-selector-enabled": "true",
+      "recorder-css-selector-enabled": "true",
+      "recorder-pierce-selector-enabled": "true",
+      "recorder-preferred-copy-format": "\"extension_0\"",
+      "recorder-recordings-ng": "[]",
+      "recorder-screenshots": "[]",
+      "recorder-selector-attribute": "\"\"",
+      "recorder-text-selector-enabled": "true",
+      "recorder-xpath-selector-enabled": "true",
+      "releaseNoteVersionSeen": "151",
+      "request-info-form-data-category-expanded": "true",
+      "request-info-general-category-expanded": "true",
+      "request-info-query-string-category-expanded": "true",
+      "request-info-request-headers-category-expanded": "true",
+      "request-info-request-payload-category-expanded": "true",
+      "request-info-response-headers-category-expanded": "true",
+      "resource-view-tab": "\"response\"",
+      "resources-cookies-expanded": "true",
+      "resources-image-expanded": "true",
+      "resources-last-selected-element-path": "[\"category://Local storage\"]",
+      "resources-local-storage-expanded": "false",
+      "resources-panel-split-view-state": "{\"vertical\":{\"size\":260.41797637939453}}",
+      "resources-session-storage-expanded": "true",
+      "resources-shared-storage-expanded": "false",
+      "security-last-selected-element-path": "\"overview\"",
+      "selected-profile-type": "\"HEAP\"",
+      "show-third-party-issues": "true",
+      "sources-panel-navigator-split-view-state": "{\"vertical\":{\"size\":0,\"showMode\":\"Both\"}}",
+      "sources-panel-split-view-state": "{\"vertical\":{\"size\":0,\"showMode\":\"Both\"},\"horizontal\":{\"size\":0,\"showMode\":\"Both\"}}",
+      "standard-emulated-device-list": "[{\"title\":\"iPhone SE\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":375,\"height\":667},\"horizontal\":{\"width\":667,\"height\":375}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone XR\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":414,\"height\":896},\"horizontal\":{\"width\":896,\"height\":414}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 12 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":390,\"height\":844},\"horizontal\":{\"width\":844,\"height\":390}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 14\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":390,\"height\":844},\"horizontal\":{\"width\":844,\"height\":390}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 14 Plus\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":428,\"height\":926},\"horizontal\":{\"width\":926,\"height\":428}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 14 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":393,\"height\":852},\"horizontal\":{\"width\":852,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 14 Pro Max\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":430,\"height\":932},\"horizontal\":{\"width\":932,\"height\":430}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 15\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":393,\"height\":852},\"horizontal\":{\"width\":852,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 15 Plus\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":430,\"height\":932},\"horizontal\":{\"width\":932,\"height\":430}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 15 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":393,\"height\":852},\"horizontal\":{\"width\":852,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 15 Pro Max\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":430,\"height\":932},\"horizontal\":{\"width\":932,\"height\":430}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 16e\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":390,\"height\":844},\"horizontal\":{\"width\":844,\"height\":390}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 16\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":393,\"height\":852},\"horizontal\":{\"width\":852,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 16 Plus\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":430,\"height\":932},\"horizontal\":{\"width\":932,\"height\":430}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 16 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":402,\"height\":874},\"horizontal\":{\"width\":874,\"height\":402}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 16 Pro Max\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":440,\"height\":956},\"horizontal\":{\"width\":956,\"height\":440}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"Pixel 3 XL\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 11; Pixel 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.75,\"vertical\":{\"width\":393,\"height\":786},\"horizontal\":{\"width\":786,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"11\",\"architecture\":\"\",\"model\":\"Pixel 3\",\"mobile\":true}},{\"title\":\"Pixel 7\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":915},\"horizontal\":{\"width\":915,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"13\",\"architecture\":\"\",\"model\":\"Pixel 7\",\"mobile\":true}},{\"title\":\"Pixel 8\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":915},\"horizontal\":{\"width\":915,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 8\",\"mobile\":true}},{\"title\":\"Pixel 8 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":448,\"height\":997},\"horizontal\":{\"width\":997,\"height\":448}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 8 Pro\",\"mobile\":true}},{\"title\":\"Pixel 8a\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 8a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":915},\"horizontal\":{\"width\":915,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 8a\",\"mobile\":true}},{\"title\":\"Pixel 9\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":924},\"horizontal\":{\"width\":924,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 9\",\"mobile\":true}},{\"title\":\"Pixel 9 Pro\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":427,\"height\":952},\"horizontal\":{\"width\":952,\"height\":427}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 9 Pro\",\"mobile\":true}},{\"title\":\"Pixel 9 Pro XL\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 14; Pixel 9 Pro XL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":448,\"height\":997},\"horizontal\":{\"width\":997,\"height\":448}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"14\",\"architecture\":\"\",\"model\":\"Pixel 9 Pro XL\",\"mobile\":true}},{\"title\":\"Pixel 10\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":924},\"horizontal\":{\"width\":924,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"16\",\"architecture\":\"\",\"model\":\"Pixel 10\",\"mobile\":true}},{\"title\":\"Samsung Galaxy S8+\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":4,\"vertical\":{\"width\":360,\"height\":740},\"horizontal\":{\"width\":740,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"SM-G955U\",\"mobile\":true}},{\"title\":\"Samsung Galaxy S20 Ultra\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 13; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3.5,\"vertical\":{\"width\":412,\"height\":915},\"horizontal\":{\"width\":915,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"13\",\"architecture\":\"\",\"model\":\"SM-G981B\",\"mobile\":true}},{\"title\":\"iPad Mini\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (iPad; CPU OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":768,\"height\":1024},\"horizontal\":{\"width\":1024,\"height\":768}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPad\",\"mobile\":true}},{\"title\":\"iPad Air\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":820,\"height\":1180},\"horizontal\":{\"width\":1180,\"height\":820}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPad\",\"mobile\":true}},{\"title\":\"iPad Pro\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":1024,\"height\":1366},\"horizontal\":{\"width\":1366,\"height\":1024}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"18.5\",\"architecture\":\"\",\"model\":\"iPad\",\"mobile\":true}},{\"title\":\"Surface Pro 7\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":912,\"height\":1368},\"horizontal\":{\"width\":1368,\"height\":912}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Surface Duo\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 11.0; Surface Duo) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.5,\"vertical\":{\"width\":540,\"height\":720},\"horizontal\":{\"width\":720,\"height\":540},\"vertical-spanned\":{\"width\":1114,\"height\":720,\"hinge\":{\"width\":34,\"height\":720,\"x\":540,\"y\":0,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":1}}},\"horizontal-spanned\":{\"width\":720,\"height\":1114,\"hinge\":{\"width\":720,\"height\":34,\"x\":0,\"y\":540,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":1}}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"vertical-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"horizontal-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":true,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"11.0\",\"architecture\":\"\",\"model\":\"Surface Duo\",\"mobile\":true}},{\"title\":\"Galaxy Z Fold 5\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":344,\"height\":882},\"horizontal\":{\"width\":882,\"height\":344},\"vertical-spanned\":{\"width\":690,\"height\":829,\"hinge\":{\"width\":0,\"height\":829,\"x\":345,\"y\":0,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.2},\"outlineColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.7}}},\"horizontal-spanned\":{\"width\":829,\"height\":690,\"hinge\":{\"width\":829,\"height\":0,\"x\":0,\"y\":345,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.2},\"outlineColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.7}}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"vertical-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"horizontal-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":true,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"10.0\",\"architecture\":\"\",\"model\":\"SM-F946U\",\"mobile\":true}},{\"title\":\"Asus Zenbook Fold\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36\",\"capabilities\":[\"touch\"],\"screen\":{\"device-pixel-ratio\":1.5,\"vertical\":{\"width\":853,\"height\":1280},\"horizontal\":{\"width\":1280,\"height\":853},\"vertical-spanned\":{\"width\":1706,\"height\":1280,\"hinge\":{\"width\":107,\"height\":1280,\"x\":800,\"y\":0,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.2},\"outlineColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.7}}},\"horizontal-spanned\":{\"width\":1280,\"height\":1706,\"hinge\":{\"width\":1706,\"height\":107,\"x\":0,\"y\":800,\"contentColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.2},\"outlineColor\":{\"r\":38,\"g\":38,\"b\":38,\"a\":0.7}}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"vertical-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"spanned\",\"orientation\":\"horizontal-spanned\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":true,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Windows\",\"platformVersion\":\"11.0\",\"architecture\":\"\",\"model\":\"UX9702AA\",\"mobile\":false}},{\"title\":\"Samsung Galaxy A51/71\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":914},\"horizontal\":{\"width\":914,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"SM-G955U\",\"mobile\":true}},{\"title\":\"Nest Hub Max\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 CrKey/1.54.250320\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":1280,\"height\":800},\"horizontal\":{\"width\":1280,\"height\":800,\"outline\":{\"insets\":{\"left\":92,\"top\":96,\"right\":91,\"bottom\":248},\"image\":\"@url(optimized/google-nest-hub-max-horizontal.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Nest Hub\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 CrKey/1.54.248666\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":1024,\"height\":600},\"horizontal\":{\"width\":1024,\"height\":600,\"outline\":{\"insets\":{\"left\":82,\"top\":74,\"right\":83,\"bottom\":222},\"image\":\"@url(optimized/google-nest-hub-horizontal.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":true,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"\",\"architecture\":\"\",\"model\":\"\",\"mobile\":false}},{\"title\":\"iPhone 4\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":320,\"height\":480},\"horizontal\":{\"width\":480,\"height\":320}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"7.1.2\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 5/SE\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":320,\"height\":568,\"outline\":{\"insets\":{\"left\":29,\"top\":105,\"right\":25,\"bottom\":111},\"image\":\"@url(optimized/iPhone5-portrait.avif)\"}},\"horizontal\":{\"width\":568,\"height\":320,\"outline\":{\"insets\":{\"left\":115,\"top\":25,\"right\":115,\"bottom\":28},\"image\":\"@url(optimized/iPhone5-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"10.3.1\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 6/7/8\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":375,\"height\":667,\"outline\":{\"insets\":{\"left\":28,\"top\":105,\"right\":28,\"bottom\":105},\"image\":\"@url(optimized/iPhone6-portrait.avif)\"}},\"horizontal\":{\"width\":667,\"height\":375,\"outline\":{\"insets\":{\"left\":106,\"top\":28,\"right\":106,\"bottom\":28},\"image\":\"@url(optimized/iPhone6-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"13.2.3\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone 6/7/8 Plus\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":414,\"height\":736,\"outline\":{\"insets\":{\"left\":26,\"top\":107,\"right\":30,\"bottom\":111},\"image\":\"@url(optimized/iPhone6Plus-portrait.avif)\"}},\"horizontal\":{\"width\":736,\"height\":414,\"outline\":{\"insets\":{\"left\":109,\"top\":29,\"right\":109,\"bottom\":27},\"image\":\"@url(optimized/iPhone6Plus-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"13.2.3\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"iPhone X\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":375,\"height\":812},\"horizontal\":{\"width\":812,\"height\":375}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"13.2.3\",\"architecture\":\"\",\"model\":\"iPhone\",\"mobile\":true}},{\"title\":\"BlackBerry Z30\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (BB10; Touch) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.0.9.2372 Mobile Safari/537.10+\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Nexus 4\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":384,\"height\":640},\"horizontal\":{\"width\":640,\"height\":384}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.4.2\",\"architecture\":\"\",\"model\":\"Nexus 4\",\"mobile\":true}},{\"title\":\"Nexus 5\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":25,\"right\":0,\"bottom\":48},\"image\":\"@url(optimized/google-nexus-5-vertical-default-1x.avif) 1x, @url(optimized/google-nexus-5-vertical-default-2x.avif) 2x\"},{\"title\":\"navigation bar\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":80,\"right\":0,\"bottom\":48},\"image\":\"@url(optimized/google-nexus-5-vertical-navigation-1x.avif) 1x, @url(optimized/google-nexus-5-vertical-navigation-2x.avif) 2x\"},{\"title\":\"keyboard\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":80,\"right\":0,\"bottom\":312},\"image\":\"@url(optimized/google-nexus-5-vertical-keyboard-1x.avif) 1x, @url(optimized/google-nexus-5-vertical-keyboard-2x.avif) 2x\"},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":25,\"right\":42,\"bottom\":0},\"image\":\"@url(optimized/google-nexus-5-horizontal-default-1x.avif) 1x, @url(optimized/google-nexus-5-horizontal-default-2x.avif) 2x\"},{\"title\":\"navigation bar\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":80,\"right\":42,\"bottom\":0},\"image\":\"@url(optimized/google-nexus-5-horizontal-navigation-1x.avif) 1x, @url(optimized/google-nexus-5-horizontal-navigation-2x.avif) 2x\"},{\"title\":\"keyboard\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":80,\"right\":42,\"bottom\":202},\"image\":\"@url(optimized/google-nexus-5-horizontal-keyboard-1x.avif) 1x, @url(optimized/google-nexus-5-horizontal-keyboard-2x.avif) 2x\"}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"6.0\",\"architecture\":\"\",\"model\":\"Nexus 5\",\"mobile\":true}},{\"title\":\"Nexus 5X\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; Nexus 5X Build/OPR4.170623.006) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":412,\"height\":732,\"outline\":{\"insets\":{\"left\":18,\"top\":88,\"right\":22,\"bottom\":98},\"image\":\"@url(optimized/Nexus5X-portrait.avif)\"}},\"horizontal\":{\"width\":732,\"height\":412,\"outline\":{\"insets\":{\"left\":88,\"top\":21,\"right\":98,\"bottom\":19},\"image\":\"@url(optimized/Nexus5X-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":24,\"right\":0,\"bottom\":48},\"image\":\"@url(optimized/google-nexus-5x-vertical-default-1x.avif) 1x, @url(optimized/google-nexus-5x-vertical-default-2x.avif) 2x\"},{\"title\":\"navigation bar\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":80,\"right\":0,\"bottom\":48},\"image\":\"@url(optimized/google-nexus-5x-vertical-navigation-1x.avif) 1x, @url(optimized/google-nexus-5x-vertical-navigation-2x.avif) 2x\"},{\"title\":\"keyboard\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":80,\"right\":0,\"bottom\":342},\"image\":\"@url(optimized/google-nexus-5x-vertical-keyboard-1x.avif) 1x, @url(optimized/google-nexus-5x-vertical-keyboard-2x.avif) 2x\"},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":24,\"right\":48,\"bottom\":0},\"image\":\"@url(optimized/google-nexus-5x-horizontal-default-1x.avif) 1x, @url(optimized/google-nexus-5x-horizontal-default-2x.avif) 2x\"},{\"title\":\"navigation bar\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":80,\"right\":48,\"bottom\":0},\"image\":\"@url(optimized/google-nexus-5x-horizontal-navigation-1x.avif) 1x, @url(optimized/google-nexus-5x-horizontal-navigation-2x.avif) 2x\"},{\"title\":\"keyboard\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":80,\"right\":48,\"bottom\":222},\"image\":\"@url(optimized/google-nexus-5x-horizontal-keyboard-1x.avif) 1x, @url(optimized/google-nexus-5x-horizontal-keyboard-2x.avif) 2x\"}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"Nexus 5X\",\"mobile\":true}},{\"title\":\"Nexus 6\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 7.1.1; Nexus 6 Build/N6F26U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3.5,\"vertical\":{\"width\":412,\"height\":732},\"horizontal\":{\"width\":732,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"7.1.1\",\"architecture\":\"\",\"model\":\"Nexus 6\",\"mobile\":true}},{\"title\":\"Nexus 6P\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; Nexus 6P Build/OPP3.170518.006) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3.5,\"vertical\":{\"width\":412,\"height\":732,\"outline\":{\"insets\":{\"left\":16,\"top\":94,\"right\":16,\"bottom\":88},\"image\":\"@url(optimized/Nexus6P-portrait.avif)\"}},\"horizontal\":{\"width\":732,\"height\":412,\"outline\":{\"insets\":{\"left\":94,\"top\":17,\"right\":88,\"bottom\":17},\"image\":\"@url(optimized/Nexus6P-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"Nexus 6P\",\"mobile\":true}},{\"title\":\"Pixel 2\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.625,\"vertical\":{\"width\":411,\"height\":731},\"horizontal\":{\"width\":731,\"height\":411}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0\",\"architecture\":\"\",\"model\":\"Pixel 2\",\"mobile\":true}},{\"title\":\"Pixel 2 XL\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3.5,\"vertical\":{\"width\":411,\"height\":823},\"horizontal\":{\"width\":823,\"height\":411}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"Pixel 2 XL\",\"mobile\":true}},{\"title\":\"Pixel 3\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 9; Pixel 3 Build/PQ1A.181105.017.A1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.75,\"vertical\":{\"width\":393,\"height\":786},\"horizontal\":{\"width\":786,\"height\":393}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"9\",\"architecture\":\"\",\"model\":\"Pixel 3\",\"mobile\":true}},{\"title\":\"Pixel 4\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":353,\"height\":745},\"horizontal\":{\"width\":745,\"height\":353}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"10\",\"architecture\":\"\",\"model\":\"Pixel 4\",\"mobile\":true}},{\"title\":\"LG Optimus L70\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; LGMS323 Build/KOT49I.MS32310c) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1.25,\"vertical\":{\"width\":384,\"height\":640},\"horizontal\":{\"width\":640,\"height\":384}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.4.2\",\"architecture\":\"\",\"model\":\"LGMS323\",\"mobile\":true}},{\"title\":\"Nokia N9\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1,\"vertical\":{\"width\":480,\"height\":854},\"horizontal\":{\"width\":854,\"height\":480}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Nokia Lumia 520\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 520)\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1.5,\"vertical\":{\"width\":320,\"height\":533},\"horizontal\":{\"width\":533,\"height\":320}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Microsoft Lumia 550\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 550) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 Edge/14.14263\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":640,\"height\":360},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.2.1\",\"architecture\":\"\",\"model\":\"Lumia 550\",\"mobile\":true}},{\"title\":\"Microsoft Lumia 950\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 950) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 Edge/14.14263\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":4,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.2.1\",\"architecture\":\"\",\"model\":\"Lumia 950\",\"mobile\":true}},{\"title\":\"Galaxy S III\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; U; Android 4.0; en-us; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.0\",\"architecture\":\"\",\"model\":\"GT-I9300\",\"mobile\":true}},{\"title\":\"Galaxy S5\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"5.0\",\"architecture\":\"\",\"model\":\"SM-G900P\",\"mobile\":true}},{\"title\":\"Galaxy S8\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 7.0; SM-G950U Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":360,\"height\":740},\"horizontal\":{\"width\":740,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"7.0\",\"architecture\":\"\",\"model\":\"SM-G950U\",\"mobile\":true}},{\"title\":\"Galaxy S9+\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.0.0; SM-G965U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":4.5,\"vertical\":{\"width\":320,\"height\":658},\"horizontal\":{\"width\":658,\"height\":320}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.0.0\",\"architecture\":\"\",\"model\":\"SM-G965U\",\"mobile\":true}},{\"title\":\"Galaxy Tab S4\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 8.1.0; SM-T837A) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2.25,\"vertical\":{\"width\":712,\"height\":1138},\"horizontal\":{\"width\":1138,\"height\":712}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"8.1.0\",\"architecture\":\"\",\"model\":\"SM-T837A\",\"mobile\":false}},{\"title\":\"JioPhone 2\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Mobile; LYF/F300B/LYF-F300B-001-01-15-130718-i;Android; rv:48.0) Gecko/48.0 Firefox/48.0 KAIOS/2.5\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1,\"vertical\":{\"width\":240,\"height\":320},\"horizontal\":{\"width\":320,\"height\":240}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"\",\"architecture\":\"\",\"model\":\"LYF/F300B/LYF-F300B-001-01-15-130718-i\",\"mobile\":true}},{\"title\":\"Kindle Fire HDX\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Linux; U; en-us; KFAPWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.13 Safari/535.19 Silk-Accelerated=true\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":800,\"height\":1280},\"horizontal\":{\"width\":1280,\"height\":800}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"iPad\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":768,\"height\":1024,\"outline\":{\"insets\":{\"left\":52,\"top\":114,\"right\":55,\"bottom\":114},\"image\":\"@url(optimized/iPad-portrait.avif)\"}},\"horizontal\":{\"width\":1024,\"height\":768,\"outline\":{\"insets\":{\"left\":112,\"top\":56,\"right\":116,\"bottom\":52},\"image\":\"@url(optimized/iPad-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"11.0\",\"architecture\":\"\",\"model\":\"iPad\",\"mobile\":true}},{\"title\":\"iPad Pro\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":1024,\"height\":1366},\"horizontal\":{\"width\":1366,\"height\":1024}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"iOS\",\"platformVersion\":\"11.0\",\"architecture\":\"\",\"model\":\"iPad\",\"mobile\":true}},{\"title\":\"Blackberry PlayBook\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.1.0; en-US) AppleWebKit/536.2+ (KHTML like Gecko) Version/7.2.1.0 Safari/536.2+\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1,\"vertical\":{\"width\":600,\"height\":1024},\"horizontal\":{\"width\":1024,\"height\":600}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\"},{\"title\":\"Nexus 10\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 6.0.1; Nexus 10 Build/MOB31T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":800,\"height\":1280},\"horizontal\":{\"width\":1280,\"height\":800}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"6.0.1\",\"architecture\":\"\",\"model\":\"Nexus 10\",\"mobile\":false}},{\"title\":\"Nexus 7\",\"type\":\"tablet\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 6.0.1; Nexus 7 Build/MOB30X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":600,\"height\":960},\"horizontal\":{\"width\":960,\"height\":600}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"6.0.1\",\"architecture\":\"\",\"model\":\"Nexus 7\",\"mobile\":false}},{\"title\":\"Galaxy Note 3\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; U; Android 4.3; en-us; SM-N900T Build/JSS15J) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.3\",\"architecture\":\"\",\"model\":\"SM-N900T\",\"mobile\":true}},{\"title\":\"Galaxy Note II\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; U; Android 4.1; en-us; GT-N7100 Build/JRO03C) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":2,\"vertical\":{\"width\":360,\"height\":640},\"horizontal\":{\"width\":640,\"height\":360}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"4.1\",\"architecture\":\"\",\"model\":\"GT-N7100\",\"mobile\":true}},{\"title\":\"Moto G4\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3,\"vertical\":{\"width\":360,\"height\":640,\"outline\":{\"insets\":{\"left\":30,\"top\":91,\"right\":30,\"bottom\":74},\"image\":\"@url(optimized/MotoG4-portrait.avif)\"}},\"horizontal\":{\"width\":640,\"height\":360,\"outline\":{\"insets\":{\"left\":91,\"top\":30,\"right\":74,\"bottom\":30},\"image\":\"@url(optimized/MotoG4-landscape.avif)\"}}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"6.0.1\",\"architecture\":\"\",\"model\":\"Moto G (4)\",\"mobile\":true}},{\"title\":\"Moto G Power\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":1.75,\"vertical\":{\"width\":412,\"height\":823},\"horizontal\":{\"width\":823,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"11\",\"architecture\":\"\",\"model\":\"moto g power (2022)\",\"mobile\":true}},{\"title\":\"Facebook on Android\",\"type\":\"phone\",\"user-agent\":\"Mozilla/5.0 (Linux; Android 12; Pixel 6 Build/SQ3A.220705.004; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/151.0.0.0 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/407.0.0.0.65;]\",\"capabilities\":[\"touch\",\"mobile\"],\"screen\":{\"device-pixel-ratio\":3.5,\"vertical\":{\"width\":412,\"height\":892},\"horizontal\":{\"width\":892,\"height\":412}},\"modes\":[{\"title\":\"default\",\"orientation\":\"vertical\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}},{\"title\":\"default\",\"orientation\":\"horizontal\",\"insets\":{\"left\":0,\"top\":0,\"right\":0,\"bottom\":0}}],\"show-by-default\":false,\"dual-screen\":false,\"foldable-screen\":false,\"show\":\"Default\",\"user-agent-metadata\":{\"platform\":\"Android\",\"platformVersion\":\"12\",\"architecture\":\"\",\"model\":\"Pixel 6\",\"mobile\":true}}]",
+      "styles-pane-sidebar-selected-tab": "\"computed\"",
+      "styles-pane-sidebar-tab-order": "{\"styles\":10,\"computed\":20}",
+      "timeline-counters-split-view-state": "{\"horizontal\":{\"size\":0}}",
+      "timeline-flamechart-main-and-vitals-view": "{\"horizontal\":{\"size\":0}}",
+      "timeline-flamechart-main-view": "{\"horizontal\":{\"size\":42.5}}",
+      "timeline-panel-sidebar-state": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "timeline-start-coverage": "false",
+      "timeline-tree-view-details-split-widget": "{\"vertical\":{\"size\":0}}",
+      "timeline-user-has-opened-siderbar-once": "true",
+      "undefined-tab-order": "{\"sources.scope-chain\":10,\"sources.watch\":20}"
+    },
+    "sync_preferences": true,
+    "synced_preferences_sync_disabled": {},
+    "synced_preferences_sync_enabled": {
+      "adorner-settings": "[{\"adorner\":\"grid\",\"isEnabled\":true},{\"adorner\":\"flex\",\"isEnabled\":true},{\"adorner\":\"ad\",\"isEnabled\":true},{\"adorner\":\"scroll-snap\",\"isEnabled\":true},{\"adorner\":\"container\",\"isEnabled\":true},{\"adorner\":\"slot\",\"isEnabled\":true},{\"adorner\":\"top-layer\",\"isEnabled\":true},{\"adorner\":\"reveal\",\"isEnabled\":true},{\"adorner\":\"subgrid\",\"isEnabled\":true},{\"adorner\":\"media\",\"isEnabled\":false},{\"adorner\":\"scroll\",\"isEnabled\":true},{\"adorner\":\"popover\",\"isEnabled\":true},{\"adorner\":\"starting-style\",\"isEnabled\":true},{\"adorner\":\"grid-lanes\",\"isEnabled\":true},{\"adorner\":\"view-source\",\"isEnabled\":true}]",
+      "emulation.locations": "[{\"title\":\"Berlin\",\"lat\":52.520007,\"long\":13.404954,\"timezoneId\":\"Europe/Berlin\",\"locale\":\"de-DE\"},{\"title\":\"London\",\"lat\":51.507351,\"long\":-0.127758,\"timezoneId\":\"Europe/London\",\"locale\":\"en-GB\"},{\"title\":\"Moscow\",\"lat\":55.755826,\"long\":37.6173,\"timezoneId\":\"Europe/Moscow\",\"locale\":\"ru-RU\"},{\"title\":\"Mountain View\",\"lat\":37.386052,\"long\":-122.083851,\"timezoneId\":\"America/Los_Angeles\",\"locale\":\"en-US\"},{\"title\":\"Mumbai\",\"lat\":19.075984,\"long\":72.877656,\"timezoneId\":\"Asia/Kolkata\",\"locale\":\"mr-IN\"},{\"title\":\"San Francisco\",\"lat\":37.774929,\"long\":-122.419416,\"timezoneId\":\"America/Los_Angeles\",\"locale\":\"en-US\"},{\"title\":\"Shanghai\",\"lat\":31.230416,\"long\":121.473701,\"timezoneId\":\"Asia/Shanghai\",\"locale\":\"zh-Hans-CN\"},{\"title\":\"São Paulo\",\"lat\":-23.55052,\"long\":-46.633309,\"timezoneId\":\"America/Sao_Paulo\",\"locale\":\"pt-BR\"},{\"title\":\"Tokyo\",\"lat\":35.689487,\"long\":139.691706,\"timezoneId\":\"Asia/Tokyo\",\"locale\":\"ja-JP\"}]",
+      "lighthouse.device-type": "\"mobile\"",
+      "syncedInspectorVersion": "46"
+    },
+    "tcp_discovery_config": [
+      "localhost:9222",
+      "localhost:9229"
+    ]
+  },
+  "domain_diversity": {
+    "last_reporting_timestamp": "13435002864691502",
+    "last_reporting_timestamp_v4": "13435002864691509"
+  },
+  "download": {},
+  "download_bubble": {
+    "partial_view_enabled": false
+  },
+  "dual_layer_user_pref_store": {
+    "user_selected_sync_types": []
+  },
+  "enterprise": {
+    "promotion_eligibility": 0
+  },
+  "enterprise_profile_guid": "e24e879f-ac8e-49ba-88f9-c7d3a30355a2",
+  "ephemeral_storage": {
+    "first_party_storage_origins_to_cleanup": []
+  },
+  "extensions": {
+    "alerts": {
+      "initialized": true
+    },
+    "chrome_url_overrides": {
+      "newtab": []
+    },
+    "commands": {
+      "linux:Ctrl+Shift+9": {
+        "command_name": "generate_password",
+        "extension": "jkjpmmpddpjaopeknfcnohfgohkbmmje",
+        "global": false
+      },
+      "linux:Ctrl+Shift+U": {
+        "command_name": "_execute_action",
+        "extension": "jkjpmmpddpjaopeknfcnohfgohkbmmje",
+        "global": false
+      }
+    },
+    "enterprise_promotion": {},
+    "last_chrome_version": "154.1.96.59",
+    "pinned_extensions": [
+      "jkjpmmpddpjaopeknfcnohfgohkbmmje"
+    ],
+    "settings": {
+      "gjmjochjlobdmjlaaphajfhnkggkedld": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "notifications",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "declarativeNetRequestWithHostAccess"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "commands": {
+          "_execute_action": {
+            "was_assigned": true
+          }
+        },
+        "content_settings": [],
+        "creation_flags": 38,
+        "disable_reasons": [],
+        "dnr_static_ruleset": {
+          "1": {
+            "checksum": 1844330657,
+            "ignore_ruleset": false
+          }
+        },
+        "filtered_service_worker_events": {
+          "webNavigation.onCommitted": [
+            {}
+          ],
+          "webNavigation.onCompleted": [
+            {}
+          ]
+        },
+        "first_install_time": "13435004330616531",
+        "from_webstore": false,
+        "granted_permissions": {
+          "api": [
+            "notifications",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "declarativeNetRequestWithHostAccess"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "has_started_service_worker": true,
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_update_time": "13435004752494005",
+        "location": 8,
+        "newAllowFileAccess": true,
+        "path": "/home/asyrjasalo.guest/.config/brave-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "service_worker_registration_info": {
+          "version": "1.1.9"
+        },
+        "serviceworkerevents": [
+          "runtime.onInstalled",
+          "tabs.onCreated",
+          "tabs.onRemoved",
+          "tabs.onUpdated"
+        ],
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false,
+        "withholding_permissions": false
+      },
+      "jkjpmmpddpjaopeknfcnohfgohkbmmje": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "activeTab",
+            "alarms",
+            "clipboardRead",
+            "clipboardWrite",
+            "contextMenus",
+            "idle",
+            "notifications",
+            "storage",
+            "tabs",
+            "unlimitedStorage",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "offscreen",
+            "sidePanel",
+            "webRequestAuthProvider"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": [
+            "*://*/*",
+            "file:///*"
+          ]
+        },
+        "commands": {
+          "_execute_action": {
+            "suggested_key": "Ctrl+Shift+U",
+            "was_assigned": true
+          },
+          "autofill_card": {
+            "suggested_key": "",
+            "was_assigned": true
+          },
+          "autofill_identity": {
+            "suggested_key": "",
+            "was_assigned": true
+          },
+          "autofill_login": {
+            "suggested_key": "Ctrl+Shift+L"
+          },
+          "generate_password": {
+            "suggested_key": "Ctrl+Shift+9",
+            "was_assigned": true
+          },
+          "lock_vault": {
+            "suggested_key": "",
+            "was_assigned": true
+          }
+        },
+        "content_settings": [],
+        "creation_flags": 38,
+        "disable_reasons": [],
+        "filtered_service_worker_events": {
+          "webNavigation.onCommitted": [
+            {}
+          ],
+          "webRequest.onHeadersReceived": [
+            {
+              "_options": {
+                "extraInfo": [
+                  "responseHeaders"
+                ],
+                "webViewInstanceId": 0
+              },
+              "types": [
+                "main_frame",
+                "sub_frame"
+              ],
+              "urls": [
+                "\u003Call_urls>"
+              ]
+            }
+          ]
+        },
+        "first_install_time": "13435004330614750",
+        "from_webstore": false,
+        "granted_permissions": {
+          "api": [
+            "activeTab",
+            "alarms",
+            "clipboardRead",
+            "clipboardWrite",
+            "contextMenus",
+            "idle",
+            "notifications",
+            "storage",
+            "tabs",
+            "unlimitedStorage",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "offscreen",
+            "sidePanel",
+            "webRequestAuthProvider"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": [
+            "*://*/*",
+            "file:///*"
+          ]
+        },
+        "has_started_service_worker": true,
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_update_time": "13435004752491027",
+        "location": 8,
+        "newAllowFileAccess": true,
+        "path": "/home/asyrjasalo.guest/.config/brave-extensions/nngceckbapebfimnlniiiahkandclblb",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "service_worker_registration_info": {
+          "version": "2026.9.2"
+        },
+        "serviceworkerevents": [
+          "alarms.onAlarm",
+          "commands.onCommand",
+          "contextMenus.onClicked",
+          "idle.onStateChanged",
+          "notifications.onButtonClicked",
+          "notifications.onClicked",
+          "permissions.onAdded",
+          "runtime.onInstalled",
+          "storage.local.onChanged",
+          "storage.onChanged",
+          "tabs.onActivated",
+          "tabs.onCreated",
+          "tabs.onRemoved",
+          "tabs.onUpdated"
+        ],
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false,
+        "withholding_permissions": false
+      },
+      "mhjfbmdgcfjbbpaeojofohoefgiehjai": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "contentSettings",
+            "fileSystem",
+            "fileSystem.write",
+            "metricsPrivate",
+            "tabs",
+            "resourcesPrivate",
+            "pdfViewerPrivate"
+          ],
+          "explicit_host": [
+            "chrome://brave-resources/*",
+            "chrome://resources/*",
+            "chrome://webui-test/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "commands": {},
+        "content_settings": [],
+        "creation_flags": 1,
+        "disable_reasons": [],
+        "first_install_time": "13435002864556578",
+        "from_webstore": false,
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_loaded_browser_version": "154.1.96.59",
+        "last_update_time": "13435004751532529",
+        "location": 5,
+        "manifest": {
+          "content_security_policy": "script-src 'self' blob: filesystem: chrome://brave-resources chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
+          "description": "",
+          "incognito": "split",
+          "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN6hM0rsDYGbzQPQfOygqlRtQgKUXMfnSjhIBL7LnReAVBEd7ZmKtyN2qmSasMl4HZpMhVe2rPWVVwBDl6iyNE/Kok6E6v6V3vCLGsOpQAuuNVye/3QxzIldzG/jQAdWZiyXReRVapOhZtLjGfywCvlWq7Sl/e3sbc0vWybSDI2QIDAQAB",
+          "manifest_version": 2,
+          "mime_types": [
+            "application/pdf",
+            "text/pdf"
+          ],
+          "mime_types_handler": "index.html",
+          "name": "Chrome PDF Viewer",
+          "offline_enabled": true,
+          "permissions": [
+            "chrome://brave-resources/",
+            "chrome://resources/",
+            "chrome://webui-test/",
+            "contentSettings",
+            "metricsPrivate",
+            "pdfViewerPrivate",
+            "resourcesPrivate",
+            "tabs",
+            {
+              "fileSystem": [
+                "write"
+              ]
+            }
+          ],
+          "version": "1",
+          "web_accessible_resources": [
+            "pdf_embedder.css"
+          ]
+        },
+        "path": "/opt/brave.com/brave/resources/pdf",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false
+      },
+      "mnojpmjdmbbfmejpflffifhffcmidifd": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "activeTab",
+            "alarms",
+            "contentSettings",
+            "contextMenus",
+            "cookies",
+            "history",
+            "management",
+            "settingsPrivate",
+            "storage",
+            "tabs",
+            "unlimitedStorage",
+            "webNavigation",
+            "webRequest",
+            "webRequestBlocking"
+          ],
+          "explicit_host": [
+            "*://*/*",
+            "\u003Call_urls>",
+            "chrome://favicon/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": [
+            "https://chrome.google.com/webstore/*",
+            "https://chromewebstore.google.com/*"
+          ]
+        },
+        "commands": {},
+        "content_settings": [],
+        "creation_flags": 1,
+        "disable_reasons": [],
+        "first_install_time": "13435002864557750",
+        "from_webstore": false,
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_loaded_browser_version": "154.1.96.59",
+        "last_update_time": "13435004751532899",
+        "location": 5,
+        "manifest": {
+          "content_scripts": [
+            {
+              "all_frames": true,
+              "js": [
+                "out/webstore.bundle.js"
+              ],
+              "matches": [
+                "https://chrome.google.com/webstore/*",
+                "https://chromewebstore.google.com/*"
+              ],
+              "run_at": "document_start"
+            }
+          ],
+          "content_security_policy": "default-src 'self'; font-src 'self' data:; script-src 'self' 'wasm-eval'; style-src 'unsafe-inline'; img-src 'self' data: chrome://favicon/; connect-src * data: blob: filesystem:;",
+          "default_locale": "en_US",
+          "description": "__MSG_appName__",
+          "icons": {
+            "128": "assets/img/icon-128.png",
+            "16": "assets/img/icon-16.png",
+            "256": "assets/img/icon-256.png",
+            "32": "assets/img/icon-32.png",
+            "48": "assets/img/icon-48.png",
+            "64": "assets/img/icon-64.png"
+          },
+          "incognito": "split",
+          "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAupOLMy5Fd4dCSOtjcApsAQOnuBdTs+OvBVt/3P93noIrf068x0xXkvxbn+fpigcqfNamiJ5CjGyfx9zAIs7zcHwbxjOw0Uih4SllfgtK+svNTeE0r5atMWE0xR489BvsqNuPSxYJUmW28JqhaSZ4SabYrRx114KcU6ko7hkjyPkjQa3P+chStJjIKYgu5tWBiMJp5QVLelKoM+xkY6S7efvJ8AfajxCViLGyDQPDviGr2D0VvIBob0D1ZmAoTvYOWafcNCaqaejPDybFtuLFX3pZBqfyOCyyzGhucyCmfBXJALKbhjRAqN5glNsUmGhhPK87TuGATQfVuZtenMvXMQIDAQAB",
+          "manifest_version": 2,
+          "name": "Brave",
+          "permissions": [
+            "activeTab",
+            "alarms",
+            "contentSettings",
+            "contextMenus",
+            "cookies",
+            "history",
+            "management",
+            "settingsPrivate",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "*://*/*",
+            "chrome://favicon/*",
+            "webDiscovery",
+            "webRequestBlocking",
+            "unlimitedStorage",
+            "\u003Call_urls>"
+          ],
+          "version": "1.0.0"
+        },
+        "path": "/opt/brave.com/brave/resources/brave_extension",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false
+      }
+    },
+    "theme": {
+      "id": ""
+    },
+    "ui": {
+      "developer_mode": true
+    }
+  },
+  "feedv2": {
+    "has_stored_data": true
+  },
+  "gaia_cookie": {
+    "periodic_report_time_2": "13435002864542153"
+  },
+  "gcm": {
+    "product_category_for_subtypes": "com.brave.macosx",
+    "push_messaging_unsubscribed_entries_list": []
+  },
+  "glic": {
+    "profile_enablement": {
+      "last_ready_state": 3
+    }
+  },
+  "google": {
+    "services": {
+      "consented_to_sync": false,
+      "signin_scoped_device_id": "60b02e97-2d52-47c1-9092-465820db0c13"
+    }
+  },
+  "high_efficiency": {},
+  "homepage": "brave://bookmarks/",
+  "homepage_is_newtabpage": false,
+  "https_only_mode_auto_enabled": false,
+  "https_only_mode_enabled": false,
+  "in_product_help": {
+    "new_badge": {
+      "ComposeNudge": {
+        "feature_enabled_time": "13435002864560228",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "ComposeProactiveNudge": {
+        "feature_enabled_time": "13435002864560233",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "GlicAppMenuNewBadge": {
+        "feature_enabled_time": "13435002864560339",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "GlicContextMenu": {
+        "feature_enabled_time": "13435002864560223",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "GlicKeyboardShortcutNewBadge": {
+        "feature_enabled_time": "13435002864560255",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "VerticalTabsNewBadge": {
+        "feature_enabled_time": "13435002864560205",
+        "show_count": 0,
+        "used_count": 0
+      }
+    },
+    "recent_session_enabled_time": "13435002864560357",
+    "recent_session_start_times": [
+      "13435002864560357"
+    ],
+    "session_last_active_time": "13435004752486332",
+    "session_number": 2,
+    "session_start_time": "13435002864560357"
+  },
+  "intl": {
+    "accept_languages": "en",
+    "selected_languages": "en"
+  },
+  "invalidation": {
+    "per_sender_registered_for_invalidation": {
+      "1013309121859": {},
+      "947318989803": {}
+    }
+  },
+  "language_model_counters": {
+    "en": 2
+  },
+  "media": {
+    "device_id_salt": "EA9D081270E4DFDA96FF104BDE22FF34",
+    "engagement": {
+      "schema_version": 5
+    }
+  },
+  "media_router": {
+    "enable_media_router": false
+  },
+  "migrated_user_scripts_toggle": true,
+  "net": {},
+  "NewTabPage": {
+    "CustomizeChromeExplicitlyClosed": true
+  },
+  "ntp": {
+    "collapsed_foreign_sessions": {},
+    "custom_background_inspiration": false,
+    "custom_background_local_to_device": false,
+    "custom_links_visible": true,
+    "enterprise_shortcuts_visible": false,
+    "num_personal_suggestions": 1,
+    "shortcust_visible": false
+  },
+  "omnibox": {
+    "keyword_space_triggering_enabled": false,
+    "prevent_url_elisions": true,
+    "shown_count_history_scope_promo": 1
+  },
+  "partition": {
+    "default_zoom_level": {
+      "x": 1.2239010857415449
+    }
+  },
+  "password_manager": {
+    "account_store_backup_password_cleaning_last_timestamp": "13435002924542754",
+    "account_store_migrated_to_os_crypt_async": true,
+    "biometric_authentication_filling": false,
+    "profile_store_backup_password_cleaning_last_timestamp": "13435002924542535",
+    "profile_store_migrated_to_os_crypt_async": true
+  },
+  "payments": {
+    "can_make_payment_enabled": false
+  },
+  "performance_tuning": {
+    "tab_discarding": {}
+  },
+  "persistent_notifications": {
+    "next_id": 10006
+  },
+  "pinned_tabs": [],
+  "prefetch": {
+    "search_prefetch": {
+      "cache": {}
+    }
+  },
+  "printing": {
+    "print_preview_sticky_settings": {
+      "appState": "{\"version\":2,\"recentDestinations\":[{\"id\":\"Save as PDF\",\"origin\":\"local\",\"capabilities\":{\"printer\":{\"color\":{\"option\":[{\"is_default\":true,\"type\":\"STANDARD_COLOR\",\"vendor_id\":\"2\"}]},\"dpi\":{\"option\":[{\"horizontal_dpi\":300,\"is_default\":true,\"vertical_dpi\":300}]},\"media_size\":{\"option\":[{\"height_microns\":355600,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":215900,\"imageable_area_top_microns\":355600,\"name\":\"NA_LEGAL\",\"width_microns\":215900,\"custom_display_name\":\"Legal\"},{\"height_microns\":279400,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":215900,\"imageable_area_top_microns\":279400,\"name\":\"NA_LETTER\",\"width_microns\":215900,\"custom_display_name\":\"Letter\"},{\"height_microns\":431800,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":279400,\"imageable_area_top_microns\":431800,\"name\":\"NA_LEDGER\",\"width_microns\":279400,\"custom_display_name\":\"Tabloid\"},{\"height_microns\":1189000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":841000,\"imageable_area_top_microns\":1189000,\"name\":\"ISO_A0\",\"width_microns\":841000,\"custom_display_name\":\"A0\"},{\"height_microns\":841000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":594000,\"imageable_area_top_microns\":841000,\"name\":\"ISO_A1\",\"width_microns\":594000,\"custom_display_name\":\"A1\"},{\"height_microns\":594000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":420000,\"imageable_area_top_microns\":594000,\"name\":\"ISO_A2\",\"width_microns\":420000,\"custom_display_name\":\"A2\"},{\"height_microns\":420000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":297000,\"imageable_area_top_microns\":420000,\"name\":\"ISO_A3\",\"width_microns\":297000,\"custom_display_name\":\"A3\"},{\"height_microns\":297000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":210000,\"imageable_area_top_microns\":297000,\"is_default\":true,\"name\":\"ISO_A4\",\"width_microns\":210000,\"custom_display_name\":\"A4\"},{\"height_microns\":210000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":148000,\"imageable_area_top_microns\":210000,\"name\":\"ISO_A5\",\"width_microns\":148000,\"custom_display_name\":\"A5\"}]},\"page_orientation\":{\"option\":[{\"type\":\"PORTRAIT\"},{\"type\":\"LANDSCAPE\"},{\"is_default\":true,\"type\":\"AUTO\"}]}},\"version\":\"1.0\"},\"displayName\":\"Save as PDF\",\"extensionId\":\"\",\"extensionName\":\"\",\"icon\":\"cr:insert-drive-file\"}],\"customMargins\":{},\"dpi\":{\"horizontal_dpi\":300,\"is_default\":true,\"vertical_dpi\":300,\"name\":\"300 dpi\"},\"mediaSize\":{\"height_microns\":297000,\"imageable_area_bottom_microns\":0,\"imageable_area_left_microns\":0,\"imageable_area_right_microns\":210000,\"imageable_area_top_microns\":297000,\"is_default\":true,\"name\":\"ISO_A4\",\"width_microns\":210000,\"custom_display_name\":\"A4\"}}"
+    }
+  },
+  "privacy_sandbox": {
+    "first_party_sets_data_access_allowed_initialized": true,
+    "first_party_sets_enabled": false
+  },
+  "profile": {
+    "avatar_index": 89,
+    "background_password_check": {
+      "check_fri_weight": 9,
+      "check_interval": "864000000000",
+      "check_mon_weight": 4,
+      "check_sat_weight": 4,
+      "check_sun_weight": 4,
+      "check_thu_weight": 9,
+      "check_tue_weight": 9,
+      "check_wed_weight": 9,
+      "next_check_time": "13435097067386761"
+    },
+    "content_settings": {
+      "did_migrate_adaptive_notification_quieting_to_cpss": true,
+      "enable_cpss": {
+        "notifications": true
+      },
+      "enable_quiet_permission_ui": {
+        "notifications": false
+      },
+      "exceptions": {
+        "abusive_notification_permissions": {},
+        "access_to_get_all_screens_media_in_session": {},
+        "anti_abuse": {},
+        "app_banner": {
+          "https://bitwarden.com:443,*": {
+            "last_modified": "13435004333292747",
+            "setting": {
+              "https://bitwarden.com/": {
+                "couldShowBannerEvents": 1.343500433329274e+16,
+                "next_install_text_animation": {
+                  "delay": "86400000000",
+                  "last_shown": "13435004333292030"
+                }
+              }
+            }
+          }
+        },
+        "ar": {},
+        "are_suspicious_notifications_allowlisted_by_user": {},
+        "auto_picture_in_picture": {},
+        "auto_select_certificate": {},
+        "automatic_downloads": {},
+        "automatic_fullscreen": {},
+        "autoplay": {},
+        "background_sync": {},
+        "bluetooth_chooser_data": {},
+        "bluetooth_guard": {},
+        "bluetooth_scanning": {},
+        "brave_cardano": {},
+        "brave_ethereum": {},
+        "brave_google_sign_in": {},
+        "brave_open_ai_chat": {},
+        "brave_remember_1p_storage": {},
+        "brave_solana": {},
+        "brave_webcompat_audio": {},
+        "brave_webcompat_canvas": {},
+        "brave_webcompat_device_memory": {},
+        "brave_webcompat_event_source_pool": {},
+        "brave_webcompat_font": {},
+        "brave_webcompat_hardware_concurrency": {},
+        "brave_webcompat_keyboard": {},
+        "brave_webcompat_language": {},
+        "brave_webcompat_media_devices": {},
+        "brave_webcompat_none": {},
+        "brave_webcompat_plugins": {},
+        "brave_webcompat_screen": {},
+        "brave_webcompat_speech_synthesis": {},
+        "brave_webcompat_usb_device_serial_number": {},
+        "brave_webcompat_user_agent": {},
+        "brave_webcompat_web_sockets_pool": {},
+        "brave_webcompat_webgl": {},
+        "brave_webcompat_webgl2": {},
+        "brave_webcompat_webgpu": {},
+        "braveAutoShred": {},
+        "bravePsst": {},
+        "braveShields": {},
+        "braveShieldsMetadata": {
+          "https://[*.]bitwarden.com,*": {
+            "last_modified": "13435004332893006",
+            "setting": {
+              "farbling_token": "8E93FF1A81F2DDDCEB402E2DB689F09A"
+            }
+          },
+          "https://[*.]google.com,*": {
+            "last_modified": "13435004365441200",
+            "setting": {
+              "farbling_token": "3395AED304C611AAED4C8AE6F3D2F465"
+            }
+          }
+        },
+        "braveSpeedreader": {},
+        "camera_pan_tilt_zoom": {},
+        "captured_surface_control": {},
+        "client_hints": {
+          "https://www.google.com:443,*": {
+            "last_modified": "13435004752782090",
+            "setting": {
+              "client_hints": [
+                9,
+                10,
+                11,
+                14,
+                16,
+                23,
+                25
+              ]
+            }
+          }
+        },
+        "clipboard": {},
+        "controlled_frame": {},
+        "cookie_controls_metadata": {},
+        "cookies": {},
+        "cosmeticFilteringV2": {
+          "*,*": {
+            "last_modified": "13435004371281554",
+            "setting": {
+              "cosmeticFilteringV2": 1
+            }
+          }
+        },
+        "direct_sockets": {},
+        "direct_sockets_private_network_access": {},
+        "display_media_system_audio": {},
+        "disruptive_notification_permissions": {},
+        "durable_storage": {},
+        "fedcm_idp_registration": {},
+        "fedcm_idp_signin": {},
+        "fedcm_share": {},
+        "file_system_access_chooser_data": {},
+        "file_system_access_extended_permission": {},
+        "file_system_access_restore_permission": {},
+        "file_system_last_picked_directory": {},
+        "file_system_read_guard": {},
+        "file_system_write_guard": {},
+        "fingerprintingV2": {},
+        "formfill_metadata": {},
+        "geolocation": {},
+        "geolocation_with_options": {},
+        "hand_tracking": {},
+        "has_migrated_local_network_access": true,
+        "hid_chooser_data": {},
+        "hid_guard": {},
+        "http_allowed": {},
+        "https_enforced": {},
+        "httpsUpgrades": {},
+        "httpUpgradableResources": {},
+        "idle_detection": {},
+        "images": {},
+        "important_site_info": {},
+        "initialized_translations": {},
+        "inline_cue_menu": {},
+        "intent_picker_auto_display": {},
+        "javascript": {},
+        "javascript_jit": {},
+        "javascript_optimizer": {},
+        "keyboard_lock": {},
+        "legacy_cookie_access": {},
+        "legacy_cookie_scope": {},
+        "local_fonts": {},
+        "local_network": {},
+        "local_network_access": {},
+        "loopback_network": {},
+        "media_engagement": {
+          "https://bitwarden.com:443,*": {
+            "expiration": "13442780341268660",
+            "last_modified": "13435004341268666",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 1
+            }
+          }
+        },
+        "media_stream_camera": {},
+        "media_stream_mic": {},
+        "midi_sysex": {},
+        "mixed_script": {},
+        "nfc_devices": {},
+        "notification_interactions": {},
+        "notification_permission_review": {},
+        "notifications": {},
+        "ondevice_languages_downloaded": {},
+        "password_protection": {},
+        "payment_handler": {},
+        "permission_actions_history": {},
+        "permission_autoblocking_data": {},
+        "permission_autorevocation_data": {},
+        "pointer_lock": {},
+        "popups": {},
+        "protocol_handler": {},
+        "reduced_accept_language": {},
+        "referrers": {},
+        "safe_browsing_url_check_data": {},
+        "sensors": {},
+        "serial_chooser_data": {},
+        "serial_guard": {},
+        "shieldsAds": {
+          "*,*": {
+            "last_modified": "13435004371281502",
+            "setting": 2
+          }
+        },
+        "shieldsCookiesV3": {},
+        "site_engagement": {
+          "chrome://newtab/,*": {
+            "last_modified": "13435004364140928",
+            "setting": {
+              "lastEngagementTime": 1.3435004364140912e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 9.899999999999999,
+              "rawScore": 9.899999999999999
+            }
+          },
+          "chrome://settings/,*": {
+            "last_modified": "13435004741616605",
+            "setting": {
+              "lastEngagementTime": 1.343500474161658e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 15.0,
+              "rawScore": 15.0
+            }
+          },
+          "https://www.google.com:443,*": {
+            "last_modified": "13435004365789590",
+            "setting": {
+              "lastEngagementTime": 1.3435004365789584e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 3.0,
+              "rawScore": 3.0
+            }
+          }
+        },
+        "sound": {},
+        "speaker_selection": {},
+        "ssl_cert_decisions": {},
+        "storage_access": {},
+        "storage_access_header_origin_trial": {},
+        "sub_apps_without_prompts": {},
+        "subresource_filter": {},
+        "subresource_filter_data": {},
+        "suspicious_notification_ids": {},
+        "suspicious_notification_show_original": {},
+        "suspicious_site_warning_data": {},
+        "top_level_storage_access": {},
+        "trackers": {
+          "*,*": {
+            "last_modified": "13435004371281566",
+            "setting": 2
+          }
+        },
+        "unused_site_permissions": {},
+        "usb_chooser_data": {},
+        "usb_guard": {},
+        "vr": {},
+        "web_app_installation": {},
+        "webid_api": {},
+        "webid_auto_reauthn": {},
+        "window_placement": {}
+      },
+      "in_content_cookies_controls_opened": true,
+      "pref_version": 1
+    },
+    "cookie_controls_mode": 1,
+    "created_by_version": "107.1.45.116",
+    "creation_time": "13435002854839171",
+    "default_content_setting_values": {
+      "anti_abuse": 2,
+      "cookies": 1,
+      "has_migrated_local_network_access": true,
+      "httpsUpgrades": 2
+    },
+    "exit_type": "Normal",
+    "family_link_user_state": 6,
+    "family_member_role": "not_in_family",
+    "isolated_web_app": {
+      "install": {
+        "pending_initialization_count": 0
+      }
+    },
+    "last_engagement_time": "13435004741616579",
+    "last_time_obsolete_http_credentials_removed": 1790529324.542646,
+    "last_time_password_store_metrics_reported": 1790529294.541394,
+    "managed": {
+      "locally_parent_approved_extensions": {},
+      "locally_parent_approved_extensions_migration_state": 1
+    },
+    "managed_user_id": "",
+    "name": "Person 1",
+    "password_hash_data_list": [],
+    "safety_hub_menu_notifications": {
+      "extensions": {
+        "isCurrentlyActive": false,
+        "result": {
+          "timestamp": "13435004608994796",
+          "triggeringExtensions": []
+        }
+      },
+      "passwords": {
+        "isCurrentlyActive": false,
+        "result": {
+          "passwordCheckOrigins": [],
+          "timestamp": "13435004457290165"
+        }
+      },
+      "safe-browsing": {
+        "isCurrentlyActive": false,
+        "onlyShowAfterTime": "13435089314892530",
+        "result": {
+          "safeBrowsingStatus": 1,
+          "timestamp": "13435004608994765"
+        }
+      },
+      "unused-site-permissions": {
+        "isCurrentlyActive": false,
+        "result": {
+          "permissions": [],
+          "timestamp": "13435004460200749"
+        }
+      }
+    },
+    "using_default_avatar": false,
+    "using_gaia_avatar": false,
+    "were_old_google_logins_removed": true
+  },
+  "profile_network_context_service": {
+    "http_cache_finch_experiment_groups": "None None None None"
+  },
+  "protection": {
+    "macs": {
+      "account_values": {
+        "browser": {
+          "show_home_button": "F6B8688079AA4C4657C3FEDCF3311348C99CB4907EEC8560CC323E4F37D1EA41",
+          "show_home_button_encrypted_hash": "djEwotRkFT2vHnhhCIA/V+DRZrZjLnP+b+0VwSGjql5xrXDmPtBAfaZbFURGViRnbnec"
+        },
+        "extensions": {
+          "ui": {
+            "developer_mode": "C4B515ABCB16541C88B522387A89F47E24F150FF18A7256BF19EE2C0896D7555",
+            "developer_mode_encrypted_hash": "djEwnGn4HyLm571QCCeecs4XAyIbPpI4sjZ8ckF6sff8BGbQEywtWeDm4qpSwJqGYOvN"
+          }
+        },
+        "homepage": "0F156BE8FFEDBF22CC2E394D6BD8DDD392F953D0F397958C64EFA57087182457",
+        "homepage_encrypted_hash": "djEwez6wt5PtkfTxuN+U9KVU6gUa9/33imjLLrtlo3LT0Y1d/stHX2XjJEWHwpeLGZY1",
+        "homepage_is_newtabpage": "BAF0DE42A6FEAC5EF6500592AEC92B79DC055C1E352B0F7BAC0BB6E72ECE67D3",
+        "homepage_is_newtabpage_encrypted_hash": "djEwNuiyCSZBdqhV7ESdO8yuXbA1NHRVLQ2svfo+ZK5oaIry2f9Cx4rce+mIbAEw7G0P",
+        "session": {
+          "restore_on_startup": "81940185F7F78D0317AB3741FA4A283985C31DB3BF95D3A4DDD4CD78FC5021F1",
+          "restore_on_startup_encrypted_hash": "djEwFEzg0id00W34Gz2o0K8gX+KMNet+dXfslTgHKA9xnZMI4OplF+GZvcpGWGX5hEYJ",
+          "startup_urls": "B41DC391D323AEB2C5465D75AB79284F9F6620BEF161110DE35202261FF03449",
+          "startup_urls_encrypted_hash": "djEwghL6jSVRi8mLaRGAB/JzS+xXBtxjeESAqUdFS7oORXVQ1jXID0VGOoaLWOgIcbzO"
+        }
+      },
+      "brave": {
+        "ad_block": {
+          "developer_mode": "A8066DC39D90B6215D9DC5B4136161EF90E7D0594CFA8673F7E92A20509684C9",
+          "developer_mode_encrypted_hash": "djEwpxuduucsPyl9YmgYp5ahlcrRIPIL9VgzMCnGqOsDFKf/kev1eaPB+ZplaSbZN0nz"
+        }
+      },
+      "browser": {
+        "show_home_button": "9463DEC4C15E47646D05FD921E0E475249EA15DE77808C4664EF238C54D89FC7",
+        "show_home_button_encrypted_hash": "djEw7yR6WqQt12q4/7WXKVhYqUw9ZLLch8Bn5pJ5lZv361SrK7Qk2jN+YH1DB60Z9nkS"
+      },
+      "default_search_provider_data": {
+        "template_url_data": "26941BE890190CE3B323016E638221B13CB5A358F245EFBDAD46F12C62946F82",
+        "template_url_data_encrypted_hash": "djEwk8VbXugCVTBTviJIhi3uwIZxP5NBF+Xg9RTRhAKzxNbS6kPQW84xrAk0JqnSTs/M"
+      },
+      "enterprise_signin": {
+        "policy_recovery_token": "7D3124ECAF7E96407EB65EAF5A43B02C7EE5F2D4A9FA38A9F371F9E1B74D6383",
+        "policy_recovery_token_encrypted_hash": "djEwntGC63MNa+3FPXvwkgoSZGXvXYrVoevkgw7qmK06Zwt7RdLbwPV3QCnGv8fsmfLO"
+      },
+      "extensions": {
+        "install": {
+          "initiallist": "721565429F6DB8F08CC129E8B4A99021CECE263598EA7CF847C99A2133F23581",
+          "initiallist_encrypted_hash": "djEwkHeWi9EY4quXPiJOJHKkiaZv/Yduf0mGmHL+hm4bMgHCoBktkuispsBkSEGGppg3",
+          "initialprovidername": "89DB3C44559AC7E75E930F08876F726C91D84C2D8D4D0A9DB7DA59DB15FA76D1",
+          "initialprovidername_encrypted_hash": "djEwn2R+8PGjEAKtAZe3ZdaoPoPlRUrGh6V/o9KiENuI/3AtKFJq5/M1WhPIlSo2Q+lT"
+        },
+        "settings": {
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "CB46504406CE07E598A65542A7FBFA1783950C6DCE7CF262E1AA141334544EC1",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "23617CC540EA186114F5B588C6F2E858C595F4857608601AF68DE4FF9C8756BB",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "7C3C0EE8015C080BFA59AF2EEB7AB8E776D1272AB2DDF212631099957D73D38B",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "84F8C01C2618C280801E9A72B2E90EF6370375F9A48A144F246C5B1CC0314D4E"
+        },
+        "settings_encrypted_hash": {
+          "gjmjochjlobdmjlaaphajfhnkggkedld": "djEwvDVxa0/wxCqIBu8xmOi1o9FarW0d496mn30KIVHeevPt1CsJpe3jocFQ81K9Bf25",
+          "jkjpmmpddpjaopeknfcnohfgohkbmmje": "djEwY6OYzk7kBfqirOX3trwjhtwh96w3s5Zm8td3EdDeB74gfBB67CO3WtjZls9lkabt",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEwtvb35anuGNFaMljJxXeGADdDlSm/m1CxIwr1Wbf5yrIurxtd1kr8nUPtktXBnv02",
+          "mnojpmjdmbbfmejpflffifhffcmidifd": "djEwWgliXxaTGv+VMRlM4g4v/eOOAv3+VmQPhsXd42aJSHxdjpUbnQviOKEXycqOOKHI"
+        },
+        "ui": {
+          "developer_mode": "F1323889EA777F2EB3E23F3E2CFCB59D3FAFCB8DE80104742CBF2A9E44046ED9",
+          "developer_mode_encrypted_hash": "djEwfCGr2TgkPAHCIt8sZ4jkb0bSv5ICCM9uQ6lDgJu7T3J2wsMXND8gcWI4gmJMgDZq"
+        }
+      },
+      "google": {
+        "services": {
+          "account_id": "E5B4CD7C5FA271A47D07D462465AFD63DBF6A8CDFAFEF4839D13F8F552131486",
+          "account_id_encrypted_hash": "djEws5EOag2fZGfyxpqHcku8joB6KwiFyWcmiFR/aVXfXX6OvP/bjwC8JQV6CzNTKMMu",
+          "last_signed_in_username": "82DB8D884695C643C31778B7B50DBB376848E2F81B5A1AECDA34FD448CECD10D",
+          "last_signed_in_username_encrypted_hash": "djEwxOmun3qSdHJMQzaJrU+kjwQLP+13cHAn1VOQvoQtqSk/p/pGFhbaSzbJpX4wwHgm",
+          "last_username": "24FCEF9BF7DF12A2935BE143E58951E09DBAA1D3E0E24430C0FF93009F5D6AFD",
+          "last_username_encrypted_hash": "djEwUrwWTlb71Rdn7Dja+dvU5v0mcEbu5mgSO71viEUKKH+f/HHPQ9PpahcBiBCBPv8C"
+        }
+      },
+      "homepage": "D0DFFDFBAD5DDF353AD3DC67B052F5F41AD34A7C73F6D321E5168D13FF9CF3B4",
+      "homepage_encrypted_hash": "djEwGVA2IkTjLe3+4FIJM2XTUhEBX6Th6FpCzvVgVXw9JhMgCQmk/ExYxJd1E578PCan",
+      "homepage_is_newtabpage": "C77EA32F1872FF78A94FD3CF2AC2625671D07B6EC18468CE474F383FE0BAFEFA",
+      "homepage_is_newtabpage_encrypted_hash": "djEwiubcvYw11NV1lw0aWHdWCCOUymIyejCfN0hljQF4todaXoWXPLKdyaq/hOPETzQh",
+      "media": {
+        "storage_id_salt": "E1848263E6199A89D48A7FDF168364BF0F31246A18227F3D149D4088C7F4D667",
+        "storage_id_salt_encrypted_hash": "djEwmus7A6SiHO78MEjfL8UH7gPMKzNqfXxuxeOCVs7oMQHvhcUctFVQ/H+biDlrSfmN"
+      },
+      "pinned_tabs": "699F1AC92729A024B80605AFC3C63BFB2A35B70C4214581BBE108F851528E9E8",
+      "pinned_tabs_encrypted_hash": "djEwWWzDrSaMLtgsEw/+Gm0mxCsOZDVi9oV24mKKlydfO4BJ+oH89l9wazE660PTgWyL",
+      "prefs": {
+        "preference_reset_time": "95C909F3D0669D5931907B455F099C510E7770D9F0BA6FF13E4C76101B44F757",
+        "preference_reset_time_encrypted_hash": "djEwyqoM/JGpKiFlXV3eoINFUv2ETBFL4NGU4ieOBHK8c6NFWgNZelQ+eaT90ssc6IS/"
+      },
+      "safebrowsing": {
+        "incidents_sent": "569707D9A4676B72F48BE92B740BE3EF895419C8A646F1AE1BA70BD9C3B41845",
+        "incidents_sent_encrypted_hash": "djEwMiMAX53T1art8hiNWR2KtJtvDx/Ug453nMjIrrEJhrKvzT9/gP0n1oArCPjd05vR"
+      },
+      "schedule_to_flush_to_disk": "A47936C5DB988C6D6B2FB601D0514A817AFD111CD6DE1CD0D175323016973458",
+      "schedule_to_flush_to_disk_encrypted_hash": "djEwRkKuEB8K/HEx9m3b99h4EJibau0Riu9Gps2W3fGt2qm6fGw43mXWrxWyZcvAXrgZ",
+      "search_provider_overrides": "1E1EBA3A4DC28A23BEFCF6ED5D71CE71E9814DD587A305F6B14F72E834AF75DD",
+      "search_provider_overrides_encrypted_hash": "djEw/O1Fo7yxiDwDA9NaOfk9W7zGcLAU6L2CmXC9ayuNndZIrEps+rHLBu4+De+BVFES",
+      "session": {
+        "restore_on_startup": "F9BD26F5D1AA6AB5258754888529CB2A82AE68D1703BCC2A97DEAEE5DDDA190E",
+        "restore_on_startup_encrypted_hash": "djEw9KqVM3yzw2hBpRQs9cgmZz1EepB9mkNSYLmMWTe+s949xVxZNzKTFwIKzQYpLzqG",
+        "startup_urls": "8BB8DBC1D7CA5C58F821C38254FB2B9C874F8EE9B9905B57DE48C731C6C91837",
+        "startup_urls_encrypted_hash": "djEwQZx2i/wNzOqRtH3q8zoq3uvH2GfwPEM4MJtVt+cymnLfCjxp2xQeLnhTdFdNMrtB"
+      }
+    },
+    "super_encrypted_hash": "djEwsjOfDLMstl/V722U/Jz0wWUyU8UuICnsY0niYqz4AqIxCVcoYPdDWvS6G5IJ9j7R"
+  },
+  "safe_browsing": {},
+  "safebrowsing": {
+    "event_timestamps": {},
+    "metrics_last_log_time": "13435002864",
+    "saw_interstitial_sber2": true,
+    "scout_reporting_enabled_when_deprecated": false,
+    "unhandled_sync_password_reuses": {}
+  },
+  "safety_hub": {
+    "unused_site_permissions_revocation": {
+      "migration_completed": true
+    }
+  },
+  "saved_tab_groups": {
+    "did_enable_shared_tab_groups_in_last_session": false,
+    "specifics_to_data_migration": true
+  },
+  "schedule_to_flush_to_disk": "13435004752648037",
+  "search": {
+    "suggest_enabled": false
+  },
+  "segmentation_platform": {
+    "segmentation_result": {
+      "cross_device_user": {
+        "in_use": false,
+        "segment_id": 0,
+        "segment_rank": 0.0
+      }
+    }
+  },
+  "selectfile": {},
+  "sessions": {
+    "event_log": [
+      {
+        "crashed": true,
+        "time": "13435002864547706",
+        "type": 0
+      },
+      {
+        "crashed": true,
+        "time": "13435004329379965",
+        "type": 0
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 2,
+        "time": "13435004372323465",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435004441194742",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435004442221445",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 2,
+        "time": "13435004442361976",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 2,
+        "time": "13435004453395339",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435004456053780",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435004457063974",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 2,
+        "time": "13435004457206512",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 3,
+        "time": "13435004749622594",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435004751528198",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435004752487506",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 3,
+        "time": "13435004752611903",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 3,
+        "time": "13435004759738355",
+        "type": 2,
+        "window_count": 1
+      }
+    ],
+    "session_data_status": 3
+  },
+  "settings": {
+    "force_google_safesearch": false
+  },
+  "should_read_incoming_syncing_theme_prefs": false,
+  "side_panel": {
+    "is_right_aligned": true
+  },
+  "signin": {
+    "accounts_metadata_dict": {},
+    "allowed": false
+  },
+  "site_search_settings": {
+    "overridden_keywords": []
+  },
+  "spellcheck": {
+    "dictionaries": [
+      "en-GB"
+    ],
+    "dictionary": "",
+    "use_spelling_service": false
+  },
+  "supervised_user": {},
+  "sync": {
+    "data_type_status_for_sync_to_signin": {
+      "account_setting": false,
+      "ai_chat_conversation": false,
+      "ai_thread": false,
+      "app_list": false,
+      "app_settings": false,
+      "apps": false,
+      "arc_package": false,
+      "autofill": false,
+      "autofill_profiles": false,
+      "autofill_valuable": false,
+      "autofill_valuable_metadata": false,
+      "autofill_wallet": false,
+      "autofill_wallet_credential": false,
+      "autofill_wallet_metadata": false,
+      "autofill_wallet_offer": false,
+      "autofill_wallet_usage": false,
+      "bookmarks": false,
+      "collaboration_group": false,
+      "contact_info": false,
+      "contextual_task": false,
+      "cookies": false,
+      "device_info": false,
+      "dictionary": false,
+      "encrypted_tab_context_container": false,
+      "encrypted_tab_context_item": false,
+      "extension_settings": false,
+      "extensions": false,
+      "gemini_thread": false,
+      "history": false,
+      "history_delete_directives": false,
+      "incoming_password_sharing_invitation": false,
+      "journey": false,
+      "managed_user_settings": false,
+      "nigori": false,
+      "notebook": false,
+      "os_preferences": false,
+      "os_priority_preferences": false,
+      "outgoing_password_sharing_invitation": false,
+      "passwords": false,
+      "preferences": false,
+      "printers": false,
+      "printers_authorization_servers": false,
+      "priority_preferences": false,
+      "product_comparison": false,
+      "reading_list": false,
+      "saved_tab_group": false,
+      "search_engines": false,
+      "security_events": false,
+      "send_tab_to_self": false,
+      "sessions": false,
+      "shared_comment": false,
+      "shared_tab_group_account_data": false,
+      "shared_tab_group_data": false,
+      "sharing_message": false,
+      "skill": false,
+      "themes": false,
+      "themes_android": false,
+      "themes_ios": false,
+      "user_consent": false,
+      "user_events": false,
+      "web_apps": false,
+      "webapks": false,
+      "webauthn_credential": false,
+      "wifi_configurations": false,
+      "workspace_desk": false
+    },
+    "encryption_bootstrap_token_per_account_migration_done": true,
+    "feature_status_for_sync_to_signin": 5
+  },
+  "syncing_theme_prefs_migrated_to_non_syncing": true,
+  "tab_group_saves_ui_update_migrated": true,
+  "tab_search": {
+    "pinned_to_tabstrip": true
+  },
+  "toolbar": {
+    "pinned_actions": [
+      "kActionShowChromeLabs"
+    ],
+    "pinned_cast_migration_complete": true,
+    "pinned_chrome_labs_migration_complete": true
+  },
+  "tor": {
+    "onion_only_in_tor_windows": true
+  },
+  "total_passwords_available_for_account": 0,
+  "total_passwords_available_for_profile": 0,
+  "translate": {
+    "enabled": false
+  },
+  "translate_blocked_languages": [
+    "en"
+  ],
+  "translate_recent_target": "en",
+  "translate_site_blacklist": [],
+  "updateclientlastupdatecheckerror": -106,
+  "updateclientlastupdatecheckerrorcategory": 5,
+  "updateclientlastupdatecheckerrorextracode1": 0,
+  "vertical_tabs": {
+    "collapsed_state": false,
+    "uncollapsed_width": 240
+  },
+  "web_apps": {
+    "did_migrate_default_chrome_apps": [
+      "MigrateDefaultChromeAppToWebAppsGSuite",
+      "MigrateDefaultChromeAppToWebAppsNonGSuite"
+    ],
+    "error_loaded_policy_apps_migrated": true,
+    "isolation_state": {},
+    "last_preinstall_synchronize_version": "154",
+    "web_app_ids": {
+      "mdpkiolbdkhdjpekfbkbmhigcaggjagi": {}
+    }
+  },
+  "webauthn": {
+    "touchid": {}
+  },
+  "webkit": {
+    "webprefs": {
+      "fonts": {
+        "fixed": {
+          "Zyyy": "Terminess Nerd Font"
+        },
+        "math": {
+          "Zyyy": "Ubuntu Sans"
+        },
+        "sansserif": {
+          "Zyyy": "Ubuntu Sans"
+        },
+        "serif": {
+          "Zyyy": "DejaVu Serif"
+        },
+        "standard": {
+          "Zyyy": "Ubuntu Sans"
+        }
+      },
+      "minimum_font_size": 0
+    }
+  },
+  "webrtc": {
+    "ip_handling_policy": "default"
+  },
+  "zerosuggest": {
+    "cachedresults": "",
+    "cachedresults_composebox": "",
+    "cachedresults_with_url": {}
+  }
+}

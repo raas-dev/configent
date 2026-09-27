@@ -35,6 +35,7 @@ LUSER=$(getent passwd | awk -F: '$6 ~ /^\/home\// {print $1; exit}')
 UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 ARCH=$(dpkg --print-architecture)
+UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui" && pwd)
 
 log() { printf '[linux-apps] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
@@ -128,6 +129,48 @@ launchers() {
       "$UHOME/.local/share/applications/$f.desktop"
   done
   if dpkg -s brave-browser >/dev/null 2>&1; then
+    # Seed from ui/brave/. Same logic as the chromium seed in
+    # install_linux_xfce: Local State pins profile.last_used +
+    # info_cache so Brave trusts the seed instead of treating it as
+    # fresh and clobbering Preferences on first shutdown; "First Run"
+    # sentinel in the user-data-dir root suppresses the welcome flow.
+    # Preferences is cleaned: no mac accelerators, GUIDs, telemetry
+    # counters, session logs.
+    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UHOME/.config/BraveSoftware/Brave-Browser/Default"
+    $SUDO cp -r "$UI/brave/Default/." \
+      "$UHOME/.config/BraveSoftware/Brave-Browser/Default/"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+      "$UI/brave/Local State" \
+      "$UHOME/.config/BraveSoftware/Brave-Browser/Local State"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+      "$UI/brave/First Run" \
+      "$UHOME/.config/BraveSoftware/Brave-Browser/First Run"
+    $SUDO chown -R "$LUSER":"$LGROUP" \
+      "$UHOME/.config/BraveSoftware"
+    # Store CRXs + --load-extension wrapper — same approach as chromium in
+    # install_linux_xfce (Brave refuses hand-registered user extensions,
+    # so seeding extensions.settings is pointless). Tolerate offline:
+    # wrapper's --load-extension dirs just warn if absent.
+    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UHOME/.config/brave-extensions"
+    run_as python3 "$UI/brave/extensions.py" \
+      "$UHOME/.config/brave-extensions" \
+      "$UHOME/.config/BraveSoftware/Brave-Browser/Default/Preferences" ||
+      log "brave extension fetch failed (offline?)"
+    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.local/bin"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UI/brave/brave-wrapper" "$UHOME/.local/bin/brave-wrapper"
+    # Desktop + menu launchers Exec-rewritten to the wrapper (desktop
+    # files don't expand $HOME) — deb file has Exec=/usr/bin/brave-browser-stable.
+    sed "s|/usr/bin/brave-browser-stable|$UHOME/.local/bin/brave-wrapper|g" \
+      /usr/share/applications/brave-browser.desktop |
+      $SUDO tee "$UHOME/.local/share/applications/brave-browser.desktop" >/dev/null
+    $SUDO chown "$LUSER":"$LGROUP" \
+      "$UHOME/.local/share/applications/brave-browser.desktop"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UHOME/.local/share/applications/brave-browser.desktop" \
+      "$UHOME/Desktop/brave-browser.desktop"
     if [ -f "$UHOME/.config/mimeapps.list" ]; then
       $SUDO sed -i 's/chromium-browser\.desktop/brave-browser.desktop/g' \
         "$UHOME/.config/mimeapps.list"
