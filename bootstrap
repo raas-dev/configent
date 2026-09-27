@@ -69,7 +69,7 @@ fi
 if [ -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids" ]; then
   while read -r pid; do
     # not our child; poll until it exits (pid reuse race is negligible here)
-    while kill -0 "$pid" 2>/dev/null; do sleep 5; done
+    while kill -0 "$pid" 2>/dev/null; do sleep 1; done
   done <"${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
   rm -f "${XDG_RUNTIME_DIR:-/tmp}/configent_detached_pids"
 fi

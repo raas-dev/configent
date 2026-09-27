@@ -36,15 +36,21 @@ UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 ARCH=$(dpkg --print-architecture)
 
-log() { printf '[vscode-brave] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
+log() { printf '[linux-apps] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
-APT_OPTS=(-y -o Acquire::Retries=3 -o Dpkg::Lock::Timeout=600 --no-install-recommends
+APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
   -o Dpkg::Options::=--force-confdef
   -o Dpkg::Options::=--force-confold
   -o Dpkg::Options::=--force-unsafe-io
   -o "Dpkg::Path-Exclude=/usr/share/doc/*"
   -o "Dpkg::Path-Include=/usr/share/doc/*/copyright"
   -o "Dpkg::Path-Exclude=/usr/share/man/*")
+
+# same eatmydata wrap as the other apt scripts: skips fsyncs during the
+# ~1.4GB deb unpack. Desktop script installs eatmydata, and this runs
+# after wait_batch, so it is present.
+EAT=()
+command -v eatmydata >/dev/null 2>&1 && EAT+=(eatmydata)
 
 # Official VSCode (packages.microsoft.com) + Brave (brave-browser-apt-
 # release.s3.brave.com) apt repos. Both ship amd64+arm64. Keys stored as
@@ -62,27 +68,33 @@ extra_repos() {
     ;;
   esac
   $SUDO install -d -m 755 /usr/share/keyrings
-  if curl -fsSL --retry 5 --retry-all-errors \
-    https://packages.microsoft.com/keys/microsoft.asc |
-    $SUDO tee /usr/share/keyrings/microsoft.asc >/dev/null; then
+  # fetch both keys concurrently — saves a round-trip
+  local tmpd
+  tmpd=$(mktemp -d)
+  curl -fsSL --retry 5 --retry-all-errors \
+    https://packages.microsoft.com/keys/microsoft.asc -o "$tmpd/microsoft.asc" &
+  local pid1=$!
+  curl -fsSL --retry 5 --retry-all-errors \
+    https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg \
+    -o "$tmpd/brave-browser-archive-keyring.gpg" &
+  local pid2=$!
+  wait "$pid1" && [ -s "$tmpd/microsoft.asc" ] &&
+    $SUDO install -m 644 "$tmpd/microsoft.asc" /usr/share/keyrings/microsoft.asc &&
     printf 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/microsoft.asc] https://packages.microsoft.com/repos/code stable main\n' |
-      $SUDO tee /etc/apt/sources.list.d/vscode.list >/dev/null
-  else
-    $SUDO rm -f /usr/share/keyrings/microsoft.asc
-  fi
-  if curl -fsSL --retry 5 --retry-all-errors \
-    https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg |
-    $SUDO tee /usr/share/keyrings/brave-browser-archive-keyring.gpg >/dev/null; then
+    $SUDO tee /etc/apt/sources.list.d/vscode.list >/dev/null || true
+  wait "$pid2" && [ -s "$tmpd/brave-browser-archive-keyring.gpg" ] &&
+    $SUDO install -m 644 "$tmpd/brave-browser-archive-keyring.gpg" \
+      /usr/share/keyrings/brave-browser-archive-keyring.gpg &&
     printf 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main\n' |
-      $SUDO tee /etc/apt/sources.list.d/brave-browser-release.list >/dev/null
-  else
-    $SUDO rm -f /usr/share/keyrings/brave-browser-archive-keyring.gpg
-  fi
+    $SUDO tee /etc/apt/sources.list.d/brave-browser-release.list >/dev/null || true
+  rm -rf "$tmpd"
   # cached deb on the provision volume beats the repo; repo name only
-  # when its sources+key landed (this run or persisted on the VM disk)
+  # when its sources+key landed (this run or persisted on the VM disk).
+  # brave-keyring: cached-deb only (arch all) — kills the first-boot
+  # apt-get update fallback; when absent, the repo dep path pulls it.
   local p f
-  for p in code brave-browser; do
-    f=$(find /mnt/lima-provision -maxdepth 1 -name "${p}_*_${ARCH}.deb" 2>/dev/null |
+  for p in code brave-browser brave-keyring; do
+    f=$(find /mnt/lima-provision -maxdepth 1 -name "${p}_*_*.deb" 2>/dev/null |
       sort -V | tail -1)
     if [ -n "$f" ]; then
       PKGS+=("$f")
@@ -154,15 +166,37 @@ log "installing: ${PKGS[*]:-none}"
   exit 0
 }
 
-# index needed whenever any repo source landed this run or the cached deb
-# is newer than what the last update saw — cheap enough to just always run
-$SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3
+# apt index is only needed when installing from a repo. Cached local debs
+# resolve their deps against the distro index the desktop script already
+# refreshed this boot. If deps are somehow missing, the retry below updates
+# and tries again.
+all_cached=true
+for p in "${PKGS[@]}"; do
+  [ "${p:0:1}" = '/' ] || all_cached=false
+done
 
-$SUDO apt-get install "${APT_OPTS[@]}" "${PKGS[@]}"
+if [ "$all_cached" = false ]; then
+  $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3
+  $SUDO "${EAT[@]}" apt-get install "${APT_OPTS[@]}" "${PKGS[@]}"
+else
+  $SUDO "${EAT[@]}" apt-get install "${APT_OPTS[@]}" "${PKGS[@]}" || {
+    log "dep resolution failed, updating index and retrying"
+    $SUDO apt-get update -o Acquire::Languages=none -o Acquire::Retries=3
+    $SUDO "${EAT[@]}" apt-get install "${APT_OPTS[@]}" "${PKGS[@]}"
+  }
+fi
 
-# cache debs on the provision volume (selkies-deb pattern)
-for p in code brave-browser; do
-  $SUDO cp /var/cache/apt/archives/"${p}"_*_"${ARCH}".deb /mnt/lima-provision/ 2>/dev/null || true
+# cache debs on the provision volume (selkies-deb pattern); skip the
+# ~250MB copy when the exact same deb is already there
+for p in code brave-browser brave-keyring; do
+  f=$(find /var/cache/apt/archives -maxdepth 1 -name "${p}_*_*.deb" 2>/dev/null | sort -V | tail -1)
+  [ -n "$f" ] || continue
+  b=${f##*/}
+  if [ -f "/mnt/lima-provision/$b" ] &&
+    [ "$(stat -c%s "$f")" = "$(stat -c%s "/mnt/lima-provision/$b" 2>/dev/null)" ]; then
+    continue
+  fi
+  $SUDO cp "$f" "/mnt/lima-provision/" 2>/dev/null || true
 done
 
 launchers
