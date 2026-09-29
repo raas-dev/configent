@@ -791,7 +791,7 @@
       }
     },
     "theme": {
-      "system_theme": 1
+      "system_theme": 0
     },
     "ui": {
       "developer_mode": true
