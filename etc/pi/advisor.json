@@ -1,0 +1,11 @@
+{
+  "advisor": "zai/glm-5.3",
+  "advisorEffort": "low",
+  "executor": "minimax/MiniMax-M3",
+  "executorEffort": "minimal",
+  "advisorOutcomeLogging": false,
+  "showUsageFooter": true,
+  "alwaysOn": true,
+  "simpleMode": true,
+  "advisorDisableSameModel": false
+}
