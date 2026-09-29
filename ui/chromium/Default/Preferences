@@ -1201,7 +1201,7 @@
     "default_content_setting_values": {
       "has_migrated_local_network_access": true
     },
-    "exit_type": "Crashed",
+    "exit_type": "Normal",
     "family_member_role": "not_in_family",
     "last_engagement_time": "13435162759021122",
     "last_time_obsolete_http_credentials_removed": 1790687998.45651,

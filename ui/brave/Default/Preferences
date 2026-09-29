@@ -2133,7 +2133,7 @@
       "has_migrated_local_network_access": true,
       "httpsUpgrades": 2
     },
-    "exit_type": "Crashed",
+    "exit_type": "Normal",
     "family_link_user_state": 6,
     "family_member_role": "not_in_family",
     "isolated_web_app": {
