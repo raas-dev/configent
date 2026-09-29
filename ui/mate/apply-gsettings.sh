@@ -90,8 +90,10 @@ gsettings set org.mate.background primary-color 'rgb(0,0,0)'
 gsettings set org.mate.background secondary-color 'rgb(0,0,0)'
 
 # === org.mate.font-rendering ===
+# Subpixel smoothing (LCD) + full hinting + subpixel order. No custom DPI.
 gsettings set org.mate.font-rendering antialiasing 'rgba'
 gsettings set org.mate.font-rendering hinting 'full'
+gsettings set org.mate.font-rendering rgba-order 'rgb'
 
 # === org.mate.interface ===
 gsettings set org.mate.interface document-font-name 'Ubuntu Sans Medium 13'
