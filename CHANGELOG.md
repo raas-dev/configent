@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.244.10](https://github.com/raas-dev/configent/compare/1.244.9...1.244.10) (2026-09-29)
+
+### Fixes
+
+* **chromium:** set group ownership in profile seeding ([3024aae](https://github.com/raas-dev/configent/commit/3024aaedec822171c9ce607c8984223ac850fb15))
+* **install:** explicitly set group ownership in chown/install ([db220d5](https://github.com/raas-dev/configent/commit/db220d50260744778f2d2b474a0d1e321f068fe1))
+* **mcp:** rename mcp.json to mcp-adapter.json ([65efc66](https://github.com/raas-dev/configent/commit/65efc66f6dcc99008e2448226f6430f1de8821de))
+* **ui:** set browser exit_type to Normal ([1653a92](https://github.com/raas-dev/configent/commit/1653a92311479b28cd4cbd06ddcc536e3faa8fae))
+
 ## [1.244.9](https://github.com/raas-dev/configent/compare/1.244.8...1.244.9) (2026-09-27)
 
 ### Fixes
