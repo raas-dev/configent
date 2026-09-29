@@ -1,0 +1,49 @@
+{
+  "checksum": "a9b0621a4fdb76a009df003b2f7ffe4c",
+  "roots": {
+    "bookmark_bar": {
+      "children": [
+        {
+          "date_added": "13435162775263815",
+          "date_last_used": "0",
+          "guid": "6c241382-416e-4ba2-a42e-d5812cd6c0fd",
+          "id": "6",
+          "meta_info": {
+            "power_bookmark_meta": ""
+          },
+          "name": "My IP Address - BrowserLeaks",
+          "type": "url",
+          "url": "https://browserleaks.com/ip"
+        }
+      ],
+      "date_added": "13435162705021928",
+      "date_last_used": "0",
+      "date_modified": "13435162775263815",
+      "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+      "id": "1",
+      "name": "Bookmarks bar",
+      "type": "folder"
+    },
+    "other": {
+      "children": [],
+      "date_added": "13435162705021928",
+      "date_last_used": "0",
+      "date_modified": "13435162717477788",
+      "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+      "id": "2",
+      "name": "Other bookmarks",
+      "type": "folder"
+    },
+    "synced": {
+      "children": [],
+      "date_added": "13435162705021928",
+      "date_last_used": "0",
+      "date_modified": "0",
+      "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+      "id": "3",
+      "name": "Mobile bookmarks",
+      "type": "folder"
+    }
+  },
+  "version": 1
+}

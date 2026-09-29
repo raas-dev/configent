@@ -1,44 +1,896 @@
 {
+  "accessibility": {
+    "captions": {
+      "headless_caption_enabled": false
+    }
+  },
+  "apps": {
+    "shortcuts_arch": "",
+    "shortcuts_version": 0
+  },
+  "autocomplete": {
+    "retention_policy_last_version": 146
+  },
   "autofill": {
-    "enabled": false
+    "last_version_deduped": 146
+  },
+  "bookmark": {
+    "storage_computation_last_update": "13435161530922760"
   },
   "bookmark_bar": {
-    "show_on_all_tabs": false
+    "show_on_all_tabs": true,
+    "show_tab_groups": false
   },
   "browser": {
     "check_default_browser": false,
+    "custom_chrome_frame": true,
     "first_run_finished": true,
-    "has_seen_welcome_page": true,
     "show_home_button": true,
-    "window_placement": {}
+    "window_placement": {
+      "bottom": 1314,
+      "left": 10,
+      "maximized": false,
+      "right": 1894,
+      "top": 43,
+      "work_area_bottom": 1324,
+      "work_area_left": 0,
+      "work_area_right": 1984,
+      "work_area_top": 33
+    }
+  },
+  "commerce_daily_metrics_last_update_time": "13435161530926007",
+  "default_apps_install_state": 2,
+  "default_search_provider": {
+    "guid": "341bf4d0-18b1-4db6-a0a5-f99a440afe0e",
+    "reset_occurred": false
   },
   "default_search_provider_data": {
+    "mirrored_template_url_data": {
+      "alternate_urls": [],
+      "contextual_search_url": "",
+      "created_from_play_api": false,
+      "date_created": "13435161529991817",
+      "doodle_url": "",
+      "enforced_by_policy": false,
+      "favicon_url": "",
+      "featured_by_policy": false,
+      "id": "11",
+      "image_search_branding_label": "",
+      "image_translate_source_language_param_key": "",
+      "image_translate_target_language_param_key": "",
+      "image_translate_url": "",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [],
+      "is_active": 0,
+      "keyword": "google.com",
+      "last_modified": "13435161529991817",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "",
+      "originating_url": "",
+      "policy_origin": 0,
+      "preconnect_to_search_url": false,
+      "prefetch_likely_navigations": false,
+      "prepopulate_id": 0,
+      "safe_for_autoreplace": true,
+      "search_intent_params": [],
+      "search_url_post_params": "",
+      "short_name": "Google",
+      "starter_pack_id": 0,
+      "suggestions_url": "",
+      "suggestions_url_post_params": "",
+      "synced_guid": "341bf4d0-18b1-4db6-a0a5-f99a440afe0e",
+      "url": "https://www.google.com/search?q={searchTerms}",
+      "usage_count": 0
+    },
     "template_url_data": {
       "alternate_urls": [],
-      "input_encodings": "UTF-8",
+      "contextual_search_url": "",
+      "created_from_play_api": false,
+      "date_created": "13435161529991817",
+      "doodle_url": "",
+      "enforced_by_policy": false,
+      "favicon_url": "",
+      "featured_by_policy": false,
+      "id": "11",
+      "image_search_branding_label": "",
+      "image_translate_source_language_param_key": "",
+      "image_translate_target_language_param_key": "",
+      "image_translate_url": "",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [],
+      "is_active": 0,
       "keyword": "google.com",
+      "last_modified": "13435161529991817",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "",
+      "originating_url": "",
+      "policy_origin": 0,
+      "preconnect_to_search_url": false,
+      "prefetch_likely_navigations": false,
+      "prepopulate_id": 0,
       "safe_for_autoreplace": true,
-      "search_terms_replacement_key": "{searchTerms}",
+      "search_intent_params": [],
+      "search_url_post_params": "",
       "short_name": "Google",
-      "url": "https://www.google.com/search?q={searchTerms}"
+      "starter_pack_id": 0,
+      "suggestions_url": "",
+      "suggestions_url_post_params": "",
+      "synced_guid": "341bf4d0-18b1-4db6-a0a5-f99a440afe0e",
+      "url": "https://www.google.com/search?q={searchTerms}",
+      "usage_count": 0
     }
+  },
+  "domain_diversity": {
+    "last_reporting_timestamp": "13435161530925784",
+    "last_reporting_timestamp_v4": "13435161530925788"
   },
   "download": {
     "directory": ""
   },
+  "download_bubble": {
+    "partial_view_enabled": false
+  },
+  "dual_layer_user_pref_store": {
+    "user_selected_sync_types": []
+  },
+  "enterprise_profile_guid": "15b37398-b126-49c4-996d-ff59696b17c8",
   "extensions": {
+    "alerts": {
+      "initialized": true
+    },
+    "chrome_url_overrides": {},
+    "commands": {},
+    "last_chrome_version": "146.0.7680.177",
     "pinned_extensions": [
-      "kdondjcpgpfoejcobgnbmpoljgnhjiaa",
-      "mdinakjfecnibgegdckgghdmejjgjaff"
+      "kdondjcpgpfoejcobgnbmpoljgnhjiaa"
     ],
+    "settings": {
+      "kdondjcpgpfoejcobgnbmpoljgnhjiaa": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "activeTab",
+            "alarms",
+            "storage",
+            "unlimitedStorage",
+            "declarativeNetRequest",
+            "scripting",
+            "offscreen",
+            "userScripts"
+          ],
+          "explicit_host": [
+            "\u003Call_urls>"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "commands": {
+          "_execute_action": {
+            "was_assigned": true
+          },
+          "enter-picker-mode": {
+            "suggested_key": "",
+            "was_assigned": true
+          },
+          "enter-zapper-mode": {
+            "suggested_key": "",
+            "was_assigned": true
+          }
+        },
+        "content_settings": [],
+        "creation_flags": 38,
+        "disable_reasons": [],
+        "dnr_dynamic_ruleset": {
+          "checksum": 1900515052
+        },
+        "dnr_static_ruleset": {
+          "1": {
+            "checksum": 986999442,
+            "ignore_ruleset": false
+          },
+          "10": {
+            "checksum": 941061419,
+            "ignore_ruleset": false
+          },
+          "11": {
+            "checksum": 1019629088,
+            "ignore_ruleset": false
+          },
+          "12": {
+            "checksum": 1795604190,
+            "ignore_ruleset": false
+          },
+          "13": {
+            "checksum": 402063334,
+            "ignore_ruleset": false
+          },
+          "14": {
+            "checksum": 1137228907,
+            "ignore_ruleset": false
+          },
+          "15": {
+            "checksum": 707000461,
+            "ignore_ruleset": false
+          },
+          "16": {
+            "checksum": 572266149,
+            "ignore_ruleset": false
+          },
+          "17": {
+            "checksum": 28381472,
+            "ignore_ruleset": false
+          },
+          "18": {
+            "checksum": 85629248,
+            "ignore_ruleset": false
+          },
+          "19": {
+            "checksum": 1366927693,
+            "ignore_ruleset": false
+          },
+          "2": {
+            "checksum": 280882728,
+            "ignore_ruleset": false
+          },
+          "20": {
+            "checksum": 1909219490,
+            "ignore_ruleset": false
+          },
+          "21": {
+            "checksum": 1006995810,
+            "ignore_ruleset": false
+          },
+          "22": {
+            "checksum": 135556384,
+            "ignore_ruleset": false
+          },
+          "23": {
+            "checksum": 897578444,
+            "ignore_ruleset": false
+          },
+          "24": {
+            "checksum": 1706928525,
+            "ignore_ruleset": false
+          },
+          "25": {
+            "checksum": 653361304,
+            "ignore_ruleset": false
+          },
+          "26": {
+            "checksum": 1592333751,
+            "ignore_ruleset": false
+          },
+          "27": {
+            "checksum": 835915282,
+            "ignore_ruleset": false
+          },
+          "28": {
+            "checksum": 1407814797,
+            "ignore_ruleset": false
+          },
+          "29": {
+            "checksum": 1277542929,
+            "ignore_ruleset": false
+          },
+          "3": {
+            "checksum": 265824960,
+            "ignore_ruleset": false
+          },
+          "30": {
+            "checksum": 1593739999,
+            "ignore_ruleset": false
+          },
+          "31": {
+            "checksum": 1560214536,
+            "ignore_ruleset": false
+          },
+          "32": {
+            "checksum": 357066012,
+            "ignore_ruleset": false
+          },
+          "33": {
+            "checksum": 338466379,
+            "ignore_ruleset": false
+          },
+          "34": {
+            "checksum": 512040072,
+            "ignore_ruleset": false
+          },
+          "35": {
+            "checksum": 78612740,
+            "ignore_ruleset": false
+          },
+          "36": {
+            "checksum": 888525273,
+            "ignore_ruleset": false
+          },
+          "37": {
+            "checksum": 974433586,
+            "ignore_ruleset": false
+          },
+          "38": {
+            "checksum": 1248974205,
+            "ignore_ruleset": false
+          },
+          "39": {
+            "checksum": 2023353150,
+            "ignore_ruleset": false
+          },
+          "4": {
+            "checksum": 1585681149,
+            "ignore_ruleset": false
+          },
+          "40": {
+            "checksum": 570575097,
+            "ignore_ruleset": false
+          },
+          "41": {
+            "checksum": 2054028998,
+            "ignore_ruleset": false
+          },
+          "42": {
+            "checksum": 440025520,
+            "ignore_ruleset": false
+          },
+          "43": {
+            "checksum": 2144463324,
+            "ignore_ruleset": false
+          },
+          "44": {
+            "checksum": 565141886,
+            "ignore_ruleset": false
+          },
+          "45": {
+            "checksum": 1172334218,
+            "ignore_ruleset": false
+          },
+          "46": {
+            "checksum": 80545853,
+            "ignore_ruleset": false
+          },
+          "47": {
+            "checksum": 803813996,
+            "ignore_ruleset": false
+          },
+          "48": {
+            "checksum": 1071996663,
+            "ignore_ruleset": false
+          },
+          "49": {
+            "checksum": 1122359188,
+            "ignore_ruleset": false
+          },
+          "5": {
+            "checksum": 2146601774,
+            "ignore_ruleset": false
+          },
+          "50": {
+            "checksum": 823427540,
+            "ignore_ruleset": false
+          },
+          "51": {
+            "checksum": 1126300825,
+            "ignore_ruleset": false
+          },
+          "52": {
+            "checksum": 1436926283,
+            "ignore_ruleset": false
+          },
+          "53": {
+            "checksum": 2057136043,
+            "ignore_ruleset": false
+          },
+          "54": {
+            "checksum": 1775019172,
+            "ignore_ruleset": false
+          },
+          "55": {
+            "checksum": 307685627,
+            "ignore_ruleset": false
+          },
+          "56": {
+            "checksum": 262227004,
+            "ignore_ruleset": false
+          },
+          "6": {
+            "checksum": 762038830,
+            "ignore_ruleset": false
+          },
+          "7": {
+            "checksum": 922747487,
+            "ignore_ruleset": false
+          },
+          "8": {
+            "checksum": 1308322113,
+            "ignore_ruleset": false
+          },
+          "9": {
+            "checksum": 1439050401,
+            "ignore_ruleset": false
+          }
+        },
+        "dnr_use_action_count_as_badge_text": true,
+        "first_install_time": "13435161530926365",
+        "from_webstore": false,
+        "granted_permissions": {
+          "api": [
+            "activeTab",
+            "alarms",
+            "storage",
+            "unlimitedStorage",
+            "declarativeNetRequest",
+            "scripting",
+            "offscreen",
+            "userScripts"
+          ],
+          "explicit_host": [
+            "\u003Call_urls>"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_update_time": "13435162706014720",
+        "location": 8,
+        "newAllowFileAccess": true,
+        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/ddkjiahejlhfcafbddmgiahcphecmpfh",
+        "persistent_script_url_patterns": [
+          "*://*.247sports.com/*",
+          "*://*.abc17news.com/*",
+          "*://*.abema.tv/*",
+          "*://*.abogadosrosarinos.com/*",
+          "*://*.adrissa.com.co/*",
+          "*://*.al.com/*",
+          "*://*.americansoda.co.uk/*",
+          "*://*.aptisweb.com/*",
+          "*://*.artforum.com/*",
+          "*://*.artnews.com/*",
+          "*://*.aspireatlas.com/*",
+          "*://*.avene-hebergement.com/*",
+          "*://*.awkward.com/*",
+          "*://*.awkwardmom.com/*",
+          "*://*.baeldung.com/*",
+          "*://*.bailiwickexpress.com/*",
+          "*://*.barnsleychronicle.com/*",
+          "*://*.becomingpeculiar.com/*",
+          "*://*.bethcakes.com/*",
+          "*://*.blogher.com/*",
+          "*://*.bluegraygal.com/*",
+          "*://*.briefeguru.de/*",
+          "*://*.caesarjaco.co.id/*",
+          "*://*.carmagazine.co.uk/*",
+          "*://*.casabasics.es/*",
+          "*://*.casteloforte.com.br/*",
+          "*://*.cattime.com/*",
+          "*://*.cbr.com/*",
+          "*://*.cbsnews.com/*",
+          "*://*.cbssports.com/*",
+          "*://*.centerfabril.com.br/*",
+          "*://*.chaptercheats.com/*",
+          "*://*.cheatsheet.com/*",
+          "*://*.cizitensports.com/*",
+          "*://*.collider.com/*",
+          "*://*.comingsoon.net/*",
+          "*://*.commercialobserver.com/*",
+          "*://*.competentedigitale.ro/*",
+          "*://*.coomer.st/*",
+          "*://*.crafty.house/*",
+          "*://*.crimsonav.com/*",
+          "*://*.dailyvoice.com/*",
+          "*://*.darumasushiantofagasta.cl/*",
+          "*://*.decider.com/*",
+          "*://*.didyouknowfacts.com/*",
+          "*://*.dogtime.com/*",
+          "*://*.dualshockers.com/*",
+          "*://*.dustyoldthing.com/*",
+          "*://*.energiasolare100.it/*",
+          "*://*.faithhub.net/*",
+          "*://*.fedex.com/*",
+          "*://*.femestella.com/*",
+          "*://*.footwearnews.com/*",
+          "*://*.forqueen.cz/*",
+          "*://*.freeconvert.com/*",
+          "*://*.frogsandsnailsandpuppydogtail.com/*",
+          "*://*.fsm-media.com/*",
+          "*://*.funtasticlife.com/*",
+          "*://*.fwmadebycarli.com/*",
+          "*://*.gamerant.com/*",
+          "*://*.gemfellowship.org/*",
+          "*://*.gfinityesports.com/*",
+          "*://*.givemesport.com/*",
+          "*://*.gulflive.com/*",
+          "*://*.helloflo.com/*",
+          "*://*.homeglowdesign.com/*",
+          "*://*.honeygirlsworld.com/*",
+          "*://*.hotcars.com/*",
+          "*://*.howtogeek.com/*",
+          "*://*.https-xhamster.com/*",
+          "*://*.igualdad.iaa.csic.es/*",
+          "*://*.indiewire.com/*",
+          "*://*.insider-gaming.com/*",
+          "*://*.insurancejournal.com/*",
+          "*://*.jasminemaria.com/*",
+          "*://*.joinusonline.net/*",
+          "*://*.jollibee.com.vn/*",
+          "*://*.kemono.cr/*",
+          "*://*.kion546.com/*",
+          "*://*.kitapsan.com.tr/*",
+          "*://*.lehighvalleylive.com/*",
+          "*://*.lettyskitchen.com/*",
+          "*://*.lifeinleggings.com/*",
+          "*://*.liveandletsfly.com/*",
+          "*://*.lizzieinlace.com/*",
+          "*://*.localnews8.com/*",
+          "*://*.lonestarlive.com/*",
+          "*://*.longhall.consulting/*",
+          "*://*.lundracing.com/*",
+          "*://*.madeeveryday.com/*",
+          "*://*.madewell.com/*",
+          "*://*.maidenhead-advertiser.co.uk/*",
+          "*://*.makeuseof.com/*",
+          "*://*.mardomreport.net/*",
+          "*://*.mebelinovdom.com/*",
+          "*://*.melangery.com/*",
+          "*://*.milestomemories.com/*",
+          "*://*.mlive.com/*",
+          "*://*.modernmom.com/*",
+          "*://*.momtastic.com/*",
+          "*://*.mostlymorgan.com/*",
+          "*://*.motherwellmag.com/*",
+          "*://*.movieweb.com/*",
+          "*://*.muddybootsanddiamonds.com/*",
+          "*://*.musicfeeds.com.au/*",
+          "*://*.nationalreview.com/*",
+          "*://*.ngsingleissues.nationalgeographic.com/*",
+          "*://*.nj.com/*",
+          "*://*.nordot.app/*",
+          "*://*.nothingbutnewcastle.com/*",
+          "*://*.nsjonline.com/*",
+          "*://*.nypost.com/*",
+          "*://*.oakvillenews.org/*",
+          "*://*.observer.com/*",
+          "*://*.official.coomer.com.co/*",
+          "*://*.ojworld.it/*",
+          "*://*.ondigitalocean.app/*",
+          "*://*.pagesix.com/*",
+          "*://*.pcwelt.de/*",
+          "*://*.pennlive.com/*",
+          "*://*.pentest.blog/*",
+          "*://*.pinkonthecheek.com/*",
+          "*://*.predic.ro/*",
+          "*://*.puckermom.com/*",
+          "*://*.pwinsider.com/*",
+          "*://*.qtoptens.com/*",
+          "*://*.qualityrental.com/*",
+          "*://*.rapidkil.com.au/*",
+          "*://*.realgm.com/*",
+          "*://*.red17.co.uk/*",
+          "*://*.robbreport.com/*",
+          "*://*.royalmailchat.co.uk/*",
+          "*://*.samchui.com/*",
+          "*://*.sandrarose.com/*",
+          "*://*.screenrant.com/*",
+          "*://*.sheknows.com/*",
+          "*://*.sherdog.com/*",
+          "*://*.sidereel.com/*",
+          "*://*.simpleflying.com/*",
+          "*://*.skybap.shop/*",
+          "*://*.sloughexpress.co.uk/*",
+          "*://*.spacenews.com/*",
+          "*://*.sport.elwatannews.com/*",
+          "*://*.sportsgamblingpodcast.com/*",
+          "*://*.spotofteadesigns.com/*",
+          "*://*.ssnewstelegram.com/*",
+          "*://*.stacysrandomthoughts.com/*",
+          "*://*.strand-co.com/*",
+          "*://*.superherohype.com/*",
+          "*://*.szaszmotorshop.hu/*",
+          "*://*.tablelifeblog.com/*",
+          "*://*.thebeautysection.com/*",
+          "*://*.thecelticblog.com/*",
+          "*://*.thecurvyfashionista.com/*",
+          "*://*.thefashionspot.com/*",
+          "*://*.thegamer.com/*",
+          "*://*.thenerdyme.com/*",
+          "*://*.thenonconsumeradvocate.com/*",
+          "*://*.thethings.com/*",
+          "*://*.timesnews.net/*",
+          "*://*.topspeed.com/*",
+          "*://*.toyotaklub.org.pl/*",
+          "*://*.travelingformiles.com/*",
+          "*://*.tvline.com/*",
+          "*://*.tvojstyl.sk/*",
+          "*://*.up-shop.org/*",
+          "*://*.usaa.com/*",
+          "*://*.visible.com/*",
+          "*://*.web.core.windows.net/*",
+          "*://*.webrick.com/*",
+          "*://*.weightlossdiet.top/*",
+          "*://*.workplace-products.co.uk/*",
+          "*://*.www.cambe.pr.gov.br/*",
+          "*://*.yairalon.com.br/*",
+          "*://*.z13.web.core.windows.net/*",
+          "\u003Call_urls>"
+        ],
+        "preferences": {},
+        "regular_only_preferences": {},
+        "service_worker_registration_info": {
+          "version": "2026.926.2202"
+        },
+        "serviceworkerevents": [
+          "alarms.onAlarm",
+          "commands.onCommand",
+          "permissions.onAdded",
+          "permissions.onRemoved"
+        ],
+        "storage_session_access_level": 2,
+        "user_scripts_enabled": true,
+        "user_scripts_worlds": {
+          "configuration": {
+            "_default": {
+              "messaging": true
+            }
+          }
+        },
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false,
+        "withholding_permissions": false
+      },
+      "mdinakjfecnibgegdckgghdmejjgjaff": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "notifications",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "declarativeNetRequestWithHostAccess"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "commands": {
+          "_execute_action": {
+            "was_assigned": true
+          }
+        },
+        "content_settings": [],
+        "creation_flags": 38,
+        "disable_reasons": [],
+        "dnr_static_ruleset": {
+          "1": {
+            "checksum": 1844330657,
+            "ignore_ruleset": false
+          }
+        },
+        "filtered_service_worker_events": {
+          "webNavigation.onCommitted": [
+            {}
+          ],
+          "webNavigation.onCompleted": [
+            {}
+          ]
+        },
+        "first_install_time": "13435161530934559",
+        "from_webstore": false,
+        "granted_permissions": {
+          "api": [
+            "notifications",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "scripting",
+            "declarativeNetRequestWithHostAccess"
+          ],
+          "explicit_host": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_update_time": "13435162706021602",
+        "location": 8,
+        "newAllowFileAccess": true,
+        "path": "/home/asyrjasalo.guest/.config/chromium-extensions/edibdbjcniadpccecjdfdjjppcpchdlm",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "service_worker_registration_info": {
+          "version": "1.1.9"
+        },
+        "serviceworkerevents": [
+          "runtime.onInstalled",
+          "tabs.onCreated",
+          "tabs.onRemoved",
+          "tabs.onUpdated"
+        ],
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false,
+        "withholding_permissions": false
+      },
+      "mhjfbmdgcfjbbpaeojofohoefgiehjai": {
+        "account_extension_type": 0,
+        "active_permissions": {
+          "api": [
+            "contentSettings",
+            "fileSystem",
+            "fileSystem.write",
+            "metricsPrivate",
+            "tabs",
+            "resourcesPrivate",
+            "pdfViewerPrivate"
+          ],
+          "explicit_host": [
+            "chrome://resources/*",
+            "chrome://webui-test/*"
+          ],
+          "manifest_permissions": [],
+          "scriptable_host": []
+        },
+        "commands": {},
+        "content_settings": [],
+        "creation_flags": 1,
+        "disable_reasons": [],
+        "events": [],
+        "first_install_time": "13435161530026165",
+        "from_webstore": false,
+        "incognito_content_settings": [],
+        "incognito_preferences": {},
+        "last_update_time": "13435161530026165",
+        "location": 5,
+        "manifest": {
+          "content_security_policy": "script-src 'self' blob: filesystem: chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
+          "description": "",
+          "incognito": "split",
+          "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN6hM0rsDYGbzQPQfOygqlRtQgKUXMfnSjhIBL7LnReAVBEd7ZmKtyN2qmSasMl4HZpMhVe2rPWVVwBDl6iyNE/Kok6E6v6V3vCLGsOpQAuuNVye/3QxzIldzG/jQAdWZiyXReRVapOhZtLjGfywCvlWq7Sl/e3sbc0vWybSDI2QIDAQAB",
+          "manifest_version": 2,
+          "mime_types": [
+            "application/pdf"
+          ],
+          "mime_types_handler": "index.html",
+          "name": "Chromium PDF Viewer",
+          "offline_enabled": true,
+          "permissions": [
+            "chrome://resources/",
+            "chrome://webui-test/",
+            "contentSettings",
+            "metricsPrivate",
+            "pdfViewerPrivate",
+            "resourcesPrivate",
+            "tabs",
+            {
+              "fileSystem": [
+                "write"
+              ]
+            }
+          ],
+          "version": "1",
+          "web_accessible_resources": [
+            "pdf_embedder.css"
+          ]
+        },
+        "path": "/home/asyrjasalo.guest/.local/share/cloakbrowser/chromium-146.0.7680.177.4/resources/pdf",
+        "preferences": {},
+        "regular_only_preferences": {},
+        "was_installed_by_default": false,
+        "was_installed_by_oem": false
+      }
+    },
+    "theme": {
+      "system_theme": 1
+    },
     "ui": {
       "developer_mode": true
     }
   },
+  "gcm": {
+    "product_category_for_subtypes": "org.chromium.linux"
+  },
   "homepage": "https://www.google.com",
   "homepage_is_newtabpage": false,
+  "in_product_help": {
+    "new_badge": {
+      "Compose": {
+        "feature_enabled_time": "13435161530986169",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "ComposeNudge": {
+        "feature_enabled_time": "13435161530986171",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "ComposeProactiveNudge": {
+        "feature_enabled_time": "13435161530986176",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "LensOverlay": {
+        "feature_enabled_time": "13435161530986180",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "SideBySide": {
+        "feature_enabled_time": "13435161530986148",
+        "show_count": 0,
+        "used_count": 0
+      },
+      "SideBySideLinkMenuNewBadge": {
+        "feature_enabled_time": "13435161530986166",
+        "show_count": 0,
+        "used_count": 0
+      }
+    },
+    "recent_session_enabled_time": "13435161530986607",
+    "recent_session_start_times": [
+      "13435161530986607"
+    ],
+    "session_last_active_time": "13435162765853335",
+    "session_number": 2,
+    "session_start_time": "13435161530986607"
+  },
   "intl": {
-    "accept_languages": "en-US,en"
+    "accept_languages": "en-US,en",
+    "selected_languages": "en-US,en"
+  },
+  "invalidation": {
+    "per_sender_registered_for_invalidation": {
+      "1013309121859": {},
+      "947318989803": {}
+    }
+  },
+  "media": {
+    "engagement": {
+      "schema_version": 5
+    }
+  },
+  "media_router": {
+    "receiver_id_hash_token": "CxQYBG+Dfhexg6j45y+HnKubuEJtjPFAs71vJ3SecyE1mo6VTjqCJa2v6Jp8vXArsHrerhQB05LpahYGAu7hiA=="
+  },
+  "migrated_user_scripts_toggle": true,
+  "NewTabPage": {
+    "CustomizeChromeExplicitlyClosed": true
+  },
+  "ntp": {
+    "last_shortcuts_staleness_update": "13435161531608544",
+    "num_personal_suggestions": 2
+  },
+  "omnibox": {
+    "shown_count_history_scope_promo": 1
+  },
+  "optimization_guide": {
+    "hintsfetcher": {
+      "hosts_successfully_fetched": {}
+    },
+    "previously_registered_optimization_types": {
+      "ABOUT_THIS_SITE": true,
+      "AUTOFILL_ACTOR_IFRAME_ORIGIN_ALLOWLIST": true,
+      "DIGITAL_CREDENTIALS_LOW_FRICTION": true,
+      "HISTORY_CLUSTERS": true,
+      "LENS_OVERLAY_EDU_ACTION_CHIP_ALLOWLIST": true,
+      "LENS_OVERLAY_EDU_ACTION_CHIP_BLOCKLIST": true,
+      "LOADING_PREDICTOR": true,
+      "MERCHANT_TRUST_SIGNALS_V2": true,
+      "PAGE_ENTITIES": true,
+      "PRICE_TRACKING": true,
+      "SALIENT_IMAGE": true,
+      "SAVED_TAB_GROUP": true,
+      "V8_COMPILE_HINTS": true
+    }
   },
   "partition": {
     "default_zoom_level": {
@@ -48,36 +900,672 @@
       "x": {}
     }
   },
+  "password_manager": {
+    "account_store_backup_password_cleaning_last_timestamp": "13435161598456610",
+    "account_store_migrated_to_os_crypt_async": true,
+    "password_promo_cards_list": [
+      {
+        "id": "relaunch_chrome_promo",
+        "last_time_shown": "0",
+        "number_of_times_shown": 0,
+        "was_dismissed": false
+      }
+    ],
+    "profile_store_backup_password_cleaning_last_timestamp": "13435161598456463",
+    "profile_store_migrated_to_os_crypt_async": true
+  },
   "performance": {
     "memory_saver_enabled": true
   },
+  "pinned_tabs": [],
+  "privacy_sandbox": {
+    "first_party_sets_data_access_allowed_initialized": true,
+    "first_party_sets_enabled": false,
+    "m1": {
+      "ad_measurement_enabled": false,
+      "fledge_enabled": false,
+      "topics_enabled": false
+    }
+  },
   "profile": {
+    "avatar_index": 26,
+    "background_password_check": {
+      "check_fri_weight": 9,
+      "check_interval": "2592000000000",
+      "check_mon_weight": 6,
+      "check_sat_weight": 6,
+      "check_sun_weight": 6,
+      "check_thu_weight": 9,
+      "check_tue_weight": 9,
+      "check_wed_weight": 9,
+      "next_check_time": "13435856965120809"
+    },
     "content_settings": {
       "exceptions": {
+        "3pcd_heuristics_grants": {},
+        "abusive_notification_permissions": {},
+        "access_to_get_all_screens_media_in_session": {},
+        "anti_abuse": {},
+        "app_banner": {
+          "chrome://password-manager/,*": {
+            "last_modified": "13435161569486002",
+            "setting": {
+              "chrome://password-manager/": {
+                "couldShowBannerEvents": 1.3435161569485996e+16,
+                "next_install_text_animation": {
+                  "delay": "86400000000",
+                  "last_shown": "13435161569485468"
+                }
+              }
+            }
+          }
+        },
+        "ar": {},
+        "are_suspicious_notifications_allowlisted_by_user": {},
+        "auto_picture_in_picture": {},
+        "auto_select_certificate": {},
+        "automatic_downloads": {},
+        "automatic_fullscreen": {},
+        "autoplay": {},
+        "background_sync": {},
+        "bluetooth_chooser_data": {},
+        "bluetooth_guard": {},
+        "bluetooth_scanning": {},
+        "camera_pan_tilt_zoom": {},
+        "captured_surface_control": {},
+        "client_hints": {
+          "https://www.google.com:443,*": {
+            "last_modified": "13435162710521816",
+            "setting": {
+              "client_hints": [
+                4,
+                5,
+                9,
+                10,
+                11,
+                13,
+                14,
+                15,
+                16,
+                23,
+                25,
+                29
+              ]
+            }
+          }
+        },
+        "clipboard": {},
+        "controlled_frame": {},
+        "cookie_controls_metadata": {
+          "https://[*.]browserleaks.com,*": {
+            "last_modified": "13435162760233935",
+            "setting": {}
+          },
+          "https://[*.]google.com,*": {
+            "last_modified": "13435162710528730",
+            "setting": {}
+          }
+        },
+        "cookies": {},
+        "direct_sockets": {},
+        "direct_sockets_private_network_access": {},
+        "display_media_system_audio": {},
+        "disruptive_notification_permissions": {},
+        "durable_storage": {},
+        "fedcm_idp_registration": {},
+        "fedcm_idp_signin": {},
+        "fedcm_share": {},
+        "file_system_access_chooser_data": {},
+        "file_system_access_extended_permission": {},
+        "file_system_access_restore_permission": {},
+        "file_system_last_picked_directory": {},
+        "file_system_read_guard": {},
+        "file_system_write_guard": {},
+        "formfill_metadata": {},
         "geolocation": {},
+        "geolocation_with_options": {},
+        "hand_tracking": {},
+        "has_migrated_local_network_access": true,
+        "hid_chooser_data": {},
+        "hid_guard": {},
+        "http_allowed": {},
+        "https_enforced": {},
+        "idle_detection": {},
+        "images": {},
+        "important_site_info": {},
+        "initialized_translations": {},
+        "intent_picker_auto_display": {},
+        "javascript": {},
+        "javascript_jit": {},
+        "javascript_optimizer": {},
+        "keyboard_lock": {},
+        "legacy_cookie_access": {},
+        "legacy_cookie_scope": {},
+        "local_fonts": {},
+        "local_network": {},
+        "local_network_access": {},
+        "loopback_network": {},
+        "media_engagement": {
+          "https://browserleaks.com:443,*": {
+            "expiration": "13442938266910499",
+            "last_modified": "13435162266910504",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 1
+            }
+          },
+          "https://www.google.com:443,*": {
+            "expiration": "13442938712509504",
+            "last_modified": "13435162712509507",
+            "lifetime": "7776000000000",
+            "setting": {
+              "hasHighScore": false,
+              "lastMediaPlaybackTime": 0.0,
+              "mediaPlaybacks": 0,
+              "visits": 4
+            }
+          }
+        },
+        "media_stream_camera": {},
+        "media_stream_mic": {},
         "media-stream-camera": {},
         "media-stream-mic": {},
-        "notifications": {}
+        "midi_sysex": {},
+        "mixed_script": {},
+        "nfc_devices": {},
+        "notification_interactions": {},
+        "notification_permission_review": {},
+        "notifications": {},
+        "ondevice_languages_downloaded": {},
+        "password_protection": {},
+        "payment_handler": {},
+        "permission_actions_history": {},
+        "permission_autoblocking_data": {},
+        "permission_autorevocation_data": {},
+        "pointer_lock": {},
+        "popups": {},
+        "protocol_handler": {},
+        "reduced_accept_language": {},
+        "safe_browsing_url_check_data": {},
+        "sensors": {},
+        "serial_chooser_data": {},
+        "serial_guard": {},
+        "site_engagement": {
+          "chrome://bookmarks/,*": {
+            "last_modified": "13435162136100432",
+            "setting": {
+              "lastEngagementTime": 1.3435162136100426e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 3.0,
+              "rawScore": 3.0
+            }
+          },
+          "chrome://customize-chrome-side-panel.top-chrome/,*": {
+            "last_modified": "13435162197026010",
+            "setting": {
+              "lastEngagementTime": 1.3435162197025984e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 8.999999999999998,
+              "rawScore": 8.999999999999998
+            }
+          },
+          "chrome://extensions/,*": {
+            "last_modified": "13435161849305175",
+            "setting": {
+              "lastEngagementTime": 1.3435161849305168e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 2.1,
+              "rawScore": 2.1
+            }
+          },
+          "chrome://newtab/,*": {
+            "last_modified": "13435162706132640",
+            "setting": {
+              "lastEngagementTime": 1.3435162706132622e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 12.0,
+              "rawScore": 12.0
+            }
+          },
+          "chrome://password-manager/,*": {
+            "last_modified": "13435161569350147",
+            "setting": {
+              "lastEngagementTime": 1.3435161569350144e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 3.0,
+              "rawScore": 3.0
+            }
+          },
+          "chrome://settings/,*": {
+            "last_modified": "13435162167556359",
+            "setting": {
+              "lastEngagementTime": 1.3435162167556334e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 15.0,
+              "rawScore": 15.0
+            }
+          },
+          "chrome://tab-search.top-chrome/,*": {
+            "last_modified": "13435162095234306",
+            "setting": {
+              "lastEngagementTime": 1.34351620952343e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 3.0,
+              "rawScore": 3.0
+            }
+          },
+          "https://browserleaks.com:443,*": {
+            "last_modified": "13435162759021159",
+            "setting": {
+              "lastEngagementTime": 1.3435162759021122e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 4.2,
+              "rawScore": 4.2
+            }
+          },
+          "https://www.google.com:443,*": {
+            "last_modified": "13435162710529321",
+            "setting": {
+              "lastEngagementTime": 1.3435162710529308e+16,
+              "lastShortcutLaunchTime": 0.0,
+              "pointsAddedToday": 7.5,
+              "rawScore": 7.5
+            }
+          }
+        },
+        "sound": {},
+        "speaker_selection": {},
+        "ssl_cert_decisions": {},
+        "storage_access": {},
+        "storage_access_header_origin_trial": {},
+        "subresource_filter": {},
+        "subresource_filter_data": {},
+        "suspicious_notification_ids": {},
+        "suspicious_notification_show_original": {},
+        "top_level_storage_access": {},
+        "unused_site_permissions": {},
+        "usb_chooser_data": {},
+        "usb_guard": {},
+        "vr": {},
+        "web_app_installation": {},
+        "webid_api": {},
+        "webid_auto_reauthn": {},
+        "window_placement": {}
+      },
+      "pref_version": 1
+    },
+    "creation_time": "13435161520754217",
+    "default_content_setting_values": {
+      "has_migrated_local_network_access": true
+    },
+    "exit_type": "Crashed",
+    "family_member_role": "not_in_family",
+    "last_engagement_time": "13435162759021122",
+    "last_time_obsolete_http_credentials_removed": 1790687998.45651,
+    "last_time_password_store_metrics_reported": 1790687968.456561,
+    "managed": {
+      "locally_parent_approved_extensions": {},
+      "locally_parent_approved_extensions_migration_state": 1
+    },
+    "managed_user_id": "",
+    "name": "Personal",
+    "password_hash_data_list": [],
+    "password_manager_enabled": false,
+    "safety_hub_menu_notifications": {
+      "extensions": {
+        "isCurrentlyActive": false,
+        "result": {
+          "timestamp": "13435162770821157",
+          "triggeringExtensions": []
+        }
+      },
+      "notification-permissions": {
+        "isCurrentlyActive": false,
+        "result": {
+          "notificationPermissions": [],
+          "timestamp": "13435162709026663"
+        }
+      },
+      "passwords": {
+        "isCurrentlyActive": false,
+        "result": {
+          "passwordCheckOrigins": [],
+          "timestamp": "13435162706122269"
+        }
+      },
+      "safe-browsing": {
+        "isCurrentlyActive": false,
+        "onlyShowAfterTime": "13435247933373490",
+        "result": {
+          "safeBrowsingStatus": 4,
+          "timestamp": "13435162770821137"
+        }
+      },
+      "unused-site-permissions": {
+        "isCurrentlyActive": false,
+        "result": {
+          "permissions": [],
+          "timestamp": "13435162709026705"
+        }
       }
     },
-    "exit_type": "Normal",
-    "password_manager_enabled": false
+    "using_default_name": false,
+    "were_old_google_logins_removed": true
+  },
+  "protection": {
+    "macs": {
+      "account_values": {
+        "browser": {
+          "show_home_button": "F6B8688079AA4C4657C3FEDCF3311348C99CB4907EEC8560CC323E4F37D1EA41",
+          "show_home_button_encrypted_hash": "djEwotRkFT2vHnhhCIA/V+DRZrZjLnP+b+0VwSGjql5xrXDmPtBAfaZbFURGViRnbnec"
+        },
+        "extensions": {
+          "ui": {
+            "developer_mode": "C4B515ABCB16541C88B522387A89F47E24F150FF18A7256BF19EE2C0896D7555",
+            "developer_mode_encrypted_hash": "djEwnGn4HyLm571QCCeecs4XAyIbPpI4sjZ8ckF6sff8BGbQEywtWeDm4qpSwJqGYOvN"
+          }
+        },
+        "homepage": "0F156BE8FFEDBF22CC2E394D6BD8DDD392F953D0F397958C64EFA57087182457",
+        "homepage_encrypted_hash": "djEwez6wt5PtkfTxuN+U9KVU6gUa9/33imjLLrtlo3LT0Y1d/stHX2XjJEWHwpeLGZY1",
+        "homepage_is_newtabpage": "BAF0DE42A6FEAC5EF6500592AEC92B79DC055C1E352B0F7BAC0BB6E72ECE67D3",
+        "homepage_is_newtabpage_encrypted_hash": "djEwNuiyCSZBdqhV7ESdO8yuXbA1NHRVLQ2svfo+ZK5oaIry2f9Cx4rce+mIbAEw7G0P",
+        "session": {
+          "restore_on_startup": "81940185F7F78D0317AB3741FA4A283985C31DB3BF95D3A4DDD4CD78FC5021F1",
+          "restore_on_startup_encrypted_hash": "djEwFEzg0id00W34Gz2o0K8gX+KMNet+dXfslTgHKA9xnZMI4OplF+GZvcpGWGX5hEYJ",
+          "startup_urls": "B41DC391D323AEB2C5465D75AB79284F9F6620BEF161110DE35202261FF03449",
+          "startup_urls_encrypted_hash": "djEwghL6jSVRi8mLaRGAB/JzS+xXBtxjeESAqUdFS7oORXVQ1jXID0VGOoaLWOgIcbzO"
+        }
+      },
+      "browser": {
+        "show_home_button": "9463DEC4C15E47646D05FD921E0E475249EA15DE77808C4664EF238C54D89FC7",
+        "show_home_button_encrypted_hash": "djEw7yR6WqQt12q4/7WXKVhYqUw9ZLLch8Bn5pJ5lZv361SrK7Qk2jN+YH1DB60Z9nkS"
+      },
+      "default_search_provider_data": {
+        "template_url_data": "B642DDD5C200A64115AC7482C9E1F981F5605210D4F156BD09C2508817969EDA",
+        "template_url_data_encrypted_hash": "djEw+bVs5MMDEd/7lHyXET+4CC29grELbzsDh1GkEprHObtmMzBgOCFozq/cqiod65aU"
+      },
+      "enterprise_signin": {
+        "policy_recovery_token": "7D3124ECAF7E96407EB65EAF5A43B02C7EE5F2D4A9FA38A9F371F9E1B74D6383",
+        "policy_recovery_token_encrypted_hash": "djEwntGC63MNa+3FPXvwkgoSZGXvXYrVoevkgw7qmK06Zwt7RdLbwPV3QCnGv8fsmfLO"
+      },
+      "extensions": {
+        "install": {
+          "initiallist": "721565429F6DB8F08CC129E8B4A99021CECE263598EA7CF847C99A2133F23581",
+          "initiallist_encrypted_hash": "djEwkHeWi9EY4quXPiJOJHKkiaZv/Yduf0mGmHL+hm4bMgHCoBktkuispsBkSEGGppg3",
+          "initialprovidername": "89DB3C44559AC7E75E930F08876F726C91D84C2D8D4D0A9DB7DA59DB15FA76D1",
+          "initialprovidername_encrypted_hash": "djEwn2R+8PGjEAKtAZe3ZdaoPoPlRUrGh6V/o9KiENuI/3AtKFJq5/M1WhPIlSo2Q+lT"
+        },
+        "settings": {
+          "kdondjcpgpfoejcobgnbmpoljgnhjiaa": "02D1934F12B429C64E6DE5F19DBF4D6F658F93DAE7830AD1839B1D4F335F5F9B",
+          "mdinakjfecnibgegdckgghdmejjgjaff": "D9C456EFCF3E61ECA6643E53DA1566D3C041DB0A7AB57C7137853AA191B003BC",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "E0543126EE630AFB32A4B9679489C8C81F7C7D5DDEC3AFA04D83826E07C7D2CB"
+        },
+        "settings_encrypted_hash": {
+          "kdondjcpgpfoejcobgnbmpoljgnhjiaa": "djEwVFX/LGm5R/ZpA7YWR8UW+1TUVBZnPC8OTR18WWBtFko49ni9TT3+XzVBbcTCvIa8",
+          "mdinakjfecnibgegdckgghdmejjgjaff": "djEwr9c99LwtLC2OXUf9S0zjMZl3QuRJRW9C3VRv4K8Z6mBYRYi+hl2+LF/gll6Xl5pz",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "djEw8nPni9w2sOM3fHGVzPZ6g5Qktaq7W/Nl5O06yX0CW1jIIjAdIWgnHCTEvSsv+kYx"
+        },
+        "ui": {
+          "developer_mode": "F1323889EA777F2EB3E23F3E2CFCB59D3FAFCB8DE80104742CBF2A9E44046ED9",
+          "developer_mode_encrypted_hash": "djEwfCGr2TgkPAHCIt8sZ4jkb0bSv5ICCM9uQ6lDgJu7T3J2wsMXND8gcWI4gmJMgDZq"
+        }
+      },
+      "homepage": "D13E070CF1879C10D6BA089F7F131E5A38AB78D28FF904A344608604DDF45005",
+      "homepage_encrypted_hash": "djEwYb+Yb5sfjP9TNBVuP08vZfavWfgp6EMMdIImmqw0auZN/vtZxkW5Uvbrrd/eX/zg",
+      "homepage_is_newtabpage": "C77EA32F1872FF78A94FD3CF2AC2625671D07B6EC18468CE474F383FE0BAFEFA",
+      "homepage_is_newtabpage_encrypted_hash": "djEwiubcvYw11NV1lw0aWHdWCCOUymIyejCfN0hljQF4todaXoWXPLKdyaq/hOPETzQh",
+      "media": {
+        "storage_id_salt": "E1848263E6199A89D48A7FDF168364BF0F31246A18227F3D149D4088C7F4D667",
+        "storage_id_salt_encrypted_hash": "djEwmus7A6SiHO78MEjfL8UH7gPMKzNqfXxuxeOCVs7oMQHvhcUctFVQ/H+biDlrSfmN"
+      },
+      "pinned_tabs": "699F1AC92729A024B80605AFC3C63BFB2A35B70C4214581BBE108F851528E9E8",
+      "pinned_tabs_encrypted_hash": "djEwWWzDrSaMLtgsEw/+Gm0mxCsOZDVi9oV24mKKlydfO4BJ+oH89l9wazE660PTgWyL",
+      "prefs": {
+        "preference_reset_time": "95C909F3D0669D5931907B455F099C510E7770D9F0BA6FF13E4C76101B44F757",
+        "preference_reset_time_encrypted_hash": "djEwyqoM/JGpKiFlXV3eoINFUv2ETBFL4NGU4ieOBHK8c6NFWgNZelQ+eaT90ssc6IS/"
+      },
+      "schedule_to_flush_to_disk": "504E08C4A60121F65459777EB62399C400BE1820D9D9086426F4209E2AAD7A37",
+      "schedule_to_flush_to_disk_encrypted_hash": "djEwqaV+4dRpdwkyKdeTPvVBqnsZgVhDjOuFit8iBD+TfL5Q3DHzJnFRm59ia/wNZVp5",
+      "search_provider_overrides": "1E1EBA3A4DC28A23BEFCF6ED5D71CE71E9814DD587A305F6B14F72E834AF75DD",
+      "search_provider_overrides_encrypted_hash": "djEw/O1Fo7yxiDwDA9NaOfk9W7zGcLAU6L2CmXC9ayuNndZIrEps+rHLBu4+De+BVFES",
+      "session": {
+        "restore_on_startup": "F2435C324381168AE66497D15E50F68A756ED18795EAE98A9F5EDDA7BEF61B84",
+        "restore_on_startup_encrypted_hash": "djEwA1R1WoOT/cibLE4dxqQuYtLNlicw5x5Nr2Qi932QjIipQALRLOd+97eHtHHh/2vt",
+        "startup_urls": "006D030B5FAA8020DFF24E306A20963BCA8C1DBC8E47D2A27A63DB0D57B8485A",
+        "startup_urls_encrypted_hash": "djEwB2YyGO9o9XDciQ7ky9pbAg8ssdT39+dNavXTDmeIQHdg7FcUGcmkLSbi0KZqh+6b"
+      }
+    }
   },
   "safebrowsing": {
     "enabled": true,
     "enhanced": false
   },
+  "safety_hub": {
+    "unused_site_permissions_revocation": {
+      "migration_completed": true
+    }
+  },
+  "saved_tab_groups": {
+    "did_enable_shared_tab_groups_in_last_session": false,
+    "specifics_to_data_migration": true
+  },
+  "schedule_to_flush_to_disk": "13435162706086211",
   "search": {
     "suggest_enabled": true
   },
+  "segmentation_platform": {
+    "client_result_prefs": "ClIKDXNob3BwaW5nX3VzZXISQQo2DQAAAAAQwsuB+9Tm7hcaJAocChoNAAAAPxIMU2hvcHBpbmdVc2VyGgVPdGhlchIEEAIYBCADEJHMgfvU5u4X",
+    "device_switcher_util": {
+      "result": {
+        "labels": [
+          "NotSynced"
+        ]
+      }
+    },
+    "last_db_compaction_time": "13435027199000000",
+    "uma_in_sql_start_time": "13435161530016774"
+  },
   "session": {
-    "restore_on_startup": 1,
+    "restore_on_startup": 5,
     "startup_urls": [],
     "tab": {},
     "window": {}
   },
+  "sessions": {
+    "event_log": [
+      {
+        "crashed": false,
+        "time": "13435161530000091",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435161530915320",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 0,
+        "time": "13435161531186365",
+        "type": 1,
+        "window_count": 0
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 1,
+        "time": "13435161534414702",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435161538470590",
+        "type": 0
+      },
+      {
+        "restore_browser": true,
+        "synchronous": true,
+        "time": "13435161539343364",
+        "type": 5
+      },
+      {
+        "errored_reading": false,
+        "tab_count": 1,
+        "time": "13435161539709475",
+        "type": 1,
+        "window_count": 1
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 2,
+        "time": "13435161858981043",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435161860557513",
+        "type": 0
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 1,
+        "time": "13435162266905254",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435162269076005",
+        "type": 0
+      },
+      {
+        "did_schedule_command": true,
+        "first_session_service": true,
+        "tab_count": 1,
+        "time": "13435162282363194",
+        "type": 2,
+        "window_count": 1
+      },
+      {
+        "crashed": false,
+        "time": "13435162705051495",
+        "type": 0
+      }
+    ],
+    "session_data_status": 1
+  },
+  "signin": {
+    "accounts_metadata_dict": {}
+  },
+  "site_search_settings": {
+    "overridden_keywords": []
+  },
+  "spellcheck": {
+    "dictionaries": [
+      "en-US"
+    ],
+    "dictionary": ""
+  },
+  "sync": {
+    "data_type_status_for_sync_to_signin": {
+      "account_setting": false,
+      "ai_thread": false,
+      "app_list": false,
+      "app_settings": false,
+      "apps": false,
+      "arc_package": false,
+      "autofill": false,
+      "autofill_profiles": false,
+      "autofill_valuable": false,
+      "autofill_valuable_metadata": false,
+      "autofill_wallet": false,
+      "autofill_wallet_credential": false,
+      "autofill_wallet_metadata": false,
+      "autofill_wallet_offer": false,
+      "autofill_wallet_usage": false,
+      "bookmarks": false,
+      "collaboration_group": false,
+      "contact_info": false,
+      "contextual_task": false,
+      "cookies": false,
+      "device_info": false,
+      "dictionary": false,
+      "extension_settings": false,
+      "extensions": false,
+      "gemini_thread": false,
+      "history": false,
+      "history_delete_directives": false,
+      "incoming_password_sharing_invitation": false,
+      "managed_user_settings": false,
+      "nigori": false,
+      "os_preferences": false,
+      "os_priority_preferences": false,
+      "outgoing_password_sharing_invitation": false,
+      "passwords": false,
+      "plus_address": false,
+      "plus_address_setting": false,
+      "preferences": false,
+      "printers": false,
+      "printers_authorization_servers": false,
+      "priority_preferences": false,
+      "product_comparison": false,
+      "reading_list": false,
+      "saved_tab_group": false,
+      "search_engines": false,
+      "security_events": false,
+      "send_tab_to_self": false,
+      "sessions": false,
+      "shared_comment": false,
+      "shared_tab_group_account_data": false,
+      "shared_tab_group_data": false,
+      "sharing_message": false,
+      "skill": false,
+      "themes": false,
+      "user_consent": false,
+      "user_events": false,
+      "web_apps": false,
+      "webapks": false,
+      "webauthn_credential": false,
+      "wifi_configurations": false,
+      "workspace_desk": false
+    },
+    "encryption_bootstrap_token_per_account_migration_done": true,
+    "feature_status_for_sync_to_signin": 5
+  },
+  "syncing_theme_prefs_migrated_to_non_syncing": true,
+  "tab_search": {
+    "tab_index": 1
+  },
+  "toolbar": {
+    "pinned_actions": [
+      "kActionShowChromeLabs",
+      "kActionShowDownloads"
+    ],
+    "pinned_cast_migration_complete": true,
+    "pinned_chrome_labs_migration_complete": true,
+    "tab_search_migration_complete": true
+  },
+  "total_passwords_available_for_account": 0,
+  "total_passwords_available_for_profile": 0,
   "translate": {
     "enabled": false
+  },
+  "translate_site_blacklist": [],
+  "translate_site_blocklist_with_time": {},
+  "web_apps": {
+    "did_migrate_default_chrome_apps": [
+      "MigrateDefaultChromeAppToWebAppsGSuite",
+      "MigrateDefaultChromeAppToWebAppsNonGSuite"
+    ],
+    "last_preinstall_synchronize_version": "146"
   },
   "webkit": {
     "webprefs": {
@@ -85,6 +1573,9 @@
       "fonts": {
         "fixed": {
           "Zyyy": "Terminess Nerd Font"
+        },
+        "math": {
+          "Zyyy": "Ubuntu Sans"
         },
         "sansserif": {
           "Zyyy": "Ubuntu Sans"
