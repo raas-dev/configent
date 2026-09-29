@@ -229,19 +229,9 @@ seed_desktop() {
   # autostart only — never touch /etc/xdg/autostart. xfce4-clipman xml seed
   # in $UI/xfce4/ already disables history, so this just enables the daemon.
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/autostart"
-  $SUDO tee "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop" >/dev/null <<'EOF'
-[Desktop Entry]
-Type=Application
-Name=Clipman
-Comment=Clipboard manager
-Exec=xfce4-clipman
-Icon=xfce4-clipman-plugin
-Terminal=false
-Hidden=false
-X-GNOME-Autostart-enabled=true
-EOF
-  $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
-  $SUDO chmod 644 "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+    "$UI/xfce4-clipman-plugin-autostart.desktop" \
+    "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
     # chromium: Desktop copy from the Exec-rewritten applications file;
