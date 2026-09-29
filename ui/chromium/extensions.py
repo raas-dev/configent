@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Fetch Chrome Web Store CRXs for the pinned extension ids and unpack them
+# Fetch Chrome Web Store CRXs for the configured extension ids and unpack them
 # versionless into ~/.config/chromium-extensions/<id>/ (outside the profile:
 # Chromium's extension GC only scans its own profile dirs). The chromium
 # wrappers mount these dirs with --load-extension. Chromium will not accept
@@ -7,7 +7,6 @@
 # Secure Preferences, writable only by the browser itself or an interactive
 # store install), so updates here = re-run this script.
 
-import hashlib
 import io
 import json
 import os
@@ -45,23 +44,6 @@ def fetch_crx(extid):
     return zipfile.ZipFile(io.BytesIO(data[off:]))
 
 
-def loaded_id(path):
-    # --load-extension unpacked exts get ids derived from the absolute path
-    # (sha256 -> a-p alphabet), NOT their store ids.
-    digest = hashlib.sha256(os.path.abspath(path).encode()).digest()[:16]
-    return "".join(chr(ord("a") + int(c, 16)) for c in digest.hex())
-
-
-def pin(prefs):
-    extroot = os.path.expanduser(sys.argv[1])
-    pins = [loaded_id(os.path.join(extroot, e)) for e in IDS]
-    doc = json.load(open(prefs)) if os.path.exists(prefs) else {}
-    doc.setdefault("extensions", {})["pinned_extensions"] = pins
-    with open(prefs, "w") as f:
-        json.dump(doc, f, indent=2)
-    print(f"pinned: {pins}")
-
-
 def main():
     extroot = os.path.expanduser(sys.argv[1])
     os.makedirs(extroot, exist_ok=True)
@@ -77,8 +59,6 @@ def main():
         shutil.rmtree(dest, ignore_errors=True)
         os.rename(tmp, dest)
         print(f"{extid}: installed")
-    if len(sys.argv) > 2:  # optional profile Preferences -> pin toolbar icons
-        pin(os.path.expanduser(sys.argv[2]))
 
 
 if __name__ == "__main__":
