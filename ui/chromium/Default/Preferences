@@ -149,7 +149,7 @@
       "kdondjcpgpfoejcobgnbmpoljgnhjiaa"
     ],
     "settings": {
-      "kdondjcpgpfoejcobgnbmpoljgnhjiaa": {
+      "ddkjiahejlhfcafbddmgiahcphecmpfh": {
         "account_extension_type": 0,
         "active_permissions": {
           "api": [
@@ -163,7 +163,7 @@
             "userScripts"
           ],
           "explicit_host": [
-            "\u003Call_urls>"
+            "<all_urls>"
           ],
           "manifest_permissions": [],
           "scriptable_host": []
@@ -428,7 +428,7 @@
             "userScripts"
           ],
           "explicit_host": [
-            "\u003Call_urls>"
+            "<all_urls>"
           ],
           "manifest_permissions": [],
           "scriptable_host": []
@@ -615,7 +615,7 @@
           "*://*.www.cambe.pr.gov.br/*",
           "*://*.yairalon.com.br/*",
           "*://*.z13.web.core.windows.net/*",
-          "\u003Call_urls>"
+          "<all_urls>"
         ],
         "preferences": {},
         "regular_only_preferences": {},
