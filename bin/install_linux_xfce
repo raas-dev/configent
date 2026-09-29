@@ -225,6 +225,28 @@ seed_desktop() {
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
   $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
+  # Wipe any textsrc left over from a prior run with default max=1000,
+  # otherwise clipman keeps appending to the existing history file even
+  # though the xml seed now says max=0.
+  $SUDO rm -rf \
+    "$UHOME/.cache/xfce4/clipman" \
+    "$UHOME/.local/share/xfce4/clipman"
+  # Clipman daemon so clipboard survives closing the owning app. Per-user
+  # autostart only — never touch /etc/xdg/autostart. xfce4-clipman xml seed
+  # in $UI/xfce4/ already disables history, so this just enables the daemon.
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/autostart"
+  $SUDO tee "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop" >/dev/null <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Clipman
+Comment=Clipboard manager
+Exec=xfce4-clipman
+Icon=xfce4-clipman-plugin
+Terminal=false
+X-GNOME-Autostart-enabled=true
+EOF
+  $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
+  $SUDO chmod 644 "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
     # chromium: Desktop copy from the Exec-rewritten applications file;
@@ -359,7 +381,7 @@ log "apt + selkies + xfce install starting (single batch)"
     fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \
-    xfce4 xfce4-terminal thunar mousepad ristretto \
+    xfce4 xfce4-clipman xfce4-clipman-plugin xfce4-terminal thunar mousepad ristretto \
     xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
     pavucontrol \
     pipewire pipewire-pulse wireplumber \

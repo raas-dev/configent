@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-clipman" version="1.0">
+  <property name="settings" type="empty">
+    <property name="store-settings" type="bool" value="false"/>
+    <property name="max-texts-in-history" type="int" value="0"/>
+    <property name="max-images-in-history" type="int" value="0"/>
+    <property name="skip-primary-clipboard" type="bool" value="false"/>
+    <property name="add-primary-clipboard" type="bool" value="false"/>
+    <property name="sync-clipboards-with-primary" type="bool" value="false"/>
+  </property>
+  <property name="tweaks" type="empty">
+    <property name="paste-on-activation" type="int" value="0"/>
+  </property>
+</channel>
