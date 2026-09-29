@@ -1,2 +1,2 @@
-[hosts.dev]
-target = "dev"
+[hosts.alkue-dev]
+target = "alkue-dev"
