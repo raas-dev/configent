@@ -83,12 +83,6 @@ gsettings set org.mate.accessibility-keyboard togglekeys-enable false
 # === org.gnome.desktop.applications.terminal (mate aliases via gnome) ===
 gsettings set org.gnome.desktop.default-applications.terminal exec 'mate-terminal'
 
-# === org.mate.desktop.background (mate alias of org.gnome.desktop.background) ===
-gsettings set org.mate.background color-shading-type 'solid'
-gsettings set org.mate.background picture-options 'zoom'
-gsettings set org.mate.background primary-color 'rgb(0,0,0)'
-gsettings set org.mate.background secondary-color 'rgb(0,0,0)'
-
 # === org.mate.font-rendering ===
 # Subpixel smoothing (LCD) + full hinting + subpixel order. No custom DPI.
 gsettings set org.mate.font-rendering antialiasing 'rgba'
@@ -109,25 +103,12 @@ gsettings set org.mate.interface window-scaling-factor 1
 # === org.mate.media-handling ===
 gsettings set org.mate.media-handling automount-open false
 
-# === org.mate.peripherals.keyboard ===
-
-# === org.mate.peripherals.mouse ===
-
 # === org.mate.session ===
 # session-start is ephemeral, skip.
 
-# === org.gnome.desktop.sound (mate alias) ===
-gsettings set org.gnome.desktop.sound event-sounds true
-gsettings set org.gnome.desktop.sound input-feedback-sounds false
-gsettings set org.gnome.desktop.sound theme-name '__no_sounds'
-
-# === org.mate.marco.general (duplicate of org.mate.Marco.general) ===
+# === org.mate.marco.general (additional keys) ===
 gsettings set org.mate.Marco.general action-double-click-titlebar 'toggle_maximize'
 gsettings set org.mate.Marco.general button-layout ':minimize,maximize,close'
-
-# === org.mate.notification-daemon (hyphenated alias) ===
-gsettings set org.mate.NotificationDaemon do-not-disturb false
-gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.panel (mounted at /org/mate/panel/general/ in dconf, flat in gsettings) ===
 # Prune orphan objects not in the canonical list (e.g. briskmenu, firefox applet
@@ -248,10 +229,6 @@ gsettings set org.mate.peripherals-keyboard-xkb.general handle-indicators true
 gsettings set org.mate.peripherals-keyboard-xkb.general known-file-list \
   "['fi', 'us']"
 
-# === org.mate.peripherals-keyboard (hyphen alias) ===
-
-# === org.mate.pluma ===
-
 # === org.mate.power-manager ===
 gsettings set org.mate.power-manager button-power 'nothing'
 gsettings set org.mate.power-manager button-suspend 'nothing'
@@ -264,8 +241,6 @@ gsettings set org.mate.screensaver lock-enabled false
 gsettings set org.mate.screensaver mode 'blank-only'
 gsettings set org.mate.screensaver picture-filename '/usr/share/backgrounds/mate/desktop/Stripes.png'
 gsettings set org.mate.screensaver themes "@as []"
-
-# === org.mate.slick-greeter ===
 
 # === org.mate.sound ===
 gsettings set org.mate.sound event-sounds false
