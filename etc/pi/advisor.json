@@ -7,5 +7,7 @@
   "showUsageFooter": false,
   "alwaysOn": true,
   "simpleMode": false,
-  "advisorDisableSameModel": false
+  "advisorDisableSameModel": false,
+  "advisorScoutEnabled": true,
+  "showUsageDetails": true
 }
