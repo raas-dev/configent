@@ -1,6 +1,6 @@
 {
   "advisor": "zai/glm-5.3",
-  "advisorEffort": "low",
+  "advisorEffort": "medium",
   "executor": "minimax/MiniMax-M3",
   "executorEffort": "minimal",
   "advisorOutcomeLogging": false,
@@ -8,6 +8,7 @@
   "alwaysOn": true,
   "simpleMode": false,
   "advisorDisableSameModel": false,
-  "advisorScoutEnabled": true,
-  "showUsageDetails": true
+  "advisorScoutEnabled": false,
+  "showUsageDetails": true,
+  "contextMaxChars": 25000
 }
