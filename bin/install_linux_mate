@@ -199,24 +199,25 @@ chromium_files_bg() {
 # accept hand-registered user extensions (Secure Preferences MACs), so
 # seeding extensions.settings is pointless.
 chromium_extensions() {
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium-extensions"
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium-extensions"
   run_as python3 "$UI/../chromium/extensions.py" \
     "$UHOME/.config/chromium-extensions" \
-    "$UHOME/.config/chromium/Default/Preferences"
+    "$UHOME/.config/chromium/Default/Preferences" ||
+    log "chromium extension fetch failed (offline?)"
 }
 chromium_launcher() {
   # Seeded profile (First Run sentinel, no default-browser prompt, pinned
   # toolbar extensions) — same as xfce. Wipe first so re-installs re-seed
   # instead of merging into a possibly-corrupt profile.
   $SUDO rm -rf "$UHOME/.config/chromium" "$UHOME/.cache/chromium" 2>/dev/null || true
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config/chromium"
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium"
   $SUDO cp -r "$UI/../chromium/Default/." \
     "$UHOME/.config/chromium/Default/"
-  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/Local State" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/Local State" \
     "$UHOME/.config/chromium/Local State"
-  $SUDO install -o "$LUSER" -m 644 "$UI/../chromium/First Run" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/First Run" \
     "$UHOME/.config/chromium/First Run"
-  $SUDO chown -R "$LUSER": "$UHOME/.config/chromium"
+  $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/chromium"
   # Store CRXs on disk + --load-extension wrapper; user-managed (no
   # policies, no /etc, no "managed by your organization").
   chromium_extensions
@@ -236,9 +237,11 @@ chromium_launcher() {
   run_as update-desktop-database "$UHOME/.local/share/applications" 2>/dev/null || true
   # Desktop launchers: ours + drop stale ones from the other DE profile.
   mkdir -p "$UHOME/Desktop" "$UHOME/.local/share/applications"
-  install -m 755 "$UHOME/.local/share/applications/chromium-browser.desktop" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
+    "$UHOME/.local/share/applications/chromium-browser.desktop" \
     "$UHOME/Desktop/chromium-browser.desktop"
-  install -m 755 "$UI/mate-terminal.desktop" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
+    "$UI/mate-terminal.desktop" \
     "$UHOME/Desktop/mate-terminal.desktop"
   install -m 644 "$UI/mate-terminal.desktop" \
     "$UHOME/.local/share/applications/mate-terminal.desktop"
