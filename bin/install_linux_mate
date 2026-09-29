@@ -317,6 +317,12 @@ write_mate_extras() {
     /etc/xdg/autostart/mate-screensaver.desktop \
     /etc/xdg/autostart/nemo-desktop.desktop \
     /etc/systemd/system/mate-session.service 2>/dev/null || true
+
+  # X11 CLIPBOARD is owned by the source app; without a long-running manager
+  # the selection dies when that app exits. parcellite is a lightweight GTK
+  # clipboard manager that polls X selections and persists them.
+  $SUDO install -m 644 "$UI/parcellite-clipboard.desktop" \
+    /etc/xdg/autostart/parcellite-clipboard.desktop
 }
 
 factory_reset_and_apply() {
@@ -413,6 +419,7 @@ log "apt + selkies + mate install starting (single batch)"
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
     fonts-noto-color-emoji \
     xsel \
+    parcellite \
     socat libnspr4 libnss3 \
     ubuntu-mate-desktop ubuntu-mate-default-settings \
     ubuntu-mate-icon-themes ubuntu-mate-themes \

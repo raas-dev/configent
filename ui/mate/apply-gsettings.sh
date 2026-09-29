@@ -200,7 +200,7 @@ gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" toplevel
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" applet-iid 'NotificationAreaAppletFactory::NotificationArea'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" position 10
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" position 50
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" toplevel-id 'top'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true

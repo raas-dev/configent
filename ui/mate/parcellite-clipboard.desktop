@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Clipboard (parcellite)
+Exec=parcellite
+Icon=parcellite
+X-GNOME-Autostart-enabled=true
+Terminal=false
+Categories=Utility;
