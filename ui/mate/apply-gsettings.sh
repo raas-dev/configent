@@ -23,7 +23,7 @@ gsettings set org.mate.Marco.general theme 'ClearlooksRe'
 gsettings set org.mate.Marco.general titlebar-font 'Ubuntu Sans Bold 13'
 
 # === org.mate.NotificationDaemon ===
-gsettings set org.mate.NotificationDaemon do-not-disturb true
+gsettings set org.mate.NotificationDaemon do-not-disturb false
 gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.background ===
@@ -126,7 +126,7 @@ gsettings set org.mate.Marco.general action-double-click-titlebar 'toggle_maximi
 gsettings set org.mate.Marco.general button-layout ':minimize,maximize,close'
 
 # === org.mate.notification-daemon (hyphenated alias) ===
-gsettings set org.mate.NotificationDaemon do-not-disturb true
+gsettings set org.mate.NotificationDaemon do-not-disturb false
 gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.panel (mounted at /org/mate/panel/general/ in dconf, flat in gsettings) ===
