@@ -265,7 +265,7 @@ for f in ('$UHOME/Desktop/chromium-browser.desktop',
   $SUDO install -m 644 "$UI/../chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   if [ "$(id -u)" = 0 ]; then
-    chown -R "$LUSER": "$UHOME/Desktop" "$UHOME/.local/share/applications"
+    chown -R "$LUSER":"$LGROUP" "$UHOME/Desktop" "$UHOME/.local/share/applications"
   fi
 }
 
@@ -349,7 +349,7 @@ factory_reset_and_apply() {
   $SUDO systemctl daemon-reload 2>/dev/null || true
 
   if [ "$(id -u)" = 0 ]; then
-    chown -R "$LUSER": \
+    chown -R "$LUSER":"$LGROUP" \
       "$UHOME/.config/systemd/user" \
       "$UHOME/.local/share/applications" 2>/dev/null || true
     $SUDO runuser -u "$LUSER" -- env \
@@ -363,7 +363,7 @@ factory_reset_and_apply() {
 
 LOGDIR=/var/log/mate-install
 $SUDO mkdir -p -m 755 "$LOGDIR"
-$SUDO chown "$LUSER": "$LOGDIR"
+$SUDO chown "$LUSER":"$LGROUP" "$LOGDIR"
 
 rm -f "$LOGDIR"/*.log
 

@@ -221,11 +221,11 @@ seed_desktop() {
   # policies, no /etc, no "managed by your organization").
   chromium_extensions
 
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/.config"
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config"
   $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
-  $SUDO install -o "$LUSER" -m 644 "$UI/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
-  $SUDO install -d -o "$LUSER" -m 755 "$UHOME/Desktop"
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
     # chromium: Desktop copy from the Exec-rewritten applications file;
     # the raw $UI file still points at /usr/local/bin/chromium-wrapper
@@ -296,7 +296,7 @@ cert_gen() {
 
 LOGDIR=/var/log/xfce-install
 $SUDO mkdir -p -m 755 "$LOGDIR"
-$SUDO chown "$LUSER": "$LOGDIR"
+$SUDO chown "$LUSER":"$LGROUP" "$LOGDIR"
 
 rm -f "$LOGDIR"/*.log
 
