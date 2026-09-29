@@ -28,7 +28,7 @@ gsettings set org.mate.NotificationDaemon sound-enabled false
 
 # === org.mate.background ===
 gsettings set org.mate.background color-shading-type 'solid'
-gsettings set org.mate.background picture-filename '/usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg'
+gsettings set org.mate.background picture-filename '/usr/share/backgrounds/ubuntu-mate-common/Green-Wall-Logo.png'
 gsettings set org.mate.background picture-options 'zoom'
 gsettings set org.mate.background primary-color '#000000'
 gsettings set org.mate.background secondary-color '#000000'
@@ -57,29 +57,6 @@ gsettings set org.mate.caja.preferences default-sort-order 'type'
 gsettings set org.mate.caja.preferences show-backup-files true
 gsettings set org.mate.caja.preferences sort-directories-first true
 
-# === org.mate.accessibility.keyboard ===
-gsettings set org.mate.accessibility-keyboard bouncekeys-beep-reject true
-gsettings set org.mate.accessibility-keyboard bouncekeys-delay 300
-gsettings set org.mate.accessibility-keyboard bouncekeys-enable false
-gsettings set org.mate.accessibility-keyboard enable false
-gsettings set org.mate.accessibility-keyboard feature-state-change-beep false
-gsettings set org.mate.accessibility-keyboard mousekeys-accel-time 1200
-gsettings set org.mate.accessibility-keyboard mousekeys-enable false
-gsettings set org.mate.accessibility-keyboard mousekeys-init-delay 160
-gsettings set org.mate.accessibility-keyboard mousekeys-max-speed 750
-gsettings set org.mate.accessibility-keyboard slowkeys-beep-accept true
-gsettings set org.mate.accessibility-keyboard slowkeys-beep-press true
-gsettings set org.mate.accessibility-keyboard slowkeys-beep-reject false
-gsettings set org.mate.accessibility-keyboard slowkeys-delay 300
-gsettings set org.mate.accessibility-keyboard slowkeys-enable false
-gsettings set org.mate.accessibility-keyboard stickykeys-enable false
-gsettings set org.mate.accessibility-keyboard stickykeys-latch-to-lock true
-gsettings set org.mate.accessibility-keyboard stickykeys-modifier-beep true
-gsettings set org.mate.accessibility-keyboard stickykeys-two-key-off true
-gsettings set org.mate.accessibility-keyboard timeout 120
-gsettings set org.mate.accessibility-keyboard timeout-enable false
-gsettings set org.mate.accessibility-keyboard togglekeys-enable false
-
 # === org.gnome.desktop.applications.terminal (mate aliases via gnome) ===
 gsettings set org.gnome.desktop.default-applications.terminal exec 'mate-terminal'
 
@@ -106,16 +83,16 @@ gsettings set org.mate.media-handling automount-open false
 # === org.mate.session ===
 # session-start is ephemeral, skip.
 
-# === org.mate.marco.general (additional keys) ===
-gsettings set org.mate.Marco.general action-double-click-titlebar 'toggle_maximize'
-gsettings set org.mate.Marco.general button-layout ':minimize,maximize,close'
-
-# === org.mate.panel (mounted at /org/mate/panel/general/ in dconf, flat in gsettings) ===
+# === org.mate.panel ===
 # Prune orphan objects not in the canonical list (e.g. briskmenu, firefox applet
 # inherited from the ubuntu-mate profile) so mate-panel stops trying to load
 # factories whose .so is absent. Done via dconf because the relocatable object
 # schema lacks a generic "delete" gsettings call.
-canon="menu-bar separator show-desktop window-list gvc indicatorappletcomplete notification-area clock workspace-switcher"
+# ponytail: window-list and workspace-switcher live under dconf-assigned IDs
+# `object-1` / `object-2` (assigned by mate-panel on first reset from default
+# layout). Names are stable across re-applies of THIS script but only because
+# the canonical list below preserves them; renumbering dconf would change them.
+canon="menu-bar separator gvc indicatorappletcomplete notification-area clock object-1 object-2"
 pruned=0
 for obj in $(dconf list /org/mate/panel/objects/ 2>/dev/null | tr -d /); do
   if ! printf '%s\n' "$canon" | grep -Fxq -- "$obj"; then
@@ -123,11 +100,11 @@ for obj in $(dconf list /org/mate/panel/objects/ 2>/dev/null | tr -d /); do
     pruned=$((pruned + 1))
   fi
 done
-# Also nuke stale toplevel rows (anything other than the canonical top/bottom)
+# Also nuke stale toplevel rows (anything other than the canonical top)
 # so the panel layout resets cleanly without orphan bars.
 for tid in $(dconf list /org/mate/panel/toplevels/ 2>/dev/null | tr -d /); do
   case " $tid " in
-  " top " | " bottom ") ;;
+  " top ") ;;
   *) dconf reset -f "/org/mate/panel/toplevels/$tid/" 2>/dev/null || true ;;
   esac
 done
@@ -138,42 +115,46 @@ done
 # distro-specific panel layout.
 gsettings set org.mate.panel default-layout 'default'
 gsettings set org.mate.panel object-id-list \
-  "['clock', 'gvc', 'indicatorappletcomplete', 'menu-bar', 'notification-area', 'separator', 'show-desktop', 'window-list', 'workspace-switcher']"
-gsettings set org.mate.panel toplevel-id-list "['top', 'bottom']"
+  "['clock', 'gvc', 'indicatorappletcomplete', 'menu-bar', 'notification-area', 'separator', 'object-1', 'object-2']"
+gsettings set org.mate.panel toplevel-id-list "['top']"
 
 # === org.mate.panel.object (relocatable per applet) ===
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" applet-iid 'ClockAppletFactory::ClockApplet'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" panel-right-stick true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" position 20
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" toplevel-id 'top'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/clock/" panel-right-stick true
 
-gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" custom-format '%a %d %b  %H:%M:%S'
-gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" format 'custom'
-gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" show-date true
-gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/" show-seconds true
-
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" cities @as []
 gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" custom-format '%a %d %b  %H:%M:%S'
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" expand-locations false
 gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" format 'custom'
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-date true
 gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-seconds true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-temperature false
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-tooltip true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-weather false
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" show-week-numbers true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" speed-unit 'm/s'
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/clock/prefs/" temperature-unit 'Centigrade'
 
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" applet-iid 'GvcAppletFactory::GvcApplet'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" panel-right-stick true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" position 40
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" toplevel-id 'top'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/gvc/" panel-right-stick true
 
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" applet-iid 'IndicatorAppletCompleteFactory::IndicatorAppletComplete'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" panel-right-stick true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" position 30
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" toplevel-id 'top'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/indicatorappletcomplete/" panel-right-stick true
 
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" object-type 'menu-bar'
@@ -183,30 +164,38 @@ gsettings set "org.mate.panel.object:/org/mate/panel/objects/menu-bar/" toplevel
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" applet-iid 'NotificationAreaAppletFactory::NotificationArea'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" locked true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" position 50
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" relative-to-edge 'end'
 gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" toplevel-id 'top'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/notification-area/" panel-right-stick true
 
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" applet-iid 'WnckletFactory::ShowDesktopApplet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" locked true
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" position 10
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/show-desktop/" toplevel-id 'bottom'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-1/" applet-iid 'WnckletFactory::WindowListApplet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-1/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-1/" position 295
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-1/" toplevel-id 'top'
 
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/window-list/" applet-iid 'WnckletFactory::WindowListApplet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/window-list/" locked true
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/window-list/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/window-list/" position 20
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/window-list/" toplevel-id 'bottom'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-2/" applet-iid 'WnckletFactory::WorkspaceSwitcherApplet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-2/" object-type 'applet'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-2/" position 253
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-2/" relative-to-edge 'end'
+gsettings set "org.mate.panel.object:/org/mate/panel/objects/object-2/" toplevel-id 'top'
 
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" applet-iid 'WnckletFactory::WorkspaceSwitcherApplet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" locked true
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" object-type 'applet'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" position 10
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" relative-to-edge 'end'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" toplevel-id 'bottom'
-gsettings set "org.mate.panel.object:/org/mate/panel/objects/workspace-switcher/" panel-right-stick true
+# Clock applet prefs on object-2 — leftover from a previous clock-applet
+# install on the workspace-switcher slot. mate-panel ignores them since
+# object-2 is not a clock, but the keys exist in dconf and we keep them in
+# sync to avoid drift warnings on dump. ponytail: harmless noise.
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" cities @as []
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" custom-format ''
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" expand-locations false
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" format '24-hour'
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-date true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-seconds false
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-temperature true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-tooltip true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-weather true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" show-week-numbers true
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" speed-unit 'm/s'
+gsettings set "org.mate.panel.applet.clock:/org/mate/panel/objects/object-2/prefs/" temperature-unit 'Centigrade'
 
 # === org.mate.panel.toplevel (relocatable per panel id) ===
 # Per-panel size/position. mate-panel derives rendered content from
@@ -215,12 +204,6 @@ gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" auto-hide
 gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" orientation 'top'
 gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" screen 0
 gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" size 32
-
-gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" auto-hide false
-gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" orientation 'bottom'
-gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" screen 0
-gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" y-bottom 0
-gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/bottom/" size 32
 
 # === org.mate.peripherals-keyboard-xkb.general ===
 gsettings set org.mate.peripherals-keyboard-xkb.general default-group 0
