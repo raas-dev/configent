@@ -4,8 +4,8 @@
   "executor": "minimax/MiniMax-M3",
   "executorEffort": "minimal",
   "advisorOutcomeLogging": false,
-  "showUsageFooter": true,
+  "showUsageFooter": false,
   "alwaysOn": true,
-  "simpleMode": true,
+  "simpleMode": false,
   "advisorDisableSameModel": false
 }
