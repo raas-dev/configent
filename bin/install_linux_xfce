@@ -376,7 +376,7 @@ log "apt + selkies + xfce install starting (single batch)"
     fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \
-    xfce4 xfce4-clipman xfce4-clipman-plugin xfce4-terminal thunar mousepad ristretto \
+    xfce4 xfce4-clipman xfce4-terminal thunar mousepad ristretto \
     xubuntu-default-settings xubuntu-icon-theme xubuntu-wallpapers \
     pavucontrol \
     pipewire pipewire-pulse wireplumber \
