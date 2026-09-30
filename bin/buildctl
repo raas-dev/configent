@@ -47,14 +47,15 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
     [ -f "$lima_instance_yaml" ] || return 0
     awk -v path="${lima_cwd}" -v home="${lima_home}" '
-      /^- location: / {
-        loc = substr($0, 13)
+      /^[[:space:]]*- location: / {
+        match($0, /^[[:space:]]*/); _ind = RLENGTH
+        loc = $0; sub(/^[[:space:]]*- location: /, "", loc)
         gsub(/^"|"$/, "", loc)
         sub(/^~\//, home "/", loc)
-        if (loc == path || loc == home || loc == "~") { skip=1; next }
+        if (loc == path || loc == home || loc == "~") { skip = _ind + 1; next }
       }
-      skip && /^  / { next }
-      { skip=0; print }
+      skip && match($0, /^[[:space:]]*/) && RLENGTH > skip { next }
+      { skip = 0; print }
       ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
       mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
   }

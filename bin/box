@@ -108,20 +108,30 @@ lima_remove_nonexistent_mounts() {
 
 # Remove cwd and full-home mounts so --mount does not duplicate;
 # \$HOME stays off the guest mount list.
+# No arg: purge cwd mount from live instance yaml in place.
+# Arg (template yaml): print filtered copy to stdout — used at VM create
+# so a stale ro template entry for the cwd can't collide with the rw
+# --mount share (lima registers both for the same host dir; ro wins).
 lima_remove_cwd_mount() {
-  lima_instance_yaml="$HOME/.lima/$NAME/lima.yaml"
-  [ -f "$lima_instance_yaml" ] || return 0
+  lima_instance_yaml="${1:-$HOME/.lima/$NAME/lima.yaml}"
+  if [ "$#" -eq 0 ]; then
+    [ -f "$lima_instance_yaml" ] || return 0
+    local out="${lima_instance_yaml}.tmp"
+  else
+    local out="/dev/stdout"
+  fi
   awk -v path="${lima_cwd}" -v home="${lima_home}" '
-    /^- location: / {
-      loc = substr($0, 13)
+    /^[[:space:]]*- location: / {
+      match($0, /^[[:space:]]*/); _ind = RLENGTH
+      loc = $0; sub(/^[[:space:]]*- location: /, "", loc)
       gsub(/^"|"$/, "", loc)
       sub(/^~\//, home "/", loc)
-      if (loc == path || loc == home || loc == "~") { skip=1; next }
+      if (loc == path || loc == home || loc == "~") { skip = _ind + 1; next }
     }
-    skip && /^  / { next }
-    { skip=0; print }
-    ' "$lima_instance_yaml" >"${lima_instance_yaml}.tmp" &&
-    mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"
+    skip && match($0, /^[[:space:]]*/) && RLENGTH > skip { next }
+    { skip = 0; print }
+    ' "$lima_instance_yaml" >"$out" &&
+    { [ "$out" = "/dev/stdout" ] || mv "${lima_instance_yaml}.tmp" "$lima_instance_yaml"; }
 }
 
 # True if the path is visible inside the guest (i.e. the mount exists).
@@ -238,8 +248,10 @@ lima_create_instance() {
     ;;
   esac
   [ -n "$net_arg" ] && os_create_args+=("$net_arg")
+  # strip template entries that would shadow the cwd rw share (ro wins on dup)
   if [ -n "$lima_skip_home_mount" ]; then
-    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+    limactl start --name "$NAME" --tty=false \
+      <(lima_remove_cwd_mount "$lima_yaml") \
       "${os_create_args[@]}" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
@@ -247,7 +259,8 @@ lima_create_instance() {
       --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
       lima_start_mount_only
   else
-    limactl start --name "$NAME" --tty=false "$lima_yaml" \
+    limactl start --name "$NAME" --tty=false \
+      <(lima_remove_cwd_mount "$lima_yaml") \
       "${os_create_args[@]}" \
       --mount "${lima_cwd}:w" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
