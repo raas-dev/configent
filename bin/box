@@ -8,9 +8,9 @@
 
 # shim for running coding agents in a lima VM
 
-: "${NAME:="default"}"
-: "${TEMPLATE:="debian"}"
-: "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,EXA_API_KEY}"
+: "${NAME:="dev"}"
+: "${TEMPLATE:="dev"}"
+: "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,OCCAM_API_KEY}"
 
 if [ "$(uname -s)" != 'Darwin' ]; then
   echo "Error: This script is ought to be run on macOS only."
@@ -26,7 +26,7 @@ omp) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 opencode) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
 codex) FW="$FW,OPENAI_API_KEY" ;;
-*) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
+*) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 esac
 
 if ! command -v limactl >/dev/null; then
@@ -214,29 +214,40 @@ lima_ensure_guest_cwd_writable() {
   lima_guest_activate_cwd_mount_rw
 }
 lima_create_instance() {
-  net="$1"
-  lima_dns_args=
-  # [ "$net" = "lima:bridged" ] &&
-  #   lima_dns_args='--dns=1.1.1.1 --dns=1.0.0.1'
+  # -qemu / -krunkit suffix on TEMPLATE: reuse base yaml; vmType via limactl flags
+  local template_file="$TEMPLATE" vm_suffix=""
+  case "$TEMPLATE" in
+  *-qemu) template_file="${TEMPLATE%-qemu}" vm_suffix="qemu" ;;
+  *-krunkit) template_file="${TEMPLATE%-krunkit}" vm_suffix="krunkit" ;;
+  esac
+  lima_yaml="$HOME/.config/configent/lima/$template_file.yaml"
+  local os_create_args=() net_arg=""
+  # prefer socket_vmnet bridged (LAN access); macos + dev stay NAT, never on LAN
+  if [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
+    case "$template_file" in macos | dev) ;; *) net_arg="--network=lima:bridged" ;; esac
+  fi
+  case "$vm_suffix" in
+  # qcow2 disk → limactl snapshot works; no rosetta (vz-only); net fallback = slirp
+  qemu) os_create_args=(--vm-type=qemu) ;;
+  # libkrun/HVF, arm64 only, experimental; net fallback = gvisor usernet
+  krunkit) os_create_args=(--vm-type=krunkit --mount-type=virtiofs) ;;
+  *)
+    os_create_args=(--vm-type=vz --rosetta)
+    [ -n "$net_arg" ] || os_create_args+=(--network=vzNAT)
+    ;;
+  esac
+  [ -n "$net_arg" ] && os_create_args+=("$net_arg")
   if [ -n "$lima_skip_home_mount" ]; then
-    # shellcheck disable=SC2086  # optional extra flags; fixed literals only
     limactl start --name "$NAME" --tty=false "$lima_yaml" \
-      --vm-type=vz \
-      --network="$net" \
-      $lima_dns_args \
-      --rosetta \
+      "${os_create_args[@]}" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
       --set=".env.GIT_AUTHOR_NAME = \"$GIT_AUTHOR_NAME\"" \
       --set=".env.GIT_COMMITTER_NAME = \"$GIT_COMMITTER_NAME\"" ||
       lima_start_mount_only
   else
-    # shellcheck disable=SC2086  # optional extra flags; fixed literals only
     limactl start --name "$NAME" --tty=false "$lima_yaml" \
-      --vm-type=vz \
-      --network="$net" \
-      $lima_dns_args \
-      --rosetta \
+      "${os_create_args[@]}" \
       --mount "${lima_cwd}:w" \
       --set=".env.MISE_GITHUB_TOKEN = \"$MISE_GITHUB_TOKEN\"" \
       --set=".env.EMAIL = \"$EMAIL\"" \
@@ -260,11 +271,8 @@ elif [ -n "$_lima_status" ]; then
   # VM exists but not running (e.g. Stopped): start it without re-creating.
   lima_start_mount_only
   lima_guest_activate_cwd_mount_rw || exit 1
-elif [ -x "/opt/socket_vmnet/bin/socket_vmnet" ]; then
-  lima_create_instance lima:bridged
-  lima_guest_activate_cwd_mount_rw || exit 1
 else
-  lima_create_instance vzNAT
+  lima_create_instance
   lima_guest_activate_cwd_mount_rw || exit 1
 fi
 
