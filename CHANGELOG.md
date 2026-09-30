@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.246.0](https://github.com/raas-dev/configent/compare/1.245.0...1.246.0) (2026-09-30)
+
+### Features
+
+* **box:** add Linux host support, remove macOS-only restriction ([73c2ead](https://github.com/raas-dev/configent/commit/73c2eada5473760c62f827450bb802460c676cdd))
+
+### Fixes
+
+* **box:** fall back to bash if host shell unavailable in guest ([53682d8](https://github.com/raas-dev/configent/commit/53682d862b82de66acddd9d4957b41193ea19161))
+* **box:** resolve dangling symlinks when copying auth files into vm ([e925e11](https://github.com/raas-dev/configent/commit/e925e117873667f46941377180f482792ed7e9e3))
+* **mounts:** normalize tilde in mount locations ([b4a537c](https://github.com/raas-dev/configent/commit/b4a537ce17ae1759ced7bf53f96b668ce4ed7ed3))
+* **mounts:** support template yaml filtering in lima_remove_cwd_mount ([29990da](https://github.com/raas-dev/configent/commit/29990daab8dcca0b5716f0a492b7ae1c93f3ba08))
+
 ## [1.245.0](https://github.com/raas-dev/configent/compare/1.244.10...1.245.0) (2026-09-30)
 
 ### Features
