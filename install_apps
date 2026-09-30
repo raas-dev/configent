@@ -78,11 +78,11 @@ elif [ "$(uname -s)" = 'Linux' ]; then
       run "$bin_path/install_apps_apk"
     fi
   fi
-  # desktop must come up fast, desktop apps can install in the background after
   if [ -n "$SETUP_GUI" ] && [ "$SETUP_GUI" != 'false' ] &&
     [ "$CANELEVATE" = 'true' ] && command -v apt-get >/dev/null; then
     wait_batch
-    run_detached "$bin_path/install_linux_apps"
+    # no run_detach: setup_ide requires the `code` binary to install extensions
+    run "$bin_path/install_linux_apps"
   fi
 else
   printf "\nError: Neither macOS nor apt, yum, zypper, pacman or apk present.\n"
