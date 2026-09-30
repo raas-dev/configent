@@ -92,6 +92,9 @@ statusLine:
 hideThinkingBlock: true
 retry:
   fallbackRevertPolicy: cooldown-expiry
+  fallbackChains:
+    web:
+      - minimax/MiniMax-M3
 steeringMode: all
 completion:
   notify: "on"
