@@ -286,6 +286,14 @@ enable_units() {
   $SUDO systemctl reset-failed xvfb xfce-session selkies-tls selkies-autostart 2>/dev/null || true
   $SUDO systemctl enable --now xvfb xfce-session selkies-tls selkies-autostart
   $SUDO systemctl daemon-reload
+  if [ "$(id -u)" = 0 ]; then
+    $SUDO runuser -u "$LUSER" -- env \
+      HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
+      systemctl --user enable --now gnome-keyring-daemon.service 2>/dev/null || true
+  else
+    XDG_RUNTIME_DIR="/run/user/$LUID" \
+      systemctl --user enable --now gnome-keyring-daemon.service 2>/dev/null || true
+  fi
 }
 
 cert_gen() {
@@ -362,6 +370,7 @@ log "apt + selkies + xfce install starting (single batch)"
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    gnome-keyring libsecret-1-0 \
     at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     fonts-noto-color-emoji \
     xsel \

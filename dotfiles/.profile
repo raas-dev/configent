@@ -58,7 +58,7 @@ export GIT_EDITOR="vim -n"
 export SVN_EDITOR="vim"
 
 # https://github.com/wofr06/lesspipe
-export LESS='-R' # output raw control chars for colors
+export LESS='-R'            # output raw control chars for colors
 export LESSUTFBINFMT='*n%C' # display Unicode characters instead of code points
 export LESSOPEN='|~/.local/configent/bin/lesspipe.sh %s'
 export LESSQUIET=1 # suppress additional less output
@@ -240,7 +240,7 @@ export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 export OPENCHAMBER_OPENCODE_PORT=4096
 
 # opencode
-export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1  # disable ~/.claude/CLAUDE.md
+export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1 # disable ~/.claude/CLAUDE.md
 
 # opencode: token-optimizer
 export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
@@ -312,9 +312,17 @@ fi
 
 # in-VM Xvfb e.g. selkies in lima :0, keep forwarded/real displays untouched
 if [ "$(uname -s)" = 'Linux' ] &&
-   [ -z "$DISPLAY" ] &&
-   [ -S /tmp/.X11-unix/X0 ]; then
+  [ -z "$DISPLAY" ] &&
+  [ -S /tmp/.X11-unix/X0 ]; then
   export DISPLAY=':0'
+fi
+
+### dbus session bus (SSH/headless shells) #####################################
+
+# pam_systemd sets XDG_RUNTIME_DIR on login, enable-linger keeps it past logout
+if [ "$(uname -s)" = 'Linux' ] && [ -z "$DBUS_SESSION_BUS_ADDRESS" ] &&
+  [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
+  export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
 
 ### mas - macOS Apple Store CLI ################################################
@@ -358,8 +366,8 @@ if [ -f /etc/alpine-release ] && command -v mise >/dev/null 2>&1; then
   export MISE_NODE_COMPILE='0'
   export MISE_RUST_DEFAULT_TOOLCHAIN='stable'
   case "$(uname -m)" in
-    x86_64)  export MISE_CARGO_DEFAULT_TARGET='x86_64-unknown-linux-musl' ;;
-    aarch64) export MISE_CARGO_DEFAULT_TARGET='aarch64-unknown-linux-musl' ;;
+  x86_64) export MISE_CARGO_DEFAULT_TARGET='x86_64-unknown-linux-musl' ;;
+  aarch64) export MISE_CARGO_DEFAULT_TARGET='aarch64-unknown-linux-musl' ;;
   esac
   export PIP_NO_BINARY=''
   export _PIP_STANDALONE_BUILD='1'

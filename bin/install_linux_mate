@@ -360,10 +360,12 @@ factory_reset_and_apply() {
       "$UHOME/.local/share/applications" 2>/dev/null || true
     $SUDO runuser -u "$LUSER" -- env \
       HOME="$UHOME" XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user enable --now mate-session.service 2>/dev/null || true
+      systemctl --user enable --now \
+      gnome-keyring-daemon.service mate-session.service 2>/dev/null || true
   else
     XDG_RUNTIME_DIR="/run/user/$LUID" \
-      systemctl --user enable --now mate-session.service 2>/dev/null || true
+      systemctl --user enable --now \
+      gnome-keyring-daemon.service mate-session.service 2>/dev/null || true
   fi
 }
 
@@ -417,6 +419,7 @@ log "apt + selkies + mate install starting (single batch)"
     "$SELKIES_DEB" \
     xvfb \
     x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    gnome-keyring libsecret-1-0 \
     fonts-noto-color-emoji \
     xsel \
     parcellite \
