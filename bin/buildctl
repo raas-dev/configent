@@ -50,6 +50,7 @@ if [ "$(uname -s)" = 'Darwin' ]; then
       /^- location: / {
         loc = substr($0, 13)
         gsub(/^"|"$/, "", loc)
+        sub(/^~\//, home "/", loc)
         if (loc == path || loc == home || loc == "~") { skip=1; next }
       }
       skip && /^  / { next }
