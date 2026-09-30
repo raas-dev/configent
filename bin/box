@@ -24,6 +24,19 @@ codex) FW="$FW,OPENAI_API_KEY" ;;
 *) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 esac
 
+# keep the headroom proxy alive inside the VM across pi/omp sessions; the
+# extension otherwise spawns it as a pi child that dies with the session.
+# skip when already up; start detached (setsid) and wait up to 30s for /livez
+box_ensure_headroom=''
+case "$program" in
+pi | omp)
+  # minimal extras: proxy server + code-aware; ml/relevance (torch) not needed
+  export OMP_HEADROOM_EXTRAS=proxy,code
+  # shellcheck disable=SC2016  # runs in guest, not host
+  box_ensure_headroom='h="$HOME/.omp/agent/headroom-venv/bin/headroom"; if [ -x "$h" ] && ! curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1; then OMP_HEADROOM_TELEMETRY=off nohup setsid "$h" proxy --host 127.0.0.1 --port 8787 >/tmp/headroom-proxy.log 2>&1 </dev/null & for i in $(seq 300); do curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1 && break; sleep 0.5; done; fi; '
+  ;;
+esac
+
 if ! command -v limactl >/dev/null; then
   echo "Error: limactl not found, cannot start Linux VM" \
     "for agent."
@@ -319,12 +332,12 @@ elif [ $# -eq 0 ]; then
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    "$guest_shell" -lic "$program"
+    "$guest_shell" -lic "${box_ensure_headroom-}$program"
 else
   _box_cmd=$(printf '%q ' "$program" "$@")
   limactl shell \
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    "$guest_shell" -lic "$_box_cmd"
+    "$guest_shell" -lic "${box_ensure_headroom-}$_box_cmd"
 fi
