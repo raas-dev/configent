@@ -33,7 +33,7 @@ pi | omp)
   # minimal extras: proxy server + code-aware; ml/relevance (torch) not needed
   export OMP_HEADROOM_EXTRAS=proxy,code
   # shellcheck disable=SC2016  # runs in guest, not host
-  box_ensure_headroom='h="$HOME/.omp/agent/headroom-venv/bin/headroom"; if [ -x "$h" ] && ! curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1; then OMP_HEADROOM_TELEMETRY=off nohup setsid "$h" proxy --host 127.0.0.1 --port 8787 >/tmp/headroom-proxy.log 2>&1 </dev/null & for i in $(seq 300); do curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1 && break; sleep 0.5; done; fi; '
+  box_ensure_headroom='h="$HOME/.omp/agent/headroom-venv/bin/headroom"; if [ -x "$h" ] && ! curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1; then (OMP_HEADROOM_TELEMETRY=off nohup setsid "$h" proxy --host 127.0.0.1 --port 8787 >/tmp/headroom-proxy.log 2>&1 </dev/null &); echo "starting headroom proxy…" >&2; for i in $(seq 300); do curl -sfm1 http://127.0.0.1:8787/livez >/dev/null 2>&1 && break; sleep 0.5; done; fi; '
   ;;
 esac
 
