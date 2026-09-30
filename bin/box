@@ -302,23 +302,28 @@ fi
 
 box_sync_agent_auth_into_vm
 
+# host $SHELL may not exist in a fresh, not-yet-bootstrapped guest
+guest_shell="$(basename "$SHELL")"
+limactl shell --tty=false "$NAME" -- \
+  command -v "$guest_shell" >/dev/null 2>&1 || guest_shell=bash
+
 if [ -z "$program" ]; then
   limactl shell \
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    "$(basename "$SHELL")"
+    "$guest_shell"
 elif [ $# -eq 0 ]; then
   limactl shell \
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    "$(basename "$SHELL")" -lic "$program"
+    "$guest_shell" -lic "$program"
 else
   _box_cmd=$(printf '%q ' "$program" "$@")
   limactl shell \
     --preserve-env \
     --workdir "$lima_cwd" \
     "$NAME" \
-    "$(basename "$SHELL")" -lic "$_box_cmd"
+    "$guest_shell" -lic "$_box_cmd"
 fi
