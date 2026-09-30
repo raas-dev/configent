@@ -36,6 +36,14 @@ lima_skip_home_mount=
 [ "$lima_cwd" = "$lima_home" ] && lima_skip_home_mount=1
 
 # Sync provider credentials from host into the Linux guest via limactl cp
+# limactl cp preserves symlinks, but configent symlinks credentials to
+# host-absolute paths that dangle in the guest; pi crashes with ENOENT
+# writing through a dangling auth.json symlink. Always copy contents.
+box_cp_auth_into_vm() { # $1 host file, $2 guest path
+  [ -f "$1" ] || return 0
+  limactl cp "$(realpath "$1")" "$NAME:$2"
+}
+
 box_sync_agent_auth_into_vm() {
   guest_home=$(limactl shell --tty=false "$NAME" -- printenv HOME) ||
     return 0
@@ -49,37 +57,30 @@ box_sync_agent_auth_into_vm() {
     "${guest_home}/.codex" ||
     return 0
 
-  # SSH: known_hosts
-  [ -f "$HOME/.ssh/known_hosts" ] &&
-    limactl cp "$HOME/.ssh/known_hosts" \
-      "$NAME:${guest_home}/.ssh/known_hosts"
+  box_cp_auth_into_vm "$HOME/.ssh/known_hosts" \
+    "${guest_home}/.ssh/known_hosts"
 
   # Pi Coding Agent
-  [ -f "$HOME/.pi/agent/auth.json" ] &&
-    limactl cp "$HOME/.pi/agent/auth.json" \
-      "$NAME:${guest_home}/.pi/agent/auth.json"
+  box_cp_auth_into_vm "$HOME/.pi/agent/auth.json" \
+    "${guest_home}/.pi/agent/auth.json"
 
   # oh-my-pi
-  [ -f "$HOME/.omp/marketplaces.json" ] &&
-    limactl cp "$HOME/.omp/marketplaces.json" \
-      "$NAME:${guest_home}/.omp/marketplaces.json"
+  box_cp_auth_into_vm "$HOME/.omp/marketplaces.json" \
+    "${guest_home}/.omp/marketplaces.json"
 
   # OpenCode
-  [ -f "$HOME/.local/share/opencode/auth.json" ] &&
-    limactl cp "$HOME/.local/share/opencode/auth.json" \
-      "$NAME:${guest_home}/.local/share/opencode/auth.json"
-  [ -f "$HOME/.local/share/opencode/mcp-auth.json" ] &&
-    limactl cp "$HOME/.local/share/opencode/mcp-auth.json" \
-      "$NAME:${guest_home}/.local/share/opencode/mcp-auth.json"
+  box_cp_auth_into_vm "$HOME/.local/share/opencode/auth.json" \
+    "${guest_home}/.local/share/opencode/auth.json"
+  box_cp_auth_into_vm "$HOME/.local/share/opencode/mcp-auth.json" \
+    "${guest_home}/.local/share/opencode/mcp-auth.json"
 
   # Claude Code
-  [ -f "$HOME/.claude.json" ] &&
-    limactl cp "$HOME/.claude.json" "$NAME:${guest_home}/.claude.json"
+  box_cp_auth_into_vm "$HOME/.claude.json" \
+    "${guest_home}/.claude.json"
 
   # Codex CLI
-  [ -f "$HOME/.codex/auth.json" ] &&
-    limactl cp "$HOME/.codex/auth.json" \
-      "$NAME:${guest_home}/.codex/auth.json"
+  box_cp_auth_into_vm "$HOME/.codex/auth.json" \
+    "${guest_home}/.codex/auth.json"
 }
 
 # Drop mount entries whose host location no longer exists on disk.
