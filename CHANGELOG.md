@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.245.0](https://github.com/raas-dev/configent/compare/1.244.10...1.245.0) (2026-09-30)
+
+### Features
+
+* **xfce:** enable clipman clipboard daemon with history disabled ([ead1215](https://github.com/raas-dev/configent/commit/ead1215dc9fc9c4c1b10754d39223b9b9641d04a))
+
+### Fixes
+
+* **install:** ensure xfce helpers resolve via /usr/local/bin ([611bc36](https://github.com/raas-dev/configent/commit/611bc364696a058f0e04db926a549aec556f86d2))
+* **install:** run install_linux_apps synchronously ([086cf19](https://github.com/raas-dev/configent/commit/086cf19a64631f2547e31aacb5fbb9b2de31020d))
+* **xfce:** enable clipman autostart and fix panel ordering ([0ef27c3](https://github.com/raas-dev/configent/commit/0ef27c38be4cec764fd1a44dd626fd693546d474))
+
 ## [1.244.10](https://github.com/raas-dev/configent/compare/1.244.9...1.244.10) (2026-09-29)
 
 ### Fixes
