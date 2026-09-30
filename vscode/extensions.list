@@ -13,6 +13,7 @@ christian-kohler.path-intellisense
 denizhandaklr.glm-chat-provider
 dmitrydorofeev.empty-indent
 dnicolson.binary-plist
+dnut.rewrap-revived
 editorconfig.editorconfig
 emilast.logfilehighlighter
 endoumame.herdr-vscode
@@ -51,7 +52,6 @@ ryanreynolds.agent-terminal
 sebastian-lay.auto-reload
 shahilkumar.docxreader
 stevejpurves.cucumber
-stkb.rewrap
 streetsidesoftware.code-spell-checker
 streetsidesoftware.code-spell-checker-finnish
 tamasfe.even-better-toml
