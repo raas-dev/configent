@@ -161,6 +161,8 @@ launchers() {
     $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.local/bin"
     $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
       "$UI/brave/brave-wrapper" "$UHOME/.local/bin/brave-wrapper"
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UI/chromium/chromium-wrapper" "$UHOME/.local/bin/chromium-wrapper"
     # Desktop + menu launchers Exec-rewritten to the wrapper (desktop
     # files don't expand $HOME) — deb file has Exec=/usr/bin/brave-browser-stable.
     sed "s|/usr/bin/brave-browser-stable|$UHOME/.local/bin/brave-wrapper|g" \
@@ -194,11 +196,22 @@ launchers() {
     for f in "$UHOME/.config/xfce4/helpers.rc" /etc/xdg/xfce4/helpers.rc; do
       if [ -f "$f" ]; then
         $SUDO sed -i 's/^WebBrowser=.*/WebBrowser=brave-browser/' "$f"
+        $SUDO sed -i 's/^TerminalEmulator=.*/TerminalEmulator=xfce4-terminal/' "$f"
       fi
     done
     $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.config/xfce4/helpers.rc" 2>/dev/null || true
     # WebBrowser launches are forced to Brave by ui/xfce/exo-open-wrapper
     # (installed by install_linux_xfce) — installs run before Brave exists.
+    # The XFCE chooser dialog resolves X-XFCE-Binaries via g_find_program_in_path
+    # at click time; if brave-wrapper is only in ~/.local/bin and the xfce session
+    # PATH dropped it, lookup returns NULL → "No helper defined" despite
+    # helpers.rc being correct. Symlink into /usr/local/bin so it always resolves.
+    if [ -x "$UHOME/.local/bin/brave-wrapper" ] && [ ! -e /usr/local/bin/brave-wrapper ]; then
+      $SUDO ln -sf "$UHOME/.local/bin/brave-wrapper" /usr/local/bin/brave-wrapper
+    fi
+    if [ -x "$UHOME/.local/bin/chromium-wrapper" ] && [ ! -e /usr/local/bin/chromium-wrapper ]; then
+      $SUDO ln -sf "$UHOME/.local/bin/chromium-wrapper" /usr/local/bin/chromium-wrapper
+    fi
   fi
   # gvfsd-metadata may be absent; Caja/Thunar honor this xattr fallback.
   run_as python3 -c "
