@@ -12,11 +12,6 @@
 : "${TEMPLATE:="dev"}"
 : "${FW:=GITHUB_TOKEN,CONTEXT7_API_KEY,OCCAM_API_KEY}"
 
-if [ "$(uname -s)" != 'Darwin' ]; then
-  echo "Error: This script is ought to be run on macOS only."
-  exit 1
-fi
-
 program="${1-}"
 [ $# -gt 0 ] && shift
 
@@ -30,7 +25,7 @@ codex) FW="$FW,OPENAI_API_KEY" ;;
 esac
 
 if ! command -v limactl >/dev/null; then
-  echo "Error: limactl not found on macOS, cannot start Linux VM" \
+  echo "Error: limactl not found, cannot start Linux VM" \
     "for agent."
   exit 127
 fi
@@ -243,8 +238,13 @@ lima_create_instance() {
   # libkrun/HVF, arm64 only, experimental; net fallback = gvisor usernet
   krunkit) os_create_args=(--vm-type=krunkit --mount-type=virtiofs) ;;
   *)
-    os_create_args=(--vm-type=vz --rosetta)
-    [ -n "$net_arg" ] || os_create_args+=(--network=vzNAT)
+    if [ "$(uname -s)" = 'Darwin' ]; then
+      os_create_args=(--vm-type=vz --rosetta)
+      [ -n "$net_arg" ] || os_create_args+=(--network=vzNAT)
+    else
+      # Linux hosts: vz/rosetta/vzNAT are macOS-only, qemu is the default
+      os_create_args=(--vm-type=qemu)
+    fi
     ;;
   esac
   [ -n "$net_arg" ] && os_create_args+=("$net_arg")
