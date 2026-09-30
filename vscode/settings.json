@@ -685,5 +685,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${progress}"
+  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${progress}",
+  "terminal.integrated.middleClickBehavior": "paste"
 }
