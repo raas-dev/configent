@@ -319,7 +319,6 @@ fi
 
 ### dbus session bus (SSH/headless shells) #####################################
 
-# pam_systemd sets XDG_RUNTIME_DIR on login, enable-linger keeps it past logout
 if [ "$(uname -s)" = 'Linux' ] && [ -z "$DBUS_SESSION_BUS_ADDRESS" ] &&
   [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
   export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
