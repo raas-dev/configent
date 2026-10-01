@@ -31,9 +31,11 @@ case "$CRBIN" in
   ;;
 esac
 EXTS=${HOME:-/root}/.config/chromium-extensions
-# --password-store=basic: no OS secret service exists here (no password
-# login → no pam_gnome_keyring → keyring can never auto-unlock), so use
-# oscrypt's built-in basic store instead of prompting to unlock keyrings.
+# --password-store=gnome-libsecret: passwords go to pass-secret-service
+# (org.freedesktop.secrets, D-Bus activated) backed by the pass store
+# seeded by bin/install_linux_apps — empty-passphrase GPG key, so no
+# unlock prompt; plaintext basic store would instead write Login Data
+# unencrypted into the profile.
 # Software GPU path for lima/krunkit VMs: real virtio-gpu is plumbed but
 # Venus is blocked by libkrun #114 (Apple Silicon blob alignment).
 # WebGL renders via ANGLE->native GL->Mesa llvmpipe (CPU, GL 4.5 core).
@@ -42,6 +44,6 @@ exec "$CRBIN" \
   --use-gl=angle --use-angle=gl \
   --enable-features=WebGPU \
   --no-default-browser-check \
-  --password-store=basic \
+  --password-store=gnome-libsecret \
   --load-extension="$EXTS/ddkjiahejlhfcafbddmgiahcphecmpfh,$EXTS/edibdbjcniadpccecjdfdjjppcpchdlm" \
   "$@"

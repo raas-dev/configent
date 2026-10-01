@@ -10,7 +10,10 @@ EXTS=${HOME:-/root}/.config/brave-extensions
 # Software GPU path for lima/krunkit VMs — same flags as
 # ui/chromium/chromium-wrapper: WebGL renders via ANGLE->native GL->Mesa
 # llvmpipe (CPU, GL 4.5 core).
+# UI/xfce VMs: passwords go to pass-secret-service — same rationale as
+# ui/chromium/chromium-wrapper.
 exec /usr/bin/brave-browser \
+  --password-store=gnome-libsecret \
   --force-renderer-accessibility --ignore-gpu-blocklist \
   --use-gl=angle --use-angle=gl \
   --enable-features=WebGPU \
