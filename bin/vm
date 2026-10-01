@@ -126,7 +126,7 @@ _vm() {
     fi
     _vm_shell "$vm_name"
     ;;
-  shell | run | exec | s)
+  shell | run)
     [ "$1" = "--" ] && shift
     if [ $# -gt 0 ]; then
       printf '%s\n' "$*" | limactl shell "$vm_name"
@@ -137,7 +137,7 @@ _vm() {
   down | stop)
     limactl stop "$vm_name" --force
     ;;
-  delete | del | rm)
+  delete | del)
     limactl stop "$vm_name" --force
     limactl delete "$vm_name" --force
     ;;
