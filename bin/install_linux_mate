@@ -416,7 +416,7 @@ log "apt + selkies + mate install starting (single batch)"
   $SUDO $EAT apt-get install "${APT_OPTS[@]}" \
     "$SELKIES_DEB" \
     xvfb \
-    x11-xkb-utils xkb-data fontconfig dbus-x11 \
+    x11-xkb-utils xkb-data fontconfig dbus-user-session \
     libsecret-1-0 \
     fonts-noto-color-emoji \
     xsel \
