@@ -7,6 +7,13 @@
 # hand-registered user extensions (Secure Preferences MACs), so updates
 # here = re-run ui/chromium/extensions.py with the brave ids.
 EXTS=${HOME:-/root}/.config/brave-extensions
+# Pin the systemd user bus when nothing else did (cron/systemd-run
+# launches see no pam/.profile env) — same guard as
+# ui/chromium/chromium-wrapper, needed by --password-store below.
+if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] &&
+  [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
+  export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+fi
 # Software GPU path for lima/krunkit VMs — same flags as
 # ui/chromium/chromium-wrapper: WebGL renders via ANGLE->native GL->Mesa
 # llvmpipe (CPU, GL 4.5 core).
