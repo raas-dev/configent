@@ -42,6 +42,18 @@ if ! command -v limactl >/dev/null; then
     "for agent."
   exit 127
 fi
+case "$program" in
+stop | down)
+  limactl stop "$NAME" --force
+  exit
+  ;;
+delete | del)
+  limactl stop "$NAME" --force
+  limactl delete "$NAME" --force
+  exit
+  ;;
+esac
+
 lima_cwd=$(pwd -P)
 lima_home=$(cd "$HOME" && pwd -P)
 lima_yaml="$HOME/.config/configent/lima/$TEMPLATE.yaml"
