@@ -317,13 +317,6 @@ if [ "$(uname -s)" = 'Linux' ] &&
   export DISPLAY=':0'
 fi
 
-### dbus session bus (SSH/headless shells) #####################################
-
-if [ "$(uname -s)" = 'Linux' ] && [ -z "$DBUS_SESSION_BUS_ADDRESS" ] &&
-  [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
-  export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
-fi
-
 ### mas - macOS Apple Store CLI ################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
