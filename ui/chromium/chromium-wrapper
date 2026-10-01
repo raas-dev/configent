@@ -31,6 +31,54 @@ case "$CRBIN" in
   ;;
 esac
 EXTS=${HOME:-/root}/.config/chromium-extensions
+# Terminal logins (limactl/ssh) get the systemd user bus
+# (/run/user/UID/bus), but pass-secret-service
+# (org.freedesktop.secrets, backing --password-store=gnome-libsecret)
+# only runs on the XFCE session bus. Chromium 143+ inits os_crypt async
+# in the network service; without the secret service it crash-loops
+# ("Network service crashed or was terminated") and pages never load.
+# Adopt the graphical session's bus when ours lacks the secret service.
+# Candidate buses are VERIFIED to serve org.freedesktop.secrets before
+# adoption: pgrep -n (newest) alone is wrong — transient xfce4-session/
+# xfdesktop respawns can carry the systemd user bus (no secrets) and be
+# newer than the real desktop session, and adopting that bus keeps the
+# network service crash-looping. pass-secret-service is checked first:
+# its own bus IS the secrets bus by definition.
+_secrets_on_bus() {
+  DBUS_SESSION_BUS_ADDRESS="$1" dbus-send --session --print-reply \
+    --dest=org.freedesktop.DBus /org/freedesktop/DBus \
+    org.freedesktop.DBus.NameHasOwner string:org.freedesktop.secrets 2>/dev/null |
+    grep -q 'boolean true'
+}
+if command -v dbus-send >/dev/null 2>&1 &&
+  ! dbus-send --session --print-reply --dest=org.freedesktop.DBus \
+    /org/freedesktop/DBus org.freedesktop.DBus.NameHasOwner \
+    string:org.freedesktop.secrets 2>/dev/null | grep -q "boolean true"; then
+  _ADOPTED=
+  # Candidate bus addresses: procs' DBUS env first (pass-secret-service is
+  # authoritative — its bus IS the secrets bus), then the user bus itself:
+  # a systemd user unit instance serves secrets there without DBUS_SESSION_
+  # BUS_ADDRESS in its environ.
+  _CAND=$(
+    for _P in $(pgrep -f "pass-secret-service" 2>/dev/null) \
+      $(pgrep -x xfce4-session 2>/dev/null) \
+      $(pgrep -x xfdesktop 2>/dev/null); do
+      tr '\0' '\n' </proc/"$_P"/environ 2>/dev/null |
+        sed -n 's/^DBUS_SESSION_BUS_ADDRESS=//p' | head -1
+    done
+    echo "unix:path=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/bus"
+  )
+  for _BUS in $_CAND; do
+    [ -n "${_BUS:-}" ] || continue
+    [ "$_BUS" != "${DBUS_SESSION_BUS_ADDRESS:-}" ] || continue
+    if _secrets_on_bus "$_BUS"; then
+      export DBUS_SESSION_BUS_ADDRESS="$_BUS"
+      _ADOPTED=yes
+      break
+    fi
+  done
+  [ -n "${_ADOPTED:-}" ] || echo "chromium-wrapper: no session bus with org.freedesktop.secrets found; password store unavailable" >&2
+fi
 # --password-store=gnome-libsecret: passwords go to pass-secret-service
 # (org.freedesktop.secrets, D-Bus activated) backed by the pass store
 # seeded by bin/install_linux_apps — empty-passphrase GPG key, so no

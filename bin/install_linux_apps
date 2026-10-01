@@ -286,6 +286,20 @@ secret_service() {
       log "pass store init deferred (bin/secret initializes on first use)"
   fi
   log "pass-secret-service ready (dbus-activatable org.freedesktop.secrets)"
+
+  # VS Code must target libsecret explicitly: its auto-detect pops
+  # "An OS keyring could not be identified" on this setup. argv.json is
+  # JSONC and only exists after first launch; preserve it if present.
+  run_as python3 - "$UHOME/.vscode/argv.json" <<'PY'
+import json, os, re, sys
+p = sys.argv[1]
+os.makedirs(os.path.dirname(p), exist_ok=True)
+s = open(p).read() if os.path.exists(p) else ''
+s = re.sub(r'//[^\n]*', '', s)
+d = json.loads(s) if s.strip() else {}
+d.setdefault('password-store', 'gnome-libsecret')
+open(p, 'w').write(json.dumps(d, indent=1) + '\n')
+PY
 }
 
 secret_service
