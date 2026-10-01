@@ -224,6 +224,72 @@ for f in ('$UHOME/Desktop/brave-browser.desktop',
   run_as update-desktop-database "$UHOME/.local/share/applications" 2>/dev/null || true
 }
 
+# pass-secret-service: Secret Service API (org.freedesktop.secrets) backed
+# by pass for libsecret clients (Brave passwords, VSCode). Upstream units
+# from https://github.com/grimsteel/pass-secret-service/tree/main/systemd,
+# Exec adapted to /usr/local/bin where the bare prebuilt binary is dropped
+# (pure-rust dbus, no runtime deps). Runs before the early-exit below so
+# reprovisions re-assert the config. No gnome-keyring involvement: nothing
+# installs it, and the org.freedesktop.secrets claim is user-local
+# (~/.local/share/dbus-1/services), so it only exists for this user.
+secret_service() {
+  command -v pass >/dev/null 2>&1 ||
+    {
+      log "pass not present, skipping secret service"
+      return 0
+    }
+  local arch
+  case "$ARCH" in
+  amd64) arch=x86_64 ;;
+  arm64) arch=aarch64 ;;
+  *)
+    log "no pass-secret-service build for $ARCH, skipping"
+    return 0
+    ;;
+  esac
+  local bin=/usr/local/bin/pass-secret-service
+  if [ ! -x "$bin" ]; then
+    local ver=v0.7.1
+    local url="https://github.com/grimsteel/pass-secret-service/releases/download/$ver/pass-secret-service-$arch"
+    local cached="/mnt/lima-provision/pass-secret-service-$arch" tmp
+    if [ -s "$cached" ]; then
+      $SUDO install -m 755 "$cached" "$bin"
+    else
+      tmp=$(mktemp)
+      curl -fsSL --retry 5 --retry-all-errors -o "$tmp" "$url"
+      $SUDO install -m 755 "$tmp" "$bin"
+      $SUDO cp "$tmp" /mnt/lima-provision/ 2>/dev/null || true
+      rm -f "$tmp"
+    fi
+  fi
+  # user-scope claim only: session bus resolves org.freedesktop.secrets
+  # from ~/.local/share/dbus-1/services; no system-wide file needed
+  $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
+    "$UHOME/.config/systemd/user" "$UHOME/.local/share/dbus-1/services"
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+    "$UI/secret/org.freedesktop.secrets.service" \
+    "$UHOME/.local/share/dbus-1/services/"
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+    "$UI/secret/pass-secret-service.service" \
+    "$UHOME/.config/systemd/user/"
+  # idle store: empty-passphrase batch key, same identity bin/secret uses —
+  # the service reads the store lazily, but init here keeps first unlock simple
+  if ! run_as test -s "$UHOME/.password-store/.gpg-id"; then
+    # shellcheck disable=SC2016  # $ must stay literal: runs as $LUSER
+    run_as bash -c 'set -e
+      gpg --batch --pinentry-mode loopback --passphrase "" \
+        --quick-gen-key "Password Store <password-store@localhost>" \
+        default default never 2>/dev/null || true
+      gpg_id=$(gpg --with-colons --list-secret-keys 2>/dev/null |
+        grep "^fpr:" | head -1 | cut -d: -f10)
+      [ -n "$gpg_id" ] && pass init "$gpg_id"' ||
+      log "pass store init deferred (bin/secret initializes on first use)"
+  fi
+  log "pass-secret-service ready (dbus-activatable org.freedesktop.secrets)"
+}
+
+secret_service
+
 if dpkg -s code >/dev/null 2>&1 && dpkg -s brave-browser >/dev/null 2>&1; then
   log "code + brave-browser already installed"
   launchers
