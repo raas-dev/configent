@@ -330,8 +330,9 @@ box_sync_agent_auth_into_vm
 
 # host $SHELL may not exist in a fresh, not-yet-bootstrapped guest
 guest_shell="$(basename "$SHELL")"
+# command -v passes on truncated/0-byte binaries; require real output
 limactl shell --tty=false "$NAME" -- \
-  command -v "$guest_shell" >/dev/null 2>&1 || guest_shell=bash
+  "$guest_shell" -c 'printf ok' 2>/dev/null | grep -qx ok || guest_shell=bash
 
 if [ -z "$program" ]; then
   limactl shell \
