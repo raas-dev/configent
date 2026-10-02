@@ -577,7 +577,7 @@ c() {
 ### Docker ####################################################################
 
 # run in docker
-rid() {
+rind() {
   # lowercase the image name to allow pushing it to container registries
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"

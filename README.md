@@ -226,9 +226,9 @@ In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
 ### Run in Docker
 
-Alias `rid` is a shortcut for building Docker image in the current directory.
+Alias `rind` is shortcut for building a Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [Railpack](https://railpack.com/)
-is used to detect the tech stack and build the image best-effort.
+is used to detect the language and framework and build the image best-effort.
 
 ⚠️: Ensure the Docker image you are building `FROM` is safe before proceeding.
 
@@ -236,11 +236,11 @@ After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
 container.
 
-If you use `PORT=8000 rid`, the port given is mapped to the host and environment
-variable `PORT` is set inside the container. Note that this takes precedence
-if `PORT` is also defined in `.env` file.
+If you use `PORT=8000 rind`, the port given is mapped to the host and
+environment variable `PORT` is set inside the container. Note that this
+takes precedence if `PORT` is also defined in `.env` file.
 
-If `rid -d` or `rid --detached` is used, all arguments are passed as is to
+If `rind -d` or `rind --detached` is used, all arguments are passed as is to
 `docker run`. CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in
 `Dockerfile` (or by `railpack`) is effective, unless you override it in
 arguments.
@@ -250,7 +250,7 @@ are followed. Sending `^C` exits the log view and does not stop the container.
 
 If `-d` or `--detached` is not used, an interactive session is assumed and all
 arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
-`rid bash` starts Bash in the container. Exiting the shell stops the container.
+`rind bash` starts Bash in the container. Exiting the shell stops the container.
 
 ⚠️: If container writes to filesystem, you must be in a VM writable directory.
 
