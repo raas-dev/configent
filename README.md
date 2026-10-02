@@ -224,9 +224,9 @@ See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
-### docker shortcut
+### Run in Docker
 
-Alias `rc` is a shortcut for building Docker image in the current directory.
+Alias `rid` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [railpack](https://railpack.com/)
 is used to detect the tech stack and build the image best-effort.
 
@@ -236,20 +236,21 @@ After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
 container.
 
-If you use `PORT=8000 rc`, the port given is mapped to the host and environment
+If you use `PORT=8000 rid`, the port given is mapped to the host and environment
 variable `PORT` is set inside the container. Note that this takes precedence
 if `PORT` is also defined in `.env` file.
 
-If `rc -d` or `rc --detached` is used, all arguments are passed to `docker run`.
-CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in `Dockerfile`
-(or by `railpack`) is effective, unless you override it in arguments.
+If `rid -d` or `rid --detached` is used, all arguments are passed as is to
+`docker run`. CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in
+`Dockerfile` (or by `railpack`) is effective, unless you override it in
+arguments.
 
 If container was started as detached and successfully started up, docker logs
 are followed. Sending `^C` exits the log view and does not stop the container.
 
 If `-d` or `--detached` is not used, an interactive session is assumed and all
 arguments are passed to `docker run` entrypoint `/bin/sh -c` as commands, e.g.
-`rc bash` starts Bash in the container. Exiting the shell stops the container.
+`rid bash` starts Bash in the container. Exiting the shell stops the container.
 
 ⚠️: If container writes to filesystem, you must be in a VM writable directory.
 
