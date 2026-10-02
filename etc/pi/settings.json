@@ -168,5 +168,8 @@
         ]
       }
     }
-  }
+  },
+  "extensions": [
+    "-builtin:mcp"
+  ]
 }
