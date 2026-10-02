@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.0](https://github.com/raas-dev/configent/compare/1.246.0...1.247.0) (2026-10-02)
+
+### Features
+
+* **linux:** replace gnome-keyring with pass-secret-service ([dc16825](https://github.com/raas-dev/configent/commit/dc16825a27da3181dbd6698dbfd38e6bc7625512))
+
+### Fixes
+
+* **box:** persist headroom proxy across pi/omp sessions ([7eee80d](https://github.com/raas-dev/configent/commit/7eee80d21fdb30264f97c6c30398b61841b7bd0f))
+* **box:** verify guest shell with execution instead of command -v ([8ecf9db](https://github.com/raas-dev/configent/commit/8ecf9dbb4c57d4342f2cb98cc775d632041ded1b))
+* **box:** wrap headroom proxy startup in subshell for proper ([d2b4819](https://github.com/raas-dev/configent/commit/d2b4819e8f7a8a6cd3d3407634dbed10f8c1a0ba))
+* **chromium:** use basic password store for vm environments ([9b3fe44](https://github.com/raas-dev/configent/commit/9b3fe44281724ce4ed9b988638404485f9d4a635))
+* **cursors:** increase size to 40 and enable browser cursors ([4eed089](https://github.com/raas-dev/configent/commit/4eed08984054d7713872a69e98175e217e6ef5a6))
+* **dbus:** simplify chromium and brave session bus setup ([ce02764](https://github.com/raas-dev/configent/commit/ce0276432a54e56497c8d31302e993513a79b54c))
+* **dbus:** use dbus-user-session instead of dbus-x11 ([34b6ecd](https://github.com/raas-dev/configent/commit/34b6ecd8da1ecafcacbf70ccaff0c6b860a6c047))
+* **mate:** ensure dbus session bus is ready ([2632c3f](https://github.com/raas-dev/configent/commit/2632c3fee068e173e70058da93ce0ab9e5cd1d45))
+* **secret:** adopt session bus with secret service for chromium ([aa7f49f](https://github.com/raas-dev/configent/commit/aa7f49f1bc284ac52df9c81a0631492eeacd1199))
+* **selkies:** enable css scaling ([682f739](https://github.com/raas-dev/configent/commit/682f73974711a80749df2315571a7bf65f79bcf8))
+* **vm:** remove command aliases ([181aa06](https://github.com/raas-dev/configent/commit/181aa06b6a288512ebfe9d39e0c18e162053b6d9))
+* **xvfb:** add xcvt and upgrade to 4k resolution ([43cf8d2](https://github.com/raas-dev/configent/commit/43cf8d2d914f493cbf57bd0bce854e67d2731346))
+* **xvfb:** downgrade resolution to 1440p ([4fcb5da](https://github.com/raas-dev/configent/commit/4fcb5dafd7d9e2b2a25f9d551e5af031bb336d8e))
+
 ## [1.246.0](https://github.com/raas-dev/configent/compare/1.245.0...1.246.0) (2026-09-30)
 
 ### Features
