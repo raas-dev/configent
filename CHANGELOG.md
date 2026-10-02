@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.1](https://github.com/raas-dev/configent/compare/1.247.0...1.247.1) (2026-10-02)
+
+### Fixes
+
+* **chromium:** clarify dbus session bus address handling ([4e76673](https://github.com/raas-dev/configent/commit/4e766738af74c582884c5c363958abe78b3eed91))
+* **lima:** fix podman storage on virtiofs mounts ([8d136df](https://github.com/raas-dev/configent/commit/8d136df07407002eca3b4e6c3c94fcaa1fc75b67))
+
+### Performance
+
+* **lima:** reduce probe sleep intervals from 2-3s to 1s ([10fff77](https://github.com/raas-dev/configent/commit/10fff7724ea8b0907ae1293132595712a091b86e))
+
 ## [1.247.0](https://github.com/raas-dev/configent/compare/1.246.0...1.247.0) (2026-10-02)
 
 ### Features
