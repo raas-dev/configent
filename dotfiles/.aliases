@@ -581,7 +581,7 @@ rc() {
   # lowercase the image name to allow pushing it to container registries
   # shellcheck disable=SC2155  # will not declare separately, value compactness
   local name="$(echo "${PWD##*/}" | tr '[:upper:]' '[:lower:]')"
-  if docker top "$name" >/dev/null; then
+  if docker top "$name" >/dev/null 2>&1; then
     docker stop "$name" || docker kill "$name"
   fi
 
@@ -590,7 +590,7 @@ rc() {
     docker build --pull --tag "$name" . || return
   else
     echo "[d] Building image with railpack"
-    if ! docker top buildkit >/dev/null; then
+    if ! docker top buildkit >/dev/null 2>&1; then
       docker run --rm --privileged -d --name buildkit moby/buildkit >/dev/null || return
     fi
     BUILDKIT_HOST='docker-container://buildkit' \
