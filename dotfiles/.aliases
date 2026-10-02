@@ -1141,6 +1141,16 @@ nixd() {
     exec_args+=(--env "PORT=$first_port")
   fi
 
+  # wait for podman (lima VM) up to 30s before touching it
+  local waited=0
+  until podman ps >/dev/null 2>&1; do
+    if (( ++waited > 30 )); then
+      echo "nixd: podman unavailable (is the lima VM running?)" >&2
+      return 1
+    fi
+    sleep 1
+  done
+
   podman start "$name" >/dev/null ||
     (podman build --tag "$image" ~/configent/etc/nix &&
       podman run --init -t --detach \
@@ -1198,8 +1208,8 @@ n() {
       shell_cmd="$cmd${*:+ $*}"
     fi
   fi
-  # shellcheck disable=SC2086  # shell_cmd must be unquoted for --command
-  nix shell --no-warn-dirty "${pkg_args[@]}" --command $shell_cmd
+  # (single string: sh parses it — zsh does not word-split "$shell_cmd")
+  nix shell --no-warn-dirty "${pkg_args[@]}" --command sh -c "$shell_cmd"
 }
 
 # https://docs.asciinema.org/manual/agg/usage/
