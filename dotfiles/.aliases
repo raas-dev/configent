@@ -1155,7 +1155,7 @@ nixd() {
     sleep 1
   done
 
-  podman start "$name" >/dev/null ||
+  podman start "$name" >/dev/null 2>&1 ||
     (podman build --tag "$image" ~/configent/etc/nix &&
       podman run --init -t --detach \
         --name "$name" \
