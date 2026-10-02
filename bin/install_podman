@@ -56,13 +56,14 @@ runtime = "crun"
 EOF
 fi
 
-# Configure registries to allow short names
+# Configure registries to allow short names; a drop-in is used so this works
+# even if containers-common has not created registries.conf yet (idempotent)
+$SUDO install -d -m 755 /etc/containers/registries.conf.d
+printf 'unqualified-search-registries = ["docker.io"]\n' |
+  $SUDO tee /etc/containers/registries.conf.d/999-shortname.conf >/dev/null
+$SUDO chmod 644 /etc/containers/registries.conf.d/999-shortname.conf
+# Disable short-name enforcing mode if configured
 if [ -e /etc/containers/registries.conf ]; then
-  # Add unqualified-search-registries if not present
-  if ! grep -q "^unqualified-search-registries" /etc/containers/registries.conf; then
-    echo 'unqualified-search-registries = ["docker.io"]' | $SUDO tee -a /etc/containers/registries.conf >/dev/null
-  fi
-  # Disable short-name enforcing mode
   $SUDO sed -i 's/short-name-mode = "enforcing"/short-name-mode = "disabled"/g' /etc/containers/registries.conf
 fi
 
