@@ -589,8 +589,12 @@ rc() {
     echo "[d] Building image from Dockerfile"
     docker build --pull --tag "$name" . || return
   else
-    echo "[d] Building image with nixpacks"
-    nixpacks build . --name "$name" || return
+    echo "[d] Building image with railpack"
+    if ! docker top buildkit >/dev/null; then
+      docker run --rm --privileged -d --name buildkit moby/buildkit >/dev/null || return
+    fi
+    BUILDKIT_HOST='docker-container://buildkit' \
+      railpack build . --name "$name" || return
   fi
 
   if [ -n "$PORT" ]; then

@@ -227,7 +227,7 @@ In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 ### docker shortcut
 
 Alias `rc` is a shortcut for building Docker image in the current directory.
-`Dockerfile` is read if present, otherwise [nixpacks](https://nixpacks.com/)
+`Dockerfile` is read if present, otherwise [railpack](https://railpack.com/)
 is used to detect the tech stack and build the image best-effort.
 
 ⚠️: Ensure the Docker image you are building `FROM` is safe before proceeding.
@@ -242,7 +242,7 @@ if `PORT` is also defined in `.env` file.
 
 If `rc -d` or `rc --detached` is used, all arguments are passed to `docker run`.
 CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in `Dockerfile`
-(or by `nixpacks`) is effective, unless you override it in arguments.
+(or by `railpack`) is effective, unless you override it in arguments.
 
 If container was started as detached and successfully started up, docker logs
 are followed. Sending `^C` exits the log view and does not stop the container.
