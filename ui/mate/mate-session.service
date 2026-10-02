@@ -7,12 +7,14 @@ Wants=network-online.target
 User=__LUSER__
 Group=__LGROUP__
 Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/__LUID__
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/__LUID__/bus
 Environment=XDG_CURRENT_DESKTOP=MATE
 Environment=XDG_SESSION_DESKTOP=mate
 Environment=XDG_DATA_DIRS=/usr/local/share:/usr/share
 Environment=GTK_A11Y=atspi
-ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done"
-ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY
+ExecStartPre=/bin/sh -c "until [ -S /tmp/.X11-unix/X0 ] && [ -S /run/user/__LUID__/bus ]; do sleep 1; done"
+ExecStartPre=/usr/bin/dbus-update-activation-environment --systemd DISPLAY XDG_RUNTIME_DIR
 ExecStart=/usr/bin/mate-session
 Restart=on-failure
 RestartSec=2
