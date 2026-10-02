@@ -586,10 +586,10 @@ rind() {
   fi
 
   if [ -r "$PWD/Dockerfile" ]; then
-    echo "[d] Building image from Dockerfile"
+    echo "[rind] Building image from Dockerfile"
     docker build --pull --tag "$name" . || return
   else
-    echo "[d] Building image with railpack"
+    echo "[rind] Building image with railpack"
     if ! docker top buildkit >/dev/null 2>&1; then
       docker run --rm --privileged -d --name buildkit moby/buildkit >/dev/null || return
     fi
@@ -629,8 +629,8 @@ rind() {
     local env_args="--env PORT=$first_port"
 
     # Debug: show what we're setting
-    echo "[d] Port mappings: $port_args"
-    echo "[d] Container PORT env: $first_port"
+    echo "[rind] Port mappings: $port_args"
+    echo "[rind] Container PORT env: $first_port"
   fi
 
   [ -r "$PWD/.env" ] && local env_file="--env-file $PWD/.env"
@@ -653,9 +653,9 @@ rind() {
   local run_exit_code=$?
 
   if [ "$run_args" = "-d" ] || [ "$run_args" = "--detach" ]; then
-    echo "[d] Published ports: container -> host"
+    echo "[rind] Published ports: container -> host"
     docker port "$name"
-    echo "[d] Following logs, ^C does not halt the container"
+    echo "[rind] Following logs, ^C does not halt the container"
     docker logs --follow "$name"
   fi
 
