@@ -224,13 +224,13 @@ See VM's startup message for exporting `KUBECONFIG` to use it with `kubectl`.
 
 In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
-### run-in-docker
+### Run in Docker
 
 Alias `rid` is a shortcut for building Docker image in the current directory.
 `Dockerfile` is read if present, otherwise [Railpack](https://railpack.com/)
 is used to detect the tech stack and build the image best-effort.
 
-⚠️: Ensure the Docker image you are building `FROM` is legit before proceeding.
+⚠️: Ensure the Docker image you are building `FROM` is safe before proceeding.
 
 After the image is built, a new container is launched from it. If `.env` file
 is present in the current directory, its environment variables are set in the
