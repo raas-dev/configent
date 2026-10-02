@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.2](https://github.com/raas-dev/configent/compare/1.247.1...1.247.2) (2026-10-02)
+
+### Fixes
+
+* **ai_commit:** use openai gpt-5.4-nano as default model ([8c50367](https://github.com/raas-dev/configent/commit/8c50367dd6d6d4a75a0ed563a6b3239cd8267cfc))
+* **docker:** rename rc docker shortcut alias to rid ([05a3bf0](https://github.com/raas-dev/configent/commit/05a3bf059aef45e491f75a4a5f6d982d0987308d))
+* **docker:** rename rc docker shortcut alias to rind ([a8c9ff7](https://github.com/raas-dev/configent/commit/a8c9ff753582e5e8c10333c74b75a9702e09f22f))
+* **docker:** replace nixpacks with railpack ([a9b5471](https://github.com/raas-dev/configent/commit/a9b54719d9c8b308cef7a260c14f77a8c1ed026e))
+* **docker:** suppress docker top stderr ([622558d](https://github.com/raas-dev/configent/commit/622558de31a07e68d50d319036b76ae88a3ebd1b))
+* **podman:** silence podman start stderr ([13d89d9](https://github.com/raas-dev/configent/commit/13d89d9436752781dc90a7f6665b770b5b37facb))
+
 ## [1.247.1](https://github.com/raas-dev/configent/compare/1.247.0...1.247.1) (2026-10-02)
 
 ### Fixes
