@@ -47,5 +47,5 @@ brew install --cask --force visual-studio-code
 # Logitech drivers
 #brew install --cask --force logitech-g-hub
 
-# Keyboard remapper (see ui/macos/ukelele for layouts)
+# Keyboard remapper (see macos/ukulele/ for layouts)
 brew install --cask --force ukelele

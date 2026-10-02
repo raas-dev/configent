@@ -16,7 +16,7 @@ fi
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
-backup_path="$this_path/../../.backup/system/Library/Preferences"
+backup_path="$this_path/../.backup/system/Library/Preferences"
 system_plist_path="/Library/Preferences/com.apple.keyboardtype.plist"
 
 ### Backup system-wide keyboard type ###########################################

@@ -14,7 +14,7 @@ fi
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
 this_path=$(cd "$(dirname "$0")" && pwd)
-backup_path="$this_path/../../.backup/Library/Preferences"
+backup_path="$this_path/../.backup/Library/Preferences"
 user_plist_path="$HOME/Library/Preferences/com.apple.HIToolbox.plist"
 
 ### Backup user's keyboard configuration #######################################
