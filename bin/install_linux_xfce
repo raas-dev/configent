@@ -40,7 +40,8 @@ UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
-UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/xfce" && pwd)
+LINUX=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux" && pwd)
+XFCE="$LINUX/xfce"
 SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
@@ -156,7 +157,7 @@ chromium_dl() {
 # seeding extensions.settings is pointless.
 chromium_extensions() {
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium-extensions"
-  run_as python3 "$UI/../chromium/extensions.py" \
+  run_as python3 "$LINUX/chromium/extensions.py" \
     "$UHOME/.config/chromium-extensions" \
     "$UHOME/.config/chromium/Default/Preferences" ||
     log "chromium extension fetch failed (offline?)"
@@ -170,11 +171,11 @@ seed_desktop() {
   [ -f /tmp/cb.ok ] || return 1
   CRBIN=$($SUDO find "$UHOME/.local/share/cloakbrowser" -maxdepth 2 -name chrome -print 2>/dev/null | sort -V | tail -1)
   [ -n "$CRBIN" ]
-  $SUDO install -m 644 "$UI/../chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
+  $SUDO install -m 644 "$LINUX/chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.local/bin"
   $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
-    "$UI/../chromium/chromium-wrapper" "$UHOME/.local/bin/chromium-wrapper"
+    "$LINUX/chromium/chromium-wrapper" "$UHOME/.local/bin/chromium-wrapper"
   for n in chrome chromium chromium-browser; do
     $SUDO ln -sf "$UHOME/.local/bin/chromium-wrapper" "$UHOME/.local/bin/$n"
   done
@@ -182,7 +183,7 @@ seed_desktop() {
   # rewritten to per-user wrapper (desktop files don't expand $HOME)
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.local/share/applications"
   sed "s|/usr/local/bin/chromium-wrapper|$UHOME/.local/bin/chromium-wrapper|" \
-    "$UI/../chromium/chromium-browser.desktop" |
+    "$LINUX/chromium/chromium-browser.desktop" |
     $SUDO tee "$UHOME/.local/share/applications/chromium-browser.desktop" >/dev/null
   $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.local/share/applications/chromium-browser.desktop"
   # Wipe xfce caches + chromium profile before re-seeding. chromium dir
@@ -206,14 +207,14 @@ seed_desktop() {
   # Preferences — Chromium reads it from there, not from under `search`
   # (seeding nested was the cause of "default search engine not set").
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium"
-  $SUDO cp -r "$UI/../chromium/Default/." \
+  $SUDO cp -r "$LINUX/chromium/Default/." \
     "$UHOME/.config/chromium/Default/"
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/Local State" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$LINUX/chromium/Local State" \
     "$UHOME/.config/chromium/Local State"
   # "First Run" sentinel in the user-data-dir root: its presence makes
   # Chromium treat the profile as used, so the ungoogled-chromium welcome
   # page never appears.
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/First Run" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$LINUX/chromium/First Run" \
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/chromium"
 
@@ -222,21 +223,21 @@ seed_desktop() {
   chromium_extensions
 
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config"
-  $SUDO cp -r "$UI/xfce4" "$UHOME/.config/xfce4"
+  $SUDO cp -r "$XFCE/xfce4" "$UHOME/.config/xfce4"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/xfce4"
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$XFCE/mimeapps.xfce.list" "$UHOME/.config/mimeapps.list"
   # Clipman daemon so clipboard survives closing the owning app. Per-user
   # autostart only — never touch /etc/xdg/autostart. xfce4-clipman xml seed
   # in $UI/xfce4/ already disables history, so this just enables the daemon.
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/autostart"
   $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
-    "$UI/xfce4-clipman-plugin-autostart.desktop" \
+    "$XFCE/xfce4-clipman-plugin-autostart.desktop" \
     "$UHOME/.config/autostart/xfce4-clipman-plugin-autostart.desktop"
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/Desktop"
   for f in chromium-browser xfce4-terminal; do
     # chromium: Desktop copy from the Exec-rewritten applications file;
     # the raw $UI file still points at /usr/local/bin/chromium-wrapper
-    src="$UI/$f.desktop"
+    src="$XFCE/$f.desktop"
     [ "$f" = chromium-browser ] &&
       src="$UHOME/.local/share/applications/$f.desktop"
     [ -f "$src" ] &&
@@ -262,7 +263,7 @@ write_configs() {
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$SELKIES/xvfb.service" |
     $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xvfb.service
-  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" "$UI/xfce-session.service" |
+  sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" "$XFCE/xfce-session.service" |
     $SUDO tee /etc/systemd/system/xfce-session.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xfce-session.service
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
@@ -386,7 +387,7 @@ $SUDO rm -f /etc/xdg/autostart/xfce4-power-manager.desktop \
   /etc/xdg/autostart/snap-userd-autostart.desktop \
   /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
 [ -x /usr/bin/exo-open ] && $SUDO mv /usr/bin/exo-open /usr/bin/exo-open-real
-$SUDO install -m 755 "$UI/exo-open-wrapper" /usr/bin/exo-open
+$SUDO install -m 755 "$XFCE/exo-open-wrapper" /usr/bin/exo-open
 $SUDO update-alternatives --set x-session-manager /usr/bin/xfce4-session
 update-desktop-database "$UHOME/.local/share/applications" 2>/dev/null || true
 

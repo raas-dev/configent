@@ -62,7 +62,8 @@ set -eu -o pipefail
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 log 'starting install_linux_mate'
-UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/mate" && pwd)
+LINUX=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux" && pwd)
+MATE="$LINUX/mate"
 SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
@@ -200,7 +201,7 @@ chromium_files_bg() {
 # seeding extensions.settings is pointless.
 chromium_extensions() {
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium-extensions"
-  run_as python3 "$UI/../chromium/extensions.py" \
+  run_as python3 "$LINUX/chromium/extensions.py" \
     "$UHOME/.config/chromium-extensions" \
     "$UHOME/.config/chromium/Default/Preferences" ||
     log "chromium extension fetch failed (offline?)"
@@ -211,11 +212,11 @@ chromium_launcher() {
   # instead of merging into a possibly-corrupt profile.
   $SUDO rm -rf "$UHOME/.config/chromium" "$UHOME/.cache/chromium" 2>/dev/null || true
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.config/chromium"
-  $SUDO cp -r "$UI/../chromium/Default/." \
+  $SUDO cp -r "$LINUX/chromium/Default/." \
     "$UHOME/.config/chromium/Default/"
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/Local State" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$LINUX/chromium/Local State" \
     "$UHOME/.config/chromium/Local State"
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$UI/../chromium/First Run" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 "$LINUX/chromium/First Run" \
     "$UHOME/.config/chromium/First Run"
   $SUDO chown -R "$LUSER":"$LGROUP" "$UHOME/.config/chromium"
   # Store CRXs on disk + --load-extension wrapper; user-managed (no
@@ -231,7 +232,7 @@ chromium_launcher() {
   # expand $HOME)
   $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 "$UHOME/.local/share/applications"
   sed "s|/usr/local/bin/chromium-wrapper|$UHOME/.local/bin/chromium-wrapper|" \
-    "$UI/../chromium/chromium-browser.desktop" |
+    "$LINUX/chromium/chromium-browser.desktop" |
     $SUDO tee "$UHOME/.local/share/applications/chromium-browser.desktop" >/dev/null
   $SUDO chown "$LUSER":"$LGROUP" "$UHOME/.local/share/applications/chromium-browser.desktop"
   run_as update-desktop-database "$UHOME/.local/share/applications" 2>/dev/null || true
@@ -241,9 +242,9 @@ chromium_launcher() {
     "$UHOME/.local/share/applications/chromium-browser.desktop" \
     "$UHOME/Desktop/chromium-browser.desktop"
   $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 \
-    "$UI/mate-terminal.desktop" \
+    "$MATE/mate-terminal.desktop" \
     "$UHOME/Desktop/mate-terminal.desktop"
-  install -m 644 "$UI/mate-terminal.desktop" \
+  install -m 644 "$MATE/mate-terminal.desktop" \
     "$UHOME/.local/share/applications/mate-terminal.desktop"
   rm -f \
     "$UHOME/Desktop/xfce4-terminal.desktop" \
@@ -262,7 +263,7 @@ for f in ('$UHOME/Desktop/chromium-browser.desktop',
     try: os.setxattr(f, 'user.gvfs.trust', b'1')
     except OSError: pass
 " 2>/dev/null || true
-  $SUDO install -m 644 "$UI/../chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
+  $SUDO install -m 644 "$LINUX/chromium/99-chromium-userns.conf" /etc/sysctl.d/99-chromium-userns.conf
   $SUDO sysctl -p /etc/sysctl.d/99-chromium-userns.conf
   if [ "$(id -u)" = 0 ]; then
     chown -R "$LUSER":"$LGROUP" "$UHOME/Desktop" "$UHOME/.local/share/applications"
@@ -273,7 +274,7 @@ install_selkies_configs() {
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" "$SELKIES/xvfb.service" |
     $SUDO tee /etc/systemd/system/xvfb.service >/dev/null
   $SUDO chmod 644 /etc/systemd/system/xvfb.service
-  $SUDO install -m 644 "$UI/keyboard-default" /etc/default/keyboard
+  $SUDO install -m 644 "$MATE/keyboard-default" /etc/default/keyboard
   # Install to the persistent lima share (survives `limactl delete` and the
   # ephemeral zero-byte copy that ends up under /usr/local/bin on vz).
   $SUDO install -d -m 755 /mnt/lima-limahome/.local/bin
@@ -301,7 +302,7 @@ enable_selkies_units() {
 }
 
 write_mate_extras() {
-  $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 "$UI/../chromium/chromium-wrapper" \
+  $SUDO install -o "$LUSER" -g "$LGROUP" -m 755 "$LINUX/chromium/chromium-wrapper" \
     "$UHOME/.local/bin/chromium-wrapper"
   [ -f /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-MATE-Splash.jpg ] && gsettings set \
     org.mate.background picture-filename \
@@ -321,7 +322,7 @@ write_mate_extras() {
   # X11 CLIPBOARD is owned by the source app; without a long-running manager
   # the selection dies when that app exits. parcellite is a lightweight GTK
   # clipboard manager that polls X selections and persists them.
-  $SUDO install -m 644 "$UI/parcellite-clipboard.desktop" \
+  $SUDO install -m 644 "$MATE/parcellite-clipboard.desktop" \
     /etc/xdg/autostart/parcellite-clipboard.desktop
 }
 
@@ -340,16 +341,16 @@ factory_reset_and_apply() {
 
   mkdir -p "$UHOME/.config"
   install -m 644 \
-    "$UI/../chromium/mimeapps.list" "$UHOME/.config/mimeapps.list"
+    "$LINUX/chromium/mimeapps.list" "$UHOME/.config/mimeapps.list"
   # NB: chromium-browser.desktop is installed by chromium_launcher() above,
   # with Exec rewritten to $UHOME/.local/bin/chromium-wrapper. Do NOT
   # install the raw repo copy here — its Exec points at /usr/local/bin,
   # which never exists, and MATE hides entries whose Exec target is absent.
 
-  "$UI/apply-gsettings.sh" "$LUSER"
+  "$MATE/apply-gsettings.sh" "$LUSER"
 
   sed -e "s|__LUSER__|$LUSER|g" -e "s|__LGROUP__|$LGROUP|g" -e "s|__LUID__|$LUID|g" \
-    "$UI/mate-session.service" \
+    "$MATE/mate-session.service" \
     >"$UHOME/.config/systemd/user/mate-session.service"
   chmod 644 "$UHOME/.config/systemd/user/mate-session.service"
   $SUDO systemctl daemon-reload 2>/dev/null || true
