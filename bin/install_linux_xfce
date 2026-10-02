@@ -40,8 +40,8 @@ UHOME=$(getent passwd "$LUSER" | cut -d: -f6)
 LGROUP=$(getent group "$LUSER" | cut -d: -f1)
 LUID=$(getent passwd "$LUSER" | cut -d: -f3)
 
-UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/xfce" && pwd)
-SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/selkies" && pwd)
+UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/xfce" && pwd)
+SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends
@@ -199,7 +199,7 @@ seed_desktop() {
     "$UHOME/.cache/Thunar" \
     "$UHOME/.cache/chromium" \
     "$UHOME/.local/share/xfce4" 2>/dev/null || true
-  # Seed from ui/chromium/. Local State pins
+  # Seed from linux/chromium/. Local State pins
   # profile.last_used + info_cache so chromium trusts the seed instead
   # of treating it as fresh and clobbering Preferences on first shutdown.
   # default_search_provider_data MUST live at the top level of

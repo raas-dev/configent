@@ -62,8 +62,8 @@ set -eu -o pipefail
 log() { printf '[mate-install] %s %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 log 'starting install_linux_mate'
-UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/mate" && pwd)
-SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../ui/selkies" && pwd)
+UI=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/mate" && pwd)
+SELKIES=$(CDPATH='' cd -- "$(dirname -- "$0")/../linux/selkies" && pwd)
 ARCH=$(dpkg --print-architecture)
 
 APT_OPTS=(-y -o Acquire::Retries=3 --no-install-recommends

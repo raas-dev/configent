@@ -13,6 +13,6 @@ extend-exclude = [
   "dotfiles/.gitconfig",
   "etc/ptpython/config.py",
   "etc/nvim/lazy-lock.json",
-  "ui/brave/Default/Preferences",
+  "linux/brave/Default/Preferences",
   "macos/write_macos_defaults"
 ]

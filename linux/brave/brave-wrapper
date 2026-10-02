@@ -3,22 +3,22 @@
 # Brave launcher. Store CRXs are unpacked versionless into
 # ~/.config/brave-extensions/<id>/ (outside the profile: Brave's extension
 # GC only scans its own profile dirs) and mounted via --load-extension —
-# same approach as ui/chromium/chromium-wrapper. Brave will not accept
+# same approach as linux/chromium/chromium-wrapper. Brave will not accept
 # hand-registered user extensions (Secure Preferences MACs), so updates
-# here = re-run ui/chromium/extensions.py with the brave ids.
+# here = re-run linux/chromium/extensions.py with the brave ids.
 EXTS=${HOME:-/root}/.config/brave-extensions
 # Pin the systemd user bus when nothing else did (cron/systemd-run
 # launches see no pam/.profile env) — same guard as
-# ui/chromium/chromium-wrapper, needed by --password-store below.
+# linux/chromium/chromium-wrapper, needed by --password-store below.
 if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] &&
   [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
   export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
 # Software GPU path for lima/krunkit VMs — same flags as
-# ui/chromium/chromium-wrapper: WebGL renders via ANGLE->native GL->Mesa
+# linux/chromium/chromium-wrapper: WebGL renders via ANGLE->native GL->Mesa
 # llvmpipe (CPU, GL 4.5 core).
 # UI/xfce VMs: passwords go to pass-secret-service — same rationale as
-# ui/chromium/chromium-wrapper.
+# linux/chromium/chromium-wrapper.
 exec /usr/bin/brave-browser \
   --password-store=gnome-libsecret \
   --force-renderer-accessibility --ignore-gpu-blocklist \
