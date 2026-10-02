@@ -32,9 +32,9 @@ case "$CRBIN" in
 esac
 EXTS=${HOME:-/root}/.config/chromium-extensions
 # Single systemd user bus: org.freedesktop.secrets lives there (D-Bus
-# activated, Restart=on-failure). Login shells get the address from
-# .profile; the XFCE session unit exports it directly. Pin it only for
-# non-login contexts (cron, systemd-run) where it would be unset.
+# activated, Restart=on-failure). The XFCE/MATE session units export it
+# directly. Pin it only for contexts outside those sessions (cron,
+# systemd-run, login shells) where it would be unset.
 if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] &&
   [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
   export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
