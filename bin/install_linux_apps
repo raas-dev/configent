@@ -302,7 +302,66 @@ open(p, 'w').write(json.dumps(d, indent=1) + '\n')
 PY
 }
 
+# computer-use-linux: MCP server + CLI controlling the real Linux desktop
+# (AT-SPI trees, screenshots, clicks/scrolls/keystrokes) from any MCP host:
+# https://github.com/agent-sh/computer-use-linux. Prebuilt release binary,
+# sha256-verified (pass-secret-service pattern; that one lacks sidecar sums).
+# COSMIC companion binary skipped — desktop here is XFCE/X11; xdotool covers
+# input. Runs before the early-exit below so reprovisions re-assert it.
+computer_use_linux() {
+  local arch
+  case "$ARCH" in
+  amd64) arch=x86_64 ;;
+  arm64) arch=aarch64 ;;
+  *)
+    log "no computer-use-linux build for $ARCH, skipping"
+    return 0
+    ;;
+  esac
+  local bin=/usr/local/bin/computer-use-linux
+  if [ -x "$bin" ]; then
+    log "computer-use-linux already installed"
+  else
+    # newest release when the API is reachable; the pin is the offline
+    # fallback for reprovisions behind a firewall
+    local ver=v0.7.10
+    local latest
+    latest=$(curl -fsSL --retry 2 --max-time 15 \
+      https://api.github.com/repos/agent-sh/computer-use-linux/releases/latest \
+      2>/dev/null | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' | head -1)
+    [ -n "$latest" ] && ver=$latest
+    local name="computer-use-linux-$arch-unknown-linux-gnu"
+    local url="https://github.com/agent-sh/computer-use-linux/releases/download/$ver/$name"
+    local cached="/mnt/lima-provision/computer-use-linux-$ver-$arch-unknown-linux-gnu" tmp want got newest
+    tmp=$(mktemp)
+    if [ -s "$cached" ]; then
+      $SUDO install -m 755 "$cached" "$bin"
+    elif curl -fsSL --retry 5 --retry-all-errors -o "$tmp" "$url" &&
+      curl -fsSL --retry 5 --retry-all-errors -o "$tmp.sha256" "$url.sha256"; then
+      want=$(awk '{print $1}' "$tmp.sha256")
+      got=$(sha256sum "$tmp" | awk '{print $1}')
+      if [ "$got" = "$want" ]; then
+        $SUDO install -m 755 "$tmp" "$bin"
+        $SUDO cp "$tmp" "/mnt/lima-provision/computer-use-linux-$ver-$arch-unknown-linux-gnu" 2>/dev/null || true
+      else
+        log "computer-use-linux sha256 mismatch, skipping"
+      fi
+    elif newest=$(find /mnt/lima-provision -maxdepth 1 -name \
+      "computer-use-linux-v*-$arch-unknown-linux-gnu" 2>/dev/null | sort -V | tail -1) &&
+      [ -n "$newest" ]; then
+      # fully offline: API down AND download failed, older release cached
+      # on the provision volume — better stale than absent
+      $SUDO install -m 755 "$newest" "$bin"
+      log "offline: installed cached ${newest##*computer-use-linux-v}"
+    else
+      log "computer-use-linux download failed, skipping"
+    fi
+    rm -f "$tmp" "$tmp.sha256"
+  fi
+}
+
 secret_service
+computer_use_linux
 
 if dpkg -s code >/dev/null 2>&1 && dpkg -s brave-browser >/dev/null 2>&1; then
   log "code + brave-browser already installed"
