@@ -191,7 +191,21 @@ if [ "$(uname -s)" = 'Darwin' ]; then
     lima_guest_activate_cwd_mount_rw || exit 1
   fi
 
-  limactl shell --workdir "$lima_cwd" "$NAME" kind "$@"
+  # kind's config.lock is created with O_CREAT|O_EXCL and mode 000, which
+  # macOS virtiofs denies on the lima home mount, so keep the kubeconfig
+  # kind writes (and its lock) on the guest-local filesystem instead.
+  # shellcheck disable=SC2016
+  # (vars expand in the guest sh, not here)
+  limactl shell --workdir "$lima_cwd" "$NAME" sh -c '
+    export KUBECONFIG="/var/tmp/configent-kind/kubeconfig"
+    mkdir -p /var/tmp/configent-kind
+    kind "$@"; ret=$?
+    if [ -f "$KUBECONFIG" ]; then
+      mkdir -p "$HOME/.kube"
+      cp "$KUBECONFIG" "$HOME/.kube/config"
+    fi
+    exit $ret
+  ' kind "$@"
   ret=$?
 
   # copy kubectl config from lima vm to host (if it exists)
