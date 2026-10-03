@@ -562,11 +562,11 @@ show_menu() {
     if [[ $key == $'\x1b' ]]; then
       read -rsn2 key
       case $key in
-      '[A') # Up arrow
+      '[A' | 'OA') # Up arrow (CSI or SS3/application cursor mode)
         ((selected--))
         [[ $selected -lt 0 ]] && selected=$((total - 1))
         ;;
-      '[B') # Down arrow
+      '[B' | 'OB') # Down arrow (CSI or SS3/application cursor mode)
         ((selected++))
         [[ $selected -ge $total ]] && selected=0
         ;;
