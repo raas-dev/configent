@@ -364,7 +364,7 @@ log "apt + selkies + xfce install starting (single batch)"
     xvfb xcvt \
     x11-xkb-utils xkb-data fontconfig dbus-user-session \
     libsecret-1-0 \
-    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
+    xdotool at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     fonts-noto-color-emoji \
     xsel \
     socat libnspr4 libnss3 \

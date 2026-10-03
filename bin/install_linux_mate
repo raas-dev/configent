@@ -426,7 +426,7 @@ log "apt + selkies + mate install starting (single batch)"
     ubuntu-mate-desktop ubuntu-mate-default-settings \
     ubuntu-mate-icon-themes ubuntu-mate-themes \
     ayatana-indicator-application mate-terminal \
-    at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
+    xdotool at-spi2-core libatk-adaptor libatk-bridge2.0-0t64 \
     dconf-cli \
     unzip \
     pipewire pipewire-pulse wireplumber \
