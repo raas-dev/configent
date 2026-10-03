@@ -226,19 +226,20 @@ In addition the host `$HOME/Downloads` is always mounted read-write in all VMs.
 
 ### Run in Docker
 
-Alias `rind` is shortcut for building a Docker image in the current directory.
-`Dockerfile` is read if present, otherwise [Railpack](https://railpack.com/)
-is used to detect the language and framework and build the image best-effort.
+For building a Docker image in the current directory, convenience wrapper
+`rind` may be used. It reads `Dockerfile` if present in the directory, otherwise
+[Railpack](https://railpack.com/) is used to detect the language and
+the framework and build the image best-effort.
 
 ⚠️: Ensure the Docker image you are building `FROM` is safe before proceeding.
 
 After the image is built, a new container is launched from it. If `.env` file
-is present in the current directory, its environment variables are set in the
-container.
+is present in the current directory, its environment variables are set inside
+the container.
 
-If you use `PORT=8000 rind`, the port given is mapped to the host and
-environment variable `PORT` is set inside the container. Note that this
-takes precedence if `PORT` is also defined in `.env` file.
+If you use `PORT=8000 rind`, the port is mapped to the host and also
+environment variable `PORT` is set inside the container. The variable takes
+precedence if `PORT` is also given in `.env` file.
 
 If `rind -d` or `rind --detached` is used, all arguments are passed as is to
 `docker run`. CMD defined in `Dockerfile` is effective. ENTRYPOINT defined in
