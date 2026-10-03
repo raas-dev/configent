@@ -1,10 +1,10 @@
 {
   "mcpServers": {
-    "computer-use-linux": {
+    "open-computer-use": {
       "args": [
         "mcp"
       ],
-      "command": "computer-use-linux",
+      "command": "open-computer-use",
       "directTools": true,
       "lifecycle": "eager"
     }
