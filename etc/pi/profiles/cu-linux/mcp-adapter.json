@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "computer-use-linux": {
+      "args": [
+        "mcp"
+      ],
+      "command": "computer-use-linux",
+      "directTools": true,
+      "lifecycle": "eager"
+    }
+  },
+  "settings": {
+    "disableProxyTool": true,
+    "toolPrefix": "none"
+  }
+}
