@@ -187,6 +187,8 @@ chromium_dl_main() {
 # then extract while the apt batch is still running.
 chromium_files_bg() {
   local i=0
+  # cb.env is written at runtime by chromium_dl — shellcheck can't follow it
+  # shellcheck disable=SC1091
   until [ -f /tmp/cb.ok ] && . /tmp/cb.env; do
     i=$((i + 1))
     [ "$i" -gt 600 ] && return 1
