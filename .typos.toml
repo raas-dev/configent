@@ -2,7 +2,6 @@
 fpr = "fpr"
 sme = "sme"
 gir = "gir"
-gir1 = "gir1"
 
 [files]
 extend-exclude = [
