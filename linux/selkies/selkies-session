@@ -38,11 +38,7 @@ fi
 
 exec env -u LD_PRELOAD selkies --public --addr 127.0.0.1 --port 8080 \
   --enable-basic-auth=false \
-  --scaling-dpi=96 \
   --use-css-scaling=true \
-  --manual-resolution=true \
-  --manual-width=1920 \
-  --manual-height=1080 \
   --audio-enabled=true \
   --audio-on-start=true \
   --raw-pointer-motion=true \
