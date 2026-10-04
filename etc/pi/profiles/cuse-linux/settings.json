@@ -1,0 +1,10 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "enabledModels": [
+    "*minimax-M3*"
+  ],
+  "packages": [
+    "npm:@agent-sh/computer-use-linux"
+  ]
+}
