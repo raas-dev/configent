@@ -413,26 +413,13 @@ cua_driver() {
   fi
 
   # daemon autostart: systemd --user unit, same recipe as upstream
-  # trycua/cua installers register with --autostart
+  # trycua/cua installers register with --autostart. Unit file lives in
+  # linux/cua-driver/; %h in ExecStart resolves to the user's home.
   if command -v systemctl >/dev/null 2>&1; then
     local unit_dir="$UHOME/.config/systemd/user"
     run_as mkdir -p "$unit_dir"
-    if [ ! -f "$unit_dir/cua-driver.service" ]; then
-      run_as sh -c "cat >'$unit_dir/cua-driver.service' <<'EOF'
-[Unit]
-Description=cua-driver serve daemon
-After=graphical-session.target
-
-[Service]
-ExecStart=$UHOME/.local/bin/cua-driver serve
-Restart=on-failure
-RestartSec=2
-
-[Install]
-WantedBy=default.target
-EOF"
-      log "cua-driver systemd user unit installed"
-    fi
+    $SUDO install -o "$LUSER" -g "$LGROUP" -m 644 \
+      "$LINUX/cua-driver/cua-driver.service" "$unit_dir/"
     # linger starts the user manager at boot on headless VMs; the daemon
     # then starts via default.target without any interactive login
     $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
