@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
+
+### cua-driver ##################################################################
+
+# https://cua.ai/docs/cua-driver
+#
+# Installs cua-driver (Rust implementation) on macOS 14+ (Apple Silicon/Intel)
+# and x86_64 Linux (X11/Wayland). No administrator access needed; the canonical
+# installer downloads from GitHub Releases, verifies against the release
+# SHA256SUMS, and installs the wrapper to ~/.local/bin.
+
+# upstream installer installs to ~/.local/bin and appends it to PATH in rc
+export PATH="$HOME/.local/bin:$PATH"
+
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
+# Linux: x86_64 desktop only per platform support matrix
+if [ "$OS" = 'Linux' ] && [ "$ARCH" != 'x86_64' ]; then
+  printf '\nERROR: cua-driver supports x86_64 Linux only, got %s.\n' "$ARCH"
+  exit 1
+fi
+
+# install via canonical installer, or self-update an existing install
+if ! command -v cua-driver >/dev/null; then
+  # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
+  /bin/bash -c "$(curl -fsSL https://cua.ai/driver/install.sh)"
+else
+  cua-driver update --apply
+  # restart any daemon running on the old binary; no-op when none was
+  cua-driver stop >/dev/null 2>&1 || true
+fi
+
+if [ "$OS" = 'Darwin' ]; then
+  # start daemon via the app bundle so macOS attributes the Accessibility and
+  # Screen Recording prompts to CuaDriver instead of the launching terminal
+  open -n -g -a CuaDriver --args serve
+
+  # request Accessibility + Screen Recording (+ Tahoe direct-capture consent),
+  # then verify live capture; user toggles CuaDriver on in System Settings
+  # and accepts the relaunch. Rerun if only one prompt appeared.
+  cua-driver permissions grant
+elif [ "$OS" = 'Linux' ]; then
+  # AT-SPI 2 over D-Bus is the only native runtime dependency; desktop
+  # sessions ship it. Best-effort install for minimal/container systems,
+  # non-fatal when no package manager or sudo is available.
+  if ! command -v at-spi-bus-launcher >/dev/null &&
+    [ ! -x /usr/libexec/at-spi-bus-launcher ] &&
+    [ ! -x /usr/lib/at-spi-bus-launcher ]; then
+    if [ "$(id -u)" = 0 ]; then
+      SUDO=''
+    elif command -v sudo >/dev/null; then
+      SUDO='sudo'
+    else
+      SUDO=''
+      printf '\nNOTE: at-spi2-core not found and sudo unavailable, skipping.\n'
+    fi
+    if command -v apt-get >/dev/null; then
+      $SUDO apt-get install -y at-spi2-core
+    elif command -v dnf >/dev/null; then
+      $SUDO dnf install -y at-spi2-core
+    elif command -v pacman >/dev/null; then
+      $SUDO pacman -Sy --noconfirm at-spi2-core
+    elif command -v zypper >/dev/null; then
+      $SUDO zypper --non-interactive install at-spi2-core
+    elif [ -n "$SUDO" ] || [ "$(id -u)" = 0 ]; then
+      printf '\nNOTE: no supported package manager for at-spi2-core, skipping.\n'
+    fi
+  fi
+fi
+
+# verify
+cua-driver --version
+
+printf '\ncua-driver installed. On Linux desktops, verify with: cua-driver doctor\n'
