@@ -206,7 +206,7 @@ gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" screen 0
 gsettings set "org.mate.panel.toplevel:/org/mate/panel/toplevels/top/" size 32
 
 # === org.mate.peripherals-mouse ===
-gsettings set org.mate.peripherals-mouse cursor-size 40
+gsettings set org.mate.peripherals-mouse cursor-size 28
 
 # === org.mate.peripherals-keyboard-xkb.general ===
 gsettings set org.mate.peripherals-keyboard-xkb.general default-group 0
