@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.3](https://github.com/raas-dev/configent/compare/1.247.2...1.247.3) (2026-10-04)
+
+### Fixes
+
+* **aliases:** improve ext usage output and error labels ([9385030](https://github.com/raas-dev/configent/commit/9385030e965890e4bd90aeff4f1d39b5be4faa33))
+* **docker:** move rind function to bin/rind script ([697cefb](https://github.com/raas-dev/configent/commit/697cefb78cbc8a5c4559c3f09ccdcf34aa0d3d0d))
+* **docker:** update rind echo labels ([826a63e](https://github.com/raas-dev/configent/commit/826a63e49dc18c8c424df9721c85ecc98d96330a))
+* **install:** add xdotool to ubuntu-mate/xfce dependency lists ([ec29e16](https://github.com/raas-dev/configent/commit/ec29e16c5f6169b2db69f409c7ef3d8fb712d9ef))
+* **install:** install computer-use-linux desktop control helper ([86d576a](https://github.com/raas-dev/configent/commit/86d576a595c7e79b9264d03629f6f8c266ba9df4))
+* **install:** suppress shellcheck for runtime cb.env sourcing ([bce704b](https://github.com/raas-dev/configent/commit/bce704b1a124a655be9d2bc5cde80589cde30e5c))
+* **kind:** copy kubeconfig via guest-local tmp path ([51d6de2](https://github.com/raas-dev/configent/commit/51d6de216bfd3f21e72072b7da1f43b2ea69362c))
+* **kind:** keep kind kubeconfig on guest-local filesystem ([ccb2f99](https://github.com/raas-dev/configent/commit/ccb2f99b0ab416a079049765410a3a571ed652ed))
+* **mcp:** auto-approve project servers and silence MCP noise ([c44b4ae](https://github.com/raas-dev/configent/commit/c44b4aed1443ebe7e48156023a678a62210d613e))
+* **pi:** accept windows absolute session file paths ([3b08371](https://github.com/raas-dev/configent/commit/3b08371195168e27c2f9dbb25a87c568a619a090))
+* **pi:** ensure headroom venv exists before starting proxy ([3bee94a](https://github.com/raas-dev/configent/commit/3bee94a61334afbc6e058f0dae06f02bf853b231))
+* **pi:** handle CSI/SS3 cursor keys in menu navigation ([d006cf0](https://github.com/raas-dev/configent/commit/d006cf074a67468f5d7f845666cb7a83da51a5da))
+* **pi:** remove MCP adapter lifecycle lazy setting ([48d074e](https://github.com/raas-dev/configent/commit/48d074ed45740b2717ab210facfb9c2f5364be70))
+* **pi:** set MCP adapter lifecycle eager for cu-linux profile ([febd53c](https://github.com/raas-dev/configent/commit/febd53cc14aa8270bd199f4cfb722fe386167f49))
+* **pi:** suppress MCP direct tool refresh notifications ([9cfc788](https://github.com/raas-dev/configent/commit/9cfc788cd129206bd3a108fb4e1d5d2322b35fe0))
+* **pi:** switch computer-use-linux to open-computer-use MCP adapter ([6544952](https://github.com/raas-dev/configent/commit/6544952c727a3451676efa7e1c89e99d42c7d42c))
+
 ## [1.247.2](https://github.com/raas-dev/configent/compare/1.247.1...1.247.2) (2026-10-02)
 
 ### Fixes
