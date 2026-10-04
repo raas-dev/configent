@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "cua-driver": {
+      "command": "cua-driver",
+      "args": [
+        "mcp"
+      ]
+    }
+  },
+  "settings": {
+    "toolPrefix": "none",
+    "disableProxyTool": true
+  }
+}
