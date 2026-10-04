@@ -319,73 +319,21 @@ PY
 # of headless VMs where the user never logs in interactively.
 # Runs before the early-exit below so reprovisions re-assert everything.
 cua_driver() {
-  local triple
   case "$ARCH" in
-  amd64) triple=x86_64-unknown-linux-gnu ;;
-  arm64) triple=aarch64-unknown-linux-gnu ;;
+  amd64 | arm64) ;; # upstream installer covers both
   *)
     log "no cua-driver build for $ARCH, skipping"
     return 0
     ;;
   esac
 
-  # latest cua-driver-rs tag (the repo ships other release trains too)
-  local tag ver cur=""
-  tag=$(curl -fsSL --retry 5 --retry-all-errors \
-    "https://api.github.com/repos/trycua/cua/releases?per_page=100" |
-    grep -o '"tag_name": *"cua-driver-rs-v[0-9.]*"' |
-    sed 's/.*v//; s/"$//' | sort -V | tail -1 || true)
-  if [ -z "$tag" ]; then
-    # offline or API rate-limited: newest cached tarball wins
-    ver=$(
-      find /mnt/lima-provision -maxdepth 1 -name 'cua-driver-rs-*-linux-*' -printf '%f\n' 2>/dev/null |
-        sed -n 's/^cua-driver-rs-\([0-9][0-9.]*\)-linux-.*/\1/p' |
-        sort -V | tail -1
-    )
-    [ -n "$ver" ] && log "cua-driver release lookup failed, using cache $ver"
-  else
-    ver=${tag#cua-driver-rs-v}
-  fi
-  [ -x "$UHOME/.local/bin/cua-driver" ] &&
-    cur=$("$UHOME/.local/bin/cua-driver" --version 2>/dev/null | awk '{print $2}')
-
-  if [ -n "$ver" ] && [ "$cur" != "$ver" ]; then
-    local asset="cua-driver-rs-$ver-linux-$ARCH-binary.tar.gz"
-    local cached="/mnt/lima-provision/$asset" expected t rel
-    t=$(mktemp -d)
-    if [ -s "$cached" ]; then
-      cp "$cached" "$t/$asset"
-    else
-      local base="https://github.com/trycua/cua/releases/download/cua-driver-rs-v$ver"
-      curl -fsSL --retry 5 --retry-all-errors -o "$t/$asset" "$base/$asset"
-      curl -fsSL --retry 5 --retry-all-errors -o "$t/SHA256SUMS" "$base/SHA256SUMS"
-      expected=$(awk -v a="$asset" '$2 == a {print $1}' "$t/SHA256SUMS")
-      if [ -z "$expected" ] ||
-        [ "$(sha256sum "$t/$asset" | awk '{print $1}')" != "$expected" ]; then
-        log "$asset checksum mismatch, aborting cua-driver install"
-        rm -rf "$t"
-        return 0
-      fi
-      $SUDO cp "$t/$asset" /mnt/lima-provision/ 2>/dev/null || true
-    fi
-    # stop any running daemon before swapping binaries (installer behaviour)
-    run_as "$UHOME/.local/bin/cua-driver" stop >/dev/null 2>&1 || true
-    mkdir "$t/x"
-    tar -xzf "$t/$asset" -C "$t/x"
-    rel="$UHOME/.cua-driver/packages/releases/$ver-$triple"
-    $SUDO rm -rf "$rel"
-    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
-      "$UHOME/.cua-driver/packages/releases" "$rel" "$UHOME/.local/bin"
-    $SUDO cp -a "$t/x"/. "$rel"/
-    $SUDO chown -R "$LUSER":"$LGROUP" "$rel"
-    $SUDO chmod 755 "$rel/cua-driver"
-    $SUDO ln -sfn "releases/$ver-$triple" "$UHOME/.cua-driver/packages/current"
-    run_as ln -sfn "$UHOME/.cua-driver/packages/current/cua-driver" \
-      "$UHOME/.local/bin/cua-driver"
-    log "cua-driver $ver installed"
-    rm -rf "$t"
-  elif [ -n "$cur" ]; then
-    log "cua-driver $cur already installed"
+  # delegate binary install/update to the shared installer
+  # (bin/install_cua_driver): canonical SHA256SUMS-verified release,
+  # ~/.cua-driver/packages/releases layout, ~/.local/bin symlink, daemon
+  # restart. Runs as LUSER via run_as; HOME comes from sudo env_reset.
+  if ! run_as env HOME="$UHOME" PATH="$UHOME/.local/bin:$PATH" \
+    "$(dirname -- "$0")/install_cua_driver"; then
+    log "warn: cua-driver install failed"
   fi
   [ -x "$UHOME/.local/bin/cua-driver" ] || return 0
 

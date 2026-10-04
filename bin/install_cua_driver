@@ -13,9 +13,10 @@ trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 # https://cua.ai/docs/cua-driver
 #
 # Installs cua-driver (Rust implementation) on macOS 14+ (Apple Silicon/Intel)
-# and x86_64 Linux (X11/Wayland). No administrator access needed; the canonical
-# installer downloads from GitHub Releases, verifies against the release
-# SHA256SUMS, and installs the wrapper to ~/.local/bin.
+# and Linux x86_64/aarch64 (X11/Wayland; aarch64 mainly for Lima VMs on Apple
+# Silicon). No administrator access needed; the canonical installer downloads
+# from GitHub Releases, verifies against the release SHA256SUMS, and installs
+# the wrapper to ~/.local/bin.
 
 # upstream installer installs to ~/.local/bin and appends it to PATH in rc
 export PATH="$HOME/.local/bin:$PATH"
@@ -23,10 +24,15 @@ export PATH="$HOME/.local/bin:$PATH"
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
-# Linux: x86_64 desktop only per platform support matrix
-if [ "$OS" = 'Linux' ] && [ "$ARCH" != 'x86_64' ]; then
-  printf '\nERROR: cua-driver supports x86_64 Linux only, got %s.\n' "$ARCH"
-  exit 1
+# Linux: x86_64/aarch64 desktop; aarch64 primarily for Lima VMs on Apple Silicon
+if [ "$OS" = 'Linux' ]; then
+  case "$ARCH" in
+  x86_64 | aarch64) ;;
+  *)
+    printf '\nERROR: cua-driver supports x86_64/aarch64 Linux only, got %s.\n' "$ARCH"
+    exit 1
+    ;;
+  esac
 fi
 
 # install via canonical installer, or self-update an existing install
