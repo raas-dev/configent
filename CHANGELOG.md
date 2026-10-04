@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.4](https://github.com/raas-dev/configent/compare/1.247.3...1.247.4) (2026-10-04)
+
+### Fixes
+
+* **install:** use mise python directly for ABI check ([8563cfb](https://github.com/raas-dev/configent/commit/8563cfb49fd4ab07da61ce6e4f24b1ae30fb5449))
+
 ## [1.247.3](https://github.com/raas-dev/configent/compare/1.247.2...1.247.3) (2026-10-04)
 
 ### Fixes
