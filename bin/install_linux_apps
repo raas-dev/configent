@@ -378,9 +378,10 @@ open_computer_use() {
     # the system `gi` package to the active mise python via site-packages
     # symlink. Both must be same major.minor (cpython ABI) for the .so.
     if [ -n "${MISE_DATA_DIR:-}" ] && command -v mise >/dev/null; then
+      local mise_python sys_pyver mise_pyver
       mise_python=$(mise where python 2>/dev/null) &&
         sys_pyver=$(/usr/bin/python3 -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}")') &&
-        mise_pyver=$(command -v mise >/dev/null && "$mise_python/bin/python3" -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null) &&
+        mise_pyver=$("$mise_python/bin/python3" -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null) &&
         [ "$sys_pyver" = "$mise_pyver" ] &&
         [ ! -e "$mise_python/lib/python${mise_pyver}/site-packages/gi" ] &&
         $SUDO ln -s /usr/lib/python3/dist-packages/gi "$mise_python/lib/python${mise_pyver}/site-packages/gi" &&
