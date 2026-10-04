@@ -302,7 +302,157 @@ open(p, 'w').write(json.dumps(d, indent=1) + '\n')
 PY
 }
 
+# cua-driver (https://cua.ai, trycua/cua): computer-use automation driver.
+# Installs the latest cua-driver-rs release user-local, mirroring the
+# official installer layout (~/.cua-driver/packages/releases/<ver>-<triple>/,
+# relative `current` pointer, ~/.local/bin/cua-driver symlink). Release tag
+# resolves via the GitHub API with a /mnt/lima-provision tarball cache as
+# offline fallback; fresh downloads verify against the release SHA256SUMS.
+#
+# The daemon binds ~/.cache/cua-driver/cua-driver.sock, but Lima homes are
+# virtiofs mounts from macOS and virtiofs cannot host AF_UNIX sockets
+# (bind → "Operation not supported", os error 95). When ~/.cache sits on
+# such a filesystem the socket dir is relocated to native /var/cache and
+# symlinked back, so serve/mcp/stop/status keep their default paths.
+# A systemd --user unit (mirroring upstream libs/cua-driver installers'
+# --autostart recipe) + linger keeps the serve daemon running across boots
+# of headless VMs where the user never logs in interactively.
+# Runs before the early-exit below so reprovisions re-assert everything.
+cua_driver() {
+  local triple
+  case "$ARCH" in
+  amd64) triple=x86_64-unknown-linux-gnu ;;
+  arm64) triple=aarch64-unknown-linux-gnu ;;
+  *)
+    log "no cua-driver build for $ARCH, skipping"
+    return 0
+    ;;
+  esac
+
+  # latest cua-driver-rs tag (the repo ships other release trains too)
+  local tag ver cur=""
+  tag=$(curl -fsSL --retry 5 --retry-all-errors \
+    "https://api.github.com/repos/trycua/cua/releases?per_page=100" |
+    grep -o '"tag_name": *"cua-driver-rs-v[0-9.]*"' |
+    sed 's/.*v//; s/"$//' | sort -V | tail -1 || true)
+  if [ -z "$tag" ]; then
+    # offline or API rate-limited: newest cached tarball wins
+    ver=$(
+      find /mnt/lima-provision -maxdepth 1 -name 'cua-driver-rs-*-linux-*' -printf '%f\n' 2>/dev/null |
+        sed -n 's/^cua-driver-rs-\([0-9][0-9.]*\)-linux-.*/\1/p' |
+        sort -V | tail -1
+    )
+    [ -n "$ver" ] && log "cua-driver release lookup failed, using cache $ver"
+  else
+    ver=${tag#cua-driver-rs-v}
+  fi
+  [ -x "$UHOME/.local/bin/cua-driver" ] &&
+    cur=$("$UHOME/.local/bin/cua-driver" --version 2>/dev/null | awk '{print $2}')
+
+  if [ -n "$ver" ] && [ "$cur" != "$ver" ]; then
+    local asset="cua-driver-rs-$ver-linux-$ARCH-binary.tar.gz"
+    local cached="/mnt/lima-provision/$asset" expected t rel
+    t=$(mktemp -d)
+    if [ -s "$cached" ]; then
+      cp "$cached" "$t/$asset"
+    else
+      local base="https://github.com/trycua/cua/releases/download/cua-driver-rs-v$ver"
+      curl -fsSL --retry 5 --retry-all-errors -o "$t/$asset" "$base/$asset"
+      curl -fsSL --retry 5 --retry-all-errors -o "$t/SHA256SUMS" "$base/SHA256SUMS"
+      expected=$(awk -v a="$asset" '$2 == a {print $1}' "$t/SHA256SUMS")
+      if [ -z "$expected" ] ||
+        [ "$(sha256sum "$t/$asset" | awk '{print $1}')" != "$expected" ]; then
+        log "$asset checksum mismatch, aborting cua-driver install"
+        rm -rf "$t"
+        return 0
+      fi
+      $SUDO cp "$t/$asset" /mnt/lima-provision/ 2>/dev/null || true
+    fi
+    # stop any running daemon before swapping binaries (installer behaviour)
+    run_as "$UHOME/.local/bin/cua-driver" stop >/dev/null 2>&1 || true
+    mkdir "$t/x"
+    tar -xzf "$t/$asset" -C "$t/x"
+    rel="$UHOME/.cua-driver/packages/releases/$ver-$triple"
+    $SUDO rm -rf "$rel"
+    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 \
+      "$UHOME/.cua-driver/packages/releases" "$rel" "$UHOME/.local/bin"
+    $SUDO cp -a "$t/x"/. "$rel"/
+    $SUDO chown -R "$LUSER":"$LGROUP" "$rel"
+    $SUDO chmod 755 "$rel/cua-driver"
+    $SUDO ln -sfn "releases/$ver-$triple" "$UHOME/.cua-driver/packages/current"
+    run_as ln -sfn "$UHOME/.cua-driver/packages/current/cua-driver" \
+      "$UHOME/.local/bin/cua-driver"
+    log "cua-driver $ver installed"
+    rm -rf "$t"
+  elif [ -n "$cur" ]; then
+    log "cua-driver $cur already installed"
+  fi
+  [ -x "$UHOME/.local/bin/cua-driver" ] || return 0
+
+  # relocate the socket dir off AF_UNIX-incapable mounts (Lima virtiofs)
+  local sockdir="$UHOME/.cache/cua-driver" fs
+  if [ -L "$sockdir" ] && [ ! -d "$sockdir/" ]; then
+    # dangling symlink: /var/cache/cua-driver was wiped — recreate it
+    $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 /var/cache/cua-driver
+    log "cua-driver socket dir /var/cache/cua-driver recreated (was missing)"
+  fi
+  if [ ! -L "$sockdir" ]; then
+    fs=$(stat -f -c %T "$UHOME/.cache" 2>/dev/null || echo unknown)
+    case "$fs" in
+    # stat reports ext4 as "ext2/ext3"
+    ext2/ext3 | xfs | btrfs | zfs | tmpfs | overlay | squashfs | unknown) ;;
+    *)
+      # virtiofs/fuseblk/9p/nfs/cifs: bind() would fail (os error 95)
+      $SUDO install -d -o "$LUSER" -g "$LGROUP" -m 755 /var/cache/cua-driver
+      run_as "$UHOME/.local/bin/cua-driver" stop >/dev/null 2>&1 || true
+      $SUDO rm -rf "$sockdir"
+      run_as ln -s /var/cache/cua-driver "$sockdir"
+      log "cua-driver socket dir → /var/cache/cua-driver ($fs cannot host unix sockets)"
+      ;;
+    esac
+  fi
+
+  # daemon autostart: systemd --user unit, same recipe as upstream
+  # trycua/cua installers register with --autostart
+  if command -v systemctl >/dev/null 2>&1; then
+    local unit_dir="$UHOME/.config/systemd/user"
+    run_as mkdir -p "$unit_dir"
+    if [ ! -f "$unit_dir/cua-driver.service" ]; then
+      run_as sh -c "cat >'$unit_dir/cua-driver.service' <<'EOF'
+[Unit]
+Description=cua-driver serve daemon
+After=graphical-session.target
+
+[Service]
+ExecStart=$UHOME/.local/bin/cua-driver serve
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
+EOF"
+      log "cua-driver systemd user unit installed"
+    fi
+    # linger starts the user manager at boot on headless VMs; the daemon
+    # then starts via default.target without any interactive login
+    $SUDO loginctl enable-linger "$LUSER" 2>/dev/null || true
+    local i=0
+    while [ $i -lt 10 ] &&
+      ! run_as env "XDG_RUNTIME_DIR=/run/user/$(id -u "$LUSER")" systemctl --user is-system-running >/dev/null 2>&1; do
+      sleep 1
+      i=$((i + 1))
+    done
+    run_as env "XDG_RUNTIME_DIR=/run/user/$(id -u "$LUSER")" systemctl --user daemon-reload || true
+    if run_as env "XDG_RUNTIME_DIR=/run/user/$(id -u "$LUSER")" systemctl --user enable --now cua-driver.service; then
+      log "cua-driver daemon autostart enabled"
+    else
+      log "warn: could not enable cua-driver systemd user unit"
+    fi
+  fi
+}
+
 secret_service
+cua_driver
 
 if dpkg -s code >/dev/null 2>&1 && dpkg -s brave-browser >/dev/null 2>&1; then
   log "code + brave-browser already installed"
