@@ -8,21 +8,35 @@
 
 trap "printf '\nCaught ^C from user - exiting now\n' ; exit 130" INT
 
-### cua-driver ##################################################################
+### cua-driver #################################################################
 
 # https://cua.ai/docs/cua-driver
 #
 # Installs cua-driver (Rust implementation) on macOS 14+ (Apple Silicon/Intel)
 # and Linux x86_64/aarch64 (X11/Wayland; aarch64 mainly for Lima VMs on Apple
-# Silicon). No administrator access needed; the canonical installer downloads
-# from GitHub Releases, verifies against the release SHA256SUMS, and installs
-# the wrapper to ~/.local/bin.
+# Silicon). No administrator access needed; on macOS installs via the
+# Homebrew cask (release sha256 verified by brew, CuaDriver.app kept in
+# ~/Applications), elsewhere the canonical installer downloads from GitHub
+# Releases, verifies against the release SHA256SUMS, and installs the wrapper
+# to ~/.local/bin.
 
 # upstream installer installs to ~/.local/bin and appends it to PATH in rc
 export PATH="$HOME/.local/bin:$PATH"
 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
+
+eval_brew() {
+  if [ -x "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x "/usr/local/bin/brew" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_ASK=1
+  export HOMEBREW_NO_ENV_HINTS=1
+}
+[ "$OS" = 'Darwin' ] && eval_brew
 
 # Linux: x86_64/aarch64 desktop; aarch64 primarily for Lima VMs on Apple Silicon
 if [ "$OS" = 'Linux' ]; then
@@ -35,11 +49,23 @@ if [ "$OS" = 'Linux' ]; then
   esac
 fi
 
-# install via canonical installer, or self-update an existing install
-if ! command -v cua-driver >/dev/null; then
-  # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
-  /bin/bash -c "$(curl -fsSL https://cua.ai/driver/install.sh)"
+# install via Homebrew cask on macOS (brew verifies the release sha256, keeps
+# CuaDriver.app in ~/Applications and cua-driver on PATH, no admin needed);
+# self-update an existing install, else fall back to the canonical installer
+if [ "$OS" = 'Darwin' ] && brew list --cask cuadriver >/dev/null 2>&1; then
+  # cask-managed install: brew upgrades, no-op when already current
+  brew upgrade --cask cuadriver
+elif ! command -v cua-driver >/dev/null; then
+  # new install: cask via brew, or canonical installer where brew is absent
+  if [ "$OS" = 'Darwin' ] && command -v brew >/dev/null; then
+    brew install --cask cuadriver
+  else
+    # nosemgrep: bash.curl.security.curl-pipe-bash.curl-pipe-bash
+    /bin/bash -c "$(curl -fsSL https://cua.ai/driver/install.sh)"
+  fi
 else
+  # pre-existing canonical install (~/.local/bin): keep its own updater to
+  # avoid a second shadowed copy from the cask
   cua-driver update --apply
   # restart any daemon running on the old binary; no-op when none was
   cua-driver stop >/dev/null 2>&1 || true
