@@ -11,6 +11,14 @@
     }
   },
   "mcp": {
+    "cua-driver": {
+      "type": "local",
+      "command": [
+        "cua-driver",
+        "mcp"
+      ],
+      "enabled": true
+    },
     "exa": {
       "enabled": false
     },
