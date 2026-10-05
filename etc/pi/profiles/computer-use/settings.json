@@ -5,6 +5,12 @@
     "*minimax-M3*"
   ],
   "packages": [
-    "npm:@injaneity/pi-computer-use"
-  ]
+    "npm:@amaster.ai/pi-computer-use"
+  ],
+  "pi-computer-use": {
+    "mode": "path",
+    "confirmAppLaunch": false,
+    "confirmDangerousActions": true,
+    "toolProfile": "full"
+  }
 }
