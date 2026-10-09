@@ -1,10 +1,8 @@
 {
   "enabled": true,
+  "inlineFooter": false,
   "settingsLanguage": "en",
   "cursorStyle": "bar",
-  "fullscreen": {
-    "wheelScrollLines": 3
-  },
   "icons": {
     "mode": "ascii"
   },
@@ -32,6 +30,9 @@
     "cost": false
   },
   "thinkingPeek": {
-    "lines": 1
+    "lines": 0
+  },
+  "fullscreen": {
+    "wheelScrollLines": 3
   }
 }
