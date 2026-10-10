@@ -581,13 +581,18 @@ alias ss='rg --smart-case --no-ignore --hidden --glob \!.git/ --fixed-strings'
 # open file in editor; inside herdr, open in a new focused tab
 e() {
   if [ "${HERDR_ENV:-}" = 1 ] && [ $# -gt 0 ]; then
-    local pid
-    pid=$(herdr tab create --cwd "$PWD" --focus 2>/dev/null \
-      | jq -r '.result.root_pane.pane_id // empty')
+    local out pid
+    out="$(herdr tab create --cwd "$PWD" --focus 2>&1)" || true
+    pid="$(printf '%s' "$out" | jq -r '.result.root_pane.pane_id // empty' 2>/dev/null)"
     if [ -n "$pid" ]; then
-      herdr pane run "$pid" exec nvim "$@"
-      return
+      if herdr pane run "$pid" exec nvim "$@"; then
+        return
+      fi
+      herdr pane close "$pid" 2>/dev/null  # drop half-opened tab
+    else
+      print -u2 "e: herdr tab create failed:" $'\n' "$out"
     fi
+    print -u2 "e: falling back to nvim in this pane"
   fi
   nvim "$@"
 }
