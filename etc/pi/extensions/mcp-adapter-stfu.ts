@@ -2,9 +2,15 @@
  * mcp-adapter-stfu — never ask for project MCP server approval.
  *
  * On every session start, pre-seeds ~/.pi/agent/mcp-project-approvals.json with
- * approvals for every server defined in the current project's .pi/mcp-adapter.json
- * and every ~/.pi/agent/profiles/<name>/mcp-adapter.json, via pi-mcp-adapter's own
+ * approvals for every server pi-mcp-adapter treats as project-scoped, via its own
  * approveProjectServer(). Equivalent to clicking "Allow" for all of them, forever.
+ * Sources covered (mirroring pi-mcp-adapter's discovery):
+ *   - `.mcp.json` at cwd, project root, and ancestors (shared-project[-ancestor])
+ *   - `.pi/mcp.json` at cwd / project root (pi-project)
+ *   - `.pi/mcp-adapter.json` at cwd / project root (pi-mcp-project)
+ *   - ~/.pi/agent/profiles/<name>/mcp-adapter.json
+ * Global settings.projectServers="allow" does NOT cover the TUI — pi-mcp-adapter
+ * only honors it headless (!ctx.hasUI) — so pre-seeding is required.
  *
  * No prompts in TUI or headless. Server defs changing → re-approved automatically
  * on next session start.
@@ -98,24 +104,41 @@ export default function (pi: import("@mariozechner/pi-coding-agent").ExtensionAP
 			const root = findProjectRoot(ctx.cwd);
 			if (!root) return;
 
-			const sources: string[] = [join(root, ".pi/mcp-adapter.json"), join(ctx.cwd, ".pi/mcp-adapter.json")];
+			// Mirror pi-mcp-adapter's merge precedence (later source wins):
+			// profiles/globals < ancestors < `.mcp.json` < `.pi/mcp.json` < `.pi/mcp-adapter.json`.
+			// Final def per name = adapter's effective def → hash matches its approval check.
+			const byName = new Map<string, unknown>();
+			const addServers = (file: string) => {
+				if (!existsSync(file)) return;
+				for (const [name, def] of Object.entries(serversOf(file))) byName.set(name, def);
+			};
+
 			const profilesDir = join(HOME, ".pi/agent/profiles");
 			try {
 				for (const p of readdirSync(profilesDir))
-					sources.push(join(profilesDir, p, "mcp-adapter.json"));
+					addServers(join(profilesDir, p, "mcp-adapter.json"));
 			} catch {
 				/* no profiles dir */
 			}
 
+			// Ancestor configs (adapter's "shared-project-ancestor" / "pi-project-ancestor"); stop at $HOME.
+			const home = resolve(HOME);
+			for (let dir = dirname(resolve(ctx.cwd)); ; dir = dirname(dir)) {
+				addServers(join(dir, ".mcp.json"));
+				addServers(join(dir, ".pi/mcp-adapter.json"));
+				if (dir === home || dirname(dir) === dir) break;
+			}
+
+			for (const base of [ctx.cwd, root]) addServers(join(base, ".mcp.json"));
+			for (const base of [ctx.cwd, root]) addServers(join(base, ".pi/mcp.json"));
+			for (const base of [ctx.cwd, root]) addServers(join(base, ".pi/mcp-adapter.json"));
+
 			let n = 0;
-			for (const file of sources) {
-				if (!existsSync(file)) continue;
-				for (const [name, def] of Object.entries(serversOf(file))) {
-					const hash = hashProjectServerDefinition(def as any);
-					if (alreadyApproved(root, name, hash)) continue;
-					await approveProjectServer(root, name, def as any);
-					n++;
-				}
+			for (const [name, def] of byName) {
+				const hash = hashProjectServerDefinition(def as any);
+				if (alreadyApproved(root, name, hash)) continue;
+				await approveProjectServer(root, name, def as any);
+				n++;
 			}
 		} catch (err) {
 			console.error(`mcp-adapter-stfu: ${err instanceof Error ? err.message : err}`);
