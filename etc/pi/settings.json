@@ -46,6 +46,9 @@
     "git:github.com/obra/superpowers"
   ],
   "quietStartup": true,
+  "workspaceHistory": {
+    "showStatus": false
+  },
   "retry": {
     "baseDelayMs": 2000,
     "enabled": true,
