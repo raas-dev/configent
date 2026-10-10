@@ -590,9 +590,9 @@ e() {
       fi
       herdr pane close "$pid" 2>/dev/null  # drop half-opened tab
     else
-      print -u2 "e: herdr tab create failed:" $'\n' "$out"
+      echo "$0: herdr tab create failed:" $'\n' "$out" >&2
     fi
-    print -u2 "e: falling back to nvim in this pane"
+    echo "$0: falling back to nvim in this pane" >&2
   fi
   nvim "$@"
 }
