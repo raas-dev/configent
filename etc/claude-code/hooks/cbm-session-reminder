@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# SessionStart context adapter installed by codebase-memory-mcp.
+# Fail-open: it never blocks or logs hook/prompt content.
+BIN='codebase-memory-mcp'
+[ -x "$BIN" ] || exit 0
+"$BIN" hook-augment 2>/dev/null
+exit 0

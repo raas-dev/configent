@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "hooks": {
+        "sessionStart": [
+            {
+                "type": "command",
+                "bash": "'codebase-memory-mcp' hook-augment --event SessionStart --dialect copilot",
+                "powershell": "& 'codebase-memory-mcp' hook-augment --event SessionStart --dialect copilot",
+                "timeoutSec": 5
+            }
+        ],
+        "subagentStart": [
+            {
+                "type": "command",
+                "bash": "'codebase-memory-mcp' hook-augment --event SubagentStart --dialect copilot",
+                "powershell": "& 'codebase-memory-mcp' hook-augment --event SubagentStart --dialect copilot",
+                "timeoutSec": 5
+            }
+        ]
+    }
+}
