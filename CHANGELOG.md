@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.5](https://github.com/raas-dev/configent/compare/1.247.4...1.247.5) (2026-10-11)
+
+### Fixes
+
+* **aliases:** handle herdr tab failures in e ([f89b545](https://github.com/raas-dev/configent/commit/f89b545abde4aa7ce62674a93cbd27bbba939863))
+* **aliases:** use echo for e() stderr output ([66c3de3](https://github.com/raas-dev/configent/commit/66c3de3e2a509539bd96889fc4ae9861d5d7a63c))
+* **cbm:** symlink config and enable auto_index on install ([8af4a94](https://github.com/raas-dev/configent/commit/8af4a94f91a6db98f52cc4b129fd8caadee363ee))
+* **mcp-adapter-stfu:** approve .mcp.json and ancestors ([f3f0af0](https://github.com/raas-dev/configent/commit/f3f0af00d99749165b216786b66ea44873071ba2))
+
 ## [1.247.4](https://github.com/raas-dev/configent/compare/1.247.3...1.247.4) (2026-10-04)
 
 ### Fixes
