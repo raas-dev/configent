@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.config/codebase-memory-mcp/config.json" ]; then
+  if [ -r "$HOME/.config/codebase-memory-mcp/config.json" ] &&
+    [ ! -L "$HOME/.config/codebase-memory-mcp/config.json" ]; then
+    mkdir -p "$backup_path/.config/codebase-memory-mcp"
+    cp -P "$HOME/.config/codebase-memory-mcp/config.json" \
+      "$backup_path/.config/codebase-memory-mcp/config.json"
+  fi
+fi
+
+# symlink
+mkdir -p "$HOME/.config/codebase-memory-mcp"
+ln -sfnv "$config_path/codebase-memory-mcp/config.json" \
+  "$HOME/.config/codebase-memory-mcp/config.json"
+
+### autoindex ##################################################################
+
+# auto_index lives in ~/.cache/codebase-memory-mcp/_config.db (SQLite), not in
+# config.json — set it with the CLI; idempotent on re-runs
+codebase-memory-mcp config set auto_index true

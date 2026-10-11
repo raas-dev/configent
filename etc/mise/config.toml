@@ -54,7 +54,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 #'github:sortie-ai/sortie' = 'latest'
 'github:vercel-labs/agent-browser' = 'latest'
-'github:DeusData/codebase-memory-mcp' = 'latest'
+'github:DeusData/codebase-memory-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cbm" }
 'github:lahfir/agent-desktop' = 'latest'
 #'npm:@fission-ai/openspec' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
