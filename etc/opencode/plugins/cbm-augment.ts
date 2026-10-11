@@ -3,14 +3,17 @@
 // Regenerated on install/update from the MCP tool registry, so it cannot
 // drift from the tools the server actually serves. Edits inside this block
 // are overwritten; edit outside it, or remove the markers to take ownership.
-// OpenCode already reaches every tool over MCP; this adds only the
-// automatic graph lookup before a grep/glob, which other clients get
-// through their own hook configuration.
+// OpenCode already reaches every tool over MCP; this module adds the
+// context surfaces other clients get through hook configuration: graph
+// lookup after grep/glob, index-coverage notes after read, session-start
+// tier routing (carried on the first tool result of each session, since
+// OpenCode documents no context-output lifecycle hook), and reinjection
+// after compaction via the documented experimental surface.
 import { spawn } from 'node:child_process';
 
-const BIN = '/var/folders/_c/lqhw9pwj2g14cxrr4bdbfgn80000gn/T/opencode/cbmhome/.local/bin/codebase-memory-mcp';
+const BIN = 'codebase-memory-mcp';
 
-function augment(tool, args) {
+function augment(payload) {
   return new Promise((resolve) => {
     const child = spawn(BIN, ['hook-augment'], {
       stdio: ['pipe', 'pipe', 'ignore'],
@@ -19,23 +22,64 @@ function augment(tool, args) {
     let out = '';
     child.stdout.on('data', (d) => (out += d.toString()));
     child.on('error', () => resolve(''));
-    child.on('close', () => resolve(out));
-    child.stdin.end(JSON.stringify({
-      hook_event_name: 'PreToolUse',
-      tool_name: tool,
-      tool_input: args ?? {},
-    }));
+    child.on('close', () => {
+      try {
+        const ctx = JSON.parse(out)?.hookSpecificOutput?.additionalContext;
+        resolve(typeof ctx === 'string' ? ctx : '');
+      } catch { resolve(''); }
+    });
+    child.stdin.end(JSON.stringify(payload));
   });
 }
 
-export const CodebaseMemory = async () => ({
-  'tool.execute.after': async (input, output) => {
-    const tool = input?.tool === 'grep' ? 'Grep' : input?.tool === 'glob' ? 'Glob' : null;
-    if (!tool) return;
-    const extra = await augment(tool, output?.args);
-    if (extra && typeof output?.output === 'string') {
-      output.output += '\n' + extra;
-    }
-  },
-});
+export const CodebaseMemory = async (ctx) => {
+  const dir = ctx?.directory;
+  const seen = new Set();
+  const lifecycle = () =>
+    augment({ hook_event_name: 'SessionStart', cwd: dir });
+  return {
+    'tool.execute.after': async (input, output) => {
+      if (typeof output?.output !== 'string') return;
+      const pieces = [];
+      const sid = input?.sessionID;
+      if (typeof sid === 'string' && !seen.has(sid)) {
+        seen.add(sid);
+        pieces.push(await lifecycle());
+      }
+      const args = input?.args ?? {};
+      const search =
+        input?.tool === 'grep' ? 'Grep' : input?.tool === 'glob' ? 'Glob' : null;
+      if (search) {
+        pieces.push(await augment({
+          hook_event_name: 'PreToolUse',
+          tool_name: search,
+          tool_input: args,
+          cwd: dir,
+        }));
+      } else if (input?.tool === 'read') {
+        const filePath = args.filePath ?? args.file_path ?? args.path;
+        if (typeof filePath === 'string' && filePath) {
+          pieces.push(await augment({
+            hook_event_name: 'PostToolUse',
+            tool_name: 'Read',
+            tool_input: { file_path: filePath },
+            cwd: dir,
+          }));
+        }
+      }
+      const extra = pieces.filter(Boolean).join('\n');
+      if (extra) {
+        output.output += '\n' + extra;
+      }
+    },
+    // Documented (experimental) compaction surface: output.context is the
+    // mutable array of context strings for the rebuilt session.
+    'experimental.session.compacting': async (_input, output) => {
+      const note = await lifecycle();
+      if (note && Array.isArray(output?.context)) {
+        output.context.push(note);
+      }
+    },
+  };
+};
 // codebase-memory-mcp:end
