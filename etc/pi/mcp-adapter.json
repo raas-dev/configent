@@ -1,5 +1,10 @@
 {
-  "mcpServers": {},
+  "mcpServers": {
+    "codebase-memory-mcp": {
+      "command": "codebase-memory-mcp",
+      "directTools": true
+    }
+  },
   "settings": {
     "mcpFooterStatus": "compact",
     "showStatusIcon": false,
