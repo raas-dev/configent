@@ -6,7 +6,7 @@
   "toolBashDefaultTimeout": 30,
   "toolOutputMaxBytes": 200000,
   "delegate": {
-    "enabled": true,
+    "enabled": false,
     "displayUsage": "separate"
   },
   "throttleRetry": {
