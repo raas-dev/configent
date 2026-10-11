@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.6](https://github.com/raas-dev/configent/compare/1.247.5...1.247.6) (2026-10-11)
+
+### Fixes
+
+* **cbm:** add codebase-memory agents and skills ([38c1de4](https://github.com/raas-dev/configent/commit/38c1de40d7a835874d590a90bb7411be3c1bba4d))
+* **cbm:** add hook-augment hooks and drop pi-cbm ([b4901ef](https://github.com/raas-dev/configent/commit/b4901eff01af057e37fbd02a462db02420515da7))
+* **opencode:** link AGENTS.md from agents submodule ([8f879f2](https://github.com/raas-dev/configent/commit/8f879f20a6a8b5567d6d7760fc8b1c4aebed0132))
+
 ## [1.247.5](https://github.com/raas-dev/configent/compare/1.247.4...1.247.5) (2026-10-11)
 
 ### Fixes
