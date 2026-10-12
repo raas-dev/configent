@@ -18,8 +18,8 @@
  * Also silences "MCP: direct tools refreshed" notify noise (moved from quiet-startup).
  */
 
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync, statSync } from "node:fs";
+import { basename, dirname, join, relative, resolve } from "node:path";
 
 const HOME = process.env.HOME ?? "~";
 const ADAPTER_DIR = join(HOME, ".pi/agent/npm/node_modules/pi-mcp-adapter/dist");
@@ -44,6 +44,40 @@ function findProjectRoot(cwd: string): string | undefined {
 		const parent = dirname(dir);
 		if (parent === dir) return undefined;
 		dir = parent;
+	}
+}
+
+/**
+ * Verbatim mirror of pi-mcp-adapter's projectApprovalScope(): the scope approvals are
+ * keyed by. It is the realpath'd CWD, not the git root — the .git walk-up only matters
+ * for linked worktrees (repo scope + relative path). No .git anywhere → cwd itself.
+ * Must match project-server-trust.js exactly or seeded approvals won't be found.
+ */
+function linkedWorktreeRepoScope(dotGit: string): string | undefined {
+	try {
+		if (!lstatSync(dotGit).isFile()) return undefined;
+		const pointer = /^gitdir: (.+)$/m.exec(readFileSync(dotGit, "utf8"))?.[1]?.trim();
+		if (!pointer) return undefined;
+		const adminDir = realpathSync(resolve(dirname(dotGit), pointer));
+		const backLink = readFileSync(join(adminDir, "gitdir"), "utf8").trim();
+		if (realpathSync(resolve(adminDir, backLink)) !== realpathSync(dotGit)) return undefined;
+		const commonDir = dirname(dirname(adminDir));
+		const bare = /^\s*bare\s*=\s*(true|yes|on|1)\s*$/im.test(readFileSync(join(commonDir, "config"), "utf8"));
+		return basename(commonDir) === ".git" && !bare ? dirname(commonDir) : `git-dir:${commonDir}`;
+	} catch {
+		return undefined;
+	}
+}
+
+function approvalScope(cwd: string): string {
+	const root = realpathSync(cwd);
+	for (let dir = root; ; dir = dirname(dir)) {
+		const dotGit = join(dir, ".git");
+		if (existsSync(dotGit)) {
+			const repoScope = linkedWorktreeRepoScope(dotGit);
+		return repoScope ? join(repoScope, relative(dir, root)) : root;
+		}
+		if (dirname(dir) === dir) return root;
 	}
 }
 
@@ -101,8 +135,8 @@ export default function (pi: import("@mariozechner/pi-coding-agent").ExtensionAP
 				/* @vite-ignore */ join(ADAPTER_DIR, "project-server-trust.js")
 			);
 
-			const root = findProjectRoot(ctx.cwd);
-			if (!root) return;
+			const root = findProjectRoot(ctx.cwd); // for source discovery only; may be undefined
+			const scope = approvalScope(ctx.cwd); // approval-store key — NOT the git root
 
 			// Mirror pi-mcp-adapter's merge precedence (later source wins):
 			// profiles/globals < ancestors < `.mcp.json` < `.pi/mcp.json` < `.pi/mcp-adapter.json`.
@@ -129,15 +163,15 @@ export default function (pi: import("@mariozechner/pi-coding-agent").ExtensionAP
 				if (dir === home || dirname(dir) === dir) break;
 			}
 
-			for (const base of [ctx.cwd, root]) addServers(join(base, ".mcp.json"));
-			for (const base of [ctx.cwd, root]) addServers(join(base, ".pi/mcp.json"));
-			for (const base of [ctx.cwd, root]) addServers(join(base, ".pi/mcp-adapter.json"));
+			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".mcp.json"));
+			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".pi/mcp.json"));
+			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".pi/mcp-adapter.json"));
 
 			let n = 0;
 			for (const [name, def] of byName) {
 				const hash = hashProjectServerDefinition(def as any);
-				if (alreadyApproved(root, name, hash)) continue;
-				await approveProjectServer(root, name, def as any);
+				if (alreadyApproved(scope, name, hash)) continue;
+				await approveProjectServer(ctx.cwd, name, def as any);
 				n++;
 			}
 		} catch (err) {
