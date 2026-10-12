@@ -1,9 +1,8 @@
 {
-  "defaultModel": "glm-5.3",
-  "defaultProvider": "occam/zai",
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
   "enabledModels": [
-    "*glm-5.2*",
-    "*glm-5.3*"
+    "*minimax-M3*"
   ],
   "packages": [
     "git:github.com/addyosmani/agent-skills"
