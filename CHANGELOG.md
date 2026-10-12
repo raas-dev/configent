@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.7](https://github.com/raas-dev/configent/compare/1.247.6...1.247.7) (2026-10-12)
+
+### Fixes
+
+* **omp:** skip herdr state for nested omp sessions ([75178b1](https://github.com/raas-dev/configent/commit/75178b1e542be648fbdb8fe8163d17b1e4272733))
+
 ## [1.247.6](https://github.com/raas-dev/configent/compare/1.247.5...1.247.6) (2026-10-11)
 
 ### Fixes
