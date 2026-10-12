@@ -6,6 +6,11 @@
     "*glm-5.3*"
   ],
   "packages": [
-    "git:github.com/addyosmani/agent-skills"
+    {
+      "source": "git:github.com/addyosmani/agent-skills",
+      "skills": [
+        "!skills/using-agent-skills"
+      ]
+    }
   ]
 }

@@ -12,7 +12,8 @@
         "skills/idea-refine",
         "skills/spec-driven-development",
         "skills/constraint-driven-development",
-        "skills/planning-and-task-breakdown"
+        "skills/planning-and-task-breakdown",
+        "!skills/using-agent-skills"
       ]
     }
   ]
