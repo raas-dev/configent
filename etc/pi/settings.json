@@ -15,6 +15,7 @@
   "packages": [
     "npm:billion-context-pi",
     "npm:pi-context-view",
+    "npm:pi-herdsman",
     "npm:pi-image-view",
     "npm:pi-invisible-continue",
     "npm:pi-markdown-preview",
@@ -22,7 +23,6 @@
     "npm:pi-open-tui",
     "npm:pi-workspace-history",
     "npm:pi-rtk-optimizer",
-    "npm:pi-subagents",
     "npm:pi-tool-repair",
     "npm:pi-tool-compact-display",
     "npm:pi-web-access",
