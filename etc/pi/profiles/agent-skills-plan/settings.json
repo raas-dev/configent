@@ -5,6 +5,12 @@
     "*minimax-M3*"
   ],
   "packages": [
-    "git:github.com/addyosmani/agent-skills"
+    {
+      "source": "git:github.com/addyosmani/agent-skills",
+      "skills": [
+        "skills/spec-driven-development",
+        "skills/planning-and-task-breakdown"
+      ]
+    }
   ]
 }
