@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.8](https://github.com/raas-dev/configent/compare/1.247.7...1.247.8) (2026-10-12)
+
+### Fixes
+
+* **pi:** key mcp approval seeding by worktree-aware scope ([25a2642](https://github.com/raas-dev/configent/commit/25a26421b90d74ce900e47a6deb03c17fdbb9f83))
+
 ## [1.247.7](https://github.com/raas-dev/configent/compare/1.247.6...1.247.7) (2026-10-12)
 
 ### Fixes
