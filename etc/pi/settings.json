@@ -39,7 +39,8 @@
     "git:github.com/ayghri/i-have-adhd",
     "git:github.com/DietrichGebert/ponytail",
     "git:github.com/iodic/pi-ayu-themes",
-    "git:github.com/jonjonrankin/pi-caveman"
+    "git:github.com/jonjonrankin/pi-caveman",
+    "git:github.com/obra/superpowers"
   ],
   "quietStartup": true,
   "workspaceHistory": {

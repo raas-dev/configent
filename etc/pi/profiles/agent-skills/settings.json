@@ -1,8 +1,0 @@
-{
-  "defaultModel": "MiniMax-M3",
-  "defaultProvider": "occam/minimax",
-  "defaultThinkingLevel": "medium",
-  "packages": [
-    "npm:pi-addyosmani-skills"
-  ]
-}
