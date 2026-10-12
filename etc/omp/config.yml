@@ -9,6 +9,7 @@ modelRoles:
   designer: minimax/MiniMax-M3
   task: minimax/MiniMax-M3
   advisor: minimax/MiniMax-M3
+  web: web/exa
 renderMermaid:
   enabled: true
 checkpoint:
@@ -16,50 +17,23 @@ checkpoint:
 calc:
   enabled: true
 commands:
-  enableClaudeProject: false
-  enableClaudeUser: false
-  enableOpencodeUser: false
-  enableOpencodeProject: false
+  enableClaudeProject: true
+  enableClaudeUser: true
+  enableOpencodeUser: true
+  enableOpencodeProject: true
 providers:
-  webSearchOrder:
-    - exa
-    - perplexity
-    - gemini
-    - anthropic
-    - codex
-    - xai
-    - zai
-    - tinyfish
-    - jina
-    - kagi
-    - tavily
-    - firecrawl
-    - brave
-    - kimi
-    - parallel
-    - synthetic
-    - searxng
-    - startpage
-    - duckduckgo
-    - ecosia
-    - google
-    - mojeek
-    - public
-  tts: auto
   openai-codex:
     codeMode: "off"
-  autoThinkingModel: online
 defaultThinkingLevel: auto
 disabledProviders:
   - cursor
   - opencode
+  - github
   - claude
-  - claude-plugins
 theme:
   dark: dark-ayu
 task:
-  disabledAgents:
-    []
+  disabledAgents: []
   isolation:
     enabled: false
   eager: always
@@ -100,14 +74,17 @@ completion:
   notify: "on"
 compaction:
   thresholdPercent: 50
-  thresholdTokens: -1
+  thresholdTokens: 200000
   methodOrder:
     - shake
     - soft
     - handoff
+  idleThresholdTokens: 200000
 bash:
   autoBackground:
     enabled: true
+  gitGuard: true
+  allowCompoundCommands: false
 dev:
   autoqa: false
 treeFilterMode: user-only
@@ -123,12 +100,14 @@ tui:
   tight: false
   resizeScrollback: rebuild
   imeSafeCursor: true
+  titleSpinner: braille
 display:
   showTokenUsage: true
   shimmer: classic
+  subagentLivePreview: false
 terminal:
   showProgress: true
-symbolPreset: unicode
+symbolPreset: nerd
 colorBlindMode: false
 doubleEscapeAction: tree
 tools:
@@ -138,7 +117,6 @@ tools:
 error:
   notify: "off"
 stt:
-  modelName: parakeet
   enabled: true
   submitTrigger: never
 marketplace:
@@ -190,3 +168,13 @@ cycleOrder:
   - slow
 ask:
   timeout: 60
+enabledProviders: []
+personality: default
+find:
+  enabled: auto
+title:
+  generator: fork
+isolation:
+  backend: auto
+ratchet:
+  enabled: true
