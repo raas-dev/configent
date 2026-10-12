@@ -1,10 +1,8 @@
 ---
 name: caveman-commit
 description: >
-  Ultra-compressed commit message generator. Cuts noise from commit messages while preserving
-  intent and reasoning. Conventional Commits format. Subject ≤50 chars, body only when "why"
-  isn't obvious. Use when user says "write a commit", "commit message", "generate commit",
-  "/commit", or invokes /caveman-commit. Auto-triggers when staging changes.
+  Write a Conventional Commits message compressed to intent only. Use for
+  "write a commit", "commit message", /commit or /caveman-commit.
 ---
 
 Write commit messages terse and exact. Conventional Commits format. No fluff. Why over what.
@@ -29,7 +27,7 @@ Write commit messages terse and exact. Conventional Commits format. No fluff. Wh
 **What NEVER goes in:**
 - "This commit does X", "I", "we", "now", "currently" — the diff says what
 - "As requested by..." — use Co-authored-by trailer
-- "Generated with Claude Code" or any AI attribution
+- "Generated with Claude Code" or any AI attribution — unless the user's own rule requires an `Assisted-by`/AI-attribution trailer, then add it as a trailer
 - Emoji (unless project convention requires)
 - Restating the file name when scope already says it
 
