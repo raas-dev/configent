@@ -1,16 +1,8 @@
 {
-  "defaultModel": "glm-5.3",
-  "defaultProvider": "occam/zai",
-  "enabledModels": [
-    "*glm-5.2*",
-    "*glm-5.3*"
-  ],
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "defaultThinkingLevel": "medium",
   "packages": [
-    {
-      "source": "git:github.com/addyosmani/agent-skills",
-      "skills": [
-        "!skills/using-agent-skills"
-      ]
-    }
+    "npm:pi-addyosmani-skills"
   ]
 }
