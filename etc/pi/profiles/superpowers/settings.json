@@ -2,9 +2,10 @@
   "defaultModel": "MiniMax-M3",
   "defaultProvider": "occam/minimax",
   "enabledModels": [
-    "*minimax-M3*"
+    "occam/**"
   ],
   "packages": [
-    "git:github.com/obra/superpowers"
+    "git:github.com/obra/superpowers",
+    "npm:pi-subagents"
   ]
 }

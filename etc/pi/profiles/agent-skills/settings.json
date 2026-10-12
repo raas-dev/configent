@@ -2,9 +2,10 @@
   "defaultModel": "MiniMax-M3",
   "defaultProvider": "occam/minimax",
   "enabledModels": [
-    "*minimax-M3*"
+    "occam/**"
   ],
   "packages": [
-    "npm:pi-addyosmani-skills"
+    "npm:pi-addyosmani-skills",
+    "npm:pi-subagents"
   ]
 }

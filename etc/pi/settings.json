@@ -15,7 +15,6 @@
   "packages": [
     "npm:billion-context-pi",
     "npm:pi-context-view",
-    "npm:pi-herdsman",
     "npm:pi-image-view",
     "npm:pi-invisible-continue",
     "npm:pi-markdown-preview",
