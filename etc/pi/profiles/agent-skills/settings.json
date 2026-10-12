@@ -1,0 +1,14 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "enabledModels": [
+    "*minimax-M3*"
+  ],
+  "packages": [
+    "npm:pi-addyosmani-skills",
+    {
+      "source": "git:github.com/obra/superpowers",
+      "skills": []
+    }
+  ]
+}
