@@ -22,7 +22,7 @@ A few features:
 - Run `up` to upgrade every package manager at once but respect locked versions.
 - Ask `ai <question>` or agent (`_`) to use web browser and other desktop apps.
 
-Works on macOS Tahoe (26), Sequoia (15) and Sonoma (14) on Apple Silicon.
+Works on macOS Golden Gate (27), Tahoe (26) and Sequoia (15) on Apple Silicon.
 
 Supported Linux distributions (both AArch64 and x86-64):
 - Ubuntu Linux 26.04 LTS (Resolute Raccoon) and 24.04 LTS (Noble Numbat)
