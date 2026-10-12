@@ -24,6 +24,9 @@ commands:
 providers:
   openai-codex:
     codeMode: "off"
+  tinyModelDevice: default
+  autoThinkingMaxEffort: xhigh
+  fetch: auto
 defaultThinkingLevel: auto
 disabledProviders:
   - cursor
@@ -36,7 +39,12 @@ task:
   disabledAgents: []
   isolation:
     enabled: false
-  eager: always
+  eager: preferred
+  enableEffort: false
+  maxConcurrency: 8
+  maxRecursionDepth: 2
+  maxRuntimeMs: 0
+  maxEffort: medium
 interruptMode: immediate
 followUpMode: one-at-a-time
 startup:
@@ -57,8 +65,8 @@ secrets:
   enabled: true
 statusLine:
   preset: default
-  separator: powerline-thin
-  contextLine: annotated
+  separator: none
+  contextLine: percentage
   sessionAccent: false
   transparent: true
   compactThinkingLevel: false
@@ -69,6 +77,7 @@ retry:
   fallbackChains:
     web:
       - minimax/MiniMax-M3
+  maxRetries: 10
 steeringMode: all
 completion:
   notify: "on"
@@ -95,16 +104,21 @@ shellMinimizer:
 setupVersion: 2
 composer:
   shape: field
+  tokenRate: false
 tui:
   textSizing: false
   tight: false
   resizeScrollback: rebuild
   imeSafeCursor: true
   titleSpinner: braille
+  reactions: true
+  mouse: false
 display:
   showTokenUsage: true
   shimmer: classic
   subagentLivePreview: false
+  pinnedAgents: collapsed
+  showTurnTime: true
 terminal:
   showProgress: true
 symbolPreset: nerd
@@ -115,7 +129,7 @@ tools:
   xdevDocs: builtins
   maxTimeout: 600
 error:
-  notify: "off"
+  notify: "on"
 stt:
   enabled: true
   submitTrigger: never
@@ -167,14 +181,20 @@ cycleOrder:
   - default
   - slow
 ask:
-  timeout: 60
+  timeout: 30
 enabledProviders: []
 personality: default
 find:
   enabled: auto
 title:
   generator: fork
+  icons: boring
 isolation:
   backend: auto
 ratchet:
+  enabled: true
+textVerbosity: medium
+loop:
+  mode: prompt
+exa:
   enabled: true
