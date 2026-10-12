@@ -82,6 +82,9 @@ if command -v omp >/dev/null; then
   omp plugin install github:asyrjasalo/omp-headroom
   # https://github.com/Baylar55/omp-undo-redo
   omp plugin install @baylarsadigov/omp-undo-redo
+  # https://github.com/addyosmani/agent-skills
+  omp plugin marketplace add addyosmani/agent-skills
+  omp plugin install agent-skills@addy-agent-skills
   # upgrade all installed plugins
   omp plugin upgrade
 fi
