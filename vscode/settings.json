@@ -255,9 +255,9 @@
     "*.plist": "xml",
     "*.prompt": "markdown",
     "*.sh": "shellscript",
+    "*.smolfile": "toml",
     "*.strings": "plist",
-    "*.tpl": "json",
-    "*.smolfile": "toml"
+    "*.tpl": "json"
   },
   "files.hotExit": "onExitAndWindowClose",
   "files.saveConflictResolution": "overwriteFileOnDisk",
@@ -524,6 +524,7 @@
   "terminal.integrated.initialHint": false,
   "terminal.integrated.letterSpacing": -1,
   "terminal.integrated.macOptionClickForcesSelection": true,
+  "terminal.integrated.middleClickBehavior": "paste",
   "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.persistentSessionScrollback": 500,
@@ -553,6 +554,7 @@
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${progress}",
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.showActions": "always",
@@ -569,6 +571,8 @@
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "update.titleBar": false,
+  "vscode-office.editMode": "ir",
+  "vscode-office.enableTelemetry": false,
   "vsintellicode.python.completionsEnabled": false,
   "window.autoDetectColorScheme": false,
   "window.closeWhenEmpty": true,
@@ -629,6 +633,8 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook",
+    "*.markdown": "default",
+    "*.md": "default",
     "git-rebase-todo": "default"
   },
   "workbench.enableExperiments": false,
@@ -684,8 +690,5 @@
     "azure-pipelines.yaml"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false,
-  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${progress}",
-  "terminal.integrated.middleClickBehavior": "paste",
-  "vscode-office.enableTelemetry": false
+  "zenMode.hideStatusBar": false
 }
