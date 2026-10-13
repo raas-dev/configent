@@ -64,8 +64,35 @@ mcp:
 secrets:
   enabled: true
 statusLine:
-  preset: default
-  separator: none
+  preset: custom
+  separator: powerline
+  leftSegments:
+    - pi
+    - hostname
+    - model
+    - mode
+    - collab
+    - path
+    - git
+    - pr
+    - session_name
+    - subagents
+  rightSegments:
+    - token_total
+    - context_pct
+    - usage
+  segmentOptions:
+    model:
+      showThinkingLevel: true
+    path:
+      abbreviate: true
+      maxLength: 40
+      stripWorkPrefix: true
+    git:
+      showBranch: true
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true
   contextLine: percentage
   sessionAccent: false
   transparent: true
