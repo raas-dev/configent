@@ -78,7 +78,6 @@ statusLine:
     - session_name
     - subagents
   rightSegments:
-    - token_total
     - context_pct
     - usage
   segmentOptions:
