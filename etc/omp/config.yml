@@ -65,7 +65,7 @@ secrets:
   enabled: true
 statusLine:
   preset: custom
-  separator: powerline
+  separator: none
   leftSegments:
     - pi
     - hostname
