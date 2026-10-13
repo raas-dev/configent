@@ -208,7 +208,7 @@ cycleOrder:
   - default
   - slow
 ask:
-  timeout: 30
+  timeout: 60
 enabledProviders: []
 personality: default
 find:
