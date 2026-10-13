@@ -220,7 +220,7 @@ isolation:
   backend: auto
 ratchet:
   enabled: true
-textVerbosity: medium
+textVerbosity: low
 loop:
   mode: prompt
 exa:
