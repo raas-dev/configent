@@ -44,7 +44,7 @@ task:
   maxConcurrency: 8
   maxRecursionDepth: 2
   maxRuntimeMs: 0
-  maxEffort: medium
+  maxEffort: high
 interruptMode: immediate
 followUpMode: one-at-a-time
 startup:
