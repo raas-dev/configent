@@ -78,8 +78,8 @@ statusLine:
     - session_name
     - subagents
   rightSegments:
-    - context_pct
     - usage
+    - context_pct
   segmentOptions:
     model:
       showThinkingLevel: true
