@@ -78,14 +78,14 @@ statusLine:
     - session_name
     - subagents
   rightSegments:
-    - usage
     - context_pct
+    - usage
   segmentOptions:
     model:
       showThinkingLevel: true
     path:
       abbreviate: true
-      maxLength: 40
+      maxLength: 20
       stripWorkPrefix: true
     git:
       showBranch: true
@@ -198,7 +198,8 @@ spelling:
 images:
   blockImages: false
 advisor:
-  enabled: false
+  enabled: true
+  reviewMode: turn
 tier:
   advisor: inherit
 extendedContext: false
@@ -238,7 +239,7 @@ modelPresets:
       task: zai/glm-5.3
       advisor: zai/glm-5.3
       web: web/exa
-    defaultThinkingLevel: auto
+    defaultThinkingLevel: low
   minimax:
     modelRoles:
       default: minimax/MiniMax-M3
