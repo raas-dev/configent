@@ -1,4 +1,4 @@
 {
   "notify": true,
-  "timeoutSeconds": 30
+  "timeoutSeconds": 60
 }
