@@ -1,13 +1,13 @@
 modelRoles:
-  default: zai/glm-5.3
-  smol: zai/glm-5.3
-  slow: zai/glm-5.3
-  vision: zai/glm-5.3
-  plan: zai/glm-5.3
-  commit: zai/glm-5.3
-  tiny: zai/glm-5.3
-  designer: zai/glm-5.3
-  task: zai/glm-5.3
+  default: minimax/MiniMax-M3
+  smol: minimax/MiniMax-M3
+  slow: minimax/MiniMax-M3
+  vision: minimax/MiniMax-M3
+  plan: minimax/MiniMax-M3
+  commit: minimax/MiniMax-M3
+  tiny: minimax/MiniMax-M3
+  designer: minimax/MiniMax-M3
+  task: minimax/MiniMax-M3
   advisor: zai/glm-5.3
   web: web/exa
 renderMermaid:
@@ -253,4 +253,4 @@ modelPresets:
       task: minimax/MiniMax-M3
       advisor: zai/glm-5.3
       web: web/exa
-    defaultThinkingLevel: auto
+    defaultThinkingLevel: medium
