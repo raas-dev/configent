@@ -198,7 +198,7 @@ spelling:
 images:
   blockImages: false
 advisor:
-  enabled: true
+  enabled: false
   reviewMode: turn
 tier:
   advisor: inherit
