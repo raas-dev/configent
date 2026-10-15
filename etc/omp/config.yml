@@ -251,6 +251,6 @@ modelPresets:
       tiny: minimax/MiniMax-M3
       designer: minimax/MiniMax-M3
       task: minimax/MiniMax-M3
-      advisor: zai/glm-5.3
+      advisor: minimax/MiniMax-M3
       web: web/exa
     defaultThinkingLevel: medium
