@@ -474,12 +474,6 @@ alias inspector='npx -y @modelcontextprotocol/inspector'
 # Find unused files, dependencies and exports in JavaScript/TypeScript projects
 alias knip='npx -y knip'
 
-# Backlog.md
-alias backlog='npx -y backlog.md'
-
-# groma.md
-alias groma='npx -y groma.md'
-
 # MCP apps development tool
 alias mcpjam='npx -y @mcpjam/inspector'
 
