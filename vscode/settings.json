@@ -560,7 +560,6 @@
   "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.tabs.showActiveTerminal": "always",
   "terminal.integrated.tabStopWidth": 4,
-  "terraform.codelens.referenceCount": true,
   "testing.followRunningTest": true,
   "timeline.pageSize": 20,
   "trivy.fixedOnly": true,
