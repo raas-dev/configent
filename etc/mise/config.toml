@@ -40,7 +40,7 @@ zoxide = 'latest'
 
 # ai coding platforms
 #claude-code = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_claude-code" }
-opencode = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_opencode" }
+opencode = { version = '1.18.18', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
 # pinned to 1.24.1: 1.24.0 depends on @openchamber/sdk@1.23.1 which was never published to npm (upstream publish bug)
