@@ -27,7 +27,7 @@ providers:
   tinyModelDevice: default
   autoThinkingMaxEffort: xhigh
   fetch: auto
-defaultThinkingLevel: auto
+defaultThinkingLevel: medium
 disabledProviders:
   - cursor
   - opencode
