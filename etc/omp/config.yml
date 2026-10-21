@@ -33,6 +33,7 @@ disabledProviders:
   - opencode
   - github
   - claude
+  - builtin-defaults
 theme:
   dark: dark-ayu
 task:
