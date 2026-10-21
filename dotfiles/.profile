@@ -245,7 +245,7 @@ export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1 # disable ~/.claude/CLAUDE.md
 # opencode: token-optimizer
 export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
 
-# ponytal
+# ponytail
 export PONYTAIL_DEFAULT_MODE="full"
 export PONYTAIL_QUIET_STARTUP=true
 export PONYTAIL_HIDE_STATUS=true
