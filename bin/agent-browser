@@ -26,4 +26,21 @@ export AGENT_BROWSER_ENGINE="chrome"
 export AGENT_BROWSER_EXECUTABLE_PATH="$BINARY_PATH"
 export AGENT_BROWSER_ARGS="$STEALTH_ARGS"
 
-agent-browser "$@"
+# Resolve the real agent-browser: first match in PATH outside this wrapper's dir
+# (a bare `agent-browser` here would find this wrapper itself and recurse forever)
+SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+REAL_AGENT_BROWSER=""
+IFS=: read -r -a _dirs <<<"$PATH"
+for _d in "${_dirs[@]}"; do
+  [ "$_d" = "$SELF_DIR" ] && continue
+  if [ -x "$_d/agent-browser" ]; then
+    REAL_AGENT_BROWSER="$_d/agent-browser"
+    break
+  fi
+done
+[ -n "$REAL_AGENT_BROWSER" ] || {
+  echo "agent-browser: real binary not found in PATH" >&2
+  exit 127
+}
+
+exec "$REAL_AGENT_BROWSER" "$@"
