@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.9](https://github.com/raas-dev/configent/compare/1.247.8...1.247.9) (2026-10-21)
+
+### Fixes
+
+* **shell:** activate mise after profile, reapply PATH precedence ([353f6e9](https://github.com/raas-dev/configent/commit/353f6e94947f752b2d12a21951867fa6183f4356))
+
 ## [1.247.8](https://github.com/raas-dev/configent/compare/1.247.7...1.247.8) (2026-10-12)
 
 ### Fixes
