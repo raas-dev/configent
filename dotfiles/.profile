@@ -265,21 +265,7 @@ export PONYTAIL_STATUS_FORMAT="{label} {mode}"
 # CloakBrowser
 if command -v cloakbrowser >/dev/null 2>&1; then
   _cb_bin="$(cloakbrowser info 2>/dev/null | awk '/^Binary:/ {print $2}')"
-  if [ -n "$_cb_bin" ]; then
-    # pi-computer-use
-    export PI_COMPUTER_USE_CHROME_EXECUTABLE="$_cb_bin"
-
-    # agent-browser
-    export AGENT_BROWSER_ENGINE="chrome"
-    export AGENT_BROWSER_EXECUTABLE_PATH="$_cb_bin"
-    _cb_py="$(dirname "$(realpath "$(mise which cloakbrowser 2>/dev/null || command -v cloakbrowser)")")/python"
-    AGENT_BROWSER_ARGS="$("$_cb_py" -c '
-from cloakbrowser.config import get_default_stealth_args
-# agent-browser splits on commas, so drop args containing commas
-print(",".join(a for a in get_default_stealth_args() if "," not in a))' 2>/dev/null)"
-    [ -n "$AGENT_BROWSER_ARGS" ] && export AGENT_BROWSER_ARGS
-    unset _cb_py
-  fi
+  [ -n "$_cb_bin" ] && export PI_COMPUTER_USE_CHROME_EXECUTABLE="$_cb_bin"
   unset _cb_bin
 fi
 

@@ -1,33 +1,72 @@
 #!/usr/bin/env bash
 
-# wrapper for agent-browser to use CloakBrowser as the browser
+# agent-browser wrapper: CloakBrowser (stealth Chromium) underneath.
+#
+# agent-browser's LAUNCH path is broken with cloak builds (CDP navigations
+# silently no-op), but its CONNECT path works perfectly. So this wrapper:
+#   1. keeps a cloak Chromium running detached on a fixed port (persistent profile)
+#   2. connects the real agent-browser to it and forwards the command
+# Cloak is launched once; later invocations reuse the running browser.
 
 set -euo pipefail
 
-# Ensure the Chromium binary is downloaded and get its path
-mise exec pipx:cloakbrowser -- cloakbrowser install --quiet 2>/dev/null || true
-BINARY_PATH=$(mise exec pipx:cloakbrowser -- cloakbrowser info | awk '/^Binary:/ { print $2 }')
+PORT=9337
+PROFILE_DIR="$HOME/.cache/agent-browser-cloak"
 
-# Resolve the Python inside the cloakbrowser pipx venv
-CLOAKBROWSER_BIN=$(mise exec pipx:cloakbrowser -- which cloakbrowser)
-VENV_PYTHON="$(dirname "$(realpath "$CLOAKBROWSER_BIN")")/python"
+# --- fast paths that need no browser -----------------------------------------
+case "${1:-}" in
+--help | -h | help | --version | -V | version)
+  ;;
+*)
+  # --- ensure cloak Chromium is up ------------------------------------------
+  if ! curl -sf "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; then
+    mise exec pipx:cloakbrowser -- cloakbrowser install --quiet 2>/dev/null || true
+    BINARY_PATH=$(mise exec pipx:cloakbrowser -- cloakbrowser info | awk '/^Binary:/ { print $2 }')
+    [ -n "$BINARY_PATH" ] && [ -x "$BINARY_PATH" ] || {
+      echo "agent-browser: CloakBrowser binary not found" >&2
+      exit 1
+    }
 
-# Get stealth args (comma-separated for agent-browser).
-# agent-browser splits on commas, so drop any arg that itself contains a comma
-# (e.g. --fingerprint-gpu-renderer="ANGLE (Apple, ANGLE Metal Renderer: ...)").
-STEALTH_ARGS=$("$VENV_PYTHON" -c "
+    # stealth args incl. a random --fingerprint per launch (one per line)
+    CLOAKBROWSER_BIN=$(mise exec pipx:cloakbrowser -- which cloakbrowser)
+    VENV_PYTHON="$(dirname "$(realpath "$CLOAKBROWSER_BIN")")/python"
+    STEALTH_ARGS=()
+    while IFS= read -r _arg; do
+      [ -n "$_arg" ] && STEALTH_ARGS+=("$_arg")
+    done < <("$VENV_PYTHON" -c "
 from cloakbrowser.config import get_default_stealth_args
-safe = [a for a in get_default_stealth_args() if ',' not in a]
-print(','.join(safe))
+print('\n'.join(get_default_stealth_args()))
 ")
 
-# Point agent-browser at CloakBrowser (--args and --executable-path require chrome engine)
-export AGENT_BROWSER_ENGINE="chrome"
-export AGENT_BROWSER_EXECUTABLE_PATH="$BINARY_PATH"
-export AGENT_BROWSER_ARGS="$STEALTH_ARGS"
+    mkdir -p "$PROFILE_DIR"
+    nohup "$BINARY_PATH" \
+      --headless=new \
+      --remote-debugging-port="$PORT" \
+      --no-first-run --no-default-browser-check \
+      --user-data-dir="$PROFILE_DIR" \
+      "${STEALTH_ARGS[@]}" \
+      >/dev/null 2>&1 &
+    disown
 
-# Resolve the real agent-browser: first match in PATH outside this wrapper's dir
-# (a bare `agent-browser` here would find this wrapper itself and recurse forever)
+    # wait for CDP endpoint
+    _up=0
+    for _ in $(seq 1 100); do
+      if curl -sf "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; then
+        _up=1
+        break
+      fi
+      sleep 0.2
+    done
+    [ "$_up" = 1 ] || {
+      echo "agent-browser: CloakBrowser failed to start on port $PORT" >&2
+      exit 1
+    }
+  fi
+  ;;
+esac
+
+# --- resolve real agent-browser outside this wrapper's dir -------------------
+# (a bare `agent-browser` would find this wrapper itself and recurse forever)
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 REAL_AGENT_BROWSER=""
 IFS=: read -r -a _dirs <<<"$PATH"
@@ -43,4 +82,26 @@ done
   exit 127
 }
 
-exec "$REAL_AGENT_BROWSER" "$@"
+# strip any global agent-browser env overrides from ~/.profile so it never
+# launches its own browser (that path is broken with cloak); we connect instead
+run_ab() {
+  env -u AGENT_BROWSER_ENGINE -u AGENT_BROWSER_EXECUTABLE_PATH -u AGENT_BROWSER_ARGS \
+    "$REAL_AGENT_BROWSER" --session cloak "$@"
+}
+
+case "${1:-}" in
+--help | -h | help | --version | -V | version)
+  exec "$REAL_AGENT_BROWSER" "$@"
+  ;;
+connect)
+  # expert escape hatch: forward raw connect, no auto-attach
+  shift
+  exec env -u AGENT_BROWSER_ENGINE -u AGENT_BROWSER_EXECUTABLE_PATH -u AGENT_BROWSER_ARGS \
+    "$REAL_AGENT_BROWSER" "$@"
+  ;;
+*)
+  # attach (idempotent, keeps tabs), then run the actual command
+  run_ab connect "$PORT" >/dev/null 2>&1 || true
+  run_ab "$@"
+  ;;
+esac
