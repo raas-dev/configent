@@ -114,6 +114,8 @@ fi
 
 ### mise #######################################################################
 
+# shims only, no `mise activate`: it re-prepends mise dirs into PATH on every
+# config change and breaks the precedence below (configent/bin > .local/bin > mise)
 path_prepend "$HOME/.local/share/mise/shims"
 
 ### bun ########################################################################
@@ -228,6 +230,7 @@ fi
 
 ### local bin ##################################################################
 
+# PATH precedence: configent/bin > .local/bin > mise shims (above)
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.local/configent/bin"
 

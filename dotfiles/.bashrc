@@ -100,8 +100,6 @@ fi
 
 ### Prompt #####################################################################
 
-command -v mise >/dev/null && eval "$(mise activate bash)"
-
 # Prefer starship prompt; fallback to builtin PS1 when unavailable
 if command -v starship >/dev/null; then
   eval "$(starship init bash)"

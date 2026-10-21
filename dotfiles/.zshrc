@@ -95,8 +95,6 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 
 ### Prompt #####################################################################
 
-command -v mise >/dev/null && eval "$(mise activate zsh)"
-
 # Prefer starship prompt; fallback to builtin prompt when unavailable
 if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
