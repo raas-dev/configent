@@ -60,6 +60,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'npm:@llamaindex/liteparse' = 'latest'
 #'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'pipx:browser-use' = 'latest'
+'pipx:cloakbrowser' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cloakbrowser" }
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
 
 # github
