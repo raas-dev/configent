@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.247.10](https://github.com/raas-dev/configent/compare/1.247.9...1.247.10) (2026-10-21)
+
+### Fixes
+
+* **agent-browser:** connect to persistent CloakBrowser instead of launch ([fa3293e](https://github.com/raas-dev/configent/commit/fa3293ec03b41cb0c59a1e2905fa9d5c92bbdc6a))
+* **agent-browser:** resolve real binary outside wrapper dir ([43d4511](https://github.com/raas-dev/configent/commit/43d45111796e71e79e268ca7a9b11aaf869d8d97))
+
 ## [1.247.9](https://github.com/raas-dev/configent/compare/1.247.8...1.247.9) (2026-10-21)
 
 ### Fixes
