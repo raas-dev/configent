@@ -114,8 +114,6 @@ fi
 
 ### mise #######################################################################
 
-# shims only, no `mise activate`: it re-prepends mise dirs into PATH on every
-# config change and breaks the precedence below (configent/bin > .local/bin > mise)
 path_prepend "$HOME/.local/share/mise/shims"
 
 ### bun ########################################################################
@@ -230,9 +228,14 @@ fi
 
 ### local bin ##################################################################
 
-# PATH precedence: configent/bin > .local/bin > mise shims (above)
-path_prepend "$HOME/.local/bin"
-path_prepend "$HOME/.local/configent/bin"
+# PATH precedence: configent/bin > .local/bin > mise shims (above); rc files
+# re-run this from a prompt hook since `mise activate` rewrites PATH on every cd
+# into a dir with mise.toml/.tool-versions
+_bin_precedence() {
+  path_prepend "$HOME/.local/bin"
+  path_prepend "$HOME/.local/configent/bin"
+}
+_bin_precedence
 
 ### ai #########################################################################
 

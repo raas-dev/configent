@@ -100,6 +100,12 @@ fi
 
 ### Prompt #####################################################################
 
+command -v mise >/dev/null && eval "$(mise activate bash)"
+
+# keep configent/bin > .local/bin > mise (fn + rationale in ~/.profile)
+command -v _bin_precedence >/dev/null || . "$HOME/.profile"
+PROMPT_COMMAND="_bin_precedence${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+
 # Prefer starship prompt; fallback to builtin PS1 when unavailable
 if command -v starship >/dev/null; then
   eval "$(starship init bash)"

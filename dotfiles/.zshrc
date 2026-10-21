@@ -95,6 +95,12 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 
 ### Prompt #####################################################################
 
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+
+# keep configent/bin > .local/bin > mise (fn + rationale in ~/.profile)
+command -v _bin_precedence >/dev/null || . "$HOME/.profile"
+precmd_functions+=(_bin_precedence)
+
 # Prefer starship prompt; fallback to builtin prompt when unavailable
 if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
