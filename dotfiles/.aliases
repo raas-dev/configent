@@ -376,6 +376,32 @@ alias xleak='mise exec github:bgreenwell/xleak -- xleak'
 # Validate and run GitHub Actions locally
 alias wrkflw='mise exec cargo:wrkflw -- wrkflw'
 
+### Node.js ####################################################################
+
+# MCP server development tool
+alias inspector='npx -y @modelcontextprotocol/inspector'
+
+# Find unused files, dependencies and exports in JavaScript/TypeScript projects
+alias knip='npx -y knip'
+
+# MCP apps development tool
+alias mcpjam='npx -y @mcpjam/inspector'
+
+# Upgrades your package.json dependencies to the latest version
+alias ncu='npx -y npm-check-updates'
+
+# Unofficial oh-my-pi web UI https://github.com/kahme247/ompweb
+alias ompweb='npx -y @kahme247/ompweb'
+
+# Project generator
+alias projen='npx -y projen'
+
+# LLM evaluation framework
+alias promptfoo='npx -y promptfoo'
+
+# Sort a package.json based on the well-known keys
+alias sort-package-json='npx -y sort-package-json'
+
 ### Python #####################################################################
 
 # https://github.com/subash774/Caffeinate
@@ -465,29 +491,6 @@ venv() {
     fi
   fi
 }
-
-### Bun ########################################################################
-
-# MCP server development tool
-alias inspector='npx -y @modelcontextprotocol/inspector'
-
-# Find unused files, dependencies and exports in JavaScript/TypeScript projects
-alias knip='npx -y knip'
-
-# MCP apps development tool
-alias mcpjam='npx -y @mcpjam/inspector'
-
-# Upgrades your package.json dependencies to the latest version
-alias ncu='npx -y npm-check-updates'
-
-# Project generator
-alias projen='npx -y projen'
-
-# LLM evaluation framework
-alias promptfoo='npx -y promptfoo'
-
-# Sort a package.json based on the well-known keys
-alias sort-package-json='npx -y sort-package-json'
 
 ### AI #########################################################################
 
