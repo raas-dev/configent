@@ -86,6 +86,8 @@ if command -v omp >/dev/null; then
   # https://github.com/addyosmani/agent-skills
   omp plugin marketplace add addyosmani/agent-skills
   omp plugin install agent-skills@addy-agent-skills
+  # https://github.com/LoneExile/omp-superpowers
+  omp plugin install @loneexile/omp-superpowers
   # upgrade all installed plugins
   omp plugin upgrade
 fi

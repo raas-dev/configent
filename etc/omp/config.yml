@@ -34,6 +34,7 @@ disabledProviders:
   - github
   - claude
   - builtin-defaults
+  - omp-plugins
 theme:
   dark: dark-ayu
 task:
