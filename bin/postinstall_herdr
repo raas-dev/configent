@@ -38,20 +38,6 @@ rm -rf "$HOME/.config/herdr/plugins/config"
 ln -sfnv "$config_path/herdr/plugins/config" \
   "$HOME/.config/herdr/plugins/config"
 
-### herdr-mirror ###############################################################
-
-# hosts.toml
-if [ ! -r "$backup_path/.config/herdr-mirror/hosts.toml" ]; then
-  if [ -r "$HOME/.config/herdr-mirror/hosts.toml" ]; then
-    mkdir -p "$backup_path/.config/herdr-mirror"
-    cp -P "$HOME/.config/herdr-mirror/hosts.toml" \
-      "$backup_path/.config/herdr-mirror/hosts.toml"
-  fi
-fi
-mkdir -p "$HOME/.config/herdr-mirror"
-ln -sfnv "$config_path/herdr/plugins/config/mirror/hosts.toml" \
-  "$HOME/.config/herdr-mirror/hosts.toml"
-
 ### herdr-nvim ###############################################################
 
 # hosts.toml
@@ -74,7 +60,6 @@ if command -v herdr >/dev/null; then
   herdr plugin install ChmaraX/herdr-gitview --yes
   herdr plugin install ChmaraX/herdr-nvim --yes
   herdr plugin install jeffarese/herdr-bar --yes
-  herdr plugin install nikok6/herdr-mirror --yes
   herdr plugin install thanhdat77/herdr-navigator --yes
   herdr server reload-config || true
 fi
