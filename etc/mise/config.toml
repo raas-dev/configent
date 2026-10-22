@@ -43,8 +43,7 @@ zoxide = 'latest'
 opencode = { version = '1.18.18', postinstall = "~/.local/configent/bin/postinstall_opencode" }
 pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi" }
 'github:can1357/oh-my-pi' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_omp" }
-# pinned to 1.24.1: 1.24.0 depends on @openchamber/sdk@1.23.1 which was never published to npm (upstream publish bug)
-#'npm:@openchamber/web' = { version = '1.24.1', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
+#'npm:@openchamber/web' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_openchamber" }
 
 # ai coding harnesses
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }
@@ -52,7 +51,6 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'aqua:rtk-ai/rtk' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
-#'github:sortie-ai/sortie' = 'latest'
 'github:vercel-labs/agent-browser' = 'latest'
 'pipx:browser-use' = 'latest'
 'pipx:cloakbrowser' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cloakbrowser" }
