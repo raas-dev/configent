@@ -13,7 +13,7 @@
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.85.0",
   "packages": [
-    "npm:billion-context-pi",
+    "npm:billion-context",
     "npm:pi-context-view",
     "npm:pi-image-view",
     "npm:pi-invisible-continue",

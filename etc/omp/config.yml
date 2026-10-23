@@ -256,3 +256,5 @@ modelPresets:
       advisor: minimax/MiniMax-M3
       web: web/exa
     defaultThinkingLevel: medium
+extensions:
+  - ~/.local/share/mise/installs/npm-billion-context/latest/lib/node_modules/billion-context/dist/agent/omp-native.js

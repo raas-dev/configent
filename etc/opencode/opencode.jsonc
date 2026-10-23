@@ -1,34 +1,42 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "zai-coding-plan": {
-      "npm": "@ai-sdk/anthropic",
+    "minimax-coding-plan": {
+      "models": {
+        "MiniMax-M3": {
+          "name": "MiniMax-M3"
+        }
+      },
       "name": "Occam",
+      "npm": "@ai-sdk/anthropic",
       "options": {
+        "apiKey": "{env:MINIMAX_API_KEY}",
         "baseURL": "https://gw.alkue.dev/v1",
-        "apiKey": "{env:ZAI_API_KEY}",
         "headers": {
           "Authorization": "Bearer {env:OCCAM_API_KEY}"
         }
-      },
-      "models": {
-        "glm-5.3": { "name": "GLM-5.3" },
-        "glm-5.3-flash": { "name": "GLM-5.3-Flash" },
-        "glm-5.2": { "name": "GLM-5.2" }
       }
     },
-    "minimax-coding-plan": {
-      "npm": "@ai-sdk/anthropic",
+    "zai-coding-plan": {
+      "models": {
+        "glm-5.2": {
+          "name": "GLM-5.2"
+        },
+        "glm-5.3": {
+          "name": "GLM-5.3"
+        },
+        "glm-5.3-flash": {
+          "name": "GLM-5.3-Flash"
+        }
+      },
       "name": "Occam",
+      "npm": "@ai-sdk/anthropic",
       "options": {
+        "apiKey": "{env:ZAI_API_KEY}",
         "baseURL": "https://gw.alkue.dev/v1",
-        "apiKey": "{env:MINIMAX_API_KEY}",
         "headers": {
           "Authorization": "Bearer {env:OCCAM_API_KEY}"
         }
-      },
-      "models": {
-        "MiniMax-M3": { "name": "MiniMax-M3" }
       }
     }
   }

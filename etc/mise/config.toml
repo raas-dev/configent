@@ -55,6 +55,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'pipx:browser-use' = 'latest'
 'pipx:cloakbrowser' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cloakbrowser" }
 'github:DeusData/codebase-memory-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cbm" }
+'npm:billion-context' = 'latest'
 'npm:@llamaindex/liteparse' = 'latest'
 #'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }

@@ -73,8 +73,6 @@ if command -v omp >/dev/null; then
   bun() { mise exec bun -- bun "$@"; }
   # marketplace
   omp plugin marketplace update
-  # https://github.com/ranxianglei/billion-context-omp
-  omp plugin install billion-context-omp
   # https://github.com/DietrichGebert/ponytail/
   omp plugin marketplace add DietrichGebert/ponytail
   omp plugin install ponytail@ponytail

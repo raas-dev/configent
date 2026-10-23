@@ -1,18 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
+  "compaction": {
+    "auto": false
+  },
+  "experimental": {
+    "disable_paste_summary": true
+  },
   "mcp": {
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
-      "enabled": true
-    },
     "codebase-memory-mcp": {
-      "type": "local",
       "command": [
         "codebase-memory-mcp"
       ],
-      "enabled": true
+      "enabled": true,
+      "type": "local"
+    },
+    "exa": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp"
     }
   },
   "permission": {
@@ -22,7 +28,7 @@
     }
   },
   "plugin": [
-    "opencode-acp",
+    "billion-context",
     "opencode-lazy-loader",
     "opencode-todo-reminder",
     "caveman-opencode-plugin",
@@ -32,8 +38,5 @@
     "@prevalentware/opencode-goal-plugin",
     "@slkiser/opencode-quota"
   ],
-  "share": "disabled",
-  "experimental": {
-    "disable_paste_summary": true
-  }
+  "share": "disabled"
 }
