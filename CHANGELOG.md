@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.248.0](https://github.com/raas-dev/configent/compare/1.247.10...1.248.0) (2026-10-23)
+
+### Features
+
+* **genoffice:** add pi profile and install cask ([844763c](https://github.com/raas-dev/configent/commit/844763c5f11543d6f58e0990a6384ab81c687cf2))
+
 ## [1.247.10](https://github.com/raas-dev/configent/compare/1.247.9...1.247.10) (2026-10-21)
 
 ### Fixes
