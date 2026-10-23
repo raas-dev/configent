@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.248.1](https://github.com/raas-dev/configent/compare/1.248.0...1.248.1) (2026-10-23)
+
+### Fixes
+
+* **billion-context:** add postinstall config symlink hook ([236f8bb](https://github.com/raas-dev/configent/commit/236f8bb4ba31c845224fccb06cd5a7ae61b3872a))
+* **billion-context:** switch to npm billion-context package ([c7e3928](https://github.com/raas-dev/configent/commit/c7e39280443cf4b2d3ba5c0df4be265f1eb6bc60))
+
 ## [1.248.0](https://github.com/raas-dev/configent/compare/1.247.10...1.248.0) (2026-10-23)
 
 ### Features
