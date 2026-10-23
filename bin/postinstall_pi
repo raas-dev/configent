@@ -66,18 +66,6 @@ mkdir -p "$HOME/.pi/agent"
 rm -rf "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
-### billion-context-pi #########################################################
-
-# acp.json
-if [ ! -r "$backup_path/.pi/acp.json" ]; then
-  if [ -r "$HOME/.pi/acp.json" ]; then
-    mkdir -p "$backup_path/.pi"
-    cp -P "$HOME/.pi/acp.json" "$backup_path/.pi/acp.json"
-  fi
-fi
-mkdir -p "$HOME/.pi"
-ln -sfnv "$config_path/pi/acp.json" "$HOME/.pi/acp.json"
-
 ### pi-caveman #################################################################
 
 # pi-caveman reads config from $XDG_CONFIG_HOME/pi/agent when set,

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# configent (https://github.com/raas-dev/configent)
+# One command automated macOS/Linux laptop/VM/container bootstrapper.
+#
+# Copyright(C) 2016- Anssi Syrjäsalo (http://a.syrjasalo.com)
+# Licensed under GNU Lesser General Public License v3 (LGPL-3.0).
+
+### constants ##################################################################
+
+this_path=$(cd "$(dirname "$0")" && pwd)
+backup_path="$this_path/../.backup"
+config_path="$HOME/.config/configent"
+
+### configs ####################################################################
+
+# backup
+if [ ! -r "$backup_path/.config/billion-context/billion-context.json" ]; then
+  if [ -r "$HOME/.config/billion-context/billion-context.json" ] &&
+    [ ! -L "$HOME/.config/billion-context/billion-context.json" ]; then
+    mkdir -p "$backup_path/.config/billion-context"
+    cp -P "$HOME/.config/billion-context/billion-context.json" \
+      "$backup_path/.config/billion-context/billion-context.json"
+  fi
+fi
+
+# symlink
+mkdir -p "$HOME/.config/billion-context"
+ln -sfnv "$config_path/billion-context/billion-context.json" \
+  "$HOME/.config/billion-context/billion-context.json"

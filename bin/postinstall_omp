@@ -39,18 +39,6 @@ for dir in agents commands extensions hooks modules skills themes; do
   ln -sfnv "$config_path/omp/$dir" "$HOME/.omp/agent/$dir"
 done
 
-### billion-context-omp ########################################################
-
-# acp-omp.json
-if [ ! -r "$backup_path/.omp/acp-omp.json" ]; then
-  if [ -r "$HOME/.omp/acp-omp.json" ]; then
-    mkdir -p "$backup_path/.omp"
-    cp -P "$HOME/.omp/acp-omp.json" "$backup_path/.omp/acp-omp.json"
-  fi
-fi
-mkdir -p "$HOME/.omp"
-ln -sfnv "$config_path/omp/acp-omp.json" "$HOME/.omp/acp-omp.json"
-
 ### ~/.agents dir ##############################################################
 
 if [ ! -r "$backup_path/.agents" ]; then
