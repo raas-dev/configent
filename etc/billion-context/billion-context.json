@@ -1,17 +1,17 @@
 {
   "autoUpdate": false,
+  "debug": false,
   "compress": {
-    "emergencyThresholdPercent": "95%",
     "maxContextLimit": "40%",
+    "emergencyThresholdPercent": "95%",
     "nudgeGrowthTokens": 50000,
     "outputHeadroomMaxPct": 0.25
   },
-  "debug": false,
   "modelContextLimit": 150000,
   "pi": {
     "subagents": {
-      "displayUsage": "separate",
-      "enabled": false
+      "enabled": false,
+      "displayUsage": "separate"
     }
   }
 }
