@@ -689,5 +689,6 @@
     "azure-pipelines.yaml"
   ],
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideStatusBar": false
+  "zenMode.hideStatusBar": false,
+  "chat.byokUtilityModelDefault": "mainAgent"
 }

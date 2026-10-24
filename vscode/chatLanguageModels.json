@@ -1,7 +1,7 @@
 [
-  {
-    "apiKey": "${input:chat.lm.secret.6fbc33fe}",
-    "name": "Z.AI GLM",
-    "vendor": "zai"
-  }
+	{
+		"name": "Z.AI",
+		"vendor": "zai",
+		"apiKey": "${input:chat.lm.secret.37291266}"
+	}
 ]
