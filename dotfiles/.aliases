@@ -494,6 +494,7 @@ venv() {
 
 ### AI #########################################################################
 
+# oh-my-pi
 ai() {
   local tools="read,bash,grep,glob,web_search,ask"
   [ -n "$1" ] && tools="${tools%,ask}"  # ask unavailable in --print mode
@@ -519,6 +520,7 @@ ai() {
   omp "${args[@]}" 2> >(grep -v '^Working\.\.\.$' >&2)
 }
 
+# pi
 agent() {
   if [ -n "$1" ]; then
     local profile="$1"
@@ -526,9 +528,10 @@ agent() {
   else
     local profile="computer-use"
   fi
-  oc exec "$profile" -- opencode "$*"
+  pic exec "$profile" -- pi "$*"
 }
 
+# herdr
 c() {
   local target="${PWD}"
   if (( $# > 0 )) && [[ "$1" != -* ]]; then
