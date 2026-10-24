@@ -47,6 +47,7 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 
 # ai coding harnesses
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }
+hunk = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_hunk" }
 nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
 'aqua:rtk-ai/rtk' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
