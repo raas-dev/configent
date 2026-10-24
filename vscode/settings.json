@@ -546,7 +546,7 @@
       "path": "herdr"
     }
   },
-  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.integrated.rightClickBehavior": "nothing",
   "terminal.integrated.scrollback": 5000,
   "terminal.integrated.shellIntegration.decorationsEnabled": "gutter",
   "terminal.integrated.shellIntegration.history": 1000,
