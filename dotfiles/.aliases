@@ -566,6 +566,10 @@ c() {
   fi
 }
 
+alias hstart='herdr plugin action invoke devswha.ovis.start'
+alias hstatus='herdr plugin action invoke devswha.ovis.status'
+alias hstop='herdr plugin action invoke devswha.ovis.stop '
+
 ### Utilities ##################################################################
 
 # More inclusive ripgrep, see alias `s`
