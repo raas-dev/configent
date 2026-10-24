@@ -572,6 +572,7 @@ c() {
 alias hstart='herdr plugin action invoke devswha.ovis.start'
 alias hstatus='herdr plugin action invoke devswha.ovis.status'
 alias hstop='herdr plugin action invoke devswha.ovis.stop '
+alias hopen='open http://127.0.0.1:7317'
 
 ### Utilities ##################################################################
 
