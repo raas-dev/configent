@@ -180,13 +180,21 @@ defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
-# Show item info near icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo false" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+# Show item info (e.g. free space) near icons on the desktop and in icon views
+# Uses export/import so PlistBuddy edits go through cfprefsd instead of
+# racing its cache with a direct plist write
+_FINDER_PLIST=$(mktemp)
+defaults export com.apple.finder "${_FINDER_PLIST}"
+for _view in DesktopViewSettings FK_StandardViewSettings StandardViewSettings; do
+  /usr/libexec/PlistBuddy -c "Set :${_view}:IconViewSettings:showItemInfo true" "${_FINDER_PLIST}" 2>/dev/null ||
+    /usr/libexec/PlistBuddy -c "Add :${_view}:IconViewSettings:showItemInfo bool true" "${_FINDER_PLIST}"
+done
 
-# Show item info to the right of the icons on the desktop
-/usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom true" ~/Library/Preferences/com.apple.finder.plist
+# Show icon labels below the icons on the desktop
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom true" "${_FINDER_PLIST}" 2>/dev/null ||
+  /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:labelOnBottom bool true" "${_FINDER_PLIST}"
+defaults import com.apple.finder "${_FINDER_PLIST}"
+rm -f "${_FINDER_PLIST}"
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy none" ~/Library/Preferences/com.apple.finder.plist
