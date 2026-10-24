@@ -132,7 +132,10 @@ fi
 
 command -v carapace >/dev/null && eval "$(carapace _carapace zsh)"
 command -v atuin >/dev/null && eval "$(atuin init zsh)"
-command -v mcat >/dev/null && eval "$(mcat --generate zsh)"
+# mcat queries/reads the tty. Under topgrade's `zsh -i -c` (antidote step) stdin is the inherited
+# terminal, so the [[ -t 0 ]] guard alone passes and mcat hangs the step. ZSH_EXECUTION_STRING is
+# set exactly when zsh runs a -c string: skip mcat then; normal interactive shells still load it.
+command -v mcat >/dev/null && [[ -t 0 ]] && [[ -z "$ZSH_EXECUTION_STRING" ]] && eval "$(mcat --generate zsh)"
 command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
 ### Load other configs #########################################################
