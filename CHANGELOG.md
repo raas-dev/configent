@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.0](https://github.com/raas-dev/configent/compare/1.248.1...1.249.0) (2026-10-24)
+
+### Features
+
+* **herdr:** add hunk-diff plugin and keybindings ([1b69ee8](https://github.com/raas-dev/configent/commit/1b69ee86dbc2728662e12686e7110ece73d9f4bb))
+* **hunk:** add hunk config, postinstall, and mise entry ([5137cc6](https://github.com/raas-dev/configent/commit/5137cc6e40fa675bbb36fc915446f2a2d60ad94f))
+
+### Fixes
+
+* **postinstall:** correct caveman backup path typo ([eec838a](https://github.com/raas-dev/configent/commit/eec838af359b3b45fab2af5e46780d971c694027))
+
 ## [1.248.1](https://github.com/raas-dev/configent/compare/1.248.0...1.248.1) (2026-10-23)
 
 ### Fixes
