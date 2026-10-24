@@ -243,13 +243,6 @@ scrollback_limit_bytes = 10000000
 
 ### plugins ####################################################################
 
-# herdr-navigator
-[[keys.command]]
-key = "prefix+t"
-type = "plugin_action"
-command = "herdr-navigator.open"
-description = "jump to anything"
-
 # herdr-bar
 [[keys.command]]
 key = "prefix+p"
