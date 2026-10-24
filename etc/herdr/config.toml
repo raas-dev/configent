@@ -243,13 +243,6 @@ scrollback_limit_bytes = 10000000
 
 ### plugins ####################################################################
 
-# herdr-bar
-[[keys.command]]
-key = "prefix+p"
-type = "plugin_action"
-command = "herdr-bar.open"
-description = "command bar"
-
 # herdr-nvim
 [[keys.command]]
 key = "prefix+o"
@@ -257,15 +250,34 @@ type = "plugin_action"
 command = "chmarax.herdr-nvim.pick-file"
 description = "open file from agent output"
 
-# herdr-gitview
+# herdr-bar
 [[keys.command]]
-key = "prefix+e"
+key = "prefix+p"
 type = "plugin_action"
-command = "chmarax.gitview.toggle-tab"
-description = "git view tab"
+command = "herdr-bar.open"
+description = "command bar"
+
+# herdr-hunk-diff
+[[keys.command]]
+key = "prefix+shift+h"
+type = "plugin_action"
+command = "jhochenbaum.hunkdiff.review"
+description = "hunk: review changes"
 
 [[keys.command]]
-key = "prefix+shift+e"
+key = "prefix+shift+s"
 type = "plugin_action"
-command = "chmarax.gitview.toggle"
-description = "git view sidebar"
+command = "jhochenbaum.hunkdiff.send-review"
+description = "hunk: send review to agent"
+
+[[keys.command]]
+key = "prefix+shift+c"
+type = "plugin_action"
+command = "jhochenbaum.hunkdiff.review:commit"
+description = "hunk: review the last commit"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "jhochenbaum.hunkdiff.review:staged"
+description = "hunk: review staged changes"
