@@ -295,7 +295,7 @@ command = "herdr-tsk.quick-capture"
 
 # herdr-workflows
 [[keys.command]]
-key = "prefix+shift+r"
+key = "prefix+shift+e"
 type = "plugin_action"
 command = "herdr-workflows.launch"
 description = "pick and run a workflow"
