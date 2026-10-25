@@ -220,10 +220,6 @@ path_append "$HOME/.azure/bin"
 
 path_append "$HOME/.krew/bin"
 
-### herdr-projects ###########################################################
-
-path_append "$HOME/.herdr-projects/data/bin"
-
 ### UTM ########################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then

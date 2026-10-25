@@ -282,9 +282,13 @@ type = "plugin_action"
 command = "jhochenbaum.hunkdiff.review:staged"
 description = "hunk: review staged changes"
 
-# herdr-projects
+# herdr-tsk
+[[keys.command]]
+key = "prefix+t"
+type = "plugin_action"
+command = "herdr-tsk.open-board"
+
 [[keys.command]]
 key = "prefix+a"
 type = "plugin_action"
-command = "herdr-projects.open"
-description = "projects: open work board"
+command = "herdr-tsk.quick-capture"
