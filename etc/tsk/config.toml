@@ -212,11 +212,23 @@
 # Agent profiles (added for task assignment)
 # =============================================================================
 
+[agent.omp]
+command = ["omp"]
+
+[agent.omp-minimax]
+command = ["omp", "--model", "minimax/MiniMax-M3", "--thinking", "medium"]
+
+[agent.omp-zai]
+command = ["omp", "--model", "zai/glm-5.3", "--thinking", "low"]
+
 [agent.pi]
 command = ["pi"]
 
-[agent.omp]
-command = ["omp"]
+[agent.pi-minimax]
+command = ["pi", "--model", "minimax/MiniMax-M3", "--thinking", "medium"]
+
+[agent.pi-zai]
+command = ["pi", "--model", "zai/glm-5.3", "--thinking", "low"]
 
 [agent.opencode]
 command = ["opencode"]
