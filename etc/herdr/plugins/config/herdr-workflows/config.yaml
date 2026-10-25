@@ -1,8 +1,20 @@
 profiles:
   omp:
     kind: omp
+  omp-minimax:
+    kind: omp
+    args: ["--model", "minimax/MiniMax-M3", "--thinking", "medium"]
+  omp-zai:
+    kind: omp
+    args: ["--model", "zai/glm-5.3", "--thinking", "low"]
   pi:
     kind: pi
+  pi-minimax:
+    kind: pi
+    args: ["--model", "minimax/MiniMax-M3", "--thinking", "medium"]
+  pi-zai:
+    kind: pi
+    args: ["--model", "zai/glm-5.3", "--thinking", "low"]
   opencode:
     kind: opencode
 default_profile: omp
