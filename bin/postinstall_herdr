@@ -52,17 +52,6 @@ mkdir -p "$HOME/.config/herdr-nvim"
 ln -sfnv "$config_path/herdr/plugins/config/chmarax.herdr-nvim/config.toml" \
   "$HOME/.config/herdr-nvim/config.toml"
 
-### herdr-projects #############################################################
-
-# symlink the whole settings dir, not the file: herdr-projects rewrites
-# config.json atomically (temp file + rename), which would replace a
-# file-level symlink with a regular file
-if [ ! -L "$HOME/.herdr-projects/settings" ]; then
-  rm -rf "$HOME/.herdr-projects/settings"
-fi
-ln -sfnv "$config_path/herdr/plugins/config/herdr-projects" \
-  "$HOME/.herdr-projects/settings"
-
 ### plugins ####################################################################
 
 if command -v herdr >/dev/null; then
