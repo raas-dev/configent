@@ -281,3 +281,10 @@ key = "prefix+shift+a"
 type = "plugin_action"
 command = "jhochenbaum.hunkdiff.review:staged"
 description = "hunk: review staged changes"
+
+# herdr-projects
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "herdr-projects.open"
+description = "projects: open work board"
