@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.2](https://github.com/raas-dev/configent/compare/1.249.1...1.249.2) (2026-10-25)
+
+### Fixes
+
+* **herdr:** drop herdr-projects settings symlink and config ([14cf2c0](https://github.com/raas-dev/configent/commit/14cf2c01902d8ee995ad7c94e370633492ec3dfd))
+
 ## [1.249.1](https://github.com/raas-dev/configent/compare/1.249.0...1.249.1) (2026-10-25)
 
 ### Fixes
