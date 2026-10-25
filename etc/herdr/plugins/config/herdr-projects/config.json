@@ -1,0 +1,21 @@
+{
+  "worker": {
+    "agent": "pi"
+  },
+  "coordinator": {
+    "agent": "pi"
+  },
+  "watcher": {
+    "agent": "pi"
+  },
+  "reviewer": {
+    "agent": "pi"
+  },
+  "repos": {
+    "configent": {
+      "repo": {
+        "key": "TASK"
+      }
+    }
+  }
+}

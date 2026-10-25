@@ -220,15 +220,15 @@ path_append "$HOME/.azure/bin"
 
 path_append "$HOME/.krew/bin"
 
+### herdr-projects ###########################################################
+
+path_append "$HOME/.herdr-projects/data/bin"
+
 ### UTM ########################################################################
 
 if [ "$(uname -s)" = 'Darwin' ]; then
   path_append "$HOME/Applications/UTM.app/Contents/MacOS"
 fi
-
-### herdr-projects ###########################################################
-
-path_append "$HOME/.herdr-projects/data/bin"
 
 ### local bin ##################################################################
 

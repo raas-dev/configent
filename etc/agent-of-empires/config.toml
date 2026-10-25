@@ -106,7 +106,7 @@ used_new_from_selection = false
 
 [app_state.web_ui_state]
 aoe-acp-last-tool = "opencode"
-aoe-last-browse-dir = "/Users/asyrjasalo"
+aoe-last-browse-dir = "~"
 aoe-repo-collapsed-__scratch__ = "1"
 aoe-web-settings = '{"mobileFontSize":8,"desktopFontSize":13,"autoOpenKeyboard":true,"persistentTerminals":true,"maxPersistentTerminals":10,"diffViewMode":"tree","diffViewLayout":"split","collapsedDiffDirs":[]}'
 aoe-welcome-seen = "1"
