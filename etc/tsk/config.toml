@@ -1,0 +1,222 @@
+# tsk configuration
+#
+# tsk writes this file once and never updates it. Every setting, including
+# ones added in later versions, is listed at
+# https://gettsk.sh/docs/storage/#configuration
+#
+# Every setting below is commented out: remove the leading # to use one.
+# An unknown key or a bad value makes that table an error: tsk does not use
+# it and says why, on the board's status row or where the setting is used.
+# tsk ignores top-level keys and tables it does not know.
+
+# =============================================================================
+# Agent profiles
+# =============================================================================
+
+# Agent profiles let you assign a task to an agent (`@` or `!a name`).
+# In Herdr, starting an assigned project task (ctrl+s) dispatches it: tsk
+# creates a git worktree for the task, opens a Herdr workspace there, and runs
+# the profile's command. Outside Herdr, or on a desk task, a start only sets
+# the status.
+#
+# Any agent that runs in a terminal works, including ones not listed here.
+# A profile needs only:
+#
+#   [agent.<name>]                     the profile's name
+#   command = ["program", "arg", ...]  the program and its arguments
+#
+# A name is lowercase letters, digits, - and ., up to 32 characters, and
+# starts with a letter or digit. Quote a name with dots: [agent."a.b"].
+#
+# tsk adds the prompt as the LAST argument, so the agent must accept its first
+# message as a trailing argument (`claude "…"`, `pi "…"`, `codex "…"`).
+#
+# Optional:
+#   prompt = "…"         replaces the default prompt below
+#   prompt_append = "…"  adds to the end of the default prompt; setting it
+#                        together with `prompt` is a config error
+#   [agent.<name>.env]   extra environment variables, as strings
+#   KEY = "value"
+#
+# Placeholders, usable in `command`, `prompt`, and `prompt_append`:
+#   {number}    task number, e.g. 12
+#   {title}     task title
+#   {notes}     task notes
+#   {steps}     task steps, one per line as [ ] or [x]
+#   {worktree}  path of the task's worktree
+#   {branch}    the task's branch
+#   {base}      the branch the work starts from, e.g. main
+#   {on}        who the agent hands reviews and blocks to: the project's
+#               `review_on`, or `you`
+
+# =============================================================================
+# The default prompt, used when a profile has no `prompt`:
+#
+#   You were dispatched to T{number} ({title}) in worktree {worktree} on
+#   branch {branch}, based on {base}.
+#
+#   1. Run `tsk guide`, then `tsk list {number} --json`. The task notes are
+#      your brief.
+#   2. Read the repo's agent instructions (AGENTS.md or CLAUDE.md) if present.
+#   3. Work only on {branch}. Run the project's checks before saying you are
+#      done.
+#   4. Push and open a pull request into {base}. Never merge it.
+#   5. Set the task to review with what you did and what to check:
+#      `tsk status {number} review --on {on} --done "…" --check "…"`, one
+#      `--check` per thing to verify, adding `--next` for what comes after.
+#      When you need a decision, block it with your question: `tsk status
+#      {number} blocked --on {on} --why "…"`, adding `--needs` and one
+#      `--option` per choice, then stop. If your notes name someone else to
+#      hand it to, use that name instead of {on}.
+#   6. On a relaunch, first read whichever record closed last (`closed_at`)
+#      in `tsk list {number} --json`: the `replies` of the last `past_blocks`
+#      entry, or the `feedback` and failed `checks` of the last `past_reviews`
+#      entry when it was `sent_back`.
+#   7. A message `[tsk T{number} sent back] …` is review feedback, with any
+#      failed checks: address it, then set review again.
+#   8. Never set the task to done; the person who reviews it does.
+# =============================================================================
+
+# `tsk dispatch T12 --show-prompt` shows exactly what an agent gets.
+
+# =============================================================================
+# Examples using the default prompt
+# =============================================================================
+
+# Flags follow the program, e.g. a model: ["codex", "--model", "<model>"].
+
+# [agent.opus]
+# command = ["claude", "--model", "claude-opus-5-5"]
+
+# [agent.codex]
+# command = ["codex"]
+
+# `env` sets variables for that agent only, here to mark its commits as the
+# agent's. Do not put API keys here: this file is plain text.
+# [agent.builder]
+# command = ["pi", "--model", "xai/grok-4.7", "--thinking", "high"]
+# [agent.builder.env]
+# GIT_AUTHOR_NAME = "builder (via tsk)"
+# GIT_COMMITTER_NAME = "builder (via tsk)"
+
+# =============================================================================
+# Examples with their own prompt
+# =============================================================================
+
+# A quick fixer for small tasks, with the task text inlined.
+# [agent.grok]
+# command = ["grok"]
+# prompt = """
+# Fix T{number}: {title}
+#
+# {notes}
+#
+# {steps}
+#
+# Keep the change small, commit on {branch}, open a pull request into {base},
+# then set the task to review with `tsk status {number} review --on {on}`.
+# """
+
+# =============================================================================
+# Adding to the default prompt
+# =============================================================================
+
+# `prompt_append` keeps the default prompt and adds your own lines after it.
+# [agent.claude-reviewed]
+# command = ["claude"]
+# prompt_append = "Before review, run the review checklist in CONTRIBUTING.md."
+
+# =============================================================================
+# On Windows (preview)
+# =============================================================================
+
+# tsk starts the agent through Windows PowerShell, so `command` may name an
+# .exe or the .ps1 shim npm installs (pi, codex). Write Windows paths as
+# literal strings ('...') so their backslashes stay as typed.
+# [agent.claude-win]
+# command = ['C:\Users\you\.local\bin\claude.exe']
+
+# =============================================================================
+# Project settings
+# =============================================================================
+
+# Settings for one project, keyed by its repository path (`~` is your home
+# folder). They live only in this file, never in the repository. Desk tasks
+# never use them.
+#   review_on      who agents hand reviews and blocks to, the {on} value:
+#                  `you` (the default), an agent profile's name, or any
+#                  other name. A task handed to anyone but you stays out of
+#                  NEEDS YOU until someone hands it on, e.g.
+#                  `tsk edit T12 --on you`.
+#   prompt_append  added after the prompt, before the profile's own
+#                  `prompt_append`
+# [project."~/code/my-app"]
+# review_on = "coordinator"
+# prompt_append = "Run `make check` before review."
+
+# =============================================================================
+# Global config
+# =============================================================================
+
+# `m` on the cleanup card (or `tsk status T12 done --merge`) merges the task's
+# open pull request with the GitHub CLI (`gh`), then marks the task done and
+# cleans up.
+#   method  "merge" (the default), "squash", or "rebase"
+# [merge]
+# method = "merge"
+
+# The group and sort a fresh board starts from (`g` and `s` change them for
+# the session only). `group` and `sort` set the desk; `project_group` and
+# `project_sort` set every project board. `messages` shows or hides the agent
+# message lines under board rows (`z` toggles them for the session). `me` is
+# the name the board shows for you, such as `@sam` on a task assigned to you.
+#   group          "none" (the default), "project", "thread", or "assignee"
+#   sort           "recent" (the default), "project", "thread", "title", or
+#                  "assignee"
+#   project_group  "none" (the default), "thread", or "assignee"
+#   project_sort   "recent" (the default), "thread", "title", or "assignee"
+#   messages       "shown" (the default) or "hidden"
+#   me             `you` by default; a name of lowercase letters, digits, -
+#                  and ., up to 32 characters, starting with a letter or
+#                  digit, and not an agent profile's name
+# The values below are the defaults, except `me`: uncommenting the block
+# changes only the name the board shows for you.
+# [board]
+# group = "none"
+# sort = "recent"
+# project_group = "none"
+# project_sort = "recent"
+# messages = "shown"
+# me = "sam"
+
+# =============================================================================
+# Backups
+# =============================================================================
+
+# Backups copy tsk.json and this file (without `env` values) to a git
+# repository, using your own `git` and its credentials. `tsk backup setup`
+# makes a private GitHub repository with `gh`; `tsk backup add <git-url>` adds
+# any other. Both write an entry like the one below. `tsk backup list` shows
+# how each went, and `tsk restore` puts a version back. Backups hold your task
+# notes: keep the repository private.
+#   kind   optional; "git" is the only kind
+#   url    the repository to push to (required)
+#   every  "save" (the default): after every save; "daily": on the first
+#          save or full board open 24 hours after the last backup
+# [[backup]]
+# kind = "git"
+# url = "git@github.com:you/tsk-backup.git"
+# every = "save"
+
+# =============================================================================
+# Agent profiles (added for task assignment)
+# =============================================================================
+
+[agent.pi]
+command = ["pi"]
+
+[agent.omp]
+command = ["omp"]
+
+[agent.opencode]
+command = ["opencode"]
