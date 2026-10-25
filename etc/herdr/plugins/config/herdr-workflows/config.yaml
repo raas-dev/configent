@@ -1,0 +1,8 @@
+profiles:
+  omp:
+    kind: omp
+  pi:
+    kind: pi
+  opencode:
+    kind: opencode
+default_profile: omp
