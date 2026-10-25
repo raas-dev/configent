@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.1](https://github.com/raas-dev/configent/compare/1.249.0...1.249.1) (2026-10-25)
+
+### Fixes
+
+* **lima:** resolve configent path without hardcoded user ([aae48eb](https://github.com/raas-dev/configent/commit/aae48eb577b93028c18c4724dc4b3c88706e4cea))
+* **macos:** write finder icon view settings via export ([f8d7ab8](https://github.com/raas-dev/configent/commit/f8d7ab8e67f14d8ec17f8f32da5ab08690df0854))
+* **zshrc:** skip mcat under non-interactive zsh -c ([99749da](https://github.com/raas-dev/configent/commit/99749da70d055df9b0a9d87cf2455d191d9515f8))
+
 ## [1.249.0](https://github.com/raas-dev/configent/compare/1.248.1...1.249.0) (2026-10-24)
 
 ### Features
