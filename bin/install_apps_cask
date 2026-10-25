@@ -50,3 +50,6 @@ brew install --cask --force visual-studio-code
 
 # Keyboard remapper (see macos/ukulele/ for layouts)
 brew install --cask --force ukelele
+
+# Vorssaint menubar toolkit (https://github.com/vorssaint/vorssaint-utils)
+# brew install --cask vorssaint/tap/vorssaint
