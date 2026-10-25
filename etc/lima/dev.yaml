@@ -100,9 +100,19 @@ provision:
       #!/bin/sh
       [ -f /etc/environment ] && set -a && . /etc/environment && set +a
       rm -rf /mnt/lima-limahome/configent
+      # locate the host configent checkout without hardcoding the host
+      # username: 1) its dedicated ~/configent mount, guest-visible at the
+      # host home path (e.g. /Users/<user>/configent on macOS hosts,
+      # /home/<user>/configent on Linux hosts), or 2) as a subdir when the
+      # whole host home is mounted over the guest home instead
+      CONFIGENT_DIR=$(findmnt -rno TARGET | grep '/configent$' | head -n 1)
+      if [ -z "$CONFIGENT_DIR" ] && [ -x "$HOME/configent/install.sh" ]; then
+        CONFIGENT_DIR="$HOME/configent"
+      fi
+      [ -n "$CONFIGENT_DIR" ] || { echo "configent mount not found" >&2; exit 1; }
       SETUP_GUI=true \
       SETUP_DOCKER=false SETUP_PODMAN=false \
-        /Users/asyrjasalo/configent/install.sh &
+        "$CONFIGENT_DIR/install.sh" &
 
 # selkies web UI binds guest loopback
 portForwards:
