@@ -507,6 +507,7 @@ ai() {
   local args=(
     --allow-home
     --no-session
+    --no-lsp
     --tools "$tools"
     --thinking auto
     --model openai/gpt-6.1-sol
