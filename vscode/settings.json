@@ -156,7 +156,7 @@
   "cSpell.showInRuler": false,
   "cSpell.spellCheckOnlyWorkspaceFiles": true,
   "cSpell.suggestionMenuType": "quickFix",
-  "cSpell.unknownWords": "report-common-typos",
+  "cSpell.unknownWords": "report-all",
   "csv-preview.resizeColumns": "all",
   "csv-preview.separator": "[,;]",
   "cursor.chat.ghostTextAtSymbols": false,
