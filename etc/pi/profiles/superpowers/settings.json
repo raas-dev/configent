@@ -5,7 +5,6 @@
     "occam/**"
   ],
   "packages": [
-    "git:github.com/obra/superpowers",
-    "npm:pi-subagents"
+    "git:github.com/obra/superpowers"
   ]
 }

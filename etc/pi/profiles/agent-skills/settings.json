@@ -5,7 +5,6 @@
     "occam/**"
   ],
   "packages": [
-    "npm:pi-addyosmani-skills",
-    "npm:pi-subagents"
+    "npm:pi-addyosmani-skills"
   ]
 }
