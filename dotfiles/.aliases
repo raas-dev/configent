@@ -509,7 +509,7 @@ ai() {
     --no-session
     --tools "$tools"
     --thinking auto
-    --model openai/gpt-6-luna
+    --model openai/gpt-6.1-sol
     --system-prompt "$system_prompt"
   )
   [ -n "$1" ] && args+=(--print "$*")
