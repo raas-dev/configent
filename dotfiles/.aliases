@@ -510,7 +510,7 @@ ai() {
     --no-lsp
     --tools "$tools"
     --thinking auto
-    --model openai/gpt-6.1-sol
+    --model openai/gpt-6.1-terra
     --system-prompt "$system_prompt"
   )
   [ -n "$1" ] && args+=(--print "$*")
