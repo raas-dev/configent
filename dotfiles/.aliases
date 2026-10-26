@@ -506,13 +506,9 @@ ai() {
   # skills are enabled, add --no-skills to disable
   local args=(
     --allow-home
-    --no-extensions
-    --no-lsp
-    --no-rules
     --no-session
-    --no-title
     --tools "$tools"
-    --thinking medium
+    --thinking auto
     --model openai/gpt-6-luna
     --system-prompt "$system_prompt"
   )
