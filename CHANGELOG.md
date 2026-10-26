@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.4](https://github.com/raas-dev/configent/compare/1.249.3...1.249.4) (2026-10-26)
+
+### Fixes
+
+* **herdr:** move workflow launch key to prefix+shift+e ([9b7a564](https://github.com/raas-dev/configent/commit/9b7a564dea14b855704a87df95025df4e0e59594))
+
 ## [1.249.3](https://github.com/raas-dev/configent/compare/1.249.2...1.249.3) (2026-10-25)
 
 ### Fixes
