@@ -74,6 +74,8 @@ if command -v omp >/dev/null; then
   omp plugin install agent-skills@addy-agent-skills
   # https://github.com/LoneExile/omp-superpowers
   omp plugin install @loneexile/omp-superpowers
+  # https://github.com/KristjanPikhof/Pi-YAML-Hooks
+  omp plugin install pi-yaml-hooks
   # upgrade all installed plugins
   omp plugin upgrade
 fi

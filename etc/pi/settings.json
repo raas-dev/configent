@@ -25,6 +25,7 @@
     "npm:pi-tool-repair",
     "npm:pi-tool-compact-display",
     "npm:pi-web-access",
+    "npm:pi-yaml-hooks",
     "npm:@gamaraan/ask-tool",
     "npm:@gamaraan/todos-tool",
     "npm:@hk_net/pi-usage-bars",
