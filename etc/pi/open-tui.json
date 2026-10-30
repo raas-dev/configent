@@ -17,8 +17,10 @@
     "context": true,
     "tokens": true,
     "cost": false,
+    "liveTps": false,
     "extensionStatuses": true,
-    "capitalizeProviderName": false
+    "capitalizeProviderName": false,
+    "nerdIconSpacing": true
   },
   "telemetry": {
     "enabled": true,
