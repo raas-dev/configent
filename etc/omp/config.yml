@@ -131,7 +131,7 @@ shellMinimizer:
   sourceOutlineLevel: default
 setupVersion: 2
 composer:
-  shape: field
+  shape: pi
   tokenRate: false
 tui:
   textSizing: false
