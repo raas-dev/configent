@@ -60,7 +60,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'npm:billion-context' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_billion-context" }
 'npm:@llamaindex/liteparse' = 'latest'
 #'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
-'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
+'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql", postinstall = "graphify install --platform agents" }
 
 # github
 #act = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_act" }
