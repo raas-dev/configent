@@ -4,7 +4,7 @@ import { constants as osConstants } from "node:os";
 
 import type { ExtensionContext } from "@mariozechner/pi-coding-agent";
 
-import { getPiSpawnCommand, type PiSpawnDeps } from "../_shared/pi-spawn.ts";
+import { getPiSpawnCommand, type PiSpawnDeps } from "./pi-spawn.ts";
 import type { SessionPickerResult } from "./picker.ts";
 
 export type StartupAction =
