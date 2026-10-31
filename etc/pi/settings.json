@@ -34,6 +34,7 @@
     "npm:@monotykamary/pi-supervisor",
     "npm:@narumitw/pi-btw",
     "npm:@normful/pi-auto-name",
+    "npm:@zosmaai/pi-llm-wiki",
     "git:github.com/asyrjasalo/omp-headroom",
     "git:github.com/ayghri/i-have-adhd",
     "git:github.com/DietrichGebert/ponytail",
