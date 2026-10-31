@@ -170,5 +170,8 @@
   },
   "extensions": [
     "-builtin:mcp"
-  ]
+  ],
+  "llm-wiki": {
+    "notices": false
+  }
 }
