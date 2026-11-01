@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.5](https://github.com/raas-dev/configent/compare/1.249.4...1.249.5) (2026-11-01)
+
+### Fixes
+
+* **bin:** allow Esc to cancel oc and pic menus ([cda3200](https://github.com/raas-dev/configent/commit/cda3200e67f9d0968d0406307f2110a2ac916e0a))
+
 ## [1.249.4](https://github.com/raas-dev/configent/compare/1.249.3...1.249.4) (2026-10-26)
 
 ### Fixes
