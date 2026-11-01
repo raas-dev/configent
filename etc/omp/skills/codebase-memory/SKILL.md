@@ -22,7 +22,7 @@ Graph tools return precise structural results in ~500 tokens vs ~80K for grep.
 | Text search | `search_code` or Grep |
 
 ## Exploration Workflow
-1. `list_projects` — check if project is indexed
+1. `list_projects` — pick the project whose `root_path` contains your working directory; pass its `name` (or the absolute directory itself) as `project`, never a repo or folder name
 2. `get_graph_schema` — understand node/edge types
 3. `search_graph(label="Function", name_pattern=".*Pattern.*")` — find code
 4. `get_code_snippet(qualified_name="project.path.FuncName")` — read source
@@ -49,17 +49,21 @@ Graph tools return precise structural results in ~500 tokens vs ~80K for grep.
 - High fan-out: `search_graph(min_degree=10, relationship="CALLS", direction="outbound")`
 - High fan-in: `search_graph(min_degree=10, relationship="CALLS", direction="inbound")`
 
-## 15 MCP Tools
+## 17 MCP Tools
 `index_repository`, `index_status`, `list_projects`, `delete_project`,
 `search_graph`, `search_code`, `trace_path`, `detect_changes`,
-`query_graph`, `get_graph_schema`, `get_code_snippet`, `get_architecture`,
-`check_index_coverage`, `manage_adr`, `ingest_traces`
+`query_graph`, `get_graph_schema`, `get_code_snippet`, `get_file_outline`,
+`get_architecture`, `compare_graphs`, `check_index_coverage`, `manage_adr`,
+`ingest_traces`
 
 ## Edge Types
-CALLS, HTTP_CALLS, ASYNC_CALLS, DATA_FLOWS, IMPORTS, DEFINES, DEFINES_METHOD,
-HANDLES, IMPLEMENTS, OVERRIDE, USAGE, CALL_REFERENCE, CONFIGURES, FILE_CHANGES_WITH,
-SIMILAR_TO, SEMANTICALLY_RELATED, CONTAINS_FILE, CONTAINS_FOLDER,
-CONTAINS_PACKAGE
+CALLS, HTTP_CALLS, ASYNC_CALLS, SPAWNS, DATA_FLOWS, IMPORTS, DEFINES, DEFINES_METHOD,
+HANDLES, IMPLEMENTS, OVERRIDE, USAGE, CALL_REFERENCE, CONFIGURES, REFERENCES_FILE,
+MENTIONS (doc comment -> referenced code), FILE_CHANGES_WITH, SIMILAR_TO,
+SEMANTICALLY_RELATED, CONTAINS_FILE, CONTAINS_FOLDER,
+INFRA_MAPS (K8s Service -> selected workloads), DEPENDS_ON (chart / manifest -> dependency),
+DEPLOYS (what puts manifests / charts on a cluster -> what it puts there),
+CONNECTS_TO (workload / compose service -> the Service its environment addresses)
 
 ## Cypher Examples (for query_graph)
 ```
@@ -70,7 +74,7 @@ MATCH (a)-[r:CALLS]->(b) WHERE a.name = 'main' RETURN b.name
 
 ## Gotchas
 1. `search_graph(relationship="HTTP_CALLS")` filters nodes by degree — use `query_graph` with Cypher to see actual edges.
-2. `query_graph` has a 100k row ceiling — add a Cypher `LIMIT` for broad queries or use `search_graph` pagination.
+2. `query_graph` caps at 99,998 visible rows (default 200) — add a Cypher `LIMIT` for broad queries or use `search_graph` pagination.
 3. `trace_path` needs exact names — use `search_graph(name_pattern=...)` first.
 4. `direction="outbound"` misses cross-service callers — use `direction="both"`.
 5. `search_graph` results default to 50 per page — check `has_more` and use `offset`.
