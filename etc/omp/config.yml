@@ -180,7 +180,7 @@ python:
 astGrep:
   enabled: true
 computer:
-  enabled: true
+  enabled: false
   display: all
 generate_image:
   enabled: false
