@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.249.6](https://github.com/raas-dev/configent/compare/1.249.5...1.249.6) (2026-11-01)
+
+### Fixes
+
+* **opencode:** update cbm plugin shape and agent perms ([7d0b556](https://github.com/raas-dev/configent/commit/7d0b556e4c6e5a7a341796a73db475e5df5bfc4d))
+* **pi:** replace cbmem extension with pi-cbm package ([cfb181a](https://github.com/raas-dev/configent/commit/cfb181adfc71d63d9d7cb707ddbdbd1bc0e5ed09))
+* **pi:** replace pi-cbm package with cbmem extension ([1d6ee88](https://github.com/raas-dev/configent/commit/1d6ee8878e6a83d640d9d0ae57efbb07c98d9a2c))
+
 ## [1.249.5](https://github.com/raas-dev/configent/compare/1.249.4...1.249.5) (2026-11-01)
 
 ### Fixes
