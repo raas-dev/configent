@@ -8,7 +8,7 @@
 import { spawn } from 'node:child_process';
 import { Type } from 'typebox';
 
-const BIN = '/Users/asyrjasalo/.local/bin/codebase-memory-mcp';
+const BIN = 'codebase-memory-mcp';
 
 async function call(tool, args, signal) {
   return new Promise((resolve) => {
