@@ -22,7 +22,7 @@ Graph tools return precise structural results in ~500 tokens vs ~80K for grep.
 | Text search | `search_code` or Grep |
 
 ## Exploration Workflow
-1. `list_projects` — check if project is indexed
+1. `list_projects` — pick the project whose `root_path` contains your working directory; pass its `name` (or the absolute directory itself) as `project`, never a repo or folder name
 2. `get_graph_schema` — understand node/edge types
 3. `search_graph(label="Function", name_pattern=".*Pattern.*")` — find code
 4. `get_code_snippet(qualified_name="project.path.FuncName")` — read source
@@ -56,10 +56,13 @@ Graph tools return precise structural results in ~500 tokens vs ~80K for grep.
 `check_index_coverage`, `manage_adr`, `ingest_traces`
 
 ## Edge Types
-CALLS, HTTP_CALLS, ASYNC_CALLS, DATA_FLOWS, IMPORTS, DEFINES, DEFINES_METHOD,
-HANDLES, IMPLEMENTS, OVERRIDE, USAGE, CALL_REFERENCE, CONFIGURES, FILE_CHANGES_WITH,
-SIMILAR_TO, SEMANTICALLY_RELATED, CONTAINS_FILE, CONTAINS_FOLDER,
-CONTAINS_PACKAGE
+CALLS, HTTP_CALLS, ASYNC_CALLS, SPAWNS, DATA_FLOWS, IMPORTS, DEFINES, DEFINES_METHOD,
+HANDLES, IMPLEMENTS, OVERRIDE, USAGE, CALL_REFERENCE, CONFIGURES, REFERENCES_FILE,
+MENTIONS (doc comment -> referenced code), FILE_CHANGES_WITH, SIMILAR_TO,
+SEMANTICALLY_RELATED, CONTAINS_FILE, CONTAINS_FOLDER,
+INFRA_MAPS (K8s Service -> selected workloads), DEPENDS_ON (chart / manifest -> dependency),
+DEPLOYS (what puts manifests / charts on a cluster -> what it puts there),
+CONNECTS_TO (workload / compose service -> the Service its environment addresses)
 
 ## Cypher Examples (for query_graph)
 ```

@@ -17,7 +17,7 @@ config_path="$HOME/.config/configent"
 # files
 for file in auth.json settings.json keybindings.json models.json \
   ask-tool.json i-have-adhd.json headroom.yml pi-btw.json \
-  pi-cbm-settings.json mcp-adapter.json open-tui.json todo.json \
+  mcp-adapter.json open-tui.json todo.json \
   web-search.json zentui.json; do
   if [ ! -r "$backup_path/.pi/agent/$file" ]; then
     if [ -r "$HOME/.pi/agent/$file" ]; then
@@ -92,20 +92,6 @@ else
   mkdir -p "$HOME/.pi/agent"
   ln -sfnv "$caveman" "$HOME/.pi/agent/caveman.json"
 fi
-
-### pi-task ####################################################################
-
-# pi-task-config.json
-if [ ! -r "$backup_path/.config/pi-task/config.json" ]; then
-  if [ -r "$HOME/.config/pi-task/config.json" ]; then
-    mkdir -p "$backup_path/.config/pi-task"
-    cp -P "$HOME/.config/pi-task/config.json" \
-      "$backup_path/.config/pi-task/config.json"
-  fi
-fi
-mkdir -p "$HOME/.config/pi-task"
-ln -sfnv "$config_path/pi/pi-task-config.json" \
-  "$HOME/.config/pi-task/config.json"
 
 ### pi-workflows ###############################################################
 

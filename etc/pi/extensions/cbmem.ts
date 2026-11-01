@@ -6,8 +6,9 @@
 // Target: @earendil-works/pi-coding-agent >= 0.74.0 (verified 0.84.2)
 // ToolDefinition.execute(toolCallId, params, signal, onUpdate, ctx)
 import { spawn } from 'node:child_process';
+import { Type } from 'typebox';
 
-const BIN = 'codebase-memory-mcp';
+const BIN = '/Users/asyrjasalo/.local/bin/codebase-memory-mcp';
 
 async function call(tool, args, signal) {
   return new Promise((resolve) => {
