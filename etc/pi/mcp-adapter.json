@@ -1,22 +1,9 @@
 {
-  "mcpServers": {
-    "minimax-vision": {
-      "command": "uvx",
-      "args": [
-        "minimax-coding-plan-mcp"
-      ],
-      "env": {
-        "MINIMAX_API_KEY": "${MINIMAX_API_KEY}",
-        "MINIMAX_API_HOST": "https://api.minimax.io"
-      },
-      "directTools": ["understand_image"]
-    }
-  },
+  "mcpServers": {},
   "settings": {
     "mcpFooterStatus": "compact",
     "showStatusIcon": false,
     "toolPrefix": "none",
-    "disableProxyTool": true,
     "projectServers": "allow"
   }
 }
