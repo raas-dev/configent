@@ -1,0 +1,8 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "defaultThinkingLevel": "minimal",
+  "enabledModels": [
+    "*minimax-M3*"
+  ]
+}
