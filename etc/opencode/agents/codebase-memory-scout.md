@@ -6,6 +6,8 @@ permission:
   read: allow
   grep: allow
   glob: allow
+  tool_search: allow
+  tool_search_regex: allow
   "codebase-memory-mcp_search_graph": allow
   "codebase-memory-mcp_trace_path": allow
   "codebase-memory-mcp_get_code_snippet": allow

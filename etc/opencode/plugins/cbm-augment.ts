@@ -32,54 +32,61 @@ function augment(payload) {
   });
 }
 
-export const CodebaseMemory = async (ctx) => {
-  const dir = ctx?.directory;
-  const seen = new Set();
-  const lifecycle = () =>
-    augment({ hook_event_name: 'SessionStart', cwd: dir });
-  return {
-    'tool.execute.after': async (input, output) => {
-      if (typeof output?.output !== 'string') return;
-      const pieces = [];
-      const sid = input?.sessionID;
-      if (typeof sid === 'string' && !seen.has(sid)) {
-        seen.add(sid);
-        pieces.push(await lifecycle());
-      }
-      const args = input?.args ?? {};
-      const search =
-        input?.tool === 'grep' ? 'Grep' : input?.tool === 'glob' ? 'Glob' : null;
-      if (search) {
-        pieces.push(await augment({
-          hook_event_name: 'PreToolUse',
-          tool_name: search,
-          tool_input: args,
-          cwd: dir,
-        }));
-      } else if (input?.tool === 'read') {
-        const filePath = args.filePath ?? args.file_path ?? args.path;
-        if (typeof filePath === 'string' && filePath) {
+export default {
+  id: 'codebase-memory-augment',
+  // V2 config loader: requires id + setup|effect; no tool domain yet
+  // at this point, so there is nothing to register here.
+  setup() {},
+  // Server runtime: reads default.server and dispatches the hooks it returns.
+  server: async (ctx) => {
+    const dir = ctx?.directory;
+    const seen = new Set();
+    const lifecycle = () =>
+      augment({ hook_event_name: 'SessionStart', cwd: dir });
+    return {
+      'tool.execute.after': async (input, output) => {
+        if (typeof output?.output !== 'string') return;
+        const pieces = [];
+        const sid = input?.sessionID;
+        if (typeof sid === 'string' && !seen.has(sid)) {
+          seen.add(sid);
+          pieces.push(await lifecycle());
+        }
+        const args = input?.args ?? {};
+        const search =
+          input?.tool === 'grep' ? 'Grep' : input?.tool === 'glob' ? 'Glob' : null;
+        if (search) {
           pieces.push(await augment({
-            hook_event_name: 'PostToolUse',
-            tool_name: 'Read',
-            tool_input: { file_path: filePath },
+            hook_event_name: 'PreToolUse',
+            tool_name: search,
+            tool_input: args,
             cwd: dir,
           }));
+        } else if (input?.tool === 'read') {
+          const filePath = args.filePath ?? args.file_path ?? args.path;
+          if (typeof filePath === 'string' && filePath) {
+            pieces.push(await augment({
+              hook_event_name: 'PostToolUse',
+              tool_name: 'Read',
+              tool_input: { file_path: filePath },
+              cwd: dir,
+            }));
+          }
         }
-      }
-      const extra = pieces.filter(Boolean).join('\n');
-      if (extra) {
-        output.output += '\n' + extra;
-      }
-    },
-    // Documented (experimental) compaction surface: output.context is the
-    // mutable array of context strings for the rebuilt session.
-    'experimental.session.compacting': async (_input, output) => {
-      const note = await lifecycle();
-      if (note && Array.isArray(output?.context)) {
-        output.context.push(note);
-      }
-    },
-  };
+        const extra = pieces.filter(Boolean).join('\n');
+        if (extra) {
+          output.output += '\n' + extra;
+        }
+      },
+      // Documented (experimental) compaction surface: output.context is the
+      // mutable array of context strings for the rebuilt session.
+      'experimental.session.compacting': async (_input, output) => {
+        const note = await lifecycle();
+        if (note && Array.isArray(output?.context)) {
+          output.context.push(note);
+        }
+      },
+    };
+  },
 };
 // codebase-memory-mcp:end
