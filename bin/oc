@@ -524,8 +524,12 @@ show_menu() {
   trap 'tput cnorm; echo' EXIT TERM
 
   echo -e "${BOLD}${header}${NC}"
-  echo -e "${DIM}Use arrow keys to navigate, Enter to select, q to quit${NC}"
+  echo -e "${DIM}Use arrow keys to navigate, Enter to select, q or Esc to quit${NC}"
   echo ""
+
+  # ESC-sequence read timeout; bash < 4 (macOS /bin/bash) lacks fractional read -t
+  local esc_timeout=0.1
+  if ((BASH_VERSINFO[0] < 4)); then esc_timeout=1; fi
 
   local should_redraw=0
   while true; do
@@ -558,9 +562,26 @@ show_menu() {
     # Read single keypress
     read -rsn1 key
 
-    # Handle arrow keys (escape sequences)
+    # Handle arrow keys (escape sequences); a bare Esc with no follow-up bytes cancels.
+    # macOS bash 3.2 has no fractional read timeouts: a pure-bash probe would wait a
+    # full 1s for bare Esc and swallow any fast follow-up keypress, so delegate the
+    # 2-byte follow-up read to zsh (0.15s window) when available.
+    esc_bare=0
     if [[ $key == $'\x1b' ]]; then
-      read -rsn2 key
+      if command -v zsh >/dev/null 2>&1; then
+        if ! key=$(zsh -c 'IFS= read -rs -k 2 -t 0.15 v && printf %s "$v"' </dev/tty); then
+          esc_bare=1
+        fi
+      elif ! read -rsn2 -t "$esc_timeout" key; then
+        esc_bare=1
+      fi
+      if [[ $esc_bare -eq 1 || $key == *$'\x1b'* ]]; then
+        tput cnorm
+        echo ""
+        echo -e "${DIM}Cancelled.${NC}" >&2
+        [[ "${MENU_ECHO_NAME:-}" == true ]] && exit 1
+        exit 0
+      fi
       case $key in
       '[A' | 'OA') # Up arrow (CSI or SS3/application cursor mode)
         ((selected--))
