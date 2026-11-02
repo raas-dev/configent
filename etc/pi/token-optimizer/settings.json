@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "retainDays": 7,
+  "archiveToolOutput": true,
+  "continuity": true
+}

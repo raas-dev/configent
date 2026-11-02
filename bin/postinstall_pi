@@ -63,7 +63,7 @@ if [ ! -r "$backup_path/.pi/agent/AGENTS.md" ]; then
   fi
 fi
 mkdir -p "$HOME/.pi/agent"
-rm -rf "$HOME/.pi/agent/AGENTS.md"
+rm -f "$HOME/.pi/agent/AGENTS.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
 ### pi-caveman #################################################################
@@ -106,6 +106,19 @@ fi
 mkdir -p "$HOME/.pi/workflows"
 ln -sfnv "$config_path/pi/workflows/settings.json" \
   "$HOME/.pi/workflows/settings.json"
+
+### token-optimizer ############################################################
+
+# token-optimizer dir
+if [ ! -r "$backup_path/.pi/agent/token-optimizer" ]; then
+  if [ -r "$HOME/.pi/agent/token-optimizer" ]; then
+    mkdir -p "$backup_path/.pi/agent"
+    cp -RP "$HOME/.pi/agent/token-optimizer" \
+      "$backup_path/.pi/agent/token-optimizer"
+  fi
+fi
+rm -rf "$HOME/.pi/agent/token-optimizer"
+ln -sfnv "$config_path/pi/token-optimizer" "$HOME/.pi/agent/token-optimizer"
 
 ### extensions #################################################################
 
