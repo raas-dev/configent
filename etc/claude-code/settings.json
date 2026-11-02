@@ -8,6 +8,7 @@
     "commit": "",
     "pr": ""
   },
+  "respondToBashCommands": false,
   "permissions": {
     "allow": [
       "Bash",
