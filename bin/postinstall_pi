@@ -107,19 +107,6 @@ mkdir -p "$HOME/.pi/workflows"
 ln -sfnv "$config_path/pi/workflows/settings.json" \
   "$HOME/.pi/workflows/settings.json"
 
-### token-optimizer ############################################################
-
-# token-optimizer dir
-if [ ! -r "$backup_path/.pi/agent/token-optimizer" ]; then
-  if [ -r "$HOME/.pi/agent/token-optimizer" ]; then
-    mkdir -p "$backup_path/.pi/agent"
-    cp -RP "$HOME/.pi/agent/token-optimizer" \
-      "$backup_path/.pi/agent/token-optimizer"
-  fi
-fi
-rm -rf "$HOME/.pi/agent/token-optimizer"
-ln -sfnv "$config_path/pi/token-optimizer" "$HOME/.pi/agent/token-optimizer"
-
 ### extensions #################################################################
 
 # (pre-)install or update extensions (requires npm in PATH)
