@@ -32,7 +32,6 @@
     "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
     "@mumme-it/opencode-caveman",
-    "@prevalentware/opencode-goal-plugin",
     "@slkiser/opencode-quota"
   ],
   "share": "disabled"
