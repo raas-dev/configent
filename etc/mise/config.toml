@@ -49,7 +49,6 @@ pi = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_pi"
 herdr = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_herdr" }
 hunk = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_hunk" }
 nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_nono" }
-'aqua:rtk-ai/rtk' = 'latest'
 'github:asyrjasalo/dynamic-mcp' = 'latest'
 #'github:njbrake/agent-of-empires' = { version = 'latest', bin = 'aoe', postinstall = "~/.local/configent/bin/postinstall_aoe" }
 'github:vercel-labs/agent-browser' = 'latest'
