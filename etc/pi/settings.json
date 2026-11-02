@@ -21,7 +21,6 @@
     "npm:pi-mcp-adapter",
     "npm:pi-open-tui",
     "npm:pi-workspace-history",
-    "npm:pi-rtk-optimizer",
     "npm:pi-tool-repair",
     "npm:pi-tool-compact-display",
     "npm:pi-web-access",
