@@ -59,19 +59,23 @@ if command -v omp >/dev/null; then
   # bun (installing on demand) and puts its shims first in PATH
   omp() { mise exec bun -- omp "$@"; }
   bun() { mise exec bun -- bun "$@"; }
-  # marketplace
+
+  # claude code marketplaces
   omp plugin marketplace update
-  # https://github.com/asyrjasalo/omp-headroom
-  (cd "$HOME/.omp/plugins" && bun remove omp-headroom >/dev/null 2>&1) || true
-  omp plugin install github:asyrjasalo/omp-headroom
-  # https://github.com/DietrichGebert/ponytail
-  omp plugin marketplace add DietrichGebert/ponytail
-  omp plugin install ponytail@ponytail
-  # https://github.com/Baylar55/omp-undo-redo
-  omp plugin install @baylarsadigov/omp-undo-redo
   # https://github.com/addyosmani/agent-skills
   omp plugin marketplace add addyosmani/agent-skills
   omp plugin install agent-skills@addy-agent-skills
+  # https://github.com/DietrichGebert/ponytail
+  omp plugin marketplace add DietrichGebert/ponytail
+  omp plugin install ponytail@ponytail
+
+  # https://github.com/asyrjasalo/omp-headroom
+  (cd "$HOME/.omp/plugins" && bun remove omp-headroom >/dev/null 2>&1) || true
+  omp plugin install github:asyrjasalo/omp-headroom
+  # https://github.com/andrebrait/omp-hooks-plus
+  omp plugin install omp-hooks-plus
+  # https://github.com/Baylar55/omp-undo-redo
+  omp plugin install @baylarsadigov/omp-undo-redo
   # https://github.com/LoneExile/omp-superpowers
   omp plugin install @loneexile/omp-superpowers
   # upgrade all installed plugins
