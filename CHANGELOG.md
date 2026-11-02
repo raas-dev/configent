@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.250.1](https://github.com/raas-dev/configent/compare/1.250.0...1.250.1) (2026-11-02)
+
+### Fixes
+
+* **configent:** drop rtk hooks and mise install ([164312b](https://github.com/raas-dev/configent/commit/164312b2b3084516c805b319b4a4048e21823d8a))
+
 ## [1.250.0](https://github.com/raas-dev/configent/compare/1.249.6...1.250.0) (2026-11-02)
 
 ### Features
