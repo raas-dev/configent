@@ -62,6 +62,9 @@ if command -v omp >/dev/null; then
 
   # claude code marketplaces
   omp plugin marketplace update
+  # https://github.com/alexgreensh/token-optimizer
+  omp plugin marketplace add alexgreensh/token-optimizer
+  omp plugin install token-optimizer@alexgreensh-token-optimizer
   # https://github.com/addyosmani/agent-skills
   omp plugin marketplace add addyosmani/agent-skills
   omp plugin install agent-skills@addy-agent-skills
