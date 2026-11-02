@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.251.0](https://github.com/raas-dev/configent/compare/1.250.1...1.251.0) (2026-11-02)
+
+### Features
+
+* **claude-code:** add token-optimizer SessionEnd hook ([a44dd59](https://github.com/raas-dev/configent/commit/a44dd5969ed5d7230d372b75f5fca0f04390179e))
+* **opencode:** add zai-orchestrator profile ([00c89b1](https://github.com/raas-dev/configent/commit/00c89b1bd33bcb91b77ed952e5394dccdbf79484))
+* **opencode:** switch to opencode v2 and new plugins ([73bf089](https://github.com/raas-dev/configent/commit/73bf0895a0c907548b7d4f7b5b7c20e84dbaeef1))
+
+### Fixes
+
+* **claude-code:** add herdr SessionStart agent state hook ([0bdd25d](https://github.com/raas-dev/configent/commit/0bdd25d8eb3c1be4659a472e433fff742d513dfd))
+* **opencode:** remove goal plugin from opencode and tui ([dfa377b](https://github.com/raas-dev/configent/commit/dfa377b147b683d31e48d8ea038afcb91bbb6e87))
+* **opencode:** use ZHIPU_API_KEY for Z.AI MCP ([7bd2a7f](https://github.com/raas-dev/configent/commit/7bd2a7f0cdac1b33312f1704a31c411abbe403be))
+* **pi:** guard argv[1] for bunfs realpath crash ([9298142](https://github.com/raas-dev/configent/commit/929814281a2c9be06875a13b110e408a83aa7c43))
+
 ## [1.250.1](https://github.com/raas-dev/configent/compare/1.250.0...1.250.1) (2026-11-02)
 
 ### Fixes
