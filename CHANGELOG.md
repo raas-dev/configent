@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.250.0](https://github.com/raas-dev/configent/compare/1.249.6...1.250.0) (2026-11-02)
+
+### Features
+
+* **omp:** reorder plugins and add agent-skills, hooks-plus ([4676552](https://github.com/raas-dev/configent/commit/4676552fe615e7a36ac95611f40e2bf1dfc9de76))
+
+### Fixes
+
+* **aliases:** move grype alias to security section ([0c32faa](https://github.com/raas-dev/configent/commit/0c32faacdba42375816250d7f4537606d87dd38d))
+* **pi:** load mcp approvals via adapter config loader ([93c25a4](https://github.com/raas-dev/configent/commit/93c25a406aa17e58194a1400ce28e2df6390aadb))
+* **security:** move osv-scanner and gitleaks to security group ([08614f8](https://github.com/raas-dev/configent/commit/08614f87967f9f2e48dc5c229e618cc9a92ab03c))
+
 ## [1.249.6](https://github.com/raas-dev/configent/compare/1.249.5...1.249.6) (2026-11-01)
 
 ### Fixes
