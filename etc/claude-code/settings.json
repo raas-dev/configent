@@ -36,7 +36,19 @@
   },
   "enableAllProjectMcpServers": true,
   "includeGitInstructions": false,
-  "hooks": {},
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(ls -d ~/.omp/plugins/cache/plugins/alexgreensh-token-optimizer___token-optimizer___* | sort -V | tail -1)/skills/token-optimizer/scripts/measure.py\" session-end-flush --trigger end",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "ccstatusline",
