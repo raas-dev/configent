@@ -72,7 +72,6 @@ github-cli = 'latest'
 hadolint = 'latest'
 lima = { version = '2.2.0', postinstall = "~/.local/configent/bin/postinstall_lima" }
 #podman = 'latest'
-#trivy = 'latest'
 'github:tokuhirom/dcv' = 'latest'
 
 # cloud
@@ -110,10 +109,14 @@ lazyssh = 'latest'
 # scripting
 #argc = 'latest'
 ast-grep = 'latest'
-gitleaks = 'latest'
 prek = 'latest'
 shellcheck = 'latest'
 shfmt = 'latest'
+
+# security
+gitleaks = 'latest'
+osv-scanner = 'latest'
+#trivy = 'latest'
 
 # powershell
 powershell = { version = "7.6.6", postinstall = "~/.local/configent/bin/postinstall_pwsh" }
