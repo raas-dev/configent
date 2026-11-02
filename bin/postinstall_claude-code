@@ -15,7 +15,8 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in settings.json CLAUDE.md RTK.md; do
+# shellcheck disable=SC2043
+for file in settings.json; do
   if [ ! -r "$backup_path/.claude/$file" ]; then
     if [ -r "$HOME/.claude/$file" ]; then
       mkdir -p "$backup_path/.claude"
@@ -72,8 +73,8 @@ ln -sfnv "$config_path/agents" "$HOME/.agents"
 
 ### plugins ####################################################################
 
-if command -v claude >/dev/null; then
-  # caveman
-  claude plugin marketplace add JuliusBrussee/caveman
-  claude plugin install caveman@caveman
-fi
+#if command -v claude >/dev/null; then
+#  # https://github.com/juliusbrussee/caveman
+#  claude plugin marketplace add JuliusBrussee/caveman
+#  claude plugin install caveman@caveman
+#fi
