@@ -2,13 +2,17 @@
  * mcp-adapter-stfu — never ask for project MCP server approval.
  *
  * On every session start, pre-seeds ~/.pi/agent/mcp-project-approvals.json with
- * approvals for every server pi-mcp-adapter treats as project-scoped, via its own
- * approveProjectServer(). Equivalent to clicking "Allow" for all of them, forever.
- * Sources covered (mirroring pi-mcp-adapter's discovery):
- *   - `.mcp.json` at cwd, project root, and ancestors (shared-project[-ancestor])
- *   - `.pi/mcp.json` at cwd / project root (pi-project)
- *   - `.pi/mcp-adapter.json` at cwd / project root (pi-mcp-project)
- *   - ~/.pi/agent/profiles/<name>/mcp-adapter.json
+ * approvals for every server pi-mcp-adapter treats as project-scoped, via the
+ * adapter's own approveProjectServer(). Equivalent to clicking "Allow" for all
+ * of them, forever.
+ *
+ * Discovery + hashing use the adapter's own loadMcpConfigWithSources() — the
+ * exact loader/merge/translate path its trust gate hashes (isApproved hashes
+ * config.mcpServers[name]). Earlier versions hand-rolled the file discovery and
+ * hashed raw defs; raw `.pi/mcp.json` defs include adapter-ignored keys
+ * (lifecycle, directTools, disableProxyTool) that translatePiMcpServer strips,
+ * so the seeded hash never matched and the TUI re-prompted every session.
+ *
  * Global settings.projectServers="allow" does NOT cover the TUI — pi-mcp-adapter
  * only honors it headless (!ctx.hasUI) — so pre-seeding is required.
  *
@@ -18,34 +22,12 @@
  * Also silences "MCP: direct tools refreshed" notify noise (moved from quiet-startup).
  */
 
-import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync, statSync } from "node:fs";
+import { existsSync, lstatSync, readFileSync, realpathSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 
 const HOME = process.env.HOME ?? "~";
 const ADAPTER_DIR = join(HOME, ".pi/agent/npm/node_modules/pi-mcp-adapter/dist");
 const APPROVALS_FILE = join(HOME, ".pi/agent/mcp-project-approvals.json");
-
-/** Mirror of pi-mcp-adapter's project-root resolution (.git walk-up + worktree pointer). */
-function findProjectRoot(cwd: string): string | undefined {
-	let dir = resolve(cwd);
-	for (;;) {
-		const dotGit = join(dir, ".git");
-		if (existsSync(dotGit)) {
-			const st = statSync(dotGit);
-			if (st.isDirectory()) return dir;
-			try {
-				const pointer = readFileSync(dotGit, "utf8").match(/^gitdir:\s*(.+)$/m)?.[1];
-				if (pointer) return resolve(dirname(resolve(dotGit)), pointer, "..");
-			} catch {
-				/* fallthrough */
-			}
-			return dir;
-		}
-		const parent = dirname(dir);
-		if (parent === dir) return undefined;
-		dir = parent;
-	}
-}
 
 /**
  * Verbatim mirror of pi-mcp-adapter's projectApprovalScope(): the scope approvals are
@@ -62,7 +44,7 @@ function linkedWorktreeRepoScope(dotGit: string): string | undefined {
 		const backLink = readFileSync(join(adminDir, "gitdir"), "utf8").trim();
 		if (realpathSync(resolve(adminDir, backLink)) !== realpathSync(dotGit)) return undefined;
 		const commonDir = dirname(dirname(adminDir));
-		const bare = /^\s*bare\s*=\s*(true|yes|on|1)\s*$/im.test(readFileSync(join(commonDir, "config"), "utf8"));
+		const bare = /^\s*bare\s*=\s*(true|yes|on|1)\s*$/im.test(readFileSync(join(commonDir), "utf8"));
 		return basename(commonDir) === ".git" && !bare ? dirname(commonDir) : `git-dir:${commonDir}`;
 	} catch {
 		return undefined;
@@ -75,17 +57,9 @@ function approvalScope(cwd: string): string {
 		const dotGit = join(dir, ".git");
 		if (existsSync(dotGit)) {
 			const repoScope = linkedWorktreeRepoScope(dotGit);
-		return repoScope ? join(repoScope, relative(dir, root)) : root;
+			return repoScope ? join(repoScope, relative(dir, root)) : root;
 		}
 		if (dirname(dir) === dir) return root;
-	}
-}
-
-function serversOf(file: string): Record<string, unknown> {
-	try {
-		return JSON.parse(readFileSync(file, "utf8"))?.mcpServers ?? {};
-	} catch {
-		return {};
 	}
 }
 
@@ -134,45 +108,22 @@ export default function (pi: import("@mariozechner/pi-coding-agent").ExtensionAP
 			const { approveProjectServer, hashProjectServerDefinition } = await import(
 				/* @vite-ignore */ join(ADAPTER_DIR, "project-server-trust.js")
 			);
+			const { loadMcpConfigWithSources, isPiMcpConfigEnabled, setPiMcpConfigEnabled } = await import(
+				/* @vite-ignore */ join(ADAPTER_DIR, "config.js")
+			);
+			// The adapter's own extension sets this on Pi 0.99+; set it too in case
+			// this handler runs before it does, so .pi/mcp.json discovery matches.
+			if (!isPiMcpConfigEnabled()) setPiMcpConfigEnabled(true);
 
-			const root = findProjectRoot(ctx.cwd); // for source discovery only; may be undefined
 			const scope = approvalScope(ctx.cwd); // approval-store key — NOT the git root
 
-			// Mirror pi-mcp-adapter's merge precedence (later source wins):
-			// profiles/globals < ancestors < `.mcp.json` < `.pi/mcp.json` < `.pi/mcp-adapter.json`.
-			// Final def per name = adapter's effective def → hash matches its approval check.
-			const byName = new Map<string, unknown>();
-			const addServers = (file: string) => {
-				if (!existsSync(file)) return;
-				for (const [name, def] of Object.entries(serversOf(file))) byName.set(name, def);
-			};
-
-			const profilesDir = join(HOME, ".pi/agent/profiles");
-			try {
-				for (const p of readdirSync(profilesDir))
-					addServers(join(profilesDir, p, "mcp-adapter.json"));
-			} catch {
-				/* no profiles dir */
-			}
-
-			// Ancestor configs (adapter's "shared-project-ancestor" / "pi-project-ancestor"); stop at $HOME.
-			const home = resolve(HOME);
-			for (let dir = dirname(resolve(ctx.cwd)); ; dir = dirname(dir)) {
-				addServers(join(dir, ".mcp.json"));
-				addServers(join(dir, ".pi/mcp-adapter.json"));
-				if (dir === home || dirname(dir) === dir) break;
-			}
-
-			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".mcp.json"));
-			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".pi/mcp.json"));
-			for (const base of [ctx.cwd, ...(root ? [root] : [])]) addServers(join(base, ".pi/mcp-adapter.json"));
-
-			let n = 0;
-			for (const [name, def] of byName) {
-				const hash = hashProjectServerDefinition(def as any);
+			const loaded = loadMcpConfigWithSources(null, ctx.cwd);
+			for (const [name, def] of Object.entries(loaded.config.mcpServers)) {
+				// Only project-scoped servers gate on approval in the TUI.
+				if (!loaded.projectServers.has(name)) continue;
+				const hash = hashProjectServerDefinition(def);
 				if (alreadyApproved(scope, name, hash)) continue;
-				await approveProjectServer(ctx.cwd, name, def as any);
-				n++;
+				await approveProjectServer(ctx.cwd, name, def);
 			}
 		} catch (err) {
 			console.error(`mcp-adapter-stfu: ${err instanceof Error ? err.message : err}`);
