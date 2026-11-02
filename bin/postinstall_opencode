@@ -15,7 +15,7 @@ config_path="$HOME/.config/configent"
 ### configs ####################################################################
 
 # files
-for file in opencode.jsonc opencode.json tui.json tui.jsonc herdr-tui-session.js caveman.json todo-reminder.json; do
+for file in opencode.jsonc opencode.json tui.json tui.jsonc herdr-tui-session.js; do
   if [ ! -r "$backup_path/.config/opencode/$file" ]; then
     if [ -r "$HOME/.config/opencode/$file" ]; then
       mkdir -p "$backup_path/.config/opencode"
@@ -87,4 +87,10 @@ if command -v opencode >/dev/null; then
       npm install --prefix "$HOME/.config/opencode" --no-fund --no-audit "$plugin" </dev/null >/dev/null 2>&1 || true
     done
   done
+fi
+
+### opencode v2 ################################################################
+
+if command -v opencode >/dev/null; then
+  opencode service set disabled true
 fi

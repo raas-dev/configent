@@ -10,10 +10,13 @@
       "type": "local",
       "command": [
         "uvx",
+        "--from",
+        "minimax-coding-plan-mcp",
         "--with",
         "mcp<1.10",
-        "minimax-coding-plan-mcp",
-        "-y"
+        "--with",
+        "pydantic<2.9",
+        "minimax-coding-plan-mcp"
       ],
       "environment": {
         "MINIMAX_API_KEY": "{env:MINIMAX_API_KEY}",

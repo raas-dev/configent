@@ -29,13 +29,10 @@
   },
   "plugin": [
     "billion-context",
-    "opencode-lazy-loader",
-    "opencode-todo-reminder",
-    "caveman-opencode-plugin",
     "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
-    "@franlol/opencode-md-table-formatter",
     "@prevalentware/opencode-goal-plugin",
+    "@mumme-it/opencode-caveman",
     "@slkiser/opencode-quota"
   ],
   "share": "disabled"
