@@ -313,6 +313,9 @@ alias gping='mise exec gping -- gping'
 # CLI to generate regular expressions from provided test cases
 alias grex='mise exec grex -- grex'
 
+# Vulnerability scanner for container images and filesystems
+alias grype='mise exec grype -- grype'
+
 # Terminal hex editor
 alias heh='mise exec cargo:heh -- heh'
 
@@ -1154,9 +1157,6 @@ alias yazi='n yazi/ffmpegthumbnailer/unar/jq/poppler/fd/ripgrep/fzf/zoxide/vim'
 alias mysql='n shell/mariadb mysql'
 alias psql='n shell/postgresql psql'
 alias sqlcmd='n sqlcmd'
-
-# appsec
-alias grype='n grype'
 
 # osint
 alias sherlock='n sherlock'
