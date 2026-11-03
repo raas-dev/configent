@@ -20,7 +20,6 @@ pi) FW="$FW,PI_OFFLINE,PI_SKIP_VERSION_CHECK,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 omp) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 opencode) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 claude) FW="$FW,ANTHROPIC_API_KEY,CLAUDE_CODE_OAUTH_TOKEN" ;;
-codex) FW="$FW,OPENAI_API_KEY" ;;
 *) FW="$FW,MINIMAX_API_KEY,ZAI_API_KEY" ;;
 esac
 
@@ -78,8 +77,7 @@ box_sync_agent_auth_into_vm() {
     "${guest_home}/.ssh" \
     "${guest_home}/.pi/agent" \
     "${guest_home}/.omp" \
-    "${guest_home}/.local/share/opencode" \
-    "${guest_home}/.codex" ||
+    "${guest_home}/.local/share/opencode" ||
     return 0
 
   box_cp_auth_into_vm "$HOME/.ssh/known_hosts" \
@@ -102,10 +100,6 @@ box_sync_agent_auth_into_vm() {
   # Claude Code
   box_cp_auth_into_vm "$HOME/.claude.json" \
     "${guest_home}/.claude.json"
-
-  # Codex CLI
-  box_cp_auth_into_vm "$HOME/.codex/auth.json" \
-    "${guest_home}/.codex/auth.json"
 }
 
 # Drop mount entries whose host location no longer exists on disk.
