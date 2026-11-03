@@ -1,0 +1,11 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "*minimax-M3*"
+  ],
+  "packages": [
+    "npm:codecartographer-pi"
+  ]
+}
