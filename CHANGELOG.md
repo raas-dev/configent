@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.251.1](https://github.com/raas-dev/configent/compare/1.251.0...1.251.1) (2026-11-03)
+
+### Fixes
+
+* **box:** drop codex auth sync and nono codex profiles ([26f6cba](https://github.com/raas-dev/configent/commit/26f6cba4b76e60a54119800ada2a40b9de225832))
+* **box:** drop headroom proxy startup for pi and omp ([751eb9f](https://github.com/raas-dev/configent/commit/751eb9f88f6200f0709e4454b557e116a1c4776d))
+* **claude-code:** share agents skills and CLAUDE.md ([9f61a34](https://github.com/raas-dev/configent/commit/9f61a3433cfecafdfce94f1acef2c9a67f3f8efe))
+* **opencode:** move librarian context7 to mcps, tune variants ([e168544](https://github.com/raas-dev/configent/commit/e168544ae3106c7bd9cab6299d9004ee7ff71ac6))
+* **opencode:** remove exa MCP server from configs ([207b562](https://github.com/raas-dev/configent/commit/207b562931bdd42ae299e06ef62876b6fa713a97))
+
 ## [1.251.0](https://github.com/raas-dev/configent/compare/1.250.1...1.251.0) (2026-11-02)
 
 ### Features
