@@ -3,9 +3,6 @@
   "multiplexer": {
     "type": "herdr"
   },
-  "disabled_mcps": [
-    "context7"
-  ],
   "disabled_agents": [
     "observer"
   ],
@@ -46,7 +43,7 @@
       },
       "explorer": {
         "model": "zai-coding-plan/glm-5.3-flash",
-        "variant": "low",
+        "variant": "medium",
         "skills": [],
         "mcps": [
           "codebase-memory-mcp"
@@ -65,11 +62,9 @@
       },
       "librarian": {
         "model": "zai-coding-plan/glm-5.3-flash",
-        "variant": "low",
-        "skills": [
-          "context7"
-        ],
+        "variant": "medium",
         "mcps": [
+          "context7",
           "exa",
           "gh_grep",
           "codebase-memory-mcp"
