@@ -14,11 +14,6 @@
       ],
       "enabled": true,
       "type": "local"
-    },
-    "exa": {
-      "enabled": true,
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp"
     }
   },
   "permission": {
