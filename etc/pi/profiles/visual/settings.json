@@ -1,0 +1,11 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "occam/minimax",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "occam/**"
+  ],
+  "packages": [
+    "git:github.com/nicobailon/visual-explainer"
+  ]
+}
