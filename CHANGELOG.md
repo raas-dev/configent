@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.251.2](https://github.com/raas-dev/configent/compare/1.251.1...1.251.2) (2026-11-04)
+
+### Fixes
+
+* **genoffice:** add zai-vision MCP and occam model filter ([4660f40](https://github.com/raas-dev/configent/commit/4660f402e1320f45b8eacfa3d92b5085493b5126))
+
 ## [1.251.1](https://github.com/raas-dev/configent/compare/1.251.0...1.251.1) (2026-11-03)
 
 ### Fixes
