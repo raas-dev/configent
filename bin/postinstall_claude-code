@@ -62,6 +62,19 @@ mkdir -p "$HOME/.claude"
 rm -rf "$HOME/.claude/CLAUDE.md"
 ln -sfnv "$config_path/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
+# token-optimizer config; freezes hook self-heal throttle so launching omp
+# does not mutate claude-code settings.json (see etc/claude-code/token-optimizer)
+if [ ! -r "$backup_path/.claude/token-optimizer/config.json" ]; then
+  if [ -r "$HOME/.claude/token-optimizer/config.json" ]; then
+    mkdir -p "$backup_path/.claude/token-optimizer"
+    cp -P "$HOME/.claude/token-optimizer/config.json" \
+      "$backup_path/.claude/token-optimizer/config.json"
+  fi
+fi
+mkdir -p "$HOME/.claude/token-optimizer"
+ln -sfnv "$config_path/claude-code/token-optimizer/config.json" \
+  "$HOME/.claude/token-optimizer/config.json"
+
 ### ccstatusline ###############################################################
 
 # ccstatusline binary
