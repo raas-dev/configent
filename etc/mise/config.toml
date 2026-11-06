@@ -158,3 +158,6 @@ npm.package_manager = "npm"
 pipx.uvx = true
 idiomatic_version_file_enable_tools = ["python", "node"]
 yes = true
+
+[settings.self_update]
+auto = true
