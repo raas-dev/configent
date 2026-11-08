@@ -2,7 +2,7 @@
   "autoUpdate": false,
   "debug": false,
   "compress": {
-    "maxContextLimit": "40%",
+    "maxContextLimit": "45%",
     "emergencyThresholdPercent": "95%",
     "nudgeGrowthTokens": 50000,
     "outputHeadroomMaxPct": 0.25
