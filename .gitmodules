@@ -1,3 +1,0 @@
-[submodule "etc/agents"]
-	path = etc/agents
-	url = https://github.com/asyrjasalo/agents.git

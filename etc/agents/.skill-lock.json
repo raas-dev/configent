@@ -1,0 +1,145 @@
+{
+  "version": 3,
+  "skills": {
+    "langfuse": {
+      "source": "langfuse/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/langfuse/skills.git",
+      "skillPath": "skills/langfuse/SKILL.md",
+      "skillFolderHash": "e328647f773572c449699be03e719e95ab151a6f",
+      "installedAt": "2026-08-16T07:36:25.754Z",
+      "updatedAt": "2026-10-24T23:07:36.588Z"
+    },
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "skillFolderHash": "29ba9c12789b1c54ab76ad40e2472e646d141b85",
+      "installedAt": "2026-08-16T07:42:18.831Z",
+      "updatedAt": "2026-11-03T08:11:05.358Z"
+    },
+    "browser-harness": {
+      "source": "browser-use/browser-harness",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/browser-use/browser-harness.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "6e69c7fbe97edded9934e3fb305d9af3536f941f",
+      "installedAt": "2026-08-16T07:42:44.093Z",
+      "updatedAt": "2026-11-03T08:11:07.828Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
+      "installedAt": "2026-08-16T07:42:55.241Z",
+      "updatedAt": "2026-08-16T07:42:55.241Z"
+    },
+    "finnish-humanizer": {
+      "source": "Hakku/finnish-humanizer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Hakku/finnish-humanizer.git",
+      "skillPath": "finnish-humanizer/SKILL.md",
+      "skillFolderHash": "7c8a927e971f1e25d46466c63540d23d3e3e845e",
+      "installedAt": "2026-08-16T07:42:57.957Z",
+      "updatedAt": "2026-08-16T07:42:57.957Z"
+    },
+    "intent-layer": {
+      "source": "crafter-station/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/crafter-station/skills.git",
+      "skillPath": "skills/intent-layer/SKILL.md",
+      "skillFolderHash": "45c317c4e911278ef056b75a74f05848199cf6b8",
+      "pluginName": "stable",
+      "installedAt": "2026-08-16T07:43:18.009Z",
+      "updatedAt": "2026-08-16T07:43:18.009Z"
+    },
+    "liteparse": {
+      "source": "run-llama/llamaparse-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/run-llama/llamaparse-agent-skills.git",
+      "skillPath": "skills/liteparse/SKILL.md",
+      "skillFolderHash": "c8a6189b121b7333a84892d3f43e33dde0bc88cb",
+      "installedAt": "2026-08-16T07:43:20.027Z",
+      "updatedAt": "2026-08-16T07:43:20.027Z"
+    },
+    "humanizer": {
+      "source": "blader/humanizer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/blader/humanizer.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "0ef9fe5bc3572734fd3ae6c448fe00a30cd5dcf0",
+      "pluginName": "humanizer",
+      "installedAt": "2026-09-03T12:03:03.607Z",
+      "updatedAt": "2026-11-02T08:27:57.293Z"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "skillFolderHash": "3df14e2d3a89459bf300614be9247e3ce74798f8",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-10-20T11:54:12.152Z",
+      "updatedAt": "2026-10-20T11:54:12.152Z"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "skillFolderHash": "5fdd6cc53385395441910b026c72d71768e993d4",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-10-20T12:04:04.487Z",
+      "updatedAt": "2026-10-20T12:04:04.487Z"
+    },
+    "herdr-workflow-create": {
+      "source": "aorumbayev/herdr-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aorumbayev/herdr-workflows.git",
+      "skillPath": "skills/herdr-workflow-create/SKILL.md",
+      "skillFolderHash": "37bee6e5044e033344582d0f6508e6395e305fd6",
+      "installedAt": "2026-10-25T17:15:53.038Z",
+      "updatedAt": "2026-11-02T08:28:03.115Z"
+    },
+    "herdr-workflow-upgrade": {
+      "source": "aorumbayev/herdr-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aorumbayev/herdr-workflows.git",
+      "skillPath": "skills/herdr-workflow-upgrade/SKILL.md",
+      "skillFolderHash": "3688525b52b536ac678b0342134e768d4b334c3d",
+      "installedAt": "2026-10-25T17:15:53.040Z",
+      "updatedAt": "2026-10-25T17:15:53.040Z"
+    },
+    "answer-me-with-html": {
+      "source": "QingYunA/answer-me-with-html",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/QingYunA/answer-me-with-html.git",
+      "skillPath": "skills/answer-me-with-html/SKILL.md",
+      "skillFolderHash": "cb237c624c8d78c6e982e730ee93f9f486ea4447",
+      "installedAt": "2026-11-03T21:15:14.662Z",
+      "updatedAt": "2026-11-03T21:15:14.662Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "droid",
+    "fx",
+    "gemini-cli",
+    "github-copilot",
+    "kilo",
+    "kimi-code-cli",
+    "opencode",
+    "pi",
+    "warp",
+    "zed"
+  ]
+}
