@@ -184,7 +184,7 @@
     "{\"source\":\"git:github.com/alexgreensh/token-optimizer\",\"scope\":\"user\"}": "5.13.69",
     "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"user\"}": "0.14.0",
     "{\"source\":\"npm:pi-context-view\",\"scope\":\"user\"}": "0.8.3",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.5",
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.6",
     "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"project\"}": "0.15.0"
   }
 }
