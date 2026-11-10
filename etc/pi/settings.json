@@ -181,9 +181,10 @@
     "{\"source\":\"npm:@hk_net/pi-usage-bars\",\"scope\":\"user\"}": "0.7.1",
     "{\"source\":\"npm:@monotykamary/pi-supervisor\",\"scope\":\"user\"}": "0.5.27",
     "{\"source\":\"npm:@normful/pi-auto-name\",\"scope\":\"user\"}": "2.1.0",
-    "{\"source\":\"git:github.com/alexgreensh/token-optimizer\",\"scope\":\"user\"}": "5.13.68",
+    "{\"source\":\"git:github.com/alexgreensh/token-optimizer\",\"scope\":\"user\"}": "5.13.69",
     "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"user\"}": "0.14.0",
     "{\"source\":\"npm:pi-context-view\",\"scope\":\"user\"}": "0.8.3",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.5"
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.5",
+    "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"project\"}": "0.15.0"
   }
 }
