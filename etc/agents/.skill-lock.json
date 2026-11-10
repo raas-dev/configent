@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "e328647f773572c449699be03e719e95ab151a6f",
+      "skillFolderHash": "42996c667c57b5762367c9e41c033e6039549765",
       "installedAt": "2026-08-16T07:36:25.754Z",
-      "updatedAt": "2026-10-24T23:07:36.588Z"
+      "updatedAt": "2026-11-10T09:18:55.467Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
@@ -24,9 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-harness.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "6e69c7fbe97edded9934e3fb305d9af3536f941f",
+      "skillFolderHash": "65c174a097cbcca483e967f5c4aa3a7b730b797d",
       "installedAt": "2026-08-16T07:42:44.093Z",
-      "updatedAt": "2026-11-03T08:11:07.828Z"
+      "updatedAt": "2026-11-10T09:19:02.074Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -70,10 +70,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/blader/humanizer.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "0ef9fe5bc3572734fd3ae6c448fe00a30cd5dcf0",
+      "skillFolderHash": "b48c832f0f809c1b5658edbb838c2521b72f2413",
       "pluginName": "humanizer",
       "installedAt": "2026-09-03T12:03:03.607Z",
-      "updatedAt": "2026-11-02T08:27:57.293Z"
+      "updatedAt": "2026-11-10T09:19:02.168Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -118,9 +118,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/QingYunA/answer-me-with-html.git",
       "skillPath": "skills/answer-me-with-html/SKILL.md",
-      "skillFolderHash": "cb237c624c8d78c6e982e730ee93f9f486ea4447",
+      "skillFolderHash": "8007aad826a73cd28b6cbcb697cd1459a88b0bf0",
       "installedAt": "2026-11-03T21:15:14.662Z",
-      "updatedAt": "2026-11-03T21:15:14.662Z"
+      "updatedAt": "2026-11-10T09:19:02.904Z"
     }
   },
   "dismissed": {
