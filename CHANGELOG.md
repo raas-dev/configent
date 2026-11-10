@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.251.3](https://github.com/raas-dev/configent/compare/1.251.2...1.251.3) (2026-11-10)
+
+### Fixes
+
+* **token-optimizer:** disable vscode extension check flag ([c531385](https://github.com/raas-dev/configent/commit/c53138555f069b47126707309a4c7ace75966a38))
+
 ## [1.251.2](https://github.com/raas-dev/configent/compare/1.251.1...1.251.2) (2026-11-04)
 
 ### Fixes
