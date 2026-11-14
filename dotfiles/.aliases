@@ -393,9 +393,6 @@ alias mcpjam='npx -y @mcpjam/inspector'
 # Upgrades your package.json dependencies to the latest version
 alias ncu='npx -y npm-check-updates'
 
-# Unofficial oh-my-pi web UI https://github.com/kahme247/ompweb
-alias ompweb='npx -y @kahme247/ompweb'
-
 # Project generator
 alias projen='npx -y projen'
 
