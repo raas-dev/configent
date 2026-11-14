@@ -242,15 +242,6 @@ _bin_precedence
 # dynamic-mcp
 export DYNAMIC_MCP_CONFIG="$HOME/.config/configent/mcp/mcp.json"
 
-# openchamber
-export OPENCHAMBER_OPENCODE_PORT=4096
-
-# opencode
-export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1 # disable ~/.claude/CLAUDE.md
-
-# opencode: token-optimizer
-export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
-
 # pi, omp: token-optimizer
 export TOKEN_OPTIMIZER_PI_HOME="$HOME/.config/configent/token-optimizer"
 
@@ -264,6 +255,18 @@ export PI_SKIP_VERSION_CHECK=1
 
 # pi: ponytail
 export PONYTAIL_STATUS_FORMAT="{label} {mode}"
+
+# omp: billion-context
+export BILLION_CONTEXT_NODE="$HOME/.local/share/mise/shims/node"
+
+# opencode
+export OPENCODE_DISABLE_CLAUDE_CODE_PROMPT=1 # disable ~/.claude/CLAUDE.md
+
+# opencode: token-optimizer
+export TOKEN_OPTIMIZER_DATA_DIR="$HOME/.local/share/token-optimizer"
+
+# openchamber
+export OPENCHAMBER_OPENCODE_PORT=4096
 
 # CloakBrowser
 if command -v cloakbrowser >/dev/null 2>&1; then
