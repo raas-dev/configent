@@ -1,0 +1,17 @@
+{
+  "revision": 77,
+  "settings": {
+    "theme": "dark",
+    "palette": "amber",
+    "darkTheme": "amber",
+    "lightTheme": "gruvbox-light",
+    "sidebarRows": "two",
+    "agentMarks": "color",
+    "restoreReplacedServer": false,
+    "agentNamedGroups": false,
+    "showThinking": false,
+    "showQuickReplies": false,
+    "showUsage": false
+  },
+  "pins": []
+}

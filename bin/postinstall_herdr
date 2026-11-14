@@ -52,6 +52,20 @@ mkdir -p "$HOME/.config/herdr-nvim"
 ln -sfnv "$config_path/herdr/plugins/config/chmarax.herdr-nvim/config.toml" \
   "$HOME/.config/herdr-nvim/config.toml"
 
+### ovis ###############################################################
+
+# preferences.json
+if [ ! -r "$backup_path/.config/ovis/preferences.json" ]; then
+  if [ -r "$HOME/.config/ovis/preferences.json" ]; then
+    mkdir -p "$backup_path/.config/ovis"
+    cp -P "$HOME/.config/ovis/preferences.json" \
+      "$backup_path/.config/ovis/preferences.json"
+  fi
+fi
+mkdir -p "$HOME/.config/ovis"
+ln -sfnv "$config_path/herdr/plugins/config/devswha.ovis/preferences.json" \
+  "$HOME/.config/ovis/preferences.json"
+
 ### plugins ####################################################################
 
 if command -v herdr >/dev/null; then
