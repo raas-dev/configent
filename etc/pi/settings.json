@@ -177,7 +177,7 @@
     "{\"source\":\"npm:pi-open-tui\",\"scope\":\"user\"}": "0.4.6",
     "{\"source\":\"npm:pi-workspace-history\",\"scope\":\"user\"}": "0.5.2",
     "{\"source\":\"npm:pi-tool-compact-display\",\"scope\":\"user\"}": "0.5.2",
-    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
     "{\"source\":\"npm:@hk_net/pi-usage-bars\",\"scope\":\"user\"}": "0.7.1",
     "{\"source\":\"npm:@monotykamary/pi-supervisor\",\"scope\":\"user\"}": "0.5.27",
     "{\"source\":\"npm:@normful/pi-auto-name\",\"scope\":\"user\"}": "2.1.0",
