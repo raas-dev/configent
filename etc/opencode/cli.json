@@ -1,0 +1,48 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "ayu"
+  },
+  "keybinds": {
+    "input.submit": [
+      "return",
+      "kpenter"
+    ]
+  },
+  "scroll": {
+    "speed": 2,
+    "acceleration": false
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "hide",
+    "markdown": "rendered",
+    "verbosity": "low",
+    "new_location": "launch",
+    "permissions": "prompt",
+    "grouping": "auto"
+  },
+  "animations": true,
+  "prompt": {
+    "image_preview": true,
+    "paste": "compact"
+  },
+  "highlights": false,
+  "terminal": {
+    "copy": "select"
+  },
+  "tabs": {
+    "indicators": "status",
+    "layout": "horizontal"
+  },
+  "plugins": [
+    "@prevalentware/opencode-goal-plugin",
+    "@slkiser/opencode-quota@latest",
+    "./herdr-opencode",
+    "./herdr-tui-session.js"
+  ]
+}
