@@ -144,7 +144,7 @@ tui:
 display:
   showTokenUsage: true
   shimmer: classic
-  subagentLivePreview: false
+  subagentLivePreview: true
   pinnedAgents: collapsed
   showTurnTime: true
 terminal:
@@ -191,7 +191,7 @@ speechgen:
 plan:
   enabled: true
 tts:
-  localVoice: af_heart
+  localVoice: harper
 live:
   voice: sol
 showHardwareCursor: true
@@ -212,7 +212,7 @@ cycleOrder:
 ask:
   timeout: 60
 enabledProviders: []
-personality: default
+personality: pragmatic
 find:
   enabled: auto
 title:
