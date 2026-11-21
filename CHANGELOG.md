@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.251.4](https://github.com/raas-dev/configent/compare/1.251.3...1.251.4) (2026-11-21)
+
+### Fixes
+
+* **opencode:** replace tui config with cli.json ([71fdd1f](https://github.com/raas-dev/configent/commit/71fdd1f5491cffce542231340b82d26818b6d021))
+
 ## [1.251.3](https://github.com/raas-dev/configent/compare/1.251.2...1.251.3) (2026-11-10)
 
 ### Fixes
