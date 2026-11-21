@@ -690,5 +690,6 @@
   ],
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "chat.byokUtilityModelDefault": "mainAgent"
+  "chat.byokUtilityModelDefault": "mainAgent",
+  "workbench.browser.searchEngine": "google"
 }
