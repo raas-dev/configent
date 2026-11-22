@@ -96,7 +96,8 @@ commit_rules="COMMIT MESSAGE RULES (must follow):
 - Line 2: blank.
 - Line 3+: optional body (bullets or sentences) for details.
 - Never prefix output with labels like \"Body:\", \"Subject:\", \"Summary:\", or section headings — only the subject line, one blank line, then body text if any.
-- Output plain text only. No markdown, no code fences, no backticks."
+- Output plain text only. No markdown, no code fences, no backticks.
+- Your entire output is the commit message and nothing else. No commentary, questions, options, or status reports around it (never lines like \"Subject is N characters\", \"Options:\", or \"I did not commit\"). You are not committing anything; a script consumes the message verbatim."
 [ -n "$recent_headlines" ] &&
   context_message="RECENT COMMIT MESSAGE HEADLINES FOR REFERENCE:
 $recent_headlines"
