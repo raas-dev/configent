@@ -57,6 +57,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'github:DeusData/codebase-memory-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cbm" }
 'npm:billion-context' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_billion-context" }
 'npm:@llamaindex/liteparse' = 'latest'
+'npm:@alibaba-group/open-code-review' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_ocr" }
 #'npm:mcporter' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_mcporter" }
 #'pipx:graphifyy' = { version = 'latest', extras = "pdf,office,video,sql" }
 
