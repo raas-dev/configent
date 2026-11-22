@@ -58,7 +58,7 @@ if [ -f "$backup_file" ]; then
   printf "\n"
 
   if [ -z "$NONINTERACTIVE" ]; then
-    printf "%sReuse (y), edit (e), new (n), quit (q) [Y/e/n/q] %s> " "${bold}${cyan}" "$normal"
+    printf "%sReuse (y), edit (e), new (n), quit (q) %s> " "${bold}${cyan}" "$normal"
     trap 'printf "\n"; rm -f "$diff_file"; exit 130' INT
     read -r reuse_choice || {
       printf "\n"
@@ -66,7 +66,6 @@ if [ -f "$backup_file" ]; then
       exit 130
     }
     trap 'rm -f "$diff_file"' EXIT INT TERM
-    [ -z "$reuse_choice" ] && reuse_choice=y
     case "$reuse_choice" in
     [yY])
       commit_message="$(cat "$backup_file")"
@@ -76,7 +75,9 @@ if [ -f "$backup_file" ]; then
       commit_message="$(cat "$backup_file")"
       choice=e
       ;;
-    [qQ])
+    [nN])
+      ;;
+    *)
       printf "Aborted.\n"
       exit 1
       ;;
@@ -350,14 +351,13 @@ if [ -z "$choice" ]; then
 fi
 
 if [ -z "$NONINTERACTIVE" ] && [ -z "$choice" ]; then
-  printf "\n%sCommit (y), edit (e), quit (q) [Y/e/q] %s> " "${bold}${cyan}" "$normal"
+  printf "\n%sCommit (y), edit (e), quit (q) %s> " "${bold}${cyan}" "$normal"
   trap 'printf "\n"; exit 130' INT
   read -r choice || {
     printf "\n"
     exit 130
   }
   trap - INT
-  [ -z "$choice" ] && choice=y
 elif [ -n "$NONINTERACTIVE" ]; then
   choice=y
 fi
