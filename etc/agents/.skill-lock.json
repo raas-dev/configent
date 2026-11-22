@@ -15,18 +15,20 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "29ba9c12789b1c54ab76ad40e2472e646d141b85",
+      "skillFolderHash": "d75a393c9a371295c6d6be46c34938e76ef21184",
       "installedAt": "2026-08-16T07:42:18.831Z",
-      "updatedAt": "2026-11-03T08:11:05.358Z"
+      "updatedAt": "2026-11-22T09:23:11.016Z",
+      "commit": "d2dfc782ccdd79d25a9b4f0acced9321789cecb8"
     },
     "browser-harness": {
       "source": "browser-use/browser-harness",
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-harness.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "65c174a097cbcca483e967f5c4aa3a7b730b797d",
+      "skillFolderHash": "797f2d05e30e58b217ff621a99d302d712dc38da",
       "installedAt": "2026-08-16T07:42:44.093Z",
-      "updatedAt": "2026-11-10T09:19:02.074Z"
+      "updatedAt": "2026-11-22T09:23:12.955Z",
+      "commit": "797f2d05e30e58b217ff621a99d302d712dc38da"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -70,10 +72,11 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/blader/humanizer.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "b48c832f0f809c1b5658edbb838c2521b72f2413",
+      "skillFolderHash": "a32f24407364c74c812b43c15926d638bee1e072",
       "pluginName": "humanizer",
       "installedAt": "2026-09-03T12:03:03.607Z",
-      "updatedAt": "2026-11-10T09:19:02.168Z"
+      "updatedAt": "2026-11-22T09:23:13.041Z",
+      "commit": "a32f24407364c74c812b43c15926d638bee1e072"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -118,9 +121,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/QingYunA/answer-me-with-html.git",
       "skillPath": "skills/answer-me-with-html/SKILL.md",
-      "skillFolderHash": "8007aad826a73cd28b6cbcb697cd1459a88b0bf0",
+      "skillFolderHash": "9cb617862948eb8390dd5a8745656f472f75de8d",
       "installedAt": "2026-11-03T21:15:14.662Z",
-      "updatedAt": "2026-11-10T09:19:02.904Z"
+      "updatedAt": "2026-11-22T09:23:13.135Z",
+      "commit": "997479b6f34c8a5141c61b03f144e821c8f99f2d"
     },
     "open-code-review": {
       "source": "alibaba/open-code-review",

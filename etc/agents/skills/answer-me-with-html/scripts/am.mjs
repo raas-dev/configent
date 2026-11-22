@@ -30,10 +30,10 @@ var init_temml = __esm({
 
 // src/cli.js
 import { parseArgs } from "node:util";
-import { readFileSync as readFileSync10, writeFileSync as writeFileSync8, mkdirSync as mkdirSync6, existsSync as existsSync8, rmSync as rmSync7, statSync as statSync6 } from "node:fs";
+import { readFileSync as readFileSync11, writeFileSync as writeFileSync8, mkdirSync as mkdirSync6, existsSync as existsSync8, rmSync as rmSync7, statSync as statSync7, chmodSync as chmodSync2, openSync as openSync2, closeSync as closeSync2 } from "node:fs";
 
 // src/assets.js
-var VERSION = "0.5.11";
+var VERSION = "0.6.2";
 var BASE_CSS = `/* Answer me with HTML base \u2014 uses theme variables only, never hard-coded colors (theme tokens and decorations: themes/<name>.js). Exception: the var() fallbacks of diagrams (flow / sequence) equal the blueprint light tokens, guarded by a test. */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -122,8 +122,10 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-md li + li { margin-top: 3px; }
 .am-md h3, .am-md h4 { margin: 14px 0 6px; font-size: var(--am-fs-text); }
 .am-md a { color: var(--accent); }
+/* A link inside a component (kv, timeline, tree, ask) sits outside .am-md: give it the same colour, not the browser default (#405). */
+.am-panel a { color: var(--accent); }
 .am-md blockquote { margin: 0 0 8px; padding: 2px 12px; border-inline-start: 3px solid var(--line-2); color: var(--ink-2); }
-.am-md :not(pre) > code { font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
+.am-md :not(pre) > code { overflow-wrap: break-word; font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
 .am-md hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
 .am-md table { width: 100%; border-collapse: collapse; font-size: var(--am-fs-text); }
 .am-md th {
@@ -136,6 +138,8 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
 .am-md tbody tr:nth-child(even) td { background: var(--fill); }
 .am-table-wrap { overflow-x: auto; }
+/* A table short of room (src/runtime/layout-dom.js fitTables) breaks a long word inside its cell rather than hold its column at full width. */
+.am-table-wrap > table.am-table-fit th, .am-table-wrap > table.am-table-fit td, .am-table-wrap > table.am-table-fit :not(pre) > code { overflow-wrap: anywhere; }
 /* Images scale down to the panel and never past 70% of the window height, keeping their shape. */
 .am-md img { max-width: 100%; max-height: 70vh; height: auto; }
 .am-figure { margin: 0; text-align: center; }
@@ -154,6 +158,28 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-ask-opt input { margin: 0; accent-color: var(--accent); position: relative; top: 2px; }
 .am-ask-tag { display: inline-block; font-size: var(--am-fs-label); line-height: 1.5; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 6px; white-space: nowrap; }
 .am-ask-note { display: block; color: var(--ink-2); }
+/* Options with a preview: the block under an option is the card's canvas. A dot grid reads as a drawing surface in every theme. */
+.am-ask-opts { clear: both; }
+.am-ask-card { min-width: 0; }
+.am-ask--cards .am-ask-opts { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); align-items: stretch; }
+.am-ask--cards .am-ask-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--paper); border: 1px solid var(--line-2); border-radius: var(--radius);
+}
+.am-ask--cards .am-ask-opt { padding: 9px 11px; }
+.am-ask-preview {
+  padding: 10px; overflow: hidden; border-top: 1px solid var(--line-2);
+  background-color: var(--fill);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--ink-3) 38%, transparent) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.am-ask--cards .am-ask-preview { flex: 1; cursor: pointer; }
+.am-ask-preview > :first-child { margin-top: 0; }
+.am-ask-preview > :last-child { margin-bottom: 0; }
+/* A diagram keeps the card width, also on a phone, where a panel diagram may scroll instead. */
+.am-ask-preview .am-diagram { overflow: visible; }
+.am-ask-preview .am-diagram > svg { max-width: 100%; height: auto; }
+.am-ask-preview > svg { display: block; max-width: 100%; height: auto; }
 /* Comment box under each panel, and the Reply sheet */
 .am-comment-btn {
   display: flex; flex-shrink: 0; align-self: center; margin-block: 0; margin-inline: auto 6px; color: var(--ink-3); background: transparent;
@@ -268,20 +294,25 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 /* \u2500\u2500 timeline \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
 .am-timeline { list-style: none; margin: 0; padding: 0; }
 .am-timeline--h { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); padding-top: 4px; }
-.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; }
-.am-timeline--h li::before {
-  content: ""; position: absolute; top: calc(var(--am-ln-whenHeight) + 7px); left: 0; right: 0; border-top: var(--bw) solid var(--line);
+/* Every item spans the same four rows (date, dot, title, text) through subgrid, so a date that wraps to two lines moves every dot down
+   together instead of running into its own. The axis is drawn from each dot to both edges of its item; the item clips it, and the first
+   and last items leave out their outer half. Do not make the li a size container: Chrome then ignores subgrid. */
+.am-timeline--h { grid-template-rows: repeat(4, auto); }
+.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; overflow-x: clip; }
+.am-timeline--h .am-tl-dot::before, .am-timeline--h .am-tl-dot::after {
+  content: ""; position: absolute; top: calc(50% - var(--bw) / 2); width: 100vw; border-top: var(--bw) solid var(--line);
 }
-.am-timeline--h li:first-child::before { inset-inline-start: 50%; }
-.am-timeline--h li:last-child::before { inset-inline-end: 50%; }
-.am-tl-when { display: block; font-size: var(--am-fs-heading); font-weight: 500; height: var(--am-ln-whenHeight); }
+.am-timeline--h .am-tl-dot::before { inset-inline-end: calc(100% + var(--bw)); }
+.am-timeline--h .am-tl-dot::after { inset-inline-start: calc(100% + var(--bw)); }
+.am-timeline--h li:first-child .am-tl-dot::before, .am-timeline--h li:last-child .am-tl-dot::after { content: none; }
+.am-tl-when { display: block; font-size: var(--am-fs-heading); font-weight: 500; min-height: var(--am-ln-whenHeight); align-self: end; }
 .am-tl-dot {
   position: relative; display: block; width: 11px; height: 11px; margin: 2px auto 8px;
   border: var(--bw) solid var(--line); border-radius: 50%; background: var(--paper);
 }
 .am-tl-item--hi .am-tl-dot { background: var(--hi-stroke, var(--accent)); border-color: var(--hi-stroke, var(--accent)); }
-.am-tl-title { display: block; font-size: var(--am-fs-code); font-weight: 500; }
-.am-tl-text { display: block; font-size: var(--am-fs-small); color: var(--ink-2); line-height: 1.45; }
+.am-tl-title { display: block; font-size: var(--am-fs-code); font-weight: 500; overflow-wrap: break-word; min-width: 0; }
+.am-tl-text { display: block; font-size: var(--am-fs-small); color: var(--ink-2); line-height: 1.45; overflow-wrap: break-word; min-width: 0; }
 .am-timeline--v li { position: relative; padding: 0 0 14px; padding-inline-start: 22px; }
 .am-timeline--v li::before { content: ""; position: absolute; inset-inline-start: 5px; top: 6px; bottom: -6px; border-inline-start: var(--bw) solid var(--line-2); }
 .am-timeline--v li:last-child::before { display: none; }
@@ -295,9 +326,10 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 .am-tl-wrap { container-type: inline-size; }
 @container (max-width: 560px) {
   .am-timeline--h { display: block; padding-top: 0; }
-  .am-timeline--h li { text-align: start; padding: 0 0 14px; padding-inline-start: 22px; }
-  .am-timeline--h li::before, .am-timeline--h li:first-child::before {
-    top: 6px; bottom: -6px; inset-inline-start: 5px; inset-inline-end: auto; border-top: 0; border-inline-start: var(--bw) solid var(--line-2);
+  .am-timeline--h li { display: block; overflow-x: visible; text-align: start; padding: 0 0 14px; padding-inline-start: 22px; }
+  .am-timeline--h .am-tl-dot::before, .am-timeline--h .am-tl-dot::after { content: none; }
+  .am-timeline--h li::before {
+    content: ""; position: absolute; top: 6px; bottom: -6px; inset-inline-start: 5px; inset-inline-end: auto; border-top: 0; border-inline-start: var(--bw) solid var(--line-2);
   }
   .am-timeline--h li:last-child::before { display: none; }
   .am-timeline--h .am-tl-dot { position: absolute; inset-inline-start: 0; top: 4px; margin: 0; }
@@ -368,6 +400,9 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 .am-tree-col:first-child::before { inset-inline-start: 50%; }
 .am-tree-col:last-child::before { inset-inline-end: 50%; }
 .am-tree-col::after { content: ""; position: absolute; top: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+/* A forest (no single root) has nothing above its columns, so they draw no connectors. */
+.am-tree-cols--free > .am-tree-col { padding-top: 0; }
+.am-tree-cols--free > .am-tree-col::before, .am-tree-cols--free > .am-tree-col::after { content: none; }
 .am-tree-list, .am-tree-list ul { list-style: none; margin: 0; padding: 0; }
 .am-tree-col > .am-tree-list { margin: 8px 0 0; margin-inline-start: 14px; }
 .am-tree-list ul { margin-inline-start: 16px; }
@@ -382,6 +417,18 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 
 /* \u2500\u2500 Diagrams (flow / sequence) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
 .am-diagram { margin: 0; overflow-x: auto; text-align: center; }
+/* A box that hides content past its left or right edge fades that edge (src/runtime/page.js sets the classes). A diagram keeps its
+   top row out of the fade: the expand button sits there at the end edge. */
+.am-more-left, .am-more-right {
+  --am-fade-l: #000; --am-fade-r: #000;
+  mask-image: linear-gradient(to right, var(--am-fade-l), #000 48px, #000 calc(100% - 48px), var(--am-fade-r));
+}
+.am-more-left { --am-fade-l: transparent; }
+.am-more-right { --am-fade-r: transparent; }
+.am-diagram.am-more-left, .am-diagram.am-more-right {
+  mask-image: linear-gradient(#000, #000), linear-gradient(to right, var(--am-fade-l), #000 48px, #000 calc(100% - 48px), var(--am-fade-r));
+  mask-size: 100% 32px, 100% 100%; mask-repeat: no-repeat;
+}
 /* Embedded previews can lose html[data-theme]; the fallbacks keep diagrams readable, and defined theme variables still win. */
 .am-diagram svg { max-width: 100%; height: auto; font-family: var(--font-sans, sans-serif); }
 .am-diagram text { fill: var(--ink, #16181d); font-size: var(--am-fs-d-node); }
@@ -414,8 +461,11 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 .am-diagram .am-er-key { fill: var(--node-text, var(--ink-2, #4b5260)); }
 .am-diagram .am-node--hi .am-er-key { fill: var(--hi-text, var(--ink-2, #4b5260)); }
 /* API contracts use the existing prose and table styles; the endpoint keeps its protocol punctuation left to right. */
+.am-api-contract + .am-api-contract { margin-block-start: 20px; padding-block-start: 16px; border-block-start: 1px solid var(--line-2); }
 .am-api-endpoint { display: flex; gap: 10px; align-items: baseline; overflow-wrap: anywhere; }
 .am-api-endpoint strong { color: var(--accent); }
+/* The target is inline code, whose break-word keeps a flex item at its full word width; min-width: 0 lets it shrink and wrap. */
+.am-api-endpoint > code { min-width: 0; }
 .am-api .am-api-section h4 { margin: 16px 0 6px; font-size: var(--am-fs-text); }
 .am-api .am-api-section h4 code { font-weight: 400; }
 .am-api .am-api-section table { margin: 0; table-layout: fixed; }
@@ -515,9 +565,10 @@ body.am-has-reply-bar { padding-block-end: 72px; }
 .am-lightbox-canvas {
   position: absolute; left: 0; top: 0;
   transform-origin: 0 0;
-  will-change: transform;
   pointer-events: none;
 }
+/* Only while the reader drags: a will-change layer keeps the bitmap it drew at the first scale and stretches it, so a zoomed-in diagram looks blurry (#430). */
+.am-lightbox-stage.am-panning .am-lightbox-canvas { will-change: transform; }
 .am-lightbox-canvas svg {
   max-width: none !important;
   max-height: none !important;
@@ -602,13 +653,40 @@ body.am-has-reply-bar { padding-block-end: 72px; }
   .am-lightbox-header { top: 8px; left: 12px; right: 12px; }
   .am-lightbox-stage { top: 46px; bottom: 12px; left: 12px; right: 12px; border-radius: max(var(--radius), 10px); }
 }
+/* \u2500\u2500 Export menu \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+   A native popover (src/render.js exportMenu): the top layer keeps it clear of the toolbar's sideways scroll box on a phone. It stays
+   hidden unless open; a browser without popovers gets the .is-open class from src/runtime/export-menu.js instead, and the runtime sets
+   top and left so the menu sits under the button. */
+.am-export { display: none; }
+.am-export:is(:popover-open, .is-open) {
+  display: flex; flex-direction: column; position: fixed; inset: 52px auto auto auto; margin: 0; z-index: 11;
+  width: max-content; min-width: 200px; max-width: calc(100vw - 16px); padding: 4px; overflow-y: auto;
+  color: var(--ink); background: var(--paper); border: 1px solid var(--line-2); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.am-export-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; padding: 8px 10px; text-align: start;
+  font: var(--am-fs-text)/1.3 var(--font-sans); color: var(--ink); background: transparent; border: 0; border-radius: var(--radius); cursor: pointer;
+}
+.am-export-item:hover, .am-export-item:focus-visible { background: var(--fill); }
+.am-export-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.am-export-item[aria-disabled="true"] { cursor: default; }
+.am-export-item[aria-disabled="true"] > span { color: var(--ink-3); }
+.am-export-item[aria-disabled="true"]:hover { background: transparent; }
+.am-export-note { font-size: var(--am-fs-small); color: var(--ink-2); white-space: normal; }
+.am-export-note:empty { display: none; }
+/* Read by screen readers, not drawn (the Export status, src/runtime/export-menu.js). */
+.am-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .am-colophon { margin: 0 0 8px; font: var(--am-fs-label) var(--font-mono); color: var(--ink-3); }
 .am-colophon a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 @media print {
   .am-toolbar, .am-diagram-expand, .am-lightbox, .am-code-copy, .am-toc, .am-comment-btn, .am-comment, .am-reply, .am-reply-bar { display: none !important; }
+  .am-btn--export, .am-export { display: none !important; }
   body { background: var(--paper); }
   .am-panel { break-inside: avoid; box-shadow: none; }
+  /* Paper does not scroll: a diagram shrinks to the page again (also below the phone breakpoint, whose rule lifts max-width), and nothing fades. */
+  .am-diagram > svg { min-width: 0 !important; max-width: 100% !important; }
+  .am-more-left, .am-more-right { mask-image: none !important; }
 }
 /* Printed on paper narrower than three columns, the two-column grid left a hole beside every panel next to a full-width one
    (a wide table, a wide diagram): one panel per row instead. */
@@ -660,7 +738,7 @@ table.am-mark { background: none; }
 .am-remark-kind::before { content: attr(data-n); margin-inline-end: 5px; color: var(--ink-3); font-family: var(--font-mono); font-size: var(--am-fs-label); }
 @media print { .am-remark-pop { display: none !important; } }
 `;
-var RUNTIME_JS = "(() => {\n// How a formula reads in a quote. MathML has no plain text, so src/math.js writes the formula as the draft wrote it, delimiters included, in\n// data-am-tex on the <math> element, and the Remark and Reply scripts read page text through this file. On a page without math there is no\n// such element, so formulaOf is null and every text comes out as it did before.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n\nconst TEX = 'data-am-tex';\n\n// The formula that holds a node, or null.\nconst formulaOf = (node) => node.parentElement?.closest(`[${TEX}]`) ?? null;\n\nconst firstText = (el) => {\n  for (const child of el.childNodes) {\n    const found = child.nodeType === 3 ? child : firstText(child);\n    if (found) return found;\n  }\n  return null;\n};\n\n// What a text node adds to a quote: its data. The first text node of a formula adds the formula, and the others add nothing.\n// (A formula in an error style is plain text with its delimiters, not a <math>, so it comes out once.)\nfunction nodeText(node) {\n  const math = formulaOf(node);\n  if (!math) return node.data;\n  return firstText(math) === node ? math.getAttribute(TEX) : '';\n}\n\n// The text of a node as textContent reads it, but with each formula as written.\nconst textWithMath = (node) => (node.nodeType === 3 ? nodeText(node) : [...node.childNodes].map(textWithMath).join(''));\n\n(() => {\n  const root = document.documentElement;\n  // A host that serves this page inside its own document leaves the real root without the page's settings. The toolbar keeps a copy;\n  // set back what the root lacks, before anything below reads the root. A root's own value, even an empty one, is never replaced.\n  const carrier = document.querySelector('.am-toolbar');\n  for (const [attr, key] of [['lang', 'data-am-root-lang'], ['dir', 'data-am-root-dir'], ['data-theme', 'data-am-root-theme'], ['data-mode', 'data-am-root-mode'], ['data-style', 'data-am-root-style']]) {\n    if (root.getAttribute(attr) === null && carrier?.getAttribute(key) != null) root.setAttribute(attr, carrier.getAttribute(key));\n  }\n  // Each toolbar list sets one root attribute; its options name the values, so the runtime names no theme or mode.\n  for (const [name, attr] of [['theme', 'data-theme'], ['mode', 'data-mode']]) {\n    const select = document.querySelector(`select[data-am=\"${name}\"]`);\n    if (!select) continue;\n    select.value = root.getAttribute(attr);\n    select.addEventListener('change', () => root.setAttribute(attr, select.value));\n  }\n\n  // \u2500\u2500 Text size \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  // A\u2212 / A+ set --am-scale on the root; every page size and line (src/themes/type-scale.js) follows it, and the drawing boxes grow\n  // with it while their viewBox keeps the units Node measured. The buttons carry the range from SCALE, so this script keeps no\n  // second copy of the numbers. A reader's choice is remembered in this browser and wins over the page's own scale; where storage\n  // is off (am serve, file://) it lasts for this tab, and the click still works.\n  const scaleDown = document.querySelector('[data-am=\"scale-down\"]');\n  const scaleUp = document.querySelector('[data-am=\"scale-up\"]');\n  if (scaleDown && scaleUp) {\n    const min = Number(scaleDown.dataset.min);\n    const max = Number(scaleDown.dataset.max);\n    const step = Number(scaleDown.dataset.step);\n    const storeKey = 'am-scale';\n    let value;\n\n    const inRange = (n) => Number.isFinite(n) && n >= min && n <= max;\n    const savedScale = () => {\n      try {\n        return Number(localStorage.getItem(storeKey));\n      } catch {\n        return NaN;\n      }\n    };\n    const saveScale = (n) => {\n      try {\n        localStorage.setItem(storeKey, String(n));\n      } catch {\n        // Storage may be off (am serve, file://); the size then lasts until the tab closes.\n      }\n    };\n\n    const updateButtons = () => {\n      const setUnavailable = (btn, unavailable) => {\n        if (unavailable) btn.setAttribute('aria-disabled', 'true');\n        else btn.removeAttribute('aria-disabled');\n      };\n      setUnavailable(scaleDown, value <= min);\n      setUnavailable(scaleUp, value >= max);\n    };\n\n    // One step is a multiple of `step`: Math.round first, then two decimals, so 1.1500000000000001 becomes 1.15.\n    const setScale = (next, remember = false) => {\n      value = Math.min(max, Math.max(min, Number((Math.round(next / step) * step).toFixed(2))));\n      root.style.setProperty('--am-scale', String(value));\n      for (const svg of document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas) > svg[role=\"img\"]')) {\n        const box = svg.viewBox?.baseVal;\n        if (!box || !(box.width > 0) || !(box.height > 0)) continue;\n        svg.setAttribute('width', String(Math.ceil(box.width * value)));\n        svg.setAttribute('height', String(Math.ceil(box.height * value)));\n      }\n      updateButtons();\n      if (remember) saveScale(value);\n      window.dispatchEvent(new Event('am-scale'));\n    };\n\n    // A page with no stored choice is left exactly as it was rendered: no inline variable, no svg rewrite, no extra layout pass.\n    value = parseFloat(getComputedStyle(root).getPropertyValue('--am-scale')) || 1;\n    updateButtons();\n    const saved = savedScale();\n    if (inRange(saved) && saved !== value) setScale(saved);\n    scaleDown.hidden = false;\n    scaleUp.hidden = false;\n    scaleDown.addEventListener('click', () => {\n      if (scaleDown.getAttribute('aria-disabled') === 'true') return;\n      setScale(value - step, true);\n    });\n    scaleUp.addEventListener('click', () => {\n      if (scaleUp.getAttribute('aria-disabled') === 'true') return;\n      setScale(value + step, true);\n    });\n  }\n\n  // A phone cannot show the whole toolbar. Its end (Reply, Remark, Copy source) is what a phone showed before the text-size\n  // buttons, so open at that end: Theme, Mode and A\u2212 / A+ are reached by scrolling toward the start. A reader scroll leaves the\n  // position we set, so a later resize does not pull the toolbar back.\n  if (carrier) {\n    const rtl = getComputedStyle(carrier).direction === 'rtl';\n    let lastProgrammatic = null;\n    let readerScrolled = false;\n    const scrollToEnd = () => {\n      if (carrier.scrollWidth <= carrier.clientWidth) return;\n      // Chrome keeps a right-to-left box's scrollLeft negative; the browser clamps either value to the real end.\n      carrier.scrollTo({ left: rtl ? -carrier.scrollWidth : carrier.scrollWidth });\n      lastProgrammatic = carrier.scrollLeft;\n    };\n    carrier.addEventListener('scroll', () => {\n      if (Math.abs(carrier.scrollLeft - lastProgrammatic) > 1) readerScrolled = true;\n    });\n    scrollToEnd();\n    addEventListener('resize', () => {\n      if (!readerScrolled) scrollToEnd();\n    });\n  }\n\n  const copyText = async (text) => {\n    try {\n      await navigator.clipboard.writeText(text);\n    } catch {\n      const ta = Object.assign(document.createElement('textarea'), { value: text });\n      document.body.append(ta);\n      ta.select();\n      document.execCommand('copy');\n      ta.remove();\n    }\n  };\n  // A button reads its label from data-done for a moment after a copy, then comes back to the label it started from. That label is\n  // read once, here: a second click inside the moment would otherwise read the copied label off the button and restore that instead,\n  // and the label would never come back. The moment starts again on each click: the timer of the previous one is left to fire and\n  // does nothing (a token, so this needs no timer bookkeeping the page scripts do not already have).\n  const flasher = (btn) => {\n    const idle = btn.textContent;\n    let clicks = 0;\n    return () => {\n      btn.textContent = btn.dataset.done;\n      const mine = ++clicks;\n      setTimeout(() => { if (mine === clicks) btn.textContent = idle; }, 1400);\n    };\n  };\n\n  const copyBtn = document.querySelector('[data-am=\"copy\"]');\n  if (copyBtn) {\n    const flash = flasher(copyBtn);\n    copyBtn.addEventListener('click', async () => {\n      const nodes = document.querySelectorAll('#am-source');\n      await copyText(nodes[nodes.length - 1]?.value ?? '');\n      flash();\n    });\n  }\n\n  // Each code block copies its own lines, without the line numbers.\n  for (const btn of document.querySelectorAll('[data-am=\"copy-code\"]')) {\n    const flash = flasher(btn);\n    btn.addEventListener('click', async () => {\n      const lines = btn.closest('.am-codeblock')?.querySelectorAll('.am-ln') ?? [];\n      await copyText([...lines].map((l) => l.textContent).join('\\n'));\n      flash();\n    });\n  }\n\n  // \u2500\u2500 Diagram Lightbox & Pan-Zoom Viewer \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  const diagrams = document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas)');\n  const lb = document.querySelector('.am-lightbox');\n  if (diagrams.length && lb) {\n    const backdrop = lb.querySelector('.am-lightbox-backdrop');\n    const titleText = lb.querySelector('.am-lightbox-title-text');\n    const stage = lb.querySelector('.am-lightbox-stage');\n    const canvas = lb.querySelector('.am-lightbox-canvas');\n    const closeBtn = lb.querySelector('.am-lightbox-close');\n    const expandLabel = lb.getAttribute('data-expand') || 'Expand diagram';\n\n    let scale = 1, x = 0, y = 0, fitScale = 1, curVw = 800, curVh = 600;\n    let isDragging = false, activePointerId = null, startX = 0, startY = 0, origX = 0, origY = 0;\n    let lastTrigger = null;\n\n    const apply = () => {\n      canvas.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;\n    };\n\n    const zoomTo = (newScale, pivotX, pivotY) => {\n      newScale = Math.max(0.2, Math.min(6.0, newScale));\n      if (Math.abs(newScale - scale) < 0.0001) return;\n      const r = newScale / scale;\n      x = pivotX - (pivotX - x) * r;\n      y = pivotY - (pivotY - y) * r;\n      scale = newScale;\n      apply();\n    };\n\n    const open = (diag, trigger) => {\n      const svg = [...diag.children].find((el) => el.tagName.toLowerCase() === 'svg');\n      if (!svg) return;\n      lastTrigger = trigger;\n\n      const panel = diag.closest('.am-panel');\n      const panelTitle = panel?.querySelector('.am-panel-head h2')?.textContent?.trim() || panel?.querySelector('h2')?.textContent?.trim() || lb.getAttribute('aria-label') || 'Diagram viewer';\n      if (titleText) titleText.textContent = panelTitle;\n\n      const clone = svg.cloneNode(true);\n      const defElements = clone.querySelectorAll('[id]');\n      if (defElements.length) {\n        const idMap = new Map();\n        defElements.forEach((el, i) => {\n          const oldId = el.id;\n          const newId = `${oldId}-lb-${i}`;\n          idMap.set(oldId, newId);\n          el.id = newId;\n        });\n        const urlAttrs = ['marker-start', 'marker-mid', 'marker-end', 'fill', 'stroke', 'filter', 'clip-path', 'mask'];\n        clone.querySelectorAll('*').forEach((el) => {\n          for (const attr of urlAttrs) {\n            const val = el.getAttribute(attr);\n            if (val && val.startsWith('url(#')) {\n              const id = val.slice(5, -1);\n              if (idMap.has(id)) el.setAttribute(attr, `url(#${idMap.get(id)})`);\n            }\n          }\n          const href = el.getAttribute('href') || el.getAttribute('xlink:href');\n          if (href && href.startsWith('#')) {\n            const id = href.slice(1);\n            if (idMap.has(id)) {\n              if (el.hasAttribute('href')) el.setAttribute('href', `#${idMap.get(id)}`);\n              if (el.hasAttribute('xlink:href')) el.setAttribute('xlink:href', `#${idMap.get(id)}`);\n            }\n          }\n        });\n      }\n\n      const vb = svg.viewBox?.baseVal;\n      curVw = (vb && vb.width > 0) ? vb.width : (parseFloat(svg.getAttribute('width')) || svg.clientWidth || 800);\n      curVh = (vb && vb.height > 0) ? vb.height : (parseFloat(svg.getAttribute('height')) || svg.clientHeight || 600);\n      clone.style.width = `${curVw}px`;\n      clone.style.height = `${curVh}px`;\n      canvas.innerHTML = '';\n      canvas.append(clone);\n      lb.removeAttribute('hidden');\n      document.body.style.overflow = 'hidden';\n\n      const rect = stage.getBoundingClientRect();\n      const pad = 48;\n      const availW = Math.max(100, rect.width - pad * 2);\n      const availH = Math.max(100, rect.height - pad * 2);\n      fitScale = Math.min(availW / curVw, availH / curVh, 1.0);\n      scale = fitScale;\n      x = (rect.width - curVw * scale) / 2;\n      y = (rect.height - curVh * scale) / 2;\n      apply();\n      closeBtn.focus();\n    };\n\n    const close = () => {\n      if (lb.hasAttribute('hidden')) return;\n      lb.setAttribute('hidden', '');\n      canvas.innerHTML = '';\n      document.body.style.overflow = '';\n      lastTrigger?.focus();\n    };\n\n    stage.addEventListener('wheel', (e) => {\n      e.preventDefault();\n      const rect = stage.getBoundingClientRect();\n      const dy = e.deltaMode === 1 ? e.deltaY * 16 : (e.deltaMode === 2 ? e.deltaY * 400 : e.deltaY);\n      const factor = Math.exp(-Math.max(-200, Math.min(200, dy)) * 0.0015);\n      zoomTo(scale * factor, e.clientX - rect.left, e.clientY - rect.top);\n    }, { passive: false });\n\n    stage.addEventListener('pointerdown', (e) => {\n      if (e.button !== 0 || isDragging) return;\n      isDragging = true;\n      activePointerId = e.pointerId;\n      startX = e.clientX;\n      startY = e.clientY;\n      origX = x;\n      origY = y;\n      stage.setPointerCapture(e.pointerId);\n      stage.classList.add('am-panning');\n    });\n\n    stage.addEventListener('pointermove', (e) => {\n      if (!isDragging || e.pointerId !== activePointerId) return;\n      x = origX + (e.clientX - startX);\n      y = origY + (e.clientY - startY);\n      apply();\n    });\n\n    const endDrag = (e) => {\n      if (!isDragging || e.pointerId !== activePointerId) return;\n      isDragging = false;\n      activePointerId = null;\n      stage.classList.remove('am-panning');\n      try { stage.releasePointerCapture(e.pointerId); } catch {}\n    };\n    stage.addEventListener('pointerup', endDrag);\n    stage.addEventListener('pointercancel', endDrag);\n\n    stage.addEventListener('dblclick', () => {\n      const rect = stage.getBoundingClientRect();\n      scale = fitScale;\n      x = (rect.width - curVw * scale) / 2;\n      y = (rect.height - curVh * scale) / 2;\n      apply();\n    });\n\n    closeBtn.addEventListener('click', close);\n    backdrop.addEventListener('click', close);\n    window.addEventListener('keydown', (e) => {\n      if (e.key === 'Escape' && !lb.hasAttribute('hidden')) close();\n    });\n\n    lb.addEventListener('keydown', (e) => {\n      if (e.key !== 'Tab') return;\n      const focusables = lb.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex=\"-1\"])');\n      if (!focusables.length) return;\n      const first = focusables[0];\n      const last = focusables[focusables.length - 1];\n      if (e.shiftKey && document.activeElement === first) {\n        e.preventDefault();\n        last.focus();\n      } else if (!e.shiftKey && document.activeElement === last) {\n        e.preventDefault();\n        first.focus();\n      }\n    });\n\n    const expandSvg = '<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" y1=\"3\" x2=\"14\" y2=\"10\"></line><line x1=\"3\" y1=\"21\" x2=\"10\" y2=\"14\"></line></svg>';\n    diagrams.forEach((diag) => {\n      const btn = document.createElement('button');\n      btn.type = 'button';\n      btn.className = 'am-diagram-expand';\n      btn.title = expandLabel;\n      btn.setAttribute('aria-label', expandLabel);\n      btn.innerHTML = expandSvg;\n      btn.addEventListener('click', () => open(diag, btn));\n      diag.prepend(btn);\n    });\n  }\n})();\n(() => {\n// The reply a reader copies from the page: one Markdown text with the decisions, the panel comments and the block remarks.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n// decisions: [{ panel, question, picked: [label], suggested: [label], touched }]; comments: [{ panel, title, text }];\n// remarks: [{ panel, quote, kind, note }], where quote is the start of the marked block and kind is a key of ui.kinds.\n// Comment and remark text is quoted line by line, so text the reader typed cannot pass as part of the structure.\n// rtl: the page reads right to left, so the arrow before each answer points left, the way the text runs.\nfunction replyText({ title, decisions, comments, remarks = [], ui, rtl = false }) {\n  const arrow = rtl ? '\u2190' : '\u2192';\n  const out = [`# Re: ${title}`];\n  if (decisions.length) {\n    out.push('', `## ${ui.decisions}`);\n    decisions.forEach((d, i) => {\n      const answer = d.picked.length ? d.picked.map((l) => `**${l}**`).join(', ') : '**\u2014**';\n      // Every option starts unselected, so an ask the reader never clicked has no answer: the reply names the suggestion\n      // instead of passing it off as the reader's choice.\n      const same = d.picked.length === d.suggested.length && d.picked.every((l) => d.suggested.includes(l));\n      const suggested = d.suggested.join(', ') || '\u2014';\n      const why = !d.touched ? `${ui.untouched}: ${suggested}` : same ? ui.confirmed : `${ui.was}: ${suggested}`;\n      out.push(`${i + 1}. [${d.panel}] ${d.question}`, `   ${arrow} ${answer} _(${why})_`);\n    });\n  }\n  const written = comments.filter((c) => c.text.trim());\n  const quoted = (text) => (text.trim() ? text.trim().split('\\n').map((l) => `  > ${l}`) : []);\n  if (written.length) {\n    out.push('', `## ${ui.comments}`);\n    for (const c of written) out.push(`- **${c.panel} \xB7 ${c.title}**`, ...quoted(c.text));\n  }\n  if (remarks.length) {\n    out.push('', `## ${ui.remarks}`);\n    for (const r of remarks) {\n      const label = [r.panel, ui.kinds?.[r.kind] ?? r.kind].filter(Boolean).join(' \xB7 ');\n      out.push(`- **${label}** \"${r.quote}\"`, ...quoted(r.note));\n    }\n  }\n  if (written.length || remarks.some((r) => r.note.trim())) out.push('', `_${ui.typed}_`);\n  return `${out.join('\\n')}\\n`;\n}\n\n// A letter of a right-to-left script. One definition for the page builder (src/bidi.js) and for the right-to-left page script\n// (src/runtime/reply-view.js), so the two cannot drift apart. A plain ES module; the page script gets this file in front of\n// reply-view.js, with its `export` keyword dropped and reply-view.js's import of it removed (src/runtime/compose.js).\nconst RTL_LETTER = /[\\p{Script=Hebrew}\\p{Script=Arabic}\\p{Script=Syriac}\\p{Script=Thaana}\\p{Script=Nko}\\p{Script=Samaritan}\\p{Script=Mandaic}]/u;\n\n// The reply as the reader sees it in the Reply sheet (src/runtime/reply.js): the Markdown that Copy copies, drawn as headings, bold answers\n// and quoted comments instead of raw \"# Re: ...\", \"1. [E] ...\" and \"- **A \xB7 ...**\" lines. Each line gets its own direction, so a\n// Hebrew reader sees Latin answers and paths in place; a line with no right-to-left letter reads left to right, as on any other page.\n// The raw Markdown stays in the sheet under a fold, so the copied text does not change.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped and rtl-letter.js in front of it in place of the\n// import (src/runtime/compose.js).\n\nconst escHtml = (s) => s.replace(/[&<>\"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' })[c]);\n// A line with a right-to-left letter reads right to left; a line without one (an English comment, a path) reads left to right.\nconst dirOf = (s) => (RTL_LETTER.test(s) ? 'rtl' : 'ltr');\n\n// The only inline Markdown src/runtime/reply-text.js writes: **answer**, _(note)_ and the \"quote\" of a remark. Each piece is isolated in its own direction,\n// so a Latin answer inside a Hebrew line keeps its place, and \"A \xB7 title\" still starts with the panel letter.\nconst piece = (tag, text) => `<${tag}><bdi dir=\"${dirOf(text)}\">${text}</bdi></${tag}>`;\nfunction inline(s) {\n  return escHtml(s)\n    .replace(/\\*\\*(.+?)\\*\\*/g, (_, t) => piece('strong', t))\n    .replace(/(^|\\s)_(.+?)_(?=\\s|$)/g, (_, pre, t) => pre + piece('em', t))\n    // The quoted start of a marked block (\"- **A \xB7 concern** \"text\"\"): isolated, so Latin text in a Hebrew line keeps its place.\n    .replace(/&quot;(.+)&quot;$/, (_, t) => `&quot;<bdi dir=\"${dirOf(t)}\">${t}</bdi>&quot;`);\n}\n\n// The reply text (src/runtime/reply-text.js) as HTML, one block per line.\nfunction replyViewHtml(text) {\n  return text\n    .replace(/\\n$/, '')\n    .split('\\n')\n    .map((line) => {\n      const dir = dirOf(line);\n      let m;\n      if (!line.trim()) return '<div class=\"am-rv-gap\"></div>';\n      if ((m = line.match(/^(#{1,2}) (.*)$/))) return `<div class=\"am-rv-h${m[1].length}\" dir=\"${dir}\">${inline(m[2])}</div>`;\n      if ((m = line.match(/^(\\d+)\\. \\[([^\\]]*)\\] (.*)$/))) {\n        return `<div class=\"am-rv-q\" dir=\"${dir}\"><bdi>${m[1]}.</bdi> <bdi class=\"am-rv-tag\">${escHtml(m[2])}</bdi> ${inline(m[3])}</div>`;\n      }\n      if ((m = line.match(/^ {3}([\u2190\u2192]) (.*)$/))) return `<div class=\"am-rv-a\" dir=\"${dir}\">${m[1]} ${inline(m[2])}</div>`;\n      if ((m = line.match(/^- (.*)$/))) return `<div class=\"am-rv-c\" dir=\"${dir}\">${inline(m[1])}</div>`;\n      // A comment line is shown exactly as the reader typed it.\n      if ((m = line.match(/^ {2}> ?(.*)$/))) return `<div class=\"am-rv-quote\" dir=\"${dirOf(m[1])}\">${escHtml(m[1]) || '&nbsp;'}</div>`;\n      return `<div dir=\"${dir}\">${inline(line)}</div>`;\n    })\n    .join('');\n}\n\n// Answer on the page: every panel gets a Comment box, and the Reply button collects the ask answers, the comments and the remarks\n// into one Markdown reply (replyText) to copy back to the agent. Answers and comments stay in localStorage across reloads.\n// The remark script (remark.js) adds the blocks the reader marked, through window.__amRemarkData, and tells this script about a change\n// with an \"am-remark-change\" event on the document.\n// The Reply sheet shows the reply drawn (replyViewHtml) with the Markdown that Copy copies under a fold. Once the reader has given any\n// input, a bar at the bottom of the page shows the counts and copies the reply in one click, so there is no trip to the top-right button.\nconst replyBtn = document.querySelector('[data-am=\"reply\"]');\nconst COMMENT_ICON = '<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"></path></svg>';\nif (replyBtn) {\n  const ui = JSON.parse(replyBtn.dataset.ui);\n  const storeKey = `am-reply:${location.pathname}`;\n  // A page served by `am serve` runs without localStorage and the phone may discard its tab, so it keeps the answers on the\n  // server: data-am-save names the write route and data-am-state carries what the server already holds for this page version.\n  const serve = (() => {\n    const { amSave: save, amState: state } = document.body?.dataset ?? {};\n    if (!save) return null;\n    try {\n      return { save, restored: state ? JSON.parse(state) : null };\n    } catch {\n      return { save, restored: null };\n    }\n  })();\n  let saveTimer = null;\n  let pendingPatch = null;\n  const sendSave = (patch) => {\n    fetch(serve.save, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(patch), keepalive: true })\n      .catch(() => {}); // a page that cannot reach the server keeps its state until it closes, as before\n  };\n  // Typing must not put one request per keystroke on the server; localStorage is written at once, the network follows.\n  const saveSoon = (patch) => {\n    clearTimeout(saveTimer);\n    pendingPatch = patch;\n    saveTimer = setTimeout(() => {\n      pendingPatch = null;\n      sendSave(patch);\n    }, 400);\n  };\n  // A hidden or closing page sends the change it still holds, before the timer can run.\n  const flushSave = () => {\n    if (!pendingPatch) return;\n    clearTimeout(saveTimer);\n    sendSave(pendingPatch);\n    pendingPatch = null;\n  };\n  document.addEventListener('visibilitychange', () => {\n    if (document.visibilityState === 'hidden') flushSave();\n  });\n  window.addEventListener('pagehide', flushSave);\n  const panels = [...document.querySelectorAll('.am-panel')];\n  const asks = [...document.querySelectorAll('.am-ask')];\n  // Answers are saved by question text, so they still match after am patch has renumbered the asks.\n  // Page text without the word joiners a right-to-left page puts after a Hebrew prefix hyphen (src/bidi.js): the reply and the saved\n  // answers hold the text as the draft wrote it, a formula too (src/runtime/math-text.js).\n  const WJ = new RegExp(String.fromCharCode(0x2060), 'g');\n  const textOf = (el) => el && textWithMath(el).replace(WJ, '').trim();\n  const keyOf = (ask) => textOf(ask.querySelector('legend')) ?? ask.dataset.ask;\n  const touched = new Set();\n  const boxes = new Map();\n  // The bar is built below with the sheet; the handlers that change the counts only call this.\n  let refreshBar = () => {};\n  // The textarea a failed copy keeps selected, so the reader can still use the keyboard shortcut.\n  let stuck = null;\n\n  const load = () => {\n    if (serve?.restored?.reply) return serve.restored.reply;\n    try {\n      return JSON.parse(localStorage.getItem(storeKey)) || {};\n    } catch {\n      return {};\n    }\n  };\n  const save = () => {\n    const state = {\n      asks: Object.fromEntries(asks.map((a) => [keyOf(a), { picked: picked(a), touched: touched.has(a) }])),\n      comments: Object.fromEntries([...boxes].map(([id, box]) => [id, box.value]).filter(([, text]) => text.trim())),\n    };\n    try {\n      localStorage.setItem(storeKey, JSON.stringify(state));\n    } catch {\n      // Storage may be off (private window, file:// policy); answers then last until the page closes.\n    }\n    if (serve) saveSoon({ reply: state });\n  };\n  const picked = (ask) => [...ask.querySelectorAll('input')].filter((i) => i.checked).map((i) => i.value);\n  const panelOf = (el) => {\n    const panel = el.closest('.am-panel');\n    return { id: panel?.id.replace(/^panel-/, '') ?? '', title: textOf(panel?.querySelector('.am-panel-head h2')) ?? '' };\n  };\n\n  const saved = load();\n  for (const ask of asks) {\n    const inputs = [...ask.querySelectorAll('input')];\n    const state = saved.asks?.[keyOf(ask)];\n    // A saved answer applies only while every picked option still exists on the page, and only if the reader clicked: older versions started\n    // with the suggestion selected and saved it untouched, and that state must come back unselected.\n    if (state?.touched && Array.isArray(state.picked) && state.picked.every((v) => inputs.some((i) => i.value === v))) {\n      for (const input of inputs) input.checked = state.picked.includes(input.value);\n      touched.add(ask);\n    }\n    // A click counts even on the option that is already picked: the reader confirms the suggestion.\n    const answer = () => {\n      touched.add(ask);\n      save();\n      refreshBar();\n    };\n    ask.addEventListener('change', answer);\n    ask.addEventListener('click', (e) => { if (e.target.matches('input')) answer(); });\n  }\n\n  for (const panel of panels) {\n    const id = panel.id.replace(/^panel-/, '');\n    // An icon only: narrow panels have no room for a word next to the title.\n    const btn = Object.assign(document.createElement('button'), { type: 'button', className: 'am-comment-btn', title: ui.comment, innerHTML: COMMENT_ICON });\n    btn.setAttribute('aria-label', `${ui.comment} ${id}`);\n    btn.setAttribute('aria-expanded', 'false');\n    const wrap = Object.assign(document.createElement('div'), { className: 'am-comment', hidden: true });\n    const box = Object.assign(document.createElement('textarea'), { rows: 3, placeholder: ui.commentHint, value: saved.comments?.[id] ?? '' });\n    box.setAttribute('aria-label', `${ui.comment} ${id}`);\n    wrap.append(box);\n    const show = (open) => {\n      wrap.hidden = !open;\n      btn.setAttribute('aria-expanded', String(open));\n    };\n    btn.addEventListener('click', () => {\n      show(wrap.hidden);\n      if (!wrap.hidden) box.focus();\n    });\n    box.addEventListener('input', () => {\n      btn.classList.toggle('am-comment-btn--on', Boolean(box.value.trim()));\n      save();\n      refreshBar();\n    });\n    btn.classList.toggle('am-comment-btn--on', Boolean(box.value.trim()));\n    if (box.value.trim()) show(true);\n    (panel.querySelector('.am-panel-head') ?? panel).append(btn);\n    panel.append(wrap);\n    boxes.set(id, box);\n  }\n\n  const sheet = document.createElement('dialog');\n  sheet.className = 'am-reply';\n  sheet.setAttribute('aria-label', ui.title);\n  sheet.innerHTML = '<div class=\"am-reply-head\"><strong></strong><span></span></div><div class=\"am-reply-view\" tabindex=\"0\"></div><details class=\"am-reply-raw\"><summary></summary><textarea readonly rows=\"10\"></textarea></details><div class=\"am-reply-actions\"><button type=\"button\" class=\"am-btn\" data-act=\"copy\"></button><button type=\"button\" class=\"am-btn\" data-act=\"close\"></button></div>';\n  sheet.querySelector('strong').textContent = ui.title;\n  sheet.querySelector('span').textContent = ui.hint;\n  sheet.querySelector('summary').textContent = ui.raw;\n  const view = sheet.querySelector('.am-reply-view');\n  const raw = sheet.querySelector('details');\n  const text = sheet.querySelector('textarea');\n  const copy = sheet.querySelector('[data-act=\"copy\"]');\n  const close = sheet.querySelector('[data-act=\"close\"]');\n  copy.textContent = ui.copy;\n  close.textContent = ui.close;\n  document.body.append(sheet);\n\n  const compose = () => {\n    const decisions = asks.map((ask) => ({\n      panel: panelOf(ask).id,\n      question: textOf(ask.querySelector('legend')) ?? '',\n      picked: picked(ask),\n      suggested: [...ask.querySelectorAll('input[data-suggested]')].map((i) => i.value),\n      touched: touched.has(ask),\n    }));\n    const comments = [...boxes].map(([id, box]) => ({ panel: id, title: panelOf(box).title, text: box.value }));\n    const remarks = window.__amRemarkData?.() ?? [];\n    const empty = !decisions.length && !comments.some((c) => c.text.trim()) && !remarks.length;\n    const title = textOf(document.querySelector('.am-head h1')) ?? document.title;\n    return empty ? '' : replyText({ title, decisions, comments, remarks, ui, rtl: document.documentElement.dir === 'rtl' });\n  };\n\n  // The text goes through the clipboard API; a page the browser treats as insecure (file://) falls back to selecting a temporary\n  // textarea, because the sheet's own textarea can sit inside a closed fold, where it cannot be selected.\n  // That fallback reports whether it worked. When it does not, the text stays selected (so Cmd/Ctrl+C still copies it) and the\n  // button says what to do instead of showing the \"Copied \u2713\" label the reader cannot trust.\n  const copyText = async (str, btn) => {\n    stuck?.remove();\n    stuck = null;\n    try {\n      await navigator.clipboard.writeText(str);\n      // The close_after_reply script (close-after-reply.js) closes the tab once the reply is on the clipboard.\n      document.dispatchEvent(new Event('am-reply-copied'));\n    } catch {\n      const tmp = Object.assign(document.createElement('textarea'), { value: str });\n      tmp.style.cssText = 'position:fixed;top:-100px;opacity:0';\n      // Inside the sheet while it is open: while a modal dialog is open the rest of the document cannot take focus, so a textarea\n      // in the body can be selected but not focused, and the keyboard shortcut the reader is told to press would copy nothing.\n      // The bottom bar copies while the sheet is closed, and a closed dialog is not rendered, so there the textarea goes in the body.\n      (sheet.open ? sheet : document.body).append(tmp);\n      tmp.select();\n      let copied = false;\n      try {\n        copied = document.execCommand('copy');\n      } catch {\n        copied = false;\n      }\n      if (!copied) {\n        stuck = tmp;\n        btn.textContent = ui.copyFailed;\n        setTimeout(() => { btn.textContent = ui.copy; }, 3000);\n        return;\n      }\n      tmp.remove();\n    }\n    btn.textContent = ui.done;\n    setTimeout(() => { btn.textContent = ui.copy; }, 1400);\n  };\n\n  const open = () => {\n    const reply = compose();\n    if (reply) view.innerHTML = replyViewHtml(reply);\n    else view.textContent = ui.empty;\n    view.scrollTop = 0;\n    text.value = reply;\n    raw.open = false;\n    raw.hidden = !reply;\n    copy.disabled = !reply;\n    if (sheet.showModal) sheet.showModal();\n    else sheet.setAttribute('open', '');\n    (reply ? copy : close).focus();\n  };\n  replyBtn.addEventListener('click', open);\n  close.addEventListener('click', () => (sheet.close ? sheet.close() : sheet.removeAttribute('open')));\n  // A failed copy leaves the text selected for Cmd/Ctrl+C; closing the sheet drops that textarea.\n  sheet.addEventListener('close', () => { stuck?.remove(); stuck = null; });\n  copy.addEventListener('click', () => copyText(text.value, copy));\n\n  const bar = Object.assign(document.createElement('div'), { className: 'am-reply-bar', hidden: true });\n  bar.setAttribute('role', 'region');\n  bar.setAttribute('aria-label', ui.title);\n  const summary = Object.assign(document.createElement('span'), { className: 'am-reply-bar-count' });\n  summary.setAttribute('aria-live', 'polite');\n  const preview = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn', textContent: ui.preview });\n  const barCopy = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn am-btn--reply', textContent: ui.copy });\n  preview.addEventListener('click', open);\n  barCopy.addEventListener('click', () => copyText(compose(), barCopy));\n  bar.append(summary, preview, barCopy);\n  document.body.append(bar);\n\n  // The bar shows only the counts that are above zero, and only once there is any input at all.\n  refreshBar = () => {\n    const counts = {\n      answered: touched.size,\n      comments: [...boxes.values()].filter((box) => box.value.trim()).length,\n      remarks: (window.__amRemarkData?.() ?? []).length,\n    };\n    const parts = Object.entries(counts).filter(([, n]) => n > 0).map(([kind, n]) => ui.count[kind].replace('{n}', n));\n    summary.textContent = parts.join(' \xB7 ');\n    bar.hidden = !parts.length;\n    document.body.classList.toggle('am-has-reply-bar', parts.length > 0);\n  };\n  document.addEventListener('am-remark-change', () => refreshBar());\n  // Saved remarks are restored by remark.js, which runs after this script in the same <script> element: its data is not there yet.\n  // A microtask runs when that whole element has finished, so the first count includes them.\n  queueMicrotask(() => refreshBar());\n}\n})();\n(() => {\n// Text helpers for remark mode (src/runtime/remark.js): how a marked block is named and quoted.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n// A block keeps its mark across `am patch` because the key is its panel, its tag and the start of its text, not its position.\n\nconst collapse = (text) => String(text).replace(/\\s+/g, ' ').trim();\n\n// The start of a block's text with whitespace collapsed: the readable identity of the block.\nfunction fingerprint(text, len = 80) {\n  return collapse(text).slice(0, len);\n}\n\n// What the reply quotes of a block: the start of its text, with an ellipsis when it is cut.\nfunction quote(text, len = 60) {\n  const t = collapse(text);\n  return t.length > len ? `${t.slice(0, len).trimEnd()}\u2026` : t;\n}\n\n// Two blocks with the same text (two identical list items) get the same base key. The n-th one in the page gets \"\\t<n>\" added;\n// a tab cannot be in a fingerprint, which has its whitespace collapsed, so the new key never meets another base key.\nfunction occurrenceKeys(bases) {\n  const seen = new Map();\n  return bases.map((base) => {\n    const n = seen.get(base) ?? 0;\n    seen.set(base, n + 1);\n    return n ? `${base}\\t${n}` : base;\n  });\n}\n\n// Remark mode: the reader turns it on, clicks a block, tags it (suggestion, keep, question, concern) and may add a note.\n// A mark shows as a bar and a note chip inside the block, lives in localStorage like panel comments, and the Reply button carries it\n// back to the agent: reply.js calls window.__amRemarkData, and replyText (reply-text.js) writes the Remarks section.\n(() => {\n  const btn = document.querySelector('[data-am=\"remark\"]');\n  if (!btn) return;\n  const ui = JSON.parse(btn.dataset.ui);\n  const KINDS = ['suggestion', 'keep', 'question', 'concern'];\n  const storeKey = `am-remark:${location.pathname}`;\n  // A page served by `am serve` has no localStorage and the phone may discard its tab; it keeps the marks on the server, in the\n  // same record as the answers (reply.js), so a re-opened page finds them again.\n  const serve = (() => {\n    const { amSave: save, amState: state } = document.body?.dataset ?? {};\n    if (!save) return null;\n    try {\n      return { save, restored: state ? JSON.parse(state) : null };\n    } catch {\n      return { save, restored: null };\n    }\n  })();\n  let saveTimer = null;\n  let pendingPatch = null;\n  const sendSave = (patch) => {\n    fetch(serve.save, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(patch), keepalive: true })\n      .catch(() => {});\n  };\n  const saveSoon = (patch) => {\n    clearTimeout(saveTimer);\n    pendingPatch = patch;\n    saveTimer = setTimeout(() => {\n      pendingPatch = null;\n      sendSave(patch);\n    }, 400);\n  };\n  // A hidden or closing page sends the change it still holds, before the timer can run.\n  const flushSave = () => {\n    if (!pendingPatch) return;\n    clearTimeout(saveTimer);\n    sendSave(pendingPatch);\n    pendingPatch = null;\n  };\n  document.addEventListener('visibilitychange', () => {\n    if (document.visibilityState === 'hidden') flushSave();\n  });\n  window.addEventListener('pagehide', flushSave);\n  // The one definition of a block a reader can mark: the content under <main>. The page and panel titles are left out, because the\n  // reply reads them as text; a panel has its Comment button.\n  // A $$ block on its own is a div; a $$ formula inside a sentence is a span of its paragraph.\n  const BLOCK = 'main :is(h1,h2,h3,h4,h5,h6,p,li,blockquote,pre,table,dd,dt,figure,div.am-math-block):not(.am-head *, .am-panel-head *, .am-toc *)';\n  // A click on these does what it always did.\n  const LIVE = '.am-remark-pop, .am-toolbar, a, button, input, textarea, select, label';\n  const blockAt = (target) => (target.closest(LIVE) ? null : target.closest(BLOCK));\n\n  const WJ = new RegExp(String.fromCharCode(0x2060), 'g'); // word joiners of a right-to-left page (src/bidi.js); not part of the draft's text\n  // A narrow horizontal timeline shows its date and title inline (src/themes/base.css). They stay parts of their own, so a block key\n  // does not change with the width of the window (#194).\n  const OWN_BOX = '.am-timeline--h .am-tl-when, .am-timeline--h .am-tl-title';\n  const inlineBox = new WeakMap();\n  const isInline = (el) => {\n    if (!inlineBox.has(el)) inlineBox.set(el, !el.matches(OWN_BOX) && getComputedStyle(el).display.startsWith('inline'));\n    return inlineBox.get(el);\n  };\n  // The text of a block as the reader sees it: separate lines, cells and timeline parts are joined by a space (textContent would run\n  // \"2026\" and \"Ship\" together), and the note chip is not part of it. A formula is one box and reads as the TeX the draft wrote\n  // (src/runtime/math-text.js), not as the MathML tokens.\n  const blockText = (el) => {\n    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);\n    let text = '';\n    let last = null;\n    for (let node = walker.nextNode(); node; node = walker.nextNode()) {\n      if (node.parentElement.closest('.am-mark-note')) continue;\n      let box = formulaOf(node) ?? node.parentElement;\n      while (box !== el && isInline(box)) box = box.parentElement;\n      if (last && box !== last) text += ' ';\n      text += nodeText(node).replace(WJ, '');\n      last = box;\n    }\n    return text;\n  };\n\n  const panelOf = (el) => el.closest('.am-panel')?.id.replace(/^panel-/, '') ?? '';\n  // Block keys, in page order. Built when first needed: a page nobody marked pays nothing.\n  let keys = null;\n  const keyMap = () => {\n    if (!keys) {\n      const blocks = [...document.querySelectorAll(BLOCK)];\n      const ids = occurrenceKeys(blocks.map((el) => `${panelOf(el)}|${el.localName}|${fingerprint(blockText(el))}`));\n      keys = new Map(blocks.map((el, i) => [el, ids[i]]));\n    }\n    return keys;\n  };\n\n  const load = () => {\n    const restored = serve?.restored?.remark;\n    if (Array.isArray(restored)) return restored.filter((m) => typeof m?.key === 'string' && KINDS.includes(m.kind));\n    try {\n      const saved = JSON.parse(localStorage.getItem(storeKey));\n      return Array.isArray(saved) ? saved.filter((m) => typeof m?.key === 'string' && KINDS.includes(m.kind)) : [];\n    } catch {\n      return [];\n    }\n  };\n  // A mark whose block is gone from the page stays stored (it may return with `am patch`); it is neither painted nor sent.\n  const marks = new Map(load().map((m) => [m.key, { key: m.key, kind: m.kind, note: String(m.note ?? '') }]));\n  // Kind and note of a popover closed without Save, by block key, until the page reloads (see open below).\n  const drafts = new Map();\n  const clearBtn = document.createElement('button');\n  clearBtn.type = 'button';\n  clearBtn.className = 'am-btn am-btn--remark-clear';\n  clearBtn.textContent = ui.clear;\n  // Clear all drops saved marks and drafts, so it shows while either exists.\n  const toClear = () => marks.size + drafts.size;\n  const showClear = () => { clearBtn.hidden = toClear() === 0; };\n  btn.insertAdjacentElement('afterend', clearBtn);\n  let clearTimer = null;\n  let clearArmed = false;\n  const resetClear = () => {\n    if (clearTimer !== null) clearTimeout(clearTimer);\n    clearTimer = null;\n    clearArmed = false;\n    clearBtn.classList.remove('is-armed');\n    clearBtn.textContent = ui.clear;\n    showClear();\n  };\n  const armClear = () => {\n    clearArmed = true;\n    clearBtn.classList.add('is-armed');\n    clearBtn.textContent = ui.clearConfirm.replace('{n}', toClear());\n    clearTimer = setTimeout(resetClear, 4000);\n  };\n  clearBtn.addEventListener('click', () => {\n    if (!clearArmed) {\n      armClear();\n      return;\n    }\n    for (const el of document.querySelectorAll('.am-mark')) unpaint(el);\n    marks.clear();\n    // A draft is a remark the reader has not saved yet; Clear all drops it too, so no block reopens with an old kind.\n    drafts.clear();\n    try {\n      localStorage.removeItem(storeKey);\n    } catch {\n      // Storage may be off (private window, a sandboxed page); the in-memory marks still clear.\n    }\n    if (serve) saveSoon({ remark: [] });\n    resetClear();\n    document.dispatchEvent(new Event('am-remark-change'));\n  });\n  const save = () => {\n    try {\n      localStorage.setItem(storeKey, JSON.stringify([...marks.values()]));\n    } catch {\n      // Storage may be off (private window, a sandboxed page); marks then last until the page closes.\n    }\n    if (serve) saveSoon({ remark: [...marks.values()] });\n    // The reply bar (reply.js) shows the number of marks.\n    document.dispatchEvent(new Event('am-remark-change'));\n    showClear();\n  };\n\n  const chip = (el, mark) => {\n    const note = document.createElement(el.localName === 'table' ? 'caption' : 'span');\n    note.className = 'am-mark-note';\n    const kind = document.createElement('b');\n    kind.textContent = ui.kinds[mark.kind];\n    note.append(kind, mark.note ? ` ${mark.note}` : '');\n    return note;\n  };\n  const clearChip = (el) => el.querySelector(':scope > .am-mark-note')?.remove();\n  const paint = (el, mark) => {\n    clearChip(el);\n    el.classList.add('am-mark');\n    el.dataset.kind = mark.kind;\n    // Inside the block, so a list item stays a child of its list. A table takes it as its caption; a list item with a sub-list shows\n    // it under its own text, before the sub-list.\n    const sub = el.querySelector(':scope > ul, :scope > ol');\n    if (el.localName === 'table') el.prepend(chip(el, mark));\n    else if (sub) sub.before(chip(el, mark));\n    else el.append(chip(el, mark));\n  };\n  const unpaint = (el) => {\n    clearChip(el);\n    el.classList.remove('am-mark');\n    delete el.dataset.kind;\n  };\n  showClear();\n  if (marks.size) for (const [el, key] of keyMap()) if (marks.has(key)) paint(el, marks.get(key));\n\n  // The popover edits one block. Save stays off until a kind is picked, and a hint says so. 1\u20134 pick a kind from the keyboard and\n  // move to the note; Ctrl / Cmd + Enter saves. A popover closed without Save keeps its kind and note as a draft for that block until the page reloads.\n  const pop = document.createElement('div');\n  pop.className = 'am-remark-pop';\n  pop.hidden = true;\n  pop.setAttribute('role', 'dialog');\n  pop.setAttribute('aria-label', ui.button);\n  document.body.append(pop);\n  let opener = null;\n  let anchor = null;\n  let keepDraft = null;\n  const close = (restoreFocus) => {\n    if (pop.hidden) return;\n    keepDraft?.();\n    keepDraft = null;\n    pop.hidden = true;\n    if (restoreFocus) (opener?.isConnected && opener !== document.body ? opener : btn).focus();\n  };\n  const place = () => {\n    const rect = anchor.getBoundingClientRect();\n    const rtl = getComputedStyle(document.documentElement).direction === 'rtl';\n    const x = rtl ? rect.right - pop.offsetWidth : rect.left;\n    // Under the block; a block taller than the window gets the popover at the bottom of the window instead.\n    const y = Math.min(rect.bottom + 6, window.innerHeight - pop.offsetHeight - 8);\n    pop.style.left = `${window.scrollX + Math.min(Math.max(8, x), window.innerWidth - pop.offsetWidth - 8)}px`;\n    pop.style.top = `${window.scrollY + Math.max(8, y)}px`;\n  };\n  const make = (tag, props) => Object.assign(document.createElement(tag), props);\n  const open = (el) => {\n    const key = keyMap().get(el);\n    const mark = marks.get(key);\n    const draft = drafts.get(key);\n    let kind = draft?.kind ?? mark?.kind ?? '';\n    opener = document.activeElement;\n    anchor = el;\n\n    const note = make('textarea', { rows: 2, placeholder: ui.hint, value: draft?.note ?? mark?.note ?? '' });\n    note.setAttribute('aria-label', ui.hint);\n    const keep = make('button', { type: 'button', className: 'am-btn', textContent: ui.save, disabled: !kind });\n    const need = make('span', { className: 'am-remark-need', textContent: ui.need, hidden: Boolean(kind) });\n    keepDraft = () => {\n      if (kind || note.value.trim()) drafts.set(key, { kind, note: note.value });\n      else drafts.delete(key);\n      showClear();\n    };\n    const done = () => { drafts.delete(key); keepDraft = null; showClear(); };\n    keep.addEventListener('click', () => {\n      done();\n      const saved = { key, kind, note: note.value.trim() };\n      marks.set(key, saved);\n      save();\n      paint(el, saved);\n      close(true);\n    });\n    const actions = make('div', { className: 'am-remark-actions' });\n    actions.append(keep);\n    if (mark) {\n      const drop = make('button', { type: 'button', className: 'am-btn', textContent: ui.remove });\n      drop.addEventListener('click', () => {\n        done();\n        marks.delete(key);\n        save();\n        unpaint(el);\n        close(true);\n      });\n      actions.append(drop);\n    }\n    const choose = (k) => {\n      kind = k;\n      for (const other of kindBtns) other.setAttribute('aria-pressed', String(other.dataset.kind === k));\n      keep.disabled = false;\n      need.hidden = true;\n    };\n    const kindBtns = KINDS.map((k, i) => {\n      const kb = make('button', { type: 'button', className: 'am-remark-kind', textContent: ui.kinds[k] });\n      kb.dataset.kind = k;\n      kb.dataset.n = i + 1;\n      kb.setAttribute('aria-pressed', String(k === kind));\n      kb.addEventListener('click', () => choose(k));\n      return kb;\n    });\n    // Ctrl / Cmd + Enter presses Save (nothing while Save waits for a kind). A digit types into the note, so it picks a kind\n    // only while the focus is outside the note.\n    pop.onkeydown = (e) => {\n      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !e.isComposing) {\n        e.preventDefault();\n        if (!keep.disabled) keep.click();\n        return;\n      }\n      if (e.target === note || e.ctrlKey || e.metaKey || e.altKey || !/^[1-4]$/.test(e.key)) return;\n      e.preventDefault();\n      choose(KINDS[Number(e.key) - 1]);\n      note.focus();\n    };\n    actions.append(need);\n    pop.replaceChildren(make('div', { className: 'am-remark-kinds' }), note, actions);\n    pop.firstChild.append(...kindBtns);\n    pop.hidden = false;\n    place();\n    (kindBtns.find((b) => b.dataset.kind === kind) ?? kindBtns[0]).focus({ preventScroll: true });\n  };\n\n  // Picking works only while remark mode is on. A click on a marked block edits its mark, on a plain block starts one.\n  // The block under the pointer gets an outline: the same blockAt decides what is outlined and what a click picks.\n  let hover = null;\n  const track = (e) => {\n    const el = e.type === 'mouseout' && e.relatedTarget === null ? null : blockAt(e.target);\n    if (el === hover) return;\n    hover?.classList.remove('am-remark-hover');\n    hover = el;\n    hover?.classList.add('am-remark-hover');\n  };\n  const pick = (e) => {\n    const el = blockAt(e.target);\n    if (el) open(el);\n  };\n  // The keyboard picks too: while the mode is on, every block takes focus with Tab, and Enter or Space opens its popover. A block\n  // that already had a tabindex keeps it; only the ones the mode added lose it again.\n  const pickKey = (e) => {\n    if ((e.key !== 'Enter' && e.key !== ' ') || e.ctrlKey || e.metaKey || e.altKey || !e.target.hasAttribute?.('data-am-pick')) return;\n    e.preventDefault();\n    open(e.target);\n  };\n  const focusable = (on) => {\n    if (!on && !keys) return; // the mode starts off: a page nobody marked builds no block keys\n    for (const el of keyMap().keys()) {\n      if (on && !el.hasAttribute('tabindex')) {\n        el.tabIndex = 0;\n        el.setAttribute('data-am-pick', '');\n      } else if (!on && el.hasAttribute('data-am-pick')) {\n        el.removeAttribute('tabindex');\n        el.removeAttribute('data-am-pick');\n      }\n    }\n  };\n  const setMode = (on) => {\n    btn.classList.toggle('is-on', on);\n    btn.setAttribute('aria-pressed', String(on));\n    const toggle = on ? 'addEventListener' : 'removeEventListener';\n    document.body[toggle]('click', pick);\n    document.body[toggle]('mouseover', track);\n    document.body[toggle]('mouseout', track);\n    document.body[toggle]('keydown', pickKey);\n    focusable(on);\n    if (!on) {\n      track({ type: 'mouseout', relatedTarget: null });\n      close(false);\n    }\n  };\n  btn.addEventListener('click', () => setMode(btn.getAttribute('aria-pressed') !== 'true'));\n  document.addEventListener('keydown', (e) => {\n    if (e.key === 'Escape') close(true);\n  });\n  // A click outside the popover closes it; the same click may then start another mark.\n  document.addEventListener('click', (e) => {\n    if (!pop.hidden && !pop.contains(e.target)) close(false);\n  }, true);\n  setMode(false);\n\n  // What the Reply button reads: the marked blocks that are on the page, in page order.\n  window.__amRemarkData = () => {\n    if (!marks.size) return [];\n    const live = [];\n    for (const [el, key] of keyMap()) {\n      const mark = marks.get(key);\n      if (mark) live.push({ panel: panelOf(el), quote: quote(blockText(el)), kind: mark.kind, note: mark.note });\n    }\n    return live;\n  };\n})();\n})();\n(() => {\n// Pure planner for justified (\"photo wall\") rows on sheet pages. No DOM access.\n//\n// This file must stay inlinable into the page script: top-level declarations only, no imports, and the exports are\n// `planLayout` and the constants the DOM adapter shares (STEP, MAX_SCALE, MIN_SCALE). The page build strips the `export ` keyword,\n// and test/layout-plan.test.js checks that this still works.\n//\n// planLayout({ width, gap, cols, panels }) -> { rows: [{ columns: [{ panels: [index, ...], width }], height }] }\n//\n// Input (all lengths in px):\n//   width   container width\n//   gap     space between columns, and between two panels stacked in one column\n//   cols    most columns in one row (the planner never uses more than MAX_COLUMNS, but spans stay shares of `cols`)\n//   panels  one entry per panel, in reading order:\n//     samples   [{ w, h }] panel height at sampled widths, ascending by w (heights between samples are interpolated)\n//     minWidth  narrowest feasible width (clamped to `width`)\n//     maxWidth  widest useful width; beyond it the panel only gains empty space (default: no limit)\n//     natural   natural diagram width for a diagram-only panel (default: none)\n//     pad       panel width not used by the diagram (padding and border; default 0)\n//     span      the author's width hint in grid columns (default 1); span >= cols keeps the panel alone in its row\n//\n// Output: { rows, maxScale }. Rows are in reading order; a row is a list of columns (at most `cols`); a column holds one panel or two\n// consecutive panels, stacked. For integer inputs the column widths plus the gaps between them equal `width`.\n// Rows are chosen by dynamic programming over break points; widths by a search in STEP px steps. Cost per row:\n//   H = tallest column; waste = sum((H - columnHeight) * columnWidth) + sum over diagrams wider than maxWidth of (w - maxWidth) * h\n//   dev = sum(((w - preferred) / oneColumn)^2) + SCALE_WEIGHT * sum over diagrams of (ln(scale) / ln(MAX_SCALE))^2\n//   cost = waste / 1000 + PREF_WEIGHT * dev * H\n// Scale band: diagrams on one page stay at similar sizes. With the result's `maxScale` as the diagram size limit, a diagram is\n// shown at scale min(maxScale, (width - pad) / natural). The planner tries a few bands [lo, lo * BAND_RATIO] (lo in BAND_LOS) and\n// keeps the cheapest plan in which no diagram is narrower than scale lo and none is shown above the band's top, so the largest and\n// smallest diagram scale on the page differ by at most BAND_RATIO. A panel wider than its diagram's top size keeps the diagram at\n// that size, and the page script must set the diagram's max-width to natural * maxScale. The band starts no higher than the\n// largest scale the page allows the least roomy diagram, so one wide diagram lowers the band for the others.\n// If no band is feasible the plan is made without a band (maxScale = MAX_SCALE); if no plan fits (or the input is unusable) the\n// result is a single column: one panel per row at the full width.\n\nconst STEP = 10;\nconst MAX_SCALE = 1.25;\nconst MIN_SCALE = 0.75; // the narrowest a diagram is shown, as a share of its natural width\nconst MAX_COLUMNS = 6; // rows with more columns are unreadable, and the search grows steeply with the column count\nconst BAND_RATIO = 1.25; // the largest and smallest diagram scale on a page differ by at most this\nconst BAND_LOS = [MIN_SCALE, 0.85, 0.95, 1]; // lower ends tried for the band; lo * BAND_RATIO is the upper end (1.25 means no upper limit)\nconst SCALE_WEIGHT = 3;\nconst PREF_WEIGHT = 0.15;\n\nfunction heightAt(samples, w) {\n  const i = samples.findIndex((s) => s.w >= w);\n  if (i === -1) return samples[samples.length - 1].h;\n  if (i === 0) return samples[0].h;\n  const a = samples[i - 1];\n  const b = samples[i];\n  return a.h + ((b.h - a.h) * (w - a.w)) / (b.w - a.w);\n}\n\n// Every way to split `len` consecutive panels into columns of 1 or 2 panels, as lists of column sizes.\nfunction splits(len) {\n  if (len === 0) return [[]];\n  return [1, 2].filter((k) => k <= len).flatMap((k) => splits(len - k).map((rest) => [k, ...rest]));\n}\n\nfunction singleColumn(width, panels) {\n  return { rows: panels.map((_, i) => ({ columns: [{ panels: [i], width }], height: 0 })) };\n}\n\nfunction planLayout({ width, gap = 0, cols = 3, panels }) {\n  const usable = Number.isFinite(width) && width > 0 && panels.every((p) => Array.isArray(p.samples) && p.samples.length > 0);\n  if (!usable) return singleColumn(width, panels);\n\n  // `cols` stays the unit of the author's spans; no row gets more than MAX_COLUMNS columns however large `cols` is.\n  const maxColumns = Math.min(cols, MAX_COLUMNS);\n  const oneColumn = Math.max(1, (width - gap * (cols - 1)) / cols);\n  // Per-panel limits. With a band [lo, lo * BAND_RATIO], a diagram is no narrower than scale lo and shown at most at the top of the\n  // band: a wider panel keeps it at that size and gains empty space, which the cost counts as waste.\n  const prepare = (lo) => panels.map((p) => {\n    const pad = p.pad ?? 0;\n    const diagram = lo > 0 && p.natural > 0;\n    const scaleCap = diagram ? Math.min(MAX_SCALE, lo * BAND_RATIO) : MAX_SCALE;\n    return {\n      ...p,\n      minWidth: Math.min(width, Math.max(Math.ceil(p.minWidth || 0), diagram ? Math.ceil(p.natural * lo + pad) : 0)),\n      maxWidth: Math.min(p.maxWidth ?? Infinity, diagram ? p.natural * scaleCap + pad : Infinity),\n      scaleCap,\n      pad,\n      preferred: Math.min(width, (p.span ?? 1) * oneColumn + ((p.span ?? 1) - 1) * gap),\n      alone: (p.span ?? 1) >= cols,\n    };\n  });\n  let info = prepare(0);\n  // Beyond its maxWidth a panel only gains empty space, so its height stops changing there (matters when a band lowers maxWidth).\n  const heightOf = (p, w) => heightAt(p.samples, Math.min(w, p.maxWidth));\n  const columnHeight = (col, w) => col.reduce((h, k) => h + heightOf(info[k], w), 0) + gap * (col.length - 1);\n\n  function bestColumns(columns) {\n    const avail = width - gap * (columns.length - 1);\n    const mins = columns.map((c) => Math.max(...c.map((k) => info[k].minWidth)));\n    const minsFrom = mins.map((_, n) => mins.slice(n).reduce((s, w) => s + w, 0));\n    if (minsFrom[0] > avail) return null;\n    let best = null;\n    const evaluate = (ws) => {\n      const hs = ws.map((w, n) => columnHeight(columns[n], w));\n      const H = Math.max(...hs);\n      let waste = 0;\n      let dev = 0;\n      ws.forEach((w, n) => {\n        waste += (H - hs[n]) * w;\n        for (const k of columns[n]) {\n          const p = info[k];\n          if (w > p.maxWidth) waste += (w - p.maxWidth) * heightOf(p, w);\n          dev += ((w - p.preferred) / oneColumn) ** 2;\n          if (p.natural > 0) {\n            const scale = Math.min(p.scaleCap, Math.max(w - p.pad, 1) / p.natural);\n            dev += SCALE_WEIGHT * (Math.log(scale) / Math.log(MAX_SCALE)) ** 2;\n          }\n        }\n      });\n      const cost = waste / 1000 + PREF_WEIGHT * dev * H;\n      if (!best || cost < best.cost) best = { cost, ws, height: H, columns };\n    };\n    const choose = (n, used, ws) => {\n      if (n === columns.length - 1) {\n        const w = avail - used;\n        if (w >= mins[n]) evaluate([...ws, w]);\n        return;\n      }\n      for (let w = mins[n]; used + w + minsFrom[n + 1] <= avail; w += STEP) choose(n + 1, used + w, [...ws, w]);\n    };\n    choose(0, 0, []);\n    return best;\n  }\n\n  // Best columns for one row of panels i..j.\n  function bestRow(i, j) {\n    if (j > i && info.slice(i, j + 1).some((p) => p.alone)) return null;\n    let best = null;\n    for (const split of splits(j - i + 1)) {\n      if (split.length > maxColumns) continue;\n      let next = i;\n      const columns = split.map((size) => Array.from({ length: size }, () => next++));\n      const r = bestColumns(columns);\n      if (r && (!best || r.cost < best.cost)) best = r;\n    }\n    return best;\n  }\n\n  // Row breaks in reading order, for the band set up in `info`. A row holds at most 2 * maxColumns panels. Null if nothing fits.\n  function solve() {\n    const n = panels.length;\n    const total = Array(n + 1).fill(Infinity);\n    const from = Array(n + 1).fill(-1);\n    const chosen = Array(n + 1).fill(null);\n    total[0] = 0;\n    for (let j = 1; j <= n; j++) {\n      for (let i = Math.max(0, j - 2 * maxColumns); i < j; i++) {\n        if (total[i] === Infinity) continue;\n        const r = bestRow(i, j - 1);\n        if (r && total[i] + r.cost < total[j]) {\n          total[j] = total[i] + r.cost;\n          from[j] = i;\n          chosen[j] = r;\n        }\n      }\n    }\n    if (total[n] === Infinity) return null;\n    const rows = [];\n    for (let j = n; j > 0; j = from[j]) {\n      const r = chosen[j];\n      rows.unshift({ columns: r.columns.map((panelsInColumn, c) => ({ panels: panelsInColumn, width: r.ws[c] })), height: r.height });\n    }\n    return { rows, cost: total[n] };\n  }\n\n  let best = null;\n  const diagrams = panels.filter((p) => p.natural > 0);\n  if (diagrams.length > 1) {\n    // No diagram can be shown larger than the page allows, so the band cannot start above the smallest of those limits.\n    const reach = Math.min(...diagrams.map((p) => Math.min(MAX_SCALE, Math.max(width - (p.pad ?? 0), 1) / p.natural)));\n    for (const lo of new Set([...BAND_LOS.filter((x) => x < reach), reach])) {\n      info = prepare(lo);\n      const r = solve();\n      if (r && (!best || r.cost < best.cost)) best = { ...r, maxScale: Math.min(MAX_SCALE, lo * BAND_RATIO) };\n    }\n    info = prepare(0);\n  }\n  best ??= solve();\n  return best ? { rows: best.rows, maxScale: best.maxScale ?? MAX_SCALE } : singleColumn(width, panels);\n}\n\n// DOM adapter for the sheet's justified (\"photo wall\") layout. Not a module: compose.js puts it after src/runtime/layout-plan.js\n// (which defines planLayout and the shared STEP, MAX_SCALE, MIN_SCALE) inside one function scope of the page script.\n//\n// It measures every panel at sampled widths, asks planLayout for rows and column widths, and applies them with flexbox.\n// The rendered HTML keeps the plain CSS grid: with JavaScript off, at the single-column breakpoint, or while printing, the grid is what\n// shows (the planned widths belong to the screen width, so print never gets a mix of the two); after printing the layout comes back.\n\nconst grid = document.querySelector('.am-grid');\nconst panels = grid ? [...grid.children].filter((el) => el.classList.contains('am-panel')) : [];\n\nif (panels.length > 1) {\n  const SINGLE_COLUMN = '(max-width: 760px)'; // the single-column breakpoint in src/themes/base.css\n  const TWO_COLUMNS = '(max-width: 1100px)'; // below this the CSS grid has two columns\n  const SAMPLE_STEP = 20; // width sampling step, px; the planner interpolates between samples\n  // The width floors are text sizes (px at scale 1). They take the page scale on every pass, so a runtime change of --am-scale re-plans.\n  const TEXT_MIN = 260; // text keeps at least about 16 CJK characters per line\n  const TABLE_COL_MIN = 96; // per table column, px\n  const TABLE_COL_COMFORT = 220; // a table column this wide reads three or four words per line\n  const KV_COL_MIN = 120; // per key-value column, px: a value of two short words stays on one line\n  const DIAGRAM_MIN = 160;\n  const RESIZE_DELAY = 150;\n  const pageScale = () => {\n    const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--am-scale'));\n    return Number.isFinite(scale) && scale > 0 ? scale : 1;\n  };\n  const OVERFLOWING = '.am-table-wrap, .am-diagram, .am-annot-scroll, pre';\n\n  // The first-row cells of each table carry the column widths fitTables() sets, so restore() resets them too.\n  const tables = [...grid.querySelectorAll('.am-table-wrap > table')];\n  const headCells = (table) => [...(table.rows[0]?.cells ?? [])];\n  const original = new Map([grid, ...panels, ...grid.querySelectorAll('.am-diagram > svg'), ...tables.flatMap(headCells)].map((el) => [el, el.getAttribute('style')]));\n  const restoreStyle = (el) => (original.get(el) === null ? el.removeAttribute('style') : el.setAttribute('style', original.get(el)));\n\n  // Back to the plain grid markup and styles.\n  const restore = () => {\n    for (const box of grid.querySelectorAll(':scope > .am-col')) box.replaceWith(...box.children);\n    for (const el of original.keys()) restoreStyle(el);\n  };\n\n  // The author's width hint, rendered as data-span only when the author wrote one. The inline grid-column is the no-JavaScript fallback\n  // and may hold spans the server added, so it is never read here.\n  const spanHint = (el) => Number(el.dataset.span) || 1;\n  const diagramOnly = (el) => {\n    const body = el.querySelector(':scope > .am-panel-body');\n    return body && body.children.length === 1 ? body.querySelector(':scope > .am-diagram > svg') : null;\n  };\n  const naturalWidth = (svg) => Number(svg.getAttribute('width')) || 0;\n\n  // The width each column of a table reads well at: its natural width, but no wider than TABLE_COL_COMFORT unless its longest word\n  // needs more. Below it the cells wrap one word per line, so a panel with a table is not planned narrower than the sum, and\n  // fitTables() keeps each column at its share (the browser would otherwise give the room to the longest column).\n  const columnWidths = new Map();\n  function comfortableWidth(table, scale) {\n    const saved = table.getAttribute('style');\n    const columns = (width) => {\n      table.style.width = width;\n      return headCells(table).map((cell) => cell.getBoundingClientRect().width);\n    };\n    const most = columns('max-content');\n    const least = columns('min-content');\n    if (saved === null) table.removeAttribute('style');\n    else table.setAttribute('style', saved);\n    // A max-content column comes out a fraction under its text in Chrome, enough to wrap the last word, so it gets one pixel more.\n    const want = most.map((w, i) => Math.min(Math.ceil(w) + 1, Math.max(least[i], TABLE_COL_COMFORT * scale)));\n    columnWidths.set(table, { least, want });\n    return want.reduce((sum, w) => sum + w, 0);\n  }\n\n  // After the layout: each column gets at least its comfortable width, scaled down toward its longest word when the panel came out\n  // narrower than planned (a page narrower than the table), so a table scrolls sideways only when even its longest words do not fit.\n  function fitTables() {\n    for (const [table, { least, want }] of columnWidths) {\n      // Each width is rounded up to a whole pixel (a column a fraction too narrow wraps its last word), so keep a pixel per column spare.\n      const room = table.parentElement.clientWidth - want.length;\n      const low = least.reduce((s, w) => s + w, 0);\n      const high = want.reduce((s, w) => s + w, 0);\n      const k = high > room ? Math.max(0, (room - low) / (high - low || 1)) : 1;\n      headCells(table).forEach((cell, i) => { cell.style.minWidth = `${Math.ceil(least[i] + (want[i] - least[i]) * k)}px`; });\n    }\n  }\n\n  // Height (and, for panels with tables or code, the narrowest width without sideways scrolling) at sampled widths.\n  // Only one panel is displayed while it is measured, so each width change lays out that panel alone.\n  function measure(width) {\n    const scale = pageScale();\n    grid.style.display = 'block';\n    for (const el of panels) {\n      el.style.display = 'none';\n      el.style.boxSizing = 'border-box';\n      for (const svg of el.querySelectorAll('.am-diagram > svg')) {\n        svg.style.width = '100%';\n        svg.style.maxWidth = `${naturalWidth(svg) * MAX_SCALE}px`;\n      }\n    }\n    const info = panels.map((el) => {\n      const svg = diagramOnly(el);\n      const svgs = [...el.querySelectorAll('.am-diagram > svg')];\n      const scrollers = el.querySelectorAll(OVERFLOWING);\n      const tableCols = Math.max(0, ...[...el.querySelectorAll('table tr:first-child')].map((tr) => tr.children.length));\n      el.style.display = '';\n      el.style.width = `${width}px`;\n      const pad = svg ? el.offsetWidth - svg.parentElement.clientWidth : 0;\n      const natural = svg ? naturalWidth(svg) : 0;\n      const shrunk = Math.max(0, ...svgs.map((s) => naturalWidth(s) * MIN_SCALE)) + (svg ? pad : 34);\n      const tableFloors = [...el.querySelectorAll('.am-table-wrap > table')].map((t) => comfortableWidth(t, scale) + el.offsetWidth - t.parentElement.clientWidth);\n      // A key-value grid gets the same care: the room a table gains must not squeeze a neighbouring grid to one word per line.\n      const kvs = [...el.querySelectorAll('.am-kv')].map((kv) => (Number(kv.style.getPropertyValue('--kv-cols')) || 1) * KV_COL_MIN * scale + el.offsetWidth - kv.clientWidth);\n      const floor = svg ? Math.max(DIAGRAM_MIN * scale, natural * MIN_SCALE + pad) : Math.max(TEXT_MIN * scale, shrunk, tableCols * TABLE_COL_MIN * scale + 34, ...tableFloors, ...kvs);\n      const from = Math.min(width, Math.floor(floor / STEP) * STEP);\n      const samples = [];\n      let fits = null;\n      for (let w = from; ; w += SAMPLE_STEP) {\n        w = Math.min(w, width);\n        el.style.width = `${w}px`;\n        if (fits === null && !svg && scrollers.length && ![...scrollers].some((s) => s.scrollWidth > s.clientWidth + 1)) fits = w;\n        samples.push({ w, h: el.offsetHeight });\n        if (w === width) break;\n      }\n      el.style.display = 'none';\n      return {\n        samples,\n        minWidth: svg ? floor : Math.max(floor, fits ?? (scrollers.length ? width : 0)),\n        maxWidth: svg ? natural * MAX_SCALE + pad : Infinity,\n        natural,\n        pad,\n        span: spanHint(el),\n      };\n    });\n    for (const el of panels) {\n      el.style.display = '';\n      el.style.width = '';\n    }\n    return info;\n  }\n\n  // Each column gets a fixed width. A row adds up to the full width, so flex-wrap breaks rows by itself.\n  // Stacked panels go into a column wrapper whose last panel absorbs the extra height.\n  function apply(plan, gap) {\n    grid.style.display = 'flex';\n    grid.style.flexWrap = 'wrap';\n    grid.style.alignItems = 'stretch';\n    grid.style.gap = `${gap}px`;\n    for (const el of panels) {\n      el.style.gridColumn = '';\n      el.style.gridRow = '';\n      el.style.flex = '0 0 auto';\n    }\n    for (const row of plan.rows) {\n      for (const col of row.columns) {\n        const width = `${col.width}px`;\n        if (col.panels.length === 1) {\n          panels[col.panels[0]].style.width = width;\n          continue;\n        }\n        const box = document.createElement('div');\n        box.className = 'am-col';\n        box.style.cssText = `width:${width};flex:0 0 auto;display:flex;flex-direction:column;gap:${gap}px`;\n        panels[col.panels[0]].before(box);\n        for (const k of col.panels) {\n          panels[k].style.width = '';\n          box.append(panels[k]);\n        }\n        panels[col.panels[col.panels.length - 1]].style.flex = '1 1 auto';\n      }\n    }\n  }\n\n  // Diagram-only panels show their diagram at most at the top of the page's scale band; a wider panel gains empty space instead.\n  function capDiagrams(maxScale) {\n    for (const el of panels) {\n      const svg = diagramOnly(el);\n      if (svg) svg.style.maxWidth = `${naturalWidth(svg) * maxScale}px`;\n    }\n  }\n\n  const containerWidth = () => Math.floor(grid.getBoundingClientRect().width);\n\n  function justify() {\n    if (printing || printQuery.matches) return;\n    try {\n      // A vertical scrollbar can appear or vanish once the rows change height; plan again if the width moved.\n      let planned = -1;\n      for (let pass = 0; pass < 3 && planned !== containerWidth(); pass++) {\n        restore();\n        if (matchMedia(SINGLE_COLUMN).matches) return;\n        planned = containerWidth();\n        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;\n        const cols = Math.max(1, Number(getComputedStyle(grid).getPropertyValue('--cols')) || 3);\n        const plan = planLayout({ width: planned, gap, cols: matchMedia(TWO_COLUMNS).matches ? Math.min(cols, 2) : cols, panels: measure(planned) });\n        apply(plan, gap);\n        capDiagrams(plan.maxScale);\n        fitTables();\n      }\n      // The width never settled: columns planned for another width would overflow or leave gaps, so show the plain grid.\n      if (planned !== containerWidth()) restore();\n    } catch {\n      restore();\n    }\n  }\n\n  // Printing: back to the plain grid (spans and all), and the layout again afterwards. Browsers disagree on which of the\n  // `beforeprint` event and the print media query change fires first, or at all, so listen to both; both are idempotent.\n  // While `printing` is set (beforeprint to afterprint) justify() does nothing, so a late resize cannot bring flex widths into the print layout.\n  let printing = false;\n  const printQuery = matchMedia('print');\n  let timer = 0;\n  const later = () => {\n    clearTimeout(timer);\n    timer = setTimeout(justify, RESIZE_DELAY);\n  };\n  const toPrint = () => {\n    clearTimeout(timer);\n    restore();\n  };\n  justify();\n  addEventListener('resize', later);\n  // A reader's text size changes every panel's text widths and heights, so the sheet is planned again like a resize.\n  addEventListener('am-scale', later);\n  addEventListener('beforeprint', () => {\n    printing = true;\n    toPrint();\n  });\n  addEventListener('afterprint', () => {\n    printing = false;\n    later();\n  });\n  printQuery.addEventListener('change', (e) => (e.matches ? toPrint() : later()));\n  // Late changes to panel heights: web fonts arriving, and images inside the grid finishing their load (load does not bubble, so capture it).\n  document.fonts?.ready.then(later);\n  grid.addEventListener('load', later, true);\n  // Switching theme changes paddings and fonts, hence panel heights.\n  document.querySelector('[data-am=\"theme\"]')?.addEventListener('click', later);\n}\n})();\n// The outline rail of a doc page (src/templates/doc.js): the markup already works without a script, <details> opens the list and the\n// links jump. This adds the hover dwell, the open direction, the keys, the tap outside and the marking of the current section.\n(() => {\n  const nav = document.querySelector('nav.am-toc');\n  const box = nav && nav.querySelector('details.am-outline');\n  if (!box) return;\n  const sum = box.querySelector('summary');\n  const links = Array.from(box.querySelectorAll('.am-outline-list a'));\n  const ticks = Array.from(box.querySelectorAll('.am-tick'));\n  const LIST_W = 240; // keep in step with .am-outline-list in src/themes/base.css\n  const EDGE = 10; // the 6px gap to the rail plus a margin to the viewport edge\n  let current = '';\n  let byHover = false;\n  let dwell = 0;\n  let leave = 0;\n\n  // Open away from the body when the room outside the rail fits the list; otherwise over the body. Never past the viewport.\n  const place = () => {\n    const r = sum.getBoundingClientRect();\n    const right = r.left + r.width / 2 > innerWidth / 2;\n    const room = right ? innerWidth - r.right : r.left;\n    nav.dataset.flow = room >= Math.min(LIST_W, innerWidth - 48) + EDGE ? 'out' : 'in';\n  };\n  const setOpen = (open) => {\n    if (open) place();\n    box.open = open;\n    if (!open) byHover = false;\n  };\n  const peek = (tick) => ticks.forEach((t) => t.classList.toggle('is-peek', t === tick));\n  const currentLink = () => links.find((a) => a.getAttribute('aria-current') === 'true') || links[0];\n\n  const mark = (id) => {\n    current = id;\n    ticks.forEach((t) => t.classList.toggle('is-current', t.dataset.id === id));\n    links.forEach((a) => {\n      if (a.getAttribute('href') === `#panel-${id}`) a.setAttribute('aria-current', 'true');\n      else a.removeAttribute('aria-current');\n    });\n  };\n  const sections = ticks.map((t) => document.getElementById(`panel-${t.dataset.id}`)).filter(Boolean);\n  if (sections.length) mark(sections[0].id.slice(6));\n  if (sections.length && 'IntersectionObserver' in window) {\n    // A thin band a third of the way down the viewport: the section across it is the one being read.\n    const seen = new Set();\n    const io = new IntersectionObserver((entries) => {\n      entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));\n      const hit = sections.filter((s) => seen.has(s)).pop();\n      if (hit && hit.id.slice(6) !== current) mark(hit.id.slice(6));\n    }, { rootMargin: '-30% 0px -65% 0px' });\n    sections.forEach((s) => io.observe(s));\n  }\n\n  place();\n  addEventListener('resize', place);\n\n  // Mouse: dwelling on the rail opens the list, leaving it closes a list opened that way. A tap or click opens it for good.\n  box.addEventListener('pointerenter', (e) => {\n    clearTimeout(leave);\n    if (e.pointerType !== 'mouse' || box.open) return;\n    dwell = setTimeout(() => { setOpen(true); byHover = true; }, 300);\n  });\n  box.addEventListener('pointerleave', () => {\n    clearTimeout(dwell);\n    // A link the keyboard moved into keeps the list open; focusout closes it once the focus leaves the nav.\n    if (byHover) leave = setTimeout(() => { if (!nav.contains(document.activeElement)) setOpen(false); }, 250);\n  });\n  sum.addEventListener('click', (e) => {\n    clearTimeout(dwell);\n    if (box.open && byHover) { e.preventDefault(); byHover = false; return; }\n    place();\n  });\n  box.addEventListener('toggle', () => { if (box.open) peek(null); });\n\n  // Keyboard: the summary opens with Enter or Space (native); arrows move through the links; Esc closes and returns to the rail.\n  sum.addEventListener('focus', () => {\n    if (sum.matches(':focus-visible')) peek(ticks.find((t) => t.dataset.id === current));\n  });\n  sum.addEventListener('blur', () => peek(null));\n  nav.addEventListener('keydown', (e) => {\n    if (e.key === 'Escape' && box.open) {\n      e.preventDefault();\n      setOpen(false);\n      sum.focus();\n      return;\n    }\n    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;\n    const at = links.indexOf(document.activeElement);\n    if (at < 0 && e.target !== sum) return;\n    e.preventDefault();\n    if (!box.open) setOpen(true);\n    let next;\n    if (e.key === 'Home') next = links[0];\n    else if (e.key === 'End') next = links[links.length - 1];\n    else if (at < 0) next = e.key === 'ArrowDown' ? currentLink() : links[links.length - 1];\n    else next = links[Math.min(links.length - 1, Math.max(0, at + (e.key === 'ArrowDown' ? 1 : -1)))];\n    next.focus();\n  });\n  nav.addEventListener('focusout', (e) => {\n    if (box.open && e.relatedTarget && !nav.contains(e.relatedTarget)) setOpen(false);\n  });\n\n  // Choosing a section or tapping outside closes the list.\n  links.forEach((a) => a.addEventListener('click', () => setOpen(false)));\n  document.addEventListener('pointerdown', (e) => { if (box.open && !nav.contains(e.target)) setOpen(false); });\n  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && box.open && !nav.contains(e.target)) setOpen(false); });\n})();\n})();\n";
+var RUNTIME_JS = "(() => {\n// How a formula reads in a quote. MathML has no plain text, so src/math.js writes the formula as the draft wrote it, delimiters included, in\n// data-am-tex on the <math> element, and the Remark and Reply scripts read page text through this file. On a page without math there is no\n// such element, so formulaOf is null and every text comes out as it did before.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n\nconst TEX = 'data-am-tex';\n\n// The formula that holds a node, or null.\nconst formulaOf = (node) => node.parentElement?.closest(`[${TEX}]`) ?? null;\n\nconst firstText = (el) => {\n  for (const child of el.childNodes) {\n    const found = child.nodeType === 3 ? child : firstText(child);\n    if (found) return found;\n  }\n  return null;\n};\n\n// What a text node adds to a quote: its data. The first text node of a formula adds the formula, and the others add nothing.\n// (A formula in an error style is plain text with its delimiters, not a <math>, so it comes out once.)\nfunction nodeText(node) {\n  const math = formulaOf(node);\n  if (!math) return node.data;\n  return firstText(math) === node ? math.getAttribute(TEX) : '';\n}\n\n// The text of a node as textContent reads it, but with each formula as written.\nconst textWithMath = (node) => (node.nodeType === 3 ? nodeText(node) : [...node.childNodes].map(textWithMath).join(''));\n\n(() => {\n  const root = document.documentElement;\n  // A host that serves this page inside its own document leaves the real root without the page's settings. The toolbar keeps a copy;\n  // set back what the root lacks, before anything below reads the root. A root's own value, even an empty one, is kept, except a\n  // theme or mode that no toolbar option names: that is the host's own setting (the Claude desktop app sets data-theme=\"dark\"), and\n  // keeping it would leave the page unstyled.\n  const carrier = document.querySelector('.am-toolbar');\n  const listFor = { 'data-theme': 'theme', 'data-mode': 'mode' };\n  const foreign = (attr, value) => {\n    const options = listFor[attr] && document.querySelector(`select[data-am=\"${listFor[attr]}\"]`)?.options;\n    return Boolean(value) && options != null && ![...options].some((o) => o.value === value);\n  };\n  for (const [attr, key] of [['lang', 'data-am-root-lang'], ['dir', 'data-am-root-dir'], ['data-theme', 'data-am-root-theme'], ['data-mode', 'data-am-root-mode'], ['data-style', 'data-am-root-style']]) {\n    const own = root.getAttribute(attr);\n    if ((own === null || foreign(attr, own)) && carrier?.getAttribute(key) != null) root.setAttribute(attr, carrier.getAttribute(key));\n  }\n  // Each toolbar list sets one root attribute; its options name the values, so the runtime names no theme or mode.\n  for (const [name, attr] of [['theme', 'data-theme'], ['mode', 'data-mode']]) {\n    const select = document.querySelector(`select[data-am=\"${name}\"]`);\n    if (!select) continue;\n    select.value = root.getAttribute(attr);\n    select.addEventListener('change', () => root.setAttribute(attr, select.value));\n  }\n\n  // \u2500\u2500 Text size \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  // A\u2212 / A+ set --am-scale on the root; every page size and line (src/themes/type-scale.js) follows it, and the drawing boxes grow\n  // with it while their viewBox keeps the units Node measured. The buttons carry the range from SCALE, so this script keeps no\n  // second copy of the numbers. A reader's choice is remembered in this browser and wins over the page's own scale; where storage\n  // is off (am serve, file://) it lasts for this tab, and the click still works.\n  const scaleDown = document.querySelector('[data-am=\"scale-down\"]');\n  const scaleUp = document.querySelector('[data-am=\"scale-up\"]');\n  if (scaleDown && scaleUp) {\n    const min = Number(scaleDown.dataset.min);\n    const max = Number(scaleDown.dataset.max);\n    const step = Number(scaleDown.dataset.step);\n    const storeKey = 'am-scale';\n    let value;\n\n    const inRange = (n) => Number.isFinite(n) && n >= min && n <= max;\n    const savedScale = () => {\n      try {\n        return Number(localStorage.getItem(storeKey));\n      } catch {\n        return NaN;\n      }\n    };\n    const saveScale = (n) => {\n      try {\n        localStorage.setItem(storeKey, String(n));\n      } catch {\n        // Storage may be off (am serve, file://); the size then lasts until the tab closes.\n      }\n    };\n\n    const updateButtons = () => {\n      const setUnavailable = (btn, unavailable) => {\n        if (unavailable) btn.setAttribute('aria-disabled', 'true');\n        else btn.removeAttribute('aria-disabled');\n      };\n      setUnavailable(scaleDown, value <= min);\n      setUnavailable(scaleUp, value >= max);\n    };\n\n    // One step is a multiple of `step`: Math.round first, then two decimals, so 1.1500000000000001 becomes 1.15.\n    const setScale = (next, remember = false) => {\n      value = Math.min(max, Math.max(min, Number((Math.round(next / step) * step).toFixed(2))));\n      root.style.setProperty('--am-scale', String(value));\n      for (const svg of document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas) > svg[role=\"img\"]')) {\n        const box = svg.viewBox?.baseVal;\n        if (!box || !(box.width > 0) || !(box.height > 0)) continue;\n        svg.setAttribute('width', String(Math.ceil(box.width * value)));\n        svg.setAttribute('height', String(Math.ceil(box.height * value)));\n      }\n      updateButtons();\n      if (remember) saveScale(value);\n      window.dispatchEvent(new Event('am-scale'));\n    };\n\n    // A page with no stored choice is left exactly as it was rendered: no inline variable, no svg rewrite, no extra layout pass.\n    value = parseFloat(getComputedStyle(root).getPropertyValue('--am-scale')) || 1;\n    updateButtons();\n    const saved = savedScale();\n    if (inRange(saved) && saved !== value) setScale(saved);\n    scaleDown.hidden = false;\n    scaleUp.hidden = false;\n    scaleDown.addEventListener('click', () => {\n      if (scaleDown.getAttribute('aria-disabled') === 'true') return;\n      setScale(value - step, true);\n    });\n    scaleUp.addEventListener('click', () => {\n      if (scaleUp.getAttribute('aria-disabled') === 'true') return;\n      setScale(value + step, true);\n    });\n  }\n\n  // A phone cannot show the whole toolbar. Its end (Reply, Remark, Copy source) is what a phone showed before the text-size\n  // buttons, so open at that end: Theme, Mode and A\u2212 / A+ are reached by scrolling toward the start. A reader scroll leaves the\n  // position we set, so a later resize does not pull the toolbar back.\n  if (carrier) {\n    const rtl = getComputedStyle(carrier).direction === 'rtl';\n    let lastProgrammatic = null;\n    let readerScrolled = false;\n    const scrollToEnd = () => {\n      if (carrier.scrollWidth <= carrier.clientWidth) return;\n      // Chrome keeps a right-to-left box's scrollLeft negative; the browser clamps either value to the real end.\n      carrier.scrollTo({ left: rtl ? -carrier.scrollWidth : carrier.scrollWidth });\n      lastProgrammatic = carrier.scrollLeft;\n    };\n    carrier.addEventListener('scroll', () => {\n      if (Math.abs(carrier.scrollLeft - lastProgrammatic) > 1) readerScrolled = true;\n    });\n    scrollToEnd();\n    addEventListener('resize', () => {\n      if (!readerScrolled) scrollToEnd();\n    });\n  }\n\n  const copyText = async (text) => {\n    try {\n      await navigator.clipboard.writeText(text);\n    } catch {\n      const ta = Object.assign(document.createElement('textarea'), { value: text });\n      document.body.append(ta);\n      ta.select();\n      document.execCommand('copy');\n      ta.remove();\n    }\n  };\n  // A button reads its label from data-done for a moment after a copy, then comes back to the label it started from. That label is\n  // read once, here: a second click inside the moment would otherwise read the copied label off the button and restore that instead,\n  // and the label would never come back. The moment starts again on each click: the timer of the previous one is left to fire and\n  // does nothing (a token, so this needs no timer bookkeeping the page scripts do not already have).\n  const flasher = (btn) => {\n    const idle = btn.textContent;\n    let clicks = 0;\n    return () => {\n      btn.textContent = btn.dataset.done;\n      const mine = ++clicks;\n      setTimeout(() => { if (mine === clicks) btn.textContent = idle; }, 1400);\n    };\n  };\n\n  const copyBtn = document.querySelector('[data-am=\"copy\"]');\n  if (copyBtn) {\n    const flash = flasher(copyBtn);\n    copyBtn.addEventListener('click', async () => {\n      const nodes = document.querySelectorAll('#am-source');\n      await copyText(nodes[nodes.length - 1]?.value ?? '');\n      flash();\n    });\n  }\n\n  // Each code block copies its own lines, without the line numbers.\n  for (const btn of document.querySelectorAll('[data-am=\"copy-code\"]')) {\n    const flash = flasher(btn);\n    btn.addEventListener('click', async () => {\n      const lines = btn.closest('.am-codeblock')?.querySelectorAll('.am-ln') ?? [];\n      await copyText([...lines].map((l) => l.textContent).join('\\n'));\n      flash();\n    });\n  }\n\n  // \u2500\u2500 Sideways scroll cue \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  // Overlay scrollbars (macOS) show nothing until the reader scrolls, so a wide code block or diagram looked cut off. While a box\n  // hides content past its left or right edge it carries am-more-left / am-more-right, and base.css fades that edge. The sides are\n  // physical because a box can read in the other direction than the page (code stays left to right on a right-to-left page); there\n  // scrollLeft counts down from 0, so the hidden amounts use its size.\n  const scrollers = document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas), .am-code, .am-annot-scroll');\n  const markMore = (el) => {\n    const hidden = el.scrollWidth - el.clientWidth;\n    let left = false;\n    let right = false;\n    if (hidden > 1) {\n      const atStart = Math.abs(el.scrollLeft);\n      const rtl = getComputedStyle(el).direction === 'rtl';\n      [left, right] = rtl ? [atStart < hidden - 1, atStart > 1] : [atStart > 1, atStart < hidden - 1];\n    }\n    el.classList.toggle('am-more-left', left);\n    el.classList.toggle('am-more-right', right);\n  };\n  if (scrollers.length) {\n    const resized = typeof ResizeObserver === 'function' ? new ResizeObserver((entries) => entries.forEach((e) => markMore(e.target))) : null;\n    for (const el of scrollers) {\n      el.addEventListener('scroll', () => markMore(el), { passive: true });\n      resized?.observe(el);\n      markMore(el);\n    }\n  }\n\n  // \u2500\u2500 Diagram Lightbox & Pan-Zoom Viewer \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  const diagrams = document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas)');\n  const lb = document.querySelector('.am-lightbox');\n  if (diagrams.length && lb) {\n    const backdrop = lb.querySelector('.am-lightbox-backdrop');\n    const titleText = lb.querySelector('.am-lightbox-title-text');\n    const stage = lb.querySelector('.am-lightbox-stage');\n    const canvas = lb.querySelector('.am-lightbox-canvas');\n    const closeBtn = lb.querySelector('.am-lightbox-close');\n    const expandLabel = lb.getAttribute('data-expand') || 'Expand diagram';\n\n    let scale = 1, x = 0, y = 0, fitScale = 1, curVw = 800, curVh = 600;\n    let isDragging = false, activePointerId = null, startX = 0, startY = 0, origX = 0, origY = 0;\n    let lastTrigger = null;\n\n    const apply = () => {\n      canvas.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;\n    };\n\n    const zoomTo = (newScale, pivotX, pivotY) => {\n      newScale = Math.max(0.2, Math.min(6.0, newScale));\n      if (Math.abs(newScale - scale) < 0.0001) return;\n      const r = newScale / scale;\n      x = pivotX - (pivotX - x) * r;\n      y = pivotY - (pivotY - y) * r;\n      scale = newScale;\n      apply();\n    };\n\n    const open = (diag, trigger) => {\n      const svg = [...diag.children].find((el) => el.tagName.toLowerCase() === 'svg');\n      if (!svg) return;\n      lastTrigger = trigger;\n\n      const panel = diag.closest('.am-panel');\n      const panelTitle = panel?.querySelector('.am-panel-head h2')?.textContent?.trim() || panel?.querySelector('h2')?.textContent?.trim() || lb.getAttribute('aria-label') || 'Diagram viewer';\n      if (titleText) titleText.textContent = panelTitle;\n\n      const clone = svg.cloneNode(true);\n      const defElements = clone.querySelectorAll('[id]');\n      if (defElements.length) {\n        const idMap = new Map();\n        defElements.forEach((el, i) => {\n          const oldId = el.id;\n          const newId = `${oldId}-lb-${i}`;\n          idMap.set(oldId, newId);\n          el.id = newId;\n        });\n        const urlAttrs = ['marker-start', 'marker-mid', 'marker-end', 'fill', 'stroke', 'filter', 'clip-path', 'mask'];\n        clone.querySelectorAll('*').forEach((el) => {\n          for (const attr of urlAttrs) {\n            const val = el.getAttribute(attr);\n            if (val && val.startsWith('url(#')) {\n              const id = val.slice(5, -1);\n              if (idMap.has(id)) el.setAttribute(attr, `url(#${idMap.get(id)})`);\n            }\n          }\n          const href = el.getAttribute('href') || el.getAttribute('xlink:href');\n          if (href && href.startsWith('#')) {\n            const id = href.slice(1);\n            if (idMap.has(id)) {\n              if (el.hasAttribute('href')) el.setAttribute('href', `#${idMap.get(id)}`);\n              if (el.hasAttribute('xlink:href')) el.setAttribute('xlink:href', `#${idMap.get(id)}`);\n            }\n          }\n        });\n      }\n\n      const vb = svg.viewBox?.baseVal;\n      curVw = (vb && vb.width > 0) ? vb.width : (parseFloat(svg.getAttribute('width')) || svg.clientWidth || 800);\n      curVh = (vb && vb.height > 0) ? vb.height : (parseFloat(svg.getAttribute('height')) || svg.clientHeight || 600);\n      // The panel's svg carries the reading floor as min-width (layout-dom.js floorDiagrams); the viewer sizes the clone itself.\n      clone.style.minWidth = '';\n      clone.style.width = `${curVw}px`;\n      clone.style.height = `${curVh}px`;\n      canvas.innerHTML = '';\n      canvas.append(clone);\n      lb.removeAttribute('hidden');\n      document.body.style.overflow = 'hidden';\n\n      const rect = stage.getBoundingClientRect();\n      const pad = 48;\n      const availW = Math.max(100, rect.width - pad * 2);\n      const availH = Math.max(100, rect.height - pad * 2);\n      fitScale = Math.min(availW / curVw, availH / curVh, 1.0);\n      scale = fitScale;\n      x = (rect.width - curVw * scale) / 2;\n      y = (rect.height - curVh * scale) / 2;\n      apply();\n      closeBtn.focus();\n    };\n\n    const close = () => {\n      if (lb.hasAttribute('hidden')) return;\n      lb.setAttribute('hidden', '');\n      canvas.innerHTML = '';\n      document.body.style.overflow = '';\n      lastTrigger?.focus();\n    };\n\n    stage.addEventListener('wheel', (e) => {\n      e.preventDefault();\n      const rect = stage.getBoundingClientRect();\n      const dy = e.deltaMode === 1 ? e.deltaY * 16 : (e.deltaMode === 2 ? e.deltaY * 400 : e.deltaY);\n      const factor = Math.exp(-Math.max(-200, Math.min(200, dy)) * 0.0015);\n      zoomTo(scale * factor, e.clientX - rect.left, e.clientY - rect.top);\n    }, { passive: false });\n\n    stage.addEventListener('pointerdown', (e) => {\n      if (e.button !== 0 || isDragging) return;\n      isDragging = true;\n      activePointerId = e.pointerId;\n      startX = e.clientX;\n      startY = e.clientY;\n      origX = x;\n      origY = y;\n      stage.setPointerCapture(e.pointerId);\n      stage.classList.add('am-panning');\n    });\n\n    stage.addEventListener('pointermove', (e) => {\n      if (!isDragging || e.pointerId !== activePointerId) return;\n      x = origX + (e.clientX - startX);\n      y = origY + (e.clientY - startY);\n      apply();\n    });\n\n    const endDrag = (e) => {\n      if (!isDragging || e.pointerId !== activePointerId) return;\n      isDragging = false;\n      activePointerId = null;\n      stage.classList.remove('am-panning');\n      try { stage.releasePointerCapture(e.pointerId); } catch {}\n    };\n    stage.addEventListener('pointerup', endDrag);\n    stage.addEventListener('pointercancel', endDrag);\n\n    stage.addEventListener('dblclick', () => {\n      const rect = stage.getBoundingClientRect();\n      scale = fitScale;\n      x = (rect.width - curVw * scale) / 2;\n      y = (rect.height - curVh * scale) / 2;\n      apply();\n    });\n\n    closeBtn.addEventListener('click', close);\n    backdrop.addEventListener('click', close);\n    window.addEventListener('keydown', (e) => {\n      if (e.key === 'Escape' && !lb.hasAttribute('hidden')) close();\n    });\n\n    lb.addEventListener('keydown', (e) => {\n      if (e.key !== 'Tab') return;\n      const focusables = lb.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex=\"-1\"])');\n      if (!focusables.length) return;\n      const first = focusables[0];\n      const last = focusables[focusables.length - 1];\n      if (e.shiftKey && document.activeElement === first) {\n        e.preventDefault();\n        last.focus();\n      } else if (!e.shiftKey && document.activeElement === last) {\n        e.preventDefault();\n        first.focus();\n      }\n    });\n\n    const expandSvg = '<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" y1=\"3\" x2=\"14\" y2=\"10\"></line><line x1=\"3\" y1=\"21\" x2=\"10\" y2=\"14\"></line></svg>';\n    diagrams.forEach((diag) => {\n      const btn = document.createElement('button');\n      btn.type = 'button';\n      btn.className = 'am-diagram-expand';\n      btn.title = expandLabel;\n      btn.setAttribute('aria-label', expandLabel);\n      btn.innerHTML = expandSvg;\n      btn.addEventListener('click', () => open(diag, btn));\n      diag.prepend(btn);\n    });\n  }\n})();\n(() => {\n// The reply a reader copies from the page: one Markdown text with the decisions, the panel comments and the block remarks.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n// decisions: [{ panel, question, picked: [label], suggested: [label], touched }]; comments: [{ panel, title, text }];\n// remarks: [{ panel, quote, kind, note }], where quote is the start of the marked block and kind is a key of ui.kinds.\n// Comment and remark text is quoted line by line, so text the reader typed cannot pass as part of the structure.\n// rtl: the page reads right to left, so the arrow before each answer points left, the way the text runs.\nfunction replyText({ title, decisions, comments, remarks = [], ui, rtl = false }) {\n  const arrow = rtl ? '\u2190' : '\u2192';\n  const out = [`# Re: ${title}`];\n  if (decisions.length) {\n    out.push('', `## ${ui.decisions}`);\n    decisions.forEach((d, i) => {\n      const answer = d.picked.length ? d.picked.map((l) => `**${l}**`).join(', ') : '**\u2014**';\n      // Every option starts unselected, so an ask the reader never clicked has no answer: the reply names the suggestion\n      // instead of passing it off as the reader's choice.\n      const same = d.picked.length === d.suggested.length && d.picked.every((l) => d.suggested.includes(l));\n      const suggested = d.suggested.join(', ') || '\u2014';\n      const why = !d.touched ? `${ui.untouched}: ${suggested}` : same ? ui.confirmed : `${ui.was}: ${suggested}`;\n      out.push(`${i + 1}. [${d.panel}] ${d.question}`, `   ${arrow} ${answer} _(${why})_`);\n    });\n  }\n  const written = comments.filter((c) => c.text.trim());\n  const quoted = (text) => (text.trim() ? text.trim().split('\\n').map((l) => `  > ${l}`) : []);\n  if (written.length) {\n    out.push('', `## ${ui.comments}`);\n    for (const c of written) out.push(`- **${c.panel} \xB7 ${c.title}**`, ...quoted(c.text));\n  }\n  if (remarks.length) {\n    out.push('', `## ${ui.remarks}`);\n    for (const r of remarks) {\n      const label = [r.panel, ui.kinds?.[r.kind] ?? r.kind].filter(Boolean).join(' \xB7 ');\n      out.push(`- **${label}** \"${r.quote}\"`, ...quoted(r.note));\n    }\n  }\n  if (written.length || remarks.some((r) => r.note.trim())) out.push('', `_${ui.typed}_`);\n  return `${out.join('\\n')}\\n`;\n}\n\n// A letter of a right-to-left script. One definition for the page builder (src/bidi.js) and for the right-to-left page script\n// (src/runtime/reply-view.js), so the two cannot drift apart. A plain ES module; the page script gets this file in front of\n// reply-view.js, with its `export` keyword dropped and reply-view.js's import of it removed (src/runtime/compose.js).\nconst RTL_LETTER = /[\\p{Script=Hebrew}\\p{Script=Arabic}\\p{Script=Syriac}\\p{Script=Thaana}\\p{Script=Nko}\\p{Script=Samaritan}\\p{Script=Mandaic}]/u;\n\n// The reply as the reader sees it in the Reply sheet (src/runtime/reply.js): the Markdown that Copy copies, drawn as headings, bold answers\n// and quoted comments instead of raw \"# Re: ...\", \"1. [E] ...\" and \"- **A \xB7 ...**\" lines. Each line gets its own direction, so a\n// Hebrew reader sees Latin answers and paths in place; a line with no right-to-left letter reads left to right, as on any other page.\n// The raw Markdown stays in the sheet under a fold, so the copied text does not change.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped and rtl-letter.js in front of it in place of the\n// import (src/runtime/compose.js).\n\nconst escHtml = (s) => s.replace(/[&<>\"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' })[c]);\n// A line with a right-to-left letter reads right to left; a line without one (an English comment, a path) reads left to right.\nconst dirOf = (s) => (RTL_LETTER.test(s) ? 'rtl' : 'ltr');\n\n// The only inline Markdown src/runtime/reply-text.js writes: **answer**, _(note)_ and the \"quote\" of a remark. Each piece is isolated in its own direction,\n// so a Latin answer inside a Hebrew line keeps its place, and \"A \xB7 title\" still starts with the panel letter.\nconst piece = (tag, text) => `<${tag}><bdi dir=\"${dirOf(text)}\">${text}</bdi></${tag}>`;\nfunction inline(s) {\n  return escHtml(s)\n    .replace(/\\*\\*(.+?)\\*\\*/g, (_, t) => piece('strong', t))\n    .replace(/(^|\\s)_(.+?)_(?=\\s|$)/g, (_, pre, t) => pre + piece('em', t))\n    // The quoted start of a marked block (\"- **A \xB7 concern** \"text\"\"): isolated, so Latin text in a Hebrew line keeps its place.\n    .replace(/&quot;(.+)&quot;$/, (_, t) => `&quot;<bdi dir=\"${dirOf(t)}\">${t}</bdi>&quot;`);\n}\n\n// The reply text (src/runtime/reply-text.js) as HTML, one block per line.\nfunction replyViewHtml(text) {\n  return text\n    .replace(/\\n$/, '')\n    .split('\\n')\n    .map((line) => {\n      const dir = dirOf(line);\n      let m;\n      if (!line.trim()) return '<div class=\"am-rv-gap\"></div>';\n      if ((m = line.match(/^(#{1,2}) (.*)$/))) return `<div class=\"am-rv-h${m[1].length}\" dir=\"${dir}\">${inline(m[2])}</div>`;\n      if ((m = line.match(/^(\\d+)\\. \\[([^\\]]*)\\] (.*)$/))) {\n        return `<div class=\"am-rv-q\" dir=\"${dir}\"><bdi>${m[1]}.</bdi> <bdi class=\"am-rv-tag\">${escHtml(m[2])}</bdi> ${inline(m[3])}</div>`;\n      }\n      if ((m = line.match(/^ {3}([\u2190\u2192]) (.*)$/))) return `<div class=\"am-rv-a\" dir=\"${dir}\">${m[1]} ${inline(m[2])}</div>`;\n      if ((m = line.match(/^- (.*)$/))) return `<div class=\"am-rv-c\" dir=\"${dir}\">${inline(m[1])}</div>`;\n      // A comment line is shown exactly as the reader typed it.\n      if ((m = line.match(/^ {2}> ?(.*)$/))) return `<div class=\"am-rv-quote\" dir=\"${dirOf(m[1])}\">${escHtml(m[1]) || '&nbsp;'}</div>`;\n      return `<div dir=\"${dir}\">${inline(line)}</div>`;\n    })\n    .join('');\n}\n\n// Answer on the page: every panel gets a Comment box, and the Reply button collects the ask answers, the comments and the remarks\n// into one Markdown reply (replyText) to copy back to the agent. Answers and comments stay in localStorage across reloads.\n// The remark script (remark.js) adds the blocks the reader marked, through window.__amRemarkData, and tells this script about a change\n// with an \"am-remark-change\" event on the document.\n// The Reply sheet shows the reply drawn (replyViewHtml) with the Markdown that Copy copies under a fold. Once the reader has given any\n// input, a bar at the bottom of the page shows the counts and copies the reply in one click, so there is no trip to the top-right button.\nconst replyBtn = document.querySelector('[data-am=\"reply\"]');\nconst COMMENT_ICON = '<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"></path></svg>';\nif (replyBtn) {\n  const ui = JSON.parse(replyBtn.dataset.ui);\n  const storeKey = `am-reply:${location.pathname}`;\n  // A page served by `am serve` runs without localStorage and the phone may discard its tab, so it keeps the answers on the\n  // server: data-am-save names the write route and data-am-state carries what the server already holds for this page version.\n  const serve = (() => {\n    const { amSave: save, amState: state } = document.body?.dataset ?? {};\n    if (!save) return null;\n    try {\n      return { save, restored: state ? JSON.parse(state) : null };\n    } catch {\n      return { save, restored: null };\n    }\n  })();\n  let saveTimer = null;\n  let pendingPatch = null;\n  const sendSave = (patch) => {\n    fetch(serve.save, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(patch), keepalive: true })\n      .catch(() => {}); // a page that cannot reach the server keeps its state until it closes, as before\n  };\n  // Typing must not put one request per keystroke on the server; localStorage is written at once, the network follows.\n  const saveSoon = (patch) => {\n    clearTimeout(saveTimer);\n    pendingPatch = patch;\n    saveTimer = setTimeout(() => {\n      pendingPatch = null;\n      sendSave(patch);\n    }, 400);\n  };\n  // A hidden or closing page sends the change it still holds, before the timer can run.\n  const flushSave = () => {\n    if (!pendingPatch) return;\n    clearTimeout(saveTimer);\n    sendSave(pendingPatch);\n    pendingPatch = null;\n  };\n  document.addEventListener('visibilitychange', () => {\n    if (document.visibilityState === 'hidden') flushSave();\n  });\n  window.addEventListener('pagehide', flushSave);\n  // A preview may draw a mock panel; it gets no comment box and cannot shadow the real panel's id.\n  const panels = [...document.querySelectorAll('.am-panel')].filter((panel) => !panel.closest('.am-ask-preview'));\n  // An ask inside a preview is part of the drawing, not a decision of the page.\n  const asks = [...document.querySelectorAll('.am-ask')].filter((a) => !a.closest('.am-ask-preview'));\n  // Answers are saved by question text, so they still match after am patch has renumbered the asks.\n  // Page text without the word joiners a right-to-left page puts after a Hebrew prefix hyphen (src/bidi.js): the reply and the saved\n  // answers hold the text as the draft wrote it, a formula too (src/runtime/math-text.js).\n  const WJ = new RegExp(String.fromCharCode(0x2060), 'g');\n  const textOf = (el) => el && textWithMath(el).replace(WJ, '').trim();\n  const keyOf = (ask) => textOf(ask.querySelector('legend')) ?? ask.dataset.ask;\n  const touched = new Set();\n  const boxes = new Map();\n  // The bar is built below with the sheet; the handlers that change the counts only call this.\n  let refreshBar = () => {};\n  // The textarea a failed copy keeps selected, so the reader can still use the keyboard shortcut.\n  let stuck = null;\n\n  const load = () => {\n    if (serve?.restored?.reply) return serve.restored.reply;\n    try {\n      return JSON.parse(localStorage.getItem(storeKey)) || {};\n    } catch {\n      return {};\n    }\n  };\n  const save = () => {\n    const state = {\n      asks: Object.fromEntries(asks.map((a) => [keyOf(a), { picked: picked(a), touched: touched.has(a) }])),\n      comments: Object.fromEntries([...boxes].map(([id, box]) => [id, box.value]).filter(([, text]) => text.trim())),\n    };\n    try {\n      localStorage.setItem(storeKey, JSON.stringify(state));\n    } catch {\n      // Storage may be off (private window, file:// policy); answers then last until the page closes.\n    }\n    if (serve) saveSoon({ reply: state });\n  };\n  // A preview can hold a mock form; those controls are a picture, not the reader's answer.\n  const inputsOf = (ask) => [...ask.querySelectorAll('input')].filter((i) => !i.closest('.am-ask-preview'));\n  const picked = (ask) => inputsOf(ask).filter((i) => i.checked).map((i) => i.value);\n  const panelOf = (el) => {\n    const panel = el.closest('.am-panel');\n    return { id: panel?.id.replace(/^panel-/, '') ?? '', title: textOf(panel?.querySelector('.am-panel-head h2')) ?? '' };\n  };\n\n  const saved = load();\n  for (const ask of asks) {\n    const inputs = inputsOf(ask);\n    const state = saved.asks?.[keyOf(ask)];\n    // A saved answer applies only while every picked option still exists on the page, and only if the reader clicked: older versions started\n    // with the suggestion selected and saved it untouched, and that state must come back unselected.\n    if (state?.touched && Array.isArray(state.picked) && state.picked.every((v) => inputs.some((i) => i.value === v))) {\n      for (const input of inputs) input.checked = state.picked.includes(input.value);\n      touched.add(ask);\n    }\n    // A click counts even on the option that is already picked: the reader confirms the suggestion.\n    const answer = (e) => {\n      if (e?.target?.closest?.('.am-ask-preview')) return;\n      touched.add(ask);\n      save();\n      refreshBar();\n    };\n    ask.addEventListener('change', answer);\n    ask.addEventListener('click', (e) => { if (e.target.matches('input')) answer(e); });\n    // In cards the whole card looks clickable, so a click on its preview picks the option too. A control in the drawing is not the answer.\n    ask.addEventListener('click', (e) => {\n      if (!ask.classList.contains('am-ask--cards')) return;\n      if (!e.target.closest?.('.am-ask-preview') || e.target.closest('input, button, a, select, textarea, summary, label')) return;\n      const input = e.target.closest('.am-ask-card')?.querySelector('input');\n      if (!input) return;\n      const wasPicked = input.checked;\n      input.click();\n      // A radio that is already on sends no change event, and the click still confirms the suggestion.\n      if (wasPicked && input.type === 'radio') answer();\n    });\n  }\n\n  for (const panel of panels) {\n    const id = panel.id.replace(/^panel-/, '');\n    // An icon only: narrow panels have no room for a word next to the title.\n    const btn = Object.assign(document.createElement('button'), { type: 'button', className: 'am-comment-btn', title: ui.comment, innerHTML: COMMENT_ICON });\n    btn.setAttribute('aria-label', `${ui.comment} ${id}`);\n    btn.setAttribute('aria-expanded', 'false');\n    const wrap = Object.assign(document.createElement('div'), { className: 'am-comment', hidden: true });\n    const box = Object.assign(document.createElement('textarea'), { rows: 3, placeholder: ui.commentHint, value: saved.comments?.[id] ?? '' });\n    box.setAttribute('aria-label', `${ui.comment} ${id}`);\n    wrap.append(box);\n    const show = (open) => {\n      wrap.hidden = !open;\n      btn.setAttribute('aria-expanded', String(open));\n    };\n    btn.addEventListener('click', () => {\n      show(wrap.hidden);\n      if (!wrap.hidden) box.focus();\n    });\n    box.addEventListener('input', () => {\n      btn.classList.toggle('am-comment-btn--on', Boolean(box.value.trim()));\n      save();\n      refreshBar();\n    });\n    btn.classList.toggle('am-comment-btn--on', Boolean(box.value.trim()));\n    if (box.value.trim()) show(true);\n    (panel.querySelector('.am-panel-head') ?? panel).append(btn);\n    panel.append(wrap);\n    boxes.set(id, box);\n  }\n\n  const sheet = document.createElement('dialog');\n  sheet.className = 'am-reply';\n  sheet.setAttribute('aria-label', ui.title);\n  sheet.innerHTML = '<div class=\"am-reply-head\"><strong></strong><span></span></div><div class=\"am-reply-view\" tabindex=\"0\"></div><details class=\"am-reply-raw\"><summary></summary><textarea readonly rows=\"10\"></textarea></details><div class=\"am-reply-actions\"><button type=\"button\" class=\"am-btn\" data-act=\"copy\"></button><button type=\"button\" class=\"am-btn\" data-act=\"close\"></button></div>';\n  sheet.querySelector('strong').textContent = ui.title;\n  sheet.querySelector('span').textContent = ui.hint;\n  sheet.querySelector('summary').textContent = ui.raw;\n  const view = sheet.querySelector('.am-reply-view');\n  const raw = sheet.querySelector('details');\n  const text = sheet.querySelector('textarea');\n  const copy = sheet.querySelector('[data-act=\"copy\"]');\n  const close = sheet.querySelector('[data-act=\"close\"]');\n  copy.textContent = ui.copy;\n  close.textContent = ui.close;\n  document.body.append(sheet);\n\n  const compose = () => {\n    const decisions = asks.map((ask) => ({\n      panel: panelOf(ask).id,\n      question: textOf(ask.querySelector('legend')) ?? '',\n      picked: picked(ask),\n      suggested: inputsOf(ask).filter((i) => i.hasAttribute('data-suggested')).map((i) => i.value),\n      touched: touched.has(ask),\n    }));\n    const comments = [...boxes].map(([id, box]) => ({ panel: id, title: panelOf(box).title, text: box.value }));\n    const remarks = window.__amRemarkData?.() ?? [];\n    const empty = !decisions.length && !comments.some((c) => c.text.trim()) && !remarks.length;\n    const title = textOf(document.querySelector('.am-head h1')) ?? document.title;\n    return empty ? '' : replyText({ title, decisions, comments, remarks, ui, rtl: document.documentElement.dir === 'rtl' });\n  };\n\n  // The text goes through the clipboard API; a page the browser treats as insecure (file://) falls back to selecting a temporary\n  // textarea, because the sheet's own textarea can sit inside a closed fold, where it cannot be selected.\n  // That fallback reports whether it worked. When it does not, the text stays selected (so Cmd/Ctrl+C still copies it) and the\n  // button says what to do instead of showing the \"Copied \u2713\" label the reader cannot trust.\n  const copyText = async (str, btn) => {\n    stuck?.remove();\n    stuck = null;\n    try {\n      await navigator.clipboard.writeText(str);\n      // The close_after_reply script (close-after-reply.js) closes the tab once the reply is on the clipboard.\n      document.dispatchEvent(new Event('am-reply-copied'));\n    } catch {\n      const tmp = Object.assign(document.createElement('textarea'), { value: str });\n      tmp.style.cssText = 'position:fixed;top:-100px;opacity:0';\n      // Inside the sheet while it is open: while a modal dialog is open the rest of the document cannot take focus, so a textarea\n      // in the body can be selected but not focused, and the keyboard shortcut the reader is told to press would copy nothing.\n      // The bottom bar copies while the sheet is closed, and a closed dialog is not rendered, so there the textarea goes in the body.\n      (sheet.open ? sheet : document.body).append(tmp);\n      tmp.select();\n      let copied = false;\n      try {\n        copied = document.execCommand('copy');\n      } catch {\n        copied = false;\n      }\n      if (!copied) {\n        stuck = tmp;\n        btn.textContent = ui.copyFailed;\n        setTimeout(() => { btn.textContent = ui.copy; }, 3000);\n        return;\n      }\n      tmp.remove();\n    }\n    btn.textContent = ui.done;\n    setTimeout(() => { btn.textContent = ui.copy; }, 1400);\n  };\n\n  const open = () => {\n    const reply = compose();\n    if (reply) view.innerHTML = replyViewHtml(reply);\n    else view.textContent = ui.empty;\n    view.scrollTop = 0;\n    text.value = reply;\n    raw.open = false;\n    raw.hidden = !reply;\n    copy.disabled = !reply;\n    if (sheet.showModal) sheet.showModal();\n    else sheet.setAttribute('open', '');\n    (reply ? copy : close).focus();\n  };\n  replyBtn.addEventListener('click', open);\n  close.addEventListener('click', () => (sheet.close ? sheet.close() : sheet.removeAttribute('open')));\n  // A failed copy leaves the text selected for Cmd/Ctrl+C; closing the sheet drops that textarea.\n  sheet.addEventListener('close', () => { stuck?.remove(); stuck = null; });\n  copy.addEventListener('click', () => copyText(text.value, copy));\n\n  const bar = Object.assign(document.createElement('div'), { className: 'am-reply-bar', hidden: true });\n  bar.setAttribute('role', 'region');\n  bar.setAttribute('aria-label', ui.title);\n  const summary = Object.assign(document.createElement('span'), { className: 'am-reply-bar-count' });\n  summary.setAttribute('aria-live', 'polite');\n  const preview = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn', textContent: ui.preview });\n  const barCopy = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn am-btn--reply', textContent: ui.copy });\n  preview.addEventListener('click', open);\n  barCopy.addEventListener('click', () => copyText(compose(), barCopy));\n  bar.append(summary, preview, barCopy);\n  document.body.append(bar);\n\n  // The bar shows only the counts that are above zero, and only once there is any input at all.\n  refreshBar = () => {\n    const counts = {\n      answered: touched.size,\n      comments: [...boxes.values()].filter((box) => box.value.trim()).length,\n      remarks: (window.__amRemarkData?.() ?? []).length,\n    };\n    const parts = Object.entries(counts).filter(([, n]) => n > 0).map(([kind, n]) => ui.count[kind].replace('{n}', n));\n    summary.textContent = parts.join(' \xB7 ');\n    bar.hidden = !parts.length;\n    document.body.classList.toggle('am-has-reply-bar', parts.length > 0);\n  };\n  document.addEventListener('am-remark-change', () => refreshBar());\n  // Saved remarks are restored by remark.js, which runs after this script in the same <script> element: its data is not there yet.\n  // A microtask runs when that whole element has finished, so the first count includes them.\n  queueMicrotask(() => refreshBar());\n}\n})();\n(() => {\n// Text helpers for remark mode (src/runtime/remark.js): how a marked block is named and quoted.\n// A plain ES module for tests; the page gets it with its `export` keyword dropped (src/runtime/compose.js).\n// A block keeps its mark across `am patch` because the key is its panel, its tag and the start of its text, not its position.\n\nconst collapse = (text) => String(text).replace(/\\s+/g, ' ').trim();\n\n// The start of a block's text with whitespace collapsed: the readable identity of the block.\nfunction fingerprint(text, len = 80) {\n  return collapse(text).slice(0, len);\n}\n\n// What the reply quotes of a block: the start of its text, with an ellipsis when it is cut.\nfunction quote(text, len = 60) {\n  const t = collapse(text);\n  return t.length > len ? `${t.slice(0, len).trimEnd()}\u2026` : t;\n}\n\n// Two blocks with the same text (two identical list items) get the same base key. The n-th one in the page gets \"\\t<n>\" added;\n// a tab cannot be in a fingerprint, which has its whitespace collapsed, so the new key never meets another base key.\nfunction occurrenceKeys(bases) {\n  const seen = new Map();\n  return bases.map((base) => {\n    const n = seen.get(base) ?? 0;\n    seen.set(base, n + 1);\n    return n ? `${base}\\t${n}` : base;\n  });\n}\n\n// Remark mode: the reader turns it on, clicks a block, tags it (suggestion, keep, question, concern) and may add a note.\n// A mark shows as a bar and a note chip inside the block, lives in localStorage like panel comments, and the Reply button carries it\n// back to the agent: reply.js calls window.__amRemarkData, and replyText (reply-text.js) writes the Remarks section.\n(() => {\n  const btn = document.querySelector('[data-am=\"remark\"]');\n  if (!btn) return;\n  const ui = JSON.parse(btn.dataset.ui);\n  const KINDS = ['suggestion', 'keep', 'question', 'concern'];\n  const storeKey = `am-remark:${location.pathname}`;\n  // A page served by `am serve` has no localStorage and the phone may discard its tab; it keeps the marks on the server, in the\n  // same record as the answers (reply.js), so a re-opened page finds them again.\n  const serve = (() => {\n    const { amSave: save, amState: state } = document.body?.dataset ?? {};\n    if (!save) return null;\n    try {\n      return { save, restored: state ? JSON.parse(state) : null };\n    } catch {\n      return { save, restored: null };\n    }\n  })();\n  let saveTimer = null;\n  let pendingPatch = null;\n  const sendSave = (patch) => {\n    fetch(serve.save, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(patch), keepalive: true })\n      .catch(() => {});\n  };\n  const saveSoon = (patch) => {\n    clearTimeout(saveTimer);\n    pendingPatch = patch;\n    saveTimer = setTimeout(() => {\n      pendingPatch = null;\n      sendSave(patch);\n    }, 400);\n  };\n  // A hidden or closing page sends the change it still holds, before the timer can run.\n  const flushSave = () => {\n    if (!pendingPatch) return;\n    clearTimeout(saveTimer);\n    sendSave(pendingPatch);\n    pendingPatch = null;\n  };\n  document.addEventListener('visibilitychange', () => {\n    if (document.visibilityState === 'hidden') flushSave();\n  });\n  window.addEventListener('pagehide', flushSave);\n  // The one definition of a block a reader can mark: the content under <main>. The page and panel titles are left out, because the\n  // reply reads them as text; a panel has its Comment button.\n  // A $$ block on its own is a div; a $$ formula inside a sentence is a span of its paragraph.\n  const BLOCK = 'main :is(h1,h2,h3,h4,h5,h6,p,li,blockquote,pre,table,dd,dt,figure,div.am-math-block):not(.am-head *, .am-panel-head *, .am-toc *)';\n  // A click on these does what it always did.\n  const LIVE = '.am-remark-pop, .am-toolbar, a, button, input, textarea, select, label';\n  const blockAt = (target) => (target.closest(LIVE) ? null : target.closest(BLOCK));\n\n  const WJ = new RegExp(String.fromCharCode(0x2060), 'g'); // word joiners of a right-to-left page (src/bidi.js); not part of the draft's text\n  // A narrow horizontal timeline shows its date and title inline (src/themes/base.css). They stay parts of their own, so a block key\n  // does not change with the width of the window (#194).\n  const OWN_BOX = '.am-timeline--h .am-tl-when, .am-timeline--h .am-tl-title';\n  const inlineBox = new WeakMap();\n  const isInline = (el) => {\n    if (!inlineBox.has(el)) inlineBox.set(el, !el.matches(OWN_BOX) && getComputedStyle(el).display.startsWith('inline'));\n    return inlineBox.get(el);\n  };\n  // The text of a block as the reader sees it: separate lines, cells and timeline parts are joined by a space (textContent would run\n  // \"2026\" and \"Ship\" together), and the note chip is not part of it. A formula is one box and reads as the TeX the draft wrote\n  // (src/runtime/math-text.js), not as the MathML tokens.\n  const blockText = (el) => {\n    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);\n    let text = '';\n    let last = null;\n    for (let node = walker.nextNode(); node; node = walker.nextNode()) {\n      if (node.parentElement.closest('.am-mark-note')) continue;\n      let box = formulaOf(node) ?? node.parentElement;\n      while (box !== el && isInline(box)) box = box.parentElement;\n      if (last && box !== last) text += ' ';\n      text += nodeText(node).replace(WJ, '');\n      last = box;\n    }\n    return text;\n  };\n\n  const panelOf = (el) => el.closest('.am-panel')?.id.replace(/^panel-/, '') ?? '';\n  // Block keys, in page order. Built when first needed: a page nobody marked pays nothing.\n  let keys = null;\n  const keyMap = () => {\n    if (!keys) {\n      const blocks = [...document.querySelectorAll(BLOCK)];\n      const ids = occurrenceKeys(blocks.map((el) => `${panelOf(el)}|${el.localName}|${fingerprint(blockText(el))}`));\n      keys = new Map(blocks.map((el, i) => [el, ids[i]]));\n    }\n    return keys;\n  };\n\n  const load = () => {\n    const restored = serve?.restored?.remark;\n    if (Array.isArray(restored)) return restored.filter((m) => typeof m?.key === 'string' && KINDS.includes(m.kind));\n    try {\n      const saved = JSON.parse(localStorage.getItem(storeKey));\n      return Array.isArray(saved) ? saved.filter((m) => typeof m?.key === 'string' && KINDS.includes(m.kind)) : [];\n    } catch {\n      return [];\n    }\n  };\n  // A mark whose block is gone from the page stays stored (it may return with `am patch`); it is neither painted nor sent.\n  const marks = new Map(load().map((m) => [m.key, { key: m.key, kind: m.kind, note: String(m.note ?? '') }]));\n  // Kind and note of a popover closed without Save, by block key, until the page reloads (see open below).\n  const drafts = new Map();\n  const clearBtn = document.createElement('button');\n  clearBtn.type = 'button';\n  clearBtn.className = 'am-btn am-btn--remark-clear';\n  clearBtn.textContent = ui.clear;\n  // Clear all drops saved marks and drafts, so it shows while either exists.\n  const toClear = () => marks.size + drafts.size;\n  const showClear = () => { clearBtn.hidden = toClear() === 0; };\n  btn.insertAdjacentElement('afterend', clearBtn);\n  let clearTimer = null;\n  let clearArmed = false;\n  const resetClear = () => {\n    if (clearTimer !== null) clearTimeout(clearTimer);\n    clearTimer = null;\n    clearArmed = false;\n    clearBtn.classList.remove('is-armed');\n    clearBtn.textContent = ui.clear;\n    showClear();\n  };\n  const armClear = () => {\n    clearArmed = true;\n    clearBtn.classList.add('is-armed');\n    clearBtn.textContent = ui.clearConfirm.replace('{n}', toClear());\n    clearTimer = setTimeout(resetClear, 4000);\n  };\n  clearBtn.addEventListener('click', () => {\n    if (!clearArmed) {\n      armClear();\n      return;\n    }\n    for (const el of document.querySelectorAll('.am-mark')) unpaint(el);\n    marks.clear();\n    // A draft is a remark the reader has not saved yet; Clear all drops it too, so no block reopens with an old kind.\n    drafts.clear();\n    try {\n      localStorage.removeItem(storeKey);\n    } catch {\n      // Storage may be off (private window, a sandboxed page); the in-memory marks still clear.\n    }\n    if (serve) saveSoon({ remark: [] });\n    resetClear();\n    document.dispatchEvent(new Event('am-remark-change'));\n  });\n  const save = () => {\n    try {\n      localStorage.setItem(storeKey, JSON.stringify([...marks.values()]));\n    } catch {\n      // Storage may be off (private window, a sandboxed page); marks then last until the page closes.\n    }\n    if (serve) saveSoon({ remark: [...marks.values()] });\n    // The reply bar (reply.js) shows the number of marks.\n    document.dispatchEvent(new Event('am-remark-change'));\n    showClear();\n  };\n\n  const chip = (el, mark) => {\n    const note = document.createElement(el.localName === 'table' ? 'caption' : 'span');\n    note.className = 'am-mark-note';\n    const kind = document.createElement('b');\n    kind.textContent = ui.kinds[mark.kind];\n    note.append(kind, mark.note ? ` ${mark.note}` : '');\n    return note;\n  };\n  const clearChip = (el) => el.querySelector(':scope > .am-mark-note')?.remove();\n  const paint = (el, mark) => {\n    clearChip(el);\n    el.classList.add('am-mark');\n    el.dataset.kind = mark.kind;\n    // Inside the block, so a list item stays a child of its list. A table takes it as its caption; a list item with a sub-list shows\n    // it under its own text, before the sub-list.\n    const sub = el.querySelector(':scope > ul, :scope > ol');\n    if (el.localName === 'table') el.prepend(chip(el, mark));\n    else if (sub) sub.before(chip(el, mark));\n    else el.append(chip(el, mark));\n  };\n  const unpaint = (el) => {\n    clearChip(el);\n    el.classList.remove('am-mark');\n    delete el.dataset.kind;\n  };\n  showClear();\n  if (marks.size) for (const [el, key] of keyMap()) if (marks.has(key)) paint(el, marks.get(key));\n\n  // The popover edits one block. Save stays off until a kind is picked, and a hint says so. 1\u20134 pick a kind from the keyboard and\n  // move to the note; Ctrl / Cmd + Enter saves. A popover closed without Save keeps its kind and note as a draft for that block until the page reloads.\n  const pop = document.createElement('div');\n  pop.className = 'am-remark-pop';\n  pop.hidden = true;\n  pop.setAttribute('role', 'dialog');\n  pop.setAttribute('aria-label', ui.button);\n  document.body.append(pop);\n  let opener = null;\n  let anchor = null;\n  let keepDraft = null;\n  const close = (restoreFocus) => {\n    if (pop.hidden) return;\n    keepDraft?.();\n    keepDraft = null;\n    pop.hidden = true;\n    if (restoreFocus) (opener?.isConnected && opener !== document.body ? opener : btn).focus();\n  };\n  const place = () => {\n    const rect = anchor.getBoundingClientRect();\n    const rtl = getComputedStyle(document.documentElement).direction === 'rtl';\n    const x = rtl ? rect.right - pop.offsetWidth : rect.left;\n    // Under the block; a block taller than the window gets the popover at the bottom of the window instead.\n    const y = Math.min(rect.bottom + 6, window.innerHeight - pop.offsetHeight - 8);\n    pop.style.left = `${window.scrollX + Math.min(Math.max(8, x), window.innerWidth - pop.offsetWidth - 8)}px`;\n    pop.style.top = `${window.scrollY + Math.max(8, y)}px`;\n  };\n  const make = (tag, props) => Object.assign(document.createElement(tag), props);\n  const open = (el) => {\n    const key = keyMap().get(el);\n    const mark = marks.get(key);\n    const draft = drafts.get(key);\n    let kind = draft?.kind ?? mark?.kind ?? '';\n    opener = document.activeElement;\n    anchor = el;\n\n    const note = make('textarea', { rows: 2, placeholder: ui.hint, value: draft?.note ?? mark?.note ?? '' });\n    note.setAttribute('aria-label', ui.hint);\n    const keep = make('button', { type: 'button', className: 'am-btn', textContent: ui.save, disabled: !kind });\n    const need = make('span', { className: 'am-remark-need', textContent: ui.need, hidden: Boolean(kind) });\n    keepDraft = () => {\n      if (kind || note.value.trim()) drafts.set(key, { kind, note: note.value });\n      else drafts.delete(key);\n      showClear();\n    };\n    const done = () => { drafts.delete(key); keepDraft = null; showClear(); };\n    keep.addEventListener('click', () => {\n      done();\n      const saved = { key, kind, note: note.value.trim() };\n      marks.set(key, saved);\n      save();\n      paint(el, saved);\n      close(true);\n    });\n    const actions = make('div', { className: 'am-remark-actions' });\n    actions.append(keep);\n    if (mark) {\n      const drop = make('button', { type: 'button', className: 'am-btn', textContent: ui.remove });\n      drop.addEventListener('click', () => {\n        done();\n        marks.delete(key);\n        save();\n        unpaint(el);\n        close(true);\n      });\n      actions.append(drop);\n    }\n    const choose = (k) => {\n      kind = k;\n      for (const other of kindBtns) other.setAttribute('aria-pressed', String(other.dataset.kind === k));\n      keep.disabled = false;\n      need.hidden = true;\n    };\n    const kindBtns = KINDS.map((k, i) => {\n      const kb = make('button', { type: 'button', className: 'am-remark-kind', textContent: ui.kinds[k] });\n      kb.dataset.kind = k;\n      kb.dataset.n = i + 1;\n      kb.setAttribute('aria-pressed', String(k === kind));\n      kb.addEventListener('click', () => choose(k));\n      return kb;\n    });\n    // Ctrl / Cmd + Enter presses Save (nothing while Save waits for a kind). A digit types into the note, so it picks a kind\n    // only while the focus is outside the note.\n    pop.onkeydown = (e) => {\n      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !e.isComposing) {\n        e.preventDefault();\n        if (!keep.disabled) keep.click();\n        return;\n      }\n      if (e.target === note || e.ctrlKey || e.metaKey || e.altKey || !/^[1-4]$/.test(e.key)) return;\n      e.preventDefault();\n      choose(KINDS[Number(e.key) - 1]);\n      note.focus();\n    };\n    actions.append(need);\n    pop.replaceChildren(make('div', { className: 'am-remark-kinds' }), note, actions);\n    pop.firstChild.append(...kindBtns);\n    pop.hidden = false;\n    place();\n    (kindBtns.find((b) => b.dataset.kind === kind) ?? kindBtns[0]).focus({ preventScroll: true });\n  };\n\n  // Picking works only while remark mode is on. A click on a marked block edits its mark, on a plain block starts one.\n  // The block under the pointer gets an outline: the same blockAt decides what is outlined and what a click picks.\n  let hover = null;\n  const track = (e) => {\n    const el = e.type === 'mouseout' && e.relatedTarget === null ? null : blockAt(e.target);\n    if (el === hover) return;\n    hover?.classList.remove('am-remark-hover');\n    hover = el;\n    hover?.classList.add('am-remark-hover');\n  };\n  const pick = (e) => {\n    const el = blockAt(e.target);\n    if (el) open(el);\n  };\n  // The keyboard picks too: while the mode is on, every block takes focus with Tab, and Enter or Space opens its popover. A block\n  // that already had a tabindex keeps it; only the ones the mode added lose it again.\n  const pickKey = (e) => {\n    if ((e.key !== 'Enter' && e.key !== ' ') || e.ctrlKey || e.metaKey || e.altKey || !e.target.hasAttribute?.('data-am-pick')) return;\n    e.preventDefault();\n    open(e.target);\n  };\n  const focusable = (on) => {\n    if (!on && !keys) return; // the mode starts off: a page nobody marked builds no block keys\n    for (const el of keyMap().keys()) {\n      if (on && !el.hasAttribute('tabindex')) {\n        el.tabIndex = 0;\n        el.setAttribute('data-am-pick', '');\n      } else if (!on && el.hasAttribute('data-am-pick')) {\n        el.removeAttribute('tabindex');\n        el.removeAttribute('data-am-pick');\n      }\n    }\n  };\n  const setMode = (on) => {\n    btn.classList.toggle('is-on', on);\n    btn.setAttribute('aria-pressed', String(on));\n    const toggle = on ? 'addEventListener' : 'removeEventListener';\n    document.body[toggle]('click', pick);\n    document.body[toggle]('mouseover', track);\n    document.body[toggle]('mouseout', track);\n    document.body[toggle]('keydown', pickKey);\n    focusable(on);\n    if (!on) {\n      track({ type: 'mouseout', relatedTarget: null });\n      close(false);\n    }\n  };\n  btn.addEventListener('click', () => setMode(btn.getAttribute('aria-pressed') !== 'true'));\n  document.addEventListener('keydown', (e) => {\n    if (e.key === 'Escape') close(true);\n  });\n  // A click outside the popover closes it; the same click may then start another mark.\n  document.addEventListener('click', (e) => {\n    if (!pop.hidden && !pop.contains(e.target)) close(false);\n  }, true);\n  setMode(false);\n\n  // What the Reply button reads: the marked blocks that are on the page, in page order.\n  window.__amRemarkData = () => {\n    if (!marks.size) return [];\n    const live = [];\n    for (const [el, key] of keyMap()) {\n      const mark = marks.get(key);\n      if (mark) live.push({ panel: panelOf(el), quote: quote(blockText(el)), kind: mark.kind, note: mark.note });\n    }\n    return live;\n  };\n})();\n})();\n(() => {\n// Pure planner for justified (\"photo wall\") rows on sheet pages. No DOM access.\n//\n// This file must stay inlinable into the page script: top-level declarations only, no imports, and the exports are\n// `planLayout` and the constants the DOM adapter shares (STEP, MAX_SCALE, MIN_SCALE). The page build strips the `export ` keyword,\n// and test/layout-plan.test.js checks that this still works.\n//\n// planLayout({ width, gap, cols, panels }) -> { rows: [{ columns: [{ panels: [index, ...], width }], height }] }\n//\n// Input (all lengths in px):\n//   width   container width\n//   gap     space between columns, and between two panels stacked in one column\n//   cols    most columns in one row (the planner never uses more than MAX_COLUMNS, but spans stay shares of `cols`)\n//   panels  one entry per panel, in reading order:\n//     samples   [{ w, h }] panel height at sampled widths, ascending by w (heights between samples are interpolated)\n//     minWidth  narrowest feasible width (clamped to `width`)\n//     maxWidth  widest useful width; beyond it the panel only gains empty space (default: no limit)\n//     natural   natural diagram width for a diagram-only panel (default: none)\n//     pad       panel width not used by the diagram (padding and border; default 0)\n//     span      the author's width hint in grid columns (default 1); span >= cols keeps the panel alone in its row\n//\n// Output: { rows, maxScale }. Rows are in reading order; a row is a list of columns (at most `cols`); a column holds one panel or two\n// consecutive panels, stacked. For integer inputs the column widths plus the gaps between them equal `width`.\n// Rows are chosen by dynamic programming over break points; widths by a search in STEP px steps. Cost per row:\n//   H = tallest column; waste = sum((H - columnHeight) * columnWidth) + sum over diagrams wider than maxWidth of (w - maxWidth) * h\n//   dev = sum(((w - preferred) / oneColumn)^2) + SCALE_WEIGHT * sum over diagrams of (ln(scale) / ln(MAX_SCALE))^2\n//   cost = waste / 1000 + PREF_WEIGHT * dev * H\n// Scale band: diagrams on one page stay at similar sizes. With the result's `maxScale` as the diagram size limit, a diagram is\n// shown at scale min(maxScale, (width - pad) / natural). The planner tries a few bands [lo, lo * BAND_RATIO] (lo in BAND_LOS) and\n// keeps the cheapest plan in which no diagram is narrower than scale lo and none is shown above the band's top, so the largest and\n// smallest diagram scale on the page differ by at most BAND_RATIO. A panel wider than its diagram's top size keeps the diagram at\n// that size, and the page script must set the diagram's max-width to natural * maxScale. The band starts no higher than the\n// largest scale the page allows the least roomy diagram, so one wide diagram lowers the band for the others.\n// If no band is feasible the plan is made without a band (maxScale = MAX_SCALE); if no plan fits (or the input is unusable) the\n// result is a single column: one panel per row at the full width.\n\nconst STEP = 10;\nconst MAX_SCALE = 1.25;\nconst MIN_SCALE = 0.75; // the narrowest a diagram is shown, as a share of its natural width\nconst MAX_COLUMNS = 6; // rows with more columns are unreadable, and the search grows steeply with the column count\nconst BAND_RATIO = 1.25; // the largest and smallest diagram scale on a page differ by at most this\nconst BAND_LOS = [MIN_SCALE, 0.85, 0.95, 1]; // lower ends tried for the band; lo * BAND_RATIO is the upper end (1.25 means no upper limit)\nconst SCALE_WEIGHT = 3;\nconst PREF_WEIGHT = 0.15;\n\nfunction heightAt(samples, w) {\n  const i = samples.findIndex((s) => s.w >= w);\n  if (i === -1) return samples[samples.length - 1].h;\n  if (i === 0) return samples[0].h;\n  const a = samples[i - 1];\n  const b = samples[i];\n  return a.h + ((b.h - a.h) * (w - a.w)) / (b.w - a.w);\n}\n\n// Every way to split `len` consecutive panels into columns of 1 or 2 panels, as lists of column sizes.\nfunction splits(len) {\n  if (len === 0) return [[]];\n  return [1, 2].filter((k) => k <= len).flatMap((k) => splits(len - k).map((rest) => [k, ...rest]));\n}\n\nfunction singleColumn(width, panels) {\n  return { rows: panels.map((_, i) => ({ columns: [{ panels: [i], width }], height: 0 })) };\n}\n\nfunction planLayout({ width, gap = 0, cols = 3, panels }) {\n  const usable = Number.isFinite(width) && width > 0 && panels.every((p) => Array.isArray(p.samples) && p.samples.length > 0);\n  if (!usable) return singleColumn(width, panels);\n\n  // `cols` stays the unit of the author's spans; no row gets more than MAX_COLUMNS columns however large `cols` is.\n  const maxColumns = Math.min(cols, MAX_COLUMNS);\n  const oneColumn = Math.max(1, (width - gap * (cols - 1)) / cols);\n  // Per-panel limits. With a band [lo, lo * BAND_RATIO], a diagram is no narrower than scale lo and shown at most at the top of the\n  // band: a wider panel keeps it at that size and gains empty space, which the cost counts as waste.\n  const prepare = (lo) => panels.map((p) => {\n    const pad = p.pad ?? 0;\n    const diagram = lo > 0 && p.natural > 0;\n    const scaleCap = diagram ? Math.min(MAX_SCALE, lo * BAND_RATIO) : MAX_SCALE;\n    return {\n      ...p,\n      minWidth: Math.min(width, Math.max(Math.ceil(p.minWidth || 0), diagram ? Math.ceil(p.natural * lo + pad) : 0)),\n      maxWidth: Math.min(p.maxWidth ?? Infinity, diagram ? p.natural * scaleCap + pad : Infinity),\n      scaleCap,\n      pad,\n      preferred: Math.min(width, (p.span ?? 1) * oneColumn + ((p.span ?? 1) - 1) * gap),\n      alone: (p.span ?? 1) >= cols,\n    };\n  });\n  let info = prepare(0);\n  // Beyond its maxWidth a panel only gains empty space, so its height stops changing there (matters when a band lowers maxWidth).\n  const heightOf = (p, w) => heightAt(p.samples, Math.min(w, p.maxWidth));\n  const columnHeight = (col, w) => col.reduce((h, k) => h + heightOf(info[k], w), 0) + gap * (col.length - 1);\n\n  function bestColumns(columns) {\n    const avail = width - gap * (columns.length - 1);\n    const mins = columns.map((c) => Math.max(...c.map((k) => info[k].minWidth)));\n    const minsFrom = mins.map((_, n) => mins.slice(n).reduce((s, w) => s + w, 0));\n    if (minsFrom[0] > avail) return null;\n    let best = null;\n    const evaluate = (ws) => {\n      const hs = ws.map((w, n) => columnHeight(columns[n], w));\n      const H = Math.max(...hs);\n      let waste = 0;\n      let dev = 0;\n      ws.forEach((w, n) => {\n        waste += (H - hs[n]) * w;\n        for (const k of columns[n]) {\n          const p = info[k];\n          if (w > p.maxWidth) waste += (w - p.maxWidth) * heightOf(p, w);\n          dev += ((w - p.preferred) / oneColumn) ** 2;\n          if (p.natural > 0) {\n            const scale = Math.min(p.scaleCap, Math.max(w - p.pad, 1) / p.natural);\n            dev += SCALE_WEIGHT * (Math.log(scale) / Math.log(MAX_SCALE)) ** 2;\n          }\n        }\n      });\n      const cost = waste / 1000 + PREF_WEIGHT * dev * H;\n      if (!best || cost < best.cost) best = { cost, ws, height: H, columns };\n    };\n    const choose = (n, used, ws) => {\n      if (n === columns.length - 1) {\n        const w = avail - used;\n        if (w >= mins[n]) evaluate([...ws, w]);\n        return;\n      }\n      for (let w = mins[n]; used + w + minsFrom[n + 1] <= avail; w += STEP) choose(n + 1, used + w, [...ws, w]);\n    };\n    choose(0, 0, []);\n    return best;\n  }\n\n  // Best columns for one row of panels i..j.\n  function bestRow(i, j) {\n    if (j > i && info.slice(i, j + 1).some((p) => p.alone)) return null;\n    let best = null;\n    for (const split of splits(j - i + 1)) {\n      if (split.length > maxColumns) continue;\n      let next = i;\n      const columns = split.map((size) => Array.from({ length: size }, () => next++));\n      const r = bestColumns(columns);\n      if (r && (!best || r.cost < best.cost)) best = r;\n    }\n    return best;\n  }\n\n  // Row breaks in reading order, for the band set up in `info`. A row holds at most 2 * maxColumns panels. Null if nothing fits.\n  function solve() {\n    const n = panels.length;\n    const total = Array(n + 1).fill(Infinity);\n    const from = Array(n + 1).fill(-1);\n    const chosen = Array(n + 1).fill(null);\n    total[0] = 0;\n    for (let j = 1; j <= n; j++) {\n      for (let i = Math.max(0, j - 2 * maxColumns); i < j; i++) {\n        if (total[i] === Infinity) continue;\n        const r = bestRow(i, j - 1);\n        if (r && total[i] + r.cost < total[j]) {\n          total[j] = total[i] + r.cost;\n          from[j] = i;\n          chosen[j] = r;\n        }\n      }\n    }\n    if (total[n] === Infinity) return null;\n    const rows = [];\n    for (let j = n; j > 0; j = from[j]) {\n      const r = chosen[j];\n      rows.unshift({ columns: r.columns.map((panelsInColumn, c) => ({ panels: panelsInColumn, width: r.ws[c] })), height: r.height });\n    }\n    return { rows, cost: total[n] };\n  }\n\n  let best = null;\n  const diagrams = panels.filter((p) => p.natural > 0);\n  if (diagrams.length > 1) {\n    // No diagram can be shown larger than the page allows, so the band cannot start above the smallest of those limits.\n    const reach = Math.min(...diagrams.map((p) => Math.min(MAX_SCALE, Math.max(width - (p.pad ?? 0), 1) / p.natural)));\n    for (const lo of new Set([...BAND_LOS.filter((x) => x < reach), reach])) {\n      info = prepare(lo);\n      const r = solve();\n      if (r && (!best || r.cost < best.cost)) best = { ...r, maxScale: Math.min(MAX_SCALE, lo * BAND_RATIO) };\n    }\n    info = prepare(0);\n  }\n  best ??= solve();\n  return best ? { rows: best.rows, maxScale: best.maxScale ?? MAX_SCALE } : singleColumn(width, panels);\n}\n\n// DOM adapter for the sheet's justified (\"photo wall\") layout. Not a module: compose.js puts it after src/runtime/layout-plan.js\n// (which defines planLayout and the shared STEP, MAX_SCALE, MIN_SCALE) inside one function scope of the page script.\n//\n// It measures every panel at sampled widths, asks planLayout for rows and column widths, and applies them with flexbox.\n// The rendered HTML keeps the plain CSS grid: with JavaScript off, at the single-column breakpoint, or while printing, the grid is what\n// shows (the planned widths belong to the screen width, so print never gets a mix of the two); after printing the layout comes back.\n\n// A diagram is never drawn under MIN_SCALE of its natural width, the floor the planner keeps: below it the text is too small to read,\n// so its figure scrolls sideways instead. This covers what the planner does not size: the plain grid, a phone, a one-panel page and a\n// panel that holds more than the diagram. The svg width follows the reader's text size (page.js), so the floor follows am-scale;\n// restore() puts it back after resetting the inline styles. Printing drops it (base.css).\nconst floorDiagrams = () => {\n  for (const svg of document.querySelectorAll('.am-diagram:not(.am-lightbox-canvas) > svg')) {\n    const width = Number(svg.getAttribute('width'));\n    if (width > 0) svg.style.minWidth = `${Math.floor(width * MIN_SCALE)}px`;\n  }\n};\nfloorDiagrams();\naddEventListener('am-scale', floorDiagrams);\n\nconst grid = document.querySelector('.am-grid');\nconst panels = grid ? [...grid.children].filter((el) => el.classList.contains('am-panel')) : [];\n\nif (panels.length > 1) {\n  const SINGLE_COLUMN = '(max-width: 760px)'; // the single-column breakpoint in src/themes/base.css\n  const TWO_COLUMNS = '(max-width: 1100px)'; // below this the CSS grid has two columns\n  const SAMPLE_STEP = 20; // width sampling step, px; the planner interpolates between samples\n  // The width floors are text sizes (px at scale 1). They take the page scale on every pass, so a runtime change of --am-scale re-plans.\n  const TEXT_MIN = 260; // text keeps at least about 16 CJK characters per line\n  const TABLE_COL_MIN = 96; // per table column, px\n  const TABLE_COL_COMFORT = 220; // a table column this wide reads three or four words per line\n  const TABLE_WORD_MAX = 160; // a longer word (an id, a path) counts as this wide and may break inside its cell when room is short\n  const KV_COL_MIN = 120; // per key-value column, px: a value of two short words stays on one line\n  const DIAGRAM_MIN = 160;\n  const RESIZE_DELAY = 150;\n  const pageScale = () => {\n    const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--am-scale'));\n    return Number.isFinite(scale) && scale > 0 ? scale : 1;\n  };\n  const OVERFLOWING = '.am-table-wrap, .am-diagram, .am-annot-scroll, pre';\n\n  // The first-row cells of each table carry the column widths fitTables() sets, so restore() resets them too.\n  const tables = [...grid.querySelectorAll('.am-table-wrap > table')];\n  const headCells = (table) => [...(table.rows[0]?.cells ?? [])];\n  const original = new Map([grid, ...panels, ...grid.querySelectorAll('.am-diagram > svg'), ...tables.flatMap(headCells)].map((el) => [el, el.getAttribute('style')]));\n  const restoreStyle = (el) => (original.get(el) === null ? el.removeAttribute('style') : el.setAttribute('style', original.get(el)));\n\n  // Back to the plain grid markup and styles.\n  const restore = () => {\n    for (const box of grid.querySelectorAll(':scope > .am-col')) box.replaceWith(...box.children);\n    for (const el of original.keys()) restoreStyle(el);\n    for (const table of tables) table.classList.remove('am-table-fit');\n    floorDiagrams();\n  };\n\n  // The author's width hint, rendered as data-span only when the author wrote one. The inline grid-column is the no-JavaScript fallback\n  // and may hold spans the server added, so it is never read here.\n  const spanHint = (el) => Number(el.dataset.span) || 1;\n  const diagramOnly = (el) => {\n    const body = el.querySelector(':scope > .am-panel-body');\n    return body && body.children.length === 1 ? body.querySelector(':scope > .am-diagram > svg') : null;\n  };\n  const naturalWidth = (svg) => Number(svg.getAttribute('width')) || 0;\n\n  // The width each column of a table reads well at: its natural width, but no wider than TABLE_COL_COMFORT unless its longest word\n  // needs more. Below it the cells wrap one word per line, so a panel with a table is not planned narrower than the sum, and\n  // fitTables() keeps each column at its share (the browser would otherwise give the room to the longest column).\n  // A column's floor is its longest word, but no more than TABLE_WORD_MAX: a long id would otherwise hold its column at full width and\n  // leave a prose column one word per line. fitTables() lets such a word break (am-table-fit) when the table is short of room.\n  const columnWidths = new Map();\n  function comfortableWidth(table, scale) {\n    const saved = table.getAttribute('style');\n    const columns = (width) => {\n      table.style.width = width;\n      return headCells(table).map((cell) => cell.getBoundingClientRect().width);\n    };\n    const most = columns('max-content');\n    const unbroken = columns('min-content');\n    const least = unbroken.map((w) => Math.min(w, TABLE_WORD_MAX * scale));\n    if (saved === null) table.removeAttribute('style');\n    else table.setAttribute('style', saved);\n    // A max-content column comes out a fraction under its text in Chrome, enough to wrap the last word, so it gets one pixel more.\n    const want = most.map((w, i) => Math.min(Math.ceil(w) + 1, Math.max(least[i], TABLE_COL_COMFORT * scale)));\n    // unbroken: each column's longest word. A column the browser lays out is at least that wide, whatever its min-width, so\n    // fitTables() turns am-table-fit on when the columns would not fit at those widths, even if the capped widths do.\n    columnWidths.set(table, { least, want, unbroken });\n    return want.reduce((sum, w) => sum + w, 0);\n  }\n\n  // After the layout: each column gets at least its comfortable width, scaled down toward its longest word when the panel came out\n  // narrower than planned (a page narrower than the table), so a table scrolls sideways only when even its longest words do not fit.\n  function fitTables() {\n    for (const [table, { least, want, unbroken }] of columnWidths) {\n      // Each width is rounded up to a whole pixel (a column a fraction too narrow wraps its last word), so keep a pixel per column spare.\n      const room = table.parentElement.clientWidth - want.length;\n      const low = least.reduce((s, w) => s + w, 0);\n      const high = want.reduce((s, w) => s + w, 0);\n      const k = high > room ? Math.max(0, (room - low) / (high - low || 1)) : 1;\n      const widths = want.map((w, i) => Math.ceil(least[i] + (w - least[i]) * k));\n      headCells(table).forEach((cell, i) => { cell.style.minWidth = `${widths[i]}px`; });\n      // Without am-table-fit a column holds its longest word, so a long id can widen the table past the room the widths left.\n      const whole = widths.reduce((s, w, i) => s + Math.max(w, unbroken[i]), 0);\n      table.classList.toggle('am-table-fit', high > room || whole > room);\n    }\n  }\n\n  // Height (and, for panels with tables or code, the narrowest width without sideways scrolling) at sampled widths.\n  // Only one panel is displayed while it is measured, so each width change lays out that panel alone.\n  function measure(width) {\n    const scale = pageScale();\n    grid.style.display = 'block';\n    for (const el of panels) {\n      el.style.display = 'none';\n      el.style.boxSizing = 'border-box';\n      for (const svg of el.querySelectorAll('.am-diagram > svg')) {\n        svg.style.width = '100%';\n        svg.style.maxWidth = `${naturalWidth(svg) * MAX_SCALE}px`;\n      }\n    }\n    const info = panels.map((el) => {\n      const svg = diagramOnly(el);\n      const svgs = [...el.querySelectorAll('.am-diagram > svg')];\n      const scrollers = el.querySelectorAll(OVERFLOWING);\n      const tableCols = Math.max(0, ...[...el.querySelectorAll('table tr:first-child')].map((tr) => tr.children.length));\n      el.style.display = '';\n      el.style.width = `${width}px`;\n      const pad = svg ? el.offsetWidth - svg.parentElement.clientWidth : 0;\n      const natural = svg ? naturalWidth(svg) : 0;\n      const shrunk = Math.max(0, ...svgs.map((s) => naturalWidth(s) * MIN_SCALE)) + (svg ? pad : 34);\n      const tableFloors = [...el.querySelectorAll('.am-table-wrap > table')].map((t) => comfortableWidth(t, scale) + el.offsetWidth - t.parentElement.clientWidth);\n      // A key-value grid gets the same care: the room a table gains must not squeeze a neighbouring grid to one word per line.\n      const kvs = [...el.querySelectorAll('.am-kv')].map((kv) => (Number(kv.style.getPropertyValue('--kv-cols')) || 1) * KV_COL_MIN * scale + el.offsetWidth - kv.clientWidth);\n      const floor = svg ? Math.max(DIAGRAM_MIN * scale, natural * MIN_SCALE + pad) : Math.max(TEXT_MIN * scale, shrunk, tableCols * TABLE_COL_MIN * scale + 34, ...tableFloors, ...kvs);\n      const from = Math.min(width, Math.floor(floor / STEP) * STEP);\n      const samples = [];\n      let fits = null;\n      for (let w = from; ; w += SAMPLE_STEP) {\n        w = Math.min(w, width);\n        el.style.width = `${w}px`;\n        if (fits === null && !svg && scrollers.length && ![...scrollers].some((s) => s.scrollWidth > s.clientWidth + 1)) fits = w;\n        samples.push({ w, h: el.offsetHeight });\n        if (w === width) break;\n      }\n      el.style.display = 'none';\n      return {\n        samples,\n        minWidth: svg ? floor : Math.max(floor, fits ?? (scrollers.length ? width : 0)),\n        maxWidth: svg ? natural * MAX_SCALE + pad : Infinity,\n        natural,\n        pad,\n        span: spanHint(el),\n      };\n    });\n    for (const el of panels) {\n      el.style.display = '';\n      el.style.width = '';\n    }\n    return info;\n  }\n\n  // Each column gets a fixed width. A row adds up to the full width, so flex-wrap breaks rows by itself.\n  // Stacked panels go into a column wrapper whose last panel absorbs the extra height.\n  function apply(plan, gap) {\n    grid.style.display = 'flex';\n    grid.style.flexWrap = 'wrap';\n    grid.style.alignItems = 'stretch';\n    grid.style.gap = `${gap}px`;\n    for (const el of panels) {\n      el.style.gridColumn = '';\n      el.style.gridRow = '';\n      el.style.flex = '0 0 auto';\n    }\n    for (const row of plan.rows) {\n      for (const col of row.columns) {\n        const width = `${col.width}px`;\n        if (col.panels.length === 1) {\n          panels[col.panels[0]].style.width = width;\n          continue;\n        }\n        const box = document.createElement('div');\n        box.className = 'am-col';\n        box.style.cssText = `width:${width};flex:0 0 auto;display:flex;flex-direction:column;gap:${gap}px`;\n        panels[col.panels[0]].before(box);\n        for (const k of col.panels) {\n          panels[k].style.width = '';\n          box.append(panels[k]);\n        }\n        panels[col.panels[col.panels.length - 1]].style.flex = '1 1 auto';\n      }\n    }\n  }\n\n  // Diagram-only panels show their diagram at most at the top of the page's scale band; a wider panel gains empty space instead.\n  function capDiagrams(maxScale) {\n    for (const el of panels) {\n      const svg = diagramOnly(el);\n      if (svg) svg.style.maxWidth = `${naturalWidth(svg) * maxScale}px`;\n    }\n  }\n\n  const containerWidth = () => Math.floor(grid.getBoundingClientRect().width);\n\n  function justify() {\n    if (printing || printQuery.matches) return;\n    try {\n      // A vertical scrollbar can appear or vanish once the rows change height; plan again if the width moved.\n      // A later pass plans for the width the previous layout left, not the grid's: restoring the grid first would bring back the\n      // grid's scrollbar, so a page whose grid scrolls and whose rows do not (or the reverse) would never settle.\n      let planned = -1;\n      let laidOut = NaN;\n      for (let pass = 0; pass < 3 && planned !== laidOut; pass++) {\n        restore();\n        if (matchMedia(SINGLE_COLUMN).matches) return;\n        planned = pass === 0 ? containerWidth() : laidOut;\n        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;\n        const cols = Math.max(1, Number(getComputedStyle(grid).getPropertyValue('--cols')) || 3);\n        const plan = planLayout({ width: planned, gap, cols: matchMedia(TWO_COLUMNS).matches ? Math.min(cols, 2) : cols, panels: measure(planned) });\n        apply(plan, gap);\n        capDiagrams(plan.maxScale);\n        fitTables();\n        laidOut = containerWidth();\n      }\n      // The width never settled: columns planned for another width would overflow or leave gaps, so show the plain grid.\n      if (planned !== laidOut) restore();\n    } catch {\n      restore();\n    }\n  }\n\n  // Printing: back to the plain grid (spans and all), and the layout again afterwards. Browsers disagree on which of the\n  // `beforeprint` event and the print media query change fires first, or at all, so listen to both; both are idempotent.\n  // While `printing` is set (beforeprint to afterprint) justify() does nothing, so a late resize cannot bring flex widths into the print layout.\n  let printing = false;\n  const printQuery = matchMedia('print');\n  let timer = 0;\n  const later = () => {\n    clearTimeout(timer);\n    timer = setTimeout(justify, RESIZE_DELAY);\n  };\n  const toPrint = () => {\n    clearTimeout(timer);\n    restore();\n  };\n  justify();\n  addEventListener('resize', later);\n  // A reader's text size changes every panel's text widths and heights, so the sheet is planned again like a resize.\n  addEventListener('am-scale', later);\n  addEventListener('beforeprint', () => {\n    printing = true;\n    toPrint();\n  });\n  addEventListener('afterprint', () => {\n    printing = false;\n    later();\n  });\n  printQuery.addEventListener('change', (e) => (e.matches ? toPrint() : later()));\n  // Late changes to panel heights: web fonts arriving, and images inside the grid finishing their load (load does not bubble, so capture it).\n  document.fonts?.ready.then(later);\n  grid.addEventListener('load', later, true);\n  // Switching theme changes paddings and fonts, hence panel heights.\n  document.querySelector('[data-am=\"theme\"]')?.addEventListener('click', later);\n}\n})();\n// The outline rail of a doc page (src/templates/doc.js): the markup already works without a script, <details> opens the list and the\n// links jump. This adds the hover dwell, the open direction, the keys, the tap outside and the marking of the current section.\n(() => {\n  const nav = document.querySelector('nav.am-toc');\n  const box = nav && nav.querySelector('details.am-outline');\n  if (!box) return;\n  const sum = box.querySelector('summary');\n  const links = Array.from(box.querySelectorAll('.am-outline-list a'));\n  const ticks = Array.from(box.querySelectorAll('.am-tick'));\n  const LIST_W = 240; // keep in step with .am-outline-list in src/themes/base.css\n  const EDGE = 10; // the 6px gap to the rail plus a margin to the viewport edge\n  let current = '';\n  let byHover = false;\n  let dwell = 0;\n  let leave = 0;\n\n  // Open away from the body when the room outside the rail fits the list; otherwise over the body. Never past the viewport.\n  const place = () => {\n    const r = sum.getBoundingClientRect();\n    const right = r.left + r.width / 2 > innerWidth / 2;\n    const room = right ? innerWidth - r.right : r.left;\n    nav.dataset.flow = room >= Math.min(LIST_W, innerWidth - 48) + EDGE ? 'out' : 'in';\n  };\n  const setOpen = (open) => {\n    if (open) place();\n    box.open = open;\n    if (!open) byHover = false;\n  };\n  const peek = (tick) => ticks.forEach((t) => t.classList.toggle('is-peek', t === tick));\n  const currentLink = () => links.find((a) => a.getAttribute('aria-current') === 'true') || links[0];\n\n  const mark = (id) => {\n    current = id;\n    ticks.forEach((t) => t.classList.toggle('is-current', t.dataset.id === id));\n    links.forEach((a) => {\n      if (a.getAttribute('href') === `#panel-${id}`) a.setAttribute('aria-current', 'true');\n      else a.removeAttribute('aria-current');\n    });\n  };\n  const sections = ticks.map((t) => document.getElementById(`panel-${t.dataset.id}`)).filter(Boolean);\n  if (sections.length) mark(sections[0].id.slice(6));\n  if (sections.length && 'IntersectionObserver' in window) {\n    // A thin band a third of the way down the viewport: the section across it is the one being read.\n    const seen = new Set();\n    const io = new IntersectionObserver((entries) => {\n      entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));\n      const hit = sections.filter((s) => seen.has(s)).pop();\n      if (hit && hit.id.slice(6) !== current) mark(hit.id.slice(6));\n    }, { rootMargin: '-30% 0px -65% 0px' });\n    sections.forEach((s) => io.observe(s));\n  }\n\n  place();\n  addEventListener('resize', place);\n\n  // Mouse: dwelling on the rail opens the list, leaving it closes a list opened that way. A tap or click opens it for good.\n  box.addEventListener('pointerenter', (e) => {\n    clearTimeout(leave);\n    if (e.pointerType !== 'mouse' || box.open) return;\n    dwell = setTimeout(() => { setOpen(true); byHover = true; }, 300);\n  });\n  box.addEventListener('pointerleave', () => {\n    clearTimeout(dwell);\n    // A link the keyboard moved into keeps the list open; focusout closes it once the focus leaves the nav.\n    if (byHover) leave = setTimeout(() => { if (!nav.contains(document.activeElement)) setOpen(false); }, 250);\n  });\n  sum.addEventListener('click', (e) => {\n    clearTimeout(dwell);\n    if (box.open && byHover) { e.preventDefault(); byHover = false; return; }\n    place();\n  });\n  box.addEventListener('toggle', () => { if (box.open) peek(null); });\n\n  // Keyboard: the summary opens with Enter or Space (native); arrows move through the links; Esc closes and returns to the rail.\n  sum.addEventListener('focus', () => {\n    if (sum.matches(':focus-visible')) peek(ticks.find((t) => t.dataset.id === current));\n  });\n  sum.addEventListener('blur', () => peek(null));\n  nav.addEventListener('keydown', (e) => {\n    if (e.key === 'Escape' && box.open) {\n      e.preventDefault();\n      setOpen(false);\n      sum.focus();\n      return;\n    }\n    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;\n    const at = links.indexOf(document.activeElement);\n    if (at < 0 && e.target !== sum) return;\n    e.preventDefault();\n    if (!box.open) setOpen(true);\n    let next;\n    if (e.key === 'Home') next = links[0];\n    else if (e.key === 'End') next = links[links.length - 1];\n    else if (at < 0) next = e.key === 'ArrowDown' ? currentLink() : links[links.length - 1];\n    else next = links[Math.min(links.length - 1, Math.max(0, at + (e.key === 'ArrowDown' ? 1 : -1)))];\n    next.focus();\n  });\n  nav.addEventListener('focusout', (e) => {\n    if (box.open && e.relatedTarget && !nav.contains(e.relatedTarget)) setOpen(false);\n  });\n\n  // Choosing a section or tapping outside closes the list.\n  links.forEach((a) => a.addEventListener('click', () => setOpen(false)));\n  document.addEventListener('pointerdown', (e) => { if (box.open && !nav.contains(e.target)) setOpen(false); });\n  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && box.open && !nav.contains(e.target)) setOpen(false); });\n})();\n\n// The toolbar's Export menu: Copy as image, Download PNG and Save as PDF. The menu is a native popover that src/render.js writes next to\n// the toolbar (a click on the button, Esc and a click outside open and close it with no script); this script shows the button, moves\n// focus with the arrow keys, says why an item cannot run, and does the work. A browser without popovers gets the same menu from a class\n// toggle instead of losing it.\n//\n// Copy and Download share one rasterizer. An item that cannot run is marked aria-disabled and carries the reason as its muted second\n// line (also its accessible description), never as the toolbar button's text: no rasterizer disables both; a preview frame whose feature\n// policy forbids clipboard-write, or a missing async Clipboard API / secure context, disables only Copy. Chromium and Firefox (as of\n// version 160) can rasterize the page; Safari and unknown browsers keep both items but carry a note that the effect is not guaranteed.\n// A refused copy reports a failure and never falls back to downloading. Save as PDF is the browser's print dialog and always works\n// (the page's print CSS hides the toolbar and the menu).\n//\n// Pipeline: clone the page body \u2192 inline every computed style (CSS variables are resolved there, so a clone keeps theme colours and\n// sizes) and the ::before / ::after decorations \u2192 wrap it in an SVG foreignObject \u2192 draw that image on a canvas \u2192 toBlob('image/png')\n// \u2192 navigator.clipboard.write(new ClipboardItem(...)), passing the blob as a promise so the write keeps the user's click activation,\n// or a download through <a download>.\n(() => {\n  const XHTML = 'http://www.w3.org/1999/xhtml';\n  const SVG = 'http://www.w3.org/2000/svg';\n  const MAX_DIM = 16384;        // Chrome refuses a canvas wider or taller than this\n  const MAX_AREA = 268435456;   // and one with more pixels than this (16384 * 16384)\n\n  const btn = document.querySelector('[data-am=\"export\"]');\n  const menu = document.getElementById('am-export');\n  if (!btn || !menu) return;\n  const main = document.querySelector('main.am-sheet, main.am-doc');\n  if (!main) return;\n  const items = [...menu.querySelectorAll('[data-export]')];\n  const item = (kind) => menu.querySelector(`[data-export=\"${kind}\"]`);\n  const [copyItem, downloadItem, pdfItem] = ['copy', 'download', 'pdf'].map(item);\n  const note = (el) => document.getElementById(el.getAttribute('aria-describedby'));\n  const text = menu.dataset;\n\n  const canRasterize = typeof XMLSerializer !== 'undefined' && typeof document.createElement('canvas').getContext === 'function';\n  const canCopy = window.isSecureContext && typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function';\n  // Chromium (including an embedded Chromium without navigator.userAgentData, whose UA still names Chrome/) and Firefox can rasterize\n  // the page. Safari and unknown browsers are not rejected outright: their items stay usable but carry a note that the effect is not\n  // guaranteed.\n  const brands = navigator.userAgentData?.brands;\n  const chromium = brands ? brands.some((b) => /Chromium/.test(b.brand)) : /\\bChrome\\//.test(navigator.userAgent);\n  const gecko = /\\bFirefox\\//.test(navigator.userAgent);\n  const native = Object.hasOwn(HTMLElement.prototype, 'popover') && typeof menu.showPopover === 'function';\n  btn.hidden = false;\n\n  const idle = btn.textContent;\n  // The button keeps its name (\"Export\") while its text shows progress, so a screen reader hears each result through a hidden live\n  // region beside it. aria-live, not\n  // role=\"status\": the live-update notice owns role=\"status\" (src/runtime/page.js), and the two must stay apart.\n  const status = document.createElement('span');\n  status.setAttribute('aria-live', 'polite');\n  status.dataset.am = 'export-status';\n  status.className = 'am-visually-hidden';\n  btn.after(status);\n  btn.setAttribute('aria-label', idle);\n  // Short feedback on the button itself, restored after a moment; the live region carries the same words.\n  const say = (message, restore) => {\n    btn.textContent = message;\n    status.textContent = message;\n    clearTimeout(say.timer);\n    if (restore) say.timer = setTimeout(() => { btn.textContent = idle; }, 1800);\n  };\n\n  // An item that can never run here (aria-disabled, reason as its second line), in the order of the conditions the page can act on.\n  const unavailable = new Map();\n  if (!canRasterize) {\n    unavailable.set(copyItem, text.unavailableBrowser);\n    unavailable.set(downloadItem, text.unavailableBrowser);\n  } else {\n    if (document.featurePolicy && document.featurePolicy.allowsFeature('clipboard-write') === false) unavailable.set(copyItem, text.unavailablePolicy);\n    else if (!canCopy) unavailable.set(copyItem, text.unavailableClipboard);\n    // Safari and unknown browsers can draw the page often enough to keep the items, but the result is not guaranteed.\n    if (!chromium && !gecko) for (const el of [copyItem, downloadItem]) if (!unavailable.has(el)) note(el).textContent = text.unverifiedEffect;\n  }\n  for (const [el, reason] of unavailable) note(el).textContent = reason;\n\n  // A running export blocks the next copy or download (a second full-page rasterization beside the first); Save as PDF stays free.\n  let busy = false;\n  const sync = () => {\n    for (const el of items) {\n      const off = unavailable.has(el) || (busy && el !== pdfItem);\n      if (off) el.setAttribute('aria-disabled', 'true');\n      else el.removeAttribute('aria-disabled');\n    }\n    if (busy) btn.setAttribute('aria-busy', 'true');\n    else btn.removeAttribute('aria-busy');\n  };\n  sync();\n\n  // A stylesheet of only the local font declarations, so a font a theme embeds still draws inside the SVG.\n  const fontFaceCss = () => {\n    let css = '';\n    for (const sheet of document.styleSheets) {\n      let rules;\n      try { rules = sheet.cssRules; } catch { continue; } // a cross-origin sheet has no readable rules; pages never carry one\n      for (const rule of rules) {\n        if (rule.type === 5 /* CSSRule.FONT_FACE_RULE */) css += `${rule.cssText}\\n`;\n      }\n    }\n    return css;\n  };\n\n  // Copy every computed declaration of src onto dst. The clone then needs no page stylesheet: var() is already resolved.\n  const inlineStyle = (src, dst) => {\n    const cs = getComputedStyle(src);\n    let css = '';\n    for (let i = 0; i < cs.length; i++) {\n      const name = cs[i];\n      const value = cs.getPropertyValue(name);\n      if (value) css += `${name}:${value};`;\n    }\n    dst.style.cssText = css;\n  };\n\n  // A ::before / ::after box exists only while the rule applies, so copy its computed declarations into a rule of its own. Each element\n  // that has one gets a data-cp marker; the marker keeps the rule from touching any other node in the picture.\n  let cpSeq = 0;\n  const pseudoRule = (src, dst, pseudo) => {\n    const cs = getComputedStyle(src, pseudo);\n    const content = cs.getPropertyValue('content');\n    if (!content || content === 'none' || content === 'normal') return '';\n    let css = '';\n    for (let i = 0; i < cs.length; i++) {\n      const name = cs[i];\n      const value = cs.getPropertyValue(name);\n      if (value) css += `${name}:${value};`;\n    }\n    if (!css) return '';\n    const mark = dst.getAttribute('data-cp') ?? String(++cpSeq);\n    dst.setAttribute('data-cp', mark);\n    return `[data-cp=\"${mark}\"]${pseudo}{${css}}\\n`;\n  };\n\n  // The page's chrome means nothing in a picture: remove the controls and the navigational rail from the clone.\n  const CHROME = '.am-code-copy, .am-diagram-expand, .am-table-controls, [class*=\"delta-switch\"], .am-toc, .am-remark-hover, .am-mark-note';\n\n  function buildSvg(width, height) {\n    const clone = main.cloneNode(true);\n    // The clone has the same node order as the original, so one index walks both trees.\n    const srcNodes = [main, ...main.querySelectorAll('*')];\n    const dstNodes = [clone, ...clone.querySelectorAll('*')];\n    for (let i = 0; i < srcNodes.length; i++) {\n      inlineStyle(srcNodes[i], dstNodes[i]);\n    }\n    let pseudoCss = '';\n    for (let i = 0; i < srcNodes.length; i++) {\n      pseudoCss += pseudoRule(srcNodes[i], dstNodes[i], '::before');\n      pseudoCss += pseudoRule(srcNodes[i], dstNodes[i], '::after');\n    }\n    for (const node of clone.querySelectorAll(CHROME)) node.remove();\n    // A rasterized image is a static snapshot, not a scrollable viewport. Inlined computed styles turn auto heights\n    // into fixed fractional heights on scrolling containers (.am-table-wrap, .am-diagram, .am-annot-scroll, .am-math-block, pre),\n    // and subpixel rounding inside the foreignObject can trigger unwanted scrollbars. Reset unconstrained containers to visible and auto.\n    // For containers with an author-specified finite max-height, keep inlined height and max-height, and hide overflow.\n    for (const scroller of clone.querySelectorAll('.am-table-wrap, .am-diagram, .am-annot-scroll, .am-math-block, pre')) {\n      const maxH = parseFloat(scroller.style.maxHeight || scroller.style.getPropertyValue('max-height'));\n      if (Number.isFinite(maxH) && maxH >= 0) {\n        scroller.style.setProperty('overflow', 'hidden', 'important');\n      } else {\n        scroller.style.setProperty('overflow', 'visible', 'important');\n        scroller.style.setProperty('height', 'auto', 'important');\n        scroller.style.setProperty('max-height', 'none', 'important');\n      }\n    }\n    clone.style.margin = '0';\n    clone.style.width = `${width}px`;\n    clone.style.maxWidth = 'none';\n\n    const wrap = document.createElementNS(XHTML, 'div');\n    wrap.setAttribute('xmlns', XHTML);\n    const body = getComputedStyle(document.body);\n    wrap.style.cssText = `width:${width}px;height:${height}px;margin:0;padding:0;box-sizing:border-box;color:${body.color};font-family:${body.fontFamily};font-size:${body.fontSize};line-height:${body.lineHeight};background-color:${body.backgroundColor};background-image:${body.backgroundImage};`;\n\n    const style = document.createElementNS(XHTML, 'style');\n    style.textContent = `${fontFaceCss()}\\n${pseudoCss}`;\n    wrap.append(style, clone);\n\n    const svg = document.createElementNS(SVG, 'svg');\n    svg.setAttribute('xmlns', SVG);\n    svg.setAttribute('width', String(width));\n    svg.setAttribute('height', String(height));\n    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);\n    const foreign = document.createElementNS(SVG, 'foreignObject');\n    foreign.setAttribute('x', '0');\n    foreign.setAttribute('y', '0');\n    foreign.setAttribute('width', String(width));\n    foreign.setAttribute('height', String(height));\n    foreign.append(wrap);\n    svg.append(foreign);\n    return new XMLSerializer().serializeToString(svg);\n  }\n\n  // A canvas may not exceed the browser's dimension or area limit: shrink the pixels rather than fail on a long page. No lower bound:\n  // one would let a very long page exceed the limits again.\n  const pixelScale = (width, height) => {\n    const wanted = Math.min(2, window.devicePixelRatio || 1);\n    return Math.min(wanted, MAX_DIM / width, MAX_DIM / height, Math.sqrt(MAX_AREA / (width * height)));\n  };\n\n  async function rasterize() {\n    await document.fonts?.ready;\n    const rect = main.getBoundingClientRect();\n    const width = Math.max(1, Math.ceil(Math.max(rect.width, main.scrollWidth)));\n    const height = Math.max(1, Math.ceil(Math.max(rect.height, main.scrollHeight)));\n    const svg = buildSvg(width, height);\n    const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;\n    const image = new Image();\n    image.decoding = 'async';\n    await new Promise((resolve, reject) => {\n      image.onload = resolve;\n      image.onerror = () => reject(new Error('the browser cannot draw the page as an SVG image'));\n      image.src = url;\n    });\n    const scale = pixelScale(width, height);\n    const canvas = document.createElement('canvas');\n    canvas.width = Math.max(1, Math.round(width * scale));\n    canvas.height = Math.max(1, Math.round(height * scale));\n    const ctx = canvas.getContext('2d');\n    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);\n    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));\n    if (!blob) throw new Error('the browser could not encode the image');\n    return blob;\n  }\n\n  // The PNG is saved under the page title (letters and digits of any script, joined by dashes).\n  const fileName = () => {\n    const slug = (document.title || '').toLowerCase().replace(/[^\\p{L}\\p{N}]+/gu, '-').slice(0, 40).replace(/^-+|-+$/g, '');\n    return `${slug || 'page'}.png`;\n  };\n  const download = (blob) => {\n    const link = document.createElement('a');\n    link.href = URL.createObjectURL(blob);\n    link.download = fileName();\n    document.body.append(link);\n    link.click();\n    link.remove();\n    setTimeout(() => URL.revokeObjectURL(link.href), 4000);\n  };\n\n  // Start rasterizing, then hand the pending blob to ClipboardItem and write within the same click task so the browser keeps the\n  // user's activation. Awaiting the raster first would spend it, and the write would be rejected. The write can be refused at once\n  // while the page is still being drawn; wait for both to settle, so a retry cannot start a second rasterization beside the first.\n  const copy = async () => {\n    const blobPromise = rasterize();\n    const written = (async () => {\n      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })]);\n    })();\n    const [write] = await Promise.allSettled([written, blobPromise]);\n    if (write.status === 'rejected') throw write.reason;\n  };\n  const save = async () => { download(await rasterize()); };\n\n  async function run(work, done) {\n    busy = true;\n    sync();\n    say(text.working, false);\n    try {\n      await work();\n      say(done, true);\n    } catch (e) {\n      console.error('[am] export failed', e);\n      say(text.failed, true);\n    } finally {\n      busy = false;\n      sync();\n    }\n  }\n\n  // The menu. Native: the popover opens and closes itself and tells us through toggle events. Fallback: the same menu toggled by a\n  // class, with Esc and a click outside handled here.\n  const isOpen = () => (native ? menu.matches(':popover-open') : menu.classList.contains('is-open'));\n  // Under the button, aligned to its inline-end edge, and inside the viewport (the toolbar scrolls sideways on a phone, so the button\n  // can sit near an edge). On a short viewport the menu is cut to the space below the button and scrolls, so every item stays reachable.\n  const place = () => {\n    const r = btn.getBoundingClientRect();\n    // clientWidth, not 100vw: the viewport width in CSS includes a classic scrollbar, so a menu sized from it can stick out.\n    const room = document.documentElement.clientWidth - 16;\n    menu.style.maxWidth = `${room}px`;\n    menu.style.minWidth = `${Math.min(200, room)}px`;\n    const width = menu.offsetWidth;\n    const rtl = getComputedStyle(btn).direction === 'rtl';\n    const left = Math.max(8, Math.min(rtl ? r.left : r.right - width, document.documentElement.clientWidth - 8 - width));\n    const top = r.bottom + 6;\n    menu.style.top = `${top}px`;\n    menu.style.left = `${left}px`;\n    menu.style.maxHeight = `${Math.max(48, document.documentElement.clientHeight - 8 - top)}px`;\n  };\n  const firstEnabled = () => items.find((el) => el.getAttribute('aria-disabled') !== 'true');\n  const opened = () => {\n    btn.setAttribute('aria-expanded', 'true');\n    place();\n    menu.style.visibility = '';\n    firstEnabled()?.focus();\n  };\n  const closed = (restoreFocus) => {\n    btn.setAttribute('aria-expanded', 'false');\n    if (restoreFocus || menu.contains(document.activeElement)) btn.focus();\n  };\n  const close = (restoreFocus = true) => {\n    if (!isOpen()) return;\n    if (native) menu.hidePopover();\n    else { menu.classList.remove('is-open'); closed(restoreFocus); }\n  };\n\n  if (native) {\n    // Place the box before it is first drawn, so it never flashes in the wrong spot.\n    menu.addEventListener('beforetoggle', (e) => {\n      btn.setAttribute('aria-expanded', String(e.newState === 'open'));\n      if (e.newState === 'open') menu.style.visibility = 'hidden';\n    });\n    menu.addEventListener('toggle', (e) => { if (e.newState === 'open') opened(); else closed(false); });\n  } else {\n    // No popover: the browser must not half-handle the attributes, and the button toggles the class itself.\n    menu.removeAttribute('popover');\n    btn.removeAttribute('popovertarget');\n    btn.addEventListener('click', () => {\n      if (isOpen()) close();\n      else { menu.classList.add('is-open'); opened(); }\n    });\n    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); close(); } });\n    document.addEventListener('pointerdown', (e) => { if (isOpen() && !menu.contains(e.target) && !btn.contains(e.target)) close(false); });\n  }\n  window.addEventListener('resize', () => { if (isOpen()) place(); });\n\n  menu.addEventListener('keydown', (e) => {\n    const at = items.indexOf(document.activeElement);\n    const to = { ArrowDown: at + 1, ArrowUp: at - 1, Home: 0, End: items.length - 1 }[e.key];\n    if (to !== undefined) {\n      e.preventDefault();\n      items[(to + items.length) % items.length].focus();\n    } else if (e.key === 'Tab') {\n      close(true); // focus goes back to the button and Tab then moves on from there\n    }\n  });\n\n  menu.addEventListener('click', (e) => {\n    const el = e.target.closest('[data-export]');\n    if (!el || el.getAttribute('aria-disabled') === 'true') return;\n    close();\n    if (el === pdfItem) window.print();\n    else if (el === copyItem) run(copy, text.copied);\n    else run(save, text.saved);\n  });\n})();\n})();\n";
 var TABLE_JS = "(() => {\n  const NUMBER = /^[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:e[+-]?\\d+)?$/i;\n  const FORMATTED_NUMBER = /^[+-]?\\$?(?:(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d*)?|\\.\\d+)%?$/;\n  const INTEGER = /^[+-]?\\d+$/;\n  const ZERO_FRACTION = /^[+-]?\\d+\\.0*$/;\n  const DATE = /^\\d{4}-\\d{2}-\\d{2}(?:[T ]\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d{1,3})?)?(?:Z|[+-]\\d{2}:?\\d{2})?)?$/;\n  const INTERACTIVE = 'a, button, input, select, textarea, details, audio[controls], video[controls], [contenteditable], [tabindex]';\n  const validDate = (text) => {\n    if (!DATE.test(text)) return false;\n    const [year, month, day] = text.slice(0, 10).split('-').map(Number);\n    const date = new Date(0);\n    date.setUTCHours(0, 0, 0, 0);\n    date.setUTCFullYear(year, month - 1, day);\n    return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day && Number.isFinite(Date.parse(text));\n  };\n  const numberValue = (text) => {\n    let normalized = text;\n    if (FORMATTED_NUMBER.test(text)) normalized = text.replace(/[$,%]/g, '');\n    else if (!NUMBER.test(text)) return null;\n    if (INTEGER.test(normalized)) return BigInt(normalized);\n    if (ZERO_FRACTION.test(normalized)) return BigInt(normalized.slice(0, normalized.indexOf('.')));\n    const value = Number(normalized);\n    return Number.isFinite(value) ? value : null;\n  };\n  const typedValue = (text) => {\n    const number = numberValue(text);\n    if (number !== null) return number;\n    return validDate(text) ? Date.parse(text) : null;\n  };\n  const relayout = () => window.dispatchEvent(new Event('resize'));\n\n  for (const table of document.querySelectorAll('table[data-am-table]')) {\n    const options = new Set(table.dataset.amTable.split(/\\s+/));\n    const body = table.tBodies[0];\n    if (!body) continue;\n\n    if (options.has('filter')) {\n      const controls = table.parentElement.previousElementSibling;\n      const input = controls?.classList.contains('am-table-controls') ? controls.querySelector('[data-am-table-filter]') : null;\n      if (input) {\n        controls.hidden = false;\n        input.addEventListener('input', () => {\n          const query = input.value.trim().toLocaleLowerCase();\n          for (const row of body.rows) row.hidden = Boolean(query) && !row.textContent.toLocaleLowerCase().includes(query);\n          relayout();\n        });\n      }\n    }\n\n    if (!options.has('sort')) continue;\n    const headers = [...(table.tHead?.rows[0]?.cells ?? [])];\n    headers.forEach((head, column) => {\n      const button = document.createElement('button');\n      button.type = 'button';\n      button.className = 'am-table-sort';\n      button.setAttribute('aria-label', head.textContent.trim());\n      const moved = [...head.childNodes].filter((child) => !(child.nodeType === 1 && (child.matches(INTERACTIVE) || child.querySelector(INTERACTIVE))));\n      head.insertBefore(button, moved[0] ?? null);\n      button.append(...moved);\n      button.addEventListener('click', () => {\n        const direction = head.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';\n        for (const cell of headers) cell.removeAttribute('aria-sort');\n        head.setAttribute('aria-sort', direction);\n        const rows = [...body.rows];\n        const texts = rows.map((row) => row.cells[column]?.textContent.trim() ?? '');\n        const numeric = texts.every((text) => numberValue(text) !== null);\n        const dates = texts.every(validDate);\n        const byValue = head.getAttribute('align') === 'right' || numeric || dates;\n        const sorted = rows.map((row, index) => ({ row, index, text: texts[index], value: byValue ? typedValue(texts[index]) : null }));\n        sorted.sort((a, b) => {\n          let compared;\n          if (byValue && (a.value !== null || b.value !== null)) {\n            if (a.value === null) compared = 1;\n            else if (b.value === null) compared = -1;\n            else compared = a.value < b.value ? -1 : a.value > b.value ? 1 : 0;\n          }\n          compared ??= a.text.localeCompare(b.text);\n          return compared === 0 ? a.index - b.index : direction === 'ascending' ? compared : -compared;\n        });\n        body.append(...sorted.map(({ row }) => row));\n        relayout();\n      });\n    });\n  }\n})();\n";
 var TABLE_CSS = `.am-table-controls { margin: 0 0 8px; }
 .am-table-filter { display: flex; align-items: center; gap: 8px; font-size: var(--am-fs-small); color: var(--ink-2); }
@@ -735,6 +813,32 @@ var DELTA_CSS = `/* Change markers (only on pages that have one). Only the Chang
 .am-view-changes .am-er-sign[data-delta="changed"], .am-view-changes .am-er-field[data-delta="changed"], .am-view-changes .am-er-key[data-delta="changed"] { fill: var(--warn); }
 .am-view-changes .am-er-field[data-delta="removed"] { text-decoration: line-through; }
 .am-view-changes .am-node .am-er-sign[data-delta] { text-decoration: none; }
+
+/* API changes use the shared switch but collapse hidden HTML rows and contracts so Before and After remain readable. */
+/* Use the code diff hues and ink/fill mixes: a theme's status --ok can be blue, but additions must stay green in every theme and mode. */
+.am-api {
+  --diff-add: #1f9d4d; --diff-del: #d1344a;
+  --ok: color-mix(in srgb, var(--diff-add) 75%, var(--ink));
+  --ok-bg: color-mix(in srgb, var(--diff-add) 14%, var(--fill));
+  --err: color-mix(in srgb, var(--diff-del) 75%, var(--ink));
+  --err-bg: color-mix(in srgb, var(--diff-del) 14%, var(--fill));
+}
+.am-api.am-view-before [data-delta="added"], .am-api.am-view-after [data-delta="removed"],
+.am-api.am-view-before .am-delta-badge, .am-api.am-view-after .am-delta-badge { display: none; }
+/* A view hides the columns and tables none of its fields need, and the first contract it shows drops the separator above it. */
+.am-api.am-view-before [data-api-hide~="before"], .am-api.am-view-after [data-api-hide~="after"] { display: none; }
+.am-api.am-view-before .am-api-contract[data-api-lead~="before"], .am-api.am-view-after .am-api-contract[data-api-lead~="after"] { margin-block-start: 0; padding-block-start: 0; border-block-start: 0; }
+.am-api .am-delta-badge { display: inline-block; color: var(--badge); margin-inline-end: 6px; font-weight: 700; }
+.am-view-changes .am-api-contract[data-delta="added"], .am-view-changes .am-api-contract [data-delta="added"] { --api-change: var(--ok); --api-change-bg: var(--ok-bg); }
+.am-view-changes .am-api-contract[data-delta="removed"], .am-view-changes .am-api-contract [data-delta="removed"] { --api-change: var(--err); --api-change-bg: var(--err-bg); }
+.am-view-changes .am-api-contract[data-delta="changed"], .am-view-changes .am-api-contract [data-delta="changed"] { --api-change: var(--warn); --api-change-bg: var(--warn-bg); }
+.am-view-changes .am-api-contract tr[data-delta] > * { color: var(--api-change); background: var(--api-change-bg); }
+.am-view-changes .am-api-section[data-delta] > h4,
+.am-view-changes .am-api-contract[data-delta] > .am-api-endpoint { color: var(--api-change); }
+.am-view-changes .am-api-contract[data-delta] > .am-api-endpoint strong { color: inherit; }
+.am-view-changes .am-api-contract tr[data-delta="removed"] > *,
+.am-view-changes .am-api-section[data-delta="removed"] > h4,
+.am-view-changes .am-api-contract[data-delta="removed"] > .am-api-endpoint { text-decoration: line-through; }
 
 /* tree */
 .am-tree .am-delta-badge {
@@ -1195,7 +1299,7 @@ var UPDATE_JS = `// Pages with a new-version button only: src/render.js adds thi
   }
 })();
 `;
-var LIVE_JS = "// am serve only: src/serve.js adds this script to the page it sends (never to the file on disk), with the page's event link and the\n// labels in the page language. When the page file changes, the server sends one \"changed\" event. A served page is sandboxed and has\n// no localStorage, so Reply answers, comments and remarks live only in this tab: a reader who has answered, commented or marked\n// anything gets a notice and reloads when ready; otherwise the page reloads by itself.\n(() => {\n  const { url, ui } = JSON.parse(document.currentScript.dataset.live);\n  if (!window.EventSource) return;\n  // The page comes back where the reader was. A sandboxed page has an opaque origin, and Chrome drops its history.state on reload,\n  // so the position goes in window.name, which a reload keeps, with the page path: a reload can land on another page (a 404 without\n  // this script, when the file was removed), and the value must not move a page it was not saved on. It is read once and cleared.\n  const SCROLL = /^am-scroll:(.*):(\\d+)$/;\n  const saved = SCROLL.exec(window.name);\n  if (saved) window.name = '';\n  if (saved && saved[1] === location.pathname) {\n    // Otherwise the browser's own restore runs after load and puts the page back at the top.\n    try {\n      history.scrollRestoration = 'manual';\n    } catch {\n      // Not settable here: the restore below may lose to the browser's.\n    }\n    // The sheet grid lays itself out again after load and the page can shrink for a moment, which drops the position to the top.\n    // So hold it for a second after load, and let go as soon as the reader scrolls, clicks or types.\n    const y = Number(saved[2]);\n    const READER = ['wheel', 'touchstart', 'keydown', 'pointerdown'];\n    const root = document.documentElement;\n    let until = 0;\n    let height = 0; // the page height at the last frame\n    const stop = () => { until = 0; };\n    // A scrollbar drag sends none of the events above, only scroll. The page is tall enough to stay at y and has not changed height\n    // since the last frame, so the move is not the layout pushing the page up: the reader moved it.\n    const moved = () => {\n      if (Math.abs(scrollY - y) > 1 && root.scrollHeight - innerHeight >= y && root.scrollHeight === height) stop();\n    };\n    const hold = () => {\n      if (Date.now() > until) {\n        READER.forEach((type) => removeEventListener(type, stop, true));\n        return removeEventListener('scroll', moved);\n      }\n      if (Math.abs(scrollY - y) > 1) scrollTo(0, y);\n      height = root.scrollHeight;\n      requestAnimationFrame(hold);\n    };\n    addEventListener('load', () => {\n      until = Date.now() + 1000;\n      READER.forEach((type) => addEventListener(type, stop, { capture: true, passive: true }));\n      addEventListener('scroll', moved, { passive: true });\n      hold();\n    }, { once: true });\n  }\n  // Theme and mode are page settings, not the reader's input.\n  let input = false;\n  const typed = (e) => { if (!e.target.closest?.('.am-toolbar')) input = true; };\n  document.addEventListener('input', typed, true);\n  document.addEventListener('change', typed, true);\n  // A click on the option that is already picked confirms the suggestion (src/runtime/reply.js) without a change event.\n  document.addEventListener('click', (e) => { if (e.target.closest?.('.am-ask input')) input = true; }, true);\n  const hasInput = () => input || Boolean(window.__amRemarkData?.().length);\n\n  const reload = () => {\n    if (!window.name || SCROLL.test(window.name)) window.name = `am-scroll:${location.pathname}:${Math.round(scrollY)}`;\n    location.reload();\n  };\n  let notice = null;\n  new EventSource(url).addEventListener('changed', () => {\n    if (!hasInput()) return reload();\n    if (notice) return;\n    // Styled inline, with the right-to-left fix in code, because this script is added at serve time: the page's stylesheet and\n    // rtl.css were built without it.\n    notice = document.createElement('div');\n    notice.setAttribute('role', 'status');\n    notice.style.cssText = 'position:fixed;inset-block-end:16px;inset-inline-start:50%;translate:-50% 0;z-index:1000;display:flex;align-items:center;gap:10px;'\n      + 'padding:8px 12px;font-size:var(--am-fs-text);color:var(--ink);background:var(--paper);border:1px solid var(--line-2);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.2)';\n    if (document.documentElement.dir === 'rtl') notice.style.translate = '50% 0';\n    // The reply bar (src/runtime/reply.js) sits at the same place and shows under the same condition, so the notice goes above it.\n    const place = () => {\n      const bar = document.querySelector('.am-reply-bar:not([hidden])');\n      notice.style.insetBlockEnd = bar ? `${innerHeight - bar.getBoundingClientRect().top + 8}px` : '16px';\n    };\n    const bar = document.querySelector('.am-reply-bar');\n    if (bar) new MutationObserver(place).observe(bar, { attributes: true, attributeFilter: ['hidden'] });\n    addEventListener('resize', place);\n    const button = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn', textContent: ui.reload });\n    button.addEventListener('click', reload);\n    notice.append(`${ui.updated} \xB7`, button);\n    document.body.append(notice);\n    place();\n  });\n})();\n";
+var LIVE_JS = "// am serve only: src/serve.js adds this script to the page it sends (never to the file on disk), with the page's event link and the\n// labels in the page language. When the page file changes, the server sends one \"changed\" event. A served page is sandboxed and has\n// no localStorage, so Reply answers, comments and remarks live only in this tab: a reader who has answered, commented or marked\n// anything gets a notice and reloads when ready; otherwise the page reloads by itself.\n(() => {\n  const { url, ui } = JSON.parse(document.currentScript.dataset.live);\n  if (!window.EventSource) return;\n  // The page comes back where the reader was. A sandboxed page has an opaque origin, and Chrome drops its history.state on reload,\n  // so the position goes in window.name, which a reload keeps, with the page path: a reload can land on another page (a 404 without\n  // this script, when the file was removed), and the value must not move a page it was not saved on. It is read once and cleared.\n  const SCROLL = /^am-scroll:(.*):(\\d+)$/;\n  const saved = SCROLL.exec(window.name);\n  if (saved) window.name = '';\n  if (saved && saved[1] === location.pathname) {\n    // Otherwise the browser's own restore runs after load and puts the page back at the top.\n    try {\n      history.scrollRestoration = 'manual';\n    } catch {\n      // Not settable here: the restore below may lose to the browser's.\n    }\n    // The sheet grid lays itself out again after load and the page can shrink for a moment, which drops the position to the top.\n    // So hold it for a second after load, and let go as soon as the reader scrolls, clicks or types.\n    const y = Number(saved[2]);\n    const READER = ['wheel', 'touchstart', 'keydown', 'pointerdown'];\n    const root = document.documentElement;\n    let until = 0;\n    let height = 0; // the page height at the last frame\n    const stop = () => { until = 0; };\n    // A scrollbar drag sends none of the events above, only scroll. The page is tall enough to stay at y and has not changed height\n    // since the last frame, so the move is not the layout pushing the page up: the reader moved it.\n    const moved = () => {\n      if (Math.abs(scrollY - y) > 1 && root.scrollHeight - innerHeight >= y && root.scrollHeight === height) stop();\n    };\n    const hold = () => {\n      if (Date.now() > until) {\n        READER.forEach((type) => removeEventListener(type, stop, true));\n        return removeEventListener('scroll', moved);\n      }\n      if (Math.abs(scrollY - y) > 1) scrollTo(0, y);\n      height = root.scrollHeight;\n      requestAnimationFrame(hold);\n    };\n    addEventListener('load', () => {\n      until = Date.now() + 1000;\n      READER.forEach((type) => addEventListener(type, stop, { capture: true, passive: true }));\n      addEventListener('scroll', moved, { passive: true });\n      hold();\n    }, { once: true });\n  }\n  // Theme and mode are page settings, not the reader's input. A control inside an option preview is a picture, not an answer.\n  let input = false;\n  const inPreview = (el) => Boolean(el.closest?.('.am-ask-preview'));\n  const typed = (e) => { if (!e.target.closest?.('.am-toolbar') && !inPreview(e.target)) input = true; };\n  document.addEventListener('input', typed, true);\n  document.addEventListener('change', typed, true);\n  // A click on the option that is already picked confirms the suggestion (src/runtime/reply.js) without a change event.\n  document.addEventListener('click', (e) => {\n    if (e.target.closest?.('.am-ask input') && !inPreview(e.target)) input = true;\n    // In cards the preview picks its option too (src/runtime/reply.js); a control in the drawing does not.\n    else if (e.target.closest?.('.am-ask--cards .am-ask-preview') && !inPreview(e.target) && !e.target.closest('input, button, a, select, textarea, summary, label')) input = true;\n  }, true);\n  const hasInput = () => input || Boolean(window.__amRemarkData?.().length);\n\n  const reload = () => {\n    if (!window.name || SCROLL.test(window.name)) window.name = `am-scroll:${location.pathname}:${Math.round(scrollY)}`;\n    location.reload();\n  };\n  let notice = null;\n  new EventSource(url).addEventListener('changed', () => {\n    if (!hasInput()) return reload();\n    if (notice) return;\n    // Styled inline, with the right-to-left fix in code, because this script is added at serve time: the page's stylesheet and\n    // rtl.css were built without it.\n    notice = document.createElement('div');\n    notice.setAttribute('role', 'status');\n    notice.style.cssText = 'position:fixed;inset-block-end:16px;inset-inline-start:50%;translate:-50% 0;z-index:1000;display:flex;align-items:center;gap:10px;'\n      + 'padding:8px 12px;font-size:var(--am-fs-text);color:var(--ink);background:var(--paper);border:1px solid var(--line-2);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.2)';\n    if (document.documentElement.dir === 'rtl') notice.style.translate = '50% 0';\n    // The reply bar (src/runtime/reply.js) sits at the same place and shows under the same condition, so the notice goes above it.\n    const place = () => {\n      const bar = document.querySelector('.am-reply-bar:not([hidden])');\n      notice.style.insetBlockEnd = bar ? `${innerHeight - bar.getBoundingClientRect().top + 8}px` : '16px';\n    };\n    const bar = document.querySelector('.am-reply-bar');\n    if (bar) new MutationObserver(place).observe(bar, { attributes: true, attributeFilter: ['hidden'] });\n    addEventListener('resize', place);\n    const button = Object.assign(document.createElement('button'), { type: 'button', className: 'am-btn', textContent: ui.reload });\n    button.addEventListener('click', reload);\n    notice.append(`${ui.updated} \xB7`, button);\n    document.body.append(notice);\n    place();\n  });\n})();\n";
 var CLOSE_AFTER_CSS = "/* Countdown popover for a page made with close_after_reply (src/render.js adds this file only then). It sits at the bottom of the\n   window in the top layer and stays hidden unless open. */\n.am-closing { display: none; }\n.am-closing:popover-open {\n  display: flex; align-items: center; gap: 12px; position: fixed; inset-block: auto 20px; inset-inline: 0; margin-inline: auto; width: max-content; max-width: calc(100vw - 24px);\n  padding: 10px 14px; font-size: var(--am-fs-text); color: var(--ink); background: var(--paper);\n  border: 1px solid var(--line-2); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.25);\n}\n@media print {\n  .am-closing { display: none !important; }\n}\n";
 var CLOSE_AFTER_JS = `// Pages made with the close_after_reply setting only: src/render.js adds this script after the page script. When the reply is copied,
 // the reply sheet closes and a popover counts down to closing the tab. Browsers close only a tab no link has moved on, so a tab that
@@ -1409,8 +1513,9 @@ var VIDEO_EXPORT_JS = "// The export engine for the path that has no ffmpeg: the
 var VIDEO_MUX_JS = "// Minimal WebM (Matroska) writer for the export path that has no ffmpeg: the browser encodes the frames (WebCodecs,\n// see src/runtime/video.js) and this module writes the container. One VP8/VP9 video track and an optional Opus audio\n// track. The blocks are buffered, sorted by time and cut into clusters of about a second, so the sound and the\n// picture of a moment sit next to each other in the file. The Segment and the Clusters carry the unknown size, which\n// is how a stream is written: nothing needs to be measured first and nothing is patched afterwards.\n// Plain bytes only (no Buffer, no imports), so the same source runs in Node and inside a page (scripts/inline-assets.mjs\n// turns it into a script for the player page).\nconst APP = 'answer-me-with-html';   // MuxingApp / WritingApp\nconst CLUSTER_MS = 1000;              // how much time one cluster holds\nconst SEEK_PRE_ROLL_NS = 80_000_000;  // what the Opus specification asks for\n\nconst ID = {\n  EBML: [0x1a, 0x45, 0xdf, 0xa3],\n  EBMLVersion: [0x42, 0x86], EBMLReadVersion: [0x42, 0xf7], EBMLMaxIDLength: [0x42, 0xf2], EBMLMaxSizeLength: [0x42, 0xf3],\n  DocType: [0x42, 0x82], DocTypeVersion: [0x42, 0x87], DocTypeReadVersion: [0x42, 0x85],\n  Segment: [0x18, 0x53, 0x80, 0x67], Info: [0x15, 0x49, 0xa9, 0x66], TimecodeScale: [0x2a, 0xd7, 0xb1],\n  MuxingApp: [0x4d, 0x80], WritingApp: [0x57, 0x41], Duration: [0x44, 0x89],\n  Tracks: [0x16, 0x54, 0xae, 0x6b], TrackEntry: [0xae], TrackNumber: [0xd7], TrackUID: [0x73, 0xc5], FlagLacing: [0x9c],\n  CodecID: [0x86], TrackType: [0x83], Video: [0xe0], PixelWidth: [0xb0], PixelHeight: [0xba],\n  Audio: [0xe1], SamplingFrequency: [0xb5], Channels: [0x9f], CodecPrivate: [0x63, 0xa2],\n  CodecDelay: [0x56, 0xaa], SeekPreRoll: [0x56, 0xbb],\n  Cluster: [0x1f, 0x43, 0xb6, 0x75], Timecode: [0xe7], SimpleBlock: [0xa3],\n};\nconst UNKNOWN_SIZE = new Uint8Array([0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]);\n\nconst concat = (parts) => {\n  let total = 0;\n  for (const p of parts) total += p.length;\n  const out = new Uint8Array(total);\n  let at = 0;\n  for (const p of parts) { out.set(p, at); at += p.length; }\n  return out;\n};\nconst bytes = (id) => new Uint8Array(id);\nconst text = (s) => new TextEncoder().encode(s);\n\n// Element size as a variable-size integer, in the shortest length that fits; the all-ones value is reserved.\nfunction size(n) {\n  for (let len = 1; len <= 8; len++) {\n    if (len === 8 || n < 2 ** (7 * len) - 1) {\n      const out = new Uint8Array(len);\n      let v = n;\n      for (let i = len - 1; i >= 0; i--) {\n        out[i] = v & 0xff;\n        v = Math.floor(v / 256);\n      }\n      out[0] |= 0x80 >> (len - 1);\n      return out;\n    }\n  }\n}\n\n// Unsigned integer, big endian, as short as it can be (a Matroska integer drops leading zero bytes).\nfunction uint(n) {\n  const out = [];\n  let v = Math.round(n);\n  do {\n    out.unshift(v & 0xff);\n    v = Math.floor(v / 256);\n  } while (v > 0);\n  return new Uint8Array(out);\n}\n\nfunction f64(x) {\n  const out = new Uint8Array(8);\n  new DataView(out.buffer).setFloat64(0, x);\n  return out;\n}\n\nconst elem = (id, payload) => concat([bytes(id), size(payload.length), payload]);\n\n// WebM writer. video: { width, height, codec } with codec 'V_VP9' or 'V_VP8'; audio: null or\n// { channels, codecPrivate, preSkipSamples }. Duration is written up front, so a player knows the length at once.\nclass WebmWriter {\n  constructor({ width, height, durationMs, videoCodec = 'V_VP9', audio = null }) {\n    this.width = width;\n    this.height = height;\n    this.durationMs = durationMs;\n    this.videoCodec = videoCodec;\n    this.audio = audio;\n    this.blocks = [];\n  }\n\n  // track 1 is the picture, track 2 the sound. key marks a key frame; tsUs is the time in microseconds.\n  block({ track, key, tsUs, data }) {\n    this.blocks.push({ track, key: Boolean(key), ms: Math.round(tsUs / 1000), data });\n  }\n\n  count(track) {\n    return this.blocks.reduce((n, b) => n + (b.track === track ? 1 : 0), 0);\n  }\n\n  build() {\n    const parts = [\n      elem(ID.EBML, concat([\n        elem(ID.EBMLVersion, uint(1)),\n        elem(ID.EBMLReadVersion, uint(1)),\n        elem(ID.EBMLMaxIDLength, uint(4)),\n        elem(ID.EBMLMaxSizeLength, uint(8)),\n        elem(ID.DocType, text('webm')),\n        elem(ID.DocTypeVersion, uint(4)),\n        elem(ID.DocTypeReadVersion, uint(2)),\n      ])),\n      concat([bytes(ID.Segment), UNKNOWN_SIZE]),\n      elem(ID.Info, concat([\n        elem(ID.TimecodeScale, uint(1_000_000)),\n        elem(ID.MuxingApp, text(APP)),\n        elem(ID.WritingApp, text(APP)),\n        elem(ID.Duration, f64(this.durationMs)),\n      ])),\n      elem(ID.Tracks, concat([this.#videoTrack(), ...(this.audio ? [this.#audioTrack()] : [])])),\n    ];\n    for (const cluster of this.#clusters()) parts.push(cluster);\n    return concat(parts);\n  }\n\n  #track(num, type, codecId, extra) {\n    return elem(ID.TrackEntry, concat([\n      elem(ID.TrackNumber, uint(num)),\n      elem(ID.TrackUID, uint(num)),\n      elem(ID.FlagLacing, uint(0)),\n      elem(ID.CodecID, text(codecId)),\n      elem(ID.TrackType, uint(type)),\n      ...extra,\n    ]));\n  }\n\n  #videoTrack() {\n    return this.#track(1, 1, this.videoCodec, [\n      elem(ID.Video, concat([elem(ID.PixelWidth, uint(this.width)), elem(ID.PixelHeight, uint(this.height))])),\n    ]);\n  }\n\n  #audioTrack() {\n    const { channels, codecPrivate, preSkipSamples } = this.audio;\n    const extra = [elem(ID.Audio, concat([elem(ID.SamplingFrequency, f64(48000)), elem(ID.Channels, uint(channels))]))];\n    if (codecPrivate) extra.unshift(elem(ID.CodecPrivate, codecPrivate));\n    // The encoder adds pre-skip samples of silence; CodecDelay tells the player to drop them again.\n    extra.push(elem(ID.CodecDelay, uint((preSkipSamples / 48000) * 1e9)), elem(ID.SeekPreRoll, uint(SEEK_PRE_ROLL_NS)));\n    return this.#track(2, 2, 'A_OPUS', extra);\n  }\n\n  #clusters() {\n    const blocks = [...this.blocks].sort((a, b) => a.ms - b.ms || a.track - b.track);\n    const out = [];\n    for (let i = 0; i < blocks.length; ) {\n      const start = blocks[i].ms;\n      const body = [elem(ID.Timecode, uint(start))];\n      while (i < blocks.length && blocks[i].ms - start <= CLUSTER_MS) {\n        body.push(this.#block(blocks[i], start));\n        i++;\n      }\n      out.push(concat([bytes(ID.Cluster), UNKNOWN_SIZE, ...body]));\n    }\n    return out;\n  }\n\n  #block(b, clusterStart) {\n    const head = new Uint8Array(4);\n    head[0] = 0x80 | b.track;                 // the track number as a variable-size integer\n    new DataView(head.buffer).setInt16(1, b.ms - clusterStart);\n    head[3] = b.key ? 0x80 : 0x00;\n    return elem(ID.SimpleBlock, concat([head, b.data]));\n  }\n}\n\nwindow.__amvWebm = { WebmWriter };\n";
 
 // src/cli.js
-import { join as join13, resolve as resolve6, dirname as dirname5, basename as basename5, extname as extname3, sep as sep4 } from "node:path";
+import { join as join14, resolve as resolve8, relative as relative4, isAbsolute as isAbsolute6, dirname as dirname5, basename as basename6, extname as extname3, sep as sep6 } from "node:path";
 import { spawn as spawn5 } from "node:child_process";
+import { randomBytes as randomBytes2 } from "node:crypto";
 
 // src/languages/zh.js
 var zh_default = {
@@ -1434,6 +1539,20 @@ var zh_default = {
     modeLabel: "\u660E\u6697",
     mode: { auto: "\u8DDF\u968F\u7CFB\u7EDF", light: "\u4EAE", dark: "\u6697" },
     scale: { down: "\u7F29\u5C0F\u6587\u5B57", up: "\u653E\u5927\u6587\u5B57" },
+    export: {
+      button: "\u5BFC\u51FA",
+      copy: "\u590D\u5236\u4E3A\u56FE\u7247",
+      download: "\u4E0B\u8F7D PNG",
+      pdf: "\u4FDD\u5B58\u4E3A PDF",
+      working: "\u6B63\u5728\u751F\u6210\u2026",
+      copied: "\u5DF2\u590D\u5236 \u2713",
+      saved: "\u5DF2\u4FDD\u5B58 \u2713",
+      failed: "\u5BFC\u51FA\u5931\u8D25",
+      unavailableBrowser: "\u5F53\u524D\u6D4F\u89C8\u5668\u4E0D\u652F\u6301\u5BFC\u51FA\u56FE\u7247\u3002",
+      unavailableClipboard: "\u5F53\u524D\u6D4F\u89C8\u5668\u4E0D\u652F\u6301\u5199\u5165\u526A\u8D34\u677F\u3002",
+      unavailablePolicy: "\u5F53\u524D\u9884\u89C8\u7A97\u53E3\u672A\u5F00\u542F\u526A\u8D34\u677F\u6743\u9650\uFF0C\u4E0D\u652F\u6301\u590D\u5236\u3002",
+      unverifiedEffect: "\u5F53\u524D\u6D4F\u89C8\u5668\u5BFC\u51FA\u6548\u679C\u53EF\u80FD\u4E0D\u4FDD\u8BC1\u3002"
+    },
     copy: "\u590D\u5236\u6E90\u7A3F",
     done: "\u5DF2\u590D\u5236 \u2713",
     copyCode: "\u590D\u5236",
@@ -1520,6 +1639,20 @@ var zh_Hant_default = {
     modeLabel: "\u660E\u6697",
     mode: { auto: "\u8DDF\u96A8\u7CFB\u7D71", light: "\u6DFA\u8272", dark: "\u6DF1\u8272" },
     scale: { down: "\u7E2E\u5C0F\u6587\u5B57", up: "\u653E\u5927\u6587\u5B57" },
+    export: {
+      button: "\u532F\u51FA",
+      copy: "\u8907\u88FD\u70BA\u5716\u7247",
+      download: "\u4E0B\u8F09 PNG",
+      pdf: "\u5132\u5B58\u70BA PDF",
+      working: "\u6B63\u5728\u7522\u751F\u2026",
+      copied: "\u5DF2\u8907\u88FD \u2713",
+      saved: "\u5DF2\u5132\u5B58 \u2713",
+      failed: "\u532F\u51FA\u5931\u6557",
+      unavailableBrowser: "\u76EE\u524D\u700F\u89BD\u5668\u4E0D\u652F\u63F4\u532F\u51FA\u5716\u7247\u3002",
+      unavailableClipboard: "\u76EE\u524D\u700F\u89BD\u5668\u4E0D\u652F\u63F4\u5BEB\u5165\u526A\u8CBC\u7C3F\u3002",
+      unavailablePolicy: "\u76EE\u524D\u9810\u89BD\u8996\u7A97\u672A\u958B\u555F\u526A\u8CBC\u7C3F\u6B0A\u9650\uFF0C\u4E0D\u652F\u63F4\u8907\u88FD\u3002",
+      unverifiedEffect: "\u76EE\u524D\u700F\u89BD\u5668\u532F\u51FA\u6548\u679C\u53EF\u80FD\u4E0D\u4FDD\u8B49\u3002"
+    },
     copy: "\u8907\u88FD\u6E90\u7A3F",
     done: "\u5DF2\u8907\u88FD \u2713",
     copyCode: "\u8907\u88FD",
@@ -1600,6 +1733,20 @@ var en_default = {
     modeLabel: "Mode",
     mode: { auto: "Auto", light: "Light", dark: "Dark" },
     scale: { down: "Smaller text", up: "Larger text" },
+    export: {
+      button: "Export",
+      copy: "Copy as image",
+      download: "Download PNG",
+      pdf: "Save as PDF",
+      working: "Rendering\u2026",
+      copied: "Copied \u2713",
+      saved: "Saved \u2713",
+      failed: "Export failed",
+      unavailableBrowser: "This browser cannot export the page as an image.",
+      unavailableClipboard: "This browser cannot write the image to the clipboard.",
+      unavailablePolicy: "This preview does not allow copying.",
+      unverifiedEffect: "Export may not work correctly in this browser."
+    },
     copy: "Copy source",
     done: "Copied \u2713",
     copyCode: "Copy",
@@ -1686,6 +1833,20 @@ var ja_default = {
     modeLabel: "\u8868\u793A",
     mode: { auto: "\u81EA\u52D5", light: "\u30E9\u30A4\u30C8", dark: "\u30C0\u30FC\u30AF" },
     scale: { down: "\u6587\u5B57\u3092\u5C0F\u3055\u304F", up: "\u6587\u5B57\u3092\u5927\u304D\u304F" },
+    export: {
+      button: "\u66F8\u304D\u51FA\u3057",
+      copy: "\u753B\u50CF\u3068\u3057\u3066\u30B3\u30D4\u30FC",
+      download: "PNG \u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9",
+      pdf: "PDF \u3068\u3057\u3066\u4FDD\u5B58",
+      working: "\u751F\u6210\u4E2D\u2026",
+      copied: "\u30B3\u30D4\u30FC\u3057\u307E\u3057\u305F \u2713",
+      saved: "\u4FDD\u5B58\u3057\u307E\u3057\u305F \u2713",
+      failed: "\u66F8\u304D\u51FA\u305B\u307E\u305B\u3093\u3067\u3057\u305F",
+      unavailableBrowser: "\u3053\u306E\u30D6\u30E9\u30A6\u30B6\u306F\u753B\u50CF\u3092\u66F8\u304D\u51FA\u305B\u307E\u305B\u3093\u3002",
+      unavailableClipboard: "\u3053\u306E\u30D6\u30E9\u30A6\u30B6\u306F\u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u306B\u753B\u50CF\u3092\u66F8\u304D\u8FBC\u3081\u307E\u305B\u3093\u3002",
+      unavailablePolicy: "\u3053\u306E\u30D7\u30EC\u30D3\u30E5\u30FC\u3067\u306F\u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u6A29\u9650\u304C\u306A\u3044\u305F\u3081\u30B3\u30D4\u30FC\u3067\u304D\u307E\u305B\u3093\u3002",
+      unverifiedEffect: "\u3053\u306E\u30D6\u30E9\u30A6\u30B6\u3067\u306F\u66F8\u304D\u51FA\u3057\u7D50\u679C\u304C\u4FDD\u8A3C\u3055\u308C\u307E\u305B\u3093\u3002"
+    },
     copy: "\u539F\u7A3F\u3092\u30B3\u30D4\u30FC",
     done: "\u30B3\u30D4\u30FC\u3057\u307E\u3057\u305F \u2713",
     copyCode: "\u30B3\u30D4\u30FC",
@@ -1770,6 +1931,20 @@ var he_default = {
     modeLabel: "\u05DE\u05E6\u05D1",
     mode: { auto: "\u05D0\u05D5\u05D8\u05D5\u05DE\u05D8\u05D9", light: "\u05D1\u05D4\u05D9\u05E8", dark: "\u05DB\u05D4\u05D4" },
     scale: { down: "\u05D4\u05E7\u05D8\u05E0\u05EA \u05D4\u05D8\u05E7\u05E1\u05D8", up: "\u05D4\u05D2\u05D3\u05DC\u05EA \u05D4\u05D8\u05E7\u05E1\u05D8" },
+    export: {
+      button: "\u05D9\u05D9\u05E6\u05D5\u05D0",
+      copy: "\u05D4\u05E2\u05EA\u05E7\u05D4 \u05DB\u05EA\u05DE\u05D5\u05E0\u05D4",
+      download: "\u05D4\u05D5\u05E8\u05D3\u05EA PNG",
+      pdf: "\u05E9\u05DE\u05D9\u05E8\u05D4 \u05DB-PDF",
+      working: "\u05DE\u05DB\u05D9\u05DF\u2026",
+      copied: "\u05D4\u05D5\u05E2\u05EA\u05E7 \u2713",
+      saved: "\u05E0\u05E9\u05DE\u05E8 \u2713",
+      failed: "\u05D4\u05D9\u05D9\u05E6\u05D5\u05D0 \u05E0\u05DB\u05E9\u05DC",
+      unavailableBrowser: "\u05D4\u05D3\u05E4\u05D3\u05E4\u05DF \u05D4\u05D6\u05D4 \u05D0\u05D9\u05E0\u05D5 \u05D9\u05DB\u05D5\u05DC \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D0\u05EA \u05D4\u05E2\u05DE\u05D5\u05D3 \u05DB\u05EA\u05DE\u05D5\u05E0\u05D4.",
+      unavailableClipboard: "\u05D4\u05D3\u05E4\u05D3\u05E4\u05DF \u05D4\u05D6\u05D4 \u05D0\u05D9\u05E0\u05D5 \u05D9\u05DB\u05D5\u05DC \u05DC\u05DB\u05EA\u05D5\u05D1 \u05D0\u05EA \u05D4\u05EA\u05DE\u05D5\u05E0\u05D4 \u05DC\u05DC\u05D5\u05D7.",
+      unavailablePolicy: "\u05D4\u05EA\u05E6\u05D5\u05D2\u05D4 \u05D4\u05DE\u05E7\u05D3\u05D9\u05DE\u05D4 \u05D4\u05D6\u05D5 \u05D0\u05D9\u05E0\u05D4 \u05DE\u05D0\u05E4\u05E9\u05E8\u05EA \u05D4\u05E2\u05EA\u05E7\u05D4.",
+      unverifiedEffect: "\u05D9\u05D9\u05EA\u05DB\u05DF \u05E9\u05D4\u05D9\u05D9\u05E6\u05D5\u05D0 \u05DC\u05D0 \u05D9\u05E2\u05D1\u05D5\u05D3 \u05DB\u05E8\u05D0\u05D5\u05D9 \u05D1\u05D3\u05E4\u05D3\u05E4\u05DF \u05D4\u05D6\u05D4."
+    },
     copy: "\u05D4\u05E2\u05EA\u05E7\u05EA \u05D4\u05DE\u05E7\u05D5\u05E8",
     done: "\u05D4\u05D5\u05E2\u05EA\u05E7 \u2713",
     copyCode: "\u05D4\u05E2\u05EA\u05E7\u05D4",
@@ -1859,26 +2034,121 @@ var he_default = {
   }
 };
 
+// src/languages/tr.js
+var tr_default = {
+  id: "tr",
+  language: "tr",
+  voice: { say: "tr_TR", espeak: "tr" },
+  ui: {
+    remark: {
+      button: "\u0130\u015Faretle",
+      need: "Kaydetmek i\xE7in bir etiket se\xE7in",
+      hint: "\u0130ste\u011Fe ba\u011Fl\u0131 not",
+      save: "Kaydet",
+      remove: "Kald\u0131r",
+      clear: "T\xFCm i\u015Faretleri temizle",
+      clearConfirm: "{n} i\u015Fareti temizlemek i\xE7in tekrar t\u0131klay\u0131n",
+      section: "\u0130\u015Faretler",
+      kinds: { suggestion: "\xF6neri", keep: "kals\u0131n", question: "soru", concern: "endi\u015Fe" }
+    },
+    theme: "Tema",
+    modeLabel: "Mod",
+    mode: { auto: "Otomatik", light: "A\xE7\u0131k", dark: "Koyu" },
+    scale: { down: "Daha k\xFC\xE7\xFCk yaz\u0131", up: "Daha b\xFCy\xFCk yaz\u0131" },
+    copy: "Kayna\u011F\u0131 kopyala",
+    done: "Kopyaland\u0131 \u2713",
+    copyCode: "Kopyala",
+    update: { button: "Yeni s\xFCr\xFCm {version}", current: "Sizdeki s\xFCr\xFCm {current}. Yeni s\xFCr\xFCm bu sayfa olu\u015Fturulurken bulundu.", whatsNew: "Yenilikler:", run: "Terminalde \xE7al\u0131\u015Ft\u0131r\u0131n:", agent: "Ya da Agent\u2019a s\xF6yleyin:", agentText: "answer-me-with-html\u2019i g\xFCncelle", notes: "Yenilikleri g\xF6r" },
+    live: { updated: "Sayfa g\xFCncellendi", reload: "Yeniden y\xFCkle" },
+    reply: {
+      button: "Yan\u0131tla",
+      comment: "Yorum",
+      commentHint: "Bu panel hakk\u0131ndaki yorumunuz",
+      title: "Yan\u0131t\u0131n\u0131z",
+      hint: "Kopyalay\u0131p Agent ile sohbetinize yap\u0131\u015Ft\u0131r\u0131n; se\xE7imleriniz ve yorumlar\u0131n\u0131zdan devam eder.",
+      copy: "Yan\u0131t\u0131 kopyala",
+      copyFailed: "Kopyalanamad\u0131 \u2014 Cmd/Ctrl+C tu\u015Flar\u0131na bas\u0131n",
+      close: "Kapat",
+      suggested: "\xF6nerilen",
+      empty: "\xD6nce se\xE7enekleri i\u015Faretleyin ya da bir panele yorum yaz\u0131n.",
+      decisions: "Kararlar",
+      comments: "Yorumlar",
+      confirmed: "\xF6neri onayland\u0131",
+      untouched: "yan\u0131tlanmad\u0131; \xF6nerilen",
+      was: "\xF6nceki",
+      typed: '">" ile ba\u015Flayan sat\u0131rlar okuyucunun yazd\u0131\u011F\u0131 metindir.',
+      raw: "Kopyalanacak metni g\xF6ster",
+      preview: "\xD6nizleme",
+      count: { answered: "Yan\u0131tlanan: {n}", comments: "Yorum: {n}", remarks: "\u0130\u015Faret: {n}" }
+    },
+    closeAfter: { closing: "Bu sekme {n} sn i\xE7inde kapanacak", keep: "A\xE7\u0131k kals\u0131n", closeFailed: "Yan\u0131t kopyaland\u0131. Bu sekmeyi art\u0131k kapatabilirsiniz." },
+    toc: "\u0130\xE7indekiler",
+    flow: "Ak\u0131\u015F \u015Femas\u0131",
+    state: "Durum makinesi diyagram\u0131",
+    sequence: "S\u0131ralama diyagram\u0131",
+    er: "Varl\u0131k-ili\u015Fki diyagram\u0131",
+    class: "S\u0131n\u0131f diyagram\u0131",
+    colon: ": ",
+    sep: ", ",
+    expand: "Diyagram\u0131 b\xFCy\xFCt",
+    close: "Kapat",
+    diagram: "Diyagram g\xF6r\xFCnt\xFCleyici",
+    delta: { added: "eklendi", removed: "kald\u0131r\u0131ld\u0131", changed: "de\u011Fi\u015Fti", view: "G\xF6r\xFCn\xFCm", before: "\xD6nce", changes: "De\u011Fi\u015Fiklikler", after: "Sonra" },
+    generated: "Olu\u015Fturan:",
+    limits: { value: "{value} / en fazla {limit}", limit: "en fazla {limit}" },
+    chart: { name: "Grafik", data: "Veri", value: "De\u011Fer", share: "Pay" },
+    api: { path: "Yol parametreleri", query: "Sorgu parametreleri", headers: "Ba\u015Fl\u0131klar", request: "\u0130stek", response: "Yan\u0131t", field: "Alan", type: "T\xFCr", description: "A\xE7\u0131klama", requirement: "Gereklilik", required: "Zorunlu", optional: "\u0130ste\u011Fe ba\u011Fl\u0131" },
+    table: { filter: "Tabloyu filtrele" },
+    export: {
+      button: "D\u0131\u015Fa aktar",
+      copy: "G\xF6rsel olarak kopyala",
+      download: "PNG indir",
+      pdf: "PDF olarak kaydet",
+      working: "Haz\u0131rlan\u0131yor\u2026",
+      copied: "Kopyaland\u0131 \u2713",
+      saved: "Kaydedildi \u2713",
+      failed: "D\u0131\u015Fa aktar\u0131lamad\u0131",
+      unavailableBrowser: "Bu taray\u0131c\u0131 sayfay\u0131 g\xF6rsel olarak d\u0131\u015Fa aktaramaz.",
+      unavailableClipboard: "Bu taray\u0131c\u0131 g\xF6rseli panoya yazamaz.",
+      unavailablePolicy: "Bu \xF6nizleme kopyalamaya izin vermiyor.",
+      unverifiedEffect: "Bu taray\u0131c\u0131da d\u0131\u015Fa aktarma d\xFCzg\xFCn \xE7al\u0131\u015Fmayabilir."
+    }
+  },
+  // Player labels. drawn..duration are the title block cells; sheet is the scene header, with {n} and {total} the zero-padded numbers.
+  videoUi: {
+    play: "Oynat",
+    pause: "Duraklat",
+    chapters: "B\xF6l\xFCmler",
+    speed: "H\u0131z",
+    export: "D\u0131\u015Fa aktar",
+    drawn: "\xC7\u0130ZEN",
+    date: "TAR\u0130H",
+    scenes: "SAHNELER",
+    duration: "S\xDCRE",
+    sheet: "PAFTA {n} / {total}"
+  }
+};
+
 // src/languages/registry.js
-var LANGUAGES = Object.freeze([zh_default, zh_Hant_default, en_default, ja_default, he_default]);
+var LANGUAGES = Object.freeze([zh_default, zh_Hant_default, en_default, ja_default, he_default, tr_default]);
 var FALLBACK = en_default;
-var languageIds = () => LANGUAGES.map((l) => l.id);
+var languageIds = () => LANGUAGES.map((l3) => l3.id);
 function findLanguage(language, script) {
-  return LANGUAGES.find((l) => l.language === language && (!l.script || l.script === script));
+  return LANGUAGES.find((l3) => l3.language === language && (!l3.script || l3.script === script));
 }
 
 // src/themes/fonts.js
 var SANS = '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif';
 var MONO = 'ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace';
-var fontLanguages = () => LANGUAGES.filter((l) => l.fonts);
+var fontLanguages = () => LANGUAGES.filter((l3) => l3.fonts);
 var langSelector = (language, base, rest) => language.langs.map((tag) => `${base}:lang(${tag})${rest}`).join(", ");
-var serifByLanguage = (variable, head) => fontLanguages().map((l) => `${langSelector(l, "&", "[data-mode]")} { ${variable}: ${head}, ${l.fonts.serif}, serif; }`).join("\n");
+var serifByLanguage = (variable, head) => fontLanguages().map((l3) => `${langSelector(l3, "&", "[data-mode]")} { ${variable}: ${head}, ${l3.fonts.serif}, serif; }`).join("\n");
 
 // src/themes/blueprint.js
 var blueprint_default = {
   name: "blueprint",
   summary: "Blueprint drawing",
-  label: { zh: "\u56FE\u7EB8", "zh-Hant": "\u5716\u7D19", en: "Blueprint", ja: "\u56F3\u9762", he: "\u05E9\u05E8\u05D8\u05D5\u05D8" },
+  label: { zh: "\u56FE\u7EB8", "zh-Hant": "\u5716\u7D19", en: "Blueprint", ja: "\u56F3\u9762", he: "\u05E9\u05E8\u05D8\u05D5\u05D8", tr: "Teknik \xE7izim" },
   // lang-ok: viewer-facing theme labels
   scope: ["page", "video"],
   tokens: {
@@ -1960,7 +2230,7 @@ var blueprint_default = {
 var shadcn_default = {
   name: "shadcn",
   summary: "shadcn cards",
-  label: { zh: "\u5361\u7247", "zh-Hant": "\u5361\u7247", en: "Cards", ja: "\u30AB\u30FC\u30C9", he: "\u05DB\u05E8\u05D8\u05D9\u05E1\u05D9\u05DD" },
+  label: { zh: "\u5361\u7247", "zh-Hant": "\u5361\u7247", en: "Cards", ja: "\u30AB\u30FC\u30C9", he: "\u05DB\u05E8\u05D8\u05D9\u05E1\u05D9\u05DD", tr: "Kartlar" },
   // lang-ok: viewer-facing theme labels
   scope: ["page", "video"],
   tokens: {
@@ -2022,7 +2292,7 @@ var LANGUAGE_SERIF_HEAD = '"Iowan Old Style", Palatino, Georgia';
 var paper_default = {
   name: "paper",
   summary: "Paper, for long reading",
-  label: { zh: "\u7EB8\u5F20", "zh-Hant": "\u7D19\u5F35", en: "Paper", ja: "\u7D19", he: "\u05E0\u05D9\u05D9\u05E8" },
+  label: { zh: "\u7EB8\u5F20", "zh-Hant": "\u7D19\u5F35", en: "Paper", ja: "\u7D19", he: "\u05E0\u05D9\u05D9\u05E8", tr: "K\xE2\u011F\u0131t" },
   // lang-ok: viewer-facing theme labels
   scope: ["page"],
   tokens: {
@@ -2141,15 +2411,15 @@ import { basename, join } from "node:path";
 var HEX = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i;
 var FN = /^(rgba?|hsla?)\(\s*([^)]*)\)$/i;
 function parseColor(value) {
-  const v2 = String(value).trim();
-  const hex = v2.match(HEX);
+  const v = String(value).trim();
+  const hex = v.match(HEX);
   if (hex) {
-    let h2 = hex[1];
-    if (h2.length <= 4) h2 = [...h2].map((c2) => c2 + c2).join("");
-    const n = [0, 2, 4, 6].map((i) => parseInt(h2.slice(i, i + 2) || "ff", 16));
+    let h3 = hex[1];
+    if (h3.length <= 4) h3 = [...h3].map((c) => c + c).join("");
+    const n = [0, 2, 4, 6].map((i) => parseInt(h3.slice(i, i + 2) || "ff", 16));
     return [n[0], n[1], n[2], n[3] / 255];
   }
-  const fn2 = v2.match(FN);
+  const fn2 = v.match(FN);
   if (!fn2) return null;
   const parts = fn2[2].split(/[\s,/]+/).filter(Boolean);
   if (parts.length < 3 || parts.length > 4) return null;
@@ -2159,21 +2429,21 @@ function parseColor(value) {
     const rgb = parts.slice(0, 3).map((s2) => num(s2, 255));
     return [...rgb, alpha].some(Number.isNaN) ? null : [...rgb, alpha];
   }
-  const [h, s, l] = [parseFloat(parts[0]), num(parts[1], 1), num(parts[2], 1)];
-  if ([h, s, l, alpha].some(Number.isNaN)) return null;
-  const k = (n) => (n + h / 30) % 12;
-  const f2 = (n) => l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+  const [h2, s, l3] = [parseFloat(parts[0]), num(parts[1], 1), num(parts[2], 1)];
+  if ([h2, s, l3, alpha].some(Number.isNaN)) return null;
+  const k = (n) => (n + h2 / 30) % 12;
+  const f2 = (n) => l3 - s * Math.min(l3, 1 - l3) * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
   return [f2(0) * 255, f2(8) * 255, f2(4) * 255, alpha];
 }
-var over = ([r, g, b, a3], [br2, bg, bb]) => [r * a3 + br2 * (1 - a3), g * a3 + bg * (1 - a3), b * a3 + bb * (1 - a3), 1];
+var over = ([r, g, b, a], [br2, bg, bb]) => [r * a + br2 * (1 - a), g * a + bg * (1 - a), b * a + bb * (1 - a), 1];
 var luminance = ([r, g, b]) => {
-  const c2 = [r, g, b].map((x) => x / 255).map((x) => x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
-  return 0.2126 * c2[0] + 0.7152 * c2[1] + 0.0722 * c2[2];
+  const c = [r, g, b].map((x2) => x2 / 255).map((x2) => x2 <= 0.03928 ? x2 / 12.92 : ((x2 + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 };
 function contrast(fg, bg, base = [255, 255, 255, 1]) {
   const back = over(bg, base);
-  const [x, y2] = [luminance(over(fg, back)), luminance(back)];
-  return (Math.max(x, y2) + 0.05) / (Math.min(x, y2) + 0.05);
+  const [x2, y2] = [luminance(over(fg, back)), luminance(back)];
+  return (Math.max(x2, y2) + 0.05) / (Math.min(x2, y2) + 0.05);
 }
 
 // src/themes/font-list.js
@@ -2188,12 +2458,12 @@ var FONT_NAMES = Object.freeze(Object.keys(FONTS));
 
 // src/version.js
 var SEMVER = /^v?(\d+)\.(\d+)\.(\d+)$/;
-function parseVersion(v2) {
-  const m2 = String(v2).trim().match(SEMVER);
-  return m2 ? m2.slice(1, 4).map(Number) : null;
+function parseVersion(v) {
+  const m = String(v).trim().match(SEMVER);
+  return m ? m.slice(1, 4).map(Number) : null;
 }
-function newer(a3, b) {
-  const pa = parseVersion(a3);
+function newer(a, b) {
+  const pa = parseVersion(a);
   const pb = parseVersion(b);
   if (!pa || !pb) return false;
   const i = pa.findIndex((n, k) => n !== pb[k]);
@@ -2258,9 +2528,9 @@ var LENGTH = /^(?:\d+|\d*\.\d+)(?:px|em)?$/;
 var LANGS = languageIds();
 var UNSAFE_VALUE = /[;{}<]/;
 function shadowOk(value) {
-  const v2 = value.trim();
-  if (v2 === "none") return true;
-  let rest = v2;
+  const v = value.trim();
+  if (v === "none") return true;
+  let rest = v;
   while (rest) {
     if (!/^drop-shadow\(/i.test(rest)) return false;
     let depth = 0;
@@ -2292,12 +2562,12 @@ function normalizeTheme(name2, data, builtinNames = []) {
       return {};
     }
     const out = {};
-    for (const [k, v2] of Object.entries(g)) {
-      out[k] = v2;
+    for (const [k, v] of Object.entries(g)) {
+      out[k] = v;
       if (!k.startsWith("--")) errors.push(`${where}: "${k}" must start with --`);
-      else if (typeof v2 !== "string" || UNSAFE_VALUE.test(v2)) errors.push(`${where}: ${k} must be a string without ; { } <`);
-      else if (diagramTokenProblem(k, v2)) errors.push(`${where}: ${k} ${diagramTokenProblem(k, v2)}`);
-      else if (LENGTH_TOKENS.includes(k) && /^[\d.]+$/.test(v2.trim())) out[k] = `${v2.trim()}px`;
+      else if (typeof v !== "string" || UNSAFE_VALUE.test(v)) errors.push(`${where}: ${k} must be a string without ; { } <`);
+      else if (diagramTokenProblem(k, v)) errors.push(`${where}: ${k} ${diagramTokenProblem(k, v)}`);
+      else if (LENGTH_TOKENS.includes(k) && /^[\d.]+$/.test(v.trim())) out[k] = `${v.trim()}px`;
     }
     return out;
   };
@@ -2311,11 +2581,11 @@ function normalizeTheme(name2, data, builtinNames = []) {
   const css = cssField("css", data.css, errors);
   let video;
   if (data.video !== void 0) {
-    const v2 = data.video && typeof data.video === "object" ? data.video : {};
-    const vt2 = v2.tokens ?? {};
+    const v = data.video && typeof data.video === "object" ? data.video : {};
+    const vt3 = v.tokens ?? {};
     video = {
-      tokens: { common: group("video.tokens.common", vt2.common), light: group("video.tokens.light", vt2.light), dark: group("video.tokens.dark", vt2.dark) },
-      css: cssField("video.css", v2.css, errors)
+      tokens: { common: group("video.tokens.common", vt3.common), light: group("video.tokens.light", vt3.light), dark: group("video.tokens.dark", vt3.dark) },
+      css: cssField("video.css", v.css, errors)
     };
   }
   const label = labelField(data.label, name2, errors);
@@ -2352,14 +2622,14 @@ function requiresField(requires, errors) {
   else if (newer(requires, VERSION)) errors.push(`needs Answer me with HTML ${requires} or newer`);
 }
 function labelField(label, name2, errors) {
-  if (label === void 0) return Object.fromEntries(LANGS.map((l) => [l, name2]));
-  if (typeof label === "string") return Object.fromEntries(LANGS.map((l) => [l, label]));
-  if (!label || typeof label !== "object" || Object.values(label).some((v2) => typeof v2 !== "string")) {
+  if (label === void 0) return Object.fromEntries(LANGS.map((l3) => [l3, name2]));
+  if (typeof label === "string") return Object.fromEntries(LANGS.map((l3) => [l3, label]));
+  if (!label || typeof label !== "object" || Object.values(label).some((v) => typeof v !== "string")) {
     errors.push(`label must be a string or an object of ${LANGS.join(" / ")} strings`);
-    return Object.fromEntries(LANGS.map((l) => [l, name2]));
+    return Object.fromEntries(LANGS.map((l3) => [l3, name2]));
   }
   const fallback = label.en ?? Object.values(label)[0] ?? name2;
-  return Object.fromEntries(LANGS.map((l) => [l, label[l] ?? fallback]));
+  return Object.fromEntries(LANGS.map((l3) => [l3, label[l3] ?? fallback]));
 }
 function cssField(where, css, errors) {
   if (css === void 0) return void 0;
@@ -2369,8 +2639,8 @@ function cssField(where, css, errors) {
   }
   if (/<\/style/i.test(css)) errors.push(`${where} must not contain </style>`);
   const text2 = css.replace(/\/\*[\s\S]*?\*\//g, "");
-  for (const m2 of text2.matchAll(/(?:^|[{};])\s*([^{};]+?)\s*\{/g)) {
-    const prelude = m2[1];
+  for (const m of text2.matchAll(/(?:^|[{};])\s*([^{};]+?)\s*\{/g)) {
+    const prelude = m[1];
     if (prelude.startsWith("@")) continue;
     const bad = prelude.split(",").map((s) => s.trim()).find((s) => !s.startsWith("&"));
     if (bad !== void 0) errors.push(`${where}: selector "${bad}" must start with & (the theme's root)`);
@@ -2382,11 +2652,11 @@ function externalResources(css) {
   if (typeof css !== "string") return [];
   const text2 = css.replace(/\/\*[\s\S]*?\*\//g, "");
   const found = [];
-  for (const m2 of text2.matchAll(/url\(\s*(['"]?)\s*([^'")]*)/gi)) {
-    if (/^(?:https?:|\/\/)/i.test(m2[2].trim())) found.push(`url(${m2[2].trim()})`);
+  for (const m of text2.matchAll(/url\(\s*(['"]?)\s*([^'")]*)/gi)) {
+    if (/^(?:https?:|\/\/)/i.test(m[2].trim())) found.push(`url(${m[2].trim()})`);
   }
-  for (const m2 of text2.matchAll(/(?:-webkit-)?image-set\(([^;{}]*)/gi)) {
-    for (const s of m2[1].matchAll(/(['"])\s*((?:https?:|\/\/)[^'"]*)\1/gi)) found.push(`image-set(${s[2].trim()})`);
+  for (const m of text2.matchAll(/(?:-webkit-)?image-set\(([^;{}]*)/gi)) {
+    for (const s of m[1].matchAll(/(['"])\s*((?:https?:|\/\/)[^'"]*)\1/gi)) found.push(`image-set(${s[2].trim()})`);
   }
   if (/@import\b/i.test(text2)) found.push("@import");
   if (/@font-face\b/i.test(text2)) found.push("@font-face");
@@ -2394,7 +2664,7 @@ function externalResources(css) {
   return found;
 }
 function themeLinks(theme) {
-  const groups = (where, tokens) => ["common", "light", "dark"].flatMap((mode) => Object.entries(tokens?.[mode] ?? {}).map(([k, v2]) => ({ where: `${where}.${mode} ${k}`, text: v2 })));
+  const groups = (where, tokens) => ["common", "light", "dark"].flatMap((mode) => Object.entries(tokens?.[mode] ?? {}).map(([k, v]) => ({ where: `${where}.${mode} ${k}`, text: v })));
   const sources = [
     { where: "css", text: theme?.css },
     { where: "video.css", text: theme?.video?.css },
@@ -2431,8 +2701,8 @@ function checkColors(theme) {
     const colors = {};
     for (const k of COLOR_TOKENS) {
       if (set[k] === void 0) continue;
-      const c2 = parseColor(set[k]);
-      if (c2) colors[k] = c2;
+      const c = parseColor(set[k]);
+      if (c) colors[k] = c;
       else errors.push(`${mode}: ${k} "${set[k]}" is not a color this check reads (use hex, rgb() or hsl())`);
     }
     const ratio = (fg, bg) => colors[fg] && colors[bg] ? contrast(colors[fg], colors[bg], colors["--paper"]) : null;
@@ -2496,7 +2766,7 @@ function readUserThemes(home, builtinNames) {
     if (!DENIED.has(e.code)) throw e;
     return { themes: themes2, broken, warning: `Cannot read the themes folder ${dir} (${e.code}); using the built-in themes only` };
   }
-  for (const f2 of files.filter((x) => x.toLowerCase().endsWith(".json")).sort()) {
+  for (const f2 of files.filter((x2) => x2.toLowerCase().endsWith(".json")).sort()) {
     const { name: name2, theme, errors } = readThemeFile(join(dir, f2), builtinNames);
     if (errors.length) broken.set(name2, { file: `themes/${f2}`, reason: errors.join("; ") });
     else themes2.push(theme);
@@ -2541,7 +2811,7 @@ function themeSet(user = [], broken = /* @__PURE__ */ new Map(), folderWarning) 
       const builtins = themes(scope);
       const own = user.filter((t) => t.name === name2 && t.scope.includes(scope));
       if (scope !== "page") return [...builtins, ...own];
-      return [...builtins, ...user.filter((t) => t.scope.includes(scope)).sort((a3, b) => a3.name.localeCompare(b.name))];
+      return [...builtins, ...user.filter((t) => t.scope.includes(scope)).sort((a, b) => a.name.localeCompare(b.name))];
     },
     warnings: [...folderWarning ? [folderWarning] : [], ...[...broken.values()].map(({ file, reason: reason2 }) => `${file} skipped: ${reason2}`)]
   });
@@ -2557,212 +2827,242 @@ function loadThemes(home, { extra } = {}) {
 }
 
 // node_modules/marked/lib/marked.esm.js
-function v() {
+function j() {
   return { async: false, breaks: false, extensions: null, gfm: true, hooks: null, pedantic: false, renderer: null, silent: false, tokenizer: null, walkTokens: null };
 }
-var y = v();
-function ee(a3) {
-  y = a3;
+var y = j();
+function ie(l3) {
+  y = l3;
 }
-var B = { exec: () => null };
-function I(a3) {
+var D = { exec: () => null };
+function B(l3) {
   let e = [];
   return (t) => {
     let n = Math.max(0, Math.min(3, t - 1)), s = e[n];
-    return s || (s = a3(n), e[n] = s), s;
+    return s || (s = l3(n), e[n] = s), s;
   };
 }
-function c(a3, e = "") {
-  let t = typeof a3 == "string" ? a3 : a3.source, n = { replace: (s, r) => {
-    let o = typeof r == "string" ? r : r.source;
-    return o = o.replace(T.caret, "$1"), t = t.replace(s, o), n;
+function h(l3, e = "") {
+  let t = typeof l3 == "string" ? l3 : l3.source, n = { replace: (s, i) => {
+    let r = typeof i == "string" ? i : i.source;
+    return r = r.replace(T.caret, "$1"), t = t.replace(s, r), n;
   }, getRegex: () => new RegExp(t, e) };
   return n;
 }
-var Me = ((a3 = "") => {
+var we = ((l3 = "") => {
   try {
-    return !!new RegExp("(?<=1)(?<!1)" + a3);
+    return !!new RegExp("(?<=1)(?<!1)" + l3);
   } catch {
     return false;
   }
 })();
-var T = { codeRemoveIndent: /^(?: {0,3}\t| {1,4})/gm, outputLinkReplace: /\\([\[\]])/g, indentCodeCompensation: /^(\s+)(?:```)/, beginningSpace: /^\s+/, endingHash: /#$/, startingSpaceChar: /^ /, endingSpaceChar: / $/, endingSpaceTabChar: /[ \t]$/, nonSpaceChar: /[^ ]/, newLineCharGlobal: /\n/g, tabCharGlobal: /\t/g, leadingSpaceTab: /^[ \t]+/, multipleSpaceGlobal: /\s+/g, blankLine: /^[ \t]*$/, doubleBlankLine: /\n[ \t]*\n[ \t]*$/, blockquoteStart: /^ {0,3}>/, blockquoteSetextReplace: /\n {0,3}((?:=+|-+) *)(?=\n|$)/g, blockquoteSetextReplace2: /^ {0,3}>[ \t]?/gm, blockquoteMarkerWhitespace: /^( {0,3}>)([ \t]+)/gm, listReplaceNesting: /^ {1,4}(?=( {4})*[^ ])/g, listIsTask: /^\[[ xX]\] +\S/, listReplaceTask: /^\[[ xX]\] +/, listTaskCheckbox: /\[[ xX]\]/, anyLine: /\n.*\n/, hrefBrackets: /^<(.*)>$/, tableDelimiter: /[:|]/, tableAlignChars: /^\||\| *$/g, tableRowBlankLine: /\n[ \t]*$/, tableAlignRight: /^ *-+: *$/, tableAlignCenter: /^ *:-+: *$/, tableAlignLeft: /^ *:-+ *$/, startATag: /^<a /i, endATag: /^<\/a>/i, startPreScriptTag: /^<(pre|code|kbd|script)(\s|>)/i, endPreScriptTag: /^<\/(pre|code|kbd|script)(\s|>)/i, startAngleBracket: /^</, endAngleBracket: />$/, pedanticHrefTitle: /^([^'"]*[^\s])\s+(['"])(.*)\2/, unicodeAlphaNumeric: /[\p{L}\p{N}]/u, numericCharacterReference: /&#(?:(\d{1,7})|[Xx]([A-Fa-f0-9]{1,6}));/, numericCharacterReferenceOrAmpersand: /&#(?:(\d{1,7})|[Xx]([A-Fa-f0-9]{1,6}));|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g, escapeTest: /[&<>"']/, escapeReplace: /[&<>"']/g, escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/, escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g, caret: /(^|[^\[])\^/g, percentDecode: /%25/g, findPipe: /\|/g, splitPipe: / \|/, slashPipe: /\\\|/g, carriageReturn: /\r\n|\r/g, spaceLine: /^ +$/gm, notSpaceStart: /^\S*/, endingNewline: /\n$/, listItemRegex: (a3) => new RegExp(`^( {0,3}${a3})((?:[	 ][^\\n]*)?(?:\\n|$))`), nextBulletRegex: I((a3) => new RegExp(`^ {0,${a3}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`)), hrRegex: I((a3) => new RegExp(`^ {0,${a3}}((?:-[ 	]*){3,}|(?:_[ 	]*){3,}|(?:\\*[ 	]*){3,})(?:\\n+|$)`)), fencesBeginRegex: I((a3) => new RegExp(`^ {0,${a3}}(?:\`\`\`|~~~)`)), headingBeginRegex: I((a3) => new RegExp(`^ {0,${a3}}#{1,6}(?:\\s|$)`)), pedanticHeadingBeginRegex: I((a3) => new RegExp(`^ {0,${a3}}#`)), htmlBeginRegex: I((a3) => new RegExp(`^ {0,${a3}}(?:</?(?:${K})(?: +|$|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)`, "i")), blockquoteBeginRegex: I((a3) => new RegExp(`^ {0,${a3}}>`)) };
-var Ce = /^(?:[ \t]*(?:\n|$))+/;
-var Ee = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/;
-var Ie = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}\1[~`]* *(?=\n|$)|$)/;
-var U = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/;
-var Be = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/;
-var ne = / {0,3}(?:[*+-]|\d{1,9}[.)])/;
-var me = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |fences|blockquote|heading|hr|html|table))+?)\n {0,3}(=+|-+) *(?:\n+|$)/;
-var xe = c(me).replace(/bull/g, ne).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex();
-var De = c(me).replace(/bull/g, ne).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex();
-var re = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table|[ \t]+\n)[^\n]+)*)/;
-var qe = /^[^\n]+/;
-var se = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\])+/;
-var Ze = c(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", se).replace("title", /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/).getRegex();
-var ve = c(/^(bull)([ \t][^\n]*?)?(?:\n|$)/).replace(/bull/g, ne).getRegex();
+var T = { codeRemoveIndent: /^(?: {0,3}\t| {1,4})/gm, listInterruptsParagraph: /^ {0,3}(?:[*+-]|1[.)])[ \t]+[^ \t\n]/, outputLinkReplace: /\\([\[\]])/g, indentCodeCompensation: /^(\s+)(?:```)/, beginningSpace: /^\s+/, endingHash: /#$/, startingSpaceChar: /^ /, endingSpaceChar: / $/, endingSpaceTabChar: /[ \t]$/, nonSpaceChar: /[^ ]/, newLineCharGlobal: /\n/g, tabCharGlobal: /\t/g, leadingSpaceTab: /^[ \t]+/, multipleSpaceGlobal: /\s+/g, blankLine: /^[ \t]*$/, doubleBlankLine: /\n[ \t]*\n[ \t]*$/, blockquoteStart: /^ {0,3}>/, blockquoteSetextReplace: /\n {0,3}((?:=+|-+)[ \t]*)(?=\n|$)/g, blockquoteSetextReplace2: /^ {0,3}>[ \t]?/gm, blockquoteMarkerWhitespace: /^( {0,3}>)([ \t]+)/gm, listReplaceNesting: /^ {1,4}(?=( {4})*[^ ])/g, listIsTask: /^\[[ xX]\][ \t]+\S/, listReplaceTask: /^\[[ xX]\][ \t]+/, listTaskCheckbox: /\[[ xX]\]/, anyLine: /\n.*\n/, hrefBrackets: /^<(.*)>$/, tableDelimiter: /[:|]/, tableAlignChars: /^\||\| *$/g, tableRowBlankLine: /\n[ \t]*$/, tableAlignRight: /^ *-+: *$/, tableAlignCenter: /^ *:-+: *$/, tableAlignLeft: /^ *:-+ *$/, startATag: /^<a /i, endATag: /^<\/a>/i, startPreScriptTag: /^<(pre|code|kbd|script)(\s|>)/i, endPreScriptTag: /^<\/(pre|code|kbd|script)(\s|>)/i, startAngleBracket: /^</, endAngleBracket: />$/, pedanticHrefTitle: /^([^'"]*[^\s])\s+(['"])(.*)\2/, unicodeAlphaNumeric: /[\p{L}\p{N}]/u, numericCharacterReference: /&#(?:(\d{1,7})|[Xx]([A-Fa-f0-9]{1,6}));/, numericCharacterReferenceOrAmpersand: /&#(?:(\d{1,7})|[Xx]([A-Fa-f0-9]{1,6}));|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g, escapeTest: /[&<>"']/, escapeReplace: /[&<>"']/g, escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/, escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g, caret: /(^|[^\[])\^/g, percentDecode: /%25/g, findPipe: /\|/g, splitPipe: / \|/, slashPipe: /\\\|/g, carriageReturn: /\r\n|\r/g, spaceLine: /^ +$/gm, notSpaceStart: /^\S*/, endingNewline: /\n$/, listItemRegex: (l3) => new RegExp(`^( {0,3}${l3})((?:[	 ][^\\n]*)?(?:\\n|$))`), nextBulletRegex: B((l3) => new RegExp(`^ {0,${l3}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`)), hrRegex: B((l3) => new RegExp(`^ {0,${l3}}((?:-[ 	]*){3,}|(?:_[ 	]*){3,}|(?:\\*[ 	]*){3,})(?:\\n+|$)`)), fencesBeginRegex: B((l3) => new RegExp(`^ {0,${l3}}(?:\`\`\`|~~~)`)), headingBeginRegex: B((l3) => new RegExp(`^ {0,${l3}}#{1,6}(?:\\s|$)`)), pedanticHeadingBeginRegex: B((l3) => new RegExp(`^ {0,${l3}}#`)), htmlBeginRegex: B((l3) => new RegExp(`^ {0,${l3}}(?:</?(?:${K})(?: +|$|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)`, "i")), blockquoteBeginRegex: B((l3) => new RegExp(`^ {0,${l3}}>`)), nestedContainerMarkers: /^(?: {0,3}(?:(?:[*+-]|\d{1,9}[.)])[ \t]+|>[ \t]?))+/ };
+var He = /^(?:[ \t]*(?:\n|$))+/;
+var je = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/;
+var Ge = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}(?:(?=`)\1`*|(?=~)\1~*) *(?=\n|$)|$)/;
+var W = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/;
+var Ne = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/;
+var ae = / {0,3}(?:[*+-]|\d{1,9}[.)])/;
+var Pe = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |fences|blockquote|heading|hr|html|table))+?)\n {0,3}(=+|-+)[ \t]*(?:\n+|$)/;
+var ye = h(Pe).replace(/bull/g, ae).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex();
+var Fe = h(Pe).replace(/bull/g, ae).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex();
+var le = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table|[ \t]+\n)[^\n]+)*)/;
+var Qe = /^[^\n]+/;
+var ue = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\\n]|\n(?![ \t]*\n))+/;
+var Ue = h(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", ue).replace("title", /(?:"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\\n]|\n(?!\n))*'|\((?:\\[\s\S]|[^()\\])*\))/).getRegex();
+var We = h(/^(bull)([ \t][^\n]*?)?(?:\n|$)/).replace(/bull/g, ae).getRegex();
 var K = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul";
-var ie = /<!--(?:-?>|[\s\S]*?(?:-->|$))/;
-var He = c("^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n*|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>[^\\n]*\\n*|$)|<![A-Z][\\s\\S]*?(?:>[^\\n]*\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>[^\\n]*\\n*|$)|</?(tag)(?:[ \\t]+|\\n|/?>|$)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!(?:script|pre|style|textarea)(?![a-z0-9-]))([a-z][a-z0-9-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</[a-z][a-z0-9-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))", "i").replace("comment", ie).replace("tag", K).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
-var be = (a3) => c(re).replace("hr", U).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", a3).replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex();
-var Ge = be(/ {0,3}(?:[*+-]|1[.)])[ \t]+[^ \t\n]/);
-var Ne = be(/ {0,3}(?:[*+-]|\d{1,9}[.)])(?:[ \t]|\n|$)/);
-var Qe = c(/^( {0,3}> ?(?:(?![ \t]*(?:\n|$))(paragraph)|[^\n]*)(?:\n|$))+/).replace("paragraph", Ne).getRegex();
-var oe = { blockquote: Qe, code: Ee, def: Ze, fences: Ie, heading: Be, hr: U, html: He, lheading: xe, list: ve, newline: Ce, paragraph: Ge, table: B, text: qe };
-var ke = c("^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)").replace("hr", U).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex();
-var je = { ...oe, lheading: De, table: ke, paragraph: c(re).replace("hr", U).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", ke).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]+[^ \\t\\n]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex() };
-var Fe = { ...oe, html: c(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", ie).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(), def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/, heading: /^(#{1,6})(.*)(?:\n+|$)/, fences: B, lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/, paragraph: c(re).replace("hr", U).replace("heading", ` *#{1,6} *[^
-]`).replace("lheading", xe).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex() };
-var Ue = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/;
-var Ke = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/;
-var Re = /^( {2,}|\\)\n(?!\s*$)[ \t]*/;
-var We = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/;
+var pe = /<!--(?:-?>|[\s\S]*?(?:-->|$))/;
+var Ke = h("^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n*|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>[^\\n]*\\n*|$)|<![A-Z][\\s\\S]*?(?:>[^\\n]*\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>[^\\n]*\\n*|$)|</?(tag)(?:[ \\t]+|\\n|/?>|$)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!(?:script|pre|style|textarea)(?![a-z0-9-]))([a-z][a-z0-9-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</[a-z][a-z0-9-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))", "i").replace("comment", pe).replace("tag", K).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
+var Se = (l3) => h(le).replace("hr", W).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", l3).replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex();
+var Xe = Se(/ {0,3}(?:[*+-]|1[.)])[ \t]+[^ \t\n]/);
+var Ve = Se(/ {0,3}(?:[*+-]|\d{1,9}[.)])(?:[ \t]|\n|$)/);
+var Je = h(/^( {0,3}> ?(?:(?![ \t]*(?:\n|$))(paragraph)|[^\n]*)(?:\n|$))+/).replace("paragraph", Ve).getRegex();
+var ce = { blockquote: Je, code: je, def: Ue, fences: Ge, heading: Ne, hr: W, html: Ke, lheading: ye, list: We, newline: He, paragraph: Xe, table: D, text: Qe };
+var Re = h("^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)").replace("hr", W).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex();
+var Ye = { ...ce, lheading: Fe, table: Re, paragraph: h(le).replace("hr", W).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", Re).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]+[^ \\t\\n]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", K).getRegex() };
+var et = { ...ce, html: h(`^ *(?:comment(?: *\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1>(?: *\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?>(?: *\\n{2,}|\\s*$))`).replace("comment", pe).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(), def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/, heading: /^(#{1,6})(.*)(?:\n+|$)/, fences: D, lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/, paragraph: h(le).replace("hr", W).replace("heading", ` *#{1,6} *[^
+]`).replace("lheading", ye).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex() };
+var tt = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/;
+var nt = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/;
+var _e = /^( {2,}|\\)\n(?!\s*$)[ \t]*/;
+var rt = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/;
 var $ = /[\p{P}\p{S}]/u;
-var H = /[\s\p{P}\p{S}]/u;
-var W = /[^\s\p{P}\p{S}]/u;
-var Xe = c(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, H).getRegex();
-var Ve = /[\p{Pi}\p{Ps}"']/u;
-var Te = /(?!~)[\p{P}\p{S}]/u;
-var Je = /(?!~)[\s\p{P}\p{S}]/u;
-var Ye = /(?:[^\s\p{P}\p{S}]|~)/u;
-var et = c(/link|precode-code|html/, "g").replace("link", /\[(?:[^\[\]`]|(?<a>`+)[^`]+\k<a>(?!`))*?\]\((?:\\[\s\S]|[^\\\(\)]|\((?:\\[\s\S]|[^\\\(\)])*\))*\)/).replace("precode-", Me ? "(?<!`)()" : "(^^|[^`])").replace("code", /(?<b>`+)[^`]+\k<b>(?!`)/).replace("html", /<(?! )[^<>]*?>/).getRegex();
-var Oe = /^(?:\*+(?:((?!\*)punct)|([^\s*]))?)|^_+(?:((?!_)punct)|([^\s_]))?/;
-var tt = c(Oe, "u").replace(/punct/g, $).getRegex();
-var nt = c(Oe, "u").replace(/punct/g, Te).getRegex();
-var rt = /^(?:\*+(?:((?!\*)(?!openQuote)punct)|([^\s*]))?)|^_+(?:((?!_)(?!openQuote)punct)|([^\s_]))?/;
-var st = c(rt, "u").replace(/openQuote/g, Ve).replace(/punct/g, $).getRegex();
-var we = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)";
-var it = c(we, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, $).getRegex();
-var ot = c(we, "gu").replace(/notPunctSpace/g, Ye).replace(/punctSpace/g, Je).replace(/punct/g, Te).getRegex();
-var at = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)[\\s](\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|(?:(?!\\*)punct|notPunctSpace)(\\*+)(?!\\*)(?=notPunctSpace)";
-var lt = c(at, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, $).getRegex();
-var ut = c("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)", "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, $).getRegex();
-var pt = "^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)[\\s](_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)|(?:(?!_)punct|notPunctSpace)(_+)(?!_)(?=notPunctSpace)";
-var ct = c(pt, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, $).getRegex();
-var ht = c(/^~~?(?:((?!~)punct)|[^\s~])/, "u").replace(/punct/g, $).getRegex();
-var dt = "^[^~]+(?=[^~])|(?!~)punct(~~?)(?=[\\s]|$)|notPunctSpace(~~?)(?!~)(?=punctSpace|$)|(?!~)punctSpace(~~?)(?=notPunctSpace)|[\\s](~~?)(?!~)(?=punct)|(?!~)punct(~~?)(?!~)(?=punct)|notPunctSpace(~~?)(?=notPunctSpace)";
-var kt = c(dt, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, $).getRegex();
-var gt = c(/\\(punct)/, "gu").replace(/punct/g, $).getRegex();
-var ft = c(/(`+)(?:[^`]|[^`][\s\S]*?[^`])\1(?!`)|`+|\\(punct)/, "gu").replace(/punct/g, $).getRegex();
-var mt = c(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex();
-var xt = c(ie).replace("(?:-->|$)", "-->").getRegex();
-var bt = c("^comment|^</[a-zA-Z][a-zA-Z0-9-]*\\s*>|^<[a-zA-Z][a-zA-Z0-9-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>").replace("comment", xt).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex();
-var Pe = /\[(?:\\[\s\S]|[^\[\]\\])*\]/;
-var Y = c(/(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\])|[^\[\]\\`])*?/).replace("brackets", Pe).getRegex();
-var Rt = c(/^!?\[(label)\]\([ \t\n]*(href)(?:(?:[ \t]+(?:\n[ \t]*)?|\n[ \t]*)(title))?[ \t\n]*\)/).replace("label", Y).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]+|(?=\))/).replace("title", /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/).getRegex();
-var Tt = c(/^!?\[(label)\]\[(ref)\]/).replace("label", Y).replace("ref", se).getRegex();
-var Ot = c(/^!?\[(ref)\](?:\[\])?/).replace("ref", se).getRegex();
-var ge = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\]){1,999}/;
-var wt = c(/(?:[^\[\]\\`]*(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\]))){0,999}?[^\[\]\\`]*?/).replace("brackets", Pe).getRegex();
-var Pt = c("reflink|nolink(?!\\()", "g").replace("reflink", c(/^!?\[(label)\]\[(ref)\]/).replace("label", wt).replace("ref", ge).getRegex()).replace("nolink", c(/^!?\[(ref)\](?:\[\])?/).replace("ref", ge).getRegex()).getRegex();
-var fe = /[hH][tT][tT][pP][sS]?|[fF][tT][pP]/;
-var yt = /[A-Za-z0-9._+-]+@[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/;
-var St = c(/(?:mailto:email|xmpp:email(?:\/[A-Za-z0-9@.]+)?)/).replace(/email/g, yt).getRegex();
-var ae = { _backpedal: B, anyPunctuation: gt, anyPunctuationOutsideCode: ft, autolink: mt, blockSkip: et, br: Re, code: Ke, del: B, delLDelim: B, delRDelim: B, emStrongLDelim: tt, emStrongRDelimAst: it, emStrongRDelimUnd: ut, escape: Ue, link: Rt, nolink: Ot, punctuation: Xe, reflink: Tt, reflinkSearch: Pt, tag: bt, text: We, url: B };
-var _t = { ...ae, emStrongLDelim: st, emStrongRDelimAst: lt, emStrongRDelimUnd: ct, link: c(/^!?\[(label)\]\((.*?)\)/).replace("label", Y).getRegex(), reflink: c(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", Y).getRegex() };
-var te = { ...ae, emStrongRDelimAst: ot, emStrongLDelim: nt, delLDelim: ht, delRDelim: kt, url: c(/^emailProtocol|^((?:protocol):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/).replace("emailProtocol", St).replace("protocol", fe).replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(), _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/, del: /^(~~?)(?=[^\s~])((?:\\[\s\S]|[^\\])*?(?:\\[\s\S]|[^\s~\\]))\1(?=[^~]|$)/, text: c(/^(?:[^a-zA-Z0-9](?=emailProtocol)|(`+|~+|[^`~])(?:(?=[`~])|(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|protocol:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9](?=emailProtocol)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))))/).replace("protocol", fe).replace(/emailProtocol/g, /(?:mailto|xmpp):/).getRegex() };
-var $t = { ...te, br: c(Re).replace("{2,}", "*").getRegex(), text: c(te.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex() };
-var X = { normal: oe, gfm: je, pedantic: Fe };
-var G = { normal: ae, gfm: te, breaks: $t, pedantic: _t };
-var Lt = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
-var ye = (a3) => Lt[a3];
-function P(a3, e) {
+var G = /[\s\p{P}\p{S}]/u;
+var X = /[^\s\p{P}\p{S}]/u;
+var st = h(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, G).getRegex();
+var it = /[\p{Pi}\p{Ps}"']/u;
+var $e = /(?!~)[\p{P}\p{S}]/u;
+var ot = /(?!~)[\s\p{P}\p{S}]/u;
+var at = /(?:[^\s\p{P}\p{S}]|~)/u;
+var lt = h(/link|precode-code|html/, "g").replace("link", /\[(?:[^\[\]`]|(?<a>`+)[^`]+\k<a>(?!`))*?\]\((?:\\[\s\S]|[^\\\(\)]|\((?:\\[\s\S]|[^\\\(\)])*\))*\)/).replace("precode-", we ? "(?<!`)()" : "(^^|[^`])").replace("code", /(?<b>`+)[^`]+\k<b>(?!`)/).replace("html", /<(?! )[^<>]*?>/).getRegex();
+var Le = /^(?:\*+(?:((?!\*)punct)|([^\s*]))?)|^_+(?:((?!_)punct)|([^\s_]))?/;
+var ut = h(Le, "u").replace(/punct/g, $).getRegex();
+var pt = h(Le, "u").replace(/punct/g, $e).getRegex();
+var ct = /^(?:\*+(?:((?!\*)(?!openQuote)punct)|([^\s*]))?)|^_+(?:((?!_)(?!openQuote)punct)|([^\s_]))?/;
+var ht = h(ct, "u").replace(/openQuote/g, it).replace(/punct/g, $).getRegex();
+var Ce = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)";
+var dt = h(Ce, "gu").replace(/notPunctSpace/g, X).replace(/punctSpace/g, G).replace(/punct/g, $).getRegex();
+var gt = h(Ce, "gu").replace(/notPunctSpace/g, at).replace(/punctSpace/g, ot).replace(/punct/g, $e).getRegex();
+var kt = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)[\\s](\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|(?:(?!\\*)punct|notPunctSpace)(\\*+)(?!\\*)(?=notPunctSpace)";
+var ft = h(kt, "gu").replace(/notPunctSpace/g, X).replace(/punctSpace/g, G).replace(/punct/g, $).getRegex();
+var mt = h("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)", "gu").replace(/notPunctSpace/g, X).replace(/punctSpace/g, G).replace(/punct/g, $).getRegex();
+var xt = "^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)[\\s](_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)|(?:(?!_)punct|notPunctSpace)(_+)(?!_)(?=notPunctSpace)";
+var bt = h(xt, "gu").replace(/notPunctSpace/g, X).replace(/punctSpace/g, G).replace(/punct/g, $).getRegex();
+var Rt = h(/^~~?(?:((?!~)punct)|[^\s~])/, "u").replace(/punct/g, $).getRegex();
+var Tt = "^[^~]+(?=[^~])|(?!~)punct(~~?)(?=[\\s]|$)|notPunctSpace(~~?)(?!~)(?=punctSpace|$)|(?!~)punctSpace(~~?)(?=notPunctSpace)|[\\s](~~?)(?!~)(?=punct)|(?!~)punct(~~?)(?!~)(?=punct)|notPunctSpace(~~?)(?=notPunctSpace)";
+var Ot = h(Tt, "gu").replace(/notPunctSpace/g, X).replace(/punctSpace/g, G).replace(/punct/g, $).getRegex();
+var wt = h(/\\(punct)/, "gu").replace(/punct/g, $).getRegex();
+var Pt = h(/(`+)(?:[^`]|[^`][\s\S]*?[^`])\1(?!`)|`+|\\(punct)/, "gu").replace(/punct/g, $).getRegex();
+var yt = h(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex();
+var St = h(pe).replace("(?:-->|$)", "-->").getRegex();
+var _t = h("^comment|^</[a-zA-Z][a-zA-Z0-9-]*\\s*>|^<[a-zA-Z][a-zA-Z0-9-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>").replace("comment", St).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex();
+var Ie = /\[(?:\\[\s\S]|[^\[\]\\])*\]/;
+var re = h(/(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\])|[^\[\]\\`])*?/).replace("brackets", Ie).getRegex();
+var $t = h(/^!?\[(label)\]\([ \t\n]*(href)(?:(?:[ \t]+(?:\n[ \t]*)?|\n[ \t]*)(title))?[ \t\n]*\)/).replace("label", re).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]+|(?=\))/).replace("title", /"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\((?:\\[\s\S]|[^)\\])*\)/).getRegex();
+var Lt = h(/^!?\[(label)\]\[(ref)\]/).replace("label", re).replace("ref", ue).getRegex();
+var Ct = h(/^!?\[(ref)\](?:\[\])?/).replace("ref", ue).getRegex();
+var Te = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\]){1,999}/;
+var It = h(/(?:[^\[\]\\`]*(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\]))){0,999}?[^\[\]\\`]*?/).replace("brackets", Ie).getRegex();
+var At = h("reflink|nolink(?!\\()", "g").replace("reflink", h(/^!?\[(label)\]\[(ref)\]/).replace("label", It).replace("ref", Te).getRegex()).replace("nolink", h(/^!?\[(ref)\](?:\[\])?/).replace("ref", Te).getRegex()).getRegex();
+var Oe = /[hH][tT][tT][pP][sS]?|[fF][tT][pP]/;
+var Et = /[A-Za-z0-9._+-]+@[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/;
+var zt = h(/(?:mailto:email|xmpp:email(?:\/[A-Za-z0-9@.]+)?)/).replace(/email/g, Et).getRegex();
+var he = { _backpedal: D, anyPunctuation: wt, anyPunctuationOutsideCode: Pt, autolink: yt, blockSkip: lt, br: _e, code: nt, del: D, delLDelim: D, delRDelim: D, emStrongLDelim: ut, emStrongRDelimAst: dt, emStrongRDelimUnd: mt, escape: tt, link: $t, nolink: Ct, punctuation: st, reflink: Lt, reflinkSearch: At, tag: _t, text: rt, url: D };
+var Mt = { ...he, emStrongLDelim: ht, emStrongRDelimAst: ft, emStrongRDelimUnd: bt, link: h(/^!?\[(label)\]\((.*?)\)/).replace("label", re).getRegex(), reflink: h(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", re).getRegex() };
+var oe = { ...he, emStrongRDelimAst: gt, emStrongLDelim: pt, delLDelim: Rt, delRDelim: Ot, url: h(/^emailProtocol|^((?:protocol):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/).replace("emailProtocol", zt).replace("protocol", Oe).replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(), _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/, del: /^(~~?)(?=[^\s~])((?:\\[\s\S]|[^\\])*?(?:\\[\s\S]|[^\s~\\]))\1(?=[^~]|$)/, text: h(/^(?:[^a-zA-Z0-9](?=emailProtocol)|(`+|~+|[^`~])(?:(?=[`~])|(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|protocol:\/\/|wwwStart|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9](?=emailProtocol)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))))/).replace("protocol", Oe).replace(/emailProtocol/g, /(?:mailto|xmpp):/).replace("wwwStart", we ? "(?<![^\\s*_~(])www\\." : "www\\.").getRegex() };
+var Bt = { ...oe, br: h(_e).replace("{2,}", "*").getRegex(), text: h(oe.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex() };
+var V = { normal: ce, gfm: Ye, pedantic: et };
+var N = { normal: he, gfm: oe, breaks: Bt, pedantic: Mt };
+var Dt = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+var Ae = (l3) => Dt[l3];
+function P(l3, e) {
   if (e) {
-    if (T.escapeTest.test(a3)) return a3.replace(T.escapeReplace, ye);
-  } else if (T.escapeTestNoEncode.test(a3)) return a3.replace(T.escapeReplaceNoEncode, ye);
-  return a3;
+    if (T.escapeTest.test(l3)) return l3.replace(T.escapeReplace, Ae);
+  } else if (T.escapeTestNoEncode.test(l3)) return l3.replace(T.escapeReplaceNoEncode, Ae);
+  return l3;
 }
-function Se(a3) {
-  return T.numericCharacterReference.test(a3) ? a3.replace(T.numericCharacterReferenceOrAmpersand, (e, t, n) => {
+function Ee(l3) {
+  return T.numericCharacterReference.test(l3) ? l3.replace(T.numericCharacterReferenceOrAmpersand, (e, t, n) => {
     if (t === void 0 && n === void 0) return "&amp;";
     let s = t === void 0 ? Number.parseInt(n, 16) : Number.parseInt(t, 10);
     return s === 0 || s > 1114111 || s >= 55296 && s <= 57343 ? "\uFFFD" : s === 38 ? "&amp;" : String.fromCodePoint(s);
-  }) : a3;
+  }) : l3;
 }
-function le(a3) {
+function de(l3) {
   try {
-    a3 = encodeURI(a3).replace(T.percentDecode, "%");
+    l3 = encodeURI(l3).replace(T.percentDecode, "%");
   } catch {
     return null;
   }
-  return a3;
+  return l3;
 }
-function ue(a3, e) {
-  let t = a3.replace(T.findPipe, (r, o, i) => {
-    let l = false, u = o;
-    for (; --u >= 0 && i[u] === "\\"; ) l = !l;
-    return l ? "|" : " |";
+function ge(l3, e) {
+  let t = l3.replace(T.findPipe, (i, r, o) => {
+    let a = false, p = r;
+    for (; --p >= 0 && o[p] === "\\"; ) a = !a;
+    return a ? "|" : " |";
   }), n = t.split(T.splitPipe), s = 0;
   if (n[0].trim() || n.shift(), n.length > 0 && !n.at(-1)?.trim() && n.pop(), e) if (n.length > e) n.splice(e);
   else for (; n.length < e; ) n.push("");
   for (; s < n.length; s++) n[s] = n[s].trim().replace(T.slashPipe, "|");
   return n;
 }
-function z(a3, e, t) {
-  let n = a3.length;
+function L(l3, e, t) {
+  let n = l3.length;
   if (n === 0) return "";
   let s = 0;
   for (; s < n; ) {
-    let r = a3.charAt(n - s - 1);
-    if (r === e && !t) s++;
-    else if (r !== e && t) s++;
+    let i = l3.charAt(n - s - 1);
+    if (i === e && !t) s++;
+    else if (i !== e && t) s++;
     else break;
   }
-  return a3.slice(0, n - s);
+  return l3.slice(0, n - s);
 }
-function pe(a3) {
-  let e = a3.split(`
+function ke(l3) {
+  let e = l3.split(`
 `), t = e.length - 1;
   for (; t >= 0 && T.blankLine.test(e[t]); ) t--;
-  return e.length - t <= 2 ? a3 : e.slice(0, t + 1).join(`
+  return e.length - t <= 2 ? l3 : e.slice(0, t + 1).join(`
 `);
 }
-function N(a3) {
-  return a3.trim().toLowerCase().toUpperCase().toLowerCase();
+function Q(l3) {
+  return l3.trim().replace(T.multipleSpaceGlobal, " ").toLowerCase().toUpperCase().toLowerCase();
 }
-function ce(a3, e) {
-  if (a3.indexOf(e[0]) === -1 && a3.indexOf(e[1]) === -1) return -1;
+function fe(l3, e) {
+  if (l3.indexOf(e[0]) === -1 && l3.indexOf(e[1]) === -1) return -1;
   let t = 0;
-  for (let n = 0; n < a3.length; n++) if (a3[n] === "\\") n++;
-  else if (a3[n] === e[0]) t++;
-  else if (a3[n] === e[1] && (t--, t < 0)) return n;
+  for (let n = 0; n < l3.length; n++) if (l3[n] === "\\") n++;
+  else if (l3[n] === e[0]) t++;
+  else if (l3[n] === e[1] && (t--, t < 0)) return n;
   return t > 0 ? -2 : -1;
 }
-function V(a3, e = 0) {
+var F = /* @__PURE__ */ new WeakMap();
+function me(l3) {
+  let e = { "*": -1, _: -1 }, t = -1, n = l3.length;
+  for (let s = 0; s < n; s++) {
+    let i = l3[s];
+    if (i !== "*" && i !== "_" && i !== "~") continue;
+    let r = s === 0 ? `
+` : l3[s - 1], o = s + 1;
+    for (; o < n && l3[o] === i; ) o++;
+    r !== " " && r !== "	" && r !== `
+` && r !== "\r" && r !== "\f" && (i === "~" ? t = s : e[i] = s), s = o - 1;
+  }
+  return { maskedSrc: l3, lastPossibleEmStrongCloserIndex: e, lastPossibleDelCloserIndex: t };
+}
+function ze(l3, e) {
+  let t = me(e), n = F.get(l3);
+  n ? n.push(t) : F.set(l3, [t]);
+}
+function Me(l3) {
+  let e = F.get(l3);
+  e && (e.pop(), e.length === 0 && F.delete(l3));
+}
+function Be(l3, e, t) {
+  let n = F.get(l3)?.at(-1);
+  return n && n.maskedSrc === e ? n.lastPossibleEmStrongCloserIndex[t] : me(e).lastPossibleEmStrongCloserIndex[t];
+}
+function De(l3, e) {
+  let t = F.get(l3)?.at(-1);
+  return t && t.maskedSrc === e ? t.lastPossibleDelCloserIndex : me(e).lastPossibleDelCloserIndex;
+}
+function J(l3, e = 0) {
   let t = e, n = "";
-  for (let s of a3) if (s === "	") {
-    let r = 4 - t % 4;
-    n += " ".repeat(r), t += r;
+  for (let s of l3) if (s === "	") {
+    let i = 4 - t % 4;
+    n += " ".repeat(i), t += i;
   } else n += s, t++;
   return n;
 }
-function _e(a3, e, t, n, s) {
-  let r = e.href, o = e.title || null, i = a3[1].replace(s.other.outputLinkReplace, "$1"), l = a3[0].charAt(0) === "!", u = n.state.inLink, h = n.state.linkEmitted, p = n.state.inRawBlock;
+function qe(l3, e, t, n, s) {
+  let i = e.href, r = e.title || null, o = l3[1].replace(s.other.outputLinkReplace, "$1"), a = l3[0].charAt(0) === "!", p = n.state.inLink, c = n.state.linkEmitted, u = n.state.inRawBlock;
   n.state.inLink = true, n.state.linkEmitted = false;
-  let d = n.inlineTokens(i), g = n.state.linkEmitted;
-  if (n.state.linkEmitted = h, n.state.inLink = u, !l) {
-    if (g) {
-      n.state.inRawBlock = p;
+  let d = n.inlineTokens(o), k = n.state.linkEmitted;
+  if (n.state.linkEmitted = c, n.state.inLink = p, !a) {
+    if (k) {
+      n.state.inRawBlock = u;
       return;
     }
     n.state.linkEmitted = true;
   }
-  return { type: l ? "image" : "link", raw: t, href: r, title: o, text: i, tokens: d };
+  return { type: a ? "image" : "link", raw: t, href: i, title: r, text: o, tokens: d };
 }
-function At(a3, e, t) {
-  let n = a3.match(t.other.indentCodeCompensation);
+function qt(l3, e, t) {
+  let n = l3.match(t.other.indentCodeCompensation);
   if (n === null) return e;
   let s = n[1];
   return e.split(`
-`).map((r) => {
-    let o = r.match(t.other.beginningSpace);
-    if (o === null) return r;
-    let [i] = o;
-    return r.slice(Math.min(i.length, s.length));
+`).map((i) => {
+    let r = i.match(t.other.beginningSpace);
+    if (r === null) return i;
+    let [o] = r;
+    return i.slice(Math.min(o.length, s.length));
   }).join(`
 `);
 }
-function $e(a3, e, t, n) {
+function ve(l3, e, t, n) {
   if (!e.includes("<")) return false;
   for (let s = 0; s < e.length; s++) {
     if (e[s] === "\\") {
@@ -2770,17 +3070,17 @@ function $e(a3, e, t, n) {
       continue;
     }
     if (e[s] === "`") {
-      let i = n.inline.code.exec(e.slice(s));
-      if (i) {
-        s += i[0].length - 1;
+      let o = n.inline.code.exec(e.slice(s));
+      if (o) {
+        s += o[0].length - 1;
         continue;
       }
     }
     if (e[s] !== "<") continue;
-    let r = a3.slice(t + s), o = n.inline.tag.exec(r) || n.inline.autolink.exec(r);
-    if (o) {
-      if (o[0].length > e.length - s) return true;
-      s += o[0].length - 1;
+    let i = l3.slice(t + s), r = n.inline.tag.exec(i) || n.inline.autolink.exec(i);
+    if (r) {
+      if (r[0].length > e.length - s) return true;
+      s += r[0].length - 1;
     }
   }
   return false;
@@ -2799,14 +3099,14 @@ var _ = class {
   code(e) {
     let t = this.rules.block.code.exec(e);
     if (t) {
-      let n = this.options.pedantic ? t[0] : pe(t[0]), s = n.replace(this.rules.other.codeRemoveIndent, "");
+      let n = this.options.pedantic ? t[0] : ke(t[0]), s = n.replace(this.rules.other.codeRemoveIndent, "");
       return { type: "code", raw: n, codeBlockStyle: "indented", text: s };
     }
   }
   fences(e) {
     let t = this.rules.block.fences.exec(e);
     if (t) {
-      let n = t[0], s = At(n, t[3] || "", this.rules);
+      let n = t[0], s = qt(n, t[3] || "", this.rules);
       return { type: "code", raw: n, lang: t[2] ? t[2].trim().replace(this.rules.inline.anyPunctuation, "$1") : t[2], text: s };
     }
   }
@@ -2815,171 +3115,176 @@ var _ = class {
     if (t) {
       let n = t[2].trim();
       if (this.rules.other.endingHash.test(n)) {
-        let s = z(n, "#");
+        let s = L(n, "#");
         (this.options.pedantic || !s || this.rules.other.endingSpaceTabChar.test(s)) && (n = s.trim());
       }
-      return { type: "heading", raw: z(t[0], `
+      return { type: "heading", raw: L(t[0], `
 `), depth: t[1].length, text: n, tokens: this.lexer.inline(n) };
     }
   }
   hr(e) {
     let t = this.rules.block.hr.exec(e);
-    if (t) return { type: "hr", raw: z(t[0], `
+    if (t) return { type: "hr", raw: L(t[0], `
 `) };
   }
   blockquote(e) {
     let t = this.rules.block.blockquote.exec(e);
     if (t) {
-      let n = z(t[0], `
+      let n = L(t[0], `
 `).split(`
-`), s = "", r = "", o = [];
+`), s = "", i = "", r = [];
       for (; n.length > 0; ) {
-        let i = false, l = [], u;
-        for (u = 0; u < n.length; u++) if (this.rules.other.blockquoteStart.test(n[u])) l.push(n[u]), i = true;
-        else if (!i) l.push(n[u]);
+        let o = false, a = [], p;
+        for (p = 0; p < n.length; p++) if (this.rules.other.blockquoteStart.test(n[p])) a.push(n[p]), o = true;
+        else if (!o) a.push(n[p]);
         else break;
-        n = n.slice(u);
-        let h = l.join(`
-`), p = h.replace(this.rules.other.blockquoteMarkerWhitespace, (k, b, x) => b + V(x, b.length)).replace(this.rules.other.blockquoteSetextReplace, `
+        n = n.slice(p);
+        let c = a.join(`
+`), u = c.replace(this.rules.other.blockquoteMarkerWhitespace, (g, b, f2) => b + J(f2, b.length)).replace(this.rules.other.blockquoteSetextReplace, `
     $1`).replace(this.rules.other.blockquoteSetextReplace2, "");
         s = s ? `${s}
-${h}` : h, r = r ? `${r}
-${p}` : p;
+${c}` : c, i = i ? `${i}
+${u}` : u;
         let d = this.lexer.state.top;
-        if (this.lexer.state.top = true, this.lexer.blockTokens(p, o, true), this.lexer.state.top = d, n.length === 0) break;
-        let g = o.at(-1);
-        if (g?.type === "code" || g?.type === "heading" || g?.type === "hr" || g?.type === "html") break;
-        if (g?.type === "blockquote") {
-          let k = g, b = n.join(`
-`), x = k.raw + `
-` + b.replace(this.rules.other.blockquoteSetextReplace2, ""), f2 = this.blockquote(x);
-          o[o.length - 1] = f2;
-          let S2 = x.substring(f2.raw.length).replace(/^\n/, ""), R3 = S2 ? S2.split(`
-`).length : 0, C = R3 ? n.slice(0, -R3) : n;
-          C.length > 0 && (s = `${s}
-${C.join(`
-`)}`), r = r.substring(0, r.length - k.text.length) + f2.text;
+        if (this.lexer.state.top = true, this.lexer.blockTokens(u, r, true), this.lexer.state.top = d, n.length === 0) break;
+        let k = r.at(-1);
+        if (k?.type === "code" || k?.type === "heading" || k?.type === "hr" || k?.type === "html" || k?.type === "table") break;
+        if (k?.type === "blockquote") {
+          let g = k, b = n.join(`
+`), f2 = g.raw + `
+` + b.replace(this.rules.other.blockquoteSetextReplace2, ""), m = this.blockquote(f2);
+          r[r.length - 1] = m;
+          let S2 = f2.substring(m.raw.length).replace(/^\n/, ""), R3 = S2 ? S2.split(`
+`).length : 0, A2 = R3 ? n.slice(0, -R3) : n;
+          if (A2.length > 0 && (s = `${s}
+${A2.join(`
+`)}`), i = i.substring(0, i.length - g.text.length) + m.text, n = n.slice(A2.length), n.length > 0 && this.rules.other.blockquoteStart.test(n[0])) continue;
           break;
-        } else if (g?.type === "list") {
-          let k = g, b = k.raw + `
+        } else if (k?.type === "list") {
+          let g = k, b = g.raw + `
 ` + n.join(`
-`), x = this.list(b);
-          o[o.length - 1] = x;
-          let f2 = x.raw.length > k.raw.length ? b.slice(k.raw.length + 1, x.raw.length).split(`
+`), f2 = this.list(b);
+          r[r.length - 1] = f2;
+          let m = f2.raw.length > g.raw.length ? b.slice(g.raw.length + 1, f2.raw.length).split(`
 `).length : 0;
-          if (f2 > 0) {
-            let S2 = n.slice(0, f2).join(`
+          if (m > 0) {
+            let S2 = n.slice(0, m).join(`
 `);
             s = `${s}
-${S2}`, r = `${r}
+${S2}`, i = `${i}
 ${S2}`;
           }
-          n = n.slice(f2);
+          n = n.slice(m);
           continue;
         }
       }
-      return { type: "blockquote", raw: s, tokens: o, text: r };
+      return { type: "blockquote", raw: s, tokens: r, text: i };
     }
   }
   list(e) {
     let t = this.rules.block.list.exec(e);
     if (t) {
-      let n = e, s = () => n.length - e.length, r = t[1].trim(), o = r.length > 1, i = { type: "list", raw: "", ordered: o, start: o ? +r.slice(0, -1) : "", loose: false, items: [] };
-      r = o ? `\\d{1,9}\\${r.slice(-1)}` : `\\${r}`, this.options.pedantic && (r = o ? r : "[*+-]");
-      let l = this.rules.other.listItemRegex(r), u = false;
+      if (!this.options.pedantic && this.lexer.state.lastToken?.type === "text" && !this.rules.other.listInterruptsParagraph.test(e)) return;
+      let n = e, s = () => n.length - e.length, i = t[1].trim(), r = i.length > 1, o = { type: "list", raw: "", ordered: r, start: r ? +i.slice(0, -1) : "", loose: false, items: [] };
+      i = r ? `\\d{1,9}\\${i.slice(-1)}` : `\\${i}`, this.options.pedantic && (i = r ? i : "[*+-]");
+      let a = this.rules.other.listItemRegex(i), p = false;
       for (; e; ) {
-        let p = false, d = "";
-        if (!(t = l.exec(e)) || this.rules.block.hr.test(e)) break;
-        let g = s();
+        let u = false, d = "";
+        if (!(t = a.exec(e)) || this.rules.block.hr.test(e)) break;
+        let k = s();
         e = e.substring(t[0].length);
-        let k = t[2].split(`
-`, 1)[0], b = t[1].length, x = this.options.pedantic ? V(k, b) : k.replace(this.rules.other.leadingSpaceTab, (Q2) => V(Q2, b)), f2 = e.split(`
-`, 1)[0], S2 = !x.trim(), R3 = 0;
-        if (this.options.pedantic ? (R3 = 2, d = x.trimStart()) : S2 ? R3 = b + 1 : (R3 = x.search(this.rules.other.nonSpaceChar), R3 = R3 > 4 ? 1 : R3, d = x.slice(R3), R3 += b), S2 && this.rules.other.blankLine.test(f2) && (e = e.substring(f2.length + 1), p = true), !p) {
-          let Q2 = this.rules.other.nextBulletRegex(R3), E = this.rules.other.hrRegex(R3), j = this.rules.other.fencesBeginRegex(R3), F = this.options.pedantic ? this.rules.other.pedanticHeadingBeginRegex(R3) : this.rules.other.headingBeginRegex(R3), Le2 = this.rules.other.htmlBeginRegex(R3), Ae2 = this.rules.other.blockquoteBeginRegex(R3);
+        let g = t[2].split(`
+`, 1)[0], b = t[1].length, f2 = this.options.pedantic ? J(g, b) : g.replace(this.rules.other.leadingSpaceTab, (v) => J(v, b)), m = e.split(`
+`, 1)[0], S2 = !f2.trim(), R3 = 0;
+        if (this.options.pedantic ? (R3 = 2, d = f2.trimStart()) : S2 ? R3 = b + 1 : (R3 = f2.search(this.rules.other.nonSpaceChar), R3 = R3 > 4 ? 1 : R3, d = f2.slice(R3), R3 += b), S2 && this.rules.other.blankLine.test(m) && (e = e.substring(m.length + 1), u = true), !u) {
+          let v = this.rules.other.nextBulletRegex(R3), U2 = this.rules.other.hrRegex(R3), ee2 = this.rules.other.fencesBeginRegex(R3), te2 = this.options.pedantic ? this.rules.other.pedanticHeadingBeginRegex(R3) : this.rules.other.headingBeginRegex(R3), M2 = this.rules.other.htmlBeginRegex(R3), ne2 = this.rules.other.blockquoteBeginRegex(R3), Z2 = false;
           for (; e; ) {
-            let he2 = e.split(`
-`, 1)[0], Z2;
-            if (f2 = he2, this.options.pedantic ? (f2 = f2.replace(this.rules.other.listReplaceNesting, "  "), Z2 = f2) : Z2 = f2.replace(this.rules.other.leadingSpaceTab, (de2) => V(de2)), j.test(f2) || F.test(f2) || Le2.test(f2) || Ae2.test(f2) || Q2.test(f2) || E.test(f2)) break;
-            if (Z2.search(this.rules.other.nonSpaceChar) >= R3 || !f2.trim()) d += `
-` + Z2.slice(R3);
+            let xe2 = e.split(`
+`, 1)[0], H2;
+            if (m = xe2, this.options.pedantic ? (m = m.replace(this.rules.other.listReplaceNesting, "  "), H2 = m) : H2 = m.replace(this.rules.other.leadingSpaceTab, (be2) => J(be2)), ee2.test(m) || te2.test(m) || M2.test(m) || ne2.test(m) || v.test(m) || U2.test(m)) break;
+            if (H2.search(this.rules.other.nonSpaceChar) >= R3 || !m.trim()) d += `
+` + H2.slice(R3), Z2 = false;
             else {
-              if (S2 || x.replace(this.rules.other.tabCharGlobal, "    ").search(this.rules.other.nonSpaceChar) >= 4 || j.test(x) || F.test(x) || E.test(x)) break;
-              let ze2 = !this.options.pedantic && /^ {0,3}(?:=+|-+) *$/.test(f2) && this.rules.block.lheading.test(`${x}
-${f2}`) ? `    ${Z2.replace(/^ {0,3}/, "")}` : f2;
+              if (S2 || f2.replace(this.rules.other.tabCharGlobal, "    ").search(this.rules.other.nonSpaceChar) >= 4 || ee2.test(f2) || te2.test(f2) || M2.test(f2) || U2.test(f2)) break;
+              if (!this.options.pedantic && !Z2) {
+                let se2 = f2.replace(this.rules.other.nestedContainerMarkers, "");
+                if (this.rules.block.fences.test(se2) || this.rules.block.heading.test(se2) || this.rules.block.hr.test(se2)) break;
+              }
+              let Ze2 = !this.options.pedantic && /^ {0,3}(?:=+|-+) *$/.test(m) && this.rules.block.lheading.test(`${f2}
+${m}`) ? `    ${H2.replace(/^ {0,3}/, "")}` : m;
               d += `
-` + ze2;
+` + Ze2, Z2 = true;
             }
-            S2 = !f2.trim(), e = e.substring(he2.length + 1), x = Z2.slice(R3);
+            S2 = !m.trim(), e = e.substring(xe2.length + 1), f2 = H2.slice(R3);
           }
         }
-        let C = n.slice(g, s());
-        i.loose || (u ? i.loose = true : this.rules.other.doubleBlankLine.test(C) && (u = true)), i.items.push({ type: "list_item", raw: C, task: !!this.options.gfm && this.rules.other.listIsTask.test(d), loose: false, text: d, tokens: [] });
+        let A2 = n.slice(k, s());
+        o.loose || (p ? o.loose = true : this.rules.other.doubleBlankLine.test(A2) && (p = true)), o.items.push({ type: "list_item", raw: A2, task: !!this.options.gfm && this.rules.other.listIsTask.test(d), loose: false, text: d, tokens: [] });
       }
-      let h = i.items.at(-1);
-      if (h) h.raw = h.raw.trimEnd(), h.text = h.text.trimEnd();
+      let c = o.items.at(-1);
+      if (c) c.raw = c.raw.trimEnd(), c.text = c.text.trimEnd();
       else return;
-      i.raw = n.slice(0, s()).trimEnd();
-      for (let p of i.items) if (this.lexer.state.top = false, p.tokens = this.lexer.blockTokens(p.text, []), !i.loose) {
-        let d = p.tokens.filter((k) => k.type === "space"), g = d.length > 0 && d.some((k) => this.rules.other.anyLine.test(k.raw));
-        i.loose = g;
+      o.raw = n.slice(0, s()).trimEnd();
+      for (let u of o.items) if (this.lexer.state.top = false, u.tokens = this.lexer.blockTokens(u.text, []), !o.loose) {
+        let d = u.tokens.filter((g) => g.type === "space"), k = d.length > 0 && d.some((g) => this.rules.other.anyLine.test(g.raw));
+        o.loose = k;
       }
-      for (let p of i.items) {
-        let d = p.tokens[0];
-        if (p.task && (d?.type === "text" || d?.type === "paragraph")) {
-          p.text = p.text.replace(this.rules.other.listReplaceTask, ""), d.raw = d.raw.replace(this.rules.other.listReplaceTask, ""), d.text = d.text.replace(this.rules.other.listReplaceTask, "");
-          for (let k = this.lexer.inlineQueue.length - 1; k >= 0; k--) if (this.rules.other.listIsTask.test(this.lexer.inlineQueue[k].src)) {
-            this.lexer.inlineQueue[k].src = this.lexer.inlineQueue[k].src.replace(this.rules.other.listReplaceTask, "");
+      for (let u of o.items) {
+        let d = u.tokens[0];
+        if (u.task && (d?.type === "text" || d?.type === "paragraph")) {
+          u.text = u.text.replace(this.rules.other.listReplaceTask, ""), d.raw = d.raw.replace(this.rules.other.listReplaceTask, ""), d.text = d.text.replace(this.rules.other.listReplaceTask, "");
+          for (let g = this.lexer.inlineQueue.length - 1; g >= 0; g--) if (this.rules.other.listIsTask.test(this.lexer.inlineQueue[g].src)) {
+            this.lexer.inlineQueue[g].src = this.lexer.inlineQueue[g].src.replace(this.rules.other.listReplaceTask, "");
             break;
           }
-          let g = this.rules.other.listTaskCheckbox.exec(p.raw);
-          if (g) {
-            let k = { type: "checkbox", raw: g[0] + " ", checked: g[0] !== "[ ]" };
-            p.checked = k.checked, i.loose ? p.tokens[0] && ["paragraph", "text"].includes(p.tokens[0].type) && "tokens" in p.tokens[0] && p.tokens[0].tokens ? (p.tokens[0].raw = k.raw + p.tokens[0].raw, p.tokens[0].text = k.raw + p.tokens[0].text, p.tokens[0].tokens.unshift(k)) : p.tokens.unshift({ type: "paragraph", raw: k.raw, text: k.raw, tokens: [k] }) : p.tokens.unshift(k);
+          let k = this.rules.other.listTaskCheckbox.exec(u.raw);
+          if (k) {
+            let g = { type: "checkbox", raw: k[0] + " ", checked: k[0] !== "[ ]" };
+            u.checked = g.checked, o.loose ? u.tokens[0] && ["paragraph", "text"].includes(u.tokens[0].type) && "tokens" in u.tokens[0] && u.tokens[0].tokens ? (u.tokens[0].raw = g.raw + u.tokens[0].raw, u.tokens[0].text = g.raw + u.tokens[0].text, u.tokens[0].tokens.unshift(g)) : u.tokens.unshift({ type: "paragraph", raw: g.raw, text: g.raw, tokens: [g] }) : u.tokens.unshift(g);
           }
-        } else p.task && (p.task = false);
+        } else u.task && (u.task = false);
       }
-      if (i.loose) for (let p of i.items) {
-        p.loose = true;
-        for (let d of p.tokens) d.type === "text" && (d.type = "paragraph");
+      if (o.loose) for (let u of o.items) {
+        u.loose = true;
+        for (let d of u.tokens) d.type === "text" && (d.type = "paragraph");
       }
-      return i;
+      return o;
     }
   }
   html(e) {
     let t = this.rules.block.html.exec(e);
     if (t) {
-      let n = pe(t[0]);
+      let n = ke(t[0]);
       return { type: "html", block: true, raw: n, pre: t[1] === "pre" || t[1] === "script" || t[1] === "style", text: n };
     }
   }
   def(e) {
     let t = this.rules.block.def.exec(e);
     if (t) {
-      if (!this.rules.other.startAngleBracket.test(t[2]) && ce(t[2], "()") !== -1) return;
-      let n = N(t[1]).replace(this.rules.other.multipleSpaceGlobal, " "), s = t[2] ? t[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "", r = t[3] ? t[3].substring(1, t[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : t[3];
-      return { type: "def", tag: n, raw: z(t[0], `
-`), href: s, title: r };
+      if (!this.rules.other.startAngleBracket.test(t[2]) && fe(t[2], "()") !== -1) return;
+      let n = Q(t[1]), s = t[2] ? t[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "", i = t[3] ? t[3].substring(1, t[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : t[3];
+      return { type: "def", tag: n, raw: L(t[0], `
+`), href: s, title: i };
     }
   }
   table(e) {
     let t = this.rules.block.table.exec(e);
     if (!t || !this.rules.other.tableDelimiter.test(t[2])) return;
-    let n = ue(t[1]), s = t[2].replace(this.rules.other.tableAlignChars, "").split("|"), r = t[3]?.trim() ? t[3].replace(this.rules.other.tableRowBlankLine, "").split(`
-`) : [], o = { type: "table", raw: z(t[0], `
+    let n = ge(t[1]), s = t[2].replace(this.rules.other.tableAlignChars, "").split("|"), i = t[3]?.trim() ? t[3].replace(this.rules.other.tableRowBlankLine, "").split(`
+`) : [], r = { type: "table", raw: L(t[0], `
 `), header: [], align: [], rows: [] };
     if (n.length === s.length) {
-      for (let i of s) this.rules.other.tableAlignRight.test(i) ? o.align.push("right") : this.rules.other.tableAlignCenter.test(i) ? o.align.push("center") : this.rules.other.tableAlignLeft.test(i) ? o.align.push("left") : o.align.push(null);
-      for (let i = 0; i < n.length; i++) o.header.push({ text: n[i], tokens: this.lexer.inline(n[i]), header: true, align: o.align[i] });
-      for (let i of r) o.rows.push(ue(i, o.header.length).map((l, u) => ({ text: l, tokens: this.lexer.inline(l), header: false, align: o.align[u] })));
-      return o;
+      for (let o of s) this.rules.other.tableAlignRight.test(o) ? r.align.push("right") : this.rules.other.tableAlignCenter.test(o) ? r.align.push("center") : this.rules.other.tableAlignLeft.test(o) ? r.align.push("left") : r.align.push(null);
+      for (let o = 0; o < n.length; o++) r.header.push({ text: n[o], tokens: this.lexer.inline(n[o]), header: true, align: r.align[o] });
+      for (let o of i) r.rows.push(ge(o, r.header.length).map((a, p) => ({ text: a, tokens: this.lexer.inline(a), header: false, align: r.align[p] })));
+      return r;
     }
   }
   lheading(e) {
     let t = this.rules.block.lheading.exec(e);
     if (t) {
       let n = t[1].trim();
-      return { type: "heading", raw: z(t[0], `
+      return { type: "heading", raw: L(t[0], `
 `), depth: t[2].charAt(0) === "=" ? 1 : 2, text: n, tokens: this.lexer.inline(n) };
     }
   }
@@ -3008,82 +3313,89 @@ ${f2}`) ? `    ${Z2.replace(/^ {0,3}/, "")}` : f2;
     let t = this.rules.inline.link.exec(e);
     if (t) {
       let n = t[0].charAt(0) === "!" ? 2 : 1;
-      if (!this.options.pedantic && $e(e, t[1], n, this.rules)) return;
+      if (!this.options.pedantic && ve(e, t[1], n, this.rules)) return;
       let s = t[2].trim();
       if (!this.options.pedantic && this.rules.other.startAngleBracket.test(s)) {
         if (!this.rules.other.endAngleBracket.test(s)) return;
-        let i = z(s.slice(0, -1), "\\");
-        if ((s.length - i.length) % 2 === 0) return;
+        let a = L(s.slice(0, -1), "\\");
+        if ((s.length - a.length) % 2 === 0) return;
       } else {
-        let i = ce(t[2], "()");
-        if (i === -2) return;
-        if (i > -1) {
-          let u = (t[0].indexOf("!") === 0 ? 5 : 4) + t[1].length + i;
-          t[2] = t[2].substring(0, i), t[0] = t[0].substring(0, u).trim(), t[3] = "";
+        let a = fe(t[2], "()");
+        if (a === -2) return;
+        if (a > -1) {
+          let c = (t[0].indexOf("!") === 0 ? 5 : 4) + t[1].length + a;
+          t[2] = t[2].substring(0, a), t[0] = t[0].substring(0, c).trim(), t[3] = "";
         }
       }
+      let i = L(t[0].slice(0, -1), "\\");
+      if ((t[0].length - i.length) % 2 === 0) return;
       let r = t[2], o = "";
       if (this.options.pedantic) {
-        let i = this.rules.other.pedanticHrefTitle.exec(r);
-        i && (r = i[1], o = i[3]);
+        let a = this.rules.other.pedanticHrefTitle.exec(r);
+        a && (r = a[1], o = a[3]);
       } else o = t[3] ? t[3].slice(1, -1) : "";
-      return r = r.trim(), this.rules.other.startAngleBracket.test(r) && (this.options.pedantic && !this.rules.other.endAngleBracket.test(s) ? r = r.slice(1) : r = r.slice(1, -1)), _e(t, { href: r && r.replace(this.rules.inline.anyPunctuation, "$1"), title: o && o.replace(this.rules.inline.anyPunctuation, "$1") }, t[0], this.lexer, this.rules);
+      return r = r.trim(), this.rules.other.startAngleBracket.test(r) && (this.options.pedantic && !this.rules.other.endAngleBracket.test(s) ? r = r.slice(1) : r = r.slice(1, -1)), qe(t, { href: r && r.replace(this.rules.inline.anyPunctuation, "$1"), title: o && o.replace(this.rules.inline.anyPunctuation, "$1") }, t[0], this.lexer, this.rules);
     }
   }
   reflink(e, t) {
     let n;
     if ((n = this.rules.inline.reflink.exec(e)) || (n = this.rules.inline.nolink.exec(e))) {
       let s = n[0].charAt(0) === "!" ? 2 : 1;
-      if (!this.options.pedantic && $e(e, n[1], s, this.rules)) return;
-      let r = (n[2] || n[1]).replace(this.rules.other.multipleSpaceGlobal, " "), o = t[N(r)];
-      if (!o) {
-        let i = n[0].charAt(0);
-        return { type: "text", raw: i, text: i };
+      if (!this.options.pedantic && ve(e, n[1], s, this.rules)) return;
+      let i = t[Q(n[2] || n[1])];
+      if (!i) {
+        let r = n[0].charAt(0);
+        return { type: "text", raw: r, text: r };
       }
-      return _e(n, o, n[0], this.lexer, this.rules);
+      return qe(n, i, n[0], this.lexer, this.rules);
     }
   }
   emStrong(e, t, n = "") {
     let s = this.rules.inline.emStrongLDelim.exec(e);
     if (!s || !s[1] && !s[2] && !s[3] && !s[4]) return;
-    let r = s[0][0], o = n === r, i = t.length - e.length, l = i;
-    for (; !this.options.pedantic && l > 0 && t[l - 1] === r; ) l--;
-    let u = [...t.slice(Math.max(0, l - 2), l)].at(-1) ?? "", h = u === "*" || u === "_" || !!this.rules.inline.punctuation.exec(u);
-    l < i && (n = u);
-    let p = l < i ? h : !!this.rules.inline.punctuation.exec(n);
+    let i = s[0][0], r = n === i, o = t.length - e.length, a = o;
+    for (; !this.options.pedantic && a > 0 && t[a - 1] === i; ) a--;
+    let p = [...t.slice(Math.max(0, a - 2), a)].at(-1) ?? "", c = p === "*" || p === "_" || !!this.rules.inline.punctuation.exec(p);
+    a < o && (n = p);
+    let u = a < o ? c : n === "*" || n === "_" || !!this.rules.inline.punctuation.exec(n);
     if (s[4] && n.match(this.rules.other.unicodeAlphaNumeric)) return;
     let d = s[1] || s[3] || "";
-    if (!d || !n || p) {
-      let g = [...s[0]].length - 1, k, b, x = g, f2 = 0, S2 = i - l + g, R3 = !this.options.pedantic && !!u.trim() && (!!d || r === "*" && !h), C = r === "*" ? this.rules.inline.emStrongRDelimAst : this.rules.inline.emStrongRDelimUnd;
-      for (C.lastIndex = 0, t = t.slice(-1 * e.length + g); (s = C.exec(t)) !== null; ) {
-        if (k = s[1] || s[2] || s[3] || s[4] || s[5] || s[6], !k) continue;
-        if (b = [...k].length, s[3] || s[4]) {
-          x += b;
+    if (!d || !n || u) {
+      let k = [...s[0]].length - 1, g, b, f2 = k, m = 0, S2 = o - a + k, R3 = !this.options.pedantic && !!p.trim() && (!!d || i === "*" && !c);
+      if (i !== "*" && i !== "_") return;
+      let A2 = i === "*" ? this.rules.inline.emStrongRDelimAst : this.rules.inline.emStrongRDelimUnd, v = Be(this, t, i), U2 = t.length - e.length + k;
+      if (v < U2) return;
+      t = t.slice(-1 * e.length + k);
+      let ee2 = v - U2;
+      for (A2.lastIndex = 0; (s = A2.exec(t)) !== null && !(s.index > ee2); ) {
+        if (g = s[1] || s[2] || s[3] || s[4] || s[5] || s[6], !g) continue;
+        if (b = [...g].length, s[3] || s[4]) {
+          f2 += b;
           continue;
         } else if (s[5] || s[6] || R3) {
-          if (o && (s[5] || s[6])) break;
+          if (r && (s[5] || s[6])) break;
           if (S2 % 3 && !((S2 + b) % 3)) {
-            f2 += b;
+            m += b;
             continue;
           }
         }
-        if (x -= b, x > 0) continue;
-        b = Math.min(b, b + x + f2);
-        let Q2 = [...s[0]][0].length, E = e.slice(0, g + s.index + Q2 + b);
-        if (Math.min(g, b) % 2) {
-          let F = E.slice(1, -1);
-          return { type: "em", raw: E, text: F, tokens: this.lexer.inlineTokens(F) };
+        if (f2 -= b, f2 > 0) continue;
+        b = Math.min(b, b + f2 + m);
+        let te2 = [...s[0]][0].length, M2 = e.slice(0, k + s.index + te2 + b);
+        if (Math.min(k, b) % 2) {
+          let Z2 = M2.slice(1, -1);
+          return { type: "em", raw: M2, text: Z2, tokens: this.lexer.inlineTokens(Z2) };
         }
-        let j = E.slice(2, -2);
-        return { type: "strong", raw: E, text: j, tokens: this.lexer.inlineTokens(j) };
+        let ne2 = M2.slice(2, -2);
+        return { type: "strong", raw: M2, text: ne2, tokens: this.lexer.inlineTokens(ne2) };
       }
     }
   }
   codespan(e) {
     let t = this.rules.inline.code.exec(e);
     if (t) {
-      let n = t[2].replace(this.rules.other.newLineCharGlobal, " "), s = this.rules.other.nonSpaceChar.test(n), r = this.rules.other.startingSpaceChar.test(n) && this.rules.other.endingSpaceChar.test(n);
-      return s && r && (n = n.substring(1, n.length - 1)), { type: "codespan", raw: t[0], text: n };
+      let n = t[2].replace(this.rules.other.newLineCharGlobal, " "), s = this.rules.other.nonSpaceChar.test(n), i = this.rules.other.startingSpaceChar.test(n) && this.rules.other.endingSpaceChar.test(n);
+      return s && i && (n = n.substring(1, n.length - 1)), { type: "codespan", raw: t[0], text: n };
     }
   }
   br(e) {
@@ -3094,17 +3406,20 @@ ${f2}`) ? `    ${Z2.replace(/^ {0,3}/, "")}` : f2;
     let s = this.rules.inline.delLDelim.exec(e);
     if (!s) return;
     if (!(s[1] || "") || !n || this.rules.inline.punctuation.exec(n)) {
-      let o = [...s[0]].length - 1, i, l, u = o, h = this.rules.inline.delRDelim;
-      for (h.lastIndex = 0, t = t.slice(-1 * e.length + o); (s = h.exec(t)) !== null; ) {
-        if (i = s[1] || s[2] || s[3] || s[4] || s[5] || s[6], !i || (l = [...i].length, l !== o)) continue;
+      let r = [...s[0]].length - 1, o, a, p = r, c = this.rules.inline.delRDelim, u = De(this, t), d = t.length - e.length + r;
+      if (u < d) return;
+      t = t.slice(-1 * e.length + r);
+      let k = u - d;
+      for (c.lastIndex = 0; (s = c.exec(t)) !== null && !(s.index > k); ) {
+        if (o = s[1] || s[2] || s[3] || s[4] || s[5] || s[6], !o || (a = [...o].length, a !== r)) continue;
         if (s[3] || s[4]) {
-          u += l;
+          p += a;
           continue;
         }
-        if (u -= l, u > 0) continue;
-        l = Math.min(l, l + u);
-        let p = [...s[0]][0].length, d = e.slice(0, o + s.index + p + l), g = d.slice(o, -o);
-        return { type: "del", raw: d, text: g, tokens: this.lexer.inlineTokens(g) };
+        if (p -= a, p > 0) continue;
+        a = Math.min(a, a + p);
+        let g = [...s[0]][0].length, b = e.slice(0, r + s.index + g + a), f2 = b.slice(r, -r);
+        return { type: "del", raw: b, text: f2, tokens: this.lexer.inlineTokens(f2) };
       }
     }
   }
@@ -3121,10 +3436,10 @@ ${f2}`) ? `    ${Z2.replace(/^ {0,3}/, "")}` : f2;
       let n, s;
       if (t[2] === "@") n = t[0], s = "mailto:" + n;
       else {
-        let r;
+        let i;
         do
-          r = t[0], t[0] = this.rules.inline._backpedal.exec(t[0])?.[0] ?? "";
-        while (r !== t[0]);
+          i = t[0], t[0] = this.rules.inline._backpedal.exec(t[0])?.[0] ?? "";
+        while (i !== t[0]);
         n = t[0], t[1] === "www." ? s = "http://" + t[0] : s = t[0];
       }
       return { type: "link", raw: t[0], text: n, href: s, autolink: true, tokens: [{ type: "text", raw: n, text: n }] };
@@ -3134,11 +3449,11 @@ ${f2}`) ? `    ${Z2.replace(/^ {0,3}/, "")}` : f2;
     let t = this.rules.inline.text.exec(e);
     if (t) {
       let n = this.lexer.state.inRawBlock;
-      return { type: "text", raw: t[0], text: n ? t[0] : Se(t[0]), escaped: n };
+      return { type: "text", raw: t[0], text: n ? t[0] : Ee(t[0]), escaped: n };
     }
   }
 };
-var O = class a {
+var O = class l {
   tokens;
   options;
   state;
@@ -3146,17 +3461,17 @@ var O = class a {
   tokenizer;
   constructor(e) {
     this.tokens = [], this.tokens.links = /* @__PURE__ */ Object.create(null), this.options = e || y, this.options.tokenizer = this.options.tokenizer || new _(), this.tokenizer = this.options.tokenizer, this.tokenizer.options = this.options, this.tokenizer.lexer = this, this.inlineQueue = [], this.state = { inLink: false, inRawBlock: false, linkEmitted: false, linkParenPossible: true, top: true };
-    let t = { other: T, block: X.normal, inline: G.normal };
-    this.options.pedantic ? (t.block = X.pedantic, t.inline = G.pedantic) : this.options.gfm && (t.block = X.gfm, this.options.breaks ? t.inline = G.breaks : t.inline = G.gfm), this.tokenizer.rules = t;
+    let t = { other: T, block: V.normal, inline: N.normal };
+    this.options.pedantic ? (t.block = V.pedantic, t.inline = N.pedantic) : this.options.gfm && (t.block = V.gfm, this.options.breaks ? t.inline = N.breaks : t.inline = N.gfm), this.tokenizer.rules = t;
   }
   static get rules() {
-    return { block: X, inline: G };
+    return { block: V, inline: N };
   }
   static lex(e, t) {
-    return new a(t).lex(e);
+    return new l(t).lex(e);
   }
   static lexInline(e, t) {
-    return new a(t).inlineTokens(e);
+    return new l(t).inlineTokens(e);
   }
   lex(e) {
     e = e.replace(T.carriageReturn, `
@@ -3168,30 +3483,33 @@ var O = class a {
     return this.inlineQueue = [], this.tokens;
   }
   blockTokens(e, t = [], n = false) {
-    this.tokenizer.lexer = this, this.options.pedantic && (e = e.replace(T.tabCharGlobal, "    ").replace(T.spaceLine, ""));
-    let s = 1 / 0;
+    this.tokenizer.lexer = this;
+    let s = this.state.lastToken;
+    this.options.pedantic && (e = e.replace(T.tabCharGlobal, "    ").replace(T.spaceLine, ""));
+    let i = 1 / 0;
     for (; e; ) {
-      if (e.length < s) s = e.length;
+      if (e.length < i) i = e.length;
       else {
         this.infiniteLoopError(e.charCodeAt(0));
         break;
       }
+      this.state.lastToken = t.at(-1);
       let r;
-      if (this.options.extensions?.block?.some((i) => (r = i.call({ lexer: this }, e, t)) ? (e = e.substring(r.raw.length), t.push(r), true) : false)) continue;
+      if (this.options.extensions?.block?.some((a) => (r = a.call({ lexer: this }, e, t)) ? (e = e.substring(r.raw.length), t.push(r), true) : false)) continue;
       if (r = this.tokenizer.space(e)) {
         e = e.substring(r.raw.length);
-        let i = t.at(-1);
-        r.raw.length === 1 && i !== void 0 ? i.raw += `
+        let a = t.at(-1);
+        r.raw.length === 1 && a !== void 0 ? a.raw += `
 ` : t.push(r);
         continue;
       }
       if (r = this.tokenizer.code(e)) {
         e = e.substring(r.raw.length);
-        let i = t.at(-1);
-        i?.type === "paragraph" || i?.type === "text" ? (i.raw += (i.raw.endsWith(`
+        let a = t.at(-1);
+        a?.type === "paragraph" || a?.type === "text" ? (a.raw += (a.raw.endsWith(`
 `) ? "" : `
-`) + r.raw, i.text += `
-` + r.text, this.inlineQueue.at(-1).src = i.text) : t.push(r);
+`) + r.raw, a.text += `
+` + r.text, this.inlineQueue.at(-1).src = a.text) : t.push(r);
         continue;
       }
       if (r = this.tokenizer.fences(e)) {
@@ -3220,11 +3538,11 @@ var O = class a {
       }
       if (r = this.tokenizer.def(e)) {
         e = e.substring(r.raw.length);
-        let i = t.at(-1);
-        i?.type === "paragraph" || i?.type === "text" ? (i.raw += (i.raw.endsWith(`
+        let a = t.at(-1);
+        a?.type === "paragraph" || a?.type === "text" ? (a.raw += (a.raw.endsWith(`
 `) ? "" : `
-`) + r.raw, i.text += `
-` + r.raw, this.inlineQueue.at(-1).src = i.text) : (this.tokens.links[r.tag] || (this.tokens.links[r.tag] = { href: r.href, title: r.title }), t.push(r));
+`) + r.raw, a.text += `
+` + r.raw, this.inlineQueue.at(-1).src = a.text) : (this.tokens.links[r.tag] || (this.tokens.links[r.tag] = { href: r.href, title: r.title }), t.push(r));
         continue;
       }
       if (r = this.tokenizer.table(e)) {
@@ -3237,26 +3555,26 @@ var O = class a {
       }
       let o = e;
       if (this.options.extensions?.startBlock) {
-        let i = 1 / 0, l = e.slice(1), u;
-        this.options.extensions.startBlock.forEach((h) => {
-          u = h.call({ lexer: this }, l), typeof u == "number" && u >= 0 && (i = Math.min(i, u));
-        }), i < 1 / 0 && i >= 0 && (o = e.substring(0, i + 1));
+        let a = 1 / 0, p = e.slice(1), c;
+        this.options.extensions.startBlock.forEach((u) => {
+          c = u.call({ lexer: this }, p), typeof c == "number" && c >= 0 && (a = Math.min(a, c));
+        }), a < 1 / 0 && a >= 0 && (o = e.substring(0, a + 1));
       }
       if (this.state.top && (r = this.tokenizer.paragraph(o))) {
-        let i = t.at(-1);
-        n && i?.type === "paragraph" ? (i.raw += (i.raw.endsWith(`
+        let a = t.at(-1);
+        n && a?.type === "paragraph" ? (a.raw += (a.raw.endsWith(`
 `) ? "" : `
-`) + r.raw, i.text += `
-` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = i.text) : t.push(r), n = o.length !== e.length, e = e.substring(r.raw.length);
+`) + r.raw, a.text += `
+` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = a.text) : t.push(r), n = o.length !== e.length, e = e.substring(r.raw.length);
         continue;
       }
       if (r = this.tokenizer.text(e)) {
         e = e.substring(r.raw.length);
-        let i = t.at(-1);
-        i?.type === "text" ? (i.raw += (i.raw.endsWith(`
+        let a = t.at(-1);
+        a?.type === "text" ? (a.raw += (a.raw.endsWith(`
 `) ? "" : `
-`) + r.raw, i.text += `
-` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = i.text) : t.push(r);
+`) + r.raw, a.text += `
+` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = a.text) : t.push(r);
         continue;
       }
       if (e) {
@@ -3264,7 +3582,7 @@ var O = class a {
         break;
       }
     }
-    return this.state.top = true, t;
+    return this.state.top = true, this.state.lastToken = s, t;
   }
   inline(e, t = []) {
     return this.inlineQueue.push({ src: e, tokens: t }), t;
@@ -3274,8 +3592,8 @@ var O = class a {
     let t = this.tokenizer.rules.inline.link;
     for (let n of e.matchAll(this.tokenizer.rules.inline.blockSkip)) if (t.test(n[0]) && e.charAt(n.index - 1) !== "!") return true;
     for (let n of e.matchAll(this.tokenizer.rules.inline.reflinkSearch)) {
-      let s = n[0], r = s.lastIndexOf("[");
-      if (!(s.charAt(0) === "!" || !Object.hasOwn(this.tokens.links, N(s.slice(r + 1, -1)))) && !(r > 1 && this.linkInText(s.slice(1, r - 1)))) return true;
+      let s = n[0], i = s.lastIndexOf("[");
+      if (!(s.charAt(0) === "!" || !Object.hasOwn(this.tokens.links, Q(s.slice(i + 1, -1)))) && !(i > 1 && this.linkInText(s.slice(1, i - 1)))) return true;
     }
     return false;
   }
@@ -3290,69 +3608,78 @@ var O = class a {
     }
   }
   #e(e, t) {
-    let n = e.includes("*") || e.includes("_") || e.includes("~") || this.options.hooks?.emStrongMask || this.tokenizer.emStrong !== _.prototype.emStrong || this.tokenizer.del !== _.prototype.del ? this.#t(e) : e, s = false, r = "", o = 1 / 0;
+    let n = e.includes("*") || e.includes("_") || e.includes("~") || this.options.hooks?.emStrongMask || this.tokenizer.emStrong !== _.prototype.emStrong || this.tokenizer.del !== _.prototype.del ? this.#r(e) : e;
+    ze(this.tokenizer, n);
+    try {
+      return this.#t(e, n, t);
+    } finally {
+      Me(this.tokenizer);
+    }
+  }
+  #t(e, t, n) {
+    let s = false, i = "", r = 1 / 0;
     for (; e; ) {
-      if (e.length < o) o = e.length;
+      if (e.length < r) r = e.length;
       else {
         this.infiniteLoopError(e.charCodeAt(0));
         break;
       }
-      s || (r = ""), s = false;
-      let i;
-      if (this.options.extensions?.inline?.some((u) => (i = u.call({ lexer: this }, e, t)) ? (e = e.substring(i.raw.length), t.push(i), true) : false)) continue;
-      if (i = this.tokenizer.escape(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      s || (i = ""), s = false;
+      let o;
+      if (this.options.extensions?.inline?.some((p) => (o = p.call({ lexer: this }, e, n)) ? (e = e.substring(o.raw.length), n.push(o), true) : false)) continue;
+      if (o = this.tokenizer.escape(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.tag(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.tag(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.link(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.link(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.reflink(e, this.tokens.links)) {
-        e = e.substring(i.raw.length);
-        let u = t.at(-1);
-        i.type === "text" && u?.type === "text" ? (u.raw += i.raw, u.text += i.text) : t.push(i);
+      if (o = this.tokenizer.reflink(e, this.tokens.links)) {
+        e = e.substring(o.raw.length);
+        let p = n.at(-1);
+        o.type === "text" && p?.type === "text" ? (p.raw += o.raw, p.text += o.text) : n.push(o);
         continue;
       }
-      if (i = this.tokenizer.emStrong(e, n, r)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.emStrong(e, t, i)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.codespan(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.codespan(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.br(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.br(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.del(e, n, r)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.del(e, t, i)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (i = this.tokenizer.autolink(e)) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (o = this.tokenizer.autolink(e)) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      if (!this.state.inLink && (i = this.tokenizer.url(e))) {
-        e = e.substring(i.raw.length), t.push(i);
+      if (!this.state.inLink && (o = this.tokenizer.url(e))) {
+        e = e.substring(o.raw.length), n.push(o);
         continue;
       }
-      let l = e;
+      let a = e;
       if (this.options.extensions?.startInline) {
-        let u = 1 / 0, h = e.slice(1), p;
+        let p = 1 / 0, c = e.slice(1), u;
         this.options.extensions.startInline.forEach((d) => {
-          p = d.call({ lexer: this }, h), typeof p == "number" && p >= 0 && (u = Math.min(u, p));
-        }), u < 1 / 0 && u >= 0 && (l = e.substring(0, u + 1));
+          u = d.call({ lexer: this }, c), typeof u == "number" && u >= 0 && (p = Math.min(p, u));
+        }), p < 1 / 0 && p >= 0 && (a = e.substring(0, p + 1));
       }
-      if (i = this.tokenizer.inlineText(l)) {
-        e = e.substring(i.raw.length), i.raw.slice(-1) !== "_" && (r = i.raw.slice(-1)), s = true;
-        let u = t.at(-1);
-        u?.type === "text" ? (u.raw += i.raw, u.text += i.text) : t.push(i);
+      if (o = this.tokenizer.inlineText(a)) {
+        e = e.substring(o.raw.length), o.raw.slice(-1) !== "_" && (i = o.raw.slice(-1)), s = true;
+        let p = n.at(-1);
+        p?.type === "text" ? (p.raw += o.raw, p.text += o.text) : n.push(o);
         continue;
       }
       if (e) {
@@ -3360,26 +3687,39 @@ var O = class a {
         break;
       }
     }
-    return t;
+    return n;
   }
-  #t(e) {
+  #n(e) {
+    let { blockSkip: t, tag: n, autolink: s } = this.tokenizer.rules.inline, i = "", r = 0, o;
+    for (t.lastIndex = 0; o = t.exec(e); ) {
+      let a = o.index + (o[2] ? o[2].length : 0), p = o.index + o[0].length;
+      if (e.charAt(a) === "<") {
+        let c = e.slice(a), u = n.exec(c) || s.exec(c);
+        if (!u) {
+          t.lastIndex = a + 1;
+          continue;
+        }
+        p = a + u[0].length, t.lastIndex = p;
+      }
+      i += e.slice(r, a) + "[" + "a".repeat(p - a - 2) + "]", r = p;
+    }
+    return i + e.slice(r);
+  }
+  #r(e) {
     let t = e;
     if (this.tokens.links && e.includes("[")) {
-      let n = this.tokenizer.rules.inline.reflinkSearch, s = (r) => {
-        let o = r.lastIndexOf("[");
-        if (!Object.hasOwn(this.tokens.links, N(r.slice(o + 1, -1)))) return r;
-        if (o > 1 && r.charAt(0) !== "!") {
-          let i = r.slice(1, o - 1);
-          if (this.linkInText(i)) return "[" + i.replace(n, s) + "][" + "a".repeat(r.length - o - 2) + "]";
+      let n = this.tokenizer.rules.inline.reflinkSearch, s = (i) => {
+        let r = i.lastIndexOf("[");
+        if (!Object.hasOwn(this.tokens.links, Q(i.slice(r + 1, -1)))) return i;
+        if (r > 1 && i.charAt(0) !== "!") {
+          let o = i.slice(1, r - 1);
+          if (this.linkInText(o)) return "[" + o.replace(n, s) + "][" + "a".repeat(i.length - r - 2) + "]";
         }
-        return "[" + "a".repeat(r.length - 2) + "]";
+        return "[" + "a".repeat(i.length - 2) + "]";
       };
       t = t.replace(n, s);
     }
-    return t = t.replace(this.tokenizer.rules.inline.anyPunctuationOutsideCode, (n, s, r) => r ? "+".repeat(n.length) : s ? s + n.slice(s.length, -s.length).replace(/`/g, "+") + s : n), t = t.replace(this.tokenizer.rules.inline.blockSkip, (n, s, r) => {
-      let o = r ? r.length : 0;
-      return n.slice(0, o) + "[" + "a".repeat(n.length - o - 2) + "]";
-    }), t = this.options.hooks?.emStrongMask?.call({ lexer: this }, t) ?? t, t;
+    return t = t.replace(this.tokenizer.rules.inline.anyPunctuationOutsideCode, (n, s, i) => i ? "+".repeat(n.length) : s ? s + n.slice(s.length, -s.length).replace(/`/g, "+") + s : n), t = this.#n(t), t = this.options.hooks?.emStrongMask?.call({ lexer: this }, t) ?? t, t;
   }
   infiniteLoopError(e) {
     let t = "Infinite loop on byte: " + e;
@@ -3387,7 +3727,7 @@ var O = class a {
     else throw new Error(t);
   }
 };
-var L = class {
+var C = class {
   options;
   parser;
   constructor(e) {
@@ -3397,10 +3737,10 @@ var L = class {
     return "";
   }
   code({ text: e, lang: t, escaped: n }) {
-    let s = (t || "").match(T.notSpaceStart)?.[0], r = e ? e.replace(T.endingNewline, "") + `
+    let s = (t || "").match(T.notSpaceStart)?.[0], i = e ? e.replace(T.endingNewline, "") + `
 ` : "";
-    return s ? '<pre><code class="language-' + P(s) + '">' + (n ? r : P(r, true)) + `</code></pre>
-` : "<pre><code>" + (n ? r : P(r, true)) + `</code></pre>
+    return s ? '<pre><code class="language-' + P(s) + '">' + (n ? i : P(i, true)) + `</code></pre>
+` : "<pre><code>" + (n ? i : P(i, true)) + `</code></pre>
 `;
   }
   blockquote({ tokens: e }) {
@@ -3424,13 +3764,13 @@ ${this.parser.parse(e)}</blockquote>
   }
   list(e) {
     let t = e.ordered, n = e.start, s = "";
-    for (let i = 0; i < e.items.length; i++) {
-      let l = e.items[i];
-      s += this.listitem(l);
+    for (let o = 0; o < e.items.length; o++) {
+      let a = e.items[o];
+      s += this.listitem(a);
     }
-    let r = t ? "ol" : "ul", o = t && n !== 1 ? ' start="' + n + '"' : "";
-    return "<" + r + o + `>
-` + s + "</" + r + `>
+    let i = t ? "ol" : "ul", r = t && n !== 1 ? ' start="' + n + '"' : "";
+    return "<" + i + r + `>
+` + s + "</" + i + `>
 `;
   }
   listitem(e) {
@@ -3446,13 +3786,13 @@ ${this.parser.parse(e)}</blockquote>
   }
   table(e) {
     let t = "", n = "";
-    for (let r = 0; r < e.header.length; r++) n += this.tablecell(e.header[r]);
+    for (let i = 0; i < e.header.length; i++) n += this.tablecell(e.header[i]);
     t += this.tablerow({ text: n });
     let s = "";
-    for (let r = 0; r < e.rows.length; r++) {
-      let o = e.rows[r];
+    for (let i = 0; i < e.rows.length; i++) {
+      let r = e.rows[i];
       n = "";
-      for (let i = 0; i < o.length; i++) n += this.tablecell(o[i]);
+      for (let o = 0; o < r.length; o++) n += this.tablecell(r[o]);
       s += this.tablerow({ text: n });
     }
     return s && (s = `<tbody>${s}</tbody>`), `<table>
@@ -3486,26 +3826,26 @@ ${e}</tr>
   del({ tokens: e }) {
     return `<del>${this.parser.parseInline(e)}</del>`;
   }
-  link({ href: e, title: t, text: n, tokens: s, autolink: r }) {
-    let o = r ? P(n, true) : this.parser.parseInline(s), i = le(e);
-    if (i === null) return o;
-    e = P(i, r);
-    let l = '<a href="' + e + '"';
-    return t && (l += ' title="' + P(t) + '"'), l += ">" + o + "</a>", l;
+  link({ href: e, title: t, text: n, tokens: s, autolink: i }) {
+    let r = i ? P(n, true) : this.parser.parseInline(s), o = de(e);
+    if (o === null) return r;
+    e = P(o, i);
+    let a = '<a href="' + e + '"';
+    return t && (a += ' title="' + P(t) + '"'), a += ">" + r + "</a>", a;
   }
   image({ href: e, title: t, text: n, tokens: s }) {
     s && (n = this.parser.parseInline(s, this.parser.textRenderer));
-    let r = le(e);
-    if (r === null) return P(n);
-    e = r;
-    let o = `<img src="${P(e)}" alt="${P(n)}"`;
-    return t && (o += ` title="${P(t)}"`), o += ">", o;
+    let i = de(e);
+    if (i === null) return P(n);
+    e = i;
+    let r = `<img src="${P(e)}" alt="${P(n)}"`;
+    return t && (r += ` title="${P(t)}"`), r += ">", r;
   }
   text(e) {
     return "tokens" in e && e.tokens ? this.parser.parseInline(e.tokens) : "escaped" in e && e.escaped ? e.text : P(e.text);
   }
 };
-var M = class {
+var E = class {
   parser;
   strong({ text: e, tokens: t }) {
     return t ? this.parser.parseInline(t, this) : e;
@@ -3532,24 +3872,25 @@ var M = class {
     return t ? this.parser.parseInline(t, this) : e;
   }
   br() {
-    return "";
+    return `
+`;
   }
   checkbox({ raw: e }) {
     return e;
   }
 };
-var w = class a2 {
+var w = class l2 {
   options;
   renderer;
   textRenderer;
   constructor(e) {
-    this.options = e || y, this.options.renderer = this.options.renderer || new L(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new M(), this.textRenderer.parser = this;
+    this.options = e || y, this.options.renderer = this.options.renderer || new C(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new E(), this.textRenderer.parser = this;
   }
   static parse(e, t) {
-    return new a2(t).parse(e);
+    return new l2(t).parse(e);
   }
   static parseInline(e, t) {
-    return new a2(t).parseInline(e);
+    return new l2(t).parseInline(e);
   }
   parse(e) {
     this.renderer.parser = this;
@@ -3557,66 +3898,66 @@ var w = class a2 {
     for (let n = 0; n < e.length; n++) {
       let s = e[n];
       if (this.options.extensions?.renderers?.[s.type]) {
-        let o = s, i = this.options.extensions.renderers[o.type].call({ parser: this }, o);
-        if (i !== false || !["space", "hr", "heading", "code", "table", "blockquote", "list", "checkbox", "html", "def", "paragraph", "text"].includes(o.type)) {
-          t += i || "";
+        let r = s, o = this.options.extensions.renderers[r.type].call({ parser: this }, r);
+        if (o !== false || !["space", "hr", "heading", "code", "table", "blockquote", "list", "checkbox", "html", "def", "paragraph", "text"].includes(r.type)) {
+          t += o === false ? "" : o ?? "";
           continue;
         }
       }
-      let r = s;
-      switch (r.type) {
+      let i = s;
+      switch (i.type) {
         case "space": {
-          t += this.renderer.space(r);
+          t += this.renderer.space(i);
           break;
         }
         case "hr": {
-          t += this.renderer.hr(r);
+          t += this.renderer.hr(i);
           break;
         }
         case "heading": {
-          t += this.renderer.heading(r);
+          t += this.renderer.heading(i);
           break;
         }
         case "code": {
-          t += this.renderer.code(r);
+          t += this.renderer.code(i);
           break;
         }
         case "table": {
-          t += this.renderer.table(r);
+          t += this.renderer.table(i);
           break;
         }
         case "blockquote": {
-          t += this.renderer.blockquote(r);
+          t += this.renderer.blockquote(i);
           break;
         }
         case "list": {
-          t += this.renderer.list(r);
+          t += this.renderer.list(i);
           break;
         }
         case "checkbox": {
-          t += this.renderer.checkbox(r);
+          t += this.renderer.checkbox(i);
           break;
         }
         case "html": {
-          t += this.renderer.html(r);
+          t += this.renderer.html(i);
           break;
         }
         case "def": {
-          t += this.renderer.def(r);
+          t += this.renderer.def(i);
           break;
         }
         case "paragraph": {
-          t += this.renderer.paragraph(r);
+          t += this.renderer.paragraph(i);
           break;
         }
         case "text": {
-          t += this.renderer.text(r);
+          t += this.renderer.text(i);
           break;
         }
         default: {
-          let o = 'Token with "' + r.type + '" type was not found.';
-          if (this.options.silent) return console.error(o), "";
-          throw new Error(o);
+          let r = 'Token with "' + i.type + '" type was not found.';
+          if (this.options.silent) return console.error(r), "";
+          throw new Error(r);
         }
       }
     }
@@ -3626,71 +3967,71 @@ var w = class a2 {
     this.renderer.parser = this;
     let n = "";
     for (let s = 0; s < e.length; s++) {
-      let r = e[s];
-      if (this.options.extensions?.renderers?.[r.type]) {
-        let i = this.options.extensions.renderers[r.type].call({ parser: this }, r);
-        if (i !== false || !["escape", "html", "link", "image", "checkbox", "strong", "em", "codespan", "br", "del", "text"].includes(r.type)) {
-          n += i || "";
+      let i = e[s];
+      if (this.options.extensions?.renderers?.[i.type]) {
+        let o = this.options.extensions.renderers[i.type].call({ parser: this }, i);
+        if (o !== false || !["escape", "html", "link", "image", "checkbox", "strong", "em", "codespan", "br", "del", "text"].includes(i.type)) {
+          n += o === false ? "" : o ?? "";
           continue;
         }
       }
-      let o = r;
-      switch (o.type) {
+      let r = i;
+      switch (r.type) {
         case "escape": {
-          n += t.text(o);
+          n += t.text(r);
           break;
         }
         case "html": {
-          n += t.html(o);
+          n += t.html(r);
           break;
         }
         case "link": {
-          n += t.link(o);
+          n += t.link(r);
           break;
         }
         case "image": {
-          n += t.image(o);
+          n += t.image(r);
           break;
         }
         case "checkbox": {
-          n += t.checkbox(o);
+          n += t.checkbox(r);
           break;
         }
         case "strong": {
-          n += t.strong(o);
+          n += t.strong(r);
           break;
         }
         case "em": {
-          n += t.em(o);
+          n += t.em(r);
           break;
         }
         case "codespan": {
-          n += t.codespan(o);
+          n += t.codespan(r);
           break;
         }
         case "br": {
-          n += t.br(o);
+          n += t.br(r);
           break;
         }
         case "del": {
-          n += t.del(o);
+          n += t.del(r);
           break;
         }
         case "text": {
-          n += t.text(o);
+          n += t.text(r);
           break;
         }
         default: {
-          let i = 'Token with "' + o.type + '" type was not found.';
-          if (this.options.silent) return console.error(i), "";
-          throw new Error(i);
+          let o = 'Token with "' + r.type + '" type was not found.';
+          if (this.options.silent) return console.error(o), "";
+          throw new Error(o);
         }
       }
     }
     return n;
   }
 };
-var A = class {
+var I = class {
   options;
   block;
   constructor(e) {
@@ -3717,122 +4058,122 @@ var A = class {
     return e ? w.parse : w.parseInline;
   }
 };
-function D(a3, e) {
-  if (Array.isArray(e)) for (let t = 0; t < e.length; t++) a3.push(e[t]);
-  else a3.push(e);
+function z(l3, e) {
+  if (Array.isArray(e)) for (let t = 0; t < e.length; t++) l3.push(e[t]);
+  else l3.push(e);
 }
-var J = class {
-  defaults = v();
+var Y = class {
+  defaults = j();
   options = this.setOptions;
   parse = this.parseMarkdown(true);
   parseInline = this.parseMarkdown(false);
   Parser = w;
-  Renderer = L;
-  TextRenderer = M;
+  Renderer = C;
+  TextRenderer = E;
   Lexer = O;
   Tokenizer = _;
-  Hooks = A;
+  Hooks = I;
   constructor(...e) {
     this.use(...e);
   }
   walkTokens(e, t) {
     let n = [];
-    for (let s of e) switch (D(n, t.call(this, s)), s.type) {
+    for (let s of e) switch (z(n, t.call(this, s)), s.type) {
       case "table": {
-        let r = s;
-        for (let o of r.header) D(n, this.walkTokens(o.tokens, t));
-        for (let o of r.rows) for (let i of o) D(n, this.walkTokens(i.tokens, t));
+        let i = s;
+        for (let r of i.header) z(n, this.walkTokens(r.tokens, t));
+        for (let r of i.rows) for (let o of r) z(n, this.walkTokens(o.tokens, t));
         break;
       }
       case "list": {
-        let r = s;
-        D(n, this.walkTokens(r.items, t));
+        let i = s;
+        z(n, this.walkTokens(i.items, t));
         break;
       }
       default: {
-        let r = s;
-        this.defaults.extensions?.childTokens?.[r.type] ? this.defaults.extensions.childTokens[r.type].forEach((o) => {
-          let i = r[o].flat(1 / 0);
-          D(n, this.walkTokens(i, t));
-        }) : r.tokens && D(n, this.walkTokens(r.tokens, t));
+        let i = s;
+        this.defaults.extensions?.childTokens?.[i.type] ? this.defaults.extensions.childTokens[i.type].forEach((r) => {
+          let o = i[r].flat(1 / 0);
+          z(n, this.walkTokens(o, t));
+        }) : i.tokens && z(n, this.walkTokens(i.tokens, t));
       }
     }
     return n;
   }
   use(...e) {
-    let t = this.defaults.extensions || { renderers: {}, childTokens: {} };
+    let t = this.defaults.extensions || { renderers: /* @__PURE__ */ Object.create(null), childTokens: /* @__PURE__ */ Object.create(null) };
     return e.forEach((n) => {
       let s = { ...n };
-      if (s.async = this.defaults.async || s.async || false, n.extensions && (n.extensions.forEach((r) => {
-        if (!r.name) throw new Error("extension name required");
-        if ("renderer" in r) {
-          let o = t.renderers[r.name];
-          o ? t.renderers[r.name] = function(...i) {
-            let l = r.renderer.apply(this, i);
-            return l === false && (l = o.apply(this, i)), l;
-          } : t.renderers[r.name] = r.renderer;
+      if (s.async = this.defaults.async || s.async || false, n.extensions && (n.extensions.forEach((i) => {
+        if (!i.name) throw new Error("extension name required");
+        if ("renderer" in i) {
+          let r = t.renderers[i.name];
+          r ? t.renderers[i.name] = function(...o) {
+            let a = i.renderer.apply(this, o);
+            return a === false && (a = r.apply(this, o)), a;
+          } : t.renderers[i.name] = i.renderer;
         }
-        if ("tokenizer" in r) {
-          if (!r.level || r.level !== "block" && r.level !== "inline") throw new Error("extension level must be 'block' or 'inline'");
-          let o = t[r.level];
-          o ? o.unshift(r.tokenizer) : t[r.level] = [r.tokenizer], r.start && (r.level === "block" ? t.startBlock ? t.startBlock.push(r.start) : t.startBlock = [r.start] : r.level === "inline" && (t.startInline ? t.startInline.push(r.start) : t.startInline = [r.start]));
+        if ("tokenizer" in i) {
+          if (!i.level || i.level !== "block" && i.level !== "inline") throw new Error("extension level must be 'block' or 'inline'");
+          let r = t[i.level];
+          r ? r.unshift(i.tokenizer) : t[i.level] = [i.tokenizer], i.start && (i.level === "block" ? t.startBlock ? t.startBlock.push(i.start) : t.startBlock = [i.start] : i.level === "inline" && (t.startInline ? t.startInline.push(i.start) : t.startInline = [i.start]));
         }
-        "childTokens" in r && r.childTokens && (t.childTokens[r.name] = r.childTokens);
+        "childTokens" in i && i.childTokens && (t.childTokens[i.name] = i.childTokens);
       }), s.extensions = t), n.renderer) {
-        let r = this.defaults.renderer || new L(this.defaults);
-        for (let o in n.renderer) {
-          if (!(o in r)) throw new Error(`renderer '${o}' does not exist`);
-          if (["options", "parser"].includes(o)) continue;
-          let i = o, l = n.renderer[i], u = r[i];
-          r[i] = (...h) => {
-            let p = l.apply(r, h);
-            return p === false && (p = u.apply(r, h)), p || "";
+        let i = this.defaults.renderer || new C(this.defaults);
+        for (let r in n.renderer) {
+          if (!(r in i)) throw new Error(`renderer '${r}' does not exist`);
+          if (["options", "parser"].includes(r)) continue;
+          let o = r, a = n.renderer[o], p = i[o];
+          i[o] = (...c) => {
+            let u = a.apply(i, c);
+            return u === false && (u = p.apply(i, c)), u === false ? "" : u ?? "";
           };
         }
-        s.renderer = r;
+        s.renderer = i;
       }
       if (n.tokenizer) {
-        let r = this.defaults.tokenizer || new _(this.defaults);
-        for (let o in n.tokenizer) {
-          if (!(o in r)) throw new Error(`tokenizer '${o}' does not exist`);
-          if (["options", "rules", "lexer"].includes(o)) continue;
-          let i = o, l = n.tokenizer[i], u = r[i];
-          r[i] = (...h) => {
-            let p = l.apply(r, h);
-            return p === false && (p = u.apply(r, h)), p;
+        let i = this.defaults.tokenizer || new _(this.defaults);
+        for (let r in n.tokenizer) {
+          if (!(r in i)) throw new Error(`tokenizer '${r}' does not exist`);
+          if (["options", "rules", "lexer"].includes(r)) continue;
+          let o = r, a = n.tokenizer[o], p = i[o];
+          i[o] = (...c) => {
+            let u = a.apply(i, c);
+            return u === false && (u = p.apply(i, c)), u;
           };
         }
-        s.tokenizer = r;
+        s.tokenizer = i;
       }
       if (n.hooks) {
-        let r = this.defaults.hooks || new A();
-        for (let o in n.hooks) {
-          if (!(o in r)) throw new Error(`hook '${o}' does not exist`);
-          if (["options", "block"].includes(o)) continue;
-          let i = o, l = n.hooks[i], u = r[i];
-          A.passThroughHooks.has(o) ? r[i] = (h) => {
-            if (r.options.async && A.passThroughHooksRespectAsync.has(o)) return (async () => {
-              let d = await l.call(r, h);
-              return u.call(r, d);
+        let i = this.defaults.hooks || new I();
+        for (let r in n.hooks) {
+          if (!(r in i)) throw new Error(`hook '${r}' does not exist`);
+          if (["options", "block"].includes(r)) continue;
+          let o = r, a = n.hooks[o], p = i[o];
+          I.passThroughHooks.has(r) ? i[o] = (c) => {
+            if (i.options.async && I.passThroughHooksRespectAsync.has(r)) return (async () => {
+              let d = await a.call(i, c);
+              return p.call(i, d);
             })();
-            let p = l.call(r, h);
-            return u.call(r, p);
-          } : r[i] = (...h) => {
-            if (r.options.async) return (async () => {
-              let d = await l.apply(r, h);
-              return d === false && (d = await u.apply(r, h)), d;
+            let u = a.call(i, c);
+            return p.call(i, u);
+          } : i[o] = (...c) => {
+            if (i.options.async) return (async () => {
+              let d = await a.apply(i, c);
+              return d === false && (d = await p.apply(i, c)), d;
             })();
-            let p = l.apply(r, h);
-            return p === false && (p = u.apply(r, h)), p;
+            let u = a.apply(i, c);
+            return u === false && (u = p.apply(i, c)), u;
           };
         }
-        s.hooks = r;
+        s.hooks = i;
       }
       if (n.walkTokens) {
-        let r = this.defaults.walkTokens, o = n.walkTokens;
-        s.walkTokens = function(i) {
-          let l = [];
-          return l.push(o.call(this, i)), r && D(l, r.call(this, i)), l;
+        let i = this.defaults.walkTokens, r = n.walkTokens;
+        s.walkTokens = function(o) {
+          let a = [];
+          return z(a, r.call(this, o)), i && z(a, i.call(this, o)), a;
         };
       }
       this.defaults = { ...this.defaults, ...s };
@@ -3849,24 +4190,24 @@ var J = class {
   }
   parseMarkdown(e) {
     return (n, s) => {
-      let r = { ...s }, o = { ...this.defaults, ...r }, i = this.onError(!!o.silent, !!o.async);
-      if (this.defaults.async === true && r.async === false) return i(new Error("marked(): The async option was set to true by an extension. Remove async: false from the parse options object to return a Promise."));
-      if (typeof n > "u" || n === null) return i(new Error("marked(): input parameter is undefined or null"));
-      if (typeof n != "string") return i(new Error("marked(): input parameter is of type " + Object.prototype.toString.call(n) + ", string expected"));
-      if (o.hooks && (o.hooks.options = o, o.hooks.block = e), o.async) return (async () => {
-        let l = o.hooks ? await o.hooks.preprocess(n) : n, h = await (o.hooks ? await o.hooks.provideLexer(e) : e ? O.lex : O.lexInline)(l, o), p = o.hooks ? await o.hooks.processAllTokens(h) : h;
-        o.walkTokens && await Promise.all(this.walkTokens(p, o.walkTokens));
-        let g = await (o.hooks ? await o.hooks.provideParser(e) : e ? w.parse : w.parseInline)(p, o);
-        return o.hooks ? await o.hooks.postprocess(g) : g;
-      })().catch(i);
+      let i = { ...s }, r = { ...this.defaults, ...i }, o = this.onError(!!r.silent, !!r.async);
+      if (this.defaults.async === true && i.async === false) return o(new Error("marked(): The async option was set to true by an extension. Remove async: false from the parse options object to return a Promise."));
+      if (typeof n > "u" || n === null) return o(new Error("marked(): input parameter is undefined or null"));
+      if (typeof n != "string") return o(new Error("marked(): input parameter is of type " + Object.prototype.toString.call(n) + ", string expected"));
+      if (r.hooks && (r.hooks.options = r, r.hooks.block = e), r.async) return (async () => {
+        let a = r.hooks ? await r.hooks.preprocess(n) : n, c = await (r.hooks ? await r.hooks.provideLexer(e) : e ? O.lex : O.lexInline)(a, r), u = r.hooks ? await r.hooks.processAllTokens(c) : c;
+        r.walkTokens && await Promise.all(this.walkTokens(u, r.walkTokens));
+        let k = await (r.hooks ? await r.hooks.provideParser(e) : e ? w.parse : w.parseInline)(u, r);
+        return r.hooks ? await r.hooks.postprocess(k) : k;
+      })().catch(o);
       try {
-        o.hooks && (n = o.hooks.preprocess(n));
-        let u = (o.hooks ? o.hooks.provideLexer(e) : e ? O.lex : O.lexInline)(n, o);
-        o.hooks && (u = o.hooks.processAllTokens(u)), o.walkTokens && this.walkTokens(u, o.walkTokens);
-        let p = (o.hooks ? o.hooks.provideParser(e) : e ? w.parse : w.parseInline)(u, o);
-        return o.hooks && (p = o.hooks.postprocess(p)), p;
-      } catch (l) {
-        return i(l);
+        r.hooks && (n = r.hooks.preprocess(n));
+        let p = (r.hooks ? r.hooks.provideLexer(e) : e ? O.lex : O.lexInline)(n, r);
+        r.hooks && (p = r.hooks.processAllTokens(p)), r.walkTokens && this.walkTokens(p, r.walkTokens);
+        let u = (r.hooks ? r.hooks.provideParser(e) : e ? w.parse : w.parseInline)(p, r);
+        return r.hooks && (u = r.hooks.postprocess(u)), u;
+      } catch (a) {
+        return o(a);
       }
     };
   }
@@ -3882,38 +4223,38 @@ Please report this to https://github.com/markedjs/marked.`, e) {
     };
   }
 };
-var q = new J();
-function m(a3, e) {
-  return q.parse(a3, e);
+var q = new Y();
+function x(l3, e) {
+  return q.parse(l3, e);
 }
-m.options = m.setOptions = function(a3) {
-  return q.setOptions(a3), m.defaults = q.defaults, ee(m.defaults), m;
+x.options = x.setOptions = function(l3) {
+  return q.setOptions(l3), x.defaults = q.defaults, ie(x.defaults), x;
 };
-m.getDefaults = v;
-m.defaults = y;
-function zt(...a3) {
-  return q.use(...a3), m.defaults = q.defaults, ee(m.defaults), m;
+x.getDefaults = j;
+x.defaults = y;
+function vt(...l3) {
+  return q.use(...l3), x.defaults = q.defaults, ie(x.defaults), x;
 }
-m.use = zt;
-m.walkTokens = function(a3, e) {
-  return q.walkTokens(a3, e);
+x.use = vt;
+x.walkTokens = function(l3, e) {
+  return q.walkTokens(l3, e);
 };
-m.parseInline = q.parseInline;
-m.Parser = w;
-m.parser = w.parse;
-m.Renderer = L;
-m.TextRenderer = M;
-m.Lexer = O;
-m.lexer = O.lex;
-m.Tokenizer = _;
-m.Hooks = A;
-m.parse = m;
-var Tn = m.options;
-var On = m.setOptions;
-var wn = m.walkTokens;
-var Pn = m.parseInline;
-var Sn = w.parse;
-var _n = O.lex;
+x.parseInline = q.parseInline;
+x.Parser = w;
+x.parser = w.parse;
+x.Renderer = C;
+x.TextRenderer = E;
+x.Lexer = O;
+x.lexer = O.lex;
+x.Tokenizer = _;
+x.Hooks = I;
+x.parse = x;
+var Ln = x.options;
+var Cn = x.setOptions;
+var In = x.walkTokens;
+var An = x.parseInline;
+var zn = w.parse;
+var Mn = O.lex;
 
 // src/themes/type-scale.js
 var SCALE = Object.freeze({ min: 0.8, max: 1.5, step: 0.05 });
@@ -4049,15 +4390,15 @@ function tokenize(str, maxWidth, size, opts) {
       out.push(ch);
       i++;
     } else if (/\s/u.test(ch)) {
-      let j = i;
-      while (j < chars.length && /\s/u.test(chars[j])) j++;
-      out.push(chars.slice(i, j).join(""));
-      i = j;
+      let j2 = i;
+      while (j2 < chars.length && /\s/u.test(chars[j2])) j2++;
+      out.push(chars.slice(i, j2).join(""));
+      i = j2;
     } else {
-      let j = i;
-      while (j < chars.length && !/\s/u.test(chars[j]) && !HAN_KANA.test(chars[j])) j++;
-      out.push(...runUnits(chars.slice(i, j).join(""), maxWidth, size, opts));
-      i = j;
+      let j2 = i;
+      while (j2 < chars.length && !/\s/u.test(chars[j2]) && !HAN_KANA.test(chars[j2])) j2++;
+      out.push(...runUnits(chars.slice(i, j2).join(""), maxWidth, size, opts));
+      i = j2;
     }
   }
   return out;
@@ -4083,7 +4424,7 @@ function wrap(str, maxWidth, size = 13, opts = {}) {
 }
 var ESC = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 function esc(str) {
-  return String(str ?? "").replace(/[&<>"']/g, (c2) => ESC[c2]);
+  return String(str ?? "").replace(/[&<>"']/g, (c) => ESC[c]);
 }
 
 // src/raw-html.js
@@ -4124,28 +4465,28 @@ function tagEnd(text2, from) {
   }
   return i < text2.length ? i + 1 : -1;
 }
-function readMatch(text2, m2) {
-  if (m2[1]) {
-    const end2 = m2[1] === "!--" ? -1 : text2.indexOf(">", m2.index);
-    return { reason: m2[1] === "!--" ? "comment" : "bogus", tag: { text: end2 === -1 ? m2[0] : text2.slice(m2.index, end2 + 1), label: m2[0] } };
+function readMatch(text2, m) {
+  if (m[1]) {
+    const end2 = m[1] === "!--" ? -1 : text2.indexOf(">", m.index);
+    return { reason: m[1] === "!--" ? "comment" : "bogus", tag: { text: end2 === -1 ? m[0] : text2.slice(m.index, end2 + 1), label: m[0] } };
   }
-  const end = tagEnd(text2, m2.index + m2[0].length);
-  return { reason: end === -1 ? "open" : null, tag: { text: end === -1 ? m2[0] : text2.slice(m2.index, end), close: m2[2] === "/", name: m2[3].toLowerCase() } };
+  const end = tagEnd(text2, m.index + m[0].length);
+  return { reason: end === -1 ? "open" : null, tag: { text: end === -1 ? m[0] : text2.slice(m.index, end), close: m[2] === "/", name: m[3].toLowerCase() } };
 }
 function mapTags(text2, decide, note2) {
   let out = "";
   let last = 0;
-  for (const m2 of text2.matchAll(SCAN)) {
-    if (m2.index < last || !m2[1] && !m2[3]) continue;
-    const { reason: reason2, tag } = readMatch(text2, m2);
-    out += text2.slice(last, m2.index) + (reason2 ? hide(tag, reason2, note2) : decide(tag));
-    last = m2.index + tag.text.length;
+  for (const m of text2.matchAll(SCAN)) {
+    if (m.index < last || !m[1] && !m[3]) continue;
+    const { reason: reason2, tag } = readMatch(text2, m);
+    out += text2.slice(last, m.index) + (reason2 ? hide(tag, reason2, note2) : decide(tag));
+    last = m.index + tag.text.length;
   }
   return out + text2.slice(last);
 }
 var readTag = (text2) => {
-  const m2 = /^<(\/?)([A-Za-z][^\s/>]*)/.exec(text2);
-  if (m2) return { text: text2, close: m2[1] === "/", name: m2[2].toLowerCase() };
+  const m = /^<(\/?)([A-Za-z][^\s/>]*)/.exec(text2);
+  if (m) return { text: text2, close: m[1] === "/", name: m[2].toLowerCase() };
   const bogus = /^<[?!](?!--)\[?\w*/.exec(text2);
   return bogus && { text: text2, label: bogus[0] };
 };
@@ -4224,11 +4565,11 @@ function relexReason(raw) {
     const comment = special[1] === "<!--";
     return comment && raw.includes("-->") ? null : { reason: comment ? "comment" : "bogus", at: special[1], label: special[1] };
   }
-  const m2 = OPENING.exec(raw);
-  if (!m2) return null;
-  const tag = { close: m2[1] === "/", name: m2[2].toLowerCase() };
+  const m = OPENING.exec(raw);
+  if (!m) return null;
+  const tag = { close: m[1] === "/", name: m[2].toLowerCase() };
   const reason2 = kind(tag.name, false) ?? (tag.name === "pre" && !tag.close && !/<\/pre>/i.test(raw) ? "unclosed" : null);
-  return reason2 && { reason: reason2, at: m2[0].trim(), label: shown(tag) };
+  return reason2 && { reason: reason2, at: m[0].trim(), label: shown(tag) };
 }
 function relex(token, { reason: reason2, at: at3, label }, { lex, note: note2 }) {
   note2(at3, REASON[reason2](label));
@@ -4275,13 +4616,13 @@ var NO_CLOSE_BEFORE = /[0-9A-Za-z_]/;
 function closing(src, at3, n) {
   if (src.length <= at3 + n || SPACE.test(src[at3 + n])) return -1;
   for (let i = at3 + n; i < src.length; i++) {
-    const c2 = src[i];
-    if (c2 === "\n" || c2 === "`") return -1;
-    if (c2 === "\\") {
+    const c = src[i];
+    if (c === "\n" || c === "`") return -1;
+    if (c === "\\") {
       i++;
       continue;
     }
-    if (c2 !== "$") continue;
+    if (c !== "$") continue;
     if (i === at3 + n || SPACE.test(src[i - 1])) return -1;
     if (n === 2) return src[i + 1] === "$" ? i : -1;
     return NO_CLOSE_BEFORE.test(src[i + 1] ?? "") ? -1 : i;
@@ -4404,13 +4745,13 @@ var NUMERIC_KEYS = /* @__PURE__ */ new Set(["cols", "span"]);
 var ATTR_TOKEN = /([\w-]+)(?:=("[^"]*"|'[^']*'|\S+))?/g;
 function parseAttrs(text2) {
   const attrs = {};
-  for (const m2 of text2.matchAll(ATTR_TOKEN)) {
-    attrs[m2[1]] = m2[2] === void 0 ? true : coerce(m2[1], unquote(m2[2]));
+  for (const m of text2.matchAll(ATTR_TOKEN)) {
+    attrs[m[1]] = m[2] === void 0 ? true : coerce(m[1], unquote(m[2]));
   }
   return attrs;
 }
-function unquote(v2) {
-  const s = v2.trim();
+function unquote(v) {
+  const s = v.trim();
   return /^(["']).*\1$/.test(s) ? s.slice(1, -1) : s;
 }
 function coerce(key, value) {
@@ -4435,8 +4776,8 @@ function collectHtmlNotes(render, { math: math2 = true } = {}) {
     mathOn = outerMath;
   }
 }
-var marked = new J({ gfm: true });
-var inline = new J({ gfm: true });
+var marked = new Y({ gfm: true });
+var inline = new Y({ gfm: true });
 var TABLE_ATTR = /^\{table\s+([^{}]*)\}$/;
 var tableUi;
 var tableInteractive = true;
@@ -4471,8 +4812,10 @@ function tableOptions(tokens) {
   }
   return tokens;
 }
-marked.use({ hooks: { processAllTokens: (tokens) => filterBlocks(tableOptions(tokens), { lex: (source) => tableOptions(marked.lexer(source)), note }) } });
-inline.use({ hooks: { processAllTokens: (tokens) => filterInline(tokens, note) } });
+var blockPass = (tokens) => filterBlocks(tableOptions(tokens), { lex: (source) => tableOptions(marked.lexer(source)), note });
+var inlinePass = (tokens) => filterInline(tokens, note);
+marked.use({ hooks: { processAllTokens: blockPass } });
+inline.use({ hooks: { processAllTokens: inlinePass } });
 marked.use({ extensions: [{
   name: "table",
   renderer(token) {
@@ -4525,6 +4868,42 @@ function md(text2, { ui, interactive = true } = {}) {
     tableInteractive = outerInteractive;
   }
 }
+function codeSpans(text2, { inline: inlineField = false } = {}) {
+  const source = wrapSpacedImages(String(text2 ?? ""));
+  const spans = [];
+  const lineAt = (index) => source.slice(0, index).split("\n").length - 1;
+  const find = (raw, from, to) => {
+    const places = (raw.includes("|") ? [raw, raw.replaceAll("|", "\\|")] : [raw]).map((written) => ({ at: source.indexOf(written, from), length: written.length })).filter(({ at: at3, length }) => at3 >= 0 && at3 + length <= to);
+    return places.sort((a, b) => a.at - b.at)[0] ?? null;
+  };
+  const walk2 = (tokens, from, to) => {
+    let cursor = from;
+    for (const token of Array.isArray(tokens) ? tokens : []) {
+      const found = token.raw ? find(token.raw, cursor, to) : null;
+      const start = found ? found.at : cursor;
+      const end = found ? found.at + found.length : to;
+      let inner = start;
+      if (token.type === "codespan") spans.push({ text: token.text, line: lineAt(start) });
+      else if (token.type !== "image") {
+        inner = walk2(token.tokens, inner, end);
+        inner = walk2(token.items, inner, end);
+        for (const row of [token.header, ...token.rows ?? []]) {
+          for (const cell of Array.isArray(row) ? row : []) inner = walk2(cell.tokens, inner, end);
+        }
+      }
+      cursor = found ? end : Math.max(cursor, inner);
+    }
+    return cursor;
+  };
+  const outer = sink;
+  sink = null;
+  try {
+    walk2(inlineField ? inlinePass(O.lexInline(source, inline.defaults)) : blockPass(marked.lexer(source)), 0, source.length);
+  } finally {
+    sink = outer;
+  }
+  return spans;
+}
 function mdInline(text2) {
   return inline.parseInline(wrapSpacedImages(String(text2 ?? "")));
 }
@@ -4538,7 +4917,7 @@ var ComponentError = class extends Error {
   }
 };
 function contentLines(text2) {
-  return String(text2).split("\n").map((raw, i) => ({ raw, text: raw.trim(), line: i + 1 })).filter((l) => l.text && !l.text.startsWith("//"));
+  return String(text2).split("\n").map((raw, i) => ({ raw, text: raw.trim(), line: i + 1 })).filter((l3) => l3.text && !l3.text.startsWith("//"));
 }
 function fields(text2) {
   return text2.split("|").map((s) => s.trim());
@@ -4593,12 +4972,22 @@ key: value
     const cells = contentLines(text2).map(({ text: t, line }) => {
       const wide = t.startsWith("*");
       const body = wide ? t.slice(1).trim() : t;
-      const m2 = body.match(/^([^:：]+)[:：]\s*(.*)$/);
-      if (!m2) throw new ComponentError(`kv line has no colon: "${t}"; expected key: value`, line);
-      return `<div class="am-kv-cell${wide ? " am-kv-cell--wide" : ""}"><dt>${esc(m2[1].trim())}</dt><dd>${mdInline(m2[2])}</dd></div>`;
+      const m = body.match(/^([^:：]+)[:：]\s*(.*)$/);
+      if (!m) throw new ComponentError(`kv line has no colon: "${t}"; expected key: value`, line);
+      return { wide, key: m[1].trim(), value: m[2] };
     });
+    const span = new Array(cells.length).fill(1);
+    let pos = 0;
+    cells.forEach((c, i) => {
+      if (c.wide) {
+        if (pos > 0) span[i - 1] += cols - pos;
+        pos = 0;
+      } else pos = (pos + 1) % cols;
+    });
+    if (pos > 0) span[cells.length - 1] += cols - pos;
+    const html = cells.map((c, i) => `<div class="am-kv-cell${c.wide ? " am-kv-cell--wide" : ""}"${span[i] > 1 ? ` style="grid-column: span ${span[i]}"` : ""}><dt>${esc(c.key)}</dt><dd>${mdInline(c.value)}</dd></div>`);
     if (!cells.length) throw new ComponentError("kv needs at least one key: value line", 1);
-    return `<dl class="am-kv" style="--kv-cols: ${cols}">${cells.join("")}</dl>`;
+    return `<dl class="am-kv" style="--kv-cols: ${cols}">${html.join("")}</dl>`;
   }
 };
 
@@ -4666,8 +5055,8 @@ function pushGroup(groups, { title = "", meta = "" }) {
 }
 function groupHtml(g) {
   const head = g.title || g.meta ? `<div class="am-annot-head"><span>${esc(g.title)}</span>${g.meta ? `<span class="am-annot-meta">${esc(g.meta)}</span>` : ""}</div>` : "";
-  const lines = g.lines.map((l) => `<div class="am-annot-scroll">${l}</div>`).join("");
-  const caps = g.captions.map((c2) => `<div class="am-annot-caption">${esc(c2)}</div>`).join("");
+  const lines = g.lines.map((l3) => `<div class="am-annot-scroll">${l3}</div>`).join("");
+  const caps = g.captions.map((c) => `<div class="am-annot-caption">${esc(c)}</div>`).join("");
   return `<div class="am-annot">${head}${lines}${caps}</div>`;
 }
 function sentenceHtml(sentence, line, rtl) {
@@ -4679,16 +5068,16 @@ function sentenceHtml(sentence, line, rtl) {
   let out = "";
   let plain = "";
   let last = 0;
-  for (const m2 of sentence.matchAll(SEG)) {
-    const before = sentence.slice(last, m2.index);
+  for (const m of sentence.matchAll(SEG)) {
+    const before = sentence.slice(last, m.index);
     out += esc(before);
     plain += before;
-    const [, seg, bang, note2] = m2;
-    const x = measure(plain, TEXT_SIZE, { mono: !rtl });
-    const noteHtml2 = note2.trim() ? `<span class="am-seg-n" style="--row: ${placeNote(rows, x, x + measure(note2, NOTE_SIZE) + NOTE_GAP)}">${esc(note2.trim())}</span>` : "";
+    const [, seg, bang, note2] = m;
+    const x2 = measure(plain, TEXT_SIZE, { mono: !rtl });
+    const noteHtml2 = note2.trim() ? `<span class="am-seg-n" style="--row: ${placeNote(rows, x2, x2 + measure(note2, NOTE_SIZE) + NOTE_GAP)}">${esc(note2.trim())}</span>` : "";
     out += `<span class="am-seg${bang ? " am-seg--err" : ""}"><span class="am-seg-t">${esc(seg)}</span>${noteHtml2}</span>`;
     plain += seg;
-    last = m2.index + m2[0].length;
+    last = m.index + m[0].length;
   }
   out += esc(sentence.slice(last));
   const wrapCls = rows.length ? "" : " am-annot-line--wrap";
@@ -4711,22 +5100,36 @@ var STATES = Object.keys(SIGN);
 var EN_DELTA = { added: "added", removed: "removed", changed: "changed", view: "View", before: "Before", changes: "Changes", after: "After" };
 var labelsOf = (ui) => ({ ...EN_DELTA, ...ui?.delta });
 function splitMarker(text2) {
-  const m2 = text2.match(/^([+\-~]) +(\S.*)$/);
-  return m2 ? { mark: m2[1], text: m2[2] } : { mark: null, text: text2 };
+  const m = text2.match(/^([+\-~]) +(\S.*)$/);
+  return m ? { mark: m[1], text: m[2] } : { mark: null, text: text2 };
 }
 var markState = (mark) => STATE_OF[mark] ?? null;
+function innerMarkMessage(component, names2, mark, text2, escape = "", link = names2.length > 1) {
+  const inner = names2.map((name2) => ({ name: name2, m: splitMarker(name2) })).filter(({ m }) => m.mark);
+  if (!inner.length) return null;
+  const first = inner[0].name;
+  const marks = new Set([mark, ...inner.map(({ m }) => m.mark)].filter(Boolean));
+  const head = `${component}: "${first}" has a change marker inside the line, so "${inner[0].m.mark} " would become part of the name and draw a second box.`;
+  if (marks.size > 1) return `${head} A marker starts the line and marks the whole line; write one line per marker`;
+  if ([...marks][0] === "~" && link) return `${head} ~ marks a node, not a link: write it on a line of its own: "~ ${inner[0].m.text}"`;
+  const quote = (name2) => name2.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let fixed2 = text2;
+  for (const { name: name2, m } of inner) fixed2 = fixed2.replace(new RegExp(`(?<!\\[)${quote(name2)}(?!\\])`), m.text);
+  const plain = !/^[*[({]/.test(inner[0].m.text);
+  return `${head} A marker starts the line and marks the whole line. Write: "${[...marks][0]} ${fixed2}".${escape && plain ? ` ${escape.replace("NAME", first)}` : ""}`;
+}
 var deltaAttr = (state) => state ? ` data-delta="${state}"` : "";
 function deltaBadge(state, ui) {
   if (!state) return "";
   return `<span class="am-delta-badge am-delta-badge--${state}" role="img" aria-label="${esc(labelsOf(ui)[state])}">${SIGN[state]}</span>`;
 }
 function withDelta(html, states, { ui, video = false } = {}) {
-  const used = STATES.map((s) => [s, states.filter((x) => x === s).length]).filter(([, n]) => n > 0);
+  const used = STATES.map((s) => [s, states.filter((x2) => x2 === s).length]).filter(([, n]) => n > 0);
   if (!used.length) return html;
   const t = labelsOf(ui);
   const word = (s, n) => n === 1 ? t[s] : t.counts?.[s] ?? t[s];
   const counts = used.map(([s, n]) => `<span class="am-delta-count am-delta-count--${s}">${SIGN[s]}${n} ${esc(word(s, n))}</span>`).join(" ");
-  const views = ["before", "changes", "after"].map((v2) => `<button type="button" data-view="${v2}" aria-pressed="${v2 === "changes"}">${esc(t[v2])}</button>`).join("");
+  const views = ["before", "changes", "after"].map((v) => `<button type="button" data-view="${v}" aria-pressed="${v === "changes"}">${esc(t[v])}</button>`).join("");
   const switcher = video ? "" : `<span class="am-delta-switch" role="group" aria-label="${esc(t.view)}" hidden>${views}</span>`;
   const open = html.indexOf(">");
   const close = html.lastIndexOf("</");
@@ -4815,7 +5218,7 @@ var HIDDEN_IN = { before: "added", after: "removed" };
 function lineAttrs(siblings, i, cols) {
   const n = siblings.length;
   return Object.entries(HIDDEN_IN).map(([view, hidden]) => {
-    const shown2 = siblings.map((x) => x.state !== hidden);
+    const shown2 = siblings.map((x2) => x2.state !== hidden);
     const first = shown2.indexOf(true);
     const last = shown2.lastIndexOf(true);
     const natural = cols ? n === 1 ? "none" : i === 0 ? "start" : i === n - 1 ? "end" : "full" : i < n - 1 ? "full" : "short";
@@ -4823,7 +5226,7 @@ function lineAttrs(siblings, i, cols) {
     return kind2 === natural ? "" : ` data-line-${view}="${kind2}"`;
   }).join("");
 }
-var dropAttrs = (children) => Object.entries(HIDDEN_IN).map(([view, hidden]) => children.every((c2) => c2.state === hidden) ? ` data-line-${view}="none"` : "").join("");
+var dropAttrs = (children) => Object.entries(HIDDEN_IN).map(([view, hidden]) => children.every((c) => c.state === hidden) ? ` data-line-${view}="none"` : "").join("");
 var boxInner = (n, ui) => `${deltaBadge(n.state, ui)}${labelHtml(n.label)}${n.sub ? `<small>${mdInline(n.sub)}</small>` : ""}`;
 function rootBox(root, ui, solo = false) {
   const drop = solo ? "" : dropAttrs(root.children);
@@ -4842,7 +5245,7 @@ function listHtml(nodes, ui) {
 }
 function liHtml(n, ui, siblings, i) {
   const sub = n.sub ? `<span class="am-tree-sub">${mdInline(n.sub)}</span>` : "";
-  const kids = n.children.length ? `<ul>${n.children.map((c2, k) => liHtml(c2, ui, n.children, k)).join("")}</ul>` : "";
+  const kids = n.children.length ? `<ul>${n.children.map((c, k) => liHtml(c, ui, n.children, k)).join("")}</ul>` : "";
   return `<li${n.hi ? ' class="am-tree-hi"' : ""}${vattrs(n)}${lineAttrs(siblings, i, false)}><span class="am-tree-label">${deltaBadge(n.state, ui)}${labelHtml(n.label)}</span>${sub}${kids}</li>`;
 }
 
@@ -4854,14 +5257,14 @@ function niceScale(peak) {
   const target = peak * 1.4;
   const pow = 10 ** Math.floor(Math.log10(target));
   const integral = Number.isInteger(peak);
-  const nice = NICE_MAX.map((m2) => m2 * pow).find((m2) => m2 >= target - 1e-9) ?? 10 * pow;
+  const nice = NICE_MAX.map((m) => m * pow).find((m) => m >= target - 1e-9) ?? 10 * pow;
   const max = integral ? Math.ceil(nice) : nice;
   const stepPow = 10 ** Math.floor(Math.log10(max));
   const step = [...NICE_STEP.map((s) => s * stepPow / 10), ...NICE_STEP.map((s) => s * stepPow)].find((s) => max / s <= 7 && Number.isInteger(round(max / s)) && (integral ? s >= 1 : true)) ?? max;
   return { max: round(max), step: round(step) };
 }
 var round = (n) => Math.round(n * 1e3) / 1e3;
-var pct = (v2, max) => `${Math.round(v2 / max * 1e4) / 100}%`;
+var pct = (v, max) => `${Math.round(v / max * 1e4) / 100}%`;
 var NUM = /^(?:max\s+)?(-?\d+(?:\.\d+)?)$/i;
 var limits_default = {
   name: "limits",
@@ -4881,8 +5284,8 @@ label | limit | unit         \u2190 limit only: the bar fills to the limit
 };
 function parseRow(t, line) {
   const [label, spec = "", unit = "", note2 = ""] = fields(t);
-  const [a3, b] = spec.split("/").map((s) => s.trim());
-  const nums = (b === void 0 ? [a3] : [a3, b]).map((s) => s?.match(NUM)?.[1]);
+  const [a, b] = spec.split("/").map((s) => s.trim());
+  const nums = (b === void 0 ? [a] : [a, b]).map((s) => s?.match(NUM)?.[1]);
   if (!spec || nums.some((n) => n === void 0)) {
     throw new ComponentError(`limits line must be label | value / limit | unit: "${t}"`, line);
   }
@@ -4898,7 +5301,7 @@ function rowHtml({ label, value, limit, unit, note: note2 }, side = "left", word
   const valText = `${value !== null ? fill(words3.value, value, limit) : fill(words3.limit, value, limit)}${unit ? ` ${unit}` : ""}`;
   const ticks = [];
   if (step > 0 && max > 0) {
-    for (let v2 = 0; v2 <= max + 1e-9; v2 += step) ticks.push(`<span style="${side}: ${pct(round(v2), max)}">${round(v2)}</span>`);
+    for (let v = 0; v <= max + 1e-9; v += step) ticks.push(`<span style="${side}: ${pct(round(v), max)}">${round(v)}</span>`);
   }
   return `<div class="am-lim${over2 ? " is-over" : ""}">
 <div class="am-lim-head"><span>${esc(label)}${note2 ? `<span class="am-lim-note">${esc(note2)}</span>` : ""}</span><span class="am-lim-val">${esc(valText)}</span></div>
@@ -4970,9 +5373,9 @@ function isolateLtrRuns(html) {
     }
     run2 = [];
   };
-  for (const m2 of String(html).matchAll(TOKEN)) {
-    const tok = m2[0];
-    const name2 = m2[1]?.toLowerCase();
+  for (const m of String(html).matchAll(TOKEN)) {
+    const tok = m[0];
+    const name2 = m[1]?.toLowerCase();
     if (skip) {
       out.push(tok);
       if (name2 === skip) depth += tok.startsWith("</") ? -1 : tok.endsWith("/>") ? 0 : 1;
@@ -5001,7 +5404,7 @@ function isolateLtrRuns(html) {
 
 // src/svg/shapes.js
 var f = (n) => String(Math.round(n * 10) / 10);
-var mid = (a3, b) => ({ x: (a3.x + b.x) / 2, y: (a3.y + b.y) / 2 });
+var mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
 function smoothPath(points) {
   const [first, ...rest] = points;
   if (rest.length === 1) return `M${f(first.x)},${f(first.y)} L${f(rest[0].x)},${f(rest[0].y)}`;
@@ -5009,8 +5412,8 @@ function smoothPath(points) {
   const m0 = mid(points[0], points[1]);
   parts.push(`L${f(m0.x)},${f(m0.y)}`);
   for (let i = 1; i < points.length - 1; i++) {
-    const m2 = mid(points[i], points[i + 1]);
-    parts.push(`Q${f(points[i].x)},${f(points[i].y)} ${f(m2.x)},${f(m2.y)}`);
+    const m = mid(points[i], points[i + 1]);
+    parts.push(`Q${f(points[i].x)},${f(points[i].y)} ${f(m.x)},${f(m.y)}`);
   }
   const last = points.at(-1);
   parts.push(`L${f(last.x)},${f(last.y)}`);
@@ -5018,7 +5421,7 @@ function smoothPath(points) {
 }
 function arrowDefs(uid, variants = []) {
   const marker = (name2, cls) => `<marker id="${uid}-arrow${name2}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow${cls}" d="M0,0 L10,5 L0,10 z"/></marker>`;
-  return `<defs>${[marker("", ""), ...variants.map((v2) => marker(`-${v2}`, ` am-arrow--${v2}`))].join("")}</defs>`;
+  return `<defs>${[marker("", ""), ...variants.map((v) => marker(`-${v}`, ` am-arrow--${v}`))].join("")}</defs>`;
 }
 function textLines(lines, cx, cy, lineHeight, attrs = "", dir = "ltr") {
   const top2 = cy - (lines.length - 1) * lineHeight / 2;
@@ -5031,45 +5434,81 @@ function diagramLabel(ui, kind2, names2) {
 }
 function svgOpen(width, height, label, dir = "ltr") {
   const w2 = Math.ceil(width);
-  const h = Math.ceil(height);
+  const h2 = Math.ceil(height);
   const direction = dir === "rtl" ? ' direction="rtl"' : "";
-  return `<svg viewBox="0 0 ${w2} ${h}" width="${w2}" height="${h}" role="img" aria-label="${esc(label)}"${direction} xmlns="http://www.w3.org/2000/svg">`;
+  return `<svg viewBox="0 0 ${w2} ${h2}" width="${w2}" height="${h2}" role="img" aria-label="${esc(label)}"${direction} xmlns="http://www.w3.org/2000/svg">`;
 }
 var SVG_OPEN_BOX = /<svg viewBox="0 0 (\d+) (\d+)" width="\1" height="\2"/g;
 function scaleSvgBoxes(html, scale = 1) {
   if (scale === 1) return html;
-  return String(html).replace(SVG_OPEN_BOX, (tag, w2, h) => `<svg viewBox="0 0 ${w2} ${h}" width="${Math.ceil(w2 * scale)}" height="${Math.ceil(h * scale)}"`);
+  return String(html).replace(SVG_OPEN_BOX, (tag, w2, h2) => `<svg viewBox="0 0 ${w2} ${h2}" width="${Math.ceil(w2 * scale)}" height="${Math.ceil(h2 * scale)}"`);
 }
-var mirror = (width, rtl) => rtl ? (x) => width - x : (x) => x;
+var mirror = (width, rtl) => rtl ? (x2) => width - x2 : (x2) => x2;
+var SEARCH_LIMIT = 4e4;
 function orderRanks(g, order) {
   order(g);
   const ranks = {};
-  for (const v2 of g.nodes()) {
-    const { rank, order: at3 } = g.node(v2);
-    if (rank !== void 0) (ranks[rank] ??= [])[at3] = v2;
+  for (const v of g.nodes()) {
+    const { rank, order: at3 } = g.node(v);
+    if (rank !== void 0) (ranks[rank] ??= [])[at3] = v;
   }
-  const pairs = (as, bs) => as.reduce((n, a3) => n + bs.filter((b) => g.node(b).order < g.node(a3).order).length, 0);
+  const rows = Object.values(ranks);
+  const pairs = (as, bs) => as.reduce((n, a) => n + bs.filter((b) => g.node(b).order < g.node(a).order).length, 0);
   const crossings2 = (left, right) => pairs(g.predecessors(left), g.predecessors(right)) + pairs(g.successors(left), g.successors(right));
-  const border = (v2) => g.node(v2).dummy === "border";
-  let swapped = true;
-  while (swapped) {
-    swapped = false;
-    for (const rank of Object.values(ranks)) {
-      for (let i = 1; i < rank.length; i++) {
-        const [a3, b] = [rank[i - 1], rank[i]];
-        if (g.parent(a3) !== g.parent(b) || border(a3) || border(b) || crossings2(b, a3) >= crossings2(a3, b)) continue;
-        [rank[i - 1], rank[i]] = [b, a3];
-        g.node(a3).order = i;
-        g.node(b).order = i - 1;
-        swapped = true;
+  const border = (v) => g.node(v).dummy === "border";
+  const fixed2 = (a, b) => g.parent(a) !== g.parent(b) || border(a) || border(b);
+  let compared = 0;
+  const gain = (a, b) => {
+    compared++;
+    return crossings2(a, b) - crossings2(b, a);
+  };
+  const swap = (row, i) => {
+    [row[i - 1], row[i]] = [row[i], row[i - 1]];
+    g.node(row[i - 1]).order = i - 1;
+    g.node(row[i]).order = i;
+  };
+  const settle3 = () => {
+    let removed = 0;
+    for (let swapped = true; swapped; ) {
+      swapped = false;
+      for (const row of rows) {
+        for (let i = 1; i < row.length; i++) {
+          const won = fixed2(row[i - 1], row[i]) ? 0 : gain(row[i - 1], row[i]);
+          if (won <= 0) continue;
+          swap(row, i);
+          removed += won;
+          swapped = true;
+        }
+      }
+    }
+    return removed;
+  };
+  settle3();
+  for (let better = true; better; ) {
+    better = false;
+    for (const row of rows) {
+      for (let i = 1; i < row.length; i++) {
+        if (compared > SEARCH_LIMIT) return;
+        if (fixed2(row[i - 1], row[i])) continue;
+        const before = rows.map((r) => [...r]);
+        const cost = -gain(row[i - 1], row[i]);
+        swap(row, i);
+        if (settle3() > cost) {
+          better = true;
+          continue;
+        }
+        rows.forEach((r, k) => before[k].forEach((v, at3) => {
+          r[at3] = v;
+          g.node(v).order = at3;
+        }));
       }
     }
   }
 }
 function mirrorLayout(g) {
   const flip = mirror(g.graph().width, true);
-  for (const v2 of g.nodes()) {
-    const node = g.node(v2);
+  for (const v of g.nodes()) {
+    const node = g.node(v);
     node.x = flip(node.x);
   }
   for (const e of g.edges()) {
@@ -5100,19 +5539,19 @@ function parseSequence(text2) {
   };
   const steps2 = [];
   for (const { text: t, line } of contentLines(text2)) {
-    let m2;
-    if (m2 = t.match(RE.participants)) {
-      m2[1].split(/[,，]/).map((s) => s.trim()).filter(Boolean).forEach(add2);
-    } else if (m2 = t.match(RE.note)) {
-      const over2 = m2[1].split(/[,，]/).map((s) => s.trim()).filter(Boolean);
+    let m;
+    if (m = t.match(RE.participants)) {
+      m[1].split(/[,，]/).map((s) => s.trim()).filter(Boolean).forEach(add2);
+    } else if (m = t.match(RE.note)) {
+      const over2 = m[1].split(/[,，]/).map((s) => s.trim()).filter(Boolean);
       over2.forEach(add2);
-      steps2.push({ kind: "note", over: over2, text: m2[2].trim(), line });
-    } else if (m2 = t.match(RE.divider)) {
-      steps2.push({ kind: "divider", text: m2[1], line });
-    } else if (m2 = t.match(RE.msg)) {
-      add2(m2[1]);
-      add2(m2[3]);
-      steps2.push({ kind: "msg", from: m2[1], to: m2[3], dashed: m2[2] === "-->", label: (m2[4] ?? "").trim(), line });
+      steps2.push({ kind: "note", over: over2, text: m[2].trim(), line });
+    } else if (m = t.match(RE.divider)) {
+      steps2.push({ kind: "divider", text: m[1], line });
+    } else if (m = t.match(RE.msg)) {
+      add2(m[1]);
+      add2(m[3]);
+      steps2.push({ kind: "msg", from: m[1], to: m[3], dashed: m[2] === "-->", label: (m[4] ?? "").trim(), line });
     } else {
       throw new ComponentError(`sequence cannot parse "${t}". Write a message as A -> B: label (--> is a dashed return) and a note as note A: text`, line);
     }
@@ -5145,24 +5584,26 @@ function layout({ participants: ps, steps: steps2 }, { num, id, ui, dir = "ltr" 
   const gaps = ps.slice(1).map((_2, i) => (actorW[i] + actorW[i + 1]) / 2 + 28);
   let extraRight = 0;
   let extraLeft = 0;
+  let msgs = 0;
   const prepared = steps2.map((s) => {
     if (s.kind === "msg") {
+      msgs++;
       const lines2 = s.label ? wrap(s.label, LABEL_MAX, FS) : [];
-      const width2 = Math.max(0, ...lines2.map((l) => measure(l, FS))) + (num ? 34 : 22);
-      const a3 = idx.get(s.from);
+      const width2 = Math.max(0, ...lines2.map((l3) => measure(l3, FS))) + (num ? 2 * (10 + 7 * String(msgs).length) : 22);
+      const a = idx.get(s.from);
       const b = idx.get(s.to);
-      if (a3 === b) {
-        if (a3 < gaps.length) gaps[a3] = Math.max(gaps[a3], width2 + 48);
+      if (a === b) {
+        if (a < gaps.length) gaps[a] = Math.max(gaps[a], width2 + 48);
         else extraRight = Math.max(extraRight, width2 + 40);
       } else {
-        const [lo, hi] = [Math.min(a3, b), Math.max(a3, b)];
-        const span = gaps.slice(lo, hi).reduce((x, y3) => x + y3, 0);
+        const [lo, hi] = [Math.min(a, b), Math.max(a, b)];
+        const span = gaps.slice(lo, hi).reduce((x2, y3) => x2 + y3, 0);
         if (span < width2) gaps[hi - 1] += width2 - span;
       }
-      return { ...s, lines: lines2, a: a3, b };
+      return { ...s, lines: lines2, a, b };
     }
     const lines = wrap(s.text, 220, NOTE_FS);
-    const w2 = Math.max(...lines.map((l) => measure(l, NOTE_FS))) + 20;
+    const w2 = Math.max(...lines.map((l3) => measure(l3, NOTE_FS))) + 20;
     if (s.kind === "note" && s.over.length === 1) {
       const i = idx.get(s.over[0]);
       if (i === 0) extraLeft = Math.max(extraLeft, w2 / 2 - actorW[0] / 2);
@@ -5187,16 +5628,16 @@ function layout({ participants: ps, steps: steps2 }, { num, id, ui, dir = "ltr" 
       const marker = ` marker-end="url(#${id}-arrow)"`;
       const step = num ? `<text class="am-step" x="${f(X3(xs[s.a]) + dx * (s.b >= s.a ? 6 : -6))}" y="${f(y2 + s.lines.length * LH - 6)}" text-anchor="${s.b >= s.a ? "start" : "end"}">${n}</text>` : "";
       if (s.a === s.b) {
-        const x = X3(xs[s.a]);
-        const labelX = x + dx * 40;
-        body.push(s.lines.map((l, k2) => `<text x="${f(labelX)}" y="${f(y2 + k2 * LH + 4)}" dominant-baseline="central">${esc(svgLine(l, dir))}</text>`).join(""));
-        body.push(`<path class="${cls}" d="M${f(x)},${f(y2)} H${f(x + dx * 30)} V${f(y2 + 20)} H${f(x + dx * 2)}"${marker}/>`, step);
+        const x2 = X3(xs[s.a]);
+        const labelX = x2 + dx * 40;
+        body.push(s.lines.map((l3, k2) => `<text x="${f(labelX)}" y="${f(y2 + k2 * LH + 4)}" dominant-baseline="central">${esc(svgLine(l3, dir))}</text>`).join(""));
+        body.push(`<path class="${cls}" d="M${f(x2)},${f(y2)} H${f(x2 + dx * 30)} V${f(y2 + 20)} H${f(x2 + dx * 2)}"${marker}/>`, step);
         y2 += Math.max(s.lines.length * LH, 20) + 28;
       } else {
         y2 += s.lines.length * LH;
         const [x1, x2] = [X3(xs[s.a]), X3(xs[s.b])];
         const mx = (x1 + x2) / 2;
-        body.push(s.lines.map((l, k2) => `<text x="${f(mx)}" y="${f(y2 - 10 - (s.lines.length - 1 - k2) * LH)}" text-anchor="middle">${esc(svgLine(l, dir))}</text>`).join(""));
+        body.push(s.lines.map((l3, k2) => `<text x="${f(mx)}" y="${f(y2 - 10 - (s.lines.length - 1 - k2) * LH)}" text-anchor="middle">${esc(svgLine(l3, dir))}</text>`).join(""));
         body.push(`<path class="${cls}" d="M${f(x1)},${f(y2)} L${f(x2 + (x2 > x1 ? -2 : 2))},${f(y2)}"${marker}/>`, step);
         y2 += 24;
       }
@@ -5205,13 +5646,13 @@ function layout({ participants: ps, steps: steps2 }, { num, id, ui, dir = "ltr" 
       const lo = Math.min(...xsOver);
       const hi = Math.max(...xsOver);
       const w2 = Math.max(s.w, hi - lo + 40);
-      const h = s.lines.length * LH + 12;
+      const h2 = s.lines.length * LH + 12;
       const cx = (lo + hi) / 2;
-      body.push(`<rect class="am-note" x="${f(cx - w2 / 2)}" y="${f(y2)}" width="${f(w2)}" height="${f(h)}" rx="2"/>`);
-      body.push(textLines(s.lines, cx, y2 + h / 2, LH, ` style="font-size:${NOTE_FS}px"`, dir));
-      y2 += h + 16;
+      body.push(`<rect class="am-note" x="${f(cx - w2 / 2)}" y="${f(y2)}" width="${f(w2)}" height="${f(h2)}" rx="2"/>`);
+      body.push(textLines(s.lines, cx, y2 + h2 / 2, LH, ` style="font-size:${NOTE_FS}px"`, dir));
+      y2 += h2 + 16;
     } else {
-      const w2 = Math.max(...s.lines.map((l) => measure(l, NOTE_FS))) + 20;
+      const w2 = Math.max(...s.lines.map((l3) => measure(l3, NOTE_FS))) + 20;
       body.push(`<line class="am-lifeline" x1="${MARGIN}" y1="${f(y2 + 10)}" x2="${f(width - MARGIN)}" y2="${f(y2 + 10)}"/>`);
       body.push(`<rect class="am-actor" x="${f(width / 2 - w2 / 2)}" y="${f(y2)}" width="${f(w2)}" height="20" rx="2"/>`);
       body.push(textLines(s.lines.slice(0, 1), width / 2, y2 + 10, LH, ` class="am-actor-text" style="font-size:${NOTE_FS}px"`, dir));
@@ -5221,26 +5662,26 @@ function layout({ participants: ps, steps: steps2 }, { num, id, ui, dir = "ltr" 
   }
   const height = y2 + 6;
   const actors = ps.map((p, i) => {
-    const x = X3(xs[i]);
-    return `<line class="am-lifeline" x1="${f(x)}" y1="${TOP + ACTOR_H}" x2="${f(x)}" y2="${f(height - 4)}"/><g data-key="${esc(p)}"><rect class="am-actor" x="${f(x - actorW[i] / 2)}" y="${TOP}" width="${f(actorW[i])}" height="${ACTOR_H}" rx="2"/>${textLines([p], x, TOP + ACTOR_H / 2, LH, ' class="am-actor-text" font-weight="600"', dir)}</g>`;
+    const x2 = X3(xs[i]);
+    return `<line class="am-lifeline" x1="${f(x2)}" y1="${TOP + ACTOR_H}" x2="${f(x2)}" y2="${f(height - 4)}"/><g data-key="${esc(p)}"><rect class="am-actor" x="${f(x2 - actorW[i] / 2)}" y="${TOP}" width="${f(actorW[i])}" height="${ACTOR_H}" rx="2"/>${textLines([p], x2, TOP + ACTOR_H / 2, LH, ' class="am-actor-text" font-weight="600"', dir)}</g>`;
   });
   return `${svgOpen(width, height, diagramLabel(ui, "sequence", ps), dir)}${arrowDefs(id)}${actors.join("")}${body.join("")}</svg>`;
 }
 
 // node_modules/@dagrejs/dagre/dist/dagre.esm.js
 var Te2 = Object.defineProperty;
-var Sn2 = (e, n, t) => n in e ? Te2(e, n, { enumerable: true, configurable: true, writable: true, value: t }) : e[n] = t;
-var Mn = (e, n) => {
+var Sn = (e, n, t) => n in e ? Te2(e, n, { enumerable: true, configurable: true, writable: true, value: t }) : e[n] = t;
+var Mn2 = (e, n) => {
   for (var t in n) Te2(e, t, { get: n[t], enumerable: true });
 };
-var je2 = (e, n, t) => Sn2(e, typeof n != "symbol" ? n + "" : n, t);
+var je2 = (e, n, t) => Sn(e, typeof n != "symbol" ? n + "" : n, t);
 var ie2 = {};
-Mn(ie2, { Graph: () => T2, alg: () => H2 });
-var Pn2 = Object.defineProperty;
+Mn2(ie2, { Graph: () => T2, alg: () => H });
+var Pn = Object.defineProperty;
 var Se2 = (e, n) => {
-  for (var t in n) Pn2(e, t, { get: n[t], enumerable: true });
+  for (var t in n) Pn(e, t, { get: n[t], enumerable: true });
 };
-var Q = class {
+var Q2 = class {
   constructor(e) {
     this._isDirected = true, this._isMultigraph = false, this._isCompound = false, this._nodes = {}, this._in = {}, this._preds = {}, this._out = {}, this._sucs = {}, this._edgeObjs = {}, this._edgeLabels = {}, this._nodeCount = 0, this._edgeCount = 0, this._defaultNodeLabelFn = () => {
     }, this._defaultEdgeLabelFn = () => {
@@ -5372,12 +5813,12 @@ var Q = class {
     return e.reduce((t, r) => (n !== void 0 ? this.setEdge(t, r, n) : this.setEdge(t, r), r)), this;
   }
   setEdge(e, n, t, r) {
-    let o, i, s, a3, l = false;
-    typeof e == "object" && e !== null && "v" in e ? (o = e.v, i = e.w, s = e.name, arguments.length === 2 && (a3 = n, l = true)) : (o = e, i = n, s = r, arguments.length > 2 && (a3 = t, l = true)), o = "" + o, i = "" + i, s !== void 0 && (s = "" + s);
+    let o, i, s, a, l3 = false;
+    typeof e == "object" && e !== null && "v" in e ? (o = e.v, i = e.w, s = e.name, arguments.length === 2 && (a = n, l3 = true)) : (o = e, i = n, s = r, arguments.length > 2 && (a = t, l3 = true)), o = "" + o, i = "" + i, s !== void 0 && (s = "" + s);
     let u = z2(this._isDirected, o, i, s);
-    if (u in this._edgeLabels) return l && (this._edgeLabels[u] = a3), this;
+    if (u in this._edgeLabels) return l3 && (this._edgeLabels[u] = a), this;
     if (s !== void 0 && !this._isMultigraph) throw new Error("Cannot set a named edge when isMultigraph = false");
-    this.setNode(o), this.setNode(i), this._edgeLabels[u] = l ? a3 : this._defaultEdgeLabelFn(o, i, s);
+    this.setNode(o), this.setNode(i), this._edgeLabels[u] = l3 ? a : this._defaultEdgeLabelFn(o, i, s);
     let d = Fn(this._isDirected, o, i, s);
     return o = d.v, i = d.w, Object.freeze(d), this._edgeObjs[u] = d, Re2(this._preds[i], o), Re2(this._sucs[o], i), this._in[i][u] = d, this._out[o][u] = d, this._edgeCount++, this;
   }
@@ -5435,8 +5876,8 @@ function z2(e, n, t, r) {
 function Fn(e, n, t, r) {
   let o = "" + n, i = "" + t;
   if (!e && o > i) {
-    let a3 = o;
-    o = i, i = a3;
+    let a = o;
+    o = i, i = a;
   }
   let s = { v: o, w: i };
   return r && (s.name = r), s;
@@ -5445,8 +5886,8 @@ function oe2(e, n) {
   return z2(e, n.v, n.w, n.name);
 }
 var Dn = {};
-Se2(Dn, { read: () => Bn, write: () => An });
-function An(e) {
+Se2(Dn, { read: () => Bn, write: () => An2 });
+function An2(e) {
   let n = { options: { directed: e.isDirected(), multigraph: e.isMultigraph(), compound: e.isCompound() }, nodes: Vn(e), edges: Yn(e) }, t = e.graph();
   return t !== void 0 && (n.value = structuredClone(t)), n;
 }
@@ -5463,15 +5904,15 @@ function Yn(e) {
   });
 }
 function Bn(e) {
-  let n = new Q(e.options);
+  let n = new Q2(e.options);
   return e.value !== void 0 && n.setGraph(e.value), e.nodes.forEach((t) => {
     n.setNode(t.v, t.value), t.parent && n.setParent(t.v, t.parent);
   }), e.edges.forEach((t) => {
     n.setEdge({ v: t.v, w: t.w, name: t.name }, t.value);
   }), n;
 }
-var H2 = {};
-Se2(H2, { CycleException: () => K2, bellmanFord: () => Me2, components: () => zn, dijkstra: () => J2, dijkstraAll: () => $n, findCycles: () => Un, floydWarshall: () => Kn, isAcyclic: () => Zn, postorder: () => nt2, preorder: () => tt2, prim: () => rt2, shortestPaths: () => ot2, tarjan: () => Fe2, topsort: () => De2 });
+var H = {};
+Se2(H, { CycleException: () => K2, bellmanFord: () => Me2, components: () => zn2, dijkstra: () => J2, dijkstraAll: () => $n, findCycles: () => Un, floydWarshall: () => Kn, isAcyclic: () => Zn, postorder: () => nt2, preorder: () => tt2, prim: () => rt2, shortestPaths: () => ot2, tarjan: () => Fe2, topsort: () => De2 });
 var Wn = () => 1;
 function Me2(e, n, t, r) {
   return Xn(e, String(n), t || Wn, r || function(o) {
@@ -5480,33 +5921,33 @@ function Me2(e, n, t, r) {
   });
 }
 function Xn(e, n, t, r) {
-  let o = {}, i, s = 0, a3 = e.nodes(), l = function(c2) {
-    let f2 = o[c2.v], h = o[c2.w];
-    if (!f2 || !h) return;
-    let g = t(c2);
-    f2.distance + g < h.distance && (o[c2.w] = { distance: f2.distance + g, predecessor: c2.v }, i = true);
+  let o = {}, i, s = 0, a = e.nodes(), l3 = function(c) {
+    let f2 = o[c.v], h2 = o[c.w];
+    if (!f2 || !h2) return;
+    let g = t(c);
+    f2.distance + g < h2.distance && (o[c.w] = { distance: f2.distance + g, predecessor: c.v }, i = true);
   }, u = function() {
-    a3.forEach(function(c2) {
-      r(c2).forEach(function(f2) {
-        let h = f2.v === c2 ? f2.v : f2.w, g = h === f2.v ? f2.w : f2.v;
-        l({ v: h, w: g });
+    a.forEach(function(c) {
+      r(c).forEach(function(f2) {
+        let h2 = f2.v === c ? f2.v : f2.w, g = h2 === f2.v ? f2.w : f2.v;
+        l3({ v: h2, w: g });
       });
     });
   };
-  a3.forEach(function(c2) {
-    let f2 = c2 === n ? 0 : Number.POSITIVE_INFINITY;
-    o[c2] = { distance: f2, predecessor: "" };
+  a.forEach(function(c) {
+    let f2 = c === n ? 0 : Number.POSITIVE_INFINITY;
+    o[c] = { distance: f2, predecessor: "" };
   });
-  let d = a3.length;
-  for (let c2 = 1; c2 < d && (i = false, s++, u(), !!i); c2++) ;
+  let d = a.length;
+  for (let c = 1; c < d && (i = false, s++, u(), !!i); c++) ;
   if (s === d - 1 && (i = false, u(), i)) throw new Error("The graph contains a negative weight cycle");
   return o;
 }
-function zn(e) {
+function zn2(e) {
   let n = {}, t = [], r;
   function o(i) {
-    var s, a3;
-    i in n || (n[i] = true, r.push(i), (s = e.successors(i)) == null || s.forEach(o), (a3 = e.predecessors(i)) == null || a3.forEach(o));
+    var s, a;
+    i in n || (n[i] = true, r.push(i), (s = e.successors(i)) == null || s.forEach(o), (a = e.predecessors(i)) == null || a.forEach(o));
   }
   return e.nodes().forEach(function(i) {
     r = [], o(i), r.length && t.push(r);
@@ -5576,12 +6017,12 @@ function J2(e, n, t, r) {
   return qn(e, String(n), t || Hn, r || o);
 }
 function qn(e, n, t, r) {
-  let o = {}, i = new Pe2(), s, a3, l = function(u) {
-    let d = u.v !== s ? u.v : u.w, c2 = o[d];
-    if (!c2) return;
-    let f2 = t(u), h = a3.distance + f2;
+  let o = {}, i = new Pe2(), s, a, l3 = function(u) {
+    let d = u.v !== s ? u.v : u.w, c = o[d];
+    if (!c) return;
+    let f2 = t(u), h2 = a.distance + f2;
     if (f2 < 0) throw new Error("dijkstra does not allow negative edge weights. Bad edge: " + u + " Weight: " + f2);
-    h < c2.distance && (c2.distance = h, c2.predecessor = s, i.decrease(d, h));
+    h2 < c.distance && (c.distance = h2, c.predecessor = s, i.decrease(d, h2));
   };
   for (e.nodes().forEach(function(u) {
     let d = u === n ? 0 : Number.POSITIVE_INFINITY;
@@ -5590,7 +6031,7 @@ function qn(e, n, t, r) {
     s = i.removeMin();
     let u = o[s];
     if (!u || u.distance === Number.POSITIVE_INFINITY) break;
-    a3 = u, r(s).forEach(l);
+    a = u, r(s).forEach(l3);
   }
   return o;
 }
@@ -5602,23 +6043,23 @@ function $n(e, n, t) {
 function Fe2(e) {
   let n = 0, t = [], r = {}, o = [];
   function i(s) {
-    var a3;
-    let l = r[s] = { onStack: true, lowlink: n, index: n++ };
-    if (t.push(s), (a3 = e.successors(s)) == null || a3.forEach(function(u) {
+    var a;
+    let l3 = r[s] = { onStack: true, lowlink: n, index: n++ };
+    if (t.push(s), (a = e.successors(s)) == null || a.forEach(function(u) {
       if (u in r) {
         let d = r[u];
-        d != null && d.onStack && (l.lowlink = Math.min(l.lowlink, d.index));
+        d != null && d.onStack && (l3.lowlink = Math.min(l3.lowlink, d.index));
       } else {
         i(u);
         let d = r[u];
-        d && (l.lowlink = Math.min(l.lowlink, d.lowlink));
+        d && (l3.lowlink = Math.min(l3.lowlink, d.lowlink));
       }
-    }), l.lowlink === l.index) {
+    }), l3.lowlink === l3.index) {
       let u = [], d;
       do {
         d = t.pop();
-        let c2 = r[d];
-        c2 && (c2.onStack = false), u.push(d);
+        let c = r[d];
+        c && (c.onStack = false), u.push(d);
       } while (s !== d);
       o.push(u);
     }
@@ -5645,21 +6086,21 @@ function Qn(e, n, t) {
   let r = {}, o = e.nodes();
   return o.forEach(function(i) {
     let s = {};
-    r[i] = s, s[i] = { distance: 0, predecessor: "" }, o.forEach(function(a3) {
-      i !== a3 && (s[a3] = { distance: Number.POSITIVE_INFINITY, predecessor: "" });
-    }), t(i).forEach(function(a3) {
-      let l = a3.v === i ? a3.w : a3.v, u = n(a3);
-      s[l] = { distance: u, predecessor: i };
+    r[i] = s, s[i] = { distance: 0, predecessor: "" }, o.forEach(function(a) {
+      i !== a && (s[a] = { distance: Number.POSITIVE_INFINITY, predecessor: "" });
+    }), t(i).forEach(function(a) {
+      let l3 = a.v === i ? a.w : a.v, u = n(a);
+      s[l3] = { distance: u, predecessor: i };
     });
   }), o.forEach(function(i) {
     let s = r[i];
-    s && o.forEach(function(a3) {
-      let l = r[a3];
-      l && o.forEach(function(u) {
-        let d = l[i], c2 = s[u], f2 = l[u];
-        if (d && c2 && f2) {
-          let h = d.distance + c2.distance;
-          h < f2.distance && (f2.distance = h, f2.predecessor = c2.predecessor);
+    s && o.forEach(function(a) {
+      let l3 = r[a];
+      l3 && o.forEach(function(u) {
+        let d = l3[i], c = s[u], f2 = l3[u];
+        if (d && c && f2) {
+          let h2 = d.distance + c.distance;
+          h2 < f2.distance && (f2.distance = h2, f2.predecessor = c.predecessor);
         }
       });
     });
@@ -5691,18 +6132,18 @@ function Zn(e) {
 }
 function et2(e, n, t, r, o) {
   Array.isArray(n) || (n = [n]);
-  let i = ((a3) => {
-    var l;
-    return (l = e.isDirected() ? e.successors(a3) : e.neighbors(a3)) != null ? l : [];
+  let i = ((a) => {
+    var l3;
+    return (l3 = e.isDirected() ? e.successors(a) : e.neighbors(a)) != null ? l3 : [];
   }), s = {};
-  return n.forEach(function(a3) {
-    if (!e.hasNode(a3)) throw new Error("Graph does not have node: " + a3);
-    o = Ae(e, a3, t === "post", s, i, r, o);
+  return n.forEach(function(a) {
+    if (!e.hasNode(a)) throw new Error("Graph does not have node: " + a);
+    o = Ae2(e, a, t === "post", s, i, r, o);
   }), o;
 }
-function Ae(e, n, t, r, o, i, s) {
-  return n in r || (r[n] = true, t || (s = i(s, n)), o(n).forEach(function(a3) {
-    s = Ae(e, a3, t, r, o, i, s);
+function Ae2(e, n, t, r, o, i, s) {
+  return n in r || (r[n] = true, t || (s = i(s, n)), o(n).forEach(function(a) {
+    s = Ae2(e, a, t, r, o, i, s);
   }), t && (s = i(s, n))), s;
 }
 function Ve2(e, n, t) {
@@ -5718,20 +6159,20 @@ function tt2(e, n) {
 }
 function rt2(e, n) {
   var t;
-  let r = new Q(), o = {}, i = new Pe2(), s;
-  function a3(d) {
-    let c2 = d.v === s ? d.w : d.v, f2 = i.priority(c2);
+  let r = new Q2(), o = {}, i = new Pe2(), s;
+  function a(d) {
+    let c = d.v === s ? d.w : d.v, f2 = i.priority(c);
     if (f2 !== void 0) {
-      let h = n(d);
-      h < f2 && (o[c2] = s, i.decrease(c2, h));
+      let h2 = n(d);
+      h2 < f2 && (o[c] = s, i.decrease(c, h2));
     }
   }
   if (e.nodeCount() === 0) return r;
   e.nodes().forEach(function(d) {
     i.add(d, Number.POSITIVE_INFINITY), r.setNode(d);
   });
-  let l = e.nodes()[0];
-  l !== void 0 && i.decrease(l, 0);
+  let l3 = e.nodes()[0];
+  l3 !== void 0 && i.decrease(l3, 0);
   let u = false;
   for (; i.size() > 0; ) {
     if (s = i.removeMin(), s in o) r.setEdge(s, o[s]);
@@ -5739,7 +6180,7 @@ function rt2(e, n) {
       if (u) throw new Error("Input graph is not connected: " + e);
       u = true;
     }
-    (t = e.nodeEdges(s)) == null || t.forEach(a3);
+    (t = e.nodeEdges(s)) == null || t.forEach(a);
   }
   return r;
 }
@@ -5753,21 +6194,21 @@ function it2(e, n, t, r) {
   if (t === void 0) return J2(e, n, t, r);
   let o = false, i = e.nodes();
   for (let s = 0; s < i.length; s++) {
-    let a3 = i[s];
-    if (a3 === void 0) continue;
-    let l = r(a3);
-    for (let u = 0; u < l.length; u++) {
-      let d = l[u];
+    let a = i[s];
+    if (a === void 0) continue;
+    let l3 = r(a);
+    for (let u = 0; u < l3.length; u++) {
+      let d = l3[u];
       if (!d) continue;
-      let c2 = d.v === a3 ? d.v : d.w, f2 = c2 === d.v ? d.w : d.v;
-      t({ v: c2, w: f2 }) < 0 && (o = true);
+      let c = d.v === a ? d.v : d.w, f2 = c === d.v ? d.w : d.v;
+      t({ v: c, w: f2 }) < 0 && (o = true);
     }
     if (o) return Me2(e, n, t, r);
   }
   return J2(e, n, t, r);
 }
-var T2 = Q;
-function M2(e, n, t, r) {
+var T2 = Q2;
+function M(e, n, t, r) {
   let o = r;
   for (; e.hasNode(o); ) o = $2(r);
   return t.dummy = n, e.setNode(o, t), o;
@@ -5787,14 +6228,14 @@ function Z(e) {
     n.setEdge(t, e.edge(t));
   }), n;
 }
-function se2(e, n) {
-  let t = e.x, r = e.y, o = n.x - t, i = n.y - r, s = e.width / 2, a3 = e.height / 2;
+function se(e, n) {
+  let t = e.x, r = e.y, o = n.x - t, i = n.y - r, s = e.width / 2, a = e.height / 2;
   if (!o && !i) throw new Error("Not possible to find intersection inside of the rectangle");
-  let l, u;
-  return o === 0 || Math.abs(i) * s > Math.abs(o) * a3 ? (i < 0 && (a3 = -a3), l = a3 * o / i, u = a3) : (o < 0 && (s = -s), l = s, u = s * i / o), { x: t + l, y: r + u };
+  let l3, u;
+  return o === 0 || Math.abs(i) * s > Math.abs(o) * a ? (i < 0 && (a = -a), l3 = a * o / i, u = a) : (o < 0 && (s = -s), l3 = s, u = s * i / o), { x: t + l3, y: r + u };
 }
 function P2(e) {
-  let n = D2(de(e) + 1).map(() => []);
+  let n = D2(de2(e) + 1).map(() => []);
   return e.nodes().forEach((t) => {
     let r = e.node(t), o = r.rank;
     o !== void 0 && (n[o] || (n[o] = []), n[o][r.order] = t);
@@ -5813,17 +6254,17 @@ function Be2(e) {
 function We2(e) {
   let n = e.nodes().map((s) => e.node(s).rank).filter((s) => s !== void 0), t = S(Math.min, n), r = [];
   e.nodes().forEach((s) => {
-    let a3 = e.node(s).rank - t;
-    r[a3] || (r[a3] = []), r[a3].push(s);
+    let a = e.node(s).rank - t;
+    r[a] || (r[a] = []), r[a].push(s);
   });
   let o = 0, i = e.graph().nodeRankFactor;
-  Array.from(r).forEach((s, a3) => {
-    s === void 0 && a3 % i !== 0 ? --o : s !== void 0 && o && s.forEach((l) => e.node(l).rank += o);
+  Array.from(r).forEach((s, a) => {
+    s === void 0 && a % i !== 0 ? --o : s !== void 0 && o && s.forEach((l3) => e.node(l3).rank += o);
   });
 }
 function ae2(e, n, t, r) {
   let o = { width: 0, height: 0 };
-  return arguments.length >= 4 && (o.rank = t, o.order = r), M2(e, "border", o, n);
+  return arguments.length >= 4 && (o.rank = t, o.order = r), M(e, "border", o, n);
 }
 function st2(e, n = Xe2) {
   let t = [];
@@ -5840,14 +6281,14 @@ function S(e, n) {
     return e(...t.map((r) => e(...r)));
   } else return e(...n);
 }
-function de(e) {
+function de2(e) {
   let t = e.nodes().map((r) => {
     let o = e.node(r).rank;
     return o === void 0 ? Number.MIN_VALUE : o;
   });
   return S(Math.max, t);
 }
-function ze(e, n) {
+function ze2(e, n) {
   let t = { lhs: [], rhs: [] };
   return e.forEach((r) => {
     n(r) ? t.lhs.push(r) : t.rhs.push(r);
@@ -5890,21 +6331,21 @@ function He2(e, n) {
   return e.reduce((t, r, o) => (t[r] = n[o], t), {});
 }
 var V2 = "\0";
-function ee2(e, n, t) {
-  var u, d, c2, f2, h, g;
+function ee(e, n, t) {
+  var u, d, c, f2, h2, g;
   if (!(e && n && t && n.dummy === "edge" && t.dummy === "edge" && n.edgeObj && t.edgeObj && e[n.edgeObj.v] && e[t.edgeObj.v] && e[n.edgeObj.w] && e[t.edgeObj.w])) return 0;
   let r = true;
   n.edgeObj.w === t.edgeObj.w && (r = false);
-  let o = r ? (d = (u = e[n.edgeObj.v]) == null ? void 0 : u.rank) != null ? d : NaN + 1 : (f2 = (c2 = e[n.edgeObj.w]) == null ? void 0 : c2.rank) != null ? f2 : NaN - 1, i = Object.entries(e).find((m2) => {
+  let o = r ? (d = (u = e[n.edgeObj.v]) == null ? void 0 : u.rank) != null ? d : NaN + 1 : (f2 = (c = e[n.edgeObj.w]) == null ? void 0 : c.rank) != null ? f2 : NaN - 1, i = Object.entries(e).find((m) => {
     var L2, y2;
-    return ((L2 = m2[1].edgeObj) == null ? void 0 : L2.v) === n.edgeObj.v && ((y2 = m2[1].edgeObj) == null ? void 0 : y2.w) === n.edgeObj.w && m2[1].rank === o;
-  }), s = Object.entries(e).find((m2) => {
+    return ((L2 = m[1].edgeObj) == null ? void 0 : L2.v) === n.edgeObj.v && ((y2 = m[1].edgeObj) == null ? void 0 : y2.w) === n.edgeObj.w && m[1].rank === o;
+  }), s = Object.entries(e).find((m) => {
     var L2, y2;
-    return ((L2 = m2[1].edgeObj) == null ? void 0 : L2.v) === t.edgeObj.v && ((y2 = m2[1].edgeObj) == null ? void 0 : y2.w) === t.edgeObj.w && m2[1].rank === o;
+    return ((L2 = m[1].edgeObj) == null ? void 0 : L2.v) === t.edgeObj.v && ((y2 = m[1].edgeObj) == null ? void 0 : y2.w) === t.edgeObj.w && m[1].rank === o;
   });
   if (!i || !s) return 0;
-  let a3 = (h = i[1].order) != null ? h : NaN, l = (g = s[1].order) != null ? g : NaN;
-  return isNaN(a3 - l) ? 0 : a3 - l;
+  let a = (h2 = i[1].order) != null ? h2 : NaN, l3 = (g = s[1].order) != null ? g : NaN;
+  return isNaN(a - l3) ? 0 : a - l3;
 }
 var ue2 = "3.1.3";
 var ce2 = class {
@@ -5935,19 +6376,19 @@ function dt2(e, n) {
 }
 var $e2 = ce2;
 var lt2 = () => 1;
-function be2(e, n) {
+function be(e, n) {
   if (e.nodeCount() <= 1) return [];
   let t = ct2(e, n || lt2);
   return ut2(t.graph, t.buckets, t.zeroIdx).flatMap((o) => e.outEdges(o.v, o.w) || []);
 }
 function ut2(e, n, t) {
-  var a3;
+  var a;
   let r = [], o = n[n.length - 1], i = n[0], s;
   for (; e.nodeCount(); ) {
     for (; s = i.dequeue(); ) fe2(e, n, t, s);
     for (; s = o.dequeue(); ) fe2(e, n, t, s);
     if (e.nodeCount()) {
-      for (let l = n.length - 2; l > 0; --l) if (s = (a3 = n[l]) == null ? void 0 : a3.dequeue(), s) {
+      for (let l3 = n.length - 2; l3 > 0; --l3) if (s = (a = n[l3]) == null ? void 0 : a.dequeue(), s) {
         r = r.concat(fe2(e, n, t, s, true) || []);
         break;
       }
@@ -5957,30 +6398,30 @@ function ut2(e, n, t) {
 }
 function fe2(e, n, t, r, o) {
   let i = [], s = o ? i : void 0;
-  return (e.inEdges(r.v) || []).forEach((a3) => {
-    let l = e.edge(a3), u = e.node(a3.v);
-    o && i.push({ v: a3.v, w: a3.w }), u.out -= l, he(n, t, u);
-  }), (e.outEdges(r.v) || []).forEach((a3) => {
-    let l = e.edge(a3), u = a3.w, d = e.node(u);
-    d.in -= l, he(n, t, d);
+  return (e.inEdges(r.v) || []).forEach((a) => {
+    let l3 = e.edge(a), u = e.node(a.v);
+    o && i.push({ v: a.v, w: a.w }), u.out -= l3, he2(n, t, u);
+  }), (e.outEdges(r.v) || []).forEach((a) => {
+    let l3 = e.edge(a), u = a.w, d = e.node(u);
+    d.in -= l3, he2(n, t, d);
   }), e.removeNode(r.v), s;
 }
 function ct2(e, n) {
   let t = new T2(), r = 0, o = 0;
-  e.nodes().forEach((a3) => {
-    t.setNode(a3, { v: a3, in: 0, out: 0 });
-  }), e.edges().forEach((a3) => {
-    let l = t.edge(a3.v, a3.w) || 0, u = n(a3), d = l + u;
-    t.setEdge(a3.v, a3.w, d);
-    let c2 = t.node(a3.v), f2 = t.node(a3.w);
-    o = Math.max(o, c2.out += u), r = Math.max(r, f2.in += u);
+  e.nodes().forEach((a) => {
+    t.setNode(a, { v: a, in: 0, out: 0 });
+  }), e.edges().forEach((a) => {
+    let l3 = t.edge(a.v, a.w) || 0, u = n(a), d = l3 + u;
+    t.setEdge(a.v, a.w, d);
+    let c = t.node(a.v), f2 = t.node(a.w);
+    o = Math.max(o, c.out += u), r = Math.max(r, f2.in += u);
   });
   let i = ft2(o + r + 3).map(() => new $e2()), s = r + 1;
-  return t.nodes().forEach((a3) => {
-    he(i, s, t.node(a3));
+  return t.nodes().forEach((a) => {
+    he2(i, s, t.node(a));
   }), { graph: t, buckets: i, zeroIdx: s };
 }
-function he(e, n, t) {
+function he2(e, n, t) {
   var r, o, i;
   t.out ? t.in ? (i = e[t.out - t.in + n]) == null || i.enqueue(t) : (o = e[e.length - 1]) == null || o.enqueue(t) : (r = e[0]) == null || r.enqueue(t);
 }
@@ -5990,7 +6431,7 @@ function ft2(e) {
   return n;
 }
 function Ue2(e, n) {
-  (e.graph().acyclicer === "greedy" ? be2(e, r(e)) : ht2(e, n != null ? n : null)).forEach((o) => {
+  (e.graph().acyclicer === "greedy" ? be(e, r(e)) : ht2(e, n != null ? n : null)).forEach((o) => {
     let i = e.edge(o);
     e.removeEdge(o), i.forwardName = o.name, i.reversed = true, e.setEdge(o.w, o.v, i, $2("rev"));
   });
@@ -6000,20 +6441,20 @@ function Ue2(e, n) {
 }
 function ht2(e, n) {
   let t = [], r = {}, o = {};
-  function i(l) {
-    Object.hasOwn(o, l) || (o[l] = true, r[l] = true, e.outEdges(l).forEach((u) => {
+  function i(l3) {
+    Object.hasOwn(o, l3) || (o[l3] = true, r[l3] = true, e.outEdges(l3).forEach((u) => {
       Object.hasOwn(r, u.w) ? t.push(u) : i(u.w);
-    }), delete r[l]);
+    }), delete r[l3]);
   }
-  function s(l) {
+  function s(l3) {
     var u;
-    Object.hasOwn(o, l) || (o[l] = true, r[l] = true, (u = e.outEdges(l)) == null || u.forEach((d) => {
-      var c2, f2;
-      Object.hasOwn(r, d.w) || ((c2 = n.node(l)) == null ? void 0 : c2.rank) > ((f2 = n.node(d.w)) == null ? void 0 : f2.rank) && bt2(e, d.w, d) ? t.push(d) : s(d.w);
-    }), delete r[l]);
+    Object.hasOwn(o, l3) || (o[l3] = true, r[l3] = true, (u = e.outEdges(l3)) == null || u.forEach((d) => {
+      var c, f2;
+      Object.hasOwn(r, d.w) || ((c = n.node(l3)) == null ? void 0 : c.rank) > ((f2 = n.node(d.w)) == null ? void 0 : f2.rank) && bt2(e, d.w, d) ? t.push(d) : s(d.w);
+    }), delete r[l3]);
   }
-  let a3 = i;
-  return n && typeof n.node == "function" && (a3 = s), e.sources().forEach(a3), e.nodes().forEach(a3), t;
+  let a = i;
+  return n && typeof n.node == "function" && (a = s), e.sources().forEach(a), e.nodes().forEach(a), t;
 }
 function Je2(e) {
   e.edges().forEach((n) => {
@@ -6031,7 +6472,7 @@ function bt2(e, n, t) {
     var s;
     if (e.sources().includes(i)) return true;
     r.add(i);
-    for (let a3 of (s = e.inEdges(i)) != null ? s : []) if (!(a3.v === t.v && a3.w === t.w) && !r.has(a3.v) && o(a3.v)) return true;
+    for (let a of (s = e.inEdges(i)) != null ? s : []) if (!(a.v === t.v && a.w === t.w) && !r.has(a.v) && o(a.v)) return true;
     return false;
   }
   return o(n);
@@ -6040,12 +6481,12 @@ function Ke2(e) {
   e.graph().dummyChains = [], e.edges().forEach((n) => pt2(e, n));
 }
 function pt2(e, n) {
-  let t = n.v, r = e.node(t).rank, o = n.w, i = e.node(o).rank, s = n.name, a3 = e.edge(n), l = a3.labelRank;
+  let t = n.v, r = e.node(t).rank, o = n.w, i = e.node(o).rank, s = n.name, a = e.edge(n), l3 = a.labelRank;
   if (i === r + 1) return;
   e.removeEdge(n);
-  let u, d, c2;
-  for (c2 = 0, ++r; r < i; ++c2, ++r) a3.points = [], d = { width: 0, height: 0, edgeLabel: a3, edgeObj: n, rank: r }, u = M2(e, "edge", d, "_d"), r === l && (d.width = a3.width, d.height = a3.height, d.dummy = "edge-label", d.labelpos = a3.labelpos), e.setEdge(t, u, { weight: a3.weight }, s), c2 === 0 && e.graph().dummyChains.push(u), t = u;
-  e.setEdge(t, o, { weight: a3.weight }, s);
+  let u, d, c;
+  for (c = 0, ++r; r < i; ++c, ++r) a.points = [], d = { width: 0, height: 0, edgeLabel: a, edgeObj: n, rank: r }, u = M(e, "edge", d, "_d"), r === l3 && (d.width = a.width, d.height = a.height, d.dummy = "edge-label", d.labelpos = a.labelpos), e.setEdge(t, u, { weight: a.weight }, s), c === 0 && e.graph().dummyChains.push(u), t = u;
+  e.setEdge(t, o, { weight: a.weight }, s);
 }
 function Qe2(e) {
   e.graph().dummyChains.forEach((n) => {
@@ -6053,36 +6494,36 @@ function Qe2(e) {
     for (e.setEdge(t.edgeObj, r); t.dummy; ) o = e.successors(n)[0], e.removeNode(n), r.points.push({ x: t.x, y: t.y }), t.dummy === "edge-label" && (r.x = t.x, r.y = t.y, r.width = t.width, r.height = t.height), n = o, t = e.node(n);
   });
 }
-function U2(e) {
+function U(e) {
   let n = {};
   function t(r) {
     let o = e.node(r);
     if (Object.hasOwn(n, r)) return o.rank;
     n[r] = true;
-    let i = e.outEdges(r), s = i ? i.map((l) => l == null ? Number.POSITIVE_INFINITY : t(l.w) - e.edge(l).minlen) : [], a3 = S(Math.min, s);
-    return a3 === Number.POSITIVE_INFINITY && (a3 = 0), o.rank = a3;
+    let i = e.outEdges(r), s = i ? i.map((l3) => l3 == null ? Number.POSITIVE_INFINITY : t(l3.w) - e.edge(l3).minlen) : [], a = S(Math.min, s);
+    return a === Number.POSITIVE_INFINITY && (a = 0), o.rank = a;
   }
   e.sources().forEach(t);
 }
-function A2(e, n) {
+function A(e, n) {
   return e.node(n.w).rank - e.node(n.v).rank - e.edge(n).minlen;
 }
-var ne2 = Et;
-function Et(e) {
+var ne = Et2;
+function Et2(e) {
   let n = new T2({ directed: false }), t = e.nodes();
   if (t.length === 0) throw new Error("Graph must have at least one node");
   let r = t[0], o = e.nodeCount();
   n.setNode(r, {});
   let i, s;
-  for (; Lt2(n, e) < o && (i = yt2(n, e), !!i); ) s = n.hasNode(i.v) ? A2(e, i) : -A2(e, i), wt2(n, e, s);
+  for (; Lt2(n, e) < o && (i = yt2(n, e), !!i); ) s = n.hasNode(i.v) ? A(e, i) : -A(e, i), wt2(n, e, s);
   return n;
 }
 function Lt2(e, n) {
   function t(r) {
     let o = n.nodeEdges(r);
     o && o.forEach((i) => {
-      let s = i.v, a3 = r === s ? i.w : s;
-      !e.hasNode(a3) && !A2(n, i) && (e.setNode(a3, {}), e.setEdge(r, a3, {}), t(a3));
+      let s = i.v, a = r === s ? i.w : s;
+      !e.hasNode(a) && !A(n, i) && (e.setNode(a, {}), e.setEdge(r, a, {}), t(a));
     });
   }
   return e.nodes().forEach(t), e.nodeCount();
@@ -6090,13 +6531,13 @@ function Lt2(e, n) {
 function yt2(e, n) {
   return n.edges().reduce((r, o) => {
     let i = Number.POSITIVE_INFINITY;
-    return e.hasNode(o.v) !== e.hasNode(o.w) && (i = A2(n, o)), i < r[0] ? [i, o] : r;
+    return e.hasNode(o.v) !== e.hasNode(o.w) && (i = A(n, o)), i < r[0] ? [i, o] : r;
   }, [Number.POSITIVE_INFINITY, null])[1];
 }
 function wt2(e, n, t) {
   e.nodes().forEach((r) => n.node(r).rank += t);
 }
-var { preorder: Nt, postorder: Gt } = H2;
+var { preorder: Nt, postorder: Gt } = H;
 var en = Y2;
 Y2.initLowLimValues = pe2;
 Y2.initCutValues = ge2;
@@ -6105,34 +6546,34 @@ Y2.leaveEdge = rn;
 Y2.enterEdge = on;
 Y2.exchangeEdges = sn;
 function Y2(e) {
-  e = Ye2(e), U2(e);
-  let n = ne2(e);
+  e = Ye2(e), U(e);
+  let n = ne(e);
   pe2(n), ge2(n, e);
   let t, r;
   for (; t = rn(n); ) r = on(n, e, t), sn(n, e, t, r);
 }
 function ge2(e, n) {
   let t = Gt(e, e.nodes());
-  t = t.slice(0, t.length - 1), t.forEach((r) => vt(e, n, r));
+  t = t.slice(0, t.length - 1), t.forEach((r) => vt2(e, n, r));
 }
-function vt(e, n, t) {
+function vt2(e, n, t) {
   let o = e.node(t).parent, i = e.edge(t, o);
   i.cutvalue = nn(e, n, t);
 }
 function nn(e, n, t) {
-  let o = e.node(t).parent, i = true, s = n.edge(t, o), a3 = 0;
-  s || (i = false, s = n.edge(o, t)), a3 = s.weight;
-  let l = n.nodeEdges(t);
-  return l && l.forEach((u) => {
-    let d = u.v === t, c2 = d ? u.w : u.v;
-    if (c2 !== o) {
-      let f2 = d === i, h = n.edge(u).weight;
-      if (a3 += f2 ? h : -h, xt2(e, t, c2)) {
-        let m2 = e.edge(t, c2).cutvalue;
-        a3 += f2 ? -m2 : m2;
+  let o = e.node(t).parent, i = true, s = n.edge(t, o), a = 0;
+  s || (i = false, s = n.edge(o, t)), a = s.weight;
+  let l3 = n.nodeEdges(t);
+  return l3 && l3.forEach((u) => {
+    let d = u.v === t, c = d ? u.w : u.v;
+    if (c !== o) {
+      let f2 = d === i, h2 = n.edge(u).weight;
+      if (a += f2 ? h2 : -h2, xt2(e, t, c)) {
+        let m = e.edge(t, c).cutvalue;
+        a += f2 ? -m : m;
       }
     }
-  }), a3;
+  }), a;
 }
 function pe2(e, n) {
   arguments.length < 2 && (n = e.nodes()[0]), tn(e, {}, 1, n);
@@ -6140,9 +6581,9 @@ function pe2(e, n) {
 function tn(e, n, t, r, o) {
   let i = t, s = e.node(r);
   n[r] = true;
-  let a3 = e.neighbors(r);
-  return a3 && a3.forEach((l) => {
-    Object.hasOwn(n, l) || (t = tn(e, n, t, l, r));
+  let a = e.neighbors(r);
+  return a && a.forEach((l3) => {
+    Object.hasOwn(n, l3) || (t = tn(e, n, t, l3, r));
   }), s.low = i, s.lim = t++, o ? s.parent = o : delete s.parent, t;
 }
 function rn(e) {
@@ -6151,8 +6592,8 @@ function rn(e) {
 function on(e, n, t) {
   let r = t.v, o = t.w;
   n.hasEdge(r, o) || (r = t.w, o = t.v);
-  let i = e.node(r), s = e.node(o), a3 = i, l = false;
-  return i.lim > s.lim && (a3 = s, l = true), n.edges().filter((d) => l === Ze2(e, e.node(d.v), a3) && l !== Ze2(e, e.node(d.w), a3)).reduce((d, c2) => A2(n, c2) < A2(n, d) ? c2 : d);
+  let i = e.node(r), s = e.node(o), a = i, l3 = false;
+  return i.lim > s.lim && (a = s, l3 = true), n.edges().filter((d) => l3 === Ze(e, e.node(d.v), a) && l3 !== Ze(e, e.node(d.w), a)).reduce((d, c) => A(n, c) < A(n, d) ? c : d);
 }
 function sn(e, n, t, r) {
   let o = t.v, i = t.w;
@@ -6163,14 +6604,14 @@ function kt2(e, n) {
   if (!t) return;
   let r = Nt(e, [t]);
   r = r.slice(1), r.forEach((o) => {
-    let s = e.node(o).parent, a3 = n.edge(o, s), l = false;
-    a3 || (a3 = n.edge(s, o), l = true), n.node(o).rank = n.node(s).rank + (l ? a3.minlen : -a3.minlen);
+    let s = e.node(o).parent, a = n.edge(o, s), l3 = false;
+    a || (a = n.edge(s, o), l3 = true), n.node(o).rank = n.node(s).rank + (l3 ? a.minlen : -a.minlen);
   });
 }
 function xt2(e, n, t) {
   return e.hasEdge(n, t);
 }
-function Ze2(e, n, t) {
+function Ze(e, n, t) {
   return t.low <= n.lim && n.lim <= t.lim;
 }
 var dn = _t2;
@@ -6182,7 +6623,7 @@ function _t2(e) {
       an(e);
       break;
     case "tight-tree":
-      Ct(e);
+      Ct2(e);
       break;
     case "longest-path":
       Ot2(e);
@@ -6193,9 +6634,9 @@ function _t2(e) {
       an(e);
   }
 }
-var Ot2 = U2;
-function Ct(e) {
-  U2(e), ne2(e);
+var Ot2 = U;
+function Ct2(e) {
+  U(e), ne(e);
 }
 function an(e) {
   en(e);
@@ -6205,27 +6646,27 @@ function Tt2(e) {
   let n = Rt2(e), t = e.graph();
   if (!Array.isArray(t.dummyChains)) return;
   t.dummyChains.forEach((o) => {
-    let i = e.node(o), s = i.edgeObj, a3 = jt(e, n, s.v, s.w), l = a3.path, u = a3.lca, d = 0, c2 = l[d], f2 = true;
+    let i = e.node(o), s = i.edgeObj, a = jt(e, n, s.v, s.w), l3 = a.path, u = a.lca, d = 0, c = l3[d], f2 = true;
     for (; o !== s.w; ) {
       if (i = e.node(o), f2) {
-        for (; (c2 = l[d]) !== u && e.node(c2).maxRank < i.rank; ) d++;
-        c2 === u && (f2 = false);
+        for (; (c = l3[d]) !== u && e.node(c).maxRank < i.rank; ) d++;
+        c === u && (f2 = false);
       }
       if (!f2) {
-        for (; d < l.length - 1 && e.node(l[d + 1]).minRank <= i.rank; ) d++;
-        c2 = l[d];
+        for (; d < l3.length - 1 && e.node(l3[d + 1]).minRank <= i.rank; ) d++;
+        c = l3[d];
       }
-      c2 !== void 0 && e.setParent(o, c2), o = e.successors(o)[0];
+      c !== void 0 && e.setParent(o, c), o = e.successors(o)[0];
     }
   });
 }
 function jt(e, n, t, r) {
-  let o = [], i = [], s = Math.min(n[t].low, n[r].low), a3 = Math.max(n[t].lim, n[r].lim), l;
-  l = t;
+  let o = [], i = [], s = Math.min(n[t].low, n[r].low), a = Math.max(n[t].lim, n[r].lim), l3;
+  l3 = t;
   do
-    l = e.parent(l), o.push(l);
-  while (l && (n[l].low > s || a3 > n[l].lim));
-  let u = l, d = r;
+    l3 = e.parent(l3), o.push(l3);
+  while (l3 && (n[l3].low > s || a > n[l3].lim));
+  let u = l3, d = r;
   for (; (d = e.parent(d)) !== u; ) i.push(d);
   return { path: o.concat(i.reverse()), lca: u };
 }
@@ -6238,29 +6679,29 @@ function Rt2(e) {
   return e.children(V2).forEach(r), n;
 }
 function un(e) {
-  let n = M2(e, "root", {}, "_root"), t = It(e), r = Object.values(t), o = S(Math.max, r) - 1, i = 2 * o + 1;
-  e.graph().nestingRoot = n, e.edges().forEach((a3) => e.edge(a3).minlen *= i);
+  let n = M(e, "root", {}, "_root"), t = It2(e), r = Object.values(t), o = S(Math.max, r) - 1, i = 2 * o + 1;
+  e.graph().nestingRoot = n, e.edges().forEach((a) => e.edge(a).minlen *= i);
   let s = St2(e) + 1;
-  e.children(V2).forEach((a3) => {
-    cn(e, n, i, s, o, t, a3);
+  e.children(V2).forEach((a) => {
+    cn(e, n, i, s, o, t, a);
   }), e.graph().nodeRankFactor = i;
 }
 function cn(e, n, t, r, o, i, s) {
-  var c2;
-  let a3 = e.children(s);
-  if (!a3.length) {
+  var c;
+  let a = e.children(s);
+  if (!a.length) {
     s !== n && e.setEdge(n, s, { weight: 0, minlen: t });
     return;
   }
-  let l = ae2(e, "_bt"), u = ae2(e, "_bb"), d = e.node(s);
-  e.setParent(l, s), d.borderTop = l, e.setParent(u, s), d.borderBottom = u, a3.forEach((f2) => {
+  let l3 = ae2(e, "_bt"), u = ae2(e, "_bb"), d = e.node(s);
+  e.setParent(l3, s), d.borderTop = l3, e.setParent(u, s), d.borderBottom = u, a.forEach((f2) => {
     var b;
     cn(e, n, t, r, o, i, f2);
-    let h = e.node(f2), g = h.borderTop ? h.borderTop : f2, m2 = h.borderBottom ? h.borderBottom : f2, L2 = h.borderTop ? r : 2 * r, y2 = g !== m2 ? 1 : o - ((b = i[s]) != null ? b : 0) + 1;
-    e.setEdge(l, g, { weight: L2, minlen: y2, nestingEdge: true }), e.setEdge(m2, u, { weight: L2, minlen: y2, nestingEdge: true });
-  }), e.parent(s) || e.setEdge(n, l, { weight: 0, minlen: o + ((c2 = i[s]) != null ? c2 : 0) });
+    let h2 = e.node(f2), g = h2.borderTop ? h2.borderTop : f2, m = h2.borderBottom ? h2.borderBottom : f2, L2 = h2.borderTop ? r : 2 * r, y2 = g !== m ? 1 : o - ((b = i[s]) != null ? b : 0) + 1;
+    e.setEdge(l3, g, { weight: L2, minlen: y2, nestingEdge: true }), e.setEdge(m, u, { weight: L2, minlen: y2, nestingEdge: true });
+  }), e.parent(s) || e.setEdge(n, l3, { weight: 0, minlen: o + ((c = i[s]) != null ? c : 0) });
 }
-function It(e) {
+function It2(e) {
   let n = {};
   function t(r, o) {
     let i = e.children(r);
@@ -6289,8 +6730,8 @@ function Pt2(e) {
   e.children(V2).forEach(n);
 }
 function hn(e, n, t, r, o, i) {
-  let s = { width: 0, height: 0, rank: i, borderType: n }, a3 = o[n][i - 1], l = M2(e, "border", s, t);
-  o[n][i] = l, e.setParent(l, r), a3 && e.setEdge(a3, l, { weight: 1 });
+  let s = { width: 0, height: 0, rank: i, borderType: n }, a = o[n][i - 1], l3 = M(e, "border", s, t);
+  o[n][i] = l3, e.setParent(l3, r), a && e.setEdge(a, l3, { weight: 1 });
 }
 function pn(e) {
   var t;
@@ -6300,7 +6741,7 @@ function pn(e) {
 function mn(e) {
   var t;
   let n = (t = e.graph().rankdir) == null ? void 0 : t.toLowerCase();
-  (n === "bt" || n === "rl") && Ft(e), (n === "lr" || n === "rl") && (Dt(e), En(e));
+  (n === "bt" || n === "rl") && Ft(e), (n === "lr" || n === "rl") && (Dt2(e), En(e));
 }
 function En(e) {
   e.nodes().forEach((n) => gn(e.node(n))), e.edges().forEach((n) => gn(e.edge(n)));
@@ -6319,7 +6760,7 @@ function Ft(e) {
 function me2(e) {
   e.y = -e.y;
 }
-function Dt(e) {
+function Dt2(e) {
   e.nodes().forEach((n) => Ee2(e.node(n))), e.edges().forEach((n) => {
     var r;
     let t = e.edge(n);
@@ -6330,20 +6771,20 @@ function Ee2(e) {
   let n = e.x;
   e.x = e.y, e.y = n;
 }
-function Le(e, n = null) {
+function Le2(e, n = null) {
   let t = {}, r = e.nodes().filter((d) => !e.children(d).length), o = r.map((d) => e.node(d).rank), i = S(Math.max, o), s = D2(i + 1).map(() => []);
-  function a3(d) {
+  function a(d) {
     if (t[d]) return;
     t[d] = true;
-    let c2 = e.node(d);
-    s[c2.rank].push(d);
+    let c = e.node(d);
+    s[c.rank].push(d);
     let f2 = e.successors(d);
-    f2 && [...f2].sort((g, m2) => u(g, m2)).forEach(a3);
+    f2 && [...f2].sort((g, m) => u(g, m)).forEach(a);
   }
-  r.sort((d, c2) => e.node(d).rank - e.node(c2).rank).forEach(a3);
-  function u(d, c2) {
-    let f2 = e.node(d), h = e.node(c2);
-    return ee2(n, f2, h);
+  r.sort((d, c) => e.node(d).rank - e.node(c).rank).forEach(a);
+  function u(d, c) {
+    let f2 = e.node(d), h2 = e.node(c);
+    return ee(n, f2, h2);
   }
   return s;
 }
@@ -6355,19 +6796,19 @@ function ye2(e, n) {
 function Vt(e, n, t) {
   let r = He2(t, t.map((u, d) => d)), o = n.flatMap((u) => {
     let d = e.outEdges(u);
-    return d ? d.map((c2) => ({ pos: r[c2.w], weight: e.edge(c2).weight })).sort((c2, f2) => c2.pos - f2.pos) : [];
+    return d ? d.map((c) => ({ pos: r[c.w], weight: e.edge(c).weight })).sort((c, f2) => c.pos - f2.pos) : [];
   }), i = 1;
   for (; i < t.length; ) i <<= 1;
   let s = 2 * i - 1;
   i -= 1;
-  let a3 = new Array(s).fill(0), l = 0;
+  let a = new Array(s).fill(0), l3 = 0;
   return o.forEach((u) => {
     let d = u.pos + i;
-    a3[d] += u.weight;
-    let c2 = 0;
-    for (; d > 0; ) d % 2 && (c2 += a3[d + 1]), d = d - 1 >> 1, a3[d] += u.weight;
-    l += u.weight * c2;
-  }), l;
+    a[d] += u.weight;
+    let c = 0;
+    for (; d > 0; ) d % 2 && (c += a[d + 1]), d = d - 1 >> 1, a[d] += u.weight;
+    l3 += u.weight * c;
+  }), l3;
 }
 function we2(e, n = []) {
   return n.map((t) => {
@@ -6375,8 +6816,8 @@ function we2(e, n = []) {
     if (!r || !r.length) return { v: t };
     {
       let o = r.reduce((i, s) => {
-        let a3 = e.edge(s), l = e.node(s.v);
-        return { sum: i.sum + a3.weight * l.order, weight: i.weight + a3.weight };
+        let a = e.edge(s), l3 = e.node(s.v);
+        return { sum: i.sum + a.weight * l3.order, weight: i.weight + a.weight };
       }, { sum: 0, weight: 0 });
       return { v: t, barycenter: o.sum / o.weight, weight: o.weight };
     }
@@ -6398,7 +6839,7 @@ function Yt(e) {
   let n = [];
   function t(o) {
     return (i) => {
-      i.merged || (i.barycenter === void 0 || o.barycenter === void 0 || i.barycenter >= o.barycenter) && Bt(o, i);
+      i.merged || (i.barycenter === void 0 || o.barycenter === void 0 || i.barycenter >= o.barycenter) && Bt2(o, i);
     };
   }
   function r(o) {
@@ -6412,26 +6853,26 @@ function Yt(e) {
   }
   return n.filter((o) => !o.merged).map((o) => W2(o, ["vs", "i", "barycenter", "weight"]));
 }
-function Bt(e, n) {
+function Bt2(e, n) {
   let t = 0, r = 0;
   e.weight && (t += e.barycenter * e.weight, r += e.weight), n.weight && (t += n.barycenter * n.weight, r += n.weight), e.vs = n.vs.concat(e.vs), e.barycenter = t / r, e.weight = r, e.i = Math.min(n.i, e.i), n.merged = true;
 }
 function Ge2(e, n, t, r, o) {
-  let i = {}, s = null, a3 = null, l = o;
-  typeof n == "boolean" ? (l = n, i = {}) : n && (i = n, s = t != null ? t : null, a3 = r != null ? r : null);
-  let u = ze(e, (y2) => Object.hasOwn(y2, "barycenter")), d = u.lhs, c2 = u.rhs.sort((y2, b) => b.i - y2.i), f2 = [], h = 0, g = 0, m2 = 0;
-  d.sort(Wt(a3, s, !!l));
+  let i = {}, s = null, a = null, l3 = o;
+  typeof n == "boolean" ? (l3 = n, i = {}) : n && (i = n, s = t != null ? t : null, a = r != null ? r : null);
+  let u = ze2(e, (y2) => Object.hasOwn(y2, "barycenter")), d = u.lhs, c = u.rhs.sort((y2, b) => b.i - y2.i), f2 = [], h2 = 0, g = 0, m = 0;
+  d.sort(Wt(a, s, !!l3));
   for (let [y2, b] of Object.entries(i)) {
-    let p = d.findIndex((E) => E.vs[0] === y2);
+    let p = d.findIndex((E2) => E2.vs[0] === y2);
     d.splice(p + 1, 0, b);
   }
-  m2 = Ln(f2, c2, m2), d.forEach((y2) => {
-    m2 += y2.vs.length, f2.push(y2.vs), h += y2.barycenter * y2.weight, g += y2.weight, m2 = Ln(f2, c2, m2);
+  m = Ln2(f2, c, m), d.forEach((y2) => {
+    m += y2.vs.length, f2.push(y2.vs), h2 += y2.barycenter * y2.weight, g += y2.weight, m = Ln2(f2, c, m);
   });
   let L2 = { vs: f2.flat(1) };
-  return g && (L2.barycenter = h / g, L2.weight = g), L2;
+  return g && (L2.barycenter = h2 / g, L2.weight = g), L2;
 }
-function Ln(e, n, t) {
+function Ln2(e, n, t) {
   let r;
   for (; n.length && (r = n[n.length - 1]).i <= t; ) n.pop(), e.push(r.vs), t++;
   return t;
@@ -6441,46 +6882,46 @@ function Wt(e, n, t) {
     if (r.barycenter < o.barycenter) return -1;
     if (r.barycenter > o.barycenter) return 1;
     if (e && (typeof r.vs[0] == "string" || typeof o.vs[0] == "string")) {
-      let i = e.node(r.vs[0]), s = e.node(o.vs[0]), a3 = ee2(n, i, s);
-      if (a3 !== 0) return a3;
+      let i = e.node(r.vs[0]), s = e.node(o.vs[0]), a = ee(n, i, s);
+      if (a !== 0) return a;
     }
     return t ? o.i - r.i : r.i - o.i;
   };
 }
-function te2(e, n, t, r, o) {
-  var y2, b, p, E, w2, k, _2, O2, j, R3, I2;
+function te(e, n, t, r, o) {
+  var y2, b, p, E2, w2, k, _2, O2, j2, R3, I2;
   let i = null, s = o;
   typeof r == "boolean" ? (s = r, i = null) : r !== void 0 && (i = r);
-  let a3 = e.children(n), l = e.node(n), u = l ? l.borderLeft : void 0, d = l ? l.borderRight : void 0, c2 = {};
-  u && (a3 = a3.filter((v2) => v2 !== u && v2 !== d));
-  let f2 = we2(e, a3);
-  f2.forEach((v2) => {
-    if (e.children(v2.v).length) {
-      let { result: x } = te2(e, v2.v, t, i, s);
-      c2[v2.v] = x, Object.hasOwn(x, "barycenter") && zt2(v2, x);
+  let a = e.children(n), l3 = e.node(n), u = l3 ? l3.borderLeft : void 0, d = l3 ? l3.borderRight : void 0, c = {};
+  u && (a = a.filter((v) => v !== u && v !== d));
+  let f2 = we2(e, a);
+  f2.forEach((v) => {
+    if (e.children(v.v).length) {
+      let { result: x2 } = te(e, v.v, t, i, s);
+      c[v.v] = x2, Object.hasOwn(x2, "barycenter") && zt2(v, x2);
     }
   });
-  let h = Ne2(f2, t);
-  Xt(h, c2);
-  let g = {}, m2 = false;
-  for (let v2 = 0; v2 < h.length; v2++) for (let x = v2 + 1; x < h.length; x++) if (!(!h[v2] || !h[x] || !((y2 = h[v2]) != null && y2.barycenter) || !((b = h[x]) != null && b.barycenter)) && ((p = h[v2]) == null ? void 0 : p.barycenter) === h[x].barycenter) {
-    let G2 = (w2 = (E = h[v2]) == null ? void 0 : E.vs[0]) != null ? w2 : "", N2 = (_2 = (k = h[x]) == null ? void 0 : k.vs[0]) != null ? _2 : "", C = e.node(G2), B2 = e.node(N2);
-    if (C.dummy === "edge" && B2.dummy === "edge" && ((O2 = C.edgeObj) == null ? void 0 : O2.v) === ((j = B2.edgeObj) == null ? void 0 : j.v) && ((R3 = C.edgeObj) == null ? void 0 : R3.w) === ((I2 = B2.edgeObj) == null ? void 0 : I2.w)) if (C.edgeLabel.reversed) {
-      g[N2] = h[v2], h.splice(v2, 1), v2--;
+  let h2 = Ne2(f2, t);
+  Xt(h2, c);
+  let g = {}, m = false;
+  for (let v = 0; v < h2.length; v++) for (let x2 = v + 1; x2 < h2.length; x2++) if (!(!h2[v] || !h2[x2] || !((y2 = h2[v]) != null && y2.barycenter) || !((b = h2[x2]) != null && b.barycenter)) && ((p = h2[v]) == null ? void 0 : p.barycenter) === h2[x2].barycenter) {
+    let G2 = (w2 = (E2 = h2[v]) == null ? void 0 : E2.vs[0]) != null ? w2 : "", N2 = (_2 = (k = h2[x2]) == null ? void 0 : k.vs[0]) != null ? _2 : "", C2 = e.node(G2), B2 = e.node(N2);
+    if (C2.dummy === "edge" && B2.dummy === "edge" && ((O2 = C2.edgeObj) == null ? void 0 : O2.v) === ((j2 = B2.edgeObj) == null ? void 0 : j2.v) && ((R3 = C2.edgeObj) == null ? void 0 : R3.w) === ((I2 = B2.edgeObj) == null ? void 0 : I2.w)) if (C2.edgeLabel.reversed) {
+      g[N2] = h2[v], h2.splice(v, 1), v--;
       break;
-    } else g[G2] || (g[G2] = h[x], h.splice(x, 1), x--);
-    else m2 = true;
+    } else g[G2] || (g[G2] = h2[x2], h2.splice(x2, 1), x2--);
+    else m = true;
   }
-  let L2 = Ge2(h, g, i, e, s);
+  let L2 = Ge2(h2, g, i, e, s);
   if (u && d) {
     L2.vs = [u, L2.vs, d].flat(1);
-    let v2 = e.predecessors(u);
-    if (v2 && v2.length) {
-      let x = e.node(v2[0]), G2 = e.predecessors(d), N2 = e.node(G2[0]);
-      Object.hasOwn(L2, "barycenter") || (L2.barycenter = 0, L2.weight = 0), L2.barycenter = (L2.barycenter * L2.weight + x.order + N2.order) / (L2.weight + 2), L2.weight += 2;
+    let v = e.predecessors(u);
+    if (v && v.length) {
+      let x2 = e.node(v[0]), G2 = e.predecessors(d), N2 = e.node(G2[0]);
+      Object.hasOwn(L2, "barycenter") || (L2.barycenter = 0, L2.weight = 0), L2.barycenter = (L2.barycenter * L2.weight + x2.order + N2.order) / (L2.weight + 2), L2.weight += 2;
     }
   }
-  return Object.defineProperty(L2, "result", { value: L2, enumerable: false, configurable: true, writable: true }), Object.defineProperty(L2, "usedBias", { value: m2, enumerable: false, configurable: true, writable: true }), L2;
+  return Object.defineProperty(L2, "result", { value: L2, enumerable: false, configurable: true, writable: true }), Object.defineProperty(L2, "usedBias", { value: m, enumerable: false, configurable: true, writable: true }), L2;
 }
 function Xt(e, n) {
   e.forEach((t) => {
@@ -6494,14 +6935,14 @@ function ve2(e, n, t, r) {
   r || (r = e.nodes());
   let o = Ht(e), i = new T2({ compound: true }).setGraph({ root: o }).setDefaultNodeLabel((s) => e.node(s));
   return r.forEach((s) => {
-    let a3 = e.node(s), l = e.parent(s);
-    if (a3.rank === n || a3.minRank <= n && n <= a3.maxRank) {
-      i.setNode(s), i.setParent(s, l || o);
+    let a = e.node(s), l3 = e.parent(s);
+    if (a.rank === n || a.minRank <= n && n <= a.maxRank) {
+      i.setNode(s), i.setParent(s, l3 || o);
       let u = e[t](s);
       u && u.forEach((d) => {
-        let c2 = d.v === s ? d.w : d.v, f2 = i.edge(c2, s), h = f2 !== void 0 ? f2.weight : 0;
-        i.setEdge(c2, s, { weight: e.edge(d).weight + h });
-      }), Object.hasOwn(a3, "minRank") && i.setNode(s, { borderLeft: a3.borderLeft[n], borderRight: a3.borderRight[n] });
+        let c = d.v === s ? d.w : d.v, f2 = i.edge(c, s), h2 = f2 !== void 0 ? f2.weight : 0;
+        i.setEdge(c, s, { weight: e.edge(d).weight + h2 });
+      }), Object.hasOwn(a, "minRank") && i.setNode(s, { borderLeft: a.borderLeft[n], borderRight: a.borderRight[n] });
     }
   }), i;
 }
@@ -6513,13 +6954,13 @@ function Ht(e) {
 function ke2(e, n, t) {
   let r = {}, o;
   t.forEach((i) => {
-    let s = e.parent(i), a3, l;
+    let s = e.parent(i), a, l3;
     for (; s; ) {
-      if (a3 = e.parent(s), a3 ? (l = r[a3], r[a3] = s) : (l = o, o = s), l && l !== s) {
-        n.setEdge(l, s);
+      if (a = e.parent(s), a ? (l3 = r[a], r[a] = s) : (l3 = o, o = s), l3 && l3 !== s) {
+        n.setEdge(l3, s);
         return;
       }
-      s = a3;
+      s = a;
     }
   });
 }
@@ -6528,15 +6969,15 @@ function re2(e, n = {}, t = null) {
     n.customOrder(e, re2);
     return;
   }
-  let r = de(e), o = yn(e, D2(1, r + 1), "inEdges"), i = yn(e, D2(r - 1, -1, -1), "outEdges"), s = Le(e, t);
-  if (wn2(e, s), n.disableOptimalOrderHeuristic) return;
-  let a3 = Number.POSITIVE_INFINITY, l, u = n.constraints || [];
-  for (let d = 0, c2 = 0; c2 < 4; ++d, ++c2) {
-    qt(d % 2 ? o : i, d % 4 >= 2, u, t), s = P2(e);
+  let r = de2(e), o = yn(e, D2(1, r + 1), "inEdges"), i = yn(e, D2(r - 1, -1, -1), "outEdges"), s = Le2(e, t);
+  if (wn(e, s), n.disableOptimalOrderHeuristic) return;
+  let a = Number.POSITIVE_INFINITY, l3, u = n.constraints || [];
+  for (let d = 0, c = 0; c < 4; ++d, ++c) {
+    qt2(d % 2 ? o : i, d % 4 >= 2, u, t), s = P2(e);
     let f2 = ye2(e, s);
-    f2 < a3 ? (c2 = 0, l = Object.assign({}, s), a3 = f2) : f2 === a3 && (l = structuredClone(s));
+    f2 < a ? (c = 0, l3 = Object.assign({}, s), a = f2) : f2 === a && (l3 = structuredClone(s));
   }
-  wn2(e, l);
+  wn(e, l3);
 }
 function yn(e, n, t) {
   let r = /* @__PURE__ */ new Map(), o = (i, s) => {
@@ -6544,73 +6985,73 @@ function yn(e, n, t) {
   };
   for (let i of e.nodes()) {
     let s = e.node(i);
-    if (typeof s.rank == "number" && o(s.rank, i), typeof s.minRank == "number" && typeof s.maxRank == "number") for (let a3 = s.minRank; a3 <= s.maxRank; a3++) a3 !== s.rank && o(a3, i);
+    if (typeof s.rank == "number" && o(s.rank, i), typeof s.minRank == "number" && typeof s.maxRank == "number") for (let a = s.minRank; a <= s.maxRank; a++) a !== s.rank && o(a, i);
   }
   return n.map(function(i) {
     return ve2(e, i, t, r.get(i) || []);
   });
 }
-function qt(e, n, t, r) {
+function qt2(e, n, t, r) {
   let o = true, i = new T2();
   e.forEach(function(s) {
     t.forEach((d) => i.setEdge(d.left, d.right));
-    let a3 = s.graph().root, { result: l, usedBias: u } = te2(s, a3, i, r, o);
-    n && u && (o = !o), l.vs.forEach((d, c2) => s.node(d).order = c2), ke2(s, i, l.vs);
+    let a = s.graph().root, { result: l3, usedBias: u } = te(s, a, i, r, o);
+    n && u && (o = !o), l3.vs.forEach((d, c) => s.node(d).order = c), ke2(s, i, l3.vs);
   });
 }
-function wn2(e, n) {
+function wn(e, n) {
   Object.values(n).forEach((t) => t.forEach((r, o) => e.node(r).order = o));
 }
 function $t2(e, n) {
   let t = {};
   function r(o, i) {
-    let s = 0, a3 = 0, l = o.length, u = i[i.length - 1];
-    return i.forEach((d, c2) => {
-      let f2 = Jt(e, d), h = f2 ? e.node(f2).order : l;
-      (f2 || d === u) && (i.slice(a3, c2 + 1).forEach((g) => {
-        let m2 = e.predecessors(g);
-        m2 && m2.forEach((L2) => {
+    let s = 0, a = 0, l3 = o.length, u = i[i.length - 1];
+    return i.forEach((d, c) => {
+      let f2 = Jt(e, d), h2 = f2 ? e.node(f2).order : l3;
+      (f2 || d === u) && (i.slice(a, c + 1).forEach((g) => {
+        let m = e.predecessors(g);
+        m && m.forEach((L2) => {
           let y2 = e.node(L2), b = y2.order;
-          (b < s || h < b) && !(y2.dummy && e.node(g).dummy) && Gn(t, L2, g);
+          (b < s || h2 < b) && !(y2.dummy && e.node(g).dummy) && Gn(t, L2, g);
         });
-      }), a3 = c2 + 1, s = h);
+      }), a = c + 1, s = h2);
     }), i;
   }
   return n.length && n.reduce(r), t;
 }
 function Ut(e, n) {
   let t = {};
-  function r(a3) {
-    var l;
-    return ((l = e.node(a3)) == null ? void 0 : l.dummy) === "border";
+  function r(a) {
+    var l3;
+    return ((l3 = e.node(a)) == null ? void 0 : l3.dummy) === "border";
   }
   if (!e.nodes().some(r)) return t;
-  function i(a3, l, u, d, c2) {
-    D2(l, u).forEach((f2) => {
-      let h = a3[f2];
-      if (h !== void 0 && e.node(h).dummy) {
-        let g = e.predecessors(h);
-        g && g.forEach((m2) => {
-          if (m2 === void 0) return;
-          let L2 = e.node(m2);
-          L2.dummy && (L2.order < d || L2.order > c2) && Gn(t, m2, h);
+  function i(a, l3, u, d, c) {
+    D2(l3, u).forEach((f2) => {
+      let h2 = a[f2];
+      if (h2 !== void 0 && e.node(h2).dummy) {
+        let g = e.predecessors(h2);
+        g && g.forEach((m) => {
+          if (m === void 0) return;
+          let L2 = e.node(m);
+          L2.dummy && (L2.order < d || L2.order > c) && Gn(t, m, h2);
         });
       }
     });
   }
-  function s(a3, l) {
-    let u = -1, d = -1, c2 = 0;
-    return l.forEach((f2, h) => {
+  function s(a, l3) {
+    let u = -1, d = -1, c = 0;
+    return l3.forEach((f2, h2) => {
       if (r(f2)) {
         let g = e.predecessors(f2);
         if (g && g.length) {
-          let m2 = g[0];
-          if (m2 === void 0) return;
-          d = e.node(m2).order, i(l, c2, h, u, d), c2 = h, u = d;
+          let m = g[0];
+          if (m === void 0) return;
+          d = e.node(m).order, i(l3, c, h2, u, d), c = h2, u = d;
         }
       }
-      i(l, c2, l.length, d, a3.length);
-    }), l;
+      i(l3, c, l3.length, d, a.length);
+    }), l3;
   }
   return n.length && n.reduce(s), t;
 }
@@ -6637,29 +7078,29 @@ function Kt(e, n, t) {
   return r !== void 0 && Object.hasOwn(r, t);
 }
 function Qt(e, n, t, r, o) {
-  let i = {}, s = {}, a3 = {};
-  return n.forEach((l) => {
-    l.forEach((u, d) => {
-      i[u] = u, s[u] = u, a3[u] = d;
+  let i = {}, s = {}, a = {};
+  return n.forEach((l3) => {
+    l3.forEach((u, d) => {
+      i[u] = u, s[u] = u, a[u] = d;
     });
-  }), n.forEach((l) => {
-    let u = -1, d = -1, c2 = false, f2 = l, h = l.findIndex((g) => (o == null ? void 0 : o.includes(g)) || Nn(g, e, o));
-    h > 0 && (f2 = [l[h], ...l.slice(0, h), ...l.slice(h + 1)], c2 = true), f2.forEach((g) => {
+  }), n.forEach((l3) => {
+    let u = -1, d = -1, c = false, f2 = l3, h2 = l3.findIndex((g) => (o == null ? void 0 : o.includes(g)) || Nn(g, e, o));
+    h2 > 0 && (f2 = [l3[h2], ...l3.slice(0, h2), ...l3.slice(h2 + 1)], c = true), f2.forEach((g) => {
       var L2;
-      let m2 = r(g);
-      if (m2 && m2.length) {
-        o != null && o.includes(g) && (m2 = m2.filter((p) => Nn(p, e, o)));
-        let y2 = m2.sort((p, E) => {
-          let w2 = a3[p], k = a3[E];
+      let m = r(g);
+      if (m && m.length) {
+        o != null && o.includes(g) && (m = m.filter((p) => Nn(p, e, o)));
+        let y2 = m.sort((p, E2) => {
+          let w2 = a[p], k = a[E2];
           return (w2 !== void 0 ? w2 : 0) - (k !== void 0 ? k : 0);
         }), b = (y2.length - 1) / 2;
-        for (let p = Math.floor(b), E = Math.ceil(b); p <= E; ++p) {
+        for (let p = Math.floor(b), E2 = Math.ceil(b); p <= E2; ++p) {
           let w2 = y2[p];
           if (w2 === void 0) continue;
-          let k = a3[w2];
-          if (k !== void 0 && s[g] === g && u < k && a3[w2] !== d && !Kt(t, g, w2)) {
+          let k = a[w2];
+          if (k !== void 0 && s[g] === g && u < k && a[w2] !== d && !Kt(t, g, w2)) {
             let _2 = i[w2];
-            _2 !== void 0 && (s[w2] = g, s[g] = i[g] = _2, u = k, c2 && (u = -1, d = (L2 = a3[w2]) != null ? L2 : -1, c2 = false));
+            _2 !== void 0 && (s[w2] = g, s[g] = i[g] = _2, u = k, c && (u = -1, d = (L2 = a[w2]) != null ? L2 : -1, c = false));
           }
         }
       }
@@ -6667,62 +7108,62 @@ function Qt(e, n, t, r, o) {
   }), { root: i, align: s };
 }
 function Zt(e, n, t, r, o = false) {
-  let i = {}, s = er(e, n, t, o), a3 = o ? "borderLeft" : "borderRight";
-  function l(h, g) {
-    let m2 = s.nodes().slice(), L2 = {}, y2 = m2.pop();
+  let i = {}, s = er(e, n, t, o), a = o ? "borderLeft" : "borderRight";
+  function l3(h2, g) {
+    let m = s.nodes().slice(), L2 = {}, y2 = m.pop();
     for (; y2; ) {
-      if (L2[y2]) h(y2);
+      if (L2[y2]) h2(y2);
       else {
-        L2[y2] = true, m2.push(y2);
-        for (let b of g(y2)) m2.push(b);
+        L2[y2] = true, m.push(y2);
+        for (let b of g(y2)) m.push(b);
       }
-      y2 = m2.pop();
+      y2 = m.pop();
     }
   }
-  function u(h) {
-    let g = s.inEdges(h);
-    g ? i[h] = g.reduce((m2, L2) => {
+  function u(h2) {
+    let g = s.inEdges(h2);
+    g ? i[h2] = g.reduce((m, L2) => {
       var p;
       let y2 = (p = i[L2.v]) != null ? p : 0, b = s.edge(L2);
-      return Math.max(m2, y2 + (b !== void 0 ? b : 0));
-    }, 0) : i[h] = 0;
+      return Math.max(m, y2 + (b !== void 0 ? b : 0));
+    }, 0) : i[h2] = 0;
   }
-  function d(h) {
-    let g = s.outEdges(h), m2 = Number.POSITIVE_INFINITY;
-    g && (m2 = g.reduce((y2, b) => {
-      let p = i[b.w], E = s.edge(b);
-      return Math.min(y2, (p !== void 0 ? p : 0) - (E !== void 0 ? E : 0));
+  function d(h2) {
+    let g = s.outEdges(h2), m = Number.POSITIVE_INFINITY;
+    g && (m = g.reduce((y2, b) => {
+      let p = i[b.w], E2 = s.edge(b);
+      return Math.min(y2, (p !== void 0 ? p : 0) - (E2 !== void 0 ? E2 : 0));
     }, Number.POSITIVE_INFINITY));
-    let L2 = e.node(h);
-    m2 !== Number.POSITIVE_INFINITY && L2.borderType !== a3 && (i[h] = Math.max(i[h] !== void 0 ? i[h] : 0, m2));
+    let L2 = e.node(h2);
+    m !== Number.POSITIVE_INFINITY && L2.borderType !== a && (i[h2] = Math.max(i[h2] !== void 0 ? i[h2] : 0, m));
   }
-  function c2(h) {
-    return s.predecessors(h) || [];
+  function c(h2) {
+    return s.predecessors(h2) || [];
   }
-  function f2(h) {
-    return s.successors(h) || [];
+  function f2(h2) {
+    return s.successors(h2) || [];
   }
-  return l(u, c2), l(d, f2), Object.keys(r).forEach((h) => {
-    var m2;
-    let g = t[h];
-    g !== void 0 && (i[h] = (m2 = i[g]) != null ? m2 : 0);
+  return l3(u, c), l3(d, f2), Object.keys(r).forEach((h2) => {
+    var m;
+    let g = t[h2];
+    g !== void 0 && (i[h2] = (m = i[g]) != null ? m : 0);
   }), i;
 }
 function er(e, n, t, r) {
   let o = new T2(), i = e.graph(), s = or(i.nodesep, i.edgesep, r);
-  return n.forEach((a3) => {
-    let l;
-    a3.forEach((u) => {
+  return n.forEach((a) => {
+    let l3;
+    a.forEach((u) => {
       let d = t[u];
       if (d !== void 0) {
-        if (o.setNode(d), l !== void 0) {
-          let c2 = t[l];
-          if (c2 !== void 0) {
-            let f2 = o.edge(c2, d);
-            o.setEdge(c2, d, Math.max(s(e, u, l), f2 || 0));
+        if (o.setNode(d), l3 !== void 0) {
+          let c = t[l3];
+          if (c !== void 0) {
+            let f2 = o.edge(c, d);
+            o.setEdge(c, d, Math.max(s(e, u, l3), f2 || 0));
           }
         }
-        l = u;
+        l3 = u;
       }
     });
   }), o;
@@ -6730,9 +7171,9 @@ function er(e, n, t, r) {
 function nr(e, n) {
   return Object.values(n).reduce((t, r) => {
     let o = Number.NEGATIVE_INFINITY, i = Number.POSITIVE_INFINITY;
-    Object.entries(r).forEach(([a3, l]) => {
-      let u = ir(e, a3) / 2;
-      o = Math.max(l + u, o), i = Math.min(l - u, i);
+    Object.entries(r).forEach(([a, l3]) => {
+      let u = ir(e, a) / 2;
+      o = Math.max(l3 + u, o), i = Math.min(l3 - u, i);
     });
     let s = o - i;
     return s < t[0] && (t = [s, r]), t;
@@ -6742,35 +7183,35 @@ function tr(e, n) {
   let t = Object.values(n), r = S(Math.min, t), o = S(Math.max, t);
   ["u", "d"].forEach((i) => {
     ["l", "r"].forEach((s) => {
-      let a3 = i + s, l = e[a3];
-      if (!l || l === n) return;
-      let u = Object.values(l), d = r - S(Math.min, u);
-      s !== "l" && (d = o - S(Math.max, u)), d && (e[a3] = X2(l, (c2) => c2 + d));
+      let a = i + s, l3 = e[a];
+      if (!l3 || l3 === n) return;
+      let u = Object.values(l3), d = r - S(Math.min, u);
+      s !== "l" && (d = o - S(Math.max, u)), d && (e[a] = X2(l3, (c) => c + d));
     });
   });
 }
 function rr(e, n = void 0) {
   let t = e.ul;
   return t ? X2(t, (r, o) => {
-    var s, a3;
+    var s, a;
     if (n) {
-      let l = n.toLowerCase(), u = e[l];
+      let l3 = n.toLowerCase(), u = e[l3];
       if (u && u[o] !== void 0) return u[o];
     }
-    let i = Object.values(e).map((l) => {
-      let u = l[o];
+    let i = Object.values(e).map((l3) => {
+      let u = l3[o];
       return u !== void 0 ? u : 0;
-    }).sort((l, u) => l - u);
-    return (((s = i[1]) != null ? s : 0) + ((a3 = i[2]) != null ? a3 : 0)) / 2;
+    }).sort((l3, u) => l3 - u);
+    return (((s = i[1]) != null ? s : 0) + ((a = i[2]) != null ? a : 0)) / 2;
   }) : {};
 }
 function vn(e, n) {
   let t = P2(e), r = Object.assign($t2(e, t), Ut(e, t)), o = {}, i;
-  ["u", "d"].forEach((a3) => {
-    i = a3 === "u" ? t : Object.values(t).reverse(), ["l", "r"].forEach((l) => {
-      l === "r" && (i = i.map((f2) => Object.values(f2).reverse()));
-      let d = Qt(e, i, r, (f2) => (a3 === "u" ? e.predecessors(f2) : e.successors(f2)) || [], n), c2 = Zt(e, i, d.root, d.align, l === "r");
-      l === "r" && (c2 = X2(c2, (f2) => -f2)), o[a3 + l] = c2;
+  ["u", "d"].forEach((a) => {
+    i = a === "u" ? t : Object.values(t).reverse(), ["l", "r"].forEach((l3) => {
+      l3 === "r" && (i = i.map((f2) => Object.values(f2).reverse()));
+      let d = Qt(e, i, r, (f2) => (a === "u" ? e.predecessors(f2) : e.successors(f2)) || [], n), c = Zt(e, i, d.root, d.align, l3 === "r");
+      l3 === "r" && (c = X2(c, (f2) => -f2)), o[a + l3] = c;
     });
   });
   let s = nr(e, o);
@@ -6778,8 +7219,8 @@ function vn(e, n) {
 }
 function or(e, n, t) {
   return (r, o, i) => {
-    let s = r.node(o), a3 = r.node(i), l = 0, u;
-    if (l += s.width / 2, Object.hasOwn(s, "labelpos")) switch (s.labelpos.toLowerCase()) {
+    let s = r.node(o), a = r.node(i), l3 = 0, u;
+    if (l3 += s.width / 2, Object.hasOwn(s, "labelpos")) switch (s.labelpos.toLowerCase()) {
       case "l":
         u = -s.width / 2;
         break;
@@ -6787,15 +7228,15 @@ function or(e, n, t) {
         u = s.width / 2;
         break;
     }
-    if (u && (l += t ? u : -u), u = void 0, l += (s.dummy ? n : e) / 2, l += (a3.dummy ? n : e) / 2, l += a3.width / 2, Object.hasOwn(a3, "labelpos")) switch (a3.labelpos.toLowerCase()) {
+    if (u && (l3 += t ? u : -u), u = void 0, l3 += (s.dummy ? n : e) / 2, l3 += (a.dummy ? n : e) / 2, l3 += a.width / 2, Object.hasOwn(a, "labelpos")) switch (a.labelpos.toLowerCase()) {
       case "l":
-        u = a3.width / 2;
+        u = a.width / 2;
         break;
       case "r":
-        u = -a3.width / 2;
+        u = -a.width / 2;
         break;
     }
-    return u && (l += t ? u : -u), l;
+    return u && (l3 += t ? u : -u), l3;
   };
 }
 function ir(e, n) {
@@ -6815,22 +7256,22 @@ function kn(e, n) {
 function sr(e) {
   let n = P2(e), t = e.graph(), r = t.ranksep, o = t.rankalign, i = 0;
   n.forEach((s) => {
-    let a3 = s.reduce((l, u) => {
-      var c2;
-      let d = (c2 = e.node(u).height) != null ? c2 : 0;
-      return l > d ? l : d;
+    let a = s.reduce((l3, u) => {
+      var c;
+      let d = (c = e.node(u).height) != null ? c : 0;
+      return l3 > d ? l3 : d;
     }, 0);
-    s.forEach((l) => {
-      let u = e.node(l);
-      o === "top" ? u.y = i + u.height / 2 : o === "bottom" ? u.y = i + a3 - u.height / 2 : u.y = i + a3 / 2;
-    }), i += a3 + r;
+    s.forEach((l3) => {
+      let u = e.node(l3);
+      o === "top" ? u.y = i + u.height / 2 : o === "bottom" ? u.y = i + a - u.height / 2 : u.y = i + a / 2;
+    }), i += a + r;
   });
 }
 var xn = /* @__PURE__ */ new WeakMap();
 function Oe2(e, n = {}) {
-  return In(e, q2, n), e;
+  return In2(e, q2, n), e;
 }
-function _n2(e, n, t) {
+function _n(e, n, t) {
   let r = n;
   for (; r !== void 0; ) {
     let o = e.parent(r);
@@ -6838,133 +7279,133 @@ function _n2(e, n, t) {
     r = o;
   }
 }
-function In(e, n, t) {
+function In2(e, n, t) {
   var y2;
   let r = e.nodes().filter((b) => e.children(b).length), o = {};
   r.forEach((b) => {
     let p = e.node(b);
     if (p && p.rankdir) {
-      let E = new T2({ multigraph: true, compound: true });
-      E.setGraph({ rankdir: p.rankdir });
+      let E2 = new T2({ multigraph: true, compound: true });
+      E2.setGraph({ rankdir: p.rankdir });
       let w2 = e.children(b);
       w2.forEach((G2) => {
         let N2 = { ...e.node(G2) };
-        E.setNode(G2, N2);
-        let C = e.parent(G2);
-        C && C !== b && w2.includes(C) && E.setParent(G2, C);
+        E2.setNode(G2, N2);
+        let C2 = e.parent(G2);
+        C2 && C2 !== b && w2.includes(C2) && E2.setParent(G2, C2);
       });
       let k = /* @__PURE__ */ new Set();
       e.edges().forEach((G2) => {
-        let N2 = _n2(e, G2.v, b), C = _n2(e, G2.w, b);
-        if (N2 === G2.v && C === G2.w) E.setEdge(G2, { ...e.edge(G2) });
-        else if (N2 && C && N2 !== C) {
-          let B2 = `${N2}\0${C}`;
-          k.has(B2) || (k.add(B2), E.setEdge(N2, C, { ...e.edge(G2) }));
+        let N2 = _n(e, G2.v, b), C2 = _n(e, G2.w, b);
+        if (N2 === G2.v && C2 === G2.w) E2.setEdge(G2, { ...e.edge(G2) });
+        else if (N2 && C2 && N2 !== C2) {
+          let B2 = `${N2}\0${C2}`;
+          k.has(B2) || (k.add(B2), E2.setEdge(N2, C2, { ...e.edge(G2) }));
         }
-      }), In(E, n, t);
-      let _2 = Rn(E);
-      Cn(_2, n, t, null), Tn2(E, _2);
-      let O2 = 1 / 0, j = 1 / 0, R3 = -1 / 0, I2 = -1 / 0;
-      E.nodes().forEach((G2) => {
+      }), In2(E2, n, t);
+      let _2 = Rn(E2);
+      Cn2(_2, n, t, null), Tn(E2, _2);
+      let O2 = 1 / 0, j2 = 1 / 0, R3 = -1 / 0, I2 = -1 / 0;
+      E2.nodes().forEach((G2) => {
         if (G2 === b) return;
-        let N2 = E.node(G2);
-        N2 && typeof N2.x == "number" && typeof N2.y == "number" && typeof N2.width == "number" && typeof N2.height == "number" && (O2 = Math.min(O2, N2.x - N2.width / 2), R3 = Math.max(R3, N2.x + N2.width / 2), j = Math.min(j, N2.y - N2.height / 2), I2 = Math.max(I2, N2.y + N2.height / 2));
-      }), (!isFinite(O2) || !isFinite(j) || !isFinite(R3) || !isFinite(I2)) && (O2 = j = 0, R3 = I2 = 0);
-      let v2 = R3 - O2, x = I2 - j;
-      o[b] = { minX: O2, minY: j, maxX: R3, maxY: I2, width: v2, height: x, offsetX: O2, offsetY: j }, p._dagreClusterSubgraph = E;
+        let N2 = E2.node(G2);
+        N2 && typeof N2.x == "number" && typeof N2.y == "number" && typeof N2.width == "number" && typeof N2.height == "number" && (O2 = Math.min(O2, N2.x - N2.width / 2), R3 = Math.max(R3, N2.x + N2.width / 2), j2 = Math.min(j2, N2.y - N2.height / 2), I2 = Math.max(I2, N2.y + N2.height / 2));
+      }), (!isFinite(O2) || !isFinite(j2) || !isFinite(R3) || !isFinite(I2)) && (O2 = j2 = 0, R3 = I2 = 0);
+      let v = R3 - O2, x2 = I2 - j2;
+      o[b] = { minX: O2, minY: j2, maxX: R3, maxY: I2, width: v, height: x2, offsetX: O2, offsetY: j2 }, p._dagreClusterSubgraph = E2;
     }
   });
   let i = [], s = (b) => {
-    let p = [], E = (e.children(b) || []).filter((w2) => w2 !== b);
-    for (; E.length > 0; ) {
-      let w2 = E.shift();
-      p.push(w2), (e.children(w2) || []).filter((k) => k !== w2).forEach((k) => E.push(k));
+    let p = [], E2 = (e.children(b) || []).filter((w2) => w2 !== b);
+    for (; E2.length > 0; ) {
+      let w2 = E2.shift();
+      p.push(w2), (e.children(w2) || []).filter((k) => k !== w2).forEach((k) => E2.push(k));
     }
     return p;
-  }, a3 = /* @__PURE__ */ new Map();
+  }, a = /* @__PURE__ */ new Map();
   r.forEach((b) => {
     let p = e.node(b);
-    p && p.rankdir && o[b] && a3.set(b, (e.children(b) || []).filter((E) => E !== b));
+    p && p.rankdir && o[b] && a.set(b, (e.children(b) || []).filter((E2) => E2 !== b));
   });
-  let l = new Set([...a3.values()].flat()), u = /* @__PURE__ */ new Map();
-  a3.forEach((b, p) => {
-    l.has(p) || u.set(p, s(p));
+  let l3 = new Set([...a.values()].flat()), u = /* @__PURE__ */ new Map();
+  a.forEach((b, p) => {
+    l3.has(p) || u.set(p, s(p));
   });
-  let d = new Set([...u.values()].flat()), c2 = (b) => {
-    for (let [p, E] of u) if (E.includes(b)) return p;
+  let d = new Set([...u.values()].flat()), c = (b) => {
+    for (let [p, E2] of u) if (E2.includes(b)) return p;
     return b;
   }, f2 = [];
   e.edges().forEach((b) => {
     (d.has(b.v) || d.has(b.w)) && f2.push({ edge: b, label: e.edge(b) });
   });
-  let h = /* @__PURE__ */ new Map();
+  let h2 = /* @__PURE__ */ new Map();
   d.forEach((b) => {
     let p = e.parent(b);
-    h.set(b, typeof p == "string" ? p : void 0);
+    h2.set(b, typeof p == "string" ? p : void 0);
   }), u.forEach((b, p) => {
-    let E = e.node(p), w2 = [];
+    let E2 = e.node(p), w2 = [];
     b.forEach((O2) => {
-      let j = e.node(O2);
-      j && (w2.push({ id: O2, node: j, parent: h.get(O2) }), e.removeNode(O2));
+      let j2 = e.node(O2);
+      j2 && (w2.push({ id: O2, node: j2, parent: h2.get(O2) }), e.removeNode(O2));
     });
     let k = f2.filter(({ edge: O2 }) => b.includes(O2.v) || b.includes(O2.w)), _2 = o[p];
-    E && (i.push({ clusterId: p, subgraph: E._dagreClusterSubgraph, bounds: _2, children: b, removedNodes: w2, removedEdges: k }), E.width = _2.width, E.height = _2.height);
+    E2 && (i.push({ clusterId: p, subgraph: E2._dagreClusterSubgraph, bounds: _2, children: b, removedNodes: w2, removedEdges: k }), E2.width = _2.width, E2.height = _2.height);
   });
   let g = /* @__PURE__ */ new Set();
   f2.forEach(({ edge: b, label: p }) => {
-    let E = c2(b.v), w2 = c2(b.w);
-    if (E !== w2 && e.hasNode(E) && e.hasNode(w2)) {
-      let k = `${E}\0${w2}`;
-      g.has(k) || (g.add(k), e.setEdge(E, w2, { ...p, width: 0, height: 0 }));
+    let E2 = c(b.v), w2 = c(b.w);
+    if (E2 !== w2 && e.hasNode(E2) && e.hasNode(w2)) {
+      let k = `${E2}\0${w2}`;
+      g.has(k) || (g.add(k), e.setEdge(E2, w2, { ...p, width: 0, height: 0 }));
     }
   });
-  let m2 = Rn(e), L2 = Cn(m2, n, t, (y2 = xn.get(e)) != null ? y2 : null);
-  xn.set(e, L2), Tn2(e, m2), g.forEach((b) => {
-    let p = b.indexOf("\0"), E = b.slice(0, p), w2 = b.slice(p + 1);
-    e.hasEdge(E, w2) && e.removeEdge(E, w2);
-  }), i.forEach(({ clusterId: b, subgraph: p, bounds: E, removedNodes: w2, removedEdges: k }) => {
-    var v2, x;
-    let _2 = e.node(b), O2 = (v2 = _2 == null ? void 0 : _2.x) != null ? v2 : 0, j = (x = _2 == null ? void 0 : _2.y) != null ? x : 0, R3 = (E.minX + E.maxX) / 2, I2 = (E.minY + E.maxY) / 2;
-    w2.forEach(({ id: G2, node: N2, parent: C }) => {
-      e.setNode(G2, N2), C !== void 0 && e.setParent(G2, C);
+  let m = Rn(e), L2 = Cn2(m, n, t, (y2 = xn.get(e)) != null ? y2 : null);
+  xn.set(e, L2), Tn(e, m), g.forEach((b) => {
+    let p = b.indexOf("\0"), E2 = b.slice(0, p), w2 = b.slice(p + 1);
+    e.hasEdge(E2, w2) && e.removeEdge(E2, w2);
+  }), i.forEach(({ clusterId: b, subgraph: p, bounds: E2, removedNodes: w2, removedEdges: k }) => {
+    var v, x2;
+    let _2 = e.node(b), O2 = (v = _2 == null ? void 0 : _2.x) != null ? v : 0, j2 = (x2 = _2 == null ? void 0 : _2.y) != null ? x2 : 0, R3 = (E2.minX + E2.maxX) / 2, I2 = (E2.minY + E2.maxY) / 2;
+    w2.forEach(({ id: G2, node: N2, parent: C2 }) => {
+      e.setNode(G2, N2), C2 !== void 0 && e.setParent(G2, C2);
     }), k.forEach(({ edge: G2, label: N2 }) => {
       e.setEdge(G2, N2);
     }), p.nodes().forEach((G2) => {
       if (G2 === b) return;
-      let N2 = p.node(G2), C = e.node(G2);
-      C && N2 && typeof N2.x == "number" && typeof N2.y == "number" && (C.x = O2 + (N2.x - R3), C.y = j + (N2.y - I2));
-    }), On2(e, p, O2 - R3, j - I2), delete _2._dagreClusterSubgraph;
+      let N2 = p.node(G2), C2 = e.node(G2);
+      C2 && N2 && typeof N2.x == "number" && typeof N2.y == "number" && (C2.x = O2 + (N2.x - R3), C2.y = j2 + (N2.y - I2));
+    }), On(e, p, O2 - R3, j2 - I2), delete _2._dagreClusterSubgraph;
   }), r.forEach((b) => {
     var w2, k;
-    let p = e.node(b), E = o[b];
-    if (p && p.rankdir && p._dagreClusterSubgraph && E) {
-      let _2 = p._dagreClusterSubgraph, O2 = (w2 = p.x) != null ? w2 : 0, j = (k = p.y) != null ? k : 0, R3 = (E.minX + E.maxX) / 2, I2 = (E.minY + E.maxY) / 2;
-      _2.nodes().forEach((v2) => {
-        if (v2 === b) return;
-        let x = _2.node(v2), G2 = e.node(v2);
-        if (G2 && x && typeof x.x == "number" && typeof x.y == "number") {
-          let N2 = x.x - R3, C = x.y - I2;
-          G2.x = O2 + N2, G2.y = j + C;
+    let p = e.node(b), E2 = o[b];
+    if (p && p.rankdir && p._dagreClusterSubgraph && E2) {
+      let _2 = p._dagreClusterSubgraph, O2 = (w2 = p.x) != null ? w2 : 0, j2 = (k = p.y) != null ? k : 0, R3 = (E2.minX + E2.maxX) / 2, I2 = (E2.minY + E2.maxY) / 2;
+      _2.nodes().forEach((v) => {
+        if (v === b) return;
+        let x2 = _2.node(v), G2 = e.node(v);
+        if (G2 && x2 && typeof x2.x == "number" && typeof x2.y == "number") {
+          let N2 = x2.x - R3, C2 = x2.y - I2;
+          G2.x = O2 + N2, G2.y = j2 + C2;
         }
-      }), On2(e, _2, O2 - R3, j - I2), delete p._dagreClusterSubgraph;
+      }), On(e, _2, O2 - R3, j2 - I2), delete p._dagreClusterSubgraph;
     }
   });
 }
-function On2(e, n, t, r) {
+function On(e, n, t, r) {
   n.edges().forEach((o) => {
     if (!e.hasEdge(o)) return;
     let i = n.edge(o), s = e.edge(o);
-    s.points = i.points.map((a3) => ({ x: a3.x + t, y: a3.y + r })), Object.hasOwn(i, "x") && (s.x = i.x + t, s.y = i.y + r);
+    s.points = i.points.map((a) => ({ x: a.x + t, y: a.y + r })), Object.hasOwn(i, "x") && (s.x = i.x + t, s.y = i.y + r);
   });
 }
-function Cn(e, n, t, r = null) {
-  var l, u;
-  let o = (t == null ? void 0 : t.useDynamic) !== false, i = o && (l = r == null ? void 0 : r.graph) != null ? l : null, s = o && (u = r == null ? void 0 : r.rawNodes) != null ? u : null;
+function Cn2(e, n, t, r = null) {
+  var l3, u;
+  let o = (t == null ? void 0 : t.useDynamic) !== false, i = o && (l3 = r == null ? void 0 : r.graph) != null ? l3 : null, s = o && (u = r == null ? void 0 : r.rawNodes) != null ? u : null;
   n("    makeSpaceForEdgeLabels", () => br(e)), n("    removeSelfEdges", () => Gr(e)), n("    acyclic", () => Ue2(e, i)), n("    nestingGraph.run", () => un(e)), n("    rank", () => dn(Z(e))), n("    injectEdgeLabelProxies", () => gr(e)), n("    removeEmptyRanks", () => We2(e)), n("    nestingGraph.cleanup", () => fn(e)), n("    normalizeRanks", () => Be2(e)), n("    assignRankMinMax", () => pr(e)), n("    removeEdgeLabelProxies", () => mr(e)), n("    normalize.run", () => Ke2(e)), n("    parentDummyChains", () => ln(e)), n("    addBorderSegments", () => bn(e)), n("    order", () => re2(e, t, s)), n("    insertSelfEdges", () => vr(e)), n("    adjustCoordinateSystem", () => pn(e)), n("    position", () => kn(e, t.corePath)), n("    positionSelfEdges", () => kr(e));
-  let a3 = JSON.parse(JSON.stringify(e._nodes));
-  return n("    removeBorderNodes", () => Nr(e)), n("    normalize.undo", () => Qe2(e)), n("    fixupEdgeLabelCoords", () => yr(e)), n("    undoCoordinateSystem", () => mn(e)), n("    translateGraph", () => Er(e)), n("    assignNodeIntersects", () => Lr(e)), n("    reversePoints", () => wr(e)), n("    acyclic.undo", () => Je2(e)), { graph: e, rawNodes: a3 };
+  let a = JSON.parse(JSON.stringify(e._nodes));
+  return n("    removeBorderNodes", () => Nr(e)), n("    normalize.undo", () => Qe2(e)), n("    fixupEdgeLabelCoords", () => yr(e)), n("    undoCoordinateSystem", () => mn(e)), n("    translateGraph", () => Er(e)), n("    assignNodeIntersects", () => Lr(e)), n("    reversePoints", () => wr(e)), n("    acyclic.undo", () => Je2(e)), { graph: e, rawNodes: a };
 }
-function Tn2(e, n) {
+function Tn(e, n) {
   e.nodes().forEach((t) => {
     let r = e.node(t), o = n.node(t);
     r && (r.x = o.x, r.y = o.y, r.order = o.order, r.rank = o.rank, n.children(t).length && (r.width = o.width, r.height = o.height));
@@ -6983,16 +7424,16 @@ var fr = { minlen: 1, weight: 1, width: 0, height: 0, labeloffset: 10, labelpos:
 var hr = ["labelpos"];
 function Rn(e) {
   let n = new T2({ multigraph: true, compound: true }), t = _e2(e.graph());
-  return n.setGraph(Object.assign({}, dr, xe2(t, ar), W2(t, lr))), e.nodes().forEach((r) => {
-    let o = _e2(e.node(r)), i = xe2(o, ur);
-    Object.keys(jn).forEach((a3) => {
-      i[a3] === void 0 && (i[a3] = jn[a3]);
+  return n.setGraph(Object.assign({}, dr, xe(t, ar), W2(t, lr))), e.nodes().forEach((r) => {
+    let o = _e2(e.node(r)), i = xe(o, ur);
+    Object.keys(jn).forEach((a) => {
+      i[a] === void 0 && (i[a] = jn[a]);
     }), n.setNode(r, i);
     let s = e.parent(r);
     s !== void 0 && n.setParent(r, s);
   }), e.edges().forEach((r) => {
     let o = _e2(e.edge(r));
-    n.setEdge(r, Object.assign({}, fr, xe2(o, cr), W2(o, hr)));
+    n.setEdge(r, Object.assign({}, fr, xe(o, cr), W2(o, hr)));
   }), n;
 }
 function br(e) {
@@ -7008,7 +7449,7 @@ function gr(e) {
     let t = e.edge(n);
     if (t.width && t.height) {
       let r = e.node(n.v), i = { rank: (e.node(n.w).rank - r.rank) / 2 + r.rank, e: n };
-      M2(e, "edge-proxy", i, "_ep");
+      M(e, "edge-proxy", i, "_ep");
     }
   });
 }
@@ -7029,29 +7470,29 @@ function mr(e) {
   });
 }
 function Er(e) {
-  let n = Number.POSITIVE_INFINITY, t = 0, r = Number.POSITIVE_INFINITY, o = 0, i = e.graph(), s = i.marginx || 0, a3 = i.marginy || 0;
-  function l(u) {
-    let d = u.x, c2 = u.y, f2 = u.width, h = u.height;
-    n = Math.min(n, d - f2 / 2), t = Math.max(t, d + f2 / 2), r = Math.min(r, c2 - h / 2), o = Math.max(o, c2 + h / 2);
+  let n = Number.POSITIVE_INFINITY, t = 0, r = Number.POSITIVE_INFINITY, o = 0, i = e.graph(), s = i.marginx || 0, a = i.marginy || 0;
+  function l3(u) {
+    let d = u.x, c = u.y, f2 = u.width, h2 = u.height;
+    n = Math.min(n, d - f2 / 2), t = Math.max(t, d + f2 / 2), r = Math.min(r, c - h2 / 2), o = Math.max(o, c + h2 / 2);
   }
-  e.nodes().forEach((u) => l(e.node(u))), e.edges().forEach((u) => {
+  e.nodes().forEach((u) => l3(e.node(u))), e.edges().forEach((u) => {
     let d = e.edge(u);
-    Object.hasOwn(d, "x") && l(d);
-  }), n -= s, r -= a3, e.nodes().forEach((u) => {
+    Object.hasOwn(d, "x") && l3(d);
+  }), n -= s, r -= a, e.nodes().forEach((u) => {
     let d = e.node(u);
     d.x -= n, d.y -= r;
   }), e.edges().forEach((u) => {
     let d = e.edge(u);
-    d.points.forEach((c2) => {
-      c2.x -= n, c2.y -= r;
+    d.points.forEach((c) => {
+      c.x -= n, c.y -= r;
     }), Object.hasOwn(d, "x") && (d.x -= n), Object.hasOwn(d, "y") && (d.y -= r);
-  }), i.width = t - n + s, i.height = o - r + a3;
+  }), i.width = t - n + s, i.height = o - r + a;
 }
 function Lr(e) {
   e.edges().forEach((n) => {
     if (n.v === n.w) return;
     let t = e.edge(n), r = e.node(n.v), o = e.node(n.w), i, s;
-    t.points ? (i = t.points[0], s = t.points[t.points.length - 1]) : (t.points = [], i = o, s = r), t.points.unshift(se2(r, i)), t.points.push(se2(o, s));
+    t.points ? (i = t.points[0], s = t.points[t.points.length - 1]) : (t.points = [], i = o, s = r), t.points.unshift(se(r, i)), t.points.push(se(o, s));
   });
 }
 function yr(e) {
@@ -7096,8 +7537,8 @@ function vr(e) {
     let r = 0;
     t.forEach((o, i) => {
       let s = e.node(o);
-      typeof s.rank != "number" && (s.rank = 0), s.order = i + r, (s.selfEdges || []).forEach((a3) => {
-        M2(e, "selfedge", { width: a3.label.width, height: a3.label.height, rank: s.rank, order: i + ++r, e: a3.e, edgeLabel: a3.label }, "_se"), (!Array.isArray(a3.label.points) || a3.label.points.length !== 7) && (a3.label.points = [{ x: 0, y: -10 }, { x: 0, y: -10 }, { x: 0, y: 0 }, { x: 0, y: 10 }, { x: 0, y: 10 }, { x: 0, y: 0 }, { x: 0, y: 0 }]);
+      typeof s.rank != "number" && (s.rank = 0), s.order = i + r, (s.selfEdges || []).forEach((a) => {
+        M(e, "selfedge", { width: a.label.width, height: a.label.height, rank: s.rank, order: i + ++r, e: a.e, edgeLabel: a.label }, "_se"), (!Array.isArray(a.label.points) || a.label.points.length !== 7) && (a.label.points = [{ x: 0, y: -10 }, { x: 0, y: -10 }, { x: 0, y: 0 }, { x: 0, y: 10 }, { x: 0, y: 10 }, { x: 0, y: 0 }, { x: 0, y: 0 }]);
       }), delete s.selfEdges;
     });
   });
@@ -7106,17 +7547,17 @@ function kr(e) {
   e.nodes().forEach((n) => {
     let t = e.node(n), r = (o) => typeof o == "number" && isFinite(o);
     if (t.dummy === "selfedge") {
-      let o = t, i = e.node(o.e.v), s = r(i == null ? void 0 : i.x) ? i.x : 0, a3 = r(i == null ? void 0 : i.y) ? i.y : 0, l = r(i == null ? void 0 : i.width) ? i.width : 0, u = r(i == null ? void 0 : i.height) ? i.height : 0, d = r(t.x) ? t.x : s, c2 = r(t.y) ? t.y : a3, f2 = l / 2, h = u / 2;
-      o.edgeLabel.points = [{ x: d + f2, y: c2 - h }, { x: d + f2, y: c2 - h }, { x: d, y: c2 }, { x: d - f2, y: c2 + h }, { x: d - f2, y: c2 + h }, { x: d, y: c2 }, { x: d, y: c2 }], o.edgeLabel.x = d, o.edgeLabel.y = c2, e.setEdge(o.e, o.edgeLabel), e.removeNode(n);
+      let o = t, i = e.node(o.e.v), s = r(i == null ? void 0 : i.x) ? i.x : 0, a = r(i == null ? void 0 : i.y) ? i.y : 0, l3 = r(i == null ? void 0 : i.width) ? i.width : 0, u = r(i == null ? void 0 : i.height) ? i.height : 0, d = r(t.x) ? t.x : s, c = r(t.y) ? t.y : a, f2 = l3 / 2, h2 = u / 2;
+      o.edgeLabel.points = [{ x: d + f2, y: c - h2 }, { x: d + f2, y: c - h2 }, { x: d, y: c }, { x: d - f2, y: c + h2 }, { x: d - f2, y: c + h2 }, { x: d, y: c }, { x: d, y: c }], o.edgeLabel.x = d, o.edgeLabel.y = c, e.setEdge(o.e, o.edgeLabel), e.removeNode(n);
     } else t && Array.isArray(t.selfEdges) && t.selfEdges.forEach((o) => {
       if (!Array.isArray(o.label.points) || o.label.points.length !== 7) {
-        let i = r(t.x) ? t.x : 0, s = r(t.y) ? t.y : 0, a3 = r(t.width) ? t.width : 0, l = r(t.height) ? t.height : 0, u = a3 / 2, d = l / 2;
+        let i = r(t.x) ? t.x : 0, s = r(t.y) ? t.y : 0, a = r(t.width) ? t.width : 0, l3 = r(t.height) ? t.height : 0, u = a / 2, d = l3 / 2;
         o.label.points = [{ x: i + u, y: s - d }, { x: i + u, y: s - d }, { x: i, y: s }, { x: i - u, y: s + d }, { x: i - u, y: s + d }, { x: i, y: s }, { x: i, y: s }];
       }
     });
   });
 }
-function xe2(e, n) {
+function xe(e, n) {
   return X2(W2(e, n), Number);
 }
 function _e2(e) {
@@ -7131,25 +7572,25 @@ function Ce2(e) {
     t.setNode(r, { label: r }), t.setParent(r, "layer" + e.node(r).rank);
   }), e.edges().forEach((r) => t.setEdge(r.v, r.w, {}, r.name)), n.forEach((r, o) => {
     let i = "layer" + o;
-    t.setNode(i, { rank: "same" }), r.reduce((s, a3) => (t.setEdge(s, a3, { style: "invis" }), a3));
+    t.setNode(i, { rank: "same" }), r.reduce((s, a) => (t.setEdge(s, a, { style: "invis" }), a));
   }), t;
 }
 var xr = { graphlib: ie2, version: ue2, layout: Oe2, debug: Ce2, util: { time: le2, notime: q2 } };
 var Uo = xr;
 
 // src/svg/geometry.js
-var overlaps = (a3, b) => a3[0] < b[2] && b[0] < a3[2] && a3[1] < b[3] && b[1] < a3[3];
+var overlaps = (a, b) => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
 function segmentHits(p, q3, [x0, y0, x1, y1]) {
   const dx = q3.x - p.x;
   const dy = q3.y - p.y;
   let t0 = 0;
   let t1 = 1;
-  for (const [a3, b] of [[-dx, p.x - x0], [dx, x1 - p.x], [-dy, p.y - y0], [dy, y1 - p.y]]) {
-    if (a3 === 0) {
+  for (const [a, b] of [[-dx, p.x - x0], [dx, x1 - p.x], [-dy, p.y - y0], [dy, y1 - p.y]]) {
+    if (a === 0) {
       if (b < 0) return false;
     } else {
-      const t = b / a3;
-      if (a3 < 0) t0 = Math.max(t0, t);
+      const t = b / a;
+      if (a < 0) t0 = Math.max(t0, t);
       else t1 = Math.min(t1, t);
       if (t0 > t1) return false;
     }
@@ -7158,18 +7599,18 @@ function segmentHits(p, q3, [x0, y0, x1, y1]) {
 }
 function curvePoints(points, tolerance = 0.25) {
   if (points.length < 3) return points;
-  const mid2 = (a3, b) => ({ x: (a3.x + b.x) / 2, y: (a3.y + b.y) / 2 });
+  const mid2 = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
   const out = [points[0]];
   let from = mid2(points[0], points[1]);
   for (let i = 1; i < points.length - 1; i++) {
     const to = mid2(points[i], points[i + 1]);
-    const c2 = points[i];
-    const bend = Math.hypot(from.x - 2 * c2.x + to.x, from.y - 2 * c2.y + to.y);
+    const c = points[i];
+    const bend = Math.hypot(from.x - 2 * c.x + to.x, from.y - 2 * c.y + to.y);
     const steps2 = Math.max(1, Math.ceil(Math.sqrt(bend / (4 * tolerance))));
     for (let s = 0; s <= steps2; s++) {
       const t = s / steps2;
       const u = 1 - t;
-      out.push({ x: u * u * from.x + 2 * u * t * c2.x + t * t * to.x, y: u * u * from.y + 2 * u * t * c2.y + t * t * to.y });
+      out.push({ x: u * u * from.x + 2 * u * t * c.x + t * t * to.x, y: u * u * from.y + 2 * u * t * c.y + t * t * to.y });
     }
     from = to;
   }
@@ -7181,7 +7622,7 @@ function curvePoints(points, tolerance = 0.25) {
 var NODE_INSET = 2;
 var LABEL_INSET = 1;
 var OTHER = { LR: "TB", RL: "TB", TB: "LR", BT: "LR" };
-var around = ({ x, y: y2 }, { width, height }) => [x - width / 2, y2 - height / 2, x + width / 2, y2 + height / 2];
+var around = ({ x: x2, y: y2 }, { width, height }) => [x2 - width / 2, y2 - height / 2, x2 + width / 2, y2 + height / 2];
 var inset = ([x0, y0, x1, y1], d) => [x0 + d, y0 + d, x1 - d, y1 - d];
 var runsThrough = (curve, box) => curve.slice(1).some((p, k) => segmentHits(curve[k], p, box));
 var name = (e) => `${e.from} -> ${e.to}`;
@@ -7192,7 +7633,7 @@ function crossings({ g, key, sizes, labels }, { nodes, edges }) {
   return edges.flatMap((edge, i) => {
     const curve = curvePoints(drawn[i].points);
     const node = nodeBoxes.find(([id, box]) => id !== edge.from && id !== edge.to && runsThrough(curve, box));
-    const label = labelBoxes.findIndex((box, j) => j !== i && box && runsThrough(curve, box));
+    const label = labelBoxes.findIndex((box, j2) => j2 !== i && box && runsThrough(curve, box));
     return [
       ...node ? [{ edge, kind: "node", other: node[0] }] : [],
       ...label >= 0 ? [{ edge, kind: "label", other: edges[label] }] : []
@@ -7206,9 +7647,9 @@ function crossingWarnings(model, rankdir, run2, relayout) {
   if (!found.length) return [];
   const alt = OTHER[rankdir];
   const clean3 = crossings(relayout(alt), model).length === 0;
-  return found.map((c2) => ({
-    line: c2.edge.line,
-    message: `${what(c2)}; ${clean3 ? `\`\`\`flow ${alt} draws this diagram without crossings` : OTHERWISE}`
+  return found.map((c) => ({
+    line: c.edge.line,
+    message: `${what(c)}; ${clean3 ? `\`\`\`flow ${alt} draws this diagram without crossings` : OTHERWISE}`
   }));
 }
 
@@ -7270,14 +7711,14 @@ Client -> Gateway
   - ~ on a line with an arrow is an error: remove the old link with - and add the new one with +. That is also how a link's label changes. The same link both unmarked and marked is an error too.
   - + group Name: A, B and - group Name: A, B mark a group box. A group that is not removed and holds only removed nodes is a warning. Markers combine with * and every shape bracket.
   - The Changes view draws added in the theme's ok color, removed faded with a struck-through label, changed with a warn outline, and each marked node with a +, \u2212 or ~ badge. A count row and a Before / Changes / After switch sit under the diagram: Before and After show the diagram as it was and as it will be, plain and without the items that are not in that view.
-  - A line that starts with a marker and a space is always read as a marker. To keep a node name that starts with "- ", write it in brackets: [- Gateway].`,
+  - A line that starts with a marker and a space is always read as a marker. A marker inside the line, before a node ("A -> + B"), is an error: write it at the start, "+ A -> B". To keep a node name that starts with "- ", write it in brackets: [- Gateway].`,
   example: "```flow LR\n(User) -> Gateway: HTTPS\nGateway -> Auth & *Service\nService -> [(Database)]\ngroup Backend: Auth, Service\n```",
   render(text2, { args, uid, ui, warn, video, dir: pageDir = "ltr" }) {
     const model = parseFlow(text2);
     model.warnings.forEach((w2) => warn?.(w2));
     const flowDir = (args.match(/\b(TB|LR|BT|RL)\b/i)?.[1] ?? "TB").toUpperCase();
     const html = `<figure class="am-diagram am-flow">${layout2(model, DIRS.has(flowDir) ? flowDir : "TB", uid(), ui, pageDir, video ? void 0 : warn)}</figure>`;
-    return withDelta(html, [...model.nodes.values(), ...model.edges, ...model.groups].map((x) => x.state ?? null), { ui, video });
+    return withDelta(html, [...model.nodes.values(), ...model.edges, ...model.groups].map((x2) => x2.state ?? null), { ui, video });
   }
 };
 function parseFlow(text2) {
@@ -7304,6 +7745,8 @@ function parseFlow(text2) {
       continue;
     }
     const { chain, label } = parseChain(t, line);
+    const inner = innerMarkMessage("flow", chain.flatMap((step) => step.nodes.filter((n) => !n.explicit).map((n) => n.label)), mark, t, "To keep a name that starts with a marker, use brackets: [NAME]", chain.length > 1);
+    if (inner) throw new ComponentError(inner, line);
     if (mark === "~" && chain.length > 1) {
       throw new ComponentError('flow: ~ marks a node, not a link. To change a link, remove the old one and add the new one: "- A -> B" then "+ A -> C"', line);
     }
@@ -7321,7 +7764,7 @@ function parseFlow(text2) {
   if (!nodes.size) throw new ComponentError("flow needs at least one node", 1);
   checkMermaidIds(nodes);
   for (const grp of groups) {
-    const missing = grp.members.filter((m2) => !nodes.has(m2));
+    const missing = grp.members.filter((m) => !nodes.has(m));
     if (missing.length) throw new ComponentError(`group ${grp.name} refers to nodes that do not exist: ${missing.join(", ")}`, grp.line);
   }
   checkLinks(edges);
@@ -7333,12 +7776,12 @@ function parseFlow(text2) {
 }
 function checkMermaidIds(nodes) {
   for (const n of nodes.values()) {
-    const m2 = n.explicit ? null : n.label.match(MERMAID_ID);
-    if (!m2) continue;
-    const id = nodes.get(m2[1]);
+    const m = n.explicit ? null : n.label.match(MERMAID_ID);
+    if (!m) continue;
+    const id = nodes.get(m[1]);
     if (!id || !(n.before && id.before || n.after && id.after)) continue;
     throw new ComponentError(
-      `"${m2[1]}" is a node on its own and also the ID of "${n.label}"; this block has no node IDs, so write the text alone${rewriteOf(m2[2])}`,
+      `"${m[1]}" is a node on its own and also the ID of "${n.label}"; this block has no node IDs, so write the text alone${rewriteOf(m[2])}`,
       n.line
     );
   }
@@ -7346,11 +7789,11 @@ function checkMermaidIds(nodes) {
 function mermaidIdWarnings(nodes) {
   const notes = [];
   for (const n of nodes.values()) {
-    const m2 = n.explicit ? null : n.label.match(MERMAID_ID);
-    if (!m2) continue;
+    const m = n.explicit ? null : n.label.match(MERMAID_ID);
+    if (!m) continue;
     notes.push({
       line: n.line,
-      message: `"${n.label}" looks like a Mermaid node ID with its text; this block has no node IDs, so the box shows "${n.label}". If you meant the text, write it alone${rewriteOf(m2[2])}`
+      message: `"${n.label}" looks like a Mermaid node ID with its text; this block has no node IDs, so the box shows "${n.label}". If you meant the text, write it alone${rewriteOf(m[2])}`
     });
   }
   return notes;
@@ -7368,13 +7811,13 @@ function nodeState({ before, after, tilde }) {
 }
 function checkLinks(edges) {
   const key = (e) => `${e.from}\0${e.to}`;
-  for (const e of edges.filter((x) => x.state)) {
-    const plain = edges.find((x) => !x.state && key(x) === key(e));
+  for (const e of edges.filter((x2) => x2.state)) {
+    const plain = edges.find((x2) => !x2.state && key(x2) === key(e));
     if (plain) throw new ComponentError(`flow: the link ${e.from} -> ${e.to} is written unmarked on line ${plain.line} and as ${e.state === "added" ? "+" : "-"} here. Mark every line of that link, or none`, e.line);
   }
 }
 function groupWarnings(groups, nodes) {
-  return groups.filter((g) => g.state !== "removed" && g.members.every((m2) => nodes.get(m2).state === "removed")).map((g) => ({ line: g.line, message: `group ${g.name} holds only removed nodes and would be an empty box after the change. Mark it with "- group ${g.name}: ${g.members.join(", ")}"` }));
+  return groups.filter((g) => g.state !== "removed" && g.members.every((m) => nodes.get(m).state === "removed")).map((g) => ({ line: g.line, message: `group ${g.name} holds only removed nodes and would be an empty box after the change. Mark it with "- group ${g.name}: ${g.members.join(", ")}"` }));
 }
 function parseChain(t, line) {
   const chain = [];
@@ -7391,10 +7834,10 @@ function parseChain(t, line) {
       pos += amp[0].length;
     }
     chain.push({ arrow, nodes: group });
-    const a3 = t.slice(pos).match(ARROW);
-    if (!a3) break;
-    arrow = a3[1];
-    pos += a3[0].length;
+    const a = t.slice(pos).match(ARROW);
+    if (!a) break;
+    arrow = a[1];
+    pos += a[0].length;
   }
   const rest = t.slice(pos).trim();
   if (rest && !/^[:：]/.test(rest)) {
@@ -7415,9 +7858,9 @@ function parseNode(t, start, line) {
     label = t.slice(pos + bracket.open.length, close).trim();
     end = close + bracket.close.length;
   } else {
-    const m2 = t.slice(pos).match(/^(.*?)(?=\s*(?:-->|->|&|[:：]|$))/);
-    label = m2[1].trim();
-    end = pos + m2[0].length;
+    const m = t.slice(pos).match(/^(.*?)(?=\s*(?:-->|->|&|[:：]|$))/);
+    label = m[1].trim();
+    end = pos + m[0].length;
   }
   if (!label) throw new ComponentError(`flow has an empty node: "${t}"`, line);
   return { node: { id: label, label, shape: bracket?.shape ?? "rect", explicit: Boolean(bracket), hi }, end };
@@ -7437,15 +7880,15 @@ function edgeText(label) {
 function nodeSize(node) {
   if (node.size) return { lines: [], width: node.size[0], height: node.size[1] };
   const lines = labelLines(node.label, TEXT_MAX, FS2);
-  const tw = Math.max(...lines.map((l) => measure(l, FS2)));
+  const tw = Math.max(...lines.map((l3) => measure(l3, FS2)));
   const th = lines.length * LH2;
   const w2 = Math.max(tw + 28, 64);
-  const h = th + 18;
+  const h2 = th + 18;
   const size = {
-    rect: [w2, h],
-    round: [w2 + 12, h],
-    diamond: [(tw + 28) * 1.5, h * 1.6],
-    db: [w2, h + 14]
+    rect: [w2, h2],
+    round: [w2 + 12, h2],
+    diamond: [(tw + 28) * 1.5, h2 * 1.6],
+    db: [w2, h2 + 14]
   }[node.shape];
   return { lines, width: size[0], height: size[1] };
 }
@@ -7466,18 +7909,18 @@ function runLayout({ nodes, edges, groups }, rankdir, rtl, widths, reserve) {
   const vertical = rankdir === "TB" || rankdir === "BT";
   groups.forEach((grp, i) => {
     g.setNode(gkey(i), { label: grp.name });
-    grp.members.forEach((m2) => g.setParent(key.get(m2), gkey(i)));
+    grp.members.forEach((m) => g.setParent(key.get(m), gkey(i)));
     if (!reserve.has(i) || !vertical) return;
     g.setNode(reserveKey(i), { width: widths[i] + 4, height: CLUSTER_LABEL_H });
     g.setParent(reserveKey(i), gkey(i));
     const down = edges.map((e) => rankdir === "TB" ? [e.from, e.to] : [e.to, e.from]);
-    const link = (a3, b, name2) => rankdir === "TB" ? g.setEdge(a3, b, {}, name2) : g.setEdge(b, a3, {}, name2);
-    const inside = new Set(grp.members);
-    const first = grp.members.filter((m2) => !down.some(([a3, b]) => b === m2 && a3 !== m2 && inside.has(a3)));
-    (first.length ? first : grp.members.slice(0, 1)).forEach((m2, k) => {
-      link(reserveKey(i), key.get(m2), `r${i}-${k}`);
-      down.forEach(([a3, b], j) => {
-        if (b === m2 && !inside.has(a3)) link(key.get(a3), reserveKey(i), `r${i}-${k}-${j}`);
+    const link = (a, b, name2) => rankdir === "TB" ? g.setEdge(a, b, {}, name2) : g.setEdge(b, a, {}, name2);
+    const inside2 = new Set(grp.members);
+    const first = grp.members.filter((m) => !down.some(([a, b]) => b === m && a !== m && inside2.has(a)));
+    (first.length ? first : grp.members.slice(0, 1)).forEach((m, k) => {
+      link(reserveKey(i), key.get(m), `r${i}-${k}`);
+      down.forEach(([a, b], j2) => {
+        if (b === m && !inside2.has(a)) link(key.get(a), reserveKey(i), `r${i}-${k}-${j2}`);
       });
     });
   });
@@ -7491,8 +7934,8 @@ function runLayout({ nodes, edges, groups }, rankdir, rtl, widths, reserve) {
   if (rtl) mirrorLayout(g);
   if (!vertical) {
     for (const [i, side] of reserve) {
-      const c2 = g.node(gkey(i));
-      insertStrip(g, side === "top" ? top(c2) + 2 : top(c2) + c2.height - 2, CLUSTER_LABEL_H + 3);
+      const c = g.node(gkey(i));
+      insertStrip(g, side === "top" ? top(c) + 2 : top(c) + c.height - 2, CLUSTER_LABEL_H + 3);
     }
   }
   fitEdges(g);
@@ -7512,7 +7955,7 @@ function fitEdges(g) {
   graph.height = Math.max(graph.height, Math.max(...ys) + Math.max(up, 0) + graph.marginy);
 }
 function shiftRight(g, d) {
-  for (const v2 of g.nodes()) g.node(v2).x += d;
+  for (const v of g.nodes()) g.node(v).x += d;
   for (const e of g.edges()) {
     const edge = g.edge(e);
     edge.points = edge.points.map((p) => ({ ...p, x: p.x + d }));
@@ -7521,9 +7964,9 @@ function shiftRight(g, d) {
   g.graph().width += d;
 }
 function insertStrip(g, y2, d) {
-  for (const v2 of g.nodes()) {
-    const n = g.node(v2);
-    if (v2.startsWith("g") && top(n) < y2 && top(n) + n.height > y2) {
+  for (const v of g.nodes()) {
+    const n = g.node(v);
+    if (v.startsWith("g") && top(n) < y2 && top(n) + n.height > y2) {
       n.height += d;
       n.y += d / 2;
     } else if (n.y > y2) n.y += d;
@@ -7539,9 +7982,9 @@ var top = (n) => n.y - n.height / 2;
 function placeLabels({ g, key, sizes }, { nodes, edges, groups }, widths, rtl, reserve) {
   const boxes = [];
   for (const n of nodes.values()) {
-    const { x, y: y2 } = g.node(key.get(n.id));
-    const { width: w2, height: h } = sizes.get(n.id);
-    boxes.push([x - w2 / 2, y2 - h / 2, x + w2 / 2, y2 + h / 2]);
+    const { x: x2, y: y2 } = g.node(key.get(n.id));
+    const { width: w2, height: h2 } = sizes.get(n.id);
+    boxes.push([x2 - w2 / 2, y2 - h2 / 2, x2 + w2 / 2, y2 + h2 / 2]);
   }
   const segments = [];
   edges.forEach((e, i) => {
@@ -7549,26 +7992,26 @@ function placeLabels({ g, key, sizes }, { nodes, edges, groups }, widths, rtl, r
     const pts = data.points;
     for (let k = 1; k < pts.length; k++) segments.push([pts[k - 1], pts[k]]);
     if (e.label) {
-      const { width: w2, height: h } = edgeText(e.label);
-      boxes.push([data.x - w2 / 2, data.y - h / 2, data.x + w2 / 2, data.y + h / 2]);
+      const { width: w2, height: h2 } = edgeText(e.label);
+      boxes.push([data.x - w2 / 2, data.y - h2 / 2, data.x + w2 / 2, data.y + h2 / 2]);
     }
   });
   return groups.map((grp, i) => {
-    const c2 = g.node(gkey(i));
-    const left = c2.x - c2.width / 2;
-    const right = left + c2.width;
+    const c = g.node(gkey(i));
+    const left = c.x - c.width / 2;
+    const right = left + c.width;
     const w2 = widths[i];
-    const own = grp.state ? [[rtl ? left - 8 : right - 8, top(c2) - 8, rtl ? left + 8 : right + 8, top(c2) + 8]] : [];
+    const own = grp.state ? [[rtl ? left - 8 : right - 8, top(c) - 8, rtl ? left + 8 : right + 8, top(c) + 8]] : [];
     const free = (x02, y0, y1) => {
       const box = [x02 - 5, y0 - 2, x02 + w2 + 5, y1 + 2];
       const wide = [x02 - 10, y0 - 2, x02 + w2 + 10, y1 + 2];
       return ![...boxes, ...own].some((b) => overlaps(wide, b)) && !segments.some(([p, q3]) => segmentHits(p, q3, box));
     };
     const room = g.hasNode(reserveKey(i)) ? g.node(reserveKey(i)) : null;
-    const baselines = reserve.get(i) === "bottom" ? [top(c2) + c2.height - 6] : room ? [top(c2) + 14, room.y + 4] : [top(c2) + 14];
+    const baselines = reserve.get(i) === "bottom" ? [top(c) + c.height - 6] : room ? [top(c) + 14, room.y + 4] : [top(c) + 14];
     for (const baseline2 of baselines) {
       const [y0, y1] = [baseline2 - 11, baseline2 + 4];
-      for (let s = 0; s <= Math.max(0, c2.width - 16 - w2); s += 4) {
+      for (let s = 0; s <= Math.max(0, c.width - 16 - w2); s += 4) {
         const x02 = rtl ? right - 8 - w2 - s : left + 8 + s;
         if (free(x02, y0, y1)) {
           boxes.push([x02, y0, x02 + w2, y1]);
@@ -7605,15 +8048,15 @@ function layout2(model, rankdir, id, ui, pageDir = "ltr", warn) {
   const { g, key, sizes } = run2;
   if (warn) crossingWarnings(model, rankdir, run2, (alt) => reservedLayout(model, alt, rtl, widths).run).forEach(warn);
   const clusters = groups.map((grp, i) => {
-    const c2 = g.node(gkey(i));
-    const x = c2.x - c2.width / 2;
-    const y2 = c2.y - c2.height / 2;
+    const c = g.node(gkey(i));
+    const x2 = c.x - c.width / 2;
+    const y2 = c.y - c.height / 2;
     const mark = deltaAttr(grp.state);
-    const badgeX = rtl ? x : x + c2.width;
-    const [labelX, labelY] = spots[i] ?? [rtl ? x + c2.width - 8 : x + 8, y2 + 14];
-    return `<rect class="am-cluster"${mark} x="${f(x)}" y="${f(y2)}" width="${f(c2.width)}" height="${f(c2.height)}" rx="4"/><text class="am-cluster-label"${mark} x="${f(labelX)}" y="${f(labelY)}">${esc(svgLine(grp.name, pageDir))}</text>${badgeSvg(grp.state, badgeX, y2)}`;
+    const badgeX = rtl ? x2 : x2 + c.width;
+    const [labelX, labelY] = spots[i] ?? [rtl ? x2 + c.width - 8 : x2 + 8, y2 + 14];
+    return `<rect class="am-cluster"${mark} x="${f(x2)}" y="${f(y2)}" width="${f(c.width)}" height="${f(c.height)}" rx="4"/><text class="am-cluster-label"${mark} x="${f(labelX)}" y="${f(labelY)}">${esc(svgLine(grp.name, pageDir))}</text>${badgeSvg(grp.state, badgeX, y2)}`;
   });
-  const stepOf = new Map([.../* @__PURE__ */ new Set([...[...nodes.values()].map((n) => n.line), ...edges.map((e) => e.line)])].sort((a3, b) => a3 - b).map((l, k) => [l, k]));
+  const stepOf = new Map([.../* @__PURE__ */ new Set([...[...nodes.values()].map((n) => n.line), ...edges.map((e) => e.line)])].sort((a, b) => a - b).map((l3, k) => [l3, k]));
   const edgeSvg = edges.map((e, i) => {
     const data = g.edge({ v: key.get(e.from), w: key.get(e.to), name: `e${i}` });
     const pts = clipEnds(data.points, g.node(key.get(e.from)), nodes.get(e.from).shape, g.node(key.get(e.to)), nodes.get(e.to).shape);
@@ -7621,43 +8064,43 @@ function layout2(model, rankdir, id, ui, pageDir = "ltr", warn) {
     const path = `<path class="am-edge${e.dashed ? " am-edge--dashed" : ""}" d="${smoothPath(pts)}" marker-end="url(#${head})"/>`;
     const open = `<g data-step="${stepOf.get(e.line)}"${deltaAttr(e.state)}>`;
     if (!e.label) return `${open}${path}</g>`;
-    const { lines, width: w2, height: h } = edgeText(e.label);
-    return `${open}${path}<g class="am-edge-label"><rect x="${f(data.x - w2 / 2)}" y="${f(data.y - h / 2)}" width="${f(w2)}" height="${f(h)}" rx="3"/>${textLines(lines, data.x, data.y, LH2, "", pageDir)}</g></g>`;
+    const { lines, width: w2, height: h2 } = edgeText(e.label);
+    return `${open}${path}<g class="am-edge-label"><rect x="${f(data.x - w2 / 2)}" y="${f(data.y - h2 / 2)}" width="${f(w2)}" height="${f(h2)}" rx="3"/>${textLines(lines, data.x, data.y, LH2, "", pageDir)}</g></g>`;
   });
   const nodeSvg = [...nodes.values()].map((n) => {
-    const { x, y: y2 } = g.node(key.get(n.id));
-    const { width: w2, height: h, lines } = sizes.get(n.id);
-    const badge = badgeSvg(n.state, ...badgePoint(n.shape, x, y2, w2, h, rtl));
-    return `<g class="am-node am-node--${n.shape}${n.hi ? " am-node--hi" : ""}" data-key="${esc(n.label)}" data-step="${stepOf.get(n.line)}"${deltaAttr(n.state)}>${shapeSvg(n.shape, x, y2, w2, h)}${textLines(lines, x, y2 + (n.shape === "db" ? 4 : 0), LH2, ' class="am-node-text"', pageDir)}${badge}</g>`;
+    const { x: x2, y: y2 } = g.node(key.get(n.id));
+    const { width: w2, height: h2, lines } = sizes.get(n.id);
+    const badge = badgeSvg(n.state, ...badgePoint(n.shape, x2, y2, w2, h2, rtl));
+    return `<g class="am-node am-node--${n.shape}${n.hi ? " am-node--hi" : ""}" data-key="${esc(n.label)}" data-step="${stepOf.get(n.line)}"${deltaAttr(n.state)}>${shapeSvg(n.shape, x2, y2, w2, h2)}${textLines(lines, x2, y2 + (n.shape === "db" ? 4 : 0), LH2, ' class="am-node-text"', pageDir)}${badge}</g>`;
   });
   const { width, height } = g.graph();
   const label = diagramLabel(ui, "flow", [...nodes.keys()].slice(0, 8));
   const heads = ["added", "removed"].filter((state) => edges.some((e) => e.state === state));
   return `${svgOpen(width, height, label, pageDir)}${arrowDefs(id, heads)}<g>${clusters.join("")}</g><g>${edgeSvg.join("")}</g><g>${nodeSvg.join("")}</g></svg>`;
 }
-function badgeSvg(state, x, y2, step) {
+function badgeSvg(state, x2, y2, step) {
   if (!state) return "";
   const at3 = step === void 0 ? "" : ` data-step="${step}"`;
-  return `<g class="am-delta-badge am-delta-badge--${state}"${at3}${deltaAttr(state)} transform="translate(${f(x)},${f(y2)})"><circle r="7"/><text text-anchor="middle" dominant-baseline="central">${SIGN[state]}</text></g>`;
+  return `<g class="am-delta-badge am-delta-badge--${state}"${at3}${deltaAttr(state)} transform="translate(${f(x2)},${f(y2)})"><circle r="7"/><text text-anchor="middle" dominant-baseline="central">${SIGN[state]}</text></g>`;
 }
-function badgePoint(shape, x, y2, w2, h, rtl = false) {
+function badgePoint(shape, x2, y2, w2, h2, rtl = false) {
   const s = rtl ? -1 : 1;
-  if (shape === "diamond") return [x + s * (w2 / 4), y2 - h / 4];
-  if (shape === "round") return [x + s * (w2 / 2 - h * 0.15), y2 - h / 2 + h * 0.15];
-  return [x + s * (w2 / 2), y2 - h / 2];
+  if (shape === "diamond") return [x2 + s * (w2 / 4), y2 - h2 / 4];
+  if (shape === "round") return [x2 + s * (w2 / 2 - h2 * 0.15), y2 - h2 / 2 + h2 * 0.15];
+  return [x2 + s * (w2 / 2), y2 - h2 / 2];
 }
-function shapeSvg(shape, x, y2, w2, h) {
-  const l = x - w2 / 2;
-  const t = y2 - h / 2;
+function shapeSvg(shape, x2, y2, w2, h2) {
+  const l3 = x2 - w2 / 2;
+  const t = y2 - h2 / 2;
   if (shape === "diamond") {
-    return `<polygon class="am-node-shape" points="${f(x)},${f(t)} ${f(x + w2 / 2)},${f(y2)} ${f(x)},${f(t + h)} ${f(l)},${f(y2)}"/>`;
+    return `<polygon class="am-node-shape" points="${f(x2)},${f(t)} ${f(x2 + w2 / 2)},${f(y2)} ${f(x2)},${f(t + h2)} ${f(l3)},${f(y2)}"/>`;
   }
   if (shape === "db") {
     const ry = 7;
-    return `<path class="am-node-shape" d="M${f(l)},${f(t + ry)} A${f(w2 / 2)},${ry} 0 0 1 ${f(l + w2)},${f(t + ry)} V${f(t + h - ry)} A${f(w2 / 2)},${ry} 0 0 1 ${f(l)},${f(t + h - ry)} Z"/><path class="am-node-shape" d="M${f(l)},${f(t + ry)} A${f(w2 / 2)},${ry} 0 0 0 ${f(l + w2)},${f(t + ry)}"/>`;
+    return `<path class="am-node-shape" d="M${f(l3)},${f(t + ry)} A${f(w2 / 2)},${ry} 0 0 1 ${f(l3 + w2)},${f(t + ry)} V${f(t + h2 - ry)} A${f(w2 / 2)},${ry} 0 0 1 ${f(l3)},${f(t + h2 - ry)} Z"/><path class="am-node-shape" d="M${f(l3)},${f(t + ry)} A${f(w2 / 2)},${ry} 0 0 0 ${f(l3 + w2)},${f(t + ry)}"/>`;
   }
-  const rx = shape === "round" ? h / 2 : 3;
-  return `<rect class="am-node-shape" x="${f(l)}" y="${f(t)}" width="${f(w2)}" height="${f(h)}" rx="${f(rx)}"/>`;
+  const rx = shape === "round" ? h2 / 2 : 3;
+  return `<rect class="am-node-shape" x="${f(l3)}" y="${f(t)}" width="${f(w2)}" height="${f(h2)}" rx="${f(rx)}"/>`;
 }
 function clipEnds(points, from, fromShape, to, toShape) {
   const pts = points.map((p) => ({ ...p }));
@@ -7679,8 +8122,8 @@ var LOOP_STEP = 20;
 var LOOP_END = 18;
 var LOOP_LABEL = 24;
 var LOOP_GAP = 6;
-function loopBeside({ x, y: y2, width, labelWidth: labelWidth3 = 0, nth = 0, offset = nth * LOOP_STEP, side = 1 }) {
-  const edge = x + side * width / 2;
+function loopBeside({ x: x2, y: y2, width, labelWidth: labelWidth3 = 0, nth = 0, offset = nth * LOOP_STEP, side = 1 }) {
+  const edge = x2 + side * width / 2;
   const out = edge + side * LOOP_OUT + side * offset;
   const [ay, by] = [y2 - LOOP_END / 2, y2 + LOOP_END / 2];
   return {
@@ -7692,18 +8135,18 @@ function loopBeside({ x, y: y2, width, labelWidth: labelWidth3 = 0, nth = 0, off
     corners: [[out + side * 6 + side * labelWidth3, by], [out, ay]]
   };
 }
-function loopBelow({ x, y: y2, height, labelWidth: labelWidth3 = 0, labelHeight = 18, depth = 0, side = 1 }) {
+function loopBelow({ x: x2, y: y2, height, labelWidth: labelWidth3 = 0, labelHeight = 18, depth = 0, side = 1 }) {
   const bottom = y2 + height / 2;
   const out = bottom + LOOP_OUT + depth;
-  const [ax, bx] = [x - side * LOOP_END / 2, x + side * LOOP_END / 2];
+  const [ax, bx] = [x2 - side * LOOP_END / 2, x2 + side * LOOP_END / 2];
   const half = Math.max(LOOP_END / 2, labelWidth3 / 2);
   return {
     a: { x: ax, y: bottom },
     b: { x: bx, y: bottom },
     c: [{ x: ax, y: out }, { x: bx, y: out }],
     away: { x: 0, y: 1 },
-    label: labelWidth3 ? { x, y: out + 6 + labelHeight / 2 } : null,
-    corners: [[x - half, bottom], [x + half, out + (labelWidth3 ? 6 + labelHeight : 0)]]
+    label: labelWidth3 ? { x: x2, y: out + 6 + labelHeight / 2 } : null,
+    corners: [[x2 - half, bottom], [x2 + half, out + (labelWidth3 ? 6 + labelHeight : 0)]]
   };
 }
 var labelRoom = (width, height) => width ? Math.max(LOOP_LABEL, 6 + (height ?? 18)) : 0;
@@ -7711,8 +8154,8 @@ function loopRoom(labelWidths, labelHeights = []) {
   const steps2 = labelWidths.slice(0, -1).reduce((depth, width, i) => depth + LOOP_STEP + labelRoom(width, labelHeights[i]), 0);
   return LOOP_OUT + steps2 + labelRoom(labelWidths.at(-1), labelHeights.at(-1)) + LOOP_GAP;
 }
-function loopPath({ a: a3, b, c: c2 }) {
-  return `M${f(a3.x)},${f(a3.y)} C${f(c2[0].x)},${f(c2[0].y)} ${f(c2[1].x)},${f(c2[1].y)} ${f(b.x)},${f(b.y)}`;
+function loopPath({ a, b, c }) {
+  return `M${f(a.x)},${f(a.y)} C${f(c[0].x)},${f(c[0].y)} ${f(c[1].x)},${f(c[1].y)} ${f(b.x)},${f(b.y)}`;
 }
 function clipToBox(centre, box, toward) {
   const dx = toward.x - centre.x;
@@ -7757,13 +8200,13 @@ Polling -> Open: reply
   - A marker applies to the transition and to each state on its line. A state is removed when it appears only on - lines, added when it appears only on + lines, and unchanged when it also appears on an unmarked line. ~ State on a line without an arrow marks that state as changed.
   - ~ on a transition is an error: remove the old transition with - and add the new one with +. The same transition both unmarked and marked is an error too.
   - The Changes view draws added in the theme's ok color, removed faded with a struck-through label, changed with a warn outline, and each marked state with a +, \u2212 or ~ badge. A count row and a Before / Changes / After switch sit under the diagram.
-  - A line that starts with a marker and a space is always read as a marker.`,
+  - A line that starts with a marker and a space is always read as a marker. A marker inside the line, before a state ("A -> + B"), is an error: write it at the start, "+ A -> B".`,
   example: "```state LR\n[*] -> Idle\nIdle -> Connecting: connect()\nConnecting -> Open: SYN-ACK\nConnecting -> Closed: RST\nOpen -> Open: retransmit\nOpen -> Closed: close()\nClosed -> [*]\n```",
   render(text2, { args, uid, ui, video, dir: pageDir = "ltr" }) {
     const model = parseState(text2);
     const dir = (args.match(/\b(TB|LR|BT|RL)\b/i)?.[1] ?? "TB").toUpperCase();
     const html = `<figure class="am-diagram am-state">${layout3(model, DIRS2.has(dir) ? dir : "TB", uid(), ui, pageDir, video)}</figure>`;
-    return withDelta(html, [...model.nodes.values(), ...model.edges].map((x) => x.state ?? null), { ui, video });
+    return withDelta(html, [...model.nodes.values(), ...model.edges].map((x2) => x2.state ?? null), { ui, video });
   }
 };
 function parseState(text2) {
@@ -7778,7 +8221,7 @@ function parseState(text2) {
     else nodes.set(id, { ...prev, before: prev.before || seen.before, after: prev.after || seen.after, tilde: prev.tilde || seen.tilde, ...tildeLine && { tildeLine: prev.tildeLine ?? tildeLine } });
     return id;
   };
-  const resolve7 = (name2, line, mark, side) => {
+  const resolve9 = (name2, line, mark, side) => {
     if (name2 !== "[*]") return add2(name2, name2, "state", line, mark);
     return add2(side === "from" ? INITIAL : FINAL, "[*]", side === "from" ? "initial" : "final", line, mark);
   };
@@ -7791,7 +8234,9 @@ function parseState(text2) {
     const at3 = t.indexOf("->");
     if (at3 === -1) {
       if (/[:：]/.test(t)) throw new ComponentError(`state cannot parse "${raw}". Write a transition as A -> B: event`, n);
-      resolve7(t.trim(), n, mark, "from");
+      const lone = innerMarkMessage("state", [t.trim()], mark, t, "", false);
+      if (lone) throw new ComponentError(lone, n);
+      resolve9(t.trim(), n, mark, "from");
       continue;
     }
     if (mark === "~") throw new ComponentError('state: ~ marks a state, not a transition. To change a transition, remove the old one and add the new one: "- A -> B" then "+ A -> C"', n);
@@ -7802,8 +8247,10 @@ function parseState(text2) {
     const label = colon === -1 ? "" : rest.slice(colon + 1).trim();
     if (to.includes("->")) throw new ComponentError(`state takes one transition per line: "${raw}" has two. Split it into two lines`, n);
     if (!from || !to) throw new ComponentError(`state: a transition needs a state on each side of ->; write "${raw}" as A -> B: event`, n);
-    const fromId = resolve7(from, n, mark, "from");
-    const toId = resolve7(to, n, mark, "to");
+    const inner = innerMarkMessage("state", [from, to], mark, t, "", true);
+    if (inner) throw new ComponentError(inner, n);
+    const fromId = resolve9(from, n, mark, "from");
+    const toId = resolve9(to, n, mark, "to");
     edges.push({ from: fromId, to: toId, label, line: n, ...state && { state } });
   }
   if (!nodes.size) throw new ComponentError("state needs at least one state", 1);
@@ -7812,7 +8259,7 @@ function parseState(text2) {
     const state = nodeState(node);
     return [id, state ? { ...node, state } : node];
   }));
-  return { nodes: settled, edges, lines: [...lines].sort((a3, b) => a3 - b) };
+  return { nodes: settled, edges, lines: [...lines].sort((a, b) => a - b) };
 }
 function checkMermaid(t, raw, mark, line) {
   if (/^stateDiagram(-v2)?$/i.test(t)) {
@@ -7833,8 +8280,8 @@ function checkMermaid(t, raw, mark, line) {
 function checkTransitions(edges, nodes) {
   const keyOf = (e) => `${e.from}\0${e.to}\0${e.label}`;
   const text2 = (e) => `${nodes.get(e.from).label} -> ${nodes.get(e.to).label}${e.label ? `: ${e.label}` : ""}`;
-  for (const e of edges.filter((x) => x.state)) {
-    const plain = edges.find((x) => !x.state && keyOf(x) === keyOf(e));
+  for (const e of edges.filter((x2) => x2.state)) {
+    const plain = edges.find((x2) => !x2.state && keyOf(x2) === keyOf(e));
     if (plain) {
       throw new ComponentError(`state: the transition ${text2(e)} is written unmarked on line ${plain.line} and as ${e.state === "added" ? "+" : "-"} here. Mark every line of that transition, or none`, e.line);
     }
@@ -7876,9 +8323,9 @@ function layout3(model, rankdir, id, ui, pageDir = "ltr", video = false) {
   }));
   const { g, key } = runLayout({ nodes: layoutNodes, edges: straight, groups: [] }, rankdir, rtl, [], /* @__PURE__ */ new Map());
   const centre = (nodeId) => {
-    const { x, y: y2 } = g.node(key.get(nodeId));
+    const { x: x2, y: y2 } = g.node(key.get(nodeId));
     const extra = room.get(nodeId) ?? {};
-    return { x: x - side * (extra.x ?? 0) / 2, y: y2 - (extra.y ?? 0) / 2 };
+    return { x: x2 - side * (extra.x ?? 0) / 2, y: y2 - (extra.y ?? 0) / 2 };
   };
   const stepOf = new Map(lines.map((line, i) => [line, i]));
   const drawn = straight.map((e, i) => {
@@ -7893,16 +8340,16 @@ function layout3(model, rankdir, id, ui, pageDir = "ltr", video = false) {
   });
   const seen = /* @__PURE__ */ new Map();
   const loopSpecs = loops.map((e) => {
-    const { x, y: y2 } = centre(e.from);
+    const { x: x2, y: y2 } = centre(e.from);
     const box = boxes.get(e.from);
     if (below) {
       const size = measured.get(e);
       const { depth } = seen.get(e.from) ?? { depth: 0 };
       seen.set(e.from, { depth: depth + LOOP_STEP + (e.label ? Math.max(LOOP_LABEL, 6 + size.height) : 0) });
-      return { e, ...loopBelow({ x, y: y2, height: box.height, depth, side, labelWidth: size.width, labelHeight: size.height }) };
+      return { e, ...loopBelow({ x: x2, y: y2, height: box.height, depth, side, labelWidth: size.width, labelHeight: size.height }) };
     }
-    const spec = beside.get(e.from).find((x2) => x2.edge === e);
-    return { e, ...loopBeside({ x, y: y2, width: box.width, side, offset: spec.offset, labelWidth: spec.labelWidth }) };
+    const spec = beside.get(e.from).find((x3) => x3.edge === e);
+    return { e, ...loopBeside({ x: x2, y: y2, width: box.width, side, offset: spec.offset, labelWidth: spec.labelWidth }) };
   });
   const loopsSvg = loopSpecs.map(({ e, ...spec }) => {
     const head = e.state ? `${id}-arrow-${e.state}` : `${id}-arrow`;
@@ -7911,42 +8358,42 @@ function layout3(model, rankdir, id, ui, pageDir = "ltr", video = false) {
     return `<g data-step="${stepOf.get(e.line)}"${deltaAttr(e.state)}>${path}${text2}</g>`;
   });
   const nodeSvg = [...nodes.values()].map((n) => {
-    const { x, y: y2 } = centre(n.id);
+    const { x: x2, y: y2 } = centre(n.id);
     const box = boxes.get(n.id);
     const badgeStep = n.state === "changed" ? stepOf.get(n.tildeLine ?? n.line) : void 0;
-    const badge = badgeSvg(n.state, rtl ? x - box.width / 2 : x + box.width / 2, y2 - box.height / 2, badgeStep);
+    const badge = badgeSvg(n.state, rtl ? x2 - box.width / 2 : x2 + box.width / 2, y2 - box.height / 2, badgeStep);
     const keyAttr = n.kind === "state" ? ` data-key="${esc(n.label)}"` : "";
     const open = `<g class="am-node am-node--state${n.kind === "state" ? "" : ` am-node--${n.kind}`}"${keyAttr} data-step="${stepOf.get(n.line)}"${deltaAttr(n.state)}>`;
-    if (n.kind === "initial") return `${open}<circle class="am-state-dot" cx="${f(x)}" cy="${f(y2)}" r="${DOT_R}"/>${badge}</g>`;
-    if (n.kind === "final") return `${open}<circle class="am-state-ring" cx="${f(x)}" cy="${f(y2)}" r="${DOT_R}"/><circle class="am-state-core" cx="${f(x)}" cy="${f(y2)}" r="2.8"/>${badge}</g>`;
-    return `${open}<rect class="am-node-shape" x="${f(x - box.width / 2)}" y="${f(y2 - box.height / 2)}" width="${f(box.width)}" height="${f(box.height)}" rx="8"/>${textLines(box.lines, x, y2, LH3, ' class="am-node-text"', pageDir)}${badge}</g>`;
+    if (n.kind === "initial") return `${open}<circle class="am-state-dot" cx="${f(x2)}" cy="${f(y2)}" r="${DOT_R}"/>${badge}</g>`;
+    if (n.kind === "final") return `${open}<circle class="am-state-ring" cx="${f(x2)}" cy="${f(y2)}" r="${DOT_R}"/><circle class="am-state-core" cx="${f(x2)}" cy="${f(y2)}" r="2.8"/>${badge}</g>`;
+    return `${open}<rect class="am-node-shape" x="${f(x2 - box.width / 2)}" y="${f(y2 - box.height / 2)}" width="${f(box.width)}" height="${f(box.height)}" rx="8"/>${textLines(box.lines, x2, y2, LH3, ' class="am-node-text"', pageDir)}${badge}</g>`;
   });
   const xs = [];
   const ys = [];
-  const at3 = (x, y2) => {
-    xs.push(x);
+  const at3 = (x2, y2) => {
+    xs.push(x2);
     ys.push(y2);
   };
   for (const n of nodes.values()) {
-    const { x, y: y2 } = centre(n.id);
+    const { x: x2, y: y2 } = centre(n.id);
     const box = boxes.get(n.id);
-    at3(x - box.width / 2, y2 - box.height / 2);
-    at3(x + box.width / 2, y2 + box.height / 2);
+    at3(x2 - box.width / 2, y2 - box.height / 2);
+    at3(x2 + box.width / 2, y2 + box.height / 2);
   }
   for (const { e, data, points } of drawn) {
     for (const p of points) at3(p.x, p.y);
     if (e.label) {
-      const { width: w2, height: h } = edgeText(e.label);
-      at3(data.x - w2 / 2, data.y - h / 2);
-      at3(data.x + w2 / 2, data.y + h / 2);
+      const { width: w2, height: h2 } = edgeText(e.label);
+      at3(data.x - w2 / 2, data.y - h2 / 2);
+      at3(data.x + w2 / 2, data.y + h2 / 2);
     }
   }
   for (const { e, corners, label: label2 } of loopSpecs) {
-    corners.forEach(([x, y2]) => at3(x, y2));
+    corners.forEach(([x2, y2]) => at3(x2, y2));
     if (label2) {
-      const { width: w2, height: h } = edgeText(e.label);
-      at3(label2.x - w2 / 2, label2.y - h / 2);
-      at3(label2.x + w2 / 2, label2.y + h / 2);
+      const { width: w2, height: h2 } = edgeText(e.label);
+      at3(label2.x - w2 / 2, label2.y - h2 / 2);
+      at3(label2.x + w2 / 2, label2.y + h2 / 2);
     }
   }
   const margin = 14;
@@ -7967,19 +8414,19 @@ function layout3(model, rankdir, id, ui, pageDir = "ltr", video = false) {
   const empty = video ? lines.map((line) => used.has(stepOf.get(line)) ? "" : `<g data-step="${stepOf.get(line)}"></g>`).join("") : "";
   return `${svgOpen(width, height, label, pageDir)}${arrowDefs(id, heads)}<g${shift}><g>${edgeSvg.join("")}</g><g>${loopsSvg.join("")}</g><g>${nodeSvg.join("")}</g>${empty}</g></svg>`;
 }
-function edgeLabelSvg(label, x, y2, pageDir) {
-  const { lines, width: w2, height: h } = edgeText(label);
-  return `<g class="am-edge-label"><rect x="${f(x - w2 / 2)}" y="${f(y2 - h / 2)}" width="${f(w2)}" height="${f(h)}" rx="3"/>${textLines(lines, x, y2, LH3, "", pageDir)}</g>`;
+function edgeLabelSvg(label, x2, y2, pageDir) {
+  const { lines, width: w2, height: h2 } = edgeText(label);
+  return `<g class="am-edge-label"><rect x="${f(x2 - w2 / 2)}" y="${f(y2 - h2 / 2)}" width="${f(w2)}" height="${f(h2)}" rx="3"/>${textLines(lines, x2, y2, LH3, "", pageDir)}</g>`;
 }
 function clipEnds2(points, edge, centre, boxes, room, nodes) {
   const pts = points.map((p) => ({ ...p }));
   if (room.has(edge.from) && pts.length > 1) pts[0] = clipToBox(centre(edge.from), boxes.get(edge.from), points[1]);
   if (room.has(edge.to) && pts.length > 1) pts[pts.length - 1] = clipToBox(centre(edge.to), boxes.get(edge.to), points[points.length - 2]);
-  const onCircle = (c2, toward, r) => {
-    const dx = toward.x - c2.x;
-    const dy = toward.y - c2.y;
+  const onCircle = (c, toward, r) => {
+    const dx = toward.x - c.x;
+    const dy = toward.y - c.y;
     const d = Math.hypot(dx, dy);
-    return d ? { x: c2.x + dx / d * r, y: c2.y + dy / d * r } : { ...c2 };
+    return d ? { x: c.x + dx / d * r, y: c.y + dy / d * r } : { ...c };
   };
   if (nodes.get(edge.from).kind === "initial" && pts.length > 1) pts[0] = onCircle(centre(edge.from), pts[1], DOT_R);
   if (nodes.get(edge.to).kind === "final" && pts.length > 1) pts[pts.length - 1] = onCircle(centre(edge.to), pts[pts.length - 2], DOT_R);
@@ -8046,7 +8493,7 @@ Order
     const model = parseEr(text2);
     const dir = (args.match(/\b(TB|LR|BT|RL)\b/i)?.[1] ?? "TB").toUpperCase();
     const html = `<figure class="am-diagram am-er">${layout4(model, DIRS3.has(dir) ? dir : "TB", ui, pageDir)}</figure>`;
-    const states = [...model.entities.values()].flatMap((e) => [e.state, ...e.fields.map((x) => x.state)]).concat(model.written.map((rel) => rel.state));
+    const states = [...model.entities.values()].flatMap((e) => [e.state, ...e.fields.map((x2) => x2.state)]).concat(model.written.map((rel) => rel.state));
     return withDelta(html, states.map((state) => state ?? null), { ui, video });
   }
 };
@@ -8162,14 +8609,14 @@ function relationships({ entities, written }) {
     }
   }
   const replaced = new Set(written.map((rel) => pairKey(rel.from, rel.to)));
-  const lines = written.map((rel) => withState(rel, rel.state ?? ends(rel.from, rel.to) ?? implied.find((x) => pairKey(x.from, x.to) === pairKey(rel.from, rel.to) && x.state)?.state));
+  const lines = written.map((rel) => withState(rel, rel.state ?? ends(rel.from, rel.to) ?? implied.find((x2) => pairKey(x2.from, x2.to) === pairKey(rel.from, rel.to) && x2.state)?.state));
   return [...implied.filter((rel) => !replaced.has(pairKey(rel.from, rel.to))), ...lines];
 }
-var pairKey = (a3, b) => [a3, b].sort().join("\0");
+var pairKey = (a, b) => [a, b].sort().join("\0");
 var fieldText = (field) => field.type ? `${field.name} ${field.type}` : field.name;
 var nameWidth = (entity) => measure(entity.name, FS3, { bold: true });
 var rowWidth = (entity, field) => measure(fieldText(field), FIELD_FS, { bold: entity.hi }) + keyWidth(entity, field) + signWidth(entity) + 2 * PAD;
-var signWidth = (entity) => entity.fields.some((x) => x.state) ? SIGN_W : 0;
+var signWidth = (entity) => entity.fields.some((x2) => x2.state) ? SIGN_W : 0;
 var keyWidth = (entity, field) => field.marker ? measure(field.marker, KEY_FS, { mono: true, bold: entity.hi }) + KEY_GAP : 0;
 function nodeSize2(entity) {
   const rows = entity.fields.map((field) => rowWidth(entity, field));
@@ -8198,8 +8645,8 @@ function layout4(model, rankdir, ui, pageDir = "ltr") {
     g.setNode(key.get(entity.name), { width: size.width, height: size.height + (room.get(entity.name) ?? 0) });
   }
   const centre = (name2) => {
-    const { x, y: y2 } = g.node(key.get(name2));
-    return { x, y: y2 - (room.get(name2) ?? 0) / 2 };
+    const { x: x2, y: y2 } = g.node(key.get(name2));
+    return { x: x2, y: y2 - (room.get(name2) ?? 0) / 2 };
   };
   rels.filter((rel) => rel.from !== rel.to).forEach((rel, i) => {
     const label2 = rel.label ? { label: rel.label, width: measure(rel.label, EDGE_FS2) + 10, height: 18, labelpos: "c" } : {};
@@ -8208,7 +8655,7 @@ function layout4(model, rankdir, ui, pageDir = "ltr") {
   Uo.layout(g, { customOrder: orderRanks });
   const rtl = pageDir === "rtl";
   if (rtl) mirrorLayout(g);
-  const steps2 = [.../* @__PURE__ */ new Set([...[...entities.values()].map((e) => e.line), ...rels.map((r) => r.line)])].sort((a3, b) => a3 - b);
+  const steps2 = [.../* @__PURE__ */ new Set([...[...entities.values()].map((e) => e.line), ...rels.map((r) => r.line)])].sort((a, b) => a - b);
   const stepOf = new Map(steps2.map((line, i) => [line, i]));
   const straight = rels.filter((rel) => rel.from !== rel.to).map((rel, i) => {
     const data = g.edge({ v: key.get(rel.from), w: key.get(rel.to), name: `e${i}` });
@@ -8222,33 +8669,33 @@ function layout4(model, rankdir, ui, pageDir = "ltr") {
     return `<g data-step="${stepOf.get(rel.line)}"${deltaAttr(rel.state)}><path class="am-edge" d="${smoothPath(points)}"/>${endsSvg(points, rel)}${label2}</g>`;
   });
   const nodeSvg = [...entities.values()].map((entity) => {
-    const { x, y: y2 } = centre(entity.name);
+    const { x: x2, y: y2 } = centre(entity.name);
     const size = sizes.get(entity.name);
-    return nodeSvgOf(entity, x, y2, size, stepOf.get(entity.line), pageDir);
+    return nodeSvgOf(entity, x2, y2, size, stepOf.get(entity.line), pageDir);
   });
   const s = rtl ? -1 : 1;
   const seen = /* @__PURE__ */ new Map();
   const loopSpecs = loops.map((rel) => {
     const { nth, depth } = seen.get(rel.from) ?? { nth: 0, depth: 0 };
     seen.set(rel.from, { nth: nth + 1, depth: depth + LOOP_STEP + (rel.label ? LOOP_LABEL : 0) });
-    const { x, y: y2 } = centre(rel.from);
+    const { x: x2, y: y2 } = centre(rel.from);
     const size = sizes.get(rel.from);
     const lw = rel.label ? labelWidth2(rel.label) : 0;
-    const spec = below ? loopBelow({ x, y: y2, height: size.height, depth, side: s, labelWidth: lw }) : loopBeside({ x, y: y2, width: size.width, nth, side: s, labelWidth: lw });
+    const spec = below ? loopBelow({ x: x2, y: y2, height: size.height, depth, side: s, labelWidth: lw }) : loopBeside({ x: x2, y: y2, width: size.width, nth, side: s, labelWidth: lw });
     return { rel, ...spec };
   });
   const loopsSvg = loopSpecs.map((spec) => loopSvg(spec, stepOf.get(spec.rel.line), pageDir));
   const xs = [];
   const ys = [];
-  const at3 = (x, y2) => {
-    xs.push(x);
+  const at3 = (x2, y2) => {
+    xs.push(x2);
     ys.push(y2);
   };
   for (const entity of entities.values()) {
-    const { x, y: y2 } = centre(entity.name);
+    const { x: x2, y: y2 } = centre(entity.name);
     const size = sizes.get(entity.name);
-    at3(x - size.width / 2, y2 - size.height / 2);
-    at3(x + size.width / 2, y2 + size.height / 2);
+    at3(x2 - size.width / 2, y2 - size.height / 2);
+    at3(x2 + size.width / 2, y2 + size.height / 2);
   }
   straight.forEach(({ rel, data, points }) => {
     for (const p of points) at3(p.x, p.y);
@@ -8258,7 +8705,7 @@ function layout4(model, rankdir, ui, pageDir = "ltr") {
       at3(data.x + w2 / 2, data.y + 9);
     }
   });
-  for (const { corners } of loopSpecs) corners.forEach(([x, y2]) => at3(x, y2));
+  for (const { corners } of loopSpecs) corners.forEach(([x2, y2]) => at3(x2, y2));
   const margin = 14;
   const shiftX = margin - Math.min(...xs);
   const shiftY = margin - Math.min(...ys);
@@ -8268,8 +8715,8 @@ function layout4(model, rankdir, ui, pageDir = "ltr") {
   const label = diagramLabel(ui, "er", [...entities.keys()].slice(0, 8));
   return `${svgOpen(width, height, label, pageDir)}<g${shift}><g>${edgeSvg.join("")}</g><g>${loopsSvg.join("")}</g><g>${nodeSvg.join("")}</g></g></svg>`;
 }
-function nodeSvgOf(entity, x, y2, size, step, pageDir) {
-  const left = x - size.width / 2;
+function nodeSvgOf(entity, x2, y2, size, step, pageDir) {
+  const left = x2 - size.width / 2;
   const top2 = y2 - size.height / 2;
   const [nameX, keyX] = pageDir === "rtl" ? [left + size.width - PAD, left + PAD] : [left + PAD, left + size.width - PAD];
   const head = `<text class="am-er-head am-node-text" font-weight="600" x="${f(nameX)}" y="${f(top2 + PAD + HEAD_LH / 2)}" dominant-baseline="central">${esc(svgLine(entity.name, pageDir))}</text>`;
@@ -8286,18 +8733,18 @@ function nodeSvgOf(entity, x, y2, size, step, pageDir) {
   const badge = badgeSvg(entity.state, rtl ? left : left + size.width, top2);
   return `<g class="am-node am-node--er${entity.hi ? " am-node--hi" : ""}" data-key="${esc(entity.name)}" data-step="${step}"${deltaAttr(entity.state)}><rect class="am-node-shape" x="${f(left)}" y="${f(top2)}" width="${f(size.width)}" height="${f(size.height)}" rx="3"/>${head}${rule}${fields2}${badge}</g>`;
 }
-function loopSvg({ rel, a: a3, b, c: c2, away, label }, step, pageDir) {
-  const path = `<path class="am-edge" d="${loopPath({ a: a3, b, c: c2 })}"/>`;
-  const ends = `${endMark(a3, { x: a3.x + away.x, y: a3.y + away.y }, rel.fromCard)}${endMark(b, { x: b.x + away.x, y: b.y + away.y }, rel.toCard)}`;
+function loopSvg({ rel, a, b, c, away, label }, step, pageDir) {
+  const path = `<path class="am-edge" d="${loopPath({ a, b, c })}"/>`;
+  const ends = `${endMark(a, { x: a.x + away.x, y: a.y + away.y }, rel.fromCard)}${endMark(b, { x: b.x + away.x, y: b.y + away.y }, rel.toCard)}`;
   const text2 = label ? labelSvg(rel.label, label.x, label.y, pageDir) : "";
   return `<g data-step="${step}"${deltaAttr(rel.state)}>${path}${ends}${text2}</g>`;
 }
 function labelWidth2(text2) {
   return measure(text2, EDGE_FS2) + 10;
 }
-function labelSvg(text2, x, y2, pageDir) {
+function labelSvg(text2, x2, y2, pageDir) {
   const w2 = labelWidth2(text2);
-  return `<g class="am-edge-label"><rect x="${f(x - w2 / 2)}" y="${f(y2 - 9)}" width="${f(w2)}" height="18" rx="3"/>${textLines([text2], x, y2, LH4, "", pageDir)}</g>`;
+  return `<g class="am-edge-label"><rect x="${f(x2 - w2 / 2)}" y="${f(y2 - 9)}" width="${f(w2)}" height="18" rx="3"/>${textLines([text2], x2, y2, LH4, "", pageDir)}</g>`;
 }
 function endsSvg(points, rel) {
   if (points.length < 2) return "";
@@ -8313,15 +8760,15 @@ function endMark(point, toward, card) {
   const px = -uy;
   const py = ux;
   const at3 = (back, side) => ({ x: point.x - ux * back + px * side, y: point.y - uy * back + py * side });
-  const line = (a3, b) => `<line x1="${f(a3.x)}" y1="${f(a3.y)}" x2="${f(b.x)}" y2="${f(b.y)}"/>`;
+  const line = (a, b) => `<line x1="${f(a.x)}" y1="${f(a.y)}" x2="${f(b.x)}" y2="${f(b.y)}"/>`;
   const bar = (back) => line(at3(back, -R.side), at3(back, R.side));
   const foot = (apexBack) => {
     const apex = at3(apexBack, 0);
     return [line(at3(0, -R.side), apex), line(at3(0, 0), apex), line(at3(0, R.side), apex)].join("");
   };
   const circle = (back) => {
-    const c2 = at3(back, 0);
-    return `<circle cx="${f(c2.x)}" cy="${f(c2.y)}" r="3.4" style="fill: var(--paper, #ffffff)"/>`;
+    const c = at3(back, 0);
+    return `<circle cx="${f(c.x)}" cy="${f(c.y)}" r="3.4" style="fill: var(--paper, #ffffff)"/>`;
   };
   const marks = {
     "1": () => bar(R.back),
@@ -8399,13 +8846,13 @@ User ..|> Store: implements
     g.setGraph({ rankdir: args.match(/\b(TB|LR|BT|RL)\b/i)?.[1].toUpperCase() ?? "TB", nodesep: 44, ranksep: 64, marginx: 18, marginy: 18 });
     g.setDefaultEdgeLabel(() => ({}));
     const keys = new Map([...classes.keys()].map((name2, i) => [name2, `n${i}`]));
-    for (const c2 of classes.values()) {
-      const stereotype = c2.kind === "class" ? [] : [c2.kind];
-      const attributes = c2.members.filter((m2) => !METHOD.test(m2));
-      const methods = c2.members.filter((m2) => METHOD.test(m2));
-      const groups = [[...stereotype, c2.name], attributes, methods].filter((rows) => rows.length);
-      const widths = groups.flatMap((rows, i) => rows.map((row, n) => measure(row, i || stereotype.length && !n ? DRAWING.field : DRAWING.node, { bold: c2.hi })));
-      g.setNode(keys.get(c2.name), { ...c2, groups, width: Math.ceil(Math.max(100, ...widths.map((w2) => w2 + 2 * PAD2))), height: groups.reduce((n, rows) => n + rows.length * ROW + PAD2, 0) });
+    for (const c of classes.values()) {
+      const stereotype = c.kind === "class" ? [] : [c.kind];
+      const attributes = c.members.filter((m) => !METHOD.test(m));
+      const methods = c.members.filter((m) => METHOD.test(m));
+      const groups = [[...stereotype, c.name], attributes, methods].filter((rows) => rows.length);
+      const widths = groups.flatMap((rows, i) => rows.map((row, n) => measure(row, i || stereotype.length && !n ? DRAWING.field : DRAWING.node, { bold: c.hi })));
+      g.setNode(keys.get(c.name), { ...c, groups, width: Math.ceil(Math.max(100, ...widths.map((w2) => w2 + 2 * PAD2))), height: groups.reduce((n, rows) => n + rows.length * ROW + PAD2, 0) });
     }
     relations.forEach((rel, i) => {
       g.setEdge(keys.get(rel.from), keys.get(rel.to), {
@@ -8426,20 +8873,20 @@ User ..|> Store: implements
       return `<g data-step="${rel.line - 1}"><path class="am-edge${rel.kind.startsWith("..") ? " am-edge--dashed" : ""}" d="${smoothPath(rel.points)}"${end}/>${label}</g>`;
     });
     const nodes = g.nodes().map((key) => {
-      const c2 = g.node(key);
-      const x = c2.x - c2.width / 2;
-      const y2 = c2.y - c2.height / 2;
+      const c = g.node(key);
+      const x2 = c.x - c.width / 2;
+      const y2 = c.y - c.height / 2;
       let top2 = y2;
-      const rows = c2.groups.map((group, k) => {
-        const separator = k ? `<path class="am-edge" d="M${f(x)},${f(top2)} h${f(c2.width)}"/>` : "";
+      const rows = c.groups.map((group, k) => {
+        const separator = k ? `<path class="am-edge" d="M${f(x2)},${f(top2)} h${f(c.width)}"/>` : "";
         const text3 = group.map((member, n) => {
-          const kind2 = !k && !n && c2.kind !== "class";
-          return `<text class="am-node-text" x="${f(k ? dir === "rtl" ? x + c2.width - PAD2 : x + PAD2 : c2.x)}" y="${f(top2 + PAD2 / 2 + ROW * (n + 0.5))}" text-anchor="${k ? "start" : "middle"}" dominant-baseline="central"${k || kind2 ? ` style="font-size:${DRAWING.field}px${kind2 ? ";font-style:italic;opacity:0.65" : ""}"` : ""}>${esc(svgLine(member, dir))}</text>`;
+          const kind2 = !k && !n && c.kind !== "class";
+          return `<text class="am-node-text" x="${f(k ? dir === "rtl" ? x2 + c.width - PAD2 : x2 + PAD2 : c.x)}" y="${f(top2 + PAD2 / 2 + ROW * (n + 0.5))}" text-anchor="${k ? "start" : "middle"}" dominant-baseline="central"${k || kind2 ? ` style="font-size:${DRAWING.field}px${kind2 ? ";font-style:italic;opacity:0.65" : ""}"` : ""}>${esc(svgLine(member, dir))}</text>`;
         }).join("");
         top2 += group.length * ROW + PAD2;
         return separator + text3;
       }).join("");
-      return `<g class="am-node am-node--rect${c2.hi ? " am-node--hi" : ""}" data-key="${esc(c2.name)}" data-step="${c2.line - 1}"><rect class="am-node-shape" x="${f(x)}" y="${f(y2)}" width="${f(c2.width)}" height="${f(c2.height)}" rx="3"/>${rows}</g>`;
+      return `<g class="am-node am-node--rect${c.hi ? " am-node--hi" : ""}" data-key="${esc(c.name)}" data-step="${c.line - 1}"><rect class="am-node-shape" x="${f(x2)}" y="${f(y2)}" width="${f(c.width)}" height="${f(c.height)}" rx="3"/>${rows}</g>`;
     });
     const defs = `<defs>${[["triangle", "M0,0 L10,5 L0,10 Z"], ["diamond", "M0,5 L6,0 L12,5 L6,10 Z"], ["filled", "M0,5 L6,0 L12,5 L6,10 Z"], ["open", "M1,1 L9,5 L1,9"]].map(([kind2, path]) => `<marker id="${id}-${kind2}" viewBox="-1 -1 14 12" refX="${kind2 === "diamond" || kind2 === "filled" ? 12 : 10}" refY="5" markerWidth="12" markerHeight="10" orient="auto-start-reverse"><path class="${kind2 === "filled" ? "am-arrow" : kind2 === "open" ? "am-edge" : "am-class-hollow"}" d="${path}"/></marker>`).join("")}</defs>`;
     return `<figure class="am-diagram am-class">${svgOpen(g.graph().width, g.graph().height, diagramLabel(ui, "class", [...classes.keys()]), dir)}${defs}${edges.join("")}${nodes.join("")}</svg></figure>`;
@@ -8447,16 +8894,22 @@ User ..|> Store: implements
 };
 
 // src/components/api.js
-function parseApi(text2) {
-  const lines = contentLines(text2);
-  const first = lines.shift();
-  const endpoint = first?.text.match(/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|TRACE|CONNECT|RPC)\s+(\S+)$/);
-  if (!endpoint || (endpoint[1] === "RPC" ? !/^[^/]+\/[^/]+$/.test(endpoint[2]) : !endpoint[2].startsWith("/"))) {
-    throw new ComponentError("api: start with METHOD /path or RPC package.Service/Method", first?.line ?? 1);
+function apiState(mark, parent, line) {
+  const own = markState(mark);
+  const inherited = ["added", "removed"].includes(parent?.state) ? parent.state : null;
+  if (inherited && own && own !== inherited) {
+    throw new ComponentError(`api: "${mark}" contradicts its ${inherited} parent; remove the marker or move the item`, line);
   }
-  const sections = [];
+  const state = inherited ?? own;
+  return state ? { state } : {};
+}
+var identifier = (text2) => text2.split(/(?<=[_./,:<>|-])(?=.)|(?<=[a-z0-9])(?=[A-Z])/).map(esc).join("<wbr>");
+function parseApi(text2) {
+  const endpoints = [];
+  let endpoint;
   let current;
-  for (const { raw, text: line, line: n } of lines) {
+  for (const { raw, text: source, line: n } of contentLines(text2)) {
+    const { mark, text: line } = splitMarker(source);
     if (/^\s/.test(raw)) {
       const [spec, ...description] = line.split(/(?<!\\)\|/).map((part) => part.replace(/\\\|/g, "|"));
       const parts = spec.trim().split(/\s+/);
@@ -8464,28 +8917,39 @@ function parseApi(text2) {
       const requirement = /^(required|optional)$/.test(parts.at(-1)) ? parts.pop() : "";
       const type = parts.join(" ");
       if (!current || !type) throw new ComponentError("api: indent name type [required|optional] | description under a section", n);
-      current.fields.push({ name: name2, type, requirement, description: description.join("|").trim() });
+      current.fields.push({ name: name2, type, requirement, description: description.join("|").trim(), ...apiState(mark, current, n) });
       continue;
     }
+    const declaration = line.match(/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|TRACE|CONNECT|RPC)\s+(\S+)$/);
+    if (declaration && (declaration[1] === "RPC" ? /^[^/]+\/[^/]+$/.test(declaration[2]) : declaration[2].startsWith("/"))) {
+      endpoint = { method: declaration[1], target: declaration[2], sections: [], line: n, ...apiState(mark, null, n) };
+      endpoints.push(endpoint);
+      current = null;
+      continue;
+    }
+    if (!endpoint) throw new ComponentError("api: start with METHOD /path or RPC package.Service/Method", n);
     const section = line.match(/^(path|query|headers|request|response)(?:\s+(.+))?$/);
     if (!section || section[1] === "response" && !section[2]) {
       throw new ComponentError("api: use path, query, headers, request [Type], or response STATUS [Type]", n);
     }
-    if (section[1] === "response" && endpoint[1] !== "RPC" && !/^[1-5]\d{2}(?:\s|$)/.test(section[2])) {
+    if (section[1] === "response" && endpoint.method !== "RPC" && !/^[1-5]\d{2}(?:\s|$)/.test(section[2])) {
       throw new ComponentError("api: HTTP responses need a status code from 100 to 599, for example response 200 User", n);
     }
-    if (endpoint[1] === "RPC" && ["path", "query", "headers"].includes(section[1])) {
+    if (endpoint.method === "RPC" && ["path", "query", "headers"].includes(section[1])) {
       throw new ComponentError("api: RPC contracts use request and response sections", n);
     }
-    current = { kind: section[1], detail: section[2] ?? "", fields: [] };
-    sections.push(current);
+    current = { kind: section[1], detail: section[2] ?? "", fields: [], ...apiState(mark, endpoint, n) };
+    endpoint.sections.push(current);
   }
-  if (!sections.length) throw new ComponentError("api needs at least one request, parameter or response section", first.line);
-  return { method: endpoint[1], target: endpoint[2], sections };
+  if (!endpoints.length) throw new ComponentError("api: start with METHOD /path or RPC package.Service/Method", 1);
+  for (const item of endpoints) {
+    if (!item.sections.length) throw new ComponentError("api: each endpoint needs at least one request, parameter or response section", item.line);
+  }
+  return { endpoints };
 }
 var api_default = {
   name: "api",
-  summary: "HTTP API or RPC contract (parameters, request and response fields)",
+  summary: "HTTP/RPC contracts and multi-endpoint changes (parameters, requests and responses)",
   syntax: `\`\`\`api
 POST /users
 headers
@@ -8498,64 +8962,166 @@ response 201 User
 response 400 Error
   message string required
 \`\`\`
-- One endpoint per block: an uppercase HTTP method and /path, or RPC package.Service/Method.
+- One or more endpoints per block: start each with an uppercase HTTP method and /path, or RPC package.Service/Method, at column 0.
 - Sections: path, query, headers, request [Type], response STATUS [Type]. RPC uses request and response.
 - Indent fields: name type [required|optional] | description. Types and descriptions are shown as text, including generics and nested field paths.
 - Write \\| for a literal | inside a type, such as string \\| null; the first unescaped | starts the description.
 - required and optional are explicit and visible in the Requirement column. If any field declares one, unspecified fields show a dash; otherwise this column is omitted.
 - A response requires a status (HTTP code 100-599 or RPC status name). A section without fields can describe an empty response, such as response 204.
+- Prefix an endpoint, section or indented field with + (added), - (removed), or ~ (changed), followed by a space. Children inherit + or -, and a contradictory child marker is an error. ~ marks only the written item.
+- To show exact old and new types, names or requirements, write the old field/section/endpoint with - and its replacement with +. A lone ~ has no old value to reconstruct.
+- One Before / Changes / After switch applies to every endpoint in the block. Before hides added items; After hides removed items; unchanged items stay in both views. Counts include inherited markers.
 - This displays a contract; it does not send requests or import OpenAPI / protobuf files.`,
   example: "```api\nRPC users.UserService/GetUser\nrequest GetUserRequest\n  id string required\nresponse OK User\n  id string required\n  email string optional\nresponse NOT_FOUND\n```",
   // render emits semantic tables, escaping every author-supplied contract value and translating the surrounding labels.
-  render(text2, { ui } = {}) {
-    const { method, target, sections } = parseApi(text2);
+  render(text2, { ui, video } = {}) {
+    const { endpoints } = parseApi(text2);
     const words3 = ui?.api ?? FALLBACK.ui.api;
-    const body = sections.map(({ kind: kind2, detail, fields: fields2 }) => {
-      const described = fields2.some((field) => field.description);
-      const specified = fields2.some((field) => field.requirement);
-      const table = fields2.length ? `<div class="am-table-wrap"><table><thead><tr><th scope="col">${esc(words3.field)}</th><th scope="col">${esc(words3.type)}</th>${specified ? `<th scope="col">${esc(words3.requirement)}</th>` : ""}${described ? `<th scope="col">${esc(words3.description)}</th>` : ""}</tr></thead><tbody>${fields2.map((field) => `<tr><th scope="row"><code>${esc(field.name)}</code></th><td><code>${esc(field.type)}</code></td>${specified ? `<td>${field.requirement ? esc(words3[field.requirement]) : "\u2014"}</td>` : ""}${described ? `<td>${esc(field.description)}</td>` : ""}</tr>`).join("")}</tbody></table></div>` : "";
-      return `<section class="am-api-section"><h4>${esc(words3[kind2])}${detail ? ` <code>${esc(detail)}</code>` : ""}</h4>${table}</section>`;
+    const VISIBLE = { before: (state) => state !== "added", after: (state) => state !== "removed" };
+    const hideIn = (needed) => {
+      const views = Object.keys(VISIBLE).filter((view) => !needed(VISIBLE[view]));
+      return views.length ? ` data-api-hide="${views.join(" ")}"` : "";
+    };
+    const column = (fields2, key) => hideIn((visible) => fields2.some((field) => visible(field.state) && field[key]));
+    const leadIn = (index) => {
+      if (!index) return "";
+      const views = Object.keys(VISIBLE).filter((view) => VISIBLE[view](endpoints[index].state) && !endpoints.slice(0, index).some((item) => VISIBLE[view](item.state)));
+      return views.length ? ` data-api-lead="${views.join(" ")}"` : "";
+    };
+    const contracts = endpoints.map(({ method, target, sections, state }, index) => {
+      const body = sections.map(({ kind: kind2, detail, fields: fields2, state: sectionState }) => {
+        const described = fields2.some((field) => field.description);
+        const specified = fields2.some((field) => field.requirement);
+        const req = specified ? column(fields2, "requirement") : "";
+        const desc = described ? column(fields2, "description") : "";
+        const rows = fields2.map((field) => `<tr${deltaAttr(field.state)}><th scope="row">${deltaBadge(field.state, ui)}<code>${identifier(field.name)}</code></th><td><code>${identifier(field.type)}</code></td>${specified ? `<td${req}>${field.requirement ? esc(words3[field.requirement]) : "\u2014"}</td>` : ""}${described ? `<td${desc}>${esc(field.description)}</td>` : ""}</tr>`).join("");
+        const table = fields2.length ? `<div class="am-table-wrap"${hideIn((visible) => fields2.some((field) => visible(field.state)))}><table><thead><tr><th scope="col">${esc(words3.field)}</th><th scope="col">${esc(words3.type)}</th>${specified ? `<th scope="col"${req}>${esc(words3.requirement)}</th>` : ""}${described ? `<th scope="col"${desc}>${esc(words3.description)}</th>` : ""}</tr></thead><tbody>${rows}</tbody></table></div>` : "";
+        return `<section class="am-api-section"${deltaAttr(sectionState)}><h4>${deltaBadge(sectionState, ui)}${esc(words3[kind2])}${detail ? ` <code>${esc(detail)}</code>` : ""}</h4>${table}</section>`;
+      }).join("");
+      return `<article class="am-api-contract"${deltaAttr(state)}${leadIn(index)}><div class="am-api-endpoint" dir="ltr">${deltaBadge(state, ui)}<strong>${esc(method)}</strong> <code>${esc(target)}</code></div>${body}</article>`;
     }).join("");
-    return `<div class="am-api am-md"><div class="am-api-endpoint" dir="ltr"><strong>${esc(method)}</strong> <code>${esc(target)}</code></div>${body}</div>`;
+    const states = endpoints.flatMap((endpoint) => [endpoint.state, ...endpoint.sections.flatMap((section) => [section.state, ...section.fields.map((field) => field.state)])]);
+    return withDelta(`<div class="am-api am-md">${contracts}</div>`, states, { ui, video });
   }
 };
 
 // src/components/ask.js
 var OPTION = /^([*-])\s+(.+)$/;
+var PREVIEW_OPEN = /^(\s*):::([^\s:]+)(?:\s+(.*))?$/;
+var PREVIEW_CLOSE = /^(\s*):::\s*$/;
+var FENCE_MARK = /^ {0,3}(`{3,}|~{3,})/;
+var RAW_PREVIEW = /* @__PURE__ */ new Set(["html", "svg"]);
+function fenceClose(lines, openIdx, mark) {
+  for (let k = openIdx + 1; k < lines.length; k++) {
+    const end = lines[k].match(FENCE_MARK)?.[1];
+    if (end && end[0] === mark[0] && end.length >= mark.length && !lines[k].trim().slice(end.length)) return k;
+  }
+  return -1;
+}
+function previewEnd(lines, openIdx) {
+  const open = lines[openIdx]?.match(PREVIEW_OPEN);
+  if (!open) return -1;
+  const indent = open[1].length;
+  const raw = RAW_PREVIEW.has(open[2].toLowerCase());
+  const body = lines.map((line) => line.slice(Math.min(indent, line.match(/^\s*/)[0].length)));
+  for (let j2 = openIdx + 1; j2 < lines.length; j2++) {
+    const end = lines[j2].match(PREVIEW_CLOSE);
+    if (end && end[1].length === indent) return j2;
+    const mark = raw ? null : body[j2].match(FENCE_MARK)?.[1];
+    const close = mark ? fenceClose(body, j2, mark) : -1;
+    if (close !== -1) j2 = close;
+  }
+  return -1;
+}
+function readAsk(text2) {
+  const lines = String(text2).split("\n");
+  let question = null;
+  const options = [];
+  let current = null;
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const trimmed = raw.trim();
+    if (!trimmed || trimmed.startsWith("//")) continue;
+    if (question === null) {
+      if (OPTION.test(trimmed)) throw new ComponentError("ask: the first line is the question", i + 1);
+      question = { text: trimmed, line: i + 1 };
+      continue;
+    }
+    const open = raw.match(PREVIEW_OPEN);
+    if (open) {
+      if (!current) throw new ComponentError("ask: put a preview under an option", i + 1);
+      if (current.preview) throw new ComponentError("ask: one preview per option", i + 1);
+      const indent = open[1].length;
+      const close = previewEnd(lines, i);
+      if (close === -1) throw new ComponentError("ask: the preview block is not closed", i + 1);
+      const content = lines.slice(i + 1, close).map((line) => line.slice(Math.min(indent, line.match(/^\s*/)[0].length)));
+      current.preview = { lang: open[2].toLowerCase(), args: (open[3] ?? "").trim(), text: content.join("\n"), line: i + 1 };
+      i = close;
+      continue;
+    }
+    const option = trimmed.match(OPTION);
+    if (option) {
+      const [label, note2 = ""] = fields(option[2]);
+      if (!label) throw new ComponentError("ask: an option needs a label before |", i + 1);
+      current = { label, note: note2, suggested: option[1] === "*", line: i + 1, preview: null };
+      options.push(current);
+      continue;
+    }
+    throw new ComponentError(`ask: "${trimmed}" is not an option; start it with * (suggested) or -`, i + 1);
+  }
+  if (!question) throw new ComponentError("ask: write the question on the first line", 1);
+  return { question, options };
+}
 var ask_default = {
   name: "ask",
   summary: "A decision the reader makes on the page (collected by Reply)",
   pageOnly: true,
   panelOnly: true,
-  syntax: `\`\`\`ask [multi]
+  // Preview blocks are rendered with the page's scale, so the ask output must not take the factor again.
+  scalesOwnSvg: true,
+  syntax: `\`\`\`ask [multi] [cards]
 The question, one sentence
-* The option you suggest | optional note   \u2190 * marks the suggestion with a tag; nothing starts selected
+* The option you suggest | optional note
 - Another option | optional note
+  :::flow
+  A -> B: its preview, drawn in an indented block
+  :::
 \`\`\`
 - The first line is the question. Each option starts with * or -. Write 2 to 6 options.
 - One choice: exactly one * option. multi lets the reader pick several; * marks the ones you suggest.
+- An option may carry one preview: indent a ::: block under it. Any component works, plus html and svg. Leave it out when a picture does not help.
+- cards lays the options out in a grid, for a landing-page choice. Each preview becomes the card's canvas.
 - Place the ask in the panel whose content the answer changes. The Reply button turns the answers into one reply.`,
   example: "```ask\nWhich cache do we use?\n* Redis | keeps data after a restart\n- Memcached | simpler, no disk\n```",
-  // The text the STE check reads: options are list items; the note reads as a second clause of the item.
+  // The text the STE check reads: options are list items; the note reads as a second clause of the item. A preview is a picture, not prose.
   lint(text2) {
-    return text2.split("\n").map((l) => l.replace(OPTION, (_2, mark, body) => `- ${fields(body).filter(Boolean).join(": ")}`)).join("\n");
+    const out = [];
+    const lines = String(text2).split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const close = line.match(PREVIEW_OPEN) ? previewEnd(lines, i) : -1;
+      if (close !== -1) {
+        out.push(...Array(close - i + 1).fill(""));
+        i = close;
+        continue;
+      }
+      const option = line.trim().match(OPTION);
+      out.push(option ? `- ${fields(option[2]).filter(Boolean).join(": ")}` : line);
+    }
+    return out.join("\n");
   },
-  render(text2, { args, uid, ui = {} }) {
+  /**
+   * Render the ask fieldset. A preview is passed to the caller's nested block renderer,
+   * so it can use any component, html or svg.
+   */
+  render(text2, { args, uid, ui = {}, line = 0, render }) {
     const multi = /(^|\s)multi(\s|$)/.test(args);
-    const lines = contentLines(text2);
-    const [first, ...rest] = lines;
-    if (!first || OPTION.test(first.text)) throw new ComponentError("ask: the first line is the question", first?.line ?? 1);
-    const options = rest.map(({ text: t, line }) => {
-      const m2 = t.match(OPTION);
-      if (!m2) throw new ComponentError(`ask: "${t}" is not an option; start it with * (suggested) or -`, line);
-      const [label, note2 = ""] = fields(m2[2]);
-      if (!label) throw new ComponentError("ask: an option needs a label before |", line);
-      return { label, note: note2, suggested: m2[1] === "*", line };
-    });
-    if (options.length < 2 || options.length > 6) throw new ComponentError(`ask: write 2 to 6 options, not ${options.length}`, first.line);
+    const cards = /(^|\s)cards(\s|$)/.test(args);
+    const { question, options } = readAsk(text2);
+    if (options.length < 2 || options.length > 6) throw new ComponentError(`ask: write 2 to 6 options, not ${options.length}`, question.line);
     const suggested = options.filter((o) => o.suggested).length;
     if (!multi && suggested !== 1) {
-      throw new ComponentError(`ask: mark exactly one option with * as your suggestion (found ${suggested}); add multi to let the reader pick several`, first.line);
+      throw new ComponentError(`ask: mark exactly one option with * as your suggestion (found ${suggested}); add multi to let the reader pick several`, question.line);
     }
     const seen = /* @__PURE__ */ new Set();
     for (const o of options) {
@@ -8564,8 +9130,18 @@ The question, one sentence
     }
     const id = uid();
     const type = multi ? "checkbox" : "radio";
-    const items = options.map((o) => `<label class="am-ask-opt"><input type="${type}" name="${id}" value="${esc(o.label)}"${o.suggested ? " data-suggested" : ""}><span class="am-ask-body"><span class="am-ask-label">${mdInline(o.label)}</span>${o.suggested ? ` <span class="am-ask-tag">${esc(ui.reply?.suggested ?? "suggested")}</span>` : ""}${o.note ? `<small class="am-ask-note">${mdInline(o.note)}</small>` : ""}</span></label>`);
-    return `<fieldset class="am-ask" data-ask="${id}"${multi ? " data-multi" : ""}><legend class="am-ask-q">${mdInline(first.text)}</legend>${items.join("")}</fieldset>`;
+    const items = options.map((o) => {
+      let preview2 = "";
+      if (o.preview) {
+        if (!render) throw new ComponentError("ask: a preview needs a page, not a video", o.preview.line);
+        const at3 = line + o.preview.line;
+        const block2 = { type: "fence", lang: o.preview.lang, args: o.preview.args, text: o.preview.text, line: at3 };
+        preview2 = `<div class="am-ask-preview">${render([block2])}</div>`;
+      }
+      const body = `<span class="am-ask-body"><span class="am-ask-label">${mdInline(o.label)}</span>${o.suggested ? ` <span class="am-ask-tag">${esc(ui.reply?.suggested ?? "suggested")}</span>` : ""}${o.note ? `<small class="am-ask-note">${mdInline(o.note)}</small>` : ""}</span>`;
+      return `<div class="am-ask-card"><label class="am-ask-opt"><input type="${type}" name="${id}" value="${esc(o.label)}"${o.suggested ? " data-suggested" : ""}>${body}</label>${preview2}</div>`;
+    });
+    return `<fieldset class="am-ask${cards ? " am-ask--cards" : ""}" data-ask="${id}"${multi ? " data-multi" : ""}><legend class="am-ask-q">${mdInline(question.text)}</legend><div class="am-ask-opts">${items.join("")}</div></fieldset>`;
   }
 };
 
@@ -8576,8 +9152,8 @@ var MAX_STEPS = 7;
 var fmt = (n) => String(round2(n));
 function* steps(peak, whole) {
   for (let power = Math.floor(Math.log10(peak)) - 2; ; power++) {
-    for (const m2 of MANTISSAS) {
-      const step = round2(m2 * 10 ** power);
+    for (const m of MANTISSAS) {
+      const step = round2(m * 10 ** power);
       if (!whole || Number.isInteger(step)) yield step;
     }
   }
@@ -8646,41 +9222,41 @@ function fitLines(label, maxWidth, maxLines, size) {
   const lines = wrap(label, maxWidth, size);
   const kept = lines.slice(0, maxLines);
   kept[kept.length - 1] = [kept.at(-1), ...lines.slice(maxLines)].join(" ");
-  return kept.map((l) => shorten(l, maxWidth, size));
+  return kept.map((l3) => shorten(l3, maxWidth, size));
 }
 var NUMBERS = /* @__PURE__ */ new Set(["am-ch-tick", "am-ch-val", "am-ch-num", "am-ch-total"]);
-var text = (cls, x, y2, str, dir, attrs = "") => `<text class="${cls}" x="${f(x)}" y="${f(y2)}"${attrs}>${esc(NUMBERS.has(cls.split(" ")[0]) ? svgNumber(str, dir) : svgLine(str, dir))}</text>`;
+var text = (cls, x2, y2, str, dir, attrs = "") => `<text class="${cls}" x="${f(x2)}" y="${f(y2)}"${attrs}>${esc(NUMBERS.has(cls.split(" ")[0]) ? svgNumber(str, dir) : svgLine(str, dir))}</text>`;
 function legendLayout(names2, maxWidth) {
   if (names2.length < 2) return { items: [], height: 0 };
   const items = [];
-  let [x, y2] = [0, 0];
+  let [x2, y2] = [0, 0];
   for (const [k, name2] of names2.entries()) {
     const w2 = 16 + measure(name2, FS4.legend);
-    if (x > 0 && x + w2 > maxWidth) [x, y2] = [0, y2 + LEGEND_LH];
-    items.push({ k, name: name2, x, y: y2, w: w2 });
-    x += w2 + 18;
+    if (x2 > 0 && x2 + w2 > maxWidth) [x2, y2] = [0, y2 + LEGEND_LH];
+    items.push({ k, name: name2, x: x2, y: y2, w: w2 });
+    x2 += w2 + 18;
   }
   return { items, height: y2 + LEGEND_LH + 6, width: Math.max(...items.map((i) => i.x + i.w)) };
 }
 function legendSvg({ items }, left, top2, { rtl, dir }, W3) {
-  return items.map(({ k, name: name2, x, y: y2, w: w2 }) => {
-    const sw = rtl ? W3 - (left + x) - 10 : left + x;
-    return `<rect class="am-ch-sw am-ch-s${k + 1}" x="${f(sw)}" y="${f(top2 + y2 + 2)}" width="10" height="10" rx="2"/>${text("am-ch-leg", rtl ? W3 - (left + x + 16) : left + x + 16, top2 + y2 + 7, name2, dir, ' dominant-baseline="central"')}`;
+  return items.map(({ k, name: name2, x: x2, y: y2, w: w2 }) => {
+    const sw = rtl ? W3 - (left + x2) - 10 : left + x2;
+    return `<rect class="am-ch-sw am-ch-s${k + 1}" x="${f(sw)}" y="${f(top2 + y2 + 2)}" width="10" height="10" rx="2"/>${text("am-ch-leg", rtl ? W3 - (left + x2 + 16) : left + x2 + 16, top2 + y2 + 7, name2, dir, ' dominant-baseline="central"')}`;
   }).join("");
 }
 var stepGroup = (i, cls, title, inner) => `<g data-step="${i}" class="${cls}">${title}${inner}</g>`;
 var squash = (s) => s.replace(/\s/g, "");
 var tooltip = (label, shown2) => squash(label) === squash(shown2) ? "" : `<title>${esc(label)}</title>`;
-function valueAxis(m2, { axisX, width, y: y2, W: W3, X: X3 }) {
-  const left = m2.rtl ? W3 - axisX - width : axisX;
-  return m2.range.ticks.flatMap((t) => [
+function valueAxis(m, { axisX, width, y: y2, W: W3, X: X3 }) {
+  const left = m.rtl ? W3 - axisX - width : axisX;
+  return m.range.ticks.flatMap((t) => [
     `<line class="${t === 0 ? "am-ch-zero" : "am-ch-grid"}" x1="${f(left)}" y1="${f(y2(t))}" x2="${f(left + width)}" y2="${f(y2(t))}"/>`,
-    text("am-ch-tick", X3(axisX - 6), y2(t), m2.tick(t), m2.dir, ' text-anchor="end" dominant-baseline="central"')
+    text("am-ch-tick", X3(axisX - 6), y2(t), m.tick(t), m.dir, ' text-anchor="end" dominant-baseline="central"')
   ]);
 }
 function categoryLabel(plan, i, label, cx, catTop, { X: X3, rtl, dir }) {
   if (plan.lines) {
-    return { svg: plan.lines[i].map((l, j) => text("am-ch-cat", X3(cx), catTop + 11 + j * LH5, l, dir, ' text-anchor="middle"')).join(""), tip: "" };
+    return { svg: plan.lines[i].map((l3, j2) => text("am-ch-cat", X3(cx), catTop + 11 + j2 * LH5, l3, dir, ' text-anchor="middle"')).join(""), tip: "" };
   }
   const shown2 = plan.shown[i];
   const [ax, ay] = [X3(cx + 3), catTop + 4];
@@ -8699,7 +9275,7 @@ var CAT_WIDTH = 180;
 function drawBars(data, { horizontal = false, unit = "", dir = "ltr", label }) {
   const { rows } = data;
   const count2 = rows[0].values.length;
-  const m2 = {
+  const m = {
     rows,
     count: count2,
     names: data.series ?? [],
@@ -8710,108 +9286,108 @@ function drawBars(data, { horizontal = false, unit = "", dir = "ltr", label }) {
     dir,
     anyHi: rows.some((r) => r.hi)
   };
-  m2.tick = (v2) => `${fmt(v2)}${unit}`;
-  const box = horizontal ? horizontalBars(m2) : verticalBars(m2);
+  m.tick = (v) => `${fmt(v)}${unit}`;
+  const box = horizontal ? horizontalBars(m) : verticalBars(m);
   return `${svgOpen(box.width, box.height, label, dir)}${box.body.join("")}</svg>`;
 }
-var barClass = (m2, row, k) => `am-ch-bar ${row.hi && m2.count === 1 ? "am-ch-hi" : `am-ch-s${k + 1}`}`;
-var rowClass = (m2, row) => `am-ch-row${m2.anyHi ? row.hi ? " is-hi" : " is-dim" : ""}`;
-var rowGroup = (m2, row, i, title, inner) => stepGroup(i, rowClass(m2, row), title, inner);
+var barClass = (m, row, k) => `am-ch-bar ${row.hi && m.count === 1 ? "am-ch-hi" : `am-ch-s${k + 1}`}`;
+var rowClass = (m, row) => `am-ch-row${m.anyHi ? row.hi ? " is-hi" : " is-dim" : ""}`;
+var rowGroup = (m, row, i, title, inner) => stepGroup(i, rowClass(m, row), title, inner);
 function planCategories(labels, from, to) {
   for (let slot = from; slot <= to; slot += 6) {
-    const lines = labels.map((l) => wrap(l, slot - 8, FS4.cat));
-    if (lines.every((ls) => ls.length <= 2 && ls.every((l) => measure(l, FS4.cat) <= slot - 8 + 0.5))) return { slot, lines };
+    const lines = labels.map((l3) => wrap(l3, slot - 8, FS4.cat));
+    if (lines.every((ls) => ls.length <= 2 && ls.every((l3) => measure(l3, FS4.cat) <= slot - 8 + 0.5))) return { slot, lines };
   }
-  return { slot: from, lines: null, shown: labels.map((l) => shorten(l, SLANT_MAX, FS4.cat)) };
+  return { slot: from, lines: null, shown: labels.map((l3) => shorten(l3, SLANT_MAX, FS4.cat)) };
 }
-function verticalBars(m2) {
-  const { rows, count: count2, range, labels, rtl, dir } = m2;
+function verticalBars(m) {
+  const { rows, count: count2, range, labels, rtl, dir } = m;
   const n = rows.length;
-  const valueW = labels ? Math.max(...rows.flatMap((r) => r.values.map((v2) => measure(m2.tick(v2), FS4.val)))) : 0;
+  const valueW = labels ? Math.max(...rows.flatMap((r) => r.values.map((v) => measure(m.tick(v), FS4.val)))) : 0;
   const barMax = Math.min(64, Math.max(BAR_W[count2], labels ? Math.ceil(valueW) + 4 : 0));
   const budget = Math.floor(MAX_WIDTH / n);
   const natural = Math.min(budget, count2 * barMax + (count2 - 1) * GAP + GUTTER);
   const plan = planCategories(rows.map((r) => r.label), natural, Math.max(natural, Math.min(budget, SLOT_MAX)));
   const slot = plan.slot;
   const bw = Math.max(6, Math.min(barMax, Math.floor((slot - Math.min(GUTTER, slot * 0.3) - (count2 - 1) * GAP) / count2)));
-  const tickW = Math.max(...range.ticks.map((t) => measure(m2.tick(t), FS4.tick)));
-  const reach = plan.lines ? 0 : Math.max(...plan.shown.map((l, i) => measure(l, FS4.cat) * COS + FS4.cat * SIN - ((i + 0.5) * slot + PAD3 + tickW + 9)));
+  const tickW = Math.max(...range.ticks.map((t) => measure(m.tick(t), FS4.tick)));
+  const reach = plan.lines ? 0 : Math.max(...plan.shown.map((l3, i) => measure(l3, FS4.cat) * COS + FS4.cat * SIN - ((i + 0.5) * slot + PAD3 + tickW + 9)));
   const axisX = PAD3 + Math.max(0, reach) + tickW + 6;
-  const legend = legendLayout(m2.names, Math.max(n * slot + tickW, 240));
+  const legend = legendLayout(m.names, Math.max(n * slot + tickW, 240));
   const W3 = Math.ceil(Math.max(axisX + n * slot + PAD3, (legend.width ?? 0) + 2 * PAD3));
   const plotTop = PAD3 + legend.height + (labels ? 16 : 6);
   const plotBottom = plotTop + PLOT_H;
   const negLabels = labels && range.min < 0;
   const catTop = plotBottom + (negLabels ? 18 : 8);
-  const catH = plan.lines ? Math.max(...plan.lines.map((ls) => ls.length)) * LH5 + 4 : Math.max(...plan.shown.map((l) => measure(l, FS4.cat))) * SIN + 12;
+  const catH = plan.lines ? Math.max(...plan.lines.map((ls) => ls.length)) * LH5 + 4 : Math.max(...plan.shown.map((l3) => measure(l3, FS4.cat))) * SIN + 12;
   const height = catTop + catH + PAD3;
   const X3 = mirror(W3, rtl);
-  const rectX = (x, w2) => rtl ? W3 - x - w2 : x;
-  const y2 = (v2) => plotTop + (range.max - v2) / (range.max - range.min) * PLOT_H;
+  const rectX = (x2, w2) => rtl ? W3 - x2 - w2 : x2;
+  const y2 = (v) => plotTop + (range.max - v) / (range.max - range.min) * PLOT_H;
   const y0 = y2(0);
-  const body = [legendSvg(legend, PAD3, PAD3, m2, W3)];
-  body.push(...valueAxis(m2, { axisX, width: n * slot, y: y2, W: W3, X: X3 }));
+  const body = [legendSvg(legend, PAD3, PAD3, m, W3)];
+  body.push(...valueAxis(m, { axisX, width: n * slot, y: y2, W: W3, X: X3 }));
   for (const [i, row] of rows.entries()) {
     const x0 = axisX + i * slot;
     const cx = x0 + slot / 2;
     const gx = x0 + (slot - (count2 * bw + (count2 - 1) * GAP)) / 2;
-    const parts = row.values.map((v2, k) => {
-      const x = gx + k * (bw + GAP);
-      const h = Math.max(Math.abs(y2(v2) - y0), v2 === 0 ? 0 : 1);
-      const top2 = v2 >= 0 ? y0 - h : y0;
-      const bar = `<rect class="${barClass(m2, row, k)}" x="${f(rectX(x, bw))}" y="${f(top2)}" width="${bw}" height="${f(h)}" rx="2"/>`;
+    const parts = row.values.map((v, k) => {
+      const x2 = gx + k * (bw + GAP);
+      const h2 = Math.max(Math.abs(y2(v) - y0), v === 0 ? 0 : 1);
+      const top2 = v >= 0 ? y0 - h2 : y0;
+      const bar = `<rect class="${barClass(m, row, k)}" x="${f(rectX(x2, bw))}" y="${f(top2)}" width="${bw}" height="${f(h2)}" rx="2"/>`;
       if (!labels) return bar;
-      const at3 = v2 >= 0 ? top2 - 4 : top2 + h + FS4.val + 1;
-      return bar + text("am-ch-val", X3(x + bw / 2), at3, m2.tick(v2), dir, ' text-anchor="middle"');
+      const at3 = v >= 0 ? top2 - 4 : top2 + h2 + FS4.val + 1;
+      return bar + text("am-ch-val", X3(x2 + bw / 2), at3, m.tick(v), dir, ' text-anchor="middle"');
     });
     const cat = categoryLabel(plan, i, row.label, cx, catTop, { X: X3, rtl, dir });
-    body.push(rowGroup(m2, row, i, cat.tip, parts.join("") + cat.svg));
+    body.push(rowGroup(m, row, i, cat.tip, parts.join("") + cat.svg));
   }
   return { width: W3, height, body };
 }
-function horizontalBars(m2) {
-  const { rows, count: count2, range, labels, rtl, dir } = m2;
+function horizontalBars(m) {
+  const { rows, count: count2, range, labels, rtl, dir } = m;
   const n = rows.length;
   const lines = rows.map((r) => fitLines(r.label, CAT_WIDTH, 3, FS4.cat));
-  const catW = Math.max(...lines.flat().map((l) => measure(l, FS4.cat)));
+  const catW = Math.max(...lines.flat().map((l3) => measure(l3, FS4.cat)));
   const bh = BAR_H[count2];
   const rowH = Math.max(count2 * bh + (count2 - 1) * GAP + 12, Math.max(...lines.map((ls) => ls.length)) * LH5 + 6);
-  const rel = (v2) => (v2 - range.min) / (range.max - range.min) * PLOT_W;
-  const widths = rows.map((r) => r.values.map((v2) => labels ? measure(m2.tick(v2), FS4.val) : 0));
-  const after = labels ? Math.max(0, ...rows.flatMap((r, i) => r.values.map((v2, k) => v2 >= 0 ? rel(v2) + 4 + widths[i][k] - PLOT_W : 0))) : 0;
-  const before = labels ? Math.max(0, ...rows.flatMap((r, i) => r.values.map((v2, k) => v2 < 0 ? widths[i][k] + 4 - rel(v2) : 0))) : 0;
-  const tickHalf = Math.max(...range.ticks.map((t) => measure(m2.tick(t), FS4.tick))) / 2;
+  const rel = (v) => (v - range.min) / (range.max - range.min) * PLOT_W;
+  const widths = rows.map((r) => r.values.map((v) => labels ? measure(m.tick(v), FS4.val) : 0));
+  const after = labels ? Math.max(0, ...rows.flatMap((r, i) => r.values.map((v, k) => v >= 0 ? rel(v) + 4 + widths[i][k] - PLOT_W : 0))) : 0;
+  const before = labels ? Math.max(0, ...rows.flatMap((r, i) => r.values.map((v, k) => v < 0 ? widths[i][k] + 4 - rel(v) : 0))) : 0;
+  const tickHalf = Math.max(...range.ticks.map((t) => measure(m.tick(t), FS4.tick))) / 2;
   const catX = PAD3 + catW;
   const axisX = Math.max(catX + 8 + before, PAD3 + tickHalf);
-  const legend = legendLayout(m2.names, Math.max(catW + PLOT_W, 240));
+  const legend = legendLayout(m.names, Math.max(catW + PLOT_W, 240));
   const W3 = Math.ceil(Math.max(axisX + PLOT_W + Math.max(after, tickHalf) + PAD3, (legend.width ?? 0) + 2 * PAD3));
   const plotTop = PAD3 + legend.height + 4;
   const plotBottom = plotTop + n * rowH;
   const height = plotBottom + 22 + PAD3;
   const X3 = mirror(W3, rtl);
-  const x = (v2) => axisX + rel(v2);
-  const x0 = x(0);
-  const body = [legendSvg(legend, PAD3, PAD3, m2, W3)];
+  const x2 = (v) => axisX + rel(v);
+  const x0 = x2(0);
+  const body = [legendSvg(legend, PAD3, PAD3, m, W3)];
   for (const t of range.ticks) {
     const line = t === 0 ? "am-ch-zero" : "am-ch-grid";
-    body.push(`<line class="${line}" x1="${f(X3(x(t)))}" y1="${f(plotTop)}" x2="${f(X3(x(t)))}" y2="${f(plotBottom)}"/>`);
-    body.push(text("am-ch-tick", X3(x(t)), plotBottom + 14, m2.tick(t), dir, ' text-anchor="middle"'));
+    body.push(`<line class="${line}" x1="${f(X3(x2(t)))}" y1="${f(plotTop)}" x2="${f(X3(x2(t)))}" y2="${f(plotBottom)}"/>`);
+    body.push(text("am-ch-tick", X3(x2(t)), plotBottom + 14, m.tick(t), dir, ' text-anchor="middle"'));
   }
   for (const [i, row] of rows.entries()) {
     const top2 = plotTop + i * rowH;
     const gy = top2 + (rowH - (count2 * bh + (count2 - 1) * GAP)) / 2;
-    const parts = row.values.map((v2, k) => {
+    const parts = row.values.map((v, k) => {
       const by = gy + k * (bh + GAP);
-      const [from, to] = [Math.min(x0, x(v2)), Math.max(x0, x(v2))];
-      const w2 = Math.max(to - from, v2 === 0 ? 0 : 1);
-      const bar = `<rect class="${barClass(m2, row, k)}" x="${f(rtl ? W3 - from - w2 : from)}" y="${f(by)}" width="${f(w2)}" height="${bh}" rx="2"/>`;
+      const [from, to] = [Math.min(x0, x2(v)), Math.max(x0, x2(v))];
+      const w2 = Math.max(to - from, v === 0 ? 0 : 1);
+      const bar = `<rect class="${barClass(m, row, k)}" x="${f(rtl ? W3 - from - w2 : from)}" y="${f(by)}" width="${f(w2)}" height="${bh}" rx="2"/>`;
       if (!labels) return bar;
-      const end = v2 >= 0 ? x(v2) + 4 : x(v2) - 4;
-      return bar + text("am-ch-val", X3(end), by + bh / 2, m2.tick(v2), dir, ` text-anchor="${v2 >= 0 ? "start" : "end"}" dominant-baseline="central"`);
+      const end = v >= 0 ? x2(v) + 4 : x2(v) - 4;
+      return bar + text("am-ch-val", X3(end), by + bh / 2, m.tick(v), dir, ` text-anchor="${v >= 0 ? "start" : "end"}" dominant-baseline="central"`);
     });
     const first = top2 + rowH / 2 - (lines[i].length - 1) * LH5 / 2;
-    const name2 = lines[i].map((l, j) => text("am-ch-cat", X3(catX), first + j * LH5, l, dir, ' text-anchor="end" dominant-baseline="central"')).join("");
-    body.push(rowGroup(m2, row, i, tooltip(row.label, lines[i].join(" ")), parts.join("") + name2));
+    const name2 = lines[i].map((l3, j2) => text("am-ch-cat", X3(catX), first + j2 * LH5, l3, dir, ' text-anchor="end" dominant-baseline="central"')).join("");
+    body.push(rowGroup(m, row, i, tooltip(row.label, lines[i].join(" ")), parts.join("") + name2));
   }
   return { width: W3, height, body };
 }
@@ -8827,7 +9403,7 @@ var COLUMN_END = 0.8;
 function drawLines(data, { unit = "", dir = "ltr", label }) {
   const { rows } = data;
   const count2 = rows[0].values.length;
-  const m2 = {
+  const m = {
     rows,
     count: count2,
     names: data.series ?? [],
@@ -8837,41 +9413,41 @@ function drawLines(data, { unit = "", dir = "ltr", label }) {
     dir,
     anyHi: rows.some((r) => r.hi)
   };
-  m2.tick = (v2) => `${fmt(v2)}${unit}`;
-  m2.carries = (row) => row.hi || count2 === 1 && rows.length <= MAX_VALUE_LABELS2;
-  const box = lineChart(m2);
+  m.tick = (v) => `${fmt(v)}${unit}`;
+  m.carries = (row) => row.hi || count2 === 1 && rows.length <= MAX_VALUE_LABELS2;
+  const box = lineChart(m);
   return `${svgOpen(box.width, box.height, label, dir)}${box.body.join("")}</svg>`;
 }
 function shownRows(rows, step) {
   const his = [];
   for (const [i, r] of rows.entries()) if (r.hi && (!his.length || i - his.at(-1) >= step)) his.push(i);
-  return rows.map((r, i) => his.includes(i) ? true : i % step === 0 && his.every((h) => Math.abs(h - i) >= step));
+  return rows.map((r, i) => his.includes(i) ? true : i % step === 0 && his.every((h2) => Math.abs(h2 - i) >= step));
 }
 function planAxis(rows, slot) {
   const labels = rows.map((r) => r.label);
   for (let step = 1; step <= Math.max(1, Math.floor(rows.length / 4)); step++) {
     const show2 = shownRows(rows, step);
     const room = step * slot - 8;
-    const lines = labels.map((l, i) => show2[i] ? wrap(l, room, FS4.cat) : null);
-    if (lines.every((ls) => !ls || ls.length <= 2 && ls.every((l) => measure(l, FS4.cat) <= room + 0.5))) return { show: show2, lines, widths: lines.map((ls) => ls ? Math.max(...ls.map((l) => measure(l, FS4.cat))) : 0) };
+    const lines = labels.map((l3, i) => show2[i] ? wrap(l3, room, FS4.cat) : null);
+    if (lines.every((ls) => !ls || ls.length <= 2 && ls.every((l3) => measure(l3, FS4.cat) <= room + 0.5))) return { show: show2, lines, widths: lines.map((ls) => ls ? Math.max(...ls.map((l3) => measure(l3, FS4.cat))) : 0) };
   }
   const show = shownRows(rows, Math.max(1, Math.ceil((LH5 + 1) / (slot * SIN))));
-  const shown2 = labels.map((l) => shorten(l, SLANT_MAX, FS4.cat));
-  return { show, lines: null, shown: shown2, widths: shown2.map((l) => measure(l, FS4.cat)) };
+  const shown2 = labels.map((l3) => shorten(l3, SLANT_MAX, FS4.cat));
+  return { show, lines: null, shown: shown2, widths: shown2.map((l3) => measure(l3, FS4.cat)) };
 }
-function valueLabels(m2, X3, x, values, ys, { valleys, end, bottom }) {
-  const label = (k, px2, py, extra) => text(`am-ch-val am-ch-s${k + 1}`, X3(px2), py, m2.tick(values[k]), m2.dir, extra);
-  if (ys.length === 1) return text("am-ch-val", X3(x), valleys[0] ? ys[0] + LABEL_GAP + FS4.val : ys[0] - LABEL_GAP, m2.tick(values[0]), m2.dir, ' text-anchor="middle"');
-  const order = ys.map((y2, k) => k).sort((a3, b) => ys[a3] - ys[b]);
+function valueLabels(m, X3, x2, values, ys, { valleys, end, bottom }) {
+  const label = (k, px2, py, extra) => text(`am-ch-val am-ch-s${k + 1}`, X3(px2), py, m.tick(values[k]), m.dir, extra);
+  if (ys.length === 1) return text("am-ch-val", X3(x2), valleys[0] ? ys[0] + LABEL_GAP + FS4.val : ys[0] - LABEL_GAP, m.tick(values[0]), m.dir, ' text-anchor="middle"');
+  const order = ys.map((y2, k) => k).sort((a, b) => ys[a] - ys[b]);
   const at3 = order.map((k) => ys[k]);
-  for (let j = 1; j < at3.length; j++) at3[j] = Math.max(at3[j], at3[j - 1] + MIN_APART);
+  for (let j2 = 1; j2 < at3.length; j2++) at3[j2] = Math.max(at3[j2], at3[j2 - 1] + MIN_APART);
   let limit = bottom;
-  for (let j = at3.length - 1; j >= 0; j--) {
-    at3[j] = Math.min(at3[j], limit);
-    limit = at3[j] - MIN_APART;
+  for (let j2 = at3.length - 1; j2 >= 0; j2--) {
+    at3[j2] = Math.min(at3[j2], limit);
+    limit = at3[j2] - MIN_APART;
   }
-  const [px, anchor] = end === "end" ? [x + DOT_HI + LABEL_SIDE, "start"] : [x - DOT_HI - LABEL_SIDE, "end"];
-  return order.map((k, j) => label(k, px, at3[j], ` text-anchor="${anchor}" dominant-baseline="central"`)).join("");
+  const [px, anchor] = end === "end" ? [x2 + DOT_HI + LABEL_SIDE, "start"] : [x2 - DOT_HI - LABEL_SIDE, "end"];
+  return order.map((k, j2) => label(k, px, at3[j2], ` text-anchor="${anchor}" dominant-baseline="central"`)).join("");
 }
 function segment(X3, [x0, y0], [x1, y1], [hi0, hi1], k) {
   const len = Math.hypot(x1 - x0, y1 - y0);
@@ -8879,46 +9455,46 @@ function segment(X3, [x0, y0], [x1, y1], [hi0, hi1], k) {
   const [r0, r1] = [hi0 ? DOT_HI : DOT2, hi1 ? DOT_HI : DOT2];
   return `<path class="am-ch-line am-ch-s${k + 1}" d="M${f(X3(x0 + dx * r0))},${f(y0 + dy * r0)} L${f(X3(x1 - dx * r1))},${f(y1 - dy * r1)}"/>`;
 }
-function lineChart(m2) {
-  const { rows, range, rtl, dir } = m2;
+function lineChart(m) {
+  const { rows, range, rtl, dir } = m;
   const n = rows.length;
   const slot = Math.min(Math.floor(MAX_WIDTH / n), SLOT_MAX);
   const plan = planAxis(rows, slot);
-  const labelled = rows.map((r) => m2.carries(r));
+  const labelled = rows.map((r) => m.carries(r));
   const anyLabels = labelled.some(Boolean);
-  const valueW = rows.map((r, i) => labelled[i] ? Math.max(...r.values.map((v2) => measure(m2.tick(v2), FS4.val, { bold: m2.count > 1 }))) : 0);
-  const tickW = Math.max(...range.ticks.map((t) => measure(m2.tick(t), FS4.tick)));
+  const valueW = rows.map((r, i) => labelled[i] ? Math.max(...r.values.map((v) => measure(m.tick(v), FS4.val, { bold: m.count > 1 }))) : 0);
+  const tickW = Math.max(...range.ticks.map((t) => measure(m.tick(t), FS4.tick)));
   const columnEnd = (i) => (i + 0.5) / n > COLUMN_END ? "start" : "end";
   const over2 = rows.map((r, i) => {
     const half = Math.max(plan.show[i] ? plan.lines ? plan.widths[i] / 2 : 0 : 0, valueW[i] / 2);
     const slanted = plan.show[i] && !plan.lines ? plan.widths[i] * COS + FS4.cat * SIN - 3 : 0;
-    const column = valueW[i] && m2.count > 1 ? valueW[i] + DOT_HI + LABEL_SIDE : 0;
+    const column = valueW[i] && m.count > 1 ? valueW[i] + DOT_HI + LABEL_SIDE : 0;
     const [left, right] = columnEnd(i) === "end" ? [0, column] : [column, 0];
     return { left: Math.max(half, slanted, left) - (i + 0.5) * slot, right: Math.max(half, right) - (n - i - 0.5) * slot };
   });
   const axisX = Math.max(PAD3 + tickW + 6, PAD3 + Math.max(...over2.map((o) => o.left)));
   const plotW = n * slot;
-  const legend = legendLayout(m2.names, Math.max(plotW + tickW, 240));
+  const legend = legendLayout(m.names, Math.max(plotW + tickW, 240));
   const W3 = Math.ceil(Math.max(axisX + plotW + Math.max(PAD3, 2 + Math.max(...over2.map((o) => o.right))), (legend.width ?? 0) + 2 * PAD3));
   const plotTop = PAD3 + legend.height + (anyLabels ? 18 : 6);
   const plotBottom = plotTop + PLOT_H;
   const catTop = plotBottom + (anyLabels ? 22 : 8);
-  const catH = plan.lines ? Math.max(...plan.lines.map((ls) => ls ? ls.length : 0)) * LH5 + 4 : Math.max(...plan.shown.map((l, i) => plan.show[i] ? measure(l, FS4.cat) : 0)) * SIN + 12;
+  const catH = plan.lines ? Math.max(...plan.lines.map((ls) => ls ? ls.length : 0)) * LH5 + 4 : Math.max(...plan.shown.map((l3, i) => plan.show[i] ? measure(l3, FS4.cat) : 0)) * SIN + 12;
   const height = catTop + catH + PAD3;
   const X3 = mirror(W3, rtl);
-  const y2 = (v2) => plotTop + (range.max - v2) / (range.max - range.min) * PLOT_H;
+  const y2 = (v) => plotTop + (range.max - v) / (range.max - range.min) * PLOT_H;
   const cx = (i) => axisX + (i + 0.5) * slot;
-  const body = [legendSvg(legend, PAD3, PAD3, m2, W3)];
-  body.push(...valueAxis(m2, { axisX, width: plotW, y: y2, W: W3, X: X3 }));
+  const body = [legendSvg(legend, PAD3, PAD3, m, W3)];
+  body.push(...valueAxis(m, { axisX, width: plotW, y: y2, W: W3, X: X3 }));
   for (const [i, row] of rows.entries()) {
     const parts = [];
     if (row.hi) parts.push(`<line class="am-ch-guide" x1="${f(X3(cx(i)))}" y1="${f(plotTop)}" x2="${f(X3(cx(i)))}" y2="${f(plotBottom)}"/>`);
-    if (i > 0) parts.push(...row.values.map((v2, k) => segment(X3, [cx(i - 1), y2(rows[i - 1].values[k])], [cx(i), y2(v2)], [rows[i - 1].hi, row.hi], k)));
-    parts.push(...row.values.map((v2, k) => `<circle class="am-ch-dot am-ch-s${k + 1}" cx="${f(X3(cx(i)))}" cy="${f(y2(v2))}" r="${row.hi ? DOT_HI : DOT2}"/>`));
+    if (i > 0) parts.push(...row.values.map((v, k) => segment(X3, [cx(i - 1), y2(rows[i - 1].values[k])], [cx(i), y2(v)], [rows[i - 1].hi, row.hi], k)));
+    parts.push(...row.values.map((v, k) => `<circle class="am-ch-dot am-ch-s${k + 1}" cx="${f(X3(cx(i)))}" cy="${f(y2(v))}" r="${row.hi ? DOT_HI : DOT2}"/>`));
     if (labelled[i]) {
-      const around2 = (j, k) => rows[j]?.values[k];
-      const valleys = row.values.map((v2, k) => i > 0 && i < n - 1 && around2(i - 1, k) > v2 && around2(i + 1, k) > v2);
-      parts.push(valueLabels(m2, X3, cx(i), row.values, row.values.map(y2), { valleys, end: columnEnd(i), bottom: plotBottom }));
+      const around2 = (j2, k) => rows[j2]?.values[k];
+      const valleys = row.values.map((v, k) => i > 0 && i < n - 1 && around2(i - 1, k) > v && around2(i + 1, k) > v);
+      parts.push(valueLabels(m, X3, cx(i), row.values, row.values.map(y2), { valleys, end: columnEnd(i), bottom: plotBottom }));
     }
     let tip = "";
     if (plan.show[i]) {
@@ -8944,21 +9520,21 @@ function drawPie(data, { unit = "", dir = "ltr", label }) {
   const { rows } = data;
   const rtl = dir === "rtl";
   const values = rows.map((r) => r.values[0]);
-  const total = values.reduce((a3, b) => a3 + b, 0);
+  const total = values.reduce((a, b) => a + b, 0);
   const anyHi = rows.some((r) => r.hi);
   const lines = rows.map((r) => fitLines(r.label, LABEL_MAX2, 2, FS4.legend));
-  const labelW = Math.max(...lines.flat().map((l) => measure(l, FS4.legend)));
-  const shown2 = values.map((v2) => `${fmt(v2)}${unit}`);
+  const labelW = Math.max(...lines.flat().map((l3) => measure(l3, FS4.legend)));
+  const shown2 = values.map((v) => `${fmt(v)}${unit}`);
   const asShares = unit === "%";
-  const shares = asShares ? [] : values.map((v2) => percent(v2, total));
+  const shares = asShares ? [] : values.map((v) => percent(v, total));
   const valueW = Math.max(...shown2.map((s) => measure(s, FS4.legend)));
   const shareW = asShares ? 0 : Math.max(...shares.map((s) => measure(s, FS4.legend)));
   const heights = lines.map((ls) => Math.max(ls.length * LH5 + ROW_PAD, 24));
-  const legendH = heights.reduce((a3, b) => a3 + b, 0);
+  const legendH = heights.reduce((a, b) => a + b, 0);
   const legendW = SW + labelW + COL_GAP + valueW + (asShares ? 0 : COL_GAP + shareW);
-  const H3 = Math.ceil(Math.max(2 * R2, legendH) + 2 * PAD3);
+  const H2 = Math.ceil(Math.max(2 * R2, legendH) + 2 * PAD3);
   const W3 = Math.ceil(PAD3 + 2 * R2 + GAP2 + legendW + PAD3);
-  const [cx, cy] = [PAD3 + R2, H3 / 2];
+  const [cx, cy] = [PAD3 + R2, H2 / 2];
   const X3 = mirror(W3, rtl);
   const lx = PAD3 + 2 * R2 + GAP2;
   const [valueX, shareX] = [lx + SW + labelW + COL_GAP + valueW, lx + legendW];
@@ -8975,7 +9551,7 @@ function drawPie(data, { unit = "", dir = "ltr", label }) {
     const parts = [];
     if (span > 0) parts.push(`<path class="am-ch-slice am-ch-s${i + 1}" d="${slice(turn, turn + span)}"/>`);
     parts.push(`<rect class="am-ch-sw am-ch-s${i + 1}" x="${f(rtl ? W3 - lx - 10 : lx)}" y="${f(mid2 - 5)}" width="10" height="10" rx="2"/>`);
-    parts.push(...lines[i].map((l, j) => text("am-ch-leg", X3(lx + SW), first + j * LH5, l, dir, ' dominant-baseline="central"')));
+    parts.push(...lines[i].map((l3, j2) => text("am-ch-leg", X3(lx + SW), first + j2 * LH5, l3, dir, ' dominant-baseline="central"')));
     parts.push(text("am-ch-num", X3(valueX), mid2, shown2[i], dir, ' text-anchor="end" dominant-baseline="central"'));
     if (!asShares) parts.push(text("am-ch-num", X3(shareX), mid2, shares[i], dir, ' text-anchor="end" dominant-baseline="central"'));
     body.push(stepGroup(i, `am-ch-row${anyHi ? row.hi ? " is-hi" : " is-dim" : ""}`, tooltip(row.label, lines[i].join(" ")), parts.join("")));
@@ -8983,12 +9559,12 @@ function drawPie(data, { unit = "", dir = "ltr", label }) {
     top2 += heights[i];
   }
   if (!asShares) body.push(totalText(fmt(total), unit, X3(cx), cy, dir));
-  return `${svgOpen(W3, H3, label, dir)}${body.join("")}</svg>`;
+  return `${svgOpen(W3, H2, label, dir)}${body.join("")}</svg>`;
 }
-function totalText(total, unit, x, y2, dir) {
+function totalText(total, unit, x2, y2, dir) {
   const room = 1.6 * R_IN;
   const size = (str, max) => Math.max(DRAWING.totalMin, Math.min(max, Math.floor(room / measure(str, 1))));
-  const one = (str, at3, max) => text("am-ch-total", x, at3, str, dir, ` text-anchor="middle" dominant-baseline="central" style="font-size:${size(str, max)}px"`);
+  const one = (str, at3, max) => text("am-ch-total", x2, at3, str, dir, ` text-anchor="middle" dominant-baseline="central" style="font-size:${size(str, max)}px"`);
   if (!unit || measure(`${total}${unit}`, DRAWING.totalFit) <= room) return one(`${total}${unit}`, y2, DRAWING.totalMax);
   return one(total, y2 - 8, DRAWING.totalMax) + one(shorten(unit.trim(), room, DRAWING.totalUnit), y2 + 12, DRAWING.totalUnit);
 }
@@ -9079,7 +9655,7 @@ function parseRow2(t, line, width, series, type) {
     const shape = series ? `label | ${series.map(() => "number").join(" | ")}` : `label${" | number".repeat(width)}`;
     throw new ComponentError(`chart row has ${cells.length} value${cells.length === 1 ? "" : "s"}, expected ${width} (${shape}): "${t}"`, line);
   }
-  const bad = cells.find((c2) => !NUMBER.test(c2));
+  const bad = cells.find((c) => !NUMBER.test(c));
   if (bad !== void 0) {
     throw new ComponentError(`chart value "${bad}" is not a number: "${t}"; write plain numbers like 12, -3 or 4.5 and put the unit in unit=`, line);
   }
@@ -9099,13 +9675,13 @@ function dataTable({ series, rows }, { type, unit }, words3) {
   const shares = pie && unit !== "%";
   const names2 = pie ? [series?.[0] ?? words3.value, ...shares ? [words3.share] : []] : series;
   const head = names2 ? `<thead><tr><td></td>${names2.map((s) => `<th scope="col">${esc(s)}</th>`).join("")}</tr></thead>` : "";
-  const body = rows.map((r) => `<tr><th scope="row">${esc(r.label)}</th>${r.values.map((v2) => cell(fmt(v2) + unit)).join("")}${shares ? cell(percent(r.values[0], total)) : ""}</tr>`);
+  const body = rows.map((r) => `<tr><th scope="row">${esc(r.label)}</th>${r.values.map((v) => cell(fmt(v) + unit)).join("")}${shares ? cell(percent(r.values[0], total)) : ""}</tr>`);
   return `<details class="am-ch-data${pie ? " am-ch-data--pie" : ""}"><summary>${esc(words3.data)}</summary><div class="am-table-wrap"><table>${head}<tbody>${body.join("")}</tbody></table></div></details>`;
 }
 
 // src/components/index.js
 var ALL2 = [callout_default, kv_default, timeline_default, annot_default, tree_default, limits_default, chart_default, sequence_default, flow_default, state_default, er_default, class_default, api_default, ask_default];
-var COMPONENTS = new Map(ALL2.map((c2) => [c2.name, c2]));
+var COMPONENTS = new Map(ALL2.map((c) => [c.name, c]));
 var RAW_LANGS = /* @__PURE__ */ new Set(["html", "svg"]);
 
 // src/parse.js
@@ -9121,7 +9697,7 @@ var DraftErrors = class extends Error {
   constructor(errors) {
     super(`${errors.length} errors in the draft`);
     this.name = "DraftErrors";
-    this.errors = [...errors].sort((a3, b) => (a3.line ?? 0) - (b.line ?? 0));
+    this.errors = [...errors].sort((a, b) => (a.line ?? 0) - (b.line ?? 0));
   }
 };
 function raiseAll(errors) {
@@ -9136,7 +9712,7 @@ var CHOICES = Object.freeze({
   outline: ["left", "right"]
 });
 function applyOverrides(meta, overrides, choices = CHOICES) {
-  const set = Object.entries(overrides).filter(([, v2]) => v2 !== void 0);
+  const set = Object.entries(overrides).filter(([, v]) => v !== void 0);
   for (const [key, value] of set) {
     if (choices[key] && !choices[key].includes(String(value))) {
       throw new ParseError(`Invalid ${key} value "${value}". Choose one of: ${choices[key].join(" | ")}`, 0);
@@ -9144,7 +9720,7 @@ function applyOverrides(meta, overrides, choices = CHOICES) {
   }
   return { ...meta, ...Object.fromEntries(set) };
 }
-var VOICES = Object.freeze(["auto", "elevenlabs", "local", "system", "off"]);
+var VOICES = Object.freeze(["auto", "elevenlabs", "local", "cmd", "system", "off"]);
 var DEFAULT_META = Object.freeze({
   template: "sheet",
   theme: AUTO,
@@ -9180,26 +9756,26 @@ var FRONT_ENTRY = /^([\p{L}\p{M}\p{N}_-]+(?: [\p{L}\p{M}\p{N}_-]+)*)\s*:\s*(.*)$
 function frontmatterValue(source, key) {
   const lines = sourceLines(source);
   if (lines[0]?.trim() !== "---") return void 0;
-  const end = lines.findIndex((l, i) => i > 0 && l.trim() === "---");
+  const end = lines.findIndex((l3, i) => i > 0 && l3.trim() === "---");
   if (end === -1) return void 0;
   let value;
   for (const line of lines.slice(1, end)) {
-    const m2 = stripLineComment(line).trim().match(FRONT_ENTRY);
-    if (m2?.[1] === key) value = unquote(m2[2]);
+    const m = stripLineComment(line).trim().match(FRONT_ENTRY);
+    if (m?.[1] === key) value = unquote(m[2]);
   }
   return value;
 }
 function parseFrontmatter(lines, base, allowed) {
   if (lines[0]?.trim() !== "---") return { meta: { ...base }, bodyStart: 0 };
-  const end = lines.findIndex((l, i) => i > 0 && l.trim() === "---");
+  const end = lines.findIndex((l3, i) => i > 0 && l3.trim() === "---");
   if (end === -1) throw new ParseError("frontmatter is not closed: missing the closing --- line", 1);
   const entries = {};
   for (let i = 1; i < end; i++) {
     const raw = stripLineComment(lines[i]).trim();
     if (!raw || raw.startsWith("#")) continue;
-    const m2 = raw.match(FRONT_ENTRY);
-    if (!m2) throw new ParseError(`Cannot parse frontmatter line "${lines[i]}"; expected key: value`, i + 1);
-    entries[m2[1]] = { value: coerce(m2[1], unquote(m2[2])), line: i + 1 };
+    const m = raw.match(FRONT_ENTRY);
+    if (!m) throw new ParseError(`Cannot parse frontmatter line "${lines[i]}"; expected key: value`, i + 1);
+    entries[m[1]] = { value: coerce(m[1], unquote(m[2])), line: i + 1 };
   }
   const meta = { ...base };
   for (const [key, { value, line }] of Object.entries(entries)) {
@@ -9218,7 +9794,7 @@ function splitSections(lines, start, errors) {
   let current = { blocks: intro };
   let mdBuf = null;
   const flushMd = () => {
-    if (mdBuf && mdBuf.lines.some((l) => l.trim())) {
+    if (mdBuf && mdBuf.lines.some((l3) => l3.trim())) {
       errors.push(...checkTables(mdBuf.lines, mdBuf.line));
       current.blocks.push({ type: "md", text: mdBuf.lines.join("\n"), line: mdBuf.line });
     }
@@ -9237,7 +9813,7 @@ function splitSections(lines, start, errors) {
     const colonName = colon?.[2].toLowerCase();
     if (colon && COMPONENTS.has(colonName)) {
       flushMd();
-      const close = lines.findIndex((l, k) => k > i && l.match(COLON_CLOSE)?.[1].length >= colon[1].length);
+      const close = findColonClose(lines, i, colon[1], colonName);
       if (close === -1) throw new ParseError(`fenced block ${colon[1]}${colon[2]} is not closed`, i + 1);
       current.blocks.push({ type: "fence", lang: colonName, args: (colon[3] ?? "").trim(), text: lines.slice(i + 1, close).join("\n"), line: i + 1 });
       i = close;
@@ -9325,10 +9901,48 @@ function checkTables(lines, first) {
     return [];
   });
 }
+var FENCE_MARK2 = /^ {0,3}(`{3,}|~{3,})/;
+function fenceClose2(lines, openIdx, mark) {
+  for (let k = openIdx + 1; k < lines.length; k++) {
+    const end = lines[k].match(FENCE_MARK2)?.[1];
+    if (end && end[0] === mark[0] && end.length >= mark.length && !lines[k].trim().slice(end.length)) return k;
+  }
+  return -1;
+}
+function findColonClose(lines, openIdx, marker, name2) {
+  const stack = [marker.length];
+  for (let j2 = openIdx + 1; j2 < lines.length; j2++) {
+    if (name2 === "ask") {
+      const end = previewEnd(lines, j2);
+      if (end !== -1) {
+        j2 = end;
+        continue;
+      }
+    }
+    const line = lines[j2];
+    const mark = line.match(FENCE_MARK2)?.[1];
+    if (mark) {
+      const close2 = fenceClose2(lines, j2, mark);
+      if (close2 === -1) continue;
+      j2 = close2;
+      continue;
+    }
+    const open = line.match(COLON_OPEN);
+    if (open) {
+      stack.push(open[1].length);
+      continue;
+    }
+    const close = line.match(COLON_CLOSE);
+    if (!close || close[1].length < stack[stack.length - 1]) continue;
+    stack.pop();
+    if (!stack.length) return j2;
+  }
+  return -1;
+}
 function findFenceClose(lines, openIdx, marker) {
   const closeRe = new RegExp(`^${marker[0] === "`" ? "`" : "~"}{${marker.length},}\\s*$`);
-  for (let j = openIdx + 1; j < lines.length; j++) {
-    if (closeRe.test(lines[j])) return j;
+  for (let j2 = openIdx + 1; j2 < lines.length; j2++) {
+    if (closeRe.test(lines[j2])) return j2;
   }
   return -1;
 }
@@ -9347,12 +9961,12 @@ function extractTitle(intro, meta) {
   if (meta.title || intro[0]?.type !== "md") return intro;
   const [first, ...rest] = intro;
   const lines = first.text.split("\n");
-  const idx = lines.findIndex((l) => l.trim());
-  const m2 = lines[idx]?.match(/^#\s+(.+)$/);
-  if (!m2) return intro;
-  meta.title = m2[1].trim();
+  const idx = lines.findIndex((l3) => l3.trim());
+  const m = lines[idx]?.match(/^#\s+(.+)$/);
+  if (!m) return intro;
+  meta.title = m[1].trim();
   const remaining = lines.slice(idx + 1);
-  if (!remaining.some((l) => l.trim())) return rest;
+  if (!remaining.some((l3) => l3.trim())) return rest;
   return [{ ...first, text: remaining.join("\n"), line: first.line + idx + 1 }, ...rest];
 }
 function assignIds(panels) {
@@ -9371,7 +9985,7 @@ function assignIds(panels) {
     used.add(panel.id);
   }
   let code = "A".charCodeAt(0);
-  const idAt = (c2) => c2 <= 90 ? String.fromCharCode(c2) : `P${c2 - 64}`;
+  const idAt = (c) => c <= 90 ? String.fromCharCode(c) : `P${c - 64}`;
   const nextFree = () => {
     let id = idAt(code);
     while (used.has(id)) id = idAt(++code);
@@ -9384,16 +9998,16 @@ function assignIds(panels) {
 function stripLineComment(line) {
   let quote = "";
   for (let i = 0; i < line.length; i++) {
-    const c2 = line[i];
+    const c = line[i];
     if (quote) {
-      if (c2 === quote) quote = "";
+      if (c === quote) quote = "";
       continue;
     }
-    if (c2 === '"' || c2 === "'") {
-      quote = c2;
+    if (c === '"' || c === "'") {
+      quote = c;
       continue;
     }
-    if (c2 === "#" && (i === 0 || /\s/.test(line[i - 1]))) return line.slice(0, i);
+    if (c === "#" && (i === 0 || /\s/.test(line[i - 1]))) return line.slice(0, i);
   }
   return line;
 }
@@ -9427,17 +10041,17 @@ ${head}<div class="am-panel-body">${panel.html}</div>
 }
 var RESERVED = /* @__PURE__ */ new Set(["template", "theme", "style", "mode", "cols", "title", "subtitle", "lang", "outline", "file"]);
 function headHtml(meta, introHtml, language = {}) {
-  const extras = Object.entries(meta).filter(([k, v2]) => !RESERVED.has(k) && v2 !== "");
+  const extras = Object.entries(meta).filter(([k, v]) => !RESERVED.has(k) && v !== "");
   const names2 = language.metaKeys ?? {};
-  const value = (v2) => language.dir === "rtl" ? `<bdi${hasRtl(v2) ? ' dir="rtl"' : ""}>${esc(v2)}</bdi>` : esc(v2);
-  const metaRow = extras.length ? `<div class="am-head-meta">${extras.map(([k, v2]) => `<span><b>${esc(names2[k.toLowerCase()] ?? k)}</b>${value(v2)}</span>`).join("")}</div>` : "";
+  const value = (v) => language.dir === "rtl" ? `<bdi${hasRtl(v) ? ' dir="rtl"' : ""}>${esc(v)}</bdi>` : esc(v);
+  const metaRow = extras.length ? `<div class="am-head-meta">${extras.map(([k, v]) => `<span><b>${esc(names2[k.toLowerCase()] ?? k)}</b>${value(v)}</span>`).join("")}</div>` : "";
   const sub = meta.subtitle ? `<p class="am-sub">${esc(meta.subtitle)}</p>` : "";
   const intro = introHtml ? `<div class="am-intro am-md">${introHtml}</div>` : "";
   return `<header class="am-head"><h1>${esc(meta.title || "Untitled")}</h1>${sub}${metaRow}${intro}</header>`;
 }
 
 // src/templates/sheet.js
-var ruler = (side, labels) => `<div class="am-ruler am-ruler--${side}" aria-hidden="true">${labels.map((l) => `<span>${l}</span>`).join("")}</div>`;
+var ruler = (side, labels) => `<div class="am-ruler am-ruler--${side}" aria-hidden="true">${labels.map((l3) => `<span>${l3}</span>`).join("")}</div>`;
 function fillRows(panels, cols) {
   const spans = panels.map((p) => Math.max(1, Math.min(Number(p.attrs.span) || 1, cols)));
   if (panels.some((p) => Number(p.attrs.rows) > 1)) return spans;
@@ -9458,12 +10072,12 @@ var CELL_SEP = /(?<!\\)\|/;
 var DELIMITER_ROW2 = /^\|[\s:|-]+\|?$/;
 function tableColumns(blocks) {
   const counts = blocks.filter((b) => b.type === "md").flatMap((b) => {
-    const lines = b.text.split("\n").map((l) => l.trim());
-    return lines.flatMap((l, i) => l.startsWith("|") && DELIMITER_ROW2.test(lines[i + 1] ?? "") ? [l.split(CELL_SEP).length - 2] : []);
+    const lines = b.text.split("\n").map((l3) => l3.trim());
+    return lines.flatMap((l3, i) => l3.startsWith("|") && DELIMITER_ROW2.test(lines[i + 1] ?? "") ? [l3.split(CELL_SEP).length - 2] : []);
   });
   return Math.max(0, ...counts);
 }
-var svgWidth = (html) => Math.max(0, ...[...html.matchAll(/<svg\b[^>]*?\swidth="(\d+(?:\.\d+)?)"/g)].map((m2) => Number(m2[1])));
+var svgWidth = (html) => Math.max(0, ...[...html.matchAll(/<svg\b[^>]*?\swidth="(\d+(?:\.\d+)?)"/g)].map((m) => Number(m[1])));
 function minSpan(panel) {
   const tableCols = tableColumns(panel.blocks ?? []);
   const byTable = tableCols >= WIDE_TABLE_COLS ? Math.ceil(tableCols / TABLE_COLS_PER_SPAN) : 1;
@@ -9515,7 +10129,7 @@ var TEMPLATES = { sheet, doc };
 
 // src/themes/index.js
 var block = (selector, vars) => `${selector} {
-${Object.entries(vars).map(([k, v2]) => `  ${k}: ${v2};`).join("\n")}
+${Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`).join("\n")}
 }`;
 function tokenCss(sel, { common = {}, light = {}, dark = {} }, fixedMode) {
   const baseScheme = fixedMode === "dark" ? "dark" : "light";
@@ -9534,8 +10148,8 @@ ${block(`${sel}[data-mode="auto"]`, dark)}
 var pageSel = (t) => `html[data-theme="${t.name}"]`;
 var videoSel = (t) => `html[data-video][data-theme="${t.name}"]`;
 var scoped = (css, sel) => css.replace(/&/g, sel);
-var languageFontCss = () => fontLanguages().map((l) => block(langSelector(l, "html", "[data-theme][data-mode]"), { "--font-sans": l.fonts.sans }));
-var ownLanguageFont = (t) => fontLanguages().map((l) => block(langSelector(l, "html", `[data-theme="${t.name}"][data-mode]`), { "--font-sans": t.tokens.common["--font-sans"] }));
+var languageFontCss = () => fontLanguages().map((l3) => block(langSelector(l3, "html", "[data-theme][data-mode]"), { "--font-sans": l3.fonts.sans }));
+var ownLanguageFont = (t) => fontLanguages().map((l3) => block(langSelector(l3, "html", `[data-theme="${t.name}"][data-mode]`), { "--font-sans": t.tokens.common["--font-sans"] }));
 function pageCss(list2 = themes("page"), { diff = false, delta = false, rtl = false, math: math2 = false, chart = false, table = false, update: update2 = false, closeAfter = false, fonts = true, scale = 1 } = {}) {
   const decorations = list2.filter((t) => t.css).map((t) => scoped(t.css, pageSel(t)));
   const fontFaces = fonts ? [...new Set(list2.map((t) => t.font).filter((f2) => f2 && FONT_CSS[f2]))].map((f2) => FONT_CSS[f2]) : [];
@@ -9653,14 +10267,14 @@ var LIMITS = { zh: { procedural: 35, descriptive: 45 }, en: { procedural: 20, de
 var MAX_SENTENCES = 6;
 var ABBR = /\b(e\.g|i\.e|etc|vs|cf|approx|Fig|No)\./gi;
 var PASSIVE = /\b(?:am|is|are|was|were|be|been|being)\s+(?:\w+ly\s+)?(\w+ed|known|done|made|given|taken|seen|written|built|shown|sent|kept|held|found|set|put|run|begun|chosen|driven|broken)\b/i;
-var EN_RE = Object.entries(EN_WORDS3).sort((a3, b) => b[0].length - a3[0].length).map(([word, suggestion]) => ({ re: new RegExp(`\\b${word.replace(/ /g, "\\s+")}\\b`, "gi"), word, suggestion }));
+var EN_RE = Object.entries(EN_WORDS3).sort((a, b) => b[0].length - a[0].length).map(([word, suggestion]) => ({ re: new RegExp(`\\b${word.replace(/ /g, "\\s+")}\\b`, "gi"), word, suggestion }));
 function splitSentences(text2) {
-  const masked = text2.replace(ABBR, (m2) => m2.replace(/\./g, "\0"));
+  const masked = text2.replace(ABBR, (m) => m.replace(/\./g, "\0"));
   const parts = masked.match(/[^。！？；!?;]+?(?:[。！？；!?;]+|\.(?=\s|$)|$)|[^.]+?\.(?=\s|$)/g) ?? [];
   return parts.map((s) => s.replace(/\u0000/g, ".").trim()).filter(Boolean);
 }
 function sentenceLength(sentence) {
-  const cjk = [...sentence].filter(isCJK).filter((c2) => !/[，。！？；：、（）「」『』“”‘’《》]/.test(c2)).length;
+  const cjk = [...sentence].filter(isCJK).filter((c) => !/[，。！？；：、（）「」『』“”‘’《》]/.test(c)).length;
   const words3 = sentence.match(/[A-Za-z0-9][\w'’-]*/g)?.length ?? 0;
   return cjk >= 4 || cjk > words3 ? { lang: "zh", count: cjk + words3 } : { lang: "en", count: words3 };
 }
@@ -9726,9 +10340,9 @@ function lintMarkdown(text2, startLine, out, family) {
     if (t.startsWith("|")) {
       flush();
       if (/^\|?[\s:|-]+\|?$/.test(t)) return;
-      const cells = t.replace(/^\||\|$/g, "").split("|").map((c2) => c2.trim());
-      if (cells.some((c2) => /^(no|✗|✘)(\s|$)/.test(c2))) return;
-      cells.forEach((c2) => checkUnit(clean(c2.replace(/^(ok|warn|✓|✔|⚠)(\s|$)/, "")), line, "descriptive", out, family));
+      const cells = t.replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      if (cells.some((c) => /^(no|✗|✘)(\s|$)/.test(c))) return;
+      cells.forEach((c) => checkUnit(clean(c.replace(/^(ok|warn|✓|✔|⚠)(\s|$)/, "")), line, "descriptive", out, family));
       return;
     }
     const list2 = t.match(/^(?:([-*+])|(\d+)[.)])\s+(.*)$/);
@@ -9763,17 +10377,17 @@ function checkUnit(text2, line, kind2, out, family) {
     }
   }
   const lexical = [
-    ...(englishRules ? EN_RE : []).flatMap(({ re: re3, suggestion }) => [...text2.matchAll(re3)].map((m2) => ({ index: m2.index, rule: "word", message: `not recommended: "${m2[0]}"`, suggestion }))),
-    ...(chineseRules ? ZH_LIGHT_VERBS : []).flatMap(({ re: re3, label }) => [...text2.matchAll(re3)].map((m2) => ({ index: m2.index, rule: "word", message: `light verb "${m2[0]}" (${label})`, suggestion: `use "${m2[1]}"` }))),
-    ...(chineseRules ? ZH_WORDS : []).flatMap(({ re: re3, suggestion }) => [...text2.matchAll(re3)].map((m2) => ({ index: m2.index, rule: "word", message: `not recommended: "${m2[0]}"`, suggestion })))
+    ...(englishRules ? EN_RE : []).flatMap(({ re: re3, suggestion }) => [...text2.matchAll(re3)].map((m) => ({ index: m.index, rule: "word", message: `not recommended: "${m[0]}"`, suggestion }))),
+    ...(chineseRules ? ZH_LIGHT_VERBS : []).flatMap(({ re: re3, label }) => [...text2.matchAll(re3)].map((m) => ({ index: m.index, rule: "word", message: `light verb "${m[0]}" (${label})`, suggestion: `use "${m[1]}"` }))),
+    ...(chineseRules ? ZH_WORDS : []).flatMap(({ re: re3, suggestion }) => [...text2.matchAll(re3)].map((m) => ({ index: m.index, rule: "word", message: `not recommended: "${m[0]}"`, suggestion })))
   ];
-  out.push(...lexical.sort((a3, b) => a3.index - b.index).map(({ index, ...w2 }) => ({ line, ...w2 })));
+  out.push(...lexical.sort((a, b) => a.index - b.index).map(({ index, ...w2 }) => ({ line, ...w2 })));
   for (const s of sentences) {
     if (!zhFamily || isJapanese(s)) continue;
     if ((s.match(/的/g) ?? []).length >= 3) out.push({ line, rule: "de-chain", message: `chained "\u7684": ${s}`, suggestion: 'split the sentence or remove extra "\u7684"' });
   }
-  for (const c2 of chineseRules ? ZH_CLICHES : []) {
-    if (text2.includes(c2)) out.push({ line, rule: "cliche", message: `clich\xE9 "${c2}"`, suggestion: "delete it or state a concrete fact" });
+  for (const c of chineseRules ? ZH_CLICHES : []) {
+    if (text2.includes(c)) out.push({ line, rule: "cliche", message: `clich\xE9 "${c}"`, suggestion: "delete it or state a concrete fact" });
   }
   return sentences.length;
 }
@@ -9801,10 +10415,10 @@ function readPage(html) {
   const attr = (name2) => root.match(new RegExp(`\\s${name2}="([^"]+)"`))?.[1];
   const video = /\sdata-video\b/.test(root);
   const open = s.lastIndexOf(SOURCE_OPEN);
-  const m2 = open === -1 ? null : s.slice(open).match(SOURCE_RE);
+  const m = open === -1 ? null : s.slice(open).match(SOURCE_RE);
   const before = open === -1 ? "" : s.slice(0, open).trimEnd();
   return {
-    source: m2 ? unescapeHtml(m2[1]) : null,
+    source: m ? unescapeHtml(m[1]) : null,
     video,
     // A <main class="am-doc"> in the body does not count; the template's <main> always comes before the body.
     template: video ? "video" : s.match(/<main class="am-(doc|sheet)\b/)?.[1],
@@ -9870,7 +10484,7 @@ function detectLang(text2) {
   }
   const otherTotal = [...others.values()].reduce((sum2, n) => sum2 + n, 0);
   if ((cjk + otherTotal) * CJK_PER_LATIN < latin) return "en";
-  const [topTag, topCount] = [...others].sort((a3, b) => b[1] - a3[1])[0] ?? [null, 0];
+  const [topTag, topCount] = [...others].sort((a, b) => b[1] - a[1])[0] ?? [null, 0];
   if (topCount > cjk) return topTag;
   if (hangul * 2 > cjk) return "ko";
   return isJapanese(draft) ? "ja" : hanLanguage(draft);
@@ -9947,7 +10561,7 @@ var headPath = (line) => {
 function parseDiff(text2, start) {
   const lines = text2.split("\n");
   while (lines.length && lines[lines.length - 1] === "") lines.pop();
-  const numbered = start !== void 0 || lines.some((l) => HUNK.test(l));
+  const numbered = start !== void 0 || lines.some((l3) => HUNK.test(l3));
   const rows = [];
   const warnings = [];
   const newLines = /* @__PURE__ */ new Set();
@@ -9984,12 +10598,12 @@ function parseDiff(text2, start) {
       title ||= headPath(line) || from;
       return meta();
     }
-    const m2 = line.match(HUNK);
-    if (m2) {
+    const m = line.match(HUNK);
+    if (m) {
       closeHunk();
-      o = Number(m2[1]);
-      n = Number(m2[3]);
-      hunk = { header: m2[0], want: { o: m2[2] === void 0 ? 1 : Number(m2[2]), n: m2[4] === void 0 ? 1 : Number(m2[4]) }, got: { o: 0, n: 0 } };
+      o = Number(m[1]);
+      n = Number(m[3]);
+      hunk = { header: m[0], want: { o: m[2] === void 0 ? 1 : Number(m[2]), n: m[4] === void 0 ? 1 : Number(m[4]) }, got: { o: 0, n: 0 } };
       return rows.push({ kind: "hunk", text: line });
     }
     if (line.startsWith("@@")) fail(`line ${i + 1} is not a hunk header; write it as @@ -60,4 +60,5 @@ (old start and count, new start and count)`);
@@ -10046,10 +10660,10 @@ var CodeError = class extends Error {
   }
 };
 function parseRange(value, name2) {
-  const m2 = String(value).match(/^(\d+)(?:-(\d+))?$/);
-  if (!m2) throw new CodeError(`${name2}="${value}" is not a line range; write ${name2}=18-30 or ${name2}=18`);
-  const from = Number(m2[1]);
-  const to = m2[2] === void 0 ? from : Number(m2[2]);
+  const m = String(value).match(/^(\d+)(?:-(\d+))?$/);
+  if (!m) throw new CodeError(`${name2}="${value}" is not a line range; write ${name2}=18-30 or ${name2}=18`);
+  const from = Number(m[1]);
+  const to = m[2] === void 0 ? from : Number(m[2]);
   if (from < 1 || to < from) throw new CodeError(`${name2}="${value}": the first line must be 1 or more and not after the last line`);
   return { from, to };
 }
@@ -10075,8 +10689,9 @@ function localPath(ref, baseDir) {
   const rel = relative(baseDir, path);
   return rel === ".." || rel.startsWith(`..${sep}`) || isAbsolute(rel) ? null : path;
 }
+var isSecretPath = (rel) => SECRET_FILE.test(basename2(rel)) || rel.split(sep).some((part) => SECRET_DIR.has(part));
 function assertNotSecret(ref, rel, via) {
-  if (SECRET_FILE.test(basename2(rel)) || rel.split(sep).some((part) => SECRET_DIR.has(part))) {
+  if (isSecretPath(rel)) {
     throw new CodeError(`"${ref}" ${via ? "points to" : "is"} a file that holds keys or passwords by convention; it is not embedded. Write a sketch instead`);
   }
 }
@@ -10118,7 +10733,7 @@ var LINE_SPAN = /<span class="am-ln[^"]*"[^>]*>([\s\S]*?)<\/span>/g;
 function readEmbeddedCode(html) {
   return new Map([...String(html).matchAll(EMBEDDED_BLOCK)].map(([, src, lines = "", inner]) => [
     `${unescapeHtml(src)}#${lines}`,
-    [...inner.matchAll(LINE_SPAN)].map((m2) => unescapeHtml(m2[1]))
+    [...inner.matchAll(LINE_SPAN)].map((m) => unescapeHtml(m[1]))
   ]));
 }
 function renderCode({ lang, args, text: text2 }, { baseDir = process.cwd(), known = /* @__PURE__ */ new Map(), ui = {}, copy = true } = {}) {
@@ -10155,9 +10770,9 @@ function renderCode({ lang, args, text: text2 }, { baseDir = process.cwd(), know
   const numbered = Boolean(opts.src || opts.start);
   const where = opts.src ? `${opts.src}${range ? `:${range.from === range.to ? range.from : `${range.from}-${range.to}`}` : ""}` : "";
   const title = opts.title ?? where;
-  const lines = body.map((l, i) => {
+  const lines = body.map((l3, i) => {
     const n = first + i;
-    return `<span class="am-ln${hl.has(n) ? " am-ln--hl" : ""}"${numbered ? ` data-n="${n}"` : ""}>${esc(l)}</span>`;
+    return `<span class="am-ln${hl.has(n) ? " am-ln--hl" : ""}"${numbered ? ` data-n="${n}"` : ""}>${esc(l3)}</span>`;
   }).join("");
   const source = opts.src ? ` data-am-src="${esc(opts.src)}"${opts.lines ? ` data-am-lines="${esc(opts.lines)}"` : ""}` : "";
   const head = `<figcaption class="am-code-head"><span class="am-code-title"${opts.title && where ? ` title="${esc(where)}"` : ""}>${esc(title)}</span>${shownLang ? `<span class="am-code-lang">${esc(shownLang)}</span>` : ""}${copyButton}</figcaption>`;
@@ -10275,10 +10890,106 @@ function inlineImages(html, { baseDir = process.cwd(), known = /* @__PURE__ */ n
   });
 }
 function remoteImages(html) {
-  return [...html.matchAll(/<img\b[^>]*?\ssrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)].map((m2) => decodeRef(m2[1] ?? m2[2] ?? m2[3])).filter((ref) => /^(?:https?:)?\/\//i.test(ref));
+  return [...html.matchAll(/<img\b[^>]*?\ssrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)].map((m) => decodeRef(m[1] ?? m[2] ?? m[3])).filter((ref) => /^(?:https?:)?\/\//i.test(ref));
 }
 function readEmbeddedImages(html) {
   return new Map([...String(html).matchAll(EMBEDDED)].map(([, src, uri]) => [decodeRef(src), uri]));
+}
+
+// src/refs.js
+import { lstatSync, readFileSync as readFileSync4, realpathSync as realpathSync3, statSync as statSync3 } from "node:fs";
+import { isAbsolute as isAbsolute3, join as join2, relative as relative2, sep as sep3 } from "node:path";
+var REF = /^([^\s:`]+):(\d+)(?:-(\d+))?$/;
+var FILE_LIKE = /\/|\.[A-Za-z][\w-]*$/;
+var INLINE_PARTS = new Map(Object.entries({
+  tree: { lines: (text2) => String(text2).split("\n").map((raw, i) => ({ text: raw.trim(), line: i + 1 })).filter((l3) => l3.text), parts: (t) => fields(t).slice(0, 2) },
+  // label and note; tree ignores a third field
+  timeline: { lines: contentLines, parts: (t) => fields(t).slice(1, 3) },
+  // title and note; the time is plain text
+  kv: { lines: contentLines, parts: (t) => [(t.startsWith("*") ? t.slice(1).trim() : t).match(/^[^:：]+[:：]\s*(.*)$/)?.[1] ?? ""] }
+  // the value; the key is plain text
+}));
+function inlineTexts(block2) {
+  if (block2.type === "md") return [{ text: block2.text, line: block2.line, inline: false }];
+  if (block2.lang === "callout") return [{ text: block2.text, line: block2.line + 1, inline: false }];
+  if (block2.lang === "ask") return askTexts(block2);
+  const component = INLINE_PARTS.get(block2.lang);
+  if (!component) return [];
+  return component.lines(block2.text).flatMap(({ text: text2, line }) => component.parts(text2).map((part) => ({ text: part, line: block2.line + line, inline: true })));
+}
+function askTexts(block2) {
+  let ask;
+  try {
+    ask = readAsk(block2.text);
+  } catch {
+    return [];
+  }
+  return [
+    { text: ask.question.text, line: block2.line + ask.question.line, inline: true },
+    ...ask.options.flatMap((o) => [
+      { text: o.label, line: block2.line + o.line, inline: true },
+      { text: o.note, line: block2.line + o.line, inline: true },
+      ...o.preview ? inlineTexts({ type: "fence", lang: o.preview.lang, text: o.preview.text, line: block2.line + o.preview.line }) : []
+    ])
+  ];
+}
+function checkRefs(blocks, { baseDir }) {
+  const files = /* @__PURE__ */ new Map();
+  const warnings = [];
+  for (const { text: text2, line, inline: inline2 } of blocks.flatMap(inlineTexts)) {
+    for (const span of codeSpans(text2, { inline: inline2 })) {
+      const problem = checkRef(span.text.trim(), baseDir, files);
+      if (problem) warnings.push({ line: line + span.line, rule: "ref", message: problem });
+    }
+  }
+  return warnings.sort((a, b) => a.line - b.line);
+}
+function checkRef(text2, baseDir, files) {
+  const m = text2.match(REF);
+  if (!m || !FILE_LIKE.test(m[1]) || isAbsolute3(m[1]) || /^[~\\]/.test(m[1]) || m[1].includes("\\")) return null;
+  const [, path, a, b = a] = m;
+  const from = Number(a);
+  const to = Number(b);
+  if (!files.has(path)) files.set(path, inspect(path, baseDir));
+  const file = files.get(path);
+  if (!file) return null;
+  if (from < 1) return `\`${text2}\`: lines start at 1`;
+  if (to < from) return `\`${text2}\`: the first line comes after the last; write ${path}:${to}-${from}`;
+  if (file.missing) return `\`${text2}\`: no such file in ${baseDir}`;
+  if (file.folder) return `\`${text2}\`: ${path} is a folder, not a file`;
+  if (to > file.lines) return `\`${text2}\`: the file has ${file.lines} line${file.lines === 1 ? "" : "s"}`;
+  return null;
+}
+function inspect(path, baseDir) {
+  const written = localPath(path, baseDir);
+  const rel = written && relative2(baseDir, written);
+  if (!rel || isSecretPath(rel)) return null;
+  if (!exists(written)) {
+    const parts = rel.split(sep3);
+    return parts.length > 1 && exists(join2(baseDir, parts[0])) ? { missing: true } : null;
+  }
+  try {
+    const real = realpathSync3(written);
+    const root = realpathSync3(baseDir);
+    if (!localPath(real, root) || isSecretPath(relative2(root, real))) return null;
+    const stat2 = statSync3(real);
+    if (stat2.isDirectory()) return { folder: true };
+    if (!stat2.isFile() || stat2.size > MAX_FILE_BYTES) return null;
+    const buf = readFileSync4(real);
+    if (buf.includes(0)) return null;
+    const text2 = buf.toString("utf8").replace(/\r\n?/g, "\n").replace(/\n$/, "");
+    return { lines: text2 ? text2.split("\n").length : 0 };
+  } catch {
+    return null;
+  }
+}
+function exists(path) {
+  try {
+    lstatSync(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 // src/sha256.js
@@ -10291,7 +11002,7 @@ var K3 = Uint32Array.from({ length: 64 }, (_2, i) => {
   }
   return Math.floor(Math.cbrt(n) % 1 * 2 ** 32);
 });
-var rotr = (x, n) => x >>> n | x << 32 - n;
+var rotr = (x2, n) => x2 >>> n | x2 << 32 - n;
 function sha256Base64(text2) {
   const data = new TextEncoder().encode(text2);
   const blocks = Math.ceil((data.length + 9) / 64);
@@ -10301,7 +11012,7 @@ function sha256Base64(text2) {
   const view = new DataView(padded.buffer);
   view.setUint32(padded.length - 8, Math.floor(data.length * 8 / 2 ** 32));
   view.setUint32(padded.length - 4, data.length * 8 >>> 0);
-  const h = Uint32Array.from([2, 3, 5, 7, 11, 13, 17, 19], (p) => Math.floor(Math.sqrt(p) % 1 * 2 ** 32));
+  const h2 = Uint32Array.from([2, 3, 5, 7, 11, 13, 17, 19], (p) => Math.floor(Math.sqrt(p) % 1 * 2 ** 32));
   const w2 = new Uint32Array(64);
   for (let at3 = 0; at3 < padded.length; at3 += 64) {
     for (let i = 0; i < 16; i++) w2[i] = view.getUint32(at3 + i * 4);
@@ -10310,25 +11021,25 @@ function sha256Base64(text2) {
       const s1 = rotr(w2[i - 2], 17) ^ rotr(w2[i - 2], 19) ^ w2[i - 2] >>> 10;
       w2[i] = w2[i - 16] + s0 + w2[i - 7] + s1 >>> 0;
     }
-    let [a3, b, c2, d, e, f2, g, hh] = h;
+    let [a, b, c, d, e, f2, g, hh] = h2;
     for (let i = 0; i < 64; i++) {
       const t1 = hh + (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) + (e & f2 ^ ~e & g) + K3[i] + w2[i] >>> 0;
-      const t2 = (rotr(a3, 2) ^ rotr(a3, 13) ^ rotr(a3, 22)) + (a3 & b ^ a3 & c2 ^ b & c2) >>> 0;
+      const t2 = (rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22)) + (a & b ^ a & c ^ b & c) >>> 0;
       hh = g;
       g = f2;
       f2 = e;
       e = d + t1 >>> 0;
-      d = c2;
-      c2 = b;
-      b = a3;
-      a3 = t1 + t2 >>> 0;
+      d = c;
+      c = b;
+      b = a;
+      a = t1 + t2 >>> 0;
     }
-    [a3, b, c2, d, e, f2, g, hh].forEach((v2, i) => {
-      h[i] = h[i] + v2 >>> 0;
+    [a, b, c, d, e, f2, g, hh].forEach((v, i) => {
+      h2[i] = h2[i] + v >>> 0;
     });
   }
   const out = new Uint8Array(32);
-  h.forEach((v2, i) => new DataView(out.buffer).setUint32(i * 4, v2));
+  h2.forEach((v, i) => new DataView(out.buffer).setUint32(i * 4, v));
   return btoa(String.fromCharCode(...out));
 }
 
@@ -10383,7 +11094,8 @@ function renderDoc(source, overrides = {}, defaults2 = {}, { themes: themes2 = B
     raiseAll(errors);
     throw new LintError(warnings);
   }
-  const stats = { panels: doc2.panels.length, components: {}, code: [], codeWarnings: [], componentWarnings: [], htmlWarnings: [], mathWarnings: [] };
+  const refWarnings = codeDir ? checkRefs([...doc2.intro, ...doc2.panels.flatMap((p) => p.blocks)], { baseDir: codeDir }) : [];
+  const stats = { panels: doc2.panels.length, components: {}, code: [], codeWarnings: [], refWarnings, componentWarnings: [], htmlWarnings: [], mathWarnings: [] };
   const ui = language.ui;
   const ctx = { seq: 0, stats, errors, ui, dir: language.dir, scale, images: { baseDir, known: knownImages }, code: { baseDir: codeDir, known: knownCode } };
   const loose = doc2.intro.filter((b) => b.type === "fence" && COMPONENTS.get(b.lang)?.panelOnly);
@@ -10427,7 +11139,7 @@ function noteRemoteImages(block2, html, ctx) {
   const first = block2.type === "md" ? block2.line : block2.line + 1;
   const used = /* @__PURE__ */ new Map();
   for (const ref of remoteImages(html)) {
-    const places = lines.flatMap((l, i) => l.includes(ref) || l.includes(encodeURI(ref)) ? [i] : []);
+    const places = lines.flatMap((l3, i) => l3.includes(ref) || l3.includes(encodeURI(ref)) ? [i] : []);
     const n = used.get(ref) ?? 0;
     used.set(ref, n + 1);
     const shown2 = ref.length > 80 ? `${ref.slice(0, 77)}...` : ref;
@@ -10441,7 +11153,7 @@ function noteHtml(block2, notes, ctx) {
   const used = /* @__PURE__ */ new Map();
   for (const { at: at3, message } of notes) {
     const tag = at3.split("\n")[0];
-    const places = lines.flatMap((l, i) => Array(l.split(tag).length - 1).fill(i));
+    const places = lines.flatMap((l3, i) => Array(l3.split(tag).length - 1).fill(i));
     const n = used.get(tag) ?? 0;
     used.set(tag, n + 1);
     ctx.stats.htmlWarnings.push({ line: first + (places[Math.min(n, places.length - 1)] ?? 0), message });
@@ -10463,7 +11175,7 @@ function embedImages(block2, html, ctx) {
     return inlineImages(html, { ...ctx.images, checkText: block2.type === "md" || MARKDOWN_FENCES.has(block2.lang) });
   } catch (err) {
     if (!(err instanceof ImageError)) throw err;
-    const idx = block2.text.split("\n").findIndex((l) => l.includes(err.ref) || l.includes(encodeURI(err.ref)));
+    const idx = block2.text.split("\n").findIndex((l3) => l3.includes(err.ref) || l3.includes(encodeURI(err.ref)));
     const first = block2.type === "md" ? block2.line : block2.line + 1;
     throw new RenderError(err.message, { line: first + Math.max(idx, 0), component: "image", example: IMAGE_EXAMPLE });
   }
@@ -10486,8 +11198,17 @@ function renderFence(block2, ctx) {
   ctx.stats.components[lang] = (ctx.stats.components[lang] ?? 0) + 1;
   try {
     const warn = ({ line: at3 = 0, message }) => ctx.stats.componentWarnings?.push({ line: line + at3, component: lang, message });
-    const html = comp.render(text2, { args, uid: () => `am${++ctx.seq}`, ui: ctx.ui, dir: ctx.dir ?? "ltr", video: ctx.video, warn });
-    return ctx.video ? html : scaleSvgBoxes(html, ctx.scale ?? 1);
+    const html = comp.render(text2, {
+      args,
+      uid: () => `am${++ctx.seq}`,
+      ui: ctx.ui,
+      dir: ctx.dir ?? "ltr",
+      video: ctx.video,
+      warn,
+      line,
+      render: (blocks) => renderBlocks(blocks, ctx)
+    });
+    return ctx.video || comp.scalesOwnSvg ? html : scaleSvgBoxes(html, ctx.scale ?? 1);
   } catch (err) {
     if (!(err instanceof ComponentError)) throw err;
     throw new RenderError(err.message, {
@@ -10529,7 +11250,7 @@ function updateNotice(ui, update2, labelKey) {
   const t = ui.update;
   const lines = update2.highlights?.[labelKey] ?? update2.highlights?.en;
   const notes = lines ? `<p class="am-update-label">${esc(t.whatsNew)}</p>
-<ul class="am-update-notes">${lines.map((l) => `<li>${esc(l).replace(/`([^`]+)`/g, "<code>$1</code>")}</li>`).join("")}</ul>
+<ul class="am-update-notes">${lines.map((l3) => `<li>${esc(l3).replace(/`([^`]+)`/g, "<code>$1</code>")}</li>`).join("")}</ul>
 ` : "";
   const plain = t.button.replace("{version}", update2.latest);
   const fill2 = (s) => esc(s).replace("{version}", `<bdi>${esc(update2.latest)}</bdi>`).replace("{current}", `<bdi>${esc(update2.current)}</bdi>`);
@@ -10545,6 +11266,20 @@ ${row(update2.command, true)}
 <p class="am-update-label">${esc(t.agent)}</p>
 ${row(t.agentText, false)}
 <a href="https://github.com/QingYunA/answer-me-with-html/releases" target="_blank" rel="noopener">${esc(t.notes)}</a>
+</div>
+`
+  };
+}
+function exportMenu(ui) {
+  const t = ui.export;
+  const item = (kind2, label) => `<button class="am-export-item" type="button" role="menuitem" data-export="${kind2}" aria-describedby="am-export-${kind2}-note"><span>${esc(label)}</span><small class="am-export-note" id="am-export-${kind2}-note" aria-hidden="true"></small></button>`;
+  const labels = [["working", t.working], ["copied", t.copied], ["saved", t.saved], ["failed", t.failed], ["unavailable-browser", t.unavailableBrowser], ["unavailable-clipboard", t.unavailableClipboard], ["unavailable-policy", t.unavailablePolicy], ["unverified-effect", t.unverifiedEffect]].map(([key, text2]) => `data-${key}="${esc(text2)}"`).join(" ");
+  return {
+    button: `<button class="am-btn am-btn--export" type="button" data-am="export" popovertarget="am-export" aria-haspopup="menu" aria-expanded="false" aria-controls="am-export" hidden>${esc(t.button)}</button>`,
+    menu: `<div class="am-export" id="am-export" popover role="menu" aria-label="${esc(t.button)}" ${labels}>
+${item("copy", t.copy)}
+${item("download", t.download)}
+${item("pdf", t.pdf)}
 </div>
 `
   };
@@ -10582,6 +11317,7 @@ function scaleButtons(ui) {
 function shell({ meta, language, body, source, embedded, update: update2, closeAfter, colophon: colophon2, scale }) {
   const { ui, labelKey } = language;
   const notice = updateNotice(ui, update2, labelKey);
+  const exporter = exportMenu(ui);
   const pick = (name2, label, values, current) => `<label class="am-pick">${esc(label)}<select data-am="${name2}">${values.map(([value, text2]) => `<option value="${esc(value)}"${value === current ? " selected" : ""}>${esc(text2)}</option>`).join("")}</select></label>`;
   const root = { lang: language.htmlLang, dir: language.dir, theme: meta.theme, mode: meta.mode, style: meta.style, scale };
   const interactiveTable = body.includes("<table data-am-table=");
@@ -10607,8 +11343,9 @@ ${scaleButtons(ui)}
 <button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="${esc(JSON.stringify({ ...ui.reply, done: ui.done, remarks: ui.remark.section, kinds: ui.remark.kinds, ...closeAfter ? { closeAfter: { seconds: CLOSE_AFTER_SECONDS, ...ui.closeAfter } } : {} }))}">${esc(ui.reply.button)}</button>
 <button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="${esc(JSON.stringify(ui.remark))}">${esc(ui.remark.button)}</button>
 <button class="am-btn" type="button" data-am="copy" data-done="${esc(ui.done)}">${esc(ui.copy)}</button>
+${exporter.button}
 </div>
-${notice.popover}${colophon2 ? withColophon(body, language) : body}
+${notice.popover}${exporter.menu}${colophon2 ? withColophon(body, language) : body}
 ${lightboxShell(ui, body.includes('class="am-diagram'))}${sourceTag(source)}
 <script>${script}</script>
 </body>
@@ -10617,24 +11354,25 @@ ${lightboxShell(ui, body.includes('class="am-diagram'))}${sourceTag(source)}
 }
 
 // src/theme-market.js
-import { join as join6 } from "node:path";
+import { join as join7 } from "node:path";
 
 // src/config.js
-import { readFileSync as readFileSync4, writeFileSync, rmSync, existsSync as existsSync3 } from "node:fs";
-import { join as join3, dirname } from "node:path";
+import { readFileSync as readFileSync5, writeFileSync, rmSync, existsSync as existsSync3 } from "node:fs";
+import { join as join4, dirname, isAbsolute as isAbsolute4, resolve as resolve3 } from "node:path";
+import { homedir as homedir3 } from "node:os";
 
 // src/home.js
-import { mkdirSync, existsSync as existsSync2, statSync as statSync3, lstatSync, chmodSync } from "node:fs";
+import { mkdirSync, existsSync as existsSync2, statSync as statSync4, lstatSync as lstatSync2, chmodSync } from "node:fs";
 import { homedir as homedir2, tmpdir } from "node:os";
-import { join as join2 } from "node:path";
-var defaultHome = () => join2(homedir2(), ".answer-me-with-html");
+import { join as join3 } from "node:path";
+var defaultHome = () => join3(homedir2(), ".answer-me-with-html");
 function ensureHome(home) {
   const fresh = !existsSync2(home);
   mkdirSync(home, { recursive: true, mode: 448 });
   if (process.platform === "win32" || !(fresh || home === defaultHome())) return;
-  if ((statSync3(home).mode & 511) !== 448) chmodSync(home, 448);
+  if ((statSync4(home).mode & 511) !== 448) chmodSync(home, 448);
 }
-var tempHome = () => join2(tmpdir(), process.getuid ? `answer-me-with-html-${process.getuid()}` : "answer-me-with-html");
+var tempHome = () => join3(tmpdir(), process.getuid ? `answer-me-with-html-${process.getuid()}` : "answer-me-with-html");
 var UnsafeTempHome = class extends Error {
   constructor(dir) {
     super(`${dir} is not a private folder of this user`);
@@ -10653,7 +11391,7 @@ function checkedTempHome({ create = false } = {}) {
   }
   let info;
   try {
-    info = lstatSync(dir);
+    info = lstatSync2(dir);
   } catch (e) {
     if (e.code === "ENOENT" && !create) return null;
     throw e;
@@ -10679,15 +11417,24 @@ var CONFIG_KEYS = Object.freeze({
   update_check: { type: "bool", default: true, label: "Check for a new version once a day in the background and tell you (never updates by itself)" },
   close_after_reply: { type: "bool", default: false, label: "Close the page tab 3 seconds after the reply is copied (a Keep open button cancels it)" },
   colophon: { type: "bool", default: true, label: 'Show the "Generated by Answer me with HTML" line above the page title' },
-  voice: { type: "enum", choices: VOICES, default: "auto", label: "Video narration voice-over (auto: ElevenLabs if ELEVENLABS_API_KEY is set, otherwise system TTS; local: the local service at AM_TTS_URL)" }
+  pages_dir: { type: "path", default: "", label: "Folder for generated pages (empty: pages/ in the data directory; a relative path is inside the data directory)" },
+  voice: { type: "enum", choices: VOICES, default: "auto", label: "Video narration voice-over (auto: ElevenLabs if ELEVENLABS_API_KEY is set, otherwise system TTS; local: the local service at AM_TTS_URL; cmd: the command-line TTS in AM_TTS_CMD)" }
 });
 var TRUE = /* @__PURE__ */ new Set(["on", "true", "yes", "1", "\u5F00", "\u5F00\u542F", "\u6253\u5F00"]);
 var FALSE = /* @__PURE__ */ new Set(["off", "false", "no", "0", "\u5173", "\u5173\u95ED"]);
 function amHome(env = process.env) {
   return env.AM_HOME || defaultHome();
 }
+function pagesDir(env = process.env, config = {}) {
+  const values = config && typeof config === "object" && config.values ? config.values : config;
+  const raw = typeof values === "string" ? values : values?.pages_dir ?? "";
+  const text2 = String(raw).trim();
+  if (!text2) return join4(amHome(env), "pages");
+  const expanded = text2.replace(/^~(?=$|[\\/])/, () => homedir3());
+  return isAbsolute4(expanded) ? resolve3(expanded) : resolve3(amHome(env), expanded);
+}
 function configPath(env = process.env) {
-  return join3(amHome(env), "config.json");
+  return join4(amHome(env), "config.json");
 }
 var defaults = () => Object.fromEntries(Object.entries(CONFIG_KEYS).map(([k, s]) => [k, s.default]));
 function configChoices(key, themes2) {
@@ -10698,9 +11445,9 @@ function coerce2(key, raw, themes2) {
   if (!spec) throw new ConfigError(`No setting named "${key}". Available: ${Object.keys(CONFIG_KEYS).join(" | ")}`);
   if (spec.type === "bool") {
     if (typeof raw === "boolean") return raw;
-    const v3 = String(raw).trim().toLowerCase();
-    if (TRUE.has(v3)) return true;
-    if (FALSE.has(v3)) return false;
+    const v2 = String(raw).trim().toLowerCase();
+    if (TRUE.has(v2)) return true;
+    if (FALSE.has(v2)) return false;
     throw new ConfigError(`${key} accepts only on / off`);
   }
   if (spec.type === "number") {
@@ -10711,16 +11458,22 @@ function coerce2(key, raw, themes2) {
     }
     return n;
   }
-  const v2 = String(raw).trim();
+  if (spec.type === "path") {
+    const v2 = String(raw).trim();
+    if (!v2) return spec.default;
+    if (v2.includes("\0")) throw new ConfigError(`${key} must be a folder path`);
+    return v2;
+  }
+  const v = String(raw).trim();
   const choices = configChoices(key, themes2);
-  if (!choices.includes(v2)) throw new ConfigError(`Invalid ${key} value "${v2}". Choose one of: ${choices.join(" | ")}`);
-  return v2;
+  if (!choices.includes(v)) throw new ConfigError(`Invalid ${key} value "${v}". Choose one of: ${choices.join(" | ")}`);
+  return v;
 }
 function readStored(env) {
   const file = configPath(env);
   if (!existsSync3(file)) return { stored: {} };
   try {
-    const data = JSON.parse(readFileSync4(file, "utf8"));
+    const data = JSON.parse(readFileSync5(file, "utf8"));
     return { stored: data && typeof data === "object" && !Array.isArray(data) ? data : {} };
   } catch (e) {
     return { stored: {}, warning: `Cannot parse ${file}; using the default settings (${e.message})` };
@@ -10730,12 +11483,12 @@ function readConfig(env = process.env, themes2 = loadThemes(amHome(env))) {
   const { stored, warning } = readStored(env);
   const values = defaults();
   const warnings = [warning];
-  for (const [k, v2] of Object.entries(stored)) {
+  for (const [k, v] of Object.entries(stored)) {
     if (!CONFIG_KEYS[k]) continue;
     try {
-      values[k] = coerce2(k, v2, themes2);
+      values[k] = coerce2(k, v, themes2);
     } catch {
-      if (k === "theme") warnings.push(`The default theme "${v2}" cannot be used (${themes2.problem(String(v2), "page")}); using ${values.theme}`);
+      if (k === "theme") warnings.push(`The default theme "${v}" cannot be used (${themes2.problem(String(v), "page")}); using ${values.theme}`);
     }
   }
   return { values, stored, warning: warnings.filter(Boolean).join("; ") || void 0, path: configPath(env) };
@@ -10765,17 +11518,17 @@ function resetConfig(key, env = process.env) {
 
 // src/themes/catalog.js
 import { createHash } from "node:crypto";
-import { mkdirSync as mkdirSync2, readFileSync as readFileSync6, renameSync as renameSync2, rmSync as rmSync2, writeFileSync as writeFileSync3 } from "node:fs";
-import { join as join5 } from "node:path";
+import { mkdirSync as mkdirSync2, readFileSync as readFileSync7, renameSync as renameSync2, rmSync as rmSync2, writeFileSync as writeFileSync3 } from "node:fs";
+import { join as join6 } from "node:path";
 
 // src/state.js
-import { readFileSync as readFileSync5, writeFileSync as writeFileSync2, renameSync } from "node:fs";
-import { join as join4 } from "node:path";
+import { readFileSync as readFileSync6, writeFileSync as writeFileSync2, renameSync } from "node:fs";
+import { join as join5 } from "node:path";
 var DAY = 24 * 60 * 60 * 1e3;
-var statePath = (home) => join4(home, "state.json");
+var statePath = (home) => join5(home, "state.json");
 function readState(home) {
   try {
-    const data = JSON.parse(readFileSync5(statePath(home), "utf8"));
+    const data = JSON.parse(readFileSync6(statePath(home), "utf8"));
     return data && typeof data === "object" && !Array.isArray(data) ? data : {};
   } catch {
     return {};
@@ -10812,8 +11565,8 @@ var CatalogError = class extends Error {
   }
 };
 var sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-var themesDir = (home) => join5(home, "themes");
-var themeFile = (home, name2) => join5(themesDir(home), `${name2}.json`);
+var themesDir = (home) => join6(home, "themes");
+var themeFile = (home, name2) => join6(themesDir(home), `${name2}.json`);
 function catalogUrl(env = process.env) {
   const url = env.AM_CATALOG_URL || CATALOG.url;
   let parsed;
@@ -10898,7 +11651,7 @@ async function fetchIndex(env = process.env, net = {}) {
   }
   const seen = /* @__PURE__ */ new Set();
   const themes2 = data.themes.slice(0, CATALOG.maxThemes).map(entryFrom).filter((e) => e && !seen.has(e.name) && seen.add(e.name));
-  return { url, themes: themes2.sort((a3, b) => a3.name < b.name ? -1 : 1) };
+  return { url, themes: themes2.sort((a, b) => a.name < b.name ? -1 : 1) };
 }
 var fileUrl = (index, name2) => new URL(`${name2}.json`, index.url).href;
 var needsNewer = (entry) => Boolean(entry.requires && newer(entry.requires, VERSION));
@@ -10943,7 +11696,7 @@ function forget(home, name2) {
 }
 function readInstalledFile(home, name2) {
   try {
-    return readFileSync6(themeFile(home, name2));
+    return readFileSync7(themeFile(home, name2));
   } catch {
     return null;
   }
@@ -11155,7 +11908,7 @@ function removeTheme(name2, { print, fail, env }) {
   }
   const wasDefault = readConfig(env, loadThemes(home)).stored.theme === name2;
   remove(home, name2);
-  print(`\u2713 Removed ${join6(themesDir(home), `${name2}.json`)}`);
+  print(`\u2713 Removed ${join7(themesDir(home), `${name2}.json`)}`);
   if (wasDefault) {
     resetConfig("theme", env);
     print(`! ${name2} was the default theme; the default is auto again`);
@@ -11220,11 +11973,11 @@ function splitNarration(blocks) {
     }
     const rest = [];
     b.text.split("\n").forEach((raw, i) => {
-      const m2 = raw.match(NARRATION);
-      if (m2 && m2[1].trim()) beats.push(beat(m2[1].trim(), b.line + i));
-      else if (!m2) rest.push(raw);
+      const m = raw.match(NARRATION);
+      if (m && m[1].trim()) beats.push(beat(m[1].trim(), b.line + i));
+      else if (!m) rest.push(raw);
     });
-    if (rest.some((l) => l.trim())) out.push({ ...b, text: rest.join("\n") });
+    if (rest.some((l3) => l3.trim())) out.push({ ...b, text: rest.join("\n") });
   }
   return { blocks: out, beats };
 }
@@ -11235,7 +11988,7 @@ function normalizeNarrationText(raw) {
   return raw.replace(FOCUS, "$1").replace(/\s+/g, " ").trim();
 }
 function beat(raw, line) {
-  const focus = [...raw.matchAll(FOCUS)].map((m2) => m2[1].trim());
+  const focus = [...raw.matchAll(FOCUS)].map((m) => m[1].trim());
   return { raw, text: normalizeNarrationText(raw), focus: focus[0] ?? null, line };
 }
 function estimateSeconds(text2) {
@@ -11282,14 +12035,14 @@ function buildTimeline(video, durations) {
   return { duration: round3(t), title, scenes };
 }
 var allBeats = (video) => [...video.introBeats, ...video.scenes.flatMap((s) => s.beats)];
-var round3 = (x) => Math.round(x * 1e3) / 1e3;
+var round3 = (x2) => Math.round(x2 * 1e3) / 1e3;
 
 // src/video/tts.js
 import { spawn, spawnSync as spawnSync2 } from "node:child_process";
 import { createHash as createHash2 } from "node:crypto";
-import { mkdirSync as mkdirSync3, readFileSync as readFileSync7, writeFileSync as writeFileSync4, existsSync as existsSync4, rmSync as rmSync3, mkdtempSync, renameSync as renameSync4, statSync as statSync4 } from "node:fs";
+import { mkdirSync as mkdirSync3, readFileSync as readFileSync8, writeFileSync as writeFileSync4, existsSync as existsSync4, rmSync as rmSync3, mkdtempSync, renameSync as renameSync4, statSync as statSync5 } from "node:fs";
 import { tmpdir as tmpdir2 } from "node:os";
-import { dirname as dirname2, join as join7, resolve as resolve3 } from "node:path";
+import { dirname as dirname2, join as join8, resolve as resolve4 } from "node:path";
 
 // src/sys.js
 import { spawnSync } from "node:child_process";
@@ -11327,7 +12080,7 @@ var TtsError = class extends Error {
     this.name = "TtsError";
   }
 };
-function pickProvider(choice, env, { platform = process.platform, which = hasCommand } = {}) {
+function pickProvider(choice, env, { platform = process.platform, which = hasCommand, timeoutMs = LOCAL_TIMEOUT_MS } = {}) {
   const eleven = () => elevenLabs(env);
   const system = () => systemVoice(platform, which);
   if (choice === "off") return null;
@@ -11336,6 +12089,7 @@ function pickProvider(choice, env, { platform = process.platform, which = hasCom
     return eleven();
   }
   if (choice === "local") return localSpeech(env);
+  if (choice === "cmd") return commandVoice(env, { which, timeoutMs });
   if (choice === "system") {
     const p = system();
     if (!p) throw new TtsError("No system TTS found: macOS has say built in; on Linux install espeak-ng");
@@ -11430,7 +12184,7 @@ function localSpeech(env) {
       let best = null;
       for (let i = 0; i < attempts; i++) {
         const samples = trimSilence(await request(text2));
-        if (!samples.some((x) => Math.abs(x) >= SILENCE)) continue;
+        if (!samples.some((x2) => Math.abs(x2) >= SILENCE)) continue;
         const ratio = samples.length / SAMPLE_RATE / expected;
         if (!best || Math.abs(Math.log(ratio)) < Math.abs(Math.log(best.ratio))) best = { samples, ratio };
         if (ratio >= LOCAL_RATIO[0] && ratio <= LOCAL_RATIO[1]) break;
@@ -11440,13 +12194,94 @@ function localSpeech(env) {
     }
   };
 }
+var CMD_EXAMPLE = "edge-tts --voice zh-CN-XiaoxiaoNeural --file {text_file} --write-media {out}";
+function commandVoice(env, { which, timeoutMs }) {
+  const template = env.AM_TTS_CMD?.trim();
+  if (!template) throw new TtsError(`voice=cmd needs the AM_TTS_CMD environment variable: a command that writes the audio of one line to {out}, such as ${CMD_EXAMPLE} (pip install edge-tts)`);
+  if (!template.includes("{out}")) throw new TtsError(`AM_TTS_CMD must name {out}, the file the command writes its audio to, such as ${CMD_EXAMPLE}`);
+  commandArgs(template, {});
+  const usesLanguage = template.includes("{lang}");
+  return {
+    name: "cmd",
+    voice: "cmd",
+    id: `cmd:${template}`,
+    concurrency: 2,
+    usesLanguage,
+    synth: (text2, { language } = {}) => withTemp(async (out) => {
+      const textFile2 = `${out}.txt`;
+      writeFileSync4(textFile2, text2);
+      const [program, ...args] = commandArgs(template, { text: text2, text_file: textFile2, out, lang: language ?? "" });
+      await runCommandTts(program, args, text2, timeoutMs);
+      let buf;
+      try {
+        buf = readFileSync8(out);
+      } catch {
+        buf = Buffer.alloc(0);
+      }
+      if (!buf.length) throw new TtsError(`AM_TTS_CMD finished but wrote no audio to {out} for the line "${text2}"`);
+      const samples = trimSilence(await mappedSamples(buf, out, "the audio AM_TTS_CMD wrote", { which, runCommand: run }));
+      if (!samples.some((x2) => Math.abs(x2) >= SILENCE)) {
+        throw new TtsError(`AM_TTS_CMD wrote only silence for the line "${text2}" (macOS say does this inside a sandbox)`);
+      }
+      return samples;
+    })
+  };
+}
+function commandArgs(template, values) {
+  const words3 = [];
+  let word = null;
+  for (let i = 0; i < template.length; i++) {
+    const ch = template[i];
+    if (ch === '"' || ch === "'") {
+      const end = template.indexOf(ch, i + 1);
+      if (end < 0) throw new TtsError(`AM_TTS_CMD has an unclosed ${ch}`);
+      word = (word ?? "") + template.slice(i + 1, end);
+      i = end;
+    } else if (/\s/.test(ch)) {
+      if (word !== null) words3.push(word);
+      word = null;
+    } else {
+      word = (word ?? "") + ch;
+    }
+  }
+  if (word !== null) words3.push(word);
+  return words3.map((w2) => w2.replace(/\{(text|text_file|out|lang)\}/g, (_2, key) => values[key] ?? `{${key}}`));
+}
+function runCommandTts(program, args, text2, timeoutMs) {
+  return new Promise((resolve9, reject) => {
+    const p = spawn(program, args, { stdio: ["pipe", "ignore", "pipe"], windowsHide: true });
+    let err = "";
+    let settled = false;
+    const settle3 = (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      if (error) reject(error);
+      else resolve9();
+    };
+    const timer = setTimeout(() => {
+      p.kill("SIGKILL");
+      p.stdin.destroy();
+      p.stderr.destroy();
+      settle3(new TtsError(`AM_TTS_CMD did not finish within ${timeoutMs / 1e3} seconds`));
+    }, timeoutMs);
+    p.stderr.on("data", (d) => {
+      err = (err + d).slice(-4e3);
+    });
+    p.stdin.on("error", () => {
+    });
+    p.stdin.end(text2);
+    p.on("error", (e) => settle3(new TtsError(e.code === "ENOENT" ? `AM_TTS_CMD runs "${program}", which is not installed or not on PATH; install it or fix AM_TTS_CMD` : `Cannot run "${program}" from AM_TTS_CMD: ${e.message}`)));
+    p.on("close", (code) => settle3(code === 0 ? null : new TtsError(`AM_TTS_CMD exited with code ${code}: ${err.trim().split(/\s*\n\s*/).slice(-3).join(" | ").slice(-300)}`)));
+  });
+}
 function audioMapProvider(mapPath, { which = hasCommand, runCommand = run } = {}) {
-  const mapFile = resolve3(mapPath);
+  const mapFile = resolve4(mapPath);
   let source;
   let mapStat;
   try {
-    source = readFileSync7(mapFile, "utf8").replace(/^\uFEFF/, "");
-    mapStat = statSync4(mapFile);
+    source = readFileSync8(mapFile, "utf8").replace(/^\uFEFF/, "");
+    mapStat = statSync5(mapFile);
   } catch (e) {
     throw new TtsError(`Cannot read audio map ${mapFile}: ${e.message}`);
   }
@@ -11466,13 +12301,13 @@ function audioMapProvider(mapPath, { which = hasCommand, runCommand = run } = {}
     if (!text2) throw new TtsError(`Audio map ${mapFile} has an empty narration key`);
     if (entries.has(text2)) throw new TtsError(`Audio map ${mapFile} has more than one entry for narration line "${text2}"`);
     if (typeof value !== "string" || !value.trim()) throw new TtsError(`Audio map entry for narration line "${text2}" must name an audio file`);
-    const audioFile = resolve3(dirname2(mapFile), value);
+    const audioFile = resolve4(dirname2(mapFile), value);
     let stat2;
     let audio;
     try {
-      stat2 = statSync4(audioFile);
+      stat2 = statSync5(audioFile);
       if (!stat2.isFile()) throw new TtsError(`Audio file for narration line "${text2}" is not a file: ${audioFile}`);
-      audio = readFileSync7(audioFile);
+      audio = readFileSync8(audioFile);
     } catch (e) {
       if (e instanceof TtsError) throw e;
       throw new TtsError(`Cannot read audio file for narration line "${text2}": ${audioFile}: ${e.message}`);
@@ -11494,33 +12329,33 @@ function audioMapProvider(mapPath, { which = hasCommand, runCommand = run } = {}
       if (!entry) throw new TtsError(`No audio map entry for narration line "${key}"`);
       let buf;
       try {
-        buf = readFileSync7(entry.file);
+        buf = readFileSync8(entry.file);
       } catch (e) {
         throw new TtsError(`Cannot read audio file for narration line "${key}": ${entry.file}: ${e.message}`);
       }
-      const samples = await mappedSamples(buf, entry.file, { which, runCommand });
+      const samples = await mappedSamples(buf, entry.file, `audio map file ${entry.file}`, { which, runCommand });
       const trimmed = trimSilence(samples);
-      if (!trimmed.some((x) => Math.abs(x) >= SILENCE)) throw new TtsError(`Audio file for narration line "${key}" contains only silence: ${entry.file}`);
+      if (!trimmed.some((x2) => Math.abs(x2) >= SILENCE)) throw new TtsError(`Audio file for narration line "${key}" contains only silence: ${entry.file}`);
       return trimmed;
     }
   };
 }
-async function mappedSamples(buf, file, { which, runCommand }) {
+async function mappedSamples(buf, file, label, { which, runCommand }) {
   if (buf.toString("ascii", 0, 4) === "RIFF" && buf.toString("ascii", 8, 12) === "WAVE") {
     try {
       return readWav(buf, { downmix: true });
     } catch (e) {
-      if (!which("ffmpeg")) throw new TtsError(`Cannot decode audio map file ${file} (needs 16-bit PCM WAV): ${e.message}`);
+      if (!which("ffmpeg")) throw new TtsError(`Cannot decode ${label} (needs 16-bit PCM WAV): ${e.message}`);
     }
   } else if (!which("ffmpeg")) {
-    throw new TtsError(`Audio map file ${file} is not WAV; converting it needs ffmpeg. Install ffmpeg or use 16-bit PCM WAV`);
+    throw new TtsError(`${label[0].toUpperCase()}${label.slice(1)} is not WAV; converting it needs ffmpeg. Install ffmpeg or use 16-bit PCM WAV`);
   }
   return withTemp(async (out) => {
     try {
       await runCommand("ffmpeg", ["-v", "error", "-y", "-i", file, "-ac", "1", "-ar", String(SAMPLE_RATE), "-c:a", "pcm_s16le", out]);
-      return readWav(readFileSync7(out));
+      return readWav(readFileSync8(out));
     } catch (e) {
-      throw new TtsError(`Cannot convert audio map file ${file} with ffmpeg: ${e.message}`);
+      throw new TtsError(`Cannot convert ${label} with ffmpeg: ${e.message}`);
     }
   });
 }
@@ -11576,7 +12411,7 @@ function systemVoice(platform, which) {
       // A caller that does not say which language a line is in (languageOf is optional) gets the system default voice.
       synth: (text2, { voice } = {}) => withTemp(async (file) => {
         await run("say", [...voice ? ["-v", voice] : [], "-o", file, "--file-format=WAVE", `--data-format=LEI16@${SAMPLE_RATE}`, "-f", textFile(file, text2)]);
-        return readWav(readFileSync7(file));
+        return readWav(readFileSync8(file));
       })
     };
   }
@@ -11592,7 +12427,7 @@ function systemVoice(platform, which) {
       // A caller that does not say which language a line is in gets the English voice, which every espeak-ng build has.
       synth: (text2, { voice } = {}) => withTemp(async (file) => {
         await run("espeak-ng", ["-v", voice ?? "en-us", "-w", file, "-f", textFile(file, text2)]);
-        return readWav(readFileSync7(file));
+        return readWav(readFileSync8(file));
       })
     };
   }
@@ -11605,10 +12440,10 @@ function espeakVoices() {
   return parseEspeakVoices(spawnSync2("espeak-ng", ["--voices"], { encoding: "utf8" }).stdout || "");
 }
 function parseMacVoices(out) {
-  return out.split("\n").map((l) => l.match(/^(.+?)\s+([a-z]{2,3}[_-][A-Za-z0-9]{2,4})\s+#/)).filter(Boolean).map((m2) => ({ name: m2[1].trim(), locale: m2[2] }));
+  return out.split("\n").map((l3) => l3.match(/^(.+?)\s+([a-z]{2,3}[_-][A-Za-z0-9]{2,4})\s+#/)).filter(Boolean).map((m) => ({ name: m[1].trim(), locale: m[2] }));
 }
 function parseEspeakVoices(out) {
-  return out.split("\n").map((l) => l.match(/^\s*\d+\s+(\S+)\s/)).filter(Boolean).map((m2) => m2[1]);
+  return out.split("\n").map((l3) => l3.match(/^\s*\d+\s+(\S+)\s/)).filter(Boolean).map((m) => m[1]);
 }
 var PREFERRED_VOICES = {
   zh: ["Tingting", "Ting-Ting", "Meijia", "Sinji"],
@@ -11623,38 +12458,38 @@ function macVoiceFor(voices, language) {
   const named = voiceHints(language)?.say;
   const wanted = [language, implied.region && `${implied.language}-${implied.region}`, named].filter(Boolean).map(localeKey);
   for (const locale of new Set(wanted)) {
-    const voice = bestVoice(voices.filter((v2) => localeKey(v2.locale) === locale), base);
+    const voice = bestVoice(voices.filter((v) => localeKey(v.locale) === locale), base);
     if (voice) return voice;
   }
-  return bestVoice(voices.filter((v2) => localeKey(v2.locale).split("_")[0] === base), base);
+  return bestVoice(voices.filter((v) => localeKey(v.locale).split("_")[0] === base), base);
 }
 function espeakVoiceFor(voices, language) {
   const base = baseLanguage(language);
   const name2 = voiceHints(language)?.espeak ?? base;
   if (!voices.length) return name2;
-  const installed = voices.includes(name2) || voices.includes(base) || voices.some((v2) => v2.startsWith(`${base}-`));
+  const installed = voices.includes(name2) || voices.includes(base) || voices.some((v) => v.startsWith(`${base}-`));
   return installed ? name2 : null;
 }
 var localeKey = (locale) => String(locale).toLowerCase().replace(/-/g, "_");
 function bestVoice(candidates, base) {
   if (!candidates.length) return null;
   for (const name2 of PREFERRED_VOICES[base] ?? []) {
-    const hit = candidates.find((v2) => stripName(v2.name) === name2);
+    const hit = candidates.find((v) => stripName(v.name) === name2);
     if (hit) return hit.name;
   }
-  const own = candidates.filter((v2) => !SHARED_VOICES.has(stripName(v2.name)));
+  const own = candidates.filter((v) => !SHARED_VOICES.has(stripName(v.name)));
   return (own[0] ?? candidates[0]).name;
 }
 var stripName = (name2) => name2.replace(/\s*[(（].*$/, "");
 function run(cmd, args) {
-  return new Promise((resolve7, reject) => {
+  return new Promise((resolve9, reject) => {
     const p = spawn(cmd, args, { stdio: ["ignore", "ignore", "pipe"] });
     let err = "";
     p.stderr.on("data", (d) => {
       err += d;
     });
     p.on("error", reject);
-    p.on("close", (code) => code === 0 ? resolve7() : reject(new TtsError(`${cmd} failed (${code}): ${err.slice(0, 200)}`)));
+    p.on("close", (code) => code === 0 ? resolve9() : reject(new TtsError(`${cmd} failed (${code}): ${err.slice(0, 200)}`)));
   });
 }
 function textFile(wavFile, text2) {
@@ -11663,9 +12498,9 @@ function textFile(wavFile, text2) {
   return p;
 }
 async function withTemp(fn2) {
-  const dir = mkdtempSync(join7(tmpdir2(), "am-tts-"));
+  const dir = mkdtempSync(join8(tmpdir2(), "am-tts-"));
   try {
-    return await fn2(join7(dir, "out.wav"));
+    return await fn2(join8(dir, "out.wav"));
   } finally {
     rmSync3(dir, { recursive: true, force: true });
   }
@@ -11704,10 +12539,10 @@ function resample(input) {
   const n = Math.floor(samples.length * SAMPLE_RATE / rate);
   const out = new Int16Array(n);
   for (let i = 0; i < n; i++) {
-    const x = i * rate / SAMPLE_RATE;
-    const a3 = Math.floor(x);
-    const b = Math.min(a3 + 1, samples.length - 1);
-    out[i] = Math.round(samples[a3] + (samples[b] - samples[a3]) * (x - a3));
+    const x2 = i * rate / SAMPLE_RATE;
+    const a = Math.floor(x2);
+    const b = Math.min(a + 1, samples.length - 1);
+    out[i] = Math.round(samples[a] + (samples[b] - samples[a]) * (x2 - a));
   }
   return out;
 }
@@ -11727,7 +12562,7 @@ async function synthAll(texts, provider, { cacheDir: wanted, languageOf } = {}) 
       const key = `${provider.id}${voice ? `:${voice}` : ""}${language ? `
 ${language}` : ""}
 ${texts[i]}`;
-      const file = cacheDir && join7(cacheDir, `${createHash2("sha1").update(key).digest("hex")}.pcm`);
+      const file = cacheDir && join8(cacheDir, `${createHash2("sha1").update(key).digest("hex")}.pcm`);
       const cached = file && readCache(file);
       if (cached) {
         results[i] = cached;
@@ -11753,7 +12588,7 @@ function readCache(file) {
   if (!existsSync4(file)) return null;
   let buf;
   try {
-    buf = readFileSync7(file);
+    buf = readFileSync8(file);
   } catch (e) {
     if (!isDenied(e)) throw e;
     return null;
@@ -11776,12 +12611,12 @@ function writeCache(file, samples) {
   }
 }
 function trimSilence(samples, threshold = SILENCE) {
-  let a3 = 0;
+  let a = 0;
   let b = samples.length;
-  while (a3 < b && Math.abs(samples[a3]) < threshold) a3++;
-  while (b > a3 && Math.abs(samples[b - 1]) < threshold) b--;
+  while (a < b && Math.abs(samples[a]) < threshold) a++;
+  while (b > a && Math.abs(samples[b - 1]) < threshold) b--;
   const pad = Math.floor(SAMPLE_RATE * 0.04);
-  return samples.slice(Math.max(0, a3 - pad), Math.min(samples.length, b + pad));
+  return samples.slice(Math.max(0, a - pad), Math.min(samples.length, b + pad));
 }
 function mixTrack(clips, starts, duration) {
   const total = Math.ceil(duration * SAMPLE_RATE);
@@ -11789,7 +12624,7 @@ function mixTrack(clips, starts, duration) {
   clips.forEach((clip, i) => {
     if (!clip) return;
     const s0 = Math.round(starts[i] * SAMPLE_RATE);
-    for (let j = 0; j < clip.length && s0 + j < total; j++) track[s0 + j] = clip[j];
+    for (let j2 = 0; j2 < clip.length && s0 + j2 < total; j2++) track[s0 + j2] = clip[j2];
   });
   return wav(track);
 }
@@ -11851,7 +12686,7 @@ async function voiceBeats(beats, provider, cacheDir, onProgress, languageOf) {
     const n = `${lines} line${lines === 1 ? "" : "s"}`;
     onProgress?.(`No ${language} voice on this machine: captions only for ${n}`);
   }
-  return { clips, captionsOnly, durations: clips.map((c2, i) => c2 ? c2.length / SAMPLE_RATE : estimateSeconds(beats[i].text)) };
+  return { clips, captionsOnly, durations: clips.map((c, i) => c ? c.length / SAMPLE_RATE : estimateSeconds(beats[i].text)) };
 }
 function playerData(video, meta, timeline) {
   return {
@@ -11876,8 +12711,8 @@ function renderScenes(video, meta, timeline, ctx, ui) {
 var beatsOf = (video, i) => i === 0 ? video.introBeats : video.scenes[i - 1].beats;
 function captionHtml(raw) {
   return raw.split(/(\[[^\]\n]+\])/).map((part) => {
-    const m2 = part.match(/^\[([^\]]+)\]$/);
-    return m2 ? `<b>${esc(m2[1])}</b>` : esc(part);
+    const m = part.match(/^\[([^\]]+)\]$/);
+    return m ? `<b>${esc(m[1])}</b>` : esc(part);
   }).join("");
 }
 function formatClock(seconds) {
@@ -11887,7 +12722,7 @@ function formatClock(seconds) {
 function titleScene(meta, introHtml, { scenes, duration }, ui) {
   const mmss = formatClock(duration);
   const cells = [[ui.drawn, "Answer me with HTML"], [ui.date, timestamp().slice(0, 10)], [ui.scenes, String(scenes)], [ui.duration, mmss]];
-  const block2 = `<div class="amv-titleblock">${cells.map(([k, v2]) => `<div><b>${esc(k)}</b><span>${esc(v2)}</span></div>`).join("")}</div>`;
+  const block2 = `<div class="amv-titleblock">${cells.map(([k, v]) => `<div><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join("")}</div>`;
   return `<section class="amv-scene amv-scene--title" data-i="0">
 <div class="amv-title-wrap"><h1 class="amv-title">${esc(meta.title || "Answer me with HTML")}</h1>${meta.subtitle ? `<p class="amv-subtitle">${esc(meta.subtitle)}</p>` : ""}${introHtml ? `<div class="amv-intro">${introHtml}</div>` : ""}${block2}</div>
 </section>`;
@@ -11900,7 +12735,7 @@ function scene(s, i, total, body, ui) {
 </section>`;
 }
 function sheetFrame() {
-  const ruler2 = (side, labels) => `<div class="amv-ruler amv-ruler--${side}">${labels.map((l) => `<span>${l}</span>`).join("")}</div>`;
+  const ruler2 = (side, labels) => `<div class="amv-ruler amv-ruler--${side}">${labels.map((l3) => `<span>${l3}</span>`).join("")}</div>`;
   const nums = [1, 2, 3, 4, 5, 6, 7, 8];
   const letters = ["A", "B", "C", "D"];
   return `<div class="amv-sheet" aria-hidden="true">${ruler2("top", nums)}${ruler2("bottom", nums)}${ruler2("left", letters)}${ruler2("right", letters)}</div>`;
@@ -11961,14 +12796,14 @@ ${sourceTag(source)}
 // src/video/export.js
 import { spawn as spawn3 } from "node:child_process";
 import { writeFileSync as writeFileSync5 } from "node:fs";
-import { join as join9 } from "node:path";
+import { join as join10 } from "node:path";
 import { pathToFileURL } from "node:url";
 
 // src/chrome.js
 import { spawn as spawn2 } from "node:child_process";
 import { existsSync as existsSync5, mkdtempSync as mkdtempSync2, rmSync as rmSync4 } from "node:fs";
 import { tmpdir as tmpdir3 } from "node:os";
-import { join as join8 } from "node:path";
+import { join as join9 } from "node:path";
 var ExportError = class extends Error {
 };
 var CDP_TIMEOUT_MS = 3e4;
@@ -12009,11 +12844,11 @@ async function openPage(url, {
   scriptError = "Page script error"
 } = {}) {
   if (!chromePath) throw new ExportError("No Chrome / Chromium / Edge found. Set the browser path with the AM_CHROME environment variable");
-  const tmp = mkdtempSync2(join8(tmpdir3(), "am-chrome-"));
+  const tmp = mkdtempSync2(join9(tmpdir3(), "am-chrome-"));
   const chrome = spawn2(chromePath, [
     "--headless=new",
     "--remote-debugging-port=0",
-    `--user-data-dir=${join8(tmp, "profile")}`,
+    `--user-data-dir=${join9(tmp, "profile")}`,
     "--no-first-run",
     "--no-default-browser-check",
     "--hide-scrollbars",
@@ -12074,7 +12909,7 @@ function waitForLoad(loaded, timeoutMs = LOAD_TIMEOUT_MS) {
   ]).finally(() => clearTimeout(timer));
 }
 function devtoolsUrl(chrome, timeoutMs = CHROME_START_TIMEOUT_MS) {
-  return new Promise((resolve7, reject) => {
+  return new Promise((resolve9, reject) => {
     let buf = "";
     const fail = (msg) => {
       clearTimeout(timer);
@@ -12087,16 +12922,16 @@ ${tail}` : msg));
     chrome.on("close", (code, signal) => fail(`Chrome exited (${code ?? signal}) before it started`));
     chrome.stderr.on("data", (d) => {
       buf += d;
-      const m2 = buf.match(/DevTools listening on (ws:\/\/\S+)/);
-      if (m2) {
+      const m = buf.match(/DevTools listening on (ws:\/\/\S+)/);
+      if (m) {
         clearTimeout(timer);
-        resolve7(m2[1]);
+        resolve9(m[1]);
       }
     });
   });
 }
 function connect(url) {
-  return new Promise((resolve7, reject) => {
+  return new Promise((resolve9, reject) => {
     const ws = new WebSocket(url);
     const pending = /* @__PURE__ */ new Map();
     const waiters = /* @__PURE__ */ new Map();
@@ -12114,7 +12949,7 @@ function connect(url) {
         waiters.delete(msg.method);
       }
     });
-    ws.addEventListener("open", () => resolve7({
+    ws.addEventListener("open", () => resolve9({
       send(method, params = {}, sessionId) {
         return new Promise((ok, fail) => {
           const msgId = ++id;
@@ -12122,9 +12957,9 @@ function connect(url) {
             pending.delete(msgId);
             fail(new ExportError(`Chrome is not responding (${method} took more than ${CDP_TIMEOUT_MS / 1e3} seconds)`));
           }, CDP_TIMEOUT_MS);
-          pending.set(msgId, { ok: (v2) => {
+          pending.set(msgId, { ok: (v) => {
             clearTimeout(timer);
-            ok(v2);
+            ok(v);
           }, fail: (e) => {
             clearTimeout(timer);
             fail(e);
@@ -12172,7 +13007,7 @@ async function exportMp4(htmlFile, mp4File, { wav: wav2, env = process.env, onPr
   const player = await openPlayer(htmlFile, { env, startTimeoutMs });
   try {
     const { info, evaluate, screenshot, tmp } = player;
-    const wavFile = wav2 ? join9(tmp, "voice.wav") : null;
+    const wavFile = wav2 ? join10(tmp, "voice.wav") : null;
     if (wav2) writeFileSync5(wavFile, wav2);
     const ffmpeg = spawn3("ffmpeg", [
       "-y",
@@ -12207,14 +13042,14 @@ async function exportMp4(htmlFile, mp4File, { wav: wav2, env = process.env, onPr
     });
     ffmpeg.stdin.on("error", () => {
     });
-    const done = new Promise((resolve7, reject) => {
+    const done = new Promise((resolve9, reject) => {
       ffmpeg.on("error", (e) => {
         exited = true;
         reject(new ExportError(`Cannot run ffmpeg: ${e.message}`));
       });
       ffmpeg.on("close", (code) => {
         exited = true;
-        if (code === 0) resolve7();
+        if (code === 0) resolve9();
         else reject(new ExportError(`ffmpeg failed (${code}): ${ffErr.slice(0, 300)}`));
       });
     });
@@ -12271,15 +13106,15 @@ async function exportWebm(htmlFile, webmFile, { env = process.env, onProgress = 
 }
 
 // src/export.js
-import { existsSync as existsSync6, lstatSync as lstatSync2, mkdirSync as mkdirSync4, readdirSync as readdirSync2, readlinkSync, realpathSync as realpathSync3, statSync as statSync5, unlinkSync, writeFileSync as writeFileSync6 } from "node:fs";
-import { basename as basename3, dirname as dirname3, join as join10, resolve as resolve4 } from "node:path";
+import { existsSync as existsSync6, lstatSync as lstatSync3, mkdirSync as mkdirSync4, readdirSync as readdirSync2, readlinkSync, realpathSync as realpathSync4, statSync as statSync6, unlinkSync, writeFileSync as writeFileSync6 } from "node:fs";
+import { basename as basename3, dirname as dirname3, join as join11, resolve as resolve5 } from "node:path";
 import { pathToFileURL as pathToFileURL2 } from "node:url";
 var VIEWPORT = 1200;
 var DEVICE_SCALE = 2;
 var MAX_SLICE = 1800;
 var SETTLE_MS = 400;
 var CHROME_CSS = `.am-toolbar, .am-reply, .am-reply-bar, .am-comment, .am-comment-btn, .am-remark-pop,
-.am-update, .am-btn--update, .am-lightbox, .am-code-copy, .am-diagram-expand, .am-toc, .am-delta-switch, .am-table-controls {
+.am-update, .am-btn--update, .am-btn--export, .am-export, .am-lightbox, .am-code-copy, .am-diagram-expand, .am-toc, .am-delta-switch, .am-table-controls {
   display: none !important;
 }
 .am-table-sort::after { content: none !important; }`;
@@ -12316,8 +13151,8 @@ async function exportPage(file, { pdf, png, env = process.env, onFile = () => {
   if (pdf && png && sameDirectory(dirname3(pdf), png) && isSliceOf(basename3(pdf), sliceName(file))) {
     throw new ExportError(`The PDF ${pdf} has the name of a PNG slice in ${png}: choose another file name`);
   }
-  if (pdf && png && lstatSync2(pdf, { throwIfNoEntry: false })?.isSymbolicLink()) {
-    const target = resolve4(dirname3(pdf), readlinkSync(pdf));
+  if (pdf && png && lstatSync3(pdf, { throwIfNoEntry: false })?.isSymbolicLink()) {
+    const target = resolve5(dirname3(pdf), readlinkSync(pdf));
     if (sameDirectory(dirname3(target), png) && isSliceOf(basename3(target), sliceName(file))) {
       throw new ExportError(`The PDF ${pdf} has the name of a PNG slice in ${png}: choose another file name`);
     }
@@ -12331,7 +13166,7 @@ async function exportPage(file, { pdf, png, env = process.env, onFile = () => {
   }
   let inputStat;
   try {
-    inputStat = statSync5(file);
+    inputStat = statSync6(file);
   } catch (e) {
     throw new ExportError(`Cannot read the page ${file}: ${e.message}`);
   }
@@ -12364,7 +13199,7 @@ async function exportPage(file, { pdf, png, env = process.env, onFile = () => {
 function checkPdfCollision(file, pdf, png) {
   let entries;
   try {
-    entries = statSync5(png, { throwIfNoEntry: false })?.isDirectory() ? readdirSync2(png) : [];
+    entries = statSync6(png, { throwIfNoEntry: false })?.isDirectory() ? readdirSync2(png) : [];
   } catch (e) {
     throw new ExportError(`Cannot check the PNG folder ${png} for a PDF collision: ${e.message}`);
   }
@@ -12373,7 +13208,7 @@ function checkPdfCollision(file, pdf, png) {
     const index = entry.match(/-([1-9]\d*)\.png$/i)?.[1];
     if (!index || checked.has(index)) continue;
     checked.add(index);
-    const slice = join10(png, `${sliceName(file)}-${index}.png`);
+    const slice = join11(png, `${sliceName(file)}-${index}.png`);
     if (existsSync6(slice) && sameFile(slice, pdf)) {
       throw new ExportError(`The PDF ${pdf} has the name of a PNG slice in ${png}: choose another file name`);
     }
@@ -12401,7 +13236,7 @@ async function writePdf(page, file) {
   return file;
 }
 async function writePngSlices(page, htmlFile, folder, onWarn = () => {
-}, inputStat = statSync5(htmlFile)) {
+}, inputStat = statSync6(htmlFile)) {
   await page.page("Emulation.setEmulatedMedia", { media: "screen" });
   await settle2(page);
   const layout5 = await page.evaluate(`(async () => {
@@ -12426,7 +13261,7 @@ async function writePngSlices(page, htmlFile, folder, onWarn = () => {
   if (layout5.empty) throw new ExportError("The page is empty: there is nothing to export");
   try {
     mkdirSync4(folder, { recursive: true });
-    if (!statSync5(folder).isDirectory()) throw new Error("not a folder");
+    if (!statSync6(folder).isDirectory()) throw new Error("not a folder");
   } catch (e) {
     throw new ExportError(`Cannot use the PNG folder ${folder}: ${e.message}`);
   }
@@ -12444,7 +13279,7 @@ async function writePngSlices(page, htmlFile, folder, onWarn = () => {
       captureBeyondViewport: true,
       clip: { x: 0, y: top2, width: VIEWPORT, height, scale: 1 }
     });
-    const file = join10(folder, `${name2}-${i}.png`);
+    const file = join11(folder, `${name2}-${i}.png`);
     if (isInputFile(file, htmlFile, inputStat)) throw new ExportError(`The PNG ${file} is the input page: choose another folder`);
     try {
       writeFileSync6(file, Buffer.from(data, "base64"));
@@ -12457,7 +13292,7 @@ async function writePngSlices(page, htmlFile, folder, onWarn = () => {
   return written;
 }
 function removeStaleSlices(folder, name2, kept, htmlFile, onWarn = () => {
-}, inputStat = statSync5(htmlFile, { throwIfNoEntry: false })) {
+}, inputStat = statSync6(htmlFile, { throwIfNoEntry: false })) {
   let entries;
   try {
     entries = readdirSync2(folder);
@@ -12467,9 +13302,9 @@ function removeStaleSlices(folder, name2, kept, htmlFile, onWarn = () => {
   }
   for (const entry of entries) {
     if (!isSliceOf(entry, name2) || kept.has(entry)) continue;
-    const file = join10(folder, entry);
+    const file = join11(folder, entry);
     try {
-      const st3 = lstatSync2(file);
+      const st3 = lstatSync3(file);
       if (!st3.isFile() && !st3.isSymbolicLink()) {
         onWarn(`Left ${file} in place: it is not a PNG file`);
         continue;
@@ -12491,38 +13326,38 @@ var settle2 = (page) => page.evaluate(`(async () => {
   return true;
 })()`);
 function isHtmlPage(file) {
-  return /\.html?$/i.test(file) && statSync5(file, { throwIfNoEntry: false })?.isFile() === true;
+  return /\.html?$/i.test(file) && statSync6(file, { throwIfNoEntry: false })?.isFile() === true;
 }
 var sliceName = (htmlFile) => basename3(htmlFile).replace(/\.html?$/i, "") || "page";
 var isSliceOf = (fileName, name2) => {
   if (!fileName.startsWith(`${name2}-`) || !fileName.endsWith(".png")) return false;
   return /^[1-9]\d*$/.test(fileName.slice(name2.length + 1, -".png".length));
 };
-var sameFile = (a3, b) => {
-  return sameIdentity(statSync5(a3), statSync5(b));
+var sameFile = (a, b) => {
+  return sameIdentity(statSync6(a), statSync6(b));
 };
-var sameIdentity = (a3, b) => a3.dev === b.dev && a3.ino === b.ino;
+var sameIdentity = (a, b) => a.dev === b.dev && a.ino === b.ino;
 var isInputFile = (file, htmlFile, inputStat) => {
   if (!existsSync6(file)) return false;
-  const st3 = statSync5(file);
-  return inputStat && sameIdentity(st3, inputStat) || existsSync6(htmlFile) && sameIdentity(st3, statSync5(htmlFile));
+  const st3 = statSync6(file);
+  return inputStat && sameIdentity(st3, inputStat) || existsSync6(htmlFile) && sameIdentity(st3, statSync6(htmlFile));
 };
 var realOrAncestor = (path) => {
   const missing = [];
-  let current = resolve4(path);
+  let current = resolve5(path);
   while (!existsSync6(current) && dirname3(current) !== current) {
     missing.unshift(basename3(current));
     current = dirname3(current);
   }
-  return join10(realpathSync3(current), ...missing);
+  return join11(realpathSync4(current), ...missing);
 };
-var sameDirectory = (a3, b) => {
-  if (resolve4(a3) === resolve4(b)) return true;
+var sameDirectory = (a, b) => {
+  if (resolve5(a) === resolve5(b)) return true;
   try {
-    if (realOrAncestor(a3) === realOrAncestor(b)) return true;
-    const x = statSync5(a3);
-    const y2 = statSync5(b);
-    return x.dev === y2.dev && x.ino === y2.ino;
+    if (realOrAncestor(a) === realOrAncestor(b)) return true;
+    const x2 = statSync6(a);
+    const y2 = statSync6(b);
+    return x2.dev === y2.dev && x2.ino === y2.ino;
   } catch {
     return false;
   }
@@ -12530,8 +13365,8 @@ var sameDirectory = (a3, b) => {
 var isPath = (value) => value.includes("/") || value.includes("\\");
 
 // src/housekeeping.js
-import { readdirSync as readdirSync3, lstatSync as lstatSync3, rmSync as rmSync5, readFileSync as readFileSync8 } from "node:fs";
-import { join as join11 } from "node:path";
+import { readdirSync as readdirSync3, lstatSync as lstatSync4, rmSync as rmSync5, readFileSync as readFileSync9 } from "node:fs";
+import { join as join12, basename as basename4, resolve as resolve6, relative as relative3, isAbsolute as isAbsolute5, sep as sep4 } from "node:path";
 
 // src/update.js
 import { spawn as spawn4 } from "node:child_process";
@@ -12548,7 +13383,7 @@ function parseHighlights(data, version) {
   if (!data || typeof data !== "object" || Array.isArray(data) || data.version !== version) return null;
   const lists = Object.entries(data).flatMap(([id, lines]) => {
     if (!LANGUAGE_ID.test(id) || !Array.isArray(lines)) return [];
-    const kept = lines.filter((l) => typeof l === "string" && l.trim() && l.length <= HIGHLIGHTS.chars && !/[\u0000-\u001f\u007f]/.test(l)).slice(0, HIGHLIGHTS.lines).map((l) => l.trim());
+    const kept = lines.filter((l3) => typeof l3 === "string" && l3.trim() && l3.length <= HIGHLIGHTS.chars && !/[\u0000-\u001f\u007f]/.test(l3)).slice(0, HIGHLIGHTS.lines).map((l3) => l3.trim());
     return kept.length ? [[id, kept]] : [];
   });
   return lists.length ? Object.fromEntries(lists) : null;
@@ -12569,10 +13404,10 @@ var DSH_PATH = /[\\/]\.dsh[\\/]profiles[\\/]([^\\/]+)[\\/]node_modules[\\/]((?:@
 var PROFILE_NAME = /^[\w.-]+$/;
 var PACKAGE_NAME = /^(@[a-z0-9][\w.-]*\/)?[a-z0-9][\w.-]*$/i;
 function dshUpdateCommand(scriptPath = "") {
-  const m2 = scriptPath.match(DSH_PATH);
-  if (!m2) return UPDATE_COMMANDS.dsh;
-  const pkg = m2[2].replace(/\\/g, "/");
-  return `dsh plugin --profile ${PROFILE_NAME.test(m2[1]) ? m2[1] : "<profile>"} up ${PACKAGE_NAME.test(pkg) ? pkg : "<package>"}`;
+  const m = scriptPath.match(DSH_PATH);
+  if (!m) return UPDATE_COMMANDS.dsh;
+  const pkg = m[2].replace(/\\/g, "/");
+  return `dsh plugin --profile ${PROFILE_NAME.test(m[1]) ? m[1] : "<profile>"} up ${PACKAGE_NAME.test(pkg) ? pkg : "<package>"}`;
 }
 function updateCommand(scriptPath = "") {
   const method = installMethod(scriptPath);
@@ -12640,19 +13475,20 @@ var CLEAN = Object.freeze({
 });
 var DIRS4 = ["pages", "videos", "cache"];
 var HOUR = DAY / 24;
+var PAGE_FILE = /^[a-z0-9-]+-\d{8}-\d{6}(-\d+)?\.html$/;
 function walk(dir) {
   let entries;
   try {
-    if (!lstatSync3(dir).isDirectory()) return [];
+    if (!lstatSync4(dir).isDirectory()) return [];
     entries = readdirSync3(dir, { withFileTypes: true });
   } catch {
     return [];
   }
   return entries.flatMap((e) => {
-    const p = join11(dir, e.name);
+    const p = join12(dir, e.name);
     if (e.isDirectory()) return walk(p);
     try {
-      const s = lstatSync3(p);
+      const s = lstatSync4(p);
       return s.isFile() ? [{ path: p, bytes: s.size, mtime: s.mtimeMs }] : [];
     } catch {
       return [];
@@ -12660,26 +13496,42 @@ function walk(dir) {
   });
 }
 var sum = (files) => files.reduce((n, f2) => n + f2.bytes, 0);
-function usage2(home) {
+var insideDir = (dir, path) => {
+  const rel = relative3(resolve6(dir), resolve6(path));
+  return rel !== "" && rel !== ".." && !rel.startsWith(`..${sep4}`) && !isAbsolute5(rel);
+};
+var DATA_DIRS = ["videos", "drafts", "cache", "serve-state", "themes"];
+var samePath = (a, b) => relative3(resolve6(a), resolve6(b)) === "";
+var outsidePages = (root, pages) => insideDir(root, pages) || samePath(root, pages) ? (f2) => !insideDir(pages, f2.path) : () => true;
+var pageFiles = (home, pages) => {
+  const nested = DATA_DIRS.map((d) => join12(home, d)).filter((root) => insideDir(pages, root));
+  return walk(pages).filter((f2) => !nested.some((root) => insideDir(root, f2.path)));
+};
+function usage2(home, pages = join12(home, "pages")) {
+  const roots = { pages, videos: join12(home, "videos"), cache: join12(home, "cache") };
   const parts = Object.fromEntries(DIRS4.map((d) => {
-    const files = walk(join11(home, d));
+    const files = d === "pages" ? pageFiles(home, pages) : walk(roots[d]).filter(outsidePages(roots[d], pages));
     return [d, { count: files.length, bytes: sum(files) }];
   }));
   return { ...parts, total: DIRS4.reduce((n, d) => n + parts[d].bytes, 0) };
 }
-function clean2(home, { days = CLEAN.days, all = false, dryRun = false, now = Date.now(), temp } = {}) {
+var pageVictims = (home, pages, cutoff, all, custom) => pageFiles(home, pages).filter((f2) => (all || f2.mtime < cutoff) && (!custom || PAGE_FILE.test(basename4(f2.path))));
+function clean2(home, { days = CLEAN.days, all = false, dryRun = false, now = Date.now(), temp, pages = join12(home, "pages") } = {}) {
   const cutoff = now - days * DAY;
+  const custom = resolve6(pages) !== resolve6(join12(home, "pages"));
   const victims = [
-    ...[home, temp].filter(Boolean).flatMap((dir) => ["pages", "videos", "drafts"].flatMap((d) => walk(join11(dir, d)).filter((f2) => all || f2.mtime < cutoff))),
-    ...walk(join11(home, "cache"))
+    ...pageVictims(home, pages, cutoff, all, custom),
+    ...["videos", "drafts"].flatMap((d) => walk(join12(home, d)).filter((f2) => outsidePages(join12(home, d), pages)(f2) && (all || f2.mtime < cutoff))),
+    ...[temp].filter(Boolean).flatMap((dir) => ["pages", "videos", "drafts"].flatMap((d) => walk(join12(dir, d)).filter((f2) => all || f2.mtime < cutoff))),
+    ...walk(join12(home, "cache")).filter(outsidePages(join12(home, "cache"), pages))
   ];
-  const gone = new Set(walk(join11(home, "pages")).filter((f2) => all || f2.mtime < cutoff).map((f2) => f2.path));
-  const states = walk(join11(home, "serve-state")).filter((f2) => {
+  const gone = new Set(pageVictims(home, pages, cutoff, all, custom).map((f2) => f2.path));
+  const states = walk(join12(home, "serve-state")).filter(outsidePages(join12(home, "serve-state"), pages)).filter((f2) => {
     if (!f2.path.endsWith(".json")) return f2.mtime < now - HOUR;
     if (all || f2.mtime < cutoff) return true;
     try {
-      const file = JSON.parse(readFileSync8(f2.path, "utf8"))?.file;
-      return typeof file !== "string" || gone.has(join11(home, "pages", file)) || !lstatSync3(join11(home, "pages", file)).isFile();
+      const file = JSON.parse(readFileSync9(f2.path, "utf8"))?.file;
+      return typeof file !== "string" || gone.has(join12(pages, file)) || !lstatSync4(join12(pages, file)).isFile();
     } catch {
       return true;
     }
@@ -12703,13 +13555,13 @@ function cleanHint(state, use, now = Date.now()) {
   const when = state.lastClean ? `last cleaned ${days} days ago` : "never cleaned";
   return `! Cleanup hint: the data directory uses ${mb(use.total)} (${parts}), ${when}. Ask the user whether to run am clean (deletes pages, videos and drafts older than ${CLEAN.days} days and empties the voice-over cache; am clean --all deletes everything).`;
 }
-function afterRender({ home, env, config, current, scriptPath, background, now = Date.now() }) {
+function afterRender({ home, env, config, current, scriptPath, background, now = Date.now(), pages = join12(home, "pages") }) {
   let state = readState(home);
   if (!state.firstSeen) state = writeState(home, { firstSeen: now });
   const hints = [];
-  const c2 = cleanHint(state, usage2(home), now);
-  if (c2) {
-    hints.push(c2);
+  const c = cleanHint(state, usage2(home, pages), now);
+  if (c) {
+    hints.push(c);
     state = writeState(home, { lastCleanHint: now });
   }
   const u = updateEnabled(env, config) ? updateHint(state, current, scriptPath, now) : null;
@@ -12788,9 +13640,9 @@ import { connect as connect2, isIP } from "node:net";
 import { spawnSync as spawnSync3 } from "node:child_process";
 import { networkInterfaces, uptime } from "node:os";
 import { createHmac, createHash as createHash3, randomBytes, timingSafeEqual } from "node:crypto";
-import { readFileSync as readFileSync9, writeFileSync as writeFileSync7, renameSync as renameSync5, rmSync as rmSync6, mkdirSync as mkdirSync5, watch, lstatSync as lstatSync4, existsSync as existsSync7, openSync, fstatSync, closeSync, linkSync, constants as fsConstants } from "node:fs";
+import { readFileSync as readFileSync10, writeFileSync as writeFileSync7, renameSync as renameSync5, rmSync as rmSync6, mkdirSync as mkdirSync5, watch, lstatSync as lstatSync5, existsSync as existsSync7, openSync, fstatSync, closeSync, linkSync, constants as fsConstants } from "node:fs";
 import { lstat, realpath, readFile, stat } from "node:fs/promises";
-import { join as join12, resolve as resolve5, dirname as dirname4, basename as basename4, sep as sep3 } from "node:path";
+import { join as join13, resolve as resolve7, dirname as dirname4, basename as basename5, sep as sep5 } from "node:path";
 var DEFAULT_PORT = 8765;
 var HOST = "127.0.0.1";
 var LAN_BIND = "0.0.0.0";
@@ -12802,19 +13654,19 @@ var SAVE = "r";
 var SETTLE_MS2 = 150;
 var LOOPBACK_HOST = /^(127\.0\.0\.1|localhost|\[::1\])(:\d{1,5})?$/i;
 function lanRank(address) {
-  const [a3, b] = address.split(".").map(Number);
-  if (a3 === 192 && b === 168) return 0;
-  if (a3 === 10) return 1;
-  if (a3 === 172 && b >= 16 && b <= 31) return 2;
+  const [a, b] = address.split(".").map(Number);
+  if (a === 192 && b === 168) return 0;
+  if (a === 10) return 1;
+  if (a === 172 && b >= 16 && b <= 31) return 2;
   return 3;
 }
-var compareOctets = (x, y2) => {
-  const [p, q3] = [x, y2].map((address) => address.split(".").map(Number));
+var compareOctets = (x2, y2) => {
+  const [p, q3] = [x2, y2].map((address) => address.split(".").map(Number));
   const i = p.findIndex((n, k) => n !== q3[k]);
   return i === -1 ? 0 : p[i] - q3[i];
 };
 function lanIPv4Addresses(interfaces = networkInterfaces()) {
-  return [...new Set(Object.values(interfaces).flatMap((entries) => entries ?? []).filter(({ address, family, internal }) => (family === "IPv4" || family === 4) && !internal && isIP(address) === 4 && address !== LAN_BIND && !address.startsWith("127.") && !address.startsWith("169.254.")).map(({ address }) => address))].sort((x, y2) => lanRank(x) - lanRank(y2) || compareOctets(x, y2));
+  return [...new Set(Object.values(interfaces).flatMap((entries) => entries ?? []).filter(({ address, family, internal }) => (family === "IPv4" || family === 4) && !internal && isIP(address) === 4 && address !== LAN_BIND && !address.startsWith("127.") && !address.startsWith("169.254.")).map(({ address }) => address))].sort((x2, y2) => lanRank(x2) - lanRank(y2) || compareOctets(x2, y2));
 }
 function publicUrlOrigin(input) {
   const error = () => new ServeError("--public-url must be an http:// or https:// origin without a path, credentials, query or fragment");
@@ -12885,7 +13737,7 @@ var SECRET_PATTERN = /^[0-9a-f]{64}$/;
 function loadSecret(secretFile) {
   if (secretFile === void 0) return randomBytes(32).toString("hex");
   try {
-    if (fsConstants.O_NOFOLLOW === void 0 && lstatSync4(secretFile).isSymbolicLink()) {
+    if (fsConstants.O_NOFOLLOW === void 0 && lstatSync5(secretFile).isSymbolicLink()) {
       throw new ServeError("--secret-file must not be a symbolic link");
     }
     const flags = fsConstants.O_RDONLY | (fsConstants.O_NOFOLLOW ?? 0) | (fsConstants.O_NONBLOCK ?? 0);
@@ -12894,7 +13746,7 @@ function loadSecret(secretFile) {
       const mode = fstatSync(fd);
       if (!mode.isFile()) throw new ServeError("--secret-file must be a regular file");
       if (process.platform !== "win32" && mode.mode & 36) throw new ServeError("--secret-file must not be readable by group or others");
-      const secret = readFileSync9(fd, "utf8");
+      const secret = readFileSync10(fd, "utf8");
       if (!SECRET_PATTERN.test(secret)) throw new ServeError("--secret-file must contain exactly 64 lowercase hex characters");
       return secret;
     } finally {
@@ -12922,7 +13774,7 @@ function loadSecret(secretFile) {
     }
   }
 }
-var infoPath = (home) => join12(home, "serve.json");
+var infoPath = (home) => join13(home, "serve.json");
 function pageToken(secret, dir, file) {
   return createHmac("sha256", secret).update(`${dir}/${file}`).digest("base64url").slice(0, TOKEN_LENGTH);
 }
@@ -12954,7 +13806,7 @@ var BOOT_SLACK_MS = 5e3;
 var bootedBefore = (startedAt) => startedAt < Date.now() - uptime() * 1e3 - BOOT_SLACK_MS;
 function readServeInfo(home) {
   try {
-    const info = JSON.parse(readFileSync9(infoPath(home), "utf8"));
+    const info = JSON.parse(readFileSync10(infoPath(home), "utf8"));
     const validBase = info?.baseUrl === void 0 || typeof info.baseUrl === "string" && publicUrlOrigin(info.baseUrl) === info.baseUrl;
     const ok = info && Number.isInteger(info.port) && typeof info.secret === "string" && info.secret.length > 0 && Number.isFinite(info.startedAt) && !bootedBefore(info.startedAt) && alive(info.pid) && validBase;
     const host = isIP(info.host) ? info.host : void 0;
@@ -12963,13 +13815,13 @@ function readServeInfo(home) {
     return null;
   }
 }
-function serveLink(home, file) {
+function serveLink(home, file, pages = resolve7(home, "pages")) {
   try {
     const info = readServeInfo(home);
     if (!info) return null;
-    const path = resolve5(file);
-    const dir = ["pages", "videos"].find((d) => dirname4(path) === resolve5(home, d));
-    const name2 = basename4(path);
+    const path = resolve7(file);
+    const dir = [["pages", resolve7(pages)], ["videos", resolve7(home, "videos")]].find(([, root]) => dirname4(path) === root)?.[0];
+    const name2 = basename5(path);
     return dir && validFileName(name2) ? pageLink(info, dir, name2) : null;
   } catch {
     return null;
@@ -12989,7 +13841,7 @@ function writeInfo(home, info) {
 }
 function removeInfo(home, secret, port) {
   try {
-    const info = JSON.parse(readFileSync9(infoPath(home), "utf8"));
+    const info = JSON.parse(readFileSync10(infoPath(home), "utf8"));
     if (info.secret === secret && info.port === port) rmSync6(infoPath(home), { force: true });
   } catch {
   }
@@ -13002,25 +13854,25 @@ var notFound = (req, res) => reply(req, res, 404, "text/plain; charset=utf-8", "
 var STATE_DIR = "serve-state";
 var MAX_STATE_BYTES = 64 * 1024;
 var STATE_KEYS = Object.freeze(["reply", "remark"]);
-async function pageVersion(home, file) {
+async function pageVersion(home, file, pages = resolve7(home, "pages")) {
   try {
-    const s = await stat(await resolvePage(home, "pages", file));
+    const s = await stat(await resolvePage(home, "pages", file, pages));
     return `${s.mtimeMs}:${s.size}:${s.ino}`;
   } catch {
     return null;
   }
 }
-var stateFile = (home, token) => join12(home, STATE_DIR, `${createHash3("sha256").update(token).digest("hex")}.json`);
+var stateFile = (home, token) => join13(home, STATE_DIR, `${createHash3("sha256").update(token).digest("hex")}.json`);
 function readState2(home, token) {
   try {
-    const record2 = JSON.parse(readFileSync9(stateFile(home, token), "utf8"));
+    const record2 = JSON.parse(readFileSync10(stateFile(home, token), "utf8"));
     return record2 && typeof record2 === "object" ? record2 : null;
   } catch {
     return null;
   }
 }
 function writeState2(home, token, record2) {
-  const dir = join12(home, STATE_DIR);
+  const dir = join13(home, STATE_DIR);
   mkdirSync5(dir, { recursive: true, mode: 448 });
   const path = stateFile(home, token);
   const tmp = `${path}.${process.pid}.${randomBytes(8).toString("hex")}.tmp`;
@@ -13095,13 +13947,13 @@ async function saveState(req, res, home, secret, file, token, version) {
   res.writeHead(204, { ...HEADERS, ...cors });
   return res.end();
 }
-async function resolvePage(home, dir, file) {
+async function resolvePage(home, dir, file, pages = resolve7(home, "pages")) {
   try {
-    const root = await realpath(join12(home, dir));
-    const path = join12(root, file);
+    const root = await realpath(dir === "pages" ? pages : join13(home, dir));
+    const path = join13(root, file);
     if (!(await lstat(path)).isFile()) return null;
     const real = await realpath(path);
-    return real.startsWith(root + sep3) ? real : null;
+    return real.startsWith(root + sep5) ? real : null;
   } catch {
     return null;
   }
@@ -13115,7 +13967,7 @@ function withLiveReload(html, eventPath, serve) {
   const at3 = withState.search(/<\/body>(?![\s\S]*<\/body>)/i);
   return at3 === -1 ? withState + script : withState.slice(0, at3) + script + withState.slice(at3);
 }
-function liveStreams(home) {
+function liveStreams(home, pages = resolve7(home, "pages")) {
   const streams = /* @__PURE__ */ new Map();
   const seen = /* @__PURE__ */ new Map();
   let watcher = null;
@@ -13128,7 +13980,7 @@ function liveStreams(home) {
   };
   const version = async (file) => {
     try {
-      const s = await stat(await resolvePage(home, "pages", file));
+      const s = await stat(await resolvePage(home, "pages", file, pages));
       return `${s.mtimeMs}:${s.size}:${s.ino}`;
     } catch {
       return null;
@@ -13166,7 +14018,7 @@ function liveStreams(home) {
   const startWatching = () => {
     if (watcher) return;
     try {
-      watcher = watch(join12(home, "pages"), settle3);
+      watcher = watch(pages, settle3);
     } catch {
       return;
     }
@@ -13214,17 +14066,17 @@ function liveStreams(home) {
     }
   };
 }
-async function openEvents(req, res, home, file, live) {
+async function openEvents(req, res, home, file, live, pages = resolve7(home, "pages")) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
     return reply(req, res, 405, "text/plain; charset=utf-8", "Method not allowed\n");
   }
   const { origin, "sec-fetch-dest": dest } = req.headers;
   if (origin !== void 0 && origin !== "null" || dest !== void 0 && dest !== "empty") return notFound(req, res);
-  if (!await resolvePage(home, "pages", file)) return notFound(req, res);
+  if (!await resolvePage(home, "pages", file, pages)) return notFound(req, res);
   return live.open(file, res, { ...HEADERS, "Content-Type": "text/event-stream; charset=utf-8", "Access-Control-Allow-Origin": "null" });
 }
-function handler(home, secret, allowedHosts, live) {
+function handler(home, secret, allowedHosts, live, pages = resolve7(home, "pages")) {
   return async (req, res) => {
     try {
       if (!hostAllowed(req.headers.host, allowedHosts)) return notFound(req, res);
@@ -13239,7 +14091,7 @@ function handler(home, secret, allowedHosts, live) {
       }
       if (!validFileName(file)) return notFound(req, res);
       if (prefix === SAVE) {
-        const version = await pageVersion(home, file);
+        const version = await pageVersion(home, file, pages);
         if (!token) return notFound(req, res);
         return await saveState(req, res, home, secret, file, token, version);
       }
@@ -13251,16 +14103,16 @@ function handler(home, secret, allowedHosts, live) {
       const dir = events ? "pages" : Object.hasOwn(PREFIX2, prefix) ? PREFIX2[prefix] : void 0;
       if (!dir || !token) return notFound(req, res);
       if (!tokenMatches(secret, dir, file, token)) return notFound(req, res);
-      if (events) return await openEvents(req, res, home, file, live);
+      if (events) return await openEvents(req, res, home, file, live, pages);
       const dest = req.headers["sec-fetch-dest"];
       if (dest !== void 0 && dest !== "document") return notFound(req, res);
-      const real = await resolvePage(home, dir, file);
+      const real = await resolvePage(home, dir, file, pages);
       if (!real) return notFound(req, res);
       const html = await readFile(real);
       const page = LOOPBACK_HOST.test(req.headers.host) ? html.toString("utf8") : withoutUpdateNotice(html.toString("utf8"));
       const body = dir === "pages" ? withLiveReload(page, eventLink({ secret }, file), {
         save: `/${SAVE}/${token}/${encodeURIComponent(file)}`,
-        state: restorable(readState2(home, token), await pageVersion(home, file)) ?? void 0
+        state: restorable(readState2(home, token), await pageVersion(home, file, pages)) ?? void 0
       }) : page;
       return reply(req, res, 200, "text/html; charset=utf-8", body);
     } catch {
@@ -13280,7 +14132,7 @@ function listening(port, host = HOST, timeout = 500) {
     socket.once("error", () => end(false));
   });
 }
-async function startServer({ home, port = DEFAULT_PORT, lan = false, publicUrl, lanAddresses, secretFile, tailscale = false, tailscaleStatus, bindHost }) {
+async function startServer({ home, port = DEFAULT_PORT, lan = false, publicUrl, lanAddresses, secretFile, tailscale = false, tailscaleStatus, bindHost, pagesDir: pagesDir2 = resolve7(home, "pages") }) {
   const addresses = lan ? lanAddresses ?? lanIPv4Addresses() : [];
   if (lan && (!addresses.length || addresses.some((address) => isIP(address) !== 4 || address === LAN_BIND || address.startsWith("127.")))) {
     throw new ServeError("--lan needs at least one active non-loopback IPv4 interface");
@@ -13293,9 +14145,9 @@ async function startServer({ home, port = DEFAULT_PORT, lan = false, publicUrl, 
   const running = readServeInfo(home);
   if (running && await listening(running.port, running.host)) throw new ServeError(`am serve is already running on ${running.baseUrl ?? `http://${HOST}:${running.port}`} (pid ${running.pid}); stop it first`);
   if (tail && !secretFile) ensureHome(home);
-  const secret = loadSecret(secretFile ?? (tail ? join12(home, "serve-secret") : void 0));
-  const live = liveStreams(home);
-  const server = createServer(handler(home, secret, allowedHosts, live));
+  const secret = loadSecret(secretFile ?? (tail ? join13(home, "serve-secret") : void 0));
+  const live = liveStreams(home, pagesDir2);
+  const server = createServer(handler(home, secret, allowedHosts, live, pagesDir2));
   await new Promise((done, fail) => {
     server.once("error", (e) => fail(e.code === "EADDRINUSE" ? new ServeError(`Port ${port} is already in use; pick another with am serve --port <n>`) : tail && e.code === "EADDRNOTAVAIL" ? new ServeError(`Cannot listen on ${listenHost}: Tailscale in userspace-networking mode has no interface for it. For tailnet devices, run \`tailscale serve --bg ${port}\` and am serve --public-url https://<machine>.<tailnet>.ts.net; --lan reaches only the local network`) : e));
     server.listen(port, listenHost, done);
@@ -13320,12 +14172,12 @@ async function startServer({ home, port = DEFAULT_PORT, lan = false, publicUrl, 
     });
     return closed;
   };
-  return { port: actual, secret, close, baseUrl, addresses, lan, tailscale: !!tail, secretPath: tail && !secretFile ? join12(home, "serve-secret") : secretFile };
+  return { port: actual, secret, close, baseUrl, addresses, lan, tailscale: !!tail, secretPath: tail && !secretFile ? join13(home, "serve-secret") : secretFile };
 }
-async function runServe({ home, port, lan = false, publicUrl, secretFile, tailscale = false, print, fail }) {
+async function runServe({ home, port, lan = false, publicUrl, secretFile, tailscale = false, pagesDir: pagesDir2, print, fail }) {
   let srv;
   try {
-    srv = await startServer({ home, port, lan, publicUrl, secretFile, tailscale });
+    srv = await startServer({ home, port, lan, publicUrl, secretFile, tailscale, pagesDir: pagesDir2 });
   } catch (e) {
     if (!(e instanceof ServeError)) throw e;
     fail(`\u2717 ${e.message}`);
@@ -13364,7 +14216,7 @@ Usage:
                       [--template sheet|doc] [--style off|80|strict] [--mode auto|light|dark]
   am patch  <html> --panel <title> [file|-] [--from file] [--theme \u2026] [--no-open]
                                                   replace one ## panel of an existing page and overwrite that HTML in place
-  am video  <file|->  [-o <file>] [--voice auto|elevenlabs|local|system|off | --audio-map <file.json>]
+  am video  <file|->  [-o <file>] [--voice auto|elevenlabs|local|cmd|system|off | --audio-map <file.json>]
                       [--mp4] [--webm] [--no-open] [--theme ${["auto", ...themeNames("video")].join("|")}] [--mode light|dark]
                                                   render a video draft into a 3b1b-style explainer video player page (--mp4 / --webm also save a video file)
   am export <page.html> [--pdf <file.pdf>] [--png <dir>]
@@ -13382,7 +14234,7 @@ Usage:
 - A file argument of - reads from stdin (good for heredoc: am render - <<'EOF' ... EOF).
 - -o names an output file, for example -o page.html; it does not name a folder.
 - Output goes to ~/.answer-me-with-html/pages/ by default (change it with the AM_HOME environment variable).
-- A page with STE or code warnings does not open. Fix the draft and render again with --replace <page>: the earlier page is deleted once the new one is written.
+- A page with STE, code or ref warnings does not open. Fix the draft and render again with --replace <page>: the earlier page is deleted once the new one is written.
 - Set auto-open, the default theme and more with am config; --open / --no-open apply to this run only.
 - am patch reads the source draft from the page's hidden #am-source, changes only the ## section that --panel names, and writes the page back to the same path.`;
 var FORMAT = `Draft format (extended Markdown)
@@ -13451,6 +14303,10 @@ export const LIMIT = 50
 - 10 to ${LONG_CODE_LINES} lines make the point best: a longer block gets a warning, and more than ${MAX_CODE_LINES} lines is an error.
 - Files that hold keys by convention (.env, *.pem, id_rsa, .ssh/, .git/ \u2026) and files with anything that looks like a key or a token are refused.
 - The render lists every embedded file. The page keeps the path; am patch reads the file again, or keeps the page's copy when the file has moved.
+- In the text, a code span that is only a path and a line (\`src/cli.js:42\` or \`src/cli.js:18-30\`) cites the file (also in tree, timeline, kv and ask text;
+  diagram text is not checked). The render checks it against the same
+  folder and prints a refs warning when the file is missing, the lines go past its end, or the range runs backwards; the page then does not open.
+  A missing path is a warning only when its first folder exists here, so a path of another project is not checked.
 
 Diff blocks: show a change
 
@@ -13507,7 +14363,7 @@ Client -> Server: ACK
   with more narration lines than steps, the extra first lines act as an opening and show nothing new.
 - Write [name] in narration: the camera zooms in on the element with that name and highlights it, and the word turns yellow in the caption.
 - Nodes / participants with the same name in adjacent scenes move smoothly from the old position to the new one (cross-scene morph).
-- Voice-over: --voice auto (default: ElevenLabs if ELEVENLABS_API_KEY is set, otherwise system TTS) | elevenlabs | local | system | off.
+- Voice-over: --voice auto (default: ElevenLabs if ELEVENLABS_API_KEY is set, otherwise system TTS) | elevenlabs | local | cmd | system | off.
   The system voice is picked for each line from the languages installed on the machine: macOS say takes the installed voice of
   the line's language (a Taiwan voice for Traditional Chinese), Linux takes the espeak-ng voice for it.
   A line whose language has no installed voice keeps its caption without narration, and the run says which language that was.
@@ -13518,6 +14374,11 @@ Client -> Server: ACK
   and am always sets input, response_format and stream. A line whose duration is clearly wrong is synthesized again,
   up to AM_TTS_ATTEMPTS times per line (default 3; set 1 to turn this off).
   Example: AM_TTS_URL=http://127.0.0.1:8000 AM_TTS_MODEL=mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-4bit       AM_TTS_VOICE=vivian am video draft.md --voice local
+  cmd runs a command-line TTS once per line, with no server: AM_TTS_CMD is the command, split into words by am and run
+  without a shell. In each word {text} is the line, {text_file} a file holding it, {out} the file the command writes its audio to
+  (required) and {lang} the line's language tag; the line is also written to its stdin. Audio that is not 16-bit PCM WAV needs ffmpeg.
+  Example (edge-tts reads with Microsoft's online voices, so it needs the network; pip install edge-tts):
+      AM_TTS_CMD='edge-tts --voice zh-CN-XiaoxiaoNeural --file {text_file} --write-media {out}' am video draft.md --voice cmd
   --audio-map lines.json reads ready-made audio from a JSON object of narration line to audio file, for example
   {"First the client sends SYN.":"audio/01.mp3"}. Relative audio paths start at the map file's folder. Keys ignore > and [ ]
   markers and extra whitespace. Non-WAV audio needs ffmpeg; every line needs an entry and every audio file must exist.
@@ -13597,7 +14458,7 @@ ${USAGE}`);
     case "lint":
       return withSource(arg, io, fail, (src) => cmdLint(src, opts, { print, fail }));
     case "config":
-      return cmdConfig([arg, ...rest].filter((x) => x !== void 0), ctx);
+      return cmdConfig([arg, ...rest].filter((x2) => x2 !== void 0), ctx);
     case "theme":
       return cmdTheme(arg, rest[0], opts, ctx);
     case "clean":
@@ -13625,7 +14486,7 @@ async function withSource(arg, io, fail, fn2) {
   const cwd = io.cwd ?? process.cwd();
   let src;
   try {
-    src = arg === "-" ? await readStream(io.stdin ?? process.stdin) : readFileSync10(resolve6(cwd, arg), "utf8");
+    src = arg === "-" ? await readStream(io.stdin ?? process.stdin) : readFileSync11(resolve8(cwd, arg), "utf8");
   } catch (e) {
     fail(`\u2717 Cannot read the draft: ${e.message}`);
     return 2;
@@ -13634,7 +14495,7 @@ async function withSource(arg, io, fail, fn2) {
     fail("\u2717 The draft is empty");
     return 2;
   }
-  return fn2(src, arg === "-" ? cwd : dirname5(resolve6(cwd, arg)), arg === "-" ? { stdin: true } : { file: resolve6(cwd, arg) });
+  return fn2(src, arg === "-" ? cwd : dirname5(resolve8(cwd, arg)), arg === "-" ? { stdin: true } : { file: resolve8(cwd, arg) });
 }
 async function readStream(stream) {
   const chunks = [];
@@ -13654,12 +14515,13 @@ function shouldOpen(opts, env, config) {
 }
 async function cmdRender(src, opts, ctx, baseDir, from) {
   const { fail, print } = ctx;
-  const replaced = opts.replace === void 0 ? null : pagePath(opts.replace, ctx);
+  const config = loadConfig(ctx);
+  const pages = pagesDir(ctx.env, config);
+  const replaced = opts.replace === void 0 ? null : pagePath(opts.replace, ctx, pages);
   if (replaced === false) {
-    fail(`\u2717 --replace takes a page that am render wrote (a .html file in ${join13(amHome(ctx.env), "pages")} or ${join13(tempHome(), "pages")})`);
+    fail(`\u2717 --replace takes a page that am render wrote (a .html file in ${pages} or ${join14(tempHome(), "pages")})`);
     return 2;
   }
-  const config = loadConfig(ctx);
   const { theme, mode, style } = config.values;
   await loadMath(src);
   let result;
@@ -13668,12 +14530,12 @@ async function cmdRender(src, opts, ctx, baseDir, from) {
   } catch (e) {
     return reportDraftError(e, src, from, ctx);
   }
-  const file = outputPath("pages", nameSource(result.meta), opts, ctx);
+  const file = outputPath("pages", nameSource(result.meta), opts, ctx, pages);
   if (!file) return 2;
-  const written = emit(result, file, ctx, { fallback: opts.out ? void 0 : "pages" });
+  const written = emit(result, file, ctx, { fallback: opts.out ? void 0 : "pages", pages, modeFrom: replaced });
   if (!written) return 1;
   if (opts.out && !extname3(file)) print("! -o names a file without an extension; use .html for an HTML page");
-  if (replaced && replaced !== resolve6(written)) removeEarlier(replaced, ctx);
+  if (replaced && replaced !== resolve8(written)) removeEarlier(replaced, ctx);
   keepDraft(result, src, from, ctx);
   const held = !opts.open && hasRetryWarnings(result) && shouldOpen(opts, ctx.env, config.values);
   if (held) print(`  Not opened because of the warnings; to render again, add --replace ${written}`);
@@ -13681,10 +14543,10 @@ async function cmdRender(src, opts, ctx, baseDir, from) {
 }
 var updateFor = (config, { env, io }) => pageUpdate(readState(amHome(env)), VERSION, io.scriptPath, env, config.values);
 var hasWarnings = (result) => hasRetryWarnings(result) || (result.stats.componentWarnings ?? []).length > 0 || (result.stats.htmlWarnings ?? []).length > 0;
-var draftsDir = (home) => join13(resolve6(home), "drafts");
+var draftsDir = (home) => join14(resolve8(home), "drafts");
 function draftTitle(src) {
-  const m2 = src.match(/^title:\s*["']?(.+?)["']?\s*$/m) ?? src.match(/^#\s+(.+)$/m);
-  return m2?.[1] ?? "";
+  const m = src.match(/^title:\s*["']?(.+?)["']?\s*$/m) ?? src.match(/^#\s+(.+)$/m);
+  return m?.[1] ?? "";
 }
 function nameSource({ file, title }) {
   return /[A-Za-z0-9]/.test(String(file ?? "")) ? file : title;
@@ -13711,7 +14573,7 @@ function saveDraft(src, { env, io }) {
 }
 function writeNew(dir, name2, text2) {
   for (let n = 1; ; n++) {
-    const file = join13(dir, n === 1 ? name2 : name2.replace(/\.md$/, `-${n}.md`));
+    const file = join14(dir, n === 1 ? name2 : name2.replace(/\.md$/, `-${n}.md`));
     try {
       writeFileSync8(file, text2, { flag: "wx" });
       return file;
@@ -13734,7 +14596,7 @@ function keepDraft(result, src, from, ctx) {
   }
 }
 function isKeptDraft(path, { env }) {
-  return [draftsDir(amHome(env)), draftsDir(tempHome())].includes(dirname5(path)) && basename5(path).endsWith(".md");
+  return [draftsDir(amHome(env)), draftsDir(tempHome())].includes(dirname5(path)) && basename6(path).endsWith(".md");
 }
 var isDraftError = (e) => e instanceof DraftErrors || e instanceof RenderError || e instanceof LintError || e instanceof ParseError && e.line > 0;
 function reportDraftError(e, src, from, ctx) {
@@ -13745,11 +14607,11 @@ function reportDraftError(e, src, from, ctx) {
   }
   return code;
 }
-var hasRetryWarnings = (result) => result.warnings.length > 0 || (result.stats.codeWarnings ?? []).length > 0 || (result.stats.mathWarnings ?? []).length > 0;
-function pagePath(arg, { env, io }) {
-  const path = resolve6(io.cwd ?? process.cwd(), arg);
-  const folders = [resolve6(amHome(env), "pages"), resolve6(tempHome(), "pages")];
-  return folders.includes(dirname5(path)) && basename5(path).endsWith(".html") ? path : false;
+var hasRetryWarnings = (result) => result.warnings.length > 0 || (result.stats.codeWarnings ?? []).length > 0 || (result.stats.refWarnings ?? []).length > 0 || (result.stats.mathWarnings ?? []).length > 0;
+function pagePath(arg, { env, io }, pages = join14(amHome(env), "pages")) {
+  const path = resolve8(io.cwd ?? process.cwd(), arg);
+  const folders = [resolve8(pages), resolve8(tempHome(), "pages")];
+  return folders.includes(dirname5(path)) && basename6(path).endsWith(".html") ? path : false;
 }
 var EXPORT_HELP = `Export a rendered page as an A4 PDF and/or PNG slices for a chat app
 
@@ -13844,10 +14706,10 @@ async function cmdPatch(htmlArg, fromArg, opts, ctx) {
     return 2;
   }
   const cwd = io.cwd ?? process.cwd();
-  const file = resolve6(cwd, htmlArg);
+  const file = resolve8(cwd, htmlArg);
   let html;
   try {
-    html = readFileSync10(file, "utf8");
+    html = readFileSync11(file, "utf8");
   } catch (e) {
     fail(`\u2717 Cannot read the HTML: ${e.message}`);
     return 2;
@@ -13861,7 +14723,7 @@ async function cmdPatch(htmlArg, fromArg, opts, ctx) {
   const from = opts.from ?? fromArg;
   let replacement;
   try {
-    replacement = !from || from === "-" ? await readStream(io.stdin ?? process.stdin) : readFileSync10(resolve6(cwd, from), "utf8");
+    replacement = !from || from === "-" ? await readStream(io.stdin ?? process.stdin) : readFileSync11(resolve8(cwd, from), "utf8");
   } catch (e) {
     fail(`\u2717 Cannot read the new panel draft: ${e.message}`);
     return 2;
@@ -13880,6 +14742,7 @@ async function cmdPatch(htmlArg, fromArg, opts, ctx) {
     return 1;
   }
   const config = loadConfig(ctx);
+  const pages = pagesDir(ctx.env, config);
   const { theme, mode, style } = config.values;
   const overrides = {
     template: video ? void 0 : opts.template ?? page.template,
@@ -13909,7 +14772,7 @@ async function cmdPatch(htmlArg, fromArg, opts, ctx) {
     }
     return reportError(e, fail);
   }
-  if (!emit(result, file, ctx, { note: video ? " (an MP4 or WebM with the same name is not updated; run am video --mp4 or --webm again if you need it)" : "", inPlace: true })) return 1;
+  if (!emit(result, file, ctx, { note: video ? " (an MP4 or WebM with the same name is not updated; run am video --mp4 or --webm again if you need it)" : "", inPlace: true, pages })) return 1;
   return finish(file, opts, config, ctx);
 }
 async function cmdExport(arg, opts, ctx) {
@@ -13928,7 +14791,7 @@ async function cmdExport(arg, opts, ctx) {
     return 2;
   }
   const cwd = io.cwd ?? process.cwd();
-  const file = resolve6(cwd, arg);
+  const file = resolve8(cwd, arg);
   let isPage;
   try {
     isPage = isHtmlPage(file);
@@ -13940,8 +14803,8 @@ async function cmdExport(arg, opts, ctx) {
     fail(`\u2717 ${arg} is not an existing .html file: am export takes a page am render wrote`);
     return 2;
   }
-  const pdf = opts.pdf === void 0 ? void 0 : resolve6(cwd, opts.pdf);
-  const png = opts.png === void 0 ? void 0 : resolve6(cwd, opts.png);
+  const pdf = opts.pdf === void 0 ? void 0 : resolve8(cwd, opts.pdf);
+  const png = opts.png === void 0 ? void 0 : resolve8(cwd, opts.png);
   try {
     await exportPage(file, { pdf, png, env, onFile: (f2) => print(`\u2713 ${f2}`), onWarn: (message) => fail(`! ${message}`) });
     return 0;
@@ -13996,7 +14859,7 @@ function validAudioMap(opts, fail) {
   return true;
 }
 async function buildVideo(src, voice, opts, config, { fail, env, io, themes: themes2 }) {
-  const provider = opts["audio-map"] !== void 0 ? audioMapProvider(resolve6(io.cwd ?? process.cwd(), opts["audio-map"])) : io.ttsProvider !== void 0 ? io.ttsProvider : pickProvider(voice, env);
+  const provider = opts["audio-map"] !== void 0 ? audioMapProvider(resolve8(io.cwd ?? process.cwd(), opts["audio-map"])) : io.ttsProvider !== void 0 ? io.ttsProvider : pickProvider(voice, env);
   const result = await renderVideo(src, {
     provider,
     cacheDir: provider ? narrationCache(amHome(env)) : void 0,
@@ -14015,12 +14878,12 @@ function narrationCache(home) {
     if (!isDenied(e)) throw e;
     return void 0;
   }
-  return join13(home, "cache", "tts");
+  return join14(home, "cache", "tts");
 }
 function voiceSummary(provider, captionsOnly = []) {
   if (!provider) return "none (captions only)";
   if (!captionsOnly.length) return provider.name;
-  return `${provider.name} (no ${captionsOnly.map((c2) => c2.language).join(", ")} voice installed: captions only for those lines)`;
+  return `${provider.name} (no ${captionsOnly.map((c) => c.language).join(", ")} voice installed: captions only for those lines)`;
 }
 async function exportVideo(file, wav2, format, { print, fail, env }) {
   const out = `${file.replace(/\.html?$/i, "")}.${format}`;
@@ -14046,16 +14909,16 @@ function loadConfig({ fail, env, themes: themes2 }) {
 function themeWarnings({ fail, themes: themes2 }) {
   themes2.warnings.forEach((w2) => fail(`! ${w2}`));
 }
-function outputPath(dir, title, opts, { env, io, fail }) {
+function outputPath(dir, title, opts, { env, io, fail }, folder = join14(amHome(env), dir)) {
   if (opts.out) {
-    const file2 = resolve6(io.cwd ?? process.cwd(), opts.out);
-    if (statSync6(file2, { throwIfNoEntry: false })?.isDirectory()) {
+    const file2 = resolve8(io.cwd ?? process.cwd(), opts.out);
+    if (statSync7(file2, { throwIfNoEntry: false })?.isDirectory()) {
       fail("\u2717 -o names a folder; give a file path, for example -o page.html");
       return null;
     }
     return file2;
   }
-  const file = join13(amHome(env), dir, `${slug(title)}-${stamp(new Date(io.now?.() ?? Date.now()))}.html`);
+  const file = join14(folder, `${slug(title)}-${stamp(new Date(io.now?.() ?? Date.now()))}.html`);
   return opts.replace === void 0 ? unusedPagePath(file) : file;
 }
 function unusedPagePath(file) {
@@ -14064,38 +14927,60 @@ function unusedPagePath(file) {
     if (!existsSync8(candidate)) return candidate;
   }
 }
-function writePage(file, html, env) {
-  const home = resolve6(amHome(env));
-  const path = resolve6(file);
-  if (path.startsWith(home + sep4)) ensureHome(home);
+var inside = (dir, target) => {
+  const rel = relative4(resolve8(dir), resolve8(target));
+  return rel !== "" && rel !== ".." && !rel.startsWith(`..${sep6}`) && !isAbsolute6(rel);
+};
+function writePage(file, html, env, pages = join14(amHome(env), "pages"), modeFrom = null) {
+  const home = resolve8(amHome(env));
+  const path = resolve8(file);
+  if (inside(home, path)) ensureHome(home);
   mkdirSync6(dirname5(file), { recursive: true });
-  if (!path.startsWith(join13(home, "pages") + sep4)) return writeFileSync8(file, html);
-  const tmp = join13(dirname5(file), `.${basename5(file)}.${process.pid}.tmp`);
+  if (!inside(pages, path)) return writeFileSync8(file, html);
+  const tmp = join14(dirname5(file), `.${basename6(file)}.${process.pid}.${randomBytes2(6).toString("hex")}.tmp`);
+  const mode = (modeFrom && modeOf(modeFrom)) ?? statSync7(file, { throwIfNoEntry: false })?.mode;
+  let fd = null;
+  let created = false;
   try {
-    writeFileSync8(tmp, html);
+    fd = openSync2(tmp, "wx", mode === void 0 ? 438 : 384);
+    created = true;
+    writeFileSync8(fd, html);
+    closeSync2(fd);
+    fd = null;
+    if (mode !== void 0) chmodSync2(tmp, mode & 511);
     renameOver(tmp, file);
   } finally {
-    rmSync7(tmp, { force: true });
+    if (fd !== null) closeSync2(fd);
+    if (created) rmSync7(tmp, { force: true });
   }
 }
-function savePage(html, file, { fallback, inPlace }, { fail, env }) {
+function modeOf(path) {
+  try {
+    return statSync7(path, { throwIfNoEntry: false })?.mode;
+  } catch (e) {
+    if (!isDenied(e)) throw e;
+    return 384;
+  }
+}
+function savePage(html, file, { fallback, inPlace, pages, modeFrom }, { fail, env }) {
   const home = amHome(env);
-  const inHome = resolve6(file).startsWith(resolve6(home) + sep4);
+  const pageRoot = pages ?? join14(home, "pages");
+  const inHome = inside(home, file);
   const hint = (path) => {
     if (inPlace) return "Copy the page to a folder this session can write to and patch the copy";
-    return inHome ? `If this session can write only inside the workspace, run the command again with -o "<workspace>/.tmp/answers/${basename5(path)}"` : "Give -o a file in a folder this session can write to";
+    return inHome ? `If this session can write only inside the workspace, run the command again with -o "<workspace>/.tmp/answers/${basename6(path)}"` : "Give -o a file in a folder this session can write to";
   };
   const refuse = (path, e) => fail(`\u2717 Cannot write the page: permission denied (${e.code}) ${path}. ${hint(path)}`);
   try {
-    writePage(file, html, env);
+    writePage(file, html, env, pageRoot, modeFrom);
     return { file };
   } catch (e) {
     if (!isDenied(e)) throw e;
     if (!(fallback && inHome)) return refuse(file, e), null;
-    const spare = join13(tempHome(), fallback, basename5(file));
+    const spare = join14(tempHome(), fallback, basename6(file));
     try {
       checkedTempHome({ create: true });
-      writePage(spare, html, env);
+      writePage(spare, html, env, join14(tempHome(), "pages"), modeFrom);
       return { file: spare, notice: `  ! ${home} is not writable (${e.code}): saved in the temporary folder, which the system may clear` };
     } catch (t) {
       if (t instanceof UnsafeTempHome) fail(`\u2717 Cannot write the page: ${home} is not writable (${e.code}) and ${t.dir} is not a private folder of this user. Give -o a file in a folder this session can write to`);
@@ -14113,13 +14998,13 @@ function removeEarlier(file, { fail }) {
     fail(`! Kept the earlier page ${file} (permission denied, ${e.code})`);
   }
 }
-function emit(result, file, ctx, { note: note2 = "", fallback, inPlace } = {}) {
+function emit(result, file, ctx, { note: note2 = "", fallback, inPlace, pages, modeFrom } = {}) {
   const { print, env } = ctx;
-  const saved = savePage(result.html, file, { fallback, inPlace }, ctx);
+  const saved = savePage(result.html, file, { fallback, inPlace, pages, modeFrom }, ctx);
   if (!saved) return null;
   print(`\u2713 ${saved.file}`);
   if (saved.notice) print(saved.notice);
-  const link = serveLink(amHome(env), saved.file);
+  const link = serveLink(amHome(env), saved.file, pages);
   if (link) print(`  link: ${link}`);
   print(`  ${summaryLine(result)}${note2}`);
   if (result.stats.code?.length) print(`  code embedded from: ${result.stats.code.join(", ")}`);
@@ -14128,29 +15013,36 @@ function emit(result, file, ctx, { note: note2 = "", fallback, inPlace } = {}) {
     print(`  code ${count(long.length, "warning")} (trim the block and run again, or keep it if every line matters):`);
     long.forEach((w2) => print(`  L${w2.line} [${w2.rule}] ${w2.message}`));
   }
+  printRefWarnings(result.stats.refWarnings, print);
   printComponentWarnings(result.stats.componentWarnings, print);
   printHtmlWarnings(result.stats.htmlWarnings, print);
   printMathWarnings(result.stats.mathWarnings, print);
   printWarnings(result.warnings, print, result.meta.style);
   return saved.file;
 }
+function printRefWarnings(notes = [], print) {
+  if (!notes.length) return;
+  print(`  refs ${count(notes.length, "warning")} (fix the path or the lines and run again; keep it if the path is from another project):`);
+  notes.slice(0, MAX_LISTED_WARNINGS).forEach((w2) => print(`  L${w2.line} [${w2.rule}] ${w2.message}`));
+  if (notes.length > MAX_LISTED_WARNINGS) print(`  \u2026 ${notes.length - MAX_LISTED_WARNINGS} more`);
+}
 function printComponentWarnings(notes = [], print) {
   if (!notes.length) return;
   print(`  diagram ${count(notes.length, "warning")} (the page is written; fix the draft if that is not what you meant):`);
-  [...notes].sort((a3, b) => a3.line - b.line).slice(0, MAX_LISTED_WARNINGS).forEach((w2) => print(`  L${w2.line} [${w2.component}] ${w2.message}`));
+  [...notes].sort((a, b) => a.line - b.line).slice(0, MAX_LISTED_WARNINGS).forEach((w2) => print(`  L${w2.line} [${w2.component}] ${w2.message}`));
   if (notes.length > MAX_LISTED_WARNINGS) print(`  \u2026 ${notes.length - MAX_LISTED_WARNINGS} more`);
 }
 function printHtmlWarnings(notes = [], print) {
-  const lines = [...new Set([...notes].sort((a3, b) => a3.line - b.line).map((w2) => `L${w2.line} [html] ${w2.message}`))];
+  const lines = [...new Set([...notes].sort((a, b) => a.line - b.line).map((w2) => `L${w2.line} [html] ${w2.message}`))];
   if (!lines.length) return;
   print(`  html ${count(lines.length, "warning")} (the page differs from the draft here; fix the draft if that is not what you meant):`);
-  lines.slice(0, MAX_LISTED_WARNINGS).forEach((l) => print(`  ${l}`));
+  lines.slice(0, MAX_LISTED_WARNINGS).forEach((l3) => print(`  ${l3}`));
   if (lines.length > MAX_LISTED_WARNINGS) print(`  \u2026 ${lines.length - MAX_LISTED_WARNINGS} more`);
 }
 function printMathWarnings(notes = [], print) {
   if (!notes.length) return;
   print(`  math ${count(notes.length, "warning")} (the page is written; fix the TeX and render again):`);
-  [...notes].sort((a3, b) => a3.line - b.line).slice(0, MAX_LISTED_WARNINGS).forEach((w2) => print(`  L${w2.line} [math] ${w2.message}`));
+  [...notes].sort((a, b) => a.line - b.line).slice(0, MAX_LISTED_WARNINGS).forEach((w2) => print(`  L${w2.line} [math] ${w2.message}`));
   if (notes.length > MAX_LISTED_WARNINGS) print(`  \u2026 ${notes.length - MAX_LISTED_WARNINGS} more`);
 }
 function summaryLine(result) {
@@ -14158,7 +15050,7 @@ function summaryLine(result) {
   if (result.beats !== void 0) {
     return `video \xB7 ${meta.theme} \xB7 ${count(stats.panels, "scene")} \xB7 ${count(result.beats, "beat")} \xB7 ${result.duration.toFixed(1)}s \xB7 voice: ${result.voiceName}`;
   }
-  const comps = Object.entries(stats.components).map(([k, v2]) => `${k}\xD7${v2}`).join(" ");
+  const comps = Object.entries(stats.components).map(([k, v]) => `${k}\xD7${v}`).join(" ");
   return `${meta.template} \xB7 ${meta.theme} \xB7 ${count(stats.panels, "panel")}${comps ? ` \xB7 ${comps}` : ""}`;
 }
 var count = (n, noun) => `${n} ${noun}${n === 1 ? "" : "s"}`;
@@ -14174,10 +15066,11 @@ function printHints(config, { env, io, print }) {
       env,
       config: config.values,
       current: VERSION,
+      pages: pagesDir(env, config),
       scriptPath: io.scriptPath,
       background: Boolean(io.background)
     });
-    hints.forEach((h) => print(h));
+    hints.forEach((h2) => print(h2));
   } catch {
   }
 }
@@ -14188,11 +15081,12 @@ function cmdClean(opts, { print, fail, env }) {
   }
   const days = opts.days === void 0 ? CLEAN.days : Number(opts.days);
   const home = amHome(env);
-  const before = usage2(home);
+  const pages = pagesDir(env, readConfig(env));
+  const before = usage2(home, pages);
   const temp = existingTempHome();
   const tempBefore = temp && usage2(temp);
   const dry = Boolean(opts["dry-run"]);
-  const r = clean2(home, { days, all: Boolean(opts.all), dryRun: dry, temp });
+  const r = clean2(home, { days, all: Boolean(opts.all), dryRun: dry, temp, pages });
   const scope = opts.all ? "all pages, videos and drafts" : `pages, videos and drafts older than ${count(days, "day")}`;
   print(`Data directory: ${home} (${mb(before.total)} in total: ${count(before.pages.count, "page")}, ${count(before.videos.count, "video")}, ${mb(before.cache.bytes)} voice-over cache)`);
   if (temp) print(`Temporary folder: ${temp} (${mb(tempBefore.total)} in total: ${count(tempBefore.pages.count, "page")}, ${count(tempBefore.videos.count, "video")})`);
@@ -14217,8 +15111,9 @@ function cmdServe(opts, { print, fail, env, io }) {
     return 2;
   }
   const port = opts.port === void 0 ? DEFAULT_PORT : Number(opts.port);
-  const secretFile = opts["secret-file"] === void 0 ? void 0 : resolve6(io?.cwd ?? process.cwd(), opts["secret-file"]);
-  return runServe({ home: amHome(env), port, lan: !!opts.lan, tailscale: !!opts.tailscale, publicUrl: opts["public-url"], secretFile, print, fail });
+  const secretFile = opts["secret-file"] === void 0 ? void 0 : resolve8(io?.cwd ?? process.cwd(), opts["secret-file"]);
+  const pages = pagesDir(env, readConfig(env));
+  return runServe({ home: amHome(env), port, lan: !!opts.lan, tailscale: !!opts.tailscale, publicUrl: opts["public-url"], secretFile, pagesDir: pages, print, fail });
 }
 function cmdLint(src, opts, { print, fail }) {
   let doc2;
@@ -14275,7 +15170,7 @@ function reportError(e, fail) {
   }
   throw e;
 }
-var showValue = (v2) => typeof v2 === "boolean" ? v2 ? "on" : "off" : String(v2);
+var showValue = (v) => typeof v === "boolean" ? v ? "on" : "off" : String(v);
 function cmdConfig(args, { print, fail, env, themes: themes2 }) {
   const [action, key, value] = args;
   try {
@@ -14306,8 +15201,9 @@ function cmdConfig(args, { print, fail, env, themes: themes2 }) {
   print(`Config file: ${path}`);
   for (const [k, spec] of Object.entries(CONFIG_KEYS)) {
     const mark = k in stored ? "*" : " ";
-    const options = spec.type === "bool" ? "on | off" : spec.type === "number" ? `${spec.min}\u2013${spec.max}, step ${spec.step}` : configChoices(k, themes2).join(" | ");
-    print(`${mark} ${k.padEnd(19)}${showValue(values[k]).padEnd(10)}${spec.label} (${options})`);
+    const options = spec.type === "bool" ? "on | off" : spec.type === "number" ? `${spec.min}\u2013${spec.max}, step ${spec.step}` : spec.type === "path" ? "a folder path" : configChoices(k, themes2).join(" | ");
+    const shown2 = showValue(values[k]);
+    print(`${mark} ${k.padEnd(19)}${shown2.length >= 10 ? `${shown2} ` : shown2.padEnd(10)}${spec.label} (${options})`);
   }
   if (env.AM_NO_OPEN && env.AM_NO_OPEN !== "0") print("Note: the AM_NO_OPEN environment variable is set and overrides the open setting.");
   print("* marks a value you changed. Change: am config set <key> <value>; reset to default: am config reset [key]");
@@ -14323,14 +15219,14 @@ function cmdList({ print, fail, themes: themes2 }) {
   const note2 = (t) => t.user ? " (yours)" : t.scope.includes("page") ? "" : " (video only)";
   for (const t of themes2.list("video")) print(`  ${t.name.padEnd(10)}${t.summary}${note2(t)}`);
   print("\nComponents (fence language):");
-  for (const c2 of COMPONENTS.values()) print(`  ${c2.name.padEnd(10)}${c2.summary}`);
+  for (const c of COMPONENTS.values()) print(`  ${c.name.padEnd(10)}${c.summary}`);
   print("  html/svg  embed as-is (escape hatch)");
   print("  <other>   code block; src=path lines=a-b quotes a file (am help code)");
   print("\nSyntax: am help <component>; draft format: am help format");
 }
 function specimenDraft(name2, mode) {
-  const sections = [...COMPONENTS.values()].map((c2) => `## ${c2.name}
-${c2.example}`);
+  const sections = [...COMPONENTS.values()].map((c) => `## ${c.name}
+${c.example}`);
   const table = "## table\n| Check | Status |\n|---|---|\n| Approved | ok passes |\n| Rejected | no fails |\n| Pending | warn needs a look |";
   return `---
 title: Theme ${name2} (${mode})
@@ -14347,8 +15243,8 @@ function cmdTheme(action, target, opts, ctx) {
     return 2;
   }
   const isFile = /\.json$/i.test(target) || /[\\/]/.test(target);
-  const path = isFile ? resolve6(io.cwd ?? process.cwd(), target) : join13(amHome(env), "themes", `${target}.json`);
-  const name2 = isFile ? basename5(path).replace(/\.json$/i, "") : target;
+  const path = isFile ? resolve8(io.cwd ?? process.cwd(), target) : join14(amHome(env), "themes", `${target}.json`);
+  const name2 = isFile ? basename6(path).replace(/\.json$/i, "") : target;
   let theme;
   let errors = [];
   if (!isFile && getTheme(name2)) {
@@ -14370,10 +15266,11 @@ function cmdTheme(action, target, opts, ctx) {
   if (!theme.scope.includes("page")) return 0;
   const themes2 = isFile ? loadThemes(amHome(env), { extra: path }) : ctx.themes;
   const config = readConfig(env, themes2);
+  const pages = pagesDir(env, config);
   const files = ["light", "dark"].map((mode) => {
     const result = renderDoc(specimenDraft(name2, mode), { theme: name2, mode, style: "off" }, {}, { themes: themes2, colophon: config.values.colophon });
-    const file = outputPath("pages", `theme-${name2}-${mode}`, {}, ctx);
-    writePage(file, result.html, env);
+    const file = outputPath("pages", `theme-${name2}-${mode}`, {}, ctx, pages);
+    writePage(file, result.html, env, pages);
     print(`\u2713 ${file}`);
     return file;
   });
