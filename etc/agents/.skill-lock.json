@@ -30,24 +30,6 @@
       "updatedAt": "2026-11-22T09:23:12.955Z",
       "commit": "797f2d05e30e58b217ff621a99d302d712dc38da"
     },
-    "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/skills.git",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
-      "installedAt": "2026-08-16T07:42:55.241Z",
-      "updatedAt": "2026-08-16T07:42:55.241Z"
-    },
-    "finnish-humanizer": {
-      "source": "Hakku/finnish-humanizer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/Hakku/finnish-humanizer.git",
-      "skillPath": "finnish-humanizer/SKILL.md",
-      "skillFolderHash": "7c8a927e971f1e25d46466c63540d23d3e3e845e",
-      "installedAt": "2026-08-16T07:42:57.957Z",
-      "updatedAt": "2026-08-16T07:42:57.957Z"
-    },
     "intent-layer": {
       "source": "crafter-station/skills",
       "sourceType": "github",
@@ -97,24 +79,6 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-10-20T12:04:04.487Z",
       "updatedAt": "2026-10-20T12:04:04.487Z"
-    },
-    "herdr-workflow-create": {
-      "source": "aorumbayev/herdr-workflows",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/aorumbayev/herdr-workflows.git",
-      "skillPath": "skills/herdr-workflow-create/SKILL.md",
-      "skillFolderHash": "37bee6e5044e033344582d0f6508e6395e305fd6",
-      "installedAt": "2026-10-25T17:15:53.038Z",
-      "updatedAt": "2026-11-02T08:28:03.115Z"
-    },
-    "herdr-workflow-upgrade": {
-      "source": "aorumbayev/herdr-workflows",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/aorumbayev/herdr-workflows.git",
-      "skillPath": "skills/herdr-workflow-upgrade/SKILL.md",
-      "skillFolderHash": "3688525b52b536ac678b0342134e768d4b334c3d",
-      "installedAt": "2026-10-25T17:15:53.040Z",
-      "updatedAt": "2026-10-25T17:15:53.040Z"
     },
     "answer-me-with-html": {
       "source": "QingYunA/answer-me-with-html",
