@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.252.0](https://github.com/raas-dev/configent/compare/1.251.4...1.252.0) (2026-11-22)
+
+### Features
+
+* **etc:** add open-code-review agent skill ([e1c8372](https://github.com/raas-dev/configent/commit/e1c83727d65ae4cabea66e4726a32867814564bd))
+* **etc:** add open-code-review npm tool ([627a4eb](https://github.com/raas-dev/configent/commit/627a4eb02e58f81d67489f42650484ceaa8a0dda))
+
+### Fixes
+
+* **ai_commit:** drop default Y and quit-on-any prompt choices ([f84c70a](https://github.com/raas-dev/configent/commit/f84c70ae477e82db8531213ea1d11602fdb89cc5))
+* **ai_commit:** forbid commentary around commit message ([02a6948](https://github.com/raas-dev/configent/commit/02a6948f2d6865be12558832121c9935bc8846f4))
+
 ## [1.251.4](https://github.com/raas-dev/configent/compare/1.251.3...1.251.4) (2026-11-21)
 
 ### Fixes
