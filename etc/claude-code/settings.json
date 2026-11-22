@@ -50,17 +50,114 @@
       }
     ],
     "SessionStart": [
-      {
+    {
         "matcher": "^(startup|resume|clear|compact|fork)$",
         "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
-            "timeout": 10
-          }
+            {
+                "type": "command",
+                "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
+                "timeout": 10
+            }
         ]
-      }
-    ]
+    },
+    {
+        "matcher": "startup",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    },
+    {
+        "matcher": "resume",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    },
+    {
+        "matcher": "clear",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    },
+    {
+        "matcher": "compact",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    }
+],
+    "PreToolUse": [
+    {
+        "matcher": "Grep|Glob|Bash",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    }
+],
+    "PostToolUse": [
+    {
+        "matcher": "Read",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    }
+],
+    "SubagentStart": [
+    {
+        "matcher": "*",
+        "hooks": [
+            {
+                "type": "command",
+                "command": "codebase-memory-mcp",
+                "args": [
+                    "hook-augment"
+                ],
+                "timeout": 5
+            }
+        ]
+    }
+]
   },
   "statusLine": {
     "type": "command",
