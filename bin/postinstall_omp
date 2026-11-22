@@ -71,7 +71,6 @@ if command -v omp >/dev/null; then
   # https://github.com/DietrichGebert/ponytail
   omp plugin marketplace add DietrichGebert/ponytail
   omp plugin install ponytail@ponytail
-
   # https://github.com/asyrjasalo/omp-headroom
   #(cd "$HOME/.omp/plugins" && bun remove omp-headroom >/dev/null 2>&1) || true
   #omp plugin install github:asyrjasalo/omp-headroom
