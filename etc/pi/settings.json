@@ -185,6 +185,7 @@
     "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"user\"}": "0.14.0",
     "{\"source\":\"npm:pi-context-view\",\"scope\":\"user\"}": "0.8.4",
     "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.9",
-    "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"project\"}": "0.15.0"
+    "{\"source\":\"git:github.com/nicobailon/visual-explainer\",\"scope\":\"project\"}": "0.15.0",
+    "{\"source\":\"npm:pi-queue-steer-factory\",\"scope\":\"project\"}": "0.17.17"
   }
 }
