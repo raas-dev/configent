@@ -3,6 +3,7 @@
   "defaultProvider": "minimax",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "minimax/**"
+    "minimax/MiniMax-M3*",
+    "occam/minimax/MiniMax-M3*"
   ]
 }

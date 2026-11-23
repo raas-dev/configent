@@ -3,7 +3,8 @@
   "defaultProvider": "minimax",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "*minimax-M3*"
+    "minimax/MiniMax-M3*",
+    "occam/minimax/MiniMax-M3*"
   ],
   "packages": [
     "git:github.com/davebcn87/pi-autoresearch"

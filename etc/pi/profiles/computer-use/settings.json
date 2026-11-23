@@ -3,7 +3,8 @@
   "defaultProvider": "minimax",
   "defaultThinkingLevel": "minimal",
   "enabledModels": [
-    "*minimax-M3*"
+    "minimax/MiniMax-M3*",
+    "occam/minimax/MiniMax-M3*"
   ],
   "packages": [
     "npm:@amaster.ai/pi-computer-use"
