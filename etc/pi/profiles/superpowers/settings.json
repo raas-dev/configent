@@ -3,7 +3,10 @@
   "defaultProvider": "zai",
   "defaultThinkingLevel": "minimal",
   "enabledModels": [
-    "zai/**"
+    "zai/glm-5.4*",
+    "zai/glm-5.3*",
+    "occam/zai/glm-5.4*",
+    "occam/zai/glm-5.3*"
   ],
   "packages": [
     "git:github.com/obra/superpowers"

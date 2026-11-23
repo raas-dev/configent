@@ -5,9 +5,7 @@
   "enabledModels": [
     "zai/glm-5.4*",
     "zai/glm-5.3*",
-    "zai/glm-5.2*",
     "occam/zai/glm-5.4*",
-    "occam/zai/glm-5.3*",
-    "occam/zai/glm-5.2*"
+    "occam/zai/glm-5.3*"
   ]
 }
