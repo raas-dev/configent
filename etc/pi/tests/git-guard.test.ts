@@ -86,7 +86,7 @@ if (failures > 0) throw new Error(`${failures} classifier case(s) failed`);
 	const fmtFile = join(fmtDir, "settings.json");
 	const original = [
 		"{",
-		`  "defaultProvider": "occam/minimax",`,
+		`  "defaultProvider": "minimax",`,
 		`  "theme": "dark",`,
 		`  "doubleEscapeAction": "tree"`,
 		"}",

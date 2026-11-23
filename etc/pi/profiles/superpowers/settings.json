@@ -1,9 +1,9 @@
 {
   "defaultModel": "glm-5.4",
-  "defaultProvider": "occam/zai",
+  "defaultProvider": "zai",
   "defaultThinkingLevel": "minimal",
   "enabledModels": [
-    "occam/**"
+    "zai/**"
   ],
   "packages": [
     "git:github.com/obra/superpowers"
