@@ -3,6 +3,17 @@
     "zai": {
       "name": "zai",
       "modelOverrides": {
+        "glm-5.4": {
+          "thinkingLevelMap": {
+            "off": "none",
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
         "glm-5.3": {
           "thinkingLevelMap": {
             "off": "none",
@@ -25,6 +36,13 @@
         "Authorization": "Bearer $OCCAM_API_KEY"
       },
       "models": [
+        {
+          "id": "glm-5.4",
+          "name": "GLM 5.4",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 131072
+        },
         {
           "id": "glm-5.3",
           "name": "GLM 5.3",
