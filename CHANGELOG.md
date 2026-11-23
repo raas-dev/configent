@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.252.1](https://github.com/raas-dev/configent/compare/1.252.0...1.252.1) (2026-11-23)
+
+### Fixes
+
+* **etc:** occam-prefix model patterns in pi profiles ([1f99cf7](https://github.com/raas-dev/configent/commit/1f99cf7555249b1f68a482350476384a25ea9ff1))
+* **etc:** wire codebase-memory hooks and subagents ([fef2677](https://github.com/raas-dev/configent/commit/fef26772093e950e95b9514d9d77d95240f909b6))
+* **pi:** drop occam provider prefix from profiles ([d3d415c](https://github.com/raas-dev/configent/commit/d3d415cedd3005d380765b1563cdf2443b526ded))
+
 ## [1.252.0](https://github.com/raas-dev/configent/compare/1.251.4...1.252.0) (2026-11-22)
 
 ### Features
