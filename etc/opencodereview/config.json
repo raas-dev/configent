@@ -4,11 +4,11 @@
     "zai-coding-plan": {
       "url": "https://api.z.ai/api/coding/paas/v4",
       "protocol": "openai",
-      "model": "glm-5.3",
+      "model": "glm-5.4",
       "api_key_cmd": "printenv ZAI_API_KEY"
     }
   },
   "llm": {
-    "model": "glm-5.3"
+    "model": "glm-5.4"
   }
 }

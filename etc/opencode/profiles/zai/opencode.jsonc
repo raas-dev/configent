@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "zai-coding-plan/glm-5.3",
+  "model": "zai-coding-plan/glm-5.4",
   "mcp": {
     "zai-vision": {
       "type": "local",
