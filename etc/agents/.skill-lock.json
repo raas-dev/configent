@@ -85,10 +85,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/QingYunA/answer-me-with-html.git",
       "skillPath": "skills/answer-me-with-html/SKILL.md",
-      "skillFolderHash": "9cb617862948eb8390dd5a8745656f472f75de8d",
+      "skillFolderHash": "87cd687d19d78c5e6486cd9ed4931873b5660138",
       "installedAt": "2026-11-03T21:15:14.662Z",
-      "updatedAt": "2026-11-22T09:23:13.135Z",
-      "commit": "997479b6f34c8a5141c61b03f144e821c8f99f2d"
+      "updatedAt": "2026-11-23T15:46:24.468Z",
+      "commit": "8411df37a9aecb62a6048f18ba63bd27bb74abec"
     },
     "open-code-review": {
       "source": "alibaba/open-code-review",
