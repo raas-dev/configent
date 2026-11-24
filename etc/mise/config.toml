@@ -2,7 +2,7 @@
 # terminal
 atuin = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_atuin" }
 bat = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_bat" }
-carapace = 'latest'
+carapace = '1.8.3' # 1.8.4 tarball has invalid '.' file entry; bump when fixed
 delta = 'latest'
 fd = 'latest'
 fzf = 'latest'
@@ -11,7 +11,7 @@ jq = 'latest'
 lsd = 'latest'
 pandoc = 'latest'
 ripgrep = 'latest'
-starship = { version = "1.26.0", postinstall = "~/.local/configent/bin/postinstall_starship" }
+starship = { version = "1.27.0", postinstall = "~/.local/configent/bin/postinstall_starship" }
 tmux = { version = '3.6a', postinstall = "~/.local/configent/bin/postinstall_tmux" }
 viddy = 'latest'
 watchexec = 'latest'
@@ -69,7 +69,7 @@ github-cli = 'latest'
 # containers
 #docker-cli = 'latest'
 hadolint = 'latest'
-lima = { version = '2.2.0', postinstall = "~/.local/configent/bin/postinstall_lima" }
+lima = { version = "2.3.0", postinstall = "~/.local/configent/bin/postinstall_lima" }
 #podman = 'latest'
 'github:tokuhirom/dcv' = 'latest'
 
@@ -91,7 +91,7 @@ azd = 'latest'
 #'github:shihanng/tfvar' = 'latest'
 
 # kubernetes
-kubectl = "1.37.0"
+kubectl = "1.37.2"
 kubecolor = 'latest'
 #krew = { version = 'latest', postinstall = "krew install ctx ns kubescape" }
 #helm = 'latest'
@@ -118,25 +118,25 @@ osv-scanner = 'latest'
 #trivy = 'latest'
 
 # powershell
-powershell = { version = "7.6.6", postinstall = "~/.local/configent/bin/postinstall_pwsh" }
+powershell = { version = "7.7.0", postinstall = "~/.local/configent/bin/postinstall_pwsh" }
 
 # rust
-rust = { version = "1.98", components = "rust-analyzer" }
+rust = { version = "1.100", components = "rust-analyzer" }
 cargo-binstall = 'latest'
 'cargo:cargo-cache' = 'latest' # for topgrade
 'cargo:cargo-update' = 'latest' # for topgrade
 
 # go
-go = "1.27.1"
+go = "1.27.4"
 'go:golang.org/x/tools/gopls' = 'latest'
 
 # node.js
-node = { version = "26.9.0", postinstall = "~/.local/configent/bin/postinstall_node" }
+node = { version = "26.13.1", postinstall = "~/.local/configent/bin/postinstall_node" }
 pnpm = { version = 'latest', postinstall = "d=$(pnpm root -g 2>/dev/null) && mkdir -p \"$d\" || true" }
 bun = 'latest'
 
 # python
-python = { version = "3.14.7", postinstall = "~/.local/configent/bin/postinstall_python" }
+python = { version = "3.15.2", postinstall = "~/.local/configent/bin/postinstall_python" }
 uv = 'latest'
 'pipx:pdm' = 'latest'
 #'pipx:poetry' = 'latest'
