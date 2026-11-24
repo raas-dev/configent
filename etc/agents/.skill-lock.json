@@ -94,11 +94,11 @@
       "source": "alibaba/open-code-review",
       "sourceType": "github",
       "sourceUrl": "https://github.com/alibaba/open-code-review.git",
-      "commit": "284ff013f0705ae6cac4c8dfbffa2f2551886d56",
+      "commit": "9007ae84e0de7b84d72f9833f6b12a2a731d5cbd",
       "skillPath": "skills/open-code-review/SKILL.md",
-      "skillFolderHash": "f96baca3b18ab0e43869f079ff3d5a992de461a6",
+      "skillFolderHash": "e62149fb469623168ef7a65c1cc97376a07b8e0b",
       "installedAt": "2026-11-22T09:21:42.714Z",
-      "updatedAt": "2026-11-22T09:21:42.714Z"
+      "updatedAt": "2026-11-24T20:36:16.186Z"
     }
   },
   "dismissed": {
