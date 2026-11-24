@@ -25,10 +25,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-harness.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "797f2d05e30e58b217ff621a99d302d712dc38da",
+      "skillFolderHash": "78dca5346138ab2bebd372308eeaeba6788f14cc",
       "installedAt": "2026-08-16T07:42:44.093Z",
-      "updatedAt": "2026-11-22T09:23:12.955Z",
-      "commit": "797f2d05e30e58b217ff621a99d302d712dc38da"
+      "updatedAt": "2026-11-24T10:25:44.629Z",
+      "commit": "78dca5346138ab2bebd372308eeaeba6788f14cc"
     },
     "intent-layer": {
       "source": "crafter-station/skills",
@@ -85,10 +85,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/QingYunA/answer-me-with-html.git",
       "skillPath": "skills/answer-me-with-html/SKILL.md",
-      "skillFolderHash": "87cd687d19d78c5e6486cd9ed4931873b5660138",
+      "skillFolderHash": "e7a5de9709207c576585778ca4e430ff0b5d20a8",
       "installedAt": "2026-11-03T21:15:14.662Z",
-      "updatedAt": "2026-11-23T15:46:24.468Z",
-      "commit": "8411df37a9aecb62a6048f18ba63bd27bb74abec"
+      "updatedAt": "2026-11-24T10:25:44.723Z",
+      "commit": "4ad397361bcb59b0791b84783ed99ef91d4b2f07"
     },
     "open-code-review": {
       "source": "alibaba/open-code-review",

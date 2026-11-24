@@ -1,2 +1,4 @@
 etc/agents/skills/browser-harness/agent-workspace/domain-skills/dexscreener/scraping.md:generic-api-key:695
 etc/agents/skills/browser-harness/agent-workspace/domain-skills/huggingface/scraping.md:generic-api-key:407
+etc/agents/skills/browser-harness/src/browser_harness/report.py:generic-api-key:27
+etc/agents/skills/browser-harness/src/browser_harness/telemetry.py:generic-api-key:19
