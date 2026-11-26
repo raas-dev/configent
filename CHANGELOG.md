@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.253.0](https://github.com/raas-dev/configent/compare/1.252.1...1.253.0) (2026-11-26)
+
+### Features
+
+* **claude-code:** enable caveman and plannotator plugins ([64fe0c8](https://github.com/raas-dev/configent/commit/64fe0c8b2bf425044d230d6c2771e3d5e8d1f6fd))
+* **plannotator:** add postinstall, mise entry, opencode commands, ([8e61bde](https://github.com/raas-dev/configent/commit/8e61bdee5538b0f0a823c97ed834fa82c4103c93))
+
 ## [1.252.1](https://github.com/raas-dev/configent/compare/1.252.0...1.252.1) (2026-11-23)
 
 ### Fixes
