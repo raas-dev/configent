@@ -27,6 +27,7 @@
     "token-optimizer-opencode",
     "@dietrichgebert/ponytail",
     "@mumme-it/opencode-caveman",
+    "@plannotator/opencode",
     "@slkiser/opencode-quota"
   ],
   "share": "disabled"
