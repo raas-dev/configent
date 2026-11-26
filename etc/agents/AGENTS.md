@@ -68,3 +68,14 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 - Before spawning a subagent, query the graph and coverage in the parent. Pass the tier, project, generation/freshness, bounded scope, queries and pagination state, qualified symbols, paths, call-chain findings, coverage evidence with ranges/reasons, source fallback already performed, and unresolved questions in the delegated task context.
 - Do not assume subagents inherit MCP access or the parent conversation. If a child lacks MCP tools, it must not call or claim MCP access. It should use the supplied evidence and read/grep exact source, especially every reported missed-coverage range.
 <!-- codebase-memory-mcp:end -->
+
+<!-- TOKEN_OPTIMIZER:MODEL_ROUTING -->
+## Model & Effort Routing (by Token Optimizer)
+For each task pick both a model and an effort level. Effort maps to this platform's thinking budget.
+- Easy (typo, rename, format, grep, single-file): haiku at low effort.
+- Standard (a bounded feature or fix): sonnet at medium effort.
+- Hard (security, migrations, concurrency, architecture): opus at high effort.
+- The cheapest models (haiku) and the lowest efforts are for easy work only. Never route a significant task there.
+- For a specific task, run: `measure.py route --task "..."`.
+<!-- updated 2026-11-21T00:00 -->
+<!-- /TOKEN_OPTIMIZER:MODEL_ROUTING -->
