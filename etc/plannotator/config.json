@@ -8,5 +8,57 @@
   },
   "theme": {
     "dark": "ayu-dark"
+  },
+  "inboxNotifications": {
+    "allowedOrigin": "http://localhost:58214",
+    "enabled": true,
+    "dismissed": false
+  },
+  "inboxBoard": true,
+  "inboxCapabilityFlips": {
+    "board": {
+      "at": 1795712255672,
+      "by": "ibx_01M8C4ACZYSR0ENDDXYB3GXZS7"
+    },
+    "steps": {
+      "at": 1795712256335,
+      "by": "ibx_01M8C4ACZYSR0ENDDXYB3GXZS7"
+    },
+    "scheduled_threads": {
+      "at": 1795712256697,
+      "by": "ibx_01M8C4ACZYSR0ENDDXYB3GXZS7"
+    },
+    "code_review": {
+      "at": 1795712259058,
+      "by": "ibx_01M8C4ACZYSR0ENDDXYB3GXZS7"
+    }
+  },
+  "inboxSteps": true,
+  "inboxScheduledThreads": true,
+  "inboxCodeReview": true,
+  "inboxRows": [
+    "smallNames"
+  ],
+  "inboxRowsRev": 25,
+  "inboxRowsDefaults": 2,
+  "inboxRowsPrev": [
+    "compact",
+    "smallNames",
+    "relativeTime",
+    "dividers",
+    "statusMark"
+  ],
+  "inboxRowsBy": null,
+  "inboxTextSize": 14,
+  "favicon": "yellow",
+  "inboxSound": {
+    "when": "asks",
+    "volume": 70,
+    "enabled": false
+  },
+  "updateCheck": false,
+  "inboxAgentStatus": true,
+  "inboxVoice": {
+    "on": false
   }
 }
