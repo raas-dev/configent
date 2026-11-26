@@ -1,4 +1,5 @@
 {
+  "cleanupPeriodDays": 99999,
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1",
@@ -8,7 +9,7 @@
     "commit": "",
     "pr": ""
   },
-  "respondToBashCommands": false,
+  "includeGitInstructions": false,
   "permissions": {
     "allow": [
       "Bash",
@@ -23,20 +24,19 @@
       "WebFetch",
       "WebSearch"
     ],
-    "ask": [
-      "Bash(git *)",
-      "Bash(rm *)"
-    ],
     "deny": [
       "Read(./.backup/**)",
       "Read(**/*.log)",
       "Read(**/*.key)",
       "Read(**/*.pem)"
     ],
+    "ask": [
+      "Bash(git *)",
+      "Bash(rm *)"
+    ],
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": true,
-  "includeGitInstructions": false,
   "hooks": {
     "SessionEnd": [
       {
@@ -50,123 +50,141 @@
       }
     ],
     "SessionStart": [
-    {
+      {
         "matcher": "^(startup|resume|clear|compact|fork)$",
         "hooks": [
-            {
-                "type": "command",
-                "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
-                "timeout": 10
-            }
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
+            "timeout": 10
+          }
         ]
-    },
-    {
+      },
+      {
         "matcher": "startup",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    },
-    {
+      },
+      {
         "matcher": "resume",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    },
-    {
+      },
+      {
         "matcher": "clear",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    },
-    {
+      },
+      {
         "matcher": "compact",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    }
-],
+      }
+    ],
     "PreToolUse": [
-    {
+      {
         "matcher": "Grep|Glob|Bash",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    }
-],
+      }
+    ],
     "PostToolUse": [
-    {
+      {
         "matcher": "Read",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    }
-],
+      }
+    ],
     "SubagentStart": [
-    {
+      {
         "matcher": "*",
         "hooks": [
-            {
-                "type": "command",
-                "command": "codebase-memory-mcp",
-                "args": [
-                    "hook-augment"
-                ],
-                "timeout": 5
-            }
+          {
+            "type": "command",
+            "command": "codebase-memory-mcp",
+            "args": [
+              "hook-augment"
+            ],
+            "timeout": 5
+          }
         ]
-    }
-]
+      }
+    ]
   },
+  "respondToBashCommands": false,
   "statusLine": {
     "type": "command",
     "command": "ccstatusline",
     "padding": 0
   },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "plannotator@plannotator": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "plannotator": {
+      "source": {
+        "source": "github",
+        "repo": "backnotprop/plannotator"
+      }
+    }
+  },
   "effortLevel": "medium",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "dark",
-  "cleanupPeriodDays": 99999
+  "theme": "dark"
 }
