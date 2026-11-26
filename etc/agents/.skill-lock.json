@@ -6,9 +6,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "42996c667c57b5762367c9e41c033e6039549765",
+      "skillFolderHash": "5fb5a3cd36f32cdf6a1fdbce035ec08bed469307",
       "installedAt": "2026-08-16T07:36:25.754Z",
-      "updatedAt": "2026-11-10T09:18:55.467Z"
+      "updatedAt": "2026-11-26T17:29:38.275Z",
+      "commit": "d3b712390e7ac647575c5c898bd24c3bdb82c227"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
@@ -25,10 +26,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-harness.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "373aecc4c40ef67d97b5ee69c144684a64a42a11",
+      "skillFolderHash": "54f4921b39aa839af55f49bbbd2a823526a80613",
       "installedAt": "2026-08-16T07:42:44.093Z",
-      "updatedAt": "2026-11-25T21:57:36.484Z",
-      "commit": "373aecc4c40ef67d97b5ee69c144684a64a42a11"
+      "updatedAt": "2026-11-26T17:29:40.495Z",
+      "commit": "54f4921b39aa839af55f49bbbd2a823526a80613"
     },
     "intent-layer": {
       "source": "crafter-station/skills",
