@@ -54,6 +54,7 @@ nono = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_n
 'github:vercel-labs/agent-browser' = 'latest'
 'pipx:browser-use' = 'latest'
 'pipx:cloakbrowser' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cloakbrowser" }
+'github:backnotprop/plannotator' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_plannotator" }
 'github:DeusData/codebase-memory-mcp' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_cbm" }
 'npm:billion-context' = { version = 'latest', postinstall = "~/.local/configent/bin/postinstall_billion-context" }
 'npm:@llamaindex/liteparse' = 'latest'

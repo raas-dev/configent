@@ -1,0 +1,12 @@
+{
+  "displayOptions": {
+    "showGrid": false
+  },
+  "inboxTool": {
+    "pi": true,
+    "opencode": true
+  },
+  "theme": {
+    "dark": "ayu-dark"
+  }
+}
