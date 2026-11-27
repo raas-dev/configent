@@ -432,6 +432,9 @@ alias semgrep='uvx semgrep'
 
 ### ai
 
+# Linter for agent skills and AI coding assistant configs
+alias agnix='uvx agnix'
+
 # Huggingface CLI
 alias huggingface-cli='uvx --from huggingface-hub huggingface-cli'
 
