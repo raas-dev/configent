@@ -26,10 +26,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-harness.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "54f4921b39aa839af55f49bbbd2a823526a80613",
+      "skillFolderHash": "76f1459c4d259d3d7a29bc23eee307a2c4895391",
       "installedAt": "2026-08-16T07:42:44.093Z",
-      "updatedAt": "2026-11-26T17:29:40.495Z",
-      "commit": "54f4921b39aa839af55f49bbbd2a823526a80613"
+      "updatedAt": "2026-11-27T12:49:16.400Z",
+      "commit": "76f1459c4d259d3d7a29bc23eee307a2c4895391"
     },
     "intent-layer": {
       "source": "crafter-station/skills",
